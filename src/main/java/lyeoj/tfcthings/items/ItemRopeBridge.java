@@ -22,58 +22,58 @@ import javax.annotation.Nonnull;
 
 public class ItemRopeBridge extends ItemTFC implements TFCThingsConfigurableItem {
 
-    public ItemRopeBridge() {
-        this.setRegistryName("rope_bridge_bundle");
-        this.setTranslationKey("rope_bridge_bundle");
-        this.setCreativeTab(CreativeTabsTFC.CT_MISC);
-    }
+	public ItemRopeBridge() {
+		this.setRegistryName("rope_bridge_bundle");
+		this.setTranslationKey("rope_bridge_bundle");
+		this.setCreativeTab(CreativeTabsTFC.CT_MISC);
+	}
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        playerIn.setActiveHand(handIn);
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
-    }
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
+		playerIn.setActiveHand(handIn);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack itemStack) {
-        return Size.SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack itemStack) {
+		return Size.SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack itemStack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack itemStack) {
+		return Weight.LIGHT;
+	}
 
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 72000;
-    }
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return 72000;
+	}
 
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.BOW;
-    }
+	public EnumAction getItemUseAction(ItemStack stack) {
+		return EnumAction.BOW;
+	}
 
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-        int charge = this.getMaxItemUseDuration(stack) - timeLeft;
-        if (charge > 5) {
-            float f = ItemBow.getArrowVelocity(charge);
-            if (!worldIn.isRemote) {
-                EntityRopeBridgeThrown bridge = new EntityRopeBridgeThrown(worldIn, entityLiving, stack);
-                bridge.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0f, f * 1.5f, 0.0f);
-                worldIn.spawnEntity(bridge);
-            }
-            worldIn.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-        }
-    }
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+		int charge = this.getMaxItemUseDuration(stack) - timeLeft;
+		if (charge > 5) {
+			float f = ItemBow.getArrowVelocity(charge);
+			if (!worldIn.isRemote) {
+				EntityRopeBridgeThrown bridge = new EntityRopeBridgeThrown(worldIn, entityLiving, stack);
+				bridge.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0f, f * 1.5f, 0.0f);
+				worldIn.spawnEntity(bridge);
+			}
+			worldIn.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		}
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableRopeBridge;
-    }
+	@Override
+	public boolean isEnabled() {
+		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableRopeBridge;
+	}
 
-    @Override
-    public int getStackSize(@Nonnull ItemStack stack) {
-        return ConfigTFCThings.Items.ROPE_BRIDGE.maxStackSize;
-    }
+	@Override
+	public int getStackSize(@Nonnull ItemStack stack) {
+		return ConfigTFCThings.Items.ROPE_BRIDGE.maxStackSize;
+	}
 }

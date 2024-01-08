@@ -6,5 +6,5 @@ import net.minecraft.item.ItemStack;
 
 //Items you create should implement this if necessary
 public interface IItemTemperatureOwner {
-    public ItemModifier getModifier(ItemStack stack, EntityPlayer player);
+	public ItemModifier getModifier(ItemStack stack, EntityPlayer player);
 }

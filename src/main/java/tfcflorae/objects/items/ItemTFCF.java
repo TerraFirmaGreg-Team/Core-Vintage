@@ -8,8 +8,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public abstract class ItemTFCF extends Item implements IItemSize {
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return getStackSize(stack);
+	}
 }

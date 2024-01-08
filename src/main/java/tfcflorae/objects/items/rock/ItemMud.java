@@ -23,95 +23,95 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.Constants.MODID_TFCF;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemMud extends ItemTFCF implements IRockObject {
-    private static final Map<Rock, ItemMud> MAP = new HashMap<>();
-    private final Rock rock;
-    private final ResourceLocation textureForegroundLocation;
-    private final ResourceLocation textureBackgroundLocation;
+	private static final Map<Rock, ItemMud> MAP = new HashMap<>();
+	private final Rock rock;
+	private final ResourceLocation textureForegroundLocation;
+	private final ResourceLocation textureBackgroundLocation;
 
-    public ItemMud(Rock rock) {
-        this.rock = rock;
-        this.textureForegroundLocation = new ResourceLocation(MODID, "textures/gui/knapping/mud_button/" + rock + ".png");
-        this.textureBackgroundLocation = new ResourceLocation(MODID, "textures/gui/knapping/mud_button_disabled/" + rock + ".png");
-        if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
-        setMaxDamage(0);
-        OreDictionaryHelper.register(this, "mud");
-        OreDictionaryHelper.register(this, "mud", rock);
-        OreDictionaryHelper.register(this, "mud", rock.getRockCategory());
+	public ItemMud(Rock rock) {
+		this.rock = rock;
+		this.textureForegroundLocation = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/mud_button/" + rock + ".png");
+		this.textureBackgroundLocation = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/mud_button_disabled/" + rock + ".png");
+		if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
+		setMaxDamage(0);
+		OreDictionaryHelper.register(this, "mud");
+		OreDictionaryHelper.register(this, "mud", rock);
+		OreDictionaryHelper.register(this, "mud", rock.getRockCategory());
 
-        if (rock.isFluxStone()) {
-            OreDictionaryHelper.register(this, "mud", "flux");
-        }
-    }
+		if (rock.isFluxStone()) {
+			OreDictionaryHelper.register(this, "mud", "flux");
+		}
+	}
 
-    public static ItemMud get(Rock rock) {
-        return MAP.get(rock);
-    }
+	public static ItemMud get(Rock rock) {
+		return MAP.get(rock);
+	}
 
-    public static ItemStack get(Rock rock, int amount) {
-        return new ItemStack(MAP.get(rock), amount);
-    }
+	public static ItemStack get(Rock rock, int amount) {
+		return new ItemStack(MAP.get(rock), amount);
+	}
 
-    public Rock getRock() {
-        return rock;
-    }
+	public Rock getRock() {
+		return rock;
+	}
 
-    @Override
-    @Nonnull
-    public Rock getRock(ItemStack stack) {
-        return rock;
-    }
+	@Override
+	@Nonnull
+	public Rock getRock(ItemStack stack) {
+		return rock;
+	}
 
-    @Override
-    @Nonnull
-    public RockCategory getRockCategory(ItemStack stack) {
-        return rock.getRockCategory();
-    }
+	@Override
+	@Nonnull
+	public RockCategory getRockCategory(ItemStack stack) {
+		return rock.getRockCategory();
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL; // Stored everywhere
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL; // Stored everywhere
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.VERY_LIGHT; // Stacksize = 64
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.VERY_LIGHT; // Stacksize = 64
+	}
 
-    @Override
-    @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-        if (!world.isRemote && !player.isSneaking() && stack.getCount() > 2) {
-            GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.MUD);
-        }
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-    }
+	@Override
+	@Nonnull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 2) {
+			GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.MUD);
+		}
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+	}
 
-    @Nonnull
-    public void onRightClick(PlayerInteractEvent.RightClickItem event) {
-        EnumHand hand = event.getHand();
-        if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "mud") && hand == EnumHand.MAIN_HAND) {
-            EntityPlayer player = event.getEntityPlayer();
-            World world = event.getWorld();
-            ItemStack stack = player.getHeldItem(hand);
-            if (!world.isRemote && !player.isSneaking() && stack.getCount() > 2) {
-                GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.MUD);
-            }
-        }
-    }
+	@Nonnull
+	public void onRightClick(PlayerInteractEvent.RightClickItem event) {
+		EnumHand hand = event.getHand();
+		if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "mud") && hand == EnumHand.MAIN_HAND) {
+			EntityPlayer player = event.getEntityPlayer();
+			World world = event.getWorld();
+			ItemStack stack = player.getHeldItem(hand);
+			if (!world.isRemote && !player.isSneaking() && stack.getCount() > 2) {
+				GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.MUD);
+			}
+		}
+	}
 
-    public ResourceLocation getForegroundTexture() {
-        return textureForegroundLocation;
-    }
+	public ResourceLocation getForegroundTexture() {
+		return textureForegroundLocation;
+	}
 
-    public ResourceLocation getBackgroundTexture() {
-        return textureBackgroundLocation;
-    }
+	public ResourceLocation getBackgroundTexture() {
+		return textureBackgroundLocation;
+	}
 }

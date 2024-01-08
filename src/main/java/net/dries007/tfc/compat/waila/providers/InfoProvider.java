@@ -19,20 +19,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class InfoProvider implements IWailaBlock {
-    @Nonnull
-    @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        int temperature = Math.round(ClimateTFC.getActualTemp(world, pos, 0));
-        int rainfall = Math.round(ClimateTFC.getRainfall(world, pos));
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.temperature", temperature).getFormattedText());
-        currentTooltip.add(new TextComponentTranslation("waila.tfc.rainfall", rainfall).getFormattedText());
-        return currentTooltip;
-    }
+	@Nonnull
+	@Override
+	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+		List<String> currentTooltip = new ArrayList<>();
+		int temperature = Math.round(ClimateTFC.getActualTemp(world, pos, 0));
+		int rainfall = Math.round(ClimateTFC.getRainfall(world, pos));
+		currentTooltip.add(new TextComponentTranslation("waila.tfc.temperature", temperature).getFormattedText());
+		currentTooltip.add(new TextComponentTranslation("waila.tfc.rainfall", rainfall).getFormattedText());
+		return currentTooltip;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(BlockRockVariant.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return Collections.singletonList(BlockRockVariant.class);
+	}
 }

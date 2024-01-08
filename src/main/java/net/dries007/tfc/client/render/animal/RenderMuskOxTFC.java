@@ -16,25 +16,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderMuskOxTFC extends RenderAnimalTFC<EntityMuskOxTFC> {
-    private static final ResourceLocation TEXTURE_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/muskox_young.png");
-    private static final ResourceLocation TEXTURE_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/muskox_old.png");
+	private static final ResourceLocation TEXTURE_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/muskox_young.png");
+	private static final ResourceLocation TEXTURE_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/muskox_old.png");
 
-    public RenderMuskOxTFC(RenderManager renderManager) {
-        super(renderManager, new ModelMuskOxBodyTFC(), 0.8F, TEXTURE_YOUNG, TEXTURE_OLD);
-        this.addLayer(new LayerMuskOxWoolTFC(this));
-    }
+	public RenderMuskOxTFC(RenderManager renderManager) {
+		super(renderManager, new ModelMuskOxBodyTFC(), 0.8F, TEXTURE_YOUNG, TEXTURE_OLD);
+		this.addLayer(new LayerMuskOxWoolTFC(this));
+	}
 
-    @Override
-    protected void preRenderCallback(EntityMuskOxTFC muskoxTFC, float par2) {
-        if (muskoxTFC.getGender() == EntityAnimalTFC.Gender.MALE)
-            GlStateManager.scale(1.2f, 1.2f, 1.2f);
-        else {
-            GlStateManager.scale(1.0f, 1.0f, 1.0f);
-        }
-    }
+	@Override
+	protected void preRenderCallback(EntityMuskOxTFC muskoxTFC, float par2) {
+		if (muskoxTFC.getGender() == EntityAnimalTFC.Gender.MALE)
+			GlStateManager.scale(1.2f, 1.2f, 1.2f);
+		else {
+			GlStateManager.scale(1.0f, 1.0f, 1.0f);
+		}
+	}
 }

@@ -21,45 +21,53 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemBlockFridge extends ItemBlockTFC {
-    public ItemBlockFridge(Block block) {
-        super(block);
-    }
+	public ItemBlockFridge(Block block) {
+		super(block);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack) {
-        return Size.HUGE;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.HUGE;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.MEDIUM;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.MEDIUM;
+	}
 
-    @Override
-    public boolean canStack(@Nonnull ItemStack stack) {
-        return false;
-    }
+	@Override
+	public boolean canStack(@Nonnull ItemStack stack) {
+		return false;
+	}
 
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.getBlockState(pos).getMaterial().isReplaceable()) {
-            pos = pos.offset(facing);
-        }
-        if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.up()).getMaterial().isReplaceable()) {
-            return EnumActionResult.PASS;
-        }
-        ItemStack stack = player.getHeldItem(hand);
-        if (player.canPlayerEdit(pos.up(), facing, stack) && player.canPlayerEdit(pos, facing, stack)) {
-            if (!worldIn.isRemote) {
-                stack.shrink(1);
-                IBlockState lowerState = this.block.getDefaultState().withProperty(BlockFridge.FACING, player.getHorizontalFacing().getOpposite()).withProperty(BlockFridge.UPPER, false);
-                IBlockState upperState = this.block.getDefaultState().withProperty(BlockFridge.FACING, player.getHorizontalFacing().getOpposite()).withProperty(BlockFridge.UPPER, true);
-                worldIn.setBlockState(pos, lowerState);
-                worldIn.setBlockState(pos.up(), upperState);
-            }
-            return EnumActionResult.SUCCESS;
-        }
-        return EnumActionResult.PASS;
-    }
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!worldIn.getBlockState(pos).getMaterial().isReplaceable()) {
+			pos = pos.offset(facing);
+		}
+		if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.up())
+		                                                                         .getMaterial()
+		                                                                         .isReplaceable()) {
+			return EnumActionResult.PASS;
+		}
+		ItemStack stack = player.getHeldItem(hand);
+		if (player.canPlayerEdit(pos.up(), facing, stack) && player.canPlayerEdit(pos, facing, stack)) {
+			if (!worldIn.isRemote) {
+				stack.shrink(1);
+				IBlockState lowerState = this.block.getDefaultState()
+				                                   .withProperty(BlockFridge.FACING, player.getHorizontalFacing()
+				                                                                           .getOpposite())
+				                                   .withProperty(BlockFridge.UPPER, false);
+				IBlockState upperState = this.block.getDefaultState()
+				                                   .withProperty(BlockFridge.FACING, player.getHorizontalFacing()
+				                                                                           .getOpposite())
+				                                   .withProperty(BlockFridge.UPPER, true);
+				worldIn.setBlockState(pos, lowerState);
+				worldIn.setBlockState(pos.up(), upperState);
+			}
+			return EnumActionResult.SUCCESS;
+		}
+		return EnumActionResult.PASS;
+	}
 }

@@ -41,177 +41,184 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, ITallPlant {
-    private static final PropertyEnum<ITallPlant.EnumBlockPart> PART = PropertyEnum.create("part", ITallPlant.EnumBlockPart.class);
-    private static final Map<Plant, BlockTallGrassTFC> MAP = new HashMap<>();
+	private static final PropertyEnum<ITallPlant.EnumBlockPart> PART = PropertyEnum.create("part", ITallPlant.EnumBlockPart.class);
+	private static final Map<Plant, BlockTallGrassTFC> MAP = new HashMap<>();
 
-    public BlockTallGrassTFC(Plant plant) {
-        super(plant);
-        if (MAP.put(plant, this) != null) {
-            throw new IllegalStateException("There can only be one.");
-        }
-    }
+	public BlockTallGrassTFC(Plant plant) {
+		super(plant);
+		if (MAP.put(plant, this) != null) {
+			throw new IllegalStateException("There can only be one.");
+		}
+	}
 
-    public static BlockTallGrassTFC get(Plant plant) {
-        return (BlockTallGrassTFC) MAP.get(plant);
-    }
+	public static BlockTallGrassTFC get(Plant plant) {
+		return (BlockTallGrassTFC) MAP.get(plant);
+	}
 
-    @Nonnull
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return super.getActualState(state, worldIn, pos).withProperty(PART, this.getPlantPart(worldIn, pos));
-    }
+	@Nonnull
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return super.getActualState(state, worldIn, pos).withProperty(PART, this.getPlantPart(worldIn, pos));
+	}
 
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
-    }
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
+	}
 
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        if (worldIn.getBlockState(pos.down(this.plant.getMaxHeight())).getBlock() == this) {
-            return false;
-        } else if (state.getBlock() != this) {
-            return this.canSustainBush(soil);
-        } else {
-            return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) && this.plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
-        }
-    }
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+		IBlockState soil = worldIn.getBlockState(pos.down());
+		if (worldIn.getBlockState(pos.down(this.plant.getMaxHeight())).getBlock() == this) {
+			return false;
+		} else if (state.getBlock() != this) {
+			return this.canSustainBush(soil);
+		} else {
+			return soil.getBlock()
+			           .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) && this.plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+		}
+	}
 
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (this.getPlantPart(worldIn, pos) == EnumBlockPart.LOWER) {
-            worldIn.setBlockState(pos, state.withProperty(AGE, worldIn.getBlockState(pos.up()).getValue(AGE)));
-        }
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (this.getPlantPart(worldIn, pos) == EnumBlockPart.LOWER) {
+			worldIn.setBlockState(pos, state.withProperty(AGE, worldIn.getBlockState(pos.up()).getValue(AGE)));
+		}
 
-        if (!this.canBlockStay(worldIn, pos, state)) {
-            worldIn.destroyBlock(pos, true);
-        }
+		if (!this.canBlockStay(worldIn, pos, state)) {
+			worldIn.destroyBlock(pos, true);
+		}
 
-    }
+	}
 
-    protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
-        if (!this.canBlockStay(worldIn, pos, state)) {
-            if (this.getPlantPart(worldIn, pos) != EnumBlockPart.UPPER) {
-                this.dropBlockAsItem(worldIn, pos, state, 0);
-            }
+	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
+		if (!this.canBlockStay(worldIn, pos, state)) {
+			if (this.getPlantPart(worldIn, pos) != EnumBlockPart.UPPER) {
+				this.dropBlockAsItem(worldIn, pos, state, 0);
+			}
 
-            worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
-        }
+			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
+		}
 
-    }
+	}
 
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        int i;
-        for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) {
-        }
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+		int i;
+		for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) {
+		}
 
-        return i < this.plant.getMaxHeight() && worldIn.isAirBlock(pos.up()) && this.canBlockStay(worldIn, pos.up(), state);
-    }
+		return i < this.plant.getMaxHeight() && worldIn.isAirBlock(pos.up()) && this.canBlockStay(worldIn, pos.up(), state);
+	}
 
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return false;
-    }
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		return false;
+	}
 
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        worldIn.setBlockState(pos.up(), this.getDefaultState());
-        IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(this.growthStageProperty, this.plant.getStageForMonth()).withProperty(PART, this.getPlantPart(worldIn, pos));
-        worldIn.setBlockState(pos, iblockstate);
-        iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
-    }
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		worldIn.setBlockState(pos.up(), this.getDefaultState());
+		IBlockState iblockstate = state.withProperty(AGE, 0)
+		                               .withProperty(this.growthStageProperty, this.plant.getStageForMonth())
+		                               .withProperty(PART, this.getPlantPart(worldIn, pos));
+		worldIn.setBlockState(pos, iblockstate);
+		iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
+	}
 
-    public void shrink(World worldIn, BlockPos pos) {
-        worldIn.setBlockToAir(pos);
-        worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
-    }
+	public void shrink(World worldIn, BlockPos pos) {
+		worldIn.setBlockToAir(pos);
+		worldIn.getBlockState(pos).neighborChanged(worldIn, pos.down(), this, pos);
+	}
 
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-        int currentStage = (Integer) state.getValue(this.growthStageProperty);
-        this.plant.getStageForMonth(currentMonth);
-        int age = (Integer) state.getValue(AGE);
-        if (!worldIn.isRemote) {
-            ItemStack stack = player.getHeldItemMainhand();
-            int i;
-            if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem().getHarvestLevel(stack, "scythe", player, state) == -1) {
-                if (stack.getItem() == Items.SHEARS) {
-                    for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
-                    }
-                }
-            } else {
-                for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-                    if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
-                    }
-                }
-            }
-        }
+	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+		Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+		int currentStage = (Integer) state.getValue(this.growthStageProperty);
+		this.plant.getStageForMonth(currentMonth);
+		int age = (Integer) state.getValue(AGE);
+		if (!worldIn.isRemote) {
+			ItemStack stack = player.getHeldItemMainhand();
+			int i;
+			if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
+			                                                                                 .getHarvestLevel(stack, "scythe", player, state) == -1) {
+				if (stack.getItem() == Items.SHEARS) {
+					for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
+						spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
+					}
+				}
+			} else {
+				for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
+					if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
+						spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
+					}
+				}
+			}
+		}
 
-    }
+	}
 
-    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-        this.onBlockHarvested(world, pos, state, player);
-        return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-    }
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+		this.onBlockHarvested(world, pos, state, player);
+		return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
+	}
 
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
-        IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-        return plant.getBlock() == this ? true : super.canSustainPlant(state, world, pos, direction, plantable);
-    }
+	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+		IBlockState plant = plantable.getPlant(world, pos.offset(direction));
+		return plant.getBlock() == this ? true : super.canSustainPlant(state, world, pos, direction, plantable);
+	}
 
-    @Nonnull
-    public Block.EnumOffsetType getOffsetType() {
-        return EnumOffsetType.XZ;
-    }
+	@Nonnull
+	public Block.EnumOffsetType getOffsetType() {
+		return EnumOffsetType.XZ;
+	}
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (worldIn.isAreaLoaded(pos, 1)) {
-            int j;
-            if (this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-                j = (Integer) state.getValue(AGE);
-                if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
-                    if (j == 3 && this.canGrow(worldIn, pos, state, worldIn.isRemote)) {
-                        this.grow(worldIn, rand, pos, state);
-                    } else if (j < 3) {
-                        worldIn.setBlockState(pos, state.withProperty(AGE, j + 1).withProperty(PART, this.getPlantPart(worldIn, pos)));
-                    }
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+		if (worldIn.isAreaLoaded(pos, 1)) {
+			int j;
+			if (this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) && this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
+				j = (Integer) state.getValue(AGE);
+				if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
+					if (j == 3 && this.canGrow(worldIn, pos, state, worldIn.isRemote)) {
+						this.grow(worldIn, rand, pos, state);
+					} else if (j < 3) {
+						worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
+						                                .withProperty(PART, this.getPlantPart(worldIn, pos)));
+					}
 
-                    ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-                }
-            } else if (!this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-                j = (Integer) state.getValue(AGE);
-                if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-                    if (j == 0 && this.canShrink(worldIn, pos)) {
-                        this.shrink(worldIn, pos);
-                    } else if (j > 0) {
-                        worldIn.setBlockState(pos, state.withProperty(AGE, j - 1).withProperty(PART, this.getPlantPart(worldIn, pos)));
-                    }
+					ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+				}
+			} else if (!this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+				j = (Integer) state.getValue(AGE);
+				if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+					if (j == 0 && this.canShrink(worldIn, pos)) {
+						this.shrink(worldIn, pos);
+					} else if (j > 0) {
+						worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
+						                                .withProperty(PART, this.getPlantPart(worldIn, pos)));
+					}
 
-                    ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-                }
-            }
+					ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+				}
+			}
 
-            this.checkAndDropBlock(worldIn, pos, state);
-        }
-    }
+			this.checkAndDropBlock(worldIn, pos, state);
+		}
+	}
 
-    @Nonnull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return this.getTallBoundingBax((Integer) state.getValue(AGE), state, source, pos);
-    }
+	@Nonnull
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return this.getTallBoundingBax((Integer) state.getValue(AGE), state, source, pos);
+	}
 
-    @Nonnull
-    protected BlockStateContainer createPlantBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{AGE, this.growthStageProperty, DAYPERIOD, PART});
-    }
+	@Nonnull
+	protected BlockStateContainer createPlantBlockState() {
+		return new BlockStateContainer(this, new IProperty[]{AGE, this.growthStageProperty, DAYPERIOD, PART});
+	}
 
-    public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
-        return true;
-    }
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
+		return true;
+	}
 
-    @Nonnull
-    public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return NonNullList.withSize(1, new ItemStack(this, 1));
-    }
+	@Nonnull
+	public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		return NonNullList.withSize(1, new ItemStack(this, 1));
+	}
 
-    private boolean canShrink(World worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up()).getBlock() != this;
-    }
+	private boolean canShrink(World worldIn, BlockPos pos) {
+		return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
+		                                                                      .getBlock() != this;
+	}
 }

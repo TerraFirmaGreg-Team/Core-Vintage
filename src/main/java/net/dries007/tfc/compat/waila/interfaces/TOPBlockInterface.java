@@ -22,81 +22,81 @@ import java.util.List;
  * Does the direct "translation" from IWailaBlock to The One Probe
  */
 public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverride {
-    protected final IWailaBlock internal;
+	protected final IWailaBlock internal;
 
-    public TOPBlockInterface(IWailaBlock internal) {
-        this.internal = internal;
-    }
+	public TOPBlockInterface(IWailaBlock internal) {
+		this.internal = internal;
+	}
 
-    @Override
-    public String getID() {
-        return "top.tfc." + internal.getClass().getName();
-    }
+	@Override
+	public String getID() {
+		return "top.tfc." + internal.getClass().getName();
+	}
 
-    @Override
-    public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
-        BlockPos pos = hitData.getPos();
-        TileEntity tileEntity = world.getTileEntity(pos);
-        if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
-            return;
-        }
-        NBTTagCompound nbt = new NBTTagCompound();
-        if (tileEntity != null) {
-            nbt = tileEntity.writeToNBT(nbt);
-        }
+	@Override
+	public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
+		BlockPos pos = hitData.getPos();
+		TileEntity tileEntity = world.getTileEntity(pos);
+		if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
+			return;
+		}
+		NBTTagCompound nbt = new NBTTagCompound();
+		if (tileEntity != null) {
+			nbt = tileEntity.writeToNBT(nbt);
+		}
 
-        if (internal.appendBody()) {
-            List<String> tooltip = internal.getTooltip(world, hitData.getPos(), nbt);
-            for (String string : tooltip) {
-                info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
-            }
-        }
-    }
+		if (internal.appendBody()) {
+			List<String> tooltip = internal.getTooltip(world, hitData.getPos(), nbt);
+			for (String string : tooltip) {
+				info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
+			}
+		}
+	}
 
-    @Override
-    public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
-        BlockPos pos = hitData.getPos();
-        TileEntity tileEntity = world.getTileEntity(pos);
-        if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
-            return false;
-        }
+	@Override
+	public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
+		BlockPos pos = hitData.getPos();
+		TileEntity tileEntity = world.getTileEntity(pos);
+		if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
+			return false;
+		}
 
-        NBTTagCompound nbt = new NBTTagCompound();
-        if (tileEntity != null) {
-            nbt = tileEntity.writeToNBT(nbt);
-        }
+		NBTTagCompound nbt = new NBTTagCompound();
+		if (tileEntity != null) {
+			nbt = tileEntity.writeToNBT(nbt);
+		}
 
-        ItemStack stack = internal.overrideIcon() ? internal.getIcon(world, pos, nbt) : ItemStack.EMPTY;
-        if (stack.isEmpty()) {
-            stack = hitData.getPickBlock();
-        }
-        String title = internal.overrideTitle() ? internal.getTitle(world, pos, nbt) : "";
-        if (title.isEmpty()) {
-            info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                    .item(stack)
-                    .vertical()
-                    .itemLabel(stack)
-                    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
-        } else {
-            info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                    .item(stack)
-                    .vertical()
-                    .text(TextStyleClass.NAME + title)
-                    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
-        }
-        return true;
-    }
+		ItemStack stack = internal.overrideIcon() ? internal.getIcon(world, pos, nbt) : ItemStack.EMPTY;
+		if (stack.isEmpty()) {
+			stack = hitData.getPickBlock();
+		}
+		String title = internal.overrideTitle() ? internal.getTitle(world, pos, nbt) : "";
+		if (title.isEmpty()) {
+			info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+			    .item(stack)
+			    .vertical()
+			    .itemLabel(stack)
+			    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+		} else {
+			info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+			    .item(stack)
+			    .vertical()
+			    .text(TextStyleClass.NAME + title)
+			    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+		}
+		return true;
+	}
 
-    public boolean overridesHeadInfo() {
-        return internal.overrideIcon() || internal.overrideTitle();
-    }
+	public boolean overridesHeadInfo() {
+		return internal.overrideIcon() || internal.overrideTitle();
+	}
 
-    protected boolean isLookingAtProvider(Block block, TileEntity tileEntity) {
-        for (Class<?> clazz : internal.getLookupClass()) {
-            if (clazz.isInstance(block) || clazz.isInstance(tileEntity)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	protected boolean isLookingAtProvider(Block block, TileEntity tileEntity) {
+		for (Class<?> clazz : internal.getLookupClass()) {
+			if (clazz.isInstance(block) || clazz.isInstance(tileEntity)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

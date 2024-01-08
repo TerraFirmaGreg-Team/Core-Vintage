@@ -7,5 +7,5 @@ import net.minecraft.util.math.BlockPos;
 
 // Blocks you create should implement this if necessary
 public interface IBlockTemperatureOwner {
-    public BlockModifier getModifier(IBlockState state, BlockPos blockPos, EntityPlayer player);
+	public BlockModifier getModifier(IBlockState state, BlockPos blockPos, EntityPlayer player);
 }

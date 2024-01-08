@@ -36,68 +36,68 @@ import java.util.Map;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemRockHoe extends ItemHoe implements IItemSize, IRockObject {
-    private static final Map<RockCategory, ItemRockHoe> MAP = new HashMap<>();
-    public final RockCategory category;
-    private final float attackDamage;
+	private static final Map<RockCategory, ItemRockHoe> MAP = new HashMap<>();
+	public final RockCategory category;
+	private final float attackDamage;
 
-    public ItemRockHoe(RockCategory category) {
-        super(category.getToolMaterial());
-        this.category = category;
-        if (MAP.put(category, this) != null) throw new IllegalStateException("There can only be one.");
-        setHarvestLevel("hoe", category.getToolMaterial().getHarvestLevel());
-        OreDictionaryHelper.register(this, "hoe");
-        OreDictionaryHelper.register(this, "hoe", "stone");
-        OreDictionaryHelper.register(this, "hoe", "stone", category);
-        attackDamage = category.getToolMaterial().getAttackDamage() * 0.875f;
-        OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
-    }
+	public ItemRockHoe(RockCategory category) {
+		super(category.getToolMaterial());
+		this.category = category;
+		if (MAP.put(category, this) != null) throw new IllegalStateException("There can only be one.");
+		setHarvestLevel("hoe", category.getToolMaterial().getHarvestLevel());
+		OreDictionaryHelper.register(this, "hoe");
+		OreDictionaryHelper.register(this, "hoe", "stone");
+		OreDictionaryHelper.register(this, "hoe", "stone", category);
+		attackDamage = category.getToolMaterial().getAttackDamage() * 0.875f;
+		OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
+	}
 
-    public static ItemRockHoe get(RockCategory category) {
-        return MAP.get(category);
-    }
+	public static ItemRockHoe get(RockCategory category) {
+		return MAP.get(category);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add("Rock type: " + OreDictionaryHelper.toString(category));
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add("Rock type: " + OreDictionaryHelper.toString(category));
+	}
 
-    @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
-        Multimap<String, AttributeModifier> multimap = HashMultimap.create();
-        if (slot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3, 0));
-        }
-        return multimap;
-    }
+	@Override
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+		Multimap<String, AttributeModifier> multimap = HashMultimap.create();
+		if (slot == EntityEquipmentSlot.MAINHAND) {
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", attackDamage, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3, 0));
+		}
+		return multimap;
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.LARGE; // Stored only in chests
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.LARGE; // Stored only in chests
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT;
+	}
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
-    }
+	@Override
+	public boolean canStack(ItemStack stack) {
+		return false;
+	}
 
-    @Nullable
-    @Override
-    public Rock getRock(ItemStack stack) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public Rock getRock(ItemStack stack) {
+		return null;
+	}
 
-    @Nonnull
-    @Override
-    public RockCategory getRockCategory(ItemStack stack) {
-        return category;
-    }
+	@Nonnull
+	@Override
+	public RockCategory getRockCategory(ItemStack stack) {
+		return category;
+	}
 }

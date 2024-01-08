@@ -4,29 +4,29 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import org.labellum.mc.waterflasks.Waterflasks;
 
-import static org.labellum.mc.waterflasks.Waterflasks.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_WATERFLASKS;
 
 public class ItemBase extends Item {
 
-    protected String name;
+	protected String name;
 
-    public ItemBase(String name) {
-        this.name = name;
-        setTranslationKey(MOD_ID + "." + name);
-        setRegistryName(name);
+	public ItemBase(String name) {
+		this.name = name;
+		setTranslationKey(MODID_WATERFLASKS + "." + name);
+		setRegistryName(name);
 
-        setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(CreativeTabs.MATERIALS);
 
-    }
+	}
 
-    public void registerItemModel() {
-        Waterflasks.proxy.registerItemRenderer(this, 0, name);
-    }
+	public void registerItemModel() {
+		Waterflasks.proxy.registerItemRenderer(this, 0, name);
+	}
 
-    @Override
-    public ItemBase setCreativeTab(CreativeTabs tab) {
-        super.setCreativeTab(tab);
-        return this;
-    }
+	@Override
+	public ItemBase setCreativeTab(CreativeTabs tab) {
+		super.setCreativeTab(tab);
+		return this;
+	}
 
 }

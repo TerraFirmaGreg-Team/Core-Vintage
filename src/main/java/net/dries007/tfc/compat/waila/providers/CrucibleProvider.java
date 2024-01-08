@@ -21,28 +21,29 @@ import java.util.Collections;
 import java.util.List;
 
 public class CrucibleProvider implements IWailaBlock {
-    @Nonnull
-    @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        TECrucible crucible = Helpers.getTE(world, pos, TECrucible.class);
-        if (crucible != null) {
-            if (crucible.getAlloy().getAmount() > 0) {
-                Metal metal = crucible.getAlloyResult();
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy().getAmount(), new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
-            }
-            float temperature = nbt.getFloat("temp");
-            String heatTooltip = Heat.getTooltip(temperature);
-            if (heatTooltip != null) {
-                currentTooltip.add(heatTooltip);
-            }
-        }
-        return currentTooltip;
-    }
+	@Nonnull
+	@Override
+	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+		List<String> currentTooltip = new ArrayList<>();
+		TECrucible crucible = Helpers.getTE(world, pos, TECrucible.class);
+		if (crucible != null) {
+			if (crucible.getAlloy().getAmount() > 0) {
+				Metal metal = crucible.getAlloyResult();
+				currentTooltip.add(new TextComponentTranslation("waila.tfc.metal.output", crucible.getAlloy()
+				                                                                                  .getAmount(), new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+			}
+			float temperature = nbt.getFloat("temp");
+			String heatTooltip = Heat.getTooltip(temperature);
+			if (heatTooltip != null) {
+				currentTooltip.add(heatTooltip);
+			}
+		}
+		return currentTooltip;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TECrucible.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return Collections.singletonList(TECrucible.class);
+	}
 }

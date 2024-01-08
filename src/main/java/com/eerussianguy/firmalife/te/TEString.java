@@ -12,53 +12,53 @@ import net.minecraft.nbt.NBTTagCompound;
 import javax.annotation.Nonnull;
 
 public class TEString extends TEInventory {
-    private long lastUpdateTick;
+	private long lastUpdateTick;
 
-    public TEString() {
-        super(1);
-    }
+	public TEString() {
+		super(1);
+	}
 
-    public void tryCook() {
-        ItemStack input = inventory.getStackInSlot(0);
-        HeatRecipe recipe = HeatRecipe.get(input);
-        ItemStack output = recipe != null ? recipe.getOutputStack(input) : input.copy();
-        CapabilityFood.updateFoodDecayOnCreate(output);
-        CapabilityFood.applyTrait(output, FoodDataFL.SMOKED);
-        CapabilityFood.removeTrait(output, FoodTrait.BRINED);
-        inventory.setStackInSlot(0, output);
-        markForSync();
-        resetCounter();
-    }
+	public void tryCook() {
+		ItemStack input = inventory.getStackInSlot(0);
+		HeatRecipe recipe = HeatRecipe.get(input);
+		ItemStack output = recipe != null ? recipe.getOutputStack(input) : input.copy();
+		CapabilityFood.updateFoodDecayOnCreate(output);
+		CapabilityFood.applyTrait(output, FoodDataFL.SMOKED);
+		CapabilityFood.removeTrait(output, FoodTrait.BRINED);
+		inventory.setStackInSlot(0, output);
+		markForSync();
+		resetCounter();
+	}
 
-    public long getTicksSinceUpdate() {
-        return CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick;
-    }
+	public long getTicksSinceUpdate() {
+		return CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick;
+	}
 
-    public void resetCounter() {
-        lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
-        markForSync();
-    }
+	public void resetCounter() {
+		lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+		markForSync();
+	}
 
-    public void reduceCounter(long amount) {
-        lastUpdateTick += amount;
-        markForSync();
-    }
+	public void reduceCounter(long amount) {
+		lastUpdateTick += amount;
+		markForSync();
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        lastUpdateTick = nbt.getLong("tick");
-        super.readFromNBT(nbt);
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		lastUpdateTick = nbt.getLong("tick");
+		super.readFromNBT(nbt);
+	}
 
-    @Nonnull
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setLong("tick", lastUpdateTick);
-        return super.writeToNBT(nbt);
-    }
+	@Nonnull
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setLong("tick", lastUpdateTick);
+		return super.writeToNBT(nbt);
+	}
 
-    @Override
-    public int getSlotLimit(int slot) {
-        return 1;
-    }
+	@Override
+	public int getSlotLimit(int slot) {
+		return 1;
+	}
 }

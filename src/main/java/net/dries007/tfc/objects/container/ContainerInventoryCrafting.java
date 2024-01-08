@@ -15,12 +15,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ContainerInventoryCrafting extends ContainerWorkbench {
-    public ContainerInventoryCrafting(InventoryPlayer inventory, World world) {
-        super(inventory, world, BlockPos.ORIGIN);
-    }
+	public ContainerInventoryCrafting(InventoryPlayer inventory, World world) {
+		super(inventory, world, BlockPos.ORIGIN);
+	}
 
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return true;
-    }
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return true;
+	}
 }

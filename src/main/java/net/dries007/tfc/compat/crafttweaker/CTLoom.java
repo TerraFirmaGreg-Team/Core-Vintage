@@ -25,73 +25,73 @@ import java.util.List;
 @ZenClass("mods.terrafirmacraft.Loom")
 @ZenRegister
 public class CTLoom {
-    @SuppressWarnings("unchecked")
-    @ZenMethod
-    public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input, IItemStack output, int steps, String loomTexture) {
-        if (output == null || input == null)
-            throw new IllegalArgumentException("Input and output are not allowed to be empty");
-        if (input instanceof ILiquidStack)
-            throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");
-        IIngredient ingredient = CTHelper.getInternalIngredient(input);
-        ItemStack outputStack = (ItemStack) output.getInternal();
-        LoomRecipe recipe = new LoomRecipe(new ResourceLocation(registryName), ingredient, outputStack, steps, new ResourceLocation(loomTexture));
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                TFCRegistries.LOOM.register(recipe);
-            }
+	@SuppressWarnings("unchecked")
+	@ZenMethod
+	public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input, IItemStack output, int steps, String loomTexture) {
+		if (output == null || input == null)
+			throw new IllegalArgumentException("Input and output are not allowed to be empty");
+		if (input instanceof ILiquidStack)
+			throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");
+		IIngredient ingredient = CTHelper.getInternalIngredient(input);
+		ItemStack outputStack = (ItemStack) output.getInternal();
+		LoomRecipe recipe = new LoomRecipe(new ResourceLocation(registryName), ingredient, outputStack, steps, new ResourceLocation(loomTexture));
+		CraftTweakerAPI.apply(new IAction() {
+			@Override
+			public void apply() {
+				TFCRegistries.LOOM.register(recipe);
+			}
 
-            @Override
-            public String describe() {
-                //noinspection ConstantConditions
-                return "Adding loom recipe " + recipe.getRegistryName().toString();
-            }
-        });
-    }
+			@Override
+			public String describe() {
+				//noinspection ConstantConditions
+				return "Adding loom recipe " + recipe.getRegistryName().toString();
+			}
+		});
+	}
 
-    @ZenMethod
-    public static void removeRecipe(IItemStack output) {
-        if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
-        ItemStack item = (ItemStack) output.getInternal();
-        List<LoomRecipe> removeList = new ArrayList<>();
-        TFCRegistries.LOOM.getValuesCollection()
-                .stream()
-                .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-                .forEach(removeList::add);
-        for (LoomRecipe rem : removeList) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.LOOM;
-                    modRegistry.remove(rem.getRegistryName());
-                }
+	@ZenMethod
+	public static void removeRecipe(IItemStack output) {
+		if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
+		ItemStack item = (ItemStack) output.getInternal();
+		List<LoomRecipe> removeList = new ArrayList<>();
+		TFCRegistries.LOOM.getValuesCollection()
+		                  .stream()
+		                  .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+		                  .forEach(removeList::add);
+		for (LoomRecipe rem : removeList) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.LOOM;
+					modRegistry.remove(rem.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    //noinspection ConstantConditions
-                    return "Removing loom recipe " + rem.getRegistryName().toString();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					//noinspection ConstantConditions
+					return "Removing loom recipe " + rem.getRegistryName().toString();
+				}
+			});
+		}
+	}
 
-    @ZenMethod
-    public static void removeRecipe(String registryName) {
-        LoomRecipe recipe = TFCRegistries.LOOM.getValue(new ResourceLocation(registryName));
-        if (recipe != null) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.LOOM;
-                    modRegistry.remove(recipe.getRegistryName());
-                }
+	@ZenMethod
+	public static void removeRecipe(String registryName) {
+		LoomRecipe recipe = TFCRegistries.LOOM.getValue(new ResourceLocation(registryName));
+		if (recipe != null) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.LOOM;
+					modRegistry.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    //noinspection ConstantConditions
-                    return "Removing loom recipe " + recipe.getRegistryName().toString();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					//noinspection ConstantConditions
+					return "Removing loom recipe " + recipe.getRegistryName().toString();
+				}
+			});
+		}
+	}
 }

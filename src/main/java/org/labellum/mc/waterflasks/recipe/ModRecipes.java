@@ -15,16 +15,16 @@ import org.labellum.mc.waterflasks.item.ModItems;
 import static net.dries007.tfc.api.types.Metal.ItemType.SHEET;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
-import static org.labellum.mc.waterflasks.Waterflasks.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_WATERFLASKS;
 
 public class ModRecipes {
 
-    public static void registerKnapping(RegistryEvent.Register<KnappingRecipe> event) {
-        event.getRegistry().registerAll(
-                new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ModItems.leatherSide),
-                        "  XX ", " XXX ", "XXXXX", " XXX ", "  X  ").setRegistryName("leather_side")
-        );
-    }
+	public static void registerKnapping(RegistryEvent.Register<KnappingRecipe> event) {
+		event.getRegistry().registerAll(
+				new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ModItems.leatherSide),
+						"  XX ", " XXX ", "XXXXX", " XXX ", "  X  ").setRegistryName("leather_side")
+		);
+	}
     /*
       XX
      XXX
@@ -33,10 +33,10 @@ public class ModRecipes {
       X
     */
 
-    public static void registerAnvil(RegistryEvent.Register<AnvilRecipe> event) {
-        event.getRegistry().registerAll(
-                new AnvilRecipe(new ResourceLocation(MOD_ID, "unfinished_iron_flask"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, SHEET))),
-                        new ItemStack(ModItems.unfinishedFlask), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST)
-        );
-    }
+	public static void registerAnvil(RegistryEvent.Register<AnvilRecipe> event) {
+		event.getRegistry().registerAll(
+				new AnvilRecipe(new ResourceLocation(MODID_WATERFLASKS, "unfinished_iron_flask"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, SHEET))),
+						new ItemStack(ModItems.unfinishedFlask), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST)
+		);
+	}
 }

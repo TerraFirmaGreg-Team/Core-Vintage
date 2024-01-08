@@ -31,130 +31,130 @@ import java.util.Random;
 
 public class BlockDryingMat extends Block implements IHasModel {
 
-    public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
+	public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
-    public BlockDryingMat(String name) {
-        super(Material.GRASS, MapColor.YELLOW);
-        setTranslationKey(name);
-        setRegistryName(name);
-        setCreativeTab(CreativeTabsTFC.CT_MISC);
+	public BlockDryingMat(String name) {
+		super(Material.GRASS, MapColor.YELLOW);
+		setTranslationKey(name);
+		setRegistryName(name);
+		setCreativeTab(CreativeTabsTFC.CT_MISC);
 
-        setHardness(0.5f);
-        setTickRandomly(true);
-        setSoundType(SoundType.PLANT);
+		setHardness(0.5f);
+		setTickRandomly(true);
+		setSoundType(SoundType.PLANT);
 
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
+		ModBlocks.BLOCKS.add(this);
+		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
 
-    }
+	}
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (hand.equals(EnumHand.MAIN_HAND)) {
-            TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
-            if (te != null && !worldIn.isRemote) {
-                if (playerIn.isSneaking()) {
-                    ItemStack stack = te.getStack();
-                    if (stack.isEmpty()) {
-                        ItemStack is = playerIn.getHeldItem(hand);
-                        if (te.isItemValid(te.SLOT, is)) {
-                            te.setStack(is.copy());
-                            is.setCount(0);
-                        }
-                    } else {
-                        ItemHandlerHelper.giveItemToPlayer(playerIn, stack);
-                        te.setStack(ItemStack.EMPTY);
-                    }
-                    te.setAndUpdateSlots(TEDryingMat.SLOT);
-                } else {
-                    playerIn.openGui(CaffeineAddon.instance, GUIHandler.DRYINGMATGUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
-                }
-            }
-            worldIn.notifyBlockUpdate(pos, state, state, 3);
-            return true;
-        }
-        return false;
-    }
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+	                                EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (hand.equals(EnumHand.MAIN_HAND)) {
+			TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+			if (te != null && !worldIn.isRemote) {
+				if (playerIn.isSneaking()) {
+					ItemStack stack = te.getStack();
+					if (stack.isEmpty()) {
+						ItemStack is = playerIn.getHeldItem(hand);
+						if (te.isItemValid(te.SLOT, is)) {
+							te.setStack(is.copy());
+							is.setCount(0);
+						}
+					} else {
+						ItemHandlerHelper.giveItemToPlayer(playerIn, stack);
+						te.setStack(ItemStack.EMPTY);
+					}
+					te.setAndUpdateSlots(TEDryingMat.SLOT);
+				} else {
+					playerIn.openGui(CaffeineAddon.instance, GUIHandler.DRYINGMATGUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+				}
+			}
+			worldIn.notifyBlockUpdate(pos, state, state, 3);
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
-        if (te != null && !worldIn.isRemote) {
-            if (worldIn.isRainingAt(pos.up())) {
-                te.resetCounter();
-            }
-        }
-    }
+	@Override
+	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+		TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+		if (te != null && !worldIn.isRemote) {
+			if (worldIn.isRainingAt(pos.up())) {
+				te.resetCounter();
+			}
+		}
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return AABB;
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return AABB;
+	}
 
-    @Override
-    public boolean isTopSolid(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isTopSolid(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!canPlaceBlockAt(worldIn, pos)) {
-            this.breakBlock(worldIn, pos, state);
-            worldIn.setBlockToAir(pos);
-        }
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-    }
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (!canPlaceBlockAt(worldIn, pos)) {
+			this.breakBlock(worldIn, pos, state);
+			worldIn.setBlockToAir(pos);
+		}
+		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+	}
 
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos.down()).isTopSolid();
-    }
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		return worldIn.getBlockState(pos.down()).isTopSolid();
+	}
 
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-                                ItemStack stack) {
-        // Set the initial counter value
-        TEDryingMat tile = Helpers.getTE(worldIn, pos, TEDryingMat.class);
-        if (tile != null) {
-            tile.resetCounter();
-        }
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-    }
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
+	                            ItemStack stack) {
+		// Set the initial counter value
+		TEDryingMat tile = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+		if (tile != null) {
+			tile.resetCounter();
+		}
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+	}
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+		if (te != null) {
+			te.onBreakBlock(worldIn, pos, state);
+		}
+		super.breakBlock(worldIn, pos, state);
+	}
 
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEDryingMat();
-    }
+	@Nullable
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TEDryingMat();
+	}
 
-    @Override
-    public void registerModels() {
-        CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-    }
+	@Override
+	public void registerModels() {
+		CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	}
 
 }

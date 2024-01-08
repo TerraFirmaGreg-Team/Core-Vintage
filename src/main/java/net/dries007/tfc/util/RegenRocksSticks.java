@@ -21,56 +21,59 @@ import java.util.Random;
 import java.util.Set;
 
 public class RegenRocksSticks extends WorldGenLooseRocks {
-    public RegenRocksSticks(boolean generateOres) {
-        super(generateOres);
-    }
+	public RegenRocksSticks(boolean generateOres) {
+		super(generateOres);
+	}
 
-    private static Boolean isReplaceable(World world, BlockPos pos) {
-        //Modified to allow replacement of grass during spring regen
-        Block test = world.getBlockState(pos).getBlock();
-        return test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos);
-    }
+	private static Boolean isReplaceable(World world, BlockPos pos) {
+		//Modified to allow replacement of grass during spring regen
+		Block test = world.getBlockState(pos).getBlock();
+		return test instanceof BlockShortGrassTFC || test.isAir(world.getBlockState(pos), world, pos);
+	}
 
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
-            final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-            final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+		if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
+			final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+			final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
 
-            // Get the proper list of veins
-            Set<Vein> veins = Sets.newHashSet();
-            int xoff = chunkX * 16 + 8;
-            int zoff = chunkZ * 16 + 8;
+			// Get the proper list of veins
+			Set<Vein> veins = Sets.newHashSet();
+			int xoff = chunkX * 16 + 8;
+			int zoff = chunkZ * 16 + 8;
 
-            if (generateOres) {
-                // Grab 2x2 area
-                ChunkDataTFC[] chunkData = {
-                        baseChunkData, // This chunk
-                        ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 0)),
-                        ChunkDataTFC.get(world, chunkBlockPos.add(0, 0, 16)),
-                        ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 16))
-                };
-                if (!chunkData[0].isInitialized()) return;
+			if (generateOres) {
+				// Grab 2x2 area
+				ChunkDataTFC[] chunkData = {
+						baseChunkData, // This chunk
+						ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 0)),
+						ChunkDataTFC.get(world, chunkBlockPos.add(0, 0, 16)),
+						ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 16))
+				};
+				if (!chunkData[0].isInitialized()) return;
 
-                // Default to 35 below the surface, like classic
-                int lowestYScan = Math.max(10, world.getTopSolidOrLiquidBlock(chunkBlockPos).getY() - ConfigTFC.General.WORLD.looseRockScan);
+				// Default to 35 below the surface, like classic
+				int lowestYScan = Math.max(10, world.getTopSolidOrLiquidBlock(chunkBlockPos)
+				                                    .getY() - ConfigTFC.General.WORLD.looseRockScan);
 
-                for (ChunkDataTFC data : chunkData) {
-                    veins.addAll(data.getGeneratedVeins());
-                }
+				for (ChunkDataTFC data : chunkData) {
+					veins.addAll(data.getGeneratedVeins());
+				}
 
-                if (!veins.isEmpty()) {
-                    veins.removeIf(v -> v.getType() == null || !v.getType().hasLooseRocks() || v.getHighestY() < lowestYScan);
-                }
-            }
+				if (!veins.isEmpty()) {
+					veins.removeIf(v -> v.getType() == null || !v.getType()
+					                                             .hasLooseRocks() || v.getHighestY() < lowestYScan);
+				}
+			}
 
-            for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency * factor; i++) {
-                BlockPos pos = new BlockPos(xoff + random.nextInt(16), 0, zoff + random.nextInt(16));
-                Rock rock = baseChunkData.getRock1(pos);
-                generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos).getY()), getRandomVein(Arrays.asList(veins.toArray(new Vein[0])), pos, random), rock);
-            }
-        }
-    }
+			for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency * factor; i++) {
+				BlockPos pos = new BlockPos(xoff + random.nextInt(16), 0, zoff + random.nextInt(16));
+				Rock rock = baseChunkData.getRock1(pos);
+				generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos)
+				                                .getY()), getRandomVein(Arrays.asList(veins.toArray(new Vein[0])), pos, random), rock);
+			}
+		}
+	}
 
     /*@Nullable
     private Vein getRandomVein(Set<Vein> veins, BlockPos pos, Random rand)
@@ -90,10 +93,10 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
         return null;
     }*/
 
-    @Override
-    protected void generateRock(World world, BlockPos pos, @Nullable Vein vein, Rock rock) {
-        if (isReplaceable(world, pos)) {
-            super.generateRock(world, pos, vein, rock);
-        }
-    }
+	@Override
+	protected void generateRock(World world, BlockPos pos, @Nullable Vein vein, Rock rock) {
+		if (isReplaceable(world, pos)) {
+			super.generateRock(world, pos, vein, rock);
+		}
+	}
 }

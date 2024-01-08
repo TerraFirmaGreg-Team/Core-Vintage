@@ -24,116 +24,116 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.List;
 import java.util.Objects;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import static su.terrafirmagreg.Constants.MODID_TFC;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
 public class CalendarEventHandler {
-    /**
-     * Called from LOGICAL SERVER
-     * Responsible for primary time tracking for player time
-     * Synced to client every second
-     *
-     * @param event {@link ServerTickEvent}
-     */
-    @SubscribeEvent
-    public static void onServerTick(ServerTickEvent event) {
-        if (event.phase == Phase.END) {
-            CalendarTFC.INSTANCE.onServerTick();
-        }
-    }
+	/**
+	 * Called from LOGICAL SERVER
+	 * Responsible for primary time tracking for player time
+	 * Synced to client every second
+	 *
+	 * @param event {@link ServerTickEvent}
+	 */
+	@SubscribeEvent
+	public static void onServerTick(ServerTickEvent event) {
+		if (event.phase == Phase.END) {
+			CalendarTFC.INSTANCE.onServerTick();
+		}
+	}
 
-    @SubscribeEvent
-    public static void onOverworldTick(TickEvent.WorldTickEvent event) {
-        if (event.phase == Phase.END && event.world.provider.getDimension() == 0) {
-            CalendarTFC.INSTANCE.onOverworldTick(event.world);
-        }
-    }
+	@SubscribeEvent
+	public static void onOverworldTick(TickEvent.WorldTickEvent event) {
+		if (event.phase == Phase.END && event.world.provider.getDimension() == 0) {
+			CalendarTFC.INSTANCE.onOverworldTick(event.world);
+		}
+	}
 
-    /**
-     * Disables the vanilla /time command as we replace it with one that takes into account the calendar
-     *
-     * @param event {@link CommandEvent}
-     */
-    @SubscribeEvent
-    public static void onCommandFire(CommandEvent event) {
-        if ("time".equals(event.getCommand().getName())) {
-            event.setCanceled(true);
-            event.getSender().sendMessage(new TextComponentTranslation(MOD_ID + ".command.time.disabled"));
-        }
-    }
+	/**
+	 * Disables the vanilla /time command as we replace it with one that takes into account the calendar
+	 *
+	 * @param event {@link CommandEvent}
+	 */
+	@SubscribeEvent
+	public static void onCommandFire(CommandEvent event) {
+		if ("time".equals(event.getCommand().getName())) {
+			event.setCanceled(true);
+			event.getSender().sendMessage(new TextComponentTranslation(MODID_TFC + ".command.time.disabled"));
+		}
+	}
 
-    /**
-     * This allows beds to function correctly with TFCs calendar
-     *
-     * @param event {@link PlayerWakeUpEvent}
-     */
-    @SubscribeEvent
-    public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
-        if (!event.getEntityPlayer().world.isRemote && !event.updateWorld()) {
-            long currentWorldTime = event.getEntity().getEntityWorld().getWorldTime();
-            if (CalendarTFC.CALENDAR_TIME.getWorldTime() != currentWorldTime) {
-                long jump = CalendarTFC.INSTANCE.setTimeFromWorldTime(currentWorldTime);
-                // Consume food/water on all online players accordingly (EXHAUSTION_MULTIPLIER is here to de-compensate)
-                event.getEntity().getEntityWorld().getEntities(EntityPlayer.class, Objects::nonNull)
-                        .forEach(player -> player.addExhaustion(FoodStatsTFC.PASSIVE_EXHAUSTION * jump / FoodStatsTFC.EXHAUSTION_MULTIPLIER * (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier));
+	/**
+	 * This allows beds to function correctly with TFCs calendar
+	 *
+	 * @param event {@link PlayerWakeUpEvent}
+	 */
+	@SubscribeEvent
+	public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
+		if (!event.getEntityPlayer().world.isRemote && !event.updateWorld()) {
+			long currentWorldTime = event.getEntity().getEntityWorld().getWorldTime();
+			if (CalendarTFC.CALENDAR_TIME.getWorldTime() != currentWorldTime) {
+				long jump = CalendarTFC.INSTANCE.setTimeFromWorldTime(currentWorldTime);
+				// Consume food/water on all online players accordingly (EXHAUSTION_MULTIPLIER is here to de-compensate)
+				event.getEntity().getEntityWorld().getEntities(EntityPlayer.class, Objects::nonNull)
+				     .forEach(player -> player.addExhaustion(FoodStatsTFC.PASSIVE_EXHAUSTION * jump / FoodStatsTFC.EXHAUSTION_MULTIPLIER * (float) ConfigTFC.General.PLAYER.passiveExhaustionMultiplier));
 
-            }
-        }
-    }
+			}
+		}
+	}
 
-    /**
-     * Fired on server only when a player logs out
-     *
-     * @param event {@link PlayerLoggedOutEvent}
-     */
-    @SubscribeEvent
-    public static void onPlayerLoggedOut(PlayerLoggedOutEvent event) {
-        if (event.player instanceof EntityPlayerMP) {
-            // Check total players and reset player / calendar time ticking
-            MinecraftServer server = event.player.getServer();
-            if (server != null) {
-                TerraFirmaCraft.getLog().info("Player Logged Out - Checking for Calendar Updates.");
-                List<EntityPlayerMP> players = server.getPlayerList().getPlayers();
-                int playerCount = players.size();
-                // The player logging out doesn't count
-                if (players.contains(event.player)) {
-                    playerCount--;
-                }
-                CalendarTFC.INSTANCE.setPlayersLoggedOn(playerCount > 0);
-            }
-        }
-    }
+	/**
+	 * Fired on server only when a player logs out
+	 *
+	 * @param event {@link PlayerLoggedOutEvent}
+	 */
+	@SubscribeEvent
+	public static void onPlayerLoggedOut(PlayerLoggedOutEvent event) {
+		if (event.player instanceof EntityPlayerMP) {
+			// Check total players and reset player / calendar time ticking
+			MinecraftServer server = event.player.getServer();
+			if (server != null) {
+				TerraFirmaCraft.getLog().info("Player Logged Out - Checking for Calendar Updates.");
+				List<EntityPlayerMP> players = server.getPlayerList().getPlayers();
+				int playerCount = players.size();
+				// The player logging out doesn't count
+				if (players.contains(event.player)) {
+					playerCount--;
+				}
+				CalendarTFC.INSTANCE.setPlayersLoggedOn(playerCount > 0);
+			}
+		}
+	}
 
-    /**
-     * Fired on server only when a player logs in
-     *
-     * @param event {@link PlayerLoggedInEvent}
-     */
-    @SubscribeEvent
-    public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
-        if (event.player instanceof EntityPlayerMP) {
-            // Check total players and reset player / calendar time ticking
-            MinecraftServer server = event.player.getServer();
-            if (server != null) {
-                TerraFirmaCraft.getLog().info("Player Logged In - Checking for Calendar Updates.");
-                int players = server.getPlayerList().getPlayers().size();
-                CalendarTFC.INSTANCE.setPlayersLoggedOn(players > 0);
-            }
-        }
-    }
+	/**
+	 * Fired on server only when a player logs in
+	 *
+	 * @param event {@link PlayerLoggedInEvent}
+	 */
+	@SubscribeEvent
+	public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
+		if (event.player instanceof EntityPlayerMP) {
+			// Check total players and reset player / calendar time ticking
+			MinecraftServer server = event.player.getServer();
+			if (server != null) {
+				TerraFirmaCraft.getLog().info("Player Logged In - Checking for Calendar Updates.");
+				int players = server.getPlayerList().getPlayers().size();
+				CalendarTFC.INSTANCE.setPlayersLoggedOn(players > 0);
+			}
+		}
+	}
 
-    /**
-     * Detects when a user manually changes `doDaylightCycle`, and updates the calendar accordingly
-     *
-     * @param event {@link GameRuleChangeEvent}
-     */
-    @SubscribeEvent
-    public static void onGameRuleChange(GameRuleChangeEvent event) {
-        if ("doDaylightCycle".equals(event.getRuleName())) {
-            // This is only called on server, so it needs to sync to client
-            CalendarTFC.INSTANCE.setDoDaylightCycle();
-        }
-    }
+	/**
+	 * Detects when a user manually changes `doDaylightCycle`, and updates the calendar accordingly
+	 *
+	 * @param event {@link GameRuleChangeEvent}
+	 */
+	@SubscribeEvent
+	public static void onGameRuleChange(GameRuleChangeEvent event) {
+		if ("doDaylightCycle".equals(event.getRuleName())) {
+			// This is only called on server, so it needs to sync to client
+			CalendarTFC.INSTANCE.setDoDaylightCycle();
+		}
+	}
 }

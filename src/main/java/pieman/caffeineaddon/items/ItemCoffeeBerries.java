@@ -17,24 +17,24 @@ import javax.annotation.Nullable;
 
 public class ItemCoffeeBerries extends ItemFood implements IHasModel {
 
-    public ItemCoffeeBerries(String name) {
-        super(0, 0, false);
-        this.setTranslationKey(name);
-        this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabsTFC.CT_FOOD);
-        this.setPotionEffect(new PotionEffect(MobEffects.SPEED, 800, 0), 1f);
+	public ItemCoffeeBerries(String name) {
+		super(0, 0, false);
+		this.setTranslationKey(name);
+		this.setRegistryName(name);
+		this.setCreativeTab(CreativeTabsTFC.CT_FOOD);
+		this.setPotionEffect(new PotionEffect(MobEffects.SPEED, 800, 0), 1f);
 
-        ModItems.ITEMS.add(this);
-    }
+		ModItems.ITEMS.add(this);
+	}
 
-    @Override
-    public void registerModels() {
-        CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
-    }
+	@Override
+	public void registerModels() {
+		CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new FoodHandler(nbt, new FoodData(4, 0f, 0f, 0f, 0f, 0.75f, 0f, 0f, 4f));
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new FoodHandler(nbt, new FoodData(4, 0f, 0f, 0f, 0f, 0.75f, 0f, 0f, 4f));
+	}
 }

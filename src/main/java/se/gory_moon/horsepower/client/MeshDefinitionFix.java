@@ -17,14 +17,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 @SideOnly(Side.CLIENT)
 interface MeshDefinitionFix extends ItemMeshDefinition {
-    // Helper method to easily create lambda instances of this class
-    static ItemMeshDefinition create(MeshDefinitionFix lambda) {
-        return lambda;
-    }
+	// Helper method to easily create lambda instances of this class
+	static ItemMeshDefinition create(MeshDefinitionFix lambda) {
+		return lambda;
+	}
 
-    ModelResourceLocation getLocation(ItemStack stack);
+	ModelResourceLocation getLocation(ItemStack stack);
 
-    default ModelResourceLocation getModelLocation(ItemStack stack) {
-        return getLocation(stack);
-    }
+	default ModelResourceLocation getModelLocation(ItemStack stack) {
+		return getLocation(stack);
+	}
 }

@@ -13,55 +13,56 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.Tags;
 
 import java.util.List;
 
-@Mod(modid = PassingDays.modId, name = PassingDays.name, version = PassingDays.version, dependencies = "after:galacticraftcore;after:immersivetech")
+import static su.terrafirmagreg.Constants.MODID_TFCPASSINGDAYS;
+
+@Mod(modid = MODID_TFCPASSINGDAYS, name = PassingDays.name, version = Tags.VERSION, dependencies = "after:galacticraftcore;after:immersivetech")
 public class PassingDays {
-    public static final String modId = "tfcpassingdays";
-    public static final String name = "TFC Passing Days";
-    public static final String version = "1.0.0";
-    boolean await = false;
-    boolean awaitingServer = false;
+	public static final String name = "TFC Passing Days";
+	boolean await = false;
+	boolean awaitingServer = false;
 
-    @Mod.EventHandler
-    public void init(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+	@Mod.EventHandler
+	public void init(FMLPreInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if (await && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null) {
-            Utils.writeDeclaredField(World.class, Minecraft.getMinecraft().world, "provider", new PassingDayWorldProviderClient(Minecraft.getMinecraft().world.provider), true);
-            await = false;
-        }
-    }
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onTick(TickEvent.ClientTickEvent event) {
+		if (await && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null) {
+			Utils.writeDeclaredField(World.class, Minecraft.getMinecraft().world, "provider", new PassingDayWorldProviderClient(Minecraft.getMinecraft().world.provider), true);
+			await = false;
+		}
+	}
 
 
-    @SubscribeEvent
-    public void onServerTick(TickEvent.ServerTickEvent event) {
-        if (awaitingServer) {
-            World world = DimensionManager.getWorld(0);
-            if (world != null && !world.isRemote && world.provider != null) {
-                Utils.writeDeclaredField(World.class, world, "provider", new PassingDayWorldProviderServer(world.provider), true);
-                awaitingServer = false;
-                List<TileEntity> teList = world.tickableTileEntities;
-                List<TileEntity> newTeList = new TETriggerList(world);
-                newTeList.addAll(teList);
-                Utils.writeDeclaredField(World.class, world, "tickableTileEntities", newTeList, true);
-            }
-        }
-    }
+	@SubscribeEvent
+	public void onServerTick(TickEvent.ServerTickEvent event) {
+		if (awaitingServer) {
+			World world = DimensionManager.getWorld(0);
+			if (world != null && !world.isRemote && world.provider != null) {
+				Utils.writeDeclaredField(World.class, world, "provider", new PassingDayWorldProviderServer(world.provider), true);
+				awaitingServer = false;
+				List<TileEntity> teList = world.tickableTileEntities;
+				List<TileEntity> newTeList = new TETriggerList(world);
+				newTeList.addAll(teList);
+				Utils.writeDeclaredField(World.class, world, "tickableTileEntities", newTeList, true);
+			}
+		}
+	}
 
-    @Mod.EventHandler
-    public void onServerStart(FMLServerStartedEvent event) {
-        awaitingServer = true;
-    }
+	@Mod.EventHandler
+	public void onServerStart(FMLServerStartedEvent event) {
+		awaitingServer = true;
+	}
 
-    @SubscribeEvent
-    public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
-        await = true;
-    }
+	@SubscribeEvent
+	public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
+		await = true;
+	}
 
 }

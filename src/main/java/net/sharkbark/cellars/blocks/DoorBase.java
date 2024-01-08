@@ -20,31 +20,31 @@ import java.util.Random;
 
 public class DoorBase extends BlockDoor implements IHasModel {
 
-    protected DoorBase(String name, Material material) {
-        //setUnlocalizedName(name);
-        super(material);
-        setTranslationKey(name);
-        setRegistryName(name);
-        setCreativeTab(Main.creativeTab);
-        setHardness(2F);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlockDoor(this).setRegistryName(this.getRegistryName()));
-    }
+	protected DoorBase(String name, Material material) {
+		//setUnlocalizedName(name);
+		super(material);
+		setTranslationKey(name);
+		setRegistryName(name);
+		setCreativeTab(Main.creativeTab);
+		setHardness(2F);
+		ModBlocks.BLOCKS.add(this);
+		ModItems.ITEMS.add(new ItemBlockDoor(this).setRegistryName(this.getRegistryName()));
+	}
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
-    }
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
+	}
 
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World worldIn, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(this);
-    }
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World worldIn, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(this);
+	}
 
-    @Override
-    public void registerModels() {
+	@Override
+	public void registerModels() {
 
-        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 
-    }
+	}
 }

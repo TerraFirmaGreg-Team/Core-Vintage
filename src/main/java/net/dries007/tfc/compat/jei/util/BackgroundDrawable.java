@@ -14,30 +14,30 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 import javax.annotation.Nonnull;
 
 public class BackgroundDrawable implements IDrawable {
-    private final int width;
-    private final int height;
-    private final ResourceLocation location;
+	private final int width;
+	private final int height;
+	private final ResourceLocation location;
 
-    public BackgroundDrawable(ResourceLocation location, int width, int height) {
-        this.location = location;
-        this.width = width;
-        this.height = height;
-    }
+	public BackgroundDrawable(ResourceLocation location, int width, int height) {
+		this.location = location;
+		this.width = width;
+		this.height = height;
+	}
 
-    @Override
-    public int getWidth() {
-        return this.width;
-    }
+	@Override
+	public int getWidth() {
+		return this.width;
+	}
 
-    @Override
-    public int getHeight() {
-        return this.height;
-    }
+	@Override
+	public int getHeight() {
+		return this.height;
+	}
 
-    @Override
-    public void draw(@Nonnull Minecraft minecraft, int xOffset, int yOffset) {
-        GlStateManager.resetColor();
-        minecraft.getTextureManager().bindTexture(this.location);
-        GuiUtils.drawTexturedModalRect(xOffset, yOffset, 0, 0, this.width, this.height, 0);
-    }
+	@Override
+	public void draw(@Nonnull Minecraft minecraft, int xOffset, int yOffset) {
+		GlStateManager.resetColor();
+		minecraft.getTextureManager().bindTexture(this.location);
+		GuiUtils.drawTexturedModalRect(xOffset, yOffset, 0, 0, this.width, this.height, 0);
+	}
 }

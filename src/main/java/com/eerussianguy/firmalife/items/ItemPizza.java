@@ -15,47 +15,47 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class ItemPizza extends ItemFoodFL {
-    public ItemPizza() {
-        super(FoodDataFL.PIZZA);
-    }
+	public ItemPizza() {
+		super(FoodDataFL.PIZZA);
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new PizzaHandler(nbt, data);
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new PizzaHandler(nbt, data);
+	}
 
 
-    public static class PizzaHandler extends FoodHandler {
-        private final FoodData rootData;
+	public static class PizzaHandler extends FoodHandler {
+		private final FoodData rootData;
 
-        public PizzaHandler(@Nullable NBTTagCompound nbt, FoodData data) {
-            super(nbt, data);
+		public PizzaHandler(@Nullable NBTTagCompound nbt, FoodData data) {
+			super(nbt, data);
 
-            this.rootData = data;
-        }
+			this.rootData = data;
+		}
 
-        public void initCreationFoods(List<FoodData> ingredients) {
-            float[] nutrition = new float[Nutrient.TOTAL];
-            float water = 0f;
-            float saturation = 2f;
-            for (FoodData ingredient : ingredients) {
-                if (ingredient == FoodDataFL.PINEAPPLE) {
-                    //data = new FoodData(4, water, saturation, new float[Nutrient.TOTAL], rootData.getDecayModifier());
-                    FirmaLife.logger.warn("Why did you put pineapple on your pizza?");
-                }
-                for (int i = 0; i < nutrition.length; i++) {
-                    nutrition[i] += 0.8f * ingredient.getNutrients()[i];
-                }
-                saturation += 0.8f * ingredient.getSaturation();
-                water += 0.8f * ingredient.getWater();
-            }
-            this.data = new FoodData(4, water, saturation, nutrition, rootData.getDecayModifier());
-        }
+		public void initCreationFoods(List<FoodData> ingredients) {
+			float[] nutrition = new float[Nutrient.TOTAL];
+			float water = 0f;
+			float saturation = 2f;
+			for (FoodData ingredient : ingredients) {
+				if (ingredient == FoodDataFL.PINEAPPLE) {
+					//data = new FoodData(4, water, saturation, new float[Nutrient.TOTAL], rootData.getDecayModifier());
+					FirmaLife.logger.warn("Why did you put pineapple on your pizza?");
+				}
+				for (int i = 0; i < nutrition.length; i++) {
+					nutrition[i] += 0.8f * ingredient.getNutrients()[i];
+				}
+				saturation += 0.8f * ingredient.getSaturation();
+				water += 0.8f * ingredient.getWater();
+			}
+			this.data = new FoodData(4, water, saturation, nutrition, rootData.getDecayModifier());
+		}
 
-        @Override
-        protected boolean isDynamic() {
-            return true;
-        }
-    }
+		@Override
+		protected boolean isDynamic() {
+			return true;
+		}
+	}
 }

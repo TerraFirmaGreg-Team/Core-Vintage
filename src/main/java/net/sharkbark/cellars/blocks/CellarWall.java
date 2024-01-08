@@ -4,8 +4,8 @@ import net.minecraft.block.material.Material;
 
 public class CellarWall extends BlockBase {
 
-    public CellarWall(String name, Material material) {
-        super(name, material);
-    }
+	public CellarWall(String name, Material material) {
+		super(name, material);
+	}
 
 }

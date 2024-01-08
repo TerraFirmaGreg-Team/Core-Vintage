@@ -21,23 +21,23 @@ import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
 
 public class QuernProvider implements IWailaBlock {
 
-    @Nonnull
-    @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>(1);
-        TEQuern quern = Helpers.getTE(world, pos, TEQuern.class);
-        IItemHandler handler;
-        ItemStack handstone;
-        if (quern != null && quern.hasHandstone() && (handler = quern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) != null && !(handstone = handler.getStackInSlot(SLOT_HANDSTONE)).isEmpty()) {
-            currentTooltip.add(new TextComponentTranslation("waila.tfc.quern.handstone_durability", handstone.getItemDamage(), handstone.getMaxDamage()).getFormattedText());
-        }
-        return currentTooltip;
-    }
+	@Nonnull
+	@Override
+	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+		List<String> currentTooltip = new ArrayList<>(1);
+		TEQuern quern = Helpers.getTE(world, pos, TEQuern.class);
+		IItemHandler handler;
+		ItemStack handstone;
+		if (quern != null && quern.hasHandstone() && (handler = quern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) != null && !(handstone = handler.getStackInSlot(SLOT_HANDSTONE)).isEmpty()) {
+			currentTooltip.add(new TextComponentTranslation("waila.tfc.quern.handstone_durability", handstone.getItemDamage(), handstone.getMaxDamage()).getFormattedText());
+		}
+		return currentTooltip;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(BlockQuern.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return Collections.singletonList(BlockQuern.class);
+	}
 
 }

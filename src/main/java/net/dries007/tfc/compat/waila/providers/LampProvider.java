@@ -22,24 +22,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class LampProvider implements IWailaBlock {
-    @Nonnull
-    @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        TELamp te = Helpers.getTE(world, pos, TELamp.class);
-        if (te != null) {
-            IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-            FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
-            if (fluid != null && fluid.amount > 0) {
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
-            }
-        }
-        return currentTooltip;
-    }
+	@Nonnull
+	@Override
+	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+		List<String> currentTooltip = new ArrayList<>();
+		TELamp te = Helpers.getTE(world, pos, TELamp.class);
+		if (te != null) {
+			IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+			FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
+			if (fluid != null && fluid.amount > 0) {
+				currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.contents", fluid.amount, fluid.getLocalizedName()).getFormattedText());
+			}
+		}
+		return currentTooltip;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TELamp.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return Collections.singletonList(TELamp.class);
+	}
 }

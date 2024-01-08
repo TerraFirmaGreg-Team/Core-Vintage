@@ -22,66 +22,66 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class CTCracking {
 
-    @ZenMethod
-    public static void addRecipe(String recipe_name, IIngredient input, IItemStack output, float chance) {
-        CrackingRecipe recipe = new CrackingRecipe(CTHelper.getInternalIngredient(input), InputHelper.toStack(output), chance).setRegistryName(recipe_name);
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                RegistriesFL.CRACKING.register(recipe);
-            }
+	@ZenMethod
+	public static void addRecipe(String recipe_name, IIngredient input, IItemStack output, float chance) {
+		CrackingRecipe recipe = new CrackingRecipe(CTHelper.getInternalIngredient(input), InputHelper.toStack(output), chance).setRegistryName(recipe_name);
+		CraftTweakerAPI.apply(new IAction() {
+			@Override
+			public void apply() {
+				RegistriesFL.CRACKING.register(recipe);
+			}
 
-            @Override
-            public String describe() {
-                return "Adding Cracking recipe " + recipe.getRegistryName().toString();
-            }
-        });
-    }
+			@Override
+			public String describe() {
+				return "Adding Cracking recipe " + recipe.getRegistryName().toString();
+			}
+		});
+	}
 
-    @ZenMethod
-    public static void removeRecipe(String recipe_name) {
+	@ZenMethod
+	public static void removeRecipe(String recipe_name) {
 
-        CrackingRecipe recipe = RegistriesFL.CRACKING.getValue(new ResourceLocation(recipe_name));
+		CrackingRecipe recipe = RegistriesFL.CRACKING.getValue(new ResourceLocation(recipe_name));
 
-        if (recipe != null) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) RegistriesFL.CRACKING;
-                    CRACKING.remove(recipe.getRegistryName());
-                }
+		if (recipe != null) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) RegistriesFL.CRACKING;
+					CRACKING.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    return "Removing Cracking recipe " + recipe_name;
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					return "Removing Cracking recipe " + recipe_name;
+				}
+			});
+		}
+	}
 
-    @ZenMethod
-    public static void removeRecipe(IItemStack output) {
-        if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
-        ArrayList<CrackingRecipe> removeList = new ArrayList<>();
+	@ZenMethod
+	public static void removeRecipe(IItemStack output) {
+		if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
+		ArrayList<CrackingRecipe> removeList = new ArrayList<>();
 
-        RegistriesFL.CRACKING.getValuesCollection()
-                .stream()
-                .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
-                .forEach(removeList::add);
+		RegistriesFL.CRACKING.getValuesCollection()
+		                     .stream()
+		                     .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
+		                     .forEach(removeList::add);
 
-        for (CrackingRecipe recipe : removeList) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) RegistriesFL.CRACKING;
-                    CRACKING.remove(recipe.getRegistryName());
-                }
+		for (CrackingRecipe recipe : removeList) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) RegistriesFL.CRACKING;
+					CRACKING.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    return "Removing Cracking recipe for output " + output.getDisplayName();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					return "Removing Cracking recipe for output " + output.getDisplayName();
+				}
+			});
+		}
+	}
 }

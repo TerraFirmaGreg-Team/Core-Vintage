@@ -3,9 +3,9 @@ package se.gory_moon.horsepower.tweaker;
 
 public interface ITweakerPlugin {
 
-    void applyTweaker();
+	void applyTweaker();
 
-    void register();
+	void register();
 
-    void run();
+	void run();
 }

@@ -12,25 +12,25 @@ import javax.annotation.Nullable;
 
 public class CapabilitySharpness {
 
-    @CapabilityInject(ISharpness.class)
-    public static Capability<ISharpness> SHARPNESS_CAPABILITY;
+	@CapabilityInject(ISharpness.class)
+	public static Capability<ISharpness> SHARPNESS_CAPABILITY;
 
-    public static void setup() {
-        CapabilityManager.INSTANCE.register(ISharpness.class, new CapabilitySharpnessStorage(), SharpnessHandler::new);
-    }
+	public static void setup() {
+		CapabilityManager.INSTANCE.register(ISharpness.class, new CapabilitySharpnessStorage(), SharpnessHandler::new);
+	}
 
-    private static class CapabilitySharpnessStorage implements Capability.IStorage<ISharpness> {
+	private static class CapabilitySharpnessStorage implements Capability.IStorage<ISharpness> {
 
-        @Nullable
-        @Override
-        public NBTBase writeNBT(Capability<ISharpness> capability, ISharpness instance, EnumFacing side) {
-            return new NBTTagInt(instance.getCharges());
-        }
+		@Nullable
+		@Override
+		public NBTBase writeNBT(Capability<ISharpness> capability, ISharpness instance, EnumFacing side) {
+			return new NBTTagInt(instance.getCharges());
+		}
 
-        @Override
-        public void readNBT(Capability<ISharpness> capability, ISharpness instance, EnumFacing side, NBTBase nbt) {
-            instance.setCharges(((NBTPrimitive) nbt).getInt());
-        }
-    }
+		@Override
+		public void readNBT(Capability<ISharpness> capability, ISharpness instance, EnumFacing side, NBTBase nbt) {
+			instance.setCharges(((NBTPrimitive) nbt).getInt());
+		}
+	}
 
 }

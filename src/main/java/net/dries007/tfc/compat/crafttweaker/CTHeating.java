@@ -28,74 +28,74 @@ import java.util.List;
 @ZenClass("mods.terrafirmacraft.Heating")
 @ZenRegister
 public class CTHeating {
-    @ZenMethod
-    public static void addRecipe(String registryName, IItemStack input, IItemStack output, float transformTemp, float maxTemp) {
-        if (input == null || output == null)
-            throw new IllegalArgumentException("Input and output are not allowed to be empty!");
-        ItemStack istack = ((ItemStack) input.getInternal());
-        ItemStack ostack = ((ItemStack) output.getInternal());
-        IItemHeat icap = istack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-        if (icap == null)
-            throw new IllegalStateException("Input must have heating capabilities!");
-        HeatRecipe recipe = new HeatRecipeSimple(IIngredient.of(istack), ostack, transformTemp, maxTemp, Metal.Tier.TIER_I).setRegistryName(registryName);
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                TFCRegistries.HEAT.register(recipe);
-            }
+	@ZenMethod
+	public static void addRecipe(String registryName, IItemStack input, IItemStack output, float transformTemp, float maxTemp) {
+		if (input == null || output == null)
+			throw new IllegalArgumentException("Input and output are not allowed to be empty!");
+		ItemStack istack = ((ItemStack) input.getInternal());
+		ItemStack ostack = ((ItemStack) output.getInternal());
+		IItemHeat icap = istack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+		if (icap == null)
+			throw new IllegalStateException("Input must have heating capabilities!");
+		HeatRecipe recipe = new HeatRecipeSimple(IIngredient.of(istack), ostack, transformTemp, maxTemp, Metal.Tier.TIER_I).setRegistryName(registryName);
+		CraftTweakerAPI.apply(new IAction() {
+			@Override
+			public void apply() {
+				TFCRegistries.HEAT.register(recipe);
+			}
 
-            @Override
-            public String describe() {
-                //noinspection ConstantConditions
-                return "Adding heating recipe " + recipe.getRegistryName().toString();
-            }
-        });
-    }
+			@Override
+			public String describe() {
+				//noinspection ConstantConditions
+				return "Adding heating recipe " + recipe.getRegistryName().toString();
+			}
+		});
+	}
 
-    @ZenMethod
-    public static void removeRecipe(IItemStack output) {
-        if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
-        ItemStack item = (ItemStack) output.getInternal();
-        List<HeatRecipe> removeList = new ArrayList<>();
-        TFCRegistries.HEAT.getValuesCollection()
-                .stream()
-                .filter(x -> x instanceof HeatRecipeSimple)
-                .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-                .forEach(removeList::add);
-        for (HeatRecipe rem : removeList) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.HEAT;
-                    modRegistry.remove(rem.getRegistryName());
-                }
+	@ZenMethod
+	public static void removeRecipe(IItemStack output) {
+		if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
+		ItemStack item = (ItemStack) output.getInternal();
+		List<HeatRecipe> removeList = new ArrayList<>();
+		TFCRegistries.HEAT.getValuesCollection()
+		                  .stream()
+		                  .filter(x -> x instanceof HeatRecipeSimple)
+		                  .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+		                  .forEach(removeList::add);
+		for (HeatRecipe rem : removeList) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.HEAT;
+					modRegistry.remove(rem.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    //noinspection ConstantConditions
-                    return "Removing heating recipe " + rem.getRegistryName().toString();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					//noinspection ConstantConditions
+					return "Removing heating recipe " + rem.getRegistryName().toString();
+				}
+			});
+		}
+	}
 
-    @ZenMethod
-    public static void removeRecipe(String registryName) {
-        HeatRecipe recipe = TFCRegistries.HEAT.getValue(new ResourceLocation(registryName));
-        if (recipe instanceof HeatRecipeSimple) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.HEAT;
-                    modRegistry.remove(recipe.getRegistryName());
-                }
+	@ZenMethod
+	public static void removeRecipe(String registryName) {
+		HeatRecipe recipe = TFCRegistries.HEAT.getValue(new ResourceLocation(registryName));
+		if (recipe instanceof HeatRecipeSimple) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.HEAT;
+					modRegistry.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    //noinspection ConstantConditions
-                    return "Removing heating recipe " + recipe.getRegistryName().toString();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					//noinspection ConstantConditions
+					return "Removing heating recipe " + recipe.getRegistryName().toString();
+				}
+			});
+		}
+	}
 }

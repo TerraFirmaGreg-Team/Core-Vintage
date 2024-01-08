@@ -23,61 +23,62 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.Tags;
 
-@Mod(modid = FirmaLife.MOD_ID, name = FirmaLife.MODNAME, version = FirmaLife.MODVERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
+import static su.terrafirmagreg.Constants.MODID_FL;
+
+@Mod(modid = MODID_FL, name = FirmaLife.MODNAME, version = Tags.VERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
 public class FirmaLife {
-    public static final String MOD_ID = "firmalife";
-    public static final String MODNAME = "FirmaLife";
-    public static final String MODVERSION = "0.5.1";
-    @SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
-    public static CommonProxy proxy;
-    public static Logger logger;
-    @Mod.Instance
-    private static FirmaLife INSTANCE = null;
-    private SimpleNetworkWrapper network;
+	public static final String MODNAME = "FirmaLife";
+	@SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
+	public static CommonProxy proxy;
+	public static Logger logger;
+	@Mod.Instance
+	private static FirmaLife INSTANCE = null;
+	private SimpleNetworkWrapper network;
 
-    public static FirmaLife getInstance() {
-        return INSTANCE;
-    }
+	public static FirmaLife getInstance() {
+		return INSTANCE;
+	}
 
-    public static SimpleNetworkWrapper getNetwork() {
-        return INSTANCE.network;
-    }
+	public static SimpleNetworkWrapper getNetwork() {
+		return INSTANCE.network;
+	}
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
-        proxy.preInit(event);
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		logger = event.getModLog();
+		proxy.preInit(event);
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new FLGuiHandler());
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
-        int id = 0;
-        // received client side
-        network.registerMessage(new PacketSpawnVanillaParticle.Handler(), PacketSpawnVanillaParticle.class, ++id, Side.CLIENT);
-        network.registerMessage(new PacketDrawBoundingBox.Handler(), PacketDrawBoundingBox.class, ++id, Side.CLIENT);
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new FLGuiHandler());
+		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_FL);
+		int id = 0;
+		// received client side
+		network.registerMessage(new PacketSpawnVanillaParticle.Handler(), PacketSpawnVanillaParticle.class, ++id, Side.CLIENT);
+		network.registerMessage(new PacketDrawBoundingBox.Handler(), PacketDrawBoundingBox.class, ++id, Side.CLIENT);
 
-        VeinAdder.ADDER.addVeins(event.getModConfigurationDirectory());
+		VeinAdder.ADDER.addVeins(event.getModConfigurationDirectory());
 
-        CapPlayerDataFL.preInit();
-        HelpersFL.insertWhitelist();
+		CapPlayerDataFL.preInit();
+		HelpersFL.insertWhitelist();
 
-        ModuleManager.initModules();
-        ModuleManager.getModules().forEach(mod -> mod.preInit(event));
-    }
+		ModuleManager.initModules();
+		ModuleManager.getModules().forEach(mod -> mod.preInit(event));
+	}
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        proxy.init(event);
-        LootTablesFL.init();
-        ModuleManager.getModules().forEach(mod -> mod.init(event));
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
+		proxy.init(event);
+		LootTablesFL.init();
+		ModuleManager.getModules().forEach(mod -> mod.init(event));
 
-        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsFL.HONEYCOMB), () -> new ItemHeatHandler(null, 1, 600));
-    }
+		CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsFL.HONEYCOMB), () -> new ItemHeatHandler(null, 1, 600));
+	}
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit(event);
-        OreDictsFL.addStaticOres();
-        ModuleManager.getModules().forEach(mod -> mod.postInit(event));
-    }
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		proxy.postInit(event);
+		OreDictsFL.addStaticOres();
+		ModuleManager.getModules().forEach(mod -> mod.postInit(event));
+	}
 }

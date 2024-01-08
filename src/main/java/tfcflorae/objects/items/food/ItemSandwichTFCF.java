@@ -10,23 +10,23 @@ import tfcflorae.util.OreDictionaryHelper;
 import javax.annotation.Nullable;
 
 public class ItemSandwichTFCF extends ItemFoodTFCF {
-    private final FoodData data;
+	private final FoodData data;
 
-    public ItemSandwichTFCF(FoodData data, Object... oreNameParts) {
-        super(data);
-        this.data = data;
+	public ItemSandwichTFCF(FoodData data, Object... oreNameParts) {
+		super(data);
+		this.data = data;
 
-        for (Object obj : oreNameParts) {
-            if (obj instanceof Object[])
-                OreDictionaryHelper.register(this, (Object[]) obj);
-            else
-                OreDictionaryHelper.register(this, obj);
-        }
-    }
+		for (Object obj : oreNameParts) {
+			if (obj instanceof Object[])
+				OreDictionaryHelper.register(this, (Object[]) obj);
+			else
+				OreDictionaryHelper.register(this, obj);
+		}
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ItemSandwich.SandwichHandler(nbt, data);
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new ItemSandwich.SandwichHandler(nbt, data);
+	}
 }

@@ -30,87 +30,87 @@ import java.util.function.Supplier;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockJars extends BlockNonCube implements IItemSize {
-    public static final PropertyInteger JARS = StatePropertiesFL.JARS;
-    private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2D / 16, 0D, 2D / 16, 14D / 16, 6D / 16, 14D / 16);
-    private final Supplier<? extends Item> item;
+	public static final PropertyInteger JARS = StatePropertiesFL.JARS;
+	private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2D / 16, 0D, 2D / 16, 14D / 16, 6D / 16, 14D / 16);
+	private final Supplier<? extends Item> item;
 
-    public BlockJars(Supplier<? extends Item> item) {
-        super(Material.GLASS);
-        setResistance(1.0f);
-        setHardness(1.0f);
-        setLightOpacity(0);
-        setDefaultState(getBlockState().getBaseState().withProperty(JARS, 1));
-        this.item = item;
-    }
+	public BlockJars(Supplier<? extends Item> item) {
+		super(Material.GLASS);
+		setResistance(1.0f);
+		setHardness(1.0f);
+		setLightOpacity(0);
+		setDefaultState(getBlockState().getBaseState().withProperty(JARS, 1));
+		this.item = item;
+	}
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(item.get(), state.getValue(JARS)));
-    }
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		drops.add(new ItemStack(item.get(), state.getValue(JARS)));
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(JARS, meta + 1);
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(JARS, meta + 1);
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(JARS) - 1;
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(JARS) - 1;
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return SHAPE;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return SHAPE;
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!canStay(world, pos)) {
-            world.destroyBlock(pos, true);
-        }
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (!canStay(world, pos)) {
+			world.destroyBlock(pos, true);
+		}
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (world.isRemote || hand == EnumHand.OFF_HAND) return false;
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (world.isRemote || hand == EnumHand.OFF_HAND) return false;
 
-        ItemStack held = player.getHeldItem(hand);
-        int jars = state.getValue(JARS);
-        if (held.isEmpty() && player.isSneaking()) {
-            ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(item.get()));
-            jars--;
-            if (jars <= 0) {
-                world.destroyBlock(pos, false);
-            } else {
-                world.setBlockState(pos, state.withProperty(JARS, jars));
-            }
-            return true;
-        }
-        return false;
-    }
+		ItemStack held = player.getHeldItem(hand);
+		int jars = state.getValue(JARS);
+		if (held.isEmpty() && player.isSneaking()) {
+			ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(item.get()));
+			jars--;
+			if (jars <= 0) {
+				world.destroyBlock(pos, false);
+			} else {
+				world.setBlockState(pos, state.withProperty(JARS, jars));
+			}
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, JARS);
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, JARS);
+	}
 
-    @Override
-    @Nonnull
-    public Size getSize(@Nonnull ItemStack stack) {
-        return Size.VERY_LARGE;
-    }
+	@Override
+	@Nonnull
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.VERY_LARGE;
+	}
 
-    @Override
-    @Nonnull
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.MEDIUM;
-    }
+	@Override
+	@Nonnull
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.MEDIUM;
+	}
 
-    private boolean canStay(IBlockAccess world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos.down());
-        return state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-    }
+	private boolean canStay(IBlockAccess world, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos.down());
+		return state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+	}
 }

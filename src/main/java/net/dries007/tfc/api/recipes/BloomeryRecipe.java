@@ -22,70 +22,78 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
-    private final Metal metal; // Melting metal (which will be stored in a bloom)
-    private final IIngredient<ItemStack> additive; // The additive used in the process (charcoal is the default for iron)
+	private final Metal metal; // Melting metal (which will be stored in a bloom)
+	private final IIngredient<ItemStack> additive; // The additive used in the process (charcoal is the default for iron)
 
-    public BloomeryRecipe(@Nonnull Metal metal, IIngredient<ItemStack> additive) {
-        this.metal = metal;
-        this.additive = additive;
+	public BloomeryRecipe(@Nonnull Metal metal, IIngredient<ItemStack> additive) {
+		this.metal = metal;
+		this.additive = additive;
 
-        //Ensure one bloomery recipe per metal
-        //noinspection ConstantConditions
-        setRegistryName(metal.getRegistryName());
-    }
+		//Ensure one bloomery recipe per metal
+		//noinspection ConstantConditions
+		setRegistryName(metal.getRegistryName());
+	}
 
-    @Nullable
-    public static BloomeryRecipe get(@Nonnull ItemStack inputItem) {
-        return TFCRegistries.BLOOMERY.getValuesCollection().stream().filter(x -> x.isValidInput(inputItem)).findFirst().orElse(null);
-    }
+	@Nullable
+	public static BloomeryRecipe get(@Nonnull ItemStack inputItem) {
+		return TFCRegistries.BLOOMERY.getValuesCollection()
+		                             .stream()
+		                             .filter(x -> x.isValidInput(inputItem))
+		                             .findFirst()
+		                             .orElse(null);
+	}
 
-    @Nullable
-    public static BloomeryRecipe get(@Nonnull Metal metal) {
-        return TFCRegistries.BLOOMERY.getValuesCollection().stream().filter(x -> metal == x.metal).findFirst().orElse(null);
-    }
+	@Nullable
+	public static BloomeryRecipe get(@Nonnull Metal metal) {
+		return TFCRegistries.BLOOMERY.getValuesCollection()
+		                             .stream()
+		                             .filter(x -> metal == x.metal)
+		                             .findFirst()
+		                             .orElse(null);
+	}
 
-    public ItemStack getOutput(List<ItemStack> inputs) {
-        int metalAmount = 0;
-        for (ItemStack stack : inputs) {
-            IMetalItem metalItem = CapabilityMetalItem.getMetalItem(stack);
-            if (metalItem != null) {
-                metalAmount += metalItem.getSmeltAmount(stack);
-            }
-        }
-        ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
-        IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap instanceof IForgeableMeasurableMetal) {
-            IForgeableMeasurableMetal capBloom = (IForgeableMeasurableMetal) cap;
-            capBloom.setMetalAmount(metalAmount);
-            capBloom.setMetal(metal);
-            capBloom.setTemperature(capBloom.getMeltTemp() - 1);
-        }
-        return bloom;
-    }
+	public ItemStack getOutput(List<ItemStack> inputs) {
+		int metalAmount = 0;
+		for (ItemStack stack : inputs) {
+			IMetalItem metalItem = CapabilityMetalItem.getMetalItem(stack);
+			if (metalItem != null) {
+				metalAmount += metalItem.getSmeltAmount(stack);
+			}
+		}
+		ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+		IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+		if (cap instanceof IForgeableMeasurableMetal) {
+			IForgeableMeasurableMetal capBloom = (IForgeableMeasurableMetal) cap;
+			capBloom.setMetalAmount(metalAmount);
+			capBloom.setMetal(metal);
+			capBloom.setTemperature(capBloom.getMeltTemp() - 1);
+		}
+		return bloom;
+	}
 
-    /**
-     * Used in JEI, gets a bloom with 100 units
-     *
-     * @return Bloom itemstack containing 100 units
-     */
-    public ItemStack getOutput() {
-        ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
-        IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap instanceof IForgeableMeasurableMetal) {
-            IForgeableMeasurableMetal capBloom = (IForgeableMeasurableMetal) cap;
-            capBloom.setMetalAmount(100);
-            capBloom.setMetal(metal);
-            capBloom.setTemperature(capBloom.getMeltTemp() - 1);
-        }
-        return bloom;
-    }
+	/**
+	 * Used in JEI, gets a bloom with 100 units
+	 *
+	 * @return Bloom itemstack containing 100 units
+	 */
+	public ItemStack getOutput() {
+		ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
+		IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+		if (cap instanceof IForgeableMeasurableMetal) {
+			IForgeableMeasurableMetal capBloom = (IForgeableMeasurableMetal) cap;
+			capBloom.setMetalAmount(100);
+			capBloom.setMetal(metal);
+			capBloom.setTemperature(capBloom.getMeltTemp() - 1);
+		}
+		return bloom;
+	}
 
-    public boolean isValidInput(ItemStack inputItem) {
-        IMetalItem metalItem = CapabilityMetalItem.getMetalItem(inputItem);
-        return metalItem != null && metalItem.getMetal(inputItem) == metal;
-    }
+	public boolean isValidInput(ItemStack inputItem) {
+		IMetalItem metalItem = CapabilityMetalItem.getMetalItem(inputItem);
+		return metalItem != null && metalItem.getMetal(inputItem) == metal;
+	}
 
-    public boolean isValidAdditive(ItemStack input) {
-        return additive.testIgnoreCount(input);
-    }
+	public boolean isValidAdditive(ItemStack input) {
+		return additive.testIgnoreCount(input);
+	}
 }

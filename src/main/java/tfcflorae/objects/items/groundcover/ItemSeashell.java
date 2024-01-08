@@ -14,26 +14,26 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemSeashell extends ItemBlockTFC {
-    public ItemSeashell(BlockSurfaceSeashells block) {
-        super(block);
-        OreDictionaryHelper.register(this, "seashell");
-        OreDictionaryHelper.register(this, "seashells");
-    }
+	public ItemSeashell(BlockSurfaceSeashells block) {
+		super(block);
+		OreDictionaryHelper.register(this, "seashell");
+		OreDictionaryHelper.register(this, "seashells");
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT;
+	}
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return getStackSize(stack);
+	}
 }

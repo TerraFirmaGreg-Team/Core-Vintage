@@ -6,24 +6,25 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import su.terrafirmagreg.Tags;
 
-@Mod(modid = TFCAgedDrinks.MODID, name = TFCAgedDrinks.NAME, version = TFCAgedDrinks.VERSION)
+import static su.terrafirmagreg.Constants.MODID_AGEDDRINKS;
+
+@Mod(modid = MODID_AGEDDRINKS, name = TFCAgedDrinks.NAME, version = Tags.VERSION)
 public class TFCAgedDrinks {
-    public static final String MODID = "aged_drinks";
-    public static final String NAME = "TFC Aged Drinks";
-    public static final String VERSION = "1.0.1";
+	public static final String NAME = "TFC Aged Drinks";
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
 
-    }
+	}
 
-    @Mod.EventBusSubscriber
-    public static class ObjectRegistryHandler {
-        @SubscribeEvent
-        public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
-            AgedRegistry.registerAgedDrinks(event);
-        }
-    }
+	@Mod.EventBusSubscriber
+	public static class ObjectRegistryHandler {
+		@SubscribeEvent
+		public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
+			AgedRegistry.registerAgedDrinks(event);
+		}
+	}
 
 }

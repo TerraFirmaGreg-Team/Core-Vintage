@@ -18,18 +18,18 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class KnappingRecipeWrapperFL extends KnappingRecipeWrapper {
-    public static final ResourceLocation PUMPKIN_TEXTURE = new ResourceLocation("minecraft", "textures/blocks/pumpkin_side.png");
+	public static final ResourceLocation PUMPKIN_TEXTURE = new ResourceLocation("minecraft", "textures/blocks/pumpkin_side.png");
 
-    public static final Map<KnappingType, ResourceLocation> HIGHMAP = Maps.newHashMap();
+	public static final Map<KnappingType, ResourceLocation> HIGHMAP = Maps.newHashMap();
 
-    public static final Map<KnappingType, ResourceLocation> LOWMAP = Maps.newHashMap();
+	public static final Map<KnappingType, ResourceLocation> LOWMAP = Maps.newHashMap();
 
-    static {
-        HIGHMAP.put(KnappingFL.PUMPKIN, PUMPKIN_TEXTURE);
-        LOWMAP.put(KnappingFL.PUMPKIN, null);
-    }
+	static {
+		HIGHMAP.put(KnappingFL.PUMPKIN, PUMPKIN_TEXTURE);
+		LOWMAP.put(KnappingFL.PUMPKIN, null);
+	}
 
-    public KnappingRecipeWrapperFL(KnappingRecipe recipe, IGuiHelper guiHelper) {
-        super(recipe, guiHelper, HIGHMAP.get(recipe.getType()), LOWMAP.get(recipe.getType()));
-    }
+	public KnappingRecipeWrapperFL(KnappingRecipe recipe, IGuiHelper guiHelper) {
+		super(recipe, guiHelper, HIGHMAP.get(recipe.getType()), LOWMAP.get(recipe.getType()));
+	}
 }

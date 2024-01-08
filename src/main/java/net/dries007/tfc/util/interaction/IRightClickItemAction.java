@@ -20,10 +20,10 @@ import net.minecraft.world.World;
  */
 @FunctionalInterface
 public interface IRightClickItemAction extends IRightClickBlockAction {
-    EnumActionResult onRightClickItem(World worldIn, EntityPlayer playerIn, EnumHand handIn);
+	EnumActionResult onRightClickItem(World worldIn, EntityPlayer playerIn, EnumHand handIn);
 
-    @Override
-    default EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ) {
-        return onRightClickItem(worldIn, player, hand);
-    }
+	@Override
+	default EnumActionResult onRightClickBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing direction, float hitX, float hitY, float hitZ) {
+		return onRightClickItem(worldIn, player, hand);
+	}
 }

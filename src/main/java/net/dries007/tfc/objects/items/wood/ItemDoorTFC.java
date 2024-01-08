@@ -23,36 +23,36 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemDoorTFC extends ItemDoor implements IItemSize {
-    private static final Map<Tree, ItemDoorTFC> MAP = new HashMap<>();
-    public final Tree wood;
+	private static final Map<Tree, ItemDoorTFC> MAP = new HashMap<>();
+	public final Tree wood;
 
-    public ItemDoorTFC(BlockDoorTFC block) {
-        super(block);
-        if (MAP.put(block.wood, this) != null) throw new IllegalStateException("There can only be one.");
-        wood = block.wood;
-        OreDictionaryHelper.register(this, "door", "wood");
-        //noinspection ConstantConditions
-        OreDictionaryHelper.register(this, "door", "wood", wood.getRegistryName().getPath());
-    }
+	public ItemDoorTFC(BlockDoorTFC block) {
+		super(block);
+		if (MAP.put(block.wood, this) != null) throw new IllegalStateException("There can only be one.");
+		wood = block.wood;
+		OreDictionaryHelper.register(this, "door", "wood");
+		//noinspection ConstantConditions
+		OreDictionaryHelper.register(this, "door", "wood", wood.getRegistryName().getPath());
+	}
 
-    public static ItemDoorTFC get(Tree wood) {
-        return MAP.get(wood);
-    }
+	public static ItemDoorTFC get(Tree wood) {
+		return MAP.get(wood);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.VERY_LARGE; // Can't be stored
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.VERY_LARGE; // Can't be stored
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.HEAVY; // Stacksize = 4
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.HEAVY; // Stacksize = 4
+	}
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return getStackSize(stack);
+	}
 }

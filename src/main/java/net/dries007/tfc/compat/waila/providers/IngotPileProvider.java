@@ -21,29 +21,29 @@ import java.util.List;
 
 public class IngotPileProvider implements IWailaBlock {
 
-    @Nonnull
-    @Override
-    public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-        TEIngotPile ingotPile = Helpers.getTE(world, pos, TEIngotPile.class);
-        if (ingotPile != null) {
-            return new ItemStack(ItemIngot.get(ingotPile.getMetal(), Metal.ItemType.INGOT), ingotPile.getCount());
-        }
-        return ItemStack.EMPTY;
-    }
+	@Nonnull
+	@Override
+	public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+		TEIngotPile ingotPile = Helpers.getTE(world, pos, TEIngotPile.class);
+		if (ingotPile != null) {
+			return new ItemStack(ItemIngot.get(ingotPile.getMetal(), Metal.ItemType.INGOT), ingotPile.getCount());
+		}
+		return ItemStack.EMPTY;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TEIngotPile.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return Collections.singletonList(TEIngotPile.class);
+	}
 
-    @Override
-    public boolean appendBody() {
-        return false;
-    }
+	@Override
+	public boolean appendBody() {
+		return false;
+	}
 
-    @Override
-    public boolean overrideIcon() {
-        return true;
-    }
+	@Override
+	public boolean overrideIcon() {
+		return true;
+	}
 }

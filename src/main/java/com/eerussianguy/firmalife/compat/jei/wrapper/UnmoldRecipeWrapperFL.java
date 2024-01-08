@@ -13,21 +13,21 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public class UnmoldRecipeWrapperFL implements IRecipeWrapper {
-    private final ItemStack mold;
-    private final ItemStack output;
+	private final ItemStack mold;
+	private final ItemStack output;
 
-    public UnmoldRecipeWrapperFL(Metal metal, String type) {
-        this.mold = new ItemStack(ItemsFL.malletMold);
-        IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
-        }
+	public UnmoldRecipeWrapperFL(Metal metal, String type) {
+		this.mold = new ItemStack(ItemsFL.malletMold);
+		IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+		if (cap instanceof IMoldHandler) {
+			cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100), true);
+		}
 
-        this.output = new ItemStack(ItemsFL.getMetalMalletHead(metal));
-    }
+		this.output = new ItemStack(ItemsFL.getMetalMalletHead(metal));
+	}
 
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.ITEM, this.mold);
-        ingredients.setOutput(VanillaTypes.ITEM, this.output);
-    }
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInput(VanillaTypes.ITEM, this.mold);
+		ingredients.setOutput(VanillaTypes.ITEM, this.output);
+	}
 }

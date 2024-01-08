@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 public class BlockDebug extends Block {
-    public BlockDebug() {
-        super(Material.SPONGE);
-    }
+	public BlockDebug() {
+		super(Material.SPONGE);
+	}
 }

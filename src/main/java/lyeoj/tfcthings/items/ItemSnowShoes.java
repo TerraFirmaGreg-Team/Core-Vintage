@@ -22,102 +22,102 @@ import javax.annotation.Nonnull;
 
 public class ItemSnowShoes extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
 
-    private static final String STEPS_NBT_KEY = "Steps";
-    private IArmorMaterialTFC materialTFC;
-    private double posX;
-    private double posZ;
+	private static final String STEPS_NBT_KEY = "Steps";
+	private IArmorMaterialTFC materialTFC;
+	private double posX;
+	private double posZ;
 
-    public ItemSnowShoes(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
-        super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
-        this.setTranslationKey("snow_shoes");
-        this.setRegistryName("snow_shoes");
-        this.materialTFC = materialTFC;
-        this.setNoRepair();
-    }
+	public ItemSnowShoes(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+		super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
+		this.setTranslationKey("snow_shoes");
+		this.setRegistryName("snow_shoes");
+		this.materialTFC = materialTFC;
+		this.setNoRepair();
+	}
 
-    public float getCrushingModifier() {
-        return this.materialTFC.getCrushingModifier();
-    }
+	public float getCrushingModifier() {
+		return this.materialTFC.getCrushingModifier();
+	}
 
-    public float getPiercingModifier() {
-        return this.materialTFC.getPiercingModifier();
-    }
+	public float getPiercingModifier() {
+		return this.materialTFC.getPiercingModifier();
+	}
 
-    public float getSlashingModifier() {
-        return this.materialTFC.getSlashingModifier();
-    }
+	public float getSlashingModifier() {
+		return this.materialTFC.getSlashingModifier();
+	}
 
-    @Nonnull
-    public Size getSize(@Nonnull ItemStack stack) {
-        return Size.LARGE;
-    }
+	@Nonnull
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.LARGE;
+	}
 
-    @Nonnull
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.HEAVY;
-    }
+	@Nonnull
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.HEAVY;
+	}
 
-    public boolean canStack(@Nonnull ItemStack stack) {
-        return false;
-    }
+	public boolean canStack(@Nonnull ItemStack stack) {
+		return false;
+	}
 
-    public int getSteps(ItemStack stack) {
-        if (!stack.hasTagCompound()) {
-            stack.setTagCompound(new NBTTagCompound());
-        }
-        if (!stack.getTagCompound().hasKey(STEPS_NBT_KEY)) {
-            return 0;
-        }
-        return stack.getTagCompound().getInteger(STEPS_NBT_KEY);
-    }
+	public int getSteps(ItemStack stack) {
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+		}
+		if (!stack.getTagCompound().hasKey(STEPS_NBT_KEY)) {
+			return 0;
+		}
+		return stack.getTagCompound().getInteger(STEPS_NBT_KEY);
+	}
 
-    public void setSteps(ItemStack stack, int steps) {
-        if (!stack.hasTagCompound()) {
-            stack.setTagCompound(new NBTTagCompound());
-        }
-        stack.getTagCompound().setInteger(STEPS_NBT_KEY, steps);
-    }
+	public void setSteps(ItemStack stack, int steps) {
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+		}
+		stack.getTagCompound().setInteger(STEPS_NBT_KEY, steps);
+	}
 
-    @Override
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        if (getSteps(itemStack) > ConfigTFCThings.Items.SNOW_SHOES.damageTicks && !world.isRemote) {
-            itemStack.damageItem(1, player);
-            setSteps(itemStack, 0);
-        }
-        if (player.onGround && !player.isRiding() && !player.isCreative()) {
-            AxisAlignedBB axisalignedbb = player.getEntityBoundingBox();
-            BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.minX + 0.001D, axisalignedbb.minY + 0.001D, axisalignedbb.minZ + 0.001D);
-            BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY - 0.001D, axisalignedbb.maxZ - 0.001D);
-            BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos2 = BlockPos.PooledMutableBlockPos.retain();
+	@Override
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+		if (getSteps(itemStack) > ConfigTFCThings.Items.SNOW_SHOES.damageTicks && !world.isRemote) {
+			itemStack.damageItem(1, player);
+			setSteps(itemStack, 0);
+		}
+		if (player.onGround && !player.isRiding() && !player.isCreative()) {
+			AxisAlignedBB axisalignedbb = player.getEntityBoundingBox();
+			BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.minX + 0.001D, axisalignedbb.minY + 0.001D, axisalignedbb.minZ + 0.001D);
+			BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY - 0.001D, axisalignedbb.maxZ - 0.001D);
+			BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos2 = BlockPos.PooledMutableBlockPos.retain();
 
-            if (player.world.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1)) {
-                for (int i = blockpos$pooledmutableblockpos.getX(); i <= blockpos$pooledmutableblockpos1.getX(); ++i) {
-                    for (int j = blockpos$pooledmutableblockpos.getY(); j <= blockpos$pooledmutableblockpos1.getY(); ++j) {
-                        for (int k = blockpos$pooledmutableblockpos.getZ(); k <= blockpos$pooledmutableblockpos1.getZ(); ++k) {
-                            blockpos$pooledmutableblockpos2.setPos(i, j, k);
-                            IBlockState iblockstate = world.getBlockState(blockpos$pooledmutableblockpos2);
-                            if (iblockstate.getBlock() instanceof BlockSnowTFC) {
-                                double speedModifier = ConfigTFC.General.MISC.snowMovementModifier + ((1 - ConfigTFC.General.MISC.snowMovementModifier) * ConfigTFCThings.Items.SNOW_SHOES.shoePower);
-                                player.motionX /= ConfigTFC.General.MISC.snowMovementModifier;
-                                player.motionZ /= ConfigTFC.General.MISC.snowMovementModifier;
-                                player.motionX *= speedModifier;
-                                player.motionZ *= speedModifier;
-                                if (!world.isRemote && ConfigTFCThings.Items.SNOW_SHOES.damageTicks > 0 && (posX != player.posX || posZ != player.posZ)) {
-                                    setSteps(itemStack, getSteps(itemStack) + 1);
-                                    posX = player.posX;
-                                    posZ = player.posZ;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+			if (player.world.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1)) {
+				for (int i = blockpos$pooledmutableblockpos.getX(); i <= blockpos$pooledmutableblockpos1.getX(); ++i) {
+					for (int j = blockpos$pooledmutableblockpos.getY(); j <= blockpos$pooledmutableblockpos1.getY(); ++j) {
+						for (int k = blockpos$pooledmutableblockpos.getZ(); k <= blockpos$pooledmutableblockpos1.getZ(); ++k) {
+							blockpos$pooledmutableblockpos2.setPos(i, j, k);
+							IBlockState iblockstate = world.getBlockState(blockpos$pooledmutableblockpos2);
+							if (iblockstate.getBlock() instanceof BlockSnowTFC) {
+								double speedModifier = ConfigTFC.General.MISC.snowMovementModifier + ((1 - ConfigTFC.General.MISC.snowMovementModifier) * ConfigTFCThings.Items.SNOW_SHOES.shoePower);
+								player.motionX /= ConfigTFC.General.MISC.snowMovementModifier;
+								player.motionZ /= ConfigTFC.General.MISC.snowMovementModifier;
+								player.motionX *= speedModifier;
+								player.motionZ *= speedModifier;
+								if (!world.isRemote && ConfigTFCThings.Items.SNOW_SHOES.damageTicks > 0 && (posX != player.posX || posZ != player.posZ)) {
+									setSteps(itemStack, getSteps(itemStack) + 1);
+									posX = player.posX;
+									posZ = player.posZ;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
-    }
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSnowShoes;
-    }
+	@Override
+	public boolean isEnabled() {
+		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSnowShoes;
+	}
 }

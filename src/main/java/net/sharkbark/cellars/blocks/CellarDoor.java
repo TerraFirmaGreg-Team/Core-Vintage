@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 
 public class CellarDoor extends DoorBase {
 
-    public CellarDoor(String name, Material material) {
-        super(name, material);
-    }
+	public CellarDoor(String name, Material material) {
+		super(name, material);
+	}
 }

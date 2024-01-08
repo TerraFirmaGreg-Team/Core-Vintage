@@ -10,21 +10,21 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = MODID_TFCTECH)
 public final class CommonEventHandler {
-    @SubscribeEvent
-    public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
-        ItemStack stack = event.getObject();
-        Item item = stack.getItem();
-        if (!stack.isEmpty()) {
-            // Attach missing heat capability to rocks
-            if (item instanceof ItemRock) {
-                ICapabilityProvider heatCap = new ItemHeatHandler(stack.getTagCompound(), 0.2f, 2000f);
-                event.addCapability(CapabilityItemHeat.KEY, heatCap);
-            }
-        }
-    }
+	@SubscribeEvent
+	public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
+		ItemStack stack = event.getObject();
+		Item item = stack.getItem();
+		if (!stack.isEmpty()) {
+			// Attach missing heat capability to rocks
+			if (item instanceof ItemRock) {
+				ICapabilityProvider heatCap = new ItemHeatHandler(stack.getTagCompound(), 0.2f, 2000f);
+				event.addCapability(CapabilityItemHeat.KEY, heatCap);
+			}
+		}
+	}
 }

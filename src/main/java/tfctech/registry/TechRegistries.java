@@ -11,22 +11,22 @@ import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.api.recipes.SmelteryRecipe;
 import tfctech.api.recipes.WireDrawingRecipe;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.Constants.MODID_TFCTECH;
 
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = MODID_TFCTECH)
 public final class TechRegistries {
-    public static IForgeRegistry<WireDrawingRecipe> WIRE_DRAWING;
-    public static IForgeRegistry<SmelteryRecipe> SMELTERY;
-    public static IForgeRegistry<GlassworkingRecipe> GLASSWORKING;
+	public static IForgeRegistry<WireDrawingRecipe> WIRE_DRAWING;
+	public static IForgeRegistry<SmelteryRecipe> SMELTERY;
+	public static IForgeRegistry<GlassworkingRecipe> GLASSWORKING;
 
-    @SubscribeEvent
-    public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
-        WIRE_DRAWING = createRegistry(new ResourceLocation(MODID, "wire_drawing_recipe"), WireDrawingRecipe.class);
-        SMELTERY = createRegistry(new ResourceLocation(MODID, "smeltery_recipe"), SmelteryRecipe.class);
-        GLASSWORKING = createRegistry(new ResourceLocation(MODID, "glassworking_recipe"), GlassworkingRecipe.class);
-    }
+	@SubscribeEvent
+	public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
+		WIRE_DRAWING = createRegistry(new ResourceLocation(MODID_TFCTECH, "wire_drawing_recipe"), WireDrawingRecipe.class);
+		SMELTERY = createRegistry(new ResourceLocation(MODID_TFCTECH, "smeltery_recipe"), SmelteryRecipe.class);
+		GLASSWORKING = createRegistry(new ResourceLocation(MODID_TFCTECH, "glassworking_recipe"), GlassworkingRecipe.class);
+	}
 
-    private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createRegistry(ResourceLocation name, Class<T> tClass) {
-        return new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
-    }
+	private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createRegistry(ResourceLocation name, Class<T> tClass) {
+		return new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
+	}
 }

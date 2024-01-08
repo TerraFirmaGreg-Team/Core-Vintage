@@ -1,6 +1,5 @@
 package de.mennomax.astikorcarts.init;
 
-import de.mennomax.astikorcarts.AstikorCarts;
 import de.mennomax.astikorcarts.item.ItemCargoCart;
 import de.mennomax.astikorcarts.item.ItemMobCart;
 import de.mennomax.astikorcarts.item.ItemPlowCart;
@@ -17,37 +16,39 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import java.util.HashSet;
 import java.util.Set;
 
-@ObjectHolder(AstikorCarts.MODID)
+import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+
+@ObjectHolder(MODID_ASTIKORCARTS)
 public class ModItems {
-    public static final Item WHEEL = null;
-    public static final Item CARGOCART = null;
-    public static final Item PLOWCART = null;
-    public static final Item MOBCART = null;
+	public static final Item WHEEL = null;
+	public static final Item CARGOCART = null;
+	public static final Item PLOWCART = null;
+	public static final Item MOBCART = null;
 
-    @EventBusSubscriber(modid = AstikorCarts.MODID)
-    public static class ItemRegistrationHandler {
-        public static final Set<Item> ITEMSET = new HashSet<Item>();
+	@EventBusSubscriber(modid = MODID_ASTIKORCARTS)
+	public static class ItemRegistrationHandler {
+		public static final Set<Item> ITEMSET = new HashSet<Item>();
 
-        @SubscribeEvent
-        public static void registerItems(RegistryEvent.Register<Item> event) {
-            final Item[] ITEMS = {
-                    new ItemWheel(),
-                    new ItemCargoCart(),
-                    new ItemPlowCart(),
-                    new ItemMobCart()
-            };
+		@SubscribeEvent
+		public static void registerItems(RegistryEvent.Register<Item> event) {
+			final Item[] ITEMS = {
+					new ItemWheel(),
+					new ItemCargoCart(),
+					new ItemPlowCart(),
+					new ItemMobCart()
+			};
 
-            for (Item item : ITEMS) {
-                event.getRegistry().register(item);
-                ITEMSET.add(item);
-            }
-        }
+			for (Item item : ITEMS) {
+				event.getRegistry().register(item);
+				ITEMSET.add(item);
+			}
+		}
 
-        @SubscribeEvent
-        public static void registerItemModels(ModelRegistryEvent event) {
-            for (Item item : ITEMSET) {
-                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-            }
-        }
-    }
+		@SubscribeEvent
+		public static void registerItemModels(ModelRegistryEvent event) {
+			for (Item item : ITEMSET) {
+				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+			}
+		}
+	}
 }

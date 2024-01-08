@@ -21,42 +21,42 @@ import java.util.List;
 
 public class LogPileProvider implements IWailaBlock {
 
-    @Nonnull
-    @Override
-    public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-        TELogPile logPile = Helpers.getTE(world, pos, TELogPile.class);
-        if (logPile != null) {
-            IItemHandler inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            ItemStack icon = ItemStack.EMPTY;
-            for (int i = 0; i < inventory.getSlots(); i++) {
-                ItemStack slotStack = inventory.getStackInSlot(i);
-                if (!slotStack.isEmpty()) {
-                    if (icon.isEmpty()) {
-                        icon = slotStack.copy();
-                    } else if (slotStack.isItemEqual(icon)) {
-                        icon.grow(slotStack.getCount());
-                    }
-                }
-            }
+	@Nonnull
+	@Override
+	public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+		TELogPile logPile = Helpers.getTE(world, pos, TELogPile.class);
+		if (logPile != null) {
+			IItemHandler inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			ItemStack icon = ItemStack.EMPTY;
+			for (int i = 0; i < inventory.getSlots(); i++) {
+				ItemStack slotStack = inventory.getStackInSlot(i);
+				if (!slotStack.isEmpty()) {
+					if (icon.isEmpty()) {
+						icon = slotStack.copy();
+					} else if (slotStack.isItemEqual(icon)) {
+						icon.grow(slotStack.getCount());
+					}
+				}
+			}
 
-            return icon;
-        }
-        return ItemStack.EMPTY;
-    }
+			return icon;
+		}
+		return ItemStack.EMPTY;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TELogPile.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return Collections.singletonList(TELogPile.class);
+	}
 
-    @Override
-    public boolean appendBody() {
-        return false;
-    }
+	@Override
+	public boolean appendBody() {
+		return false;
+	}
 
-    @Override
-    public boolean overrideIcon() {
-        return true;
-    }
+	@Override
+	public boolean overrideIcon() {
+		return true;
+	}
 }

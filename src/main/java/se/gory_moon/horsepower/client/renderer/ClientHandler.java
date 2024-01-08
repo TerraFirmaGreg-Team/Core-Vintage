@@ -18,35 +18,36 @@ import se.gory_moon.horsepower.util.RenderUtils;
 import java.util.stream.StreamSupport;
 
 public class ClientHandler {
-    @SubscribeEvent
-    public static void renderWorld(RenderWorldLastEvent event) {
-        final ItemStack[] itemStack = {ItemStack.EMPTY};
-        if (Configs.client.showObstructedPlace) {
-            if (StreamSupport.stream(Minecraft.getMinecraft().player.getHeldEquipment().spliterator(), false).anyMatch(stack -> !stack.isEmpty() && isHPBlock((itemStack[0] = stack).getItem()))) {
-                Minecraft mc = Minecraft.getMinecraft();
-                if (mc.objectMouseOver == null || mc.objectMouseOver.typeOfHit != RayTraceResult.Type.BLOCK)
-                    return;
+	@SubscribeEvent
+	public static void renderWorld(RenderWorldLastEvent event) {
+		final ItemStack[] itemStack = {ItemStack.EMPTY};
+		if (Configs.client.showObstructedPlace) {
+			if (StreamSupport.stream(Minecraft.getMinecraft().player.getHeldEquipment().spliterator(), false)
+			                 .anyMatch(stack -> !stack.isEmpty() && isHPBlock((itemStack[0] = stack).getItem()))) {
+				Minecraft mc = Minecraft.getMinecraft();
+				if (mc.objectMouseOver == null || mc.objectMouseOver.typeOfHit != RayTraceResult.Type.BLOCK)
+					return;
 
-                int offset = 0;
-                if (!itemStack[0].isEmpty() && ((ItemBlock) itemStack[0].getItem()).getBlock() instanceof BlockGrindstone)
-                    offset = -1;
+				int offset = 0;
+				if (!itemStack[0].isEmpty() && ((ItemBlock) itemStack[0].getItem()).getBlock() instanceof BlockGrindstone)
+					offset = -1;
 
-                EnumFacing enumFacing = mc.objectMouseOver.sideHit;
-                BlockPos pos = mc.objectMouseOver.getBlockPos();
-                if (!mc.world.getBlockState(pos).getBlock().isReplaceable(mc.world, pos))
-                    pos = pos.offset(enumFacing);
-                if (offset == 0 && !mc.world.getBlockState(pos.up()).getBlock().isReplaceable(mc.world, pos.up()))
-                    pos = pos.down();
+				EnumFacing enumFacing = mc.objectMouseOver.sideHit;
+				BlockPos pos = mc.objectMouseOver.getBlockPos();
+				if (!mc.world.getBlockState(pos).getBlock().isReplaceable(mc.world, pos))
+					pos = pos.offset(enumFacing);
+				if (offset == 0 && !mc.world.getBlockState(pos.up()).getBlock().isReplaceable(mc.world, pos.up()))
+					pos = pos.down();
 
-                RenderUtils.renderUsedArea(mc.world, pos, offset, 0.15F, 0.05F);
-            }
-        }
-    }
+				RenderUtils.renderUsedArea(mc.world, pos, offset, 0.15F, 0.05F);
+			}
+		}
+	}
 
-    private static boolean isHPBlock(Item item) {
-        if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockHPBase) {
-            return TileEntityHPHorseBase.class.isAssignableFrom(((BlockHPBase) ((ItemBlock) item).getBlock()).getTileClass());
-        }
-        return false;
-    }
+	private static boolean isHPBlock(Item item) {
+		if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockHPBase) {
+			return TileEntityHPHorseBase.class.isAssignableFrom(((BlockHPBase) ((ItemBlock) item).getBlock()).getTileClass());
+		}
+		return false;
+	}
 }

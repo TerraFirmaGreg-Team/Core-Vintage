@@ -20,59 +20,67 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRecipe> {
-    protected Metal output;
-    protected Metal input;
-    protected IIngredient<ItemStack> additive;
+	protected Metal output;
+	protected Metal input;
+	protected IIngredient<ItemStack> additive;
 
-    /**
-     * Creates a new blast furnace recipe
-     *
-     * @param output   the metal output of this recipe
-     * @param input    the metal input of this recipe
-     * @param additive additive to make this recipe (for pig iron, this means flux)
-     */
-    public BlastFurnaceRecipe(Metal output, Metal input, IIngredient<ItemStack> additive) {
-        this.output = output;
-        this.input = input;
-        this.additive = additive;
+	/**
+	 * Creates a new blast furnace recipe
+	 *
+	 * @param output   the metal output of this recipe
+	 * @param input    the metal input of this recipe
+	 * @param additive additive to make this recipe (for pig iron, this means flux)
+	 */
+	public BlastFurnaceRecipe(Metal output, Metal input, IIngredient<ItemStack> additive) {
+		this.output = output;
+		this.input = input;
+		this.additive = additive;
 
-        //Ensure one blast furnace recipe per input metal
-        //noinspection ConstantConditions
-        setRegistryName(input.getRegistryName());
-    }
+		//Ensure one blast furnace recipe per input metal
+		//noinspection ConstantConditions
+		setRegistryName(input.getRegistryName());
+	}
 
-    @Nullable
-    public static BlastFurnaceRecipe get(ItemStack inputItem) {
-        return TFCRegistries.BLAST_FURNACE.getValuesCollection().stream().filter(x -> x.isValidInput(inputItem)).findFirst().orElse(null);
-    }
+	@Nullable
+	public static BlastFurnaceRecipe get(ItemStack inputItem) {
+		return TFCRegistries.BLAST_FURNACE.getValuesCollection()
+		                                  .stream()
+		                                  .filter(x -> x.isValidInput(inputItem))
+		                                  .findFirst()
+		                                  .orElse(null);
+	}
 
-    @Nullable
-    public static BlastFurnaceRecipe get(Metal inputMetal) {
-        return TFCRegistries.BLAST_FURNACE.getValuesCollection().stream().filter(x -> x.input == inputMetal).findFirst().orElse(null);
-    }
+	@Nullable
+	public static BlastFurnaceRecipe get(Metal inputMetal) {
+		return TFCRegistries.BLAST_FURNACE.getValuesCollection()
+		                                  .stream()
+		                                  .filter(x -> x.input == inputMetal)
+		                                  .findFirst()
+		                                  .orElse(null);
+	}
 
-    @Nullable
-    public FluidStack getOutput(ItemStack stack) {
-        IMetalItem metal = CapabilityMetalItem.getMetalItem(stack);
-        int value = metal != null && metal.getMetal(stack) == input ? metal.getSmeltAmount(stack) : 0;
-        return value > 0 ? new FluidStack(FluidsTFC.getFluidFromMetal(output), value) : null;
-    }
+	@Nullable
+	public FluidStack getOutput(ItemStack stack) {
+		IMetalItem metal = CapabilityMetalItem.getMetalItem(stack);
+		int value = metal != null && metal.getMetal(stack) == input ? metal.getSmeltAmount(stack) : 0;
+		return value > 0 ? new FluidStack(FluidsTFC.getFluidFromMetal(output), value) : null;
+	}
 
-    public boolean isValidInput(ItemStack stack) {
-        IMetalItem metal = CapabilityMetalItem.getMetalItem(stack);
-        return metal != null && metal.getMetal(stack) == input;
-    }
+	public boolean isValidInput(ItemStack stack) {
+		IMetalItem metal = CapabilityMetalItem.getMetalItem(stack);
+		return metal != null && metal.getMetal(stack) == input;
+	}
 
-    public boolean isValidAdditive(ItemStack stack) {
-        return additive.testIgnoreCount(stack);
-    }
+	public boolean isValidAdditive(ItemStack stack) {
+		return additive.testIgnoreCount(stack);
+	}
 
-    /**
-     * For JEI only, gets an ingot of this recipe metal
-     *
-     * @return itemstack containing ingot of the specified metal
-     */
-    public ItemStack getOutput() {
-        return new ItemStack(ItemIngot.get(output, Metal.ItemType.INGOT));
-    }
+	/**
+	 * For JEI only, gets an ingot of this recipe metal
+	 *
+	 * @return itemstack containing ingot of the specified metal
+	 */
+	public ItemStack getOutput() {
+		return new ItemStack(ItemIngot.get(output, Metal.ItemType.INGOT));
+	}
 }

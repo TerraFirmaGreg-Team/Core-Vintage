@@ -9,7 +9,7 @@ import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.minecraft.block.material.Material;
 
 public interface IPlantType {
-    BlockPlantTFC create(Plant plant);
+	BlockPlantTFC create(Plant plant);
 
-    Material getPlantMaterial();
+	Material getPlantMaterial();
 }

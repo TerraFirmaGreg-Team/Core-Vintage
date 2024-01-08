@@ -22,78 +22,78 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Objects;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_TFC;
 
 @SuppressWarnings("unused")
 public abstract class KnappingComponent extends CustomComponent {
-    @VariableHolder
-    @SerializedName("recipe")
-    public String recipeName;
+	@VariableHolder
+	@SerializedName("recipe")
+	public String recipeName;
 
-    @Nullable
-    protected transient KnappingRecipe recipe;
+	@Nullable
+	protected transient KnappingRecipe recipe;
 
-    @Override
-    public void build(int componentX, int componentY, int pageNum) {
-        this.posX = componentX;
-        this.posY = componentY;
-        Objects.requireNonNull(recipeName, "Missing recipe name?");
-        this.recipe = TFCRegistries.KNAPPING.getValue(new ResourceLocation(recipeName));
-    }
+	@Override
+	public void build(int componentX, int componentY, int pageNum) {
+		this.posX = componentX;
+		this.posY = componentY;
+		Objects.requireNonNull(recipeName, "Missing recipe name?");
+		this.recipe = TFCRegistries.KNAPPING.getValue(new ResourceLocation(recipeName));
+	}
 
-    @Override
-    public void render(IComponentRenderContext context, float partialTicks, int mouseX, int mouseY) {
-        GlStateManager.pushMatrix();
-        GlStateManager.enableBlend();
-        GlStateManager.translate(posX, posY, 0);
-        GlStateManager.color(1f, 1f, 1f, 1f);
+	@Override
+	public void render(IComponentRenderContext context, float partialTicks, int mouseX, int mouseY) {
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.translate(posX, posY, 0);
+		GlStateManager.color(1f, 1f, 1f, 1f);
 
-        context.getGui().mc.getTextureManager().bindTexture(TFCPatchouliPlugin.BOOK_UTIL_TEXTURES);
-        Gui.drawModalRectWithCustomSizedTexture(posX, posY, 0, 0, 116, 90, 256, 256);
+		context.getGui().mc.getTextureManager().bindTexture(TFCPatchouliPlugin.BOOK_UTIL_TEXTURES);
+		Gui.drawModalRectWithCustomSizedTexture(posX, posY, 0, 0, 116, 90, 256, 256);
 
-        int ticks = context.getGui() instanceof GuiBook ? ((GuiBook) context.getGui()).ticksInBook : 0;
+		int ticks = context.getGui() instanceof GuiBook ? ((GuiBook) context.getGui()).ticksInBook : 0;
 
-        ResourceLocation squareHigh = getSquareHigh(ticks);
-        ResourceLocation squareLow = getSquareLow(ticks);
+		ResourceLocation squareHigh = getSquareHigh(ticks);
+		ResourceLocation squareLow = getSquareLow(ticks);
 
-        if (recipe != null) {
-            for (int y = 0; y < recipe.getMatrix().getHeight(); y++) {
-                for (int x = 0; x < recipe.getMatrix().getWidth(); x++) {
-                    if (recipe.getMatrix().get(x, y) && squareHigh != null) {
-                        context.getGui().mc.getTextureManager().bindTexture(squareHigh);
-                        Gui.drawModalRectWithCustomSizedTexture(5 + x * 16, 5 + y * 16, 0, 0, 16, 16, 16, 16);
-                    } else if (squareLow != null) {
-                        context.getGui().mc.getTextureManager().bindTexture(squareLow);
-                        Gui.drawModalRectWithCustomSizedTexture(5 + x * 16, 5 + y * 16, 0, 0, 16, 16, 16, 16);
-                    }
-                }
-            }
-            context.renderItemStack(95, 37, mouseX, mouseY, recipe.getOutput(getInputItem(ticks)));
-        } else {
-            Gui.drawModalRectWithCustomSizedTexture(92, 34, 2, 144, 22, 22, 256, 256);
-            if (context.isAreaHovered(mouseX, mouseY, 92, 34, 22, 22)) {
-                context.setHoverTooltip(Collections.singletonList(I18n.format(MOD_ID + ".patchouli.recipe_removed")));
-            }
-            for (int y = 0; y < 5; y++) {
-                for (int x = 0; x < 5; x++) {
-                    if (squareHigh != null) {
-                        context.getGui().mc.getTextureManager().bindTexture(squareHigh);
-                        Gui.drawModalRectWithCustomSizedTexture(5 + x * 16, 5 + y * 16, 0, 0, 16, 16, 16, 16);
-                    }
-                }
-            }
-        }
-        GlStateManager.popMatrix();
-    }
+		if (recipe != null) {
+			for (int y = 0; y < recipe.getMatrix().getHeight(); y++) {
+				for (int x = 0; x < recipe.getMatrix().getWidth(); x++) {
+					if (recipe.getMatrix().get(x, y) && squareHigh != null) {
+						context.getGui().mc.getTextureManager().bindTexture(squareHigh);
+						Gui.drawModalRectWithCustomSizedTexture(5 + x * 16, 5 + y * 16, 0, 0, 16, 16, 16, 16);
+					} else if (squareLow != null) {
+						context.getGui().mc.getTextureManager().bindTexture(squareLow);
+						Gui.drawModalRectWithCustomSizedTexture(5 + x * 16, 5 + y * 16, 0, 0, 16, 16, 16, 16);
+					}
+				}
+			}
+			context.renderItemStack(95, 37, mouseX, mouseY, recipe.getOutput(getInputItem(ticks)));
+		} else {
+			Gui.drawModalRectWithCustomSizedTexture(92, 34, 2, 144, 22, 22, 256, 256);
+			if (context.isAreaHovered(mouseX, mouseY, 92, 34, 22, 22)) {
+				context.setHoverTooltip(Collections.singletonList(I18n.format(MODID_TFC + ".patchouli.recipe_removed")));
+			}
+			for (int y = 0; y < 5; y++) {
+				for (int x = 0; x < 5; x++) {
+					if (squareHigh != null) {
+						context.getGui().mc.getTextureManager().bindTexture(squareHigh);
+						Gui.drawModalRectWithCustomSizedTexture(5 + x * 16, 5 + y * 16, 0, 0, 16, 16, 16, 16);
+					}
+				}
+			}
+		}
+		GlStateManager.popMatrix();
+	}
 
-    @Nullable
-    protected abstract ResourceLocation getSquareLow(int ticks);
+	@Nullable
+	protected abstract ResourceLocation getSquareLow(int ticks);
 
-    @Nullable
-    protected abstract ResourceLocation getSquareHigh(int ticks);
+	@Nullable
+	protected abstract ResourceLocation getSquareHigh(int ticks);
 
-    @Nonnull
-    protected ItemStack getInputItem(int ticks) {
-        return ItemStack.EMPTY;
-    }
+	@Nonnull
+	protected ItemStack getInputItem(int ticks) {
+		return ItemStack.EMPTY;
+	}
 }

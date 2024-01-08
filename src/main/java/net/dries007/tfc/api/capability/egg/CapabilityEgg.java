@@ -11,14 +11,14 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_TFC;
 
 public class CapabilityEgg {
-    public static final ResourceLocation KEY = new ResourceLocation(MOD_ID, "egg");
-    @CapabilityInject(IEgg.class)
-    public static Capability<IEgg> CAPABILITY;
+	public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "egg");
+	@CapabilityInject(IEgg.class)
+	public static Capability<IEgg> CAPABILITY;
 
-    public static void preInit() {
-        CapabilityManager.INSTANCE.register(IEgg.class, new DumbStorage<>(), EggHandler::new);
-    }
+	public static void preInit() {
+		CapabilityManager.INSTANCE.register(IEgg.class, new DumbStorage<>(), EggHandler::new);
+	}
 }

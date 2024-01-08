@@ -12,52 +12,55 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pieman.caffeineaddon.Reference;
 import pieman.caffeineaddon.init.ModBlocks;
 
+import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
+
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = Reference.MOD_ID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_CAFFEINEADDON)
 public final class ClientRegisterEvents {
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
-        BlockColors blockColors = event.getBlockColors();
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
+		BlockColors blockColors = event.getBlockColors();
 
-        // Grass Colors
-        IBlockColor grassColor = (state, worldIn, pos, tintIndex) -> {
-            if (pos != null) {
-                double temp = MathHelper.clamp((ClimateTFC.getMonthlyTemp(pos) + 30) / 60, 0, 1);
-                double rain = MathHelper.clamp((ClimateTFC.getRainfall(pos) - 50) / 400, 0, 1);
-                return ColorizerGrass.getGrassColor(temp, rain);
-            }
-            return ColorizerGrass.getGrassColor(0.5, 0.5);
-        };
+		// Grass Colors
+		IBlockColor grassColor = (state, worldIn, pos, tintIndex) -> {
+			if (pos != null) {
+				double temp = MathHelper.clamp((ClimateTFC.getMonthlyTemp(pos) + 30) / 60, 0, 1);
+				double rain = MathHelper.clamp((ClimateTFC.getRainfall(pos) - 50) / 400, 0, 1);
+				return ColorizerGrass.getGrassColor(temp, rain);
+			}
+			return ColorizerGrass.getGrassColor(0.5, 0.5);
+		};
 
-        // Foliage Color
-        // todo: do something different for conifers - they should have a different color mapping through the seasons
-        IBlockColor foliageColor = (state, worldIn, pos, tintIndex) -> {
-            if (pos != null) {
-                double temp = MathHelper.clamp((ClimateTFC.getMonthlyTemp(pos) + 30) / 60, 0, 1);
-                double rain = MathHelper.clamp((ClimateTFC.getRainfall(pos) - 50) / 400, 0, 1);
-                return ColorizerGrass.getGrassColor(temp, rain);
-            }
-            return ColorizerGrass.getGrassColor(0.5, 0.5);
-        };
+		// Foliage Color
+		// todo: do something different for conifers - they should have a different color mapping through the seasons
+		IBlockColor foliageColor = (state, worldIn, pos, tintIndex) -> {
+			if (pos != null) {
+				double temp = MathHelper.clamp((ClimateTFC.getMonthlyTemp(pos) + 30) / 60, 0, 1);
+				double rain = MathHelper.clamp((ClimateTFC.getRainfall(pos) - 50) / 400, 0, 1);
+				return ColorizerGrass.getGrassColor(temp, rain);
+			}
+			return ColorizerGrass.getGrassColor(0.5, 0.5);
+		};
 
-        blockColors.registerBlockColorHandler(foliageColor, ModBlocks.LEAVES);
+		blockColors.registerBlockColorHandler(foliageColor, ModBlocks.LEAVES);
 
-    }
+	}
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    @SuppressWarnings("deprecation")
-    public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
-        ItemColors itemColors = event.getItemColors();
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("deprecation")
+	public static void registerColorHandlerItems(ColorHandlerEvent.Item event) {
+		ItemColors itemColors = event.getItemColors();
 
-        itemColors.registerItemColorHandler((stack, tintIndex) ->
-                        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-                ModBlocks.LEAVES);
-    }
+		itemColors.registerItemColorHandler((stack, tintIndex) ->
+						event.getBlockColors()
+						     .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+						                                                   .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+				ModBlocks.LEAVES);
+	}
 
 }

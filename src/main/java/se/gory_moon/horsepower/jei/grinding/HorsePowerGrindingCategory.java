@@ -10,52 +10,54 @@ import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.lib.Reference;
 import se.gory_moon.horsepower.util.Localization;
 
+import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
+
 
 public class HorsePowerGrindingCategory extends HorsePowerCategory<GrindstoneRecipeWrapper> {
 
-    private static final int inputSlot = 0;
-    private static final int outputSlot = 1;
-    private static final int secondarySlot = 2;
-    private final String localizedName;
-    private final boolean handHandler;
+	private static final int inputSlot = 0;
+	private static final int outputSlot = 1;
+	private static final int secondarySlot = 2;
+	private final String localizedName;
+	private final boolean handHandler;
 
-    public HorsePowerGrindingCategory(IGuiHelper guiHelper, boolean hand) {
-        super(guiHelper, true, 146, 85, new ResourceLocation("horsepower", "textures/gui/jei_grindstone.png"));
-        this.handHandler = hand;
+	public HorsePowerGrindingCategory(IGuiHelper guiHelper, boolean hand) {
+		super(guiHelper, true, 146, 85, new ResourceLocation(MODID_HORSEPOWER, "textures/gui/jei_grindstone.png"));
+		this.handHandler = hand;
 
-        localizedName = handHandler ? Localization.GUI.CATEGORY_HAND_GRINDING.translate() : Localization.GUI.CATEGORY_GRINDING.translate();
-    }
+		localizedName = handHandler ? Localization.GUI.CATEGORY_HAND_GRINDING.translate() : Localization.GUI.CATEGORY_GRINDING.translate();
+	}
 
-    @Override
-    public String getUid() {
-        return handHandler ? HorsePowerPlugin.HAND_GRINDING : HorsePowerPlugin.GRINDING;
-    }
+	@Override
+	public String getUid() {
+		return handHandler ? HorsePowerPlugin.HAND_GRINDING : HorsePowerPlugin.GRINDING;
+	}
 
-    @Override
-    public String getTitle() {
-        return localizedName;
-    }
+	@Override
+	public String getTitle() {
+		return localizedName;
+	}
 
-    @Override
-    public String getModName() {
-        return Reference.NAME;
-    }
+	@Override
+	public String getModName() {
+		return Reference.NAME;
+	}
 
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, GrindstoneRecipeWrapper recipeWrapper, IIngredients ingredients) {
-        IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
+	@Override
+	public void setRecipe(IRecipeLayout recipeLayout, GrindstoneRecipeWrapper recipeWrapper, IIngredients ingredients) {
+		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-        guiItemStacks.init(inputSlot, true, 34, 27);
-        guiItemStacks.init(outputSlot, false, 90, 27);
-        guiItemStacks.init(secondarySlot, false, 90, 50);
-        guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
-        {
-            if (slotIndex == secondarySlot && !ingredient.isEmpty()) {
-                tooltip.add(tooltip.size() - 1, Localization.GUI.JEI.GRINDING_CHANCE.translate(recipeWrapper.getSecondaryChance()));
-            }
-        });
+		guiItemStacks.init(inputSlot, true, 34, 27);
+		guiItemStacks.init(outputSlot, false, 90, 27);
+		guiItemStacks.init(secondarySlot, false, 90, 50);
+		guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
+		{
+			if (slotIndex == secondarySlot && !ingredient.isEmpty()) {
+				tooltip.add(tooltip.size() - 1, Localization.GUI.JEI.GRINDING_CHANCE.translate(recipeWrapper.getSecondaryChance()));
+			}
+		});
 
-        guiItemStacks.set(ingredients);
-        super.openRecipe();
-    }
+		guiItemStacks.set(ingredients);
+		super.openRecipe();
+	}
 }

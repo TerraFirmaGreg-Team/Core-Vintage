@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderOcelotTFC extends RenderOcelot {
-    public RenderOcelotTFC(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelOcelotTFC();
-    }
+	public RenderOcelotTFC(RenderManager renderManager) {
+		super(renderManager);
+		this.mainModel = new ModelOcelotTFC();
+	}
 }

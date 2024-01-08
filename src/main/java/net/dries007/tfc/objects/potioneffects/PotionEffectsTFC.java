@@ -12,23 +12,23 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 import static net.dries007.tfc.util.Helpers.getNull;
+import static su.terrafirmagreg.Constants.MODID_TFC;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_TFC)
+@GameRegistry.ObjectHolder(MODID_TFC)
 public final class PotionEffectsTFC {
-    public static final Potion OVERBURDENED = getNull();
-    public static final Potion THIRST = getNull();
-    public static final Potion FOOD_POISON = getNull();
+	public static final Potion OVERBURDENED = getNull();
+	public static final Potion THIRST = getNull();
+	public static final Potion FOOD_POISON = getNull();
 
-    @SubscribeEvent
-    public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
-        event.getRegistry().registerAll(
-                new PotionOverburdened().setRegistryName(MOD_ID, "overburdened"),
-                new PotionThirst().setRegistryName(MOD_ID, "thirst"),
-                new PotionFoodPoison().setRegistryName(MOD_ID, "food_poison")
-        );
-    }
+	@SubscribeEvent
+	public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
+		event.getRegistry().registerAll(
+				new PotionOverburdened().setRegistryName(MODID_TFC, "overburdened"),
+				new PotionThirst().setRegistryName(MODID_TFC, "thirst"),
+				new PotionFoodPoison().setRegistryName(MODID_TFC, "food_poison")
+		);
+	}
 }

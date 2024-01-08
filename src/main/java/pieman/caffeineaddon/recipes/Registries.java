@@ -13,36 +13,37 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
-import pieman.caffeineaddon.Reference;
 import pieman.caffeineaddon.blocks.BlockDryingMat;
 
-@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
+import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
+
+@Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class Registries {
-    public static final ResourceLocation DRYINGMAT_RECIPE = new ResourceLocation(Reference.MOD_ID, "drying_mat_recipe");
-    public static IForgeRegistry<DryingMatRecipe> DRYINGMAT = null;
+	public static final ResourceLocation DRYINGMAT_RECIPE = new ResourceLocation(MODID_CAFFEINEADDON, "drying_mat_recipe");
+	public static IForgeRegistry<DryingMatRecipe> DRYINGMAT = null;
 
-    @SubscribeEvent
-    public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
-        // Normal registries
-        newRegistry(DRYINGMAT_RECIPE, DryingMatRecipe.class);
-        DRYINGMAT = GameRegistry.findRegistry(DryingMatRecipe.class);
-    }
+	@SubscribeEvent
+	public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
+		// Normal registries
+		newRegistry(DRYINGMAT_RECIPE, DryingMatRecipe.class);
+		DRYINGMAT = GameRegistry.findRegistry(DryingMatRecipe.class);
+	}
 
-    @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        final World world = event.getWorld();
-        final BlockPos pos = event.getPos();
-        final IBlockState state = world.getBlockState(pos);
+	@SubscribeEvent
+	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+		final World world = event.getWorld();
+		final BlockPos pos = event.getPos();
+		final IBlockState state = world.getBlockState(pos);
 
-        // Fire onBlockActivated for in world crafting devices
-        if (state.getBlock() instanceof BlockDryingMat) {
-            event.setUseBlock(Event.Result.ALLOW);
-        }
-    }
+		// Fire onBlockActivated for in world crafting devices
+		if (state.getBlock() instanceof BlockDryingMat) {
+			event.setUseBlock(Event.Result.ALLOW);
+		}
+	}
 
-    private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {
-        IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
-    }
+	private static <T extends IForgeRegistryEntry<T>> void newRegistry(ResourceLocation name, Class<T> tClass) {
+		IForgeRegistry<T> reg = new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
+	}
 
 
 }

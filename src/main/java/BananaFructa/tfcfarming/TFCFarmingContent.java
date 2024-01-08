@@ -18,58 +18,58 @@ import java.util.HashMap;
 @Mod.EventBusSubscriber
 public class TFCFarmingContent {
 
-    public static HashMap<ItemWithSubType, NutrientClass> fertilizerClass = new HashMap<>();
-    public static HashMap<ItemWithSubType, Integer> fertilizerValues = new HashMap<>();
-    public static BasicItem fertilizerP = new BasicItem("fertilizer_p");
-    static Item cachedItem = null;
-    static int cachedType = 0;
-    static boolean cachedResponse;
+	public static HashMap<ItemWithSubType, NutrientClass> fertilizerClass = new HashMap<>();
+	public static HashMap<ItemWithSubType, Integer> fertilizerValues = new HashMap<>();
+	public static BasicItem fertilizerP = new BasicItem("fertilizer_p");
+	static Item cachedItem = null;
+	static int cachedType = 0;
+	static boolean cachedResponse;
 
-    public static void registerFertilizer(Item item, int type, NutrientClass n, int value) {
-        fertilizerClass.put(new ItemWithSubType(item, type), n);
-        fertilizerValues.put(new ItemWithSubType(item, type), value);
-    }
+	public static void registerFertilizer(Item item, int type, NutrientClass n, int value) {
+		fertilizerClass.put(new ItemWithSubType(item, type), n);
+		fertilizerValues.put(new ItemWithSubType(item, type), value);
+	}
 
-    public static boolean isFertilizer(ItemStack is) {
-        Item i = is.getItem();
-        boolean meta = i.getHasSubtypes();
-        if (i != cachedItem || (meta && is.getMetadata() != cachedType)) {
-            cachedItem = i;
-            cachedType = meta ? is.getMetadata() : 0;
-            cachedResponse = false;
-            cachedResponse = fertilizerClass.containsKey(new ItemWithSubType(i, cachedType));
-        }
-        return cachedResponse;
-    }
+	public static boolean isFertilizer(ItemStack is) {
+		Item i = is.getItem();
+		boolean meta = i.getHasSubtypes();
+		if (i != cachedItem || (meta && is.getMetadata() != cachedType)) {
+			cachedItem = i;
+			cachedType = meta ? is.getMetadata() : 0;
+			cachedResponse = false;
+			cachedResponse = fertilizerClass.containsKey(new ItemWithSubType(i, cachedType));
+		}
+		return cachedResponse;
+	}
 
-    public static NutrientClass getFertilizerClass(ItemStack i) {
-        return fertilizerClass.get(new ItemWithSubType(i.getItem(), i.getHasSubtypes() ? i.getMetadata() : 0));
-    }
+	public static NutrientClass getFertilizerClass(ItemStack i) {
+		return fertilizerClass.get(new ItemWithSubType(i.getItem(), i.getHasSubtypes() ? i.getMetadata() : 0));
+	}
 
-    public static int getFertilizerValue(ItemStack i) {
-        return fertilizerValues.get(new ItemWithSubType(i.getItem(), i.getHasSubtypes() ? i.getMetadata() : 0));
-    }
+	public static int getFertilizerValue(ItemStack i) {
+		return fertilizerValues.get(new ItemWithSubType(i.getItem(), i.getHasSubtypes() ? i.getMetadata() : 0));
+	}
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onItemRegister(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(fertilizerP);
-        for (int i = 0; i < Config.fertilizerNames.length; i++) {
-            String[] s = Config.fertilizerNames[i].split(":");
-            Item item;
-            int type = 0;
-            if (s[s.length - 1].matches("[0-9]+")) {
-                item = Item.REGISTRY.getObject(new ResourceLocation(String.join(":", Arrays.copyOfRange(s, 0, s.length - 1))));
-                type = Integer.parseInt(s[s.length - 1]);
-            } else {
-                item = Item.REGISTRY.getObject(new ResourceLocation(Config.fertilizerNames[i]));
-            }
-            registerFertilizer(item, type, Config.fertilizerClasses[i], Config.fertilizerValues[i]);
-        }
-    }
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onItemRegister(RegistryEvent.Register<Item> event) {
+		event.getRegistry().register(fertilizerP);
+		for (int i = 0; i < Config.fertilizerNames.length; i++) {
+			String[] s = Config.fertilizerNames[i].split(":");
+			Item item;
+			int type = 0;
+			if (s[s.length - 1].matches("[0-9]+")) {
+				item = Item.REGISTRY.getObject(new ResourceLocation(String.join(":", Arrays.copyOfRange(s, 0, s.length - 1))));
+				type = Integer.parseInt(s[s.length - 1]);
+			} else {
+				item = Item.REGISTRY.getObject(new ResourceLocation(Config.fertilizerNames[i]));
+			}
+			registerFertilizer(item, type, Config.fertilizerClasses[i], Config.fertilizerValues[i]);
+		}
+	}
 
-    @SubscribeEvent
-    public static void onModelRegistry(ModelRegistryEvent event) {
-        ModelLoader.setCustomModelResourceLocation(fertilizerP, 0, new ModelResourceLocation(fertilizerP.getRegistryName(), "inventory"));
-    }
+	@SubscribeEvent
+	public static void onModelRegistry(ModelRegistryEvent event) {
+		ModelLoader.setCustomModelResourceLocation(fertilizerP, 0, new ModelResourceLocation(fertilizerP.getRegistryName(), "inventory"));
+	}
 
 }

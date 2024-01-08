@@ -20,19 +20,19 @@ import javax.annotation.Nullable;
  * {@link net.dries007.tfc.objects.items.ceramics.ItemSmallVessel}
  */
 public interface IMoldHandler extends IFluidHandler, INBTSerializable<NBTTagCompound>, IItemHeat {
-    /**
-     * Gets the metal currently in the mold. Null if empty. Used in model loading.
-     *
-     * @return The metal
-     */
-    @Nullable
-    Metal getMetal();
+	/**
+	 * Gets the metal currently in the mold. Null if empty. Used in model loading.
+	 *
+	 * @return The metal
+	 */
+	@Nullable
+	Metal getMetal();
 
-    /**
-     * Gets the current amount of metal in the mold. Zero if empty.
-     *
-     * @return The amount of metal, in mB / units
-     */
-    int getAmount();
+	/**
+	 * Gets the current amount of metal in the mold. Zero if empty.
+	 *
+	 * @return The amount of metal, in mB / units
+	 */
+	int getAmount();
 
 }

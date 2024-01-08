@@ -20,37 +20,37 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class BlockFruitDoor extends BlockDoor {
-    public String Name;
+	public String Name;
 
-    public BlockFruitDoor(String Name) {
-        super(Material.WOOD);
-        setHardness(3.0F);
-        disableStats();
-        setSoundType(SoundType.WOOD);
-        Blocks.FIRE.setFireInfo(this, 5, 20);
-        this.Name = Name;
-    }
+	public BlockFruitDoor(String Name) {
+		super(Material.WOOD);
+		setHardness(3.0F);
+		disableStats();
+		setSoundType(SoundType.WOOD);
+		Blocks.FIRE.setFireInfo(this, 5, 20);
+		this.Name = Name;
+	}
 
-    public Item getItem() //From the way we build the ImmutableLists these two should always be sorted
-    {
-        Iterator<ItemFruitDoor> ifd = ItemsTFCF.getAllFruitDoors().iterator();
-        Iterator<BlockFruitDoor> bfd = BlocksTFCF.getAllFruitDoors().iterator();
-        while (ifd.hasNext() && bfd.hasNext()) {
-            ItemFruitDoor i = ifd.next();
-            BlockFruitDoor b = bfd.next();
-            if (this == b)
-                return i;
-        }
-        return null;
-    }
+	public Item getItem() //From the way we build the ImmutableLists these two should always be sorted
+	{
+		Iterator<ItemFruitDoor> ifd = ItemsTFCF.getAllFruitDoors().iterator();
+		Iterator<BlockFruitDoor> bfd = BlocksTFCF.getAllFruitDoors().iterator();
+		while (ifd.hasNext() && bfd.hasNext()) {
+			ItemFruitDoor i = ifd.next();
+			BlockFruitDoor b = bfd.next();
+			if (this == b)
+				return i;
+		}
+		return null;
+	}
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : getItem();
-    }
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : getItem();
+	}
 
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(getItem());
-    }
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(getItem());
+	}
 }

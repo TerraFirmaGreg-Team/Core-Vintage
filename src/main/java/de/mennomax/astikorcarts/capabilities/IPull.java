@@ -3,7 +3,7 @@ package de.mennomax.astikorcarts.capabilities;
 import de.mennomax.astikorcarts.entity.AbstractDrawn;
 
 public interface IPull {
-    AbstractDrawn getDrawn();
+	AbstractDrawn getDrawn();
 
-    void setDrawn(AbstractDrawn drawnIn);
+	void setDrawn(AbstractDrawn drawnIn);
 }

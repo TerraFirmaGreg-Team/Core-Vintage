@@ -7,16 +7,16 @@ import net.minecraft.item.ItemFood;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class ItemHeatableFoodFL extends ItemFood implements IItemFoodTFC {
-    public FoodData data;
+	public FoodData data;
 
-    public ItemHeatableFoodFL(FoodData data) {
-        super(0, 0.0F, false);
-        this.setMaxDamage(0);
-        this.data = data;
-    }
+	public ItemHeatableFoodFL(FoodData data) {
+		super(0, 0.0F, false);
+		this.setMaxDamage(0);
+		this.data = data;
+	}
 
-    @Override
-    public ICapabilityProvider getCustomFoodHandler() {
-        return new FoodHeatHandler(null, data, 1.0F, 200.0F);
-    }
+	@Override
+	public ICapabilityProvider getCustomFoodHandler() {
+		return new FoodHeatHandler(null, data, 1.0F, 200.0F);
+	}
 }

@@ -14,15 +14,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderCowTFC extends RenderAnimalTFC<EntityCowTFC> {
-    private static final ResourceLocation COW_YOUNG = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/cow_young.png");
-    private static final ResourceLocation COW_OLD = new ResourceLocation(MOD_ID, "textures/entity/animal/livestock/cow_old.png");
+	private static final ResourceLocation COW_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/cow_young.png");
+	private static final ResourceLocation COW_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/cow_old.png");
 
-    public RenderCowTFC(RenderManager renderManager) {
-        super(renderManager, new ModelCowTFC(), 0.7F, COW_YOUNG, COW_OLD);
-    }
+	public RenderCowTFC(RenderManager renderManager) {
+		super(renderManager, new ModelCowTFC(), 0.7F, COW_YOUNG, COW_OLD);
+	}
 }

@@ -6,8 +6,8 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
 
 public class TestGrass extends BlockRockVariantFallable {
 
-    public TestGrass(Type type, Rock rock) {
-        super(type, rock);
+	public TestGrass(Type type, Rock rock) {
+		super(type, rock);
 
-    }
+	}
 }

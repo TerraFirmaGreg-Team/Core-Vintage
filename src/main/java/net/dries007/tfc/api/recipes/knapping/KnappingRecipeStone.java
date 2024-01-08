@@ -12,18 +12,18 @@ import net.minecraft.item.ItemStack;
 import java.util.function.Function;
 
 public class KnappingRecipeStone extends KnappingRecipe {
-    private final Function<Rock, ItemStack> supplier;
+	private final Function<Rock, ItemStack> supplier;
 
-    public KnappingRecipeStone(KnappingType type, Function<Rock, ItemStack> supplier, String... pattern) {
-        super(type, false, pattern);
-        this.supplier = supplier;
-    }
+	public KnappingRecipeStone(KnappingType type, Function<Rock, ItemStack> supplier, String... pattern) {
+		super(type, false, pattern);
+		this.supplier = supplier;
+	}
 
-    @Override
-    public ItemStack getOutput(ItemStack input) {
-        if (input.getItem() instanceof IRockObject) {
-            return supplier.apply(((IRockObject) input.getItem()).getRock(input));
-        }
-        return ItemStack.EMPTY;
-    }
+	@Override
+	public ItemStack getOutput(ItemStack input) {
+		if (input.getItem() instanceof IRockObject) {
+			return supplier.apply(((IRockObject) input.getItem()).getRock(input));
+		}
+		return ItemStack.EMPTY;
+	}
 }

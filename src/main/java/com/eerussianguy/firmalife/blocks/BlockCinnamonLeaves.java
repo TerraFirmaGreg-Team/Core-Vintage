@@ -19,41 +19,41 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockCinnamonLeaves extends BlockLeavesTFC {
-    public BlockCinnamonLeaves() {
-        // LOOK AWAY!!!!
-        // Is this necessary? I don't know
-        super(PlantsFL.CINNAMON_TREE);
-    }
+	public BlockCinnamonLeaves() {
+		// LOOK AWAY!!!!
+		// Is this necessary? I don't know
+		super(PlantsFL.CINNAMON_TREE);
+	}
 
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        int chance = 10; // this should be config
-        if (RANDOM.nextInt(101) < chance) {
-            drops.add(new ItemStack(BlocksFL.CINNAMON_SAPLING));
-        }
-    }
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		int chance = 10; // this should be config
+		if (RANDOM.nextInt(101) < chance) {
+			drops.add(new ItemStack(BlocksFL.CINNAMON_SAPLING));
+		}
+	}
 
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        worldIn.scheduleUpdate(pos, state.getBlock(), 1);
-    }
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+		worldIn.scheduleUpdate(pos, state.getBlock(), 1);
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos) {
-        for (EnumFacing d : EnumFacing.VALUES) {
-            for (int i = 1; i < 4; i++) {
-                Block offsetBlock = world.getBlockState(pos.offset(d, i)).getBlock();
-                if (offsetBlock instanceof BlockCinnamonLog)
-                    return;
-            }
-        }
-        world.destroyBlock(pos, true);
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, @Nullable Block blockIn, @Nullable BlockPos fromPos) {
+		for (EnumFacing d : EnumFacing.VALUES) {
+			for (int i = 1; i < 4; i++) {
+				Block offsetBlock = world.getBlockState(pos.offset(d, i)).getBlock();
+				if (offsetBlock instanceof BlockCinnamonLog)
+					return;
+			}
+		}
+		world.destroyBlock(pos, true);
+	}
 
-    @Override
-    @Nonnull
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return ImmutableList.of(ItemStack.EMPTY);
-    }
+	@Override
+	@Nonnull
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		return ImmutableList.of(ItemStack.EMPTY);
+	}
 }

@@ -21,41 +21,42 @@ import tfcflorae.util.agriculture.CropTFCF;
 import javax.annotation.Nonnull;
 
 public class InteractionInjectTFCF {
-    @Nonnull
-    public static EnumActionResult onItemUse(ItemSeedsTFC itemSeed, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack itemstack = player.getHeldItem(hand);
-        IBlockState state = worldIn.getBlockState(pos);
-        if (state.getBlock() instanceof BlockFarmlandTFC) {
-            return itemstack.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-        }
-        if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, itemSeed) && worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof FarmlandTFCF) {
-            ICrop seedCrop = null;
+	@Nonnull
+	public static EnumActionResult onItemUse(ItemSeedsTFC itemSeed, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack itemstack = player.getHeldItem(hand);
+		IBlockState state = worldIn.getBlockState(pos);
+		if (state.getBlock() instanceof BlockFarmlandTFC) {
+			return itemstack.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+		}
+		if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock()
+		                                                                                                   .canSustainPlant(state, worldIn, pos, EnumFacing.UP, itemSeed) && worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof FarmlandTFCF) {
+			ICrop seedCrop = null;
 
-            for (Crop crop : Crop.values())
-                if (itemSeed == ItemSeedsTFC.get(crop))
-                    seedCrop = crop;
-            if (seedCrop == null)
-                for (CropTFCF crop : CropTFCF.values())
-                    if (itemSeed == ItemSeedsTFC.get(crop))
-                        seedCrop = crop;
-            if (TFCFlorae.TFCPHCompatAdded) {
-                if (seedCrop == null)
-                    for (TPCrop crop : TPCrop.values())
-                        if (itemSeed == ItemSeedsTFC.get(crop))
-                            seedCrop = crop;
-            }
+			for (Crop crop : Crop.values())
+				if (itemSeed == ItemSeedsTFC.get(crop))
+					seedCrop = crop;
+			if (seedCrop == null)
+				for (CropTFCF crop : CropTFCF.values())
+					if (itemSeed == ItemSeedsTFC.get(crop))
+						seedCrop = crop;
+			if (TFCFlorae.TFCPHCompatAdded) {
+				if (seedCrop == null)
+					for (TPCrop crop : TPCrop.values())
+						if (itemSeed == ItemSeedsTFC.get(crop))
+							seedCrop = crop;
+			}
 
-            if (seedCrop == null) {
-                TFCFlorae.getLog().error("TFCFlorae: Couldn't find crop to place in TFCFlorae farmland");
-                return EnumActionResult.FAIL;
-            }
+			if (seedCrop == null) {
+				TFCFlorae.getLog().error("TFCFlorae: Couldn't find crop to place in TFCFlorae farmland");
+				return EnumActionResult.FAIL;
+			}
 
-            worldIn.setBlockState(pos.up(), BlockCropTFC.get(seedCrop).getDefaultState());
+			worldIn.setBlockState(pos.up(), BlockCropTFC.get(seedCrop).getDefaultState());
 
-            itemstack.shrink(1);
-            return EnumActionResult.SUCCESS;
-        } else {
-            return EnumActionResult.FAIL;
-        }
-    }
+			itemstack.shrink(1);
+			return EnumActionResult.SUCCESS;
+		} else {
+			return EnumActionResult.FAIL;
+		}
+	}
 }

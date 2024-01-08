@@ -20,38 +20,38 @@ import java.util.Random;
 
 public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements IHasModel {
 
-    public BlockCoffeeTreeLeaves(IFruitTree tree) {
-        super(tree);
-        setTranslationKey(tree.getName() + "_leaves");
-        setRegistryName(tree.getName() + "_leaves");
-        //setCreativeTab(CreativeTabsTFC.CT_WOOD);
+	public BlockCoffeeTreeLeaves(IFruitTree tree) {
+		super(tree);
+		setTranslationKey(tree.getName() + "_leaves");
+		setRegistryName(tree.getName() + "_leaves");
+		//setCreativeTab(CreativeTabsTFC.CT_WOOD);
 
-        //the super does this but passes itself so forge gives a warning and doesn't register it
-        //OreDictionaryHelper.register(this, "tree", "leaves");
-        //OreDictionaryHelper.register(this.to, "tree", "leaves", tree.getName());
+		//the super does this but passes itself so forge gives a warning and doesn't register it
+		//OreDictionaryHelper.register(this, "tree", "leaves");
+		//OreDictionaryHelper.register(this.to, "tree", "leaves", tree.getName());
 
-        ModBlocks.BLOCKS.add(this);
-        //ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(tree.getName() + "_leaves"));
-    }
+		ModBlocks.BLOCKS.add(this);
+		//ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(tree.getName() + "_leaves"));
+	}
 
-    @Override
-    public void registerModels() {
-        CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-    }
+	@Override
+	public void registerModels() {
+		CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	}
 
-    @Override
-    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+	@Override
+	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
 
-        TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
-        if (te != null) {
-            float temp = ClimateTFC.getActualTemp(world, pos);
-            float rainfall = ChunkDataTFC.getRainfall(world, pos);
-            long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-            System.out.println("state.getValue(HARVESTABLE) " + state.getValue(HARVESTABLE));
-            System.out.println("tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()) " + tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()));
-            System.out.println("hours > tree.getGrowthTime() " + (hours > tree.getGrowthTime()));
-            System.out.println("tree.isValidForGrowth(temp, rainfall) " + tree.isValidForGrowth(temp, rainfall));
-        }
-        super.randomTick(world, pos, state, random);
-    }
+		TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+		if (te != null) {
+			float temp = ClimateTFC.getActualTemp(world, pos);
+			float rainfall = ChunkDataTFC.getRainfall(world, pos);
+			long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+			System.out.println("state.getValue(HARVESTABLE) " + state.getValue(HARVESTABLE));
+			System.out.println("tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()) " + tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()));
+			System.out.println("hours > tree.getGrowthTime() " + (hours > tree.getGrowthTime()));
+			System.out.println("tree.isValidForGrowth(temp, rainfall) " + tree.isValidForGrowth(temp, rainfall));
+		}
+		super.randomTick(world, pos, state, random);
+	}
 }

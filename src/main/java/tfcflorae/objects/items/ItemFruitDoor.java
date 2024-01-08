@@ -14,24 +14,24 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemFruitDoor extends ItemDoor implements IItemSize {
-    public ItemFruitDoor(BlockFruitDoor block) {
-        super(block);
-    }
+	public ItemFruitDoor(BlockFruitDoor block) {
+		super(block);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.VERY_LARGE;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.VERY_LARGE;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.HEAVY;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.HEAVY;
+	}
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return getStackSize(stack);
+	}
 }

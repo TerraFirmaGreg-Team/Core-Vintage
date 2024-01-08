@@ -25,43 +25,43 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class BlockNonCube extends Block implements IItemSize {
-    public BlockNonCube(Material materialIn) {
-        super(materialIn);
-    }
+	public BlockNonCube(Material materialIn) {
+		super(materialIn);
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 
-    @Override
-    @Nonnull
-    public Size getSize(@Nonnull ItemStack itemStack) {
-        return Size.NORMAL;
-    }
+	@Override
+	@Nonnull
+	public Size getSize(@Nonnull ItemStack itemStack) {
+		return Size.NORMAL;
+	}
 
-    @Override
-    @Nonnull
-    public Weight getWeight(@Nonnull ItemStack itemStack) {
-        return Weight.MEDIUM;
-    }
+	@Override
+	@Nonnull
+	public Weight getWeight(@Nonnull ItemStack itemStack) {
+		return Weight.MEDIUM;
+	}
 }

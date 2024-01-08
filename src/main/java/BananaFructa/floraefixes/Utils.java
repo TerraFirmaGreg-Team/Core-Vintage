@@ -26,92 +26,93 @@ import java.lang.reflect.Modifier;
 
 public class Utils {
 
-    public static <T> T readDeclaredField(Class<?> targetType, Object target, String name) {
-        try {
-            Field f = targetType.getDeclaredField(name);
-            f.setAccessible(true);
-            return (T) f.get(target);
-        } catch (Exception err) {
-            err.printStackTrace();
-            return null;
-        }
-    }
+	public static <T> T readDeclaredField(Class<?> targetType, Object target, String name) {
+		try {
+			Field f = targetType.getDeclaredField(name);
+			f.setAccessible(true);
+			return (T) f.get(target);
+		} catch (Exception err) {
+			err.printStackTrace();
+			return null;
+		}
+	}
 
-    public static void writeDeclaredField(Class<?> targetType, Object target, String name, Object value, boolean final_) {
-        try {
-            Field f = targetType.getDeclaredField(name);
-            f.setAccessible(true);
-            if (final_) {
-                Field modifiersField = Field.class.getDeclaredField("modifiers");
-                modifiersField.setAccessible(true);
-                modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-            }
-            f.set(target, value);
+	public static void writeDeclaredField(Class<?> targetType, Object target, String name, Object value, boolean final_) {
+		try {
+			Field f = targetType.getDeclaredField(name);
+			f.setAccessible(true);
+			if (final_) {
+				Field modifiersField = Field.class.getDeclaredField("modifiers");
+				modifiersField.setAccessible(true);
+				modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+			}
+			f.set(target, value);
 
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-    }
+		} catch (Exception err) {
+			err.printStackTrace();
+		}
+	}
 
-    public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
-        float f = playerIn.rotationPitch;
-        float f1 = playerIn.rotationYaw;
-        double d0 = playerIn.posX;
-        double d1 = playerIn.posY + (double) playerIn.getEyeHeight();
-        double d2 = playerIn.posZ;
-        Vec3d vec3d = new Vec3d(d0, d1, d2);
-        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float) Math.PI);
-        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float) Math.PI);
-        float f4 = -MathHelper.cos(-f * 0.017453292F);
-        float f5 = MathHelper.sin(-f * 0.017453292F);
-        float f6 = f3 * f4;
-        float f7 = f2 * f4;
-        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue();
-        Vec3d vec3d1 = vec3d.add((double) f6 * d3, (double) f5 * d3, (double) f7 * d3);
-        return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
-    }
+	public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
+		float f = playerIn.rotationPitch;
+		float f1 = playerIn.rotationYaw;
+		double d0 = playerIn.posX;
+		double d1 = playerIn.posY + (double) playerIn.getEyeHeight();
+		double d2 = playerIn.posZ;
+		Vec3d vec3d = new Vec3d(d0, d1, d2);
+		float f2 = MathHelper.cos(-f1 * 0.017453292F - (float) Math.PI);
+		float f3 = MathHelper.sin(-f1 * 0.017453292F - (float) Math.PI);
+		float f4 = -MathHelper.cos(-f * 0.017453292F);
+		float f5 = MathHelper.sin(-f * 0.017453292F);
+		float f6 = f3 * f4;
+		float f7 = f2 * f4;
+		double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue();
+		Vec3d vec3d1 = vec3d.add((double) f6 * d3, (double) f5 * d3, (double) f7 * d3);
+		return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+	}
 
-    public static ActionResult<ItemStack> ricePlaceFixed(ICrop crop, Item item, World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, false);
-        if (crop == Crop.RICE) {
-            if (raytraceresult == null) {
-                return new ActionResult(EnumActionResult.PASS, itemstack);
-            } else {
-                if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
-                    BlockPos blockpos = raytraceresult.getBlockPos().up();
-                    Material material = worldIn.getBlockState(blockpos.down()).getMaterial();
-                    if ((!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) && material == Material.WATER) {
-                        return new ActionResult(EnumActionResult.FAIL, itemstack);
-                    }
+	public static ActionResult<ItemStack> ricePlaceFixed(ICrop crop, Item item, World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
+		RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, false);
+		if (crop == Crop.RICE) {
+			if (raytraceresult == null) {
+				return new ActionResult(EnumActionResult.PASS, itemstack);
+			} else {
+				if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
+					BlockPos blockpos = raytraceresult.getBlockPos().up();
+					Material material = worldIn.getBlockState(blockpos.down()).getMaterial();
+					if ((!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) && material == Material.WATER) {
+						return new ActionResult(EnumActionResult.FAIL, itemstack);
+					}
 
-                    BlockPos blockpos1 = blockpos.up();
-                    IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                    if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenTFC.FRESH_WATER && material != Material.WATER) {
-                        BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
-                        worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState());
-                        if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn).isCanceled()) {
-                            blocksnapshot.restore(true, false);
-                            return new ActionResult(EnumActionResult.FAIL, itemstack);
-                        }
+					BlockPos blockpos1 = blockpos.up();
+					IBlockState iblockstate = worldIn.getBlockState(blockpos);
+					if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenTFC.FRESH_WATER && material != Material.WATER) {
+						BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
+						worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState());
+						if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn)
+						                     .isCanceled()) {
+							blocksnapshot.restore(true, false);
+							return new ActionResult(EnumActionResult.FAIL, itemstack);
+						}
 
-                        worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState(), 11);
+						worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState(), 11);
 
-                        if (!playerIn.capabilities.isCreativeMode) {
-                            itemstack.shrink(1);
-                        }
+						if (!playerIn.capabilities.isCreativeMode) {
+							itemstack.shrink(1);
+						}
 
-                        playerIn.addStat(StatList.getObjectUseStats(item));
-                        worldIn.playSound(playerIn, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        return new ActionResult(EnumActionResult.SUCCESS, itemstack);
-                    }
-                }
+						playerIn.addStat(StatList.getObjectUseStats(item));
+						worldIn.playSound(playerIn, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+					}
+				}
 
-                return new ActionResult(EnumActionResult.FAIL, itemstack);
-            }
-        } else {
-            return new ActionResult(EnumActionResult.FAIL, itemstack);
-        }
-    }
+				return new ActionResult(EnumActionResult.FAIL, itemstack);
+			}
+		} else {
+			return new ActionResult(EnumActionResult.FAIL, itemstack);
+		}
+	}
 
 }

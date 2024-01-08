@@ -9,21 +9,21 @@ import net.minecraftforge.items.IItemHandler;
 import net.sharkbark.cellars.blocks.tileentity.TECellarShelf;
 
 public class ContainerCellarShelf extends ContainerTE<TECellarShelf> {
-    public ContainerCellarShelf(InventoryPlayer playerInv, TECellarShelf tile, EntityPlayer player) {
-        super(playerInv, tile);
-    }
+	public ContainerCellarShelf(InventoryPlayer playerInv, TECellarShelf tile, EntityPlayer player) {
+		super(playerInv, tile);
+	}
 
-    @Override
-    protected void addContainerSlots() {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+	@Override
+	protected void addContainerSlots() {
+		IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        if (inventory != null) {
-            for (int y = 0; y < 2; y++) {
-                for (int x = 0; x < 7; x++) {
+		if (inventory != null) {
+			for (int y = 0; y < 2; y++) {
+				for (int x = 0; x < 7; x++) {
 
-                    addSlotToContainer(new SlotCallback(inventory, x + y * 7, x * 18 + 26, y * 18 + 25, tile));
-                }
-            }
-        }
-    }
+					addSlotToContainer(new SlotCallback(inventory, x + y * 7, x * 18 + 26, y * 18 + 25, tile));
+				}
+			}
+		}
+	}
 }

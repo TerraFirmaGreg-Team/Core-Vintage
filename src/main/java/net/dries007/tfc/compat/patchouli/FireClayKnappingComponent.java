@@ -12,15 +12,15 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("unused")
 public class FireClayKnappingComponent extends KnappingComponent {
-    @Nullable
-    @Override
-    protected ResourceLocation getSquareLow(int ticks) {
-        return TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE;
-    }
+	@Nullable
+	@Override
+	protected ResourceLocation getSquareLow(int ticks) {
+		return TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE;
+	}
 
-    @Nullable
-    @Override
-    protected ResourceLocation getSquareHigh(int ticks) {
-        return TFCGuiHandler.FIRE_CLAY_TEXTURE;
-    }
+	@Nullable
+	@Override
+	protected ResourceLocation getSquareHigh(int ticks) {
+		return TFCGuiHandler.FIRE_CLAY_TEXTURE;
+	}
 }

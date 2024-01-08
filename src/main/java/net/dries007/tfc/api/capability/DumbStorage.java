@@ -17,13 +17,13 @@ import javax.annotation.Nullable;
  * @param <T> The capability class
  */
 public final class DumbStorage<T> implements Capability.IStorage<T> {
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
+		return null;
+	}
 
-    @Override
-    public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
-    }
+	@Override
+	public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
+	}
 }

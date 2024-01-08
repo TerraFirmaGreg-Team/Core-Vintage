@@ -13,20 +13,20 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import tfcflorae.objects.items.ItemsTFCF;
 
 public class CastingRecipeWrapperEarthenwareFL implements IRecipeWrapper {
-    private final ItemStack mold;
-    private final FluidStack input;
+	private final ItemStack mold;
+	private final FluidStack input;
 
-    public CastingRecipeWrapperEarthenwareFL(Metal metal, String type) {
-        this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100);
-        this.mold = new ItemStack(ItemsTFCF.malletMoldEarthenware);
-        IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(this.input, true);
-        }
-    }
+	public CastingRecipeWrapperEarthenwareFL(Metal metal, String type) {
+		this.input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), 100);
+		this.mold = new ItemStack(ItemsTFCF.malletMoldEarthenware);
+		IFluidHandler cap = this.mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+		if (cap instanceof IMoldHandler) {
+			cap.fill(this.input, true);
+		}
+	}
 
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.FLUID, this.input);
-        ingredients.setOutput(VanillaTypes.ITEM, this.mold);
-    }
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInput(VanillaTypes.FLUID, this.input);
+		ingredients.setOutput(VanillaTypes.ITEM, this.mold);
+	}
 }

@@ -13,12 +13,12 @@ import net.minecraft.world.World;
  * Various blocks (i.e. fire pits, forges) will try and heat blocks in specific locations if they implement this interface
  */
 public interface IHeatConsumerBlock {
-    /**
-     * Gets the current temperature of the block
-     *
-     * @param world       The world
-     * @param pos         The position of the {@code IHeatConsumerBlock}
-     * @param temperature a temperature. Will be in [0, max temp in config]
-     */
-    void acceptHeat(World world, BlockPos pos, float temperature);
+	/**
+	 * Gets the current temperature of the block
+	 *
+	 * @param world       The world
+	 * @param pos         The position of the {@code IHeatConsumerBlock}
+	 * @param temperature a temperature. Will be in [0, max temp in config]
+	 */
+	void acceptHeat(World world, BlockPos pos, float temperature);
 }

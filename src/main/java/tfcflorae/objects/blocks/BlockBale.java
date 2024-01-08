@@ -22,38 +22,38 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class BlockBale extends BlockRotatedPillar implements IItemSize {
-    public BlockBale() {
-        super(new Material(MapColor.FOLIAGE));
-        this.setSoundType(SoundType.PLANT);
-        setHardness(0.6F);
-        OreDictionaryHelper.register(this, "thatch");
-        OreDictionaryHelper.register(this, "bale");
-        Blocks.FIRE.setFireInfo(this, 60, 20);
-    }
+	public BlockBale() {
+		super(new Material(MapColor.FOLIAGE));
+		this.setSoundType(SoundType.PLANT);
+		setHardness(0.6F);
+		OreDictionaryHelper.register(this, "thatch");
+		OreDictionaryHelper.register(this, "bale");
+		Blocks.FIRE.setFireInfo(this, 60, 20);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.VERY_SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.VERY_SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.HEAVY;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.HEAVY;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @Nonnull
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	@Nonnull
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
 
-    /**
-     * Block's chance to react to a living entity falling on it.
-     */
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.fall(fallDistance, 0.2F);
-    }
+	/**
+	 * Block's chance to react to a living entity falling on it.
+	 */
+	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+		entityIn.fall(fallDistance, 0.2F);
+	}
 }

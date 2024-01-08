@@ -23,19 +23,22 @@ import java.util.stream.Collectors;
  */
 
 public class FlaskFluidHandler extends FluidHandlerItemStack {
-    private final Set<Fluid> whitelist;
+	private final Set<Fluid> whitelist;
 
-    public FlaskFluidHandler(@Nonnull ItemStack container, int capacity, String[] fluidNames) {
-        this(container, capacity, Arrays.stream(fluidNames).map(FluidRegistry::getFluid).filter(Objects::nonNull).collect(Collectors.toSet()));
-    }
+	public FlaskFluidHandler(@Nonnull ItemStack container, int capacity, String[] fluidNames) {
+		this(container, capacity, Arrays.stream(fluidNames)
+		                                .map(FluidRegistry::getFluid)
+		                                .filter(Objects::nonNull)
+		                                .collect(Collectors.toSet()));
+	}
 
-    public FlaskFluidHandler(@Nonnull ItemStack container, int capacity, Set<Fluid> whitelist) {
-        super(container, capacity);
-        this.whitelist = whitelist;
-    }
+	public FlaskFluidHandler(@Nonnull ItemStack container, int capacity, Set<Fluid> whitelist) {
+		super(container, capacity);
+		this.whitelist = whitelist;
+	}
 
-    @Override
-    public boolean canFillFluidType(FluidStack fluid) {
-        return whitelist.contains(fluid.getFluid());
-    }
+	@Override
+	public boolean canFillFluidType(FluidStack fluid) {
+		return whitelist.contains(fluid.getFluid());
+	}
 }

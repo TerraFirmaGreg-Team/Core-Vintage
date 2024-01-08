@@ -8,5 +8,5 @@ import net.minecraft.util.math.BlockPos;
 // Add an example of this into TemperatureRegistry for blocks you didn't create personally
 @FunctionalInterface
 public interface IBlockTemperatureProvider extends ITemperatureProvider {
-    public BlockModifier getModifier(IBlockState state, BlockPos blockPos, EntityPlayer player);
+	public BlockModifier getModifier(IBlockState state, BlockPos blockPos, EntityPlayer player);
 }

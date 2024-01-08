@@ -114,6 +114,14 @@ repositories {
         name 'Mod Maven'
         url 'https://modmaven.dev'
     }
+    maven {
+        name 'BlameJared Maven'
+        url 'https://maven.blamejared.com'
+    }
+    maven {
+        name 'GTNH Maven'
+        url 'https://nexus.gtnewhorizons.com/repository/public/'
+    }
 }
 
 dependencies {
@@ -131,6 +139,7 @@ dependencies {
         testCompileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
             transitive = false // We only care about the 1 annotation class
         }
+        testCompileOnly "me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0"
     }
     if (propertyBool('use_asset_mover')) {
         implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
@@ -146,6 +155,10 @@ dependencies {
         annotationProcessor(mixin) {
             transitive = false
         }
+    }
+
+    patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
+        transitive = false
     }
 
     compileOnly 'org.projectlombok:lombok:1.18.30'
@@ -182,13 +195,14 @@ if (propertyBool('use_access_transformer')) {
 
 processResources {
 
-    filesNotMatching(propertyString('mixin_refmap') as String) { fcd ->
-        fcd.expand(
+    filesMatching(['mcmod.info', 'pack.mcmeta', 'mixins.*(?!refmap).*\\.json']) {
+        def authors = propertyString('mod_authors').split(',').collect { """\"${it.trim()}\"""" }.join(', ')
+        expand(
                 'mod_id': propertyString('mod_id'),
                 'mod_name': propertyString('mod_name'),
                 'mod_version': propertyString('mod_version'),
                 'mod_description': propertyString('mod_description'),
-                'mod_authors': "[${propertyStringList('mod_authors', ',').join(', ')}]",
+                'mod_authors': "[${authors}]",
                 'mod_credits': propertyString('mod_credits'),
                 'mod_url': propertyString('mod_url'),
                 'mod_update_json': propertyString('mod_update_json'),

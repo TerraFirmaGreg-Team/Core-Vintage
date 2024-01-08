@@ -12,44 +12,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BlockFruitPlanks extends Block {
-    private static final Map<SeasonalTrees, BlockFruitPlanks> MAP_TFCF = new HashMap<>();
-    private static final Map<IFruitTree, BlockFruitPlanks> MAP_TFC = new HashMap<>();
-    public final SeasonalTrees fruitTFCF;
-    public final IFruitTree fruitTFC;
+	private static final Map<SeasonalTrees, BlockFruitPlanks> MAP_TFCF = new HashMap<>();
+	private static final Map<IFruitTree, BlockFruitPlanks> MAP_TFC = new HashMap<>();
+	public final SeasonalTrees fruitTFCF;
+	public final IFruitTree fruitTFC;
 
-    public BlockFruitPlanks(SeasonalTrees tree) {
-        super(Material.WOOD, Material.WOOD.getMaterialMapColor());
-        if (MAP_TFCF.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
+	public BlockFruitPlanks(SeasonalTrees tree) {
+		super(Material.WOOD, Material.WOOD.getMaterialMapColor());
+		if (MAP_TFCF.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
 
-        fruitTFCF = tree;
-        fruitTFC = null;
-        setHarvestLevel("axe", 0);
-        setHardness(2.0F)
-                .setResistance(5.0F);
-        setSoundType(SoundType.WOOD);
-        OreDictionaryHelper.register(this, "planks");
-        Blocks.FIRE.setFireInfo(this, 5, 20);
-    }
+		fruitTFCF = tree;
+		fruitTFC = null;
+		setHarvestLevel("axe", 0);
+		setHardness(2.0F)
+				.setResistance(5.0F);
+		setSoundType(SoundType.WOOD);
+		OreDictionaryHelper.register(this, "planks");
+		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
 
-    public BlockFruitPlanks(IFruitTree tree) {
-        super(Material.WOOD, Material.WOOD.getMaterialMapColor());
-        if (MAP_TFC.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
+	public BlockFruitPlanks(IFruitTree tree) {
+		super(Material.WOOD, Material.WOOD.getMaterialMapColor());
+		if (MAP_TFC.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
 
-        fruitTFC = tree;
-        fruitTFCF = null;
-        setHarvestLevel("axe", 0);
-        setHardness(2.0F)
-                .setResistance(5.0F);
-        setSoundType(SoundType.WOOD);
-        OreDictionaryHelper.register(this, "planks");
-        Blocks.FIRE.setFireInfo(this, 5, 20);
-    }
+		fruitTFC = tree;
+		fruitTFCF = null;
+		setHarvestLevel("axe", 0);
+		setHardness(2.0F)
+				.setResistance(5.0F);
+		setSoundType(SoundType.WOOD);
+		OreDictionaryHelper.register(this, "planks");
+		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
 
-    public static BlockFruitPlanks getTFCF(SeasonalTrees tree) {
-        return MAP_TFCF.get(tree);
-    }
+	public static BlockFruitPlanks getTFCF(SeasonalTrees tree) {
+		return MAP_TFCF.get(tree);
+	}
 
-    public static BlockFruitPlanks getTFC(IFruitTree tree) {
-        return MAP_TFC.get(tree);
-    }
+	public static BlockFruitPlanks getTFC(IFruitTree tree) {
+		return MAP_TFC.get(tree);
+	}
 }

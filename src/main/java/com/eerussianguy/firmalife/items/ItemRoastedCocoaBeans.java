@@ -10,18 +10,18 @@ import javax.annotation.Nonnull;
 
 public class ItemRoastedCocoaBeans extends ItemMisc {
 
-    public ItemRoastedCocoaBeans() {
-        super(Size.SMALL, Weight.LIGHT);
-    }
+	public ItemRoastedCocoaBeans() {
+		super(Size.SMALL, Weight.LIGHT);
+	}
 
-    @Override
-    @Nonnull
-    public ItemStack getContainerItem(ItemStack itemStack) {
-        return new ItemStack(ItemsFL.COCOA_POWDER);
-    }
+	@Override
+	@Nonnull
+	public ItemStack getContainerItem(ItemStack itemStack) {
+		return new ItemStack(ItemsFL.COCOA_POWDER);
+	}
 
-    @Override
-    public boolean hasContainerItem(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return true;
+	}
 }

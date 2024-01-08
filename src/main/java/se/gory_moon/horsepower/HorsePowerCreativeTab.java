@@ -2,16 +2,17 @@ package se.gory_moon.horsepower;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-
 import se.gory_moon.horsepower.blocks.ModBlocks;
 
-public class HorsePowerCreativeTab extends CreativeTabs {
-    public HorsePowerCreativeTab() {
-        super("horsepower");
-    }
+import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
 
-    @Override
-    public ItemStack createIcon() {
-        return new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE);
-    }
+public class HorsePowerCreativeTab extends CreativeTabs {
+	public HorsePowerCreativeTab() {
+		super(MODID_HORSEPOWER);
+	}
+
+	@Override
+	public ItemStack createIcon() {
+		return new ItemStack(ModBlocks.BLOCK_HAND_GRINDSTONE);
+	}
 }

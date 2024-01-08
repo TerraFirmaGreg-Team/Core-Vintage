@@ -12,23 +12,23 @@ import javax.annotation.Nullable;
 @SuppressWarnings("WeakerAccess")
 public class ItemMiscHeatableTFCF extends ItemMiscTFCF {
 
-    private float heatCapacity, meltTemp;
+	private float heatCapacity, meltTemp;
 
-    public ItemMiscHeatableTFCF(Size size, Weight weight, float heatCapacity, float meltTemp) {
-        super(size, weight);
-        this.heatCapacity = heatCapacity;
-        this.meltTemp = meltTemp;
-    }
+	public ItemMiscHeatableTFCF(Size size, Weight weight, float heatCapacity, float meltTemp) {
+		super(size, weight);
+		this.heatCapacity = heatCapacity;
+		this.meltTemp = meltTemp;
+	}
 
-    public ItemMiscHeatableTFCF(Size size, Weight weight, float heatCapacity, float meltTemp, String oreDictionary) {
-        super(size, weight, oreDictionary);
-        this.heatCapacity = heatCapacity;
-        this.meltTemp = meltTemp;
-    }
+	public ItemMiscHeatableTFCF(Size size, Weight weight, float heatCapacity, float meltTemp, String oreDictionary) {
+		super(size, weight, oreDictionary);
+		this.heatCapacity = heatCapacity;
+		this.meltTemp = meltTemp;
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ItemHeatHandler(nbt, heatCapacity, meltTemp);
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new ItemHeatHandler(nbt, heatCapacity, meltTemp);
+	}
 }

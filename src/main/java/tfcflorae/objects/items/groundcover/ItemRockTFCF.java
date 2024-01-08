@@ -19,35 +19,35 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemRockTFCF extends ItemBlockTFC {
-    public ItemRockTFCF(BlockSurfaceRock block) {
-        super(block);
-    }
+	public ItemRockTFCF(BlockSurfaceRock block) {
+		super(block);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT;
+	}
 
-    @Nonnull
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return getStackSize(stack);
-    }
+	@Nonnull
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return getStackSize(stack);
+	}
 
-    @Nonnull
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-        if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
-            TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);
-        }
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-    }
+	@Nonnull
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
+			TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);
+		}
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+	}
 }

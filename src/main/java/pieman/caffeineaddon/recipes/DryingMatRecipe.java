@@ -11,60 +11,61 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class DryingMatRecipe extends IForgeRegistryEntry.Impl<DryingMatRecipe> implements IJEISimpleRecipe {
-    private IIngredient<ItemStack> inputItem;
-    private ItemStack outputItem;
-    private int duration;
-    public DryingMatRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
-        this.inputItem = input;
-        this.outputItem = output;
-        this.duration = duration;
+	private IIngredient<ItemStack> inputItem;
+	private ItemStack outputItem;
+	private int duration;
 
-        if (inputItem == null || outputItem == null) {
-            throw new IllegalArgumentException("Input and output are not allowed to be empty");
-        }
-    }
+	public DryingMatRecipe(IIngredient<ItemStack> input, ItemStack output, int duration) {
+		this.inputItem = input;
+		this.outputItem = output;
+		this.duration = duration;
 
-    @Nullable
-    public static DryingMatRecipe get(ItemStack item) {
-        return Registries.DRYINGMAT.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst()
-                .orElse(null);
-    }
+		if (inputItem == null || outputItem == null) {
+			throw new IllegalArgumentException("Input and output are not allowed to be empty");
+		}
+	}
 
-    public int getDuration() {
-        return duration;
-    }
+	@Nullable
+	public static DryingMatRecipe get(ItemStack item) {
+		return Registries.DRYINGMAT.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst()
+		                           .orElse(null);
+	}
 
-    /**
-     * Only for GUI purposes - not intended as a crafting mechanic
-     *
-     * @return the output item stack
-     */
-    @Nonnull
-    public ItemStack getOutputStack() {
-        return outputItem;
-    }
+	public int getDuration() {
+		return duration;
+	}
 
-    @Nonnull
-    public IIngredient<ItemStack> getItemIngredient() {
-        return inputItem;
-    }
+	/**
+	 * Only for GUI purposes - not intended as a crafting mechanic
+	 *
+	 * @return the output item stack
+	 */
+	@Nonnull
+	public ItemStack getOutputStack() {
+		return outputItem;
+	}
 
-    @Nonnull
-    public ItemStack getOutputItem(ItemStack stack) {
-        return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
-    }
+	@Nonnull
+	public IIngredient<ItemStack> getItemIngredient() {
+		return inputItem;
+	}
 
-    @Override
-    public NonNullList<IIngredient<ItemStack>> getIngredients() {
-        return NonNullList.withSize(1, inputItem);
-    }
+	@Nonnull
+	public ItemStack getOutputItem(ItemStack stack) {
+		return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
+	}
 
-    @Override
-    public NonNullList<ItemStack> getOutputs() {
-        return NonNullList.withSize(1, outputItem);
-    }
+	@Override
+	public NonNullList<IIngredient<ItemStack>> getIngredients() {
+		return NonNullList.withSize(1, inputItem);
+	}
 
-    private boolean isValidInput(ItemStack inputItem) {
-        return this.inputItem.testIgnoreCount(inputItem);
-    }
+	@Override
+	public NonNullList<ItemStack> getOutputs() {
+		return NonNullList.withSize(1, outputItem);
+	}
+
+	private boolean isValidInput(ItemStack inputItem) {
+		return this.inputItem.testIgnoreCount(inputItem);
+	}
 }

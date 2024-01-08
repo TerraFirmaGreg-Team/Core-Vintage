@@ -21,25 +21,25 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockGreenhouseDoor extends BlockDoor {
-    public BlockGreenhouseDoor() {
-        super(Material.WOOD);
-        this.setSoundType(SoundType.METAL);
-        this.setHardness(3.0F);
-        this.disableStats();
-        Blocks.FIRE.setFireInfo(this, 5, 20);
-    }
+	public BlockGreenhouseDoor() {
+		super(Material.WOOD);
+		this.setSoundType(SoundType.METAL);
+		this.setHardness(3.0F);
+		this.disableStats();
+		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
 
-    public Item getItem() {
-        return ItemsFL.ITEM_GREENHOUSE_DOOR;
-    }
+	public Item getItem() {
+		return ItemsFL.ITEM_GREENHOUSE_DOOR;
+	}
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : this.getItem();
-    }
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : this.getItem();
+	}
 
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(this.getItem());
-    }
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		return new ItemStack(this.getItem());
+	}
 }

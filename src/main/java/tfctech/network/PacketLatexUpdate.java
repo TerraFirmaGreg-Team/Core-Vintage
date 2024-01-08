@@ -17,54 +17,54 @@ import javax.annotation.Nonnull;
  * Update latex status on client, for render purposes
  */
 public class PacketLatexUpdate implements IMessage {
-    private BlockPos pos;
-    private int cutState = -1;
-    private int fluid = 0;
-    private boolean pot = false;
-    private boolean base = false;
+	private BlockPos pos;
+	private int cutState = -1;
+	private int fluid = 0;
+	private boolean pot = false;
+	private boolean base = false;
 
-    @SuppressWarnings("unused")
-    @Deprecated
-    public PacketLatexUpdate() {}
+	@SuppressWarnings("unused")
+	@Deprecated
+	public PacketLatexUpdate() {}
 
-    public PacketLatexUpdate(@Nonnull TELatexExtractor tile) {
-        this.pos = tile.getPos();
-        cutState = tile.cutState();
-        fluid = tile.getFluidAmount();
-        pot = tile.hasPot();
-        base = tile.hasBase();
-    }
+	public PacketLatexUpdate(@Nonnull TELatexExtractor tile) {
+		this.pos = tile.getPos();
+		cutState = tile.cutState();
+		fluid = tile.getFluidAmount();
+		pot = tile.hasPot();
+		base = tile.hasBase();
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        pos = BlockPos.fromLong(buf.readLong());
-        cutState = buf.readInt();
-        fluid = buf.readInt();
-        pot = buf.readBoolean();
-        base = buf.readBoolean();
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		pos = BlockPos.fromLong(buf.readLong());
+		cutState = buf.readInt();
+		fluid = buf.readInt();
+		pot = buf.readBoolean();
+		base = buf.readBoolean();
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeLong(pos.toLong());
-        buf.writeInt(cutState);
-        buf.writeInt(fluid);
-        buf.writeBoolean(pot);
-        buf.writeBoolean(base);
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeLong(pos.toLong());
+		buf.writeInt(cutState);
+		buf.writeInt(fluid);
+		buf.writeBoolean(pot);
+		buf.writeBoolean(base);
+	}
 
-    public static class Handler implements IMessageHandler<PacketLatexUpdate, IMessage> {
-        @Override
-        public IMessage onMessage(PacketLatexUpdate message, MessageContext ctx) {
-            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-            if (player != null) {
-                World world = player.getEntityWorld();
-                TELatexExtractor te = Helpers.getTE(world, message.pos, TELatexExtractor.class);
-                if (te != null) {
-                    te.updateClient(message.cutState, message.fluid, message.pot, message.base);
-                }
-            }
-            return null;
-        }
-    }
+	public static class Handler implements IMessageHandler<PacketLatexUpdate, IMessage> {
+		@Override
+		public IMessage onMessage(PacketLatexUpdate message, MessageContext ctx) {
+			EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+			if (player != null) {
+				World world = player.getEntityWorld();
+				TELatexExtractor te = Helpers.getTE(world, message.pos, TELatexExtractor.class);
+				if (te != null) {
+					te.updateClient(message.cutState, message.fluid, message.pot, message.base);
+				}
+			}
+			return null;
+		}
+	}
 }

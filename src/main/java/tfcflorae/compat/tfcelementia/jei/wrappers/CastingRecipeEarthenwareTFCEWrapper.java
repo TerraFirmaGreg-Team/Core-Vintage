@@ -13,22 +13,22 @@ import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import tfcflorae.compat.tfcelementia.ceramics.ItemEarthenwareMoldTFCE;
 
 public class CastingRecipeEarthenwareTFCEWrapper extends net.dries007.tfc.compat.jei.wrappers.CastingRecipeWrapper {
-    private ItemStack mold;
-    private FluidStack input;
+	private ItemStack mold;
+	private FluidStack input;
 
-    public CastingRecipeEarthenwareTFCEWrapper(Metal metal, ItemMetalTFCE.ItemType type) {
-        super(metal, Metal.ItemType.INGOT); // Just so I can override
-        input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), type.getSmeltAmount());
-        mold = new ItemStack(ItemEarthenwareMoldTFCE.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(input, true);
-        }
-    }
+	public CastingRecipeEarthenwareTFCEWrapper(Metal metal, ItemMetalTFCE.ItemType type) {
+		super(metal, Metal.ItemType.INGOT); // Just so I can override
+		input = new FluidStack(FluidsTFC.getFluidFromMetal(metal), type.getSmeltAmount());
+		mold = new ItemStack(ItemEarthenwareMoldTFCE.get(type));
+		IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+		if (cap instanceof IMoldHandler) {
+			cap.fill(input, true);
+		}
+	}
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.FLUID, input);
-        ingredients.setOutput(VanillaTypes.ITEM, mold);
-    }
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInput(VanillaTypes.FLUID, input);
+		ingredients.setOutput(VanillaTypes.ITEM, mold);
+	}
 }

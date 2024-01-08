@@ -19,16 +19,16 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
  * {@link CapabilityFood}
  */
 public class PacketFoodStatsReplace implements IMessageEmpty {
-    public static final class Handler implements IMessageHandler<PacketFoodStatsReplace, IMessage> {
-        @Override
-        public IMessage onMessage(PacketFoodStatsReplace message, MessageContext ctx) {
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                if (player != null) {
-                    FoodStatsTFC.replaceFoodStats(player);
-                }
-            });
-            return null;
-        }
-    }
+	public static final class Handler implements IMessageHandler<PacketFoodStatsReplace, IMessage> {
+		@Override
+		public IMessage onMessage(PacketFoodStatsReplace message, MessageContext ctx) {
+			TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+				EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+				if (player != null) {
+					FoodStatsTFC.replaceFoodStats(player);
+				}
+			});
+			return null;
+		}
+	}
 }

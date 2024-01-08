@@ -16,49 +16,49 @@ import tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.Constants.MODID_TFCF;
 
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = MODID_TFCF)
 public class EntitiesTFCF {
-    @GameRegistry.ObjectHolder("tfcf:long")
-    public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = Helpers.getNull();
+	@GameRegistry.ObjectHolder("tfcf:long")
+	public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = Helpers.getNull();
 
-    private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
-        public void write(PacketBuffer buf, @Nonnull Long value) {
-            buf.writeLong(value);
-        }
+	private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
+		public void write(PacketBuffer buf, @Nonnull Long value) {
+			buf.writeLong(value);
+		}
 
-        public Long read(PacketBuffer buf) {
-            return buf.readLong();
-        }
+		public Long read(PacketBuffer buf) {
+			return buf.readLong();
+		}
 
-        public DataParameter<Long> createKey(int id) {
-            return new DataParameter<>(id, this);
-        }
+		public DataParameter<Long> createKey(int id) {
+			return new DataParameter<>(id, this);
+		}
 
-        @Nonnull
-        public Long copyValue(@Nonnull Long value) {
-            return value;
-        }
-    };
+		@Nonnull
+		public Long copyValue(@Nonnull Long value) {
+			return value;
+		}
+	};
 
-    private static int id = 1; // don't use id 0, it's easier to debug if something goes wrong
+	private static int id = 1; // don't use id 0, it's easier to debug if something goes wrong
 
-    @SuppressWarnings("unchecked")
-    public static DataSerializer<Long> getLongDataSerializer() {
-        return (DataSerializer<Long>) LONG_DATA_SERIALIZER_ENTRY.getSerializer();
-    }
+	@SuppressWarnings("unchecked")
+	public static DataSerializer<Long> getLongDataSerializer() {
+		return (DataSerializer<Long>) LONG_DATA_SERIALIZER_ENTRY.getSerializer();
+	}
 
-    @SubscribeEvent
-    public static void registerDataSerializers(RegistryEvent.Register<DataSerializerEntry> event) {
-        event.getRegistry().register(new DataSerializerEntry(LONG_DATA_SERIALIZER).setRegistryName("long"));
-    }
+	@SubscribeEvent
+	public static void registerDataSerializers(RegistryEvent.Register<DataSerializerEntry> event) {
+		event.getRegistry().register(new DataSerializerEntry(LONG_DATA_SERIALIZER).setRegistryName("long"));
+	}
 
-    public static void preInit() {
-        register("fruit_boat", EntityBoatTFCF.class);
-    }
+	public static void preInit() {
+		register("fruit_boat", EntityBoatTFCF.class);
+	}
 
-    private static void register(String name, Class<? extends Entity> cls) {
-        EntityRegistry.registerModEntity(new ResourceLocation(MODID, name), cls, name, id++, TFCFlorae.getInstance(), 160, 20, true);
-    }
+	private static void register(String name, Class<? extends Entity> cls) {
+		EntityRegistry.registerModEntity(new ResourceLocation(MODID_TFCF, name), cls, name, id++, TFCFlorae.getInstance(), 160, 20, true);
+	}
 }

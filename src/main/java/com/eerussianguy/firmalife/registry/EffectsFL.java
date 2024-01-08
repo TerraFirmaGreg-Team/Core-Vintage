@@ -8,17 +8,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_FL;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = MODID_FL)
+@GameRegistry.ObjectHolder(MODID_FL)
 public class EffectsFL {
-    public static final Potion SWARM = Helpers.getNull();
+	public static final Potion SWARM = Helpers.getNull();
 
-    @SubscribeEvent
-    public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
-        event.getRegistry().registerAll(
-                new PotionSwarm().setRegistryName(MOD_ID, "swarm")
-        );
-    }
+	@SubscribeEvent
+	public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
+		event.getRegistry().registerAll(
+				new PotionSwarm().setRegistryName(MODID_FL, "swarm")
+		);
+	}
 }

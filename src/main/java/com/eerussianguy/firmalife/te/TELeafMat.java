@@ -17,110 +17,110 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class TELeafMat extends TEInventory implements ITickable {
-    private long startTick;
-    private int tickGoal;
+	private long startTick;
+	private int tickGoal;
 
-    public TELeafMat() {
-        super(1);
-        startTick = 0;
-        tickGoal = 0;
-    }
+	public TELeafMat() {
+		super(1);
+		startTick = 0;
+		tickGoal = 0;
+	}
 
-    @Override
-    public boolean isItemValid(int slot, ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean isItemValid(int slot, ItemStack stack) {
+		return true;
+	}
 
-    @Override
-    public void update() {
-        if (!world.isRemote) {
-            if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
-                if (recipeExists()) {
-                    dry();
-                }
-            }
-        }
-    }
+	@Override
+	public void update() {
+		if (!world.isRemote) {
+			if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
+				if (recipeExists()) {
+					dry();
+				}
+			}
+		}
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        startTick = nbt.getLong("startTick");
-        tickGoal = nbt.getInteger("tickGoal");
-        super.readFromNBT(nbt);
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		startTick = nbt.getLong("startTick");
+		tickGoal = nbt.getInteger("tickGoal");
+		super.readFromNBT(nbt);
+	}
 
-    @Override
-    @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setLong("startTick", startTick);
-        nbt.setInteger("tickGoal", tickGoal);
-        return super.writeToNBT(nbt);
-    }
+	@Override
+	@Nonnull
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setLong("startTick", startTick);
+		nbt.setInteger("tickGoal", tickGoal);
+		return super.writeToNBT(nbt);
+	}
 
-    public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-        Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
-    }
+	public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+		Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+	}
 
-    public void clear() {
-        startTick = 0;
-        tickGoal = 0;
-        markDirty();
-    }
+	public void clear() {
+		startTick = 0;
+		tickGoal = 0;
+		markDirty();
+	}
 
-    public void deleteSlot() {
-        inventory.setStackInSlot(0, ItemStack.EMPTY);
-    }
+	public void deleteSlot() {
+		inventory.setStackInSlot(0, ItemStack.EMPTY);
+	}
 
-    public void start() {
-        if (recipeExists()) {
-            startTick = CalendarTFC.PLAYER_TIME.getTicks();
-            setDuration();
-        } else {
-            Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
-            deleteSlot();
-        }
-        markDirty();
-    }
+	public void start() {
+		if (recipeExists()) {
+			startTick = CalendarTFC.PLAYER_TIME.getTicks();
+			setDuration();
+		} else {
+			Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+			deleteSlot();
+		}
+		markDirty();
+	}
 
-    public void rain() {
-        tickGoal += 25;
-    }
+	public void rain() {
+		tickGoal += 25;
+	}
 
-    private boolean recipeExists() {
-        ItemStack input = inventory.getStackInSlot(0);
-        DryingRecipe recipe = null;
-        if (!input.isEmpty() && !world.isRemote) {
-            recipe = DryingRecipe.get(input);
-        }
-        return recipe != null;
-    }
+	private boolean recipeExists() {
+		ItemStack input = inventory.getStackInSlot(0);
+		DryingRecipe recipe = null;
+		if (!input.isEmpty() && !world.isRemote) {
+			recipe = DryingRecipe.get(input);
+		}
+		return recipe != null;
+	}
 
-    private void setDuration() {
-        ItemStack input = inventory.getStackInSlot(0);
-        int recipeTime = 0;
-        if (!input.isEmpty() && !world.isRemote) {
-            DryingRecipe recipe = DryingRecipe.get(input);
-            if (recipe != null) {
-                recipeTime = DryingRecipe.getDuration(recipe);
-            }
-        }
-        tickGoal = recipeTime;
-    }
+	private void setDuration() {
+		ItemStack input = inventory.getStackInSlot(0);
+		int recipeTime = 0;
+		if (!input.isEmpty() && !world.isRemote) {
+			DryingRecipe recipe = DryingRecipe.get(input);
+			if (recipe != null) {
+				recipeTime = DryingRecipe.getDuration(recipe);
+			}
+		}
+		tickGoal = recipeTime;
+	}
 
-    private void dry() {
-        ItemStack input = inventory.getStackInSlot(0);
-        if (!input.isEmpty()) {
-            DryingRecipe recipe = DryingRecipe.get(input);
-            if (recipe != null && !world.isRemote) {
-                inventory.setStackInSlot(0, HelpersFL.updateFoodFuzzed(input, recipe.getOutputItem(input)));
-                setAndUpdateSlots(0);
-                markForSync();
-            }
-        }
-        markDirty();
-    }
+	private void dry() {
+		ItemStack input = inventory.getStackInSlot(0);
+		if (!input.isEmpty()) {
+			DryingRecipe recipe = DryingRecipe.get(input);
+			if (recipe != null && !world.isRemote) {
+				inventory.setStackInSlot(0, HelpersFL.updateFoodFuzzed(input, recipe.getOutputItem(input)));
+				setAndUpdateSlots(0);
+				markForSync();
+			}
+		}
+		markDirty();
+	}
 
-    public long getTicksRemaining() {
-        return tickGoal - (CalendarTFC.PLAYER_TIME.getTicks() - startTick);
-    }
+	public long getTicksRemaining() {
+		return tickGoal - (CalendarTFC.PLAYER_TIME.getTicks() - startTick);
+	}
 }

@@ -46,267 +46,276 @@ import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 @ParametersAreNonnullByDefault
 public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
-    public static final PropertyEnum<EnumPileType> PILE_TYPE = PropertyEnum.<EnumPileType>create("pile_type", EnumPileType.class);
-    private static final AxisAlignedBB AABB_1_STONE = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.1875D, 0.75D);
-    private static final AxisAlignedBB AABB_2_STONE = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.1875D, 0.75D);
-    private static final AxisAlignedBB AABB_3_STONE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.1875D, 0.8125D);
-    private static final AxisAlignedBB AABB_4_STONE = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.1875D, 0.875D);
-    private static final Map<Rock, BlockPebbleWater> MAP = new HashMap<>();
-    protected final Rock rock;
+	public static final PropertyEnum<EnumPileType> PILE_TYPE = PropertyEnum.<EnumPileType>create("pile_type", EnumPileType.class);
+	private static final AxisAlignedBB AABB_1_STONE = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.1875D, 0.75D);
+	private static final AxisAlignedBB AABB_2_STONE = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.1875D, 0.75D);
+	private static final AxisAlignedBB AABB_3_STONE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.1875D, 0.8125D);
+	private static final AxisAlignedBB AABB_4_STONE = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.1875D, 0.875D);
+	private static final Map<Rock, BlockPebbleWater> MAP = new HashMap<>();
+	protected final Rock rock;
 
-    public BlockPebbleWater(Fluid fluid, Rock rock) {
-        this(fluid, Material.WATER, rock);
-    }
+	public BlockPebbleWater(Fluid fluid, Rock rock) {
+		this(fluid, Material.WATER, rock);
+	}
 
-    public BlockPebbleWater(Fluid fluid, Material materialIn, Rock rock) {
-        super(fluid, Material.WATER, false);
+	public BlockPebbleWater(Fluid fluid, Material materialIn, Rock rock) {
+		super(fluid, Material.WATER, false);
 
-        this.rock = rock;
-        setHardness(0.5F);
-        setResistance(2.0F);
-        setSoundType(SoundType.STONE);
-        setDefaultState(getDefaultState().withProperty(PILE_TYPE, EnumPileType.ONE).withProperty(LEVEL, 0));
+		this.rock = rock;
+		setHardness(0.5F);
+		setResistance(2.0F);
+		setSoundType(SoundType.STONE);
+		setDefaultState(getDefaultState().withProperty(PILE_TYPE, EnumPileType.ONE).withProperty(LEVEL, 0));
 
-        OreDictionaryHelper.register(this, rock);
-    }
+		OreDictionaryHelper.register(this, rock);
+	}
 
-    public static BlockPebbleWater get(Rock rock) {
-        return MAP.get(rock);
-    }
+	public static BlockPebbleWater get(Rock rock) {
+		return MAP.get(rock);
+	}
 
-    @Nonnull
-    @Override
-    public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
-        return false;
-    }
+	@Nonnull
+	@Override
+	public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
+		return false;
+	}
 
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
-        if (state.getBlock() == null || world.isAirBlock(pos.down())) {
-            this.dropBlockAsItem((World) world, pos, world.getBlockState(pos), 0);
-            (world).setBlockToAir(pos);
-        }
-    }
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+		if (state.getBlock() == null || world.isAirBlock(pos.down())) {
+			this.dropBlockAsItem((World) world, pos, world.getBlockState(pos), 0);
+			(world).setBlockToAir(pos);
+		}
+	}
 
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        if (this.getFluid() == SALT_WATER)
-            return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down()).isFullBlock() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
-        else if (this.getFluid() == FRESH_WATER)
-            return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down()).isFullBlock() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
-        else
-            return false;
-    }
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		if (this.getFluid() == SALT_WATER)
+			return worldIn.getBlockState(pos)
+			              .getBlock()
+			              .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
+			                                                     .isFullBlock() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
+		else if (this.getFluid() == FRESH_WATER)
+			return worldIn.getBlockState(pos)
+			              .getBlock()
+			              .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
+			                                                     .isFullBlock() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
+		else
+			return false;
+	}
 
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-        return this.canPlaceBlockAt(worldIn, pos) && !(worldIn.isAirBlock(pos.up()));
-    }
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+		return this.canPlaceBlockAt(worldIn, pos) && !(worldIn.isAirBlock(pos.up()));
+	}
 
-    @Override
-    @Nonnull
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.XZ;
-    }
+	@Override
+	@Nonnull
+	public Block.EnumOffsetType getOffsetType() {
+		return Block.EnumOffsetType.XZ;
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.TINY; // Store anywhere
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.TINY; // Store anywhere
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.VERY_LIGHT; // Stacksize = 64
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.VERY_LIGHT; // Stacksize = 64
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        state = state.getActualState(source, pos);
-        switch ((EnumPileType) state.getValue(PILE_TYPE)) {
-            default:
-            case ONE:
-            case ONE_PLANT:
-                return AABB_1_STONE;
-            case TWO:
-            case TWO_PLANT:
-                return AABB_2_STONE;
-            case THREE:
-            case THREE_PLANT:
-                return AABB_3_STONE;
-            case FOUR:
-            case FOUR_PLANT:
-                return AABB_4_STONE;
-        }
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		state = state.getActualState(source, pos);
+		switch ((EnumPileType) state.getValue(PILE_TYPE)) {
+			default:
+			case ONE:
+			case ONE_PLANT:
+				return AABB_1_STONE;
+			case TWO:
+			case TWO_PLANT:
+				return AABB_2_STONE;
+			case THREE:
+			case THREE_PLANT:
+				return AABB_3_STONE;
+			case FOUR:
+			case FOUR_PLANT:
+				return AABB_4_STONE;
+		}
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> list) {
-        list.add(new ItemStack(this, 1, EnumPileType.ONE.getMetadata()));
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> list) {
+		list.add(new ItemStack(this, 1, EnumPileType.ONE.getMetadata()));
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return layer == BlockRenderLayer.TRANSLUCENT || layer == BlockRenderLayer.CUTOUT;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+		return layer == BlockRenderLayer.TRANSLUCENT || layer == BlockRenderLayer.CUTOUT;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (world.isRemote)
-            return true;
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (world.isRemote)
+			return true;
 
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-            if (!world.isRemote) {
-                if (!player.getHeldItem(hand).isEmpty() && player.getHeldItem(hand).getItem() == ItemRock.get(rock)) {
-                    if (state.getValue(PILE_TYPE) == EnumPileType.FOUR || state.getValue(PILE_TYPE) == EnumPileType.FOUR_PLANT)
-                        return false;
-                    ItemStack stack = player.getHeldItem(hand).splitStack(1);
-                    if (!stack.isEmpty()) {
-                        IBlockState stateNew = state.cycleProperty(PILE_TYPE);
-                        world.setBlockState(pos, stateNew);
-                        return true;
-                    }
-                } else if (player.getHeldItem(hand).isEmpty()) {
-                    ItemStack extracted = new ItemStack(ItemRock.get(rock), 1);
-                    EntityItem item = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, extracted);
-                    item.motionX = item.motionY = item.motionZ = 0D;
-                    world.spawnEntity(item);
+		for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+			if (!world.isRemote) {
+				if (!player.getHeldItem(hand).isEmpty() && player.getHeldItem(hand).getItem() == ItemRock.get(rock)) {
+					if (state.getValue(PILE_TYPE) == EnumPileType.FOUR || state.getValue(PILE_TYPE) == EnumPileType.FOUR_PLANT)
+						return false;
+					ItemStack stack = player.getHeldItem(hand).splitStack(1);
+					if (!stack.isEmpty()) {
+						IBlockState stateNew = state.cycleProperty(PILE_TYPE);
+						world.setBlockState(pos, stateNew);
+						return true;
+					}
+				} else if (player.getHeldItem(hand).isEmpty()) {
+					ItemStack extracted = new ItemStack(ItemRock.get(rock), 1);
+					EntityItem item = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, extracted);
+					item.motionX = item.motionY = item.motionZ = 0D;
+					world.spawnEntity(item);
 
-                    if (state.getValue(PILE_TYPE) == EnumPileType.FOUR)
-                        world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.THREE));
-                    if (state.getValue(PILE_TYPE) == EnumPileType.THREE)
-                        world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.TWO));
-                    if (state.getValue(PILE_TYPE) == EnumPileType.TWO)
-                        world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.ONE));
-                    if (state.getValue(PILE_TYPE) == EnumPileType.ONE)
-                        world.setBlockToAir(pos);
+					if (state.getValue(PILE_TYPE) == EnumPileType.FOUR)
+						world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.THREE));
+					if (state.getValue(PILE_TYPE) == EnumPileType.THREE)
+						world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.TWO));
+					if (state.getValue(PILE_TYPE) == EnumPileType.TWO)
+						world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.ONE));
+					if (state.getValue(PILE_TYPE) == EnumPileType.ONE)
+						world.setBlockToAir(pos);
 
-                    if (state.getValue(PILE_TYPE) == EnumPileType.FOUR_PLANT)
-                        world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.THREE_PLANT));
-                    if (state.getValue(PILE_TYPE) == EnumPileType.THREE_PLANT)
-                        world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.TWO_PLANT));
-                    if (state.getValue(PILE_TYPE) == EnumPileType.TWO_PLANT)
-                        world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.ONE_PLANT));
-                    if (state.getValue(PILE_TYPE) == EnumPileType.ONE_PLANT)
-                        world.setBlockToAir(pos);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+					if (state.getValue(PILE_TYPE) == EnumPileType.FOUR_PLANT)
+						world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.THREE_PLANT));
+					if (state.getValue(PILE_TYPE) == EnumPileType.THREE_PLANT)
+						world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.TWO_PLANT));
+					if (state.getValue(PILE_TYPE) == EnumPileType.TWO_PLANT)
+						world.setBlockState(pos, state.withProperty(PILE_TYPE, EnumPileType.ONE_PLANT));
+					if (state.getValue(PILE_TYPE) == EnumPileType.ONE_PLANT)
+						world.setBlockToAir(pos);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 
-    @Nonnull
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        if (!(world.getBlockState(pos).getBlock() instanceof BlockPebbleWater)) {
-            if (world.rand.nextBoolean())
-                return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PILE_TYPE, EnumPileType.ONE_PLANT);
-            else
-                return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PILE_TYPE, EnumPileType.ONE);
-        }
-        return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
-    }
+	@Nonnull
+	@Override
+	@SuppressWarnings("deprecation")
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		if (!(world.getBlockState(pos).getBlock() instanceof BlockPebbleWater)) {
+			if (world.rand.nextBoolean())
+				return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PILE_TYPE, EnumPileType.ONE_PLANT);
+			else
+				return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PILE_TYPE, EnumPileType.ONE);
+		}
+		return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+	}
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemRock.get(rock);
-    }
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return ItemRock.get(rock);
+	}
 
-    @Override
-    public int quantityDropped(IBlockState state, int fortune, Random random) {
-        int dropCount = 0;
-        int meta = state.getValue(PILE_TYPE).getMetadata();
-        if (meta <= 3)
-            dropCount = meta;
-        if (meta >= 4 && meta <= 7)
-            dropCount = meta - 4;
-        return 1 + dropCount;
-    }
+	@Override
+	public int quantityDropped(IBlockState state, int fortune, Random random) {
+		int dropCount = 0;
+		int meta = state.getValue(PILE_TYPE).getMetadata();
+		if (meta <= 3)
+			dropCount = meta;
+		if (meta >= 4 && meta <= 7)
+			dropCount = meta - 4;
+		return 1 + dropCount;
+	}
 
-    @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(ItemRock.get(rock), 1);
-    }
+	@Override
+	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+		return new ItemStack(ItemRock.get(rock), 1);
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(PILE_TYPE, EnumPileType.byMetadata(meta));
-    }
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(PILE_TYPE, EnumPileType.byMetadata(meta));
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return ((EnumPileType) state.getValue(PILE_TYPE)).getMetadata();
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return ((EnumPileType) state.getValue(PILE_TYPE)).getMetadata();
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer.Builder(this).add(LEVEL).add(new IProperty[]{PILE_TYPE}).add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0])).build();
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer.Builder(this).add(LEVEL)
+		                                            .add(new IProperty[]{PILE_TYPE})
+		                                            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+		                                            .build();
+	}
 
-    @Override
-    public int damageDropped(IBlockState state) {
-        return ((EnumPileType) state.getValue(PILE_TYPE)).getMetadata();
-    }
+	@Override
+	public int damageDropped(IBlockState state) {
+		return ((EnumPileType) state.getValue(PILE_TYPE)).getMetadata();
+	}
 
-    public ItemBlock getItemBlock() {
-        return null;
-    }
+	public ItemBlock getItemBlock() {
+		return null;
+	}
 
-    public static enum EnumPileType implements IStringSerializable {
-        ONE,
-        TWO,
-        THREE,
-        FOUR,
-        ONE_PLANT,
-        TWO_PLANT,
-        THREE_PLANT,
-        FOUR_PLANT;
+	public static enum EnumPileType implements IStringSerializable {
+		ONE,
+		TWO,
+		THREE,
+		FOUR,
+		ONE_PLANT,
+		TWO_PLANT,
+		THREE_PLANT,
+		FOUR_PLANT;
 
-        private final String name;
+		private final String name;
 
-        private EnumPileType() {
-            this.name = name().toLowerCase(Locale.ENGLISH);
-        }
+		private EnumPileType() {
+			this.name = name().toLowerCase(Locale.ENGLISH);
+		}
 
-        public static EnumPileType byMetadata(int metadata) {
-            if (metadata < 0 || metadata >= values().length) {
-                metadata = 0;
-            }
-            return values()[metadata];
-        }
+		public static EnumPileType byMetadata(int metadata) {
+			if (metadata < 0 || metadata >= values().length) {
+				metadata = 0;
+			}
+			return values()[metadata];
+		}
 
-        public int getMetadata() {
-            return this.ordinal();
-        }
+		public int getMetadata() {
+			return this.ordinal();
+		}
 
-        @Override
-        public String toString() {
-            return this.name;
-        }
+		@Override
+		public String toString() {
+			return this.name;
+		}
 
-        @Override
-        public String getName() {
-            return this.name;
-        }
-    }
+		@Override
+		public String getName() {
+			return this.name;
+		}
+	}
 }

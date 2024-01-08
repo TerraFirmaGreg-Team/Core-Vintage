@@ -22,25 +22,25 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class BlockDecorativeStone extends Block implements IItemSize {
-    public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_BRICKS = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_POLISHED = new HashMap<>();
-    public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_RAW = new HashMap<>();
+	public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_BRICKS = new HashMap<>();
+	public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_POLISHED = new HashMap<>();
+	public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_RAW = new HashMap<>();
 
-    public BlockDecorativeStone(MapColor blockMapColorIn) {
-        super(Material.ROCK, blockMapColorIn);
-        setSoundType(SoundType.STONE);
-        setHardness(1.0F);
-    }
+	public BlockDecorativeStone(MapColor blockMapColorIn) {
+		super(Material.ROCK, blockMapColorIn);
+		setSoundType(SoundType.STONE);
+		setHardness(1.0F);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT;
+	}
 }

@@ -17,32 +17,32 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class SmelteryRecipeWrapper implements IRecipeWrapper {
-    private final SmelteryRecipe recipe;
+	private final SmelteryRecipe recipe;
 
-    public SmelteryRecipeWrapper(SmelteryRecipe recipe) {
-        this.recipe = recipe;
-    }
+	public SmelteryRecipeWrapper(SmelteryRecipe recipe) {
+		this.recipe = recipe;
+	}
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        List<List<ItemStack>> allInputs = new ArrayList<>();
-        for (IIngredient<ItemStack> ingredient : recipe.getIngredients()) {
-            allInputs.add(ingredient.getValidIngredients());
-        }
-        ingredients.setInputLists(VanillaTypes.ITEM, allInputs);
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		List<List<ItemStack>> allInputs = new ArrayList<>();
+		for (IIngredient<ItemStack> ingredient : recipe.getIngredients()) {
+			allInputs.add(ingredient.getValidIngredients());
+		}
+		ingredients.setInputLists(VanillaTypes.ITEM, allInputs);
 
-        List<List<FluidStack>> allOutputFluids = new ArrayList<>();
-        allOutputFluids.add(NonNullList.withSize(1, recipe.getOutput()));
-        ingredients.setOutputLists(VanillaTypes.FLUID, allOutputFluids);
-    }
+		List<List<FluidStack>> allOutputFluids = new ArrayList<>();
+		allOutputFluids.add(NonNullList.withSize(1, recipe.getOutput()));
+		ingredients.setOutputLists(VanillaTypes.FLUID, allOutputFluids);
+	}
 
-    @Override
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        float x = 44f;
-        float y = 3f;
-        String text = Heat.getTooltip(recipe.getMeltTemp());
-        //noinspection ConstantConditions
-        x = x - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
-        minecraft.fontRenderer.drawString(text, x, y, 0xFFFFFF, false);
-    }
+	@Override
+	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+		float x = 44f;
+		float y = 3f;
+		String text = Heat.getTooltip(recipe.getMeltTemp());
+		//noinspection ConstantConditions
+		x = x - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
+		minecraft.fontRenderer.drawString(text, x, y, 0xFFFFFF, false);
+	}
 }

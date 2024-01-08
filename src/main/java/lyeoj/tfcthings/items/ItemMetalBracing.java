@@ -10,21 +10,21 @@ import javax.annotation.Nonnull;
 
 public class ItemMetalBracing extends ItemTFC {
 
-    public ItemMetalBracing() {
-        this.setRegistryName("metal_bracing");
-        this.setTranslationKey("metal_bracing");
-        this.setCreativeTab(CreativeTabsTFC.CT_METAL);
-    }
+	public ItemMetalBracing() {
+		this.setRegistryName("metal_bracing");
+		this.setTranslationKey("metal_bracing");
+		this.setCreativeTab(CreativeTabsTFC.CT_METAL);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack itemStack) {
-        return Size.SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack itemStack) {
+		return Size.SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack itemStack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack itemStack) {
+		return Weight.LIGHT;
+	}
 }

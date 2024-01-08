@@ -8,20 +8,20 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class ItemMiscTech extends ItemMisc {
-    private final String oreDictionary;
+	private final String oreDictionary;
 
-    public ItemMiscTech(Size size, Weight weight, String oreDictionary) {
-        super(size, weight);
-        this.oreDictionary = oreDictionary;
-    }
+	public ItemMiscTech(Size size, Weight weight, String oreDictionary) {
+		super(size, weight);
+		this.oreDictionary = oreDictionary;
+	}
 
-    public ItemMiscTech(Size size, Weight weight) {
-        super(size, weight);
-        oreDictionary = null;
-    }
+	public ItemMiscTech(Size size, Weight weight) {
+		super(size, weight);
+		oreDictionary = null;
+	}
 
-    @Nullable
-    public String getOreDictionary() {
-        return oreDictionary;
-    }
+	@Nullable
+	public String getOreDictionary() {
+		return oreDictionary;
+	}
 }

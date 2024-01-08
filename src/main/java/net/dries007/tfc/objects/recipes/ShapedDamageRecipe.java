@@ -26,62 +26,62 @@ import javax.annotation.Nonnull;
  */
 @SuppressWarnings("unused")
 public class ShapedDamageRecipe extends ShapedOreRecipe {
-    private final int damage;
+	private final int damage;
 
-    public ShapedDamageRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
-        super(group, result, input);
-        this.damage = damage;
-    }
+	public ShapedDamageRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
+		super(group, result, input);
+		this.damage = damage;
+	}
 
-    @Override
-    @Nonnull
-    public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
-        final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
+	@Override
+	@Nonnull
+	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
+		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
 
-        for (int i = 0; i < remainingItems.size(); ++i) {
-            final ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
+		for (int i = 0; i < remainingItems.size(); ++i) {
+			final ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
 
-            // If the stack isn't empty and the stack is damageable we can damage it, otherwise delegate to containerItem.
-            if (!itemstack.isEmpty() && itemstack.getItem().isDamageable()) {
-                remainingItems.set(i, damageStack(itemstack));
-            } else {
-                remainingItems.set(i, ForgeHooks.getContainerItem(itemstack));
-            }
-        }
+			// If the stack isn't empty and the stack is damageable we can damage it, otherwise delegate to containerItem.
+			if (!itemstack.isEmpty() && itemstack.getItem().isDamageable()) {
+				remainingItems.set(i, damageStack(itemstack));
+			} else {
+				remainingItems.set(i, ForgeHooks.getContainerItem(itemstack));
+			}
+		}
 
-        return remainingItems;
-    }
+		return remainingItems;
+	}
 
-    @Override
-    @Nonnull
-    public String getGroup() {
-        return group == null ? "" : group.toString();
-    }
+	@Override
+	@Nonnull
+	public String getGroup() {
+		return group == null ? "" : group.toString();
+	}
 
-    // We need to damage the stack but damageItem will not return an item.
-    private ItemStack damageStack(ItemStack stack) {
-        ItemStack damagedStack = stack.copy();
-        EntityPlayer player = ForgeHooks.getCraftingPlayer();
-        if (player != null) {
-            damagedStack.damageItem(damage, player);
-        }
-        return damagedStack;
-    }
+	// We need to damage the stack but damageItem will not return an item.
+	private ItemStack damageStack(ItemStack stack) {
+		ItemStack damagedStack = stack.copy();
+		EntityPlayer player = ForgeHooks.getCraftingPlayer();
+		if (player != null) {
+			damagedStack.damageItem(damage, player);
+		}
+		return damagedStack;
+	}
 
-    @SuppressWarnings("unused")
-    public static class Factory implements IRecipeFactory {
-        @Override
-        public IRecipe parse(final JsonContext context, final JsonObject json) {
-            String group = JsonUtils.getString(json, "group", "");
+	@SuppressWarnings("unused")
+	public static class Factory implements IRecipeFactory {
+		@Override
+		public IRecipe parse(final JsonContext context, final JsonObject json) {
+			String group = JsonUtils.getString(json, "group", "");
 
-            CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);
+			CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);
 
-            ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-            final int damage;
-            if (JsonUtils.hasField(json, "damage"))
-                damage = JsonUtils.getInt(json, "damage");
-            else damage = 1;
-            return new ShapedDamageRecipe(group.isEmpty() ? null : new ResourceLocation(group), primer, result, damage);
-        }
-    }
+			ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+			final int damage;
+			if (JsonUtils.hasField(json, "damage"))
+				damage = JsonUtils.getInt(json, "damage");
+			else damage = 1;
+			return new ShapedDamageRecipe(group.isEmpty() ? null : new ResourceLocation(group), primer, result, damage);
+		}
+	}
 }

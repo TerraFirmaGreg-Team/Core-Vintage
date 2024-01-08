@@ -27,157 +27,157 @@ import javax.annotation.Nullable;
 
 public class FreezeDryer extends BlockContainer implements IHasModel {
 
-    public static final PropertyDirection FACING;
+	public static final PropertyDirection FACING;
 
-    static {
-        FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-    }
-
-
-    public FreezeDryer(String name, Material material) {
-        super(Material.ROCK);
-        setTranslationKey(name);
-        setRegistryName(name);
-        setCreativeTab(Main.creativeTab);
-        setHardness(2F);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-
-        return false;
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    public EnumFacing getFacing(IBlockState state) {
-        return state.getValue(FACING);
-    }
-
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
-
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        this.setDefaultFacing(worldIn, pos, state);
-    }
-
-    private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state) {
-        if (!worldIn.isRemote) {
-            IBlockState iblockstate = worldIn.getBlockState(pos.north());
-            IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
-            IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
-            IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = state.getValue(FACING);
-
-            if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock()) {
-                enumfacing = EnumFacing.SOUTH;
-            } else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock()) {
-                enumfacing = EnumFacing.NORTH;
-            } else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock()) {
-                enumfacing = EnumFacing.EAST;
-            } else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock()) {
-                enumfacing = EnumFacing.WEST;
-            }
-
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-        }
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{FACING});
-    }
-
-    @Override
-    public IBlockState withRotation(IBlockState state, Rotation rot) {
-        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        EnumFacing enumfacing = EnumFacing.byHorizontalIndex(meta);
-
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
-            enumfacing = EnumFacing.NORTH;
-        }
-
-        return this.getDefaultState().withProperty(FACING, enumfacing);
-    }
+	static {
+		FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	}
 
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
-    public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing) state.getValue(FACING)).getIndex();
-    }
+	public FreezeDryer(String name, Material material) {
+		super(Material.ROCK);
+		setTranslationKey(name);
+		setRegistryName(name);
+		setCreativeTab(Main.creativeTab);
+		setHardness(2F);
+		ModBlocks.BLOCKS.add(this);
+		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+	}
 
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY, float hitZ) {
+		return false;
+	}
 
-        if (!worldIn.isRemote) {
-            player.openGui(Main.INSTANCE, Reference.GUI_FREEZE_DRYER, worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-        return true;
+	public EnumFacing getFacing(IBlockState state) {
+		return state.getValue(FACING);
+	}
 
-    }
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		this.setDefaultFacing(worldIn, pos, state);
+	}
 
-        if (stack.hasDisplayName()) {
-            TileEntity entity = worldIn.getTileEntity(pos);
+	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state) {
+		if (!worldIn.isRemote) {
+			IBlockState iblockstate = worldIn.getBlockState(pos.north());
+			IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
+			IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
+			IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
+			EnumFacing enumfacing = state.getValue(FACING);
 
-            if (entity instanceof TEFreezeDryer) {
-                //((TECellarShelf)entity).setCustomName(stack.getDisplayName());
-            }
-        }
+			if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock()) {
+				enumfacing = EnumFacing.SOUTH;
+			} else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock()) {
+				enumfacing = EnumFacing.NORTH;
+			} else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock()) {
+				enumfacing = EnumFacing.EAST;
+			} else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock()) {
+				enumfacing = EnumFacing.WEST;
+			}
 
-    }
+			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+		}
+	}
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEFreezeDryer tile = Helpers.getTE(worldIn, pos, TEFreezeDryer.class);
-        if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[]{FACING});
+	}
 
+	@Override
+	public IBlockState withRotation(IBlockState state, Rotation rot) {
+		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+	}
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World world, int i) {
-        if (!world.isRemote) {
-            System.out.println("Client : Creating TileEntity");
-        } else {
-            System.out.println("Server : Creating TileEntity");
-        }
-        return new TEFreezeDryer();
-    }
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.byHorizontalIndex(meta);
 
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
 
-    }
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
 
 
-    @Override
-    public void registerModels() {
-        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-    }
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
+	public int getMetaFromState(IBlockState state) {
+		return ((EnumFacing) state.getValue(FACING)).getIndex();
+	}
+
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY, float hitZ) {
+
+		if (!worldIn.isRemote) {
+			player.openGui(Main.INSTANCE, Reference.GUI_FREEZE_DRYER, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		}
+
+		return true;
+
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+
+		if (stack.hasDisplayName()) {
+			TileEntity entity = worldIn.getTileEntity(pos);
+
+			if (entity instanceof TEFreezeDryer) {
+				//((TECellarShelf)entity).setCustomName(stack.getDisplayName());
+			}
+		}
+
+	}
+
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		TEFreezeDryer tile = Helpers.getTE(worldIn, pos, TEFreezeDryer.class);
+		if (tile != null) {
+			tile.onBreakBlock(worldIn, pos, state);
+		}
+		super.breakBlock(worldIn, pos, state);
+	}
+
+
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(World world, int i) {
+		if (!world.isRemote) {
+			System.out.println("Client : Creating TileEntity");
+		} else {
+			System.out.println("Server : Creating TileEntity");
+		}
+		return new TEFreezeDryer();
+	}
+
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+
+	}
+
+
+	@Override
+	public void registerModels() {
+		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	}
 }

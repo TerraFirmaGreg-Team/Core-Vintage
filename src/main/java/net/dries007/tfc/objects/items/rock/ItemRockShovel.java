@@ -41,87 +41,89 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class ItemRockShovel extends ItemSpade implements IItemSize, IRockObject {
-    private static final Map<RockCategory, ItemRockShovel> MAP = new HashMap<>();
-    public final RockCategory category;
+	private static final Map<RockCategory, ItemRockShovel> MAP = new HashMap<>();
+	public final RockCategory category;
 
-    public ItemRockShovel(RockCategory category) {
-        super(category.getToolMaterial());
-        this.category = category;
-        if (MAP.put(category, this) != null) throw new IllegalStateException("There can only be one.");
-        attackDamage = 0.875f * category.getToolMaterial().getAttackDamage();
-        attackSpeed = -3f;
-        setHarvestLevel("shovel", category.getToolMaterial().getHarvestLevel());
-        OreDictionaryHelper.register(this, "shovel");
-        OreDictionaryHelper.register(this, "shovel", "stone");
-        OreDictionaryHelper.register(this, "shovel", "stone", category);
-        OreDictionaryHelper.registerDamageType(this, DamageType.CRUSHING);
-    }
+	public ItemRockShovel(RockCategory category) {
+		super(category.getToolMaterial());
+		this.category = category;
+		if (MAP.put(category, this) != null) throw new IllegalStateException("There can only be one.");
+		attackDamage = 0.875f * category.getToolMaterial().getAttackDamage();
+		attackSpeed = -3f;
+		setHarvestLevel("shovel", category.getToolMaterial().getHarvestLevel());
+		OreDictionaryHelper.register(this, "shovel");
+		OreDictionaryHelper.register(this, "shovel", "stone");
+		OreDictionaryHelper.register(this, "shovel", "stone", category);
+		OreDictionaryHelper.registerDamageType(this, DamageType.CRUSHING);
+	}
 
-    public static ItemRockShovel get(RockCategory category) {
-        return MAP.get(category);
-    }
+	public static ItemRockShovel get(RockCategory category) {
+		return MAP.get(category);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add("Rock type: " + OreDictionaryHelper.toString(category));
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add("Rock type: " + OreDictionaryHelper.toString(category));
+	}
 
-    @Override
-    @Nonnull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack itemstack = player.getHeldItem(hand);
+	@Override
+	@Nonnull
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack itemstack = player.getHeldItem(hand);
 
-        if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
-            return EnumActionResult.FAIL;
-        } else {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
-            Block block = iblockstate.getBlock();
-            if (!(block instanceof BlockRockVariant)) {
-                return EnumActionResult.PASS;
-            }
-            BlockRockVariant rockVariant = (BlockRockVariant) block;
-            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS || rockVariant.getType() == Rock.Type.DIRT) {
-                IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH).getDefaultState();
-                worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
+			return EnumActionResult.FAIL;
+		} else {
+			IBlockState iblockstate = worldIn.getBlockState(pos);
+			Block block = iblockstate.getBlock();
+			if (!(block instanceof BlockRockVariant)) {
+				return EnumActionResult.PASS;
+			}
+			BlockRockVariant rockVariant = (BlockRockVariant) block;
+			if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up())
+			                                                                                       .getMaterial() == Material.AIR && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS || rockVariant.getType() == Rock.Type.DIRT) {
+				IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH)
+				                                           .getDefaultState();
+				worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-                if (!worldIn.isRemote) {
-                    worldIn.setBlockState(pos, iblockstate1, 11);
-                    itemstack.damageItem(1, player);
-                }
+				if (!worldIn.isRemote) {
+					worldIn.setBlockState(pos, iblockstate1, 11);
+					itemstack.damageItem(1, player);
+				}
 
-                return EnumActionResult.SUCCESS;
-            }
-        }
-        return EnumActionResult.PASS;
-    }
+				return EnumActionResult.SUCCESS;
+			}
+		}
+		return EnumActionResult.PASS;
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.LARGE; // Stored only in chests
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.LARGE; // Stored only in chests
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.MEDIUM;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.MEDIUM;
+	}
 
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
-    }
+	@Override
+	public boolean canStack(ItemStack stack) {
+		return false;
+	}
 
-    @Nullable
-    @Override
-    public Rock getRock(ItemStack stack) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public Rock getRock(ItemStack stack) {
+		return null;
+	}
 
-    @Nonnull
-    @Override
-    public RockCategory getRockCategory(ItemStack stack) {
-        return category;
-    }
+	@Nonnull
+	@Override
+	public RockCategory getRockCategory(ItemStack stack) {
+		return category;
+	}
 }

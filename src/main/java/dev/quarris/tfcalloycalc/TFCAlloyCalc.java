@@ -16,36 +16,44 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.Tags;
 
-@Mod(modid = ModRef.ID, name = ModRef.NAME, version = ModRef.VERSION, dependencies = ModRef.DEPENDENCIES)
+import static su.terrafirmagreg.Constants.MODID_TFCALLOYCALC;
+
+@Mod(modid = MODID_TFCALLOYCALC, name = ModRef.NAME, version = Tags.VERSION, dependencies = ModRef.DEPENDENCIES)
 public class TFCAlloyCalc {
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        ModRef.logger = event.getModLog();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-        GameRegistry.registerTileEntity(TileEntityCalc.class, ModRef.res("alloy_calculator"));
-    }
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		ModRef.logger = event.getModLog();
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		GameRegistry.registerTileEntity(TileEntityCalc.class, ModRef.res("alloy_calculator"));
+	}
 
-    @Mod.EventBusSubscriber(modid = ModRef.ID)
-    public static class EventHandler {
+	@Mod.EventBusSubscriber(modid = MODID_TFCALLOYCALC)
+	public static class EventHandler {
 
-        static Block calc;
+		static Block calc;
 
-        @SubscribeEvent
-        public static void registerBlocks(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(calc = new BlockCalc(Material.IRON).setTranslationKey(ModRef.ID + ".alloy_calculator").setRegistryName(ModRef.res("alloy_calculator")));
-        }
+		@SubscribeEvent
+		public static void registerBlocks(RegistryEvent.Register<Block> event) {
+			event.getRegistry()
+			     .register(calc = new BlockCalc(Material.IRON).setTranslationKey(MODID_TFCALLOYCALC + ".alloy_calculator")
+			                                                  .setRegistryName(ModRef.res("alloy_calculator")));
+		}
 
-        @SubscribeEvent
-        public static void registerItems(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(new ItemBlock(calc).setCreativeTab(CreativeTabsTFC.CT_MISC).setTranslationKey(ModRef.ID + ".alloy_calculator").setRegistryName(ModRef.res("alloy_calculator")));
-        }
+		@SubscribeEvent
+		public static void registerItems(RegistryEvent.Register<Item> event) {
+			event.getRegistry()
+			     .register(new ItemBlock(calc).setCreativeTab(CreativeTabsTFC.CT_MISC)
+			                                  .setTranslationKey(MODID_TFCALLOYCALC + ".alloy_calculator")
+			                                  .setRegistryName(ModRef.res("alloy_calculator")));
+		}
 
-        @SideOnly(Side.CLIENT)
-        @SubscribeEvent
-        public static void registerModels(ModelRegistryEvent event) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(calc), 0, new ModelResourceLocation(calc.getRegistryName(), "inventory"));
-        }
-    }
+		@SideOnly(Side.CLIENT)
+		@SubscribeEvent
+		public static void registerModels(ModelRegistryEvent event) {
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(calc), 0, new ModelResourceLocation(calc.getRegistryName(), "inventory"));
+		}
+	}
 }

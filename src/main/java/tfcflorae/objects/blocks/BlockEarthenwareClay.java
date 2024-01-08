@@ -18,33 +18,33 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockEarthenwareClay extends Block implements IItemSize {
-    public BlockEarthenwareClay() {
-        super(Material.CLAY);
-        setSoundType(SoundType.GROUND);
-        setHardness(1.0F);
-        OreDictionaryHelper.register(this, "block", "Clay");
-    }
+	public BlockEarthenwareClay() {
+		super(Material.CLAY);
+		setSoundType(SoundType.GROUND);
+		setHardness(1.0F);
+		OreDictionaryHelper.register(this, "block", "Clay");
+	}
 
-    @Override
-    public int quantityDropped(Random random) {
-        return 4;
-    }
+	@Override
+	public int quantityDropped(Random random) {
+		return 4;
+	}
 
-    @Nonnull
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemsTFCF.EARTHENWARE_CLAY;
-    }
+	@Nonnull
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return ItemsTFCF.EARTHENWARE_CLAY;
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(ItemStack stack) {
+		return Size.SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(ItemStack stack) {
+		return Weight.LIGHT;
+	}
 }

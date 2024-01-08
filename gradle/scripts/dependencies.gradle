@@ -94,7 +94,7 @@ dependencies {
 
 //        compileOnly files("libs/TerraFirmaCraft-MC1.12.2-1.7.21.179")
 
-        compileOnly fileTree(include: ["*.jar"], dir: "libs")
+        //compileOnly fileTree(include: ["*.jar"], dir: "libs")
 
         // CT
         compileOnly("curse.maven:crafttweaker-239197:4731280")

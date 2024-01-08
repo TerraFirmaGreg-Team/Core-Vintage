@@ -31,87 +31,87 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public class PacketCapabilityContainerUpdate implements IMessage {
-    private final TIntObjectMap<NBTTagCompound> capabilityData = new TIntObjectHashMap<>();
-    private int windowID;
+	private final TIntObjectMap<NBTTagCompound> capabilityData = new TIntObjectHashMap<>();
+	private int windowID;
 
-    @SuppressWarnings("unused")
-    @Deprecated
-    public PacketCapabilityContainerUpdate() {}
+	@SuppressWarnings("unused")
+	@Deprecated
+	public PacketCapabilityContainerUpdate() {}
 
-    public PacketCapabilityContainerUpdate(int windowID, int slotID, ItemStack stack) {
-        this.windowID = windowID;
+	public PacketCapabilityContainerUpdate(int windowID, int slotID, ItemStack stack) {
+		this.windowID = windowID;
 
-        final NBTTagCompound data = CapabilityContainerListener.readCapabilityData(stack);
-        if (!data.isEmpty()) {
-            capabilityData.put(slotID, data);
-        }
-    }
+		final NBTTagCompound data = CapabilityContainerListener.readCapabilityData(stack);
+		if (!data.isEmpty()) {
+			capabilityData.put(slotID, data);
+		}
+	}
 
-    public PacketCapabilityContainerUpdate(int windowID, NonNullList<ItemStack> items) {
-        this.windowID = windowID;
+	public PacketCapabilityContainerUpdate(int windowID, NonNullList<ItemStack> items) {
+		this.windowID = windowID;
 
-        for (int i = 0; i < items.size(); i++) {
-            final NBTTagCompound nbt = CapabilityContainerListener.readCapabilityData(items.get(i));
-            if (!nbt.isEmpty()) {
-                capabilityData.put(i, nbt);
-            }
-        }
-    }
+		for (int i = 0; i < items.size(); i++) {
+			final NBTTagCompound nbt = CapabilityContainerListener.readCapabilityData(items.get(i));
+			if (!nbt.isEmpty()) {
+				capabilityData.put(i, nbt);
+			}
+		}
+	}
 
-    @Override
-    public final void fromBytes(final ByteBuf buf) {
-        windowID = buf.readInt();
+	@Override
+	public final void fromBytes(final ByteBuf buf) {
+		windowID = buf.readInt();
 
-        final int numEntries = buf.readInt();
-        for (int i = 0; i < numEntries; i++) {
-            final int index = buf.readInt();
-            final NBTTagCompound data = ByteBufUtils.readTag(buf);
-            capabilityData.put(index, data);
-        }
-    }
+		final int numEntries = buf.readInt();
+		for (int i = 0; i < numEntries; i++) {
+			final int index = buf.readInt();
+			final NBTTagCompound data = ByteBufUtils.readTag(buf);
+			capabilityData.put(index, data);
+		}
+	}
 
-    @Override
-    public final void toBytes(final ByteBuf buf) {
-        buf.writeInt(windowID);
+	@Override
+	public final void toBytes(final ByteBuf buf) {
+		buf.writeInt(windowID);
 
-        buf.writeInt(capabilityData.size());
-        capabilityData.forEachEntry((index, data) -> {
-            buf.writeInt(index);
-            ByteBufUtils.writeTag(buf, data);
-            return true;
-        });
-    }
+		buf.writeInt(capabilityData.size());
+		capabilityData.forEachEntry((index, data) -> {
+			buf.writeInt(index);
+			ByteBufUtils.writeTag(buf, data);
+			return true;
+		});
+	}
 
-    public final boolean hasData() {
-        return !capabilityData.isEmpty();
-    }
+	public final boolean hasData() {
+		return !capabilityData.isEmpty();
+	}
 
-    @ParametersAreNonnullByDefault
-    public static class Handler implements IMessageHandler<PacketCapabilityContainerUpdate, IMessage> {
-        @Override
-        public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx) {
-            if (!message.hasData()) return null; // Don't do anything if no data was sent
+	@ParametersAreNonnullByDefault
+	public static class Handler implements IMessageHandler<PacketCapabilityContainerUpdate, IMessage> {
+		@Override
+		public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx) {
+			if (!message.hasData()) return null; // Don't do anything if no data was sent
 
-            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-                final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-                final Container container;
+			TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+				final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+				final Container container;
 
-                if (player != null) {
-                    if (message.windowID == 0) {
-                        container = player.inventoryContainer;
-                    } else if (message.windowID == player.openContainer.windowId) {
-                        container = player.openContainer;
-                    } else {
-                        return;
-                    }
+				if (player != null) {
+					if (message.windowID == 0) {
+						container = player.inventoryContainer;
+					} else if (message.windowID == player.openContainer.windowId) {
+						container = player.openContainer;
+					} else {
+						return;
+					}
 
-                    message.capabilityData.forEachEntry((index, nbt) -> {
-                        CapabilityContainerListener.applyCapabilityData(container.getSlot(index).getStack(), nbt);
-                        return true;
-                    });
-                }
-            });
-            return null;
-        }
-    }
+					message.capabilityData.forEachEntry((index, nbt) -> {
+						CapabilityContainerListener.applyCapabilityData(container.getSlot(index).getStack(), nbt);
+						return true;
+					});
+				}
+			});
+			return null;
+		}
+	}
 }

@@ -8,17 +8,17 @@ import net.sharkbark.cellars.util.IHasModel;
 
 public abstract class ItemBase extends ItemTFC implements IHasModel {
 
-    public ItemBase(String name) {
-        setTranslationKey(name);
-        setRegistryName(name);
-        setCreativeTab(CreativeTabs.MATERIALS);
+	public ItemBase(String name) {
+		setTranslationKey(name);
+		setRegistryName(name);
+		setCreativeTab(CreativeTabs.MATERIALS);
 
-        ModItems.ITEMS.add(this);
-    }
+		ModItems.ITEMS.add(this);
+	}
 
-    @Override
-    public void registerModels() {
-        Main.proxy.registerItemRenderer(this, 0, "inventory");
-    }
+	@Override
+	public void registerModels() {
+		Main.proxy.registerItemRenderer(this, 0, "inventory");
+	}
 
 }

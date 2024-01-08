@@ -15,14 +15,14 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class AnvilComponent extends SimpleRecipeComponent<AnvilRecipe> {
-    @VariableHolder
-    @SerializedName("recipe")
-    public String recipeName;
+	@VariableHolder
+	@SerializedName("recipe")
+	public String recipeName;
 
-    @Override
-    public void build(int componentX, int componentY, int pageNum) {
-        Objects.requireNonNull(recipeName, "Recipe name is null?");
-        recipe = TFCRegistries.ANVIL.getValue(new ResourceLocation(recipeName));
-        super.build(componentX, componentY, pageNum);
-    }
+	@Override
+	public void build(int componentX, int componentY, int pageNum) {
+		Objects.requireNonNull(recipeName, "Recipe name is null?");
+		recipe = TFCRegistries.ANVIL.getValue(new ResourceLocation(recipeName));
+		super.build(componentX, componentY, pageNum);
+	}
 }

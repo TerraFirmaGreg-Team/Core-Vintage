@@ -28,37 +28,37 @@ import java.util.Random;
 
 public class BlockLeafyBush extends BlockBerryBush {
 
-    public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 1, 4);
+	public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 1, 4);
 
-    private static final AxisAlignedBB SMALL_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.25D, 1D);
-    private static final AxisAlignedBB MEDIUM_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.5D, 1D);
-    private static final AxisAlignedBB AABB_3 = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.75D, 1D);
+	private static final AxisAlignedBB SMALL_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.25D, 1D);
+	private static final AxisAlignedBB MEDIUM_SIZE_AABB = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.5D, 1D);
+	private static final AxisAlignedBB AABB_3 = new AxisAlignedBB(0D, 0.0D, 0, 1D, 0.75D, 1D);
 
-    public BlockLeafyBush(LeafyBush bush) {
-        super(bush);
-        setTranslationKey(bush.getName() + "_bush");
-        setRegistryName(bush.getName() + "_bush");
-        setCreativeTab(CreativeTabsTFC.CT_WOOD);
+	public BlockLeafyBush(LeafyBush bush) {
+		super(bush);
+		setTranslationKey(bush.getName() + "_bush");
+		setRegistryName(bush.getName() + "_bush");
+		setCreativeTab(CreativeTabsTFC.CT_WOOD);
 
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(bush.getName() + "_bush"));
-        setDefaultState(blockState.getBaseState().withProperty(GROWTH, 1));
-    }
+		ModBlocks.BLOCKS.add(this);
+		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(bush.getName() + "_bush"));
+		setDefaultState(blockState.getBaseState().withProperty(GROWTH, 1));
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @Nonnull
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(GROWTH, meta);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	@Nonnull
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(GROWTH, meta);
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(GROWTH).intValue();
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(GROWTH).intValue();
+	}
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         /*if (worldIn.getBlockState(pos).getValue(FRUITING))
         {
             if (!worldIn.isRemote)
@@ -73,44 +73,44 @@ public class BlockLeafyBush extends BlockBerryBush {
             }
             return true;
         }*/
-        return false;
-    }
+		return false;
+	}
 
-    @Override
-    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-        if (!world.isRemote) {
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
-            if (te != null) {
-                float temp = ClimateTFC.getActualTemp(world, pos);
-                float rainfall = ChunkDataTFC.getRainfall(world, pos);
-                long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-                int currGrowth = world.getBlockState(pos).getValue(GROWTH);
-                if (hours > bush.getGrowthTime() && bush.isValidForGrowth(temp, rainfall) && currGrowth < 4) {
-                    if (bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
-                        world.setBlockState(pos, world.getBlockState(pos).withProperty(GROWTH, currGrowth + 1));
-                    }
-                    te.resetCounter();
-                }
-            }
-        }
-    }
+	@Override
+	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+		if (!world.isRemote) {
+			TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+			if (te != null) {
+				float temp = ClimateTFC.getActualTemp(world, pos);
+				float rainfall = ChunkDataTFC.getRainfall(world, pos);
+				long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+				int currGrowth = world.getBlockState(pos).getValue(GROWTH);
+				if (hours > bush.getGrowthTime() && bush.isValidForGrowth(temp, rainfall) && currGrowth < 4) {
+					if (bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+						world.setBlockState(pos, world.getBlockState(pos).withProperty(GROWTH, currGrowth + 1));
+					}
+					te.resetCounter();
+				}
+			}
+		}
+	}
 
-    @Override
-    @Nonnull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+	@Override
+	@Nonnull
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 
-        return switch (source.getBlockState(pos).getValue(GROWTH)) {
-            case 1 -> SMALL_SIZE_AABB;
-            case 2 -> MEDIUM_SIZE_AABB;
-            case 3 -> AABB_3;
-            default -> FULL_BLOCK_AABB;
-        };
-    }
+		return switch (source.getBlockState(pos).getValue(GROWTH)) {
+			case 1 -> SMALL_SIZE_AABB;
+			case 2 -> MEDIUM_SIZE_AABB;
+			case 3 -> AABB_3;
+			default -> FULL_BLOCK_AABB;
+		};
+	}
 
-    @Override
-    @Nonnull
-    public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, GROWTH);
-    }
+	@Override
+	@Nonnull
+	public BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, GROWTH);
+	}
 
 }

@@ -15,33 +15,34 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import su.terrafirmagreg.Tags;
 
-@Mod(modid = AstikorCarts.MODID, version = AstikorCarts.VERSION, acceptedMinecraftVersions = "[1.12,1.13)")
+import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+
+@Mod(modid = MODID_ASTIKORCARTS, version = Tags.VERSION)
 public class AstikorCarts {
-    public static final String MODID = "astikorcarts";
-    public static final String VERSION = "tfc-1.12.2-0.1.2.9";
 
-    @SidedProxy(clientSide = "de.mennomax.astikorcarts.proxy.ClientProxy", serverSide = "de.mennomax.astikorcarts.proxy.ServerProxy")
-    public static IProxy proxy;
+	@SidedProxy(clientSide = "de.mennomax.astikorcarts.proxy.ClientProxy", serverSide = "de.mennomax.astikorcarts.proxy.ServerProxy")
+	public static IProxy proxy;
 
-    @Instance(MODID)
-    public static AstikorCarts instance;
+	@Instance(MODID_ASTIKORCARTS)
+	public static AstikorCarts instance;
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        PacketHandler.registerPackets();
-        CapabilityManager.INSTANCE.register(IPull.class, new PullStorage(), PullFactory::new);
-        proxy.preInit();
-    }
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		PacketHandler.registerPackets();
+		CapabilityManager.INSTANCE.register(IPull.class, new PullStorage(), PullFactory::new);
+		proxy.preInit();
+	}
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-        proxy.init();
-    }
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+		proxy.init();
+	}
 
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit();
-    }
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		proxy.postInit();
+	}
 }

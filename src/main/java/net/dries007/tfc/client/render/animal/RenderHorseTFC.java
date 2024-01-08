@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderHorseTFC extends RenderHorse {
-    public RenderHorseTFC(RenderManager renderManager) {
-        super(renderManager);
-        this.mainModel = new ModelHorseTFC();
-    }
+	public RenderHorseTFC(RenderManager renderManager) {
+		super(renderManager);
+		this.mainModel = new ModelHorseTFC();
+	}
 }

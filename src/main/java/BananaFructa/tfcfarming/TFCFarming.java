@@ -13,48 +13,49 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import su.terrafirmagreg.Tags;
 
-@Mod(modid = TFCFarming.modId, name = TFCFarming.name, version = TFCFarming.version, dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
+import static su.terrafirmagreg.Constants.*;
+
+@Mod(modid = MODID_TFCFARMING, name = TFCFarming.name, version = Tags.VERSION, dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
 public class TFCFarming {
 
-    public static final String modId = "tfcfarming";
-    public static final String name = "TFC Farming";
-    public static final String version = "1.2.0";
+	public static final String name = "TFC Farming";
 
-    public static TFCFarming INSTANCE;
-    public static boolean tfcfloraeLoaded = false;
-    public static boolean firmalifeLoaded = false;
-    @SidedProxy(modId = TFCFarming.modId, clientSide = "BananaFructa.tfcfarming.ClientProxy", serverSide = "BananaFructa.tfcfarming.CommonProxy")
-    public static CommonProxy proxy;
-    public FarmingWorldStorage worldStorage;
+	public static TFCFarming INSTANCE;
+	public static boolean tfcfloraeLoaded = false;
+	public static boolean firmalifeLoaded = false;
+	@SidedProxy(modId = MODID_TFCFARMING, clientSide = "BananaFructa.tfcfarming.ClientProxy", serverSide = "BananaFructa.tfcfarming.CommonProxy")
+	public static CommonProxy proxy;
+	public FarmingWorldStorage worldStorage;
 
-    public TFCFarming() {
-        tfcfloraeLoaded = Loader.isModLoaded("tfcflorae");
-        firmalifeLoaded = Loader.isModLoaded("firmalife");
-        INSTANCE = this;
-    }
+	public TFCFarming() {
+		tfcfloraeLoaded = Loader.isModLoaded(MODID_TFCF);
+		firmalifeLoaded = Loader.isModLoaded(MODID_FL);
+		INSTANCE = this;
+	}
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        Config.load(event.getModConfigurationDirectory());
-    }
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		Config.load(event.getModConfigurationDirectory());
+	}
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(proxy);
-        PacketHandler.registerPackets();
-        GameRegistry.registerTileEntity(TECropBaseN.class, new ResourceLocation(modId, TECropBaseN.class.getSimpleName()));
-        if (firmalifeLoaded) {
-            GameRegistry.registerTileEntity(TEPlanterN.class, new ResourceLocation(modId, TEPlanterN.class.getSimpleName()));
-            GameRegistry.registerTileEntity(TEHangingPlanterN.class, new ResourceLocation(modId, TEHangingPlanterN.class.getSimpleName()));
-            GameRegistry.registerTileEntity(TEStemCropN.class, new ResourceLocation(modId, TEStemCropN.class.getSimpleName()));
-        }
-        proxy.init();
-    }
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(proxy);
+		PacketHandler.registerPackets();
+		GameRegistry.registerTileEntity(TECropBaseN.class, new ResourceLocation(MODID_TFCFARMING, TECropBaseN.class.getSimpleName()));
+		if (firmalifeLoaded) {
+			GameRegistry.registerTileEntity(TEPlanterN.class, new ResourceLocation(MODID_TFCFARMING, TEPlanterN.class.getSimpleName()));
+			GameRegistry.registerTileEntity(TEHangingPlanterN.class, new ResourceLocation(MODID_TFCFARMING, TEHangingPlanterN.class.getSimpleName()));
+			GameRegistry.registerTileEntity(TEStemCropN.class, new ResourceLocation(MODID_TFCFARMING, TEStemCropN.class.getSimpleName()));
+		}
+		proxy.init();
+	}
 
-    @Mod.EventHandler
-    public void serverStaring(FMLServerStartingEvent event) {
-        worldStorage = FarmingWorldStorage.get(event.getServer().getWorld(0));
-    }
+	@Mod.EventHandler
+	public void serverStaring(FMLServerStartingEvent event) {
+		worldStorage = FarmingWorldStorage.get(event.getServer().getWorld(0));
+	}
 
 }

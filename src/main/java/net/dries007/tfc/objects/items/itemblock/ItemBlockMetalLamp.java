@@ -37,120 +37,120 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
-    private static final Map<Metal, ItemBlockMetalLamp> TABLE = new HashMap<>();
-    public static int CAPACITY;
+	private static final Map<Metal, ItemBlockMetalLamp> TABLE = new HashMap<>();
+	public static int CAPACITY;
 
-    public ItemBlockMetalLamp(Metal metal) {
-        super(BlockMetalLamp.get(metal));
-        CAPACITY = ConfigTFC.Devices.LAMP.tank;
-        if (!TABLE.containsKey(metal))
-            TABLE.put(metal, this);
+	public ItemBlockMetalLamp(Metal metal) {
+		super(BlockMetalLamp.get(metal));
+		CAPACITY = ConfigTFC.Devices.LAMP.tank;
+		if (!TABLE.containsKey(metal))
+			TABLE.put(metal, this);
 
-        // In the interest of not writing a joint heat / fluid capability that extends ICapabilityProvider, I think this is justified
-        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(this), () -> new ItemHeatHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
-        OreDictionaryHelper.register(this, "lamp");
-    }
+		// In the interest of not writing a joint heat / fluid capability that extends ICapabilityProvider, I think this is justified
+		CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(this), () -> new ItemHeatHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+		OreDictionaryHelper.register(this, "lamp");
+	}
 
-    public static Set<Fluid> getValidFluids() {
-        String[] fluidNames = ConfigTFC.Devices.LAMP.fuels;
-        Set<Fluid> validFluids = new HashSet<>();
-        for (String fluidName : fluidNames) {
-            validFluids.add(FluidRegistry.getFluid(fluidName));
-        }
-        return validFluids;
-    }
+	public static Set<Fluid> getValidFluids() {
+		String[] fluidNames = ConfigTFC.Devices.LAMP.fuels;
+		Set<Fluid> validFluids = new HashSet<>();
+		for (String fluidName : fluidNames) {
+			validFluids.add(FluidRegistry.getFluid(fluidName));
+		}
+		return validFluids;
+	}
 
-    public static Item get(Metal metal) {
-        return TABLE.get(metal);
-    }
+	public static Item get(Metal metal) {
+		return TABLE.get(metal);
+	}
 
-    @Override
-    public boolean canStack(@Nonnull ItemStack stack) {
-        IFluidHandler lampCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (lampCap != null) {
-            return lampCap.drain(CAPACITY, false) == null;
-        }
-        return true;
-    }
+	@Override
+	public boolean canStack(@Nonnull ItemStack stack) {
+		IFluidHandler lampCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+		if (lampCap != null) {
+			return lampCap.drain(CAPACITY, false) == null;
+		}
+		return true;
+	}
 
-    @Override
-    @Nonnull
-    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (fluidCap != null) {
-            FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
-            if (fluidStack != null) {
-                String fluidName = fluidStack.getLocalizedName();
-                return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
-            }
-        }
-        return super.getItemStackDisplayName(stack);
-    }
+	@Override
+	@Nonnull
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+		IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+		if (fluidCap != null) {
+			FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
+			if (fluidStack != null) {
+				String fluidName = fluidStack.getLocalizedName();
+				return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
+			}
+		}
+		return super.getItemStackDisplayName(stack);
+	}
 
-    @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
-    }
+	@Override
+	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
+	}
 
-    @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
-        if (isInCreativeTab(tab)) {
-            items.add(new ItemStack(this));
-            for (Fluid fluid : getValidFluids()) {
-                ItemStack stack = new ItemStack(this);
-                IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-                if (cap != null) {
-                    cap.fill(new FluidStack(fluid, CAPACITY), true);
-                }
-                items.add(stack);
-            }
-        }
-    }
+	@Override
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+		if (isInCreativeTab(tab)) {
+			items.add(new ItemStack(this));
+			for (Fluid fluid : getValidFluids()) {
+				ItemStack stack = new ItemStack(this);
+				IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+				if (cap != null) {
+					cap.fill(new FluidStack(fluid, CAPACITY), true);
+				}
+				items.add(stack);
+			}
+		}
+	}
 
-    //no need for @Override itemRightClick to fill or place since fluidhandler interactions and placement are handled before it is called
+	//no need for @Override itemRightClick to fill or place since fluidhandler interactions and placement are handled before it is called
 
-    /**
-     * @param stack the item stack. This can assume that it is of the right item type and do casts without checking
-     * @return the metal of the stack
-     */
-    @Nullable
-    @Override
-    public Metal getMetal(ItemStack stack) {
-        return ((BlockMetalLamp) (super.block)).getMetal();
-    }
+	/**
+	 * @param stack the item stack. This can assume that it is of the right item type and do casts without checking
+	 * @return the metal of the stack
+	 */
+	@Nullable
+	@Override
+	public Metal getMetal(ItemStack stack) {
+		return ((BlockMetalLamp) (super.block)).getMetal();
+	}
 
-    /**
-     * @param stack The item stack
-     * @return the amount of liquid metal that this item will create (in TFC units or mB: 1 unit = 1 mB)
-     */
-    @Override
-    public int getSmeltAmount(ItemStack stack) {
-        return 100;
-    }
+	/**
+	 * @param stack The item stack
+	 * @return the amount of liquid metal that this item will create (in TFC units or mB: 1 unit = 1 mB)
+	 */
+	@Override
+	public int getSmeltAmount(ItemStack stack) {
+		return 100;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addMetalInfo(ItemStack stack, List<String> text) // shamelessly co-opted to show liquid too
-    {
-        IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        boolean spacer = false;
-        if (fluidCap != null) {
-            FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
-            if (fluidStack != null) {
-                spacer = true;
-                text.add("");
-                String fluidName = fluidStack.getLocalizedName();
-                text.add(I18n.format("tfc.tooltip.barrel_fluid", fluidStack.amount, fluidName));
-            }
-        }
-        Metal metal = getMetal(stack);
-        if (metal != null) {
-            if (!spacer) {
-                text.add("");
-            }
-            text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(metal))));
-            text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));
-            text.add(I18n.format(Helpers.getEnumName(metal.getTier())));
-        }
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addMetalInfo(ItemStack stack, List<String> text) // shamelessly co-opted to show liquid too
+	{
+		IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+		boolean spacer = false;
+		if (fluidCap != null) {
+			FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
+			if (fluidStack != null) {
+				spacer = true;
+				text.add("");
+				String fluidName = fluidStack.getLocalizedName();
+				text.add(I18n.format("tfc.tooltip.barrel_fluid", fluidStack.amount, fluidName));
+			}
+		}
+		Metal metal = getMetal(stack);
+		if (metal != null) {
+			if (!spacer) {
+				text.add("");
+			}
+			text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(metal))));
+			text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));
+			text.add(I18n.format(Helpers.getEnumName(metal.getTier())));
+		}
+	}
 }

@@ -8,16 +8,16 @@ import net.minecraftforge.items.IItemHandler;
 import pieman.caffeineaddon.blocks.TEDryingMat;
 
 public class ContainerDryingMat extends ContainerTE<TEDryingMat> {
-    public ContainerDryingMat(InventoryPlayer playerInv, TEDryingMat te) {
-        super(playerInv, te);
-    }
+	public ContainerDryingMat(InventoryPlayer playerInv, TEDryingMat te) {
+		super(playerInv, te);
+	}
 
-    @Override
-    protected void addContainerSlots() {
-        IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory != null) {
-            addSlotToContainer(new SlotCallback(inventory, TEDryingMat.SLOT, 80, 34, tile));
-        }
-    }
+	@Override
+	protected void addContainerSlots() {
+		IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+		if (inventory != null) {
+			addSlotToContainer(new SlotCallback(inventory, TEDryingMat.SLOT, 80, 34, tile));
+		}
+	}
 
 }

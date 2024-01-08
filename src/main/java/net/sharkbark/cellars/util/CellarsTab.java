@@ -6,16 +6,18 @@ import net.sharkbark.cellars.init.ModBlocks;
 
 import javax.annotation.Nonnull;
 
+import static su.terrafirmagreg.Constants.MODID_CELLARS;
+
 public class CellarsTab extends CreativeTabs {
 
-    public CellarsTab() {
-        super(Reference.MOD_ID);
-    }
+	public CellarsTab() {
+		super(MODID_CELLARS);
+	}
 
-    @Nonnull
-    @Override
-    public ItemStack createIcon() {
-        return new ItemStack(ModBlocks.CELLAR_DOOR);
-    }
+	@Nonnull
+	@Override
+	public ItemStack createIcon() {
+		return new ItemStack(ModBlocks.CELLAR_DOOR);
+	}
 
 }

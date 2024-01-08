@@ -22,66 +22,66 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class CTOven {
 
-    @ZenMethod
-    public static void addRecipe(String recipe_name, IIngredient input, IItemStack output, int duration) {
-        OvenRecipe recipe = new OvenRecipe(CTHelper.getInternalIngredient(input), InputHelper.toStack(output), duration).setRegistryName(recipe_name);
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                RegistriesFL.OVEN.register(recipe);
-            }
+	@ZenMethod
+	public static void addRecipe(String recipe_name, IIngredient input, IItemStack output, int duration) {
+		OvenRecipe recipe = new OvenRecipe(CTHelper.getInternalIngredient(input), InputHelper.toStack(output), duration).setRegistryName(recipe_name);
+		CraftTweakerAPI.apply(new IAction() {
+			@Override
+			public void apply() {
+				RegistriesFL.OVEN.register(recipe);
+			}
 
-            @Override
-            public String describe() {
-                return "Adding Oven recipe " + recipe_name;
-            }
-        });
-    }
+			@Override
+			public String describe() {
+				return "Adding Oven recipe " + recipe_name;
+			}
+		});
+	}
 
-    @ZenMethod
-    public static void removeRecipe(String recipe_name) {
+	@ZenMethod
+	public static void removeRecipe(String recipe_name) {
 
-        OvenRecipe recipe = RegistriesFL.OVEN.getValue(new ResourceLocation(recipe_name));
+		OvenRecipe recipe = RegistriesFL.OVEN.getValue(new ResourceLocation(recipe_name));
 
-        if (recipe != null) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) RegistriesFL.OVEN;
-                    Oven.remove(recipe.getRegistryName());
-                }
+		if (recipe != null) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) RegistriesFL.OVEN;
+					Oven.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    return "Removing Oven recipe " + recipe_name;
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					return "Removing Oven recipe " + recipe_name;
+				}
+			});
+		}
+	}
 
-    @ZenMethod
-    public static void removeRecipe(IItemStack output) {
-        if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
-        ArrayList<OvenRecipe> removeList = new ArrayList<>();
+	@ZenMethod
+	public static void removeRecipe(IItemStack output) {
+		if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
+		ArrayList<OvenRecipe> removeList = new ArrayList<>();
 
-        RegistriesFL.OVEN.getValuesCollection()
-                .stream()
-                .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
-                .forEach(removeList::add);
+		RegistriesFL.OVEN.getValuesCollection()
+		                 .stream()
+		                 .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
+		                 .forEach(removeList::add);
 
-        for (OvenRecipe recipe : removeList) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) RegistriesFL.OVEN;
-                    Oven.remove(recipe.getRegistryName());
-                }
+		for (OvenRecipe recipe : removeList) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) RegistriesFL.OVEN;
+					Oven.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    return "Removing Oven recipe for output " + output.getDisplayName();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					return "Removing Oven recipe for output " + output.getDisplayName();
+				}
+			});
+		}
+	}
 }

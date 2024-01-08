@@ -20,62 +20,68 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.terrafirmacraft.Bloomery")
 @ZenRegister
 public class CTBloomery {
-    @SuppressWarnings("unchecked")
-    @ZenMethod
-    public static void addRecipe(String metal, crafttweaker.api.item.IIngredient additive) {
-        //noinspection ConstantConditions
-        Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
-        if (result == null) {
-            throw new IllegalArgumentException("Metal specified not found!");
-        }
-        if (BloomeryRecipe.get(result) != null) {
-            throw new IllegalStateException("Recipe for that metal already exists!");
-        }
-        if (additive == null)
-            throw new IllegalArgumentException("Additive is not allowed to be empty");
-        if (additive instanceof ILiquidStack)
-            throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");
-        //noinspection rawtypes
-        IIngredient ingredient = CTHelper.getInternalIngredient(additive);
-        BloomeryRecipe recipe = new BloomeryRecipe(result, ingredient);
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                TFCRegistries.BLOOMERY.register(recipe);
-            }
+	@SuppressWarnings("unchecked")
+	@ZenMethod
+	public static void addRecipe(String metal, crafttweaker.api.item.IIngredient additive) {
+		//noinspection ConstantConditions
+		Metal result = TFCRegistries.METALS.getValuesCollection()
+		                                   .stream()
+		                                   .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal))
+		                                   .findFirst()
+		                                   .orElse(null);
+		if (result == null) {
+			throw new IllegalArgumentException("Metal specified not found!");
+		}
+		if (BloomeryRecipe.get(result) != null) {
+			throw new IllegalStateException("Recipe for that metal already exists!");
+		}
+		if (additive == null)
+			throw new IllegalArgumentException("Additive is not allowed to be empty");
+		if (additive instanceof ILiquidStack)
+			throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");
+		//noinspection rawtypes
+		IIngredient ingredient = CTHelper.getInternalIngredient(additive);
+		BloomeryRecipe recipe = new BloomeryRecipe(result, ingredient);
+		CraftTweakerAPI.apply(new IAction() {
+			@Override
+			public void apply() {
+				TFCRegistries.BLOOMERY.register(recipe);
+			}
 
-            @Override
-            public String describe() {
-                //noinspection ConstantConditions
-                return "Adding bloomery recipe for " + result.getRegistryName().getPath();
-            }
-        });
-    }
+			@Override
+			public String describe() {
+				//noinspection ConstantConditions
+				return "Adding bloomery recipe for " + result.getRegistryName().getPath();
+			}
+		});
+	}
 
-    @ZenMethod
-    public static void removeRecipe(String metal) {
-        //noinspection ConstantConditions
-        Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
-        if (result == null) {
-            throw new IllegalArgumentException("Metal specified not found!");
-        }
-        BloomeryRecipe recipe = BloomeryRecipe.get(result);
-        if (recipe != null) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable<BloomeryRecipe> modRegistry = (IForgeRegistryModifiable<BloomeryRecipe>) TFCRegistries.BLOOMERY;
-                    modRegistry.remove(recipe.getRegistryName());
-                }
+	@ZenMethod
+	public static void removeRecipe(String metal) {
+		//noinspection ConstantConditions
+		Metal result = TFCRegistries.METALS.getValuesCollection()
+		                                   .stream()
+		                                   .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal))
+		                                   .findFirst()
+		                                   .orElse(null);
+		if (result == null) {
+			throw new IllegalArgumentException("Metal specified not found!");
+		}
+		BloomeryRecipe recipe = BloomeryRecipe.get(result);
+		if (recipe != null) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable<BloomeryRecipe> modRegistry = (IForgeRegistryModifiable<BloomeryRecipe>) TFCRegistries.BLOOMERY;
+					modRegistry.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    //noinspection ConstantConditions
-                    return "Removing bloomery recipe " + recipe.getRegistryName().toString();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					//noinspection ConstantConditions
+					return "Removing bloomery recipe " + recipe.getRegistryName().toString();
+				}
+			});
+		}
+	}
 }

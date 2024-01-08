@@ -32,168 +32,168 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class UnmoldEarthenwareMalletRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
-    private final NonNullList<Ingredient> input;
-    private final ResourceLocation group;
-    private final String type;
-    private final float chance;
+	private final NonNullList<Ingredient> input;
+	private final ResourceLocation group;
+	private final String type;
+	private final float chance;
 
-    private UnmoldEarthenwareMalletRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull String type, float chance) {
-        this.group = group;
-        this.input = input;
-        this.type = type;
-        this.chance = chance;
-    }
+	private UnmoldEarthenwareMalletRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull String type, float chance) {
+		this.group = group;
+		this.input = input;
+		this.type = type;
+		this.chance = chance;
+	}
 
-    public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
-        boolean foundMold = false;
+	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+		boolean foundMold = false;
 
-        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                if (!(stack.getItem() instanceof ItemEarthenwareMalletMoldFL)) {
-                    return false;
-                }
+		for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+			ItemStack stack = inv.getStackInSlot(slot);
+			if (!stack.isEmpty()) {
+				if (!(stack.getItem() instanceof ItemEarthenwareMalletMoldFL)) {
+					return false;
+				}
 
-                ItemEarthenwareMalletMoldFL moldItemEarthenware = (ItemEarthenwareMalletMoldFL) stack.getItem();
-                IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                if (!(cap instanceof IMoldHandler)) {
-                    return false;
-                }
+				ItemEarthenwareMalletMoldFL moldItemEarthenware = (ItemEarthenwareMalletMoldFL) stack.getItem();
+				IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+				if (!(cap instanceof IMoldHandler)) {
+					return false;
+				}
 
-                IMoldHandler moldHandler = (IMoldHandler) cap;
-                if (moldHandler.isMolten()) {
-                    return false;
-                }
+				IMoldHandler moldHandler = (IMoldHandler) cap;
+				if (moldHandler.isMolten()) {
+					return false;
+				}
 
-                Metal metal = moldHandler.getMetal();
-                if (metal == null || !moldItemEarthenware.getToolName().equals(this.type) || foundMold) {
-                    return false;
-                }
+				Metal metal = moldHandler.getMetal();
+				if (metal == null || !moldItemEarthenware.getToolName().equals(this.type) || foundMold) {
+					return false;
+				}
 
-                foundMold = true;
-            }
-        }
+				foundMold = true;
+			}
+		}
 
-        return foundMold;
-    }
+		return foundMold;
+	}
 
-    @Nonnull
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
-        ItemStack moldStack = null;
+	@Nonnull
+	public ItemStack getCraftingResult(InventoryCrafting inv) {
+		ItemStack moldStack = null;
 
-        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty()) {
-                if (!(stack.getItem() instanceof ItemEarthenwareMalletMoldFL)) {
-                    return ItemStack.EMPTY;
-                }
+		for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+			ItemStack stack = inv.getStackInSlot(slot);
+			if (!stack.isEmpty()) {
+				if (!(stack.getItem() instanceof ItemEarthenwareMalletMoldFL)) {
+					return ItemStack.EMPTY;
+				}
 
-                ItemEarthenwareMalletMoldFL tmp = (ItemEarthenwareMalletMoldFL) stack.getItem();
-                if (!tmp.getToolName().equals(this.type) || moldStack != null) {
-                    return ItemStack.EMPTY;
-                }
+				ItemEarthenwareMalletMoldFL tmp = (ItemEarthenwareMalletMoldFL) stack.getItem();
+				if (!tmp.getToolName().equals(this.type) || moldStack != null) {
+					return ItemStack.EMPTY;
+				}
 
-                moldStack = stack;
-            }
-        }
+				moldStack = stack;
+			}
+		}
 
-        if (moldStack != null) {
-            IFluidHandler moldCap = moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-            if (moldCap instanceof IMoldHandler) {
-                IMoldHandler moldHandler = (IMoldHandler) moldCap;
-                if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
-                    return this.getOutputItem(moldHandler);
-                }
-            }
-        }
+		if (moldStack != null) {
+			IFluidHandler moldCap = moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+			if (moldCap instanceof IMoldHandler) {
+				IMoldHandler moldHandler = (IMoldHandler) moldCap;
+				if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
+					return this.getOutputItem(moldHandler);
+				}
+			}
+		}
 
-        return ItemStack.EMPTY;
-    }
+		return ItemStack.EMPTY;
+	}
 
-    public boolean canFit(int width, int height) {
-        return true;
-    }
+	public boolean canFit(int width, int height) {
+		return true;
+	}
 
-    @Nonnull
-    public ItemStack getRecipeOutput() {
-        return ItemStack.EMPTY;
-    }
+	@Nonnull
+	public ItemStack getRecipeOutput() {
+		return ItemStack.EMPTY;
+	}
 
-    @Nonnull
-    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-        for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
-            ItemStack stack = inv.getStackInSlot(slot);
-            if (!stack.isEmpty() && stack.getItem() instanceof ItemEarthenwareMalletMoldFL) {
-                EntityPlayer player = ForgeHooks.getCraftingPlayer();
-                if (!player.world.isRemote) {
-                    stack = this.getMoldResult(stack);
-                    if (!stack.isEmpty()) {
-                        ItemHandlerHelper.giveItemToPlayer(player, stack);
-                    } else {
-                        player.world.playSound(null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                    }
-                }
-            }
-        }
+	@Nonnull
+	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+		for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
+			ItemStack stack = inv.getStackInSlot(slot);
+			if (!stack.isEmpty() && stack.getItem() instanceof ItemEarthenwareMalletMoldFL) {
+				EntityPlayer player = ForgeHooks.getCraftingPlayer();
+				if (!player.world.isRemote) {
+					stack = this.getMoldResult(stack);
+					if (!stack.isEmpty()) {
+						ItemHandlerHelper.giveItemToPlayer(player, stack);
+					} else {
+						player.world.playSound(null, player.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+					}
+				}
+			}
+		}
 
-        return ForgeHooks.defaultRecipeGetRemainingItems(inv);
-    }
+		return ForgeHooks.defaultRecipeGetRemainingItems(inv);
+	}
 
-    @Nonnull
-    public NonNullList<Ingredient> getIngredients() {
-        return this.input;
-    }
+	@Nonnull
+	public NonNullList<Ingredient> getIngredients() {
+		return this.input;
+	}
 
-    public boolean isDynamic() {
-        return true;
-    }
+	public boolean isDynamic() {
+		return true;
+	}
 
-    @Nonnull
-    public String getGroup() {
-        return this.group == null ? "" : this.group.toString();
-    }
+	@Nonnull
+	public String getGroup() {
+		return this.group == null ? "" : this.group.toString();
+	}
 
-    public String getType() {
-        return this.type;
-    }
+	public String getType() {
+		return this.type;
+	}
 
-    public float getChance() {
-        return this.chance;
-    }
+	public float getChance() {
+		return this.chance;
+	}
 
-    public ItemStack getMoldResult(ItemStack moldIn) {
-        return Constants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
-    }
+	public ItemStack getMoldResult(ItemStack moldIn) {
+		return Constants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
+	}
 
-    public ItemStack getOutputItem(IMoldHandler moldHandler) {
-        Metal m = moldHandler.getMetal();
-        if (m != null) {
-            ItemStack output = new ItemStack(ItemsFL.getMetalMalletHead(m));
-            IItemHeat heat = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (heat != null) {
-                heat.setTemperature(moldHandler.getTemperature());
-            }
+	public ItemStack getOutputItem(IMoldHandler moldHandler) {
+		Metal m = moldHandler.getMetal();
+		if (m != null) {
+			ItemStack output = new ItemStack(ItemsFL.getMetalMalletHead(m));
+			IItemHeat heat = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+			if (heat != null) {
+				heat.setTemperature(moldHandler.getTemperature());
+			}
 
-            return output;
-        } else {
-            return ItemStack.EMPTY;
-        }
-    }
+			return output;
+		} else {
+			return ItemStack.EMPTY;
+		}
+	}
 
-    public static class Factory implements IRecipeFactory {
-        public Factory() {
-        }
+	public static class Factory implements IRecipeFactory {
+		public Factory() {
+		}
 
-        public IRecipe parse(JsonContext context, JsonObject json) {
-            NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
-            String result = JsonUtils.getString(json, "result");
-            String type = result.toLowerCase().split("_")[0];
-            String group = JsonUtils.getString(json, "group", "");
-            float chance = 0.0F;
-            if (JsonUtils.hasField(json, "chance")) {
-                chance = JsonUtils.getFloat(json, "chance");
-            }
-            return new UnmoldEarthenwareMalletRecipe(group.isEmpty() ? new ResourceLocation(result) : new ResourceLocation(group), ingredients, type, chance);
-        }
-    }
+		public IRecipe parse(JsonContext context, JsonObject json) {
+			NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
+			String result = JsonUtils.getString(json, "result");
+			String type = result.toLowerCase().split("_")[0];
+			String group = JsonUtils.getString(json, "group", "");
+			float chance = 0.0F;
+			if (JsonUtils.hasField(json, "chance")) {
+				chance = JsonUtils.getFloat(json, "chance");
+			}
+			return new UnmoldEarthenwareMalletRecipe(group.isEmpty() ? new ResourceLocation(result) : new ResourceLocation(group), ingredients, type, chance);
+		}
+	}
 }

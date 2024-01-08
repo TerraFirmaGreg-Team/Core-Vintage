@@ -16,22 +16,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class CheesewheelProvider implements IWailaBlock {
-    @Nonnull
-    @Override
-    public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound NBT) {
-        List<String> currentTooltip = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockCheesewheel) {
-            AgingFL age = state.getValue(StatePropertiesFL.AGE);
-            currentTooltip.add(age.getFormat() + new TextComponentTranslation(age.getTranslationKey()).getFormattedText());
-        }
+	@Nonnull
+	@Override
+	public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound NBT) {
+		List<String> currentTooltip = new ArrayList<>();
+		IBlockState state = world.getBlockState(pos);
+		if (state.getBlock() instanceof BlockCheesewheel) {
+			AgingFL age = state.getValue(StatePropertiesFL.AGE);
+			currentTooltip.add(age.getFormat() + new TextComponentTranslation(age.getTranslationKey()).getFormattedText());
+		}
 
-        return currentTooltip;
-    }
+		return currentTooltip;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(BlockCheesewheel.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return Collections.singletonList(BlockCheesewheel.class);
+	}
 }

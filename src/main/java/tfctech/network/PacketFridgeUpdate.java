@@ -14,40 +14,40 @@ import tfctech.objects.tileentities.TEFridge;
 import javax.annotation.Nonnull;
 
 public class PacketFridgeUpdate implements IMessage {
-    private BlockPos pos;
-    private float efficiency;
+	private BlockPos pos;
+	private float efficiency;
 
-    public PacketFridgeUpdate() {}
+	public PacketFridgeUpdate() {}
 
-    public PacketFridgeUpdate(@Nonnull BlockPos pos, float efficiency) {
-        this.pos = pos;
-        this.efficiency = efficiency;
-    }
+	public PacketFridgeUpdate(@Nonnull BlockPos pos, float efficiency) {
+		this.pos = pos;
+		this.efficiency = efficiency;
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        pos = BlockPos.fromLong(buf.readLong());
-        efficiency = buf.readFloat();
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		pos = BlockPos.fromLong(buf.readLong());
+		efficiency = buf.readFloat();
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeLong(pos.toLong());
-        buf.writeFloat(efficiency);
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeLong(pos.toLong());
+		buf.writeFloat(efficiency);
+	}
 
-    public static class Handler implements IMessageHandler<PacketFridgeUpdate, IMessage> {
-        @Override
-        public IMessage onMessage(PacketFridgeUpdate message, MessageContext ctx) {
-            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-            if (player != null) {
-                World world = player.getEntityWorld();
-                TEFridge te = Helpers.getTE(world, message.pos, TEFridge.class);
-                if (te != null) {
-                    te.updateClient(message.efficiency);
-                }
-            }
-            return null;
-        }
-    }
+	public static class Handler implements IMessageHandler<PacketFridgeUpdate, IMessage> {
+		@Override
+		public IMessage onMessage(PacketFridgeUpdate message, MessageContext ctx) {
+			EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+			if (player != null) {
+				World world = player.getEntityWorld();
+				TEFridge te = Helpers.getTE(world, message.pos, TEFridge.class);
+				if (te != null) {
+					te.updateClient(message.efficiency);
+				}
+			}
+			return null;
+		}
+	}
 }

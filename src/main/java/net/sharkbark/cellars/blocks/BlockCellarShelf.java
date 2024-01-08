@@ -26,74 +26,74 @@ import javax.annotation.Nullable;
 
 public class BlockCellarShelf extends BlockContainer implements IHasModel {
 
-    public BlockCellarShelf(String name, Material material) {
-        super(Material.WOOD);
-        setTranslationKey(name);
-        setRegistryName(name);
-        setCreativeTab(Main.creativeTab);
-        setHardness(2F);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
-    }
+	public BlockCellarShelf(String name, Material material) {
+		super(Material.WOOD);
+		setTranslationKey(name);
+		setRegistryName(name);
+		setCreativeTab(Main.creativeTab);
+		setHardness(2F);
+		ModBlocks.BLOCKS.add(this);
+		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
+	}
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY, float hitZ) {
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY, float hitZ) {
 
-        if (!worldIn.isRemote) {
-            player.openGui(Main.INSTANCE, Reference.GUI_CELLAR_SHELF, worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
+		if (!worldIn.isRemote) {
+			player.openGui(Main.INSTANCE, Reference.GUI_CELLAR_SHELF, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		}
 
-        return true;
+		return true;
 
-    }
+	}
 
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity entity = worldIn.getTileEntity(pos);
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		if (stack.hasDisplayName()) {
+			TileEntity entity = worldIn.getTileEntity(pos);
 
-            if (entity instanceof TECellarShelf) {
-                //((TECellarShelf)entity).setCustomName(stack.getDisplayName());
-            }
-        }
+			if (entity instanceof TECellarShelf) {
+				//((TECellarShelf)entity).setCustomName(stack.getDisplayName());
+			}
+		}
 
-    }
+	}
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TECellarShelf tile = Helpers.getTE(worldIn, pos, TECellarShelf.class);
-        if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
-        }
-        super.breakBlock(worldIn, pos, state);
-    }
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		TECellarShelf tile = Helpers.getTE(worldIn, pos, TECellarShelf.class);
+		if (tile != null) {
+			tile.onBreakBlock(worldIn, pos, state);
+		}
+		super.breakBlock(worldIn, pos, state);
+	}
 
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World world, int i) {
-        if (!world.isRemote) {
-            System.out.println("Client : Creating TileEntity");
-        } else {
-            System.out.println("Server : Creating TileEntity");
-        }
-        return new TECellarShelf();
-    }
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(World world, int i) {
+		if (!world.isRemote) {
+			System.out.println("Client : Creating TileEntity");
+		} else {
+			System.out.println("Server : Creating TileEntity");
+		}
+		return new TECellarShelf();
+	}
 
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState p_isOpaqueCube_1_) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState p_isOpaqueCube_1_) {
+		return false;
+	}
 
-    @Override
-    public void registerModels() {
-        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-    }
+	@Override
+	public void registerModels() {
+		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	}
 
 
 }

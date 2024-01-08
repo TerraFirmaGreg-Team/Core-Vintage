@@ -21,46 +21,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemRockToolHead extends ItemTFC implements IRockObject {
-    private static final EnumMap<Rock.ToolType, Map<RockCategory, ItemRockToolHead>> TABLE = new EnumMap<>(Rock.ToolType.class);
-    private final RockCategory category;
-    private final Rock.ToolType type;
+	private static final EnumMap<Rock.ToolType, Map<RockCategory, ItemRockToolHead>> TABLE = new EnumMap<>(Rock.ToolType.class);
+	private final RockCategory category;
+	private final Rock.ToolType type;
 
-    public ItemRockToolHead(RockCategory category, Rock.ToolType type) {
-        this.type = type;
-        this.category = category;
-        if (!TABLE.containsKey(type))
-            TABLE.put(type, new HashMap<>());
-        TABLE.get(type).put(category, this);
+	public ItemRockToolHead(RockCategory category, Rock.ToolType type) {
+		this.type = type;
+		this.category = category;
+		if (!TABLE.containsKey(type))
+			TABLE.put(type, new HashMap<>());
+		TABLE.get(type).put(category, this);
 
-        OreDictionaryHelper.register(this, type, "head");
-        OreDictionaryHelper.register(this, type, "head", category);
-    }
+		OreDictionaryHelper.register(this, type, "head");
+		OreDictionaryHelper.register(this, type, "head", category);
+	}
 
-    public static ItemRockToolHead get(RockCategory cat, Rock.ToolType type) {
-        return TABLE.get(type).get(cat);
-    }
+	public static ItemRockToolHead get(RockCategory cat, Rock.ToolType type) {
+		return TABLE.get(type).get(cat);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack) {
-        return Size.SMALL; // Stored everywhere
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.SMALL; // Stored everywhere
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.LIGHT; // Stacksize = 32
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.LIGHT; // Stacksize = 32
+	}
 
-    @Nullable
-    @Override
-    public Rock getRock(ItemStack stack) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public Rock getRock(ItemStack stack) {
+		return null;
+	}
 
-    @Nonnull
-    @Override
-    public RockCategory getRockCategory(ItemStack stack) {
-        return category;
-    }
+	@Nonnull
+	@Override
+	public RockCategory getRockCategory(ItemStack stack) {
+		return category;
+	}
 }

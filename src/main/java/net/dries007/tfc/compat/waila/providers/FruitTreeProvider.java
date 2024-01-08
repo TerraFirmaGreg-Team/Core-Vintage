@@ -32,66 +32,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTreeProvider implements IWailaBlock {
-    private static void addInfo(IFruitTree tree, TETickCounter te, float temperature, float rainfall, List<String> currentTooltip) {
-        if (tree.isValidForGrowth(temperature, rainfall)) {
-            currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
-            if (te != null) {
-                long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-                // Don't show 100% since it still needs to check on randomTick to grow
-                float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
-                String growth = String.format("%d%%", Math.round(perc));
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
-            }
-        } else {
-            currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
-        }
-    }
+	private static void addInfo(IFruitTree tree, TETickCounter te, float temperature, float rainfall, List<String> currentTooltip) {
+		if (tree.isValidForGrowth(temperature, rainfall)) {
+			currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growing").getFormattedText());
+			if (te != null) {
+				long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+				// Don't show 100% since it still needs to check on randomTick to grow
+				float perc = Math.min(0.99F, hours / (tree.getGrowthTime() * (float) ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) * 100;
+				String growth = String.format("%d%%", Math.round(perc));
+				currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());
+			}
+		} else {
+			currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.not_growing").getFormattedText());
+		}
+	}
 
-    @Nonnull
-    @Override
-    public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-        List<String> currentTooltip = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockFruitTreeLeaves) {
-            BlockFruitTreeLeaves block = (BlockFruitTreeLeaves) state.getBlock();
-            if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree().isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
-                if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
-                    TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
-                    addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
-                }
-            } else {
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
-                for (Month month : Month.values()) {
-                    if (block.getTree().isHarvestMonth(month)) {
-                        currentTooltip.add(TerraFirmaCraft.getProxy().getMonthName(month, true));
-                    }
-                }
-            }
-        } else if (state.getBlock() instanceof BlockFruitTreeSapling) {
-            BlockFruitTreeSapling block = (BlockFruitTreeSapling) state.getBlock();
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
-            addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
-        } else if (state.getBlock() instanceof BlockFruitTreeTrunk) {
-            // Gets the top most trunk, since that one is the responsible for growth
-            IBlockState topMost = state;
-            while (world.getBlockState(pos.up()).getBlock() instanceof BlockFruitTreeTrunk) {
-                pos = pos.up();
-                topMost = world.getBlockState(pos);
-            }
-            if (world.getBlockState(pos.up()).getBlock() instanceof BlockFruitTreeBranch) {
-                // Abort, this tree is already fully grown
-                return currentTooltip;
-            }
-            BlockFruitTreeTrunk block = (BlockFruitTreeTrunk) topMost.getBlock();
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
-            addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
-        }
-        return currentTooltip;
-    }
+	@Nonnull
+	@Override
+	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+		List<String> currentTooltip = new ArrayList<>();
+		IBlockState state = world.getBlockState(pos);
+		if (state.getBlock() instanceof BlockFruitTreeLeaves) {
+			BlockFruitTreeLeaves block = (BlockFruitTreeLeaves) state.getBlock();
+			if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree()
+			                                                             .isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+				if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
+					TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+					addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
+				}
+			} else {
+				currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
+				for (Month month : Month.values()) {
+					if (block.getTree().isHarvestMonth(month)) {
+						currentTooltip.add(TerraFirmaCraft.getProxy().getMonthName(month, true));
+					}
+				}
+			}
+		} else if (state.getBlock() instanceof BlockFruitTreeSapling) {
+			BlockFruitTreeSapling block = (BlockFruitTreeSapling) state.getBlock();
+			TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+			addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
+		} else if (state.getBlock() instanceof BlockFruitTreeTrunk) {
+			// Gets the top most trunk, since that one is the responsible for growth
+			IBlockState topMost = state;
+			while (world.getBlockState(pos.up()).getBlock() instanceof BlockFruitTreeTrunk) {
+				pos = pos.up();
+				topMost = world.getBlockState(pos);
+			}
+			if (world.getBlockState(pos.up()).getBlock() instanceof BlockFruitTreeBranch) {
+				// Abort, this tree is already fully grown
+				return currentTooltip;
+			}
+			BlockFruitTreeTrunk block = (BlockFruitTreeTrunk) topMost.getBlock();
+			TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+			addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
+		}
+		return currentTooltip;
+	}
 
-    @Nonnull
-    @Override
-    public List<Class<?>> getLookupClass() {
-        return ImmutableList.of(BlockFruitTreeLeaves.class, BlockFruitTreeSapling.class, BlockFruitTreeTrunk.class);
-    }
+	@Nonnull
+	@Override
+	public List<Class<?>> getLookupClass() {
+		return ImmutableList.of(BlockFruitTreeLeaves.class, BlockFruitTreeSapling.class, BlockFruitTreeTrunk.class);
+	}
 }

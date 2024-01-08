@@ -12,23 +12,23 @@ import pieman.caffeineaddon.util.IHasModel;
 
 public class BlockCoffeeTreeSapling extends BlockFruitTreeSapling implements IHasModel {
 
-    public BlockCoffeeTreeSapling(IFruitTree tree) {
-        super(tree);
-        setTranslationKey(tree.getName() + "_sapling");
-        setRegistryName(tree.getName() + "_sapling");
-        setCreativeTab(CreativeTabsTFC.CT_WOOD);
+	public BlockCoffeeTreeSapling(IFruitTree tree) {
+		super(tree);
+		setTranslationKey(tree.getName() + "_sapling");
+		setRegistryName(tree.getName() + "_sapling");
+		setCreativeTab(CreativeTabsTFC.CT_WOOD);
 
-        //the super does this but passes itself so forge doesn't register it
-        //OreDictionaryHelper.register(this, "tree", "sapling");
-        //OreDictionaryHelper.register(this, "tree", "sapling", tree.getName());
+		//the super does this but passes itself so forge doesn't register it
+		//OreDictionaryHelper.register(this, "tree", "sapling");
+		//OreDictionaryHelper.register(this, "tree", "sapling", tree.getName());
 
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(tree.getName() + "_sapling"));
-    }
+		ModBlocks.BLOCKS.add(this);
+		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(tree.getName() + "_sapling"));
+	}
 
-    @Override
-    public void registerModels() {
-        CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-    }
+	@Override
+	public void registerModels() {
+		CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	}
 
 }

@@ -8,7 +8,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemBlockCrate extends ItemBlockTFC implements IItemSize {
-    public ItemBlockCrate(BlockCrate block) {
-        super(block);
-    }
+	public ItemBlockCrate(BlockCrate block) {
+		super(block);
+	}
 }

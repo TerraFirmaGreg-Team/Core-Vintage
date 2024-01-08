@@ -9,29 +9,32 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import su.terrafirmagreg.Tags;
+
+import static su.terrafirmagreg.Constants.MODID_TIME4TFC;
 
 /**
  * @author AnodeCathode, dmillerw
  */
-@Mod(modid = "time4tfc", name = "Time4TFC", version = "@VERSION@", dependencies = "required-after:tfc")
+@Mod(modid = MODID_TIME4TFC, name = "Time4TFC", version = Tags.VERSION, dependencies = "required-after:tfc")
 public class time4tfc {
 
-    public static Configuration configuration;
+	public static Configuration configuration;
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        configuration = new Configuration(event.getSuggestedConfigurationFile());
-        configuration.load();
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		configuration = new Configuration(event.getSuggestedConfigurationFile());
+		configuration.load();
 
-        SessionData.loadFromConfiguration(configuration);
+		SessionData.loadFromConfiguration(configuration);
 
-        PacketHandler.initialize();
-        NetworkEventHandler.register();
+		PacketHandler.initialize();
+		NetworkEventHandler.register();
 
-    }
+	}
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        WorldProviderTooMuchTime.overrideDefault();
-    }
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		WorldProviderTooMuchTime.overrideDefault();
+	}
 }

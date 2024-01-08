@@ -27,81 +27,81 @@ import java.util.List;
 @ZenClass("mods.terrafirmacraft.Welding")
 @ZenRegister
 public class CTWelding {
-    @ZenMethod
-    public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input1, crafttweaker.api.item.IIngredient input2, IItemStack output, int minTier) {
-        addRecipe(registryName, input1, input2, output, minTier, null);
-    }
+	@ZenMethod
+	public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input1, crafttweaker.api.item.IIngredient input2, IItemStack output, int minTier) {
+		addRecipe(registryName, input1, input2, output, minTier, null);
+	}
 
-    @SuppressWarnings("unchecked")
-    @ZenMethod
-    public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input1, crafttweaker.api.item.IIngredient input2, IItemStack output, int minTier, String skillTypeName) {
-        if (output == null || input1 == null || input2 == null)
-            throw new IllegalArgumentException("Both inputs and output are not allowed to be empty");
-        if (input1 instanceof ILiquidStack || input2 instanceof ILiquidStack)
-            throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");
-        IIngredient ingredient1 = CTHelper.getInternalIngredient(input1);
-        IIngredient ingredient2 = CTHelper.getInternalIngredient(input2);
-        Metal.Tier tier = Metal.Tier.valueOf(minTier);
-        ItemStack outputStack = (ItemStack) output.getInternal();
-        SmithingSkill.Type skillType = skillTypeName == null ? null : SmithingSkill.Type.valueOf(skillTypeName.toUpperCase());
-        WeldingRecipe recipe = new WeldingRecipe(new ResourceLocation(registryName), ingredient1, ingredient2, outputStack, tier, skillType);
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                TFCRegistries.WELDING.register(recipe);
-            }
+	@SuppressWarnings("unchecked")
+	@ZenMethod
+	public static void addRecipe(String registryName, crafttweaker.api.item.IIngredient input1, crafttweaker.api.item.IIngredient input2, IItemStack output, int minTier, String skillTypeName) {
+		if (output == null || input1 == null || input2 == null)
+			throw new IllegalArgumentException("Both inputs and output are not allowed to be empty");
+		if (input1 instanceof ILiquidStack || input2 instanceof ILiquidStack)
+			throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");
+		IIngredient ingredient1 = CTHelper.getInternalIngredient(input1);
+		IIngredient ingredient2 = CTHelper.getInternalIngredient(input2);
+		Metal.Tier tier = Metal.Tier.valueOf(minTier);
+		ItemStack outputStack = (ItemStack) output.getInternal();
+		SmithingSkill.Type skillType = skillTypeName == null ? null : SmithingSkill.Type.valueOf(skillTypeName.toUpperCase());
+		WeldingRecipe recipe = new WeldingRecipe(new ResourceLocation(registryName), ingredient1, ingredient2, outputStack, tier, skillType);
+		CraftTweakerAPI.apply(new IAction() {
+			@Override
+			public void apply() {
+				TFCRegistries.WELDING.register(recipe);
+			}
 
-            @Override
-            public String describe() {
-                //noinspection ConstantConditions
-                return "Adding welding recipe " + recipe.getRegistryName().toString();
-            }
-        });
-    }
+			@Override
+			public String describe() {
+				//noinspection ConstantConditions
+				return "Adding welding recipe " + recipe.getRegistryName().toString();
+			}
+		});
+	}
 
-    @ZenMethod
-    public static void removeRecipe(IItemStack output) {
-        if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
-        ItemStack item = (ItemStack) output.getInternal();
-        List<WeldingRecipe> removeList = new ArrayList<>();
-        TFCRegistries.WELDING.getValuesCollection()
-                .stream()
-                .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-                .forEach(removeList::add);
-        for (WeldingRecipe rem : removeList) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.WELDING;
-                    modRegistry.remove(rem.getRegistryName());
-                }
+	@ZenMethod
+	public static void removeRecipe(IItemStack output) {
+		if (output == null) throw new IllegalArgumentException("Output not allowed to be empty");
+		ItemStack item = (ItemStack) output.getInternal();
+		List<WeldingRecipe> removeList = new ArrayList<>();
+		TFCRegistries.WELDING.getValuesCollection()
+		                     .stream()
+		                     .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+		                     .forEach(removeList::add);
+		for (WeldingRecipe rem : removeList) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.WELDING;
+					modRegistry.remove(rem.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    //noinspection ConstantConditions
-                    return "Removing welding recipe " + rem.getRegistryName().toString();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					//noinspection ConstantConditions
+					return "Removing welding recipe " + rem.getRegistryName().toString();
+				}
+			});
+		}
+	}
 
-    @ZenMethod
-    public static void removeRecipe(String registryName) {
-        WeldingRecipe recipe = TFCRegistries.WELDING.getValue(new ResourceLocation(registryName));
-        if (recipe != null) {
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.WELDING;
-                    modRegistry.remove(recipe.getRegistryName());
-                }
+	@ZenMethod
+	public static void removeRecipe(String registryName) {
+		WeldingRecipe recipe = TFCRegistries.WELDING.getValue(new ResourceLocation(registryName));
+		if (recipe != null) {
+			CraftTweakerAPI.apply(new IAction() {
+				@Override
+				public void apply() {
+					IForgeRegistryModifiable modRegistry = (IForgeRegistryModifiable) TFCRegistries.WELDING;
+					modRegistry.remove(recipe.getRegistryName());
+				}
 
-                @Override
-                public String describe() {
-                    //noinspection ConstantConditions
-                    return "Removing welding recipe " + recipe.getRegistryName().toString();
-                }
-            });
-        }
-    }
+				@Override
+				public String describe() {
+					//noinspection ConstantConditions
+					return "Removing welding recipe " + recipe.getRegistryName().toString();
+				}
+			});
+		}
+	}
 }

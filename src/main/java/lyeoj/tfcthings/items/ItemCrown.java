@@ -24,74 +24,76 @@ import java.util.List;
 
 public class ItemCrown extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
 
-    private final Gem gem;
+	private final Gem gem;
 
-    public ItemCrown(int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String metal, Gem gem) {
-        super(EnumHelper.addArmorMaterial("crown_" + metal + "_" + gem.name().toLowerCase(), "tfcthings:crown/" + metal + "_" + gem.name().toLowerCase(), 10, new int[]{0, 0, 0, 0}, 50, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F), renderIndexIn, equipmentSlotIn);
-        this.gem = gem;
-        this.setTranslationKey(metal + "_crown");
-        this.setRegistryName("crown/" + metal + "_" + gem.name().toLowerCase());
-        this.setNoRepair();
-    }
+	public ItemCrown(int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String metal, Gem gem) {
+		super(EnumHelper.addArmorMaterial("crown_" + metal + "_" + gem.name()
+		                                                              .toLowerCase(), "tfcthings:crown/" + metal + "_" + gem.name()
+		                                                                                                                    .toLowerCase(), 10, new int[]{0, 0, 0, 0}, 50, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F), renderIndexIn, equipmentSlotIn);
+		this.gem = gem;
+		this.setTranslationKey(metal + "_crown");
+		this.setRegistryName("crown/" + metal + "_" + gem.name().toLowerCase());
+		this.setNoRepair();
+	}
 
-    public ItemCrown(int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String metal) {
-        super(EnumHelper.addArmorMaterial("crown_" + metal + "_empty", "tfcthings:crown/" + metal + "_empty", 10, new int[]{0, 0, 0, 0}, 50, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F), renderIndexIn, equipmentSlotIn);
-        this.gem = null;
-        this.setTranslationKey(metal + "_crown");
-        this.setRegistryName("crown/" + metal + "_empty");
-        this.setNoRepair();
-    }
+	public ItemCrown(int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String metal) {
+		super(EnumHelper.addArmorMaterial("crown_" + metal + "_empty", "tfcthings:crown/" + metal + "_empty", 10, new int[]{0, 0, 0, 0}, 50, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F), renderIndexIn, equipmentSlotIn);
+		this.gem = null;
+		this.setTranslationKey(metal + "_crown");
+		this.setRegistryName("crown/" + metal + "_empty");
+		this.setNoRepair();
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack itemStack) {
-        return Size.LARGE;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack itemStack) {
+		return Size.LARGE;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack itemStack) {
-        return Weight.HEAVY;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack itemStack) {
+		return Weight.HEAVY;
+	}
 
-    @Override
-    public boolean canStack(@Nonnull ItemStack stack) {
-        return false;
-    }
+	@Override
+	public boolean canStack(@Nonnull ItemStack stack) {
+		return false;
+	}
 
-    @Override
-    public float getCrushingModifier() {
-        return 0;
-    }
+	@Override
+	public float getCrushingModifier() {
+		return 0;
+	}
 
-    @Override
-    public float getPiercingModifier() {
-        return 0;
-    }
+	@Override
+	public float getPiercingModifier() {
+		return 0;
+	}
 
-    @Override
-    public float getSlashingModifier() {
-        return 0;
-    }
+	@Override
+	public float getSlashingModifier() {
+		return 0;
+	}
 
-    public boolean isDamageable() {
-        return false;
-    }
+	public boolean isDamageable() {
+		return false;
+	}
 
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (gem == null) {
-            tooltip.add(I18n.format("tfcthings.tooltip.crown.gem.empty", new Object[0]));
-            tooltip.add(I18n.format("tfcthings.tooltip.crown.missing", new Object[0]));
-        } else {
-            String gemName = I18n.format(ItemGem.get(gem).getTranslationKey() + ".normal.name", new Object[0]);
-            tooltip.add(I18n.format("tfcthings.tooltip.crown.gem", gemName));
-        }
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-    }
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		if (gem == null) {
+			tooltip.add(I18n.format("tfcthings.tooltip.crown.gem.empty", new Object[0]));
+			tooltip.add(I18n.format("tfcthings.tooltip.crown.missing", new Object[0]));
+		} else {
+			String gemName = I18n.format(ItemGem.get(gem).getTranslationKey() + ".normal.name", new Object[0]);
+			tooltip.add(I18n.format("tfcthings.tooltip.crown.gem", gemName));
+		}
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableCrowns;
-    }
+	@Override
+	public boolean isEnabled() {
+		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableCrowns;
+	}
 }

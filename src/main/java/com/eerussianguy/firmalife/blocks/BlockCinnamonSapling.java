@@ -12,12 +12,12 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public class BlockCinnamonSapling extends BlockSaplingTFC {
-    public BlockCinnamonSapling() {
-        super(PlantsFL.CINNAMON_TREE);
-    }
+	public BlockCinnamonSapling() {
+		super(PlantsFL.CINNAMON_TREE);
+	}
 
-    @Override
-    public void grow(World world, Random rand, BlockPos pos, IBlockState blockState) {
-        WorldgenCinnamon.generateCinnamon(world, rand, pos, false);
-    }
+	@Override
+	public void grow(World world, Random rand, BlockPos pos, IBlockState blockState) {
+		WorldgenCinnamon.generateCinnamon(world, rand, pos, false);
+	}
 }

@@ -13,42 +13,42 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketTileEntityUpdate implements IMessage {
-    private NBTTagCompound tileEntity;
-    private BlockPos pos;
+	private NBTTagCompound tileEntity;
+	private BlockPos pos;
 
-    @SuppressWarnings("unused")
-    @Deprecated
-    public PacketTileEntityUpdate() {}
+	@SuppressWarnings("unused")
+	@Deprecated
+	public PacketTileEntityUpdate() {}
 
-    public PacketTileEntityUpdate(TileEntity te) {
-        pos = te.getPos();
-        tileEntity = te.serializeNBT();
-    }
+	public PacketTileEntityUpdate(TileEntity te) {
+		pos = te.getPos();
+		tileEntity = te.serializeNBT();
+	}
 
-    @Override
-    public void fromBytes(ByteBuf byteBuf) {
-        pos = BlockPos.fromLong(byteBuf.readLong());
-        tileEntity = ByteBufUtils.readTag(byteBuf);
-    }
+	@Override
+	public void fromBytes(ByteBuf byteBuf) {
+		pos = BlockPos.fromLong(byteBuf.readLong());
+		tileEntity = ByteBufUtils.readTag(byteBuf);
+	}
 
-    @Override
-    public void toBytes(ByteBuf byteBuf) {
-        byteBuf.writeLong(pos.toLong());
-        ByteBufUtils.writeTag(byteBuf, tileEntity);
-    }
+	@Override
+	public void toBytes(ByteBuf byteBuf) {
+		byteBuf.writeLong(pos.toLong());
+		ByteBufUtils.writeTag(byteBuf, tileEntity);
+	}
 
-    public static class Handler implements IMessageHandler<PacketTileEntityUpdate, IMessage> {
-        @Override
-        public IMessage onMessage(PacketTileEntityUpdate message, MessageContext ctx) {
-            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-            if (player != null) {
-                World world = player.getEntityWorld();
-                TileEntity te = world.getTileEntity(message.pos);
-                if (te != null) {
-                    te.readFromNBT(message.tileEntity);
-                }
-            }
-            return null;
-        }
-    }
+	public static class Handler implements IMessageHandler<PacketTileEntityUpdate, IMessage> {
+		@Override
+		public IMessage onMessage(PacketTileEntityUpdate message, MessageContext ctx) {
+			EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+			if (player != null) {
+				World world = player.getEntityWorld();
+				TileEntity te = world.getTileEntity(message.pos);
+				if (te != null) {
+					te.readFromNBT(message.tileEntity);
+				}
+			}
+			return null;
+		}
+	}
 }

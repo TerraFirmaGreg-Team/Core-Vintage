@@ -35,45 +35,46 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.Tags;
 
-@Mod(modid = HotOrNot.MOD_ID, name = HotOrNot.MOD_NAME, version = HotOrNot.VERSION, useMetadata = true)
+import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+
+@Mod(modid = MODID_HOTORNOT, name = HotOrNot.MOD_NAME, version = Tags.VERSION, useMetadata = true)
 public class HotOrNot {
 
-    public static final String MOD_ID = "hotornot";
-    public static final String MOD_NAME = "Hot Or Not - TFC";
-    public static final String VERSION = "1.2.0";
+	public static final String MOD_NAME = "Hot Or Not - TFC";
 
-    public static final CreativeTabs HOTORNOT_TAB = new CreativeTabs(MOD_ID) {
-        @Override
-        public ItemStack createIcon() {
-            //ToDo: Replace with TFC Blue Steel Lava Bucket
-            return new ItemStack(Items.LAVA_BUCKET);
-        }
-    };
+	public static final CreativeTabs HOTORNOT_TAB = new CreativeTabs(MODID_HOTORNOT) {
+		@Override
+		public ItemStack createIcon() {
+			//ToDo: Replace with TFC Blue Steel Lava Bucket
+			return new ItemStack(Items.LAVA_BUCKET);
+		}
+	};
 
-    @Instance
-    private static HotOrNot INSTANCE = null;
-    private static SimpleNetworkWrapper network;
-    private final Logger log = LogManager.getLogger(MOD_ID);
+	@Instance
+	private static HotOrNot INSTANCE = null;
+	private static SimpleNetworkWrapper network;
+	private final Logger log = LogManager.getLogger(MODID_HOTORNOT);
 
-    public static SimpleNetworkWrapper getNetwork() {
-        return network;
-    }
+	public static SimpleNetworkWrapper getNetwork() {
+		return network;
+	}
 
-    @SuppressWarnings("unused")
-    public static Logger getLog() {
-        return INSTANCE.log;
-    }
+	@SuppressWarnings("unused")
+	public static Logger getLog() {
+		return INSTANCE.log;
+	}
 
-    public static HotOrNot getInstance() {
-        return INSTANCE;
-    }
+	public static HotOrNot getInstance() {
+		return INSTANCE;
+	}
 
-    @EventHandler
-    public void onPreInit(final FMLPreInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new HotGuiHandler());
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
-        network.registerMessage(new PacketServerSettings.Handler(), PacketServerSettings.class, 1, Side.CLIENT);
-        network.registerMessage(new PacketClientSettings.Handler(), PacketClientSettings.class, 2, Side.SERVER);
-    }
+	@EventHandler
+	public void onPreInit(final FMLPreInitializationEvent event) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new HotGuiHandler());
+		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_HOTORNOT);
+		network.registerMessage(new PacketServerSettings.Handler(), PacketServerSettings.class, 1, Side.CLIENT);
+		network.registerMessage(new PacketClientSettings.Handler(), PacketClientSettings.class, 2, Side.SERVER);
+	}
 }

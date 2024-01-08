@@ -14,21 +14,21 @@ import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import tfcflorae.compat.tfcelementia.ceramics.ItemEarthenwareMoldTFCE;
 
 public class UnmoldRecipeEarthenwareTFCEWrapper implements IRecipeWrapper {
-    private ItemStack mold;
-    private ItemStack output;
+	private ItemStack mold;
+	private ItemStack output;
 
-    public UnmoldRecipeEarthenwareTFCEWrapper(Metal metal, ItemMetalTFCE.ItemType type) {
-        mold = new ItemStack(ItemEarthenwareMoldTFCE.get(type));
-        IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-        if (cap instanceof IMoldHandler) {
-            cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), type.getSmeltAmount()), true);
-        }
-        output = new ItemStack(ItemMetalTFCE.get(metal, type));
-    }
+	public UnmoldRecipeEarthenwareTFCEWrapper(Metal metal, ItemMetalTFCE.ItemType type) {
+		mold = new ItemStack(ItemEarthenwareMoldTFCE.get(type));
+		IFluidHandler cap = mold.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+		if (cap instanceof IMoldHandler) {
+			cap.fill(new FluidStack(FluidsTFC.getFluidFromMetal(metal), type.getSmeltAmount()), true);
+		}
+		output = new ItemStack(ItemMetalTFCE.get(metal, type));
+	}
 
-    @Override
-    public void getIngredients(IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.ITEM, mold);
-        ingredients.setOutput(VanillaTypes.ITEM, output);
-    }
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInput(VanillaTypes.ITEM, mold);
+		ingredients.setOutput(VanillaTypes.ITEM, output);
+	}
 }

@@ -8,11 +8,11 @@ package net.dries007.tfc.compat.patchouli;
 import vazkii.patchouli.api.ICustomComponent;
 
 public abstract class CustomComponent implements ICustomComponent {
-    protected transient int posX, posY;
+	protected transient int posX, posY;
 
-    @Override
-    public void build(int componentX, int componentY, int pageNum) {
-        this.posX = componentX;
-        this.posY = componentY;
-    }
+	@Override
+	public void build(int componentX, int componentY, int pageNum) {
+		this.posX = componentX;
+		this.posY = componentY;
+	}
 }

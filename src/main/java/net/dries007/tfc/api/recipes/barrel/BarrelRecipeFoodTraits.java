@@ -24,47 +24,48 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BarrelRecipeFoodTraits extends BarrelRecipe {
-    private final FoodTrait trait;
-    private final String tooltipName;
+	private final FoodTrait trait;
+	private final String tooltipName;
 
-    private BarrelRecipeFoodTraits(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
-        super(inputFluid, inputStack, null, ItemStack.EMPTY, duration);
-        this.trait = trait;
-        this.tooltipName = tooltipName;
-    }
+	private BarrelRecipeFoodTraits(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
+		super(inputFluid, inputStack, null, ItemStack.EMPTY, duration);
+		this.trait = trait;
+		this.tooltipName = tooltipName;
+	}
 
-    public static BarrelRecipe pickling(@Nonnull IIngredient<ItemStack> inputStack) {
-        return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED), FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
-    }
+	public static BarrelRecipe pickling(@Nonnull IIngredient<ItemStack> inputStack) {
+		return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED), FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
+	}
 
-    public static BarrelRecipe brining(@Nonnull IIngredient<ItemStack> inputStack) {
-        return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.BRINE.get(), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_brining");
-    }
+	public static BarrelRecipe brining(@Nonnull IIngredient<ItemStack> inputStack) {
+		return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.BRINE.get(), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_brining");
+	}
 
-    @Override
-    public boolean isValidInput(@Nullable FluidStack inputFluid, ItemStack inputStack) {
-        IFood food = inputStack.getCapability(CapabilityFood.CAPABILITY, null);
-        return super.isValidInput(inputFluid, inputStack) && food != null && !food.getTraits().contains(trait); // Don't apply again and again.
-    }
+	@Override
+	public boolean isValidInput(@Nullable FluidStack inputFluid, ItemStack inputStack) {
+		IFood food = inputStack.getCapability(CapabilityFood.CAPABILITY, null);
+		return super.isValidInput(inputFluid, inputStack) && food != null && !food.getTraits()
+		                                                                          .contains(trait); // Don't apply again and again.
+	}
 
-    @Nonnull
-    @Override
-    public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
-        int multiplier = getMultiplier(inputFluid, inputStack);
-        ItemStack stack = inputStack.copy();
-        stack.setCount(multiplier);
+	@Nonnull
+	@Override
+	public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
+		int multiplier = getMultiplier(inputFluid, inputStack);
+		ItemStack stack = inputStack.copy();
+		stack.setCount(multiplier);
 
-        ItemStack remainder = Helpers.consumeItem(inputStack.copy(), multiplier);
-        IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
-        if (food != null) {
-            CapabilityFood.applyTrait(food, trait);
-        }
-        return Helpers.listOf(stack, remainder);
-    }
+		ItemStack remainder = Helpers.consumeItem(inputStack.copy(), multiplier);
+		IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+		if (food != null) {
+			CapabilityFood.applyTrait(food, trait);
+		}
+		return Helpers.listOf(stack, remainder);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public String getResultName() {
-        return I18n.format("tfc.tooltip." + tooltipName);
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public String getResultName() {
+		return I18n.format("tfc.tooltip." + tooltipName);
+	}
 }

@@ -5,12 +5,12 @@ import de.mennomax.astikorcarts.entity.EntityMobCart;
 import net.minecraft.world.World;
 
 public class ItemMobCart extends AbstractCartItem {
-    public ItemMobCart() {
-        super("mobcart");
-    }
+	public ItemMobCart() {
+		super("mobcart");
+	}
 
-    @Override
-    public AbstractDrawn newCart(World worldIn) {
-        return new EntityMobCart(worldIn);
-    }
+	@Override
+	public AbstractDrawn newCart(World worldIn) {
+		return new EntityMobCart(worldIn);
+	}
 }

@@ -14,24 +14,24 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
  */
 public class NetworkEventHandler {
 
-    public static void register() {
-        FMLCommonHandler.instance().bus().register(new NetworkEventHandler());
-    }
+	public static void register() {
+		FMLCommonHandler.instance().bus().register(new NetworkEventHandler());
+	}
 
-    @SubscribeEvent
-    public void onClientLogin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
-        if (!event.isLocal()) {
-            SessionData.modEnabled = false;
-        }
-    }
+	@SubscribeEvent
+	public void onClientLogin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
+		if (!event.isLocal()) {
+			SessionData.modEnabled = false;
+		}
+	}
 
-    @SubscribeEvent
-    public void onClientLogout(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
-        SessionData.loadFromConfiguration(time4tfc.configuration);
-    }
+	@SubscribeEvent
+	public void onClientLogout(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
+		SessionData.loadFromConfiguration(time4tfc.configuration);
+	}
 
-    @SubscribeEvent
-    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        PacketHandler.INSTANCE.sendTo(new PacketServerSettings(), (EntityPlayerMP) event.player);
-    }
+	@SubscribeEvent
+	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+		PacketHandler.INSTANCE.sendTo(new PacketServerSettings(), (EntityPlayerMP) event.player);
+	}
 }

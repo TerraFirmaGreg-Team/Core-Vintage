@@ -11,32 +11,35 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pieman.caffeineaddon.init.RegistryHandler;
 import pieman.caffeineaddon.proxy.CommonProxy;
+import su.terrafirmagreg.Tags;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, dependencies = "required-after:tfc")
+import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
+
+@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
 public class CaffeineAddon {
-    public static final Logger LOG = LogManager.getLogger(Reference.MOD_ID);
-    @Instance
-    public static CaffeineAddon instance;
+	public static final Logger LOG = LogManager.getLogger(MODID_CAFFEINEADDON);
+	@Instance
+	public static CaffeineAddon instance;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
-    public static CommonProxy proxy;
+	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
+	public static CommonProxy proxy;
 
-    @EventHandler
-    public static void PreInit(FMLPreInitializationEvent event) {
-        proxy.preinit();
-        RegistryHandler.preInitRegistries();
-    }
+	@EventHandler
+	public static void PreInit(FMLPreInitializationEvent event) {
+		proxy.preinit();
+		RegistryHandler.preInitRegistries();
+	}
 
-    @EventHandler
-    public static void Init(FMLInitializationEvent event) {
-        proxy.init();
-        RegistryHandler.initRegistries();
-    }
+	@EventHandler
+	public static void Init(FMLInitializationEvent event) {
+		proxy.init();
+		RegistryHandler.initRegistries();
+	}
 
-    @EventHandler
-    public static void PostInit(FMLPostInitializationEvent event) {
-        proxy.postinit();
-        RegistryHandler.postInitRegistries();
-    }
+	@EventHandler
+	public static void PostInit(FMLPostInitializationEvent event) {
+		proxy.postinit();
+		RegistryHandler.postInitRegistries();
+	}
 
 }

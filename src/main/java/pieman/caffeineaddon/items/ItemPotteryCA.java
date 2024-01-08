@@ -8,17 +8,17 @@ import pieman.caffeineaddon.util.IHasModel;
 
 public class ItemPotteryCA extends ItemPottery implements IHasModel {
 
-    public ItemPotteryCA(String name) {
-        super();
-        this.setTranslationKey(name);
-        this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabsTFC.CT_POTTERY);
+	public ItemPotteryCA(String name) {
+		super();
+		this.setTranslationKey(name);
+		this.setRegistryName(name);
+		this.setCreativeTab(CreativeTabsTFC.CT_POTTERY);
 
-        ModItems.ITEMS.add(this);
-    }
+		ModItems.ITEMS.add(this);
+	}
 
-    @Override
-    public void registerModels() {
-        CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
-    }
+	@Override
+	public void registerModels() {
+		CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
+	}
 }

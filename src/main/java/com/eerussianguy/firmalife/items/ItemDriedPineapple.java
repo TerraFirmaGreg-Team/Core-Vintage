@@ -13,17 +13,17 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemDriedPineapple extends ItemMisc {
-    public ItemDriedPineapple() {
-        super(Size.SMALL, Weight.LIGHT);
-    }
+	public ItemDriedPineapple() {
+		super(Size.SMALL, Weight.LIGHT);
+	}
 
-    @Override
-    public ItemStack getContainerItem(ItemStack itemStack) {
-        return new ItemStack(ItemsFL.getFood(FoodFL.PINEAPPLE_CHUNKS));
-    }
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack) {
+		return new ItemStack(ItemsFL.getFood(FoodFL.PINEAPPLE_CHUNKS));
+	}
 
-    @Override
-    public boolean hasContainerItem(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return true;
+	}
 }

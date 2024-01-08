@@ -13,22 +13,22 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class SlotKnappingOutput extends SlotItemHandler {
-    private final Runnable onSlotTake;
+	private final Runnable onSlotTake;
 
-    public SlotKnappingOutput(IItemHandler inventory, int idx, int x, int y, Runnable onSlotTake) {
-        super(inventory, idx, x, y);
-        this.onSlotTake = onSlotTake;
-    }
+	public SlotKnappingOutput(IItemHandler inventory, int idx, int x, int y, Runnable onSlotTake) {
+		super(inventory, idx, x, y);
+		this.onSlotTake = onSlotTake;
+	}
 
-    @Override
-    @Nonnull
-    public ItemStack onTake(EntityPlayer thePlayer, @Nonnull ItemStack stack) {
-        onSlotTake.run();
-        return super.onTake(thePlayer, stack);
-    }
+	@Override
+	@Nonnull
+	public ItemStack onTake(EntityPlayer thePlayer, @Nonnull ItemStack stack) {
+		onSlotTake.run();
+		return super.onTake(thePlayer, stack);
+	}
 
-    @Override
-    public boolean isItemValid(@Nonnull ItemStack stack) {
-        return false;
-    }
+	@Override
+	public boolean isItemValid(@Nonnull ItemStack stack) {
+		return false;
+	}
 }

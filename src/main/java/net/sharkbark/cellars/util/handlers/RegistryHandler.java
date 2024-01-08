@@ -22,75 +22,77 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.IHasModel;
-import net.sharkbark.cellars.util.Reference;
 
-@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
+import static su.terrafirmagreg.Constants.MODID_CELLARS;
+
+@Mod.EventBusSubscriber(modid = MODID_CELLARS)
 public class RegistryHandler {
 
-    @SubscribeEvent
-    public static void onItemRegister(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(ModItems.ITEMS.toArray(new Item[0]));
-        ModItems.registerItems(event.getRegistry());
-    }
+	@SubscribeEvent
+	public static void onItemRegister(RegistryEvent.Register<Item> event) {
+		event.getRegistry().registerAll(ModItems.ITEMS.toArray(new Item[0]));
+		ModItems.registerItems(event.getRegistry());
+	}
 
-    @SubscribeEvent
-    public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+	@SubscribeEvent
+	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 
-        event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
-        TileEntityHandler.registerTileEntities();
+		event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
+		TileEntityHandler.registerTileEntities();
 
-    }
+	}
 
-    @SubscribeEvent
-    public static void onModelRegister(ModelRegistryEvent event) {
+	@SubscribeEvent
+	public static void onModelRegister(ModelRegistryEvent event) {
 
-        for (Item item : ModItems.ITEMS) {
+		for (Item item : ModItems.ITEMS) {
 
-            if (item instanceof IHasModel) {
+			if (item instanceof IHasModel) {
 
-                ((IHasModel) item).registerModels();
+				((IHasModel) item).registerModels();
 
-            }
+			}
 
-        }
+		}
 
-        for (Block block : ModBlocks.BLOCKS) {
+		for (Block block : ModBlocks.BLOCKS) {
 
-            if (block instanceof IHasModel) {
+			if (block instanceof IHasModel) {
 
-                ((IHasModel) block).registerModels();
+				((IHasModel) block).registerModels();
 
-            }
+			}
 
-        }
+		}
 
-    }
+	}
 
-    @SubscribeEvent
-    public static void registerAnvilRecipes(RegistryEvent.Register<AnvilRecipe> event) {
-        ForgeRule[] iceSawRules = new ForgeRule[]{ForgeRule.HIT_LAST, ForgeRule.UPSET_SECOND_LAST, ForgeRule.DRAW_NOT_LAST};
-        event.getRegistry().registerAll(
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "bronze_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BRONZE, ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BRONZE_ICE_SAW_HEAD), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "bismuth_bronze_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BISMUTH_BRONZE_ICE_SAW_HEAD), Metal.BISMUTH_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "black_bronze_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BLACK_BRONZE_ICE_SAW_HEAD), Metal.BLACK_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "wrought_iron_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.WROUGHT_IRON_ICE_SAW_HEAD), Metal.WROUGHT_IRON.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.STEEL_ICE_SAW_HEAD), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "black_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BLACK_STEEL_ICE_SAW_HEAD), TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL).getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "red_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.RED_STEEL, ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.RED_STEEL_ICE_SAW_HEAD), Metal.RED_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
-                new AnvilRecipe(new ResourceLocation(Reference.MOD_ID, "blue_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BLUE_STEEL_ICE_SAW_HEAD), Metal.BLUE_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules)
-        );
-    }
+	@SubscribeEvent
+	public static void registerAnvilRecipes(RegistryEvent.Register<AnvilRecipe> event) {
+		ForgeRule[] iceSawRules = new ForgeRule[]{ForgeRule.HIT_LAST, ForgeRule.UPSET_SECOND_LAST, ForgeRule.DRAW_NOT_LAST};
+		event.getRegistry().registerAll(
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bronze_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BRONZE, ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.BRONZE_ICE_SAW_HEAD), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bismuth_bronze_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.BISMUTH_BRONZE_ICE_SAW_HEAD), Metal.BISMUTH_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_bronze_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.BLACK_BRONZE_ICE_SAW_HEAD), Metal.BLACK_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "wrought_iron_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.WROUGHT_IRON_ICE_SAW_HEAD), Metal.WROUGHT_IRON.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.STEEL_ICE_SAW_HEAD), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.BLACK_STEEL_ICE_SAW_HEAD), TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL)
+						                                                                      .getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "red_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.RED_STEEL, ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.RED_STEEL_ICE_SAW_HEAD), Metal.RED_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "blue_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, ItemType.DOUBLE_INGOT))),
+						new ItemStack(ModItems.BLUE_STEEL_ICE_SAW_HEAD), Metal.BLUE_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules)
+		);
+	}
 
-    public static void initRegistries() {
-        NetworkRegistry.INSTANCE.registerGuiHandler(Main.INSTANCE, new GuiHandler());
-    }
+	public static void initRegistries() {
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.INSTANCE, new GuiHandler());
+	}
 
 }

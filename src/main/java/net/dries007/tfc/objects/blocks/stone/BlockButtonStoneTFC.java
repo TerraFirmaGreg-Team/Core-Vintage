@@ -13,17 +13,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BlockButtonStoneTFC extends BlockButtonStone {
-    private static final Map<Rock, BlockButtonStoneTFC> MAP = new HashMap<>();
-    public final Rock rock;
+	private static final Map<Rock, BlockButtonStoneTFC> MAP = new HashMap<>();
+	public final Rock rock;
 
-    public BlockButtonStoneTFC(Rock rock) {
-        this.rock = rock;
-        if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
-        setHardness(0.5F);
-        setSoundType(SoundType.STONE);
-    }
+	public BlockButtonStoneTFC(Rock rock) {
+		this.rock = rock;
+		if (MAP.put(rock, this) != null) throw new IllegalStateException("There can only be one.");
+		setHardness(0.5F);
+		setSoundType(SoundType.STONE);
+	}
 
-    public static BlockButtonStoneTFC get(Rock rock) {
-        return MAP.get(rock);
-    }
+	public static BlockButtonStoneTFC get(Rock rock) {
+		return MAP.get(rock);
+	}
 }

@@ -8,56 +8,58 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import su.terrafirmagreg.Tags;
 
 import java.lang.reflect.Method;
 
-@Mod(modid = DeathDairyDespair.MODID, name = DeathDairyDespair.NAME, version = DeathDairyDespair.VERSION)
+import static su.terrafirmagreg.Constants.MODID_DDD;
+
+@Mod(modid = MODID_DDD, name = DeathDairyDespair.NAME, version = Tags.VERSION)
 public class DeathDairyDespair {
-    public static final String MODID = "deathdairydespair";
-    public static final String NAME = "Death, Dairy and Despair";
-    public static final String VERSION = "0.1";
+	public static final String NAME = "Death, Dairy and Despair";
 
-    private Method writePlayerData;
+	private Method writePlayerData;
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        Config.load(event.getModConfigurationDirectory());
-        TFCCommonEventHandlerWrapper.init();
-    }
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		Config.load(event.getModConfigurationDirectory());
+		TFCCommonEventHandlerWrapper.init();
+	}
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(this);
 
-        try {
+		try {
 
-            writePlayerData = PlayerList.class.getDeclaredMethod("writePlayerData", EntityPlayerMP.class);
-            writePlayerData.setAccessible(true);
+			writePlayerData = PlayerList.class.getDeclaredMethod("writePlayerData", EntityPlayerMP.class);
+			writePlayerData.setAccessible(true);
 
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
+		} catch (Exception err) {
+			err.printStackTrace();
+		}
 
-    }
+	}
 
-    public void invokeWritePlayerData(PlayerList list, EntityPlayerMP player) {
-        if (list == null) return;
-        try {
-            writePlayerData.invoke(list, player);
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-    }
+	public void invokeWritePlayerData(PlayerList list, EntityPlayerMP player) {
+		if (list == null) return;
+		try {
+			writePlayerData.invoke(list, player);
+		} catch (Exception err) {
+			err.printStackTrace();
+		}
+	}
 
 
-    // Saves player data upon death
-    @SubscribeEvent
-    public void onPlayerDeath(LivingDeathEvent event) {
-        if (event.getEntity() instanceof EntityPlayerMP) {
-            System.out.println("A");
-            invokeWritePlayerData(event.getEntity().world.getMinecraftServer().getPlayerList(), (EntityPlayerMP) event.getEntity());
-        }
-    }
+	// Saves player data upon death
+	@SubscribeEvent
+	public void onPlayerDeath(LivingDeathEvent event) {
+		if (event.getEntity() instanceof EntityPlayerMP) {
+			System.out.println("A");
+			invokeWritePlayerData(event.getEntity().world.getMinecraftServer()
+			                                             .getPlayerList(), (EntityPlayerMP) event.getEntity());
+		}
+	}
 
 }
 

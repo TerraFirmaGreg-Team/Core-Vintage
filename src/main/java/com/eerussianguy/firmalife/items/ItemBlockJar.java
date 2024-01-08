@@ -20,39 +20,39 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemBlockJar extends ItemBlockTFC {
-    public ItemBlockJar(Block block) {
-        super(block);
-    }
+	public ItemBlockJar(Block block) {
+		super(block);
+	}
 
-    @Override
-    @Nonnull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        IBlockState state = worldIn.getBlockState(pos);
-        if (state.getBlock() == block) {
-            if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
-                int jars = state.getValue(BlockJars.JARS);
-                if (jars < 4) {
-                    worldIn.setBlockState(pos, state.withProperty(BlockJars.JARS, jars + 1));
-                    player.getHeldItem(hand).shrink(1);
-                    return EnumActionResult.SUCCESS;
-                }
-            }
-            return EnumActionResult.FAIL;
-        }
-        if (worldIn.getBlockState(pos).isSideSolid(worldIn, pos, EnumFacing.UP)) {
-            return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-        } else {
-            return EnumActionResult.FAIL;
-        }
-    }
+	@Override
+	@Nonnull
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		IBlockState state = worldIn.getBlockState(pos);
+		if (state.getBlock() == block) {
+			if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
+				int jars = state.getValue(BlockJars.JARS);
+				if (jars < 4) {
+					worldIn.setBlockState(pos, state.withProperty(BlockJars.JARS, jars + 1));
+					player.getHeldItem(hand).shrink(1);
+					return EnumActionResult.SUCCESS;
+				}
+			}
+			return EnumActionResult.FAIL;
+		}
+		if (worldIn.getBlockState(pos).isSideSolid(worldIn, pos, EnumFacing.UP)) {
+			return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+		} else {
+			return EnumActionResult.FAIL;
+		}
+	}
 
-    @Override
-    public ItemStack getContainerItem(ItemStack itemStack) {
-        return new ItemStack(ItemsFL.JAR);
-    }
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack) {
+		return new ItemStack(ItemsFL.JAR);
+	}
 
-    @Override
-    public boolean hasContainerItem(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return true;
+	}
 }

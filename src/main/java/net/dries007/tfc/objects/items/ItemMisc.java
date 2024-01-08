@@ -14,34 +14,34 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ItemMisc extends ItemTFC implements IItemSize {
-    private final Size size;
-    private final Weight weight;
+	private final Size size;
+	private final Weight weight;
 
-    public ItemMisc(Size size, Weight weight, Object... oreNameParts) {
-        this(size, weight);
+	public ItemMisc(Size size, Weight weight, Object... oreNameParts) {
+		this(size, weight);
 
-        for (Object obj : oreNameParts) {
-            if (obj instanceof Object[])
-                OreDictionaryHelper.register(this, (Object[]) obj);
-            else
-                OreDictionaryHelper.register(this, obj);
-        }
-    }
+		for (Object obj : oreNameParts) {
+			if (obj instanceof Object[])
+				OreDictionaryHelper.register(this, (Object[]) obj);
+			else
+				OreDictionaryHelper.register(this, obj);
+		}
+	}
 
-    public ItemMisc(Size size, Weight weight) {
-        this.size = size;
-        this.weight = weight;
-    }
+	public ItemMisc(Size size, Weight weight) {
+		this.size = size;
+		this.weight = weight;
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack stack) {
-        return size;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack stack) {
+		return size;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return weight;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return weight;
+	}
 }

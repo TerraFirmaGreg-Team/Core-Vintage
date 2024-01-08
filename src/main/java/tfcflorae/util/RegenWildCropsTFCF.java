@@ -12,11 +12,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class RegenWildCropsTFCF extends WorldGenWildCropsTFCF {
-    @Override
-    protected boolean isValidPosition(World world, BlockPos pos) {
-        //Modified to allow replacement of grass during spring regen
-        Block block = world.getBlockState(pos).getBlock();
-        return (block instanceof BlockShortGrassTFC || block.isAir(world.getBlockState(pos), world, pos) && (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down()))));
-    }
+	@Override
+	protected boolean isValidPosition(World world, BlockPos pos) {
+		//Modified to allow replacement of grass during spring regen
+		Block block = world.getBlockState(pos).getBlock();
+		return (block instanceof BlockShortGrassTFC || block.isAir(world.getBlockState(pos), world, pos) && (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down()))));
+	}
 
 }

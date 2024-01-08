@@ -10,31 +10,31 @@ import javax.annotation.Nonnull;
 
 public class ItemMetalSlingAmmo extends ItemTFC implements TFCThingsConfigurableItem {
 
-    private final int type;
+	private final int type;
 
-    public ItemMetalSlingAmmo(int type) {
-        this.type = type;
-    }
+	public ItemMetalSlingAmmo(int type) {
+		this.type = type;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSling;
-    }
+	@Override
+	public boolean isEnabled() {
+		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSling;
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack itemStack) {
-        return Size.SMALL;
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack itemStack) {
+		return Size.SMALL;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack itemStack) {
-        return Weight.LIGHT;
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack itemStack) {
+		return Weight.LIGHT;
+	}
 
-    public int getType() {
-        return type;
-    }
+	public int getType() {
+		return type;
+	}
 
 }

@@ -24,57 +24,59 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemGreenhouseDoor extends ItemDoor implements IItemSize {
-    private final Block block; // let's just duplicate the variable instead of using an AT
+	private final Block block; // let's just duplicate the variable instead of using an AT
 
-    public ItemGreenhouseDoor(BlockGreenhouseDoor door) {
-        super(door);
-        this.block = door;
-    }
+	public ItemGreenhouseDoor(BlockGreenhouseDoor door) {
+		super(door);
+		this.block = door;
+	}
 
-    /**
-     * Copypasta to reverse the facing direction it chooses
-     */
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (facing != EnumFacing.UP) {
-            return EnumActionResult.FAIL;
-        } else {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
-            Block block = iblockstate.getBlock();
+	/**
+	 * Copypasta to reverse the facing direction it chooses
+	 */
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (facing != EnumFacing.UP) {
+			return EnumActionResult.FAIL;
+		} else {
+			IBlockState iblockstate = worldIn.getBlockState(pos);
+			Block block = iblockstate.getBlock();
 
-            if (!block.isReplaceable(worldIn, pos)) {
-                pos = pos.offset(facing);
-            }
+			if (!block.isReplaceable(worldIn, pos)) {
+				pos = pos.offset(facing);
+			}
 
-            ItemStack itemstack = player.getHeldItem(hand);
+			ItemStack itemstack = player.getHeldItem(hand);
 
-            if (player.canPlayerEdit(pos, facing, itemstack) && this.block.canPlaceBlockAt(worldIn, pos)) {
-                EnumFacing enumfacing = EnumFacing.fromAngle(player.rotationYaw);
-                int i = enumfacing.getXOffset();
-                int j = enumfacing.getZOffset();
-                boolean flag = i < 0 && hitZ < 0.5F || i > 0 && hitZ > 0.5F || j < 0 && hitX > 0.5F || j > 0 && hitX < 0.5F;
-                placeDoor(worldIn, pos, enumfacing.getOpposite(), this.block, flag); // only line that we change
-                SoundType soundtype = worldIn.getBlockState(pos).getBlock().getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);
-                worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-                itemstack.shrink(1);
-                return EnumActionResult.SUCCESS;
-            } else {
-                return EnumActionResult.FAIL;
-            }
-        }
-    }
+			if (player.canPlayerEdit(pos, facing, itemstack) && this.block.canPlaceBlockAt(worldIn, pos)) {
+				EnumFacing enumfacing = EnumFacing.fromAngle(player.rotationYaw);
+				int i = enumfacing.getXOffset();
+				int j = enumfacing.getZOffset();
+				boolean flag = i < 0 && hitZ < 0.5F || i > 0 && hitZ > 0.5F || j < 0 && hitX > 0.5F || j > 0 && hitX < 0.5F;
+				placeDoor(worldIn, pos, enumfacing.getOpposite(), this.block, flag); // only line that we change
+				SoundType soundtype = worldIn.getBlockState(pos)
+				                             .getBlock()
+				                             .getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);
+				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+				itemstack.shrink(1);
+				return EnumActionResult.SUCCESS;
+			} else {
+				return EnumActionResult.FAIL;
+			}
+		}
+	}
 
-    @Nonnull
-    public Size getSize(ItemStack stack) {
-        return Size.VERY_LARGE;
-    }
+	@Nonnull
+	public Size getSize(ItemStack stack) {
+		return Size.VERY_LARGE;
+	}
 
-    @Nonnull
-    public Weight getWeight(ItemStack stack) {
-        return Weight.HEAVY;
-    }
+	@Nonnull
+	public Weight getWeight(ItemStack stack) {
+		return Weight.HEAVY;
+	}
 
-    public int getItemStackLimit(ItemStack stack) {
-        return this.getStackSize(stack);
-    }
+	public int getItemStackLimit(ItemStack stack) {
+		return this.getStackSize(stack);
+	}
 }

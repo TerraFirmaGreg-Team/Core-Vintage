@@ -14,25 +14,25 @@ import tfcflorae.util.OreDictionaryHelper;
 import javax.annotation.Nonnull;
 
 public class BlockFruitBookshelves extends Block {
-    public BlockFruitBookshelves() {
-        super(Material.WOOD, Material.WOOD.getMaterialMapColor());
-        setHarvestLevel("axe", 0);
-        setHardness(2.0F);
-        setResistance(15.0F);
-        setSoundType(SoundType.WOOD);
-        OreDictionaryHelper.register(this, "bookshelf");
-        Blocks.FIRE.setFireInfo(this, 5, 20);
-    }
+	public BlockFruitBookshelves() {
+		super(Material.WOOD, Material.WOOD.getMaterialMapColor());
+		setHarvestLevel("axe", 0);
+		setHardness(2.0F);
+		setResistance(15.0F);
+		setSoundType(SoundType.WOOD);
+		OreDictionaryHelper.register(this, "bookshelf");
+		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @Nonnull
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	@Nonnull
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
 
-    @Override
-    public float getEnchantPowerBonus(World world, BlockPos pos) {
-        return 1.0F; // Same as vanilla
-    }
+	@Override
+	public float getEnchantPowerBonus(World world, BlockPos pos) {
+		return 1.0F; // Same as vanilla
+	}
 }

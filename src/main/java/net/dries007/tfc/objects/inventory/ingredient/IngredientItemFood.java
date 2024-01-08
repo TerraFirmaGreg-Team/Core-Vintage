@@ -14,46 +14,46 @@ import net.minecraft.util.NonNullList;
  * Accepts only valid, not rotten foods on recipes
  */
 public class IngredientItemFood implements IIngredient<ItemStack> {
-    private final IIngredient<ItemStack> innerIngredient;
+	private final IIngredient<ItemStack> innerIngredient;
 
-    public IngredientItemFood(IIngredient<ItemStack> innerIngredient) {
-        this.innerIngredient = innerIngredient;
-    }
+	public IngredientItemFood(IIngredient<ItemStack> innerIngredient) {
+		this.innerIngredient = innerIngredient;
+	}
 
-    @Override
-    public NonNullList<ItemStack> getValidIngredients() {
-        NonNullList<ItemStack> ingredients = innerIngredient.getValidIngredients();
-        for (ItemStack stack : ingredients) {
-            IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
-            if (food != null) {
-                food.setNonDecaying();
-            }
-        }
-        return ingredients;
-    }
+	@Override
+	public NonNullList<ItemStack> getValidIngredients() {
+		NonNullList<ItemStack> ingredients = innerIngredient.getValidIngredients();
+		for (ItemStack stack : ingredients) {
+			IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+			if (food != null) {
+				food.setNonDecaying();
+			}
+		}
+		return ingredients;
+	}
 
-    @Override
-    public boolean test(ItemStack input) {
-        return innerIngredient.test(input) && !isRotten(input);
-    }
+	@Override
+	public boolean test(ItemStack input) {
+		return innerIngredient.test(input) && !isRotten(input);
+	}
 
-    @Override
-    public boolean testIgnoreCount(ItemStack stack) {
-        return innerIngredient.testIgnoreCount(stack) && !isRotten(stack);
-    }
+	@Override
+	public boolean testIgnoreCount(ItemStack stack) {
+		return innerIngredient.testIgnoreCount(stack) && !isRotten(stack);
+	}
 
-    @Override
-    public ItemStack consume(ItemStack input) {
-        return innerIngredient.consume(input);
-    }
+	@Override
+	public ItemStack consume(ItemStack input) {
+		return innerIngredient.consume(input);
+	}
 
-    @Override
-    public int getAmount() {
-        return innerIngredient.getAmount();
-    }
+	@Override
+	public int getAmount() {
+		return innerIngredient.getAmount();
+	}
 
-    private boolean isRotten(ItemStack stack) {
-        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-        return cap != null && cap.isRotten();
-    }
+	private boolean isRotten(ItemStack stack) {
+		IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+		return cap != null && cap.isRotten();
+	}
 }

@@ -40,117 +40,122 @@ import java.util.List;
 
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAccessor {
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
-    public static final PropertyEnum<ChopperModels> PART = PropertyEnum.create("part", ChopperModels.class);
-    private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 2.0D, 1.0D);
+	public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
+	public static final PropertyEnum<ChopperModels> PART = PropertyEnum.create("part", ChopperModels.class);
+	private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 2.0D, 1.0D);
 
-    public BlockChopper() {
-        super();
-        setHardness(5.0F);
-        setResistance(5.0F);
-        setRegistryName(Constants.CHOPPER_BLOCK);
-        setTranslationKey(Constants.CHOPPER_BLOCK);
-    }
+	public BlockChopper() {
+		super();
+		setHardness(5.0F);
+		setResistance(5.0F);
+		setRegistryName(Constants.CHOPPER_BLOCK);
+		setTranslationKey(Constants.CHOPPER_BLOCK);
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        EnumFacing enumfacing = EnumFacing.byIndex(meta);
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
-            enumfacing = EnumFacing.NORTH;
-        }
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
 
-        return getDefaultState().withProperty(FACING, enumfacing).withProperty(PART, ChopperModels.BASE);
-    }
+		return getDefaultState().withProperty(FACING, enumfacing).withProperty(PART, ChopperModels.BASE);
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
 
-    @Override
-    public boolean hasCustomBreakingProgress(IBlockState state) {
-        return true;
-    }
+	@Override
+	public boolean hasCustomBreakingProgress(IBlockState state) {
+		return true;
+	}
 
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return COLLISION_AABB;
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return COLLISION_AABB;
+	}
 
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return COLLISION_AABB;
-    }
+	@Nullable
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+		return COLLISION_AABB;
+	}
 
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        if (!worldIn.isRemote) {
-            EnumFacing enumfacing = state.getValue(FACING);
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing).withProperty(PART, ChopperModels.BASE), 2);
-        }
-    }
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		if (!worldIn.isRemote) {
+			EnumFacing enumfacing = state.getValue(FACING);
+			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing)
+			                                .withProperty(PART, ChopperModels.BASE), 2);
+		}
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new ExtendedBlockState(this, new IProperty[]{PART, FACING}, new IUnlistedProperty[]{SIDE_TEXTURE, TOP_TEXTURE});
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new ExtendedBlockState(this, new IProperty[]{PART, FACING}, new IUnlistedProperty[]{SIDE_TEXTURE, TOP_TEXTURE});
+	}
 
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
-        tooltip.add(Localization.ITEM.HORSE_CHOPPING.SIZE.translate(Colors.WHITE.toString(), Colors.LIGHTGRAY.toString()));
-        tooltip.add(Localization.ITEM.HORSE_CHOPPING.LOCATION.translate());
-        tooltip.add(Localization.ITEM.HORSE_CHOPPING.USE.translate());
-    }
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+		tooltip.add(Localization.ITEM.HORSE_CHOPPING.SIZE.translate(Colors.WHITE.toString(), Colors.LIGHTGRAY.toString()));
+		tooltip.add(Localization.ITEM.HORSE_CHOPPING.LOCATION.translate());
+		tooltip.add(Localization.ITEM.HORSE_CHOPPING.USE.translate());
+	}
 
-    @Override
-    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor).getBlock() instanceof BlockFiller)) {
-            ((World) world).setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-        }
-    }
+	@Override
+	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
+		if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor)
+		                                                                     .getBlock() instanceof BlockFiller)) {
+			((World) world).setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+		}
+	}
 
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(PART, ChopperModels.BASE);
-    }
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite())
+		                        .withProperty(PART, ChopperModels.BASE);
+	}
 
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 
-        TileEntityHPBase tile = getTileEntity(worldIn, pos);
-        if (tile == null)
-            return;
-        tile.setForward(placer.getHorizontalFacing().getOpposite());
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-    }
+		TileEntityHPBase tile = getTileEntity(worldIn, pos);
+		if (tile == null)
+			return;
+		tile.setForward(placer.getHorizontalFacing().getOpposite());
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+	}
 
-    @Override
-    public void emptiedOutput(World world, BlockPos pos) {
-    }
+	@Override
+	public void emptiedOutput(World world, BlockPos pos) {
+	}
 
-    @Nonnull
-    @Override
-    public Class<?> getTileClass() {
-        return TileEntityChopper.class;
-    }
+	@Nonnull
+	@Override
+	public Class<?> getTileClass() {
+		return TileEntityChopper.class;
+	}
 
-    // The One Probe Integration
-    @Optional.Method(modid = "theoneprobe")
-    @Override
-    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-        TileEntityChopper tileEntity = getTileEntity(world, data.getPos());
-        if (tileEntity != null) {
-            double totalWindup = Configs.general.pointsForWindup > 0 ? Configs.general.pointsForWindup : 1;
-            probeInfo.progress((long) ((((double) tileEntity.getField(2)) / totalWindup) * 100L), 100L, new ProgressStyle().prefix(Localization.TOP.WINDUP_PROGRESS.translate() + " ").suffix("%"));
-            if (tileEntity.getField(0) > 1)
-                probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L, new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ").suffix("%"));
-        }
-    }
+	// The One Probe Integration
+	@Optional.Method(modid = "theoneprobe")
+	@Override
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+		TileEntityChopper tileEntity = getTileEntity(world, data.getPos());
+		if (tileEntity != null) {
+			double totalWindup = Configs.general.pointsForWindup > 0 ? Configs.general.pointsForWindup : 1;
+			probeInfo.progress((long) ((((double) tileEntity.getField(2)) / totalWindup) * 100L), 100L, new ProgressStyle().prefix(Localization.TOP.WINDUP_PROGRESS.translate() + " ")
+			                                                                                                               .suffix("%"));
+			if (tileEntity.getField(0) > 1)
+				probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L, new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ")
+				                                                                                                                                     .suffix("%"));
+		}
+	}
 }

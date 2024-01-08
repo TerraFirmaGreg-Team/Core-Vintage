@@ -15,29 +15,29 @@ import javax.annotation.Nullable;
 
 public class ItemBearTrapHalf extends ItemTFC implements TFCThingsConfigurableItem {
 
-    public ItemBearTrapHalf() {
-        setTranslationKey("bear_trap_half");
-        setRegistryName("bear_trap_half");
-        setCreativeTab(CreativeTabsTFC.CT_METAL);
-    }
+	public ItemBearTrapHalf() {
+		setTranslationKey("bear_trap_half");
+		setRegistryName("bear_trap_half");
+		setCreativeTab(CreativeTabsTFC.CT_METAL);
+	}
 
-    @Nonnull
-    public Size getSize(@Nonnull ItemStack stack) {
-        return Size.NORMAL;
-    }
+	@Nonnull
+	public Size getSize(@Nonnull ItemStack stack) {
+		return Size.NORMAL;
+	}
 
-    @Nonnull
-    public Weight getWeight(@Nonnull ItemStack stack) {
-        return Weight.HEAVY;
-    }
+	@Nonnull
+	public Weight getWeight(@Nonnull ItemStack stack) {
+		return Weight.HEAVY;
+	}
 
-    @Nullable
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ForgeableHeatableHandler(nbt, 0.35F, 1540.0F);
-    }
+	@Nullable
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new ForgeableHeatableHandler(nbt, 0.35F, 1540.0F);
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableBearTrap;
-    }
+	@Override
+	public boolean isEnabled() {
+		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableBearTrap;
+	}
 }

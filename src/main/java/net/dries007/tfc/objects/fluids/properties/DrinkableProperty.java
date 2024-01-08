@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 
 @FunctionalInterface
 public interface DrinkableProperty {
-    FluidProperty<DrinkableProperty> DRINKABLE = new FluidProperty<>("drinkable");
+	FluidProperty<DrinkableProperty> DRINKABLE = new FluidProperty<>("drinkable");
 
-    void onDrink(@Nonnull EntityPlayer player);
+	void onDrink(@Nonnull EntityPlayer player);
 }

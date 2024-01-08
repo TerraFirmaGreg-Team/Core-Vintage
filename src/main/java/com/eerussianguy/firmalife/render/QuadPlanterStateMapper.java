@@ -6,12 +6,12 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 
 import javax.annotation.Nonnull;
 
-import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.Constants.MODID_FL;
 
 public class QuadPlanterStateMapper extends StateMapperBase {
-    @Override
-    @Nonnull
-    protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-        return new ModelResourceLocation(MOD_ID + ":quad_planter");
-    }
+	@Override
+	@Nonnull
+	protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+		return new ModelResourceLocation(MODID_FL + ":quad_planter");
+	}
 }

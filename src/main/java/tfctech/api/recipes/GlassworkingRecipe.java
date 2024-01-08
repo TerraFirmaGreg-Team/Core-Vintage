@@ -6,26 +6,31 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import tfctech.registry.TechRegistries;
 
 public class GlassworkingRecipe extends IForgeRegistryEntry.Impl<GlassworkingRecipe> {
-    private final SimpleCraftMatrix matrix;
-    private final ItemStack output;
-    public GlassworkingRecipe(ItemStack output, String... pattern) {
-        this.matrix = new SimpleCraftMatrix(false, pattern);
-        this.output = output;
-    }
+	private final SimpleCraftMatrix matrix;
+	private final ItemStack output;
 
-    public static GlassworkingRecipe get(SimpleCraftMatrix input) {
-        return TechRegistries.GLASSWORKING.getValuesCollection().stream().filter(x -> x.matches(input)).findFirst().orElse(null);
-    }
+	public GlassworkingRecipe(ItemStack output, String... pattern) {
+		this.matrix = new SimpleCraftMatrix(false, pattern);
+		this.output = output;
+	}
 
-    public SimpleCraftMatrix getMatrix() {
-        return matrix;
-    }
+	public static GlassworkingRecipe get(SimpleCraftMatrix input) {
+		return TechRegistries.GLASSWORKING.getValuesCollection()
+		                                  .stream()
+		                                  .filter(x -> x.matches(input))
+		                                  .findFirst()
+		                                  .orElse(null);
+	}
 
-    public ItemStack getOutput() {
-        return output.copy();
-    }
+	public SimpleCraftMatrix getMatrix() {
+		return matrix;
+	}
 
-    private boolean matches(SimpleCraftMatrix other) {
-        return other.matches(this.matrix);
-    }
+	public ItemStack getOutput() {
+		return output.copy();
+	}
+
+	private boolean matches(SimpleCraftMatrix other) {
+		return other.matches(this.matrix);
+	}
 }

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModKeybindings {
-    public static List<KeyBinding> keybindings = new ArrayList<KeyBinding>();
+	public static List<KeyBinding> keybindings = new ArrayList<KeyBinding>();
 
-    public static void registerKeyBindings() {
-        keybindings.add(new KeyBinding("key.astikorcarts.desc", Keyboard.KEY_R, "key.categories.astikorcarts"));
+	public static void registerKeyBindings() {
+		keybindings.add(new KeyBinding("key.astikorcarts.desc", Keyboard.KEY_R, "key.categories.astikorcarts"));
 
-        for (KeyBinding bind : keybindings) {
-            ClientRegistry.registerKeyBinding(bind);
-        }
-    }
+		for (KeyBinding bind : keybindings) {
+			ClientRegistry.registerKeyBinding(bind);
+		}
+	}
 }

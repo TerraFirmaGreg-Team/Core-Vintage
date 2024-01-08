@@ -13,21 +13,21 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
  * todo: in 1.13+ move this to a json recipe type
  */
 public abstract class KnappingRecipe extends IForgeRegistryEntry.Impl<KnappingRecipe> {
-    private final KnappingType type;
-    private final SimpleCraftMatrix matrix;
+	private final KnappingType type;
+	private final SimpleCraftMatrix matrix;
 
-    protected KnappingRecipe(KnappingType type, boolean outsideSlotRequired, String... pattern) {
-        this.matrix = new SimpleCraftMatrix(outsideSlotRequired, pattern);
-        this.type = type;
-    }
+	protected KnappingRecipe(KnappingType type, boolean outsideSlotRequired, String... pattern) {
+		this.matrix = new SimpleCraftMatrix(outsideSlotRequired, pattern);
+		this.type = type;
+	}
 
-    public SimpleCraftMatrix getMatrix() {
-        return matrix;
-    }
+	public SimpleCraftMatrix getMatrix() {
+		return matrix;
+	}
 
-    public abstract ItemStack getOutput(ItemStack input);
+	public abstract ItemStack getOutput(ItemStack input);
 
-    public KnappingType getType() {
-        return this.type;
-    }
+	public KnappingType getType() {
+		return this.type;
+	}
 }

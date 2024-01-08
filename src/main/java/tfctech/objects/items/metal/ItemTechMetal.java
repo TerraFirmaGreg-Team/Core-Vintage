@@ -23,130 +23,135 @@ import java.util.function.BiFunction;
  * Since TFC has Metal.ItemType we can't reuse {@link net.dries007.tfc.objects.items.metal.ItemMetal} directly
  */
 public class ItemTechMetal extends ItemTFC implements IMetalItem {
-    private static final Map<Metal, EnumMap<ItemType, ItemTechMetal>> TABLE = new HashMap<>();
-    protected final Metal metal;
-    protected final ItemType type;
-    public ItemTechMetal(Metal metal, ItemType type) {
-        this.metal = metal;
-        this.type = type;
-        if (!TABLE.containsKey(metal)) {
-            TABLE.put(metal, new EnumMap<>(ItemType.class));
-        }
-        TABLE.get(metal).put(type, this);
-        setNoRepair();
+	private static final Map<Metal, EnumMap<ItemType, ItemTechMetal>> TABLE = new HashMap<>();
+	protected final Metal metal;
+	protected final ItemType type;
 
-    }
+	public ItemTechMetal(Metal metal, ItemType type) {
+		this.metal = metal;
+		this.type = type;
+		if (!TABLE.containsKey(metal)) {
+			TABLE.put(metal, new EnumMap<>(ItemType.class));
+		}
+		TABLE.get(metal).put(type, this);
+		setNoRepair();
 
-    @Nullable
-    public static ItemTechMetal get(Metal metal, ItemTechMetal.ItemType type) {
-        return TABLE.get(metal).get(type);
-    }
+	}
 
-    public ItemType getType() {
-        return type;
-    }
+	@Nullable
+	public static ItemTechMetal get(Metal metal, ItemTechMetal.ItemType type) {
+		return TABLE.get(metal).get(type);
+	}
 
-    @Nonnull
-    @Override
-    public Size getSize(@Nonnull ItemStack itemStack) {
-        switch (type) {
-            case WIRE:
-            case BOWL_MOUNT:
-                return Size.LARGE;
-            case GEAR:
-            case RACKWHEEL:
-                return Size.NORMAL;
-            default:
-                return Size.SMALL;
-        }
-    }
+	public ItemType getType() {
+		return type;
+	}
 
-    @Nonnull
-    @Override
-    public Weight getWeight(@Nonnull ItemStack itemStack) {
-        switch (type) {
-            case RACKWHEEL:
-            case GEAR:
-                return Weight.HEAVY;
-            case GROOVE:
-            case WIRE:
-            case SLEEVE:
-            case STRIP:
-                return Weight.LIGHT;
-            default:
-                return Weight.MEDIUM;
-        }
-    }
+	@Nonnull
+	@Override
+	public Size getSize(@Nonnull ItemStack itemStack) {
+		switch (type) {
+			case WIRE:
+			case BOWL_MOUNT:
+				return Size.LARGE;
+			case GEAR:
+			case RACKWHEEL:
+				return Size.NORMAL;
+			default:
+				return Size.SMALL;
+		}
+	}
 
-    @Override
-    @Nonnull
-    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        //noinspection ConstantConditions
-        String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName().getPath().toLowerCase())).getFormattedText();
-        return (new TextComponentTranslation("item.tfctech.metalitem." + type.name().toLowerCase() + ".name", metalName)).getFormattedText();
-    }
+	@Nonnull
+	@Override
+	public Weight getWeight(@Nonnull ItemStack itemStack) {
+		switch (type) {
+			case RACKWHEEL:
+			case GEAR:
+				return Weight.HEAVY;
+			case GROOVE:
+			case WIRE:
+			case SLEEVE:
+			case STRIP:
+				return Weight.LIGHT;
+			default:
+				return Weight.MEDIUM;
+		}
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
-    }
+	@Override
+	@Nonnull
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+		//noinspection ConstantConditions
+		String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
+		                                                                           .getPath()
+		                                                                           .toLowerCase())).getFormattedText();
+		return (new TextComponentTranslation("item.tfctech.metalitem." + type.name()
+		                                                                     .toLowerCase() + ".name", metalName)).getFormattedText();
+	}
 
-    @Nonnull
-    @Override
-    public Metal getMetal(ItemStack itemStack) {
-        return metal;
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
+	}
 
-    @Override
-    public int getSmeltAmount(ItemStack itemStack) {
-        return type.getSmeltAmount();
-    }
+	@Nonnull
+	@Override
+	public Metal getMetal(ItemStack itemStack) {
+		return metal;
+	}
 
-    public enum ItemType {
-        BOWL_MOUNT(100),
-        DRAW_PLATE(100),
-        GROOVE(50, false, ItemGroove::new),
-        INDUCTOR(200),
-        TONGS(100),
-        STRIP(50),
-        LONG_ROD(100),
-        ROD(50),
-        BOLT(25),
-        SCREW(25),
-        SLEEVE(100, true),
-        RACKWHEEL_PIECE(100, true),
-        RACKWHEEL(400),
-        GEAR(400, false, ItemGear::new),
-        WIRE(50, false, ItemWire::new);
+	@Override
+	public int getSmeltAmount(ItemStack itemStack) {
+		return type.getSmeltAmount();
+	}
 
-        private final int smeltAmount;
-        private final boolean hasMold;
-        private final BiFunction<Metal, ItemType, Item> supplier;
-        ItemType(int smeltAmount) {
-            this(smeltAmount, false);
-        }
+	public enum ItemType {
+		BOWL_MOUNT(100),
+		DRAW_PLATE(100),
+		GROOVE(50, false, ItemGroove::new),
+		INDUCTOR(200),
+		TONGS(100),
+		STRIP(50),
+		LONG_ROD(100),
+		ROD(50),
+		BOLT(25),
+		SCREW(25),
+		SLEEVE(100, true),
+		RACKWHEEL_PIECE(100, true),
+		RACKWHEEL(400),
+		GEAR(400, false, ItemGear::new),
+		WIRE(50, false, ItemWire::new);
 
-        ItemType(int smeltAmount, boolean hasMold) {
-            this(smeltAmount, hasMold, ItemTechMetal::new);
-        }
+		private final int smeltAmount;
+		private final boolean hasMold;
+		private final BiFunction<Metal, ItemType, Item> supplier;
 
-        ItemType(int smeltAmount, boolean hasMold, @Nonnull BiFunction<Metal, ItemType, Item> supplier) {
-            this.smeltAmount = smeltAmount;
-            this.hasMold = hasMold;
-            this.supplier = supplier;
-        }
+		ItemType(int smeltAmount) {
+			this(smeltAmount, false);
+		}
 
-        public static Item create(Metal metal, ItemType type) {
-            return type.supplier.apply(metal, type);
-        }
+		ItemType(int smeltAmount, boolean hasMold) {
+			this(smeltAmount, hasMold, ItemTechMetal::new);
+		}
 
-        public int getSmeltAmount() {
-            return smeltAmount;
-        }
+		ItemType(int smeltAmount, boolean hasMold, @Nonnull BiFunction<Metal, ItemType, Item> supplier) {
+			this.smeltAmount = smeltAmount;
+			this.hasMold = hasMold;
+			this.supplier = supplier;
+		}
 
-        public boolean hasMold() {
-            return hasMold;
-        }
-    }
+		public static Item create(Metal metal, ItemType type) {
+			return type.supplier.apply(metal, type);
+		}
+
+		public int getSmeltAmount() {
+			return smeltAmount;
+		}
+
+		public boolean hasMold() {
+			return hasMold;
+		}
+	}
 }

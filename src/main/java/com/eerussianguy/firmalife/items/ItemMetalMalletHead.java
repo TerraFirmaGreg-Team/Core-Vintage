@@ -14,42 +14,42 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ItemMetalMalletHead extends ItemTFC implements IMetalItem {
-    private final Metal metal;
-    private final int smeltAmount;
+	private final Metal metal;
+	private final int smeltAmount;
 
-    public ItemMetalMalletHead(Metal metal) {
-        this.metal = metal;
-        this.smeltAmount = 100;
-    }
+	public ItemMetalMalletHead(Metal metal) {
+		this.metal = metal;
+		this.smeltAmount = 100;
+	}
 
-    @Nonnull
-    public Size getSize(@Nonnull ItemStack itemStack) {
-        return Size.LARGE;
-    }
+	@Nonnull
+	public Size getSize(@Nonnull ItemStack itemStack) {
+		return Size.LARGE;
+	}
 
-    @Nonnull
-    public Weight getWeight(@Nonnull ItemStack itemStack) {
-        return Weight.HEAVY;
-    }
+	@Nonnull
+	public Weight getWeight(@Nonnull ItemStack itemStack) {
+		return Weight.HEAVY;
+	}
 
-    @Nullable
-    @Override
-    public Metal getMetal(ItemStack itemStack) {
-        return metal;
-    }
+	@Nullable
+	@Override
+	public Metal getMetal(ItemStack itemStack) {
+		return metal;
+	}
 
-    @Override
-    public int getSmeltAmount(ItemStack itemStack) {
-        return smeltAmount;
-    }
+	@Override
+	public int getSmeltAmount(ItemStack itemStack) {
+		return smeltAmount;
+	}
 
-    @Override
-    public boolean canMelt(ItemStack itemStack) {
-        return true;
-    }
+	@Override
+	public boolean canMelt(ItemStack itemStack) {
+		return true;
+	}
 
-    @Nullable
-    public ICapabilityProvider initCapabilities(ItemStack itemStack, @Nullable NBTTagCompound nbt) {
-        return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
-    }
+	@Nullable
+	public ICapabilityProvider initCapabilities(ItemStack itemStack, @Nullable NBTTagCompound nbt) {
+		return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
+	}
 }

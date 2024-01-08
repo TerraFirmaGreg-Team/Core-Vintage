@@ -13,14 +13,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemBlockUrn extends ItemBlockTFC implements IItemSize {
-    public ItemBlockUrn(BlockUrn block) {
-        super(block);
-    }
+	public ItemBlockUrn(BlockUrn block) {
+		super(block);
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        // Since this is technically still a pottery item, despite being a block
-        return new ItemHeatHandler(nbt, 1.0f, 1599f);
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		// Since this is technically still a pottery item, despite being a block
+		return new ItemHeatHandler(nbt, 1.0f, 1599f);
+	}
 }

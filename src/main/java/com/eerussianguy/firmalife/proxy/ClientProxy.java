@@ -1,6 +1,13 @@
 package com.eerussianguy.firmalife.proxy;
 
+import lyeoj.tfcthings.init.TFCThingsEntities;
+import lyeoj.tfcthings.renderer.TESRGemDisplay;
+import lyeoj.tfcthings.renderer.TESRGrindstone;
+import lyeoj.tfcthings.tileentity.TileEntityGemDisplay;
+import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,6 +21,15 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent e) {
 		super.preInit(e);
+
+		TFCThingsEntities.registerEntityModels();
+	}
+
+	@Override
+	public void init(FMLInitializationEvent event) {
+		super.init(event);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGemDisplay.class, new TESRGemDisplay());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindstone.class, new TESRGrindstone());
 	}
 
 	@SideOnly(Side.CLIENT)

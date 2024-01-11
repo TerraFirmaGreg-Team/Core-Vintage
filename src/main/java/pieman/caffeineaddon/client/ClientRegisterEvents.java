@@ -17,7 +17,7 @@ import pieman.caffeineaddon.init.ModBlocks;
 import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_CAFFEINEADDON)
+@Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public final class ClientRegisterEvents {
 
 	@SubscribeEvent

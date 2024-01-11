@@ -15,7 +15,7 @@ import su.terrafirmagreg.Tags;
 
 import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
 
-@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
+//@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
 public class CaffeineAddon {
 	public static final Logger LOG = LogManager.getLogger(MODID_CAFFEINEADDON);
 	@Instance

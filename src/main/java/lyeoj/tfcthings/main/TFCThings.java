@@ -36,19 +36,16 @@ public class TFCThings {
 		LOGGER.info("TFC Things: Starting Pre-Init...");
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_TFCTHINGS);
 		network.registerMessage(MessageHookJavelinUpdate.Handler.class, MessageHookJavelinUpdate.class, 1, Side.CLIENT);
-		proxy.preInit(event);
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		LOGGER.info("TFC Things: Starting Init...");
-		proxy.init(event);
 	}
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		LOGGER.info("TFC Things: Starting Post-Init...");
-		proxy.postInit(event);
 	}
 
 }

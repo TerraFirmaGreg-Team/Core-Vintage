@@ -1,6 +1,12 @@
 package com.eerussianguy.firmalife.proxy;
 
 import com.eerussianguy.firmalife.world.WorldGeneratorFL;
+import lyeoj.tfcthings.capability.CapabilitySharpness;
+import lyeoj.tfcthings.capability.TFCThingsCapabilityHandler;
+import lyeoj.tfcthings.init.TFCThingsEntities;
+import lyeoj.tfcthings.main.ConfigTFCThings;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -13,6 +19,14 @@ import static su.terrafirmagreg.Constants.MODID_FL;
 public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent e) {
 		GameRegistry.registerWorldGenerator(new WorldGeneratorFL(), 0);
+
+		MinecraftForge.EVENT_BUS.register(new TFCThingsCapabilityHandler());
+		CapabilitySharpness.setup();
+		TFCThingsEntities.registerEntities();
+		CalendarTFC.BIRTHDAYS.put("OCTOBER4", "Lyeoj's Birthday");
+		for (int i = 0; i < ConfigTFCThings.Misc.BIRTHDAYS.dayList.length; i++) {
+			ConfigTFCThings.addBirthday(ConfigTFCThings.Misc.BIRTHDAYS.dayList[i]);
+		}
 	}
 
 	public void init(FMLInitializationEvent e) {

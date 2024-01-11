@@ -19,7 +19,7 @@ import java.util.List;
 
 import static su.terrafirmagreg.Constants.MODID_TFCPASSINGDAYS;
 
-@Mod(modid = MODID_TFCPASSINGDAYS, name = PassingDays.name, version = Tags.VERSION, dependencies = "after:galacticraftcore;after:immersivetech")
+//@Mod(modid = MODID_TFCPASSINGDAYS, name = PassingDays.name, version = Tags.VERSION, dependencies = "after:galacticraftcore;after:immersivetech")
 public class PassingDays {
 	public static final String name = "TFC Passing Days";
 	boolean await = false;

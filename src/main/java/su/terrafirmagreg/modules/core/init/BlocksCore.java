@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.init;
 
-import su.terrafirmagreg.api.modules.registry.Registry;
+import su.terrafirmagreg.api.registry.Registry;
 
 public final class BlocksCore {
 

@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.modules.ModuleBase;
-import su.terrafirmagreg.api.modules.registry.Registry;
+import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.modules.TFGModule;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.TFGModules;

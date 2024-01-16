@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.modules.registry;
+package su.terrafirmagreg.api.registry;
 
 import net.darkhax.bookshelf.block.IColorfulBlock;
 import net.darkhax.bookshelf.block.ITileEntityBlock;
@@ -6,7 +6,6 @@ import net.darkhax.bookshelf.item.IColorfulItem;
 import net.darkhax.bookshelf.lib.Constants;
 import net.darkhax.bookshelf.lib.LootBuilder;
 import net.darkhax.bookshelf.registry.IAutoRegistry;
-import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;

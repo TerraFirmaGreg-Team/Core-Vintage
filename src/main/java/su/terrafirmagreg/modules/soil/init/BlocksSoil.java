@@ -4,7 +4,7 @@ import net.darkhax.bookshelf.item.ICustomModel;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.api.modules.registry.Registry;
+import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;

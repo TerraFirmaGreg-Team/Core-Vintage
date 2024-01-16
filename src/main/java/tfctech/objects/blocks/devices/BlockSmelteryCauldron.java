@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.NotNull;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 
@@ -151,13 +152,13 @@ public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize 
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 }

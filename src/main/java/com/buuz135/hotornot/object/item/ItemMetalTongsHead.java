@@ -6,6 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,12 +44,12 @@ public class ItemMetalTongsHead extends ItemTFC implements IMetalItem {
 	}
 
 	@Override
-	public Size getSize(final ItemStack itemStack) {
+	public @NotNull Size getSize(final ItemStack itemStack) {
 		return Size.NORMAL;
 	}
 
 	@Override
-	public Weight getWeight(final ItemStack itemStack) {
+	public @NotNull Weight getWeight(final ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 }

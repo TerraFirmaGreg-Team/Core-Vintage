@@ -55,6 +55,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Constants;
 
 import javax.annotation.Nonnull;
@@ -164,13 +165,13 @@ public class ItemSmallVessel extends ItemPottery {
 
 	@Nonnull
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL; // Can't be stored in itself
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
 

@@ -31,6 +31,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -158,13 +159,13 @@ public class ItemQuiver extends ItemArmorTFC {
 
 	@Nonnull
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;
 	}
 

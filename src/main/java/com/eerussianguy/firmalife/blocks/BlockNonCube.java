@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -55,13 +56,13 @@ public abstract class BlockNonCube extends Block implements IItemSize {
 
 	@Override
 	@Nonnull
-	public Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
 		return Size.NORMAL;
 	}
 
 	@Override
 	@Nonnull
-	public Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 }

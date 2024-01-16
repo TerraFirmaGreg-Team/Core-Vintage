@@ -1,0 +1,35 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "soil_type": {
+      "silt": {
+        "textures": {
+          "all": "tfg:blocks/soil/mud_bricks/silt"
+        }
+      },
+      "loam": {
+        "textures": {
+          "all": "tfg:blocks/soil/mud_bricks/loam"
+        }
+      },
+      "sandy_loam": {
+        "textures": {
+          "all": "tfg:blocks/soil/mud_bricks/sandy_loam"
+        }
+      },
+      "silty_loam": {
+        "textures": {
+          "all": "tfg:blocks/soil/mud_bricks/silty_loam"
+        }
+      },
+      "humus": {
+        "textures": {
+          "all": "tfg:blocks/soil/mud_bricks/humus"
+        }
+      }
+    }
+  }
+}

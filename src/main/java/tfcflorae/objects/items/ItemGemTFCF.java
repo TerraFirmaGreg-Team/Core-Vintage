@@ -6,6 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.GemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -70,13 +71,13 @@ public class ItemGemTFCF extends ItemTFCF {
 
 	@Nonnull
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT;
 	}
 

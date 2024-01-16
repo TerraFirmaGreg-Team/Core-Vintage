@@ -22,6 +22,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
@@ -201,13 +202,13 @@ public class ItemBowTFCF extends ItemBow implements IItemSize {
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return size;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return weight;
 	}
 }

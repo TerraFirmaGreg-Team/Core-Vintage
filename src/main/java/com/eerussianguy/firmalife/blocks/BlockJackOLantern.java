@@ -22,6 +22,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -43,12 +44,12 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize, ILi
 	}
 
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE;
 	}
 
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.HEAVY;
 	}
 

@@ -13,6 +13,7 @@ import net.dries007.tfc.api.types.IArmorMaterialTFC;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -42,13 +43,13 @@ public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResista
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return Size.LARGE; // Stored in chests
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return Weight.HEAVY; // Stacksize is already restricted to 1
 	}
 

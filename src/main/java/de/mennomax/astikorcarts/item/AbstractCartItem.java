@@ -15,6 +15,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -58,13 +59,13 @@ public abstract class AbstractCartItem extends ItemTFC {
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
 		return Size.HUGE;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
 		return Weight.VERY_HEAVY;
 	}
 }

@@ -25,6 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TEInductionCrucible;
 
@@ -197,12 +198,12 @@ public class BlockInductionCrucible extends Block implements IItemSize {
 	}
 
 	@Override
-	public Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
 	@Override
-	public Weight getWeight(ItemStack itemStack) {
+	public @NotNull Weight getWeight(ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 

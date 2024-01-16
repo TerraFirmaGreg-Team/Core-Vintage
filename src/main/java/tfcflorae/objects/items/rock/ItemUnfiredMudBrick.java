@@ -9,6 +9,7 @@ import net.dries007.tfc.api.util.IRockObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.items.ItemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -50,13 +51,13 @@ public class ItemUnfiredMudBrick extends ItemTFCF implements IRockObject {
 
 	@Nonnull
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL; // Stored everywhere
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT; // Stacksize = 32
 	}
 

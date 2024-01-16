@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -55,13 +56,13 @@ public class ItemHikingBoots extends ItemArmor implements IItemSize, IDamageResi
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
 		return Weight.HEAVY;
 	}
 

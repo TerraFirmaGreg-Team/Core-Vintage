@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -60,13 +61,13 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return this.size;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return this.weight;
 	}
 

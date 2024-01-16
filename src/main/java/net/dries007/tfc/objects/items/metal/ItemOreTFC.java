@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -189,13 +190,13 @@ public class ItemOreTFC extends ItemTFC implements IMetalItem {
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return Size.SMALL; // Fits in Small Vessels
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return Weight.MEDIUM; // Stacksize = 16
 	}
 }

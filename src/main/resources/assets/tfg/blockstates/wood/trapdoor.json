@@ -1,0 +1,35 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/trapdoor/trapdoor_bottom"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "facing": {
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "north": {},
+      "east": {
+        "y": 90
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": {
+        "model": "tfg:wood/trapdoor/trapdoor_top"
+      }
+    },
+    "open": {
+      "false": {},
+      "true": {
+        "model": "tfg:wood/trapdoor/trapdoor_open"
+      }
+    }
+  }
+}

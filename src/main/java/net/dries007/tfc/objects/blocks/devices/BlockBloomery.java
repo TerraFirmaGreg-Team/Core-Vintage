@@ -32,6 +32,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -204,13 +205,13 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
 
 	@Override
 	@Nonnull
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE; // Only in chests
 	}
 
 	@Override
 	@Nonnull
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY;  // stacksize = 1
 	}
 

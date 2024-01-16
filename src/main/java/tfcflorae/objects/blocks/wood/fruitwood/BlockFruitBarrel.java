@@ -33,6 +33,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
@@ -79,13 +80,13 @@ public class BlockFruitBarrel extends Block implements IItemSize {
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE; // Causes overburden if sealed
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
 

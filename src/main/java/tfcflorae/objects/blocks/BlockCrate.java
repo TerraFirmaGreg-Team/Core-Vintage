@@ -25,6 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.te.TECrate;
 
@@ -70,13 +71,13 @@ public class BlockCrate extends Block implements IItemSize {
 
 	@Override
 	@Nonnull
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE; // Causes overburden if sealed
 	}
 
 	@Override
 	@Nonnull
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
 

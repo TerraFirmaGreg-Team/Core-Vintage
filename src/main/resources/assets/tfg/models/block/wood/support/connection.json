@@ -1,0 +1,67 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "block/block",
+  "textures": {
+    "texture": "tfg:blocks/wood/sheet"
+  },
+  "elements": [
+    {
+      "from": [
+        11, 10, 5
+      ],
+      "to": [
+        16, 16, 11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5, 0, 11, 6
+          ],
+          "texture": "#texture",
+          "cullface": "north",
+          "tintindex": 1
+        },
+        "east": {
+          "uv": [
+            0, 0, 16, 16
+          ],
+          "texture": "#texture",
+          "cullface": "east",
+          "tintindex": 1
+        },
+        "south": {
+          "uv": [
+            5, 0, 11, 6
+          ],
+          "texture": "#texture",
+          "cullface": "south",
+          "tintindex": 1
+        },
+        "west": {
+          "uv": [
+            0, 0, 16, 16
+          ],
+          "texture": "#texture",
+          "cullface": "west",
+          "tintindex": 1
+        },
+        "up": {
+          "uv": [
+            5, 0, 11, 16
+          ],
+          "texture": "#texture",
+          "cullface": "up",
+          "tintindex": 1
+        },
+        "down": {
+          "uv": [
+            5, 0, 11, 16
+          ],
+          "texture": "#texture",
+          "cullface": "down",
+          "tintindex": 1
+        }
+      }
+    }
+  ]
+}

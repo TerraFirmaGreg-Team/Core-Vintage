@@ -334,8 +334,11 @@ public class FallingBlockManager {
 		                                                                                             .isReplaceable();
 
 		public static final Specification VERTICAL_AND_HORIZONTAL = new Specification(true, () -> TFCSounds.DIRT_SLIDE_SHORT);
+		public static final Specification VERTICAL_AND_HORIZONTAL_ROCK = new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT);
 		public static final Specification VERTICAL_ONLY = new Specification(false, () -> TFCSounds.DIRT_SLIDE_SHORT);
+		public static final Specification VERTICAL_ONLY_SOIL = new Specification(false, () -> TFCSounds.DIRT_SLIDE_SHORT);
 		public static final Specification COLLAPSABLE = new Specification(false, true, () -> TFCSounds.ROCK_SLIDE_LONG);
+		public static final Specification COLLAPSABLE_ROCK = new Specification(false, true, () -> TFCSounds.ROCK_SLIDE_LONG);
 
 		private final boolean canFallHorizontally;
 		private final Supplier<SoundEvent> soundEventDelegate;

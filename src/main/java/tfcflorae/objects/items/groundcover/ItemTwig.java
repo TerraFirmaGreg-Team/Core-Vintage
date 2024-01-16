@@ -5,6 +5,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockTwig;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -25,13 +26,13 @@ public class ItemTwig extends ItemBlockTFC {
 
 	@Nonnull
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;
 	}
 

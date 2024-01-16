@@ -5,6 +5,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemToolHead extends ItemBase implements IMetalItem {
 	private final Metal metal;
@@ -15,12 +16,12 @@ public class ItemToolHead extends ItemBase implements IMetalItem {
 	}
 
 	@Override
-	public Size getSize(ItemStack arg0) {
+	public @NotNull Size getSize(@NotNull ItemStack arg0) {
 		return Size.NORMAL;
 	}
 
 	@Override
-	public Weight getWeight(ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 

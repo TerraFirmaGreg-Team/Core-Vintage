@@ -4,6 +4,7 @@ package org.labellum.mc.waterflasks.item;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.labellum.mc.waterflasks.ConfigFlasks;
 
 import javax.annotation.Nonnull;
@@ -19,13 +20,13 @@ public class ItemIronFlask extends ItemFlask {
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return Size.NORMAL;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 

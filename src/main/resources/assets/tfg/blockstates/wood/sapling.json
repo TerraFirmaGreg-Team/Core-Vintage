@@ -1,0 +1,574 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/sapling"
+  },
+  "variants": {
+    "type": {
+      "acacia": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/acacia",
+          "leaves": "tfg:blocks/wood/leaves/acacia"
+        }
+      },
+      "ash": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/ash",
+          "leaves": "tfg:blocks/wood/leaves/ash"
+        }
+      },
+      "aspen": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/aspen",
+          "leaves": "tfg:blocks/wood/leaves/aspen"
+        }
+      },
+      "birch": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/birch",
+          "leaves": "tfg:blocks/wood/leaves/birch"
+        }
+      },
+      "blackwood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/blackwood",
+          "leaves": "tfg:blocks/wood/leaves/blackwood"
+        }
+      },
+      "chestnut": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/chestnut",
+          "leaves": "tfg:blocks/wood/leaves/chestnut"
+        }
+      },
+      "douglas_fir": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/douglas_fir",
+          "leaves": "tfg:blocks/wood/leaves/douglas_fir"
+        }
+      },
+      "hickory": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/hickory",
+          "leaves": "tfg:blocks/wood/leaves/hickory"
+        }
+      },
+      "maple": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/maple",
+          "leaves": "tfg:blocks/wood/leaves/maple"
+        }
+      },
+      "oak": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/oak",
+          "leaves": "tfg:blocks/wood/leaves/oak"
+        }
+      },
+      "palm": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/palm",
+          "leaves": "tfg:blocks/wood/leaves/palm"
+        }
+      },
+      "pine": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/pine",
+          "leaves": "tfg:blocks/wood/leaves/pine"
+        }
+      },
+      "rosewood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/rosewood",
+          "leaves": "tfg:blocks/wood/leaves/rosewood"
+        }
+      },
+      "sequoia": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/sequoia",
+          "leaves": "tfg:blocks/wood/leaves/sequoia"
+        }
+      },
+      "spruce": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/spruce",
+          "leaves": "tfg:blocks/wood/leaves/spruce"
+        }
+      },
+      "sycamore": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/sycamore",
+          "leaves": "tfg:blocks/wood/leaves/sycamore"
+        }
+      },
+      "white_cedar": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/white_cedar",
+          "leaves": "tfg:blocks/wood/leaves/white_cedar"
+        }
+      },
+      "willow": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/willow",
+          "leaves": "tfg:blocks/wood/leaves/willow"
+        }
+      },
+      "kapok": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/kapok",
+          "leaves": "tfg:blocks/wood/leaves/kapok"
+        }
+      },
+      "banana": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/banana",
+          "leaves": "tfg:blocks/wood/leaves/banana"
+        }
+      },
+      "cherry": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/cherry",
+          "leaves": "tfg:blocks/wood/leaves/cherry"
+        }
+      },
+      "green_apple": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/green_apple",
+          "leaves": "tfg:blocks/wood/leaves/green_apple"
+        }
+      },
+      "lemon": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/lemon",
+          "leaves": "tfg:blocks/wood/leaves/lemon"
+        }
+      },
+      "olive": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/olive",
+          "leaves": "tfg:blocks/wood/leaves/olive"
+        }
+      },
+      "orange": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/orange",
+          "leaves": "tfg:blocks/wood/leaves/orange"
+        }
+      },
+      "peach": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/peach",
+          "leaves": "tfg:blocks/wood/leaves/peach"
+        }
+      },
+      "plum": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/plum",
+          "leaves": "tfg:blocks/wood/leaves/plum"
+        }
+      },
+      "red_apple": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/red_apple",
+          "leaves": "tfg:blocks/wood/leaves/red_apple"
+        }
+      },
+      "hevea": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/hevea",
+          "leaves": "tfg:blocks/wood/leaves/hevea"
+        }
+      },
+      "african_padauk": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/african_padauk",
+          "leaves": "tfg:blocks/wood/leaves/african_padauk"
+        }
+      },
+      "alder": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/alder",
+          "leaves": "tfg:blocks/wood/leaves/alder"
+        }
+      },
+      "angelim": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/angelim",
+          "leaves": "tfg:blocks/wood/leaves/angelim"
+        }
+      },
+      "bald_cypress": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/bald_cypress",
+          "leaves": "tfg:blocks/wood/leaves/bald_cypress"
+        }
+      },
+      "baobab": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/baobab",
+          "leaves": "tfg:blocks/wood/leaves/baobab"
+        }
+      },
+      "beech": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/beech",
+          "leaves": "tfg:blocks/wood/leaves/beech"
+        }
+      },
+      "black_walnut": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/black_walnut",
+          "leaves": "tfg:blocks/wood/leaves/black_walnut"
+        }
+      },
+      "box": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/box",
+          "leaves": "tfg:blocks/wood/leaves/box"
+        }
+      },
+      "brazilwood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/brazilwood",
+          "leaves": "tfg:blocks/wood/leaves/brazilwood"
+        }
+      },
+      "butternut": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/butternut",
+          "leaves": "tfg:blocks/wood/leaves/butternut"
+        }
+      },
+      "cocobolo": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/cocobolo",
+          "leaves": "tfg:blocks/wood/leaves/cocobolo"
+        }
+      },
+      "cypress": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/cypress",
+          "leaves": "tfg:blocks/wood/leaves/cypress"
+        }
+      },
+      "ebony": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/ebony",
+          "leaves": "tfg:blocks/wood/leaves/ebony"
+        }
+      },
+      "eucalyptus": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/eucalyptus",
+          "leaves": "tfg:blocks/wood/leaves/eucalyptus"
+        }
+      },
+      "european_oak": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/european_oak",
+          "leaves": "tfg:blocks/wood/leaves/european_oak"
+        }
+      },
+      "fever": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/fever",
+          "leaves": "tfg:blocks/wood/leaves/fever"
+        }
+      },
+      "fruitwood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/fruitwood",
+          "leaves": "tfg:blocks/wood/leaves/fruitwood"
+        }
+      },
+      "ginkgo": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/ginkgo",
+          "leaves": "tfg:blocks/wood/leaves/ginkgo"
+        }
+      },
+      "greenheart": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/greenheart",
+          "leaves": "tfg:blocks/wood/leaves/greenheart"
+        }
+      },
+      "hawthorn": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/hawthorn",
+          "leaves": "tfg:blocks/wood/leaves/hawthorn"
+        }
+      },
+      "hazel": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/hazel",
+          "leaves": "tfg:blocks/wood/leaves/hazel"
+        }
+      },
+      "hemlock": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/hemlock",
+          "leaves": "tfg:blocks/wood/leaves/hemlock"
+        }
+      },
+      "holly": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/holly",
+          "leaves": "tfg:blocks/wood/leaves/holly"
+        }
+      },
+      "hornbeam": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/hornbeam",
+          "leaves": "tfg:blocks/wood/leaves/hornbeam"
+        }
+      },
+      "ipe": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/ipe",
+          "leaves": "tfg:blocks/wood/leaves/ipe"
+        }
+      },
+      "iroko": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/iroko",
+          "leaves": "tfg:blocks/wood/leaves/iroko"
+        }
+      },
+      "ironwood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/ironwood",
+          "leaves": "tfg:blocks/wood/leaves/ironwood"
+        }
+      },
+      "jacaranda": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/jacaranda",
+          "leaves": "tfg:blocks/wood/leaves/jacaranda"
+        }
+      },
+      "juniper": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/juniper",
+          "leaves": "tfg:blocks/wood/leaves/juniper"
+        }
+      },
+      "kauri": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/kauri",
+          "leaves": "tfg:blocks/wood/leaves/kauri"
+        }
+      },
+      "larch": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/larch",
+          "leaves": "tfg:blocks/wood/leaves/larch"
+        }
+      },
+      "limba": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/limba",
+          "leaves": "tfg:blocks/wood/leaves/limba"
+        }
+      },
+      "locust": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/locust",
+          "leaves": "tfg:blocks/wood/leaves/locust"
+        }
+      },
+      "logwood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/logwood",
+          "leaves": "tfg:blocks/wood/leaves/logwood"
+        }
+      },
+      "maclura": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/maclura",
+          "leaves": "tfg:blocks/wood/leaves/maclura"
+        }
+      },
+      "mahoe": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/mahoe",
+          "leaves": "tfg:blocks/wood/leaves/mahoe"
+        }
+      },
+      "mahogany": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/mahogany",
+          "leaves": "tfg:blocks/wood/leaves/mahogany"
+        }
+      },
+      "mangrove": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/mangrove",
+          "leaves": "tfg:blocks/wood/leaves/mangrove"
+        }
+      },
+      "marblewood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/marblewood",
+          "leaves": "tfg:blocks/wood/leaves/marblewood"
+        }
+      },
+      "messmate": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/messmate",
+          "leaves": "tfg:blocks/wood/leaves/messmate"
+        }
+      },
+      "mountain_ash": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/mountain_ash",
+          "leaves": "tfg:blocks/wood/leaves/mountain_ash"
+        }
+      },
+      "nordmann_fir": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/nordmann_fir",
+          "leaves": "tfg:blocks/wood/leaves/nordmann_fir"
+        }
+      },
+      "norway_spruce": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/norway_spruce",
+          "leaves": "tfg:blocks/wood/leaves/norway_spruce"
+        }
+      },
+      "pink_cherry": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/pink_cherry",
+          "leaves": "tfg:blocks/wood/leaves/pink_cherry"
+        }
+      },
+      "pink_ivory": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/pink_ivory",
+          "leaves": "tfg:blocks/wood/leaves/pink_ivory"
+        }
+      },
+      "poplar": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/poplar",
+          "leaves": "tfg:blocks/wood/leaves/poplar"
+        }
+      },
+      "purpleheart": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/purpleheart",
+          "leaves": "tfg:blocks/wood/leaves/purpleheart"
+        }
+      },
+      "red_cedar": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/red_cedar",
+          "leaves": "tfg:blocks/wood/leaves/red_cedar"
+        }
+      },
+      "red_elm": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/red_elm",
+          "leaves": "tfg:blocks/wood/leaves/red_elm"
+        }
+      },
+      "redwood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/redwood",
+          "leaves": "tfg:blocks/wood/leaves/redwood"
+        }
+      },
+      "rowan": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/rowan",
+          "leaves": "tfg:blocks/wood/leaves/rowan"
+        }
+      },
+      "rubber_fig": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/rubber_fig",
+          "leaves": "tfg:blocks/wood/leaves/rubber_fig"
+        }
+      },
+      "sweetgum": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/sweetgum",
+          "leaves": "tfg:blocks/wood/leaves/sweetgum"
+        }
+      },
+      "syzygium": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/syzygium",
+          "leaves": "tfg:blocks/wood/leaves/syzygium"
+        }
+      },
+      "teak": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/teak",
+          "leaves": "tfg:blocks/wood/leaves/teak"
+        }
+      },
+      "walnut": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/walnut",
+          "leaves": "tfg:blocks/wood/leaves/walnut"
+        }
+      },
+      "wenge": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/wenge",
+          "leaves": "tfg:blocks/wood/leaves/wenge"
+        }
+      },
+      "white_cherry": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/white_cherry",
+          "leaves": "tfg:blocks/wood/leaves/white_cherry"
+        }
+      },
+      "white_elm": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/white_elm",
+          "leaves": "tfg:blocks/wood/leaves/white_elm"
+        }
+      },
+      "whitebeam": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/whitebeam",
+          "leaves": "tfg:blocks/wood/leaves/whitebeam"
+        }
+      },
+      "yellow_meranti": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/yellow_meranti",
+          "leaves": "tfg:blocks/wood/leaves/yellow_meranti"
+        }
+      },
+      "yew": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/yew",
+          "leaves": "tfg:blocks/wood/leaves/yew"
+        }
+      },
+      "zebrawood": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/zebrawood",
+          "leaves": "tfg:blocks/wood/leaves/zebrawood"
+        }
+      },
+      "cocoa": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/cocoa",
+          "leaves": "tfg:blocks/wood/leaves/cocoa"
+        }
+      },
+      "cinnamon": {
+        "textures": {
+          "side": "tfg:blocks/wood/log/side/cinnamon",
+          "leaves": "tfg:blocks/wood/leaves/cinnamon"
+        }
+      }
+    }
+  }
+}

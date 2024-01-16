@@ -1,0 +1,100 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "color": {
+      "black": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/black"
+        }
+      },
+      "blue": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/blue"
+        }
+      },
+      "brown": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/brown"
+        }
+      },
+      "cyan": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/cyan"
+        }
+      },
+      "gray": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/gray"
+        }
+      },
+      "green": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/green"
+        }
+      },
+      "light_blue": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/light_blue"
+        }
+      },
+      "lime": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/lime"
+        }
+      },
+      "magenta": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/magenta"
+        }
+      },
+      "orange": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/orange"
+        }
+      },
+      "pink": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/pink"
+        }
+      },
+      "plain": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/plain"
+        }
+      },
+      "purple": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/purple"
+        }
+      },
+      "red": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/red"
+        }
+      },
+      "silver": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/silver"
+        }
+      },
+      "white": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/white"
+        }
+      },
+      "yellow": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/yellow"
+        }
+      },
+      "colorless": {
+        "textures": {
+          "all": "tfg:blocks/rock/alabaster/smooth/colorless"
+        }
+      }
+    }
+  }
+}

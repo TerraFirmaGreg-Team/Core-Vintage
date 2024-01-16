@@ -7,6 +7,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -21,11 +22,11 @@ public class ItemFruitDoor extends ItemDoor implements IItemSize {
 
 	@Nonnull
 	@Override
-	public Size getSize(ItemStack stack) {return Size.VERY_LARGE;}
+	public @NotNull Size getSize(ItemStack stack) {return Size.VERY_LARGE;}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(ItemStack stack) {return Weight.HEAVY;}
+	public @NotNull Weight getWeight(ItemStack stack) {return Weight.HEAVY;}
 
 	@Override
 	public int getItemStackLimit(ItemStack stack) {return getStackSize(stack);}

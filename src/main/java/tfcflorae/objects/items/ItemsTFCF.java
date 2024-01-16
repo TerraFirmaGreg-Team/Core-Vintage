@@ -2344,7 +2344,7 @@ public final class ItemsTFCF {
 			allCeramicMoldItems = ceramicItems.build();
 		}
 
-		OreDictionaryHelper.init();
+		//OreDictionaryHelper.init();
 	}
 
 	@SuppressWarnings("ConstantConditions")

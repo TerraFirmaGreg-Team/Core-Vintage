@@ -39,6 +39,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
 import javax.annotation.Nonnull;
@@ -222,13 +223,13 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 
 	@Nonnull
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(ItemStack stack) {
 		return Size.TINY; // Store anywhere
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
 	}
 

@@ -1,0 +1,278 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true,
+    "textures": {
+      "bottom": "#all",
+      "top": "#all",
+      "side": "#all"
+    }
+  },
+  "variants": {
+    "facing": {
+      "east": {},
+      "west": {
+        "y": 180,
+        "uvlock": true
+      },
+      "south": {
+        "y": 90,
+        "uvlock": true
+      },
+      "north": {
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": {
+        "x": 180
+      }
+    },
+    "shape": {
+      "straight": {
+        "model": "stairs"
+      },
+      "inner_left": {
+        "model": "inner_stairs"
+      },
+      "inner_right": {
+        "model": "inner_stairs"
+      },
+      "outer_left": {
+        "model": "outer_stairs"
+      },
+      "outer_right": {
+        "model": "outer_stairs"
+      }
+    },
+    "rock_type": {
+      "granite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/granite"
+        }
+      },
+      "diorite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/diorite"
+        }
+      },
+      "gabbro": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/gabbro"
+        }
+      },
+      "shale": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/shale"
+        }
+      },
+      "claystone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/claystone"
+        }
+      },
+      "limestone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/limestone"
+        }
+      },
+      "conglomerate": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/conglomerate"
+        }
+      },
+      "dolomite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/dolomite"
+        }
+      },
+      "chert": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/chert"
+        }
+      },
+      "chalk": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/chalk"
+        }
+      },
+      "rhyolite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/rhyolite"
+        }
+      },
+      "basalt": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/basalt"
+        }
+      },
+      "andesite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/andesite"
+        }
+      },
+      "dacite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/dacite"
+        }
+      },
+      "quartzite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/quartzite"
+        }
+      },
+      "slate": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/slate"
+        }
+      },
+      "phyllite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/phyllite"
+        }
+      },
+      "schist": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/schist"
+        }
+      },
+      "gneiss": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/gneiss"
+        }
+      },
+      "marble": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/marble"
+        }
+      },
+      "breccia": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/breccia"
+        }
+      },
+      "foidolite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/foidolite"
+        }
+      },
+      "porphyry": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/porphyry"
+        }
+      },
+      "peridotite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/peridotite"
+        }
+      },
+      "mudstone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/mudstone"
+        }
+      },
+      "sandstone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/sandstone"
+        }
+      },
+      "siltstone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/siltstone"
+        }
+      },
+      "blueschist": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/blueschist"
+        }
+      },
+      "catlinite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/catlinite"
+        }
+      },
+      "greenschist": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/greenschist"
+        }
+      },
+      "novaculite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/novaculite"
+        }
+      },
+      "soapstone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/soapstone"
+        }
+      },
+      "komatiite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/komatiite"
+        }
+      },
+      "red_granite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/red_granite"
+        }
+      },
+      "blaimorite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/blaimorite"
+        }
+      },
+      "boninite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/boninite"
+        }
+      },
+      "carbonatite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/carbonatite"
+        }
+      },
+      "laterite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/laterite"
+        }
+      },
+      "arkose": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/arkose"
+        }
+      },
+      "jaspillite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/jaspillite"
+        }
+      },
+      "travertine": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/travertine"
+        }
+      },
+      "wackestone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/wackestone"
+        }
+      },
+      "blackband_ironstone": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/blackband_ironstone"
+        }
+      },
+      "cataclasite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/cataclasite"
+        }
+      },
+      "mylonite": {
+        "textures": {
+          "all": "tfg:blocks/rock/cobble/mylonite"
+        }
+      }
+    }
+  }
+}

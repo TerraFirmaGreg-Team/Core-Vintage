@@ -14,7 +14,7 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.blocks.itemblocks.ItemBlockDoor;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import net.sharkbark.cellars.util.IHasModel;
+import su.terrafirmagreg.api.util.IHasModel;
 
 import java.util.Random;
 
@@ -42,7 +42,7 @@ public class DoorBase extends BlockDoor implements IHasModel {
 	}
 
 	@Override
-	public void registerModels() {
+	public void onModelRegister() {
 
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 

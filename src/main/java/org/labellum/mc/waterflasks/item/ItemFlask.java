@@ -39,6 +39,7 @@ import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import org.labellum.mc.waterflasks.ConfigFlasks;
 import org.labellum.mc.waterflasks.fluids.FlaskFluidHandler;
 
@@ -82,13 +83,13 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSize 
 
 	@Nonnull
 	@Override
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return Size.SMALL;
 	}
 
 	@Nonnull
 	@Override
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return Weight.MEDIUM;
 	}
 

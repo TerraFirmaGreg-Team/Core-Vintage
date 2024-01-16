@@ -1,0 +1,291 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true
+  },
+  "variants": {
+    "up": {
+      "true": {
+        "submodel": {
+          "wall_post": {
+            "model": "wall_post"
+          }
+        }
+      },
+      "false": {},
+      "inventory": {
+        "model": "wall_inventory"
+      }
+    },
+    "north": {
+      "true": {
+        "submodel": {
+          "wall_north": {
+            "model": "wall_side"
+          }
+        }
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "submodel": {
+          "wall_east": {
+            "model": "wall_side",
+            "y": 90
+          }
+        }
+      },
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "submodel": {
+          "wall_south": {
+            "model": "wall_side",
+            "y": 180
+          }
+        }
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "submodel": {
+          "wall_west": {
+            "model": "wall_side",
+            "y": 270
+          }
+        }
+      },
+      "false": {}
+    },
+    "rock_type": {
+      "granite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/granite"
+        }
+      },
+      "diorite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/diorite"
+        }
+      },
+      "gabbro": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/gabbro"
+        }
+      },
+      "shale": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/shale"
+        }
+      },
+      "claystone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/claystone"
+        }
+      },
+      "limestone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/limestone"
+        }
+      },
+      "conglomerate": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/conglomerate"
+        }
+      },
+      "dolomite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/dolomite"
+        }
+      },
+      "chert": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/chert"
+        }
+      },
+      "chalk": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/chalk"
+        }
+      },
+      "rhyolite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/rhyolite"
+        }
+      },
+      "basalt": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/basalt"
+        }
+      },
+      "andesite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/andesite"
+        }
+      },
+      "dacite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/dacite"
+        }
+      },
+      "quartzite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/quartzite"
+        }
+      },
+      "slate": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/slate"
+        }
+      },
+      "phyllite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/phyllite"
+        }
+      },
+      "schist": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/schist"
+        }
+      },
+      "gneiss": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/gneiss"
+        }
+      },
+      "marble": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/marble"
+        }
+      },
+      "breccia": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/breccia"
+        }
+      },
+      "foidolite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/foidolite"
+        }
+      },
+      "porphyry": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/porphyry"
+        }
+      },
+      "peridotite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/peridotite"
+        }
+      },
+      "mudstone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/mudstone"
+        }
+      },
+      "sandstone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/sandstone"
+        }
+      },
+      "siltstone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/siltstone"
+        }
+      },
+      "blueschist": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/blueschist"
+        }
+      },
+      "catlinite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/catlinite"
+        }
+      },
+      "greenschist": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/greenschist"
+        }
+      },
+      "novaculite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/novaculite"
+        }
+      },
+      "soapstone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/soapstone"
+        }
+      },
+      "komatiite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/komatiite"
+        }
+      },
+      "red_granite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/red_granite"
+        }
+      },
+      "blaimorite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/blaimorite"
+        }
+      },
+      "boninite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/boninite"
+        }
+      },
+      "carbonatite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/carbonatite"
+        }
+      },
+      "laterite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/laterite"
+        }
+      },
+      "arkose": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/arkose"
+        }
+      },
+      "jaspillite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/jaspillite"
+        }
+      },
+      "travertine": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/travertine"
+        }
+      },
+      "wackestone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/wackestone"
+        }
+      },
+      "blackband_ironstone": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/blackband_ironstone"
+        }
+      },
+      "cataclasite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/cataclasite"
+        }
+      },
+      "mylonite": {
+        "textures": {
+          "wall": "tfg:blocks/rock/raw/mylonite"
+        }
+      }
+    }
+  }
+}

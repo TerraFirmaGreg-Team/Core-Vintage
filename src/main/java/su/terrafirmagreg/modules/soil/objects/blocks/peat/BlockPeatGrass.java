@@ -1,0 +1,112 @@
+package su.terrafirmagreg.modules.soil.objects.blocks.peat;
+
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.objects.block.BlockBase;
+import su.terrafirmagreg.api.util.CustomStateMap;
+import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.modules.soil.StorageSoil;
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
+
+import java.util.Random;
+
+
+public class BlockPeatGrass extends BlockBase implements IHasModel {
+
+    // Used for connected textures only.
+    public static final PropertyBool NORTH = PropertyBool.create("north");
+    public static final PropertyBool EAST = PropertyBool.create("east");
+    public static final PropertyBool SOUTH = PropertyBool.create("south");
+    public static final PropertyBool WEST = PropertyBool.create("west");
+
+    public static final String NAME = "soil/peat_grass";
+
+    public BlockPeatGrass() {
+        super(Material.GRASS);
+
+        setSoundType(SoundType.PLANT);
+        setTickRandomly(true);
+        setDefaultState(this.getDefaultState()
+                .withProperty(NORTH, false)
+                .withProperty(EAST, false)
+                .withProperty(SOUTH, false)
+                .withProperty(WEST, false));
+
+        OreDictionaryHelper.register(this, "peat");
+        OreDictionaryHelper.register(this, "peat", "grass");
+        Blocks.FIRE.setFireInfo(this, 5, 5);
+    }
+
+    @Override
+    public int getMetaFromState(@NotNull IBlockState state) {
+        return 0;
+    }
+
+    @SuppressWarnings("deprecation")
+    @NotNull
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
+        pos = pos.add(0, -1, 0);
+        return state.withProperty(NORTH, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+                .withProperty(EAST, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+                .withProperty(SOUTH, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+                .withProperty(WEST, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+    }
+
+    @Override
+    public void randomTick(World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
+        if (world.isRemote) return;
+        BlockSoilGrass.spreadGrass(world, pos, state, rand);
+    }
+
+    @Override
+    @NotNull
+    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+        return Item.getItemFromBlock(this);
+    }
+
+    @Override
+    @NotNull
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    @NotNull
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
+    }
+
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onModelRegister() {
+        ModelLoader.setCustomStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customPath(Helpers.getID(NAME))
+                        .build());
+
+        ModelLoader.setCustomModelResourceLocation(
+                Item.getItemFromBlock(this), 0,
+                new ModelResourceLocation(Helpers.getID(NAME), "normal"));
+
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "dynamictrees:block/smartmodel/branch",
+  "textures": {
+    "rings": "tfg:blocks/wood/log/end/white_cedar",
+    "bark": "tfg:blocks/wood/log/side/white_cedar"
+  }
+}

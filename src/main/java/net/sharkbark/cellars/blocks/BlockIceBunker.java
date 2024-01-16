@@ -19,7 +19,7 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.blocks.tileentity.TEIceBunker;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import net.sharkbark.cellars.util.IHasModel;
+import su.terrafirmagreg.api.util.IHasModel;
 import net.sharkbark.cellars.util.Reference;
 
 import javax.annotation.Nullable;
@@ -78,7 +78,7 @@ public class BlockIceBunker extends BlockContainer implements IHasModel {
 	}
 
 	@Override
-	public void registerModels() {
+	public void onModelRegister() {
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 }

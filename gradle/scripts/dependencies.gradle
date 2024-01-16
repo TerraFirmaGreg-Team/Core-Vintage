@@ -50,6 +50,7 @@ dependencies {
 
         implementation rfg.deobf("curse.maven:nbt-tooltip-274816:2567902")
         implementation rfg.deobf("curse.maven:mod-debug-world-type-313045:2705823")
+        implementation rfg.deobf("curse.maven:aainfo-573154:3627065")
 
 
 //        implementation rfg.deobf("curse.maven:athenaeum-284350:4633750")

@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import pieman.caffeineaddon.util.IHasModel;
+import su.terrafirmagreg.api.util.IHasModel;
 
 import javax.annotation.Nullable;
 
@@ -28,7 +28,7 @@ public class ItemCoffeeBerries extends ItemFood implements IHasModel {
 	}
 
 	@Override
-	public void registerModels() {
+	public void onModelRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 

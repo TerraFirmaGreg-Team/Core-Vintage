@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import net.sharkbark.cellars.util.IHasModel;
+import su.terrafirmagreg.api.util.IHasModel;
 
 import static su.terrafirmagreg.Constants.MODID_CELLARS;
 
@@ -49,7 +49,7 @@ public class RegistryHandler {
 
 			if (item instanceof IHasModel) {
 
-				((IHasModel) item).registerModels();
+				((IHasModel) item).onModelRegister();
 
 			}
 
@@ -59,7 +59,7 @@ public class RegistryHandler {
 
 			if (block instanceof IHasModel) {
 
-				((IHasModel) block).registerModels();
+				((IHasModel) block).onModelRegister();
 
 			}
 

@@ -4,6 +4,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
 import net.sharkbark.cellars.Main;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemIceShard extends ItemBase {
 
@@ -13,12 +14,12 @@ public class ItemIceShard extends ItemBase {
 	}
 
 	@Override
-	public Size getSize(ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.SMALL;
 	}
 
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.LIGHT;
 	}
 }

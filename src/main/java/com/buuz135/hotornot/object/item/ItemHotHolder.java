@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -72,12 +73,12 @@ public class ItemHotHolder extends ItemTFC {
 	}
 
 	@Override
-	public Size getSize(final ItemStack itemStack) {
+	public @NotNull Size getSize(final ItemStack itemStack) {
 		return Size.VERY_LARGE;
 	}
 
 	@Override
-	public Weight getWeight(final ItemStack itemStack) {
+	public @NotNull Weight getWeight(final ItemStack itemStack) {
 		return Weight.HEAVY;
 	}
 

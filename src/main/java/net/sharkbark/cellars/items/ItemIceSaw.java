@@ -24,6 +24,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.ModConfig;
 import net.sharkbark.cellars.init.ModItems;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -49,12 +50,12 @@ public class ItemIceSaw extends ItemBase implements IMetalItem {
 	}
 
 	@Override
-	public Size getSize(ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
 	@Override
-	public Weight getWeight(ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 
@@ -64,7 +65,7 @@ public class ItemIceSaw extends ItemBase implements IMetalItem {
 	}
 
 	@Override
-	public boolean canStack(ItemStack itemStack) {
+	public boolean canStack(@NotNull ItemStack itemStack) {
 		return false;
 	}
 

@@ -1,0 +1,12 @@
+{
+  "parent": "tfg:block/cube_overlay",
+  "textures": {
+    "particle": "#all",
+    "up": "#clay",
+    "north": "#clay",
+    "south": "#clay",
+    "east": "#clay",
+    "west": "#clay",
+    "down": "#clay"
+  }
+}

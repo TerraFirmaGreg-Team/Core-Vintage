@@ -9,6 +9,7 @@ import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -22,12 +23,12 @@ public class ItemBearTrapHalf extends ItemTFC implements TFCThingsConfigurableIt
 	}
 
 	@Nonnull
-	public Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@Nonnull ItemStack stack) {
 		return Size.NORMAL;
 	}
 
 	@Nonnull
-	public Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 

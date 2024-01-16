@@ -1,0 +1,57 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "stone": "minecraft:blocks/stone",
+    "particle": "#planks"
+  },
+  "elements": [
+    {
+      "name": "Blade",
+      "from": [
+        3, 23, 7.5
+      ],
+      "to": [
+        13, 26, 8.5
+      ],
+      "shade": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3, 13, 13, 16
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            13, 13, 14, 16
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            3, 13, 13, 16
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            2, 13, 3, 16
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            3, 12, 13, 13
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            3, 11, 13, 12
+          ],
+          "texture": "#stone"
+        }
+      }
+    }
+  ]
+}

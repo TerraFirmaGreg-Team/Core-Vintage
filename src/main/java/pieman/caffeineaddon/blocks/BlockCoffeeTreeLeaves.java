@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
-import pieman.caffeineaddon.util.IHasModel;
+import su.terrafirmagreg.api.util.IHasModel;
 
 import java.util.Random;
 
@@ -35,7 +35,7 @@ public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements IHasM
 	}
 
 	@Override
-	public void registerModels() {
+	public void onModelRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 

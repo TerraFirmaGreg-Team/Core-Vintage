@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/farmland"
+  },
+  "variants": {
+    "soil_type": {
+      "silt": {
+        "textures": {
+          "side": "tfg:blocks/soil/dirt/silt",
+          "up": "tfg:blocks/soil/farmland/silt"
+        }
+      },
+      "loam": {
+        "textures": {
+          "side": "tfg:blocks/soil/dirt/loam",
+          "up": "tfg:blocks/soil/farmland/loam"
+        }
+      },
+      "sandy_loam": {
+        "textures": {
+          "side": "tfg:blocks/soil/dirt/sandy_loam",
+          "up": "tfg:blocks/soil/farmland/sandy_loam"
+        }
+      },
+      "silty_loam": {
+        "textures": {
+          "side": "tfg:blocks/soil/dirt/silty_loam",
+          "up": "tfg:blocks/soil/farmland/silty_loam"
+        }
+      },
+      "humus": {
+        "textures": {
+          "side": "tfg:blocks/soil/dirt/humus",
+          "up": "tfg:blocks/soil/farmland/humus"
+        }
+      }
+    }
+  }
+}

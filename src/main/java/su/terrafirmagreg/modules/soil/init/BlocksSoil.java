@@ -16,12 +16,12 @@ public final class BlocksSoil {
 
 	public static void onRegister(Registry registry) {
 
-		for (var block : StorageSoil.SOIL_BLOCKS.values()) {
-			registry.registerBlockWithItem((Block) block, block.getName());
-		}
+//		for (var block : StorageSoil.SOIL_BLOCKS.values()) {
+//			registry.registerBlockWithItem((Block) block, block.getName());
+//		}
 
-		registry.registerBlockWithItem(PEAT_GRASS = new BlockPeatGrass(), BlockPeatGrass.NAME);
-		registry.registerBlockWithItem(PEAT = new BlockPeat(), BlockPeat.NAME);
+//		registry.registerBlockWithItem(PEAT_GRASS = new BlockPeatGrass(), BlockPeatGrass.NAME);
+//		registry.registerBlockWithItem(PEAT = new BlockPeat(), BlockPeat.NAME);
 
 
 	}

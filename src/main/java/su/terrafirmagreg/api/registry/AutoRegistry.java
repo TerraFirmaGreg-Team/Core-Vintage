@@ -1,18 +1,21 @@
 package su.terrafirmagreg.api.registry;
 
+import lombok.Getter;
 import net.darkhax.bookshelf.block.IColorfulBlock;
 import net.darkhax.bookshelf.block.ITileEntityBlock;
 import net.darkhax.bookshelf.item.IColorfulItem;
 import net.darkhax.bookshelf.lib.Constants;
 import net.darkhax.bookshelf.lib.LootBuilder;
-import net.darkhax.bookshelf.registry.IAutoRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -23,186 +26,213 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.objects.tile.ITEBlock;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by
  * registering the event while the owner is active, Forge will shut up about harmless registry
  * entries being dangerous.
  */
-public class AutoRegistry implements IAutoRegistry {
+@Getter
+public class AutoRegistry implements IAutoRegister {
 
-    /**
-     * The registry helper to register things from.
-     */
-    private final Registry helper;
+	/**
+	 * The registry helper to register things from.
+	 */
+	private final Registry registry;
 
-    public AutoRegistry(Registry helper) {
+	public AutoRegistry(Registry registry) {
 
-        this.helper = helper;
-    }
+		this.registry = registry;
+	}
 
-    @SubscribeEvent
-    public void registerBlocks (RegistryEvent.Register<Block> event) {
+	@Override
+	public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
+		for (var block : this.registry.getBlocks()) {
+			event.getRegistry().register(block);
+		}
 
-        for (final Block block : this.helper.getBlocks()) {
+		for (var provider : this.registry.getTileProviders()) {
+			if (provider instanceof Block) {
+				GameRegistry.registerTileEntity(provider.getTileEntityClass(),
+						((Block) provider).getRegistryName().toString().replace(":", ".").replace("_", "."));
+			}
+		}
+	}
 
-            event.getRegistry().register(block);
-        }
+	@Override
+	public void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
+		for (var item : this.registry.getItems()) {
+			event.getRegistry().register(item);
+		}
+	}
 
-        for (final ITileEntityBlock provider : this.helper.getTileProviders()) {
+	@Override
+	public void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
+		for (var potion : this.registry.getPotions()) {
+			event.getRegistry().register(potion);
+		}
+	}
 
-            if (provider instanceof Block) {
+	@Override
+	public void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
+		for (var potionType : this.registry.getPotionType()) {
+			event.getRegistry().register(potionType);
+		}
+	}
 
-                GameRegistry.registerTileEntity(provider.getTileEntityClass(), ((Block) provider).getRegistryName().toString().replace(":", ".").replace("_", "."));
-            }
-        }
-    }
+	@Override
+	public void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
+		for (var biome : this.registry.getBiomes()) {
+			event.getRegistry().register(biome);
+		}
+	}
 
-    @SubscribeEvent
-    public void registerItems (RegistryEvent.Register<Item> event) {
+	@Override
+	public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
+		for (var sound : this.registry.getSounds()) {
+			event.getRegistry().register(sound);
+		}
+	}
 
-        for (final Item item : this.helper.getItems()) {
+	@Override
+	public void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
 
-            event.getRegistry().register(item);
-        }
-    }
+		for (var entity : this.registry.getEntities()) {
+			strategy.register(event.getRegistry());
+		}
 
-    @SubscribeEvent
-    public void registerEntitys (RegistryEvent.Register<EntityEntry> event) {
+		for (var entry : this.registry.getEntities()) {
 
-        for (final EntityEntryBuilder<? extends Entity> entry : this.helper.getEntities()) {
+			event.getRegistry().register(entry.build());
+		}
+	}
 
-            event.getRegistry().register(entry.build());
-        }
-    }
 
-    @SubscribeEvent
-    public void registerSounds (RegistryEvent.Register<SoundEvent> event) {
 
-        for (final SoundEvent sound : this.helper.getSounds()) {
+	@Override
+	public void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
+		for (final Enchantment enchant : this.registry.getEnchantments()) {
 
-            event.getRegistry().register(sound);
-        }
-    }
+			event.getRegistry().register(enchant);
+		}
+	}
 
-    @SubscribeEvent
-    public void registerRecipes (RegistryEvent.Register<IRecipe> event) {
+	@Override
+	public void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
+		// TODO: register villager profession event
+	}
 
-        for (final IRecipe recipe : this.helper.getRecipes()) {
 
-            event.getRegistry().register(recipe);
-        }
-    }
 
-    @SubscribeEvent
-    public void registerEnchants (RegistryEvent.Register<Enchantment> event) {
-        
-        for (final Enchantment enchant : this.helper.getEnchantments()) {
-            
-            event.getRegistry().register(enchant);
-        }
-    }
-    
-    @SubscribeEvent
-    public void onTableLoaded (LootTableLoadEvent event) {
+	@Override
+	public void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
+		for (final IRecipe recipe : this.registry.getRecipes()) {
 
-        for (final LootBuilder builder : this.helper.getLootTableEntries().get(event.getName())) {
+			event.getRegistry().register(recipe);
+		}
+	}
 
-            final LootPool pool = event.getTable().getPool(builder.getPool());
+	@Override
+	public void onRegisterTileEntitiesEvent() {
 
-            if (pool != null) {
+		for (ITileEntityRegistrationStrategy strategy : this.registry.getTileEntityRegistrationStrategyList()) {
+			strategy.register();
+		}
+	}
 
-                pool.addEntry(builder.build());
-            }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
+		for (IClientModelRegistrationStrategy strategy : this.registry.getClientModelRegistrationStrategyList()) {
+			strategy.register();
+		}
+	}
 
-            else {
 
-                Constants.LOG.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.helper.getModid(), event.getName(), builder.toString());
-            }
-        }
-    }
+	@SubscribeEvent
+	public void onTableLoaded(LootTableLoadEvent event) {
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void modelRegistryEvent (ModelRegistryEvent event) {
+		for (final LootBuilder builder : this.registry.getLootTableEntries().get(event.getName())) {
 
-        for (final Item item : this.helper.getItems()) {
+			final LootPool pool = event.getTable().getPool(builder.getPool());
 
-            this.helper.registerInventoryModel(item);
-        }
+			if (pool != null) {
 
-        for (final Block block : this.helper.getBlocks()) {
+				pool.addEntry(builder.build());
+			} else {
 
-            this.helper.registerInventoryModel(block);
-        }
-    }
+				Constants.LOG.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
+			}
+		}
+	}
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void registerBlockColor (ColorHandlerEvent.Block event) {
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void modelRegistryEvent(ModelRegistryEvent event) {
 
-        for (final Block block : this.helper.getColoredBlocks()) {
+		for (final Item item : this.registry.getItems()) {
 
-            event.getBlockColors().registerBlockColorHandler(((IColorfulBlock) block).getColorHandler(), block);
-        }
-    }
+			this.registry.registerInventoryModel(item);
+		}
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void registerItemColor (ColorHandlerEvent.Item event) {
+		for (final Block block : this.registry.getBlocks()) {
 
-        for (final Block block : this.helper.getColoredBlocks()) {
+			this.registry.registerInventoryModel(block);
+		}
+	}
 
-            final IColorfulBlock colorfulBlock = (IColorfulBlock) block;
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void registerBlockColor(ColorHandlerEvent.Block event) {
 
-            if (colorfulBlock.getItemColorHandler() != null) {
+		for (final Block block : this.registry.getColoredBlocks()) {
 
-                event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
-            }
-        }
+			event.getBlockColors().registerBlockColorHandler(((IColorfulBlock) block).getColorHandler(), block);
+		}
+	}
 
-        for (final Item item : this.helper.getColoredItems()) {
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void registerItemColor(ColorHandlerEvent.Item event) {
 
-            event.getItemColors().registerItemColorHandler(((IColorfulItem) item).getColorHandler(), item);
-        }
-    }
+		for (final Block block : this.registry.getColoredBlocks()) {
 
-    @Override
-    public Registry getHelper () {
+			final IColorfulBlock colorfulBlock = (IColorfulBlock) block;
 
-        return this.helper;
-    }
+			if (colorfulBlock.getItemColorHandler() != null) {
 
-    @Override
-    public void init () {
+				event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
+			}
+		}
 
-    }
+		for (final Item item : this.registry.getColoredItems()) {
 
-    @Override
-    public void postInit () {
+			event.getItemColors().registerItemColorHandler(((IColorfulItem) item).getColorHandler(), item);
+		}
+	}
 
-    }
+	public void init() {}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void clientInit () {
+	public void postInit() {}
 
-        for (final ITileEntityBlock provider : this.helper.getTileProviders()) {
+	@SideOnly(Side.CLIENT)
+	public void clientInit() {
 
-            final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
+		for (final ITileEntityBlock provider : this.registry.getTileProviders()) {
 
-            if (tesr != null) {
+			final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
-                ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
-            }
-        }
-    }
+			if (tesr != null) {
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void clientPostInit () {
+				ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
+			}
+		}
+	}
 
-    }
+	@SideOnly(Side.CLIENT)
+	public void clientPostInit() {}
 }

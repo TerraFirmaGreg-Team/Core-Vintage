@@ -7,10 +7,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.modules.ITFGModule;
-import su.terrafirmagreg.api.registry.Registry;
+import su.terrafirmagreg.api.modules.ModuleBase;
 import su.terrafirmagreg.api.modules.TFGModule;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.modules.TFGModules;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -24,7 +24,7 @@ import static su.terrafirmagreg.Tags.*;
 		name = "TFG Core",
 		description = "Core TFG content. Disabling this disables the entire mod and all its addons.",
 		coreModule = true)
-public class ModuleCore implements ITFGModule {
+public class ModuleCore extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger("TFG ModuleCore");
 
@@ -33,10 +33,10 @@ public class ModuleCore implements ITFGModule {
 	@SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
 	public static IProxy PROXY;
 
-	private final Registry registry;
 
 	public ModuleCore() {
-		this.registry = new Registry(MISC_TAB);
+		this.setRegistry(new Registry(MISC_TAB));
+
 	}
 
 	@Override

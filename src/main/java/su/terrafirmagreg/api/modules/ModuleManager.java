@@ -116,11 +116,15 @@ public class ModuleManager implements IModuleManager {
 		}
 	}
 
+	// --------------------------------------------------------------------------
+	// - FML Lifecycle
+	// --------------------------------------------------------------------------
+
 	public void onConstruction(FMLConstructionEvent event) {
 		currentStage = ModuleStage.CONSTRUCTION;
 		this.fireEvent(module -> {
 			module.getLogger().debug("Construction start");
-			module.construction(event);
+			module.onConstruction(event);
 			module.getLogger().debug("Construction complete");
 		});
 	}
@@ -131,20 +135,22 @@ public class ModuleManager implements IModuleManager {
 			module.getLogger().debug("Registering packets");
 			module.onNetworkRegister();
 
-			module.getLogger().debug("Registering");
+			module.getLogger().debug("Registering start");
 			module.onRegister();
+			module.getLogger().debug("Registering complete");
 
-			module.getLogger().debug("Pre-init start");
-			module.preInit(event);
-			module.getLogger().debug("Pre-init complete");
+			module.getLogger().debug("Pre-onInit start");
+			module.onPreInit(event);
+			module.getLogger().debug("Pre-onInit complete");
 
 			if (event.getSide() == Side.CLIENT) {
-				module.getLogger().debug("Client Registering");
+				module.getLogger().debug("Client Registering start");
 				module.onClientRegister();
+				module.getLogger().debug("Client Registering complete");
 
-				module.getLogger().debug("Client Pre-init start");
-				module.clientPreInit(event);
-				module.getLogger().debug("Client Pre-init complete");
+				module.getLogger().debug("Client Pre-onInit start");
+				module.onClientPreInit(event);
+				module.getLogger().debug("Client Pre-onInit complete");
 			}
 		});
 	}
@@ -153,12 +159,12 @@ public class ModuleManager implements IModuleManager {
 		currentStage = ModuleStage.INIT;
 		this.fireEvent(module -> {
 			module.getLogger().debug("Init start");
-			module.init(event);
+			module.onInit(event);
 			module.getLogger().debug("Init complete");
 
 			if (event.getSide() == Side.CLIENT) {
 				module.getLogger().debug("Client Init start");
-				module.clientInit(event);
+				module.onClientInit(event);
 				module.getLogger().debug("Client Init complete");
 			}
 		});
@@ -168,14 +174,14 @@ public class ModuleManager implements IModuleManager {
 	public void onPostInit(FMLPostInitializationEvent event) {
 		currentStage = ModuleStage.POST_INIT;
 		this.fireEvent(module -> {
-			module.getLogger().debug("Post-init start");
-			module.postInit(event);
-			module.getLogger().debug("Post-init complete");
+			module.getLogger().debug("Post-onInit start");
+			module.onPostInit(event);
+			module.getLogger().debug("Post-onInit complete");
 
 			if (event.getSide() == Side.CLIENT) {
-				module.getLogger().debug("Client Post-init start");
-				module.clientPostInit(event);
-				module.getLogger().debug("Client Post-init complete");
+				module.getLogger().debug("Client Post-onInit start");
+				module.onClientPostInit(event);
+				module.getLogger().debug("Client Post-onInit complete");
 			}
 		});
 	}
@@ -184,16 +190,20 @@ public class ModuleManager implements IModuleManager {
 		currentStage = ModuleStage.FINISHED;
 		this.fireEvent(module -> {
 			module.getLogger().debug("Load-complete start");
-			module.loadComplete(event);
+			module.onLoadComplete(event);
 			module.getLogger().debug("Load-complete complete");
 		});
 	}
+
+	// --------------------------------------------------------------------------
+	// - Server
+	// --------------------------------------------------------------------------
 
 	public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
 		currentStage = ModuleStage.SERVER_ABOUT_TO_START;
 		this.fireEvent(module -> {
 			module.getLogger().debug("Server-about-to-start start");
-			module.serverAboutToStart(event);
+			module.onServerAboutToStart(event);
 			module.getLogger().debug("Server-about-to-start complete");
 		});
 	}
@@ -202,7 +212,7 @@ public class ModuleManager implements IModuleManager {
 		currentStage = ModuleStage.SERVER_STARTING;
 		this.fireEvent(module -> {
 			module.getLogger().debug("Server-starting start");
-			module.serverStarting(event);
+			module.onServerStarting(event);
 			module.getLogger().debug("Server-starting complete");
 		});
 	}
@@ -211,7 +221,7 @@ public class ModuleManager implements IModuleManager {
 		currentStage = ModuleStage.SERVER_STARTED;
 		this.fireEvent(module -> {
 			module.getLogger().debug("Server-started start");
-			module.serverStarted(event);
+			module.onServerStarted(event);
 			module.getLogger().debug("Server-started complete");
 		});
 	}
@@ -219,7 +229,7 @@ public class ModuleManager implements IModuleManager {
 	public void onServerStopping(FMLServerStoppingEvent event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Server-stopping start");
-			module.serverStopping(event);
+			module.onServerStopping(event);
 			module.getLogger().debug("Server-stopping complete");
 		});
 	}
@@ -227,7 +237,7 @@ public class ModuleManager implements IModuleManager {
 	public void onServerStopped(FMLServerStoppedEvent event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Server-topped start");
-			module.serverStopped(event);
+			module.onServerStopped(event);
 			module.getLogger().debug("Server-topped complete");
 		});
 	}

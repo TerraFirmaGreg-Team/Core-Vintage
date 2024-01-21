@@ -27,10 +27,9 @@ public class ModuleRock extends ModuleBase {
 
 	public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "wand", false);
 
-	private final Registry registry;
-
 	public ModuleRock() {
-		this.registry = new Registry(ROCK_TAB);
+		this.setRegistry(new Registry(ROCK_TAB));
+
 	}
 
 	@Override

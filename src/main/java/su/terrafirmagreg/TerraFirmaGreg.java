@@ -26,7 +26,7 @@ public class TerraFirmaGreg {
 
 	@EventHandler
 	public void onConstruction(FMLConstructionEvent event) {
-		moduleManager = ModuleManager.getInstance();
+		this.moduleManager = ModuleManager.getInstance();
 //        GregTechAPI.moduleManager = moduleManager;
 		moduleManager.registerContainer(new TFGModules());
 		MinecraftForge.EVENT_BUS.post(new ModuleContainerRegistryEvent());

@@ -34,42 +34,42 @@ public interface ITFGModule {
 	// - FML Lifecycle
 	// --------------------------------------------------------------------------
 
-	default void construction(FMLConstructionEvent event) {}
+	default void onConstruction(FMLConstructionEvent event) {}
 
-	default void preInit(FMLPreInitializationEvent event) {}
+	default void onPreInit(FMLPreInitializationEvent event) {}
 
-	default void init(FMLInitializationEvent event) {}
+	default void onInit(FMLInitializationEvent event) {}
 
-	default void postInit(FMLPostInitializationEvent event) {}
+	default void onPostInit(FMLPostInitializationEvent event) {}
 
-	default void loadComplete(FMLLoadCompleteEvent event) {}
-
-	// --------------------------------------------------------------------------
-	// - Server
-	// --------------------------------------------------------------------------
-
-	default void serverAboutToStart(FMLServerAboutToStartEvent event) {}
-
-	default void serverStarting(FMLServerStartingEvent event) {}
-
-	default void serverStarted(FMLServerStartedEvent event) {}
-
-	default void serverStopping(FMLServerStoppingEvent event) {}
-
-	default void serverStopped(FMLServerStoppedEvent event) {}
+	default void onLoadComplete(FMLLoadCompleteEvent event) {}
 
 	// --------------------------------------------------------------------------
 	// - FML Lifecycle: Client
 	// --------------------------------------------------------------------------
 
 	@SideOnly(Side.CLIENT)
-	default void clientPreInit(FMLPreInitializationEvent event) {}
+	default void onClientPreInit(FMLPreInitializationEvent event) {}
 
 	@SideOnly(Side.CLIENT)
-	default void clientInit(FMLInitializationEvent event) {}
+	default void onClientInit(FMLInitializationEvent event) {}
 
 	@SideOnly(Side.CLIENT)
-	default void clientPostInit(FMLPostInitializationEvent event) {}
+	default void onClientPostInit(FMLPostInitializationEvent event) {}
+
+	// --------------------------------------------------------------------------
+	// - Server
+	// --------------------------------------------------------------------------
+
+	default void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
+
+	default void onServerStarting(FMLServerStartingEvent event) {}
+
+	default void onServerStarted(FMLServerStartedEvent event) {}
+
+	default void onServerStopping(FMLServerStoppingEvent event) {}
+
+	default void onServerStopped(FMLServerStoppedEvent event) {}
 
 	// --------------------------------------------------------------------------
 	// - Registration

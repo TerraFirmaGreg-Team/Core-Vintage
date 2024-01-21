@@ -32,10 +32,10 @@ public class ModuleSoil extends ModuleBase {
 
 	public static final CreativeTabs SOIL_TAB = new CreativeTabBase("soil", "wand", false);
 
-	private final Registry registry;
 
 	public ModuleSoil() {
-		this.registry = new Registry(SOIL_TAB);
+		this.setRegistry(new Registry(SOIL_TAB));
+
 	}
 
 	@Override

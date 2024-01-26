@@ -26,21 +26,30 @@ import static su.terrafirmagreg.Tags.MOD_NAME;
 
 public class ModuleManager {
 
+    private static final ModuleManager INSTANCE = new ModuleManager();
+
     private static final String MODULE_CFG_FILE_NAME = "modules.cfg";
     private static final String MODULE_CFG_CATEGORY_NAME = "modules";
     private static File configFolder;
-    private final Map<ResourceLocation, ModuleBase> sortedModules = new LinkedHashMap<>();
-    private final Set<ModuleBase> loadedModules = new LinkedHashSet<>();
+    private final Map<ResourceLocation, ModuleBase> sortedModules;
+    private final Set<ModuleBase> loadedModules;
     private final Logger logger = LogManager.getLogger("TFG Module Loader");
+    private final ModuleEventRouter moduleEventRouter;
     private Map<String, IModuleContainer> containers = new LinkedHashMap<>();
     @Getter
     private IModuleContainer loadedContainer;
     private Configuration config;
-    private final ModuleEventRouter moduleEventRouter;
 
-    public ModuleManager() {
+
+    private ModuleManager() {
+        this.sortedModules = new LinkedHashMap<>();
+        this.loadedModules = new LinkedHashSet<>();
         this.moduleEventRouter = new ModuleEventRouter(loadedModules);
         MinecraftForge.EVENT_BUS.register(this.moduleEventRouter);
+    }
+
+    public static ModuleManager getInstance() {
+        return INSTANCE;
     }
 
     private static ModuleBase getCoreModule(List<ModuleBase> modules) {
@@ -272,6 +281,7 @@ public class ModuleManager {
     }
 
     public void routeFMLStateEvent(FMLStateEvent event) {
+        System.out.println("Routing event: " + event);
         this.moduleEventRouter.routeFMLStateEvent(event);
     }
 }

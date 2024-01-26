@@ -30,6 +30,8 @@ public class ModuleEventRouter {
 
     public ModuleEventRouter(Set<ModuleBase> loadedModules) {
 
+        System.out.println("Loaded modules: " + loadedModules);
+
         this.loadedModules = loadedModules;
         this.routes = new HashMap<>();
 
@@ -157,64 +159,94 @@ public class ModuleEventRouter {
 
     @SubscribeEvent
     public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterBlock(event));
-        this.onRegisterTileEntitiesEvent();
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register BlockEvent start");
+            module.getAutoRegistry().onRegisterBlock(event);
+            module.getAutoRegistry().onRegisterTileEntities();
+            module.getLogger().debug("Register BlockEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterItem(event));
-
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register ItemEvent start");
+            module.getAutoRegistry().onRegisterItem(event);
+            module.getLogger().debug("Register ItemEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterPotion(event));
-
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register PotionEvent start");
+            module.getAutoRegistry().onRegisterPotion(event);
+            module.getLogger().debug("Register PotionEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterPotionType(event));
-
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register PotionTypeEvent start");
+            module.getAutoRegistry().onRegisterPotionType(event);
+            module.getLogger().debug("Register PotionTypeEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterBiome(event));
-
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register BiomeEvent start");
+            module.getAutoRegistry().onRegisterBiome(event);
+            module.getLogger().debug("Register BiomeEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterSound(event));
-
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register SoundEvent start");
+            module.getAutoRegistry().onRegisterSound(event);
+            module.getLogger().debug("Register SoundEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterEntity(event));
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register EntityEvent start");
+            module.getAutoRegistry().onRegisterEntity(event);
+            module.getLogger().debug("Register EntityEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterEnchantment(event));
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register EnchantmentEvent start");
+            module.getAutoRegistry().onRegisterEnchantment(event);
+            module.getLogger().debug("Register EnchantmentEvent complete");
+        });
     }
 
     @SubscribeEvent
     public void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterVillagerProfession(event));
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register VillagerProfessionEvent start");
+            module.getAutoRegistry().onRegisterVillagerProfession(event);
+            module.getLogger().debug("Register VillagerProfessionEvent complete");
+        });
     }
 
 
     @SubscribeEvent
     public void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterRecipes(event));
-    }
-
-    private void onRegisterTileEntitiesEvent() {
-        this.fireEvent(module -> module.getAutoRegistry().onRegisterTileEntities());
-
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register RecipesEvent( start");
+            module.getAutoRegistry().onRegisterRecipes(event);
+            module.getLogger().debug("Register RecipesEvent( complete");
+        });
     }
 
     // --------------------------------------------------------------------------
@@ -224,8 +256,11 @@ public class ModuleEventRouter {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
-        this.fireEvent(module -> module.getAutoRegistry().onClientRegisterModels(event));
-
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register ModelsEvent start");
+            module.getAutoRegistry().onClientRegisterModels(event);
+            module.getLogger().debug("Register ModelsEvent complete");
+        });
     }
 
     // --------------------------------------------------------------------------
@@ -234,6 +269,7 @@ public class ModuleEventRouter {
 
     private void fireEvent(Consumer<ModuleBase> moduleConsumer) {
         for (ModuleBase module : this.loadedModules) {
+            module.getLogger().debug("Event fired: " + module);
             moduleConsumer.accept(module);
         }
     }

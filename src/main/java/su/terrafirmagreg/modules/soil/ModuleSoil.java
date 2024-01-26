@@ -23,10 +23,10 @@ import java.util.List;
 
 import static su.terrafirmagreg.api.modules.ModuleContainerTFG.MODULE_SOIL;
 
-@ModuleTFG(
-        moduleID = MODULE_SOIL,
-        containerID = Tags.MOD_ID,
-        name = "TFG Soil")
+//@ModuleTFG(
+//        moduleID = MODULE_SOIL,
+//        containerID = Tags.MOD_ID,
+//        name = "TFG Soil")
 public class ModuleSoil extends ModuleBase {
 
     public static final Logger LOGGER = LogManager.getLogger("ModuleSoil");

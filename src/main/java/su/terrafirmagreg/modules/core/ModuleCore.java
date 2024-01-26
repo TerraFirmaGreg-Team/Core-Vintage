@@ -26,12 +26,9 @@ import static su.terrafirmagreg.Tags.*;
         coreModule = true)
 public class ModuleCore extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger("TFG ModuleCore");
+    public static final Logger LOGGER = LogManager.getLogger("ModuleCore");
 
     public static final CreativeTabs MISC_TAB = new CreativeTabBase("misc", "wand", false);
-
-    @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
-    public static IProxy PROXY;
 
 
     public ModuleCore() {

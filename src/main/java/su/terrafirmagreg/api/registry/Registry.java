@@ -5,9 +5,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
@@ -30,9 +28,11 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.item.IColorfulItem;
 import su.terrafirmagreg.api.objects.item.ICustomMesh;
+import su.terrafirmagreg.api.util.IItemProvider;
 import su.terrafirmagreg.api.util.LootBuilder;
 import su.terrafirmagreg.api.objects.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
@@ -118,11 +118,13 @@ public class Registry {
     /**
      * A list of all the colored items registered here.
      */
+    @Getter
     private final List<Item> coloredItems = NonNullList.create();
 
     /**
      * A list of all the colored blocks registered here.
      */
+    @Getter
     private final List<Block> coloredBlocks = NonNullList.create();
 
     /**
@@ -150,12 +152,6 @@ public class Registry {
     private CreativeTabs tab;
 
     /**
-     * The instance of the owning mod.
-     */
-    @Setter
-    private Object modInstance;
-
-    /**
      * The auto registry for the helper.
      */
     @Getter
@@ -175,22 +171,12 @@ public class Registry {
      *
      * @param tab The tab for the registry helper.
      */
-    public Registry(CreativeTabs tab) {
+    public Registry(@Nullable CreativeTabs tab) {
         this.tab = tab;
         this.modid = Loader.instance().activeModContainer().getModId();
         HELPERS.add(this);
     }
 
-
-    /**
-     * Provides a list of all known registry helpers.
-     *
-     * @return A list of all known registry helpers.
-     */
-    public static List<Registry> getAllHelpers() {
-
-        return HELPERS;
-    }
 
     /**
      * Enables automatic registration for things like the event bus.
@@ -210,7 +196,6 @@ public class Registry {
      * @return Whether or not the helper has automatic registration.
      */
     public boolean hasAutoRegistry() {
-
         return this.autoRegistry != null;
     }
 
@@ -225,19 +210,32 @@ public class Registry {
         return new AutoRegistry(this);
     }
 
-    //region // ===== Block ==========================================================================================//
+    //region // ===== Block ========================================================================================================================//
 
-    /**
-     * Registers a block to the game. This will also set the unlocalized name, and creative tab
-     * if {@link #tab} has been set. The block will also be cached in {@link #blocks}.
-     *
-     * @param block The block to register.
-     * @param id    The id to register the block with.
-     * @return The block being registered.
-     */
-    public Block registerBlock(@Nonnull Block block, @Nonnull String id) {
+    public Block[] registerBlocks(Block... blocks) {
+        for (Block block : blocks) {
+            registerBlock(block);
+        }
+        return blocks;
+    }
 
-        return this.registerBlock(block, new ItemBlock(block), id);
+    public Block registerBlock(Block block) {
+        if (this.tab != null) {
+            block.setCreativeTab(this.tab);
+        }
+        this.blocks.add(block);
+
+        return block;
+    }
+
+    public Block registerBlockWithItem(@Nonnull Block block, @Nonnull String id) {
+
+        ItemBlock itemBlock;
+
+        if (block instanceof IItemProvider provider) itemBlock = provider.getItemBlock();
+        else itemBlock = new ItemBlock(block);
+
+        return this.registerBlock(block, itemBlock, id);
     }
 
     /**
@@ -249,34 +247,27 @@ public class Registry {
      * @param id        The id to register the block with.
      * @return The block being registered.
      */
-    public Block registerBlock(@Nonnull Block block, @Nonnull ItemBlock itemBlock, @Nonnull String id) {
+    public Block registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
 
         block.setRegistryName(this.modid, id);
         block.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", "."));
         this.blocks.add(block);
 
-        this.registerItem(itemBlock, id);
+        if (itemBlock != null) this.registerItem(itemBlock, id);
 
-        if (this.tab != null) {
-            block.setCreativeTab(this.tab);
-        }
 
-        if (block instanceof IColorfulBlock) {
+        if (this.tab != null) block.setCreativeTab(this.tab);
 
-            this.coloredBlocks.add(block);
-        }
+        if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
 
-        if (block instanceof ITEBlock) {
-
-            this.tileProviders.add((ITEBlock) block);
-        }
+        if (block instanceof ITEBlock te) this.tileProviders.add(te);
 
         return block;
     }
 
     //endregion
 
-    //region // ===== Item ===========================================================================================//
+    //region // ===== Item =========================================================================================================================//
 
     /**
      * Registers an item to the game. This will also set the unlocalized name, and creative tab
@@ -325,7 +316,7 @@ public class Registry {
 
     //endregion
 
-    //region // ===== Potions ========================================================================================//
+    //region // ===== Potions ======================================================================================================================//
 
     public void registerPotion(@Nonnull Potion potion, @Nonnull String id) {
 
@@ -337,7 +328,7 @@ public class Registry {
 
     //endregion
 
-    //region // ===== Potion Types ===================================================================================//
+    //region // ===== Potion Types =================================================================================================================//
 
     public void registerPotionType(@Nonnull PotionType potionType, @Nonnull String id) {
 
@@ -347,7 +338,7 @@ public class Registry {
 
     //endregion
 
-    //region // ===== Biome ==========================================================================================//
+    //region // ===== Biome ========================================================================================================================//
 
     public void registerBiome(Biome biome, String id) {
         this.registerBiome(biome, id, new BiomeDictionary.Type[0]);
@@ -367,7 +358,7 @@ public class Registry {
 
     //endregion
 
-    //region // ===== Sound ==========================================================================================//
+    //region // ===== Sound ========================================================================================================================//
 
     /**
      * Registers a new sound with the game. The sound must also exist in the sounds.json file.
@@ -385,7 +376,7 @@ public class Registry {
 
     //endregion
 
-    //region // ===== Entity =========================================================================================//
+    //region // ===== Entity =======================================================================================================================//
 
     /**
      * Registers any sort of entity. Will not have a spawn egg.
@@ -425,7 +416,7 @@ public class Registry {
 
     //endregion
 
-    //region // ===== Enchantment ====================================================================================//
+    //region // ===== Enchantment ==================================================================================================================//
 
     /**
      * Registers an enchantment.
@@ -443,12 +434,12 @@ public class Registry {
 
     //endregion
 
-    //region // ===== Villager Profession ============================================================================//
+    //region // ===== Villager Profession ==========================================================================================================//
 
 
     //endregion
 
-    //region // ===== Recipe =========================================================================================//
+    //region // ===== Recipe =======================================================================================================================//
 
     /**
      * Adds a shaped recipe to the game.
@@ -493,6 +484,9 @@ public class Registry {
     //endregion
 
 
+    //region // ===== Loot Table ===================================================================================================================//
+
+
     /**
      * Registers a loot table with the loot table list. This needs to be called before a loot
      * table can be used.
@@ -505,6 +499,11 @@ public class Registry {
         return LootTableList.register(new ResourceLocation(this.getModid(), name));
     }
 
+    //endregion
+
+
+    //region // ===== Models =======================================================================================================================//
+
     /**
      * Registers an inventory model for a block. The model name is equal to the registry name
      * of the block. Only set for meta 0.
@@ -513,8 +512,8 @@ public class Registry {
      */
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Block block) {
-
-        this.registerInventoryModel(Item.getItemFromBlock(block));
+        if (block instanceof IHasModel model) model.onModelRegister();
+        else this.registerInventoryModel(Item.getItemFromBlock(block));
     }
 
     /**
@@ -542,7 +541,6 @@ public class Registry {
      */
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Block block, int meta, @Nonnull String modelName) {
-
         this.registerInventoryModel(Item.getItemFromBlock(block), meta, modelName);
     }
 
@@ -589,25 +587,5 @@ public class Registry {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(modelName, "inventory"));
     }
 
-    /**
-     * Gets a list of all items registered that have custom color handlers.
-     *
-     * @return A list of all colored items.
-     */
-    @SideOnly(Side.CLIENT)
-    public List<Item> getColoredItems() {
-
-        return this.coloredItems;
-    }
-
-    /**
-     * Gets a list of all registered blocks that have custom color handlers.
-     *
-     * @return A list of all colored blocks.
-     */
-    @SideOnly(Side.CLIENT)
-    public List<Block> getColoredBlocks() {
-
-        return this.coloredBlocks;
-    }
+    //endregion
 }

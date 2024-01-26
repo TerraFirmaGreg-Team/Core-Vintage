@@ -127,10 +127,6 @@ public class AutoRegistry {
 
     @SideOnly(Side.CLIENT)
     public void onClientRegisterModels(ModelRegistryEvent event) {
-//        for (IClientModelRegistrationStrategy strategy : this.registry.getClientModelRegistrationStrategyList()) {
-//            strategy.register();
-//        }
-
         for (final Item item : this.registry.getItems()) {
 
             this.registry.registerInventoryModel(item);

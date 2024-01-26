@@ -17,13 +17,13 @@ import su.terrafirmagreg.modules.rock.init.ItemsRock;
 import java.util.Collections;
 import java.util.List;
 
-@ModuleTFG(
-        moduleID = ModuleContainerTFG.MODULE_ROCK,
-        containerID = Tags.MOD_ID,
-        name = "TFG Rock")
+//@ModuleTFG(
+//        moduleID = ModuleContainerTFG.MODULE_ROCK,
+//        containerID = Tags.MOD_ID,
+//        name = "TFG Rock")
 public class ModuleRock extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger("TFG ModuleRock");
+    public static final Logger LOGGER = LogManager.getLogger("ModuleRock");
 
     public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "wand", false);
 

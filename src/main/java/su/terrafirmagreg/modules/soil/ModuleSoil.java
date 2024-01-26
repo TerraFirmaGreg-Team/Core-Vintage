@@ -8,9 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.modules.ModuleBase;
-import su.terrafirmagreg.api.modules.ModuleTFG;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
@@ -20,8 +18,6 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import java.util.Collections;
 import java.util.List;
-
-import static su.terrafirmagreg.api.modules.ModuleContainerTFG.MODULE_SOIL;
 
 //@ModuleTFG(
 //        moduleID = MODULE_SOIL,

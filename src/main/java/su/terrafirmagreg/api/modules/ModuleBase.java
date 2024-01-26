@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.AutoRegistry;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.modules.ModuleContainerTFG;
 
 import java.util.Collections;
 import java.util.Set;

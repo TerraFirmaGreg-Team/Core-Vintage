@@ -553,8 +553,7 @@ public class Registry {
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Item item) {
 
-        if (item instanceof IVariant variant) this.registerInventoryModel(item, variant.getPrefix(), variant.getVariant());
-        else if (item instanceof IHasModel model) model.onModelRegister();
+        if (item instanceof IHasModel model) model.onModelRegister();
         else this.registerInventoryModel(item, 0, item.getRegistryName().toString());
     }
 

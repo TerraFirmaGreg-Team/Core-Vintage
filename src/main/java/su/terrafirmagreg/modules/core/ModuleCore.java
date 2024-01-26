@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.core;
 
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.fml.common.SidedProxy;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,12 +10,9 @@ import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.modules.ModuleBase;
 import su.terrafirmagreg.api.modules.ModuleTFG;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
-import su.terrafirmagreg.api.modules.ModuleContainerTFG;
+import su.terrafirmagreg.modules.ModuleContainerTFG;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
-import su.terrafirmagreg.proxy.IProxy;
-
-import static su.terrafirmagreg.Tags.*;
 
 @ModuleTFG(
         moduleID = ModuleContainerTFG.MODULE_CORE,

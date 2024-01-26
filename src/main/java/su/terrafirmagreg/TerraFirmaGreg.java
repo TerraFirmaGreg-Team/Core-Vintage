@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.*;
 
 import su.terrafirmagreg.api.modules.ModuleContainerRegistryEvent;
 import su.terrafirmagreg.api.modules.ModuleManager;
-import su.terrafirmagreg.api.modules.ModuleContainerTFG;
+import su.terrafirmagreg.modules.ModuleContainerTFG;
 import su.terrafirmagreg.proxy.IProxy;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;

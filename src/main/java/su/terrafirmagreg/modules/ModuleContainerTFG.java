@@ -1,5 +1,8 @@
-package su.terrafirmagreg.api.modules;
+package su.terrafirmagreg.modules;
 
+
+import su.terrafirmagreg.api.modules.IModuleContainer;
+import su.terrafirmagreg.api.modules.ModuleContainer;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 

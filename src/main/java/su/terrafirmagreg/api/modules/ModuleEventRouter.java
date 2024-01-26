@@ -269,7 +269,6 @@ public class ModuleEventRouter {
 
     private void fireEvent(Consumer<ModuleBase> moduleConsumer) {
         for (ModuleBase module : this.loadedModules) {
-            module.getLogger().debug("Event fired: " + module);
             moduleConsumer.accept(module);
         }
     }

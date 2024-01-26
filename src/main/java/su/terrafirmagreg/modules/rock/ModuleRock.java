@@ -6,11 +6,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.modules.ModuleBase;
-import su.terrafirmagreg.api.modules.ModuleTFG;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
-import su.terrafirmagreg.api.modules.ModuleContainerTFG;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 

@@ -1,37 +1,44 @@
 package su.terrafirmagreg.api.modules;
 
 import lombok.Getter;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.event.*;
+
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.registry.AutoRegistry;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.util.Helpers;
-import su.terrafirmagreg.modules.TFGModules;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Set;
 
-public abstract class ModuleBase implements ITFGModule {
+
+@Getter
+public abstract class ModuleBase implements IModuleBase {
+
+    protected Registry registry;
+    //    protected IPacketRegistry packetRegistry;
+    @Getter
+    private AutoRegistry autoRegistry;
+
+    protected ModuleBase() {}
 
 
-
-	protected Registry registry;
-
-	protected ModuleBase() {}
-
-
-	protected void setRegistry(Registry registry) {
-		if (this.registry != null) throw new IllegalStateException("Trying to assign module registry after it has already been assigned");
-		this.registry = registry;
-	}
-
-	@NotNull
-	@Override
-	public Set<ResourceLocation> getDependencyUids() {
-		return Collections.singleton(Helpers.getID(TFGModules.MODULE_CORE));
-	}
+    protected void enableAutoRegistry(CreativeTabs tab) {
+        this.registry = new Registry(tab).enableAutoRegistration();
+        this.autoRegistry = registry.getAutoRegistry();
+    }
 
 
+    /**
+     * What other modules this module depends on.
+     * <p>
+     * e.g. <code>new ResourceLocation("tfg", "foo_module")</code> represents a dependency on the module
+     * "foo_module" in the container "tfg"
+     */
+    @NotNull
+    public Set<ResourceLocation> getDependencyUids() {
+        return Collections.singleton(Helpers.getID(ModuleContainerTFG.MODULE_CORE));
+    }
 }

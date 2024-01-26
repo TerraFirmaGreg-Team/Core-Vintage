@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
@@ -22,6 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.itemblocks.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.StorageSoil;
@@ -87,8 +89,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
             } else if (usBlock instanceof ISoilBlock soil) {
                 world.setBlockState(pos, StorageSoil.getBlock(soil.getBlockVariant()
-                                                                  .getNonGrassVersion(), soil.getType())
-                                                    .getDefaultState());
+                                .getNonGrassVersion(), soil.getType())
+                        .getDefaultState());
             }
         } else if (neighborLight >= 9) {
             for (int i = 0; i < 4; ++i) {
@@ -265,7 +267,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     }
 
     @Override
-    public void registerMeshModels() {
+    public void onModelRegister() {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @NotNull
             protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {

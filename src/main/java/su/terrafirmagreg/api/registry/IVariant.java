@@ -1,10 +1,3 @@
-/**
- * This class was created by <Darkhax>. It is distributed as part of Bookshelf. You can find
- * the original source here: https://github.com/Darkhax-Minecraft/Bookshelf
- * <p>
- * Bookshelf is Open Source and distributed under the GNU Lesser General Public License version
- * 2.1.
- */
 package su.terrafirmagreg.api.registry;
 
 /**
@@ -13,34 +6,34 @@ package su.terrafirmagreg.api.registry;
  */
 public interface IVariant {
 
-	/**
-	 * An array of strings which represent the variants for an item. They should be in the
-	 * order of meta, with meta 0 being the first entry, and so on.
-	 *
-	 * @return An array of strings which represent the variants for an item.
-	 */
-	String[] getVariant();
+    /**
+     * An array of strings which represent the variants for an item. They should be in the
+     * order of meta, with meta 0 being the first entry, and so on.
+     *
+     * @return An array of strings which represent the variants for an item.
+     */
+    String[] getVariant();
 
-	/**
-	 * Checks if a meta value is within the valid metadata range.
-	 *
-	 * @param meta The meta value to validate.
-	 * @return Whether or not the passed meta value is valid.
-	 */
-	default boolean isValidMeta(int meta) {
+    /**
+     * Checks if a meta value is within the valid metadata range.
+     *
+     * @param meta The meta value to validate.
+     * @return Whether or not the passed meta value is valid.
+     */
+    default boolean isValidMeta(int meta) {
 
-		return meta >= 0 && meta < this.getVariant().length;
-	}
+        return meta >= 0 && meta < this.getVariant().length;
+    }
 
-	/**
-	 * Gets a string which is used to prefix the variants. For example, if you want to have
-	 * several fish, you could have fish be the prefix, and the type of fish be the variant
-	 * name.
-	 *
-	 * @return The prefix to add to the variant name.
-	 */
-	default String getPrefix() {
+    /**
+     * Gets a string which is used to prefix the variants. For example, if you want to have
+     * several fish, you could have fish be the prefix, and the type of fish be the variant
+     * name.
+     *
+     * @return The prefix to add to the variant name.
+     */
+    default String getPrefix() {
 
-		return "";
-	}
+        return "";
+    }
 }

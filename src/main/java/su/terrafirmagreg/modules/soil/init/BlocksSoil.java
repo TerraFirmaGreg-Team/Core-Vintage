@@ -1,20 +1,20 @@
 package su.terrafirmagreg.modules.soil.init;
 
-import net.darkhax.bookshelf.item.ICustomModel;
-import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import su.terrafirmagreg.api.registry.Registry;
+import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;
 
 public final class BlocksSoil {
 
-	public static BlockPeatGrass PEAT_GRASS;
-	public static BlockPeat PEAT;
+    public static BlockPeatGrass PEAT_GRASS;
+    public static BlockPeat PEAT;
 
-	public static void onRegister(Registry registry) {
+    public static void onRegister(Registry registry) {
 
 //		for (var block : StorageSoil.SOIL_BLOCKS.values()) {
 //			registry.registerBlockWithItem((Block) block, block.getName());
@@ -24,12 +24,12 @@ public final class BlocksSoil {
 //		registry.registerBlockWithItem(PEAT = new BlockPeat(), BlockPeat.NAME);
 
 
-	}
+    }
 
-	@SideOnly(Side.CLIENT)
-	public static void onClientRegister(Registry registry) {
-		StorageSoil.SOIL_BLOCKS.values().forEach(ICustomModel::registerMeshModels);
-	}
+    @SideOnly(Side.CLIENT)
+    public static void onClientRegister(Registry registry) {
+        StorageSoil.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+    }
 //
 //	@SideOnly(Side.CLIENT)
 //	public static void onClientInitialization() {

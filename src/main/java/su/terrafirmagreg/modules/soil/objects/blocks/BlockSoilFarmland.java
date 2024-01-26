@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
@@ -24,6 +25,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.itemblocks.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.StorageSoil;
@@ -263,7 +265,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
     }
 
     @Override
-    public void registerMeshModels() {
+    public void onModelRegister() {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @NotNull
             protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {

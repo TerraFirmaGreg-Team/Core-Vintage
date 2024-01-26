@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.block.BlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -81,7 +83,7 @@ public abstract class BlockSoil extends BlockBase implements ISoilBlock {
     }
 
     @Override
-    public void registerMeshModels() {
+    public void onModelRegister() {
         ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
             @NotNull
             protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {

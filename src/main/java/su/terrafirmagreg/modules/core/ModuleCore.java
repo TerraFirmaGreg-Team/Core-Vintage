@@ -28,6 +28,7 @@ public class ModuleCore extends ModuleBase {
 
 
     public ModuleCore() {
+        super(0);
         this.enableAutoRegistry(MISC_TAB);
 
     }

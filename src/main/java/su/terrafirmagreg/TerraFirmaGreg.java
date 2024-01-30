@@ -32,7 +32,7 @@ public class TerraFirmaGreg {
 
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
-        this.moduleManager = ModuleManager.getInstance();
+        this.moduleManager = new ModuleManager();
         this.moduleManager.registerContainer(new ModuleContainerTFG());
         MinecraftForge.EVENT_BUS.post(new ModuleContainerRegistryEvent());
         this.moduleManager.setup(event.getASMHarvestedData(), Loader.instance().getConfigDir());

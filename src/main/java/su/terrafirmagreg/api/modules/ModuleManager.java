@@ -18,22 +18,18 @@ import su.terrafirmagreg.api.util.Helpers;
 
 import java.io.File;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.Tags.MOD_NAME;
 
 public class ModuleManager {
-
-    private static final ModuleManager INSTANCE = new ModuleManager();
 
     private static final String MODULE_CFG_FILE_NAME = "modules.cfg";
     private static final String MODULE_CFG_CATEGORY_NAME = "modules";
     private static File configFolder;
     private final Map<ResourceLocation, ModuleBase> sortedModules;
     private final Set<ModuleBase> loadedModules;
-    private final Logger logger = LogManager.getLogger("TFG Module Loader");
+    public static final Logger LOGGER = LogManager.getLogger("TFG Module Loader");
     private final ModuleEventRouter moduleEventRouter;
     private Map<String, IModuleContainer> containers = new LinkedHashMap<>();
     @Getter
@@ -41,15 +37,11 @@ public class ModuleManager {
     private Configuration config;
 
 
-    private ModuleManager() {
+    public ModuleManager() {
         this.sortedModules = new LinkedHashMap<>();
         this.loadedModules = new LinkedHashSet<>();
         this.moduleEventRouter = new ModuleEventRouter(loadedModules);
         MinecraftForge.EVENT_BUS.register(this.moduleEventRouter);
-    }
-
-    public static ModuleManager getInstance() {
-        return INSTANCE;
     }
 
     private static ModuleBase getCoreModule(List<ModuleBase> modules) {
@@ -140,7 +132,7 @@ public class ModuleManager {
                 ModuleBase module = iterator.next();
                 if (!isModuleEnabled(module)) {
                     iterator.remove();
-                    logger.debug("Module disabled: {}", module);
+                    LOGGER.debug("Module disabled: {}", module);
                     continue;
                 }
                 ModuleTFG annotation = module.getClass().getAnnotation(ModuleTFG.class);
@@ -166,7 +158,7 @@ public class ModuleManager {
                     ModuleTFG annotation = module.getClass().getAnnotation(ModuleTFG.class);
                     String moduleID = annotation.moduleID();
                     toLoad.remove(new ResourceLocation(moduleID));
-                    logger.info("Module {} is missing at least one of module dependencies: {}, skipping loading...",
+                    LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...",
                             moduleID, dependencies);
                 }
             }
@@ -216,10 +208,10 @@ public class ModuleManager {
                     Class<?> clazz = Class.forName(data.getClassName());
                     instances.add((ModuleBase) clazz.newInstance());
                 } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-                    logger.error("Could not initialize module " + moduleID, e);
+                    LOGGER.error("Could not initialize module " + moduleID, e);
                 }
             } else {
-                logger.info("Module {} is missing at least one of mod dependencies: {}, skipping loading...", moduleID,
+                LOGGER.info("Module {} is missing at least one of mod dependencies: {}, skipping loading...", moduleID,
                         modDependencies);
             }
         }
@@ -237,7 +229,7 @@ public class ModuleManager {
                 Class<?> clazz = Class.forName(data.getClassName());
                 registerContainer((IModuleContainer) clazz.newInstance());
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-                logger.error("Could not initialize module container " + data.getClassName(), e);
+                LOGGER.error("Could not initialize module container " + data.getClassName(), e);
             }
         }
     }

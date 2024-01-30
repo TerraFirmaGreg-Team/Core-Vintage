@@ -3,8 +3,10 @@ package su.terrafirmagreg.core.mixin.gregtech;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockOre;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,21 +20,21 @@ import java.util.Random;
 @Mixin(value = BlockOre.class, remap = false)
 public class BlockOreMixin {
 
-	@Shadow
-	@Final
-	public Material material;
+    @Shadow
+    @Final
+    public Material field_149764_J;
 
-	@Inject(method = "getItemDropped", at = @At(value = "HEAD"), remap = false, cancellable = true)
-	private void getItemDropped(IBlockState state, Random rand, int fortune, CallbackInfoReturnable<Item> cir) {
-		var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, material);
+    @Inject(method = "getItemDropped", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    private void getItemDropped(IBlockState state, Random rand, int fortune, CallbackInfoReturnable<Item> cir) {
+        var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, field_149764_J);
 
-		cir.setReturnValue(itemStack.getItem());
-	}
+        cir.setReturnValue(itemStack.getItem());
+    }
 
-	@Inject(method = "damageDropped", at = @At(value = "HEAD"), remap = false, cancellable = true)
-	private void damageDropped(IBlockState state, CallbackInfoReturnable<Integer> cir) {
-		var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, material);
+    @Inject(method = "damageDropped", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    private void damageDropped(IBlockState state, CallbackInfoReturnable<Integer> cir) {
+        var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, field_149764_J);
 
-		cir.setReturnValue(itemStack.getItemDamage());
-	}
+        cir.setReturnValue(itemStack.getItemDamage());
+    }
 }

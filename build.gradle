@@ -48,7 +48,7 @@ version = propertyString('mod_version')
 group = propertyString('root_package')
 
 base {
-    archivesName.set(propertyString('mod_id'))
+    archivesName.set(propertyString('mod_name') + "-1.12.x")
 }
 
 tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_sources')
@@ -240,7 +240,7 @@ jar {
     // Add all embedded dependencies into the jar
     from(provider { configurations.embed.collect { it.isDirectory() ? it : zipTree(it) } })
 
-    archiveFileName = mod_name + "-1.12.x-" + mod_version + ".jar"
+
 }
 
 runClient {

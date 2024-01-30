@@ -1,7 +1,7 @@
 {
   "package": "su.terrafirmagreg.core.mixin",
   "required": true,
-  "refmap": "mixins.${mod_id}.refmap.json",
+  "refmap": "mixins.tfg.refmap.json",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8.5",
   "compatibilityLevel": "JAVA_8",

@@ -6,8 +6,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 
-import su.terrafirmagreg.api.modules.ModuleContainerRegistryEvent;
-import su.terrafirmagreg.api.modules.ModuleManager;
+import su.terrafirmagreg.api.module.ModuleContainerRegistryEvent;
+import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.modules.ModuleContainerTFG;
 import su.terrafirmagreg.proxy.IProxy;
 

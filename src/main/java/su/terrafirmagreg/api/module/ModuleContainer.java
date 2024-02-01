@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.modules;
+package su.terrafirmagreg.api.module;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

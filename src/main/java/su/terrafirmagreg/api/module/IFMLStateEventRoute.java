@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.modules;
+package su.terrafirmagreg.api.module;
 
 import net.minecraftforge.fml.common.event.FMLStateEvent;
 

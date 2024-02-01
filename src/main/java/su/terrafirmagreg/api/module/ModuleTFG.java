@@ -1,12 +1,9 @@
-package su.terrafirmagreg.api.modules;
+package su.terrafirmagreg.api.module;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.Tags.MOD_NAME;
 
 /**
  * All of your {@link ModuleBase} classes must be annotated with this to be registered.

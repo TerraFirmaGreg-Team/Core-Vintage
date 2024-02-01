@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.modules.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
@@ -31,6 +31,7 @@ public class ModuleSoil extends ModuleBase {
 
 
     public ModuleSoil() {
+        super(1);
         this.enableAutoRegistry(SOIL_TAB);
 
     }

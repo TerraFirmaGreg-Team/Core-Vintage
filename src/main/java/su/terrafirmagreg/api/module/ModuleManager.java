@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.modules;
+package su.terrafirmagreg.api.module;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;

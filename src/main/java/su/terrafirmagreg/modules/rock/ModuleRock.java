@@ -6,7 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.modules.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
@@ -25,6 +25,7 @@ public class ModuleRock extends ModuleBase {
     public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "wand", false);
 
     public ModuleRock() {
+        super(1);
         this.enableAutoRegistry(ROCK_TAB);
 
     }

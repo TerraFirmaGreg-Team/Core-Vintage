@@ -1,8 +1,5 @@
 package su.terrafirmagreg.core;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.DumbStorage;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -13,6 +10,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.DumbStorage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalEventHandler;

@@ -1,9 +1,10 @@
 package su.terrafirmagreg.core.modules.ambiental.compat;
 
 
-import net.dries007.tfc.objects.te.TECrucible;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import net.dries007.tfc.objects.te.TECrucible;
 import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import tfctech.objects.tileentities.*;
 
@@ -15,76 +16,76 @@ import static su.terrafirmagreg.core.modules.ambiental.api.ITileEntityTemperatur
 
 public class TFCTech {
 
-	public static Optional<TempModifier> handleElectricForge(EntityPlayer player, TileEntity tile) {
-		if (tile instanceof TEElectricForge electricForge) {
-			float temp = electricForge.getField(TECrucible.FIELD_TEMPERATURE);
-			float change = temp / 100f;
-			float potency = temp / 350f;
-			if (hasProtection(player)) {
-				change = change * mod;
-			}
-			return TempModifier.defined("electric_forge", change, potency);
-		} else {
-			return TempModifier.none();
-		}
-	}
+    public static Optional<TempModifier> handleElectricForge(EntityPlayer player, TileEntity tile) {
+        if (tile instanceof TEElectricForge electricForge) {
+            float temp = electricForge.getField(TECrucible.FIELD_TEMPERATURE);
+            float change = temp / 100f;
+            float potency = temp / 350f;
+            if (hasProtection(player)) {
+                change = change * mod;
+            }
+            return TempModifier.defined("electric_forge", change, potency);
+        } else {
+            return TempModifier.none();
+        }
+    }
 
-	public static Optional<TempModifier> handleInductionCrucible(EntityPlayer player, TileEntity tile) {
-		if (tile instanceof TEInductionCrucible inductionCrucible) {
-			float temp = inductionCrucible.getField(TECrucible.FIELD_TEMPERATURE);
-			float change = temp / 100f;
-			float potency = temp / 350f;
-			if (hasProtection(player)) {
-				change = change * mod;
-			}
-			return TempModifier.defined("induction_crucible", change, potency);
-		} else {
-			return TempModifier.none();
-		}
-	}
+    public static Optional<TempModifier> handleInductionCrucible(EntityPlayer player, TileEntity tile) {
+        if (tile instanceof TEInductionCrucible inductionCrucible) {
+            float temp = inductionCrucible.getField(TECrucible.FIELD_TEMPERATURE);
+            float change = temp / 100f;
+            float potency = temp / 350f;
+            if (hasProtection(player)) {
+                change = change * mod;
+            }
+            return TempModifier.defined("induction_crucible", change, potency);
+        } else {
+            return TempModifier.none();
+        }
+    }
 
-	public static Optional<TempModifier> handleSmelteryCauldron(EntityPlayer player, TileEntity tile) {
-		if (tile instanceof TESmelteryCauldron smelteryCauldron) {
-			float temp = smelteryCauldron.getField(TECrucible.FIELD_TEMPERATURE);
-			float change = temp / 120f;
-			float potency = temp / 370f;
-			if (hasProtection(player)) {
-				change = change * mod;
-			}
-			return TempModifier.defined("smeltery_cauldron", change, potency);
-		} else {
-			return TempModifier.none();
-		}
-	}
+    public static Optional<TempModifier> handleSmelteryCauldron(EntityPlayer player, TileEntity tile) {
+        if (tile instanceof TESmelteryCauldron smelteryCauldron) {
+            float temp = smelteryCauldron.getField(TECrucible.FIELD_TEMPERATURE);
+            float change = temp / 120f;
+            float potency = temp / 370f;
+            if (hasProtection(player)) {
+                change = change * mod;
+            }
+            return TempModifier.defined("smeltery_cauldron", change, potency);
+        } else {
+            return TempModifier.none();
+        }
+    }
 
-	public static Optional<TempModifier> handleSmelteryFirebox(EntityPlayer player, TileEntity tile) {
-		if (tile instanceof TESmelteryFirebox smelteryFirebox) {
-			float temp = smelteryFirebox.getField(TECrucible.FIELD_TEMPERATURE);
-			float change = temp / 120f;
-			float potency = temp / 370f;
-			if (hasProtection(player)) {
-				change = change * mod;
-			}
-			return TempModifier.defined("smeltery_firebox", change, potency);
-		} else {
-			return TempModifier.none();
-		}
-	}
+    public static Optional<TempModifier> handleSmelteryFirebox(EntityPlayer player, TileEntity tile) {
+        if (tile instanceof TESmelteryFirebox smelteryFirebox) {
+            float temp = smelteryFirebox.getField(TECrucible.FIELD_TEMPERATURE);
+            float change = temp / 120f;
+            float potency = temp / 370f;
+            if (hasProtection(player)) {
+                change = change * mod;
+            }
+            return TempModifier.defined("smeltery_firebox", change, potency);
+        } else {
+            return TempModifier.none();
+        }
+    }
 
-	public static Optional<TempModifier> handleFridge(EntityPlayer player, TileEntity tile) {
-		if (tile instanceof TEFridge fridge) {
+    public static Optional<TempModifier> handleFridge(EntityPlayer player, TileEntity tile) {
+        if (tile instanceof TEFridge fridge) {
 
-			float change = 0f;
-			float potency = 0f;
+            float change = 0f;
+            float potency = 0f;
 
-			if (fridge.isOpen()) {
-				change = -10f;
-				potency = -0.7f;
-			}
+            if (fridge.isOpen()) {
+                change = -10f;
+                potency = -0.7f;
+            }
 
-			return TempModifier.defined("fridge", change, potency);
-		} else {
-			return TempModifier.none();
-		}
-	}
+            return TempModifier.defined("fridge", change, potency);
+        } else {
+            return TempModifier.none();
+        }
+    }
 }

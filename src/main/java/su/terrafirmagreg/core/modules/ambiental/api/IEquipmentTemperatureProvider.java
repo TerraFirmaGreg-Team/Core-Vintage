@@ -5,6 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;
 
@@ -12,7 +13,8 @@ import java.util.Optional;
 
 @FunctionalInterface
 public interface IEquipmentTemperatureProvider {
-	static void evaluateAll(EntityPlayer player, TempModifierStorage storage) {
+
+    static void evaluateAll(EntityPlayer player, TempModifierStorage storage) {
 //        CuriosApi.getCuriosHelper().getEquippedCurios(player).ifPresent(c -> {
 //            for(int i = 0; i < c.getSlots(); i++) {
 //                ItemStack stack = c.getStackInSlot(i);
@@ -43,7 +45,7 @@ public interface IEquipmentTemperatureProvider {
 //                }
 //            }
 //        }
-	}
+    }
 
 //    static Optional<TempModifier> handleClothes(EntityPlayer player, ItemStack stack) {
 //        if(stack.getItem() instanceof ClothesItem clothesItem) {
@@ -74,23 +76,23 @@ public interface IEquipmentTemperatureProvider {
 //        return TempModifier.none();
 //    }
 
-	static boolean hasLeatherArmorProtection(EntityPlayer player) {
-		Item head = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem();
-		Item chest = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem();
-		Item legs = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem();
-		Item feet = player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
+    static boolean hasLeatherArmorProtection(EntityPlayer player) {
+        Item head = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem();
+        Item chest = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem();
+        Item legs = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem();
+        Item feet = player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
 
-		Item leatherHelmet = Items.LEATHER_HELMET;
-		Item leatherChestplate = Items.LEATHER_CHESTPLATE;
-		Item leatherLeggings = Items.LEATHER_LEGGINGS;
-		Item leatherBoots = Items.LEATHER_BOOTS;
+        Item leatherHelmet = Items.LEATHER_HELMET;
+        Item leatherChestplate = Items.LEATHER_CHESTPLATE;
+        Item leatherLeggings = Items.LEATHER_LEGGINGS;
+        Item leatherBoots = Items.LEATHER_BOOTS;
 
-		// Leather Armor
-		return head.equals(leatherHelmet) &&
-				chest.equals(leatherChestplate) &&
-				legs.equals(leatherLeggings) &&
-				feet.equals(leatherBoots);
-	}
+        // Leather Armor
+        return head.equals(leatherHelmet) &&
+                chest.equals(leatherChestplate) &&
+                legs.equals(leatherLeggings) &&
+                feet.equals(leatherBoots);
+    }
 
-	Optional<TempModifier> getModifier(EntityPlayer player, ItemStack stack);
+    Optional<TempModifier> getModifier(EntityPlayer player, ItemStack stack);
 }

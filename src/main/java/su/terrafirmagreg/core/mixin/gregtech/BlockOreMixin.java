@@ -1,12 +1,11 @@
 package su.terrafirmagreg.core.mixin.gregtech;
 
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Material;
-import gregtech.common.blocks.BlockOre;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
+import gregtech.common.blocks.BlockOre;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

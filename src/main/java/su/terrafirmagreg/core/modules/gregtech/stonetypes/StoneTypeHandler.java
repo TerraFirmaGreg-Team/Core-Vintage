@@ -1,13 +1,11 @@
 package su.terrafirmagreg.core.modules.gregtech.stonetypes;
 
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.ore.StoneType;
-
-import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.ore.StoneType;
 import su.terrafirmagreg.core.util.Triple;
 
 import java.util.LinkedHashSet;

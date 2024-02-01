@@ -13,6 +13,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 import org.apache.commons.lang3.ArrayUtils;
 import su.terrafirmagreg.core.config.TFGConfig;
 import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
@@ -23,41 +24,41 @@ import static su.terrafirmagreg.Tags.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class TFCAmbientalEventHandler {
 
-	@SubscribeEvent
-	public void onPlayerDeath(LivingDeathEvent event) {
-		if (event.getEntityLiving().world.isRemote) {
-			return;
-		}
-		if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
-			return;
-		}
-		if (player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
-			TemperatureCapability cap = player.getCapability(TemperatureCapability.CAPABILITY, null);
-			cap.bodyTemperature = TemperatureCapability.AVERAGE;
-		}
-	}
+    @SubscribeEvent
+    public void onPlayerDeath(LivingDeathEvent event) {
+        if (event.getEntityLiving().world.isRemote) {
+            return;
+        }
+        if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
+            return;
+        }
+        if (player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
+            TemperatureCapability cap = player.getCapability(TemperatureCapability.CAPABILITY, null);
+            cap.bodyTemperature = TemperatureCapability.AVERAGE;
+        }
+    }
 
-	@SubscribeEvent
-	public void onPlayerSpawn(LivingSpawnEvent event) {
-		if (event.getEntityLiving().world.isRemote) {
-			return;
-		}
-		if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
-			return;
-		}
-		player.sendMessage(new TextComponentString("respawned"));
-	}
+    @SubscribeEvent
+    public void onPlayerSpawn(LivingSpawnEvent event) {
+        if (event.getEntityLiving().world.isRemote) {
+            return;
+        }
+        if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
+            return;
+        }
+        player.sendMessage(new TextComponentString("respawned"));
+    }
 
-	@SubscribeEvent
-	public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		if (event.getObject() instanceof EntityPlayer player) {
+    @SubscribeEvent
+    public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
+        if (event.getObject() instanceof EntityPlayer player) {
 
-			ResourceLocation loc = new ResourceLocation(MOD_ID, "temperature");
+            ResourceLocation loc = new ResourceLocation(MOD_ID, "temperature");
 
-			// Each player should have their own instance for each stat, as associated values may vary
-			if (!event.getCapabilities().containsKey(loc))
-				event.addCapability(loc, new TemperatureCapability(player));
-		}
+            // Each player should have their own instance for each stat, as associated values may vary
+            if (!event.getCapabilities().containsKey(loc))
+                event.addCapability(loc, new TemperatureCapability(player));
+        }
 //		if (event.getObject() instanceof EntityPlayer)
 //		{
 //			EntityPlayer player = (EntityPlayer)event.getObject();
@@ -65,32 +66,32 @@ public class TFCAmbientalEventHandler {
 //			capability.setPlayer(player);
 //			event.addCapability(TemperatureCapability.KEY, capability);
 //		}
-	}
+    }
 
-	@SubscribeEvent
-	public void onPlayerUpdate(LivingUpdateEvent event) {
+    @SubscribeEvent
+    public void onPlayerUpdate(LivingUpdateEvent event) {
 
-		EntityLivingBase entityLiving = event.getEntityLiving();
-		if (!(entityLiving instanceof EntityPlayer player)) {
-			return;
-		}
+        EntityLivingBase entityLiving = event.getEntityLiving();
+        if (!(entityLiving instanceof EntityPlayer player)) {
+            return;
+        }
 
-		if (player.isCreative()) {
-			return;
-		}
+        if (player.isCreative()) {
+            return;
+        }
 
-		if (!ArrayUtils.contains(TFGConfig.GENERAL.allowedDims, player.dimension)) {
-			return;
-		}
+        if (!ArrayUtils.contains(TFGConfig.GENERAL.allowedDims, player.dimension)) {
+            return;
+        }
 
-		TemperatureCapability temp = player.getCapability(TemperatureCapability.CAPABILITY, null);
+        TemperatureCapability temp = player.getCapability(TemperatureCapability.CAPABILITY, null);
 
-		temp.update();
-	}
+        temp.update();
+    }
 
-	@SubscribeEvent
-	public void registerPotions(RegistryEvent.Register<Potion> event) {
-		event.getRegistry().register(TempEffect.WARM);
-		event.getRegistry().register(TempEffect.COOL);
-	}
+    @SubscribeEvent
+    public void registerPotions(RegistryEvent.Register<Potion> event) {
+        event.getRegistry().register(TempEffect.WARM);
+        event.getRegistry().register(TempEffect.COOL);
+    }
 }

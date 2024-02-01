@@ -1,17 +1,16 @@
 package su.terrafirmagreg.core.mixin.gregtech;
 
-import gregtech.api.unification.FluidUnifier;
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.worldgen.populator.SurfaceRockPopulator;
-import gregtech.common.blocks.BlockOre;
-
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
 
+import gregtech.api.unification.FluidUnifier;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.worldgen.populator.SurfaceRockPopulator;
+import gregtech.common.blocks.BlockOre;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

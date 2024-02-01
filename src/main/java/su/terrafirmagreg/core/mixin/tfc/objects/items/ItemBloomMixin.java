@@ -1,14 +1,5 @@
 package su.terrafirmagreg.core.mixin.tfc.objects.items;
 
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.items.ItemBloom;
-import net.dries007.tfc.objects.items.ItemTFC;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +8,14 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
+import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
+import net.dries007.tfc.api.capability.forge.IForgeable;
+import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
+import net.dries007.tfc.api.capability.metal.IMetalItem;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.items.ItemBloom;
+import net.dries007.tfc.objects.items.ItemTFC;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;

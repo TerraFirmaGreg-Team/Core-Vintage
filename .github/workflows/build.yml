@@ -1,0 +1,90 @@
+name: Build
+run-name: "Build #${{ github.run_number }}"
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.1.1
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+
+      - name: Set the version
+        id: set_version
+        run: |
+          DEV=${{ steps.get_version.outputs.version }}
+          sed -i -e "s/0.0.0/${DEV}/g" gradle.properties
+
+      - name: Set up JDK 8 and 17
+        uses: actions/setup-java@v4.0.0
+        with:
+          java-version: |
+            8
+            17
+          distribution: 'adopt'
+          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-write-only: false
+          generate-job-summary: false
+          gradle-home-cache-includes: |
+            caches
+            notifications
+            jdks
+            wrapper
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.1.0
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build
+        uses: gradle/gradle-build-action@v2.11.1
+        with:
+          arguments: build
+
+      - name: Upload jar
+        uses: actions/upload-artifact@v4.0.0
+        with:
+          path: build/libs/TerraFirmaGreg-Core-1.12.x-${{ steps.get_version.outputs.version }}.jar
+          retention-days: 5
+
+      - name: Release
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: lNttW2Xl
+          modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
+          modrinth-dependencies: |
+            tULldUx4(required)
+            JaCEZUhg(required)
+
+          curseforge-id: 513402
+          curseforge-token: ${{ secrets.CF_API_TOKEN }}
+          curseforge-dependencies: |
+            gregtech-ce-unofficial(required)
+            terrafirmacraft(required)
+
+          files: build/libs/TerraFirmaGreg-Core-1.20.x-${{ steps.get_version.outputs.version }}.jar
+
+          name: TerraFirmaGreg-Core-1.20.x-${{ steps.get_version.outputs.version }}
+          version: ${{ steps.get_version.outputs.version }}
+          version-type: release
+
+          loaders: forge
+          game-versions: 1.12.1
+          game-version-filter: none
+          java: 8
+          retry-attempts: 2
+          retry-delay: 10000
+          fail-mode: fail

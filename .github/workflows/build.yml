@@ -75,9 +75,9 @@ jobs:
             gregtech-ce-unofficial(required)
             terrafirmacraft(required)
 
-          files: build/libs/TerraFirmaGreg-Core-1.20.x-${{ steps.get_version.outputs.version }}.jar
+          files: build/libs/TerraFirmaGreg-Core-1.12.x-${{ steps.get_version.outputs.version }}.jar
 
-          name: TerraFirmaGreg-Core-1.20.x-${{ steps.get_version.outputs.version }}
+          name: TerraFirmaGreg-Core-1.12.x-${{ steps.get_version.outputs.version }}
           version: ${{ steps.get_version.outputs.version }}
           version-type: release
 

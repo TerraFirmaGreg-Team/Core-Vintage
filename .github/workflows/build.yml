@@ -82,7 +82,7 @@ jobs:
           version-type: release
 
           loaders: forge
-          game-versions: 1.12.1
+          game-versions: 1.12.2
           game-version-filter: none
           java: 8
           retry-attempts: 2

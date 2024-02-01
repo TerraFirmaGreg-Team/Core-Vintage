@@ -7,15 +7,15 @@ import org.jetbrains.annotations.Nullable;
 public class ModuleConstructor {
 
     @Nullable
-    public ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
+    public ModuleBase constructModule(String container, Class<? extends ModuleBase> moduleClass) {
 
         try {
             ModuleBase module = moduleClass.newInstance();
-            ModuleManager.LOGGER.info("[ {} ] Loaded module: {}", moduleClass.getName(), modId);
+            ModuleManager.LOGGER.info("[ {} ] Loaded module: {}", moduleClass.getName(), container);
             return module;
 
         } catch (Exception e) {
-            FMLLog.log.error("[ {} ] Error loading module: {} {}", moduleClass.getName(), modId, e);
+            ModuleManager.LOGGER.error("[ {} ] Error loading module: {} {}", moduleClass.getName(), container, e);
         }
 
         return null;

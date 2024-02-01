@@ -83,14 +83,14 @@ public class ModuleEventRouter {
         this.routes.put(FMLPostInitializationEvent.class,
                 (IFMLStateEventRoute<FMLPostInitializationEvent>) (event) ->
                         this.fireEvent(module -> {
-                            module.getLogger().debug("Post-onInit start");
+                            module.getLogger().debug("Post-Init start");
                             module.onPostInit(event);
-                            module.getLogger().debug("Post-onInit complete");
+                            module.getLogger().debug("Post-Init complete");
 
                             if (event.getSide() == Side.CLIENT) {
-                                module.getLogger().debug("Client Post-onInit start");
+                                module.getLogger().debug("Client Post-Init start");
                                 module.onClientPostInit(event);
-                                module.getLogger().debug("Client Post-onInit complete");
+                                module.getLogger().debug("Client Post-Init complete");
                             }
                         })
         );
@@ -137,9 +137,9 @@ public class ModuleEventRouter {
         this.routes.put(FMLServerStoppedEvent.class,
                 (IFMLStateEventRoute<FMLServerStoppedEvent>) (event) ->
                         this.fireEvent(module -> {
-                            module.getLogger().debug("Server-topped start");
+                            module.getLogger().debug("Server-stopped start");
                             module.onServerStopped(event);
-                            module.getLogger().debug("Server-topped complete");
+                            module.getLogger().debug("Server-stopped complete");
                         })
         );
     }

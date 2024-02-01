@@ -29,7 +29,7 @@ public class ModuleManager {
     private static File configFolder;
     private final Map<ResourceLocation, ModuleBase> sortedModules;
     private final Set<ModuleBase> loadedModules;
-    public static final Logger LOGGER = LogManager.getLogger("TFG Module Loader");
+    public static final Logger LOGGER = LogManager.getLogger("TFG Module Manager");
     private final ModuleEventRouter moduleEventRouter;
     private Map<String, IModuleContainer> containers = new LinkedHashMap<>();
     @Getter

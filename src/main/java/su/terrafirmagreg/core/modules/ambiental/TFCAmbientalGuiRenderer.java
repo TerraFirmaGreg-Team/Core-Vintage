@@ -142,15 +142,14 @@ public class TFCAmbientalGuiRenderer {
 			}
 		}
 		if ((player.isSneaking() || !TFGConfig.CLIENT.SNEAKY_DETAILS) && tempSystem instanceof TemperatureCapability) {
-			TemperatureCapability sys = tempSystem;
-			float targetFormatted = sys.getTarget();
-			float tempFormatted = sys.getTemperature();
-			float changeFormatted = sys.getChange();
+			float targetFormatted = tempSystem.getTarget();
+			float tempFormatted = tempSystem.getTemperature();
+			float changeFormatted = tempSystem.getChange();
 			FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 			String tempStr = String.format("%.1f\u00BA -> %.1f\u00BA", temperature, targetFormatted);
 			String changeStr = String.format("%.3f\u00BA/s", change);
-			fr.drawStringWithShadow(tempStr, mid + 50 - fr.getStringWidth(tempStr) / 2 + offsetX, armorRowHeight + 1 + offsetY, c.getRGB());
-			fr.drawStringWithShadow(changeStr, mid - 50 - fr.getStringWidth(changeStr) / 2, armorRowHeight + 1, c.getRGB());
+			fr.drawStringWithShadow(tempStr, mid + 50 - (float) fr.getStringWidth(tempStr) / 2 + offsetX, armorRowHeight + 1 + offsetY, c.getRGB());
+			fr.drawStringWithShadow(changeStr, mid - 50 - (float) fr.getStringWidth(changeStr) / 2, armorRowHeight + 1, c.getRGB());
 
 		}
 		GL11.glColor4f(1f, 1f, 1f, 0.9F);

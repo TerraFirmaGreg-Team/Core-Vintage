@@ -64,3 +64,8 @@ death.attack.hyperthermia=%1$s умер от сердечного приступ
 
 effect.tfg.cool.name=Остываете
 effect.tfg.warm.name=Нагреваетесь
+
+# Подсказки
+tooltip.tfg.too hot=Слишком горячё! Экипируйте щипцы.
+tooltip.tfg.too cold=Слишком холодно! Экипируйте щипцы.
+tooltip.tfg.toolight=Слишком легкий! Экипируйте щипцы.

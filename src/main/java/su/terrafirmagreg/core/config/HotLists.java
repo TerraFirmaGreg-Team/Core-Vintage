@@ -1,7 +1,7 @@
-package su.terrafirmagreg.core.modules.hotornot.config;
+package su.terrafirmagreg.core.config;
 
 import net.minecraft.item.ItemStack;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 
 public class HotLists {
 	public static boolean isRemoved(ItemStack stack) {

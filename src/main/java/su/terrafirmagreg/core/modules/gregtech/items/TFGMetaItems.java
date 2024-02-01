@@ -96,8 +96,6 @@ public class TFGMetaItems extends StandardMetaItem {
 		ROCKET_BODY_TIER_7 = addItem(19, "rocket.body.tier.7");
 		ROCKET_BODY_TIER_8 = addItem(20, "rocket.body.tier.8");
 		ROCKET_BODY_TIER_9 = addItem(21, "rocket.body.tier.9");
-		ROCKET_BODY_TIER_10 = addItem(22, "rocket.body.tier.10");
-		ROCKET_BODY_TIER_11 = addItem(23, "rocket.body.tier.11");
 
 		ALLOY_INGOT_TIER_1 = addItem(24, "alloy.ingot.tier.1");
 		ALLOY_INGOT_TIER_2 = addItem(25, "alloy.ingot.tier.2");
@@ -108,8 +106,6 @@ public class TFGMetaItems extends StandardMetaItem {
 		ALLOY_INGOT_TIER_7 = addItem(30, "alloy.ingot.tier.7");
 		ALLOY_INGOT_TIER_8 = addItem(31, "alloy.ingot.tier.8");
 		ALLOY_INGOT_TIER_9 = addItem(32, "alloy.ingot.tier.9");
-		ALLOY_INGOT_TIER_10 = addItem(33, "alloy.ingot.tier.10");
-		ALLOY_INGOT_TIER_11 = addItem(34, "alloy.ingot.tier.11");
 
 		ROCKET_CONTROL_COMPUTER_TIER_1 = addItem(35, "rocket.control.computer.tier.1");
 		ROCKET_CONTROL_COMPUTER_TIER_2 = addItem(36, "rocket.control.computer.tier.2");
@@ -120,16 +116,12 @@ public class TFGMetaItems extends StandardMetaItem {
 		ROCKET_CONTROL_COMPUTER_TIER_7 = addItem(41, "rocket.control.computer.tier.7");
 		ROCKET_CONTROL_COMPUTER_TIER_8 = addItem(42, "rocket.control.computer.tier.8");
 		ROCKET_CONTROL_COMPUTER_TIER_9 = addItem(43, "rocket.control.computer.tier.9");
-		ROCKET_CONTROL_COMPUTER_TIER_10 = addItem(44, "rocket.control.computer.tier.10");
-		ROCKET_CONTROL_COMPUTER_TIER_11 = addItem(45, "rocket.control.computer.tier.11");
 
 		SCHEMATIC_BLANK = addItem(46, "schematic.blank");
 
 		LANDER_TIER_1 = addItem(47, "lander.tier.1");
 		LANDER_TIER_2 = addItem(48, "lander.tier.2");
 		LANDER_TIER_3 = addItem(49, "lander.tier.3");
-
-		FLUID_HOUSING = addItem(50, "fluid.housing");
 
 		WOODEN_BUCKET_WITH_SALT = addItem(51, "wooden.bucket.with.salt").setMaxStackSize(1);
 

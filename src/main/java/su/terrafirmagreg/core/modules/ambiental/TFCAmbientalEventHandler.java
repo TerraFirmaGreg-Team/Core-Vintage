@@ -14,7 +14,7 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.commons.lang3.ArrayUtils;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
 import su.terrafirmagreg.core.modules.ambiental.effects.TempEffect;
 

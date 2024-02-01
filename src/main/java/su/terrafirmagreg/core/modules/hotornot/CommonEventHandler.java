@@ -19,11 +19,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 import su.terrafirmagreg.core.modules.ambiental.TFCAmbientalGuiRenderer;
 import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
 import su.terrafirmagreg.core.modules.gregtech.items.tools.TFGToolItems;
-import su.terrafirmagreg.core.modules.hotornot.config.HotLists;
+import su.terrafirmagreg.core.config.HotLists;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 

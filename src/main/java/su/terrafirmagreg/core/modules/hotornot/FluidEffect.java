@@ -5,7 +5,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;

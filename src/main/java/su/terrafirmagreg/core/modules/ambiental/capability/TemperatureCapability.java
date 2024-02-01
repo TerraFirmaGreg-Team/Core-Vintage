@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 import su.terrafirmagreg.core.modules.ambiental.AmbientalDamage;
 import su.terrafirmagreg.core.modules.ambiental.api.IBlockTemperatureProvider;
 import su.terrafirmagreg.core.modules.ambiental.api.IEquipmentTemperatureProvider;

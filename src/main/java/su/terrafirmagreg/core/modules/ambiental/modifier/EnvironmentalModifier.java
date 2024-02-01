@@ -10,7 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 import su.terrafirmagreg.core.modules.ambiental.api.AmbientalRegistry;
 import su.terrafirmagreg.core.modules.ambiental.api.IEnvironmentalTemperatureProvider;
 import su.terrafirmagreg.core.modules.ambiental.effects.TempEffect;

@@ -12,8 +12,8 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import su.terrafirmagreg.core.TFGConfig;
-import su.terrafirmagreg.core.modules.hotornot.config.HotLists;
+import su.terrafirmagreg.core.config.TFGConfig;
+import su.terrafirmagreg.core.config.HotLists;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT)
 public class ClientEventHandler {

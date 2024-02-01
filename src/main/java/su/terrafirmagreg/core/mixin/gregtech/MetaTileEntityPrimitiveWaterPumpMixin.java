@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 
 @Mixin(value = MetaTileEntityPrimitiveWaterPump.class, remap = false)
 public abstract class MetaTileEntityPrimitiveWaterPumpMixin extends MultiblockControllerBase implements IPrimitivePump {

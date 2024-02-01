@@ -65,3 +65,8 @@ death.attack.hyperthermia=%1$s died of heatstroke.
 
 effect.tfg.cool.name=Cooling Down
 effect.tfg.warm.name=Warming Up
+
+# Tooltips
+tooltip.tfg.toohot=Too hot to handle! Wear protection.
+tooltip.tfg.toocold=Too cold to handle! Wear protection.
+tooltip.tfg.toolight=Too light to handle! Wear protection.

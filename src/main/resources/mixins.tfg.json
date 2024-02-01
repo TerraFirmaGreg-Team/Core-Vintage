@@ -23,7 +23,6 @@
     "gregtech.MinerLogicMixin",
     "gregtech.PartsRecipeHandlerMixin",
     "gregtech.ToolRecipeHandlerMixin",
-    "gregtech.TreeFellingListenerMixin",
     "puddles.PuddlesMixin",
     "tfc.BloomeryRecipeMixin",
     "tfc.CommonEventHandlerMixin",

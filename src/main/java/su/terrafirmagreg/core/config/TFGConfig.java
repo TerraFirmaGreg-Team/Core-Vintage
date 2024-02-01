@@ -1,4 +1,4 @@
-package su.terrafirmagreg.core;
+package su.terrafirmagreg.core.config;
 
 import net.minecraftforge.common.config.Config;
 

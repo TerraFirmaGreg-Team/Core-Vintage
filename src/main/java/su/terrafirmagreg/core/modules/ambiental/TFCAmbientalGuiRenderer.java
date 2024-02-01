@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 import su.terrafirmagreg.core.modules.ambiental.capability.TemperatureCapability;
 
 import static su.terrafirmagreg.Tags.MOD_ID;

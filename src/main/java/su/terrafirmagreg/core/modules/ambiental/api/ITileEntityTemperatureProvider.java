@@ -2,7 +2,7 @@ package su.terrafirmagreg.core.modules.ambiental.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import su.terrafirmagreg.core.TFGConfig;
+import su.terrafirmagreg.core.config.TFGConfig;
 import su.terrafirmagreg.core.modules.ambiental.modifier.EnvironmentalModifier;
 import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifier;
 import su.terrafirmagreg.core.modules.ambiental.modifier.TempModifierStorage;

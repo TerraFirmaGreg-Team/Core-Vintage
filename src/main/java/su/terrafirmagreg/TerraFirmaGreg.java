@@ -1,14 +1,11 @@
 package su.terrafirmagreg;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 
-import su.terrafirmagreg.api.module.ModuleContainerRegistryEvent;
-import su.terrafirmagreg.api.module.ModuleManager;
-import su.terrafirmagreg.modules.ModuleContainerTFG;
+import su.terrafirmagreg.api.module.ModuleManager2;
 import su.terrafirmagreg.proxy.IProxy;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;
@@ -26,16 +23,19 @@ public class TerraFirmaGreg {
 
     // Hold this so that we can reference non-interface methods without
     // letting the GregTechAPI object see them as immediately.
-    private ModuleManager moduleManager;
+    private final ModuleManager2 moduleManager;
 
-    public TerraFirmaGreg() {}
+    public TerraFirmaGreg() {
+
+        this.moduleManager = new ModuleManager2(MOD_ID);
+    }
 
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
-        this.moduleManager = new ModuleManager();
-        this.moduleManager.registerContainer(new ModuleContainerTFG());
-        MinecraftForge.EVENT_BUS.post(new ModuleContainerRegistryEvent());
+//        this.moduleManager.registerContainer(new ModuleContainerTFG());
+
         this.moduleManager.setup(event.getASMHarvestedData(), Loader.instance().getConfigDir());
+        this.moduleManager.onConstructionEvent();
         this.moduleManager.routeFMLStateEvent(event);
     }
 
@@ -52,7 +52,6 @@ public class TerraFirmaGreg {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
-        this.moduleManager.processIMC(FMLInterModComms.fetchRuntimeMessages(INSTANCE));
     }
 
     @EventHandler
@@ -83,10 +82,5 @@ public class TerraFirmaGreg {
     @EventHandler
     public void serverStopped(FMLServerStoppedEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
-    }
-
-    @EventHandler
-    public void respondIMC(FMLInterModComms.IMCEvent event) {
-        this.moduleManager.processIMC(event.getMessages());
     }
 }

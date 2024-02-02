@@ -14,7 +14,7 @@ import su.terrafirmagreg.modules.rock.init.ItemsRock;
 import java.util.Collections;
 import java.util.List;
 
-//@ModuleTFG(
+//@Module(
 //        moduleID = ModuleContainerTFG.MODULE_ROCK,
 //        containerID = Tags.MOD_ID,
 //        name = "TFG Rock")

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ModuleTFG {
+public @interface Module {
 
     /**
      * The ID of this module. Must be unique within its container.
@@ -39,8 +39,6 @@ public @interface ModuleTFG {
      * Core modules should not have mod dependencies.
      */
     boolean coreModule() default false;
-
-    boolean disableModule() default false;
 
     String author() default "";
 

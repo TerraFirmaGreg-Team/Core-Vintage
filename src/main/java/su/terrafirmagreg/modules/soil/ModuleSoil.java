@@ -19,7 +19,7 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 import java.util.Collections;
 import java.util.List;
 
-//@ModuleTFG(
+//@Module(
 //        moduleID = MODULE_SOIL,
 //        containerID = Tags.MOD_ID,
 //        name = "TFG Soil")

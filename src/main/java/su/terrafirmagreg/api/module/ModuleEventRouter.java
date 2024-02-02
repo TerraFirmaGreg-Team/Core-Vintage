@@ -18,16 +18,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
 public class ModuleEventRouter {
 
-    private final Set<ModuleBase> loadedModules;
+    private final List<ModuleBase> loadedModules;
     private final Map<Class<? extends FMLStateEvent>, IFMLStateEventRoute> routes;
 
-    public ModuleEventRouter(Set<ModuleBase> loadedModules) {
+    public ModuleEventRouter(List<ModuleBase> loadedModules) {
 
         System.out.println("Loaded modules: " + loadedModules);
 

@@ -5,6 +5,8 @@ import net.darkhax.bookshelf.registry.IVariant;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -511,8 +513,13 @@ public class Registry {
      */
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Block block) {
-//        if (block instanceof IHasModel model) model.onModelRegister();
-        this.registerInventoryModel(Item.getItemFromBlock(block));
+        if (block instanceof IHasModel model) model.onModelRegister();
+        else this.registerBlockModel(block, new StateMap.Builder().build());
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerBlockModel(@Nonnull Block block, IStateMapper stateMap) {
+        ModelLoader.setCustomStateMapper(block, stateMap);
     }
 
     /**
@@ -524,8 +531,7 @@ public class Registry {
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Item item) {
         if (item instanceof IHasModel model) model.onModelRegister();
-
-        else this.registerInventoryModel(item, 0, item.getRegistryName().toString());
+        else this.registerItemModel(item, 0, item.getRegistryName().toString());
     }
 
     /**
@@ -536,8 +542,7 @@ public class Registry {
      * @param modelName The name of the model to register.
      */
     @SideOnly(Side.CLIENT)
-    public void registerInventoryModel(@Nonnull Item item, int meta, @Nonnull String modelName) {
-
+    public void registerItemModel(@Nonnull Item item, int meta, @Nonnull String modelName) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(modelName, "normal"));
     }
 

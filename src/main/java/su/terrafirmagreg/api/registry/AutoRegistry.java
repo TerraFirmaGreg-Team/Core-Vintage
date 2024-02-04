@@ -138,9 +138,9 @@ public class AutoRegistry {
 
     @SideOnly(Side.CLIENT)
     public void onRegisterModels(ModelRegistryEvent event) {
-//        for (Block block : this.registry.getBlocks()) {
-//            this.registry.registerInventoryModel(block);
-//        }
+        for (Block block : this.registry.getBlocks()) {
+            this.registry.registerInventoryModel(block);
+        }
 
         for (var item : this.registry.getItems()) {
             this.registry.registerInventoryModel(item);

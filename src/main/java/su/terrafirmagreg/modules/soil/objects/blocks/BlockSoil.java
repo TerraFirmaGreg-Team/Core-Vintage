@@ -7,26 +7,22 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.block.BlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 import java.util.Random;
 
-public abstract class BlockSoil extends BlockBase implements ISoilBlock {
+public abstract class BlockSoil extends BlockBase implements ISoilBlockVariant {
 
     private final SoilBlockVariant variant;
     private final SoilType type;
@@ -80,21 +76,6 @@ public abstract class BlockSoil extends BlockBase implements ISoilBlock {
     @Override
     public int damageDropped(@NotNull IBlockState state) {
         return getMetaFromState(state);
-    }
-
-    @Override
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @NotNull
-            protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(),
-                        "soil_type=" + getType());
-            }
-        });
-
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(),
-                        "soil_type=" + getType()));
     }
 
     @NotNull

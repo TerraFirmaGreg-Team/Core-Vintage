@@ -11,11 +11,11 @@ import net.minecraftforge.client.model.ModelLoader;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.item.ItemBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItem;
+import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItemVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
 
 
-public class ItemSoilMudBrick extends ItemBase implements ISoilItem {
+public class ItemSoilMudBrick extends ItemBase implements ISoilItemVariant {
 
     private final SoilItemVariant variant;
     private final SoilType type;
@@ -50,11 +50,5 @@ public class ItemSoilMudBrick extends ItemBase implements ISoilItem {
     @Override
     public Weight getWeight(@NotNull ItemStack stack) {
         return Weight.LIGHT; // Stacksize = 32
-    }
-
-    @Override
-    public void onModelRegister() {
-        ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
     }
 }

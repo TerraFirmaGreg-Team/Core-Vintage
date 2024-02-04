@@ -9,7 +9,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.storage.loot.LootPool;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -26,8 +25,8 @@ import lombok.Getter;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.item.IColorfulItem;
+import su.terrafirmagreg.api.util.Helpers;
 import su.terrafirmagreg.api.util.IHasModel;
-import su.terrafirmagreg.api.util.LootBuilder;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by
@@ -118,99 +117,67 @@ public class AutoRegistry {
 
     public void onRegisterTileEntities() {
         for (var provider : this.registry.getTileProviders()) {
-            if (provider instanceof Block) {
-                GameRegistry.registerTileEntity(provider.getTileEntityClass(),
-                        ((Block) provider).getRegistryName().toString().replace(":", ".").replace("_", "."));
-            }
+            GameRegistry.registerTileEntity(provider.getTileEntityClass(), Helpers.getID("tile." + provider.getTileEntityClass().getSimpleName()));
         }
     }
 
 
+    public void onTableLoaded(LootTableLoadEvent event) {
+        for (var builder : this.registry.getLootTableEntries().get(event.getName())) {
+            var pool = event.getTable().getPool(builder.getPool());
+            if (pool != null) pool.addEntry(builder.build());
+            else ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
+        }
+    }
+
+
+    // --------------------------------------------------------------------------
+    // - Client
+    // --------------------------------------------------------------------------
+
+
     @SideOnly(Side.CLIENT)
-    public void onClientRegisterModels(ModelRegistryEvent event) {
-        for (IHasModel model : this.registry.getModels()) {
-            model.onModelRegister();
-        }
+    public void onRegisterModels(ModelRegistryEvent event) {
+//        for (Block block : this.registry.getBlocks()) {
+//            this.registry.registerInventoryModel(block);
+//        }
 
-        for (Block block : this.registry.getBlocks()) {
-
-            this.registry.registerInventoryModel(block);
-        }
-
-        for (Item item : this.registry.getItems()) {
-
+        for (var item : this.registry.getItems()) {
             this.registry.registerInventoryModel(item);
         }
 
-
-    }
-
-
-    @SubscribeEvent
-    public void onTableLoaded(LootTableLoadEvent event) {
-
-        for (final LootBuilder builder : this.registry.getLootTableEntries().get(event.getName())) {
-
-            final LootPool pool = event.getTable().getPool(builder.getPool());
-
-            if (pool != null) {
-
-                pool.addEntry(builder.build());
-            } else {
-
-                ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
-            }
+        for (var model : this.registry.getModels()) {
+            model.onModelRegister();
         }
     }
 
-    @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public void registerBlockColor(ColorHandlerEvent.Block event) {
+    public void onRegisterTileEntitySpecialRenderer() {
+        for (var provider : this.registry.getTileProviders()) {
+            TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
-        for (final Block block : this.registry.getColoredBlocks()) {
+            if (tesr != null) ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
+        }
+    }
 
+    @SideOnly(Side.CLIENT)
+    public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
+        for (var block : this.registry.getColoredBlocks()) {
             event.getBlockColors().registerBlockColorHandler(((IColorfulBlock) block).getColorHandler(), block);
         }
     }
 
-    @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public void registerItemColor(ColorHandlerEvent.Item event) {
-
-        for (final Block block : this.registry.getColoredBlocks()) {
-
-            final IColorfulBlock colorfulBlock = (IColorfulBlock) block;
-
+    public void onRegisterItemColor(ColorHandlerEvent.Item event) {
+        for (var block : this.registry.getColoredBlocks()) {
+            var colorfulBlock = (IColorfulBlock) block;
             if (colorfulBlock.getItemColorHandler() != null) {
-
                 event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
             }
         }
 
-        for (final Item item : this.registry.getColoredItems()) {
-
+        for (var item : this.registry.getColoredItems()) {
             event.getItemColors().registerItemColorHandler(((IColorfulItem) item).getColorHandler(), item);
         }
     }
-
-    public void init() {}
-
-    public void postInit() {}
-
-    @SideOnly(Side.CLIENT)
-    public void clientInit() {
-
-        for (var provider : this.registry.getTileProviders()) {
-
-            TileEntitySpecialRenderer tesr = provider.getTileRenderer();
-
-            if (tesr != null) {
-
-                ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void clientPostInit() {}
 }

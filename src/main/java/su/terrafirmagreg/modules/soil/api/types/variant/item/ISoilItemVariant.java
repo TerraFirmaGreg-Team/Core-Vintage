@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface ISoilItem extends ISoilType, IHasModel, IItemSize {
+public interface ISoilItemVariant extends ISoilType, IItemSize {
 
     /**
      * Возвращает вариант блока породы.
@@ -28,16 +28,6 @@ public interface ISoilItem extends ISoilType, IHasModel, IItemSize {
      */
     @NotNull
     default String getName() {
-        return String.format("soil.%s.%s", getItemVariant(), getType());
-    }
-
-    /**
-     * Возвращает расположение ресурса для данного подтипа деревянного предмета.
-     *
-     * @return расположение ресурса
-     */
-    @NotNull
-    default ResourceLocation getResourceLocation() {
-        return Helpers.getID(String.format("soil/%s/%s", getItemVariant(), getType()));
+        return String.format("soil/%s/%s", getItemVariant(), getType());
     }
 }

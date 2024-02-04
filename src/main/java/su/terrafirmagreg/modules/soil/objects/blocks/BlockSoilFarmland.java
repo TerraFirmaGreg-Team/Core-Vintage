@@ -8,8 +8,7 @@ import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -28,17 +27,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
+import tfcflorae.objects.blocks.blocktype.farmland.BlockLoamySandFarmland;
 
 import java.util.Random;
 
 
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IHasModel {
 
     public static final int[] TINT = new int[]{
             0xffffffff,
@@ -84,8 +85,8 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
 
     protected static void turnToDirt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
-        if (block instanceof ISoilBlock) {
-            var soil = ((ISoilBlock) block).getType();
+        if (block instanceof ISoilBlockVariant) {
+            var soil = ((ISoilBlockVariant) block).getType();
 
             world.setBlockState(pos, StorageSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
@@ -264,20 +265,9 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock {
         }
     }
 
+
     @Override
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @NotNull
-            protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "soil_type=" + getType());
-            }
-
-        });
-
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "soil_type=" + getType()));
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockSoilFarmland.MOISTURE).build());
     }
-
 }

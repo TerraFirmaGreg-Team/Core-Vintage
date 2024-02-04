@@ -3,7 +3,6 @@
   "defaults": {
     "model": "tfg:soil/clay_grass",
     "textures": {
-      "particle": "tfg:blocks/soil/overlay/grass/top",
       "clay": "tfg:blocks/soil/overlay/clay",
       "up": "tfg:blocks/soil/overlay/grass/top",
       "north": "tfg:blocks/soil/overlay/grass/side",
@@ -17,6 +16,14 @@
     "normal": [
       {}
     ],
+    "east": {
+      "true": {
+        "textures": {
+          "east": "tfg:blocks/soil/overlay/grass/top"
+        }
+      },
+      "false": {}
+    },
     "north": {
       "true": {
         "textures": {
@@ -25,18 +32,14 @@
       },
       "false": {}
     },
+    "snowy": {
+      "true": {},
+      "false": {}
+    },
     "south": {
       "true": {
         "textures": {
           "south": "tfg:blocks/soil/overlay/grass/top"
-        }
-      },
-      "false": {}
-    },
-    "east": {
-      "true": {
-        "textures": {
-          "east": "tfg:blocks/soil/overlay/grass/top"
         }
       },
       "false": {}

@@ -8,8 +8,6 @@ import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
@@ -18,7 +16,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,13 +23,13 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import java.util.Random;
 
-public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
+public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlockVariant {
 
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
@@ -128,20 +125,5 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
             default:
                 return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
         }
-    }
-
-    @Override
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @NotNull
-            protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(), "soil_type=" + getType());
-            }
-        });
-
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "soil_type=" + getType()));
     }
 }

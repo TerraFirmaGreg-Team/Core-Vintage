@@ -9,8 +9,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
@@ -19,7 +18,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
@@ -37,7 +35,9 @@ import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 
 import java.util.Random;
 
-public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
+import static net.minecraft.block.BlockGrass.*;
+
+public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant {
 
     // Used for connected textures only.
     public static final PropertyBool NORTH = PropertyBool.create("north");
@@ -50,8 +50,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
 
     public BlockSoilGrass(SoilBlockVariant variant, SoilType type) {
 
-        if (variant.canFall())
-            FallingBlockManager.registerFallable(this, variant.getSpecification());
+        if (variant.canFall()) FallingBlockManager.registerFallable(this, variant.getSpecification());
 
         this.variant = variant;
         this.type = type;
@@ -87,7 +86,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
             // Генерируем торф в зависимости от типа блока
             if (usBlock instanceof BlockPeat) {
                 world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
-            } else if (usBlock instanceof ISoilBlock soil) {
+            } else if (usBlock instanceof ISoilBlockVariant soil) {
                 world.setBlockState(pos, StorageSoil.getBlock(soil.getBlockVariant()
                                 .getNonGrassVersion(), soil.getType())
                         .getDefaultState());
@@ -127,11 +126,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
                 // Генерируем траву в зависимости от типа текущего блока
                 if (currentBlock instanceof BlockPeat) {
                     world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
-                } else if (currentBlock instanceof ISoilBlock block) {
+                } else if (currentBlock instanceof ISoilBlockVariant block) {
                     SoilBlockVariant spreader = SoilBlockVariants.GRASS;
 
                     // Проверяем тип блока, с которого распространяется трава
-                    if (usBlock instanceof ISoilBlock && ((ISoilBlock) usBlock).getBlockVariant() == SoilBlockVariants.DRY_GRASS) {
+                    if (usBlock instanceof ISoilBlockVariant && ((ISoilBlockVariant) usBlock).getBlockVariant() == SoilBlockVariants.DRY_GRASS) {
                         spreader = SoilBlockVariants.DRY_GRASS;
                     }
 
@@ -181,13 +180,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
             if (!worldIn.isAreaLoaded(pos, 3))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
             Block block = worldIn.getBlockState(pos).getBlock();
-            if (block instanceof ISoilBlock) {
-                var soil = ((ISoilBlock) block).getType();
+            if (block instanceof ISoilBlockVariant soilBlockVariant) {
+                var soil = soilBlockVariant.getType();
 
-                if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up())
-                        .getLightOpacity(worldIn, pos.up()) > 2) {
-                    worldIn.setBlockState(pos, StorageSoil.getBlock(SoilBlockVariants.DIRT, soil)
-                            .getDefaultState());
+                if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
+                    worldIn.setBlockState(pos, StorageSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
                 } else {
                     if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
                         for (int i = 0; i < 4; ++i) {
@@ -217,22 +214,17 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
         pos = pos.add(0, -1, 0);
         Block blockUp = world.getBlockState(pos.up()).getBlock();
         return state
-                .withProperty(NORTH, world.getBlockState(pos.offset(EnumFacing.NORTH))
-                        .getBlock() instanceof BlockSoilGrass)
-                .withProperty(EAST, world.getBlockState(pos.offset(EnumFacing.EAST))
-                        .getBlock() instanceof BlockSoilGrass)
-                .withProperty(SOUTH, world.getBlockState(pos.offset(EnumFacing.SOUTH))
-                        .getBlock() instanceof BlockSoilGrass)
-                .withProperty(WEST, world.getBlockState(pos.offset(EnumFacing.WEST))
-                        .getBlock() instanceof BlockSoilGrass);
-        // TODO: 15.08.2023
-        //.withProperty(SNOWY, Boolean.valueOf(blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER));
+                .withProperty(NORTH, world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() instanceof BlockSoilGrass)
+                .withProperty(EAST, world.getBlockState(pos.offset(EnumFacing.EAST)).getBlock() instanceof BlockSoilGrass)
+                .withProperty(SOUTH, world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() instanceof BlockSoilGrass)
+                .withProperty(WEST, world.getBlockState(pos.offset(EnumFacing.WEST)).getBlock() instanceof BlockSoilGrass)
+                .withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
     }
 
     @NotNull
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, EAST, NORTH, WEST, SOUTH, BlockGrass.SNOWY);
+        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY);
     }
 
     @NotNull
@@ -264,28 +256,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock {
     @SuppressWarnings("deprecation")
     public boolean shouldSideBeRendered(@NotNull IBlockState blockState, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
         return super.shouldSideBeRendered(blockState, world, pos, side);
-    }
-
-    @Override
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @NotNull
-            protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
-                return new ModelResourceLocation(getResourceLocation(),
-                        "east=" + state.getValue(EAST) + "," +
-                                "north=" + state.getValue(NORTH) + "," +
-                                "soil_type=" + getType() + "," +
-                                "south=" + state.getValue(SOUTH) + "," +
-                                "west=" + state.getValue(WEST));
-            }
-        });
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(),
-                        "east=false,north=false," +
-                                "soil_type=" + getType() + "," +
-                                "south=false,west=false"));
     }
 
     @NotNull

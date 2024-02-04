@@ -17,6 +17,14 @@
     "normal": [
       {}
     ],
+    "east": {
+      "true": {
+        "textures": {
+          "east": "tfg:blocks/soil/overlay/dry_grass/top"
+        }
+      },
+      "false": {}
+    },
     "north": {
       "true": {
         "textures": {
@@ -25,18 +33,14 @@
       },
       "false": {}
     },
+    "snowy": {
+      "true": {},
+      "false": {}
+    },
     "south": {
       "true": {
         "textures": {
           "south": "tfg:blocks/soil/overlay/dry_grass/top"
-        }
-      },
-      "false": {}
-    },
-    "east": {
-      "true": {
-        "textures": {
-          "east": "tfg:blocks/soil/overlay/dry_grass/top"
         }
       },
       "false": {}

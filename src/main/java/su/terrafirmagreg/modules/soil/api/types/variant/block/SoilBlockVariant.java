@@ -112,7 +112,7 @@ public class SoilBlockVariant {
     public static class Builder {
 
         private final String name;
-        private BiFunction<SoilBlockVariant, SoilType, ISoilBlock> factory;
+        private BiFunction<SoilBlockVariant, SoilType, ISoilBlockVariant> factory;
         private Specification specification = null;
 
         /**
@@ -124,7 +124,7 @@ public class SoilBlockVariant {
             this.name = name;
         }
 
-        public Builder setFactory(BiFunction<SoilBlockVariant, SoilType, ISoilBlock> factory) {
+        public Builder setFactory(BiFunction<SoilBlockVariant, SoilType, ISoilBlockVariant> factory) {
             this.factory = factory;
             return this;
         }

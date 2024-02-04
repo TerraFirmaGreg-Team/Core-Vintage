@@ -58,7 +58,7 @@ public class SoilItemVariant {
     public static class Builder {
 
         private final String name;
-        private BiFunction<SoilItemVariant, SoilType, ISoilItem> factory;
+        private BiFunction<SoilItemVariant, SoilType, ISoilItemVariant> factory;
 
 
         /**
@@ -71,7 +71,7 @@ public class SoilItemVariant {
         }
 
 
-        public Builder setFactory(BiFunction<SoilItemVariant, SoilType, ISoilItem> factory) {
+        public Builder setFactory(BiFunction<SoilItemVariant, SoilType, ISoilItemVariant> factory) {
             this.factory = factory;
             return this;
         }

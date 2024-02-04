@@ -12,13 +12,13 @@ import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import java.util.Random;
 
-public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {
+public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlockVariant {
 
     public BlockSoilDryGrass(SoilBlockVariant variant, SoilType type) {
         super(variant, type);

@@ -1,5 +1,8 @@
 package su.terrafirmagreg.api.registry;
 
+import net.darkhax.bookshelf.item.ICustomModel;
+import net.darkhax.bookshelf.registry.IVariant;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,6 +21,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -254,7 +258,7 @@ public class Registry {
     public Block registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
 
         block.setRegistryName(this.modid, id);
-        block.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", "."));
+        block.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
         this.blocks.add(block);
 
         if (itemBlock != null) this.registerItem(itemBlock, id);
@@ -273,6 +277,7 @@ public class Registry {
 
     //region // ===== Item =========================================================================================================================//
 
+
     /**
      * Registers an item to the game. This will also set the unlocalized name, and creative tab
      * if {@link #tab} has been set. The item will also be cached in {@link #items}.
@@ -283,18 +288,8 @@ public class Registry {
      */
     public Item registerItem(@Nonnull Item item, @Nonnull String id) {
 
-        return this.registerItem(item, new ResourceLocation(this.modid, id));
-    }
-
-    public Item registerItem(@Nonnull Block block, @Nonnull String id) {
-
-        return this.registerItem(new ItemBlock(block), id);
-    }
-
-    public Item registerItem(@Nonnull Item item, @Nonnull ResourceLocation id) {
-
-        item.setRegistryName(id);
-        item.setTranslationKey(id.getNamespace().replaceAll("_", ".") + "." + id.getPath().toLowerCase().replace("_", "."));
+        item.setRegistryName(this.modid, id);
+        item.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
         this.items.add(item);
 
         if (this.tab != null) {
@@ -389,7 +384,7 @@ public class Registry {
      * @param id       The string id for the entity.
      * @return The entity that was registered.
      */
-    public <T extends Entity> EntityEntryBuilder<T> registerEntity(Class<T> entClass, String id, int networkId) {
+    public <T extends Entity> EntityEntryBuilder<T> registerEntity(String id, Class<T> entClass, int networkId) {
 
         final ResourceLocation entId = new ResourceLocation(this.modid, id);
         final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
@@ -409,9 +404,9 @@ public class Registry {
      * @param id       The string id for the entity.
      * @return The entity that was registered.
      */
-    public <T extends Entity> EntityEntryBuilder<T> registerMob(Class<T> entClass, String id, int networkId, int primary, int seconday) {
+    public <T extends Entity> EntityEntryBuilder<T> registerMob(String id, Class<T> entClass,  int networkId, int primary, int seconday) {
 
-        final EntityEntryBuilder<T> builder = this.registerEntity(entClass, id, networkId);
+        final EntityEntryBuilder<T> builder = this.registerEntity(id, entClass, networkId);
 
         builder.tracker(64, 1, true);
         builder.egg(primary, seconday);
@@ -516,7 +511,8 @@ public class Registry {
      */
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Block block) {
-        if (block instanceof IHasModel model) model.onModelRegister();
+//        if (block instanceof IHasModel model) model.onModelRegister();
+        this.registerInventoryModel(Item.getItemFromBlock(block));
     }
 
     /**
@@ -528,6 +524,21 @@ public class Registry {
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Item item) {
         if (item instanceof IHasModel model) model.onModelRegister();
+
+        else this.registerInventoryModel(item, 0, item.getRegistryName().toString());
+    }
+
+    /**
+     * Registers an inventory model for an item.
+     *
+     * @param item The item to register the model for.
+     * @param meta The meta to register the model for.
+     * @param modelName The name of the model to register.
+     */
+    @SideOnly(Side.CLIENT)
+    public void registerInventoryModel(@Nonnull Item item, int meta, @Nonnull String modelName) {
+
+        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(modelName, "normal"));
     }
 
 

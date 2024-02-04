@@ -8,6 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.*;
@@ -259,7 +260,30 @@ public class ModuleEventRouter {
     public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register ModelsEvent start");
-            module.getAutoRegistry().onClientRegisterModels(event);
+            module.getAutoRegistry().onRegisterModels(event);
+            module.getAutoRegistry().onRegisterTileEntitySpecialRenderer();
+            module.getLogger().debug("Register ModelsEvent complete");
+        });
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unused")
+    public void onClientRegisterBlockColor(ColorHandlerEvent.Block event) {
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register ModelsEvent start");
+            module.getAutoRegistry().onRegisterBlockColor(event);
+            module.getLogger().debug("Register ModelsEvent complete");
+        });
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unused")
+    public void onClientRegisterItemColor(ColorHandlerEvent.Item event) {
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register ModelsEvent start");
+            module.getAutoRegistry().onRegisterItemColor(event);
             module.getLogger().debug("Register ModelsEvent complete");
         });
     }

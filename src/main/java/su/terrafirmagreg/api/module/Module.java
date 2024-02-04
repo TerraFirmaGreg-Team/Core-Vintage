@@ -18,11 +18,6 @@ public @interface Module {
     String moduleID();
 
     /**
-     * The ID of the container to associate this module with.
-     */
-    String containerID();
-
-    /**
      * A human-readable name for this module.
      */
     String name();
@@ -31,14 +26,6 @@ public @interface Module {
      * A list of mod IDs that this module depends on. If any mods specified are not present, the module will not load.
      */
     String[] modDependencies() default {};
-
-    /**
-     * Whether this module is the "core" module for its container.
-     * Each container must have exactly one core module, which will be loaded before all other modules in the container.
-     * <p>
-     * Core modules should not have mod dependencies.
-     */
-    boolean coreModule() default false;
 
     String author() default "";
 

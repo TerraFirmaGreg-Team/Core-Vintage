@@ -6,20 +6,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.ModuleContainerTFG;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
-@Module(
-        moduleID = ModuleContainerTFG.MODULE_CORE,
-        containerID = Tags.MOD_ID,
+@Module(moduleID = "Core",
         name = "TFG Core",
-        description = "Core TFG content. Disabling this disables the entire mod and all its addons.",
-        coreModule = true)
+        description = "Core TFG content. Disabling this disables the entire mod and all its module.")
 public class ModuleCore extends ModuleBase {
 
     public static final Logger LOGGER = LogManager.getLogger("ModuleCore");

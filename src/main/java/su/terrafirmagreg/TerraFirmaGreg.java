@@ -1,11 +1,10 @@
 package su.terrafirmagreg;
 
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 
-import su.terrafirmagreg.api.module.ModuleManager2;
+import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.proxy.IProxy;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;
@@ -23,18 +22,17 @@ public class TerraFirmaGreg {
 
     // Hold this so that we can reference non-interface methods without
     // letting the GregTechAPI object see them as immediately.
-    private final ModuleManager2 moduleManager;
+    private final ModuleManager moduleManager;
 
     public TerraFirmaGreg() {
 
-        this.moduleManager = new ModuleManager2(MOD_ID);
+        this.moduleManager = new ModuleManager(MOD_ID);
     }
 
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
-//        this.moduleManager.registerContainer(new ModuleContainerTFG());
 
-        this.moduleManager.setup(event.getASMHarvestedData(), Loader.instance().getConfigDir());
+        this.moduleManager.setup(event.getASMHarvestedData());
         this.moduleManager.onConstructionEvent();
         this.moduleManager.routeFMLStateEvent(event);
     }

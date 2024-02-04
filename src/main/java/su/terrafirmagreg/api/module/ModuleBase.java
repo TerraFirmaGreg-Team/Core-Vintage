@@ -117,11 +117,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     // --------------------------------------------------------------------------
 
     public int compareTo(@NotNull ModuleBase otherModule) {
-        var annotation = otherModule.getClass().getAnnotation(Module.class);
-        if (annotation != null && annotation.coreModule()) {
-            return -1;
-        } else {
-            return Integer.compare(otherModule.getPriority(), this.priority);
-        }
+        return Integer.compare(otherModule.getPriority(), this.priority);
     }
 }

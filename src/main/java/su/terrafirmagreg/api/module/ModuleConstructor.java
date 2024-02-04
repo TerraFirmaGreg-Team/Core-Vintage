@@ -16,17 +16,15 @@ public class ModuleConstructor {
 
     @Nullable
     public ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
-
         try {
             ModuleBase module = moduleClass.newInstance();
-            FMLLog.log.info("[" + modId + "] Loaded module: " + moduleClass.getName());
+            ModuleManager.LOGGER.info("[ {} ] Loaded module: {}", modId, moduleClass.getName());
             return module;
 
         } catch (Exception e) {
-            FMLLog.log.error("[" + modId + "] Error loading module: " + moduleClass.getName(), e);
+            ModuleManager.LOGGER.error("[ {} ] Error loading module: {} {}", modId, moduleClass.getName(), e);
         }
 
         return null;
     }
-
 }

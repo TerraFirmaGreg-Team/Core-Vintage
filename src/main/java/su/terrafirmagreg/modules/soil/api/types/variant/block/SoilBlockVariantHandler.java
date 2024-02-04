@@ -73,7 +73,7 @@ public class SoilBlockVariantHandler {
         SoilBlockVariants.MUD_BRICKS = new SoilBlockVariant
                 .Builder("mud_bricks")
                 .setFactory(BlockSoilMudBrick::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .setFallingSpecification(VERTICAL_ONLY_SOIL)
                 .build();
     }
 }

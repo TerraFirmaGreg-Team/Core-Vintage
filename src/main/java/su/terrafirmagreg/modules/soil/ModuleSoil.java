@@ -25,7 +25,7 @@ public class ModuleSoil extends ModuleBase {
 
     public static final Logger LOGGER = LogManager.getLogger("Module Soil");
 
-    public static final CreativeTabs SOIL_TAB = new CreativeTabBase("soil", "wand", false);
+    public static final CreativeTabs SOIL_TAB = new CreativeTabBase("soil", "soil.grass.silt", false);
 
 
     public ModuleSoil() {

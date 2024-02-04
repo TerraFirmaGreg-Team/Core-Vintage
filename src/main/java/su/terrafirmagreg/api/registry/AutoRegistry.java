@@ -23,10 +23,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lombok.Getter;
-import su.terrafirmagreg.api.util.LootBuilder;
+import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.item.IColorfulItem;
-import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.api.util.LootBuilder;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by
@@ -151,7 +151,7 @@ public class AutoRegistry {
                 pool.addEntry(builder.build());
             } else {
 
-                ModuleCore.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
+                ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
             }
         }
     }

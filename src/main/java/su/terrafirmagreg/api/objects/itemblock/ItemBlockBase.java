@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.objects.itemblocks;
+package su.terrafirmagreg.api.objects.itemblock;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.ItemSizeHandler;

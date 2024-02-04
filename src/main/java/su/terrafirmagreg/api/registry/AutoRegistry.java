@@ -26,6 +26,7 @@ import lombok.Getter;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.item.IColorfulItem;
+import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.api.util.LootBuilder;
 
 /**
@@ -127,15 +128,21 @@ public class AutoRegistry {
 
     @SideOnly(Side.CLIENT)
     public void onClientRegisterModels(ModelRegistryEvent event) {
-        for (final Item item : this.registry.getItems()) {
+        for (IHasModel model : this.registry.getModels()) {
+            model.onModelRegister();
+        }
+
+        for (Block block : this.registry.getBlocks()) {
+
+            this.registry.registerInventoryModel(block);
+        }
+
+        for (Item item : this.registry.getItems()) {
 
             this.registry.registerInventoryModel(item);
         }
 
-        for (final Block block : this.registry.getBlocks()) {
 
-            this.registry.registerInventoryModel(block);
-        }
     }
 
 

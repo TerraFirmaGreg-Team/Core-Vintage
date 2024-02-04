@@ -8,10 +8,14 @@
       "north": "tfg:blocks/soil/overlay/dry_grass/side",
       "south": "tfg:blocks/soil/overlay/dry_grass/side",
       "east": "tfg:blocks/soil/overlay/dry_grass/side",
-      "west": "tfg:blocks/soil/overlay/dry_grass/side"
+      "west": "tfg:blocks/soil/overlay/dry_grass/side",
+      "all": "tfg:blocks/soil/dirt/sandy_loam"
     }
   },
   "variants": {
+    "normal": [
+      {}
+    ],
     "north": {
       "true": {
         "textures": {
@@ -43,33 +47,6 @@
         }
       },
       "false": {}
-    },
-    "soil_type": {
-      "silt": {
-        "textures": {
-          "all": "tfg:blocks/soil/dirt/silt"
-        }
-      },
-      "loam": {
-        "textures": {
-          "all": "tfg:blocks/soil/dirt/loam"
-        }
-      },
-      "sandy_loam": {
-        "textures": {
-          "all": "tfg:blocks/soil/dirt/sandy_loam"
-        }
-      },
-      "silty_loam": {
-        "textures": {
-          "all": "tfg:blocks/soil/dirt/silty_loam"
-        }
-      },
-      "humus": {
-        "textures": {
-          "all": "tfg:blocks/soil/dirt/humus"
-        }
-      }
     }
   }
 }

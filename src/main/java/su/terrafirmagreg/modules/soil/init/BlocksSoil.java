@@ -29,7 +29,12 @@ public final class BlocksSoil {
 
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
-//                StorageSoil.SOIL_BLOCKS.values().forEach(IHasModel::onModelRegister);
+
+        registry.registerClientModelRegistration(() -> {
+
+
+
+        });
     }
 //
 //	@SideOnly(Side.CLIENT)

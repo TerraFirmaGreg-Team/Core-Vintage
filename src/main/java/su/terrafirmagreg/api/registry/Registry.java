@@ -38,6 +38,7 @@ import su.terrafirmagreg.api.objects.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.IHasModel;
 
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 
@@ -114,6 +115,9 @@ public class Registry {
      */
     @Getter
     private final List<ICustomMesh> customMeshes = NonNullList.create();
+
+    @Getter
+    private final List<IHasModel> models = NonNullList.create();
 
     /**
      * A list of all the colored items registered here.
@@ -513,35 +517,6 @@ public class Registry {
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Block block) {
         if (block instanceof IHasModel model) model.onModelRegister();
-        else this.registerInventoryModel(Item.getItemFromBlock(block));
-    }
-
-    /**
-     * Registers an inventory model for a block with variants. The model name is equal to the
-     * registry name of the block, plus the variant string for the meta.
-     *
-     * @param block    The block to register models for.
-     * @param prefix   The prefix for the textures. Use empty string for none.
-     * @param variants An array of variant names in order of meta.
-     */
-    @SideOnly(Side.CLIENT)
-    public void registerInventoryModel(@Nonnull Block block, @Nonnull String prefix, @Nonnull String... variants) {
-
-        for (int meta = 0; meta < variants.length; meta++) {
-            this.registerInventoryModel(Item.getItemFromBlock(block), meta, block.getRegistryName().toString() + "_" + (prefix.isEmpty() ? prefix : prefix + "_") + variants[meta]);
-        }
-    }
-
-    /**
-     * Registers an inventory model for a block.
-     *
-     * @param block     The block to register the model for.
-     * @param meta      The meta to register the model for.
-     * @param modelName The name of the model to register.
-     */
-    @SideOnly(Side.CLIENT)
-    public void registerInventoryModel(@Nonnull Block block, int meta, @Nonnull String modelName) {
-        this.registerInventoryModel(Item.getItemFromBlock(block), meta, modelName);
     }
 
     /**
@@ -552,38 +527,13 @@ public class Registry {
      */
     @SideOnly(Side.CLIENT)
     public void registerInventoryModel(@Nonnull Item item) {
-
         if (item instanceof IHasModel model) model.onModelRegister();
-        else this.registerInventoryModel(item, 0, item.getRegistryName().toString());
     }
 
-    /**
-     * Registers an inventory model for an item with variants. The model name is equal to the
-     * registry name of the item, plus the variant string for the meta.
-     *
-     * @param item     The item to register models for.
-     * @param prefix   Adds a prefix to each of the model variants.
-     * @param variants An array of variant names in order of meta.
-     */
+
     @SideOnly(Side.CLIENT)
-    public void registerInventoryModel(@Nonnull Item item, @Nonnull String prefix, @Nonnull String... variants) {
-
-        for (int meta = 0; meta < variants.length; meta++) {
-            this.registerInventoryModel(item, meta, item.getRegistryName().toString() + "_" + (prefix.isEmpty() ? prefix : prefix + "_") + variants[meta]);
-        }
-    }
-
-    /**
-     * Registers an inventory model for an item.
-     *
-     * @param item      The item to register the model for.
-     * @param meta      The meta to register the model for.
-     * @param modelName The name of the model to register.
-     */
-    @SideOnly(Side.CLIENT)
-    public void registerInventoryModel(@Nonnull Item item, int meta, @Nonnull String modelName) {
-
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(modelName, "inventory"));
+    public void registerClientModelRegistration(IHasModel model) {
+        this.models.add(model);
     }
 
     //endregion

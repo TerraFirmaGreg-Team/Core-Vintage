@@ -5,7 +5,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.objects.itemblocks.ItemBlockBase;
+import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.IItemProvider;
 
 public abstract class BlockBase extends Block implements IItemProvider {

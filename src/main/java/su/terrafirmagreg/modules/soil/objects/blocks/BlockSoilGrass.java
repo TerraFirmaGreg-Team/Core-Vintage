@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.objects.itemblocks.ItemBlockBase;
+import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;

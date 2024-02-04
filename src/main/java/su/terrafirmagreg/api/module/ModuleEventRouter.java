@@ -20,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class ModuleEventRouter {
@@ -36,16 +35,15 @@ public class ModuleEventRouter {
         this.routes = new HashMap<>();
 
         this.routes.put(FMLConstructionEvent.class,
-                (IFMLStateEventRoute<FMLConstructionEvent>) (event) -> {
-                    this.fireEvent(module -> {
-                        module.getLogger().debug("Registering packets");
-                        module.onNetworkRegister(); //TODO: Pre-Init?
+                (IFMLStateEventRoute<FMLConstructionEvent>) (event) ->
+                        this.fireEvent(module -> {
+                            module.getLogger().debug("Registering packets");
+                            module.onNetworkRegister(); //TODO: Pre-Init?
 
-                        module.getLogger().debug("Construction start");
-                        module.onConstruction(event);
-                        module.getLogger().debug("Construction complete");
-                    });
-                }
+                            module.getLogger().debug("Construction start");
+                            module.onConstruction(event);
+                            module.getLogger().debug("Construction complete");
+                        })
         );
         this.routes.put(FMLPreInitializationEvent.class,
                 (IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
@@ -145,19 +143,12 @@ public class ModuleEventRouter {
         );
     }
 
-    public <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
-        //noinspection unchecked
-        IFMLStateEventRoute<E> route = this.routes.get(event.getClass());
-
-        if (route == null) throw new IllegalArgumentException("No route found for event: " + event.getClass());
-        route.routeEvent(event);
-    }
-
     // --------------------------------------------------------------------------
     // - Registration Events
     // --------------------------------------------------------------------------
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register BlockEvent start");
@@ -168,6 +159,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register ItemEvent start");
@@ -177,6 +169,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register PotionEvent start");
@@ -186,6 +179,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register PotionTypeEvent start");
@@ -195,6 +189,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register BiomeEvent start");
@@ -204,6 +199,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register SoundEvent start");
@@ -213,6 +209,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register EntityEvent start");
@@ -222,6 +219,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register EnchantmentEvent start");
@@ -231,6 +229,7 @@ public class ModuleEventRouter {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register VillagerProfessionEvent start");
@@ -241,6 +240,7 @@ public class ModuleEventRouter {
 
 
     @SubscribeEvent
+    @SuppressWarnings("unused")
     public void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register RecipesEvent( start");
@@ -255,6 +255,7 @@ public class ModuleEventRouter {
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unused")
     public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register ModelsEvent start");
@@ -273,11 +274,11 @@ public class ModuleEventRouter {
         }
     }
 
-//    private void fireEvent(Consumer<ModuleBase> moduleConsumer) {
-//        for (ModuleBase module : loadedModules) {
-//            currentContainer = containers.get(getContainerID(module));
-//            moduleConsumer.accept(module);
-//        }
-//    }
+    public <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
+        //noinspection unchecked
+        IFMLStateEventRoute<E> route = this.routes.get(event.getClass());
 
+        if (route == null) throw new IllegalArgumentException("No route found for event: " + event.getClass());
+        route.routeEvent(event);
+    }
 }

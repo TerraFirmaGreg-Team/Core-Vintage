@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.soil;
 
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -29,8 +30,10 @@ public class ModuleSoil extends ModuleBase {
 
 
     public ModuleSoil() {
-        super(1);
+        super(2);
         this.enableAutoRegistry(SOIL_TAB);
+
+        MinecraftForge.EVENT_BUS.register(this);
 
     }
 

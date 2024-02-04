@@ -21,12 +21,13 @@ import net.minecraftforge.items.IItemHandler;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.api.objects.item.ItemBase;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemDebug extends Item {
+public class ItemDebug extends ItemBase {
 
     public ItemDebug() {
         setNoRepair();
@@ -68,22 +69,7 @@ public class ItemDebug extends Item {
         return EnumActionResult.SUCCESS;
     }
 
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        return false;
-    }
-
-    @Override
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-        return false;
-    }
-
-    @Override
-    public boolean canHarvestBlock(IBlockState blockIn) {
-        return false;
-    }
-
-    @Override
+	@Override
     public boolean hasEffect(ItemStack stack) {
         return true;
     }

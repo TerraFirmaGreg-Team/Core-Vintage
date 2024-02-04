@@ -14,10 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.ToIntFunction;
 
-/**
- * Based on:
- * https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/1.12.2/src/main/java/choonster/testmod3/client/model/ModModelManager.java
- */
+
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class ModelRegistrationHelper {
 
@@ -27,7 +24,7 @@ public class ModelRegistrationHelper {
 	public static final StateMapperBase PROPERTY_STRING_MAPPER = new StateMapperBase() {
 
 		@Override
-		protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+		protected @NotNull ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
 
 			return new ModelResourceLocation("minecraft:air");
 		}
@@ -46,8 +43,8 @@ public class ModelRegistrationHelper {
 
 		for (Block block : blocks) {
 
-			if (block instanceof IHasModel) {
-				((IHasModel) block).onModelRegister();
+			if (block instanceof IHasModel model) {
+                model.onModelRegister();
 
 			} else {
 				ModelRegistrationHelper.registerBlockItemModel(block.getDefaultState());

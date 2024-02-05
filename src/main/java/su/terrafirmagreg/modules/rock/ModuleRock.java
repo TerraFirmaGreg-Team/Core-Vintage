@@ -24,7 +24,7 @@ public class ModuleRock extends ModuleBase {
 
     public static final Logger LOGGER = LogManager.getLogger("Module Rock");
 
-    public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "wand", false);
+    public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/chiseled/basalt", false);
 
     public ModuleRock() {
         super(1);

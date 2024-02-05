@@ -1,0 +1,33 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:groundcover/rubble",
+    "uvlock": false,
+    "textures": {
+      "all": "tfg:blocks/rock/raw/greenschist"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "axis": {
+      "north": {
+        "model": "tfg:groundcover/rubble",
+        "y": 0
+      },
+      "east": {
+        "model": "tfg:groundcover/pebble",
+        "y": 90
+      },
+      "south": {
+        "model": "tfg:groundcover/boulder",
+        "y": 180
+      },
+      "west": {
+        "model": "tfg:groundcover/loose_rock",
+        "y": 270
+      }
+    }
+  }
+}

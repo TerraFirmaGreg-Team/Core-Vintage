@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "pressure_plate_up",
+    "uvlock": true,
+    "textures": {
+      "texture": "tfg:blocks/rock/raw/foidolite"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "powered": {
+      "false": {},
+      "true": {
+        "model": "pressure_plate_down"
+      }
+    }
+  }
+}

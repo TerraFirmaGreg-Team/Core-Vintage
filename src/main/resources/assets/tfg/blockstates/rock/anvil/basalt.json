@@ -2,9 +2,9 @@
   "forge_marker": 1,
   "defaults": {
     "model": "tfg:rock/anvil",
+    "uvlock": true,
     "textures": {
-      "all": "tfg:blocks/rock/raw/basalt",
-      "overlay": "tfg:blocks/rock/overlay/anvil"
+      "all": "tfg:blocks/rock/raw/basalt"
     }
   },
   "variants": {

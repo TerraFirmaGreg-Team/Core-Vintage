@@ -1,7 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "particle": "#all"
+    "particle": "#all",
+    "overlay": "tfg:blocks/rock/overlay/anvil"
   },
   "elements": [
     {

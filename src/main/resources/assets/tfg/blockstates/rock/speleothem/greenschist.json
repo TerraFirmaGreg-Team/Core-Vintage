@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:rock/speleothem_inventory",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/rock/raw/greenschist"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "size": {
+      "small": {
+        "model": "tfg:rock/speleothem_small"
+      },
+      "medium": {
+        "model": "tfg:rock/speleothem_medium"
+      },
+      "big": {
+        "model": "tfg:rock/speleothem_big"
+      }
+    }
+  }
+}

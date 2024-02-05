@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:rock/mossy_bricks",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/rock/bricks/sandstone"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ]
+  }
+}

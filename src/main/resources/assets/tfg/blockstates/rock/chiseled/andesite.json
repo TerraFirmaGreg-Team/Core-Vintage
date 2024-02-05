@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/rock/chiseled/andesite"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ]
+  }
+}

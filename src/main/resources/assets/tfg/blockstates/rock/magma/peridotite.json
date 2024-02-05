@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:cube_overlay_all",
+    "uvlock": true,
+    "textures": {
+      "overlay": "tfg:blocks/rock/overlay/magma",
+      "all": "tfg:blocks/rock/raw/peridotite"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ]
+  }
+}

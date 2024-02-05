@@ -1,0 +1,13 @@
+{
+  "parent": "tfg:block/cube_overlay_all",
+  "textures": {
+    "particle": "#all",
+    "overlay": "tfg:blocks/rock/overlay/mossy/bricks",
+    "up": "#overlay",
+    "north": "#overlay",
+    "south": "#overlay",
+    "east": "#overlay",
+    "west": "#overlay",
+    "down": "#overlay"
+  }
+}

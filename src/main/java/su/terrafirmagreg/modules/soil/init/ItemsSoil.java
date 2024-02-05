@@ -8,7 +8,7 @@ public final class ItemsSoil {
 
 	public static void onRegister(Registry registry) {
 
-		for (var item : StorageSoil.SOIL_ITEMS.values()) registry.registerItem((Item) item, item.getName());
+		for (var item : StorageSoil.SOIL_ITEMS.values()) registry.registerAutoItem((Item) item);
 	}
 
 

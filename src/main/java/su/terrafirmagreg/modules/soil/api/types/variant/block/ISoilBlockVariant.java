@@ -2,13 +2,13 @@ package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.IItemProvider;
+import su.terrafirmagreg.api.registry.IAutoRegistry;
 import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 
 /**
  * Интерфейс, представляющий блок почвы.
  */
-public interface ISoilBlockVariant extends ISoilType, IItemProvider, IItemSize {
+public interface ISoilBlockVariant extends ISoilType, IAutoRegistry, IItemSize {
 
     /**
      * Возвращает вариант блока почвы.
@@ -24,6 +24,7 @@ public interface ISoilBlockVariant extends ISoilType, IItemProvider, IItemSize {
      * @return Местоположение регистрации блока почвы.
      */
     @NotNull
+    @Override
     default String getName() {
         return String.format("soil/%s/%s", getBlockVariant(), getType());
     }

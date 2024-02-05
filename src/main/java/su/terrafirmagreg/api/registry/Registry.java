@@ -1,8 +1,5 @@
 package su.terrafirmagreg.api.registry;
 
-import net.darkhax.bookshelf.item.ICustomModel;
-import net.darkhax.bookshelf.registry.IVariant;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
@@ -10,7 +7,9 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
@@ -23,7 +22,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,18 +31,16 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
-import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.item.IColorfulItem;
 import su.terrafirmagreg.api.objects.item.ICustomMesh;
-import su.terrafirmagreg.api.util.IItemProvider;
-import su.terrafirmagreg.api.util.LootBuilder;
 import su.terrafirmagreg.api.objects.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.util.LootBuilder;
 
-import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 
@@ -242,10 +238,19 @@ public class Registry {
 
         ItemBlock itemBlock;
 
-        if (block instanceof IItemProvider provider) itemBlock = provider.getItemBlock();
+        if (block instanceof IAutoRegistry provider) itemBlock = provider.getItemBlock();
         else itemBlock = new ItemBlock(block);
 
         return this.registerBlock(block, itemBlock, id);
+    }
+
+    public void registerAutoBlock(Block block) {
+        if (block instanceof IAutoRegistry provider) {
+            ItemBlock itemBlock = provider.getItemBlock();
+            String id = provider.getName();
+
+            this.registerBlock(block, itemBlock, id);
+        }
     }
 
     /**
@@ -257,7 +262,7 @@ public class Registry {
      * @param id        The id to register the block with.
      * @return The block being registered.
      */
-    public Block registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
+    public <B extends Block, I extends ItemBlock> B registerBlock(@Nonnull B block, @Nullable I itemBlock, @Nonnull String id) {
 
         block.setRegistryName(this.modid, id);
         block.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -280,15 +285,22 @@ public class Registry {
     //region // ===== Item =========================================================================================================================//
 
 
+    public void registerAutoItem(Item item) {
+        if (item instanceof IAutoRegistry provider) {
+            String id = provider.getName();
+
+            this.registerItem(item, id);
+        }
+    }
+
     /**
      * Registers an item to the game. This will also set the unlocalized name, and creative tab
      * if {@link #tab} has been set. The item will also be cached in {@link #items}.
      *
      * @param item The item to register.
      * @param id   The id to register the item with.
-     * @return The item being registered.
      */
-    public Item registerItem(@Nonnull Item item, @Nonnull String id) {
+    public void registerItem(@Nonnull Item item, @Nonnull String id) {
 
         item.setRegistryName(this.modid, id);
         item.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -311,8 +323,6 @@ public class Registry {
                 this.coloredItems.add(item);
             }
         }
-
-        return item;
     }
 
     //endregion

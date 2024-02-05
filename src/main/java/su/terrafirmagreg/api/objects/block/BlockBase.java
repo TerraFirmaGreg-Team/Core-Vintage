@@ -6,9 +6,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.util.IItemProvider;
+import su.terrafirmagreg.api.registry.IAutoRegistry;
 
-public abstract class BlockBase extends Block implements IItemProvider {
+public abstract class BlockBase extends Block implements IAutoRegistry {
 
 	public BlockBase(Material materialIn) {
 		super(materialIn);

@@ -17,9 +17,7 @@ import su.terrafirmagreg.api.util.Helpers;
 import su.terrafirmagreg.api.util.IHasModel;
 
 
-public class BlockPeat extends BlockBase implements IHasModel {
-
-    public static final String NAME = "soil/peat";
+public class BlockPeat extends BlockBase  {
 
     public BlockPeat() {
         super(Material.GROUND);
@@ -28,24 +26,14 @@ public class BlockPeat extends BlockBase implements IHasModel {
         setHardness(0.6F);
         setHarvestLevel("shovel", 0);
 
-        OreDictionaryHelper.register(this, NAME);
+        OreDictionaryHelper.register(this, getName());
         Blocks.FIRE.setFireInfo(this, 5, 10);
 
         //DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);
     }
 
-
     @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @NotNull
-            protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
-                return new ModelResourceLocation(Helpers.getID(NAME), "normal");
-            }
-        });
-
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(Helpers.getID(NAME), "normal"));
+    public @NotNull String getName() {
+        return "soil/peat";
     }
 }

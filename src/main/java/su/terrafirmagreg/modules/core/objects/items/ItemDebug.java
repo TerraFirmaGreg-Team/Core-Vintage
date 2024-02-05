@@ -21,6 +21,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.TerraFirmaCraft;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.item.ItemBase;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -87,5 +88,10 @@ public class ItemDebug extends ItemBase {
     @Override
     public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.EPIC;
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return "wand";
     }
 }

@@ -5,7 +5,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import su.terrafirmagreg.api.registry.Registry;
-import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;
@@ -17,12 +16,10 @@ public final class BlocksSoil {
 
     public static void onRegister(Registry registry) {
 
-        for (var block : StorageSoil.SOIL_BLOCKS.values()) {
-            registry.registerBlockWithItem((Block) block, block.getName());
-        }
+        for (var block : StorageSoil.SOIL_BLOCKS.values()) registry.registerAutoBlock((Block) block);
 
-//		registry.registerBlockWithItem(PEAT_GRASS = new BlockPeatGrass(), BlockPeatGrass.NAME);
-//		registry.registerBlockWithItem(PEAT = new BlockPeat(), BlockPeat.NAME);
+		registry.registerAutoBlock(PEAT_GRASS = new BlockPeatGrass());
+		registry.registerAutoBlock(PEAT = new BlockPeat());
 
 
     }
@@ -30,11 +27,6 @@ public final class BlocksSoil {
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
 
-        registry.registerClientModelRegistration(() -> {
-
-
-
-        });
     }
 //
 //	@SideOnly(Side.CLIENT)

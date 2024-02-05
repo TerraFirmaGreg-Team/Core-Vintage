@@ -15,16 +15,12 @@ public final class ItemsCore {
 
         //==== Other =================================================================================================//
 
-        registry.registerItem(WAND = new ItemDebug(), "wand");
+        registry.registerAutoItem(WAND = new ItemDebug());
     }
 
 
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
-        registry.registerClientModelRegistration(() -> {
-            ModelRegistrationHelper.registerItemModels(
-                    WAND
-            );
-        });
+
     }
 }

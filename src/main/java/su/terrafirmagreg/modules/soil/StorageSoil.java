@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
-public class StorageSoil {
+public final class StorageSoil {
 
     public static final Map<Pair<SoilBlockVariant, SoilType>, ISoilBlockVariant> SOIL_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<Pair<SoilItemVariant, SoilType>, ISoilItemVariant> SOIL_ITEMS = new Object2ObjectLinkedOpenHashMap<>();

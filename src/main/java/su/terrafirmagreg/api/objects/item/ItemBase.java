@@ -4,9 +4,10 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.registry.IAutoRegistry;
 
 
-public abstract class ItemBase extends Item implements IItemSize {
+public abstract class ItemBase extends Item implements IItemSize, IAutoRegistry {
 
 	/**
 	 * This should NOT be overridden except for VERY SPECIAL cases

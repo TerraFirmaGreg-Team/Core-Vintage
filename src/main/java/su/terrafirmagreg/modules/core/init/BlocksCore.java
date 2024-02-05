@@ -4,10 +4,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import su.terrafirmagreg.api.registry.Registry;
-import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.core.objects.blocks.BlockDebug;
-import su.terrafirmagreg.modules.soil.StorageSoil;
 
 public final class BlocksCore {
 
@@ -17,17 +15,11 @@ public final class BlocksCore {
 
         //==== Other =================================================================================================//
 
-        registry.registerBlock(DEBUG = new BlockDebug(), DEBUG.getItemBlock(), "debug");
+        registry.registerAutoBlock(DEBUG = new BlockDebug());
     }
 
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
-        registry.registerClientModelRegistration(() -> {
-            ModelRegistrationHelper.registerBlockItemModels(
-                    DEBUG
-            );
-
-        });
     }
 
 }

@@ -28,15 +28,13 @@ import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 import java.util.Random;
 
 
-public class BlockPeatGrass extends BlockBase implements IHasModel {
+public class BlockPeatGrass extends BlockBase  {
 
     // Used for connected textures only.
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
-
-    public static final String NAME = "soil/peat_grass";
 
     public BlockPeatGrass() {
         super(Material.GRASS);
@@ -52,6 +50,11 @@ public class BlockPeatGrass extends BlockBase implements IHasModel {
         OreDictionaryHelper.register(this, "peat");
         OreDictionaryHelper.register(this, "peat", "grass");
         Blocks.FIRE.setFireInfo(this, 5, 5);
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return "soil/peat_grass";
     }
 
     @Override
@@ -96,17 +99,4 @@ public class BlockPeatGrass extends BlockBase implements IHasModel {
     }
 
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(Helpers.getID(NAME))
-                        .build());
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(Helpers.getID(NAME), "normal"));
-
-    }
 }

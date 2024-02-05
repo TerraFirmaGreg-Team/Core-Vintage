@@ -46,24 +46,24 @@ public class BlockRockAnvil extends BlockRock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullBlock(IBlockState state) {
+    public boolean isFullBlock(@NotNull IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@NotNull IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean isSideSolid(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
         return side == EnumFacing.DOWN;
     }
 
@@ -77,14 +77,14 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @NotNull
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         return AABB;
     }
 
     @Nullable
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(@NotNull IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
         return AABB;
     }
 
@@ -92,13 +92,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @NotNull
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+    public AxisAlignedBB getSelectedBoundingBox(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos) {
         return AABB;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return false;
     }
 
@@ -181,13 +181,13 @@ public class BlockRockAnvil extends BlockRock {
 
     @Override
     @NotNull
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
         return ItemsRock.getItem(RockItemVariants.LOOSE, getType());
     }
 
     @Override
     @NotNull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
         return new ItemStack(BlocksRock.getBlock(RockBlockVariants.RAW, getType()));
     }
 

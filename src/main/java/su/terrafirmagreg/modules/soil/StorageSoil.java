@@ -55,8 +55,8 @@ public final class StorageSoil {
 
     public static boolean isGrass(IBlockState current) {
         if (current.getBlock() instanceof BlockPeatGrass) return true;
-        if (current.getBlock() instanceof ISoilBlockVariant soilTypeBlock) {
-            var variant = soilTypeBlock.getBlockVariant();
+        if (current.getBlock() instanceof ISoilBlockVariant soil) {
+            var variant = soil.getBlockVariant();
             return variant == GRASS || variant == DRY_GRASS ||
                     variant == CLAY_GRASS;
         }
@@ -65,8 +65,8 @@ public final class StorageSoil {
 
     public static boolean isSoil(IBlockState current) {
         if (current.getBlock() instanceof BlockPeat) return true;
-        if (current.getBlock() instanceof ISoilBlockVariant soilTypeBlock) {
-            var variant = soilTypeBlock.getBlockVariant();
+        if (current.getBlock() instanceof ISoilBlockVariant soil) {
+            var variant = soil.getBlockVariant();
             return variant == GRASS || variant == DRY_GRASS ||
                     variant == DIRT || variant == CLAY ||
                     variant == CLAY_GRASS;

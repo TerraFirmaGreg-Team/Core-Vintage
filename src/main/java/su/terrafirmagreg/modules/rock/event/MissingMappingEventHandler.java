@@ -28,7 +28,7 @@ public class MissingMappingEventHandler {
                     // TFC ItemsBlock
                     for (var variant : RockBlockVariant.getBlockVariants()) {
                         var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlock2 = "tfc:stone/" + variant.toString() + "/" + type.toString();
+                        var mappingKeyBlock2 = "tfc:stone/" + variant + "/" + type;
                         if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlock2)) {
                             mapping.remap(Item.getItemFromBlock(BlocksRock.getBlock(variant, type)));
                             break;
@@ -38,7 +38,7 @@ public class MissingMappingEventHandler {
                     // TFC Items
                     for (var variant : RockItemVariant.getItemVariants()) {
                         var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlock2 = "tfc:stone/" + variant.toString() + "/" + type.toString();
+                        var mappingKeyBlock2 = "tfc:stone/" + variant + "/" + type;
                         if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlock2)) {
                             mapping.remap(ItemsRock.getItem(variant, type));
                             break;
@@ -79,7 +79,7 @@ public class MissingMappingEventHandler {
                     // TFC ItemsBlock
                     for (var variant : RockBlockVariant.getBlockVariants()) {
                         var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlock2 = "tfc:stone/" + variant + "/" + type.toString();
+                        var mappingKeyBlock2 = "tfc:stone/" + variant + "/" + type;
                         if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlock2)) {
                             mapping.remap(BlocksRock.getBlock(variant, type));
                             break;

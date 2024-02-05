@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 
 import gregtech.api.unification.ore.StoneType;
@@ -7,8 +8,8 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.Pair;
-import su.terrafirmagreg.modules.rock.StorageRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,14 +45,14 @@ public class RockBlockVariant {
 
 
         for (var type : RockType.getTypes()) {
-            if (StorageRock.ROCK_BLOCKS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
+            if (BlocksRock.ROCK_BLOCKS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 
             if (builder.hasStoneType) {
                 new StoneType(idCounter.getAndIncrement(), "tfg_" + type + "_" + builder.name,
                         SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
-                        () -> StorageRock.getBlock(this, type).getDefaultState(),
-                        state -> state.getBlock() == StorageRock.getBlock(this, type), false
+                        () -> BlocksRock.getBlock(this, type).getDefaultState(),
+                        state -> state.getBlock() == BlocksRock.getBlock(this, type), false
                 );
             }
         }
@@ -75,7 +76,7 @@ public class RockBlockVariant {
 
         private final String name;
         private float baseHardness;
-        private BiFunction<RockBlockVariant, RockType, IRockBlock> factory;
+        private BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
         private Specification specification = null;
         private boolean hasStoneType = false;
 
@@ -93,7 +94,7 @@ public class RockBlockVariant {
             return this;
         }
 
-        public Builder setFactory(BiFunction<RockBlockVariant, RockType, IRockBlock> factory) {
+        public Builder setFactory(BiFunction<RockBlockVariant, RockType, ? extends Block> factory) {
             this.factory = factory;
             return this;
         }

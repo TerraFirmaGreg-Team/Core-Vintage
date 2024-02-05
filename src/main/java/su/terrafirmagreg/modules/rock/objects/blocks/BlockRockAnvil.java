@@ -19,11 +19,12 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
-import su.terrafirmagreg.modules.rock.StorageRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import java.util.Random;
 
@@ -181,13 +182,13 @@ public class BlockRockAnvil extends BlockRock {
     @Override
     @NotNull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return StorageRock.getItem(RockItemVariants.LOOSE, getType());
+        return ItemsRock.getItem(RockItemVariants.LOOSE, getType());
     }
 
     @Override
     @NotNull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(StorageRock.getBlock(RockBlockVariants.RAW, getType()));
+        return new ItemStack(BlocksRock.getBlock(RockBlockVariants.RAW, getType()));
     }
 
 //	@Override

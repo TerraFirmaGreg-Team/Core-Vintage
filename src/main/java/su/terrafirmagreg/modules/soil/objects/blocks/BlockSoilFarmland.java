@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import net.minecraft.block.Block;
@@ -11,7 +10,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -32,13 +30,13 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.IHasModel;
-import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
-import tfcflorae.objects.blocks.blocktype.farmland.BlockLoamySandFarmland;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import java.util.Random;
 
@@ -84,7 +82,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
         if (block instanceof ISoilBlockVariant) {
             var soil = ((ISoilBlockVariant) block).getType();
 
-            world.setBlockState(pos, StorageSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
+            world.setBlockState(pos, BlocksSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
             for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
                 double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
@@ -238,7 +236,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
     @NotNull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return StorageSoil.getItem(SoilItemVariants.PILE, getType());
+        return ItemsSoil.getItem(SoilItemVariants.PILE, getType());
     }
 
     @Override

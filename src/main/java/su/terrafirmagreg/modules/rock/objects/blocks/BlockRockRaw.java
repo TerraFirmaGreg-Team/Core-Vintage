@@ -19,10 +19,10 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.modules.rock.StorageRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import java.util.Random;
 
@@ -38,7 +38,7 @@ public class BlockRockRaw extends BlockRock {
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(variant.getSpecification());
-        spec.setResultingState(StorageRock.getBlock(RockBlockVariants.COBBLE, type).getDefaultState());
+        spec.setResultingState(BlocksRock.getBlock(RockBlockVariants.COBBLE, type).getDefaultState());
 
 
         FallingBlockManager.registerFallable(this, spec);
@@ -88,7 +88,7 @@ public class BlockRockRaw extends BlockRock {
                 pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = StorageRock.getBlock(RockBlockVariants.ANVIL, getType());
+                var anvil = BlocksRock.getBlock(RockBlockVariants.ANVIL, getType());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }

@@ -2,10 +2,13 @@ package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import lombok.Getter;
+
+import net.minecraft.block.Block;
+
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.Pair;
-import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -36,7 +39,7 @@ public class SoilBlockVariant {
             throw new RuntimeException(String.format("SoilBlockVariant: [%s] already exists!", name));
 
         for (var type : SoilType.getTypes()) {
-            if (StorageSoil.SOIL_BLOCKS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
+            if (BlocksSoil.SOIL_BLOCKS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }
@@ -112,7 +115,7 @@ public class SoilBlockVariant {
     public static class Builder {
 
         private final String name;
-        private BiFunction<SoilBlockVariant, SoilType, ISoilBlockVariant> factory;
+        private BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory;
         private Specification specification = null;
 
         /**
@@ -124,7 +127,7 @@ public class SoilBlockVariant {
             this.name = name;
         }
 
-        public Builder setFactory(BiFunction<SoilBlockVariant, SoilType, ISoilBlockVariant> factory) {
+        public Builder setFactory(BiFunction<SoilBlockVariant, SoilType, ? extends Block> factory) {
             this.factory = factory;
             return this;
         }

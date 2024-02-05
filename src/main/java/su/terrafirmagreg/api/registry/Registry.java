@@ -31,7 +31,6 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.item.IColorfulItem;
@@ -244,7 +243,7 @@ public class Registry {
         return this.registerBlock(block, itemBlock, id);
     }
 
-    public void registerAutoBlock(Block block) {
+    public void registerAuto(Block block) {
         if (block instanceof IAutoRegistry provider) {
             ItemBlock itemBlock = provider.getItemBlock();
             String id = provider.getName();
@@ -285,7 +284,7 @@ public class Registry {
     //region // ===== Item =========================================================================================================================//
 
 
-    public void registerAutoItem(Item item) {
+    public void registerAuto(Item item) {
         if (item instanceof IAutoRegistry provider) {
             String id = provider.getName();
 

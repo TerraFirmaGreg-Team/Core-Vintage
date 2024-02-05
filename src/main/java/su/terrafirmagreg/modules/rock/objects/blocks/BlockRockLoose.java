@@ -5,8 +5,6 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -21,17 +19,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.modules.rock.StorageRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 
 public class BlockRockLoose extends BlockRock {
@@ -72,7 +69,7 @@ public class BlockRockLoose extends BlockRock {
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(StorageRock.getItem(RockItemVariants.LOOSE, getType()));
+        var itemStack = new ItemStack(ItemsRock.getItem(RockItemVariants.LOOSE, getType()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -86,7 +83,7 @@ public class BlockRockLoose extends BlockRock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(StorageRock.getItem(RockItemVariants.LOOSE, getType())));
+        drops.add(new ItemStack(ItemsRock.getItem(RockItemVariants.LOOSE, getType())));
     }
 
     @Override
@@ -97,7 +94,7 @@ public class BlockRockLoose extends BlockRock {
     @NotNull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(StorageRock.getItem(RockItemVariants.LOOSE, getType()));
+        return new ItemStack(ItemsRock.getItem(RockItemVariants.LOOSE, getType()));
     }
 
     @NotNull

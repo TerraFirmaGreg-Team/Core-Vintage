@@ -2,6 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "model": "cube_all",
+    "uvlock": true,
     "uvlock": true
   },
   "variants": {

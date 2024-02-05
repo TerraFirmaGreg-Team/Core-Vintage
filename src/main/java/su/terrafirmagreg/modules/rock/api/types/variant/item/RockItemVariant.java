@@ -1,10 +1,13 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.item;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+
+import net.minecraft.item.Item;
+
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.Pair;
-import su.terrafirmagreg.modules.rock.StorageRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -29,7 +32,7 @@ public class RockItemVariant {
             throw new RuntimeException(String.format("MetalItemVariant: [%s] already exists!", name));
 
         for (var type : RockType.getTypes()) {
-            if (StorageRock.ROCK_ITEMS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
+            if (ItemsRock.ROCK_ITEMS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }
@@ -57,7 +60,7 @@ public class RockItemVariant {
     public static class Builder {
 
         private final String name;
-        private BiFunction<RockItemVariant, RockType, IRockItem> factory;
+        private BiFunction<RockItemVariant, RockType, ? extends Item> factory;
 
 
         /**
@@ -70,7 +73,7 @@ public class RockItemVariant {
         }
 
 
-        public Builder setFactory(BiFunction<RockItemVariant, RockType, IRockItem> factory) {
+        public Builder setFactory(BiFunction<RockItemVariant, RockType, ? extends Item> factory) {
             this.factory = factory;
             return this;
         }

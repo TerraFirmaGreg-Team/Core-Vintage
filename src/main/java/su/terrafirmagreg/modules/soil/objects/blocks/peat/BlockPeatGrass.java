@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Blocks;
@@ -18,16 +17,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.block.BlockBase;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
-import su.terrafirmagreg.api.util.CustomStateMap;
-import su.terrafirmagreg.api.util.Helpers;
-import su.terrafirmagreg.api.util.IHasModel;
-import su.terrafirmagreg.modules.soil.StorageSoil;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 
 import java.util.Random;
@@ -72,10 +67,10 @@ public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
         pos = pos.add(0, -1, 0);
-        return state.withProperty(NORTH, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-                .withProperty(EAST, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-                .withProperty(SOUTH, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-                .withProperty(WEST, StorageSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+        return state.withProperty(NORTH, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+                .withProperty(EAST, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+                .withProperty(SOUTH, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+                .withProperty(WEST, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
     }
 
     @Override

@@ -21,11 +21,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
-import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import java.util.Random;
 
@@ -104,7 +104,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlockVari
     @NotNull
     @Override
     public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return StorageSoil.getItem(SoilItemVariants.PILE, getType());
+        return ItemsSoil.getItem(SoilItemVariants.PILE, getType());
     }
 
     @Override

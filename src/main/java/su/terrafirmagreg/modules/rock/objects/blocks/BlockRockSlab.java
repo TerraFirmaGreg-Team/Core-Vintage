@@ -8,8 +8,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -19,18 +17,17 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.modules.rock.StorageRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.objects.blocks.itemblock.ItemRockSlab;
 
 import java.util.List;
@@ -63,20 +60,20 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
     protected static Block getFullBlockFromSlab(RockBlockVariant variant, RockType type) {
         return switch (variant.toString()) {
-            case "slab/raw", "slab_double/raw" -> StorageRock.getBlock(RockBlockVariants.RAW, type);
-            case "slab/cobble", "slab_double/cobble" -> StorageRock.getBlock(RockBlockVariants.COBBLE, type);
-            case "slab/smooth", "slab_double/smooth" -> StorageRock.getBlock(RockBlockVariants.SMOOTH, type);
-            case "slab/bricks", "slab_double/bricks" -> StorageRock.getBlock(RockBlockVariants.BRICKS, type);
+            case "slab/raw", "slab_double/raw" -> BlocksRock.getBlock(RockBlockVariants.RAW, type);
+            case "slab/cobble", "slab_double/cobble" -> BlocksRock.getBlock(RockBlockVariants.COBBLE, type);
+            case "slab/smooth", "slab_double/smooth" -> BlocksRock.getBlock(RockBlockVariants.SMOOTH, type);
+            case "slab/bricks", "slab_double/bricks" -> BlocksRock.getBlock(RockBlockVariants.BRICKS, type);
             default -> throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
         };
     }
 
     protected static Block getDoubleSlabFromSlab(RockBlockVariant variant, RockType type) {
         return switch (variant.toString()) {
-            case "slab/raw" -> StorageRock.getBlock(RockBlockVariants.SLAB_DOUBLE_RAW, type);
-            case "slab/cobble" -> StorageRock.getBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, type);
-            case "slab/smooth" -> StorageRock.getBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, type);
-            case "slab/bricks" -> StorageRock.getBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, type);
+            case "slab/raw" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_RAW, type);
+            case "slab/cobble" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, type);
+            case "slab/smooth" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, type);
+            case "slab/bricks" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, type);
             default -> throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
         };
     }

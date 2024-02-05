@@ -12,11 +12,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -24,27 +22,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
-import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
-
-import static net.minecraft.block.BlockGrass.*;
 
 public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, IColorfulBlock {
 
@@ -96,7 +89,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
             if (usBlock instanceof BlockPeat) {
                 world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
             } else if (usBlock instanceof ISoilBlockVariant soil) {
-                world.setBlockState(pos, StorageSoil.getBlock(soil.getBlockVariant().getNonGrassVersion(), soil.getType()).getDefaultState());
+                world.setBlockState(pos, BlocksSoil.getBlock(soil.getBlockVariant().getNonGrassVersion(), soil.getType()).getDefaultState());
             }
         } else if (neighborLight >= 9) {
             for (int i = 0; i < 4; ++i) {
@@ -112,7 +105,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
                 IBlockState current = world.getBlockState(target);
 
                 // Пропускаем итерацию, если текущий блок не является почвой или уже имеет траву
-                if (!StorageSoil.isSoil(current) || StorageSoil.isGrass(current)) {
+                if (!BlocksSoil.isSoil(current) || BlocksSoil.isGrass(current)) {
                     continue;
                 }
 
@@ -141,7 +134,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
                         spreader = SoilBlockVariants.DRY_GRASS;
                     }
 
-                    world.setBlockState(pos, StorageSoil.getBlock(block.getBlockVariant()
+                    world.setBlockState(pos, BlocksSoil.getBlock(block.getBlockVariant()
                                     .getGrassVersion(spreader), block.getType())
                             .getDefaultState());
                 }
@@ -191,7 +184,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
                 var soil = soilBlockVariant.getType();
 
                 if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
-                    worldIn.setBlockState(pos, StorageSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
+                    worldIn.setBlockState(pos, BlocksSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
                 } else {
                     if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
                         for (int i = 0; i < 4; ++i) {
@@ -204,8 +197,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
                             IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                             IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                            if (iblockstate1.getBlock() == StorageSoil.getBlock(SoilBlockVariants.DIRT, soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
-                                worldIn.setBlockState(blockpos, StorageSoil.getBlock(SoilBlockVariants.GRASS, soil)
+                            if (iblockstate1.getBlock() == BlocksSoil.getBlock(SoilBlockVariants.DIRT, soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+                                worldIn.setBlockState(blockpos, BlocksSoil.getBlock(SoilBlockVariants.GRASS, soil)
                                         .getDefaultState());
                             }
                         }
@@ -237,7 +230,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
     @NotNull
     @Override
     public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return StorageSoil.getItem(SoilItemVariants.PILE, type);
+        return ItemsSoil.getItem(SoilItemVariants.PILE, type);
     }
 
     @Override

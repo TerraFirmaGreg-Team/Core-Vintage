@@ -4,7 +4,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import su.terrafirmagreg.api.registry.Registry;
-import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.core.objects.items.ItemDebug;
 
 public final class ItemsCore {
@@ -15,7 +14,7 @@ public final class ItemsCore {
 
         //==== Other =================================================================================================//
 
-        registry.registerAutoItem(WAND = new ItemDebug());
+        registry.registerAuto(WAND = new ItemDebug());
     }
 
 

@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
 import net.minecraft.util.BlockRenderLayer;
@@ -16,10 +14,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.modules.soil.StorageSoil;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import java.util.Random;
 
@@ -63,7 +61,7 @@ public class BlockSoilPodzol extends BlockSoil {
     @NotNull
     @Override
     public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return StorageSoil.getItem(SoilItemVariants.PILE, getType());
+        return ItemsSoil.getItem(SoilItemVariants.PILE, getType());
     }
 
     @NotNull

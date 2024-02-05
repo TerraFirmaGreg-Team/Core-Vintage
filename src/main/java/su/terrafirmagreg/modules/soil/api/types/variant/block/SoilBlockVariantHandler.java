@@ -9,6 +9,35 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTIC
 public class SoilBlockVariantHandler {
 
     public static void init() {
+        SoilBlockVariants.GRASS = new SoilBlockVariant
+                .Builder("grass")
+                .setFactory(BlockSoilGrass::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .build();
+
+        SoilBlockVariants.DRY_GRASS = new SoilBlockVariant
+                .Builder("dry_grass")
+                .setFactory(BlockSoilDryGrass::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .build();
+
+        SoilBlockVariants.PODZOL = new SoilBlockVariant
+                .Builder("podzol")
+                .setFactory(BlockSoilPodzol::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .build();
+
+        SoilBlockVariants.MYCELIUM = new SoilBlockVariant
+                .Builder("mycelium")
+                .setFactory(BlockSoilMycelium::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .build();
+
+        SoilBlockVariants.GRASS_PATH = new SoilBlockVariant
+                .Builder("grass_path")
+                .setFactory(BlockSoilGrassPath::new)
+                .setFallingSpecification(VERTICAL_ONLY_SOIL)
+                .build();
 
         SoilBlockVariants.DIRT = new SoilBlockVariant
                 .Builder("dirt")
@@ -28,27 +57,9 @@ public class SoilBlockVariantHandler {
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 
-        SoilBlockVariants.GRASS = new SoilBlockVariant
-                .Builder("grass")
-                .setFactory(BlockSoilGrass::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-                .build();
-
-        SoilBlockVariants.GRASS_PATH = new SoilBlockVariant
-                .Builder("grass_path")
-                .setFactory(BlockSoilGrassPath::new)
-                .setFallingSpecification(VERTICAL_ONLY_SOIL)
-                .build();
-
-        SoilBlockVariants.DRY_GRASS = new SoilBlockVariant
-                .Builder("dry_grass")
-                .setFactory(BlockSoilDryGrass::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-                .build();
-
-        SoilBlockVariants.CLAY = new SoilBlockVariant
-                .Builder("clay")
-                .setFactory(BlockSoilClay::new)
+        SoilBlockVariants.FARMLAND = new SoilBlockVariant
+                .Builder("farmland")
+                .setFactory(BlockSoilFarmland::new)
                 .setFallingSpecification(VERTICAL_ONLY_SOIL)
                 .build();
 
@@ -64,22 +75,10 @@ public class SoilBlockVariantHandler {
                 .setFallingSpecification(VERTICAL_ONLY_SOIL)
                 .build();
 
-        SoilBlockVariants.FARMLAND = new SoilBlockVariant
-                .Builder("farmland")
-                .setFactory(BlockSoilFarmland::new)
+        SoilBlockVariants.CLAY = new SoilBlockVariant
+                .Builder("clay")
+                .setFactory(BlockSoilClay::new)
                 .setFallingSpecification(VERTICAL_ONLY_SOIL)
-                .build();
-
-        SoilBlockVariants.PODZOL = new SoilBlockVariant
-                .Builder("podzol")
-                .setFactory(BlockSoilPodzol::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-                .build();
-
-        SoilBlockVariants.MYCELIUM = new SoilBlockVariant
-                .Builder("mycelium")
-                .setFactory(BlockSoilMycelium::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 
         SoilBlockVariants.MUD = new SoilBlockVariant

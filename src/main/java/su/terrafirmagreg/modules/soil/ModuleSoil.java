@@ -32,9 +32,6 @@ public class ModuleSoil extends ModuleBase {
     public ModuleSoil() {
         super(2);
         this.enableAutoRegistry(SOIL_TAB);
-
-        MinecraftForge.EVENT_BUS.register(this);
-
     }
 
     @Override
@@ -45,13 +42,6 @@ public class ModuleSoil extends ModuleBase {
 
         BlocksSoil.onRegister(registry);
         ItemsSoil.onRegister(registry);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void onClientRegister() {
-        BlocksSoil.onClientRegister(registry);
-        ItemsSoil.onClientRegister(registry);
     }
 
     @Override

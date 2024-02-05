@@ -10,9 +10,4 @@ public final class ItemsSoil {
 
 		for (var item : StorageSoil.SOIL_ITEMS.values()) registry.registerAutoItem((Item) item);
 	}
-
-
-	public static void onClientRegister(Registry registry) {
-
-	}
 }

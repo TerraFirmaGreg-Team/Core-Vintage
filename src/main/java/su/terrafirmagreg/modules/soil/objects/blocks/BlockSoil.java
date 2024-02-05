@@ -31,8 +31,7 @@ public abstract class BlockSoil extends BlockBase implements ISoilBlockVariant {
     public BlockSoil(SoilBlockVariant variant, SoilType type) {
         super(Material.GROUND);
 
-        if (variant.canFall())
-            FallingBlockManager.registerFallable(this, variant.getSpecification());
+        if (variant.canFall()) FallingBlockManager.registerFallable(this, variant.getSpecification());
 
         this.variant = variant;
         this.type = type;

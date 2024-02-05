@@ -59,15 +59,14 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
 
     public BlockSoilGrass(SoilBlockVariant variant, SoilType type) {
 
-        if (variant.canFall()) FallingBlockManager.registerFallable(this, variant.getSpecification());
-
         this.variant = variant;
         this.type = type;
+
+        if (variant.canFall()) FallingBlockManager.registerFallable(this, variant.getSpecification());
 
         setSoundType(SoundType.PLANT);
         setHardness(2.1F);
         setHarvestLevel("shovel", 0);
-        setTickRandomly(true);
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)
@@ -96,9 +95,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
             if (usBlock instanceof BlockPeat) {
                 world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
             } else if (usBlock instanceof ISoilBlockVariant soil) {
-                world.setBlockState(pos, StorageSoil.getBlock(soil.getBlockVariant()
-                                .getNonGrassVersion(), soil.getType())
-                        .getDefaultState());
+                world.setBlockState(pos, StorageSoil.getBlock(soil.getBlockVariant().getNonGrassVersion(), soil.getType()).getDefaultState());
             }
         } else if (neighborLight >= 9) {
             for (int i = 0; i < 4; ++i) {
@@ -239,7 +236,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
     @NotNull
     @Override
     public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return StorageSoil.getItem(SoilItemVariants.PILE, getType());
+        return StorageSoil.getItem(SoilItemVariants.PILE, type);
     }
 
     @Override

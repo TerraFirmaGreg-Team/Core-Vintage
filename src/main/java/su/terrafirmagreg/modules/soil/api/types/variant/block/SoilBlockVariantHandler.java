@@ -72,13 +72,13 @@ public class SoilBlockVariantHandler {
 
         SoilBlockVariants.PODZOL = new SoilBlockVariant
                 .Builder("podzol")
-                .setFactory(BlockSoilDirt::new)
+                .setFactory(BlockSoilPodzol::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 
         SoilBlockVariants.MYCELIUM = new SoilBlockVariant
                 .Builder("mycelium")
-                .setFactory(BlockSoilDirt::new)
+                .setFactory(BlockSoilMycelium::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 

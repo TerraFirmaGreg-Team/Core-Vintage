@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks.peat;
 
+import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -7,8 +8,11 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -19,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.objects.block.BlockBase;
+import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.api.util.Helpers;
 import su.terrafirmagreg.api.util.IHasModel;
@@ -28,7 +33,7 @@ import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 import java.util.Random;
 
 
-public class BlockPeatGrass extends BlockBase  {
+public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
 
     // Used for connected textures only.
     public static final PropertyBool NORTH = PropertyBool.create("north");
@@ -42,10 +47,10 @@ public class BlockPeatGrass extends BlockBase  {
         setSoundType(SoundType.PLANT);
         setTickRandomly(true);
         setDefaultState(this.getDefaultState()
-                .withProperty(NORTH, false)
-                .withProperty(EAST, false)
-                .withProperty(SOUTH, false)
-                .withProperty(WEST, false));
+                .withProperty(NORTH, Boolean.FALSE)
+                .withProperty(EAST, Boolean.FALSE)
+                .withProperty(SOUTH, Boolean.FALSE)
+                .withProperty(WEST, Boolean.FALSE));
 
         OreDictionaryHelper.register(this, "peat");
         OreDictionaryHelper.register(this, "peat", "grass");
@@ -99,4 +104,13 @@ public class BlockPeatGrass extends BlockBase  {
     }
 
 
+    @Override
+    public IBlockColor getColorHandler() {
+        return GrassColorHandler::computeGrassColor;
+    }
+
+    @Override
+    public IItemColor getItemColorHandler() {
+        return (s, i) -> this.getColorHandler().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getDefaultState(), null, null, i);
+    }
 }

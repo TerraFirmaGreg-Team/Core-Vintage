@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import net.minecraft.block.Block;
@@ -9,6 +10,8 @@ import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -26,6 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.modules.soil.StorageSoil;
@@ -39,7 +43,7 @@ import tfcflorae.objects.blocks.blocktype.farmland.BlockLoamySandFarmland;
 import java.util.Random;
 
 
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IHasModel {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IHasModel, IColorfulBlock {
 
     public static final int[] TINT = new int[]{
             0xffffffff,
@@ -269,5 +273,10 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
     @Override
     public void onModelRegister() {
         ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockSoilFarmland.MOISTURE).build());
+    }
+
+    @Override
+    public IBlockColor getColorHandler() {
+        return (s, w, p, i) -> BlockSoilFarmland.TINT[s.getValue(BlockSoilFarmland.MOISTURE)];
     }
 }

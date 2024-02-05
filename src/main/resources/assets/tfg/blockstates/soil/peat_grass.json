@@ -3,8 +3,8 @@
   "defaults": {
     "model": "tfg:soil/grass",
     "textures": {
-      "all": "tfg:blocks/soil/dirt/peat",
-      "particle": "tfg:blocks/soil/dirt/peat",
+      "all": "tfg:blocks/soil/peat",
+      "particle": "tfg:blocks/soil/peat",
       "up": "tfg:blocks/soil/overlay/grass/top",
       "north": "tfg:blocks/soil/overlay/grass/side",
       "south": "tfg:blocks/soil/overlay/grass/side",

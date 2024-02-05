@@ -1,0 +1,55 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/grass",
+    "textures": {
+      "up": "tfg:blocks/soil/overlay/podzol/top",
+      "north": "tfg:blocks/soil/overlay/podzol/side",
+      "south": "tfg:blocks/soil/overlay/podzol/side",
+      "east": "tfg:blocks/soil/overlay/podzol/side",
+      "west": "tfg:blocks/soil/overlay/podzol/side",
+      "all": "tfg:blocks/soil/dirt/silty_loam"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "east": {
+      "true": {
+        "textures": {
+          "east": "tfg:blocks/soil/overlay/podzol/top"
+        }
+      },
+      "false": {}
+    },
+    "north": {
+      "true": {
+        "textures": {
+          "north": "tfg:blocks/soil/overlay/podzol/top"
+        }
+      },
+      "false": {}
+    },
+    "snowy": {
+      "true": {},
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "textures": {
+          "south": "tfg:blocks/soil/overlay/podzol/top"
+        }
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "textures": {
+          "west": "tfg:blocks/soil/overlay/podzol/top"
+        }
+      },
+      "false": {}
+    }
+  }
+}

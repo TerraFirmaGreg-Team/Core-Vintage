@@ -47,20 +47,12 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
 
     public static final int[] TINT = new int[]{
             0xffffffff,
-            0xfff7f7f7,
-            0xffefefef,
             0xffe7e7e7,
-            0xffdfdfdf,
             0xffd7d7d7,
-            0xffcfcfcf,
             0xffc7c7c7,
-            0xffbfbfbf,
             0xffb7b7b7,
-            0xffafafaf,
             0xffa7a7a7,
-            0xff9f9f9f,
             0xff979797,
-            0xff8f8f8f,
             0xff878787,
     };
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);

@@ -71,7 +71,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
-                .withProperty(WEST, Boolean.FALSE));
+                .withProperty(WEST, Boolean.FALSE)
+                .withProperty(SNOWY,Boolean.FALSE));
 
         OreDictionaryHelper.register(this, variant.toString());
         OreDictionaryHelper.register(this, variant.toString(), type.toString());

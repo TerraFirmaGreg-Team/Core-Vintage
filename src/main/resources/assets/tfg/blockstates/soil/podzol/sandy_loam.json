@@ -31,10 +31,6 @@
       },
       "false": {}
     },
-    "snowy": {
-      "true": {},
-      "false": {}
-    },
     "south": {
       "true": {
         "textures": {

@@ -14,10 +14,22 @@ public class RockBlockVariantHandler {
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
                 .build();
 
+        RockBlockVariants.MOSSY_COBBLE = new RockBlockVariant.Builder("mossy_cobble")
+                .setBaseHardness(6f)
+                .setFactory(BlockRockMossy::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
+                .build();
+
         RockBlockVariants.RAW = new RockBlockVariant.Builder("raw")
                 .setBaseHardness(6f)
                 .setFactory(BlockRockRaw::new)
                 .setStoneType()
+                .setFallingSpecification(COLLAPSABLE_ROCK)
+                .build();
+
+        RockBlockVariants.MOSSY_RAW = new RockBlockVariant.Builder("mossy_raw")
+                .setBaseHardness(6f)
+                .setFactory(BlockRockMossy::new)
                 .setFallingSpecification(COLLAPSABLE_ROCK)
                 .build();
 
@@ -31,17 +43,32 @@ public class RockBlockVariantHandler {
                 .setFactory(BlockRockBricks::new)
                 .build();
 
+        RockBlockVariants.MOSSY_BRICKS = new RockBlockVariant.Builder("mossy_bricks")
+                .setBaseHardness(6f)
+                .setFactory(BlockRockMossy::new)
+                .build();
+
+        RockBlockVariants.CRACKED_BRICKS = new RockBlockVariant.Builder("cracked_bricks")
+                .setBaseHardness(6f)
+                .setFactory(BlockRockBricks::new)
+                .build();
+
+        RockBlockVariants.CHISELED = new RockBlockVariant.Builder("chiseled")
+                .setBaseHardness(6f)
+                .setFactory(BlockRockBricks::new)
+                .build();
+
         RockBlockVariants.GRAVEL = new RockBlockVariant.Builder("gravel")
                 .setBaseHardness(6f)
                 .setFactory(BlockRockGravel::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 
-        RockBlockVariants.SAND = new RockBlockVariant.Builder("sand")
-                .setBaseHardness(6f)
-                .setFactory(BlockRockSand::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-                .build();
+//        RockBlockVariants.SAND = new RockBlockVariant.Builder("sand")
+//                .setBaseHardness(6f)
+//                .setFactory(BlockRockSand::new)
+//                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+//                .build();
 
         RockBlockVariants.LOOSE_ROCK = new RockBlockVariant.Builder("loose_rock")
                 .setBaseHardness(6f)
@@ -74,33 +101,6 @@ public class RockBlockVariantHandler {
                 .setBaseHardness(6f)
                 .setFactory(BlockRockMagma::new)
                 .setFallingSpecification(COLLAPSABLE_ROCK)
-                .build();
-
-        RockBlockVariants.MOSSY_RAW = new RockBlockVariant.Builder("mossy_raw")
-                .setBaseHardness(6f)
-                .setFactory(BlockRockMossy::new)
-                .setFallingSpecification(COLLAPSABLE_ROCK)
-                .build();
-
-        RockBlockVariants.MOSSY_COBBLE = new RockBlockVariant.Builder("mossy_cobble")
-                .setBaseHardness(6f)
-                .setFactory(BlockRockMossy::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
-                .build();
-
-        RockBlockVariants.MOSSY_BRICKS = new RockBlockVariant.Builder("mossy_bricks")
-                .setBaseHardness(6f)
-                .setFactory(BlockRockMossy::new)
-                .build();
-
-        RockBlockVariants.CRACKED_BRICKS = new RockBlockVariant.Builder("cracked_bricks")
-                .setBaseHardness(6f)
-                .setFactory(BlockRockBricks::new)
-                .build();
-
-        RockBlockVariants.CHISELED = new RockBlockVariant.Builder("chiseled")
-                .setBaseHardness(6f)
-                .setFactory(BlockRockBricks::new)
                 .build();
 
 //

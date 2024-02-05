@@ -4,12 +4,16 @@
     "model": "cube_all",
     "uvlock": true,
     "textures": {
-      "all": "tfg:blocks/rock/cobble/boninite"
+      "all": "tfg:blocks/rock/raw/boninite"
     }
   },
   "variants": {
     "normal": [
       {}
-    ]
+    ],
+    "can_fall": {
+      "true": {},
+      "false": {}
+    }
   }
 }

@@ -28,7 +28,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.rock.objects.itemblock.ItemRockSlab;
+import su.terrafirmagreg.modules.rock.objects.itemblocks.ItemRockSlab;
 
 import java.util.List;
 import java.util.Random;

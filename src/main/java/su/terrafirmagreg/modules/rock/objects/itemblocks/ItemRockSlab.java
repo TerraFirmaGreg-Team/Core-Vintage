@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.rock.objects.itemblock;
+package su.terrafirmagreg.modules.rock.objects.itemblocks;
 
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;

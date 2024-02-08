@@ -1,5 +1,7 @@
 package su.terrafirmagreg;
 
+import lombok.Getter;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
@@ -15,7 +17,8 @@ public class TerraFirmaGreg {
 
     @SuppressWarnings("unused")
     @Mod.Instance
-    private static TerraFirmaGreg INSTANCE;
+    @Getter
+    private static TerraFirmaGreg instance;
 
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
     public static IProxy PROXY;

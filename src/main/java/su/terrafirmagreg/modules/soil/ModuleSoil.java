@@ -30,7 +30,7 @@ public class ModuleSoil extends ModuleBase {
 
 
     public ModuleSoil() {
-        super(2);
+        super(3);
         this.enableAutoRegistry(SOIL_TAB);
     }
 

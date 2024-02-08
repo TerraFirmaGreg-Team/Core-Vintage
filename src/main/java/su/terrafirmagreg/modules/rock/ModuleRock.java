@@ -27,7 +27,7 @@ public class ModuleRock extends ModuleBase {
     public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/raw/basalt", false);
 
     public ModuleRock() {
-        super(1);
+        super(2);
         this.enableAutoRegistry(ROCK_TAB);
 
     }

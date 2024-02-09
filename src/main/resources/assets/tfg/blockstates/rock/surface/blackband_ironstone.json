@@ -11,7 +11,7 @@
     "normal": [
       {}
     ],
-    "axis": {
+    "facing": {
       "north": {
         "model": "tfg:groundcover/rubble",
         "y": 0

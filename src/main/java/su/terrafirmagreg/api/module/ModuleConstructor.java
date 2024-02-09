@@ -8,7 +8,6 @@ class ModuleConstructor {
     ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
         try {
             ModuleBase module = moduleClass.newInstance();
-            module.setModId(modId);
             ModuleManager.LOGGER.info("[ {} ] Loaded module: {}", modId, moduleClass.getName());
             return module;
 

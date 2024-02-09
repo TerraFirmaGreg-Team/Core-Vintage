@@ -11,24 +11,28 @@ import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
+import java.util.Collections;
+import java.util.List;
+
 @Module(moduleID = "Wood", name = "TFG Wood")
 public class ModuleWood extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger("ModuleWood");
-    public static final CreativeTabs MISC_TAB = new CreativeTabBase("wood", "wood/planks/pine", false);
+    public static final Logger LOGGER = LogManager.getLogger("Module Wood");
+    public static final CreativeTabs WOOD_TAB = new CreativeTabBase("wood", "wood/planks/pine", false);
 
     public static IPacketService PACKET_SERVICE;
     public static ITileDataService TILE_DATA_SERVICE;
 
     public ModuleWood() {
         super(4);
-        this.enableAutoRegistry(MISC_TAB);
+        this.enableAutoRegistry(WOOD_TAB);
 
         PACKET_SERVICE = this.enableNetwork();
         TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
@@ -48,5 +52,11 @@ public class ModuleWood extends ModuleBase {
     @Override
     public @NotNull Logger getLogger() {
         return LOGGER;
+    }
+
+    @NotNull
+    @Override
+    public List<Class<?>> getEventBusSubscribers() {
+        return Collections.singletonList(ModuleWood.class);
     }
 }

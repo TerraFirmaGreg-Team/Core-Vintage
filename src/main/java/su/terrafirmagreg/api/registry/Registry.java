@@ -164,7 +164,6 @@ public class Registry {
     @Getter
     private AutoRegistry autoRegistry;
 
-    @Setter
     private NetworkEntityIdSupplier networkEntityIdSupplier;
 
     /**
@@ -217,6 +216,13 @@ public class Registry {
      */
     public AutoRegistry getNewAutoRegistry() {
         return new AutoRegistry(this);
+    }
+
+    public void setNetworkEntityIdSupplier(NetworkEntityIdSupplier supplier) {
+        if (this.networkEntityIdSupplier != null)
+            throw new IllegalStateException("Network entity id supplier has already been set");
+
+        this.networkEntityIdSupplier = supplier;
     }
 
 

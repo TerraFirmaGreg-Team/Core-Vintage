@@ -4,7 +4,9 @@
     "model": "tfg:wood/log"
   },
   "variants": {
-    "normal": [{}],
+    "normal": [{
+      "model": "tfg:wood/log"
+    }],
     "axis": {
       "y": {},
       "z": {

@@ -24,12 +24,8 @@ public class WoodTypes {
     public static WoodType WHITE_CEDAR;
     public static WoodType WILLOW;
     public static WoodType KAPOK;
-
-    // TFC TECH
-    public static WoodType HEVEA;
-
-    // TFCFlorae
-    public static WoodType AFRICAN_PADAUK;
+    public static WoodType HEVEA;     // TFC TECH
+    public static WoodType AFRICAN_PADAUK; // TFCFlorae
     public static WoodType ALDER;
     public static WoodType ANGELIM;
     public static WoodType BALD_CYPRESS;
@@ -92,9 +88,7 @@ public class WoodTypes {
     public static WoodType YELLOW_MERANTI;
     public static WoodType YEW;
     public static WoodType ZEBRAWOOD;
-
-    // фруктовые
-    public static WoodType BANANA;
+    public static WoodType BANANA; // фруктовые
     public static WoodType CHERRY;
     public static WoodType GREEN_APPLE;
     public static WoodType LEMON;

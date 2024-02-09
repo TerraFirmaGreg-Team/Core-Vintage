@@ -7,6 +7,7 @@ import lombok.Setter;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,9 +45,8 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     private final String name;
     @Getter
     private final int priority;
-    @Setter
     @NotNull
-    private String modId;
+    private final String modid;
 
     protected Registry registry;
     private ThreadedNetworkWrapper threadedNetworkWrapper;
@@ -61,7 +61,8 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
     protected ModuleBase(int priority) {
 	    this.priority = priority;
-        this.name = this.getClass().getSimpleName();
+        this.modid = Loader.instance().activeModContainer().getModId();
+	    this.name = this.getClass().getSimpleName();
     }
 
     protected void setConfigurationDirectory(File file) {
@@ -72,7 +73,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     protected void enableAutoRegistry(CreativeTabs tab) {
         this.registry = new Registry(tab).enableAutoRegistration();
 
-        this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modId, s -> new NetworkEntityIdSupplier());
+        this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modid, s -> new NetworkEntityIdSupplier());
         this.registry.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
         this.autoRegistry = registry.getAutoRegistry();
     }
@@ -89,8 +90,8 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     protected IPacketService enableNetwork() {
 
         if (this.threadedNetworkWrapper == null) {
-            this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modId, ThreadedNetworkWrapper::new);
-            this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modId, s -> new PacketRegistry(this.threadedNetworkWrapper));
+            this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modid, ThreadedNetworkWrapper::new);
+            this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modid, s -> new PacketRegistry(this.threadedNetworkWrapper));
             this.packetService = new PacketService(this.threadedNetworkWrapper);
         }
 

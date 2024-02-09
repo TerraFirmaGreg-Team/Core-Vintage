@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.data;
 
 import lombok.Getter;
 import net.minecraft.util.IStringSerializable;

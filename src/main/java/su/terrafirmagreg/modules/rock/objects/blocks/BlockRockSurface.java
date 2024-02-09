@@ -25,16 +25,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.data.Blockstates;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+
 
 public class BlockRockSurface extends BlockRock {
-
-    public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(
             2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
             14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
@@ -43,7 +44,7 @@ public class BlockRockSurface extends BlockRock {
         super(variant, type);
 
         setHardness(0.1f);
-        setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.NORTH));
+        setDefaultState(blockState.getBaseState().withProperty(HORIZONTAL, EnumFacing.NORTH));
         FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
@@ -160,17 +161,17 @@ public class BlockRockSurface extends BlockRock {
     @Override
     @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(meta));
+        return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(AXIS).getHorizontalIndex();
+        return state.getValue(HORIZONTAL).getHorizontalIndex();
     }
 
     @NotNull
     @Override
     public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, AXIS);
+        return new BlockStateContainer(this, HORIZONTAL);
     }
 }

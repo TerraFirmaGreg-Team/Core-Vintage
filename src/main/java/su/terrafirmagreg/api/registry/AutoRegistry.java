@@ -3,10 +3,12 @@ package su.terrafirmagreg.api.registry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -14,7 +16,8 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
@@ -23,10 +26,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lombok.Getter;
 import su.terrafirmagreg.api.module.ModuleManager;
-import su.terrafirmagreg.api.objects.block.IColorfulBlock;
-import su.terrafirmagreg.api.objects.item.IColorfulItem;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.util.Helpers;
-import su.terrafirmagreg.api.util.IHasModel;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by
@@ -154,9 +156,18 @@ public class AutoRegistry {
     @SideOnly(Side.CLIENT)
     public void onRegisterTileEntitySpecialRenderer() {
         for (var provider : this.registry.getTileProviders()) {
-            TileEntitySpecialRenderer tesr = provider.getTileRenderer();
+            TileEntitySpecialRenderer<? super TileEntity> tesr = provider.getTileRenderer();
 
             if (tesr != null) ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void onRegisterEntityRenderingHandler() {
+        for (var provider : this.registry.getEntities2()) {
+            IRenderFactory<? super Entity> renderFactory = provider.getEntityRenderer();
+
+            if (renderFactory != null) RenderingRegistry.registerEntityRenderingHandler(provider.getEntityClass(), renderFactory);
         }
     }
 

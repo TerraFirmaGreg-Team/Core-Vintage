@@ -1,10 +1,9 @@
 package su.terrafirmagreg.modules.core.objects.blocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.objects.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.BlockBase;
 
 public class BlockDebug extends BlockBase {
 

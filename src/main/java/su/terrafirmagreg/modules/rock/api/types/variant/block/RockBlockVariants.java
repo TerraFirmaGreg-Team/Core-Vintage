@@ -13,7 +13,7 @@ public class RockBlockVariants {
     public static RockBlockVariant CHISELED;
     public static RockBlockVariant GRAVEL;
     public static RockBlockVariant SAND;
-    public static RockBlockVariant LOOSE_ROCK;
+    public static RockBlockVariant SURFACE;
     public static RockBlockVariant SPELEOTHEM;
     public static RockBlockVariant BUTTON;
     public static RockBlockVariant PRESSURE_PLATE;

@@ -70,7 +70,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
 
     protected void enableAutoRegistry(CreativeTabs tab) {
-        this.registry = new Registry(modId, tab).enableAutoRegistration();
+        this.registry = new Registry(tab).enableAutoRegistration();
 
         this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modId, s -> new NetworkEntityIdSupplier());
         this.registry.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);

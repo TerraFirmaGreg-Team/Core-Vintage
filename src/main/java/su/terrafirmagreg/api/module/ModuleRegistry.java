@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.module;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +25,7 @@ public class ModuleRegistry {
         this.moduleClassList.add(moduleClass);
     }
 
-    void initializeModules(String modId) {
+    void initializeModules(@NotNull String modId) {
 
         for (Class<? extends ModuleBase> moduleClass : this.moduleClassList) {
             ModuleBase module = this.moduleConstructor.constructModule(modId, moduleClass);

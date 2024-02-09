@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.objects.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.util.EnumColor;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;

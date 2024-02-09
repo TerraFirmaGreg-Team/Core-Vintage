@@ -2,16 +2,13 @@ package su.terrafirmagreg.modules.soil;
 
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.objects.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariantHandler;

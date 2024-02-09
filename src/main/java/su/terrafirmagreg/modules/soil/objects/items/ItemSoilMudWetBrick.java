@@ -4,12 +4,10 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
 
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.objects.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItemVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;

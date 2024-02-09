@@ -12,7 +12,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import su.terrafirmagreg.api.network.tile.client.TileDataServiceClientMonitor;
 import su.terrafirmagreg.api.network.tile.spi.TileEntityDataContainerBase;
-import su.terrafirmagreg.api.objects.packet.CPacketTileEntityBase;
+import su.terrafirmagreg.api.spi.packet.CPacketTileEntityBase;
 
 public class SCPacketTileData extends CPacketTileEntityBase<SCPacketTileData> {
 

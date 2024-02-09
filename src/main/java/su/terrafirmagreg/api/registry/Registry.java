@@ -35,10 +35,11 @@ import com.google.common.collect.Multimap;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
-import su.terrafirmagreg.api.objects.block.IColorfulBlock;
-import su.terrafirmagreg.api.objects.item.IColorfulItem;
-import su.terrafirmagreg.api.objects.item.ICustomMesh;
-import su.terrafirmagreg.api.objects.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.entity.IEntity;
+import su.terrafirmagreg.api.spi.item.IColorfulItem;
+import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.api.util.LootBuilder;
@@ -95,6 +96,9 @@ public class Registry {
      */
     @Getter
     private final NonNullList<EntityEntryBuilder<? extends Entity>> entities = NonNullList.create();
+
+    @Getter
+    private final NonNullList<IEntity> entities2 = NonNullList.create();
 
     /**
      * A list of all entities registered by the helper.
@@ -164,21 +168,21 @@ public class Registry {
     private NetworkEntityIdSupplier networkEntityIdSupplier;
 
     /**
-     * Constructs a new RegistryHelper for the specified mod id. Multiple helpers can exist
+     * Constructs a new Registry for the specified mod id. Multiple helpers can exist
      * with the same id, but it's not recommended.
      */
-    public Registry(String modid) {
-        this(modid, null);
+    public Registry() {
+        this(null);
     }
 
     /**
-     * Constructs a new RegistryHelper. The modid for the helper is equal to that of the active
+     * Constructs a new Registry. The modid for the helper is equal to that of the active
      * mod container, and auto model registration is enabled.
      *
      * @param tab The tab for the registry helper.
      */
-    public Registry(String modid, @Nullable CreativeTabs tab) {
-        this.modid = modid;
+    public Registry(@Nullable CreativeTabs tab) {
+        this.modid = Loader.instance().activeModContainer().getModId();
         this.tab = tab;
     }
 

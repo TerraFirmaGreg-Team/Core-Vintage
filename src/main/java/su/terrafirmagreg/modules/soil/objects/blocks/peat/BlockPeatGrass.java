@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.objects.block.BlockBase;
-import su.terrafirmagreg.api.objects.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 

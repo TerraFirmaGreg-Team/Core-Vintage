@@ -70,9 +70,9 @@ public class RockBlockVariantHandler {
 //                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
 //                .build();
 
-        RockBlockVariants.LOOSE_ROCK = new RockBlockVariant.Builder("loose_rock")
+        RockBlockVariants.SURFACE = new RockBlockVariant.Builder("surface")
                 .setBaseHardness(6f)
-                .setFactory(BlockRockLoose::new)
+                .setFactory(BlockRockSurface::new)
                 .setFallingSpecification(VERTICAL_ONLY)
                 .build();
 

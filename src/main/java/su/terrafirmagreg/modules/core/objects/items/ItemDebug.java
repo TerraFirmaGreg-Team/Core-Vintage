@@ -1,11 +1,8 @@
 package su.terrafirmagreg.modules.core.objects.items;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
@@ -22,7 +19,7 @@ import net.minecraftforge.items.IItemHandler;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.TerraFirmaCraft;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.objects.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.ItemBase;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

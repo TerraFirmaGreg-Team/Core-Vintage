@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.objects.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
@@ -41,7 +41,8 @@ public class BlockRockAnvil extends BlockRock {
 
     @Override
     public ItemBlock getItemBlock() {
-        return this.getType().getRockCategory().isHasAnvil() ? new ItemBlockBase(this) : null;
+//        return this.getType().getRockCategory().isHasAnvil() ? new ItemBlockBase(this) : null;
+        return new ItemBlockBase(this);
     }
 
     @Override

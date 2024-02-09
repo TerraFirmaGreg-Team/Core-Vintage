@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.registry;
 
+import lombok.Setter;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
@@ -32,6 +34,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.objects.block.IColorfulBlock;
 import su.terrafirmagreg.api.objects.item.IColorfulItem;
 import su.terrafirmagreg.api.objects.item.ICustomMesh;
@@ -44,11 +47,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 public class Registry {
-
-    /**
-     * A list of all known helpers.
-     */
-    private static final List<Registry> HELPERS = NonNullList.create();
 
     /**
      * The id of the mod the registry helper instance belongs to.
@@ -162,12 +160,15 @@ public class Registry {
     @Getter
     private AutoRegistry autoRegistry;
 
+    @Setter
+    private NetworkEntityIdSupplier networkEntityIdSupplier;
+
     /**
      * Constructs a new RegistryHelper for the specified mod id. Multiple helpers can exist
      * with the same id, but it's not recommended.
      */
-    public Registry() {
-        this(null);
+    public Registry(String modid) {
+        this(modid, null);
     }
 
     /**
@@ -176,10 +177,9 @@ public class Registry {
      *
      * @param tab The tab for the registry helper.
      */
-    public Registry(@Nullable CreativeTabs tab) {
+    public Registry(String modid, @Nullable CreativeTabs tab) {
+        this.modid = modid;
         this.tab = tab;
-        this.modid = Loader.instance().activeModContainer().getModId();
-        HELPERS.add(this);
     }
 
 
@@ -214,6 +214,7 @@ public class Registry {
     public AutoRegistry getNewAutoRegistry() {
         return new AutoRegistry(this);
     }
+
 
     //region // ===== Block ========================================================================================================================//
 

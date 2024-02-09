@@ -9,9 +9,9 @@ public class ModuleRegistry {
     private List<ModuleBase> moduleList;
     private ModuleConstructor moduleConstructor;
 
-    public ModuleRegistry(List<ModuleBase> moduleList, ModuleConstructor moduleConstructor) {
-        this.moduleConstructor = moduleConstructor;
+    ModuleRegistry(List<ModuleBase> moduleList, ModuleConstructor moduleConstructor) {
 
+        this.moduleConstructor = moduleConstructor;
         this.moduleClassList = new ArrayList<>();
         this.moduleList = moduleList;
     }
@@ -23,7 +23,7 @@ public class ModuleRegistry {
         this.moduleClassList.add(moduleClass);
     }
 
-    public void initializeModules(String modId) {
+    void initializeModules(String modId) {
 
         for (Class<? extends ModuleBase> moduleClass : this.moduleClassList) {
             ModuleBase module = this.moduleConstructor.constructModule(modId, moduleClass);

@@ -71,6 +71,9 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
     protected void enableAutoRegistry(CreativeTabs tab) {
         this.registry = new Registry(modId, tab).enableAutoRegistration();
+
+        this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modId, s -> new NetworkEntityIdSupplier());
+        this.registry.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
         this.autoRegistry = registry.getAutoRegistry();
     }
 
@@ -84,9 +87,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
      * @return a reference to the module's packet service
      */
     protected IPacketService enableNetwork() {
-
-        this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modId, s -> new NetworkEntityIdSupplier());
-        this.registry.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
 
         if (this.threadedNetworkWrapper == null) {
             this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modId, ThreadedNetworkWrapper::new);

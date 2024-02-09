@@ -91,10 +91,10 @@ public class TileDataServiceOverlayRenderer {
 
     private static void bufferColoredQuad(BufferBuilder renderer, int x, int y, float width, int height, float red, float green, float blue, float alpha) {
 
-        renderer.pos((double) (x), (double) (y), 1.0D).color(red, green, blue, alpha).endVertex();
-        renderer.pos((double) (x), (double) (y + height), 1.0D).color(red, green, blue, alpha).endVertex();
-        renderer.pos((double) (x + width), (double) (y + height), 1.0D).color(red, green, blue, alpha).endVertex();
-        renderer.pos((double) (x + width), (double) (y), 1.0D).color(red, green, blue, alpha).endVertex();
+        renderer.pos(x, y, 1.0D).color(red, green, blue, alpha).endVertex();
+        renderer.pos(x, y + height, 1.0D).color(red, green, blue, alpha).endVertex();
+        renderer.pos(x + width, y + height, 1.0D).color(red, green, blue, alpha).endVertex();
+        renderer.pos(x + width, y, 1.0D).color(red, green, blue, alpha).endVertex();
     }
 
     public void renderMonitor(TileDataServiceClientMonitor monitor, int x, int y, String title) {

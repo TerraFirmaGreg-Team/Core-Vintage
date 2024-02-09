@@ -38,7 +38,7 @@ public class ModuleManager {
         Set<ASMDataTable.ASMData> dataSet = table.getAll(Module.class.getCanonicalName());
         for (ASMDataTable.ASMData data : dataSet) {
             String moduleID = (String) data.getAnnotationInfo().get("moduleID");
-            List<String> modDependencies = (ArrayList<String>) data.getAnnotationInfo().get("modDependencies");
+            List<String> modDependencies = (List<String>) data.getAnnotationInfo().get("modDependencies");
             if (modDependencies == null || modDependencies.stream().allMatch(Loader::isModLoaded)) {
                 try {
                     this.moduleRegistry.registerModules((Class<? extends ModuleBase>) Class.forName(data.getClassName()));
@@ -46,8 +46,7 @@ public class ModuleManager {
                     LOGGER.error("Could not initialize module: {} {}", moduleID, e);
                 }
             } else {
-                LOGGER.info("Module {} is missing at least one of mod dependencies: {}, skipping loading...", moduleID,
-                        modDependencies);
+                LOGGER.info("Module {} is missing at least one of mod dependencies: {}, skipping loading...", moduleID, modDependencies);
             }
         }
 
@@ -57,16 +56,9 @@ public class ModuleManager {
                 MinecraftForge.EVENT_BUS.register(clazz);
             }
         }
-
-    }
-
-
-
-
-    public void onConstructionEvent() {
-
         // Initialize modules.
         this.moduleRegistry.initializeModules(this.modId);
+
     }
 
     public void routeFMLStateEvent(FMLStateEvent event) {

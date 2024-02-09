@@ -1,21 +1,11 @@
 package su.terrafirmagreg.api.module;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLLog;
-
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.discovery.ASMDataTable;
-
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-public class ModuleConstructor {
+class ModuleConstructor {
 
     @Nullable
-    public ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
+    ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
         try {
             ModuleBase module = moduleClass.newInstance();
             module.setModId(modId);

@@ -36,7 +36,6 @@ public class TerraFirmaGreg {
     public void onConstruction(FMLConstructionEvent event) {
 
         this.moduleManager.setup(event.getASMHarvestedData());
-        this.moduleManager.onConstructionEvent();
         this.moduleManager.routeFMLStateEvent(event);
     }
 

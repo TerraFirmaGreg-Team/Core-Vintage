@@ -57,7 +57,7 @@ public abstract class TileEntityDataBase extends TileEntityDataContainerBase {
     }
 
     @Override
-    public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet) {
+    public void onDataPacket(@NotNull NetworkManager networkManager, SPacketUpdateTileEntity packet) {
 
         this.readFromNBT(packet.getNbtCompound());
         BlockHelper.notifyBlockUpdate(this.world, this.pos);

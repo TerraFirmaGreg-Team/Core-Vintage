@@ -4,7 +4,7 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -37,7 +37,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.util.CustomStateMap;
+import su.terrafirmagreg.api.registry.RegistryModel;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -331,16 +331,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(getResourceLocation())
-                        .ignore(BlockWoodLog.PLACED)
-                        .customVariant("type=" + getType())
-                        .build());
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(),
-                        "axis=none,small=false,type=" + getType()));
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockWoodLog.PLACED).build());
+        RegistryModel.registerItemModel(Item.getItemFromBlock(this), 0, "normal");
     }
 }

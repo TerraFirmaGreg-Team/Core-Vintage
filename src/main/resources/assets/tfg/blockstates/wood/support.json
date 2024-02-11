@@ -12,9 +12,11 @@
     "normal": [
       {}
     ],
-    "inventory": {
-      "model": "tfg:wood/support/inventory"
-    },
+    "inventory": [
+      {
+        "model": "tfg:wood/support/inventory"
+      }
+    ],
     "axis": {
       "y": {
         "model": "tfg:wood/support/vertical"

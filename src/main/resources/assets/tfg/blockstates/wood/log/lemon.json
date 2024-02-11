@@ -1,0 +1,32 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/log",
+    "textures": {
+      "side": "tfg:blocks/wood/log/side/lemon",
+      "end": "tfg:blocks/wood/log/end/lemon"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "axis": {
+      "y": {},
+      "z": {
+        "x": 90
+      },
+      "x": {
+        "x": 90,
+        "y": 90
+      },
+      "none": {}
+    },
+    "small": {
+      "true": {
+        "model": "tfg:wood/small_log"
+      },
+      "false": {}
+    }
+  }
+}

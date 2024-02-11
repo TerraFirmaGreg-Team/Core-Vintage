@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 
 import java.util.Random;
 

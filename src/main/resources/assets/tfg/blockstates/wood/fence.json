@@ -9,6 +9,9 @@
   },
   "variants": {
     "normal": [
+      {}
+    ],
+    "inventory": [
       {
         "model": "tfg:wood/fence/inventory"
       }

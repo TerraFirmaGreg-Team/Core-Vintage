@@ -24,7 +24,7 @@ import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 
 import javax.annotation.Nullable;
 import java.util.Random;

@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;

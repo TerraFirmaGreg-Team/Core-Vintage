@@ -24,7 +24,7 @@ import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
-import su.terrafirmagreg.modules.wood.objects.blocks.itemblocks.ItemBlockWoodDoor;
+import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodDoor;
 
 import java.util.Random;
 
@@ -89,6 +89,6 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
+                new ModelResourceLocation(getResourceLocation(), "inventory"));
     }
 }

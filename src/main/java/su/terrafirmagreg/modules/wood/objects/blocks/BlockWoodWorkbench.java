@@ -91,13 +91,11 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
         ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(getResourceLocation())
-                        .build());
+                new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
+                new ModelResourceLocation(getResourceLocation(), "inventory"));
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -141,7 +139,7 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
         }
 
         @Override
-        public Container createContainer(InventoryPlayer inv, EntityPlayer player) {
+        public Container createContainer(@NotNull InventoryPlayer inv, @NotNull EntityPlayer player) {
             return new ContainerWoodWorkbench(inv, world, position, workbenchTFC);
         }
 

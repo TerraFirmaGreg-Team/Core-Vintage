@@ -4,10 +4,11 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import su.terrafirmagreg.api.registry.IHasModel;
+import su.terrafirmagreg.api.registry.RegistryModel;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -44,14 +45,11 @@ public abstract class BlockWood extends BlockBase implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-
-        ModelLoader.setCustomStateMapper(this,
+        RegistryModel.registerBlockModel(this,
                 new CustomStateMap.Builder()
                         .customPath(getResourceLocation())
                         .build());
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
+        RegistryModel.registerItemModel(Item.getItemFromBlock(this), getResourceLocation().toString());
     }
 }

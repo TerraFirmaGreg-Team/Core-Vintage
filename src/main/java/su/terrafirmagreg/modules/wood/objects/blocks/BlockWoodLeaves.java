@@ -8,7 +8,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -34,7 +34,7 @@ import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.util.CustomStateMap;
+import su.terrafirmagreg.api.registry.RegistryModel;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -217,18 +217,18 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@NotNull IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
         return new TETickCounter();
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
         doLeafDecay(worldIn, pos, state);
     }
 
@@ -248,13 +248,13 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    protected int getSaplingDropChance(IBlockState state) {
+    protected int getSaplingDropChance(@NotNull IBlockState state) {
         return 25;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return false;
     }
 
@@ -280,12 +280,12 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
+    public void beginLeavesDecay(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos) {
         // Don't do vanilla decay
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, IBlockState state, int fortune) {
         if (state.getValue(LEAF_STATE) != WINTER) {
             int chance = this.getSaplingDropChance(state);
             if (chance > 0) {
@@ -307,7 +307,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(@NotNull IBlockState blockState, @NotNull IBlockAccess blockAccess, @NotNull BlockPos pos, @NotNull EnumFacing side) {
         /*
          * See comment on getRenderLayer()
          */
@@ -394,17 +394,11 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
         ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(getResourceLocation())
+                new StateMap.Builder()
                         .ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE)
-                        .customVariant("type=" + getType())
                         .build());
 
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(),
-                        "state=normal,type=" + getType()));
+        RegistryModel.registerItemModel(Item.getItemFromBlock(this), 0, "normal");
     }
 
     public enum EnumLeafState implements IStringSerializable {

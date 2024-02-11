@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 
 public class BlockBase extends Block implements IHasModel {
 

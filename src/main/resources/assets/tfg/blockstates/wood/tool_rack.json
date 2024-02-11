@@ -8,6 +8,9 @@
     "normal": [
       {}
     ],
+    "inventory": [
+      {}
+    ],
     "facing": {
       "south": {},
       "west": {

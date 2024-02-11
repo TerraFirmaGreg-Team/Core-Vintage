@@ -14,14 +14,14 @@
     "normal": [
       {}
     ],
+    "inventory": [
+      {}
+    ],
     "sealed": {
       "true": {
         "model": "tfg:wood/barrel_sealed"
       },
       "false": {}
-    },
-    "inventory": [
-      {}
-    ]
+    }
   }
 }

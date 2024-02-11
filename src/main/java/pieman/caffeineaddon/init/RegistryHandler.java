@@ -15,7 +15,7 @@ import pieman.caffeineaddon.blocks.BlockCoffeeTreeLeaves;
 import pieman.caffeineaddon.blocks.TEDryingMat;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.jeicompat.OreDictionaryCompat;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 
 import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
 

@@ -11,6 +11,8 @@ import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
 
 import java.io.File;
@@ -29,18 +31,16 @@ public class CustomStateMap extends StateMapperBase {
 	private final String suffix;
 	private final List<IProperty<?>> ignored;
 	private final ResourceLocation resourceLocation;
-	private final String variant;
 
 	private CustomStateMap(Builder builder) {
 		this.name = builder.name;
 		this.suffix = builder.suffix;
 		this.ignored = builder.ignored;
 		this.resourceLocation = builder.resourceLocation;
-		this.variant = builder.variant;
 	}
 
 	@Override
-	protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+	protected @NotNull ModelResourceLocation getModelResourceLocation(IBlockState state) {
 		Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
 		String s;
 
@@ -60,52 +60,44 @@ public class CustomStateMap extends StateMapperBase {
 		}
 
 
-		var variantIn = this.getPropertyString(map, variant);
-//        if (!map.isEmpty()) {
-//            if (this.variant != null) {
-//                variantIn = variantIn + variant;
-//            }
-//            return new ModelResourceLocation(resourceLocation, variantIn);
-//        }
-
-		return new ModelResourceLocation(resourceLocation, variantIn);
+		return new ModelResourceLocation(resourceLocation, this.getPropertyString(map));
 
 
 	}
 
-	public String getPropertyString(Map<IProperty<?>, Comparable<?>> values, String variant) {
-		StringBuilder stringbuilder = new StringBuilder();
-
-		for (Map.Entry<IProperty<?>, Comparable<?>> entry : values.entrySet()) {
-			if (stringbuilder.length() != 0) {
-				stringbuilder.append(",");
-			}
-
-			IProperty<?> iproperty = entry.getKey();
-			stringbuilder.append(iproperty.getName());
-			stringbuilder.append("=");
-			stringbuilder.append(this.getPropertyName(iproperty, entry.getValue()));
-		}
-
-		if (variant != null) {
-			if (stringbuilder.length() != 0) {
-				stringbuilder.append(",");
-			}
-			stringbuilder.append(variant);
-		}
-
-		if (stringbuilder.length() == 0) {
-			stringbuilder.append("normal");
-		}
-
-		return stringbuilder.toString();
-	}
+//	public String getPropertyString(Map<IProperty<?>, Comparable<?>> values, String variant) {
+//		StringBuilder stringbuilder = new StringBuilder();
+//
+//		for (Map.Entry<IProperty<?>, Comparable<?>> entry : values.entrySet()) {
+//			if (stringbuilder.length() != 0) {
+//				stringbuilder.append(",");
+//			}
+//
+//			IProperty<?> iproperty = entry.getKey();
+//			stringbuilder.append(iproperty.getName());
+//			stringbuilder.append("=");
+//			stringbuilder.append(this.getPropertyName(iproperty, entry.getValue()));
+//		}
+//
+//		if (variant != null) {
+//			if (stringbuilder.length() != 0) {
+//				stringbuilder.append(",");
+//			}
+//			stringbuilder.append(variant);
+//		}
+//
+//		if (stringbuilder.length() == 0) {
+//			stringbuilder.append("normal");
+//		}
+//
+//		return stringbuilder.toString();
+//	}
 
 	private <T extends Comparable<T>> String getPropertyName(IProperty<T> property, Comparable<?> value) {
 		return property.getName((T) value);
 	}
 
-	private <T extends Comparable<T>> String removeName(IProperty<T> property, Map<IProperty<?>, Comparable<?>> values) {
+    private <T extends Comparable<T>> String removeName(IProperty<T> property, Map<IProperty<?>, Comparable<?>> values) {
 		return property.getName((T) values.remove(this.name));
 	}
 
@@ -116,9 +108,6 @@ public class CustomStateMap extends StateMapperBase {
 		private IProperty<?> name;
 		private String suffix;
 		private ResourceLocation resourceLocation;
-		private String variant;
-
-		private String replaceResourceLocation;
 
 		public Builder withName(IProperty<?> builderPropertyIn) {
 			this.name = builderPropertyIn;
@@ -136,23 +125,6 @@ public class CustomStateMap extends StateMapperBase {
 		}
 
 		public Builder customPath(ResourceLocation resourceLocation) {
-			this.resourceLocation = resourceLocation;
-			return this;
-		}
-
-		public Builder customVariant(String variant) {
-			this.variant = variant;
-			return this;
-		}
-
-
-		public Builder customPathReplace(ResourceLocation resourceLocation, CharSequence target, CharSequence replacement) {
-			File blockstateFilePath = new File(rootFolder + "/resources/" + Tags.MOD_ID + "/blockstates/" + resourceLocation.getPath() + ".json");
-			try {
-				this.replaceResourceLocation = new String(Files.readAllBytes(blockstateFilePath.toPath())).replace(target, replacement);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			this.resourceLocation = resourceLocation;
 			return this;
 		}

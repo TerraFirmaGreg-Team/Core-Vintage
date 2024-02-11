@@ -3,8 +3,8 @@
   "defaults": {
     "model": "tfg:wood/log",
     "textures": {
-      "side": "tfg:blocks/wood/log/side/acacia",
-      "end": "tfg:blocks/wood/log/end/acacia"
+      "side": "tfg:blocks/wood/log/side/black_walnut",
+      "end": "tfg:blocks/wood/log/end/black_walnut"
     }
   },
   "variants": {

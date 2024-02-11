@@ -6,15 +6,15 @@ import net.minecraft.util.ResourceLocation;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IAutoRegistry;
+import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.api.util.Helpers;
-import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 
 
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IWoodType, IAutoRegistry, IHasModel, IItemSize {
+public interface IWoodBlock extends IWoodType, IAutoRegistry, IItemSize {
 
     /**
      * Возвращает вариант деревянного блока.

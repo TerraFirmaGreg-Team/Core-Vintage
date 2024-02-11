@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/sapling",
+    "textures": {
+      "side": "tfg:blocks/wood/log/side/mountain_ash",
+      "leaves": "tfg:blocks/wood/leaves/mountain_ash"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+  }
+}

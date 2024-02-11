@@ -12,13 +12,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
-public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock {
+public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock, IHasModel {
 
     private final WoodBlockVariant variant;
     private final WoodType type;
@@ -64,6 +65,6 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
+                new ModelResourceLocation(getResourceLocation(), "inventory"));
     }
 }

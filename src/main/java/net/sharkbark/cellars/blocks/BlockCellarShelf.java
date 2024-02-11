@@ -19,7 +19,7 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.blocks.tileentity.TECellarShelf;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 import net.sharkbark.cellars.util.Reference;
 
 import javax.annotation.Nullable;

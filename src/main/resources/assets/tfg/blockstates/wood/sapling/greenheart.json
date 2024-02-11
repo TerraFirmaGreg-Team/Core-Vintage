@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/sapling",
+    "textures": {
+      "side": "tfg:blocks/wood/log/side/greenheart",
+      "leaves": "tfg:blocks/wood/leaves/greenheart"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+  }
+}

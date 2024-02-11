@@ -8,7 +8,7 @@ import net.minecraft.item.ItemBlock;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 
 public class BlockCoffeeTreeSapling extends BlockFruitTreeSapling implements IHasModel {
 

@@ -7,6 +7,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +36,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -47,7 +49,7 @@ import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
  * @see TEWoodBarrel
  * @see BarrelRecipe
  */
-public class BlockWoodBarrel extends BlockWood implements IItemSize {
+public class BlockWoodBarrel extends BlockWood implements ICustomMesh {
 
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
@@ -294,21 +296,21 @@ public class BlockWoodBarrel extends BlockWood implements IItemSize {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        final ModelResourceLocation sealed = new ModelResourceLocation(getResourceLocation(), "sealed=true");
-        final ModelResourceLocation unsealed = new ModelResourceLocation(getResourceLocation(), "sealed=false");
-
         ModelLoader.setCustomStateMapper(this,
                 new CustomStateMap.Builder()
                         .customPath(getResourceLocation())
                         .build());
 
-        ModelLoader.setCustomMeshDefinition(
-                Item.getItemFromBlock(this),
-                stack -> stack.getTagCompound() != null ? sealed : unsealed);
-
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(), "normal"));
 
+    }
+
+    @Override
+    public ItemMeshDefinition getCustomMesh() {
+        final ModelResourceLocation sealed = new ModelResourceLocation(getResourceLocation(), "sealed=true");
+        final ModelResourceLocation unsealed = new ModelResourceLocation(getResourceLocation(), "sealed=false");
+        return stack -> stack.getTagCompound() != null ? sealed : unsealed;
     }
 }

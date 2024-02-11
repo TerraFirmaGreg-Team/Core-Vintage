@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/leaves",
+    "textures": {
+      "all": "tfg:blocks/wood/leaves/angelim"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "state": {
+      "normal": {},
+      "flowering": {},
+      "fruit": {},
+      "autumn": {},
+      "winter": {}
+    }
+  }
+}

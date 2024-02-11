@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 
 import javax.annotation.Nullable;
 

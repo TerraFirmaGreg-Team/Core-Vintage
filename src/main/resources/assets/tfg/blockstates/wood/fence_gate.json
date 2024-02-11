@@ -1,7 +1,6 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfg:wood/fence_gate/closed",
     "textures": {
       "planks": "tfg:blocks/wood/planks"
     },
@@ -10,6 +9,11 @@
   "variants": {
     "normal": [
       {}
+    ],
+    "inventory": [
+      {
+        "model": "tfg:wood/fence_gate/closed"
+      }
     ],
     "facing": {
       "south": {},

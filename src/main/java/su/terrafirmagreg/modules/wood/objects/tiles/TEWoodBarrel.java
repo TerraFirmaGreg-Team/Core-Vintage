@@ -39,7 +39,7 @@ import net.dries007.tfc.util.calendar.ICalendarTickable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.blocks.itemblocks.ItemBlockWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
 
 import java.util.*;
 import java.util.stream.Collectors;

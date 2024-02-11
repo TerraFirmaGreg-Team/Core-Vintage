@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.registry;
 
-import lombok.Setter;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
@@ -41,7 +39,6 @@ import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
-import su.terrafirmagreg.api.util.IHasModel;
 import su.terrafirmagreg.api.util.LootBuilder;
 
 import java.util.List;
@@ -258,7 +255,7 @@ public class Registry {
         if (block instanceof IAutoRegistry provider) {
             ItemBlock itemBlock = provider.getItemBlock();
             String id = provider.getName();
-
+            this.registerClientModelRegistration(provider);
             this.registerBlock(block, itemBlock, id);
         }
     }
@@ -277,6 +274,7 @@ public class Registry {
         block.setRegistryName(this.modid, id);
         block.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
         this.blocks.add(block);
+
 
         if (itemBlock != null) this.registerItem(itemBlock, id);
 
@@ -299,6 +297,7 @@ public class Registry {
         if (item instanceof IAutoRegistry provider) {
             String id = provider.getName();
 
+            this.registerClientModelRegistration(provider);
             this.registerItem(item, id);
         }
     }
@@ -322,16 +321,7 @@ public class Registry {
 
         if (GameUtils.isClient()) {
 
-            if (item instanceof ICustomMesh mesh) {
-
-                this.customMeshes.add(mesh);
-                ModelLoader.setCustomMeshDefinition(item, mesh.getCustomMesh());
-            }
-
-            if (item instanceof IColorfulItem) {
-
-                this.coloredItems.add(item);
-            }
+            if (item instanceof IColorfulItem) this.coloredItems.add(item);
         }
     }
 
@@ -524,47 +514,6 @@ public class Registry {
 
 
     //region // ===== Models =======================================================================================================================//
-
-    /**
-     * Registers an inventory model for a block. The model name is equal to the registry name
-     * of the block. Only set for meta 0.
-     *
-     * @param block The block to register the model for.
-     */
-    @SideOnly(Side.CLIENT)
-    public void registerInventoryModel(@Nonnull Block block) {
-        if (block instanceof IHasModel model) model.onModelRegister();
-        else this.registerBlockModel(block, new StateMap.Builder().build());
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void registerBlockModel(@Nonnull Block block, IStateMapper stateMap) {
-        ModelLoader.setCustomStateMapper(block, stateMap);
-    }
-
-    /**
-     * Registers an inventory model for an item.The model name is equal to the registry name of
-     * the item. Only set for meta 0.
-     *
-     * @param item The item to register the model for.
-     */
-    @SideOnly(Side.CLIENT)
-    public void registerInventoryModel(@Nonnull Item item) {
-        if (item instanceof IHasModel model) model.onModelRegister();
-        else this.registerItemModel(item, 0, item.getRegistryName().toString());
-    }
-
-    /**
-     * Registers an inventory model for an item.
-     *
-     * @param item The item to register the model for.
-     * @param meta The meta to register the model for.
-     * @param modelName The name of the model to register.
-     */
-    @SideOnly(Side.CLIENT)
-    public void registerItemModel(@Nonnull Item item, int meta, @Nonnull String modelName) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(modelName, "normal"));
-    }
 
 
     @SideOnly(Side.CLIENT)

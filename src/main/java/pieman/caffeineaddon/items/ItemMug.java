@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 
 import javax.annotation.Nonnull;
 

@@ -13,6 +13,9 @@
     "normal": [
       {}
     ],
+    "inventory": [
+      {}
+    ],
     "half": {
       "bottom": {},
       "top": {

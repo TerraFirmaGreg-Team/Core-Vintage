@@ -1,0 +1,48 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/fence_log/post",
+    "textures": {
+      "planks": "tfg:blocks/wood/planks",
+      "side": "tfg:blocks/wood/log/side/bald_cypress",
+      "end": "tfg:blocks/wood/log/end/bald_cypress"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {
+        "model": "tfg:wood/fence_log/inventory"
+      }
+    ],
+    "north": {
+      "true": {
+        "submodel": "tfg:wood/fence_log/side"
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "submodel": "tfg:wood/fence_log/side",
+        "y": 90
+      },
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "submodel": "tfg:wood/fence_log/side",
+        "y": 180
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "submodel": "tfg:wood/fence_log/side",
+        "y": 270
+      },
+      "false": {}
+    }
+  }
+}

@@ -68,6 +68,6 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
 
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
+                new ModelResourceLocation(getResourceLocation(), "inventory"));
     }
 }

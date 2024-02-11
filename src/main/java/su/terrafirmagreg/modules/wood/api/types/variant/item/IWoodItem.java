@@ -6,13 +6,13 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IAutoRegistry;
 import su.terrafirmagreg.api.util.Helpers;
-import su.terrafirmagreg.api.util.IHasModel;
+import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface IWoodItem extends IWoodType, IAutoRegistry, IHasModel, IItemSize {
+public interface IWoodItem extends IWoodType, IAutoRegistry, IItemSize {
 
     /**
      * Возвращает вариант блока породы.

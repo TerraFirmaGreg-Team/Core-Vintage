@@ -78,10 +78,4 @@ public class ItemRockLoose extends ItemBase implements IRockItem {
         if (type.isFlux())
             tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
     }
-
-    @Override
-    public void onModelRegister() {
-        ModelRegistrationHelper.registerItemModel(this);
-
-    }
 }

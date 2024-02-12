@@ -1,7 +1,6 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfg:rock/speleothem_inventory",
     "uvlock": true,
     "textures": {
       "all": "tfg:blocks/rock/raw/dacite"
@@ -11,15 +10,20 @@
     "normal": [
       {}
     ],
+    "inventory": [
+      {
+        "model": "tfg:rock/speleothem/inventory"
+      }
+    ],
     "size": {
       "small": {
-        "model": "tfg:rock/speleothem_small"
+        "model": "tfg:rock/speleothem/small"
       },
       "medium": {
-        "model": "tfg:rock/speleothem_medium"
+        "model": "tfg:rock/speleothem/medium"
       },
       "big": {
-        "model": "tfg:rock/speleothem_big"
+        "model": "tfg:rock/speleothem/big"
       }
     }
   }

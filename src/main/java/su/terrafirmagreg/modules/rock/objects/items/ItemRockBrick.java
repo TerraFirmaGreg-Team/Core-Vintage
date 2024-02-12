@@ -41,10 +41,4 @@ public class ItemRockBrick extends ItemBase implements IRockItem {
     public Weight getWeight(@NotNull ItemStack stack) {
         return Weight.LIGHT; // Stacksize = 32
     }
-
-    @Override
-    public void onModelRegister() {
-        ModelRegistrationHelper.registerItemModel(this);
-
-    }
 }

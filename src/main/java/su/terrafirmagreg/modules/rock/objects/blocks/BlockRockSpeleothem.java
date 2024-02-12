@@ -5,6 +5,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -17,7 +18,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
+
+import net.minecraftforge.client.model.ModelLoader;
+
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.registry.IHasModel;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
@@ -28,7 +34,7 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 
-public class BlockRockSpeleothem extends BlockRock {
+public class BlockRockSpeleothem extends BlockRock implements IHasModel {
 
     public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
@@ -169,6 +175,13 @@ public class BlockRockSpeleothem extends BlockRock {
 
     private boolean isThis(IBlockAccess world, BlockPos pos) {
         return world.getBlockState(pos).getBlock() instanceof BlockRockSpeleothem;
+    }
+
+    @Override
+    public void onModelRegister() {
+
+        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
     }
 
 

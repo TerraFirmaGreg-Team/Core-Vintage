@@ -1,7 +1,6 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "button",
     "uvlock": true,
     "textures": {
       "texture": "tfg:blocks/rock/raw/blaimorite"
@@ -9,12 +8,17 @@
   },
   "variants": {
     "normal": [
+      {}
+    ],
+    "inventory": [
       {
         "model": "button_inventory"
       }
     ],
     "powered": {
-      "false": {},
+      "false": {
+        "model": "button"
+      },
       "true": {
         "model": "button_pressed"
       }

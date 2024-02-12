@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.rock.api.types.type.IRockType;
 /**
  * Интерфейс, представляющий предмет породы.
  */
-public interface IRockItem extends IRockType, IAutoRegistry, IItemSize, IHasModel {
+public interface IRockItem extends IRockType, IAutoRegistry, IItemSize {
 
     /**
      * Возвращает вариант предмета.

@@ -43,10 +43,4 @@ public class ItemRockGravel extends ItemBase implements IRockItem {
         return Weight.LIGHT; // Stacksize = 32
     }
 
-    @Override
-    public void onModelRegister() {
-        ModelRegistrationHelper.registerItemModel(this);
-
-    }
-
 }

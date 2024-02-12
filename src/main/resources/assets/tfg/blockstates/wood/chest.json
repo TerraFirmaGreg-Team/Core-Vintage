@@ -12,6 +12,11 @@
       {}
     ],
     "inventory": [
+      {
+        "model": "tfg:rock/speleothem_inventory"
+      }
+    ],
+    "inventory": [
       {}
     ],
     "facing": {

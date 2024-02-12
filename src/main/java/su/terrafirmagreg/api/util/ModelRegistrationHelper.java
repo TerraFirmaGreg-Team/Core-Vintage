@@ -84,10 +84,14 @@ public class ModelRegistrationHelper {
         Block block = blockState.getBlock();
         Item item = Item.getItemFromBlock(block);
 
+        ResourceLocation registryName = block.getRegistryName();
+        Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
+
         ModelRegistrationHelper.registerItemModel(
+
                 item,
                 new ModelResourceLocation(
-                        Preconditions.checkNotNull(block.getRegistryName(), "Block %s has null registry name", block),
+                        registryName,
                         PROPERTY_STRING_MAPPER.getPropertyString(blockState.getProperties())
                 )
         );

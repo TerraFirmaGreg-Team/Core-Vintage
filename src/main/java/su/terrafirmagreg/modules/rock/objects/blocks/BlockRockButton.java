@@ -9,6 +9,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -21,7 +22,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -29,7 +32,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import java.util.List;
 
 @Getter
-public class BlockRockButton extends BlockButtonStone implements IRockBlock {
+public class BlockRockButton extends BlockButtonStone implements IRockBlock, IHasModel {
 
     private final RockBlockVariant blockVariant;
     private final RockType type;
@@ -64,5 +67,12 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
         tooltip.add(new TextComponentTranslation(
                 "rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+    }
+
+    @Override
+    public void onModelRegister() {
+
+        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
     }
 }

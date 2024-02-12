@@ -19,6 +19,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
@@ -33,10 +34,10 @@ public class BlockRockAnvil extends BlockRock {
 
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockBlockVariant variant, RockType type) {
-        super(variant, type);
+    public BlockRockAnvil(RockBlockVariant blockVariant, RockType type) {
+        super(blockVariant, type);
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
     }
 
     @Override

@@ -15,10 +15,10 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
  */
 public class BlockRockMossy extends BlockRock {
 
-    public BlockRockMossy(RockBlockVariant variant, RockType type) {
-        super(variant, type);
+    public BlockRockMossy(RockBlockVariant blockVariant, RockType type) {
+        super(blockVariant, type);
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
     }
 
     @NotNull

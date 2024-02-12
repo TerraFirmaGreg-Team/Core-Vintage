@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -33,21 +35,22 @@ import su.terrafirmagreg.modules.rock.objects.itemblocks.ItemRockSlab;
 import java.util.List;
 import java.util.Random;
 
+@Getter
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-    private final RockBlockVariant variant;
+    private final RockBlockVariant blockVariant;
     private final RockType type;
     protected Block block;
     protected Half halfSlab;
     protected Double doubleSlab;
 
-    private BlockRockSlab(RockBlockVariant variant, RockType type) {
+    private BlockRockSlab(RockBlockVariant blockVariant, RockType type) {
         super(Material.ROCK);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
-        this.block = getFullBlockFromSlab(variant, type);
+        this.block = getFullBlockFromSlab(blockVariant, type);
         this.useNeighborBrightness = true;
 
         var state = blockState.getBaseState();
@@ -76,18 +79,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
             case "slab/bricks" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, type);
             default -> throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
         };
-    }
-
-    @NotNull
-    @Override
-    public RockBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public RockType getType() {
-        return type;
     }
 
     @Override
@@ -218,8 +209,8 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
             this.doubleSlab.halfSlab = this;
             this.halfSlab = this;
 
-            OreDictionaryHelper.register(this, variant.toString());
-            OreDictionaryHelper.register(this, variant.toString(), type.toString());
+            //OreDictionaryHelper.register(this, variant.toString());
+            //OreDictionaryHelper.register(this, variant.toString(), type.toString());
         }
 
         @Override

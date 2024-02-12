@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,34 +23,23 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import java.util.List;
 
+@Getter
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
 
-    private final RockBlockVariant variant;
+    private final RockBlockVariant blockVariant;
     private final RockType type;
 
-    public BlockRockPressurePlate(RockBlockVariant variant, RockType type) {
+    public BlockRockPressurePlate(RockBlockVariant blockVariant, RockType type) {
         super(Material.ROCK, Sensitivity.MOBS);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.STONE);
         setHardness(0.5f);
 
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
         OreDictionaryHelper.register(this, "pressure_plate_stone");
-    }
-
-    @NotNull
-    @Override
-    public RockBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public RockType getType() {
-        return type;
     }
 
     @Override

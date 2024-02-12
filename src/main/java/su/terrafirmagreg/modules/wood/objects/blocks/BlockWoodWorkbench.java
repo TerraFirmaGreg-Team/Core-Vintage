@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -33,15 +35,15 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodWorkbench;
 
-
+@Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodWorkbench(WoodBlockVariant variant, WoodType type) {
+    public BlockWoodWorkbench(WoodBlockVariant blockVariant, WoodType type) {
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -53,16 +55,6 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
 
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable
@@ -104,12 +96,12 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     public static class InterfaceCraftingTable implements IInteractionObject {
 
         //todo: replace with proper workbench mechanics + normal forge gui code
-        private final BlockWoodWorkbench workbenchTFC;
+        private final BlockWoodWorkbench workbench;
         private final World world;
         private final BlockPos position;
 
-        public InterfaceCraftingTable(BlockWoodWorkbench workbenchTFC, World worldIn, BlockPos pos) {
-            this.workbenchTFC = workbenchTFC;
+        public InterfaceCraftingTable(BlockWoodWorkbench workbench, World worldIn, BlockPos pos) {
+            this.workbench = workbench;
             this.world = worldIn;
             this.position = pos;
         }
@@ -135,12 +127,12 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
          */
         @Override
         public ITextComponent getDisplayName() {
-            return new TextComponentTranslation(workbenchTFC.getTranslationKey() + ".name");
+            return new TextComponentTranslation(workbench.getTranslationKey() + ".name");
         }
 
         @Override
         public Container createContainer(@NotNull InventoryPlayer inv, @NotNull EntityPlayer player) {
-            return new ContainerWoodWorkbench(inv, world, position, workbenchTFC);
+            return new ContainerWoodWorkbench(inv, world, position, workbench);
         }
 
         @Override

@@ -9,8 +9,8 @@ import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 public class ItemWoodAnimalCart extends ItemWoodSupplyCart {
 
-    public ItemWoodAnimalCart(WoodItemVariant variant, WoodType type) {
-        super(variant, type);
+    public ItemWoodAnimalCart(WoodItemVariant itemVariant, WoodType type) {
+        super(itemVariant, type);
 
     }
 

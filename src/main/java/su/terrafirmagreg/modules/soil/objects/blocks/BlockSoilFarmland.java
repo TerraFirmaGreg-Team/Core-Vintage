@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import lombok.Getter;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -40,7 +41,7 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import java.util.Random;
 
-
+@Getter
 public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IHasModel, IColorfulBlock {
 
     public static final int[] TINT = new int[]{
@@ -55,15 +56,15 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
     };
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    private final SoilBlockVariant variant;
+    private final SoilBlockVariant blockVariant;
     private final SoilType type;
 
-    public BlockSoilFarmland(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilFarmland(SoilBlockVariant blockVariant, SoilType type) {
 
-        if (variant.canFall())
-            FallingBlockManager.registerFallable(this, variant.getSpecification());
+        if (blockVariant.canFall())
+            FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
         this.useNeighborBrightness = true;
 
@@ -73,7 +74,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
         setDefaultState(blockState.getBaseState()
                 .withProperty(BlockFarmland.MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
 
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        //OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
     }
 
 
@@ -89,18 +90,6 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
                 entity.setPositionAndUpdate(entity.posX, entity.posY + d0 + 0.001D, entity.posZ);
             }
         }
-    }
-
-    @NotNull
-    @Override
-    public SoilBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public SoilType getType() {
-        return type;
     }
 
     @Override

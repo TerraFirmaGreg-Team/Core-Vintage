@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,49 +15,40 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import java.util.List;
 
+@Getter
 public abstract class BlockRock extends BlockBase implements IRockBlock {
 
-    private final RockBlockVariant variant;
+    private final RockBlockVariant blockVariant;
     private final RockType type;
 
-    public BlockRock(Material material, RockBlockVariant variant, RockType type) {
+    public BlockRock(Material material, RockBlockVariant blockVariant, RockType type) {
         super(material);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
 
-        if (getItemBlock() != null) {
-            OreDictionaryHelper.register(this, variant.toString());
-            OreDictionaryHelper.register(this, variant.toString(), type.toString());
-        }
+//        if (getItemBlock() != null) {
+//            OreDictionaryHelper.register(this, blockVariant.toString());
+//            OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+//        }
 
     }
 
-    public BlockRock(RockBlockVariant variant, RockType type) {
-        this(Material.ROCK, variant, type);
+    public BlockRock(RockBlockVariant blockVariant, RockType type) {
+        this(Material.ROCK, blockVariant, type);
     }
 
-    @NotNull
-    @Override
-    public RockBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public RockType getType() {
-        return type;
-    }
 
     @Override
     @SideOnly(Side.CLIENT)

@@ -11,12 +11,12 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 public class BlockRockGravel extends BlockRockFallable {
 
-    public BlockRockGravel(RockBlockVariant variant, RockType type) {
-        super(Material.SAND, variant, type);
+    public BlockRockGravel(RockBlockVariant blockVariant, RockType type) {
+        super(Material.SAND, blockVariant, type);
 
         setSoundType(SoundType.GROUND);
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
         //DirtHelper.registerSoil(this, DirtHelper.GRAVELLIKE);
     }
 

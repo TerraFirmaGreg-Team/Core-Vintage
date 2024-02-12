@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -17,13 +19,14 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
+@Getter
 public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodButton(WoodBlockVariant variant, WoodType type) {
-        this.variant = variant;
+    public BlockWoodButton(WoodBlockVariant blockVariant, WoodType type) {
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setHardness(0.5F);
@@ -33,16 +36,6 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
 
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable

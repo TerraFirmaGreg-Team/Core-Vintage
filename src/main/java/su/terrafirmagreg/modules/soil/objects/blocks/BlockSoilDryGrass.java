@@ -20,8 +20,8 @@ import java.util.Random;
 
 public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlockVariant {
 
-    public BlockSoilDryGrass(SoilBlockVariant variant, SoilType type) {
-        super(variant, type);
+    public BlockSoilDryGrass(SoilBlockVariant blockVariant, SoilType type) {
+        super(blockVariant, type);
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }

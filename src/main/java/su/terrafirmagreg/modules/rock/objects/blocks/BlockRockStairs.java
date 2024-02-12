@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,15 +23,16 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import java.util.List;
 
+@Getter
 public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
-    private final RockBlockVariant variant;
+    private final RockBlockVariant blockVariant;
     private final RockType type;
 
-    public BlockRockStairs(RockBlockVariant variant, RockType type) {
+    public BlockRockStairs(RockBlockVariant blockVariant, RockType type) {
         super(Blocks.COBBLESTONE.getDefaultState());
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
         this.useNeighborBrightness = true;
 
@@ -37,19 +40,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
 
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @NotNull
-    @Override
-    public RockBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public RockType getType() {
-        return type;
+        //OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
     }
 
     @Override

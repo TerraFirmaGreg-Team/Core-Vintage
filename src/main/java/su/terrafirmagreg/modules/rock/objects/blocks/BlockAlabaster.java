@@ -14,27 +14,27 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 public class BlockAlabaster extends BlockBase implements IItemSize {
 
-    private final RockBlockVariant variant;
+    private final RockBlockVariant blockVariant;
     private final EnumColor color;
 
-    public BlockAlabaster(RockBlockVariant variant, EnumColor color) {
+    public BlockAlabaster(RockBlockVariant blockVariant, EnumColor color) {
         super(Material.ROCK);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.color = color;
 
         setCreativeTab(ModuleCore.MISC_TAB);
         setSoundType(SoundType.STONE);
         setHardness(1.0F);
 
-        OreDictionaryHelper.register(this, "alabaster");
-        OreDictionaryHelper.register(this, "alabaster", variant.toString());
-        OreDictionaryHelper.register(this, "alabaster", variant.toString(), color.getName());
+//        OreDictionaryHelper.register(this, "alabaster");
+//        OreDictionaryHelper.register(this, "alabaster", blockVariant.toString());
+//        OreDictionaryHelper.register(this, "alabaster", blockVariant.toString(), color.getName());
     }
 
 	@Override
     public @NotNull String getName() {
-        return String.format("rock/alabaster/%s/%s", variant, color.getName());
+        return String.format("rock/alabaster/%s/%s", blockVariant, color.getName());
     }
 
 

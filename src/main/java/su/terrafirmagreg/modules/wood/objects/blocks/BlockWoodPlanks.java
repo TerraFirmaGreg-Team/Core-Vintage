@@ -8,8 +8,8 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 public class BlockWoodPlanks extends BlockWood {
 
-    public BlockWoodPlanks(WoodBlockVariant variant, WoodType type) {
-        super(variant, type);
+    public BlockWoodPlanks(WoodBlockVariant blockVariant, WoodType type) {
+        super(blockVariant, type);
 
         setHardness(2.0F);
         setResistance(5.0F);

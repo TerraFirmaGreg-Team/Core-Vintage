@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 
+import lombok.Getter;
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import net.minecraft.block.Block;
@@ -30,6 +31,7 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import java.util.Random;
 
+@Getter
 public class BlockSoilMycelium extends BlockMycelium implements ISoilBlockVariant {
 
     public static final PropertyBool NORTH = PropertyBool.create("north");
@@ -37,15 +39,15 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlockVarian
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
 
-    private final SoilBlockVariant variant;
+    private final SoilBlockVariant blockVariant;
     private final SoilType type;
 
-    public BlockSoilMycelium(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilMycelium(SoilBlockVariant blockVariant, SoilType type) {
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
-        if (variant.canFall()) FallingBlockManager.registerFallable(this, variant.getSpecification());
+        if (blockVariant.canFall()) FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 
 
         setDefaultState(this.blockState.getBaseState()
@@ -57,18 +59,6 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlockVarian
 
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
-    }
-
-    @NotNull
-    @Override
-    public SoilBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public SoilType getType() {
-        return type;
     }
 
     @Override

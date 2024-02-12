@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public interface IAutoRegistry extends IHasModel {
+public interface IAutoRegistry {
 
     /**
      * Возвращает объект ItemBlock, связанный с данным блоком.

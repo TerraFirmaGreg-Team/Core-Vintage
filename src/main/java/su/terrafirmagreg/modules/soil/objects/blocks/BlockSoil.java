@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import lombok.Getter;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -22,37 +23,26 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 import java.util.Random;
 
+@Getter
 public abstract class BlockSoil extends BlockBase implements ISoilBlockVariant {
 
-    private final SoilBlockVariant variant;
+    private final SoilBlockVariant blockVariant;
     private final SoilType type;
 
 
-    public BlockSoil(SoilBlockVariant variant, SoilType type) {
+    public BlockSoil(SoilBlockVariant blockVariant, SoilType type) {
         super(Material.GROUND);
 
-        if (variant.canFall()) FallingBlockManager.registerFallable(this, variant.getSpecification());
+        if (blockVariant.canFall()) FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.GROUND);
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
 
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @NotNull
-    @Override
-    public SoilBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public SoilType getType() {
-        return type;
+        //OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
     }
 
     @Override
@@ -64,7 +54,7 @@ public abstract class BlockSoil extends BlockBase implements ISoilBlockVariant {
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random rand) {
-        if (variant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+        if (blockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();

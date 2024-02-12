@@ -12,7 +12,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface IWoodItem extends IWoodType, IAutoRegistry, IItemSize {
+public interface IWoodItem extends IWoodType, IAutoRegistry, IItemSize, IHasModel {
 
     /**
      * Возвращает вариант блока породы.

@@ -1,10 +1,11 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -21,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -37,7 +37,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.registry.RegistryModel;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -46,7 +46,7 @@ import java.util.*;
 
 
 @MethodsReturnNonnullByDefault
-
+@Getter
 public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
     public static final PropertyBool PLACED = PropertyBool.create("placed");
@@ -56,11 +56,11 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodLog(WoodBlockVariant variant, WoodType type) {
-        this.variant = variant;
+    public BlockWoodLog(WoodBlockVariant blockVariant, WoodType type) {
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setTickRandomly(true);
@@ -80,16 +80,6 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 //        if (type.canMakeTannin()) {
 //            OreDictionaryHelper.register(this, variant.toString(), "wood", "tannin");
 //        }
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable
@@ -331,7 +321,6 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockWoodLog.PLACED).build());
-        RegistryModel.registerItemModel(Item.getItemFromBlock(this), 0, "normal");
+        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
     }
 }

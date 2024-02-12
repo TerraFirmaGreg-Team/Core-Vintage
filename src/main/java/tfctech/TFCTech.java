@@ -25,7 +25,7 @@ import static su.terrafirmagreg.Constants.MODID_TFCTECH;
 public class TFCTech {
 
 	public static final String NAME = "TFCTech Unofficial";
-	public static final String DEPENDENCIES = "required-after:tfc;after:ic2;after:gregtech";
+	public static final String DEPENDENCIES = "after:tfc;after:ic2;after:gregtech";
 	private static final boolean signedBuild = true;
 	@SuppressWarnings("FieldMayBeFinal")
 	@Mod.Instance

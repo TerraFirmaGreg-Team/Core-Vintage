@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import lombok.Getter;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -29,17 +29,18 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import java.util.Random;
 
+@Getter
 public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlockVariant {
 
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
-    private final SoilBlockVariant variant;
+    private final SoilBlockVariant blockVariant;
     private final SoilType type;
 
-    public BlockSoilGrassPath(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilGrassPath(SoilBlockVariant blockVariant, SoilType type) {
 
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
         this.useNeighborBrightness = true;
 
@@ -48,19 +49,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlockVari
         setHarvestLevel("shovel", 0);
         setLightOpacity(255);
 
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @NotNull
-    @Override
-    public SoilBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public SoilType getType() {
-        return type;
+        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
     @Override

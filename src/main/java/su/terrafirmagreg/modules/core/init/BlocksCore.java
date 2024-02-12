@@ -4,6 +4,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import su.terrafirmagreg.api.registry.Registry;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.core.objects.blocks.BlockDebug;
 
 public final class BlocksCore {
@@ -19,6 +20,13 @@ public final class BlocksCore {
 
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
+//        registry.registerClientModel(() -> {
+//            ModelRegistrationHelper.registerBlockItemModels(
+//                    DEBUG
+//
+//
+//            );
+//        });
     }
 
 }

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import lombok.Getter;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -10,42 +11,32 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 
+@Getter
 public class ItemWoodSupplyCart extends ItemBase implements IWoodItem {
 
+    private final WoodItemVariant itemVariant;
     private final WoodType type;
-    private final WoodItemVariant variant;
 
-    public ItemWoodSupplyCart(WoodItemVariant variant, WoodType type) {
+
+    public ItemWoodSupplyCart(WoodItemVariant itemVariant, WoodType type) {
         this.type = type;
-        this.variant = variant;
+        this.itemVariant = itemVariant;
         this.setMaxStackSize(1);
 
 //        OreDictionaryHelper.onRegister(this, variant.toString());
 //        OreDictionaryHelper.onRegister(this, variant.toString(), type.toString());
-    }
-
-    @NotNull
-    @Override
-    public WoodItemVariant getItemVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @NotNull
@@ -95,7 +86,7 @@ public class ItemWoodSupplyCart extends ItemBase implements IWoodItem {
 
     @Override
     public void onModelRegister() {
-        ModelLoader.setCustomModelResourceLocation(this, 0,
-                new ModelResourceLocation(getResourceLocation(), "inventory"));
+        ModelRegistrationHelper.registerItemModel(this, this.getResourceLocation().toString());
+
     }
 }

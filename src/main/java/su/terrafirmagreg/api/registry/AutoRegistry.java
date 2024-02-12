@@ -13,6 +13,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -28,6 +29,7 @@ import lombok.Getter;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
+import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.util.Helpers;
 
 /**
@@ -140,22 +142,13 @@ public class AutoRegistry {
 
     @SideOnly(Side.CLIENT)
     public void onRegisterModels(ModelRegistryEvent event) {
-
         for (var model : this.registry.getModels()) {
             model.onModelRegister();
         }
 
-        for (var item : this.registry.getItems()) {
-            RegistryModel.registerInventoryModel(item);
+        for (var item : this.registry.getCustomMeshes()) {
+            ModelLoader.setCustomMeshDefinition(item, ((ICustomMesh) item).getCustomMesh());
         }
-
-        for (var block : this.registry.getBlocks()) {
-            RegistryModel.registerInventoryModel(block);
-        }
-
-
-
-
     }
 
     @SideOnly(Side.CLIENT)
@@ -169,7 +162,7 @@ public class AutoRegistry {
 
     @SideOnly(Side.CLIENT)
     public void onRegisterEntityRenderingHandler() {
-        for (var provider : this.registry.getEntities2()) {
+        for (var provider : this.registry.getEntities_new()) {
             IRenderFactory<? super Entity> renderFactory = provider.getEntityRenderer();
 
             if (renderFactory != null) RenderingRegistry.registerEntityRenderingHandler(provider.getEntityClass(), renderFactory);

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -8,7 +10,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -22,7 +23,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -34,7 +34,7 @@ import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.registry.RegistryModel;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -47,15 +47,16 @@ import static net.dries007.tfc.Constants.RNG;
 import static su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 
+@Getter
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
     public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
     public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodLeaves(WoodBlockVariant variant, WoodType type) {
-        this.variant = variant;
+    public BlockWoodLeaves(WoodBlockVariant blockVariant, WoodType type) {
+        this.blockVariant = blockVariant;
         this.type = type;
 
         this.leavesFancy = true; // Fast / Fancy graphics works correctly
@@ -71,16 +72,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable
@@ -393,12 +384,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new StateMap.Builder()
-                        .ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE)
-                        .build());
-
-        RegistryModel.registerItemModel(Item.getItemFromBlock(this), 0, "normal");
+        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
     }
 
     public enum EnumLeafState implements IStringSerializable {

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import lombok.Getter;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.GrassColorHandler;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
@@ -39,6 +39,7 @@ import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 
 import java.util.Random;
 
+@Getter
 public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, IColorfulBlock {
 
     // Used for connected textures only.
@@ -47,15 +48,15 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
 
-    private final SoilBlockVariant variant;
+    private final SoilBlockVariant blockVariant;
     private final SoilType type;
 
-    public BlockSoilGrass(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilGrass(SoilBlockVariant blockVariant, SoilType type) {
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
-        if (variant.canFall()) FallingBlockManager.registerFallable(this, variant.getSpecification());
+        if (blockVariant.canFall()) FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 
         setSoundType(SoundType.PLANT);
         setHardness(2.1F);
@@ -67,8 +68,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
                 .withProperty(WEST, Boolean.FALSE)
                 .withProperty(SNOWY,Boolean.FALSE));
 
-        OreDictionaryHelper.register(this, variant.toString());
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+        //OreDictionaryHelper.register(this, variant.toString());
+        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
@@ -157,18 +158,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
         }
     }
 
-    @NotNull
-    @Override
-    public SoilBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public SoilType getType() {
-        return type;
-    }
-
     @Override
     public ItemBlock getItemBlock() {
         return new ItemBlockBase(this);
@@ -243,7 +232,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random rand) {
-        if (this.variant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+        if (this.blockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();

@@ -9,8 +9,8 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 public class BlockSoilRootedDirt extends BlockSoil {
 
-    public BlockSoilRootedDirt(SoilBlockVariant variant, SoilType type) {
-        super(variant, type);
+    public BlockSoilRootedDirt(SoilBlockVariant blockVariant, SoilType type) {
+        super(blockVariant, type);
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }

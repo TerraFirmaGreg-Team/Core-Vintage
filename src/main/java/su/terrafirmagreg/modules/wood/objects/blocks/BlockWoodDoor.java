@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -28,15 +30,16 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodDoor;
 
 import java.util.Random;
 
+@Getter
 public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodDoor(WoodBlockVariant variant, WoodType type) {
+    public BlockWoodDoor(WoodBlockVariant blockVariant, WoodType type) {
         super(Material.WOOD);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -49,15 +52,6 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
-    }
 
     @Nullable
     @Override

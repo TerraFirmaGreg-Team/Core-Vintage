@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockMagma;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,7 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -24,38 +25,27 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import java.util.List;
 
+@Getter
 public class BlockRockMagma extends BlockMagma implements IRockBlock {
 
-    private final RockBlockVariant variant;
+    private final RockBlockVariant blockVariant;
     private final RockType type;
 
-    public BlockRockMagma(RockBlockVariant variant, RockType type) {
+    public BlockRockMagma(RockBlockVariant blockVariant, RockType type) {
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.STONE);
         setHardness(getFinalHardness());
         setHarvestLevel("pickaxe", 0);
 
-        if (getItemBlock() != null) {
-            OreDictionaryHelper.register(this, variant.toString());
-            OreDictionaryHelper.register(this, variant.toString(), type.toString());
-        }
+//        if (getItemBlock() != null) {
+//            OreDictionaryHelper.register(this, variant.toString());
+//            OreDictionaryHelper.register(this, variant.toString(), type.toString());
+//        }
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
-    }
-
-    @NotNull
-    @Override
-    public RockBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public RockType getType() {
-        return type;
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
     }
 
     @Override

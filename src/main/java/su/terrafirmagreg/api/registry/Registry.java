@@ -2,8 +2,6 @@ package su.terrafirmagreg.api.registry;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -37,9 +35,11 @@ import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.entity.IEntity;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.item.ICustomModel;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.LootBuilder;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -95,7 +95,7 @@ public class Registry {
     private final NonNullList<EntityEntryBuilder<? extends Entity>> entities = NonNullList.create();
 
     @Getter
-    private final NonNullList<IEntity> entities2 = NonNullList.create();
+    private final NonNullList<IEntity> entities_new = NonNullList.create();
 
     /**
      * A list of all entities registered by the helper.
@@ -114,7 +114,7 @@ public class Registry {
      * A list of all the custom mesh definitions.
      */
     @Getter
-    private final List<ICustomMesh> customMeshes = NonNullList.create();
+    private final List<Item> customMeshes = NonNullList.create();
 
     @Getter
     private final List<IHasModel> models = NonNullList.create();
@@ -225,38 +225,31 @@ public class Registry {
 
     //region // ===== Block ========================================================================================================================//
 
-    public Block[] registerBlocks(Block... blocks) {
+    public void registerBlocks(Block... blocks) {
         for (Block block : blocks) {
             registerBlock(block);
         }
-        return blocks;
     }
 
-    public Block registerBlock(Block block) {
+    public void registerBlock(Block block) {
         if (this.tab != null) {
             block.setCreativeTab(this.tab);
         }
         this.blocks.add(block);
 
-        return block;
-    }
-
-    public Block registerBlockWithItem(@Nonnull Block block, @Nonnull String id) {
-
-        ItemBlock itemBlock;
-
-        if (block instanceof IAutoRegistry provider) itemBlock = provider.getItemBlock();
-        else itemBlock = new ItemBlock(block);
-
-        return this.registerBlock(block, itemBlock, id);
     }
 
     public void registerAuto(Block block) {
         if (block instanceof IAutoRegistry provider) {
             ItemBlock itemBlock = provider.getItemBlock();
             String id = provider.getName();
-            this.registerClientModelRegistration(provider);
             this.registerBlock(block, itemBlock, id);
+
+            this.registerClientModel(() ->
+                    ModelRegistrationHelper.registerBlockItemModel(block)
+            );
+
+//            if (block instanceof IHasModel model) this.registerClientModel(model);
         }
     }
 
@@ -267,9 +260,8 @@ public class Registry {
      * @param block     The block to register.
      * @param itemBlock The ItemBlock for the block.
      * @param id        The id to register the block with.
-     * @return The block being registered.
      */
-    public <B extends Block, I extends ItemBlock> B registerBlock(@Nonnull B block, @Nullable I itemBlock, @Nonnull String id) {
+    public void registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
 
         block.setRegistryName(this.modid, id);
         block.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -284,8 +276,6 @@ public class Registry {
         if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
 
         if (block instanceof ITEBlock te) this.tileProviders.add(te);
-
-        return block;
     }
 
     //endregion
@@ -297,8 +287,12 @@ public class Registry {
         if (item instanceof IAutoRegistry provider) {
             String id = provider.getName();
 
-            this.registerClientModelRegistration(provider);
             this.registerItem(item, id);
+
+            this.registerClientModel(() ->
+                    ModelRegistrationHelper.registerItemModel(item)
+            );
+//            if (item instanceof IHasModel model) this.registerClientModel(model);
         }
     }
 
@@ -320,6 +314,8 @@ public class Registry {
         }
 
         if (GameUtils.isClient()) {
+
+            if (item instanceof ICustomMesh) this.customMeshes.add(item);
 
             if (item instanceof IColorfulItem) this.coloredItems.add(item);
         }
@@ -375,14 +371,12 @@ public class Registry {
      * Registers a new sound with the game. The sound must also exist in the sounds.json file.
      *
      * @param name The name of the sound file. No upper case chars!
-     * @return The sound event that was registered.
      */
-    public SoundEvent registerSound(String name) {
+    public void registerSound(String name) {
 
         final ResourceLocation id = new ResourceLocation(this.modid, name);
         final SoundEvent sound = new SoundEvent(id).setRegistryName(id);
         this.sounds.add(sound);
-        return sound;
     }
 
     //endregion
@@ -416,7 +410,7 @@ public class Registry {
      * @param id       The string id for the entity.
      * @return The entity that was registered.
      */
-    public <T extends Entity> EntityEntryBuilder<T> registerMob(String id, Class<T> entClass,  int networkId, int primary, int seconday) {
+    public <T extends Entity> EntityEntryBuilder<T> registerMob(String id, Class<T> entClass, int networkId, int primary, int seconday) {
 
         final EntityEntryBuilder<T> builder = this.registerEntity(id, entClass, networkId);
 
@@ -507,7 +501,7 @@ public class Registry {
      */
     public ResourceLocation registerLootTable(String name) {
 
-        return LootTableList.register(new ResourceLocation(this.getModid(), name));
+        return LootTableList.register(new ResourceLocation(this.modid, name));
     }
 
     //endregion
@@ -517,9 +511,10 @@ public class Registry {
 
 
     @SideOnly(Side.CLIENT)
-    public void registerClientModelRegistration(IHasModel model) {
+    public void registerClientModel(IHasModel model) {
         this.models.add(model);
     }
+
 
     //endregion
 }

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -32,13 +34,17 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodSlab;
 
 import java.util.Random;
 
+@Getter
 public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
+
+    private final WoodBlockVariant blockVariant;
+    private final WoodType type;
     public final Block block;
     protected Half halfSlab;
 
-    private BlockWoodSlab(WoodType type) {
+    private BlockWoodSlab(WoodBlockVariant blockVariant, WoodType type) {
         super(Material.WOOD);
 
         IBlockState state = blockState.getBaseState();
@@ -46,6 +52,8 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
 
         this.block = BlocksWood.getBlock(WoodBlockVariants.PLANKS, type);
+        this.blockVariant = blockVariant;
+        this.type = type;
         useNeighborBrightness = true;
 
         setLightOpacity(255);
@@ -148,29 +156,16 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
     public static class Double extends BlockWoodSlab {
 
-        private final WoodBlockVariant variant;
-        private final WoodType type;
 
-        public Double(WoodBlockVariant variant, WoodType type) {
-            super(type);
 
-            this.variant = variant;
-            this.type = type;
+        public Double(WoodBlockVariant blockVariant, WoodType type) {
+            super(blockVariant, type);
+
         }
 
         @Override
         public boolean isDouble() {
             return true;
-        }
-
-        @Override
-        public WoodBlockVariant getBlockVariant() {
-            return variant;
-        }
-
-        @Override
-        public WoodType getType() {
-            return type;
         }
 
         @Override
@@ -193,20 +188,14 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
 
         public final Double doubleSlab;
 
-        private final WoodBlockVariant variant;
-        private final WoodType type;
-
-        public Half(WoodBlockVariant variant, WoodType type) {
-            super(type);
+	    public Half(WoodBlockVariant blockVariant, WoodType type) {
+            super(blockVariant, type);
 
             doubleSlab = (Double) BlocksWood.getBlock(WoodBlockVariants.SLAB_DOUBLE, type);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 
-            this.variant = variant;
-            this.type = type;
-
-//            OreDictionaryHelper.register(this, variant.toString());
+		    //            OreDictionaryHelper.register(this, variant.toString());
 //            OreDictionaryHelper.register(this, variant.toString(), "wood");
 //            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
         }
@@ -214,16 +203,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
         @Override
         public boolean isDouble() {
             return false;
-        }
-
-        @Override
-        public WoodBlockVariant getBlockVariant() {
-            return variant;
-        }
-
-        @Override
-        public WoodType getType() {
-            return type;
         }
 
         @Override

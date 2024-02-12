@@ -40,8 +40,8 @@ public class BlockWoodToolRack extends BlockWood {
     protected static final AxisAlignedBB RACK_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 
 
-    public BlockWoodToolRack(WoodBlockVariant variant, WoodType type) {
-        super(variant, type);
+    public BlockWoodToolRack(WoodBlockVariant blockVariant, WoodType type) {
+        super(blockVariant, type);
 
         setHarvestLevel("axe", 0);
         setHardness(0.5f);

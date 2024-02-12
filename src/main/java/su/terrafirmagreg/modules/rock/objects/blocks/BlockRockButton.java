@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.BlockDirectional;
@@ -26,31 +28,20 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import java.util.List;
 
+@Getter
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
-    private final RockBlockVariant variant;
+    private final RockBlockVariant blockVariant;
     private final RockType type;
 
-    public BlockRockButton(RockBlockVariant variant, RockType type) {
-        this.variant = variant;
+    public BlockRockButton(RockBlockVariant blockVariant, RockType type) {
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.STONE);
         setHardness(0.5f);
 
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @NotNull
-    @Override
-    public RockBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @NotNull
-    @Override
-    public RockType getType() {
-        return type;
+        //OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
     }
 
     @Override

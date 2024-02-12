@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -39,7 +41,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
 
-
+@Getter
 public class BlockWoodLoom extends BlockContainer implements IWoodBlock {
 
     protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
@@ -47,13 +49,13 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock {
     protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);
     protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
+    public BlockWoodLoom(WoodBlockVariant blockVariant, WoodType type) {
         super(Material.WOOD, MapColor.AIR);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -64,16 +66,6 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock {
                 .withProperty(BlockHorizontal.FACING, EnumFacing.NORTH));
 
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable

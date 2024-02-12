@@ -12,5 +12,5 @@ public interface ICustomModel {
      * Provides a hook for new models to be baked.
      */
     @SideOnly(Side.CLIENT)
-    void onModelRegister();
+    void registerMeshModels();
 }

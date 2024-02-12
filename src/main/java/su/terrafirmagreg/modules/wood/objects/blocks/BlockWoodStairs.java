@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -18,15 +20,16 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
+@Getter
 public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodStairs(WoodBlockVariant variant, WoodType type) {
+    public BlockWoodStairs(WoodBlockVariant blockVariant, WoodType type) {
         super(BlocksWood.getBlock(WoodBlockVariants.PLANKS, type).getDefaultState());
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
         this.useNeighborBrightness = true;
         setHarvestLevel("axe", 0);
@@ -36,16 +39,6 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
 //            OreDictionaryHelper.register(this, variant.toString());
 //            OreDictionaryHelper.register(this, variant.toString(), "wood");
 //            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable

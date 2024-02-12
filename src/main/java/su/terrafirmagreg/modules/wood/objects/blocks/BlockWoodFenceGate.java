@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -18,15 +20,16 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
+@Getter
 public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodFenceGate(WoodBlockVariant variant, WoodType type) {
+    public BlockWoodFenceGate(WoodBlockVariant blockVariant, WoodType type) {
         super(BlockPlanks.EnumType.OAK);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -38,16 +41,6 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
 
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable

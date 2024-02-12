@@ -8,12 +8,12 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 public class BlockRockCobble extends BlockRockFallable {
 
 
-    public BlockRockCobble(RockBlockVariant variant, RockType type) {
-        super(variant, type);
+    public BlockRockCobble(RockBlockVariant blockVariant, RockType type) {
+        super(blockVariant, type);
 
         setHardness(getFinalHardness());
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
-        OreDictionaryHelper.register(this, "cobblestone");
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        //OreDictionaryHelper.register(this, "cobblestone");
     }
 }

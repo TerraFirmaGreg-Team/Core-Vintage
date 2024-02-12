@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -21,13 +23,14 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
+@Getter
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodBookshelf(WoodBlockVariant variant, WoodType type) {
-        this.variant = variant;
+    public BlockWoodBookshelf(WoodBlockVariant blockVariant, WoodType type) {
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -39,16 +42,6 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
 
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable

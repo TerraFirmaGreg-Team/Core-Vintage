@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,15 +21,16 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
+@Getter
 public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock, IHasModel {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodPressurePlate(WoodBlockVariant variant, WoodType type) {
+    public BlockWoodPressurePlate(WoodBlockVariant blockVariant, WoodType type) {
         super(Material.WOOD, Sensitivity.EVERYTHING);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setHardness(0.5F);
@@ -37,16 +40,6 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
 
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
     }
 
     @Nullable

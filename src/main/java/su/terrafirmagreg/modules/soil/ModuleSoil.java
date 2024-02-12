@@ -18,7 +18,7 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 import java.util.Collections;
 import java.util.List;
 
-@Module(moduleID = "Soil", name = "TFG Soil")
+//@Module(moduleID = "Soil", name = "TFG Soil")
 public class ModuleSoil extends ModuleBase {
 
     public static final Logger LOGGER = LogManager.getLogger("Module Soil");

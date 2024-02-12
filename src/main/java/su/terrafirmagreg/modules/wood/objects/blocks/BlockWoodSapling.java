@@ -1,16 +1,16 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +18,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,7 +28,7 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.RegistryModel;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -38,16 +37,16 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodSapling;
 import java.util.List;
 import java.util.Random;
 
-
+@Getter
 public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable, IGrowingPlant {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodSapling(WoodBlockVariant variant, WoodType type) {
-        this.variant = variant;
+    public BlockWoodSapling(WoodBlockVariant blockVariant, WoodType type) {
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setHardness(0.0F);
@@ -60,18 +59,6 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
-
-
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
-    }
-
 
     @Nullable
     @Override
@@ -143,23 +130,23 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     @SuppressWarnings("deprecation")
     @Override
     @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         return SAPLING_AABB;
     }
 
     @Override
     @NotNull
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    public EnumPlantType getPlantType(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return EnumPlantType.Plains;
     }
 
     @Override
-    public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
+    public boolean canGrow(@NotNull World world, @NotNull BlockPos blockPos, @NotNull IBlockState blockState, boolean b) {
         return true;
     }
 
     @Override
-    public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
+    public boolean canUseBonemeal(@NotNull World world, @NotNull Random random, @NotNull BlockPos blockPos, @NotNull IBlockState blockState) {
         return false;
     }
 
@@ -183,8 +170,6 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(STAGE).build());
-
-        RegistryModel.registerItemModel(Item.getItemFromBlock(this), 0, "inventory");
+        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
     }
 }

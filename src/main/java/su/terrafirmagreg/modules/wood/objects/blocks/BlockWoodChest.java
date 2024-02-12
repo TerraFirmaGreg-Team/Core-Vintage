@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
@@ -35,15 +37,16 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.objects.inventory.capability.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
 
+@Getter
 public class BlockWoodChest extends BlockChest implements IWoodBlock {
 
-    private final WoodBlockVariant variant;
+    private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
-    public BlockWoodChest(WoodBlockVariant variant, WoodType type) {
+    public BlockWoodChest(WoodBlockVariant blockVariant, WoodType type) {
         super(Type.BASIC);
 
-        this.variant = variant;
+        this.blockVariant = blockVariant;
         this.type = type;
 
         setHardness(2.5F);
@@ -55,16 +58,6 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock {
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());
     }
 
-    @Override
-    public WoodBlockVariant getBlockVariant() {
-        return variant;
-    }
-
-    @Override
-    public WoodType getType() {
-        return type;
-    }
-
     @Nullable
     @Override
     public ItemBlock getItemBlock() {
@@ -72,7 +65,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 //        if (!worldIn.isRemote) {
 //            CoreGuiHandler.openGui(worldIn, pos, playerIn, CoreGuiHandler.Type.WOOD_CHEST);
 //        }

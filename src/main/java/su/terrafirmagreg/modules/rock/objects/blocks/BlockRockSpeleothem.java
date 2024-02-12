@@ -40,12 +40,12 @@ public class BlockRockSpeleothem extends BlockRock {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World worldIn, @NotNull BlockPos pos) {
+    public boolean canPlaceBlockAt(@NotNull World worldIn, @NotNull BlockPos pos) {
         return getBearing(worldIn, pos) > 0;
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state, @NotNull EntityLivingBase placer, @NotNull ItemStack stack) {
         var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
         worldIn.setBlockState(pos, state.withProperty(SIZE, size));
     }

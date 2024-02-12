@@ -6,8 +6,8 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 public class BlockSoilMud extends BlockSoil {
 
-    public BlockSoilMud(SoilBlockVariant variant, SoilType type) {
-        super(variant, type);
+    public BlockSoilMud(SoilBlockVariant blockVariant, SoilType type) {
+        super(blockVariant, type);
 
     }
 }

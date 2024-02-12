@@ -9,12 +9,12 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 public class BlockRockSand extends BlockRockFallable {
 
-    public BlockRockSand(RockBlockVariant variant, RockType type) {
-        super(Material.SAND, variant, type);
+    public BlockRockSand(RockBlockVariant blockVariant, RockType type) {
+        super(Material.SAND, blockVariant, type);
 
         setSoundType(SoundType.SAND);
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
         //DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.SANDLIKE);
     }
 

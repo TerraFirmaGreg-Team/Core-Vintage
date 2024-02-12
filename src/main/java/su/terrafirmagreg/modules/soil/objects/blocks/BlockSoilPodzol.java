@@ -28,8 +28,8 @@ public class BlockSoilPodzol extends BlockSoil {
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
 
-    public BlockSoilPodzol(SoilBlockVariant variant, SoilType type) {
-        super(variant, type);
+    public BlockSoilPodzol(SoilBlockVariant blockVariant, SoilType type) {
+        super(blockVariant, type);
 
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)

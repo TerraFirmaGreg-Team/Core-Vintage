@@ -9,8 +9,8 @@ import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlow;
 
 public class ItemWoodPlow extends ItemWoodSupplyCart {
 
-    public ItemWoodPlow(WoodItemVariant variant, WoodType type) {
-        super(variant, type);
+    public ItemWoodPlow(WoodItemVariant itemVariant, WoodType type) {
+        super(itemVariant, type);
 
     }
 

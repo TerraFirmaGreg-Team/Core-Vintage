@@ -24,7 +24,7 @@ import static su.terrafirmagreg.Constants.MODID_TFCF;
 @Mod(modid = MODID_TFCF, name = TFCFlorae.NAME, version = Tags.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
 	public static final String NAME = "TFC Florae";
-	public static final String DEPENDENCIES = "required-after:tfc;"
+	public static final String DEPENDENCIES = "after:tfc;"
 			+ "after:firmalife;"
 			+ "after:tfcelementia;"
 			+ "after:tfc_ph_compat;";

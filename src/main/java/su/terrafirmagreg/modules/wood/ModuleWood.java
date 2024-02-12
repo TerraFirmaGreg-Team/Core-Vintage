@@ -21,7 +21,7 @@ import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import java.util.Collections;
 import java.util.List;
 
-@Module(moduleID = "Wood", name = "TFG Wood")
+//@Module(moduleID = "Wood", name = "TFG Wood")
 public class ModuleWood extends ModuleBase {
 
     public static final Logger LOGGER = LogManager.getLogger("Module Wood");

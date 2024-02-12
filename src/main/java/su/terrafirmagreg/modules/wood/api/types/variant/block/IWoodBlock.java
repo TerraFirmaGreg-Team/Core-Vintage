@@ -14,7 +14,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IWoodType, IAutoRegistry, IItemSize {
+public interface IWoodBlock extends IWoodType, IAutoRegistry, IItemSize, IHasModel {
 
     /**
      * Возвращает вариант деревянного блока.

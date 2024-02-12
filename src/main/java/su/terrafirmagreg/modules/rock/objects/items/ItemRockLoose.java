@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
+import lombok.Getter;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,38 +21,28 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
 
 import java.util.List;
 
+@Getter
 public class ItemRockLoose extends ItemBase implements IRockItem {
 
-    private final RockItemVariant variant;
+    private final RockItemVariant itemVariant;
     private final RockType type;
 
-    public ItemRockLoose(RockItemVariant variant, RockType type) {
+    public ItemRockLoose(RockItemVariant itemVariant, RockType type) {
 
-        this.variant = variant;
+        this.itemVariant = itemVariant;
         this.type = type;
 
-        OreDictionaryHelper.register(this, variant.toString());
-        OreDictionaryHelper.register(this, variant.toString(), type.toString());
-        OreDictionaryHelper.register(this, variant.toString(), type.getRockCategory().toString());
-        if (type.isFlux()) OreDictionaryHelper.register(this, variant.toString(), "flux");
-    }
-
-    @NotNull
-    @Override
-    public RockItemVariant getItemVariant() {
-        return variant;
-    }
-
-    @Override
-    @NotNull
-    public RockType getType() {
-        return type;
+        OreDictionaryHelper.register(this, itemVariant.toString());
+        OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
+        OreDictionaryHelper.register(this, itemVariant.toString(), type.getRockCategory().toString());
+        if (type.isFlux()) OreDictionaryHelper.register(this, itemVariant.toString(), "flux");
     }
 
     @NotNull
@@ -85,5 +77,11 @@ public class ItemRockLoose extends ItemBase implements IRockItem {
 
         if (type.isFlux())
             tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
+    }
+
+    @Override
+    public void onModelRegister() {
+        ModelRegistrationHelper.registerItemModel(this);
+
     }
 }

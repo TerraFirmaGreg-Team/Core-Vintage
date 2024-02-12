@@ -41,10 +41,4 @@ public class ItemSoilPile extends ItemBase implements ISoilItem {
         return Weight.VERY_LIGHT;
     }
 
-    @Override
-    public void onModelRegister() {
-        ModelRegistrationHelper.registerItemModel(this);
-
-    }
-
 }

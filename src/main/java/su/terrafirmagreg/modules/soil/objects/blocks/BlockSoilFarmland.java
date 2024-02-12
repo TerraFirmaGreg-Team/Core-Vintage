@@ -42,7 +42,7 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 import java.util.Random;
 
 @Getter
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IHasModel, IColorfulBlock {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IColorfulBlock {
 
     public static final int[] TINT = new int[]{
             0xffffffff,
@@ -78,10 +78,10 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
     }
 
 
-    protected static void turnToDirt(World world, BlockPos pos) {
+    protected static void turnToDirt(World world, @NotNull BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
-        if (block instanceof ISoilBlockVariant) {
-            var soil = ((ISoilBlockVariant) block).getType();
+        if (block instanceof ISoilBlockVariant soilBlockVariant) {
+            var soil = soilBlockVariant.getType();
 
             world.setBlockState(pos, BlocksSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
@@ -246,12 +246,6 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
             default:
                 return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
         }
-    }
-
-
-    @Override
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockSoilFarmland.MOISTURE).build());
     }
 
     @Override

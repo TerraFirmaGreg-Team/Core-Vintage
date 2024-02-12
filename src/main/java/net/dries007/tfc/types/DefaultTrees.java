@@ -13,6 +13,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import su.terrafirmagreg.Constants;
+
 import static su.terrafirmagreg.Constants.MODID_TFC;
 
 @SuppressWarnings("WeakerAccess")
@@ -40,6 +42,7 @@ public final class DefaultTrees {
 	public static final ResourceLocation WHITE_CEDAR = new ResourceLocation(MODID_TFC, "white_cedar");
 	public static final ResourceLocation WILLOW = new ResourceLocation(MODID_TFC, "willow");
 	public static final ResourceLocation KAPOK = new ResourceLocation(MODID_TFC, "kapok");
+    public static final ResourceLocation HEVEA = new ResourceLocation(MODID_TFC, "hevea");
 
 	/**
 	 * Simple ITreeGenerator instances.
@@ -151,7 +154,9 @@ public final class DefaultTrees {
 				                                                          .setBushes()
 				                                                          .setDensity(0.7f, 2f)
 				                                                          .setBurnInfo(603f, 1000)
-				                                                          .build()
+				                                                          .build(),
+                new Tree.Builder(HEVEA, 140f, 350f, 7f, 27f, GEN_TALL).setDensity(0.1f, 0.6f)
+                        .setRadius(2).setGrowthTime(10).setBurnInfo(762f, 2000).build()
 		);
 	}
 }

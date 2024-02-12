@@ -10,7 +10,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface ISoilItem extends ISoilType, IItemSize, IAutoRegistry, IHasModel {
+public interface ISoilItem extends ISoilType, IItemSize, IAutoRegistry {
 
     /**
      * Возвращает вариант блока породы.

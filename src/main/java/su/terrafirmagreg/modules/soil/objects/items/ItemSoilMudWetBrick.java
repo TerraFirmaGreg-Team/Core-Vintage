@@ -40,10 +40,4 @@ public class ItemSoilMudWetBrick extends ItemBase implements ISoilItem {
     public Weight getWeight(@NotNull ItemStack stack) {
         return Weight.LIGHT; // Stacksize = 32
     }
-
-    @Override
-    public void onModelRegister() {
-        ModelRegistrationHelper.registerItemModel(this);
-
-    }
 }

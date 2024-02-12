@@ -3,6 +3,8 @@ package su.terrafirmagreg.modules.wood.objects.items;
 import lombok.Getter;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -142,5 +144,11 @@ public class ItemWoodBoat extends ItemBase implements IWoodItem {
     public void onModelRegister() {
         ModelRegistrationHelper.registerItemModel(this, this.getResourceLocation().toString());
 
+    }
+
+
+    @Override
+    public IItemColor getColorHandler() {
+        return (s, i) -> this.getType().getColor();
     }
 }

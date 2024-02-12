@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -17,6 +18,7 @@ public class BlockWoodFenceLog extends BlockWoodFence {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelRegistrationHelper.registerBlockItemModel(this);
+        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
     }
 }

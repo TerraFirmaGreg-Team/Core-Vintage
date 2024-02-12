@@ -213,6 +213,12 @@ public class ModelRegistrationHelper {
         ModelRegistrationHelper.registerItemModel(item, 0, resourceLocation);
     }
 
+    public static void registerItemModel(Item item, ResourceLocation modelLocation) {
+
+        ModelResourceLocation resourceLocation = new ModelResourceLocation(modelLocation, "inventory");
+        ModelRegistrationHelper.registerItemModel(item, 0, resourceLocation);
+    }
+
 
 
     /**

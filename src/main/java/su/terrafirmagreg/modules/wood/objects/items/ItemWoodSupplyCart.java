@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.objects.items;
 
 import lombok.Getter;
 
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -88,5 +89,10 @@ public class ItemWoodSupplyCart extends ItemBase implements IWoodItem {
     public void onModelRegister() {
         ModelRegistrationHelper.registerItemModel(this, this.getResourceLocation().toString());
 
+    }
+
+    @Override
+    public IItemColor getColorHandler() {
+        return (s, i) -> this.getType().getColor();
     }
 }

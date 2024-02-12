@@ -2,15 +2,21 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import lombok.Getter;
 
+import net.dries007.tfc.client.GrassColorHandler;
+
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -28,6 +34,7 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -38,7 +45,7 @@ import java.util.List;
 import java.util.Random;
 
 @Getter
-public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable, IGrowingPlant {
+public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable, IGrowingPlant, IColorfulBlock {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
@@ -170,6 +177,18 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
+        ModelRegistrationHelper.registerBlockModel(this, new StateMap.Builder().ignore(STAGE).build());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
     }
+
+    @Override
+    public IBlockColor getColorHandler() {
+        return GrassColorHandler::computeGrassColor;
+    }
+
+    @Override
+    public IItemColor getItemColorHandler() {
+        return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
+    }
+
 }

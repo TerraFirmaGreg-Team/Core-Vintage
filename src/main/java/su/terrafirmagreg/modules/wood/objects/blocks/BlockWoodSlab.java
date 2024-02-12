@@ -11,6 +11,8 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -24,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -35,7 +38,7 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodSlab;
 import java.util.Random;
 
 @Getter
-public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
+public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
@@ -135,6 +138,16 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock {
     @Override
     protected BlockStateContainer createBlockState() {
         return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
+    }
+
+    @Override
+    public IBlockColor getColorHandler() {
+        return (s, w, p, i) ->  this.getType().getColor();
+    }
+
+    @Override
+    public IItemColor getItemColorHandler() {
+        return (s, i) -> this.getType().getColor();
     }
 
     @NotNull

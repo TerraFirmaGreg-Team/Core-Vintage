@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -17,6 +20,7 @@ public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
+        ModelRegistrationHelper.registerBlockModel(this, new StateMap.Builder().ignore(BlockFenceGate.IN_WALL, BlockFenceGate.POWERED).build());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
     }
 }

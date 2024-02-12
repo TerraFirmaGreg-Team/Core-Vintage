@@ -7,6 +7,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -22,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -31,7 +34,7 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodDoor;
 import java.util.Random;
 
 @Getter
-public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
+public class BlockWoodDoor extends BlockDoor implements IWoodBlock, IColorfulBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
@@ -84,5 +87,15 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
         ModelLoader.setCustomModelResourceLocation(
                 Item.getItemFromBlock(this), 0,
                 new ModelResourceLocation(getResourceLocation(), "inventory"));
+    }
+
+    @Override
+    public IBlockColor getColorHandler() {
+        return (s, w, p, i) ->  this.getType().getColor();
+    }
+
+    @Override
+    public IItemColor getItemColorHandler() {
+        return (s, i) -> this.getType().getColor();
     }
 }

@@ -2,6 +2,8 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import lombok.Getter;
 
+import net.dries007.tfc.client.GrassColorHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -10,6 +12,9 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -33,6 +38,7 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -48,7 +54,7 @@ import static su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLeaves.Enum
 
 
 @Getter
-public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
+public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfulBlock {
 
     public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
     public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
@@ -382,9 +388,20 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
+    public IBlockColor getColorHandler() {
+        return GrassColorHandler::computeGrassColor;
+    }
+
+    @Override
+    public IItemColor getItemColorHandler() {
+        return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelRegistrationHelper.registerBlockItemModel(this.getDefaultState());
+        ModelRegistrationHelper.registerBlockModel(this, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE).build());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
     }
 
     public enum EnumLeafState implements IStringSerializable {

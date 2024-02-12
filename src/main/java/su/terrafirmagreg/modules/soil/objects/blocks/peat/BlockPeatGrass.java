@@ -106,6 +106,6 @@ public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
 
     @Override
     public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getColorHandler().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getDefaultState(), null, null, i);
+        return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
     }
 }

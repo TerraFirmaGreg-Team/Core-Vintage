@@ -5,6 +5,8 @@ import lombok.Getter;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -13,14 +15,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.CustomStateMap;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 @Getter
-public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
+public class BlockWoodButton extends BlockButtonWood implements IWoodBlock, IColorfulBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
@@ -47,13 +51,17 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(getResourceLocation())
-                        .build());
+        ModelRegistrationHelper.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
+    }
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "inventory"));
+    @Override
+    public IBlockColor getColorHandler() {
+        return (s, w, p, i) ->  this.getType().getColor();
+    }
+
+    @Override
+    public IItemColor getItemColorHandler() {
+        return (s, i) -> this.getType().getColor();
     }
 }

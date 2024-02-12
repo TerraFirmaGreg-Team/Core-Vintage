@@ -38,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.util.CustomStateMap;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
@@ -245,16 +246,16 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh {
         return false;
     }
 
-    @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TEWoodBarrel();
-    }
+//    @Override
+//    public boolean hasTileEntity(@NotNull IBlockState state) {
+//        return true;
+//    }
+//
+//    @Nullable
+//    @Override
+//    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+//        return new TEWoodBarrel();
+//    }
 
     /**
      * Handle drops via {@link this#breakBlock(World, BlockPos, IBlockState)}
@@ -296,14 +297,8 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(getResourceLocation())
-                        .build());
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
+        ModelRegistrationHelper.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
 
     }
 

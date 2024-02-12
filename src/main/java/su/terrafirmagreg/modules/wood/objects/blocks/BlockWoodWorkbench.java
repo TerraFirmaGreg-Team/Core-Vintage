@@ -6,6 +6,8 @@ import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -28,15 +30,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import mcp.MethodsReturnNonnullByDefault;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.CustomStateMap;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodWorkbench;
 
 @Getter
-public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
+public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock, IColorfulBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
@@ -82,12 +86,18 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+        ModelRegistrationHelper.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
+    }
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "inventory"));
+    @Override
+    public IBlockColor getColorHandler() {
+        return (s, w, p, i) ->  this.getType().getColor();
+    }
+
+    @Override
+    public IItemColor getItemColorHandler() {
+        return (s, i) -> this.getType().getColor();
     }
 
     @SuppressWarnings("WeakerAccess")

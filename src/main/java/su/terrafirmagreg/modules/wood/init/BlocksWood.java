@@ -37,7 +37,6 @@ public final class BlocksWood {
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
 //        registry.registerClientModelRegistrationStrategy(() -> {
-//            WOOD_BLOCKS.values().forEach(IHasModel::onModelRegister);
 //            //for (var tree : WoodTreeVariant.getTreeTypes()) ModelHelperTFC.regModel(tree);
 //        });
 
@@ -46,6 +45,7 @@ public final class BlocksWood {
 //        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRWoodLoom());
 //        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRWoodChest());
 //        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodToolRack.class, new TESRWoodToolRack());
+
     }
 
     public static void onPostInitialization() {

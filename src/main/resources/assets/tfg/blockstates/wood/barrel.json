@@ -17,16 +17,6 @@
     "inventory": [
       {}
     ],
-    "moisture": {
-      "0": {},
-      "1": {},
-      "2": {},
-      "3": {},
-      "4": {},
-      "5": {},
-      "6": {},
-      "7": {}
-    },
     "sealed": {
       "true": {
         "model": "tfg:wood/barrel_sealed"

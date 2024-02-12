@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.objects.items;
 
 import lombok.Getter;
 
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 
 import net.dries007.tfc.api.capability.size.Size;
@@ -45,5 +46,10 @@ public class ItemWoodWheel extends ItemBase implements IWoodItem {
     public void onModelRegister() {
         ModelRegistrationHelper.registerItemModel(this, this.getResourceLocation().toString());
 
+    }
+
+    @Override
+    public IItemColor getColorHandler() {
+        return (s, i) -> this.getType().getColor();
     }
 }

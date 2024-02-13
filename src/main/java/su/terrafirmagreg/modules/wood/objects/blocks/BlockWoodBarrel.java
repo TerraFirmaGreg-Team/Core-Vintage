@@ -9,6 +9,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -37,10 +38,12 @@ import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
 /**
@@ -50,7 +53,7 @@ import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
  * @see TEWoodBarrel
  * @see BarrelRecipe
  */
-public class BlockWoodBarrel extends BlockWood implements ICustomMesh {
+public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock {
 
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
@@ -246,16 +249,16 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh {
         return false;
     }
 
-//    @Override
-//    public boolean hasTileEntity(@NotNull IBlockState state) {
-//        return true;
-//    }
-//
-//    @Nullable
-//    @Override
-//    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-//        return new TEWoodBarrel();
-//    }
+    @Override
+    public boolean hasTileEntity(@NotNull IBlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+        return new TEWoodBarrel();
+    }
 
     /**
      * Handle drops via {@link this#breakBlock(World, BlockPos, IBlockState)}
@@ -307,5 +310,16 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh {
         final ModelResourceLocation sealed = new ModelResourceLocation(getResourceLocation(), "sealed=true");
         final ModelResourceLocation unsealed = new ModelResourceLocation(getResourceLocation(), "sealed=false");
         return stack -> stack.getTagCompound() != null ? sealed : unsealed;
+    }
+
+    @Override
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return TEWoodBarrel.class;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public TileEntitySpecialRenderer<?> getTileRenderer() {
+        return new TESRWoodBarrel();
     }
 }

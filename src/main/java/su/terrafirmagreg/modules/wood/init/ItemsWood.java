@@ -20,28 +20,15 @@ public final class ItemsWood {
 
     public static void onRegister(Registry registry) {
         for (var item : WOOD_ITEMS.values()) registry.registerAuto(item);
+
         //for (var item : TREE_ITEMS) registry.registerItem(item);
     }
 
     @SideOnly(Side.CLIENT)
     public static void onClientRegister(Registry registry) {
-//        registry.registerClientModelRegistrationStrategy(() -> {
-//            WOOD_ITEMS.values().forEach(IHasModel::onModelRegister);
-//        });
+
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void onClientInitialization() {
-//        var minecraft = Minecraft.getMinecraft();
-//        var itemColors = minecraft.getItemColors();
-//
-//
-//        itemColors.registerItemColorHandler((s, i) -> ((IWoodItem) s.getItem()).getType().getColor(),
-//                WOOD_ITEMS.values()
-//                        .stream()
-//                        .map(s -> (Item) s)
-//                        .toArray(Item[]::new));
-    }
 
     @NotNull
     public static Item getItem(@NotNull WoodItemVariant variant, @NotNull WoodType type) {

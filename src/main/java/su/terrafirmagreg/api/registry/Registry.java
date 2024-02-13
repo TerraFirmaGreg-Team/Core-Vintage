@@ -222,18 +222,10 @@ public class Registry {
 
     //region // ===== Block ========================================================================================================================//
 
-    public void registerBlocks(Block... blocks) {
+    public void registerAuto(Block... blocks) {
         for (Block block : blocks) {
-            registerBlock(block);
+            registerAuto(block);
         }
-    }
-
-    public void registerBlock(Block block) {
-        if (this.tab != null) {
-            block.setCreativeTab(this.tab);
-        }
-        this.blocks.add(block);
-
     }
 
     public void registerAuto(Block block) {
@@ -279,6 +271,11 @@ public class Registry {
 
     //region // ===== Item =========================================================================================================================//
 
+    public void registerAuto(Item... items) {
+        for (Item item : items) {
+            registerAuto(item);
+        }
+    }
 
     public void registerAuto(Item item) {
         if (item instanceof IAutoRegistry provider) {

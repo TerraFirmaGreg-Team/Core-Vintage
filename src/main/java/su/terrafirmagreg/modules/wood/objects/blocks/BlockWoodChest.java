@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -33,15 +34,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
+import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.objects.inventory.capability.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
 
 @Getter
-public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulBlock {
+public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulBlock, ITEBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
@@ -156,15 +160,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulB
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(getResourceLocation())
-                        .ignore(BlockChest.FACING)
-                        .build());
-
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "normal"));
+        ModelRegistrationHelper.registerBlockModel(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customPath(getResourceLocation()).build());
+        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
     }
 
     @Override
@@ -175,5 +172,15 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulB
     @Override
     public IItemColor getItemColorHandler() {
         return (s, i) -> this.getType().getColor();
+    }
+
+    @Override
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return TEWoodChest.class;
+    }
+
+    @Override
+    public TileEntitySpecialRenderer<?> getTileRenderer() {
+        return new TESRWoodChest();
     }
 }

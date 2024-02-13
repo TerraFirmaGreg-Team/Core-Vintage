@@ -154,7 +154,7 @@ public class AutoRegistry {
     @SideOnly(Side.CLIENT)
     public void onRegisterTileEntitySpecialRenderer() {
         for (var provider : this.registry.getTileProviders()) {
-            TileEntitySpecialRenderer<? super TileEntity> tesr = provider.getTileRenderer();
+            final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
             if (tesr != null) ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
         }

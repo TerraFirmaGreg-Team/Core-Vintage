@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,15 +25,17 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import su.terrafirmagreg.modules.wood.client.render.TESRWoodToolRack;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodToolRack;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.*;
 
 
-public class BlockWoodToolRack extends BlockWood {
+public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 
     protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
     protected static final AxisAlignedBB RACK_WEST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -205,5 +208,15 @@ public class BlockWoodToolRack extends BlockWood {
             slot += 2;
         }
         return slot;
+    }
+
+    @Override
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return TEWoodToolRack.class;
+    }
+
+    @Override
+    public TileEntitySpecialRenderer<?> getTileRenderer() {
+        return new TESRWoodToolRack();
     }
 }

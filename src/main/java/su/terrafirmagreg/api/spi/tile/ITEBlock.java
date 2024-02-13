@@ -23,7 +23,7 @@ public interface ITEBlock {
      * @return The TESR to bind to the tile.
      */
     @SideOnly(Side.CLIENT)
-    default TileEntitySpecialRenderer<? super TileEntity> getTileRenderer() {
+    default TileEntitySpecialRenderer<?> getTileRenderer() {
 
         return null;
     }

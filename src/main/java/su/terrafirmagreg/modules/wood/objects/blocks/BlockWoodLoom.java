@@ -14,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -38,15 +39,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
+import su.terrafirmagreg.modules.wood.client.render.TESRWoodLoom;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
 
 @Getter
-public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorfulBlock {
+public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorfulBlock, ITEBlock {
 
     protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
     protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
@@ -117,7 +120,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
     @Override
     @SuppressWarnings("deprecation")
     @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         return switch (state.getValue(BlockHorizontal.FACING)) {
             default -> LOOM_NORTH_AABB;
             case SOUTH -> LOOM_SOUTH_AABB;
@@ -129,18 +132,18 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
     @Override
     @SuppressWarnings("deprecation")
     @NotNull
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos, @NotNull EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         var te = Helpers.getTE(worldIn, pos, TEWoodLoom.class);
         if (te != null) {
             return te.onRightClick(playerIn);
@@ -151,7 +154,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
     @Override
     @SuppressWarnings("deprecation")
     @NotNull
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
@@ -167,12 +170,12 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
     @Override
     @SuppressWarnings("deprecation")
     @NotNull
-    public EnumBlockRenderType getRenderType(IBlockState state) {
+    public EnumBlockRenderType getRenderType(@NotNull IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
 
     @Override
-    public void breakBlock(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+    public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
         TEWoodLoom te = Helpers.getTE(worldIn, pos, TEWoodLoom.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
@@ -195,5 +198,15 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
     @Override
     public IItemColor getItemColorHandler() {
         return (s, i) -> this.getType().getColor();
+    }
+
+    @Override
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return TEWoodLoom.class;
+    }
+
+    @Override
+    public TileEntitySpecialRenderer<?> getTileRenderer() {
+        return new TESRWoodLoom();
     }
 }

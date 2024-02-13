@@ -25,13 +25,6 @@ public final class BlocksWood {
 
         //registry.registerBlocks(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values().toArray(new Block[0]));
 
-
-//        registry.registerTileEntities(
-//                TEWoodLoom.class,
-//                TEWoodToolRack.class,
-//                TEWoodChest.class,
-//                TEWoodBarrel.class
-//        );
     }
 
     @SideOnly(Side.CLIENT)
@@ -39,12 +32,6 @@ public final class BlocksWood {
 //        registry.registerClientModelRegistrationStrategy(() -> {
 //            //for (var tree : WoodTreeVariant.getTreeTypes()) ModelHelperTFC.regModel(tree);
 //        });
-
-        //==== TESRs =================================================================================================//
-//        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodBarrel.class, new TESRWoodBarrel());
-//        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodLoom.class, new TESRWoodLoom());
-//        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodChest.class, new TESRWoodChest());
-//        ClientRegistry.bindTileEntitySpecialRenderer(TEWoodToolRack.class, new TESRWoodToolRack());
 
     }
 
@@ -54,48 +41,6 @@ public final class BlocksWood {
 //        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void onClientInitialization() {
-//        var itemColors = Minecraft.getMinecraft().getItemColors();
-//        var blockColors = Minecraft.getMinecraft().getBlockColors();
-//
-//        IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
-//        IBlockColor grassColor = GrassColorHandler::computeGrassColor;
-//
-//
-//        blockColors.registerBlockColorHandler((s, w, p, i) -> {
-//                    // цвет листвы
-//                    if (i == 0) return foliageColor.colorMultiplier(s, w, p, i);
-//                    // цвет дерева
-//                    if (i == 1) return ((IWoodBlock) s.getBlock()).getType().getColor();
-//                    // Если не указан индекс
-//                    return 0xFFFFFF;
-//                },
-//                WOOD_BLOCKS.values()
-//                        .stream()
-//                        .map(s -> (Block) s)
-//                        .toArray(Block[]::new));
-//
-//        itemColors.registerItemColorHandler((s, i) -> {
-//                    // цвет листвы
-//                    if (i == 0)
-//                        return blockColors.colorMultiplier(((ItemBlock) s.getItem()).getBlock()
-//                                .getDefaultState(), null, null, i);
-//                    // цвет дерева
-//                    if (i == 1)
-//                        return ((IWoodBlock) ((ItemBlock) s.getItem()).getBlock()).getType().getColor();
-//                    // Если не указан индекс
-//                    return 0xFFFFFF;
-//                },
-//                WOOD_BLOCKS.values()
-//                        .stream()
-//                        .map(s -> (Block) s)
-//                        .toArray(Block[]::new));
-
-//        blockColors.registerBlockColorHandler(foliageColor,
-//                LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values()
-//                        .toArray(new Block[0]));
-    }
 
 
 

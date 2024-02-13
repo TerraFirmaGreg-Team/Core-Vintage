@@ -1,17 +1,13 @@
 package su.terrafirmagreg.api.module;
 
-import lombok.Getter;
-
-import lombok.Setter;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.network.*;
@@ -60,9 +56,9 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     private File configurationDirectory;
 
     protected ModuleBase(int priority) {
-	    this.priority = priority;
+        this.priority = priority;
         this.modid = Loader.instance().activeModContainer().getModId();
-	    this.name = this.getClass().getSimpleName();
+        this.name = this.getClass().getSimpleName();
     }
 
     protected void setConfigurationDirectory(File file) {

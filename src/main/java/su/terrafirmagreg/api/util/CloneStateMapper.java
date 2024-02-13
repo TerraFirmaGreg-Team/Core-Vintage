@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.IdentityHashMap;
@@ -17,34 +18,34 @@ import java.util.Map;
  */
 public class CloneStateMapper extends StateMapperBase {
 
-	private static final Map<Block, CloneStateMapper> CACHE = new IdentityHashMap<>();
+    private static final Map<Block, CloneStateMapper> CACHE = new IdentityHashMap<>();
 
-	private final Block block;
+    private final Block block;
 
-	private CloneStateMapper(Block block) {
+    private CloneStateMapper(Block block) {
 
-		this.block = block;
-	}
+        this.block = block;
+    }
 
-	public static CloneStateMapper forBlock(Block block) {
+    public static CloneStateMapper forBlock(Block block) {
 
-		CloneStateMapper cloneStateMapper = CACHE.get(block);
+        CloneStateMapper cloneStateMapper = CACHE.get(block);
 
-		if (cloneStateMapper == null) {
-			cloneStateMapper = new CloneStateMapper(block);
-			CACHE.put(block, cloneStateMapper);
-		}
+        if (cloneStateMapper == null) {
+            cloneStateMapper = new CloneStateMapper(block);
+            CACHE.put(block, cloneStateMapper);
+        }
 
-		return cloneStateMapper;
-	}
+        return cloneStateMapper;
+    }
 
-	@NotNull
-	@Override
-	protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
+    @NotNull
+    @Override
+    protected ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
 
-		return new ModelResourceLocation(
-				Block.REGISTRY.getNameForObject(this.block),
-				this.getPropertyString(state.getProperties())
-		);
-	}
+        return new ModelResourceLocation(
+                Block.REGISTRY.getNameForObject(this.block),
+                this.getPropertyString(state.getProperties())
+        );
+    }
 }

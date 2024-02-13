@@ -1,9 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
-import lombok.Getter;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
@@ -20,6 +17,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import org.jetbrains.annotations.NotNull;

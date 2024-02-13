@@ -2,9 +2,7 @@ package su.terrafirmagreg.modules.core;
 
 
 import net.minecraft.creativetab.CreativeTabs;
-
 import net.minecraftforge.common.MinecraftForge;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

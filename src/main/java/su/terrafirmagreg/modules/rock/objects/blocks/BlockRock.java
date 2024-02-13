@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -11,11 +9,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;

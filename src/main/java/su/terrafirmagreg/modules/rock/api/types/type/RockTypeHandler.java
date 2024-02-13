@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.rock.api.types.type;
 
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategories;
 import su.terrafirmagreg.modules.rock.plugin.gregtech.material.TFGMaterials;
-import su.terrafirmagreg.modules.rock.plugin.gregtech.oreprefix.TFGOrePrefix;
 
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static su.terrafirmagreg.modules.rock.plugin.gregtech.oreprefix.TFGOrePrefix.*;

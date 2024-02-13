@@ -15,11 +15,10 @@ public final class BlocksRock {
 
     public static final Map<Pair<RockBlockVariant, RockType>, Block> ROCK_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
 
-	public static void onRegister(Registry registry) {
+    public static void onRegister(Registry registry) {
 
         for (var block : ROCK_BLOCKS.values()) registry.registerAuto(block);
-	}
-
+    }
 
 
     @NotNull

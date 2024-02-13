@@ -10,17 +10,15 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-
-import com.google.common.base.Preconditions;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IHasModel;
 
-import javax.annotation.Nonnull;
 import java.util.function.ToIntFunction;
+import javax.annotation.Nonnull;
 
 /**
  * Based on:
@@ -218,7 +216,6 @@ public class ModelRegistrationHelper {
         ModelResourceLocation resourceLocation = new ModelResourceLocation(modelLocation, "inventory");
         ModelRegistrationHelper.registerItemModel(item, 0, resourceLocation);
     }
-
 
 
     /**

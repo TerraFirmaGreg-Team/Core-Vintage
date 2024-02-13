@@ -34,6 +34,7 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 
 public class BlockRockSurface extends BlockRock {
+
     private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(
             2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
             14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);

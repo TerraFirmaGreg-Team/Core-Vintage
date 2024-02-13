@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 public class SoilBlockVariants {
+
     public static SoilBlockVariant GRASS;
     public static SoilBlockVariant DRY_GRASS;
     public static SoilBlockVariant PODZOL;

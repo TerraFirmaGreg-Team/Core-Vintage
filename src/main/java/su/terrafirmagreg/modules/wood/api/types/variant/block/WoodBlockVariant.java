@@ -1,10 +1,9 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.block;
 
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import lombok.Getter;
-
 import net.minecraft.block.Block;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.Pair;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;

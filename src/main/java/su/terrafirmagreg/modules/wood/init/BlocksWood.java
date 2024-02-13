@@ -42,8 +42,6 @@ public final class BlocksWood {
     }
 
 
-
-
     @NotNull
     public static Block getBlock(@NotNull WoodBlockVariant variant, @NotNull WoodType type) {
         var block = (Block) WOOD_BLOCKS.get(new Pair<>(variant, type));

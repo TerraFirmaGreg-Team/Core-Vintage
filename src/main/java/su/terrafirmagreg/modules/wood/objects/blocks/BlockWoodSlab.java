@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -25,6 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
@@ -41,10 +40,9 @@ import java.util.Random;
 public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-
+    public final Block block;
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
-    public final Block block;
     protected Half halfSlab;
 
     private BlockWoodSlab(WoodBlockVariant blockVariant, WoodType type) {
@@ -142,7 +140,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 
     @Override
     public IBlockColor getColorHandler() {
-        return (s, w, p, i) ->  this.getType().getColor();
+        return (s, w, p, i) -> this.getType().getColor();
     }
 
     @Override
@@ -168,7 +166,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
     }
 
     public static class Double extends BlockWoodSlab {
-
 
 
         public Double(WoodBlockVariant blockVariant, WoodType type) {
@@ -201,14 +198,14 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 
         public final Double doubleSlab;
 
-	    public Half(WoodBlockVariant blockVariant, WoodType type) {
+        public Half(WoodBlockVariant blockVariant, WoodType type) {
             super(blockVariant, type);
 
             doubleSlab = (Double) BlocksWood.getBlock(WoodBlockVariants.SLAB_DOUBLE, type);
             doubleSlab.halfSlab = this;
             halfSlab = this;
 
-		    //            OreDictionaryHelper.register(this, variant.toString());
+            //            OreDictionaryHelper.register(this, variant.toString());
 //            OreDictionaryHelper.register(this, variant.toString(), "wood");
 //            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
         }

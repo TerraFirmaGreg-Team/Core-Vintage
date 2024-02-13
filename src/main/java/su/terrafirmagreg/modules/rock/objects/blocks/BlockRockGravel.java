@@ -1,10 +1,9 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import net.dries007.tfc.api.util.FallingBlockManager;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
+import net.dries007.tfc.api.util.FallingBlockManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 

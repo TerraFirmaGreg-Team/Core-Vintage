@@ -16,11 +16,8 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
-import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 

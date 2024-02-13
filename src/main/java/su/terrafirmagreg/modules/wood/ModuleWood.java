@@ -11,7 +11,6 @@ import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;

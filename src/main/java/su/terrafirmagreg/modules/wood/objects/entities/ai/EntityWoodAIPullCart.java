@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.objects.entities.ai;
 
-import de.mennomax.astikorcarts.capabilities.PullProvider;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
+
+import de.mennomax.astikorcarts.capabilities.PullProvider;
 
 public class EntityWoodAIPullCart extends EntityAIBase {
 

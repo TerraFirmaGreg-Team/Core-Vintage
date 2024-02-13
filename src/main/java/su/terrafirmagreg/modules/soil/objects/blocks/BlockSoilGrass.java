@@ -1,9 +1,5 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import lombok.Getter;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.client.GrassColorHandler;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
@@ -25,6 +21,9 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
+import net.dries007.tfc.api.util.FallingBlockManager;
+import net.dries007.tfc.client.GrassColorHandler;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -66,7 +65,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE)
-                .withProperty(SNOWY,Boolean.FALSE));
+                .withProperty(SNOWY, Boolean.FALSE));
 
         //OreDictionaryHelper.register(this, variant.toString());
         //OreDictionaryHelper.register(this, variant.toString(), type.toString());

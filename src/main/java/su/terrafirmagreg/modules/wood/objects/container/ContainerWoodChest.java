@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.container;
 
-import net.dries007.tfc.objects.container.ContainerTE;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -11,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.objects.container.ContainerTE;
 import org.jetbrains.annotations.NotNull;
 
 public class ContainerWoodChest extends Container {

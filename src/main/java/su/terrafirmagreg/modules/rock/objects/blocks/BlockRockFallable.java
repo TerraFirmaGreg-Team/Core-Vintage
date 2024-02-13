@@ -9,7 +9,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;

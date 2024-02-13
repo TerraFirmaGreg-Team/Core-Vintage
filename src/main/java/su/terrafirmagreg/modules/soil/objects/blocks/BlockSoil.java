@@ -1,9 +1,5 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import lombok.Getter;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.util.OreDictionaryHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;

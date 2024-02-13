@@ -1,15 +1,10 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import lombok.Getter;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.util.OreDictionaryHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,15 +17,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;

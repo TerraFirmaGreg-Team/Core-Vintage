@@ -1,10 +1,9 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
-import lombok.Getter;
-
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 
+import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import org.jetbrains.annotations.NotNull;

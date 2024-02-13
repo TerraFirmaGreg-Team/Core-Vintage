@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
 
-import su.terrafirmagreg.modules.soil.objects.items.*;
+import su.terrafirmagreg.modules.soil.objects.items.ItemSoilMudBrick;
+import su.terrafirmagreg.modules.soil.objects.items.ItemSoilMudWetBrick;
+import su.terrafirmagreg.modules.soil.objects.items.ItemSoilPile;
 
 public class SoilItemVariantHandler {
 

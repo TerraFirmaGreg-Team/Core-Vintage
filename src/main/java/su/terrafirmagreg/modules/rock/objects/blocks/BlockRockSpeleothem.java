@@ -5,7 +5,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -18,9 +17,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-
-import net.minecraftforge.client.model.ModelLoader;
-
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.api.util.ModelRegistrationHelper;

@@ -1,15 +1,13 @@
 package su.terrafirmagreg.modules.soil.objects.items;
 
+import net.minecraft.item.ItemStack;
+
 import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import net.minecraft.item.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
-import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItem;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;

@@ -1,15 +1,12 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.block;
 
 
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.util.ResourceLocation;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IAutoRegistry;
 import su.terrafirmagreg.api.registry.IHasModel;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.Helpers;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 

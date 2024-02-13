@@ -1,11 +1,9 @@
 package su.terrafirmagreg.modules.soil.init;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-
 import net.minecraft.block.Block;
-
 import net.minecraft.block.state.IBlockState;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.util.Pair;
@@ -18,7 +16,6 @@ import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;
 import java.util.Map;
 
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
-import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.CLAY_GRASS;
 
 public final class BlocksSoil {
 
@@ -31,8 +28,8 @@ public final class BlocksSoil {
 
         for (var block : SOIL_BLOCKS.values()) registry.registerAuto(block);
 
-		registry.registerAuto(PEAT_GRASS = new BlockPeatGrass());
-		registry.registerAuto(PEAT = new BlockPeat());
+        registry.registerAuto(PEAT_GRASS = new BlockPeatGrass());
+        registry.registerAuto(PEAT = new BlockPeat());
 
 
     }

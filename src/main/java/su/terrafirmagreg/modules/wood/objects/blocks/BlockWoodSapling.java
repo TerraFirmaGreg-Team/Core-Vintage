@@ -1,9 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import lombok.Getter;
-
-import net.dries007.tfc.client.GrassColorHandler;
-
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -28,7 +24,9 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;

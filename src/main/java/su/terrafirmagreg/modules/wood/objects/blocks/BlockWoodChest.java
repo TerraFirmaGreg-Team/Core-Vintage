@@ -1,12 +1,9 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -24,10 +21,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import org.jetbrains.annotations.NotNull;
@@ -166,7 +163,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulB
 
     @Override
     public IBlockColor getColorHandler() {
-        return (s, w, p, i) ->  this.getType().getColor();
+        return (s, w, p, i) -> this.getType().getColor();
     }
 
     @Override

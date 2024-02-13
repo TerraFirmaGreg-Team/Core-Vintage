@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.BlockDirectional;
@@ -19,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.registry.IHasModel;

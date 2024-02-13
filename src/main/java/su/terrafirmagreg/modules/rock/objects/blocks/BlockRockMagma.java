@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.BlockMagma;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;

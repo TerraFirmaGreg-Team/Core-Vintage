@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
-import net.dries007.tfc.api.recipes.LoomRecipe;
-import net.dries007.tfc.objects.te.TEInventory;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,7 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.objects.te.TEInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;

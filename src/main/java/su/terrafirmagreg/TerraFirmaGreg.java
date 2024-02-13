@@ -1,11 +1,10 @@
 package su.terrafirmagreg;
 
-import lombok.Getter;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 
+import lombok.Getter;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.proxy.IProxy;
 
@@ -15,14 +14,12 @@ import static su.terrafirmagreg.Tags.*;
 @Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
+    @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
+    public static IProxy PROXY;
     @SuppressWarnings("unused")
     @Mod.Instance
     @Getter
     private static TerraFirmaGreg instance;
-
-    @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
-    public static IProxy PROXY;
-
     // Hold this so that we can reference non-interface methods without
     // letting the GregTechAPI object see them as immediately.
     private final ModuleManager moduleManager;

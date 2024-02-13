@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ModuleRegistry {
+
     private List<Class<? extends ModuleBase>> moduleClassList;
     private List<ModuleBase> moduleList;
     private ModuleConstructor moduleConstructor;
@@ -17,7 +18,6 @@ public class ModuleRegistry {
         this.moduleClassList = new ArrayList<>();
         this.moduleList = moduleList;
     }
-
 
 
     public final void registerModules(Class<? extends ModuleBase> moduleClass) {

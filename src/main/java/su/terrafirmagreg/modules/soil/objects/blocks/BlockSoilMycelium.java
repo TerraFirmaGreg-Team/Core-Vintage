@@ -1,9 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 
-import lombok.Getter;
-import net.dries007.tfc.api.util.FallingBlockManager;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMycelium;
 import net.minecraft.block.properties.PropertyBool;
@@ -12,15 +9,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -55,7 +52,7 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlockVarian
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE)
-                .withProperty(SNOWY,Boolean.FALSE));
+                .withProperty(SNOWY, Boolean.FALSE));
 
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

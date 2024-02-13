@@ -67,7 +67,7 @@ public class ItemDebug extends ItemBase {
         return EnumActionResult.SUCCESS;
     }
 
-	@Override
+    @Override
     public boolean hasEffect(ItemStack stack) {
         return true;
     }

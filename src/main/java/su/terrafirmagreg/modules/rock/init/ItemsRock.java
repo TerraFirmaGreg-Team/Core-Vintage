@@ -15,13 +15,12 @@ public final class ItemsRock {
 
     public static final Map<Pair<RockItemVariant, RockType>, Item> ROCK_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
-	public static void onRegister(Registry registry) {
+    public static void onRegister(Registry registry) {
 
         for (var item : ROCK_ITEMS.values()) registry.registerAuto(item);
 
 
     }
-
 
 
     @NotNull

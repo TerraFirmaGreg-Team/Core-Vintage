@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.rock.api.types.type;
 
-import gregtech.api.unification.ore.StoneType;
-
-import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 
 import gregtech.api.unification.material.Material;
@@ -13,8 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.util.Helpers;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
-import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -68,7 +63,6 @@ public class RockType {
                 .findFirst()
                 .orElse(null);
     }
-
 
 
     /**

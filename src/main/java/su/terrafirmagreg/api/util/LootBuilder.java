@@ -18,36 +18,30 @@ public class LootBuilder {
      * The name of the loot entry. This can not be changed once set.
      */
     private final String name;
-
-    /**
-     * The name of the pool this entry targets.
-     */
-    private String pool;
-
-    /**
-     * The weight of the entry.
-     */
-    private int weight;
-
-    /**
-     * The quality of the entry. Affects how looting impacts the entry's weight.
-     */
-    private int quality;
-
-    /**
-     * The item to generate with the entry.
-     */
-    private Item item;
-
     /**
      * The conditions for the loot entry.
      */
     private final List<LootCondition> conditions;
-
     /**
      * The functions for the loot entry.
      */
     private final List<LootFunction> functions;
+    /**
+     * The name of the pool this entry targets.
+     */
+    private String pool;
+    /**
+     * The weight of the entry.
+     */
+    private int weight;
+    /**
+     * The quality of the entry. Affects how looting impacts the entry's weight.
+     */
+    private int quality;
+    /**
+     * The item to generate with the entry.
+     */
+    private Item item;
 
     public LootBuilder(String name, String pool, int weight, Item item) {
 

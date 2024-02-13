@@ -1,20 +1,17 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -62,7 +59,7 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock, IColorfulB
 
     @Override
     public IBlockColor getColorHandler() {
-        return (s, w, p, i) ->  this.getType().getColor();
+        return (s, w, p, i) -> this.getType().getColor();
     }
 
     @Override

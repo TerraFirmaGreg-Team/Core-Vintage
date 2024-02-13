@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +20,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
@@ -91,7 +90,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock, IColorfulBlo
 
     @Override
     public IBlockColor getColorHandler() {
-        return (s, w, p, i) ->  this.getType().getColor();
+        return (s, w, p, i) -> this.getType().getColor();
     }
 
     @Override

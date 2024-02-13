@@ -1,9 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import lombok.Getter;
-
-import net.dries007.tfc.client.GrassColorHandler;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -23,7 +19,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -32,7 +31,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.ImmutableList;
+import lombok.Getter;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
@@ -47,7 +48,10 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import static net.dries007.tfc.Constants.RNG;
 import static su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLeaves.EnumLeafState.*;

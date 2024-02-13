@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.soil.init;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-
 import net.minecraft.item.Item;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.util.Pair;
@@ -16,10 +15,10 @@ public final class ItemsSoil {
 
     public static final Map<Pair<SoilItemVariant, SoilType>, Item> SOIL_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
-	public static void onRegister(Registry registry) {
+    public static void onRegister(Registry registry) {
 
-		for (var item : SOIL_ITEMS.values()) registry.registerAuto(item);
-	}
+        for (var item : SOIL_ITEMS.values()) registry.registerAuto(item);
+    }
 
 
     @NotNull

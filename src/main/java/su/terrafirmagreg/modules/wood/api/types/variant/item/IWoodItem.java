@@ -5,9 +5,9 @@ import net.minecraft.util.ResourceLocation;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IAutoRegistry;
+import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.util.Helpers;
-import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 
 /**

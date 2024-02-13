@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 
-import lombok.Getter;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -11,7 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -28,10 +25,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.Helpers;
@@ -192,7 +189,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
 
     @Override
     public IBlockColor getColorHandler() {
-        return (s, w, p, i) ->  this.getType().getColor();
+        return (s, w, p, i) -> this.getType().getColor();
     }
 
     @Override

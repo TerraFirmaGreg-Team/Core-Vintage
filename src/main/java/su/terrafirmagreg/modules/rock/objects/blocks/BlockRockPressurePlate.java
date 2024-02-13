@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import lombok.Getter;
-
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import lombok.Getter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,6 +52,6 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation("rockcategory.name")
-                        .getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
+                .getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
     }
 }

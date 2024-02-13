@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -130,7 +129,8 @@ public class AutoRegistry {
         for (var builder : this.registry.getLootTableEntries().get(event.getName())) {
             var pool = event.getTable().getPool(builder.getPool());
             if (pool != null) pool.addEntry(builder.build());
-            else ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
+            else
+                ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
         }
     }
 

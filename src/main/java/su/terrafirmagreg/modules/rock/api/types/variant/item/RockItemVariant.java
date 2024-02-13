@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.item;
 
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-
 import net.minecraft.item.Item;
 
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;

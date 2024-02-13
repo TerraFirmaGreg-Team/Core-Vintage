@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.itemblocks;
 
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -32,6 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

@@ -4,10 +4,9 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.data.EnumColor;
+import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
@@ -32,7 +31,7 @@ public class BlockAlabaster extends BlockBase implements IItemSize {
 //        OreDictionaryHelper.register(this, "alabaster", blockVariant.toString(), color.getName());
     }
 
-	@Override
+    @Override
     public @NotNull String getName() {
         return String.format("rock/alabaster/%s/%s", blockVariant, color.getName());
     }

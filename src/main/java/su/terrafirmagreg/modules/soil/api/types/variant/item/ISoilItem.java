@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
-import com.ibm.icu.impl.URLHandler;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IAutoRegistry;
-import su.terrafirmagreg.api.registry.IHasModel;
 import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 
 /**

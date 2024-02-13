@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.module;
 
-import gregtech.api.modules.IGregTechModule;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;

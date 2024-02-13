@@ -1,15 +1,15 @@
 package su.terrafirmagreg.modules.soil.objects.blocks.peat;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
+import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 
 
-public class BlockPeat extends BlockBase  {
+public class BlockPeat extends BlockBase {
 
     public BlockPeat() {
         super(Material.GROUND);

@@ -1,9 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
 
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.objects.te.TETickableInventory;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
@@ -26,12 +23,14 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
 import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
+import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

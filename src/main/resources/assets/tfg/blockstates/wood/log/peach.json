@@ -4,7 +4,7 @@
     "model": "tfg:wood/log",
     "textures": {
       "side": "tfg:blocks/wood/log/side/peach",
-      "end": "tfg:blocks/wood/log/end/peach"
+      "end": "tfg:blocks/wood/log/side/peach"
     }
   },
   "variants": {

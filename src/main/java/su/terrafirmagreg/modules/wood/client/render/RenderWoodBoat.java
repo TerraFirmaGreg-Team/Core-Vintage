@@ -17,7 +17,6 @@ import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodBoat;
 
 
 @SideOnly(Side.CLIENT)
-
 public class RenderWoodBoat extends Render<EntityWoodBoat> {
 
     private final ModelBase modelBoat = new ModelBoat();

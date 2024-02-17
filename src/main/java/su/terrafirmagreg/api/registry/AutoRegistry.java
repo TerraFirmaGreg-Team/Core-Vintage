@@ -3,7 +3,6 @@ package su.terrafirmagreg.api.registry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
@@ -16,8 +15,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
@@ -94,7 +91,7 @@ public class AutoRegistry {
 
     public void onRegisterEntity(RegistryEvent.Register<EntityEntry> event) {
         for (var entry : this.registry.getEntities()) {
-            event.getRegistry().register(entry.build());
+            event.getRegistry().register(entry);
         }
     }
 
@@ -130,7 +127,7 @@ public class AutoRegistry {
             var pool = event.getTable().getPool(builder.getPool());
             if (pool != null) pool.addEntry(builder.build());
             else
-                ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModid(), event.getName(), builder.toString());
+                ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModID(), event.getName(), builder.toString());
         }
     }
 
@@ -157,15 +154,6 @@ public class AutoRegistry {
             final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
             if (tesr != null) ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void onRegisterEntityRenderingHandler() {
-        for (var provider : this.registry.getEntities_new()) {
-            IRenderFactory<? super Entity> renderFactory = provider.getEntityRenderer();
-
-            if (renderFactory != null) RenderingRegistry.registerEntityRenderingHandler(provider.getEntityClass(), renderFactory);
         }
     }
 

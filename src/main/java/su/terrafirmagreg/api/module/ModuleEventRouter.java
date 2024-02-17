@@ -262,7 +262,6 @@ public class ModuleEventRouter {
             module.getLogger().debug("Register ModelsEvent start");
             module.getAutoRegistry().onRegisterModels(event);
             module.getAutoRegistry().onRegisterTileEntitySpecialRenderer();
-            module.getAutoRegistry().onRegisterEntityRenderingHandler();
             module.getLogger().debug("Register ModelsEvent complete");
         });
     }

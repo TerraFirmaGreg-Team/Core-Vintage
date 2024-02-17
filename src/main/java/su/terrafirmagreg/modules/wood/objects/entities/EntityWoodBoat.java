@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,19 +15,15 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.spi.entity.IEntity;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
-import su.terrafirmagreg.modules.wood.client.render.RenderWoodBoat;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 
 @MethodsReturnNonnullByDefault
-public class EntityWoodBoat extends EntityBoat implements IEntity {
+public class EntityWoodBoat extends EntityBoat {
 
     private static final DataParameter<String> WOOD_NAME = EntityDataManager.createKey(EntityWoodBoat.class, DataSerializers.STRING);
 
@@ -163,15 +157,5 @@ public class EntityWoodBoat extends EntityBoat implements IEntity {
         if (compound.hasKey("Wood")) {
             this.dataManager.set(WOOD_NAME, compound.getString("Wood"));
         }
-    }
-
-    @Override
-    public Class<? extends Entity> getEntityClass() {
-        return null;
-    }
-
-    @Override
-    public Render<? super Entity> getEntityRenderer() {
-        return RenderWoodBoat::new;
     }
 }

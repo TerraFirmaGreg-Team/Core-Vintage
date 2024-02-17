@@ -18,6 +18,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,7 +31,6 @@ import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
-import su.terrafirmagreg.api.spi.entity.IEntity;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
@@ -47,7 +47,7 @@ public class Registry {
      * The id of the mod the registry helper instance belongs to.
      */
     @Getter
-    private final String modid;
+    private final String modID;
 
     /**
      * A list of all items registered by the helper.
@@ -89,10 +89,7 @@ public class Registry {
      * A list of all entities registered by the helper.
      */
     @Getter
-    private final NonNullList<EntityEntryBuilder<? extends Entity>> entities = NonNullList.create();
-
-    @Getter
-    private final NonNullList<IEntity> entities_new = NonNullList.create();
+    private final NonNullList<EntityEntry> entities = NonNullList.create();
 
     /**
      * A list of all entities registered by the helper.
@@ -113,6 +110,9 @@ public class Registry {
     @Getter
     private final List<Item> customMeshes = NonNullList.create();
 
+    /**
+     * A list of all the custom models.
+     */
     @Getter
     private final List<IHasModel> models = NonNullList.create();
 
@@ -175,7 +175,7 @@ public class Registry {
      * @param tab The tab for the registry helper.
      */
     public Registry(@Nullable CreativeTabs tab) {
-        this.modid = Loader.instance().activeModContainer().getModId();
+        this.modID = Loader.instance().activeModContainer().getModId();
         this.tab = tab;
     }
 
@@ -252,8 +252,8 @@ public class Registry {
      */
     public void registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
 
-        block.setRegistryName(this.modid, id);
-        block.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
+        block.setRegistryName(this.modID, id);
+        block.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
         this.blocks.add(block);
 
 
@@ -299,8 +299,8 @@ public class Registry {
      */
     public void registerItem(@Nonnull Item item, @Nonnull String id) {
 
-        item.setRegistryName(this.modid, id);
-        item.setTranslationKey(this.modid + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
+        item.setRegistryName(this.modID, id);
+        item.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
         this.items.add(item);
 
         if (this.tab != null) {
@@ -321,9 +321,9 @@ public class Registry {
 
     public void registerPotion(@Nonnull Potion potion, @Nonnull String id) {
 
-        potion.setRegistryName(this.modid, id);
-        potion.setPotionName(this.modid + "." + id.toLowerCase().replace("_", "."));
-        potion.setPotionName(this.modid + ".effect." + id);
+        potion.setRegistryName(this.modID, id);
+        potion.setPotionName(this.modID + "." + id.toLowerCase().replace("_", "."));
+        potion.setPotionName(this.modID + ".effect." + id);
         this.potions.add(potion);
     }
 
@@ -333,7 +333,7 @@ public class Registry {
 
     public void registerPotionType(@Nonnull PotionType potionType, @Nonnull String id) {
 
-        potionType.setRegistryName(this.modid, id);
+        potionType.setRegistryName(this.modID, id);
         this.potionType.add(potionType);
     }
 
@@ -347,7 +347,7 @@ public class Registry {
 
     public void registerBiome(Biome biome, String id, BiomeDictionary.Type[] types) {
 
-        biome.setRegistryName(this.modid, id);
+        biome.setRegistryName(this.modID, id);
         this.biomes.add(biome);
 
         if (types.length > 0) {
@@ -368,7 +368,7 @@ public class Registry {
      */
     public void registerSound(String name) {
 
-        final ResourceLocation id = new ResourceLocation(this.modid, name);
+        final ResourceLocation id = new ResourceLocation(this.modID, name);
         final SoundEvent sound = new SoundEvent(id).setRegistryName(id);
         this.sounds.add(sound);
     }
@@ -384,17 +384,23 @@ public class Registry {
      * @param id       The string id for the entity.
      * @return The entity that was registered.
      */
-    public <T extends Entity> EntityEntryBuilder<T> registerEntity(String id, Class<T> entClass, int networkId) {
+    public <T extends Entity> EntityEntryBuilder<T> registerEntity(String id, Class<T> entClass) {
 
-        final ResourceLocation entId = new ResourceLocation(this.modid, id);
         final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
-        builder.id(entId, networkId);
-        builder.name(this.modid + "." + id);
         builder.entity(entClass);
 
-        this.entities.add(builder);
-        this.entityIds.add(entId);
+        registerEntity(id, builder);
+
         return builder;
+    }
+
+    public <E extends Entity> void registerEntity(String id, EntityEntryBuilder<E> builder) {
+        final ResourceLocation entId = new ResourceLocation(this.modID, id);
+        builder.id(entId, this.networkEntityIdSupplier.getAndIncrement());
+        builder.name(this.modID + "." + id);
+
+        this.entities.add(builder.build());
+        this.entityIds.add(entId);
     }
 
     /**
@@ -404,9 +410,9 @@ public class Registry {
      * @param id       The string id for the entity.
      * @return The entity that was registered.
      */
-    public <T extends Entity> EntityEntryBuilder<T> registerMob(String id, Class<T> entClass, int networkId, int primary, int seconday) {
+    public <T extends Entity> EntityEntryBuilder<T> registerMob(String id, Class<T> entClass, int primary, int seconday) {
 
-        final EntityEntryBuilder<T> builder = this.registerEntity(id, entClass, networkId);
+        final EntityEntryBuilder<T> builder = this.registerEntity(id, entClass);
 
         builder.tracker(64, 1, true);
         builder.egg(primary, seconday);
@@ -426,7 +432,7 @@ public class Registry {
      */
     public Enchantment registerEnchantment(Enchantment enchant, String id) {
 
-        enchant.setRegistryName(new ResourceLocation(this.modid, id));
+        enchant.setRegistryName(new ResourceLocation(this.modID, id));
         this.enchantments.add(enchant);
         return enchant;
     }
@@ -475,7 +481,7 @@ public class Registry {
      */
     public IRecipe registerRecipe(String id, IRecipe recipe) {
 
-        recipe.setRegistryName(new ResourceLocation(this.modid, id));
+        recipe.setRegistryName(new ResourceLocation(this.modID, id));
         this.recipes.add(recipe);
         return recipe;
     }
@@ -495,7 +501,7 @@ public class Registry {
      */
     public ResourceLocation registerLootTable(String name) {
 
-        return LootTableList.register(new ResourceLocation(this.modid, name));
+        return LootTableList.register(new ResourceLocation(this.modID, name));
     }
 
     //endregion

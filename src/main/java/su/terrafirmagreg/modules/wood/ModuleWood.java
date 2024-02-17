@@ -15,6 +15,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
+import su.terrafirmagreg.modules.wood.init.EntitiesWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import java.util.Collections;
@@ -46,6 +47,14 @@ public class ModuleWood extends ModuleBase {
 
         BlocksWood.onRegister(registry);
         ItemsWood.onRegister(registry);
+        EntitiesWood.onRegister(registry);
+    }
+
+    @Override
+    public void onClientRegister() {
+
+        EntitiesWood.onClientRegister(registry);
+
     }
 
     @Override

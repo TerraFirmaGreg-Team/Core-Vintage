@@ -41,7 +41,7 @@ public final class EntitiesWood {
     }
 
     @SideOnly(Side.CLIENT)
-    public static void onClientRegister() {
+    public static void onClientRegister(Registry registry) {
         RenderingRegistry.registerEntityRenderingHandler(EntityWoodBoat.class, RenderWoodBoat::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWoodSupplyCart.class, RenderWoodSupplyCart::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWoodAnimalCart.class, RenderWoodAnimalCart::new);

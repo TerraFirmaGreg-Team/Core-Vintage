@@ -24,11 +24,6 @@ public final class ItemsWood {
         //for (var item : TREE_ITEMS) registry.registerItem(item);
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void onClientRegister(Registry registry) {
-
-    }
-
 
     @NotNull
     public static Item getItem(@NotNull WoodItemVariant variant, @NotNull WoodType type) {

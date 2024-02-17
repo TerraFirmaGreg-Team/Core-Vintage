@@ -69,6 +69,6 @@ public class TerraFirmaGreg {
 
     @EventHandler
     public void onPostInit(FMLPostInitializationEvent event) {
-        TFGRecipes.register();
+        Recipes.register();
     }
 }

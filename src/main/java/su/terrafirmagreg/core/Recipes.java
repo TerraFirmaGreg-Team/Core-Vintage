@@ -30,7 +30,7 @@ import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.core.util.TFGModUtils.TFG_OREPREFIX_REGISTRY;
 
-public class TFGRecipes {
+public class Recipes {
 
     public static void register() {
         fixStoneToolsRecipes();

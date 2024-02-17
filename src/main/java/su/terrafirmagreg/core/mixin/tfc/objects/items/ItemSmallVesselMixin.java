@@ -1,5 +1,9 @@
 package su.terrafirmagreg.core.mixin.tfc.objects.items;
 
+import net.dries007.tfc.objects.blocks.BlockLargeVessel;
+import net.dries007.tfc.objects.items.ceramics.ItemPottery;
+import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemStackHandler;
@@ -25,7 +29,7 @@ public abstract class ItemSmallVesselMixin extends ItemStackHandler implements I
      */
     @Inject(method = "isItemValid", at = @At(value = "INVOKE", target = "Lnet/dries007/tfc/api/capability/size/Size;isSmallerThan(Lnet/dries007/tfc/api/capability/size/Size;)Z", shift = At.Shift.AFTER), remap = false, cancellable = true)
     private void onIsItemValid(int slot, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (stack.hasCapability(ITEM_HEAT_CAPABILITY, null)) {
+        if (stack.hasCapability(ITEM_HEAT_CAPABILITY, null) && !(stack.getItem() instanceof ItemPottery)) {
             cir.setReturnValue(true);
         } else if (stack.getItem() instanceof ItemFoodTFC) {
             cir.setReturnValue(true);

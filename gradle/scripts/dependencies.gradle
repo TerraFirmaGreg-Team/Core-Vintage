@@ -55,6 +55,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:tfctech-unofficial-340660:3209033")
     implementation rfg.deobf("curse.maven:tfc-cellars-add-on-431185:3640604")
     implementation rfg.deobf("curse.maven:tfc-things-386285:3378687")
+    implementation rfg.deobf("curse.maven:tfc-alloy-calculator-506260:3393720")
 
     implementation rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548")
     implementation rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637")

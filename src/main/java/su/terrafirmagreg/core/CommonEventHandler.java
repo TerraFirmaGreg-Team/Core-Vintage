@@ -19,7 +19,7 @@ import su.terrafirmagreg.core.modules.gregtech.recipes.TFGRecipeHandlerList;
 import su.terrafirmagreg.core.modules.gregtech.stonetypes.StoneTypeHandler;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
-public final class TFGCommonEventHandler {
+public final class CommonEventHandler {
 
     @SubscribeEvent
     public static void registerMaterials(MaterialEvent event) {

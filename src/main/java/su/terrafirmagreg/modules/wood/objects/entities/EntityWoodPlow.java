@@ -88,7 +88,9 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 
     public void onUpdate() {
         super.onUpdate();
-        EntityPlayer player = this.pulling != null && this.pulling.getControllingPassenger() instanceof EntityPlayer ? (EntityPlayer) this.pulling.getControllingPassenger() : (this.pulling instanceof EntityPlayer ? (EntityPlayer) this.pulling : null);
+        EntityPlayer player = this.pulling != null && this.pulling.getControllingPassenger() instanceof EntityPlayer
+                ? (EntityPlayer) this.pulling.getControllingPassenger()
+                : (this.pulling instanceof EntityPlayer ? (EntityPlayer) this.pulling : null);
         if (!this.world.isRemote && this.dataManager.get(PLOWING) && player != null) {
             if (this.prevPosX != this.posX || this.prevPosZ != this.posZ) {
                 for (int i = 0; i < this.inventory.getSizeInventory(); i++) {

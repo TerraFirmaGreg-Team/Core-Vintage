@@ -38,8 +38,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IIn
             return false;
         }
         for (String entry : ModuleWoodConfig.SUPPLY_CART.canPull) {
-            if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn)
-                    .toString())) {
+            if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
                 return true;
             }
         }

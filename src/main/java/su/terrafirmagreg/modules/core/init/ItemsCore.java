@@ -2,24 +2,23 @@ package su.terrafirmagreg.modules.core.init;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import su.terrafirmagreg.api.registry.Registry;
+import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.core.objects.items.ItemDebug;
 
 public final class ItemsCore {
 
-    public static ItemDebug WAND;
+	public static ItemDebug WAND;
 
-    public static void onRegister(Registry registry) {
+	public static void onRegister(RegistryManager registry) {
 
-        //==== Other =================================================================================================//
+		//==== Other =================================================================================================//
 
-        registry.registerAuto(WAND = new ItemDebug());
-    }
+		registry.registerAuto(WAND = new ItemDebug());
+	}
 
 
-    @SideOnly(Side.CLIENT)
-    public static void onClientRegister(Registry registry) {
+	@SideOnly(Side.CLIENT)
+	public static void onClientRegister(RegistryManager registry) {
 
 //        registry.registerClientModel(() -> {
 //            ModelRegistrationHelper.registerItemModels(
@@ -29,5 +28,5 @@ public final class ItemsCore {
 //            );
 //        });
 
-    }
+	}
 }

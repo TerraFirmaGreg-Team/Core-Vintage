@@ -1,0 +1,87 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "forestry:blocks/wood/bark.acacia"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        35,
+        25,
+        0
+      ],
+      "scale": [
+        0.2,
+        0.4,
+        0.2
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        35,
+        25,
+        0
+      ],
+      "scale": [
+        0.3,
+        0.7,
+        0.3
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        35,
+        25,
+        0
+      ],
+      "scale": [
+        0.3,
+        0.7,
+        0.3
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        35,
+        25,
+        0
+      ],
+      "scale": [
+        0.3,
+        0.7,
+        0.3
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.3,
+        0.7,
+        0.3
+      ]
+    },
+    "gui": {
+      "rotation": [
+        126,
+        0,
+        -25
+      ],
+      "scale": [
+        0.3,
+        0.7,
+        0.3
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.3,
+        0.7,
+        0.3
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ]
+    }
+  }
+}

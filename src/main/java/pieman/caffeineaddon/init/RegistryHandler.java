@@ -15,7 +15,7 @@ import pieman.caffeineaddon.blocks.BlockCoffeeTreeLeaves;
 import pieman.caffeineaddon.blocks.TEDryingMat;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.jeicompat.OreDictionaryCompat;
-import su.terrafirmagreg.api.registry.IHasModel;
+import su.terrafirmagreg.api.registry.IHasStateMapper;
 
 import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
 
@@ -38,16 +38,17 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event) {
 		for (Item item : ModItems.ITEMS) {
-			if (item instanceof IHasModel) {
-				((IHasModel) item).onModelRegister();
+			if (item instanceof IHasStateMapper) {
+				((IHasStateMapper) item).onStateMapperRegister();
 			}
 		}
-		ModelLoader.setCustomStateMapper(ModBlocks.LEAVES, new StateMap.Builder().ignore(BlockCoffeeTreeLeaves.DECAYABLE)
-		                                                                         .ignore(BlockCoffeeTreeLeaves.HARVESTABLE)
-		                                                                         .build());
+		ModelLoader.setCustomStateMapper(ModBlocks.LEAVES, new StateMap.Builder()
+				.ignore(BlockCoffeeTreeLeaves.DECAYABLE)
+				.ignore(BlockCoffeeTreeLeaves.HARVESTABLE)
+				.build());
 		for (Block block : ModBlocks.BLOCKS) {
-			if (block instanceof IHasModel) {
-				((IHasModel) block).onModelRegister();
+			if (block instanceof IHasStateMapper) {
+				((IHasStateMapper) block).onStateMapperRegister();
 			}
 		}
 	}

@@ -52,7 +52,7 @@ public class InfectedAir extends BlockBase {
 	}
 
 	@Override
-	public void onModelRegister() {
+	public void onStateMapperRegister() {
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 

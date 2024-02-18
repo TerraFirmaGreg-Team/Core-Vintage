@@ -19,12 +19,12 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.blocks.tileentity.TEIceBunker;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasModel;
 import net.sharkbark.cellars.util.Reference;
+import su.terrafirmagreg.api.registry.IHasStateMapper;
 
 import javax.annotation.Nullable;
 
-public class BlockIceBunker extends BlockContainer implements IHasModel {
+public class BlockIceBunker extends BlockContainer implements IHasStateMapper {
 
 	public BlockIceBunker(String name, Material material) {
 		super(Material.WOOD);
@@ -78,7 +78,7 @@ public class BlockIceBunker extends BlockContainer implements IHasModel {
 	}
 
 	@Override
-	public void onModelRegister() {
+	public void onStateMapperRegister() {
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 }

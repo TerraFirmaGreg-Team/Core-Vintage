@@ -1,5 +1,12 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import com.google.common.collect.ImmutableList;
+import lombok.Getter;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.client.particle.TFCParticles;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -29,19 +36,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.google.common.collect.ImmutableList;
-import lombok.Getter;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.client.GrassColorHandler;
-import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.registry.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -60,69 +59,69 @@ import static su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLeaves.Enum
 @Getter
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfulBlock {
 
-    public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
-    public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
-    private final WoodBlockVariant blockVariant;
-    private final WoodType type;
+	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
+	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
+	private final WoodBlockVariant blockVariant;
+	private final WoodType type;
 
-    public BlockWoodLeaves(WoodBlockVariant blockVariant, WoodType type) {
-        this.blockVariant = blockVariant;
-        this.type = type;
+	public BlockWoodLeaves(WoodBlockVariant blockVariant, WoodType type) {
+		this.blockVariant = blockVariant;
+		this.type = type;
 
-        this.leavesFancy = true; // Fast / Fancy graphics works correctly
+		this.leavesFancy = true; // Fast / Fancy graphics works correctly
 
-        setTickRandomly(true);
-        setDefaultState(blockState.getBaseState()
-                .withProperty(LEAF_STATE, NORMAL)
-                .withProperty(HARVESTABLE, false)
-                .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+		setTickRandomly(true);
+		setDefaultState(blockState.getBaseState()
+				.withProperty(LEAF_STATE, NORMAL)
+				.withProperty(HARVESTABLE, false)
+				.withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
 
 
-        Blocks.FIRE.setFireInfo(this, 30, 60);
+		Blocks.FIRE.setFireInfo(this, 30, 60);
 
-        //OreDictionaryHelper.register(this, variant.toString());
-        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
+		//OreDictionaryHelper.register(this, variant.toString());
+		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+	}
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockBase(this);
-    }
+	@Nullable
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlockBase(this);
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
-                .withProperty(HARVESTABLE, meta > 3)
-                .withProperty(LEAF_STATE, valueOf(meta & 0b11))
-                .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	@NotNull
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState()
+				.withProperty(HARVESTABLE, meta > 3)
+				.withProperty(LEAF_STATE, valueOf(meta & 0b11))
+				.withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(LEAF_STATE)
-                .ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(LEAF_STATE)
+				.ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return Block.NULL_AABB;
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+		return Block.NULL_AABB;
+	}
 
-    public double getGrowthRate(World world, BlockPos pos) {
-        if (world.isRainingAt(pos)) return ConfigTFC.General.MISC.plantGrowthRate * 5d;
-        else return ConfigTFC.General.MISC.plantGrowthRate;
-    }
+	public double getGrowthRate(World world, BlockPos pos) {
+		if (world.isRainingAt(pos)) return ConfigTFC.General.MISC.plantGrowthRate * 5d;
+		else return ConfigTFC.General.MISC.plantGrowthRate;
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        //world.scheduleUpdate(pos, this, 0);
-        doLeafDecay(world, pos, state);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		//world.scheduleUpdate(pos, this, 0);
+		doLeafDecay(world, pos, state);
+	}
 
 //    @Override
 //    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
@@ -178,13 +177,13 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //        doLeafDecay(world, pos, state);
 //    }
 
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
-        if (tile != null) {
-            tile.resetCounter();
-        }
-    }
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+		if (tile != null) {
+			tile.resetCounter();
+		}
+	}
 
 //    @Override
 //    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -202,137 +201,137 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //        return false;
 //    }
 
-    @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
-            // Player will take damage when falling through leaves if fall is over 9 blocks, fall damage is then set to 0.
-            entityIn.fall((entityIn.fallDistance - 6), 1.0F);
-            entityIn.fallDistance = 0;
-            // Entity motion is reduced by leaves.
-            entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
-            if (entityIn.motionY < 0) {
-                entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
-            }
-            entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
-        }
-    }
+	@Override
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
+			// Player will take damage when falling through leaves if fall is over 9 blocks, fall damage is then set to 0.
+			entityIn.fall((entityIn.fallDistance - 6), 1.0F);
+			entityIn.fallDistance = 0;
+			// Entity motion is reduced by leaves.
+			entityIn.motionX *= ConfigTFC.General.MISC.leafMovementModifier;
+			if (entityIn.motionY < 0) {
+				entityIn.motionY *= ConfigTFC.General.MISC.leafMovementModifier;
+			}
+			entityIn.motionZ *= ConfigTFC.General.MISC.leafMovementModifier;
+		}
+	}
 
-    @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
-        return true;
-    }
+	@Override
+	public boolean hasTileEntity(@NotNull IBlockState state) {
+		return true;
+	}
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TETickCounter();
-    }
+	@Nullable
+	@Override
+	public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+		return new TETickCounter();
+	}
 
-    @Override
-    public void updateTick(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
-        doLeafDecay(worldIn, pos, state);
-    }
+	@Override
+	public void updateTick(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
+		doLeafDecay(worldIn, pos, state);
+	}
 
-    @Override
-    @NotNull
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
-    }
+	@Override
+	@NotNull
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
+	}
 
-    @Override
-    @NotNull
-    public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
-        if (state.getValue(LEAF_STATE) != WINTER) {
-            return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlocksWood.getBlock(WoodBlockVariants.SAPLING, type)) : Items.AIR;
-        }
-        return null;
-    }
+	@Override
+	@NotNull
+	public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
+		if (state.getValue(LEAF_STATE) != WINTER) {
+			return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlocksWood.getBlock(WoodBlockVariants.SAPLING, type)) : Items.AIR;
+		}
+		return null;
+	}
 
-    @Override
-    protected int getSaplingDropChance(@NotNull IBlockState state) {
-        return 25;
-    }
+	@Override
+	protected int getSaplingDropChance(@NotNull IBlockState state) {
+		return 25;
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
-        return false;
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean isOpaqueCube(@NotNull IBlockState state) {
+		return false;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @NotNull
-    public BlockRenderLayer getRenderLayer() {
-        /*
-         * This is a way to make sure the leave settings are updated.
-         * The result of this call is cached somewhere, so it's not that important, but:
-         * The alternative would be to use `Minecraft.getMinecraft().gameSettings.fancyGraphics` directly in the 2 relevant methods.
-         * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
-         */
-        leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
-        return super.getRenderLayer();
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	@NotNull
+	public BlockRenderLayer getRenderLayer() {
+		/*
+		 * This is a way to make sure the leave settings are updated.
+		 * The result of this call is cached somewhere, so it's not that important, but:
+		 * The alternative would be to use `Minecraft.getMinecraft().gameSettings.fancyGraphics` directly in the 2 relevant methods.
+		 * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
+		 */
+		leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		return super.getRenderLayer();
+	}
 
-    @Override
-    @NotNull
-    public BlockPlanks.EnumType getWoodType(int meta) {
-        // Unused so return whatever
-        return BlockPlanks.EnumType.OAK;
-    }
+	@Override
+	@NotNull
+	public BlockPlanks.EnumType getWoodType(int meta) {
+		// Unused so return whatever
+		return BlockPlanks.EnumType.OAK;
+	}
 
-    @Override
-    public void beginLeavesDecay(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos) {
-        // Don't do vanilla decay
-    }
+	@Override
+	public void beginLeavesDecay(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos) {
+		// Don't do vanilla decay
+	}
 
-    @Override
-    public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, IBlockState state, int fortune) {
-        if (state.getValue(LEAF_STATE) != WINTER) {
-            int chance = this.getSaplingDropChance(state);
-            if (chance > 0) {
-                if (fortune > 0) {
-                    chance -= 2 << fortune;
-                    if (chance < 10) chance = 10;
-                }
+	@Override
+	public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, IBlockState state, int fortune) {
+		if (state.getValue(LEAF_STATE) != WINTER) {
+			int chance = this.getSaplingDropChance(state);
+			if (chance > 0) {
+				if (fortune > 0) {
+					chance -= 2 << fortune;
+					if (chance < 10) chance = 10;
+				}
 
-                if (RANDOM.nextInt(chance) == 0) {
-                    ItemStack drop = new ItemStack(getItemDropped(state, RANDOM, fortune), 1, damageDropped(state));
-                    if (!drop.isEmpty()) {
-                        drops.add(drop);
-                    }
-                }
-            }
-        }
-    }
+				if (RANDOM.nextInt(chance) == 0) {
+					ItemStack drop = new ItemStack(getItemDropped(state, RANDOM, fortune), 1, damageDropped(state));
+					if (!drop.isEmpty()) {
+						drops.add(drop);
+					}
+				}
+			}
+		}
+	}
 
-    @SuppressWarnings("deprecation")
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean shouldSideBeRendered(@NotNull IBlockState blockState, @NotNull IBlockAccess blockAccess, @NotNull BlockPos pos, @NotNull EnumFacing side) {
-        /*
-         * See comment on getRenderLayer()
-         */
-        leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
-        return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
-    }
+	@SuppressWarnings("deprecation")
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean shouldSideBeRendered(@NotNull IBlockState blockState, @NotNull IBlockAccess blockAccess, @NotNull BlockPos pos, @NotNull EnumFacing side) {
+		/*
+		 * See comment on getRenderLayer()
+		 */
+		leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+	}
 
-    @Override
-    @NotNull
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return ImmutableList.of(new ItemStack(this));
-    }
+	@Override
+	@NotNull
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		return ImmutableList.of(new ItemStack(this));
+	}
 
-    private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
-        // TFC Leaf Decay
-        if (world.isRemote || !state.getValue(DECAYABLE))
-            return;
+	private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
+		// TFC Leaf Decay
+		if (world.isRemote || !state.getValue(DECAYABLE))
+			return;
 
-        Set<BlockPos> paths = new HashSet<>();
-        Set<BlockPos> evaluated = new HashSet<>(); // Leaves that everything was evaluated so no need to do it again
-        List<BlockPos> pathsToAdd; // New Leaves that needs evaluation
-        BlockPos.MutableBlockPos pos1 = new BlockPos.MutableBlockPos(pos);
-        IBlockState state1;
-        paths.add(pos); // Center block
+		Set<BlockPos> paths = new HashSet<>();
+		Set<BlockPos> evaluated = new HashSet<>(); // Leaves that everything was evaluated so no need to do it again
+		List<BlockPos> pathsToAdd; // New Leaves that needs evaluation
+		BlockPos.MutableBlockPos pos1 = new BlockPos.MutableBlockPos(pos);
+		IBlockState state1;
+		paths.add(pos); // Center block
 
 //        for (int i = 0; i < this.getTreeVariant().getMaxDecayDistance(); i++) {
 //            pathsToAdd = new ArrayList<>();
@@ -353,79 +352,80 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //            paths.removeAll(evaluated);
 //        }
 
-        world.setBlockToAir(pos);
-        int particleScale = 10;
-        double x = pos.getX();
-        double y = pos.getY();
-        double z = pos.getZ();
-        for (int i = 1; i < RNG.nextInt(4); i++) {
-            switch (RNG.nextInt(4)) {
-                case 1:
-                    TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() /
-                            particleScale, y - RNG.nextFloat() /
-                            particleScale, z + RNG.nextFloat() /
-                            particleScale, (RNG.nextFloat() - 0.5) /
-                            particleScale, -0.15D + RNG.nextFloat() /
-                            particleScale, (RNG.nextFloat() - 0.5) /
-                            particleScale, 90);
-                    break;
-                case 2:
-                    TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() /
-                            particleScale, y - RNG.nextFloat() /
-                            particleScale, z + RNG.nextFloat() /
-                            particleScale, (RNG.nextFloat() - 0.5) /
-                            particleScale, -0.15D + RNG.nextFloat() /
-                            particleScale, (RNG.nextFloat() - 0.5) /
-                            particleScale, 70);
-                    break;
-                case 3:
-                    TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() /
-                            particleScale, y - RNG.nextFloat() /
-                            particleScale, z + RNG.nextFloat() /
-                            particleScale, (RNG.nextFloat() - 0.5) /
-                            particleScale, -0.15D + RNG.nextFloat() /
-                            particleScale, (RNG.nextFloat() - 0.5) /
-                            particleScale, 80);
-                    break;
-            }
-        }
-    }
+		world.setBlockToAir(pos);
+		int particleScale = 10;
+		double x = pos.getX();
+		double y = pos.getY();
+		double z = pos.getZ();
+		for (int i = 1; i < RNG.nextInt(4); i++) {
+			switch (RNG.nextInt(4)) {
+				case 1:
+					TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() /
+							particleScale, y - RNG.nextFloat() /
+							particleScale, z + RNG.nextFloat() /
+							particleScale, (RNG.nextFloat() - 0.5) /
+							particleScale, -0.15D + RNG.nextFloat() /
+							particleScale, (RNG.nextFloat() - 0.5) /
+							particleScale, 90);
+					break;
+				case 2:
+					TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() /
+							particleScale, y - RNG.nextFloat() /
+							particleScale, z + RNG.nextFloat() /
+							particleScale, (RNG.nextFloat() - 0.5) /
+							particleScale, -0.15D + RNG.nextFloat() /
+							particleScale, (RNG.nextFloat() - 0.5) /
+							particleScale, 70);
+					break;
+				case 3:
+					TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() /
+							particleScale, y - RNG.nextFloat() /
+							particleScale, z + RNG.nextFloat() /
+							particleScale, (RNG.nextFloat() - 0.5) /
+							particleScale, -0.15D + RNG.nextFloat() /
+							particleScale, (RNG.nextFloat() - 0.5) /
+							particleScale, 80);
+					break;
+			}
+		}
+	}
 
-    @Override
-    public IBlockColor getColorHandler() {
-        return GrassColorHandler::computeGrassColor;
-    }
+	@Override
+	public IBlockColor getColorHandler() {
+		return GrassColorHandler::computeGrassColor;
+	}
 
-    @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
-    }
+	@Override
+	public IItemColor getItemColorHandler() {
+		return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelRegistrationHelper.registerBlockModel(this, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE).build());
-        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onStateMapperRegister() {
+		ModelManager.registerBlockModel(this, new StateMap.Builder()
+				.ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE).build());
+		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
+	}
 
-    public enum EnumLeafState implements IStringSerializable {
-        NORMAL,
-        FLOWERING,
-        FRUIT,
-        AUTUMN,
-        WINTER;
+	public enum EnumLeafState implements IStringSerializable {
+		NORMAL,
+		FLOWERING,
+		FRUIT,
+		AUTUMN,
+		WINTER;
 
-        private static final EnumLeafState[] VALUES = values();
+		private static final EnumLeafState[] VALUES = values();
 
-        @NotNull
-        public static EnumLeafState valueOf(int index) {
-            return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
-        }
+		@NotNull
+		public static EnumLeafState valueOf(int index) {
+			return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
+		}
 
-        @Override
-        @NotNull
-        public String getName() {
-            return this.name().toLowerCase();
-        }
-    }
+		@Override
+		@NotNull
+		public String getName() {
+			return this.name().toLowerCase();
+		}
+	}
 }

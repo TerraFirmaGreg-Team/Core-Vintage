@@ -4,9 +4,9 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.minecraft.item.Item;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasModel;
+import su.terrafirmagreg.api.registry.IHasStateMapper;
 
-public class ItemCoffee extends Item implements IHasModel {
+public class ItemCoffee extends Item implements IHasStateMapper {
 
 	public ItemCoffee(String name) {
 		super();
@@ -18,7 +18,7 @@ public class ItemCoffee extends Item implements IHasModel {
 	}
 
 	@Override
-	public void onModelRegister() {
+	public void onStateMapperRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 

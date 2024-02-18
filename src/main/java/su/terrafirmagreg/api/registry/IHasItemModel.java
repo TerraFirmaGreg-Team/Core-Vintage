@@ -1,11 +1,11 @@
 package su.terrafirmagreg.api.registry;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-// Configure automatic model registration
-public interface IHasModel {
+public interface IHasItemModel {
 
-    @SideOnly(Side.CLIENT)
-    void onModelRegister();
+	@SideOnly(Side.CLIENT)
+	void onModelRegister(Item item);
 }

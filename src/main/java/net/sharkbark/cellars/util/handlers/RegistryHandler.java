@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasModel;
+import su.terrafirmagreg.api.registry.IHasStateMapper;
 
 import static su.terrafirmagreg.Constants.MODID_CELLARS;
 
@@ -47,9 +47,9 @@ public class RegistryHandler {
 
 		for (Item item : ModItems.ITEMS) {
 
-			if (item instanceof IHasModel) {
+			if (item instanceof IHasStateMapper) {
 
-				((IHasModel) item).onModelRegister();
+				((IHasStateMapper) item).onStateMapperRegister();
 
 			}
 
@@ -57,9 +57,9 @@ public class RegistryHandler {
 
 		for (Block block : ModBlocks.BLOCKS) {
 
-			if (block instanceof IHasModel) {
+			if (block instanceof IHasStateMapper) {
 
-				((IHasModel) block).onModelRegister();
+				((IHasStateMapper) block).onStateMapperRegister();
 
 			}
 
@@ -82,8 +82,9 @@ public class RegistryHandler {
 				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, ItemType.DOUBLE_INGOT))),
 						new ItemStack(ModItems.STEEL_ICE_SAW_HEAD), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
 				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), ItemType.DOUBLE_INGOT))),
-						new ItemStack(ModItems.BLACK_STEEL_ICE_SAW_HEAD), TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL)
-						                                                                      .getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+						new ItemStack(ModItems.BLACK_STEEL_ICE_SAW_HEAD), TFCRegistries.METALS
+						.getValue(DefaultMetals.BLACK_STEEL)
+						.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
 				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "red_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.RED_STEEL, ItemType.DOUBLE_INGOT))),
 						new ItemStack(ModItems.RED_STEEL_ICE_SAW_HEAD), Metal.RED_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
 				new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "blue_steel_ice_saw"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, ItemType.DOUBLE_INGOT))),

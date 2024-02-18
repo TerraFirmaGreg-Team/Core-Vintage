@@ -7,9 +7,9 @@ import net.minecraft.item.ItemBlock;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasModel;
+import su.terrafirmagreg.api.registry.IHasStateMapper;
 
-public class BlockBase extends Block implements IHasModel {
+public class BlockBase extends Block implements IHasStateMapper {
 
 	public BlockBase(String name, Material material) {
 		super(material);
@@ -22,7 +22,7 @@ public class BlockBase extends Block implements IHasModel {
 	}
 
 	@Override
-	public void onModelRegister() {
+	public void onStateMapperRegister() {
 
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,8 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
@@ -35,66 +34,66 @@ import java.util.Random;
 @Getter
 public class BlockWoodDoor extends BlockDoor implements IWoodBlock, IColorfulBlock {
 
-    private final WoodBlockVariant blockVariant;
-    private final WoodType type;
+	private final WoodBlockVariant blockVariant;
+	private final WoodType type;
 
-    public BlockWoodDoor(WoodBlockVariant blockVariant, WoodType type) {
-        super(Material.WOOD);
+	public BlockWoodDoor(WoodBlockVariant blockVariant, WoodType type) {
+		super(Material.WOOD);
 
-        this.blockVariant = blockVariant;
-        this.type = type;
+		this.blockVariant = blockVariant;
+		this.type = type;
 
-        setSoundType(SoundType.WOOD);
-        setHardness(3.0F);
-        disableStats();
+		setSoundType(SoundType.WOOD);
+		setHardness(3.0F);
+		disableStats();
 
-        Blocks.FIRE.setFireInfo(this, 5, 20);
+		Blocks.FIRE.setFireInfo(this, 5, 20);
 
-        //OreDictionaryHelper.register(this, variant.toString());
-        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
+		//OreDictionaryHelper.register(this, variant.toString());
+		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+	}
 
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockWoodDoor(this);
-    }
+	@Nullable
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlockWoodDoor(this);
+	}
 
-    @SuppressWarnings("ConstantConditions")
-    @NotNull
-    @Override
-    public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
-        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
-    }
+	@SuppressWarnings("ConstantConditions")
+	@NotNull
+	@Override
+	public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
+		return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
+	}
 
-    @SuppressWarnings("ConstantConditions")
-    @NotNull
-    @Override
-    public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
-        return new ItemStack(Item.getItemFromBlock(this));
-    }
+	@SuppressWarnings("ConstantConditions")
+	@NotNull
+	@Override
+	public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
+		return new ItemStack(Item.getItemFromBlock(this));
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customPath(getResourceLocation())
-                        .ignore(BlockDoor.POWERED).build());
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onStateMapperRegister() {
+		ModelLoader.setCustomStateMapper(this,
+				new CustomStateMap.Builder()
+						.customPath(getResourceLocation())
+						.ignore(BlockDoor.POWERED).build());
 
-        ModelLoader.setCustomModelResourceLocation(
-                Item.getItemFromBlock(this), 0,
-                new ModelResourceLocation(getResourceLocation(), "inventory"));
-    }
+		ModelLoader.setCustomModelResourceLocation(
+				Item.getItemFromBlock(this), 0,
+				new ModelResourceLocation(getResourceLocation(), "inventory"));
+	}
 
-    @Override
-    public IBlockColor getColorHandler() {
-        return (s, w, p, i) -> this.getType().getColor();
-    }
+	@Override
+	public IBlockColor getColorHandler() {
+		return (s, w, p, i) -> this.getType().getColor();
+	}
 
-    @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getType().getColor();
-    }
+	@Override
+	public IItemColor getItemColorHandler() {
+		return (s, i) -> this.getType().getColor();
+	}
 }

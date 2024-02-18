@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -22,15 +24,12 @@ import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import lombok.Getter;
-import mcp.MethodsReturnNonnullByDefault;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.registry.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.CustomStateMap;
-import su.terrafirmagreg.api.util.ModelRegistrationHelper;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -39,113 +38,114 @@ import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodWorkbench;
 @Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock, IColorfulBlock {
 
-    private final WoodBlockVariant blockVariant;
-    private final WoodType type;
+	private final WoodBlockVariant blockVariant;
+	private final WoodType type;
 
-    public BlockWoodWorkbench(WoodBlockVariant blockVariant, WoodType type) {
+	public BlockWoodWorkbench(WoodBlockVariant blockVariant, WoodType type) {
 
-        this.blockVariant = blockVariant;
-        this.type = type;
+		this.blockVariant = blockVariant;
+		this.type = type;
 
-        setSoundType(SoundType.WOOD);
-        setHardness(2.0F);
-        setResistance(5.0F);
-        setHarvestLevel("axe", 0);
+		setSoundType(SoundType.WOOD);
+		setHardness(2.0F);
+		setResistance(5.0F);
+		setHarvestLevel("axe", 0);
 
-        Blocks.FIRE.setFireInfo(this, 5, 20);
+		Blocks.FIRE.setFireInfo(this, 5, 20);
 
-        //OreDictionaryHelper.register(this, variant.toString());
-        //OreDictionaryHelper.register(this, variant.toString(), type.toString());
-    }
+		//OreDictionaryHelper.register(this, variant.toString());
+		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+	}
 
-    @Nullable
-    @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlockBase(this);
-    }
+	@Nullable
+	@Override
+	public ItemBlock getItemBlock() {
+		return new ItemBlockBase(this);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @NotNull
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+	@SideOnly(Side.CLIENT)
+	@NotNull
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 
-    @Override
-    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote && playerIn != null) {
-            playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
-            playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
-        }
-        return true;
-    }
+	@Override
+	public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote && playerIn != null) {
+			playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
+			playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
+		}
+		return true;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelRegistrationHelper.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
-        ModelRegistrationHelper.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onStateMapperRegister() {
+		ModelManager.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation())
+				.build());
+		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
+	}
 
-    @Override
-    public IBlockColor getColorHandler() {
-        return (s, w, p, i) -> this.getType().getColor();
-    }
+	@Override
+	public IBlockColor getColorHandler() {
+		return (s, w, p, i) -> this.getType().getColor();
+	}
 
-    @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getType().getColor();
-    }
+	@Override
+	public IItemColor getItemColorHandler() {
+		return (s, i) -> this.getType().getColor();
+	}
 
-    @SuppressWarnings("WeakerAccess")
+	@SuppressWarnings("WeakerAccess")
 
-    @MethodsReturnNonnullByDefault
-    public static class InterfaceCraftingTable implements IInteractionObject {
+	@MethodsReturnNonnullByDefault
+	public static class InterfaceCraftingTable implements IInteractionObject {
 
-        //todo: replace with proper workbench mechanics + normal forge gui code
-        private final BlockWoodWorkbench workbench;
-        private final World world;
-        private final BlockPos position;
+		//todo: replace with proper workbench mechanics + normal forge gui code
+		private final BlockWoodWorkbench workbench;
+		private final World world;
+		private final BlockPos position;
 
-        public InterfaceCraftingTable(BlockWoodWorkbench workbench, World worldIn, BlockPos pos) {
-            this.workbench = workbench;
-            this.world = worldIn;
-            this.position = pos;
-        }
+		public InterfaceCraftingTable(BlockWoodWorkbench workbench, World worldIn, BlockPos pos) {
+			this.workbench = workbench;
+			this.world = worldIn;
+			this.position = pos;
+		}
 
-        /**
-         * Get the name of this object. For players this returns their username
-         */
-        @Override
-        public String getName() {
-            return "crafting_table";
-        }
+		/**
+		 * Get the name of this object. For players this returns their username
+		 */
+		@Override
+		public String getName() {
+			return "crafting_table";
+		}
 
-        /**
-         * Returns true if this thing is named
-         */
-        @Override
-        public boolean hasCustomName() {
-            return false;
-        }
+		/**
+		 * Returns true if this thing is named
+		 */
+		@Override
+		public boolean hasCustomName() {
+			return false;
+		}
 
-        /**
-         * Get the formatted ChatComponent that will be used for the sender's username in chat
-         */
-        @Override
-        public ITextComponent getDisplayName() {
-            return new TextComponentTranslation(workbench.getTranslationKey() + ".name");
-        }
+		/**
+		 * Get the formatted ChatComponent that will be used for the sender's username in chat
+		 */
+		@Override
+		public ITextComponent getDisplayName() {
+			return new TextComponentTranslation(workbench.getTranslationKey() + ".name");
+		}
 
-        @Override
-        public Container createContainer(@NotNull InventoryPlayer inv, @NotNull EntityPlayer player) {
-            return new ContainerWoodWorkbench(inv, world, position, workbench);
-        }
+		@Override
+		public Container createContainer(@NotNull InventoryPlayer inv, @NotNull EntityPlayer player) {
+			return new ContainerWoodWorkbench(inv, world, position, workbench);
+		}
 
-        @Override
-        public String getGuiID() {
-            return "minecraft:crafting_table";
-        }
-    }
+		@Override
+		public String getGuiID() {
+			return "minecraft:crafting_table";
+		}
+	}
 
 }

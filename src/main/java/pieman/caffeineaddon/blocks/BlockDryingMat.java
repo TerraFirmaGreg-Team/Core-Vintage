@@ -24,12 +24,12 @@ import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasModel;
+import su.terrafirmagreg.api.registry.IHasStateMapper;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockDryingMat extends Block implements IHasModel {
+public class BlockDryingMat extends Block implements IHasStateMapper {
 
 	public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
@@ -153,7 +153,7 @@ public class BlockDryingMat extends Block implements IHasModel {
 	}
 
 	@Override
-	public void onModelRegister() {
+	public void onStateMapperRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 

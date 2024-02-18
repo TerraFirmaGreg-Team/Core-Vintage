@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -22,8 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
@@ -39,199 +38,199 @@ import java.util.Random;
 @Getter
 public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock {
 
-    public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-    public final Block block;
-    private final WoodBlockVariant blockVariant;
-    private final WoodType type;
-    protected Half halfSlab;
+	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
+	public final Block block;
+	private final WoodBlockVariant blockVariant;
+	private final WoodType type;
+	protected Half halfSlab;
 
-    private BlockWoodSlab(WoodBlockVariant blockVariant, WoodType type) {
-        super(Material.WOOD);
+	private BlockWoodSlab(WoodBlockVariant blockVariant, WoodType type) {
+		super(Material.WOOD);
 
-        IBlockState state = blockState.getBaseState();
+		IBlockState state = blockState.getBaseState();
 
-        if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
+		if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
 
-        this.block = BlocksWood.getBlock(WoodBlockVariants.PLANKS, type);
-        this.blockVariant = blockVariant;
-        this.type = type;
-        useNeighborBrightness = true;
+		this.block = BlocksWood.getBlock(WoodBlockVariants.PLANKS, type);
+		this.blockVariant = blockVariant;
+		this.type = type;
+		useNeighborBrightness = true;
 
-        setLightOpacity(255);
-        setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
-        setSoundType(SoundType.STONE);
-        setHarvestLevel("axe", 0);
+		setLightOpacity(255);
+		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
+		setSoundType(SoundType.STONE);
+		setHarvestLevel("axe", 0);
 
-        Blocks.FIRE.setFireInfo(this, 5, 20);
-    }
+		Blocks.FIRE.setFireInfo(this, 5, 20);
+	}
 
-    @NotNull
-    @Override
-    public String getTranslationKey(int meta) {
-        return super.getTranslationKey();
-    }
+	@NotNull
+	@Override
+	public String getTranslationKey(int meta) {
+		return super.getTranslationKey();
+	}
 
-    @NotNull
-    @Override
-    public IProperty<?> getVariantProperty() {
-        return VARIANT; // why is this not null-tolerable ...
-    }
+	@NotNull
+	@Override
+	public IProperty<?> getVariantProperty() {
+		return VARIANT; // why is this not null-tolerable ...
+	}
 
-    @NotNull
-    @Override
-    public Comparable<?> getTypeForItem(@NotNull ItemStack stack) {
-        return Variant.DEFAULT;
-    }
+	@NotNull
+	@Override
+	public Comparable<?> getTypeForItem(@NotNull ItemStack stack) {
+		return Variant.DEFAULT;
+	}
 
-    @NotNull
-    @SuppressWarnings("deprecation")
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
+	@NotNull
+	@SuppressWarnings("deprecation")
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
-        if (!this.isDouble()) {
-            iblockstate = iblockstate.withProperty(BlockSlab.HALF, (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
-        }
+		if (!this.isDouble()) {
+			iblockstate = iblockstate.withProperty(BlockSlab.HALF, (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
+		}
 
-        return iblockstate;
-    }
+		return iblockstate;
+	}
 
-    @Override
-    public int getMetaFromState(@NotNull IBlockState state) {
-        int i = 0;
+	@Override
+	public int getMetaFromState(@NotNull IBlockState state) {
+		int i = 0;
 
-        if (!this.isDouble() && state.getValue(BlockSlab.HALF) == EnumBlockHalf.TOP) {
-            i |= 8;
-        }
+		if (!this.isDouble() && state.getValue(BlockSlab.HALF) == EnumBlockHalf.TOP) {
+			i |= 8;
+		}
 
-        return i;
-    }
+		return i;
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public float getBlockHardness(@NotNull IBlockState blockState, @NotNull World worldIn, @NotNull BlockPos pos) {
-        return block.getBlockHardness(blockState, worldIn, pos);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public float getBlockHardness(@NotNull IBlockState blockState, @NotNull World worldIn, @NotNull BlockPos pos) {
+		return block.getBlockHardness(blockState, worldIn, pos);
+	}
 
-    @NotNull
-    @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return Item.getItemFromBlock(halfSlab);
-    }
+	@NotNull
+	@Override
+	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+		return Item.getItemFromBlock(halfSlab);
+	}
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public float getExplosionResistance(@NotNull Entity exploder) {
-        return block.getExplosionResistance(exploder);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public float getExplosionResistance(@NotNull Entity exploder) {
+		return block.getExplosionResistance(exploder);
+	}
 
-    @NotNull
-    @SuppressWarnings("deprecation")
-    @Override
-    public ItemStack getItem(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        return new ItemStack(halfSlab);
-    }
+	@NotNull
+	@SuppressWarnings("deprecation")
+	@Override
+	public ItemStack getItem(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+		return new ItemStack(halfSlab);
+	}
 
-    @NotNull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
-    }
+	@NotNull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
+	}
 
-    @Override
-    public IBlockColor getColorHandler() {
-        return (s, w, p, i) -> this.getType().getColor();
-    }
+	@Override
+	public IBlockColor getColorHandler() {
+		return (s, w, p, i) -> this.getType().getColor();
+	}
 
-    @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getType().getColor();
-    }
+	@Override
+	public IItemColor getItemColorHandler() {
+		return (s, i) -> this.getType().getColor();
+	}
 
-    @NotNull
-    @SuppressWarnings("deprecation")
-    @Override
-    public SoundType getSoundType() {
-        return block.getSoundType();
-    }
+	@NotNull
+	@SuppressWarnings("deprecation")
+	@Override
+	public SoundType getSoundType() {
+		return block.getSoundType();
+	}
 
-    public enum Variant implements IStringSerializable {
-        DEFAULT;
+	public enum Variant implements IStringSerializable {
+		DEFAULT;
 
-        @NotNull
-        @Override
-        public String getName() {
-            return "default";
-        }
-    }
+		@NotNull
+		@Override
+		public String getName() {
+			return "default";
+		}
+	}
 
-    public static class Double extends BlockWoodSlab {
+	public static class Double extends BlockWoodSlab {
 
 
-        public Double(WoodBlockVariant blockVariant, WoodType type) {
-            super(blockVariant, type);
+		public Double(WoodBlockVariant blockVariant, WoodType type) {
+			super(blockVariant, type);
 
-        }
+		}
 
-        @Override
-        public boolean isDouble() {
-            return true;
-        }
+		@Override
+		public boolean isDouble() {
+			return true;
+		}
 
-        @Override
-        public ItemBlock getItemBlock() {
-            return null;
-        }
+		@Override
+		public ItemBlock getItemBlock() {
+			return null;
+		}
 
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void onModelRegister() {
-            ModelLoader.setCustomStateMapper(this,
-                    new CustomStateMap.Builder()
-                            .customPath(getResourceLocation())
-                            .ignore(BlockWoodSlab.VARIANT)
-                            .build());
-        }
-    }
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void onStateMapperRegister() {
+			ModelLoader.setCustomStateMapper(this,
+					new CustomStateMap.Builder()
+							.customPath(getResourceLocation())
+							.ignore(BlockWoodSlab.VARIANT)
+							.build());
+		}
+	}
 
-    public static class Half extends BlockWoodSlab {
+	public static class Half extends BlockWoodSlab {
 
-        public final Double doubleSlab;
+		public final Double doubleSlab;
 
-        public Half(WoodBlockVariant blockVariant, WoodType type) {
-            super(blockVariant, type);
+		public Half(WoodBlockVariant blockVariant, WoodType type) {
+			super(blockVariant, type);
 
-            doubleSlab = (Double) BlocksWood.getBlock(WoodBlockVariants.SLAB_DOUBLE, type);
-            doubleSlab.halfSlab = this;
-            halfSlab = this;
+			doubleSlab = (Double) BlocksWood.getBlock(WoodBlockVariants.SLAB_DOUBLE, type);
+			doubleSlab.halfSlab = this;
+			halfSlab = this;
 
-            //            OreDictionaryHelper.register(this, variant.toString());
+			//            OreDictionaryHelper.register(this, variant.toString());
 //            OreDictionaryHelper.register(this, variant.toString(), "wood");
 //            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
-        }
+		}
 
-        @Override
-        public boolean isDouble() {
-            return false;
-        }
+		@Override
+		public boolean isDouble() {
+			return false;
+		}
 
-        @Override
-        public ItemBlock getItemBlock() {
-            return new ItemBlockWoodSlab(this, this, this.doubleSlab);
-        }
+		@Override
+		public ItemBlock getItemBlock() {
+			return new ItemBlockWoodSlab(this, this, this.doubleSlab);
+		}
 
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void onModelRegister() {
-            ModelLoader.setCustomStateMapper(this,
-                    new CustomStateMap.Builder()
-                            .customPath(getResourceLocation())
-                            .ignore(BlockWoodSlab.VARIANT)
-                            .build());
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void onStateMapperRegister() {
+			ModelLoader.setCustomStateMapper(this,
+					new CustomStateMap.Builder()
+							.customPath(getResourceLocation())
+							.ignore(BlockWoodSlab.VARIANT)
+							.build());
 
-            ModelLoader.setCustomModelResourceLocation(
-                    Item.getItemFromBlock(this), 0,
-                    new ModelResourceLocation(getResourceLocation(), "normal"));
-        }
-    }
+			ModelLoader.setCustomModelResourceLocation(
+					Item.getItemFromBlock(this), 0,
+					new ModelResourceLocation(getResourceLocation(), "normal"));
+		}
+	}
 }

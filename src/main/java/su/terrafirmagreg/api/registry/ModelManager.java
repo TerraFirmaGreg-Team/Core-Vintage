@@ -63,7 +63,7 @@ public class ModelManager {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void registerBlockModel(@Nonnull Block block, IStateMapper stateMap) {
+	public static void registerStateMapper(@Nonnull Block block, IStateMapper stateMap) {
 		ModelLoader.setCustomStateMapper(block, stateMap);
 	}
 

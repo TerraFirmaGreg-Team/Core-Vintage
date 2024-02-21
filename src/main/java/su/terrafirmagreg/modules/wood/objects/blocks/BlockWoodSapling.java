@@ -174,7 +174,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerBlockModel(this, new StateMap.Builder().ignore(STAGE).build());
+		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(STAGE).build());
 		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
 	}
 

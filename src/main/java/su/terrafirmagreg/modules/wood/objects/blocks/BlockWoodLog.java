@@ -320,7 +320,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerBlockModel(this, new StateMap.Builder().ignore(PLACED).build());
+		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(PLACED).build());
 		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
 	}
 }

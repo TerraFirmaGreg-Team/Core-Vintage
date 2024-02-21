@@ -297,7 +297,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation())
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation())
 				.build());
 		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
 

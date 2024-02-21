@@ -49,7 +49,7 @@ public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock, ICol
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation())
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation())
 				.build());
 		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
 	}

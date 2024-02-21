@@ -52,7 +52,7 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock, IC
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerBlockModel(this, new CustomStateMap.Builder().customPath(getResourceLocation())
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation())
 				.ignore(BlockFenceGate.IN_WALL, BlockFenceGate.POWERED).build());
 		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
 	}

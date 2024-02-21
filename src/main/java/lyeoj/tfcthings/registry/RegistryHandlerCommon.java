@@ -7,6 +7,7 @@ import lyeoj.tfcthings.items.ItemOreDict;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
+import lyeoj.tfcthings.tileentity.TileEntityGemDisplay;
 import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -82,6 +83,9 @@ public class RegistryHandlerCommon {
 			}
 		}
 		GameRegistry.registerTileEntity(TileEntityBearTrap.class, TFCThingsBlocks.BEAR_TRAP.getRegistryName());
+		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGemDisplays) {
+			GameRegistry.registerTileEntity(TileEntityGemDisplay.class, TFCThingsBlocks.GEM_DISPLAY_ANDESITE.getRegistryName());
+		}
 		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGrindstones) {
 			GameRegistry.registerTileEntity(TileEntityGrindstone.class, TFCThingsBlocks.GRINDSTONE_BLOCK.getRegistryName());
 		}

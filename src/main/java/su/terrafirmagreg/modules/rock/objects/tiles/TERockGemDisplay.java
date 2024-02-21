@@ -49,7 +49,7 @@ public class TERockGemDisplay extends TEBase {
 
 	public void onBreakBlock() {
 		this.items.forEach((i) -> {
-			InventoryHelper.spawnItemStack(this.world, (double) this.pos.getX(), (double) this.pos.getY(), (double) this.pos.getZ(), i);
+			InventoryHelper.spawnItemStack(this.world, this.pos.getX(), this.pos.getY(), this.pos.getZ(), i);
 		});
 	}
 

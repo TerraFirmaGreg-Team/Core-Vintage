@@ -32,7 +32,7 @@ repositories {
 def use_gregtech = true
 def use_dramatic_trees = true
 def use_tconstruct = false
-def use_forestry = true
+def use_forestry = false
 def use_pams = false
 def use_immersive = false
 def use_util = true

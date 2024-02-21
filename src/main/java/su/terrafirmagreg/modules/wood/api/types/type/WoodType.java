@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.wood.api.types.type;
 
-import binnie.extratrees.wood.planks.IPlankType;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +64,6 @@ public class WoodType {
 		private float burnTemp;
 		private int burnTicks;
 		private boolean canMakeTannin;
-		private IPlankType foestryWoodType;
 
 		public Builder(@NotNull String name) {
 			this.name = name;
@@ -90,12 +88,6 @@ public class WoodType {
 		// Установить возможность производить танин
 		public Builder setTannin() {
 			canMakeTannin = true;
-			return this;
-		}
-
-		public Builder setForestryWoodType(IPlankType foestryWoodType) {
-			this.foestryWoodType = foestryWoodType;
-			this.setColor(foestryWoodType.getColour());
 			return this;
 		}
 

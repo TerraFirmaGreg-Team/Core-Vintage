@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -49,8 +48,6 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 		setResistance(3f);
 		setDefaultState(this.blockState.getBaseState()
 				.withProperty(FACING, NORTH));
-
-		Blocks.FIRE.setFireInfo(this, 5, 20);
 	}
 
 	@NotNull

@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -50,8 +49,6 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock, IC
 		setHardness(2.0F);
 		setResistance(5.0F);
 		setHarvestLevel("axe", 0);
-
-		Blocks.FIRE.setFireInfo(this, 5, 20);
 
 		//OreDictionaryHelper.register(this, variant.toString());
 		//OreDictionaryHelper.register(this, variant.toString(), type.toString());

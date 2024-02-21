@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -46,8 +45,6 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock, IColorfulBlo
 		setSoundType(SoundType.WOOD);
 		setHardness(3.0F);
 		disableStats();
-
-		Blocks.FIRE.setFireInfo(this, 5, 20);
 
 		//OreDictionaryHelper.register(this, variant.toString());
 		//OreDictionaryHelper.register(this, variant.toString(), type.toString());

@@ -5,7 +5,6 @@ import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
@@ -37,8 +36,6 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock, IC
 		setHardness(2.0F);
 		setResistance(5.0F);
 		setHarvestLevel("axe", 0);
-
-		Blocks.FIRE.setFireInfo(this, 30, 20);
 
 		//OreDictionaryHelper.register(this, variant.toString());
 		//OreDictionaryHelper.register(this, variant.toString(), type.toString());

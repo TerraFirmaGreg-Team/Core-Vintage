@@ -64,6 +64,8 @@ public class WoodBlockVariant {
 	public static class Builder {
 
 		private final String name;
+		private int encouragement;
+		private int flammability;
 		private BiFunction<WoodBlockVariant, WoodType, ? extends Block> factory;
 		private Specification specification = null;
 
@@ -78,6 +80,12 @@ public class WoodBlockVariant {
 
 		public Builder setFactory(BiFunction<WoodBlockVariant, WoodType, ? extends Block> factory) {
 			this.factory = factory;
+			return this;
+		}
+
+		public Builder setFireInfo(int encouragement, int flammability) {
+			this.encouragement = encouragement;
+			this.flammability = flammability;
 			return this;
 		}
 

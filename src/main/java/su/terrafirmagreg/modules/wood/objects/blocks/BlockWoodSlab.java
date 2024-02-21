@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -60,8 +59,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("axe", 0);
-
-		Blocks.FIRE.setFireInfo(this, 5, 20);
 	}
 
 	@NotNull
@@ -166,7 +163,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 
 	public static class Double extends BlockWoodSlab {
 
-
 		public Double(WoodBlockVariant blockVariant, WoodType type) {
 			super(blockVariant, type);
 
@@ -204,7 +200,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 			doubleSlab.halfSlab = this;
 			halfSlab = this;
 
-			//            OreDictionaryHelper.register(this, variant.toString());
+//            OreDictionaryHelper.register(this, variant.toString());
 //            OreDictionaryHelper.register(this, variant.toString(), "wood");
 //            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
 		}

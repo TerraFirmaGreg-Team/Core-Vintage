@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -57,8 +56,6 @@ public class BlockWoodSupport extends BlockWood {
 				.withProperty(SOUTH, false)
 				.withProperty(EAST, false)
 				.withProperty(WEST, false));
-
-		Blocks.FIRE.setFireInfo(this, 5, 20);
 	}
 
 	/**

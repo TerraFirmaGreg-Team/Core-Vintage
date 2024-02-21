@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -54,8 +53,6 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulB
 
 		setHardness(2.5F);
 		setSoundType(SoundType.WOOD);
-
-		Blocks.FIRE.setFireInfo(this, 5, 20);
 
 		//OreDictionaryHelper.register(this, variant.toString());
 		//OreDictionaryHelper.register(this, variant.toString(), type.toString());

@@ -6,7 +6,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,8 +35,6 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock, IColorfulB
 		setHarvestLevel("axe", 0);
 		setHardness(2.0F);
 		setResistance(15.0F);
-
-		Blocks.FIRE.setFireInfo(this, 5, 20);
 
 		//OreDictionaryHelper.register(this, variant.toString());
 		//OreDictionaryHelper.register(this, variant.toString(), type.toString());

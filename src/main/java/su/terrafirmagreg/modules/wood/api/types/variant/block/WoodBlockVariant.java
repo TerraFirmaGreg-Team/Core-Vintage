@@ -24,10 +24,16 @@ public class WoodBlockVariant {
 	private final String name;
 	@Getter
 	private final Specification specification;
+	@Getter
+	private final int encouragement;
+	@Getter
+	private final int flammability;
 
 	private WoodBlockVariant(Builder builder) {
 		this.name = builder.name;
 		this.specification = builder.specification;
+		this.encouragement = builder.encouragement;
+		this.flammability = builder.flammability;
 
 		if (name.isEmpty())
 			throw new RuntimeException(String.format("WoodBlockVariant name must contain any character: [%s]", name));
@@ -64,10 +70,10 @@ public class WoodBlockVariant {
 	public static class Builder {
 
 		private final String name;
-		private int encouragement;
-		private int flammability;
 		private BiFunction<WoodBlockVariant, WoodType, ? extends Block> factory;
 		private Specification specification = null;
+		private int encouragement;
+		private int flammability;
 
 		/**
 		 * Создает экземпляр Builder с указанным именем.

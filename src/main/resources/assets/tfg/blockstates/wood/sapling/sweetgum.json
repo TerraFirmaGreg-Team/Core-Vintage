@@ -4,7 +4,7 @@
     "model": "tfg:wood/sapling",
     "textures": {
       "side": "tfg:blocks/wood/log/side/sweetgum",
-      "leaves": "tfg:blocks/wood/leaves/sweetgum"
+      "leaves": "tfg:blocks/wood/log/leaves/sweetgum"
     }
   },
   "variants": {

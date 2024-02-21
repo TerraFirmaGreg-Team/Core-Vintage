@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
-import net.minecraft.item.Item;
-
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.Pair;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -16,70 +15,70 @@ import java.util.function.BiFunction;
  */
 public class WoodItemVariant {
 
-    private static final Set<WoodItemVariant> WOOD_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
+	private static final Set<WoodItemVariant> WOOD_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
-    @NotNull
-    private final String name;
+	@NotNull
+	private final String name;
 
-    private WoodItemVariant(Builder builder) {
-        this.name = builder.name;
+	private WoodItemVariant(Builder builder) {
+		this.name = builder.name;
 
-        if (name.isEmpty())
-            throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
+		if (name.isEmpty())
+			throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
 
-        if (!WOOD_ITEM_VARIANTS.add(this))
-            throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
+		if (!WOOD_ITEM_VARIANTS.add(this))
+			throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
 
-        for (var type : WoodType.getTypes()) {
-            if (ItemsWood.WOOD_ITEMS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-        }
-    }
+		for (var type : WoodType.getTypes()) {
+			if (ItemsWood.WOOD_ITEMS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
+				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+		}
+	}
 
-    /**
-     * Возвращает множество всех созданных вариантов деревянных блоков.
-     *
-     * @return множество вариантов деревянных блоков
-     */
-    public static Set<WoodItemVariant> getWoodItemVariants() {
-        return WOOD_ITEM_VARIANTS;
-    }
+	/**
+	 * Возвращает множество всех созданных вариантов деревянных блоков.
+	 *
+	 * @return множество вариантов деревянных блоков
+	 */
+	public static Set<WoodItemVariant> getWoodItemVariants() {
+		return WOOD_ITEM_VARIANTS;
+	}
 
-    /**
-     * Возвращает строковое представление варианта деревянного блока (его имя).
-     *
-     * @return имя варианта деревянного блока
-     */
-    @NotNull
-    @Override
-    public String toString() {
-        return name;
-    }
+	/**
+	 * Возвращает строковое представление варианта деревянного блока (его имя).
+	 *
+	 * @return имя варианта деревянного блока
+	 */
+	@NotNull
+	@Override
+	public String toString() {
+		return name;
+	}
 
-    public static class Builder {
+	public static class Builder {
 
-        private final String name;
-        private BiFunction<WoodItemVariant, WoodType, ? extends Item> factory;
-
-
-        /**
-         * Создает экземпляр Builder с указанным именем.
-         *
-         * @param name Имя породы.
-         */
-        public Builder(@NotNull String name) {
-            this.name = name;
-        }
+		private final String name;
+		private BiFunction<WoodItemVariant, WoodType, ? extends Item> factory;
 
 
-        public Builder setFactory(BiFunction<WoodItemVariant, WoodType, ? extends Item> factory) {
-            this.factory = factory;
-            return this;
-        }
+		/**
+		 * Создает экземпляр Builder с указанным именем.
+		 *
+		 * @param name Имя породы.
+		 */
+		public Builder(@NotNull String name) {
+			this.name = name;
+		}
 
 
-        public WoodItemVariant build() {
-            return new WoodItemVariant(this);
-        }
-    }
+		public Builder setFactory(BiFunction<WoodItemVariant, WoodType, ? extends Item> factory) {
+			this.factory = factory;
+			return this;
+		}
+
+
+		public WoodItemVariant build() {
+			return new WoodItemVariant(this);
+		}
+	}
 }

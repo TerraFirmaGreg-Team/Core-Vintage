@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood;
 
 
 import net.minecraft.creativetab.CreativeTabs;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -24,47 +23,47 @@ import java.util.List;
 @Module(moduleID = "Wood", name = "TFG Wood")
 public class ModuleWood extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger("Module Wood");
-    public static final CreativeTabs WOOD_TAB = new CreativeTabBase("wood", "wood/planks/pine", false);
+	public static final Logger LOGGER = LogManager.getLogger("Module Wood");
+	public static final CreativeTabs WOOD_TAB = new CreativeTabBase("wood", "wood/planks/pine", false);
 
-    public static IPacketService PACKET_SERVICE;
-    public static ITileDataService TILE_DATA_SERVICE;
+	public static IPacketService PACKET_SERVICE;
+	public static ITileDataService TILE_DATA_SERVICE;
 
-    public ModuleWood() {
-        super(4);
-        this.enableAutoRegistry(WOOD_TAB);
+	public ModuleWood() {
+		super(4);
+		this.enableAutoRegistry(WOOD_TAB);
 
-        PACKET_SERVICE = this.enableNetwork();
-        TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
-    }
+		PACKET_SERVICE = this.enableNetwork();
+		TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
+	}
 
-    @Override
-    public void onRegister() {
-        WoodTypeHandler.init();
+	@Override
+	public void onRegister() {
+		WoodTypeHandler.init();
 //        WoodTreeVariantHandler.init();
-        WoodBlockVariantHandler.init();
-        WoodItemVariantHandler.init();
+		WoodBlockVariantHandler.init();
+		WoodItemVariantHandler.init();
 
-        BlocksWood.onRegister(registry);
-        ItemsWood.onRegister(registry);
-        EntitiesWood.onRegister(registry);
-    }
+		BlocksWood.onRegister(registry);
+		ItemsWood.onRegister(registry);
+		EntitiesWood.onRegister(registry);
+	}
 
-    @Override
-    public void onClientRegister() {
+	@Override
+	public void onClientRegister() {
+		BlocksWood.onClientRegister(registry);
+		EntitiesWood.onClientRegister(registry);
 
-        EntitiesWood.onClientRegister(registry);
+	}
 
-    }
+	@Override
+	public @NotNull Logger getLogger() {
+		return LOGGER;
+	}
 
-    @Override
-    public @NotNull Logger getLogger() {
-        return LOGGER;
-    }
-
-    @NotNull
-    @Override
-    public List<Class<?>> getEventBusSubscribers() {
-        return Collections.singletonList(ModuleWood.class);
-    }
+	@NotNull
+	@Override
+	public List<Class<?>> getEventBusSubscribers() {
+		return Collections.singletonList(ModuleWood.class);
+	}
 }

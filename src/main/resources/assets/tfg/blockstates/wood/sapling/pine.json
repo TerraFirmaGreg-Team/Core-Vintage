@@ -4,7 +4,7 @@
     "model": "tfg:wood/sapling",
     "textures": {
       "side": "tfg:blocks/wood/log/side/pine",
-      "leaves": "tfg:blocks/wood/leaves/pine"
+      "leaves": "tfg:blocks/wood/log/leaves/pine"
     }
   },
   "variants": {

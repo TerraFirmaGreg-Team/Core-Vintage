@@ -11,15 +11,15 @@ public class WoodBlockVariantHandler {
 				.setFactory(BlockWoodLog::new)
 				.build();
 
-		WoodBlockVariants.LEAVES = new WoodBlockVariant
-				.Builder("leaves")
-				.setFactory(BlockWoodLeaves::new)
-				.build();
-
-		WoodBlockVariants.SAPLING = new WoodBlockVariant
-				.Builder("sapling")
-				.setFactory(BlockWoodSapling::new)
-				.build();
+//		WoodBlockVariants.LEAVES = new WoodBlockVariant
+//				.Builder("leaves")
+//				.setFactory(BlockWoodLeaves::new)
+//				.build();
+//
+//		WoodBlockVariants.SAPLING = new WoodBlockVariant
+//				.Builder("sapling")
+//				.setFactory(BlockWoodSapling::new)
+//				.build();
 
 		WoodBlockVariants.PLANKS = new WoodBlockVariant
 				.Builder("planks")

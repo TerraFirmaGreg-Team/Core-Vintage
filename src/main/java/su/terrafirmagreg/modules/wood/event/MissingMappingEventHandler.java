@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
@@ -26,159 +25,159 @@ import static su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVari
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class MissingMappingEventHandler {
 
-    @SubscribeEvent
-    public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
-            String mappingKey = mapping.key.toString();
+	@SubscribeEvent
+	public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
+		for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
+			String mappingKey = mapping.key.toString();
 
-            if (mappingKey.startsWith("astikorcarts:")) {
-                // Astikor Carts
-                switch (mappingKey) {
-                    case "astikorcarts:plowcart":
-                        mapping.remap(ItemsWood.getItem(PLOW, ACACIA));
-                        break;
-                    case "astikorcarts:cargocart":
-                        mapping.remap(ItemsWood.getItem(SUPPLY_CART, ACACIA));
-                        break;
-                    case "astikorcarts:mobcart":
-                        mapping.remap(ItemsWood.getItem(ANIMAL_CART, ACACIA));
-                        break;
-                    case "astikorcarts:wheel":
-                        mapping.remap(ItemsWood.getItem(WHEEL, ACACIA));
-                        break;
-                }
-            } else if (mappingKey.startsWith("tfc:")) {
-                for (var type : WoodType.getTypes()) {
-                    // TFC ItemsBlock
-                    for (var variant : WoodBlockVariant.getBlockVariants()) {
-                        var mappingKeyBlock = "tfc:wood/" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlockFruit = "tfc:wood/fruit_trees/" + variant + "/" + type;
-                        if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
-                            mapping.remap(Item.getItemFromBlock(BlocksWood.getBlock(variant, type)));
-                            break;
-                        }
-                    }
+			if (mappingKey.startsWith("astikorcarts:")) {
+				// Astikor Carts
+				switch (mappingKey) {
+					case "astikorcarts:plowcart":
+						mapping.remap(ItemsWood.getItem(PLOW, ACACIA));
+						break;
+					case "astikorcarts:cargocart":
+						mapping.remap(ItemsWood.getItem(SUPPLY_CART, ACACIA));
+						break;
+					case "astikorcarts:mobcart":
+						mapping.remap(ItemsWood.getItem(ANIMAL_CART, ACACIA));
+						break;
+					case "astikorcarts:wheel":
+						mapping.remap(ItemsWood.getItem(WHEEL, ACACIA));
+						break;
+				}
+			} else if (mappingKey.startsWith("tfc:")) {
+				for (var type : WoodType.getTypes()) {
+					// TFC ItemsBlock
+					for (var variant : WoodBlockVariant.getBlockVariants()) {
+						var mappingKeyBlock = "tfc:wood/" + variant.toString() + "/" + type.toString();
+						var mappingKeyBlockFruit = "tfc:wood/fruit_trees/" + variant + "/" + type;
+						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
+							mapping.remap(Item.getItemFromBlock(BlocksWood.getBlock(variant, type)));
+							break;
+						}
+					}
 
-                    // TFC Items
-                    for (var variant : WoodItemVariant.getWoodItemVariants()) {
-                        var mappingKeyBlock = "tfc:wood/" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlockFruit = "tfc:wood/fruit_trees/" + variant + "/" + type;
-                        if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
-                            mapping.remap(ItemsWood.getItem(variant, type));
-                            break;
-                        }
-                    }
-                }
-            } else if (mappingKey.startsWith("tfcflorae:")) {
-                for (var type : WoodType.getTypes()) {
-                    // TFCFlorae ItemsBlock
-                    for (var variant : WoodBlockVariant.getBlockVariants()) {
-                        var mappingKeyBlock = "tfcflorae:wood/" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlockFruit = "tfcflorae:wood/fruit_tree/" + variant + "/" + type;
-                        if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
-                            mapping.remap(Item.getItemFromBlock(BlocksWood.getBlock(variant, type)));
-                            break;
-                        }
-                    }
+					// TFC Items
+					for (var variant : WoodItemVariant.getWoodItemVariants()) {
+						var mappingKeyBlock = "tfc:wood/" + variant.toString() + "/" + type.toString();
+						var mappingKeyBlockFruit = "tfc:wood/fruit_trees/" + variant + "/" + type;
+						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
+							mapping.remap(ItemsWood.getItem(variant, type));
+							break;
+						}
+					}
+				}
+			} else if (mappingKey.startsWith("tfcflorae:")) {
+				for (var type : WoodType.getTypes()) {
+					// TFCFlorae ItemsBlock
+					for (var variant : WoodBlockVariant.getBlockVariants()) {
+						var mappingKeyBlock = "tfcflorae:wood/" + variant.toString() + "/" + type.toString();
+						var mappingKeyBlockFruit = "tfcflorae:wood/fruit_tree/" + variant + "/" + type;
+						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
+							mapping.remap(Item.getItemFromBlock(BlocksWood.getBlock(variant, type)));
+							break;
+						}
+					}
 
-                    // TFCFlorae Items
-                    for (var variant : WoodItemVariant.getWoodItemVariants()) {
-                        var mappingKeyBlock = "tfcflorae:wood/" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlockFruit = "tfcflorae:wood/fruit_tree/" + variant + "/" + type;
-                        if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
-                            mapping.remap(ItemsWood.getItem(variant, type));
-                            break;
-                        }
-                    }
-                }
-            } else if (mappingKey.startsWith("firmalife:")) {
-                for (var type : WoodType.getTypes()) {
-                    // FirmaLife ItemsBlock
-                    for (var variant : WoodBlockVariant.getBlockVariants()) {
-                        var mappingKeyBlock = "firmalife:wood/" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlockFruit = "firmalife:wood/fruit_tree/" + variant + "/" + type;
-                        if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
-                            mapping.remap(Item.getItemFromBlock(BlocksWood.getBlock(variant, type)));
-                            break;
-                        }
-                    }
+					// TFCFlorae Items
+					for (var variant : WoodItemVariant.getWoodItemVariants()) {
+						var mappingKeyBlock = "tfcflorae:wood/" + variant.toString() + "/" + type.toString();
+						var mappingKeyBlockFruit = "tfcflorae:wood/fruit_tree/" + variant + "/" + type;
+						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
+							mapping.remap(ItemsWood.getItem(variant, type));
+							break;
+						}
+					}
+				}
+			} else if (mappingKey.startsWith("firmalife:")) {
+				for (var type : WoodType.getTypes()) {
+					// FirmaLife ItemsBlock
+					for (var variant : WoodBlockVariant.getBlockVariants()) {
+						var mappingKeyBlock = "firmalife:wood/" + variant.toString() + "/" + type.toString();
+						var mappingKeyBlockFruit = "firmalife:wood/fruit_tree/" + variant + "/" + type;
+						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
+							mapping.remap(Item.getItemFromBlock(BlocksWood.getBlock(variant, type)));
+							break;
+						}
+					}
 
-                    // FirmaLife Items
-                    for (var variant : WoodItemVariant.getWoodItemVariants()) {
-                        var mappingKeyBlock = "firmalife:wood/" + variant.toString() + "/" + type.toString();
-                        var mappingKeyBlockFruit = "firmalife:wood/fruit_tree/" + variant + "/" + type;
-                        if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
-                            mapping.remap(ItemsWood.getItem(variant, type));
-                            break;
-                        }
-                    }
-                }
-            }
+					// FirmaLife Items
+					for (var variant : WoodItemVariant.getWoodItemVariants()) {
+						var mappingKeyBlock = "firmalife:wood/" + variant.toString() + "/" + type.toString();
+						var mappingKeyBlockFruit = "firmalife:wood/fruit_tree/" + variant + "/" + type;
+						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
+							mapping.remap(ItemsWood.getItem(variant, type));
+							break;
+						}
+					}
+				}
+			}
 
-        }
-    }
+		}
+	}
 
-    @SubscribeEvent
-    public static void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
-            String mappingKey = mapping.key.toString();
+	@SubscribeEvent
+	public static void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
+		for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
+			String mappingKey = mapping.key.toString();
 
-            if (mappingKey.startsWith("tfc:")) {
-                for (var type : WoodType.getTypes()) {
-                    // TFC ItemsBlock
-                    for (var variant : WoodBlockVariant.getBlockVariants()) {
-                        var mappingKeyBlock = "tfc:wood/" + variant.toString() + "/" + type.toString();
-                        if (mappingKey.equals(mappingKeyBlock)) {
-                            mapping.remap(BlocksWood.getBlock(variant, type));
-                            break;
-                        }
-                    }
-                }
-            } else if (mappingKey.startsWith("tfcflorae:")) {
-                for (var type : WoodType.getTypes()) {
-                    // TFCFlorae ItemsBlock
-                    for (var variant : WoodBlockVariant.getBlockVariants()) {
-                        var mappingKeyBlock = "tfcflorae:wood/" + variant.toString() + "/" + type.toString();
-                        if (mappingKey.equals(mappingKeyBlock)) {
-                            mapping.remap(BlocksWood.getBlock(variant, type));
-                            break;
-                        }
-                    }
-                }
-            } else if (mappingKey.startsWith("firmalife:")) {
-                for (var type : WoodType.getTypes()) {
-                    // FirmaLife ItemsBlock
-                    for (var variant : WoodBlockVariant.getBlockVariants()) {
-                        var mappingKeyBlock = "firmalife:wood/" + variant.toString() + "/" + type.toString();
-                        if (mappingKey.equals(mappingKeyBlock)) {
-                            mapping.remap(BlocksWood.getBlock(variant, type));
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+			if (mappingKey.startsWith("tfc:")) {
+				for (var type : WoodType.getTypes()) {
+					// TFC ItemsBlock
+					for (var variant : WoodBlockVariant.getBlockVariants()) {
+						var mappingKeyBlock = "tfc:wood/" + variant.toString() + "/" + type.toString();
+						if (mappingKey.equals(mappingKeyBlock)) {
+							mapping.remap(BlocksWood.getBlock(variant, type));
+							break;
+						}
+					}
+				}
+			} else if (mappingKey.startsWith("tfcflorae:")) {
+				for (var type : WoodType.getTypes()) {
+					// TFCFlorae ItemsBlock
+					for (var variant : WoodBlockVariant.getBlockVariants()) {
+						var mappingKeyBlock = "tfcflorae:wood/" + variant.toString() + "/" + type.toString();
+						if (mappingKey.equals(mappingKeyBlock)) {
+							mapping.remap(BlocksWood.getBlock(variant, type));
+							break;
+						}
+					}
+				}
+			} else if (mappingKey.startsWith("firmalife:")) {
+				for (var type : WoodType.getTypes()) {
+					// FirmaLife ItemsBlock
+					for (var variant : WoodBlockVariant.getBlockVariants()) {
+						var mappingKeyBlock = "firmalife:wood/" + variant.toString() + "/" + type.toString();
+						if (mappingKey.equals(mappingKeyBlock)) {
+							mapping.remap(BlocksWood.getBlock(variant, type));
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 
-    @SubscribeEvent
-    public static void onMissingEntityMapping(RegistryEvent.MissingMappings<EntityEntry> event) {
-        for (RegistryEvent.MissingMappings.Mapping<EntityEntry> mapping : event.getAllMappings()) {
+	@SubscribeEvent
+	public static void onMissingEntityMapping(RegistryEvent.MissingMappings<EntityEntry> event) {
+		for (RegistryEvent.MissingMappings.Mapping<EntityEntry> mapping : event.getAllMappings()) {
 
-            switch (mapping.key.toString()) {
-                // Astikor Carts
-                case "astikorcarts:plowcart":
-                    mapping.remap(EntityRegistry.getEntry(EntityWoodPlow.class));
-                    break;
-                case "astikorcarts:mobcart":
-                    mapping.remap(EntityRegistry.getEntry(EntityWoodAnimalCart.class));
-                    break;
-                case "astikorcarts:cargocart":
-                    mapping.remap(EntityRegistry.getEntry(EntityWoodSupplyCart.class));
-                    break;
-                case "tfc:boat":
-                    mapping.remap(EntityRegistry.getEntry(EntityWoodBoat.class));
-                    break;
-            }
-        }
-    }
+			switch (mapping.key.toString()) {
+				// Astikor Carts
+				case "astikorcarts:plowcart":
+					mapping.remap(EntityRegistry.getEntry(EntityWoodPlow.class));
+					break;
+				case "astikorcarts:mobcart":
+					mapping.remap(EntityRegistry.getEntry(EntityWoodAnimalCart.class));
+					break;
+				case "astikorcarts:cargocart":
+					mapping.remap(EntityRegistry.getEntry(EntityWoodSupplyCart.class));
+					break;
+				case "tfc:boat":
+					mapping.remap(EntityRegistry.getEntry(EntityWoodBoat.class));
+					break;
+			}
+		}
+	}
 }

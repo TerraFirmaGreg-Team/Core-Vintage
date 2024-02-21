@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.init;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
@@ -28,6 +29,9 @@ public final class BlocksWood {
 
 	@SideOnly(Side.CLIENT)
 	public static void onClientRegister(RegistryManager registry) {
+		ModelResourceLocation blockModelLocation = new ModelResourceLocation("tfg:leaves");
+		ModelResourceLocation itemModelLocation = new ModelResourceLocation("tfg:leaves", "inventory");
+
 //        registry.registerClientModelRegistrationStrategy(() -> {
 //            //for (var tree : WoodTreeVariant.getTreeTypes()) ModelHelperTFC.regModel(tree);
 //        });

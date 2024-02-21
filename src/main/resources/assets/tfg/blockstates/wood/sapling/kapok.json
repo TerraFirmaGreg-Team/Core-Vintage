@@ -4,7 +4,7 @@
     "model": "tfg:wood/sapling",
     "textures": {
       "side": "tfg:blocks/wood/log/side/kapok",
-      "leaves": "tfg:blocks/wood/leaves/kapok"
+      "leaves": "tfg:blocks/wood/log/leaves/kapok"
     }
   },
   "variants": {

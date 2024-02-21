@@ -4,7 +4,7 @@
     "model": "tfg:wood/sapling",
     "textures": {
       "side": "tfg:blocks/wood/log/side/hevea",
-      "leaves": "tfg:blocks/wood/leaves/hevea"
+      "leaves": "tfg:blocks/wood/log/leaves/hevea"
     }
   },
   "variants": {

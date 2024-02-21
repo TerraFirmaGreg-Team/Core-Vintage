@@ -3,46 +3,45 @@ package su.terrafirmagreg.modules.wood.objects.itemblocks;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSapling;
 
 
 public class ItemBlockWoodSapling extends ItemBlockBase {
 
-    private final BlockWoodSapling blockWoodSapling;
+	private final BlockWoodSapling blockWoodSapling;
 
-    public ItemBlockWoodSapling(BlockWoodSapling blockWoodSapling) {
-        super(blockWoodSapling);
+	public ItemBlockWoodSapling(BlockWoodSapling blockWoodSapling) {
+		super(blockWoodSapling);
 
-        this.blockWoodSapling = blockWoodSapling;
-    }
+		this.blockWoodSapling = blockWoodSapling;
+	}
 
-    @Override
-    public boolean onEntityItemUpdate(EntityItem entityItem) {
-        if (!entityItem.world.isRemote && entityItem.age >= entityItem.lifespan && !entityItem.getItem().isEmpty()) {
-            final BlockPos pos = entityItem.getPosition();
-            if (placeAndDecreaseCount(entityItem, pos)) {
-                entityItem.setDead();
-                return true;
-            }
-            for (EnumFacing face : EnumFacing.HORIZONTALS) {
-                final BlockPos offsetPos = pos.offset(face);
-                if (placeAndDecreaseCount(entityItem, offsetPos)) {
-                    entityItem.setDead();
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	@Override
+	public boolean onEntityItemUpdate(EntityItem entityItem) {
+		if (!entityItem.world.isRemote && entityItem.age >= entityItem.lifespan && !entityItem.getItem().isEmpty()) {
+			final BlockPos pos = entityItem.getPosition();
+			if (placeAndDecreaseCount(entityItem, pos)) {
+				entityItem.setDead();
+				return true;
+			}
+			for (EnumFacing face : EnumFacing.HORIZONTALS) {
+				final BlockPos offsetPos = pos.offset(face);
+				if (placeAndDecreaseCount(entityItem, offsetPos)) {
+					entityItem.setDead();
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    private boolean placeAndDecreaseCount(EntityItem entityItem, BlockPos pos) {
-        if (entityItem.world.mayPlace(block, pos, false, EnumFacing.UP, null) && entityItem.world.setBlockState(pos, block.getDefaultState())) {
-            entityItem.getItem().shrink(1);
-        }
-        return entityItem.getItem().isEmpty();
-    }
+	private boolean placeAndDecreaseCount(EntityItem entityItem, BlockPos pos) {
+		if (entityItem.world.mayPlace(block, pos, false, EnumFacing.UP, null) && entityItem.world.setBlockState(pos, block.getDefaultState())) {
+			entityItem.getItem().shrink(1);
+		}
+		return entityItem.getItem().isEmpty();
+	}
 
 
 //    @SideOnly(Side.CLIENT)

@@ -19,7 +19,7 @@ public class RockBlockVariants {
 	public static RockBlockVariant PRESSURE_PLATE;
 	public static RockBlockVariant ANVIL;
 	public static RockBlockVariant MAGMA;
-	public static RockBlockVariant GEM_DISPLAY;
+	public static RockBlockVariant STAND_GEM;
 
 	public static RockBlockVariant STAIRS_RAW;
 	public static RockBlockVariant STAIRS_COBBLE;

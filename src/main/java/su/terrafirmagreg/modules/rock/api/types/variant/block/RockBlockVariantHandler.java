@@ -103,7 +103,7 @@ public class RockBlockVariantHandler {
 				.setFallingSpecification(COLLAPSABLE_ROCK)
 				.build();
 
-		RockBlockVariants.GEM_DISPLAY = new RockBlockVariant.Builder("gem_display")
+		RockBlockVariants.STAND_GEM = new RockBlockVariant.Builder("stand_gem")
 				.setBaseHardness(1F)
 				.setFactory(BlockRockGemDisplay::new)
 				.build();

@@ -40,8 +40,8 @@ def use_util = true
 dependencies {
     // GregTech dependencies
     if (use_gregtech.toBoolean()) {
-        implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:4965457-sources-4965459")
-        implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:4910674-sources-4910676")
+        implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5121638-sources-5121640")
+        implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5121714-sources-5121718")
 
         implementation rfg.deobf("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
         implementation rfg.deobf("curse.maven:ctm-267602:2915363")

@@ -8,6 +8,8 @@ package net.dries007.tfc.api.util;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import lombok.Getter;
+import lombok.Setter;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
@@ -317,7 +319,7 @@ public class FallingBlockManager {
 	public static BlockPos checkAreaClear(World world, IBlockState state, BlockPos pos) {
 		// Check that there are no entities in the area, otherwise it would collide with them
 		if (!world.getEntitiesWithinAABB(EntityFallingBlock.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)))
-		          .isEmpty()) {
+				.isEmpty()) {
 			// If we can't fall due to a collision, wait for the block to move out of the way and try again later
 			world.scheduleUpdate(pos, state.getBlock(), 20);
 			return null;
@@ -327,11 +329,13 @@ public class FallingBlockManager {
 
 	public static class Specification {
 
-		public static final IFallDropsProvider DEFAULT_DROPS_PROVIDER = (world, pos, state, teData, fallTime, fallDistance) -> Collections.singletonList(new ItemStack(state.getBlock(), 1, state.getBlock()
-		                                                                                                                                                                                         .damageDropped(state)));
-		public static final ICollapseChecker DEFAULT_COLLAPSE_CHECKER = (world, collapsePos) -> world.getBlockState(collapsePos.down())
-		                                                                                             .getMaterial()
-		                                                                                             .isReplaceable();
+		public static final IFallDropsProvider DEFAULT_DROPS_PROVIDER = (world, pos, state, teData, fallTime, fallDistance) -> Collections.singletonList(new ItemStack(state.getBlock(), 1, state
+				.getBlock()
+				.damageDropped(state)));
+		public static final ICollapseChecker DEFAULT_COLLAPSE_CHECKER = (world, collapsePos) -> world
+				.getBlockState(collapsePos.down())
+				.getMaterial()
+				.isReplaceable();
 
 		public static final Specification VERTICAL_AND_HORIZONTAL = new Specification(true, () -> TFCSounds.DIRT_SLIDE_SHORT);
 		public static final Specification VERTICAL_AND_HORIZONTAL_ROCK = new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT);
@@ -344,13 +348,17 @@ public class FallingBlockManager {
 		private final Supplier<SoundEvent> soundEventDelegate;
 		private final IFallDropsProvider fallDropsProvider;
 
+		@Getter
 		private final boolean collapsable;
 		private ICollapseChecker collapseChecker;
 
+		@Setter
 		@Nullable
 		private IBlockState resultingState; // Defaults to base IBlockState, null here as a reference as states can be pretty big in memory
+		@Setter
 		@Nullable
 		private IBeginFallCallback beginFallCallback;
+		@Setter
 		@Nullable
 		private IEndFallCallback endFallCallback;
 
@@ -383,24 +391,12 @@ public class FallingBlockManager {
 			this.fallDropsProvider = fallDropsProvider;
 		}
 
-		public void setBeginFallCallback(IBeginFallCallback callback) {
-			this.beginFallCallback = callback;
-		}
-
-		public void setEndFallCallback(IEndFallCallback callback) {
-			this.endFallCallback = callback;
-		}
-
 		public void setCollapseCondition(ICollapseChecker collapseChecker) {
 			this.collapseChecker = collapseChecker;
 		}
 
 		public boolean canFallHorizontally() {
 			return canFallHorizontally;
-		}
-
-		public boolean isCollapsable() {
-			return collapsable;
 		}
 
 		public SoundEvent getSoundEvent() {
@@ -410,10 +406,6 @@ public class FallingBlockManager {
 		@Nullable
 		public IBlockState getResultingState() {
 			return resultingState;
-		}
-
-		public void setResultingState(IBlockState state) {
-			this.resultingState = state;
 		}
 
 		@Nonnull

@@ -6,6 +6,7 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.DimensionManager;
+import org.jetbrains.annotations.NotNull;
 
 import static net.anodecathode.time4tfc.data.SessionData.*;
 
@@ -51,7 +52,7 @@ public class WorldProviderTooMuchTime extends WorldProvider {
 	}
 
 	@Override
-	public DimensionType getDimensionType() {
+	public @NotNull DimensionType getDimensionType() {
 		return DimensionType.OVERWORLD;
 	}
 }

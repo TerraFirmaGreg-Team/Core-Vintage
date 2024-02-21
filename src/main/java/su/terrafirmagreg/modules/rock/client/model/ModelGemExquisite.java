@@ -1,4 +1,4 @@
-package lyeoj.tfcthings.model;
+package su.terrafirmagreg.modules.rock.client.model;
 
 
 import net.minecraft.client.model.ModelBase;

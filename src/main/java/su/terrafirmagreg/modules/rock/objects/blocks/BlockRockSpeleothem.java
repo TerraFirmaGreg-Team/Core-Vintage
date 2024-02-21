@@ -33,8 +33,12 @@ public class BlockRockSpeleothem extends BlockRock implements IHasStateMapper {
 
 	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
+	private final RockType type;
+
 	public BlockRockSpeleothem(RockBlockVariant variant, RockType type) {
 		super(variant, type);
+
+		this.type = type;
 
 		setDefaultState(blockState.getBaseState()
 				.withProperty(SIZE, EnumSize.MEDIUM));
@@ -53,7 +57,7 @@ public class BlockRockSpeleothem extends BlockRock implements IHasStateMapper {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+	public void neighborChanged(IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
 		int size = state.getValue(SIZE).strength;
 		if (getBearing(worldIn, pos) < size + 1) {
 			worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
@@ -63,22 +67,22 @@ public class BlockRockSpeleothem extends BlockRock implements IHasStateMapper {
 	}
 
 	@Override
-	public int quantityDropped(IBlockState state, int fortune, Random random) {
+	public int quantityDropped(@NotNull IBlockState state, int fortune, Random random) {
 		return 1 + random.nextInt(3);
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemsRock.getItem(RockItemVariants.LOOSE, getType());
+	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+		return ItemsRock.getItem(RockItemVariants.LOOSE, type);
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, @NotNull IBlockState state, EntityPlayer player) {
+	public boolean canSilkHarvest(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer player) {
 		return true;
 	}
 
 	@Override
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+	public boolean isPassable(@NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
 		return false;
 	}
 
@@ -98,38 +102,38 @@ public class BlockRockSpeleothem extends BlockRock implements IHasStateMapper {
 	@NotNull
 	@Override
 	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+	public AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
 		return state.getValue(SIZE).aabb;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(@NotNull IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
 		return getBoundingBox(blockState, worldIn, pos);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isFullCube(IBlockState state) {
+	public boolean isFullCube(@NotNull IBlockState state) {
 		return false;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isFullBlock(IBlockState state) {
+	public boolean isFullBlock(@NotNull IBlockState state) {
 		return false;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(@NotNull IBlockState state) {
 		return false;
 	}
 
 	@NotNull
 	@Override
 	@SuppressWarnings("deprecation")
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos blockPos, EnumFacing face) {
+	public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos blockPos, @NotNull EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
@@ -158,7 +162,7 @@ public class BlockRockSpeleothem extends BlockRock implements IHasStateMapper {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos) {
+	public IBlockState getActualState(final @NotNull IBlockState state, final @NotNull IBlockAccess worldIn, final @NotNull BlockPos pos) {
 		var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
 		if (isCenter(worldIn, pos)) size = EnumSize.MEDIUM;
 		return state.withProperty(SIZE, size);

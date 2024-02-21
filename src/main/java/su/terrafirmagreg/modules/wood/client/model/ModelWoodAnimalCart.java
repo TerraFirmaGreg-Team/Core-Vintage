@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodAnimalCart;
 
 
@@ -56,33 +57,35 @@ public class ModelWoodAnimalCart extends ModelBase {
 		this.boardFront = new ModelRenderer(this, 20, 28);
 		this.boardFront.addBox(-9F, -5F, -15.5F, 18, 8, 2);
 
+		// --LEFT-WHEEL----------------------------------
 		this.leftWheel = new ModelRenderer(this, 54, 21);
 		this.leftWheel.setRotationPoint(14.5F, 5.0F, 1.0F);
-		this.leftWheel.addBox(-2.0F, -1.0F, -1.0F, 1, 2, 2);
+		this.leftWheel.addBox(-2.0F, -1.0F, -1.0F, 2, 2, 2);
 		for (int i = 0; i < 8; i++) {
-			ModelRenderer rim = new ModelRenderer(this, 60, 0);
-			rim.addBox(-1.5F, -4.5F, 9.86F, 1, 9, 1);
+			ModelRenderer rim = new ModelRenderer(this, 0, 11);
+			rim.addBox(-1.5F, -4.5F, 9.86F, 2, 9, 1);
 			rim.rotateAngleX = i * (float) Math.PI / 4.0F;
 			this.leftWheel.addChild(rim);
 
-			ModelRenderer spoke = new ModelRenderer(this, 60, 10);
-			spoke.addBox(-1.5F, 1.0F, -0.5F, 1, 9, 1);
+			ModelRenderer spoke = new ModelRenderer(this, 4, 11);
+			spoke.addBox(-1.5F, 1.0F, -0.5F, 2, 9, 1);
 			spoke.rotateAngleX = i * (float) Math.PI / 4.0F;
 			this.leftWheel.addChild(spoke);
 		}
 
-		this.rightWheel = new ModelRenderer(this, 54, 21);
+		// --RIGHT-WHEEL---------------------------------
+		this.rightWheel = new ModelRenderer(this, 0, 21);
 		this.rightWheel.mirror = true;
 		this.rightWheel.setRotationPoint(-14.5F, 5.0F, 1.0F);
-		this.rightWheel.addBox(1.0F, -1.0F, -1.0F, 1, 2, 2);
+		this.rightWheel.addBox(1.0F, -1.0F, -1.0F, 2, 2, 2);
 		for (int i = 0; i < 8; i++) {
-			ModelRenderer rim = new ModelRenderer(this, 60, 0);
-			rim.addBox(0.5F, -4.5F, 9.86F, 1, 9, 1);
+			ModelRenderer rim = new ModelRenderer(this, 0, 11);
+			rim.addBox(0.5F, -4.5F, 9.86F, 2, 9, 1);
 			rim.rotateAngleX = i * (float) Math.PI / 4.0F;
 			this.rightWheel.addChild(rim);
 
-			ModelRenderer spoke = new ModelRenderer(this, 60, 10);
-			spoke.addBox(0.5F, 1.0F, -0.5F, 1, 9, 1);
+			ModelRenderer spoke = new ModelRenderer(this, 4, 11);
+			spoke.addBox(0.5F, 1.0F, -0.5F, 2, 9, 1);
 			spoke.rotateAngleX = i * (float) Math.PI / 4.0F;
 			this.rightWheel.addChild(spoke);
 		}
@@ -90,7 +93,7 @@ public class ModelWoodAnimalCart extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale) {
+	public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale) {
 		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch, scale, entity);
 
 		this.leftWheel.rotateAngleX = ((EntityWoodAnimalCart) entity).getWheelRotation();

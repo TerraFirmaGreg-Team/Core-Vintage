@@ -53,7 +53,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 		this.block = BlocksWood.getBlock(WoodBlockVariants.PLANKS, type);
 		this.blockVariant = blockVariant;
 		this.type = type;
-		useNeighborBrightness = true;
+		this.useNeighborBrightness = true;
 
 		setLightOpacity(255);
 		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));

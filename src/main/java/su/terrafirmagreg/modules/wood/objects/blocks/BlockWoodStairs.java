@@ -22,6 +22,7 @@ import su.terrafirmagreg.modules.wood.init.BlocksWood;
 @Getter
 public class BlockWoodStairs extends BlockStairs implements IWoodBlock, IColorfulBlock {
 
+
 	private final WoodBlockVariant blockVariant;
 	private final WoodType type;
 

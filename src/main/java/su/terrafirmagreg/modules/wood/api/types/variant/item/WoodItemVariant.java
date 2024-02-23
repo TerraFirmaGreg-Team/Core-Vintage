@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.Pair;
@@ -15,7 +15,7 @@ import java.util.function.BiFunction;
  */
 public class WoodItemVariant {
 
-	private static final Set<WoodItemVariant> WOOD_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
+	private static final Set<WoodItemVariant> WOOD_ITEM_VARIANTS = new ObjectOpenHashSet<>();
 
 	@NotNull
 	private final String name;

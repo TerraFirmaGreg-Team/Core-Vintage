@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.block;
 
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import lombok.Getter;
 import net.minecraft.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +18,7 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
  */
 public class WoodBlockVariant {
 
-	private static final Set<WoodBlockVariant> WOOD_BLOCK_VARIANTS = new ObjectLinkedOpenHashSet<>();
+	private static final Set<WoodBlockVariant> WOOD_BLOCK_VARIANTS = new ObjectOpenHashSet<>();
 
 	@NotNull
 	private final String name;

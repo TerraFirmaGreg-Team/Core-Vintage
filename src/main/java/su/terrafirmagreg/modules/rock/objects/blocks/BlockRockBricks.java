@@ -7,12 +7,11 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 public class BlockRockBricks extends BlockRock {
 
 
-    public BlockRockBricks(RockBlockVariant blockVariant, RockType type) {
-        super(blockVariant, type);
+	public BlockRockBricks(RockBlockVariant blockVariant, RockType type) {
+		super(blockVariant, type);
 
-        setHardness(getFinalHardness());
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
-        //OreDictionaryHelper.register(this, "cobblestone");
-    }
+		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+		//OreDictionaryHelper.register(this, "cobblestone");
+	}
 }

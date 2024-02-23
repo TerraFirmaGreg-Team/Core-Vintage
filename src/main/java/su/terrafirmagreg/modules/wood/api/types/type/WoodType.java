@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.api.types.type;
 
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,9 +9,9 @@ import java.util.Set;
 /**
  * Класс Wood представляет тип дерева с определенными характеристиками.
  */
-public class WoodType {
+public class WoodType implements Comparable<WoodType> {
 
-	private static final Set<WoodType> WOOD_TYPES = new ObjectLinkedOpenHashSet<>();
+	private static final Set<WoodType> WOOD_TYPES = new ObjectOpenHashSet<>();
 
 	@NotNull
 	private final String name;
@@ -55,6 +55,11 @@ public class WoodType {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(@NotNull WoodType woodType) {
+		return this.name.compareTo(woodType.toString());
 	}
 
 	public static class Builder {

@@ -1,6 +1,9 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.modules.rock.api.types.type.IRockType;
@@ -23,7 +26,7 @@ public interface IRockBlock extends IRockType, IAutoReg, IItemSize {
 	 *
 	 * @return Окончательная твердость блока породы.
 	 */
-	default float getFinalHardness() {
+	default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
 		return getBlockVariant().getBaseHardness() + getType().getRockCategory().getHardnessModifier();
 	}
 

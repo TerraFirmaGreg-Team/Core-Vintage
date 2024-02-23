@@ -37,4 +37,5 @@ public interface IRockBlock extends IRockType, IAutoReg, IItemSize {
 		return String.format("rock/%s/%s", getBlockVariant(), getType());
 	}
 
+
 }

@@ -36,7 +36,10 @@
     }
   },
   "textures": {
-    "particle": "#side"
+    "particle": "#all",
+    "top": "#all",
+    "bottom": "#all",
+    "side": "#all"
   },
   "elements": [
     {

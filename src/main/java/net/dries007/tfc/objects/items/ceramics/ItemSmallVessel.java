@@ -92,7 +92,7 @@ public class ItemSmallVessel extends ItemPottery {
 						break;
 					case LIQUID_SOLID:
 						TerraFirmaCraft.getNetwork()
-						               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MODID_TFC + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+								.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MODID_TFC + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
 						break;
 				}
 			}
@@ -147,8 +147,7 @@ public class ItemSmallVessel extends ItemPottery {
 	@Nonnull
 	public ItemStack getFiringResult(ItemStack input) {
 		IItemHandler capItemHandler = input.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		if (capItemHandler instanceof ISmallVesselHandler) {
-			ISmallVesselHandler cap = (ISmallVesselHandler) capItemHandler;
+		if (capItemHandler instanceof ISmallVesselHandler cap) {
 			Alloy alloy = new Alloy();
 
 			for (int i = 0; i < cap.getSlots(); i++) {
@@ -259,8 +258,9 @@ public class ItemSmallVessel extends ItemPottery {
 						} else {
 							onlySmeltables = false;
 						}
-						text.add(1, I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem()
-						                                                                                                 .getItemStackDisplayName(slot)));
+						text.add(1, I18n.format(Constants.MODID_TFC + ".tooltip.small_vessel_item", slot.getCount(), slot
+								.getItem()
+								.getItemStackDisplayName(slot)));
 						hasContent = true;
 					}
 				}
@@ -268,8 +268,8 @@ public class ItemSmallVessel extends ItemPottery {
 				if (hasContent) {
 					if (onlySmeltables) {
 						int textPosition = (int) super.stacks.stream()
-						                                     .filter(itemstack -> !ItemStack.EMPTY.equals(itemstack))
-						                                     .count() + 1;
+								.filter(itemstack -> !ItemStack.EMPTY.equals(itemstack))
+								.count() + 1;
 						int totalAmount = materials.values().stream().reduce(0, Integer::sum);
 						for (Entry<Metal, Integer> entry : materials.entrySet()) {
 							Metal key = entry.getKey();
@@ -291,7 +291,7 @@ public class ItemSmallVessel extends ItemPottery {
 		@Override
 		public Metal getMetal() {
 			return fluidMode && tank.getFluid() != null ? FluidsTFC.getMetalFromFluid(tank.getFluid()
-			                                                                              .getFluid()) : null;
+					.getFluid()) : null;
 		}
 
 		@Override

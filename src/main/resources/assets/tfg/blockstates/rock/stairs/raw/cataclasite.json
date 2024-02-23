@@ -1,0 +1,53 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true,
+    "model": "tfg:rock/stairs",
+    "textures": {
+      "all": "tfg:blocks/rock/raw/cataclasite"
+    }
+  },
+  "variants": {
+      "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing": {
+      "east": {},
+      "west": {
+        "y": 180
+      },
+      "south": {
+        "y": 90
+      },
+      "north": {
+        "y": 270
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": {
+        "x": 180
+      }
+    },
+    "shape": {
+      "straight": {
+        "model": "tfg:rock/stairs"
+      },
+      "inner_left": {
+        "model": "tfg:rock/inner_stairs"
+      },
+      "inner_right": {
+        "model": "tfg:rock/inner_stairs"
+      },
+      "outer_left": {
+        "model": "tfg:rock/outer_stairs"
+      },
+      "outer_right": {
+        "model": "tfg:rock/outer_stairs"
+      }
+    }
+  }
+}

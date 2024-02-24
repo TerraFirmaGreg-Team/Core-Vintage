@@ -251,6 +251,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(MOISTURE).build());
 	}

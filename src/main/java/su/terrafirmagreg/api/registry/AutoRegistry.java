@@ -147,10 +147,6 @@ public class AutoRegistry {
 	@SideOnly(Side.CLIENT)
 	public void onRegisterModels(ModelRegistryEvent event) {
 
-		for (var model : this.registry.getModels()) {
-			model.onModelRegister();
-		}
-
 		for (var model : this.registry.getItemModel()) {
 			model.onModelRegister();
 		}

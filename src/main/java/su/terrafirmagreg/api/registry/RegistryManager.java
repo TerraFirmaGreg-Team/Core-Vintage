@@ -117,12 +117,13 @@ public class RegistryManager {
 	private final List<Item> customMeshes = NonNullList.create();
 
 	/**
-	 * A list of all the custom models.
+	 * A list of all the custom stateMapper.
 	 */
-	private final List<IModelRegister> models = NonNullList.create();
-
 	private final List<IStateMapperRegister> stateMapper = NonNullList.create();
 
+	/**
+	 * A list of all the custom models.
+	 */
 	private final List<IModelRegister> itemModel = NonNullList.create();
 
 	/**
@@ -247,13 +248,13 @@ public class RegistryManager {
 			if (block instanceof IStateMapperRegister state) {
 				this.stateMapper.add(state);
 			}
-			if (block instanceof IModelRegister model) {
-				this.itemModel.add(model);
-			} else {
-				this.registerClientModel(() ->
-						ModelManager.registerItemModel(Item.getItemFromBlock(block))
-				);
-			}
+//			if (block instanceof IModelRegister model) {
+//				this.itemModel.add(model);
+//			} else {
+//				this.registerClientModel(() ->
+//						ModelManager.registerBlockItemModel(block)
+//				);
+//			}
 			if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
 		}
 	}
@@ -283,7 +284,7 @@ public class RegistryManager {
 	 * @param item The item to register.
 	 * @param id   The id to register the item with.
 	 */
-	public void registerItem(@Nonnull Item item, @Nonnull String id) {
+	public <T extends Item> void registerItem(@Nonnull T item, @Nonnull String id) {
 
 		item.setRegistryName(this.modID, id);
 		item.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -503,7 +504,7 @@ public class RegistryManager {
 
 	@SideOnly(Side.CLIENT)
 	public void registerClientModel(IModelRegister model) {
-		this.models.add(model);
+		this.itemModel.add(model);
 	}
 
 	//endregion

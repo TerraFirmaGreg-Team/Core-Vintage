@@ -78,6 +78,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock, IColorfulBlo
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockDoor.POWERED).build());
 	}

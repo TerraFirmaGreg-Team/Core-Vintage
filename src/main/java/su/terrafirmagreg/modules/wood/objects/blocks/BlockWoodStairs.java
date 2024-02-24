@@ -51,6 +51,7 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock, IColorfu
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 	}

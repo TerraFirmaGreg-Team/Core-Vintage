@@ -62,6 +62,11 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 		setHarvestLevel("axe", 0);
 	}
 
+	@Override
+	public ItemBlock getItemBlock() {
+		return this.isDouble() ? null : new ItemBlockWoodSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
+	}
+
 	@NotNull
 	@Override
 	public String getTranslationKey(int meta) {
@@ -190,11 +195,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 			return true;
 		}
 
-		@Override
-		public ItemBlock getItemBlock() {
-			return null;
-		}
-
 
 	}
 
@@ -217,11 +217,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 		@Override
 		public boolean isDouble() {
 			return false;
-		}
-
-		@Override
-		public ItemBlock getItemBlock() {
-			return new ItemBlockWoodSlab(this, this, this.doubleSlab);
 		}
 	}
 }

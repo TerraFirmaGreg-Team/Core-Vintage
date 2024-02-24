@@ -30,8 +30,10 @@ public class ModelManager {
 	}
 
 	public static void registerBlockItemModel(Block block) {
-
-		ModelManager.registerItemModel(Item.getItemFromBlock(block), block.getRegistryName());
+		ResourceLocation registryName = block.getRegistryName();
+		Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
+		
+		ModelManager.registerItemModel(Item.getItemFromBlock(block), registryName);
 	}
 
 	public static void registerBlockItemModel(Block block, String modelLocation) {
@@ -67,7 +69,7 @@ public class ModelManager {
 		ResourceLocation registryName = item.getRegistryName();
 		Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 
-		ModelManager.registerItemModel(item, registryName.toString());
+		ModelManager.registerItemModel(item, registryName);
 	}
 
 	public static void registerItemModel(Item item, String modelLocation) {

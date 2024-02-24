@@ -50,6 +50,7 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 	}

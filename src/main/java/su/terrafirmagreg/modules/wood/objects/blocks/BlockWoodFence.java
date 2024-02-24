@@ -62,6 +62,7 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock, IColorfulB
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 	}

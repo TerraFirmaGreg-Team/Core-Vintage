@@ -293,8 +293,8 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 
 	@Override
 	public ItemMeshDefinition getCustomMesh() {
-		final ModelResourceLocation sealed = new ModelResourceLocation(getResourceLocation(), "sealed=true");
-		final ModelResourceLocation unsealed = new ModelResourceLocation(getResourceLocation(), "sealed=false");
+		var sealed = new ModelResourceLocation(getResourceLocation(), "sealed=true");
+		var unsealed = new ModelResourceLocation(getResourceLocation(), "sealed=false");
 		return stack -> stack.getTagCompound() != null ? sealed : unsealed;
 	}
 

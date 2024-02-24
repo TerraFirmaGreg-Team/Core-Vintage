@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.rock;
 
 
 import net.minecraft.creativetab.CreativeTabs;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -22,35 +21,35 @@ import java.util.List;
 @Module(moduleID = "Rock", name = "TFG Rock")
 public class ModuleRock extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger("Module Rock");
+	public static final Logger LOGGER = LogManager.getLogger("Module Rock");
 
-    public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/raw/basalt", false);
+	public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/raw/basalt", false);
 
-    public ModuleRock() {
-        super(2);
-        this.enableAutoRegistry(ROCK_TAB);
+	public ModuleRock() {
+		super(2);
+		this.enableAutoRegistry(ROCK_TAB);
 
-    }
+	}
 
-    @Override
-    public void onRegister() {
-        RockCategoryHandler.init();
-        RockTypeHandler.init();
-        RockBlockVariantHandler.init();
-        RockItemVariantHandler.init();
+	@Override
+	public void onRegister() {
+		RockCategoryHandler.init();
+		RockTypeHandler.init();
+		RockBlockVariantHandler.init();
+		RockItemVariantHandler.init();
 
-        BlocksRock.onRegister(registry);
-        ItemsRock.onRegister(registry);
-    }
+		BlocksRock.onRegister(registry);
+		ItemsRock.onRegister(registry);
+	}
 
-    @Override
-    public @NotNull Logger getLogger() {
-        return LOGGER;
-    }
+	@Override
+	public @NotNull Logger getLogger() {
+		return LOGGER;
+	}
 
-    @NotNull
-    @Override
-    public List<Class<?>> getEventBusSubscribers() {
-        return Collections.singletonList(ModuleRock.class);
-    }
+	@NotNull
+	@Override
+	public List<Class<?>> getEventBusSubscribers() {
+		return Collections.singletonList(ModuleRock.class);
+	}
 }

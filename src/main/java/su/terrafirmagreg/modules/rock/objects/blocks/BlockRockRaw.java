@@ -17,6 +17,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.models.IStateMapperRegister;
 import su.terrafirmagreg.api.models.ModelManager;
@@ -121,6 +123,7 @@ public class BlockRockRaw extends BlockRock implements IStateMapperRegister {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(CAN_FALL).build());
 	}

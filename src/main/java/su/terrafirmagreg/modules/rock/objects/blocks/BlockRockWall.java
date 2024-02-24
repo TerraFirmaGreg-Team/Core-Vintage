@@ -66,6 +66,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock, IStateMapper
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(VARIANT).build());
 	}

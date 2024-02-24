@@ -9,7 +9,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.IStateMapperRegister;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -19,7 +18,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 @Getter
-public class BlockWoodButton extends BlockButtonWood implements IWoodBlock, IColorfulBlock, IStateMapperRegister {
+public class BlockWoodButton extends BlockButtonWood implements IWoodBlock, IColorfulBlock {
 
 	private final WoodBlockVariant blockVariant;
 	private final WoodType type;
@@ -48,6 +47,7 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock, ICol
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 	}

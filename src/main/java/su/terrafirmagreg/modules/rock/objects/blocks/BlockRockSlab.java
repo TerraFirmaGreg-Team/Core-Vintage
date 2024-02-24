@@ -198,8 +198,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ISt
 		public boolean isDouble() {
 			return true;
 		}
-
-
 	}
 
 	public static class Half extends BlockRockSlab {

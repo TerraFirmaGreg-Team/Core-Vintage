@@ -9,6 +9,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -22,6 +23,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -33,7 +36,7 @@ import java.util.List;
 import java.util.Random;
 
 @Getter
-public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
+public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, IStateMapperRegister {
 
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 	private final RockBlockVariant blockVariant;
@@ -168,6 +171,13 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 						.getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onStateMapperRegister() {
+		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(BlockRockSlab.VARIANT).build());
+	}
+
+
 	public enum Variant implements IStringSerializable {
 		DEFAULT;
 
@@ -188,6 +198,8 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 		public boolean isDouble() {
 			return true;
 		}
+
+
 	}
 
 	public static class Half extends BlockRockSlab {
@@ -207,5 +219,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock {
 		public boolean isDouble() {
 			return false;
 		}
+
 	}
 }

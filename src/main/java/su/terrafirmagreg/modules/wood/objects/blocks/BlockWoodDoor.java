@@ -5,7 +5,6 @@ import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,11 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -71,17 +70,16 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock, IColorfulBlo
 		return new ItemStack(Item.getItemFromBlock(this));
 	}
 
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelLoader.setCustomStateMapper(this,
-				new CustomStateMap.Builder()
-						.customPath(getResourceLocation())
-						.ignore(BlockDoor.POWERED).build());
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this, getResourceLocation());
+	}
 
-		ModelLoader.setCustomModelResourceLocation(
-				Item.getItemFromBlock(this), 0,
-				new ModelResourceLocation(getResourceLocation(), "inventory"));
+	@Override
+	public void onStateMapperRegister() {
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(BlockDoor.POWERED).build());
 	}
 
 	@Override

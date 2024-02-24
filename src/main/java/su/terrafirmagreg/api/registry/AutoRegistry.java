@@ -116,8 +116,10 @@ public class AutoRegistry {
 
 	public void onRegisterTileEntities() {
 		for (var provider : this.registry.getTileProviders()) {
-			GameRegistry.registerTileEntity(provider.getTileEntityClass(), Helpers.getID("tile." + provider
-					.getTileEntityClass().getSimpleName()));
+			GameRegistry.registerTileEntity(
+					provider.getTileEntityClass(),
+					Helpers.getID("tile." + provider.getTileEntityClass().getSimpleName())
+			);
 		}
 	}
 
@@ -126,8 +128,13 @@ public class AutoRegistry {
 		for (var builder : this.registry.getLootTableEntries().get(event.getName())) {
 			var pool = event.getTable().getPool(builder.getPool());
 			if (pool != null) pool.addEntry(builder.build());
-			else
-				ModuleManager.LOGGER.info("The mod {} tried to add loot to {} but the pool was not found. {}", this.registry.getModID(), event.getName(), builder.toString());
+			else {
+				ModuleManager.LOGGER.info(
+						"The mod {} tried to add loot to {} but the pool was not found. {}",
+						this.registry.getModID(),
+						event.getName(),
+						builder.toString());
+			}
 		}
 	}
 
@@ -139,7 +146,16 @@ public class AutoRegistry {
 
 	@SideOnly(Side.CLIENT)
 	public void onRegisterModels(ModelRegistryEvent event) {
+
 		for (var model : this.registry.getModels()) {
+			model.onModelRegister();
+		}
+
+		for (var model : this.registry.getItemModel()) {
+			model.onModelRegister();
+		}
+
+		for (var model : this.registry.getStateMapper()) {
 			model.onStateMapperRegister();
 		}
 
@@ -169,8 +185,7 @@ public class AutoRegistry {
 		for (var block : this.registry.getColoredBlocks()) {
 			var colorfulBlock = (IColorfulBlock) block;
 			if (colorfulBlock.getItemColorHandler() != null) {
-				event.getItemColors()
-						.registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
+				event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
 			}
 		}
 

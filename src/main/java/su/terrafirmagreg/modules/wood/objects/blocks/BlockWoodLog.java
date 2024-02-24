@@ -35,7 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -319,8 +319,12 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this);
+	}
+
+	@Override
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(PLACED).build());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
 	}
 }

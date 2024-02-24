@@ -8,7 +8,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -19,8 +18,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
-import su.terrafirmagreg.api.registry.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -29,7 +26,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import java.util.List;
 
 @Getter
-public class BlockRockButton extends BlockButtonStone implements IRockBlock, IHasStateMapper {
+public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
 	private final RockBlockVariant blockVariant;
 	private final RockType type;
@@ -64,12 +61,5 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock, IHa
 
 		tooltip.add(new TextComponentTranslation(
 				"rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
-	}
-
-	@Override
-	public void onStateMapperRegister() {
-
-		ModelManager.registerBlockItemModel(this.getDefaultState());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
 	}
 }

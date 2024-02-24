@@ -4,8 +4,9 @@ package su.terrafirmagreg.modules.wood.api.types.variant.block;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.IStateMapperRegister;
 import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
 import su.terrafirmagreg.api.util.Helpers;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 
@@ -13,7 +14,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, IHasStateMapper {
+public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, IModelRegister, IStateMapperRegister {
 
 	/**
 	 * Возвращает вариант деревянного блока.

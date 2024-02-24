@@ -8,11 +8,11 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
 import javax.annotation.Nonnull;
 
-public class ItemMug extends ItemJug implements IHasStateMapper {
+public class ItemMug extends ItemJug implements IModelRegister {
 
 	public ItemMug(String name) {
 		super();
@@ -39,7 +39,7 @@ public class ItemMug extends ItemJug implements IHasStateMapper {
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 

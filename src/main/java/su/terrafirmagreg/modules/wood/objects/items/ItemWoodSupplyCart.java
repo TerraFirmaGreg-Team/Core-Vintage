@@ -14,7 +14,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
@@ -84,8 +84,8 @@ public class ItemWoodSupplyCart extends ItemBase implements IWoodItem {
 	}
 
 	@Override
-	public void onStateMapperRegister() {
-		ModelManager.registerItemModel(this, this.getResourceLocation().toString());
+	public void onModelRegister() {
+		ModelManager.registerItemModel(this, getResourceLocation());
 
 	}
 

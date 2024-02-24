@@ -11,6 +11,9 @@
     "normal": [
       {}
     ],
+    "inventory": [
+      {}
+    ],
     "facing": {
       "north": {
         "model": "tfg:groundcover/rubble",

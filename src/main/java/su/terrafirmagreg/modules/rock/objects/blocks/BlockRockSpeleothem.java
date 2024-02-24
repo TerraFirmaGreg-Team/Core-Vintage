@@ -17,8 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
-import su.terrafirmagreg.api.registry.ModelManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
@@ -29,7 +27,7 @@ import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 
-public class BlockRockSpeleothem extends BlockRock implements IHasStateMapper {
+public class BlockRockSpeleothem extends BlockRock {
 
 	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
@@ -174,13 +172,6 @@ public class BlockRockSpeleothem extends BlockRock implements IHasStateMapper {
 
 	private boolean isThis(IBlockAccess world, BlockPos pos) {
 		return world.getBlockState(pos).getBlock() instanceof BlockRockSpeleothem;
-	}
-
-	@Override
-	public void onStateMapperRegister() {
-
-		ModelManager.registerBlockItemModel(this.getDefaultState());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
 	}
 
 

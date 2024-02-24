@@ -4,9 +4,9 @@ import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.creativetab.CreativeTabs;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
-public abstract class ItemBase extends ItemTFC implements IHasStateMapper {
+public abstract class ItemBase extends ItemTFC implements IModelRegister {
 
 	public ItemBase(String name) {
 		setTranslationKey(name);
@@ -17,7 +17,7 @@ public abstract class ItemBase extends ItemTFC implements IHasStateMapper {
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 

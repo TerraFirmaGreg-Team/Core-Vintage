@@ -28,6 +28,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
@@ -39,127 +42,107 @@ import su.terrafirmagreg.api.util.LootBuilder;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+@Getter
 public class RegistryManager {
 
 	/**
 	 * The id of the mod the registry helper instance belongs to.
 	 */
-	@Getter
 	private final String modID;
 
 	/**
 	 * A list of all items registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<Item> items = NonNullList.create();
 
 	/**
 	 * A list of all blocks registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<Block> blocks = NonNullList.create();
 
 	/**
 	 * A list of all potions registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<Potion> potions = NonNullList.create();
 
 	/**
 	 * A list of all potion type registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<PotionType> potionType = NonNullList.create();
 
 	/**
 	 * A list of all biomes registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<Biome> biomes = NonNullList.create();
 
 	/**
 	 * A list of all the sounds registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<SoundEvent> sounds = NonNullList.create();
 
 	/**
 	 * A list of all entities registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<EntityEntry> entities = NonNullList.create();
 
 	/**
 	 * A list of all entities registered by the helper.
 	 */
-	@Getter
 	private final NonNullList<ResourceLocation> entityIds = NonNullList.create();
 
 	/**
 	 * A local map of all the entries that have been added. This is on a per instance basis,
 	 * used to get mod-specific entries.
 	 */
-	@Getter
 	private final Multimap<ResourceLocation, LootBuilder> lootTableEntries = HashMultimap.create();
 
 	/**
 	 * A list of all the tile providers registered here.
 	 */
-	@Getter
 	private final List<ITEBlock> tileProviders = NonNullList.create();
 
 	/**
 	 * A list of all recipes registered.
 	 */
-	@Getter
 	private final List<IRecipe> recipes = NonNullList.create();
 
 	/**
 	 * A list of all enchantments registered.
 	 */
-	@Getter
 	private final List<Enchantment> enchantments = NonNullList.create();
 
 	/**
 	 * A list of all the custom mesh definitions.
 	 */
-	@Getter
 	private final List<Item> customMeshes = NonNullList.create();
 
 	/**
 	 * A list of all the custom models.
 	 */
-	@Getter
-	private final List<IHasStateMapper> models = NonNullList.create();
+	private final List<IModelRegister> models = NonNullList.create();
 
-	@Getter
-	private final List<IHasStateMapper> stateMapper = NonNullList.create();
+	private final List<IStateMapperRegister> stateMapper = NonNullList.create();
 
-	@Getter
-	private final List<IHasStateMapper> itemModel = NonNullList.create();
+	private final List<IModelRegister> itemModel = NonNullList.create();
 
 	/**
 	 * A list of all the colored items registered here.
 	 */
-	@Getter
 	private final List<Item> coloredItems = NonNullList.create();
 
 	/**
 	 * A list of all the colored blocks registered here.
 	 */
-	@Getter
 	private final List<Block> coloredBlocks = NonNullList.create();
 
 	/**
 	 * The creative tab used by the mod. This can be null.
 	 */
-	@Getter
 	private CreativeTabs tab;
 
 	/**
 	 * The auto registry for the helper.
 	 */
-	@Getter
 	private AutoRegistry autoRegistry;
 
 	private NetworkEntityIdSupplier networkEntityIdSupplier;
@@ -237,12 +220,6 @@ public class RegistryManager {
 			ItemBlock itemBlock = provider.getItemBlock();
 			String id = provider.getName();
 			this.registerBlock(block, itemBlock, id);
-
-			this.registerClientModel(() ->
-					ModelManager.registerBlockItemModel(block)
-			);
-
-//            if (block instanceof IHasModel model) this.registerClientModel(model);
 		}
 	}
 
@@ -254,21 +231,31 @@ public class RegistryManager {
 	 * @param itemBlock The ItemBlock for the block.
 	 * @param id        The id to register the block with.
 	 */
-	public void registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
+	public <T extends Block> void registerBlock(@Nonnull T block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
 
 		block.setRegistryName(this.modID, id);
 		block.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
+		if (this.tab != null)
+			block.setCreativeTab(this.tab);
+
 		this.blocks.add(block);
 
-
 		if (itemBlock != null) this.registerItem(itemBlock, id);
-
-
-		if (this.tab != null) block.setCreativeTab(this.tab);
-
-		if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
-
 		if (block instanceof ITEBlock te) this.tileProviders.add(te);
+
+		if (GameUtils.isClient()) {
+			if (block instanceof IStateMapperRegister state) {
+				this.stateMapper.add(state);
+			}
+			if (block instanceof IModelRegister model) {
+				this.itemModel.add(model);
+			} else {
+				this.registerClientModel(() ->
+						ModelManager.registerItemModel(Item.getItemFromBlock(block))
+				);
+			}
+			if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
+		}
 	}
 
 	//endregion
@@ -286,11 +273,6 @@ public class RegistryManager {
 			String id = provider.getName();
 
 			this.registerItem(item, id);
-
-			this.registerClientModel(() ->
-					ModelManager.registerItemModel(item)
-			);
-//            if (item instanceof IHasModel model) this.registerClientModel(model);
 		}
 	}
 
@@ -312,9 +294,14 @@ public class RegistryManager {
 		}
 
 		if (GameUtils.isClient()) {
-
+			if (item instanceof IModelRegister model) {
+				this.itemModel.add(model);
+			} else {
+				this.registerClientModel(() ->
+						ModelManager.registerItemModel(item)
+				);
+			}
 			if (item instanceof ICustomMesh) this.customMeshes.add(item);
-
 			if (item instanceof IColorfulItem) this.coloredItems.add(item);
 		}
 	}
@@ -515,10 +502,9 @@ public class RegistryManager {
 
 
 	@SideOnly(Side.CLIENT)
-	public void registerClientModel(IHasStateMapper model) {
+	public void registerClientModel(IModelRegister model) {
 		this.models.add(model);
 	}
-
 
 	//endregion
 }

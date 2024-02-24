@@ -11,9 +11,8 @@
     "normal": [
       {}
     ],
-    "can_fall": {
-      "true": {},
-      "false": {}
-    }
+    "inventory": [
+      {}
+    ]
   }
 }

@@ -8,9 +8,9 @@ import net.minecraft.item.ItemBlock;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
-public class BlockCoffeeTreeSapling extends BlockFruitTreeSapling implements IHasStateMapper {
+public class BlockCoffeeTreeSapling extends BlockFruitTreeSapling implements IModelRegister {
 
 	public BlockCoffeeTreeSapling(IFruitTree tree) {
 		super(tree);
@@ -27,7 +27,7 @@ public class BlockCoffeeTreeSapling extends BlockFruitTreeSapling implements IHa
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 

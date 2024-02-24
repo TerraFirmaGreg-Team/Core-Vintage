@@ -11,11 +11,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
 import javax.annotation.Nullable;
 
-public class ItemCoffeeBerries extends ItemFood implements IHasStateMapper {
+public class ItemCoffeeBerries extends ItemFood implements IModelRegister {
 
 	public ItemCoffeeBerries(String name) {
 		super(0, 0, false);
@@ -28,7 +28,7 @@ public class ItemCoffeeBerries extends ItemFood implements IHasStateMapper {
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 

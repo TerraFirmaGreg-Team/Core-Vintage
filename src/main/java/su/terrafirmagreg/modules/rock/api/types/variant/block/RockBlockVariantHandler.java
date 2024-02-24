@@ -105,9 +105,9 @@ public class RockBlockVariantHandler {
 
 		RockBlockVariants.STAND_GEM = new RockBlockVariant.Builder("stand_gem")
 				.setBaseHardness(1F)
-				.setFactory(BlockRockGemDisplay::new)
+				.setFactory(BlockRockStandGem::new)
 				.build();
-		
+
 		RockBlockVariants.STAIRS_RAW = new RockBlockVariant.Builder("stairs/raw")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockStairs::new)

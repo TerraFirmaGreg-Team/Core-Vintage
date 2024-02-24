@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:rock/half_slab",
+    "textures": {
+      "all": "tfg:blocks/rock/bricks/limestone"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "half": {
+      "bottom": {
+        "model": "tfg:rock/half_slab"
+      },
+      "top": {
+        "model": "tfg:rock/upper_slab"
+      }
+    }
+  }
+}

@@ -21,11 +21,11 @@ import net.sharkbark.cellars.blocks.tileentity.TEFreezeDryer;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.Reference;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
 import javax.annotation.Nullable;
 
-public class FreezeDryer extends BlockContainer implements IHasStateMapper {
+public class FreezeDryer extends BlockContainer implements IModelRegister {
 
 	public static final PropertyDirection FACING;
 
@@ -177,7 +177,7 @@ public class FreezeDryer extends BlockContainer implements IHasStateMapper {
 
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 }

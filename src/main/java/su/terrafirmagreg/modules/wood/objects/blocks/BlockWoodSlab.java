@@ -9,7 +9,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
@@ -23,6 +22,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -35,7 +36,7 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodSlab;
 import java.util.Random;
 
 @Getter
-public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock {
+public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock, IStateMapperRegister {
 
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 	public final Block block;
@@ -161,6 +162,22 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 		}
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onStateMapperRegister() {
+		ModelLoader.setCustomStateMapper(this,
+				new CustomStateMap.Builder()
+						.customPath(getResourceLocation())
+						.ignore(BlockWoodSlab.VARIANT)
+						.build());
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this, getResourceLocation());
+	}
+
 	public static class Double extends BlockWoodSlab {
 
 		public Double(WoodBlockVariant blockVariant, WoodType type) {
@@ -178,15 +195,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 			return null;
 		}
 
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void onStateMapperRegister() {
-			ModelLoader.setCustomStateMapper(this,
-					new CustomStateMap.Builder()
-							.customPath(getResourceLocation())
-							.ignore(BlockWoodSlab.VARIANT)
-							.build());
-		}
+
 	}
 
 	public static class Half extends BlockWoodSlab {
@@ -213,20 +222,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 		@Override
 		public ItemBlock getItemBlock() {
 			return new ItemBlockWoodSlab(this, this, this.doubleSlab);
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void onStateMapperRegister() {
-			ModelLoader.setCustomStateMapper(this,
-					new CustomStateMap.Builder()
-							.customPath(getResourceLocation())
-							.ignore(BlockWoodSlab.VARIANT)
-							.build());
-
-			ModelLoader.setCustomModelResourceLocation(
-					Item.getItemFromBlock(this), 0,
-					new ModelResourceLocation(getResourceLocation(), "normal"));
 		}
 	}
 }

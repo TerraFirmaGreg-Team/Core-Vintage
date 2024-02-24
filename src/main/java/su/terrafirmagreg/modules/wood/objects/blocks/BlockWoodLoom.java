@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -33,7 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
@@ -181,10 +180,13 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this, getResourceLocation());
+	}
+
+	@Override
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation())
-				.build());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 	}
 
 	@Override

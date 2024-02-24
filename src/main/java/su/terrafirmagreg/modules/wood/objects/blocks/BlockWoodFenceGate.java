@@ -6,12 +6,11 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.CustomStateMap;
@@ -48,10 +47,16 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock, IC
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this, getResourceLocation());
+	}
+
+	@Override
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation())
-				.ignore(BlockFenceGate.IN_WALL, BlockFenceGate.POWERED).build());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder()
+				.customPath(getResourceLocation())
+				.ignore(IN_WALL, POWERED)
+				.build());
 	}
 
 	@Override

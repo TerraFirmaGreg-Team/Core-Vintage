@@ -4,9 +4,9 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
-public class ItemPotteryCA extends ItemPottery implements IHasStateMapper {
+public class ItemPotteryCA extends ItemPottery implements IModelRegister {
 
 	public ItemPotteryCA(String name) {
 		super();
@@ -18,7 +18,7 @@ public class ItemPotteryCA extends ItemPottery implements IHasStateMapper {
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 }

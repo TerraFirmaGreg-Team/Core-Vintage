@@ -16,6 +16,9 @@
     "normal": [
       {}
     ],
+    "inventory": [
+      {}
+    ],
     "east": {
       "true": {
         "textures": {

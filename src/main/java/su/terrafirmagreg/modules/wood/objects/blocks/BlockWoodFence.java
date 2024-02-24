@@ -6,12 +6,11 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.CustomStateMap;
@@ -48,10 +47,8 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock, IColorfulB
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation())
-				.build());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this, getResourceLocation());
 	}
 
 	@Override
@@ -62,5 +59,10 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock, IColorfulB
 	@Override
 	public IItemColor getItemColorHandler() {
 		return (s, i) -> this.getType().getColor();
+	}
+
+	@Override
+	public void onStateMapperRegister() {
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
 	}
 }

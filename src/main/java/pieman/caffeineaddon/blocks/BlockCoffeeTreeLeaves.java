@@ -14,11 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
 import java.util.Random;
 
-public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements IHasStateMapper {
+public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements IModelRegister {
 
 	public BlockCoffeeTreeLeaves(IFruitTree tree) {
 		super(tree);
@@ -35,7 +35,7 @@ public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements IHasS
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		CaffeineAddon.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 

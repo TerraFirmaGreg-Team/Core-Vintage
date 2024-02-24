@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -402,10 +402,15 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this);
+	}
+
+	@Override
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new StateMap.Builder()
-				.ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE).build());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
+				.ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE)
+				.build());
 	}
 
 	public enum EnumLeafState implements IStringSerializable {

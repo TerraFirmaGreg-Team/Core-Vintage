@@ -1,5 +1,9 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
+import lombok.Getter;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.client.TFCGuiHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,12 +15,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import lombok.Getter;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ItemBase;
@@ -29,51 +27,51 @@ import java.util.List;
 @Getter
 public class ItemRockLoose extends ItemBase implements IRockItem {
 
-    private final RockItemVariant itemVariant;
-    private final RockType type;
+	private final RockItemVariant itemVariant;
+	private final RockType type;
 
-    public ItemRockLoose(RockItemVariant itemVariant, RockType type) {
+	public ItemRockLoose(RockItemVariant itemVariant, RockType type) {
 
-        this.itemVariant = itemVariant;
-        this.type = type;
+		this.itemVariant = itemVariant;
+		this.type = type;
 
-        OreDictionaryHelper.register(this, itemVariant.toString());
-        OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
-        OreDictionaryHelper.register(this, itemVariant.toString(), type.getRockCategory().toString());
-        if (type.isFlux()) OreDictionaryHelper.register(this, itemVariant.toString(), "flux");
-    }
+//        OreDictionaryHelper.register(this, itemVariant.toString());
+//        OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
+//        OreDictionaryHelper.register(this, itemVariant.toString(), type.getRockCategory().toString());
+//        if (type.isFlux()) OreDictionaryHelper.register(this, itemVariant.toString(), "flux");
+	}
 
-    @NotNull
-    @Override
-    public Size getSize(@NotNull ItemStack stack) {
-        return Size.SMALL;
-    }
+	@NotNull
+	@Override
+	public Size getSize(@NotNull ItemStack stack) {
+		return Size.SMALL;
+	}
 
-    @NotNull
-    @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
-        return Weight.VERY_LIGHT;
-    }
+	@NotNull
+	@Override
+	public Weight getWeight(@NotNull ItemStack stack) {
+		return Weight.VERY_LIGHT;
+	}
 
-    @Override
-    @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-        if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
-            TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);
-        }
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-    }
+	@Override
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
+			TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);
+		}
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TextComponentTranslation(
-                "rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation(
+				"rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
 
-        if (type.isFlux())
-            tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
-    }
+		if (type.isFlux())
+			tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
+	}
 }

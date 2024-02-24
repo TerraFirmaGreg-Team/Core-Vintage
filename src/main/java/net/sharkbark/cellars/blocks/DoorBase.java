@@ -14,11 +14,11 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.blocks.itemblocks.ItemBlockDoor;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
 import java.util.Random;
 
-public class DoorBase extends BlockDoor implements IHasStateMapper {
+public class DoorBase extends BlockDoor implements IModelRegister {
 
 	protected DoorBase(String name, Material material) {
 		//setUnlocalizedName(name);
@@ -42,7 +42,7 @@ public class DoorBase extends BlockDoor implements IHasStateMapper {
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 

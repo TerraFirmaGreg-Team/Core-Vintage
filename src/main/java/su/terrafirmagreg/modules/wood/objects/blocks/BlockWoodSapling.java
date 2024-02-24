@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -31,7 +30,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -173,9 +172,13 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void onModelRegister() {
+		ModelManager.registerBlockItemModel(this);
+	}
+
+	@Override
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(STAGE).build());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), this.getRegistryName().toString());
 	}
 
 	@Override

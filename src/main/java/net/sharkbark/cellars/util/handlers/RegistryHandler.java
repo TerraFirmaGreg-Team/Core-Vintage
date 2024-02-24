@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
 import static su.terrafirmagreg.Constants.MODID_CELLARS;
 
@@ -47,9 +47,9 @@ public class RegistryHandler {
 
 		for (Item item : ModItems.ITEMS) {
 
-			if (item instanceof IHasStateMapper) {
+			if (item instanceof IModelRegister) {
 
-				((IHasStateMapper) item).onStateMapperRegister();
+				((IModelRegister) item).onModelRegister();
 
 			}
 
@@ -57,9 +57,9 @@ public class RegistryHandler {
 
 		for (Block block : ModBlocks.BLOCKS) {
 
-			if (block instanceof IHasStateMapper) {
+			if (block instanceof IModelRegister) {
 
-				((IHasStateMapper) block).onStateMapperRegister();
+				((IModelRegister) block).onModelRegister();
 
 			}
 

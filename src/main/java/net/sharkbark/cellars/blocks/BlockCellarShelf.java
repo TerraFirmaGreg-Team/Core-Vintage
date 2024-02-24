@@ -20,11 +20,11 @@ import net.sharkbark.cellars.blocks.tileentity.TECellarShelf;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.Reference;
-import su.terrafirmagreg.api.registry.IHasStateMapper;
+import su.terrafirmagreg.api.models.IModelRegister;
 
 import javax.annotation.Nullable;
 
-public class BlockCellarShelf extends BlockContainer implements IHasStateMapper {
+public class BlockCellarShelf extends BlockContainer implements IModelRegister {
 
 	public BlockCellarShelf(String name, Material material) {
 		super(Material.WOOD);
@@ -91,7 +91,7 @@ public class BlockCellarShelf extends BlockContainer implements IHasStateMapper 
 	}
 
 	@Override
-	public void onStateMapperRegister() {
+	public void onModelRegister() {
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 

@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -17,6 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
@@ -24,7 +27,7 @@ import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import java.util.Random;
 
-public class BlockRockRaw extends BlockRock {
+public class BlockRockRaw extends BlockRock implements IStateMapperRegister {
 
 	/* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
 	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
@@ -115,5 +118,10 @@ public class BlockRockRaw extends BlockRock {
 	@Override
 	public int quantityDropped(@NotNull IBlockState state, int fortune, Random random) {
 		return 1 + random.nextInt(3);
+	}
+
+	@Override
+	public void onStateMapperRegister() {
+		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(CAN_FALL).build());
 	}
 }

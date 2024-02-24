@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.registry.ModelManager;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
@@ -41,8 +41,8 @@ public class ItemWoodWheel extends ItemBase implements IWoodItem {
 	}
 
 	@Override
-	public void onStateMapperRegister() {
-		ModelManager.registerItemModel(this, this.getResourceLocation().toString());
+	public void onModelRegister() {
+		ModelManager.registerItemModel(this, getResourceLocation());
 
 	}
 

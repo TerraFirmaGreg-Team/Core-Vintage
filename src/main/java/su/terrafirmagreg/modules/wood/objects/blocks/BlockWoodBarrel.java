@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -34,10 +33,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.registry.ModelManager;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
-import su.terrafirmagreg.api.util.CustomStateMap;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
@@ -292,15 +289,6 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@SuppressWarnings("deprecation")
 	public int getComparatorInputOverride(IBlockState state, @NotNull World world, @NotNull BlockPos pos) {
 		return state.getValue(SEALED) ? 15 : 0;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation())
-				.build());
-		ModelManager.registerItemModel(Item.getItemFromBlock(this), getResourceLocation());
-
 	}
 
 	@Override

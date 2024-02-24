@@ -4,6 +4,7 @@ import lombok.Getter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -16,6 +17,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -24,7 +27,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import java.util.List;
 
 @Getter
-public class BlockRockWall extends BlockWall implements IRockBlock {
+public class BlockRockWall extends BlockWall implements IRockBlock, IStateMapperRegister {
 
 	private final RockBlockVariant blockVariant;
 	private final RockType type;
@@ -60,5 +63,10 @@ public class BlockRockWall extends BlockWall implements IRockBlock {
 		tooltip.add(
 				new TextComponentTranslation("rockcategory.name")
 						.getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
+	}
+
+	@Override
+	public void onStateMapperRegister() {
+		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(VARIANT).build());
 	}
 }

@@ -11,6 +11,9 @@
     "normal": [
       {}
     ],
+    "inventory": [
+      {}
+    ],
     "powered": {
       "false": {},
       "true": {

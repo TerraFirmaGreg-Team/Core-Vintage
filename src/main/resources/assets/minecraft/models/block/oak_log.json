@@ -1,7 +1,0 @@
-{
-    "parent": "tfg:block/wood/log",
-    "textures": {
-        "end": "blocks/log_oak_top",
-        "side": "blocks/log_oak"
-    }
-}

@@ -28,8 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.IModelRegister;
-import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
+import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
@@ -112,19 +112,19 @@ public class RegistryManager {
 	private final List<Enchantment> enchantments = NonNullList.create();
 
 	/**
-	 * A list of all the custom mesh definitions.
-	 */
-	private final List<Item> customMeshes = NonNullList.create();
-
-	/**
 	 * A list of all the custom stateMapper.
 	 */
-	private final List<IStateMapperRegister> stateMapper = NonNullList.create();
+	private final List<ICustomStateMapper> customStateMapper = NonNullList.create();
 
 	/**
 	 * A list of all the custom models.
 	 */
-	private final List<IModelRegister> itemModel = NonNullList.create();
+	private final List<ICustomModel> customModel = NonNullList.create();
+
+	/**
+	 * A list of all the custom mesh definitions.
+	 */
+	private final List<Item> customMeshes = NonNullList.create();
 
 	/**
 	 * A list of all the colored items registered here.
@@ -139,7 +139,7 @@ public class RegistryManager {
 	/**
 	 * The creative tab used by the mod. This can be null.
 	 */
-	private CreativeTabs tab;
+	private final CreativeTabs tab;
 
 	/**
 	 * The auto registry for the helper.
@@ -232,7 +232,7 @@ public class RegistryManager {
 	 * @param itemBlock The ItemBlock for the block.
 	 * @param id        The id to register the block with.
 	 */
-	public <T extends Block> void registerBlock(@Nonnull T block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
+	public void registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
 
 		block.setRegistryName(this.modID, id);
 		block.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -245,16 +245,16 @@ public class RegistryManager {
 		if (block instanceof ITEBlock te) this.tileProviders.add(te);
 
 		if (GameUtils.isClient()) {
-			if (block instanceof IStateMapperRegister state) {
-				this.stateMapper.add(state);
+			if (block instanceof ICustomStateMapper state) {
+				this.customStateMapper.add(state);
 			}
-//			if (block instanceof IModelRegister model) {
-//				this.itemModel.add(model);
-//			} else {
-//				this.registerClientModel(() ->
-//						ModelManager.registerBlockItemModel(block)
-//				);
-//			}
+			if (block instanceof ICustomModel blockModel) {
+				this.customModel.add(blockModel);
+			} else {
+				this.registerClientModel(() ->
+						ModelManager.registerBlockInventoryModel(block)
+				);
+			}
 			if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
 		}
 	}
@@ -284,7 +284,7 @@ public class RegistryManager {
 	 * @param item The item to register.
 	 * @param id   The id to register the item with.
 	 */
-	public <T extends Item> void registerItem(@Nonnull T item, @Nonnull String id) {
+	public void registerItem(@Nonnull Item item, @Nonnull String id) {
 
 		item.setRegistryName(this.modID, id);
 		item.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -295,11 +295,11 @@ public class RegistryManager {
 		}
 
 		if (GameUtils.isClient()) {
-			if (item instanceof IModelRegister model) {
-				this.itemModel.add(model);
-			} else {
+			if (item instanceof ICustomModel itemModel) {
+				this.customModel.add(itemModel);
+			} else if (!(item instanceof ItemBlock)) {
 				this.registerClientModel(() ->
-						ModelManager.registerItemModel(item)
+						ModelManager.registerInventoryModel(item)
 				);
 			}
 			if (item instanceof ICustomMesh) this.customMeshes.add(item);
@@ -503,8 +503,8 @@ public class RegistryManager {
 
 
 	@SideOnly(Side.CLIENT)
-	public void registerClientModel(IModelRegister model) {
-		this.itemModel.add(model);
+	public void registerClientModel(ICustomModel model) {
+		this.customModel.add(model);
 	}
 
 	//endregion

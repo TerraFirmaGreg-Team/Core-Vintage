@@ -111,11 +111,11 @@ public class WoodBlockVariantHandler {
 				.setFireInfo(5, 20)
 				.build();
 
-//		WoodBlockVariants.WORKBENCH = new WoodBlockVariant
-//				.Builder("workbench")
-//				.setFactory(BlockWoodWorkbench::new)
-//				.setFireInfo(5, 20)
-//				.build();
+		WoodBlockVariants.WORKBENCH = new WoodBlockVariant
+				.Builder("workbench")
+				.setFactory(BlockWoodWorkbench::new)
+				.setFireInfo(5, 20)
+				.build();
 
 		WoodBlockVariants.CHEST_TRAP = new WoodBlockVariant
 				.Builder("chest_trap")
@@ -135,11 +135,11 @@ public class WoodBlockVariantHandler {
 				.setFireInfo(5, 20)
 				.build();
 
-//		WoodBlockVariants.BARREL = new WoodBlockVariant
-//				.Builder("barrel")
-//				.setFactory(BlockWoodBarrel::new)
-//				.setFireInfo(5, 20)
-//				.build();
+		WoodBlockVariants.BARREL = new WoodBlockVariant
+				.Builder("barrel")
+				.setFactory(BlockWoodBarrel::new)
+				.setFireInfo(5, 20)
+				.build();
 
 		WoodBlockVariants.LADDER = new WoodBlockVariant
 				.Builder("ladder")

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.items;
 
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -15,9 +17,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.TerraFirmaCraft;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 
@@ -27,68 +26,68 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class ItemDebug extends ItemBase {
 
-    public ItemDebug() {
-        setNoRepair();
-        setMaxStackSize(1);
-        setFull3D();
-    }
+	public ItemDebug() {
+		setNoRepair();
+		setMaxStackSize(1);
+		setFull3D();
+	}
 
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        // Block
-        try {
-            Block block = worldIn.getBlockState(pos).getBlock();
-            try {
-                block.getClass().getMethod("debug").invoke(block);
-            } catch (Exception t) { /* Nothing Burger */ }
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		// Block
+		try {
+			Block block = worldIn.getBlockState(pos).getBlock();
+			try {
+				block.getClass().getMethod("debug").invoke(block);
+			} catch (Exception t) { /* Nothing Burger */ }
 
-            // Tile Entity
-            TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile != null) {
-                try {
-                    tile.getClass().getMethod("debug").invoke(tile);
-                } catch (Exception t) {
-                    TerraFirmaCraft.getLog().info("No debug method found to invoke on {}", tile);
-                }
+			// Tile Entity
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile != null) {
+				try {
+					tile.getClass().getMethod("debug").invoke(tile);
+				} catch (Exception t) {
+					TerraFirmaCraft.getLog().info("No debug method found to invoke on {}", tile);
+				}
 
-                TerraFirmaCraft.getLog().info("Tile Data: {}", tile.serializeNBT());
+				TerraFirmaCraft.getLog().info("Tile Data: {}", tile.serializeNBT());
 
-                IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (inventory != null) {
-                    TerraFirmaCraft.getLog().info("Found item handler: {}", inventory);
-                }
+				IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+				if (inventory != null) {
+					TerraFirmaCraft.getLog().info("Found item handler: {}", inventory);
+				}
 
-                IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                if (fluids != null) {
-                    TerraFirmaCraft.getLog().info("Found fluid handler: {}", fluids);
-                }
-            }
-        } catch (Exception t) { /* Nothing Burger */ }
-        return EnumActionResult.SUCCESS;
-    }
+				IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+				if (fluids != null) {
+					TerraFirmaCraft.getLog().info("Found fluid handler: {}", fluids);
+				}
+			}
+		} catch (Exception t) { /* Nothing Burger */ }
+		return EnumActionResult.SUCCESS;
+	}
 
-    @Override
-    public boolean hasEffect(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean hasEffect(ItemStack stack) {
+		return true;
+	}
 
-    @Override
-    public int getEntityLifespan(ItemStack itemStack, World world) {
-        return 60;
-    }
+	@Override
+	public int getEntityLifespan(ItemStack itemStack, World world) {
+		return 60;
+	}
 
-    @Override
-    public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
-        return false;
-    }
+	@Override
+	public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
+		return false;
+	}
 
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
-    }
+	@Override
+	public IRarity getForgeRarity(ItemStack stack) {
+		return EnumRarity.EPIC;
+	}
 
-    @Override
-    public @NotNull String getName() {
-        return "wand";
-    }
+	@Override
+	public @NotNull String getName() {
+		return "wand";
+	}
 }

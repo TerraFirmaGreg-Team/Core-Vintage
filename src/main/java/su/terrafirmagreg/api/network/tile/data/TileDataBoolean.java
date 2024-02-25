@@ -1,48 +1,47 @@
 package su.terrafirmagreg.api.network.tile.data;
 
 import net.minecraft.network.PacketBuffer;
-
 import su.terrafirmagreg.api.network.tile.spi.TileDataBase;
 
 
 public class TileDataBoolean extends TileDataBase {
 
-    private boolean value;
+	private boolean value;
 
-    public TileDataBoolean(boolean initialValue) {
+	public TileDataBoolean(boolean initialValue) {
 
-        this(initialValue, 1);
-    }
+		this(initialValue, 1);
+	}
 
-    public TileDataBoolean(boolean initialValue, int updateInterval) {
+	public TileDataBoolean(boolean initialValue, int updateInterval) {
 
-        super(updateInterval);
-        this.set(initialValue);
-    }
+		super(updateInterval);
+		this.set(initialValue);
+	}
 
-    public void set(boolean value) {
+	public void set(boolean value) {
 
-        if (value != this.value) {
-            this.value = value;
-            this.setDirty(true);
-        }
-    }
+		if (value != this.value) {
+			this.value = value;
+			this.setDirty(true);
+		}
+	}
 
-    public boolean get() {
+	public boolean get() {
 
-        return this.value;
-    }
+		return this.value;
+	}
 
-    @Override
-    public void read(PacketBuffer buffer) {
+	@Override
+	public void read(PacketBuffer buffer) {
 
-        this.value = buffer.readBoolean();
-    }
+		this.value = buffer.readBoolean();
+	}
 
-    @Override
-    public void write(PacketBuffer buffer) {
+	@Override
+	public void write(PacketBuffer buffer) {
 
-        buffer.writeBoolean(this.value);
-    }
+		buffer.writeBoolean(this.value);
+	}
 
 }

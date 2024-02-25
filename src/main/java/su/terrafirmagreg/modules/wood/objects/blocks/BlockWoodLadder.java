@@ -40,7 +40,7 @@ public class BlockWoodLadder extends BlockLadder implements IWoodBlock, IColorfu
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

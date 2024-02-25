@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -14,8 +15,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -31,77 +30,77 @@ import java.util.Random;
 
 public class BlockRockAnvil extends BlockRock {
 
-    private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
+	private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockBlockVariant blockVariant, RockType type) {
-        super(blockVariant, type);
+	public BlockRockAnvil(RockBlockVariant blockVariant, RockType type) {
+		super(blockVariant, type);
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
-    }
+		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+	}
 
-    @Override
-    public ItemBlock getItemBlock() {
+	@Override
+	public ItemBlock getItemBlock() {
 //        return this.getType().getRockCategory().isHasAnvil() ? new ItemBlockBase(this) : null;
-        return new ItemBlockBase(this);
-    }
+		return new ItemBlockBase(this);
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullBlock(@NotNull IBlockState state) {
-        return false;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean isFullBlock(@NotNull IBlockState state) {
+		return false;
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean isFullCube(@NotNull IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
-        return false;
-    }
+	@Override
+	public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
+		return false;
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isSideSolid(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
-        return side == EnumFacing.DOWN;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean isSideSolid(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
+		return side == EnumFacing.DOWN;
+	}
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+	@NotNull
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
-        return AABB;
-    }
+	@Override
+	@NotNull
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+		return AABB;
+	}
 
-    @Nullable
-    @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(@NotNull IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
-        return AABB;
-    }
+	@Nullable
+	@Override
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getCollisionBoundingBox(@NotNull IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+		return AABB;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getSelectedBoundingBox(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos) {
-        return AABB;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	@NotNull
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getSelectedBoundingBox(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos) {
+		return AABB;
+	}
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
-        return false;
-    }
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(@NotNull IBlockState state) {
+		return false;
+	}
 
 //	@Override
 //	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -175,22 +174,22 @@ public class BlockRockAnvil extends BlockRock {
 //		super.breakBlock(worldIn, pos, state);
 //	}
 
-    @Override
-    public int quantityDropped(Random random) {
-        return 1 + random.nextInt(3);
-    }
+	@Override
+	public int quantityDropped(Random random) {
+		return 1 + random.nextInt(3);
+	}
 
-    @Override
-    @NotNull
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return ItemsRock.getItem(RockItemVariants.LOOSE, getType());
-    }
+	@Override
+	@NotNull
+	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+		return ItemsRock.getItem(RockItemVariants.LOOSE, getType());
+	}
 
-    @Override
-    @NotNull
-    public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
-        return new ItemStack(BlocksRock.getBlock(RockBlockVariants.RAW, getType()));
-    }
+	@Override
+	@NotNull
+	public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
+		return new ItemStack(BlocksRock.getBlock(RockBlockVariants.RAW, getType()));
+	}
 
 //	@Override
 //	public boolean hasTileEntity(IBlockState state) {

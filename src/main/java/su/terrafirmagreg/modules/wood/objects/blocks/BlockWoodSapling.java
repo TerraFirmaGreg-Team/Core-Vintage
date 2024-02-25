@@ -173,7 +173,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this);
+		ModelManager.registerBlockInventoryModel(this);
 	}
 
 	@Override

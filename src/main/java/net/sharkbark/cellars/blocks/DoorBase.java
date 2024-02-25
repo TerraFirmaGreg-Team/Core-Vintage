@@ -14,11 +14,11 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.blocks.itemblocks.ItemBlockDoor;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import java.util.Random;
 
-public class DoorBase extends BlockDoor implements IModelRegister {
+public class DoorBase extends BlockDoor implements ICustomModel {
 
 	protected DoorBase(String name, Material material) {
 		//setUnlocalizedName(name);

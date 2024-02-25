@@ -12,27 +12,27 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Module {
 
-    /**
-     * The ID of this module. Must be unique within its container.
-     */
-    String moduleID();
+	/**
+	 * The ID of this module. Must be unique within its container.
+	 */
+	String moduleID();
 
-    /**
-     * A human-readable name for this module.
-     */
-    String name();
+	/**
+	 * A human-readable name for this module.
+	 */
+	String name();
 
-    /**
-     * A list of mod IDs that this module depends on. If any mods specified are not present, the module will not load.
-     */
-    String[] modDependencies() default {};
+	/**
+	 * A list of mod IDs that this module depends on. If any mods specified are not present, the module will not load.
+	 */
+	String[] modDependencies() default {};
 
-    String author() default "";
+	String author() default "";
 
-    String version() default "";
+	String version() default "";
 
-    /**
-     * A description of this module in the module configuration file.
-     */
-    String description() default "";
+	/**
+	 * A description of this module in the module configuration file.
+	 */
+	String description() default "";
 }

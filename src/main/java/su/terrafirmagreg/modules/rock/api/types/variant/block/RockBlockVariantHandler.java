@@ -33,11 +33,6 @@ public class RockBlockVariantHandler {
 				.setFallingSpecification(COLLAPSABLE_ROCK)
 				.build();
 
-		RockBlockVariants.SMOOTH = new RockBlockVariant.Builder("smooth")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSmooth::new)
-				.build();
-
 		RockBlockVariants.BRICKS = new RockBlockVariant.Builder("bricks")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockBricks::new)
@@ -51,6 +46,11 @@ public class RockBlockVariantHandler {
 		RockBlockVariants.CRACKED_BRICKS = new RockBlockVariant.Builder("cracked_bricks")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockBricks::new)
+				.build();
+
+		RockBlockVariants.SMOOTH = new RockBlockVariant.Builder("smooth")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSmooth::new)
 				.build();
 
 		RockBlockVariants.CHISELED = new RockBlockVariant.Builder("chiseled")

@@ -22,7 +22,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.CustomStateMap;
@@ -36,7 +36,7 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodSlab;
 import java.util.Random;
 
 @Getter
-public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock, IStateMapperRegister {
+public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock, ICustomStateMapper {
 
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 	public final Block block;
@@ -157,16 +157,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 		return block.getSoundType();
 	}
 
-	public enum Variant implements IStringSerializable {
-		DEFAULT;
-
-		@NotNull
-		@Override
-		public String getName() {
-			return "default";
-		}
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
@@ -180,7 +170,17 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
+	}
+
+	public enum Variant implements IStringSerializable {
+		DEFAULT;
+
+		@NotNull
+		@Override
+		public String getName() {
+			return "default";
+		}
 	}
 
 	public static class Double extends BlockWoodSlab {

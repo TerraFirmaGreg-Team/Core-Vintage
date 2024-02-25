@@ -18,7 +18,7 @@ import su.terrafirmagreg.modules.rock.init.ItemsRock;
 import java.util.Collections;
 import java.util.List;
 
-@Module(moduleID = "Rock", name = "TFG Rock")
+@Module(moduleID = "Rock", name = "TFG Module Rock")
 public class ModuleRock extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger("Module Rock");

@@ -7,12 +7,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IColorfulBlock {
 
-    @SideOnly(Side.CLIENT)
-    IBlockColor getColorHandler();
+	@SideOnly(Side.CLIENT)
+	IBlockColor getColorHandler();
 
-    @SideOnly(Side.CLIENT)
-    default IItemColor getItemColorHandler() {
+	@SideOnly(Side.CLIENT)
+	default IItemColor getItemColorHandler() {
 
-        return null;
-    }
+		return null;
+	}
 }

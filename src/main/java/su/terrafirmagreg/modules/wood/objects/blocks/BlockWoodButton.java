@@ -43,7 +43,7 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock, ICol
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

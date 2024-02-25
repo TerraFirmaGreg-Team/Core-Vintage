@@ -2,8 +2,10 @@ package su.terrafirmagreg.api.models;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -18,6 +20,16 @@ public class ModelManager {
 
 	// ===== StateMapper ===========================================================================================================================//
 
+	/**
+	 * A {@link StateMapperBase} used to create property strings.
+	 */
+	public static StateMapperBase PROPERTY_STRING_MAPPER = new StateMapperBase() {
+		@Override
+		protected @NotNull ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
+			return new ModelResourceLocation("minecraft:air");
+		}
+	};
+
 	@SideOnly(Side.CLIENT)
 	public static void registerStateMapper(@Nonnull Block block, IStateMapper stateMap) {
 		ModelLoader.setCustomStateMapper(block, stateMap);
@@ -26,77 +38,73 @@ public class ModelManager {
 	// ===== ItemBlock =============================================================================================================================//
 
 	public static void registerBlockItemModels(Block... blocks) {
-		for (Block block : blocks) ModelManager.registerBlockItemModel(block);
+		for (Block block : blocks) ModelManager.registerBlockInventoryModel(block);
 	}
 
-	public static void registerBlockItemModel(Block block) {
+	public static void registerBlockInventoryModel(Block block) {
 		ResourceLocation registryName = block.getRegistryName();
 		Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
-		
-		ModelManager.registerItemModel(Item.getItemFromBlock(block), registryName);
+		ModelManager.registerInventoryModel(Item.getItemFromBlock(block), registryName);
 	}
 
-	public static void registerBlockItemModel(Block block, String modelLocation) {
-		ModelManager.registerItemModel(Item.getItemFromBlock(block), modelLocation);
+	public static void registerBlockInventoryModel(Block block, String modelLocation) {
+		ModelManager.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
 
 	}
 
-	public static void registerBlockItemModel(Block block, ResourceLocation modelLocation) {
-		ModelManager.registerItemModel(Item.getItemFromBlock(block), modelLocation);
+	public static void registerBlockInventoryModel(Block block, ResourceLocation modelLocation) {
+		ModelManager.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
 
 	}
 
 	// ===== Item ================================================================================================================================//
 
-	public static void registerItemModels(String subfolder, Item... items) {
-		for (Item item : items) ModelManager.registerItemModels(subfolder, item);
+	public static void registerInventoryModel(String subfolder, Item... items) {
+		for (Item item : items) ModelManager.registerInventoryModel(subfolder, item);
 	}
 
-	public static void registerItemModels(String subfolder, Item item) {
+	public static void registerInventoryModel(String subfolder, Item item) {
 		ResourceLocation registryName = item.getRegistryName();
 		Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 		String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
-		ModelManager.registerItemModel(item, modelLocation);
+		ModelManager.registerInventoryModel(item, modelLocation);
 	}
 
 
-	public static void registerItemModels(Item... items) {
-		for (Item item : items) registerItemModel(item);
+	public static void registerInventoryModel(Item... items) {
+		for (Item item : items) registerInventoryModel(item);
 	}
 
-	public static void registerItemModel(Item item) {
+	public static void registerInventoryModel(Item item) {
 		ResourceLocation registryName = item.getRegistryName();
 		Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 
-		ModelManager.registerItemModel(item, registryName);
+		ModelManager.registerInventoryModel(item, registryName);
 	}
 
-	public static void registerItemModel(Item item, String modelLocation) {
+	public static void registerInventoryModel(Item item, String modelLocation) {
 		ModelResourceLocation resourceLocation = new ModelResourceLocation(modelLocation, "inventory");
-
-		ModelManager.registerItemModel(item, 0, resourceLocation);
+		ModelManager.registerInventoryModel(item, resourceLocation);
 	}
 
-	public static void registerItemModel(Item item, ResourceLocation modelLocation) {
+	public static void registerInventoryModel(Item item, ResourceLocation modelLocation) {
 		ModelResourceLocation resourceLocation = new ModelResourceLocation(modelLocation, "inventory");
-
-		ModelManager.registerItemModel(item, 0, resourceLocation);
+		ModelManager.registerInventoryModel(item, resourceLocation);
 	}
 
-	public static void registerItemModel(Item item, ModelResourceLocation resourceLocation) {
-		ModelManager.registerItemModel(item, 0, resourceLocation);
+	public static void registerInventoryModel(Item item, ModelResourceLocation resourceLocation) {
+		ModelManager.registerInventoryModel(item, 0, resourceLocation);
 	}
 
-	public static void registerItemModel(@NotNull Item item, int metadata, @NotNull String variant) {
-
+	public static void registerInventoryModel(@NotNull Item item, int metadata, @NotNull String variant) {
 		ResourceLocation registryName = item.getRegistryName();
 		Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 
-		ModelManager.registerItemModel(item, metadata, new ModelResourceLocation(registryName, variant));
+		ModelManager.registerInventoryModel(item, metadata, new ModelResourceLocation(registryName, variant));
 	}
 
-	public static void registerItemModel(@NotNull Item item, int meta, @NotNull ModelResourceLocation resourceLocation) {
+	public static void registerInventoryModel(@NotNull Item item, int meta, @NotNull ModelResourceLocation resourceLocation) {
 		ModelLoader.setCustomModelResourceLocation(item, meta, resourceLocation);
 	}
 

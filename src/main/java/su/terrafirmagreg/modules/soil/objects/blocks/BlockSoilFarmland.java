@@ -24,7 +24,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -39,7 +39,7 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 import java.util.Random;
 
 @Getter
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IColorfulBlock, IStateMapperRegister {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IColorfulBlock, ICustomStateMapper {
 
 	public static final int[] TINT = new int[]{
 			0xffffffff,

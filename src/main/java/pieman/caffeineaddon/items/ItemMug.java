@@ -8,11 +8,11 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import javax.annotation.Nonnull;
 
-public class ItemMug extends ItemJug implements IModelRegister {
+public class ItemMug extends ItemJug implements ICustomModel {
 
 	public ItemMug(String name) {
 		super();

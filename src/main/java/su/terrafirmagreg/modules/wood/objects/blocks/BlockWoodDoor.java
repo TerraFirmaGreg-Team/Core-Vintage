@@ -74,7 +74,7 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock, IColorfulBlo
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

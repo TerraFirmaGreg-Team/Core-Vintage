@@ -1,5 +1,9 @@
 package su.terrafirmagreg.api.network.tile.client;
 
+import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -13,11 +17,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-
-import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.TerraFirmaGregConfig;
 
@@ -26,189 +25,189 @@ import java.awt.*;
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class TileDataServiceOverlayRenderer {
 
-    private static final TileDataServiceOverlayRenderer INSTANCE = new TileDataServiceOverlayRenderer();
+	private static final TileDataServiceOverlayRenderer INSTANCE = new TileDataServiceOverlayRenderer();
 
-    @SubscribeEvent
-    public static void onRenderGameOverlayPostEvent(RenderGameOverlayEvent.Post event) {
+	@SubscribeEvent
+	public static void onRenderGameOverlayPostEvent(RenderGameOverlayEvent.Post event) {
 
-        if (!TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED ||
-                Minecraft.getMinecraft().isGamePaused()) {
-            return;
-        }
+		if (!TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED ||
+				Minecraft.getMinecraft().isGamePaused()) {
+			return;
+		}
 
-        RenderGameOverlayEvent.ElementType type = event.getType();
+		RenderGameOverlayEvent.ElementType type = event.getType();
 
-        if (type == RenderGameOverlayEvent.ElementType.ALL) {
+		if (type == RenderGameOverlayEvent.ElementType.ALL) {
 
-            ScaledResolution resolution = event.getResolution();
+			ScaledResolution resolution = event.getResolution();
 
-            // --- Total ---
+			// --- Total ---
 
-            INSTANCE.renderMonitor(TileDataServiceClientMonitor.TOTAL, resolution.getScaledWidth() / 2 - 32 - 128, 100, "Total Rx");
+			INSTANCE.renderMonitor(TileDataServiceClientMonitor.TOTAL, resolution.getScaledWidth() / 2 - 32 - 128, 100, "Total Rx");
 
-            // --- Position ---
+			// --- Position ---
 
-            RayTraceResult traceResult = Minecraft.getMinecraft().objectMouseOver;
+			RayTraceResult traceResult = Minecraft.getMinecraft().objectMouseOver;
 
-            if (traceResult != null
-                    && traceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+			if (traceResult != null
+					&& traceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
-                BlockPos blockPos = traceResult.getBlockPos();
-                TileDataServiceClientMonitor monitor = TileDataServiceClientMonitor.findMonitorForPosition(blockPos);
+				BlockPos blockPos = traceResult.getBlockPos();
+				TileDataServiceClientMonitor monitor = TileDataServiceClientMonitor.findMonitorForPosition(blockPos);
 
-                int x = resolution.getScaledWidth() / 2 - 32 + 128;
-                int y = 100;
+				int x = resolution.getScaledWidth() / 2 - 32 + 128;
+				int y = 100;
 
-                if (monitor != null) {
-                    String title = "[" + blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ() + "]";
-                    INSTANCE.renderMonitor(monitor, x, y, title);
-                }
+				if (monitor != null) {
+					String title = "[" + blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ() + "]";
+					INSTANCE.renderMonitor(monitor, x, y, title);
+				}
 
-                TileDataTrackerUpdateMonitor trackerUpdateMonitor = TileDataServiceClientMonitor.getTrackerUpdateMonitor();
-                Object2ObjectArrayMap<BlockPos, Object2IntArrayMap<Class>> updateMap = trackerUpdateMonitor.getPublicTrackerUpdateMap();
-                Object2IntArrayMap<Class> map = updateMap.get(blockPos);
+				TileDataTrackerUpdateMonitor trackerUpdateMonitor = TileDataServiceClientMonitor.getTrackerUpdateMonitor();
+				Object2ObjectArrayMap<BlockPos, Object2IntArrayMap<Class>> updateMap = trackerUpdateMonitor.getPublicTrackerUpdateMap();
+				Object2IntArrayMap<Class> map = updateMap.get(blockPos);
 
-                if (map != null) {
+				if (map != null) {
 
-                    ObjectIterator<Object2IntMap.Entry<Class>> iterator = map.object2IntEntrySet().iterator();
-                    FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-                    int index = 0;
+					ObjectIterator<Object2IntMap.Entry<Class>> iterator = map.object2IntEntrySet().iterator();
+					FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+					int index = 0;
 
-                    while (iterator.hasNext()) {
-                        Object2IntMap.Entry<Class> entry = iterator.next();
+					while (iterator.hasNext()) {
+						Object2IntMap.Entry<Class> entry = iterator.next();
 
-                        Class dataClass = entry.getKey();
-                        int count = entry.getIntValue();
+						Class dataClass = entry.getKey();
+						int count = entry.getIntValue();
 
-                        fontRenderer.drawStringWithShadow(dataClass.getSimpleName() + " " + count, x + 64 /* TODO: cost */ + 5, y + 9 + index * 10, Color.WHITE.getRGB());
-                        index += 1;
-                    }
-                }
-            }
+						fontRenderer.drawStringWithShadow(dataClass.getSimpleName() + " " + count, x + 64 /* TODO: cost */ + 5, y + 9 + index * 10, Color.WHITE.getRGB());
+						index += 1;
+					}
+				}
+			}
 
-        }
-    }
+		}
+	}
 
-    private static void bufferColoredQuad(BufferBuilder renderer, int x, int y, float width, int height, float red, float green, float blue, float alpha) {
+	private static void bufferColoredQuad(BufferBuilder renderer, int x, int y, float width, int height, float red, float green, float blue, float alpha) {
 
-        renderer.pos(x, y, 1.0D).color(red, green, blue, alpha).endVertex();
-        renderer.pos(x, y + height, 1.0D).color(red, green, blue, alpha).endVertex();
-        renderer.pos(x + width, y + height, 1.0D).color(red, green, blue, alpha).endVertex();
-        renderer.pos(x + width, y, 1.0D).color(red, green, blue, alpha).endVertex();
-    }
+		renderer.pos(x, y, 1.0D).color(red, green, blue, alpha).endVertex();
+		renderer.pos(x, y + height, 1.0D).color(red, green, blue, alpha).endVertex();
+		renderer.pos(x + width, y + height, 1.0D).color(red, green, blue, alpha).endVertex();
+		renderer.pos(x + width, y, 1.0D).color(red, green, blue, alpha).endVertex();
+	}
 
-    public void renderMonitor(TileDataServiceClientMonitor monitor, int x, int y, String title) {
+	public void renderMonitor(TileDataServiceClientMonitor monitor, int x, int y, String title) {
 
-        int trackedIndex = TerraFirmaGregConfig.TILE_DATA_SERVICE.TRACKING_INDEX;
-        int totalWidth = 64; // TODO: const
+		int trackedIndex = TerraFirmaGregConfig.TILE_DATA_SERVICE.TRACKING_INDEX;
+		int totalWidth = 64; // TODO: const
 
-        int size = monitor.size();
+		int size = monitor.size();
 
-        if (size == 0) {
-            return;
-        }
+		if (size == 0) {
+			return;
+		}
 
-        int max = 0;
-        int min = Integer.MAX_VALUE;
-        int minActual = Integer.MAX_VALUE;
-        int total = 0;
-        int tracked = 0;
+		int max = 0;
+		int min = Integer.MAX_VALUE;
+		int minActual = Integer.MAX_VALUE;
+		int total = 0;
+		int tracked = 0;
 
-        for (int i = 0; i < size; i++) {
-            int count = monitor.get(i);
-            total += count;
+		for (int i = 0; i < size; i++) {
+			int count = monitor.get(i);
+			total += count;
 
-            if (i == trackedIndex) {
-                tracked = count;
-            }
+			if (i == trackedIndex) {
+				tracked = count;
+			}
 
-            if (count > max) {
-                max = count;
-            }
+			if (count > max) {
+				max = count;
+			}
 
-            if (count > 0 && count < min) {
-                min = count;
-            }
+			if (count > 0 && count < min) {
+				min = count;
+			}
 
-            if (count < minActual) {
-                minActual = count;
-            }
-        }
+			if (count < minActual) {
+				minActual = count;
+			}
+		}
 
-        if (min > max) {
-            min = 0;
-        }
+		if (min > max) {
+			min = 0;
+		}
 
-        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-        {
-            int textWidth = fontRenderer.getStringWidth(title);
-            fontRenderer.drawStringWithShadow(title, (float) (x - (textWidth / 2.0) + (totalWidth / 2.0)), y - 9, Color.WHITE.getRGB());
-        }
+		{
+			int textWidth = fontRenderer.getStringWidth(title);
+			fontRenderer.drawStringWithShadow(title, (float) (x - (textWidth / 2.0) + (totalWidth / 2.0)), y - 9, Color.WHITE.getRGB());
+		}
 
-        {
-            String text = "§a" + min + " §e" + (int) (total / (float) size) + " §c" + max + " §9" + tracked;
-            int textWidth = fontRenderer.getStringWidth(text);
-            fontRenderer.drawStringWithShadow(text, (float) (x - (textWidth / 2.0) + (totalWidth / 2.0)), y, Color.WHITE.getRGB());
-        }
+		{
+			String text = "§a" + min + " §e" + (int) (total / (float) size) + " §c" + max + " §9" + tracked;
+			int textWidth = fontRenderer.getStringWidth(text);
+			fontRenderer.drawStringWithShadow(text, (float) (x - (textWidth / 2.0) + (totalWidth / 2.0)), y, Color.WHITE.getRGB());
+		}
 
-        if (max == 0) {
-            return; // prevent div by zero
-        }
+		if (max == 0) {
+			return; // prevent div by zero
+		}
 
-        // Only render if the first value
-        if (minActual != max) {
+		// Only render if the first value
+		if (minActual != max) {
 
-            Tessellator tessellator = Tessellator.getInstance();
-            BufferBuilder renderer = tessellator.getBuffer();
+			Tessellator tessellator = Tessellator.getInstance();
+			BufferBuilder renderer = tessellator.getBuffer();
 
-            GlStateManager.disableTexture2D();
-            GlStateManager.enableAlpha();
-            GlStateManager.enableBlend();
-            renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+			GlStateManager.disableTexture2D();
+			GlStateManager.enableAlpha();
+			GlStateManager.enableBlend();
+			renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
 
-            int height = 1;
-            y += 9;
+			int height = 1;
+			y += 9;
 
-            int avg = (int) (total / (float) size);
+			int avg = (int) (total / (float) size);
 
-            bufferColoredQuad(renderer, x, y, totalWidth, size, 0, 0, 0, 0.75f);
+			bufferColoredQuad(renderer, x, y, totalWidth, size, 0, 0, 0, 0.75f);
 
-            int trackedX = 0;
-            int innerY = y - 1;
-            for (int i = 0; i < size; i++) {
+			int trackedX = 0;
+			int innerY = y - 1;
+			for (int i = 0; i < size; i++) {
 
-                float widthScalar = monitor.get(i) / (float) max;
-                int width = (int) (totalWidth * widthScalar);
-                innerY += height;
+				float widthScalar = monitor.get(i) / (float) max;
+				int width = (int) (totalWidth * widthScalar);
+				innerY += height;
 
-                if (i == trackedIndex) {
-                    trackedX = width;
+				if (i == trackedIndex) {
+					trackedX = width;
 
-                } else if (width == totalWidth) {
-                    bufferColoredQuad(renderer, x, innerY, width, height, 1, 0, 0, 0.75f);
+				} else if (width == totalWidth) {
+					bufferColoredQuad(renderer, x, innerY, width, height, 1, 0, 0, 0.75f);
 
-                } else if (width < (min / (float) max) * totalWidth + 1) {
-                    bufferColoredQuad(renderer, x, innerY, width, height, 0, 1, 0, 0.75f);
+				} else if (width < (min / (float) max) * totalWidth + 1) {
+					bufferColoredQuad(renderer, x, innerY, width, height, 0, 1, 0, 0.75f);
 
-                } else {
-                    bufferColoredQuad(renderer, x, innerY, width, height, 1, 1, 1, 0.5f);
-                }
-            }
+				} else {
+					bufferColoredQuad(renderer, x, innerY, width, height, 1, 1, 1, 0.5f);
+				}
+			}
 
-            bufferColoredQuad(renderer, (int) (((avg / (float) max) * totalWidth) + x), y, 1, size, 1, 1, 0, 1);
-            bufferColoredQuad(renderer, (int) (((min / (float) max) * totalWidth) + x), y, 1, size, 0, 1, 0, 1);
-            bufferColoredQuad(renderer, totalWidth + x, y, 1, size, 1, 0, 0, 1);
+			bufferColoredQuad(renderer, (int) (((avg / (float) max) * totalWidth) + x), y, 1, size, 1, 1, 0, 1);
+			bufferColoredQuad(renderer, (int) (((min / (float) max) * totalWidth) + x), y, 1, size, 0, 1, 0, 1);
+			bufferColoredQuad(renderer, totalWidth + x, y, 1, size, 1, 0, 0, 1);
 
-            if (trackedX > 0) {
-                bufferColoredQuad(renderer, x, trackedIndex + y, trackedX, 1, 85 / 255f, 85 / 255f, 1, 1);
-                bufferColoredQuad(renderer, (trackedX + x), y, 1, size, 85 / 255f, 85 / 255f, 1, 1);
-            }
+			if (trackedX > 0) {
+				bufferColoredQuad(renderer, x, trackedIndex + y, trackedX, 1, 85 / 255f, 85 / 255f, 1, 1);
+				bufferColoredQuad(renderer, (trackedX + x), y, 1, size, 85 / 255f, 85 / 255f, 1, 1);
+			}
 
-            tessellator.draw();
-            GlStateManager.enableTexture2D();
-        }
+			tessellator.draw();
+			GlStateManager.enableTexture2D();
+		}
 
-    }
+	}
 
 }

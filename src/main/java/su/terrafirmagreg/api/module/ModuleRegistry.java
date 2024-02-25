@@ -8,35 +8,35 @@ import java.util.List;
 
 public class ModuleRegistry {
 
-    private List<Class<? extends ModuleBase>> moduleClassList;
-    private List<ModuleBase> moduleList;
-    private ModuleConstructor moduleConstructor;
+	private List<Class<? extends ModuleBase>> moduleClassList;
+	private final List<ModuleBase> moduleList;
+	private final ModuleConstructor moduleConstructor;
 
-    ModuleRegistry(List<ModuleBase> moduleList, ModuleConstructor moduleConstructor) {
+	ModuleRegistry(List<ModuleBase> moduleList, ModuleConstructor moduleConstructor) {
 
-        this.moduleConstructor = moduleConstructor;
-        this.moduleClassList = new ArrayList<>();
-        this.moduleList = moduleList;
-    }
+		this.moduleConstructor = moduleConstructor;
+		this.moduleClassList = new ArrayList<>();
+		this.moduleList = moduleList;
+	}
 
 
-    public final void registerModules(Class<? extends ModuleBase> moduleClass) {
+	public final void registerModules(Class<? extends ModuleBase> moduleClass) {
 
-        this.moduleClassList.add(moduleClass);
-    }
+		this.moduleClassList.add(moduleClass);
+	}
 
-    void initializeModules(@NotNull String modId) {
+	void initializeModules(@NotNull String modId) {
 
-        for (Class<? extends ModuleBase> moduleClass : this.moduleClassList) {
-            ModuleBase module = this.moduleConstructor.constructModule(modId, moduleClass);
+		for (Class<? extends ModuleBase> moduleClass : this.moduleClassList) {
+			ModuleBase module = this.moduleConstructor.constructModule(modId, moduleClass);
 
-            if (module != null) this.moduleList.add(module);
-        }
+			if (module != null) this.moduleList.add(module);
+		}
 
-        // Don't really need to keep this around.
-        this.moduleClassList = null;
+		// Don't really need to keep this around.
+		this.moduleClassList = null;
 
-        // Sort the module list by module priority.
-        Collections.sort(this.moduleList);
-    }
+		// Sort the module list by module priority.
+		Collections.sort(this.moduleList);
+	}
 }

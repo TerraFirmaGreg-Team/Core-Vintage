@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Random;
 
 @Getter
-public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, IStateMapperRegister {
+public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICustomStateMapper {
 
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 	private final RockBlockVariant blockVariant;

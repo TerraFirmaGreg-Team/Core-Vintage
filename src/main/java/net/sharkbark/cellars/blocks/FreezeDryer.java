@@ -21,11 +21,11 @@ import net.sharkbark.cellars.blocks.tileentity.TEFreezeDryer;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.Reference;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import javax.annotation.Nullable;
 
-public class FreezeDryer extends BlockContainer implements IModelRegister {
+public class FreezeDryer extends BlockContainer implements ICustomModel {
 
 	public static final PropertyDirection FACING;
 

@@ -48,7 +48,7 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock, IC
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

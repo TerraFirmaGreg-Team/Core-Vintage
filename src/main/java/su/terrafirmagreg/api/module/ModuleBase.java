@@ -26,15 +26,15 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	/**
 	 * Stores a network wrapper for each mod id.
 	 */
-	private static Map<String, ThreadedNetworkWrapper> NETWORK_WRAPPER_MAP = new HashMap<>();
+	private static final Map<String, ThreadedNetworkWrapper> NETWORK_WRAPPER_MAP = new HashMap<>();
 	/**
 	 * Stores a packet registry for each mod id.
 	 */
-	private static Map<String, IPacketRegistry> PACKET_REGISTRY_MAP = new HashMap<>();
+	private static final Map<String, IPacketRegistry> PACKET_REGISTRY_MAP = new HashMap<>();
 	/**
 	 * Stores a network entity id supplier for each mod id.
 	 */
-	private static Map<String, NetworkEntityIdSupplier> NETWORK_ENTITY_ID_SUPPLIER_MAP = new HashMap<>();
+	private static final Map<String, NetworkEntityIdSupplier> NETWORK_ENTITY_ID_SUPPLIER_MAP = new HashMap<>();
 
 	@Getter
 	private final String name;

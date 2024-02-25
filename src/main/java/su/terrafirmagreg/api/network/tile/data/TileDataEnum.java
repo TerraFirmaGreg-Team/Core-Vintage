@@ -1,62 +1,61 @@
 package su.terrafirmagreg.api.network.tile.data;
 
 import net.minecraft.network.PacketBuffer;
-
 import su.terrafirmagreg.api.network.tile.spi.TileDataBase;
 
 public class TileDataEnum<E extends Enum> extends TileDataBase {
 
-    private final EnumReader<E> reader;
-    private final EnumWriter<E> writer;
-    private E value;
+	private final EnumReader<E> reader;
+	private final EnumWriter<E> writer;
+	private E value;
 
-    public TileDataEnum(EnumReader<E> reader, EnumWriter<E> writer, E initialValue) {
+	public TileDataEnum(EnumReader<E> reader, EnumWriter<E> writer, E initialValue) {
 
-        this(reader, writer, initialValue, 1);
-    }
+		this(reader, writer, initialValue, 1);
+	}
 
-    public TileDataEnum(EnumReader<E> reader, EnumWriter<E> writer, E initialValue, int updateInterval) {
+	public TileDataEnum(EnumReader<E> reader, EnumWriter<E> writer, E initialValue, int updateInterval) {
 
-        super(updateInterval);
-        this.reader = reader;
-        this.writer = writer;
-        this.set(initialValue);
-    }
+		super(updateInterval);
+		this.reader = reader;
+		this.writer = writer;
+		this.set(initialValue);
+	}
 
-    public void set(E value) {
+	public void set(E value) {
 
-        if (value != this.value) {
-            this.value = value;
-            this.setDirty(true);
-        }
-    }
+		if (value != this.value) {
+			this.value = value;
+			this.setDirty(true);
+		}
+	}
 
-    public E get() {
+	public E get() {
 
-        return this.value;
-    }
+		return this.value;
+	}
 
-    @Override
-    public void read(PacketBuffer buffer) {
+	@Override
+	public void read(PacketBuffer buffer) {
 
-        this.value = this.reader.read(buffer.readInt());
-    }
+		this.value = this.reader.read(buffer.readInt());
+	}
 
-    @Override
-    public void write(PacketBuffer buffer) {
+	@Override
+	public void write(PacketBuffer buffer) {
 
-        buffer.writeInt(this.writer.write(this.value));
-    }
+		buffer.writeInt(this.writer.write(this.value));
+	}
 
-    public interface EnumReader<E extends Enum> {
+	public interface EnumReader<E extends Enum> {
 
-        E read(int ordinal);
+		E read(int ordinal);
 
-    }
+	}
 
-    public interface EnumWriter<E extends Enum> {
+	public interface EnumWriter<E extends Enum> {
 
-        int write(E value);
+		int write(E value);
 
-    }
+	}
 }

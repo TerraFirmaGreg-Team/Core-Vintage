@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import lombok.Getter;
+import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,9 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import lombok.Getter;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -24,51 +23,51 @@ import java.util.Random;
 @Getter
 public abstract class BlockSoil extends BlockBase implements ISoilBlockVariant {
 
-    private final SoilBlockVariant blockVariant;
-    private final SoilType type;
+	private final SoilBlockVariant blockVariant;
+	private final SoilType type;
 
 
-    public BlockSoil(SoilBlockVariant blockVariant, SoilType type) {
-        super(Material.GROUND);
+	public BlockSoil(SoilBlockVariant blockVariant, SoilType type) {
+		super(Material.GROUND);
 
-        if (blockVariant.canFall()) FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+		if (blockVariant.canFall()) FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 
-        this.blockVariant = blockVariant;
-        this.type = type;
+		this.blockVariant = blockVariant;
+		this.type = type;
 
-        setSoundType(SoundType.GROUND);
-        setHardness(2.0F);
-        setHarvestLevel("shovel", 0);
+		setSoundType(SoundType.GROUND);
+		setHardness(2.0F);
+		setHarvestLevel("shovel", 0);
 
-        //OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
-    }
+		//OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+	}
 
-    @Override
-    public int getMetaFromState(@NotNull IBlockState state) {
-        return 0;
-    }
+	@Override
+	public int getMetaFromState(@NotNull IBlockState state) {
+		return 0;
+	}
 
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void randomDisplayTick(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random rand) {
-        if (blockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
-            double d0 = (float) pos.getX() + rand.nextFloat();
-            double d1 = (double) pos.getY() - 0.05D;
-            double d2 = (float) pos.getZ() + rand.nextFloat();
-            world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
-        }
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void randomDisplayTick(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random rand) {
+		if (blockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+			double d0 = (float) pos.getX() + rand.nextFloat();
+			double d1 = (double) pos.getY() - 0.05D;
+			double d2 = (float) pos.getZ() + rand.nextFloat();
+			world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
+		}
+	}
 
-    @Override
-    public int damageDropped(@NotNull IBlockState state) {
-        return getMetaFromState(state);
-    }
+	@Override
+	public int damageDropped(@NotNull IBlockState state) {
+		return getMetaFromState(state);
+	}
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+	@NotNull
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 }

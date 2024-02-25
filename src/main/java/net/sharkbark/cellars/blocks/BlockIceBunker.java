@@ -20,11 +20,11 @@ import net.sharkbark.cellars.blocks.tileentity.TEIceBunker;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.Reference;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import javax.annotation.Nullable;
 
-public class BlockIceBunker extends BlockContainer implements IModelRegister {
+public class BlockIceBunker extends BlockContainer implements ICustomModel {
 
 	public BlockIceBunker(String name, Material material) {
 		super(Material.WOOD);

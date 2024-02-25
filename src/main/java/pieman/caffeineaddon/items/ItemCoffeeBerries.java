@@ -11,11 +11,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import javax.annotation.Nullable;
 
-public class ItemCoffeeBerries extends ItemFood implements IModelRegister {
+public class ItemCoffeeBerries extends ItemFood implements ICustomModel {
 
 	public ItemCoffeeBerries(String name) {
 		super(0, 0, false);

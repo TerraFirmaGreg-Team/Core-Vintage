@@ -1,54 +1,53 @@
 package su.terrafirmagreg.api.network.tile.data;
 
 import net.minecraft.network.PacketBuffer;
-
 import su.terrafirmagreg.api.network.tile.spi.TileDataBase;
 
 
 public class TileDataInteger extends TileDataBase {
 
-    private int value;
+	private int value;
 
-    public TileDataInteger(int initialValue) {
+	public TileDataInteger(int initialValue) {
 
-        this(initialValue, 1);
-    }
+		this(initialValue, 1);
+	}
 
-    public TileDataInteger(int initialValue, int updateInterval) {
+	public TileDataInteger(int initialValue, int updateInterval) {
 
-        super(updateInterval);
-        this.set(initialValue);
-    }
+		super(updateInterval);
+		this.set(initialValue);
+	}
 
-    public void set(int value) {
+	public void set(int value) {
 
-        if (value != this.value) {
-            this.value = value;
-            this.setDirty(true);
-        }
-    }
+		if (value != this.value) {
+			this.value = value;
+			this.setDirty(true);
+		}
+	}
 
-    public int get() {
+	public int get() {
 
-        return this.value;
-    }
+		return this.value;
+	}
 
-    public int add(int value) {
+	public int add(int value) {
 
-        this.set(this.value + value);
-        return this.value;
-    }
+		this.set(this.value + value);
+		return this.value;
+	}
 
-    @Override
-    public void read(PacketBuffer buffer) {
+	@Override
+	public void read(PacketBuffer buffer) {
 
-        this.value = buffer.readInt();
-    }
+		this.value = buffer.readInt();
+	}
 
-    @Override
-    public void write(PacketBuffer buffer) {
+	@Override
+	public void write(PacketBuffer buffer) {
 
-        buffer.writeInt(this.value);
-    }
+		buffer.writeInt(this.value);
+	}
 
 }

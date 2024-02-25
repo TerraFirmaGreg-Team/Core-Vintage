@@ -10,10 +10,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public interface ICustomMesh {
 
-    /**
-     * Gets a custom ItemMeshDefinition for the item. Keep in mind that the models still have
-     * to be baked.
-     */
-    @SideOnly(Side.CLIENT)
-    ItemMeshDefinition getCustomMesh();
+	/**
+	 * Gets a custom ItemMeshDefinition for the item. Keep in mind that the models still have
+	 * to be baked.
+	 */
+	@SideOnly(Side.CLIENT)
+	ItemMeshDefinition getCustomMesh();
 }

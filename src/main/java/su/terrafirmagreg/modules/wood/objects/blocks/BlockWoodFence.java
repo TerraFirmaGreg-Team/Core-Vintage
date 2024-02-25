@@ -48,7 +48,7 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock, IColorfulB
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

@@ -46,7 +46,7 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

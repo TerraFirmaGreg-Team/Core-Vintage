@@ -36,7 +36,7 @@ public abstract class BlockWood extends BlockBase implements IWoodBlock, IColorf
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

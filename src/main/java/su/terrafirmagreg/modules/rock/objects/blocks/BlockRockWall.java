@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.IStateMapperRegister;
+import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -27,7 +27,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import java.util.List;
 
 @Getter
-public class BlockRockWall extends BlockWall implements IRockBlock, IStateMapperRegister {
+public class BlockRockWall extends BlockWall implements IRockBlock, ICustomStateMapper {
 
 	private final RockBlockVariant blockVariant;
 	private final RockType type;

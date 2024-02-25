@@ -11,11 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public interface IColorfulItem {
 
-    /**
-     * Gets the color handler for the item.
-     *
-     * @return The color handler for the item.
-     */
-    @SideOnly(Side.CLIENT)
-    IItemColor getColorHandler();
+	/**
+	 * Gets the color handler for the item.
+	 *
+	 * @return The color handler for the item.
+	 */
+	@SideOnly(Side.CLIENT)
+	IItemColor getColorHandler();
 }

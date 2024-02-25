@@ -13,92 +13,92 @@ import java.util.List;
  */
 public abstract class TileDataBase implements ITileData {
 
-    private final int updateInterval;
-    private int updateCounter;
-    private boolean dirty;
-    private boolean forceUpdate;
-    private List<IChangeObserver> changeObservers;
+	private final int updateInterval;
+	private int updateCounter;
+	private boolean dirty;
+	private boolean forceUpdate;
+	private List<IChangeObserver> changeObservers;
 
-    protected TileDataBase(int updateInterval) {
+	protected TileDataBase(int updateInterval) {
 
-        this.updateInterval = updateInterval;
-    }
+		this.updateInterval = updateInterval;
+	}
 
-    public void addChangeObserver(IChangeObserver observer) {
+	public void addChangeObserver(IChangeObserver observer) {
 
-        if (this.changeObservers == null) {
-            this.changeObservers = new ArrayList<>(1);
-        }
+		if (this.changeObservers == null) {
+			this.changeObservers = new ArrayList<>(1);
+		}
 
-        this.changeObservers.add(observer);
-    }
+		this.changeObservers.add(observer);
+	}
 
-    @Override
-    public boolean isDirty() {
+	@Override
+	public boolean isDirty() {
 
-        return this.dirty && (this.updateCounter == 0);
-    }
+		return this.dirty && (this.updateCounter == 0);
+	}
 
-    @Override
-    public void setDirty(boolean dirty) {
+	@Override
+	public void setDirty(boolean dirty) {
 
-        boolean changed = (this.dirty != dirty);
+		boolean changed = (this.dirty != dirty);
 
-        this.dirty = dirty;
+		this.dirty = dirty;
 
-        if (this.changeObservers != null
-                && changed) {
-            //noinspection ForLoopReplaceableByForEach
-            for (int i = 0; i < this.changeObservers.size(); i++) {
-                //noinspection unchecked
-                this.changeObservers.get(i).onDirtyStateChanged(this);
-            }
-        }
-    }
+		if (this.changeObservers != null
+				&& changed) {
+			//noinspection ForLoopReplaceableByForEach
+			for (int i = 0; i < this.changeObservers.size(); i++) {
+				//noinspection unchecked
+				this.changeObservers.get(i).onDirtyStateChanged(this);
+			}
+		}
+	}
 
-    @Override
-    public void forceUpdate() {
+	@Override
+	public void forceUpdate() {
 
-        this.forceUpdate = true;
-    }
+		this.forceUpdate = true;
+	}
 
-    @Override
-    public void update() {
+	@Override
+	public void update() {
 
-        if (this.forceUpdate) {
-            this.updateCounter = 0;
-            this.forceUpdate = false;
+		if (this.forceUpdate) {
+			this.updateCounter = 0;
+			this.forceUpdate = false;
 
-        } else {
-            this.updateCounter += 1;
+		} else {
+			this.updateCounter += 1;
 
-            if (this.updateCounter >= this.updateInterval) {
-                this.updateCounter = 0;
-            }
-        }
-    }
+			if (this.updateCounter >= this.updateInterval) {
+				this.updateCounter = 0;
+			}
+		}
+	}
 
-    public interface IChangeObserver<D extends TileDataBase> {
+	public interface IChangeObserver<D extends TileDataBase> {
 
-        void onDirtyStateChanged(D data);
+		void onDirtyStateChanged(D data);
 
-        class OnDirtyMarkTileDirty<D extends TileDataBase>
-                implements IChangeObserver<D> {
+		class OnDirtyMarkTileDirty<D extends TileDataBase>
+				implements IChangeObserver<D> {
 
-            private final TileEntity tile;
+			private final TileEntity tile;
 
-            public OnDirtyMarkTileDirty(TileEntity tile) {
+			public OnDirtyMarkTileDirty(TileEntity tile) {
 
-                this.tile = tile;
-            }
+				this.tile = tile;
+			}
 
-            @Override
-            public void onDirtyStateChanged(D data) {
+			@Override
+			public void onDirtyStateChanged(D data) {
 
-                if (data.isDirty()) {
-                    this.tile.markDirty();
-                }
-            }
-        }
-    }
+				if (data.isDirty()) {
+					this.tile.markDirty();
+				}
+			}
+		}
+	}
 }

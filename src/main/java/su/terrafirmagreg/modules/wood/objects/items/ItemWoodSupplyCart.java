@@ -85,7 +85,7 @@ public class ItemWoodSupplyCart extends ItemBase implements IWoodItem {
 
 	@Override
 	public void onModelRegister() {
-		ModelManager.registerItemModel(this, getResourceLocation());
+		ModelManager.registerInventoryModel(this, getResourceLocation());
 
 	}
 

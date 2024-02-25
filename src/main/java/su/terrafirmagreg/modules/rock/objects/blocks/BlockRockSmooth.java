@@ -5,9 +5,9 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 public class BlockRockSmooth extends BlockRock {
 
-    public BlockRockSmooth(RockBlockVariant blockVariant, RockType type) {
-        super(blockVariant, type);
+	public BlockRockSmooth(RockBlockVariant blockVariant, RockType type) {
+		super(blockVariant, type);
 
-        //OreDictionaryHelper.register(this, "stonePolished");
-    }
+		//OreDictionaryHelper.register(this, "stonePolished");
+	}
 }

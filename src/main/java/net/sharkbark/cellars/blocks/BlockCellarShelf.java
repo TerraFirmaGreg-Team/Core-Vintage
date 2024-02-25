@@ -20,11 +20,11 @@ import net.sharkbark.cellars.blocks.tileentity.TECellarShelf;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.Reference;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import javax.annotation.Nullable;
 
-public class BlockCellarShelf extends BlockContainer implements IModelRegister {
+public class BlockCellarShelf extends BlockContainer implements ICustomModel {
 
 	public BlockCellarShelf(String name, Material material) {
 		super(Material.WOOD);

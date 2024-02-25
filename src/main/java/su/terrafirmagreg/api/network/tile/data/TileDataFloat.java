@@ -2,54 +2,53 @@ package su.terrafirmagreg.api.network.tile.data;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.MathHelper;
-
 import su.terrafirmagreg.api.network.tile.spi.TileDataBase;
 import su.terrafirmagreg.api.util.MathConstants;
 
 public class TileDataFloat extends TileDataBase {
 
-    private float value;
+	private float value;
 
-    public TileDataFloat(float initialValue) {
+	public TileDataFloat(float initialValue) {
 
-        this(initialValue, 1);
-    }
+		this(initialValue, 1);
+	}
 
-    public TileDataFloat(float initialValue, int updateInterval) {
+	public TileDataFloat(float initialValue, int updateInterval) {
 
-        super(updateInterval);
-        this.set(initialValue);
-    }
+		super(updateInterval);
+		this.set(initialValue);
+	}
 
-    public void set(float value) {
+	public void set(float value) {
 
-        if (MathHelper.abs(value - this.value) > MathConstants.FLT_EPSILON) {
-            this.value = value;
-            this.setDirty(true);
-        }
-    }
+		if (MathHelper.abs(value - this.value) > MathConstants.FLT_EPSILON) {
+			this.value = value;
+			this.setDirty(true);
+		}
+	}
 
-    public float get() {
+	public float get() {
 
-        return this.value;
-    }
+		return this.value;
+	}
 
-    public float add(float value) {
+	public float add(float value) {
 
-        this.set(this.value + value);
-        return this.value;
-    }
+		this.set(this.value + value);
+		return this.value;
+	}
 
-    @Override
-    public void read(PacketBuffer buffer) {
+	@Override
+	public void read(PacketBuffer buffer) {
 
-        this.value = buffer.readFloat();
-    }
+		this.value = buffer.readFloat();
+	}
 
-    @Override
-    public void write(PacketBuffer buffer) {
+	@Override
+	public void write(PacketBuffer buffer) {
 
-        buffer.writeFloat(this.value);
-    }
+		buffer.writeFloat(this.value);
+	}
 
 }

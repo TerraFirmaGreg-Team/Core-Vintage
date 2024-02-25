@@ -1,31 +1,30 @@
 package su.terrafirmagreg.modules.soil.objects.blocks.peat;
 
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-
-import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 
 
 public class BlockPeat extends BlockBase {
 
-    public BlockPeat() {
-        super(Material.GROUND);
+	public BlockPeat() {
+		super(Material.GROUND);
 
-        setSoundType(SoundType.GROUND);
-        setHardness(0.6F);
-        setHarvestLevel("shovel", 0);
+		setSoundType(SoundType.GROUND);
+		setHardness(0.6F);
+		setHarvestLevel("shovel", 0);
 
-        OreDictionaryHelper.register(this, getName());
-        Blocks.FIRE.setFireInfo(this, 5, 10);
+		OreDictionaryHelper.register(this, getName());
+		Blocks.FIRE.setFireInfo(this, 5, 10);
 
-        //DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);
-    }
+		//DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);
+	}
 
-    @Override
-    public @NotNull String getName() {
-        return "soil/peat";
-    }
+	@Override
+	public @NotNull String getName() {
+		return "soil/peat";
+	}
 }

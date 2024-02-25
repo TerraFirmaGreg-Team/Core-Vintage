@@ -403,7 +403,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this);
+		ModelManager.registerBlockInventoryModel(this);
 	}
 
 	@Override

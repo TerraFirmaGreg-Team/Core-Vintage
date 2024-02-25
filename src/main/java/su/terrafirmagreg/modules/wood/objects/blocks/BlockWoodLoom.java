@@ -181,7 +181,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

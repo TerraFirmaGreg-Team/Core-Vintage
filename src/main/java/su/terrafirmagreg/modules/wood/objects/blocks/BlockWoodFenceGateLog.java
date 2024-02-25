@@ -17,7 +17,7 @@ public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this);
+		ModelManager.registerBlockInventoryModel(this);
 	}
 
 	@Override

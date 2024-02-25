@@ -152,7 +152,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulB
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockItemModel(this, getResourceLocation());
+		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	@Override

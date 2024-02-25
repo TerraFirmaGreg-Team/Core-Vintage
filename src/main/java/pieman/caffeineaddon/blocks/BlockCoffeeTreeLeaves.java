@@ -14,11 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import java.util.Random;
 
-public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements IModelRegister {
+public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements ICustomModel {
 
 	public BlockCoffeeTreeLeaves(IFruitTree tree) {
 		super(tree);

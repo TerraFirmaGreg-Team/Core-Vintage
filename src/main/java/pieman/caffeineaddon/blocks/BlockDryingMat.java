@@ -24,12 +24,12 @@ import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
-import su.terrafirmagreg.api.models.IModelRegister;
+import su.terrafirmagreg.api.models.ICustomModel;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockDryingMat extends Block implements IModelRegister {
+public class BlockDryingMat extends Block implements ICustomModel {
 
 	public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 

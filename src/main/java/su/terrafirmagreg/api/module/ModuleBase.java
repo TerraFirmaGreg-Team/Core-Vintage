@@ -181,6 +181,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	// --------------------------------------------------------------------------
 
 	public int compareTo(@NotNull ModuleBase otherModule) {
-		return Integer.compare(otherModule.getPriority(), this.priority);
+		return Integer.compare(this.priority, otherModule.getPriority());
 	}
 }

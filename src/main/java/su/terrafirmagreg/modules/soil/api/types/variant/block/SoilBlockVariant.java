@@ -17,7 +17,7 @@ import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVa
 /**
  * Класс, представляющий вариант блока почвы.
  */
-public class SoilBlockVariant {
+public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
 
 	private static final Set<SoilBlockVariant> SOIL_BLOCK_VARIANTS = new ObjectOpenHashSet<>();
 
@@ -108,6 +108,11 @@ public class SoilBlockVariant {
 	public boolean isGrass() {
 		return this == GRASS || this == DRY_GRASS ||
 				this == CLAY_GRASS;
+	}
+
+	@Override
+	public int compareTo(@NotNull SoilBlockVariant blockVariant) {
+		return this.name.compareTo(blockVariant.toString());
 	}
 
 	public static class Builder {

@@ -13,7 +13,7 @@ import java.util.function.BiFunction;
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.
  */
-public class SoilItemVariant {
+public class SoilItemVariant implements Comparable<SoilItemVariant> {
 
 	private static final Set<SoilItemVariant> SOIL_ITEM_VARIANTS = new ObjectOpenHashSet<>();
 
@@ -53,6 +53,11 @@ public class SoilItemVariant {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(@NotNull SoilItemVariant itemVariant) {
+		return this.name.compareTo(itemVariant.toString());
 	}
 
 

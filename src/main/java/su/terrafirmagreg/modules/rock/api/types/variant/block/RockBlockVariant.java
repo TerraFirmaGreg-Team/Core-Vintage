@@ -19,7 +19,7 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
 /**
  * Класс, представляющий тип блока породы.
  */
-public class RockBlockVariant {
+public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
 	private static final Set<RockBlockVariant> ROCK_BLOCK_VARIANTS = new ObjectOpenHashSet<>();
 	private static final AtomicInteger idCounter = new AtomicInteger(16);
@@ -72,6 +72,11 @@ public class RockBlockVariant {
 				() -> BlocksRock.getBlock(this, type).getDefaultState(),
 				state -> state.getBlock() == BlocksRock.getBlock(this, type), false
 		);
+	}
+
+	@Override
+	public int compareTo(@NotNull RockBlockVariant blockVariant) {
+		return this.name.compareTo(blockVariant.toString());
 	}
 
 	public static class Builder {

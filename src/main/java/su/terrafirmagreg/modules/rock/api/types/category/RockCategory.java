@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 /**
  * Класс, представляющий категорию породы.
  */
-public class RockCategory {
+public class RockCategory implements Comparable<RockCategory> {
 
 	private static final Set<RockCategory> ROCK_CATEGORIES = new ObjectOpenHashSet<>();
 
@@ -78,6 +78,11 @@ public class RockCategory {
 	public String getLocalizedName() {
 		return textFormatting + new TextComponentTranslation(
 				String.format("rock.category.%s.name", this)).getFormattedText();
+	}
+
+	@Override
+	public int compareTo(@NotNull RockCategory category) {
+		return this.name.compareTo(category.toString());
 	}
 
 	/**

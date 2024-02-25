@@ -105,8 +105,8 @@ public class RockType implements Comparable<RockType> {
 	}
 
 	@Override
-	public int compareTo(@NotNull RockType rockType) {
-		return this.name.compareTo(rockType.toString());
+	public int compareTo(@NotNull RockType type) {
+		return this.name.compareTo(type.toString());
 	}
 
 	public static class Builder {

@@ -58,8 +58,8 @@ public class WoodType implements Comparable<WoodType> {
 	}
 
 	@Override
-	public int compareTo(@NotNull WoodType woodType) {
-		return this.name.compareTo(woodType.toString());
+	public int compareTo(@NotNull WoodType type) {
+		return this.name.compareTo(type.toString());
 	}
 
 	public static class Builder {

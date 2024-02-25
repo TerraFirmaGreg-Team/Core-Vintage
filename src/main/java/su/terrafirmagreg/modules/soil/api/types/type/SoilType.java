@@ -62,8 +62,8 @@ public class SoilType implements Comparable<SoilType> {
 	}
 
 	@Override
-	public int compareTo(@NotNull SoilType soilType) {
-		return this.name.compareTo(soilType.toString());
+	public int compareTo(@NotNull SoilType type) {
+		return this.name.compareTo(type.toString());
 	}
 
 	public static class Builder {

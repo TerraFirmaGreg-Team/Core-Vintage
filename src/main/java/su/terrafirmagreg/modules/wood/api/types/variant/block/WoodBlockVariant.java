@@ -16,7 +16,7 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
 /**
  * Класс CropItemVariant представляет вариант деревянного блока.
  */
-public class WoodBlockVariant {
+public class WoodBlockVariant implements Comparable<WoodBlockVariant> {
 
 	private static final Set<WoodBlockVariant> WOOD_BLOCK_VARIANTS = new ObjectOpenHashSet<>();
 
@@ -65,6 +65,11 @@ public class WoodBlockVariant {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(@NotNull WoodBlockVariant blockVariant) {
+		return this.name.compareTo(blockVariant.toString());
 	}
 
 	public static class Builder {

@@ -13,7 +13,7 @@ import java.util.function.BiFunction;
 /**
  * Класс, представляющий тип блока породы.
  */
-public class RockItemVariant {
+public class RockItemVariant implements Comparable<RockItemVariant> {
 
 	private static final Set<RockItemVariant> ROCK_ITEM_VARIANTS = new ObjectOpenHashSet<>();
 
@@ -52,6 +52,11 @@ public class RockItemVariant {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(@NotNull RockItemVariant itemVariant) {
+		return this.name.compareTo(itemVariant.toString());
 	}
 
 

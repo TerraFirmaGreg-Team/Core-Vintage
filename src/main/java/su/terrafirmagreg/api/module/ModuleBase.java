@@ -14,7 +14,7 @@ import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.network.tile.TileDataServiceContainer;
 import su.terrafirmagreg.api.registry.AutoRegistry;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import java.io.File;
 import java.util.*;
@@ -96,7 +96,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	protected ITileDataService enableNetworkTileDataService(IPacketService packetService) {
 
 		if (this.tileDataService == null) {
-			this.tileDataService = TileDataServiceContainer.register(Helpers.getID(this.name), packetService);
+			this.tileDataService = TileDataServiceContainer.register(ModUtils.getID(this.name), packetService);
 		}
 
 		return this.tileDataService;

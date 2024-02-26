@@ -7,7 +7,7 @@ import lombok.Getter;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
 import java.util.ArrayList;
@@ -101,7 +101,7 @@ public class RockType implements Comparable<RockType> {
 	 */
 	@NotNull
 	public ResourceLocation getTexture() {
-		return Helpers.getID("textures/blocks/rock/raw/" + this + ".png");
+		return ModUtils.getID("textures/blocks/rock/raw/" + this + ".png");
 	}
 
 	@Override

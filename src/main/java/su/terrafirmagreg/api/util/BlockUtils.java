@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockHelper {
+public class BlockUtils {
 
-	private BlockHelper() {
-		//
+	private BlockUtils() {
+		throw new IllegalAccessError("Utility class");
 	}
 
 	public static void notifyBlockUpdate(World world, BlockPos pos) {
@@ -56,7 +56,7 @@ public class BlockHelper {
 	public static void forBlocksInRangeShuffled(World world, BlockPos pos, int range, IBlockAction action) {
 
 		ArrayList<BlockPos> blockList = new ArrayList<>();
-		BlockHelper.findBlocksInCube(world, pos, range, range, range, IBlockFilter.TRUE, blockList);
+		BlockUtils.findBlocksInCube(world, pos, range, range, range, IBlockFilter.TRUE, blockList);
 		Collections.shuffle(blockList);
 		int rangeSq = range * range;
 		BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
@@ -96,7 +96,7 @@ public class BlockHelper {
 	public static void forBlocksInCubeShuffled(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockAction action) {
 
 		ArrayList<BlockPos> blockList = new ArrayList<>();
-		BlockHelper.findBlocksInCube(world, pos, rangeX, rangeY, rangeZ, IBlockFilter.TRUE, blockList);
+		BlockUtils.findBlocksInCube(world, pos, rangeX, rangeY, rangeZ, IBlockFilter.TRUE, blockList);
 		Collections.shuffle(blockList);
 
 		for (BlockPos blockPos : blockList) {

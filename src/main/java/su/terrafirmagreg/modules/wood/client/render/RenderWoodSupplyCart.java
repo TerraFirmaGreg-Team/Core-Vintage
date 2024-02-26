@@ -8,7 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.client.model.ModelWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 
@@ -35,7 +36,7 @@ public class RenderWoodSupplyCart extends Render<EntityWoodSupplyCart> {
 			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
 		}
 
-		Helpers.setWoodColor(woodType.getColor());
+		Utils.setWoodColor(woodType.getColor());
 
 		this.model.render(entity, partialTicks, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
@@ -49,7 +50,7 @@ public class RenderWoodSupplyCart extends Render<EntityWoodSupplyCart> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(@NotNull EntityWoodSupplyCart entity) {
-		return Helpers.getID("textures/entity/supply_cart.png");
+		return ModUtils.getID("textures/entity/supply_cart.png");
 	}
 
 	public void setupRotation(float entityYaw) {

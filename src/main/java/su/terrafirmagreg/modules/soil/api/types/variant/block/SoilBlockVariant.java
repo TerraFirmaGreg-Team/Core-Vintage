@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import lombok.Getter;
 import net.minecraft.block.Block;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.Pair;
+import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 

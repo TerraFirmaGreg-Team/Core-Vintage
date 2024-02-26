@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.models.ICustomModel;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 
 
@@ -40,6 +40,6 @@ public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, ICustomModel
 	 */
 	@NotNull
 	default ResourceLocation getResourceLocation() {
-		return Helpers.getID(String.format("wood/%s", getBlockVariant()));
+		return ModUtils.getID(String.format("wood/%s", getBlockVariant()));
 	}
 }

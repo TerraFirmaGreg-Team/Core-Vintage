@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.models;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

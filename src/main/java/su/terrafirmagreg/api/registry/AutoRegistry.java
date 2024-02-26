@@ -25,7 +25,7 @@ import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.ModUtils;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by
@@ -118,7 +118,7 @@ public class AutoRegistry {
 		for (var provider : this.registry.getTileProviders()) {
 			GameRegistry.registerTileEntity(
 					provider.getTileEntityClass(),
-					Helpers.getID("tile." + provider.getTileEntityClass().getSimpleName())
+					ModUtils.getID("tile." + provider.getTileEntityClass().getSimpleName())
 			);
 		}
 	}

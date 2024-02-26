@@ -6,7 +6,7 @@ import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.Pair;
+import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 

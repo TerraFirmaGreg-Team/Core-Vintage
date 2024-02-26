@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.client.render.TESRRockGemDisplay;
@@ -105,7 +105,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 
 	public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			TERockGemDisplay te = Helpers.getTE(worldIn, pos, TERockGemDisplay.class);
+			TERockGemDisplay te = Utils.getTE(worldIn, pos, TERockGemDisplay.class);
 			if (te != null) {
 				return te.onRightClick(playerIn, hand);
 			}
@@ -115,7 +115,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 	}
 
 	public void breakBlock(@NotNull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-		TERockGemDisplay te = Helpers.getTE(worldIn, pos, TERockGemDisplay.class);
+		TERockGemDisplay te = Utils.getTE(worldIn, pos, TERockGemDisplay.class);
 		if (te != null) {
 			te.onBreakBlock();
 		}
@@ -140,7 +140,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 
 	@Override
 	public int getComparatorInputOverride(@NotNull IBlockState state, World world, @NotNull BlockPos pos) {
-		TERockGemDisplay te = Helpers.getTE(world, pos, TERockGemDisplay.class);
+		TERockGemDisplay te = Utils.getTE(world, pos, TERockGemDisplay.class);
 		assert te != null;
 		return (int) Math.floor(15 * ((double) te.getSize() / (double) te.getMaxStackSize()));
 	}

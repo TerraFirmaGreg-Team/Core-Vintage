@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.models;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

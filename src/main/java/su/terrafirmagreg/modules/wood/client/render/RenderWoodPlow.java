@@ -11,7 +11,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.client.model.ModelWoodPlow;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlow;
 
@@ -38,7 +39,7 @@ public class RenderWoodPlow extends Render<EntityWoodPlow> {
 			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
 		}
 
-		Helpers.setWoodColor(woodType.getColor());
+		Utils.setWoodColor(woodType.getColor());
 
 		this.model.render(entity, partialTicks, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
@@ -71,7 +72,7 @@ public class RenderWoodPlow extends Render<EntityWoodPlow> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(@NotNull EntityWoodPlow entity) {
-		return Helpers.getID("textures/entity/plow.png");
+		return ModUtils.getID("textures/entity/plow.png");
 	}
 
 	public void setupRotation(float entityYaw) {

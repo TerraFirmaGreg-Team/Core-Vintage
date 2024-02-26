@@ -4,6 +4,8 @@ import lombok.Getter;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.proxy.IProxy;
 
@@ -13,6 +15,7 @@ import static su.terrafirmagreg.Tags.*;
 @Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
+	public static final Logger LOGGER = LogManager.getLogger("TFG");
 	@SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
 	public static IProxy PROXY;
 	@SuppressWarnings("unused")

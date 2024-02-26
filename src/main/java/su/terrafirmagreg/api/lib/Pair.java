@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.lib;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,43 +7,24 @@ import java.util.Objects;
  * Класс Pair представляет тройку значений.
  *
  * @param <L> тип левого элемента
- * @param <M> тип среднего элемента
  * @param <R> тип правого элемента
  */
-public final class Triple<L, M, R> implements Serializable {
+public final class Pair<L, R> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private final L left;
-	private final M middle;
 	private final R right;
 
 	/**
 	 * Создает новую упорядоченную тройку из заданных элементов.
 	 *
-	 * @param left   левый элемент
-	 * @param middle средний элемент
-	 * @param right  правый элемент
+	 * @param left  левый элемент
+	 * @param right правый элемент
 	 */
-	public Triple(L left, M middle, R right) {
+	public Pair(L left, R right) {
 		this.left = left;
-		this.middle = middle;
 		this.right = right;
-	}
-
-	/**
-	 * Создает новую тройку из заданных элементов.
-	 *
-	 * @param left   левый элемент
-	 * @param middle средний элемент
-	 * @param right  правый элемент
-	 * @param <L>    тип левого элемента
-	 * @param <M>    тип среднего элемента
-	 * @param <R>    тип правого элемента
-	 * @return новая тройка
-	 */
-	public static <L, M, R> Triple<L, M, R> of(L left, M middle, R right) {
-		return new Triple<>(left, middle, right);
 	}
 
 	/**
@@ -53,15 +34,6 @@ public final class Triple<L, M, R> implements Serializable {
 	 */
 	public L getLeft() {
 		return left;
-	}
-
-	/**
-	 * Возвращает средний элемент этой тройки.
-	 *
-	 * @return средний элемент
-	 */
-	public M getMiddle() {
-		return middle;
 	}
 
 	/**
@@ -83,11 +55,10 @@ public final class Triple<L, M, R> implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Triple<?, ?, ?> other)) {
+		if (!(obj instanceof Pair<?, ?> other)) {
 			return false;
 		}
-		return Objects.equals(left, other.left) && Objects.equals(middle, other.middle)
-				&& Objects.equals(right, other.right);
+		return Objects.equals(left, other.left) && Objects.equals(right, other.right);
 	}
 
 	/**
@@ -96,7 +67,7 @@ public final class Triple<L, M, R> implements Serializable {
 	 * @return хэш-код
 	 */
 	public int hashCode() {
-		return Objects.hash(left, middle, right);
+		return Objects.hash(left, right);
 	}
 
 	/**
@@ -105,6 +76,6 @@ public final class Triple<L, M, R> implements Serializable {
 	 * @return строковое представление
 	 */
 	public String toString() {
-		return "(" + left + "," + middle + "," + right + ")";
+		return "(" + left + "," + right + ")";
 	}
 }

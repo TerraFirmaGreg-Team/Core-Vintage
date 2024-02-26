@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
-import su.terrafirmagreg.api.util.BlockHelper;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 /**
  * This provides a default implementation of the packet update methods.
@@ -59,6 +59,6 @@ public abstract class TileEntityDataBase extends TileEntityDataContainerBase {
 	public void onDataPacket(@NotNull NetworkManager networkManager, SPacketUpdateTileEntity packet) {
 
 		this.readFromNBT(packet.getNbtCompound());
-		BlockHelper.notifyBlockUpdate(this.world, this.pos);
+		BlockUtils.notifyBlockUpdate(this.world, this.pos);
 	}
 }

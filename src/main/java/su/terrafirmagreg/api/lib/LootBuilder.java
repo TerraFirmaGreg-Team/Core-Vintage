@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.lib;
 
 import net.minecraft.item.Item;
 import net.minecraft.world.storage.loot.LootEntryItem;

@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.util.Pair;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 

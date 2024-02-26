@@ -11,7 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.api.util.Helpers;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodBoat;
 
 
@@ -38,7 +39,7 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
 			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
 		}
 
-		Helpers.setWoodColor(woodType.getColor());
+		Utils.setWoodColor(woodType.getColor());
 
 		this.modelBoat.render(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
@@ -57,7 +58,7 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityWoodBoat entity) {
 		// Fallback
-		return Helpers.getID("textures/entity/boat.png");
+		return ModUtils.getID("textures/entity/boat.png");
 	}
 
 	@Override

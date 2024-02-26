@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.rock.init;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.util.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
 

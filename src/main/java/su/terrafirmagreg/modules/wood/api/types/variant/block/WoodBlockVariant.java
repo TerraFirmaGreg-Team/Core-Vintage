@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import lombok.Getter;
 import net.minecraft.block.Block;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.Pair;
+import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 

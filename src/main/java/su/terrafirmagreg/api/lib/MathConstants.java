@@ -1,9 +1,11 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.lib;
 
 import java.util.Random;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public final class MathConstants {
+
+	private MathConstants() {}
 
 	/**
 	 * A close to zero double epsilon value
@@ -86,9 +88,5 @@ public final class MathConstants {
 	private static final double BIG_ENOUGH_FLOOR = BIG_ENOUGH_INT + 0.0000;
 	private static final double BIG_ENOUGH_ROUND = BIG_ENOUGH_INT + 0.5000;
 	private static final double BIG_ENOUGH_CEIL = BIG_ENOUGH_INT + 0.9999;
-
-	private MathConstants() {
-		//
-	}
 
 }

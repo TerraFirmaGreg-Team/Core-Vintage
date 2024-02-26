@@ -2,8 +2,8 @@ package su.terrafirmagreg.api.network.tile.data;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.MathHelper;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.network.tile.spi.TileDataBase;
-import su.terrafirmagreg.api.util.MathConstants;
 
 public class TileDataFloat extends TileDataBase {
 

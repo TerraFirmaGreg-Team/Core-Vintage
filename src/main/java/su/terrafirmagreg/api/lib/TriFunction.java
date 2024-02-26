@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.lib;
 
 import org.jetbrains.annotations.NotNull;
 

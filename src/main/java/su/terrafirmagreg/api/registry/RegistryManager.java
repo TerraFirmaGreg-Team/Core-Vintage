@@ -28,6 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.models.ICustomModel;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
@@ -37,7 +38,6 @@ import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
-import su.terrafirmagreg.api.util.LootBuilder;
 
 import javax.annotation.Nonnull;
 import java.util.List;

@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.rock.api.types.variant.item;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.Pair;
+import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 

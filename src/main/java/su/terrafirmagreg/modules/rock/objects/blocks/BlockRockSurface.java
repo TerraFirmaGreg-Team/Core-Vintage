@@ -38,12 +38,12 @@ public class BlockRockSurface extends BlockRock {
 			2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
 			14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0);
 
-	public BlockRockSurface(RockBlockVariant variant, RockType type) {
-		super(variant, type);
+	public BlockRockSurface(RockBlockVariant blockVariant, RockType type) {
+		super(blockVariant, type);
 
 		setHardness(0.1f);
 		setDefaultState(blockState.getBaseState().withProperty(HORIZONTAL, EnumFacing.NORTH));
-		FallingBlockManager.registerFallable(this, variant.getSpecification());
+		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 	}
 
 	@Override

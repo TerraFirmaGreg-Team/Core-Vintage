@@ -54,7 +54,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
 		this.blockVariant = blockVariant;
 		this.type = type;
 
-		if (blockVariant.canFall()) FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 
 		setSoundType(SoundType.PLANT);
 		setHardness(2.1F);

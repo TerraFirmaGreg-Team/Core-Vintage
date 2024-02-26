@@ -64,11 +64,11 @@ public class RockBlockVariantHandler {
 				.setFallingSpecification(VERTICAL_AND_HORIZONTAL)
 				.build();
 
-//        RockBlockVariants.SAND = new RockBlockVariant.Builder("sand")
-//                .setBaseHardness(6f)
-//                .setFactory(BlockRockSand::new)
-//                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-//                .build();
+		RockBlockVariants.SAND = new RockBlockVariant.Builder("sand")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSand::new)
+				.setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+				.build();
 
 		RockBlockVariants.SURFACE = new RockBlockVariant.Builder("surface")
 				.setBaseHardness(6f)

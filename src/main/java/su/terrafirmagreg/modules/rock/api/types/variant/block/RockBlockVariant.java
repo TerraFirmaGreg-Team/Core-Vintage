@@ -44,11 +44,11 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
 
 		for (var type : RockType.getTypes()) {
+
 			if (BlocksRock.ROCK_BLOCKS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
 				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 
-			if (builder.hasStoneType)
-				createStoneType(idCounter.getAndIncrement(), type, builder.name);
+			if (builder.hasStoneType) createStoneType(idCounter.getAndIncrement(), type, builder.name);
 		}
 	}
 
@@ -66,9 +66,12 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 		return name;
 	}
 
+	public boolean canFall() {
+		return specification != null;
+	}
+
 	public void createStoneType(int id, RockType type, String name) {
-		new StoneType(id, "tfg_" + type + "_" + name,
-				SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
+		new StoneType(id, type + "_" + name, SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
 				() -> BlocksRock.getBlock(this, type).getDefaultState(),
 				state -> state.getBlock() == BlocksRock.getBlock(this, type), false
 		);

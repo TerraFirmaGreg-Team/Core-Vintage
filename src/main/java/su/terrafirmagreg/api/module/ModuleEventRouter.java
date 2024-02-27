@@ -153,8 +153,8 @@ public class ModuleEventRouter {
 	public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register BlockEvent start");
-			module.getAutoRegistry().onRegisterBlock(event);
-			module.getAutoRegistry().onRegisterTileEntities();
+			module.getRegistry().onRegisterBlock(event);
+			module.getRegistry().onRegisterTileEntities();
 			module.getLogger().debug("Register BlockEvent complete");
 		});
 	}
@@ -164,7 +164,7 @@ public class ModuleEventRouter {
 	public void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ItemEvent start");
-			module.getAutoRegistry().onRegisterItem(event);
+			module.getRegistry().onRegisterItem(event);
 			module.getLogger().debug("Register ItemEvent complete");
 		});
 	}
@@ -174,7 +174,7 @@ public class ModuleEventRouter {
 	public void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register PotionEvent start");
-			module.getAutoRegistry().onRegisterPotion(event);
+			module.getRegistry().onRegisterPotion(event);
 			module.getLogger().debug("Register PotionEvent complete");
 		});
 	}
@@ -184,7 +184,7 @@ public class ModuleEventRouter {
 	public void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register PotionTypeEvent start");
-			module.getAutoRegistry().onRegisterPotionType(event);
+			module.getRegistry().onRegisterPotionType(event);
 			module.getLogger().debug("Register PotionTypeEvent complete");
 		});
 	}
@@ -194,7 +194,7 @@ public class ModuleEventRouter {
 	public void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register BiomeEvent start");
-			module.getAutoRegistry().onRegisterBiome(event);
+			module.getRegistry().onRegisterBiome(event);
 			module.getLogger().debug("Register BiomeEvent complete");
 		});
 	}
@@ -204,7 +204,7 @@ public class ModuleEventRouter {
 	public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register SoundEvent start");
-			module.getAutoRegistry().onRegisterSound(event);
+			module.getRegistry().onRegisterSound(event);
 			module.getLogger().debug("Register SoundEvent complete");
 		});
 	}
@@ -214,7 +214,7 @@ public class ModuleEventRouter {
 	public void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register EntityEvent start");
-			module.getAutoRegistry().onRegisterEntity(event);
+			module.getRegistry().onRegisterEntity(event);
 			module.getLogger().debug("Register EntityEvent complete");
 		});
 	}
@@ -224,7 +224,7 @@ public class ModuleEventRouter {
 	public void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register EnchantmentEvent start");
-			module.getAutoRegistry().onRegisterEnchantment(event);
+			module.getRegistry().onRegisterEnchantment(event);
 			module.getLogger().debug("Register EnchantmentEvent complete");
 		});
 	}
@@ -234,7 +234,7 @@ public class ModuleEventRouter {
 	public void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register VillagerProfessionEvent start");
-			module.getAutoRegistry().onRegisterVillagerProfession(event);
+			module.getRegistry().onRegisterVillagerProfession(event);
 			module.getLogger().debug("Register VillagerProfessionEvent complete");
 		});
 	}
@@ -245,7 +245,7 @@ public class ModuleEventRouter {
 	public void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register RecipesEvent( start");
-			module.getAutoRegistry().onRegisterRecipes(event);
+			module.getRegistry().onRegisterRecipes(event);
 			module.getLogger().debug("Register RecipesEvent( complete");
 		});
 	}
@@ -260,8 +260,8 @@ public class ModuleEventRouter {
 	public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ModelsEvent start");
-			module.getAutoRegistry().onRegisterModels(event);
-			module.getAutoRegistry().onRegisterTileEntitySpecialRenderer();
+			module.getRegistry().onRegisterModels(event);
+			module.getRegistry().onRegisterTileEntitySpecialRenderer();
 			module.getLogger().debug("Register ModelsEvent complete");
 		});
 	}
@@ -272,7 +272,7 @@ public class ModuleEventRouter {
 	public void onClientRegisterBlockColor(ColorHandlerEvent.Block event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ModelsEvent start");
-			module.getAutoRegistry().onRegisterBlockColor(event);
+			module.getRegistry().onRegisterBlockColor(event);
 			module.getLogger().debug("Register ModelsEvent complete");
 		});
 	}
@@ -283,7 +283,7 @@ public class ModuleEventRouter {
 	public void onClientRegisterItemColor(ColorHandlerEvent.Item event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ModelsEvent start");
-			module.getAutoRegistry().onRegisterItemColor(event);
+			module.getRegistry().onRegisterItemColor(event);
 			module.getLogger().debug("Register ModelsEvent complete");
 		});
 	}

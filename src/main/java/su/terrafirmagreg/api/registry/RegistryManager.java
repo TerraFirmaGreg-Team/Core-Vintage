@@ -144,7 +144,7 @@ public class RegistryManager {
 	/**
 	 * The auto registry for the helper.
 	 */
-	private AutoRegistry autoRegistry;
+	private Registry registry;
 
 	private NetworkEntityIdSupplier networkEntityIdSupplier;
 
@@ -175,8 +175,8 @@ public class RegistryManager {
 	 */
 	public RegistryManager enableAutoRegistration() {
 
-		this.autoRegistry = this.getNewAutoRegistry();
-		MinecraftForge.EVENT_BUS.register(this.autoRegistry);
+		this.registry = new Registry(this);
+		MinecraftForge.EVENT_BUS.register(this.registry);
 		return this;
 	}
 
@@ -186,18 +186,7 @@ public class RegistryManager {
 	 * @return Whether or not the helper has automatic registration.
 	 */
 	public boolean hasAutoRegistry() {
-		return this.autoRegistry != null;
-	}
-
-
-	/**
-	 * Used to get a new auto registry instance. Only used if {@link #enableAutoRegistration()}
-	 * is used.
-	 *
-	 * @return The new auto registry instance.
-	 */
-	public AutoRegistry getNewAutoRegistry() {
-		return new AutoRegistry(this);
+		return this.registry != null;
 	}
 
 	public void setNetworkEntityIdSupplier(NetworkEntityIdSupplier supplier) {

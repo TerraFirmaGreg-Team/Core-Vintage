@@ -38,8 +38,8 @@ public class ModuleRock extends ModuleBase {
 		RockBlockVariantHandler.init();
 		RockItemVariantHandler.init();
 
-		BlocksRock.onRegister(registry);
-		ItemsRock.onRegister(registry);
+		BlocksRock.onRegister(registryManager);
+		ItemsRock.onRegister(registryManager);
 	}
 
 	@Override

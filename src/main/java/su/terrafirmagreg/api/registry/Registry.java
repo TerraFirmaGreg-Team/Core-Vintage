@@ -33,70 +33,70 @@ import su.terrafirmagreg.api.util.ModUtils;
  * entries being dangerous.
  */
 @Getter
-public class AutoRegistry {
+public class Registry {
 
 	/**
 	 * The registry helper to register things from.
 	 */
-	private final RegistryManager registry;
+	private final RegistryManager registryManager;
 
-	public AutoRegistry(RegistryManager registry) {
+	public Registry(RegistryManager registryManager) {
+		this.registryManager = registryManager;
 
-		this.registry = registry;
 	}
 
 
 	public void onRegisterBlock(RegistryEvent.Register<Block> event) {
-		for (var block : this.registry.getBlocks()) {
+		for (var block : this.registryManager.getBlocks()) {
 			event.getRegistry().register(block);
 		}
 	}
 
 
 	public void onRegisterItem(RegistryEvent.Register<Item> event) {
-		for (var item : this.registry.getItems()) {
+		for (var item : this.registryManager.getItems()) {
 			event.getRegistry().register(item);
 		}
 	}
 
 
 	public void onRegisterPotion(RegistryEvent.Register<Potion> event) {
-		for (var potion : this.registry.getPotions()) {
+		for (var potion : this.registryManager.getPotions()) {
 			event.getRegistry().register(potion);
 		}
 	}
 
 
 	public void onRegisterPotionType(RegistryEvent.Register<PotionType> event) {
-		for (var potionType : this.registry.getPotionType()) {
+		for (var potionType : this.registryManager.getPotionType()) {
 			event.getRegistry().register(potionType);
 		}
 	}
 
 
 	public void onRegisterBiome(RegistryEvent.Register<Biome> event) {
-		for (var biome : this.registry.getBiomes()) {
+		for (var biome : this.registryManager.getBiomes()) {
 			event.getRegistry().register(biome);
 		}
 	}
 
 
 	public void onRegisterSound(RegistryEvent.Register<SoundEvent> event) {
-		for (var sound : this.registry.getSounds()) {
+		for (var sound : this.registryManager.getSounds()) {
 			event.getRegistry().register(sound);
 		}
 	}
 
 
 	public void onRegisterEntity(RegistryEvent.Register<EntityEntry> event) {
-		for (var entry : this.registry.getEntities()) {
+		for (var entry : this.registryManager.getEntities()) {
 			event.getRegistry().register(entry);
 		}
 	}
 
 
 	public void onRegisterEnchantment(RegistryEvent.Register<Enchantment> event) {
-		for (var enchant : this.registry.getEnchantments()) {
+		for (var enchant : this.registryManager.getEnchantments()) {
 			event.getRegistry().register(enchant);
 		}
 	}
@@ -108,14 +108,14 @@ public class AutoRegistry {
 
 
 	public void onRegisterRecipes(RegistryEvent.Register<IRecipe> event) {
-		for (var recipe : this.registry.getRecipes()) {
+		for (var recipe : this.registryManager.getRecipes()) {
 			event.getRegistry().register(recipe);
 		}
 	}
 
 
 	public void onRegisterTileEntities() {
-		for (var provider : this.registry.getTileProviders()) {
+		for (var provider : this.registryManager.getTileProviders()) {
 			GameRegistry.registerTileEntity(
 					provider.getTileEntityClass(),
 					ModUtils.getID("tile." + provider.getTileEntityClass().getSimpleName())
@@ -125,15 +125,13 @@ public class AutoRegistry {
 
 
 	public void onTableLoaded(LootTableLoadEvent event) {
-		for (var builder : this.registry.getLootTableEntries().get(event.getName())) {
+		for (var builder : this.registryManager.getLootTableEntries().get(event.getName())) {
 			var pool = event.getTable().getPool(builder.getPool());
 			if (pool != null) pool.addEntry(builder.build());
 			else {
 				ModuleManager.LOGGER.info(
 						"The mod {} tried to add loot to {} but the pool was not found. {}",
-						this.registry.getModID(),
-						event.getName(),
-						builder.toString());
+						this.registryManager.getModID(), event.getName(), builder.toString());
 			}
 		}
 	}
@@ -147,22 +145,22 @@ public class AutoRegistry {
 	@SideOnly(Side.CLIENT)
 	public void onRegisterModels(ModelRegistryEvent event) {
 
-		for (var model : this.registry.getCustomModel()) {
+		for (var model : this.registryManager.getCustomModel()) {
 			model.onModelRegister();
 		}
 
-		for (var model : this.registry.getCustomStateMapper()) {
+		for (var model : this.registryManager.getCustomStateMapper()) {
 			model.onStateMapperRegister();
 		}
 
-		for (var item : this.registry.getCustomMeshes()) {
+		for (var item : this.registryManager.getCustomMeshes()) {
 			ModelLoader.setCustomMeshDefinition(item, ((ICustomMesh) item).getCustomMesh());
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void onRegisterTileEntitySpecialRenderer() {
-		for (var provider : this.registry.getTileProviders()) {
+		for (var provider : this.registryManager.getTileProviders()) {
 			final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
 			if (tesr != null) ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
@@ -171,22 +169,28 @@ public class AutoRegistry {
 
 	@SideOnly(Side.CLIENT)
 	public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
-		for (var block : this.registry.getColoredBlocks()) {
-			event.getBlockColors().registerBlockColorHandler(((IColorfulBlock) block).getColorHandler(), block);
+		for (var block : this.registryManager.getColoredBlocks()) {
+			if (block instanceof IColorfulBlock colorfulBlock) {
+				event.getBlockColors().registerBlockColorHandler(colorfulBlock.getColorHandler(), block);
+			}
+
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void onRegisterItemColor(ColorHandlerEvent.Item event) {
-		for (var block : this.registry.getColoredBlocks()) {
-			var colorfulBlock = (IColorfulBlock) block;
-			if (colorfulBlock.getItemColorHandler() != null) {
-				event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
+		for (var block : this.registryManager.getColoredBlocks()) {
+			if (block instanceof IColorfulBlock colorfulBlock) {
+				if (colorfulBlock.getItemColorHandler() != null) {
+					event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
+				}
 			}
 		}
 
-		for (var item : this.registry.getColoredItems()) {
-			event.getItemColors().registerItemColorHandler(((IColorfulItem) item).getColorHandler(), item);
+		for (var item : this.registryManager.getColoredItems()) {
+			if (item instanceof IColorfulItem colorfulItem) {
+				event.getItemColors().registerItemColorHandler(colorfulItem.getColorHandler(), item);
+			}
 		}
 	}
 }

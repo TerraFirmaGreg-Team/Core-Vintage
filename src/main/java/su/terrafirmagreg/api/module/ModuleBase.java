@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.network.*;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.network.tile.TileDataServiceContainer;
-import su.terrafirmagreg.api.registry.AutoRegistry;
+import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.api.util.ModUtils;
 
@@ -43,20 +43,25 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	@NotNull
 	private final String modid;
 
-	protected RegistryManager registry;
+	protected RegistryManager registryManager;
 	private ThreadedNetworkWrapper threadedNetworkWrapper;
 	private IPacketRegistry packetRegistry;
 	private IPacketService packetService;
 	private ITileDataService tileDataService;
 	private NetworkEntityIdSupplier networkEntityIdSupplier;
 	@Getter
-	private AutoRegistry autoRegistry;
+	private Registry registry;
 	@Getter
 	private File configurationDirectory;
 
 	protected ModuleBase(int priority) {
+		this(priority, Loader.instance().activeModContainer().getModId());
+
+	}
+
+	protected ModuleBase(int priority, @NotNull String modid) {
 		this.priority = priority;
-		this.modid = Loader.instance().activeModContainer().getModId();
+		this.modid = modid;
 		this.name = this.getClass().getSimpleName();
 	}
 
@@ -66,11 +71,11 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
 
 	protected void enableAutoRegistry(CreativeTabs tab) {
-		this.registry = new RegistryManager(tab).enableAutoRegistration();
+		this.registryManager = new RegistryManager(tab).enableAutoRegistration();
 
 		this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modid, s -> new NetworkEntityIdSupplier());
-		this.registry.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
-		this.autoRegistry = registry.getAutoRegistry();
+		this.registryManager.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
+		this.registry = registryManager.getRegistry();
 	}
 
 	/**
@@ -102,49 +107,49 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 		return this.tileDataService;
 	}
 
-
-	// ===== Registration ========================================================================================================================= //
-
-	public void onRegister() {}
-
-	public void onClientRegister() {}
-
-	public void onNetworkRegister() {}
-
 	// ===== FML Lifecycle ======================================================================================================================== //
 
-	public void onConstruction(FMLConstructionEvent event) {}
+	protected void onConstruction(FMLConstructionEvent event) {}
 
-	public void onPreInit(FMLPreInitializationEvent event) {}
+	protected void onPreInit(FMLPreInitializationEvent event) {}
 
-	public void onInit(FMLInitializationEvent event) {}
+	protected void onInit(FMLInitializationEvent event) {}
 
-	public void onPostInit(FMLPostInitializationEvent event) {}
+	protected void onPostInit(FMLPostInitializationEvent event) {}
 
-	public void onLoadComplete(FMLLoadCompleteEvent event) {}
+	protected void onLoadComplete(FMLLoadCompleteEvent event) {}
 
 	// ===== FML Lifecycle: Client ================================================================================================================ //
 
 	@SideOnly(Side.CLIENT)
-	public void onClientPreInit(FMLPreInitializationEvent event) {}
+	protected void onClientPreInit(FMLPreInitializationEvent event) {}
 
 	@SideOnly(Side.CLIENT)
-	public void onClientInit(FMLInitializationEvent event) {}
+	protected void onClientInit(FMLInitializationEvent event) {}
 
 	@SideOnly(Side.CLIENT)
-	public void onClientPostInit(FMLPostInitializationEvent event) {}
+	protected void onClientPostInit(FMLPostInitializationEvent event) {}
 
 	// ===== Server =============================================================================================================================== //
 
-	public void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
+	protected void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
 
-	public void onServerStarting(FMLServerStartingEvent event) {}
+	protected void onServerStarting(FMLServerStartingEvent event) {}
 
-	public void onServerStarted(FMLServerStartedEvent event) {}
+	protected void onServerStarted(FMLServerStartedEvent event) {}
 
-	public void onServerStopping(FMLServerStoppingEvent event) {}
+	protected void onServerStopping(FMLServerStoppingEvent event) {}
 
-	public void onServerStopped(FMLServerStoppedEvent event) {}
+	protected void onServerStopped(FMLServerStoppedEvent event) {}
+
+	// ===== Registration ========================================================================================================================= //
+
+	protected void onRegister() {}
+
+	protected void onClientRegister() {}
+
+	protected void onNetworkRegister() {}
+
 
 	/**
 	 * What other modules this module depends on.

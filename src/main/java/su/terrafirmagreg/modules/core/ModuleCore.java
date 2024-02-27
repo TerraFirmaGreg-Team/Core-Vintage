@@ -34,15 +34,15 @@ public class ModuleCore extends ModuleBase {
 
 	@Override
 	public void onRegister() {
-		BlocksCore.onRegister(registry);
-		ItemsCore.onRegister(registry);
+		BlocksCore.onRegister(registryManager);
+		ItemsCore.onRegister(registryManager);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void onClientRegister() {
-		BlocksCore.onClientRegister(registry);
-		ItemsCore.onClientRegister(registry);
+		BlocksCore.onClientRegister(registryManager);
+		ItemsCore.onClientRegister(registryManager);
 	}
 
 	@Override

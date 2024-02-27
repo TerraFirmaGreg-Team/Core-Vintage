@@ -36,8 +36,8 @@ public class ModuleSoil extends ModuleBase {
 		SoilBlockVariantHandler.init();
 		SoilItemVariantHandler.init();
 
-		BlocksSoil.onRegister(registry);
-		ItemsSoil.onRegister(registry);
+		BlocksSoil.onRegister(registryManager);
+		ItemsSoil.onRegister(registryManager);
 	}
 
 	@Override

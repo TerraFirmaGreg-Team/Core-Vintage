@@ -44,15 +44,15 @@ public class ModuleWood extends ModuleBase {
 		WoodBlockVariantHandler.init();
 		WoodItemVariantHandler.init();
 
-		BlocksWood.onRegister(registry);
-		ItemsWood.onRegister(registry);
-		EntitiesWood.onRegister(registry);
+		BlocksWood.onRegister(registryManager);
+		ItemsWood.onRegister(registryManager);
+		EntitiesWood.onRegister(registryManager);
 	}
 
 	@Override
 	public void onClientRegister() {
-		BlocksWood.onClientRegister(registry);
-		EntitiesWood.onClientRegister(registry);
+		BlocksWood.onClientRegister(registryManager);
+		EntitiesWood.onClientRegister(registryManager);
 
 	}
 

@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.init.ItemsRock;
+import su.terrafirmagreg.modules.rock.data.ItemsRock;
 
 import java.util.Set;
 import java.util.function.BiFunction;

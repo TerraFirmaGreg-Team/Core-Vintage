@@ -33,8 +33,8 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.soil.init.ItemsSoil;
+import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 

@@ -12,8 +12,8 @@ import su.terrafirmagreg.modules.rock.api.types.category.RockCategoryHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariantHandler;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariantHandler;
-import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.rock.init.ItemsRock;
+import su.terrafirmagreg.modules.rock.data.BlocksRock;
+import su.terrafirmagreg.modules.rock.data.ItemsRock;
 
 import java.util.Collections;
 import java.util.List;

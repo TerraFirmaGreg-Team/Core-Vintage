@@ -27,9 +27,9 @@ import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
-import su.terrafirmagreg.modules.rock.init.ItemsRock;
+import su.terrafirmagreg.modules.rock.data.ItemsRock;
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.api.models.Blockstates.HORIZONTAL;
 
 
 public class BlockRockSurface extends BlockRock {

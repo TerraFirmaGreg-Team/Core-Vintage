@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.init;
+package su.terrafirmagreg.modules.core.data;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

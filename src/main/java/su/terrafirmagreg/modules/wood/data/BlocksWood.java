@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.wood.init;
+package su.terrafirmagreg.modules.wood.data;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.block.Block;

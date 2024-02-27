@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
-import su.terrafirmagreg.modules.rock.init.BlocksRock;
-import su.terrafirmagreg.modules.rock.init.ItemsRock;
+import su.terrafirmagreg.modules.rock.data.BlocksRock;
+import su.terrafirmagreg.modules.rock.data.ItemsRock;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 

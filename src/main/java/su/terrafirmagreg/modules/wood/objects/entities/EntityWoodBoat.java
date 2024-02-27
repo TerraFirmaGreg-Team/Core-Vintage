@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
-import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 
 @MethodsReturnNonnullByDefault

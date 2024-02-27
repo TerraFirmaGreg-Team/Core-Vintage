@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 
 import java.util.Set;
 import java.util.function.BiFunction;

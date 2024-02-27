@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.init.BlocksWood;
+import su.terrafirmagreg.modules.wood.data.BlocksWood;
 
 import java.util.Set;
 import java.util.function.BiFunction;

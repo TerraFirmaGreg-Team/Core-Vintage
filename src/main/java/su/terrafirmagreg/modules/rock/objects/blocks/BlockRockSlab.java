@@ -29,7 +29,7 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
-import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.rock.data.BlocksRock;
 import su.terrafirmagreg.modules.rock.objects.itemblocks.ItemRockSlab;
 
 import java.util.List;

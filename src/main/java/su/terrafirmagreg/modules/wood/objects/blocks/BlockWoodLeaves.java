@@ -45,7 +45,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
-import su.terrafirmagreg.modules.wood.init.BlocksWood;
+import su.terrafirmagreg.modules.wood.data.BlocksWood;
 
 import java.util.HashSet;
 import java.util.List;

@@ -11,8 +11,8 @@ import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariantHandler;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.soil.init.ItemsSoil;
+import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Collections;
 import java.util.List;

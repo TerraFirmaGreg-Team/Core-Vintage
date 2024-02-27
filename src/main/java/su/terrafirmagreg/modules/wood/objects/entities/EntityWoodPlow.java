@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
-import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 public class EntityWoodPlow extends EntityWoodCartInventory implements IInventoryChangedListener {
 

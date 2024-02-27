@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.data;
+package su.terrafirmagreg.api.models;
 
 import net.darkhax.bookshelf.block.property.PropertyObject;
 import net.minecraft.block.properties.PropertyBool;

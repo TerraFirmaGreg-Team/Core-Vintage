@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.rock.init;
+package su.terrafirmagreg.modules.rock.data;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.block.Block;

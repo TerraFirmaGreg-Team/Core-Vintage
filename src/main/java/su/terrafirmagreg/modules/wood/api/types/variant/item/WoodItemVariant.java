@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 import java.util.Set;
 import java.util.function.BiFunction;

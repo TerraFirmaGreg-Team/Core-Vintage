@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
-import su.terrafirmagreg.modules.soil.init.ItemsSoil;
+import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 

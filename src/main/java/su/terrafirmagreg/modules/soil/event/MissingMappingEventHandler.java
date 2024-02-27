@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
-import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.soil.init.ItemsSoil;
+import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 

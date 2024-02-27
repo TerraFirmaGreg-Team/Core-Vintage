@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.core.init.BlocksCore;
-import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.core.data.BlocksCore;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 @Module(moduleID = "Core",
 		name = "TFG Module Core",

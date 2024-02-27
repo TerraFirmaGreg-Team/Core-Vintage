@@ -8,7 +8,7 @@ import net.minecraft.block.SoundType;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.rock.data.BlocksRock;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;

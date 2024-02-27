@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.wood.init;
+package su.terrafirmagreg.modules.wood.data;
 
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;

@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood.objects.tiles;
 
 
 import lombok.Getter;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -36,6 +35,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
 
@@ -219,10 +219,10 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 				tickCounter = 0;
 
 				ItemStack fluidContainerIn = inventory.getStackInSlot(SLOT_FLUID_CONTAINER_IN);
-				FluidActionResult result = FluidTransferHelper.emptyContainerIntoTank(fluidContainerIn, tank, inventory, SLOT_FLUID_CONTAINER_OUT, ConfigTFC.Devices.BARREL.tank, world, pos);
+				FluidActionResult result = FluidTransferHelper.emptyContainerIntoTank(fluidContainerIn, tank, inventory, SLOT_FLUID_CONTAINER_OUT, ModuleWoodConfig.BLOCKS.BARREL.tank, world, pos);
 
 				if (!result.isSuccess()) {
-					result = FluidTransferHelper.fillContainerFromTank(fluidContainerIn, tank, inventory, SLOT_FLUID_CONTAINER_OUT, ConfigTFC.Devices.BARREL.tank, world, pos);
+					result = FluidTransferHelper.fillContainerFromTank(fluidContainerIn, tank, inventory, SLOT_FLUID_CONTAINER_OUT, ModuleWoodConfig.BLOCKS.BARREL.tank, world, pos);
 				}
 
 				if (result.isSuccess()) {
@@ -444,8 +444,8 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 		private final Set<Fluid> whitelist;
 
 		public BarrelFluidTank(IFluidTankCallback callback, int fluidTankID) {
-			super(callback, fluidTankID, ConfigTFC.Devices.BARREL.tank);
-			whitelist = Arrays.stream(ConfigTFC.Devices.BARREL.fluidWhitelist)
+			super(callback, fluidTankID, ModuleWoodConfig.BLOCKS.BARREL.tank);
+			whitelist = Arrays.stream(ModuleWoodConfig.BLOCKS.BARREL.fluidWhitelist)
 					.map(FluidRegistry::getFluid)
 					.filter(Objects::nonNull)
 					.collect(Collectors.toSet());

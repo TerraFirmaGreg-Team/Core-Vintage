@@ -49,7 +49,6 @@ public class ModuleRockConfig {
 
 	}
 
-
 	static {
 		ConfigAnytime.register(ModuleRockConfig.class);
 	}

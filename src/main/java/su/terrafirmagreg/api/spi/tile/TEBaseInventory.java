@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.spi.tile;
 
-
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
 import net.minecraft.block.state.IBlockState;

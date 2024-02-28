@@ -32,7 +32,7 @@ import java.util.UUID;
 public abstract class EntityWoodCart extends Entity implements IEntityAdditionalSpawnData {
 
 	public static final UUID PULL_SLOWLY_MODIFIER_UUID = UUID.fromString("49B0E52E-48F2-4D89-BED7-4F5DF26F1263");
-	public static final AttributeModifier PULL_SLOWLY_MODIFIER = (new AttributeModifier(PULL_SLOWLY_MODIFIER_UUID, "Pull slowly modifier", ModuleWoodConfig.SPEED_MODIFIER, 2)).setSaved(false);
+	public static final AttributeModifier PULL_SLOWLY_MODIFIER = (new AttributeModifier(PULL_SLOWLY_MODIFIER_UUID, "Pull slowly modifier", ModuleWoodConfig.MISC.SPEED_MODIFIER, 2)).setSaved(false);
 	private static final DataParameter<String> WOOD_NAME = EntityDataManager.createKey(EntityWoodCart.class, DataSerializers.STRING);
 	private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.createKey(EntityWoodCart.class, DataSerializers.VARINT);
 	private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.createKey(EntityWoodCart.class, DataSerializers.FLOAT);

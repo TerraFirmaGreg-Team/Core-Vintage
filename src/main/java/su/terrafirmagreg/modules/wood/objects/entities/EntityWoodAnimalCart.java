@@ -31,7 +31,7 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
 		if (this.isPassenger(pullingIn)) {
 			return false;
 		}
-		for (String entry : ModuleWoodConfig.ANIMAL_CART.canPull) {
+		for (String entry : ModuleWoodConfig.ITEMS.ANIMAL_CART.canPull) {
 			if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn)
 					.toString())) {
 				return true;

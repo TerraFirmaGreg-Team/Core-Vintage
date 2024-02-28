@@ -49,11 +49,6 @@ public class ItemFireStarter extends ItemBase implements ICustomModel {
 		OreDictUtils.register(this, "fireStarter");
 	}
 
-	@Override
-	public @NotNull String getName() {
-		return "firestarter";
-	}
-
 	/**
 	 * Causes ignition of fire based devices, consume or damage items if valid
 	 *
@@ -87,6 +82,11 @@ public class ItemFireStarter extends ItemBase implements ICustomModel {
 			return false;
 		}
 		return OreDictUtils.contains(stack, "fireStarter") || OreDictUtils.contains(stack, "infiniteFire");
+	}
+
+	@Override
+	public @NotNull String getName() {
+		return "firestarter";
 	}
 
 	@Override

@@ -1,9 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.minecraft.block.material.Material;
@@ -29,9 +27,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
+
+import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
 public class EntityWoodPlow extends EntityWoodCartInventory implements IInventoryChangedListener {
 
@@ -57,7 +59,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 		if (this.isPassenger(pullingIn)) {
 			return false;
 		}
-		for (String entry : ModuleWoodConfig.PLOW.canPull) {
+		for (String entry : ModuleWoodConfig.ITEMS.PLOW.canPull) {
 			if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn)
 					.toString())) {
 				return true;
@@ -177,12 +179,14 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 		ItemStack itemstack = this.inventory.getStackInSlot(slot);
 		Item item = itemstack.getItem();
 
-		if (state.getBlock() instanceof BlockRockVariant blockRock) {
-			if (blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DIRT || blockRock.getType() == Rock.Type.DRY_GRASS) {
+
+		if (state.getBlock() instanceof ISoilBlockVariant soil) {
+			var variant = soil.getBlockVariant();
+			if (variant == GRASS || variant == DIRT || variant == DRY_GRASS) {
 				if (item instanceof ItemHoe || item instanceof ItemMetalHoe) {
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.FARMLAND)
+						world.setBlockState(pos, BlocksSoil.getBlock(FARMLAND, soil.getType())
 								.getDefaultState());
 						damageAndUpdateOnBreak(pos, slot, itemstack, player);
 
@@ -192,7 +196,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 					if (metaltool.getType() == Metal.ItemType.SHOVEL) {
 						if (!world.isRemote) {
 							world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-							this.world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH)
+							this.world.setBlockState(pos, BlocksSoil.getBlock(GRASS_PATH, soil.getType())
 									.getDefaultState());
 							this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
 						}
@@ -201,7 +205,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 				{
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						this.world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH)
+						this.world.setBlockState(pos, BlocksSoil.getBlock(GRASS_PATH, soil.getType())
 								.getDefaultState());
 						this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
 					}

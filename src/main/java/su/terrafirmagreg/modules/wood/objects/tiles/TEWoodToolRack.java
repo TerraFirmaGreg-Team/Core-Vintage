@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood.objects.tiles;
 
 import gregtech.api.items.toolitem.IGTTool;
 import lombok.Getter;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
@@ -17,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.devices.objects.items.ItemFireStarter;
 
 
 @Getter

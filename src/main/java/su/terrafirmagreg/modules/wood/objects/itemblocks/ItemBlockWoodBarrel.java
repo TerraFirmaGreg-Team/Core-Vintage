@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.itemblocks;
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -37,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
@@ -80,7 +80,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 						}
 						FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
 						if (canCreateSources && fluidStack != null) {
-							fluidStack.amount = ConfigTFC.Devices.BARREL.tank;
+							fluidStack.amount = ModuleWoodConfig.BLOCKS.BARREL.tank;
 						}
 						barrelCap.fill(fluidStack, true);
 						return EnumActionResult.SUCCESS;
@@ -149,7 +149,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 					IBlockState state = worldIn.getBlockState(pos);
 					IFluidHandler handler = FluidUtil.getFluidHandler(worldIn, pos, rayTrace.sideHit);
 					if (handler != null && handler.drain(Fluid.BUCKET_VOLUME, false) != null) {
-						FluidTank tank = new FluidTank(ConfigTFC.Devices.BARREL.tank);
+						FluidTank tank = new FluidTank(ModuleWoodConfig.BLOCKS.BARREL.tank);
 						boolean canCreateSources = false; //default
 						if (state.getBlock() instanceof BlockFluidClassic) {
 							BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(pos).getBlock();
@@ -160,7 +160,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 						}
 						FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
 						if (canCreateSources && fluidStack != null) {
-							fluidStack.amount = ConfigTFC.Devices.BARREL.tank;
+							fluidStack.amount = ModuleWoodConfig.BLOCKS.BARREL.tank;
 						}
 						barrelCap.fill(fluidStack, true);
 						return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
@@ -181,7 +181,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 	public static class ItemBarrelFluidHandler extends FluidWhitelistHandlerComplex {
 
 		protected ItemBarrelFluidHandler(@NotNull ItemStack container) {
-			super(container, ConfigTFC.Devices.BARREL.tank, ConfigTFC.Devices.BARREL.fluidWhitelist);
+			super(container, ModuleWoodConfig.BLOCKS.BARREL.tank, ModuleWoodConfig.BLOCKS.BARREL.fluidWhitelist);
 		}
 
 		@Override

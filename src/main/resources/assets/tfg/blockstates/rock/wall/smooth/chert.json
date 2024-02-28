@@ -1,6 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
+    "model": "tfc:empty",
     "uvlock": true,
     "textures": {
       "wall": "tfg:blocks/rock/smooth/chert"
@@ -15,6 +16,10 @@
         "model": "wall_inventory"
       }
     ],
+"variant": {
+  "cobblestone": {},
+  "mossy_cobblestone": {}
+},
     "north": {
       "true": {
         "submodel": "wall_side"

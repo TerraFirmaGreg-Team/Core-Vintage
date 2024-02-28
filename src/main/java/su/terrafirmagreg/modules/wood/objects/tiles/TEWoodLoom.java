@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood.objects.tiles;
 
 import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,11 +12,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLoom;
 
 
-public class TEWoodLoom extends TEInventory implements ITickable {
+public class TEWoodLoom extends TEBaseInventory implements ITickable {
 
 	private WoodType cachedWoodType;
 

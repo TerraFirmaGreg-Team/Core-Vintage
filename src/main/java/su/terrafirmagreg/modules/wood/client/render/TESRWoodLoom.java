@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.render;
 
 
-import net.dries007.tfc.client.render.TESRBase;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,6 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.api.spi.render.TESRBase;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;

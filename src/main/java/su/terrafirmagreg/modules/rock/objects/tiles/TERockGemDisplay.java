@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.rock.objects.tiles;
 import lombok.Getter;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
-import net.dries007.tfc.objects.te.TEBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
@@ -16,6 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.spi.tile.TEBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -15,8 +15,8 @@ import javax.annotation.Nonnull;
 @Module(moduleID = "Device", name = "TFG Module Device")
 public class ModuleDevice extends ModuleBase {
 
-	public static final Logger LOGGER = LogManager.getLogger("Module Rock");
-	public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/bellows", false);
+	public static final Logger LOGGER = LogManager.getLogger(ModuleDevice.class.getSimpleName());
+	public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/bellows");
 
 
 	public ModuleDevice() {
@@ -37,4 +37,5 @@ public class ModuleDevice extends ModuleBase {
 	public Logger getLogger() {
 		return LOGGER;
 	}
+
 }

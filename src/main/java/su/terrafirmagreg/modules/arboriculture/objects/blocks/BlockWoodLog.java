@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.wood.objects.blocks;
+package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;

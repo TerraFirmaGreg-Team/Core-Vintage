@@ -21,9 +21,9 @@ import java.util.List;
 @Module(moduleID = "Rock", name = "TFG Module Rock")
 public class ModuleRock extends ModuleBase {
 
-	public static final Logger LOGGER = LogManager.getLogger("Module Rock");
+	public static final Logger LOGGER = LogManager.getLogger(ModuleRock.class.getSimpleName());
 
-	public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/raw/basalt", false);
+	public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/raw/basalt");
 
 	public ModuleRock() {
 		super(2);

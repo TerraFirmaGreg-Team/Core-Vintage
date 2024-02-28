@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.api.types.variant.block;
 public class WoodBlockVariants {
 
 	public static WoodBlockVariant LOG;
-	public static WoodBlockVariant stripped_log;
+	public static WoodBlockVariant STRIPPED_LOG;
 	public static WoodBlockVariant LEAVES;
 	public static WoodBlockVariant SAPLING;
 	public static WoodBlockVariant POTTED_SAPLING;

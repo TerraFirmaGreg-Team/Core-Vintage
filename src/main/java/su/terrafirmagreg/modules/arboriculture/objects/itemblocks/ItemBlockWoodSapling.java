@@ -1,10 +1,10 @@
-package su.terrafirmagreg.modules.wood.objects.itemblocks;
+package su.terrafirmagreg.modules.arboriculture.objects.itemblocks;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSapling;
+import su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodSapling;
 
 
 public class ItemBlockWoodSapling extends ItemBlockBase {

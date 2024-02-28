@@ -23,8 +23,8 @@ import java.util.List;
 @Module(moduleID = "Wood", name = "TFG Module Wood")
 public class ModuleWood extends ModuleBase {
 
-	public static final Logger LOGGER = LogManager.getLogger("Module Wood");
-	public static final CreativeTabs WOOD_TAB = new CreativeTabBase("wood", "wood/planks/pine", false);
+	public static final Logger LOGGER = LogManager.getLogger(ModuleWood.class.getSimpleName());
+	public static final CreativeTabs WOOD_TAB = new CreativeTabBase("wood", "wood/planks/pine");
 
 	public static IPacketService PACKET_SERVICE;
 	public static ITileDataService TILE_DATA_SERVICE;

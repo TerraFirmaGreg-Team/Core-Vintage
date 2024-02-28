@@ -1,12 +1,10 @@
-package su.terrafirmagreg.modules.wood.objects.blocks;
+package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -41,6 +39,8 @@ import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.Utils;
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -53,7 +53,7 @@ import java.util.Random;
 import java.util.Set;
 
 import static net.dries007.tfc.Constants.RNG;
-import static su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
+import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 
 @Getter
@@ -155,7 +155,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //                break;
 //            case 3:
 //                if (state.getValue(LEAF_STATE) != FRUIT) {
-//                    TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+//                    TETickCounter te = Utils.getTE(world, pos, TETickCounter.class);
 //                    if (te != null) {
 //                        long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
 //                        if (hours > (getTreeVariant().getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
@@ -178,8 +178,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //    }
 
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-		TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+	public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+		TETickCounter tile = Utils.getTE(worldIn, pos, TETickCounter.class);
 		if (tile != null) {
 			tile.resetCounter();
 		}
@@ -191,7 +191,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //            if (!worldIn.isRemote) {
 //                ItemHandlerHelper.giveItemToPlayer(playerIn, this.getTreeVariant().getFoodDrop());
 //                worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
-//                TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+//                TETickCounter te = Utils.getTE(worldIn, pos, TETickCounter.class);
 //                if (te != null) {
 //                    te.resetCounter();
 //                }

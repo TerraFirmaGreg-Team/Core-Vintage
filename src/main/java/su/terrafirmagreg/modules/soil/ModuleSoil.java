@@ -20,9 +20,9 @@ import java.util.List;
 @Module(moduleID = "Soil", name = "TFG Module Soil")
 public class ModuleSoil extends ModuleBase {
 
-	public static final Logger LOGGER = LogManager.getLogger("Module Soil");
+	public static final Logger LOGGER = LogManager.getLogger(ModuleSoil.class.getSimpleName());
 
-	public static final CreativeTabs SOIL_TAB = new CreativeTabBase("soil", "soil/grass/humus", false);
+	public static final CreativeTabs SOIL_TAB = new CreativeTabBase("soil", "soil/grass/humus");
 
 
 	public ModuleSoil() {

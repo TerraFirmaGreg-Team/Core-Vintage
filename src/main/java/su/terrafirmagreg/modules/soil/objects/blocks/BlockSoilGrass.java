@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import lombok.Getter;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.client.GrassColorHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
@@ -31,6 +30,7 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;

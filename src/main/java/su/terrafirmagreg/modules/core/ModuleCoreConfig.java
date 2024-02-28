@@ -4,8 +4,8 @@ import com.cleanroommc.configanytime.ConfigAnytime;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import su.terrafirmagreg.modules.rock.ModuleRock;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.Tags.MOD_NAME;
@@ -23,7 +23,8 @@ public class ModuleCoreConfig {
 	@Config.LangKey("config." + MOD_ID + ".core.items")
 	public static final ItemsCategory ITEMS = new ItemsCategory();
 
-	@Config.Comment("Miscelaneous")
+	@Config.Name("Misc")
+	@Config.Comment("Miscellaneous")
 	@Config.LangKey("config." + MOD_ID + ".core.misc")
 	public static final MiscCategory MISC = new MiscCategory();
 
@@ -52,12 +53,14 @@ public class ModuleCoreConfig {
 		ConfigAnytime.register(ModuleCoreConfig.class);
 	}
 
-	@SubscribeEvent
-	public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if (event.getModID().equals(MOD_ID)) {
-			ModuleRock.LOGGER.warn("Config changed");
-			ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
+	@Mod.EventBusSubscriber(modid = MOD_ID)
+	public static class EventHandler {
+		@SubscribeEvent
+		public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+			if (event.getModID().equals(MOD_ID)) {
+				ModuleCore.LOGGER.warn("Config changed");
+				ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
+			}
 		}
 	}
-
 }

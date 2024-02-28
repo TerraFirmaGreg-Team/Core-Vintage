@@ -4,7 +4,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -37,6 +36,7 @@ import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -139,7 +139,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
 
 	@Override
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-		var te = Helpers.getTE(worldIn, pos, TEWoodLoom.class);
+		var te = Utils.getTE(worldIn, pos, TEWoodLoom.class);
 		if (te != null) {
 			return te.onRightClick(playerIn);
 		}
@@ -171,7 +171,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
 
 	@Override
 	public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		TEWoodLoom te = Helpers.getTE(worldIn, pos, TEWoodLoom.class);
+		TEWoodLoom te = Utils.getTE(worldIn, pos, TEWoodLoom.class);
 		if (te != null) {
 			te.onBreakBlock(worldIn, pos, state);
 		}

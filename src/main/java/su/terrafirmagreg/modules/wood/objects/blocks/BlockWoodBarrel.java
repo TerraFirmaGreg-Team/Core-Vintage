@@ -4,7 +4,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
 import net.minecraft.block.properties.PropertyBool;
@@ -35,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
@@ -63,7 +63,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	 * Used to toggle the barrel seal state and update the tile entity, in the correct order
 	 */
 	public static void toggleBarrelSeal(World world, BlockPos pos) {
-		var tile = Helpers.getTE(world, pos, TEWoodBarrel.class);
+		var tile = Utils.getTE(world, pos, TEWoodBarrel.class);
 		if (tile != null) {
 			IBlockState state = world.getBlockState(pos);
 			boolean previousSealed = state.getValue(SEALED);
@@ -172,7 +172,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 
 	@Override
 	public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		TEWoodBarrel tile = Helpers.getTE(worldIn, pos, TEWoodBarrel.class);
+		TEWoodBarrel tile = Utils.getTE(worldIn, pos, TEWoodBarrel.class);
 		if (tile != null) {
 			tile.onBreakBlock(worldIn, pos, state);
 		}
@@ -190,7 +190,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@Override
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = playerIn.getHeldItem(hand);
-		TEWoodBarrel te = Helpers.getTE(worldIn, pos, TEWoodBarrel.class);
+		TEWoodBarrel te = Utils.getTE(worldIn, pos, TEWoodBarrel.class);
 		if (te != null) {
 			if (heldItem.isEmpty() && playerIn.isSneaking()) {
 				worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
@@ -218,7 +218,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@Override
 	public void onBlockPlacedBy(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer, @NotNull ItemStack stack) {
 		if (!worldIn.isRemote && stack.getTagCompound() != null) {
-			TEWoodBarrel te = Helpers.getTE(worldIn, pos, TEWoodBarrel.class);
+			TEWoodBarrel te = Utils.getTE(worldIn, pos, TEWoodBarrel.class);
 			if (te != null) {
 				worldIn.setBlockState(pos, state.withProperty(SEALED, true));
 				te.loadFromItemStack(stack);
@@ -272,7 +272,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@NotNull
 	public ItemStack getPickBlock(IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
 		ItemStack stack = new ItemStack(state.getBlock());
-		TEWoodBarrel tile = Helpers.getTE(world, pos, TEWoodBarrel.class);
+		TEWoodBarrel tile = Utils.getTE(world, pos, TEWoodBarrel.class);
 		if (tile != null && tile.isSealed()) {
 			tile.saveToItemStack(stack);
 		}

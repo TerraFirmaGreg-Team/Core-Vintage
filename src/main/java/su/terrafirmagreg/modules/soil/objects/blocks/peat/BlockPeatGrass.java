@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.soil.objects.blocks.peat;
 
-import net.dries007.tfc.client.GrassColorHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -20,6 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 

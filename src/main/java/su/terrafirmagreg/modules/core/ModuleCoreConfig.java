@@ -48,7 +48,6 @@ public class ModuleCoreConfig {
 
 	}
 
-
 	static {
 		ConfigAnytime.register(ModuleCoreConfig.class);
 	}

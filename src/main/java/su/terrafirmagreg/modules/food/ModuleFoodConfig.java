@@ -43,7 +43,6 @@ public class ModuleFoodConfig {
 
 	}
 
-
 	static {
 		ConfigAnytime.register(ModuleFoodConfig.class);
 	}

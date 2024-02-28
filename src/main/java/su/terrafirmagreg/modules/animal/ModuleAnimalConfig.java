@@ -43,7 +43,6 @@ public class ModuleAnimalConfig {
 
 	}
 
-
 	static {
 		ConfigAnytime.register(ModuleAnimalConfig.class);
 	}

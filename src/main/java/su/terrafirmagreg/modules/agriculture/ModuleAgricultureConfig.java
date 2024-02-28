@@ -43,7 +43,6 @@ public class ModuleAgricultureConfig {
 
 	}
 
-
 	static {
 		ConfigAnytime.register(ModuleAgricultureConfig.class);
 	}

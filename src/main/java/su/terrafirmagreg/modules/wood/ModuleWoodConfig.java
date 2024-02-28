@@ -31,70 +31,119 @@ public class ModuleWoodConfig {
 
 	public static final class BlocksCategory {
 
+		@Config.Comment("Barrel")
+		@Config.LangKey("config." + MOD_ID + ".wood.barrel")
+		public final Barrel BARREL = new Barrel();
 
+
+		public static final class Barrel {
+
+			@Config.Comment("How much fluid (mB) can a barrel hold?")
+			@Config.RangeInt(min = 100)
+			@Config.LangKey("config." + MOD_ID + ".wood.barrel.tank")
+			public int tank = 10_000;
+
+			@Config.Comment("List of fluids allowed to be inserted into a barrel.")
+			@Config.LangKey("config." + MOD_ID + ".wood.barrel.fluidWhitelist")
+			public String[] fluidWhitelist = {
+					"fresh_water",
+					"hot_water",
+					"salt_water",
+					"water",
+					"limewater",
+					"tannin",
+					"olive_oil",
+					"olive_oil_water",
+					"vinegar",
+					"rum",
+					"beer",
+					"whiskey",
+					"rye_whiskey",
+					"corn_whiskey",
+					"sake",
+					"vodka",
+					"cider",
+					"brine",
+					"milk",
+					"milk_curdled",
+					"milk_vinegar",
+					"white_dye",
+					"orange_dye",
+					"magenta_dye",
+					"light_blue_dye",
+					"yellow_dye",
+					"lime_dye",
+					"pink_dye",
+					"gray_dye",
+					"light_gray_dye",
+					"cyan_dye",
+					"purple_dye",
+					"blue_dye",
+					"brown_dye",
+					"green_dye",
+					"red_dye",
+					"black_dye"
+			};
+		}
 	}
 
 	public static final class ItemsCategory {
 
+		public final SupplyCart SUPPLY_CART = new SupplyCart();
+		public final Plow PLOW = new Plow();
+		public final AnimalCart ANIMAL_CART = new AnimalCart();
+
+		public static class SupplyCart {
+			public String[] canPull = {
+					"minecraft:donkey",
+					"minecraft:horse",
+					"minecraft:mule",
+					"minecraft:pig",
+					"minecraft:player",
+					"tfc:cameltfc",
+					"tfc:donkeytfc",
+					"tfc:horsetfc",
+					"tfc:muletfc"
+			};
+		}
+
+		public static class Plow {
+			public String[] canPull = {
+					"minecraft:donkey",
+					"minecraft:horse",
+					"minecraft:mule",
+					"minecraft:pig",
+					"minecraft:player",
+					"tfc:cameltfc",
+					"tfc:donkeytfc",
+					"tfc:horsetfc",
+					"tfc:muletfc"
+			};
+		}
+
+		public static class AnimalCart {
+			public String[] canPull = {
+					"minecraft:donkey",
+					"minecraft:horse",
+					"minecraft:mule",
+					"minecraft:pig",
+					"minecraft:player",
+					"tfc:cameltfc",
+					"tfc:donkeytfc",
+					"tfc:horsetfc",
+					"tfc:muletfc"
+			};
+		}
 
 	}
 
 	public static final class MiscCategory {
 
+		@Config.RequiresMcRestart
+		@Config.RangeDouble(min = -1.0D, max = 0.0D)
+		public final double SPEED_MODIFIER = -0.65D;
 
-	}
 
-	@Config.RequiresMcRestart
-	@Config.RangeDouble(min = -1.0D, max = 0.0D)
-	public static double SPEED_MODIFIER = -0.65D;
-
-	public static SupplyCart SUPPLY_CART = new SupplyCart();
-	public static Plow PLOW = new Plow();
-	public static AnimalCart ANIMAL_CART = new AnimalCart();
-
-	public static class SupplyCart {
-
-		public String[] canPull = {
-				"minecraft:donkey",
-				"minecraft:horse",
-				"minecraft:mule",
-				"minecraft:pig",
-				"minecraft:player",
-				"tfc:cameltfc",
-				"tfc:donkeytfc",
-				"tfc:horsetfc",
-				"tfc:muletfc"
-		};
-	}
-
-	public static class Plow {
-
-		public String[] canPull = {
-				"minecraft:donkey",
-				"minecraft:horse",
-				"minecraft:mule",
-				"minecraft:pig",
-				"minecraft:player",
-				"tfc:cameltfc",
-				"tfc:donkeytfc",
-				"tfc:horsetfc",
-				"tfc:muletfc"
-		};
-	}
-
-	public static class AnimalCart {
-
-		public String[] canPull = {
-				"minecraft:donkey",
-				"minecraft:horse",
-				"minecraft:mule",
-				"minecraft:pig",
-				"minecraft:player",
-				"tfc:cameltfc",
-				"tfc:donkeytfc",
-				"tfc:horsetfc",
-				"tfc:muletfc"
-		};
 	}
 
 	static {

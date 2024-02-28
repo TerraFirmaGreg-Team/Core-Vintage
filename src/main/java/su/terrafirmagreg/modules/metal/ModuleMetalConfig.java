@@ -43,7 +43,6 @@ public class ModuleMetalConfig {
 
 	}
 
-
 	static {
 		ConfigAnytime.register(ModuleMetalConfig.class);
 	}

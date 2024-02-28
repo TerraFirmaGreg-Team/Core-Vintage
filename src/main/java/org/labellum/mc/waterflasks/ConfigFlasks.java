@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 
-import static su.terrafirmagreg.Constants.MODID_WATERFLASKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_WATERFLASKS;
 
 /**
  * Top level items must be static, the subclasses' fields must not be static.

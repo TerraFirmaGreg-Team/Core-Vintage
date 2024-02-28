@@ -17,7 +17,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

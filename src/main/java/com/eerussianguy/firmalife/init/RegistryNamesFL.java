@@ -2,7 +2,7 @@ package com.eerussianguy.firmalife.init;
 
 import net.minecraft.util.ResourceLocation;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 public class RegistryNamesFL {
 	public static final ResourceLocation OVEN_RECIPE = new ResourceLocation(MODID_FL, "oven_recipe");

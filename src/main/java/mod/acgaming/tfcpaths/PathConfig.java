@@ -6,7 +6,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.Constants.MODID_TFCPATHS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCPATHS;
 
 @Config(modid = MODID_TFCPATHS, name = TFCPaths.NAME)
 public class PathConfig {

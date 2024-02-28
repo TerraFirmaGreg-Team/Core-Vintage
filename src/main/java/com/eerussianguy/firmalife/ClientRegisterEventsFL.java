@@ -52,7 +52,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_FL)

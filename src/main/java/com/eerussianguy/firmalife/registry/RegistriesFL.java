@@ -11,7 +11,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 @GameRegistry.ObjectHolder(MODID_FL)

@@ -10,7 +10,7 @@ import net.minecraft.util.math.Vec3d;
 import tfctech.client.render.models.ModelFridge;
 import tfctech.objects.tileentities.TEFridge;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 public class TESRFridge extends TileEntitySpecialRenderer<TEFridge> {
 	private static final ResourceLocation FRIDGE_TEXTURES = new ResourceLocation(MODID_TFCTECH, "textures/models/fridge.png");

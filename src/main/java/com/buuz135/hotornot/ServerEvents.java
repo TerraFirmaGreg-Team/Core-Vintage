@@ -24,7 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 @ParametersAreNonnullByDefault
 @EventBusSubscriber(modid = MODID_HOTORNOT)

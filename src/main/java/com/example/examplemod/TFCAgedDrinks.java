@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_AGEDDRINKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_AGEDDRINKS;
 
 @Mod(modid = MODID_AGEDDRINKS, name = TFCAgedDrinks.NAME, version = Tags.VERSION)
 public class TFCAgedDrinks {

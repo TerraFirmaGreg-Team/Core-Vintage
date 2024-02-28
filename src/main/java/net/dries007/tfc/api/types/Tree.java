@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class Tree extends IForgeRegistryEntry.Impl<Tree> {
 	@GameRegistry.ObjectHolder(MODID_TFC + ":sequoia")

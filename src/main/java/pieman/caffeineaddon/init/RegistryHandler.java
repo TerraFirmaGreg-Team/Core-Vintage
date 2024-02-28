@@ -17,7 +17,7 @@ import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.jeicompat.OreDictionaryCompat;
 import su.terrafirmagreg.api.models.ICustomModel;
 
-import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
 
 @EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class RegistryHandler {

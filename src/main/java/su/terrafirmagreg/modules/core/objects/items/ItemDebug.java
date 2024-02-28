@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -19,6 +18,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.modules.core.ModuleCore;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -47,19 +47,19 @@ public class ItemDebug extends ItemBase {
 				try {
 					tile.getClass().getMethod("debug").invoke(tile);
 				} catch (Exception t) {
-					TerraFirmaCraft.getLog().info("No debug method found to invoke on {}", tile);
+					ModuleCore.LOGGER.info("No debug method found to invoke on {}", tile);
 				}
 
-				TerraFirmaCraft.getLog().info("Tile Data: {}", tile.serializeNBT());
+				ModuleCore.LOGGER.info("Tile Data: {}", tile.serializeNBT());
 
 				IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 				if (inventory != null) {
-					TerraFirmaCraft.getLog().info("Found item handler: {}", inventory);
+					ModuleCore.LOGGER.info("Found item handler: {}", inventory);
 				}
 
 				IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 				if (fluids != null) {
-					TerraFirmaCraft.getLog().info("Found fluid handler: {}", fluids);
+					ModuleCore.LOGGER.info("Found fluid handler: {}", fluids);
 				}
 			}
 		} catch (Exception t) { /* Nothing Burger */ }

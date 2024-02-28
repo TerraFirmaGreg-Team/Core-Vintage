@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
 @EventBusSubscriber(modid = MODID_ASTIKORCARTS, value = {Side.CLIENT})
 public class ClientEventHandler {

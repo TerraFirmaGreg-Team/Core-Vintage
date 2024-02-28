@@ -8,7 +8,6 @@ import static su.terrafirmagreg.Tags.MOD_ID;
 public class ModUtils {
 
 	private ModUtils() {
-
 		throw new IllegalAccessError("Utility class");
 	}
 
@@ -20,6 +19,10 @@ public class ModUtils {
 	 */
 	public static ResourceLocation getID(String string) {
 		return new ResourceLocation(MOD_ID, string);
+	}
+
+	public static String getIDName(String string) {
+		return String.format(MOD_ID + string);
 	}
 
 

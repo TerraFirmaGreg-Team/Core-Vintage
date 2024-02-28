@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
 public class RenderPlowCart extends Render<EntityPlowCart> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_ASTIKORCARTS, "textures/entity/plowcart.png");

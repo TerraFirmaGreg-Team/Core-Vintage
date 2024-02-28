@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
 	public static final ResourceLocation LARGE_VESSEL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/large_vessel.png");

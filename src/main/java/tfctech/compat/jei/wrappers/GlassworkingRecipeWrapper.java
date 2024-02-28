@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.objects.fluids.TechFluids;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 public class GlassworkingRecipeWrapper implements IRecipeWrapper {
 	private static final ResourceLocation GLASS_TEXTURE = new ResourceLocation(MODID_TFCTECH, "textures/gui/glassworking/button.png");

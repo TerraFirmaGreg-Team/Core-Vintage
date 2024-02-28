@@ -12,7 +12,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 
 public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory> {

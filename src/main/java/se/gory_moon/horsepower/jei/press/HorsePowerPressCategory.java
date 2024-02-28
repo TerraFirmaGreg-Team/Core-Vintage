@@ -12,7 +12,7 @@ import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.lib.Reference;
 import se.gory_moon.horsepower.util.Localization;
 
-import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
 
 public class HorsePowerPressCategory extends HorsePowerCategory<PressRecipeWrapper> {
 

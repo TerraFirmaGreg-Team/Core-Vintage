@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
 public class PacketHandler {
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_ASTIKORCARTS);

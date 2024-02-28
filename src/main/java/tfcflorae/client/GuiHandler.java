@@ -32,7 +32,7 @@ import tfcflorae.util.OreDictionaryHelper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 public class GuiHandler implements IGuiHandler {
 	public static final ResourceLocation SACK_INVENTORY_BACKGROUND = new ResourceLocation(MODID_TFCF, "textures/gui/sack_inventory.png");

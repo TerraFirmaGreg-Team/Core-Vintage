@@ -15,7 +15,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiFirePit extends GuiContainerTE<TEFirePit> {
 	private static final ResourceLocation FIRE_PIT_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/fire_pit.png");

@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_EASYBREEDINGTFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_EASYBREEDINGTFC;
 
 @Mod(modid = MODID_EASYBREEDINGTFC, name = EasyBreedingTFC.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
 public class EasyBreedingTFC {

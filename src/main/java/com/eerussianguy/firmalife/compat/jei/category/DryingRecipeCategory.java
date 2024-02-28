@@ -11,7 +11,7 @@ import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 //TFC's quern recipe category
 public class DryingRecipeCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {

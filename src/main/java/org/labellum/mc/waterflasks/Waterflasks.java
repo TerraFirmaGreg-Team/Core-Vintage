@@ -43,10 +43,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.labellum.mc.waterflasks.item.ModItems;
 import org.labellum.mc.waterflasks.proxy.CommonProxy;
 import org.labellum.mc.waterflasks.recipe.ModRecipes;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_WATERFLASKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_WATERFLASKS;
 
 @Mod(modid = MODID_WATERFLASKS, name = Waterflasks.MOD_NAME, version = Tags.VERSION, dependencies = Waterflasks.DEPENDENCIES)
 public class Waterflasks {

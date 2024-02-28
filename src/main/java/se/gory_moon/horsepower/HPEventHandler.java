@@ -27,7 +27,7 @@ import se.gory_moon.horsepower.network.messages.SyncServerRecipesMessage;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.util.Utils;
 import se.gory_moon.horsepower.util.color.Colors;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.Arrays;
 import java.util.HashMap;

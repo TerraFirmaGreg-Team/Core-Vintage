@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import java.util.HashSet;
 import java.util.Set;
 
-import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
 @ObjectHolder(MODID_ASTIKORCARTS)
 public class ModItems {

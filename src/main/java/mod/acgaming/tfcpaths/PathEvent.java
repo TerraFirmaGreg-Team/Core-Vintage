@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.Constants.MODID_TFCPATHS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCPATHS;
 
 @EventBusSubscriber(modid = MODID_TFCPATHS)
 public class PathEvent {

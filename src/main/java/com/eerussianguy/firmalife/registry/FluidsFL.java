@@ -12,7 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import javax.annotation.Nonnull;
 

@@ -8,7 +8,7 @@ import net.minecraftforge.common.config.Config.Name;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.Fluid;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.function.BooleanSupplier;
 

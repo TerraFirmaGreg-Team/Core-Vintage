@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public final class FluidsTFC {
 	private static final ResourceLocation STILL = new ResourceLocation(MODID_TFC, "blocks/fluid_still");

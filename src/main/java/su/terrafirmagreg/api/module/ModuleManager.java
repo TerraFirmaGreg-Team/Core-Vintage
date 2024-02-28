@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class ModuleManager {
 
-	public static final Logger LOGGER = LogManager.getLogger("TFG Module Manager");
+	public static final Logger LOGGER = LogManager.getLogger("Module Manager");
 
 	private final String modId;
 	private final List<ModuleBase> moduleList;

@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiSalad extends GuiContainerTFC {
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/salad.png");

@@ -6,7 +6,7 @@ import net.sharkbark.cellars.init.ModBlocks;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 public class CellarsTab extends CreativeTabs {
 

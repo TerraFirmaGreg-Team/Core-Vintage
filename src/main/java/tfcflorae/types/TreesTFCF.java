@@ -10,8 +10,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tfcflorae.world.worldgen.TreeGenRandom;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

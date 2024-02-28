@@ -26,7 +26,7 @@ import se.gory_moon.horsepower.items.ModItems;
 import java.util.HashSet;
 import java.util.Set;
 
-import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_HORSEPOWER)

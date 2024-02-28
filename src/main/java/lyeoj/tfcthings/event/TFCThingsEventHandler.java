@@ -33,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS)
 public class TFCThingsEventHandler {

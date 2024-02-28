@@ -1,45 +1,45 @@
 package su.terrafirmagreg.api.util;
 
-import net.darkhax.bookshelf.Bookshelf;
+import com.google.common.base.CaseFormat;
+import com.google.common.base.Joiner;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import su.terrafirmagreg.TerraFirmaGreg;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public final class OreDictUtils {
 
+	private static final Multimap<String, ItemStack> MAP_ORE = HashMultimap.create();
+
 	private OreDictUtils() {
 		throw new IllegalAccessError("Utility class");
 	}
 
-	private static void registerOre(String name, Item ore) {
 
-		registerOre(name, new ItemStack(ore));
+	public static void init() {
+		MAP_ORE.forEach(OreDictionary::registerOre);
+		MAP_ORE.clear();
 	}
 
-	private static void registerOre(String name, Block ore) {
-
-		registerOre(name, new ItemStack(ore));
+	public static void register(Item item, Object... parts) {
+		register(new ItemStack(item), toString(parts));
 	}
 
-	public static void registerOre(String name, ItemStack... ores) {
-
-		for (ItemStack ore : ores) {
-			registerOre(name, ore);
-		}
+	public static void register(Block block, Object... parts) {
+		register(new ItemStack(block), toString(parts));
 	}
 
-	private static void registerOre(String name, ItemStack ore) {
-
-		if (ore != null && !ore.isEmpty()) {
-
-			OreDictionary.registerOre(name, ore);
+	public static void register(ItemStack itemStack, String parts) {
+		if (itemStack != null && !itemStack.isEmpty()) {
+			MAP_ORE.put(toString(parts), itemStack);
 		} else {
-
-			Bookshelf.LOG.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", name);
+			TerraFirmaGreg.LOGGER.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", parts);
 		}
 	}
 
@@ -50,30 +50,42 @@ public final class OreDictUtils {
 	 * @return A set of the ore names.
 	 */
 	public static Set<String> getOreNames(ItemStack stack) {
-
 		final Set<String> names = new HashSet<>();
 
 		for (final int id : OreDictionary.getOreIDs(stack)) {
-
 			names.add(OreDictionary.getOreName(id));
 		}
 
 		return names;
 	}
 
-	public static boolean contains(String oreDict, ItemStack itemStack) {
+	/**
+	 * Конвертирует массив из строк в oreDict, передавай в массив строки содержащие только буквы,
+	 * регистр значения не имеет, каждый элемент массива будет отформатирован в соответствие с camelCase.
+	 */
+	public static String toString(Object... parts) {
+		if (parts.length > 1) {
+			return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, Joiner.on('_').skipNulls().join(parts)
+					.replace("/", "_").toUpperCase());
+		}
 
-		if (itemStack.isEmpty()) {
+		return (String) parts[0];
+	}
+
+	public static boolean contains(ItemStack itemStack, String oreDict) {
+		if (!OreDictionary.doesOreNameExist(oreDict)) {
+			TerraFirmaGreg.LOGGER.warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", itemStack, oreDict);
 			return false;
 		}
 
-		int logWood = OreDictionary.getOreID(oreDict);
+		if (itemStack.isEmpty()) return false;
+
+		int needle = OreDictionary.getOreID(oreDict);
 		int[] oreIDs = OreDictionary.getOreIDs(itemStack);
 
 		//noinspection ForLoopReplaceableByForEach
 		for (int i = 0; i < oreIDs.length; i++) {
-
-			if (oreIDs[i] == logWood) {
+			if (oreIDs[i] == needle) {
 				return true;
 			}
 		}

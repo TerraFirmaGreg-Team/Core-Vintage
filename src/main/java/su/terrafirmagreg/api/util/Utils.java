@@ -2,6 +2,8 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -56,6 +58,16 @@ public class Utils {
 		Entity entity = world.getEntityByID(pos.getX());
 		if (!aClass.isInstance(entity)) return null;
 		return (T) entity;
+	}
+
+	/**
+	 * Simple method to spawn items in the world at a precise location, rather than using InventoryHelper
+	 */
+	public static void spawnItemStack(World world, BlockPos pos, ItemStack stack) {
+		if (stack.isEmpty())
+			return;
+		EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+		world.spawnEntity(entityitem);
 	}
 
 }

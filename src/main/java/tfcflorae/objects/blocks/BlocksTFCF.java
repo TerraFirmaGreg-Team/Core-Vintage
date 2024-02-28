@@ -67,7 +67,7 @@ import tfcflorae.util.agriculture.SeasonalTrees;
 import static net.dries007.tfc.api.types.Rock.Type.DIRT;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

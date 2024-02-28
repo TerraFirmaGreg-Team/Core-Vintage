@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static se.gory_moon.horsepower.blocks.BlockHPChoppingBase.createItemStack;
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class ShapedChoppingRecipe extends ShapedOreRecipe {
 	public final List<ItemStack> outputBlocks;

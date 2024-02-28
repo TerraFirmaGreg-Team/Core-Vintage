@@ -23,7 +23,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

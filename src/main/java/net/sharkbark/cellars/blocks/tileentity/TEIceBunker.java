@@ -34,7 +34,7 @@ import net.sharkbark.cellars.init.ModItems;
 
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 public class TEIceBunker extends TileEntityLockableLoot implements IInventory, ITickable {
 

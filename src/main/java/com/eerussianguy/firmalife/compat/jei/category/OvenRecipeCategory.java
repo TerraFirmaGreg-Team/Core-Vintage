@@ -11,7 +11,7 @@ import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 //this is just TFC's HeatCategory, copied over in case i need to change it
 public class OvenRecipeCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {

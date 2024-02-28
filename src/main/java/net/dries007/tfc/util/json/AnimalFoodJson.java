@@ -14,7 +14,7 @@ import net.minecraftforge.common.crafting.JsonContext;
 
 import java.lang.reflect.Type;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class AnimalFoodJson implements JsonDeserializer<AnimalFood> {
 	@Override

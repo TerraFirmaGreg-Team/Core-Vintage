@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 
 import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
 import static org.labellum.mc.waterflasks.Waterflasks.FLASK_BREAK;
-import static su.terrafirmagreg.Constants.MODID_WATERFLASKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_WATERFLASKS;
 
 public abstract class ItemFlask extends ItemFluidContainer implements IItemSize {
 

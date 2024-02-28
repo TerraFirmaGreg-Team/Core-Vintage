@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiPowderkeg.POWDERKEG_BACKGROUND;
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 
 public class GuiButtonPowderkegSeal extends GuiButtonTFC implements IButtonTooltip {

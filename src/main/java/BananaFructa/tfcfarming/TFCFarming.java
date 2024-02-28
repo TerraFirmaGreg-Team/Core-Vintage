@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.*;
+import static su.terrafirmagreg.api.lib.Constants.*;
 
 @Mod(modid = MODID_TFCFARMING, name = TFCFarming.name, version = Tags.VERSION, dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
 public class TFCFarming {

@@ -32,7 +32,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public abstract class BlockHPChoppingBase extends BlockHPBase {
 	public static final PropertyUnlistedString SIDE_TEXTURE = new PropertyUnlistedString("side_texture");

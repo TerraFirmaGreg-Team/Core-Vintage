@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 public class GuiSmelteryFirebox extends GuiContainerTE<TESmelteryFirebox> {
 	private static final ResourceLocation FIREBOX_BACKGROUND = new ResourceLocation(MODID_TFCTECH, "textures/gui/smeltery_firebox.png");

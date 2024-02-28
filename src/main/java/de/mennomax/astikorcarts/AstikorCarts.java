@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
 @Mod(modid = MODID_ASTIKORCARTS, version = Tags.VERSION)
 public class AstikorCarts {

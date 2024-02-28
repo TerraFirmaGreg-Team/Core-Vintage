@@ -78,7 +78,7 @@ import java.awt.*;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_TFCF)

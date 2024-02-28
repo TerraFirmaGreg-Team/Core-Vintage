@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class CapabilityFood {
 	public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "food");

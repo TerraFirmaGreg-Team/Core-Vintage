@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static com.buuz135.hotornot.HotOrNot.HOTORNOT_TAB;
-import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 @ObjectHolder(value = MODID_HOTORNOT)
 @EventBusSubscriber(modid = MODID_HOTORNOT)

@@ -11,7 +11,7 @@ import tfctech.compat.jei.wrappers.SmelteryRecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 @ParametersAreNonnullByDefault
 public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper> {

@@ -19,8 +19,8 @@ import tfcflorae.types.TreesTFCF;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @SideOnly(Side.CLIENT)
 public class TESRFruitLoomTFCF extends TESRBase<TEFruitLoom> {

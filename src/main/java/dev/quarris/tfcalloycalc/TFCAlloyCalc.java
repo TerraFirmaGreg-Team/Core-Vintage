@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_TFCALLOYCALC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCALLOYCALC;
 
 @Mod(modid = MODID_TFCALLOYCALC, name = ModRef.NAME, version = Tags.VERSION, dependencies = ModRef.DEPENDENCIES)
 public class TFCAlloyCalc {

@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 @SideOnly(Side.CLIENT)
 @EventBusSubscriber(modid = MODID_HOTORNOT, value = Side.CLIENT)

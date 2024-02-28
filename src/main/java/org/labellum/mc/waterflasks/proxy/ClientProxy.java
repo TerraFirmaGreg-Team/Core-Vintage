@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 
-import static su.terrafirmagreg.Constants.MODID_WATERFLASKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_WATERFLASKS;
 
 public class ClientProxy extends CommonProxy {
 	@Override

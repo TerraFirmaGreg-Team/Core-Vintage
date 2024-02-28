@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 public abstract class PotionFL extends Potion {
 	private static final ResourceLocation POTION_ICONS = new ResourceLocation(MODID_FL, "textures/gui/icons/potion.png");

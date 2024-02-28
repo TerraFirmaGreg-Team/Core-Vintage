@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 
 public class GuiButtonLargeVesselSeal extends GuiButtonTFC implements IButtonTooltip {

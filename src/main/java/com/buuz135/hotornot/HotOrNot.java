@@ -37,7 +37,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 @Mod(modid = MODID_HOTORNOT, name = HotOrNot.MOD_NAME, version = Tags.VERSION, useMetadata = true)
 public class HotOrNot {

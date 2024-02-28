@@ -16,7 +16,7 @@ import vazkii.patchouli.api.IComponentRenderContext;
 import javax.annotation.Nullable;
 import java.util.Collections;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public abstract class SimpleRecipeComponent<T extends IJEISimpleRecipe> extends CustomComponent {
 	@Nullable

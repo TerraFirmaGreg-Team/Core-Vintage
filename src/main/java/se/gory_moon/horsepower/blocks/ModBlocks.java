@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import se.gory_moon.horsepower.items.ItemBlockDouble;
 import se.gory_moon.horsepower.tileentity.*;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.HashSet;
 import java.util.Set;

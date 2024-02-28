@@ -1,6 +1,15 @@
-package su.terrafirmagreg;
+package su.terrafirmagreg.api.lib;
+
+import java.util.Random;
 
 public class Constants {
+
+	private Constants() {
+		throw new IllegalAccessError("Utility class");
+	}
+
+	public static final Random RANDOM = new Random();
+
 
 	public static final String MODID_TFC = "tfc";
 	public static final String MODID_TFCF = "tfcflorae";

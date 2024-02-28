@@ -22,7 +22,7 @@ import su.terrafirmagreg.Tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTOWERHEAT;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTOWERHEAT;
 
 @Mod(modid = MODID_TFCTOWERHEAT, version = Tags.VERSION, name = TowerHeat.name)
 public class TowerHeat {

@@ -20,7 +20,7 @@ import vazkii.patchouli.api.VariableHolder;
 import javax.annotation.Nullable;
 import java.util.Collections;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SuppressWarnings("unused")
 public class WeldingComponent extends CustomComponent {

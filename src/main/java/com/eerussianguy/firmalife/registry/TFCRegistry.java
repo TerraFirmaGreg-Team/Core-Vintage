@@ -48,8 +48,8 @@ import net.minecraftforge.registries.IForgeRegistryModifiable;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
-import static su.terrafirmagreg.Constants.MODID_FL;
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class TFCRegistry {

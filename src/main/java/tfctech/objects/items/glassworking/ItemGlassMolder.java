@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.ItemMiscTech;
 

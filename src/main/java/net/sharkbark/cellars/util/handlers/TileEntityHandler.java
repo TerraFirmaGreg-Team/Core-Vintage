@@ -7,7 +7,7 @@ import net.sharkbark.cellars.blocks.tileentity.TEFreezeDryer;
 import net.sharkbark.cellars.blocks.tileentity.TEIceBunker;
 import net.sharkbark.cellars.blocks.tileentity.TEInfectedAir;
 
-import static su.terrafirmagreg.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 public class TileEntityHandler {
 	public static void registerTileEntities() {

@@ -28,7 +28,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 @JEIPlugin
 public class JEIPluginFL implements IModPlugin {

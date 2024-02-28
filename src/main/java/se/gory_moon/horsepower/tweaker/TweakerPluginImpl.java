@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static crafttweaker.api.minecraft.CraftTweakerMC.getItemStacks;
-import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
 
 @ZenClass("mods.horsepower.Recipes")
 public class TweakerPluginImpl implements ITweakerPlugin {

@@ -30,7 +30,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.*;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 /*
  * TFC entity spawning mechanics

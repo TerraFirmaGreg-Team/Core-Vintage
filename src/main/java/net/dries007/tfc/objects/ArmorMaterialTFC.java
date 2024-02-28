@@ -12,7 +12,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 /**
  * This is an extension enum for the vanilla's ArmorMaterials.

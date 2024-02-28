@@ -15,7 +15,7 @@ import tfctech.objects.tileentities.TEElectricForge;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 public class GuiElectricForge extends GuiContainerTE<TEElectricForge> {
 	private static final ResourceLocation ELECTRIC_FORGE_BACKGROUND = new ResourceLocation(MODID_TFCTECH, "textures/gui/electric_forge.png");

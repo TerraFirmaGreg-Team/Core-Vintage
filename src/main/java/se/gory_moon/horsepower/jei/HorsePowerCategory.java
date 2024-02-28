@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
 
 public abstract class HorsePowerCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
 	public static final ResourceLocation COMPONENTS = new ResourceLocation(MODID_HORSEPOWER, "textures/gui/COMPONENTS.png");

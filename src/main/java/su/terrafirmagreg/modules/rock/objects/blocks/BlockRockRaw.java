@@ -1,9 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,6 +20,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.util.Utils;
+import su.terrafirmagreg.modules.rock.ModuleRockConfig;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
@@ -80,14 +80,14 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 
 			// No supporting solid blocks, so pop off as an item
 			worldIn.setBlockToAir(pos);
-			Helpers.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
+			Utils.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
 		}
 	}
 
 	@Override
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = playerIn.getHeldItemMainhand();
-		if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(
+		if (ModuleRockConfig.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(
 				pos.up(), true)) {
 			if (!worldIn.isRemote) {
 				// Create a stone anvil
@@ -112,7 +112,7 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 		super.getDrops(drops, world, pos, state, fortune);
 
 		// TODO
-//		if (RANDOM.nextDouble() < ConfigTFC.General.MISC.stoneGemDropChance) {
+//		if (RANDOM.nextDouble() < ModuleRockConfig.MISC.stoneGemDropChance) {
 //			drops.add(GemsFromRawRocks.getRandomGem());
 //		}
 	}

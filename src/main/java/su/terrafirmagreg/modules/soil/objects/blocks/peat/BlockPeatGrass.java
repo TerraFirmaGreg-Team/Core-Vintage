@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks.peat;
 
 import net.dries007.tfc.client.GrassColorHandler;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -46,8 +45,8 @@ public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
 				.withProperty(SOUTH, Boolean.FALSE)
 				.withProperty(WEST, Boolean.FALSE));
 
-		OreDictionaryHelper.register(this, "peat");
-		OreDictionaryHelper.register(this, "peat", "grass");
+//		OreDictionaryHelper.register(this, "peat");
+//		OreDictionaryHelper.register(this, "peat", "grass");
 		Blocks.FIRE.setFireInfo(this, 5, 5);
 	}
 

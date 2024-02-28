@@ -7,13 +7,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 
 import java.util.List;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 public class GuiSmelteryCauldron extends GuiContainerTE<TESmelteryCauldron> {
 	private static final ResourceLocation CAULDRON_BACKGROUND = new ResourceLocation(MODID_TFCTECH, "textures/gui/smeltery_cauldron.png");

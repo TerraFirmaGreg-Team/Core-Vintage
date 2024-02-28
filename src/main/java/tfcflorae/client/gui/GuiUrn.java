@@ -17,7 +17,7 @@ import tfcflorae.objects.te.TEUrn;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 public class GuiUrn extends GuiContainerTE<TEUrn> {
 	public static final ResourceLocation URN_BACKGROUND = new ResourceLocation(MODID_TFCF, "textures/gui/urn.png");

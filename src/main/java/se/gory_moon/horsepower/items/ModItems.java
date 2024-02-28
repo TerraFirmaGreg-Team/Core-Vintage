@@ -28,7 +28,7 @@ import se.gory_moon.horsepower.HorsePowerMod;
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.recipes.ShapedChoppingRecipe;
 import se.gory_moon.horsepower.recipes.ShapelessChoppingRecipe;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.*;
 

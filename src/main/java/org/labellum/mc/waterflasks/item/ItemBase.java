@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import org.labellum.mc.waterflasks.Waterflasks;
 
-import static su.terrafirmagreg.Constants.MODID_WATERFLASKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_WATERFLASKS;
 
 public class ItemBase extends Item {
 

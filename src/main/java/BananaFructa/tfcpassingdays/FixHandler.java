@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.Constants.MODID_TFCPASSINGDAYS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCPASSINGDAYS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCPASSINGDAYS)
 public class FixHandler {

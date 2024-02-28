@@ -36,7 +36,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public final class PlayerDataOverlay {

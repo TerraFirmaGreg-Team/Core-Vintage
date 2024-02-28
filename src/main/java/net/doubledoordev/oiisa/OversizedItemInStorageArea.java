@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
 
 import static net.doubledoordev.oiisa.OversizedItemInStorageArea.MOD_NAME;
 import static net.dries007.tfc.objects.items.ItemsTFC.WOOD_ASH;
-import static su.terrafirmagreg.Constants.MODID_OSA;
+import static su.terrafirmagreg.api.lib.Constants.MODID_OSA;
 
 @Mod(modid = MODID_OSA, name = MOD_NAME, version = Tags.VERSION)
 public class OversizedItemInStorageArea {

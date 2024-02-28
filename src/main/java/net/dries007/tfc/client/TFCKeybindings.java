@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
 @SideOnly(Side.CLIENT)

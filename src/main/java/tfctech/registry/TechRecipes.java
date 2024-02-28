@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 import tfctech.TechConfig;
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.api.recipes.SmelteryRecipe;
@@ -47,7 +47,7 @@ import tfctech.objects.items.metal.ItemTechMetal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 @SuppressWarnings({"ConstantConditions", "unused"})
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)

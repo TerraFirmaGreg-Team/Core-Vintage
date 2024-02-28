@@ -20,7 +20,7 @@ import tfcflorae.world.worldgen.soil.WorldGenSoilTypes;
 import tfcflorae.world.worldgen.structures.WorldGenStructures;
 import tfcflorae.world.worldgen.structures.WorldGenStructuresCorals;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 public class CommonProxy {

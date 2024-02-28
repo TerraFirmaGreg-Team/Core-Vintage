@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.lang.reflect.Field;
 
-import static su.terrafirmagreg.Constants.MODID_TFCAMBIENTAL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
 public class AmbientalHandler {
 

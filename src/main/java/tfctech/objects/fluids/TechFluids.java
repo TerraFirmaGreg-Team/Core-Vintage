@@ -5,7 +5,7 @@ import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import javax.annotation.Nonnull;
 

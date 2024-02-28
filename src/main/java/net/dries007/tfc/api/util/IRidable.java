@@ -17,7 +17,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public interface IRidable {
 	default <A extends EntityAnimal & IAnimalTFC> boolean attemptApplyHalter(A animal, World world, EntityPlayer player, ItemStack stack) {

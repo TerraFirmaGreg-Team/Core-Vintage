@@ -38,7 +38,7 @@ import su.terrafirmagreg.Tags;
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.Constants.MODID_PUDDLES;
+import static su.terrafirmagreg.api.lib.Constants.MODID_PUDDLES;
 
 @Mod(modid = MODID_PUDDLES, name = Puddles.NAME, version = Tags.VERSION)
 public class Puddles {

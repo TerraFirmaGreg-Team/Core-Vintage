@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 @SideOnly(Side.CLIENT)
 @EventBusSubscriber(modid = MODID_HOTORNOT, value = Side.CLIENT)

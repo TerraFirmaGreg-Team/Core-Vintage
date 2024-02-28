@@ -17,8 +17,8 @@ import tfcflorae.util.CapabilityHeatHandler;
 import tfcflorae.util.HelpersTFCF;
 import tfcflorae.util.fuel.FuelsTFCF;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 @Mod(modid = MODID_TFCF, name = TFCFlorae.NAME, version = Tags.VERSION, dependencies = TFCFlorae.DEPENDENCIES)

@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
 
 public class RenderPigvil extends RenderLiving<EntityPigvil> {
 

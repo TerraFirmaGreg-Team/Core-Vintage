@@ -2,7 +2,7 @@ package com.eerussianguy.firmalife.init;
 
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 import org.apache.commons.io.FileUtils;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.io.File;
 import java.io.IOException;

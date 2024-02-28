@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower.lib;
 
-import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
 
 public class Reference {
 	public static final String NAME = "Horse Power TFC";

@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static com.buuz135.hotornot.HotOrNot.MOD_NAME;
-import static su.terrafirmagreg.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 @EventBusSubscriber(modid = MODID_HOTORNOT)
 @Config(modid = MODID_HOTORNOT, type = Type.INSTANCE, name = MOD_NAME)

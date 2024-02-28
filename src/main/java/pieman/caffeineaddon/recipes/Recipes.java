@@ -20,7 +20,7 @@ import pieman.caffeineaddon.init.ModFluids;
 import pieman.caffeineaddon.init.ModItems;
 
 import static net.dries007.tfc.objects.fluids.FluidsTFC.FRESH_WATER;
-import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
 
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class Recipes {

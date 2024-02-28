@@ -32,7 +32,7 @@ import vazkii.patchouli.api.PatchouliAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class TFCPatchouliPlugin {
 	public static final ResourceLocation BOOK_UTIL_TEXTURES = new ResourceLocation(MODID_TFC, "textures/gui/book.png");

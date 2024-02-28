@@ -12,10 +12,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
 
 @Mod(modid = MODID_TFCTHINGS, name = TFCThings.NAME, version = Tags.VERSION, dependencies = TFCThings.DEPENDENCIES)
 public class TFCThings {

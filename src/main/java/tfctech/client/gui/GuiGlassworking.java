@@ -12,10 +12,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 import tfctech.objects.container.ContainerGlassworking;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 public class GuiGlassworking extends GuiContainerTFC {
 	private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Constants.MODID_TFC, "textures/gui/knapping.png");

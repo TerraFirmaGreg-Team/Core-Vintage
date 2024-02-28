@@ -51,7 +51,7 @@ import tfcflorae.util.RegenWildCropsTFCF;
 import java.util.*;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.

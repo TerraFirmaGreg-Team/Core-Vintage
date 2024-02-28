@@ -8,7 +8,7 @@ package net.dries007.tfc.api.util;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 public interface IGrowingPlant {
 	public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos);

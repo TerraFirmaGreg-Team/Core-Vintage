@@ -29,8 +29,7 @@ public class ModuleEventRouter {
 	private final Map<Class<? extends FMLStateEvent>, IFMLStateEventRoute> routes;
 
 	public ModuleEventRouter(List<ModuleBase> loadedModules) {
-
-		System.out.println("Loaded modules: " + loadedModules);
+		ModuleManager.LOGGER.debug("Loaded modules: " + loadedModules);
 
 		this.loadedModules = loadedModules;
 		this.routes = new HashMap<>();
@@ -150,7 +149,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
+	protected void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register BlockEvent start");
 			module.getRegistry().onRegisterBlock(event);
@@ -161,7 +160,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
+	protected void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ItemEvent start");
 			module.getRegistry().onRegisterItem(event);
@@ -171,7 +170,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
+	protected void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register PotionEvent start");
 			module.getRegistry().onRegisterPotion(event);
@@ -181,7 +180,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
+	protected void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register PotionTypeEvent start");
 			module.getRegistry().onRegisterPotionType(event);
@@ -191,7 +190,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
+	protected void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register BiomeEvent start");
 			module.getRegistry().onRegisterBiome(event);
@@ -201,7 +200,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
+	protected void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register SoundEvent start");
 			module.getRegistry().onRegisterSound(event);
@@ -211,7 +210,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
+	protected void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register EntityEvent start");
 			module.getRegistry().onRegisterEntity(event);
@@ -221,7 +220,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
+	protected void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register EnchantmentEvent start");
 			module.getRegistry().onRegisterEnchantment(event);
@@ -231,7 +230,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
+	protected void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register VillagerProfessionEvent start");
 			module.getRegistry().onRegisterVillagerProfession(event);
@@ -242,7 +241,7 @@ public class ModuleEventRouter {
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
+	protected void onRegisterRecipesEvent(RegistryEvent.Register<IRecipe> event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register RecipesEvent( start");
 			module.getRegistry().onRegisterRecipes(event);
@@ -257,7 +256,7 @@ public class ModuleEventRouter {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("unused")
-	public void onClientRegisterModelsEvent(ModelRegistryEvent event) {
+	protected void onClientRegisterModelsEvent(ModelRegistryEvent event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ModelsEvent start");
 			module.getRegistry().onRegisterModels(event);
@@ -269,7 +268,7 @@ public class ModuleEventRouter {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("unused")
-	public void onClientRegisterBlockColor(ColorHandlerEvent.Block event) {
+	protected void onClientRegisterBlockColor(ColorHandlerEvent.Block event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ModelsEvent start");
 			module.getRegistry().onRegisterBlockColor(event);
@@ -280,7 +279,7 @@ public class ModuleEventRouter {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("unused")
-	public void onClientRegisterItemColor(ColorHandlerEvent.Item event) {
+	protected void onClientRegisterItemColor(ColorHandlerEvent.Item event) {
 		this.fireEvent(module -> {
 			module.getLogger().debug("Register ModelsEvent start");
 			module.getRegistry().onRegisterItemColor(event);
@@ -292,13 +291,13 @@ public class ModuleEventRouter {
 	// - Internal
 	// --------------------------------------------------------------------------
 
-	private void fireEvent(Consumer<ModuleBase> moduleConsumer) {
+	protected void fireEvent(Consumer<ModuleBase> moduleConsumer) {
 		for (ModuleBase module : this.loadedModules) {
 			moduleConsumer.accept(module);
 		}
 	}
 
-	public <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
+	protected <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
 		//noinspection unchecked
 		IFMLStateEventRoute<E> route = this.routes.get(event.getClass());
 

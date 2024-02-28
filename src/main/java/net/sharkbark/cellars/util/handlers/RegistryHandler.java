@@ -23,7 +23,7 @@ import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import su.terrafirmagreg.api.models.ICustomModel;
 
-import static su.terrafirmagreg.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 @Mod.EventBusSubscriber(modid = MODID_CELLARS)
 public class RegistryHandler {

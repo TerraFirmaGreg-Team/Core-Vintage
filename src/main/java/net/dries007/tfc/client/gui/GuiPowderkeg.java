@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
 	public static final ResourceLocation POWDERKEG_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/powderkeg.png");

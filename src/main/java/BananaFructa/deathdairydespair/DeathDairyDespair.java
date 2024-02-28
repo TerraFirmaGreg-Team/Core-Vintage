@@ -12,7 +12,7 @@ import su.terrafirmagreg.Tags;
 
 import java.lang.reflect.Method;
 
-import static su.terrafirmagreg.Constants.MODID_DDD;
+import static su.terrafirmagreg.api.lib.Constants.MODID_DDD;
 
 @Mod(modid = MODID_DDD, name = DeathDairyDespair.NAME, version = Tags.VERSION)
 public class DeathDairyDespair {

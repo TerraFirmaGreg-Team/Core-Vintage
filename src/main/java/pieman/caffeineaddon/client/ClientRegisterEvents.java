@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pieman.caffeineaddon.init.ModBlocks;
 
-import static su.terrafirmagreg.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)

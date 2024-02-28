@@ -13,11 +13,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.Tags;
 
 import java.util.List;
-
-import static su.terrafirmagreg.Constants.MODID_TFCPASSINGDAYS;
 
 //@Mod(modid = MODID_TFCPASSINGDAYS, name = PassingDays.name, version = Tags.VERSION, dependencies = "after:galacticraftcore;after:immersivetech")
 public class PassingDays {

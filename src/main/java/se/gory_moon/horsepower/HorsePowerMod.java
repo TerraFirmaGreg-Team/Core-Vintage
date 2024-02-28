@@ -21,7 +21,7 @@ import se.gory_moon.horsepower.util.Utils;
 import su.terrafirmagreg.Tags;
 
 import static se.gory_moon.horsepower.lib.Reference.*;
-import static su.terrafirmagreg.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
 
 @Mod(modid = MODID_HORSEPOWER, version = Tags.VERSION, name = NAME, dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
 @EventBusSubscriber

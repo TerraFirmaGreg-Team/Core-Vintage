@@ -3,8 +3,6 @@ package su.terrafirmagreg.modules.core;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -36,13 +34,6 @@ public class ModuleCore extends ModuleBase {
 	public void onRegister() {
 		BlocksCore.onRegister(registryManager);
 		ItemsCore.onRegister(registryManager);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void onClientRegister() {
-		BlocksCore.onClientRegister(registryManager);
-		ItemsCore.onClientRegister(registryManager);
 	}
 
 	@Override

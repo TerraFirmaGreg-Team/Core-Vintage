@@ -20,7 +20,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiKnapping extends GuiContainerTFC {
 	private static final ResourceLocation BG_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping.png");

@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 public class ArmorMaterialsTFCF implements IArmorMaterialTFC {
 	public static final IArmorMaterialTFC PINEAPPLE_LEATHER = new ArmorMaterialTFC(EnumHelper.addArmorMaterial("pineapple_leather", MODID_TFCF + ":pineapple_leather", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F), 2, 2, 5);

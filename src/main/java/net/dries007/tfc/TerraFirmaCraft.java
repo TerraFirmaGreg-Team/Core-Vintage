@@ -47,7 +47,7 @@ import net.minecraftforge.fml.server.FMLServerHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 import static su.terrafirmagreg.Tags.VERSION;
 
 @SuppressWarnings("FieldMayBeFinal")

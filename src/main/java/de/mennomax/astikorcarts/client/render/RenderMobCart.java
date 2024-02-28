@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
-import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
 public class RenderMobCart extends Render<EntityMobCart> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_ASTIKORCARTS, "textures/entity/mobcart.png");

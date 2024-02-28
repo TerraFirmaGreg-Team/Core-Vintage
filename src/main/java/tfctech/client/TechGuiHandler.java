@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 public class TechGuiHandler implements IGuiHandler {
 	public static final ResourceLocation GUI_ELEMENTS = new ResourceLocation(MODID_TFCTECH, "textures/gui/elements.png");

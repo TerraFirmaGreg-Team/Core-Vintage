@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import tfcflorae.compat.firmalife.jei.wrappers.CastingRecipeWrapperKaoliniteFL;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class CastingCategoryKaoliniteFLCompat extends BaseRecipeCategory<CastingRecipeWrapperKaoliniteFL> {
 	private static final ResourceLocation ICONS = new ResourceLocation(MODID_TFC, "textures/gui/icons/jei.png");

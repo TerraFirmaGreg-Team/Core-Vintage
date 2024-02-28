@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_TFCALLOYCALC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCALLOYCALC;
 
 public class BlockCalc extends Block {
 

@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
-import static su.terrafirmagreg.Constants.MODID_ASTIKORCARTS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
 public class GuiPlow extends GuiContainer {
 	private static final ResourceLocation PLOW_GUI_TEXTURES = new ResourceLocation(MODID_ASTIKORCARTS, "textures/gui/container/plow.png");

@@ -39,7 +39,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.Optional;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 @GameRegistry.ObjectHolder(MODID_FL)

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import lombok.Getter;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -42,7 +41,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
 
 		setHarvestLevel("pickaxe", 0);
 
-		OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+//		OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
 	}
 
 	@Override

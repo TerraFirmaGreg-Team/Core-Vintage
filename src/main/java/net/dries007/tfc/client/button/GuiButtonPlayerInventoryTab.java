@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/icons.png");

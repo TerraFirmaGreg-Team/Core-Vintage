@@ -22,7 +22,7 @@ import vazkii.patchouli.common.item.PatchouliItems;
 
 import java.util.Map;
 
-import static su.terrafirmagreg.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 @Mod(modid = MODID_CELLARS, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
 @Mod.EventBusSubscriber(modid = MODID_CELLARS)

@@ -18,13 +18,6 @@ public final class BlocksCore {
 
 	@SideOnly(Side.CLIENT)
 	public static void onClientRegister(RegistryManager registry) {
-//        registry.registerClientModel(() -> {
-//            ModelRegistrationHelper.registerBlockItemModels(
-//                    DEBUG
-//
-//
-//            );
-//        });
 	}
 
 }

@@ -25,7 +25,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiAnvilTFC extends GuiContainerTE<TEAnvilTFC> {
 	public static final ResourceLocation ANVIL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/anvil.png");

@@ -9,7 +9,7 @@ import tfcflorae.objects.te.TEUrn;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 public class GuiButtonUrn extends GuiButtonTFC implements IButtonTooltip {
 	private final TEUrn tile;

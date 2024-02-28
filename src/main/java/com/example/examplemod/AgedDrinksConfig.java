@@ -3,7 +3,7 @@ package com.example.examplemod;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.fml.common.Mod;
 
-import static su.terrafirmagreg.Constants.MODID_AGEDDRINKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_AGEDDRINKS;
 
 
 @Config(modid = MODID_AGEDDRINKS, category = "")

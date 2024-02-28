@@ -37,7 +37,19 @@ public class ModelManager {
 
 	// ===== ItemBlock =============================================================================================================================//
 
-	public static void registerBlockItemModels(Block... blocks) {
+	public static void registerBlockInventoryModes(String subfolder, Block... blocks) {
+		for (Block block : blocks) ModelManager.registerBlockInventoryModel(subfolder, block);
+	}
+
+	public static void registerBlockInventoryModel(String subfolder, Block block) {
+		ResourceLocation registryName = block.getRegistryName();
+		Preconditions.checkNotNull(registryName, "Item %s has null registry name", block);
+		String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
+
+		ModelManager.registerBlockInventoryModel(block, modelLocation);
+	}
+
+	public static void registerBlockInventoryModes(Block... blocks) {
 		for (Block block : blocks) ModelManager.registerBlockInventoryModel(block);
 	}
 

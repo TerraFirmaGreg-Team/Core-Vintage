@@ -8,7 +8,7 @@ import su.terrafirmagreg.Tags;
 
 import java.lang.reflect.Field;
 
-import static su.terrafirmagreg.Constants.MODID_TFCSTACKS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCSTACKS;
 
 @Mod(modid = MODID_TFCSTACKS, name = TFCStacks.NAME, version = Tags.VERSION)
 public class TFCStacks {

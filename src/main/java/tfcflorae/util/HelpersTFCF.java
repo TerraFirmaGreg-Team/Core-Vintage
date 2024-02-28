@@ -4,7 +4,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.Arrays;
 import java.util.HashSet;

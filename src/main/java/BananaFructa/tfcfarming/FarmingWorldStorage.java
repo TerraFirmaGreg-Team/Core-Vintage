@@ -21,7 +21,7 @@ import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
 import java.util.*;
 
-import static su.terrafirmagreg.Constants.MODID_TFCFARMING;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCFARMING;
 
 public class FarmingWorldStorage extends WorldSavedData {
 

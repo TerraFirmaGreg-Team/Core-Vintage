@@ -23,7 +23,7 @@ import net.minecraftforge.registries.DataSerializerEntry;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public class EntitiesTFC {

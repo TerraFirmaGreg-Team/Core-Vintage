@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 @Mod(modid = MODID_FL, name = FirmaLife.MODNAME, version = Tags.VERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
 public class FirmaLife {

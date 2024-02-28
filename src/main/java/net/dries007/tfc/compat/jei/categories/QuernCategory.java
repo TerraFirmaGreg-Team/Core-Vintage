@@ -18,7 +18,7 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

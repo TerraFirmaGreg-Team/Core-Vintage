@@ -15,7 +15,7 @@ import net.dries007.tfc.compat.jei.util.BackgroundDrawable;
 import net.dries007.tfc.compat.jei.wrappers.VeinWrapper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;

@@ -17,7 +17,7 @@ import tfcflorae.objects.te.TECrate;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 public class GuiCrate extends GuiContainerTE<TECrate> {
 	public static final ResourceLocation CRATE_BACKGROUND = new ResourceLocation(MODID_TFCF, "textures/gui/crate.png");

@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivestock {
 	private static final int DAYS_TO_ADULTHOOD = 96;

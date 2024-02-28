@@ -15,7 +15,7 @@ import tfcflorae.compat.firmalife.jei.wrappers.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @JEIPlugin
 public class JEIPluginFLCompat implements IModPlugin {

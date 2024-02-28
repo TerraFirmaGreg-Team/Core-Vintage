@@ -29,7 +29,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import static net.dries007.tfc.Constants.GSON;
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public final class CapabilityDamageResistance {
 	public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "damage_resistance");

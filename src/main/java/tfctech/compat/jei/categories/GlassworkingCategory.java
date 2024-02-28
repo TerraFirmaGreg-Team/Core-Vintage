@@ -13,7 +13,7 @@ import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 @ParametersAreNonnullByDefault
 public class GlassworkingCategory extends BaseRecipeCategory<GlassworkingRecipeWrapper> {

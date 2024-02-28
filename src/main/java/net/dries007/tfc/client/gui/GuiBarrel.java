@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 	public static final ResourceLocation BARREL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/barrel.png");

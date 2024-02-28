@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.soil.objects.items;
 import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
@@ -22,8 +21,8 @@ public class ItemSoilMudBrick extends ItemBase implements ISoilItem {
 		this.itemVariant = itemVariant;
 		this.type = type;
 
-		OreDictionaryHelper.register(this, itemVariant.toString());
-		OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
+//		OreDictionaryHelper.register(this, itemVariant.toString());
+//		OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
 	}
 
 	@NotNull

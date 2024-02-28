@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-import static su.terrafirmagreg.Constants.MODID_TIME4TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TIME4TFC;
 
 /**
  * @author dmillerw

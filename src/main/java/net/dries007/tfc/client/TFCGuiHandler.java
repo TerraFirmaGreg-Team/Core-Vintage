@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class TFCGuiHandler implements IGuiHandler {
 	public static final ResourceLocation SMALL_INVENTORY_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/small_inventory.png");

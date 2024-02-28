@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS, value = Side.CLIENT)
 public class RegistryHandlerClient {

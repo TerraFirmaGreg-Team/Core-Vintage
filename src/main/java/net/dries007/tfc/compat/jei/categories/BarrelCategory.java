@@ -14,7 +14,7 @@ import net.dries007.tfc.compat.jei.wrappers.BarrelRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import su.terrafirmagreg.Constants;
+import su.terrafirmagreg.api.lib.Constants;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;

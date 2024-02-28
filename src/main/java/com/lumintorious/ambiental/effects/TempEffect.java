@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static su.terrafirmagreg.Constants.MODID_TFCAMBIENTAL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
 public class TempEffect extends Potion {
 	public static final TempEffect WARM = new TempEffect("warm", 0xFFFFCC00, 0);

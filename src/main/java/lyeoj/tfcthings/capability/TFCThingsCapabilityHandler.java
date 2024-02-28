@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Arrays;
 
-import static su.terrafirmagreg.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
 
 public class TFCThingsCapabilityHandler {
 	public static final ResourceLocation SHARPNESS_CAPABILITY = new ResourceLocation(MODID_TFCTHINGS, "sharpness");

@@ -4,7 +4,7 @@ import com.lumintorious.ambiental.TFCAmbientalConfig;
 import com.lumintorious.ambiental.Util;
 import com.lumintorious.ambiental.capability.TemperatureCapability;
 
-import static su.terrafirmagreg.Constants.MODID_TFCAMBIENTAL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
 public class BaseModifier {
 	private String unlocalizedName;

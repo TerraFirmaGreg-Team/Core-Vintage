@@ -9,7 +9,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.Constants.MODID_PUDDLES;
+import static su.terrafirmagreg.api.lib.Constants.MODID_PUDDLES;
 
 @Config(modid = MODID_PUDDLES, name = Puddles.NAME, type = Type.INSTANCE)
 public class PuddlesConfig {

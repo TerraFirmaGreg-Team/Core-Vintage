@@ -17,7 +17,7 @@ import tfcflorae.objects.blocks.entity.EntityBoatTFCF;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault

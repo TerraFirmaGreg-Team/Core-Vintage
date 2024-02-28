@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 @ParametersAreNonnullByDefault
 public final class CapPlayerDataFL {

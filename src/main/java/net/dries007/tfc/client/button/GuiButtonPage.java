@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiButtonPage extends GuiButton implements IButtonTooltip {
 	private static final ResourceLocation ICONS = new ResourceLocation(MODID_TFC, "textures/gui/icons.png");

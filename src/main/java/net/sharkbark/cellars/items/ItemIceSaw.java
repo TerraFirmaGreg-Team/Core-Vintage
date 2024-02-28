@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 @Mod.EventBusSubscriber(modid = MODID_CELLARS)
 public class ItemIceSaw extends ItemBase implements IMetalItem {

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_TFCAMBIENTAL;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
 @Mod(modid = MODID_TFCAMBIENTAL, name = TFCAmbiental.NAME, version = Tags.VERSION)
 public class TFCAmbiental {

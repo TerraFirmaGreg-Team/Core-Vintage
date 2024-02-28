@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 	@GameRegistry.ObjectHolder(MODID_TFC + ":unknown")

@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.wood.objects.tiles;
 import gregtech.api.items.toolitem.IGTTool;
 import lombok.Getter;
 import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
@@ -17,6 +16,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 
 @Getter
@@ -40,7 +40,7 @@ public class TEWoodToolRack extends TEBase {
 				item instanceof ItemHoe ||
 				item instanceof ItemSword ||
 				item instanceof ItemFlintAndSteel ||
-				OreDictionaryHelper.doesStackMatchOre(stack, "tool");
+				OreDictUtils.contains(stack, "tool");
 	}
 
 	public void onBreakBlock() {

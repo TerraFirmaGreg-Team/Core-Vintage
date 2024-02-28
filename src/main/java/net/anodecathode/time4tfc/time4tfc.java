@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import su.terrafirmagreg.Tags;
 
-import static su.terrafirmagreg.Constants.MODID_TIME4TFC;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TIME4TFC;
 
 /**
  * @author AnodeCathode, dmillerw

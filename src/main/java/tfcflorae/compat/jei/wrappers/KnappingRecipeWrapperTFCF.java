@@ -15,7 +15,7 @@ import tfcflorae.objects.items.rock.ItemMud;
 
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 	private static final ResourceLocation PINEAPPLE_LEATHER_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/pineapple_leather_button.png");

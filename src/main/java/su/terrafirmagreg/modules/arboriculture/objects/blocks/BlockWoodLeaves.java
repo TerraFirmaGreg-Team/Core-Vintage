@@ -36,6 +36,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -52,7 +53,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static net.dries007.tfc.Constants.RNG;
 import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 
@@ -294,8 +294,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 					if (chance < 10) chance = 10;
 				}
 
-				if (RANDOM.nextInt(chance) == 0) {
-					ItemStack drop = new ItemStack(getItemDropped(state, RANDOM, fortune), 1, damageDropped(state));
+				if (Constants.RANDOM.nextInt(chance) == 0) {
+					ItemStack drop = new ItemStack(getItemDropped(state, Constants.RANDOM, fortune), 1, damageDropped(state));
 					if (!drop.isEmpty()) {
 						drops.add(drop);
 					}
@@ -357,33 +357,33 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 		double x = pos.getX();
 		double y = pos.getY();
 		double z = pos.getZ();
-		for (int i = 1; i < RNG.nextInt(4); i++) {
-			switch (RNG.nextInt(4)) {
+		for (int i = 1; i < Constants.RANDOM.nextInt(4); i++) {
+			switch (Constants.RANDOM.nextInt(4)) {
 				case 1:
-					TFCParticles.LEAF1.sendToAllNear(world, x + RNG.nextFloat() /
-							particleScale, y - RNG.nextFloat() /
-							particleScale, z + RNG.nextFloat() /
-							particleScale, (RNG.nextFloat() - 0.5) /
-							particleScale, -0.15D + RNG.nextFloat() /
-							particleScale, (RNG.nextFloat() - 0.5) /
+					TFCParticles.LEAF1.sendToAllNear(world, x + Constants.RANDOM.nextFloat() /
+							particleScale, y - Constants.RANDOM.nextFloat() /
+							particleScale, z + Constants.RANDOM.nextFloat() /
+							particleScale, (Constants.RANDOM.nextFloat() - 0.5) /
+							particleScale, -0.15D + Constants.RANDOM.nextFloat() /
+							particleScale, (Constants.RANDOM.nextFloat() - 0.5) /
 							particleScale, 90);
 					break;
 				case 2:
-					TFCParticles.LEAF2.sendToAllNear(world, x + RNG.nextFloat() /
-							particleScale, y - RNG.nextFloat() /
-							particleScale, z + RNG.nextFloat() /
-							particleScale, (RNG.nextFloat() - 0.5) /
-							particleScale, -0.15D + RNG.nextFloat() /
-							particleScale, (RNG.nextFloat() - 0.5) /
+					TFCParticles.LEAF2.sendToAllNear(world, x + Constants.RANDOM.nextFloat() /
+							particleScale, y - Constants.RANDOM.nextFloat() /
+							particleScale, z + Constants.RANDOM.nextFloat() /
+							particleScale, (Constants.RANDOM.nextFloat() - 0.5) /
+							particleScale, -0.15D + Constants.RANDOM.nextFloat() /
+							particleScale, (Constants.RANDOM.nextFloat() - 0.5) /
 							particleScale, 70);
 					break;
 				case 3:
-					TFCParticles.LEAF3.sendToAllNear(world, x + RNG.nextFloat() /
-							particleScale, y - RNG.nextFloat() /
-							particleScale, z + RNG.nextFloat() /
-							particleScale, (RNG.nextFloat() - 0.5) /
-							particleScale, -0.15D + RNG.nextFloat() /
-							particleScale, (RNG.nextFloat() - 0.5) /
+					TFCParticles.LEAF3.sendToAllNear(world, x + Constants.RANDOM.nextFloat() /
+							particleScale, y - Constants.RANDOM.nextFloat() /
+							particleScale, z + Constants.RANDOM.nextFloat() /
+							particleScale, (Constants.RANDOM.nextFloat() - 0.5) /
+							particleScale, -0.15D + Constants.RANDOM.nextFloat() /
+							particleScale, (Constants.RANDOM.nextFloat() - 0.5) /
 							particleScale, 80);
 					break;
 			}

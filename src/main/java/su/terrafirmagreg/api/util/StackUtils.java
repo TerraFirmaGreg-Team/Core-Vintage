@@ -514,11 +514,7 @@ public final class StackUtils {
 
 		thing = Block.getBlockFromName(name);
 
-		if (thing != null) {
-			return thing;
-		}
-
-		return null;
+		return thing;
 	}
 
 	/**

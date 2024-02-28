@@ -4,13 +4,7 @@ import java.util.Random;
 
 public class Constants {
 
-	private Constants() {
-		throw new IllegalAccessError("Utility class");
-	}
-
 	public static final Random RANDOM = new Random();
-
-
 	public static final String MODID_TFC = "tfc";
 	public static final String MODID_TFCF = "tfcflorae";
 	public static final String MODID_TFCTECH = "tfctech";
@@ -36,5 +30,9 @@ public class Constants {
 	public static final String MODID_TFCFARMING = "tfcfarming";
 	public static final String MODID_TFCPASSINGDAYS = "tfcpassingdays";
 	public static final String MODID_TFCTOWERHEAT = "tfctowerheat";
+
+	private Constants() {
+		throw new IllegalAccessError("Utility class");
+	}
 
 }

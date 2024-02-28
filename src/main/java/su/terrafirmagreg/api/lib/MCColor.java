@@ -191,56 +191,6 @@ public class MCColor extends Color {
 	}
 
 	/**
-	 * Writes the color object's data to the ItemStack's NBTTagCompound.
-	 *
-	 * @param stack The ItemStack to write the color data to.
-	 */
-	public void writeToStack(@Nonnull ItemStack stack) {
-
-		this.writeToNBT(stack.getTagCompound());
-	}
-
-	/**
-	 * Writes the color object's data to the NBTTagCompound.
-	 *
-	 * @param tag The NBTTagCompound to write the color data to.
-	 */
-	public void writeToNBT(@Nonnull NBTTagCompound tag) {
-
-		tag.setIntArray("Color", new int[]{this.getRed(), this.getGreen(), this.getBlue()});
-	}
-
-	/**
-	 * Gets the components as an integer array.
-	 *
-	 * @return The components as an integer array.
-	 */
-	public int[] getComponents() {
-
-		return new int[]{this.getRed(), this.getGreen(), this.getBlue()};
-	}
-
-	public float getRedF() {
-
-		return this.getRed() / 255f;
-	}
-
-	public float getGreenF() {
-
-		return this.getGreen() / 255f;
-	}
-
-	public float getBlueF() {
-
-		return this.getBlue() / 255f;
-	}
-
-	public void setRenderColor() {
-
-		GlStateManager.color(this.getRed(), this.getGreen(), this.getBlue());
-	}
-
-	/**
 	 * Creates a random MCColor.
 	 *
 	 * @param rand An instance of Random.
@@ -300,5 +250,55 @@ public class MCColor extends Color {
 	public static boolean isAcceptable(@Nonnull NBTTagCompound tag) {
 
 		return tag.hasKey("Color") && tag.getIntArray("Color").length == 3;
+	}
+
+	/**
+	 * Writes the color object's data to the ItemStack's NBTTagCompound.
+	 *
+	 * @param stack The ItemStack to write the color data to.
+	 */
+	public void writeToStack(@Nonnull ItemStack stack) {
+
+		this.writeToNBT(stack.getTagCompound());
+	}
+
+	/**
+	 * Writes the color object's data to the NBTTagCompound.
+	 *
+	 * @param tag The NBTTagCompound to write the color data to.
+	 */
+	public void writeToNBT(@Nonnull NBTTagCompound tag) {
+
+		tag.setIntArray("Color", new int[]{this.getRed(), this.getGreen(), this.getBlue()});
+	}
+
+	/**
+	 * Gets the components as an integer array.
+	 *
+	 * @return The components as an integer array.
+	 */
+	public int[] getComponents() {
+
+		return new int[]{this.getRed(), this.getGreen(), this.getBlue()};
+	}
+
+	public float getRedF() {
+
+		return this.getRed() / 255f;
+	}
+
+	public float getGreenF() {
+
+		return this.getGreen() / 255f;
+	}
+
+	public float getBlueF() {
+
+		return this.getBlue() / 255f;
+	}
+
+	public void setRenderColor() {
+
+		GlStateManager.color(this.getRed(), this.getGreen(), this.getBlue());
 	}
 }

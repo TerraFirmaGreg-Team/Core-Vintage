@@ -2,14 +2,10 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -35,8 +31,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.arboriculture.ModuleArboricultureConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -74,10 +74,10 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
 		Blocks.FIRE.setFireInfo(this, 5, 5);
 
-//        OreDictionaryHelper.register(this, "logWood");
-//        OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
+//        OreDictUtils.register(this, "logWood");
+//        OreDictUtils.register(this, variant.toString(), "wood", type.toString());
 //        if (type.canMakeTannin()) {
-//            OreDictionaryHelper.register(this, variant.toString(), "wood", "tannin");
+//            OreDictUtils.register(this, variant.toString(), "wood", "tannin");
 //        }
 	}
 
@@ -152,7 +152,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
 	@Override
 	public boolean isToolEffective(@NotNull String type, @NotNull IBlockState state) {
-		return ("hammer".equals(type) && ConfigTFC.General.TREE.enableHammerSticks) ||
+		return ("hammer".equals(type) && ModuleArboricultureConfig.MISC.enableHammerSticks) ||
 				super.isToolEffective(type, state);
 	}
 
@@ -210,17 +210,17 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 		if (toolClasses.contains("axe") || toolClasses.contains("saw")) {
 			// Harvest the block normally, saws and axes are valid tools regardless
 			super.harvestBlock(worldIn, player, pos, state, te, stack);
-		} else if (toolClasses.contains("hammer") && ConfigTFC.General.TREE.enableHammerSticks) {
+		} else if (toolClasses.contains("hammer") && ModuleArboricultureConfig.MISC.enableHammerSticks) {
 			// Hammers drop sticks here - we duplicate the original method
 			//noinspection ConstantConditions
 			player.addStat(StatList.getBlockStats(this));
 			player.addExhaustion(0.005F);
 
 			if (!worldIn.isRemote) {
-				Helpers.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D),
+				StackUtils.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D),
 						new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
 			}
-		} else if (ConfigTFC.General.TREE.requiresAxe) {
+		} else if (ModuleArboricultureConfig.MISC.requiresAxe) {
 			// Here, there was no valid tool used. Deny spawning any drops since logs require axes
 			//noinspection ConstantConditions
 			player.addStat(StatList.getBlockStats(this));
@@ -244,20 +244,20 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 		final Set<String> toolClasses = stack.getItem().getToolClasses(stack);
 		if (toolClasses.contains("axe") && !toolClasses.contains("saw")) {
 			// Axes, not saws, cause tree felling
-			if (!state.getValue(PLACED) && ConfigTFC.General.TREE.enableFelling) {
+			if (!state.getValue(PLACED) && ModuleArboricultureConfig.MISC.enableFelling) {
 				player.setHeldItem(EnumHand.MAIN_HAND, stack); // Reset so we can damage however we want before vanilla
 				if (!removeTree(world, pos, player, stack,
-						OreDictionaryHelper.doesStackMatchOre(stack, "axeStone") ||
-								OreDictionaryHelper.doesStackMatchOre(stack, "hammerStone"))) {
+						OreDictUtils.contains(stack, "axeStone") ||
+								OreDictUtils.contains(stack, "hammerStone"))) {
 					// Don't remove the block, the rest of the tree broke instead
 					return false;
 				}
 				return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
 			}
-		} else if (toolClasses.contains("hammer") && ConfigTFC.General.TREE.enableHammerSticks) {
+		} else if (toolClasses.contains("hammer") && ModuleArboricultureConfig.MISC.enableHammerSticks) {
 			// Hammers drop sticks instead
 			return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
-		} else if (!toolClasses.contains("saw") && ConfigTFC.General.TREE.requiresAxe) {
+		} else if (!toolClasses.contains("saw") && ModuleArboricultureConfig.MISC.requiresAxe) {
 			// Don't drop anything if broken by hand
 			return world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
 		}
@@ -298,14 +298,14 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 		for (final BlockPos pos1 : logs.subList(0, Math.min(logs.size(), maxLogs))) {
 			if (explosion) {
 				// Explosions are 30% Efficient: no TNT powered tree farms.
-				if (Constants.RNG.nextFloat() < 0.3) {
+				if (Constants.RANDOM.nextFloat() < 0.3) {
 					if (!world.isRemote) {
-						Helpers.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
+						StackUtils.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
 					}
 				}
 			} else {
 				// Stone tools are 60% efficient (default config)
-				if (!stoneTool || Constants.RNG.nextFloat() < ConfigTFC.General.TREE.stoneAxeReturnRate && !world.isRemote) {
+				if (!stoneTool || Constants.RANDOM.nextFloat() < ModuleArboricultureConfig.MISC.stoneAxeReturnRate && !world.isRemote) {
 					harvestBlock(world, player, pos1, world.getBlockState(pos1), null, stack);
 				}
 				stack.damageItem(1, player);

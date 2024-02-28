@@ -5,8 +5,6 @@ import java.util.Random;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public final class MathConstants {
 
-	private MathConstants() {}
-
 	/**
 	 * A close to zero double epsilon value
 	 */
@@ -47,17 +45,14 @@ public final class MathConstants {
 	 * PI/2 as a floating point value
 	 */
 	public static final float HALF_PI = 0.5f * PI;
-
 	/**
 	 * PI/4 as a floating point value
 	 */
 	public static final float QUARTER_PI = 0.25f * PI;
-
 	/**
 	 * 3PI/4 as a floating point value
 	 */
 	public static final float THREE_QUARTER_PI = 0.75f * PI;
-
 	/**
 	 * 1/PI as a floating point value
 	 */
@@ -88,5 +83,9 @@ public final class MathConstants {
 	private static final double BIG_ENOUGH_FLOOR = BIG_ENOUGH_INT + 0.0000;
 	private static final double BIG_ENOUGH_ROUND = BIG_ENOUGH_INT + 0.5000;
 	private static final double BIG_ENOUGH_CEIL = BIG_ENOUGH_INT + 0.9999;
+
+	private MathConstants() {
+		throw new IllegalAccessError("Utility class");
+	}
 
 }

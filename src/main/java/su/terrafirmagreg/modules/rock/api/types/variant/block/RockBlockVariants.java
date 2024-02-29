@@ -10,7 +10,6 @@ public class RockBlockVariants {
 
 
 	public static RockBlockVariant RAW;
-	public static RockBlockVariant MOSSY_RAW;
 	public static RockBlockVariant STAIRS_RAW;
 	public static RockBlockVariant SLAB_DOUBLE_RAW;
 	public static RockBlockVariant SLAB_RAW;

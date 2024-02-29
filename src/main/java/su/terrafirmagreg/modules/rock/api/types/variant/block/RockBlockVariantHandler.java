@@ -47,12 +47,6 @@ public class RockBlockVariantHandler {
 				.setFallingSpecification(COLLAPSABLE_ROCK)
 				.build();
 
-		RockBlockVariants.MOSSY_RAW = new RockBlockVariant.Builder("mossy_raw")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockMossy::new)
-				.setFallingSpecification(COLLAPSABLE_ROCK)
-				.build();
-
 		RockBlockVariants.STAIRS_RAW = new RockBlockVariant.Builder("stairs/raw")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockStairs::new)

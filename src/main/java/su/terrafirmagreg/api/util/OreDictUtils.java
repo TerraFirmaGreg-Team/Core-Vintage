@@ -65,8 +65,10 @@ public final class OreDictUtils {
 	 */
 	public static String toString(Object... parts) {
 		if (parts.length > 1) {
-			return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, Joiner.on('_').skipNulls().join(parts)
-					.replace("/", "_").toUpperCase());
+			return CaseFormat.UPPER_UNDERSCORE.to(
+					CaseFormat.LOWER_CAMEL,
+					Joiner.on('_').skipNulls().join(parts).replace("/", "_").toUpperCase()
+			);
 		}
 
 		return (String) parts[0];

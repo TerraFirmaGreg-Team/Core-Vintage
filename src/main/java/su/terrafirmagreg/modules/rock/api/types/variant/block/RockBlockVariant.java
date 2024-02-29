@@ -19,15 +19,14 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
 /**
  * Класс, представляющий тип блока породы.
  */
+@Getter
 public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
 	private static final Set<RockBlockVariant> ROCK_BLOCK_VARIANTS = new ObjectOpenHashSet<>();
 	private static final AtomicInteger idCounter = new AtomicInteger(16);
 
 	private final String name;
-	@Getter
 	private final float baseHardness;
-	@Getter
 	private final Specification specification;
 
 	private RockBlockVariant(Builder builder) {
@@ -42,13 +41,11 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 		if (!ROCK_BLOCK_VARIANTS.add(this))
 			throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
 
-
 		for (var type : RockType.getTypes()) {
-
 			if (BlocksRock.ROCK_BLOCKS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
 				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 
-			if (builder.hasStoneType) createStoneType(idCounter.getAndIncrement(), type, builder.name);
+			if (builder.hasStoneType) createStoneType(idCounter.getAndIncrement(), type);
 		}
 	}
 
@@ -70,8 +67,8 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 		return specification != null;
 	}
 
-	public void createStoneType(int id, RockType type, String name) {
-		new StoneType(id, type + "_" + name, SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
+	public void createStoneType(int id, RockType type) {
+		new StoneType(id, type + "_" + this.name, SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
 				() -> BlocksRock.getBlock(this, type).getDefaultState(),
 				state -> state.getBlock() == BlocksRock.getBlock(this, type), false
 		);

@@ -20,6 +20,26 @@ public class RockBlockVariantHandler {
 				.setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
 				.build();
 
+		RockBlockVariants.STAIRS_COBBLE = new RockBlockVariant.Builder("stairs/cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockStairs::new)
+				.build();
+
+		RockBlockVariants.SLAB_DOUBLE_COBBLE = new RockBlockVariant.Builder("slab_double/cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Double::new)
+				.build();
+
+		RockBlockVariants.SLAB_COBBLE = new RockBlockVariant.Builder("slab/cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Half::new)
+				.build();
+
+		RockBlockVariants.WALL_COBBLE = new RockBlockVariant.Builder("wall/cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockWall::new)
+				.build();
+
 		RockBlockVariants.RAW = new RockBlockVariant.Builder("raw")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockRaw::new)
@@ -33,6 +53,51 @@ public class RockBlockVariantHandler {
 				.setFallingSpecification(COLLAPSABLE_ROCK)
 				.build();
 
+		RockBlockVariants.STAIRS_RAW = new RockBlockVariant.Builder("stairs/raw")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockStairs::new)
+				.build();
+
+		RockBlockVariants.SLAB_DOUBLE_RAW = new RockBlockVariant.Builder("slab_double/raw")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Double::new)
+				.build();
+
+		RockBlockVariants.SLAB_RAW = new RockBlockVariant.Builder("slab/raw")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Half::new)
+				.build();
+
+		RockBlockVariants.WALL_RAW = new RockBlockVariant.Builder("wall/raw")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockWall::new)
+				.build();
+
+		RockBlockVariants.SMOOTH = new RockBlockVariant.Builder("smooth")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSmooth::new)
+				.build();
+
+		RockBlockVariants.STAIRS_SMOOTH = new RockBlockVariant.Builder("stairs/smooth")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockStairs::new)
+				.build();
+
+		RockBlockVariants.SLAB_DOUBLE_SMOOTH = new RockBlockVariant.Builder("slab_double/smooth")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Double::new)
+				.build();
+
+		RockBlockVariants.SLAB_SMOOTH = new RockBlockVariant.Builder("slab/smooth")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Half::new)
+				.build();
+
+		RockBlockVariants.WALL_SMOOTH = new RockBlockVariant.Builder("wall/smooth")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockWall::new)
+				.build();
+
 		RockBlockVariants.BRICKS = new RockBlockVariant.Builder("bricks")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockBricks::new)
@@ -43,14 +108,29 @@ public class RockBlockVariantHandler {
 				.setFactory(BlockRockMossy::new)
 				.build();
 
+		RockBlockVariants.STAIRS_BRICK = new RockBlockVariant.Builder("stairs/bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockStairs::new)
+				.build();
+
+		RockBlockVariants.SLAB_DOUBLE_BRICK = new RockBlockVariant.Builder("slab_double/bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Double::new)
+				.build();
+
+		RockBlockVariants.SLAB_BRICK = new RockBlockVariant.Builder("slab/bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Half::new)
+				.build();
+
+		RockBlockVariants.WALL_BRICK = new RockBlockVariant.Builder("wall/bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockWall::new)
+				.build();
+
 		RockBlockVariants.CRACKED_BRICKS = new RockBlockVariant.Builder("cracked_bricks")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockBricks::new)
-				.build();
-
-		RockBlockVariants.SMOOTH = new RockBlockVariant.Builder("smooth")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSmooth::new)
 				.build();
 
 		RockBlockVariants.CHISELED = new RockBlockVariant.Builder("chiseled")
@@ -106,86 +186,6 @@ public class RockBlockVariantHandler {
 		RockBlockVariants.STAND_GEM = new RockBlockVariant.Builder("stand_gem")
 				.setBaseHardness(1F)
 				.setFactory(BlockRockStandGem::new)
-				.build();
-
-		RockBlockVariants.STAIRS_RAW = new RockBlockVariant.Builder("stairs/raw")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockStairs::new)
-				.build();
-
-		RockBlockVariants.STAIRS_COBBLE = new RockBlockVariant.Builder("stairs/cobble")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockStairs::new)
-				.build();
-
-		RockBlockVariants.STAIRS_SMOOTH = new RockBlockVariant.Builder("stairs/smooth")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockStairs::new)
-				.build();
-
-		RockBlockVariants.STAIRS_BRICK = new RockBlockVariant.Builder("stairs/bricks")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockStairs::new)
-				.build();
-
-		RockBlockVariants.SLAB_DOUBLE_RAW = new RockBlockVariant.Builder("slab_double/raw")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Double::new)
-				.build();
-
-		RockBlockVariants.SLAB_DOUBLE_COBBLE = new RockBlockVariant.Builder("slab_double/cobble")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Double::new)
-				.build();
-
-		RockBlockVariants.SLAB_DOUBLE_SMOOTH = new RockBlockVariant.Builder("slab_double/smooth")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Double::new)
-				.build();
-
-		RockBlockVariants.SLAB_DOUBLE_BRICK = new RockBlockVariant.Builder("slab_double/bricks")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Double::new)
-				.build();
-
-		RockBlockVariants.SLAB_RAW = new RockBlockVariant.Builder("slab/raw")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Half::new)
-				.build();
-
-		RockBlockVariants.SLAB_COBBLE = new RockBlockVariant.Builder("slab/cobble")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Half::new)
-				.build();
-
-		RockBlockVariants.SLAB_SMOOTH = new RockBlockVariant.Builder("slab/smooth")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Half::new)
-				.build();
-
-		RockBlockVariants.SLAB_BRICK = new RockBlockVariant.Builder("slab/bricks")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockSlab.Half::new)
-				.build();
-
-		RockBlockVariants.WALL_RAW = new RockBlockVariant.Builder("wall/raw")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockWall::new)
-				.build();
-
-		RockBlockVariants.WALL_COBBLE = new RockBlockVariant.Builder("wall/cobble")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockWall::new)
-				.build();
-
-		RockBlockVariants.WALL_SMOOTH = new RockBlockVariant.Builder("wall/smooth")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockWall::new)
-				.build();
-
-		RockBlockVariants.WALL_BRICK = new RockBlockVariant.Builder("wall/bricks")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockWall::new)
 				.build();
 	}
 }

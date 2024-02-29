@@ -28,7 +28,6 @@ public class ModuleRock extends ModuleBase {
 	public ModuleRock() {
 		super(2);
 		this.enableAutoRegistry(ROCK_TAB);
-
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class ModuleRock extends ModuleBase {
 		RockTypeHandler.init();
 		RockBlockVariantHandler.init();
 		RockItemVariantHandler.init();
-
+		
 		BlocksRock.onRegister(registryManager);
 		ItemsRock.onRegister(registryManager);
 	}

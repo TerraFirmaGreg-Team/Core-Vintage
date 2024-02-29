@@ -27,7 +27,7 @@ public interface IRockBlock extends IRockType, IAutoReg, IItemSize {
 	 * @return Окончательная твердость блока породы.
 	 */
 	default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-		return getBlockVariant().getBaseHardness() + getType().getRockCategory().getHardnessModifier();
+		return this.getBlockVariant().getBaseHardness() + this.getType().getRockCategory().getHardnessModifier();
 	}
 
 	/**
@@ -37,7 +37,7 @@ public interface IRockBlock extends IRockType, IAutoReg, IItemSize {
 	 */
 	@NotNull
 	default String getName() {
-		return String.format("rock/%s/%s", getBlockVariant(), getType());
+		return String.format("rock/%s/%s", this.getBlockVariant(), this.getType());
 	}
 
 

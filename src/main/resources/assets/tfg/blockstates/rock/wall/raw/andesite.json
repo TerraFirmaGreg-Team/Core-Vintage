@@ -13,43 +13,40 @@
     ],
     "inventory": [
       {
-        "model": "wall_inventory"
+        "model": "tfg:block/rock/wall/inventory"
       }
     ],
-"variant": {
-  "cobblestone": {},
-  "mossy_cobblestone": {}
-},
+    
     "north": {
       "true": {
-        "submodel": "wall_side"
+        "submodel": "tfg:block/rock/wall/side"
       },
       "false": {}
     },
     "east": {
       "true": {
-        "submodel": "wall_side",
+        "submodel": "tfg:block/rock/wall/side",
         "y": 90
       },
       "false": {}
     },
     "south": {
       "true": {
-        "submodel": "wall_side",
+        "submodel": "tfg:block/rock/wall/side",
         "y": 180
       },
       "false": {}
     },
     "west": {
       "true": {
-        "submodel": "wall_side",
+        "submodel": "tfg:block/rock/wall/side",
         "y": 270
       },
       "false": {}
     },
     "up": {
       "true": {
-        "submodel": "wall_post",
+        "submodel": "tfg:block/rock/wall/post",
         "y": 270
       },
       "false": {}

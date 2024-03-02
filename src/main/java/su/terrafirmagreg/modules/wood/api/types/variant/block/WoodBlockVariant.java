@@ -56,6 +56,10 @@ public class WoodBlockVariant implements Comparable<WoodBlockVariant> {
 		return WOOD_BLOCK_VARIANTS;
 	}
 
+	public Block getBlock(WoodType type) {
+		return BlocksWood.getBlock(this, type);
+	}
+
 	/**
 	 * Возвращает строковое представление варианта деревянного блока (его имя).
 	 *

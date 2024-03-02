@@ -58,6 +58,10 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 		return ROCK_BLOCK_VARIANTS;
 	}
 
+	public Block getBlock(RockType type) {
+		return BlocksRock.getBlock(this, type);
+	}
+
 	@Override
 	public String toString() {
 		return name;
@@ -73,6 +77,7 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 				state -> state.getBlock() == BlocksRock.getBlock(this, type), false
 		);
 	}
+
 
 	@Override
 	public int compareTo(@NotNull RockBlockVariant blockVariant) {

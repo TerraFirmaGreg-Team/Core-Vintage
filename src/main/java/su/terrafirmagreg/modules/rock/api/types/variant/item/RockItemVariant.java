@@ -44,6 +44,10 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
 		return ROCK_ITEM_VARIANTS;
 	}
 
+	public Item getItem(RockType type) {
+		return ItemsRock.getItem(this, type);
+	}
+
 	/**
 	 * Возвращает строковое представление типа блока породы.
 	 *

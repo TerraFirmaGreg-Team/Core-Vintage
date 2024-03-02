@@ -51,6 +51,10 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
 		return SOIL_BLOCK_VARIANTS;
 	}
 
+	public Block getBlock(SoilType type) {
+		return BlocksSoil.getBlock(this, type);
+	}
+
 	/**
 	 * Возвращает строковое представление варианта блока почвы.
 	 *

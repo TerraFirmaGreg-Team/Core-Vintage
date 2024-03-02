@@ -44,6 +44,10 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
 		return WOOD_ITEM_VARIANTS;
 	}
 
+	public Item getItem(WoodType type) {
+		return ItemsWood.getItem(this, type);
+	}
+
 	/**
 	 * Возвращает строковое представление варианта деревянного блока (его имя).
 	 *

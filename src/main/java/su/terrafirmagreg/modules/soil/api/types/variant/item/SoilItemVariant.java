@@ -44,6 +44,10 @@ public class SoilItemVariant implements Comparable<SoilItemVariant> {
 		return SOIL_ITEM_VARIANTS;
 	}
 
+	public Item getItem(SoilType type) {
+		return ItemsSoil.getItem(this, type);
+	}
+
 	/**
 	 * Возвращает строковое представление варианта деревянного блока (его имя).
 	 *

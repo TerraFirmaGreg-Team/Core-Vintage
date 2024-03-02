@@ -1,10 +1,6 @@
 {
-	"parent": "block/upper_slab",
+	"parent": "tfg:block/rock/slab/upper",
   "textures": {
-    "particle": "#all",
-    "bottom": "#all",
-    "top": "#all",
-    "side": "#all",
     "overlay": "#overlay"
   },
 	"elements": [

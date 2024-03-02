@@ -1,9 +1,6 @@
-{   "parent": "block/half_slab",
+{   
+  "parent": "tfg:block/rock/slab/half",
     "textures": {
-        "particle": "#all",
-        "bottom": "#all",
-        "top": "#all",
-        "side": "#all",
         "overlay": "#overlay"
     },
     "elements": [

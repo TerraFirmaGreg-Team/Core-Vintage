@@ -1,0 +1,54 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/wall/inventory",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/soil/mud_bricks/humus"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {
+        "model": "tfg:soil/wall/inventory"
+      }
+    ],
+    "north": {
+      "true": {
+        "submodel": "tfg:soil/wall/side"
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "submodel": "tfg:soil/wall/side",
+        "y": 90
+      },
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "submodel": "tfg:soil/wall/side",
+        "y": 180
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "submodel": "tfg:soil/wall/side",
+        "y": 270
+      },
+      "false": {}
+    },
+    "up": {
+      "true": {
+        "submodel": "tfg:soil/wall/post",
+        "y": 270
+      },
+      "false": {}
+    }
+  }
+}

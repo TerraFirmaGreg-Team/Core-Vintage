@@ -5,7 +5,6 @@ import lombok.Getter;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMycelium;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -27,13 +26,10 @@ import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.api.models.Blockstates.*;
+
 @Getter
 public class BlockSoilMycelium extends BlockMycelium implements ISoilBlockVariant {
-
-	public static final PropertyBool NORTH = PropertyBool.create("north");
-	public static final PropertyBool EAST = PropertyBool.create("east");
-	public static final PropertyBool SOUTH = PropertyBool.create("south");
-	public static final PropertyBool WEST = PropertyBool.create("west");
 
 	private final SoilBlockVariant blockVariant;
 	private final SoilType type;

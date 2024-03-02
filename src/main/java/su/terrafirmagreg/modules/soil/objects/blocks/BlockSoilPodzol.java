@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -18,12 +17,9 @@ import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 
-public class BlockSoilPodzol extends BlockSoil {
+import static su.terrafirmagreg.api.models.Blockstates.*;
 
-	public static final PropertyBool NORTH = PropertyBool.create("north");
-	public static final PropertyBool EAST = PropertyBool.create("east");
-	public static final PropertyBool SOUTH = PropertyBool.create("south");
-	public static final PropertyBool WEST = PropertyBool.create("west");
+public class BlockSoilPodzol extends BlockSoil {
 
 	public BlockSoilPodzol(SoilBlockVariant blockVariant, SoilType type) {
 		super(blockVariant, type);

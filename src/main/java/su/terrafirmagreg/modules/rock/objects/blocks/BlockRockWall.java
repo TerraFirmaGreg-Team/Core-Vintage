@@ -39,7 +39,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
 		this.type = type;
 
 		setSoundType(SoundType.STONE);
-
 		setHarvestLevel("pickaxe", 0);
 
 //		OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());

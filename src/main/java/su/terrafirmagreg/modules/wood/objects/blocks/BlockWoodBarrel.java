@@ -6,7 +6,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -40,6 +39,8 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
+import static su.terrafirmagreg.api.models.Blockstates.SEALED;
+
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes.
  * Sealed state is stored in block state and cached in TE, synced when updated via custom packet
@@ -48,8 +49,6 @@ import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
  * @see BarrelRecipe
  */
 public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock {
-
-	public static final PropertyBool SEALED = PropertyBool.create("sealed");
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
 	public BlockWoodBarrel(WoodBlockVariant variant, WoodType type) {

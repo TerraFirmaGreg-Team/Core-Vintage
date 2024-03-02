@@ -1,0 +1,155 @@
+{   
+  "parent": "tfg:block/soil/slab/half",
+    "textures": {
+        "overlay": "#overlay"
+    },
+    "elements": [
+      {
+        "from": [
+          0,
+          0,
+          0
+        ],
+        "to": [
+          16,
+          8,
+          16
+        ],
+        "faces": {
+          "north": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#all",
+            "cullface": "north"
+          },
+          "east": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#all",
+            "cullface": "east"
+          },
+          "south": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#all",
+            "cullface": "south"
+          },
+          "west": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#all",
+            "cullface": "west"
+          },
+          "up": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#all"
+          },
+          "down": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#all",
+            "cullface": "down"
+          }
+        }
+      },
+      {
+        "name": "overlay",
+        "from": [
+          0,
+          0,
+          0
+        ],
+        "to": [
+          16,
+          8,
+          16
+        ],
+        "faces": {
+          "north": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "north"
+          },
+          "east": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "east"
+          },
+          "south": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "south"
+          },
+          "west": {
+            "uv": [
+              0,
+              8,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "west"
+          },
+          "up": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#overlay"
+          },
+          "down": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "down"
+          }
+        }
+      }
+    ]
+}

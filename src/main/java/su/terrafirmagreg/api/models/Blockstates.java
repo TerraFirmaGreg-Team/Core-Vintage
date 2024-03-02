@@ -17,6 +17,16 @@ public final class Blockstates {
 	 */
 	public static final PropertyBool POWERED = PropertyBool.create("powered");
 
+	public static final PropertyBool MOSSY = PropertyBool.create("mossy");
+
+	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
+
+	public static final PropertyBool SEALED = PropertyBool.create("sealed");
+
+	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
+	public static final PropertyBool PLACED = PropertyBool.create("placed");
+	public static final PropertyBool SMALL = PropertyBool.create("small");
+
 	/**
 	 * Used to hold another block state. This is useful for mimicking other blocks.
 	 */
@@ -42,6 +52,8 @@ public final class Blockstates {
 	 */
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
 
+	public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+
 	/**
 	 * Used to determine the direction a block is facing. Only includes horizontal directions.
 	 * (N-S-W-E)
@@ -51,32 +63,32 @@ public final class Blockstates {
 	/**
 	 * Used to determine if a block is connected on the bottom face.
 	 */
-	public static final PropertyBool CONNECTED_DOWN = PropertyBool.create("connected_down");
+	public static final PropertyBool DOWN = PropertyBool.create("down");
 
 	/**
 	 * Used to determine if a block is connected on the upward face.
 	 */
-	public static final PropertyBool CONNECTED_UP = PropertyBool.create("connected_up");
+	public static final PropertyBool UP = PropertyBool.create("up");
 
 	/**
 	 * Used to determine if a block is connected on the northern face.
 	 */
-	public static final PropertyBool CONNECTED_NORTH = PropertyBool.create("connected_north");
+	public static final PropertyBool NORTH = PropertyBool.create("north");
 
 	/**
 	 * Used to determine if a block is connected on the southern face.
 	 */
-	public static final PropertyBool CONNECTED_SOUTH = PropertyBool.create("connected_south");
+	public static final PropertyBool SOUTH = PropertyBool.create("south");
 
 	/**
 	 * Used to determine if a block is connected on the eastern face.
 	 */
-	public static final PropertyBool CONNECTED_EAST = PropertyBool.create("connected_east");
+	public static final PropertyBool EAST = PropertyBool.create("east");
 
 	/**
 	 * Used to determine if a block is connected on the western face.
 	 */
-	public static final PropertyBool CONNECTED_WEST = PropertyBool.create("connected_west");
+	public static final PropertyBool WEST = PropertyBool.create("west");
 
 	/**
 	 * Used to determine if a block has been enabled or not.

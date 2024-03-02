@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -29,10 +28,12 @@ import su.terrafirmagreg.modules.rock.data.BlocksRock;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.api.models.Blockstates.CAN_FALL;
+
 public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 
 	/* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
-	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
+
 
 	public BlockRockRaw(RockBlockVariant blockVariant, RockType type) {
 		super(blockVariant, type);

@@ -4,10 +4,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -34,10 +31,10 @@ import su.terrafirmagreg.modules.rock.objects.tiles.TERockGemDisplay;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockRockStandGem extends BlockRock implements ITEBlock {
+import static su.terrafirmagreg.api.models.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.api.models.Blockstates.UP;
 
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
-	public static final PropertyBool TOP = PropertyBool.create("top");
+public class BlockRockStandGem extends BlockRock implements ITEBlock {
 
 	public BlockRockStandGem(RockBlockVariant blockVariant, RockType type) {
 		super(blockVariant, type);
@@ -46,8 +43,8 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 		this.setHarvestLevel("pickaxe", 0);
 		this.setHardness(1.0F);
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(FACING, EnumFacing.EAST)
-				.withProperty(TOP, Boolean.TRUE));
+				.withProperty(HORIZONTAL, EnumFacing.EAST)
+				.withProperty(UP, Boolean.TRUE));
 	}
 
 	@Nonnull
@@ -68,21 +65,21 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 
 
 	protected @NotNull BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, TOP);
+		return new BlockStateContainer(this, HORIZONTAL, UP);
 	}
 
 	public @NotNull IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
-				.withProperty(TOP, meta / 4 % 2 != 0);
+				.withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
+				.withProperty(UP, meta / 4 % 2 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getHorizontalIndex() + (state.getValue(TOP) ? 4 : 0);
+		return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(UP) ? 4 : 0);
 	}
 
 	public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
 	}
 
 	@Nonnull
@@ -125,9 +122,9 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 	public void neighborChanged(@NotNull IBlockState state, @NotNull World worldIn, BlockPos pos, @NotNull Block blockIn, BlockPos fromPos) {
 		if (fromPos.equals(pos.up())) {
 			if (worldIn.getBlockState(fromPos).getBlock() instanceof BlockAir) {
-				state = state.withProperty(TOP, Boolean.TRUE);
+				state = state.withProperty(UP, Boolean.TRUE);
 			} else {
-				state = state.withProperty(TOP, Boolean.FALSE);
+				state = state.withProperty(UP, Boolean.FALSE);
 			}
 			worldIn.setBlockState(pos, state, 2);
 		}

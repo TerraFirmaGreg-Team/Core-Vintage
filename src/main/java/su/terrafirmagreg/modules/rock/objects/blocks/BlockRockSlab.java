@@ -14,6 +14,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
@@ -31,7 +32,6 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
 import su.terrafirmagreg.modules.rock.data.BlocksRock;
-import su.terrafirmagreg.modules.rock.objects.itemblocks.ItemRockSlab;
 
 import java.util.List;
 import java.util.Random;
@@ -40,8 +40,10 @@ import java.util.Random;
 public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICustomStateMapper {
 
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
+
 	private final RockBlockVariant blockVariant;
 	private final RockType type;
+
 	protected Block block;
 	protected Half halfSlab;
 	protected Double doubleSlab;
@@ -51,8 +53,8 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICu
 
 		this.blockVariant = blockVariant;
 		this.type = type;
-		this.block = getFullBlockFromSlab(blockVariant, type);
 		this.useNeighborBrightness = true;
+		this.block = getFullBlockFromSlab(blockVariant, type);
 
 		var state = blockState.getBaseState();
 		if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
@@ -87,7 +89,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICu
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return this.isDouble() ? null : new ItemRockSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
+		return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
 	}
 
 	@Override

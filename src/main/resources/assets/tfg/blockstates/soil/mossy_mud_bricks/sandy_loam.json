@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/mossy_bricks",
+    "textures": {
+      "all": "tfg:blocks/soil/mud_bricks/sandy_loam"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

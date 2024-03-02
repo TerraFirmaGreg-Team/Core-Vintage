@@ -7,7 +7,6 @@ import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -43,13 +42,14 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import java.util.*;
 
+import static su.terrafirmagreg.api.models.Blockstates.PLACED;
+import static su.terrafirmagreg.api.models.Blockstates.SMALL;
+
 
 @MethodsReturnNonnullByDefault
 @Getter
 public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
-	public static final PropertyBool PLACED = PropertyBool.create("placed");
-	public static final PropertyBool SMALL = PropertyBool.create("small");
 
 	public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
 	public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);

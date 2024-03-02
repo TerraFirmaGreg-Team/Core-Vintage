@@ -8,7 +8,6 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -53,6 +52,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static su.terrafirmagreg.api.models.Blockstates.HARVESTABLE;
 import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 
@@ -60,7 +60,7 @@ import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLe
 public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfulBlock {
 
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
-	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
+
 	private final WoodBlockVariant blockVariant;
 	private final WoodType type;
 
@@ -410,7 +410,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new StateMap.Builder()
-				.ignore(BlockLeaves.DECAYABLE, BlockWoodLeaves.HARVESTABLE)
+				.ignore(BlockLeaves.DECAYABLE, HARVESTABLE)
 				.build());
 	}
 

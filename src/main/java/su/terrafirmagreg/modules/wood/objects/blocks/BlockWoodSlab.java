@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +32,6 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 import su.terrafirmagreg.modules.wood.data.BlocksWood;
-import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodSlab;
 
 import java.util.Random;
 
@@ -39,23 +39,24 @@ import java.util.Random;
 public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, IColorfulBlock, ICustomStateMapper {
 
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-	public final Block block;
+
 	private final WoodBlockVariant blockVariant;
 	private final WoodType type;
+
+	protected Block block;
 	protected Half halfSlab;
+	protected Double doubleSlab;
 
 	private BlockWoodSlab(WoodBlockVariant blockVariant, WoodType type) {
 		super(Material.WOOD);
 
-		IBlockState state = blockState.getBaseState();
-
-		if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
-
-		this.block = BlocksWood.getBlock(WoodBlockVariants.PLANKS, type);
 		this.blockVariant = blockVariant;
 		this.type = type;
 		this.useNeighborBrightness = true;
+		this.block = BlocksWood.getBlock(WoodBlockVariants.PLANKS, type);
 
+		IBlockState state = blockState.getBaseState();
+		if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
 		setLightOpacity(255);
 		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
 		setSoundType(SoundType.STONE);
@@ -64,7 +65,7 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return this.isDouble() ? null : new ItemBlockWoodSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
+		return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
 	}
 
 	@NotNull
@@ -199,8 +200,6 @@ public abstract class BlockWoodSlab extends BlockSlab implements IWoodBlock, ICo
 	}
 
 	public static class Half extends BlockWoodSlab {
-
-		public final Double doubleSlab;
 
 		public Half(WoodBlockVariant blockVariant, WoodType type) {
 			super(blockVariant, type);

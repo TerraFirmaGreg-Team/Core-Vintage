@@ -12,6 +12,14 @@
     ],
     "inventory": [
       {}
-    ]
+    ],
+    "mossy": {
+      "true": {
+        "textures": {
+          "overlay": "tfg:blocks/soil/overlay/mossy/bricks"
+        }
+      },
+      "false": {}
+    }
   }
 }

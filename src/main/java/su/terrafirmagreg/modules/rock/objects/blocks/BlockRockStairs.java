@@ -35,7 +35,6 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 		this.useNeighborBrightness = true;
 
 		setSoundType(SoundType.STONE);
-
 		setHarvestLevel("pickaxe", 0);
 
 		//OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());

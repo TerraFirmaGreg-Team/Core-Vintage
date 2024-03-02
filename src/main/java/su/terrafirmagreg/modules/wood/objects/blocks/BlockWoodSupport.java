@@ -2,8 +2,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import net.dries007.tfc.ConfigTFC;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -27,16 +25,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static su.terrafirmagreg.api.models.Blockstates.*;
+
 public class BlockWoodSupport extends BlockWood {
-
-	/* Axis of the support, Y for vertical placed, Z/X for horizontal */
-	public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
-	/* Connection sides used by vertical supports */
-	public static final PropertyBool NORTH = PropertyBool.create("north");
-	public static final PropertyBool SOUTH = PropertyBool.create("south");
-	public static final PropertyBool EAST = PropertyBool.create("east");
-	public static final PropertyBool WEST = PropertyBool.create("west");
-
 	private static final AxisAlignedBB VERTICAL_SUPPORT_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1.0D, 0.6875D);
 	private static final AxisAlignedBB HORIZONTAL_SUPPORT_AABB = new AxisAlignedBB(0.375D, 0.625D, 0.375D, 0.625D, 1.0D, 0.625D);
 	private static final AxisAlignedBB CONNECTION_N_AABB = new AxisAlignedBB(0.3125D, 0.625D, 0.0D, 0.6875D, 1.0D, 0.3125D);

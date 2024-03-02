@@ -4,7 +4,7 @@
     "model": "tfg:rock/wall/inventory",
     "uvlock": true,
     "textures": {
-      "wall": "tfg:blocks/rock/cobble/quartzite"
+      "all": "tfg:blocks/rock/cobble/quartzite"
     }
   },
   "variants": {

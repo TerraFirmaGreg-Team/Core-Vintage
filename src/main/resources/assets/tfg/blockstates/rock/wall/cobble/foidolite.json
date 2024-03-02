@@ -4,7 +4,7 @@
     "model": "tfg:rock/wall/inventory",
     "uvlock": true,
     "textures": {
-      "wall": "tfg:blocks/rock/cobble/foidolite"
+      "all": "tfg:blocks/rock/cobble/foidolite"
     }
   },
   "variants": {

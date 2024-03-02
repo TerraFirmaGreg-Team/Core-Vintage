@@ -170,7 +170,6 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICu
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
-
 	}
 
 	@Override

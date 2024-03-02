@@ -4,7 +4,7 @@
     "model": "tfg:rock/wall/inventory",
     "uvlock": true,
     "textures": {
-      "wall": "tfg:blocks/rock/raw/jaspillite"
+      "all": "tfg:blocks/rock/raw/jaspillite"
     }
   },
   "variants": {

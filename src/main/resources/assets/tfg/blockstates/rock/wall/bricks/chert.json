@@ -4,7 +4,7 @@
     "model": "tfg:rock/wall/inventory",
     "uvlock": true,
     "textures": {
-      "wall": "tfg:blocks/rock/bricks/chert"
+      "all": "tfg:blocks/rock/bricks/chert"
     }
   },
   "variants": {

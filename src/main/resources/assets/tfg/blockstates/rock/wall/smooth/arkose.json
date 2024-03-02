@@ -4,7 +4,7 @@
     "model": "tfg:rock/wall/inventory",
     "uvlock": true,
     "textures": {
-      "wall": "tfg:blocks/rock/smooth/arkose"
+      "all": "tfg:blocks/rock/smooth/arkose"
     }
   },
   "variants": {

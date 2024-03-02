@@ -27,7 +27,7 @@
         "y": 270
       }
     },
-    "top": {
+    "up": {
       "true": {},
       "false": {
         "model": "tfg:rock/stand_gem_alt"

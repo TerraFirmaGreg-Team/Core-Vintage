@@ -36,11 +36,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static su.terrafirmagreg.api.models.Blockstates.SEALED;
 
 
 public class TEWoodBarrel extends TETickableInventory implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback {
@@ -131,7 +132,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	@Override
 	public void onLoad() {
 		if (!world.isRemote) {
-			sealed = world.getBlockState(pos).getValue(BlockWoodBarrel.SEALED);
+			sealed = world.getBlockState(pos).getValue(SEALED);
 			recipe = BarrelRecipe.get(inventory.getStackInSlot(SLOT_ITEM), tank.getFluid());
 		}
 	}
@@ -359,7 +360,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
 		ItemStack barrelStack = new ItemStack(state.getBlock());
 
-		if (state.getValue(BlockWoodBarrel.SEALED)) {
+		if (state.getValue(SEALED)) {
 			saveToItemStack(barrelStack);
 			InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), barrelStack);
 		} else {

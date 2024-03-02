@@ -26,13 +26,15 @@ import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
+import static su.terrafirmagreg.api.models.Blockstates.SEALED;
+
 @SideOnly(Side.CLIENT)
 public class TESRWoodBarrel extends TileEntitySpecialRenderer<TEWoodBarrel> {
 
 	@Override
 	public void render(TEWoodBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		IBlockState state = te.getWorld().getBlockState(te.getPos());
-		if (!(state.getBlock() instanceof BlockWoodBarrel) || state.getValue(BlockWoodBarrel.SEALED)) {
+		if (!(state.getBlock() instanceof BlockWoodBarrel) || state.getValue(SEALED)) {
 			return;
 		}
 

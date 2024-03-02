@@ -166,8 +166,7 @@ public class BlockLargePlanter extends Block implements IItemSize {
 
 	@Override
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
-		if (state instanceof IExtendedBlockState) {
-			IExtendedBlockState extension = (IExtendedBlockState) state;
+		if (state instanceof IExtendedBlockState extension) {
 			PlanterRecipe.PlantInfo plant = getCrop(world, pos);
 			extension = extension.withProperty(CROP, plant);
 			return extension;
@@ -195,6 +194,6 @@ public class BlockLargePlanter extends Block implements IItemSize {
 
 	private boolean canStay(IBlockAccess world, BlockPos pos) {
 		return world.getBlockState(pos.down())
-		            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+				.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
 	}
 }

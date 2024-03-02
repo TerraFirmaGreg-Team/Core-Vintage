@@ -34,8 +34,7 @@ public class AmbientalHandler {
 
 		Entity entity = event.getTarget();
 		EntityPlayer player = event.getEntityPlayer();
-		if (entity instanceof EntityVillager) {
-			EntityVillager villager = (EntityVillager) entity;
+		if (entity instanceof EntityVillager villager) {
 			long time = villager.world.getWorldTime();
 			try {
 				MerchantRecipeList list = new MerchantRecipeList();
@@ -51,7 +50,7 @@ public class AmbientalHandler {
 							ItemStack itemToBuy2 = recipe.getSecondItemToBuy().copy();
 							ItemStack itemToSell = recipe.getItemToSell().copy();
 							if (itemToSell.hasCapability(CapabilityFood.CAPABILITY, null)) {
-								IFood cap = (IFood) itemToSell.getCapability(CapabilityFood.CAPABILITY, null);
+								IFood cap = itemToSell.getCapability(CapabilityFood.CAPABILITY, null);
 								cap.setCreationDate(time);
 							}
 							list2.add(new MerchantRecipe(itemToBuy, itemToBuy2, itemToSell));
@@ -70,10 +69,9 @@ public class AmbientalHandler {
 		if (event.getEntityLiving().world.isRemote) {
 			return;
 		}
-		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
+		if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
 			return;
 		}
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 		if (player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
 			TemperatureCapability cap = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
 			cap.bodyTemperature = TemperatureCapability.AVERAGE;
@@ -85,10 +83,9 @@ public class AmbientalHandler {
 		if (event.getEntityLiving().world.isRemote) {
 			return;
 		}
-		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
+		if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
 			return;
 		}
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 		player.sendMessage(new TextComponentString("respawned"));
 	}
 
@@ -106,8 +103,7 @@ public class AmbientalHandler {
 
 	@SubscribeEvent
 	public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		if (event.getObject() instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) event.getObject();
+		if (event.getObject() instanceof EntityPlayer player) {
 
 			ResourceLocation loc = new ResourceLocation(MODID_TFCAMBIENTAL, "temperature");
 
@@ -119,11 +115,10 @@ public class AmbientalHandler {
 
 	@SubscribeEvent
 	public void onPlayerUpdate(LivingUpdateEvent event) {
-		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
+		if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
 			return;
 		}
 
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 		if (player.isCreative()) {
 			return;
 		}

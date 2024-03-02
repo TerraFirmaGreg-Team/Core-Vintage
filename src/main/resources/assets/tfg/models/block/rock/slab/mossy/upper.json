@@ -4,9 +4,8 @@
     "overlay": "#overlay"
   },
 	"elements": [
-		{
-			"name": "overlay",
-			"from": [
+    {
+      "from": [
         0,
         8,
         0
@@ -17,14 +16,45 @@
         16
       ],
       "faces": {
-        "down": {
+        "north": {
           "uv": [
             0,
             0,
             16,
-            16
+            8
           ],
-          "texture": "#overlay"
+          "texture": "#all",
+          "cullface": "north"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "east"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "west"
         },
         "up": {
           "uv": [
@@ -33,9 +63,33 @@
             16,
             16
           ],
-          "texture": "#overlay",
+          "texture": "#all",
           "cullface": "up"
         },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#all"
+        }
+      }
+    },
+    {
+      "name": "overlay",
+      "from": [
+        0,
+        8,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
         "north": {
           "uv": [
             0,
@@ -45,6 +99,16 @@
           ],
           "texture": "#overlay",
           "cullface": "north"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#overlay",
+          "cullface": "east"
         },
         "south": {
           "uv": [
@@ -66,17 +130,26 @@
           "texture": "#overlay",
           "cullface": "west"
         },
-        "east": {
+        "up": {
           "uv": [
             0,
             0,
             16,
-            8
+            16
           ],
           "texture": "#overlay",
-          "cullface": "east"
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#overlay"
         }
       }
-		}
-	]
+    }
+  ]
 }

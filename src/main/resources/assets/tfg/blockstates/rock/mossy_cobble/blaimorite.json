@@ -4,6 +4,7 @@
     "model": "tfg:rock/mossy_cobble",
     "uvlock": true,
     "textures": {
+      
       "all": "tfg:blocks/rock/cobble/blaimorite"
     }
   },

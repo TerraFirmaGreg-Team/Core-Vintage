@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -62,20 +63,24 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICu
 
 	protected static Block getFullBlockFromSlab(RockBlockVariant variant, RockType type) {
 		return switch (variant.toString()) {
-			case "slab/raw", "slab_double/raw" -> BlocksRock.getBlock(RockBlockVariants.RAW, type);
 			case "slab/cobble", "slab_double/cobble" -> BlocksRock.getBlock(RockBlockVariants.COBBLE, type);
+			case "slab/mossy_cobble", "slab_double/mossy_cobble" -> BlocksRock.getBlock(RockBlockVariants.MOSSY_COBBLE, type);
+			case "slab/raw", "slab_double/raw" -> BlocksRock.getBlock(RockBlockVariants.RAW, type);
 			case "slab/smooth", "slab_double/smooth" -> BlocksRock.getBlock(RockBlockVariants.SMOOTH, type);
 			case "slab/bricks", "slab_double/bricks" -> BlocksRock.getBlock(RockBlockVariants.BRICKS, type);
+			case "slab/mossy_bricks", "slab_double/mossy_bricks" -> BlocksRock.getBlock(RockBlockVariants.MOSSY_BRICKS, type);
 			default -> throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
 		};
 	}
 
 	protected static Block getDoubleSlabFromSlab(RockBlockVariant variant, RockType type) {
 		return switch (variant.toString()) {
-			case "slab/raw" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_RAW, type);
 			case "slab/cobble" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_COBBLE, type);
+			case "slab/mossy_cobble" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_MOSSY_COBBLE, type);
+			case "slab/raw" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_RAW, type);
 			case "slab/smooth" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_SMOOTH, type);
 			case "slab/bricks" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_BRICK, type);
+			case "slab/mossy_bricks" -> BlocksRock.getBlock(RockBlockVariants.SLAB_DOUBLE_MOSSY_BRICKS, type);
 			default -> throw new RuntimeException(String.format("Double slab from slab not founded: %s, %s", variant, type));
 		};
 	}
@@ -150,8 +155,7 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICu
 	@Override
 	@NotNull
 	protected BlockStateContainer createBlockState() {
-		return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF,
-				VARIANT);
+		return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, BlockSlab.HALF, VARIANT);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -159,6 +163,14 @@ public abstract class BlockRockSlab extends BlockSlab implements IRockBlock, ICu
 	@Override
 	public SoundType getSoundType() {
 		return block.getSoundType();
+	}
+
+	@NotNull
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+
 	}
 
 	@Override

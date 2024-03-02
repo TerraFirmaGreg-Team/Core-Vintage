@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.models;
 
-import net.darkhax.bookshelf.block.property.PropertyObject;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -9,6 +8,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import su.terrafirmagreg.api.models.property.PropertyObject;
 
 public final class Blockstates {
 

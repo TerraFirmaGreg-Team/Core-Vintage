@@ -153,7 +153,7 @@ public final class NBTUtils {
 	 */
 	public static int increment(ItemStack stack, String key, int amount) {
 
-		return incriment(net.darkhax.bookshelf.util.StackUtils.prepareStackTag(stack), key, amount);
+		return incriment(StackUtils.prepareStackTag(stack), key, amount);
 	}
 
 	/**

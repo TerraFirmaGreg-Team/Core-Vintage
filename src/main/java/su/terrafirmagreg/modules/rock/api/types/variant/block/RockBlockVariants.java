@@ -2,11 +2,16 @@ package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
 public class RockBlockVariants {
 	public static RockBlockVariant COBBLE;
-	public static RockBlockVariant MOSSY_COBBLE;
 	public static RockBlockVariant STAIRS_COBBLE;
 	public static RockBlockVariant SLAB_DOUBLE_COBBLE;
 	public static RockBlockVariant SLAB_COBBLE;
 	public static RockBlockVariant WALL_COBBLE;
+
+	public static RockBlockVariant MOSSY_COBBLE;
+	public static RockBlockVariant STAIRS_MOSSY_COBBLE;
+	public static RockBlockVariant SLAB_DOUBLE_MOSSY_COBBLE;
+	public static RockBlockVariant SLAB_MOSSY_COBBLE;
+	public static RockBlockVariant WALL_MOSSY_COBBLE;
 
 
 	public static RockBlockVariant RAW;
@@ -24,12 +29,16 @@ public class RockBlockVariants {
 
 
 	public static RockBlockVariant BRICKS;
-	public static RockBlockVariant MOSSY_BRICKS;
 	public static RockBlockVariant STAIRS_BRICK;
 	public static RockBlockVariant SLAB_DOUBLE_BRICK;
 	public static RockBlockVariant SLAB_BRICK;
 	public static RockBlockVariant WALL_BRICK;
 
+	public static RockBlockVariant MOSSY_BRICKS;
+	public static RockBlockVariant STAIRS_MOSSY_BRICKS;
+	public static RockBlockVariant SLAB_DOUBLE_MOSSY_BRICKS;
+	public static RockBlockVariant SLAB_MOSSY_BRICKS;
+	public static RockBlockVariant WALL_MOSSY_BRICKS;
 
 	public static RockBlockVariant CRACKED_BRICKS;
 	public static RockBlockVariant CHISELED;

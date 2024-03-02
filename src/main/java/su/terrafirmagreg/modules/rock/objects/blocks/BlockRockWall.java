@@ -21,7 +21,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import java.util.List;
-
+ 
 @Getter
 public class BlockRockWall extends BlockWall implements IRockBlock {
 

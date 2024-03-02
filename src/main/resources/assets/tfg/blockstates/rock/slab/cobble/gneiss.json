@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfg:rock/half_slab",
+    "model": "tfg:rock/slab/half",
     "textures": {
       "all": "tfg:blocks/rock/cobble/gneiss"
     }
@@ -15,10 +15,10 @@
     ],
     "half": {
       "bottom": {
-        "model": "tfg:rock/half_slab"
+        "model": "tfg:rock/slab/half"
       },
       "top": {
-        "model": "tfg:rock/upper_slab"
+        "model": "tfg:rock/slab/upper"
       }
     }
   }

@@ -14,12 +14,6 @@ public class RockBlockVariantHandler {
 				.setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
 				.build();
 
-		RockBlockVariants.MOSSY_COBBLE = new RockBlockVariant.Builder("mossy_cobble")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockMossy::new)
-				.setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
-				.build();
-
 		RockBlockVariants.STAIRS_COBBLE = new RockBlockVariant.Builder("stairs/cobble")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockStairs::new)
@@ -36,6 +30,32 @@ public class RockBlockVariantHandler {
 				.build();
 
 		RockBlockVariants.WALL_COBBLE = new RockBlockVariant.Builder("wall/cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockWall::new)
+				.build();
+
+		RockBlockVariants.MOSSY_COBBLE = new RockBlockVariant.Builder("mossy_cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockMossy::new)
+				.setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
+				.build();
+
+		RockBlockVariants.STAIRS_MOSSY_COBBLE = new RockBlockVariant.Builder("stairs/mossy_cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockStairs::new)
+				.build();
+
+		RockBlockVariants.SLAB_DOUBLE_MOSSY_COBBLE = new RockBlockVariant.Builder("slab_double/mossy_cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Double::new)
+				.build();
+
+		RockBlockVariants.SLAB_MOSSY_COBBLE = new RockBlockVariant.Builder("slab/mossy_cobble")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Half::new)
+				.build();
+
+		RockBlockVariants.WALL_MOSSY_COBBLE = new RockBlockVariant.Builder("wall/mossy_cobble")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockWall::new)
 				.build();
@@ -97,11 +117,6 @@ public class RockBlockVariantHandler {
 				.setFactory(BlockRockBricks::new)
 				.build();
 
-		RockBlockVariants.MOSSY_BRICKS = new RockBlockVariant.Builder("mossy_bricks")
-				.setBaseHardness(6f)
-				.setFactory(BlockRockMossy::new)
-				.build();
-
 		RockBlockVariants.STAIRS_BRICK = new RockBlockVariant.Builder("stairs/bricks")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockStairs::new)
@@ -118,6 +133,31 @@ public class RockBlockVariantHandler {
 				.build();
 
 		RockBlockVariants.WALL_BRICK = new RockBlockVariant.Builder("wall/bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockWall::new)
+				.build();
+
+		RockBlockVariants.MOSSY_BRICKS = new RockBlockVariant.Builder("mossy_bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockMossy::new)
+				.build();
+
+		RockBlockVariants.STAIRS_MOSSY_BRICKS = new RockBlockVariant.Builder("stairs/mossy_bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockStairs::new)
+				.build();
+
+		RockBlockVariants.SLAB_DOUBLE_MOSSY_BRICKS = new RockBlockVariant.Builder("slab_double/mossy_bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Double::new)
+				.build();
+
+		RockBlockVariants.SLAB_MOSSY_BRICKS = new RockBlockVariant.Builder("slab/mossy_bricks")
+				.setBaseHardness(6f)
+				.setFactory(BlockRockSlab.Half::new)
+				.build();
+
+		RockBlockVariants.WALL_MOSSY_BRICKS = new RockBlockVariant.Builder("wall/mossy_bricks")
 				.setBaseHardness(6f)
 				.setFactory(BlockRockWall::new)
 				.build();

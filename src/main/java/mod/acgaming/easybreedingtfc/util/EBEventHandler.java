@@ -8,9 +8,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EBEventHandler {
 	@SubscribeEvent
 	public void addAI(LivingEvent.LivingUpdateEvent event) {
-		if (event.getEntityLiving() instanceof EntityAnimalTFC && event.getEntityLiving().ticksExisted < 5 && !event.getEntityLiving()
-		                                                                                                            .isChild()) {
-			EntityAnimalTFC animal = (EntityAnimalTFC) event.getEntityLiving();
+		if (event.getEntityLiving() instanceof EntityAnimalTFC animal && event.getEntityLiving().ticksExisted < 5 && !event.getEntityLiving()
+				.isChild()) {
 			animal.tasks.addTask(2, new EBEntityAI(animal));
 		}
 	}

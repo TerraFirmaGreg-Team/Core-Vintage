@@ -15,6 +15,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -33,7 +34,7 @@ public class BlockCalc extends Block {
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState() {
+	protected @NotNull BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACING);
 	}
 

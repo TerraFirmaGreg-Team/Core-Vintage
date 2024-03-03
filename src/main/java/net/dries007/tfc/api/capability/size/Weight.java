@@ -6,14 +6,15 @@
 package net.dries007.tfc.api.capability.size;
 
 import lombok.Getter;
+import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 
 @Getter
 public enum Weight {
-	VERY_LIGHT("very_light", 64),
-	LIGHT("light", 32),
-	MEDIUM("medium", 16),
-	HEAVY("heavy", 4),
-	VERY_HEAVY("very_heavy", 1);
+	VERY_LIGHT("very_light", ModuleCoreConfig.MISC.WEIGHT.VERY_LIGHT),
+	LIGHT("light", ModuleCoreConfig.MISC.WEIGHT.LIGHT),
+	MEDIUM("medium", ModuleCoreConfig.MISC.WEIGHT.MEDIUM),
+	HEAVY("heavy", ModuleCoreConfig.MISC.WEIGHT.HEAVY),
+	VERY_HEAVY("very_heavy", ModuleCoreConfig.MISC.WEIGHT.VERY_HEAVY);
 
 	public final int stackSize;
 	public final String name;

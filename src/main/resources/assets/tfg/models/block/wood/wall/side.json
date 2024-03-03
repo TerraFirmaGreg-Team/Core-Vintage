@@ -3,5 +3,44 @@
     "textures": {
       "particle": "#all",
       "wall": "#all"
-    }
+    },
+    "elements": [
+      {
+        "from": [
+          5,
+          0,
+          0
+        ],
+        "to": [
+          11,
+          14,
+          8
+        ],
+        "faces": {
+          "down": {
+            "texture": "#wall",
+            "cullface": "down",
+            "tintindex": 1
+          },
+          "up": {
+            "texture": "#wall",
+            "tintindex": 1
+          },
+          "north": {
+            "texture": "#wall",
+            "cullface": "north",
+            "tintindex": 1
+          },
+          "west": {
+            "texture": "#wall",
+            "tintindex": 1
+          },
+          "east": {
+            "texture": "#wall",
+            "tintindex": 1
+          }
+        },
+        "__comment": "wall"
+      }
+    ]
 }

@@ -54,7 +54,6 @@ public class DeathDairyDespair {
 	@SubscribeEvent
 	public void onPlayerDeath(LivingDeathEvent event) {
 		if (event.getEntity() instanceof EntityPlayerMP) {
-			System.out.println("A");
 			invokeWritePlayerData(event.getEntity().world.getMinecraftServer().getPlayerList(), (EntityPlayerMP) event.getEntity());
 		}
 	}

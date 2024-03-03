@@ -35,7 +35,6 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
 		this.type = type;
 
 		setSoundType(SoundType.STONE);
-
 		setHarvestLevel("pickaxe", 0);
 
 //        if (getItemBlock() != null) {

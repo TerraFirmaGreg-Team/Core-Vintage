@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import net.dries007.tfc.ConfigTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -18,6 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
@@ -57,10 +57,10 @@ public class BlockWoodSupport extends BlockWood {
 	 * @return true if there is a support in 4 block radius
 	 */
 	public static boolean isBeingSupported(World worldIn, BlockPos pos) {
-		int sRangeHor = ConfigTFC.General.FALLABLE.supportBeamRangeHor;
-		int sRangeVert = ConfigTFC.General.FALLABLE.supportBeamRangeUp;
-		int sRangeHorNeg = ConfigTFC.General.FALLABLE.supportBeamRangeHor * -1;
-		int sRangeVertNeg = ConfigTFC.General.FALLABLE.supportBeamRangeDown * -1;
+		int sRangeHor = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor;
+		int sRangeVert = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeUp;
+		int sRangeHorNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
+		int sRangeVertNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
 		if (!worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
 			return true; // If world isn't loaded...
 		}
@@ -90,10 +90,10 @@ public class BlockWoodSupport extends BlockWood {
 		int maxY = Math.max(from.getY(), to.getY());
 		int minZ = Math.min(from.getZ(), to.getZ());
 		int maxZ = Math.max(from.getZ(), to.getZ());
-		int sRangeHor = ConfigTFC.General.FALLABLE.supportBeamRangeHor;
-		int sRangeVert = ConfigTFC.General.FALLABLE.supportBeamRangeUp;
-		int sRangeHorNeg = ConfigTFC.General.FALLABLE.supportBeamRangeHor * -1;
-		int sRangeVertNeg = ConfigTFC.General.FALLABLE.supportBeamRangeDown * -1;
+		int sRangeHor = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor;
+		int sRangeVert = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeUp;
+		int sRangeHorNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
+		int sRangeVertNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
 		BlockPos minPoint = new BlockPos(minX, minY, minZ);
 		BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
 		for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(minPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),

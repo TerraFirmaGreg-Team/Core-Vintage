@@ -27,6 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Objects;
 
 import static net.minecraft.util.text.TextFormatting.GOLD;
 
@@ -44,6 +45,7 @@ public class ItemDebug extends ItemBase {
 		ItemStack stack = player.getHeldItemMainhand();
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (nbt == null) NBTUtils.resetNBT(stack);
+		assert nbt != null;
 		int mode = nbt.getInteger("mode");
 		int newMode = (mode > 3) ? 0 : mode + 1;
 		nbt.setInteger("mode", newMode);
@@ -75,6 +77,7 @@ public class ItemDebug extends ItemBase {
 		NBTTagCompound nbt = stack.getTagCompound();
 
 		if (nbt == null) NBTUtils.resetNBT(stack);
+		assert nbt != null;
 		int mode = nbt.getInteger("mode");
 		switch (mode) {
 			case 0: {
@@ -106,8 +109,10 @@ public class ItemDebug extends ItemBase {
 	@Nonnull
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
 		if (world.isRemote) return ActionResult.newResult(EnumActionResult.FAIL, player.getHeldItem(hand));
-		if (player.isSneaking() && world.getBlockState(player.rayTrace(10, 1).getBlockPos()).getBlock()
-				.isAir(world.getBlockState(player.rayTrace(10, 1).getBlockPos()), world, player.rayTrace(5, 1).getBlockPos())) changeMode(player);
+		if (player.isSneaking() && world.getBlockState(Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()).getBlock()
+				.isAir(world.getBlockState(
+								Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()), world,
+						Objects.requireNonNull(player.rayTrace(5, 1)).getBlockPos())) changeMode(player);
 		return super.onItemRightClick(world, player, hand);
 	}
 

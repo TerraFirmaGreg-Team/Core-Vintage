@@ -40,6 +40,33 @@ public class ItemDebug extends ItemBase {
 		setFull3D();
 	}
 
+	public static void changeMode(EntityPlayer player) {
+		ItemStack stack = player.getHeldItemMainhand();
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt == null) NBTUtils.resetNBT(stack);
+		int mode = nbt.getInteger("mode");
+		int newMode = (mode > 3) ? 0 : mode + 1;
+		nbt.setInteger("mode", newMode);
+		switch (newMode) {
+			case 0: {
+				player.sendStatusMessage(new TextComponentString(GOLD + "Blockstate"), true);
+				break;
+			}
+			case 1: {
+				player.sendStatusMessage(new TextComponentString(GOLD + "NBT"), true);
+				break;
+			}
+			case 2: {
+				player.sendStatusMessage(new TextComponentString(GOLD + "Blockstate list"), true);
+				break;
+			}
+			case 3: {
+				player.sendStatusMessage(new TextComponentString(GOLD + "Transform"), true);
+				break;
+			}
+		}
+	}
+
 	@Override
 	@Nonnull
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -110,33 +137,6 @@ public class ItemDebug extends ItemBase {
 			}
 		}
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-	}
-
-	public static void changeMode(EntityPlayer player) {
-		ItemStack stack = player.getHeldItemMainhand();
-		NBTTagCompound nbt = stack.getTagCompound();
-		if (nbt == null) NBTUtils.resetNBT(stack);
-		int mode = nbt.getInteger("mode");
-		int newMode = (mode > 3) ? 0 : mode + 1;
-		nbt.setInteger("mode", newMode);
-		switch (newMode) {
-			case 0: {
-				player.sendStatusMessage(new TextComponentString(GOLD + "Blockstate"), true);
-				break;
-			}
-			case 1: {
-				player.sendStatusMessage(new TextComponentString(GOLD + "NBT"), true);
-				break;
-			}
-			case 2: {
-				player.sendStatusMessage(new TextComponentString(GOLD + "Blockstate list"), true);
-				break;
-			}
-			case 3: {
-				player.sendStatusMessage(new TextComponentString(GOLD + "Transform"), true);
-				break;
-			}
-		}
 	}
 
 	@Override

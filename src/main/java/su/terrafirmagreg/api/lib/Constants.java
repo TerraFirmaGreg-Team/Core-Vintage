@@ -15,7 +15,6 @@ public class Constants {
 	public static final String MODID_OSA = "oversizediteminstoragearea";
 	static public final String MODID_CELLARS = "cellars";
 	public static final String MODID_EASYBREEDINGTFC = "easybreedingtfc";
-	public static final String MODID_TFCPATHS = "tfcpaths";
 	public static final String MODID_TFCTHINGS = "tfcthings";
 	public static final String MODID_TFCALLOYCALC = "tfcalloycalc";
 	public static final String MODID_ASTIKORCARTS = "astikorcarts";

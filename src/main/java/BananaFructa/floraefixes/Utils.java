@@ -76,13 +76,13 @@ public class Utils {
 		RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, false);
 		if (crop == Crop.RICE) {
 			if (raytraceresult == null) {
-				return new ActionResult(EnumActionResult.PASS, itemstack);
+				return new ActionResult<>(EnumActionResult.PASS, itemstack);
 			} else {
 				if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
 					BlockPos blockpos = raytraceresult.getBlockPos().up();
 					Material material = worldIn.getBlockState(blockpos.down()).getMaterial();
 					if ((!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) && material == Material.WATER) {
-						return new ActionResult(EnumActionResult.FAIL, itemstack);
+						return new ActionResult<>(EnumActionResult.FAIL, itemstack);
 					}
 
 					BlockPos blockpos1 = blockpos.up();
@@ -91,9 +91,9 @@ public class Utils {
 						BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
 						worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState());
 						if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn)
-						                     .isCanceled()) {
+								.isCanceled()) {
 							blocksnapshot.restore(true, false);
-							return new ActionResult(EnumActionResult.FAIL, itemstack);
+							return new ActionResult<>(EnumActionResult.FAIL, itemstack);
 						}
 
 						worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState(), 11);
@@ -104,14 +104,14 @@ public class Utils {
 
 						playerIn.addStat(StatList.getObjectUseStats(item));
 						worldIn.playSound(playerIn, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+						return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 					}
 				}
 
-				return new ActionResult(EnumActionResult.FAIL, itemstack);
+				return new ActionResult<>(EnumActionResult.FAIL, itemstack);
 			}
 		} else {
-			return new ActionResult(EnumActionResult.FAIL, itemstack);
+			return new ActionResult<>(EnumActionResult.FAIL, itemstack);
 		}
 	}
 

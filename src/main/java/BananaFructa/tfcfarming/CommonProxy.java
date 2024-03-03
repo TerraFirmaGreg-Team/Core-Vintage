@@ -77,27 +77,25 @@ public class CommonProxy {
 		if (!event.getWorld().isRemote) {
 			setTileEntity(event.getWorld(), event.getPos());
 			if (TFCFarming.firmalifeLoaded) {
-				TEPlanter pte = (TEPlanter) Helpers.getTE(event.getWorld(), event.getPos(), TEPlanter.class);
+				TEPlanter pte = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanter.class);
 				if (pte != null) {
 					event.getWorld().setTileEntity(event.getPos(), TEPlanterN.class.newInstance());
 					return;
 				}
 
 				Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
-				if (Config.hangingPlanters && b instanceof BlockHangingPlanter) {
+				if (Config.hangingPlanters && b instanceof BlockHangingPlanter hangingPlanter) {
 
-					BlockHangingPlanter hangingPlanter = (BlockHangingPlanter) b;
 					Supplier<? extends Item> supplier = Utils.readDeclaredField(BlockBonsai.class, hangingPlanter, "seed");
 					Item i = supplier.get();
 
-					if (i instanceof ItemSeedsTFC) {
-						ItemSeedsTFC seeds = (ItemSeedsTFC) i;
+					if (i instanceof ItemSeedsTFC seeds) {
 						TEHangingPlanter hpte = Helpers.getTE(event.getWorld(), event.getPos(), TEHangingPlanter.class);
 						if (hpte != null) {
 							ICrop crop = Utils.readDeclaredField(ItemSeedsTFC.class, seeds, "crop");
 							if (crop != null) {
 								TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class)
-								                                                        .newInstance(crop);
+										.newInstance(crop);
 								teHangingPlanter.resetCounter();
 								event.getWorld().setTileEntity(event.getPos(), teHangingPlanter);
 							}
@@ -179,12 +177,12 @@ public class CommonProxy {
 				if (hangingPlanter || planter || canSeeSky(event.getPos(), event.getWorld())) {
 					if (TFCFarmingContent.isFertilizer(event.getItemStack())) {
 						int meta = event.getItemStack().getItem().getHasSubtypes() ? event.getItemStack()
-						                                                                  .getMetadata() : 0;
+								.getMetadata() : 0;
 						NutrientClass nutrientClass = TFCFarmingContent.getFertilizerClass(event.getItemStack());
 						int value = TFCFarmingContent.getFertilizerValue(event.getItemStack());
 						if (!planter && TFCFarming.INSTANCE.worldStorage.fertilizerBlock(event.getPos()
-						                                                                      .getX(), event.getPos()
-						                                                                                    .getZ(), nutrientClass, value)) {
+								.getX(), event.getPos()
+								.getZ(), nutrientClass, value)) {
 							event.getItemStack().setCount(event.getItemStack().getCount() - 1);
 						} else if (planter) {
 							TEPlanterN tePlanterN = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanterN.class);

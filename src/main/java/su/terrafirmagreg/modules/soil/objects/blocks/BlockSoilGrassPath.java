@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 import su.terrafirmagreg.modules.soil.data.ItemsSoil;
@@ -28,7 +28,7 @@ import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 import java.util.Random;
 
 @Getter
-public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlockVariant {
+public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
 
 	private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 

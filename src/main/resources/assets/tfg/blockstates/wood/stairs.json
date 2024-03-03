@@ -1,11 +1,11 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfg:wood/stairs",
+    "model": "tfg:wood/stairs/straight",
+    "uvlock": true,
     "textures": {
       "all": "tfg:blocks/wood/planks"
-    },
-    "uvlock": true
+    }
   },
   "variants": {
     "normal": [
@@ -34,19 +34,19 @@
     },
     "shape": {
       "straight": {
-        "model": "tfg:wood/stairs"
+        "model": "tfg:wood/stairs/straight"
       },
       "inner_left": {
-        "model": "tfg:wood/inner_stairs"
+        "model": "tfg:wood/stairs/inner"
       },
       "inner_right": {
-        "model": "tfg:wood/inner_stairs"
+        "model": "tfg:wood/stairs/inner"
       },
       "outer_left": {
-        "model": "tfg:wood/outer_stairs"
+        "model": "tfg:wood/stairs/outer"
       },
       "outer_right": {
-        "model": "tfg:wood/outer_stairs"
+        "model": "tfg:wood/stairs/outer"
       }
     }
   }

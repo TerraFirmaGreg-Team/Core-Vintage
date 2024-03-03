@@ -15,13 +15,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 import java.util.Random;
 
 @Getter
-public abstract class BlockSoil extends BlockBase implements ISoilBlockVariant {
+public abstract class BlockSoil extends BlockBase implements ISoilBlock {
 
 	private final SoilBlockVariant blockVariant;
 	private final SoilType type;

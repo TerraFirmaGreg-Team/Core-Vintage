@@ -13,15 +13,15 @@
     ],
     "inventory": [
       {
-        "model": "tfg:wood/button_inventory"
+        "model": "tfg:wood/button/inventory"
       }
     ],
     "powered": {
       "false": {
-        "model": "tfg:wood/button"
+        "model": "tfg:wood/button/unpressed"
       },
       "true": {
-        "model": "tfg:wood/button_pressed"
+        "model": "tfg:wood/button/pressed"
       }
     },
     "facing": {

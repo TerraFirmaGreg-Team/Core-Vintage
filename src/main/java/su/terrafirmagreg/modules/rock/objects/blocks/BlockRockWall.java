@@ -6,7 +6,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -32,8 +31,8 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
 	private final RockBlockVariant blockVariant;
 	private final RockType type;
 
-	public BlockRockWall(RockBlockVariant blockVariant, RockType type) {
-		super(Blocks.COBBLESTONE);
+	public BlockRockWall(RockBlockVariant modelBlock, RockBlockVariant blockVariant, RockType type) {
+		super(modelBlock.getBlock(type));
 
 		this.blockVariant = blockVariant;
 		this.type = type;

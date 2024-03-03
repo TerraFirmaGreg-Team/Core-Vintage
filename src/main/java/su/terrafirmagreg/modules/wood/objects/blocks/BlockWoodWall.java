@@ -1,13 +1,18 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import lombok.Getter;
-import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockWall;
+import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
@@ -17,29 +22,38 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 @Getter
-public class BlockWoodStairs extends BlockStairs implements IWoodBlock, IColorfulBlock {
-
+public class BlockWoodWall extends BlockWall implements IWoodBlock, IColorfulBlock {
 
 	private final WoodBlockVariant blockVariant;
 	private final WoodType type;
 
-	public BlockWoodStairs(WoodBlockVariant modelBlock, WoodBlockVariant blockVariant, WoodType type) {
-		super(modelBlock.getBlock(type).getDefaultState());
+	public BlockWoodWall(WoodBlockVariant modelBlock, WoodBlockVariant blockVariant, WoodType type) {
+		super(modelBlock.getBlock(type));
 
 		this.blockVariant = blockVariant;
 		this.type = type;
-		this.useNeighborBrightness = true;
+
+		setSoundType(SoundType.WOOD);
 		setHarvestLevel("axe", 0);
 
-//            OreDictionaryHelper.register(this, variant.toString());
-//            OreDictionaryHelper.register(this, variant.toString(), "wood");
-//            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
+//		OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
 	}
 
-	@Nullable
 	@Override
 	public ItemBlock getItemBlock() {
 		return new ItemBlockBase(this);
+	}
+
+	@NotNull
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public void getSubBlocks(@NotNull CreativeTabs itemIn, @NotNull NonNullList<ItemStack> items) {
+		items.add(new ItemStack(this));
 	}
 
 	@Override
@@ -51,7 +65,10 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock, IColorfu
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder()
+				.customPath(getResourceLocation())
+				.ignore(BlockWall.VARIANT)
+				.build());
 	}
 
 	@Override

@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
@@ -39,7 +39,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.models.Blockstates.*;
 
 @Getter
-public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, IColorfulBlock {
+public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulBlock {
 
 	private final SoilBlockVariant blockVariant;
 	private final SoilType type;
@@ -82,7 +82,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
 			// Генерируем торф в зависимости от типа блока
 			if (usBlock instanceof BlockPeat) {
 				world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
-			} else if (usBlock instanceof ISoilBlockVariant soil) {
+			} else if (usBlock instanceof ISoilBlock soil) {
 				world.setBlockState(pos, BlocksSoil.getBlock(soil.getBlockVariant().getNonGrassVersion(), soil.getType()).getDefaultState());
 			}
 		} else if (neighborLight >= 9) {
@@ -120,11 +120,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
 				// Генерируем траву в зависимости от типа текущего блока
 				if (currentBlock instanceof BlockPeat) {
 					world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
-				} else if (currentBlock instanceof ISoilBlockVariant block) {
+				} else if (currentBlock instanceof ISoilBlock block) {
 					SoilBlockVariant spreader = SoilBlockVariants.GRASS;
 
 					// Проверяем тип блока, с которого распространяется трава
-					if (usBlock instanceof ISoilBlockVariant && ((ISoilBlockVariant) usBlock).getBlockVariant() == SoilBlockVariants.DRY_GRASS) {
+					if (usBlock instanceof ISoilBlock && ((ISoilBlock) usBlock).getBlockVariant() == SoilBlockVariants.DRY_GRASS) {
 						spreader = SoilBlockVariants.DRY_GRASS;
 					}
 
@@ -162,7 +162,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlockVariant, ICo
 			if (!worldIn.isAreaLoaded(pos, 3))
 				return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
 			Block block = worldIn.getBlockState(pos).getBlock();
-			if (block instanceof ISoilBlockVariant soilBlockVariant) {
+			if (block instanceof ISoilBlock soilBlockVariant) {
 				var soil = soilBlockVariant.getType();
 
 				if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {

@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;
@@ -43,7 +43,7 @@ public final class BlocksSoil {
 
 	public static boolean isGrass(IBlockState current) {
 		if (current.getBlock() instanceof BlockPeatGrass) return true;
-		if (current.getBlock() instanceof ISoilBlockVariant soil) {
+		if (current.getBlock() instanceof ISoilBlock soil) {
 			var variant = soil.getBlockVariant();
 			return variant == GRASS || variant == DRY_GRASS ||
 					variant == CLAY_GRASS;
@@ -53,7 +53,7 @@ public final class BlocksSoil {
 
 	public static boolean isSoil(IBlockState current) {
 		if (current.getBlock() instanceof BlockPeat) return true;
-		if (current.getBlock() instanceof ISoilBlockVariant soil) {
+		if (current.getBlock() instanceof ISoilBlock soil) {
 			var variant = soil.getBlockVariant();
 			return variant == GRASS || variant == DRY_GRASS ||
 					variant == DIRT || variant == CLAY ||

@@ -5,7 +5,6 @@ import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -17,17 +16,17 @@ import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 @Getter
-public class BlockSoilMudWall extends BlockWall implements ISoilBlockVariant, ICustomStateMapper {
+public class BlockSoilMudWall extends BlockWall implements ISoilBlock, ICustomStateMapper {
 
 	private final SoilBlockVariant blockVariant;
 	private final SoilType type;
 
-	public BlockSoilMudWall(SoilBlockVariant blockVariant, SoilType type) {
-		super(Blocks.COBBLESTONE);
+	public BlockSoilMudWall(SoilBlockVariant modelBlock, SoilBlockVariant blockVariant, SoilType type) {
+		super(modelBlock.getBlock(type));
 
 		this.blockVariant = blockVariant;
 		this.type = type;

@@ -8,7 +8,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 /**
  * Интерфейс, представляющий блок почвы.
  */
-public interface ISoilBlockVariant extends ISoilType, IAutoReg, IItemSize {
+public interface ISoilBlock extends ISoilType, IAutoReg, IItemSize {
 
 	/**
 	 * Возвращает вариант блока почвы.

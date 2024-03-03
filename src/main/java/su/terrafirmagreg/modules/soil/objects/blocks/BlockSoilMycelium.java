@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 import su.terrafirmagreg.modules.soil.data.ItemsSoil;
@@ -29,7 +29,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.models.Blockstates.*;
 
 @Getter
-public class BlockSoilMycelium extends BlockMycelium implements ISoilBlockVariant {
+public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
 	private final SoilBlockVariant blockVariant;
 	private final SoilType type;

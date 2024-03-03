@@ -1,6 +1,0 @@
-{
-  "parent": "tfg:block/cube_overlay_all",
-  "textures": {
-    "overlay": "tfg:blocks/soil/overlay/mossy/bricks"
-  }
-}

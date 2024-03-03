@@ -4,7 +4,6 @@ import lombok.Getter;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -27,8 +26,8 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 	private final RockBlockVariant blockVariant;
 	private final RockType type;
 
-	public BlockRockStairs(RockBlockVariant blockVariant, RockType type) {
-		super(Blocks.COBBLESTONE.getDefaultState());
+	public BlockRockStairs(RockBlockVariant modelBlock, RockBlockVariant blockVariant, RockType type) {
+		super(modelBlock.getBlock(type).getDefaultState());
 
 		this.blockVariant = blockVariant;
 		this.type = type;

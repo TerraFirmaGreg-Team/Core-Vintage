@@ -11,14 +11,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 
-public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlockVariant {
+public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {
 
 	public BlockSoilDryGrass(SoilBlockVariant blockVariant, SoilType type) {
 		super(blockVariant, type);

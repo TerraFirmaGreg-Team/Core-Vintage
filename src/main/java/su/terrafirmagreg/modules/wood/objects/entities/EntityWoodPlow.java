@@ -27,7 +27,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
@@ -180,7 +180,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 		Item item = itemstack.getItem();
 
 
-		if (state.getBlock() instanceof ISoilBlockVariant soil) {
+		if (state.getBlock() instanceof ISoilBlock soil) {
 			var variant = soil.getBlockVariant();
 			if (variant == GRASS || variant == DIRT || variant == DRY_GRASS) {
 				if (item instanceof ItemHoe || item instanceof ItemMetalHoe) {

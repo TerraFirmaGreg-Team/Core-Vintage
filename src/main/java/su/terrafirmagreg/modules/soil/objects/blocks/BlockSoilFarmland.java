@@ -29,7 +29,7 @@ import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
@@ -39,7 +39,7 @@ import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 import java.util.Random;
 
 @Getter
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVariant, IColorfulBlock, ICustomStateMapper {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IColorfulBlock, ICustomStateMapper {
 
 	public static final int[] TINT = new int[]{
 			0xffffffff,
@@ -77,7 +77,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlockVarian
 
 	protected static void turnToDirt(World world, @NotNull BlockPos pos) {
 		Block block = world.getBlockState(pos).getBlock();
-		if (block instanceof ISoilBlockVariant soilBlockVariant) {
+		if (block instanceof ISoilBlock soilBlockVariant) {
 			var soil = soilBlockVariant.getType();
 
 			world.setBlockState(pos, BlocksSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());

@@ -36,6 +36,7 @@ import java.util.Random;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class PuddlesEventHandler {
 
@@ -146,7 +147,7 @@ public class PuddlesEventHandler {
 				} else {
 					float f = (float) MathHelper.ceil(distance - 3.0F);
 
-					double d0 = Math.min((double) (0.2F + f / 15.0F), 2.5D);
+					double d0 = Math.min(0.2F + f / 15.0F, 2.5D);
 					int i = (int) (200.0D * d0);
 
 					for (int a = 0; a < 20; a++) {

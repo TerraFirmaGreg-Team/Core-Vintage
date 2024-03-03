@@ -66,7 +66,9 @@ public class ModuleCoreConfig {
 	}
 
 	public static final class MiscCategory {
-
+		@Config.Name("Debug Mode")
+		@Config.Comment("When enabled, prints debug values to console")
+		public boolean DEBUG = false;
 
 	}
 

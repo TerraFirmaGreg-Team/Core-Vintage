@@ -1,8 +1,7 @@
-package mod.acgaming.tfcpaths;
+package su.terrafirmagreg.modules.soil.event;
 
-import net.dries007.tfc.api.types.Rock;
+
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,14 +10,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.soil.ModuleSoilConfig;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCPATHS;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
-@EventBusSubscriber(modid = MODID_TFCPATHS)
-public class PathEvent {
+@SuppressWarnings("unused")
+@Mod.EventBusSubscriber(modid = MOD_ID)
+public class PathEventHandler {
+
 	private static int player_debug_cooldown = 100;
 	private static int mob_debug_cooldown = 1000;
 	private static double player_speed = 0.001D;
@@ -47,7 +52,7 @@ public class PathEvent {
 				player_speed = player_speed_current;
 			}
 
-			if (PathConfig.general_settings.DEBUG) {
+			if (ModuleCoreConfig.MISC.DEBUG) {
 				if (player_debug_cooldown == 0) {
 					System.out.println("[Player] Random: " + player_random);
 					System.out.println("[Player] Speed: " + player_speed);
@@ -57,39 +62,30 @@ public class PathEvent {
 				}
 			}
 
-			if (!world.isRemote && state.getBlock() instanceof BlockRockVariant && player_speed > 0.2) {
-				BlockRockVariant blockRock = (BlockRockVariant) state.getBlock();
+			if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && player_speed > 0.2) {
 
-				if (player_random < PathConfig.player_settings.GRASS_TO_DIRT && blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DRY_GRASS) {
-					world.setBlockState(posPlayer, BlockRockVariant.get(blockRock.getRock(), Rock.Type.DIRT)
-					                                               .getDefaultState());
-					if (PathConfig.general_settings.DESTROY_VEGETATION) {
+				if (player_random < ModuleSoilConfig.BLOCKS.PATH.PLAYER_GRASS_TO_DIRT && soil.getBlockVariant() == GRASS || soil.getBlockVariant() == DRY_GRASS) {
+					world.setBlockState(posPlayer, DIRT.getBlock(soil.getType()).getDefaultState());
+					if (ModuleSoilConfig.BLOCKS.PATH.DESTROY_VEGETATION) {
 						BlockPos upPos = posPlayer.up();
 						Material upMaterial = world.getBlockState(upPos).getMaterial();
 						if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos)
-						                                                                         .getBlock() instanceof BlockPlacedItemFlat) {
+								.getBlock() instanceof BlockPlacedItemFlat) {
 							world.destroyBlock(upPos, true);
 						}
 					}
 					return;
 				}
 
-				if (player_random < PathConfig.player_settings.DIRT_TO_PATH && blockRock.getType() == Rock.Type.DIRT) {
-					world.setBlockState(posPlayer, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH)
-					                                               .getDefaultState());
-					return;
-				}
-
-				if (player_random < PathConfig.player_settings.PATH_TO_GRAVEL && blockRock.getType() == Rock.Type.PATH) {
-					world.setBlockState(posPlayer, BlockRockVariant.get(blockRock.getRock(), Rock.Type.GRAVEL)
-					                                               .getDefaultState());
+				if (player_random < ModuleSoilConfig.BLOCKS.PATH.PLAYER_DIRT_TO_PATH && soil.getBlockVariant() == DIRT) {
+					world.setBlockState(posPlayer, GRASS_PATH.getBlock(soil.getType()).getDefaultState());
 					return;
 				}
 			}
 		}
 
 		// MOB PATHING
-		if (PathConfig.general_settings.ALL_ENTITIES) {
+		if (ModuleSoilConfig.BLOCKS.PATH.ALL_ENTITIES) {
 			if (event.getEntity() != null && !(event.getEntity() instanceof EntityPlayer)) {
 				// GET MOB INFORMATION
 				EntityLivingBase entity = event.getEntityLiving();
@@ -104,7 +100,7 @@ public class PathEvent {
 				double mob_random = Math.random() * 1000.0D + 1.0D;
 				double mob_speed = Math.sqrt(entity.motionX * entity.motionX + entity.motionY * entity.motionY + entity.motionZ * entity.motionZ);
 
-				if (PathConfig.general_settings.DEBUG) {
+				if (ModuleCoreConfig.MISC.DEBUG) {
 					if (mob_debug_cooldown == 0) {
 						System.out.println("[Mob] Random: " + mob_random);
 						System.out.println("[Mob] Speed: " + mob_speed);
@@ -114,32 +110,23 @@ public class PathEvent {
 					}
 				}
 
-				if (!world.isRemote && state.getBlock() instanceof BlockRockVariant && mob_speed > 0.08) {
-					BlockRockVariant blockRock = (BlockRockVariant) state.getBlock();
+				if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && mob_speed > 0.08) {
 
-					if (mob_random < PathConfig.mob_settings.GRASS_TO_DIRT && blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DRY_GRASS) {
-						world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.DIRT)
-						                                               .getDefaultState());
-						if (PathConfig.general_settings.DESTROY_VEGETATION) {
+					if (mob_random < ModuleSoilConfig.BLOCKS.PATH.MOB_GRASS_TO_DIRT && soil.getBlockVariant() == GRASS || soil.getBlockVariant() == DRY_GRASS) {
+						world.setBlockState(posEntity, DIRT.getBlock(soil.getType()).getDefaultState());
+						if (ModuleSoilConfig.BLOCKS.PATH.DESTROY_VEGETATION) {
 							BlockPos upPos = posEntity.up();
 							Material upMaterial = world.getBlockState(upPos).getMaterial();
 							if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos)
-							                                                                         .getBlock() instanceof BlockPlacedItemFlat) {
+									.getBlock() instanceof BlockPlacedItemFlat) {
 								world.destroyBlock(upPos, true);
 							}
 						}
 						return;
 					}
 
-					if (mob_random < PathConfig.mob_settings.DIRT_TO_PATH && blockRock.getType() == Rock.Type.DIRT) {
-						world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH)
-						                                               .getDefaultState());
-						return;
-					}
-
-					if (mob_random < PathConfig.mob_settings.PATH_TO_GRAVEL && blockRock.getType() == Rock.Type.PATH) {
-						world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.GRAVEL)
-						                                               .getDefaultState());
+					if (mob_random < ModuleSoilConfig.BLOCKS.PATH.MOB_DIRT_TO_PATH && soil.getBlockVariant() == DIRT || soil.getBlockVariant() == COARSE_DIRT) {
+						world.setBlockState(posEntity, GRASS_PATH.getBlock(soil.getType()).getDefaultState());
 						return;
 					}
 				}

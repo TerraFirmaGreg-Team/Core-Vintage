@@ -9,7 +9,6 @@ public class Constants {
 	public static final String MODID_TFCF = "tfcflorae";
 	public static final String MODID_TFCTECH = "tfctech";
 	public static final String MODID_HORSEPOWER = "horsepower";
-	public static final String MODID_PUDDLES = "puddles";
 	public static final String MODID_CAFFEINEADDON = "ca";
 	public static final String MODID_WATERFLASKS = "waterflasks";
 	public static final String MODID_TIME4TFC = "time4tfc";

@@ -30,6 +30,28 @@ public class ModuleCoreConfig {
 
 	public static final class BlocksCategory {
 
+		@Config.Comment("Barrel")
+		@Config.LangKey("config." + MOD_ID + ".wood.barrel")
+		public final Puddle PUDDLE = new Puddle();
+
+		public static final class Puddle {
+
+			@Config.Name("Puddle Rate")
+			@Config.Comment({
+					"The game will pick a random block every tick for every active chunk",
+					"Then it will check if a puddle can be placed there",
+					"Then it generates a random number between 0-99",
+					"And if that number is less than this puddle rate number, it puts a puddle",
+					"That means any value over 99 will flood your world with puddles"
+			})
+			public int puddleRate = 15;
+
+			@Config.Name("Can Use Glass Bottle")
+			@Config.Comment({"Toggles filling glass bottles with puddle water"})
+			public boolean canUseGlassBottle = true;
+
+		}
+
 
 	}
 

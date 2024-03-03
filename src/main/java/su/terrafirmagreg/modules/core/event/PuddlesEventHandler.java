@@ -1,18 +1,19 @@
-package puddles;
+package su.terrafirmagreg.modules.core.event;
 
+
+import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -21,58 +22,22 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.data.BlocksCore;
 
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_PUDDLES;
+import static su.terrafirmagreg.Tags.MOD_ID;
 
-@Mod(modid = MODID_PUDDLES, name = Puddles.NAME, version = Tags.VERSION)
-public class Puddles {
-	public static final String NAME = "Puddles";
-
-	public static Block puddle;
-
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		puddle = new BlockPuddle().setTranslationKey("puddle")
-		                          .setRegistryName(new ResourceLocation(MODID_PUDDLES, "puddle"));
-		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.register(new PuddlesConfig.ConfigEventHandler());
-	}
-
-	@SubscribeEvent
-	@SuppressWarnings("ConstantConditions")
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().register(puddle);
-	}
-
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event) {
-		ItemBlock puddle_item = new ItemBlock(puddle);
-		puddle_item.setRegistryName(new ResourceLocation(MODID_PUDDLES, "puddle"));
-		event.getRegistry().register(puddle_item);
-	}
-
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event) {
-		Item puddle_item = Item.getItemFromBlock(puddle);
-		ModelLoader.setCustomModelResourceLocation(puddle_item, 0, new ModelResourceLocation(puddle_item.getRegistryName(), "inventory"));
-		ModelLoader.setCustomStateMapper(puddle, new StateMap.Builder().build());
-	}
+@Mod.EventBusSubscriber(modid = MOD_ID)
+public class PuddlesEventHandler {
 
 	@SubscribeEvent
 	public void placePuddles(TickEvent.ServerTickEvent event) {
@@ -94,8 +59,8 @@ public class Puddles {
 						BlockPos puddlePos = pos.add(0, y, 0);
 
 						if (this.canSpawnPuddle(world, puddlePos)) {
-							if (random.nextInt(100) < PuddlesConfig.puddleRate) {
-								world.setBlockState(puddlePos.up(), puddle.getDefaultState(), 2);
+							if (random.nextInt(100) < ModuleCoreConfig.BLOCKS.PUDDLE.puddleRate) {
+								world.setBlockState(puddlePos.up(), BlocksCore.PUDDLE.getDefaultState(), 2);
 							}
 						}
 					}
@@ -106,24 +71,28 @@ public class Puddles {
 		}
 	}
 
+	// TODO: PuddlesMixin +
 	public boolean canSpawnPuddle(World world, BlockPos pos) {
-		if (!world.isSideSolid(pos, EnumFacing.UP))
+		if (!world.isSideSolid(pos, EnumFacing.UP)) {
 			return false;
-		if (!world.isAirBlock(pos.up()))
+		}
+		if (!world.isAirBlock(pos.up())) {
 			return false;
-		if (!world.isRaining())
+		}
+		if (!world.isRaining()) {
 			return false;
+		}
 
 		Biome biome = world.getBiomeForCoordsBody(pos);
-		if (biome.canRain() && !biome.getEnableSnow()) {
+		if (biome.canRain() && !biome.getEnableSnow() && (ClimateTFC.getActualTemp(pos) > 0)) {
 			for (int y = pos.getY() + 1; y < world.getHeight(); y++) {
 				BlockPos up = new BlockPos(pos.getX(), y, pos.getZ());
-				if (!world.isAirBlock(up))
+				if (!world.isAirBlock(up)) {
 					return false;
+				}
 			}
 			return true;
 		}
-
 		return false;
 	}
 
@@ -133,8 +102,8 @@ public class Puddles {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos().up();
 		EntityPlayer player = event.getEntityPlayer();
-		if (world.getBlockState(pos).getBlock() == Puddles.puddle) {
-			if (stack.getItem() == Items.GLASS_BOTTLE && PuddlesConfig.canUseGlassBottle) {
+		if (world.getBlockState(pos).getBlock() == BlocksCore.PUDDLE) {
+			if (stack.getItem() == Items.GLASS_BOTTLE && ModuleCoreConfig.BLOCKS.PUDDLE.canUseGlassBottle) {
 				if (event.getFace() == EnumFacing.UP) {
 					if (!world.isRemote) {
 						stack.shrink(1);
@@ -165,11 +134,15 @@ public class Puddles {
 		World world = entity.getEntityWorld();
 
 		if (!world.isRemote) {
-			if (world.getBlockState(pos).getBlock() == Puddles.puddle) {
+			if (world.getBlockState(pos).getBlock() == BlocksCore.PUDDLE) {
 				float distance = event.getDistance();
 				if (distance < 3.0F) {
-					((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D, Block.getStateId(Puddles.puddle.getDefaultState()));
-					((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_SPLASH, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D, Block.getStateId(Puddles.puddle.getDefaultState()));
+					((WorldServer) world).spawnParticle(
+							EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D,
+							Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
+					((WorldServer) world).spawnParticle(
+							EnumParticleTypes.WATER_SPLASH, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D,
+							Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
 				} else {
 					float f = (float) MathHelper.ceil(distance - 3.0F);
 
@@ -179,9 +152,12 @@ public class Puddles {
 					for (int a = 0; a < 20; a++) {
 						double x = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
 						double z = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
-						((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_SPLASH, entity.posX + x, entity.posY, entity.posZ + z, i / 2, 0.0D, 0.0D, 0.0D, 0.25D);
+						((WorldServer) world).spawnParticle(
+								EnumParticleTypes.WATER_SPLASH, entity.posX + x, entity.posY, entity.posZ + z, i / 2, 0.0D, 0.0D, 0.0D, 0.25D);
 					}
-					((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i, 0.0D, 0.0D, 0.0D, 0.4D, Block.getStateId(Puddles.puddle.getDefaultState()));
+					((WorldServer) world).spawnParticle(
+							EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i, 0.0D, 0.0D, 0.0D, 0.4D,
+							Block.getStateId(BlocksCore.PUDDLE.getDefaultState()));
 					world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 				}
 			}

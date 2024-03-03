@@ -31,7 +31,7 @@ public class ModuleCoreConfig {
 	public static final class BlocksCategory {
 
 		@Config.Comment("Barrel")
-		@Config.LangKey("config." + MOD_ID + ".wood.barrel")
+		@Config.LangKey("config." + MOD_ID + ".core.blocks.puddle")
 		public final Puddle PUDDLE = new Puddle();
 
 		public static final class Puddle {

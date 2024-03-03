@@ -23,7 +23,6 @@ public class DeathDairyDespair {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Config.load(event.getModConfigurationDirectory());
-		TFCCommonEventHandlerWrapper.init();
 	}
 
 	@Mod.EventHandler
@@ -56,8 +55,7 @@ public class DeathDairyDespair {
 	public void onPlayerDeath(LivingDeathEvent event) {
 		if (event.getEntity() instanceof EntityPlayerMP) {
 			System.out.println("A");
-			invokeWritePlayerData(event.getEntity().world.getMinecraftServer()
-			                                             .getPlayerList(), (EntityPlayerMP) event.getEntity());
+			invokeWritePlayerData(event.getEntity().world.getMinecraftServer().getPlayerList(), (EntityPlayerMP) event.getEntity());
 		}
 	}
 

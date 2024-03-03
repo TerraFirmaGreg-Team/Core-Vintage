@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.Tags.MOD_NAME;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCSTACKS;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "core")
 public class ModuleCoreConfig {
@@ -73,27 +72,27 @@ public class ModuleCoreConfig {
 		public static final class Weight {
 			@Config.RequiresMcRestart
 			@Config.Comment("Stack size of Very Heavy items. I wouldn't change this one. Default = 1")
-			@Config.LangKey("config." + MODID_TFCSTACKS + ".general.VERY_HEAVY")
+			@Config.LangKey("config." + MOD_ID + ".core.misc.weight.very_heavy")
 			public int VERY_HEAVY = 1;
 
 			@Config.RequiresMcRestart
 			@Config.Comment("Stack size of Heavy items. Default = 4")
-			@Config.LangKey("config." + MODID_TFCSTACKS + ".general.HEAVY")
+			@Config.LangKey("config." + MOD_ID + ".core.misc.weight.heavy")
 			public int HEAVY = 4;
 
 			@Config.RequiresMcRestart
 			@Config.Comment("Stack size of Medium items. Default = 16")
-			@Config.LangKey("config." + MODID_TFCSTACKS + ".general.MEDIUM")
+			@Config.LangKey("config." + MOD_ID + ".core.misc.weight.medium")
 			public int MEDIUM = 16;
 
 			@Config.RequiresMcRestart
 			@Config.Comment("Stack size of Light items. Default = 32")
-			@Config.LangKey("config." + MODID_TFCSTACKS + ".general.LIGHT")
+			@Config.LangKey("config." + MOD_ID + ".core.misc.weight.light")
 			public int LIGHT = 32;
 
 			@Config.RequiresMcRestart
 			@Config.Comment("Stack size of Very Light items. Default = 64")
-			@Config.LangKey("config." + MODID_TFCSTACKS + ".general.VERY_LIGHT")
+			@Config.LangKey("config." + MOD_ID + ".core.misc.weight.very_light")
 			public int VERY_LIGHT = 64;
 		}
 

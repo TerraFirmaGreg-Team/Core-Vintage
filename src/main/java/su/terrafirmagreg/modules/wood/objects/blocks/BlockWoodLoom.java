@@ -12,8 +12,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,13 +25,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ModelManager;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.Utils;
@@ -44,7 +37,7 @@ import su.terrafirmagreg.modules.wood.client.render.TESRWoodLoom;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
 
 @Getter
-public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorfulBlock, ITEBlock {
+public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBlock {
 
 	protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
 	protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
@@ -176,28 +169,6 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
 			te.onBreakBlock(worldIn, pos, state);
 		}
 		super.breakBlock(worldIn, pos, state);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
-	}
-
-	@Override
-	public IBlockColor getColorHandler() {
-		return (s, w, p, i) -> this.getType().getColor();
-	}
-
-	@Override
-	public IItemColor getItemColorHandler() {
-		return (s, i) -> this.getType().getColor();
 	}
 
 	@Override

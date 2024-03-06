@@ -7,8 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -39,7 +36,7 @@ import su.terrafirmagreg.modules.wood.objects.inventory.capability.InventoryWood
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
 
 @Getter
-public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulBlock, ITEBlock {
+public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 
 	private final WoodBlockVariant blockVariant;
 	private final WoodType type;
@@ -151,24 +148,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulB
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customResource(getResourceLocation()).build());
-	}
-
-	@Override
-	public IBlockColor getColorHandler() {
-		return (s, w, p, i) -> this.getType().getColor();
-	}
-
-	@Override
-	public IItemColor getItemColorHandler() {
-		return (s, i) -> this.getType().getColor();
 	}
 
 	@Override

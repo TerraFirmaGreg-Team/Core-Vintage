@@ -18,10 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ICustomStateMapper;
-import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.BlockSlabBase;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -29,7 +26,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import java.util.Random;
 
 @Getter
-public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock, IColorfulBlock, ICustomStateMapper {
+public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock {
 
 	private final WoodBlockVariant blockVariant;
 	private final WoodType type;
@@ -82,12 +79,6 @@ public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock,
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(VARIANT).build());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onModelRegister() {
-		ModelManager.registerBlockInventoryModel(this, getResourceLocation());
 	}
 
 	public static class Double extends BlockWoodSlab {

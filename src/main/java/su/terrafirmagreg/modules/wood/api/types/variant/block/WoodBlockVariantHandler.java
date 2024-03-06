@@ -28,22 +28,22 @@ public class WoodBlockVariantHandler {
 				.setFireInfo(5, 20)
 				.build();
 
-		STAIRS = new WoodBlockVariant.Builder("stairs")
+		STAIRS_PLANKS = new WoodBlockVariant.Builder("stairs/planks")
 				.setFactory((v, t) -> new BlockWoodStairs(PLANKS, v, t))
 				.setFireInfo(5, 20)
 				.build();
 
-		SLAB_DOUBLE = new WoodBlockVariant.Builder("slab_double")
+		SLAB_DOUBLE_PLANKS = new WoodBlockVariant.Builder("slab_double/planks")
 				.setFactory((v, t) -> new BlockWoodSlab.Double(PLANKS, v, t))
 				.setFireInfo(5, 20)
 				.build();
 
-		SLAB = new WoodBlockVariant.Builder("slab")
-				.setFactory((v, t) -> new BlockWoodSlab.Half(PLANKS, SLAB_DOUBLE, v, t))
+		SLAB_PLANKS = new WoodBlockVariant.Builder("slab/planks")
+				.setFactory((v, t) -> new BlockWoodSlab.Half(PLANKS, SLAB_DOUBLE_PLANKS, v, t))
 				.setFireInfo(5, 20)
 				.build();
 
-		WALL = new WoodBlockVariant.Builder("wall")
+		WALL_PLANKS = new WoodBlockVariant.Builder("wall/planks")
 				.setFactory((v, t) -> new BlockWoodWall(PLANKS, v, t))
 				.setFireInfo(5, 20)
 				.build();

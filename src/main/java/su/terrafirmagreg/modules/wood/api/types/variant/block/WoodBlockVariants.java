@@ -8,10 +8,10 @@ public class WoodBlockVariants {
 	public static WoodBlockVariant SAPLING;
 	public static WoodBlockVariant POTTED_SAPLING;
 	public static WoodBlockVariant PLANKS;
-	public static WoodBlockVariant STAIRS;
-	public static WoodBlockVariant SLAB_DOUBLE;
-	public static WoodBlockVariant SLAB;
-	public static WoodBlockVariant WALL;
+	public static WoodBlockVariant STAIRS_PLANKS;
+	public static WoodBlockVariant SLAB_DOUBLE_PLANKS;
+	public static WoodBlockVariant SLAB_PLANKS;
+	public static WoodBlockVariant WALL_PLANKS;
 	public static WoodBlockVariant BOOKSHELF;
 	public static WoodBlockVariant DOOR;
 	public static WoodBlockVariant TRAPDOOR;

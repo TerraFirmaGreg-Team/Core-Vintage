@@ -18,7 +18,9 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,7 +37,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.tile.IContainerProvider;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
 
 import java.util.*;
@@ -44,7 +49,7 @@ import java.util.stream.Collectors;
 import static su.terrafirmagreg.api.models.Blockstates.SEALED;
 
 
-public class TEWoodBarrel extends TETickableInventory implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback {
+public class TEWoodBarrel extends TETickableInventory implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback, IContainerProvider<ContainerWoodBarrel, GuiWoodBarrel> {
 
 	public static final int SLOT_FLUID_CONTAINER_IN = 0;
 	public static final int SLOT_FLUID_CONTAINER_OUT = 1;
@@ -438,6 +443,17 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	@Override
 	public void setLastUpdateTick(long tick) {
 		this.lastPlayerTick = tick;
+	}
+
+	@Override
+	public ContainerWoodBarrel getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		return new ContainerWoodBarrel(inventoryPlayer, this);
+	}
+
+	@Override
+	public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		Container container = getContainer(inventoryPlayer, world, state, pos);
+		return new GuiWoodBarrel(container, inventoryPlayer, this, world.getBlockState(pos).getBlock().getTranslationKey());
 	}
 
 	protected static class BarrelFluidTank extends FluidTankCallback {

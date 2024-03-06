@@ -75,7 +75,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 					tooltip.add(I18n.format(MODID_TFC + ".tooltip.barrel_empty"));
 				} else {
 					tooltip.add(fluid.getLocalizedName());
-					tooltip.add(TextFormatting.GRAY.toString() + I18n.format(MODID_TFC + ".tooltip.barrel_fluid_amount", fluid.amount));
+					tooltip.add(TextFormatting.GRAY + I18n.format(MODID_TFC + ".tooltip.barrel_fluid_amount", fluid.amount));
 				}
 
 				this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);
@@ -84,8 +84,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 
 		// Button Tooltips
 		for (GuiButton button : buttonList) {
-			if (button instanceof IButtonTooltip && button.isMouseOver()) {
-				IButtonTooltip tooltip = (IButtonTooltip) button;
+			if (button instanceof IButtonTooltip tooltip && button.isMouseOver()) {
 				if (tooltip.hasTooltip()) {
 					drawHoveringText(I18n.format(tooltip.getTooltip()), mouseX, mouseY);
 				}
@@ -169,8 +168,8 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 						buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
 						buffer.pos(positionX, positionY + 16, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
 						buffer.pos(positionX + 16, positionY + 16, 0)
-						      .tex(sprite.getMaxU(), sprite.getMaxV())
-						      .endVertex();
+								.tex(sprite.getMaxU(), sprite.getMaxV())
+								.endVertex();
 						buffer.pos(positionX + 16, positionY, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
 
 						fillHeightPixels -= 16;
@@ -181,17 +180,17 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 						int blank = 16 - fillHeightPixels;
 						positionY += blank;
 						buffer.pos(positionX, positionY, 0)
-						      .tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
-						      .endVertex();
+								.tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
+								.endVertex();
 						buffer.pos(positionX, positionY + fillHeightPixels, 0)
-						      .tex(sprite.getMinU(), sprite.getMaxV())
-						      .endVertex();
+								.tex(sprite.getMinU(), sprite.getMaxV())
+								.endVertex();
 						buffer.pos(positionX + 16, positionY + fillHeightPixels, 0)
-						      .tex(sprite.getMaxU(), sprite.getMaxV())
-						      .endVertex();
+								.tex(sprite.getMaxU(), sprite.getMaxV())
+								.endVertex();
 						buffer.pos(positionX + 16, positionY, 0)
-						      .tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
-						      .endVertex();
+								.tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
+								.endVertex();
 					}
 
 					Tessellator.getInstance().draw();

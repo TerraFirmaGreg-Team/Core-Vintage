@@ -98,13 +98,11 @@ public class ModelManager {
 	}
 
 	public static void registerInventoryModel(Item item, String modelLocation) {
-		ModelResourceLocation resourceLocation = new ModelResourceLocation(modelLocation, "inventory");
-		ModelManager.registerInventoryModel(item, resourceLocation);
+		ModelManager.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
 	}
 
 	public static void registerInventoryModel(Item item, ResourceLocation modelLocation) {
-		ModelResourceLocation resourceLocation = new ModelResourceLocation(modelLocation, "inventory");
-		ModelManager.registerInventoryModel(item, resourceLocation);
+		ModelManager.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
 	}
 
 	public static void registerInventoryModel(Item item, ModelResourceLocation resourceLocation) {

@@ -25,6 +25,9 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
+    flatDir {
+        dirs 'libs'
+    }
     mavenLocal() // Must be last for caching to work
 }
 
@@ -46,6 +49,8 @@ dependencies {
         implementation rfg.deobf("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
         implementation rfg.deobf("curse.maven:ctm-267602:2915363")
     }
+
+//    compileOnly fileTree(include: ["*.jar"], dir: "libs")
 
     // Forestry dependencies
     if (use_forestry.toBoolean()) {

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.devices.data;
+package su.terrafirmagreg.modules.device.data;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

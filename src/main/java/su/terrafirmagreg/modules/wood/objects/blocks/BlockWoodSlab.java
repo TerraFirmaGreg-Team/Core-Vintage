@@ -81,8 +81,7 @@ public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock,
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelLoader.setCustomStateMapper(this,
-				new CustomStateMap.Builder().customPath(getResourceLocation()).ignore(VARIANT).build());
+		ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(VARIANT).build());
 	}
 
 	@Override

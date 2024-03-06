@@ -5,12 +5,26 @@ import de.mennomax.astikorcarts.entity.EntityCargoCart;
 import de.mennomax.astikorcarts.entity.EntityPlowCart;
 import de.mennomax.astikorcarts.inventory.ContainerCargoCart;
 import de.mennomax.astikorcarts.inventory.ContainerPlowCart;
+import net.dries007.tfc.client.TFCGuiHandler;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import su.terrafirmagreg.TerraFirmaGreg;
 
 public class GuiHandler implements IGuiHandler {
+
+	// use this instead of player.openGui() -> avoids magic numbers
+	public static void openGui(World world, BlockPos pos, EntityPlayer player, TFCGuiHandler.Type type) {
+		player.openGui(TerraFirmaGreg.getInstance(), type.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+	}
+
+	// Only use this for things that don't need a BlockPos to identify TE's!!!
+	public static void openGui(World world, EntityPlayer player, TFCGuiHandler.Type type) {
+		player.openGui(TerraFirmaGreg.getInstance(), type.ordinal(), world, 0, 0, 0);
+	}
+
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		EntityCargoCart cart;

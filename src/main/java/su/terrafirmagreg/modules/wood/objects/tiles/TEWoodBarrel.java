@@ -20,7 +20,6 @@ import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -294,7 +293,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+	public void readFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 
 		tank.readFromNBT(nbt.getCompoundTag("tank"));
@@ -343,13 +342,13 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
 		}
@@ -362,7 +361,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	}
 
 	@Override
-	public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+	public void onBreakBlock(@NotNull World world, @NotNull BlockPos pos, IBlockState state) {
 		ItemStack barrelStack = new ItemStack(state.getBlock());
 
 		if (state.getValue(SEALED)) {
@@ -385,7 +384,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	}
 
 	@Override
-	public boolean isItemValid(int slot, ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		switch (slot) {
 			case SLOT_FLUID_CONTAINER_IN -> {
 				return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
@@ -452,7 +451,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 
 	@Override
 	public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-		Container container = getContainer(inventoryPlayer, world, state, pos);
+		var container = getContainer(inventoryPlayer, world, state, pos);
 		return new GuiWoodBarrel(container, inventoryPlayer, this, world.getBlockState(pos).getBlock().getTranslationKey());
 	}
 

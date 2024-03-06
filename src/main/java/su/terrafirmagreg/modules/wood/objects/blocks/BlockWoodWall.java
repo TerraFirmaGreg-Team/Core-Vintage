@@ -66,7 +66,7 @@ public class BlockWoodWall extends BlockWall implements IWoodBlock, IColorfulBlo
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
 		ModelManager.registerStateMapper(this, new CustomStateMap.Builder()
-				.customPath(getResourceLocation())
+				.customResource(getResourceLocation())
 				.ignore(BlockWall.VARIANT)
 				.build());
 	}

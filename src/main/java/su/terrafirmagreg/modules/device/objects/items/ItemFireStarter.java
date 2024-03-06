@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.devices.objects.items;
+package su.terrafirmagreg.modules.device.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.TFCSounds;
@@ -23,8 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.ICustomModel;
-import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -41,11 +39,12 @@ import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemFireStarter extends ItemBase implements ICustomModel {
+public class ItemFireStarter extends ItemBase {
 	public ItemFireStarter() {
 		setMaxDamage(8);
 		setMaxStackSize(1);
 		setNoRepair();
+
 		OreDictUtils.register(this, "fireStarter");
 	}
 
@@ -86,7 +85,7 @@ public class ItemFireStarter extends ItemBase implements ICustomModel {
 
 	@Override
 	public @NotNull String getName() {
-		return "firestarter";
+		return "device/firestarter";
 	}
 
 	@Override
@@ -235,9 +234,4 @@ public class ItemFireStarter extends ItemBase implements ICustomModel {
 		return null;
 	}
 
-
-	@Override
-	public void onModelRegister() {
-		ModelManager.registerInventoryModel("device", this);
-	}
 }

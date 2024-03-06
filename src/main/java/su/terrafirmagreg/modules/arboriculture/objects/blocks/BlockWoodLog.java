@@ -9,7 +9,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -31,6 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -326,6 +326,6 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(PLACED).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(PLACED).build());
 	}
 }

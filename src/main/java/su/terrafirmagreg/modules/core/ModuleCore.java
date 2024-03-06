@@ -17,7 +17,7 @@ public class ModuleCore extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleCore.class.getSimpleName());
 
-	public static final CreativeTabs MISC_TAB = new CreativeTabBase("misc", "wand");
+	public static final CreativeTabs MISC_TAB = new CreativeTabBase("misc", "core/wand");
 
 
 	public ModuleCore() {

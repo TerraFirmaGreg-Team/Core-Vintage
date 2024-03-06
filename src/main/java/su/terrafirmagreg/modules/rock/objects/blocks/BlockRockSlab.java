@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -18,8 +17,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.ICustomStateMapper;
-import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.BlockSlabBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -29,7 +26,7 @@ import java.util.List;
 import java.util.Random;
 
 @Getter
-public abstract class BlockRockSlab extends BlockSlabBase implements IRockBlock, ICustomStateMapper {
+public abstract class BlockRockSlab extends BlockSlabBase implements IRockBlock {
 
 	private final RockBlockVariant blockVariant;
 	private final RockType type;
@@ -75,12 +72,6 @@ public abstract class BlockRockSlab extends BlockSlabBase implements IRockBlock,
 		tooltip.add(
 				new TextComponentTranslation("rockcategory.name")
 						.getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(BlockRockSlab.VARIANT).build());
 	}
 
 

@@ -1,9 +1,9 @@
-package su.terrafirmagreg.modules.devices.data;
+package su.terrafirmagreg.modules.device.data;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.modules.devices.objects.items.ItemFireStarter;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 
 public class ItemsDevice {

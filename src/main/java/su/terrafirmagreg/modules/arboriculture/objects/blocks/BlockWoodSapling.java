@@ -11,7 +11,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
@@ -29,6 +28,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.modules.arboriculture.objects.itemblocks.ItemBlockWoodSapling;
@@ -179,7 +179,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(STAGE).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(STAGE).build());
 	}
 
 	@Override

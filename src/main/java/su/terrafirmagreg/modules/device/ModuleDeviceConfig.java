@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.devices;
+package su.terrafirmagreg.modules.device;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 import net.minecraftforge.common.config.Config;

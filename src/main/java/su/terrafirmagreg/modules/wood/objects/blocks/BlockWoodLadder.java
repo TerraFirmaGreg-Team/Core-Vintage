@@ -46,7 +46,7 @@ public class BlockWoodLadder extends BlockLadder implements IWoodBlock, IColorfu
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
 	}
 
 	@Override

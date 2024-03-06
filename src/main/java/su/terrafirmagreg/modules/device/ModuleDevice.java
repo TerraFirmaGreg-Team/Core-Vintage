@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.devices;
+package su.terrafirmagreg.modules.device;
 
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -7,8 +7,8 @@ import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.devices.data.BlocksDevice;
-import su.terrafirmagreg.modules.devices.data.ItemsDevice;
+import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.data.ItemsDevice;
 
 import javax.annotation.Nonnull;
 
@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 public class ModuleDevice extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleDevice.class.getSimpleName());
-	public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/bellows");
+	public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/firestarter");
 
 
 	public ModuleDevice() {

@@ -161,6 +161,8 @@ public class ItemDebug extends ItemBase {
 
 	@Override
 	public @NotNull String getName() {
-		return "wand";
+		return "core/wand";
 	}
+
+
 }

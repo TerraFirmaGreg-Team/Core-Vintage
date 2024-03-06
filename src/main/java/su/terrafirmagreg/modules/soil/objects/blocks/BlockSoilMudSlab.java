@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
@@ -15,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.BlockSlabBase;
@@ -67,7 +67,7 @@ public abstract class BlockSoilMudSlab extends BlockSlabBase implements ISoilBlo
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(VARIANT).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(VARIANT).build());
 	}
 
 

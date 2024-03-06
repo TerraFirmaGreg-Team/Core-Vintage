@@ -30,10 +30,12 @@ public class ModelManager {
 		}
 	};
 
+
 	@SideOnly(Side.CLIENT)
 	public static void registerStateMapper(@Nonnull Block block, IStateMapper stateMap) {
 		ModelLoader.setCustomStateMapper(block, stateMap);
 	}
+
 
 	// ===== ItemBlock =============================================================================================================================//
 

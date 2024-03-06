@@ -158,7 +158,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, IColorfulB
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customPath(getResourceLocation()).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customResource(getResourceLocation()).build());
 	}
 
 	@Override

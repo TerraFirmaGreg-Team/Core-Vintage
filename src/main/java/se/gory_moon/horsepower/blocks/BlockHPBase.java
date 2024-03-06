@@ -100,8 +100,7 @@ public abstract class BlockHPBase extends Block implements IItemSize {
 			search:
 			for (Class<? extends Entity> clazz : clazzes) {
 				for (Object entity : worldIn.getEntitiesWithinAABB(clazz, new AxisAlignedBB((double) x - 7.0D, (double) y - 7.0D, (double) z - 7.0D, (double) x + 7.0D, (double) y + 7.0D, (double) z + 7.0D))) {
-					if (entity instanceof EntityCreature) {
-						EntityCreature tmp = (EntityCreature) entity;
+					if (entity instanceof EntityCreature tmp) {
 						if ((tmp.getLeashed() && tmp.getLeashHolder() == playerIn)) {
 							creature = tmp;
 							break search;

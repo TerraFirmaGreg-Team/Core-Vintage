@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 import lombok.Getter;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -12,6 +11,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -57,6 +57,6 @@ public class BlockSoilMudWall extends BlockWall implements ISoilBlock, ICustomSt
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockWall.VARIANT).build());
 	}
 }

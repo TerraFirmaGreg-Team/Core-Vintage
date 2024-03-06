@@ -14,15 +14,19 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.CustomStateMap;
+import su.terrafirmagreg.api.models.ICustomStateMapper;
+import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.registry.IAutoReg;
 
 @Getter
-public abstract class BlockSlabBase extends BlockSlab implements IAutoReg {
+public abstract class BlockSlabBase extends BlockSlab implements IAutoReg, ICustomStateMapper {
 
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
 	protected Block block;
 	protected BlockSlab halfSlab;
+	protected BlockSlab doubleSlab;
 
 	public BlockSlabBase(Material material) {
 		super(material);
@@ -90,6 +94,12 @@ public abstract class BlockSlabBase extends BlockSlab implements IAutoReg {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onStateMapperRegister() {
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(VARIANT).build());
 	}
 
 	public enum Variant implements IStringSerializable {

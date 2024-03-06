@@ -42,7 +42,7 @@ public abstract class BlockWood extends BlockBase implements IWoodBlock, IColorf
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
 	}
 
 	@Override

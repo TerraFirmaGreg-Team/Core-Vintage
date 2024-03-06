@@ -5,7 +5,6 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -17,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.util.Utils;
@@ -126,6 +126,6 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(CAN_FALL).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(CAN_FALL).build());
 	}
 }

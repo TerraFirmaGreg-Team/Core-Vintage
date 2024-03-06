@@ -187,7 +187,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, IColorf
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customPath(getResourceLocation()).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
 	}
 
 	@Override

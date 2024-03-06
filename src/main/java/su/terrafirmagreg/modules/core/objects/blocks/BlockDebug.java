@@ -12,6 +12,8 @@ public class BlockDebug extends BlockBase {
 
 	@Override
 	public @NotNull String getName() {
-		return "debug";
+		return "core/debug";
 	}
+
+
 }

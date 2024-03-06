@@ -23,13 +23,13 @@ import java.util.Random;
 public class BlockPuddle extends BlockBase {
 	public BlockPuddle() {
 		super(Material.GROUND);
-		this.setBlockUnbreakable();
-		this.setTickRandomly(true);
+		setBlockUnbreakable();
+		setTickRandomly(true);
 	}
 
 	@Override
 	public @NotNull String getName() {
-		return "puddle";
+		return "core/puddle";
 	}
 
 	@Override

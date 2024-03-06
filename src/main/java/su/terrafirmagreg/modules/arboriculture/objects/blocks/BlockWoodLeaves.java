@@ -12,7 +12,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
@@ -36,6 +35,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
@@ -409,7 +409,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder()
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder()
 				.ignore(BlockLeaves.DECAYABLE, HARVESTABLE)
 				.build());
 	}

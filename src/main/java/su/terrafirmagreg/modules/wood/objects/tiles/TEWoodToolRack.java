@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.devices.objects.items.ItemFireStarter;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 
 @Getter

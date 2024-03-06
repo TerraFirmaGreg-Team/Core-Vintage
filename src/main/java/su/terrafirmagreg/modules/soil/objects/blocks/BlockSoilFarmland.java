@@ -7,7 +7,6 @@ import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +23,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
@@ -253,6 +253,6 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().ignore(MOISTURE).build());
+		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(MOISTURE).build());
 	}
 }

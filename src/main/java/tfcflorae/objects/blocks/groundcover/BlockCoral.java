@@ -102,12 +102,12 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 	@Nonnull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos)
-		            .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
-		            .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
-		            .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
-		            .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
-		            .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
-		            .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
+				.withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
+				.withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
+				.withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
+				.withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
+				.withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
+				.withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
 	}
 
 	protected boolean canSustainBush(IBlockState state) {
@@ -186,25 +186,21 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 	@Override
 	@Nonnull
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
-		switch (rot) {
-			case CLOCKWISE_180:
-				return state.withProperty(NORTH, state.getValue(SOUTH))
-				            .withProperty(EAST, state.getValue(WEST))
-				            .withProperty(SOUTH, state.getValue(NORTH))
-				            .withProperty(WEST, state.getValue(EAST));
-			case COUNTERCLOCKWISE_90:
-				return state.withProperty(NORTH, state.getValue(EAST))
-				            .withProperty(EAST, state.getValue(SOUTH))
-				            .withProperty(SOUTH, state.getValue(WEST))
-				            .withProperty(WEST, state.getValue(NORTH));
-			case CLOCKWISE_90:
-				return state.withProperty(NORTH, state.getValue(WEST))
-				            .withProperty(EAST, state.getValue(NORTH))
-				            .withProperty(SOUTH, state.getValue(EAST))
-				            .withProperty(WEST, state.getValue(SOUTH));
-			default:
-				return state;
-		}
+		return switch (rot) {
+			case CLOCKWISE_180 -> state.withProperty(NORTH, state.getValue(SOUTH))
+					.withProperty(EAST, state.getValue(WEST))
+					.withProperty(SOUTH, state.getValue(NORTH))
+					.withProperty(WEST, state.getValue(EAST));
+			case COUNTERCLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(EAST))
+					.withProperty(EAST, state.getValue(SOUTH))
+					.withProperty(SOUTH, state.getValue(WEST))
+					.withProperty(WEST, state.getValue(NORTH));
+			case CLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(WEST))
+					.withProperty(EAST, state.getValue(NORTH))
+					.withProperty(SOUTH, state.getValue(EAST))
+					.withProperty(WEST, state.getValue(SOUTH));
+			default -> state;
+		};
 	}
 
 	@SuppressWarnings("deprecation")
@@ -281,7 +277,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 	@Override
 	public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		return canConnectTo(world, pos.offset(facing), facing.getOpposite()) && !(world.getBlockState(pos.offset(facing))
-		                                                                               .getBlock() instanceof BlockFence);
+				.getBlock() instanceof BlockFence);
 	}
 
 	protected boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
@@ -314,8 +310,8 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
 		this.onBlockHarvested(world, pos, state, player);
 		return world.setBlockState(pos, FluidsTFC.SALT_WATER.get()
-		                                                    .getBlock()
-		                                                    .getDefaultState(), world.isRemote ? 11 : 3);
+				.getBlock()
+				.getDefaultState(), world.isRemote ? 11 : 3);
 	}
 
 	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {

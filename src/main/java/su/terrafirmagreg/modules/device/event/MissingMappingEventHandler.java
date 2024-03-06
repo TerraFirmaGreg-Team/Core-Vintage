@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.devices.event;
+package su.terrafirmagreg.modules.device.event;
 
 
 import net.minecraft.block.Block;
@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import su.terrafirmagreg.modules.devices.data.ItemsDevice;
+import su.terrafirmagreg.modules.device.data.ItemsDevice;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 

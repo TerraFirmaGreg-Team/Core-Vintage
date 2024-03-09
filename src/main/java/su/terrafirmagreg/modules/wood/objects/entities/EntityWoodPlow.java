@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
@@ -26,16 +27,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.spi.tile.IContainerProvider;
+import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
+import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
+import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodPlow;
 
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
-public class EntityWoodPlow extends EntityWoodCartInventory implements IInventoryChangedListener {
+public class EntityWoodPlow extends EntityWoodCartInventory implements IInventoryChangedListener, IContainerProvider<ContainerWoodPlow, GuiWoodPlow> {
 
 	private static final DataParameter<Boolean> PLOWING = EntityDataManager.createKey(EntityWoodPlow.class, DataSerializers.BOOLEAN);
 	private static final double BLADEOFFSET = 1.7D;
@@ -60,8 +64,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 			return false;
 		}
 		for (String entry : ModuleWoodConfig.ITEMS.PLOW.canPull) {
-			if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn)
-					.toString())) {
+			if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
 				return true;
 			}
 		}
@@ -134,7 +137,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 	public boolean processInitialInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		if (!this.world.isRemote) {
 			if (player.isSneaking()) {
-				player.openGui(TerraFirmaGreg.getInstance(), 1, this.world, this.getEntityId(), 0, 0);
+				GuiHandler.openGui(world, new BlockPos(this.getEntityId(), 0, 0), player, GuiHandler.Type.WOOD_PLOW);
 			} else {
 				this.dataManager.set(PLOWING, !this.dataManager.get(PLOWING));
 			}
@@ -212,5 +215,15 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 				}
 			}
 		}
+	}
+
+	@Override
+	public ContainerWoodPlow getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		return new ContainerWoodPlow(inventoryPlayer, inventory, this, inventoryPlayer.player);
+	}
+
+	@Override
+	public GuiWoodPlow getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		return new GuiWoodPlow(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, inventory);
 	}
 }

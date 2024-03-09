@@ -744,8 +744,7 @@ public final class CommonEventHandler {
 				Entity TFCReplacement = Helpers.getTFCReplacement(entity);
 				if (TFCReplacement != null) {
 					TFCReplacement.setPositionAndRotation(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-					event.getWorld()
-							.spawnEntity(TFCReplacement); // Fires another spawning event for the TFC replacement
+					event.getWorld().spawnEntity(TFCReplacement); // Fires another spawning event for the TFC replacement
 				}
 				event.setCanceled(true); // Cancel the vanilla spawn
 			}

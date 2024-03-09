@@ -28,6 +28,7 @@ import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -62,9 +63,9 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 
 	@Override
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-//        if (!worldIn.isRemote) {
-//            CoreGuiHandler.openGui(worldIn, pos, playerIn, CoreGuiHandler.Type.WOOD_CHEST);
-//        }
+		if (!worldIn.isRemote) {
+			GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.WOOD_CHEST);
+		}
 		return true;
 	}
 
@@ -90,8 +91,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 					Block block = worldIn.getBlockState(blockpos).getBlock();
 
 					if (block == this) {
-						if (!allowBlocking && isBlocked(worldIn, blockpos)) // Forge: fix MC-99321
-						{
+						// Forge: fix MC-99321
+						if (!allowBlocking && isBlocked(worldIn, blockpos)) {
 							return null;
 						}
 

@@ -33,7 +33,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
-import su.terrafirmagreg.api.util.Utils;
+import su.terrafirmagreg.api.util.TileUtil;
+import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
@@ -62,7 +63,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	 * Used to toggle the barrel seal state and update the tile entity, in the correct order
 	 */
 	public static void toggleBarrelSeal(World world, BlockPos pos) {
-		var tile = Utils.getTE(world, pos, TEWoodBarrel.class);
+		var tile = TileUtil.getTile(world, pos, TEWoodBarrel.class);
 		if (tile != null) {
 			IBlockState state = world.getBlockState(pos);
 			boolean previousSealed = state.getValue(SEALED);
@@ -171,7 +172,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 
 	@Override
 	public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		TEWoodBarrel tile = Utils.getTE(worldIn, pos, TEWoodBarrel.class);
+		var tile = TileUtil.getTile(worldIn, pos, TEWoodBarrel.class);
 		if (tile != null) {
 			tile.onBreakBlock(worldIn, pos, state);
 		}
@@ -189,7 +190,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@Override
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = playerIn.getHeldItem(hand);
-		TEWoodBarrel te = Utils.getTE(worldIn, pos, TEWoodBarrel.class);
+		var te = TileUtil.getTile(worldIn, pos, TEWoodBarrel.class);
 		if (te != null) {
 			if (heldItem.isEmpty() && playerIn.isSneaking()) {
 				worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
@@ -205,9 +206,9 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 					return true;
 				}
 			} else {
-//                if (!worldIn.isRemote) {
-//                    CoreGuiHandler.openGui(worldIn, pos, playerIn, CoreGuiHandler.Type.WOOD_BARREL);
-//                }
+				if (!worldIn.isRemote) {
+					GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.WOOD_BARREL);
+				}
 				return true;
 			}
 		}
@@ -217,7 +218,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@Override
 	public void onBlockPlacedBy(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer, @NotNull ItemStack stack) {
 		if (!worldIn.isRemote && stack.getTagCompound() != null) {
-			TEWoodBarrel te = Utils.getTE(worldIn, pos, TEWoodBarrel.class);
+			var te = TileUtil.getTile(worldIn, pos, TEWoodBarrel.class);
 			if (te != null) {
 				worldIn.setBlockState(pos, state.withProperty(SEALED, true));
 				te.loadFromItemStack(stack);
@@ -257,8 +258,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	 * Handle drops via {@link this#breakBlock(World, BlockPos, IBlockState)}
 	 */
 	@Override
-	public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, int fortune) {
-	}
+	public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, int fortune) {}
 
 	@Override
 	public void onBlockExploded(World world, @NotNull BlockPos pos, @NotNull Explosion explosion) {
@@ -271,7 +271,7 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
 	@NotNull
 	public ItemStack getPickBlock(IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
 		ItemStack stack = new ItemStack(state.getBlock());
-		TEWoodBarrel tile = Utils.getTE(world, pos, TEWoodBarrel.class);
+		var tile = TileUtil.getTile(world, pos, TEWoodBarrel.class);
 		if (tile != null && tile.isSealed()) {
 			tile.saveToItemStack(stack);
 		}

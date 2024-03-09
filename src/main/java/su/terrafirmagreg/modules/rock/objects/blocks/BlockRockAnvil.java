@@ -108,7 +108,7 @@ public class BlockRockAnvil extends BlockRock {
 //		if (hand == EnumHand.OFF_HAND) {
 //			return false;
 //		}
-//		TEMetalAnvil te = Helpers.getTE(worldIn, pos, TEMetalAnvil.class);
+//		TEMetalAnvil te = Helpers.getTile(worldIn, pos, TEMetalAnvil.class);
 //		if (te == null) {
 //			return false;
 //		}
@@ -167,7 +167,7 @@ public class BlockRockAnvil extends BlockRock {
 
 //	@Override
 //	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-//		TEMetalAnvil te = Helpers.getTE(worldIn, pos, TEMetalAnvil.class);
+//		TEMetalAnvil te = Helpers.getTile(worldIn, pos, TEMetalAnvil.class);
 //		if (te != null) {
 //			te.onBreakBlock(worldIn, pos, state);
 //		}

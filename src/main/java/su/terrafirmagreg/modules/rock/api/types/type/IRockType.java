@@ -33,4 +33,5 @@ public interface IRockType extends IRockCategory {
 	default String getLocalizedNameType() {
 		return new TextComponentTranslation(String.format("rock.type.%s.name", getType())).getFormattedText();
 	}
+
 }

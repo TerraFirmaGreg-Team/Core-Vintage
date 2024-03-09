@@ -99,8 +99,7 @@ public class TFCGuiHandler implements IGuiHandler {
 			case QUIVER -> new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
 			case CHEST -> {
 				if (world.getBlockState(pos).getBlock() instanceof BlockChestTFC) {
-					ILockableContainer chestContainer = ((BlockChestTFC) world.getBlockState(pos)
-							.getBlock()).getLockableContainer(world, pos);
+					ILockableContainer chestContainer = ((BlockChestTFC) world.getBlockState(pos).getBlock()).getLockableContainer(world, pos);
 					if (chestContainer == null) // This is null if the chest is blocked
 					{
 						yield null;

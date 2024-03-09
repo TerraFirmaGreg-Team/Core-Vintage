@@ -1,8 +1,10 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.item.Item;
@@ -11,15 +13,19 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.spi.tile.IContainerProvider;
+import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
+import su.terrafirmagreg.modules.wood.client.gui.GuiWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
+import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodSupplyCart;
 
-public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IInventoryChangedListener {
+public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IInventoryChangedListener, IContainerProvider<ContainerWoodSupplyCart, GuiWoodSupplyCart> {
 
 	private static final DataParameter<Integer> CARGO = EntityDataManager.createKey(EntityWoodSupplyCart.class, DataSerializers.VARINT);
 
@@ -37,8 +43,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IIn
 			return false;
 		}
 		for (String entry : ModuleWoodConfig.ITEMS.SUPPLY_CART.canPull) {
-			if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn)
-					.toString())) {
+			if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
 				return true;
 			}
 		}
@@ -64,7 +69,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IIn
 	public boolean processInitialInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		if (!this.world.isRemote) {
 			if (player.isSneaking()) {
-				player.openGui(TerraFirmaGreg.getInstance(), 0, this.world, this.getEntityId(), 0, 0);
+				GuiHandler.openGui(world, new BlockPos(this.getEntityId(), 0, 0), player, GuiHandler.Type.WOOD_SUPPLY_CART);
 			} else if (this.pulling != player) {
 				player.startRiding(this);
 			}
@@ -129,6 +134,16 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IIn
 		super.writeEntityToNBT(compound);
 
 		compound.setInteger("Cargo", dataManager.get(CARGO));
+	}
+
+	@Override
+	public ContainerWoodSupplyCart getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		return new ContainerWoodSupplyCart(inventoryPlayer, inventory, this, inventoryPlayer.player);
+	}
+
+	@Override
+	public GuiWoodSupplyCart getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		return new GuiWoodSupplyCart(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, inventory);
 	}
 
 }

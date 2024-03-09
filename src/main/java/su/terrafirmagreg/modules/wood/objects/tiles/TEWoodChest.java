@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
@@ -8,29 +7,33 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.tile.IContainerProvider;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.client.gui.GuiWoodChest;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodChest;
 import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodChest;
 import su.terrafirmagreg.modules.wood.objects.inventory.capability.WoodDoubleChestItemHandler;
 
-
-@MethodsReturnNonnullByDefault
-public class TEWoodChest extends TileEntityChest implements ISlotCallback {
+public class TEWoodChest extends TileEntityChest implements ISlotCallback, IContainerProvider<ContainerWoodChest, GuiWoodChest> {
 
 	public static final int SIZE = 18;
 
@@ -74,8 +77,8 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
 			numPlayersUsing = 0;
 
 			for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(6, 6, 6)))) {
-				if (player.openContainer instanceof ContainerWoodChest) {
-					IInventory iinventory = ((ContainerWoodChest) player.openContainer).getLowerChestInventory();
+				if (player.openContainer instanceof ContainerWoodChest containerWoodChest) {
+					IInventory iinventory = containerWoodChest.getLowerChestInventory();
 					if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest) iinventory).isPartOfLargeChest(this)) {
 						++numPlayersUsing;
 					}
@@ -136,7 +139,7 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Nullable
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable net.minecraft.util.EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (doubleChestHandler == null || doubleChestHandler.needsRefresh()) {
 				doubleChestHandler = WoodDoubleChestItemHandler.get(this);
@@ -149,7 +152,7 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
 	}
 
 	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+	public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, IBlockState oldState, IBlockState newSate) {
 		return oldState.getBlock() != newSate.getBlock();
 	}
 
@@ -161,7 +164,7 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
+	public boolean isItemValidForSlot(int index, @NotNull ItemStack stack) {
 		// Blocks input from hopper
 		var cap = CapabilityItemSize.getIItemSize(stack);
 		if (cap != null) {
@@ -173,5 +176,20 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback {
 	@Override
 	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		return isItemValidForSlot(slot, stack);
+	}
+
+	@Override
+	public ContainerWoodChest getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		ILockableContainer chestContainer = ((BlockWoodChest) state.getBlock()).getLockableContainer(world, pos);
+		// This is null if the chest is blocked
+		if (chestContainer == null) {
+			return null;
+		}
+		return new ContainerWoodChest(inventoryPlayer, chestContainer, inventoryPlayer.player);
+	}
+
+	@Override
+	public GuiWoodChest getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		return new GuiWoodChest(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
 	}
 }

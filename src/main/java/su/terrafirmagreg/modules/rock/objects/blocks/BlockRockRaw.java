@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
-import su.terrafirmagreg.api.util.Utils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.rock.ModuleRockConfig;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -81,7 +81,7 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 
 			// No supporting solid blocks, so pop off as an item
 			worldIn.setBlockToAir(pos);
-			Utils.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
+			StackUtils.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
 		}
 	}
 

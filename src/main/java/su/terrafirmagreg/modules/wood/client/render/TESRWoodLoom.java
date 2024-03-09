@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.api.spi.render.TESRBase;
+import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
 
@@ -31,7 +31,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
 		try {
 			woodType = te.getWood();
 			GlStateManager.pushMatrix();
-			Utils.setWoodColor(woodType.getColor());
+			ColourUtils.setWoodColor(woodType.getColor());
 			this.bindTexture(ModUtils.getID("textures/blocks/wood/planks.png"));
 
 			GlStateManager.disableLighting();
@@ -60,7 +60,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
 		if (te.hasRecipe()) {
 			try {
 				GlStateManager.pushMatrix();
-				Utils.setWoodColor(woodType.getColor());
+				ColourUtils.setWoodColor(woodType.getColor());
 				this.bindTexture(te.getInProgressTexture());
 
 				GlStateManager.disableLighting();

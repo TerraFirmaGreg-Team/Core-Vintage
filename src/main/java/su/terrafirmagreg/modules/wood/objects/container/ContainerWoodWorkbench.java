@@ -5,6 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodWorkbench;
 
 
@@ -23,7 +24,7 @@ public class ContainerWoodWorkbench extends ContainerWorkbench {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) {
+	public boolean canInteractWith(@NotNull EntityPlayer playerIn) {
 		if (world.getBlockState(pos).getBlock() != block) {
 			return false;
 		} else {

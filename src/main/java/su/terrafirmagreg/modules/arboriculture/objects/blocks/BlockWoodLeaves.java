@@ -39,7 +39,7 @@ import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.util.Utils;
+import su.terrafirmagreg.api.util.TileUtil;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -155,7 +155,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //                break;
 //            case 3:
 //                if (state.getValue(LEAF_STATE) != FRUIT) {
-//                    TETickCounter te = Utils.getTE(world, pos, TETickCounter.class);
+//                    TETickCounter te = TileUtil.getTile(world, pos, TETickCounter.class);
 //                    if (te != null) {
 //                        long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
 //                        if (hours > (getTreeVariant().getMinGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
@@ -179,7 +179,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 
 	@Override
 	public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		TETickCounter tile = Utils.getTE(worldIn, pos, TETickCounter.class);
+		TETickCounter tile = TileUtil.getTile(worldIn, pos, TETickCounter.class);
 		if (tile != null) {
 			tile.resetCounter();
 		}
@@ -191,7 +191,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //            if (!worldIn.isRemote) {
 //                ItemHandlerHelper.giveItemToPlayer(playerIn, this.getTreeVariant().getFoodDrop());
 //                worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, NORMAL));
-//                TETickCounter te = Utils.getTE(worldIn, pos, TETickCounter.class);
+//                TETickCounter te = TileUtil.getTile(worldIn, pos, TETickCounter.class);
 //                if (te != null) {
 //                    te.resetCounter();
 //                }

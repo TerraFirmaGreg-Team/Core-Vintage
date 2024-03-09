@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.api.util.Utils;
+import su.terrafirmagreg.api.util.TileUtil;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 
 import javax.annotation.Nonnull;
@@ -149,7 +149,7 @@ public class ItemFireStarter extends ItemBase {
 				// Log pile
 				if (itemRand.nextFloat() < chance) {
 					world.setBlockState(pos.down(), state.withProperty(LIT, true));
-					TELogPile te = Utils.getTE(world, pos.down(), TELogPile.class);
+					TELogPile te = TileUtil.getTile(world, pos.down(), TELogPile.class);
 					if (te != null) {
 						te.light();
 					}
@@ -160,7 +160,7 @@ public class ItemFireStarter extends ItemBase {
 			} else if (state.getBlock() == BlocksTFC.PIT_KILN) {
 				// Pit Kiln
 				if (itemRand.nextFloat() < chance) {
-					TEPitKiln te = Utils.getTE(world, pos.down(), TEPitKiln.class);
+					TEPitKiln te = TileUtil.getTile(world, pos.down(), TEPitKiln.class);
 					if (te != null) {
 						te.tryLight();
 					}
@@ -192,7 +192,7 @@ public class ItemFireStarter extends ItemBase {
 					final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
 					if (itemRand.nextFloat() < chance + kindlingModifier) {
 						world.setBlockState(pos, BlocksTFC.FIREPIT.getDefaultState().withProperty(LIT, true));
-						TEFirePit te = Utils.getTE(world, pos, TEFirePit.class);
+						TEFirePit te = TileUtil.getTile(world, pos, TEFirePit.class);
 						if (te != null) {
 							te.onCreate(log.getItem());
 						}

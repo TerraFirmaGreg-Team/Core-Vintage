@@ -8,8 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.Utils;
 import su.terrafirmagreg.modules.wood.client.model.ModelWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodAnimalCart;
 
@@ -36,7 +36,7 @@ public class RenderWoodAnimalCart extends Render<EntityWoodAnimalCart> {
 			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
 		}
 
-		Utils.setWoodColor(woodType.getColor());
+		ColourUtils.setWoodColor(woodType.getColor());
 
 		this.model.render(entity, partialTicks, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 

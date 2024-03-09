@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
-import su.terrafirmagreg.api.util.Utils;
+import su.terrafirmagreg.api.util.TileUtil;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -132,7 +132,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBloc
 
 	@Override
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-		var te = Utils.getTE(worldIn, pos, TEWoodLoom.class);
+		var te = TileUtil.getTile(worldIn, pos, TEWoodLoom.class);
 		if (te != null) {
 			return te.onRightClick(playerIn);
 		}
@@ -164,7 +164,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBloc
 
 	@Override
 	public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		TEWoodLoom te = Utils.getTE(worldIn, pos, TEWoodLoom.class);
+		TEWoodLoom te = TileUtil.getTile(worldIn, pos, TEWoodLoom.class);
 		if (te != null) {
 			te.onBreakBlock(worldIn, pos, state);
 		}

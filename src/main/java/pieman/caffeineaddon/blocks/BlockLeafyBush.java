@@ -65,7 +65,7 @@ public class BlockLeafyBush extends BlockBerryBush {
             {
                 Helpers.spawnItemStack(worldIn, pos, bush.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
-                TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+                TETickCounter te = Helpers.getTile(worldIn, pos, TETickCounter.class);
                 if (te != null)
                 {
                     te.resetCounter();

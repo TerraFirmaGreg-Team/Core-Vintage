@@ -59,7 +59,6 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 	public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		tooltip.add(new TextComponentTranslation(
-				"rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
+		tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
 	}
 }

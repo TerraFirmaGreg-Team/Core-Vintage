@@ -24,6 +24,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 
@@ -276,10 +278,9 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 			double moveX = targetVec.x - this.posX + lookX * this.spacing;
 			double moveZ = targetVec.z - this.posZ + lookZ * this.spacing;
 			this.motionX = moveX;
-//            if(this.pulling instanceof EntityPlayer && !this.world.isRemote)
-//            {
-//                System.out.println(this.pulling.fallDistance);
-//            }
+			if (ModuleCoreConfig.MISC.DEBUG && this.pulling instanceof EntityPlayer && !this.world.isRemote) {
+				System.out.println(this.pulling.fallDistance);
+			}
 			if (!this.pulling.onGround && this.pulling.fallDistance == 0.0F) {
 				this.motionY = targetVec.y - this.posY;
 				this.fallDistance = 0.0F;
@@ -304,7 +305,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount) {
+	public boolean attackEntityFrom(@NotNull DamageSource source, float amount) {
 		if (this.isEntityInvulnerable(source)) {
 			return false;
 		} else if (!this.world.isRemote && !this.isDead) {
@@ -346,7 +347,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound) {
+	protected void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		if (this.pulling != null) {
 			compound.setUniqueId("FirstPullingUUID", this.pulling.getUniqueID());
 		}
@@ -358,7 +359,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 	}
 
 	@Override
-	protected void addPassenger(Entity passenger) {
+	protected void addPassenger(@NotNull Entity passenger) {
 		super.addPassenger(passenger);
 		if (this.canPassengerSteer() && this.lerpSteps > 0) {
 			this.lerpSteps = 0;
@@ -380,7 +381,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
+	public @NotNull ItemStack getPickedResult(@NotNull RayTraceResult target) {
 		return new ItemStack(this.getItemCart());
 	}
 

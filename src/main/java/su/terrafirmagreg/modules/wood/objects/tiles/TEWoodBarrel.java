@@ -452,7 +452,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	@Override
 	public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
 		var container = getContainer(inventoryPlayer, world, state, pos);
-		return new GuiWoodBarrel(container, inventoryPlayer, this, world.getBlockState(pos).getBlock().getTranslationKey());
+		return new GuiWoodBarrel(container, inventoryPlayer, this, state.getBlock().getTranslationKey());
 	}
 
 	protected static class BarrelFluidTank extends FluidTankCallback {

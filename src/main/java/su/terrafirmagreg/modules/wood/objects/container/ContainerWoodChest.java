@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.container;
 
+import lombok.Getter;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -11,6 +12,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+@Getter
 public class ContainerWoodChest extends Container {
 
 	private final IInventory lowerChestInventory;
@@ -45,7 +47,7 @@ public class ContainerWoodChest extends Container {
 	 */
 	@Override
 	@NotNull
-	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+	public ItemStack transferStackInSlot(@NotNull EntityPlayer player, int index) {
 		// Slot that was clicked
 		Slot slot = inventorySlots.get(index);
 		if (slot != null && slot.getHasStack()) {
@@ -82,7 +84,7 @@ public class ContainerWoodChest extends Container {
 	 * Called when the container is closed.
 	 */
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn) {
+	public void onContainerClosed(@NotNull EntityPlayer playerIn) {
 		super.onContainerClosed(playerIn);
 		this.lowerChestInventory.closeInventory(playerIn);
 	}
@@ -92,13 +94,6 @@ public class ContainerWoodChest extends Container {
 		return this.lowerChestInventory.isUsableByPlayer(playerIn);
 	}
 
-	/**
-	 * Gets the inventory associated with this chest container.
-	 */
-	public IInventory getLowerChestInventory() {
-		return this.lowerChestInventory;
-	}
-
 	private static class SlotChestTFC extends Slot {
 
 		SlotChestTFC(IInventory inventoryIn, int index, int xPosition, int yPosition) {
@@ -106,7 +101,7 @@ public class ContainerWoodChest extends Container {
 		}
 
 		@Override
-		public boolean isItemValid(ItemStack stack) {
+		public boolean isItemValid(@NotNull ItemStack stack) {
 			IItemSize cap = CapabilityItemSize.getIItemSize(stack);
 			if (cap != null) {
 				return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);

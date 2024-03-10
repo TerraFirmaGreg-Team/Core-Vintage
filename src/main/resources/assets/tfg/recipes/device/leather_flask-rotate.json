@@ -1,0 +1,29 @@
+{
+  "type": "tfc:damage_item_shaped",
+  "pattern": [
+    " S ",
+    "LBL",
+    " SK"
+  ],
+  "key": {
+    "K": {
+      "type": "forge:ore_dict",
+      "ore": "knife",
+      "data": "*"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    },
+    "L": {
+      "item": "tfg:device/flask/leather/side"
+    },
+    "B": {
+      "item": "tfg:animal/bladder"
+    }
+  },
+  "result": {
+    "item": "tfg:device/flask/leather/flask",
+    "data": 0
+  }
+}

@@ -79,6 +79,24 @@
           ]
         }
       ]
+    },
+    {
+      "name": "roll4",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "tfg:animal/bladder",
+          "functions": [
+            {
+              "function": "tfc:apply_req_skill",
+              "skill": "butchering",
+              "tier": 1,
+              "rarity": 75
+            }
+          ]
+        }
+      ]
     }
   ]
 }

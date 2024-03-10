@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.TerraFirmaGreg;
 
 import java.util.HashSet;
@@ -63,14 +64,13 @@ public final class OreDictUtils {
 	 * Конвертирует массив из строк в oreDict, передавай в массив строки содержащие только буквы,
 	 * регистр значения не имеет, каждый элемент массива будет отформатирован в соответствие с camelCase.
 	 */
-	public static String toString(Object... parts) {
+	public static String toString(@NotNull Object... parts) {
 		if (parts.length > 1) {
 			return CaseFormat.UPPER_UNDERSCORE.to(
 					CaseFormat.LOWER_CAMEL,
 					Joiner.on('_').skipNulls().join(parts).replace("/", "_").toUpperCase()
 			);
 		}
-
 		return (String) parts[0];
 	}
 

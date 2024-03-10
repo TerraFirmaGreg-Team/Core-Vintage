@@ -199,7 +199,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
 	@NotNull
 	@Override
-	public Weight getWeight(ItemStack stack) {
+	public Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.MEDIUM; // Stacksize = 16
 	}
 

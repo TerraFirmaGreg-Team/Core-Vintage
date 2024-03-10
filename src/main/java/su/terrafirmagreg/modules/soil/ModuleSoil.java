@@ -5,8 +5,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
@@ -17,7 +17,7 @@ import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 import java.util.Collections;
 import java.util.List;
 
-@Module(moduleID = "Soil", name = "TFG Module Soil")
+@ModuleTFG(moduleID = "Soil", name = "TFG Module Soil")
 public class ModuleSoil extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleSoil.class.getSimpleName());

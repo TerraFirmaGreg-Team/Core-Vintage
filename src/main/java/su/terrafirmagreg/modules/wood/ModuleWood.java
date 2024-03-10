@@ -5,8 +5,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
@@ -20,7 +20,7 @@ import su.terrafirmagreg.modules.wood.data.ItemsWood;
 import java.util.Collections;
 import java.util.List;
 
-@Module(moduleID = "Wood", name = "TFG Module Wood")
+@ModuleTFG(moduleID = "Wood", name = "TFG Module Wood")
 public class ModuleWood extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleWood.class.getSimpleName());

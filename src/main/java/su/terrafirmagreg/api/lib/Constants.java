@@ -10,13 +10,11 @@ public class Constants {
 	public static final String MODID_TFCTECH = "tfctech";
 	public static final String MODID_HORSEPOWER = "horsepower";
 	public static final String MODID_CAFFEINEADDON = "ca";
-	public static final String MODID_WATERFLASKS = "waterflasks";
 	public static final String MODID_TIME4TFC = "time4tfc";
 	public static final String MODID_OSA = "oversizediteminstoragearea";
 	static public final String MODID_CELLARS = "cellars";
 	public static final String MODID_EASYBREEDINGTFC = "easybreedingtfc";
 	public static final String MODID_TFCTHINGS = "tfcthings";
-	public static final String MODID_TFCALLOYCALC = "tfcalloycalc";
 	public static final String MODID_ASTIKORCARTS = "astikorcarts";
 	public static final String MODID_HOTORNOT = "hotornot";
 	public static final String MODID_FL = "firmalife";

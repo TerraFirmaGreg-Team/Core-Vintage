@@ -16,6 +16,7 @@ public final class ItemsCore {
 
 		registry.registerAuto(WAND = new ItemDebug());
 
+
 	}
 
 

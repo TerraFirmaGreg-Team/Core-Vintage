@@ -167,8 +167,8 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    compileOnlyApi 'org.jetbrains:annotations:24.0.1'
-    annotationProcessor 'org.jetbrains:annotations:24.0.1'
+    compileOnlyApi 'org.jetbrains:annotations:24.1.0'
+    annotationProcessor 'org.jetbrains:annotations:24.1.0'
 
     implementation 'it.unimi.dsi:fastutil:8.5.+'
     implementation "info.loenwind.autoconfig:AutoConfig:1.12.2-1.0.2"

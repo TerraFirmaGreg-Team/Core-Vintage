@@ -4,15 +4,16 @@ package su.terrafirmagreg.modules.device;
 import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
+import su.terrafirmagreg.modules.device.data.SoundDevice;
 
 import javax.annotation.Nonnull;
 
-@Module(moduleID = "Device", name = "TFG Module Device")
+@ModuleTFG(moduleID = "Device", name = "TFG Module Device")
 public class ModuleDevice extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleDevice.class.getSimpleName());
@@ -29,6 +30,7 @@ public class ModuleDevice extends ModuleBase {
 	public void onRegister() {
 		BlocksDevice.onRegister(registryManager);
 		ItemsDevice.onRegister(registryManager);
+		SoundDevice.onRegister(registryManager);
 	}
 
 

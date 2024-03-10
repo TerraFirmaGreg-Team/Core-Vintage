@@ -347,11 +347,13 @@ public class RegistryManager {
 	 *
 	 * @param name The name of the sound file. No upper case chars!
 	 */
-	public void registerSound(String name) {
+	public SoundEvent registerSound(String name) {
 
 		final ResourceLocation id = new ResourceLocation(this.modID, name);
 		final SoundEvent sound = new SoundEvent(id).setRegistryName(id);
 		this.sounds.add(sound);
+
+		return sound;
 	}
 
 	//endregion

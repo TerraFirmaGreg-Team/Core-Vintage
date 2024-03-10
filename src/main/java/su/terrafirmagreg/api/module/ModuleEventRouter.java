@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.util.GameUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,6 @@ public class ModuleEventRouter {
 	private final Map<Class<? extends FMLStateEvent>, IFMLStateEventRoute> routes;
 
 	public ModuleEventRouter(List<ModuleBase> loadedModules) {
-		ModuleManager.LOGGER.debug("Loaded modules: " + loadedModules);
 
 		this.loadedModules = loadedModules;
 		this.routes = new HashMap<>();
@@ -72,7 +72,7 @@ public class ModuleEventRouter {
 							module.onInit(event);
 							module.getLogger().debug("Init complete");
 
-							if (event.getSide().isClient()) {
+							if (GameUtils.isClient()) {
 								module.getLogger().debug("Client Init start");
 								module.onClientInit(event);
 								module.getLogger().debug("Client Init complete");
@@ -86,7 +86,7 @@ public class ModuleEventRouter {
 							module.onPostInit(event);
 							module.getLogger().debug("Post-Init complete");
 
-							if (event.getSide() == Side.CLIENT) {
+							if (GameUtils.isClient()) {
 								module.getLogger().debug("Client Post-Init start");
 								module.onClientPostInit(event);
 								module.getLogger().debug("Client Post-Init complete");

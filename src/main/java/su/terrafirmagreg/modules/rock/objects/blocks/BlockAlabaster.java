@@ -21,7 +21,7 @@ public class BlockAlabaster extends BlockBase implements IItemSize {
 		this.blockVariant = blockVariant;
 		this.color = color;
 
-		setCreativeTab(ModuleCore.MISC_TAB);
+		setCreativeTab(ModuleCore.CORE_TAB);
 		setSoundType(SoundType.STONE);
 		setHardness(1.0F);
 

@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects;
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.util.loot.ApplyRequiredSkill;
 import net.dries007.tfc.util.loot.ApplySimpleSkill;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
@@ -106,6 +107,7 @@ public class LootTablesTFC {
 
 		// Loot function for skill drop multiplier
 		LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(new ResourceLocation(MODID_TFC, "apply_skill")));
+		LootFunctionManager.registerFunction(new ApplyRequiredSkill.Serializer(new ResourceLocation(MODID_TFC, "apply_req_skill")));
 	}
 
 	@SubscribeEvent
@@ -119,8 +121,7 @@ public class LootTablesTFC {
 
 		// Add calamari to squid's loot table
 		if ("minecraft:entities/squid".equals(event.getName().toString())) {
-			event.getTable()
-			     .addPool(event.getLootTableManager().getLootTableFromLocation(ANIMALS_SQUID).getPool("roll1"));
+			event.getTable().addPool(event.getLootTableManager().getLootTableFromLocation(ANIMALS_SQUID).getPool("roll1"));
 		}
 	}
 

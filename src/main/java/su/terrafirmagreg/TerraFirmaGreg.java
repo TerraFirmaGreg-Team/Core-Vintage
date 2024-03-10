@@ -16,8 +16,11 @@ import static su.terrafirmagreg.Tags.*;
 public class TerraFirmaGreg {
 
 	public static final Logger LOGGER = LogManager.getLogger("TFG");
+
+	@Getter
 	@SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
-	public static IProxy PROXY;
+	public static IProxy proxy;
+
 	@SuppressWarnings("unused")
 	@Mod.Instance
 	@Getter

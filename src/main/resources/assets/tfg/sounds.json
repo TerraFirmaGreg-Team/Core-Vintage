@@ -1,0 +1,9 @@
+{
+  "item.flaskbreak": {
+    "category": "ambient",
+    "subtitle": "tfg.item.device.flaskbreak",
+    "sounds": [
+      "tfg:device/leather_flask_break"
+    ]
+  }
+}

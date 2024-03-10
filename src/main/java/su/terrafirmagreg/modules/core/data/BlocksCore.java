@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.core.objects.blocks.BlockPuddle;
 public final class BlocksCore {
 
 	public static BlockDebug DEBUG;
-	public static BlockPuddle PUDDLE; //TODO: отключить itemBlock
+	public static BlockPuddle PUDDLE; //TODO: отключить регистрацию itemBlock
 
 	public static void onRegister(RegistryManager registry) {
 

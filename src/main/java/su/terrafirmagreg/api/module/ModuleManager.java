@@ -32,7 +32,7 @@ public class ModuleManager {
 
 	public void setup(ASMDataTable table) {
 
-		Set<ASMDataTable.ASMData> dataSet = table.getAll(Module.class.getCanonicalName());
+		Set<ASMDataTable.ASMData> dataSet = table.getAll(ModuleTFG.class.getCanonicalName());
 		for (ASMDataTable.ASMData data : dataSet) {
 			String moduleID = (String) data.getAnnotationInfo().get("moduleID");
 			List<String> modDependencies = (List<String>) data.getAnnotationInfo().get("modDependencies");

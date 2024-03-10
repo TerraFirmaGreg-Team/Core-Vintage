@@ -8,11 +8,11 @@ class ModuleConstructor {
 	ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
 		try {
 			ModuleBase module = moduleClass.newInstance();
-			ModuleManager.LOGGER.info("[ {} ] Loaded module: {}", modId, moduleClass.getName());
+			ModuleManager.LOGGER.info("[{}] Loaded module: {}", modId, moduleClass.getSimpleName());
 			return module;
 
 		} catch (Exception e) {
-			ModuleManager.LOGGER.error("[ {} ] Error loading module: {} {}", modId, moduleClass.getName(), e);
+			ModuleManager.LOGGER.error("[{}] Error loading module: {} {}", modId, moduleClass.getSimpleName(), e);
 		}
 
 		return null;

@@ -5,8 +5,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategoryHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
@@ -18,7 +18,7 @@ import su.terrafirmagreg.modules.rock.data.ItemsRock;
 import java.util.Collections;
 import java.util.List;
 
-@Module(moduleID = "Rock", name = "TFG Module Rock")
+@ModuleTFG(moduleID = "Rock", name = "TFG Module Rock")
 public class ModuleRock extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleRock.class.getSimpleName());
@@ -36,7 +36,7 @@ public class ModuleRock extends ModuleBase {
 		RockTypeHandler.init();
 		RockBlockVariantHandler.init();
 		RockItemVariantHandler.init();
-		
+
 		BlocksRock.onRegister(registryManager);
 		ItemsRock.onRegister(registryManager);
 	}

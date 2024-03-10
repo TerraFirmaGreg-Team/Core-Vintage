@@ -1,19 +1,17 @@
 package su.terrafirmagreg.modules.animal.data;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.registry.RegistryManager;
+import su.terrafirmagreg.modules.animal.objects.items.ItemAnimalMisc;
 
 
 public class ItemsAnimal {
 
+	public static ItemAnimalMisc BLADDER;
+
 	public static void onRegister(RegistryManager registry) {
 
+		registry.registerAuto(BLADDER = new ItemAnimalMisc.Builder("bladder").build());
 
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void onClientRegister(RegistryManager registry) {
 
 	}
 }

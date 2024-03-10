@@ -1,4 +1,4 @@
-package dev.quarris.tfcalloycalc;
+package su.terrafirmagreg.modules.device.objects.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -7,14 +7,15 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import su.terrafirmagreg.modules.device.objects.tiles.TEAlloyCalculator;
 
-public class ContainerCalc extends Container {
+public class ContainerAlloyCalculator extends Container {
 
-	public final TileEntityCalc tile;
+	public final TEAlloyCalculator tile;
 	private final InventoryPlayer inv;
 	private final IItemHandler stacks;
 
-	public ContainerCalc(InventoryPlayer playerInv, TileEntityCalc tile) {
+	public ContainerAlloyCalculator(InventoryPlayer playerInv, TEAlloyCalculator tile) {
 		this.tile = tile;
 		this.stacks = tile.stacks;
 		this.inv = playerInv;
@@ -25,7 +26,7 @@ public class ContainerCalc extends Container {
 				this.addSlotToContainer(new SlotItemHandler(this.stacks, slot, 10 + stackSlotX * 18, 31 + stackSlotY * 18) {
 					@Override
 					public void onSlotChanged() {
-						ContainerCalc.this.tile.calculateAlloy();
+						ContainerAlloyCalculator.this.tile.calculateAlloy();
 					}
 				});
 			}

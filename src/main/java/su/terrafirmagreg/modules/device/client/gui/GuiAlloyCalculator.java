@@ -1,4 +1,4 @@
-package dev.quarris.tfcalloycalc;
+package su.terrafirmagreg.modules.device.client.gui;
 
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.Alloy;
@@ -8,17 +8,19 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.device.objects.container.ContainerAlloyCalculator;
 
 import java.util.Map;
 
 @SideOnly(Side.CLIENT)
-public class GuiCalc extends GuiContainer {
+public class GuiAlloyCalculator extends GuiContainer {
 
-	public static final ResourceLocation BG_TEX = ModRef.res("textures/gui/alloy_calc_gui.png");
+	public static final ResourceLocation ALLOY_CALCULATOR_BACKGROUND = ModUtils.getID("textures/gui/alloy_calculator.png");
 
-	private final ContainerCalc container;
+	private final ContainerAlloyCalculator container;
 
-	public GuiCalc(ContainerCalc container) {
+	public GuiAlloyCalculator(ContainerAlloyCalculator container) {
 		super(container);
 		this.container = container;
 		this.ySize = 186;
@@ -27,7 +29,7 @@ public class GuiCalc extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		this.drawDefaultBackground();
-		this.mc.getTextureManager().bindTexture(BG_TEX);
+		this.mc.getTextureManager().bindTexture(ALLOY_CALCULATOR_BACKGROUND);
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 		//drawRect(this.guiLeft, this.guiTop, this.guiLeft + this.xSize, this.guiTop + this.ySize, 0xFFC6C6C6);
 	}

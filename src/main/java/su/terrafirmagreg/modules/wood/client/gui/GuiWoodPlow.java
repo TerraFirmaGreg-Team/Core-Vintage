@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.wood.client.gui;
 
-import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import su.terrafirmagreg.api.gui.GuiContainerBase;
 import su.terrafirmagreg.api.util.ModUtils;
 
-public class GuiWoodPlow extends GuiContainerTFC {
+public class GuiWoodPlow extends GuiContainerBase {
 
 	private static final ResourceLocation PLOW_GUI_TEXTURES = ModUtils.getID("textures/gui/container/plow.png");
 	private final IInventory plowInventory;

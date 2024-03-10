@@ -12,7 +12,8 @@ public class KnappingRecipeAdd {
 
 	public static void register(RegistryEvent.Register<KnappingRecipe> event) {
 		event.getRegistry().registerAll(
-				new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsDevice.LEATHER_SIDE),
+				new KnappingRecipeSimple(
+						KnappingType.LEATHER, true, new ItemStack(ItemsDevice.LEATHER_SIDE),
 						"  XX ", " XXX ", "XXXXX", " XXX ", "  X  ").setRegistryName("leather_side")
 		);
 	}

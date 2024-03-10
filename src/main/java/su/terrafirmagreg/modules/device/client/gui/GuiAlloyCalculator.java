@@ -16,7 +16,7 @@ import java.util.Map;
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCalculator extends GuiContainer {
 
-	public static final ResourceLocation ALLOY_CALCULATOR_BACKGROUND = ModUtils.getID("textures/gui/alloy_calculator.png");
+	public static final ResourceLocation ALLOY_CALCULATOR_BACKGROUND = ModUtils.getID("textures/gui/container/alloy_calculator.png");
 
 	private final ContainerAlloyCalculator container;
 
@@ -36,6 +36,7 @@ public class GuiAlloyCalculator extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+
 		this.fontRenderer.drawString("Alloy Calculator", 8, 6, 0x404040);
 		Alloy alloy = this.container.tile.getAlloy();
 		if (alloy != null) {

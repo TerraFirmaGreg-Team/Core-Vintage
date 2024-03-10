@@ -24,7 +24,6 @@ import su.terrafirmagreg.modules.rock.ModuleRockConfig;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
-import su.terrafirmagreg.modules.rock.data.BlocksRock;
 
 import java.util.Random;
 
@@ -42,7 +41,7 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 
 		// Copy as each raw stone has an unique resultingState
 		var spec = new FallingBlockManager.Specification(blockVariant.getSpecification());
-		spec.setResultingState(BlocksRock.getBlock(RockBlockVariants.COBBLE, type).getDefaultState());
+		spec.setResultingState(RockBlockVariants.COBBLE.get(type).getDefaultState());
 
 
 		FallingBlockManager.registerFallable(this, spec);
@@ -92,7 +91,7 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 				pos.up(), true)) {
 			if (!worldIn.isRemote) {
 				// Create a stone anvil
-				var anvil = BlocksRock.getBlock(RockBlockVariants.ANVIL, getType());
+				var anvil = RockBlockVariants.ANVIL.get(getType());
 				if (anvil instanceof BlockRockAnvil) {
 					worldIn.setBlockState(pos, anvil.getDefaultState());
 				}

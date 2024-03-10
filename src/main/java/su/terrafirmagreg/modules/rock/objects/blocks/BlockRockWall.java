@@ -32,7 +32,7 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
 	private final RockType type;
 
 	public BlockRockWall(RockBlockVariant modelBlock, RockBlockVariant blockVariant, RockType type) {
-		super(modelBlock.getBlock(type));
+		super(modelBlock.get(type));
 
 		this.blockVariant = blockVariant;
 		this.type = type;

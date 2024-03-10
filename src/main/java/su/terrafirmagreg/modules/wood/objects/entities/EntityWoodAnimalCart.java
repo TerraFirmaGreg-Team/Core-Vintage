@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 public class EntityWoodAnimalCart extends EntityWoodCart {
 
@@ -44,7 +43,7 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
 	public Item getItemCart() {
 		var type = getWood();
 		if (type != null) {
-			return ItemsWood.getItem(WoodItemVariants.ANIMAL_CART, type);
+			return WoodItemVariants.ANIMAL_CART.get(type);
 		}
 		return getItemCart();
 	}

@@ -22,7 +22,6 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
-import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 
@@ -81,7 +80,7 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 	@NotNull
 	@Override
 	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-		return ItemsSoil.getItem(SoilItemVariants.PILE, type);
+		return SoilItemVariants.PILE.get(type);
 	}
 
 	@NotNull

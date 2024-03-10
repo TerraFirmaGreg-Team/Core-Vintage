@@ -104,7 +104,7 @@ public class ClientRegisterEventsTFCF {
 
 		for (Item item : ItemsTFCF.getAllSimpleItems())
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-			                                                                                  .toString()));
+					.toString()));
 
 		for (ItemGemTFCF item : ItemsTFCF.getAllGemTFCFItems())
 			for (GemTFCF.Grade grade : GemTFCF.Grade.values())
@@ -112,42 +112,48 @@ public class ClientRegisterEventsTFCF {
 
 		for (Item item : ItemsTFCF.getAllItemBows())
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-			                                                                                  .toString()));
+					.toString()));
 
 		for (ItemFruitDoor item : ItemsTFCF.getAllFruitDoors())
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-			                                                                                  .toString()));
+					.toString()));
 
 		for (EnumDyeColor color : EnumDyeColor.values()) {
 			if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL_GLAZED.getRegistryName()
-				                                                                                                                                                                                   .toString()));
-				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED.getRegistryName()
-				                                                                                                                                                                               .toString()));
+				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL_GLAZED
+						.getRegistryName()
+						.toString()));
+				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED
+						.getRegistryName()
+						.toString()));
 			}
 			if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL_GLAZED.getRegistryName()
-				                                                                                                                                                                               .toString()));
-				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED.getRegistryName()
-				                                                                                                                                                                           .toString()));
+				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL_GLAZED
+						.getRegistryName()
+						.toString()));
+				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED
+						.getRegistryName()
+						.toString()));
 			}
 			if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.UNFIRED_STONEWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.UNFIRED_STONEWARE_VESSEL_GLAZED.getRegistryName()
-				                                                                                                                                                                               .toString()));
-				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED.getRegistryName()
-				                                                                                                                                                                           .toString()));
+				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.UNFIRED_STONEWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.UNFIRED_STONEWARE_VESSEL_GLAZED
+						.getRegistryName()
+						.toString()));
+				ModelLoader.setCustomModelResourceLocation(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED, color.getDyeDamage(), new ModelResourceLocation(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED
+						.getRegistryName()
+						.toString()));
 			}
 		}
 
 		for (ItemArmorTFCF item : ItemsTFCF.getAllArmorItems())
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-			                                                                                  .toString()));
+					.toString()));
 
 		// BLOCKS
 
 		for (ItemBlock itemBlock : BlocksTFCF.getAllNormalItemBlocks())
 			ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName()
-			                                                                                            .toString()));
+					.toString()));
 
 		for (Block block : BlocksTFCF.getAllCoralPlants())
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockCoral.LEVEL).build());
@@ -193,7 +199,7 @@ public class ClientRegisterEventsTFCF {
 		if (ConfigTFCF.General.WORLD.enableGroundcoverOreDeposit) {
 			for (Block block : BlocksTFCF.getAllSurfaceOreBlocks())
 				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSurfaceOreDeposit.GRADE)
-				                                                              .build());
+						.build());
 		}
 
 //        for (Block block : BlocksTFCF.getAllJoshuaTreeSaplingBlocks())
@@ -201,13 +207,13 @@ public class ClientRegisterEventsTFCF {
 
 		for (BlockFruitTreeLeaves leaves : BlocksTFCF.getAllFruitLeaves())
 			ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE)
-			                                                               .ignore(BlockFruitTreeLeaves.HARVESTABLE)
-			                                                               .build());
+					.ignore(BlockFruitTreeLeaves.HARVESTABLE)
+					.build());
 
 		for (BlockLeavesTFCF leaves : BlocksTFCF.getAllNormalTreeLeaves())
 			ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockLeavesTFCF.DECAYABLE)
-			                                                               .ignore(BlockLeavesTFCF.HARVESTABLE)
-			                                                               .build());
+					.ignore(BlockLeavesTFCF.HARVESTABLE)
+					.build());
 
 		for (BlockLogTFCF Logs : BlocksTFCF.getAllNormalTreeLog())
 			ModelLoader.setCustomStateMapper(Logs, new StateMap.Builder().ignore(BlockLogTFCF.PLACED).build());
@@ -223,7 +229,7 @@ public class ClientRegisterEventsTFCF {
 
 		for (BlockFruitLogFenceGate gate : BlocksTFCF.getAllFruitLogFenceGates())
 			ModelLoader.setCustomStateMapper(gate, new StateMap.Builder().ignore(BlockFruitLogFenceGate.POWERED)
-			                                                             .build());
+					.build());
 
 		for (BlockFenceGateLog gate : BlocksTFCF.getAllFenceGateLogBlocks())
 			ModelLoader.setCustomStateMapper(gate, new StateMap.Builder().ignore(BlockFenceGateLog.POWERED).build());
@@ -234,13 +240,13 @@ public class ClientRegisterEventsTFCF {
 		for (BlockSlabTFCF.Half block : BlocksTFCF.getAllSlabBlocks()) {
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSlabTFCF.VARIANT).build());
 			ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFCF.VARIANT)
-			                                                                         .build());
+					.build());
 		}
 
 		for (BlockFruitSlab.Half block : BlocksTFCF.getAllFruitSlabBlocks()) {
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitSlab.VARIANT).build());
 			ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockFruitSlab.VARIANT)
-			                                                                         .build());
+					.build());
 		}
 
 		for (Block block : BlocksTFCF.getAllFruitChestBlocks())
@@ -249,7 +255,7 @@ public class ClientRegisterEventsTFCF {
 		for (BlockSlabTFC.Half block : BlocksTFCF.getAllSlabBlocksTFC()) {
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
 			ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT)
-			                                                                         .build());
+					.build());
 		}
 
 		for (Block block : BlocksTFCF.getAllFluidBlocks())
@@ -257,7 +263,7 @@ public class ClientRegisterEventsTFCF {
 
 		for (Block block : BlocksTFCF.getAllBambooLog())
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(StatePropertiesTFCF.CAN_GROW)
-			                                                              .build());
+					.build());
 
 		for (Block block : BlocksTFCF.getAllBambooLeaves())
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
@@ -266,58 +272,59 @@ public class ClientRegisterEventsTFCF {
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesTFCF.CAN_GROW)
-		                                                                                       .build());
+				.build());
 		ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
-		                                                                                          .build());
+				.build());
 		ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
-		                                                                                           .build());
+				.build());
 
 		ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesTFCF.CAN_GROW)
-		                                                                                       .build());
+				.build());
 		ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
-		                                                                                          .build());
+				.build());
 		ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
-		                                                                                           .build());
+				.build());
 
 		if (ConfigTFCF.General.WORLD.enableAllBlockTypes && ConfigTFCF.General.WORLD.enableAllFarmland) {
 			BlocksTFCF.getAllBlockRockVariantsTFCF().forEach(e -> {
 				if (e.getType() == RockTFCF.LOAMY_SAND_FARMLAND) {
 					ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockLoamySandFarmland.MOISTURE)
-					                                                          .build());
+							.build());
 				} else if (e.getType() == RockTFCF.SANDY_LOAM_FARMLAND) {
 					ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockSandyLoamFarmland.MOISTURE)
-					                                                          .build());
+							.build());
 				} else if (e.getType() == RockTFCF.LOAM_FARMLAND) {
 					ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockLoamFarmland.MOISTURE)
-					                                                          .build());
+							.build());
 				} else if (e.getType() == RockTFCF.SILT_LOAM_FARMLAND) {
 					ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockSiltLoamFarmland.MOISTURE)
-					                                                          .build());
+							.build());
 				} else if (e.getType() == RockTFCF.SILT_FARMLAND) {
 					ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockSiltFarmland.MOISTURE)
-					                                                          .build());
+							.build());
 				} else if (e.getType() == RockTFCF.HUMUS_FARMLAND) {
 					ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockHumusFarmland.MOISTURE)
-					                                                          .build());
+							.build());
 				} else if (e.getType() == RockTFCF.MOSSY_RAW) {
 					ModelLoader.setCustomStateMapper(e, new StateMap.Builder().ignore(BlockRockRawTFCF.CAN_FALL)
-					                                                          .build());
+							.build());
 				}
 			});
 		}
 
 		// Ceramic Molds
 		if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-			ModelBakery.registerItemVariants(ItemEarthenwareMold.get(Metal.ItemType.INGOT), new ModelResourceLocation(ItemEarthenwareMold.get(Metal.ItemType.INGOT)
-			                                                                                                                             .getRegistryName() + "/unknown"));
+			ModelBakery.registerItemVariants(ItemEarthenwareMold.get(Metal.ItemType.INGOT), new ModelResourceLocation(ItemEarthenwareMold
+					.get(Metal.ItemType.INGOT)
+					.getRegistryName() + "/unknown"));
 		}
 		if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
 			ModelBakery.registerItemVariants(ItemKaoliniteMold.get(Metal.ItemType.INGOT), new ModelResourceLocation(ItemKaoliniteMold.get(Metal.ItemType.INGOT)
-			                                                                                                                         .getRegistryName() + "/unknown"));
+					.getRegistryName() + "/unknown"));
 		}
 		if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
 			ModelBakery.registerItemVariants(ItemStonewareMold.get(Metal.ItemType.INGOT), new ModelResourceLocation(ItemStonewareMold.get(Metal.ItemType.INGOT)
-			                                                                                                                         .getRegistryName() + "/unknown"));
+					.getRegistryName() + "/unknown"));
 		}
 
 		if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
@@ -326,10 +333,10 @@ public class ClientRegisterEventsTFCF {
 				if (item == null) continue;
 
 				final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-				                                                                     .toString() + "/empty");
+						.toString() + "/empty");
 				final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-				                                                                   .toString() + "/" + value.name()
-				                                                                                            .toLowerCase());
+						.toString() + "/" + value.name()
+						.toLowerCase());
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
 					@Nonnull
@@ -354,10 +361,10 @@ public class ClientRegisterEventsTFCF {
 				if (item == null) continue;
 
 				final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-				                                                                     .toString() + "/empty");
+						.toString() + "/empty");
 				final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-				                                                                   .toString() + "/" + value.name()
-				                                                                                            .toLowerCase());
+						.toString() + "/" + value.name()
+						.toLowerCase());
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
 					@Nonnull
@@ -382,10 +389,10 @@ public class ClientRegisterEventsTFCF {
 				if (item == null) continue;
 
 				final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-				                                                                     .toString() + "/empty");
+						.toString() + "/empty");
 				final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-				                                                                   .toString() + "/" + value.name()
-				                                                                                            .toLowerCase());
+						.toString() + "/" + value.name()
+						.toLowerCase());
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
 					@Nonnull
@@ -408,52 +415,61 @@ public class ClientRegisterEventsTFCF {
 		if (TFCFlorae.TFCElementiaAdded) {
 			if (ItemMetalTFCE.ItemType.NAIL.isTypeActive()) {
 				if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-					ModelBakery.registerItemVariants(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL), new ModelResourceLocation(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL)
-					                                                                                                                                            .getRegistryName() + "/unknown"));
+					ModelBakery.registerItemVariants(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL), new ModelResourceLocation(ItemEarthenwareMoldTFCE
+							.get(ItemMetalTFCE.ItemType.NAIL)
+							.getRegistryName() + "/unknown"));
 				}
 				if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-					ModelBakery.registerItemVariants(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL), new ModelResourceLocation(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL)
-					                                                                                                                                        .getRegistryName() + "/unknown"));
+					ModelBakery.registerItemVariants(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL), new ModelResourceLocation(ItemKaoliniteMoldTFCE
+							.get(ItemMetalTFCE.ItemType.NAIL)
+							.getRegistryName() + "/unknown"));
 				}
 				if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-					ModelBakery.registerItemVariants(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL), new ModelResourceLocation(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL)
-					                                                                                                                                        .getRegistryName() + "/unknown"));
+					ModelBakery.registerItemVariants(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.NAIL), new ModelResourceLocation(ItemStonewareMoldTFCE
+							.get(ItemMetalTFCE.ItemType.NAIL)
+							.getRegistryName() + "/unknown"));
 				}
 			}
 			if (ItemMetalTFCE.ItemType.RING.isTypeActive()) {
 				if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-					ModelBakery.registerItemVariants(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.RING), new ModelResourceLocation(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.RING)
-					                                                                                                                                            .getRegistryName() + "/unknown"));
+					ModelBakery.registerItemVariants(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.RING), new ModelResourceLocation(ItemEarthenwareMoldTFCE
+							.get(ItemMetalTFCE.ItemType.RING)
+							.getRegistryName() + "/unknown"));
 				}
 				if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-					ModelBakery.registerItemVariants(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.RING), new ModelResourceLocation(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.RING)
-					                                                                                                                                        .getRegistryName() + "/unknown"));
+					ModelBakery.registerItemVariants(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.RING), new ModelResourceLocation(ItemKaoliniteMoldTFCE
+							.get(ItemMetalTFCE.ItemType.RING)
+							.getRegistryName() + "/unknown"));
 				}
 				if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-					ModelBakery.registerItemVariants(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.RING), new ModelResourceLocation(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.RING)
-					                                                                                                                                        .getRegistryName() + "/unknown"));
+					ModelBakery.registerItemVariants(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.RING), new ModelResourceLocation(ItemStonewareMoldTFCE
+							.get(ItemMetalTFCE.ItemType.RING)
+							.getRegistryName() + "/unknown"));
 				}
 			}
 			if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-				ModelBakery.registerItemVariants(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE), new ModelResourceLocation(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE)
-				                                                                                                                                                     .getRegistryName() + "/unknown"));
+				ModelBakery.registerItemVariants(ItemEarthenwareMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE), new ModelResourceLocation(ItemEarthenwareMoldTFCE
+						.get(ItemMetalTFCE.ItemType.HALBERD_BLADE)
+						.getRegistryName() + "/unknown"));
 			}
 			if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-				ModelBakery.registerItemVariants(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE), new ModelResourceLocation(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE)
-				                                                                                                                                                 .getRegistryName() + "/unknown"));
+				ModelBakery.registerItemVariants(ItemKaoliniteMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE), new ModelResourceLocation(ItemKaoliniteMoldTFCE
+						.get(ItemMetalTFCE.ItemType.HALBERD_BLADE)
+						.getRegistryName() + "/unknown"));
 			}
 			if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-				ModelBakery.registerItemVariants(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE), new ModelResourceLocation(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE)
-				                                                                                                                                                 .getRegistryName() + "/unknown"));
+				ModelBakery.registerItemVariants(ItemStonewareMoldTFCE.get(ItemMetalTFCE.ItemType.HALBERD_BLADE), new ModelResourceLocation(ItemStonewareMoldTFCE
+						.get(ItemMetalTFCE.ItemType.HALBERD_BLADE)
+						.getRegistryName() + "/unknown"));
 			}
 
 			if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
 				ItemEarthenwareMoldTFCE item = ItemEarthenwareMoldTFCE.get(ItemType.HALBERD_BLADE);
 				if (item != null) {
 					final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-					                                                                     .toString() + "/empty");
+							.toString() + "/empty");
 					final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-					                                                                   .toString() + "/halberd_blade");
+							.toString() + "/halberd_blade");
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
@@ -477,9 +493,9 @@ public class ClientRegisterEventsTFCF {
 				ItemKaoliniteMoldTFCE item = ItemKaoliniteMoldTFCE.get(ItemType.HALBERD_BLADE);
 				if (item != null) {
 					final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-					                                                                     .toString() + "/empty");
+							.toString() + "/empty");
 					final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-					                                                                   .toString() + "/halberd_blade");
+							.toString() + "/halberd_blade");
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
@@ -503,9 +519,9 @@ public class ClientRegisterEventsTFCF {
 				ItemStonewareMoldTFCE item = ItemStonewareMoldTFCE.get(ItemType.HALBERD_BLADE);
 				if (item != null) {
 					final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-					                                                                     .toString() + "/empty");
+							.toString() + "/empty");
 					final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-					                                                                   .toString() + "/halberd_blade");
+							.toString() + "/halberd_blade");
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
@@ -532,10 +548,10 @@ public class ClientRegisterEventsTFCF {
 						continue;
 
 					final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-					                                                                     .toString() + "/empty");
+							.toString() + "/empty");
 					final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-					                                                                   .toString() + "/" + value.name()
-					                                                                                            .toLowerCase());
+							.toString() + "/" + value.name()
+							.toLowerCase());
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
@@ -562,10 +578,10 @@ public class ClientRegisterEventsTFCF {
 						continue;
 
 					final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-					                                                                     .toString() + "/empty");
+							.toString() + "/empty");
 					final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-					                                                                   .toString() + "/" + value.name()
-					                                                                                            .toLowerCase());
+							.toString() + "/" + value.name()
+							.toLowerCase());
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
@@ -592,10 +608,10 @@ public class ClientRegisterEventsTFCF {
 						continue;
 
 					final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-					                                                                     .toString() + "/empty");
+							.toString() + "/empty");
 					final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-					                                                                   .toString() + "/" + value.name()
-					                                                                                            .toLowerCase());
+							.toString() + "/" + value.name()
+							.toLowerCase());
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
@@ -622,9 +638,9 @@ public class ClientRegisterEventsTFCF {
 				ItemEarthenwareMalletMoldFL item = ItemsTFCF.malletMoldEarthenware;
 
 				final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-				                                                                     .toString() + "/empty");
+						.toString() + "/empty");
 				final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-				                                                                   .toString() + "/mallet_head");
+						.toString() + "/mallet_head");
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
 					@Nonnull
@@ -646,9 +662,9 @@ public class ClientRegisterEventsTFCF {
 				ItemKaoliniteMalletMoldFL item = ItemsTFCF.malletMoldKaolinite;
 
 				final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-				                                                                     .toString() + "/empty");
+						.toString() + "/empty");
 				final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-				                                                                   .toString() + "/mallet_head");
+						.toString() + "/mallet_head");
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
 					@Nonnull
@@ -670,9 +686,9 @@ public class ClientRegisterEventsTFCF {
 				ItemStonewareMalletMoldFL item = ItemsTFCF.malletMoldStoneware;
 
 				final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName()
-				                                                                     .toString() + "/empty");
+						.toString() + "/empty");
 				final ModelResourceLocation FILLED = new ModelResourceLocation(item.getRegistryName()
-				                                                                   .toString() + "/mallet_head");
+						.toString() + "/mallet_head");
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
 					@Nonnull
@@ -706,7 +722,7 @@ public class ClientRegisterEventsTFCF {
         {
             public int colorMultiplier(ItemStack stack, int tintIndex)
             {
-                return tintIndex > 0 ? -1 : ((ItemArmorTFCF)stack.getItem()).getColor(stack);
+                return tintIndex > 0 ? -1 : ((ItemArmorTFCF)stack.get()).getColor(stack);
             }
         }, ItemsTFCF.getAllArmorItems().toArray(new ItemArmorTFCF[0]));*/
 
@@ -716,89 +732,89 @@ public class ClientRegisterEventsTFCF {
 
 		if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
 			itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage())
-			                                                                                       .getColorValue() : 0xFFFFFF,
+							.getColorValue() : 0xFFFFFF,
 					ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL_GLAZED, ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED);
 		}
 		if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
 			itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage())
-			                                                                                       .getColorValue() : 0xFFFFFF,
+							.getColorValue() : 0xFFFFFF,
 					ItemsTFCF.UNFIRED_KAOLINITE_VESSEL_GLAZED, ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED);
 		}
 		if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
 			itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? EnumDyeColor.byDyeDamage(stack.getItemDamage())
-			                                                                                       .getColorValue() : 0xFFFFFF,
+							.getColorValue() : 0xFFFFFF,
 					ItemsTFCF.UNFIRED_STONEWARE_VESSEL_GLAZED, ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED);
 		}
 
 		if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
 			itemColors.registerItemColorHandler((stack, tintIndex) ->
 							event.getBlockColors()
-							     .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-							                                                   .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+									.colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+											.getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 					BlocksTFCF.getAllBlockRockVariantsTFCF()
-					          .stream()
-					          .filter(x -> x.getType().isGrass)
-					          .toArray(BlockRockVariantTFCF[]::new));
+							.stream()
+							.filter(x -> x.getType().isGrass)
+							.toArray(BlockRockVariantTFCF[]::new));
 		}
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors()
-						     .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-						                                                   .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+								.colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+										.getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 				BlocksTFCF.getAllFruitLeaves().toArray(new BlockFruitTreeLeaves[0])
 		);
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors()
-						     .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-						                                                   .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+								.colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+										.getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 				BlocksTFCF.getAllNormalTreeLeaves().toArray(new BlockLeavesTFCF[0])
 		);
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors()
-						     .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-						                                                   .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+								.colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+										.getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 				BlocksTFCF.CASSIA_CINNAMON_LEAVES);
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors()
-						     .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-						                                                   .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+								.colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+										.getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 				BlocksTFCF.CEYLON_CINNAMON_LEAVES);
 
 		itemColors.registerItemColorHandler((stack, tintIndex) ->
 						event.getBlockColors()
-						     .colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-						                                                   .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+								.colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
+										.getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
 				BlocksTFCF.getAllTallGrassWaterBlocks().toArray(new BlockTallGrassWater[0]));
 
         /*itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
             BlocksTFCF.getAllShortGrassBlocks().toArray(new BlockShortGrassTFCF[0]));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
             BlocksTFCF.getAllTallGrassBlocks().toArray(new BlockTallGrassTFCF[0]));*/
 
         /*itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
             BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantTFCF[0]));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
             BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantDummy1[0]));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
             BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantDummy2[0]));*/
 
         /*itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
             BlocksTFCF.getAllHangingCreepingPlantBlocks().toArray(new BlockHangingCreepingPlantTFCF[0]));
 
         itemColors.registerItemColorHandler((stack, tintIndex) ->
-                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.get()).get().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
             BlocksTFCF.getAllCreepingPlantBlocks().toArray(new BlockCreepingPlantTFCF[0]));*/
 
 		if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay || ConfigTFCF.General.WORLD.enableAllKaoliniteClay || ConfigTFCF.General.WORLD.enableAllStonewareClay) {
@@ -890,7 +906,7 @@ public class ClientRegisterEventsTFCF {
 			path.append(registryName.replace(prefix, "")); // There well be a '/' at the start of registryName due to the prefix, so don't add an extra one.
 		else path.append('/').append(registryName);
 		ModelLoader.setCustomModelResourceLocation(item, e.ordinal(), new ModelResourceLocation(path.toString()
-		                                                                                            .toLowerCase()));
+				.toLowerCase()));
 	}
 
 	@SubscribeEvent
@@ -902,13 +918,13 @@ public class ClientRegisterEventsTFCF {
 
 		if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
 			blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllBlockRockVariantsTFCF()
-			                                                            .stream()
-			                                                            .filter(x -> x.getType().isGrass)
-			                                                            .toArray(BlockRockVariantTFCF[]::new));
+					.stream()
+					.filter(x -> x.getType().isGrass)
+					.toArray(BlockRockVariantTFCF[]::new));
 		}
 
 		blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllShortGrassBlocks()
-		                                                            .toArray(new BlockShortGrassTFCF[0]));
+				.toArray(new BlockShortGrassTFCF[0]));
 		//blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllTallGrassBlocks().toArray(new BlockTallGrassTFCF[0]));
 
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllFruitLeaves().toArray(new Block[0]));
@@ -923,56 +939,56 @@ public class ClientRegisterEventsTFCF {
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.CASSIA_CINNAMON_LEAVES);
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.CEYLON_CINNAMON_LEAVES);
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllWaterPlantBlocks()
-		                                                              .toArray(new BlockWaterPlantTFCF[0]));
+				.toArray(new BlockWaterPlantTFCF[0]));
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingPlantBlocks()
-		                                                              .toArray(new BlockHangingPlantTFCF[0]));
+				.toArray(new BlockHangingPlantTFCF[0]));
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllHangingCreepingPlantBlocks()
-		                                                              .toArray(new BlockHangingCreepingPlantTFCF[0]));
+				.toArray(new BlockHangingCreepingPlantTFCF[0]));
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllCreepingPlantBlocks()
-		                                                              .toArray(new BlockCreepingPlantTFCF[0]));
+				.toArray(new BlockCreepingPlantTFCF[0]));
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllTallGrassWaterBlocks()
-		                                                              .toArray(new BlockTallGrassWater[0]));
+				.toArray(new BlockTallGrassWater[0]));
 		//blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantTFCF[0]));
 		blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks()
-		                                                              .toArray(new BlockPlantDummy1[0]));
+				.toArray(new BlockPlantDummy1[0]));
 		//blockColors.registerBlockColorHandler(foliageColor, BlocksTFCF.getAllStandardBlocks().toArray(new BlockPlantDummy2[0]));
 
 		if (ConfigTFCF.General.WORLD.enableAllBlockTypes && ConfigTFCF.General.WORLD.enableAllFarmland) {
 			blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockLoamySandFarmland.TINT[state.getValue(BlockLoamySandFarmland.MOISTURE)],
 					BlocksTFCF.getAllBlockRockVariantsTFCF()
-					          .stream()
-					          .filter(x -> x.getType() == RockTFCF.LOAMY_SAND_FARMLAND)
-					          .toArray(BlockRockVariantTFCF[]::new));
+							.stream()
+							.filter(x -> x.getType() == RockTFCF.LOAMY_SAND_FARMLAND)
+							.toArray(BlockRockVariantTFCF[]::new));
 
 			blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockSandyLoamFarmland.TINT[state.getValue(BlockSandyLoamFarmland.MOISTURE)],
 					BlocksTFCF.getAllBlockRockVariantsTFCF()
-					          .stream()
-					          .filter(x -> x.getType() == RockTFCF.SANDY_LOAM_FARMLAND)
-					          .toArray(BlockRockVariantTFCF[]::new));
+							.stream()
+							.filter(x -> x.getType() == RockTFCF.SANDY_LOAM_FARMLAND)
+							.toArray(BlockRockVariantTFCF[]::new));
 
 			blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockLoamFarmland.TINT[state.getValue(BlockLoamFarmland.MOISTURE)],
 					BlocksTFCF.getAllBlockRockVariantsTFCF()
-					          .stream()
-					          .filter(x -> x.getType() == RockTFCF.LOAM_FARMLAND)
-					          .toArray(BlockRockVariantTFCF[]::new));
+							.stream()
+							.filter(x -> x.getType() == RockTFCF.LOAM_FARMLAND)
+							.toArray(BlockRockVariantTFCF[]::new));
 
 			blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockSiltLoamFarmland.TINT[state.getValue(BlockSiltLoamFarmland.MOISTURE)],
 					BlocksTFCF.getAllBlockRockVariantsTFCF()
-					          .stream()
-					          .filter(x -> x.getType() == RockTFCF.SILT_LOAM_FARMLAND)
-					          .toArray(BlockRockVariantTFCF[]::new));
+							.stream()
+							.filter(x -> x.getType() == RockTFCF.SILT_LOAM_FARMLAND)
+							.toArray(BlockRockVariantTFCF[]::new));
 
 			blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockSiltFarmland.TINT[state.getValue(BlockSiltFarmland.MOISTURE)],
 					BlocksTFCF.getAllBlockRockVariantsTFCF()
-					          .stream()
-					          .filter(x -> x.getType() == RockTFCF.SILT_FARMLAND)
-					          .toArray(BlockRockVariantTFCF[]::new));
+							.stream()
+							.filter(x -> x.getType() == RockTFCF.SILT_FARMLAND)
+							.toArray(BlockRockVariantTFCF[]::new));
 
 			blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockHumusFarmland.TINT[state.getValue(BlockHumusFarmland.MOISTURE)],
 					BlocksTFCF.getAllBlockRockVariantsTFCF()
-					          .stream()
-					          .filter(x -> x.getType() == RockTFCF.HUMUS_FARMLAND)
-					          .toArray(BlockRockVariantTFCF[]::new));
+							.stream()
+							.filter(x -> x.getType() == RockTFCF.HUMUS_FARMLAND)
+							.toArray(BlockRockVariantTFCF[]::new));
 		}
 	}
 }

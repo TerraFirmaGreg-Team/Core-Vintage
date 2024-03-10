@@ -44,8 +44,10 @@ public class SoilItemVariant implements Comparable<SoilItemVariant> {
 		return SOIL_ITEM_VARIANTS;
 	}
 
-	public Item getItem(SoilType type) {
-		return ItemsSoil.getItem(this, type);
+	public Item get(SoilType type) {
+		var item = ItemsSoil.SOIL_ITEMS.get(new Pair<>(this, type));
+		if (item != null) return item;
+		throw new RuntimeException(String.format("Item soil is null: %s, %s", this, type));
 	}
 
 	/**

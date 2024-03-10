@@ -25,7 +25,7 @@ public class BlockWoodWall extends BlockWall implements IWoodBlock {
 	private final WoodType type;
 
 	public BlockWoodWall(WoodBlockVariant modelBlock, WoodBlockVariant blockVariant, WoodType type) {
-		super(modelBlock.getBlock(type));
+		super(modelBlock.get(type));
 
 		this.blockVariant = blockVariant;
 		this.type = type;

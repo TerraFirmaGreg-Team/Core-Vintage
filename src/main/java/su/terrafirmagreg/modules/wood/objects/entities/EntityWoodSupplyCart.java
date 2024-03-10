@@ -22,7 +22,6 @@ import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodSupplyCart;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
 import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodSupplyCart;
 
 public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IInventoryChangedListener, IContainerProvider<ContainerWoodSupplyCart, GuiWoodSupplyCart> {
@@ -54,7 +53,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IIn
 	public Item getItemCart() {
 		var type = getWood();
 		if (type != null) {
-			return ItemsWood.getItem(WoodItemVariants.SUPPLY_CART, type);
+			return WoodItemVariants.SUPPLY_CART.get(type);
 		}
 		return getItemCart();
 	}

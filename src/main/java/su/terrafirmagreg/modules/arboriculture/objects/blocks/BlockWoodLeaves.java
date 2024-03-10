@@ -45,7 +45,6 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
-import su.terrafirmagreg.modules.wood.data.BlocksWood;
 
 import java.util.HashSet;
 import java.util.List;
@@ -242,7 +241,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 	@NotNull
 	public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
 		if (state.getValue(LEAF_STATE) != WINTER) {
-			return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlocksWood.getBlock(WoodBlockVariants.SAPLING, type)) : Items.AIR;
+			return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(WoodBlockVariants.SAPLING.get(type)) : Items.AIR;
 		}
 		return null;
 	}
@@ -341,9 +340,9 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 //                    if (evaluated.contains(pos1) || !world.isBlockLoaded(pos1))
 //                        continue;
 //                    state1 = world.getBlockState(pos1);
-//                    if (state1.getBlock() == BlocksWood.getBlock(WoodBlockVariants.LOG, type))
+//                    if (state1.get() == BlocksWood.get(WoodBlockVariants.LOG, type))
 //                        return;
-//                    if (state1.getBlock() == this)
+//                    if (state1.get() == this)
 //                        pathsToAdd.add(pos1.toImmutable());
 //                }
 //                evaluated.add(p1); // Evaluated

@@ -36,7 +36,7 @@ public class BlockBambooLeaves extends BlockLeavesTFC {
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		//worldIn.scheduleUpdate(pos, state.getBlock(), 1);
+		//worldIn.scheduleUpdate(pos, state.get(), 1);
 		doLeafDecay(worldIn, pos, state);
 	}
 

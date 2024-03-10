@@ -65,7 +65,7 @@ public class PathEventHandler {
 			if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && player_speed > 0.2) {
 
 				if (player_random < ModuleSoilConfig.BLOCKS.PATH.PLAYER_GRASS_TO_DIRT && soil.getBlockVariant() == GRASS || soil.getBlockVariant() == DRY_GRASS) {
-					world.setBlockState(posPlayer, DIRT.getBlock(soil.getType()).getDefaultState());
+					world.setBlockState(posPlayer, DIRT.get(soil.getType()).getDefaultState());
 					if (ModuleSoilConfig.BLOCKS.PATH.DESTROY_VEGETATION) {
 						BlockPos upPos = posPlayer.up();
 						Material upMaterial = world.getBlockState(upPos).getMaterial();
@@ -78,7 +78,7 @@ public class PathEventHandler {
 				}
 
 				if (player_random < ModuleSoilConfig.BLOCKS.PATH.PLAYER_DIRT_TO_PATH && soil.getBlockVariant() == DIRT) {
-					world.setBlockState(posPlayer, GRASS_PATH.getBlock(soil.getType()).getDefaultState());
+					world.setBlockState(posPlayer, GRASS_PATH.get(soil.getType()).getDefaultState());
 					return;
 				}
 			}
@@ -113,7 +113,7 @@ public class PathEventHandler {
 				if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && mob_speed > 0.08) {
 
 					if (mob_random < ModuleSoilConfig.BLOCKS.PATH.MOB_GRASS_TO_DIRT && soil.getBlockVariant() == GRASS || soil.getBlockVariant() == DRY_GRASS) {
-						world.setBlockState(posEntity, DIRT.getBlock(soil.getType()).getDefaultState());
+						world.setBlockState(posEntity, DIRT.get(soil.getType()).getDefaultState());
 						if (ModuleSoilConfig.BLOCKS.PATH.DESTROY_VEGETATION) {
 							BlockPos upPos = posEntity.up();
 							Material upMaterial = world.getBlockState(upPos).getMaterial();
@@ -126,7 +126,7 @@ public class PathEventHandler {
 					}
 
 					if (mob_random < ModuleSoilConfig.BLOCKS.PATH.MOB_DIRT_TO_PATH && soil.getBlockVariant() == DIRT || soil.getBlockVariant() == COARSE_DIRT) {
-						world.setBlockState(posEntity, GRASS_PATH.getBlock(soil.getType()).getDefaultState());
+						world.setBlockState(posEntity, GRASS_PATH.get(soil.getType()).getDefaultState());
 						return;
 					}
 				}

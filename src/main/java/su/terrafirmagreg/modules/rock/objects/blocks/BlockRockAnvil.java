@@ -22,8 +22,6 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
-import su.terrafirmagreg.modules.rock.data.BlocksRock;
-import su.terrafirmagreg.modules.rock.data.ItemsRock;
 
 import java.util.Random;
 
@@ -182,13 +180,13 @@ public class BlockRockAnvil extends BlockRock {
 	@Override
 	@NotNull
 	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-		return ItemsRock.getItem(RockItemVariants.LOOSE, getType());
+		return RockItemVariants.LOOSE.get(getType());
 	}
 
 	@Override
 	@NotNull
 	public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
-		return new ItemStack(BlocksRock.getBlock(RockBlockVariants.RAW, getType()));
+		return new ItemStack(RockBlockVariants.RAW.get(getType()));
 	}
 
 //	@Override

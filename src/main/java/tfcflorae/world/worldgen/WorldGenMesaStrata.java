@@ -46,12 +46,12 @@ public class WorldGenMesaStrata implements IWorldGenerator {
 					//if (b == BiomesTFC.MESA || b == BiomesTFC.MESA_PLATEAU || b == BiomesTFC.MESA_BRYCE || b == BiomesTFC.MESA_PLATEAU_M || BiomesTFC.isMesaBiome(b))
 					if (BiomesTFC.isMesaBiome(b)) {
 						for (int y = WorldTypeTFC.SEALEVEL; y < world.getTopSolidOrLiquidBlock(strataLayer)
-						                                             .getY(); ++y) {
+								.getY(); ++y) {
 							BlockPos currentBlock = chunkBlockPos.add(x, y, z);
 							IBlockState currentBlockState = world.getBlockState(currentBlock);
 							IBlockState currentBlockStateTop = world.getBlockState(currentBlock.up());
 							//TFCFlorae.getLog().warn("TFCFlorae: Current 'currentBlock' is " + "X: " + currentBlock.getX() + ", Y: " + currentBlock.getY() + ", Z: " + currentBlock.getZ());
-							//if (currentBlockState instanceof BlockRockVariant && ((BlockRockVariant)(currentBlockState.getBlock())).getRock().getRockCategory() == TFCRegistries.ROCK_CATEGORIES.getValue(DefaultRocks.SEDIMENTARY))
+							//if (currentBlockState instanceof BlockRockVariant && ((BlockRockVariant)(currentBlockState.get())).getRock().getRockCategory() == TFCRegistries.ROCK_CATEGORIES.getValue(DefaultRocks.SEDIMENTARY))
 							if ((y <= WorldTypeTFC.SEALEVEL + 5 && (BlocksTFC.isRawStone(currentBlockState) || BlocksTFC.isGround(currentBlockState) || BlocksTFCF.isGround(currentBlockState) || BlocksTFC.isSoil(currentBlockState) || BlocksTFCF.isSoil(currentBlockState)) && !(BlocksTFC.isGrass(currentBlockState) || BlocksTFC.isSand(currentBlockState) || BlocksTFC.isClay(currentBlockState) || BlocksTFCF.isGrass(currentBlockState) || BlocksTFCF.isSand(currentBlockState) || BlocksTFCF.isClay(currentBlockState))) ||
 									(y > WorldTypeTFC.SEALEVEL + 5 && (BlocksTFC.isRawStone(currentBlockState) || BlocksTFC.isGround(currentBlockState) || BlocksTFCF.isGround(currentBlockState) || BlocksTFC.isSoil(currentBlockState) || BlocksTFCF.isSoil(currentBlockState)))) {
 								if (y >= strataLayer.getY() && y <= strataLayer.getY() + 2) {

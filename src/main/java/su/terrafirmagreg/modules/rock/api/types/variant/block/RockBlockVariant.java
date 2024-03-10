@@ -58,8 +58,10 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 		return ROCK_BLOCK_VARIANTS;
 	}
 
-	public Block getBlock(RockType type) {
-		return BlocksRock.getBlock(this, type);
+	public Block get(RockType type) {
+		var block = BlocksRock.ROCK_BLOCKS.get(new Pair<>(this, type));
+		if (block != null) return block;
+		throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
 	}
 
 	@Override
@@ -73,8 +75,8 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
 	public void createStoneType(int id, RockType type) {
 		new StoneType(id, type + "_" + this.name, SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
-				() -> BlocksRock.getBlock(this, type).getDefaultState(),
-				state -> state.getBlock() == BlocksRock.getBlock(this, type), false
+				() -> this.get(type).getDefaultState(),
+				state -> state.getBlock() == this.get(type), false
 		);
 	}
 

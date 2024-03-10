@@ -19,7 +19,7 @@ public class BlockPeat extends BlockBase {
 //		OreDictionaryHelper.register(this, getName());
 		Blocks.FIRE.setFireInfo(this, 5, 10);
 
-		//DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.GRAVELLIKE);
+		//DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.GRAVELLIKE);
 	}
 
 	@Override

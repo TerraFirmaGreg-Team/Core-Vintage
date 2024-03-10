@@ -26,7 +26,7 @@ public class BlockSoilMudWall extends BlockWall implements ISoilBlock, ICustomSt
 	private final SoilType type;
 
 	public BlockSoilMudWall(SoilBlockVariant modelBlock, SoilBlockVariant blockVariant, SoilType type) {
-		super(modelBlock.getBlock(type));
+		super(modelBlock.get(type));
 
 		this.blockVariant = blockVariant;
 		this.type = type;

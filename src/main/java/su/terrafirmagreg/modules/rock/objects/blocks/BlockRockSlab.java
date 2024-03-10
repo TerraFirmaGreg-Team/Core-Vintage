@@ -40,7 +40,7 @@ public abstract class BlockRockSlab extends BlockSlabBase implements IRockBlock 
 
 		this.blockVariant = blockVariant;
 		this.type = type;
-		this.block = model.getBlock(type);
+		this.block = model.get(type);
 
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 0);
@@ -92,7 +92,7 @@ public abstract class BlockRockSlab extends BlockSlabBase implements IRockBlock 
 		public Half(RockBlockVariant model, RockBlockVariant doubleSlab, RockBlockVariant variant, RockType type) {
 			super(model, variant, type);
 
-			this.doubleSlab = (Double) doubleSlab.getBlock(type);
+			this.doubleSlab = (Double) doubleSlab.get(type);
 			this.doubleSlab.halfSlab = this;
 			this.halfSlab = this;
 

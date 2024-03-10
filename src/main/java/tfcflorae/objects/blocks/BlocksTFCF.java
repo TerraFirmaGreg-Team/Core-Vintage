@@ -844,16 +844,16 @@ public final class BlocksTFCF {
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
 				if (plant.getPlantType() == Plant.PlantType.WATER) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                 .getPath(), new BlockWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
+							.getPath(), new BlockWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.WATER_SEA) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                 .getPath(), new BlockWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
+							.getPath(), new BlockWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.TALL_WATER) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                 .getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
+							.getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.TALL_WATER_SEA) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                 .getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
+							.getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.HANGING && (
 						plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
@@ -861,9 +861,9 @@ public final class BlocksTFCF {
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.JUNGLE_VINE))) {
 					plantHangingBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                   .getPath(), new BlockHangingPlantTFCF(plant), CT_FLORA));
+							.getPath(), new BlockHangingPlantTFCF(plant), CT_FLORA));
 					plantHangingCreepingBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                           .getPath() + "_creeping", new BlockHangingCreepingPlantTFCF(plant), CT_FLORA));
+							.getPath() + "_creeping", new BlockHangingCreepingPlantTFCF(plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.CREEPING && (
 						plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TACKWEED) ||
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TAKAKIA) ||
@@ -872,10 +872,10 @@ public final class BlocksTFCF {
 								plant == TFCRegistries.PLANTS.getValue(DefaultPlants.MOSS) ||
 								plant == TFCRegistries.PLANTS.getValue(DefaultPlants.REINDEER_LICHEN))) {
 					plantCreepingBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                    .getPath(), new BlockCreepingPlantTFCF(plant), CT_FLORA));
+							.getPath(), new BlockCreepingPlantTFCF(plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.TALL_GRASS/* && (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS))*/) {
 					plantTallGrassWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-					                                                          .getPath(), new BlockTallGrassWater(plant), CT_FLORA));
+							.getPath(), new BlockTallGrassWater(plant), CT_FLORA));
 				}
                 /*else if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && (
                     plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_BARLEY) || 
@@ -979,20 +979,20 @@ public final class BlocksTFCF {
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
 					if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
 						blockRockVariantsTFCF.add(register(r, rockTFCF.name()
-						                                              .toLowerCase() + "/" + rock.getRegistryName()
-						                                                                         .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
+								.toLowerCase() + "/" + rock.getRegistryName()
+								.getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
 					} else {
 						if (rockTFCF == RockTFCF.MOSSY_RAW || rockTFCF == RockTFCF.MUD_BRICKS || rockTFCF == RockTFCF.MUD) {
 							blockRockVariantsTFCF.add(register(r, rockTFCF.name()
-							                                              .toLowerCase() + "/" + rock.getRegistryName()
-							                                                                         .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
+									.toLowerCase() + "/" + rock.getRegistryName()
+									.getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
 						}
 					}
 				}
 			} else {
 				if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
 					blockRockVariantsTFCF.add(register(r, "single/" + rockTFCF.name()
-					                                                          .toLowerCase(), BlockRockVariantTFCF.create(null, rockTFCF), CT_ROCK_BLOCKS));
+							.toLowerCase(), BlockRockVariantTFCF.create(null, rockTFCF), CT_ROCK_BLOCKS));
 				}
 			}
 		}
@@ -1005,9 +1005,9 @@ public final class BlocksTFCF {
 			for (Ore ore : TFCRegistries.ORES.getValuesCollection())
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					surfaceOreBlocks.add(register(r, ("groundcover/ore/" + ore.getRegistryName()
-					                                                          .getPath()
-					                                                          .toLowerCase() + "/" + rock.getRegistryName()
-					                                                                                     .getPath()).toLowerCase(), new BlockSurfaceOreDeposit(ore, rock), CT_ROCK_BLOCKS));
+							.getPath()
+							.toLowerCase() + "/" + rock.getRegistryName()
+							.getPath()).toLowerCase(), new BlockSurfaceOreDeposit(ore, rock), CT_ROCK_BLOCKS));
 
 			allSurfaceOreBlocks = surfaceOreBlocks.build();
 			allSurfaceOreBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
@@ -1016,8 +1016,8 @@ public final class BlocksTFCF {
 		if (ConfigTFCF.General.WORLD.enableGroundcoverRock) {
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
 				surfaceRock.add(register(r, "groundcover/rock/" + rock.getRegistryName()
-				                                                      .getPath()
-				                                                      .toLowerCase(), new BlockSurfaceRock(rock), CT_ROCK_BLOCKS));
+						.getPath()
+						.toLowerCase(), new BlockSurfaceRock(rock), CT_ROCK_BLOCKS));
 			}
 			allSurfaceRocks = surfaceRock.build();
 			allSurfaceRocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
@@ -1064,28 +1064,28 @@ public final class BlocksTFCF {
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					blockWallTFCF.add(register(r, "wall/" + rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-					                                                                                  .getPath()
-					                                                                                  .toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_DECORATIONS));
+							.getPath()
+							.toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_DECORATIONS));
 
 			// Stairs
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					blockStairsTFC.add(register(r, "stairs/" + (rockTFCF.name()
-					                                                    .toLowerCase() + "/" + rock.getRegistryName()
-					                                                                               .getPath()).toLowerCase(), new BlockStairsTFCF(rock, rockTFCF), CT_DECORATIONS));
+							.toLowerCase() + "/" + rock.getRegistryName()
+							.getPath()).toLowerCase(), new BlockStairsTFCF(rock, rockTFCF), CT_DECORATIONS));
 
 			// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					register(r, "double_slab/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-					                                                                        .getPath()).toLowerCase(), new BlockSlabTFCF.Double(rock, rockTFCF));
+							.getPath()).toLowerCase(), new BlockSlabTFCF.Double(rock, rockTFCF));
 
 			// Slabs
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					blockSlabTFCF.add(register(r, "slab/" + (rockTFCF.name()
-					                                                 .toLowerCase() + "/" + rock.getRegistryName()
-					                                                                            .getPath()).toLowerCase(), new BlockSlabTFCF.Half(rock, rockTFCF), CT_DECORATIONS));
+							.toLowerCase() + "/" + rock.getRegistryName()
+							.getPath()).toLowerCase(), new BlockSlabTFCF.Half(rock, rockTFCF), CT_DECORATIONS));
 
 			allWallBlocks = blockWallTFCF.build();
 			allStairBlocks = blockStairsTFC.build();
@@ -1098,20 +1098,20 @@ public final class BlocksTFCF {
 		for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW})
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				blockStairTFC.add(register(r, "stairs/" + (type.name() + "/" + rock.getRegistryName()
-				                                                                   .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
+						.getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
 
 		// TFC Double Slabs
 		// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
 		for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW})
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				register(r, "double_slab/" + (type.name() + "/" + rock.getRegistryName()
-				                                                      .getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
+						.getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
 
 		// TFC Slabs
 		for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW})
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				blockSlabTFC.add(register(r, "slab/" + (type.name() + "/" + rock.getRegistryName()
-				                                                                .getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_DECORATIONS));
+						.getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_DECORATIONS));
 
 		for (SeasonalTrees fruitTree : SeasonalTrees.values()) {
 			if (fruitTree.isNormalTree) {
@@ -1329,7 +1329,7 @@ public final class BlocksTFCF {
 
 		for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
 			fenceGatesLog.add(register(r, "wood/fence_gate_log/" + wood.getRegistryName()
-			                                                           .getPath(), new BlockFenceGateLog(wood), CT_DECORATIONS));
+					.getPath(), new BlockFenceGateLog(wood), CT_DECORATIONS));
 
 //            if (wood == TFCRegistries.TREES.getValue(TreesTFCF.JOSHUA_TREE)) {
 //                Builder<BlockJoshuaTreeLog> logJoshuaTree = ImmutableList.builder();
@@ -1357,35 +1357,35 @@ public final class BlocksTFCF {
 			);
 			for (FluidWrapper wrapper : FluidsTFCF.getAllFermentedAlcoholsFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllAlcoholsFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllBeerFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllTeaFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllCoffeeFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllJuiceBerryFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllJuiceFruitFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllMiscFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			allFluidBlocks = fluids.build();
 		}
@@ -1728,7 +1728,7 @@ public final class BlocksTFCF {
 	public static boolean isClayGrass(IBlockState current) {
 		if (!(current.getBlock() instanceof BlockRockVariantTFCF)) return false;
 		RockTFCF rockTFCF = ((BlockRockVariantTFCF) current.getBlock()).getType();
-		//Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
+		//Rock.Type type = ((BlockRockVariant) current.get()).getType();
 		return
 				//type == Rock.Type.CLAY_GRASS ||
 				rockTFCF == RockTFCF.SANDY_CLAY_LOAM_GRASS ||
@@ -1947,7 +1947,7 @@ public final class BlocksTFCF {
 	public static boolean isClayDirt(IBlockState current) {
 		if (!(current.getBlock() instanceof BlockRockVariantTFCF)) return false;
 		RockTFCF rockTFCF = ((BlockRockVariantTFCF) current.getBlock()).getType();
-		//Rock.Type type = ((BlockRockVariant) current.getBlock()).getType();
+		//Rock.Type type = ((BlockRockVariant) current.get()).getType();
 		return
 				//type == Rock.Type.CLAY ||
 				rockTFCF == RockTFCF.SANDY_CLAY_LOAM ||

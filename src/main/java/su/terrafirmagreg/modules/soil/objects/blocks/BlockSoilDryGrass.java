@@ -14,7 +14,6 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
-import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 
@@ -29,6 +28,6 @@ public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {
 	@NotNull
 	@Override
 	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-		return ItemsSoil.getItem(SoilItemVariants.PILE, getType());
+		return SoilItemVariants.PILE.get(getType());
 	}
 }

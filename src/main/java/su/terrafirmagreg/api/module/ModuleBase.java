@@ -44,11 +44,12 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	private final String modid;
 
 	protected RegistryManager registryManager;
-	private ThreadedNetworkWrapper threadedNetworkWrapper;
-	private IPacketRegistry packetRegistry;
-	private IPacketService packetService;
-	private ITileDataService tileDataService;
-	private NetworkEntityIdSupplier networkEntityIdSupplier;
+	protected IPacketRegistry packetRegistry;
+	protected IPacketService packetService;
+	protected ThreadedNetworkWrapper threadedNetworkWrapper;
+	protected ITileDataService tileDataService;
+	protected NetworkEntityIdSupplier networkEntityIdSupplier;
+
 	@Getter
 	private Registry registry;
 	@Getter

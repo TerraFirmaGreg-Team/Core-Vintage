@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.wood.data;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.item.Item;
-import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -19,13 +18,5 @@ public final class ItemsWood {
 		for (var item : WOOD_ITEMS.values()) registry.registerAuto(item);
 
 		//for (var item : TREE_ITEMS) registry.registerItem(item);
-	}
-
-
-	@NotNull
-	public static Item getItem(@NotNull WoodItemVariant variant, @NotNull WoodType type) {
-		var item = (Item) WOOD_ITEMS.get(new Pair<>(variant, type));
-		if (item != null) return item;
-		throw new RuntimeException(String.format("Item wood is null: %s, %s", variant, type));
 	}
 }

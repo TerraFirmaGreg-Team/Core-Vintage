@@ -44,8 +44,10 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
 		return ROCK_ITEM_VARIANTS;
 	}
 
-	public Item getItem(RockType type) {
-		return ItemsRock.getItem(this, type);
+	public Item get(RockType type) {
+		var item = ItemsRock.ROCK_ITEMS.get(new Pair<>(this, type));
+		if (item != null) return item;
+		throw new RuntimeException(String.format("Item rock is null: %s, %s", this, type));
 	}
 
 	/**

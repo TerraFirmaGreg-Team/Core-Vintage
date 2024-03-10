@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.soil.data;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -31,14 +30,6 @@ public final class BlocksSoil {
 		registry.registerAuto(PEAT = new BlockPeat());
 
 
-	}
-
-
-	@NotNull
-	public static Block getBlock(@NotNull SoilBlockVariant variant, @NotNull SoilType type) {
-		var block = (Block) SOIL_BLOCKS.get(new Pair<>(variant, type));
-		if (block != null) return block;
-		throw new RuntimeException(String.format("Block soil is null: %s, %s", variant, type));
 	}
 
 	public static boolean isGrass(IBlockState current) {

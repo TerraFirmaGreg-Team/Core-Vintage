@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.rock.data;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.block.Block;
-import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -17,14 +16,6 @@ public final class BlocksRock {
 	public static void onRegister(RegistryManager registry) {
 		for (var block : ROCK_BLOCKS.values()) registry.registerAuto(block);
 
-	}
-
-
-	@NotNull
-	public static Block getBlock(@NotNull RockBlockVariant variant, @NotNull RockType type) {
-		var block = (Block) ROCK_BLOCKS.get(new Pair<>(variant, type));
-		if (block != null) return block;
-		throw new RuntimeException(String.format("Block rock is null: %s, %s", variant, type));
 	}
 
 

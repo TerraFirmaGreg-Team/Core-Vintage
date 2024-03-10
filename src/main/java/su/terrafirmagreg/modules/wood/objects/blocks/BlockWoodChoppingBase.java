@@ -121,9 +121,9 @@ public abstract class BlockWoodChoppingBase extends BlockHPBase {
 //    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 //        List<ItemStack> stacks = Utils.getCraftingItems(this);
 //        for (ItemStack stack : stacks) {
-//            if (!Configs.general.useDynamicDisplay && !"tfc".equals(stack.getItem().getRegistryName().getNamespace()))
+//            if (!Configs.general.useDynamicDisplay && !"tfc".equals(stack.get().getRegistryName().getNamespace()))
 //                continue;
-//            Block block = getBlockFromItem(stack.getItem());
+//            Block block = getBlockFromItem(stack.get());
 //            int blockMeta = stack.getItemDamage();
 //
 //            if (blockMeta == OreDictionary.WILDCARD_VALUE) {

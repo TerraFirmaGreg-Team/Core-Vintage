@@ -44,8 +44,10 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
 		return WOOD_ITEM_VARIANTS;
 	}
 
-	public Item getItem(WoodType type) {
-		return ItemsWood.getItem(this, type);
+	public Item get(WoodType type) {
+		var item = ItemsWood.WOOD_ITEMS.get(new Pair<>(this, type));
+		if (item != null) return item;
+		throw new RuntimeException(String.format("Item wood is null: %s, %s", this, type));
 	}
 
 	/**

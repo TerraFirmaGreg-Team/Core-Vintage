@@ -9,8 +9,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
-import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 
@@ -29,7 +27,7 @@ public final class MissingMappingEventHandler {
 					for (var variant : SoilBlockVariant.getBlockVariants()) {
 						var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(Item.getItemFromBlock(BlocksSoil.getBlock(variant, type)));
+							mapping.remap(Item.getItemFromBlock(variant.get(type)));
 							break;
 						}
 					}
@@ -38,7 +36,7 @@ public final class MissingMappingEventHandler {
 					for (var variant : SoilItemVariant.getItemVariants()) {
 						var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(ItemsSoil.getItem(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}
@@ -49,7 +47,7 @@ public final class MissingMappingEventHandler {
 					for (var variant : SoilBlockVariant.getBlockVariants()) {
 						var mappingKeyBlock = "tfcflorae:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(Item.getItemFromBlock(BlocksSoil.getBlock(variant, type)));
+							mapping.remap(Item.getItemFromBlock(variant.get(type)));
 							break;
 						}
 					}
@@ -58,7 +56,7 @@ public final class MissingMappingEventHandler {
 					for (var variant : SoilItemVariant.getItemVariants()) {
 						var mappingKeyBlock = "tfcflorae:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(ItemsSoil.getItem(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}
@@ -78,7 +76,7 @@ public final class MissingMappingEventHandler {
 					for (var variant : SoilBlockVariant.getBlockVariants()) {
 						var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(BlocksSoil.getBlock(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}
@@ -89,7 +87,7 @@ public final class MissingMappingEventHandler {
 					for (var variant : SoilBlockVariant.getBlockVariants()) {
 						var mappingKeyBlock = "tfcflorae:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(BlocksSoil.getBlock(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}

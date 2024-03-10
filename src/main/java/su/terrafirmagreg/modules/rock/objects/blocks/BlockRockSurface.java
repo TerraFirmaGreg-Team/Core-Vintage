@@ -27,7 +27,6 @@ import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
-import su.terrafirmagreg.modules.rock.data.ItemsRock;
 
 import static su.terrafirmagreg.api.models.Blockstates.HORIZONTAL;
 
@@ -69,7 +68,7 @@ public class BlockRockSurface extends BlockRock {
 	@Override
 	@SuppressWarnings("ConstantConditions")
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-		var itemStack = new ItemStack(ItemsRock.getItem(RockItemVariants.LOOSE, getType()));
+		var itemStack = new ItemStack(RockItemVariants.LOOSE.get(getType()));
 
 		if (playerIn.addItemStackToInventory(itemStack)) {
 			worldIn.setBlockToAir(pos);
@@ -83,7 +82,7 @@ public class BlockRockSurface extends BlockRock {
 
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, int fortune) {
-		drops.add(new ItemStack(ItemsRock.getItem(RockItemVariants.LOOSE, getType())));
+		drops.add(new ItemStack(RockItemVariants.LOOSE.get(getType())));
 	}
 
 	@Override
@@ -94,7 +93,7 @@ public class BlockRockSurface extends BlockRock {
 	@NotNull
 	@Override
 	public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
-		return new ItemStack(ItemsRock.getItem(RockItemVariants.LOOSE, getType()));
+		return new ItemStack(RockItemVariants.LOOSE.get(getType()));
 	}
 
 	@NotNull

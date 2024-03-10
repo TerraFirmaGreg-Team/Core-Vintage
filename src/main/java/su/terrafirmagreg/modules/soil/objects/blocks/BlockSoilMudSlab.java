@@ -39,7 +39,7 @@ public abstract class BlockSoilMudSlab extends BlockSlabBase implements ISoilBlo
 
 		this.blockVariant = blockVariant;
 		this.type = type;
-		this.block = model.getBlock(type);
+		this.block = model.get(type);
 
 		setSoundType(SoundType.GROUND);
 		setHarvestLevel("pickaxe", 0);
@@ -88,7 +88,7 @@ public abstract class BlockSoilMudSlab extends BlockSlabBase implements ISoilBlo
 		public Half(SoilBlockVariant model, SoilBlockVariant doubleSlab, SoilBlockVariant variant, SoilType type) {
 			super(model, variant, type);
 
-			this.doubleSlab = (Double) doubleSlab.getBlock(type);
+			this.doubleSlab = (Double) doubleSlab.get(type);
 			this.doubleSlab.halfSlab = this;
 			this.halfSlab = this;
 

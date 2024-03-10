@@ -33,8 +33,6 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
-import su.terrafirmagreg.modules.soil.data.ItemsSoil;
 
 import java.util.Random;
 
@@ -80,7 +78,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
 		if (block instanceof ISoilBlock soilBlockVariant) {
 			var soil = soilBlockVariant.getType();
 
-			world.setBlockState(pos, BlocksSoil.getBlock(SoilBlockVariants.DIRT, soil).getDefaultState());
+			world.setBlockState(pos, SoilBlockVariants.DIRT.get(soil).getDefaultState());
 			AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
 			for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
 				double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
@@ -163,7 +161,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
 //            }
 //        } else if (plantable instanceof BlockCropGrowing) {
 //            IBlockState cropState = world.getBlockState(pos.up());
-//            if (cropState.getBlock() instanceof BlockCropGrowing) {
+//            if (cropState.get() instanceof BlockCropGrowing) {
 //                boolean isWild = cropState.getValue(BlockCropGrowing.WILD);
 //                if (isWild) {
 //                    if (variant == SoilBlockVariants.DIRT || variant == SoilBlockVariants.GRASS ||
@@ -222,7 +220,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
 	@NotNull
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemsSoil.getItem(SoilItemVariants.PILE, getType());
+		return SoilItemVariants.PILE.get(getType());
 	}
 
 	@Override

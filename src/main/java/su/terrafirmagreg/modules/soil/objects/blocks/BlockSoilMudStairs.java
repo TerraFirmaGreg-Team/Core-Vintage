@@ -20,7 +20,7 @@ public class BlockSoilMudStairs extends BlockStairs implements ISoilBlock {
 	private final SoilType type;
 
 	public BlockSoilMudStairs(SoilBlockVariant modelBlock, SoilBlockVariant blockVariant, SoilType type) {
-		super(modelBlock.getBlock(type).getDefaultState());
+		super(modelBlock.get(type).getDefaultState());
 
 		this.blockVariant = blockVariant;
 		this.type = type;

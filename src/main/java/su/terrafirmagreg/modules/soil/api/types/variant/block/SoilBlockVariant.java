@@ -51,8 +51,10 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
 		return SOIL_BLOCK_VARIANTS;
 	}
 
-	public Block getBlock(SoilType type) {
-		return BlocksSoil.getBlock(this, type);
+	public Block get(SoilType type) {
+		var block = BlocksSoil.SOIL_BLOCKS.get(new Pair<>(this, type));
+		if (block != null) return block;
+		throw new RuntimeException(String.format("Block soil is null: %s, %s", this, type));
 	}
 
 	/**

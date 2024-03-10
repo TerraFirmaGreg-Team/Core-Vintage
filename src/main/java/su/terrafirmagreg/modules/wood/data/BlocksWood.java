@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -40,15 +39,7 @@ public final class BlocksWood {
 
 	public static void onPostInitialization() {
 //        for (var type : WoodType.getTypes()) {
-//            FuelManager.addFuel(new Fuel(IIngredient.of(new ItemStack(StorageWood.getBlock(LOG, type))), type.getBurnTicks(), type.getBurnTemp()));
+//            FuelManager.addFuel(new Fuel(IIngredient.of(new ItemStack(StorageWood.get(LOG, type))), type.getBurnTicks(), type.getBurnTemp()));
 //        }
-	}
-
-
-	@NotNull
-	public static Block getBlock(@NotNull WoodBlockVariant variant, @NotNull WoodType type) {
-		var block = (Block) WOOD_BLOCKS.get(new Pair<>(variant, type));
-		if (block != null) return block;
-		throw new RuntimeException(String.format("Block wood is null: %s, %s", variant, type));
 	}
 }

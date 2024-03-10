@@ -40,7 +40,7 @@ public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock 
 
 		this.blockVariant = blockVariant;
 		this.type = type;
-		this.block = model.getBlock(type);
+		this.block = model.get(type);
 
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("axe", 0);
@@ -99,7 +99,7 @@ public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock 
 		public Half(WoodBlockVariant model, WoodBlockVariant doubleSlab, WoodBlockVariant blockVariant, WoodType type) {
 			super(model, blockVariant, type);
 
-			this.doubleSlab = (Double) doubleSlab.getBlock(type);
+			this.doubleSlab = (Double) doubleSlab.get(type);
 			this.doubleSlab.halfSlab = this;
 			this.halfSlab = this;
 

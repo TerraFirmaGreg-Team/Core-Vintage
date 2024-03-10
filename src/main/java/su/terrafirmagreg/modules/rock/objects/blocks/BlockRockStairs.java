@@ -27,7 +27,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 	private final RockType type;
 
 	public BlockRockStairs(RockBlockVariant modelBlock, RockBlockVariant blockVariant, RockType type) {
-		super(modelBlock.getBlock(type).getDefaultState());
+		super(modelBlock.get(type).getDefaultState());
 
 		this.blockVariant = blockVariant;
 		this.type = type;

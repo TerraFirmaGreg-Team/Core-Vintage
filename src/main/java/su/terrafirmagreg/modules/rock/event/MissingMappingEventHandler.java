@@ -9,8 +9,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
-import su.terrafirmagreg.modules.rock.data.BlocksRock;
-import su.terrafirmagreg.modules.rock.data.ItemsRock;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 
@@ -29,7 +27,7 @@ public class MissingMappingEventHandler {
 						var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
 						var mappingKeyBlock2 = "tfc:stone/" + variant + "/" + type;
 						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlock2)) {
-							mapping.remap(Item.getItemFromBlock(BlocksRock.getBlock(variant, type)));
+							mapping.remap(Item.getItemFromBlock(variant.get(type)));
 							break;
 						}
 					}
@@ -39,7 +37,7 @@ public class MissingMappingEventHandler {
 						var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
 						var mappingKeyBlock2 = "tfc:stone/" + variant + "/" + type;
 						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlock2)) {
-							mapping.remap(ItemsRock.getItem(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}
@@ -50,7 +48,7 @@ public class MissingMappingEventHandler {
 					for (var variant : RockBlockVariant.getBlockVariants()) {
 						var mappingKeyBlock = "tfcflorae:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(Item.getItemFromBlock(BlocksRock.getBlock(variant, type)));
+							mapping.remap(Item.getItemFromBlock(variant.get(type)));
 							break;
 						}
 					}
@@ -59,7 +57,7 @@ public class MissingMappingEventHandler {
 					for (var variant : RockItemVariant.getItemVariants()) {
 						var mappingKeyBlock = "tfcflorae:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(ItemsRock.getItem(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}
@@ -80,7 +78,7 @@ public class MissingMappingEventHandler {
 						var mappingKeyBlock = "tfc:" + variant.toString() + "/" + type.toString();
 						var mappingKeyBlock2 = "tfc:stone/" + variant + "/" + type;
 						if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlock2)) {
-							mapping.remap(BlocksRock.getBlock(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}
@@ -91,7 +89,7 @@ public class MissingMappingEventHandler {
 					for (var variant : RockBlockVariant.getBlockVariants()) {
 						var mappingKeyBlock = "tfcflorae:" + variant.toString() + "/" + type.toString();
 						if (mappingKey.equals(mappingKeyBlock)) {
-							mapping.remap(BlocksRock.getBlock(variant, type));
+							mapping.remap(variant.get(type));
 							break;
 						}
 					}

@@ -74,7 +74,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 			IBlockState stateDown = worldIn.getBlockState(pos.down());
 			Material material = stateDown.getMaterial();
 			return ((soil.getBlock()
-			             .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)) || ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) || material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC)))) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+					.canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)) || ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) || material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC)))) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
 		} else {
 			return this.canSustainBush(soil);
 		}
@@ -89,12 +89,12 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
-        if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) return false;
+        if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).get() == this) return false;
 
         IBlockState stateDown = worldIn.getBlockState(pos.down());
-        if (state.getBlock() == this)
+        if (state.get() == this)
         {
-            return sustain(stateDown) || (stateDown.getBlock().canSustainPlant(stateDown, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos)));
+            return sustain(stateDown) || (stateDown.get().canSustainPlant(stateDown, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos)));
         }
         return sustain(stateDown);
     }
@@ -102,23 +102,23 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
     private boolean sustain(IBlockState state)
     {
         Material material = state.getMaterial();
-        return (material == Material.WATER && state.getValue(BlockLiquid.LEVEL) == 0 && state == FRESH_WATER) || material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+        return (material == Material.WATER && state.getValue(BlockLiquid.LEVEL) == 0 && state == FRESH_WATER) || material == Material.ICE || (material == Material.CORAL && !(state.get() instanceof BlockEmergentTallWaterPlantTFC));
     }
 
     @Override
     protected boolean canSustainBush(IBlockState state)
     {
-        return (BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC));
+        return (BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.get() instanceof BlockEmergentTallWaterPlantTFC));
     }*/
 
     /*public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
         IBlockState soil = worldIn.getBlockState(pos.down());
 
-        if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) return false;
-        if (state.getBlock() == this)
+        if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).get() == this) return false;
+        if (state.get() == this)
         {
-            return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+            return soil.get().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
         }
         return this.canSustainBush(soil);
     }*/
@@ -161,8 +161,8 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos.up(), this.getDefaultState());
 		IBlockState iblockstate = state.withProperty(AGE, 0)
-		                               .withProperty(growthStageProperty, plant.getStageForMonth())
-		                               .withProperty(PART, getPlantPart(worldIn, pos));
+				.withProperty(growthStageProperty, plant.getStageForMonth())
+				.withProperty(PART, getPlantPart(worldIn, pos));
 		worldIn.setBlockState(pos, iblockstate);
 		iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
 	}
@@ -177,10 +177,10 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 		if (!worldIn.isRemote && player != null) {
 			ItemStack stack = player.getHeldItemMainhand();
 			if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-			                                                                                 .getHarvestLevel(stack, "scythe", player, state) != -1) {
+					.getHarvestLevel(stack, "scythe", player, state) != -1) {
 				for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
 					if (Constants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
-					                                          .getValue(AGE) + 1) / 4.0D) //+25% change for each age
+							.getValue(AGE) + 1) / 4.0D) //+25% change for each age
 					{
 						spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
 					}
@@ -223,7 +223,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 					grow(worldIn, rand, pos, state);
 				} else if (j < 3) {
 					worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
-					                                .withProperty(PART, getPlantPart(worldIn, pos)));
+							.withProperty(PART, getPlantPart(worldIn, pos)));
 				}
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
@@ -235,7 +235,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 					shrink(worldIn, pos);
 				} else if (j > 0) {
 					worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
-					                                .withProperty(PART, getPlantPart(worldIn, pos)));
+							.withProperty(PART, getPlantPart(worldIn, pos)));
 				}
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
@@ -269,6 +269,6 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 
 	private boolean canShrink(World worldIn, BlockPos pos) {
 		return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-		                                                                      .getBlock() != this;
+				.getBlock() != this;
 	}
 }

@@ -30,11 +30,9 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.tile.IContainerProvider;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
 import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodPlow;
 
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
@@ -75,7 +73,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 	public Item getItemCart() {
 		var type = getWood();
 		if (type != null) {
-			return ItemsWood.getItem(WoodItemVariants.PLOW, type);
+			return WoodItemVariants.PLOW.get(type);
 		}
 		return getItemCart();
 	}
@@ -189,7 +187,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 				if (item instanceof ItemHoe || item instanceof ItemMetalHoe) {
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						world.setBlockState(pos, BlocksSoil.getBlock(FARMLAND, soil.getType())
+						world.setBlockState(pos, FARMLAND.get(soil.getType())
 								.getDefaultState());
 						damageAndUpdateOnBreak(pos, slot, itemstack, player);
 
@@ -199,7 +197,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 					if (metaltool.getType() == Metal.ItemType.SHOVEL) {
 						if (!world.isRemote) {
 							world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-							this.world.setBlockState(pos, BlocksSoil.getBlock(GRASS_PATH, soil.getType())
+							this.world.setBlockState(pos, GRASS_PATH.get(soil.getType())
 									.getDefaultState());
 							this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
 						}
@@ -208,7 +206,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 				{
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						this.world.setBlockState(pos, BlocksSoil.getBlock(GRASS_PATH, soil.getType())
+						this.world.setBlockState(pos, GRASS_PATH.get(soil.getType())
 								.getDefaultState());
 						this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
 					}

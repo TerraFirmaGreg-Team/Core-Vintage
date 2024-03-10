@@ -30,8 +30,7 @@ public class TileDataServiceOverlayRenderer {
 	@SubscribeEvent
 	public static void onRenderGameOverlayPostEvent(RenderGameOverlayEvent.Post event) {
 
-		if (!TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED ||
-				Minecraft.getMinecraft().isGamePaused()) {
+		if (!TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED || Minecraft.getMinecraft().isGamePaused()) {
 			return;
 		}
 

@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 
 @MethodsReturnNonnullByDefault
@@ -61,7 +60,7 @@ public class EntityWoodBoat extends EntityBoat {
 	public Item getItemBoat() {
 		var type = getWood();
 		if (type != null) {
-			return ItemsWood.getItem(WoodItemVariants.BOAT, type);
+			return WoodItemVariants.BOAT.get(type);
 		}
 		return super.getItemBoat();
 	}

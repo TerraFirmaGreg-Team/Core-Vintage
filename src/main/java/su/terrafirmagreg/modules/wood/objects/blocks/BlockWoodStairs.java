@@ -17,7 +17,7 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
 	private final WoodType type;
 
 	public BlockWoodStairs(WoodBlockVariant modelBlock, WoodBlockVariant blockVariant, WoodType type) {
-		super(modelBlock.getBlock(type).getDefaultState());
+		super(modelBlock.get(type).getDefaultState());
 
 		this.blockVariant = blockVariant;
 		this.type = type;

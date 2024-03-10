@@ -496,6 +496,7 @@ public class RegistryManager {
 	@SideOnly(Side.CLIENT)
 	public void registerClientModel(ICustomModel model) {
 		this.customModel.add(model);
+		
 	}
 
 	//endregion

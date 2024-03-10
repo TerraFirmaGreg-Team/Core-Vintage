@@ -17,7 +17,7 @@ public class BlockSoilClayGrass extends BlockSoilGrass {
 	public BlockSoilClayGrass(SoilBlockVariant blockVariant, SoilType type) {
 		super(blockVariant, type);
 
-		//DirtHelper.registerSoil(this.getDefaultState().getBlock(), DirtHelper.DIRTLIKE);
+		//DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.DIRTLIKE);
 	}
 
 	@Override

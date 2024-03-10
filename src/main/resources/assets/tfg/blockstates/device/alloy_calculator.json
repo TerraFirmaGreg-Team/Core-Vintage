@@ -4,7 +4,7 @@
     "model": "tfg:device/alloy_calculator",
     "uvlock": true,
     "textures": {
-      "all": "tfg:block/device/alloy_calculator"
+      "all": "tfg:blocks/device/alloy_calculator"
     }
   },
   "variants": {

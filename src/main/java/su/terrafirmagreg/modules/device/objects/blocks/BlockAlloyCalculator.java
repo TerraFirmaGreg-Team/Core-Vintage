@@ -15,12 +15,12 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TEAlloyCalculator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCALLOYCALC;
 import static su.terrafirmagreg.api.models.Blockstates.HORIZONTAL;
 
 public class BlockAlloyCalculator extends BlockBase implements ITEBlock {
@@ -41,8 +41,8 @@ public class BlockAlloyCalculator extends BlockBase implements ITEBlock {
 	}
 
 	@Override
-	public boolean onBlockActivated(@Nonnull World worldIn, BlockPos pos, @Nonnull IBlockState state, EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-		playerIn.openGui(MODID_TFCALLOYCALC, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+	public boolean onBlockActivated(@Nonnull World worldIn, @NotNull BlockPos pos, @Nonnull IBlockState state, @NotNull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+		GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.ALLOY_CALCULATOR);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 

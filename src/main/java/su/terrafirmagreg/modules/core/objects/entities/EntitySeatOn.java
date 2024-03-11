@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.animal.objects.entities;
+package su.terrafirmagreg.modules.core.objects.entities;
 
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;

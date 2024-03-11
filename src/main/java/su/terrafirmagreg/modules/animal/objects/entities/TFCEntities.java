@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
 
 import javax.annotation.Nonnull;
@@ -24,11 +25,11 @@ public class TFCEntities {
 			buf.writeLong(value);
 		}
 
-		public Long read(PacketBuffer buf) {
+		public @NotNull Long read(PacketBuffer buf) {
 			return buf.readLong();
 		}
 
-		public DataParameter<Long> createKey(int id) {
+		public @NotNull DataParameter<Long> createKey(int id) {
 			return new DataParameter<>(id, this);
 		}
 

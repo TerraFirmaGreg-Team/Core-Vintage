@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Implements pregnancy for mammals in TFC
  */
 @ParametersAreNonnullByDefault
-public abstract class EntityAnimalMammal extends TFCEntityAnimal {
+public abstract class EntityAnimalMammal extends EntityAnimalBase {
 	// The time(in days) this entity became pregnant
 	private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class, TFCEntities.getLongDataSerializer());
 

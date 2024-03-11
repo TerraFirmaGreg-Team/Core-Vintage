@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -78,7 +78,7 @@ public class ModelAnimalSheepBody extends ModelQuadruped {
 			}
 		}
 
-		if (sheep.getGender() == TFCEntityAnimal.Gender.FEMALE) {
+		if (sheep.getGender() == EntityAnimalBase.Gender.FEMALE) {
 			horn1.isHidden = true;
 			horn2.isHidden = true;
 		}

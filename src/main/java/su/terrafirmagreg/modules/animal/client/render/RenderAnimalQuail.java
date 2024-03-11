@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalQuail;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,7 +42,7 @@ public class RenderAnimalQuail extends RenderLiving<EntityAnimalQuail> {
 
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
-		} else if (quail.getGender() == TFCEntityAnimal.Gender.MALE) {
+		} else if (quail.getGender() == EntityAnimalBase.Gender.MALE) {
 			return quail.getAge() == IAnimal.Age.OLD ? MALE_OLD : MALE_YOUNG;
 		} else {
 			return quail.getAge() == IAnimal.Age.OLD ? FEMALE_OLD : FEMALE_YOUNG;

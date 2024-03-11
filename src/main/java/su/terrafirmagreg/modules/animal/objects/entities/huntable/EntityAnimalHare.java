@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +29,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 
 	@SuppressWarnings("unused")
 	public EntityAnimalHare(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalHare(World worldIn, IAnimal.Gender gender, int birthDay) {

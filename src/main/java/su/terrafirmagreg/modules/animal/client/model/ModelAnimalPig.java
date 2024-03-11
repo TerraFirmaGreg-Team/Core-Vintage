@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
 
 import javax.annotation.Nonnull;
@@ -49,7 +49,7 @@ public class ModelAnimalPig extends ModelQuadruped {
 		float ageScale = 2.0F - percent;
 
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-		if (pig.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (pig.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (!pig.isChild()) {
 				tusk1.isHidden = false;
 				tusk2.isHidden = false;

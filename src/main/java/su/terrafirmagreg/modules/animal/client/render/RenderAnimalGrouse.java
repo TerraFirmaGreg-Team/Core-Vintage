@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalGrouse;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,7 +42,7 @@ public class RenderAnimalGrouse extends RenderLiving<EntityAnimalGrouse> {
 
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
-		} else if (grouse.getGender() == TFCEntityAnimal.Gender.MALE) {
+		} else if (grouse.getGender() == EntityAnimalBase.Gender.MALE) {
 			return grouse.getAge() == IAnimal.Age.OLD ? MALE_YOUNG : MALE_OLD;
 		} else {
 			return grouse.getAge() == IAnimal.Age.OLD ? FEMALE_YOUNG : FEMALE_OLD;

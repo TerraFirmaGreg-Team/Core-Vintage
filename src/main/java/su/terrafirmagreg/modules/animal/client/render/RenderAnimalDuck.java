@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalDuck;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,7 +42,7 @@ public class RenderAnimalDuck extends RenderLiving<EntityAnimalDuck> {
 
 		if (percent < 0.65f) {
 			return DUCKLING_TEXTURE;
-		} else if (duck.getGender() == TFCEntityAnimal.Gender.MALE) {
+		} else if (duck.getGender() == EntityAnimalBase.Gender.MALE) {
 			return duck.getAge() == IAnimal.Age.OLD ? DRAKE_OLD : DRAKE_YOUNG;
 		} else {
 			return duck.getAge() == IAnimal.Age.OLD ? DUCK_OLD : DUCK_YOUNG;

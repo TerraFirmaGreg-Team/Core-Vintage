@@ -45,9 +45,9 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
 import su.terrafirmagreg.modules.core.data.EffectsCore;
 
 import javax.annotation.Nonnull;
@@ -78,7 +78,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	private float geneJump, geneHealth, geneSpeed; // Basic genetic selection based on vanilla's horse offspring
 
 	public EntityAnimalDonkey(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
+		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
 	}
 
 	public EntityAnimalDonkey(World world, Gender gender, int birthDay) {
@@ -177,7 +177,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	public boolean isReadyToMate() {
 		if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
 			return false;
-		return this.matingTime + TFCEntityAnimal.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+		return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
 	}
 
 	@Override
@@ -387,8 +387,8 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
 	@Override
 	protected void initEntityAI() {
-		TFCEntityAnimal.addCommonLivestockAI(this, 1.2D);
-		TFCEntityAnimal.addCommonPreyAI(this, 1.2);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.2);
 		tasks.addTask(2, new EntityAIMate(this, 1.0D, EntityAnimalHorse.class)); // Missing horses (for mules)
 		tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));

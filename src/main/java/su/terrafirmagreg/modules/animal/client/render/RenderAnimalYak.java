@@ -7,7 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalYak;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -23,7 +23,7 @@ public class RenderAnimalYak extends RenderAnimal<EntityAnimalYak> {
 	}
 
 	protected void preRenderCallback(EntityAnimalYak yakTFC, float par2) {
-		if (yakTFC.getGender() == TFCEntityAnimal.Gender.MALE)
+		if (yakTFC.getGender() == EntityAnimalBase.Gender.MALE)
 			GlStateManager.scale(1.2f, 1.2f, 1.2f);
 		else {
 			GlStateManager.scale(1.15f, 1.15f, 1.15f);

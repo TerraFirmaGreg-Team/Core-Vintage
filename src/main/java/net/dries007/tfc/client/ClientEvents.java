@@ -119,8 +119,7 @@ public class ClientEvents {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onInitGuiPre(GuiScreenEvent.InitGuiEvent.Pre event) {
-		if (ConfigTFC.General.OVERRIDES.forceTFCWorldType && event.getGui() instanceof GuiCreateWorld) {
-			GuiCreateWorld gui = ((GuiCreateWorld) event.getGui());
+		if (ConfigTFC.General.OVERRIDES.forceTFCWorldType && event.getGui() instanceof GuiCreateWorld gui) {
 			// Only change if default is selected, because coming back from customisation, this will be set already.
 			if (gui.selectedIndex == WorldType.DEFAULT.getId()) {
 				gui.selectedIndex = TerraFirmaCraft.getWorldType().getId();
@@ -137,13 +136,13 @@ public class ClientEvents {
 			int guiTop = ((GuiInventory) event.getGui()).getGuiTop();
 
 			event.getButtonList()
-			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.INVENTORY, guiLeft, guiTop, ++buttonId, false));
+					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.INVENTORY, guiLeft, guiTop, ++buttonId, false));
 			event.getButtonList()
-			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.SKILLS, guiLeft, guiTop, ++buttonId, true));
+					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.SKILLS, guiLeft, guiTop, ++buttonId, true));
 			event.getButtonList()
-			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.CALENDAR, guiLeft, guiTop, ++buttonId, true));
+					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.CALENDAR, guiLeft, guiTop, ++buttonId, true));
 			event.getButtonList()
-			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.NUTRITION, guiLeft, guiTop, ++buttonId, true));
+					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.NUTRITION, guiLeft, guiTop, ++buttonId, true));
 		}
 	}
 
@@ -151,8 +150,7 @@ public class ClientEvents {
 	@SubscribeEvent
 	public static void onGuiButtonPressPre(GuiScreenEvent.ActionPerformedEvent.Pre event) {
 		if (event.getGui() instanceof GuiInventory) {
-			if (event.getButton() instanceof GuiButtonPlayerInventoryTab) {
-				GuiButtonPlayerInventoryTab button = (GuiButtonPlayerInventoryTab) event.getButton();
+			if (event.getButton() instanceof GuiButtonPlayerInventoryTab button) {
 				// This is to prevent the button from immediately firing after moving (enabled is set to false then)
 				if (button.isActive() && button.enabled) {
 					TerraFirmaCraft.getNetwork().sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
@@ -182,7 +180,7 @@ public class ClientEvents {
 		if (mc.gameSettings.showDebugInfo) {
 			//noinspection ConstantConditions
 			BlockPos blockpos = new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity()
-			                                                                  .getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
+					.getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
 			Chunk chunk = mc.world.getChunk(blockpos);
 			if (mc.world.isBlockLoaded(blockpos) && !chunk.isEmpty()) {
 				final int x = blockpos.getX() & 15, z = blockpos.getZ() & 15;
@@ -219,7 +217,7 @@ public class ClientEvents {
 
 						list.add(GRAY + "Valid Trees: ");
 						data.getValidTrees()
-						    .forEach(t -> list.add(String.format("%s %s (%.1f)", WHITE, t.getRegistryName(), t.getDominance())));
+								.forEach(t -> list.add(String.format("%s %s (%.1f)", WHITE, t.getRegistryName(), t.getDominance())));
 
 						list.add(GRAY + "Sea level offset: " + WHITE + data.getSeaLevelOffset(x, z));
 						list.add(GRAY + "Spawn Protection: " + WHITE + data.getSpawnProtection());

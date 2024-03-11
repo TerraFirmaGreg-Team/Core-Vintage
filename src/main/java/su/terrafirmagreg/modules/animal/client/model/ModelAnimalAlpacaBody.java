@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -128,7 +128,7 @@ public class ModelAnimalAlpacaBody extends ModelBase {
 		float percent = (float) alpaca.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (alpaca.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (alpaca.getGender() == EntityAnimalBase.Gender.MALE) {
 			udders.isHidden = true;
 			ear1f.isHidden = true;
 			ear2f.isHidden = true;

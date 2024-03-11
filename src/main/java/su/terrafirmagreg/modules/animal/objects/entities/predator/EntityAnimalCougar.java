@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
 
@@ -33,7 +33,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 	@SuppressWarnings("unused")
 	public EntityAnimalCougar(World worldIn) {
 		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()),
-				TFCEntityAnimal.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+				EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalCougar(World worldIn, IAnimal.Gender gender, int birthDay) {

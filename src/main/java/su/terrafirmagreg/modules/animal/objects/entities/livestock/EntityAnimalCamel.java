@@ -32,8 +32,8 @@ import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -48,7 +48,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 	private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityAnimalCamel.class, DataSerializers.BOOLEAN);
 
 	public EntityAnimalCamel(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
 		this.setSize(0.9F, 2.0F);
 	}
 

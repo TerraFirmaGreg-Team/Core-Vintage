@@ -1,270 +1,67 @@
 package su.terrafirmagreg.modules.animal.data;
 
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.animal.client.render.*;
-import su.terrafirmagreg.modules.animal.objects.entities.EntitySeatOn;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.*;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.*;
 import su.terrafirmagreg.modules.animal.objects.entities.predator.*;
-
-import java.awt.*;
 
 public class EntitiesAnimal {
 
 	public static void onRegister(RegistryManager registry) {
 
-		registry.registerEntity("sitblock", EntityEntryBuilder.create()
-				.entity(EntitySeatOn.class)
-				.tracker(160, 20, true)
-		);
+//		registry.registerEntity("sitblock", EntityEntryBuilder.create()
+//				.entity(EntitySeatOn.class)
+//				.tracker(160, 20, true)
+//		);
 
-		registry.registerEntity("sheep", EntityEntryBuilder.create()
-				.entity(EntityAnimalSheep.class)
-				.egg(Color.decode("0xFFFFFF").getRGB(), Color.decode("0xFF6347").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("cow", EntityEntryBuilder.create()
-				.entity(EntityAnimalCow.class)
-				.egg(Color.decode("0xA52A2A").getRGB(), Color.decode("0xFFFFFF").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("grizzlybear", EntityEntryBuilder.create()
-				.entity(EntityAnimalGrizzlyBear.class)
-				.egg(Color.decode("0xB22222").getRGB(), Color.decode("0xDEB887").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("chicken", EntityEntryBuilder.create()
-				.entity(EntityAnimalChicken.class)
-				.egg(Color.decode("0x557755").getRGB(), Color.decode("0xFFF91F").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("pheasant", EntityEntryBuilder.create()
-				.entity(EntityAnimalPheasant.class)
-				.egg(Color.decode("0x5577FF").getRGB(), Color.decode("0xFFFA90").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("deer", EntityEntryBuilder.create()
-				.entity(EntityAnimalDeer.class)
-				.egg(Color.decode("0x55FF55").getRGB(), Color.decode("0x5FFAAF").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("pig", EntityEntryBuilder.create()
-				.entity(EntityAnimalPig.class)
-				.egg(Color.decode("0xAA7722").getRGB(), Color.decode("0xFFEBCD").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("wolf", EntityEntryBuilder.create()
-				.entity(EntityAnimalWolf.class)
-				.egg(Color.decode("0xB0ACAC").getRGB(), Color.decode("0x796555").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("rabbit", EntityEntryBuilder.create()
-				.entity(EntityAnimalRabbit.class)
-				.egg(Color.decode("0x885040").getRGB(), Color.decode("0x462612").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("horse", EntityEntryBuilder.create()
-				.entity(EntityAnimalHorse.class)
-				.egg(Color.decode("0xA5886B").getRGB(), Color.decode("0xABA400").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("donkey", EntityEntryBuilder.create()
-				.entity(EntityAnimalDonkey.class)
-				.egg(Color.decode("0x493C32").getRGB(), Color.decode("0x756659").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("mule", EntityEntryBuilder.create()
-				.entity(EntityAnimalMule.class)
-				.egg(Color.decode("0x180200").getRGB(), Color.decode("0x482D1A").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("polarbear", EntityEntryBuilder.create()
-				.entity(EntityAnimalPolarBear.class)
-				.egg(Color.decode("0xF1FFF1").getRGB(), Color.decode("0xA0A0A0").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("parrot", EntityEntryBuilder.create()
-				.entity(EntityAnimalParrot.class)
-				.egg(Color.decode("0x885040").getRGB(), Color.decode("0xB0ACAC").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("llama", EntityEntryBuilder.create()
-				.entity(EntityAnimalLlama.class)
-				.egg(Color.decode("0xA52A2A").getRGB(), Color.decode("0xAA7722").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("ocelot", EntityEntryBuilder.create()
-				.entity(EntityAnimalOcelot.class)
-				.egg(Color.decode("0x3527FA").getRGB(), Color.decode("0x7F23A0").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("panther", EntityEntryBuilder.create()
-				.entity(EntityAnimalPanther.class)
-				.egg(Color.decode("0x000066").getRGB(), Color.decode("0x000000").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("duck", EntityEntryBuilder.create()
-				.entity(EntityAnimalDuck.class)
-				.egg(Color.decode("0xFFF91F").getRGB(), Color.decode("0x462612").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("alpaca", EntityEntryBuilder.create()
-				.entity(EntityAnimalAlpaca.class)
-				.egg(Color.decode("0x00CC66").getRGB(), Color.decode("0x006633").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("goat", EntityEntryBuilder.create()
-				.entity(EntityAnimalGoat.class)
-				.egg(Color.decode("0xA0A0A0").getRGB(), Color.decode("0x404040").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("sabertooth", EntityEntryBuilder.create()
-				.entity(EntityAnimalSaberTooth.class)
-				.egg(Color.decode("0xFF8000").getRGB(), Color.decode("0xFFD700").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("camel", EntityEntryBuilder.create()
-				.entity(EntityAnimalCamel.class)
-				.egg(Color.decode("0xA5886B").getRGB(), Color.decode("0x006633").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("lion", EntityEntryBuilder.create()
-				.entity(EntityAnimalLion.class)
-				.egg(Color.decode("0xDAA520").getRGB(), Color.decode("0xA0522D").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("hyena", EntityEntryBuilder.create()
-				.entity(EntityAnimalHyena.class)
-				.egg(Color.decode("0x666600").getRGB(), Color.decode("0x331900").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("direwolf", EntityEntryBuilder.create()
-				.entity(EntityAnimalDireWolf.class)
-				.egg(Color.decode("0x343434").getRGB(), Color.decode("0x978f7e").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("hare", EntityEntryBuilder.create()
-				.entity(EntityAnimalHare.class)
-				.egg(Color.decode("0x866724").getRGB(), Color.decode("0xDADADA").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("boar", EntityEntryBuilder.create()
-				.entity(EntityAnimalBoar.class)
-				.egg(Color.decode("0x463c09").getRGB(), Color.decode("0xe39ad8").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("zebu", EntityEntryBuilder.create()
-				.entity(EntityAnimalZebu.class)
-				.egg(Color.decode("0x2c2507").getRGB(), Color.decode("0xbcb38e").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("gazelle", EntityEntryBuilder.create()
-				.entity(EntityAnimalGazelle.class)
-				.egg(Color.decode("0xa9a76f").getRGB(), Color.decode("0xc0ab55").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("wildebeest", EntityEntryBuilder.create()
-				.entity(EntityAnimalWildebeest.class)
-				.egg(Color.decode("0x696142").getRGB(), Color.decode("0x9c8115").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("quail", EntityEntryBuilder.create()
-				.entity(EntityAnimalQuail.class)
-				.egg(Color.decode("0x237ddc").getRGB(), Color.decode("0xe3e36d").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("grouse", EntityEntryBuilder.create()
-				.entity(EntityAnimalGrouse.class)
-				.egg(Color.decode("0xf7a100").getRGB(), Color.decode("0x71ffd0").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("mongoose", EntityEntryBuilder.create()
-				.entity(EntityAnimalMongoose.class)
-				.egg(Color.decode("0xf9f50f").getRGB(), Color.decode("0x90ec7f").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("turkey", EntityEntryBuilder.create()
-				.entity(EntityAnimalTurkey.class)
-				.egg(Color.decode("0xad1d1d").getRGB(), Color.decode("0xeaa659").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("jackal", EntityEntryBuilder.create()
-				.entity(EntityAnimalJackal.class)
-				.egg(Color.decode("0xb8762b").getRGB(), Color.decode("0xffffff").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("muskox", EntityEntryBuilder.create()
-				.entity(EntityAnimalMuskOx.class)
-				.egg(Color.decode("0x620d55").getRGB(), Color.decode("0xcdaf4f").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("yak", EntityEntryBuilder.create()
-				.entity(EntityAnimalYak.class)
-				.egg(Color.decode("0x837669").getRGB(), Color.decode("0x3e3d7c").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("blackbear", EntityEntryBuilder.create()
-				.entity(EntityAnimalBlackBear.class)
-				.egg(Color.decode("0x000000").getRGB(), Color.decode("0xa18f6c").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("cougar", EntityEntryBuilder.create()
-				.entity(EntityAnimalCougar.class)
-				.egg(Color.decode("0x817a00").getRGB(), Color.decode("0xdcd889").getRGB())
-				.tracker(80, 3, true)
-		);
-
-		registry.registerEntity("coyote", EntityEntryBuilder.create()
-				.entity(EntityAnimalCoyote.class)
-				.egg(Color.decode("0xb7bc88").getRGB(), Color.decode("0xdac213").getRGB())
-				.tracker(80, 3, true)
-		);
+		registry.registerEntity("sheep", EntityAnimalSheep.class, 0xFFFFFF, 0xFF6347);
+		registry.registerEntity("cow", EntityAnimalCow.class, 0xA52A2A, 0xFFFFFF);
+		registry.registerEntity("grizzlybear", EntityAnimalGrizzlyBear.class, 0xB22222, 0xDEB887);
+		registry.registerEntity("chicken", EntityAnimalChicken.class, 0x557755, 0xFFF91F);
+		registry.registerEntity("pheasant", EntityAnimalPheasant.class, 0x5577FF, 0xFFFA90);
+		registry.registerEntity("deer", EntityAnimalDeer.class, 0x55FF55, 0x5FFAAF);
+		registry.registerEntity("pig", EntityAnimalPig.class, 0xAA7722, 0xFFEBCD);
+		registry.registerEntity("wolf", EntityAnimalWolf.class, 0xB0ACAC, 0x796555);
+		registry.registerEntity("rabbit", EntityAnimalRabbit.class, 0x885040, 0x462612);
+		registry.registerEntity("horse", EntityAnimalHorse.class, 0xA5886B, 0xABA400);
+		registry.registerEntity("donkey", EntityAnimalDonkey.class, 0x493C32, 0x756659);
+		registry.registerEntity("mule", EntityAnimalMule.class, 0x180200, 0x482D1A);
+		registry.registerEntity("polarbear", EntityAnimalPolarBear.class, 0xF1FFF1, 0xA0A0A0);
+		registry.registerEntity("parrot", EntityAnimalParrot.class, 0x885040, 0xB0ACAC);
+		registry.registerEntity("llama", EntityAnimalLlama.class, 0xA52A2A, 0xAA7722);
+		registry.registerEntity("ocelot", EntityAnimalOcelot.class, 0x3527FA, 0x7F23A0);
+		registry.registerEntity("panther", EntityAnimalPanther.class, 0x000066, 0x000000);
+		registry.registerEntity("duck", EntityAnimalDuck.class, 0xFFF91F, 0x462612);
+		registry.registerEntity("alpaca", EntityAnimalAlpaca.class, 0x00CC66, 0x006633);
+		registry.registerEntity("goat", EntityAnimalGoat.class, 0xA0A0A0, 0x404040);
+		registry.registerEntity("sabertooth", EntityAnimalSaberTooth.class, 0xFF8000, 0xFFD700);
+		registry.registerEntity("camel", EntityAnimalCamel.class, 0xA5886B, 0x006633);
+		registry.registerEntity("lion", EntityAnimalLion.class, 0xDAA520, 0xA0522D);
+		registry.registerEntity("hyena", EntityAnimalHyena.class, 0x666600, 0x331900);
+		registry.registerEntity("direwolf", EntityAnimalDireWolf.class, 0x343434, 0x978f7e);
+		registry.registerEntity("hare", EntityAnimalHare.class, 0x866724, 0xDADADA);
+		registry.registerEntity("boar", EntityAnimalBoar.class, 0x463c09, 0xe39ad8);
+		registry.registerEntity("zebu", EntityAnimalZebu.class, 0x2c2507, 0xbcb38e);
+		registry.registerEntity("gazelle", EntityAnimalGazelle.class, 0xa9a76f, 0xc0ab55);
+		registry.registerEntity("wildebeest", EntityAnimalWildebeest.class, 0x696142, 0x9c8115);
+		registry.registerEntity("quail", EntityAnimalQuail.class, 0x237ddc, 0xe3e36d);
+		registry.registerEntity("grouse", EntityAnimalGrouse.class, 0xf7a100, 0x71ffd0);
+		registry.registerEntity("mongoose", EntityAnimalMongoose.class, 0xf9f50f, 0x90ec7f);
+		registry.registerEntity("turkey", EntityAnimalTurkey.class, 0xad1d1d, 0xeaa659);
+		registry.registerEntity("jackal", EntityAnimalJackal.class, 0xb8762b, 0xffffff);
+		registry.registerEntity("muskox", EntityAnimalMuskOx.class, 0x620d55, 0xcdaf4f);
+		registry.registerEntity("yak", EntityAnimalYak.class, 0x837669, 0x3e3d7c);
+		registry.registerEntity("blackbear", EntityAnimalBlackBear.class, 0x000000, 0xa18f6c);
+		registry.registerEntity("cougar", EntityAnimalCougar.class, 0x817a00, 0xdcd889);
+		registry.registerEntity("coyote", EntityAnimalCoyote.class, 0xb7bc88, 0xdac213);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void onClientRegister() {
+	public static void onClientRegister(RegistryManager registry) {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimalSheep.class, RenderAnimalSheep::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimalCow.class, RenderAnimalCow::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimalGrizzlyBear.class, RenderAnimalGrizzlyBear::new);

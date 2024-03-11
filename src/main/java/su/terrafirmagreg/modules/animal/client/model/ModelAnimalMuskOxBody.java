@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
 
 import javax.annotation.Nonnull;
@@ -186,7 +186,7 @@ public class ModelAnimalMuskOxBody extends ModelBase {
 		float percent = (float) muskox.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (muskox.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (muskox.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				hornCenter.isHidden = true;
 				hornRightBase.isHidden = true;

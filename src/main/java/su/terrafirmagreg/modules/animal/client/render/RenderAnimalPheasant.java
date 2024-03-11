@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalPheasant;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalPheasant;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -38,7 +38,7 @@ public class RenderAnimalPheasant extends RenderLiving<EntityAnimalPheasant> {
 
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
-		} else if (pheasent.getGender() == TFCEntityAnimal.Gender.MALE) {
+		} else if (pheasent.getGender() == EntityAnimalBase.Gender.MALE) {
 			return MALE_TEXTURE;
 		} else {
 			return FEMALE_TEXTURE;

@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.oredict.OreDictionary;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;

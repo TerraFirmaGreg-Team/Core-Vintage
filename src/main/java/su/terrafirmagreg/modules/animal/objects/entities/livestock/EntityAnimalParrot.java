@@ -31,8 +31,8 @@ import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -54,7 +54,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 
 	@SuppressWarnings("unused")
 	public EntityAnimalParrot(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalParrot(World world, IAnimal.Gender gender, int birthDay) {
@@ -95,7 +95,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 			}
 			if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
 				this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-				TFCEntityAnimal.findFemaleMate(this);
+				EntityAnimalBase.findFemaleMate(this);
 			}
 			if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
 

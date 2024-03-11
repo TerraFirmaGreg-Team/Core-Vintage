@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalChicken;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalChicken;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,7 +42,7 @@ public class RenderAnimalChicken extends RenderLiving<EntityAnimalChicken> {
 
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
-		} else if (chicken.getGender() == TFCEntityAnimal.Gender.MALE) {
+		} else if (chicken.getGender() == EntityAnimalBase.Gender.MALE) {
 			return chicken.getAge() == IAnimal.Age.OLD ? ROOSTER_OLD : ROOSTER_YOUNG;
 		} else {
 			return chicken.getAge() == IAnimal.Age.OLD ? CHICKEN_OLD : CHICKEN_YOUNG;

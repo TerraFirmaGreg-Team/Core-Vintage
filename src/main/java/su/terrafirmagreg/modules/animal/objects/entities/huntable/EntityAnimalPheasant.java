@@ -18,8 +18,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -28,7 +28,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
-public class EntityAnimalPheasant extends TFCEntityAnimal implements IHuntable {
+public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 24;
 
 	//Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap

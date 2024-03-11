@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
 
 import javax.annotation.Nonnull;
@@ -288,7 +288,7 @@ public class ModelAnimalYak extends ModelBase {
 		float percent = (float) yak.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (yak.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (yak.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				udder.isHidden = true;
 				hornRightF1A.isHidden = true;

@@ -17,8 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -27,7 +27,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
-public class EntityAnimalTurkey extends TFCEntityAnimal implements IHuntable {
+public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 32;
 
 	public float wingRotation;

@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
 
 import javax.annotation.Nonnull;
@@ -79,7 +79,7 @@ public class ModelAnimalCow extends ModelQuadruped {
 			}
 		}
 
-		if (cow.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (cow.getGender() == EntityAnimalBase.Gender.MALE) {
 			udders.isHidden = true;
 		} else {
 			horn1b.isHidden = true;

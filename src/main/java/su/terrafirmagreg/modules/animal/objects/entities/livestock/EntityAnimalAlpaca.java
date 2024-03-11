@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -37,7 +37,7 @@ import java.util.function.BiConsumer;
 public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAnimalAlpaca(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(ConfigTFC.Animals.ALPACA.adulthood, ConfigTFC.Animals.ALPACA.elder), EntitySheep.getRandomSheepColor(Constants.RNG));
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.ALPACA.adulthood, ConfigTFC.Animals.ALPACA.elder), EntitySheep.getRandomSheepColor(Constants.RNG));
 	}
 
 	public EntityAnimalAlpaca(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {

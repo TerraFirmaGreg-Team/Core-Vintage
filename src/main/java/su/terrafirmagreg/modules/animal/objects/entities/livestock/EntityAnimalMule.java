@@ -42,8 +42,8 @@ import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.data.EffectsCore;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
@@ -68,7 +68,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 	private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
 	public EntityAnimalMule(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
+		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
 	}
 
 	public EntityAnimalMule(World world, Gender gender, int birthDay) {
@@ -218,8 +218,8 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
 	@Override
 	protected void initEntityAI() {
-		TFCEntityAnimal.addCommonLivestockAI(this, 1.2D);
-		TFCEntityAnimal.addCommonPreyAI(this, 1.2);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.2);
 		this.tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 	}

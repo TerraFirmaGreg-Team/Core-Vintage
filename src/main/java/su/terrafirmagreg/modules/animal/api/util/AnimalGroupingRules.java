@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.animal.objects.entities;
+package su.terrafirmagreg.modules.animal.api.util;
 
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.entity.EntityLiving;

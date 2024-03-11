@@ -393,7 +393,7 @@ public class RegistryManager {
 	 * @param id       The string id for the entity.
 	 * @return The entity that was registered.
 	 */
-	public <T extends Entity> EntityEntryBuilder<T> registerMob(String id, Class<T> entClass, int primary, int seconday) {
+	public <T extends Entity> EntityEntryBuilder<T> registerEntity(String id, Class<T> entClass, int primary, int seconday) {
 
 		final EntityEntryBuilder<T> builder = this.registerEntity(id, entClass);
 

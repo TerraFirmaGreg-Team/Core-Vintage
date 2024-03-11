@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
 
 import javax.annotation.Nonnull;
@@ -425,7 +425,7 @@ public class ModelAnimalZebu extends ModelBase {
 		float percent = (float) zebu.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (zebu.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (zebu.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				hornML1.isHidden = true;
 				hornML2.isHidden = true;

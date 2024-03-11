@@ -29,9 +29,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIFindNest;
 
 import javax.annotation.Nonnull;
@@ -44,7 +44,7 @@ import java.util.function.BiConsumer;
 
 
 @ParametersAreNonnullByDefault
-public class EntityAnimalChicken extends TFCEntityAnimal implements ILivestock {
+public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock {
 	//The last time(in ticks) this chicken has laid eggs
 	private static final DataParameter<Long> LAID = EntityDataManager.createKey(EntityAnimalChicken.class, TFCEntities.getLongDataSerializer());
 	//Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap

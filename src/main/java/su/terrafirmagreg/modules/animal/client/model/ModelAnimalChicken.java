@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalChicken;
 
 import javax.annotation.Nonnull;
@@ -81,7 +81,7 @@ public class ModelAnimalChicken extends ModelBase {
 		GlStateManager.scale(1 / ageScale, 1 / ageScale, 1 / ageScale);
 		GlStateManager.translate(0.0F, 1.5f - (1.5f * percent), 0f);
 
-		if (percent >= 0.75 && chicken.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (percent >= 0.75 && chicken.getGender() == EntityAnimalBase.Gender.MALE) {
 			crown.isHidden = false;
 			this.body.rotateAngleX = (float) Math.PI / 4F;
 			this.rightWing.rotateAngleX = (float) Math.PI / 4F;

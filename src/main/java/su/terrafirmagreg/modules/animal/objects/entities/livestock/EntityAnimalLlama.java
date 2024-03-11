@@ -38,9 +38,9 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIPanic;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
@@ -71,7 +71,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
 	@SuppressWarnings("unused")
 	public EntityAnimalLlama(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
 	}
 
 	public EntityAnimalLlama(World world, IAnimal.Gender gender, int birthDay) {
@@ -246,7 +246,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	public boolean isReadyToMate() {
 		if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
 			return false;
-		return this.matingTime + TFCEntityAnimal.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+		return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
 	}
 
 	@Override
@@ -357,7 +357,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 			}
 			if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
 				this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-				TFCEntityAnimal.findFemaleMate(this);
+				EntityAnimalBase.findFemaleMate(this);
 			}
 			if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();

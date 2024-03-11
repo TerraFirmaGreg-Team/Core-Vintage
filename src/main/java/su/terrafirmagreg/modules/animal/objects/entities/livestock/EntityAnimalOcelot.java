@@ -35,8 +35,8 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.objects.entities.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
 import javax.annotation.Nonnull;
@@ -63,7 +63,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
 	@SuppressWarnings("unused")
 	public EntityAnimalOcelot(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), TFCEntityAnimal.getRandomGrowth(ConfigTFC.Animals.OCELOT.adulthood, ConfigTFC.Animals.OCELOT.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.OCELOT.adulthood, ConfigTFC.Animals.OCELOT.elder));
 	}
 
 	public EntityAnimalOcelot(World world, IAnimal.Gender gender, int birthDay) {
@@ -144,7 +144,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 	public boolean isReadyToMate() {
 		if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
 			return false;
-		return this.matingTime + TFCEntityAnimal.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+		return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
 	}
 
 	@Override
@@ -234,7 +234,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 			}
 			if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
 				this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-				TFCEntityAnimal.findFemaleMate(this);
+				EntityAnimalBase.findFemaleMate(this);
 			}
 			if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();

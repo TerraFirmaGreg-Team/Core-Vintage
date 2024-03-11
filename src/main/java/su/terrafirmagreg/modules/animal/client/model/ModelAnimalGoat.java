@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
 
 import javax.annotation.Nonnull;
@@ -173,7 +173,7 @@ public class ModelAnimalGoat extends ModelBase {
 		float percent = (float) goat.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (goat.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (goat.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				babyhorn1.isHidden = false;
 				babyhorn2.isHidden = false;

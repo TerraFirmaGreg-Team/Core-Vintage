@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalDeer;
 
 import javax.annotation.Nonnull;
@@ -336,7 +336,7 @@ public class ModelAnimalDeer extends ModelBase {
 		float ab = (float) Math.sqrt(1.0F / aa);
 		GlStateManager.scale(ab, ab, ab);
 		GlStateManager.translate(0.0F, 22F * f5 * age / (float) Math.pow(aa, 0.4), 2F * f5 * age / ab);
-		if (deer.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (deer.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (aa <= 1.75) {
 				antler11.isHidden = false;
 				antler21.isHidden = false;

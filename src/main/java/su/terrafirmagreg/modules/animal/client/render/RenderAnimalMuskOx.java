@@ -7,7 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalMuskOxBody;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,7 +25,7 @@ public class RenderAnimalMuskOx extends RenderAnimal<EntityAnimalMuskOx> {
 
 	@Override
 	protected void preRenderCallback(EntityAnimalMuskOx muskoxTFC, float par2) {
-		if (muskoxTFC.getGender() == TFCEntityAnimal.Gender.MALE)
+		if (muskoxTFC.getGender() == EntityAnimalBase.Gender.MALE)
 			GlStateManager.scale(1.2f, 1.2f, 1.2f);
 		else {
 			GlStateManager.scale(1.0f, 1.0f, 1.0f);

@@ -42,26 +42,26 @@ import java.util.List;
 import java.util.Random;
 
 
-public abstract class TFCEntityAnimal extends EntityAnimal implements IAnimal {
+public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 	public static final long MATING_COOLDOWN_DEFAULT_TICKS = ICalendar.TICKS_IN_HOUR * 2;
 
 	//Values that has a visual effect on client
-	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(TFCEntityAnimal.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(TFCEntityAnimal.class, DataSerializers.VARINT);
-	private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(TFCEntityAnimal.class, DataSerializers.FLOAT);
+	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityAnimalBase.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(EntityAnimalBase.class, DataSerializers.VARINT);
+	private static final DataParameter<Float> FAMILIARITY = EntityDataManager.createKey(EntityAnimalBase.class, DataSerializers.FLOAT);
 	//Is this female fertilized? (in oviparous, the egg laying is fertilized, for mammals this is pregnancy)
-	private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(TFCEntityAnimal.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(EntityAnimalBase.class, DataSerializers.BOOLEAN);
 	private long lastFed; //Last time(in days) this entity was fed
 	private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
 	private long matingTime; //The last time(in ticks) this male tried fertilizing females
 	private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
 	@SuppressWarnings("unused")
-	public TFCEntityAnimal(World worldIn) {
+	public EntityAnimalBase(World worldIn) {
 		super(worldIn);
 	}
 
-	public TFCEntityAnimal(World worldIn, Gender gender, int birthDay) {
+	public EntityAnimalBase(World worldIn, Gender gender, int birthDay) {
 		super(worldIn);
 		this.setGender(gender);
 		this.setBirthDay(birthDay);
@@ -214,7 +214,7 @@ public abstract class TFCEntityAnimal extends EntityAnimal implements IAnimal {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
 			try {
-				TFCEntityAnimal baby = this.getClass().getConstructor(World.class).newInstance(this.world);
+				EntityAnimalBase baby = this.getClass().getConstructor(World.class).newInstance(this.world);
 				baby.setGender(Gender.valueOf(Constants.RNG.nextBoolean()));
 				baby.setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
 				baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
@@ -372,7 +372,7 @@ public abstract class TFCEntityAnimal extends EntityAnimal implements IAnimal {
 	@Override
 	public boolean canMateWith(EntityAnimal otherAnimal) {
 		if (otherAnimal.getClass() != this.getClass()) return false;
-		TFCEntityAnimal other = (TFCEntityAnimal) otherAnimal;
+		EntityAnimalBase other = (EntityAnimalBase) otherAnimal;
 		return this.getGender() != other.getGender() && this.isInLove() && other.isInLove();
 	}
 

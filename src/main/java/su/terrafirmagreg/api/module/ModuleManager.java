@@ -48,7 +48,7 @@ public class ModuleManager {
 		}
 
 		for (ModuleBase module : moduleList) {
-			module.getLogger().debug("Registering event handlers");
+			module.getLogger().info("Registering event handlers");
 			for (Class<?> clazz : module.getEventBusSubscribers()) {
 				MinecraftForge.EVENT_BUS.register(clazz);
 			}

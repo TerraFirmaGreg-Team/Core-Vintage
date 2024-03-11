@@ -9,6 +9,7 @@ import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.animal.data.BlocksAnimal;
+import su.terrafirmagreg.modules.animal.data.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 
 import javax.annotation.Nonnull;
@@ -35,6 +36,11 @@ public class ModuleAnimal extends ModuleBase {
 	public void onRegister() {
 		BlocksAnimal.onRegister(registryManager);
 		ItemsAnimal.onRegister(registryManager);
+		EntitiesAnimal.onRegister(registryManager);
+	}
+
+	public void onClientRegister() {
+		EntitiesAnimal.onClientRegister(registryManager);
 	}
 
 	@Nonnull

@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalTurkey;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntityAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalTurkey;
 
 import javax.annotation.Nonnull;
@@ -32,7 +32,7 @@ public class RenderAnimalTurkey extends RenderLiving<EntityAnimalTurkey> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityAnimalTurkey turkey) {
-		if (turkey.getGender() == TFCEntityAnimal.Gender.MALE) {
+		if (turkey.getGender() == EntityAnimalBase.Gender.MALE) {
 			return MALE;
 		} else {
 			return FEMALE;

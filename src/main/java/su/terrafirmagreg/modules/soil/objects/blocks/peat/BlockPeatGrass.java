@@ -18,8 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 
 import java.util.Random;
@@ -60,10 +60,10 @@ public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
 		pos = pos.add(0, -1, 0);
-		return state.withProperty(NORTH, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-				.withProperty(EAST, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-				.withProperty(SOUTH, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-				.withProperty(WEST, BlocksSoil.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+		return state.withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+				.withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+				.withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+				.withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
 	}
 
 	@Override

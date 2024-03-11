@@ -4,10 +4,17 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
+import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
+import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
 public class BlockUtils {
 
@@ -169,6 +176,40 @@ public class BlockUtils {
 		IBlockFilter TRUE = (world, pos, blockState) -> true;
 
 		boolean allow(World world, BlockPos pos, IBlockState blockState);
+	}
+
+
+	public static boolean isGrass(IBlockState current) {
+		if (current.getBlock() instanceof BlockPeatGrass) return true;
+		if (current.getBlock() instanceof ISoilBlock soil) {
+			var variant = soil.getBlockVariant();
+			return variant == GRASS || variant == DRY_GRASS ||
+					variant == CLAY_GRASS;
+		}
+		return false;
+	}
+
+	public static boolean isSoil(IBlockState current) {
+		if (current.getBlock() instanceof BlockPeat) return true;
+		if (current.getBlock() instanceof ISoilBlock soil) {
+			var variant = soil.getBlockVariant();
+			return variant == GRASS || variant == DRY_GRASS ||
+					variant == DIRT || variant == CLAY ||
+					variant == CLAY_GRASS;
+		}
+		return false;
+	}
+
+	public static boolean isGround(IBlockState current) {
+		if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
+			var variant = rockTypeBlock.getBlockVariant();
+			return variant == GRAVEL || variant == SAND || variant == RAW;
+		}
+		if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
+			var variant = soilTypeBlock.getBlockVariant();
+			return variant == GRASS || variant == DRY_GRASS || variant == DIRT;
+		}
+		return false;
 	}
 
 }

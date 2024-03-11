@@ -1,0 +1,22 @@
+package su.terrafirmagreg.modules.animal.client.render;
+
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.animal.client.model.ModelAnimalGoat;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@SideOnly(Side.CLIENT)
+@ParametersAreNonnullByDefault
+public class RenderAnimalGoat extends RenderAnimal<EntityAnimalGoat> {
+	private static final ResourceLocation GOAT_OLD = ModUtils.getID("textures/entity/animal/livestock/goat_old.png");
+	private static final ResourceLocation GOAT_YOUNG = ModUtils.getID("textures/entity/animal/livestock/goat_young.png");
+
+	public RenderAnimalGoat(RenderManager renderManager) {
+		super(renderManager, new ModelAnimalGoat(), 0.7F, GOAT_YOUNG, GOAT_OLD);
+	}
+}

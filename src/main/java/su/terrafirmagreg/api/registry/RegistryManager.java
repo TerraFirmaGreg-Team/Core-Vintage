@@ -387,7 +387,7 @@ public class RegistryManager {
 	}
 
 	/**
-	 * Registers any sort of entity. Will not have a spawn egg.
+	 * Registers any sort of entity. Will have a spawn egg.
 	 *
 	 * @param entClass The entity class.
 	 * @param id       The string id for the entity.
@@ -496,7 +496,7 @@ public class RegistryManager {
 	@SideOnly(Side.CLIENT)
 	public void registerClientModel(ICustomModel model) {
 		this.customModel.add(model);
-		
+
 	}
 
 	//endregion

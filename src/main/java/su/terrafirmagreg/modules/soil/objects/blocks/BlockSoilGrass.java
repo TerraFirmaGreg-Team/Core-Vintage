@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -98,7 +99,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 				IBlockState current = world.getBlockState(target);
 
 				// Пропускаем итерацию, если текущий блок не является почвой или уже имеет траву
-				if (!BlocksSoil.isSoil(current) || BlocksSoil.isGrass(current)) {
+				if (!BlockUtils.isSoil(current) || BlockUtils.isGrass(current)) {
 					continue;
 				}
 

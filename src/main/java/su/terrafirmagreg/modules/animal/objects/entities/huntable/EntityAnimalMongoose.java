@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -17,8 +15,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;
@@ -33,7 +33,7 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 
 	@SuppressWarnings("unused")
 	public EntityAnimalMongoose(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalMongoose(World worldIn, Gender gender, int birthDay) {
@@ -46,7 +46,7 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.DESERT)) {
-			return ConfigTFC.Animals.MONGOOSE.rarity;
+			return ModuleAnimalConfig.ENTITIES.MONGOOSE.rarity;
 		}
 		return 0;
 	}
@@ -98,12 +98,12 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_MONGOOSE_HURT;
+		return SoundAnimal.ANIMAL_MONGOOSE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_MONGOOSE_DEATH;
+		return SoundAnimal.ANIMAL_MONGOOSE_DEATH;
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_MONGOOSE_SAY;
+		return SoundAnimal.ANIMAL_MONGOOSE_SAY;
 	}
 
 	@Nullable

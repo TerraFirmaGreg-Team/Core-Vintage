@@ -1,12 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -35,7 +31,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
@@ -60,7 +60,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
 	@SuppressWarnings("unused")
 	public EntityAnimalSheep(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.SHEEP.adulthood, ConfigTFC.Animals.SHEEP.elder), EntitySheep.getRandomSheepColor(Constants.RNG));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.SHEEP.adulthood, ModuleAnimalConfig.ENTITIES.SHEEP.elder), EntitySheep.getRandomSheepColor(Constants.RANDOM));
 	}
 
 	public EntityAnimalSheep(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -75,7 +75,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.PLAINS)) {
-			return ConfigTFC.Animals.SHEEP.rarity;
+			return ModuleAnimalConfig.ENTITIES.SHEEP.rarity;
 		}
 		return 0;
 	}
@@ -97,9 +97,9 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
 	@Override
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.SHEEP.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.SHEEP.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
+			EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
 			baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 			baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
 			world.spawnEntity(baby);
@@ -108,7 +108,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
 	@Override
 	public long gestationDays() {
-		return ConfigTFC.Animals.SHEEP.gestation;
+		return ModuleAnimalConfig.ENTITIES.SHEEP.gestation;
 	}
 
 	@Override
@@ -135,12 +135,12 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
+		if (OreDictUtils.contains(stack, "knife")) {
 			if (!world.isRemote) {
 				if (isReadyForAnimalProduct()) {
 					stack.damageItem(1, player);
 					ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL, 1);
-					Helpers.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
+					StackUtils.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
 					playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 					setProductsCooldown();
 				} else {
@@ -151,7 +151,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 				}
 			}
 			return true;
-		} else if (OreDictionaryHelper.doesStackMatchOre(stack, "shears")) {
+		} else if (OreDictUtils.contains(stack, "shears")) {
 			if (!world.isRemote) {
 				if (!isReadyForAnimalProduct()) {
 					TextComponentTranslation tooltip = getTooltip();
@@ -168,7 +168,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.SHEEP.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.SHEEP.oldDeathChance;
 	}
 
 	@Override
@@ -190,12 +190,12 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.SHEEP.adulthood;
+		return ModuleAnimalConfig.ENTITIES.SHEEP.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.SHEEP.elder;
+		return ModuleAnimalConfig.ENTITIES.SHEEP.elder;
 	}
 
 	@Override
@@ -216,7 +216,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.SHEEP.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.SHEEP.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override

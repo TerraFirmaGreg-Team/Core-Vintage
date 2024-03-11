@@ -16,8 +16,8 @@ public class RenderAnimalCamel extends RenderAnimal<EntityAnimalCamel> {
 	private static final ResourceLocation OLD = ModUtils.getID("textures/entity/animal/livestock/camel_old.png");
 	private static final ResourceLocation YOUNG = ModUtils.getID("textures/entity/animal/livestock/camel_young.png");
 
-	public RenderAnimalCamel(RenderManager p_i47203_1_) {
-		super(p_i47203_1_, new ModelAnimalCamel(0.0F), 0.7F, YOUNG, OLD);
+	public RenderAnimalCamel(RenderManager renderManager) {
+		super(renderManager, new ModelAnimalCamel(0.0F), 0.7F, YOUNG, OLD);
 		this.addLayer(new LayerCamelDecor(this));
 	}
 

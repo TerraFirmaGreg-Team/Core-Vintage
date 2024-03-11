@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -19,7 +17,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -30,7 +30,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock {
 	public EntityAnimalQuail(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.QUAIL.adulthood, ConfigTFC.Animals.QUAIL.elder));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.QUAIL.adulthood, ModuleAnimalConfig.ENTITIES.QUAIL.elder));
 	}
 
 	public EntityAnimalQuail(World worldIn, Gender gender, int birthDay) {
@@ -43,19 +43,19 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-			return ConfigTFC.Animals.QUAIL.rarity;
+			return ModuleAnimalConfig.ENTITIES.QUAIL.rarity;
 		}
 		return 0;
 	}
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.QUAIL.adulthood;
+		return ModuleAnimalConfig.ENTITIES.QUAIL.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.QUAIL.elder;
+		return ModuleAnimalConfig.ENTITIES.QUAIL.elder;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 			if (cap != null) {
 				EntityAnimalQuail chick = new EntityAnimalQuail(this.world);
 				chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-				cap.setFertilized(chick, ConfigTFC.Animals.QUAIL.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+				cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.QUAIL.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
 			}
 		}
 		eggs.add(egg);
@@ -76,22 +76,22 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.QUAIL.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.QUAIL.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_QUAIL_HURT;
+		return SoundAnimal.ANIMAL_QUAIL_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_QUAIL_DEATH;
+		return SoundAnimal.ANIMAL_QUAIL_DEATH;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_QUAIL_SAY;
+		return SoundAnimal.ANIMAL_QUAIL_SAY;
 	}
 
 	@Nullable
@@ -107,6 +107,6 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.QUAIL.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.QUAIL.oldDeathChance;
 	}
 }

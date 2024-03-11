@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -16,7 +14,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,7 +25,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAnimalYak(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.YAK.adulthood, ConfigTFC.Animals.YAK.elder));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.YAK.adulthood, ModuleAnimalConfig.ENTITIES.YAK.elder));
 	}
 
 	public EntityAnimalYak(World worldIn, Gender gender, int birthDay) {
@@ -38,16 +38,16 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TAIGA)) {
-			return ConfigTFC.Animals.YAK.rarity;
+			return ModuleAnimalConfig.ENTITIES.YAK.rarity;
 		}
 		return 0;
 	}
 
 	@Override
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.YAK.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.YAK.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
 			this.world.spawnEntity(baby);
@@ -56,12 +56,12 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
 	@Override
 	public long gestationDays() {
-		return ConfigTFC.Animals.YAK.gestation;
+		return ModuleAnimalConfig.ENTITIES.YAK.gestation;
 	}
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.YAK.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.YAK.oldDeathChance;
 	}
 
 	@Override
@@ -71,27 +71,27 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.YAK.adulthood;
+		return ModuleAnimalConfig.ENTITIES.YAK.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.YAK.elder;
+		return ModuleAnimalConfig.ENTITIES.YAK.elder;
 	}
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.YAK.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.YAK.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_YAK_HURT;
+		return SoundAnimal.ANIMAL_YAK_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_YAK_DEATH;
+		return SoundAnimal.ANIMAL_YAK_DEATH;
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_YAK_SAY;
+		return SoundAnimal.ANIMAL_YAK_SAY;
 	}
 
 	@Nullable

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -30,7 +30,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
 
 	@SuppressWarnings("unused")
 	public EntityAnimalBlackBear(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalBlackBear(World worldIn, IAnimal.Gender gender, int birthDay) {
@@ -43,7 +43,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-			return ConfigTFC.Animals.BLACK_BEAR.rarity;
+			return ModuleAnimalConfig.ENTITIES.BLACK_BEAR.rarity;
 		}
 		return 0;
 	}
@@ -61,7 +61,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
 
 
 		int priority = 2;
-		for (String input : ConfigTFC.Animals.BLACK_BEAR.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.BLACK_BEAR.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {

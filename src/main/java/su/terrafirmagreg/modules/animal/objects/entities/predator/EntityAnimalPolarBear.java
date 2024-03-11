@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -49,7 +49,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 
 	@SuppressWarnings("unused")
 	public EntityAnimalPolarBear(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalPolarBear(World world, IAnimal.Gender gender, int birthDay) {
@@ -63,7 +63,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 
 	@Override
 	public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
-		return new EntityAnimalPolarBear(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+		return new EntityAnimalPolarBear(this.world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
 		int priority = 2;
-		for (String input : ConfigTFC.Animals.POLAR_BEAR.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.POLAR_BEAR.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {
@@ -252,7 +252,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-			return ConfigTFC.Animals.POLAR_BEAR.rarity;
+			return ModuleAnimalConfig.ENTITIES.POLAR_BEAR.rarity;
 		}
 		return 0;
 	}

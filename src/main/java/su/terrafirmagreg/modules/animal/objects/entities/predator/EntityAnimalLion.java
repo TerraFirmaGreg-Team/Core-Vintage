@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -26,8 +24,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -47,7 +47,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
 	@SuppressWarnings("unused")
 	public EntityAnimalLion(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalLion(World worldIn, Gender gender, int birthDay) {
@@ -60,7 +60,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-			return ConfigTFC.Animals.LION.rarity;
+			return ModuleAnimalConfig.ENTITIES.LION.rarity;
 		}
 		return 0;
 	}
@@ -94,7 +94,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 	public void birthChildren() {
 		int numberOfChildren = 1; //one always
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			this.world.spawnEntity(baby);
 		}
@@ -131,12 +131,12 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_LION_HURT;
+		return SoundAnimal.ANIMAL_LION_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_LION_DEATH;
+		return SoundAnimal.ANIMAL_LION_DEATH;
 	}
 
 	@Override
@@ -166,7 +166,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
 		int priority = 2;
-		for (String input : ConfigTFC.Animals.LION.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.LION.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {
@@ -191,7 +191,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_LION_CRY : TFCSounds.ANIMAL_LION_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;
 	}
 
 	@Nullable
@@ -209,7 +209,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn) {
-		playSound(TFCSounds.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
+		playSound(SoundAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
 	}
 
 	/**

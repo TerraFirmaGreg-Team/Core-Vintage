@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -19,7 +17,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,7 +33,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock {
 	public EntityAnimalDuck(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.DUCK.adulthood, ConfigTFC.Animals.DUCK.elder));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.DUCK.adulthood, ModuleAnimalConfig.ENTITIES.DUCK.elder));
 	}
 
 	public EntityAnimalDuck(World worldIn, Gender gender, int birthDay) {
@@ -46,19 +46,19 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-			return ConfigTFC.Animals.DUCK.rarity;
+			return ModuleAnimalConfig.ENTITIES.DUCK.rarity;
 		}
 		return 0;
 	}
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.DUCK.adulthood;
+		return ModuleAnimalConfig.ENTITIES.DUCK.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.DUCK.elder;
+		return ModuleAnimalConfig.ENTITIES.DUCK.elder;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 			if (cap != null) {
 				EntityAnimalDuck chick = new EntityAnimalDuck(this.world);
 				chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-				cap.setFertilized(chick, ConfigTFC.Animals.DUCK.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+				cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.DUCK.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
 			}
 		}
 		eggs.add(egg);
@@ -79,22 +79,22 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.DUCK.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.DUCK.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_DUCK_HURT;
+		return SoundAnimal.ANIMAL_DUCK_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_DUCK_DEATH;
+		return SoundAnimal.ANIMAL_DUCK_DEATH;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_DUCK_CRY : TFCSounds.ANIMAL_DUCK_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DUCK_CRY : SoundAnimal.ANIMAL_DUCK_SAY;
 	}
 
 	@Nullable
@@ -110,6 +110,6 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.DUCK.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.DUCK.oldDeathChance;
 	}
 }

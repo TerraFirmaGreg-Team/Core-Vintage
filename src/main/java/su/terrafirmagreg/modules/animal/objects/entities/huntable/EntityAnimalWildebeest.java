@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -23,8 +20,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.oredict.OreDictionary;
+import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;
@@ -39,7 +39,7 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
 
 	@SuppressWarnings("unused")
 	public EntityAnimalWildebeest(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalWildebeest(World worldIn, Gender gender, int birthDay) {
@@ -62,7 +62,7 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-			return ConfigTFC.Animals.WILDEBEEST.rarity;
+			return ModuleAnimalConfig.ENTITIES.WILDEBEEST.rarity;
 		}
 		return 0;
 	}
@@ -104,12 +104,12 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_WILDEBEEST_HURT;
+		return SoundAnimal.ANIMAL_WILDEBEEST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_WILDEBEEST_DEATH;
+		return SoundAnimal.ANIMAL_WILDEBEEST_DEATH;
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_WILDEBEEST_SAY;
+		return SoundAnimal.ANIMAL_WILDEBEEST_SAY;
 	}
 
 	@Nullable

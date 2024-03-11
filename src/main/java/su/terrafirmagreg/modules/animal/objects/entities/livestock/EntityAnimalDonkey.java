@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -41,6 +40,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -78,7 +78,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	private float geneJump, geneHealth, geneSpeed; // Basic genetic selection based on vanilla's horse offspring
 
 	public EntityAnimalDonkey(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
+		this(world, Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.DONKEY.adulthood, ModuleAnimalConfig.ENTITIES.DONKEY.elder));
 	}
 
 	public EntityAnimalDonkey(World world, Gender gender, int birthDay) {
@@ -165,12 +165,12 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.DONKEY.adulthood;
+		return ModuleAnimalConfig.ENTITIES.DONKEY.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.DONKEY.elder;
+		return ModuleAnimalConfig.ENTITIES.DONKEY.elder;
 	}
 
 	@Override
@@ -239,7 +239,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.PLAINS)) {
-			return ConfigTFC.Animals.DONKEY.rarity;
+			return ModuleAnimalConfig.ENTITIES.DONKEY.rarity;
 		}
 		return 0;
 	}
@@ -268,7 +268,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	}
 
 	public long gestationDays() {
-		return ConfigTFC.Animals.DONKEY.gestation;
+		return ModuleAnimalConfig.ENTITIES.DONKEY.gestation;
 	}
 
 	@Override
@@ -462,7 +462,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
 				// Randomly die of old age, tied to entity UUID and calendar time
 				final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-				if (random.nextDouble() < ConfigTFC.Animals.DONKEY.oldDeathChance) {
+				if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.DONKEY.oldDeathChance) {
 					this.setDead();
 				}
 			}
@@ -498,7 +498,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 			this.onFertilized((IAnimal) other);
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
-			EntityAnimalDonkey baby = new EntityAnimalDonkey(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalDonkey baby = new EntityAnimalDonkey(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			this.setOffspringAttributes(this, baby);
 			return baby;
 		}
@@ -527,7 +527,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	}
 
 	private void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.DONKEY.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.DONKEY.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
 			// Birth one animal
 			IAnimal baby;

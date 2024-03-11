@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities;
 
 import com.google.common.base.Predicates;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.EntityAgeable;
@@ -25,6 +24,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
@@ -84,7 +84,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 	 */
 	public static int getRandomGrowth(int daysToAdult, int daysToElder) {
 		int randomFactor = daysToElder > 0 ? (int) (daysToElder * 1.25f) : daysToAdult * 4;
-		int lifeTimeDays = daysToAdult + Constants.RNG.nextInt(randomFactor);
+		int lifeTimeDays = daysToAdult + Constants.RANDOM.nextInt(randomFactor);
 		return (int) (CalendarTFC.PLAYER_TIME.getTotalDays() - lifeTimeDays);
 	}
 
@@ -215,7 +215,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
 			try {
 				EntityAnimalBase baby = this.getClass().getConstructor(World.class).newInstance(this.world);
-				baby.setGender(Gender.valueOf(Constants.RNG.nextBoolean()));
+				baby.setGender(Gender.valueOf(Constants.RANDOM.nextBoolean()));
 				baby.setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
 				baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
 				return baby;

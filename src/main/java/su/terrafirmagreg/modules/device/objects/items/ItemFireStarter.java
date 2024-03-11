@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TELogPile;
@@ -28,6 +27,7 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtil;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.device.data.SoundDevice;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -139,7 +139,7 @@ public class ItemFireStarter extends ItemBase {
 			}
 
 			if (count % 3 == 1) {
-				player.playSound(TFCSounds.FIRE_STARTER, 0.5f, 0.05F);
+				player.playSound(SoundDevice.FIRE_STARTER, 0.5f, 0.05F);
 			}
 		} else if (countLeft == 1) // Server, and last tick of use
 		{

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -74,7 +74,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 	private int geneHorseVariant;
 
 	public EntityAnimalHorse(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.HORSE.adulthood, ConfigTFC.Animals.HORSE.elder));
+		this(world, Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.HORSE.adulthood, ModuleAnimalConfig.ENTITIES.HORSE.elder));
 	}
 
 	public EntityAnimalHorse(World world, Gender gender, int birthDay) {
@@ -174,12 +174,12 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.HORSE.adulthood;
+		return ModuleAnimalConfig.ENTITIES.HORSE.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.HORSE.elder;
+		return ModuleAnimalConfig.ENTITIES.HORSE.elder;
 	}
 
 	@Override
@@ -248,7 +248,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.PLAINS)) {
-			return ConfigTFC.Animals.HORSE.rarity;
+			return ModuleAnimalConfig.ENTITIES.HORSE.rarity;
 		}
 		return 0;
 	}
@@ -277,7 +277,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 	}
 
 	public long gestationDays() {
-		return ConfigTFC.Animals.HORSE.gestation;
+		return ModuleAnimalConfig.ENTITIES.HORSE.gestation;
 	}
 
 	@Override
@@ -401,7 +401,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 			this.onFertilized((IAnimal) other);
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
-			EntityAnimalHorse baby = new EntityAnimalHorse(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalHorse baby = new EntityAnimalHorse(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			this.setOffspringAttributes(this, baby);
 			baby.setHorseVariant(this.getHorseVariant());
 			return baby;
@@ -468,7 +468,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
 				// Randomly die of old age, tied to entity UUID and calendar time
 				final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-				if (random.nextDouble() < ConfigTFC.Animals.HORSE.oldDeathChance) {
+				if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.HORSE.oldDeathChance) {
 					this.setDead();
 				}
 			}
@@ -502,7 +502,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 	}
 
 	private void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.HORSE.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.HORSE.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
 			// Birth one animal
 			IAnimal baby;

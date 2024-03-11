@@ -23,8 +23,8 @@ public class LayerCamelDecor implements LayerRenderer<EntityAnimalCamel> {
 	private final RenderAnimalCamel renderer;
 	private final ModelAnimalCamel model = new ModelAnimalCamel(0.51F);
 
-	public LayerCamelDecor(RenderAnimalCamel p_i47184_1_) {
-		this.renderer = p_i47184_1_;
+	public LayerCamelDecor(RenderAnimalCamel renderAnimalCamel) {
+		this.renderer = renderAnimalCamel;
 	}
 
 	public void doRenderLayer(EntityAnimalCamel entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {

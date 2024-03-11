@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -28,8 +26,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIFindNest;
@@ -55,7 +55,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 	public float wingRotDelta = 1.0F;
 
 	public EntityAnimalChicken(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.CHICKEN.adulthood, ConfigTFC.Animals.CHICKEN.elder));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.CHICKEN.adulthood, ModuleAnimalConfig.ENTITIES.CHICKEN.elder));
 	}
 
 	public EntityAnimalChicken(World worldIn, Gender gender, int birthDay) {
@@ -68,7 +68,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.PLAINS)) {
-			return ConfigTFC.Animals.CHICKEN.rarity;
+			return ModuleAnimalConfig.ENTITIES.CHICKEN.rarity;
 		}
 		return 0;
 	}
@@ -95,12 +95,12 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.CHICKEN.adulthood;
+		return ModuleAnimalConfig.ENTITIES.CHICKEN.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.CHICKEN.elder;
+		return ModuleAnimalConfig.ENTITIES.CHICKEN.elder;
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 			if (cap != null) {
 				EntityAnimalChicken chick = new EntityAnimalChicken(this.world);
 				chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-				cap.setFertilized(chick, ConfigTFC.Animals.CHICKEN.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+				cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.CHICKEN.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
 			}
 		}
 		eggs.add(egg);
@@ -137,7 +137,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.CHICKEN.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.CHICKEN.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
@@ -218,7 +218,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (this.getClass() == EntityAnimalChicken.class && this.getGender() == Gender.MALE && !this.world.isRemote && !this.isChild() && CalendarTFC.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
-			this.world.playSound(null, this.getPosition(), TFCSounds.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
+			this.world.playSound(null, this.getPosition(), SoundAnimal.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
 		}
 		this.oFlap = this.wingRotation;
 		this.oFlapSpeed = this.destPos;
@@ -252,6 +252,6 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.CHICKEN.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.CHICKEN.oldDeathChance;
 	}
 }

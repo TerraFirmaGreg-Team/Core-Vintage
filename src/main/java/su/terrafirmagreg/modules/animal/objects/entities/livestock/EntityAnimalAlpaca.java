@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -18,9 +15,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nullable;
@@ -37,7 +37,7 @@ import java.util.function.BiConsumer;
 public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAnimalAlpaca(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.ALPACA.adulthood, ConfigTFC.Animals.ALPACA.elder), EntitySheep.getRandomSheepColor(Constants.RNG));
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.ALPACA.adulthood, ModuleAnimalConfig.ENTITIES.ALPACA.elder), EntitySheep.getRandomSheepColor(Constants.RANDOM));
 	}
 
 	public EntityAnimalAlpaca(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {
@@ -49,7 +49,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TAIGA)) {
-			return ConfigTFC.Animals.ALPACA.rarity;
+			return ModuleAnimalConfig.ENTITIES.ALPACA.rarity;
 		}
 		return 0;
 	}
@@ -71,9 +71,9 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
 	@Override
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.ALPACA.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.ALPACA.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
+			EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
 			baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 			baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
 			world.spawnEntity(baby);
@@ -82,12 +82,12 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
 	@Override
 	public long gestationDays() {
-		return ConfigTFC.Animals.ALPACA.gestation;
+		return ModuleAnimalConfig.ENTITIES.ALPACA.gestation;
 	}
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.ALPACA.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.ALPACA.oldDeathChance;
 	}
 
 	@Override
@@ -97,32 +97,32 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.ALPACA.adulthood;
+		return ModuleAnimalConfig.ENTITIES.ALPACA.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.ALPACA.elder;
+		return ModuleAnimalConfig.ENTITIES.ALPACA.elder;
 	}
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.ALPACA.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.ALPACA.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_ALPACA_HURT;
+		return SoundAnimal.ANIMAL_ALPACA_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_ALPACA_DEATH;
+		return SoundAnimal.ANIMAL_ALPACA_DEATH;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_ALPACA_CRY : TFCSounds.ANIMAL_ALPACA_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_ALPACA_CRY : SoundAnimal.ANIMAL_ALPACA_SAY;
 	}
 
 	@Nullable

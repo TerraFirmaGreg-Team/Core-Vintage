@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -19,7 +17,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -30,7 +30,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestock {
 	public EntityAnimalGrouse(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.GROUSE.adulthood, ConfigTFC.Animals.GROUSE.elder));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.GROUSE.adulthood, ModuleAnimalConfig.ENTITIES.GROUSE.elder));
 	}
 
 	public EntityAnimalGrouse(World worldIn, Gender gender, int birthDay) {
@@ -43,19 +43,19 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-			return ConfigTFC.Animals.GROUSE.rarity;
+			return ModuleAnimalConfig.ENTITIES.GROUSE.rarity;
 		}
 		return 0;
 	}
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.GROUSE.adulthood;
+		return ModuleAnimalConfig.ENTITIES.GROUSE.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.GROUSE.elder;
+		return ModuleAnimalConfig.ENTITIES.GROUSE.elder;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 			if (cap != null) {
 				EntityAnimalGrouse chick = new EntityAnimalGrouse(this.world);
 				chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-				cap.setFertilized(chick, ConfigTFC.Animals.GROUSE.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+				cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.GROUSE.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
 			}
 		}
 		eggs.add(egg);
@@ -76,22 +76,22 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.GROUSE.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.GROUSE.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_GROUSE_HURT;
+		return SoundAnimal.ANIMAL_GROUSE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_GROUSE_DEATH;
+		return SoundAnimal.ANIMAL_GROUSE_DEATH;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_GROUSE_SAY;
+		return SoundAnimal.ANIMAL_GROUSE_SAY;
 	}
 
 	@Nullable
@@ -107,6 +107,6 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.GROUSE.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.GROUSE.oldDeathChance;
 	}
 }

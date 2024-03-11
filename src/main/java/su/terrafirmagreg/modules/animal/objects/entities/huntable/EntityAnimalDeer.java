@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -23,8 +21,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.oredict.OreDictionary;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;
@@ -39,7 +39,7 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 
 	@SuppressWarnings("unused")
 	public EntityAnimalDeer(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalDeer(World worldIn, Gender gender, int birthDay) {
@@ -62,7 +62,7 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-			return ConfigTFC.Animals.DEER.rarity;
+			return ModuleAnimalConfig.ENTITIES.DEER.rarity;
 		}
 		return 0;
 	}
@@ -104,12 +104,12 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_DEER_HURT;
+		return SoundAnimal.ANIMAL_DEER_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_DEER_DEATH;
+		return SoundAnimal.ANIMAL_DEER_DEATH;
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_DEER_CRY : TFCSounds.ANIMAL_DEER_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DEER_CRY : SoundAnimal.ANIMAL_DEER_SAY;
 	}
 
 	@Nullable

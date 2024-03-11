@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -55,7 +55,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
 	@SuppressWarnings("unused")
 	public EntityAnimalRabbit(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalRabbit(World worldIn, Gender gender, int birthDay) {
@@ -72,7 +72,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.PLAINS
 						|| biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-			return ConfigTFC.Animals.RABBIT.rarity;
+			return ModuleAnimalConfig.ENTITIES.RABBIT.rarity;
 		}
 		return 0;
 	}
@@ -167,7 +167,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 	public void birthChildren() {
 		int numberOfChildren = 5 + rand.nextInt(5); // 5-10
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalRabbit baby = new EntityAnimalRabbit(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalRabbit baby = new EntityAnimalRabbit(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			this.world.spawnEntity(baby);
 		}

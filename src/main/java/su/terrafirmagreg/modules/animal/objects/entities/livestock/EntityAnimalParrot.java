@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -54,7 +54,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 
 	@SuppressWarnings("unused")
 	public EntityAnimalParrot(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalParrot(World world, IAnimal.Gender gender, int birthDay) {
@@ -171,7 +171,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 
 	@Override
 	public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
-		return new EntityAnimalParrot(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+		return new EntityAnimalParrot(this.world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
 	}
 
 	@Override
@@ -327,7 +327,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-			return ConfigTFC.Animals.PARROT.rarity;
+			return ModuleAnimalConfig.ENTITIES.PARROT.rarity;
 		}
 		return 0;
 	}

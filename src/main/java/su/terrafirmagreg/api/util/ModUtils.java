@@ -3,6 +3,8 @@ package su.terrafirmagreg.api.util;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 
+import javax.annotation.Nonnull;
+
 import static su.terrafirmagreg.Tags.MOD_ID;
 
 public class ModUtils {
@@ -33,5 +35,20 @@ public class ModUtils {
 	 */
 	public static boolean isJEIEnabled() {
 		return Loader.isModLoaded("jei");
+	}
+
+
+	/**
+	 * This is meant to avoid Intellij's warnings about null fields that are injected to at runtime
+	 * Use this for things like @ObjectHolder, @CapabilityInject, etc.
+	 * AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
+	 *
+	 * @param <T> anything and everything
+	 * @return null, but not null
+	 */
+	@Nonnull
+	@SuppressWarnings("ConstantConditions")
+	public static <T> T getNull() {
+		return null;
 	}
 }

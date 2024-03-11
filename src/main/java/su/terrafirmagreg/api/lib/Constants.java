@@ -5,6 +5,8 @@ import java.util.Random;
 public class Constants {
 
 	public static final Random RANDOM = new Random();
+
+
 	public static final String MODID_TFC = "tfc";
 	public static final String MODID_TFCF = "tfcflorae";
 	public static final String MODID_TFCTECH = "tfctech";

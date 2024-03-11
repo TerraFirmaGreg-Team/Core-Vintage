@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -17,8 +15,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -32,7 +32,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
 	@SuppressWarnings("unused")
 	public EntityAnimalCougar(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()),
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
 				EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
@@ -46,19 +46,19 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-			return ConfigTFC.Animals.COUGAR.rarity;
+			return ModuleAnimalConfig.ENTITIES.COUGAR.rarity;
 		}
 		return 0;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_COUGAR_HURT;
+		return SoundAnimal.ANIMAL_COUGAR_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_COUGAR_DEATH;
+		return SoundAnimal.ANIMAL_COUGAR_DEATH;
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
 		int priority = 2;
-		for (String input : ConfigTFC.Animals.COUGAR.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.COUGAR.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {
@@ -89,7 +89,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_COUGAR_CRY : TFCSounds.ANIMAL_COUGAR_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COUGAR_CRY : SoundAnimal.ANIMAL_COUGAR_SAY;
 	}
 
 	@Nullable

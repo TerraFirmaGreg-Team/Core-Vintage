@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -29,10 +27,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
@@ -48,7 +48,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 	private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityAnimalCamel.class, DataSerializers.BOOLEAN);
 
 	public EntityAnimalCamel(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.CAMEL.adulthood, ModuleAnimalConfig.ENTITIES.CAMEL.elder));
 		this.setSize(0.9F, 2.0F);
 	}
 
@@ -62,17 +62,17 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_CAMEL_CRY : TFCSounds.ANIMAL_CAMEL_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_CAMEL_CRY : SoundAnimal.ANIMAL_CAMEL_SAY;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_CAMEL_HURT;
+		return SoundAnimal.ANIMAL_CAMEL_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_CAMEL_DEATH;
+		return SoundAnimal.ANIMAL_CAMEL_DEATH;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -183,12 +183,12 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.CAMEL.adulthood;
+		return ModuleAnimalConfig.ENTITIES.CAMEL.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.CAMEL.elder;
+		return ModuleAnimalConfig.ENTITIES.CAMEL.elder;
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-			return ConfigTFC.Animals.CAMEL.rarity;
+			return ModuleAnimalConfig.ENTITIES.CAMEL.rarity;
 		}
 		return 0;
 	}
@@ -225,7 +225,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
 	@Override
 	public long gestationDays() {
-		return ConfigTFC.Animals.CAMEL.gestation;
+		return ModuleAnimalConfig.ENTITIES.CAMEL.gestation;
 	}
 
 	@Override
@@ -281,16 +281,16 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
-			return new EntityAnimalCamel(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			return new EntityAnimalCamel(this.world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 		}
 		return null;
 	}
 
 	@Override
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.CAMEL.babies; //one always
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.CAMEL.babies; //one always
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			if (this.geneHealth > 0) {
 				baby.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.geneHealth);

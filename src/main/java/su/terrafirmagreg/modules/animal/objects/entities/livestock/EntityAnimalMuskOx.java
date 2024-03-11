@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -17,8 +15,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -27,7 +27,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAnimalMuskOx(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.MUSKOX.adulthood, ConfigTFC.Animals.MUSKOX.elder), EntitySheep.getRandomSheepColor(Constants.RNG));
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.MUSKOX.adulthood, ModuleAnimalConfig.ENTITIES.MUSKOX.elder), EntitySheep.getRandomSheepColor(Constants.RANDOM));
 	}
 
 	public EntityAnimalMuskOx(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {
@@ -40,7 +40,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-			return ConfigTFC.Animals.MUSKOX.rarity;
+			return ModuleAnimalConfig.ENTITIES.MUSKOX.rarity;
 		}
 		return 0;
 	}
@@ -57,9 +57,9 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
 	@Override
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.MUSKOX.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.MUSKOX.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
+			EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
 			baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 			baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
 			world.spawnEntity(baby);
@@ -68,12 +68,12 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
 	@Override
 	public long gestationDays() {
-		return ConfigTFC.Animals.MUSKOX.gestation;
+		return ModuleAnimalConfig.ENTITIES.MUSKOX.gestation;
 	}
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.MUSKOX.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.MUSKOX.oldDeathChance;
 	}
 
 	@Override
@@ -83,32 +83,32 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.MUSKOX.adulthood;
+		return ModuleAnimalConfig.ENTITIES.MUSKOX.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.MUSKOX.elder;
+		return ModuleAnimalConfig.ENTITIES.MUSKOX.elder;
 	}
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.MUSKOX.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.MUSKOX.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_MUSKOX_HURT;
+		return SoundAnimal.ANIMAL_MUSKOX_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_MUSKOX_DEATH;
+		return SoundAnimal.ANIMAL_MUSKOX_DEATH;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_MUSKOX_SAY;
+		return SoundAnimal.ANIMAL_MUSKOX_SAY;
 	}
 
 	@Nullable

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities;
 
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializer;
@@ -11,6 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import javax.annotation.Nonnull;
 
@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class TFCEntities {
 	@GameRegistry.ObjectHolder("tfc:long")
-	public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = Helpers.getNull();
+	public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = ModUtils.getNull();
 
 	private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
 		public void write(PacketBuffer buf, @Nonnull Long value) {

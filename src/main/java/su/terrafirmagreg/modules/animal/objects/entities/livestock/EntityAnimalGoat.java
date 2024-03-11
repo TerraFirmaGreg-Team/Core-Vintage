@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -20,7 +18,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAILawnmower;
 
 import javax.annotation.Nullable;
@@ -37,7 +37,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
 	@SuppressWarnings("unused")
 	public EntityAnimalGoat(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.GOAT.adulthood, ConfigTFC.Animals.GOAT.elder));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.GOAT.adulthood, ModuleAnimalConfig.ENTITIES.GOAT.elder));
 	}
 
 	public EntityAnimalGoat(World worldIn, Gender gender, int birthDay) {
@@ -81,16 +81,16 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-			return ConfigTFC.Animals.GOAT.rarity;
+			return ModuleAnimalConfig.ENTITIES.GOAT.rarity;
 		}
 		return 0;
 	}
 
 	@Override
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.GOAT.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.GOAT.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
 			this.world.spawnEntity(baby);
@@ -99,12 +99,12 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
 	@Override
 	public long gestationDays() {
-		return ConfigTFC.Animals.GOAT.gestation;
+		return ModuleAnimalConfig.ENTITIES.GOAT.gestation;
 	}
 
 	@Override
 	public double getOldDeathChance() {
-		return ConfigTFC.Animals.GOAT.oldDeathChance;
+		return ModuleAnimalConfig.ENTITIES.GOAT.oldDeathChance;
 	}
 
 	@Override
@@ -114,27 +114,27 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.GOAT.adulthood;
+		return ModuleAnimalConfig.ENTITIES.GOAT.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.GOAT.elder;
+		return ModuleAnimalConfig.ENTITIES.GOAT.elder;
 	}
 
 	@Override
 	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.GOAT.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+		return Math.max(0, ModuleAnimalConfig.ENTITIES.GOAT.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_GOAT_HURT;
+		return SoundAnimal.ANIMAL_GOAT_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_GOAT_DEATH;
+		return SoundAnimal.ANIMAL_GOAT_DEATH;
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_GOAT_CRY : TFCSounds.ANIMAL_GOAT_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_GOAT_CRY : SoundAnimal.ANIMAL_GOAT_SAY;
 	}
 
 	@Nullable

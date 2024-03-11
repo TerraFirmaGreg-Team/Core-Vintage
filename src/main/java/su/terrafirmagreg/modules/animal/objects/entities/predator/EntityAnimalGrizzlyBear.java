@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -29,9 +27,11 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIStandAttack;
@@ -59,7 +59,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
 	@SuppressWarnings("unused")
 	public EntityAnimalGrizzlyBear(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalGrizzlyBear(World worldIn, Gender gender, int birthDay) {
@@ -72,7 +72,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TAIGA)) {
-			return ConfigTFC.Animals.GRIZZLY_BEAR.rarity;
+			return ModuleAnimalConfig.ENTITIES.GRIZZLY_BEAR.rarity;
 		}
 		return 0;
 	}
@@ -153,12 +153,12 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_BEAR_HURT;
+		return SoundAnimal.ANIMAL_BEAR_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_BEAR_DEATH;
+		return SoundAnimal.ANIMAL_BEAR_DEATH;
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
 		int priority = 2;
-		for (String input : ConfigTFC.Animals.GRIZZLY_BEAR.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.GRIZZLY_BEAR.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {
@@ -244,7 +244,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_BEAR_CRY : TFCSounds.ANIMAL_BEAR_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_BEAR_CRY : SoundAnimal.ANIMAL_BEAR_SAY;
 	}
 
 	@Nullable

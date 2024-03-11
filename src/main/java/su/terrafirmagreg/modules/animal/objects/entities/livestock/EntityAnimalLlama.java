@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -34,6 +33,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -71,7 +71,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
 	@SuppressWarnings("unused")
 	public EntityAnimalLlama(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.LLAMA.adulthood, ModuleAnimalConfig.ENTITIES.LLAMA.elder));
 	}
 
 	public EntityAnimalLlama(World world, IAnimal.Gender gender, int birthDay) {
@@ -234,12 +234,12 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.LLAMA.gestation;
+		return ModuleAnimalConfig.ENTITIES.LLAMA.gestation;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.LLAMA.elder;
+		return ModuleAnimalConfig.ENTITIES.LLAMA.elder;
 	}
 
 	@Override
@@ -300,7 +300,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-			return ConfigTFC.Animals.LLAMA.rarity;
+			return ModuleAnimalConfig.ENTITIES.LLAMA.rarity;
 		}
 		return 0;
 	}
@@ -363,7 +363,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
 				// Randomly die of old age, tied to entity UUID and calendar time
 				final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-				if (random.nextDouble() < ConfigTFC.Animals.LLAMA.oldDeathChance) {
+				if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.LLAMA.oldDeathChance) {
 					this.setDead();
 				}
 			}
@@ -376,7 +376,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	}
 
 	public long gestationDays() {
-		return ConfigTFC.Animals.LLAMA.gestation;
+		return ModuleAnimalConfig.ENTITIES.LLAMA.gestation;
 	}
 
 	@Override
@@ -461,15 +461,15 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
-			return new EntityAnimalLlama(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			return new EntityAnimalLlama(this.world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 		}
 		return null;
 	}
 
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.LLAMA.babies; //one always
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.LLAMA.babies; //one always
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalLlama baby = new EntityAnimalLlama(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalLlama baby = new EntityAnimalLlama(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			if (this.geneHealth > 0) {
 				baby.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.geneHealth);

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -29,7 +29,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 
 	@SuppressWarnings("unused")
 	public EntityAnimalHare(World worldIn) {
-		this(worldIn, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalHare(World worldIn, IAnimal.Gender gender, int birthDay) {
@@ -46,7 +46,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.SAVANNA ||
 						biomeType == BiomeHelper.BiomeType.DESERT)) {
-			return ConfigTFC.Animals.HARE.rarity;
+			return ModuleAnimalConfig.ENTITIES.HARE.rarity;
 		}
 		return 0;
 	}

@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -37,6 +36,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -68,7 +68,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 	private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
 	public EntityAnimalMule(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
+		this(world, Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.MULE.adulthood, ModuleAnimalConfig.ENTITIES.MULE.elder));
 	}
 
 	public EntityAnimalMule(World world, Gender gender, int birthDay) {
@@ -129,12 +129,12 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.MULE.adulthood;
+		return ModuleAnimalConfig.ENTITIES.MULE.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.MULE.elder;
+		return ModuleAnimalConfig.ENTITIES.MULE.elder;
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
 	@Override
 	public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-		return ConfigTFC.Animals.MULE.rarity; // Not naturally spawned, must be bred
+		return ModuleAnimalConfig.ENTITIES.MULE.rarity; // Not naturally spawned, must be bred
 	}
 
 	@Override
@@ -281,7 +281,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
 				// Randomly die of old age, tied to entity UUID and calendar time
 				final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-				if (random.nextDouble() < ConfigTFC.Animals.MULE.oldDeathChance) {
+				if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.MULE.oldDeathChance) {
 					this.setDead();
 				}
 			}
@@ -298,7 +298,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 	public EntityAgeable createChild(@Nonnull EntityAgeable other) {
 		if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
-			EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			this.setOffspringAttributes(this, baby);
 			return baby;
 		}

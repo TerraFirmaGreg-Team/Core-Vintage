@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -17,8 +15,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nullable;
@@ -40,7 +40,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
 	@SuppressWarnings("unused")
 	public EntityAnimalPheasant(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityAnimalPheasant(World worldIn, Gender gender, int birthDay) {
@@ -53,7 +53,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-			return ConfigTFC.Animals.PHEASANT.rarity;
+			return ModuleAnimalConfig.ENTITIES.PHEASANT.rarity;
 		}
 		return 0;
 	}
@@ -116,12 +116,12 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_PHEASANT_HURT;
+		return SoundAnimal.ANIMAL_PHEASANT_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_PHEASANT_DEATH;
+		return SoundAnimal.ANIMAL_PHEASANT_DEATH;
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_PHEASANT_SAY;
+		return SoundAnimal.ANIMAL_PHEASANT_SAY;
 	}
 
 	@Nullable

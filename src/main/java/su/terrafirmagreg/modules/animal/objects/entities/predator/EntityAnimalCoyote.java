@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -23,8 +21,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -41,7 +41,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
 	@SuppressWarnings("unused")
 	public EntityAnimalCoyote(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
 				getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
@@ -55,7 +55,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.PLAINS)) {
-			return ConfigTFC.Animals.COYOTE.rarity;
+			return ModuleAnimalConfig.ENTITIES.COYOTE.rarity;
 		}
 		return 0;
 	}
@@ -107,12 +107,12 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_COYOTE_HURT;
+		return SoundAnimal.ANIMAL_COYOTE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_COYOTE_DEATH;
+		return SoundAnimal.ANIMAL_COYOTE_DEATH;
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
 		int priority = 2;
-		for (String input : ConfigTFC.Animals.COYOTE.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.COYOTE.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {
@@ -166,7 +166,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_COYOTE_CRY : TFCSounds.ANIMAL_COYOTE_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COYOTE_CRY : SoundAnimal.ANIMAL_COYOTE_SAY;
 	}
 
 	@Nullable

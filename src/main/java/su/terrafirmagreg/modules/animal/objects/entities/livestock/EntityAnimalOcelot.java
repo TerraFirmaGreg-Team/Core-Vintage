@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -31,6 +30,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -63,7 +63,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
 	@SuppressWarnings("unused")
 	public EntityAnimalOcelot(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.OCELOT.adulthood, ConfigTFC.Animals.OCELOT.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.OCELOT.adulthood, ModuleAnimalConfig.ENTITIES.OCELOT.elder));
 	}
 
 	public EntityAnimalOcelot(World world, IAnimal.Gender gender, int birthDay) {
@@ -132,12 +132,12 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
 	@Override
 	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.OCELOT.adulthood;
+		return ModuleAnimalConfig.ENTITIES.OCELOT.adulthood;
 	}
 
 	@Override
 	public int getDaysToElderly() {
-		return ConfigTFC.Animals.OCELOT.elder;
+		return ModuleAnimalConfig.ENTITIES.OCELOT.elder;
 	}
 
 	@Override
@@ -186,7 +186,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-			return ConfigTFC.Animals.OCELOT.rarity;
+			return ModuleAnimalConfig.ENTITIES.OCELOT.rarity;
 		}
 		return 0;
 	}
@@ -207,7 +207,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 	}
 
 	public long gestationDays() {
-		return ConfigTFC.Animals.OCELOT.gestation;
+		return ModuleAnimalConfig.ENTITIES.OCELOT.gestation;
 	}
 
 	@Override
@@ -240,7 +240,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
 				// Randomly die of old age, tied to entity UUID and calendar time
 				final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-				if (random.nextDouble() < ConfigTFC.Animals.OCELOT.oldDeathChance) {
+				if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.OCELOT.oldDeathChance) {
 					this.setDead();
 				}
 			}
@@ -253,9 +253,9 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 	}
 
 	public void birthChildren() {
-		int numberOfChildren = ConfigTFC.Animals.OCELOT.babies;
+		int numberOfChildren = ModuleAnimalConfig.ENTITIES.OCELOT.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
-			EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			if (this.isTamed()) {
 				baby.setOwnerId(this.getOwnerId());
@@ -271,7 +271,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 		super.initEntityAI();
 
 		int priority = 1;
-		for (String input : ConfigTFC.Animals.OCELOT.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.OCELOT.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {
@@ -400,7 +400,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
-			EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 			if (this.isTamed()) {
 				baby.setOwnerId(this.getOwnerId());
 				baby.setTamed(true);

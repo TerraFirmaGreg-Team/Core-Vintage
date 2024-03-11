@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.client.TFCSounds;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -22,8 +20,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -40,7 +40,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
 	@SuppressWarnings("unused")
 	public EntityAnimalSaberTooth(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
 				getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
@@ -54,7 +54,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
 		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
 				(biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-			return ConfigTFC.Animals.SABER_TOOTH.rarity;
+			return ModuleAnimalConfig.ENTITIES.SABER_TOOTH.rarity;
 		}
 		return 0;
 	}
@@ -96,12 +96,12 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_SABERTOOTH_HURT;
+		return SoundAnimal.ANIMAL_SABERTOOTH_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_SABERTOOTH_DEATH;
+		return SoundAnimal.ANIMAL_SABERTOOTH_DEATH;
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
 		int priority = 2;
-		for (String input : ConfigTFC.Animals.SABER_TOOTH.huntCreatures) {
+		for (String input : ModuleAnimalConfig.ENTITIES.SABER_TOOTH.huntCreatures) {
 			ResourceLocation key = new ResourceLocation(input);
 			EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
 			if (entityEntry != null) {
@@ -163,7 +163,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_SABERTOOTH_CRY : TFCSounds.ANIMAL_SABERTOOTH_SAY;
+		return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_SABERTOOTH_CRY : SoundAnimal.ANIMAL_SABERTOOTH_SAY;
 	}
 
 	@Nullable
@@ -174,6 +174,6 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn) {
-		playSound(TFCSounds.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
+		playSound(SoundAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
 	}
 }

@@ -1,6 +1,5 @@
 package mod.acgaming.easybreedingtfc.ai;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.SoundEvents;
@@ -8,16 +7,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import java.util.List;
 
 import static mod.acgaming.easybreedingtfc.config.EBConfig.searchDistance;
 
 public class EBEntityAI extends EntityAIBase {
-	private final EntityAnimalTFC animal;
+	private final EntityAnimalBase animal;
 	private final World world;
 
-	public EBEntityAI(EntityAnimalTFC animal) {
+	public EBEntityAI(EntityAnimalBase animal) {
 		this.animal = animal;
 		this.world = animal.world;
 	}
@@ -46,7 +46,7 @@ public class EBEntityAI extends EntityAIBase {
 		return false;
 	}
 
-	public void execute(EntityAnimalTFC animal, EntityItem item) {
+	public void execute(EntityAnimalBase animal, EntityItem item) {
 		if (animal.getNavigator().tryMoveToXYZ(item.posX, item.posY, item.posZ, 1.25F)) {
 			if (animal.getDistance(item) < 1.0F) {
 				consumeFood(item);

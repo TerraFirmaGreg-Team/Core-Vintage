@@ -13,10 +13,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
-import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
-import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
-import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
@@ -45,6 +41,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
@@ -80,26 +80,27 @@ public class CommonEventHandlerFL {
 			if (bucket != null) //checking if it can be filled
 			{
 				FluidActionResult fillResult = FluidUtil.tryFillContainer(item, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)), Fluid.BUCKET_VOLUME, player, false);
-				if (fillResult.isSuccess() && entity instanceof EntityCowTFC) {
-					EntityCowTFC cow = (EntityCowTFC) entity;//we can just cast the entity to a cow to test familiarity etc
+				if (fillResult.isSuccess() && entity instanceof EntityAnimalCow) {
+					EntityAnimalCow cow = (EntityAnimalCow) entity;//we can just cast the entity to a cow to test familiarity etc
 					Fluid fluid = FluidsTFC.MILK.get();
 					boolean foundMilkable = false;
-					if (entity instanceof EntityYakTFC)//have to check the original entity to get the proper instanceof however
+					if (entity instanceof EntityAnimalYak)//have to check the original entity to get the proper instanceof however
 					{
 						foundMilkable = true;
 						fluid = FluidsFL.YAK_MILK.get();
-					} else if (entity instanceof EntityGoatTFC) {
+					} else if (entity instanceof EntityAnimalGoat) {
 						foundMilkable = true;
 						fluid = FluidsFL.GOAT_MILK.get();
-					} else if (entity instanceof EntityZebuTFC) {
+					} else if (entity instanceof EntityAnimalZebu) {
 						foundMilkable = true;
 						fluid = FluidsFL.ZEBU_MILK.get();
 					}
 					if (foundMilkable) {
 						if (cow.getFamiliarity() > 0.15f && cow.isReadyForAnimalProduct()) {
 							FluidTank fluidHandler = new FluidTank(fluid, 1000, 1000);
-							player.setHeldItem(player.getActiveHand(), FluidUtil.tryFillContainerAndStow(item, fluidHandler, new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true)
-							                                                    .getResult());
+							player.setHeldItem(player.getActiveHand(), FluidUtil
+									.tryFillContainerAndStow(item, fluidHandler, new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true)
+									.getResult());
 							cow.setProductsCooldown();
 							event.setCanceled(true);
 						}

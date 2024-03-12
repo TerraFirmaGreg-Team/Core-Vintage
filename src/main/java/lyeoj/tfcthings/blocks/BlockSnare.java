@@ -7,7 +7,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.entity.animal.*;
+import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -34,6 +34,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalHare;
+import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalPheasant;
+import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalRabbit;
+import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalTurkey;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalChicken;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -58,9 +67,9 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 		this.setHardness(1.5f);
 		this.setHarvestLevel("axe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
-		                                    .withProperty(FACING, EnumFacing.NORTH)
-		                                    .withProperty(BAITED, Boolean.valueOf(false))
-		                                    .withProperty(CLOSED, Boolean.valueOf(false)));
+				.withProperty(FACING, EnumFacing.NORTH)
+				.withProperty(BAITED, Boolean.valueOf(false))
+				.withProperty(CLOSED, Boolean.valueOf(false)));
 
 	}
 
@@ -86,9 +95,9 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 	@Nonnull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-		           .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-		           .withProperty(BAITED, meta / 4 % 2 != 0)
-		           .withProperty(CLOSED, meta / 8 != 0);
+				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+				.withProperty(BAITED, meta / 4 % 2 != 0)
+				.withProperty(CLOSED, meta / 8 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
@@ -112,7 +121,7 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 		if (block != Blocks.BARRIER) {
 			BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
 			return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-			                                                            .isLeaves(iblockstate, worldIn, pos.down());
+					.isLeaves(iblockstate, worldIn, pos.down());
 		} else {
 			return false;
 		}
@@ -157,7 +166,7 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 	}
 
 	private boolean isFood(ItemStack stack) {
-		AnimalFood food = AnimalFood.get(EntityChickenTFC.class);
+		AnimalFood food = AnimalFood.get(EntityAnimalChicken.class);
 		return food != null && food.isFood(stack);
 	}
 
@@ -183,10 +192,10 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 		AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D, pos.getZ() + 10.0D);
 		TileEntityBearTrap snare = getTileEntity(worldIn, pos);
 		if (snare.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox)
-		                             .isEmpty() && !worldIn.isRemote) {
-			for (EntityAnimalTFC animal : worldIn.getEntitiesWithinAABB(EntityAnimalTFC.class, captureBox)) {
+				.isEmpty() && !worldIn.isRemote) {
+			for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox)) {
 				if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition())
-				                                       .getBlock() instanceof BlockSnare)) {
+						.getBlock() instanceof BlockSnare)) {
 					snare.setCapturedEntity(animal);
 					snare.setOpen(false);
 					state = state.withProperty(CLOSED, Boolean.valueOf(true));
@@ -199,25 +208,25 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 			if (state.getValue(BAITED)) {
 				if (rand.nextDouble() < ConfigTFCThings.Items.SNARE.baitCaptureChance) {
 					double entitySelection = rand.nextDouble();
-					EntityAnimalTFC animal;
+					EntityAnimalBase animal;
 					if (entitySelection < 0.1) {
 						if (entitySelection < 0.03) {
 							if (entitySelection < 0.01) {
-								animal = new EntityGrouseTFC(worldIn);
+								animal = new EntityAnimalGrouse(worldIn);
 							} else {
-								animal = new EntityQuailTFC(worldIn);
+								animal = new EntityAnimalQuail(worldIn);
 							}
 						} else {
-							animal = new EntityDuckTFC(worldIn);
+							animal = new EntityAnimalDuck(worldIn);
 						}
 					} else if (entitySelection < 0.5) {
 						if (entitySelection < 0.3) {
-							animal = new EntityHareTFC(worldIn);
+							animal = new EntityAnimalHare(worldIn);
 						} else {
-							animal = new EntityRabbitTFC(worldIn);
+							animal = new EntityAnimalRabbit(worldIn);
 						}
 					} else {
-						animal = new EntityPheasantTFC(worldIn);
+						animal = new EntityAnimalPheasant(worldIn);
 					}
 					animal.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
 					worldIn.spawnEntity(animal);
@@ -235,7 +244,7 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 	}
 
 	private boolean isCapturable(Entity entityIn) {
-		return entityIn instanceof EntityRabbitTFC || entityIn instanceof EntityPheasantTFC || entityIn instanceof EntityDuckTFC || entityIn instanceof EntityChickenTFC || entityIn instanceof EntityTurkeyTFC;
+		return entityIn instanceof EntityAnimalRabbit || entityIn instanceof EntityAnimalPheasant || entityIn instanceof EntityAnimalDuck || entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
 	}
 
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {

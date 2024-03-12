@@ -7,7 +7,6 @@ import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
-import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
@@ -30,6 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
 
 import javax.annotation.Nullable;
 
@@ -115,13 +115,13 @@ public class TFCThingsEventHandler {
 	@SubscribeEvent
 	public static void modifyBreakSpeed(PlayerEvent.BreakSpeed event) {
 		if (event.getEntityPlayer()
-		         .getHeldItemMainhand()
-		         .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+				.getHeldItemMainhand()
+				.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
 			ISharpness capability = getSharpnessCapability(event.getEntityPlayer().getHeldItemMainhand());
 			if (capability != null) {
 				if (shouldBoostSpeed(event.getEntityPlayer().getHeldItemMainhand(), event.getState())) {
 					if (event.getState().getBlock() instanceof BlockLogTFC && !event.getState()
-					                                                                .getValue(BlockLogTFC.PLACED)) {
+							.getValue(BlockLogTFC.PLACED)) {
 						return;
 					}
 					if (capability.getCharges() > 256) {
@@ -167,15 +167,14 @@ public class TFCThingsEventHandler {
 		if (event.getItemStack().getItem() instanceof ItemRopeJavelin) {
 			if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockToolRack) {
 				((ItemRopeJavelin) event.getItemStack()
-				                        .getItem()).retractJavelin(event.getItemStack(), event.getWorld());
+						.getItem()).retractJavelin(event.getItemStack(), event.getWorld());
 			}
 		}
 	}
 
 	@SubscribeEvent
 	public static void onPlayerInteractEntity(PlayerInteractEvent.EntityInteract event) {
-		if (event.getTarget() instanceof EntitySheepTFC) {
-			EntitySheepTFC sheep = (EntitySheepTFC) event.getTarget();
+		if (event.getTarget() instanceof EntityAnimalSheep sheep) {
 			if ((OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "shears") || OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "knife"))
 					&& sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
 				if (!sheep.world.isRemote) {

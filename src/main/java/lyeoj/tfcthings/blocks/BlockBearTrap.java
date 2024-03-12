@@ -7,7 +7,6 @@ import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
@@ -38,6 +37,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -58,9 +58,9 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 		this.setResistance(10.0F);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
-		                                    .withProperty(FACING, EnumFacing.NORTH)
-		                                    .withProperty(BURIED, Boolean.valueOf(false))
-		                                    .withProperty(CLOSED, Boolean.valueOf(false)));
+				.withProperty(FACING, EnumFacing.NORTH)
+				.withProperty(BURIED, Boolean.valueOf(false))
+				.withProperty(CLOSED, Boolean.valueOf(false)));
 	}
 
 	@Override
@@ -97,9 +97,9 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 	@Nonnull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-		           .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-		           .withProperty(BURIED, meta / 4 % 2 != 0)
-		           .withProperty(CLOSED, meta / 8 != 0);
+				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+				.withProperty(BURIED, meta / 4 % 2 != 0)
+				.withProperty(CLOSED, meta / 8 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
@@ -123,7 +123,7 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 		if (block != Blocks.BARRIER) {
 			BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
 			return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-			                                                            .isLeaves(iblockstate, worldIn, pos.down());
+					.isLeaves(iblockstate, worldIn, pos.down());
 		} else {
 			return false;
 		}
@@ -154,7 +154,7 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 		if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade ||
 				(playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
 						((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType()
-						                                                      .equals(Metal.ItemType.SHOVEL))) {
+								.equals(Metal.ItemType.SHOVEL))) {
 			playerIn.getHeldItem(hand).damageItem(1, playerIn);
 			state = state.cycleProperty(BURIED);
 			worldIn.setBlockState(pos, state, 2);

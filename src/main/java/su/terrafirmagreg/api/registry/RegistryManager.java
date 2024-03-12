@@ -395,10 +395,12 @@ public class RegistryManager {
 	 */
 	public <T extends Entity> EntityEntryBuilder<T> registerEntity(String id, Class<T> entClass, int primary, int seconday) {
 
-		final EntityEntryBuilder<T> builder = this.registerEntity(id, entClass);
-
+		final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
+		builder.entity(entClass);
 		builder.tracker(64, 1, true);
 		builder.egg(primary, seconday);
+
+		this.registerEntity(id, builder);
 		return builder;
 	}
 

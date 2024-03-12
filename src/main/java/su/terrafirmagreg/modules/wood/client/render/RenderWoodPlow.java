@@ -72,7 +72,7 @@ public class RenderWoodPlow extends Render<EntityWoodPlow> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(@NotNull EntityWoodPlow entity) {
-		return ModUtils.getID("textures/entity/plow.png");
+		return ModUtils.getID("textures/entity/wood/plow.png");
 	}
 
 	public void setupRotation(float entityYaw) {

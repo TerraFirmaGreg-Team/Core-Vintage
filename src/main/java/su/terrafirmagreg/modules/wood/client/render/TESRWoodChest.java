@@ -56,10 +56,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 				GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
 				GlStateManager.matrixMode(5888);
 			} else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/chests/chest_trap.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest_trap.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			} else if (woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/chests/chest.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			}
 		} else {
@@ -73,10 +73,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 				GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
 				GlStateManager.matrixMode(5888);
 			} else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/chests/chest_trap_double.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest_trap_double.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			} else if (woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/chests/chest_double.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest_double.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			}
 		}

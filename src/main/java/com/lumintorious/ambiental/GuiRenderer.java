@@ -160,7 +160,7 @@ public class GuiRenderer {
 	private void drawTemperatureVignettes(int width, int height, EntityPlayer player, RenderGameOverlayEvent.Pre event) {
 		ResourceLocation vignetteLocation = null;
 		float temperature = 1f;
-		ITemperatureCapability tempSystem = (ITemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
+		ITemperatureCapability tempSystem = player.getCapability(TemperatureCapability.CAPABILITY, null);
 		temperature = tempSystem.getTemperature();
 
 

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
@@ -145,7 +145,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_PHEASANT;
+		return LootTablesAnimal.ANIMALS_PHEASANT;
 	}
 
 	@Override

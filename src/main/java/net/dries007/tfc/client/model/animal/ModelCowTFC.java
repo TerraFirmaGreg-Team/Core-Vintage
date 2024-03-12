@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
@@ -84,7 +84,7 @@ public class ModelCowTFC extends ModelQuadruped {
 			}
 		}
 
-		if (cow.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (cow.getGender() == EntityAnimalBase.Gender.MALE) {
 			udders.isHidden = true;
 		} else {
 			horn1b.isHidden = true;

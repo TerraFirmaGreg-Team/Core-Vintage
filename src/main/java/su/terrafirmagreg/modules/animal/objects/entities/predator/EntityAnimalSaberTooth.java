@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
@@ -169,7 +169,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 	@Nullable
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_SABERTOOTH;
+		return LootTablesAnimal.ANIMALS_SABERTOOTH;
 	}
 
 	@Override

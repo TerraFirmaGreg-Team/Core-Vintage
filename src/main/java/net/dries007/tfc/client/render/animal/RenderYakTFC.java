@@ -6,7 +6,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelYakTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -29,7 +29,7 @@ public class RenderYakTFC extends RenderAnimalTFC<EntityYakTFC> {
 	}
 
 	protected void preRenderCallback(EntityYakTFC yakTFC, float par2) {
-		if (yakTFC.getGender() == EntityAnimalTFC.Gender.MALE)
+		if (yakTFC.getGender() == EntityAnimalBase.Gender.MALE)
 			GlStateManager.scale(1.2f, 1.2f, 1.2f);
 		else {
 			GlStateManager.scale(1.15f, 1.15f, 1.15f);

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.api.lib.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -103,7 +103,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_POLAR_BEAR;
+		return LootTablesAnimal.ANIMALS_POLAR_BEAR;
 	}
 
 	@Override

@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -86,7 +86,7 @@ public class ModelChickenTFC extends ModelBase {
 		GlStateManager.scale(1 / ageScale, 1 / ageScale, 1 / ageScale);
 		GlStateManager.translate(0.0F, 1.5f - (1.5f * percent), 0f);
 
-		if (percent >= 0.75 && chicken.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (percent >= 0.75 && chicken.getGender() == EntityAnimalBase.Gender.MALE) {
 			crown.isHidden = false;
 			this.body.rotateAngleX = (float) Math.PI / 4F;
 			this.rightWing.rotateAngleX = (float) Math.PI / 4F;

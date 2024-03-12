@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -287,7 +287,7 @@ public class ModelTurkeyTFC extends ModelBase {
 		float percent = (float) turkey.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (turkey.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (turkey.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				tails1.isHidden = true;
 				tails2.isHidden = true;

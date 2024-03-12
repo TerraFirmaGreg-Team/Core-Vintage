@@ -16,9 +16,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityAgeable;
@@ -50,6 +48,9 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -73,7 +74,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
 	private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
 	public EntityMuleTFC(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
+		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
 	}
 
 	public EntityMuleTFC(World world, Gender gender, int birthDay) {
@@ -221,8 +222,8 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
 
 	@Override
 	protected void initEntityAI() {
-		EntityAnimalTFC.addCommonLivestockAI(this, 1.2D);
-		EntityAnimalTFC.addCommonPreyAI(this, 1.2);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.2);
 		this.tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 	}
@@ -266,7 +267,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
 				}
 				if (hugeHeavyCount >= 2) {
 					// Does not work when ridden, mojang bug: https://bugs.mojang.com/browse/MC-121788
-					this.addPotionEffect(new PotionEffect(PotionEffectsTFC.OVERBURDENED, 25, 125, false, false));
+					this.addPotionEffect(new PotionEffect(PotionsCore.OVERBURDENED, 25, 125, false, false));
 				}
 			}
 			// Is it time to decay familiarity?
@@ -310,7 +311,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_MULE;
+		return LootTablesAnimal.ANIMALS_MULE;
 	}
 
 	@Override

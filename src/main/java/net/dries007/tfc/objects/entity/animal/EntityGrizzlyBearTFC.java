@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
@@ -39,6 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -252,6 +253,6 @@ public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredato
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_GRIZZLY_BEAR;
+		return LootTablesAnimal.ANIMALS_GRIZZLY_BEAR;
 	}
 }

@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -130,7 +130,7 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_ALPACA;
+		return LootTablesAnimal.ANIMALS_ALPACA;
 	}
 
 	@Override

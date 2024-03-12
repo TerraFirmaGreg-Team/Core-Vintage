@@ -4,7 +4,6 @@ import com.lumintorious.ambiental.TFCAmbientalConfig;
 import com.lumintorious.ambiental.api.IEnvironmentalTemperatureProvider;
 import com.lumintorious.ambiental.api.TemperatureRegistry;
 import com.lumintorious.ambiental.capability.TemperatureCapability;
-import com.lumintorious.ambiental.effects.TempEffect;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -16,6 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 public class EnvironmentalModifier extends BaseModifier {
 	public EnvironmentalModifier(String name, float change, float potency) {
@@ -53,7 +53,7 @@ public class EnvironmentalModifier extends BaseModifier {
 			} else if (state.getBlock() == Blocks.LAVA) {
 				return new EnvironmentalModifier("in_lava", 10f, 5f);
 			} else if (state.getBlock() == FluidsTFC.SALT_WATER.get().getBlock() && player.world.getBiome(pos)
-			                                                                                    .getTempCategory() == Biome.TempCategory.OCEAN) {
+					.getTempCategory() == Biome.TempCategory.OCEAN) {
 				return new EnvironmentalModifier("in_ocean_water", -8f, 6f);
 			} else {
 				return new EnvironmentalModifier("in_water", -5f, 6f);
@@ -130,7 +130,7 @@ public class EnvironmentalModifier extends BaseModifier {
 
 	public static EnvironmentalModifier handleFood(EntityPlayer player) {
 		if (getEnvironmentTemperature(player) < TemperatureCapability.AVERAGE - 3 && player.getFoodStats()
-		                                                                                   .getFoodLevel() > 16) {
+				.getFoodLevel() > 16) {
 			return new EnvironmentalModifier("well_fed", 2f, 0f);
 		}
 		return null;
@@ -176,10 +176,10 @@ public class EnvironmentalModifier extends BaseModifier {
 	}
 
 	public static EnvironmentalModifier handlePotionEffects(EntityPlayer player) {
-		if (player.isPotionActive(TempEffect.COOL)) {
+		if (player.isPotionActive(PotionsCore.HYPOTHERMIA)) {
 			return new EnvironmentalModifier("cooling_effect", -10F, 0);
 		}
-		if (player.isPotionActive(TempEffect.WARM)) {
+		if (player.isPotionActive(PotionsCore.HYPERTHERMIA)) {
 			return new EnvironmentalModifier("heating_effect", 10F, 0);
 		}
 		return null;

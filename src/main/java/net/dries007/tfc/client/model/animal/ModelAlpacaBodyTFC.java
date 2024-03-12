@@ -6,7 +6,7 @@
 package net.dries007.tfc.client.model.animal;
 
 import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -133,7 +133,7 @@ public class ModelAlpacaBodyTFC extends ModelBase {
 		float percent = (float) alpaca.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (alpaca.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (alpaca.getGender() == EntityAnimalBase.Gender.MALE) {
 			udders.isHidden = true;
 			ear1f.isHidden = true;
 			ear2f.isHidden = true;

@@ -10,7 +10,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +23,7 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -71,7 +71,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 			addStats(foodCap);
 		} else {
 			TerraFirmaCraft.getLog()
-			               .info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
+					.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
 		}
 	}
 
@@ -91,7 +91,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 			if (Constants.RNG.nextFloat() < 0.6) {
 				sourcePlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1800, 1));
 				if (Constants.RNG.nextFloat() < 0.15) {
-					sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsTFC.FOOD_POISON, 1800, 0));
+					sourcePlayer.addPotionEffect(new PotionEffect(PotionsCore.PARASITES, 1800, 0));
 				}
 			}
 		}
@@ -176,7 +176,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 		// Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
 		if (player instanceof EntityPlayerMP) {
 			TerraFirmaCraft.getNetwork()
-			               .sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
+					.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
 		}
 	}
 
@@ -282,7 +282,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 				addThirst(value);
 				// Salty drink effect
 				if (value < 0 && Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-					sourcePlayer.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
+					sourcePlayer.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 600, 0));
 				}
 			}
 			return true;

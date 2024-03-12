@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.entity.Entity;
@@ -95,6 +95,6 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 	@Nullable
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_COUGAR;
+		return LootTablesAnimal.ANIMALS_COUGAR;
 	}
 }

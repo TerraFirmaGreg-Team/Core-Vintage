@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -28,6 +28,8 @@ import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -117,8 +119,8 @@ public class EntityDeerTFC extends EntityAnimalMammal implements IHuntable {
 	@Override
 	protected void initEntityAI() {
 		double speedMult = 1.4D;
-		EntityAnimalTFC.addWildPreyAI(this, speedMult);
-		EntityAnimalTFC.addCommonPreyAI(this, speedMult);
+		EntityAnimalBase.addWildPreyAI(this, speedMult);
+		EntityAnimalBase.addCommonPreyAI(this, speedMult);
 
 		this.tasks.addTask(3, new EntityAITempt(this, 1.1D, ItemsTFC.SALT, false));
 
@@ -140,7 +142,7 @@ public class EntityDeerTFC extends EntityAnimalMammal implements IHuntable {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_DEER;
+		return LootTablesAnimal.ANIMALS_DEER;
 	}
 
 	@Override

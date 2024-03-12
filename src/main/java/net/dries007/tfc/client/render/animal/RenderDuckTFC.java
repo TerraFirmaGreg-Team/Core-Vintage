@@ -7,7 +7,7 @@ package net.dries007.tfc.client.render.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelDuckTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityDuckTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -48,7 +48,7 @@ public class RenderDuckTFC extends RenderLiving<EntityDuckTFC> {
 
 		if (percent < 0.65f) {
 			return DUCKLING_TEXTURE;
-		} else if (duck.getGender() == EntityAnimalTFC.Gender.MALE) {
+		} else if (duck.getGender() == EntityAnimalBase.Gender.MALE) {
 			return duck.getAge() == IAnimal.Age.OLD ? DRAKE_OLD : DRAKE_YOUNG;
 		} else {
 			return duck.getAge() == IAnimal.Age.OLD ? DUCK_OLD : DUCK_YOUNG;

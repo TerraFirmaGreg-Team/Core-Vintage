@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityDeerTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -341,7 +341,7 @@ public class ModelDeerTFC extends ModelBase {
 		float ab = (float) Math.sqrt(1.0F / aa);
 		GlStateManager.scale(ab, ab, ab);
 		GlStateManager.translate(0.0F, 22F * f5 * age / (float) Math.pow(aa, 0.4), 2F * f5 * age / ab);
-		if (deer.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (deer.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (aa <= 1.75) {
 				antler11.isHidden = false;
 				antler21.isHidden = false;

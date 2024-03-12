@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
@@ -139,7 +139,7 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_WILDEBEEST;
+		return LootTablesAnimal.ANIMALS_WILDEBEEST;
 	}
 
 	@Override

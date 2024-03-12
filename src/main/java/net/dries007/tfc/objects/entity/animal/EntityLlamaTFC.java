@@ -12,7 +12,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIPanicTFC;
@@ -46,6 +46,7 @@ import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -75,7 +76,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 
 	@SuppressWarnings("unused")
 	public EntityLlamaTFC(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
 	}
 
 	public EntityLlamaTFC(World world, IAnimal.Gender gender, int birthDay) {
@@ -250,7 +251,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	public boolean isReadyToMate() {
 		if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
 			return false;
-		return this.matingTime + EntityAnimalTFC.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+		return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
 	}
 
 	@Override
@@ -361,7 +362,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 			}
 			if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
 				this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-				EntityAnimalTFC.findFemaleMate(this);
+				EntityAnimalBase.findFemaleMate(this);
 			}
 			if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
@@ -444,7 +445,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_LLAMA;
+		return LootTablesAnimal.ANIMALS_LLAMA;
 	}
 
 	@Override

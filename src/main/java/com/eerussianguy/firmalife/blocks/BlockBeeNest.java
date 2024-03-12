@@ -1,7 +1,6 @@
 package com.eerussianguy.firmalife.blocks;
 
 import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.registry.EffectsFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.Constants;
 import net.minecraft.block.Block;
@@ -18,6 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -76,7 +76,7 @@ public class BlockBeeNest extends BlockNonCube {
 		if (world.isDaytime()) {
 			EntityPlayer player = world.getNearestAttackablePlayer(pos, 10, 10);
 			if (player != null) {
-				player.addPotionEffect(new PotionEffect(EffectsFL.SWARM, 30 * 20));
+				player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
 			}
 		}
 		super.breakBlock(world, pos, state);

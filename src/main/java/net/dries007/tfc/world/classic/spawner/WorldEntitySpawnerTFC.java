@@ -6,7 +6,6 @@
 package net.dries007.tfc.world.classic.spawner;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.entity.animal.*;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -26,6 +25,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
+import su.terrafirmagreg.modules.animal.objects.entities.livestock.*;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -47,24 +47,24 @@ public final class WorldEntitySpawnerTFC {
 
 	static {
 		LIVESTOCK = new HashMap<>();
-		LIVESTOCK.put(EntityAlpacaTFC.class, () -> ConfigTFC.Animals.ALPACA.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityCamelTFC.class, () -> ConfigTFC.Animals.CAMEL.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityChickenTFC.class, () -> ConfigTFC.Animals.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityCowTFC.class, () -> ConfigTFC.Animals.COW.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityDonkeyTFC.class, () -> ConfigTFC.Animals.DONKEY.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityDuckTFC.class, () -> ConfigTFC.Animals.DUCK.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityGoatTFC.class, () -> ConfigTFC.Animals.GOAT.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityGrouseTFC.class, () -> ConfigTFC.Animals.GROUSE.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityHorseTFC.class, () -> ConfigTFC.Animals.HORSE.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityLlamaTFC.class, () -> ConfigTFC.Animals.LLAMA.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityMuskOxTFC.class, () -> ConfigTFC.Animals.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityOcelotTFC.class, () -> ConfigTFC.Animals.OCELOT.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityPigTFC.class, () -> ConfigTFC.Animals.PIG.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityQuailTFC.class, () -> ConfigTFC.Animals.QUAIL.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntitySheepTFC.class, () -> ConfigTFC.Animals.SHEEP.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityWolfTFC.class, () -> ConfigTFC.Animals.WOLF.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityYakTFC.class, () -> ConfigTFC.Animals.YAK.elder * ICalendar.TICKS_IN_DAY);
-		LIVESTOCK.put(EntityZebuTFC.class, () -> ConfigTFC.Animals.ZEBU.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalAlpaca.class, () -> ConfigTFC.Animals.ALPACA.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalCamel.class, () -> ConfigTFC.Animals.CAMEL.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalChicken.class, () -> ConfigTFC.Animals.CHICKEN.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalCow.class, () -> ConfigTFC.Animals.COW.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalDonkey.class, () -> ConfigTFC.Animals.DONKEY.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalDuck.class, () -> ConfigTFC.Animals.DUCK.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalGoat.class, () -> ConfigTFC.Animals.GOAT.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalGrouse.class, () -> ConfigTFC.Animals.GROUSE.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalHorse.class, () -> ConfigTFC.Animals.HORSE.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalLlama.class, () -> ConfigTFC.Animals.LLAMA.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalMuskOx.class, () -> ConfigTFC.Animals.MUSKOX.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalOcelot.class, () -> ConfigTFC.Animals.OCELOT.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalPig.class, () -> ConfigTFC.Animals.PIG.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalQuail.class, () -> ConfigTFC.Animals.QUAIL.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalSheep.class, () -> ConfigTFC.Animals.SHEEP.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalWolf.class, () -> ConfigTFC.Animals.WOLF.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalYak.class, () -> ConfigTFC.Animals.YAK.elder * ICalendar.TICKS_IN_DAY);
+		LIVESTOCK.put(EntityAnimalZebu.class, () -> ConfigTFC.Animals.ZEBU.elder * ICalendar.TICKS_IN_DAY);
 	}
 
 	public static void init() {
@@ -130,8 +130,8 @@ public final class WorldEntitySpawnerTFC {
 				.filter(x -> {
 					if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
 						Entity ent = x.newInstance(worldIn);
-						if (ent instanceof ICreature) {
-							int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+						if (ent instanceof ICreature creature) {
+							int weight = creature.getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
 							return weight > 0 && randomIn.nextInt(weight) == 0;
 						}
 					}

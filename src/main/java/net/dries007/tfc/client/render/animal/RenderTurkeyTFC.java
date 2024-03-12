@@ -6,7 +6,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelTurkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -38,7 +38,7 @@ public class RenderTurkeyTFC extends RenderLiving<EntityTurkeyTFC> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityTurkeyTFC turkey) {
-		if (turkey.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (turkey.getGender() == EntityAnimalBase.Gender.MALE) {
 			return MALE;
 		} else {
 			return FEMALE;

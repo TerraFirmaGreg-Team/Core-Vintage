@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityPigTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
@@ -54,7 +54,7 @@ public class ModelPigTFC extends ModelQuadruped {
 		float ageScale = 2.0F - percent;
 
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-		if (pig.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (pig.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (!pig.isChild()) {
 				tusk1.isHidden = false;
 				tusk2.isHidden = false;

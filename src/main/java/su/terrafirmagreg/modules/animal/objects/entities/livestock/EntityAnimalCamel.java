@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -260,7 +260,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_CAMEL;
+		return LootTablesAnimal.ANIMALS_CAMEL;
 	}
 
 	@Override

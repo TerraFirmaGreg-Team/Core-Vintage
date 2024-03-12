@@ -14,6 +14,8 @@ import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.data.LootTablesCore;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 @ModuleTFG(moduleID = "Core", name = "TFG Module Core",
 		description = "Core TFG content. Disabling this disables the entire mod and all its module.")
@@ -34,6 +36,8 @@ public class ModuleCore extends ModuleBase {
 	public void onRegister() {
 		BlocksCore.onRegister(registryManager);
 		ItemsCore.onRegister(registryManager);
+		PotionsCore.onRegister(registryManager);
+		LootTablesCore.onRegister(registryManager);
 	}
 
 	@Override

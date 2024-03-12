@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -39,6 +38,7 @@ import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
@@ -305,7 +305,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_SHEEP;
+		return LootTablesAnimal.ANIMALS_SHEEP;
 	}
 
 	@Override

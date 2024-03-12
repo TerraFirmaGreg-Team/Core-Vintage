@@ -6,7 +6,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelPheasantTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityPheasantTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -44,7 +44,7 @@ public class RenderPheasantTFC extends RenderLiving<EntityPheasantTFC> {
 
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
-		} else if (pheasent.getGender() == EntityAnimalTFC.Gender.MALE) {
+		} else if (pheasent.getGender() == EntityAnimalBase.Gender.MALE) {
 			return MALE_TEXTURE;
 		} else {
 			return FEMALE_TEXTURE;

@@ -22,7 +22,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -50,6 +49,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -164,7 +164,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
 							int dropCount = Math.min(Constants.RNG.nextInt(4) + 1, leafCount);
 							BlockPos dropPos = logPos.offset(EnumFacing.random(Constants.RNG), Constants.RNG.nextInt(3) + 1);
 							Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut()
-							                                                            .getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
+									.getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
 							TFCParticles.LEAF1.sendToAllNear(worldIn, dropPos.getX() + RNG.nextFloat() / 10, dropPos.getY() - RNG.nextFloat() / 10, dropPos.getZ() + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, 90);
 							leafCount -= dropCount;
 						}
@@ -178,7 +178,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
 							player.sendStatusMessage(new TextComponentTranslation("tooltip.firmalife.distance"), true);
 						}
 						player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1));
-						player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 200, 0));
+						player.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 200, 0));
 					}
 					return EnumActionResult.SUCCESS;
 				}

@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -178,7 +178,7 @@ public class ModelGoatTFC extends ModelBase {
 		float percent = (float) goat.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (goat.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (goat.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				babyhorn1.isHidden = false;
 				babyhorn2.isHidden = false;

@@ -12,7 +12,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
@@ -46,6 +46,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -292,8 +294,8 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 
 	@Override
 	protected void initEntityAI() {
-		EntityAnimalTFC.addCommonLivestockAI(this, 1.2D);
-		EntityAnimalTFC.addCommonPreyAI(this, 1.2D);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.2D);
 
 		tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 	}
@@ -312,7 +314,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_SHEEP;
+		return LootTablesAnimal.ANIMALS_SHEEP;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.lumintorious.ambiental;
 
 import com.lumintorious.ambiental.capability.TemperatureCapability;
-import com.lumintorious.ambiental.effects.TempEffect;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.minecraft.entity.Entity;
@@ -9,13 +8,11 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -130,11 +127,5 @@ public class AmbientalHandler {
 			}
 		}
 		temp.update();
-	}
-
-	@SubscribeEvent
-	public void registerPotions(RegistryEvent.Register<Potion> event) {
-		event.getRegistry().register(TempEffect.WARM);
-		event.getRegistry().register(TempEffect.COOL);
 	}
 }

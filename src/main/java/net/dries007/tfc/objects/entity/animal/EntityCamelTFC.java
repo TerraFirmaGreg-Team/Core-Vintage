@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -38,6 +38,7 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -52,7 +53,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
 	private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityCamelTFC.class, DataSerializers.BOOLEAN);
 
 	public EntityCamelTFC(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
 		this.setSize(0.9F, 2.0F);
 	}
 
@@ -257,7 +258,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
 	}
 
 	@Override
-	protected ResourceLocation getLootTable() {return LootTablesTFC.ANIMALS_CAMEL;}
+	protected ResourceLocation getLootTable() {return LootTablesAnimal.ANIMALS_CAMEL;}
 
 	@Override
 	public boolean canMateWith(EntityAnimal otherAnimal) {

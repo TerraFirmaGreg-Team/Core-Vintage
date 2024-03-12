@@ -11,6 +11,7 @@ import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.animal.data.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.data.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 
 import javax.annotation.Nonnull;
 
@@ -37,6 +38,7 @@ public class ModuleAnimal extends ModuleBase {
 		BlocksAnimal.onRegister(registryManager);
 		ItemsAnimal.onRegister(registryManager);
 		EntitiesAnimal.onRegister(registryManager);
+		LootTablesAnimal.onRegister(registryManager);
 	}
 
 	public void onClientRegister() {

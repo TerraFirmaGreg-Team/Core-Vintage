@@ -28,9 +28,6 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.api.type.ICreature;
-import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.compat.patchouli.TFCPatchouliPlugin;
@@ -51,7 +48,6 @@ import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
@@ -128,6 +124,10 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ICreature;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -193,8 +193,7 @@ public final class CommonEventHandler {
 	public static void onEntityUseItem(LivingEntityUseItemEvent.Finish event) {
 		ItemStack usedItem = event.getItem();
 		if (usedItem.getItem() == Items.MILK_BUCKET || PotionUtils.getPotionFromItem(usedItem) == PotionTypes.WATER) {
-			if (event.getEntityLiving() instanceof EntityPlayerMP) {
-				EntityPlayerMP player = (EntityPlayerMP) event.getEntityLiving();
+			if (event.getEntityLiving() instanceof EntityPlayerMP player) {
 				if (player.getFoodStats() instanceof FoodStatsTFC) {
 					((FoodStatsTFC) player.getFoodStats()).addThirst(40); //Same as jug
 				}
@@ -308,8 +307,7 @@ public final class CommonEventHandler {
 
 		// Try to drink water
 		// Only possible with main hand - fixes attempting to drink even when it doesn't make sense
-		if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC && event.getHand() == EnumHand.MAIN_HAND) {
-			IFoodStatsTFC foodStats = (IFoodStatsTFC) player.getFoodStats();
+		if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC foodStats && event.getHand() == EnumHand.MAIN_HAND) {
 			RayTraceResult result = Helpers.rayTrace(event.getWorld(), player, true);
 			if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
 				IBlockState waterState = world.getBlockState(result.getBlockPos());
@@ -341,8 +339,7 @@ public final class CommonEventHandler {
 		Block block = state.getBlock();
 
 		if (ConfigTFC.General.OVERRIDES.enableHoeing) {
-			if (block instanceof BlockRockVariant) {
-				BlockRockVariant blockRock = (BlockRockVariant) block;
+			if (block instanceof BlockRockVariant blockRock) {
 				if (blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DIRT) {
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -959,7 +956,7 @@ public final class CommonEventHandler {
 			}
 			if (hugeHeavyCount >= 2) {
 				// Player is barely able to move
-				event.player.addPotionEffect(new PotionEffect(PotionEffectsTFC.OVERBURDENED, 25, 125, false, false));
+				event.player.addPotionEffect(new PotionEffect(PotionsCore.OVERBURDENED, 25, 125, false, false));
 			}
 		}
 

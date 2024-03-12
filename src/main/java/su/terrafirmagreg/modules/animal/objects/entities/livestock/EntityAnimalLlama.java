@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -440,7 +440,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_LLAMA;
+		return LootTablesAnimal.ANIMALS_LLAMA;
 	}
 
 	@Override

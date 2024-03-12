@@ -126,7 +126,7 @@ public class Registry {
 	}
 
 
-	public void onTableLoaded(LootTableLoadEvent event) {
+	public void onRegisterLootTableLoad(LootTableLoadEvent event) {
 		for (var builder : this.registryManager.getLootTableEntries().get(event.getName())) {
 			var pool = event.getTable().getPool(builder.getPool());
 			if (pool != null) pool.addEntry(builder.build());

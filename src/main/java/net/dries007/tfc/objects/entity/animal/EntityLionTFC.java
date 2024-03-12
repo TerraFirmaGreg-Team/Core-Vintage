@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -35,6 +35,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -179,7 +180,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
 	protected SoundEvent getAmbientSound() {return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;}
 
 	@Nullable
-	protected ResourceLocation getLootTable() {return LootTablesTFC.ANIMALS_LION;}
+	protected ResourceLocation getLootTable() {return LootTablesAnimal.ANIMALS_LION;}
 
 	@Override
 	protected void updateAITasks() {

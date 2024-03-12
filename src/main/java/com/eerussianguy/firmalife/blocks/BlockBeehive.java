@@ -2,7 +2,6 @@ package com.eerussianguy.firmalife.blocks;
 
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
-import com.eerussianguy.firmalife.registry.EffectsFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import mcp.MethodsReturnNonnullByDefault;
@@ -38,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -145,7 +145,7 @@ public class BlockBeehive extends Block implements IItemSize {
 			Item giveItem = !OreDictionaryHelper.doesStackMatchOre(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
 			ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(giveItem));
 			if (isNotCalm(world, pos, state)) {
-				player.addPotionEffect(new PotionEffect(EffectsFL.SWARM, 30 * 20));
+				player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
 			}
 			TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
 			if (te != null)
@@ -158,7 +158,7 @@ public class BlockBeehive extends Block implements IItemSize {
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
 		if (isNotCalm(world, pos, state)) {
-			player.addPotionEffect(new PotionEffect(EffectsFL.SWARM, 30 * 20));
+			player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
 		}
 		return super.removedByPlayer(state, world, pos, player, willHarvest);
 	}

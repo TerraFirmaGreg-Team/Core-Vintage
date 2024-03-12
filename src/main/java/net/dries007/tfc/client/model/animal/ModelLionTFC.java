@@ -8,7 +8,7 @@ package net.dries007.tfc.client.model.animal;
 //Made with Blockbench
 //Paste this code into your mod.
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityLionTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -245,7 +245,7 @@ public class ModelLionTFC extends ModelBase {
 		float percent = (float) lion.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (lion.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (lion.getGender() == EntityAnimalBase.Gender.MALE) {
 			earFL.isHidden = true;
 			earFR.isHidden = true;
 			earML.isHidden = false;

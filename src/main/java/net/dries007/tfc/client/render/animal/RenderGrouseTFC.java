@@ -7,7 +7,7 @@ package net.dries007.tfc.client.render.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelGrouseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -48,7 +48,7 @@ public class RenderGrouseTFC extends RenderLiving<EntityGrouseTFC> {
 
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
-		} else if (grouse.getGender() == EntityAnimalTFC.Gender.MALE) {
+		} else if (grouse.getGender() == EntityAnimalBase.Gender.MALE) {
 			return grouse.getAge() == IAnimal.Age.OLD ? MALE_YOUNG : MALE_OLD;
 		} else {
 			return grouse.getAge() == IAnimal.Age.OLD ? FEMALE_YOUNG : FEMALE_OLD;

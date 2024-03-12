@@ -22,7 +22,6 @@ import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.command.*;
 import net.dries007.tfc.compat.patchouli.TFCPatchouliPlugin;
 import net.dries007.tfc.network.*;
-import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
@@ -47,8 +46,8 @@ import net.minecraftforge.fml.server.FMLServerHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 import static su.terrafirmagreg.Tags.VERSION;
+import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
@@ -148,7 +147,6 @@ public final class TerraFirmaCraft {
 		}
 
 		ItemsTFC.init();
-		LootTablesTFC.init();
 		CapabilityFood.init();
 
 		if (event.getSide().isClient()) {

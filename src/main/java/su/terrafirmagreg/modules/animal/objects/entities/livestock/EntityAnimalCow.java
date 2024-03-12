@@ -4,7 +4,7 @@ import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -243,7 +243,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_COW;
+		return LootTablesAnimal.ANIMALS_COW;
 	}
 
 	@Override

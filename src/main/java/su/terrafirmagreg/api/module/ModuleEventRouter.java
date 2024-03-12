@@ -10,6 +10,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -235,6 +236,16 @@ public class ModuleEventRouter {
 			module.getLogger().info("Register VillagerProfessionEvent start");
 			module.getRegistry().onRegisterVillagerProfession(event);
 			module.getLogger().info("Register VillagerProfessionEvent complete");
+		});
+	}
+
+	@SubscribeEvent
+	@SuppressWarnings("unused")
+	protected void onRegisterEnchantmentEvent(LootTableLoadEvent event) {
+		this.fireEvent(module -> {
+			module.getLogger().info("Register LootTableLoadEvent start");
+			module.getRegistry().onRegisterLootTableLoad(event);
+			module.getLogger().info("Register LootTableLoadEvent complete");
 		});
 	}
 

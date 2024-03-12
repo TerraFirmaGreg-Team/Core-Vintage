@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
@@ -23,6 +23,7 @@ import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -31,7 +32,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
-public class EntityTurkeyTFC extends EntityAnimalTFC implements IHuntable {
+public class EntityTurkeyTFC extends su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 32;
 
 	public float wingRotation;
@@ -107,8 +108,8 @@ public class EntityTurkeyTFC extends EntityAnimalTFC implements IHuntable {
 	@Override
 	protected void initEntityAI() {
 		double speedMult = 1.3D;
-		EntityAnimalTFC.addWildPreyAI(this, speedMult);
-		EntityAnimalTFC.addCommonPreyAI(this, speedMult);
+		EntityAnimalBase.addWildPreyAI(this, speedMult);
+		EntityAnimalBase.addCommonPreyAI(this, speedMult);
 	}
 
 	@Override
@@ -125,7 +126,7 @@ public class EntityTurkeyTFC extends EntityAnimalTFC implements IHuntable {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_TURKEY;
+		return LootTablesAnimal.ANIMALS_TURKEY;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAITamableAvoidPlayer;
@@ -44,6 +44,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -73,7 +74,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
 
 	@SuppressWarnings("unused")
 	public EntityWolfTFC(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.WOLF.adulthood, ConfigTFC.Animals.WOLF.elder));
+		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.WOLF.adulthood, ConfigTFC.Animals.WOLF.elder));
 	}
 
 	public EntityWolfTFC(World worldIn, Gender gender, int birthDay) {
@@ -194,7 +195,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
 	public boolean isReadyToMate() {
 		if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
 			return false;
-		return this.matingTime + EntityAnimalTFC.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+		return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
 	}
 
 	@Override
@@ -318,7 +319,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
 	@Override
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_WOLF;
+		return LootTablesAnimal.ANIMALS_WOLF;
 	}
 
 	@Override
@@ -346,7 +347,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
 			}
 			if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
 				this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-				EntityAnimalTFC.findFemaleMate(this);
+				EntityAnimalBase.findFemaleMate(this);
 			}
 			if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
 				this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;
@@ -23,16 +24,16 @@ public class EntitiesTFCF {
 	@GameRegistry.ObjectHolder("tfcf:long")
 	public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = Helpers.getNull();
 
-	private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
+	private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<>() {
 		public void write(PacketBuffer buf, @Nonnull Long value) {
 			buf.writeLong(value);
 		}
 
-		public Long read(PacketBuffer buf) {
+		public @NotNull Long read(PacketBuffer buf) {
 			return buf.readLong();
 		}
 
-		public DataParameter<Long> createKey(int id) {
+		public @NotNull DataParameter<Long> createKey(int id) {
 			return new DataParameter<>(id, this);
 		}
 

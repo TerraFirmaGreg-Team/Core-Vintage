@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
@@ -83,7 +83,7 @@ public class ModelSheepBodyTFC extends ModelQuadruped {
 			}
 		}
 
-		if (sheep.getGender() == EntityAnimalTFC.Gender.FEMALE) {
+		if (sheep.getGender() == EntityAnimalBase.Gender.FEMALE) {
 			horn1.isHidden = true;
 			horn2.isHidden = true;
 		}

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.api.lib.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -262,7 +262,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_RABBIT;
+		return LootTablesAnimal.ANIMALS_RABBIT;
 	}
 
 	@Nullable

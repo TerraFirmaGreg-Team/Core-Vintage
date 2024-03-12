@@ -9,7 +9,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIFindNest;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -36,6 +36,7 @@ import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -48,7 +49,7 @@ import java.util.function.BiConsumer;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @ParametersAreNonnullByDefault
-public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
+public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
 	//The last time(in ticks) this chicken has laid eggs
 	private static final DataParameter<Long> LAID = EntityDataManager.createKey(EntityChickenTFC.class, EntitiesTFC.getLongDataSerializer());
 	//Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap
@@ -180,8 +181,8 @@ public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
 
 	@Override
 	protected void initEntityAI() {
-		EntityAnimalTFC.addCommonLivestockAI(this, 1.3D);
-		EntityAnimalTFC.addCommonPreyAI(this, 1.3D);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.3D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.3D);
 
 		this.tasks.addTask(5, new EntityAIFindNest(this, 1D));
 	}
@@ -200,7 +201,7 @@ public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_CHICKEN;
+		return LootTablesAnimal.ANIMALS_CHICKEN;
 	}
 
 	@Override

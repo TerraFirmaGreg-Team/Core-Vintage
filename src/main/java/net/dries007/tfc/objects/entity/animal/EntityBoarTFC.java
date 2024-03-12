@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.block.Block;
@@ -24,6 +24,8 @@ import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -114,8 +116,8 @@ public class EntityBoarTFC extends EntityAnimalMammal implements IHuntable {
 	@Override
 	protected void initEntityAI() {
 		double speedMult = 1.3D;
-		EntityAnimalTFC.addWildPreyAI(this, speedMult);
-		EntityAnimalTFC.addCommonPreyAI(this, speedMult);
+		EntityAnimalBase.addWildPreyAI(this, speedMult);
+		EntityAnimalBase.addCommonPreyAI(this, speedMult);
 	}
 
 	@Override
@@ -132,7 +134,7 @@ public class EntityBoarTFC extends EntityAnimalMammal implements IHuntable {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_BOAR;
+		return LootTablesAnimal.ANIMALS_BOAR;
 	}
 
 	@Override

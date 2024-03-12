@@ -7,17 +7,25 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
+import net.minecraft.world.storage.loot.functions.LootFunction;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
+import net.minecraft.world.storage.loot.functions.SetCount;
+import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
@@ -163,7 +171,7 @@ public class RegistryManager {
 	 * @param tab The tab for the registry helper.
 	 */
 	public RegistryManager(@Nullable CreativeTabs tab) {
-		this.modID = Loader.instance().activeModContainer().getModId();
+		this.modID = Loader.instance().activeModContainer().getModId().replaceAll("_", ".");
 		this.tab = tab;
 	}
 
@@ -300,22 +308,41 @@ public class RegistryManager {
 
 	//region // ===== Potions ======================================================================================================================//
 
-	public void registerPotion(@Nonnull Potion potion, @Nonnull String id) {
 
+	public Potion registerPotion(@Nonnull String id, @Nonnull Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
+
+		potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
+		return this.registerPotion(id, potion);
+	}
+
+	public Potion registerPotion(@Nonnull String id, @Nonnull Potion potion) {
 		potion.setRegistryName(this.modID, id);
-		potion.setPotionName(this.modID + "." + id.toLowerCase().replace("_", "."));
-		potion.setPotionName(this.modID + ".effect." + id);
+		potion.setPotionName(this.modID + ".effect." + id.toLowerCase().replace("_", "."));
 		this.potions.add(potion);
+		return potion;
 	}
 
 	//endregion
 
 	//region // ===== Potion Types =================================================================================================================//
 
-	public void registerPotionType(@Nonnull PotionType potionType, @Nonnull String id) {
+	public PotionType registerPotionType(@Nonnull String id, @Nonnull Potion potion, int duration) {
+
+		PotionType potionType = new PotionType(new PotionEffect(potion, duration));
+		return registerPotionType(id, potionType);
+	}
+
+	public PotionType registerPotionType(@Nonnull String id, @Nonnull PotionType potionType, @Nonnull Potion potion, int duration) {
+
+		potionType = new PotionType(new PotionEffect(potion, duration));
+		return registerPotionType(id, potionType);
+	}
+
+	public PotionType registerPotionType(@Nonnull String id, @Nonnull PotionType potionType) {
 
 		potionType.setRegistryName(this.modID, id);
 		this.potionType.add(potionType);
+		return potionType;
 	}
 
 	//endregion
@@ -487,6 +514,125 @@ public class RegistryManager {
 	public ResourceLocation registerLootTable(String name) {
 
 		return LootTableList.register(new ResourceLocation(this.modID, name));
+	}
+
+	public <T extends LootFunction> void registerLootFunction(LootFunction.Serializer<? extends T> serializer) {
+
+		LootFunctionManager.registerFunction(serializer);
+	}
+
+	/**
+	 * Creates a new loot entry that will be added to the loot pools when a world is loaded.
+	 *
+	 * @param location The loot table to add the loot to. You can use
+	 *                 {@link LootTableList} for convenience.
+	 * @param name     The name of the entry being added. This will be prefixed with {@link #modID}
+	 *                 .
+	 * @param pool     The name of the pool to add the entry to. This pool must already exist.
+	 * @param weight   The weight of the entry.
+	 * @param item     The item to add.
+	 * @param meta     The metadata for the loot.
+	 * @param amount   The amount of the item to set.
+	 * @return A builder object. It can be used to fine tune the loot entry.
+	 */
+	public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int amount) {
+
+		return this.addLoot(location, name, pool, weight, item, meta, amount, amount);
+	}
+
+	/**
+	 * Creates a new loot entry that will be added to the loot pools when a world is loaded.
+	 *
+	 * @param location The loot table to add the loot to. You can use
+	 *                 {@link LootTableList} for convenience.
+	 * @param name     The name of the entry being added. This will be prefixed with {@link #modID}
+	 *                 .
+	 * @param pool     The name of the pool to add the entry to. This pool must already exist.
+	 * @param weight   The weight of the entry.
+	 * @param item     The item to add.
+	 * @param meta     The metadata for the loot.
+	 * @param min      The smallest item size.
+	 * @param max      The largest item size.
+	 * @return A builder object. It can be used to fine tune the loot entry.
+	 */
+	public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int min, int max) {
+
+		final LootBuilder loot = this.addLoot(location, name, pool, weight, item, meta);
+		loot.addFunction(new SetCount(new LootCondition[0], new RandomValueRange(min, max)));
+		return loot;
+	}
+
+	/**
+	 * Creates a new loot entry that will be added to the loot pools when a world is loaded.
+	 *
+	 * @param location The loot table to add the loot to. You can use
+	 *                 {@link LootTableList} for convenience.
+	 * @param name     The name of the entry being added. This will be prefixed with {@link #modID}
+	 *                 .
+	 * @param pool     The name of the pool to add the entry to. This pool must already exist.
+	 * @param weight   The weight of the entry.
+	 * @param item     The item to add.
+	 * @param meta     The metadata for the loot.
+	 * @return A builder object. It can be used to fine tune the loot entry.
+	 */
+	public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item, int meta) {
+
+		final LootBuilder loot = this.addLoot(location, name, pool, weight, item);
+		loot.addFunction(new SetMetadata(new LootCondition[0], new RandomValueRange(meta, meta)));
+		return loot;
+	}
+
+	/**
+	 * Creates a new loot entry that will be added to the loot pools when a world is loaded.
+	 *
+	 * @param location The loot table to add the loot to. You can use
+	 *                 {@link LootTableList} for convenience.
+	 * @param name     The name of the entry being added. This will be prefixed with {@link #modID}
+	 *                 .
+	 * @param pool     The name of the pool to add the entry to. This pool must already exist.
+	 * @param weight   The weight of the entry.
+	 * @param item     The item to add.
+	 * @return A builder object. It can be used to fine tune the loot entry.
+	 */
+	public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item) {
+
+		return this.addLoot(location, new LootBuilder(this.modID + ":" + name, pool, weight, item));
+	}
+
+	/**
+	 * Creates a new loot entry that will be added to the loot pools when a world is loaded.
+	 *
+	 * @param location   The loot table to add the loot to. You can use
+	 *                   {@link LootTableList} for convenience.
+	 * @param name       The name of the entry being added. This will be prefixed with {@link #modID}
+	 *                   .
+	 * @param pool       The name of the pool to add the entry to. This pool must already exist.
+	 * @param weight     The weight of the entry.
+	 * @param quality    The quality of the entry. Quality is an optional value which modifies the
+	 *                   weight of an entry based on the player's luck level. totalWeight = weight +
+	 *                   (quality * luck)
+	 * @param item       The item to add.
+	 * @param conditions A list of loot conditions.
+	 * @param functions  A list of loot functions.
+	 * @return A builder object. It can be used to fine tune the loot entry.
+	 */
+	public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, int quality, Item item, List<LootCondition> conditions, List<LootFunction> functions) {
+
+		return this.addLoot(location, new LootBuilder(this.modID + ":" + name, pool, weight, quality, item, conditions, functions));
+	}
+
+	/**
+	 * Creates a new loot entry that will be added to the loot pools when a world is loaded.
+	 *
+	 * @param location The loot table to add the loot to. You can use
+	 *                 {@link LootTableList} for convenience.
+	 * @param builder  The loot builder to add.
+	 * @return A builder object. It can be used to fine tune the loot entry.
+	 */
+	public LootBuilder addLoot(ResourceLocation location, LootBuilder builder) {
+
+		this.lootTableEntries.put(location, builder);
+		return builder;
 	}
 
 	//endregion

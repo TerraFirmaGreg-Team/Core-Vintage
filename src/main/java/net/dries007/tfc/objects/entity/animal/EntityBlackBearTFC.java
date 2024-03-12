@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
@@ -78,5 +78,5 @@ public class EntityBlackBearTFC extends EntityGrizzlyBearTFC implements IPredato
 	}
 
 	@Nullable
-	protected ResourceLocation getLootTable() {return LootTablesTFC.ANIMALS_BLACK_BEAR;}
+	protected ResourceLocation getLootTable() {return LootTablesAnimal.ANIMALS_BLACK_BEAR;}
 }

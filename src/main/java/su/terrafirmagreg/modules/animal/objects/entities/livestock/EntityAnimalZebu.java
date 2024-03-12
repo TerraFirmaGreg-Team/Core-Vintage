@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -107,7 +107,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_ZEBU;
+		return LootTablesAnimal.ANIMALS_ZEBU;
 	}
 
 	@Override

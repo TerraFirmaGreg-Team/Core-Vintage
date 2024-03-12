@@ -9,7 +9,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -36,6 +36,7 @@ import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -58,7 +59,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 
 	@SuppressWarnings("unused")
 	public EntityParrotTFC(World world) {
-		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
 	public EntityParrotTFC(World world, IAnimal.Gender gender, int birthDay) {
@@ -99,7 +100,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 			}
 			if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
 				this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-				EntityAnimalTFC.findFemaleMate(this);
+				EntityAnimalBase.findFemaleMate(this);
 			}
 			if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
 
@@ -214,7 +215,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_PARROT;
+		return LootTablesAnimal.ANIMALS_PARROT;
 	}
 
 	@Override

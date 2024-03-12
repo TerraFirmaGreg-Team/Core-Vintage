@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -293,7 +293,7 @@ public class ModelYakTFC extends ModelBase {
 		float percent = (float) yak.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (yak.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (yak.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				udder.isHidden = true;
 				hornRightF1A.isHidden = true;

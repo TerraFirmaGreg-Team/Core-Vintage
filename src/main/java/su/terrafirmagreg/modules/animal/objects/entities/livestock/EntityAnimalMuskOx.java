@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -113,7 +113,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_MUSKOX;
+		return LootTablesAnimal.ANIMALS_MUSKOX;
 	}
 
 	@Override

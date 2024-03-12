@@ -5,9 +5,7 @@
 
 package net.dries007.tfc.compat.waila.providers;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.compat.waila.interfaces.IWailaEntity;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalMammal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -15,6 +13,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.IShearable;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

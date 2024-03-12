@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -430,7 +430,7 @@ public class ModelZebuTFC extends ModelBase {
 		float percent = (float) zebu.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (zebu.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (zebu.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				hornML1.isHidden = true;
 				hornML2.isHidden = true;

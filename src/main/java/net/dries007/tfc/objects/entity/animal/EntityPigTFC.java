@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -24,6 +24,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -116,8 +118,8 @@ public class EntityPigTFC extends EntityAnimalMammal implements ILivestock {
 
 	@Override
 	protected void initEntityAI() {
-		EntityAnimalTFC.addCommonLivestockAI(this, 1.3D);
-		EntityAnimalTFC.addCommonPreyAI(this, 1.3D);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.3D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.3D);
 
 		tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 	}
@@ -136,7 +138,7 @@ public class EntityPigTFC extends EntityAnimalMammal implements ILivestock {
 
 	@Nullable
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_PIG;
+		return LootTablesAnimal.ANIMALS_PIG;
 	}
 
 	@Override

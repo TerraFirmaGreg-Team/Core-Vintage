@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -188,7 +188,7 @@ public class ModelGrouseTFC extends ModelBase {
 		float percent = (float) grouse.getPercentToAdulthood();
 		float ageScale = 2.0F - percent;
 
-		if (grouse.getGender() == EntityAnimalTFC.Gender.MALE) {
+		if (grouse.getGender() == EntityAnimalBase.Gender.MALE) {
 			if (percent < 0.5) {
 				tailFTip.isHidden = true;
 				maleMane.isHidden = true;

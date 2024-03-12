@@ -7,7 +7,7 @@ package net.dries007.tfc.client.render.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelChickenTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -48,7 +48,7 @@ public class RenderChickenTFC extends RenderLiving<EntityChickenTFC> {
 
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
-		} else if (chicken.getGender() == EntityAnimalTFC.Gender.MALE) {
+		} else if (chicken.getGender() == EntityAnimalBase.Gender.MALE) {
 			return chicken.getAge() == IAnimal.Age.OLD ? ROOSTER_OLD : ROOSTER_YOUNG;
 		} else {
 			return chicken.getAge() == IAnimal.Age.OLD ? CHICKEN_OLD : CHICKEN_YOUNG;

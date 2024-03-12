@@ -6,7 +6,7 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelMuskOxBodyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -31,7 +31,7 @@ public class RenderMuskOxTFC extends RenderAnimalTFC<EntityMuskOxTFC> {
 
 	@Override
 	protected void preRenderCallback(EntityMuskOxTFC muskoxTFC, float par2) {
-		if (muskoxTFC.getGender() == EntityAnimalTFC.Gender.MALE)
+		if (muskoxTFC.getGender() == EntityAnimalBase.Gender.MALE)
 			GlStateManager.scale(1.2f, 1.2f, 1.2f);
 		else {
 			GlStateManager.scale(1.0f, 1.0f, 1.0f);

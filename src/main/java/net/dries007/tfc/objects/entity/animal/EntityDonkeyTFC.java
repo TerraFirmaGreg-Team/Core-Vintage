@@ -13,10 +13,8 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -52,6 +50,9 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -82,7 +83,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
 	private float geneJump, geneHealth, geneSpeed; // Basic genetic selection based on vanilla's horse offspring
 
 	public EntityDonkeyTFC(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
+		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
 	}
 
 	public EntityDonkeyTFC(World world, Gender gender, int birthDay) {
@@ -181,7 +182,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
 	public boolean isReadyToMate() {
 		if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
 			return false;
-		return this.matingTime + EntityAnimalTFC.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+		return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
 	}
 
 	@Override
@@ -392,8 +393,8 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
 
 	@Override
 	protected void initEntityAI() {
-		EntityAnimalTFC.addCommonLivestockAI(this, 1.2D);
-		EntityAnimalTFC.addCommonPreyAI(this, 1.2);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.2);
 		tasks.addTask(2, new EntityAIMate(this, 1.0D, EntityHorseTFC.class)); // Missing horses (for mules)
 		tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
@@ -438,7 +439,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
 				}
 				if (hugeHeavyCount >= 2) {
 					// Does not work when ridden, mojang bug: https://bugs.mojang.com/browse/MC-121788
-					this.addPotionEffect(new PotionEffect(PotionEffectsTFC.OVERBURDENED, 25, 125, false, false));
+					this.addPotionEffect(new PotionEffect(PotionsCore.OVERBURDENED, 25, 125, false, false));
 				}
 			}
 			if (this.isFertilized() && CalendarTFC.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
@@ -481,7 +482,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_DONKEY;
+		return LootTablesAnimal.ANIMALS_DONKEY;
 	}
 
 	@Override

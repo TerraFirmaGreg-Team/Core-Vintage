@@ -13,7 +13,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.LootTablesTFC;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -48,6 +48,7 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -79,7 +80,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	private int geneHorseVariant;
 
 	public EntityHorseTFC(World world) {
-		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.HORSE.adulthood, ConfigTFC.Animals.HORSE.elder));
+		this(world, Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.HORSE.adulthood, ConfigTFC.Animals.HORSE.elder));
 	}
 
 	public EntityHorseTFC(World world, Gender gender, int birthDay) {
@@ -187,7 +188,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	public boolean isReadyToMate() {
 		if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
 			return false;
-		return this.matingTime + EntityAnimalTFC.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+		return this.matingTime + EntityAnimalBase.MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
 	}
 
 	@Override
@@ -330,7 +331,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 
 	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTablesTFC.ANIMALS_HORSE;
+		return LootTablesAnimal.ANIMALS_HORSE;
 	}
 
 	@Override
@@ -409,8 +410,8 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 
 	@Override
 	protected void initEntityAI() {
-		EntityAnimalTFC.addCommonLivestockAI(this, 1.2D);
-		EntityAnimalTFC.addCommonPreyAI(this, 1.2);
+		EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
+		EntityAnimalBase.addCommonPreyAI(this, 1.2);
 		tasks.addTask(2, new EntityAIMate(this, 1.0D, EntityDonkeyTFC.class)); // Missing donkeys (for mules)
 		this.tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));

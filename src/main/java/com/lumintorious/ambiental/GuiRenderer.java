@@ -21,15 +21,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.api.util.ModUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiRenderer {
-	public static final ResourceLocation COLD_VIGNETTE = new ResourceLocation("tfcambiental:textures/gui/cold_vignette.png");
-	public static final ResourceLocation HOT_VIGNETTE = new ResourceLocation("tfcambiental:textures/gui/hot_vignette.png");
-	public static final ResourceLocation MINUS = new ResourceLocation("tfcambiental:textures/gui/lower.png");
-	public static final ResourceLocation PLUS = new ResourceLocation("tfcambiental:textures/gui/higher.png");
-	public static final ResourceLocation MINUSER = new ResourceLocation("tfcambiental:textures/gui/lowerer.png");
-	public static final ResourceLocation PLUSER = new ResourceLocation("tfcambiental:textures/gui/higherer.png");
+	public static final ResourceLocation COLD_VIGNETTE = ModUtils.getID("textures/gui/cold_vignette.png");
+	public static final ResourceLocation HOT_VIGNETTE = ModUtils.getID("textures/gui/hot_vignette.png");
+	public static final ResourceLocation MINUS = ModUtils.getID("textures/gui/lower.png");
+	public static final ResourceLocation PLUS = ModUtils.getID("textures/gui/higher.png");
+	public static final ResourceLocation MINUSER = ModUtils.getID("textures/gui/lowerer.png");
+	public static final ResourceLocation PLUSER = ModUtils.getID("textures/gui/higherer.png");
 
 	private static void drawTexturedModalRect(float x, float y, float width, float height, ResourceLocation loc) {
 		Minecraft minecraft = Minecraft.getMinecraft();

@@ -2,7 +2,7 @@ package su.terrafirmagreg;
 
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = Tags.MOD_ID, name = Tags.MOD_ID + "/" + Tags.MOD_NAME)
+@Config(modid = Tags.MOD_ID, name = Tags.MOD_NAME + "/" + Tags.MOD_NAME)
 public class TerraFirmaGregConfig {
 
 	public static TileDataService TILE_DATA_SERVICE = new TileDataService();

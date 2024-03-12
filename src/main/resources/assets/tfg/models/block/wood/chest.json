@@ -2,7 +2,7 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "particle": "tfg:entity/chests/chest"
+    "particle": "tfg:entity/wood/chests/normal/single"
   },
   "elements": [
     {

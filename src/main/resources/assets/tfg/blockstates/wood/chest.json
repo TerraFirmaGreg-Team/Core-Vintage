@@ -3,8 +3,7 @@
   "defaults": {
     "model": "tfg:wood/chest",
     "textures": {
-      "texture": "tfg:entity/chests/chest",
-      "particle": "tfg:blocks/wood/planks"
+      "texture": "tfg:entity/chests/normal/single"
     }
   },
   "variants": {

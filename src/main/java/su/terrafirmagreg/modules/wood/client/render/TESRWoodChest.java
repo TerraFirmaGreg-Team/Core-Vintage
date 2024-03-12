@@ -56,10 +56,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 				GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
 				GlStateManager.matrixMode(5888);
 			} else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest_trap.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/trap/single.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			} else if (woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/normal/single.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			}
 		} else {
@@ -73,10 +73,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 				GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
 				GlStateManager.matrixMode(5888);
 			} else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest_trap_double.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/trap/double.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			} else if (woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/chest_double.png"));
+				bindTexture(ModUtils.getID("textures/entity/wood/chests/normal/double.png"));
 				ColourUtils.setWoodColor(woodType.getColor());
 			}
 		}
@@ -84,7 +84,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 
-		if (destroyStage < 0) ColourUtils.setWoodColor(woodType.getColor());
+		if (destroyStage < 0) {
+			assert woodType != null;
+			ColourUtils.setWoodColor(woodType.getColor());
+		}
 
 		GlStateManager.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
 		GlStateManager.scale(1.0F, -1.0F, -1.0F);
@@ -124,6 +127,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 		modelchest.renderAll();
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.popMatrix();
+		assert woodType != null;
 		ColourUtils.setWoodColor(woodType.getColor());
 
 		if (destroyStage >= 0) {

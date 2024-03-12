@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.Tags.MOD_NAME;
 
-@Config(modid = MOD_ID, name = MOD_NAME + "/" + "animal")
+@Config(modid = MOD_ID, name = MOD_NAME + "/" + "Animal")
 public class ModuleAnimalConfig {
 
 	@Config.Name("Blocks")
@@ -18,30 +18,19 @@ public class ModuleAnimalConfig {
 	@Config.LangKey("config." + MOD_ID + ".animal.blocks")
 	public static final BlocksCategory BLOCKS = new BlocksCategory();
 
+	public static final class BlocksCategory {}
+
 	@Config.Name("Items")
 	@Config.Comment("Items settings")
 	@Config.LangKey("config." + MOD_ID + ".animal.items")
 	public static final ItemsCategory ITEMS = new ItemsCategory();
 
+	public static final class ItemsCategory {}
+
 	@Config.Name("Entities")
 	@Config.Comment("Entities settings")
 	@Config.LangKey("config." + MOD_ID + ".animal.entities")
 	public static final EntitiesCategory ENTITIES = new EntitiesCategory();
-
-	@Config.Name("Misc")
-	@Config.Comment("Miscellaneous")
-	@Config.LangKey("config." + MOD_ID + ".animal.misc")
-	public static final MiscCategory MISC = new MiscCategory();
-
-	public static final class BlocksCategory {
-
-
-	}
-
-	public static final class ItemsCategory {
-
-
-	}
 
 	public static final class EntitiesCategory {
 		@Config.Comment("Alpaca")
@@ -50,7 +39,7 @@ public class ModuleAnimalConfig {
 
 		@Config.Comment("Sheep")
 		@Config.LangKey("config." + MOD_ID + ".animal.entities.sheep")
-		public static final Sheep SHEEP = new Sheep();
+		public final Sheep SHEEP = new Sheep();
 
 		@Config.Comment("Cow")
 		@Config.LangKey("config." + MOD_ID + ".animal.entities.cow")
@@ -1064,10 +1053,12 @@ public class ModuleAnimalConfig {
 
 	}
 
-	public static final class MiscCategory {
+	@Config.Name("Misc")
+	@Config.Comment("Miscellaneous")
+	@Config.LangKey("config." + MOD_ID + ".animal.misc")
+	public static final MiscCategory MISC = new MiscCategory();
 
-
-	}
+	public static final class MiscCategory {}
 
 	static {
 		ConfigAnytime.register(ModuleAnimalConfig.class);

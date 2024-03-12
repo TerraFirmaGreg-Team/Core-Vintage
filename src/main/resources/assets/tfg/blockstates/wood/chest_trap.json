@@ -4,8 +4,7 @@
   "defaults": {
     "model": "tfg:wood/chest",
     "textures": {
-      "texture": "tfg:entity/chests/chest_trap",
-      "particle": "tfg:entity/chests/chest_trap"
+      "texture": "tfg:entity/chests/trap/single"
     }
   },
   "variants": {

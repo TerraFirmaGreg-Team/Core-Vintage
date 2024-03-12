@@ -79,7 +79,6 @@ dependencies {
         implementation rfg.deobf("curse.maven:had-enough-items-557549:4810661")
         implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
         implementation rfg.deobf("curse.maven:reid-629017:4505486")
-        implementation rfg.deobf("curse.maven:configanytime-870276:4576653")
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
         implementation rfg.deobf("curse.maven:common-capabilities-247007:3053017-sources-3053019-javadoc-3053020")
         implementation rfg.deobf("curse.maven:cyclops-core-232758:3159497-sources-3159499-javadoc-3159500")

@@ -171,6 +171,7 @@ dependencies {
     annotationProcessor 'org.jetbrains:annotations:24.1.0'
 
     implementation 'it.unimi.dsi:fastutil:8.5.+'
+    implementation 'com.cleanroommc:configanytime:2.0'
     implementation "info.loenwind.autoconfig:AutoConfig:1.12.2-1.0.2"
     implementation "info.loenwind.autosave:AutoSave:1.12.2-1.0.11"
 

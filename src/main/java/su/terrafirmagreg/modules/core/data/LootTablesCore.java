@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.core.api.loot.ApplyRequiredSkill;
 import su.terrafirmagreg.modules.core.api.loot.ApplySimpleSkill;
 
-public class LootTablesCore {
+public final class LootTablesCore {
 
 	public static void onRegister(RegistryManager registry) {
 

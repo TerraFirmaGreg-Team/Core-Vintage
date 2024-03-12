@@ -10,11 +10,11 @@ public final class ItemsCore {
 	public static ItemDebug WAND;
 
 
-	public static void onRegister(RegistryManager manager) {
+	public static void onRegister(RegistryManager registry) {
 
 		//==== Other =================================================================================================//
 
-		manager.registerAuto(WAND = new ItemDebug());
+		registry.registerAuto(WAND = new ItemDebug());
 
 
 	}

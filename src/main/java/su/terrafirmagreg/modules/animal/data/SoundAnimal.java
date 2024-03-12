@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.animal.data;
 import net.minecraft.util.SoundEvent;
 import su.terrafirmagreg.api.registry.RegistryManager;
 
-public class SoundAnimal {
+public final class SoundAnimal {
 
 	public static SoundEvent ANIMAL_BEAR_SAY;
 	public static SoundEvent ANIMAL_BEAR_CRY;

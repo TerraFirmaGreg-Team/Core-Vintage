@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.animal.objects.items.ItemAnimalMisc;
 
 
-public class ItemsAnimal {
+public final class ItemsAnimal {
 
 	public static ItemAnimalMisc BLADDER;
 	public static ItemAnimalMisc WOOL;

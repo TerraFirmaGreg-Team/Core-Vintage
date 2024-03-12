@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.device.objects.items.ItemIronFlask;
 import su.terrafirmagreg.modules.device.objects.items.ItemLeatherFlask;
 
 
-public class ItemsDevice {
+public final class ItemsDevice {
 
 	public static ItemFireStarter FIRESTARTER;
 	public static ItemDeviceMisc LEATHER_SIDE;

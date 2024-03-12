@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.animal.objects.entities.huntable.*;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.*;
 import su.terrafirmagreg.modules.animal.objects.entities.predator.*;
 
-public class EntitiesAnimal {
+public final class EntitiesAnimal {
 
 	public static void onRegister(RegistryManager registry) {
 

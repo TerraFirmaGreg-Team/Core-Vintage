@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockAlloyCalculator;
 
 
-public class BlocksDevice {
+public final class BlocksDevice {
 
 	public static BlockAlloyCalculator ALLOY_CALCULATOR;
 

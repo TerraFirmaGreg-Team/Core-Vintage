@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.data;
 import net.minecraft.util.SoundEvent;
 import su.terrafirmagreg.api.registry.RegistryManager;
 
-public class SoundDevice {
+public final class SoundDevice {
 
 	public static SoundEvent FLASK_BREAK;
 	public static SoundEvent FIRE_STARTER;

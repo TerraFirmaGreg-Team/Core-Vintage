@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.animal.data;
 import net.minecraft.util.ResourceLocation;
 import su.terrafirmagreg.api.registry.RegistryManager;
 
-public class LootTablesAnimal {
+public final class LootTablesAnimal {
 	public static ResourceLocation ANIMALS_BLACK_BEAR;
 	public static ResourceLocation ANIMALS_GRIZZLY_BEAR;
 	public static ResourceLocation ANIMALS_POLAR_BEAR;

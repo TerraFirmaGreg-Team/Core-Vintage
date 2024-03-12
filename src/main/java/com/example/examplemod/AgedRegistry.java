@@ -74,8 +74,7 @@ public class AgedRegistry {
 			newFluid = FluidRegistry.getFluid(newFluid.getName());
 		}
 		FluidRegistry.addBucketForFluid(newFluid);
-		FluidWrapper properties = FluidsTFC.getWrapper(newFluid);
-		return properties;
+		return FluidsTFC.getWrapper(newFluid);
 	}
 
 	public static void registerAgedDrinks(RegistryEvent.Register<BarrelRecipe> event) {

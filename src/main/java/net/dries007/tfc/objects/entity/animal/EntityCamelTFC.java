@@ -10,7 +10,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.api.util.IRidable;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -37,6 +36,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -65,14 +65,14 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_CAMEL_CRY : TFCSounds.ANIMAL_CAMEL_SAY;
+		return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_CAMEL_CRY : SoundAnimal.ANIMAL_CAMEL_SAY;
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return TFCSounds.ANIMAL_CAMEL_HURT;}
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_CAMEL_HURT;}
 
 	@Override
-	protected SoundEvent getDeathSound() {return TFCSounds.ANIMAL_CAMEL_DEATH;}
+	protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_CAMEL_DEATH;}
 
 	@SuppressWarnings("deprecation")
 	protected void playStepSound(BlockPos pos, Block blockIn) {
@@ -163,14 +163,14 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
 		this.geneVariant = i;
 		EntityCamelTFC father = (EntityCamelTFC) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-		                                .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
 		this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
 		if (this.rand.nextFloat() < 0.03F) {

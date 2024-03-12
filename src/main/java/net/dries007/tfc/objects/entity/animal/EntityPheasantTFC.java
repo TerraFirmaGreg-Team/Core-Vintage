@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.entity.animal;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IHuntable;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -23,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -119,12 +119,12 @@ public class EntityPheasantTFC extends EntityAnimalTFC implements IHuntable {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_PHEASANT_HURT;
+		return SoundAnimal.ANIMAL_PHEASANT_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_PHEASANT_DEATH;
+		return SoundAnimal.ANIMAL_PHEASANT_DEATH;
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class EntityPheasantTFC extends EntityAnimalTFC implements IHuntable {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return TFCSounds.ANIMAL_PHEASANT_SAY;
+		return SoundAnimal.ANIMAL_PHEASANT_SAY;
 	}
 
 	@Nullable

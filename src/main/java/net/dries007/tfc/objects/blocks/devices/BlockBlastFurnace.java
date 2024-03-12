@@ -12,7 +12,6 @@ import net.dries007.tfc.objects.blocks.BlockFireBrick;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEBlastFurnace;
 import net.dries007.tfc.objects.te.TEMetalSheet;
@@ -30,6 +29,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,7 +51,7 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
 		};
 		BLAST_FURNACE_CHIMNEY = new Multiblock()
 				.match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksTFC.MOLTEN || state.getMaterial()
-				                                                                                    .isReplaceable())
+						.isReplaceable())
 				.match(new BlockPos(0, 0, 1), stoneMatcher)
 				.match(new BlockPos(0, 0, -1), stoneMatcher)
 				.match(new BlockPos(1, 0, 0), stoneMatcher)

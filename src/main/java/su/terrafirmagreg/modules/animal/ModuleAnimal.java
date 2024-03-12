@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 public class ModuleAnimal extends ModuleBase {
 	public static final Logger LOGGER = LogManager.getLogger(ModuleAnimal.class.getSimpleName());
 
-	public static final CreativeTabs ANIMAL_TAB = new CreativeTabBase("misc", "animal/wand");
+	public static final CreativeTabs ANIMAL_TAB = new CreativeTabBase("misc", "animal/product/wool");
 
 
 	public static IPacketService PACKET_SERVICE;

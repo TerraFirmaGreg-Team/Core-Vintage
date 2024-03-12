@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.entity.animal;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IPredator;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
@@ -38,6 +37,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -155,12 +155,12 @@ public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredato
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_BEAR_HURT;
+		return SoundAnimal.ANIMAL_BEAR_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_BEAR_DEATH;
+		return SoundAnimal.ANIMAL_BEAR_DEATH;
 	}
 
 	@Override
@@ -246,7 +246,7 @@ public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredato
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_BEAR_CRY : TFCSounds.ANIMAL_BEAR_SAY;
+		return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_BEAR_CRY : SoundAnimal.ANIMAL_BEAR_SAY;
 	}
 
 	@Nullable

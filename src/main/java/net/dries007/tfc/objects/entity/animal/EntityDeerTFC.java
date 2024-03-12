@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.entity.animal;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IHuntable;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -27,6 +26,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -105,12 +105,12 @@ public class EntityDeerTFC extends EntityAnimalMammal implements IHuntable {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_DEER_HURT;
+		return SoundAnimal.ANIMAL_DEER_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_DEER_DEATH;
+		return SoundAnimal.ANIMAL_DEER_DEATH;
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class EntityDeerTFC extends EntityAnimalMammal implements IHuntable {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_DEER_CRY : TFCSounds.ANIMAL_DEER_SAY;
+		return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DEER_CRY : SoundAnimal.ANIMAL_DEER_SAY;
 	}
 
 	@Nullable

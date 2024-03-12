@@ -204,12 +204,12 @@ public final class ItemsTFC {
 		{
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				simpleItems.add(register(r, "rock/" + rock.getRegistryName()
-				                                          .getPath()
-				                                          .toLowerCase(), new ItemRock(rock), CT_ROCK_ITEMS));
+						.getPath()
+						.toLowerCase(), new ItemRock(rock), CT_ROCK_ITEMS));
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				simpleItems.add(register(r, "brick/" + rock.getRegistryName()
-				                                           .getPath()
-				                                           .toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
+						.getPath()
+						.toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
 		}
 
 		{
@@ -218,7 +218,7 @@ public final class ItemsTFC {
 				b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK_ITEMS));
 				if (ore.isGraded()) {
 					simpleItems.add(register(r, "ore/small/" + ore.getRegistryName()
-					                                              .getPath(), new ItemSmallOre(ore), CT_ROCK_ITEMS));
+							.getPath(), new ItemSmallOre(ore), CT_ROCK_ITEMS));
 				}
 			}
 			allOreItems = b.build();
@@ -237,7 +237,7 @@ public final class ItemsTFC {
 				if (type != Metal.ItemType.BUCKET && type.hasType(metal)) // buckets registered separately
 				{
 					simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName()
-					                                                                              .getPath(), Metal.ItemType.create(metal, type), CT_METAL));
+							.getPath(), Metal.ItemType.create(metal, type), CT_METAL));
 				}
 			}
 		}
@@ -254,13 +254,13 @@ public final class ItemsTFC {
 
 		for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks())
 			simpleItems.add(register(r, slab.getRegistryName()
-			                                .getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
+					.getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
 
 		for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
 			simpleItems.add(register(r, "wood/lumber/" + wood.getRegistryName()
-			                                                 .getPath(), new ItemLumberTFC(wood), CT_WOOD));
+					.getPath(), new ItemLumberTFC(wood), CT_WOOD));
 			simpleItems.add(register(r, "wood/boat/" + wood.getRegistryName()
-			                                               .getPath(), new ItemBoatTFC(wood), CT_WOOD));
+					.getPath(), new ItemBoatTFC(wood), CT_WOOD));
 		}
 
 		simpleItems.add(register(r, "stick_bunch", new ItemMisc(Size.NORMAL, Weight.LIGHT), CT_WOOD));
@@ -270,9 +270,9 @@ public final class ItemsTFC {
 		for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
 			for (Rock.ToolType type : Rock.ToolType.values()) {
 				simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName()
-				                                                                            .getPath(), type.create(cat), CT_ROCK_ITEMS));
+						.getPath(), type.create(cat), CT_ROCK_ITEMS));
 				simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-				                                                                                 .getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
+						.getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
 			}
 		}
 
@@ -286,7 +286,7 @@ public final class ItemsTFC {
 					ItemPottery item = new ItemMold(type);
 					register(r, "ceramics/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY);
 					simpleItems.add(register(r, "ceramics/unfired/mold/" + type.name()
-					                                                           .toLowerCase(), new ItemUnfiredMold(type), CT_POTTERY));
+							.toLowerCase(), new ItemUnfiredMold(type), CT_POTTERY));
 				}
 			}
 
@@ -348,7 +348,6 @@ public final class ItemsTFC {
 		simpleItems.add(register(r, "crop/product/jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 		simpleItems.add(register(r, "crop/product/dirty_jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 
-		simpleItems.add(register(r, "firestarter", new ItemFireStarter(), CT_MISC));
 		simpleItems.add(register(r, "straw", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"), CT_MISC));
 		simpleItems.add(register(r, "glass_shard", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 		simpleItems.add(register(r, "handstone", new ItemCraftingTool(250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"), CT_MISC));
@@ -393,11 +392,11 @@ public final class ItemsTFC {
 	public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
 		// Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
 		TerraFirmaCraft.getLog()
-		               .info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+				.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
 		event.getRegistry().registerAll(
 				new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
 				new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName())
-				                        .setTranslationKey("glassBottle")
+						.setTranslationKey("glassBottle")
 		);
 
 		if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {

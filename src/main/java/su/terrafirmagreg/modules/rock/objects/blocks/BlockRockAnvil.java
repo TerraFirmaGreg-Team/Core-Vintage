@@ -133,7 +133,7 @@ public class BlockRockAnvil extends BlockRock {
 //			else if (te.isItemValid(TEMetalAnvil.SLOT_HAMMER, heldItem)) {
 //				if (!worldIn.isRemote && te.attemptWelding(playerIn)) {
 //					// Valid welding occurred.
-//					worldIn.playSound(null, pos, TFCSounds.ANVIL_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+//					worldIn.playSound(null, pos, SoundAnimal.ANVIL_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
 //					return true;
 //				}
 //			}

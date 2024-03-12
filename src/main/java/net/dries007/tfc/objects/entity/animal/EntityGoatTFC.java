@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.entity.animal;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAILawnmower;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -27,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -134,12 +134,12 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return TFCSounds.ANIMAL_GOAT_HURT;
+		return SoundAnimal.ANIMAL_GOAT_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFCSounds.ANIMAL_GOAT_DEATH;
+		return SoundAnimal.ANIMAL_GOAT_DEATH;
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_GOAT_CRY : TFCSounds.ANIMAL_GOAT_SAY;
+		return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_GOAT_CRY : SoundAnimal.ANIMAL_GOAT_SAY;
 	}
 
 	@Nullable

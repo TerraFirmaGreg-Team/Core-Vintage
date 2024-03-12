@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.blocks;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.devices.BlockCharcoalForge;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TECharcoalForge;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -29,6 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

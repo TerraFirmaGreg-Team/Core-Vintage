@@ -11,7 +11,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.util.Helpers;
@@ -37,6 +36,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -65,7 +65,7 @@ public class BlockLogPile extends Block implements ILightableBlock {
 			return state.getMaterial() == Material.GLASS && !(state.getBlock() instanceof BlockPane); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
 		}
 		return !state.getMaterial()
-		             .getCanBurn() && state.isNormalCube(); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
+				.getCanBurn() && state.isNormalCube(); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
 	}
 
 	private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
@@ -75,15 +75,15 @@ public class BlockLogPile extends Block implements ILightableBlock {
 			return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID || offsetState.isSideSolid(world, pos, side);
 		}
 		return !offsetState.getMaterial()
-		                   .getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID) || offsetState.isSideSolid(world, pos, side);
+				.getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID) || offsetState.isSideSolid(world, pos, side);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-		           .withProperty(AXIS, meta == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X)
-		           .withProperty(LIT, meta >= 2);
+				.withProperty(AXIS, meta == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X)
+				.withProperty(LIT, meta >= 2);
 	}
 
 	@Override
@@ -142,8 +142,8 @@ public class BlockLogPile extends Block implements ILightableBlock {
 			// 3. Open the GUI
 			ItemStack stack = player.getHeldItem(hand);
 			if (!state.getValue(LIT) && side == EnumFacing.UP && world.getBlockState(pos.up())
-			                                                          .getBlock()
-			                                                          .isReplaceable(world, pos) && ItemFireStarter.onIgnition(stack)) {
+					.getBlock()
+					.isReplaceable(world, pos) && ItemFireStarter.onIgnition(stack)) {
 				// Light the Pile
 				if (!world.isRemote) {
 					world.setBlockState(pos, state.withProperty(LIT, true));

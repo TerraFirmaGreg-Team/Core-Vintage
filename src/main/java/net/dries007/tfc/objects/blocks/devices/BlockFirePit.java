@@ -10,7 +10,6 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEFirePit;
@@ -46,6 +45,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -66,8 +66,8 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
 	public BlockFirePit() {
 		super(Material.WOOD);
 		setDefaultState(blockState.getBaseState()
-		                          .withProperty(LIT, false)
-		                          .withProperty(ATTACHMENT, FirePitAttachment.NONE));
+				.withProperty(LIT, false)
+				.withProperty(ATTACHMENT, FirePitAttachment.NONE));
 		disableStats();
 		setTickRandomly(true);
 		setLightLevel(1F);
@@ -79,8 +79,8 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
 	@Nonnull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-		           .withProperty(LIT, (meta & 1) > 0)
-		           .withProperty(ATTACHMENT, FirePitAttachment.valueOf(meta >> 1));
+				.withProperty(LIT, (meta & 1) > 0)
+				.withProperty(ATTACHMENT, FirePitAttachment.valueOf(meta >> 1));
 	}
 
 	@Override
@@ -379,7 +379,9 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
 	}
 
 	public enum FirePitAttachment implements IStringSerializable {
-		NONE, GRILL, COOKING_POT;
+		NONE,
+		GRILL,
+		COOKING_POT;
 
 		private static final FirePitAttachment[] VALUES = values();
 

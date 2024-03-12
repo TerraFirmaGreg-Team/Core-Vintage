@@ -290,7 +290,7 @@ public class TEAnvilTFC extends TEInventory {
 			if (fluxStack.isEmpty()) {
 				// No flux
 				TerraFirmaCraft.getNetwork()
-				               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
+						.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
 				return false;
 			}
 
@@ -300,10 +300,10 @@ public class TEAnvilTFC extends TEInventory {
 			if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
 				if (cap1 instanceof IItemHeat && cap2 instanceof IItemHeat) {
 					TerraFirmaCraft.getNetwork()
-					               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
+							.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
 				} else {
 					TerraFirmaCraft.getNetwork()
-					               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+							.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
 				}
 				return false;
 			}
@@ -332,7 +332,7 @@ public class TEAnvilTFC extends TEInventory {
 
 		// For when there is both inputs but no recipe that matches
 		TerraFirmaCraft.getNetwork()
-		               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+				.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
 		return false;
 	}
 

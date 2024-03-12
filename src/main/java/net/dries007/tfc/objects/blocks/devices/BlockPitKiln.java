@@ -7,7 +7,6 @@ package net.dries007.tfc.objects.blocks.devices;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -37,6 +36,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -197,8 +197,8 @@ public class BlockPitKiln extends Block implements ILightableBlock {
 	@Override
 	public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
 		return world.getBlockState(pos)
-		            .getActualState(world, pos)
-		            .getValue(LIT) ? 120 : 0; // Twice as much as the highest vanilla level (60)
+				.getActualState(world, pos)
+				.getValue(LIT) ? 120 : 0; // Twice as much as the highest vanilla level (60)
 	}
 
 	@Override

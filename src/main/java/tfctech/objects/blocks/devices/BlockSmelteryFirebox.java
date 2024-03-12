@@ -6,7 +6,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.BlockHorizontal;
@@ -34,6 +33,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
@@ -73,8 +73,8 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 	@Nonnull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-		           .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-		           .withProperty(LIT, meta / 4 % 2 != 0);
+				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+				.withProperty(LIT, meta / 4 % 2 != 0);
 	}
 
 	@Override
@@ -164,9 +164,10 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 						TechGuiHandler.openGui(world, pos, player, TechGuiHandler.Type.SMELTERY_FIREBOX);
 					}
 				} else {
-					if (held.getItem() instanceof ItemBlock && ((ItemBlock) held.getItem()).getBlock() instanceof BlockSmelteryCauldron && world.getBlockState(pos.up())
-					                                                                                                                            .getMaterial()
-					                                                                                                                            .isReplaceable()) {
+					if (held.getItem() instanceof ItemBlock && ((ItemBlock) held.getItem()).getBlock() instanceof BlockSmelteryCauldron && world
+							.getBlockState(pos.up())
+							.getMaterial()
+							.isReplaceable()) {
 						held.getItem().onItemUse(player, world, pos.up(), hand, side, hitX, hitY, hitZ);
 					} else {
 						player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);

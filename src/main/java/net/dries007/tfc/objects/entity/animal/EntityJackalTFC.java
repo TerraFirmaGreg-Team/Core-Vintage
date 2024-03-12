@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.entity.animal;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IPredator;
-import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
@@ -28,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -58,10 +58,10 @@ public class EntityJackalTFC extends EntityCoyoteTFC implements IPredator {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return TFCSounds.ANIMAL_JACKAL_HURT;}
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_JACKAL_HURT;}
 
 	@Override
-	protected SoundEvent getDeathSound() {return TFCSounds.ANIMAL_JACKAL_DEATH;}
+	protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_JACKAL_DEATH;}
 
 	@Override
 	protected void initEntityAI() {
@@ -91,7 +91,7 @@ public class EntityJackalTFC extends EntityCoyoteTFC implements IPredator {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return Constants.RNG.nextInt(100) < 5 ? TFCSounds.ANIMAL_JACKAL_CRY : TFCSounds.ANIMAL_JACKAL_SAY;
+		return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_JACKAL_CRY : SoundAnimal.ANIMAL_JACKAL_SAY;
 	}
 
 	@Nullable

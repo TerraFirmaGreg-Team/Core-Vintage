@@ -8,7 +8,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -33,6 +32,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -52,9 +52,9 @@ public class BlockOven extends Block implements ILightableBlock, IItemSize {
 		setResistance(3.0f);
 		setTickRandomly(true);
 		this.setDefaultState(this.blockState.getBaseState()
-		                                    .withProperty(CURED, false)
-		                                    .withProperty(FACING, EnumFacing.NORTH)
-		                                    .withProperty(LIT, false));
+				.withProperty(CURED, false)
+				.withProperty(FACING, EnumFacing.NORTH)
+				.withProperty(LIT, false));
 	}
 
 	/**
@@ -288,9 +288,9 @@ public class BlockOven extends Block implements ILightableBlock, IItemSize {
 		if (cured)
 			facing -= 8;
 		return this.getDefaultState()
-		           .withProperty(CURED, cured)
-		           .withProperty(LIT, lit)
-		           .withProperty(FACING, EnumFacing.byHorizontalIndex(facing));
+				.withProperty(CURED, cured)
+				.withProperty(LIT, lit)
+				.withProperty(FACING, EnumFacing.byHorizontalIndex(facing));
 	}
 
 	@Override

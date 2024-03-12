@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelDuckTFC;
 import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.objects.entity.animal.EntityDuckTFC;
@@ -49,9 +49,9 @@ public class RenderDuckTFC extends RenderLiving<EntityDuckTFC> {
 		if (percent < 0.65f) {
 			return DUCKLING_TEXTURE;
 		} else if (duck.getGender() == EntityAnimalTFC.Gender.MALE) {
-			return duck.getAge() == IAnimalTFC.Age.OLD ? DRAKE_OLD : DRAKE_YOUNG;
+			return duck.getAge() == IAnimal.Age.OLD ? DRAKE_OLD : DRAKE_YOUNG;
 		} else {
-			return duck.getAge() == IAnimalTFC.Age.OLD ? DUCK_OLD : DUCK_YOUNG;
+			return duck.getAge() == IAnimal.Age.OLD ? DUCK_OLD : DUCK_YOUNG;
 		}
 	}
 

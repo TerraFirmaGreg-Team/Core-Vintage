@@ -10,7 +10,7 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.types.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -151,7 +151,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 					TextComponentTranslation tooltip = getTooltip();
 					if (tooltip != null) {
 						TerraFirmaCraft.getNetwork()
-						               .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+								.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
 					}
 				}
 			}
@@ -162,7 +162,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 					TextComponentTranslation tooltip = getTooltip();
 					if (tooltip != null) {
 						TerraFirmaCraft.getNetwork()
-						               .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+								.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
 					}
 				}
 			}

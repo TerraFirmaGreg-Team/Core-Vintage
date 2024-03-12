@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.entity.ai;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 
 //AI to avoid players unless familiarized. Must be applied to EntityAnimal that implements IAnimalTFC
-public class EntityAITamableAvoidPlayer<T extends EntityCreature & IAnimalTFC> extends EntityAIAvoidEntity<EntityPlayer> {
+public class EntityAITamableAvoidPlayer<T extends EntityCreature & IAnimal> extends EntityAIAvoidEntity<EntityPlayer> {
 	public EntityAITamableAvoidPlayer(T entityIn, float avoidDistanceIn, double farSpeedIn, double nearSpeedIn) {
 		super(entityIn, EntityPlayer.class, avoidDistanceIn, farSpeedIn, nearSpeedIn);
 	}
@@ -15,7 +15,7 @@ public class EntityAITamableAvoidPlayer<T extends EntityCreature & IAnimalTFC> e
 	@Override
 	public boolean shouldExecute() {
 		EntityCreature animal = this.entity;
-		if (((IAnimalTFC) animal).getFamiliarity() > 0 || isBegging(animal)) //since AITempt actually changes movement, and begging just turns the head
+		if (((IAnimal) animal).getFamiliarity() > 0 || isBegging(animal)) //since AITempt actually changes movement, and begging just turns the head
 		{
 			return false;
 		}

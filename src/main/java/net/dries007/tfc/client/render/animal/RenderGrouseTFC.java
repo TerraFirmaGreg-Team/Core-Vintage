@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelGrouseTFC;
 import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
@@ -49,9 +49,9 @@ public class RenderGrouseTFC extends RenderLiving<EntityGrouseTFC> {
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
 		} else if (grouse.getGender() == EntityAnimalTFC.Gender.MALE) {
-			return grouse.getAge() == IAnimalTFC.Age.OLD ? MALE_YOUNG : MALE_OLD;
+			return grouse.getAge() == IAnimal.Age.OLD ? MALE_YOUNG : MALE_OLD;
 		} else {
-			return grouse.getAge() == IAnimalTFC.Age.OLD ? FEMALE_YOUNG : FEMALE_OLD;
+			return grouse.getAge() == IAnimal.Age.OLD ? FEMALE_YOUNG : FEMALE_OLD;
 		}
 	}
 

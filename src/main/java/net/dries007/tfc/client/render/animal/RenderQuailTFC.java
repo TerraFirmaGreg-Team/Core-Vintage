@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelQuailTFC;
 import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.objects.entity.animal.EntityQuailTFC;
@@ -49,9 +49,9 @@ public class RenderQuailTFC extends RenderLiving<EntityQuailTFC> {
 		if (percent < 0.65f) {
 			return CHICK_TEXTURE;
 		} else if (quail.getGender() == EntityAnimalTFC.Gender.MALE) {
-			return quail.getAge() == IAnimalTFC.Age.OLD ? MALE_OLD : MALE_YOUNG;
+			return quail.getAge() == IAnimal.Age.OLD ? MALE_OLD : MALE_YOUNG;
 		} else {
-			return quail.getAge() == IAnimalTFC.Age.OLD ? FEMALE_OLD : FEMALE_YOUNG;
+			return quail.getAge() == IAnimal.Age.OLD ? FEMALE_OLD : FEMALE_YOUNG;
 		}
 	}
 

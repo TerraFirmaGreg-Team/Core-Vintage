@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
 import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
 import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
@@ -215,8 +215,8 @@ public class ModelHorseTFC extends ModelHorse {
 	@Override
 	public void render(@Nonnull Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		AbstractHorse horse = (AbstractHorse) entityIn;
-		IAnimalTFC animal = (IAnimalTFC) horse;
-		if (animal.getAge() != IAnimalTFC.Age.CHILD) {
+		IAnimal animal = (IAnimal) horse;
+		if (animal.getAge() != IAnimal.Age.CHILD) {
 			if (horse.isHorseSaddled()) {
 				this.horseFaceRopes.render(scale);
 				this.horseSaddleBottom.render(scale);

@@ -8,9 +8,9 @@ package net.dries007.tfc.objects.entity.animal;
 import com.google.common.base.Predicates;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.api.types.IPredator;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -46,7 +46,7 @@ import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC {
+public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimal {
 	public static final long MATING_COOLDOWN_DEFAULT_TICKS = ICalendar.TICKS_IN_HOUR * 2;
 
 	//Values that has a visual effect on client
@@ -96,11 +96,11 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
 	 * Find and charms a near female animal of this animal
 	 * Used by males to try mating with females
 	 */
-	public static <T extends EntityAnimal & IAnimalTFC> void findFemaleMate(T maleAnimal) {
+	public static <T extends EntityAnimal & IAnimal> void findFemaleMate(T maleAnimal) {
 		List<EntityAnimal> list = maleAnimal.world.getEntitiesWithinAABB(maleAnimal.getClass(), maleAnimal.getEntityBoundingBox()
-		                                                                                                  .grow(8.0D));
+				.grow(8.0D));
 		for (EntityAnimal femaleAnimal : list) {
-			IAnimalTFC female = (IAnimalTFC) femaleAnimal;
+			IAnimal female = (IAnimal) femaleAnimal;
 			if (female.getGender() == Gender.FEMALE && !femaleAnimal.isInLove() && female.isReadyToMate()) {
 				femaleAnimal.setInLove(null);
 				maleAnimal.setInLove(null);
@@ -109,7 +109,7 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
 		}
 	}
 
-	public static <T extends EntityAnimal & IAnimalTFC> void addCommonLivestockAI(T entity, double speedMult) {
+	public static <T extends EntityAnimal & IAnimal> void addCommonLivestockAI(T entity, double speedMult) {
 		entity.tasks.addTask(2, new EntityAIMate(entity, 1.0D));
 
 		for (ItemStack is : OreDictionary.getOres("grain")) {
@@ -200,18 +200,18 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-		                                                                                      .name()
-		                                                                                      .toLowerCase());
+				.name()
+				.toLowerCase());
 	}
 
 	@Nullable
 	@Override
 	public EntityAgeable createChild(@Nonnull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
-		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimalTFC) {
+		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);
 			this.resetInLove();
-			this.onFertilized((IAnimalTFC) other);
+			this.onFertilized((IAnimal) other);
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
@@ -363,7 +363,7 @@ public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC
 						//Show tooltips
 						if (this.isFertilized() && this.getType() == Type.MAMMAL) {
 							TerraFirmaCraft.getNetwork()
-							               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+									.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
 						}
 					}
 				}

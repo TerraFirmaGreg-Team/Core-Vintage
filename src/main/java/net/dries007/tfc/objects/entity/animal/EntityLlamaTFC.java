@@ -10,8 +10,8 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -56,7 +56,7 @@ import java.util.function.BiConsumer;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @ParametersAreNonnullByDefault
-public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestock {
+public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	//Values that has a visual effect on client
 	protected static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityLlamaTFC.class, DataSerializers.BOOLEAN);
 	protected static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(EntityLlamaTFC.class, DataSerializers.VARINT);
@@ -74,10 +74,10 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestoc
 
 	@SuppressWarnings("unused")
 	public EntityLlamaTFC(World world) {
-		this(world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
 	}
 
-	public EntityLlamaTFC(World world, IAnimalTFC.Gender gender, int birthDay) {
+	public EntityLlamaTFC(World world, IAnimal.Gender gender, int birthDay) {
 		super(world);
 		this.setGender(gender);
 		this.setBirthDay(birthDay);
@@ -150,7 +150,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestoc
 						//Show tooltips
 						if (this.isFertilized() && this.getType() == Type.MAMMAL) {
 							TerraFirmaCraft.getNetwork()
-							               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+									.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
 						}
 					}
 				}
@@ -205,7 +205,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestoc
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimalTFC male) {
+	public void onFertilized(@Nonnull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		int selection = this.rand.nextInt(9);
 		int i;
@@ -220,14 +220,14 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestoc
 		this.geneVariant = i;
 		EntityLlamaTFC father = (EntityLlamaTFC) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-		                                .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
 		this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
 		if (this.rand.nextFloat() < 0.03F) {
@@ -258,16 +258,16 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestoc
 	}
 
 	@Override
-	public IAnimalTFC.Type getType() {
-		return IAnimalTFC.Type.MAMMAL;
+	public IAnimal.Type getType() {
+		return IAnimal.Type.MAMMAL;
 	}
 
 	@Override
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-		                                                                                      .name()
-		                                                                                      .toLowerCase());
+				.name()
+				.toLowerCase());
 	}
 
 	@Override
@@ -285,7 +285,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestoc
 
 	@Override
 	public boolean isChild() {
-		return this.getAge() == IAnimalTFC.Age.CHILD;
+		return this.getAge() == IAnimal.Age.CHILD;
 	}
 
 	@Nonnull
@@ -457,14 +457,14 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimalTFC, ILivestoc
 	@Override
 	public EntityLlama createChild(@Nonnull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
-		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimalTFC) {
+		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);
 			this.resetInLove();
-			this.onFertilized((IAnimalTFC) other);
+			this.onFertilized((IAnimal) other);
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
-			return new EntityLlamaTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			return new EntityLlamaTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 		}
 		return null;
 	}

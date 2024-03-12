@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.compat.waila.providers;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.compat.waila.interfaces.IWailaEntity;
 import net.dries007.tfc.objects.entity.animal.EntityAnimalMammal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -26,8 +26,8 @@ public class AnimalProvider implements IWailaEntity {
 	@Override
 	public List<String> getTooltip(@Nonnull Entity entity, @Nonnull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
-		if (entity instanceof IAnimalTFC) {
-			IAnimalTFC animal = (IAnimalTFC) entity;
+		if (entity instanceof IAnimal) {
+			IAnimal animal = (IAnimal) entity;
 			boolean familiarized = animal.getFamiliarity() > 0.15f;
 			if (animal.getAdultFamiliarityCap() > 0) {
 				currentTooltip.add(new TextComponentTranslation(familiarized ? "waila.tfc.animal.familiarized" : "waila.tfc.animal.not_familiarized").getFormattedText());
@@ -49,7 +49,7 @@ public class AnimalProvider implements IWailaEntity {
 							currentTooltip.add(new TextComponentTranslation("waila.tfc.animal.can_mate").getFormattedText());
 						}
 						if (animal.isFertilized()) {
-							if (animal.getType() == IAnimalTFC.Type.MAMMAL) {
+							if (animal.getType() == IAnimal.Type.MAMMAL) {
 								currentTooltip.add(new TextComponentTranslation("waila.tfc.animal.pregnant").getFormattedText());
 								// In 1.15+ this will move to AnimalProperties and everything needed will be there
 								// For 1.12, addons will need to either extend EntityAnimalMammal or handle the tooltip themselves
@@ -65,7 +65,7 @@ public class AnimalProvider implements IWailaEntity {
 						if (animal.isReadyForAnimalProduct()) {
 							if (animal instanceof IShearable) {
 								currentTooltip.add(new TextComponentTranslation("waila.tfc.animal.can_shear").getFormattedText());
-							} else if (animal.getType() == IAnimalTFC.Type.OVIPAROUS) {
+							} else if (animal.getType() == IAnimal.Type.OVIPAROUS) {
 								currentTooltip.add(new TextComponentTranslation("waila.tfc.animal.has_eggs").getFormattedText());
 							} else {
 								currentTooltip.add(new TextComponentTranslation("waila.tfc.animal.has_milk").getFormattedText());
@@ -81,6 +81,6 @@ public class AnimalProvider implements IWailaEntity {
 	@Nonnull
 	@Override
 	public List<Class<?>> getLookupClass() {
-		return Collections.singletonList(IAnimalTFC.class);
+		return Collections.singletonList(IAnimal.class);
 	}
 }

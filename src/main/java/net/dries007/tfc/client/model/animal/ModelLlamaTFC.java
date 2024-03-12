@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -83,8 +83,8 @@ public class ModelLlamaTFC extends ModelQuadruped {
 		if (((EntityAnimal) entityIn).isChild()) {
 			double ageScale = 1;
 			double percent = 1;
-			if (entityIn instanceof IAnimalTFC) {
-				percent = ((IAnimalTFC) entityIn).getPercentToAdulthood();
+			if (entityIn instanceof IAnimal) {
+				percent = ((IAnimal) entityIn).getPercentToAdulthood();
 				ageScale = 1 / (2.0D - percent);
 			}
 			GlStateManager.scale(ageScale, ageScale, ageScale);

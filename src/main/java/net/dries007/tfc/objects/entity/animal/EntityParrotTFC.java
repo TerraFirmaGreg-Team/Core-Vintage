@@ -9,8 +9,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -43,7 +43,7 @@ import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivestock {
+public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock {
 	private static final int DAYS_TO_ADULTHOOD = 96;
 	//Values that has a visual effect on client
 	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityParrotTFC.class, DataSerializers.BOOLEAN);
@@ -57,10 +57,10 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 
 	@SuppressWarnings("unused")
 	public EntityParrotTFC(World world) {
-		this(world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
-	public EntityParrotTFC(World world, IAnimalTFC.Gender gender, int birthDay) {
+	public EntityParrotTFC(World world, IAnimal.Gender gender, int birthDay) {
 		super(world);
 		this.setGender(gender);
 		this.setBirthDay(birthDay);
@@ -174,7 +174,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 
 	@Override
 	public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
-		return new EntityParrotTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+		return new EntityParrotTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
 	}
 
 	@Override
@@ -217,12 +217,12 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 	}
 
 	@Override
-	public IAnimalTFC.Gender getGender() {
-		return IAnimalTFC.Gender.valueOf(this.dataManager.get(GENDER));
+	public IAnimal.Gender getGender() {
+		return IAnimal.Gender.valueOf(this.dataManager.get(GENDER));
 	}
 
 	@Override
-	public void setGender(IAnimalTFC.Gender gender) {
+	public void setGender(IAnimal.Gender gender) {
 		this.dataManager.set(GENDER, gender.toBool());
 	}
 
@@ -285,7 +285,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 	}
 
 	@Override
-	public IAnimalTFC.Type getType() {
+	public IAnimal.Type getType() {
 		return Type.OVIPAROUS;
 	}
 
@@ -293,8 +293,8 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-		                                                                                      .name()
-		                                                                                      .toLowerCase());
+				.name()
+				.toLowerCase());
 	}
 
 	@Override
@@ -304,7 +304,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 
 	@Override
 	public boolean isChild() {
-		return this.getAge() == IAnimalTFC.Age.CHILD;
+		return this.getAge() == IAnimal.Age.CHILD;
 	}
 
 	@Override

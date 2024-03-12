@@ -7,9 +7,9 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.api.util.IRidable;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -46,16 +46,16 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
-public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILivestock, IRidable {
+public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestock, IRidable {
 	private static final DataParameter<Integer> DATA_COLOR_ID = EntityDataManager.createKey(EntityCamelTFC.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityCamelTFC.class, DataSerializers.BOOLEAN);
 
 	public EntityCamelTFC(World world) {
-		this(world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
 		this.setSize(0.9F, 2.0F);
 	}
 
-	public EntityCamelTFC(World world, IAnimalTFC.Gender gender, int birthDay) {
+	public EntityCamelTFC(World world, IAnimal.Gender gender, int birthDay) {
 		super(world, gender, birthDay);
 	}
 
@@ -148,7 +148,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimalTFC male) {
+	public void onFertilized(@Nonnull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		int selection = this.rand.nextInt(9);
 		int i;
@@ -269,14 +269,14 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
 	@Override
 	public EntityCamelTFC createChild(@Nonnull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
-		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimalTFC) {
+		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			super.setFertilized(true);
 			this.resetInLove();
-			this.onFertilized((IAnimalTFC) other);
+			this.onFertilized((IAnimal) other);
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally
-			return new EntityCamelTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+			return new EntityCamelTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
 		}
 		return null;
 	}

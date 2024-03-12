@@ -10,8 +10,8 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -56,7 +56,7 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @ParametersAreNonnullByDefault
 // Changes in config allow placing this animal in livestock and still respawn
-public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock {
+public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
 	//Values that has a visual effect on client
 	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityWolfTFC.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(EntityWolfTFC.class, DataSerializers.VARINT);
@@ -174,7 +174,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock 
 	}
 
 	@Override
-	public void onFertilized(IAnimalTFC male) {
+	public void onFertilized(IAnimal male) {
 		//Mark the day this female became pregnant
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 	}
@@ -210,8 +210,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock 
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-		                                                                                      .name()
-		                                                                                      .toLowerCase());
+				.name()
+				.toLowerCase());
 	}
 
 	@Override
@@ -416,7 +416,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock 
 							//Show tooltips
 							if (this.isFertilized() && this.getType() == Type.MAMMAL) {
 								TerraFirmaCraft.getNetwork()
-								               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+										.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
 							}
 						}
 					}
@@ -431,10 +431,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimalTFC, ILivestock 
 	@Override
 	public EntityWolfTFC createChild(@Nonnull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
-		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimalTFC) {
+		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);
 			this.resetInLove();
-			this.onFertilized((IAnimalTFC) other);
+			this.onFertilized((IAnimal) other);
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			// Try to return to vanilla's default method a baby of this animal, as if bred normally

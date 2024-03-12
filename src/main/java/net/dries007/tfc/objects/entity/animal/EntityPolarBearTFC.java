@@ -7,8 +7,8 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.IPredator;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
@@ -42,7 +42,7 @@ import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, IPredator, EntityAIStandAttack.IEntityStandAttack {
+public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPredator, EntityAIStandAttack.IEntityStandAttack {
 	private static final int DAYS_TO_ADULTHOOD = 180;
 	//Values that has a visual effect on client
 	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityPolarBearTFC.class, DataSerializers.BOOLEAN);
@@ -52,10 +52,10 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
 
 	@SuppressWarnings("unused")
 	public EntityPolarBearTFC(World world) {
-		this(world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+		this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalTFC.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
 	}
 
-	public EntityPolarBearTFC(World world, IAnimalTFC.Gender gender, int birthDay) {
+	public EntityPolarBearTFC(World world, IAnimal.Gender gender, int birthDay) {
 		super(world);
 		this.setSize(1.4F, 1.7F);
 		this.setGender(gender);
@@ -66,7 +66,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
 
 	@Override
 	public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
-		return new EntityPolarBearTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+		return new EntityPolarBearTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
 	}
 
 	@Override
@@ -154,12 +154,12 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
 	}
 
 	@Override
-	public IAnimalTFC.Gender getGender() {
-		return IAnimalTFC.Gender.valueOf(this.dataManager.get(GENDER));
+	public IAnimal.Gender getGender() {
+		return IAnimal.Gender.valueOf(this.dataManager.get(GENDER));
 	}
 
 	@Override
-	public void setGender(IAnimalTFC.Gender gender) {
+	public void setGender(IAnimal.Gender gender) {
 		this.dataManager.set(GENDER, gender.toBool());
 	}
 
@@ -210,16 +210,16 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
 	}
 
 	@Override
-	public IAnimalTFC.Type getType() {
-		return IAnimalTFC.Type.MAMMAL;
+	public IAnimal.Type getType() {
+		return IAnimal.Type.MAMMAL;
 	}
 
 	@Override
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-		                                                                                      .name()
-		                                                                                      .toLowerCase());
+				.name()
+				.toLowerCase());
 	}
 
 	@Override
@@ -229,7 +229,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
 
 	@Override
 	public boolean isChild() {
-		return this.getAge() == IAnimalTFC.Age.CHILD;
+		return this.getAge() == IAnimal.Age.CHILD;
 	}
 
 	@Override
@@ -291,7 +291,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimalTFC, I
 	@Override
 	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		this.setGender(IAnimalTFC.Gender.valueOf(nbt.getBoolean("gender")));
+		this.setGender(IAnimal.Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
 	}
 

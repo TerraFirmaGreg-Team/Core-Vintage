@@ -6,7 +6,6 @@
 package net.dries007.tfc.world.classic.spawner;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.ICreatureTFC;
 import net.dries007.tfc.objects.entity.animal.*;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -26,6 +25,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import su.terrafirmagreg.modules.animal.api.type.ICreature;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -85,8 +85,8 @@ public final class WorldEntitySpawnerTFC {
 		EntityLiving entity = (EntityLiving) event.getEntity();
 
 		event.getWorld()
-		     .getBiome(new BlockPos(event.getX(), event.getY(), event.getZ()))
-		     .getSpawnableList(EnumCreatureType.CREATURE);
+				.getBiome(new BlockPos(event.getX(), event.getY(), event.getZ()))
+				.getSpawnableList(EnumCreatureType.CREATURE);
 
 		if (LIVESTOCK.containsKey(entity.getClass())) {
 			event.setResult(Event.Result.ALLOW); // Always cancel vanilla's spawning since we take it from here
@@ -127,26 +127,25 @@ public final class WorldEntitySpawnerTFC {
 
 		// Spawns only one group
 		ForgeRegistries.ENTITIES.getValuesCollection().stream()
-		                        .filter(x -> {
-			                        if (ICreatureTFC.class.isAssignableFrom(x.getEntityClass())) {
-				                        Entity ent = x.newInstance(worldIn);
-				                        if (ent instanceof ICreatureTFC) {
-					                        int weight = ((ICreatureTFC) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
-					                        return weight > 0 && randomIn.nextInt(weight) == 0;
-				                        }
-			                        }
-			                        return false;
-		                        }).findFirst()
-		                        .ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
+				.filter(x -> {
+					if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
+						Entity ent = x.newInstance(worldIn);
+						if (ent instanceof ICreature) {
+							int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+							return weight > 0 && randomIn.nextInt(weight) == 0;
+						}
+					}
+					return false;
+				}).findFirst()
+				.ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
 	}
 
 	private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
 		List<EntityLiving> group = new ArrayList<>();
 		EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-		if (!(creature instanceof ICreatureTFC)) {
+		if (!(creature instanceof ICreature creatureTFC)) {
 			return; // Make sure to not crash
 		}
-		ICreatureTFC creatureTFC = (ICreatureTFC) creature;
 		int fallback = 5; // Fallback measure if some mod completely deny this entity spawn
 		int individuals = Math.max(1, creatureTFC.getMinGroupSize()) + randomIn.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
 		while (individuals > 0) {
@@ -171,7 +170,7 @@ public final class WorldEntitySpawnerTFC {
 				if (--individuals > 0) {
 					//We still need to spawn more
 					creature = (EntityLiving) entityEntry.newInstance(worldIn);
-					creatureTFC = (ICreatureTFC) creature;
+					creatureTFC = (ICreature) creature;
 				}
 			} else {
 				if (--fallback <= 0) //Trying to spawn in water or inside walls too many times, let's break

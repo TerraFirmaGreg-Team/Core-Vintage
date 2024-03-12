@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.entity.ai;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -18,7 +18,7 @@ import net.minecraft.entity.ai.EntityAIWander;
  * - Attack Reach
  * - Hunting Area via {@link EntityCreature#setHomePosAndDistance}
  */
-public class EntityAIAttackMeleeTFC<T extends EntityCreature & IAnimalTFC> extends EntityAIAttackMelee {
+public class EntityAIAttackMeleeTFC<T extends EntityCreature & IAnimal> extends EntityAIAttackMelee {
 	protected AttackBehavior attackBehavior; // Day/Night behavior
 	protected double attackReach; // Attack Reach, Vanilla is 2.0D
 	protected EntityAIWander wander;
@@ -60,7 +60,7 @@ public class EntityAIAttackMeleeTFC<T extends EntityCreature & IAnimalTFC> exten
 				return false;
 			}
 		}
-		if (((IAnimalTFC) this.attacker).getAge() != IAnimalTFC.Age.CHILD || this.attacker.getRevengeTarget() != null) {
+		if (((IAnimal) this.attacker).getAge() != IAnimal.Age.CHILD || this.attacker.getRevengeTarget() != null) {
 			if (this.attacker.getRevengeTarget() != null) {
 				// Updates hunting area, avoiding exploit (hit & run outside of it's reach (resetting aggro), get back and hit again)
 				this.attacker.setHomePosAndDistance(this.attacker.getPosition(), 80);

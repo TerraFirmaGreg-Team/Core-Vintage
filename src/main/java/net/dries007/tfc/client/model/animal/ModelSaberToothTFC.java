@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -215,8 +215,8 @@ public class ModelSaberToothTFC extends ModelBase {
 			double ageScale = 1;
 			double percent = 1;
 
-			if (entity instanceof IAnimalTFC) {
-				percent = ((IAnimalTFC) entity).getPercentToAdulthood();
+			if (entity instanceof IAnimal) {
+				percent = ((IAnimal) entity).getPercentToAdulthood();
 				ageScale = 1 / (2.0D - percent);
 			}
 

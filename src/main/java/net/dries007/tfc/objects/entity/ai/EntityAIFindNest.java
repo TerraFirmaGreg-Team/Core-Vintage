@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.entity.ai;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.te.TENestBox;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -41,8 +41,8 @@ public class EntityAIFindNest extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		if (theCreature instanceof IAnimalTFC && ((IAnimalTFC) theCreature).getType() == IAnimalTFC.Type.OVIPAROUS) {
-			IAnimalTFC animal = (IAnimalTFC) theCreature;
+		if (theCreature instanceof IAnimal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
+			IAnimal animal = (IAnimal) theCreature;
 			return animal.isReadyForAnimalProduct() && this.getNearbyNest();
 		}
 		return false;
@@ -62,7 +62,7 @@ public class EntityAIFindNest extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		this.theCreature.getNavigator()
-		                .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1, this.nestPos.getZ() + 0.5D, this.speed);
+				.tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1, this.nestPos.getZ() + 0.5D, this.speed);
 		this.currentTick = 0;
 		this.end = false;
 		this.maxSittingTicks = this.theCreature.getRNG().nextInt(200) + 100;
@@ -74,7 +74,7 @@ public class EntityAIFindNest extends EntityAIBase {
 		if (nestPos == null) return;
 		if (this.theCreature.getDistanceSq(nestPos) > 1.25D) {
 			this.theCreature.getNavigator()
-			                .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D, this.speed);
+					.tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D, this.speed);
 			if (this.currentTick > 200) {
 				//We never reached it in 10 secs, lets give up on this nest box
 				failureDepressionMap.put(nestPos, theWorld.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
@@ -82,8 +82,8 @@ public class EntityAIFindNest extends EntityAIBase {
 			}
 		} else {
 			TENestBox te = Helpers.getTE(this.theWorld, nestPos, TENestBox.class);
-			if (te != null && theCreature instanceof IAnimalTFC && ((IAnimalTFC) theCreature).getType() == IAnimalTFC.Type.OVIPAROUS) {
-				IAnimalTFC animal = (IAnimalTFC) theCreature;
+			if (te != null && theCreature instanceof IAnimal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
+				IAnimal animal = (IAnimal) theCreature;
 				if (!te.hasBird()) {
 					te.seatOnThis(theCreature);
 					this.currentTick = 0;
@@ -109,8 +109,8 @@ public class EntityAIFindNest extends EntityAIBase {
 		int i = (int) this.theCreature.posY;
 		double d0 = Double.MAX_VALUE;
 		for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(theCreature.getPosition()
-		                                                                           .add(-16, 0, -16), theCreature.getPosition()
-		                                                                                                         .add(16, 4, 16))) {
+				.add(-16, 0, -16), theCreature.getPosition()
+				.add(16, 4, 16))) {
 			if (this.isNestBlock(this.theWorld, pos) && this.theWorld.isAirBlock(pos.up())) {
 				double d1 = this.theCreature.getDistanceSq(pos);
 

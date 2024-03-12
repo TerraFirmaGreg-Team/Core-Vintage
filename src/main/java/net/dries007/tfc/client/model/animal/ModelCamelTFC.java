@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.model.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -381,8 +381,8 @@ public class ModelCamelTFC extends ModelBase {
 		if (((EntityAnimal) entityIn).isChild()) {
 			double ageScale = 1;
 			double percent = 1;
-			if (entityIn instanceof IAnimalTFC) {
-				percent = ((IAnimalTFC) entityIn).getPercentToAdulthood();
+			if (entityIn instanceof IAnimal) {
+				percent = ((IAnimal) entityIn).getPercentToAdulthood();
 				ageScale = 1 / (2.0D - percent);
 			}
 			GlStateManager.scale(ageScale, ageScale, ageScale);

@@ -7,7 +7,7 @@ package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Helpers;
@@ -45,8 +45,8 @@ public class TENestBox extends TEInventory implements ITickable, IItemHandlerSid
 					if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= CalendarTFC.PLAYER_TIME.getTotalDays()) {
 						Entity baby = cap.getEntity(this.world);
 						if (baby != null) {
-							if (baby instanceof IAnimalTFC) {
-								((IAnimalTFC) baby).setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
+							if (baby instanceof IAnimal) {
+								((IAnimal) baby).setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
 							}
 							baby.setLocationAndAngles(this.pos.getX(), this.pos.getY() + 0.5D, this.pos.getZ(), 0.0F, 0.0F);
 							world.spawnEntity(baby);

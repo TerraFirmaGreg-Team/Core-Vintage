@@ -14,9 +14,9 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.api.util.IRidable;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -61,7 +61,7 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock, IRidable {
+public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IRidable {
 	//Values that has a visual effect on client
 	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityMuleTFC.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(EntityMuleTFC.class, DataSerializers.VARINT);
@@ -158,8 +158,8 @@ public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock,
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-		                                                                                      .name()
-		                                                                                      .toLowerCase());
+				.name()
+				.toLowerCase());
 	}
 
 	public boolean isHalter() {
@@ -403,7 +403,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock,
 						//Show tooltips
 						if (this.isFertilized() && this.getType() == Type.MAMMAL) {
 							TerraFirmaCraft.getNetwork()
-							               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+									.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
 						}
 					}
 				}

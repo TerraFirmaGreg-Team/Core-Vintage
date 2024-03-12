@@ -9,7 +9,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
 import net.minecraft.client.Minecraft;
@@ -54,8 +54,8 @@ public final class PlayerDataOverlay {
 		vb.begin(7, DefaultVertexFormats.POSITION_TEX);
 		vb.pos(xCoord + 0.0F, yCoord + maxV, 0).tex((minU) * textureScaleU, (minV + maxV) * textureScaleV).endVertex();
 		vb.pos(xCoord + maxU, yCoord + maxV, 0)
-		  .tex((minU + maxU) * textureScaleU, (minV + maxV) * textureScaleV)
-		  .endVertex();
+				.tex((minU + maxU) * textureScaleU, (minV + maxV) * textureScaleV)
+				.endVertex();
 		vb.pos(xCoord + maxU, yCoord + 0.0F, 0).tex((minU + maxU) * textureScaleU, (minV) * textureScaleV).endVertex();
 		vb.pos(xCoord + 0.0F, yCoord + 0.0F, 0).tex((minU) * textureScaleU, (minV) * textureScaleV).endVertex();
 		tessellator.draw();
@@ -243,7 +243,7 @@ public final class PlayerDataOverlay {
 
 		if (player.isSneaking()) {
 			EntityLivingBase entity = event.getEntity();
-			if (entity instanceof IAnimalTFC && ((IAnimalTFC) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
+			if (entity instanceof IAnimal && ((IAnimal) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
 				double x, y, z;
 				x = event.getX();
 				y = event.getY();
@@ -255,7 +255,7 @@ public final class PlayerDataOverlay {
 				float f2 = 5.0F;
 
 				if (d3 < f2) {
-					IAnimalTFC animal = (IAnimalTFC) entity;
+					IAnimal animal = (IAnimal) entity;
 					RenderManager rendermanager = mc.getRenderManager();
 
 					GL11.glPushMatrix();
@@ -270,7 +270,7 @@ public final class PlayerDataOverlay {
 					GL11.glScalef(0.33F, 0.33F, 0.33F);
 
 					float familiarity = Math.max(0.0F, Math.min(1.0F, animal.getFamiliarity()));
-					if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimalTFC.Age.CHILD) {
+					if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimal.Age.CHILD) {
 						// Render a red-ish outline for adults that cannot be familiarized more
 						drawTexturedModalRect(-8, 0, 132, 40, 16, 16);
 					} else if (familiarity >= 0.3F) {

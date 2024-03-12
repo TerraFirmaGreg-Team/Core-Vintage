@@ -13,9 +13,9 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ILivestock;
-import net.dries007.tfc.api.util.IRidable;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
@@ -63,7 +63,7 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivestock, IRidable {
+public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock, IRidable {
 	//Values that has a visual effect on client
 	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityDonkeyTFC.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> BIRTHDAY = EntityDataManager.createKey(EntityDonkeyTFC.class, DataSerializers.VARINT);
@@ -147,7 +147,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimalTFC male) {
+	public void onFertilized(@Nonnull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		// If mating with other types of horse, mark children to be mules
 		if (male.getClass() != this.getClass()) {
@@ -156,14 +156,14 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 		// Save genes
 		EntityAnimal father = (EntityAnimal) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-		                                .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+				.getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 	}
 
 	@Override
@@ -197,8 +197,8 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-		                                                                                      .name()
-		                                                                                      .toLowerCase());
+				.name()
+				.toLowerCase());
 	}
 
 	public boolean isHalter() {
@@ -486,7 +486,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 	@Override
 	public boolean canMateWith(EntityAnimal otherAnimal) {
 		if (otherAnimal instanceof EntityHorseTFC || otherAnimal instanceof EntityDonkeyTFC) {
-			IAnimalTFC other = (IAnimalTFC) otherAnimal;
+			IAnimal other = (IAnimal) otherAnimal;
 			return this.getGender() != other.getGender() && this.isInLove() && otherAnimal.isInLove();
 		}
 		return false;
@@ -496,10 +496,10 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 	@Override
 	public EntityAgeable createChild(@Nonnull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
-		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimalTFC) {
+		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);
 			this.resetInLove();
-			this.onFertilized((IAnimalTFC) other);
+			this.onFertilized((IAnimal) other);
 		} else if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			EntityDonkeyTFC baby = new EntityDonkeyTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
@@ -517,10 +517,10 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 	 */
 	private boolean findFemaleMate() {
 		List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class, this.getEntityBoundingBox()
-		                                                                                     .grow(8.0D));
+				.grow(8.0D));
 		for (AbstractHorse ent : list) {
 			if (ent instanceof EntityHorseTFC || ent instanceof EntityDonkeyTFC) {
-				IAnimalTFC animal = (IAnimalTFC) ent;
+				IAnimal animal = (IAnimal) ent;
 				if (animal.getGender() == Gender.FEMALE && animal.isReadyToMate() && !ent.isInLove()) {
 					ent.setInLove(null);
 					return true;
@@ -534,7 +534,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 		int numberOfChildren = ConfigTFC.Animals.DONKEY.babies;
 		for (int i = 0; i < numberOfChildren; i++) {
 			// Birth one animal
-			IAnimalTFC baby;
+			IAnimal baby;
 			if (birthMule) {
 				baby = new EntityMuleTFC(this.world);
 			} else {

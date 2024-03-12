@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.client.render.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelSheepWoolTFC;
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.minecraft.client.renderer.GlStateManager;
@@ -32,7 +32,7 @@ public class LayerSheepWoolTFC implements LayerRenderer<EntitySheepTFC> {
 	@Override
 	public void doRenderLayer(EntitySheepTFC sheep, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		if (sheep.hasWool() && !sheep.isInvisible()) {
-			this.sheepRenderer.bindTexture(sheep.getAge() == IAnimalTFC.Age.OLD ? OLD_TEXTURE : TEXTURE);
+			this.sheepRenderer.bindTexture(sheep.getAge() == IAnimal.Age.OLD ? OLD_TEXTURE : TEXTURE);
 
 			float[] afloat = EntitySheep.getDyeRgb(sheep.getDyeColor());
 			GlStateManager.color(afloat[0], afloat[1], afloat[2]);

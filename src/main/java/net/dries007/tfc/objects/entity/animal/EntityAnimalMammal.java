@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
-import net.dries007.tfc.api.types.IAnimalTFC;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
@@ -43,7 +43,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalTFC {
 	}
 
 	@Override
-	public void onFertilized(IAnimalTFC male) {
+	public void onFertilized(IAnimal male) {
 		//Mark the day this female became pregnant
 		setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 	}

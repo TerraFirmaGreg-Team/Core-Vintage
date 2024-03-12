@@ -105,8 +105,7 @@ public class TemperatureCapability<C> implements ICapabilitySerializable<NBTTagC
 						}
 					}
 					if (TFCAmbientalConfig.GENERAL.loseHungerThirst) {
-						if (player.getFoodStats() instanceof FoodStatsTFC) {
-							FoodStatsTFC stats = (FoodStatsTFC) player.getFoodStats();
+						if (player.getFoodStats() instanceof FoodStatsTFC stats) {
 							if (this.getTemperature() > (HOT_THRESHOLD * 2f + BURN_THRESHOLD) / 3f) {
 								stats.addThirst(-8);
 							} else if (this.getTemperature() < (COOL_THRESHOLD * 2f + FREEZE_THRESHOLD) / 3f) {

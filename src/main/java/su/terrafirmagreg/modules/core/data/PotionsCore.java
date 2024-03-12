@@ -24,10 +24,10 @@ public final class PotionsCore {
 	public static void onRegister(RegistryManager registry) {
 		registry.registerPotion("overburdened", OVERBURDENED = new PotionOverburdened());
 		registry.registerPotion("thirst", THIRST = new PotionThirst());
-		registry.registerPotion("food_poison", PARASITES = new PotionParasites());
+		registry.registerPotion("parasites", PARASITES = new PotionParasites());
 		registry.registerPotion("swarm", SWARM = new PotionSwarm());
 		registry.registerPotion("hyperthermia", HYPERTHERMIA = new PotionHyperthermia());
-		registry.registerPotion("cool", HYPOTHERMIA = new PotionHypothermia());
+		registry.registerPotion("hypothermia", HYPOTHERMIA = new PotionHypothermia());
 		registry.registerPotion("resist_cold", COLD_RESIST = new PotionResistCold());
 		registry.registerPotion("resist_heat", HEAT_RESIST = new PotionResistHeat());
 

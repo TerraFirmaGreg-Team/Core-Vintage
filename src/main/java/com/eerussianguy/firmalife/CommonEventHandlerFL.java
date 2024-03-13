@@ -14,7 +14,6 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -41,6 +40,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
+import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
@@ -145,7 +145,7 @@ public class CommonEventHandlerFL {
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos pos = event.getPos();
 		EnumFacing facing = event.getFace();
-		if (item == ItemsTFC.WOOL_YARN && player.isSneaking() && facing != null) {
+		if (item == ItemsAnimal.WOOL_YARN && player.isSneaking() && facing != null) {
 			BlockPos offsetPos = pos.offset(facing);
 			if (world.isAirBlock(offsetPos)) {
 				IBlockState string = BlocksFL.WOOL_STRING.getStateForPlacement(world, player, facing, offsetPos);

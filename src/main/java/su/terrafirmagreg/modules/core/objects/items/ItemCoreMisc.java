@@ -17,15 +17,15 @@ public class ItemCoreMisc extends ItemBase {
 	@Getter
 	private final String name;
 
-	public ItemCoreMisc(Builder builder) {
+	public ItemCoreMisc(String name, Size size, Weight weight, Object... oreNameParts) {
+		this(name, size, weight);
+		if (oreNameParts != null) OreDictUtils.register(this, oreNameParts);
+	}
 
-		this.name = builder.name;
-		this.size = builder.size;
-		this.weight = builder.weight;
-
-
-		if (builder.oreNameParts != null)
-			OreDictUtils.register(this, builder.oreNameParts);
+	public ItemCoreMisc(String name, Size size, Weight weight) {
+		this.name = "core/" + name;
+		this.size = size;
+		this.weight = weight;
 	}
 
 	@Nonnull
@@ -47,15 +47,11 @@ public class ItemCoreMisc extends ItemBase {
 		private final String name;
 
 		public Builder(String name) {
-			this.name = "core/" + name;
+			this.name = name;
 		}
 
-		public Builder setSize(Size size) {
+		public Builder setSize(Size size, Weight weight) {
 			this.size = size;
-			return this;
-		}
-
-		public Builder setWeight(Weight weight) {
 			this.weight = weight;
 			return this;
 		}
@@ -66,7 +62,7 @@ public class ItemCoreMisc extends ItemBase {
 		}
 
 		public ItemCoreMisc build() {
-			return new ItemCoreMisc(this);
+			return new ItemCoreMisc(name, size, weight, oreNameParts);
 		}
 	}
 

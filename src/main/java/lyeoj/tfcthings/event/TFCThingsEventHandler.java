@@ -8,7 +8,6 @@ import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
 
 import javax.annotation.Nullable;
@@ -178,7 +178,7 @@ public class TFCThingsEventHandler {
 			if ((OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "shears") || OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "knife"))
 					&& sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
 				if (!sheep.world.isRemote) {
-					ItemStack woolStack = new ItemStack(ItemsTFC.WOOL, 1);
+					ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL, 1);
 					Helpers.spawnItemStack(sheep.world, new BlockPos(sheep.posX, sheep.posY, sheep.posZ), woolStack);
 				}
 			}

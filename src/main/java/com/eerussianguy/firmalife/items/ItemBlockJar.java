@@ -1,7 +1,6 @@
 package com.eerussianguy.firmalife.items;
 
 import com.eerussianguy.firmalife.blocks.BlockJars;
-import com.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
@@ -13,6 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -48,7 +48,7 @@ public class ItemBlockJar extends ItemBlockTFC {
 
 	@Override
 	public ItemStack getContainerItem(ItemStack itemStack) {
-		return new ItemStack(ItemsFL.JAR);
+		return new ItemStack(ItemsCore.JAR);
 	}
 
 	@Override

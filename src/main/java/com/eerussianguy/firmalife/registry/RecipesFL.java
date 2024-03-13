@@ -26,6 +26,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
@@ -37,7 +38,7 @@ public class RecipesFL {
 		int hour = ICalendar.TICKS_IN_HOUR;
 		r.registerAll(
 				// the input being straw makes this a curing recipe
-				new OvenRecipe(IIngredient.of(new ItemStack(ItemsTFC.STRAW)), new ItemStack(ItemsTFC.WOOD_ASH), 8 * hour).setRegistryName("cure"),
+				new OvenRecipe(IIngredient.of(new ItemStack(ItemsCore.STRAW)), new ItemStack(ItemsCore.WOOD_ASH), 8 * hour).setRegistryName("cure"),
 
 				new OvenRecipe(IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.DRIED_COCOA_BEANS))), new ItemStack(ItemsFL.ROASTED_COCOA_BEANS), 2 * hour).setRegistryName("dried_cocoa_beans"),
 				new OvenRecipe(IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.CHESTNUTS))), new ItemStack(ItemsFL.getFood(FoodFL.ROASTED_CHESTNUTS)), 2 * hour).setRegistryName("chestnuts"),
@@ -70,7 +71,7 @@ public class RecipesFL {
 		int day = ICalendar.TICKS_IN_DAY;
 		for (Fruit fruit : Fruit.values()) {
 			r.register(new DryingRecipe(IIngredient.of(fruit.getFruit()), new ItemStack(ItemsFL.getDriedFruit(fruit)), day / 2).setRegistryName(fruit.name()
-			                                                                                                                                         .toLowerCase()));
+					.toLowerCase()));
 		}
 		r.registerAll(
 				new DryingRecipe(IIngredient.of(new ItemStack(ItemsFL.CINNAMON_BARK)), new ItemStack(ItemsFL.CINNAMON), day).setRegistryName("cinnamon_bark"),
@@ -110,7 +111,7 @@ public class RecipesFL {
 		PlantsFL.WRAPPERS.forEach(plant -> {
 			BlockPlantTFC block = BlockPlantTFC.get(plant);
 			r.register(new PlanterRecipe(IIngredient.of(block), new ItemStack(block), 1, false).setRegistryName(plant.getRegistryName()
-			                                                                                                         .getPath()));
+					.getPath()));
 		});
 	}
 

@@ -32,6 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.items.ItemsTFCF;
 
@@ -133,7 +134,7 @@ public class BlockUrnLoot extends Block implements IItemSize {
 
 			count = rand.nextInt(2) + 1;
 			for (int i = 0; i < count; i++) {
-				Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS, ItemsTFCF.FLAX, ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING, ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsTFC.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL, ItemsTFC.WOOL, ItemsTFC.WOOL_YARN, ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE), ItemPowder.get(Powder.FLUX), ItemPowder.get(Powder.SALTPETER), ItemPowder.get(Powder.LAPIS_LAZULI), ItemPowder.get(Powder.SULFUR), ItemPowder.get(Powder.SALT)};
+				Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS, ItemsTFCF.FLAX, ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING, ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsTFC.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL, ItemsAnimal.WOOL, ItemsAnimal.WOOL_YARN, ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE), ItemPowder.get(Powder.FLUX), ItemPowder.get(Powder.SALTPETER), ItemPowder.get(Powder.LAPIS_LAZULI), ItemPowder.get(Powder.SULFUR), ItemPowder.get(Powder.SALT)};
 				int dropIndex = rand.nextInt(dropList.length);
 				int amount = rand.nextInt(5) + 2;
 
@@ -242,6 +243,6 @@ public class BlockUrnLoot extends Block implements IItemSize {
 
 	private boolean canStay(IBlockAccess world, BlockPos pos) {
 		return world.getBlockState(pos.down())
-		            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+				.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
 	}
 }

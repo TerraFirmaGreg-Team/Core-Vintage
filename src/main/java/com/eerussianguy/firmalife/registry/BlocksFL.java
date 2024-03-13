@@ -15,7 +15,6 @@ import net.dries007.tfc.objects.blocks.agriculture.*;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
@@ -35,6 +34,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 
 import java.util.Optional;
 
@@ -213,7 +213,7 @@ public class BlocksFL {
 		normalIBs.add(register(r, "pumpkin_hanging_planter", new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT), () -> ItemSeedsTFC.get(StemCrop.PUMPKIN), 13), CT_DECORATIONS));
 		normalIBs.add(register(r, "melon_hanging_planter", new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.MELON_FRUIT), () -> ItemSeedsTFC.get(StemCrop.MELON), 13), CT_DECORATIONS));
 		normalIBs.add(register(r, "squash_hanging_planter", new BlockHangingPlanter(() -> ItemFoodTFC.get(Food.SQUASH), () -> ItemSeedsTFC.get(Crop.SQUASH), 13), CT_DECORATIONS));
-		register(r, "wool_string", new BlockString(() -> ItemsTFC.WOOL_YARN));
+		register(r, "wool_string", new BlockString(() -> ItemsAnimal.WOOL_YARN));
 		normalIBs.add(register(r, "trellis", new BlockTrellis(), CT_DECORATIONS));
 		normalIBs.add(register(r, "beehive", new BlockBeehive(), CT_DECORATIONS));
 		register(r, "honey_jar", new BlockJars(() -> ItemsFL.HONEY_JAR), CT_FOOD);
@@ -233,13 +233,13 @@ public class BlocksFL {
 
 		for (BerryBush bush : BerryBush.values()) {
 			normalIBs.add(register(r, bush.name()
-			                              .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
+					.toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
 		}
 
 		for (BushFL bush : BushFL.values()) {
 			normalIBs.add(register(r, bush.name().toLowerCase() + "_bush", new BlockBerryBush(bush), CT_FLORA));
 			normalIBs.add(register(r, bush.name()
-			                              .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
+					.toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
 		}
 
 		for (BlockJackOLantern.Carving carving : BlockJackOLantern.Carving.values()) {
@@ -324,7 +324,7 @@ public class BlocksFL {
 		fruitDoors.add(register(r, name + "_door", new BlockFruitDoor(), CT_DECORATIONS));
 		fruitTrapdoors.add(register(r, name + "_trapdoor", new BlockFruitTrapDoor(), CT_DECORATIONS));
 		optionalTree.ifPresent(tree -> bonsais.add(register(r, name + "_bonsai_pot", new BlockBonsai(() -> tree.getFoodDrop()
-		                                                                                                       .getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_DECORATIONS))
+				.getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_DECORATIONS))
 		);
 	}
 

@@ -122,8 +122,6 @@ public class ItemsFL {
 	public static final ItemFoodFL FETA = Helpers.getNull();
 	@GameRegistry.ObjectHolder("shosha")
 	public static final ItemFoodFL SHOSHA = Helpers.getNull();
-	@GameRegistry.ObjectHolder("jar")
-	public static final ItemMisc JAR = Helpers.getNull();
 	@GameRegistry.ObjectHolder("treated_lumber")
 	public static final ItemMisc TREATED_LUMBER = Helpers.getNull();
 	@GameRegistry.ObjectHolder("beeswax")
@@ -261,7 +259,6 @@ public class ItemsFL {
 		easyItems.add(register(r, "pineapple_yarn", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 		easyItems.add(register(r, "honeycomb", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 		easyItems.add(register(r, "honey_jar", new ItemBlockJar(BlocksFL.HONEY_JAR), CT_FOOD));
-		easyItems.add(register(r, "jar", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_FOOD));
 		easyItems.add(register(r, "treated_lumber", new ItemMisc(Size.SMALL, Weight.MEDIUM), CT_MISC));
 		easyItems.add(register(r, "beeswax", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_FOOD));
 
@@ -284,11 +281,11 @@ public class ItemsFL {
 
 		for (Metal metal : TFCRegistries.METALS.getValuesCollection())
 			if (metal.isToolMetal()) {
-				ItemMetalMallet mallet = register(r, metal.toString() + "_mallet", new ItemMetalMallet(metal), CT_METAL);
+				ItemMetalMallet mallet = register(r, metal + "_mallet", new ItemMetalMallet(metal), CT_METAL);
 				OreDictionary.registerOre("tool", mallet);
 				easyItems.add(mallet);
 				ItemMetalMalletHead head = new ItemMetalMalletHead(metal);
-				easyItems.add(register(r, metal.toString() + "_mallet_head", head, CT_METAL));
+				easyItems.add(register(r, metal + "_mallet_head", head, CT_METAL));
 				OreDictionary.registerOre("tool", head);
 				malletHeads.put(metal, head);
 			}

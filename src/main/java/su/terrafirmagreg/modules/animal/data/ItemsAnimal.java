@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.animal.data;
 
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.animal.objects.items.ItemAnimalMisc;
 
@@ -16,9 +18,9 @@ public final class ItemsAnimal {
 
 		registry.registerAuto(BLADDER = new ItemAnimalMisc.Builder("product/bladder").build());
 		registry.registerAuto(WOOL = new ItemAnimalMisc.Builder("product/wool").build());
-		registry.registerAuto(WOOL_YARN = new ItemAnimalMisc.Builder("product/wool_yarn").build());
-		registry.registerAuto(WOOL_CLOTH = new ItemAnimalMisc.Builder("product/wool_cloth").build());
-		registry.registerAuto(SILK_CLOTH = new ItemAnimalMisc.Builder("product/silk_cloth").build());
+		registry.registerAuto(WOOL_YARN = new ItemAnimalMisc("product/wool_yarn", Size.VERY_SMALL, Weight.VERY_LIGHT, "string"));
+		registry.registerAuto(WOOL_CLOTH = new ItemAnimalMisc("product/wool_cloth", Size.SMALL, Weight.LIGHT, "cloth_high_quality"));
+		registry.registerAuto(SILK_CLOTH = new ItemAnimalMisc("product/silk_cloth", Size.SMALL, Weight.LIGHT, "cloth_high_quality"));
 
 
 	}

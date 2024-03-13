@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.animal.objects.items;
+package su.terrafirmagreg.modules.wood.objects.items;
 
 import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
@@ -10,20 +10,20 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemAnimalMisc extends ItemBase {
+public class ItemWoodMisc extends ItemBase {
 	private final Size size;
 	private final Weight weight;
 
 	@Getter
 	private final String name;
 
-	public ItemAnimalMisc(String name, Size size, Weight weight, Object... oreNameParts) {
+	public ItemWoodMisc(String name, Size size, Weight weight, Object... oreNameParts) {
 		this(name, size, weight);
 		if (oreNameParts != null) OreDictUtils.register(this, oreNameParts);
 	}
 
-	public ItemAnimalMisc(String name, Size size, Weight weight) {
-		this.name = "animal/" + name;
+	public ItemWoodMisc(String name, Size size, Weight weight) {
+		this.name = "wood/" + name;
 		this.size = size;
 		this.weight = weight;
 	}
@@ -65,8 +65,8 @@ public class ItemAnimalMisc extends ItemBase {
 			return this;
 		}
 
-		public ItemAnimalMisc build() {
-			return new ItemAnimalMisc(name, size, weight, oreNameParts);
+		public ItemWoodMisc build() {
+			return new ItemWoodMisc(name, size, weight, oreNameParts);
 		}
 	}
 

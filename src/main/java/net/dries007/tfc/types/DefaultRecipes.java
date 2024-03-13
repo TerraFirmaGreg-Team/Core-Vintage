@@ -67,6 +67,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -101,7 +104,7 @@ public final class DefaultRecipes {
 				new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 1000), IIngredient.of("logWoodTannin"), new FluidStack(TANNIN.get(), 10000), ItemStack.EMPTY, 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("tannin"),
 				new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 200), IIngredient.of(ItemsTFC.JUTE), null, new ItemStack(ItemsTFC.JUTE_FIBER), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("jute_fiber"),
 				new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 600), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(Food.SUGARCANE), 5)), null, new ItemStack(Items.SUGAR), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("sugar"),
-				new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 500), IIngredient.of(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())), null, new ItemStack(ItemsTFC.GLUE), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("glue"),
+				new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 500), IIngredient.of(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())), null, new ItemStack(ItemsCore.GLUE), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("glue"),
 				// Alcohol - Classic created 1000mb with 4oz, which would be 8 items per full barrel at 5 oz/item. Instead we now require 20 items, so conversion is 2 oz/item here
 				new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), new IngredientItemFood(IIngredient.of(ItemFoodTFC.get(Food.BARLEY_FLOUR))), new FluidStack(FluidsTFC.BEER.get(), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("beer"),
 				new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), new IngredientItemFood(IIngredient.of("apple")), new FluidStack(FluidsTFC.CIDER.get(), 500), ItemStack.EMPTY, 72 * ICalendar.TICKS_IN_HOUR).setRegistryName("cider"),
@@ -115,27 +118,27 @@ public final class DefaultRecipes {
 				new BarrelRecipe(IIngredient.of(250, FluidsTFC.BEER.get(), FluidsTFC.CIDER.get(), FluidsTFC.RUM.get(), FluidsTFC.SAKE.get(), FluidsTFC.VODKA.get(), FluidsTFC.WHISKEY.get(), FluidsTFC.CORN_WHISKEY.get(), FluidsTFC.RYE_WHISKEY.get()), new IngredientItemFood(IIngredient.of("categoryFruit")), new FluidStack(FluidsTFC.VINEGAR.get(), 250), ItemStack.EMPTY, 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("vinegar"),
 				// Food preservation
 				BarrelRecipeFoodTraits.pickling(new IngredientItemFood(IIngredient.of("categoryFruit")))
-				                      .setRegistryName("pickling_fruit"),
+						.setRegistryName("pickling_fruit"),
 				BarrelRecipeFoodTraits.pickling(new IngredientItemFood(IIngredient.of("categoryVegetable")))
-				                      .setRegistryName("pickling_vegetable"),
+						.setRegistryName("pickling_vegetable"),
 				BarrelRecipeFoodTraits.pickling(new IngredientItemFood(IIngredient.of("categoryMeat")))
-				                      .setRegistryName("pickling_meat"),
+						.setRegistryName("pickling_meat"),
 				BarrelRecipeFoodTraits.brining(new IngredientItemFood(IIngredient.of("categoryFruit")))
-				                      .setRegistryName("brining_fruit"),
+						.setRegistryName("brining_fruit"),
 				BarrelRecipeFoodTraits.brining(new IngredientItemFood(IIngredient.of("categoryVegetable")))
-				                      .setRegistryName("brining_vegetable"),
+						.setRegistryName("brining_vegetable"),
 				BarrelRecipeFoodTraits.brining(new IngredientItemFood(IIngredient.of("categoryMeat")))
-				                      .setRegistryName("brining_meat"),
+						.setRegistryName("brining_meat"),
 				BarrelRecipeFoodPreservation.vinegar(new IngredientItemFood(IIngredient.of("categoryFruit")))
-				                            .setRegistryName("vinegar_fruit"),
+						.setRegistryName("vinegar_fruit"),
 				BarrelRecipeFoodPreservation.vinegar(new IngredientItemFood(IIngredient.of("categoryVegetable")))
-				                            .setRegistryName("vinegar_vegetable"),
+						.setRegistryName("vinegar_vegetable"),
 				BarrelRecipeFoodPreservation.vinegar(new IngredientItemFood(IIngredient.of("categoryMeat")))
-				                            .setRegistryName("vinegar_meat"),
+						.setRegistryName("vinegar_meat"),
 
 				new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 100), IIngredient.of("sand"), null, new ItemStack(ItemsTFC.MORTAR, 16), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("mortar"),
 				new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 125), IIngredient.of("dustSalt"), new FluidStack(SALT_WATER.get(), 125), ItemStack.EMPTY, 0).setRegistryName("fresh_to_salt_water"),
-				new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(new ItemStack(ItemsTFC.WOOD_ASH)), new FluidStack(LYE.get(), 125), ItemStack.EMPTY, 0).setRegistryName("lye"),
+				new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(new ItemStack(ItemsCore.WOOD_ASH)), new FluidStack(LYE.get(), 125), ItemStack.EMPTY, 0).setRegistryName("lye"),
 				new BarrelRecipe(IIngredient.of(MILK_VINEGAR.get(), 1), IIngredient.of(ItemStack.EMPTY), new FluidStack(CURDLED_MILK.get(), 1), ItemStack.EMPTY, 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("curdled_milk"),
 				// based on eating 5 oz in classic, and 1 item in TNG, the full barrel recipe generated 160 oz of cheese, now 32 items. Therefore 625mb creates 2 cheese.
 				new BarrelRecipe(IIngredient.of(CURDLED_MILK.get(), 625), IIngredient.of(ItemStack.EMPTY), null, new ItemStack(ItemFoodTFC.get(Food.CHEESE), 2), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("cheese"),
@@ -160,8 +163,9 @@ public final class DefaultRecipes {
 
 		for (Food food : new Food[]{Food.SALAD_DAIRY, Food.SALAD_FRUIT, Food.SALAD_GRAIN, Food.SALAD_MEAT, Food.SALAD_VEGETABLE, Food.SOUP_DAIRY, Food.SOUP_FRUIT, Food.SOUP_GRAIN, Food.SOUP_MEAT, Food.SOUP_VEGETABLE}) {
 			event.getRegistry()
-			     .register(new BarrelRecipeDynamicBowlFood(IIngredient.of(FRESH_WATER.get(), 200), IIngredient.of(ItemFoodTFC.get(food)), 0).setRegistryName(food.name()
-			                                                                                                                                                     .toLowerCase() + "_cleaning"));
+					.register(new BarrelRecipeDynamicBowlFood(IIngredient.of(FRESH_WATER.get(), 200), IIngredient.of(ItemFoodTFC.get(food)), 0).setRegistryName(food
+							.name()
+							.toLowerCase() + "_cleaning"));
 		}
 
 		//The many many many recipes that is dye. This assumes that the standard meta values for colored objects are followed.
@@ -171,8 +175,9 @@ public final class DefaultRecipes {
 			int dyeMeta = dyeColor.getMetadata();
 			event.getRegistry().registerAll(
 					// Dye fluid
-					new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 1000), IIngredient.of(OreDictionaryHelper.toString("dye_" + dyeName)), new FluidStack(FluidsTFC.getFluidFromDye(dyeColor)
-					                                                                                                                                                .get(), 1000), ItemStack.EMPTY, ICalendar.TICKS_IN_HOUR).setRegistryName(dyeName),
+					new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 1000), IIngredient.of(OreDictionaryHelper.toString("dye_" + dyeName)), new FluidStack(FluidsTFC
+							.getFluidFromDye(dyeColor)
+							.get(), 1000), ItemStack.EMPTY, ICalendar.TICKS_IN_HOUR).setRegistryName(dyeName),
 					// Vanilla dye-able items
 					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of("woolWhite"), null, new ItemStack(Blocks.WOOL, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("wool_" + dyeName),
 					new BarrelRecipe(IIngredient.of(fluid, 25), IIngredient.of(new ItemStack(Blocks.CARPET, 1, 0)), null, new ItemStack(Blocks.CARPET, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("carpet_" + dyeName),
@@ -211,153 +216,153 @@ public final class DefaultRecipes {
 		event.getRegistry().registerAll(
 				//Orange
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.YELLOW)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("orange_dye_red_yellow_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.YELLOW)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
+						.get(), 2), 0).setRegistryName("orange_dye_red_yellow_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.YELLOW)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("orange_dye_yellow_red_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
+						.get(), 2), 0).setRegistryName("orange_dye_yellow_red_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                         .get(), 1000), IIngredient.of("dyeYellow"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
-				                                                                                                             .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("orange_dye_red_yellow_solid"),
+						.get(), 1000), IIngredient.of("dyeYellow"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("orange_dye_red_yellow_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.YELLOW)
-				                                         .get(), 1000), IIngredient.of("dyeRed"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
-				                                                                                                          .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("orange_dye_yellow_red_solid"),
+						.get(), 1000), IIngredient.of("dyeRed"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("orange_dye_yellow_red_solid"),
 				//Light Blue
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("light_blue_dye_blue_white_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
+						.get(), 2), 0).setRegistryName("light_blue_dye_blue_white_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("light_blue_dye_white_blue_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
+						.get(), 2), 0).setRegistryName("light_blue_dye_white_blue_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                         .get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_blue_dye_blue_white_solid"),
+						.get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_blue_dye_blue_white_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                         .get(), 1000), IIngredient.of("dyeBlue"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
-				                                                                                                           .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_blue_dye_white_blue_solid"),
+						.get(), 1000), IIngredient.of("dyeBlue"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIGHT_BLUE)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_blue_dye_white_blue_solid"),
 				//Magenta
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("magenta_dye_purple_pink_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
+						.get(), 2), 0).setRegistryName("magenta_dye_purple_pink_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("magenta_dye_pink_purple_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
+						.get(), 2), 0).setRegistryName("magenta_dye_pink_purple_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
-				                                         .get(), 1000), IIngredient.of("dyePink"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
-				                                                                                                           .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("magenta_dye_purple_pink_solid"),
+						.get(), 1000), IIngredient.of("dyePink"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("magenta_dye_purple_pink_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
-				                                         .get(), 1000), IIngredient.of("dyePurple"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
-				                                                                                                             .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("magenta_dye_pink_purple_solid"),
+						.get(), 1000), IIngredient.of("dyePurple"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.MAGENTA)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("magenta_dye_pink_purple_solid"),
 				//Pink
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("pink_dye_red_white_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
+						.get(), 2), 0).setRegistryName("pink_dye_red_white_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("pink_dye_white_red_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
+						.get(), 2), 0).setRegistryName("pink_dye_white_red_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                         .get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("pink_dye_red_white_solid"),
+						.get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("pink_dye_red_white_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                         .get(), 1000), IIngredient.of("dyeRed"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
-				                                                                                                          .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("pink_dye_white_red_solid"),
+						.get(), 1000), IIngredient.of("dyeRed"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PINK)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("pink_dye_white_red_solid"),
 				//Light Gray
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("light_gray_dye_white_gray_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 2), 0).setRegistryName("light_gray_dye_white_gray_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                    .get(), 2), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                                                     .get(), 3), 0).setRegistryName("light_gray_dye_white_black_liquid"),
+						.get(), 2), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 3), 0).setRegistryName("light_gray_dye_white_black_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("light_gray_dye_gray_white_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 2), 0).setRegistryName("light_gray_dye_gray_white_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                                                                 .get(), 2), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                                                     .get(), 3), 0).setRegistryName("light_gray_dye_black_white_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
+						.get(), 2), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 3), 0).setRegistryName("light_gray_dye_black_white_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                         .get(), 1000), IIngredient.of("dyeGray"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                           .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_white_gray_solid"),
+						.get(), 1000), IIngredient.of("dyeGray"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_white_gray_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                         .get(), 2000), IIngredient.of("dyeBlack"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_white_black_solid"),
+						.get(), 2000), IIngredient.of("dyeBlack"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_white_black_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
-				                                         .get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_gray_white_solid"),
+						.get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_gray_white_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
-				                                         .get(), 500), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
-				                                                                                                           .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_black_white_solid"),
+						.get(), 500), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.SILVER)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("light_gray_dye_black_white_solid"),
 				//Lime
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("lime_dye_green_white_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
+						.get(), 2), 0).setRegistryName("lime_dye_green_white_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("lime_dye_white_green_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
+						.get(), 2), 0).setRegistryName("lime_dye_white_green_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
-				                                         .get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("lime_dye_green_white_solid"),
+						.get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("lime_dye_green_white_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                         .get(), 1000), IIngredient.of("dyeGreen"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("lime_dye_white_green_solid"),
+						.get(), 1000), IIngredient.of("dyeGreen"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.LIME)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("lime_dye_white_green_solid"),
 				//Cyan
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("cyan_dye_green_blue_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
+						.get(), 2), 0).setRegistryName("cyan_dye_green_blue_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("cyan_dye_blue_green_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
+						.get(), 2), 0).setRegistryName("cyan_dye_blue_green_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.GREEN)
-				                                         .get(), 1000), IIngredient.of("dyeBlue"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
-				                                                                                                           .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("cyan_dye_green_blue_solid"),
+						.get(), 1000), IIngredient.of("dyeBlue"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("cyan_dye_green_blue_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                         .get(), 1000), IIngredient.of("dyeGreen"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("cyan_dye_blue_green_solid"),
+						.get(), 1000), IIngredient.of("dyeGreen"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.CYAN)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("cyan_dye_blue_green_solid"),
 				//Purple
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("purple_dye_red_blue_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
+						.get(), 2), 0).setRegistryName("purple_dye_red_blue_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("purple_dye_blue_red_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
+						.get(), 2), 0).setRegistryName("purple_dye_blue_red_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-				                                         .get(), 1000), IIngredient.of("dyeBlue"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
-				                                                                                                           .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("purple_dye_red_blue_solid"),
+						.get(), 1000), IIngredient.of("dyeBlue"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("purple_dye_red_blue_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLUE)
-				                                         .get(), 1000), IIngredient.of("dyeRed"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
-				                                                                                                          .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("purple_dye_blue_red_solid"),
+						.get(), 1000), IIngredient.of("dyeRed"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.PURPLE)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("purple_dye_blue_red_solid"),
 				//Gray
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("gray_dye_black_white_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
+						.get(), 2), 0).setRegistryName("gray_dye_black_white_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                                    .get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
-				                                                                                                 .get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
-				                                                                                                                                     .get(), 2), 0).setRegistryName("gray_dye_white_black_liquid"),
+						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
+						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
+						.get(), 2), 0).setRegistryName("gray_dye_white_black_liquid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.BLACK)
-				                                         .get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("gray_dye_black_white_solid"),
+						.get(), 1000), IIngredient.of("dyeWhite"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("gray_dye_black_white_solid"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.WHITE)
-				                                         .get(), 1000), IIngredient.of("dyeBlack"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
-				                                                                                                            .get(), 1000), ItemStack.EMPTY, 0).setRegistryName("gray_dye_white_black_solid")
+						.get(), 1000), IIngredient.of("dyeBlack"), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.GRAY)
+						.get(), 1000), ItemStack.EMPTY, 0).setRegistryName("gray_dye_white_black_solid")
 		);
 	}
 
@@ -386,8 +391,9 @@ public final class DefaultRecipes {
 			if (type.hasMold(null)) {
 				int amount = type == INGOT ? 2 : 1;
 				event.getRegistry()
-				     .register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemUnfiredMold.get(type), amount), type.getPattern()).setRegistryName(type.name()
-				                                                                                                                                                          .toLowerCase() + "_mold"));
+						.register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemUnfiredMold.get(type), amount), type.getPattern()).setRegistryName(type
+								.name()
+								.toLowerCase() + "_mold"));
 			}
 		}
 
@@ -443,7 +449,7 @@ public final class DefaultRecipes {
 		for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
 			//noinspection ConstantConditions
 			r.register(new HeatRecipeMetalMelting(metal).setRegistryName(metal.getRegistryName()
-			                                                                  .getPath() + "_melting"));
+					.getPath() + "_melting"));
 		}
 
 		// Pottery Items with metadata
@@ -458,8 +464,9 @@ public final class DefaultRecipes {
 			ItemUnfiredMold unfiredMold = ItemUnfiredMold.get(type);
 			ItemMold firedMold = ItemMold.get(type);
 			if (unfiredMold != null && firedMold != null) {
-				r.register(new HeatRecipeSimple(IIngredient.of(unfiredMold), new ItemStack(firedMold), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_mold_" + type.name()
-				                                                                                                                                                     .toLowerCase()));
+				r.register(new HeatRecipeSimple(IIngredient.of(unfiredMold), new ItemStack(firedMold), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_mold_" + type
+						.name()
+						.toLowerCase()));
 			}
 		}
 
@@ -488,9 +495,9 @@ public final class DefaultRecipes {
 
 				// Misc
 				new HeatRecipeSimple(IIngredient.of("stickWood"), new ItemStack(Blocks.TORCH, 2), 40).setRegistryName("torch"),
-				new HeatRecipeSimple(IIngredient.of(ItemsTFC.STICK_BUNCH), new ItemStack(Blocks.TORCH, 18), 60).setRegistryName("torch_stick_bunch"),
+				new HeatRecipeSimple(IIngredient.of(ItemsWood.STICK_BUNCH), new ItemStack(Blocks.TORCH, 18), 60).setRegistryName("torch_stick_bunch"),
 				new HeatRecipeSimple(IIngredient.of("sand"), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass"),
-				new HeatRecipeSimple(IIngredient.of(ItemsTFC.GLASS_SHARD), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass_shard"),
+				new HeatRecipeSimple(IIngredient.of(ItemsCore.GLASS_SHARD), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass_shard"),
 				new HeatRecipeSimple(IIngredient.of("blockClay"), new ItemStack(Blocks.HARDENED_CLAY), 600).setRegistryName("terracotta"),
 				new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_BRICK), new ItemStack(Items.BRICK), 1500).setRegistryName("unfired_brick"),
 				new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_FLOWER_POT), new ItemStack(Items.FLOWER_POT), 1500).setRegistryName("unfired_flower_pot"),
@@ -525,47 +532,47 @@ public final class DefaultRecipes {
 
 				// Bread
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.BARLEY_BREAD)), 480)
-				          .setRegistryName("burned_barley_bread"),
+						.setRegistryName("burned_barley_bread"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.CORNBREAD)), 480)
-				          .setRegistryName("burned_cornbread"),
+						.setRegistryName("burned_cornbread"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.OAT_BREAD)), 480)
-				          .setRegistryName("burned_oat_bread"),
+						.setRegistryName("burned_oat_bread"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.RICE_BREAD)), 480)
-				          .setRegistryName("burned_rice_bread"),
+						.setRegistryName("burned_rice_bread"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.RYE_BREAD)), 480)
-				          .setRegistryName("burned_rye_bread"),
+						.setRegistryName("burned_rye_bread"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.WHEAT_BREAD)), 480)
-				          .setRegistryName("burned_wheat_bread"),
+						.setRegistryName("burned_wheat_bread"),
 
 				// Meat
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_BEEF)), 480)
-				          .setRegistryName("burned_beef"),
+						.setRegistryName("burned_beef"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_PORK)), 480)
-				          .setRegistryName("burned_pork"),
+						.setRegistryName("burned_pork"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_CHICKEN)), 480)
-				          .setRegistryName("burned_chicken"),
+						.setRegistryName("burned_chicken"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_MUTTON)), 480)
-				          .setRegistryName("burned_mutton"),
+						.setRegistryName("burned_mutton"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_FISH)), 480)
-				          .setRegistryName("burned_fish"),
+						.setRegistryName("burned_fish"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_BEAR)), 480)
-				          .setRegistryName("burned_bear"),
+						.setRegistryName("burned_bear"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_CALAMARI)), 480)
-				          .setRegistryName("burned_calamari"),
+						.setRegistryName("burned_calamari"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_HORSE_MEAT)), 480)
-				          .setRegistryName("burned_horse_meat"),
+						.setRegistryName("burned_horse_meat"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_PHEASANT)), 480)
-				          .setRegistryName("burned_pheasant"),
+						.setRegistryName("burned_pheasant"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_RABBIT)), 480)
-				          .setRegistryName("burned_rabbit"),
+						.setRegistryName("burned_rabbit"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_WOLF)), 480)
-				          .setRegistryName("burned_wolf"),
+						.setRegistryName("burned_wolf"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_VENISON)), 480)
-				          .setRegistryName("burned_venison"),
+						.setRegistryName("burned_venison"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_CAMELIDAE)), 480)
-				          .setRegistryName("burned_camelidae"),
+						.setRegistryName("burned_camelidae"),
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_MONGOOSE)), 480)
-				          .setRegistryName("burned_mongoose"),
+						.setRegistryName("burned_mongoose"),
 
 				// Egg
 				HeatRecipe.destroy(IIngredient.of(ItemFoodTFC.get(Food.COOKED_EGG)), 480).setRegistryName("burned_egg"),
@@ -658,7 +665,7 @@ public final class DefaultRecipes {
 			Metal metalObj = TFCRegistries.METALS.getValue(metal);
 			//noinspection ConstantConditions
 			addAnvil(r, metal.getPath() + "_rod", INGOT, metal, new ItemStack(ItemMetal.get(metalObj, ROD), 2), metalObj.getTier()
-			                                                                                                            .previous(), GENERAL, DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
+					.previous(), GENERAL, DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
 		});
 	}
 
@@ -691,10 +698,10 @@ public final class DefaultRecipes {
 
 		r.registerAll(
 				new LoomRecipe(new ResourceLocation(MODID_TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(MODID_TFC, "textures/blocks/devices/loom/product/burlap.png")),
-				new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_cloth"), IIngredient.of(ItemsTFC.WOOL_YARN, 16), new ItemStack(ItemsTFC.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-				new LoomRecipe(new ResourceLocation(MODID_TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsTFC.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+				new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_cloth"), IIngredient.of(ItemsAnimal.WOOL_YARN, 16), new ItemStack(ItemsAnimal.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+				new LoomRecipe(new ResourceLocation(MODID_TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsAnimal.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
 
-				new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_block"), IIngredient.of(ItemsTFC.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+				new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_block"), IIngredient.of(ItemsAnimal.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
 		);
 	}
 
@@ -831,8 +838,8 @@ public final class DefaultRecipes {
 			Block rawRock = BlockRockVariant.get(rock, Rock.Type.RAW);
 			IBlockState smoothRock = BlockRockVariant.get(rock, Rock.Type.SMOOTH).getDefaultState();
 			event.getRegistry()
-			     .register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock.getRegistryName()
-			                                                                                     .getPath()));
+					.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock.getRegistryName()
+							.getPath()));
 		}
 
 		// Alabaster smoothing
@@ -840,11 +847,11 @@ public final class DefaultRecipes {
 			Block rawColoredAlabaster = BlockDecorativeStone.ALABASTER_RAW.get(color);
 			IBlockState smoothColoredAlabaster = BlockDecorativeStone.ALABASTER_POLISHED.get(color).getDefaultState();
 			event.getRegistry()
-			     .register(new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));
+					.register(new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));
 		}
 		// And plain
 		event.getRegistry()
-		     .register(new ChiselRecipe(BlocksTFC.ALABASTER_RAW_PLAIN, BlocksTFC.ALABASTER_POLISHED_PLAIN.getDefaultState()).setRegistryName("smooth_alabaster"));
+				.register(new ChiselRecipe(BlocksTFC.ALABASTER_RAW_PLAIN, BlocksTFC.ALABASTER_POLISHED_PLAIN.getDefaultState()).setRegistryName("smooth_alabaster"));
 	}
 
 	private static void addAnvil(IForgeRegistry<AnvilRecipe> registry, Metal.ItemType inputType, Metal.ItemType outputType, boolean onlyToolMetals, @Nullable SmithingSkill.Type skillType, ForgeRule... rules) {
@@ -877,7 +884,7 @@ public final class DefaultRecipes {
 			if (!output.isEmpty()) {
 				//noinspection ConstantConditions
 				registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, (outputType.name() + "_" + metal.getRegistryName()
-				                                                                                                  .getPath()).toLowerCase()), ingredient, output, metal.getTier(), skillType, rules));
+						.getPath()).toLowerCase()), ingredient, output, metal.getTier(), skillType, rules));
 			}
 		}
 	}
@@ -893,7 +900,7 @@ public final class DefaultRecipes {
 			if (!input.isEmpty() && !output.isEmpty()) {
 				//noinspection ConstantConditions
 				registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, ("ingot_" + outputMetal.getRegistryName()
-				                                                                                         .getPath()).toLowerCase()), IIngredient.of(input), output, inputMetal.getTier(), skillType, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+						.getPath()).toLowerCase()), IIngredient.of(input), output, inputMetal.getTier(), skillType, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
 			}
 		}
 	}
@@ -956,8 +963,8 @@ public final class DefaultRecipes {
 			if (!output.isEmpty()) {
 				// Note: Welding recipes require one less than the tier of the metal
 				registry.register(new WeldingRecipe(new ResourceLocation(MODID_TFC, (outputType.name() + "_" + metal.getRegistryName()
-				                                                                                                    .getPath()).toLowerCase()), ingredient1, ingredient2, output, metal.getTier()
-				                                                                                                                                                                       .previous(), skillType));
+						.getPath()).toLowerCase()), ingredient1, ingredient2, output, metal.getTier()
+						.previous(), skillType));
 			}
 		}
 	}
@@ -975,8 +982,8 @@ public final class DefaultRecipes {
 				// Note: Welding recipes require one less than the tier of the metal
 				//noinspection ConstantConditions
 				registry.register(new WeldingRecipe(new ResourceLocation(MODID_TFC, ("ingot_" + outputMetal.getRegistryName()
-				                                                                                           .getPath()).toLowerCase()), IIngredient.of(input1), IIngredient.of(input2), output, outputMetal.getTier()
-				                                                                                                                                                                                          .previous(), null));
+						.getPath()).toLowerCase()), IIngredient.of(input1), IIngredient.of(input2), output, outputMetal.getTier()
+						.previous(), null));
 			}
 		}
 	}

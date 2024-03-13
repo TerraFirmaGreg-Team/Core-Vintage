@@ -7,7 +7,6 @@ import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -23,6 +22,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -208,7 +208,7 @@ public class TEOven extends TEInventory implements ITickable {
 	public boolean isCuringRecipe() {
 		if (recipeExists()) {
 			ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
-			return input.isItemEqual(new ItemStack(ItemsTFC.STRAW));
+			return input.isItemEqual(new ItemStack(ItemsCore.STRAW));
 		}
 		return false;
 	}

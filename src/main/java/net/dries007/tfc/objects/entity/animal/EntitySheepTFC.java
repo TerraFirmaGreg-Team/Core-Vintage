@@ -12,9 +12,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -46,6 +44,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
@@ -146,7 +146,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 			if (!world.isRemote) {
 				if (isReadyForAnimalProduct()) {
 					stack.damageItem(1, player);
-					ItemStack woolStack = new ItemStack(ItemsTFC.WOOL, 1);
+					ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL, 1);
 					Helpers.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
 					playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 					setProductsCooldown();
@@ -215,7 +215,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 	@Override
 	public List<ItemStack> getProducts() {
 		// Only white for now
-		return Collections.singletonList(new ItemStack(ItemsTFC.WOOL, 1));
+		return Collections.singletonList(new ItemStack(ItemsAnimal.WOOL, 1));
 	}
 
 	@Override

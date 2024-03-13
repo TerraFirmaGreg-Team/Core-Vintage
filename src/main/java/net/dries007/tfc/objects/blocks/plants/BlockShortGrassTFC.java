@@ -7,7 +7,6 @@ package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -28,6 +27,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -62,12 +62,12 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 		int age = (Integer) state.getValue(AGE);
 		if (!worldIn.isRemote) {
 			if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
-			                                                                                 .getHarvestLevel(stack, "scythe", player, state) == -1) {
+					.getHarvestLevel(stack, "scythe", player, state) == -1) {
 				if (stack.getItem() == Items.SHEARS) {
 					spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
 				}
 			} else if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
-				spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
+				spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
 			}
 		}
 

@@ -47,7 +47,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
@@ -127,6 +126,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -246,7 +246,7 @@ public final class CommonEventHandler {
 		ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock()
 				.damageDropped(state));
 		if (!event.isSilkTouching() && OreDictionaryHelper.doesStackMatchOre(stackAt, "blockGlass")) {
-			event.getDrops().add(new ItemStack(ItemsTFC.GLASS_SHARD));
+			event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD));
 		}
 
 		// Apply durability modifier on tools

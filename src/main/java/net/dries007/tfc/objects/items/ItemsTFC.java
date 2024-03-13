@@ -61,10 +61,8 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 @GameRegistry.ObjectHolder(MODID_TFC)
 public final class ItemsTFC {
 	public static final ItemGoldPan GOLDPAN = getNull();
-	public static final ItemMisc STRAW = getNull();
 	public static final Item HANDSTONE = getNull();
 	public static final Item WROUGHT_IRON_GRILL = getNull();
-	public static final Item GLUE = getNull();
 	public static final Item BRASS_MECHANISMS = getNull();
 
 	@GameRegistry.ObjectHolder("crop/product/jute")
@@ -73,14 +71,6 @@ public final class ItemsTFC {
 	public static final ItemMisc JUTE_FIBER = getNull();
 	@GameRegistry.ObjectHolder("crop/product/burlap_cloth")
 	public static final ItemMisc BURLAP_CLOTH = getNull();
-	@GameRegistry.ObjectHolder("animal/product/wool")
-	public static final ItemMisc WOOL = getNull();
-	@GameRegistry.ObjectHolder("animal/product/wool_yarn")
-	public static final ItemMisc WOOL_YARN = getNull();
-	@GameRegistry.ObjectHolder("animal/product/wool_cloth")
-	public static final ItemMisc WOOL_CLOTH = getNull();
-	@GameRegistry.ObjectHolder("animal/product/silk_cloth")
-	public static final ItemMisc SILK_CLOTH = getNull();
 
 	@GameRegistry.ObjectHolder("ceramics/unfired/fire_brick")
 	public static final ItemPottery UNFIRED_FIRE_BRICK = getNull();
@@ -165,12 +155,6 @@ public final class ItemsTFC {
 	public static final Item DIRTY_JUTE_NET = getNull();
 	@GameRegistry.ObjectHolder("food/olive_paste")
 	public static final Item OLIVE_PASTE = getNull();
-	@GameRegistry.ObjectHolder("glass_shard")
-	public static final Item GLASS_SHARD = getNull();
-	@GameRegistry.ObjectHolder("stick_bunch")
-	public static final Item STICK_BUNCH = getNull();
-	@GameRegistry.ObjectHolder("wood_ash")
-	public static final Item WOOD_ASH = getNull();
 
 	private static ImmutableList<Item> allSimpleItems;
 	private static ImmutableList<ItemOreTFC> allOreItems;
@@ -194,7 +178,6 @@ public final class ItemsTFC {
 		IForgeRegistry<Item> r = event.getRegistry();
 		Builder<Item> simpleItems = ImmutableList.builder();
 
-		simpleItems.add(register(r, "wand", new ItemDebug(), CT_MISC));
 		simpleItems.add(register(r, "mortar", new ItemMisc(Size.TINY, Weight.VERY_LIGHT, "mortar"), CT_MISC));
 		simpleItems.add(register(r, "halter", new ItemMisc(Size.SMALL, Weight.LIGHT, "halter"), CT_MISC));
 		register(r, "wooden_bucket", new ItemWoodenBucket(), CT_WOOD); //not a simple item, use a custom model
@@ -262,10 +245,6 @@ public final class ItemsTFC {
 			simpleItems.add(register(r, "wood/boat/" + wood.getRegistryName()
 					.getPath(), new ItemBoatTFC(wood), CT_WOOD));
 		}
-
-		simpleItems.add(register(r, "stick_bunch", new ItemMisc(Size.NORMAL, Weight.LIGHT), CT_WOOD));
-		simpleItems.add(register(r, "stick_bundle", new ItemMisc(Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"), CT_WOOD));
-		simpleItems.add(register(r, "wood_ash", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_WOOD));
 
 		for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
 			for (Rock.ToolType type : Rock.ToolType.values()) {
@@ -348,8 +327,6 @@ public final class ItemsTFC {
 		simpleItems.add(register(r, "crop/product/jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 		simpleItems.add(register(r, "crop/product/dirty_jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 
-		simpleItems.add(register(r, "straw", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"), CT_MISC));
-		simpleItems.add(register(r, "glass_shard", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 		simpleItems.add(register(r, "handstone", new ItemCraftingTool(250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"), CT_MISC));
 
 		simpleItems.add(register(r, "spindle", new ItemCraftingTool(40, Size.NORMAL, Weight.MEDIUM, "spindle"), CT_MISC));
@@ -366,17 +343,11 @@ public final class ItemsTFC {
 
 		simpleItems.add(register(r, "quiver", new ItemQuiver(), CT_MISC));
 
-		simpleItems.add(register(r, "animal/product/wool", new ItemMisc(Size.SMALL, Weight.LIGHT), CT_MISC));
-		simpleItems.add(register(r, "animal/product/wool_yarn", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT, "string"), CT_MISC));
-		simpleItems.add(register(r, "animal/product/wool_cloth", new ItemMisc(Size.SMALL, Weight.LIGHT, "cloth_high_quality"), CT_MISC));
-		simpleItems.add(register(r, "animal/product/silk_cloth", new ItemMisc(Size.SMALL, Weight.LIGHT, "cloth_high_quality"), CT_MISC));
-
 		simpleItems.add(register(r, "dye/black", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_black"), CT_MISC));
 		simpleItems.add(register(r, "dye/blue", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_blue"), CT_MISC));
 		simpleItems.add(register(r, "dye/white", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_white"), CT_MISC));
 		simpleItems.add(register(r, "dye/brown", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_brown"), CT_MISC));
 		simpleItems.add(register(r, "alabaster_brick", new ItemMisc(Size.VERY_SMALL, Weight.LIGHT), CT_MISC));
-		simpleItems.add(register(r, "glue", new ItemMisc(Size.TINY, Weight.LIGHT, "slimeball", "glue"), CT_MISC));
 		simpleItems.add(register(r, "brass_mechanisms", new ItemMisc(Size.NORMAL, Weight.LIGHT), CT_MISC));
 
 		register(r, "goldpan", new ItemGoldPan(), CT_MISC);

@@ -4,6 +4,7 @@ import com.eerussianguy.firmalife.init.FruitTreeFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
+import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -1269,50 +1270,26 @@ public final class ItemsTFCF {
 	public static ItemEarthenwareMalletMoldFL malletMoldEarthenware;
 	public static ItemKaoliniteMalletMoldFL malletMoldKaolinite;
 	public static ItemStonewareMalletMoldFL malletMoldStoneware;
+	@Getter
 	private static ImmutableList<Item> allSimpleItems;
+	@Getter
 	private static ImmutableList<ItemBowTFCF> allItemBows;
+	@Getter
 	private static ImmutableList<Item> allFoodItems;
+	@Getter
 	private static ImmutableList<ItemGemTFCF> allGemTFCFItems;
+	@Getter
 	private static ImmutableList<BlockSurfaceOreDeposit> allSurfaceOreBlocks;
+	@Getter
 	private static ImmutableList<ItemFruitDoor> allFruitDoors;
+	@Getter
 	private static ImmutableList<Item> allCeramicMoldItems;
+	@Getter
 	private static ImmutableList<ItemArmorTFCF> allArmorItems;
 	private static Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
 
-	public static ImmutableList<Item> getAllSimpleItems() {
-		return allSimpleItems;
-	}
-
-	public static ImmutableList<ItemBowTFCF> getAllItemBows() {
-		return allItemBows;
-	}
-
-	public static ImmutableList<Item> getAllFoodItems() {
-		return allFoodItems;
-	}
-
-	public static ImmutableList<ItemGemTFCF> getAllGemTFCFItems() {
-		return allGemTFCFItems;
-	}
-
-	public static ImmutableList<BlockSurfaceOreDeposit> getAllSurfaceOreBlocks() {
-		return allSurfaceOreBlocks;
-	}
-
-	public static ImmutableList<ItemFruitDoor> getAllFruitDoors() {
-		return allFruitDoors;
-	}
-
 	public static Item getDriedFruit(FruitsTFCF fruit) {
 		return driedFruits.get(fruit);
-	}
-
-	public static ImmutableList<Item> getAllCeramicMoldItems() {
-		return allCeramicMoldItems;
-	}
-
-	public static ImmutableList<ItemArmorTFCF> getAllArmorItems() {
-		return allArmorItems;
 	}
 
 	@SuppressWarnings("ConstantConditions")

@@ -13,7 +13,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -38,6 +37,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -172,12 +172,12 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 		if (player.isSneaking()) {
 			// This will search through the logItems, then the strawItems
 			ItemStack dropStack = logItems.stream()
-			                              .filter(i -> !i.isEmpty())
-			                              .findFirst()
-			                              .orElseGet(() -> strawItems.stream()
-			                                                         .filter(i -> !i.isEmpty())
-			                                                         .findFirst()
-			                                                         .orElse(ItemStack.EMPTY));
+					.filter(i -> !i.isEmpty())
+					.findFirst()
+					.orElseGet(() -> strawItems.stream()
+							.filter(i -> !i.isEmpty())
+							.findFirst()
+							.orElse(ItemStack.EMPTY));
 			if (!dropStack.isEmpty()) {
 				ItemHandlerHelper.giveItemToPlayer(player, dropStack.splitStack(1));
 				updateBlock();
@@ -321,7 +321,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 
 	private void addStrawBlock() {
 		for (int i = 0; i < 4; i++) {
-			addStraw(new ItemStack(ItemsTFC.STRAW));
+			addStraw(new ItemStack(ItemsCore.STRAW));
 		}
 	}
 

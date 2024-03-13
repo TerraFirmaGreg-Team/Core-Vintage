@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "firmalife:items/jar"
+    "layer0": "tfg:items/core/jar"
   }
 }

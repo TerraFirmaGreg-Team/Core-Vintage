@@ -1,6 +1,5 @@
 package tfctech;
 
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 import tfctech.client.TechGuiHandler;
 import tfctech.network.PacketFridgeUpdate;
 import tfctech.network.PacketLatexUpdate;
@@ -49,7 +49,7 @@ public class TFCTech {
 	public void init(FMLInitializationEvent event) {
 		// Register dust ash ore dictionary
 		// Unfortunately, this has to be done after TFC registered it's items, which is only safe after preInit
-		OreDictionary.registerOre("dustAsh", ItemsTFC.WOOD_ASH);
+		OreDictionary.registerOre("dustAsh", ItemsCore.WOOD_ASH);
 		FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "tfctech.compat.waila.TOPPlugin");
 		TechFoodTraits.init();
 	}

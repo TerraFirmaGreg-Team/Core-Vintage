@@ -31,8 +31,8 @@ import su.terrafirmagreg.modules.rock.objects.tiles.TERockGemDisplay;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.models.Blockstates.HORIZONTAL;
-import static su.terrafirmagreg.api.models.Blockstates.UP;
+import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+import static su.terrafirmagreg.api.util.PropertyUtils.UP;
 
 public class BlockRockStandGem extends BlockRock implements ITEBlock {
 

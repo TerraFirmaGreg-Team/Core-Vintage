@@ -16,7 +16,7 @@ import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.models.Blockstates.*;
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
 public class BlockSoilPodzol extends BlockSoil {
 

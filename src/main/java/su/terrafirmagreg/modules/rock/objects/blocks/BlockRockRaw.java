@@ -27,7 +27,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.models.Blockstates.CAN_FALL;
+import static su.terrafirmagreg.api.util.PropertyUtils.CAN_FALL;
 
 public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 

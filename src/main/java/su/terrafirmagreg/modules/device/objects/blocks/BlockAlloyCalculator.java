@@ -21,7 +21,7 @@ import su.terrafirmagreg.modules.device.objects.tiles.TEAlloyCalculator;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.models.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 
 public class BlockAlloyCalculator extends BlockBase implements ITEBlock {
 

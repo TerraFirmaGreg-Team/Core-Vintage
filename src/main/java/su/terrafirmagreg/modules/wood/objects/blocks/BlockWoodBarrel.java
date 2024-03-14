@@ -40,7 +40,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
-import static su.terrafirmagreg.api.models.Blockstates.SEALED;
+import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes.

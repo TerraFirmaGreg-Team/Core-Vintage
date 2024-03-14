@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.models;
+package su.terrafirmagreg.api.util;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import su.terrafirmagreg.api.models.property.PropertyObject;
 
-public final class Blockstates {
+public final class PropertyUtils {
 
 	/**
 	 * Used to handle whether or not the block is on or off. Used mainly by redstone blocks.
@@ -100,7 +100,7 @@ public final class Blockstates {
 	 * implicit public constructor to every class which does not define at lease one
 	 * explicitly. Hence why this constructor was added.
 	 */
-	private Blockstates() {
+	private PropertyUtils() {
 
 		throw new IllegalAccessError("Utility class");
 	}

@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.models.Blockstates.*;
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
 public class BlockWoodSupport extends BlockWood {
 	private static final AxisAlignedBB VERTICAL_SUPPORT_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1.0D, 0.6875D);

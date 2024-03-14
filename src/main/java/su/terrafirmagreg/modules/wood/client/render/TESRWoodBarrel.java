@@ -26,7 +26,7 @@ import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
-import static su.terrafirmagreg.api.models.Blockstates.SEALED;
+import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
 @SideOnly(Side.CLIENT)
 public class TESRWoodBarrel extends TileEntitySpecialRenderer<TEWoodBarrel> {

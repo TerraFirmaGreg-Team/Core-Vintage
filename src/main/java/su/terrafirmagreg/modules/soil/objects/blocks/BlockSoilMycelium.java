@@ -25,7 +25,7 @@ import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.models.Blockstates.*;
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
 @Getter
 public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {

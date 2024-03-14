@@ -42,8 +42,8 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import java.util.*;
 
-import static su.terrafirmagreg.api.models.Blockstates.PLACED;
-import static su.terrafirmagreg.api.models.Blockstates.SMALL;
+import static su.terrafirmagreg.api.util.PropertyUtils.PLACED;
+import static su.terrafirmagreg.api.util.PropertyUtils.SMALL;
 
 
 @MethodsReturnNonnullByDefault

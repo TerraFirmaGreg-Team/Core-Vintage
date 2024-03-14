@@ -47,7 +47,7 @@ import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.api.models.Blockstates.SEALED;
+import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
 
 public class TEWoodBarrel extends TETickableInventory implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback, IContainerProvider<ContainerWoodBarrel, GuiWoodBarrel> {

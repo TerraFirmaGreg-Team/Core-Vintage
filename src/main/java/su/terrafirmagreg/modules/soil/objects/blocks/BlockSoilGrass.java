@@ -36,7 +36,7 @@ import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.models.Blockstates.*;
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
 @Getter
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulBlock {

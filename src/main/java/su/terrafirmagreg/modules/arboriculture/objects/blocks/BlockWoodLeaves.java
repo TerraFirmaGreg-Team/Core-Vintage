@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.models.Blockstates.HARVESTABLE;
+import static su.terrafirmagreg.api.util.PropertyUtils.HARVESTABLE;
 import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 

@@ -1,6 +1,5 @@
 package de.mennomax.astikorcarts.packets;
 
-import de.mennomax.astikorcarts.capabilities.PullProvider;
 import de.mennomax.astikorcarts.entity.AbstractDrawn;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -10,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
 
 public class CPacketToggleSlow implements IMessage {
 	public CPacketToggleSlow() {
@@ -35,12 +35,12 @@ public class CPacketToggleSlow implements IMessage {
 				if (ridden instanceof EntityLivingBase && ridden.hasCapability(PullProvider.PULL, null)) {
 					if (ridden.getCapability(PullProvider.PULL, null).getDrawn() != null) {
 						if (((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-						                               .hasModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER)) {
+								.hasModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER)) {
 							((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-							                           .removeModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
+									.removeModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
 						} else {
 							((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-							                           .applyModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
+									.applyModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
 						}
 					}
 				}

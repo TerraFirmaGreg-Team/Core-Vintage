@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.wood.network;
 
-import de.mennomax.astikorcarts.capabilities.PullProvider;
 import de.mennomax.astikorcarts.entity.AbstractDrawn;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -9,6 +8,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 import java.util.List;

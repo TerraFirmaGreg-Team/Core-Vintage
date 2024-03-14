@@ -33,6 +33,8 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -450,9 +452,9 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-		var container = getContainer(inventoryPlayer, world, state, pos);
-		return new GuiWoodBarrel(container, inventoryPlayer, this, state.getBlock().getTranslationKey());
+		return new GuiWoodBarrel(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state.getBlock().getTranslationKey());
 	}
 
 	protected static class BarrelFluidTank extends FluidTankCallback {

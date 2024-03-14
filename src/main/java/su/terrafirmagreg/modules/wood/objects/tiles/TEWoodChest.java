@@ -189,6 +189,7 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback, ICont
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public GuiWoodChest getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
 		return new GuiWoodChest(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
 	}

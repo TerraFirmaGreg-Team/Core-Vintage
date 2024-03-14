@@ -1,6 +1,5 @@
 package de.mennomax.astikorcarts.handler;
 
-import de.mennomax.astikorcarts.capabilities.PullProvider;
 import de.mennomax.astikorcarts.entity.ai.EntityAIPullCart;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -9,6 +8,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 

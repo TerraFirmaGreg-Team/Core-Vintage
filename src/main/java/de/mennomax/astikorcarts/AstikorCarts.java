@@ -1,8 +1,5 @@
 package de.mennomax.astikorcarts;
 
-import de.mennomax.astikorcarts.capabilities.IPull;
-import de.mennomax.astikorcarts.capabilities.PullFactory;
-import de.mennomax.astikorcarts.capabilities.PullStorage;
 import de.mennomax.astikorcarts.handler.GuiHandler;
 import de.mennomax.astikorcarts.handler.PacketHandler;
 import de.mennomax.astikorcarts.proxy.IProxy;
@@ -16,6 +13,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.IPull;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullFactory;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullStorage;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 

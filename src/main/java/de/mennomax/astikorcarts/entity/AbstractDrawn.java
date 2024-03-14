@@ -1,6 +1,5 @@
 package de.mennomax.astikorcarts.entity;
 
-import de.mennomax.astikorcarts.capabilities.PullProvider;
 import de.mennomax.astikorcarts.config.ModConfig;
 import de.mennomax.astikorcarts.handler.PacketHandler;
 import de.mennomax.astikorcarts.packets.SPacketDrawnUpdate;
@@ -27,6 +26,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
 
 import java.util.UUID;
 
@@ -99,20 +99,20 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
 					if (this.pulling != null) {
 						if (this.pulling instanceof EntityLivingBase) {
 							((EntityLivingBase) this.pulling).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-							                                 .removeModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
+									.removeModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
 						}
 						this.pulling.getCapability(PullProvider.PULL, null).setDrawn(null);
 						this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
 					}
 					((WorldServer) this.world).getEntityTracker()
-					                          .sendToTracking(this, PacketHandler.INSTANCE.getPacketFrom(new SPacketDrawnUpdate(-1, this.getEntityId())));
+							.sendToTracking(this, PacketHandler.INSTANCE.getPacketFrom(new SPacketDrawnUpdate(-1, this.getEntityId())));
 				} else {
 					if (entityIn instanceof EntityLiving) {
 						((EntityLiving) entityIn).getNavigator().clearPath();
 					}
 					entityIn.getCapability(PullProvider.PULL, null).setDrawn(this);
 					((WorldServer) this.world).getEntityTracker()
-					                          .sendToTracking(this, PacketHandler.INSTANCE.getPacketFrom(new SPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
+							.sendToTracking(this, PacketHandler.INSTANCE.getPacketFrom(new SPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
 					this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);
 				}
 			}

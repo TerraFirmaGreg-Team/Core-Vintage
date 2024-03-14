@@ -26,6 +26,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.tile.IContainerProvider;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -221,6 +223,7 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public GuiWoodPlow getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
 		return new GuiWoodPlow(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, inventory);
 	}

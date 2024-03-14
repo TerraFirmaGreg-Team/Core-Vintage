@@ -1,8 +1,8 @@
 package de.mennomax.astikorcarts.entity.ai;
 
-import de.mennomax.astikorcarts.capabilities.PullProvider;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
 
 public class EntityAIPullCart extends EntityAIBase {
 	private final EntityLiving living;

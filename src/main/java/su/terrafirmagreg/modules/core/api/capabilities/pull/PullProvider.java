@@ -1,4 +1,4 @@
-package de.mennomax.astikorcarts.capabilities;
+package su.terrafirmagreg.modules.core.api.capabilities.pull;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

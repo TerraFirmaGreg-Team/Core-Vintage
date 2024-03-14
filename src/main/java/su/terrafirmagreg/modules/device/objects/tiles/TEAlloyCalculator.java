@@ -9,6 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
@@ -74,6 +76,7 @@ public class TEAlloyCalculator extends TEBase implements IContainerProvider<Cont
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public GuiAlloyCalculator getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
 		return new GuiAlloyCalculator(getContainer(inventoryPlayer, world, state, pos));
 	}

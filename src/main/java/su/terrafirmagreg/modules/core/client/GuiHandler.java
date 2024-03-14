@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.spi.tile.IContainerProvider;
+import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.TileUtil;
 
 public class GuiHandler implements IGuiHandler {

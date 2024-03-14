@@ -30,7 +30,7 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
 			throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
 
 		for (var type : WoodType.getTypes()) {
-			if (ItemsWood.WOOD_ITEMS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
+			if (ItemsWood.WOOD_ITEMS.put(Pair.of(this, type), builder.factory.apply(this, type)) != null)
 				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 		}
 	}
@@ -45,7 +45,7 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
 	}
 
 	public Item get(WoodType type) {
-		var item = ItemsWood.WOOD_ITEMS.get(new Pair<>(this, type));
+		var item = ItemsWood.WOOD_ITEMS.get(Pair.of(this, type));
 		if (item != null) return item;
 		throw new RuntimeException(String.format("Item wood is null: %s, %s", this, type));
 	}

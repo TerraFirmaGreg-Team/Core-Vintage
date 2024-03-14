@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.spi.tile.IContainerProvider;
+import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.objects.container.ContainerAlloyCalculator;

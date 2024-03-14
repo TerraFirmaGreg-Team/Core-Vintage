@@ -30,7 +30,7 @@ public class SoilItemVariant implements Comparable<SoilItemVariant> {
 			throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
 
 		for (var type : SoilType.getTypes()) {
-			if (ItemsSoil.SOIL_ITEMS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
+			if (ItemsSoil.SOIL_ITEMS.put(Pair.of(this, type), builder.factory.apply(this, type)) != null)
 				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 		}
 	}
@@ -45,7 +45,7 @@ public class SoilItemVariant implements Comparable<SoilItemVariant> {
 	}
 
 	public Item get(SoilType type) {
-		var item = ItemsSoil.SOIL_ITEMS.get(new Pair<>(this, type));
+		var item = ItemsSoil.SOIL_ITEMS.get(Pair.of(this, type));
 		if (item != null) return item;
 		throw new RuntimeException(String.format("Item soil is null: %s, %s", this, type));
 	}

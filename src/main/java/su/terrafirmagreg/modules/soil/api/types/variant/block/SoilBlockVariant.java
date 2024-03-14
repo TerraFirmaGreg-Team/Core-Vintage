@@ -37,7 +37,7 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
 			throw new RuntimeException(String.format("SoilBlockVariant: [%s] already exists!", name));
 
 		for (var type : SoilType.getTypes()) {
-			if (BlocksSoil.SOIL_BLOCKS.put(new Pair<>(this, type), builder.factory.apply(this, type)) != null)
+			if (BlocksSoil.SOIL_BLOCKS.put(Pair.of(this, type), builder.factory.apply(this, type)) != null)
 				throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 		}
 	}
@@ -52,7 +52,7 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
 	}
 
 	public Block get(SoilType type) {
-		var block = BlocksSoil.SOIL_BLOCKS.get(new Pair<>(this, type));
+		var block = BlocksSoil.SOIL_BLOCKS.get(Pair.of(this, type));
 		if (block != null) return block;
 		throw new RuntimeException(String.format("Block soil is null: %s, %s", this, type));
 	}

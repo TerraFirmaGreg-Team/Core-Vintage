@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
 import net.minecraft.block.Block;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -28,6 +29,7 @@ import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
@@ -87,6 +89,11 @@ public class RegistryManager {
 	 * A list of all the sounds registered by the helper.
 	 */
 	private final NonNullList<SoundEvent> sounds = NonNullList.create();
+
+	/**
+	 * A list of all the keyBinding registered by the helper.
+	 */
+	private final NonNullList<KeyBinding> keyBinding = NonNullList.create();
 
 	/**
 	 * A list of all entities registered by the helper.
@@ -207,17 +214,9 @@ public class RegistryManager {
 
 	//region // ===== Block ========================================================================================================================//
 
-	public void registerAuto(Block... blocks) {
-		for (Block block : blocks) {
-			registerAuto(block);
-		}
-	}
-
 	public void registerAuto(Block block) {
 		if (block instanceof IAutoReg provider) {
-			ItemBlock itemBlock = provider.getItemBlock();
-			String id = provider.getName();
-			this.registerBlock(block, itemBlock, id);
+			this.registerBlock(block, provider.getItemBlock(), provider.getName());
 		}
 	}
 
@@ -227,18 +226,18 @@ public class RegistryManager {
 	 *
 	 * @param block     The block to register.
 	 * @param itemBlock The ItemBlock for the block.
-	 * @param id        The id to register the block with.
+	 * @param name      The name to register the block with.
 	 */
-	public void registerBlock(@Nonnull Block block, @Nullable ItemBlock itemBlock, @Nonnull String id) {
+	public <T extends Block> T registerBlock(@Nonnull T block, @Nullable ItemBlock itemBlock, @Nonnull String name) {
 
-		block.setRegistryName(this.modID, id);
-		block.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
+		block.setRegistryName(this.modID, name);
+		block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
 		if (this.tab != null)
 			block.setCreativeTab(this.tab);
 
 		this.blocks.add(block);
 
-		if (itemBlock != null) this.registerItem(itemBlock, id);
+		if (itemBlock != null) this.registerItem(itemBlock, name);
 		if (block instanceof ITEBlock te) this.tileProviders.add(te);
 
 		if (GameUtils.isClient()) {
@@ -254,23 +253,16 @@ public class RegistryManager {
 			}
 			if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
 		}
+		return block;
 	}
 
 	//endregion
 
 	//region // ===== Item =========================================================================================================================//
 
-	public void registerAuto(Item... items) {
-		for (Item item : items) {
-			registerAuto(item);
-		}
-	}
-
 	public void registerAuto(Item item) {
 		if (item instanceof IAutoReg provider) {
-			String id = provider.getName();
-
-			this.registerItem(item, id);
+			this.registerItem(item, provider.getName());
 		}
 	}
 
@@ -279,12 +271,12 @@ public class RegistryManager {
 	 * if {@link #tab} has been set. The item will also be cached in {@link #items}.
 	 *
 	 * @param item The item to register.
-	 * @param id   The id to register the item with.
+	 * @param name The name to register the item with.
 	 */
-	public void registerItem(@Nonnull Item item, @Nonnull String id) {
+	public <T extends Item> T registerItem(@Nonnull T item, @Nonnull String name) {
 
-		item.setRegistryName(this.modID, id);
-		item.setTranslationKey(this.modID + "." + id.toLowerCase().replace("_", ".").replaceAll("/", "."));
+		item.setRegistryName(this.modID, name);
+		item.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
 		this.items.add(item);
 
 		if (this.tab != null) {
@@ -302,6 +294,7 @@ public class RegistryManager {
 			if (item instanceof ICustomMesh) this.customMeshes.add(item);
 			if (item instanceof IColorfulItem) this.coloredItems.add(item);
 		}
+		return item;
 	}
 
 	//endregion
@@ -309,15 +302,15 @@ public class RegistryManager {
 	//region // ===== Potions ======================================================================================================================//
 
 
-	public Potion registerPotion(@Nonnull String id, @Nonnull Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
+	public Potion registerPotion(@Nonnull String name, @Nonnull Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
 
 		potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
-		return this.registerPotion(id, potion);
+		return this.registerPotion(name, potion);
 	}
 
-	public Potion registerPotion(@Nonnull String id, @Nonnull Potion potion) {
-		potion.setRegistryName(this.modID, id);
-		potion.setPotionName(this.modID + ".effect." + id.toLowerCase().replace("_", "."));
+	public Potion registerPotion(@Nonnull String name, @Nonnull Potion potion) {
+		potion.setRegistryName(this.modID, name);
+		potion.setPotionName(this.modID + ".effect." + name.toLowerCase().replace("_", "."));
 		this.potions.add(potion);
 		return potion;
 	}
@@ -326,21 +319,21 @@ public class RegistryManager {
 
 	//region // ===== Potion Types =================================================================================================================//
 
-	public PotionType registerPotionType(@Nonnull String id, @Nonnull Potion potion, int duration) {
+	public PotionType registerPotionType(@Nonnull String name, @Nonnull Potion potion, int duration) {
 
-		PotionType potionType = new PotionType(new PotionEffect(potion, duration));
-		return registerPotionType(id, potionType);
+		var potionType = new PotionType(new PotionEffect(potion, duration));
+		return registerPotionType(name, potionType);
 	}
 
-	public PotionType registerPotionType(@Nonnull String id, @Nonnull PotionType potionType, @Nonnull Potion potion, int duration) {
+	public PotionType registerPotionType(@Nonnull String name, @Nonnull PotionType potionType, @Nonnull Potion potion, int duration) {
 
 		potionType = new PotionType(new PotionEffect(potion, duration));
-		return registerPotionType(id, potionType);
+		return registerPotionType(name, potionType);
 	}
 
-	public PotionType registerPotionType(@Nonnull String id, @Nonnull PotionType potionType) {
+	public PotionType registerPotionType(@Nonnull String name, @Nonnull PotionType potionType) {
 
-		potionType.setRegistryName(this.modID, id);
+		potionType.setRegistryName(this.modID, name);
 		this.potionType.add(potionType);
 		return potionType;
 	}
@@ -349,13 +342,13 @@ public class RegistryManager {
 
 	//region // ===== Biome ========================================================================================================================//
 
-	public void registerBiome(Biome biome, String id) {
-		this.registerBiome(biome, id, new BiomeDictionary.Type[0]);
+	public void registerBiome(Biome biome, String name) {
+		this.registerBiome(biome, name, new BiomeDictionary.Type[0]);
 	}
 
-	public void registerBiome(Biome biome, String id, BiomeDictionary.Type[] types) {
+	public void registerBiome(Biome biome, String name, BiomeDictionary.Type[] types) {
 
-		biome.setRegistryName(this.modID, id);
+		biome.setRegistryName(this.modID, name);
 		this.biomes.add(biome);
 
 		if (types.length > 0) {
@@ -376,8 +369,8 @@ public class RegistryManager {
 	 */
 	public SoundEvent registerSound(String name) {
 
-		final ResourceLocation id = new ResourceLocation(this.modID, name);
-		final SoundEvent sound = new SoundEvent(id).setRegistryName(id);
+		final ResourceLocation soundNameIn = new ResourceLocation(this.modID, name);
+		final SoundEvent sound = new SoundEvent(soundNameIn).setRegistryName(soundNameIn);
 		this.sounds.add(sound);
 
 		return sound;
@@ -385,29 +378,42 @@ public class RegistryManager {
 
 	//endregion
 
+	//region // ===== KeyBinding ===================================================================================================================//
+
+	public KeyBinding registerKeyBinding(String description, int keyCode) {
+
+		var prefix = "key." + modID + ".";
+		final KeyBinding key = new KeyBinding(prefix + description, keyCode, prefix + "categories");
+		ClientRegistry.registerKeyBinding(key);
+
+		this.keyBinding.add(key);
+		return key;
+	}
+
+	//endregion
 	//region // ===== Entity =======================================================================================================================//
 
 	/**
 	 * Registers any sort of entity. Will not have a spawn egg.
 	 *
 	 * @param entClass The entity class.
-	 * @param id       The string id for the entity.
+	 * @param name     The string name for the entity.
 	 * @return The entity that was registered.
 	 */
-	public <T extends Entity> EntityEntryBuilder<T> registerEntity(String id, Class<T> entClass) {
+	public <T extends Entity> EntityEntryBuilder<T> registerEntity(String name, Class<T> entClass) {
 
 		final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
 		builder.entity(entClass);
 
-		registerEntity(id, builder);
+		registerEntity(name, builder);
 
 		return builder;
 	}
 
-	public <E extends Entity> void registerEntity(String id, EntityEntryBuilder<E> builder) {
-		final ResourceLocation entId = new ResourceLocation(this.modID, id);
+	public <E extends Entity> void registerEntity(String name, EntityEntryBuilder<E> builder) {
+		final ResourceLocation entId = new ResourceLocation(this.modID, name);
 		builder.id(entId, this.networkEntityIdSupplier.getAndIncrement());
-		builder.name(this.modID + "." + id);
+		builder.name(this.modID + "." + name);
 
 		this.entities.add(builder.build());
 		this.entityIds.add(entId);
@@ -417,17 +423,17 @@ public class RegistryManager {
 	 * Registers any sort of entity. Will have a spawn egg.
 	 *
 	 * @param entClass The entity class.
-	 * @param id       The string id for the entity.
+	 * @param name     The string name for the entity.
 	 * @return The entity that was registered.
 	 */
-	public <T extends Entity> EntityEntryBuilder<T> registerEntity(String id, Class<T> entClass, int primary, int seconday) {
+	public <T extends Entity> EntityEntryBuilder<T> registerEntity(String name, Class<T> entClass, int primary, int seconday) {
 
 		final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
 		builder.entity(entClass);
 		builder.tracker(64, 1, true);
 		builder.egg(primary, seconday);
 
-		this.registerEntity(id, builder);
+		this.registerEntity(name, builder);
 		return builder;
 	}
 
@@ -439,12 +445,12 @@ public class RegistryManager {
 	 * Registers an enchantment.
 	 *
 	 * @param enchant The enchantment to register.
-	 * @param id      The ID of the enchantment.
+	 * @param name    The ID of the enchantment.
 	 * @return The enchantment that was registered.
 	 */
-	public Enchantment registerEnchantment(Enchantment enchant, String id) {
+	public Enchantment registerEnchantment(Enchantment enchant, String name) {
 
-		enchant.setRegistryName(new ResourceLocation(this.modID, id));
+		enchant.setRegistryName(new ResourceLocation(this.modID, name));
 		this.enchantments.add(enchant);
 		return enchant;
 	}
@@ -461,39 +467,39 @@ public class RegistryManager {
 	/**
 	 * Adds a shaped recipe to the game.
 	 *
-	 * @param id     The id of the recipe.
+	 * @param name   The name of the recipe.
 	 * @param output The output for the recipe.
 	 * @param inputs The inputs. Pattern, then char followed by what it represents.
 	 * @return The recipe registered.
 	 */
-	public IRecipe addShapedRecipe(String id, ItemStack output, Object... inputs) {
+	public IRecipe addShapedRecipe(String name, ItemStack output, Object... inputs) {
 
-		return this.registerRecipe(id, new ShapedOreRecipe(null, output, inputs));
+		return this.registerRecipe(name, new ShapedOreRecipe(null, output, inputs));
 	}
 
 	/**
 	 * Adds a shapeless recipe to the game.
 	 *
-	 * @param id     The id of the recipe.
+	 * @param name   The name of the recipe.
 	 * @param output The output of the recipe.
 	 * @param inputs The inputs for the recipe.
 	 * @return The recipe registered.
 	 */
-	public IRecipe addShapelessRecipe(String id, ItemStack output, Object... inputs) {
+	public IRecipe addShapelessRecipe(String name, ItemStack output, Object... inputs) {
 
-		return this.registerRecipe(id, new ShapelessOreRecipe(null, output, inputs));
+		return this.registerRecipe(name, new ShapelessOreRecipe(null, output, inputs));
 	}
 
 	/**
 	 * Adds a recipe to the game.
 	 *
-	 * @param id     The id of the recipe.
+	 * @param name   The name of the recipe.
 	 * @param recipe The recipe object.
 	 * @return The registered registry object.
 	 */
-	public IRecipe registerRecipe(String id, IRecipe recipe) {
+	public IRecipe registerRecipe(String name, IRecipe recipe) {
 
-		recipe.setRegistryName(new ResourceLocation(this.modID, id));
+		recipe.setRegistryName(new ResourceLocation(this.modID, name));
 		this.recipes.add(recipe);
 		return recipe;
 	}

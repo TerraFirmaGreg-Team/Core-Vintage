@@ -1,6 +1,5 @@
 package de.mennomax.astikorcarts.packets;
 
-import de.mennomax.astikorcarts.entity.AbstractDrawn;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -9,6 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
+import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 import java.util.List;
 
@@ -33,13 +33,13 @@ public class CPacketActionKey implements IMessage {
 		public IMessage onMessage(CPacketActionKey message, MessageContext ctx) {
 			EntityPlayerMP sender = ctx.getServerHandler().player;
 			sender.getServerWorld().addScheduledTask(() -> {
-				List<AbstractDrawn> result = sender.getServerWorld()
-						.getEntitiesWithinAABB(AbstractDrawn.class, sender.getEntityBoundingBox()
+				List<EntityWoodCart> result = sender.getServerWorld()
+						.getEntitiesWithinAABB(EntityWoodCart.class, sender.getEntityBoundingBox()
 								.grow(3), entity -> entity != sender.getRidingEntity() && entity.isEntityAlive());
 				if (!result.isEmpty()) {
 					Entity target = sender.isRiding() ? sender.getRidingEntity() : sender;
-					AbstractDrawn closest = result.get(0);
-					for (AbstractDrawn cart : result) {
+					EntityWoodCart closest = result.get(0);
+					for (EntityWoodCart cart : result) {
 						if (cart.getPulling() == target) {
 							cart.setPulling(null);
 							return;
@@ -50,7 +50,7 @@ public class CPacketActionKey implements IMessage {
 					}
 					if (closest.canBePulledBy(target)) {
 						if (target.hasCapability(PullProvider.PULL, null)) {
-							AbstractDrawn drawn = target.getCapability(PullProvider.PULL, null).getDrawn();
+							EntityWoodCart drawn = target.getCapability(PullProvider.PULL, null).getDrawn();
 							if (drawn != null && drawn.getPulling() == target) {
 								return;
 							}

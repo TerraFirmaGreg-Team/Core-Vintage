@@ -1,11 +1,11 @@
 package de.mennomax.astikorcarts.packets;
 
-import de.mennomax.astikorcarts.entity.AbstractDrawn;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 public class SPacketDrawnUpdate implements IMessage {
 	private int pullingId;
@@ -36,7 +36,7 @@ public class SPacketDrawnUpdate implements IMessage {
 		@Override
 		public IMessage onMessage(SPacketDrawnUpdate message, MessageContext ctx) {
 			Minecraft.getMinecraft().addScheduledTask(() -> {
-				AbstractDrawn cart = (AbstractDrawn) Minecraft.getMinecraft().world.getEntityByID(message.cartId);
+				EntityWoodCart cart = (EntityWoodCart) Minecraft.getMinecraft().world.getEntityByID(message.cartId);
 				if (message.pullingId < 0) {
 					cart.setPulling(null);
 					return;

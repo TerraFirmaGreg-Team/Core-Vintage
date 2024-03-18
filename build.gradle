@@ -194,30 +194,30 @@ if (propertyBool('use_access_transformer')) {
     }
 }
 
-processResources {
-
-    filesMatching(['mcmod.info', 'pack.mcmeta', 'mixins.*(?!refmap).*\\.json']) {
-        def authors = propertyString('mod_authors').split(',').collect { """\"${it.trim()}\"""" }.join(', ')
-        expand(
-                'mod_id': propertyString('mod_id'),
-                'mod_name': propertyString('mod_name'),
-                'mod_version': propertyString('mod_version'),
-                'mod_description': propertyString('mod_description'),
-                'mod_authors': "[${authors}]",
-                'mod_credits': propertyString('mod_credits'),
-                'mod_url': propertyString('mod_url'),
-                'mod_update_json': propertyString('mod_update_json'),
-                'mod_logo_path': propertyString('mod_logo_path'),
-                'mixin_refmap': propertyString('mixin_refmap'),
-                'mixin_package': propertyString('mixin_package')
-        )
-    }
-
-    if (propertyBool('use_access_transformer')) {
-        rename '(.+_at.cfg)', 'META-INF/$1'
-    }
-
-}
+//processResources {
+//
+//    filesMatching(['mcmod.info', 'pack.mcmeta', 'mixins.*(?!refmap).*\\.json']) {
+//        def authors = propertyString('mod_authors').split(',').collect { """\"${it.trim()}\"""" }.join(', ')
+//        expand(
+//                'mod_id': propertyString('mod_id'),
+//                'mod_name': propertyString('mod_name'),
+//                'mod_version': propertyString('mod_version'),
+//                'mod_description': propertyString('mod_description'),
+//                'mod_authors': "[${authors}]",
+//                'mod_credits': propertyString('mod_credits'),
+//                'mod_url': propertyString('mod_url'),
+//                'mod_update_json': propertyString('mod_update_json'),
+//                'mod_logo_path': propertyString('mod_logo_path'),
+//                'mixin_refmap': propertyString('mixin_refmap'),
+//                'mixin_package': propertyString('mixin_package')
+//        )
+//    }
+//
+//    if (propertyBool('use_access_transformer')) {
+//        rename '(.+_at.cfg)', 'META-INF/$1'
+//    }
+//
+//}
 
 jar {
     zip64 = true

@@ -27,12 +27,12 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.Optional;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.property.PropertyUnlistedDirection;
 import se.gory_moon.horsepower.client.model.modelvariants.HandGrindstoneModels;
 import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityHandGrindstone;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
+import su.terrafirmagreg.api.models.property.PropertyUnlistedDirection;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -132,14 +132,14 @@ public class BlockHandGrindstone extends BlockHPBase implements IProbeInfoAccess
 			IExtendedBlockState extendedState = (IExtendedBlockState) getExtendedState(state, worldIn, pos);
 			EnumFacing enumfacing = extendedState.getValue(FACING);
 			worldIn.setBlockState(pos, extendedState.withProperty(FACING, enumfacing)
-			                                        .withProperty(PART, HandGrindstoneModels.BASE), 2);
+					.withProperty(PART, HandGrindstoneModels.BASE), 2);
 		}
 	}
 
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		worldIn.setBlockState(pos, ((IExtendedBlockState) state).withProperty(FACING, placer.getHorizontalFacing()
-		                                                                                    .getOpposite())
-		                                                        .withProperty(PART, HandGrindstoneModels.BASE), 2);
+						.getOpposite())
+				.withProperty(PART, HandGrindstoneModels.BASE), 2);
 
 		TileEntityHandGrindstone tile = getTileEntity(worldIn, pos);
 		if (tile == null)
@@ -164,7 +164,7 @@ public class BlockHandGrindstone extends BlockHPBase implements IProbeInfoAccess
 			return state;
 
 		return ((IExtendedBlockState) state).withProperty(FACING, tile.getForward())
-		                                    .withProperty(PART, state.getValue(PART));
+				.withProperty(PART, state.getValue(PART));
 	}
 
 	// The One Probe Integration
@@ -173,8 +173,9 @@ public class BlockHandGrindstone extends BlockHPBase implements IProbeInfoAccess
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		TileEntityHandGrindstone tileEntity = (TileEntityHandGrindstone) world.getTileEntity(data.getPos());
 		if (tileEntity != null) {
-			probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L, new ProgressStyle().prefix(Localization.TOP.GRINDSTONE_PROGRESS.translate() + " ")
-			                                                                                                                                     .suffix("%"));
+			probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L, new ProgressStyle()
+					.prefix(Localization.TOP.GRINDSTONE_PROGRESS.translate() + " ")
+					.suffix("%"));
 		}
 	}
 }

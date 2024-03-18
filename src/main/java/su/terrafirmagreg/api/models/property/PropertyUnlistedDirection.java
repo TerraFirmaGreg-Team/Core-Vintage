@@ -1,4 +1,4 @@
-package se.gory_moon.horsepower.blocks.property;
+package su.terrafirmagreg.api.models.property;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.property.IUnlistedProperty;

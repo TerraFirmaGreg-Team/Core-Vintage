@@ -21,12 +21,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.oredict.OreDictionary;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.blocks.property.PropertyUnlistedString;
 import se.gory_moon.horsepower.tileentity.TileEntityChopper;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.RenderUtils;
 import se.gory_moon.horsepower.util.Utils;
+import su.terrafirmagreg.api.models.property.PropertyUnlistedString;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -126,8 +126,8 @@ public abstract class BlockHPChoppingBase extends BlockHPBase {
 		List<ItemStack> stacks = Utils.getCraftingItems(this);
 		for (ItemStack stack : stacks) {
 			if (!Configs.general.useDynamicDisplay && !MODID_TFC.equals(stack.getItem()
-			                                                                 .getRegistryName()
-			                                                                 .getNamespace()))
+					.getRegistryName()
+					.getNamespace()))
 				continue;
 			Block block = getBlockFromItem(stack.getItem());
 			int blockMeta = stack.getItemDamage();

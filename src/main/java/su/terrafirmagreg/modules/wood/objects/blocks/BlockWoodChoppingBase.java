@@ -20,11 +20,11 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.NotNull;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
-import se.gory_moon.horsepower.blocks.property.PropertyUnlistedString;
 import se.gory_moon.horsepower.tileentity.TileEntityChopper;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.RenderUtils;
+import su.terrafirmagreg.api.models.property.PropertyUnlistedString;
 
 import java.util.ArrayList;
 import java.util.List;

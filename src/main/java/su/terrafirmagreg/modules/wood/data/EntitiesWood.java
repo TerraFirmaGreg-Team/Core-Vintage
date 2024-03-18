@@ -7,7 +7,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.wood.client.render.RenderWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.client.render.RenderWoodBoat;
-import su.terrafirmagreg.modules.wood.client.render.RenderWoodPlow;
+import su.terrafirmagreg.modules.wood.client.render.RenderWoodPlowCart;
 import su.terrafirmagreg.modules.wood.client.render.RenderWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodBoat;
@@ -47,7 +47,7 @@ public final class EntitiesWood {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodBoat.class, RenderWoodBoat::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodSupplyCart.class, RenderWoodSupplyCart::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodAnimalCart.class, RenderWoodAnimalCart::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodPlowCart.class, RenderWoodPlow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityWoodPlowCart.class, RenderWoodPlowCart::new);
 
 	}
 }

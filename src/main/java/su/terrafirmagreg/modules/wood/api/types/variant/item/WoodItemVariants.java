@@ -7,5 +7,5 @@ public class WoodItemVariants {
 	public static WoodItemVariant WHEEL;
 	public static WoodItemVariant SUPPLY_CART;
 	public static WoodItemVariant ANIMAL_CART;
-	public static WoodItemVariant PLOW;
+	public static WoodItemVariant PLOW_CART;
 }

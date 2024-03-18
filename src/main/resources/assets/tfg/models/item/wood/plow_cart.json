@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tfg:items/wood/plow"
+    "layer0": "tfg:items/wood/plow_cart"
   }
 }

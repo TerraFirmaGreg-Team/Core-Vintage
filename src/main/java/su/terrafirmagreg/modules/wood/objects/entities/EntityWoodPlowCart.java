@@ -75,7 +75,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory implements IInve
 	public Item getItemCart() {
 		var type = getWood();
 		if (type != null) {
-			return WoodItemVariants.PLOW.get(type);
+			return WoodItemVariants.PLOW_CART.get(type);
 		}
 		return getItemCart();
 	}

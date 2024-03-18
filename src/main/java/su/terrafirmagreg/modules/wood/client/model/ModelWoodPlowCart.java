@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlowCart;
 
 @SideOnly(Side.CLIENT)
-public class ModelWoodPlow extends ModelBase {
+public class ModelWoodPlowCart extends ModelBase {
 
 	private final ModelRenderer axis;
 	private final ModelRenderer[] triangle = new ModelRenderer[3];
@@ -22,7 +22,7 @@ public class ModelWoodPlow extends ModelBase {
 	private final ModelRenderer leftWheel;
 	private final ModelRenderer rightWheel;
 
-	public ModelWoodPlow() {
+	public ModelWoodPlowCart() {
 		// --AXIS--------------------------------------
 		this.axis = new ModelRenderer(this, 0, 0);
 		this.axis.addBox(-12.5F, 4.0F, 0.0F, 25, 2, 2);

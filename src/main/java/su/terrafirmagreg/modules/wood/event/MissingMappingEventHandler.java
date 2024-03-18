@@ -30,7 +30,7 @@ public class MissingMappingEventHandler {
 				// Astikor Carts
 				switch (mappingKey) {
 					case "astikorcarts:plowcart":
-						mapping.remap(WoodItemVariants.PLOW.get(ACACIA));
+						mapping.remap(WoodItemVariants.PLOW_CART.get(ACACIA));
 						break;
 					case "astikorcarts:cargocart":
 						mapping.remap(WoodItemVariants.SUPPLY_CART.get(ACACIA));

@@ -13,15 +13,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.client.model.ModelWoodPlow;
+import su.terrafirmagreg.modules.wood.client.model.ModelWoodPlowCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlowCart;
 
 @SideOnly(Side.CLIENT)
-public class RenderWoodPlow extends Render<EntityWoodPlowCart> {
+public class RenderWoodPlowCart extends Render<EntityWoodPlowCart> {
 
-	protected ModelBase model = new ModelWoodPlow();
+	protected ModelBase model = new ModelWoodPlowCart();
 
-	public RenderWoodPlow(RenderManager renderManager) {
+	public RenderWoodPlowCart(RenderManager renderManager) {
 		super(renderManager);
 		this.shadowSize = 0.6F;
 	}
@@ -72,7 +72,7 @@ public class RenderWoodPlow extends Render<EntityWoodPlowCart> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(@NotNull EntityWoodPlowCart entity) {
-		return ModUtils.getID("textures/entity/wood/plow.png");
+		return ModUtils.getID("textures/entity/wood/plow_cart.png");
 	}
 
 	public void setupRotation(float entityYaw) {

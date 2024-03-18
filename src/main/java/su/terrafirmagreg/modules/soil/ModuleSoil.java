@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @ModuleTFG(moduleID = "Soil", name = "TFG Module Soil")
-public class ModuleSoil extends ModuleBase {
+public final class ModuleSoil extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleSoil.class.getSimpleName());
 

@@ -11,8 +11,8 @@ import su.terrafirmagreg.modules.agriculture.data.ItemsAgriculture;
 import javax.annotation.Nonnull;
 
 //@Module(moduleID = "Agriculture", name = "TFG Module Agriculture")
-public class ModuleAgriculture extends ModuleBase {
-	public static final CreativeTabs AGRICULTURE_TAB = new CreativeTabBase("agriculture", "tfc:agriculture/crop/seed/rice");
+public final class ModuleAgriculture extends ModuleBase {
+	public static final CreativeTabs AGRICULTURE_TAB = new CreativeTabBase("agriculture", "agriculture/crop/seed/rice");
 	public static final Logger LOGGER = LogManager.getLogger(ModuleAgriculture.class.getSimpleName());
 
 	public ModuleAgriculture() {

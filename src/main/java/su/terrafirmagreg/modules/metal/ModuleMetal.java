@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.metal.data.ItemsMetal;
 import javax.annotation.Nonnull;
 
 //@Module(moduleID = "Metal", name = "TFG Module Metal")
-public class ModuleMetal extends ModuleBase {
+public final class ModuleMetal extends ModuleBase {
 	public static final Logger LOGGER = LogManager.getLogger(ModuleMetal.class.getSimpleName());
 	public static final CreativeTabs METAL_TAB = new CreativeTabBase("metal", "metal/anvil/red_steel");
 

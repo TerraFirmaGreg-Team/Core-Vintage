@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 import static su.terrafirmagreg.modules.core.ModuleCore.CORE_TAB;
 
 @ModuleTFG(moduleID = "Animal", name = "TFG Module Animal")
-public class ModuleAnimal extends ModuleBase {
+public final class ModuleAnimal extends ModuleBase {
 	public static final Logger LOGGER = LogManager.getLogger(ModuleAnimal.class.getSimpleName());
 
 

@@ -14,7 +14,7 @@ import su.terrafirmagreg.modules.device.data.SoundDevice;
 import javax.annotation.Nonnull;
 
 @ModuleTFG(moduleID = "Device", name = "TFG Module Device")
-public class ModuleDevice extends ModuleBase {
+public final class ModuleDevice extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleDevice.class.getSimpleName());
 	public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/firestarter");

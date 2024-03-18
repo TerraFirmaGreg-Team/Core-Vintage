@@ -19,12 +19,10 @@ import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 @ModuleTFG(moduleID = "Core", name = "TFG Module Core",
 		description = "Core TFG content. Disabling this disables the entire mod and all its module.")
-public class ModuleCore extends ModuleBase {
+public final class ModuleCore extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleCore.class.getSimpleName());
-
 	public static final CreativeTabs CORE_TAB = new CreativeTabBase("misc", "core/wand");
-
 
 	public ModuleCore() {
 		super(1);

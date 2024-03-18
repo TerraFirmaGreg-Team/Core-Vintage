@@ -12,7 +12,7 @@ import su.terrafirmagreg.modules.arboriculture.data.ItemsArboriculture;
 import javax.annotation.Nonnull;
 
 //@Module(moduleID = "Arboriculture", name = "TFG Module Arboriculture")
-public class ModuleArboriculture extends ModuleBase {
+public final class ModuleArboriculture extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger("Module Arboriculture");
 	public static final CreativeTabs ARBORICULTURE_TAB = new CreativeTabBase("arboriculture", "arboriculture/log/pine");

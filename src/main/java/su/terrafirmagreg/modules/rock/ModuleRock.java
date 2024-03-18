@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 @ModuleTFG(moduleID = "Rock", name = "TFG Module Rock")
-public class ModuleRock extends ModuleBase {
+public final class ModuleRock extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleRock.class.getSimpleName());
 

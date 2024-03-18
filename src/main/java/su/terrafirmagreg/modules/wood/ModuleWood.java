@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 @ModuleTFG(moduleID = "Wood", name = "TFG Module Wood")
-public class ModuleWood extends ModuleBase {
+public final class ModuleWood extends ModuleBase {
 
 	public static final Logger LOGGER = LogManager.getLogger(ModuleWood.class.getSimpleName());
 	public static final CreativeTabs WOOD_TAB = new CreativeTabBase("wood", "wood/planks/pine");
@@ -42,9 +42,6 @@ public class ModuleWood extends ModuleBase {
 
 		PACKET_SERVICE = this.enableNetwork();
 		TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
-
-		MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
-		MinecraftForge.EVENT_BUS.register(new MissingMappingEventHandler());
 	}
 
 	@Override
@@ -74,6 +71,9 @@ public class ModuleWood extends ModuleBase {
 
 	@Override
 	public void onPreInit(FMLPreInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MissingMappingEventHandler());
+
 		CapabilityManager.INSTANCE.register(IPullCapability.class, new PullStorage(), PullCapability::new);
 	}
 

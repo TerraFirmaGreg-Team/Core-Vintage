@@ -2,6 +2,9 @@ package su.terrafirmagreg.modules.wood;
 
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -10,13 +13,16 @@ import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.IPullCapability;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullStorage;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;
-import su.terrafirmagreg.modules.wood.data.BlocksWood;
-import su.terrafirmagreg.modules.wood.data.EntitiesWood;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
-import su.terrafirmagreg.modules.wood.data.PacketWood;
+import su.terrafirmagreg.modules.wood.data.*;
+import su.terrafirmagreg.modules.wood.event.EntityJoinWorldEventHandler;
+import su.terrafirmagreg.modules.wood.event.KeyEventHandler;
+import su.terrafirmagreg.modules.wood.event.MissingMappingEventHandler;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +42,9 @@ public class ModuleWood extends ModuleBase {
 
 		PACKET_SERVICE = this.enableNetwork();
 		TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
+
+		MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MissingMappingEventHandler());
 	}
 
 	@Override
@@ -43,7 +52,6 @@ public class ModuleWood extends ModuleBase {
 		WoodTypeHandler.init();
 		WoodBlockVariantHandler.init();
 		WoodItemVariantHandler.init();
-		//        WoodTreeVariantHandler.init();
 
 		BlocksWood.onRegister(registryManager);
 		ItemsWood.onRegister(registryManager);
@@ -54,6 +62,7 @@ public class ModuleWood extends ModuleBase {
 	public void onClientRegister() {
 		BlocksWood.onClientRegister(registryManager);
 		EntitiesWood.onClientRegister(registryManager);
+		KeybindingsWood.onClientRegister(registryManager);
 
 	}
 
@@ -61,6 +70,16 @@ public class ModuleWood extends ModuleBase {
 	public void onNetworkRegister() {
 		PacketWood.onRegister(packetRegistry);
 
+	}
+
+	@Override
+	public void onPreInit(FMLPreInitializationEvent event) {
+		CapabilityManager.INSTANCE.register(IPullCapability.class, new PullStorage(), PullCapability::new);
+	}
+
+	@Override
+	public void onClientPreInit(FMLPreInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new KeyEventHandler());
 	}
 
 	@Override

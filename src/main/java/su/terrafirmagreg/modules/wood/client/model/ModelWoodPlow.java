@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlow;
+import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlowCart;
 
 @SideOnly(Side.CLIENT)
 public class ModelWoodPlow extends ModelBase {
@@ -129,13 +129,13 @@ public class ModelWoodPlow extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale, @NotNull Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch, scale, entity);
-		this.leftWheel.rotateAngleX = ((EntityWoodPlow) entity).getWheelRotation();
+		this.leftWheel.rotateAngleX = ((EntityWoodPlowCart) entity).getWheelRotation();
 		this.rightWheel.rotateAngleX = this.leftWheel.rotateAngleX;
 
 		this.leftWheel.render(scale);
 		this.rightWheel.render(scale);
 
-		if (((EntityWoodPlow) entity).getPlowing()) {
+		if (((EntityWoodPlowCart) entity).getPlowing()) {
 			for (ModelRenderer renderer : this.plowShaftUpper) {
 				renderer.rotateAngleX = (float) Math.PI / 4.0F;
 			}

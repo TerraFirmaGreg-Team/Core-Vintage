@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.wood.client.render.RenderWoodPlow;
 import su.terrafirmagreg.modules.wood.client.render.RenderWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodBoat;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlow;
+import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlowCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 
 public final class EntitiesWood {
@@ -37,7 +37,7 @@ public final class EntitiesWood {
 
 		registry.registerEntity("plow",
 				EntityEntryBuilder.create()
-						.entity(EntityWoodPlow.class)
+						.entity(EntityWoodPlowCart.class)
 						.tracker(80, 3, false)
 		);
 	}
@@ -47,7 +47,7 @@ public final class EntitiesWood {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodBoat.class, RenderWoodBoat::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodSupplyCart.class, RenderWoodSupplyCart::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodAnimalCart.class, RenderWoodAnimalCart::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodPlow.class, RenderWoodPlow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityWoodPlowCart.class, RenderWoodPlow::new);
 
 	}
 }

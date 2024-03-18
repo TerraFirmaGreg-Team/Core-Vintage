@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.wood.network;
 
-import de.mennomax.astikorcarts.entity.AbstractDrawn;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,16 +14,13 @@ import java.util.List;
 
 public class CSPacketActionKey implements IMessage, IMessageHandler<CSPacketActionKey, IMessage> {
 
-	public CSPacketActionKey() {
-	}
+	public CSPacketActionKey() {}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
-	}
+	public void fromBytes(ByteBuf buf) {}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
-	}
+	public void toBytes(ByteBuf buf) {}
 
 	@Override
 	public IMessage onMessage(CSPacketActionKey message, MessageContext ctx) {
@@ -47,7 +43,7 @@ public class CSPacketActionKey implements IMessage, IMessageHandler<CSPacketActi
 				}
 				if (closest.canBePulledBy(target)) {
 					if (target.hasCapability(PullProvider.PULL, null)) {
-						AbstractDrawn drawn = target.getCapability(PullProvider.PULL, null).getDrawn();
+						EntityWoodCart drawn = target.getCapability(PullProvider.PULL, null).getDrawn();
 						if (drawn != null && drawn.getPulling() == target) {
 							return;
 						}

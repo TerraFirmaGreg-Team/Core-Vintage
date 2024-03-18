@@ -38,9 +38,6 @@ public class ModuleEventRouter {
 		this.routes.put(FMLConstructionEvent.class,
 				(IFMLStateEventRoute<FMLConstructionEvent>) (event) ->
 						this.fireEvent(module -> {
-							module.getLogger().info("Registering packets");
-							module.onNetworkRegister(); //TODO: Pre-Init?
-
 							module.getLogger().info("Construction start");
 							module.onConstruction(event);
 							module.getLogger().info("Construction complete");
@@ -49,6 +46,9 @@ public class ModuleEventRouter {
 		this.routes.put(FMLPreInitializationEvent.class,
 				(IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
 						this.fireEvent(module -> {
+							module.getLogger().info("Registering packets");
+							module.onNetworkRegister();
+
 							module.getLogger().info("Registering");
 							module.onRegister();
 

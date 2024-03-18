@@ -41,7 +41,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	@Getter
 	private final int priority;
 	@NotNull
-	private final String modid;
+	private final String modID;
 
 	protected RegistryManager registryManager;
 	protected IPacketRegistry packetRegistry;
@@ -60,9 +60,9 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
 	}
 
-	protected ModuleBase(int priority, @NotNull String modid) {
+	protected ModuleBase(int priority, @NotNull String modID) {
 		this.priority = priority;
-		this.modid = modid;
+		this.modID = modID;
 		this.name = this.getClass().getSimpleName();
 	}
 
@@ -74,7 +74,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	protected void enableAutoRegistry(CreativeTabs tab) {
 		this.registryManager = new RegistryManager(tab).enableAutoRegistration();
 
-		this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modid, s -> new NetworkEntityIdSupplier());
+		this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modID, s -> new NetworkEntityIdSupplier());
 		this.registryManager.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
 		this.registry = registryManager.getRegistry();
 	}
@@ -91,8 +91,8 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	protected IPacketService enableNetwork() {
 
 		if (this.threadedNetworkWrapper == null) {
-			this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modid, ThreadedNetworkWrapper::new);
-			this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modid, s -> new PacketRegistry(this.threadedNetworkWrapper));
+			this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modID, ThreadedNetworkWrapper::new);
+			this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modID, s -> new PacketRegistry(this.threadedNetworkWrapper));
 			this.packetService = new PacketService(this.threadedNetworkWrapper);
 		}
 
@@ -131,7 +131,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	@SideOnly(Side.CLIENT)
 	protected void onClientPostInit(FMLPostInitializationEvent event) {}
 
-	// ===== Server =============================================================================================================================== //
+	// ===== FML Lifecycle: Server =============================================================================================================== //
 
 	protected void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
 
@@ -147,6 +147,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
 	protected void onRegister() {}
 
+	@SideOnly(Side.CLIENT)
 	protected void onClientRegister() {}
 
 	protected void onNetworkRegister() {}

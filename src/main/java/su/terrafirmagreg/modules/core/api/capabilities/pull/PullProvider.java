@@ -6,10 +6,10 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class PullProvider implements ICapabilityProvider {
-	@CapabilityInject(IPull.class)
-	public static final Capability<IPull> PULL = null;
+	@CapabilityInject(IPullCapability.class)
+	public static final Capability<IPullCapability> PULL = null;
 
-	private final IPull instance = PULL.getDefaultInstance();
+	private final IPullCapability instance = PULL.getDefaultInstance();
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {

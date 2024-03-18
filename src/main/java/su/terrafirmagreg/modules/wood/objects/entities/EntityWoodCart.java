@@ -3,10 +3,10 @@ package su.terrafirmagreg.modules.wood.objects.entities;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MoverType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,8 +26,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
+import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.network.SCPacketDrawnUpdate;
 
 import java.util.UUID;
 
@@ -120,28 +123,27 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 	 */
 	public void setPulling(Entity entityIn) {
 		if (this.pulling == null || entityIn == null) {
-//			if (!this.world.isRemote) {
-//				if (entityIn == null) {
-//					if (this.pulling != null) {
-//						if (this.pulling instanceof EntityLivingBase) {
-//							((EntityLivingBase) this.pulling).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-//									.removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
-//						}
-//						this.pulling.getCapability(PullProvider.PULL, null).setDrawn(null);
-//						this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
-//					}
-//					((WorldServer) this.world).getEntityTracker()
-//							.sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
-//				} else {
-//					if (entityIn instanceof EntityLiving) {
-//						((EntityLiving) entityIn).getNavigator().clearPath();
-//					}
-//					entityIn.getCapability(PullProvider.PULL, null).setDrawn(this);
-//					((WorldServer) this.world).getEntityTracker()
-//							.sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
-//					this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);
-//				}
-//			}
+			if (!this.world.isRemote) {
+				if (entityIn == null) {
+					if (this.pulling != null) {
+						if (this.pulling instanceof EntityLivingBase entityLivingBase) {
+							entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+						}
+						this.pulling.getCapability(PullProvider.PULL, null).setDrawn(null);
+						this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
+					}
+					((WorldServer) this.world).getEntityTracker()
+							.sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
+				} else {
+					if (entityIn instanceof EntityLiving entityLiving) {
+						entityLiving.getNavigator().clearPath();
+					}
+					entityIn.getCapability(PullProvider.PULL, null).setDrawn(this);
+					((WorldServer) this.world).getEntityTracker()
+							.sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
+					this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);
+				}
+			}
 			this.pulling = entityIn;
 		}
 	}

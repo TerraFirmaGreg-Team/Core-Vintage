@@ -11,12 +11,12 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
-public class ContainerWoodPlow extends Container {
+public class ContainerWoodPlowCart extends Container {
 
 	private final IInventory plowInventory;
 	private final EntityWoodCart drawn;
 
-	public ContainerWoodPlow(InventoryPlayer playerInventory, IInventory plowInventory, EntityWoodCart drawn, EntityPlayer player) {
+	public ContainerWoodPlowCart(InventoryPlayer playerInventory, IInventory plowInventory, EntityWoodCart drawn, EntityPlayer player) {
 		this.plowInventory = plowInventory;
 		this.drawn = drawn;
 		plowInventory.openInventory(player);

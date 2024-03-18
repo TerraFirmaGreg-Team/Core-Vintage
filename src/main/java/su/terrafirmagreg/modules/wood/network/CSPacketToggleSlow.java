@@ -9,35 +9,32 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
+import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 public class CSPacketToggleSlow implements IMessage, IMessageHandler<CSPacketToggleSlow, IMessage> {
 
-	public CSPacketToggleSlow() {
-	}
+	public CSPacketToggleSlow() {}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
-	}
+	public void fromBytes(ByteBuf buf) {}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
-	}
+	public void toBytes(ByteBuf buf) {}
 
 	@Override
 	public IMessage onMessage(CSPacketToggleSlow message, MessageContext ctx) {
 		EntityPlayerMP player = ctx.getServerHandler().player;
 		if (player.isRiding()) {
 			Entity ridden = player.getRidingEntity();
-			if (ridden instanceof EntityLivingBase && ridden.hasCapability(PullProvider.PULL, null)) {
+			if (ridden instanceof EntityLivingBase entityLivingBase && ridden.hasCapability(PullProvider.PULL, null)) {
 				if (ridden.getCapability(PullProvider.PULL, null).getDrawn() != null) {
-					if (((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-							.hasModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER)) {
-						((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-								.removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+					ModuleWood.LOGGER.info("toggle slow");
+
+					if (entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER)) {
+						entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
 					} else {
-						((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-								.applyModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
+						entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
 					}
 				}
 			}

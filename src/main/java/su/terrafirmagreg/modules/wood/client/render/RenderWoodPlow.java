@@ -14,10 +14,10 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.client.model.ModelWoodPlow;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlow;
+import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlowCart;
 
 @SideOnly(Side.CLIENT)
-public class RenderWoodPlow extends Render<EntityWoodPlow> {
+public class RenderWoodPlow extends Render<EntityWoodPlowCart> {
 
 	protected ModelBase model = new ModelWoodPlow();
 
@@ -27,7 +27,7 @@ public class RenderWoodPlow extends Render<EntityWoodPlow> {
 	}
 
 	@Override
-	public void doRender(EntityWoodPlow entity, double x, double y, double z, float entityYaw, float partialTicks) {
+	public void doRender(EntityWoodPlowCart entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		var woodType = entity.getWood();
 		GlStateManager.pushMatrix();
 		this.setupTranslation(x, y, z);
@@ -71,7 +71,7 @@ public class RenderWoodPlow extends Render<EntityWoodPlow> {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(@NotNull EntityWoodPlow entity) {
+	protected ResourceLocation getEntityTexture(@NotNull EntityWoodPlowCart entity) {
 		return ModUtils.getID("textures/entity/wood/plow.png");
 	}
 

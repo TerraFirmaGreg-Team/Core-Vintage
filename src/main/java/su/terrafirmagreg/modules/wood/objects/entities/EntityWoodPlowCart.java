@@ -35,22 +35,22 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
-import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodPlow;
+import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodPlowCart;
 
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
-public class EntityWoodPlow extends EntityWoodCartInventory implements IInventoryChangedListener, IContainerProvider<ContainerWoodPlow, GuiWoodPlow> {
+public class EntityWoodPlowCart extends EntityWoodCartInventory implements IInventoryChangedListener, IContainerProvider<ContainerWoodPlowCart, GuiWoodPlow> {
 
-	private static final DataParameter<Boolean> PLOWING = EntityDataManager.createKey(EntityWoodPlow.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> PLOWING = EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.BOOLEAN);
 	private static final double BLADEOFFSET = 1.7D;
 	@SuppressWarnings("rawtypes")
 	private static final DataParameter[] TOOLS = {
-			EntityDataManager.createKey(EntityWoodPlow.class, DataSerializers.ITEM_STACK),
-			EntityDataManager.createKey(EntityWoodPlow.class, DataSerializers.ITEM_STACK),
-			EntityDataManager.createKey(EntityWoodPlow.class, DataSerializers.ITEM_STACK)
+			EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK),
+			EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK),
+			EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.ITEM_STACK)
 	};
 
-	public EntityWoodPlow(World worldIn) {
+	public EntityWoodPlowCart(World worldIn) {
 		super(worldIn);
 		this.setSize(1.5F, 1.4F);
 		this.spacing = 2.4D;
@@ -218,8 +218,8 @@ public class EntityWoodPlow extends EntityWoodCartInventory implements IInventor
 	}
 
 	@Override
-	public ContainerWoodPlow getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-		return new ContainerWoodPlow(inventoryPlayer, inventory, this, inventoryPlayer.player);
+	public ContainerWoodPlowCart getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+		return new ContainerWoodPlowCart(inventoryPlayer, inventory, this, inventoryPlayer.player);
 	}
 
 	@Override

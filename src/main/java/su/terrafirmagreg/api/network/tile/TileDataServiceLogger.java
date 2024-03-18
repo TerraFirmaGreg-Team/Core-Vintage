@@ -8,7 +8,5 @@ public final class TileDataServiceLogger {
 
 	public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_ID + "." + TileDataService.class.getSimpleName());
 
-	private TileDataServiceLogger() {
-		//
-	}
+	private TileDataServiceLogger() {}
 }

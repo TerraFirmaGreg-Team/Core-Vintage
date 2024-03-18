@@ -10,6 +10,7 @@ import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
+import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public final class FuelManager {
 		FUELS.add(new Fuel(IIngredient.of("peat"), 2500, 680));
 
 		// Stick Bundle
-		FUELS.add(new Fuel(IIngredient.of("stickBundle"), 600, 900));
+		FUELS.add(new Fuel(IIngredient.of(ItemsWood.STICK_BUNDLE), 600, 900));
 	}
 
 	/**

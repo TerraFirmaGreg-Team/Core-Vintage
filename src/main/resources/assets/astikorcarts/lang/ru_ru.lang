@@ -1,8 +1,0 @@
-item.astikorcarts:cargocart.name=Телега
-item.astikorcarts:plowcart.name=Плуг
-item.astikorcarts:wheel.name=Колесо
-itemGroup.astikorcarts=AstikorCarts
-entity.astikorcarts:cargocart.name=Телега
-entity.astikorcarts:plowcart.name=Плуг
-key.categories.astikorcarts=AstikorCarts
-key.astikorcarts.desc=Клавиша действия

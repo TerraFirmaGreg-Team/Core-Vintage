@@ -21,9 +21,9 @@ public class EntityJoinWorldEventHandler {
 		}
 	}
 
-	// TODO remove this
+	// TODO
 	@SubscribeEvent
-	public static void on(AttachCapabilitiesEvent<Entity> event) {
+	public void on(AttachCapabilitiesEvent<Entity> event) {
 		// null check because of a compability issue with MrCrayfish's Furniture Mod and probably others
 		// since this event is being fired even when an entity is initialized in the main menu
 		if (event.getObject().world != null && !event.getObject().world.isRemote) {

@@ -1,6 +1,5 @@
 package de.mennomax.astikorcarts.handler;
 
-import de.mennomax.astikorcarts.init.ModKeybindings;
 import de.mennomax.astikorcarts.packets.CPacketActionKey;
 import de.mennomax.astikorcarts.packets.CPacketToggleSlow;
 import net.minecraft.client.Minecraft;
@@ -9,6 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import su.terrafirmagreg.modules.wood.data.KeybindingsWood;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_ASTIKORCARTS;
 
@@ -19,7 +19,7 @@ public class ClientEventHandler {
 	public static void onClientTickEvent(ClientTickEvent event) {
 		if (event.phase == TickEvent.Phase.END) {
 			if (Minecraft.getMinecraft().world != null) {
-				if (ModKeybindings.keybindings.get(0).isPressed()) {
+				if (KeybindingsWood.ACTION_CART.isPressed()) {
 					PacketHandler.INSTANCE.sendToServer(new CPacketActionKey());
 				}
 				if (Minecraft.getMinecraft().gameSettings.keyBindSprint.isPressed()) {

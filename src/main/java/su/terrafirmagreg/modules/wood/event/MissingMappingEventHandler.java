@@ -4,7 +4,6 @@ package su.terrafirmagreg.modules.wood.event;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -14,17 +13,16 @@ import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodBoat;
-import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlow;
+import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodPlowCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.modules.wood.api.types.type.WoodTypes.ACACIA;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+
 public class MissingMappingEventHandler {
 
 	@SubscribeEvent
-	public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
+	public void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
 		for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
 			String mappingKey = mapping.key.toString();
 
@@ -116,7 +114,7 @@ public class MissingMappingEventHandler {
 	}
 
 	@SubscribeEvent
-	public static void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
+	public void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
 		for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
 			String mappingKey = mapping.key.toString();
 
@@ -158,13 +156,13 @@ public class MissingMappingEventHandler {
 	}
 
 	@SubscribeEvent
-	public static void onMissingEntityMapping(RegistryEvent.MissingMappings<EntityEntry> event) {
+	public void onMissingEntityMapping(RegistryEvent.MissingMappings<EntityEntry> event) {
 		for (RegistryEvent.MissingMappings.Mapping<EntityEntry> mapping : event.getAllMappings()) {
 
 			switch (mapping.key.toString()) {
 				// Astikor Carts
 				case "astikorcarts:plowcart":
-					mapping.remap(EntityRegistry.getEntry(EntityWoodPlow.class));
+					mapping.remap(EntityRegistry.getEntry(EntityWoodPlowCart.class));
 					break;
 				case "astikorcarts:mobcart":
 					mapping.remap(EntityRegistry.getEntry(EntityWoodAnimalCart.class));

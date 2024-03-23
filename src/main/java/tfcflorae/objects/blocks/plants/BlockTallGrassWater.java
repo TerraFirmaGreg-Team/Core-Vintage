@@ -101,14 +101,14 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 
     private boolean sustain(IBlockState state)
     {
-        Material material = state.getMaterial();
+        Material material = state.getMetal();
         return (material == Material.WATER && state.getValue(BlockLiquid.LEVEL) == 0 && state == FRESH_WATER) || material == Material.ICE || (material == Material.CORAL && !(state.get() instanceof BlockEmergentTallWaterPlantTFC));
     }
 
     @Override
     protected boolean canSustainBush(IBlockState state)
     {
-        return (BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == plant.getWaterType()) || (state.getMaterial() == Material.CORAL && !(state.get() instanceof BlockEmergentTallWaterPlantTFC));
+        return (BlocksTFC.isWater(state) || state.getMetal() == Material.ICE && state == plant.getWaterType()) || (state.getMetal() == Material.CORAL && !(state.get() instanceof BlockEmergentTallWaterPlantTFC));
     }*/
 
     /*public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)

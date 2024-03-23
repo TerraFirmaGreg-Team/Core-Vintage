@@ -124,8 +124,9 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
 					return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 				}
 				int messageType = 0;
-				if (FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos)) != null && FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos))
-				                                                                                                        .isCollapsable()) {
+				if (FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos)) != null && FallingBlockManager
+						.getSpecification(worldIn.getBlockState(blockpos))
+						.isCollapsable()) {
 					boolean result = isThisBlockSafe(worldIn, blockpos);
 					;
 					float falsePositiveChance = 0.3F;
@@ -183,12 +184,13 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
 		int radY = 2;
 		int radZ = 4;
 		Iterator var6 = BlockSupport.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))
-		                            .iterator();
+				.iterator();
 
 		while (var6.hasNext()) {
 			BlockPos checking = (BlockPos) var6.next();
-			if (FallingBlockManager.getSpecification(worldIn.getBlockState(checking)) != null && FallingBlockManager.getSpecification(worldIn.getBlockState(checking))
-			                                                                                                        .isCollapsable()) {
+			if (FallingBlockManager.getSpecification(worldIn.getBlockState(checking)) != null && FallingBlockManager
+					.getSpecification(worldIn.getBlockState(checking))
+					.isCollapsable()) {
 				if (FallingBlockManager.canCollapse(worldIn, checking)) {
 					return false;
 				}

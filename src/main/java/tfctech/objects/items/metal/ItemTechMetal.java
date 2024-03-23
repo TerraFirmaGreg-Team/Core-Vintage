@@ -85,10 +85,10 @@ public class ItemTechMetal extends ItemTFC implements IMetalItem {
 	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
 		//noinspection ConstantConditions
 		String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-		                                                                           .getPath()
-		                                                                           .toLowerCase())).getFormattedText();
+				.getPath()
+				.toLowerCase())).getFormattedText();
 		return (new TextComponentTranslation("item.tfctech.metalitem." + type.name()
-		                                                                     .toLowerCase() + ".name", metalName)).getFormattedText();
+				.toLowerCase() + ".name", metalName)).getFormattedText();
 	}
 
 	@Nullable

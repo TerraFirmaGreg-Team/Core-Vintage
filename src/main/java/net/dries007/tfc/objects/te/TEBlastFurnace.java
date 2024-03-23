@@ -290,12 +290,12 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 				while (maxOre < oreStacks.size()) {
 					//Structure lost one or more chimney levels
 					InventoryHelper.spawnItemStack(world, pos.north().getX(), pos.getY(), pos.north()
-					                                                                         .getZ(), oreStacks.get(0));
+							.getZ(), oreStacks.get(0));
 					oreStacks.remove(0);
 				}
 				while (maxFuel < fuelStacks.size()) {
 					InventoryHelper.spawnItemStack(world, pos.north().getX(), pos.north().getY(), pos.north()
-					                                                                                 .getZ(), fuelStacks.get(0));
+							.getZ(), fuelStacks.get(0));
 					fuelStacks.remove(0);
 				}
 				addItemsFromWorld();
@@ -331,7 +331,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 	public void debug() {
 		TerraFirmaCraft.getLog().debug("Debugging Blast Furnace:");
 		TerraFirmaCraft.getLog()
-		               .debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
+				.debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
 		TerraFirmaCraft.getLog().debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
 		int i = 0;
 		for (ItemStack item : oreStacks) {
@@ -370,7 +370,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 	private void addItemsFromWorld() {
 		EntityItem fluxEntity = null, oreEntity = null;
 		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.up(), pos.up()
-		                                                                                                      .add(1, 5, 1)), EntitySelectors.IS_ALIVE);
+				.add(1, 5, 1)), EntitySelectors.IS_ALIVE);
 		for (EntityItem entityItem : items) {
 			ItemStack stack = entityItem.getItem();
 			BlastFurnaceRecipe recipe = BlastFurnaceRecipe.get(stack);
@@ -438,12 +438,12 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 				if (slagLayers >= 4) {
 					slagLayers -= 4;
 					world.setBlockState(pos.up(i), BlocksTFC.MOLTEN.getDefaultState()
-					                                               .withProperty(LIT, cooking)
-					                                               .withProperty(BlockMolten.LAYERS, 4));
+							.withProperty(LIT, cooking)
+							.withProperty(BlockMolten.LAYERS, 4));
 				} else {
 					world.setBlockState(pos.up(i), BlocksTFC.MOLTEN.getDefaultState()
-					                                               .withProperty(LIT, cooking)
-					                                               .withProperty(BlockMolten.LAYERS, slagLayers));
+							.withProperty(LIT, cooking)
+							.withProperty(BlockMolten.LAYERS, slagLayers));
 					slagLayers = 0;
 				}
 			} else {

@@ -80,7 +80,7 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		if (handIn.equals(EnumHand.MAIN_HAND)) {
 			if (playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-			                                                     .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+					.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
 				playerIn.setActiveHand(handIn);
 				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 			}
@@ -93,7 +93,7 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
 		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer playerIn = (EntityPlayer) entityLiving;
 			if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-			                                                                       .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+					.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
 				ItemStack item = playerIn.getHeldItemOffhand();
 				ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(item);
 				if (capability != null && capability.getCharges() < getMaxCharges()) {

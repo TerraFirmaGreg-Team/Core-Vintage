@@ -144,6 +144,6 @@ public class ItemSmallOre extends ItemTFC implements IMetalItem {
 	@Override
 	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return ore.getMetal() != null ? new ItemHeatHandler(nbt, ore.getMetal().getSpecificHeat(), ore.getMetal()
-		                                                                                              .getMeltTemp()) : null;
+				.getMeltTemp()) : null;
 	}
 }

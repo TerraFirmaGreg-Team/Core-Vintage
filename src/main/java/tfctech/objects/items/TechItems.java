@@ -213,16 +213,18 @@ public final class TechItems {
 		metalItems.add(register(r, "metal/iron_bowl_mount", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.BOWL_MOUNT), CT_METAL));
 
 		metalItems.add(register(r, "metal/iron_draw_plate", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.DRAW_PLATE)
-		                                                                          .setMaxDamage(ToolMaterialsTFC.WROUGHT_IRON.getMaxUses())
-		                                                                          .setMaxStackSize(1), CT_METAL));
-		metalItems.add(register(r, "metal/steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel")), ItemTechMetal.ItemType.DRAW_PLATE)
-		                                                                           .setMaxDamage(ToolMaterialsTFC.STEEL.getMaxUses())
-		                                                                           .setMaxStackSize(1), CT_METAL));
-		metalItems.add(register(r, "metal/black_steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "black_steel")), ItemTechMetal.ItemType.DRAW_PLATE)
-		                                                                                 .setMaxDamage(ToolMaterialsTFC.BLACK_STEEL.getMaxUses())
-		                                                                                 .setMaxStackSize(1), CT_METAL));
+				.setMaxDamage(ToolMaterialsTFC.WROUGHT_IRON.getMaxUses())
+				.setMaxStackSize(1), CT_METAL));
+		metalItems.add(register(r, "metal/steel_draw_plate", ItemTechMetal.ItemType
+				.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "steel")), ItemTechMetal.ItemType.DRAW_PLATE)
+				.setMaxDamage(ToolMaterialsTFC.STEEL.getMaxUses())
+				.setMaxStackSize(1), CT_METAL));
+		metalItems.add(register(r, "metal/black_steel_draw_plate", ItemTechMetal.ItemType
+				.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "black_steel")), ItemTechMetal.ItemType.DRAW_PLATE)
+				.setMaxDamage(ToolMaterialsTFC.BLACK_STEEL.getMaxUses())
+				.setMaxStackSize(1), CT_METAL));
 		metalItems.add(register(r, "metal/iron_tongs", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.TONGS)
-		                                                                     .setMaxStackSize(1), CT_MISC));
+				.setMaxStackSize(1), CT_MISC));
 
 		metalItems.add(register(r, "metal/copper_inductor", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Constants.MODID_TFC, "copper")), ItemTechMetal.ItemType.INDUCTOR), CT_METAL));
 
@@ -235,36 +237,36 @@ public final class TechItems {
 				continue;
 			//noinspection ConstantConditions
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_strip", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.STRIP), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_strip", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.STRIP), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_rackwheel_piece", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.RACKWHEEL_PIECE), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_rackwheel_piece", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.RACKWHEEL_PIECE), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_rackwheel", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.RACKWHEEL), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_rackwheel", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.RACKWHEEL), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_gear", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.GEAR), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_gear", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.GEAR), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_wire", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.WIRE), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_wire", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.WIRE), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_long_rod", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.LONG_ROD), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_long_rod", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.LONG_ROD), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_rod", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.ROD), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_rod", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.ROD), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_bolt", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.BOLT), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_bolt", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.BOLT), CT_METAL));
 			metalItems.add(register(r, "metal/" + metal.getRegistryName()
-			                                           .getPath()
-			                                           .toLowerCase() + "_screw", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.SCREW), CT_METAL));
+					.getPath()
+					.toLowerCase() + "_screw", ItemTechMetal.ItemType.create(metal, ItemTechMetal.ItemType.SCREW), CT_METAL));
 			if (metal.getTier().isAtLeast(Metal.Tier.TIER_III) && metal.getToolMetal() != null) {
 				metalItems.add(register(r, "metal/" + metal.getRegistryName()
-				                                           .getPath()
-				                                           .toLowerCase() + "_blowpipe", new ItemBlowpipe(metal), CT_METAL));
+						.getPath()
+						.toLowerCase() + "_blowpipe", new ItemBlowpipe(metal), CT_METAL));
 			}
 		}
 

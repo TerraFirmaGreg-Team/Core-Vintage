@@ -67,7 +67,7 @@ public final class ClientRegisterEvents {
 		// Simple Items
 		for (Item item : TechItems.getAllSimpleItems())
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-			                                                                                  .toString()));
+					.toString()));
 
 		for (Block block : TechBlocks.getAllFluidBlocks())
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
@@ -90,13 +90,14 @@ public final class ClientRegisterEvents {
 			if (item instanceof ItemTechMetal) {
 				ItemTechMetal metalItem = (ItemTechMetal) item;
 				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem.getType()
-				                                                                                                                                      .name()
-				                                                                                                                                      .toLowerCase()), "inventory"));
+						.name()
+						.toLowerCase()), "inventory"));
 				if (((ItemTechMetal) item).getType() == ItemTechMetal.ItemType.WIRE) {
 					for (int i = 1; i <= 4; i++)
-						ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem.getType()
-						                                                                                                                                      .name()
-						                                                                                                                                      .toLowerCase()), "inventory"));
+						ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem
+								.getType()
+								.name()
+								.toLowerCase()), "inventory"));
 
 				}
 			} else if (item instanceof ItemBlowpipe) {
@@ -123,9 +124,9 @@ public final class ClientRegisterEvents {
 		// Molds
 		for (Item item : TechItems.getAllCeramicMoldItems()) {
 			final ModelResourceLocation EMPTY = new ModelResourceLocation(new ResourceLocation(item.getRegistryName()
-			                                                                                       .toString() + "_empty"), "inventory");
+					.toString() + "_empty"), "inventory");
 			final ModelResourceLocation FILLED = new ModelResourceLocation(new ResourceLocation(item.getRegistryName()
-			                                                                                        .toString()), "inventory");
+					.toString()), "inventory");
 			ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 				@Override
 				@Nonnull
@@ -182,7 +183,7 @@ public final class ClientRegisterEvents {
 					(stack, tintIndex) -> {
 						if (tintIndex == 1 && stack.getItem() instanceof ItemGear) {
 							return (new Color(((ItemGear) stack.getItem()).getSleeveMetal().getColor())).brighter()
-							                                                                            .getRGB();
+									.getRGB();
 						} else if (tintIndex == 1 && stack.getItem() instanceof ItemBlowpipe) {
 							IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 							if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
@@ -195,7 +196,7 @@ public final class ClientRegisterEvents {
 						}
 						//noinspection ConstantConditions
 						return (new Color(((IMetalItem) stack.getItem()).getMetal(stack).getColor())).brighter()
-						                                                                             .getRGB();
+								.getRGB();
 					},
 					item);
 		}

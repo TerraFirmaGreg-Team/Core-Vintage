@@ -5,9 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 
-/**
- * Интерфейс ICropItem представляет деревянный предмет.
- */
+
 public interface ISoilItem extends ISoilType, IItemSize, IAutoReg {
 
 	/**

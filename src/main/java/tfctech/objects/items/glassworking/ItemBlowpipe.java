@@ -56,8 +56,8 @@ public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
 	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
 		//noinspection ConstantConditions
 		String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-		                                                                           .getPath()
-		                                                                           .toLowerCase())).getFormattedText();
+				.getPath()
+				.toLowerCase())).getFormattedText();
 		return (new TextComponentTranslation("item.tfctech.metalitem.blowpipe.name", metalName)).getFormattedText();
 	}
 

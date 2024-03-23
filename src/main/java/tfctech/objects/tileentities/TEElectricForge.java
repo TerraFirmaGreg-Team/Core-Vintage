@@ -152,8 +152,8 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
 		if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos)
-		                                                                                             .getValue(BlockElectricForge.FACING)
-		                                                                                             .getOpposite()) {
+				.getValue(BlockElectricForge.FACING)
+				.getOpposite()) {
 			if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
 				return true;
 			} else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
@@ -167,8 +167,8 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	@SuppressWarnings("unchecked")
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 		if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos)
-		                                                                                             .getValue(BlockElectricForge.FACING)
-		                                                                                             .getOpposite()) {
+				.getValue(BlockElectricForge.FACING)
+				.getOpposite()) {
 			if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
 				return (T) this.energyContainer;
 			} else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
@@ -279,8 +279,8 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	@Override
 	public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
 		return TechConfig.DEVICES.acceptIc2EU && (facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos)
-		                                                                                                                 .getValue(BlockElectricForge.FACING)
-		                                                                                                                 .getOpposite());
+				.getValue(BlockElectricForge.FACING)
+				.getOpposite());
 	}
 
 	private void handleInputMelting(ItemStack stack, int index) {

@@ -43,10 +43,10 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 				return stack.getItem() instanceof ItemTechMetal && ((ItemTechMetal) stack.getItem()).getType() == ItemTechMetal.ItemType.DRAW_PLATE;
 			case 1:
 				WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection()
-				                                                      .stream()
-				                                                      .filter(x -> x.matches(stack))
-				                                                      .findFirst()
-				                                                      .orElse(null);
+						.stream()
+						.filter(x -> x.matches(stack))
+						.findFirst()
+						.orElse(null);
 				return recipe != null;
 		}
 		return false;
@@ -58,10 +58,10 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 
 	public boolean hasWire() {
 		WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection()
-		                                                      .stream()
-		                                                      .filter(x -> x.matches(inventory.getStackInSlot(1)))
-		                                                      .findFirst()
-		                                                      .orElse(null);
+				.stream()
+				.filter(x -> x.matches(inventory.getStackInSlot(1)))
+				.findFirst()
+				.orElse(null);
 		return recipe != null;
 	}
 
@@ -69,13 +69,13 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 		if (canWork()) {
 			if (progress == 0) {
 				WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection()
-				                                                      .stream()
-				                                                      .filter(x -> x.matches(inventory.getStackInSlot(1)))
-				                                                      .findFirst()
-				                                                      .orElse(null);
+						.stream()
+						.filter(x -> x.matches(inventory.getStackInSlot(1)))
+						.findFirst()
+						.orElse(null);
 				Metal.Tier workableTier = ((ItemTechMetal) inventory.getStackInSlot(0)
-				                                                    .getItem()).getMetal(inventory.getStackInSlot(0))
-				                                                               .getTier();
+						.getItem()).getMetal(inventory.getStackInSlot(0))
+						.getTier();
 				if (recipe == null) {
 					player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.wiredraw.no_recipe"), true);
 					return false;
@@ -101,8 +101,8 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 			if (!simulate) {
 				cachedWireColor = 0x00000000;
 				TechRegistries.WIRE_DRAWING.getValuesCollection().stream()
-				                           .filter(x -> x.matches(stack))
-				                           .findFirst().ifPresent(x -> cachedWireColor = x.getWireColor());
+						.filter(x -> x.matches(stack))
+						.findFirst().ifPresent(x -> cachedWireColor = x.getWireColor());
 				setAndUpdateSlots(0);
 			}
 			return output;
@@ -124,7 +124,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 	@Override
 	public void setAndUpdateSlots(int slot) {
 		TFCTech.getNetwork()
-		       .sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
+				.sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
 		super.setAndUpdateSlots(slot);
 	}
 
@@ -199,10 +199,10 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 						inventory.setStackInSlot(0, ItemStack.EMPTY);
 					}
 					TechRegistries.WIRE_DRAWING.getValuesCollection()
-					                           .stream()
-					                           .filter(x -> x.matches(inventory.getStackInSlot(1)))
-					                           .findFirst()
-					                           .ifPresent(recipe -> inventory.setStackInSlot(1, recipe.getOutput()));
+							.stream()
+							.filter(x -> x.matches(inventory.getStackInSlot(1)))
+							.findFirst()
+							.ifPresent(recipe -> inventory.setStackInSlot(1, recipe.getOutput()));
 					setAndUpdateSlots(1);
 				}
 			}

@@ -347,8 +347,8 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 		double actualTotalAmount = getAmountAccurately();
 		for (Metal metal : Sets.union(recipe.getMetals().keySet(), metals.keySet())) {
 			if (!metals.containsKey(metal) || !recipe.getMetals().containsKey(metal) || !recipe.getMetals()
-			                                                                                   .get(metal)
-			                                                                                   .test(metals.get(metal) / actualTotalAmount)) {
+					.get(metal)
+					.test(metals.get(metal) / actualTotalAmount)) {
 				return false;
 			}
 		}

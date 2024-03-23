@@ -44,19 +44,19 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
 	@Nullable
 	public static BlastFurnaceRecipe get(ItemStack inputItem) {
 		return TFCRegistries.BLAST_FURNACE.getValuesCollection()
-		                                  .stream()
-		                                  .filter(x -> x.isValidInput(inputItem))
-		                                  .findFirst()
-		                                  .orElse(null);
+				.stream()
+				.filter(x -> x.isValidInput(inputItem))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Nullable
 	public static BlastFurnaceRecipe get(Metal inputMetal) {
 		return TFCRegistries.BLAST_FURNACE.getValuesCollection()
-		                                  .stream()
-		                                  .filter(x -> x.input == inputMetal)
-		                                  .findFirst()
-		                                  .orElse(null);
+				.stream()
+				.filter(x -> x.input == inputMetal)
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Nullable

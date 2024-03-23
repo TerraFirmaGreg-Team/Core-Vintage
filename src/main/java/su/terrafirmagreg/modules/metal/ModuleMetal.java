@@ -4,13 +4,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.metal.data.BlocksMetal;
 import su.terrafirmagreg.modules.metal.data.ItemsMetal;
 
 import javax.annotation.Nonnull;
 
-//@Module(moduleID = "Metal", name = "TFG Module Metal")
+@ModuleTFG(moduleID = "Metal", name = "TFG Module Metal")
 public final class ModuleMetal extends ModuleBase {
 	public static final Logger LOGGER = LogManager.getLogger(ModuleMetal.class.getSimpleName());
 	public static final CreativeTabs METAL_TAB = new CreativeTabBase("metal", "metal/anvil/red_steel");

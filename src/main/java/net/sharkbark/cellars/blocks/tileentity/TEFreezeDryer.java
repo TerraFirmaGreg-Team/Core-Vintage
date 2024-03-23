@@ -33,8 +33,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.sharkbark.cellars.ModConfig;
-import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.Reference;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -69,7 +69,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
 			localTemperature = ClimateTFC.getActualTemp(this.getPos());
 			temperature = localTemperature;
 			localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos()
-			                                                      .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
+					.getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
 			System.out.println("Local pos: " + this.getPos());
 			System.out.println("Local pressure is: " + localPressure);
 			pressure = localPressure;
@@ -148,13 +148,13 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
 	private void handleCoolant() {
 		if (!inventory.getStackInSlot(9).isEmpty()) {
 			Item item = inventory.getStackInSlot(9).getItem();
-			if ((item == ModItems.PACKED_ICE_SHARD || Block.getBlockFromItem(item) == Blocks.PACKED_ICE) && coolant < ModConfig.coolantMax - ModConfig.packedIceCoolant) {
+			if ((item == ItemsCore.PACKED_ICE_SHARD || Block.getBlockFromItem(item) == Blocks.PACKED_ICE) && coolant < ModConfig.coolantMax - ModConfig.packedIceCoolant) {
 				coolant = coolant + ModConfig.packedIceCoolant;
 				inventory.extractItem(9, 1, false);
-			} else if ((item == ModItems.SEA_ICE_SHARD || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) && coolant < ModConfig.coolantMax - ModConfig.seaIceCoolant) {
+			} else if ((item == ItemsCore.SEA_ICE_SHARD || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) && coolant < ModConfig.coolantMax - ModConfig.seaIceCoolant) {
 				coolant = coolant + ModConfig.seaIceCoolant;
 				inventory.extractItem(9, 1, false);
-			} else if ((item == ModItems.ICE_SHARD || Block.getBlockFromItem(item) == Blocks.ICE) && coolant < ModConfig.coolantMax - ModConfig.iceCoolant) {
+			} else if ((item == ItemsCore.ICE_SHARD || Block.getBlockFromItem(item) == Blocks.ICE) && coolant < ModConfig.coolantMax - ModConfig.iceCoolant) {
 				coolant = coolant + ModConfig.iceCoolant;
 				inventory.extractItem(9, 1, false);
 			} else if ((Block.getBlockFromItem(item) == Blocks.SNOW) && coolant < ModConfig.coolantMax - ModConfig.snowCoolant) {
@@ -417,9 +417,9 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
 			return false;
 		}
 
-		if ((itemStack.getItem() == ModItems.SEA_ICE_SHARD ||
-				itemStack.getItem() == ModItems.PACKED_ICE_SHARD ||
-				itemStack.getItem() == ModItems.ICE_SHARD ||
+		if ((itemStack.getItem() == ItemsCore.SEA_ICE_SHARD ||
+				itemStack.getItem() == ItemsCore.PACKED_ICE_SHARD ||
+				itemStack.getItem() == ItemsCore.ICE_SHARD ||
 				itemStack.getItem() == Items.SNOWBALL ||
 				itemStack.getItem() == Item.getItemFromBlock(Blocks.ICE) ||
 				itemStack.getItem() == Item.getItemFromBlock(Blocks.PACKED_ICE) ||

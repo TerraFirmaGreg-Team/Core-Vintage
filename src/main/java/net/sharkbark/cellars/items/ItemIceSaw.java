@@ -23,8 +23,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.ModConfig;
-import net.sharkbark.cellars.init.ModItems;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nullable;
 
@@ -133,19 +133,19 @@ public class ItemIceSaw extends ItemBase implements IMetalItem {
 			if (ModConfig.disableShards) {
 				return Item.getItemFromBlock(block);
 			} else {
-				return ModItems.SEA_ICE_SHARD;
+				return ItemsCore.SEA_ICE_SHARD;
 			}
 		} else if (block == Blocks.PACKED_ICE) {
 			if (ModConfig.disableShards) {
 				return Item.getItemFromBlock(block);
 			} else {
-				return ModItems.PACKED_ICE_SHARD;
+				return ItemsCore.PACKED_ICE_SHARD;
 			}
 		} else if (block == Blocks.ICE) {
 			if (ModConfig.disableShards) {
 				return Item.getItemFromBlock(block);
 			} else {
-				return ModItems.ICE_SHARD;
+				return ItemsCore.ICE_SHARD;
 			}
 		}
 

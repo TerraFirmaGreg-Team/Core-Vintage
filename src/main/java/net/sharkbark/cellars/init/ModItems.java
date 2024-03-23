@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.sharkbark.cellars.items.ItemIceSaw;
-import net.sharkbark.cellars.items.ItemIceShard;
 import net.sharkbark.cellars.items.ItemToolHead;
 
 import java.util.ArrayList;
@@ -56,13 +55,6 @@ public class ModItems {
 	@ObjectHolder(MODID_CELLARS + ":blue_steel_ice_saw_head")
 	public static final Item BLUE_STEEL_ICE_SAW_HEAD = null;
 
-	@ObjectHolder(MODID_CELLARS + ":ice_shard")
-	public static final Item ICE_SHARD = null;
-	@ObjectHolder(MODID_CELLARS + ":packed_ice_shard")
-	public static final Item PACKED_ICE_SHARD = null;
-	@ObjectHolder(MODID_CELLARS + ":sea_ice_shard")
-	public static final Item SEA_ICE_SHARD = null;
-
 	public static void registerItems(IForgeRegistry<Item> registry) {
 		Item[] saws = new Item[]{
 				new ItemIceSaw(Metal.BRONZE, "bronze_ice_saw"),
@@ -83,11 +75,7 @@ public class ModItems {
 				new ItemToolHead(Metal.STEEL, "steel_ice_saw_head", "icesawBlade"),
 				new ItemToolHead(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), "black_steel_ice_saw_head", "icesawBlade"),
 				new ItemToolHead(Metal.RED_STEEL, "red_steel_ice_saw_head", "icesawBlade"),
-				new ItemToolHead(Metal.BLUE_STEEL, "blue_steel_ice_saw_head", "icesawBlade"),
-
-				new ItemIceShard("ice_shard"),
-				new ItemIceShard("packed_ice_shard"),
-				new ItemIceShard("sea_ice_shard")
+				new ItemToolHead(Metal.BLUE_STEEL, "blue_steel_ice_saw_head", "icesawBlade")
 		);
 
 		for (Item saw : saws) {

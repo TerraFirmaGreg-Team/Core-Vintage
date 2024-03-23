@@ -30,7 +30,7 @@ import net.sharkbark.cellars.blocks.CellarDoor;
 import net.sharkbark.cellars.blocks.CellarWall;
 import net.sharkbark.cellars.blocks.container.ContainerIceBunker;
 import net.sharkbark.cellars.init.ModBlocks;
-import net.sharkbark.cellars.init.ModItems;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nullable;
 
@@ -134,15 +134,15 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 				for (int slot = 3; slot >= 0; slot--) {
 					if (!chestContents.get(slot).isEmpty()) {
 						Item item = chestContents.get(slot).getItem();
-						if (item == ModItems.PACKED_ICE_SHARD || Block.getBlockFromItem(item) == Blocks.PACKED_ICE) {
+						if (item == ItemsCore.PACKED_ICE_SHARD || Block.getBlockFromItem(item) == Blocks.PACKED_ICE) {
 							coolantAmount = coolantAmount + ModConfig.packedIceCoolant;
 							seaIce = false;
 							dryIce = true;
-						} else if (item == ModItems.SEA_ICE_SHARD || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) {
+						} else if (item == ItemsCore.SEA_ICE_SHARD || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) {
 							coolantAmount = coolantAmount + ModConfig.seaIceCoolant;
 							seaIce = true;
 							dryIce = false;
-						} else if (item == ModItems.ICE_SHARD || Block.getBlockFromItem(item) == Blocks.ICE) {
+						} else if (item == ItemsCore.ICE_SHARD || Block.getBlockFromItem(item) == Blocks.ICE) {
 							coolantAmount = coolantAmount + ModConfig.iceCoolant;
 							seaIce = false;
 							dryIce = false;
@@ -407,7 +407,7 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 
 	private int getBlockType(int x, int y, int z) {
 		Block block = world.getBlockState(new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
-		                   .getBlock();
+				.getBlock();
 		if (block instanceof CellarWall) {
 			return 0;
 		} else if (block instanceof CellarDoor) {
@@ -437,7 +437,7 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 
 	private void updateContainer(int x, int y, int z) {
 		Block block = world.getBlockState(new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
-		                   .getBlock();
+				.getBlock();
 		if (block instanceof BlockCellarShelf) {
 			TileEntity tileEntity = world.getTileEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
 			if (tileEntity != null) {

@@ -11,6 +11,7 @@ import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
@@ -41,6 +42,8 @@ public final class ModuleCore extends ModuleBase {
 	@Override
 	public void onPreInit(FMLPreInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
+
+		PullCapability.preInit();
 	}
 
 	@Override

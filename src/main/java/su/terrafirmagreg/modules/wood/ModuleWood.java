@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.wood;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,9 +12,6 @@ import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.core.api.capabilities.pull.IPullCapability;
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullStorage;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;
@@ -73,8 +69,6 @@ public final class ModuleWood extends ModuleBase {
 	public void onPreInit(FMLPreInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
 		MinecraftForge.EVENT_BUS.register(new MissingMappingEventHandler());
-
-		CapabilityManager.INSTANCE.register(IPullCapability.class, new PullStorage(), PullCapability::new);
 	}
 
 	@Override

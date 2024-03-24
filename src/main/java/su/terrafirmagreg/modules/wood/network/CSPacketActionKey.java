@@ -7,7 +7,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 import java.util.List;
@@ -42,8 +42,8 @@ public class CSPacketActionKey implements IMessage, IMessageHandler<CSPacketActi
 					}
 				}
 				if (closest.canBePulledBy(target)) {
-					if (target.hasCapability(PullProvider.PULL, null)) {
-						EntityWoodCart drawn = target.getCapability(PullProvider.PULL, null).getDrawn();
+					if (target.hasCapability(PullCapability.PULL_CAPABILITY, null)) {
+						EntityWoodCart drawn = target.getCapability(PullCapability.PULL_CAPABILITY, null).getDrawn();
 						if (drawn != null && drawn.getPulling() == target) {
 							return;
 						}

@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullProvider;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -129,7 +129,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 						if (this.pulling instanceof EntityLivingBase entityLivingBase) {
 							entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
 						}
-						this.pulling.getCapability(PullProvider.PULL, null).setDrawn(null);
+						this.pulling.getCapability(PullCapability.PULL_CAPABILITY, null).setDrawn(null);
 						this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
 					}
 					((WorldServer) this.world).getEntityTracker()
@@ -138,7 +138,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 					if (entityIn instanceof EntityLiving entityLiving) {
 						entityLiving.getNavigator().clearPath();
 					}
-					entityIn.getCapability(PullProvider.PULL, null).setDrawn(this);
+					entityIn.getCapability(PullCapability.PULL_CAPABILITY, null).setDrawn(this);
 					((WorldServer) this.world).getEntityTracker()
 							.sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
 					this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);

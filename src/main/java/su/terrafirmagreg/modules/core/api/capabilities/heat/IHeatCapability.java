@@ -1,7 +1,13 @@
+/*
+ * Work under Copyright. Licensed under the EUPL.
+ * See the project README.md and LICENSE.txt for more information.
+ */
+
 package su.terrafirmagreg.modules.core.api.capabilities.heat;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -9,63 +15,62 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
- * Рекомендуется наследоваться от {@link HeatCapability}, а не реализовывать это напрямую.
- * Если вы все же реализуете это, посмотрите на ItemHeatHandler, чтобы увидеть, как тепло распадается со временем.
+ * It is recommended that if you extend {@link HeatProvider} rather than implement this directly.
+ * If you do extend this, look at ItemHeatHandler to observe how heat decays over time.
  */
-public interface IHeatCapability {
+public interface IHeatCapability extends INBTSerializable<NBTTagCompound> {
 	/**
-	 * Получить текущую температуру. Должен вызывать {@link HeatCapability#adjustTemp(float, float, long)} внутри себя.
+	 * Gets the current temperature. Should call {@link HeatCapability#adjustTemp(float, float, long)} internally
 	 *
-	 * @return текущая температура
+	 * @return the temperature.
 	 */
 	float getTemperature();
 
 	/**
-	 * Установить температуру. Используется для изменения температуры.
+	 * Sets the temperature. Used for anything that modifies the temperature.
 	 *
-	 * @param temperature температура для установки
+	 * @param temperature the temperature to set.
 	 */
 	void setTemperature(float temperature);
 
 	/**
-	 * Получить теплоемкость. (Мера того, насколько быстро нагревается или охлаждается предмет)
-	 * Реализация остается на усмотрение объекта нагревания. (См. TEFirePit, например)
+	 * Gets the Heat capacity. (A measure of how fast this items heats up or cools down)
+	 * Implementation is left up to the heating object. (See TEFirePit for example)
 	 *
-	 * @return теплоемкость. Обычно от 0 до 1, может быть за пределами этого диапазона, должна быть неотрицательной
+	 * @return the heat capacity. Typically 0 - 1, can be outside this range, must be non-negative
 	 */
 	float getHeatCapacity();
 
 	/**
-	 * Получить температуру плавления предмета.
-	 * В зависимости от предмета это может не иметь смысла.
+	 * Gets the melting point of the item.
+	 * Depending on the item, this may not mean anything.
 	 *
-	 * @return температура, при которой предмет должен плавиться
+	 * @return a temperature at which this item should melt at
 	 */
 	float getMeltTemp();
 
 	/**
-	 * Если объект может плавиться / превращаться, вернуть, превращен ли он
-	 * Это может иметь различные значения в зависимости от объекта
+	 * If the object can melt / transform, return if it is transformed
+	 * This can mean many different things depending on the object
 	 *
-	 * @return превращен ли объект
+	 * @return is the object transformed.
 	 */
 	default boolean isMolten() {
 		return getTemperature() > getMeltTemp();
 	}
 
 	/**
-	 * Добавляет всплывающую подсказку с информацией о тепле при наведении.
-	 * При переопределении этого метода для отображения дополнительной информации, используйте IHeatCapability.super.addHeatInfo()
+	 * Adds the heat info tooltip when hovering over.
+	 * When overriding this to show additional information, fall back to IItemHeat.super.addHeatInfo()
 	 *
-	 * @param stack стек, к которому добавляется информация
-	 * @param text  список подсказок
+	 * @param stack The stack to add information to
+	 * @param text  The list of tooltips
 	 */
 	@SideOnly(Side.CLIENT)
 	default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
 		String tooltip = Heat.getTooltip(getTemperature());
 		if (tooltip != null) {
-			text.add("");
-			text.add(I18n.format("tfg.tooltip.temperature", tooltip));
+			text.add(tooltip);
 		}
 	}
 }

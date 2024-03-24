@@ -1,79 +1,56 @@
 package su.terrafirmagreg.modules.core.api.capabilities.heat;
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class HeatCapability implements IHeatCapability {
-
-	/**
-	 * Ключ для определения Capability работы с тепловыми свойствами предметов.
-	 */
+public final class HeatCapability {
 	public static final ResourceLocation KEY = ModUtils.getID("heat_capability");
-	/**
-	 * Карты, содержащие пользовательские предметы и их тепловые свойства.
-	 */
-	public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>();
-	/**
-	 * Переменная для работы с возможностью работы с тепловыми свойствами предметов.
-	 */
+	public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
+
 	@CapabilityInject(IHeatCapability.class)
 	public static Capability<IHeatCapability> HEAT_CAPABILITY;
-	// Это "константы". Некоторые реализации могут захотеть изменить их на основе других факторов. (См. ItemMold)
-	protected float heatCapacity;
-	protected float meltTemp;
 
-	// Это значения из последнего обновления. Они обновляются при чтении из NBT или при установке температуры вручную.
-	// Обратите внимание, что если температура == 0, lastUpdateTick должен установить себя в -1,
-	// чтобы сохранить совместимость Capability - т.е. возможность складывания.
-	protected float temperature;
-	protected long lastUpdateTick;
+	public static void preInit() {
+		CapabilityManager.INSTANCE.register(IHeatCapability.class, new HeatStorage(), HeatProvider::new);
 
-	/**
-	 * Возвращает возможность управления тепловыми свойствами для указанного предмета.
-	 *
-	 * @param stack предмет, для которого требуется получить данные о температуре
-	 * @return возможность управления тепловыми свойствами предмета
-	 */
-	public static IHeatCapability getHeatData(ItemStack stack) {
-		return stack.getCapability(HEAT_CAPABILITY, null);
 	}
 
+	public static void init() {
+		//register heat on vanilla egg for cooking
+		HeatCapability.CUSTOM_ITEMS.put(IIngredient.of(Items.EGG), () -> new HeatProvider(null, 1, 480));
+		HeatCapability.CUSTOM_ITEMS.put(IIngredient.of("blockClay"), () -> new HeatProvider(null, 1, 600));
+		HeatCapability.CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.GLASS_SHARD), () -> new HeatProvider(null, 1, 1000));
+		HeatCapability.CUSTOM_ITEMS.put(IIngredient.of(ItemsWood.STICK_BUNCH), () -> new HeatProvider(null, 1, 200));
+		HeatCapability.CUSTOM_ITEMS.put(IIngredient.of("terracotta"), () -> new HeatProvider(null, 1, 1200));
+		HeatCapability.CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS), () -> new HeatProvider(null, Metal.WROUGHT_IRON.getSpecificHeat(), Metal.WROUGHT_IRON.getMeltTemp()));
+	}
 
 	/**
-	 * Вспомогательный метод для изменения температуры к определенному значению без перегрева и дрожания.
-	 *
-	 * @param temp   текущая температура
-	 * @param target целевая температура
-	 * @param delta  положительное изменение температуры
-	 * @return новая температура
+	 * Helper method to adjust temperature towards a value, without overshooting or stuttering
 	 */
 	public static float adjustTempTowards(float temp, float target, float delta) {
 		return adjustTempTowards(temp, target, delta, delta);
 	}
 
-	/**
-	 * Вспомогательный метод для изменения температуры к определенному значению без перегрева и дрожания.
-	 *
-	 * @param temp          текущая температура
-	 * @param target        целевая температура
-	 * @param deltaPositive положительное изменение температуры
-	 * @param deltaNegative отрицательное изменение температуры
-	 * @return новая температура
-	 */
 	public static float adjustTempTowards(float temp, float target, float deltaPositive, float deltaNegative) {
 		if (temp < target) {
 			return Math.min(temp + deltaPositive, target);
@@ -85,12 +62,7 @@ public class HeatCapability implements IHeatCapability {
 	}
 
 	/**
-	 * Метод для изменения температуры на основе теплоемкости и времени обновления.
-	 *
-	 * @param temp             текущая температура
-	 * @param heatCapacity     теплоемкость
-	 * @param ticksSinceUpdate время с последнего обновления
-	 * @return новая температура
+	 * Call this from within {@link IHeatCapability#getTemperature()}
 	 */
 	public static float adjustTemp(float temp, float heatCapacity, long ticksSinceUpdate) {
 		if (ticksSinceUpdate <= 0) return temp;
@@ -98,43 +70,24 @@ public class HeatCapability implements IHeatCapability {
 		return newTemp < 0 ? 0 : newTemp;
 	}
 
-	/**
-	 * Метод для увеличения температуры предмета.
-	 *
-	 * @param instance экземпляр предмета
-	 */
 	public static void addTemp(IHeatCapability instance) {
 		// Default modifier = 3 (2x normal cooling)
 		addTemp(instance, 3);
 	}
 
 	/**
-	 * Метод для увеличения температуры предмета с заданным модификатором.
+	 * Use this to increase the heat on an IItemHeat instance.
 	 *
-	 * @param instance экземпляр предмета
-	 * @param modifier модификатор увеличения температуры
+	 * @param modifier the modifier for how much this will heat up: 0 - 1 slows down cooling, 1 = no heating or cooling, > 1 heats, 2 heats at the same rate of normal cooling, 2+ heats faster
 	 */
 	public static void addTemp(IHeatCapability instance, float modifier) {
 		final float temp = instance.getTemperature() + modifier * instance.getHeatCapacity() * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
 		instance.setTemperature(temp);
 	}
 
-	/**
-	 * Метод для приближения температуры предмета к целевой температуре.
-	 *
-	 * @param temp         текущая температура
-	 * @param burnTemp     температура горения
-	 * @param airTicks     количество тиков нахождения предмета на воздухе
-	 * @param maxTempBonus максимальное дополнительное значение температуры
-	 * @return новая температура
-	 */
 	public static float adjustToTargetTemperature(float temp, float burnTemp, int airTicks, int maxTempBonus) {
 		boolean hasAir = airTicks > 0;
 		float targetTemperature = burnTemp + (hasAir ? MathHelper.clamp(burnTemp, 0, maxTempBonus) : 0);
-
-		if (targetTemperature > 1601)
-			targetTemperature = 1601;
-
 		if (temp != targetTemperature) {
 			float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
 			return adjustTempTowards(temp, targetTemperature, delta * (hasAir ? 2 : 1), delta * (hasAir ? 0.5f : 1));
@@ -142,12 +95,6 @@ public class HeatCapability implements IHeatCapability {
 		return temp;
 	}
 
-	/**
-	 * Метод для получения пользовательских тепловых свойств предмета.
-	 *
-	 * @param stack предмет
-	 * @return тепловые свойства предмета
-	 */
 	@Nullable
 	public static ICapabilityProvider getCustomHeat(ItemStack stack) {
 		Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_ITEMS.keySet();
@@ -156,60 +103,6 @@ public class HeatCapability implements IHeatCapability {
 				return CUSTOM_ITEMS.get(ingredient).get();
 			}
 		}
-
 		return null;
-	}
-
-	/**
-	 * Возвращает текущую температуру, отображаемую наружу. Она может отличаться от внутреннего значения температуры или значения, сохраненного в NBT.
-	 * Примечание: если вы проверяете температуру внутри, НЕ используйте temperature, используйте этот метод,
-	 * так как temperature не представляет текущую температуру.
-	 *
-	 * @return Текущая температура
-	 */
-	@Override
-	public float getTemperature() {
-		return adjustTemp(temperature, heatCapacity, CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick);
-	}
-
-	/**
-	 * Обновляет температуру и сохраняет метку времени последнего обновления
-	 *
-	 * @param temperature Температура для установки. Между 0 и 1600
-	 */
-	@Override
-	public void setTemperature(float temperature) {
-		this.temperature = temperature;
-		this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
-	}
-
-	/**
-	 * Возвращает теплоемкость объекта
-	 *
-	 * @return Теплоемкость
-	 */
-	@Override
-	public float getHeatCapacity() {
-		return heatCapacity;
-	}
-
-	/**
-	 * Возвращает температуру плавления объекта
-	 *
-	 * @return Температура плавления
-	 */
-	@Override
-	public float getMeltTemp() {
-		return meltTemp;
-	}
-
-	/**
-	 * Проверяет, находится ли объект в расплавленном состоянии
-	 *
-	 * @return true, если объект находится в расплавленном состоянии; false в противном случае
-	 */
-	@Override
-	public boolean isMolten() {
-		return getTemperature() >= meltTemp;
 	}
 }

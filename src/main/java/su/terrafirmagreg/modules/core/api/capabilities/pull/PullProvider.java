@@ -12,6 +12,14 @@ public class PullProvider implements ICapabilityProvider, IPullCapability {
 
 	private EntityWoodCart drawn;
 
+	public PullProvider() {
+		this(null);
+	}
+
+	public PullProvider(EntityWoodCart drawn) {
+		this.drawn = drawn;
+	}
+
 	@Override
 	public EntityWoodCart getDrawn() {
 		return drawn;

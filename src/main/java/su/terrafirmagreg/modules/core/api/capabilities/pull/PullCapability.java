@@ -1,16 +1,13 @@
 package su.terrafirmagreg.modules.core.api.capabilities.pull;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import su.terrafirmagreg.api.util.ModUtils;
 
-@Setter
-@Getter
-public class PullCapability {
+
+public final class PullCapability {
 
 	public static final ResourceLocation KEY = ModUtils.getID("pull_capability");
 

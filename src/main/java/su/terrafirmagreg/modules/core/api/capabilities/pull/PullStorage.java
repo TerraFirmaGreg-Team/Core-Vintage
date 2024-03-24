@@ -12,7 +12,5 @@ public class PullStorage implements IStorage<IPullCapability> {
 	}
 
 	@Override
-	public void readNBT(Capability<IPullCapability> capability, IPullCapability instance, EnumFacing side, NBTBase nbt) {
-
-	}
+	public void readNBT(Capability<IPullCapability> capability, IPullCapability instance, EnumFacing side, NBTBase nbt) {}
 }

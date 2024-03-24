@@ -67,9 +67,6 @@ public class CommonProxy {
 				GameRegistry.registerWorldGenerator(new WorldGenSoilDecorative(), 0);
 				GameRegistry.registerWorldGenerator(new WorldGenClays(), 0);
 			}
-			if (ConfigTFCF.General.WORLD.enableGroundcoverRock) {
-				GameRegistry.registerWorldGenerator(new WorldGenSurfaceRocks(), 0);
-			}
 			if (ConfigTFCF.General.WORLD.enableGroundcoverSeashell) {
 				GameRegistry.registerWorldGenerator(new WorldGenSurfaceSeashells(), 0);
 			}
@@ -78,9 +75,6 @@ public class CommonProxy {
 			}
 			if (ConfigTFCF.General.WORLD.enableGroundcoverBones) {
 				GameRegistry.registerWorldGenerator(new WorldGenSurfaceBones(), 0);
-			}
-			if (ConfigTFCF.General.WORLD.enableGroundcoverOreDeposit) {
-				GameRegistry.registerWorldGenerator(new WorldGenSurfaceOreDeposits(true), 0);
 			}
 			if (ConfigTFCF.General.WORLD.enableGroundcoverPinecone) {
 				GameRegistry.registerWorldGenerator(new WorldGenSurfacePinecone(), 0);

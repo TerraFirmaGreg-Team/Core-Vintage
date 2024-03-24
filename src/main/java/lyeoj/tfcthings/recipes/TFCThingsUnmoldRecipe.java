@@ -47,17 +47,15 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 		for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
 			ItemStack stack = inv.getStackInSlot(slot);
 			if (!stack.isEmpty()) {
-				if (!(stack.getItem() instanceof ItemTFCThingsMold)) {
+				if (!(stack.getItem() instanceof ItemTFCThingsMold moldItem)) {
 					return false;
 				}
 
-				ItemTFCThingsMold moldItem = (ItemTFCThingsMold) stack.getItem();
-				IFluidHandler cap = (IFluidHandler) stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
-				if (!(cap instanceof IMoldHandler)) {
+				IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
+				if (!(cap instanceof IMoldHandler moldHandler)) {
 					return false;
 				}
 
-				IMoldHandler moldHandler = (IMoldHandler) cap;
 				if (moldHandler.isMolten()) {
 					return false;
 				}
@@ -81,11 +79,10 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 		for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
 			ItemStack stack = inv.getStackInSlot(slot);
 			if (!stack.isEmpty()) {
-				if (!(stack.getItem() instanceof ItemTFCThingsMold)) {
+				if (!(stack.getItem() instanceof ItemTFCThingsMold tmp)) {
 					return ItemStack.EMPTY;
 				}
 
-				ItemTFCThingsMold tmp = (ItemTFCThingsMold) stack.getItem();
 				if (!tmp.getToolName().equals(this.type) || moldStack != null) {
 					return ItemStack.EMPTY;
 				}
@@ -95,9 +92,8 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 		}
 
 		if (moldStack != null) {
-			IFluidHandler moldCap = (IFluidHandler) moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
-			if (moldCap instanceof IMoldHandler) {
-				IMoldHandler moldHandler = (IMoldHandler) moldCap;
+			IFluidHandler moldCap = moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, (EnumFacing) null);
+			if (moldCap instanceof IMoldHandler moldHandler) {
 				if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
 					return this.getOutputItem(moldHandler);
 				}

@@ -8,7 +8,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -32,6 +31,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import javax.annotation.Nonnull;
@@ -185,7 +185,7 @@ public class BlockOven extends Block implements ILightableBlock, IItemSize {
 							ItemHandlerHelper.giveItemToPlayer(player, takeStack);
 							te.markForSync();
 							if (ConfigFL.General.BALANCE.peelNeeded && te.willDamage() && !OreDictionaryHelper.doesStackMatchOre(held, "peel") && state.getValue(CURED))
-								player.attackEntityFrom(DamageSourcesTFC.GRILL, 2.0F); // damage player if they don't use peel
+								player.attackEntityFrom(DamageSources.GRILL, 2.0F); // damage player if they don't use peel
 							return true;
 						}
 					}

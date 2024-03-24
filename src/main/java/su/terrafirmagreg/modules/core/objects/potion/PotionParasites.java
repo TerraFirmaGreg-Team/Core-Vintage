@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.minecraft.entity.EntityLivingBase;
 import su.terrafirmagreg.api.spi.effects.PotionBase;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import javax.annotation.Nonnull;
 
@@ -15,7 +15,7 @@ public class PotionParasites extends PotionBase {
 
 	@Override
 	public void performEffect(@Nonnull EntityLivingBase entity, int amplifier) {
-		entity.attackEntityFrom(DamageSourcesTFC.FOOD_POISON, 1.0F * (amplifier + 1));
+		entity.attackEntityFrom(DamageSources.FOOD_POISON, 1.0F * (amplifier + 1));
 	}
 
 	@Override

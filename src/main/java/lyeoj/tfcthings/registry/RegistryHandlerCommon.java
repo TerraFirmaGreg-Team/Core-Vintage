@@ -198,8 +198,7 @@ public class RegistryHandlerCommon {
 			event.getRegistry()
 					.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTHINGS, "hook_javelin_head_black_steel"), IIngredient.of(new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), DOUBLE_INGOT))),
 							new ItemStack(TFCThingsItems.ITEM_HOOK_JAVELIN_HEAD_BLACK_STEEL), TFCRegistries.METALS
-							.getValue(DefaultMetals.BLACK_STEEL)
-							.getTier(), WEAPONS, DRAW_LAST, UPSET_NOT_LAST, BEND_NOT_LAST));
+							.getValue(DefaultMetals.BLACK_STEEL).getTier(), WEAPONS, DRAW_LAST, UPSET_NOT_LAST, BEND_NOT_LAST));
 			event.getRegistry()
 					.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTHINGS, "hook_javelin_head_blue_steel"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, DOUBLE_INGOT))),
 							new ItemStack(TFCThingsItems.ITEM_HOOK_JAVELIN_HEAD_BLUE_STEEL), Metal.BLUE_STEEL.getTier(), WEAPONS, DRAW_LAST, UPSET_NOT_LAST, BEND_NOT_LAST));

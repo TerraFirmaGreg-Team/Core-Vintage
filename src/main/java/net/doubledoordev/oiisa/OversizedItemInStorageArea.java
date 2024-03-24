@@ -53,8 +53,7 @@ public class OversizedItemInStorageArea {
 	@Mod.Instance(MODID_OSA)
 	public static OversizedItemInStorageArea INSTANCE;
 	static Logger log;
-	DamageSource playerIncinerator = new DamageSource("oiisaincinerator").setDamageBypassesArmor()
-			.setDamageIsAbsolute();
+	DamageSource playerIncinerator = new DamageSource("oiisaincinerator").setDamageBypassesArmor().setDamageIsAbsolute();
 	Map<String, Integer> weightMap = new HashMap<>();
 	Map<String, Integer> containerSizeOverideMap = new HashMap<>();
 

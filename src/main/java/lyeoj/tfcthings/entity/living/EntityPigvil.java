@@ -2,7 +2,6 @@ package lyeoj.tfcthings.entity.living;
 
 import com.google.common.collect.Sets;
 import lyeoj.tfcthings.init.TFCThingsBlocks;
-import lyeoj.tfcthings.init.TFCThingsDamageSources;
 import lyeoj.tfcthings.init.TFCThingsItems;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
@@ -22,6 +21,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import java.util.Set;
 
@@ -111,7 +111,7 @@ public class EntityPigvil extends EntityCreature {
 		if (this.world.getBlockState(blockpos).getBlock().isReplaceable(world, blockpos)) {
 			this.world.playSound(player, blockpos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
 			this.world.setBlockState(blockpos, getAnvil().getDefaultState()
-			                                             .withProperty(BlockAnvilTFC.AXIS, this.getAdjustedHorizontalFacing()));
+					.withProperty(BlockAnvilTFC.AXIS, this.getAdjustedHorizontalFacing()));
 			this.setDead();
 			return true;
 		}
@@ -134,7 +134,7 @@ public class EntityPigvil extends EntityCreature {
 
 	public void onCollideWithPlayer(EntityPlayer playerIn) {
 		if (this.fallDistance > 3 && this.posY > playerIn.posY) {
-			playerIn.attackEntityFrom(TFCThingsDamageSources.PIGVIL, fallDistance * 3.0f);
+			playerIn.attackEntityFrom(DamageSources.PIGVIL, fallDistance * 3.0f);
 		}
 	}
 

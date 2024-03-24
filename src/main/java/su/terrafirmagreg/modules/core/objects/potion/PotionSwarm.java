@@ -2,17 +2,16 @@ package su.terrafirmagreg.modules.core.objects.potion;
 
 import net.dries007.tfc.Constants;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.api.spi.effects.PotionBase;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class PotionSwarm extends PotionBase {
-	public static final DamageSource SWARM = new DamageSource("swarm").setDifficultyScaled();
 
 	public PotionSwarm() {
 		super(true, 0xffff1a);
@@ -34,7 +33,7 @@ public class PotionSwarm extends PotionBase {
 			}
 		} else {
 			if (!entity.isWet())
-				entity.attackEntityFrom(SWARM, 1.0f + amplifier);
+				entity.attackEntityFrom(DamageSources.SWARM, 1.0f + amplifier);
 		}
 
 	}

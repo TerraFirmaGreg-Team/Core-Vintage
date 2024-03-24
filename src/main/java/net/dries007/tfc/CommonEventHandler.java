@@ -47,7 +47,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -126,6 +125,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
@@ -1005,7 +1005,7 @@ public final class CommonEventHandler {
 			for (String pluckable : ConfigTFC.General.MISC.pluckableEntities) {
 				if (pluckable.equals(entityTypeName)) {
 					target.dropItem(Items.FEATHER, 1);
-					target.attackEntityFrom(DamageSourcesTFC.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
+					target.attackEntityFrom(DamageSources.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
 					if (target instanceof IAnimal animalTarget) {
 						animalTarget.setFamiliarity(animalTarget.getFamiliarity() - 0.04f);
 					}

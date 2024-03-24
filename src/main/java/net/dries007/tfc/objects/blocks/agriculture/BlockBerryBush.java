@@ -11,7 +11,6 @@ import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -39,6 +38,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -215,7 +215,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 			}
 			entityIn.motionZ *= ConfigTFC.General.MISC.berryBushMovementModifier;
 			if (bush.isSpiky() && entityIn instanceof EntityLivingBase) {
-				entityIn.attackEntityFrom(DamageSourcesTFC.BERRYBUSH, 1.0F);
+				entityIn.attackEntityFrom(DamageSources.BERRYBUSH, 1.0F);
 			}
 		}
 	}

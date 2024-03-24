@@ -10,7 +10,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -23,6 +22,7 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import javax.annotation.Nonnull;
@@ -164,7 +164,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 					player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 160, 1, false, false));
 					if (thirst <= 0f) {
 						// Hurt the player, same as starvation
-						player.attackEntityFrom(DamageSourcesTFC.DEHYDRATION, 1);
+						player.attackEntityFrom(DamageSources.DEHYDRATION, 1);
 					}
 				} else if (thirst < 20f) {
 					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 160, 0, false, false));

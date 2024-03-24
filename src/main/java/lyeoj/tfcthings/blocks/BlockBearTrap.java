@@ -1,6 +1,5 @@
 package lyeoj.tfcthings.blocks;
 
-import lyeoj.tfcthings.init.TFCThingsDamageSources;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
@@ -38,6 +37,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -175,9 +175,9 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 				entityLiving.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, debuffDuration));
 				entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, debuffDuration));
 				if (ConfigTFCThings.Items.BEAR_TRAP.fixedDamage > 0) {
-					entityLiving.attackEntityFrom(TFCThingsDamageSources.BEAR_TRAP, (float) ConfigTFCThings.Items.BEAR_TRAP.fixedDamage);
+					entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP, (float) ConfigTFCThings.Items.BEAR_TRAP.fixedDamage);
 				} else if (healthCut > 0) {
-					entityLiving.attackEntityFrom(TFCThingsDamageSources.BEAR_TRAP, entityLiving.getHealth() / (float) healthCut);
+					entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP, entityLiving.getHealth() / (float) healthCut);
 				}
 				trap.setCapturedEntity(entityLiving);
 				entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);

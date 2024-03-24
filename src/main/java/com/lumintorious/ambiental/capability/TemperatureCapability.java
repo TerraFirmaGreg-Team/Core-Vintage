@@ -1,6 +1,5 @@
 package com.lumintorious.ambiental.capability;
 
-import com.lumintorious.ambiental.AmbientalDamage;
 import com.lumintorious.ambiental.TFCAmbientalConfig;
 import com.lumintorious.ambiental.modifiers.*;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -13,6 +12,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 public class TemperatureCapability<C> implements ICapabilitySerializable<NBTTagCompound>, ITemperatureCapability {
 	@CapabilityInject(ITemperatureCapability.class)
@@ -99,9 +99,9 @@ public class TemperatureCapability<C> implements ICapabilitySerializable<NBTTagC
 					damageTick = 0;
 					if (TFCAmbientalConfig.GENERAL.takeDamage) {
 						if (this.getTemperature() > BURN_THRESHOLD) {
-							player.attackEntityFrom(AmbientalDamage.HEAT, 4f);
+							player.attackEntityFrom(DamageSources.HYPERTHERMIA, 4f);
 						} else if (this.getTemperature() < FREEZE_THRESHOLD) {
-							player.attackEntityFrom(AmbientalDamage.COLD, 4f);
+							player.attackEntityFrom(DamageSources.HYPOTHERMIA, 4f);
 						}
 					}
 					if (TFCAmbientalConfig.GENERAL.loseHungerThirst) {

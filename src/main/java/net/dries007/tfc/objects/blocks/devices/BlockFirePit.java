@@ -12,7 +12,6 @@ import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEFirePit;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
@@ -44,6 +43,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
@@ -290,9 +290,9 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
 						if (!anythingInTheInv) {
 							if (state.getValue(LIT)) {
 								if (attachment == FirePitAttachment.COOKING_POT) {
-									player.attackEntityFrom(DamageSourcesTFC.SOUP, 1);
+									player.attackEntityFrom(DamageSources.SOUP, 1);
 								} else {
-									player.attackEntityFrom(DamageSourcesTFC.GRILL, 1);
+									player.attackEntityFrom(DamageSources.GRILL, 1);
 								}
 
 							} else {

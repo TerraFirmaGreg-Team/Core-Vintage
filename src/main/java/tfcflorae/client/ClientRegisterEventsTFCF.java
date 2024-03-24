@@ -52,7 +52,6 @@ import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
 import tfcflorae.objects.blocks.blocktype.farmland.*;
 import tfcflorae.objects.blocks.groundcover.BlockCoral;
-import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
 import tfcflorae.objects.blocks.plants.*;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
 import tfcflorae.objects.blocks.wood.BlockFenceGateLog;
@@ -189,17 +188,6 @@ public class ClientRegisterEventsTFCF {
 		if (ConfigTFCF.General.WORLD.enableGroundcoverTwig) {
 			for (Block block : BlocksTFCF.getAllSurfaceTwig())
 				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-		}
-
-		if (ConfigTFCF.General.WORLD.enableGroundcoverRock) {
-			for (Block block : BlocksTFCF.getAllSurfaceRocks())
-				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().build());
-		}
-
-		if (ConfigTFCF.General.WORLD.enableGroundcoverOreDeposit) {
-			for (Block block : BlocksTFCF.getAllSurfaceOreBlocks())
-				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSurfaceOreDeposit.GRADE)
-						.build());
 		}
 
 //        for (Block block : BlocksTFCF.getAllJoshuaTreeSaplingBlocks())

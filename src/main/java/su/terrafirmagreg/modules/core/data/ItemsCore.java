@@ -19,6 +19,8 @@ public final class ItemsCore {
 	public static ItemCoreMisc STRAW;
 	public static ItemCoreMisc WOOD_ASH;
 	public static ItemCoreMisc JAR;
+	public static ItemCoreMisc HALTER;
+	public static ItemCoreMisc MORTAR;
 
 
 	public static void onRegister(RegistryManager registry) {
@@ -31,10 +33,11 @@ public final class ItemsCore {
 		registry.registerAuto(ICE_SHARD = new ItemCoreMisc("ice_shard", Size.TINY, Weight.LIGHT));
 		registry.registerAuto(SEA_ICE_SHARD = new ItemCoreMisc("sea_ice_shard", Size.TINY, Weight.LIGHT));
 		registry.registerAuto(PACKED_ICE_SHARD = new ItemCoreMisc("packed_ice_shard", Size.TINY, Weight.LIGHT));
-
 		registry.registerAuto(STRAW = new ItemCoreMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
 		registry.registerAuto(WOOD_ASH = new ItemCoreMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT));
 		registry.registerAuto(JAR = new ItemCoreMisc("jar", Size.VERY_SMALL, Weight.VERY_LIGHT));
+		registry.registerAuto(HALTER = new ItemCoreMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
+		registry.registerAuto(MORTAR = new ItemCoreMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));
 
 
 	}

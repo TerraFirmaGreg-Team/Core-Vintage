@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tfcthings:items/sling_ammo_fire"
+    "layer0": "tfg:items/device/sling/ammo/light"
   }
 }

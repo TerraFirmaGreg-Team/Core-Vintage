@@ -1,7 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "tfcthings:items/sling_stone"
+    "layer0": "tfg:items/device/sling/stone"
   },
   "display": {
     "thirdperson_righthand": {

@@ -1,56 +1,56 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "tfcthings:items/sling_metal"
+    "layer0": "tfg:items/device/sling/normal"
   },
   "overrides": [
     {
       "predicate": {
         "spinning": 1
       },
-      "model": "tfcthings:item/sling/sling_1"
+      "model": "tfg:item/device/sling/sub/1"
     },
     {
       "predicate": {
         "spinning": 2
       },
-      "model": "tfcthings:item/sling/sling_2"
+      "model": "tfg:item/device/sling/sub/2"
     },
     {
       "predicate": {
         "spinning": 3
       },
-      "model": "tfcthings:item/sling/sling_3"
+      "model": "tfg:item/device/sling/sub/3"
     },
     {
       "predicate": {
         "spinning": 4
       },
-      "model": "tfcthings:item/sling/sling_4"
+      "model": "tfg:item/device/sling/sub/4"
     },
     {
       "predicate": {
         "spinning": 5
       },
-      "model": "tfcthings:item/sling/sling_5"
+      "model": "tfg:item/device/sling/sub/5"
     },
     {
       "predicate": {
         "spinning": 6
       },
-      "model": "tfcthings:item/sling/sling_6"
+      "model": "tfg:item/device/sling/sub/6"
     },
     {
       "predicate": {
         "spinning": 7
       },
-      "model": "tfcthings:item/sling/sling_7"
+      "model": "tfg:item/device/sling/sub/7"
     },
     {
       "predicate": {
         "spinning": 8
       },
-      "model": "tfcthings:item/sling/sling_8"
+      "model": "tfg:item/device/sling/sub/8"
     }
   ]
 }

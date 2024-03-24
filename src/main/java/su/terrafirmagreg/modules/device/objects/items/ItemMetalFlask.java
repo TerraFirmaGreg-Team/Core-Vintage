@@ -9,18 +9,18 @@ import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 
 import javax.annotation.Nonnull;
 
-public class ItemIronFlask extends ItemFlask {
+public class ItemMetalFlask extends ItemFlask {
 
 	protected static int capacity = ModuleDeviceConfig.ITEMS.WATER_FLASKS.ironCap;
 	protected static int drink = 100; //matches amount of water in TFC Jug
 
-	public ItemIronFlask() {
+	public ItemMetalFlask() {
 		super(capacity, drink);
 	}
 
 	@Override
 	public @NotNull String getName() {
-		return "device/flask/iron";
+		return "device/flask/metal";
 	}
 
 	@Nonnull

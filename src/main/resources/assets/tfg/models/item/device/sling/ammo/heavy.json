@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tfg:items/device/flask/iron/3"
+    "layer0": "tfg:items/device/sling/ammo/heavy"
   }
 }

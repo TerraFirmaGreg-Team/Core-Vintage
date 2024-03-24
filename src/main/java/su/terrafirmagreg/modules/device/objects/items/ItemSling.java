@@ -1,65 +1,58 @@
-package lyeoj.tfcthings.items;
+package su.terrafirmagreg.modules.device.objects.items;
 
 import lyeoj.tfcthings.entity.projectile.EntitySlingStone;
 import lyeoj.tfcthings.entity.projectile.EntitySlingStoneMetal;
 import lyeoj.tfcthings.entity.projectile.EntitySlingStoneMetalLight;
 import lyeoj.tfcthings.entity.projectile.EntityUnknownProjectile;
+import lyeoj.tfcthings.items.ItemMetalSlingAmmo;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 
-public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThingsConfigurableItem {
+public class ItemSling extends ItemBase {
 
-	private int tier;
-
-	public ItemSling(int tier) {
-		this.tier = tier;
-		if (tier < 1) {
-			this.setMaxDamage(64);
-		} else {
-			this.setMaxDamage(256);
-		}
+	public ItemSling() {
+		this.setMaxDamage(64);
 		this.setNoRepair();
 		this.setMaxStackSize(1);
-		this.setCreativeTab(CreativeTabsTFC.CT_MISC);
 		this.addPropertyOverride(new ResourceLocation("spinning"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+			public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
 				if (entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack && entityIn.getItemInUseMaxCount() > 0) {
 					int maxPower = ConfigTFCThings.Items.SLING.maxPower;
 					int chargeSpeed = ConfigTFCThings.Items.SLING.chargeSpeed;
 					float powerRatio = Math.min((float) entityIn.getItemInUseMaxCount() / (float) chargeSpeed, maxPower) / (float) maxPower;
-					float f = MathHelper.floor(((entityIn.getItemInUseMaxCount() * powerRatio) % 8) + 1);
-					return f;
+					return (float) MathHelper.floor(((entityIn.getItemInUseMaxCount() * powerRatio) % 8) + 1);
 				}
 				return 0.0F;
 			}
 		});
+		OreDictUtils.register(this, "tool");
+	}
+
+	@Override
+	public @NotNull String getName() {
+		return "device/sling/normal";
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -80,7 +73,7 @@ public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThings
 		return Weight.MEDIUM;
 	}
 
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		boolean flag = !this.findAmmo(playerIn).isEmpty();
@@ -89,13 +82,12 @@ public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThings
 			return flag ? new ActionResult(EnumActionResult.PASS, itemstack) : new ActionResult(EnumActionResult.FAIL, itemstack);
 		} else {
 			playerIn.setActiveHand(handIn);
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 		}
 	}
 
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-		if (entityLiving instanceof EntityPlayer) {
-			EntityPlayer entityplayer = (EntityPlayer) entityLiving;
+	public void onPlayerStoppedUsing(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull EntityLivingBase entityLiving, int timeLeft) {
+		if (entityLiving instanceof EntityPlayer entityplayer) {
 
 			boolean flag = entityplayer.isCreative();
 			ItemStack itemStack = this.findAmmo(entityplayer);
@@ -112,7 +104,7 @@ public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThings
 				if (!worldIn.isRemote) {
 					shoot(worldIn, entityLiving, power, velocity, inaccuracy, itemStack);
 				}
-				worldIn.playSound((EntityPlayer) null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 				itemStack.shrink(1);
 				if (itemStack.isEmpty()) {
@@ -124,7 +116,7 @@ public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThings
 				if (!worldIn.isRemote) {
 					shoot(worldIn, entityLiving, power, velocity, inaccuracy, itemStack);
 				}
-				worldIn.playSound((EntityPlayer) null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			}
 		}
 	}
@@ -136,8 +128,7 @@ public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThings
 
 		if (itemStack.getItem() instanceof ItemIngot) {
 			entitySlingStone = new EntityUnknownProjectile(worldIn, entityLiving, power);
-		} else if (itemStack.getItem() instanceof ItemMetalSlingAmmo) {
-			ItemMetalSlingAmmo ammo = (ItemMetalSlingAmmo) itemStack.getItem();
+		} else if (itemStack.getItem() instanceof ItemMetalSlingAmmo ammo) {
 			switch (ammo.getType()) {
 				case 0:
 					entitySlingStone = new EntitySlingStoneMetal(worldIn, entityLiving, power + 5);
@@ -152,7 +143,7 @@ public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThings
 					break;
 				case 2:
 					entitySlingStone = new EntitySlingStoneMetalLight(worldIn, entityLiving, power + 3);
-					adjustedVelocity *= 1.2;
+					adjustedVelocity *= 1.2F;
 					break;
 				default:
 					entitySlingStone = new EntitySlingStoneMetal(worldIn, entityLiving, power + 2);
@@ -186,43 +177,18 @@ public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThings
 	protected boolean isStone(ItemStack stack) {
 		if (stack.getItem() instanceof ItemRock) {
 			return true;
-		} else if (stack.getItem() instanceof ItemIngot) {
-			ItemIngot ingot = (ItemIngot) stack.getItem();
-			if (ingot.getMetal(stack) == Metal.UNKNOWN) {
-				return true;
-			}
-		} else if (tier > 0 && stack.getItem() instanceof ItemMetalSlingAmmo) {
-			return true;
+		} else if (stack.getItem() instanceof ItemIngot ingot) {
+			return ingot.getMetal(stack) == Metal.UNKNOWN;
 		}
 		return false;
 	}
 
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public int getMaxItemUseDuration(@NotNull ItemStack stack) {
 		return 72000;
 	}
 
-	public EnumAction getItemUseAction(ItemStack stack) {
+	public @NotNull EnumAction getItemUseAction(@NotNull ItemStack stack) {
 		return EnumAction.BOW;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		if (tier < 1) {
-			tooltip.add(I18n.format("tfcthings.tooltip.sling.message1", new Object[0]));
-		} else {
-			tooltip.add(I18n.format("tfcthings.tooltip.sling.message2", new Object[0]));
-		}
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-	}
-
-	@Override
-	public void initOreDict() {
-		OreDictionary.registerOre("tool", new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
-		;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSling;
-	}
 }

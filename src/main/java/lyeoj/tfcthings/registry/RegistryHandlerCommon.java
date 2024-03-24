@@ -36,6 +36,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import su.terrafirmagreg.modules.device.data.ItemsDevice;
 
 import static net.dries007.tfc.api.types.Metal.ItemType.*;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
@@ -96,7 +97,7 @@ public class RegistryHandlerCommon {
 	public static void registerKnappingRecipes(RegistryEvent.Register<KnappingRecipe> event) {
 		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSling) {
 			event.getRegistry()
-					.register(new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(TFCThingsItems.ITEM_SLING),
+					.register(new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsDevice.SLING),
 							"  XXX", "    X", " XXXX", "XX   ", "X    ").setRegistryName("sling"));
 		}
 		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer) {
@@ -213,10 +214,10 @@ public class RegistryHandlerCommon {
 		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSling) {
 			event.getRegistry()
 					.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTHINGS, "sling_ammo_steel"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, INGOT))),
-							new ItemStack(TFCThingsItems.ITEM_SLING_AMMO, 16), Metal.STEEL.getTier(), WEAPONS, HIT_LAST, HIT_NOT_LAST, BEND_NOT_LAST));
+							new ItemStack(ItemsDevice.SLING_AMMO, 16), Metal.STEEL.getTier(), WEAPONS, HIT_LAST, HIT_NOT_LAST, BEND_NOT_LAST));
 			event.getRegistry()
 					.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTHINGS, "sling_ammo_iron"), IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, INGOT))),
-							new ItemStack(TFCThingsItems.ITEM_SLING_AMMO, 8), Metal.WROUGHT_IRON.getTier(), WEAPONS, HIT_LAST, HIT_NOT_LAST, BEND_NOT_LAST));
+							new ItemStack(ItemsDevice.SLING_AMMO, 8), Metal.WROUGHT_IRON.getTier(), WEAPONS, HIT_LAST, HIT_NOT_LAST, BEND_NOT_LAST));
 		}
 
 	}

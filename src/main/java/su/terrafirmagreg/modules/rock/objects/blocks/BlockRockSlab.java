@@ -79,6 +79,7 @@ public abstract class BlockRockSlab extends BlockSlabBase implements IRockBlock 
 
 		public Double(RockBlockVariant model, RockBlockVariant variant, RockType type) {
 			super(model, variant, type);
+
 		}
 
 		@Override

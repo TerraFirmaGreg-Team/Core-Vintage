@@ -65,7 +65,6 @@ public final class BlocksTFC {
 	@GameRegistry.ObjectHolder("alabaster/raw/plain")
 	public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
 	public static final BlockFirePit FIREPIT = getNull();
-	public static final BlockThatch THATCH = getNull();
 	public static final BlockThatchBed THATCH_BED = getNull();
 	public static final BlockPitKiln PIT_KILN = getNull();
 	public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
@@ -272,8 +271,6 @@ public final class BlocksTFC {
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), CT_ROCK_BLOCKS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), CT_ROCK_BLOCKS)));
 
-
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), CT_DECORATIONS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_DECORATIONS)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));

@@ -126,6 +126,7 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
+import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
@@ -697,9 +698,9 @@ public final class CommonEventHandler {
 
 		// Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
 		// This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
-		if (event.getWorld().getBlockState(pos).getBlock() == BlocksTFC.THATCH || event.getWorld()
+		if (event.getWorld().getBlockState(pos).getBlock() == BlocksCore.THATCH || event.getWorld()
 				.getBlockState(pos.up())
-				.getBlock() == BlocksTFC.THATCH) {
+				.getBlock() == BlocksCore.THATCH) {
 			event.setResult(Event.Result.DENY);
 		}
 	}

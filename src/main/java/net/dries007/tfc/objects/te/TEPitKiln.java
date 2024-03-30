@@ -37,6 +37,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nonnull;
@@ -200,7 +201,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 			}
 
 			// Straw via thatch block (special exception)
-			if (stack.getItem() == Item.getItemFromBlock(BlocksTFC.THATCH) && strawCount <= STRAW_NEEDED - 4) {
+			if (stack.getItem() == Item.getItemFromBlock(BlocksCore.THATCH) && strawCount <= STRAW_NEEDED - 4) {
 				stack.shrink(1);
 				addStrawBlock();
 				world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);

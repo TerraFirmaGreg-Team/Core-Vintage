@@ -19,6 +19,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.BlocksCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -52,23 +53,24 @@ public class ItemAnimalHide extends ItemTFC {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP && worldIn.getBlockState(pos)
-		                                                                                                                                       .getBlock() == BlocksTFC.THATCH && worldIn.getBlockState(pos.offset(player.getHorizontalFacing()))
-		                                                                                                                                                                                 .getBlock() == BlocksTFC.THATCH) {
+		if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP && worldIn
+				.getBlockState(pos)
+				.getBlock() == BlocksCore.THATCH && worldIn.getBlockState(pos.offset(player.getHorizontalFacing()))
+				.getBlock() == BlocksCore.THATCH) {
 			// Try and create a thatch bed
 			BlockPos headPos = pos.offset(player.getHorizontalFacing());
 			//Creating a thatch bed
 			if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(headPos, facing, stack)) {
 				if (!worldIn.isRemote) {
 					IBlockState footState = BlocksTFC.THATCH_BED.getDefaultState()
-					                                            .withProperty(BlockBed.OCCUPIED, false)
-					                                            .withProperty(BlockBed.FACING, player.getHorizontalFacing())
-					                                            .withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+							.withProperty(BlockBed.OCCUPIED, false)
+							.withProperty(BlockBed.FACING, player.getHorizontalFacing())
+							.withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 					IBlockState headState = BlocksTFC.THATCH_BED.getDefaultState()
-					                                            .withProperty(BlockBed.OCCUPIED, false)
-					                                            .withProperty(BlockBed.FACING, player.getHorizontalFacing()
-					                                                                                 .getOpposite())
-					                                            .withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
+							.withProperty(BlockBed.OCCUPIED, false)
+							.withProperty(BlockBed.FACING, player.getHorizontalFacing()
+									.getOpposite())
+							.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
 					worldIn.setBlockState(pos, footState, 10);
 					worldIn.setBlockState(headPos, headState, 10);
 					SoundType soundtype = BlocksTFC.THATCH_BED.getSoundType(footState, worldIn, pos, player);
@@ -85,7 +87,7 @@ public class ItemAnimalHide extends ItemTFC {
 			IBlockState stateAbove = worldIn.getBlockState(posAbove);
 			ItemStack stackAt = stateAt.getBlock().getPickBlock(stateAt, null, worldIn, pos, player);
 			if (facing == EnumFacing.UP && OreDictionaryHelper.doesStackMatchOre(stackAt, "logWood") && stateAbove.getBlock()
-			                                                                                                      .isAir(stateAbove, worldIn, posAbove)) {
+					.isAir(stateAbove, worldIn, posAbove)) {
 				if (!worldIn.isRemote) {
 					worldIn.setBlockState(posAbove, BlocksTFC.PLACED_HIDE.getDefaultState().withProperty(SIZE, size));
 				}
@@ -138,7 +140,9 @@ public class ItemAnimalHide extends ItemTFC {
 	}
 
 	public enum HideSize implements IStringSerializable {
-		SMALL, MEDIUM, LARGE;
+		SMALL,
+		MEDIUM,
+		LARGE;
 
 		private static final HideSize[] VALUES = values();
 
@@ -154,6 +158,10 @@ public class ItemAnimalHide extends ItemTFC {
 	}
 
 	public enum HideType {
-		RAW, SOAKED, SCRAPED, PREPARED, SHEEPSKIN
+		RAW,
+		SOAKED,
+		SCRAPED,
+		PREPARED,
+		SHEEPSKIN
 	}
 }

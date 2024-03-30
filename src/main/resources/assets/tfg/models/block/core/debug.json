@@ -1,8 +1,201 @@
 {
-  "parent": "block/cube_bottom_top",
+  "parent": "block/block",
   "textures": {
-    "side": "tfg:icons/whitebg/popcorn",
-    "up": "tfg:icons/whitebg/cookie-chocolate-sprinkles",
-    "down": "tfg:icons/white"
+    "particle": "#all",
+    "down": "#all",
+    "up": "#all",
+    "north": "#all",
+    "east": "#all",
+    "south": "#all",
+    "west": "#all",
+    "warning": "tfg:blocks/core/warning"
+  },
+    "elements": [
+      {
+        "from": [
+          0,
+          0,
+          0
+        ],
+        "to": [
+          16,
+          16,
+          16
+        ],
+        "faces": {
+          "down": {
+            "texture": "#all",
+            "cullface": "down"
+          },
+          "up": {
+            "texture": "#all",
+            "cullface": "up"
+          },
+          "north": {
+            "texture": "#all",
+            "cullface": "north"
+          },
+          "south": {
+            "texture": "#all",
+            "cullface": "south"
+          },
+          "west": {
+            "texture": "#all",
+            "cullface": "west"
+          },
+          "east": {
+            "texture": "#all",
+            "cullface": "east"
+          }
+        }
+      },
+      {
+        "from": [
+          7,
+          17,
+          7
+        ],
+        "to": [
+          9,
+          19,
+          9
+        ],
+        "faces": {
+          "down": {
+            "uv": [
+              10,
+              11,
+              12,
+              13
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "up": {
+            "uv": [
+              10,
+              8,
+              12,
+              10
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "north": {
+            "uv": [
+              4,
+              10,
+              6,
+              12
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "south": {
+            "uv": [
+              4,
+              10,
+              6,
+              12
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "west": {
+            "uv": [
+              4,
+              10,
+              6,
+              12
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "east": {
+            "uv": [
+              4,
+              10,
+              6,
+              12
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          }
+        }
+      },
+      {
+        "from": [
+          7,
+          20,
+          7
+        ],
+        "to": [
+          9,
+          26,
+          9
+        ],
+        "faces": {
+          "down": {
+            "uv": [
+              10,
+              5,
+              12,
+              7
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "up": {
+            "uv": [
+              10,
+              2,
+              12,
+              4
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "north": {
+            "uv": [
+              4,
+              3,
+              6,
+              9
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "south": {
+            "uv": [
+              4,
+              3,
+              6,
+              9
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "west": {
+            "uv": [
+              4,
+              3,
+              6,
+              9
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          },
+          "east": {
+            "uv": [
+              4,
+              3,
+              6,
+              9
+            ],
+            "texture": "#warning",
+            "cullface": "down"
+          }
+        }
+      }
+    ]
   }
-}

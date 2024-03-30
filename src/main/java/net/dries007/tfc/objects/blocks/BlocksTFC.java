@@ -27,8 +27,6 @@ import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGravel;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -57,13 +55,6 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 public final class BlocksTFC {
 	@GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
 	public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
-
-	@GameRegistry.ObjectHolder("alabaster/bricks/plain")
-	public static final BlockDecorativeStone ALABASTER_BRICKS_PLAIN = getNull();
-	@GameRegistry.ObjectHolder("alabaster/polished/plain")
-	public static final BlockDecorativeStone ALABASTER_POLISHED_PLAIN = getNull();
-	@GameRegistry.ObjectHolder("alabaster/raw/plain")
-	public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
 	public static final BlockFirePit FIREPIT = getNull();
 	public static final BlockThatchBed THATCH_BED = getNull();
 	public static final BlockPitKiln PIT_KILN = getNull();
@@ -83,7 +74,6 @@ public final class BlocksTFC {
 	public static final BlockQuern QUERN = getNull();
 	public static final BlockIceTFC SEA_ICE = getNull();
 	public static final BlockPowderKeg POWDERKEG = getNull();
-	public static final BlockGravel AGGREGATE = getNull();
 	public static final Block FIRE_BRICKS = getNull();
 
 	// All these are for use in model registration. Do not use for block lookups.
@@ -268,7 +258,6 @@ public final class BlocksTFC {
 		Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
 		Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), CT_ROCK_BLOCKS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), CT_ROCK_BLOCKS)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_DECORATIONS)));
@@ -285,24 +274,6 @@ public final class BlocksTFC {
 
 		normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), CT_POTTERY)));
 		normalItemBlocks.add(new ItemBlockPowderKeg(register(r, "powderkeg", new BlockPowderKeg(), CT_WOOD)));
-
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/raw/plain", new BlockDecorativeStone(MapColor.SNOW), CT_DECORATIONS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/polished/plain", new BlockDecorativeStone(MapColor.SNOW), CT_DECORATIONS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/bricks/plain", new BlockDecorativeStone(MapColor.SNOW), CT_DECORATIONS)));
-
-		for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-			BlockDecorativeStone polished = new BlockDecorativeStone(MapColor.getBlockColor(dyeColor));
-			BlockDecorativeStone bricks = new BlockDecorativeStone(MapColor.getBlockColor(dyeColor));
-			BlockDecorativeStone raw = new BlockDecorativeStone(MapColor.getBlockColor(dyeColor));
-
-			normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/polished/" + dyeColor.getName(), polished, CT_DECORATIONS)));
-			normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/bricks/" + dyeColor.getName(), bricks, CT_DECORATIONS)));
-			normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/raw/" + dyeColor.getName(), raw, CT_DECORATIONS)));
-
-			BlockDecorativeStone.ALABASTER_POLISHED.put(dyeColor, polished);
-			BlockDecorativeStone.ALABASTER_BRICKS.put(dyeColor, bricks);
-			BlockDecorativeStone.ALABASTER_RAW.put(dyeColor, raw);
-		}
 
 		{
 			// Apparently this is the way we're supposed to do things even though the fluid registry defaults. So we'll do it this way.

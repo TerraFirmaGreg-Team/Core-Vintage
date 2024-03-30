@@ -3,11 +3,14 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "tfc:blocks/aggregate"
+      "all": "tfg:blocks/rock/alabaster/bricks/plain"
     }
   },
   "variants": {
     "normal": [
+      {}
+    ],
+    "inventory": [
       {}
     ]
   }

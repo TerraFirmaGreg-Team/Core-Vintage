@@ -52,6 +52,4 @@ public class RockBlockVariants {
 	public static RockBlockVariant ANVIL;
 	public static RockBlockVariant MAGMA;
 	public static RockBlockVariant STAND_GEM;
-
-
 }

@@ -15,8 +15,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlockDecorativeStone;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -102,16 +100,6 @@ public class OreDictionaryHelper {
 		OreDictionary.registerOre("dyeBrown", new ItemStack(ItemPowder.get(Powder.FERTILIZER)));
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ItemPowder.get(Powder.CHARCOAL)));
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ItemPowder.get(Powder.COKE)));
-
-		BlockDecorativeStone.ALABASTER_BRICKS.forEach((dyeColor, blockDecorativeStone) -> OreDictionary.registerOre("alabasterBricks", new ItemStack(blockDecorativeStone)));
-		BlockDecorativeStone.ALABASTER_BRICKS.forEach((dyeColor, blockDecorativeStone) -> OreDictionary.registerOre("bricksAlabaster", new ItemStack(blockDecorativeStone)));
-		BlockDecorativeStone.ALABASTER_POLISHED.forEach((dyeColor, blockDecorativeStone) -> OreDictionary.registerOre("alabasterPolished", new ItemStack(blockDecorativeStone)));
-		BlockDecorativeStone.ALABASTER_RAW.forEach((dyeColor, blockDecorativeStone) -> OreDictionary.registerOre("alabasterRaw", new ItemStack(blockDecorativeStone)));
-
-		OreDictionary.registerOre("alabasterBricks", new ItemStack(BlocksTFC.ALABASTER_BRICKS_PLAIN));
-		OreDictionary.registerOre("bricksAlabaster", new ItemStack(BlocksTFC.ALABASTER_BRICKS_PLAIN));
-		OreDictionary.registerOre("alabasterRaw", new ItemStack(BlocksTFC.ALABASTER_RAW_PLAIN));
-		OreDictionary.registerOre("alabasterPolished", new ItemStack(BlocksTFC.ALABASTER_POLISHED_PLAIN));
 
 		// Register a name without any items
 		OreDictionary.getOres("infiniteFire", true);

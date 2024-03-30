@@ -29,7 +29,6 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlockDecorativeStone;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
@@ -67,8 +66,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
+import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.rock.data.BlocksRock;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 import javax.annotation.Nullable;
@@ -80,6 +82,7 @@ import static net.dries007.tfc.types.DefaultMetals.*;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
 
 /**
  * In 1.14+, every line in here needs to be a json file. Yay, but also ugh.
@@ -148,7 +151,7 @@ public final class DefaultRecipes {
 				// this ratio works for 9b + 1b = 10b (full barrel) of brine/milk_vinegar, but leaves odd ninths of fluid around for other mixtures.
 				new BarrelRecipeFluidMixing(IIngredient.of(MILK.get(), 9), new IngredientFluidItem(VINEGAR.get(), 1), new FluidStack(MILK_VINEGAR.get(), 10), 0).setRegistryName("milk_vinegar"),
 				new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), IIngredient.of("dustFlux"), new FluidStack(LIMEWATER.get(), 500), ItemStack.EMPTY, 0).setRegistryName("limewater"),
-				new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 100), IIngredient.of("gemGypsum"), null, new ItemStack(BlocksTFC.ALABASTER_RAW_PLAIN), ICalendar.TICKS_IN_HOUR).setRegistryName("plain_alabaster"),
+				new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 100), IIngredient.of("gemGypsum"), null, new ItemStack(BlocksRock.ALABASTER_RAW), ICalendar.TICKS_IN_HOUR).setRegistryName("plain_alabaster"),
 
 				//olive oil production
 				new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(ItemsTFC.OLIVE_PASTE), new FluidStack(OLIVE_OIL_WATER.get(), 125), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("olive_water"),
@@ -189,11 +192,11 @@ public final class DefaultRecipes {
 					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(ItemsTFC.UNFIRED_VESSEL), null, new ItemStack(ItemsTFC.UNFIRED_VESSEL_GLAZED, 1, 15 - dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("glazed_vessel_" + dyeName),
 					// Concrete (vanilla + aggregate)
 					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(new ItemStack(Blocks.CONCRETE_POWDER, 1, 0)), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_" + dyeName),
-					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksTFC.AGGREGATE), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("aggregate_" + dyeName),
+					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksCore.AGGREGATE), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName("aggregate_" + dyeName),
 					// Alabaster
-					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksTFC.ALABASTER_BRICKS_PLAIN), null, new ItemStack(BlockDecorativeStone.ALABASTER_BRICKS.get(dyeColor)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_" + dyeColor.getName()),
-					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksTFC.ALABASTER_RAW_PLAIN), null, new ItemStack(BlockDecorativeStone.ALABASTER_RAW.get(dyeColor)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_" + dyeColor.getName()),
-					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksTFC.ALABASTER_POLISHED_PLAIN), null, new ItemStack(BlockDecorativeStone.ALABASTER_POLISHED.get(dyeColor)), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_" + dyeColor.getName())
+					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksRock.ALABASTER_BRICKS), null, new ItemStack(BlocksRock.ALABASTER_COLOR_BLOCKS.get(Pair.of(dyeColor, BRICKS))), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_" + dyeColor.getName()),
+					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksRock.ALABASTER_RAW), null, new ItemStack(BlocksRock.ALABASTER_COLOR_BLOCKS.get(Pair.of(dyeColor, RAW))), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_" + dyeColor.getName()),
+					new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksRock.ALABASTER_SMOOTH), null, new ItemStack(BlocksRock.ALABASTER_COLOR_BLOCKS.get(Pair.of(dyeColor, SMOOTH))), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_" + dyeColor.getName())
 			);
 		}
 		// Un-dyeing Recipes
@@ -206,19 +209,19 @@ public final class DefaultRecipes {
 				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("blockGlass"), null, new ItemStack(Blocks.GLASS), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_undo"),
 				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("paneGlass"), null, new ItemStack(Blocks.GLASS_PANE), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_pane_undo"),
 				// Concrete
-				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("powderConcrete"), null, new ItemStack(BlocksTFC.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
+				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("powderConcrete"), null, new ItemStack(BlocksCore.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
 				// Alabaster
-				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(BlocksTFC.ALABASTER_BRICKS_PLAIN), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
-				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(BlocksTFC.ALABASTER_RAW_PLAIN), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),
-				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterPolished"), null, new ItemStack(BlocksTFC.ALABASTER_POLISHED_PLAIN), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_undo")
+				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(BlocksRock.ALABASTER_BRICKS), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
+				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(BlocksRock.ALABASTER_RAW), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),
+				new BarrelRecipe(IIngredient.of(FluidsTFC.LYE.get(), 125), IIngredient.of("alabasterSmooth"), null, new ItemStack(BlocksRock.ALABASTER_SMOOTH), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_polished_undo")
 		);
 		// Dye combinations.
 		event.getRegistry().registerAll(
 				//Orange
-				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
-						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.YELLOW)
-						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
-						.get(), 2), 0).setRegistryName("orange_dye_red_yellow_liquid"),
+				new BarrelRecipeFluidMixing(
+						IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.RED).get(), 1),
+						new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.YELLOW).get(), 1),
+						new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE).get(), 2), 0).setRegistryName("orange_dye_red_yellow_liquid"),
 				new BarrelRecipeFluidMixing(IIngredient.of(FluidsTFC.getFluidFromDye(EnumDyeColor.YELLOW)
 						.get(), 1), new IngredientFluidItem(FluidsTFC.getFluidFromDye(EnumDyeColor.RED)
 						.get(), 1), new FluidStack(FluidsTFC.getFluidFromDye(EnumDyeColor.ORANGE)
@@ -837,21 +840,17 @@ public final class DefaultRecipes {
 		for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
 			Block rawRock = BlockRockVariant.get(rock, Rock.Type.RAW);
 			IBlockState smoothRock = BlockRockVariant.get(rock, Rock.Type.SMOOTH).getDefaultState();
-			event.getRegistry()
-					.register(new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock.getRegistryName()
-							.getPath()));
+			event.getRegistry().register(
+					new ChiselRecipe(rawRock, smoothRock).setRegistryName("smooth_" + rock.getRegistryName().getPath()));
 		}
 
 		// Alabaster smoothing
-		for (EnumDyeColor color : EnumDyeColor.values()) {
-			Block rawColoredAlabaster = BlockDecorativeStone.ALABASTER_RAW.get(color);
-			IBlockState smoothColoredAlabaster = BlockDecorativeStone.ALABASTER_POLISHED.get(color).getDefaultState();
-			event.getRegistry()
-					.register(new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));
-		}
-		// And plain
-		event.getRegistry()
-				.register(new ChiselRecipe(BlocksTFC.ALABASTER_RAW_PLAIN, BlocksTFC.ALABASTER_POLISHED_PLAIN.getDefaultState()).setRegistryName("smooth_alabaster"));
+//		for (EnumColor color : EnumColor.values()) {
+//			Block rawColoredAlabaster = BlocksRock.ALABASTER_BLOCKS.get(Pair.of(color, RAW));
+//			IBlockState smoothColoredAlabaster = BlocksRock.ALABASTER_BLOCKS.get(Pair.of(color, SMOOTH)).getDefaultState();
+//			event.getRegistry().register(
+//					new ChiselRecipe(rawColoredAlabaster, smoothColoredAlabaster).setRegistryName("smooth_" + color.getName() + "_alabaster"));
+//		}
 	}
 
 	private static void addAnvil(IForgeRegistry<AnvilRecipe> registry, Metal.ItemType inputType, Metal.ItemType outputType, boolean onlyToolMetals, @Nullable SmithingSkill.Type skillType, ForgeRule... rules) {

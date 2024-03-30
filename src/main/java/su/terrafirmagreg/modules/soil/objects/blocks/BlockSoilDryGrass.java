@@ -9,6 +9,9 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -29,5 +32,12 @@ public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {
 	@Override
 	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
 		return SoilItemVariants.PILE.get(getType());
+	}
+
+	@NotNull
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 }

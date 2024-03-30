@@ -26,7 +26,6 @@ import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by
@@ -58,7 +57,6 @@ public class Registry {
 		for (var item : this.registryManager.getItems()) {
 			event.getRegistry().register(item);
 		}
-		OreDictUtils.init();
 	}
 
 
@@ -122,6 +120,12 @@ public class Registry {
 					provider.getTileEntityClass(),
 					ModUtils.getID("tile." + provider.getTileEntityClass().getSimpleName())
 			);
+		}
+	}
+
+	public void onRegisterOreDict() {
+		for (var oreDict : this.registryManager.getOreDicts()) {
+			oreDict.onRegisterOreDict();
 		}
 	}
 

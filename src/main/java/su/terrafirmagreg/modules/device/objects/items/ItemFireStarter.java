@@ -45,7 +45,7 @@ public class ItemFireStarter extends ItemBase {
 		setMaxStackSize(1);
 		setNoRepair();
 
-		OreDictUtils.register(this, "fireStarter");
+
 	}
 
 	/**
@@ -86,6 +86,11 @@ public class ItemFireStarter extends ItemBase {
 	@Override
 	public @NotNull String getName() {
 		return "device/firestarter";
+	}
+
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "fireStarter");
 	}
 
 	@Override

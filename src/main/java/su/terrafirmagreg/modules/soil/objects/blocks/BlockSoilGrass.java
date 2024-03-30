@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -61,10 +62,12 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 				.withProperty(WEST, Boolean.FALSE)
 				.withProperty(SNOWY, Boolean.FALSE));
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
-
 		//DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+	}
+
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
 	}
 
 	public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {

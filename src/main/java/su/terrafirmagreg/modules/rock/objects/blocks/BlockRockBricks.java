@@ -10,8 +10,6 @@ public class BlockRockBricks extends BlockRock {
 	public BlockRockBricks(RockBlockVariant blockVariant, RockType type) {
 		super(blockVariant, type);
 
-
 		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
-		//OreDictionaryHelper.register(this, "cobblestone");
 	}
 }

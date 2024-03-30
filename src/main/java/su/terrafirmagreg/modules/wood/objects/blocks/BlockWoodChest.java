@@ -51,8 +51,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 		setHardness(2.5F);
 		setSoundType(SoundType.WOOD);
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+		//OreDictUtils.register(this, variant.toString());
+		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 	@Nullable

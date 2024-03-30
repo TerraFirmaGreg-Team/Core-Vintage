@@ -25,8 +25,8 @@ public class ItemWoodLumber extends ItemBase implements IWoodItem {
 
 		setMaxDamage(0);
 
-//        OreDictionaryHelper.register(this, variant.toString());
-//        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+//        OreDictUtils.register(this, variant.toString());
+//        OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 	@NotNull

@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.rock.ModuleRockConfig;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -45,7 +46,12 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 
 
 		FallingBlockManager.registerFallable(this, spec);
-		//OreDictionaryHelper.register(this, "stone");
+	}
+
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, getBlockVariant());
+		OreDictUtils.register(this, "stone");
 	}
 
 	@NotNull

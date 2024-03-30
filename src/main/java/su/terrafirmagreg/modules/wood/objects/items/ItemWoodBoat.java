@@ -41,8 +41,8 @@ public class ItemWoodBoat extends ItemBase implements IWoodItem {
 		this.type = type;
 		this.itemVariant = itemVariant;
 
-//        OreDictionaryHelper.register(this, variant.toString());
-//        OreDictionaryHelper.register(this, variant.toString(), type.toString());
+//        OreDictUtils.register(this, variant.toString());
+//        OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 

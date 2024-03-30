@@ -8,16 +8,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
-import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.BlockSlabBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -46,6 +40,12 @@ public abstract class BlockSoilMudSlab extends BlockSlabBase implements ISoilBlo
 	}
 
 	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "slab");
+		OreDictUtils.register(this, "slab", "mud", "bricks");
+	}
+
+	@Override
 	public ItemBlock getItemBlock() {
 		return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
 	}
@@ -54,20 +54,6 @@ public abstract class BlockSoilMudSlab extends BlockSlabBase implements ISoilBlo
 	@NotNull
 	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
 		return Item.getItemFromBlock(halfSlab);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	@NotNull
-	public ItemStack getItem(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		return new ItemStack(halfSlab);
-	}
-
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(VARIANT).build());
 	}
 
 
@@ -91,9 +77,6 @@ public abstract class BlockSoilMudSlab extends BlockSlabBase implements ISoilBlo
 			this.doubleSlab = (Double) doubleSlab.get(type);
 			this.doubleSlab.halfSlab = this;
 			this.halfSlab = this;
-
-			//OreDictionaryHelper.register(this, variant.toString());
-			//OreDictionaryHelper.register(this, variant.toString(), type.toString());
 		}
 
 		@Override

@@ -26,8 +26,8 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
 		setHardness(0.5F);
 		setSoundType(SoundType.WOOD);
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+		//OreDictUtils.register(this, variant.toString());
+		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 	@Nullable

@@ -6,7 +6,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -19,7 +18,9 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
+import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 
 import java.util.Random;
@@ -40,14 +41,18 @@ public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
 				.withProperty(SOUTH, Boolean.FALSE)
 				.withProperty(WEST, Boolean.FALSE));
 
-//		OreDictionaryHelper.register(this, "peat");
-//		OreDictionaryHelper.register(this, "peat", "grass");
-		Blocks.FIRE.setFireInfo(this, 5, 5);
+		BlockUtils.setFireInfo(this, 5, 5);
 	}
 
 	@Override
 	public @NotNull String getName() {
 		return "soil/peat_grass";
+	}
+
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "peat");
+		OreDictUtils.register(this, "peat", "grass");
 	}
 
 	@Override
@@ -75,7 +80,7 @@ public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
 	@Override
 	@NotNull
 	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-		return Item.getItemFromBlock(this);
+		return Item.getItemFromBlock(BlocksSoil.PEAT);
 	}
 
 	@Override

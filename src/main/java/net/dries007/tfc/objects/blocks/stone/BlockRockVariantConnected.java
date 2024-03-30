@@ -9,7 +9,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlockPeat;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -23,6 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -46,12 +47,11 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 		int neighborLight;
 		Block usBlock;
 		if (up.getMaterial()
-		      .isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
+				.isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
 			usBlock = us.getBlock();
 			if (usBlock instanceof BlockPeat) {
-				world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState());
-			} else if (usBlock instanceof BlockRockVariant) {
-				BlockRockVariant rock = ((BlockRockVariant) usBlock);
+				world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
+			} else if (usBlock instanceof BlockRockVariant rock) {
 				world.setBlockState(pos, rock.getVariant(rock.getType().getNonGrassVersion()).getDefaultState());
 			}
 		} else if (neighborLight >= 9) {
@@ -67,12 +67,12 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 				BlockPos targetUp = target.up();
 				IBlockState targetUpState;
 				if (world.getLightFromNeighbors(targetUp) < 4 || (targetUpState = world.getBlockState(targetUp)).getMaterial()
-				                                                                                                .isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
+						.isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
 					continue;
 				}
 				Block currentBlock = current.getBlock();
 				if (currentBlock instanceof BlockPeat) {
-					world.setBlockState(target, BlocksTFC.PEAT_GRASS.getDefaultState());
+					world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
 				} else if (currentBlock instanceof BlockRockVariant) {
 					Rock.Type spreader = Rock.Type.GRASS;
 					usBlock = us.getBlock();
@@ -81,7 +81,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 					}
 					BlockRockVariant block = ((BlockRockVariant) current.getBlock());
 					world.setBlockState(target, block.getVariant(block.getType().getGrassVersion(spreader))
-					                                 .getDefaultState());
+							.getDefaultState());
 				}
 			}
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
@@ -110,9 +110,9 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		pos = pos.add(0, -1, 0);
 		return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-		            .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-		            .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-		            .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+				.withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+				.withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+				.withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
 	}
 
 	@Override

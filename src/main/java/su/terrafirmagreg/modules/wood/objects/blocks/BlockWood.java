@@ -22,8 +22,8 @@ public abstract class BlockWood extends BlockBase implements IWoodBlock {
 
 		setSoundType(SoundType.WOOD);
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+		//OreDictUtils.register(this, variant.toString());
+		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 

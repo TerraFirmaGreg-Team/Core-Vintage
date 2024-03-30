@@ -33,6 +33,7 @@ import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.arboriculture.ModuleArboricultureConfig;
@@ -72,7 +73,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 				.withProperty(PLACED, true)
 				.withProperty(SMALL, false));
 
-		Blocks.FIRE.setFireInfo(this, 5, 5);
+		BlockUtils.setFireInfo(this, 5, 5);
 
 //        OreDictUtils.register(this, "logWood");
 //        OreDictUtils.register(this, variant.toString(), "wood", type.toString());

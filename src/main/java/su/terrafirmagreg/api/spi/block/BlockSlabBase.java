@@ -11,6 +11,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
@@ -80,6 +82,13 @@ public abstract class BlockSlabBase extends BlockSlab implements IAutoReg, ICust
 		}
 
 		return i;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	@NotNull
+	public ItemStack getItem(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+		return new ItemStack(halfSlab);
 	}
 
 

@@ -9,6 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -28,8 +29,12 @@ public class BlockSoilMudStairs extends BlockStairs implements ISoilBlock {
 
 		setSoundType(SoundType.GROUND);
 		setHarvestLevel("pickaxe", 0);
+	}
 
-		//OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "stairs");
+		OreDictUtils.register(this, "stairs", "mud", "bricks");
 	}
 
 	@Override

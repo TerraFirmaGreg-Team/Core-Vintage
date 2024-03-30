@@ -6,6 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItem;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
@@ -20,9 +21,11 @@ public class ItemSoilPile extends ItemBase implements ISoilItem {
 
 		this.itemVariant = itemVariant;
 		this.type = type;
+	}
 
-//		OreDictionaryHelper.register(this, itemVariant.toString());
-//		OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, itemVariant);
 	}
 
 	@NotNull

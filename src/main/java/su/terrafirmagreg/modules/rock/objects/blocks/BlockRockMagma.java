@@ -17,6 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -37,12 +38,12 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 0);
 
-//        if (getItemBlock() != null) {
-//            OreDictionaryHelper.register(this, variant.toString());
-//            OreDictionaryHelper.register(this, variant.toString(), type.toString());
-//        }
-
 		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+	}
+
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
 	}
 
 	@Override

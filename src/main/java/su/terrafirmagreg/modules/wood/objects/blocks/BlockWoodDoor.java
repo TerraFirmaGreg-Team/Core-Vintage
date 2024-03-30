@@ -42,8 +42,8 @@ public class BlockWoodDoor extends BlockDoor implements IWoodBlock {
 		setHardness(3.0F);
 		disableStats();
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+		//OreDictUtils.register(this, variant.toString());
+		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 

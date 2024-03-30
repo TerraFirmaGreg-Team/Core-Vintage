@@ -19,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -45,8 +46,11 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
 		setHardness(2.0F);
 		setHarvestLevel("shovel", 0);
 		setLightOpacity(255);
+	}
 
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
 	}
 
 	@Override

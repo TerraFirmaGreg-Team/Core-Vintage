@@ -2,8 +2,6 @@ package su.terrafirmagreg.api.util;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,17 +14,10 @@ import java.util.Set;
 
 public final class OreDictUtils {
 
-	private static final Multimap<String, ItemStack> MAP_ORE = HashMultimap.create();
-
 	private OreDictUtils() {
 		throw new IllegalAccessError("Utility class");
 	}
 
-
-	public static void init() {
-		MAP_ORE.forEach(OreDictionary::registerOre);
-		MAP_ORE.clear();
-	}
 
 	public static void register(Item item, Object... parts) {
 		register(new ItemStack(item), toString(parts));
@@ -36,9 +27,9 @@ public final class OreDictUtils {
 		register(new ItemStack(block), toString(parts));
 	}
 
-	public static void register(ItemStack itemStack, String parts) {
+	private static void register(ItemStack itemStack, String parts) {
 		if (itemStack != null && !itemStack.isEmpty()) {
-			MAP_ORE.put(toString(parts), itemStack);
+			OreDictionary.registerOre(parts, itemStack);
 		} else {
 			TerraFirmaGreg.LOGGER.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", parts);
 		}
@@ -60,23 +51,15 @@ public final class OreDictUtils {
 		return names;
 	}
 
-	/**
-	 * Конвертирует массив из строк в oreDict, передавай в массив строки содержащие только буквы,
-	 * регистр значения не имеет, каждый элемент массива будет отформатирован в соответствие с camelCase.
-	 */
 	public static String toString(@NotNull Object... parts) {
-		if (parts.length > 1) {
-			return CaseFormat.UPPER_UNDERSCORE.to(
-					CaseFormat.LOWER_CAMEL,
-					Joiner.on('_').skipNulls().join(parts).replace("/", "_").toUpperCase()
-			);
-		}
-		return (String) parts[0];
+		return CaseFormat.UPPER_UNDERSCORE
+				.converterTo(CaseFormat.LOWER_CAMEL)
+				.convert(Joiner.on('_').skipNulls().join(parts));
 	}
 
 	public static boolean contains(ItemStack itemStack, String oreDict) {
 		if (!OreDictionary.doesOreNameExist(oreDict)) {
-			TerraFirmaGreg.LOGGER.warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", itemStack, oreDict);
+			TerraFirmaGreg.LOGGER.warn("Method called with non-existing name. stack: {} name: {}", itemStack, oreDict);
 			return false;
 		}
 

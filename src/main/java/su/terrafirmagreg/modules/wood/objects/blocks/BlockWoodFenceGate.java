@@ -32,8 +32,8 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
 		setHardness(2.0F);
 		setResistance(15.0F);
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+		//OreDictUtils.register(this, variant.toString());
+		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 	@Nullable

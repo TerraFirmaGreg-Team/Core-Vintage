@@ -33,7 +33,7 @@ public class BlockWoodWall extends BlockWall implements IWoodBlock {
 		setSoundType(SoundType.WOOD);
 		setHarvestLevel("axe", 0);
 
-//		OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+//		OreDictUtils.register(this, blockVariant.toString(), type.toString());
 	}
 
 	@Override

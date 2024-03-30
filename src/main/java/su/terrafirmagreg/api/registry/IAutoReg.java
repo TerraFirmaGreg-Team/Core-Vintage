@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public interface IAutoReg {
+public interface IAutoReg extends IOreDict {
 
 	/**
 	 * Возвращает объект ItemBlock, связанный с данным блоком.

@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -38,8 +39,11 @@ public abstract class BlockSoil extends BlockBase implements ISoilBlock {
 		setSoundType(SoundType.GROUND);
 		setHardness(2.0F);
 		setHarvestLevel("shovel", 0);
+	}
 
-		//OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
 	}
 
 	@Override

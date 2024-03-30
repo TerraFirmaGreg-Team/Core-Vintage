@@ -25,9 +25,9 @@ public class BlockAlabaster extends BlockBase implements IItemSize {
 		setSoundType(SoundType.STONE);
 		setHardness(1.0F);
 
-//        OreDictionaryHelper.register(this, "alabaster");
-//        OreDictionaryHelper.register(this, "alabaster", blockVariant.toString());
-//        OreDictionaryHelper.register(this, "alabaster", blockVariant.toString(), color.getName());
+//        OreDictUtils.register(this, "alabaster");
+//        OreDictUtils.register(this, "alabaster", blockVariant.toString());
+//        OreDictUtils.register(this, "alabaster", blockVariant.toString(), color.getName());
 	}
 
 	@Override

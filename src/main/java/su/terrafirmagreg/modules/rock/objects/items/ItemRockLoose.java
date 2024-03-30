@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
@@ -34,11 +35,13 @@ public class ItemRockLoose extends ItemBase implements IRockItem {
 
 		this.itemVariant = itemVariant;
 		this.type = type;
+	}
 
-//        OreDictionaryHelper.register(this, itemVariant.toString());
-//        OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
-//        OreDictionaryHelper.register(this, itemVariant.toString(), type.getRockCategory().toString());
-//        if (type.isFlux()) OreDictionaryHelper.register(this, itemVariant.toString(), "flux");
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, itemVariant);
+		OreDictUtils.register(this, itemVariant, getCategory());
+		OreDictUtils.register(this, itemVariant, "flux");
 	}
 
 	@NotNull

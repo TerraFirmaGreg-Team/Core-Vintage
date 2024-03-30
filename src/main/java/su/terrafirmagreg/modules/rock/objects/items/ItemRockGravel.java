@@ -6,6 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
@@ -20,10 +21,12 @@ public class ItemRockGravel extends ItemBase implements IRockItem {
 	public ItemRockGravel(RockItemVariant itemVariant, RockType type) {
 		this.itemVariant = itemVariant;
 		this.type = type;
+	}
 
-//        OreDictionaryHelper.register(this, itemVariant.toString());
-//        OreDictionaryHelper.register(this, itemVariant.toString(), type.toString());
-//        OreDictionaryHelper.register(this, itemVariant.toString(), type.getRockCategory().toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, itemVariant);
+		OreDictUtils.register(this, itemVariant, getCategory());
 	}
 
 

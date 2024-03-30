@@ -24,8 +24,8 @@ public class ItemBlockWoodDoor extends ItemBlock implements IItemSize {
 	public ItemBlockWoodDoor(BlockWoodDoor blockWoodDoor) {
 		super(blockWoodDoor);
 
-		//OreDictionaryHelper.register(this, "door", "wood");
-		//OreDictionaryHelper.register(this, "door", "wood", blockWoodDoor.getType().toString());
+		//OreDictUtils.register(this, "door", "wood");
+		//OreDictUtils.register(this, "door", "wood", blockWoodDoor.getType().toString());
 	}
 
 	/**

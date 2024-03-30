@@ -19,6 +19,7 @@ import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -39,8 +40,12 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
 
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 0);
+	}
 
-//		OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "wall");
+		OreDictUtils.register(this, "wall", "stone");
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ICustomStateMapper;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -33,8 +34,12 @@ public class BlockSoilMudWall extends BlockWall implements ISoilBlock, ICustomSt
 
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 0);
+	}
 
-//		OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "wall");
+		OreDictUtils.register(this, "wall", "mud", "bricks");
 	}
 
 	@Override

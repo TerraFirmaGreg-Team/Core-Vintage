@@ -47,12 +47,17 @@ public class ItemSling extends ItemBase {
 				return 0.0F;
 			}
 		});
-		OreDictUtils.register(this, "tool");
+
 	}
 
 	@Override
 	public @NotNull String getName() {
 		return "device/sling/normal";
+	}
+
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "tool");
 	}
 
 	@SideOnly(Side.CLIENT)

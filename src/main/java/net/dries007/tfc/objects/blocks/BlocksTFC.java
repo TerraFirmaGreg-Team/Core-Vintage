@@ -43,6 +43,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
+import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;
 
 import static net.dries007.tfc.api.types.Rock.Type.*;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
@@ -62,10 +64,6 @@ public final class BlocksTFC {
 	public static final BlockDecorativeStone ALABASTER_POLISHED_PLAIN = getNull();
 	@GameRegistry.ObjectHolder("alabaster/raw/plain")
 	public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
-
-	public static final BlockDebug DEBUG = getNull();
-	public static final BlockPeat PEAT = getNull();
-	public static final BlockPeat PEAT_GRASS = getNull();
 	public static final BlockFirePit FIREPIT = getNull();
 	public static final BlockThatch THATCH = getNull();
 	public static final BlockThatchBed THATCH_BED = getNull();
@@ -271,13 +269,9 @@ public final class BlocksTFC {
 		Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
 		Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), CT_MISC)));
-
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), CT_ROCK_BLOCKS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), CT_ROCK_BLOCKS)));
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), CT_ROCK_BLOCKS)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), CT_ROCK_BLOCKS)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), CT_DECORATIONS)));
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_DECORATIONS)));
@@ -323,11 +317,11 @@ public final class BlocksTFC {
 			);
 			for (FluidWrapper wrapper : FluidsTFC.getAllAlcoholsFluids()) {
 				b.add(register(r, "fluid/" + wrapper.get()
-				                                    .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
 			}
 			for (FluidWrapper wrapper : FluidsTFC.getAllOtherFiniteFluids()) {
 				b.add(register(r, "fluid/" + wrapper.get()
-				                                    .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
 			}
 			for (FluidWrapper wrapper : FluidsTFC.getAllMetalFluids()) {
 				b.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.LAVA)));
@@ -335,7 +329,7 @@ public final class BlocksTFC {
 			for (EnumDyeColor color : EnumDyeColor.values()) {
 				FluidWrapper wrapper = FluidsTFC.getFluidFromDye(color);
 				b.add(register(r, "fluid/" + wrapper.get()
-				                                    .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
+						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
 			}
 			allFluidBlocks = b.build();
 		}
@@ -346,7 +340,7 @@ public final class BlocksTFC {
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
 					if (type != ANVIL) {
 						b.add(register(r, type.name().toLowerCase() + "/" + rock.getRegistryName()
-						                                                        .getPath(), BlockRockVariant.create(rock, type), CT_ROCK_BLOCKS));
+								.getPath(), BlockRockVariant.create(rock, type), CT_ROCK_BLOCKS));
 					} else if (rock.getRockCategory().hasAnvil()) {
 						// Anvil registration is special, is has it's own folder
 						register(r, "anvil/" + rock.getRegistryName().getPath(), BlockRockVariant.create(rock, type));
@@ -383,8 +377,8 @@ public final class BlocksTFC {
 							spec = new FallingBlockManager.Specification(spec);
 							spec.setResultingState(BlockRockVariant.get(rock, COBBLE).getDefaultState());
 							FallingBlockManager.registerFallable(BlockRockVariant.get(rock, SMOOTH)
-							                                                     .getDefaultState()
-							                                                     .withProperty(BlockRockSmooth.CAN_FALL, true), spec);
+									.getDefaultState()
+									.withProperty(BlockRockSmooth.CAN_FALL, true), spec);
 							break;
 						default:
 							Rock.Type nonGrassType = type.getNonGrassVersion();
@@ -403,7 +397,7 @@ public final class BlocksTFC {
 			for (Ore ore : TFCRegistries.ORES.getValuesCollection())
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					b.add(register(r, ("ore/" + ore.getRegistryName().getPath() + "/" + rock.getRegistryName()
-					                                                                        .getPath()).toLowerCase(), new BlockOreTFC(ore, rock), CT_ROCK_BLOCKS));
+							.getPath()).toLowerCase(), new BlockOreTFC(ore, rock), CT_ROCK_BLOCKS));
 			allOreBlocks = b.build();
 			allOreBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
 		}
@@ -427,55 +421,55 @@ public final class BlocksTFC {
 			// All bookshelves + item blocks
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/bookshelf/" + wood.getRegistryName()
-				                                                                          .getPath(), new BlockBookshelfTFC(wood), CT_DECORATIONS)));
+						.getPath(), new BlockBookshelfTFC(wood), CT_DECORATIONS)));
 			// All workbenches + item blocks
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/workbench/" + wood.getRegistryName()
-				                                                                          .getPath(), new BlockWorkbenchTFC(wood), CT_DECORATIONS)));
+						.getPath(), new BlockWorkbenchTFC(wood), CT_DECORATIONS)));
 			// All fences + item blocks
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/fence/" + wood.getRegistryName()
-				                                                                         .getPath(), new BlockFenceTFC(wood), CT_DECORATIONS)));
+						.getPath(), new BlockFenceTFC(wood), CT_DECORATIONS)));
 			// All buttons + item blocks
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/button/" + wood.getRegistryName()
-				                                                                          .getPath(), new BlockButtonWoodTFC(wood), CT_DECORATIONS)));
+						.getPath(), new BlockButtonWoodTFC(wood), CT_DECORATIONS)));
 			// All pressure plates + item blocks
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/pressure_plate/" + wood.getRegistryName()
-				                                                                                  .getPath()
-				                                                                                  .toLowerCase(), new BlockWoodPressurePlateTFC(wood), CT_DECORATIONS)));
+						.getPath()
+						.toLowerCase(), new BlockWoodPressurePlateTFC(wood), CT_DECORATIONS)));
 
 			// Other blocks that don't have specific order requirements
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
 				// Only block in the decorations category
 				normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/planks/" + wood.getRegistryName()
-				                                                                       .getPath(), new BlockPlanksTFC(wood), CT_WOOD)));
+						.getPath(), new BlockPlanksTFC(wood), CT_WOOD)));
 				// Blocks with specific block collections don't matter
 				logs.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockLogTFC(wood), CT_WOOD));
 				leaves.add(register(r, "wood/leaves/" + wood.getRegistryName()
-				                                            .getPath(), new BlockLeavesTFC(wood), CT_WOOD));
+						.getPath(), new BlockLeavesTFC(wood), CT_WOOD));
 				fenceGates.add(register(r, "wood/fence_gate/" + wood.getRegistryName()
-				                                                    .getPath(), new BlockFenceGateTFC(wood), CT_DECORATIONS));
+						.getPath(), new BlockFenceGateTFC(wood), CT_DECORATIONS));
 				saplings.add(register(r, "wood/sapling/" + wood.getRegistryName()
-				                                               .getPath(), new BlockSaplingTFC(wood), CT_WOOD));
+						.getPath(), new BlockSaplingTFC(wood), CT_WOOD));
 				doors.add(register(r, "wood/door/" + wood.getRegistryName()
-				                                         .getPath(), new BlockDoorTFC(wood), CT_DECORATIONS));
+						.getPath(), new BlockDoorTFC(wood), CT_DECORATIONS));
 				trapDoors.add(register(r, "wood/trapdoor/" + wood.getRegistryName()
-				                                                 .getPath(), new BlockTrapDoorWoodTFC(wood), CT_DECORATIONS));
+						.getPath(), new BlockTrapDoorWoodTFC(wood), CT_DECORATIONS));
 				chests.add(register(r, "wood/chest/" + wood.getRegistryName()
-				                                           .getPath(), new BlockChestTFC(BlockChestTFC.TFCBASIC, wood), CT_DECORATIONS));
+						.getPath(), new BlockChestTFC(BlockChestTFC.TFCBASIC, wood), CT_DECORATIONS));
 				chests.add(register(r, "wood/chest_trap/" + wood.getRegistryName()
-				                                                .getPath(), new BlockChestTFC(BlockChestTFC.TFCTRAP, wood), CT_DECORATIONS));
+						.getPath(), new BlockChestTFC(BlockChestTFC.TFCTRAP, wood), CT_DECORATIONS));
 
 				toolRacks.add(register(r, "wood/tool_rack/" + wood.getRegistryName()
-				                                                  .getPath(), new BlockToolRack(wood), CT_DECORATIONS));
+						.getPath(), new BlockToolRack(wood), CT_DECORATIONS));
 				barrelItems.add(new ItemBlockBarrel(register(r, "wood/barrel/" + wood.getRegistryName()
-				                                                                     .getPath(), new BlockBarrel(), CT_DECORATIONS)));
+						.getPath(), new BlockBarrel(), CT_DECORATIONS)));
 
 				looms.add(register(r, "wood/loom/" + wood.getRegistryName().getPath(), new BlockLoom(wood), CT_WOOD));
 				supports.add(register(r, "wood/support/" + wood.getRegistryName()
-				                                               .getPath(), new BlockSupport(wood), CT_WOOD));
+						.getPath(), new BlockSupport(wood), CT_WOOD));
 			}
 
 			allLogBlocks = logs.build();
@@ -514,21 +508,21 @@ public final class BlocksTFC {
 			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					b.add(register(r, ("wall/" + type.name() + "/" + rock.getRegistryName()
-					                                                     .getPath()).toLowerCase(), new BlockWallTFC(BlockRockVariant.get(rock, type)), CT_DECORATIONS));
+							.getPath()).toLowerCase(), new BlockWallTFC(BlockRockVariant.get(rock, type)), CT_DECORATIONS));
 			// Stairs
 			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					stairs.add(register(r, "stairs/" + (type.name() + "/" + rock.getRegistryName()
-					                                                            .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
+							.getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				stairs.add(register(r, "stairs/wood/" + wood.getRegistryName()
-				                                            .getPath(), new BlockStairsTFC(wood), CT_DECORATIONS));
+						.getPath(), new BlockStairsTFC(wood), CT_DECORATIONS));
 
 			// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
 			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					register(r, "double_slab/" + (type.name() + "/" + rock.getRegistryName()
-					                                                      .getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
+							.getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				register(r, "double_slab/wood/" + wood.getRegistryName().getPath(), new BlockSlabTFC.Double(wood));
 
@@ -536,19 +530,19 @@ public final class BlocksTFC {
 			for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					slab.add(register(r, "slab/" + (type.name() + "/" + rock.getRegistryName()
-					                                                        .getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_DECORATIONS));
+							.getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_DECORATIONS));
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				slab.add(register(r, "slab/wood/" + wood.getRegistryName()
-				                                        .getPath(), new BlockSlabTFC.Half(wood), CT_DECORATIONS));
+						.getPath(), new BlockSlabTFC.Half(wood), CT_DECORATIONS));
 
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
 				// Redstone things
 				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/button/" + rock.getRegistryName()
-				                                                                           .getPath()
-				                                                                           .toLowerCase(), new BlockButtonStoneTFC(rock), CT_DECORATIONS)));
+						.getPath()
+						.toLowerCase(), new BlockButtonStoneTFC(rock), CT_DECORATIONS)));
 				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/pressure_plate/" + rock.getRegistryName()
-				                                                                                   .getPath()
-				                                                                                   .toLowerCase(), new BlockPressurePlateTFC(rock), CT_DECORATIONS)));
+						.getPath()
+						.toLowerCase(), new BlockPressurePlateTFC(rock), CT_DECORATIONS)));
 			}
 
 			allWallBlocks = b.build();
@@ -567,16 +561,16 @@ public final class BlocksTFC {
 			for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
 				if (Metal.ItemType.ANVIL.hasType(metal))
 					anvils.add(register(r, "anvil/" + metal.getRegistryName()
-					                                       .getPath(), new BlockAnvilTFC(metal), CT_METAL));
+							.getPath(), new BlockAnvilTFC(metal), CT_METAL));
 				if (Metal.ItemType.SHEET.hasType(metal)) {
 					sheets.add(register(r, "sheet/" + metal.getRegistryName()
-					                                       .getPath(), new BlockMetalSheet(metal), CT_METAL));
+							.getPath(), new BlockMetalSheet(metal), CT_METAL));
 					metalTrapdoors.add(register(r, "trapdoor/" + metal.getRegistryName()
-					                                                  .getPath(), new BlockTrapDoorMetalTFC(metal), CT_METAL));
+							.getPath(), new BlockTrapDoorMetalTFC(metal), CT_METAL));
 				}
 				if (Metal.ItemType.LAMP.hasType(metal))
 					lamps.add(register(r, "lamp/" + metal.getRegistryName()
-					                                     .getPath(), new BlockMetalLamp(metal), CT_METAL));
+							.getPath(), new BlockMetalLamp(metal), CT_METAL));
 
 			}
 
@@ -614,13 +608,13 @@ public final class BlocksTFC {
 
 			for (FruitTree tree : FruitTree.values()) {
 				fSaplings.add(register(r, "fruit_trees/sapling/" + tree.name()
-				                                                       .toLowerCase(), new BlockFruitTreeSapling(tree), CT_WOOD));
+						.toLowerCase(), new BlockFruitTreeSapling(tree), CT_WOOD));
 				fTrunks.add(register(r, "fruit_trees/trunk/" + tree.name()
-				                                                   .toLowerCase(), new BlockFruitTreeTrunk(tree)));
+						.toLowerCase(), new BlockFruitTreeTrunk(tree)));
 				fBranches.add(register(r, "fruit_trees/branch/" + tree.name()
-				                                                      .toLowerCase(), new BlockFruitTreeBranch(tree)));
+						.toLowerCase(), new BlockFruitTreeBranch(tree)));
 				fLeaves.add(register(r, "fruit_trees/leaves/" + tree.name()
-				                                                    .toLowerCase(), new BlockFruitTreeLeaves(tree), CT_WOOD));
+						.toLowerCase(), new BlockFruitTreeLeaves(tree), CT_WOOD));
 			}
 
 			allFruitTreeSaplingBlocks = fSaplings.build();
@@ -649,10 +643,10 @@ public final class BlocksTFC {
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
 				if (plant.getPlantType() != Plant.PlantType.SHORT_GRASS && plant.getPlantType() != Plant.PlantType.TALL_GRASS)
 					b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType()
-					                                                                      .create(plant), CT_FLORA));
+							.create(plant), CT_FLORA));
 				if (plant.canBePotted())
 					pots.add(register(r, "flowerpot/" + plant.getRegistryName()
-					                                         .getPath(), new BlockFlowerPotTFC(plant)));
+							.getPath(), new BlockFlowerPotTFC(plant)));
 			}
 			allPlantBlocks = b.build();
 			allFlowerPots = pots.build();
@@ -673,7 +667,7 @@ public final class BlocksTFC {
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
 				if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS || plant.getPlantType() == Plant.PlantType.TALL_GRASS)
 					b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType()
-					                                                                      .create(plant), CT_FLORA));
+							.create(plant), CT_FLORA));
 			}
 			allGrassBlocks = b.build();
 			for (BlockPlantTFC blockPlant : allGrassBlocks) {
@@ -742,17 +736,17 @@ public final class BlocksTFC {
 		// Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
 		if (ConfigTFC.General.OVERRIDES.enableFrozenOverrides) {
 			TerraFirmaCraft.getLog()
-			               .info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+					.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
 			event.getRegistry().registerAll(
 					new BlockIceTFC(FluidsTFC.FRESH_WATER.get()).setRegistryName("minecraft", "ice")
-					                                            .setTranslationKey("ice"),
+							.setTranslationKey("ice"),
 					new BlockSnowTFC().setRegistryName("minecraft", "snow_layer").setTranslationKey("snow")
 			);
 		}
 
 		if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {
 			event.getRegistry()
-			     .register(new BlockTorchTFC().setRegistryName("minecraft", "torch").setTranslationKey("torch"));
+					.register(new BlockTorchTFC().setRegistryName("minecraft", "torch").setTranslationKey("torch"));
 		}
 	}
 

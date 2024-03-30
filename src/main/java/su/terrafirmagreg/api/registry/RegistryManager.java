@@ -152,6 +152,11 @@ public class RegistryManager {
 	private final List<Block> coloredBlocks = NonNullList.create();
 
 	/**
+	 * A list of all the oreDict registered here.
+	 */
+	private final List<IOreDict> oreDicts = NonNullList.create();
+
+	/**
 	 * The creative tab used by the mod. This can be null.
 	 */
 	private final CreativeTabs tab;
@@ -232,21 +237,20 @@ public class RegistryManager {
 
 		block.setRegistryName(this.modID, name);
 		block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
-		if (this.tab != null)
-			block.setCreativeTab(this.tab);
+		if (this.tab != null) block.setCreativeTab(this.tab);
 
 		this.blocks.add(block);
 
-		if (itemBlock != null) this.registerItem(itemBlock, name);
+		if (itemBlock != null) {
+			this.registerItem(itemBlock, name);
+			if (block instanceof IOreDict oreDict) this.oreDicts.add(oreDict);
+		}
 		if (block instanceof ITEBlock te) this.tileProviders.add(te);
 
 		if (GameUtils.isClient()) {
-			if (block instanceof ICustomStateMapper state) {
-				this.customStateMapper.add(state);
-			}
-			if (block instanceof ICustomModel blockModel) {
-				this.customModel.add(blockModel);
-			} else {
+			if (block instanceof ICustomStateMapper state) this.customStateMapper.add(state);
+			if (block instanceof ICustomModel blockModel) this.customModel.add(blockModel);
+			else {
 				this.registerClientModel(() ->
 						ModelManager.registerBlockInventoryModel(block)
 				);
@@ -279,9 +283,11 @@ public class RegistryManager {
 		item.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
 		this.items.add(item);
 
-		if (this.tab != null) {
+		if (this.tab != null)
 			item.setCreativeTab(this.tab);
-		}
+
+		if (item instanceof IOreDict oreDict)
+			this.oreDicts.add(oreDict);
 
 		if (GameUtils.isClient()) {
 			if (item instanceof ICustomModel itemModel) {

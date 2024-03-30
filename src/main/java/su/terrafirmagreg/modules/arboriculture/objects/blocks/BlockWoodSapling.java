@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -31,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.models.CustomStateMap;
 import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtil;
 import su.terrafirmagreg.modules.arboriculture.objects.itemblocks.ItemBlockWoodSapling;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
@@ -58,10 +58,10 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 		setDefaultState(blockState.getBaseState()
 				.withProperty(STAGE, 0));
 
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+		//OreDictUtils.register(this, variant.toString());
+		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 	@Nullable

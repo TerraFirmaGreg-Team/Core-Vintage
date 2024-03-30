@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.data;
 
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.registry.RegistryManager;
@@ -27,13 +29,13 @@ public final class ItemsDevice {
 
 		registry.registerAuto(FIRESTARTER = new ItemFireStarter());
 
-		registry.registerAuto(LEATHER_SIDE = new ItemDeviceMisc.Builder("flask/leather/side").build());
+		registry.registerAuto(LEATHER_SIDE = new ItemDeviceMisc("flask/leather/side", Size.SMALL, Weight.LIGHT));
 		registry.registerAuto(LEATHER_FLASK = new ItemLeatherFlask());
-		registry.registerAuto(BROKEN_LEATHER_FLASK = new ItemDeviceMisc.Builder("flask/leather/broken").build());
+		registry.registerAuto(BROKEN_LEATHER_FLASK = new ItemDeviceMisc("flask/leather/broken", Size.SMALL, Weight.LIGHT));
 
-		registry.registerAuto(UNFINISHED_FLASK = new ItemDeviceMisc.Builder("flask/metal/unfinished").build());
+		registry.registerAuto(UNFINISHED_FLASK = new ItemDeviceMisc("flask/metal/unfinished", Size.SMALL, Weight.LIGHT));
 		registry.registerAuto(IRON_FLASK = new ItemMetalFlask());
-		registry.registerAuto(BROKEN_IRON_FLASK = new ItemDeviceMisc.Builder("flask/metal/broken").build());
+		registry.registerAuto(BROKEN_IRON_FLASK = new ItemDeviceMisc("flask/metal/broken", Size.SMALL, Weight.LIGHT));
 
 		registry.registerAuto(SLING = new ItemSling());
 		registry.registerAuto(SLING_REINFORCED = new ItemReinforcedSling());

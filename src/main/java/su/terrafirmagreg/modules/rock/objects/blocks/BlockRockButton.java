@@ -19,6 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -37,8 +38,11 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
 		setSoundType(SoundType.STONE);
 		setHardness(0.5f);
+	}
 
-		//OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
 	}
 
 	@Override

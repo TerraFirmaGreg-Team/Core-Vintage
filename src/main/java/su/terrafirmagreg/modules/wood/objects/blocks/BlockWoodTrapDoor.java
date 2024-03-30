@@ -25,8 +25,8 @@ public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
 		setHardness(0.5F);
 		setSoundType(SoundType.WOOD);
 
-		//OreDictionaryHelper.register(this, variant.toString());
-		//OreDictionaryHelper.register(this, variant.toString(), type.toString());
+		//OreDictUtils.register(this, variant.toString());
+		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}
 
 	@Nullable

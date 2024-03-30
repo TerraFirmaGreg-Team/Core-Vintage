@@ -24,9 +24,9 @@ public class BlockWoodStairs extends BlockStairs implements IWoodBlock {
 		this.useNeighborBrightness = true;
 		setHarvestLevel("axe", 0);
 
-//            OreDictionaryHelper.register(this, variant.toString());
-//            OreDictionaryHelper.register(this, variant.toString(), "wood");
-//            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
+//            OreDictUtils.register(this, variant.toString());
+//            OreDictUtils.register(this, variant.toString(), "wood");
+//            OreDictUtils.register(this, variant.toString(), "wood", type.toString());
 	}
 
 	@Nullable

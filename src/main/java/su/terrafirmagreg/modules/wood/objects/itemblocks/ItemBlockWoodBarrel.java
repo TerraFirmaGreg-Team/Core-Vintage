@@ -52,7 +52,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 
 	public ItemBlockWoodBarrel(Block block) {
 		super(block);
-		//OreDictionaryHelper.register(this, "barrel");
+		//OreDictUtils.register(this, "barrel");
 	}
 
 	@NotNull

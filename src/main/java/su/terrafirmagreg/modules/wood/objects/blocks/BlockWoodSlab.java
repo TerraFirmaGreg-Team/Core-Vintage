@@ -103,9 +103,9 @@ public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock 
 			this.doubleSlab.halfSlab = this;
 			this.halfSlab = this;
 
-//            OreDictionaryHelper.register(this, variant.toString());
-//            OreDictionaryHelper.register(this, variant.toString(), "wood");
-//            OreDictionaryHelper.register(this, variant.toString(), "wood", type.toString());
+//            OreDictUtils.register(this, variant.toString());
+//            OreDictUtils.register(this, variant.toString(), "wood");
+//            OreDictUtils.register(this, variant.toString(), "wood", type.toString());
 		}
 
 		@Override

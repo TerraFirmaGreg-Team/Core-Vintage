@@ -165,6 +165,7 @@ public class ModuleEventRouter {
 		this.fireEvent(module -> {
 			module.getLogger().info("Register ItemEvent start");
 			module.getRegistry().onRegisterItem(event);
+			module.getRegistry().onRegisterOreDict();
 			module.getLogger().info("Register ItemEvent complete");
 		});
 	}

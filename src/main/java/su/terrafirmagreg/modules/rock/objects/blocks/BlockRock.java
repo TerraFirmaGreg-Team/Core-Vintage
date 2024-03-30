@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -32,12 +33,11 @@ public abstract class BlockRock extends BlockBase implements IRockBlock {
 
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 0);
+	}
 
-//        if (getItemBlock() != null) {
-//            OreDictionaryHelper.register(this, blockVariant.toString());
-//            OreDictionaryHelper.register(this, blockVariant.toString(), type.toString());
-//        }
-
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
 	}
 
 	public BlockRock(RockBlockVariant blockVariant, RockType type) {

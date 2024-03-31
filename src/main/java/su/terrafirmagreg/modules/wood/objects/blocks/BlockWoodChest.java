@@ -24,10 +24,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -150,7 +150,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customResource(getResourceLocation()).build());
+		ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customResource(getResourceLocation()).build());
 	}
 
 	@Override

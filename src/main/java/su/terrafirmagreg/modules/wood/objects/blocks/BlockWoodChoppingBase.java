@@ -24,7 +24,7 @@ import se.gory_moon.horsepower.tileentity.TileEntityChopper;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.RenderUtils;
-import su.terrafirmagreg.api.models.property.PropertyUnlistedString;
+import su.terrafirmagreg.api.model.property.PropertyUnlistedString;
 
 import java.util.ArrayList;
 import java.util.List;

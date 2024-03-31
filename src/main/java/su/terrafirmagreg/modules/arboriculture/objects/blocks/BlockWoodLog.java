@@ -30,10 +30,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
-import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.arboriculture.ModuleArboricultureConfig;
@@ -321,12 +321,12 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockInventoryModel(this);
+		ModelUtils.registerBlockInventoryModel(this);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(PLACED).build());
+		ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(PLACED).build());
 	}
 }

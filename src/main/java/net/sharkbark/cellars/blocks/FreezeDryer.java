@@ -21,7 +21,7 @@ import net.sharkbark.cellars.blocks.tileentity.TEFreezeDryer;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
 import net.sharkbark.cellars.util.Reference;
-import su.terrafirmagreg.api.models.ICustomModel;
+import su.terrafirmagreg.api.model.ICustomModel;
 
 import javax.annotation.Nullable;
 

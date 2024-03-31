@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomStateMapper;
 import su.terrafirmagreg.api.spi.block.BlockSlabBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;

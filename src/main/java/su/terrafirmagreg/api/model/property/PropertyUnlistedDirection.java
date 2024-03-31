@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.models.property;
+package su.terrafirmagreg.api.model.property;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.property.IUnlistedProperty;

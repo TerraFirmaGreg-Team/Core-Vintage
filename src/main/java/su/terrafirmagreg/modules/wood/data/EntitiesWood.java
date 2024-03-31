@@ -35,7 +35,7 @@ public final class EntitiesWood {
 						.tracker(80, 3, false)
 		);
 
-		registry.registerEntity("plow",
+		registry.registerEntity("plow_cart",
 				EntityEntryBuilder.create()
 						.entity(EntityWoodPlowCart.class)
 						.tracker(80, 3, false)

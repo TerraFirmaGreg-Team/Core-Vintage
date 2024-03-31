@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ICustomStateMapper;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.model.CustomStateMap;
+import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.rock.ModuleRockConfig;
@@ -131,6 +131,6 @@ public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(CAN_FALL).build());
+		ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(CAN_FALL).build());
 	}
 }

@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.models.ICustomModel;
+import su.terrafirmagreg.api.model.ICustomModel;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 

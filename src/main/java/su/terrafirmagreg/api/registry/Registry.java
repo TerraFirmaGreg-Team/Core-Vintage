@@ -12,7 +12,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -21,11 +21,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.api.model.CustomModelLoader;
 import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.ModelUtils;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by
@@ -150,17 +152,13 @@ public class Registry {
 
 	@SideOnly(Side.CLIENT)
 	public void onRegisterModels(ModelRegistryEvent event) {
+		ModelLoaderRegistry.registerLoader(new CustomModelLoader());
 
-		for (var model : this.registryManager.getCustomModel()) {
-			model.onModelRegister();
-		}
-
-		for (var model : this.registryManager.getCustomStateMapper()) {
-			model.onStateMapperRegister();
-		}
+		for (var model : this.registryManager.getCustomModel()) model.onModelRegister();
+		for (var model : this.registryManager.getCustomStateMapper()) model.onStateMapperRegister();
 
 		for (var item : this.registryManager.getCustomMeshes()) {
-			ModelLoader.setCustomMeshDefinition(item, ((ICustomMesh) item).getCustomMesh());
+			ModelUtils.registerCustomMeshDefinition(item, ((ICustomMesh) item).getCustomMesh());
 		}
 	}
 

@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.api.types.variant.item;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.ICustomModel;
+import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.util.ModUtils;

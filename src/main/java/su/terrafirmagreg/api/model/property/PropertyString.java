@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.models.property;
+package su.terrafirmagreg.api.model.property;
 
 import com.google.common.base.Optional;
 import net.minecraft.block.properties.PropertyHelper;

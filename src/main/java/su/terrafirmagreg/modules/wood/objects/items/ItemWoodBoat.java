@@ -20,8 +20,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.ModelManager;
 import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
@@ -139,7 +139,7 @@ public class ItemWoodBoat extends ItemBase implements IWoodItem {
 
 	@Override
 	public void onModelRegister() {
-		ModelManager.registerInventoryModel(this, getResourceLocation());
+		ModelUtils.registerInventoryModel(this, getResourceLocation());
 
 	}
 

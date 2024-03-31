@@ -8,9 +8,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -45,7 +45,7 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder()
+		ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
 				.customResource(getResourceLocation())
 				.ignore(IN_WALL, POWERED)
 				.build());

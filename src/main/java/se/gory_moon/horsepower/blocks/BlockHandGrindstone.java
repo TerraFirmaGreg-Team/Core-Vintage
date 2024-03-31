@@ -32,7 +32,7 @@ import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityHandGrindstone;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
-import su.terrafirmagreg.api.models.property.PropertyUnlistedDirection;
+import su.terrafirmagreg.api.model.property.PropertyUnlistedDirection;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

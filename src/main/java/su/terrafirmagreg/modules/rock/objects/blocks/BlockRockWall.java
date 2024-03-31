@@ -15,10 +15,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ICustomStateMapper;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.model.CustomStateMap;
+import su.terrafirmagreg.api.model.ICustomStateMapper;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -78,6 +78,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockWall.VARIANT).build());
+		ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockWall.VARIANT).build());
 	}
 }

@@ -8,7 +8,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import su.terrafirmagreg.api.models.property.PropertyObject;
+import su.terrafirmagreg.api.model.property.PropertyObject;
 
 public final class PropertyUtils {
 

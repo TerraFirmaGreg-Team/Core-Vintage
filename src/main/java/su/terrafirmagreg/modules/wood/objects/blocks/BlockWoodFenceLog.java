@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
@@ -17,12 +17,12 @@ public class BlockWoodFenceLog extends BlockWoodFence {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onModelRegister() {
-		ModelManager.registerBlockInventoryModel(this);
+		ModelUtils.registerBlockInventoryModel(this);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onStateMapperRegister() {
-		ModelManager.registerStateMapper(this, new StateMap.Builder().build());
+		ModelUtils.registerStateMapper(this, new StateMap.Builder().build());
 	}
 }

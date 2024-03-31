@@ -6,12 +6,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.models.CustomStateMap;
-import su.terrafirmagreg.api.models.ICustomModel;
-import su.terrafirmagreg.api.models.ICustomStateMapper;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.model.CustomStateMap;
+import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.model.ICustomStateMapper;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.metal.api.types.type.IMetalType;
 
 import javax.annotation.Nonnull;
@@ -52,13 +52,13 @@ public interface IMetalBlock extends IMetalType, IAutoReg, IItemSize, ICustomMod
 	@Override
 	@SideOnly(Side.CLIENT)
 	default void onModelRegister() {
-		ModelManager.registerBlockInventoryModel((Block) this, getResourceLocation());
+		ModelUtils.registerBlockInventoryModel((Block) this, getResourceLocation());
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	default void onStateMapperRegister() {
-		ModelManager.registerStateMapper((Block) this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
+		ModelUtils.registerStateMapper((Block) this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
 	}
 
 }

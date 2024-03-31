@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.models.property;
+package su.terrafirmagreg.api.model.property;
 
 import net.minecraftforge.common.property.IUnlistedProperty;
 

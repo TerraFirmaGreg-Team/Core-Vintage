@@ -14,7 +14,7 @@ import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.blocks.itemblocks.ItemBlockDoor;
 import net.sharkbark.cellars.init.ModBlocks;
 import net.sharkbark.cellars.init.ModItems;
-import su.terrafirmagreg.api.models.ICustomModel;
+import su.terrafirmagreg.api.model.ICustomModel;
 
 import java.util.Random;
 

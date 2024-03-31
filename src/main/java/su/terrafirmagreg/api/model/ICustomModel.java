@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.models;
+package su.terrafirmagreg.api.model;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

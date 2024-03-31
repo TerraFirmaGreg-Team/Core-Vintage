@@ -39,15 +39,15 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.LootBuilder;
-import su.terrafirmagreg.api.models.ICustomModel;
-import su.terrafirmagreg.api.models.ICustomStateMapper;
-import su.terrafirmagreg.api.models.ModelManager;
+import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.model.ICustomStateMapper;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.ModelUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -259,7 +259,7 @@ public class RegistryManager {
 			if (block instanceof ICustomModel blockModel) this.customModel.add(blockModel);
 			else {
 				this.registerClientModel(() ->
-						ModelManager.registerBlockInventoryModel(block)
+						ModelUtils.registerBlockInventoryModel(block)
 				);
 			}
 			if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
@@ -307,7 +307,7 @@ public class RegistryManager {
 				this.customModel.add(itemModel);
 			} else if (!(item instanceof ItemBlock)) {
 				this.registerClientModel(() ->
-						ModelManager.registerInventoryModel(item)
+						ModelUtils.registerInventoryModel(item)
 				);
 			}
 			if (item instanceof ICustomMesh) this.customMeshes.add(item);

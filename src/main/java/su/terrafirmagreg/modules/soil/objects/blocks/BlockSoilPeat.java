@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.soil.objects.blocks.peat;
+package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -8,9 +8,9 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
 
-public class BlockPeat extends BlockBase {
+public class BlockSoilPeat extends BlockBase {
 
-	public BlockPeat() {
+	public BlockSoilPeat() {
 		super(Material.GROUND);
 
 		setSoundType(SoundType.GROUND);

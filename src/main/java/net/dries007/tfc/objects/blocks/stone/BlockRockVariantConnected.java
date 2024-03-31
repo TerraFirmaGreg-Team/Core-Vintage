@@ -23,7 +23,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
-import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -49,7 +49,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 		if (up.getMaterial()
 				.isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
 			usBlock = us.getBlock();
-			if (usBlock instanceof BlockPeat) {
+			if (usBlock instanceof BlockSoilPeat) {
 				world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
 			} else if (usBlock instanceof BlockRockVariant rock) {
 				world.setBlockState(pos, rock.getVariant(rock.getType().getNonGrassVersion()).getDefaultState());
@@ -71,7 +71,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 					continue;
 				}
 				Block currentBlock = current.getBlock();
-				if (currentBlock instanceof BlockPeat) {
+				if (currentBlock instanceof BlockSoilPeat) {
 					world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
 				} else if (currentBlock instanceof BlockRockVariant) {
 					Rock.Type spreader = Rock.Type.GRASS;

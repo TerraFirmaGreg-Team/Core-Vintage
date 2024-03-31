@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.soil.objects.blocks.peat;
+package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,16 +21,15 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
 
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
 
-public class BlockPeatGrass extends BlockBase implements IColorfulBlock {
+public class BlockSoilPeatGrass extends BlockBase implements IColorfulBlock {
 
-	public BlockPeatGrass() {
+	public BlockSoilPeatGrass() {
 		super(Material.GRASS);
 
 		setSoundType(SoundType.PLANT);

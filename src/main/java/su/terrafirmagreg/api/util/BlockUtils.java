@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
-import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeatGrass;
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
+import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeatGrass;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -186,7 +186,7 @@ public class BlockUtils {
 
 
 	public static boolean isGrass(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeatGrass) return true;
+		if (current.getBlock() instanceof BlockSoilPeatGrass) return true;
 		if (current.getBlock() instanceof ISoilBlock soil) {
 			var variant = soil.getBlockVariant();
 			return variant == GRASS || variant == DRY_GRASS ||
@@ -196,7 +196,7 @@ public class BlockUtils {
 	}
 
 	public static boolean isSoil(IBlockState current) {
-		if (current.getBlock() instanceof BlockPeat) return true;
+		if (current.getBlock() instanceof BlockSoilPeat) return true;
 		if (current.getBlock() instanceof ISoilBlock soil) {
 			var variant = soil.getBlockVariant();
 			return variant == GRASS || variant == DRY_GRASS ||

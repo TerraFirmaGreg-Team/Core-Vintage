@@ -33,7 +33,6 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
-import su.terrafirmagreg.modules.soil.objects.blocks.peat.BlockPeat;
 
 import java.util.Random;
 
@@ -83,7 +82,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 		// Проверяем условие для генерации торфа
 		if (up.getMaterial().isLiquid() || (neighborLight < 4 && up.getLightOpacity(world, upPos) > 2)) {
 			// Генерируем торф в зависимости от типа блока
-			if (usBlock instanceof BlockPeat) {
+			if (usBlock instanceof BlockSoilPeat) {
 				world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
 			} else if (usBlock instanceof ISoilBlock soil) {
 				world.setBlockState(pos, soil.getBlockVariant().getNonGrassVersion().get(soil.getType()).getDefaultState());
@@ -121,7 +120,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 				Block currentBlock = current.getBlock();
 
 				// Генерируем траву в зависимости от типа текущего блока
-				if (currentBlock instanceof BlockPeat) {
+				if (currentBlock instanceof BlockSoilPeat) {
 					world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
 				} else if (currentBlock instanceof ISoilBlock block) {
 					SoilBlockVariant spreader = SoilBlockVariants.GRASS;

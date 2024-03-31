@@ -17,10 +17,10 @@ public final class BlocksCore {
 
 		//==== Other =================================================================================================//
 
-		registry.registerAuto(DEBUG = new BlockDebug());
-		registry.registerAuto(PUDDLE = new BlockPuddle());
-		registry.registerAuto(THATCH = new BlockThatch());
-		registry.registerAuto(AGGREGATE = new BlockAggregate());
+		DEBUG = registry.registerBlock(new BlockDebug());
+		PUDDLE = registry.registerBlock(new BlockPuddle());
+		THATCH = registry.registerBlock(new BlockThatch());
+		AGGREGATE = registry.registerBlock(new BlockAggregate());
 	}
 
 }

@@ -15,8 +15,6 @@ public final class ItemsRock {
 
 	public static void onRegister(RegistryManager registry) {
 
-		for (var item : ROCK_ITEMS.values()) registry.registerAuto(item);
-
-
+		registry.registerItems(ROCK_ITEMS.values());
 	}
 }

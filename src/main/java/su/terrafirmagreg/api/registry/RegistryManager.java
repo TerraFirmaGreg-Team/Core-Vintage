@@ -50,6 +50,7 @@ import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -219,10 +220,16 @@ public class RegistryManager {
 
 	//region // ===== Block ========================================================================================================================//
 
-	public void registerAuto(Block block) {
-		if (block instanceof IAutoReg provider) {
-			this.registerBlock(block, provider.getItemBlock(), provider.getName());
+	public <T extends Block> void registerBlocks(Collection<T> collection) {
+		for (var item : collection) {
+			if (item instanceof IAutoReg provider) {
+				this.registerBlock(item, provider.getItemBlock(), provider.getName());
+			}
 		}
+	}
+
+	public <T extends Block & IAutoReg> T registerBlock(T block) {
+		return this.registerBlock(block, block.getItemBlock(), block.getName());
 	}
 
 	/**
@@ -264,10 +271,16 @@ public class RegistryManager {
 
 	//region // ===== Item =========================================================================================================================//
 
-	public void registerAuto(Item item) {
-		if (item instanceof IAutoReg provider) {
-			this.registerItem(item, provider.getName());
+	public <T extends Item> void registerItems(Collection<T> collection) {
+		for (var item : collection) {
+			if (item instanceof IAutoReg provider) {
+				this.registerItem(item, provider.getName());
+			}
 		}
+	}
+
+	public <T extends Item & IAutoReg> T registerItem(T item) {
+		return this.registerItem(item, item.getName());
 	}
 
 	/**
@@ -331,12 +344,6 @@ public class RegistryManager {
 		return registerPotionType(name, potionType);
 	}
 
-	public PotionType registerPotionType(@Nonnull String name, @Nonnull PotionType potionType, @Nonnull Potion potion, int duration) {
-
-		potionType = new PotionType(new PotionEffect(potion, duration));
-		return registerPotionType(name, potionType);
-	}
-
 	public PotionType registerPotionType(@Nonnull String name, @Nonnull PotionType potionType) {
 
 		potionType.setRegistryName(this.modID, name);
@@ -348,11 +355,11 @@ public class RegistryManager {
 
 	//region // ===== Biome ========================================================================================================================//
 
-	public void registerBiome(Biome biome, String name) {
-		this.registerBiome(biome, name, new BiomeDictionary.Type[0]);
+	public Biome registerBiome(Biome biome, String name) {
+		return this.registerBiome(biome, name, new BiomeDictionary.Type[0]);
 	}
 
-	public void registerBiome(Biome biome, String name, BiomeDictionary.Type[] types) {
+	public Biome registerBiome(Biome biome, String name, BiomeDictionary.Type[] types) {
 
 		biome.setRegistryName(this.modID, name);
 		this.biomes.add(biome);
@@ -361,7 +368,7 @@ public class RegistryManager {
 			BiomeDictionary.addTypes(biome, types);
 		}
 
-
+		return biome;
 	}
 
 	//endregion

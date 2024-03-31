@@ -15,6 +15,6 @@ public final class ItemsSoil {
 
 	public static void onRegister(RegistryManager registry) {
 
-		for (var item : SOIL_ITEMS.values()) registry.registerAuto(item);
+		registry.registerItems(SOIL_ITEMS.values());
 	}
 }

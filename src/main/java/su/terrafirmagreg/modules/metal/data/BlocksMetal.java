@@ -16,7 +16,7 @@ public final class BlocksMetal {
 	public static final Map<Pair<MetalBlockVariant, MetalType>, Block> METAL_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
 
 	public static void onRegister(RegistryManager registry) {
-		for (var block : METAL_BLOCKS.values()) registry.registerAuto(block);
+		registry.registerBlocks(METAL_BLOCKS.values());
 
 	}
 

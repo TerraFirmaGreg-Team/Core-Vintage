@@ -21,9 +21,9 @@ public final class ItemsWood {
 	public static final Map<Pair<WoodItemVariant, WoodType>, Item> WOOD_ITEMS = new Object2ObjectLinkedOpenHashMap<>();
 
 	public static void onRegister(RegistryManager registry) {
-		for (var item : WOOD_ITEMS.values()) registry.registerAuto(item);
+		registry.registerItems(WOOD_ITEMS.values());
 
-		registry.registerAuto(STICK_BUNDLE = new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
-		registry.registerAuto(STICK_BUNCH = new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
+		STICK_BUNDLE = registry.registerItem(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
+		STICK_BUNCH = registry.registerItem(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
 	}
 }

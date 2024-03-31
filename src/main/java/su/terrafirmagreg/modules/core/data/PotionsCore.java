@@ -22,18 +22,18 @@ public final class PotionsCore {
 	public static PotionType LONG_HEAT_RESIST_TYPE;
 
 	public static void onRegister(RegistryManager registry) {
-		registry.registerPotion("overburdened", OVERBURDENED = new PotionOverburdened());
-		registry.registerPotion("thirst", THIRST = new PotionThirst());
-		registry.registerPotion("parasites", PARASITES = new PotionParasites());
-		registry.registerPotion("swarm", SWARM = new PotionSwarm());
-		registry.registerPotion("hyperthermia", HYPERTHERMIA = new PotionHyperthermia());
-		registry.registerPotion("hypothermia", HYPOTHERMIA = new PotionHypothermia());
-		registry.registerPotion("resist_cold", COLD_RESIST = new PotionResistCold());
-		registry.registerPotion("resist_heat", HEAT_RESIST = new PotionResistHeat());
+		OVERBURDENED = registry.registerPotion("overburdened", new PotionOverburdened());
+		THIRST = registry.registerPotion("thirst", new PotionThirst());
+		PARASITES = registry.registerPotion("parasites", new PotionParasites());
+		SWARM = registry.registerPotion("swarm", new PotionSwarm());
+		HYPERTHERMIA = registry.registerPotion("hyperthermia", new PotionHyperthermia());
+		HYPOTHERMIA = registry.registerPotion("hypothermia", new PotionHypothermia());
+		COLD_RESIST = registry.registerPotion("resist_cold", new PotionResistCold());
+		HEAT_RESIST = registry.registerPotion("resist_heat", new PotionResistHeat());
 
-		registry.registerPotionType("cold_resist_type", COLD_RESIST_TYPE, COLD_RESIST, 1200);           //TODO cfg duration
-		registry.registerPotionType("long_cold_resist_type", LONG_COLD_RESIST_TYPE, COLD_RESIST, 2400); //TODO cfg duration
-		registry.registerPotionType("heat_resist_type", HEAT_RESIST_TYPE, HEAT_RESIST, 1200);           //TODO cfg duration
-		registry.registerPotionType("long_heat_resist_type", LONG_HEAT_RESIST_TYPE, HEAT_RESIST, 2400); //TODO cfg duration
+		COLD_RESIST_TYPE = registry.registerPotionType("cold_resist_type", COLD_RESIST, 1200);           //TODO cfg duration
+		LONG_COLD_RESIST_TYPE = registry.registerPotionType("long_cold_resist_type", COLD_RESIST, 2400); //TODO cfg duration
+		HEAT_RESIST_TYPE = registry.registerPotionType("heat_resist_type", HEAT_RESIST, 1200);           //TODO cfg duration
+		LONG_HEAT_RESIST_TYPE = registry.registerPotionType("long_heat_resist_type", HEAT_RESIST, 2400); //TODO cfg duration
 	}
 }

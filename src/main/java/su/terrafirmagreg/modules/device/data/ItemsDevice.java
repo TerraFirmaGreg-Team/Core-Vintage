@@ -2,8 +2,6 @@ package su.terrafirmagreg.modules.device.data;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.device.objects.items.*;
 
@@ -27,28 +25,21 @@ public final class ItemsDevice {
 
 	public static void onRegister(RegistryManager registry) {
 
-		registry.registerAuto(FIRESTARTER = new ItemFireStarter());
+		FIRESTARTER = registry.registerItem(new ItemFireStarter());
 
-		registry.registerAuto(LEATHER_SIDE = new ItemDeviceMisc("flask/leather/side", Size.SMALL, Weight.LIGHT));
-		registry.registerAuto(LEATHER_FLASK = new ItemLeatherFlask());
-		registry.registerAuto(BROKEN_LEATHER_FLASK = new ItemDeviceMisc("flask/leather/broken", Size.SMALL, Weight.LIGHT));
+		LEATHER_SIDE = registry.registerItem(new ItemDeviceMisc("flask/leather/side", Size.SMALL, Weight.LIGHT));
+		LEATHER_FLASK = registry.registerItem(new ItemLeatherFlask());
+		BROKEN_LEATHER_FLASK = registry.registerItem(new ItemDeviceMisc("flask/leather/broken", Size.SMALL, Weight.LIGHT));
 
-		registry.registerAuto(UNFINISHED_FLASK = new ItemDeviceMisc("flask/metal/unfinished", Size.SMALL, Weight.LIGHT));
-		registry.registerAuto(IRON_FLASK = new ItemMetalFlask());
-		registry.registerAuto(BROKEN_IRON_FLASK = new ItemDeviceMisc("flask/metal/broken", Size.SMALL, Weight.LIGHT));
+		UNFINISHED_FLASK = registry.registerItem(new ItemDeviceMisc("flask/metal/unfinished", Size.SMALL, Weight.LIGHT));
+		IRON_FLASK = registry.registerItem(new ItemMetalFlask());
+		BROKEN_IRON_FLASK = registry.registerItem(new ItemDeviceMisc("flask/metal/broken", Size.SMALL, Weight.LIGHT));
 
-		registry.registerAuto(SLING = new ItemSling());
-		registry.registerAuto(SLING_REINFORCED = new ItemReinforcedSling());
-		registry.registerAuto(SLING_AMMO = new ItemSlingAmmo(0, "heavy"));
-		registry.registerAuto(SLING_AMMO_SPREAD = new ItemSlingAmmo(1, "spread"));
-		registry.registerAuto(SLING_AMMO_LIGHT = new ItemSlingAmmo(2, "light"));
-		registry.registerAuto(SLING_AMMO_FIRE = new ItemSlingAmmo(3, "fire"));
-
-	}
-
-
-	@SideOnly(Side.CLIENT)
-	public static void onClientRegister(RegistryManager registry) {
-
+		SLING = registry.registerItem(new ItemSling());
+		SLING_REINFORCED = registry.registerItem(new ItemReinforcedSling());
+		SLING_AMMO = registry.registerItem(new ItemSlingAmmo(0, "heavy"));
+		SLING_AMMO_SPREAD = registry.registerItem(new ItemSlingAmmo(1, "spread"));
+		SLING_AMMO_LIGHT = registry.registerItem(new ItemSlingAmmo(2, "light"));
+		SLING_AMMO_FIRE = registry.registerItem(new ItemSlingAmmo(3, "fire"));
 	}
 }

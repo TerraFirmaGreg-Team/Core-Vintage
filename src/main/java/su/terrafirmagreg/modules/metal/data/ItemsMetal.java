@@ -16,7 +16,7 @@ public class ItemsMetal {
 
 	public static void onRegister(RegistryManager registry) {
 
-		for (var item : METAL_ITEMS.values()) registry.registerAuto(item);
+		registry.registerItems(METAL_ITEMS.values());
 
 
 	}

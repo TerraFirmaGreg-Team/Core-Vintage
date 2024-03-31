@@ -20,10 +20,10 @@ public final class BlocksSoil {
 
 	public static void onRegister(RegistryManager registry) {
 
-		for (var block : SOIL_BLOCKS.values()) registry.registerAuto(block);
+		registry.registerBlocks(SOIL_BLOCKS.values());
 
-		registry.registerAuto(PEAT_GRASS = new BlockPeatGrass());
-		registry.registerAuto(PEAT = new BlockPeat());
+		PEAT_GRASS = registry.registerBlock(new BlockPeatGrass());
+		PEAT = registry.registerBlock(new BlockPeat());
 
 
 	}

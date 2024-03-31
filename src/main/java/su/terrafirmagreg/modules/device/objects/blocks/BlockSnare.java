@@ -6,11 +6,8 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -47,12 +44,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
+
 
 public class BlockSnare extends BlockBase implements ITEBlock {
 
-	public static final PropertyBool CLOSED = PropertyBool.create("closed");
-	public static final PropertyBool BAITED = PropertyBool.create("baited");
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
 
@@ -64,7 +60,7 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 		this.setHardness(1.5f);
 		this.setHarvestLevel("axe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(FACING, EnumFacing.NORTH)
+				.withProperty(HORIZONTAL, EnumFacing.NORTH)
 				.withProperty(BAITED, Boolean.FALSE)
 				.withProperty(CLOSED, Boolean.FALSE));
 
@@ -82,25 +78,25 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 
 	@Override
 	protected @NotNull BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, BAITED, CLOSED);
+		return new BlockStateContainer(this, HORIZONTAL, BAITED, CLOSED);
 	}
 
 	@Nonnull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+				.withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
 				.withProperty(BAITED, meta / 4 % 2 != 0)
 				.withProperty(CLOSED, meta / 8 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getHorizontalIndex() + (state.getValue(BAITED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
+		return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BAITED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
 	}
 
 	@SuppressWarnings("deprecation")
 	public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
 	}
 
 	@Nullable

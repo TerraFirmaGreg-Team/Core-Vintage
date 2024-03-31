@@ -10,7 +10,6 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -47,10 +46,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
-	public static final PropertyDirection AXIS = PropertyDirection.create("axis", EnumFacing.Plane.HORIZONTAL);
 	private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
 	private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
 
@@ -71,7 +71,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
 		setHarvestLevel("pickaxe", 0);
 
 		setDefaultState(this.blockState.getBaseState()
-				.withProperty(AXIS, EnumFacing.NORTH));
+				.withProperty(HORIZONTAL, EnumFacing.NORTH));
 
 		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 	}
@@ -102,7 +102,8 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
 			if (state.getBlock().isReplaceable(worldIn, placedPos) &&
 					stateSupport.isSideSolid(worldIn, supportPos, EnumFacing.UP)) {
 				if (!worldIn.isRemote) {
-					worldIn.setBlockState(placedPos, MetalBlockVariants.ANVIL.get(type).getDefaultState().withProperty(AXIS, player.getHorizontalFacing()));
+					worldIn.setBlockState(placedPos, MetalBlockVariants.ANVIL.get(type).getDefaultState()
+							.withProperty(HORIZONTAL, player.getHorizontalFacing()));
 					worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 					stack.shrink(1);
 					player.setHeldItem(hand, stack);
@@ -122,12 +123,12 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
 	@Override
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(AXIS, EnumFacing.byHorizontalIndex(meta));
+		return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(AXIS).getHorizontalIndex();
+		return state.getValue(HORIZONTAL).getHorizontalIndex();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -151,7 +152,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
 	@Override
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return state.getValue(AXIS).getAxis() == EnumFacing.Axis.X ? AABB_Z : AABB_X;
+		return state.getValue(HORIZONTAL).getAxis() == EnumFacing.Axis.X ? AABB_Z : AABB_X;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -257,7 +258,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
 
 	@Override
 	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, AXIS);
+		return new BlockStateContainer(this, HORIZONTAL);
 	}
 
 	@Override

@@ -36,17 +36,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
+
 
 @ParametersAreNonnullByDefault
 public class BlockMetalCladding extends BlockBase implements IMetalBlock {
-	public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
-			PropertyBool.create("down"),
-			PropertyBool.create("up"),
-			PropertyBool.create("north"),
-			PropertyBool.create("south"),
-			PropertyBool.create("west"),
-			PropertyBool.create("east")
-	};
+	public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
 	private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[]{
 			new AxisAlignedBB(0d, 0.9375d, 0d, 1d, 1d, 1d),
 			new AxisAlignedBB(0d, 0d, 0d, 1d, 0.0625d, 1d),

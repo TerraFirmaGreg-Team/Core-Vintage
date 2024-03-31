@@ -6,10 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -40,11 +37,10 @@ import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBearTrap;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
+
 public class BlockBearTrap extends BlockBase implements ITEBlock {
 
-	public static final PropertyBool CLOSED = PropertyBool.create("closed");
-	public static final PropertyBool BURIED = PropertyBool.create("buried");
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
 	public BlockBearTrap() {
@@ -54,7 +50,7 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 		this.setResistance(10.0F);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(FACING, EnumFacing.NORTH)
+				.withProperty(HORIZONTAL, EnumFacing.NORTH)
 				.withProperty(BURIED, Boolean.FALSE)
 				.withProperty(CLOSED, Boolean.FALSE));
 	}
@@ -91,7 +87,7 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 
 	@Override
 	protected @NotNull BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, BURIED, CLOSED);
+		return new BlockStateContainer(this, HORIZONTAL, BURIED, CLOSED);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -103,18 +99,18 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+				.withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
 				.withProperty(BURIED, meta / 4 % 2 != 0)
 				.withProperty(CLOSED, meta / 8 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
+		return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
 	}
 
 	@SuppressWarnings("deprecation")
 	public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
 	}
 
 	@Nullable

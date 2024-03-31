@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class BlockRockSpeleothem extends BlockRock {
 
-	public static PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
+	public static final PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
 	private final RockType type;
 

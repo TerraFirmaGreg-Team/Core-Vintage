@@ -13,21 +13,6 @@ import su.terrafirmagreg.api.model.property.PropertyObject;
 public final class PropertyUtils {
 
 	/**
-	 * Used to handle whether or not the block is on or off. Used mainly by redstone blocks.
-	 */
-	public static final PropertyBool POWERED = PropertyBool.create("powered");
-
-	public static final PropertyBool MOSSY = PropertyBool.create("mossy");
-
-	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
-
-	public static final PropertyBool SEALED = PropertyBool.create("sealed");
-
-	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
-	public static final PropertyBool PLACED = PropertyBool.create("placed");
-	public static final PropertyBool SMALL = PropertyBool.create("small");
-
-	/**
 	 * Used to hold another block state. This is useful for mimicking other blocks.
 	 */
 	public static final PropertyObject<IBlockState> HELD_STATE = new PropertyObject<>("held_state", IBlockState.class);
@@ -94,6 +79,24 @@ public final class PropertyUtils {
 	 * Used to determine if a block has been enabled or not.
 	 */
 	public static final PropertyBool ENABLED = PropertyBool.create("enabled");
+
+	/**
+	 * Used to handle whether or not the block is on or off. Used mainly by redstone blocks.
+	 */
+	public static final PropertyBool POWERED = PropertyBool.create("powered");
+
+	public static final PropertyBool MOSSY = PropertyBool.create("mossy");
+
+	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
+
+	public static final PropertyBool SEALED = PropertyBool.create("sealed");
+
+	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
+	public static final PropertyBool PLACED = PropertyBool.create("placed");
+	public static final PropertyBool SMALL = PropertyBool.create("small");
+	public static final PropertyBool CLOSED = PropertyBool.create("closed");
+	public static final PropertyBool BURIED = PropertyBool.create("buried");
+	public static final PropertyBool BAITED = PropertyBool.create("baited");
 
 	/**
 	 * Utility classes, such as this one, are not meant to be instantiated. Java adds an

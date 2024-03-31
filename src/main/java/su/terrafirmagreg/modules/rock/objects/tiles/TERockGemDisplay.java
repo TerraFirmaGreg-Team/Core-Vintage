@@ -15,10 +15,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 @Getter
 public class TERockGemDisplay extends TEBase {

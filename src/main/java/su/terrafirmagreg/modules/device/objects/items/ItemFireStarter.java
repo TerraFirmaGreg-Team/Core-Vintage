@@ -22,15 +22,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.api.util.TileUtil;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 import su.terrafirmagreg.modules.device.data.SoundDevice;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +154,7 @@ public class ItemFireStarter extends ItemBase {
 				// Log pile
 				if (itemRand.nextFloat() < chance) {
 					world.setBlockState(pos.down(), state.withProperty(LIT, true));
-					TELogPile te = TileUtil.getTile(world, pos.down(), TELogPile.class);
+					TELogPile te = TileUtils.getTile(world, pos.down(), TELogPile.class);
 					if (te != null) {
 						te.light();
 					}
@@ -165,7 +165,7 @@ public class ItemFireStarter extends ItemBase {
 			} else if (state.getBlock() == BlocksTFC.PIT_KILN) {
 				// Pit Kiln
 				if (itemRand.nextFloat() < chance) {
-					TEPitKiln te = TileUtil.getTile(world, pos.down(), TEPitKiln.class);
+					TEPitKiln te = TileUtils.getTile(world, pos.down(), TEPitKiln.class);
 					if (te != null) {
 						te.tryLight();
 					}
@@ -197,7 +197,7 @@ public class ItemFireStarter extends ItemBase {
 					final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
 					if (itemRand.nextFloat() < chance + kindlingModifier) {
 						world.setBlockState(pos, BlocksTFC.FIREPIT.getDefaultState().withProperty(LIT, true));
-						TEFirePit te = TileUtil.getTile(world, pos, TEFirePit.class);
+						TEFirePit te = TileUtils.getTile(world, pos, TEFirePit.class);
 						if (te != null) {
 							te.onCreate(log.getItem());
 						}

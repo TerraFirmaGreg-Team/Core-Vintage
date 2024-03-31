@@ -1,19 +1,14 @@
-package lyeoj.tfcthings.blocks;
+package su.terrafirmagreg.modules.device.objects.blocks;
 
-import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -34,6 +29,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalHare;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalPheasant;
@@ -43,13 +41,14 @@ import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalC
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
+import su.terrafirmagreg.modules.device.objects.tiles.TESnare;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
 
-public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurableItem {
+public class BlockSnare extends BlockBase implements ITEBlock {
 
 	public static final PropertyBool CLOSED = PropertyBool.create("closed");
 	public static final PropertyBool BAITED = PropertyBool.create("baited");
@@ -59,40 +58,35 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 
 	public BlockSnare() {
 		super(Material.WOOD);
-		this.setTranslationKey("snare");
-		this.setRegistryName("snare");
+
 		this.setTickRandomly(true);
 		this.setSoundType(SoundType.WOOD);
-		this.setCreativeTab(CreativeTabsTFC.CT_MISC);
 		this.setHardness(1.5f);
 		this.setHarvestLevel("axe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(FACING, EnumFacing.NORTH)
-				.withProperty(BAITED, Boolean.valueOf(false))
-				.withProperty(CLOSED, Boolean.valueOf(false)));
+				.withProperty(BAITED, Boolean.FALSE)
+				.withProperty(CLOSED, Boolean.FALSE));
 
 	}
 
 	@Override
-	public boolean hasTileEntity(IBlockState state) {
+	public boolean hasTileEntity(@NotNull IBlockState state) {
 		return true;
 	}
 
 	@Override
-	public TileEntityBearTrap createTileEntity(World world, IBlockState state) {
-		return new TileEntityBearTrap();
-	}
-
-	public TileEntityBearTrap getTileEntity(IBlockAccess world, BlockPos pos) {
-		return (TileEntityBearTrap) world.getTileEntity(pos);
+	public TESnare createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+		return new TESnare();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[]{FACING, BAITED, CLOSED});
+	protected @NotNull BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING, BAITED, CLOSED);
 	}
 
 	@Nonnull
+	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
@@ -101,17 +95,19 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 	}
 
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex() + ((Boolean) state.getValue(BAITED) ? 4 : 0) + ((Boolean) state.getValue(CLOSED) ? 8 : 0);
+		return state.getValue(FACING).getHorizontalIndex() + (state.getValue(BAITED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
 	}
 
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+	@SuppressWarnings("deprecation")
+	public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
 		AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-		return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (double) ((float) 0 * 0.125F), axisalignedbb.maxZ);
+		return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
 	}
 
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
@@ -127,17 +123,20 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 		}
 	}
 
-	public boolean isOpaqueCube(IBlockState state) {
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(@NotNull IBlockState state) {
 		return false;
 	}
 
-	public boolean isFullCube(IBlockState state) {
+	@SuppressWarnings("deprecation")
+	public boolean isFullCube(@NotNull IBlockState state) {
 		return false;
 	}
 
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-		TileEntityBearTrap trap = (TileEntityBearTrap) te;
-		if (!trap.isOpen()) {
+	public void harvestBlock(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable TileEntity te, @NotNull ItemStack stack) {
+		TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
+		assert snare != null;
+		if (!snare.isOpen()) {
 			if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
 				worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
 			} else {
@@ -148,7 +147,7 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 		}
 	}
 
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!state.getValue(BAITED)) {
 			ItemStack stack = playerIn.getHeldItem(hand);
 			if ((stack.getItem() instanceof ItemSeedsTFC || isFood(stack)) && !worldIn.isRemote) {
@@ -158,7 +157,7 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 						playerIn.inventory.deleteStack(stack);
 					}
 				}
-				state = state.withProperty(BAITED, Boolean.valueOf(true));
+				state = state.withProperty(BAITED, Boolean.TRUE);
 				worldIn.setBlockState(pos, state, 2);
 			}
 		}
@@ -171,26 +170,28 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 	}
 
 	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+	public void onEntityCollision(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Entity entityIn) {
 		if (isCapturable(entityIn)) {
-			TileEntityBearTrap trap = getTileEntity(worldIn, pos);
+			TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
 			EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
-			if (trap.isOpen()) {
-				trap.setCapturedEntity(entityLiving);
+			assert snare != null;
+			if (snare.isOpen()) {
+				snare.setCapturedEntity(entityLiving);
 				entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-				trap.setOpen(false);
-				state = state.withProperty(CLOSED, Boolean.valueOf(true));
-				state = state.withProperty(BAITED, Boolean.valueOf(false));
+				snare.setOpen(false);
+				state = state.withProperty(CLOSED, Boolean.TRUE);
+				state = state.withProperty(BAITED, Boolean.FALSE);
 				worldIn.setBlockState(pos, state, 2);
-			} else if (trap.getCapturedEntity() != null && trap.getCapturedEntity().equals(entityLiving)) {
+			} else if (snare.getCapturedEntity() != null && snare.getCapturedEntity().equals(entityLiving)) {
 				entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 			}
 		}
 	}
 
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+	public void updateTick(@NotNull World worldIn, BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
 		AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D, pos.getZ() + 10.0D);
-		TileEntityBearTrap snare = getTileEntity(worldIn, pos);
+		TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
+		assert snare != null;
 		if (snare.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox)
 				.isEmpty() && !worldIn.isRemote) {
 			for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox)) {
@@ -198,8 +199,8 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 						.getBlock() instanceof BlockSnare)) {
 					snare.setCapturedEntity(animal);
 					snare.setOpen(false);
-					state = state.withProperty(CLOSED, Boolean.valueOf(true));
-					state = state.withProperty(BAITED, Boolean.valueOf(false));
+					state = state.withProperty(CLOSED, Boolean.TRUE);
+					state = state.withProperty(BAITED, Boolean.FALSE);
 					worldIn.setBlockState(pos, state, 2);
 					animal.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 					return;
@@ -232,11 +233,11 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 					worldIn.spawnEntity(animal);
 					snare.setCapturedEntity(animal);
 					snare.setOpen(false);
-					state = state.withProperty(CLOSED, Boolean.valueOf(true));
-					state = state.withProperty(BAITED, Boolean.valueOf(false));
+					state = state.withProperty(CLOSED, Boolean.TRUE);
+					state = state.withProperty(BAITED, Boolean.FALSE);
 					worldIn.setBlockState(pos, state, 2);
 				} else if (rand.nextDouble() < ConfigTFCThings.Items.SNARE.baitExpireChance) {
-					state = state.withProperty(BAITED, Boolean.valueOf(false));
+					state = state.withProperty(BAITED, Boolean.FALSE);
 					worldIn.setBlockState(pos, state, 2);
 				}
 			}
@@ -247,10 +248,10 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 		return entityIn instanceof EntityAnimalRabbit || entityIn instanceof EntityAnimalPheasant || entityIn instanceof EntityAnimalDuck || entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
 	}
 
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+	public void neighborChanged(@NotNull IBlockState state, World worldIn, BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
 		if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-			TileEntityBearTrap trap = getTileEntity(worldIn, pos);
-			if (!trap.isOpen()) {
+			TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
+			if (!snare.isOpen()) {
 				if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
 					worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
 				} else {
@@ -275,20 +276,28 @@ public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurabl
 		return Weight.MEDIUM;
 	}
 
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+	@SuppressWarnings("deprecation")
+	public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
 		return TRAP_AABB;
 	}
 
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+	public boolean isPassable(@NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
 		return true;
 	}
 
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+	@SuppressWarnings("deprecation")
+	public @NotNull BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos, @NotNull EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
+
 	@Override
-	public boolean isEnabled() {
-		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSnare;
+	public @NotNull String getName() {
+		return "device/snare";
+	}
+
+	@Override
+	public Class<? extends TileEntity> getTileEntityClass() {
+		return TESnare.class;
 	}
 }

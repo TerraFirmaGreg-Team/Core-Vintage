@@ -1,18 +1,13 @@
-package lyeoj.tfcthings.blocks;
+package su.terrafirmagreg.modules.device.objects.blocks;
 
-import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -24,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -36,13 +32,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBearTrap;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigurableItem {
+public class BlockBearTrap extends BlockBase implements ITEBlock {
 
 	public static final PropertyBool CLOSED = PropertyBool.create("closed");
 	public static final PropertyBool BURIED = PropertyBool.create("buried");
@@ -51,50 +49,58 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 
 	public BlockBearTrap() {
 		super(Material.IRON);
-		this.setTranslationKey("bear_trap");
-		this.setRegistryName("bear_trap");
-		this.setCreativeTab(CreativeTabsTFC.CT_METAL);
+
 		this.setHardness(10.0F);
 		this.setResistance(10.0F);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
 				.withProperty(FACING, EnumFacing.NORTH)
-				.withProperty(BURIED, Boolean.valueOf(false))
-				.withProperty(CLOSED, Boolean.valueOf(false)));
+				.withProperty(BURIED, Boolean.FALSE)
+				.withProperty(CLOSED, Boolean.FALSE));
 	}
 
 	@Override
-	public boolean hasTileEntity(IBlockState state) {
+	public @NotNull String getName() {
+		return "device/bear_trap";
+	}
+
+	@Override
+	public @Nullable ItemBlock getItemBlock() {
+		return new ItemBlock(this);
+	}
+
+	@Override
+	public boolean hasTileEntity(@NotNull IBlockState state) {
 		return true;
 	}
 
 	@Override
-	public TileEntityBearTrap createTileEntity(World world, IBlockState state) {
-		return new TileEntityBearTrap();
+	public TEBearTrap createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+		return new TEBearTrap();
 	}
 
-	public TileEntityBearTrap getTileEntity(IBlockAccess world, BlockPos pos) {
-		return (TileEntityBearTrap) world.getTileEntity(pos);
-	}
 
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+	@SuppressWarnings("deprecation")
+	public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
 		return TRAP_AABB;
 	}
 
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+	public boolean isPassable(@NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[]{FACING, BURIED, CLOSED});
+	protected @NotNull BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING, BURIED, CLOSED);
 	}
 
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+	@SuppressWarnings("deprecation")
+	public @NotNull BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos, @NotNull EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
-	@Nonnull
+	@NotNull
+	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
@@ -103,15 +109,17 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 	}
 
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex() + ((Boolean) state.getValue(BURIED) ? 4 : 0) + ((Boolean) state.getValue(CLOSED) ? 8 : 0);
+		return state.getValue(FACING).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
 	}
 
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+	@SuppressWarnings("deprecation")
+	public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
 		AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
 		return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (double) ((float) 0 * 0.125F), axisalignedbb.maxZ);
 	}
@@ -129,16 +137,18 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 		}
 	}
 
-	public boolean isOpaqueCube(IBlockState state) {
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(@NotNull IBlockState state) {
 		return false;
 	}
 
-	public boolean isFullCube(IBlockState state) {
+	@SuppressWarnings("deprecation")
+	public boolean isFullCube(@NotNull IBlockState state) {
 		return false;
 	}
 
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-		TileEntityBearTrap trap = (TileEntityBearTrap) te;
+	public void harvestBlock(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable TileEntity te, @NotNull ItemStack stack) {
+		TEBearTrap trap = TileUtils.getTile(worldIn, pos, TEBearTrap.class);
 		if (!trap.isOpen()) {
 			if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
 				worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
@@ -150,11 +160,10 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 		}
 	}
 
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade ||
-				(playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
-						((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType()
-								.equals(Metal.ItemType.SHOVEL))) {
+	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade || (playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
+				((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType()
+						.equals(Metal.ItemType.SHOVEL))) {
 			playerIn.getHeldItem(hand).damageItem(1, playerIn);
 			state = state.cycleProperty(BURIED);
 			worldIn.setBlockState(pos, state, 2);
@@ -164,10 +173,9 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 	}
 
 	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		if (entityIn instanceof EntityLivingBase) {
-			TileEntityBearTrap trap = getTileEntity(worldIn, pos);
-			EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
+	public void onEntityCollision(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Entity entityIn) {
+		if (entityIn instanceof EntityLivingBase entityLiving) {
+			TEBearTrap trap = TileUtils.getTile(worldIn, pos, TEBearTrap.class);
 			if (trap.isOpen()) {
 				int debuffDuration = ConfigTFCThings.Items.BEAR_TRAP.debuffDuration;
 				double healthCut = ConfigTFCThings.Items.BEAR_TRAP.healthCut;
@@ -182,7 +190,7 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 				trap.setCapturedEntity(entityLiving);
 				entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 				trap.setOpen(false);
-				state = state.withProperty(CLOSED, Boolean.valueOf(true));
+				state = state.withProperty(CLOSED, Boolean.TRUE);
 				worldIn.setBlockState(pos, state, 2);
 				entityLiving.playSound(SoundEvents.ENTITY_ITEM_BREAK, 2.0F, 0.4F);
 			} else if (trap.getCapturedEntity() != null && trap.getCapturedEntity().equals(entityLiving)) {
@@ -192,7 +200,7 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 					if (Math.random() > 2 * ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
 						this.dropBlockAsItem(worldIn, pos, state, 0);
 					}
-					worldIn.setBlockState(pos, net.minecraft.init.Blocks.AIR.getDefaultState(), worldIn.isRemote ? 11 : 3);
+					worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), worldIn.isRemote ? 11 : 3);
 				}
 				if (entityLiving.isDead) {
 					trap.setCapturedEntity(null);
@@ -201,9 +209,10 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 		}
 	}
 
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+	@SuppressWarnings("deprecation")
+	public void neighborChanged(@NotNull IBlockState state, World worldIn, BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
 		if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-			TileEntityBearTrap trap = getTileEntity(worldIn, pos);
+			TEBearTrap trap = TileUtils.getTile(worldIn, pos, TEBearTrap.class);
 			if (!trap.isOpen()) {
 				if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
 					worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
@@ -217,20 +226,20 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.HEAVY;
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableBearTrap;
+	public Class<? extends TileEntity> getTileEntityClass() {
+		return TEBearTrap.class;
 	}
 }

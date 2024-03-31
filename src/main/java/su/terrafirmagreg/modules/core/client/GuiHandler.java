@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.gui.IContainerProvider;
-import su.terrafirmagreg.api.util.TileUtil;
+import su.terrafirmagreg.api.util.TileUtils;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -35,7 +35,7 @@ public class GuiHandler implements IGuiHandler {
 		BlockPos blockPos = new BlockPos(x, y, z);
 		ItemStack stack = player.getHeldItemMainhand();
 		IBlockState blockState = world.getBlockState(blockPos);
-		TileEntity tileEntity = TileUtil.getTile(world, blockPos);
+		TileEntity tileEntity = TileUtils.getTile(world, blockPos);
 		Entity entity = world.getEntityByID(x);
 		Type type = Type.valueOf(ID);
 		return switch (type) {
@@ -61,7 +61,7 @@ public class GuiHandler implements IGuiHandler {
 		Container container = getServerGuiElement(ID, player, world, x, y, z);
 		BlockPos blockPos = new BlockPos(x, y, z);
 		IBlockState blockState = world.getBlockState(blockPos);
-		TileEntity tileEntity = TileUtil.getTile(world, blockPos);
+		TileEntity tileEntity = TileUtils.getTile(world, blockPos);
 		Entity entity = world.getEntityByID(x);
 		Type type = Type.valueOf(ID);
 		return switch (type) {

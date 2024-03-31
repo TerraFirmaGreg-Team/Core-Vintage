@@ -31,7 +31,7 @@ import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.TileUtil;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.arboriculture.objects.itemblocks.ItemBlockWoodSapling;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -85,7 +85,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
 	@Override
 	public void onBlockPlacedBy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer, @NotNull ItemStack stack) {
-		TETickCounter te = TileUtil.getTile(worldIn, pos, TETickCounter.class);
+		TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
 		if (te != null) {
 			te.resetCounter();
 		}

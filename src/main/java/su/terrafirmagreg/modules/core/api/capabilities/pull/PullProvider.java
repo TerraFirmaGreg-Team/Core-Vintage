@@ -4,9 +4,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
-
-import javax.annotation.Nullable;
 
 public class PullProvider implements ICapabilityProvider, IPullCapability {
 

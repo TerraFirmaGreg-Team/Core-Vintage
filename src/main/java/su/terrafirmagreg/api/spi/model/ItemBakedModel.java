@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.util.vector.Vector3f;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemBakedModel implements IBakedModel {

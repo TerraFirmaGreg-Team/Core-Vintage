@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.model.IModelState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.util.vector.Vector3f;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockBakedModel implements IBakedModel {

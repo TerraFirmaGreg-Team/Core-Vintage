@@ -39,7 +39,7 @@ import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.TileUtil;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -178,7 +178,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 
 	@Override
 	public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		TETickCounter tile = TileUtil.getTile(worldIn, pos, TETickCounter.class);
+		TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
 		if (tile != null) {
 			tile.resetCounter();
 		}

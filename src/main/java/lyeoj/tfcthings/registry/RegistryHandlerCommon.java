@@ -6,7 +6,6 @@ import lyeoj.tfcthings.init.TFCThingsSoundEvents;
 import lyeoj.tfcthings.items.ItemOreDict;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
 import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -36,6 +35,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
 
 import static net.dries007.tfc.api.types.Metal.ItemType.*;
@@ -82,7 +82,6 @@ public class RegistryHandlerCommon {
 				event.getRegistry().register(block);
 			}
 		}
-		GameRegistry.registerTileEntity(TileEntityBearTrap.class, TFCThingsBlocks.BEAR_TRAP.getRegistryName());
 		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGrindstones) {
 			GameRegistry.registerTileEntity(TileEntityGrindstone.class, TFCThingsBlocks.GRINDSTONE_BLOCK.getRegistryName());
 		}
@@ -225,7 +224,7 @@ public class RegistryHandlerCommon {
 	public static void registerWeldingRecipes(RegistryEvent.Register<WeldingRecipe> event) {
 		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableBearTrap) {
 			event.getRegistry()
-					.register(new WeldingRecipe(new ResourceLocation(MODID_TFCTHINGS, "bear_trap"), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), new ItemStack(TFCThingsBlocks.BEAR_TRAP), Metal.STEEL.getTier()));
+					.register(new WeldingRecipe(new ResourceLocation(MODID_TFCTHINGS, "bear_trap"), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), new ItemStack(BlocksDevice.BEAR_TRAP), Metal.STEEL.getTier()));
 		}
 		if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones) {
 			event.getRegistry()

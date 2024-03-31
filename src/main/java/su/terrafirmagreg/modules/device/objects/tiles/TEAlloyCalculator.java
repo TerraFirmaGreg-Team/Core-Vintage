@@ -14,13 +14,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.objects.container.ContainerAlloyCalculator;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class TEAlloyCalculator extends TEBase implements IContainerProvider<ContainerAlloyCalculator, GuiAlloyCalculator> {
 

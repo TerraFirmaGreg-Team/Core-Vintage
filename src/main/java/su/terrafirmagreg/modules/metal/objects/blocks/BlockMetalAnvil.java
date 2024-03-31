@@ -33,6 +33,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
@@ -43,7 +44,6 @@ import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 

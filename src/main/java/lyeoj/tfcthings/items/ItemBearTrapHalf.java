@@ -33,7 +33,7 @@ public class ItemBearTrapHalf extends ItemTFC implements TFCThingsConfigurableIt
 	}
 
 	@Nullable
-	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new ForgeableHeatableHandler(nbt, 0.35F, 1540.0F);
 	}
 

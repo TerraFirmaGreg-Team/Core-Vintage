@@ -8,9 +8,8 @@ import net.dries007.tfc.objects.container.IButtonHandler;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
-
-import javax.annotation.Nullable;
 
 public class ContainerAnvilPlan extends ContainerTE<TEMetalAnvil> implements IButtonHandler {
 	public ContainerAnvilPlan(InventoryPlayer playerInv, TEMetalAnvil tile) {

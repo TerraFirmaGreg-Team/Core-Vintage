@@ -19,8 +19,7 @@ public class EquipmentModifier extends BaseModifier {
 	public static void getModifiers(EntityPlayer player, ModifierStorage modifiers) {
 		Iterable<ItemStack> armor = player.getArmorInventoryList();
 		for (ItemStack stack : armor) {
-			if (stack.getItem() instanceof ItemArmor) {
-				ItemArmor thing = (ItemArmor) stack.getItem();
+			if (stack.getItem() instanceof ItemArmor thing) {
 				if (thing.armorType == EntityEquipmentSlot.HEAD) {
 					if (player.world.getLight(player.getPosition()) > 14) {
 						float envTemp = EnvironmentalModifier.getEnvironmentTemperature(player);

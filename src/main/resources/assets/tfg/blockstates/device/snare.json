@@ -1,0 +1,41 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/snare/normal",
+    "textures": {
+      "all": "tfg:blocks/device/snare"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "baited": {
+      "true": {
+        "model": "tfg:device/snare/baited"
+      },
+      "false": {}
+    },
+    "closed": {
+      "true": {
+        "model": "tfg:device/snare/triggered"
+      },
+      "false": {}
+    },
+    "facing": {
+      "south": {},
+      "west": {
+        "y": 90
+      },
+      "north": {
+        "y": 180
+      },
+      "east": {
+        "y": 270
+      }
+    }
+  }
+}

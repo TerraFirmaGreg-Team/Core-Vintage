@@ -21,15 +21,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
-import su.terrafirmagreg.api.util.TileUtil;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.client.render.TESRRockGemDisplay;
 import su.terrafirmagreg.modules.rock.objects.tiles.TERockGemDisplay;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 import static su.terrafirmagreg.api.util.PropertyUtils.UP;
@@ -102,7 +102,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 
 	public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			TERockGemDisplay te = TileUtil.getTile(worldIn, pos, TERockGemDisplay.class);
+			TERockGemDisplay te = TileUtils.getTile(worldIn, pos, TERockGemDisplay.class);
 			if (te != null) {
 				return te.onRightClick(playerIn, hand);
 			}
@@ -112,7 +112,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 	}
 
 	public void breakBlock(@NotNull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-		TERockGemDisplay te = TileUtil.getTile(worldIn, pos, TERockGemDisplay.class);
+		TERockGemDisplay te = TileUtils.getTile(worldIn, pos, TERockGemDisplay.class);
 		if (te != null) {
 			te.onBreakBlock();
 		}
@@ -137,7 +137,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 
 	@Override
 	public int getComparatorInputOverride(@NotNull IBlockState state, World world, @NotNull BlockPos pos) {
-		TERockGemDisplay te = TileUtil.getTile(world, pos, TERockGemDisplay.class);
+		TERockGemDisplay te = TileUtils.getTile(world, pos, TERockGemDisplay.class);
 		assert te != null;
 		return (int) Math.floor(15 * ((double) te.getSize() / (double) te.getMaxStackSize()));
 	}

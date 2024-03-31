@@ -1,5 +1,6 @@
-package lyeoj.tfcthings.tileentity;
+package su.terrafirmagreg.modules.device.objects.tiles;
 
+import lombok.Getter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,16 +8,18 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class TileEntityBearTrap extends TileEntity {
+public class TEBearTrap extends TileEntity {
 	private EntityLivingBase capturedEntity;
 	private UUID capturedId;
+	@Getter
 	private boolean open;
 
-	public TileEntityBearTrap() {
+	public TEBearTrap() {
 		super();
 		this.open = true;
 	}
@@ -28,18 +31,18 @@ public class TileEntityBearTrap extends TileEntity {
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag() {
+	public @NotNull NBTTagCompound getUpdateTag() {
 		return this.writeToNBT(new NBTTagCompound());
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+	public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
 		super.onDataPacket(net, pkt);
 		handleUpdateTag(pkt.getNbtCompound());
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+	public @NotNull NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setBoolean("open", open);
 		if (this.capturedEntity != null) {
 			compound.setUniqueId("capturedId", this.capturedEntity.getUniqueID());
@@ -64,8 +67,7 @@ public class TileEntityBearTrap extends TileEntity {
 	private void readCapturedEntity() {
 		if (this.capturedId != null) {
 			if (this.world.getPlayerEntityByUUID(capturedId) != null) {
-				EntityLivingBase entity = this.world.getPlayerEntityByUUID(capturedId);
-				this.capturedEntity = entity;
+				this.capturedEntity = this.world.getPlayerEntityByUUID(capturedId);
 			} else if (this.world instanceof WorldServer) {
 				Entity entity = ((WorldServer) this.world).getEntityFromUuid(this.capturedId);
 				if (entity instanceof EntityLivingBase) {
@@ -73,10 +75,6 @@ public class TileEntityBearTrap extends TileEntity {
 				}
 			}
 		}
-	}
-
-	public boolean isOpen() {
-		return this.open;
 	}
 
 	public void setOpen(boolean isOpen) {

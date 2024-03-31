@@ -9,12 +9,11 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
+public class TileUtils {
 
-public class TileUtil {
-
-	private TileUtil() {
+	private TileUtils() {
 		throw new IllegalAccessError("Utility class");
 	}
 

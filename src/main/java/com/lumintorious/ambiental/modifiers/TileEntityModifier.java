@@ -30,8 +30,7 @@ public class TileEntityModifier extends BlockModifier {
 	}
 
 	public static TileEntityModifier handleCharcoalForge(TileEntity tile, EntityPlayer player) {
-		if (tile instanceof TECharcoalForge) {
-			TECharcoalForge forge = (TECharcoalForge) tile;
+		if (tile instanceof TECharcoalForge forge) {
 			float temp = forge.getField(TECharcoalForge.FIELD_TEMPERATURE);
 			float change = temp / 140f;
 			float potency = temp / 350f;
@@ -45,8 +44,7 @@ public class TileEntityModifier extends BlockModifier {
 	}
 
 	public static TileEntityModifier handleFirePit(TileEntity tile, EntityPlayer player) {
-		if (tile instanceof TEFirePit) {
-			TEFirePit pit = (TEFirePit) tile;
+		if (tile instanceof TEFirePit pit) {
 			float temp = pit.getField(TEFirePit.FIELD_TEMPERATURE);
 			float change = temp / 100f;
 			float potency = temp / 350f;
@@ -60,8 +58,7 @@ public class TileEntityModifier extends BlockModifier {
 	}
 
 	public static TileEntityModifier handleBloomery(TileEntity tile, EntityPlayer player) {
-		if (tile instanceof TEBloomery) {
-			TEBloomery bloomery = (TEBloomery) tile;
+		if (tile instanceof TEBloomery bloomery) {
 			float change = bloomery.getRemainingTicks() > 0 ? 4f : 0f;
 			float potency = change;
 			if (hasProtection(player)) {
@@ -74,8 +71,7 @@ public class TileEntityModifier extends BlockModifier {
 	}
 
 	public static TileEntityModifier handleLamps(TileEntity tile, EntityPlayer player) {
-		if (tile instanceof TELamp) {
-			TELamp lamp = (TELamp) tile;
+		if (tile instanceof TELamp lamp) {
 			if (EnvironmentalModifier.getEnvironmentTemperature(player) < TemperatureCapability.AVERAGE) {
 				float change = (lamp.isPowered() && lamp.getFuel() > 0) ? 1f : 0f;
 				float potency = 0f;

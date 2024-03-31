@@ -5,8 +5,7 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.config.OreTooltipMode;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public enum Heat {
 	WARMING(1f, 80f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),

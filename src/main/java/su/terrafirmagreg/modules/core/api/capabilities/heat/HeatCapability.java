@@ -12,11 +12,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

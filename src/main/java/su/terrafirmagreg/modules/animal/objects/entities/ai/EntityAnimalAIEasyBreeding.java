@@ -1,4 +1,4 @@
-package mod.acgaming.easybreedingtfc.ai;
+package su.terrafirmagreg.modules.animal.objects.entities.ai;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
@@ -7,17 +7,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import java.util.List;
 
-import static mod.acgaming.easybreedingtfc.config.EBConfig.searchDistance;
-
-public class EBEntityAI extends EntityAIBase {
+public class EntityAnimalAIEasyBreeding extends EntityAIBase {
 	private final EntityAnimalBase animal;
 	private final World world;
 
-	public EBEntityAI(EntityAnimalBase animal) {
+	public EntityAnimalAIEasyBreeding(EntityAnimalBase animal) {
 		this.animal = animal;
 		this.world = animal.world;
 	}
@@ -63,6 +62,15 @@ public class EBEntityAI extends EntityAIBase {
 	}
 
 	List<EntityItem> getItems() {
-		return world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance, animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
+		return world.getEntitiesWithinAABB(
+				EntityItem.class,
+				new AxisAlignedBB(
+						animal.posX - ModuleAnimalConfig.MISC.searchDistance,
+						animal.posY - ModuleAnimalConfig.MISC.searchDistance,
+						animal.posZ - ModuleAnimalConfig.MISC.searchDistance,
+						animal.posX + ModuleAnimalConfig.MISC.searchDistance,
+						animal.posY + ModuleAnimalConfig.MISC.searchDistance,
+						animal.posZ + ModuleAnimalConfig.MISC.searchDistance
+				));
 	}
 }

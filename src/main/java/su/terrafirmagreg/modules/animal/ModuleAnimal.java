@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.animal;
 
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.api.module.ModuleBase;
@@ -10,6 +12,7 @@ import su.terrafirmagreg.modules.animal.data.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.data.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
 
 import javax.annotation.Nonnull;
 
@@ -39,8 +42,15 @@ public final class ModuleAnimal extends ModuleBase {
 		LootTablesAnimal.onRegister(registryManager);
 	}
 
+	@Override
 	public void onClientRegister() {
 		EntitiesAnimal.onClientRegister(registryManager);
+
+	}
+
+	@Override
+	public void onInit(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new EasyBreedingEventHandler());
 	}
 
 	@Nonnull

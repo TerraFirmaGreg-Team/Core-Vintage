@@ -1058,7 +1058,13 @@ public class ModuleAnimalConfig {
 	@Config.LangKey("config." + MOD_ID + ".animal.misc")
 	public static final MiscCategory MISC = new MiscCategory();
 
-	public static final class MiscCategory {}
+	public static final class MiscCategory {
+
+		@Config.Name("Search distance")
+		@Config.Comment("The distance for animals to search for food")
+		public double searchDistance = 10;
+
+	}
 
 	static {
 		ConfigAnytime.register(ModuleAnimalConfig.class);

@@ -19,10 +19,10 @@ import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 import static su.terrafirmagreg.modules.wood.api.types.type.WoodTypes.ACACIA;
 
 
-public class MissingMappingEventHandler {
+public final class MissingMappingEventHandler {
 
 	@SubscribeEvent
-	public void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
+	public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
 		for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
 			String mappingKey = mapping.key.toString();
 
@@ -114,7 +114,7 @@ public class MissingMappingEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
+	public static void onMissingBlockMapping(RegistryEvent.MissingMappings<Block> event) {
 		for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
 			String mappingKey = mapping.key.toString();
 

@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.registry.IOreDict;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
@@ -12,7 +13,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface IWoodItem extends IWoodType, IAutoReg, IItemSize, ICustomModel, IColorfulItem {
+public interface IWoodItem extends IWoodType, IAutoReg, IItemSize, ICustomModel, IColorfulItem, IOreDict {
 
 	/**
 	 * Возвращает вариант блока породы.

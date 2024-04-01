@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
@@ -40,9 +41,12 @@ public class ItemWoodBoat extends ItemBase implements IWoodItem {
 	public ItemWoodBoat(WoodItemVariant itemVariant, WoodType type) {
 		this.type = type;
 		this.itemVariant = itemVariant;
+	}
 
-//        OreDictUtils.register(this, variant.toString());
-//        OreDictUtils.register(this, variant.toString(), type.toString());
+	@Override
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, itemVariant);
+		OreDictUtils.register(this, itemVariant, type);
 	}
 
 

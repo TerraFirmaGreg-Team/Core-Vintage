@@ -1,7 +1,5 @@
 package tfcflorae.objects.items;
 
-import com.eerussianguy.firmalife.init.FruitTreeFL;
-import com.eerussianguy.firmalife.init.PlantsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import lombok.Getter;
@@ -57,7 +55,6 @@ import tfcflorae.objects.items.rock.ItemFiredMudBrick;
 import tfcflorae.objects.items.rock.ItemMud;
 import tfcflorae.objects.items.rock.ItemUnfiredMudBrick;
 import tfcflorae.objects.items.tools.*;
-import tfcflorae.types.TreesTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.CropTFCF;
 import tfcflorae.util.agriculture.FoodDataTFCF;
@@ -2195,11 +2192,6 @@ public final class ItemsTFCF {
 		OreDictionary.registerOre("poleCassiaCinnamon", cassiaPole);
 		OreDictionary.registerOre("poleWooden", cassiaPole);
 
-		ItemMisc cassiaLumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-		simpleItems.add(register(r, "wood/fruit_tree/lumber/cassia_cinnamon", cassiaLumber, CT_WOOD));
-		OreDictionary.registerOre("lumberCassiaCinnamon", cassiaLumber);
-
-		simpleItems.add(register(r, "wood/fruit_tree/boat/cassia_cinnamon", new ItemBoatTFCF(TreesTFCF.CASSIA_CINNAMON_TREE), CT_WOOD));
 
 		// Ceylon cinnamon
 		ItemMisc ceylonPole = new ItemMisc(Size.SMALL, Weight.MEDIUM);
@@ -2207,23 +2199,11 @@ public final class ItemsTFCF {
 		OreDictionary.registerOre("poleCeylonCinnamon", ceylonPole);
 		OreDictionary.registerOre("poleWooden", ceylonPole);
 
-		ItemMisc ceylonLumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-		simpleItems.add(register(r, "wood/fruit_tree/lumber/ceylon_cinnamon", ceylonLumber, CT_WOOD));
-		OreDictionary.registerOre("lumberCeylonCinnamon", ceylonLumber);
-
-		simpleItems.add(register(r, "wood/fruit_tree/boat/ceylon_cinnamon", new ItemBoatTFCF(TreesTFCF.CEYLON_CINNAMON_TREE), CT_WOOD));
-
 		for (int i = 0; i < BlocksTFCF.bamboo.length; i++) {
 			ItemMisc bambooPole = new ItemMisc(Size.SMALL, Weight.MEDIUM);
 			simpleItems.add(register(r, "wood/pole/" + BlocksTFCF.bamboo[i], bambooPole, CT_WOOD));
 			OreDictionary.registerOre(OreDictionaryHelper.toString("pole_" + BlocksTFCF.bamboo[i]), bambooPole);
 			((BlockBambooLog) BlocksTFCF.getAllBambooLog().get(i)).setDrop(bambooPole);
-
-			ItemMisc bambooLumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-			simpleItems.add(register(r, "wood/lumber/" + BlocksTFCF.bamboo[i], bambooLumber, CT_WOOD));
-			OreDictionary.registerOre(OreDictionaryHelper.toString("lumber_" + BlocksTFCF.bamboo[i]), bambooLumber);
-
-			simpleItems.add(register(r, "wood/boat/" + BlocksTFCF.bamboo[i], new ItemBoatTFCF(BlocksTFCF.bambooTrees[i]), CT_WOOD));
 		}
 
         /*for (SeasonalTrees fruitTree : SeasonalTrees.values())
@@ -2256,15 +2236,6 @@ public final class ItemsTFCF {
 						.toLowerCase() + name.substring(1)
 						.toLowerCase()), pole);
 			}
-
-			// Lumber
-			ItemMisc lumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-			simpleItems.add(register(r, "wood/fruit_tree/lumber/" + name, lumber, CT_WOOD));
-			OreDictionary.registerOre(OreDictionaryHelper.toString("lumber_" + name.substring(0, 1)
-					.toLowerCase() + name.substring(1)
-					.toLowerCase()), lumber);
-
-			simpleItems.add(register(r, "wood/fruit_tree/boat/" + name, new ItemBoatTFCF(fruitTree), CT_WOOD));
 		}
 
 		for (BlockFruitDoor blockDoor : BlocksTFCF.getAllFruitDoors()) {
@@ -2285,27 +2256,6 @@ public final class ItemsTFCF {
 		for (BlockSlabTFCF.Half slab : BlocksTFCF.getAllSlabBlocks())
 			simpleItems.add(register(r, slab.getRegistryName()
 					.getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_DECORATIONS));
-
-		if (TFCFlorae.FirmaLifeAdded) {
-			// Cinnamon
-			ItemMisc cinnamonLumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-			simpleItems.add(register(r, "wood/fruit_tree/lumber/cinnamon", cinnamonLumber, CT_WOOD));
-			OreDictionary.registerOre("lumberCinnamon", cinnamonLumber);
-
-			simpleItems.add(register(r, "wood/fruit_tree/boat/cinnamon", new ItemBoatTFCF(PlantsFL.CINNAMON_TREE), CT_WOOD));
-
-			for (FruitTreeFL fruitTree : FruitTreeFL.values()) {
-				// Lumber
-				String name = fruitTree.getName().toLowerCase();
-				ItemMisc lumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-				simpleItems.add(register(r, "wood/fruit_tree/lumber/" + name, lumber, CT_WOOD));
-				OreDictionary.registerOre(OreDictionaryHelper.toString("lumber_" + name.substring(0, 1)
-						.toLowerCase() + name.substring(1)
-						.toLowerCase()), lumber);
-
-				simpleItems.add(register(r, "wood/fruit_tree/boat/" + name, new ItemBoatTFCF(fruitTree), CT_WOOD));
-			}
-		}
 
 		allFruitDoors = fruitDoors.build();
 

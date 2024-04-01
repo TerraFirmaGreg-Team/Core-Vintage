@@ -12,7 +12,10 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.*;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Ore;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
@@ -32,9 +35,7 @@ import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
-import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
 import net.dries007.tfc.objects.items.wood.ItemDoorTFC;
-import net.dries007.tfc.objects.items.wood.ItemLumberTFC;
 import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -233,13 +234,6 @@ public final class ItemsTFC {
 		for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks())
 			simpleItems.add(register(r, slab.getRegistryName()
 					.getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
-
-		for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-			simpleItems.add(register(r, "wood/lumber/" + wood.getRegistryName()
-					.getPath(), new ItemLumberTFC(wood), CT_WOOD));
-			simpleItems.add(register(r, "wood/boat/" + wood.getRegistryName()
-					.getPath(), new ItemBoatTFC(wood), CT_WOOD));
-		}
 
 		for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
 			for (Rock.ToolType type : Rock.ToolType.values()) {

@@ -9,9 +9,7 @@ import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 import su.terrafirmagreg.Tags;
-import tfcflorae.client.ClientEvents;
 import tfcflorae.client.GuiHandler;
-import tfcflorae.objects.blocks.entity.EntitiesTFCF;
 import tfcflorae.proxy.CommonProxy;
 import tfcflorae.util.CapabilityHeatHandler;
 import tfcflorae.util.HelpersTFCF;
@@ -90,11 +88,6 @@ public class TFCFlorae {
         */
 
 		proxy.preInit(event);
-		EntitiesTFCF.preInit();
-
-		if (event.getSide().isClient()) {
-			ClientEvents.preInit();
-		}
 
 		HelpersTFCF.insertWhitelistFluids();
 	}

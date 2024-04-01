@@ -63,7 +63,6 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 				.withProperty(HORIZONTAL, EnumFacing.NORTH)
 				.withProperty(BAITED, Boolean.FALSE)
 				.withProperty(CLOSED, Boolean.FALSE));
-
 	}
 
 	@Override

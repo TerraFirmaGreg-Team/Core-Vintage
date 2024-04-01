@@ -7,33 +7,27 @@ public class WoodItemVariantHandler {
 
 	public static void init() {
 
-		WoodItemVariants.BOAT = new WoodItemVariant
-				.Builder("boat")
+		WoodItemVariants.BOAT = new WoodItemVariant.Builder("boat")
 				.setFactory(ItemWoodBoat::new)
 				.build();
 
-		WoodItemVariants.LUMBER = new WoodItemVariant
-				.Builder("lumber")
+		WoodItemVariants.LUMBER = new WoodItemVariant.Builder("lumber")
 				.setFactory(ItemWoodLumber::new)
 				.build();
 
-		WoodItemVariants.WHEEL = new WoodItemVariant
-				.Builder("wheel")
+		WoodItemVariants.WHEEL = new WoodItemVariant.Builder("wheel")
 				.setFactory(ItemWoodWheel::new)
 				.build();
 
-		WoodItemVariants.SUPPLY_CART = new WoodItemVariant
-				.Builder("supply_cart")
+		WoodItemVariants.SUPPLY_CART = new WoodItemVariant.Builder("supply_cart")
 				.setFactory(ItemWoodSupplyCart::new)
 				.build();
 
-		WoodItemVariants.ANIMAL_CART = new WoodItemVariant
-				.Builder("animal_cart")
+		WoodItemVariants.ANIMAL_CART = new WoodItemVariant.Builder("animal_cart")
 				.setFactory(ItemWoodAnimalCart::new)
 				.build();
 
-		WoodItemVariants.PLOW_CART = new WoodItemVariant
-				.Builder("plow_cart")
+		WoodItemVariants.PLOW_CART = new WoodItemVariant.Builder("plow_cart")
 				.setFactory(ItemWoodPlow::new)
 				.build();
 	}

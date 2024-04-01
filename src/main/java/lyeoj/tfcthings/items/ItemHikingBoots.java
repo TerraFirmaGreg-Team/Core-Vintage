@@ -24,28 +24,28 @@ import javax.annotation.Nonnull;
 public class ItemHikingBoots extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
 
 	private static final String STEPS_NBT_KEY = "Steps";
-	private IArmorMaterialTFC materialTFC;
+	private final IArmorMaterialTFC material;
 	private double posX;
 	private double posZ;
 
-	public ItemHikingBoots(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
-		super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
+	public ItemHikingBoots(IArmorMaterialTFC material, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+		super(material.getMaterial(), renderIndexIn, equipmentSlotIn);
 		this.setTranslationKey("hiking_boots");
 		this.setRegistryName("hiking_boots");
-		this.materialTFC = materialTFC;
+		this.material = material;
 		this.setNoRepair();
 	}
 
 	public float getCrushingModifier() {
-		return this.materialTFC.getCrushingModifier();
+		return this.material.getCrushingModifier();
 	}
 
 	public float getPiercingModifier() {
-		return this.materialTFC.getPiercingModifier();
+		return this.material.getPiercingModifier();
 	}
 
 	public float getSlashingModifier() {
-		return this.materialTFC.getSlashingModifier();
+		return this.material.getSlashingModifier();
 	}
 
 

@@ -7,6 +7,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -26,8 +28,13 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
 		setHardness(0.5F);
 		setSoundType(SoundType.WOOD);
 
-		//OreDictUtils.register(this, variant.toString());
-		//OreDictUtils.register(this, variant.toString(), type.toString());
+		BlockUtils.setFireInfo(this, 5, 20);
+	}
+
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
+		OreDictUtils.register(this, blockVariant, "wood");
+		OreDictUtils.register(this, blockVariant, type);
 	}
 
 	@Nullable

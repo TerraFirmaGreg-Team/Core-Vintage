@@ -23,6 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -44,8 +46,12 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
 		setResistance(5.0F);
 		setHarvestLevel("axe", 0);
 
-		//OreDictUtils.register(this, variant.toString());
-		//OreDictUtils.register(this, variant.toString(), type.toString());
+		BlockUtils.setFireInfo(this, 5, 20);
+	}
+
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant);
+		OreDictUtils.register(this, blockVariant, type);
 	}
 
 	@Nullable

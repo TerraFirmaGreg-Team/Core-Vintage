@@ -13,6 +13,7 @@ import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.model.ICustomStateMapper;
 import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.registry.IOreDict;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -22,7 +23,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, ICustomModel, ICustomStateMapper, IColorfulBlock {
+public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, ICustomModel, ICustomStateMapper, IColorfulBlock, IOreDict {
 
 	/**
 	 * Возвращает вариант деревянного блока.

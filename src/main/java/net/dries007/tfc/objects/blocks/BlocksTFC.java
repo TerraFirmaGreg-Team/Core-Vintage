@@ -386,27 +386,10 @@ public final class BlocksTFC {
 
 			// This loop is split up to organize the ordering of the creative tab
 			// Do not optimize these loops back together
-			// All bookshelves + item blocks
-			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
-				normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/bookshelf/" + wood.getRegistryName()
-						.getPath(), new BlockBookshelfTFC(wood), CT_DECORATIONS)));
-			// All workbenches + item blocks
-			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
-				normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/workbench/" + wood.getRegistryName()
-						.getPath(), new BlockWorkbenchTFC(wood), CT_DECORATIONS)));
 			// All fences + item blocks
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
 				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/fence/" + wood.getRegistryName()
 						.getPath(), new BlockFenceTFC(wood), CT_DECORATIONS)));
-			// All buttons + item blocks
-			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
-				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/button/" + wood.getRegistryName()
-						.getPath(), new BlockButtonWoodTFC(wood), CT_DECORATIONS)));
-			// All pressure plates + item blocks
-			for (Tree wood : TFCRegistries.TREES.getValuesCollection())
-				inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/pressure_plate/" + wood.getRegistryName()
-						.getPath()
-						.toLowerCase(), new BlockWoodPressurePlateTFC(wood), CT_DECORATIONS)));
 
 			// Other blocks that don't have specific order requirements
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {

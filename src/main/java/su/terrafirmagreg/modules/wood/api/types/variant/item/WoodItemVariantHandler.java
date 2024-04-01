@@ -28,7 +28,7 @@ public class WoodItemVariantHandler {
 				.build();
 
 		WoodItemVariants.PLOW_CART = new WoodItemVariant.Builder("plow_cart")
-				.setFactory(ItemWoodPlow::new)
+				.setFactory(ItemWoodPlowCart::new)
 				.build();
 	}
 }

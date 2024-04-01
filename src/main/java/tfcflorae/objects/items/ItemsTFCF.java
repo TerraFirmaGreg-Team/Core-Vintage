@@ -2270,8 +2270,6 @@ public final class ItemsTFCF {
 		if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay || ConfigTFCF.General.WORLD.enableAllKaoliniteClay || ConfigTFCF.General.WORLD.enableAllStonewareClay) {
 			allCeramicMoldItems = ceramicItems.build();
 		}
-
-		//OreDictionaryHelper.init();
 	}
 
 	@SuppressWarnings("ConstantConditions")

@@ -1036,14 +1036,12 @@ public final class BlocksTFCF {
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 					blockWallTFCF.add(register(r, "wall/" + rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-							.getPath()
-							.toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_DECORATIONS));
+							.getPath().toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_DECORATIONS));
 
 			// Stairs
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					blockStairsTFC.add(register(r, "stairs/" + (rockTFCF.name()
-							.toLowerCase() + "/" + rock.getRegistryName()
+					blockStairsTFC.add(register(r, "stairs/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
 							.getPath()).toLowerCase(), new BlockStairsTFCF(rock, rockTFCF), CT_DECORATIONS));
 
 			// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
@@ -1055,8 +1053,7 @@ public final class BlocksTFCF {
 			// Slabs
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					blockSlabTFCF.add(register(r, "slab/" + (rockTFCF.name()
-							.toLowerCase() + "/" + rock.getRegistryName()
+					blockSlabTFCF.add(register(r, "slab/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
 							.getPath()).toLowerCase(), new BlockSlabTFCF.Half(rock, rockTFCF), CT_DECORATIONS));
 
 			allWallBlocks = blockWallTFCF.build();

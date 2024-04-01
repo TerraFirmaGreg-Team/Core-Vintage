@@ -66,7 +66,9 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 		setHardness(0.5F);
 		setResistance(2.0F);
 		setSoundType(SoundType.STONE);
-		setDefaultState(getDefaultState().withProperty(PILE_TYPE, EnumPileType.ONE).withProperty(LEVEL, 0));
+		setDefaultState(this.getDefaultState()
+				.withProperty(PILE_TYPE, EnumPileType.ONE)
+				.withProperty(LEVEL, 0));
 
 		OreDictionaryHelper.register(this, rock);
 	}
@@ -75,7 +77,6 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 		return MAP.get(rock);
 	}
 
-	@Nonnull
 	@Override
 	public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
 		return false;
@@ -93,14 +94,14 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		if (this.getFluid() == SALT_WATER)
 			return worldIn.getBlockState(pos)
-			              .getBlock()
-			              .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
-			                                                     .isFullBlock() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
+					.getBlock()
+					.isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
+					.isFullBlock() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
 		else if (this.getFluid() == FRESH_WATER)
 			return worldIn.getBlockState(pos)
-			              .getBlock()
-			              .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
-			                                                     .isFullBlock() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
+					.getBlock()
+					.isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
+					.isFullBlock() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
 		else
 			return false;
 	}
@@ -130,7 +131,7 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		state = state.getActualState(source, pos);
-		switch ((EnumPileType) state.getValue(PILE_TYPE)) {
+		switch (state.getValue(PILE_TYPE)) {
 			default:
 			case ONE:
 			case ONE_PLANT:
@@ -268,9 +269,9 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer.Builder(this).add(LEVEL)
-		                                            .add(new IProperty[]{PILE_TYPE})
-		                                            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-		                                            .build();
+				.add(new IProperty[]{PILE_TYPE})
+				.add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+				.build();
 	}
 
 	@Override

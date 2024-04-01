@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.device.data.ItemsDevice;
 import static su.terrafirmagreg.Tags.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class MissingMappingEventHandler {
+public final class MissingMappingEventHandler {
 
 	@SubscribeEvent
 	public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {

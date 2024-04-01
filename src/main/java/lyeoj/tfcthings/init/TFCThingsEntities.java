@@ -1,9 +1,13 @@
 package lyeoj.tfcthings.init;
 
 import lyeoj.tfcthings.entity.living.EntityPigvil;
-import lyeoj.tfcthings.entity.projectile.*;
+import lyeoj.tfcthings.entity.projectile.EntityRopeBridgeThrown;
+import lyeoj.tfcthings.entity.projectile.EntityThrownHookJavelin;
+import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.main.TFCThings;
-import lyeoj.tfcthings.renderer.*;
+import lyeoj.tfcthings.renderer.RenderPigvil;
+import lyeoj.tfcthings.renderer.RenderThrownRopeBridge;
+import lyeoj.tfcthings.renderer.RenderThrownRopeJavelin;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -17,13 +21,9 @@ public class TFCThingsEntities {
 	};
 
 	public static final NonMobEntityInfo[] NON_MOB_ENTITY_INFOS = {
-			new NonMobEntityInfo("slingstone", EntitySlingStone.class, 0, 64, 1, true),
-			new NonMobEntityInfo("unknownprojectile", EntityUnknownProjectile.class, 2, 64, 1, true),
 			new NonMobEntityInfo("ropejavelinthrown", EntityThrownRopeJavelin.class, 3, 64, 2, true),
 			new NonMobEntityInfo("hookjavelinthrown", EntityThrownHookJavelin.class, 4, 64, 2, true),
-			new NonMobEntityInfo("ropebridgethrown", EntityRopeBridgeThrown.class, 5, 64, 2, true),
-			new NonMobEntityInfo("slingstonemetal", EntitySlingStoneMetal.class, 6, 64, 1, true),
-			new NonMobEntityInfo("slingstonemetallight", EntitySlingStoneMetalLight.class, 7, 64, 1, true)
+			new NonMobEntityInfo("ropebridgethrown", EntityRopeBridgeThrown.class, 5, 64, 2, true)
 	};
 
 	public static void registerEntities() {
@@ -41,13 +41,10 @@ public class TFCThingsEntities {
 
 	public static void registerEntityModels() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigvil.class, RenderPigvil::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySlingStone.class, RenderSlingStone::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityUnknownProjectile.class, RenderUnknownProjectile::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrownRopeJavelin.class, RenderThrownRopeJavelin::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrownHookJavelin.class, RenderThrownRopeJavelin::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityRopeBridgeThrown.class, RenderThrownRopeBridge::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetal.class, RenderSlingStoneMetal::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySlingStoneMetalLight.class, RenderSlingStoneMetal::new);
+
 	}
 
 	public static class MobInfo {

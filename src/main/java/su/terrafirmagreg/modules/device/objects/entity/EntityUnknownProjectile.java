@@ -1,4 +1,4 @@
-package lyeoj.tfcthings.entity.projectile;
+package su.terrafirmagreg.modules.device.objects.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;

@@ -16,7 +16,7 @@ public final class ItemsDevice {
 	public static ItemMetalFlask IRON_FLASK;
 	public static ItemDeviceMisc BROKEN_IRON_FLASK;
 	public static ItemSling SLING;
-	public static ItemReinforcedSling SLING_REINFORCED;
+	public static ItemSlingReinforced SLING_REINFORCED;
 	public static ItemSlingAmmo SLING_AMMO;
 	public static ItemSlingAmmo SLING_AMMO_SPREAD;
 	public static ItemSlingAmmo SLING_AMMO_LIGHT;
@@ -36,7 +36,7 @@ public final class ItemsDevice {
 		BROKEN_IRON_FLASK = registry.registerItem(new ItemDeviceMisc("flask/metal/broken", Size.SMALL, Weight.LIGHT));
 
 		SLING = registry.registerItem(new ItemSling());
-		SLING_REINFORCED = registry.registerItem(new ItemReinforcedSling());
+		SLING_REINFORCED = registry.registerItem(new ItemSlingReinforced());
 		SLING_AMMO = registry.registerItem(new ItemSlingAmmo(0, "heavy"));
 		SLING_AMMO_SPREAD = registry.registerItem(new ItemSlingAmmo(1, "spread"));
 		SLING_AMMO_LIGHT = registry.registerItem(new ItemSlingAmmo(2, "light"));

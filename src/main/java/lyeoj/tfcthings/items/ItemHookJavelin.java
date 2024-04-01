@@ -19,6 +19,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -38,7 +39,7 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
 		return "hook_javelin";
 	}
 
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
 		if (!playerIn.onGround) {
 			ItemStack itemstack = playerIn.getHeldItem(handIn);
 			if (isThrown(itemstack) && getCapturedEntity(itemstack, worldIn) == null) {
@@ -96,8 +97,8 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
 					blockpos = new BlockPos(d11, playerIn.posY - 1.0D, d12);
 
 					if (playerIn.world.getBlockState(blockpos)
-					                  .isSideSolid(playerIn.world, blockpos, EnumFacing.UP) || playerIn.world.getBlockState(blockpos)
-					                                                                                         .getMaterial() == Material.WATER) {
+							.isSideSolid(playerIn.world, blockpos, EnumFacing.UP) || playerIn.world.getBlockState(blockpos)
+							.getMaterial() == Material.WATER) {
 						d1 = d11;
 						d13 = playerIn.posY + 1.0D;
 						d14 = d12;
@@ -119,7 +120,7 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
 		playerIn.setPositionAndUpdate(d1, d13, d14);
 	}
 
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+	public @NotNull Multimap<String, AttributeModifier> getAttributeModifiers(@NotNull EntityEquipmentSlot slot, @NotNull ItemStack stack) {
 		Multimap<String, AttributeModifier> multimap = HashMultimap.create();
 		if (slot == EntityEquipmentSlot.MAINHAND && !isThrown(stack)) {
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage * 0.4, 0));

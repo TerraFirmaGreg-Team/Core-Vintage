@@ -1,20 +1,21 @@
-package lyeoj.tfcthings.renderer;
+package su.terrafirmagreg.modules.device.client.render;
 
-import lyeoj.tfcthings.entity.projectile.EntitySlingStone;
-import lyeoj.tfcthings.model.ModelSlingStone;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.device.client.model.ModelSlingStone;
+import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
 
 import javax.annotation.Nullable;
 
-public class RenderSlingStone extends Render<EntitySlingStone> {
+public class RenderSlingMetal extends Render<EntitySlingStone> {
 
-	private static final ResourceLocation SLING_STONE_TEXTURE = new ResourceLocation("tfcthings:textures/entity/slingstone.png");
+	private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.getID("textures/blocks/metal/base.png");
 	private final ModelSlingStone slingStoneModel = new ModelSlingStone();
 
-	public RenderSlingStone(RenderManager renderManager) {
+	public RenderSlingMetal(RenderManager renderManager) {
 		super(renderManager);
 	}
 

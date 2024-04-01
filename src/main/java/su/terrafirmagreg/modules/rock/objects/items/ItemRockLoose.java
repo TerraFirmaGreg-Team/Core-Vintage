@@ -39,6 +39,7 @@ public class ItemRockLoose extends ItemBase implements IRockItem {
 
 	@Override
 	public void onRegisterOreDict() {
+		OreDictUtils.register(this, "rock");
 		OreDictUtils.register(this, itemVariant);
 		OreDictUtils.register(this, itemVariant, getCategory());
 		OreDictUtils.register(this, itemVariant, "flux");

@@ -1,4 +1,4 @@
-package lyeoj.tfcthings.entity.projectile;
+package su.terrafirmagreg.modules.device.objects.entity;
 
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.minecraft.block.Block;
@@ -8,6 +8,7 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 
 public class EntitySlingStone extends EntityThrowable {
@@ -19,8 +20,7 @@ public class EntitySlingStone extends EntityThrowable {
 	}
 
 	public EntitySlingStone(World worldIn, EntityLivingBase throwerIn) {
-		super(worldIn, throwerIn);
-		power = 1;
+		this(worldIn, throwerIn, 1);
 	}
 
 	public EntitySlingStone(World worldIn, EntityLivingBase throwerIn, int power) {
@@ -40,13 +40,13 @@ public class EntitySlingStone extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult result) {
+	protected void onImpact(@NotNull RayTraceResult result) {
 		if (shouldHit(result)) {
 			float i = power;
 
 			if (result.entityHit instanceof IPredator || result.entityHit instanceof AbstractSkeleton) {
 				double predatorMultiplier = ConfigTFCThings.Items.SLING.predatorMultiplier;
-				i *= predatorMultiplier;
+				i *= (float) predatorMultiplier;
 			}
 			if (this.isBurning()) {
 				result.entityHit.setFire(5);

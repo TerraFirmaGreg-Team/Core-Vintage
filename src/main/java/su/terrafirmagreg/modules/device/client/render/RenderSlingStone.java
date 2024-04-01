@@ -1,20 +1,22 @@
-package lyeoj.tfcthings.renderer;
+package su.terrafirmagreg.modules.device.client.render;
 
-import lyeoj.tfcthings.entity.projectile.EntitySlingStone;
-import lyeoj.tfcthings.model.ModelSlingStone;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.device.client.model.ModelSlingStone;
+import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
 
 import javax.annotation.Nullable;
 
-public class RenderSlingStoneMetal extends Render<EntitySlingStone> {
+public class RenderSlingStone extends Render<EntitySlingStone> {
 
-	private static final ResourceLocation SLING_STONE_TEXTURE = new ResourceLocation("tfcthings:textures/blocks/steel.png");
+	private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.getID("textures/blocks/rock/raw/dacite.png");
 	private final ModelSlingStone slingStoneModel = new ModelSlingStone();
 
-	public RenderSlingStoneMetal(RenderManager renderManager) {
+	public RenderSlingStone(RenderManager renderManager) {
 		super(renderManager);
 	}
 
@@ -62,7 +64,7 @@ public class RenderSlingStoneMetal extends Render<EntitySlingStone> {
 
 	@Nullable
 	@Override
-	protected ResourceLocation getEntityTexture(EntitySlingStone entity) {
+	protected ResourceLocation getEntityTexture(@NotNull EntitySlingStone entity) {
 		return SLING_STONE_TEXTURE;
 	}
 

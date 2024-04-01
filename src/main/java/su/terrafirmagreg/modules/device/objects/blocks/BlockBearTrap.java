@@ -16,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -58,11 +57,6 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 	@Override
 	public @NotNull String getName() {
 		return "device/bear_trap";
-	}
-
-	@Override
-	public @Nullable ItemBlock getItemBlock() {
-		return new ItemBlock(this);
 	}
 
 	@Override

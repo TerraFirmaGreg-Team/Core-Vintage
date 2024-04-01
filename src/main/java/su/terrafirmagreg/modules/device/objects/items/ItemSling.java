@@ -1,16 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import lyeoj.tfcthings.entity.projectile.EntitySlingStone;
-import lyeoj.tfcthings.entity.projectile.EntitySlingStoneMetal;
-import lyeoj.tfcthings.entity.projectile.EntitySlingStoneMetalLight;
-import lyeoj.tfcthings.entity.projectile.EntityUnknownProjectile;
-import lyeoj.tfcthings.items.ItemMetalSlingAmmo;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -26,6 +20,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
+import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetal;
+import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetalLight;
+import su.terrafirmagreg.modules.device.objects.entity.EntityUnknownProjectile;
+import su.terrafirmagreg.modules.rock.objects.items.ItemRockLoose;
 
 import javax.annotation.Nonnull;
 
@@ -133,7 +132,7 @@ public class ItemSling extends ItemBase {
 
 		if (itemStack.getItem() instanceof ItemIngot) {
 			entitySlingStone = new EntityUnknownProjectile(worldIn, entityLiving, power);
-		} else if (itemStack.getItem() instanceof ItemMetalSlingAmmo ammo) {
+		} else if (itemStack.getItem() instanceof ItemSlingAmmo ammo) {
 			switch (ammo.getType()) {
 				case 0:
 					entitySlingStone = new EntitySlingStoneMetal(worldIn, entityLiving, power + 5);
@@ -180,7 +179,7 @@ public class ItemSling extends ItemBase {
 	}
 
 	protected boolean isStone(ItemStack stack) {
-		if (stack.getItem() instanceof ItemRock) {
+		if (stack.getItem() instanceof ItemRockLoose) {
 			return true;
 		} else if (stack.getItem() instanceof ItemIngot ingot) {
 			return ingot.getMetal(stack) == Metal.UNKNOWN;

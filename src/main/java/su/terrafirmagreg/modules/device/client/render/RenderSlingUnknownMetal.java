@@ -1,19 +1,21 @@
-package lyeoj.tfcthings.renderer;
+package su.terrafirmagreg.modules.device.client.render;
 
-import lyeoj.tfcthings.entity.projectile.EntityUnknownProjectile;
-import lyeoj.tfcthings.model.ModelUnknownProjectile;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.device.client.model.ModelUnknownProjectile;
+import su.terrafirmagreg.modules.device.objects.entity.EntityUnknownProjectile;
 
 import javax.annotation.Nullable;
 
-public class RenderUnknownProjectile extends Render<EntityUnknownProjectile> {
-	private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = new ResourceLocation("tfc:textures/blocks/metal/unknown.png");
+public class RenderSlingUnknownMetal extends Render<EntityUnknownProjectile> {
+	private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.getID("textures/blocks/metal/base.png");
 	private final ModelUnknownProjectile unknownModel = new ModelUnknownProjectile();
 
-	public RenderUnknownProjectile(RenderManager renderManager) {
+	public RenderSlingUnknownMetal(RenderManager renderManager) {
 		super(renderManager);
 	}
 
@@ -61,7 +63,7 @@ public class RenderUnknownProjectile extends Render<EntityUnknownProjectile> {
 
 	@Nullable
 	@Override
-	protected ResourceLocation getEntityTexture(EntityUnknownProjectile entity) {
+	protected ResourceLocation getEntityTexture(@NotNull EntityUnknownProjectile entity) {
 		return UNKNOWN_INGOT_TEXTURE;
 	}
 

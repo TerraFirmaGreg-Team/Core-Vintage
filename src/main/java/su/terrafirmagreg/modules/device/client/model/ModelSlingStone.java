@@ -1,13 +1,9 @@
-package lyeoj.tfcthings.model;
+package su.terrafirmagreg.modules.device.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-/**
- * Rock - Lyeoj
- * Created using Tabula 7.1.0
- */
 public class ModelSlingStone extends ModelBase {
 	public ModelRenderer rock2;
 	public ModelRenderer rock1;

@@ -1,11 +1,8 @@
 package tfcflorae.objects.blocks;
 
-import com.eerussianguy.firmalife.init.FruitTreeFL;
-import com.eerussianguy.firmalife.init.PlantsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
@@ -20,7 +17,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.agriculture.FruitTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -37,7 +33,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import tfcflorae.ConfigTFCF;
-import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockStairsTFCF;
@@ -838,16 +833,16 @@ public final class BlocksTFCF {
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
 				if (plant.getPlantType() == Plant.PlantType.WATER) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath(), new BlockWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
+					                                                 .getPath(), new BlockWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.WATER_SEA) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath(), new BlockWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
+					                                                 .getPath(), new BlockWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.TALL_WATER) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
+					                                                 .getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.TALL_WATER_SEA) {
 					plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
+					                                                 .getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.HANGING && (
 						plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
@@ -855,9 +850,9 @@ public final class BlocksTFCF {
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.JUNGLE_VINE))) {
 					plantHangingBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath(), new BlockHangingPlantTFCF(plant), CT_FLORA));
+					                                                   .getPath(), new BlockHangingPlantTFCF(plant), CT_FLORA));
 					plantHangingCreepingBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath() + "_creeping", new BlockHangingCreepingPlantTFCF(plant), CT_FLORA));
+					                                                           .getPath() + "_creeping", new BlockHangingCreepingPlantTFCF(plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.CREEPING && (
 						plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TACKWEED) ||
 								plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TAKAKIA) ||
@@ -866,10 +861,10 @@ public final class BlocksTFCF {
 								plant == TFCRegistries.PLANTS.getValue(DefaultPlants.MOSS) ||
 								plant == TFCRegistries.PLANTS.getValue(DefaultPlants.REINDEER_LICHEN))) {
 					plantCreepingBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath(), new BlockCreepingPlantTFCF(plant), CT_FLORA));
+					                                                    .getPath(), new BlockCreepingPlantTFCF(plant), CT_FLORA));
 				} else if (plant.getPlantType() == Plant.PlantType.TALL_GRASS/* && (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS))*/) {
 					plantTallGrassWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-							.getPath(), new BlockTallGrassWater(plant), CT_FLORA));
+					                                                          .getPath(), new BlockTallGrassWater(plant), CT_FLORA));
 				}
                 /*else if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && (
                     plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_BARLEY) || 
@@ -928,7 +923,8 @@ public final class BlocksTFCF {
 			Builder<BlockCropTFC> b = ImmutableList.builder();
 
 			for (CropTFCF crop : CropTFCF.values()) {
-				cropBlocks.add(register(r, "crop/" + crop.name().toLowerCase(), crop.createGrowingBlock()));
+				cropBlocks.add(register(r, "crop/" + crop.name()
+				                                         .toLowerCase(), crop.createGrowingBlock()));
 			}
 		}
 
@@ -936,14 +932,16 @@ public final class BlocksTFCF {
 			Builder<BlockCropDead> b = ImmutableList.builder();
 
 			for (CropTFCF crop : CropTFCF.values()) {
-				deadCrops.add(register(r, "dead_crop/" + crop.name().toLowerCase(), crop.createDeadBlock()));
+				deadCrops.add(register(r, "dead_crop/" + crop.name()
+				                                             .toLowerCase(), crop.createDeadBlock()));
 			}
 		}
 
 		Builder<BlockBerryBush> fBerry = ImmutableList.builder();
 
 		for (BerryBushTFCF bush : BerryBushTFCF.values()) {
-			fBerry.add(register(r, "berry_bush/" + bush.name().toLowerCase(), new BlockBerryBush(bush), CT_FOOD));
+			fBerry.add(register(r, "berry_bush/" + bush.name()
+			                                           .toLowerCase(), new BlockBerryBush(bush), CT_FOOD));
 		}
 
 		allBerryBushBlocks = fBerry.build();
@@ -973,20 +971,20 @@ public final class BlocksTFCF {
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
 					if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
 						blockRockVariantsTFCF.add(register(r, rockTFCF.name()
-								.toLowerCase() + "/" + rock.getRegistryName()
-								.getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
+						                                              .toLowerCase() + "/" + rock.getRegistryName()
+						                                                                         .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
 					} else {
 						if (rockTFCF == RockTFCF.MOSSY_RAW || rockTFCF == RockTFCF.MUD_BRICKS || rockTFCF == RockTFCF.MUD) {
 							blockRockVariantsTFCF.add(register(r, rockTFCF.name()
-									.toLowerCase() + "/" + rock.getRegistryName()
-									.getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
+							                                              .toLowerCase() + "/" + rock.getRegistryName()
+							                                                                         .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK_BLOCKS));
 						}
 					}
 				}
 			} else {
 				if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
 					blockRockVariantsTFCF.add(register(r, "single/" + rockTFCF.name()
-							.toLowerCase(), BlockRockVariantTFCF.create(null, rockTFCF), CT_ROCK_BLOCKS));
+					                                                          .toLowerCase(), BlockRockVariantTFCF.create(null, rockTFCF), CT_ROCK_BLOCKS));
 				}
 			}
 		}
@@ -1035,26 +1033,31 @@ public final class BlocksTFCF {
 			// Walls
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					blockWallTFCF.add(register(r, "wall/" + rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-							.getPath().toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_DECORATIONS));
+					blockWallTFCF.add(register(r, "wall/" + rockTFCF.name()
+					                                                .toLowerCase() + "/" + rock.getRegistryName()
+					                                                                           .getPath()
+					                                                                           .toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_DECORATIONS));
 
 			// Stairs
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					blockStairsTFC.add(register(r, "stairs/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-							.getPath()).toLowerCase(), new BlockStairsTFCF(rock, rockTFCF), CT_DECORATIONS));
+					blockStairsTFC.add(register(r, "stairs/" + (rockTFCF.name()
+					                                                    .toLowerCase() + "/" + rock.getRegistryName()
+					                                                                               .getPath()).toLowerCase(), new BlockStairsTFCF(rock, rockTFCF), CT_DECORATIONS));
 
 			// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					register(r, "double_slab/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-							.getPath()).toLowerCase(), new BlockSlabTFCF.Double(rock, rockTFCF));
+					register(r, "double_slab/" + (rockTFCF.name()
+					                                      .toLowerCase() + "/" + rock.getRegistryName()
+					                                                                 .getPath()).toLowerCase(), new BlockSlabTFCF.Double(rock, rockTFCF));
 
 			// Slabs
 			for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS})
 				for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-					blockSlabTFCF.add(register(r, "slab/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-							.getPath()).toLowerCase(), new BlockSlabTFCF.Half(rock, rockTFCF), CT_DECORATIONS));
+					blockSlabTFCF.add(register(r, "slab/" + (rockTFCF.name()
+					                                                 .toLowerCase() + "/" + rock.getRegistryName()
+					                                                                            .getPath()).toLowerCase(), new BlockSlabTFCF.Half(rock, rockTFCF), CT_DECORATIONS));
 
 			allWallBlocks = blockWallTFCF.build();
 			allStairBlocks = blockStairsTFC.build();
@@ -1067,145 +1070,33 @@ public final class BlocksTFCF {
 		for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW})
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				blockStairTFC.add(register(r, "stairs/" + (type.name() + "/" + rock.getRegistryName()
-						.getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
+				                                                                   .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
 
 		// TFC Double Slabs
 		// Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
 		for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW})
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				register(r, "double_slab/" + (type.name() + "/" + rock.getRegistryName()
-						.getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
+				                                                      .getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
 
 		// TFC Slabs
 		for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW})
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				blockSlabTFC.add(register(r, "slab/" + (type.name() + "/" + rock.getRegistryName()
-						.getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_DECORATIONS));
+				                                                                .getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_DECORATIONS));
 
 		for (SeasonalTrees fruitTree : SeasonalTrees.values()) {
 			if (fruitTree.isNormalTree) {
-				String name = fruitTree.getName().toLowerCase();
+				String name = fruitTree.getName()
+				                       .toLowerCase();
 				if (!fruitTree.isSpecialBlock) {
 					itemNormalTreeLeaves.add(register(r, "wood/leaves/" + name, new BlockLeavesTFCF(fruitTree.normalTree, fruitTree), CT_WOOD));
 				}
 				if (fruitTree.isCustomLog) {
 					normalTreeLog.add(register(r, "wood/log/" + name, new BlockLogTFCF(fruitTree.normalTree, fruitTree), CT_WOOD));
 				}
-//                if (fruitTree.normalTree == TreesTFCF.JOSHUA_TREE_TREE) {
-//                    Builder<BlockJoshuaTreeFlower> flowerJoshuaTree = ImmutableList.builder();
-//                    String name1 = fruitTree.getName().toLowerCase();
-//
-//                    flowerJoshuaTree.add(register(r, "wood/leaves/" + name1, new BlockJoshuaTreeFlower(fruitTree.normalTree, fruitTree), CT_WOOD));
-//
-//                    allJoshuaTreeFlowerBlocks = flowerJoshuaTree.build();
-//                    for (BlockJoshuaTreeFlower blockJoshuaTreeFlower : allJoshuaTreeFlowerBlocks) {
-//                        normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeFlower));
-//                    }
-//                }
 			}
-            /*else
-            {
-                String name = fruitTree.getName().toLowerCase();
-                register(r, "wood/fruit_tree/branch/" + name, new BlockFruitTreeBranch(fruitTree));
-                fruitLeaves.add(register(r, "wood/fruit_tree/leaves/" + name, new BlockFruitTreeLeaves(fruitTree), CT_WOOD));
-                fruitSapling.add(register(r, "wood/fruit_tree/sapling/" + name, new BlockFruitTreeSapling(fruitTree), CT_WOOD));
-                register(r, "wood/fruit_tree/trunk/" + name, new BlockFruitTreeTrunk(fruitTree));
-                //fruitBarrel.add(register(r, "wood/fruit_tree/barrel/" + name, new BlockFruitBarrelTest(), CT_DECORATIONS));
-                fruitBookshelves.add(register(r, "wood/fruit_tree/bookshelf/" + name, new BlockFruitBookshelves(), CT_DECORATIONS));
-                fruitButton.add(register(r, "wood/fruit_tree/button/" + name, new BlockFruitButton(), CT_DECORATIONS));
-                fruitDoors.add(register(r, "wood/fruit_tree/door/" + name, new BlockFruitDoor(name), CT_DECORATIONS));
-                fruitPlanks.add(register(r, "wood/fruit_tree/planks/" + name, new BlockFruitPlanks(fruitTree), CT_WOOD));
-                register(r, "wood/fruit_tree/double_slab/" + name, new BlockFruitSlab.Double(fruitTree));
-                fruitSlab.add(register(r, "wood/fruit_tree/slab/" + name, new BlockFruitSlab.Half(fruitTree), CT_DECORATIONS));
-                fruitStairs.add(register(r, "wood/fruit_tree/stairs/" + name, new BlockFruitStairs(fruitTree), CT_DECORATIONS));
-                fruitPressurePlate.add(register(r, "wood/fruit_tree/pressure_plate/" + name, new BlockFruitPressurePlate(), CT_DECORATIONS));
-                fruitFences.add(register(r, "wood/fruit_tree/fence/" +  name, new BlockFruitFence(), CT_DECORATIONS));
-                fruitFenceGates.add(register(r, "wood/fruit_tree/fence_gate/" + name, new BlockFruitFenceGate(), CT_DECORATIONS));
-                fruitLogFences.add(register(r, "wood/fruit_tree/fence_log/" + name, new BlockFruitLogFence(), CT_DECORATIONS));
-                fruitLogFenceGates.add(register(r, "wood/fruit_tree/fence_gate_log/" + name, new BlockFruitLogFenceGate(), CT_DECORATIONS));
-                fruitSupport.add(register(r, "wood/fruit_tree/support/" +  name, new BlockFruitSupport(), CT_DECORATIONS));
-                fruitToolRack.add(register(r, "wood/fruit_tree/tool_rack/" + name, new BlockFruitToolRack(), CT_DECORATIONS));
-                fruitTrapdoors.add(register(r, "wood/fruit_tree/trapdoor/" + name, new BlockFruitTrapDoor(), CT_DECORATIONS));
-                fruitWorkbench.add(register(r, "wood/fruit_tree/workbench/" + name, new BlockFruitWorkbench(), CT_DECORATIONS));
-                fruitChests.add(register(r, "wood/fruit_tree/chest/" + name, new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCBASIC, fruitTree), CT_DECORATIONS));
-                fruitChests.add(register(r, "wood/fruit_tree/chest_trap/" + name, new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCTRAP, fruitTree), CT_DECORATIONS));
-                fruitLoom.add(register(r, "wood/fruit_tree/loom/" + name, new BlockFruitLoom(fruitTree), CT_WOOD));
-            }*/
 		}
-
-		for (IFruitTree fruitTree : FruitTree.values()) {
-			String name = fruitTree.getName().toLowerCase();
-			//fruitBarrel.add(register(r, "wood/fruit_tree/barrel/" + name, new BlockFruitBarrelTest(), CT_DECORATIONS));
-			fruitBookshelves.add(register(r, "wood/fruit_tree/bookshelf/" + name, new BlockFruitBookshelves(), CT_DECORATIONS));
-			if (!TFCFlorae.FirmaLifeAdded) {
-				fruitDoors.add(register(r, "wood/fruit_tree/door/" + name, new BlockFruitDoor(name), CT_DECORATIONS));
-			}
-			fruitButton.add(register(r, "wood/fruit_tree/button/" + name, new BlockFruitButton(), CT_DECORATIONS));
-			fruitPlanks.add(register(r, "wood/fruit_tree/planks/" + name, new BlockFruitPlanks(fruitTree), CT_WOOD));
-			register(r, "wood/fruit_tree/double_slab/" + name, new BlockFruitSlab.Double(fruitTree));
-			fruitSlab.add(register(r, "wood/fruit_tree/slab/" + name, new BlockFruitSlab.Half(fruitTree), CT_DECORATIONS));
-			fruitStairs.add(register(r, "wood/fruit_tree/stairs/" + name, new BlockFruitStairs(fruitTree), CT_DECORATIONS));
-			fruitPressurePlate.add(register(r, "wood/fruit_tree/pressure_plate/" + name, new BlockFruitPressurePlate(), CT_DECORATIONS));
-			if (!TFCFlorae.FirmaLifeAdded) {
-				fruitFences.add(register(r, "wood/fruit_tree/fence/" + name, new BlockFruitFence(), CT_DECORATIONS));
-				fruitFenceGates.add(register(r, "wood/fruit_tree/fence_gate/" + name, new BlockFruitFenceGate(), CT_DECORATIONS));
-			}
-			fruitLogFences.add(register(r, "wood/fruit_tree/fence_log/" + name, new BlockFruitLogFence(), CT_DECORATIONS));
-			fruitLogFenceGates.add(register(r, "wood/fruit_tree/fence_gate_log/" + name, new BlockFruitLogFenceGate(), CT_DECORATIONS));
-			fruitSupport.add(register(r, "wood/fruit_tree/support/" + name, new BlockFruitSupport(), CT_DECORATIONS));
-			fruitToolRack.add(register(r, "wood/fruit_tree/tool_rack/" + name, new BlockFruitToolRack(), CT_DECORATIONS));
-			if (!TFCFlorae.FirmaLifeAdded) {
-				fruitTrapdoors.add(register(r, "wood/fruit_tree/trapdoor/" + name, new BlockFruitTrapDoor(), CT_DECORATIONS));
-			}
-			fruitWorkbench.add(register(r, "wood/fruit_tree/workbench/" + name, new BlockFruitWorkbench(), CT_DECORATIONS));
-			fruitChests.add(register(r, "wood/fruit_tree/chest/" + name, new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCBASIC, fruitTree), CT_DECORATIONS));
-			fruitChests.add(register(r, "wood/fruit_tree/chest_trap/" + name, new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCTRAP, fruitTree), CT_DECORATIONS));
-			fruitLoom.add(register(r, "wood/fruit_tree/loom/" + name, new BlockFruitLoom(fruitTree), CT_WOOD));
-		}
-
-		// Cassia Cinnamon
-		//fruitBarrel.add(register(r, "wood/fruit_tree/barrel/cassia_cinnamon", new BlockFruitBarrelTest(), CT_DECORATIONS));
-		fruitBookshelves.add(register(r, "wood/fruit_tree/bookshelf/cassia_cinnamon", new BlockFruitBookshelves(), CT_DECORATIONS));
-		fruitDoors.add(register(r, "wood/fruit_tree/door/cassia_cinnamon", new BlockFruitDoor("cassia_cinnamon"), CT_DECORATIONS));
-		fruitButton.add(register(r, "wood/fruit_tree/button/cassia_cinnamon", new BlockFruitButton(), CT_DECORATIONS));
-		planksTFC.add(register(r, "wood/fruit_tree/planks/cassia_cinnamon", new BlockPlanksTFC(TreesTFCF.CASSIA_CINNAMON_TREE), CT_WOOD));
-		fruitPressurePlate.add(register(r, "wood/fruit_tree/pressure_plate/cassia_cinnamon", new BlockFruitPressurePlate(), CT_DECORATIONS));
-		fruitFences.add(register(r, "wood/fruit_tree/fence/cassia_cinnamon", new BlockFruitFence(), CT_DECORATIONS));
-		fruitFenceGates.add(register(r, "wood/fruit_tree/fence_gate/cassia_cinnamon", new BlockFruitFenceGate(), CT_DECORATIONS));
-		fruitLogFences.add(register(r, "wood/fruit_tree/fence_log/cassia_cinnamon", new BlockFruitLogFence(), CT_DECORATIONS));
-		fruitLogFenceGates.add(register(r, "wood/fruit_tree/fence_gate_log/cassia_cinnamon", new BlockFruitLogFenceGate(), CT_DECORATIONS));
-		fruitSupport.add(register(r, "wood/fruit_tree/support/cassia_cinnamon", new BlockFruitSupport(), CT_DECORATIONS));
-		fruitToolRack.add(register(r, "wood/fruit_tree/tool_rack/cassia_cinnamon", new BlockFruitToolRack(), CT_DECORATIONS));
-		fruitTrapdoors.add(register(r, "wood/fruit_tree/trapdoor/cassia_cinnamon", new BlockFruitTrapDoor(), CT_DECORATIONS));
-		fruitWorkbench.add(register(r, "wood/fruit_tree/workbench/cassia_cinnamon", new BlockFruitWorkbench(), CT_DECORATIONS));
-		register(r, "wood/fruit_tree/double_slab/cassia_cinnamon", new BlockSlabTFC.Double(TreesTFCF.CASSIA_CINNAMON_TREE));
-		blockSlabTFC.add(register(r, "wood/fruit_tree/slab/cassia_cinnamon", new BlockSlabTFC.Half(TreesTFCF.CASSIA_CINNAMON_TREE), CT_DECORATIONS));
-		blockStairTFC.add(register(r, "wood/fruit_tree/stairs/cassia_cinnamon", new BlockStairsTFC(TreesTFCF.CASSIA_CINNAMON_TREE), CT_DECORATIONS));
-		fruitChests.add(register(r, "wood/fruit_tree/chest/cassia_cinnamon", new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCBASIC, TreesTFCF.CASSIA_CINNAMON_TREE), CT_DECORATIONS));
-		fruitChests.add(register(r, "wood/fruit_tree/chest_trap/cassia_cinnamon", new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCTRAP, TreesTFCF.CASSIA_CINNAMON_TREE), CT_DECORATIONS));
-		fruitLoom.add(register(r, "wood/fruit_tree/loom/cassia_cinnamon", new BlockFruitLoom(TreesTFCF.CASSIA_CINNAMON_TREE), CT_WOOD));
-
-		// Ceylon Cinnamon
-		//fruitBarrel.add(register(r, "wood/fruit_tree/barrel/ceylon_cinnamon", new BlockFruitBarrelTest(), CT_DECORATIONS));
-		fruitBookshelves.add(register(r, "wood/fruit_tree/bookshelf/ceylon_cinnamon", new BlockFruitBookshelves(), CT_DECORATIONS));
-		fruitButton.add(register(r, "wood/fruit_tree/button/ceylon_cinnamon", new BlockFruitButton(), CT_DECORATIONS));
-		fruitDoors.add(register(r, "wood/fruit_tree/door/ceylon_cinnamon", new BlockFruitDoor("ceylon_cinnamon"), CT_DECORATIONS));
-		planksTFC.add(register(r, "wood/fruit_tree/planks/ceylon_cinnamon", new BlockPlanksTFC(TreesTFCF.CEYLON_CINNAMON_TREE), CT_WOOD));
-		fruitPressurePlate.add(register(r, "wood/fruit_tree/pressure_plate/ceylon_cinnamon", new BlockFruitPressurePlate(), CT_DECORATIONS));
-		fruitFences.add(register(r, "wood/fruit_tree/fence/ceylon_cinnamon", new BlockFruitFence(), CT_DECORATIONS));
-		fruitFenceGates.add(register(r, "wood/fruit_tree/fence_gate/ceylon_cinnamon", new BlockFruitFenceGate(), CT_DECORATIONS));
-		fruitLogFences.add(register(r, "wood/fruit_tree/fence_log/ceylon_cinnamon", new BlockFruitLogFence(), CT_DECORATIONS));
-		fruitLogFenceGates.add(register(r, "wood/fruit_tree/fence_gate_log/ceylon_cinnamon", new BlockFruitLogFenceGate(), CT_DECORATIONS));
-		fruitSupport.add(register(r, "wood/fruit_tree/support/ceylon_cinnamon", new BlockFruitSupport(), CT_DECORATIONS));
-		fruitToolRack.add(register(r, "wood/fruit_tree/tool_rack/ceylon_cinnamon", new BlockFruitToolRack(), CT_DECORATIONS));
-		fruitTrapdoors.add(register(r, "wood/fruit_tree/trapdoor/ceylon_cinnamon", new BlockFruitTrapDoor(), CT_DECORATIONS));
-		fruitWorkbench.add(register(r, "wood/fruit_tree/workbench/ceylon_cinnamon", new BlockFruitWorkbench(), CT_DECORATIONS));
-		register(r, "wood/fruit_tree/double_slab/ceylon_cinnamon", new BlockSlabTFC.Double(TreesTFCF.CEYLON_CINNAMON_TREE));
-		blockSlabTFC.add(register(r, "wood/fruit_tree/slab/ceylon_cinnamon", new BlockSlabTFC.Half(TreesTFCF.CEYLON_CINNAMON_TREE), CT_DECORATIONS));
-		blockStairTFC.add(register(r, "wood/fruit_tree/stairs/ceylon_cinnamon", new BlockStairsTFC(TreesTFCF.CEYLON_CINNAMON_TREE), CT_DECORATIONS));
-		fruitChests.add(register(r, "wood/fruit_tree/chest/ceylon_cinnamon", new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCBASIC, TreesTFCF.CEYLON_CINNAMON_TREE), CT_DECORATIONS));
-		fruitChests.add(register(r, "wood/fruit_tree/chest_trap/ceylon_cinnamon", new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCTRAP, TreesTFCF.CEYLON_CINNAMON_TREE), CT_DECORATIONS));
-		fruitLoom.add(register(r, "wood/fruit_tree/loom/ceylon_cinnamon", new BlockFruitLoom(TreesTFCF.CEYLON_CINNAMON_TREE), CT_WOOD));
 
 		inventoryItemBlocks.add(register(r, "wood/fruit_tree/log/cassia_cinnamon", new BlockCassiaCinnamonLog(), CT_WOOD));
 		inventoryItemBlocks.add(register(r, "wood/fruit_tree/leaves/cassia_cinnamon", new BlockCassiaCinnamonLeaves(), CT_WOOD));
@@ -1217,27 +1108,6 @@ public final class BlocksTFCF {
 
 		// Bamboo
 		for (int i = 0; i < bamboo.length; i++) {
-			//fruitBarrel.add(register(r, "wood/barrel/" + bamboo[i], new BlockFruitBarrelTest(), CT_DECORATIONS));
-			fruitBookshelves.add(register(r, "wood/bookshelf/" + bamboo[i], new BlockFruitBookshelves(), CT_DECORATIONS));
-			fruitButton.add(register(r, "wood/button/" + bamboo[i], new BlockFruitButton(), CT_DECORATIONS));
-			fruitDoors.add(register(r, "wood/door/" + bamboo[i], new BlockFruitDoor(bamboo[i]), CT_DECORATIONS));
-			planksTFC.add(register(r, "wood/planks/" + bamboo[i], new BlockPlanksTFC(bambooTrees[i]), CT_WOOD));
-			fruitPressurePlate.add(register(r, "wood/pressure_plate/" + bamboo[i], new BlockFruitPressurePlate(), CT_DECORATIONS));
-			fruitFences.add(register(r, "wood/fence/" + bamboo[i], new BlockFruitFence(), CT_DECORATIONS));
-			fruitFenceGates.add(register(r, "wood/fence_gate/" + bamboo[i], new BlockFruitFenceGate(), CT_DECORATIONS));
-			fruitLogFences.add(register(r, "wood/fence_log/" + bamboo[i], new BlockFruitLogFence(), CT_DECORATIONS));
-			fruitLogFenceGates.add(register(r, "wood/fence_gate_log/" + bamboo[i], new BlockFruitLogFenceGate(), CT_DECORATIONS));
-			fruitSupport.add(register(r, "wood/support/" + bamboo[i], new BlockFruitSupport(), CT_DECORATIONS));
-			fruitToolRack.add(register(r, "wood/tool_rack/" + bamboo[i], new BlockFruitToolRack(), CT_DECORATIONS));
-			fruitTrapdoors.add(register(r, "wood/trapdoor/" + bamboo[i], new BlockFruitTrapDoor(), CT_DECORATIONS));
-			fruitWorkbench.add(register(r, "wood/workbench/" + bamboo[i], new BlockFruitWorkbench(), CT_DECORATIONS));
-			register(r, "wood/double_slab/" + bamboo[i], new BlockSlabTFC.Double(bambooTrees[i]));
-			blockSlabTFC.add(register(r, "wood/slab/" + bamboo[i], new BlockSlabTFC.Half(bambooTrees[i]), CT_DECORATIONS));
-			blockStairTFC.add(register(r, "wood/stairs/" + bamboo[i], new BlockStairsTFC(bambooTrees[i]), CT_DECORATIONS));
-
-			fruitChests.add(register(r, "wood/chest/" + bamboo[i], new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCBASIC, bambooTrees[i]), CT_DECORATIONS));
-			fruitChests.add(register(r, "wood/chest_trap/" + bamboo[i], new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCTRAP, bambooTrees[i]), CT_DECORATIONS));
-			fruitLoom.add(register(r, "wood/loom/" + bamboo[i], new BlockFruitLoom(bambooTrees[i]), CT_WOOD));
 
 			Block bambooBlock = register(r, "wood/log/" + bamboo[i], new BlockBambooLog(), CT_WOOD);
 			BlockBambooLeaves leaves = new BlockBambooLeaves(bambooTrees[i]);
@@ -1252,71 +1122,9 @@ public final class BlocksTFCF {
 			itemBambooSapling.add(bambooSapling);
 		}
 
-		if (TFCFlorae.FirmaLifeAdded) {
-			// Cocoa
-			for (FruitTreeFL fruitTree : FruitTreeFL.values()) {
-				String name = fruitTree.getName().toLowerCase();
-				//fruitBarrel.add(register(r, "wood/fruit_tree/barrel/" + name, new BlockFruitBarrelTest(), CT_DECORATIONS));
-				fruitBookshelves.add(register(r, "wood/fruit_tree/bookshelf/" + name, new BlockFruitBookshelves(), CT_DECORATIONS));
-				fruitButton.add(register(r, "wood/fruit_tree/button/" + name, new BlockFruitButton(), CT_DECORATIONS));
-				fruitPlanks.add(register(r, "wood/fruit_tree/planks/" + name, new BlockFruitPlanks(fruitTree), CT_WOOD));
-				register(r, "wood/fruit_tree/double_slab/" + name, new BlockFruitSlab.Double(fruitTree));
-				fruitSlab.add(register(r, "wood/fruit_tree/slab/" + name, new BlockFruitSlab.Half(fruitTree), CT_DECORATIONS));
-				fruitStairs.add(register(r, "wood/fruit_tree/stairs/" + name, new BlockFruitStairs(fruitTree), CT_DECORATIONS));
-				fruitPressurePlate.add(register(r, "wood/fruit_tree/pressure_plate/" + name, new BlockFruitPressurePlate(), CT_DECORATIONS));
-				fruitLogFences.add(register(r, "wood/fruit_tree/fence_log/" + name, new BlockFruitLogFence(), CT_DECORATIONS));
-				fruitLogFenceGates.add(register(r, "wood/fruit_tree/fence_gate_log/" + name, new BlockFruitLogFenceGate(), CT_DECORATIONS));
-				fruitSupport.add(register(r, "wood/fruit_tree/support/" + name, new BlockFruitSupport(), CT_DECORATIONS));
-				fruitToolRack.add(register(r, "wood/fruit_tree/tool_rack/" + name, new BlockFruitToolRack(), CT_DECORATIONS));
-				fruitWorkbench.add(register(r, "wood/fruit_tree/workbench/" + name, new BlockFruitWorkbench(), CT_DECORATIONS));
-				fruitChests.add(register(r, "wood/fruit_tree/chest/" + name, new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCBASIC, fruitTree), CT_DECORATIONS));
-				fruitChests.add(register(r, "wood/fruit_tree/chest_trap/" + name, new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCTRAP, fruitTree), CT_DECORATIONS));
-				fruitLoom.add(register(r, "wood/fruit_tree/loom/" + name, new BlockFruitLoom(fruitTree), CT_WOOD));
-			}
-
-			// Cinnamon
-			//fruitBarrel.add(register(r, "wood/fruit_tree/barrel/cinnamon", new BlockFruitBarrelTest(), CT_DECORATIONS));
-			fruitBookshelves.add(register(r, "wood/fruit_tree/bookshelf/cinnamon", new BlockFruitBookshelves(), CT_DECORATIONS));
-			fruitButton.add(register(r, "wood/fruit_tree/button/cinnamon", new BlockFruitButton(), CT_DECORATIONS));
-			planksTFC.add(register(r, "wood/fruit_tree/planks/cinnamon", new BlockPlanksTFC(PlantsFL.CINNAMON_TREE), CT_WOOD));
-			register(r, "wood/fruit_tree/double_slab/cinnamon", new BlockSlabTFC.Double(PlantsFL.CINNAMON_TREE));
-			blockSlabTFC.add(register(r, "wood/fruit_tree/slab/cinnamon", new BlockSlabTFC.Half(PlantsFL.CINNAMON_TREE), CT_DECORATIONS));
-			blockStairTFC.add(register(r, "wood/fruit_tree/stairs/cinnamon", new BlockStairsTFC(PlantsFL.CINNAMON_TREE), CT_DECORATIONS));
-			fruitPressurePlate.add(register(r, "wood/fruit_tree/pressure_plate/cinnamon", new BlockFruitPressurePlate(), CT_DECORATIONS));
-			fruitLogFences.add(register(r, "wood/fruit_tree/fence_log/cinnamon", new BlockFruitLogFence(), CT_DECORATIONS));
-			fruitLogFenceGates.add(register(r, "wood/fruit_tree/fence_gate_log/cinnamon", new BlockFruitLogFenceGate(), CT_DECORATIONS));
-			fruitSupport.add(register(r, "wood/fruit_tree/support/cinnamon", new BlockFruitSupport(), CT_DECORATIONS));
-			fruitToolRack.add(register(r, "wood/fruit_tree/tool_rack/cinnamon", new BlockFruitToolRack(), CT_DECORATIONS));
-			fruitWorkbench.add(register(r, "wood/fruit_tree/workbench/cinnamon", new BlockFruitWorkbench(), CT_DECORATIONS));
-			fruitChests.add(register(r, "wood/fruit_tree/chest/cinnamon", new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCBASIC, PlantsFL.CINNAMON_TREE), CT_DECORATIONS));
-			fruitChests.add(register(r, "wood/fruit_tree/chest_trap/cinnamon", new BlockFruitChestTFCF(BlockFruitChestTFCF.TFCTRAP, PlantsFL.CINNAMON_TREE), CT_DECORATIONS));
-			fruitLoom.add(register(r, "wood/fruit_tree/loom/cinnamon", new BlockFruitLoom(PlantsFL.CINNAMON_TREE), CT_WOOD));
-		}
 
 		//multiBlock.add(register(r, "multiblock/campfire", new BlockCampfire(Material.ROCK), CT_MISC));
 		//multiBlock.add(register(r, "multiblock/dummyHalf", new BlockDummyHalf(), CT_MISC));
-
-		for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-			fenceGatesLog.add(register(r, "wood/fence_gate_log/" + wood.getRegistryName()
-					.getPath(), new BlockFenceGateLog(wood), CT_DECORATIONS));
-
-//            if (wood == TFCRegistries.TREES.getValue(TreesTFCF.JOSHUA_TREE)) {
-//                Builder<BlockJoshuaTreeLog> logJoshuaTree = ImmutableList.builder();
-//                Builder<BlockJoshuaTreeSapling> saplingJoshuaTree = ImmutableList.builder();
-//
-//                logJoshuaTree.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockJoshuaTreeLog(wood), CT_WOOD));
-//                saplingJoshuaTree.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockJoshuaTreeSapling(wood), CT_WOOD));
-//
-//                allJoshuaTreeLogBlocks = logJoshuaTree.build();
-//                for (BlockJoshuaTreeLog blockJoshuaTreeLog : allJoshuaTreeLogBlocks) {
-//                    normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeLog));
-//                }
-//                allJoshuaTreeSaplingBlocks = saplingJoshuaTree.build();
-//                for (BlockJoshuaTreeSapling blockJoshuaTreeSapling : allJoshuaTreeSaplingBlocks) {
-//                    normalItemBlocks.add(new ItemBlockTFC(blockJoshuaTreeSapling));
-//                }
-//            }
-		}
 
 		{
 			fluids.add(
@@ -1326,35 +1134,35 @@ public final class BlocksTFCF {
 			);
 			for (FluidWrapper wrapper : FluidsTFCF.getAllFermentedAlcoholsFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllAlcoholsFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllBeerFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllTeaFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllCoffeeFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllJuiceBerryFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllJuiceFruitFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			for (FluidWrapper wrapper : FluidsTFCF.getAllMiscFluids()) {
 				fluids.add(register(r, "fluid/" + wrapper.get()
-						.getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
+				                                         .getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));
 			}
 			allFluidBlocks = fluids.build();
 		}

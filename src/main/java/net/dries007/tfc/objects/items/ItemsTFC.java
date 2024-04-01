@@ -18,9 +18,7 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.items.ceramics.*;
 import net.dries007.tfc.objects.items.food.ItemDynamicBowlFood;
@@ -35,7 +33,6 @@ import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
-import net.dries007.tfc.objects.items.wood.ItemDoorTFC;
 import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -183,12 +180,12 @@ public final class ItemsTFC {
 		{
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				simpleItems.add(register(r, "rock/" + rock.getRegistryName()
-						.getPath()
-						.toLowerCase(), new ItemRock(rock), CT_ROCK_ITEMS));
+				                                          .getPath()
+				                                          .toLowerCase(), new ItemRock(rock), CT_ROCK_ITEMS));
 			for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
 				simpleItems.add(register(r, "brick/" + rock.getRegistryName()
-						.getPath()
-						.toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
+				                                           .getPath()
+				                                           .toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
 		}
 
 		{
@@ -197,7 +194,7 @@ public final class ItemsTFC {
 				b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK_ITEMS));
 				if (ore.isGraded()) {
 					simpleItems.add(register(r, "ore/small/" + ore.getRegistryName()
-							.getPath(), new ItemSmallOre(ore), CT_ROCK_ITEMS));
+					                                              .getPath(), new ItemSmallOre(ore), CT_ROCK_ITEMS));
 				}
 			}
 			allOreItems = b.build();
@@ -216,7 +213,7 @@ public final class ItemsTFC {
 				if (type != Metal.ItemType.BUCKET && type.hasType(metal)) // buckets registered separately
 				{
 					simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName()
-							.getPath(), Metal.ItemType.create(metal, type), CT_METAL));
+					                                                                              .getPath(), Metal.ItemType.create(metal, type), CT_METAL));
 				}
 			}
 		}
@@ -228,19 +225,12 @@ public final class ItemsTFC {
 		for (BlockLogTFC log : BlocksTFC.getAllLogBlocks())
 			simpleItems.add(register(r, log.getRegistryName().getPath(), new ItemBlockTFC(log), CT_WOOD));
 
-		for (BlockDoorTFC door : BlocksTFC.getAllDoorBlocks())
-			simpleItems.add(register(r, door.getRegistryName().getPath(), new ItemDoorTFC(door), CT_DECORATIONS));
-
-		for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks())
-			simpleItems.add(register(r, slab.getRegistryName()
-					.getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
-
 		for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
 			for (Rock.ToolType type : Rock.ToolType.values()) {
 				simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName()
-						.getPath(), type.create(cat), CT_ROCK_ITEMS));
+				                                                                            .getPath(), type.create(cat), CT_ROCK_ITEMS));
 				simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-						.getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
+				                                                                                 .getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
 			}
 		}
 
@@ -254,7 +244,7 @@ public final class ItemsTFC {
 					ItemPottery item = new ItemMold(type);
 					register(r, "ceramics/fired/mold/" + type.name().toLowerCase(), item, CT_POTTERY);
 					simpleItems.add(register(r, "ceramics/unfired/mold/" + type.name()
-							.toLowerCase(), new ItemUnfiredMold(type), CT_POTTERY));
+					                                                           .toLowerCase(), new ItemUnfiredMold(type), CT_POTTERY));
 				}
 			}
 
@@ -352,11 +342,11 @@ public final class ItemsTFC {
 	public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
 		// Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
 		TerraFirmaCraft.getLog()
-				.info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+		               .info("The below warnings about unintended overrides are normal. The override is intended. ;)");
 		event.getRegistry().registerAll(
 				new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
 				new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName())
-						.setTranslationKey("glassBottle")
+				                        .setTranslationKey("glassBottle")
 		);
 
 		if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {

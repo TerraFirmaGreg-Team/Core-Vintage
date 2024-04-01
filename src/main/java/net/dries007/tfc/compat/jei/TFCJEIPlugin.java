@@ -179,7 +179,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		                                                                    .collect(Collectors.toList());
 
 		registry.addRecipes(clayknapRecipes, KNAP_CLAY_UID);
-		for (ItemStack stack : OreDictionary.getOres("clay")) {
+		for (ItemStack stack : OreDictionary.getOres("ingotClay")) {
 			registry.addRecipeCatalyst(stack, KNAP_CLAY_UID);
 		}
 

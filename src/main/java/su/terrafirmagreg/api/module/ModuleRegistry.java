@@ -10,7 +10,7 @@ public class ModuleRegistry {
 
 	private final List<ModuleBase> moduleList;
 	private final ModuleConstructor moduleConstructor;
-	private List<Class<? extends ModuleBase>> moduleClassList;
+	private final List<Class<? extends ModuleBase>> moduleClassList;
 
 	ModuleRegistry(List<ModuleBase> moduleList, ModuleConstructor moduleConstructor) {
 

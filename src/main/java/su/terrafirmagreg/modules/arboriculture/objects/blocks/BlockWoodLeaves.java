@@ -71,9 +71,9 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 
 		setTickRandomly(true);
 		setDefaultState(blockState.getBaseState()
-				.withProperty(LEAF_STATE, NORMAL)
-				.withProperty(HARVESTABLE, false)
-				.withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+		                          .withProperty(LEAF_STATE, NORMAL)
+		                          .withProperty(HARVESTABLE, false)
+		                          .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
 
 
 		BlockUtils.setFireInfo(this, 30, 60);
@@ -93,15 +93,15 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(HARVESTABLE, meta > 3)
-				.withProperty(LEAF_STATE, valueOf(meta & 0b11))
-				.withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+		           .withProperty(HARVESTABLE, meta > 3)
+		           .withProperty(LEAF_STATE, valueOf(meta & 0b11))
+		           .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(LEAF_STATE)
-				.ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
+		            .ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
 	}
 
 	@SuppressWarnings("deprecation")

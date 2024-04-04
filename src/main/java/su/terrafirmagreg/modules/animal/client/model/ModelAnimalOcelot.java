@@ -8,9 +8,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-
-import javax.annotation.Nonnull;
 
 public class ModelAnimalOcelot extends ModelBase {
 	private final ModelRenderer ocelotBackLeftLeg;
@@ -59,7 +58,7 @@ public class ModelAnimalOcelot extends ModelBase {
 	}
 
 	@Override
-	public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
 		if (((EntityAnimal) entity).isChild()) {

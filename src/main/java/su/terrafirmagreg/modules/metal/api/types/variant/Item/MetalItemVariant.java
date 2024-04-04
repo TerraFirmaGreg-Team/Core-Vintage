@@ -7,7 +7,6 @@ import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.data.ItemsMetal;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -17,7 +16,7 @@ import java.util.function.BiFunction;
 public class MetalItemVariant implements Comparable<MetalItemVariant> {
 	private static final Set<MetalItemVariant> METAL_ITEM_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
-	@Nonnull
+	@NotNull
 	private final String name;
 
 

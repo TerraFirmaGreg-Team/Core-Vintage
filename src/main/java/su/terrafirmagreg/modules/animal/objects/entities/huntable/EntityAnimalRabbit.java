@@ -29,6 +29,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
@@ -37,13 +38,11 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 16;
 	private static final DataParameter<Integer> RABBIT_TYPE = EntityDataManager.createKey(EntityAnimalRabbit.class, DataSerializers.VARINT);
@@ -196,17 +195,17 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 		}
 	}
 
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("RabbitType", this.getRabbitType());
 	}
 
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		this.setRabbitType(compound.getInteger("RabbitType"));
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public SoundCategory getSoundCategory() {
 		return SoundCategory.NEUTRAL;

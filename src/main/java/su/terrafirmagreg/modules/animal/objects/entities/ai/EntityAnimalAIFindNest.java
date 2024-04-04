@@ -56,7 +56,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		this.theCreature.getNavigator()
-				.tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1, this.nestPos.getZ() + 0.5D, this.speed);
+		                .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1, this.nestPos.getZ() + 0.5D, this.speed);
 		this.currentTick = 0;
 		this.end = false;
 		this.maxSittingTicks = this.theCreature.getRNG().nextInt(200) + 100;
@@ -68,7 +68,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 		if (nestPos == null) return;
 		if (this.theCreature.getDistanceSq(nestPos) > 1.25D) {
 			this.theCreature.getNavigator()
-					.tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D, this.speed);
+			                .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D, this.speed);
 			if (this.currentTick > 200) {
 				//We never reached it in 10 secs, lets give up on this nest box
 				failureDepressionMap.put(nestPos, theWorld.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
@@ -102,8 +102,8 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 		int i = (int) this.theCreature.posY;
 		double d0 = Double.MAX_VALUE;
 		for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(theCreature.getPosition()
-				.add(-16, 0, -16), theCreature.getPosition()
-				.add(16, 4, 16))) {
+		                                                                           .add(-16, 0, -16), theCreature.getPosition()
+		                                                                                                         .add(16, 4, 16))) {
 			if (this.isNestBlock(this.theWorld, pos) && this.theWorld.isAirBlock(pos.up())) {
 				double d1 = this.theCreature.getDistanceSq(pos);
 

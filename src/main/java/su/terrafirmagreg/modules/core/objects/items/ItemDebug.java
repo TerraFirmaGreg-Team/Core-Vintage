@@ -24,15 +24,13 @@ import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.NBTUtils;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Objects;
 
 import static net.minecraft.util.text.TextFormatting.GOLD;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemDebug extends ItemBase {
 
 	public ItemDebug() {
@@ -70,7 +68,7 @@ public class ItemDebug extends ItemBase {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (world.isRemote) return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 		ItemStack stack = player.getHeldItemMainhand();
@@ -106,13 +104,13 @@ public class ItemDebug extends ItemBase {
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		if (world.isRemote) return ActionResult.newResult(EnumActionResult.FAIL, player.getHeldItem(hand));
 		if (player.isSneaking() && world.getBlockState(Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()).getBlock()
-				.isAir(world.getBlockState(
-								Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()), world,
-						Objects.requireNonNull(player.rayTrace(5, 1)).getBlockPos())) changeMode(player);
+		                                .isAir(world.getBlockState(
+						                                Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()), world,
+				                                Objects.requireNonNull(player.rayTrace(5, 1)).getBlockPos())) changeMode(player);
 		return super.onItemRightClick(world, player, hand);
 	}
 

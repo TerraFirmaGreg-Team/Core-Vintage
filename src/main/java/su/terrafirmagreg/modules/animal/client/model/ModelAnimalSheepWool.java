@@ -8,10 +8,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalSheepWool extends ModelQuadruped {
 	public ModelAnimalSheepWool() {
 		super(12, 0.0F);

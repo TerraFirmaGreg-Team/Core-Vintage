@@ -9,12 +9,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class TEMetalSheet extends TEBase {
 	private final boolean[] faces;
 
@@ -69,7 +67,7 @@ public class TEMetalSheet extends TEBase {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		for (EnumFacing face : EnumFacing.values()) {
 			nbt.setBoolean(face.getName(), faces[face.getIndex()]);

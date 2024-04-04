@@ -85,12 +85,12 @@ public final class MetalCapability {
 			if (oreDict.startsWith(oreName)) {
 				//noinspection ConstantConditions
 				return TFCRegistries.METALS.getValuesCollection().stream()
-						.filter(metal -> oreDict.equals(OreDictionaryHelper.toString(oreName, metal.getRegistryName().getPath())))
-						.findFirst()
-						.map(metal -> {
-							Metal.ItemType type = ORE_DICT_METAL_ITEMS.get(oreName);
-							return new MetalProvider(metal, type.getSmeltAmount(), true);
-						}).orElse(null);
+				                           .filter(metal -> oreDict.equals(OreDictionaryHelper.toString(oreName, metal.getRegistryName().getPath())))
+				                           .findFirst()
+				                           .map(metal -> {
+					                           Metal.ItemType type = ORE_DICT_METAL_ITEMS.get(oreName);
+					                           return new MetalProvider(metal, type.getSmeltAmount(), true);
+				                           }).orElse(null);
 			}
 		}
 		return null;

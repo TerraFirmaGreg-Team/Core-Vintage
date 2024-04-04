@@ -3,9 +3,8 @@ package su.terrafirmagreg.modules.core.objects.potion;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.effects.PotionBase;
-
-import javax.annotation.Nonnull;
 
 public class PotionThirst extends PotionBase {
 	public PotionThirst() {
@@ -14,7 +13,7 @@ public class PotionThirst extends PotionBase {
 	}
 
 	@Override
-	public void performEffect(@Nonnull EntityLivingBase entity, int amplifier) {
+	public void performEffect(@NotNull EntityLivingBase entity, int amplifier) {
 		EntityPlayerMP player = null;
 		IFoodStatsTFC foodStatsTFC = null;
 		if (entity instanceof EntityPlayerMP entityPlayerMP) {

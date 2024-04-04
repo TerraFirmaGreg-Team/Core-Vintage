@@ -8,7 +8,6 @@ import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.data.BlocksMetal;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -63,7 +62,7 @@ public class MetalBlockVariant implements Comparable<MetalBlockVariant> {
 	 *
 	 * @return Строковое представление варианта металлического блока.
 	 */
-	@Nonnull
+	@NotNull
 	@Override
 	public String toString() {
 		return name;

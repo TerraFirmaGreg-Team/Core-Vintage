@@ -5,9 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
 
 public class MetalProvider implements ICapabilityProvider, IMetalCapability {
 	private final Metal metal;
@@ -41,14 +40,14 @@ public class MetalProvider implements ICapabilityProvider, IMetalCapability {
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == MetalCapability.METAL_CAPABILITY;
 	}
 
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return capability == MetalCapability.METAL_CAPABILITY ? (T) this : null;
 	}
 }

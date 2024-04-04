@@ -9,13 +9,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * Generic entity used for sitting on top of blocks
  */
 @Getter
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class EntitySeatOn extends Entity {
 	private BlockPos pos;

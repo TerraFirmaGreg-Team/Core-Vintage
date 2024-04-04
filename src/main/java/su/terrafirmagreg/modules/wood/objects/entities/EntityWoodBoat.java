@@ -37,8 +37,8 @@ public class EntityWoodBoat extends EntityBoat {
 	public WoodType getWood() {
 		//noinspection ConstantConditions
 		return WoodType.getTypes().stream()
-				.filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
-				.findFirst().orElse(null);
+		               .filter(wood -> wood.toString().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
+		               .findFirst().orElse(null);
 	}
 
 	public void setWood(@Nullable WoodType woodType) {

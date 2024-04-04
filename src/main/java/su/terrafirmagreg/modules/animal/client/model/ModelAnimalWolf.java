@@ -12,14 +12,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * Need this for not insta-growing
  * This is a copy paste from vanilla, changing only the re-scale while animal is growing
  */
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalWolf extends ModelBase {
 	/**
 	 * main box for the wolf head

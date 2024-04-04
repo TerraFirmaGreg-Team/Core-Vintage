@@ -3,14 +3,13 @@ package su.terrafirmagreg.modules.metal;
 import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.metal.data.BlocksMetal;
 import su.terrafirmagreg.modules.metal.data.ItemsMetal;
-
-import javax.annotation.Nonnull;
 
 //@ModuleTFG(moduleID = "Metal", name = "TFG Module Metal")
 public final class ModuleMetal extends ModuleBase {
@@ -34,9 +33,8 @@ public final class ModuleMetal extends ModuleBase {
 		ItemsMetal.onRegister(registryManager);
 	}
 
-	@Nonnull
 	@Override
-	public Logger getLogger() {
+	public @NotNull Logger getLogger() {
 		return LOGGER;
 	}
 }

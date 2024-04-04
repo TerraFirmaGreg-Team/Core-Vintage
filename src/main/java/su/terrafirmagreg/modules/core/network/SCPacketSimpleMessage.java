@@ -44,7 +44,7 @@ public class SCPacketSimpleMessage implements IMessage, IMessageHandler<SCPacket
 	public void fromBytes(ByteBuf buf) {
 		category = MessageCategory.values()[buf.readInt()];
 		text = ITextComponent.Serializer.jsonToComponent(buf.readCharSequence(buf.readInt(), Charset.defaultCharset())
-				.toString());
+		                                                    .toString());
 	}
 
 	@Override

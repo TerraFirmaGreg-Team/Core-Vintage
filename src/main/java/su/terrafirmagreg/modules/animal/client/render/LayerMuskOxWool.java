@@ -8,11 +8,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalMuskOxWool;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class LayerMuskOxWool implements LayerRenderer<EntityAnimalMuskOx> {
 	private final RenderAnimalMuskOx muskoxRenderer;
 	private final ModelAnimalMuskOxWool muskoxModel = new ModelAnimalMuskOxWool();

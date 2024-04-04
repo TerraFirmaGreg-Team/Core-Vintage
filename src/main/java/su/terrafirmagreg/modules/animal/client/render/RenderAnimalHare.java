@@ -9,10 +9,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalHare;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalHare;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalHare extends RenderLiving<EntityAnimalHare> {
 	private static final ResourceLocation BROWN = ModUtils.getID("textures/entity/animal/huntable/hare/brown.png");
 	private static final ResourceLocation SPOTTED = ModUtils.getID("textures/entity/animal/huntable/hare/spotted.png");

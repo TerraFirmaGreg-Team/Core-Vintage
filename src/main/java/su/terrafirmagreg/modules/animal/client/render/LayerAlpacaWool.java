@@ -8,11 +8,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalAlpacaWool;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class LayerAlpacaWool implements LayerRenderer<EntityAnimalAlpaca> {
 	private final RenderAnimalAlpaca alpacaRenderer;
 	private final ModelAnimalAlpacaWool alpacaModel = new ModelAnimalAlpacaWool();

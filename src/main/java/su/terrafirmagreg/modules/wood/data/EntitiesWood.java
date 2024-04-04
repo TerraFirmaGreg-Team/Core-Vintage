@@ -19,26 +19,26 @@ public final class EntitiesWood {
 	public static void onRegister(RegistryManager registry) {
 		registry.registerEntity("boat",
 				EntityEntryBuilder.create()
-						.entity(EntityWoodBoat.class)
-						.tracker(160, 20, true)
+				                  .entity(EntityWoodBoat.class)
+				                  .tracker(160, 20, true)
 		);
 
 		registry.registerEntity("supply_cart",
 				EntityEntryBuilder.create()
-						.entity(EntityWoodSupplyCart.class)
-						.tracker(80, 3, false)
+				                  .entity(EntityWoodSupplyCart.class)
+				                  .tracker(80, 3, false)
 		);
 
 		registry.registerEntity("animal_cart",
 				EntityEntryBuilder.create()
-						.entity(EntityWoodAnimalCart.class)
-						.tracker(80, 3, false)
+				                  .entity(EntityWoodAnimalCart.class)
+				                  .tracker(80, 3, false)
 		);
 
 		registry.registerEntity("plow_cart",
 				EntityEntryBuilder.create()
-						.entity(EntityWoodPlowCart.class)
-						.tracker(80, 3, false)
+				                  .entity(EntityWoodPlowCart.class)
+				                  .tracker(80, 3, false)
 		);
 	}
 

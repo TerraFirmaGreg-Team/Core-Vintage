@@ -18,7 +18,6 @@ import net.minecraftforge.client.model.IModel;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import javax.vecmath.Matrix4f;
 import java.util.List;
 import java.util.Map;
@@ -187,7 +186,7 @@ public abstract class CachedDynamicBakedModel implements IBakedModel {
 		}
 
 		@Override
-		public @NotNull IBakedModel handleItemState(@Nonnull IBakedModel originalModel, @NotNull ItemStack stack, World world, EntityLivingBase entity) {
+		public @NotNull IBakedModel handleItemState(@NotNull IBakedModel originalModel, @NotNull ItemStack stack, World world, EntityLivingBase entity) {
 
 			if (originalModel instanceof CachedDynamicBakedModel rextexturable) {
 

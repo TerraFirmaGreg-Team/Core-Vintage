@@ -8,16 +8,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Resistances are positive, weaknesses are negative
  * Calculations are done per <a href="https://www.desmos.com/calculator/689oqycw1t">this spreadsheet</a>
  */
-@ParametersAreNonnullByDefault
+
 public enum DamageType {
 	CRUSHING,
 	PIERCING,
@@ -48,7 +46,7 @@ public enum DamageType {
 		return (float) Math.pow(Math.E, -0.01 * resistance);
 	}
 
-	@Nonnull
+	@NotNull
 	private static DamageType get(DamageSource source) {
 		// Unblockable damage types don't have a special damage source
 		if (!source.isUnblockable()) {
@@ -110,7 +108,7 @@ public enum DamageType {
 		return GENERIC;
 	}
 
-	@Nonnull
+	@NotNull
 	private static DamageType getFromItem(ItemStack stack) {
 		if (OreDictionaryHelper.doesStackMatchOre(stack, "damageTypeCrushing")) {
 			return CRUSHING;

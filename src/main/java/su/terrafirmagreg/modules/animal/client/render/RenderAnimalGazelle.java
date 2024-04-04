@@ -10,10 +10,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalGazelle;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalGazelle;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalGazelle extends RenderLiving<EntityAnimalGazelle> {
 	private static final ResourceLocation TEXTURE = ModUtils.getID("textures/entity/animal/huntable/gazelle.png");
 

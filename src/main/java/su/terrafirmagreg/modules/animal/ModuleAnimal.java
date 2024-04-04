@@ -4,6 +4,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
@@ -13,8 +14,6 @@ import su.terrafirmagreg.modules.animal.data.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
-
-import javax.annotation.Nonnull;
 
 import static su.terrafirmagreg.modules.core.ModuleCore.CORE_TAB;
 
@@ -53,9 +52,8 @@ public final class ModuleAnimal extends ModuleBase {
 		MinecraftForge.EVENT_BUS.register(new EasyBreedingEventHandler());
 	}
 
-	@Nonnull
 	@Override
-	public Logger getLogger() {
+	public @NotNull Logger getLogger() {
 		return LOGGER;
 	}
 }

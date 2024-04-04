@@ -9,10 +9,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalPheasant;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalPheasant extends ModelBase {
 	private final ModelRenderer body;
 	private final ModelRenderer tail;

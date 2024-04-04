@@ -28,12 +28,11 @@ import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalGazelle extends EntityAnimalMammal implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 128;
 

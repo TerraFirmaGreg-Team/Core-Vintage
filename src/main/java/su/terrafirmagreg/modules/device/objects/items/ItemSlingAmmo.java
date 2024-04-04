@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 
-import javax.annotation.Nonnull;
-
 public class ItemSlingAmmo extends ItemBase {
 
 	@Getter
@@ -21,15 +19,13 @@ public class ItemSlingAmmo extends ItemBase {
 	}
 
 
-	@Nonnull
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.LIGHT;
 	}
 

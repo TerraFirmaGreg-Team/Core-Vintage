@@ -23,6 +23,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
@@ -37,7 +38,6 @@ import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAITamabl
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
@@ -94,7 +94,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 	 */
 	public static <T extends EntityAnimal & IAnimal> void findFemaleMate(T maleAnimal) {
 		List<EntityAnimal> list = maleAnimal.world.getEntitiesWithinAABB(maleAnimal.getClass(), maleAnimal.getEntityBoundingBox()
-				.grow(8.0D));
+		                                                                                                  .grow(8.0D));
 		for (EntityAnimal femaleAnimal : list) {
 			IAnimal female = (IAnimal) femaleAnimal;
 			if (female.getGender() == Gender.FEMALE && !femaleAnimal.isInLove() && female.isReadyToMate()) {
@@ -204,7 +204,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 
 	@Nullable
 	@Override
-	public EntityAgeable createChild(@Nonnull EntityAgeable other) {
+	public EntityAgeable createChild(@NotNull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
 		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);
@@ -261,7 +261,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 		}
 	} //disable fall damage for oviparous only, like vanilla
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {
@@ -312,7 +312,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -325,7 +325,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -347,7 +347,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 
 		if (!itemstack.isEmpty()) {
@@ -386,7 +386,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
 	 * @param stack the food stack to eat
 	 * @return true if eaten, false otherwise
 	 */
-	protected boolean eatFood(@Nonnull ItemStack stack, EntityPlayer player) {
+	protected boolean eatFood(@NotNull ItemStack stack, EntityPlayer player) {
 		if (!this.world.isRemote) {
 			lastFed = CalendarTFC.PLAYER_TIME.getTotalDays();
 			lastFDecay = lastFed; //No decay needed

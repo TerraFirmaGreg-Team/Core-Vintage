@@ -72,7 +72,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 						boolean canCreateSources = false; //default
 						if (state.getBlock() instanceof BlockFluidClassic) {
 							BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(fluidPos)
-									.getBlock();
+							                                                          .getBlock();
 							canCreateSources = ObfuscationReflectionHelper.getPrivateValue(BlockFluidClassic.class, fluidblock, "canCreateSources");
 						} else if (state.getBlock() instanceof BlockLiquid) {
 							//Fire the event so other mods that prevent infinite water disable this
@@ -108,7 +108,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 			ItemStackHandler stackHandler = new ItemStackHandler(3);
 			//noinspection ConstantConditions
 			stackHandler.deserializeNBT(((ItemBarrelFluidHandler) barrelCap).getBarrelContents()
-					.getCompoundTag("inventory"));
+			                                                                .getCompoundTag("inventory"));
 			ItemStack inventory = stackHandler.getStackInSlot(TEWoodBarrel.SLOT_ITEM);
 
 			if (fluidStack == null || fluidStack.amount == 0) {
@@ -130,7 +130,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 			}
 
 			String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound()
-					.getLong("sealedCalendarTick"), CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+			                                                              .getLong("sealedCalendarTick"), CalendarTFC.CALENDAR_TIME.getDaysInMonth());
 			tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("top.tfc.barrel.sealed", formattedDate).getFormattedText());
 		}
 	}

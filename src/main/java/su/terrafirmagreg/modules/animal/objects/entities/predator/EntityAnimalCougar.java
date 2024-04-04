@@ -24,9 +24,7 @@ import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator {
 	private static final int DAYS_TO_ADULTHOOD = 160;
 

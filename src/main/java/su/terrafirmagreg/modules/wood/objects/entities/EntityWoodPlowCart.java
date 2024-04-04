@@ -190,7 +190,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory implements IInve
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						world.setBlockState(pos, FARMLAND.get(soil.getType())
-								.getDefaultState());
+						                                 .getDefaultState());
 						damageAndUpdateOnBreak(pos, slot, itemstack, player);
 
 					}
@@ -200,7 +200,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory implements IInve
 						if (!world.isRemote) {
 							world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 							this.world.setBlockState(pos, GRASS_PATH.get(soil.getType())
-									.getDefaultState());
+							                                        .getDefaultState());
 							this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
 						}
 					}
@@ -209,7 +209,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory implements IInve
 					if (!world.isRemote) {
 						world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						this.world.setBlockState(pos, GRASS_PATH.get(soil.getType())
-								.getDefaultState());
+						                                        .getDefaultState());
 						this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
 					}
 				}

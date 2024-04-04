@@ -93,21 +93,21 @@ public class TESRWoodBarrel extends TileEntitySpecialRenderer<TEWoodBarrel> {
 			double height = 0.140625D + (0.75D - 0.015625D) * content.amount / properties.getCapacity();
 
 			buffer.pos(0.1875D, height, 0.1875D)
-					.tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
-					.normal(0, 0, 1)
-					.endVertex();
+			      .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
+			      .normal(0, 0, 1)
+			      .endVertex();
 			buffer.pos(0.1875D, height, 0.8125D)
-					.tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
-					.normal(0, 0, 1)
-					.endVertex();
+			      .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
+			      .normal(0, 0, 1)
+			      .endVertex();
 			buffer.pos(0.8125D, height, 0.8125D)
-					.tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
-					.normal(0, 0, 1)
-					.endVertex();
+			      .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
+			      .normal(0, 0, 1)
+			      .endVertex();
 			buffer.pos(0.8125D, height, 0.1875D)
-					.tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
-					.normal(0, 0, 1)
-					.endVertex();
+			      .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
+			      .normal(0, 0, 1)
+			      .endVertex();
 
 			Tessellator.getInstance().draw();
 		}

@@ -10,10 +10,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalDeer;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalDeer;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalDeer extends RenderLiving<EntityAnimalDeer> {
 	private static final ResourceLocation DEER_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/deer.png");
 

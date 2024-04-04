@@ -35,10 +35,10 @@ public class BlockSoilPeatGrass extends BlockBase implements IColorfulBlock {
 		setSoundType(SoundType.PLANT);
 		setTickRandomly(true);
 		setDefaultState(this.getDefaultState()
-				.withProperty(NORTH, Boolean.FALSE)
-				.withProperty(EAST, Boolean.FALSE)
-				.withProperty(SOUTH, Boolean.FALSE)
-				.withProperty(WEST, Boolean.FALSE));
+		                    .withProperty(NORTH, Boolean.FALSE)
+		                    .withProperty(EAST, Boolean.FALSE)
+		                    .withProperty(SOUTH, Boolean.FALSE)
+		                    .withProperty(WEST, Boolean.FALSE));
 
 		BlockUtils.setFireInfo(this, 5, 5);
 	}
@@ -65,9 +65,9 @@ public class BlockSoilPeatGrass extends BlockBase implements IColorfulBlock {
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
 		pos = pos.add(0, -1, 0);
 		return state.withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-				.withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-				.withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-				.withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+		            .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+		            .withProperty(SOUTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+		            .withProperty(WEST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
 	}
 
 	@Override

@@ -38,7 +38,6 @@ import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
 import su.terrafirmagreg.modules.device.data.SoundDevice;
 
-import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
@@ -70,28 +69,26 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSize,
 		return getStackSize(stack);
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.MEDIUM;
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {return false;}
+	public boolean canStack(@NotNull ItemStack stack) {return false;}
 
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new FluidWhitelistHandlerComplex(stack, capacity, FluidsTFC.getAllWrappers()
-				.stream()
-				.filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
-				.map(FluidWrapper::get)
-				.collect(Collectors.toSet()));
+		                                                                  .stream()
+		                                                                  .filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
+		                                                                  .map(FluidWrapper::get)
+		                                                                  .collect(Collectors.toSet()));
 	}
 
 	@Override
@@ -195,8 +192,8 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSize,
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @NotNull World worldIn, @NotNull EntityLivingBase entityLiving) {
+	@NotNull
+	public ItemStack onItemUseFinish(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull EntityLivingBase entityLiving) {
 		IFluidHandler flaskCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (flaskCap != null) {
 			FluidStack total = flaskCap.drain(capacity, false);
@@ -204,7 +201,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSize,
 				FluidStack fluidConsumed = flaskCap.drain(drink, true);
 				if (fluidConsumed != null) {
 					DrinkableProperty drinkable = FluidsTFC.getWrapper(fluidConsumed.getFluid())
-							.get(DrinkableProperty.DRINKABLE);
+					                                       .get(DrinkableProperty.DRINKABLE);
 					if (drinkable != null) {
 						drinkable.onDrink((EntityPlayer) entityLiving);
 						if (stack.getItemDamage() == stack.getMaxDamage()) {
@@ -229,8 +226,8 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSize,
 	}
 
 	@Override
-	@Nonnull
-	public EnumAction getItemUseAction(@Nonnull ItemStack stack) {
+	@NotNull
+	public EnumAction getItemUseAction(@NotNull ItemStack stack) {
 		return EnumAction.DRINK;
 	}
 
@@ -240,8 +237,8 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSize,
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (bucketCap != null) {
 			FluidStack fluidStack = bucketCap.drain(capacity, false);

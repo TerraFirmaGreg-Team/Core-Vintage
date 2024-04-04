@@ -58,7 +58,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBloc
 		setHardness(0.5f);
 		setResistance(3f);
 		setDefaultState(this.blockState.getBaseState()
-				.withProperty(BlockHorizontal.FACING, EnumFacing.NORTH));
+		                               .withProperty(BlockHorizontal.FACING, EnumFacing.NORTH));
 
 		//OreDictUtils.register(this, variant.toString(), type.toString());
 	}

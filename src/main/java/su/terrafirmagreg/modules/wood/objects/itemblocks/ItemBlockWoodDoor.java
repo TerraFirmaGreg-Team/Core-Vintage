@@ -35,13 +35,13 @@ public class ItemBlockWoodDoor extends ItemBlock implements IItemSize {
 		BlockPos blockpos = pos.offset(facing.rotateY());
 		BlockPos blockpos1 = pos.offset(facing.rotateYCCW());
 		int i = (worldIn.getBlockState(blockpos1).isNormalCube() ? 1 : 0) + (worldIn.getBlockState(blockpos1.up())
-				.isNormalCube() ? 1 : 0);
+		                                                                            .isNormalCube() ? 1 : 0);
 		int j = (worldIn.getBlockState(blockpos).isNormalCube() ? 1 : 0) + (worldIn.getBlockState(blockpos.up())
-				.isNormalCube() ? 1 : 0);
+		                                                                           .isNormalCube() ? 1 : 0);
 		boolean flag = worldIn.getBlockState(blockpos1).getBlock() == door || worldIn.getBlockState(blockpos1.up())
-				.getBlock() == door;
+		                                                                             .getBlock() == door;
 		boolean flag1 = worldIn.getBlockState(blockpos).getBlock() == door || worldIn.getBlockState(blockpos.up())
-				.getBlock() == door;
+		                                                                             .getBlock() == door;
 
 		if ((!flag || flag1) && j <= i) {
 			if (flag1 && !flag || j < i) {
@@ -54,10 +54,10 @@ public class ItemBlockWoodDoor extends ItemBlock implements IItemSize {
 		BlockPos blockpos2 = pos.up();
 		boolean flag2 = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(blockpos2);
 		IBlockState iblockstate = door.getDefaultState()
-				.withProperty(BlockDoor.FACING, facing)
-				.withProperty(BlockDoor.HINGE, isRightHinge ? BlockDoor.EnumHingePosition.RIGHT : BlockDoor.EnumHingePosition.LEFT)
-				.withProperty(BlockDoor.POWERED, Boolean.valueOf(flag2))
-				.withProperty(BlockDoor.OPEN, Boolean.valueOf(flag2));
+		                              .withProperty(BlockDoor.FACING, facing)
+		                              .withProperty(BlockDoor.HINGE, isRightHinge ? BlockDoor.EnumHingePosition.RIGHT : BlockDoor.EnumHingePosition.LEFT)
+		                              .withProperty(BlockDoor.POWERED, Boolean.valueOf(flag2))
+		                              .withProperty(BlockDoor.OPEN, Boolean.valueOf(flag2));
 		worldIn.setBlockState(pos, iblockstate.withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER), 2);
 		worldIn.setBlockState(blockpos2, iblockstate.withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER), 2);
 		worldIn.notifyNeighborsOfStateChange(pos, door, false);
@@ -101,8 +101,8 @@ public class ItemBlockWoodDoor extends ItemBlock implements IItemSize {
 				boolean flag = i < 0 && hitZ < 0.5F || i > 0 && hitZ > 0.5F || j < 0 && hitX > 0.5F || j > 0 && hitX < 0.5F;
 				placeDoor(worldIn, pos, enumfacing, this.block, flag);
 				SoundType soundtype = worldIn.getBlockState(pos)
-						.getBlock()
-						.getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);
+				                             .getBlock()
+				                             .getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);
 				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 				itemstack.shrink(1);
 				return EnumActionResult.SUCCESS;

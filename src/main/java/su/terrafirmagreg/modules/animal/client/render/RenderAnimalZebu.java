@@ -9,10 +9,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalZebu;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalZebu extends RenderAnimal<EntityAnimalZebu> {
 	private static final ResourceLocation ZEBU_YOUNG = ModUtils.getID("textures/entity/animal/livestock/zebu_young.png");
 	private static final ResourceLocation ZEBU_OLD = ModUtils.getID("textures/entity/animal/livestock/zebu_old.png");

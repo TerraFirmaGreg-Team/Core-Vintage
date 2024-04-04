@@ -32,14 +32,11 @@ import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalSheet;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
 
-@ParametersAreNonnullByDefault
 public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{DOWN, UP, NORTH, SOUTH, WEST, EAST};
 	private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[]{
@@ -65,12 +62,12 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 		setHarvestLevel("pickaxe", 0);
 
 		setDefaultState(this.blockState.getBaseState()
-				.withProperty(FACE_PROPERTIES[0], false)
-				.withProperty(FACE_PROPERTIES[1], false)
-				.withProperty(FACE_PROPERTIES[2], false)
-				.withProperty(FACE_PROPERTIES[3], false)
-				.withProperty(FACE_PROPERTIES[4], false)
-				.withProperty(FACE_PROPERTIES[5], false));
+		                               .withProperty(FACE_PROPERTIES[0], false)
+		                               .withProperty(FACE_PROPERTIES[1], false)
+		                               .withProperty(FACE_PROPERTIES[2], false)
+		                               .withProperty(FACE_PROPERTIES[3], false)
+		                               .withProperty(FACE_PROPERTIES[4], false)
+		                               .withProperty(FACE_PROPERTIES[5], false));
 	}
 
 	@Override
@@ -102,7 +99,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
 		if (tile != null) {
@@ -132,7 +129,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		TEMetalSheet tile = Helpers.getTE(source, pos, TEMetalSheet.class);
@@ -155,7 +152,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
@@ -184,7 +181,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return getBoundingBox(state, worldIn, pos);
@@ -243,7 +240,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACE_PROPERTIES);
 	}
@@ -270,7 +267,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 		return new TEMetalSheet();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem());

@@ -9,17 +9,16 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalCamel;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCamel;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.stream.IntStream;
 
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class LayerCamelDecor implements LayerRenderer<EntityAnimalCamel> {
 	private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16)
-			.mapToObj(i -> ModUtils.getID("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i)
-					.getName() + ".png"))
-			.toArray(ResourceLocation[]::new);
+	                                                                        .mapToObj(i -> ModUtils.getID("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i)
+	                                                                                                                                                              .getName() + ".png"))
+	                                                                        .toArray(ResourceLocation[]::new);
 	private final RenderAnimalCamel renderer;
 	private final ModelAnimalCamel model = new ModelAnimalCamel(0.51F);
 

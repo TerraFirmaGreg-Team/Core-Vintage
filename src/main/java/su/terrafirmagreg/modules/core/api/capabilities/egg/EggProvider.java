@@ -7,9 +7,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
 
 public class EggProvider implements ICapabilitySerializable<NBTTagCompound>, IEggCapability {
 	private boolean fertilized;
@@ -46,21 +45,21 @@ public class EggProvider implements ICapabilitySerializable<NBTTagCompound>, IEg
 		return fertilized;
 	}
 
-	public void setFertilized(@Nonnull Entity entity, long hatchDay) {
+	public void setFertilized(@NotNull Entity entity, long hatchDay) {
 		this.fertilized = true;
 		this.entitytag = entity.serializeNBT();
 		this.hatchDay = hatchDay;
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == EggCapability.EGG_CAPABILITY;
 	}
 
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return capability == EggCapability.EGG_CAPABILITY ? (T) this : null;
 	}
 

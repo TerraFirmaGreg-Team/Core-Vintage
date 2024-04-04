@@ -4,12 +4,11 @@ package su.terrafirmagreg.modules.arboriculture;
 import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.arboriculture.data.BlocksArboriculture;
 import su.terrafirmagreg.modules.arboriculture.data.ItemsArboriculture;
-
-import javax.annotation.Nonnull;
 
 //@Module(moduleID = "Arboriculture", name = "TFG Module Arboriculture")
 public final class ModuleArboriculture extends ModuleBase {
@@ -31,9 +30,8 @@ public final class ModuleArboriculture extends ModuleBase {
 	}
 
 
-	@Nonnull
 	@Override
-	public Logger getLogger() {
+	public @NotNull Logger getLogger() {
 		return LOGGER;
 	}
 }

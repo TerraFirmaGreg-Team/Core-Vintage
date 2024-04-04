@@ -26,8 +26,6 @@ import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetalLigh
 import su.terrafirmagreg.modules.device.objects.entity.EntityUnknownProjectile;
 import su.terrafirmagreg.modules.rock.objects.items.ItemRockLoose;
 
-import javax.annotation.Nonnull;
-
 public class ItemSling extends ItemBase {
 
 	public ItemSling() {
@@ -65,15 +63,13 @@ public class ItemSling extends ItemBase {
 	}
 
 
-	@Nonnull
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.NORMAL;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 

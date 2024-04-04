@@ -10,10 +10,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalLion;
 import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalLion;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalLion extends RenderLiving<EntityAnimalLion> {
 	private static final ResourceLocation LIONS_TEXTURE = ModUtils.getID("textures/entity/animal/predators/lions.png");
 

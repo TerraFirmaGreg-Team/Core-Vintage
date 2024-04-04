@@ -74,7 +74,7 @@ public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
 			// This fires when you select a plan in the Plan GUI
 			ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
 			ModuleMetal.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString())
-					.build()));
+			                                                                                         .build()));
 		} else if (button == buttonLeft) {
 			page--;
 			updatePage();

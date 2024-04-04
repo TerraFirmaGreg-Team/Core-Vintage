@@ -37,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.model.ICustomModel;
@@ -49,7 +50,6 @@ import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 
@@ -240,7 +240,7 @@ public class RegistryManager {
 	 * @param itemBlock The ItemBlock for the block.
 	 * @param name      The name to register the block with.
 	 */
-	public <T extends Block> T registerBlock(@Nonnull T block, @Nullable ItemBlock itemBlock, @Nonnull String name) {
+	public <T extends Block> T registerBlock(@NotNull T block, @Nullable ItemBlock itemBlock, @NotNull String name) {
 
 		block.setRegistryName(this.modID, name);
 		block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -290,7 +290,7 @@ public class RegistryManager {
 	 * @param item The item to register.
 	 * @param name The name to register the item with.
 	 */
-	public <T extends Item> T registerItem(@Nonnull T item, @Nonnull String name) {
+	public <T extends Item> T registerItem(@NotNull T item, @NotNull String name) {
 
 		item.setRegistryName(this.modID, name);
 		item.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -321,13 +321,13 @@ public class RegistryManager {
 	//region // ===== Potions ======================================================================================================================//
 
 
-	public Potion registerPotion(@Nonnull String name, @Nonnull Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
+	public Potion registerPotion(@NotNull String name, @NotNull Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
 
 		potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
 		return this.registerPotion(name, potion);
 	}
 
-	public Potion registerPotion(@Nonnull String name, @Nonnull Potion potion) {
+	public Potion registerPotion(@NotNull String name, @NotNull Potion potion) {
 		potion.setRegistryName(this.modID, name);
 		potion.setPotionName(this.modID + ".effect." + name.toLowerCase().replace("_", "."));
 		this.potions.add(potion);
@@ -338,13 +338,13 @@ public class RegistryManager {
 
 	//region // ===== Potion Types =================================================================================================================//
 
-	public PotionType registerPotionType(@Nonnull String name, @Nonnull Potion potion, int duration) {
+	public PotionType registerPotionType(@NotNull String name, @NotNull Potion potion, int duration) {
 
 		var potionType = new PotionType(new PotionEffect(potion, duration));
 		return registerPotionType(name, potionType);
 	}
 
-	public PotionType registerPotionType(@Nonnull String name, @Nonnull PotionType potionType) {
+	public PotionType registerPotionType(@NotNull String name, @NotNull PotionType potionType) {
 
 		potionType.setRegistryName(this.modID, name);
 		this.potionType.add(potionType);

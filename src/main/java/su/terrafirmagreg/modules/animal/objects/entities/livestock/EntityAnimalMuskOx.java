@@ -21,9 +21,7 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAnimalMuskOx(World worldIn) {

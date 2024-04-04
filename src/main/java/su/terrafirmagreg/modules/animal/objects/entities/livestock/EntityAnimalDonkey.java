@@ -37,6 +37,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
@@ -51,15 +52,13 @@ import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivestock, IRidable {
 	//Values that has a visual effect on client
 	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
@@ -144,7 +143,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimal male) {
+	public void onFertilized(@NotNull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		// If mating with other types of horse, mark children to be mules
 		if (male.getClass() != this.getClass()) {
@@ -153,14 +152,14 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 		// Save genes
 		EntityAnimal father = (EntityAnimal) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
-				.getBaseValue() + this.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
-				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+		                                .getBaseValue() + this.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
+		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 	}
 
 	@Override
@@ -194,8 +193,8 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                        .name()
+		                                                                                        .toLowerCase());
 	}
 
 	public boolean isHalter() {
@@ -224,7 +223,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 		return this.getAge() == Age.CHILD;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {
@@ -291,7 +290,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -310,7 +309,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -329,7 +328,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 
 		if (!stack.isEmpty()) {
@@ -490,7 +489,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 
 	@Nullable
 	@Override
-	public EntityAgeable createChild(@Nonnull EntityAgeable other) {
+	public EntityAgeable createChild(@NotNull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
 		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);
@@ -513,7 +512,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
 	 */
 	private boolean findFemaleMate() {
 		List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class, this.getEntityBoundingBox()
-				.grow(8.0D));
+		                                                                                     .grow(8.0D));
 		for (AbstractHorse ent : list) {
 			if (ent instanceof EntityAnimalHorse || ent instanceof EntityAnimalDonkey) {
 				IAnimal animal = (IAnimal) ent;

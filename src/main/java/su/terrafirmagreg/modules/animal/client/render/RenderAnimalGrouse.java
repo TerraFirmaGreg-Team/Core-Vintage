@@ -13,10 +13,8 @@ import su.terrafirmagreg.modules.animal.client.model.ModelAnimalGrouse;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalGrouse extends RenderLiving<EntityAnimalGrouse> {
 	private static final ResourceLocation FEMALE_YOUNG = ModUtils.getID("textures/entity/animal/livestock/grousef_young.png");
 	private static final ResourceLocation FEMALE_OLD = ModUtils.getID("textures/entity/animal/livestock/grousef_old.png");

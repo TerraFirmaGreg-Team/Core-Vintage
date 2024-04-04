@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.metal.api.types.type;
 
 import gregtech.api.unification.material.Material;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 
 /**
@@ -13,9 +13,9 @@ public class MetalType {
 
 	private static final Set<MetalType> METAL_TYPES = new ObjectLinkedOpenHashSet<>();
 
-	@Nonnull
+	@NotNull
 	private final String name;
-	@Nonnull
+	@NotNull
 	private final Material material;
 
 	/**
@@ -23,7 +23,7 @@ public class MetalType {
 	 *
 	 * @param name Имя типа почвы.
 	 */
-	public MetalType(@Nonnull String name, @Nonnull Material material) {
+	public MetalType(@NotNull String name, @NotNull Material material) {
 		this.name = name;
 		this.material = material;
 
@@ -50,14 +50,14 @@ public class MetalType {
 	 *
 	 * @return Строковое представление типа почвы.
 	 */
-	@Nonnull
+	@NotNull
 	@Override
 	public String toString() {
 		return name;
 	}
 
 
-	@Nonnull
+	@NotNull
 	public Material getMaterial() {
 		return material;
 	}

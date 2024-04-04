@@ -6,8 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.Random;
 
@@ -108,7 +108,7 @@ public class MCColor extends Color {
 	 *
 	 * @param stack The ItemStack to construct a color from.
 	 */
-	public MCColor(@Nonnull ItemStack stack) {
+	public MCColor(@NotNull ItemStack stack) {
 
 		this(stack.getTagCompound());
 	}
@@ -142,7 +142,7 @@ public class MCColor extends Color {
 	 *
 	 * @param tag The NBTTagCompound to construct a color from.
 	 */
-	public MCColor(@Nonnull NBTTagCompound tag) {
+	public MCColor(@NotNull NBTTagCompound tag) {
 
 		this(tag.getIntArray("Color"));
 	}
@@ -153,7 +153,7 @@ public class MCColor extends Color {
 	 *
 	 * @param colors The array to construct a color from.
 	 */
-	public MCColor(@Nonnull int[] colors) {
+	public MCColor(@NotNull int[] colors) {
 
 		this(colors[0], colors[1], colors[2]);
 	}
@@ -196,7 +196,7 @@ public class MCColor extends Color {
 	 * @param rand An instance of Random.
 	 * @return A random MCColor.
 	 */
-	public static MCColor getRandomColor(@Nonnull Random rand) {
+	public static MCColor getRandomColor(@NotNull Random rand) {
 
 		return new MCColor(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
 	}
@@ -209,7 +209,7 @@ public class MCColor extends Color {
 	 * @param stack The ItemStack to check.
 	 * @return Whether or not the ItemStack was acceptable.
 	 */
-	public static boolean isAcceptable(@Nonnull ItemStack stack) {
+	public static boolean isAcceptable(@NotNull ItemStack stack) {
 
 		return !stack.isEmpty() && stack.hasTagCompound() && isAcceptable(stack.getTagCompound());
 	}
@@ -222,7 +222,7 @@ public class MCColor extends Color {
 	 * @param pos   The pos to check at.
 	 * @return Whether or not the TileEntity was acceptable.
 	 */
-	public static boolean isAcceptable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+	public static boolean isAcceptable(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
 
 		return isAcceptable(world.getTileEntity(pos));
 	}
@@ -235,7 +235,7 @@ public class MCColor extends Color {
 	 * @param tile The TileEntity to check.
 	 * @return Whether or not the TileEntity was acceptable.
 	 */
-	public static boolean isAcceptable(@Nonnull TileEntity tile) {
+	public static boolean isAcceptable(@NotNull TileEntity tile) {
 
 		return tile != null && !tile.isInvalid() && isAcceptable(tile.getTileData());
 	}
@@ -247,7 +247,7 @@ public class MCColor extends Color {
 	 * @param tag The NBTTagCompound to check.
 	 * @return Whether or not the ItemStack was acceptable.
 	 */
-	public static boolean isAcceptable(@Nonnull NBTTagCompound tag) {
+	public static boolean isAcceptable(@NotNull NBTTagCompound tag) {
 
 		return tag.hasKey("Color") && tag.getIntArray("Color").length == 3;
 	}
@@ -257,7 +257,7 @@ public class MCColor extends Color {
 	 *
 	 * @param stack The ItemStack to write the color data to.
 	 */
-	public void writeToStack(@Nonnull ItemStack stack) {
+	public void writeToStack(@NotNull ItemStack stack) {
 
 		this.writeToNBT(stack.getTagCompound());
 	}
@@ -267,7 +267,7 @@ public class MCColor extends Color {
 	 *
 	 * @param tag The NBTTagCompound to write the color data to.
 	 */
-	public void writeToNBT(@Nonnull NBTTagCompound tag) {
+	public void writeToNBT(@NotNull NBTTagCompound tag) {
 
 		tag.setIntArray("Color", new int[]{this.getRed(), this.getGreen(), this.getBlue()});
 	}

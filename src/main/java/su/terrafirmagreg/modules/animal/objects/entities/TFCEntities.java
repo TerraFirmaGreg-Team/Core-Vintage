@@ -12,8 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.util.ModUtils;
 
-import javax.annotation.Nonnull;
-
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class TFCEntities {
@@ -21,7 +19,7 @@ public class TFCEntities {
 	public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = ModUtils.getNull();
 
 	private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
-		public void write(PacketBuffer buf, @Nonnull Long value) {
+		public void write(PacketBuffer buf, @NotNull Long value) {
 			buf.writeLong(value);
 		}
 
@@ -33,8 +31,8 @@ public class TFCEntities {
 			return new DataParameter<>(id, this);
 		}
 
-		@Nonnull
-		public Long copyValue(@Nonnull Long value) {
+		@NotNull
+		public Long copyValue(@NotNull Long value) {
 			return value;
 		}
 	};

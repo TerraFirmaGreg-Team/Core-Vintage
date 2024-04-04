@@ -47,7 +47,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 		setHardness(0.5f);
 		setResistance(3f);
 		setDefaultState(this.blockState.getBaseState()
-				.withProperty(FACING, NORTH));
+		                               .withProperty(FACING, NORTH));
 	}
 
 	@NotNull

@@ -53,9 +53,9 @@ public class TileDataServiceClientMonitor {
 		TOTAL = new TileDataServiceClientMonitor(() -> TerraFirmaGregConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
 
 		PER_POS_TOTAL = CacheBuilder.newBuilder()
-				.maximumSize(1000)
-				.expireAfterAccess(10, TimeUnit.MINUTES)
-				.build(CACHE_LOADER);
+		                            .maximumSize(1000)
+		                            .expireAfterAccess(10, TimeUnit.MINUTES)
+		                            .build(CACHE_LOADER);
 	}
 
 	// ---------------------------------------------------------------------------

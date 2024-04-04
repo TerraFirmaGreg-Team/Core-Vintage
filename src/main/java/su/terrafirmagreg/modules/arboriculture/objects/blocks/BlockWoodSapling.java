@@ -56,7 +56,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
 		setDefaultState(blockState.getBaseState()
-				.withProperty(STAGE, 0));
+		                          .withProperty(STAGE, 0));
 
 		BlockUtils.setFireInfo(this, 5, 20);
 

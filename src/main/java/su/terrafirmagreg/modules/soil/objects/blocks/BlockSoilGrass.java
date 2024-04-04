@@ -55,11 +55,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 		setHardness(2.1F);
 		setHarvestLevel("shovel", 0);
 		setDefaultState(this.blockState.getBaseState()
-				.withProperty(NORTH, Boolean.FALSE)
-				.withProperty(EAST, Boolean.FALSE)
-				.withProperty(SOUTH, Boolean.FALSE)
-				.withProperty(WEST, Boolean.FALSE)
-				.withProperty(SNOWY, Boolean.FALSE));
+		                               .withProperty(NORTH, Boolean.FALSE)
+		                               .withProperty(EAST, Boolean.FALSE)
+		                               .withProperty(SOUTH, Boolean.FALSE)
+		                               .withProperty(WEST, Boolean.FALSE)
+		                               .withProperty(SNOWY, Boolean.FALSE));
 
 		//DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
 	}
@@ -112,7 +112,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 
 				// Пропускаем итерацию, если верхний блок жидкость или имеет высокую прозрачность
 				if (world.getLightFromNeighbors(targetUp) < 4 || targetUpState.getMaterial()
-						.isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
+				                                                              .isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
 					continue;
 				}
 
@@ -181,7 +181,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 
 							if (iblockstate1.getBlock() == SoilBlockVariants.DIRT.get(soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
 								worldIn.setBlockState(blockpos, SoilBlockVariants.GRASS.get(soil)
-										.getDefaultState());
+								                                                       .getDefaultState());
 							}
 						}
 					}

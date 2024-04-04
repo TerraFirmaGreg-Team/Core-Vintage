@@ -43,11 +43,11 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
 
 		setDefaultState(this.blockState.getBaseState()
-				.withProperty(NORTH, Boolean.FALSE)
-				.withProperty(EAST, Boolean.FALSE)
-				.withProperty(SOUTH, Boolean.FALSE)
-				.withProperty(WEST, Boolean.FALSE)
-				.withProperty(SNOWY, Boolean.FALSE));
+		                               .withProperty(NORTH, Boolean.FALSE)
+		                               .withProperty(EAST, Boolean.FALSE)
+		                               .withProperty(SOUTH, Boolean.FALSE)
+		                               .withProperty(WEST, Boolean.FALSE)
+		                               .withProperty(SNOWY, Boolean.FALSE));
 
 
 		//DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

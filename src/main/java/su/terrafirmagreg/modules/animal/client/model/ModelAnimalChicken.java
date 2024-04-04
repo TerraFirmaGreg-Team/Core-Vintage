@@ -7,14 +7,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalChicken;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalChicken extends ModelBase {
 	private final ModelRenderer head;
 	private final ModelRenderer body;
@@ -68,7 +66,7 @@ public class ModelAnimalChicken extends ModelBase {
 	}
 
 	@Override
-	public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
+	public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
 		EntityAnimalChicken chicken = ((EntityAnimalChicken) entity);

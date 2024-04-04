@@ -49,9 +49,9 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 		this.setResistance(10.0F);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(HORIZONTAL, EnumFacing.NORTH)
-				.withProperty(BURIED, Boolean.FALSE)
-				.withProperty(CLOSED, Boolean.FALSE));
+		                                    .withProperty(HORIZONTAL, EnumFacing.NORTH)
+		                                    .withProperty(BURIED, Boolean.FALSE)
+		                                    .withProperty(CLOSED, Boolean.FALSE));
 	}
 
 	@Override
@@ -93,9 +93,9 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
-				.withProperty(BURIED, meta / 4 % 2 != 0)
-				.withProperty(CLOSED, meta / 8 != 0);
+		           .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+		           .withProperty(BURIED, meta / 4 % 2 != 0)
+		           .withProperty(CLOSED, meta / 8 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
@@ -121,7 +121,7 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 		if (block != Blocks.BARRIER) {
 			BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
 			return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-					.isLeaves(iblockstate, worldIn, pos.down());
+			                                                            .isLeaves(iblockstate, worldIn, pos.down());
 		} else {
 			return false;
 		}
@@ -153,7 +153,7 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
 	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade || (playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
 				((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType()
-						.equals(Metal.ItemType.SHOVEL))) {
+				                                                      .equals(Metal.ItemType.SHOVEL))) {
 			playerIn.getHeldItem(hand).damageItem(1, playerIn);
 			state = state.cycleProperty(BURIED);
 			worldIn.setBlockState(pos, state, 2);

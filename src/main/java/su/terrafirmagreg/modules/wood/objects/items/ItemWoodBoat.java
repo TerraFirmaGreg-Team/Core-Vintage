@@ -96,8 +96,8 @@ public class ItemWoodBoat extends ItemBase implements IWoodItem {
 			Vec3d vec3d2 = playerIn.getLook(1.0F);
 			boolean flag = false;
 			List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getEntityBoundingBox()
-					.expand(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D)
-					.grow(1.0D));
+			                                                                                   .expand(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D)
+			                                                                                   .grow(1.0D));
 
 			for (Entity entity : list) {
 				if (entity.canBeCollidedWith()) {

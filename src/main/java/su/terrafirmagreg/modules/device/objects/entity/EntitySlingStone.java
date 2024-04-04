@@ -61,7 +61,7 @@ public class EntitySlingStone extends EntityThrowable {
 					this.setDead();
 				}
 			} else if (world.getBlockState(result.getBlockPos())
-					.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
+			                .getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB) {
 				this.world.setEntityState(this, (byte) 3);
 				this.setDead();
 			}

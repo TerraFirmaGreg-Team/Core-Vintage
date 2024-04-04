@@ -8,11 +8,9 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalAlpacaBody;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalAlpaca extends RenderAnimal<EntityAnimalAlpaca> {
 	private static final ResourceLocation ALPACA_OLD = ModUtils.getID("textures/entity/animal/livestock/alpaca_old.png");
 	private static final ResourceLocation ALPACA_YOUNG = ModUtils.getID("textures/entity/animal/livestock/alpaca_young.png");

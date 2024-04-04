@@ -40,7 +40,6 @@ import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalG
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
 import su.terrafirmagreg.modules.device.objects.tiles.TESnare;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
@@ -60,9 +59,9 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 		this.setHardness(1.5f);
 		this.setHarvestLevel("axe", 0);
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(HORIZONTAL, EnumFacing.NORTH)
-				.withProperty(BAITED, Boolean.FALSE)
-				.withProperty(CLOSED, Boolean.FALSE));
+		                                    .withProperty(HORIZONTAL, EnumFacing.NORTH)
+		                                    .withProperty(BAITED, Boolean.FALSE)
+		                                    .withProperty(CLOSED, Boolean.FALSE));
 	}
 
 	@Override
@@ -80,13 +79,13 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 		return new BlockStateContainer(this, HORIZONTAL, BAITED, CLOSED);
 	}
 
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
-				.withProperty(BAITED, meta / 4 % 2 != 0)
-				.withProperty(CLOSED, meta / 8 != 0);
+		           .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+		           .withProperty(BAITED, meta / 4 % 2 != 0)
+		           .withProperty(CLOSED, meta / 8 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
@@ -112,7 +111,7 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 		if (block != Blocks.BARRIER) {
 			BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
 			return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-					.isLeaves(iblockstate, worldIn, pos.down());
+			                                                            .isLeaves(iblockstate, worldIn, pos.down());
 		} else {
 			return false;
 		}
@@ -188,10 +187,10 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 		TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
 		assert snare != null;
 		if (snare.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox)
-				.isEmpty() && !worldIn.isRemote) {
+		                             .isEmpty() && !worldIn.isRemote) {
 			for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox)) {
 				if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition())
-						.getBlock() instanceof BlockSnare)) {
+				                                       .getBlock() instanceof BlockSnare)) {
 					snare.setCapturedEntity(animal);
 					snare.setOpen(false);
 					state = state.withProperty(CLOSED, Boolean.TRUE);
@@ -259,15 +258,13 @@ public class BlockSnare extends BlockBase implements ITEBlock {
 		}
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 

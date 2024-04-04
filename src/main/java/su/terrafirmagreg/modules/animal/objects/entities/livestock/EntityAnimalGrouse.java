@@ -22,12 +22,10 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestock {
 	public EntityAnimalGrouse(World worldIn) {
 		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.GROUSE.adulthood, ModuleAnimalConfig.ENTITIES.GROUSE.elder));

@@ -102,7 +102,7 @@ public abstract class TEBase extends TileEntity {
 		SPacketUpdateTileEntity packet = getUpdatePacket();
 		if (packet != null && world instanceof WorldServer) {
 			PlayerChunkMapEntry chunk = ((WorldServer) world).getPlayerChunkMap()
-					.getEntry(pos.getX() >> 4, pos.getZ() >> 4);
+			                                                 .getEntry(pos.getX() >> 4, pos.getZ() >> 4);
 			if (chunk != null) {
 				chunk.sendPacket(packet);
 			}

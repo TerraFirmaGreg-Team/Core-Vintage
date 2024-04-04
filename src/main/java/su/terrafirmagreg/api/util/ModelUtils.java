@@ -20,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.model.CustomModelLoader;
 
-import javax.annotation.Nonnull;
 import javax.vecmath.Vector4f;
 import java.util.Optional;
 
@@ -41,7 +40,7 @@ public class ModelUtils {
 
 
 	@SideOnly(Side.CLIENT)
-	public static void registerStateMapper(@Nonnull Block block, IStateMapper stateMap) {
+	public static void registerStateMapper(@NotNull Block block, IStateMapper stateMap) {
 		ModelLoader.setCustomStateMapper(block, stateMap);
 	}
 

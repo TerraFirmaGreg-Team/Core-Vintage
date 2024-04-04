@@ -12,10 +12,8 @@ import su.terrafirmagreg.modules.animal.client.model.ModelAnimalPheasant;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalPheasant;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalPheasant extends RenderLiving<EntityAnimalPheasant> {
 	private static final ResourceLocation CHICK_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/pheasant_chick.png");
 	private static final ResourceLocation MALE_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/pheasant_male.png");

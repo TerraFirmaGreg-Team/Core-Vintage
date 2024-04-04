@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
@@ -38,13 +39,11 @@ import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttack
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIStandAttack;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPredator, EntityAnimalAIStandAttack.IEntityStandAttack {
 	private static final int DAYS_TO_ADULTHOOD = 240;
 	private static final DataParameter<Boolean> IS_STANDING;
@@ -162,7 +161,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 	}
 
 	@Override
-	public boolean attackEntityAsMob(@Nonnull Entity entityIn) {
+	public boolean attackEntityAsMob(@NotNull Entity entityIn) {
 		double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		if (this.isChild()) {
 			attackDamage /= 2;

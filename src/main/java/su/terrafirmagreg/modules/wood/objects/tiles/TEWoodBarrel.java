@@ -171,7 +171,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	@Override
 	public boolean canFill(FluidStack resource, EnumFacing side) {
 		return !sealed && (resource.getFluid() == null || resource.getFluid()
-				.getTemperature(resource) < BARREL_MAX_FLUID_TEMPERATURE);
+		                                                          .getTemperature(resource) < BARREL_MAX_FLUID_TEMPERATURE);
 	}
 
 	@Override
@@ -239,7 +239,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 				Fluid freshWater = FluidRegistry.getFluid("fresh_water");
 
 				if (!sealed && world.isRainingAt(pos.up()) && (tank.getFluid() == null || tank.getFluid()
-						.getFluid() == freshWater)) {
+				                                                                              .getFluid() == freshWater)) {
 					tank.fill(new FluidStack(freshWater, 10), true);
 				}
 
@@ -464,9 +464,9 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 		public BarrelFluidTank(IFluidTankCallback callback, int fluidTankID) {
 			super(callback, fluidTankID, ModuleWoodConfig.BLOCKS.BARREL.tank);
 			whitelist = Arrays.stream(ModuleWoodConfig.BLOCKS.BARREL.fluidWhitelist)
-					.map(FluidRegistry::getFluid)
-					.filter(Objects::nonNull)
-					.collect(Collectors.toSet());
+			                  .map(FluidRegistry::getFluid)
+			                  .filter(Objects::nonNull)
+			                  .collect(Collectors.toSet());
 		}
 
 		@Override

@@ -8,11 +8,9 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalPolarBear;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelPolarBearTFC
@@ -20,7 +18,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalPolarBear extends ModelBase {
 	private final ModelRenderer head;
 	private final ModelRenderer rearbody;
@@ -116,7 +114,7 @@ public class ModelAnimalPolarBear extends ModelBase {
 	}
 
 	@Override
-	public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public void render(@NotNull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
 		if (((EntityAnimal) entity).isChild()) {

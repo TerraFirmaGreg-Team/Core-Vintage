@@ -25,9 +25,7 @@ import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalJackal extends EntityAnimalCoyote implements IPredator {
 	private static final int DAYS_TO_ADULTHOOD = 112;
 

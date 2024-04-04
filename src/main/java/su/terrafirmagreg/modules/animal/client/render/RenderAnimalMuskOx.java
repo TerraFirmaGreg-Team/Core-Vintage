@@ -10,10 +10,8 @@ import su.terrafirmagreg.modules.animal.client.model.ModelAnimalMuskOxBody;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalMuskOx extends RenderAnimal<EntityAnimalMuskOx> {
 	private static final ResourceLocation TEXTURE_YOUNG = ModUtils.getID("textures/entity/animal/livestock/muskox_young.png");
 	private static final ResourceLocation TEXTURE_OLD = ModUtils.getID("textures/entity/animal/livestock/muskox_old.png");

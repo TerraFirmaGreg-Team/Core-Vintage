@@ -5,15 +5,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Implements pregnancy for mammals in TFC
  */
-@ParametersAreNonnullByDefault
+
 public abstract class EntityAnimalMammal extends EntityAnimalBase {
 	// The time(in days) this entity became pregnant
 	private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class, TFCEntities.getLongDataSerializer());
@@ -37,7 +35,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
 	}
 
 	@Override
-	public void onFertilized(IAnimal male) {
+	public void onFertilized(@NotNull IAnimal male) {
 		//Mark the day this female became pregnant
 		setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 	}
@@ -77,13 +75,13 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setLong("pregnant", getPregnantTime());
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setPregnantTime(nbt.getLong("pregnant"));
 	}

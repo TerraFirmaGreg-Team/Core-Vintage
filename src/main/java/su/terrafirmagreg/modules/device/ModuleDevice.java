@@ -6,6 +6,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
@@ -13,8 +14,6 @@ import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.data.EntitiesDevice;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
 import su.terrafirmagreg.modules.device.data.SoundDevice;
-
-import javax.annotation.Nonnull;
 
 @ModuleTFG(moduleID = "Device", name = "TFG Module Device")
 public final class ModuleDevice extends ModuleBase {
@@ -43,9 +42,8 @@ public final class ModuleDevice extends ModuleBase {
 	}
 
 
-	@Nonnull
 	@Override
-	public Logger getLogger() {
+	public @NotNull Logger getLogger() {
 		return LOGGER;
 	}
 

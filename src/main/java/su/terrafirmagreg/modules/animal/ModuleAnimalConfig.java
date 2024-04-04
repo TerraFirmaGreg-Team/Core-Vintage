@@ -17,20 +17,26 @@ public class ModuleAnimalConfig {
 	@Config.Comment("Block settings")
 	@Config.LangKey("config." + MOD_ID + ".animal.blocks")
 	public static final BlocksCategory BLOCKS = new BlocksCategory();
-
-	public static final class BlocksCategory {}
-
 	@Config.Name("Items")
 	@Config.Comment("Items settings")
 	@Config.LangKey("config." + MOD_ID + ".animal.items")
 	public static final ItemsCategory ITEMS = new ItemsCategory();
-
-	public static final class ItemsCategory {}
-
 	@Config.Name("Entities")
 	@Config.Comment("Entities settings")
 	@Config.LangKey("config." + MOD_ID + ".animal.entities")
 	public static final EntitiesCategory ENTITIES = new EntitiesCategory();
+	@Config.Name("Misc")
+	@Config.Comment("Miscellaneous")
+	@Config.LangKey("config." + MOD_ID + ".animal.misc")
+	public static final MiscCategory MISC = new MiscCategory();
+
+	static {
+		ConfigAnytime.register(ModuleAnimalConfig.class);
+	}
+
+	public static final class BlocksCategory {}
+
+	public static final class ItemsCategory {}
 
 	public static final class EntitiesCategory {
 		@Config.Comment("Alpaca")
@@ -1053,21 +1059,12 @@ public class ModuleAnimalConfig {
 
 	}
 
-	@Config.Name("Misc")
-	@Config.Comment("Miscellaneous")
-	@Config.LangKey("config." + MOD_ID + ".animal.misc")
-	public static final MiscCategory MISC = new MiscCategory();
-
 	public static final class MiscCategory {
 
 		@Config.Name("Search distance")
 		@Config.Comment("The distance for animals to search for food")
 		public double searchDistance = 10;
 
-	}
-
-	static {
-		ConfigAnytime.register(ModuleAnimalConfig.class);
 	}
 
 	@Mod.EventBusSubscriber(modid = MOD_ID)

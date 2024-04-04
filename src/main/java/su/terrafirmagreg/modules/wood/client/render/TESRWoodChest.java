@@ -35,7 +35,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 
 			if (block instanceof BlockWoodChest && meta == 0) {
 				((BlockWoodChest) block).checkForSurroundingChests(te.getWorld(), te.getPos(), te.getWorld()
-						.getBlockState(te.getPos()));
+				                                                                                 .getBlockState(te.getPos()));
 				meta = te.getBlockMetadata();
 			}
 

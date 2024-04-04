@@ -20,10 +20,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.oredict.OreDictionary;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +53,7 @@ public final class StackUtils {
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	public static ItemStack consumeItem(ItemStack stack, int amount) {
 		if (stack.getCount() <= amount) {
 			return ItemStack.EMPTY;
@@ -62,7 +62,7 @@ public final class StackUtils {
 		return stack;
 	}
 
-	@Nonnull
+	@NotNull
 	public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
 		return player.isCreative() ? stack : consumeItem(stack, amount);
 	}
@@ -311,7 +311,7 @@ public final class StackUtils {
 	 * @param secondStack The second stack to check.
 	 * @return booleanTrue if stacks are similar, or if both are null.
 	 */
-	public static boolean areStacksSimilar(@Nonnull ItemStack firstStack, @Nonnull ItemStack secondStack) {
+	public static boolean areStacksSimilar(@NotNull ItemStack firstStack, @NotNull ItemStack secondStack) {
 
 		return firstStack.getItem() == secondStack.getItem() && areStacksSameMeta(firstStack, secondStack);
 	}
@@ -349,7 +349,7 @@ public final class StackUtils {
 	 * @param second The second stack.
 	 * @return Whether or not they have the same meta or wildcard meta.
 	 */
-	public static boolean areStacksSameMeta(@Nonnull ItemStack first, @Nonnull ItemStack second) {
+	public static boolean areStacksSameMeta(@NotNull ItemStack first, @NotNull ItemStack second) {
 
 		return first.getMetadata() == second.getMetadata() || first.getMetadata() == OreDictionary.WILDCARD_VALUE || second.getMetadata() == OreDictionary.WILDCARD_VALUE;
 	}

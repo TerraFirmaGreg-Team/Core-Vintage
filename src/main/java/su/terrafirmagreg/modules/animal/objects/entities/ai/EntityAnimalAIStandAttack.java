@@ -4,12 +4,10 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * Extended Melee AI for standing attacks (bears and polar bears)
  */
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalAIStandAttack<T extends EntityCreature & IAnimal & EntityAnimalAIStandAttack.IEntityStandAttack> extends EntityAnimalAIAttackMelee<T> {
 	public EntityAnimalAIStandAttack(T creature, double speedIn, double attackReach) {
 		super(creature, speedIn, attackReach);

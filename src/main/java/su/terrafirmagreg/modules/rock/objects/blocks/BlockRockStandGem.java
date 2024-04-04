@@ -29,8 +29,6 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.client.render.TESRRockGemDisplay;
 import su.terrafirmagreg.modules.rock.objects.tiles.TERockGemDisplay;
 
-import javax.annotation.Nonnull;
-
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 import static su.terrafirmagreg.api.util.PropertyUtils.UP;
 
@@ -43,19 +41,17 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 		this.setHarvestLevel("pickaxe", 0);
 		this.setHardness(1.0F);
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(HORIZONTAL, EnumFacing.EAST)
-				.withProperty(UP, Boolean.TRUE));
+		                                    .withProperty(HORIZONTAL, EnumFacing.EAST)
+		                                    .withProperty(UP, Boolean.TRUE));
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.HEAVY;
 	}
 
@@ -70,8 +66,8 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 
 	public @NotNull IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
-				.withProperty(UP, meta / 4 % 2 != 0);
+		           .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
+		           .withProperty(UP, meta / 4 % 2 != 0);
 	}
 
 	public int getMetaFromState(IBlockState state) {
@@ -82,7 +78,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 		return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
 	}
 
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos, @NotNull EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
@@ -111,7 +107,7 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
 		return true;
 	}
 
-	public void breakBlock(@NotNull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+	public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		TERockGemDisplay te = TileUtils.getTile(worldIn, pos, TERockGemDisplay.class);
 		if (te != null) {
 			te.onBreakBlock();

@@ -42,11 +42,11 @@ public class BlockWoodSupport extends BlockWood {
 		setHardness(2.0F);
 		setHarvestLevel("axe", 0);
 		setDefaultState(blockState.getBaseState()
-				.withProperty(AXIS, EnumFacing.Axis.Y)
-				.withProperty(NORTH, false)
-				.withProperty(SOUTH, false)
-				.withProperty(EAST, false)
-				.withProperty(WEST, false));
+		                          .withProperty(AXIS, EnumFacing.Axis.Y)
+		                          .withProperty(NORTH, false)
+		                          .withProperty(SOUTH, false)
+		                          .withProperty(EAST, false)
+		                          .withProperty(WEST, false));
 	}
 
 	/**
@@ -137,9 +137,9 @@ public class BlockWoodSupport extends BlockWood {
 	@NotNull
 	public IBlockState getActualState(@NotNull IBlockState state, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
 		return state.withProperty(NORTH, isConnectable(worldIn, pos, EnumFacing.NORTH))
-				.withProperty(SOUTH, isConnectable(worldIn, pos, EnumFacing.SOUTH))
-				.withProperty(EAST, isConnectable(worldIn, pos, EnumFacing.EAST))
-				.withProperty(WEST, isConnectable(worldIn, pos, EnumFacing.WEST));
+		            .withProperty(SOUTH, isConnectable(worldIn, pos, EnumFacing.SOUTH))
+		            .withProperty(EAST, isConnectable(worldIn, pos, EnumFacing.EAST))
+		            .withProperty(WEST, isConnectable(worldIn, pos, EnumFacing.WEST));
 	}
 
 	@Override
@@ -234,7 +234,7 @@ public class BlockWoodSupport extends BlockWood {
 					if (world.getBlockState(mutablePos).getMaterial().isReplaceable()) {
 						if (!world.isRemote) {
 							world.setBlockState(mutablePos, itemBlock.getDefaultState()
-									.withProperty(AXIS, EnumFacing.Axis.Y), 2);
+							                                         .withProperty(AXIS, EnumFacing.Axis.Y), 2);
 						}
 						if (!player.isCreative()) {
 							heldStack.shrink(1);
@@ -268,7 +268,7 @@ public class BlockWoodSupport extends BlockWood {
 					worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y), 2);
 					if (worldIn.checkNoEntityCollision(new AxisAlignedBB(pos.up(2)))) {
 						worldIn.setBlockState(pos.up(2), this.getDefaultState()
-								.withProperty(AXIS, EnumFacing.Axis.Y), 2);
+						                                     .withProperty(AXIS, EnumFacing.Axis.Y), 2);
 						stack.shrink(2);
 					} else {
 						stack.shrink(1);
@@ -291,8 +291,8 @@ public class BlockWoodSupport extends BlockWood {
 					if (worldIn.getBlockState(pos.offset(face, i)).getMaterial().isReplaceable()) {
 						worldIn.setBlockState(pos.offset(face, i), this.getDefaultState().withProperty(AXIS, axis), 2);
 						worldIn.scheduleBlockUpdate(pos.offset(face, i)
-								.down(), worldIn.getBlockState(pos.offset(face, i).down())
-								.getBlock(), 3, 2);
+						                               .down(), worldIn.getBlockState(pos.offset(face, i).down())
+						                                               .getBlock(), 3, 2);
 					}
 				}
 			}
@@ -384,7 +384,7 @@ public class BlockWoodSupport extends BlockWood {
 		for (int i = 0; i < 5; i++) {
 			BlockPos offsetPos = pos.offset(face, i);
 			if (!(worldIn.getBlockState(offsetPos)
-					.getBlock() instanceof BlockWoodSupport) && !worldIn.isAirBlock(offsetPos)) {
+			             .getBlock() instanceof BlockWoodSupport) && !worldIn.isAirBlock(offsetPos)) {
 				return 0;
 			}
 			IBlockState state = worldIn.getBlockState(pos.offset(face, i + 1));

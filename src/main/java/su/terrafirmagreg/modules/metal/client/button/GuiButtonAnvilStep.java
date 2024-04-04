@@ -8,8 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.ANVIL_BACKGROUND;
 
@@ -28,7 +27,7 @@ public class GuiButtonAnvilStep extends GuiButtonTFC implements IButtonTooltip {
 	}
 
 	@Override
-	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+	public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
 			GlStateManager.color(1, 1, 1, 1);
 			mc.getTextureManager().bindTexture(ANVIL_BACKGROUND);

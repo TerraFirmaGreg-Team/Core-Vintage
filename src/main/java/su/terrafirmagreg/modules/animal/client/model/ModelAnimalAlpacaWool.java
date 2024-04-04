@@ -9,15 +9,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * ModelAlpacaWoolTFC
  * Created using Tabula 7.1.0
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalAlpacaWool extends ModelBase {
 	private final ModelRenderer head;
 	private final ModelRenderer neck1;

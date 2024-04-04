@@ -101,7 +101,7 @@ public class ThreadedNetworkWrapper {
 		public A onMessage(final Q message, final MessageContext ctx) {
 
 			final IThreadListener target = ctx.side == Side.CLIENT ? Minecraft.getMinecraft() : FMLCommonHandler.instance()
-					.getMinecraftServerInstance();
+			                                                                                                    .getMinecraftServerInstance();
 
 			if (target != null) {
 				target.addScheduledTask(new Runner(message, ctx));

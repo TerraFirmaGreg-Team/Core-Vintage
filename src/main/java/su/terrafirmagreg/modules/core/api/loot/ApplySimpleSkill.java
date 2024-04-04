@@ -16,13 +16,12 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.ModUtils;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class ApplySimpleSkill extends LootFunction {
 	private final SkillType<? extends SimpleSkill> skillType;
 	private final RandomValueRange valueRange;
@@ -36,8 +35,8 @@ public class ApplySimpleSkill extends LootFunction {
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
+	@NotNull
+	public ItemStack apply(@NotNull ItemStack stack, @NotNull Random rand, LootContext context) {
 		Entity entity = context.getKillerPlayer();
 		if (entity instanceof EntityPlayer) {
 			IPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
@@ -67,8 +66,8 @@ public class ApplySimpleSkill extends LootFunction {
 		}
 
 		@Override
-		@Nonnull
-		public ApplySimpleSkill deserialize(JsonObject object, JsonDeserializationContext deserializationContext, LootCondition[] conditionsIn) {
+		@NotNull
+		public ApplySimpleSkill deserialize(@NotNull JsonObject object, @NotNull JsonDeserializationContext deserializationContext, LootCondition @NotNull [] conditionsIn) {
 			String skillName = JsonUtils.getString(object, "skill");
 			float amount = JsonUtils.getFloat(object, "add");
 			SkillType<? extends SimpleSkill> skillType = SkillType.get(skillName, SimpleSkill.class);

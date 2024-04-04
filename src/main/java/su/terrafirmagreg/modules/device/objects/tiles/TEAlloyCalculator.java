@@ -20,8 +20,6 @@ import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.objects.container.ContainerAlloyCalculator;
 
-import javax.annotation.Nonnull;
-
 public class TEAlloyCalculator extends TEBase implements IContainerProvider<ContainerAlloyCalculator, GuiAlloyCalculator> {
 
 	public final ItemStackHandler stacks = new ItemStackHandler(9);
@@ -41,9 +39,9 @@ public class TEAlloyCalculator extends TEBase implements IContainerProvider<Cont
 			this.alloy = computedAlloy;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
+	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound compound) {
 		compound = super.writeToNBT(compound);
 		compound.setTag("Stacks", this.stacks.serializeNBT());
 		return compound;

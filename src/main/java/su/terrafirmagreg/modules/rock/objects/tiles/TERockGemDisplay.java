@@ -18,8 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 
-import javax.annotation.Nonnull;
-
 @Getter
 public class TERockGemDisplay extends TEBase {
 
@@ -61,7 +59,7 @@ public class TERockGemDisplay extends TEBase {
 		ItemStackHelper.loadAllItems(nbt.getCompoundTag("items"), this.items);
 	}
 
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("grade", grade);

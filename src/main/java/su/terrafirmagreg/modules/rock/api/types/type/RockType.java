@@ -58,10 +58,10 @@ public class RockType implements Comparable<RockType> {
 	@Nullable
 	public static RockType getByName(@NotNull String name) {
 		return RockType.getTypes()
-				.stream()
-				.filter(s -> s.toString().equals(name))
-				.findFirst()
-				.orElse(null);
+		               .stream()
+		               .filter(s -> s.toString().equals(name))
+		               .findFirst()
+		               .orElse(null);
 	}
 
 

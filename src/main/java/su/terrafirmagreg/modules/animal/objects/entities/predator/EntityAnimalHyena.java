@@ -30,12 +30,11 @@ import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
 	private static final int DAYS_TO_ADULTHOOD = 112;
 

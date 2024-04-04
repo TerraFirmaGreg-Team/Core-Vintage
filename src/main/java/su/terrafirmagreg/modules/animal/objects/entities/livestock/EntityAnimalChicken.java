@@ -23,6 +23,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
@@ -35,15 +36,12 @@ import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIFindNest;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock {
 	//The last time(in ticks) this chicken has laid eggs
 	private static final DataParameter<Long> LAID = EntityDataManager.createKey(EntityAnimalChicken.class, TFCEntities.getLongDataSerializer());
@@ -239,13 +237,13 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setLong("laidTicks", getLaidTicks());
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setLaidTicks(nbt.getLong("laidTicks"));
 	}

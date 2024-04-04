@@ -22,7 +22,6 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ import java.util.List;
  * A Chicken of the colder regions!
  * Actually, ducks takes longer to reach maturity, but hey, they are cute!
  */
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock {
 	public EntityAnimalDuck(World worldIn) {
 		this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(ModuleAnimalConfig.ENTITIES.DUCK.adulthood, ModuleAnimalConfig.ENTITIES.DUCK.elder));

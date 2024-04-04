@@ -18,26 +18,26 @@ public final class EntitiesDevice {
 	public static void onRegister(RegistryManager registry) {
 		registry.registerEntity("slingstone",
 				EntityEntryBuilder.create()
-						.entity(EntitySlingStone.class)
-						.tracker(64, 1, true)
+				                  .entity(EntitySlingStone.class)
+				                  .tracker(64, 1, true)
 		);
 
 		registry.registerEntity("slingstonemetal",
 				EntityEntryBuilder.create()
-						.entity(EntitySlingStoneMetal.class)
-						.tracker(64, 1, true)
+				                  .entity(EntitySlingStoneMetal.class)
+				                  .tracker(64, 1, true)
 		);
 
 		registry.registerEntity("slingstonemetallight",
 				EntityEntryBuilder.create()
-						.entity(EntitySlingStoneMetalLight.class)
-						.tracker(64, 1, true)
+				                  .entity(EntitySlingStoneMetalLight.class)
+				                  .tracker(64, 1, true)
 		);
 
 		registry.registerEntity("unknownprojectile",
 				EntityEntryBuilder.create()
-						.entity(EntityUnknownProjectile.class)
-						.tracker(64, 1, true)
+				                  .entity(EntityUnknownProjectile.class)
+				                  .tracker(64, 1, true)
 		);
 	}
 

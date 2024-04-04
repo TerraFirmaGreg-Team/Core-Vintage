@@ -5,8 +5,8 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
@@ -82,7 +82,7 @@ public interface IAnimal extends ICreature {
 	/**
 	 * Event: Do things on fertilization of females (ie: save the male genes for some sort of genetic selection)
 	 */
-	default void onFertilized(@Nonnull IAnimal male) {
+	default void onFertilized(@NotNull IAnimal male) {
 		setFertilized(true);
 	}
 
@@ -144,7 +144,7 @@ public interface IAnimal extends ICreature {
 	 * @param stack the itemstack to check
 	 * @return true if item is used to feed this animal (entice and increase familiarity)
 	 */
-	default boolean isFood(@Nonnull ItemStack stack) {
+	default boolean isFood(@NotNull ItemStack stack) {
 		//noinspection unchecked
 		AnimalFood food = AnimalFood.get((Class<? extends Entity>) this.getClass());
 		if (food != null) {

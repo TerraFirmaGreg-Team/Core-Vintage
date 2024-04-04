@@ -10,15 +10,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * ModelLlamaTFC
  * Created using Tabula 7.1.0
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalLlama extends ModelQuadruped {
 	private final ModelRenderer chest1;
 	private final ModelRenderer chest2;

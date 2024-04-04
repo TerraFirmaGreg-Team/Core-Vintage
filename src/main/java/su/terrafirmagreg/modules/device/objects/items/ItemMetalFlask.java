@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 
-import javax.annotation.Nonnull;
-
 public class ItemMetalFlask extends ItemFlask {
 
 	protected static int capacity = ModuleDeviceConfig.ITEMS.WATER_FLASKS.ironCap;
@@ -23,15 +21,13 @@ public class ItemMetalFlask extends ItemFlask {
 		return "device/flask/metal";
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.NORMAL;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 

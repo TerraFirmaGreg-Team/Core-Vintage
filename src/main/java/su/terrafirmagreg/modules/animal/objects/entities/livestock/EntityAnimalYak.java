@@ -19,9 +19,7 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAnimalYak(World worldIn) {

@@ -69,9 +69,9 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 		setResistance(5.0F);
 
 		setDefaultState(blockState.getBaseState()
-				.withProperty(LOG_AXIS, EnumAxis.Y)
-				.withProperty(PLACED, true)
-				.withProperty(SMALL, false));
+		                          .withProperty(LOG_AXIS, EnumAxis.Y)
+		                          .withProperty(PLACED, true)
+		                          .withProperty(SMALL, false));
 
 		BlockUtils.setFireInfo(this, 5, 5);
 
@@ -189,7 +189,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		// Small logs are a weird feature, for now they shall be disabled via shift placement since it interferes with log pile placement
 		return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
-				.withProperty(PLACED, true);
+		            .withProperty(PLACED, true);
 	}
 
 	@NotNull

@@ -8,8 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
 /**
  * This is a partial block, ie. not a full cube.
  */
@@ -26,7 +24,7 @@ public abstract class BlockPartialBase extends BlockBase {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isSideSolid(@NotNull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @NotNull EnumFacing side) {
+	public boolean isSideSolid(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
 
 		return false;
 	}
@@ -58,7 +56,7 @@ public abstract class BlockPartialBase extends BlockBase {
 		return this.isFullBlock(state);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos, @NotNull EnumFacing face) {

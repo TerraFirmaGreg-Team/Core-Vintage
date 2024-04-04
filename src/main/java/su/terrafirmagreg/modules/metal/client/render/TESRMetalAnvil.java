@@ -7,13 +7,12 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
-
-import javax.annotation.Nonnull;
 
 public class TESRMetalAnvil extends TileEntitySpecialRenderer<TEMetalAnvil> {
 	@Override
-	public void render(@Nonnull TEMetalAnvil te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+	public void render(@NotNull TEMetalAnvil te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
 		IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

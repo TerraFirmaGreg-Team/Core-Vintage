@@ -30,6 +30,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
@@ -45,14 +46,11 @@ import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIPanic;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestock {
 	//Values that has a visual effect on client
 	protected static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityAnimalLlama.class, DataSerializers.BOOLEAN);
@@ -100,7 +98,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 
 		if (!stack.isEmpty()) {
@@ -202,7 +200,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimal male) {
+	public void onFertilized(@NotNull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		int selection = this.rand.nextInt(9);
 		int i;
@@ -217,14 +215,14 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 		this.geneVariant = i;
 		EntityAnimalLlama father = (EntityAnimalLlama) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
-				.getBaseValue() + this.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
-				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+		                                .getBaseValue() + this.getEntityAttribute(AbstractHorse.JUMP_STRENGTH)
+		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
 		this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
 		if (this.rand.nextFloat() < 0.03F) {
@@ -263,8 +261,8 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                        .name()
+		                                                                                        .toLowerCase());
 	}
 
 	@Override
@@ -285,7 +283,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 		return this.getAge() == IAnimal.Age.CHILD;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {
@@ -380,7 +378,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -399,7 +397,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -452,7 +450,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
 	@Nullable
 	@Override
-	public EntityLlama createChild(@Nonnull EntityAgeable other) {
+	public EntityLlama createChild(@NotNull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
 		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);

@@ -24,7 +24,6 @@ import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -33,7 +32,7 @@ import java.util.function.BiConsumer;
  * A Sheep of the colder regions!
  * Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give birth to one individual
  */
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAnimalAlpaca(World worldIn) {

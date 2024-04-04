@@ -37,7 +37,7 @@ public class BlockWoodChopping extends BlockWoodChoppingBase {
 
 	public static boolean isValidChoppingTool(ItemStack stack, EntityPlayer player) {
 		return !stack.isEmpty() && ((stack.getItem()
-				.getHarvestLevel(stack, "axe", player, null) > -1) || isChoppingToolWhitelisted(stack));
+		                                  .getHarvestLevel(stack, "axe", player, null) > -1) || isChoppingToolWhitelisted(stack));
 	}
 
 	private static boolean isChoppingToolWhitelisted(ItemStack stack) {

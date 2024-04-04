@@ -1,10 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
-import su.terrafirmagreg.api.lib.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -27,14 +24,17 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -70,7 +70,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 	}
 
 	@Override
-	public boolean setEntityOnShoulder(@Nonnull EntityPlayer player) {
+	public boolean setEntityOnShoulder(@NotNull EntityPlayer player) {
 		// todo if vanilla fixes the class enforcement in 1.15, do rework this animal
 		return false;
 	}
@@ -113,7 +113,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 
 		if (!itemstack.isEmpty()) {
@@ -162,7 +162,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 	}
 
 	@Override
-	public boolean canMateWith(@Nonnull EntityAnimal otherAnimal) {
+	public boolean canMateWith(@NotNull EntityAnimal otherAnimal) {
 		// At the time I wrote this, I decided to stick to vanilla.
 		// Should we change this I think we also need to think how they would lay eggs
 		// Because copying chicken mechanics for parrots is weird
@@ -170,7 +170,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 	}
 
 	@Override
-	public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
+	public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
 		return new EntityAnimalParrot(this.world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
 	}
 
@@ -183,7 +183,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -196,7 +196,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -292,8 +292,8 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                        .name()
+		                                                                                        .toLowerCase());
 	}
 
 	@Override
@@ -312,7 +312,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 		this.setScale((float) ageScale);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {

@@ -2,7 +2,6 @@ package net.sharkbark.cellars;
 
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -11,14 +10,12 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.sharkbark.cellars.proxy.CommonProxy;
 import net.sharkbark.cellars.util.CellarsTab;
 import net.sharkbark.cellars.util.Reference;
 import net.sharkbark.cellars.util.handlers.PacketHandler;
 import net.sharkbark.cellars.util.handlers.RegistryHandler;
 import su.terrafirmagreg.Tags;
-import vazkii.patchouli.common.item.PatchouliItems;
 
 import java.util.Map;
 
@@ -71,19 +68,6 @@ public class Main {
 				data.setTag(EntityPlayer.PERSISTED_NBT_TAG, (persistent = new NBTTagCompound()));
 			} else {
 				persistent = data.getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-			}
-
-			if (!persistent.hasKey("CellarsFirstJoin")) {
-				persistent.setBoolean("CellarsFirstJoin", true);
-				try {
-					NBTTagCompound bookData = new NBTTagCompound();
-					bookData.setString("patchouli:book", "cellars:book");
-					ItemStack book = new ItemStack(PatchouliItems.book);
-					book.setTagCompound(bookData);
-					ItemHandlerHelper.giveItemToPlayer((EntityPlayer) event.getEntity(), book);
-				} catch (NoClassDefFoundError e) {
-					System.out.println("Mod failed to give Patchouli Book to" + event.getEntity());
-				}
 			}
 		}
 	}

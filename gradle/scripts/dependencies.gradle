@@ -82,29 +82,21 @@ dependencies {
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
         implementation rfg.deobf("curse.maven:common-capabilities-247007:3053017-sources-3053019-javadoc-3053020")
         implementation rfg.deobf("curse.maven:cyclops-core-232758:3159497-sources-3159499-javadoc-3159500")
-        implementation rfg.deobf("curse.maven:bookshelf-228525:2836960-sources-2836961-javadoc-2836962")
 //      implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
 //      implementation rfg.deobf("curse.maven:future-mc-310059:3924863")
 //      implementation rfg.deobf("curse.maven:shadowfacts-forgelin-248453:2785465")
 
 
         runtimeOnly("curse.maven:aainfo-573154:3627065")
-        runtimeOnly("curse.maven:mod-debug-world-type-313045:2705823")
-        runtimeOnly("curse.maven:debug-block-collision-302110:2613483")
 //      runtimeOnly("curse.maven:fancy-spawn-eggs-302277:2612571")
 //      runtimeOnly("curse.maven:nbt-tooltip-274816:2567902")
 //      runtimeOnly("curse.maven:spark-361579:3542217")
 //      runtimeOnly("curse.maven:tabula-minecraft-modeler-229092:2801271")
 //      runtimeOnly("curse.maven:ichunutil-229060:2801263")
 
-
-        compileOnly("curse.maven:game-stages-268655:2951840")
         compileOnly("curse.maven:hwyla-253449:2568751")
-        compileOnly("curse.maven:patchouli-306770:3162874")
         compileOnly("curse.maven:nyx-rotn-edition-437663:3840824")
         compileOnly("curse.maven:industrial-craft-242638:3838713")
-        compileOnly("curse.maven:crafttweaker-239197:4731280")
-        compileOnly("curse.maven:mtlib-253211:3308160")
     }
 
     // Tinkers Construct dependencies

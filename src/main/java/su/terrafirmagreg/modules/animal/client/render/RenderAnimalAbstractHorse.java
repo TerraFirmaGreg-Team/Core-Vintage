@@ -8,11 +8,11 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalHorse;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDonkey;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMule;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 
 /**
@@ -41,7 +41,7 @@ public class RenderAnimalAbstractHorse extends RenderLiving<AbstractHorse> {
 	}
 
 	@Override
-	protected void preRenderCallback(@Nonnull AbstractHorse entitylivingbaseIn, float partialTickTime) {
+	protected void preRenderCallback(@NotNull AbstractHorse entitylivingbaseIn, float partialTickTime) {
 		GlStateManager.scale(this.scale, this.scale, this.scale);
 		super.preRenderCallback(entitylivingbaseIn, partialTickTime);
 	}

@@ -23,11 +23,9 @@ import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.*;
 
-@ParametersAreNonnullByDefault
+
 public class ContainerAnvilTFC extends ContainerTE<TEMetalAnvil> implements IButtonHandler {
 	public ContainerAnvilTFC(InventoryPlayer playerInv, TEMetalAnvil te) {
 		super(playerInv, te, 26);

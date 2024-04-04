@@ -8,10 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalRabbit;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalRabbit;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalRabbit extends RenderLiving<EntityAnimalRabbit> {
 	private static final ResourceLocation WHITE = new ResourceLocation("textures/entity/rabbit/white.png");
 	private static final ResourceLocation GOLD = new ResourceLocation("textures/entity/rabbit/gold.png");

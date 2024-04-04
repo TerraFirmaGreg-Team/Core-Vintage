@@ -105,7 +105,7 @@ public class BlockWoodFiller extends BlockDirectional {
 		IBlockState state1 = world.getBlockState(pos);
 		if (validateFilled(world, state1, pos0))
 			state1.getBlock()
-					.addCollisionBoxToList(state1, world, pos, entityBox, collidingBoxes, entityIn, p_185477_7_);
+			      .addCollisionBoxToList(state1, world, pos, entityBox, collidingBoxes, entityIn, p_185477_7_);
 	}
 
 	@Override
@@ -300,7 +300,7 @@ public class BlockWoodFiller extends BlockDirectional {
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
 		IBlockState state = world.getBlockState(pos);
 		if (world instanceof World && !((World) world).isRemote && pos.offset(state.getValue(FACING))
-				.equals(neighbor)) {
+		                                                              .equals(neighbor)) {
 			validateFilled((World) world, world.getBlockState(neighbor), pos);
 		}
 	}

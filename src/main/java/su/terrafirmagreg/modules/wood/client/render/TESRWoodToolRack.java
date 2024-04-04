@@ -75,8 +75,8 @@ public class TESRWoodToolRack extends TileEntitySpecialRenderer<TEWoodToolRack> 
 					GlStateManager.rotate(META_TO_ANGLE[dir], 0.0F, 1.0F, 0.0F);
 					GlStateManager.scale(blockScale, blockScale, blockScale);
 					Minecraft.getMinecraft()
-							.getRenderItem()
-							.renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+					         .getRenderItem()
+					         .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
 					GlStateManager.popMatrix();
 				}
 			}

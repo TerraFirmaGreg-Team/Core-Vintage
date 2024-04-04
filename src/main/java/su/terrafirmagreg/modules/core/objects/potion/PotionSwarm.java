@@ -5,10 +5,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.effects.PotionBase;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class PotionSwarm extends PotionBase {
@@ -19,7 +19,7 @@ public class PotionSwarm extends PotionBase {
 	}
 
 	@Override
-	public void performEffect(@Nonnull EntityLivingBase entity, int amplifier) {
+	public void performEffect(@NotNull EntityLivingBase entity, int amplifier) {
 		World world = entity.getEntityWorld();
 		if (world.isRemote) {
 			BlockPos pos = entity.getPosition();

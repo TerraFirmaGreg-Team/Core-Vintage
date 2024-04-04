@@ -87,7 +87,7 @@ public class BlockWoodChopper extends BlockWoodChoppingBase {
 		if (!worldIn.isRemote) {
 			EnumFacing enumfacing = state.getValue(FACING);
 			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing)
-					.withProperty(PART, ChopperModels.BASE), 2);
+			                                .withProperty(PART, ChopperModels.BASE), 2);
 		}
 	}
 
@@ -106,7 +106,7 @@ public class BlockWoodChopper extends BlockWoodChoppingBase {
 	@Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
 		if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor)
-				.getBlock() instanceof BlockFiller)) {
+		                                                                     .getBlock() instanceof BlockFiller)) {
 			((World) world).setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 		}
 	}
@@ -114,7 +114,7 @@ public class BlockWoodChopper extends BlockWoodChoppingBase {
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite())
-				.withProperty(PART, ChopperModels.BASE);
+		                        .withProperty(PART, ChopperModels.BASE);
 	}
 
 	public void onBlockPlacedBy(@NotNull World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {

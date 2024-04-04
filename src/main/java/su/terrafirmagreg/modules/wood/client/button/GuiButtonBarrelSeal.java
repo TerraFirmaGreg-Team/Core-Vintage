@@ -3,13 +3,12 @@ package su.terrafirmagreg.modules.wood.client.button;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.button.GuiButtonBase;
 import su.terrafirmagreg.api.spi.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
-
-import javax.annotation.Nonnull;
 
 
 public class GuiButtonBarrelSeal extends GuiButtonBase implements IButtonTooltip {
@@ -31,7 +30,7 @@ public class GuiButtonBarrelSeal extends GuiButtonBase implements IButtonTooltip
 	}
 
 	@Override
-	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+	public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
 			GlStateManager.color(1, 1, 1, 1);
 			mc.getTextureManager().bindTexture(GuiWoodBarrel.BARREL_BACKGROUND);

@@ -2,8 +2,7 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 
@@ -46,7 +45,7 @@ public class ModUtils {
 	 * @param <T> anything and everything
 	 * @return null, but not null
 	 */
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("ConstantConditions")
 	public static <T> T getNull() {
 		return null;

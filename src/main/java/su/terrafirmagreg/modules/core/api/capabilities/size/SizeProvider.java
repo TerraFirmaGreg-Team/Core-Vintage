@@ -7,7 +7,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.EnumMap;
 
 public class SizeProvider implements ICapabilityProvider, ISizeCapability {
@@ -43,31 +42,29 @@ public class SizeProvider implements ICapabilityProvider, ISizeCapability {
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == SizeCapability.SIZE_CAPABILITY;
 	}
 
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return capability == SizeCapability.SIZE_CAPABILITY ? (T) this : null;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return this.size;
 	}
 
-	@Nonnull
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return this.weight;
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return canStack;
 	}
 
@@ -75,7 +72,7 @@ public class SizeProvider implements ICapabilityProvider, ISizeCapability {
 	 * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
 	 */
 	@Override
-	public int getStackSize(@Nonnull ItemStack stack) {
+	public int getStackSize(@NotNull ItemStack stack) {
 		return this.canStack ? this.weight.stackSize : 1;
 	}
 }

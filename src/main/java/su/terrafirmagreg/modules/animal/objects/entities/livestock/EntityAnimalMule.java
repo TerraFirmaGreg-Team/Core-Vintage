@@ -33,6 +33,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
@@ -48,14 +49,11 @@ import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock, IRidable {
 	//Values that has a visual effect on client
@@ -156,8 +154,8 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                        .name()
+		                                                                                        .toLowerCase());
 	}
 
 	public boolean isHalter() {
@@ -186,7 +184,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 		return this.getAge() == Age.CHILD;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {
@@ -295,7 +293,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
 	@Nullable
 	@Override
-	public EntityAgeable createChild(@Nonnull EntityAgeable other) {
+	public EntityAgeable createChild(@NotNull EntityAgeable other) {
 		if (other == this) {
 			// Only called if this animal is interacted with a spawn egg
 			EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
@@ -328,7 +326,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -340,7 +338,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -352,7 +350,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 
 		if (!stack.isEmpty()) {

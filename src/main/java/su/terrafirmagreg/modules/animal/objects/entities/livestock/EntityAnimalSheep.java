@@ -29,6 +29,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
@@ -44,8 +45,6 @@ import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,7 +52,6 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
 	private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.VARINT);
 	private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntityAnimalSheep.class, TFCEntities.getLongDataSerializer());
@@ -119,14 +117,14 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setLong("shearedTick", getShearedTick());
 		compound.setInteger("dyecolor", getDyeColor().getMetadata());
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		setShearedTick(compound.getLong("shearedTick"));
 		setDyeColor(EnumDyeColor.byMetadata(compound.getByte("dyecolor")));
@@ -172,7 +170,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 	}
 
 	@Override
-	protected boolean eatFood(@Nonnull ItemStack stack, EntityPlayer player) {
+	protected boolean eatFood(@NotNull ItemStack stack, EntityPlayer player) {
 		// Refuses to eat rotten stuff
 		IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 		if (cap != null) {
@@ -240,13 +238,13 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 	}
 
 	@Override
-	public boolean isShearable(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos) {
+	public boolean isShearable(@NotNull ItemStack item, IBlockAccess world, BlockPos pos) {
 		return isReadyForAnimalProduct();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+	public List<ItemStack> onSheared(@NotNull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		setProductsCooldown();
 		List<ItemStack> products = getProducts();
 		// Fortune makes this less random and more towards the maximum (3) amount.

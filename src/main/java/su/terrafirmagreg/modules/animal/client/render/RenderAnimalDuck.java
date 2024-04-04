@@ -13,10 +13,8 @@ import su.terrafirmagreg.modules.animal.client.model.ModelAnimalDuck;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalDuck extends RenderLiving<EntityAnimalDuck> {
 	private static final ResourceLocation DUCK_OLD = ModUtils.getID("textures/entity/animal/livestock/duck_old.png");
 	private static final ResourceLocation DUCK_YOUNG = ModUtils.getID("textures/entity/animal/livestock/duck_young.png");

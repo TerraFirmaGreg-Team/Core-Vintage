@@ -30,15 +30,13 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 import su.terrafirmagreg.modules.device.data.SoundDevice;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
 import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemFireStarter extends ItemBase {
 	public ItemFireStarter() {
 		setMaxDamage(8);
@@ -218,7 +216,7 @@ public class ItemFireStarter extends ItemBase {
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return false;
 	}
 
@@ -230,7 +228,7 @@ public class ItemFireStarter extends ItemBase {
 			BlockPos pos = result.getBlockPos();
 			final IBlockState current = world.getBlockState(pos);
 			if (result.sideHit == EnumFacing.UP && current.isSideSolid(world, pos, EnumFacing.UP) && !current.getMaterial()
-					.isLiquid()) {
+			                                                                                                 .isLiquid()) {
 				if (world.isAirBlock(pos.up())) {
 					return result;
 				}

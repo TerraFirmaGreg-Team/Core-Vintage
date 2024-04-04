@@ -19,8 +19,6 @@ import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TEAlloyCalculator;
 
-import javax.annotation.Nonnull;
-
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 
 public class BlockAlloyCalculator extends BlockBase implements ITEBlock {
@@ -32,7 +30,7 @@ public class BlockAlloyCalculator extends BlockBase implements ITEBlock {
 		super(Material.IRON);
 
 		setDefaultState(this.blockState.getBaseState()
-				.withProperty(HORIZONTAL, EnumFacing.NORTH));
+		                               .withProperty(HORIZONTAL, EnumFacing.NORTH));
 	}
 
 	@Override
@@ -41,17 +39,17 @@ public class BlockAlloyCalculator extends BlockBase implements ITEBlock {
 	}
 
 	@Override
-	public boolean onBlockActivated(@Nonnull World worldIn, @NotNull BlockPos pos, @Nonnull IBlockState state, @NotNull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.ALLOY_CALCULATOR);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, IBlockState state, EntityLivingBase placer, @Nonnull ItemStack stack) {
+	public void onBlockPlacedBy(World worldIn, @NotNull BlockPos pos, IBlockState state, EntityLivingBase placer, @NotNull ItemStack stack) {
 		worldIn.setBlockState(pos, state.withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite()), 2);
 	}
 
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		EnumFacing enumfacing = EnumFacing.byIndex(meta);
@@ -67,14 +65,14 @@ public class BlockAlloyCalculator extends BlockBase implements ITEBlock {
 		return state.getValue(HORIZONTAL).getIndex();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SuppressWarnings("deprecation")
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		return state.withProperty(HORIZONTAL, rot.rotate(state.getValue(HORIZONTAL)));
 	}
 
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		return state.withRotation(mirrorIn.toRotation(state.getValue(HORIZONTAL)));

@@ -5,8 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
@@ -62,7 +62,7 @@ public interface IHeatCapability extends INBTSerializable<NBTTagCompound> {
 	 * @param text  The list of tooltips
 	 */
 	@SideOnly(Side.CLIENT)
-	default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+	default void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 		String tooltip = Heat.getTooltip(getTemperature());
 		if (tooltip != null) {
 			text.add(tooltip);

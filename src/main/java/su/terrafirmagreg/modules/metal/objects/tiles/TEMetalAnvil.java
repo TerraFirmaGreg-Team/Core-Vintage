@@ -29,19 +29,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.TextComponentTranslation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.rock.objects.blocks.BlockRockAnvil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 
 // TODO делать отдельный класс для каменной наковали, без интерфейса
-@ParametersAreNonnullByDefault
+
 public class TEMetalAnvil extends TEInventory {
 	public static final int WORK_MAX = 145;
 	public static final int SLOT_INPUT_1 = 0;
@@ -81,7 +80,7 @@ public class TEMetalAnvil extends TEInventory {
 		return recipe;
 	}
 
-	@Nonnull
+	@NotNull
 	public ForgeSteps getSteps() {
 		return steps;
 	}
@@ -153,7 +152,7 @@ public class TEMetalAnvil extends TEInventory {
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		if (recipe != null) {
@@ -188,7 +187,7 @@ public class TEMetalAnvil extends TEInventory {
 	/**
 	 * Only occurs on server side
 	 */
-	public void addStep(@Nonnull EntityPlayer player, @Nullable ForgeStep step) {
+	public void addStep(@NotNull EntityPlayer player, @Nullable ForgeStep step) {
 		ItemStack input = inventory.getStackInSlot(SLOT_INPUT_1);
 		IForgeable cap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
 		if (cap != null) {

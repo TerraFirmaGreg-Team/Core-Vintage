@@ -164,8 +164,8 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
 						buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
 						buffer.pos(positionX, positionY + 16, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
 						buffer.pos(positionX + 16, positionY + 16, 0)
-								.tex(sprite.getMaxU(), sprite.getMaxV())
-								.endVertex();
+						      .tex(sprite.getMaxU(), sprite.getMaxV())
+						      .endVertex();
 						buffer.pos(positionX + 16, positionY, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
 
 						fillHeightPixels -= 16;
@@ -176,17 +176,17 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
 						int blank = 16 - fillHeightPixels;
 						positionY += blank;
 						buffer.pos(positionX, positionY, 0)
-								.tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
-								.endVertex();
+						      .tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
+						      .endVertex();
 						buffer.pos(positionX, positionY + fillHeightPixels, 0)
-								.tex(sprite.getMinU(), sprite.getMaxV())
-								.endVertex();
+						      .tex(sprite.getMinU(), sprite.getMaxV())
+						      .endVertex();
 						buffer.pos(positionX + 16, positionY + fillHeightPixels, 0)
-								.tex(sprite.getMaxU(), sprite.getMaxV())
-								.endVertex();
+						      .tex(sprite.getMaxU(), sprite.getMaxV())
+						      .endVertex();
 						buffer.pos(positionX + 16, positionY, 0)
-								.tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
-								.endVertex();
+						      .tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
+						      .endVertex();
 					}
 
 					Tessellator.getInstance().draw();

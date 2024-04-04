@@ -9,10 +9,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalWildebeest;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalWildebeest;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalWildebeest extends RenderLiving<EntityAnimalWildebeest> {
 	private static final ResourceLocation TEXTURE = ModUtils.getID("textures/entity/animal/huntable/wildebeest.png");
 

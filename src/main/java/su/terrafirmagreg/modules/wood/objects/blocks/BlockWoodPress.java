@@ -56,7 +56,7 @@ public class BlockWoodPress extends BlockHPBase {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta))
-				.withProperty(PART, PressModels.BASE);
+		                        .withProperty(PART, PressModels.BASE);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class BlockWoodPress extends BlockHPBase {
 	@Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
 		if (!((World) world).isRemote && pos.up().equals(neighbor) && !(world.getBlockState(neighbor)
-				.getBlock() instanceof BlockFiller)) {
+		                                                                     .getBlock() instanceof BlockFiller)) {
 			((World) world).setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 		}
 	}
@@ -116,7 +116,7 @@ public class BlockWoodPress extends BlockHPBase {
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite())
-				.withProperty(PART, PressModels.BASE);
+		                        .withProperty(PART, PressModels.BASE);
 	}
 
 	@Override

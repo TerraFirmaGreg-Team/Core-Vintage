@@ -3,12 +3,11 @@ package su.terrafirmagreg.modules.agriculture;
 import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.agriculture.data.BlocksAgriculture;
 import su.terrafirmagreg.modules.agriculture.data.ItemsAgriculture;
-
-import javax.annotation.Nonnull;
 
 //@Module(moduleID = "Agriculture", name = "TFG Module Agriculture")
 public final class ModuleAgriculture extends ModuleBase {
@@ -26,7 +25,7 @@ public final class ModuleAgriculture extends ModuleBase {
 		ItemsAgriculture.onRegister(registryManager);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Logger getLogger() {
 		return LOGGER;

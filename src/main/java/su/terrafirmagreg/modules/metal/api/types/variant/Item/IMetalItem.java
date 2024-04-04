@@ -2,11 +2,10 @@ package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
 import gregtech.api.unification.material.Material;
 import net.dries007.tfc.api.capability.size.IItemSize;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.modules.metal.api.types.type.IMetalType;
-
-import javax.annotation.Nonnull;
 
 /**
  * Интерфейс, представляющий предмет породы.
@@ -18,7 +17,7 @@ public interface IMetalItem extends IMetalType, IItemSize, IAutoReg {
 	 *
 	 * @return Вариант блока породы.
 	 */
-	@Nonnull
+	@NotNull
 	MetalItemVariant getItemVariant();
 
 	/**
@@ -35,7 +34,7 @@ public interface IMetalItem extends IMetalType, IItemSize, IAutoReg {
 	 *
 	 * @return Расположение в реестре
 	 */
-	@Nonnull
+	@NotNull
 	default String getName() {
 		return String.format("metal.%s.%s", getItemVariant(), getMaterial());
 	}

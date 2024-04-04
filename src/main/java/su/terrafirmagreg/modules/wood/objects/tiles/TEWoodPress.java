@@ -114,7 +114,7 @@ public class TEWoodPress extends TileEntityHPHorseBase {
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		return index == 0 && HPRecipes.instance()
-				.hasPressRecipe(stack) && currentPressStatus == 0 && getStackInSlot(1).isEmpty();
+		                              .hasPressRecipe(stack) && currentPressStatus == 0 && getStackInSlot(1).isEmpty();
 	}
 
 	@Override

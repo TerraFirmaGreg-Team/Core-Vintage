@@ -70,7 +70,7 @@ public class PathEventHandler {
 						BlockPos upPos = posPlayer.up();
 						Material upMaterial = world.getBlockState(upPos).getMaterial();
 						if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos)
-								.getBlock() instanceof BlockPlacedItemFlat) {
+						                                                                         .getBlock() instanceof BlockPlacedItemFlat) {
 							world.destroyBlock(upPos, true);
 						}
 					}
@@ -118,7 +118,7 @@ public class PathEventHandler {
 							BlockPos upPos = posEntity.up();
 							Material upMaterial = world.getBlockState(upPos).getMaterial();
 							if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos)
-									.getBlock() instanceof BlockPlacedItemFlat) {
+							                                                                         .getBlock() instanceof BlockPlacedItemFlat) {
 								world.destroyBlock(upPos, true);
 							}
 						}

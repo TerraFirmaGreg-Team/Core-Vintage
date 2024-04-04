@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.HorsePowerMod;
 import se.gory_moon.horsepower.util.Utils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -52,8 +51,6 @@ public class HPRecipes {
 		createRecipes(ChoppingBlockRecipe.class, chopping, true).forEach(this::addChoppingRecipe);
 		createRecipes(ManualChoppingBlockRecipe.class, manualChopping, true).forEach(this::addManualChoppingRecipe);
 		createRecipes(PressRecipe.class, press, false).forEach(this::addPressRecipe);
-
-		HorsePowerMod.tweakerPlugin.applyTweaker();
 	}
 
 	public void addGrindstoneRecipe(Block input, ItemStack output, int time, boolean hand) {

@@ -3,9 +3,8 @@ package su.terrafirmagreg.modules.core.api.capabilities.damage;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
 
 public class DamageResistanceProvider implements IDamageResistanceCapability, ICapabilityProvider {
 	private final float crushingModifier;
@@ -38,14 +37,14 @@ public class DamageResistanceProvider implements IDamageResistanceCapability, IC
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == DamageResistanceCapability.DAMAGE_RESISTANCE_CAPABILITY;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return hasCapability(capability, facing) ? (T) this : null;
 	}
 }

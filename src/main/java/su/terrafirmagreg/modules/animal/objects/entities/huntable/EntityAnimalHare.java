@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
@@ -19,10 +20,7 @@ import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 16;
 	private static final DataParameter<Integer> HARE_TYPE = EntityDataManager.createKey(EntityAnimalHare.class, DataSerializers.VARINT);
@@ -57,12 +55,12 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 		this.dataManager.register(HARE_TYPE, 0);
 	}
 
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("HareType", this.getHareType());
 	}
 
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		this.setHareType(compound.getInteger("HareType"));
 	}

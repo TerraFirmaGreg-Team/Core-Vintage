@@ -25,6 +25,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
@@ -36,13 +37,11 @@ import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
+
 public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILivestock, IRidable {
 	private static final DataParameter<Integer> DATA_COLOR_ID = EntityDataManager.createKey(EntityAnimalCamel.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityAnimalCamel.class, DataSerializers.BOOLEAN);
@@ -142,7 +141,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (canAcceptHalter(stack)) {
 			return attemptApplyHalter(this, this.world, player, stack);
@@ -151,7 +150,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimal male) {
+	public void onFertilized(@NotNull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		int selection = this.rand.nextInt(9);
 		int i;
@@ -166,14 +165,14 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 		this.geneVariant = i;
 		EntityAnimalCamel father = (EntityAnimalCamel) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-				.getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+		                                .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
 		this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
 		if (this.rand.nextFloat() < 0.03F) {
@@ -229,7 +228,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger("Variant", this.getVariant());
 		nbt.setInteger("Strength", this.getStrength());
@@ -240,7 +239,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setStrength(nbt.getInteger("Strength"));
 		this.setVariant(nbt.getInteger("Variant"));
@@ -272,7 +271,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
 	@Nullable
 	@Override
-	public EntityAnimalCamel createChild(@Nonnull EntityAgeable other) {
+	public EntityAnimalCamel createChild(@NotNull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
 		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			super.setFertilized(true);

@@ -14,8 +14,6 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.metal.api.types.type.IMetalType;
 
-import javax.annotation.Nonnull;
-
 /**
  * Интерфейс, представляющий блок металла.
  */
@@ -34,7 +32,7 @@ public interface IMetalBlock extends IMetalType, IAutoReg, IItemSize, ICustomMod
 	 *
 	 * @return Местоположение регистрации блока почвы.
 	 */
-	@Nonnull
+	@NotNull
 	default String getName() {
 		return String.format("metal/%s/%s", getBlockVariant(), getType());
 	}

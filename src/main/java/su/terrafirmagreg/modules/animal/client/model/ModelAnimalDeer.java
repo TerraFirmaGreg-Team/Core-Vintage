@@ -7,14 +7,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalDeer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalDeer extends ModelBase {
 	//fields
 	private final ModelRenderer antler24;
@@ -320,7 +318,7 @@ public class ModelAnimalDeer extends ModelBase {
 	}
 
 	@Override
-	public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(@NotNull Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 

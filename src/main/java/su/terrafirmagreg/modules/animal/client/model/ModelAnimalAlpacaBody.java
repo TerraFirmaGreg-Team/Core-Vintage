@@ -10,15 +10,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalAlpaca;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * ModelAlpacaBodyTFC
  * Created using Tabula 7.1.0
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalAlpacaBody extends ModelBase {
 	private final ModelRenderer ear1f;
 	private final ModelRenderer ear2f;

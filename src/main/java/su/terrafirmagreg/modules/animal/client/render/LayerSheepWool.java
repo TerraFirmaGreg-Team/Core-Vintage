@@ -10,10 +10,8 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalSheepWool;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class LayerSheepWool implements LayerRenderer<EntityAnimalSheep> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation("minecraft:textures/entity/sheep/sheep_fur.png");
 	private static final ResourceLocation OLD_TEXTURE = new ResourceLocation("tfc:textures/entity/animal/livestock/sheep_fur_old.png");

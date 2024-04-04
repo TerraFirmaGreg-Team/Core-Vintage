@@ -8,10 +8,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalPig;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalPig extends RenderAnimal<EntityAnimalPig> {
 	private static final ResourceLocation PIG_YOUNG = ModUtils.getID("textures/entity/animal/livestock/pig_young.png");
 	private static final ResourceLocation PIG_OLD = ModUtils.getID("textures/entity/animal/livestock/pig_old.png");

@@ -6,16 +6,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalTurkey;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalTurkey;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalTurkey extends RenderLiving<EntityAnimalTurkey> {
 	private static final ResourceLocation MALE = ModUtils.getID("textures/entity/animal/huntable/turkeym.png");
 	private static final ResourceLocation FEMALE = ModUtils.getID("textures/entity/animal/huntable/turkeyf.png");
@@ -25,7 +23,7 @@ public class RenderAnimalTurkey extends RenderLiving<EntityAnimalTurkey> {
 	}
 
 	@Override
-	public void doRender(@Nonnull EntityAnimalTurkey turkey, double par2, double par4, double par6, float par8, float par9) {
+	public void doRender(@NotNull EntityAnimalTurkey turkey, double par2, double par4, double par6, float par8, float par9) {
 		this.shadowSize = (float) (0.35f + (turkey.getPercentToAdulthood() * 0.35f));
 		super.doRender(turkey, par2, par4, par6, par8, par9);
 	}

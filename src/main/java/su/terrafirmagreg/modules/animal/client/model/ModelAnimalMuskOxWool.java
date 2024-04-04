@@ -8,15 +8,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalMuskOx;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * ModelAlpacaWoolTFC
  * Created using Tabula 7.1.0
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalMuskOxWool extends ModelBase {
 	public ModelRenderer bodyShoulderQiviut;
 	public ModelRenderer bodyHairQiviut;

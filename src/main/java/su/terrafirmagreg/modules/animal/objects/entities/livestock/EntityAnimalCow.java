@@ -29,6 +29,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
@@ -41,14 +42,11 @@ import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 	private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, TFCEntities.getLongDataSerializer());
 
@@ -111,19 +109,19 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setLong("milkedTick", getMilkedTick());
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		setMilkedTick(compound.getLong("milkedTick"));
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 		FluidActionResult fillResult = FluidUtil.tryFillContainer(itemstack, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
 				Fluid.BUCKET_VOLUME, player, false);
@@ -154,7 +152,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 	}
 
 	@Override
-	protected boolean eatFood(@Nonnull ItemStack stack, EntityPlayer player) {
+	protected boolean eatFood(@NotNull ItemStack stack, EntityPlayer player) {
 		// Refuses to eat rotten stuff
 		IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 		if (cap != null) {

@@ -13,10 +13,8 @@ import su.terrafirmagreg.modules.animal.client.model.ModelAnimalChicken;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalChicken;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalChicken extends RenderLiving<EntityAnimalChicken> {
 	private static final ResourceLocation CHICKEN_YOUNG = ModUtils.getID("textures/entity/animal/livestock/chicken_young.png");
 	private static final ResourceLocation CHICKEN_OLD = ModUtils.getID("textures/entity/animal/livestock/chicken_old.png");

@@ -6,15 +6,13 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.client.model.ModelAnimalGrizzlyBear;
 import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalGrizzlyBear;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderAnimalGrizzlyBear extends RenderLiving<EntityAnimalGrizzlyBear> {
 	private static final ResourceLocation BEAR_TEXTURE = ModUtils.getID("textures/entity/animal/predators/grizzlybear.png");
 
@@ -23,7 +21,7 @@ public class RenderAnimalGrizzlyBear extends RenderLiving<EntityAnimalGrizzlyBea
 	}
 
 	@Override
-	public void doRender(@Nonnull EntityAnimalGrizzlyBear bear, double par2, double par4, double par6, float par8, float par9) {
+	public void doRender(@NotNull EntityAnimalGrizzlyBear bear, double par2, double par4, double par6, float par8, float par9) {
 		this.shadowSize = (float) (0.35f + (bear.getPercentToAdulthood() * 0.35f));
 		super.doRender(bear, par2, par4, par6, par8, par9);
 	}

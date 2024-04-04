@@ -22,9 +22,7 @@ import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttack
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIStandAttack;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IPredator, EntityAnimalAIStandAttack.IEntityStandAttack {
 	private static final int DAYS_TO_ADULTHOOD = 240;
 

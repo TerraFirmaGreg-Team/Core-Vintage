@@ -100,7 +100,7 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 			ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 
 			if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1)
-					.isEmpty() && LoomRecipe.get(heldItem) != null) {
+			                                                      .isEmpty() && LoomRecipe.get(heldItem) != null) {
 				inventory.setStackInSlot(0, heldItem.copy());
 				inventory.getStackInSlot(0).setCount(1);
 				heldItem.shrink(1);
@@ -110,8 +110,8 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 				return true;
 			} else if (!inventory.getStackInSlot(0).isEmpty()) {
 				if (IIngredient.of(inventory.getStackInSlot(0))
-						.testIgnoreCount(heldItem) && recipe.getInputCount() > inventory.getStackInSlot(0)
-						.getCount()) {
+				               .testIgnoreCount(heldItem) && recipe.getInputCount() > inventory.getStackInSlot(0)
+				                                                                               .getCount()) {
 					heldItem.shrink(1);
 					inventory.getStackInSlot(0).grow(1);
 
@@ -122,7 +122,7 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 
 			if (recipe != null && heldItem.isEmpty()) {
 				if (recipe.getInputCount() == inventory.getStackInSlot(0)
-						.getCount() && progress < recipe.getStepCount() && !needsUpdate) {
+				                                       .getCount() && progress < recipe.getStepCount() && !needsUpdate) {
 					if (!world.isRemote) {
 						long time = world.getTotalWorldTime() - lastPushed;
 						if (time < 20) {

@@ -7,10 +7,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalBoar;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 
 /**
@@ -19,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelAnimalBoar extends ModelBase {
 	public ModelRenderer legLBackTop;
 	public ModelRenderer legLFrontTop;
@@ -311,7 +309,7 @@ public class ModelAnimalBoar extends ModelBase {
 	}
 
 	@Override
-	public void render(@Nonnull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
+	public void render(@NotNull Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 		EntityAnimalBoar hog = ((EntityAnimalBoar) entity);
 
 		float percent = (float) hog.getPercentToAdulthood();

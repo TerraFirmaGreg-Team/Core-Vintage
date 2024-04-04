@@ -34,7 +34,7 @@ public class ModuleRegistry {
 		}
 
 		// Don't really need to keep this around.
-		this.moduleClassList = null;
+		this.moduleClassList.clear();
 
 		// Sort the module list by module priority.
 		Collections.sort(this.moduleList);

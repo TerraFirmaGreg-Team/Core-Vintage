@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public final class NBTUtils {
 
 	/**

@@ -170,14 +170,6 @@ public class RegistryManager {
 	private NetworkEntityIdSupplier networkEntityIdSupplier;
 
 	/**
-	 * Constructs a new Registry for the specified mod id. Multiple helpers can exist
-	 * with the same id, but it's not recommended.
-	 */
-	public RegistryManager() {
-		this(null);
-	}
-
-	/**
 	 * Constructs a new Registry. The modid for the helper is equal to that of the active
 	 * mod container, and auto model registration is enabled.
 	 *

@@ -23,8 +23,8 @@ import su.terrafirmagreg.api.model.CustomModelLoader;
 import javax.vecmath.Vector4f;
 import java.util.Optional;
 
-
-public class ModelUtils {
+@SuppressWarnings("unused")
+public final class ModelUtils {
 
 	// ===== StateMapper ===========================================================================================================================//
 

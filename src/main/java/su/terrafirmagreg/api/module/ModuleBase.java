@@ -55,9 +55,12 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	@Getter
 	private File configurationDirectory;
 
+	protected ModuleBase() {
+		this(-1);
+	}
+
 	protected ModuleBase(int priority) {
 		this(priority, Loader.instance().activeModContainer().getModId());
-
 	}
 
 	protected ModuleBase(int priority, @NotNull String modID) {
@@ -68,6 +71,10 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
 	protected void setConfigurationDirectory(File file) {
 		this.configurationDirectory = file;
+	}
+
+	protected void enableAutoRegistry() {
+		enableAutoRegistry(null);
 	}
 
 
@@ -188,6 +195,14 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 	// --------------------------------------------------------------------------
 
 	public int compareTo(@NotNull ModuleBase otherModule) {
-		return Integer.compare(this.priority, otherModule.getPriority());
+		if (this.priority == -1 && otherModule.getPriority() == -1) {
+			return this.name.compareTo(otherModule.getName());
+		} else if (this.priority == -1) {
+			return -1;
+		} else if (otherModule.getPriority() == -1) {
+			return 1;
+		} else {
+			return Integer.compare(this.priority, otherModule.getPriority());
+		}
 	}
 }

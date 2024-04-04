@@ -2,7 +2,8 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.client.renderer.GlStateManager;
 
-public class ColourUtils {
+@SuppressWarnings("unused")
+public final class ColourUtils {
 
 	private ColourUtils() {
 		throw new IllegalAccessError("Utility class");

@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.model.CustomModelLoader;
-import su.terrafirmagreg.api.module.ModuleManager;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
@@ -135,12 +134,7 @@ public class Registry {
 	public void onRegisterLootTableLoad(LootTableLoadEvent event) {
 		for (var builder : this.registryManager.getLootTableEntries().get(event.getName())) {
 			var pool = event.getTable().getPool(builder.getPool());
-			if (pool != null) pool.addEntry(builder.build());
-			else {
-				ModuleManager.LOGGER.info(
-						"The mod {} tried to add loot to {} but the pool was not found. {}",
-						this.registryManager.getModID(), event.getName(), builder.toString());
-			}
+			pool.addEntry(builder.build());
 		}
 	}
 

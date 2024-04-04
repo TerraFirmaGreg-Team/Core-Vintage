@@ -8,7 +8,8 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityUtils {
+@SuppressWarnings("unused")
+public final class EntityUtils {
 
 	/**
 	 * An array of armor equipment slots.

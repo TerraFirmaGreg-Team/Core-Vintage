@@ -18,7 +18,8 @@ import java.util.List;
 import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
-public class BlockUtils {
+@SuppressWarnings("unused")
+public final class BlockUtils {
 
 	private BlockUtils() {
 		throw new IllegalAccessError("Utility class");

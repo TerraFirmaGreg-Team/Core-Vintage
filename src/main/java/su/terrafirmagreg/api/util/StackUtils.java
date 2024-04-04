@@ -27,6 +27,7 @@ import su.terrafirmagreg.api.lib.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public final class StackUtils {
 
 	private StackUtils() {

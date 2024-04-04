@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import su.terrafirmagreg.api.model.property.PropertyObject;
 
+@SuppressWarnings("unused")
 public final class PropertyUtils {
 
 	/**

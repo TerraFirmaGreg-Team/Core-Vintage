@@ -11,7 +11,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.jetbrains.annotations.Nullable;
 
-public class TileUtils {
+@SuppressWarnings("unused")
+public final class TileUtils {
 
 	private TileUtils() {
 		throw new IllegalAccessError("Utility class");

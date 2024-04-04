@@ -9,10 +9,8 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.objects.items.ItemSlabTFC;
 import net.dries007.tfc.objects.items.ceramics.*;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
@@ -41,7 +39,6 @@ import tfcflorae.objects.GemTFCF;
 import tfcflorae.objects.PowderTFCF;
 import tfcflorae.objects.ToolMaterialsTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
 import tfcflorae.objects.blocks.wood.BlockLogTFCF;
 import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLog;
@@ -2233,15 +2230,6 @@ public final class ItemsTFCF {
 			}
 		}
 
-
-		for (BlockSlabTFC.Half slab : BlocksTFCF.getAllSlabBlocksTFC())
-			simpleItems.add(register(r, slab.getRegistryName()
-			                                .getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
-
-		for (BlockSlabTFCF.Half slab : BlocksTFCF.getAllSlabBlocks())
-			simpleItems.add(register(r, slab.getRegistryName()
-			                                .getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_DECORATIONS));
-		
 
 		BlocksTFCF.getAllNormalItemBlocks().forEach((x) -> {
 			registerItemBlock(r, x);

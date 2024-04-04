@@ -62,8 +62,7 @@ public class ClientProxy extends CommonProxy {
 			event.getToolTip().add(line);
 		}
 
-		if ((event.getItemStack().getItem() instanceof ItemSeedsTFC)) {
-			ItemSeedsTFC seedsTFC = (ItemSeedsTFC) event.getItemStack().getItem();
+		if (event.getItemStack().getItem() instanceof ItemSeedsTFC seedsTFC) {
 			ICrop crop = cropCache.get(seedsTFC);
 			if (GuiScreen.isShiftKeyDown()) {
 				CropNutrients n = CropNutrients.getCropNValues(crop);

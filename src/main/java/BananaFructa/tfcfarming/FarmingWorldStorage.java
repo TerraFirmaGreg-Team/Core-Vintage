@@ -120,8 +120,7 @@ public class FarmingWorldStorage extends WorldSavedData {
 							deadCrop = true;
 							continue;
 						}
-						if (b instanceof BlockCropTFC) {
-							BlockCropTFC cropTFC = (BlockCropTFC) b;
+						if (b instanceof BlockCropTFC cropTFC) {
 							NutrientClass nc = CropNutrients.getCropNValues(cropTFC.getCrop()).favouriteNutrient;
 							if (nc == nutrientClass) break; // the top crop is already absorbing that nutrient
 							else continue;

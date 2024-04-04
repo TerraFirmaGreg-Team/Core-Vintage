@@ -4,13 +4,11 @@ import com.google.common.base.Strings;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.GrassColorHandler;
-import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -48,7 +46,6 @@ import tfcflorae.objects.GemTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockRawTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
 import tfcflorae.objects.blocks.blocktype.farmland.*;
 import tfcflorae.objects.blocks.groundcover.BlockCoral;
 import tfcflorae.objects.blocks.plants.*;
@@ -195,22 +192,6 @@ public class ClientRegisterEventsTFCF {
 
 		for (Block block : BlocksTFCF.getAllCropBlocks())
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(WILD).build());
-
-
-		for (Block block : BlocksTFCF.getAllWallBlocks())
-			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
-
-		for (BlockSlabTFCF.Half block : BlocksTFCF.getAllSlabBlocks()) {
-			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSlabTFCF.VARIANT).build());
-			ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFCF.VARIANT)
-			                                                                         .build());
-		}
-
-		for (BlockSlabTFC.Half block : BlocksTFCF.getAllSlabBlocksTFC()) {
-			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
-			ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT)
-			                                                                         .build());
-		}
 
 		for (Block block : BlocksTFCF.getAllFluidBlocks())
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());

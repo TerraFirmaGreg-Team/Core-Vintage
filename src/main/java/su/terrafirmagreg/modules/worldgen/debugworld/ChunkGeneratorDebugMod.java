@@ -9,8 +9,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.ChunkGeneratorDebug;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.worldgen.ModuleWorldGen;
@@ -41,9 +41,9 @@ public class ChunkGeneratorDebugMod extends ChunkGeneratorDebug {
 
 		try {
 			// Set the fields, this is needed because vanilla hardcodes some references here.
-			Field fieldAllValidStates = ReflectionHelper.findField(net.minecraft.world.gen.ChunkGeneratorDebug.class, "ALL_VALID_STATES", "field_177464_a");
-			Field fieldWidth = ReflectionHelper.findField(net.minecraft.world.gen.ChunkGeneratorDebug.class, "GRID_WIDTH", "field_177462_b");
-			Field fieldHeight = ReflectionHelper.findField(net.minecraft.world.gen.ChunkGeneratorDebug.class, "GRID_HEIGHT", "field_181039_c");
+			Field fieldAllValidStates = ObfuscationReflectionHelper.findField(ChunkGeneratorDebug.class, "field_177464_a");
+			Field fieldWidth = ObfuscationReflectionHelper.findField(ChunkGeneratorDebug.class, "field_177462_b");
+			Field fieldHeight = ObfuscationReflectionHelper.findField(ChunkGeneratorDebug.class, "field_181039_c");
 
 			ModuleWorldGen.setFinalStatic(fieldAllValidStates, allModStates);
 			ModuleWorldGen.setFinalStatic(fieldWidth, width);
@@ -77,7 +77,7 @@ public class ChunkGeneratorDebugMod extends ChunkGeneratorDebug {
 
 		final Chunk chunk = new Chunk(this.world, primer, x, z);
 		chunk.generateSkylightMap();
-		final Biome[] abiome = this.world.getBiomeProvider().getBiomes((Biome[]) null, x * 16, z * 16, 16, 16);
+		final Biome[] abiome = this.world.getBiomeProvider().getBiomes(null, x * 16, z * 16, 16, 16);
 		final byte[] abyte = chunk.getBiomeArray();
 
 		for (int i1 = 0; i1 < abyte.length; ++i1) {

@@ -45,8 +45,6 @@ import tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
 import tfcflorae.objects.blocks.wood.BlockLogTFCF;
 import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLog;
-import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitDoor;
-import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitSlab;
 import tfcflorae.objects.items.ceramics.*;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.objects.items.food.ItemSandwichTFCF;
@@ -1278,8 +1276,6 @@ public final class ItemsTFCF {
 	@Getter
 	private static ImmutableList<BlockSurfaceOreDeposit> allSurfaceOreBlocks;
 	@Getter
-	private static ImmutableList<ItemFruitDoor> allFruitDoors;
-	@Getter
 	private static ImmutableList<Item> allCeramicMoldItems;
 	@Getter
 	private static ImmutableList<ItemArmorTFCF> allArmorItems;
@@ -1297,7 +1293,6 @@ public final class ItemsTFCF {
 		ImmutableList.Builder<Item> simpleItems = ImmutableList.builder();
 		ImmutableList.Builder<ItemBowTFCF> itemBows = ImmutableList.builder();
 		ImmutableList.Builder<BlockSurfaceOreDeposit> surfaceOreBlocks = new Builder<>();
-		ImmutableList.Builder<ItemFruitDoor> fruitDoors = ImmutableList.builder();
 		ImmutableList.Builder<Item> ceramicItems = ImmutableList.builder();
 		ImmutableList.Builder<ItemArmorTFCF> armorItems = ImmutableList.builder();
 
@@ -1388,7 +1383,7 @@ public final class ItemsTFCF {
 					ItemFoodTFCF dried = new ItemFoodTFCF(fruit.getDriedData());
 					simpleItems.add(register(r, "food/dried/" + fruit.name().toLowerCase(), dried, CT_FOOD));
 					OreDictionary.registerOre(OreDictionaryHelper.toString("dried_" + fruit.name()
-							.toLowerCase()), dried);
+					                                                                       .toLowerCase()), dried);
 					OreDictionary.registerOre("fruitDry", dried);
 					driedFruits.put(fruit, dried);
 				}
@@ -1397,7 +1392,7 @@ public final class ItemsTFCF {
 					ItemFoodTFCF dried = new ItemFoodTFCF(fruit.getDriedData());
 					simpleItems.add(register(r, "food/dried/" + fruit.name().toLowerCase(), dried, CT_FOOD));
 					OreDictionary.registerOre(OreDictionaryHelper.toString("dried_" + fruit.name()
-							.toLowerCase()), dried);
+					                                                                       .toLowerCase()), dried);
 					OreDictionary.registerOre("fruitDry", dried);
 					driedFruits.put(fruit, dried);
 				}
@@ -1724,9 +1719,9 @@ public final class ItemsTFCF {
 						// Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
 						ItemPottery item = new ItemEarthenwareMold(type);
 						ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name()
-								.toLowerCase(), item, CT_POTTERY));
+						                                                                      .toLowerCase(), item, CT_POTTERY));
 						simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-								.toLowerCase(), new ItemUnfiredEarthenwareMold(type), CT_POTTERY));
+						                                                                       .toLowerCase(), new ItemUnfiredEarthenwareMold(type), CT_POTTERY));
 					}
 				}
 
@@ -1736,19 +1731,19 @@ public final class ItemsTFCF {
 							ItemPottery item = new ItemEarthenwareMoldTFCE(type, type.getSmeltAmount());
 							if (ItemMetalTFCE.ItemType.NAIL.isTypeActive() && type == ItemMetalTFCE.ItemType.NAIL) {
 								ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                      .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
+								                                                                       .toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
 							} else if (ItemMetalTFCE.ItemType.RING.isTypeActive() && type == ItemMetalTFCE.ItemType.RING) {
 								ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                      .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
+								                                                                       .toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
 							} else if (type == ItemMetalTFCE.ItemType.HALBERD_BLADE) {
 								ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                      .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
+								                                                                       .toLowerCase(), new ItemUnfiredEarthenwareMoldTFCE(type), CT_POTTERY));
 							}
 						}
 					}
@@ -1788,9 +1783,9 @@ public final class ItemsTFCF {
 						// Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
 						ItemPottery item = new ItemKaoliniteMold(type);
 						ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name()
-								.toLowerCase(), item, CT_POTTERY));
+						                                                                    .toLowerCase(), item, CT_POTTERY));
 						simpleItems.add(register(r, "ceramics/kaolinite/unfired/mold/" + type.name()
-								.toLowerCase(), new ItemUnfiredKaoliniteMold(type), CT_POTTERY));
+						                                                                     .toLowerCase(), new ItemUnfiredKaoliniteMold(type), CT_POTTERY));
 					}
 				}
 
@@ -1800,19 +1795,19 @@ public final class ItemsTFCF {
 							ItemPottery item = new ItemKaoliniteMoldTFCE(type, type.getSmeltAmount());
 							if (ItemMetalTFCE.ItemType.NAIL.isTypeActive() && type == ItemMetalTFCE.ItemType.NAIL) {
 								ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                    .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/kaolinite/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
+								                                                                     .toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
 							} else if (ItemMetalTFCE.ItemType.RING.isTypeActive() && type == ItemMetalTFCE.ItemType.RING) {
 								ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                    .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/kaolinite/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
+								                                                                     .toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
 							} else if (type == ItemMetalTFCE.ItemType.HALBERD_BLADE) {
 								ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                    .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/kaolinite/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
+								                                                                     .toLowerCase(), new ItemUnfiredKaoliniteMoldTFCE(type), CT_POTTERY));
 							}
 						}
 					}
@@ -1852,9 +1847,9 @@ public final class ItemsTFCF {
 						// Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
 						ItemPottery item = new ItemStonewareMold(type);
 						ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name()
-								.toLowerCase(), item, CT_POTTERY));
+						                                                                    .toLowerCase(), item, CT_POTTERY));
 						simpleItems.add(register(r, "ceramics/stoneware/unfired/mold/" + type.name()
-								.toLowerCase(), new ItemUnfiredStonewareMold(type), CT_POTTERY));
+						                                                                     .toLowerCase(), new ItemUnfiredStonewareMold(type), CT_POTTERY));
 					}
 				}
 
@@ -1864,19 +1859,19 @@ public final class ItemsTFCF {
 							ItemPottery item = new ItemStonewareMoldTFCE(type, type.getSmeltAmount());
 							if (ItemMetalTFCE.ItemType.NAIL.isTypeActive() && type == ItemMetalTFCE.ItemType.NAIL) {
 								ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                    .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/stoneware/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
+								                                                                     .toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
 							} else if (ItemMetalTFCE.ItemType.RING.isTypeActive() && type == ItemMetalTFCE.ItemType.RING) {
 								ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                    .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/stoneware/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
+								                                                                     .toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
 							} else if (type == ItemMetalTFCE.ItemType.HALBERD_BLADE) {
 								ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name()
-										.toLowerCase(), item, CT_POTTERY));
+								                                                                    .toLowerCase(), item, CT_POTTERY));
 								simpleItems.add(register(r, "ceramics/stoneware/unfired/mold/" + type.name()
-										.toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
+								                                                                     .toLowerCase(), new ItemUnfiredStonewareMoldTFCE(type), CT_POTTERY));
 							}
 						}
 					}
@@ -1919,14 +1914,14 @@ public final class ItemsTFCF {
 				ItemMud mud = new ItemMud(rock);
 				ItemUnfiredMudBrick unfiredMudBrick = new ItemUnfiredMudBrick(mud, rock);
 				simpleItems.add(register(r, "mud/mud_ball/" + rock.getRegistryName()
-						.getPath()
-						.toLowerCase(), mud, CT_ROCK_ITEMS));
+				                                                  .getPath()
+				                                                  .toLowerCase(), mud, CT_ROCK_ITEMS));
 				simpleItems.add(register(r, "mud/unfired/mud_brick/" + rock.getRegistryName()
-						.getPath()
-						.toLowerCase(), unfiredMudBrick, CT_ROCK_ITEMS));
+				                                                           .getPath()
+				                                                           .toLowerCase(), unfiredMudBrick, CT_ROCK_ITEMS));
 				simpleItems.add(register(r, "mud/fired/mud_brick/" + rock.getRegistryName()
-						.getPath()
-						.toLowerCase(), new ItemFiredMudBrick(unfiredMudBrick), CT_ROCK_ITEMS));
+				                                                         .getPath()
+				                                                         .toLowerCase(), new ItemFiredMudBrick(unfiredMudBrick), CT_ROCK_ITEMS));
 			}
 		}
 
@@ -2233,31 +2228,20 @@ public final class ItemsTFCF {
 				ItemMisc pole = new ItemMisc(Size.SMALL, Weight.MEDIUM);
 				simpleItems.add(register(r, "wood/fruit_tree/pole/" + name, pole, CT_WOOD));
 				OreDictionary.registerOre(OreDictionaryHelper.toString("pole_" + name.substring(0, 1)
-						.toLowerCase() + name.substring(1)
-						.toLowerCase()), pole);
+				                                                                     .toLowerCase() + name.substring(1)
+				                                                                                          .toLowerCase()), pole);
 			}
 		}
 
-		for (BlockFruitDoor blockDoor : BlocksTFCF.getAllFruitDoors()) {
-			ItemFruitDoor itemDoor = new ItemFruitDoor(blockDoor);
-			fruitDoors.add(register(r, blockDoor.getRegistryName().getPath(), itemDoor, CT_DECORATIONS));
-			OreDictionary.registerOre(OreDictionaryHelper.toString("door_wood"), itemDoor);
-			OreDictionary.registerOre(OreDictionaryHelper.toString("door_wood_" + blockDoor.Name), itemDoor);
-		}
-
-		for (BlockFruitSlab.Half slab : BlocksTFCF.getAllFruitSlabBlocks())
-			simpleItems.add(register(r, slab.getRegistryName()
-					.getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_DECORATIONS));
 
 		for (BlockSlabTFC.Half slab : BlocksTFCF.getAllSlabBlocksTFC())
 			simpleItems.add(register(r, slab.getRegistryName()
-					.getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
+			                                .getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
 
 		for (BlockSlabTFCF.Half slab : BlocksTFCF.getAllSlabBlocks())
 			simpleItems.add(register(r, slab.getRegistryName()
-					.getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_DECORATIONS));
-
-		allFruitDoors = fruitDoors.build();
+			                                .getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_DECORATIONS));
+		
 
 		BlocksTFCF.getAllNormalItemBlocks().forEach((x) -> {
 			registerItemBlock(r, x);
@@ -2277,10 +2261,10 @@ public final class ItemsTFCF {
 	public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
 		// Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
 		TFCFlorae.getLog()
-				.info("The below warnings about unintended overrides are normal. The override is intended - deal with it. ;)");
+		         .info("The below warnings about unintended overrides are normal. The override is intended - deal with it. ;)");
 		event.getRegistry().registerAll(
 				new ItemFlint(Size.VERY_SMALL, Weight.VERY_LIGHT).setRegistryName(Items.FLINT.getRegistryName())
-						.setTranslationKey("flint")
+				                                                 .setTranslationKey("flint")
 				//new ItemFoodTFCF(FoodDataTFCF.ROASTED_PORCINI).setRegistryName(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS)).getRegistryName()).setTranslationKey("barrel_cactus")
 		);
 

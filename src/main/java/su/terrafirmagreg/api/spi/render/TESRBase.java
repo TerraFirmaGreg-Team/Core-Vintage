@@ -6,7 +6,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TESRBase<T extends TileEntity> extends TileEntitySpecialRenderer<T> {
+public abstract class TESRBase<T extends TileEntity> extends TileEntitySpecialRenderer<T> {
 	// Use this to get vertices for a box from Min - Max point in 3D
 	// Pass the string of the axies you want the box to render on ('xz') for no top / bottom, etc.
 	// Pass 'xyz' for all vertices

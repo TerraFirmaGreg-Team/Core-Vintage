@@ -28,8 +28,7 @@ public class ItemFoodTFCF extends ItemFood implements IItemFoodTFC {
 		this.data = data;
 
 		for (Object obj : objs) {
-			if (obj instanceof PotionEffectToHave) {
-				PotionEffectToHave Effect = (PotionEffectToHave) obj;
+			if (obj instanceof PotionEffectToHave Effect) {
 				PotionEffects.add(Effect);
 			} else if (obj instanceof Object[])
 				OreDictionaryHelper.register(this, (Object[]) obj);

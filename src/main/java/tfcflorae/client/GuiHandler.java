@@ -10,22 +10,17 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
-import tfcflorae.client.gui.GuiCrate;
 import tfcflorae.client.gui.GuiUrn;
-import tfcflorae.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
 import tfcflorae.objects.container.ContainerBag;
-import tfcflorae.objects.container.ContainerCrate;
 import tfcflorae.objects.container.ContainerSack;
 import tfcflorae.objects.container.ContainerUrn;
 import tfcflorae.objects.items.ItemBag;
 import tfcflorae.objects.items.ItemSack;
 import tfcflorae.objects.items.rock.ItemMud;
-import tfcflorae.objects.te.TECrate;
 import tfcflorae.objects.te.TEUrn;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -106,16 +101,6 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerKnapping(KnappingTypes.FLINT, player.inventory, OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
 			case URN:
 				return new ContainerUrn(player.inventory, Helpers.getTE(world, pos, TEUrn.class));
-			case CRATE:
-				return new ContainerCrate(player.inventory, Helpers.getTE(world, pos, TECrate.class));
-			case CHEST:
-				if (world.getBlockState(pos).getBlock() instanceof BlockFruitChestTFCF) {
-					ILockableContainer chestContainer = ((BlockFruitChestTFCF) world.getBlockState(pos)
-					                                                                .getBlock()).getLockableContainer(world, pos);
-					//noinspection ConstantConditions
-					return new ContainerChestTFC(player.inventory, chestContainer, player);
-				}
-				return null;
 			default:
 				return null;
 		}
@@ -167,10 +152,6 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiUrn(container, player.inventory, Helpers.getTE(world, pos, TEUrn.class), world.getBlockState(new BlockPos(x, y, z))
 				                                                                                            .getBlock()
 				                                                                                            .getTranslationKey());
-			case CRATE:
-				return new GuiCrate(container, player.inventory, Helpers.getTE(world, pos, TECrate.class), world.getBlockState(new BlockPos(x, y, z))
-				                                                                                                .getBlock()
-				                                                                                                .getTranslationKey());
 			case CHEST:
 				if (container instanceof ContainerChestTFC) {
 					return new GuiChestTFC((ContainerChestTFC) container, player.inventory);
@@ -200,7 +181,6 @@ public class GuiHandler implements IGuiHandler {
 		FLINT,
 		CHEST,
 		URN,
-		CRATE,
 		NULL;
 
 		private static final Type[] values = values();

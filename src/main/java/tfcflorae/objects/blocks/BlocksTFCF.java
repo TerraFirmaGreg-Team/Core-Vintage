@@ -45,15 +45,16 @@ import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLeaves;
 import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLog;
 import tfcflorae.objects.blocks.wood.bamboo.BlockBambooSapling;
 import tfcflorae.objects.blocks.wood.cinnamon.*;
-import tfcflorae.objects.blocks.wood.fruitwood.*;
 import tfcflorae.objects.fluids.FluidsTFCF;
 import tfcflorae.objects.items.food.ItemBlockRot;
 import tfcflorae.objects.items.food.PotionEffectToHave;
-import tfcflorae.objects.items.itemblock.ItemBlockCrate;
 import tfcflorae.objects.items.itemblock.ItemBlockTallGrassWater;
 import tfcflorae.objects.items.itemblock.ItemBlockUrn;
 import tfcflorae.objects.items.itemblock.ItemBlockUrnLoot;
-import tfcflorae.objects.te.*;
+import tfcflorae.objects.te.TELargeEarthenwareVessel;
+import tfcflorae.objects.te.TELargeKaoliniteVessel;
+import tfcflorae.objects.te.TELargeStonewareVessel;
+import tfcflorae.objects.te.TEUrn;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.types.PlantsTFCF;
 import tfcflorae.types.TreesTFCF;
@@ -82,8 +83,7 @@ public final class BlocksTFCF {
 	public static final BlockUrn FIRED_URN = getNull();
 	@GameRegistry.ObjectHolder("storage/urn_loot")
 	public static final BlockUrnLoot URN_LOOT = getNull();
-	@GameRegistry.ObjectHolder("storage/crate")
-	public static final BlockCrate CRATE = getNull();
+
 
 	@GameRegistry.ObjectHolder("groundcover/bone")
 	public static final BlockSurfaceBones BONES = Helpers.getNull();
@@ -252,27 +252,8 @@ public final class BlocksTFCF {
 	private static ImmutableList<ItemBlock> allNormalItemBlocks;
 	private static ImmutableList<Block> allInventoryItemBlocks = Helpers.getNull();
 	private static ImmutableList<Block> allFoodItemBlocks = Helpers.getNull();
-	private static ImmutableList<BlockFenceGateLog> allFenceGateLogBlocks = Helpers.getNull();
 	private static ImmutableList<BlockFruitTreeLeaves> allFruitLeaves = Helpers.getNull();
 	private static ImmutableList<BlockFruitTreeSapling> allFruitSapling = Helpers.getNull();
-	//private static ImmutableList<BlockFruitBarrelTest> allFruitBarrel = Helpers.getNull();
-	private static ImmutableList<BlockFruitBookshelves> allFruitBookshelves = Helpers.getNull();
-	private static ImmutableList<BlockFruitButton> allFruitButton = Helpers.getNull();
-	private static ImmutableList<BlockFruitDoor> allFruitDoors = Helpers.getNull();
-	private static ImmutableList<BlockFruitPressurePlate> allFruitPressurePlate = Helpers.getNull();
-	private static ImmutableList<BlockFruitFence> allFruitFences = Helpers.getNull();
-	private static ImmutableList<BlockFruitFenceGate> allFruitFenceGates = Helpers.getNull();
-	private static ImmutableList<BlockFruitLogFence> allFruitLogFences = Helpers.getNull();
-	private static ImmutableList<BlockFruitLogFenceGate> allFruitLogFenceGates = Helpers.getNull();
-	private static ImmutableList<BlockFruitPlanks> allFruitPlanks = Helpers.getNull();
-	private static ImmutableList<BlockFruitSlab.Half> allFruitSlabBlocks = Helpers.getNull();
-	private static ImmutableList<BlockFruitStairs> allFruitStairBlocks = Helpers.getNull();
-	private static ImmutableList<BlockFruitSupport> allFruitSupport = Helpers.getNull();
-	private static ImmutableList<BlockFruitToolRack> allFruitToolRack = Helpers.getNull();
-	private static ImmutableList<BlockFruitTrapDoor> allFruitTrapDoors = Helpers.getNull();
-	private static ImmutableList<BlockFruitWorkbench> allFruitWorkbench = Helpers.getNull();
-	private static ImmutableList<BlockFruitChestTFCF> allFruitChestBlocks = Helpers.getNull();
-	private static ImmutableList<BlockFruitLoom> allFruitLoomBlocks = Helpers.getNull();
 	private static ImmutableList<BlockFluidBase> allFluidBlocks = Helpers.getNull();
 	private static ImmutableList<BlockCropTFC> allCropBlocks = Helpers.getNull();
 	private static ImmutableList<BlockCropDead> allDeadCrops = Helpers.getNull();
@@ -325,10 +306,6 @@ public final class BlocksTFCF {
 		return allFoodItemBlocks;
 	}
 
-	public static ImmutableList<BlockFenceGateLog> getAllFenceGateLogBlocks() {
-		return allFenceGateLogBlocks;
-	}
-
 	public static ImmutableList<BlockFruitTreeLeaves> getAllFruitLeaves() {
 		return allFruitLeaves;
 	}
@@ -337,82 +314,6 @@ public final class BlocksTFCF {
 		return allFruitSapling;
 	}
 
-    /*public static ImmutableList<BlockFruitBarrelTest> getAllFruitBarrel()
-    {
-        return allFruitBarrel;
-    }*/
-
-	public static ImmutableList<BlockFruitBookshelves> getAllFruitBookshelves() {
-		return allFruitBookshelves;
-	}
-
-	public static ImmutableList<BlockFruitButton> getAllFruitButton() {
-		return allFruitButton;
-	}
-
-	public static ImmutableList<BlockFruitDoor> getAllFruitDoors() {
-		return allFruitDoors;
-	}
-
-	public static ImmutableList<BlockFruitPlanks> getAllFruitPlanks() {
-		return allFruitPlanks;
-	}
-
-	public static ImmutableList<BlockPlanksTFC> getAllPlanksTFC() {
-		return allPlanksTFC;
-	}
-
-	public static ImmutableList<BlockFruitSlab.Half> getAllFruitSlabBlocks() {
-		return allFruitSlabBlocks;
-	}
-
-	public static ImmutableList<BlockFruitStairs> getAllFruitStairBlocks() {
-		return allFruitStairBlocks;
-	}
-
-	public static ImmutableList<BlockFruitPressurePlate> getAllFruitPressurePlate() {
-		return allFruitPressurePlate;
-	}
-
-	public static ImmutableList<BlockFruitFence> getAllFruitFences() {
-		return allFruitFences;
-	}
-
-	public static ImmutableList<BlockFruitFenceGate> getAllFruitFenceGates() {
-		return allFruitFenceGates;
-	}
-
-	public static ImmutableList<BlockFruitLogFence> getAllFruitLogFences() {
-		return allFruitLogFences;
-	}
-
-	public static ImmutableList<BlockFruitLogFenceGate> getAllFruitLogFenceGates() {
-		return allFruitLogFenceGates;
-	}
-
-	public static ImmutableList<BlockFruitSupport> getAllFruitSupport() {
-		return allFruitSupport;
-	}
-
-	public static ImmutableList<BlockFruitToolRack> getAllFruitToolRack() {
-		return allFruitToolRack;
-	}
-
-	public static ImmutableList<BlockFruitTrapDoor> getAllFruitTrapdoors() {
-		return allFruitTrapDoors;
-	}
-
-	public static ImmutableList<BlockFruitWorkbench> getAllFruitWorkbench() {
-		return allFruitWorkbench;
-	}
-
-	public static ImmutableList<BlockFruitChestTFCF> getAllFruitChestBlocks() {
-		return allFruitChestBlocks;
-	}
-
-	public static ImmutableList<BlockFruitLoom> getAllFruitLoomBlocks() {
-		return allFruitLoomBlocks;
-	}
 
 	public static ImmutableList<BlockCropTFC> getAllCropBlocks() {
 		return allCropBlocks;
@@ -587,24 +488,6 @@ public final class BlocksTFCF {
 		ImmutableList.Builder<BlockFenceGateLog> fenceGatesLog = ImmutableList.builder();
 		ImmutableList.Builder<BlockFruitTreeLeaves> fruitLeaves = ImmutableList.builder();
 		ImmutableList.Builder<BlockFruitTreeSapling> fruitSapling = ImmutableList.builder();
-		//ImmutableList.Builder<BlockFruitBarrelTest> fruitBarrel = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitBookshelves> fruitBookshelves = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitButton> fruitButton = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitDoor> fruitDoors = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitPlanks> fruitPlanks = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitSlab.Half> fruitSlab = new Builder<>();
-		ImmutableList.Builder<BlockFruitStairs> fruitStairs = new Builder<>();
-		ImmutableList.Builder<BlockFruitPressurePlate> fruitPressurePlate = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitFence> fruitFences = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitFenceGate> fruitFenceGates = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitLogFence> fruitLogFences = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitLogFenceGate> fruitLogFenceGates = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitSupport> fruitSupport = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitToolRack> fruitToolRack = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitTrapDoor> fruitTrapdoors = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitWorkbench> fruitWorkbench = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitChestTFCF> fruitChests = ImmutableList.builder();
-		ImmutableList.Builder<BlockFruitLoom> fruitLoom = ImmutableList.builder();
 		ImmutableList.Builder<BlockCropTFC> cropBlocks = ImmutableList.builder();
 		ImmutableList.Builder<BlockCropDead> deadCrops = ImmutableList.builder();
 		ImmutableList.Builder<BlockBerryBush> cropBerryBushBlocks = ImmutableList.builder();
@@ -665,7 +548,6 @@ public final class BlocksTFCF {
 
 		normalItemBlocks.add(new ItemBlockUrn(register(r, "storage/urn", new BlockUrn(), CT_POTTERY)));
 		normalItemBlocks.add(new ItemBlockUrnLoot(register(r, "storage/urn_loot", new BlockUrnLoot(), CT_POTTERY)));
-		normalItemBlocks.add(new ItemBlockCrate(register(r, "storage/crate", new BlockCrate(), CT_DECORATIONS)));
 
         /*normalItemBlocks.add(new ItemBlockTFC(register(r, "coral/tube/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA)));
         normalItemBlocks.add(new ItemBlockTFC(register(r, "coral/brain/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA)));
@@ -1199,11 +1081,6 @@ public final class BlocksTFCF {
 			normalItemBlocks.add(new ItemBlockRot(x));
 		});
 
-		allFenceGateLogBlocks = fenceGatesLog.build();
-		allFenceGateLogBlocks.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
 		allFruitLeaves = fruitLeaves.build();
 		allFruitLeaves.forEach((x) -> {
 			normalItemBlocks.add(new ItemBlockTFC(x));
@@ -1214,27 +1091,6 @@ public final class BlocksTFCF {
 			normalItemBlocks.add(new ItemBlockTFC(x));
 		});
 
-        /*allFruitBarrel = fruitBarrel.build();
-        allFruitBarrel.forEach((x) -> {
-            normalItemBlocks.add(new ItemBlockTFC(x));
-        });*/
-
-		allFruitBookshelves = fruitBookshelves.build();
-		allFruitBookshelves.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitButton = fruitButton.build();
-		allFruitButton.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitDoors = fruitDoors.build();
-
-		allFruitPlanks = fruitPlanks.build();
-		allFruitPlanks.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
 
 		allPlanksTFC = planksTFC.build();
 		allPlanksTFC.forEach((x) -> {
@@ -1244,70 +1100,6 @@ public final class BlocksTFCF {
 		allSlabBlocksTFC = blockSlabTFC.build();
 		allStairBlocksTFC = blockStairTFC.build();
 		allStairBlocksTFC.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-
-		allFruitSlabBlocks = fruitSlab.build();
-		allFruitStairBlocks = fruitStairs.build();
-		allFruitStairBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-
-		allFruitPressurePlate = fruitPressurePlate.build();
-		allFruitPressurePlate.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitFences = fruitFences.build();
-		allFruitFences.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitFenceGates = fruitFenceGates.build();
-		allFruitFenceGates.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitLogFences = fruitLogFences.build();
-		allFruitLogFences.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitLogFenceGates = fruitLogFenceGates.build();
-		allFruitLogFenceGates.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitSupport = fruitSupport.build();
-		allFruitSupport.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitToolRack = fruitToolRack.build();
-		allFruitToolRack.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitTrapDoors = fruitTrapdoors.build();
-		allFruitTrapDoors.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitWorkbench = fruitWorkbench.build();
-		allFruitWorkbench.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitChestBlocks = fruitChests.build();
-		allFruitChestBlocks.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-		allFruitLoomBlocks = fruitLoom.build();
-		allFruitLoomBlocks.forEach((x) -> {
-			normalItemBlocks.add(new ItemBlockTFC(x));
-		});
-
-        /*allMultiBlocks = multiBlock.build();
-        allMultiBlocks.forEach((x) -> {
-            normalItemBlocks.add(new ItemBlockTFC(x));
-        });*/
 
 		allNormalItemBlocks = normalItemBlocks.build();
 
@@ -1320,10 +1112,7 @@ public final class BlocksTFCF {
 		if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
 			register(TELargeStonewareVessel.class, "large_stoneware_vessel");
 		}
-		register(TEFruitChest.class, "fruit_chest");
-		register(TEFruitLoom.class, "fruit_loom");
 		register(TEUrn.class, "urn");
-		register(TECrate.class, "crate");
 	}
 
 	public static boolean isRawStone(IBlockState current) {

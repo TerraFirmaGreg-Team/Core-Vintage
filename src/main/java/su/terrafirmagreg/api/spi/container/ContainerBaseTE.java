@@ -1,8 +1,6 @@
 package su.terrafirmagreg.api.spi.container;
 
-import net.dries007.tfc.objects.container.ContainerSimple;
 import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
@@ -11,13 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 
 /**
  * This is the mother of all Container-with-a-Tile-Entity implementations
  *
  * @param <T> The Tile Entity class
  */
-public abstract class ContainerBaseTE<T extends TEInventory> extends ContainerSimple {
+public abstract class ContainerBaseTE<T extends TEBaseInventory> extends ContainerBase {
 	protected final T tile;
 	protected final EntityPlayer player;
 

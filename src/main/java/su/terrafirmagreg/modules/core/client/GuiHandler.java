@@ -88,6 +88,7 @@ public class GuiHandler implements IGuiHandler {
 		WOOD_BARREL,
 		WOOD_CHEST,
 		ALLOY_CALCULATOR,
+		CRATE,
 		NULL;
 
 		private static final Type[] values = values();

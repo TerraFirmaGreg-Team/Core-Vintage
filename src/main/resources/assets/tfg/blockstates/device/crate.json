@@ -1,0 +1,23 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/crate/closed",
+	"textures": {
+		"all": "tfg:blocks/device/crate"
+	}
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "sealed": {
+      "true": {},
+      "false": {
+        "model": "tfg:device/crate/open"
+      }
+    }
+  }
+}

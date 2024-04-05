@@ -4,7 +4,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -18,10 +17,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.data.SoundAnimal;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import java.util.ArrayList;
 import java.util.List;

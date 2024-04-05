@@ -11,11 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.modules.device.objects.tiles.TEInfectedAir;
-
-import org.jetbrains.annotations.Nullable;
 
 public class BlockInfectedAir extends BlockBase implements ITEBlock {
 

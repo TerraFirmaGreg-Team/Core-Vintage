@@ -33,11 +33,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
-import su.terrafirmagreg.modules.core.api.util.DamageSources;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import su.terrafirmagreg.api.lib.Constants;
 
-
 import java.util.List;
 
 

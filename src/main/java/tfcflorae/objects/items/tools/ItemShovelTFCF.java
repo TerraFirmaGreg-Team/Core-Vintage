@@ -23,8 +23,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 public class ItemShovelTFCF extends ItemSpade implements IItemSize {
 	public final ToolMaterial material;

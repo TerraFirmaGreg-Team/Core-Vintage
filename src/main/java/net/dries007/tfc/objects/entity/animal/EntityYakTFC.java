@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -15,10 +14,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.data.SoundAnimal;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 
 public class EntityYakTFC extends EntityCowTFC implements ILivestock {

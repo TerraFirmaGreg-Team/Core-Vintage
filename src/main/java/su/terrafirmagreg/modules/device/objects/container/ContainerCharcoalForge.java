@@ -8,7 +8,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
 
-
 import static su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge.*;
 
 

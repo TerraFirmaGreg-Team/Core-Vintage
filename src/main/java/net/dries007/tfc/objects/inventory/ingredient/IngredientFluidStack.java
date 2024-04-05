@@ -3,9 +3,7 @@ package net.dries007.tfc.objects.inventory.ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 public class IngredientFluidStack implements IIngredient<FluidStack> {

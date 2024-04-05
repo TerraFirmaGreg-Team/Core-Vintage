@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-
 import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;

@@ -21,8 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigurableItem {
 
 	public ItemHookJavelin(Metal metal, String name) {

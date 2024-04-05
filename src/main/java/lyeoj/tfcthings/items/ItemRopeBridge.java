@@ -19,8 +19,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemRopeBridge extends ItemTFC implements TFCThingsConfigurableItem {
 
 	public ItemRopeBridge() {

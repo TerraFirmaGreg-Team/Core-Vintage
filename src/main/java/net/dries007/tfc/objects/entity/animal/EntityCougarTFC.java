@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -18,10 +17,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import su.terrafirmagreg.modules.animal.api.type.IPredator;
-import su.terrafirmagreg.modules.animal.data.SoundAnimal;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 
 public class EntityCougarTFC extends EntityPantherTFC implements IPredator {

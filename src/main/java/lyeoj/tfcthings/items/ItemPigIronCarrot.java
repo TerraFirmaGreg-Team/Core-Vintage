@@ -19,8 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableItem {
 
 	private final Metal metal;

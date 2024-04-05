@@ -3,8 +3,6 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalForge;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -14,10 +12,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.modules.device.data.SoundDevice;
-
-import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalForge;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 
 import java.util.HashSet;
 import java.util.Set;

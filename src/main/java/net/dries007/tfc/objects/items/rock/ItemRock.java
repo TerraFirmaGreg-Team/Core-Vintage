@@ -17,8 +17,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -10,10 +10,9 @@ import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.objects.items.rock.ItemMud;
-
-import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 

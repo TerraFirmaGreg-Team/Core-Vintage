@@ -12,10 +12,9 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-
-import org.jetbrains.annotations.NotNull;
 
 
 public class TEToolRack extends TEBase {

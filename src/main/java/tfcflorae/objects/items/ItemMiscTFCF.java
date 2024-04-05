@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 @SuppressWarnings("WeakerAccess")
 //public class ItemMiscTFCF extends ItemMisc
 public class ItemMiscTFCF extends ItemTFCF implements IItemSize {

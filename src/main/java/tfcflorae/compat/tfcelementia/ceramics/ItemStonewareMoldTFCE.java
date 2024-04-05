@@ -34,12 +34,10 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import tfcflorae.compat.tfcelementia.recipes.UnmoldRecipeStoneware;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
 import java.util.List;

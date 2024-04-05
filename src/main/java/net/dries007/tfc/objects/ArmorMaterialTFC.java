@@ -4,7 +4,6 @@ import net.dries007.tfc.api.types.IArmorMaterialTFC;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;

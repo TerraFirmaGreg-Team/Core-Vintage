@@ -17,11 +17,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBloom;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

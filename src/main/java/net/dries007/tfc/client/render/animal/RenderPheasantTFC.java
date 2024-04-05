@@ -1,7 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelPheasantTFC;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityPheasantTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -10,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 

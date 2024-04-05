@@ -4,9 +4,8 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
 import net.minecraft.util.ResourceLocation;
-import su.terrafirmagreg.api.lib.Constants;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

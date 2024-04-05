@@ -1,7 +1,6 @@
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelTurkeyTFC;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -9,9 +8,8 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.jetbrains.annotations.NotNull;
-
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 

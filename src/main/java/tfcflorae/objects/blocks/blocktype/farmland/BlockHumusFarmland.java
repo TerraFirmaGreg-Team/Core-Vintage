@@ -26,7 +26,6 @@ import net.minecraftforge.common.IPlantable;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault

@@ -31,8 +31,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;

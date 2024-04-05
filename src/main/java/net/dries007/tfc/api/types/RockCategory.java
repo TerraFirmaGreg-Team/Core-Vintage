@@ -3,7 +3,6 @@ package net.dries007.tfc.api.types;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;

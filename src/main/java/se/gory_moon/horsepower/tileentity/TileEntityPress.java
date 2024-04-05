@@ -14,13 +14,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.recipes.HPRecipeBase;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.recipes.PressRecipe;
 import se.gory_moon.horsepower.util.Localization;
-
-import org.jetbrains.annotations.Nullable;
 
 public class TileEntityPress extends TileEntityHPHorseBase {
 	private final FluidTank tank = new FluidTank(Configs.general.pressFluidTankSize);

@@ -11,7 +11,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
 import org.jetbrains.annotations.NotNull;
 
 public class ContainerSmallVessel extends ContainerItemStack implements ISlotCallback {

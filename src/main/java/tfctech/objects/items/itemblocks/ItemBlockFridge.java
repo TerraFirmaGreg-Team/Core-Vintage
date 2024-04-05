@@ -16,8 +16,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import tfctech.objects.blocks.devices.BlockFridge;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 public class ItemBlockFridge extends ItemBlockTFC {

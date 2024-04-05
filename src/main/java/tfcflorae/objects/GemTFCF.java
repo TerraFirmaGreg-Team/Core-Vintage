@@ -1,9 +1,7 @@
 package tfcflorae.objects;
 
 import net.dries007.tfc.util.collections.WeightedCollection;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;

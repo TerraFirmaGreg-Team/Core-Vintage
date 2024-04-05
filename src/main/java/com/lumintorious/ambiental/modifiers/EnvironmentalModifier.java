@@ -53,7 +53,7 @@ public class EnvironmentalModifier extends BaseModifier {
 			} else if (state.getBlock() == Blocks.LAVA) {
 				return new EnvironmentalModifier("in_lava", 10f, 5f);
 			} else if (state.getBlock() == FluidsTFC.SALT_WATER.get().getBlock() && player.world.getBiome(pos)
-					.getTempCategory() == Biome.TempCategory.OCEAN) {
+			                                                                                    .getTempCategory() == Biome.TempCategory.OCEAN) {
 				return new EnvironmentalModifier("in_ocean_water", -8f, 6f);
 			} else {
 				return new EnvironmentalModifier("in_water", -5f, 6f);
@@ -130,7 +130,7 @@ public class EnvironmentalModifier extends BaseModifier {
 
 	public static EnvironmentalModifier handleFood(EntityPlayer player) {
 		if (getEnvironmentTemperature(player) < TemperatureCapability.AVERAGE - 3 && player.getFoodStats()
-				.getFoodLevel() > 16) {
+		                                                                                   .getFoodLevel() > 16) {
 			return new EnvironmentalModifier("well_fed", 2f, 0f);
 		}
 		return null;

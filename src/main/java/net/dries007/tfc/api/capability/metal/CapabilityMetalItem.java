@@ -14,9 +14,8 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.oredict.OreDictionary;
-import su.terrafirmagreg.api.lib.Constants;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

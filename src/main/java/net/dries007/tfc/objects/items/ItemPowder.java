@@ -7,8 +7,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.EnumMap;
 
 @SuppressWarnings("WeakerAccess")

@@ -20,15 +20,12 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 

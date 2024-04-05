@@ -24,8 +24,6 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TENestBox;
 
-import org.jetbrains.annotations.NotNull;
-
 
 public class BlockNestBox extends BlockBase implements ITEBlock {
 

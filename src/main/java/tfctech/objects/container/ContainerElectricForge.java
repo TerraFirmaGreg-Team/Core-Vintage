@@ -7,9 +7,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import tfctech.objects.tileentities.TEElectricForge;
-
 import org.jetbrains.annotations.Nullable;
+import tfctech.objects.tileentities.TEElectricForge;
 
 public class ContainerElectricForge extends ContainerTE<TEElectricForge> implements IButtonHandler {
 	public ContainerElectricForge(InventoryPlayer playerInv, TEElectricForge te) {

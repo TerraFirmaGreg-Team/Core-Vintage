@@ -15,7 +15,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;

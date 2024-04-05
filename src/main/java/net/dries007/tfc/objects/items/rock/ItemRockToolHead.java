@@ -9,9 +9,6 @@ import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;

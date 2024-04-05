@@ -29,9 +29,9 @@ public class TFCThingsItems {
 	public static final Item ITEM_METAL_BRACING = new ItemMetalBracing();
 	public static final Item ITEM_ROPE_BRIDGE = new ItemRopeBridge();
 	public static final Item ITEM_WHETSTONE = new ItemWhetstone(1, 64).setRegistryName("whetstone")
-			.setTranslationKey("whetstone");
+	                                                                  .setTranslationKey("whetstone");
 	public static final Item ITEM_HONING_STEEL = new ItemWhetstone(2, 4200).setRegistryName("honing_steel")
-			.setTranslationKey("honing_steel");
+	                                                                       .setTranslationKey("honing_steel");
 	public static final Item ITEM_HONING_STEEL_DIAMOND = new ItemWhetstone(3, 4500)
 			.setRegistryName("honing_steel_diamond")
 			.setTranslationKey("honing_steel_diamond");

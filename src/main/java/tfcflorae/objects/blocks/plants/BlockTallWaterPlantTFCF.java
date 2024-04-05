@@ -19,9 +19,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fluids.Fluid;
-import tfcflorae.util.OreDictionaryHelper;
-
 import org.jetbrains.annotations.NotNull;
+import tfcflorae.util.OreDictionaryHelper;
 
 import java.util.HashMap;
 import java.util.Map;

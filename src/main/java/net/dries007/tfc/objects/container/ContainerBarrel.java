@@ -9,7 +9,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
 import org.jetbrains.annotations.Nullable;
 
 import static net.dries007.tfc.objects.te.TEBarrel.*;

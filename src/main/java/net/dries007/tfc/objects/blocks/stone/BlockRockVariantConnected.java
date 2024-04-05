@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 
-
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault

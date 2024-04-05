@@ -35,11 +35,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
 
 
 public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPlantable {

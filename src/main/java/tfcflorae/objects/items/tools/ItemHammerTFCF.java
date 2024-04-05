@@ -11,8 +11,6 @@ import net.minecraft.item.ItemTool;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 public class ItemHammerTFCF extends ItemTool implements IItemSize {

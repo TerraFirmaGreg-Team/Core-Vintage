@@ -7,8 +7,6 @@ import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemMetalBracing extends ItemTFC {
 
 	public ItemMetalBracing() {

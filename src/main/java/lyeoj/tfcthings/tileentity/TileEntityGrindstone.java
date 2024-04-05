@@ -19,7 +19,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-
 import org.jetbrains.annotations.NotNull;
 
 public class TileEntityGrindstone extends TEInventory implements ITickable {

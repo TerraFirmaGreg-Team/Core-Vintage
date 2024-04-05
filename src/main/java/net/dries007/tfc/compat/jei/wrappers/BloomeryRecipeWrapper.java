@@ -8,7 +8,6 @@ import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.compat.jei.TFCJEIPlugin;
 import net.minecraft.item.ItemStack;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

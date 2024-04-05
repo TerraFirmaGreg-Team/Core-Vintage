@@ -25,12 +25,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TEInductionCrucible;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 

@@ -22,12 +22,9 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 
 public class ItemBag extends ItemTFCF {

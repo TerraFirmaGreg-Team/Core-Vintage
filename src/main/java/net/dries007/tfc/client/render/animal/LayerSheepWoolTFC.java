@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.render.animal;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.client.model.animal.ModelSheepWoolTFC;
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,6 +8,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 
 @SideOnly(Side.CLIENT)

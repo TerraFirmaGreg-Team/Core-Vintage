@@ -1,7 +1,6 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 
 import java.util.Collections;
 import java.util.List;

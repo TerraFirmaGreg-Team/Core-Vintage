@@ -12,7 +12,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
-
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;

@@ -19,10 +19,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;

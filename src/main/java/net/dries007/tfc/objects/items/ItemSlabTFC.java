@@ -9,8 +9,6 @@ import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 

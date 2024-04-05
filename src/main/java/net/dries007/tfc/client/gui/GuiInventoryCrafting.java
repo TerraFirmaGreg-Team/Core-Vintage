@@ -13,7 +13,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

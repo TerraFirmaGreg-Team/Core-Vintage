@@ -15,7 +15,6 @@ import tfctech.client.TechSounds;
 import tfctech.objects.blocks.TechBlocks;
 import tfctech.objects.blocks.devices.BlockLatexExtractor;
 
-
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 

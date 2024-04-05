@@ -21,6 +21,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
 import tfctech.TFCTech;
@@ -34,10 +36,6 @@ import tfctech.objects.tileentities.TEElectricForge;
 import tfctech.objects.tileentities.TEInductionCrucible;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 import tfctech.objects.tileentities.TESmelteryFirebox;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,14 +1,14 @@
 package com.lumintorious.ambiental.modifiers;
 
 import com.lumintorious.ambiental.capability.TemperatureCapability;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
-import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 import net.dries007.tfc.objects.te.TELamp;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
+import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
+import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
 public class TileEntityModifier extends BlockModifier {
 

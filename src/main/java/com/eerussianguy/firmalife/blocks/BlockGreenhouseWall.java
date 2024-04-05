@@ -26,9 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
-
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.GLASS;
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.TOP;
 import static net.minecraft.block.BlockHorizontal.FACING;

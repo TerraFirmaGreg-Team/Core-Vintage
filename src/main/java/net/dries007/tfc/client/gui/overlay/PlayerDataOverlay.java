@@ -4,7 +4,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
 import net.minecraft.client.Minecraft;
@@ -28,6 +27,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 import java.awt.*;
 

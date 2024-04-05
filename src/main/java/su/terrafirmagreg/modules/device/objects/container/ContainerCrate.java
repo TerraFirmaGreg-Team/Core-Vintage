@@ -5,12 +5,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.api.spi.container.IButtonHandler;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
 import su.terrafirmagreg.modules.device.objects.tiles.TECrate;
-
-import org.jetbrains.annotations.Nullable;
 
 public class ContainerCrate extends ContainerBaseTE<TECrate> implements IButtonHandler {
 	public ContainerCrate(InventoryPlayer playerInv, TECrate tile) {

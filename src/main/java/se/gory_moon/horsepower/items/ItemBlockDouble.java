@@ -47,8 +47,8 @@ public class ItemBlockDouble extends ItemBlock {
 			if (placeBlockAt(itemstack, player, worldIn, pos, facing, hitX, hitY, hitZ, blockState)) {
 				placeBlockAt(itemstack, player, worldIn, posUp, facing, hitX, hitY, hitZ, blockStateUp);
 				SoundType soundtype = worldIn.getBlockState(pos)
-						.getBlock()
-						.getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);
+				                             .getBlock()
+				                             .getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);
 				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 				itemstack.shrink(1);
 			}

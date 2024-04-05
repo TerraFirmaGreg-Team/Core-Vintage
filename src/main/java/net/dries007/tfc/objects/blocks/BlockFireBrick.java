@@ -9,8 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 
 public class BlockFireBrick extends Block implements IItemSize {
 	public BlockFireBrick() {

@@ -7,7 +7,6 @@ import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import org.jetbrains.annotations.NotNull;
 
 public class TEString extends TEInventory {

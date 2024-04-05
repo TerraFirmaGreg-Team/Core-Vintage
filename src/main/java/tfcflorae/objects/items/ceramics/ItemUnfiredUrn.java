@@ -6,8 +6,6 @@ import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemUnfiredUrn extends ItemPottery {
 
 	@Override

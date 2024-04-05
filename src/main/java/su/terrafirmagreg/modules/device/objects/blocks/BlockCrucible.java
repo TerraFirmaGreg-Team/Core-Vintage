@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
@@ -36,10 +37,6 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.client.render.TESRCrucible;
 import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 

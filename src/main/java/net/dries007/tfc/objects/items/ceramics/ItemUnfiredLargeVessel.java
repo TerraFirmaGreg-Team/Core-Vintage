@@ -5,8 +5,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemUnfiredLargeVessel extends ItemPottery {
 
 	@Override

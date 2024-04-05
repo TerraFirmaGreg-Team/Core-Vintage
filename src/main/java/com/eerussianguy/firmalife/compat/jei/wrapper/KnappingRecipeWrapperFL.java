@@ -8,7 +8,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.minecraft.util.ResourceLocation;
 
-
 import java.util.Map;
 
 

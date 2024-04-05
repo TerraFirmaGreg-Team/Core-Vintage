@@ -28,6 +28,8 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 import tfctech.client.TechSounds;
@@ -35,11 +37,6 @@ import tfctech.network.PacketFridgeUpdate;
 import tfctech.network.PacketTileEntityUpdate;
 import tfctech.objects.blocks.devices.BlockFridge;
 import tfctech.objects.storage.MachineEnergyContainer;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
-
 
 import static tfctech.objects.blocks.devices.BlockFridge.UPPER;
 

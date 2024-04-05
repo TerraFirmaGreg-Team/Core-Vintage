@@ -26,11 +26,9 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tfctech.objects.items.metal.ItemTechMetal;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import tfctech.objects.items.metal.ItemTechMetal;
 
 import java.util.EnumMap;
 import java.util.List;

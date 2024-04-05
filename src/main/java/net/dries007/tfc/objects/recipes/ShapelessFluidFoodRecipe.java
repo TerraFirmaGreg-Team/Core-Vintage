@@ -18,7 +18,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
 import org.jetbrains.annotations.NotNull;
 
 

@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.entity.ai;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 
 /**

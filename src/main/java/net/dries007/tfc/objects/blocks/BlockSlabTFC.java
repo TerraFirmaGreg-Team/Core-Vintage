@@ -21,7 +21,6 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;

@@ -9,13 +9,12 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockChopper;
 import se.gory_moon.horsepower.recipes.HPRecipeBase;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.util.Localization;
-
-import org.jetbrains.annotations.Nullable;
 
 public class TileEntityChopper extends TileEntityHPHorseBase {
 	private final float oldVisualWindup = -1;

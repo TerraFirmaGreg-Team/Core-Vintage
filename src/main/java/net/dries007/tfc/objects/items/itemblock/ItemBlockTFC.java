@@ -9,8 +9,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemBlockTFC extends ItemBlock implements IItemSize {
 	private final IItemSize size;
 

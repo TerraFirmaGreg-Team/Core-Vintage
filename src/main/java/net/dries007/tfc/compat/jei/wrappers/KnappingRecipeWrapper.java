@@ -13,9 +13,7 @@ import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.jetbrains.annotations.Nullable;
-
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 

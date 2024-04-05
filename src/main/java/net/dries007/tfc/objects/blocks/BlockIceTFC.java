@@ -19,7 +19,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

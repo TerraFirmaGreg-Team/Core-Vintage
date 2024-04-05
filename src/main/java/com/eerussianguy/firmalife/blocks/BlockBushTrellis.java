@@ -23,7 +23,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

@@ -5,7 +5,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.minecraft.item.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
 
 public class ItemRoastedCocoaBeans extends ItemMisc {

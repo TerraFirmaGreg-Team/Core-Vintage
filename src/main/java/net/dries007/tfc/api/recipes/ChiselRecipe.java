@@ -5,9 +5,7 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {

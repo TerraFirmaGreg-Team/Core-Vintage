@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import tfctech.compat.jei.wrappers.SmelteryRecipeWrapper;
 
-
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 

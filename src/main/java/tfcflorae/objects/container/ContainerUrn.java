@@ -7,10 +7,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 import tfcflorae.objects.blocks.BlockUrn;
 import tfcflorae.objects.te.TEUrn;
-
-import org.jetbrains.annotations.Nullable;
 
 public class ContainerUrn extends ContainerTE<TEUrn> implements IButtonHandler {
 	public ContainerUrn(InventoryPlayer playerInv, TEUrn tile) {

@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import tfcelementia.objects.items.metal.ItemMetalTFCE.ItemType;
 import tfcflorae.ConfigTFCF;
@@ -59,8 +60,6 @@ import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
 import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
 import tfcflorae.objects.items.ceramics.ItemStonewareMold;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 

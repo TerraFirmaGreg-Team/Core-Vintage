@@ -3,7 +3,6 @@ package net.dries007.tfc.util.skills;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
-
 import org.jetbrains.annotations.NotNull;
 
 /**

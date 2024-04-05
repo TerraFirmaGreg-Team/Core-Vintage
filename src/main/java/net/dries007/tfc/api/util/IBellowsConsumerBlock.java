@@ -4,9 +4,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 
 /**
  * Blocks(not TEs) must implement this interface in order to work with bellows

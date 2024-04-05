@@ -5,7 +5,6 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
-
 import org.jetbrains.annotations.NotNull;
 
 

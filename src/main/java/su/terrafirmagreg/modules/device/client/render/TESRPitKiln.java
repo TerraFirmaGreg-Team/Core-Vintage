@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -18,6 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 @SideOnly(Side.CLIENT)
 public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln> {

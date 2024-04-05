@@ -20,7 +20,6 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-
 import org.jetbrains.annotations.NotNull;
 
 public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {

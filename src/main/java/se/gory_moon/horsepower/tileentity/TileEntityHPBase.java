@@ -21,9 +21,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
-import se.gory_moon.horsepower.recipes.HPRecipeBase;
-
 import org.jetbrains.annotations.Nullable;
+import se.gory_moon.horsepower.recipes.HPRecipeBase;
 
 public abstract class TileEntityHPBase extends TileEntity {
 	private final IItemHandler handlerBottom;
@@ -275,7 +274,7 @@ public abstract class TileEntityHPBase extends TileEntity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T getCapability(Capability<T> capability, @javax.annotation.Nullable EnumFacing facing) {
+	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == null)
 				return (T) handlerNull;

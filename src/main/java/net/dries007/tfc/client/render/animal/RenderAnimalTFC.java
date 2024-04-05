@@ -1,13 +1,12 @@
 package net.dries007.tfc.client.render.animal;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 
 @SuppressWarnings("WeakerAccess")

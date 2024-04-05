@@ -43,11 +43,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import tfcflorae.util.OreDictionaryHelper;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import tfcflorae.util.OreDictionaryHelper;
 
 import java.util.HashMap;
 import java.util.Map;

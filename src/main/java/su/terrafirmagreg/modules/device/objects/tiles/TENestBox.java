@@ -20,12 +20,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.device.client.gui.GuiNestBox;
 import su.terrafirmagreg.modules.device.objects.container.ContainerNestBox;
-
-import org.jetbrains.annotations.Nullable;
 
 
 public class TENestBox extends TEInventory implements ITickable, IItemHandlerSidedCallback, IContainerProvider<ContainerNestBox, GuiNestBox> {

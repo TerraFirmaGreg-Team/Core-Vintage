@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

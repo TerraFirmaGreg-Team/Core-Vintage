@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.sharkbark.cellars.ModConfig;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

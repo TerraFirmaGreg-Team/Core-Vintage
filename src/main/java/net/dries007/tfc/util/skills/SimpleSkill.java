@@ -2,7 +2,6 @@ package net.dries007.tfc.util.skills;
 
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
-
 import org.jetbrains.annotations.NotNull;
 
 public class SimpleSkill extends Skill {

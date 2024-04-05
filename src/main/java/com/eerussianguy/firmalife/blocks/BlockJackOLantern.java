@@ -23,7 +23,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;

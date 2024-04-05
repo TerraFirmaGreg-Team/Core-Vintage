@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.minecraft.entity.IEntityLivingData;
@@ -14,11 +13,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.animal.api.type.IHuntable;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 
 
 public class EntityHareTFC extends EntityRabbitTFC implements IHuntable {

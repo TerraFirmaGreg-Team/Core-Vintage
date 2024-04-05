@@ -20,15 +20,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.client.model.modelvariants.GrindStoneModels;
 import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityGrindstone;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 

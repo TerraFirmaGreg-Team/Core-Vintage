@@ -27,11 +27,10 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.sharkbark.cellars.ModConfig;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiCellarShelf;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCellarShelf;
-
-import org.jetbrains.annotations.Nullable;
 
 public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallback, ITickable, IContainerProvider<ContainerCellarShelf, GuiCellarShelf> {
 	public float temperature = -1;

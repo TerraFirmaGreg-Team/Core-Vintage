@@ -12,8 +12,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.ArmorMaterialsTFCF;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResistance {
 	public static final int DEFAULT_COLOR = 14277081; // Light Gray
 	public static final int BURLAP_COLOR = 12497798;

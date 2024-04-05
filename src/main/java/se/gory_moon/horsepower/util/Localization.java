@@ -124,7 +124,9 @@ public final class Localization {
 	public static class ITEM {
 
 		public enum HORSE_GRINDSTONE {
-			SIZE, LOCATION, USE;
+			SIZE,
+			LOCATION,
+			USE;
 
 			public String translate(Object... vars) {
 				return Localization.translateString("item.horsepower:grindstone.description." + toString().toLowerCase(), vars);
@@ -140,7 +142,9 @@ public final class Localization {
 		}
 
 		public enum HORSE_CHOPPING {
-			SIZE, LOCATION, USE;
+			SIZE,
+			LOCATION,
+			USE;
 
 			public String translate(Object... vars) {
 				return Localization.translateString("item.horsepower:chopping.description." + toString().toLowerCase(), vars);
@@ -148,7 +152,9 @@ public final class Localization {
 		}
 
 		public enum HORSE_PRESS {
-			SIZE, LOCATION, USE;
+			SIZE,
+			LOCATION,
+			USE;
 
 			public String translate(Object... vars) {
 				return Localization.translateString("item.horsepower:press.description." + toString().toLowerCase(), vars);

@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import tfctech.client.render.teisr.TEISRTechDevices;
 import tfctech.client.render.tesr.TESRFridge;
 import tfctech.client.render.tesr.TESRLatexExtractor;
@@ -41,8 +42,6 @@ import tfctech.objects.items.metal.ItemTechMetal;
 import tfctech.objects.tileentities.TEFridge;
 import tfctech.objects.tileentities.TELatexExtractor;
 import tfctech.objects.tileentities.TEWireDrawBench;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.Collections;

@@ -5,9 +5,8 @@ import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import su.terrafirmagreg.api.lib.Constants;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.lib.Constants;
 
 public final class TechFluids {
 	private static final ResourceLocation LAVA_STILL = new ResourceLocation(Constants.MODID_TFC, "blocks/lava_still");

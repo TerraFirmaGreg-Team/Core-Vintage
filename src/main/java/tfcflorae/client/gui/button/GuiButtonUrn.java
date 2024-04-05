@@ -4,9 +4,8 @@ import net.dries007.tfc.client.button.GuiButtonTFC;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import tfcflorae.objects.te.TEUrn;
-
 import org.jetbrains.annotations.NotNull;
+import tfcflorae.objects.te.TEUrn;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;

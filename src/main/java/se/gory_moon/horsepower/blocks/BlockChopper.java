@@ -25,6 +25,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.common.Optional;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.client.model.modelvariants.ChopperModels;
 import se.gory_moon.horsepower.lib.Constants;
@@ -32,10 +34,6 @@ import se.gory_moon.horsepower.tileentity.TileEntityChopper;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;

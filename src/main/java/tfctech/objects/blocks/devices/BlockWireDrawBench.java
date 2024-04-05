@@ -27,9 +27,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tfctech.objects.tileentities.TEWireDrawBench;
-
 import org.jetbrains.annotations.Nullable;
+import tfctech.objects.tileentities.TEWireDrawBench;
 
 import java.util.Random;
 

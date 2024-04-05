@@ -10,8 +10,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResistance {
 	private final IArmorMaterialTFC materialTFC;
 

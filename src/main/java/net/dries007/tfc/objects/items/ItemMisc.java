@@ -7,8 +7,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemMisc extends ItemTFC implements IItemSize {
 	private final Size size;
 	private final Weight weight;

@@ -8,9 +8,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import pieman.caffeineaddon.potion.PotionEffects;
-
 import org.jetbrains.annotations.NotNull;
+import pieman.caffeineaddon.potion.PotionEffects;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 

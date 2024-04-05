@@ -19,8 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemHikingBoots extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
 
 	private static final String STEPS_NBT_KEY = "Steps";

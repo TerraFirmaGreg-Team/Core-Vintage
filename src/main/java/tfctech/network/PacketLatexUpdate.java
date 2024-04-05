@@ -9,9 +9,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import tfctech.objects.tileentities.TELatexExtractor;
-
 import org.jetbrains.annotations.NotNull;
+import tfctech.objects.tileentities.TELatexExtractor;
 
 /**
  * Update latex status on client, for render purposes

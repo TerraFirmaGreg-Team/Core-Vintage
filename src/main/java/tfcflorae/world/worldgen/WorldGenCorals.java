@@ -17,7 +17,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import tfcflorae.objects.blocks.groundcover.BlockCoral;
 import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
 
-
 import java.util.Random;
 
 

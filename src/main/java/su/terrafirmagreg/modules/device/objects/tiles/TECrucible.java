@@ -32,14 +32,12 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 

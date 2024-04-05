@@ -4,7 +4,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-
 import org.jetbrains.annotations.NotNull;
 
 public class TEStemCrop extends TECropBase {

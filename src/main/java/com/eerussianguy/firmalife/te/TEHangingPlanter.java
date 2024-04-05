@@ -3,7 +3,6 @@ package com.eerussianguy.firmalife.te;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.minecraft.nbt.NBTTagCompound;
-
 import org.jetbrains.annotations.NotNull;
 
 public class TEHangingPlanter extends TETickCounter implements GreenhouseHelpers.IGreenhouseReceiver {

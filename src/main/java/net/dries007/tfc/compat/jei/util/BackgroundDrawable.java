@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
-
 import org.jetbrains.annotations.NotNull;
 
 public class BackgroundDrawable implements IDrawable {

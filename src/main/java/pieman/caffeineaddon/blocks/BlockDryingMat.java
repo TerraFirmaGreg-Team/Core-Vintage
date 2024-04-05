@@ -20,13 +20,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.Nullable;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
 import su.terrafirmagreg.api.model.ICustomModel;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 

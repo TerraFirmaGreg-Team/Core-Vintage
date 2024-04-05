@@ -17,9 +17,8 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.items.ItemHandlerHelper;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 
 @SuppressWarnings("unused")

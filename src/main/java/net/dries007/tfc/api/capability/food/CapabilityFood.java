@@ -13,7 +13,6 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemHandlerHelper;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

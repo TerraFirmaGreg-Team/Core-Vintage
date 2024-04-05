@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import org.jetbrains.annotations.NotNull;
 
 

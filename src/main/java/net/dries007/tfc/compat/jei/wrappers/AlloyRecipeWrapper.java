@@ -11,7 +11,6 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.api.spi.container;
 
 import net.minecraft.nbt.NBTTagCompound;
-
 import org.jetbrains.annotations.Nullable;
 
 public interface IButtonHandler {

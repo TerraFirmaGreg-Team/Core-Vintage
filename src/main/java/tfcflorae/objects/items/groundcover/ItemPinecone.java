@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockPinecone;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 public class ItemPinecone extends ItemBlockTFC {

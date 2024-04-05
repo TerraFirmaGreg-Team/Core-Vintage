@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.model.animal;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,8 +8,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.util.math.MathHelper;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 public class ModelOcelotTFC extends ModelBase {
 	private final ModelRenderer ocelotBackLeftLeg;

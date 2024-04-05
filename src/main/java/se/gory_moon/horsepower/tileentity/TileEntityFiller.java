@@ -7,10 +7,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.blocks.BlockFiller;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
-
-import org.jetbrains.annotations.Nullable;
 
 public class TileEntityFiller extends TileEntity {
 	public TileEntityHPBase getFilledTileEntity() {
@@ -57,7 +56,7 @@ public class TileEntityFiller extends TileEntity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable net.minecraft.util.EnumFacing facing) {
+	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable net.minecraft.util.EnumFacing facing) {
 		TileEntityHPBase te = getFilledTileEntity();
 		if (te != null)
 			return te.getCapability(capability, facing);

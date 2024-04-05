@@ -9,9 +9,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import tfctech.objects.tileentities.TEFridge;
-
 import org.jetbrains.annotations.NotNull;
+import tfctech.objects.tileentities.TEFridge;
 
 public class PacketFridgeUpdate implements IMessage {
 	private BlockPos pos;

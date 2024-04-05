@@ -30,6 +30,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import tfctech.objects.blocks.TechBlocks;
 import tfctech.objects.items.ceramics.ItemFluidBowl;
@@ -38,10 +40,6 @@ import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.glassworking.ItemGlassMolder;
 import tfctech.objects.items.metal.ItemGroove;
 import tfctech.objects.items.metal.ItemTechMetal;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 

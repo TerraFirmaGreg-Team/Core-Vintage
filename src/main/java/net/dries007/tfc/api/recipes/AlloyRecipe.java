@@ -6,7 +6,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.Alloy;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import org.jetbrains.annotations.NotNull;
 
 /**

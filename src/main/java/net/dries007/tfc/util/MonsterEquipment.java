@@ -12,7 +12,6 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

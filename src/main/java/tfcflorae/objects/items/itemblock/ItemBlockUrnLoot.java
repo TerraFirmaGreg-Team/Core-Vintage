@@ -6,9 +6,8 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import tfcflorae.objects.blocks.BlockUrnLoot;
-
 import org.jetbrains.annotations.Nullable;
+import tfcflorae.objects.blocks.BlockUrnLoot;
 
 
 public class ItemBlockUrnLoot extends ItemBlockTFC implements IItemSize {

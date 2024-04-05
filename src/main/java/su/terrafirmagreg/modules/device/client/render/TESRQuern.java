@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -14,6 +13,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
 
 public class TESRQuern extends TileEntitySpecialRenderer<TEQuern> {
 	@Override

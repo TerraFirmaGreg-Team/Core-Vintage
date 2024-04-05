@@ -27,11 +27,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCharcoalForge;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 

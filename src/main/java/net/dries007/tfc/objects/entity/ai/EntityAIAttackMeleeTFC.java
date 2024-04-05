@@ -1,10 +1,10 @@
 package net.dries007.tfc.objects.entity.ai;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWander;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 /**
  * Extends vanilla AI to add a bit more in-depth to predators

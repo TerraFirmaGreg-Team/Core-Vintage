@@ -8,9 +8,8 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tfctech.TechConfig;
-
 import org.jetbrains.annotations.Nullable;
+import tfctech.TechConfig;
 
 /**
  * Energy storage for machines

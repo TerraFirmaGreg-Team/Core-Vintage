@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import net.dries007.tfc.objects.entity.ai.EntityAILawnmower;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -20,10 +19,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.data.SoundAnimal;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 
 /**

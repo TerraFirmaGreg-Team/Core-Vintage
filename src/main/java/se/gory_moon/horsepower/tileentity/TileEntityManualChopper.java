@@ -13,12 +13,11 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.HPEventHandler;
 import se.gory_moon.horsepower.recipes.HPRecipeBase;
 import se.gory_moon.horsepower.recipes.HPRecipes;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 

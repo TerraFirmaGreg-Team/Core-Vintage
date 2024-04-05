@@ -13,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static com.eerussianguy.firmalife.te.TEOven.*;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;

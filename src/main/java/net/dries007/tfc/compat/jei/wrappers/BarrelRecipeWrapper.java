@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

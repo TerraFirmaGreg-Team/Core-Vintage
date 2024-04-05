@@ -17,10 +17,9 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
-
-import org.jetbrains.annotations.NotNull;
 
 
 public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {

@@ -61,6 +61,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
@@ -68,8 +69,6 @@ import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.rock.data.BlocksRock;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 

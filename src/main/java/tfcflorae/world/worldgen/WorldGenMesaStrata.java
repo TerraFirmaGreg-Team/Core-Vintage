@@ -46,7 +46,7 @@ public class WorldGenMesaStrata implements IWorldGenerator {
 					//if (b == BiomesTFC.MESA || b == BiomesTFC.MESA_PLATEAU || b == BiomesTFC.MESA_BRYCE || b == BiomesTFC.MESA_PLATEAU_M || BiomesTFC.isMesaBiome(b))
 					if (BiomesTFC.isMesaBiome(b)) {
 						for (int y = WorldTypeTFC.SEALEVEL; y < world.getTopSolidOrLiquidBlock(strataLayer)
-								.getY(); ++y) {
+						                                             .getY(); ++y) {
 							BlockPos currentBlock = chunkBlockPos.add(x, y, z);
 							IBlockState currentBlockState = world.getBlockState(currentBlock);
 							IBlockState currentBlockStateTop = world.getBlockState(currentBlock.up());

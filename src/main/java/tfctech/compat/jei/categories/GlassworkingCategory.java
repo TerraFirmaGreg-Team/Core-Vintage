@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
 
-
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 

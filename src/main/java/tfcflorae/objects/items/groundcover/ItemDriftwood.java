@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockDriftwood;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 public class ItemDriftwood extends ItemBlockTFC {

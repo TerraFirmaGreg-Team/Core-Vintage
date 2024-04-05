@@ -35,11 +35,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
-import tfcflorae.objects.blocks.BlocksTFCF;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import tfcflorae.objects.blocks.BlocksTFCF;
 
 import java.util.Random;
 

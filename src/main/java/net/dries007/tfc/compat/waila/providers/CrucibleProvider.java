@@ -8,9 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
 
 import java.util.ArrayList;
 import java.util.Collections;

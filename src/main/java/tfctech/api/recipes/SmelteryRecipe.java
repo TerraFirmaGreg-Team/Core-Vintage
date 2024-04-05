@@ -4,11 +4,9 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import tfctech.registry.TechRegistries;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import tfctech.registry.TechRegistries;
 
 import java.util.ArrayList;
 import java.util.List;

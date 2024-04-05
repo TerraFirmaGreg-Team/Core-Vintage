@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -39,10 +40,6 @@ import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 import java.util.function.BiPredicate;

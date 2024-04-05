@@ -17,8 +17,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 

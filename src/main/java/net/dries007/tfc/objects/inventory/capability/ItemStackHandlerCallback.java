@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.inventory.capability;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
-
 import org.jetbrains.annotations.NotNull;
 
 public class ItemStackHandlerCallback extends ItemStackHandler {

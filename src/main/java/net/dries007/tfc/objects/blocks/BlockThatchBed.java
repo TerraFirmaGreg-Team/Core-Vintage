@@ -19,9 +19,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import su.terrafirmagreg.modules.core.data.BlocksCore;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.core.data.BlocksCore;
 
 import java.util.Random;
 

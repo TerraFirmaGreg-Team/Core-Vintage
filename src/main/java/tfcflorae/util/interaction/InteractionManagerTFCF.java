@@ -11,10 +11,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import org.jetbrains.annotations.Nullable;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;

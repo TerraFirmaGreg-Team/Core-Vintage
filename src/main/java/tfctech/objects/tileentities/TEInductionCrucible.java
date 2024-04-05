@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
@@ -25,11 +27,6 @@ import tfctech.client.TechSounds;
 import tfctech.client.audio.IMachineSoundEffect;
 import tfctech.objects.blocks.devices.BlockInductionCrucible;
 import tfctech.objects.storage.MachineEnergyContainer;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
-
 
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;

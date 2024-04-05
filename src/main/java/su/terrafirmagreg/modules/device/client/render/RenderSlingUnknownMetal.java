@@ -5,11 +5,10 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelUnknownProjectile;
 import su.terrafirmagreg.modules.device.objects.entity.EntityUnknownProjectile;
-
-import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingUnknownMetal extends Render<EntityUnknownProjectile> {
 	private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.getID("textures/blocks/metal/base.png");

@@ -95,7 +95,7 @@ public class CommonProxy {
 							ICrop crop = Utils.readDeclaredField(ItemSeedsTFC.class, seeds, "crop");
 							if (crop != null) {
 								TETickCounter teHangingPlanter = TEHangingPlanterN.class.getConstructor(ICrop.class)
-										.newInstance(crop);
+								                                                        .newInstance(crop);
 								teHangingPlanter.resetCounter();
 								event.getWorld().setTileEntity(event.getPos(), teHangingPlanter);
 							}
@@ -177,12 +177,12 @@ public class CommonProxy {
 				if (hangingPlanter || planter || canSeeSky(event.getPos(), event.getWorld())) {
 					if (TFCFarmingContent.isFertilizer(event.getItemStack())) {
 						int meta = event.getItemStack().getItem().getHasSubtypes() ? event.getItemStack()
-								.getMetadata() : 0;
+						                                                                  .getMetadata() : 0;
 						NutrientClass nutrientClass = TFCFarmingContent.getFertilizerClass(event.getItemStack());
 						int value = TFCFarmingContent.getFertilizerValue(event.getItemStack());
 						if (!planter && TFCFarming.INSTANCE.worldStorage.fertilizerBlock(event.getPos()
-								.getX(), event.getPos()
-								.getZ(), nutrientClass, value)) {
+						                                                                      .getX(), event.getPos()
+						                                                                                    .getZ(), nutrientClass, value)) {
 							event.getItemStack().setCount(event.getItemStack().getCount() - 1);
 						} else if (planter) {
 							TEPlanterN tePlanterN = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanterN.class);

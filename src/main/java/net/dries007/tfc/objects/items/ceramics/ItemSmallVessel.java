@@ -51,11 +51,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.lib.Constants;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.List;
 import java.util.Map.Entry;

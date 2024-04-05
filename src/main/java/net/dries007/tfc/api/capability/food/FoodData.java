@@ -2,7 +2,6 @@ package net.dries007.tfc.api.capability.food;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
-
 import org.jetbrains.annotations.Nullable;
 
 public class FoodData implements INBTSerializable<NBTTagCompound> {

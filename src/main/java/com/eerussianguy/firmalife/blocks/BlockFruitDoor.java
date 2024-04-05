@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;

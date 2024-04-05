@@ -24,7 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
-
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 

@@ -44,7 +44,7 @@ public class StructureGeneratorCorals extends WorldGenerator {
 
 	public static boolean canSpawnHere(Template template, World world, BlockPos pos, int variation) {
 		return isCornerValid(world, pos, variation) && isCornerValid(world, pos.add(template.getSize()
-				.getX(), 0, 0), variation)
+		                                                                                    .getX(), 0, 0), variation)
 				&& isCornerValid(world, pos.add(template.getSize().getX(), 0, template.getSize().getZ()), variation)
 				&& isCornerValid(world, pos.add(0, 0, template.getSize().getZ()), variation);
 	}
@@ -59,7 +59,7 @@ public class StructureGeneratorCorals extends WorldGenerator {
 		int groundX2 = getGroundFromAbove(world, pos.getX() + template.getSize().getX(), pos.getZ());
 		int groundX3 = getGroundFromAbove(world, pos.getX(), pos.getZ() + template.getSize().getZ());
 		int groundX4 = getGroundFromAbove(world, pos.getX() + template.getSize().getX(), pos.getZ() + template.getSize()
-				.getZ());
+		                                                                                                      .getZ());
 
 		if (groundX1 <= groundX2 && groundX1 <= groundX3 && groundX1 <= groundX4)
 			return groundX1;
@@ -77,7 +77,7 @@ public class StructureGeneratorCorals extends WorldGenerator {
 		BlockPos x1 = new BlockPos(pos.getX() + template.getSize().getX(), pos.getY(), pos.getZ());
 		BlockPos x2 = new BlockPos(pos.getX(), pos.getY(), pos.getZ() + template.getSize().getZ());
 		BlockPos x3 = new BlockPos(pos.getX() + template.getSize().getX(), pos.getY(), pos.getZ() + template.getSize()
-				.getZ());
+		                                                                                                    .getZ());
 
 		final Biome b1 = world.getBiome(x1);
 		final Biome b2 = world.getBiome(x2);
@@ -99,8 +99,8 @@ public class StructureGeneratorCorals extends WorldGenerator {
 
 		//Not accepted positions
 		if (world.getBlockState(pos).getBlock() == ChunkGenTFC.FRESH_WATER.getBlock() || world.getBlockState(pos)
-				.getBlock() == ChunkGenTFC.SALT_WATER.getBlock() || world.getBlockState(pos)
-				.getBlock() == ChunkGenTFC.HOT_WATER.getBlock()) {
+		                                                                                      .getBlock() == ChunkGenTFC.SALT_WATER.getBlock() || world.getBlockState(pos)
+		                                                                                                                                               .getBlock() == ChunkGenTFC.HOT_WATER.getBlock()) {
 			y = -99;
 		}
 		if (world.getBlockState(pos).getBlock() == Blocks.LAVA ||
@@ -156,8 +156,8 @@ public class StructureGeneratorCorals extends WorldGenerator {
 			// The structure can spawn here
 			Rotation rotation = Rotation.values()[rand.nextInt(3)];
 			PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE)
-					.setRotation(getRotation())
-					.setIgnoreStructureBlock(false);
+			                                                    .setRotation(getRotation())
+			                                                    .setIgnoreStructureBlock(false);
 
 			int newY = getLowestCorner(template, world, position);
 			position = position.add(0, (newY - position.getY()) + 1, 0);
@@ -180,10 +180,10 @@ public class StructureGeneratorCorals extends WorldGenerator {
 						state = block.getDefaultState();
 
 					for (Entry<IProperty<?>, Comparable<?>> entry2 : block.getDefaultState().getProperties()
-							.entrySet()) {
+					                                                      .entrySet()) {
 						if (entry2.getKey().getValueClass().equals(EnumFacing.class) && entry2.getKey()
-								.getName()
-								.equals("facing")) {
+						                                                                      .getName()
+						                                                                      .equals("facing")) {
 							state = state.withRotation(rotation.add(Rotation.CLOCKWISE_180));
 							break;
 						}

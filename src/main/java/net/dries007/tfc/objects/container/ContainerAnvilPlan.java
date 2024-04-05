@@ -7,7 +7,6 @@ import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-
 import org.jetbrains.annotations.Nullable;
 
 public class ContainerAnvilPlan extends ContainerTE<TEAnvilTFC> implements IButtonHandler {

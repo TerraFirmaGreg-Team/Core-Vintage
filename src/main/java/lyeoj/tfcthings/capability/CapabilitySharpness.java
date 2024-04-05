@@ -7,7 +7,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
 import org.jetbrains.annotations.Nullable;
 
 public class CapabilitySharpness {

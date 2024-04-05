@@ -11,7 +11,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import tfctech.api.recipes.SmelteryRecipe;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

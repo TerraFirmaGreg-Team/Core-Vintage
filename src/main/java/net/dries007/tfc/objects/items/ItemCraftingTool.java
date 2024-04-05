@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.items;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
 
 public class ItemCraftingTool extends ItemMisc {

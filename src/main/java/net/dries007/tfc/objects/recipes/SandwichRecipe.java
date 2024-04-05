@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

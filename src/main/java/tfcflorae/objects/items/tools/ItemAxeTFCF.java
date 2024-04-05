@@ -12,8 +12,6 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 

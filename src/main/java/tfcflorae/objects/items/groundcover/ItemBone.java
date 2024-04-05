@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceBones;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 public class ItemBone extends ItemBlockTFC {

@@ -15,15 +15,12 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfctech.TFCTech;
 import tfctech.network.PacketLatexUpdate;
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.TechItems;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
-
 
 import static net.minecraftforge.fluids.Fluid.BUCKET_VOLUME;
 

@@ -20,6 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.oredict.OreDictionary;
+import org.jetbrains.annotations.NotNull;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.tileentity.TileEntityChopper;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
@@ -27,8 +28,6 @@ import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.RenderUtils;
 import se.gory_moon.horsepower.util.Utils;
 import su.terrafirmagreg.api.model.property.PropertyUnlistedString;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,7 +15,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

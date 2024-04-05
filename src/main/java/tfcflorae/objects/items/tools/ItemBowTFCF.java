@@ -25,8 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemBowTFCF extends ItemBow implements IItemSize {
 	private final Size size;
 	private final Weight weight;

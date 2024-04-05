@@ -4,9 +4,7 @@ import com.eerussianguy.firmalife.init.RegistriesFL;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {

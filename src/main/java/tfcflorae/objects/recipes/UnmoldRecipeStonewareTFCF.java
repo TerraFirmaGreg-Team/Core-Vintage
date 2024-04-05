@@ -24,12 +24,9 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import tfcflorae.objects.items.ceramics.ItemStonewareMold;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
-
+import tfcflorae.objects.items.ceramics.ItemStonewareMold;
 
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;

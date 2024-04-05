@@ -20,11 +20,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 import tfctech.client.TechSounds;
 import tfctech.objects.tileentities.TELatexExtractor;
-
-import org.jetbrains.annotations.Nullable;
-
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.NORTH;

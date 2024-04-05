@@ -30,13 +30,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
-
-import org.jetbrains.annotations.NotNull;
-
 
 import static su.terrafirmagreg.api.util.PropertyUtils.FULL;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;

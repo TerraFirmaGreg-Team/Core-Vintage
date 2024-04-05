@@ -7,9 +7,7 @@ import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;

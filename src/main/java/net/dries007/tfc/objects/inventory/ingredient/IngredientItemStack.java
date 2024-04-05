@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.inventory.ingredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
-
 import org.jetbrains.annotations.NotNull;
 
 public class IngredientItemStack implements IIngredient<ItemStack> {

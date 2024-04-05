@@ -123,7 +123,7 @@ public final class TechRecipes {
 					if (!output.isEmpty()) {
 						//noinspection ConstantConditions
 						r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-								.getPath()).toLowerCase() + "_wire"), ingredient, output, metal.getTier(), null, ForgeRule.DRAW_LAST, ForgeRule.DRAW_NOT_LAST));
+						                                                                     .getPath()).toLowerCase() + "_wire"), ingredient, output, metal.getTier(), null, ForgeRule.DRAW_LAST, ForgeRule.DRAW_NOT_LAST));
 					}
 				}
 			}
@@ -136,7 +136,7 @@ public final class TechRecipes {
 				if (!output.isEmpty()) {
 					//noinspection ConstantConditions
 					r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-							.getPath()).toLowerCase() + "_long_rod"), ingredient, output, metal.getTier(), null, ForgeRule.HIT_LAST, ForgeRule.HIT_SECOND_LAST, ForgeRule.HIT_THIRD_LAST));
+					                                                                     .getPath()).toLowerCase() + "_long_rod"), ingredient, output, metal.getTier(), null, ForgeRule.HIT_LAST, ForgeRule.HIT_SECOND_LAST, ForgeRule.HIT_THIRD_LAST));
 				}
 			}
 
@@ -148,7 +148,7 @@ public final class TechRecipes {
 				if (!output.isEmpty()) {
 					//noinspection ConstantConditions
 					r.register(new AnvilRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-							.getPath()).toLowerCase() + "_blowpipe"), ingredient, output, metal.getTier(), null, ForgeRule.BEND_LAST, ForgeRule.BEND_SECOND_LAST));
+					                                                                     .getPath()).toLowerCase() + "_blowpipe"), ingredient, output, metal.getTier(), null, ForgeRule.BEND_LAST, ForgeRule.BEND_SECOND_LAST));
 				}
 			}
 		}
@@ -221,7 +221,7 @@ public final class TechRecipes {
 				if (!output.isEmpty()) {
 					//noinspection ConstantConditions
 					r.register(new WireDrawingRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-							.getPath()).toLowerCase() + "_wire_" + i), ingredient, tier, output, color));
+					                                                                           .getPath()).toLowerCase() + "_wire_" + i), ingredient, tier, output, color));
 				}
 			}
 		}
@@ -250,7 +250,7 @@ public final class TechRecipes {
 			if (!output.isEmpty()) {
 				//noinspection ConstantConditions
 				r.register(new WeldingRecipe(new ResourceLocation(MODID_TFCTECH, (metal.getRegistryName()
-						.getPath()).toLowerCase() + "_gear"), ingredient1, ingredient2, output, metal.getTier(), null));
+				                                                                       .getPath()).toLowerCase() + "_gear"), ingredient1, ingredient2, output, metal.getTier(), null));
 			}
 		}
 	}
@@ -286,8 +286,8 @@ public final class TechRecipes {
 				list.add(ingredient);
 				//noinspection ConstantConditions
 				r.register(new ShapelessDamageRecipe(groupStrip, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-						.getPath()
-						.toLowerCase() + "_strip"));
+				                                                                                                      .getPath()
+				                                                                                                      .toLowerCase() + "_strip"));
 			}
 
 			/*
@@ -301,8 +301,8 @@ public final class TechRecipes {
 				list.add(ingredient);
 				//noinspection ConstantConditions
 				r.register(new ShapelessDamageRecipe(groupRod, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-						.getPath()
-						.toLowerCase() + "_rod"));
+				                                                                                                    .getPath()
+				                                                                                                    .toLowerCase() + "_rod"));
 			}
 
 			/*
@@ -316,8 +316,8 @@ public final class TechRecipes {
 				list.add(ingredient);
 				//noinspection ConstantConditions
 				r.register(new ShapelessDamageRecipe(groupBolt, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-						.getPath()
-						.toLowerCase() + "_bolt"));
+				                                                                                                     .getPath()
+				                                                                                                     .toLowerCase() + "_bolt"));
 			}
 
 			/*
@@ -331,8 +331,8 @@ public final class TechRecipes {
 				list.add(ingredient);
 				//noinspection ConstantConditions
 				r.register(new ShapelessDamageRecipe(groupScrew, list, output, 1).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-						.getPath()
-						.toLowerCase() + "_screw"));
+				                                                                                                      .getPath()
+				                                                                                                      .toLowerCase() + "_screw"));
 			}
 
 			/*
@@ -348,8 +348,8 @@ public final class TechRecipes {
 				list.add(ingredient);
 				//noinspection ConstantConditions
 				r.register(new ShapedRecipes("rackwheel", 2, 2, list, output).setRegistryName(MODID_TFCTECH, metal.getRegistryName()
-						.getPath()
-						.toLowerCase() + "_rackwheel"));
+				                                                                                                  .getPath()
+				                                                                                                  .toLowerCase() + "_rackwheel"));
 			}
 		}
 	}

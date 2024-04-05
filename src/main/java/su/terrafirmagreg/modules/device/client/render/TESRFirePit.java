@@ -22,7 +22,6 @@ import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
-
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.SLOT_EXTRA_INPUT_START;

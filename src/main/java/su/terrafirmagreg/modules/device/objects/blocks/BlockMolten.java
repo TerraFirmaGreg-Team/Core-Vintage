@@ -19,12 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.spi.block.BlockBase;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
-
+import su.terrafirmagreg.api.spi.block.BlockBase;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 

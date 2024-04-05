@@ -10,7 +10,6 @@ import net.dries007.tfc.objects.items.metal.ItemIngot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")

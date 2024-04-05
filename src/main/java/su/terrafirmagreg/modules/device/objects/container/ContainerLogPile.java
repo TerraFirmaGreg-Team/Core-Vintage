@@ -7,9 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 
 
 @MethodsReturnNonnullByDefault

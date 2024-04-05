@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;

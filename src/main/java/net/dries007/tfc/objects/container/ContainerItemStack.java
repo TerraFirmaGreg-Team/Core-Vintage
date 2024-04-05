@@ -6,7 +6,6 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
 
 

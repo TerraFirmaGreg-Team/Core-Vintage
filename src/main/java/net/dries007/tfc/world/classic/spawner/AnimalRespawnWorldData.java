@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

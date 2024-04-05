@@ -10,9 +10,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
-import su.terrafirmagreg.api.lib.Constants;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.List;
 

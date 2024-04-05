@@ -10,7 +10,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

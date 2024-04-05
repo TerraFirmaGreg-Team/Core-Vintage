@@ -6,9 +6,7 @@ import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.jetbrains.annotations.NotNull;
-
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 

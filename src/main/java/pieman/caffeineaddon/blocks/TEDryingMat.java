@@ -9,9 +9,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pieman.caffeineaddon.recipes.DryingMatRecipe;
-
 import org.jetbrains.annotations.NotNull;
+import pieman.caffeineaddon.recipes.DryingMatRecipe;
 
 public class TEDryingMat extends TEInventory implements ITickable {
 

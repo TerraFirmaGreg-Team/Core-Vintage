@@ -27,9 +27,6 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

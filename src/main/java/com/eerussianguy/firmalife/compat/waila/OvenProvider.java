@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

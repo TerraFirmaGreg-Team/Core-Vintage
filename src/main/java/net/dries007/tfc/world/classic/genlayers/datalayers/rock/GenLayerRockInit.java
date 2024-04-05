@@ -8,7 +8,6 @@ import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.registries.ForgeRegistry;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

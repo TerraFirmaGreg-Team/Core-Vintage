@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.jetbrains.annotations.NotNull;
 
 

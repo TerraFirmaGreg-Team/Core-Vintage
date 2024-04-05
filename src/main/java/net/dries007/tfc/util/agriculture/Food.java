@@ -3,9 +3,7 @@ package net.dries007.tfc.util.agriculture;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import static net.dries007.tfc.util.agriculture.Food.Category.*;

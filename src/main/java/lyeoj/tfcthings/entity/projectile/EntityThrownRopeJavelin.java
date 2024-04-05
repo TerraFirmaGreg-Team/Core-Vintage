@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
-
 import org.jetbrains.annotations.NotNull;
 
 public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {

@@ -31,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
@@ -38,8 +39,6 @@ import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;
 import su.terrafirmagreg.modules.device.objects.container.ContainerBlastFurnace;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

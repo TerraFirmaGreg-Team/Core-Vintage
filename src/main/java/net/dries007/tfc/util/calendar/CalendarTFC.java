@@ -9,7 +9,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

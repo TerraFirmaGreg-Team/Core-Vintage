@@ -15,16 +15,14 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfctech.TFCTech;
 import tfctech.api.recipes.WireDrawingRecipe;
 import tfctech.client.TechSounds;
 import tfctech.network.PacketTileEntityUpdate;
 import tfctech.objects.items.metal.ItemTechMetal;
 import tfctech.registry.TechRegistries;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class TEWireDrawBench extends TEInventory implements ITickable {

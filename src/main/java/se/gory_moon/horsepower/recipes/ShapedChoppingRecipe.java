@@ -9,10 +9,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import org.jetbrains.annotations.NotNull;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

@@ -6,11 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.NotNull;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
 import su.terrafirmagreg.api.model.ICustomModel;
-
-import org.jetbrains.annotations.NotNull;
 
 public class ItemMug extends ItemJug implements ICustomModel {
 

@@ -21,9 +21,8 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import tfctech.objects.items.glassworking.ItemGlassMolder;
-
 import org.jetbrains.annotations.NotNull;
+import tfctech.objects.items.glassworking.ItemGlassMolder;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY;
 

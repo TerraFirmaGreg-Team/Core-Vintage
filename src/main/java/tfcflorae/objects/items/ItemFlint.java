@@ -14,8 +14,6 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemFlint extends ItemTFCF implements IItemSize {
 	private final Size size;
 	private final Weight weight;

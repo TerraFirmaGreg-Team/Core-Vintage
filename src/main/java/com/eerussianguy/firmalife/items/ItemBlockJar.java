@@ -12,9 +12,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 
 @MethodsReturnNonnullByDefault

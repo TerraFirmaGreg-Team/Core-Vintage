@@ -18,10 +18,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
-
-import org.jetbrains.annotations.NotNull;
 
 import static tfcflorae.api.stateproperty.StatePropertiesTFCF.CONNECTED;
 import static tfcflorae.api.stateproperty.StatePropertiesTFCF.GROWN;

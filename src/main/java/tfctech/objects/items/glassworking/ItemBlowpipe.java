@@ -11,11 +11,9 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import tfctech.client.TechGuiHandler;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import tfctech.client.TechGuiHandler;
 
 import java.util.HashMap;
 import java.util.Map;

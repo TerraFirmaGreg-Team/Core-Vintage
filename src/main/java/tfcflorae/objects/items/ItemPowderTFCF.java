@@ -7,8 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.PowderTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.EnumMap;
 
 @SuppressWarnings("WeakerAccess")

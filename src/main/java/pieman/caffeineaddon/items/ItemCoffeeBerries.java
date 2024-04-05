@@ -9,11 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.Nullable;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
 import su.terrafirmagreg.api.model.ICustomModel;
-
-import org.jetbrains.annotations.Nullable;
 
 public class ItemCoffeeBerries extends ItemFood implements ICustomModel {
 

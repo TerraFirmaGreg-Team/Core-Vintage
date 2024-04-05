@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.client.model.pipeline.VertexTransformer;
 import net.minecraftforge.common.model.TRSRTransformation;
-
 import org.jetbrains.annotations.NotNull;
 
 import javax.vecmath.Matrix3f;

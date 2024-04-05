@@ -19,9 +19,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
 import org.jetbrains.annotations.Nullable;
-
 
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.*;

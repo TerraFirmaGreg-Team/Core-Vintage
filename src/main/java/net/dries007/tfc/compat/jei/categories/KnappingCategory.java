@@ -11,7 +11,6 @@ import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 

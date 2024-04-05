@@ -14,9 +14,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import su.terrafirmagreg.api.lib.Constants;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.lib.Constants;
 
 public final class FluidsTFCF {
 	private static final ResourceLocation STILL = new ResourceLocation(Constants.MODID_TFC, "blocks/fluid_still");

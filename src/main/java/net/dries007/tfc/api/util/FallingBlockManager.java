@@ -28,11 +28,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
 
 import java.util.*;
 import java.util.function.Supplier;

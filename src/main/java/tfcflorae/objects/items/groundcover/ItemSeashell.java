@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceSeashells;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 public class ItemSeashell extends ItemBlockTFC {

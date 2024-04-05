@@ -17,9 +17,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 
 public class TEPlacedItem extends TEInventory {

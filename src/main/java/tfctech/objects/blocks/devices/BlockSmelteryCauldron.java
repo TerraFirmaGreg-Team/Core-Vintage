@@ -27,13 +27,9 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryCauldron;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
-
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 

@@ -18,12 +18,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.objects.items.glassworking.ItemGlassMolder;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 
 @SuppressWarnings("WeakerAccess")

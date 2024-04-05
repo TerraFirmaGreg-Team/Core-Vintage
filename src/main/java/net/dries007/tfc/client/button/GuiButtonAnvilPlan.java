@@ -8,7 +8,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.ANVIL_BACKGROUND;

@@ -57,20 +57,20 @@ public class ModModelManager {
 		replaceChoppingModel(new ModelResourceLocation("horsepower:chopping_block"), MODEL_ManualChoppingBlock, event);
 
 		event.getModelRegistry()
-				.putObject(getModel("chopper"), event.getModelRegistry()
-						.getObject(new ModelResourceLocation("horsepower:chopper", "facing=north,part=base")));
+		     .putObject(getModel("chopper"), event.getModelRegistry()
+		                                          .getObject(new ModelResourceLocation("horsepower:chopper", "facing=north,part=base")));
 		event.getModelRegistry()
-				.putObject(getModel("chopper"), event.getModelRegistry()
-						.getObject(new ModelResourceLocation("horsepower:chopper", "facing=south,part=base")));
+		     .putObject(getModel("chopper"), event.getModelRegistry()
+		                                          .getObject(new ModelResourceLocation("horsepower:chopper", "facing=south,part=base")));
 		event.getModelRegistry()
-				.putObject(getModel("chopper"), event.getModelRegistry()
-						.getObject(new ModelResourceLocation("horsepower:chopper", "facing=west,part=base")));
+		     .putObject(getModel("chopper"), event.getModelRegistry()
+		                                          .getObject(new ModelResourceLocation("horsepower:chopper", "facing=west,part=base")));
 		event.getModelRegistry()
-				.putObject(getModel("chopper"), event.getModelRegistry()
-						.getObject(new ModelResourceLocation("horsepower:chopper", "facing=east,part=base")));
+		     .putObject(getModel("chopper"), event.getModelRegistry()
+		                                          .getObject(new ModelResourceLocation("horsepower:chopper", "facing=east,part=base")));
 		event.getModelRegistry()
-				.putObject(getModel("chopping_block"), event.getModelRegistry()
-						.getObject(new ModelResourceLocation("horsepower:chopping_block")));
+		     .putObject(getModel("chopping_block"), event.getModelRegistry()
+		                                                 .getObject(new ModelResourceLocation("horsepower:chopping_block")));
 	}
 
 	@SubscribeEvent
@@ -99,8 +99,8 @@ public class ModModelManager {
 
 	private void registerBlockModels() {
 		ModBlocks.RegistrationHandler.ITEM_BLOCKS.stream()
-				.filter(item -> !itemsRegistered.contains(item))
-				.forEach(this::registerItemModel);
+		                                         .filter(item -> !itemsRegistered.contains(item))
+		                                         .forEach(this::registerItemModel);
 	}
 
 	/**
@@ -109,8 +109,8 @@ public class ModModelManager {
 	private void registerItemModels() {
 		// Then register items with default model names
 		ModItems.RegistrationHandler.ITEMS.stream()
-				.filter(item -> !itemsRegistered.contains(item))
-				.forEach(this::registerItemModel);
+		                                  .filter(item -> !itemsRegistered.contains(item))
+		                                  .forEach(this::registerItemModel);
 	}
 
 	/*

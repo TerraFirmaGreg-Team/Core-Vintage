@@ -2,7 +2,6 @@ package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.minecraft.item.ItemArmor;
-
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -38,6 +38,6 @@ public class FoodDataFL {
 
 	public static final FoodData PINEAPPLE = new FoodData(4, 0.5F, 4.1F, 0.0F, 0.75F, 0.0F, 0.0F, 0.0F, 4.9F);
 	public static final FoodData MELON = new FoodData(4, 1.5F, 1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 4.9F);
-	
+
 }
 

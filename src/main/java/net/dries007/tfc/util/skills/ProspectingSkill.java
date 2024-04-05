@@ -3,7 +3,6 @@ package net.dries007.tfc.util.skills;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;

@@ -24,9 +24,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import su.terrafirmagreg.modules.core.data.PotionsCore;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.PotionsCore;
 
 import java.awt.*;
 import java.util.Arrays;

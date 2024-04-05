@@ -233,13 +233,13 @@ public class BlocksFL {
 
 		for (BerryBush bush : BerryBush.values()) {
 			normalIBs.add(register(r, bush.name()
-					.toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
+			                              .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
 		}
 
 		for (BushFL bush : BushFL.values()) {
 			normalIBs.add(register(r, bush.name().toLowerCase() + "_bush", new BlockBerryBush(bush), CT_FLORA));
 			normalIBs.add(register(r, bush.name()
-					.toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
+			                              .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
 		}
 
 		for (BlockJackOLantern.Carving carving : BlockJackOLantern.Carving.values()) {
@@ -324,7 +324,7 @@ public class BlocksFL {
 		fruitDoors.add(register(r, name + "_door", new BlockFruitDoor(), CT_DECORATIONS));
 		fruitTrapdoors.add(register(r, name + "_trapdoor", new BlockFruitTrapDoor(), CT_DECORATIONS));
 		optionalTree.ifPresent(tree -> bonsais.add(register(r, name + "_bonsai_pot", new BlockBonsai(() -> tree.getFoodDrop()
-				.getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_DECORATIONS))
+		                                                                                                       .getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_DECORATIONS))
 		);
 	}
 

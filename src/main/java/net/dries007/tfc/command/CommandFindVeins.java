@@ -19,9 +19,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.WorldWorkerManager;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedWriter;

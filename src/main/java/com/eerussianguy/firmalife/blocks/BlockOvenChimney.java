@@ -17,8 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static net.dries007.tfc.Constants.RNG;
 

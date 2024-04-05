@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
-
 import org.jetbrains.annotations.NotNull;
 
 

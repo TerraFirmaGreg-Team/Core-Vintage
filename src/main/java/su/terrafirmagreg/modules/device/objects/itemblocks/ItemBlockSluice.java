@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 
-
 import static su.terrafirmagreg.api.util.PropertyUtils.FACING;
 import static su.terrafirmagreg.api.util.PropertyUtils.UPPER;
 

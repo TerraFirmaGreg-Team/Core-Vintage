@@ -30,11 +30,9 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import su.terrafirmagreg.api.lib.Constants;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.*;
 import java.util.function.Supplier;

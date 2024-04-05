@@ -14,8 +14,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceRock;
 
-import org.jetbrains.annotations.NotNull;
-
 
 @MethodsReturnNonnullByDefault
 public class ItemRockTFCF extends ItemBlockTFC {

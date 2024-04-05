@@ -12,7 +12,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

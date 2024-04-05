@@ -9,14 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import org.jetbrains.annotations.NotNull;
 import tfctech.objects.blocks.devices.BlockFridge;
 import tfctech.objects.blocks.devices.BlockLatexExtractor;
 import tfctech.objects.blocks.devices.BlockWireDrawBench;
 import tfctech.objects.tileentities.TEFridge;
 import tfctech.objects.tileentities.TELatexExtractor;
 import tfctech.objects.tileentities.TEWireDrawBench;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

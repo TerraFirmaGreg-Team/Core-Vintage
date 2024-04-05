@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.model.animal;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -11,6 +10,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 
 /**

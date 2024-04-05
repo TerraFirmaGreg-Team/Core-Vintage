@@ -7,9 +7,7 @@ import net.dries007.tfc.objects.items.food.ItemDynamicBowlFood;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

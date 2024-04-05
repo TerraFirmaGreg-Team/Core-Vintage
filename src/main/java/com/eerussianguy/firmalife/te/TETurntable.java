@@ -17,7 +17,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -9,7 +9,6 @@ import net.dries007.tfc.util.forge.ForgeRule;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-
 import org.jetbrains.annotations.NotNull;
 
 

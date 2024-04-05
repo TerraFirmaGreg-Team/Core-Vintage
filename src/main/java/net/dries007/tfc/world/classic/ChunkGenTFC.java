@@ -42,7 +42,6 @@ import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.registries.ForgeRegistry;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;

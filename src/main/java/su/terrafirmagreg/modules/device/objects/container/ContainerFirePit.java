@@ -9,7 +9,6 @@ import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
-
 import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.*;
 
 

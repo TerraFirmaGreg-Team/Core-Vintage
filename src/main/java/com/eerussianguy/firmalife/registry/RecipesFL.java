@@ -71,7 +71,7 @@ public class RecipesFL {
 		int day = ICalendar.TICKS_IN_DAY;
 		for (Fruit fruit : Fruit.values()) {
 			r.register(new DryingRecipe(IIngredient.of(fruit.getFruit()), new ItemStack(ItemsFL.getDriedFruit(fruit)), day / 2).setRegistryName(fruit.name()
-					.toLowerCase()));
+			                                                                                                                                         .toLowerCase()));
 		}
 		r.registerAll(
 				new DryingRecipe(IIngredient.of(new ItemStack(ItemsFL.CINNAMON_BARK)), new ItemStack(ItemsFL.CINNAMON), day).setRegistryName("cinnamon_bark"),
@@ -111,7 +111,7 @@ public class RecipesFL {
 		PlantsFL.WRAPPERS.forEach(plant -> {
 			BlockPlantTFC block = BlockPlantTFC.get(plant);
 			r.register(new PlanterRecipe(IIngredient.of(block), new ItemStack(block), 1, false).setRegistryName(plant.getRegistryName()
-					.getPath()));
+			                                                                                                         .getPath()));
 		});
 	}
 

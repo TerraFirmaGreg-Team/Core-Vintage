@@ -15,8 +15,6 @@ import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.items.ItemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemClayEarthenware extends ItemTFCF implements IItemSize {
 	private final Size size;
 	private final Weight weight;

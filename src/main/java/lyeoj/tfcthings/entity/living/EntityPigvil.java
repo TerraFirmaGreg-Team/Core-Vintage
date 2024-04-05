@@ -111,7 +111,7 @@ public class EntityPigvil extends EntityCreature {
 		if (this.world.getBlockState(blockpos).getBlock().isReplaceable(world, blockpos)) {
 			this.world.playSound(player, blockpos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
 			this.world.setBlockState(blockpos, getAnvil().getDefaultState()
-					.withProperty(BlockAnvilTFC.AXIS, this.getAdjustedHorizontalFacing()));
+			                                             .withProperty(BlockAnvilTFC.AXIS, this.getAdjustedHorizontalFacing()));
 			this.setDead();
 			return true;
 		}

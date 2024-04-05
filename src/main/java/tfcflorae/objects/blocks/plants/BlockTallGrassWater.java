@@ -25,9 +25,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import java.util.HashMap;
 import java.util.Map;

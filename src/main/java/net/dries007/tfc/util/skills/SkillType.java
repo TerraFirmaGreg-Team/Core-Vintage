@@ -2,9 +2,7 @@ package net.dries007.tfc.util.skills;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

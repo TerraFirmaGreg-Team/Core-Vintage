@@ -8,9 +8,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.DyeUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import tfcflorae.objects.items.ItemArmorTFCF;
-
 import org.jetbrains.annotations.NotNull;
+import tfcflorae.objects.items.ItemArmorTFCF;
 
 import java.util.List;
 

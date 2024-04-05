@@ -35,6 +35,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -45,10 +46,6 @@ import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;

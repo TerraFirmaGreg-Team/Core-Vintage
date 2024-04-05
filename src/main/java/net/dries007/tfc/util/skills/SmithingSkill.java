@@ -3,9 +3,7 @@ package net.dries007.tfc.util.skills;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 public class SmithingSkill extends Skill {

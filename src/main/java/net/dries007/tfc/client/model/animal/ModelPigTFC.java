@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.model.animal;
 
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import net.dries007.tfc.objects.entity.animal.EntityPigTFC;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,8 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 
 @SideOnly(Side.CLIENT)

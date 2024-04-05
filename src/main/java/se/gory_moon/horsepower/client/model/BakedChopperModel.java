@@ -27,13 +27,11 @@ import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.blocks.BlockChopper;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 import se.gory_moon.horsepower.util.RenderUtils;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import javax.vecmath.Matrix4f;
 import java.util.List;

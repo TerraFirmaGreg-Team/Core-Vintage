@@ -6,9 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")

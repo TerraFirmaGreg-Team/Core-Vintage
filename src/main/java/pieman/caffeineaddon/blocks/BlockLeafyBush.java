@@ -19,11 +19,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
 import pieman.caffeineaddon.util.LeafyBush;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 

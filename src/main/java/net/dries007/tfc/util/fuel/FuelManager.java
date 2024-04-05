@@ -5,9 +5,8 @@ import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
 import java.util.ArrayList;
 import java.util.List;

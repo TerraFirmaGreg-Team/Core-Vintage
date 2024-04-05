@@ -17,10 +17,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.IClientCommand;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.HPEventHandler;
 import se.gory_moon.horsepower.recipes.HPRecipes;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;

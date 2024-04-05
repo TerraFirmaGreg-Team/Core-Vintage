@@ -104,7 +104,7 @@ public class OversizedItemInStorageArea {
 
 		// raytrace to get the block the user is looking at.
 		BlockPos tracedPos = getTracedPos(Helpers.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
-				.getAttributeValue(), 1));
+		                                                                 .getAttributeValue(), 1));
 		ArrayList<String> slotClassNameList = new ArrayList<>(Arrays.asList(ModConfig.slotClassNames));
 		ArrayList<String> containerClassNameList = new ArrayList<>(Arrays.asList(ModConfig.sizeLimitOptions.sizeContainers));
 		ArrayList<String> blockedItemNameList = new ArrayList<>(Arrays.asList(ModConfig.ignoredItems));
@@ -187,9 +187,9 @@ public class OversizedItemInStorageArea {
 		for (Slot slot : slotsToEffect) {
 			// make sure our slot has a stack.
 			if (slot.getHasStack() && !blockedItemNameList.contains(slot.getStack()
-					.getItem()
-					.getRegistryName()
-					.toString())) {
+			                                                            .getItem()
+			                                                            .getRegistryName()
+			                                                            .toString())) {
 				// get the stack from the slot.
 				ItemStack stackToActOn = slot.getStack();
 				// get the ItemSize capability that holds the Size & Weight of the item.
@@ -216,9 +216,9 @@ public class OversizedItemInStorageArea {
 		for (Slot slot : slotsToEffect) {
 			// Make sure each slot has an item and isn't a blocked one.
 			if (slot.getHasStack() && !blockedItemNameList.contains(slot.getStack()
-					.getItem()
-					.getRegistryName()
-					.toString())) {
+			                                                            .getItem()
+			                                                            .getRegistryName()
+			                                                            .toString())) {
 				ItemStack itemStack = slot.getStack();
 				//Get the weight based off the config and add it to the current weight.
 				if (currentWeight < maxWeight) {
@@ -323,12 +323,12 @@ public class OversizedItemInStorageArea {
 			for (Slot slot : slotsToEffect) {
 				//If the stack has a heat capability and isn't on the ignore list we can get the cap off the item and check the heat.
 				if (slot.getStack()
-						.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null) && !blockedItemNameList.contains(slot.getStack()
-						.getItem()
-						.getRegistryName()
-						.toString())) {
+				        .hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null) && !blockedItemNameList.contains(slot.getStack()
+				                                                                                                           .getItem()
+				                                                                                                           .getRegistryName()
+				                                                                                                           .toString())) {
 					IItemHeat heatCapability = slot.getStack()
-							.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+					                               .getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
 
 					// if we should do overheat stuff, Needs to be enabled, Traced pos needs to be valid, It needs to be a TE, The item needs a valid heatcap and the temp needs to be high enough.
 					if (tracedPos != null && world.getTileEntity(tracedPos) != null && heatCapability != null && heatCapability.getTemperature() >= ModConfig.overheatOptions.heatToStartFire) {
@@ -402,8 +402,8 @@ public class OversizedItemInStorageArea {
 
 							//Check to see if we can place a fire below the player because daum look at that hot... block.
 							if (ModConfig.overheatOptions.incineratedPlayersStartFires && world.getBlockState(playerPos)
-									.getBlock()
-									.isReplaceable(world, playerPos))
+							                                                                   .getBlock()
+							                                                                   .isReplaceable(world, playerPos))
 								world.setBlockState(playerPos, Blocks.FIRE.getDefaultState(), 11);
 
 							//Kill this genius trying to wear a suit of hot.
@@ -418,7 +418,7 @@ public class OversizedItemInStorageArea {
 							insultingAshList.appendTag(insultingAshLore);
 							insultingAshNBT.setTag("display", new NBTTagCompound());
 							insultingAshNBT.getCompoundTag("display")
-									.setTag("Name", new NBTTagString("\u00a78Ash of " + playerDisplayName));
+							               .setTag("Name", new NBTTagString("\u00a78Ash of " + playerDisplayName));
 							insultingAshNBT.getCompoundTag("display").setTag("Lore", insultingAshList);
 
 							ItemStack insultingAsh = new ItemStack(ItemsCore.WOOD_ASH, 1);

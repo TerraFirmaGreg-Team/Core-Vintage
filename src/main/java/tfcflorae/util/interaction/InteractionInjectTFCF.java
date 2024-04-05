@@ -14,11 +14,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import tfcflorae.util.agriculture.CropTFCF;
-
-import org.jetbrains.annotations.NotNull;
 
 public class InteractionInjectTFCF {
 	@NotNull

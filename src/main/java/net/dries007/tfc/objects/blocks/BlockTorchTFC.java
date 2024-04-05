@@ -27,11 +27,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import java.util.Random;
 

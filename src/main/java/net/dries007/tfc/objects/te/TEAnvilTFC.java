@@ -35,9 +35,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.TextComponentTranslation;
-import org.jetbrains.annotations.Nullable;
-
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 

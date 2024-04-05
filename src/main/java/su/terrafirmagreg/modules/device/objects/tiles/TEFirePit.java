@@ -39,14 +39,12 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.container.ContainerFirePit;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.LinkedList;

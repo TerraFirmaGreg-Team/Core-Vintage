@@ -8,7 +8,6 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.chunk.Chunk;
-
 import org.jetbrains.annotations.NotNull;
 
 

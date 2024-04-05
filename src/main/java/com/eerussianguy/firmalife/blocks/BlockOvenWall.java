@@ -21,7 +21,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static net.dries007.tfc.Constants.RNG;
 import static net.minecraft.block.BlockHorizontal.FACING;

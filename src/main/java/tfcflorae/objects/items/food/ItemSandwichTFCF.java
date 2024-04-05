@@ -5,9 +5,8 @@ import net.dries007.tfc.objects.items.food.ItemSandwich;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import tfcflorae.util.OreDictionaryHelper;
-
 import org.jetbrains.annotations.Nullable;
+import tfcflorae.util.OreDictionaryHelper;
 
 public class ItemSandwichTFCF extends ItemFoodTFCF {
 	private final FoodData data;

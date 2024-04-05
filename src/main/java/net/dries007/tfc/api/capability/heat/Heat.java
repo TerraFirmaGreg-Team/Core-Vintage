@@ -5,7 +5,6 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.config.OreTooltipMode;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
-
 import org.jetbrains.annotations.Nullable;
 
 public enum Heat {

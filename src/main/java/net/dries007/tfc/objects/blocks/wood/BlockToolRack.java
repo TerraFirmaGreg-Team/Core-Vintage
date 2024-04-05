@@ -26,11 +26,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
-
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.block.material.Material.WOOD;

@@ -25,7 +25,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 
 @MethodsReturnNonnullByDefault

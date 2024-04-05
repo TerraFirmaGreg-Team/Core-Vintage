@@ -2,7 +2,6 @@ package net.dries007.tfc.util.calendar;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.world.World;
-
 import org.jetbrains.annotations.NotNull;
 
 public interface ICalendarFormatted extends ICalendar {

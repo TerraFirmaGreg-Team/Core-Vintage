@@ -20,7 +20,6 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
-
 import org.jetbrains.annotations.NotNull;
 
 public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {

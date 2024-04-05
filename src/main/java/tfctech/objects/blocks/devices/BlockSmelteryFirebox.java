@@ -31,14 +31,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryFirebox;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 

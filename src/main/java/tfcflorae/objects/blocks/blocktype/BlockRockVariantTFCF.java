@@ -35,8 +35,6 @@ import tfcflorae.objects.items.rock.ItemMud;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;

@@ -26,11 +26,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
 
 public class UnmoldEarthenwareMalletRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	private final NonNullList<Ingredient> input;

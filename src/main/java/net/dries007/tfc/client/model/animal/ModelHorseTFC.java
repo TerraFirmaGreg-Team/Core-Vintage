@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.model.animal;
 
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
 import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
 import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
@@ -14,8 +13,8 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 /**
  * Need this for not insta-growing

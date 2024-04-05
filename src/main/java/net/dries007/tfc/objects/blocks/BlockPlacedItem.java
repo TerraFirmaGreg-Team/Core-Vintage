@@ -1,6 +1,5 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -27,10 +26,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 import java.util.Random;
 

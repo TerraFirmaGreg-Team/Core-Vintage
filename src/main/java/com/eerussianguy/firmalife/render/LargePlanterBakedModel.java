@@ -16,7 +16,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.property.IExtendedBlockState;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

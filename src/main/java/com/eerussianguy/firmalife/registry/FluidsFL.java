@@ -12,9 +12,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import su.terrafirmagreg.api.lib.Constants;
-
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.lib.Constants;
 
 //duplicating the fluid registration logic from TFC as not to create conflicts
 public final class FluidsFL {

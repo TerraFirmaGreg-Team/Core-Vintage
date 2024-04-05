@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
@@ -18,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -97,7 +92,7 @@ public class GuiKnapping extends GuiContainerTFC {
 	}
 
 	@Override
-	protected void actionPerformed(@Nonnull GuiButton button) {
+	protected void actionPerformed(@NotNull GuiButton button) {
 		if (button instanceof GuiButtonKnapping) {
 			((GuiButtonKnapping) button).onClick();
 			button.playPressSound(mc.getSoundHandler());

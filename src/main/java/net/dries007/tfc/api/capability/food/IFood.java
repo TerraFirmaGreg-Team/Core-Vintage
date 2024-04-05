@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.ConfigTFC;
@@ -21,8 +16,10 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 /**
@@ -68,7 +65,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
 	 *
 	 * @see FoodData
 	 */
-	@Nonnull
+	@NotNull
 	FoodData getData();
 
 	/**
@@ -93,7 +90,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
 	 *
 	 * @return the traits of the food
 	 */
-	@Nonnull
+	@NotNull
 	List<FoodTrait> getTraits();
 
 	/**
@@ -104,7 +101,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
 	 * @param text  the tooltip
 	 */
 	@SideOnly(Side.CLIENT)
-	default void addTooltipInfo(@Nonnull ItemStack stack, @Nonnull List<String> text, @Nullable EntityPlayer player) {
+	default void addTooltipInfo(@NotNull ItemStack stack, @NotNull List<String> text, @Nullable EntityPlayer player) {
 		// Expiration dates
 		if (isRotten()) {
 			text.add(TextFormatting.RED + I18n.format("tfc.tooltip.food_rotten"));

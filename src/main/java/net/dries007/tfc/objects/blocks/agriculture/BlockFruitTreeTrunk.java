@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.dries007.tfc.ConfigTFC;
@@ -33,12 +28,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
-@ParametersAreNonnullByDefault
+
 public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 	/* Connection sides (used if there's a branch on facing) */
 	public static final PropertyBool NORTH = PropertyBool.create("north");
@@ -80,8 +76,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
-	public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+	@NotNull
+	public IBlockState getActualState(@NotNull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		for (EnumFacing face : EnumFacing.HORIZONTALS) {
 			if (worldIn.getBlockState(pos.offset(face)).getBlock() == BlockFruitTreeBranch.get(tree)) {
 				if (face == EnumFacing.NORTH) {
@@ -106,7 +102,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		state = getActualState(state, source, pos);
 		AxisAlignedBB finalAABB = TRUNK_AABB;
@@ -126,7 +122,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
@@ -134,7 +130,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void addCollisionBoxToList(IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox, @Nonnull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+	public void addCollisionBoxToList(IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull AxisAlignedBB entityBox, @NotNull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
 		addCollisionBoxToList(pos, entityBox, collidingBoxes, TRUNK_AABB);
 	}
 
@@ -295,7 +291,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, NORTH, SOUTH, EAST, WEST);
 	}
@@ -312,12 +308,12 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(BlockFruitTreeSapling.get(tree));
 	}
 
-	@Nonnull
+	@NotNull
 	public IFruitTree getTree() {
 		return tree;
 	}

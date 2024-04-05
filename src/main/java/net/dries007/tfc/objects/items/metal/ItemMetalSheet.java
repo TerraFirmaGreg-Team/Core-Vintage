@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.dries007.tfc.api.types.Metal;
@@ -20,17 +15,16 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class ItemMetalSheet extends ItemMetal {
 	public ItemMetalSheet(Metal metal, Metal.ItemType type) {
 		super(metal, type);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (worldIn.getBlockState(pos).isNormalCube() && stack.getItem() instanceof ItemMetalSheet) {

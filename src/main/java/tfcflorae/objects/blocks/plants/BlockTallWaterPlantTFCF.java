@@ -21,15 +21,15 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fluids.Fluid;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
-@ParametersAreNonnullByDefault
+
 public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGrowable, ITallPlant {
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
 	private static final Map<Plant, BlockTallWaterPlantTFCF> MAP = new HashMap<>();
@@ -94,13 +94,13 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.XZ;
 	}
@@ -152,13 +152,13 @@ public class BlockTallWaterPlantTFCF extends BlockWaterPlantTFCF implements IGro
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return getTallBoundingBax(state.getValue(AGE), state, source, pos);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer.Builder(this)
 				.add(LEVEL)

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.ConfigTFC;
@@ -43,19 +38,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.types.PlantsTFCF;
 import tfcflorae.util.agriculture.CropTFCF;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockPlantTFC extends BlockBush implements IItemSize {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 	public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
@@ -88,7 +81,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		return (BlockPlantTFC) MAP.get(plant);
 	}
 
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(AGE, meta);
 	}
@@ -97,7 +90,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		return (Integer) state.getValue(AGE);
 	}
 
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return state.withProperty(DAYPERIOD, this.getDayPeriod())
 		            .withProperty(this.growthStageProperty, this.plant.getStageForMonth());
@@ -138,7 +131,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		this.checkAndDropBlock(world, pos, state);
 	}
 
-	@Nonnull
+	@NotNull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return !this.plant.getOreDictName().isPresent() ? Items.AIR : Item.getItemFromBlock(this);
 	}
@@ -196,12 +189,12 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
 	}
 
-	@Nonnull
+	@NotNull
 	public BlockStateContainer getBlockState() {
 		return this.blockState;
 	}
 
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.XYZ;
 	}
@@ -227,12 +220,12 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		return this.plant;
 	}
 
-	@Nonnull
+
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.TINY;
 	}
 
-	@Nonnull
+
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT;
 	}
@@ -293,7 +286,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return PLANT_AABB.offset(state.getOffset(source, pos));
 	}
@@ -303,7 +296,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		return this.plant.getMovementMod() == 0.0 ? blockState.getBoundingBox(worldIn, pos) : NULL_AABB;
 	}
 
-	@Nonnull
+	@NotNull
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
 		switch (this.plant.getPlantType()) {
 			case CACTUS:
@@ -320,12 +313,12 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public Plant.EnumPlantTypeTFC getPlantTypeTFC() {
 		return this.plant.getEnumPlantTypeTFC();
 	}
 
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, new IProperty[]{this.growthStageProperty, DAYPERIOD, AGE});
 	}

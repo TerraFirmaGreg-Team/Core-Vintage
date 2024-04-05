@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.egg;
 
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -16,8 +11,10 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 /**
@@ -53,7 +50,7 @@ public interface IEgg extends INBTSerializable<NBTTagCompound> {
 	 * @param entity   the entity this egg's gonna hatch
 	 * @param hatchDay the hatch day, as in CalendarTFC#getTotalDays
 	 */
-	void setFertilized(@Nonnull Entity entity, long hatchDay);
+	void setFertilized(@NotNull Entity entity, long hatchDay);
 
 	/**
 	 * Tooltip added to the egg item
@@ -63,7 +60,7 @@ public interface IEgg extends INBTSerializable<NBTTagCompound> {
 	 * @param text  the tooltip
 	 */
 	@SideOnly(Side.CLIENT)
-	default void addEggInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+	default void addEggInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 		if (isFertilized()) {
 			long remainingDays = this.getHatchDay() - CalendarTFC.PLAYER_TIME.getTotalDays();
 			text.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.fertilized"));

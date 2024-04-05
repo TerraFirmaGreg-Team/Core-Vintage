@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.projectile;
 
 import io.netty.buffer.ByteBuf;
@@ -26,7 +21,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
 	private ItemStack weapon = ItemStack.EMPTY;
@@ -65,7 +60,7 @@ public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity,
 	public void setWeapon(ItemStack stack) {this.weapon = stack.copy();}
 
 	@Override
-	protected void onHit(@Nonnull RayTraceResult raytraceResultIn) {
+	protected void onHit(@NotNull RayTraceResult raytraceResultIn) {
 		Entity entity = raytraceResultIn.entityHit;
 
 		// Damage item
@@ -153,7 +148,7 @@ public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity,
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected ItemStack getArrowStack() {
 		return this.weapon;
 	}

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -38,7 +33,8 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -75,7 +71,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public boolean setEntityOnShoulder(@Nonnull EntityPlayer player) {
+	public boolean setEntityOnShoulder(@NotNull EntityPlayer player) {
 		// todo if vanilla fixes the class enforcement in 1.15, do rework this animal
 		return false;
 	}
@@ -118,7 +114,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 
 		if (!itemstack.isEmpty()) {
@@ -167,7 +163,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public boolean canMateWith(@Nonnull EntityAnimal otherAnimal) {
+	public boolean canMateWith(@NotNull EntityAnimal otherAnimal) {
 		// At the time I wrote this, I decided to stick to vanilla.
 		// Should we change this I think we also need to think how they would lay eggs
 		// Because copying chicken mechanics for parrots is weird
@@ -175,7 +171,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
+	public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
 		return new EntityParrotTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
 	}
 
@@ -188,7 +184,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -201,7 +197,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -295,8 +291,8 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                      .name()
+		                                                                                      .toLowerCase());
 	}
 
 	@Override
@@ -315,7 +311,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 		this.setScale((float) ageScale);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {

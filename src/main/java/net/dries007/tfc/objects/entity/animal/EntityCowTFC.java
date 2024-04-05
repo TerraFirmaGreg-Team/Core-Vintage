@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -46,16 +41,17 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 	private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityCowTFC.class, EntitiesTFC.getLongDataSerializer());
 
@@ -118,19 +114,19 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setLong("milkedTick", getMilkedTick());
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		setMilkedTick(compound.getLong("milkedTick"));
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 		FluidActionResult fillResult = FluidUtil.tryFillContainer(itemstack, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
 				Fluid.BUCKET_VOLUME, player, false);
@@ -147,7 +143,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 				TextComponentTranslation tooltip = getTooltip();
 				if (tooltip != null) {
 					TerraFirmaCraft.getNetwork()
-							.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+					               .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
 				}
 			}
 			return true;
@@ -162,7 +158,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 	}
 
 	@Override
-	protected boolean eatFood(@Nonnull ItemStack stack, EntityPlayer player) {
+	protected boolean eatFood(@NotNull ItemStack stack, EntityPlayer player) {
 		// Refuses to eat rotten stuff
 		IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 		if (cap != null) {

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.Plant;
@@ -22,13 +17,13 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITallPlant {
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
 	private static final Map<Plant, BlockTallPlantTFC> MAP = new HashMap<>();
@@ -86,13 +81,13 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.XYZ;
 	}
@@ -148,13 +143,13 @@ public class BlockTallPlantTFC extends BlockPlantTFC implements IGrowable, ITall
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return getTallBoundingBax(state.getValue(AGE), state, source, pos);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, AGE, growthStageProperty, PART, DAYPERIOD);
 	}

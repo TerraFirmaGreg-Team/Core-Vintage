@@ -10,9 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemBearTrapHalf extends ItemTFC implements TFCThingsConfigurableItem {
 
@@ -22,13 +20,13 @@ public class ItemBearTrapHalf extends ItemTFC implements TFCThingsConfigurableIt
 		setCreativeTab(CreativeTabsTFC.CT_METAL);
 	}
 
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.NORMAL;
 	}
 
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 

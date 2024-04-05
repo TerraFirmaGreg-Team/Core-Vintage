@@ -37,11 +37,9 @@ import su.terrafirmagreg.modules.core.data.ItemsCore;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.items.ItemsTFCF;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockUrnLoot extends Block implements IItemSize {
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1D, 0.875D);
 
@@ -144,20 +142,20 @@ public class BlockUrnLoot extends Block implements IItemSize {
 		}
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.HUGE;
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return stack.getTagCompound() == null;
 	}
 
@@ -192,7 +190,7 @@ public class BlockUrnLoot extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return AABB.offset(state.getOffset(source, pos));
@@ -200,7 +198,7 @@ public class BlockUrnLoot extends Block implements IItemSize {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
@@ -220,7 +218,7 @@ public class BlockUrnLoot extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
@@ -244,6 +242,6 @@ public class BlockUrnLoot extends Block implements IItemSize {
 
 	private boolean canStay(IBlockAccess world, BlockPos pos) {
 		return world.getBlockState(pos.down())
-				.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+		            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
 	}
 }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import mezz.jei.api.IGuiHelper;
@@ -17,10 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class RockLayerCategory extends BaseRecipeCategory<RockLayerWrapper> {
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(Constants.MODID_TFC, "textures/gui/jei_rocklayer.png");
 

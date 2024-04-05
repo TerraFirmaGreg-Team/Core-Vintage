@@ -5,8 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {
 	protected Block inputLog;
@@ -32,12 +33,12 @@ public class NutRecipe extends IForgeRegistryEntry.Impl<NutRecipe> {
 		                             .orElse(null);
 	}
 
-	@Nonnull
+	@NotNull
 	public Block getLeaves() {
 		return inputLeaves;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getNut() {
 		return outputItem;
 	}

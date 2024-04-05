@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
@@ -17,8 +12,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,8 +59,8 @@ public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSiz
 	}
 
 	@Override
-	@Nonnull
-	public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+	@NotNull
+	public IRarity getForgeRarity(@NotNull ItemStack stack) {
 		switch (metal.getTier()) {
 			case TIER_I:
 			case TIER_II:

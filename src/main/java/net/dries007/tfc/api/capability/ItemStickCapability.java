@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability;
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
@@ -20,8 +15,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -44,7 +41,7 @@ public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+	public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 		float temperature = getTemperature();
 		if (temperature > getMeltTemp() * 0.9f) {
 			text.add(I18n.format("tfc.enum.heat.torch.lit"));
@@ -53,20 +50,20 @@ public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.SMALL; // Store anywhere
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityItemSize.ITEM_SIZE_CAPABILITY || super.hasCapability(capability, facing);
 	}
 }

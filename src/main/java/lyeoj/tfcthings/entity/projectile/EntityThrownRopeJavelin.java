@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
 	protected double effectiveRange = 1024;
@@ -106,7 +106,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
 	protected void performAdditionalUpdates() {
 	}
 
-	protected void onHit(@Nonnull RayTraceResult raytraceResultIn) {
+	protected void onHit(@NotNull RayTraceResult raytraceResultIn) {
 		if (getWeapon().getItem() instanceof ItemRopeJavelin) {
 			ItemRopeJavelin javelin = (ItemRopeJavelin) getWeapon().getItem();
 
@@ -195,7 +195,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
 		super.readEntityFromNBT(compound);
 	}
 
-	@Nonnull
+	@NotNull
 	protected ItemStack getArrowStack() {
 		return this.weapon;
 	}

@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/freeze_dryer",
+    "textures": {
+      "wall": "tfg:blocks/device/cellar/wall",
+      "redstone": "minecraft:blocks/redstone_block",
+      "iron": "minecraft:blocks/iron_block",
+      "glass": "minecraft:blocks/glass",
+      "piston": "minecraft:blocks/piston_bottom",
+      "steel": "tfc:blocks/trapdoor/steel"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing": {
+      "north": {},
+      "east":  { "y": 90 },
+      "south": { "y": 180 },
+      "west":  { "y": 270 }
+    }
+  }
+}

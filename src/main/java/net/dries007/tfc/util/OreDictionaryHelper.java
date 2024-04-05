@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import com.google.common.base.CaseFormat;
@@ -23,7 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This is not the best example of good coding practice, but I do think it works rather well.
@@ -108,7 +103,7 @@ public class OreDictionaryHelper {
 	/**
 	 * Checks if an ItemStack has an OreDictionary entry that matches 'name'.
 	 */
-	public static boolean doesStackMatchOre(@Nonnull ItemStack stack, String name) {
+	public static boolean doesStackMatchOre(@NotNull ItemStack stack, String name) {
 		if (!OreDictionary.doesOreNameExist(name)) {
 			TerraFirmaCraft.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
 			return false;

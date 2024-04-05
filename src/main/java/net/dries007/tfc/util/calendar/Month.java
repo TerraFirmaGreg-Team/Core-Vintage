@@ -1,11 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.calendar;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 public enum Month {
@@ -33,7 +29,7 @@ public enum Month {
 		this.temperatureModifier = temperatureModifier;
 	}
 
-	@Nonnull
+	@NotNull
 	public static Month valueOf(int id) {
 		return id >= 0 && id < VALUES.length ? VALUES[id] : JANUARY;
 	}

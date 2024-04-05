@@ -1,14 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.capability;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemStackHandlerCallback extends ItemStackHandler {
 	private final ISlotCallback callback;
@@ -24,7 +19,7 @@ public class ItemStackHandlerCallback extends ItemStackHandler {
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		return callback.isItemValid(slot, stack);
 	}
 

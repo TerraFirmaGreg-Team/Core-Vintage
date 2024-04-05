@@ -9,7 +9,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import tfctech.objects.tileentities.TEElectricForge;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ContainerElectricForge extends ContainerTE<TEElectricForge> implements IButtonHandler {
 	public ContainerElectricForge(InventoryPlayer playerInv, TEElectricForge te) {

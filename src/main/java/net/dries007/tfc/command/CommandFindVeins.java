@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
 import gnu.trove.map.hash.TObjectIntHashMap;
@@ -25,25 +20,26 @@ import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.WorldWorkerManager;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-@ParametersAreNonnullByDefault
+
 public class CommandFindVeins extends CommandBase {
 	@Override
-	@Nonnull
+	@NotNull
 	public String getName() {
 		return "findveins";
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getUsage(ICommandSender sender) {
 		return "tfc.command.findveins.usage";
 	}
@@ -105,7 +101,7 @@ public class CommandFindVeins extends CommandBase {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
 		if (args.length == 1) {
 			return getListOfStringsMatchingLastWord(args, VeinRegistry.INSTANCE.keySet());
@@ -141,7 +137,7 @@ public class CommandFindVeins extends CommandBase {
 		private long lastNotifcationTime;
 		private Boolean keepingLoaded;
 
-		public Worker(@Nonnull ICommandSender listener, @Nonnull List<ChunkPos> chunks, @Nullable VeinType filter, int type) {
+		public Worker(@NotNull ICommandSender listener, @NotNull List<ChunkPos> chunks, @Nullable VeinType filter, int type) {
 			this.listener = listener;
 			this.chunks = chunks;
 			this.jobSize = chunks.size();

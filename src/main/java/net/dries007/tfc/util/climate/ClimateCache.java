@@ -1,14 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.climate;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,12 +14,12 @@ import java.util.Map;
 public final class ClimateCache {
 	private final Map<ChunkPos, ClimateData> backingMap = new HashMap<>();
 
-	@Nonnull
+	@NotNull
 	public ClimateData get(BlockPos pos) {
 		return get(new ChunkPos(pos));
 	}
 
-	@Nonnull
+	@NotNull
 	public ClimateData get(ChunkPos pos) {
 		return backingMap.getOrDefault(pos, ClimateData.DEFAULT);
 	}

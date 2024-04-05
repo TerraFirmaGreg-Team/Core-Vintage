@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.rock;
 
 import com.google.common.collect.HashMultimap;
@@ -27,15 +22,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemRockHoe extends ItemHoe implements IItemSize, IRockObject {
 	private static final Map<RockCategory, ItemRockHoe> MAP = new HashMap<>();
 	public final RockCategory category;
@@ -73,13 +69,13 @@ public class ItemRockHoe extends ItemHoe implements IItemSize, IRockObject {
 		return multimap;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE; // Stored only in chests
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;
@@ -96,7 +92,7 @@ public class ItemRockHoe extends ItemHoe implements IItemSize, IRockObject {
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public RockCategory getRockCategory(ItemStack stack) {
 		return category;

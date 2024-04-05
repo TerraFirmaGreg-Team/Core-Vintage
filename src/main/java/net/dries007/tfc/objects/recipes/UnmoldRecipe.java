@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -30,22 +25,23 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	private final NonNullList<Ingredient> input;
 	private final ResourceLocation group;
 	private final Metal.ItemType type;
 	private final float chance; // Return chance
 
-	private UnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull Metal.ItemType type, float chance) {
+	private UnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @NotNull Metal.ItemType type, float chance) {
 		this.group = group;
 		this.input = input;
 		this.type = type;
@@ -53,7 +49,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 	}
 
 	@Override
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		boolean foundMold = false;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
 			ItemStack stack = inv.getStackInSlot(slot);
@@ -86,7 +82,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack moldStack = null;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -122,13 +118,13 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inv) {
 		// Return empty molds
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -154,7 +150,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<Ingredient> getIngredients() {
 		return input;
 	}
@@ -165,7 +161,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}

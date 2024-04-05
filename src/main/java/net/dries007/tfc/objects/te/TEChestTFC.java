@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -32,11 +27,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 @MethodsReturnNonnullByDefault
 public class TEChestTFC extends TileEntityChest implements ISlotCallback {
 	public static final int SIZE = 18;
@@ -65,7 +60,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
 	}
 
 	@Override
-	protected boolean isChestAt(@Nonnull BlockPos posIn) {
+	protected boolean isChestAt(@NotNull BlockPos posIn) {
 		if (world == null) return false;
 
 		Block block = this.world.getBlockState(posIn).getBlock();
@@ -162,7 +157,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getRenderBoundingBox() {
 		return new AxisAlignedBB(getPos().add(-1, 0, -1), getPos().add(2, 2, 2));
 	}
@@ -178,7 +173,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		return isItemValidForSlot(slot, stack);
 	}
 }

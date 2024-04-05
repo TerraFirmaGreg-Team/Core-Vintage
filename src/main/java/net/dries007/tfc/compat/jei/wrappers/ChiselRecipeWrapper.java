@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -15,11 +10,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class ChiselRecipeWrapper implements IRecipeWrapper {
 	private final List<ItemStack> ingredients;
 	private final ItemStack output;
@@ -28,14 +23,14 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
 		ingredients = new ArrayList<>();
 		// Although this looks resource-intensive, it's done one time only
 		TFCJEIPlugin.getAllIngredients().stream()
-				.filter(stack -> stack.getItem() instanceof ItemBlock)
-				.forEach(stack ->
-				{
-					Block block = ((ItemBlock) stack.getItem()).getBlock();
-					if (recipe.matches(block.getDefaultState())) {
-						ingredients.add(stack);
-					}
-				});
+		            .filter(stack -> stack.getItem() instanceof ItemBlock)
+		            .forEach(stack ->
+		            {
+			            Block block = ((ItemBlock) stack.getItem()).getBlock();
+			            if (recipe.matches(block.getDefaultState())) {
+				            ingredients.add(stack);
+			            }
+		            });
 		// Ideally we should use Block#getPickBlock but we can't have a World and EntityPlayer at this point
 		ItemStack recipeOutput = new ItemStack(recipe.getOutputState().getBlock());
 		if (recipeOutput.isEmpty()) {

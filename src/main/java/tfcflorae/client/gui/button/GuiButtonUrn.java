@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import tfcflorae.objects.te.TEUrn;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
@@ -30,7 +30,7 @@ public class GuiButtonUrn extends GuiButtonTFC implements IButtonTooltip {
 	}
 
 	@Override
-	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+	public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
 			GlStateManager.color(1, 1, 1, 1);
 			mc.getTextureManager().bindTexture(LARGE_VESSEL_BACKGROUND);

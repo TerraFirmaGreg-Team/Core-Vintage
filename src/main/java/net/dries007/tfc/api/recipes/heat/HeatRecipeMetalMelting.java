@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.heat;
 
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -12,10 +7,9 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
 
-@ParametersAreNonnullByDefault
+
 public class HeatRecipeMetalMelting extends HeatRecipe {
 	private final Metal metal; //Used only in JEI to determine the metal registered in this recipe.
 

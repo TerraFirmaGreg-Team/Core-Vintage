@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -14,10 +9,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BiomeProviderTFC extends BiomeProvider {
 	public BiomeProviderTFC(World world) {

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import mezz.jei.api.IGuiHelper;
@@ -19,9 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class AlloyCategory extends BaseRecipeCategory<AlloyRecipeWrapper> {
 	private static final ResourceLocation ICONS = new ResourceLocation(Constants.MODID_TFC, "textures/gui/icons/jei.png");
 

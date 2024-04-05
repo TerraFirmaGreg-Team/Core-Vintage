@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
@@ -16,19 +11,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class CommandHeat extends CommandBase {
 	@Override
-	@Nonnull
+	@NotNull
 	public String getName() {
 		return "heat";
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getUsage(ICommandSender sender) {
 		return "tfc.command.heat.usage";
 	}

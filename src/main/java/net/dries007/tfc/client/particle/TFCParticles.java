@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.particle;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -20,7 +15,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Supplier;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -106,7 +102,7 @@ public enum TFCParticles {
 	 * @param map the TextureMap, got from {@link TextureStitchEvent.Pre} event
 	 */
 	@SideOnly(Side.CLIENT)
-	private void registerSprite(@Nonnull TextureMap map) {
+	private void registerSprite(@NotNull TextureMap map) {
 		this.sprite = map.registerSprite(location);
 	}
 
@@ -115,7 +111,7 @@ public enum TFCParticles {
 	 */
 	public interface IParticleFactoryTFC {
 		@SideOnly(Side.CLIENT)
-		@Nonnull
+		@NotNull
 		Particle createParticle(World world, double x, double y, double z, double speedX, double speedY, double speedZ, int duration);
 	}
 }

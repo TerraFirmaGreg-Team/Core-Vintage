@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -58,15 +53,16 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Map.Entry;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class ItemSmallVessel extends ItemPottery {
 	private final boolean glazed;
 
@@ -76,7 +72,7 @@ public class ItemSmallVessel extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (!worldIn.isRemote && !playerIn.isSneaking()) {
@@ -92,7 +88,7 @@ public class ItemSmallVessel extends ItemPottery {
 						break;
 					case LIQUID_SOLID:
 						TerraFirmaCraft.getNetwork()
-								.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MODID_TFC + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+						               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, MODID_TFC + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
 						break;
 				}
 			}
@@ -101,7 +97,7 @@ public class ItemSmallVessel extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getTranslationKey(ItemStack stack) {
 		if (!glazed) {
 			return super.getTranslationKey(stack);
@@ -144,7 +140,7 @@ public class ItemSmallVessel extends ItemPottery {
 	 * @param input the small vessel
 	 * @return the vessel with molten contents, if possible
 	 */
-	@Nonnull
+	@NotNull
 	public ItemStack getFiringResult(ItemStack input) {
 		IItemHandler capItemHandler = input.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		if (capItemHandler instanceof ISmallVesselHandler cap) {
@@ -162,13 +158,13 @@ public class ItemSmallVessel extends ItemPottery {
 		return input;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL; // Can't be stored in itself
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
@@ -236,7 +232,7 @@ public class ItemSmallVessel extends ItemPottery {
 
 		@SideOnly(Side.CLIENT)
 		@Override
-		public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+		public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 			Metal metal = getMetal();
 			if (metal != null) {
 				String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
@@ -268,8 +264,8 @@ public class ItemSmallVessel extends ItemPottery {
 				if (hasContent) {
 					if (onlySmeltables) {
 						int textPosition = (int) super.stacks.stream()
-								.filter(itemstack -> !ItemStack.EMPTY.equals(itemstack))
-								.count() + 1;
+						                                     .filter(itemstack -> !ItemStack.EMPTY.equals(itemstack))
+						                                     .count() + 1;
 						int totalAmount = materials.values().stream().reduce(0, Integer::sum);
 						for (Entry<Metal, Integer> entry : materials.entrySet()) {
 							Metal key = entry.getKey();
@@ -291,7 +287,7 @@ public class ItemSmallVessel extends ItemPottery {
 		@Override
 		public Metal getMetal() {
 			return fluidMode && tank.getFluid() != null ? FluidsTFC.getMetalFromFluid(tank.getFluid()
-					.getFluid()) : null;
+			                                                                              .getFluid()) : null;
 		}
 
 		@Override
@@ -300,14 +296,14 @@ public class ItemSmallVessel extends ItemPottery {
 		}
 
 		@Override
-		public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 			return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 		}
 
 		@Nullable
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 			return hasCapability(capability, facing) ? (T) this : null;
 		}
 
@@ -348,7 +344,7 @@ public class ItemSmallVessel extends ItemPottery {
 		}
 
 		@Override
-		public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+		public void setStackInSlot(int slot, @NotNull ItemStack stack) {
 			IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 			if (cap != null) {
 				CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
@@ -356,9 +352,9 @@ public class ItemSmallVessel extends ItemPottery {
 			super.setStackInSlot(slot, stack);
 		}
 
-		@Nonnull
+		@NotNull
 		@Override
-		public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+		public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 			if (!simulate) {
 				IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 				if (cap != null) {
@@ -369,7 +365,7 @@ public class ItemSmallVessel extends ItemPottery {
 		}
 
 		@Override
-		@Nonnull
+		@NotNull
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
 			ItemStack stack = super.extractItem(slot, amount, simulate).copy();
 			IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
@@ -380,7 +376,7 @@ public class ItemSmallVessel extends ItemPottery {
 		}
 
 		@Override
-		public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+		public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 			IItemSize size = CapabilityItemSize.getIItemSize(stack);
 			if (size != null) {
 				return size.getSize(stack).isSmallerThan(Size.NORMAL);
@@ -439,7 +435,7 @@ public class ItemSmallVessel extends ItemPottery {
 		 * Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different stack is being taken out.
 		 */
 		@Override
-		public void beforePutStack(SlotCallback slot, @Nonnull ItemStack stack) {
+		public void beforePutStack(SlotCallback slot, @NotNull ItemStack stack) {
 			IFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
 			if (cap != null) {
 				CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);

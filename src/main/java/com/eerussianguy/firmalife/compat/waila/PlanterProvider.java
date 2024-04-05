@@ -13,15 +13,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class PlanterProvider implements IWailaBlock {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
 		IBlockState state = world.getBlockState(pos);
 		TileEntity te = world.getTileEntity(pos);
@@ -71,7 +72,7 @@ public class PlanterProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(TEPlanter.class);

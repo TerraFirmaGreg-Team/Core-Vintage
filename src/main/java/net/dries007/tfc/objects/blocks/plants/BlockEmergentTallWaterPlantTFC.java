@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.Plant;
@@ -14,13 +9,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
-@ParametersAreNonnullByDefault
+
 public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC implements ITallPlant {
 	private static final Map<Plant, BlockEmergentTallWaterPlantTFC> MAP = new HashMap<>();
 

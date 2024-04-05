@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -18,12 +13,11 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * todo: spawn stuff, see worldevent.createspawn & worldProvider
  */
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class WorldTypeTFC extends WorldType {
 	public static final int SEALEVEL = 144;

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -40,14 +35,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockBerryBush extends Block implements IGrowingPlant {
 	public static final PropertyBool FRUITING = PropertyBool.create("fruiting");
@@ -75,7 +71,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(FRUITING, meta == 1);
 	}
@@ -104,7 +100,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		switch (bush.getSize()) {
 			case SMALL:
@@ -117,7 +113,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		if (bush.getSize() == IBerryBush.Size.LARGE && face == EnumFacing.UP)
@@ -176,13 +172,13 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, @Nonnull BlockPos pos) {
+	public boolean canPlaceBlockAt(World worldIn, @NotNull BlockPos pos) {
 		if (super.canPlaceBlockAt(worldIn, pos)) {
 			return canStay(worldIn, pos);
 		}
@@ -221,7 +217,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FRUITING);
 	}
@@ -237,7 +233,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 		return new TETickCounter();
 	}
 
-	@Nonnull
+	@NotNull
 	public IBerryBush getBush() {
 		return bush;
 	}

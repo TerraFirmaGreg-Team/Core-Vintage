@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -168,8 +163,8 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 						buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
 						buffer.pos(positionX, positionY + 16, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
 						buffer.pos(positionX + 16, positionY + 16, 0)
-								.tex(sprite.getMaxU(), sprite.getMaxV())
-								.endVertex();
+						      .tex(sprite.getMaxU(), sprite.getMaxV())
+						      .endVertex();
 						buffer.pos(positionX + 16, positionY, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
 
 						fillHeightPixels -= 16;
@@ -180,17 +175,17 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 						int blank = 16 - fillHeightPixels;
 						positionY += blank;
 						buffer.pos(positionX, positionY, 0)
-								.tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
-								.endVertex();
+						      .tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
+						      .endVertex();
 						buffer.pos(positionX, positionY + fillHeightPixels, 0)
-								.tex(sprite.getMinU(), sprite.getMaxV())
-								.endVertex();
+						      .tex(sprite.getMinU(), sprite.getMaxV())
+						      .endVertex();
 						buffer.pos(positionX + 16, positionY + fillHeightPixels, 0)
-								.tex(sprite.getMaxU(), sprite.getMaxV())
-								.endVertex();
+						      .tex(sprite.getMaxU(), sprite.getMaxV())
+						      .endVertex();
 						buffer.pos(positionX + 16, positionY, 0)
-								.tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
-								.endVertex();
+						      .tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
+						      .endVertex();
 					}
 
 					Tessellator.getInstance().draw();

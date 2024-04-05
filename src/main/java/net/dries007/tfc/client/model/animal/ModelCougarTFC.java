@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.model.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -15,7 +10,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelCougarTFC
@@ -23,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelCougarTFC extends ModelBase {
 	public ModelRenderer backBody;
 	public ModelRenderer backLeftLegTop;

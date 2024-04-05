@@ -36,8 +36,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class ItemMetalTongsJawMold extends ItemPottery {
@@ -58,7 +60,7 @@ public class ItemMetalTongsJawMold extends ItemPottery {
 	}
 
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand hand) {
 		final ItemStack heldStack = player.getHeldItem(hand);
@@ -92,7 +94,7 @@ public class ItemMetalTongsJawMold extends ItemPottery {
 		return new ActionResult<>(EnumActionResult.SUCCESS, heldStack);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getTranslationKey(ItemStack stack) {
 		final IFluidHandler capFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);

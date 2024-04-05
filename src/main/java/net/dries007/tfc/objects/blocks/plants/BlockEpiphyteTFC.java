@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.Plant;
@@ -23,12 +18,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class BlockEpiphyteTFC extends BlockPlantTFC {
 	private static final PropertyDirection FACING = PropertyDirection.create("facing");
 	private static final AxisAlignedBB PLANT_UP_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.75D, 0.75D);
@@ -54,7 +49,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 		this.onNeighborChangeInternal(worldIn, pos, state);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
@@ -73,7 +68,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.NONE;
 	}
@@ -106,7 +101,7 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		switch (state.getValue(FACING)) {
 			case EAST:
@@ -124,27 +119,27 @@ public class BlockEpiphyteTFC extends BlockPlantTFC {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, FACING, growthStageProperty, DAYPERIOD, AGE);
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		if (this.canPlaceAt(worldIn, pos, facing)) {

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -39,9 +34,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes.
@@ -50,7 +46,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @see TEBarrel
  * @see BarrelRecipe
  */
-@ParametersAreNonnullByDefault
+
 public class BlockBarrel extends Block implements IItemSize {
 	public static final PropertyBool SEALED = PropertyBool.create("sealed");
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
@@ -79,20 +75,20 @@ public class BlockBarrel extends Block implements IItemSize {
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE; // Causes overburden if sealed
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return stack.getTagCompound() == null;
 	}
 
@@ -109,7 +105,7 @@ public class BlockBarrel extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(SEALED, meta == 1);
@@ -138,7 +134,7 @@ public class BlockBarrel extends Block implements IItemSize {
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return BOUNDING_BOX;
@@ -146,7 +142,7 @@ public class BlockBarrel extends Block implements IItemSize {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
@@ -183,7 +179,7 @@ public class BlockBarrel extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
@@ -229,7 +225,7 @@ public class BlockBarrel extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, SEALED);
 	}
@@ -272,7 +268,7 @@ public class BlockBarrel extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world,
 	                              BlockPos pos, EntityPlayer player) {
 		ItemStack stack = new ItemStack(state.getBlock());

@@ -1,15 +1,12 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.skills;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -56,12 +53,12 @@ public final class SkillType<S extends Skill> {
 		SKILL_ORDER.add(this);
 	}
 
-	@Nonnull
+	@NotNull
 	public static List<SkillType<? extends Skill>> getSkills() {
 		return SKILL_ORDER;
 	}
 
-	@Nonnull
+	@NotNull
 	public static Map<String, Skill> createSkillMap(IPlayerData rootInstance) {
 		return SKILL_TYPES.values()
 		                  .stream()
@@ -81,7 +78,7 @@ public final class SkillType<S extends Skill> {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public String getName() {
 		return name;
 	}

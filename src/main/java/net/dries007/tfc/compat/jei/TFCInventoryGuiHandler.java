@@ -1,14 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei;
 
 import mezz.jei.api.gui.IAdvancedGuiHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +16,7 @@ public class TFCInventoryGuiHandler<T extends GuiContainer> implements IAdvanced
 		this.clazz = clazz;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Class<T> getGuiContainerClass() {
 		return clazz;

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import tfctech.objects.tileentities.TEFridge;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class PacketFridgeUpdate implements IMessage {
 	private BlockPos pos;
@@ -19,7 +19,7 @@ public class PacketFridgeUpdate implements IMessage {
 
 	public PacketFridgeUpdate() {}
 
-	public PacketFridgeUpdate(@Nonnull BlockPos pos, float efficiency) {
+	public PacketFridgeUpdate(@NotNull BlockPos pos, float efficiency) {
 		this.pos = pos;
 		this.efficiency = efficiency;
 	}

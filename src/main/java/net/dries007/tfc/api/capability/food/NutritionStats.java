@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.ConfigTFC;
@@ -11,8 +6,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -68,7 +65,7 @@ public class NutritionStats implements INBTSerializable<NBTTagCompound> {
 		updateAverageNutrients();
 	}
 
-	public void addNutrients(@Nonnull FoodData data) {
+	public void addNutrients(@NotNull FoodData data) {
 		records.addFirst(data.copy());
 		calculateNutrition();
 	}
@@ -78,7 +75,7 @@ public class NutritionStats implements INBTSerializable<NBTTagCompound> {
 	 * It marks said food data as "buffed", and each food data can only be buffed once.
 	 * This is used for non-food related nutrition bonuses, for instance drinking milk (which is not a food as it dosen't expire, which is unbalanced)
 	 */
-	public void addBuff(@Nonnull FoodData data) {
+	public void addBuff(@NotNull FoodData data) {
 		FoodData recentFood = getMostRecentRecord();
 		if (recentFood != null) {
 			recentFood.applyBuff(data);

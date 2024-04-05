@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.types.Metal;
@@ -15,10 +10,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class TEMetalSheet extends TEBase {
 	private final boolean[] faces;
 
@@ -73,7 +67,7 @@ public class TEMetalSheet extends TEBase {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		for (EnumFacing face : EnumFacing.values()) {
 			nbt.setBoolean(face.getName(), faces[face.getIndex()]);

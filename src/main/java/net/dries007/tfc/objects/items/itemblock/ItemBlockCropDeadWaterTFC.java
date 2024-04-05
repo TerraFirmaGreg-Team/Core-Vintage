@@ -16,10 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class ItemBlockCropDeadWaterTFC extends ItemBlockTFC {
 	protected final BlockCropDead block;
 
@@ -28,7 +27,7 @@ public class ItemBlockCropDeadWaterTFC extends ItemBlockTFC {
 		this.block = block;
 	}
 
-	@Nonnull
+	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);

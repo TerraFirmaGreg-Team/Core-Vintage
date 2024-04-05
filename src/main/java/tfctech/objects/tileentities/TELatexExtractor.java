@@ -20,13 +20,14 @@ import tfctech.network.PacketLatexUpdate;
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.TechItems;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static net.minecraftforge.fluids.Fluid.BUCKET_VOLUME;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class TELatexExtractor extends TEBase implements ITickable {
 	public static final int MAX_FLUID = BUCKET_VOLUME;
@@ -49,7 +50,7 @@ public class TELatexExtractor extends TEBase implements ITickable {
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("flowTicks", flowTicks);

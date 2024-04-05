@@ -50,7 +50,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
@@ -106,8 +106,8 @@ public class ClientRegisterEventsFL {
 			private final ModelResourceLocation FALLBACK = new ModelResourceLocation(item.getRegistryName().toString());
 
 			@Override
-			@Nonnull
-			public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+			@NotNull
+			public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 				IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 				if (cap instanceof IMoldHandler) {
 					Metal metal = ((IMoldHandler) cap).getMetal();

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -15,13 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemGem extends ItemTFC {
 	private static final EnumMap<Gem, ItemGem> MAP = new EnumMap<>(Gem.class);
 	public final Gem gem;
@@ -67,13 +63,13 @@ public class ItemGem extends ItemTFC {
 		}
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL; // Stored anywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64

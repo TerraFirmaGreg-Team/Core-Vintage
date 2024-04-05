@@ -37,11 +37,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPlantable {
 	static final PropertyBool DOWN = PropertyBool.create("down");
 	static final PropertyBool UP = PropertyBool.create("up");
@@ -74,13 +74,13 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 		this.canCreateSources = false;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.TINY; // Store anywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
@@ -88,7 +88,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos)
 		            .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
@@ -105,7 +105,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		state = state.getActualState(source, pos);
 
@@ -155,7 +155,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 		return NULL_AABB;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	protected BlockStateContainer createBlockState() {
 		//return new BlockStateContainer(this, LEVEL, DOWN, UP, NORTH, EAST, WEST, SOUTH);
@@ -173,7 +173,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		switch (rot) {
 			case CLOCKWISE_180:
@@ -198,7 +198,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		switch (mirrorIn) {
 			case LEFT_RIGHT:
@@ -210,27 +210,27 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
 		return true;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
@@ -243,12 +243,12 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
@@ -256,7 +256,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!worldIn.isRemote) {
@@ -266,7 +266,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		return canConnectTo(world, pos.offset(facing), facing.getOpposite()) && !(world.getBlockState(pos.offset(facing))
@@ -298,7 +298,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
 		this.onBlockHarvested(world, pos, state, player);
@@ -314,7 +314,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		for (EnumFacing face : EnumFacing.values()) {
 			IBlockState up = worldIn.getBlockState(pos.up());
@@ -341,14 +341,14 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements IItemSize, IPl
 		return getDefaultState();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.NONE;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {

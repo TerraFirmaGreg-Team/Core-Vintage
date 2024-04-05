@@ -19,8 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
 public class ItemSnowShoes extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
 
 	private static final String STEPS_NBT_KEY = "Steps";
@@ -48,17 +46,17 @@ public class ItemSnowShoes extends ItemArmor implements IItemSize, IDamageResist
 		return this.materialTFC.getSlashingModifier();
 	}
 
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return false;
 	}
 

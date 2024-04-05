@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -13,13 +8,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class BarrelRecipeDynamicBowlFood extends BarrelRecipe {
 	public BarrelRecipeDynamicBowlFood(IIngredient<FluidStack> inputFluid, IIngredient<ItemStack> inputStack, int duration) {
 		super(inputFluid, inputStack, null, new ItemStack(Items.BOWL), duration);
@@ -30,7 +26,7 @@ public class BarrelRecipeDynamicBowlFood extends BarrelRecipe {
 		return true; // Since we don't care about ratios, excess item input will be leftover, and there's no excess fluid output.
 	}
 
-	@Nonnull
+	@NotNull
 	public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
 		int multiplier = getMultiplier(inputFluid, inputStack);
 		List<ItemStack> outputList = new ArrayList<>();

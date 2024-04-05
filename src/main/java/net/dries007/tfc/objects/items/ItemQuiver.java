@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.ConfigTFC;
@@ -33,11 +28,11 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class ItemQuiver extends ItemArmorTFC {
 	public ItemQuiver() {
 		super(ArmorMaterialTFC.QUIVER, 1 /* chest*/, EntityEquipmentSlot.CHEST);
@@ -148,7 +143,7 @@ public class ItemQuiver extends ItemArmorTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (!worldIn.isRemote && !playerIn.isSneaking()) {
@@ -157,13 +152,13 @@ public class ItemQuiver extends ItemArmorTFC {
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;
@@ -187,19 +182,19 @@ public class ItemQuiver extends ItemArmorTFC {
 		}
 
 		@Override
-		public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 		}
 
 		@Nullable
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 			return hasCapability(capability, facing) ? (T) this : null;
 		}
 
 		@Override
-		public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+		public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 			return OreDictionaryHelper.doesStackMatchOre(stack, "javelin") ||
 					stack.getItem() instanceof ItemArrow;
 		}

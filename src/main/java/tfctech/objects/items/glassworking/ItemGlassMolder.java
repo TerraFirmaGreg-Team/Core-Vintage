@@ -26,13 +26,14 @@ import su.terrafirmagreg.api.lib.Constants;
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.ItemMiscTech;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemGlassMolder extends ItemMiscTech {
 	public static final int BLOWPIPE_TANK = 250;
@@ -78,7 +79,7 @@ public class ItemGlassMolder extends ItemMiscTech {
 		}
 
 		@Override
-		public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 			return capability == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY
 					|| capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 		}
@@ -86,11 +87,11 @@ public class ItemGlassMolder extends ItemMiscTech {
 		@Nullable
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 			return hasCapability(capability, facing) ? (T) this : null;
 		}
 
-		@Nonnull
+		@NotNull
 		@Override
 		public NBTTagCompound serializeNBT() {
 			NBTTagCompound nbt = super.serializeNBT();
@@ -111,7 +112,7 @@ public class ItemGlassMolder extends ItemMiscTech {
 
 		@SideOnly(Side.CLIENT)
 		@Override
-		public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> tooltip) {
+		public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> tooltip) {
 			FluidStack fluid = tank.drain(capacity, false);
 			if (fluid != null) {
 				String fluidDesc = TextFormatting.DARK_GREEN + fluid.getLocalizedName() + TextFormatting.WHITE;
@@ -160,7 +161,7 @@ public class ItemGlassMolder extends ItemMiscTech {
 			return tank.drain(capacity, false);
 		}
 
-		@Nonnull
+		@NotNull
 		@Override
 		public ItemStack getContainer() {
 			return this.tank.getContainer();

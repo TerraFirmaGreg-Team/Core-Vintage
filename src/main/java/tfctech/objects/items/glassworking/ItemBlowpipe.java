@@ -13,8 +13,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import tfctech.client.TechGuiHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,8 +41,8 @@ public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking()) {
 			IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
@@ -52,12 +54,12 @@ public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		//noinspection ConstantConditions
 		String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-				.getPath()
-				.toLowerCase())).getFormattedText();
+		                                                                           .getPath()
+		                                                                           .toLowerCase())).getFormattedText();
 		return (new TextComponentTranslation("item.tfctech.metalitem.blowpipe.name", metalName)).getFormattedText();
 	}
 

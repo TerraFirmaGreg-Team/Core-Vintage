@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.ConfigTFC;
@@ -38,15 +33,16 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.objects.blocks.wood.BlockBarrel.SEALED;
 
-@ParametersAreNonnullByDefault
+
 public class TEBarrel extends TETickableInventory implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback {
 	public static final int SLOT_FLUID_CONTAINER_IN = 0;
 	public static final int SLOT_FLUID_CONTAINER_OUT = 1;
@@ -142,7 +138,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
 		return recipe;
 	}
 
-	@Nonnull
+	@NotNull
 	public String getSealedDate() {
 		return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
 	}
@@ -322,7 +318,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
 		nbt.setLong("sealedTick", sealedTick);

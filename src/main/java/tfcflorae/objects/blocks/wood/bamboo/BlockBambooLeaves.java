@@ -15,8 +15,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 public class BlockBambooLeaves extends BlockLeavesTFC {
@@ -69,13 +71,13 @@ public class BlockBambooLeaves extends BlockLeavesTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, DECAYABLE);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return ImmutableList.of(new ItemStack(this));
 	}

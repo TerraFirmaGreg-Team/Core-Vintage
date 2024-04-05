@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -19,7 +14,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Much of this is borrowed from https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/d064915183a4a3b803d779576f982279268b1ca3/src/main/java/choonster/testmod3/crafting/recipe/ShapelessCuttingRecipe.java
@@ -28,13 +23,13 @@ import javax.annotation.Nonnull;
 public class ShapedDamageRecipe extends ShapedOreRecipe {
 	private final int damage;
 
-	public ShapedDamageRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
+	public ShapedDamageRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
 		super(group, result, input);
 		this.damage = damage;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
 
@@ -53,7 +48,7 @@ public class ShapedDamageRecipe extends ShapedOreRecipe {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.metal;
 
 import net.dries007.tfc.api.capability.DumbStorage;
@@ -21,7 +16,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.oredict.OreDictionary;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -100,13 +96,13 @@ public final class CapabilityMetalItem {
 			if (oreDict.startsWith(oreName)) {
 				//noinspection ConstantConditions
 				return TFCRegistries.METALS.getValuesCollection().stream()
-						.filter(metal -> oreDict.equals(OreDictionaryHelper.toString(oreName, metal.getRegistryName()
-								.getPath())))
-						.findFirst()
-						.map(metal -> {
-							Metal.ItemType type = ORE_DICT_METAL_ITEMS.get(oreName);
-							return new MetalItemHandler(metal, type.getSmeltAmount(), true);
-						}).orElse(null);
+				                           .filter(metal -> oreDict.equals(OreDictionaryHelper.toString(oreName, metal.getRegistryName()
+				                                                                                                      .getPath())))
+				                           .findFirst()
+				                           .map(metal -> {
+					                           Metal.ItemType type = ORE_DICT_METAL_ITEMS.get(oreName);
+					                           return new MetalItemHandler(metal, type.getSmeltAmount(), true);
+				                           }).orElse(null);
 			}
 		}
 		return null;

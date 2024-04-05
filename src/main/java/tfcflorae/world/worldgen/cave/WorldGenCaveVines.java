@@ -11,10 +11,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import tfcflorae.objects.blocks.plants.BlockHangingPlantTFCF;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class WorldGenCaveVines extends WorldGenerator {
 	private Plant plant;
 

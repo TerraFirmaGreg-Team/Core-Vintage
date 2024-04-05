@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -19,24 +14,24 @@ import net.minecraftforge.registries.ForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * This is part of an effort to find the cause of TerraFirmaCraft#355 and TerraFirmaCraft#361
  */
-@ParametersAreNonnullByDefault
+
 public class CommandDebugInfo extends CommandBase {
 	private static final Logger LOGGER = LogManager.getLogger("tfc-infodump");
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getName() {
 		return "tfcdebuginfodump";
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getUsage(ICommandSender sender) {
 		return "tfc.command.debuginfo.usage";
 	}

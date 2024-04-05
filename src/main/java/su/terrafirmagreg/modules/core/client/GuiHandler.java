@@ -95,6 +95,9 @@ public class GuiHandler implements IGuiHandler {
 		NEST_BOX,
 		LOG_PILE,
 		CRUCIBLE,
+		CELLAR_SHELF,
+		ICE_BUNKER,
+		FREEZE_DRYER,
 		NULL;
 
 		private static final Type[] values = values();

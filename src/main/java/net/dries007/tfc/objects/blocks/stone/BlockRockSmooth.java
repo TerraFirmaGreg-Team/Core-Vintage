@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.stone;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -12,10 +7,9 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockRockSmooth extends BlockRockVariant {
 	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
 

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -28,15 +23,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class ItemProspectorPick extends ItemMetalTool {
 	private static final int PROSPECT_RADIUS = 12;
 	private static final int COOLDOWN = 10;
@@ -47,7 +43,7 @@ public class ItemProspectorPick extends ItemMetalTool {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, @Nullable EnumFacing facing, float hitX, float hitY, float hitZ) {
 		IBlockState state = worldIn.getBlockState(pos);
 		if (facing != null) {
@@ -123,7 +119,7 @@ public class ItemProspectorPick extends ItemMetalTool {
 	 * @param center The center position
 	 * @return the collection of results
 	 */
-	@Nonnull
+	@NotNull
 	private Collection<ProspectResult> scanSurroundingBlocks(World world, BlockPos center) {
 		Map<String, ProspectResult> results = new HashMap<>();
 		for (BlockPos.MutableBlockPos pos : BlockPos.MutableBlockPos.getAllInBoxMutable(center.add(-PROSPECT_RADIUS, -PROSPECT_RADIUS, -PROSPECT_RADIUS), center.add(PROSPECT_RADIUS, PROSPECT_RADIUS, PROSPECT_RADIUS))) {
@@ -140,7 +136,7 @@ public class ItemProspectorPick extends ItemMetalTool {
 		return results.values();
 	}
 
-	@Nonnull
+	@NotNull
 	private ItemStack getOreStack(World world, BlockPos pos, IBlockState state, boolean ignoreGrade) {
 		for (VeinType vein : VeinRegistry.INSTANCE.getVeins().values()) {
 			if (vein.isOreBlock(state)) {

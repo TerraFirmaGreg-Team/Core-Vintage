@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.stone;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -27,11 +22,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockFarmlandTFC extends BlockRockVariantFallable {
 	public static final int MAX_MOISTURE = 15;
 	public static final PropertyInteger MOISTURE = PropertyInteger.create("moisture", 0, MAX_MOISTURE);

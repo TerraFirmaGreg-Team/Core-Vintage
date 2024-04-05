@@ -7,8 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 // For now this is unnecessary, but it sets the groundwork for harvesting Whey + other straining recipes
 public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
@@ -45,7 +46,7 @@ public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	public FluidStack getOutputFluid() {
 		return outputFluid;
 	}

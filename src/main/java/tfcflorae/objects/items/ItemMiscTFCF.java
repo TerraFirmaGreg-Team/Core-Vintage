@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")
 //public class ItemMiscTFCF extends ItemMisc
@@ -31,15 +31,15 @@ public class ItemMiscTFCF extends ItemTFCF implements IItemSize {
 		this.weight = weight;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return size;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return weight;
 	}
 }

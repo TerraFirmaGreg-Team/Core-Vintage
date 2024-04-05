@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen.vein;
 
 import com.google.common.collect.ImmutableSet;
@@ -13,14 +8,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.Random;
 import java.util.Set;
 
-@ParametersAreNonnullByDefault
+
 public class VeinType {
 	private final Ore ore;
 	private final ItemStack looseRock;
@@ -93,7 +89,7 @@ public class VeinType {
 		return !looseRock.isEmpty();
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getLooseRockItem() {
 		return looseRock.copy();
 	}
@@ -159,13 +155,14 @@ public class VeinType {
 	}
 
 	public enum Shape {
-		SPHERE, CLUSTER
+		SPHERE,
+		CLUSTER
 	}
 
 	public static class CustomVeinType extends VeinType {
 		private final IBlockState oreState;
 
-		public CustomVeinType(@Nonnull IBlockState oreState, ItemStack looseRock, @Nonnull Collection<Rock> rocks, Shape shape, int width, int height, int rarity, int minY, int maxY, int density) {
+		public CustomVeinType(@NotNull IBlockState oreState, ItemStack looseRock, @NotNull Collection<Rock> rocks, Shape shape, int width, int height, int rarity, int minY, int maxY, int density) {
 			super(null, looseRock, rocks, shape, width, height, rarity, minY, maxY, density);
 			this.oreState = oreState;
 		}

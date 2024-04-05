@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
@@ -16,15 +11,16 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LampProvider implements IWailaBlock {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
 		TELamp te = Helpers.getTE(world, pos, TELamp.class);
 		if (te != null) {
@@ -37,7 +33,7 @@ public class LampProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(TELamp.class);

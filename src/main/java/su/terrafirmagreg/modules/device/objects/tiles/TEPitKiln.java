@@ -35,13 +35,13 @@ import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 import static su.terrafirmagreg.api.util.PropertyUtils.FULL;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 public class TEPitKiln extends TEPlacedItem implements ITickable {
 	public static final int STRAW_NEEDED = 8;
 	public static final int WOOD_NEEDED = 8;
@@ -233,7 +233,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("isLit", isLit);
 		nbt.setLong("litTick", litTick);

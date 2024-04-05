@@ -10,9 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemMetalMalletHead extends ItemTFC implements IMetalItem {
 	private final Metal metal;
@@ -23,13 +21,13 @@ public class ItemMetalMalletHead extends ItemTFC implements IMetalItem {
 		this.smeltAmount = 100;
 	}
 
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.HEAVY;
 	}
 

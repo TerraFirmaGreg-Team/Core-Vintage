@@ -38,14 +38,15 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 import static net.dries007.tfc.Constants.RNG;
 
-@ParametersAreNonnullByDefault
+
 public class BlockLeavesTFCF extends BlockLeaves {
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockLeavesTFCF.EnumLeafState.class);
 	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
@@ -75,7 +76,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 		           .withProperty(HARVESTABLE, meta > 3)
@@ -202,7 +203,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
 	}
@@ -244,7 +245,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockRenderLayer getRenderLayer() {
 		/*
 		 * This is a way to make sure the leave settings are updated.
@@ -257,7 +258,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockPlanks.EnumType getWoodType(int meta) {
 		// Unused so return whatever
 		return BlockPlanks.EnumType.OAK;
@@ -299,13 +300,13 @@ public class BlockLeavesTFCF extends BlockLeaves {
 		return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
-	@Nonnull
+	@NotNull
 	public Tree getTree() {
 		return wood;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return ImmutableList.of(new ItemStack(this));
 	}
@@ -362,11 +363,15 @@ public class BlockLeavesTFCF extends BlockLeaves {
 	}
 
 	public enum EnumLeafState implements IStringSerializable {
-		NORMAL, FLOWERING, FRUIT, AUTUMN, WINTER;
+		NORMAL,
+		FLOWERING,
+		FRUIT,
+		AUTUMN,
+		WINTER;
 
 		private static final EnumLeafState[] VALUES = values();
 
-		@Nonnull
+		@NotNull
 		public static EnumLeafState valueOf(int index) {
 			return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
 		}

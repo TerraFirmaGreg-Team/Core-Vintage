@@ -24,12 +24,12 @@ import su.terrafirmagreg.modules.device.client.gui.GuiQuern;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerQuern;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 import static net.minecraft.init.SoundEvents.*;
 
-@ParametersAreNonnullByDefault
+
 public class TEQuern extends TEInventory implements ITickable, IContainerProvider<ContainerQuern, GuiQuern> {
 	public static final int SLOT_HANDSTONE = 0;
 	public static final int SLOT_INPUT = 1;
@@ -88,7 +88,7 @@ public class TEQuern extends TEInventory implements ITickable, IContainerProvide
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("rotationTimer", rotationTimer);
 		return super.writeToNBT(nbt);
@@ -135,7 +135,7 @@ public class TEQuern extends TEInventory implements ITickable, IContainerProvide
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
 		return new AxisAlignedBB(getPos(), getPos().add(1, 2, 1));

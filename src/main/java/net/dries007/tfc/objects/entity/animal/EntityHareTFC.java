@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -21,11 +16,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class EntityHareTFC extends EntityRabbitTFC implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 16;
 	private static final DataParameter<Integer> HARE_TYPE = EntityDataManager.createKey(EntityHareTFC.class, DataSerializers.VARINT);
@@ -60,12 +55,12 @@ public class EntityHareTFC extends EntityRabbitTFC implements IHuntable {
 		this.dataManager.register(HARE_TYPE, 0);
 	}
 
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("HareType", this.getHareType());
 	}
 
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		this.setHareType(compound.getInteger("HareType"));
 	}

@@ -27,13 +27,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowable, ITallPlant {
 	private static final PropertyEnum<BlockTallGrassWater.EnumBlockPart> PART = PropertyEnum.create("part", BlockTallGrassWater.EnumBlockPart.class);
 	private static final Map<Plant, BlockTallGrassWater> MAP = new HashMap<>();
@@ -48,7 +48,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
 	}
@@ -74,7 +74,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 			IBlockState stateDown = worldIn.getBlockState(pos.down());
 			Material material = stateDown.getMaterial();
 			return ((soil.getBlock()
-					.canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)) || ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) || material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC)))) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+			             .canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)) || ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) || material == Material.ICE || (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC)))) && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
 		} else {
 			return this.canSustainBush(soil);
 		}
@@ -161,8 +161,8 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos.up(), this.getDefaultState());
 		IBlockState iblockstate = state.withProperty(AGE, 0)
-				.withProperty(growthStageProperty, plant.getStageForMonth())
-				.withProperty(PART, getPlantPart(worldIn, pos));
+		                               .withProperty(growthStageProperty, plant.getStageForMonth())
+		                               .withProperty(PART, getPlantPart(worldIn, pos));
 		worldIn.setBlockState(pos, iblockstate);
 		iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
 	}
@@ -177,10 +177,10 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 		if (!worldIn.isRemote && player != null) {
 			ItemStack stack = player.getHeldItemMainhand();
 			if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-					.getHarvestLevel(stack, "scythe", player, state) != -1) {
+			                                                                                 .getHarvestLevel(stack, "scythe", player, state) != -1) {
 				for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
 					if (Constants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
-							.getValue(AGE) + 1) / 4.0D) //+25% change for each age
+					                                          .getValue(AGE) + 1) / 4.0D) //+25% change for each age
 					{
 						spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
 					}
@@ -206,7 +206,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XZ;
 	}
@@ -223,7 +223,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 					grow(worldIn, rand, pos, state);
 				} else if (j < 3) {
 					worldIn.setBlockState(pos, state.withProperty(AGE, j + 1)
-							.withProperty(PART, getPlantPart(worldIn, pos)));
+					                                .withProperty(PART, getPlantPart(worldIn, pos)));
 				}
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
@@ -235,7 +235,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 					shrink(worldIn, pos);
 				} else if (j > 0) {
 					worldIn.setBlockState(pos, state.withProperty(AGE, j - 1)
-							.withProperty(PART, getPlantPart(worldIn, pos)));
+					                                .withProperty(PART, getPlantPart(worldIn, pos)));
 				}
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 			}
@@ -245,13 +245,13 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return getTallBoundingBax(state.getValue(AGE), state, source, pos);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD, PART);
 	}
@@ -262,13 +262,13 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return NonNullList.withSize(1, new ItemStack(this, 1));
 	}
 
 	private boolean canShrink(World worldIn, BlockPos pos) {
 		return worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.up())
-				.getBlock() != this;
+		                                                                      .getBlock() != this;
 	}
 }

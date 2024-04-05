@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -17,21 +12,23 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class BarrelRecipeFoodPreservation extends BarrelRecipe {
 	private final FoodTrait trait;
 	private final String tooltipName;
 
-	public BarrelRecipeFoodPreservation(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, String tooltipName) {
+	public BarrelRecipeFoodPreservation(@NotNull IIngredient<FluidStack> inputFluid, @NotNull IIngredient<ItemStack> inputStack, FoodTrait trait, String tooltipName) {
 		super(inputFluid, inputStack, null, ItemStack.EMPTY, -1);
 		this.trait = trait;
 		this.tooltipName = tooltipName;
 	}
 
-	public static BarrelRecipe vinegar(@Nonnull IIngredient<ItemStack> inputStack) {
+	public static BarrelRecipe vinegar(@NotNull IIngredient<ItemStack> inputStack) {
 		return new BarrelRecipeFoodPreservation(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.PICKLED), FoodTrait.VINEGAR, "barrel_recipe_vinegar");
 	}
 
@@ -41,7 +38,7 @@ public class BarrelRecipeFoodPreservation extends BarrelRecipe {
 		return super.isValidInput(inputFluid, inputStack) && (inputFluid == null || inputFluid.amount / this.inputFluid.getAmount() >= inputStack.getCount() / this.inputStack.getAmount());
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
 		return Helpers.listOf(inputStack);
@@ -52,7 +49,7 @@ public class BarrelRecipeFoodPreservation extends BarrelRecipe {
 		CapabilityFood.applyTrait(inputStack, trait);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<ItemStack> getOutputItemOnUnseal(FluidStack inputFluid, ItemStack inputStack) {
 		CapabilityFood.removeTrait(inputStack, trait);

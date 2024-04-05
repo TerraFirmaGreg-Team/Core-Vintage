@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.ConfigTFC;
@@ -13,8 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -49,19 +45,19 @@ public class Ore extends IForgeRegistryEntry.Impl<Ore> {
 		setRegistryName(name);
 	}
 
-	public Ore(ResourceLocation name, @Nonnull ResourceLocation metal, boolean canMelt, double chunkChance, double panChance) {
+	public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt, double chunkChance, double panChance) {
 		this(name, TFCRegistries.METALS.getValue(metal), canMelt, chunkChance, panChance);
 	}
 
-	public Ore(ResourceLocation name, @Nonnull ResourceLocation metal) {
+	public Ore(ResourceLocation name, @NotNull ResourceLocation metal) {
 		this(name, TFCRegistries.METALS.getValue(metal), true, 0, 0);
 	}
 
-	public Ore(ResourceLocation name, @Nonnull ResourceLocation metal, boolean canMelt) {
+	public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt) {
 		this(name, TFCRegistries.METALS.getValue(metal), canMelt, 0, 0);
 	}
 
-	public Ore(ResourceLocation name, @Nonnull ResourceLocation metal, double chunkChance, double panChance) {
+	public Ore(ResourceLocation name, @NotNull ResourceLocation metal, double chunkChance, double panChance) {
 		this(name, TFCRegistries.METALS.getValue(metal), true, chunkChance, panChance);
 	}
 
@@ -101,11 +97,13 @@ public class Ore extends IForgeRegistryEntry.Impl<Ore> {
 	}
 
 	public enum Grade implements IStringSerializable {
-		NORMAL, POOR, RICH;
+		NORMAL,
+		POOR,
+		RICH;
 
 		private static final Grade[] VALUES = values();
 
-		@Nonnull
+		@NotNull
 		public static Grade valueOf(int value) {
 			return value < 0 || value >= VALUES.length ? NORMAL : VALUES[value];
 		}

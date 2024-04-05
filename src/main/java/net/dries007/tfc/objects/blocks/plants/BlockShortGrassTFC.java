@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.Constants;
@@ -29,14 +24,15 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
 	private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.5, 0.875);
@@ -62,7 +58,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 		int age = (Integer) state.getValue(AGE);
 		if (!worldIn.isRemote) {
 			if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem()
-					.getHarvestLevel(stack, "scythe", player, state) == -1) {
+			                                                                                 .getHarvestLevel(stack, "scythe", player, state) == -1) {
 				if (stack.getItem() == Items.SHEARS) {
 					spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
 				}
@@ -73,7 +69,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 
 	}
 
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.XZ;
 	}
@@ -107,7 +103,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		switch ((Integer) state.getValue(AGE)) {
 			case 0:
@@ -121,7 +117,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, new IProperty[]{AGE, this.growthStageProperty, DAYPERIOD});
 	}
@@ -130,12 +126,12 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 		return 1 + random.nextInt(fortune * 2 + 1);
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 		return new ItemStack(this, 1);
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(this, 1);
 	}
@@ -144,7 +140,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 		return true;
 	}
 
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return NonNullList.withSize(1, new ItemStack(this, 1));
 	}

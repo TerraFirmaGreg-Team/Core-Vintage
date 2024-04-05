@@ -30,14 +30,15 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static net.minecraftforge.fluids.BlockFluidBase.LEVEL;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemCheesecloth extends ItemTFC {
 	private static final int CAPACITY = 500;
 
@@ -49,7 +50,7 @@ public class ItemCheesecloth extends ItemTFC {
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (bucketCap != null)
 			return bucketCap.drain(CAPACITY, false) == null;
@@ -126,8 +127,8 @@ public class ItemCheesecloth extends ItemTFC {
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (bucketCap != null) {
 			FluidStack fluidStack = bucketCap.drain(CAPACITY, false);
@@ -157,20 +158,20 @@ public class ItemCheesecloth extends ItemTFC {
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.NORMAL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.LIGHT;
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new FluidWhitelistHandler(stack, CAPACITY, ConfigFL.General.COMPAT.cheeseclothWhitelist);
 	}
 }

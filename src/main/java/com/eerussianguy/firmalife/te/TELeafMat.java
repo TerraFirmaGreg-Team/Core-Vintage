@@ -12,10 +12,9 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class TELeafMat extends TEInventory implements ITickable {
 	private long startTick;
 	private int tickGoal;
@@ -50,7 +49,7 @@ public class TELeafMat extends TEInventory implements ITickable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setLong("startTick", startTick);
 		nbt.setInteger("tickGoal", tickGoal);

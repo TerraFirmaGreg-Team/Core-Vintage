@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -42,14 +37,15 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
+
 public class EntityRabbitTFC extends EntityAnimalMammal implements IHuntable {
 	private static final int DAYS_TO_ADULTHOOD = 16;
 	private static final DataParameter<Integer> RABBIT_TYPE = EntityDataManager.createKey(EntityRabbitTFC.class, DataSerializers.VARINT);
@@ -202,17 +198,17 @@ public class EntityRabbitTFC extends EntityAnimalMammal implements IHuntable {
 		}
 	}
 
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("RabbitType", this.getRabbitType());
 	}
 
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		this.setRabbitType(compound.getInteger("RabbitType"));
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public SoundCategory getSoundCategory() {
 		return SoundCategory.NEUTRAL;

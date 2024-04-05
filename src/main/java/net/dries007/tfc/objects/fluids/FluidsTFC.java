@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.fluids;
 
 import com.google.common.collect.HashBiMap;
@@ -31,7 +26,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -89,9 +85,9 @@ public final class FluidsTFC {
 		return allMetalFluids.values();
 	}
 
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("ConstantConditions")
-	public static FluidWrapper getWrapper(@Nonnull Fluid fluid) {
+	public static FluidWrapper getWrapper(@NotNull Fluid fluid) {
 		if (!WRAPPERS.containsKey(fluid)) {
 			// Should only ever get called for non-tfc fluids, but in which case prevents a null wrapper getting returned
 			WRAPPERS.put(fluid, new FluidWrapper(fluid, false));
@@ -99,23 +95,23 @@ public final class FluidsTFC {
 		return WRAPPERS.get(fluid);
 	}
 
-	@Nonnull
+	@NotNull
 	public static Set<FluidWrapper> getAllWrappers() {
 		return WRAPPERS.values();
 	}
 
-	@Nonnull
-	public static Fluid getFluidFromMetal(@Nonnull Metal metal) {
+	@NotNull
+	public static Fluid getFluidFromMetal(@NotNull Metal metal) {
 		return allMetalFluids.get(metal).get();
 	}
 
-	@Nonnull
-	public static Metal getMetalFromFluid(@Nonnull Fluid fluid) {
+	@NotNull
+	public static Metal getMetalFromFluid(@NotNull Fluid fluid) {
 		return getWrapper(fluid).get(MetalProperty.METAL).getMetal();
 	}
 
-	@Nonnull
-	public static FluidWrapper getFluidFromDye(@Nonnull EnumDyeColor dyeColor) {
+	@NotNull
+	public static FluidWrapper getFluidFromDye(@NotNull EnumDyeColor dyeColor) {
 		return DYE_FLUIDS.get(dyeColor);
 	}
 
@@ -183,12 +179,12 @@ public final class FluidsTFC {
 		allMetalFluids = ImmutableMap.<Metal, FluidWrapper>builder()
 				.putAll(
 						TFCRegistries.METALS.getValuesCollection()
-								.stream()
-								.collect(Collectors.toMap(
-										metal -> metal,
-										metal -> registerFluid(new Fluid(metal.getRegistryName()
-												.getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor())).with(MetalProperty.METAL, new MetalProperty(metal))
-								))
+						                    .stream()
+						                    .collect(Collectors.toMap(
+								                    metal -> metal,
+								                    metal -> registerFluid(new Fluid(metal.getRegistryName()
+								                                                          .getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor())).with(MetalProperty.METAL, new MetalProperty(metal))
+						                    ))
 				)
 				.build();
 
@@ -201,8 +197,8 @@ public final class FluidsTFC {
 				})));
 	}
 
-	@Nonnull
-	private static FluidWrapper registerFluid(@Nonnull Fluid newFluid) {
+	@NotNull
+	private static FluidWrapper registerFluid(@NotNull Fluid newFluid) {
 		boolean isDefault = !FluidRegistry.isFluidRegistered(newFluid.getName());
 
 		if (!isDefault) {

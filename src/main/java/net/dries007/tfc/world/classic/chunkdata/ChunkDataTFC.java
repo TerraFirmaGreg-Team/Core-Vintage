@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.chunkdata;
 
 import net.dries007.tfc.ConfigTFC;
@@ -23,8 +18,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.ForgeRegistry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -64,12 +61,12 @@ public final class ChunkDataTFC {
 	private long protectedTicks; // Used for hostile spawn protection. Starts negative, increases by players in the area
 	private long lastUpdateTick, lastUpdateYear; // The last time this chunk was updated by world regen
 
-	@Nonnull
+	@NotNull
 	public static ChunkDataTFC get(World world, BlockPos pos) {
 		return get(world.getChunk(pos));
 	}
 
-	@Nonnull
+	@NotNull
 	public static ChunkDataTFC get(Chunk chunk) {
 		ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
 		return data == null ? EMPTY : data;
@@ -150,7 +147,7 @@ public final class ChunkDataTFC {
 	 *
 	 * @param vein the ore added by ore vein generator
 	 */
-	public void markVeinGenerated(@Nonnull Vein vein) {
+	public void markVeinGenerated(@NotNull Vein vein) {
 		generatedVeins.add(vein);
 	}
 

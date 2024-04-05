@@ -18,12 +18,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class TETurntable extends TETickableInventory {
 	private static final List<Item> POTTERY = TFCRegistries.KNAPPING.getValuesCollection().stream()
@@ -111,7 +111,7 @@ public class TETurntable extends TETickableInventory {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("speed", speed);
 		nbt.setInteger("progress", progress);

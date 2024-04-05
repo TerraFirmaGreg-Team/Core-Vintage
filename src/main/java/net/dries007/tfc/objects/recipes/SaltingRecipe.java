@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -22,14 +17,15 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class SaltingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	private final NonNullList<Ingredient> input;
 	private final ResourceLocation group;
@@ -40,7 +36,7 @@ public class SaltingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements 
 	}
 
 	@Override
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		List<ItemStack> items = new ArrayList<>();
 		for (int i = 0; i < inv.getSizeInventory(); ++i) {
 			ItemStack stack = inv.getStackInSlot(i);
@@ -55,7 +51,7 @@ public class SaltingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements 
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack result = ItemStack.EMPTY;
 		for (int i = 0; i < inv.getSizeInventory(); i++) {
@@ -78,11 +74,11 @@ public class SaltingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements 
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {return ItemStack.EMPTY;}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<Ingredient> getIngredients() {
 		return this.input;
 	}
@@ -93,7 +89,7 @@ public class SaltingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements 
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return this.group == null ? "" : this.group.toString();
 	}

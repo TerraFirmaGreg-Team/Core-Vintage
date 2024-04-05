@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
@@ -16,8 +11,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.function.BiFunction;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -64,7 +61,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 	 * @param color        color of the metal when in fluid form. Used to auto generate a fluid texture. In future this may be used to color items as well
 	 * @param toolMetal    The tool material. Null if metal is not able to create tools
 	 */
-	public Metal(@Nonnull ResourceLocation name, Tier tier, boolean usable, float specificHeat, float meltTemp, int color, @Nullable Item.ToolMaterial toolMetal, @Nullable IArmorMaterialTFC armorMetal) {
+	public Metal(@NotNull ResourceLocation name, Tier tier, boolean usable, float specificHeat, float meltTemp, int color, @Nullable Item.ToolMaterial toolMetal, @Nullable IArmorMaterialTFC armorMetal) {
 		this.usable = usable;
 		this.tier = tier;
 		this.specificHeat = specificHeat;
@@ -139,30 +136,36 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 	 * T4 - Blast Furnace / Crucible
 	 */
 	public enum Tier {
-		TIER_0, TIER_I, TIER_II, TIER_III, TIER_IV, TIER_V, TIER_VI;
+		TIER_0,
+		TIER_I,
+		TIER_II,
+		TIER_III,
+		TIER_IV,
+		TIER_V,
+		TIER_VI;
 
 		private static final Tier[] VALUES = values();
 
-		@Nonnull
+		@NotNull
 		public static Tier valueOf(int tier) {
 			return tier < 0 || tier > VALUES.length ? TIER_I : VALUES[tier];
 		}
 
-		@Nonnull
+		@NotNull
 		public Tier next() {
 			return this == TIER_VI ? TIER_VI : VALUES[this.ordinal() + 1];
 		}
 
-		@Nonnull
+		@NotNull
 		public Tier previous() {
 			return this == TIER_0 ? TIER_0 : VALUES[this.ordinal() - 1];
 		}
 
-		public boolean isAtLeast(@Nonnull Tier requiredInclusive) {
+		public boolean isAtLeast(@NotNull Tier requiredInclusive) {
 			return this.ordinal() >= requiredInclusive.ordinal();
 		}
 
-		public boolean isAtMost(@Nonnull Tier requiredInclusive) {
+		public boolean isAtMost(@NotNull Tier requiredInclusive) {
 			return this.ordinal() <= requiredInclusive.ordinal();
 		}
 	}
@@ -229,7 +232,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 		private final BiFunction<Metal, ItemType, Item> supplier;
 		private final String[] pattern;
 
-		ItemType(boolean toolItem, int armorSlot, int smeltAmount, @Nonnull BiFunction<Metal, ItemType, Item> supplier, boolean hasMold, String... moldPattern) {
+		ItemType(boolean toolItem, int armorSlot, int smeltAmount, @NotNull BiFunction<Metal, ItemType, Item> supplier, boolean hasMold, String... moldPattern) {
 			this.toolItem = toolItem;
 			this.armorSlot = armorSlot;
 			this.smeltAmount = smeltAmount;
@@ -246,11 +249,11 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 			this(toolItem, smeltAmount, false);
 		}
 
-		ItemType(boolean toolItem, int armorSlot, int smeltAmount, @Nonnull BiFunction<Metal, ItemType, Item> supplier) {
+		ItemType(boolean toolItem, int armorSlot, int smeltAmount, @NotNull BiFunction<Metal, ItemType, Item> supplier) {
 			this(toolItem, armorSlot, smeltAmount, supplier, false);
 		}
 
-		ItemType(boolean toolItem, int smeltAmount, @Nonnull BiFunction<Metal, ItemType, Item> supplier) {
+		ItemType(boolean toolItem, int smeltAmount, @NotNull BiFunction<Metal, ItemType, Item> supplier) {
 			this(toolItem, -1, smeltAmount, supplier, false);
 		}
 

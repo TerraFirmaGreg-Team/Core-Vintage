@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import com.google.common.base.Joiner;
@@ -37,8 +32,10 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -116,7 +113,7 @@ public final class Helpers {
 	 * @param creature the entityLiving that will sit on this block
 	 * @param yOffset  the y offset of the top facing
 	 */
-	public static void sitOnBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityLiving creature, double yOffset) {
+	public static void sitOnBlock(@NotNull World world, @NotNull BlockPos pos, @NotNull EntityLiving creature, double yOffset) {
 		if (!world.isRemote && !world.getBlockState(pos).getMaterial().isReplaceable()) {
 			EntitySeatOn seat = new EntitySeatOn(world, pos, yOffset);
 			world.spawnEntity(seat);
@@ -132,7 +129,7 @@ public final class Helpers {
 	 * @return the entity which is sitting on this block, or null if none
 	 */
 	@Nullable
-	public static Entity getSittingEntity(@Nonnull World world, @Nonnull BlockPos pos) {
+	public static Entity getSittingEntity(@NotNull World world, @NotNull BlockPos pos) {
 		if (!world.isRemote) {
 			List<EntitySeatOn> seats = world.getEntitiesWithinAABB(EntitySeatOn.class, new AxisAlignedBB(pos).grow(1D));
 			for (EntitySeatOn seat : seats) {
@@ -222,7 +219,7 @@ public final class Helpers {
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	public static ItemStack consumeItem(ItemStack stack, int amount) {
 		if (stack.getCount() <= amount) {
 			return ItemStack.EMPTY;
@@ -231,7 +228,7 @@ public final class Helpers {
 		return stack;
 	}
 
-	@Nonnull
+	@NotNull
 	public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
 		return player.isCreative() ? stack : consumeItem(stack, amount);
 	}
@@ -420,7 +417,7 @@ public final class Helpers {
 	 * @param <T> anything and everything
 	 * @return null, but not null
 	 */
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("ConstantConditions")
 	public static <T> T getNull() {
 		return null;

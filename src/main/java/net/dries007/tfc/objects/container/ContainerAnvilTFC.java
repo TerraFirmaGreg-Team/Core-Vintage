@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -25,14 +20,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.*;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
 	public ContainerAnvilTFC(InventoryPlayer playerInv, TEAnvilTFC te) {
 		super(playerInv, te, 26);

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
 
 import net.dries007.tfc.ConfigTFC;
@@ -43,9 +38,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 import static net.dries007.tfc.objects.te.TEBarrel.BARREL_MAX_FLUID_TEMPERATURE;
@@ -54,14 +50,14 @@ import static net.dries007.tfc.objects.te.TEBarrel.BARREL_MAX_FLUID_TEMPERATURE;
  * Item block for {@link BlockBarrel}
  * Only has NBT data if the barrel is sealed and has contents
  */
-@ParametersAreNonnullByDefault
+
 public class ItemBlockBarrel extends ItemBlockTFC {
 	public ItemBlockBarrel(Block block) {
 		super(block);
 		OreDictionaryHelper.register(this, "barrel");
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
@@ -98,8 +94,8 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 	}
 
 	@Override
-	@Nonnull
-	public String getTranslationKey(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getTranslationKey(@NotNull ItemStack stack) {
 		IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		return barrelCap != null && barrelCap.drain(1, false) != null ? super.getTranslationKey() + ".sealed" : super.getTranslationKey();
 	}
@@ -139,7 +135,7 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
@@ -177,13 +173,13 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 
 	@Nullable
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new ItemBarrelFluidHandler(stack);
 	}
 
 	// This is not an item handler, but still saves items from a sealed barrel
 	public static class ItemBarrelFluidHandler extends FluidWhitelistHandlerComplex {
-		protected ItemBarrelFluidHandler(@Nonnull ItemStack container) {
+		protected ItemBarrelFluidHandler(@NotNull ItemStack container) {
 			super(container, ConfigTFC.Devices.BARREL.tank, ConfigTFC.Devices.BARREL.fluidWhitelist);
 		}
 
@@ -223,7 +219,7 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 		}
 
 		@Override
-		protected void setFluid(@Nonnull FluidStack fluid) {
+		protected void setFluid(@NotNull FluidStack fluid) {
 			// Update the sealed tick whenever there is an update in the stored fluid
 			if (!container.hasTagCompound()) {
 				container.setTagCompound(new NBTTagCompound());

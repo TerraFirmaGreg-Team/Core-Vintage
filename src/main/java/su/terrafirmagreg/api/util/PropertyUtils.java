@@ -26,7 +26,7 @@ public final class PropertyUtils {
 	/**
 	 * Used to hold the BlockPos of the block.
 	 */
-	public static final PropertyObject<BlockPos> BLOCKPOS = new PropertyObject<>("pos", BlockPos.class);
+	public static final PropertyObject<BlockPos> BLOCK_POS = new PropertyObject<>("pos", BlockPos.class);
 
 	/**
 	 * Used to determine the color of a block. Only supports the 16 vanilla colors.

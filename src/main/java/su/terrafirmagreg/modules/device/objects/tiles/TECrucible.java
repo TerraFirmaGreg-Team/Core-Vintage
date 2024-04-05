@@ -37,13 +37,14 @@ import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 public class TECrucible extends TETickableInventory implements ITickable, ITileFields, IItemHandlerSidedCallback, IContainerProvider<ContainerCrucible, GuiCrucible> {
 	public static final int SLOT_INPUT_START = 0;
 	public static final int SLOT_INPUT_END = 8;
@@ -245,7 +246,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("alloy", alloy.serializeNBT());
 		nbt.setFloat("temp", temperature);
@@ -325,7 +326,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
 	 *
 	 * @return the alloyForgeableHeatableHandler
 	 */
-	@Nonnull
+	@NotNull
 	public Alloy getAlloy() {
 		return alloy;
 	}
@@ -335,7 +336,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
 	 *
 	 * @return the current result of getAlloy().getResult()
 	 */
-	@Nonnull
+	@NotNull
 	public Metal getAlloyResult() {
 		return alloyResult;
 	}

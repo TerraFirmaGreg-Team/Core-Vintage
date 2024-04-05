@@ -1,14 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.interfaces;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -22,8 +18,8 @@ public interface IWailaEntity {
 	 * @param nbt    the server sync nbt (not always possible, but non null for checking)
 	 * @return a List containing tooltips to write on the panel's body
 	 */
-	@Nonnull
-	List<String> getTooltip(@Nonnull Entity entity, @Nonnull NBTTagCompound nbt);
+	@NotNull
+	List<String> getTooltip(@NotNull Entity entity, @NotNull NBTTagCompound nbt);
 
 	/**
 	 * Overrides the title (default to the name of the entity looked upon)
@@ -32,8 +28,8 @@ public interface IWailaEntity {
 	 * @param nbt    the server sync nbt (not always possible, but non null for checking)
 	 * @return the title
 	 */
-	@Nonnull
-	default String getTitle(@Nonnull Entity entity, @Nonnull NBTTagCompound nbt) {
+	@NotNull
+	default String getTitle(@NotNull Entity entity, @NotNull NBTTagCompound nbt) {
 		return "";
 	}
 
@@ -42,7 +38,7 @@ public interface IWailaEntity {
 	 *
 	 * @return List of classes (eg: <Entity>.class)
 	 */
-	@Nonnull
+	@NotNull
 	List<Class<?>> getLookupClass();
 
 	/**

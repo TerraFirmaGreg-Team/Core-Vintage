@@ -9,10 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceFlint;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemFlint extends ItemBlockTFC {
 	public ItemFlint(BlockSurfaceFlint block) {
@@ -20,13 +19,13 @@ public class ItemFlint extends ItemBlockTFC {
 		OreDictionaryHelper.register(this, "flint");
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;

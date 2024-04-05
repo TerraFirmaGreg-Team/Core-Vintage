@@ -24,7 +24,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.*;
@@ -143,21 +144,21 @@ public class BlockCinnamonLog extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, GROWN, CAN_GROW, CONNECTED);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		boolean can_grow = false;
 		boolean grown = false;
@@ -185,7 +186,7 @@ public class BlockCinnamonLog extends Block {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (state.getValue(CONNECTED)) {
 			return FULL_BLOCK_AABB;
@@ -210,7 +211,7 @@ public class BlockCinnamonLog extends Block {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
 	}

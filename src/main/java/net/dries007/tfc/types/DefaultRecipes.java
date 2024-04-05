@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.types;
 
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -74,7 +69,8 @@ import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.rock.data.BlocksRock;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 
 import static net.dries007.tfc.api.types.Metal.ItemType.*;

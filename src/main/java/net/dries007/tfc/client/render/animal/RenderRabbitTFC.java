@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelRabbitTFC;
@@ -13,10 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderRabbitTFC extends RenderLiving<EntityRabbitTFC> {
 	private static final ResourceLocation WHITE = new ResourceLocation("textures/entity/rabbit/white.png");
 	private static final ResourceLocation GOLD = new ResourceLocation("textures/entity/rabbit/gold.png");

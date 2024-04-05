@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.types;
 
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
@@ -40,7 +35,7 @@ public final class DefaultTrees {
 	public static final ResourceLocation WHITE_CEDAR = new ResourceLocation(MODID_TFC, "white_cedar");
 	public static final ResourceLocation WILLOW = new ResourceLocation(MODID_TFC, "willow");
 	public static final ResourceLocation KAPOK = new ResourceLocation(MODID_TFC, "kapok");
-    public static final ResourceLocation HEVEA = new ResourceLocation(MODID_TFC, "hevea");
+	public static final ResourceLocation HEVEA = new ResourceLocation(MODID_TFC, "hevea");
 
 	/**
 	 * Simple ITreeGenerator instances.
@@ -153,8 +148,8 @@ public final class DefaultTrees {
 				                                                          .setDensity(0.7f, 2f)
 				                                                          .setBurnInfo(603f, 1000)
 				                                                          .build(),
-                new Tree.Builder(HEVEA, 140f, 350f, 7f, 27f, GEN_TALL).setDensity(0.1f, 0.6f)
-                        .setRadius(2).setGrowthTime(10).setBurnInfo(762f, 2000).build()
+				new Tree.Builder(HEVEA, 140f, 350f, 7f, 27f, GEN_TALL).setDensity(0.1f, 0.6f)
+				                                                      .setRadius(2).setGrowthTime(10).setBurnInfo(762f, 2000).build()
 		);
 	}
 }

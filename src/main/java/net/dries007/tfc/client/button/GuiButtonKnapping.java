@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.button;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -14,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonKnapping extends GuiButton {
@@ -33,7 +28,7 @@ public class GuiButtonKnapping extends GuiButton {
 	}
 
 	@Override
-	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+	public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
 			GlStateManager.color(1, 1, 1, 1);
 			mc.getTextureManager().bindTexture(texture);

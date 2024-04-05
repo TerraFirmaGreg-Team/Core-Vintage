@@ -26,8 +26,10 @@ import se.gory_moon.horsepower.tileentity.TileEntityGrindstone;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
@@ -120,7 +122,7 @@ public class BlockGrindstone extends BlockHPBase implements IProbeInfoAccessor {
 	}
 
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Class<?> getTileClass() {
 		return TileEntityGrindstone.class;

@@ -21,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
 
@@ -31,7 +31,7 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
 		super(renderManager);
 	}
 
-	public void doRender(@Nonnull EntityThrownRopeJavelin entity, double x, double y, double z, float entityYaw, float partialTicks) {
+	public void doRender(@NotNull EntityThrownRopeJavelin entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) x, (float) y, (float) z);
 		GlStateManager.enableRescaleNormal();
@@ -58,8 +58,8 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
-	@Nonnull
-	protected ResourceLocation getEntityTexture(@Nonnull EntityThrownRopeJavelin entity) {
+	@NotNull
+	protected ResourceLocation getEntityTexture(@NotNull EntityThrownRopeJavelin entity) {
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}
 

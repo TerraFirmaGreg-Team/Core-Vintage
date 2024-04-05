@@ -31,13 +31,13 @@ import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCharcoalForge;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 public class TECharcoalForge extends TETickableInventory implements ICalendarTickable, ITileFields, IContainerProvider<ContainerCharcoalForge, GuiCharcoalForge> {
 	public static final int SLOT_FUEL_MIN = 0;
 	public static final int SLOT_FUEL_MAX = 4;
@@ -255,7 +255,7 @@ public class TECharcoalForge extends TETickableInventory implements ICalendarTic
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setFloat("temperature", temperature);
 		nbt.setInteger("burnTicks", burnTicks);

@@ -23,13 +23,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import tfctech.client.TechSounds;
 import tfctech.objects.tileentities.TELatexExtractor;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.NORTH;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockLatexExtractor extends Block {
 

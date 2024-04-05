@@ -2,8 +2,10 @@ package tfcflorae.objects;
 
 import net.dries007.tfc.util.collections.WeightedCollection;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -54,7 +56,7 @@ public enum GemTFCF {
 		 * @param random Random generator for rolling the odds
 		 * @return a random drop gem grade
 		 */
-		@Nonnull
+		@NotNull
 		public static Grade randomGrade(Random random) {
 			return GRADE_ODDS.getRandomEntry(random);
 		}

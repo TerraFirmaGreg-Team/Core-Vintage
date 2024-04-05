@@ -17,12 +17,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import tfcflorae.objects.items.rock.ItemMud;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockRockVariantFallableTFCF extends BlockRockVariantTFCF {
 	public BlockRockVariantFallableTFCF(RockTFCF rockTFCF, Rock rock) {
 		super(rockTFCF, rock);

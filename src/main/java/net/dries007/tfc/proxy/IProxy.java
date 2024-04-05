@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.proxy;
 
 import net.dries007.tfc.util.calendar.Month;
@@ -11,11 +6,12 @@ import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public interface IProxy {
-	@Nonnull
+	@NotNull
 	IThreadListener getThreadListener(MessageContext context);
 
 	@Nullable
@@ -26,13 +22,13 @@ public interface IProxy {
 
 	// Calendar Translation / Localization Methods
 
-	@Nonnull
+	@NotNull
 	String getMonthName(Month month, boolean useSeasons);
 
-	@Nonnull
+	@NotNull
 	String getDayName(int dayOfMonth, long totalDays);
 
-	@Nonnull
+	@NotNull
 	String getDate(int hour, int minute, String monthName, int day, long years);
 
 	class WrongSideException extends RuntimeException {

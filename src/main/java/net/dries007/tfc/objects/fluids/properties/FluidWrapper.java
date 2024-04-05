@@ -1,13 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.fluids.properties;
 
 import net.minecraftforge.fluids.Fluid;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,13 +20,13 @@ public class FluidWrapper {
 	private final boolean isDefault;
 	private final Map<FluidProperty<?>, Object> properties;
 
-	public FluidWrapper(@Nonnull Fluid fluid, boolean isDefault) {
+	public FluidWrapper(@NotNull Fluid fluid, boolean isDefault) {
 		this.fluid = fluid;
 		this.isDefault = isDefault;
 		this.properties = new HashMap<>();
 	}
 
-	@Nonnull
+	@NotNull
 	public Fluid get() {
 		return fluid;
 	}

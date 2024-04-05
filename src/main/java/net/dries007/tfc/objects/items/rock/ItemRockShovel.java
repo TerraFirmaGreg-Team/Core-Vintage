@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.rock;
 
 import net.dries007.tfc.ConfigTFC;
@@ -33,14 +28,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class ItemRockShovel extends ItemSpade implements IItemSize, IRockObject {
 	private static final Map<RockCategory, ItemRockShovel> MAP = new HashMap<>();
 	public final RockCategory category;
@@ -69,7 +65,7 @@ public class ItemRockShovel extends ItemSpade implements IItemSize, IRockObject 
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack itemstack = player.getHeldItem(hand);
 
@@ -99,13 +95,13 @@ public class ItemRockShovel extends ItemSpade implements IItemSize, IRockObject 
 		return EnumActionResult.PASS;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE; // Stored only in chests
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;
@@ -122,7 +118,7 @@ public class ItemRockShovel extends ItemSpade implements IItemSize, IRockObject 
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public RockCategory getRockCategory(ItemStack stack) {
 		return category;

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import net.dries007.tfc.client.TFCSounds;
@@ -26,8 +21,9 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import static net.minecraftforge.fluids.FluidUtil.getFluidHandler;
 
@@ -44,8 +40,8 @@ public final class FluidTransferHelper {
 	 * @param side           The side of the fluid that is being drained.
 	 * @return a {@link FluidActionResult} holding the result and the resulting container.
 	 */
-	@Nonnull
-	public static FluidActionResult tryPickUpFluidGreedy(@Nonnull ItemStack emptyContainer, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, int maxAmount, boolean consumeOnInfiniteFluids) {
+	@NotNull
+	public static FluidActionResult tryPickUpFluidGreedy(@NotNull ItemStack emptyContainer, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, int maxAmount, boolean consumeOnInfiniteFluids) {
 		if (emptyContainer.isEmpty() || worldIn == null || pos == null) {
 			return FluidActionResult.FAILURE;
 		}
@@ -97,8 +93,8 @@ public final class FluidTransferHelper {
 	 * @param doFill      true if the container should actually be filled, false if it should be simulated.
 	 * @return a {@link FluidActionResult} holding the filled container if successful.
 	 */
-	@Nonnull
-	public static FluidActionResult tryFillContainer(@Nonnull ItemStack container, IFluidHandler fluidSource, int maxAmount, @Nullable EntityPlayer player, boolean doFill) {
+	@NotNull
+	public static FluidActionResult tryFillContainer(@NotNull ItemStack container, IFluidHandler fluidSource, int maxAmount, @Nullable EntityPlayer player, boolean doFill) {
 		ItemStack containerCopy = ItemHandlerHelper.copyStackWithSize(container, 1); // do not modify the input
 		IFluidHandlerItem containerFluidHandler = getFluidHandler(containerCopy);
 		if (containerFluidHandler != null) {
@@ -135,8 +131,8 @@ public final class FluidTransferHelper {
 	 * @param pos              BlockPos to play the sound at. Null for no sound.
 	 * @return A {@link FluidActionResult} holding the result and the resulting container. The resulting container is empty on failure.
 	 */
-	@Nonnull
-	public static FluidActionResult emptyContainerIntoTank(@Nonnull ItemStack container, IFluidHandler fluidDestination, IItemHandler returnInventory, int returnSlot, int maxAmount, @Nullable World world, @Nullable BlockPos pos) {
+	@NotNull
+	public static FluidActionResult emptyContainerIntoTank(@NotNull ItemStack container, IFluidHandler fluidDestination, IItemHandler returnInventory, int returnSlot, int maxAmount, @Nullable World world, @Nullable BlockPos pos) {
 		if (!container.isEmpty()) {
 			FluidActionResult emptiedSimulated = tryEmptyContainer(container, fluidDestination, maxAmount, false, null, null);
 
@@ -173,8 +169,8 @@ public final class FluidTransferHelper {
 	 * @param pos             BlockPos to play the sound at. Null for no sound.
 	 * @return A {@link FluidActionResult} holding the result and the resulting container. The resulting container is empty on failure.
 	 */
-	@Nonnull
-	public static FluidActionResult fillContainerFromTank(@Nonnull ItemStack container, IFluidHandler fluidSource, IItemHandler returnInventory, int returnSlot, int maxAmount, @Nullable World world, @Nullable BlockPos pos) {
+	@NotNull
+	public static FluidActionResult fillContainerFromTank(@NotNull ItemStack container, IFluidHandler fluidSource, IItemHandler returnInventory, int returnSlot, int maxAmount, @Nullable World world, @Nullable BlockPos pos) {
 		FluidActionResult filledSimulated = tryFillContainer(container, fluidSource, maxAmount, false, null, null);
 
 		if (filledSimulated.isSuccess()) {
@@ -207,8 +203,8 @@ public final class FluidTransferHelper {
 	 * @return A {@link FluidActionResult} holding the empty container if the fluid handler was filled.
 	 * NOTE If the container is consumable, the empty container will be null on success.
 	 */
-	@Nonnull
-	private static FluidActionResult tryEmptyContainer(@Nonnull ItemStack container, IFluidHandler fluidDestination, int maxAmount, boolean doDrain, @Nullable World world, @Nullable BlockPos pos) {
+	@NotNull
+	private static FluidActionResult tryEmptyContainer(@NotNull ItemStack container, IFluidHandler fluidDestination, int maxAmount, boolean doDrain, @Nullable World world, @Nullable BlockPos pos) {
 		ItemStack containerCopy = ItemHandlerHelper.copyStackWithSize(container, 1); // do not modify the input
 		IFluidHandlerItem containerFluidHandler = FluidUtil.getFluidHandler(containerCopy);
 		if (containerFluidHandler != null) {
@@ -247,8 +243,8 @@ public final class FluidTransferHelper {
 	 * @param pos         BlockPos to play the sound at. Null for no sound.
 	 * @return A {@link FluidActionResult} holding the filled container if successful.
 	 */
-	@Nonnull
-	private static FluidActionResult tryFillContainer(@Nonnull ItemStack container, IFluidHandler fluidSource, int maxAmount, boolean doFill, @Nullable World world, @Nullable BlockPos pos) {
+	@NotNull
+	private static FluidActionResult tryFillContainer(@NotNull ItemStack container, IFluidHandler fluidSource, int maxAmount, boolean doFill, @Nullable World world, @Nullable BlockPos pos) {
 		ItemStack containerCopy = ItemHandlerHelper.copyStackWithSize(container, 1); // do not modify the input
 		IFluidHandlerItem containerFluidHandler = getFluidHandler(containerCopy);
 		if (containerFluidHandler != null) {

@@ -11,10 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockTrellis extends BlockNonCube {
 	private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2.0D / 16, 0.0D, 2.0D / 16, 14.0D / 16, 1.0D, 14.0D / 16);
@@ -28,7 +27,7 @@ public class BlockTrellis extends BlockNonCube {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return SHAPE;
 	}

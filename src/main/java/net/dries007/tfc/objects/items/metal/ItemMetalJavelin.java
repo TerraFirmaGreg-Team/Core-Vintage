@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.dries007.tfc.Constants;
@@ -22,7 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemMetalJavelin extends ItemMetalTool {
 	public ItemMetalJavelin(Metal metal, Metal.ItemType type) {
@@ -35,8 +30,8 @@ public class ItemMetalJavelin extends ItemMetalTool {
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		if (type == Metal.ItemType.JAVELIN) {
 			ItemStack itemstack = playerIn.getHeldItem(handIn);
 			playerIn.setActiveHand(handIn);
@@ -46,7 +41,7 @@ public class ItemMetalJavelin extends ItemMetalTool {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BOW;
 	}

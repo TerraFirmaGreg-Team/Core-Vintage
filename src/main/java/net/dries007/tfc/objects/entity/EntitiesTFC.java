@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -21,7 +16,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -31,7 +26,7 @@ public class EntitiesTFC {
 	public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = Helpers.getNull();
 
 	private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
-		public void write(PacketBuffer buf, @Nonnull Long value) {
+		public void write(PacketBuffer buf, @NotNull Long value) {
 			buf.writeLong(value);
 		}
 
@@ -43,8 +38,8 @@ public class EntitiesTFC {
 			return new DataParameter<>(id, this);
 		}
 
-		@Nonnull
-		public Long copyValue(@Nonnull Long value) {
+		@NotNull
+		public Long copyValue(@NotNull Long value) {
 			return value;
 		}
 	};

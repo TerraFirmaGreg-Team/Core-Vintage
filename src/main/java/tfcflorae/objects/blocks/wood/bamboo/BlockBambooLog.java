@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static tfcflorae.api.stateproperty.StatePropertiesTFCF.CONNECTED;
 import static tfcflorae.api.stateproperty.StatePropertiesTFCF.GROWN;
@@ -88,21 +88,21 @@ public class BlockBambooLog extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, GROWN, CONNECTED);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		boolean grown = false;
 		if (meta >= 2) {
@@ -121,7 +121,7 @@ public class BlockBambooLog extends Block {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (state.getValue(CONNECTED)) {
 			return FULL_BLOCK_AABB;
@@ -140,7 +140,7 @@ public class BlockBambooLog extends Block {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
 	}

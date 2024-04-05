@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
 import net.dries007.tfc.api.capability.food.*;
@@ -21,22 +16,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ParametersAreNonnullByDefault
+
 public class CommandPlayerTFC extends CommandBase {
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		return "playertfc";
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getUsage(ICommandSender sender) {
 		return "tfc.command.playertfc.usage";
@@ -82,7 +78,7 @@ public class CommandPlayerTFC extends CommandBase {
 		return 2;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
 		if (args.length == 1) {
@@ -241,7 +237,10 @@ public class CommandPlayerTFC extends CommandBase {
 	}
 
 	private enum ExecuteType {
-		SET, RESET, ADD, GET;
+		SET,
+		RESET,
+		ADD,
+		GET;
 
 		static ExecuteType parse(String text) throws CommandException {
 			try {

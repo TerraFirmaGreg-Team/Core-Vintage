@@ -34,8 +34,10 @@ import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 import su.terrafirmagreg.api.model.property.PropertyUnlistedDirection;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
@@ -95,7 +97,7 @@ public class BlockHandGrindstone extends BlockHPBase implements IProbeInfoAccess
 		return super.onBlockActivated(worldIn, pos, state, player, hand, facing, hitX, hitY, hitZ);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Class<?> getTileClass() {
 		return TileEntityHandGrindstone.class;
@@ -132,14 +134,14 @@ public class BlockHandGrindstone extends BlockHPBase implements IProbeInfoAccess
 			IExtendedBlockState extendedState = (IExtendedBlockState) getExtendedState(state, worldIn, pos);
 			EnumFacing enumfacing = extendedState.getValue(FACING);
 			worldIn.setBlockState(pos, extendedState.withProperty(FACING, enumfacing)
-					.withProperty(PART, HandGrindstoneModels.BASE), 2);
+			                                        .withProperty(PART, HandGrindstoneModels.BASE), 2);
 		}
 	}
 
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		worldIn.setBlockState(pos, ((IExtendedBlockState) state).withProperty(FACING, placer.getHorizontalFacing()
-						.getOpposite())
-				.withProperty(PART, HandGrindstoneModels.BASE), 2);
+		                                                                                    .getOpposite())
+		                                                        .withProperty(PART, HandGrindstoneModels.BASE), 2);
 
 		TileEntityHandGrindstone tile = getTileEntity(worldIn, pos);
 		if (tile == null)
@@ -164,7 +166,7 @@ public class BlockHandGrindstone extends BlockHPBase implements IProbeInfoAccess
 			return state;
 
 		return ((IExtendedBlockState) state).withProperty(FACING, tile.getForward())
-				.withProperty(PART, state.getValue(PART));
+		                                    .withProperty(PART, state.getValue(PART));
 	}
 
 	// The One Probe Integration

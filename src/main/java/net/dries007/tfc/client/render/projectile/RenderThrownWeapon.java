@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.projectile;
 
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
@@ -18,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T> {
@@ -29,7 +24,7 @@ public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T> 
 		this.itemRenderer = Minecraft.getMinecraft().getRenderItem();
 	}
 
-	public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+	public void doRender(@NotNull T entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) x, (float) y, (float) z);
 		GlStateManager.enableRescaleNormal();
@@ -59,8 +54,8 @@ public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T> 
 	}
 
 	@Override
-	@Nonnull
-	protected ResourceLocation getEntityTexture(@Nonnull T entity) {return TextureMap.LOCATION_BLOCKS_TEXTURE;}
+	@NotNull
+	protected ResourceLocation getEntityTexture(@NotNull T entity) {return TextureMap.LOCATION_BLOCKS_TEXTURE;}
 
 	protected void doRenderTransformations(T entity, float partialTicks) {
 		GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);

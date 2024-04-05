@@ -16,7 +16,6 @@ import tfctech.client.TechGuiHandler;
 import tfctech.network.PacketFridgeUpdate;
 import tfctech.network.PacketLatexUpdate;
 import tfctech.network.PacketTileEntityUpdate;
-import tfctech.registry.TechFoodTraits;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
@@ -51,7 +50,6 @@ public class TFCTech {
 		// Unfortunately, this has to be done after TFC registered it's items, which is only safe after preInit
 		OreDictionary.registerOre("dustAsh", ItemsCore.WOOD_ASH);
 		FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "tfctech.compat.waila.TOPPlugin");
-		TechFoodTraits.init();
 	}
 
 	@EventHandler

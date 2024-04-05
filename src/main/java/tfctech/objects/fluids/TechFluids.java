@@ -7,7 +7,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class TechFluids {
 	private static final ResourceLocation LAVA_STILL = new ResourceLocation(Constants.MODID_TFC, "blocks/lava_still");
@@ -28,7 +28,7 @@ public final class TechFluids {
 		GLASS.get().setTemperature(1073); // Kelvin
 	}
 
-	private static FluidWrapper registerFluid(@Nonnull Fluid newFluid) {
+	private static FluidWrapper registerFluid(@NotNull Fluid newFluid) {
 		boolean isDefault = FluidRegistry.registerFluid(newFluid);
 		if (!isDefault) {
 			// Fluid was already registered with this name, default to that fluid

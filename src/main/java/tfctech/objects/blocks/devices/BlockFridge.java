@@ -30,13 +30,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tfctech.objects.tileentities.TEFridge;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 import static net.minecraft.util.EnumFacing.NORTH;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockFridge extends BlockHorizontal {
 	public static final PropertyBool UPPER = PropertyBool.create("upper"); //true if this is the upper half

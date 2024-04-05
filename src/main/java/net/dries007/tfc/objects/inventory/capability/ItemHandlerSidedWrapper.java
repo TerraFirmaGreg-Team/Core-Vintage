@@ -1,15 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.capability;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemHandlerSidedWrapper implements IItemHandlerModifiable {
 	private final IItemHandlerSidedCallback callback;
@@ -23,7 +18,7 @@ public class ItemHandlerSidedWrapper implements IItemHandlerModifiable {
 	}
 
 	@Override
-	public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+	public void setStackInSlot(int slot, @NotNull ItemStack stack) {
 		handler.setStackInSlot(slot, stack);
 	}
 
@@ -32,22 +27,22 @@ public class ItemHandlerSidedWrapper implements IItemHandlerModifiable {
 		return handler.getSlots();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getStackInSlot(int slot) {
 		return handler.getStackInSlot(slot);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+	public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 		if (callback.canInsert(slot, stack, side)) {
 			return handler.insertItem(slot, stack, simulate);
 		}
 		return stack;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
 		if (callback.canExtract(slot, side)) {

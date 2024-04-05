@@ -1,29 +1,24 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class CustomChunkPrimer extends ChunkPrimer {
 	private static final IBlockState DEFAULT_STATE = Blocks.AIR.getDefaultState();
 	private final IBlockState[] data = new IBlockState[65536];
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getBlockState(int x, int y, int z) {
 		IBlockState iblockstate = data[x << 12 | z << 8 | y];
 		return iblockstate == null ? DEFAULT_STATE : iblockstate;
 	}
 
 	@Override
-	public void setBlockState(int x, int y, int z, @Nonnull IBlockState state) {
+	public void setBlockState(int x, int y, int z, @NotNull IBlockState state) {
 		data[x << 12 | z << 8 | y] = state;
 	}
 

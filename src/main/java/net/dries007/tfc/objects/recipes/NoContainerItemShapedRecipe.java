@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -17,15 +12,15 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 public class NoContainerItemShapedRecipe extends ShapedOreRecipe {
-	private NoContainerItemShapedRecipe(ResourceLocation group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
+	private NoContainerItemShapedRecipe(ResourceLocation group, @NotNull ItemStack result, CraftingHelper.ShapedPrimer primer) {
 		super(group, result, primer);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		return NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);

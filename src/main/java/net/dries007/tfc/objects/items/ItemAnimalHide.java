@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.ConfigTFC;
@@ -21,14 +16,12 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 
-@ParametersAreNonnullByDefault
+
 public class ItemAnimalHide extends ItemTFC {
 	private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
 	protected final HideSize size;
@@ -44,33 +37,33 @@ public class ItemAnimalHide extends ItemTFC {
 		TABLE.get(type).put(size, this);
 	}
 
-	@Nonnull
+	@NotNull
 	public static ItemAnimalHide get(HideType type, HideSize size) {
 		return TABLE.get(type).get(size);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP && worldIn
 				.getBlockState(pos)
 				.getBlock() == BlocksCore.THATCH && worldIn.getBlockState(pos.offset(player.getHorizontalFacing()))
-				.getBlock() == BlocksCore.THATCH) {
+		                                                   .getBlock() == BlocksCore.THATCH) {
 			// Try and create a thatch bed
 			BlockPos headPos = pos.offset(player.getHorizontalFacing());
 			//Creating a thatch bed
 			if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(headPos, facing, stack)) {
 				if (!worldIn.isRemote) {
 					IBlockState footState = BlocksTFC.THATCH_BED.getDefaultState()
-							.withProperty(BlockBed.OCCUPIED, false)
-							.withProperty(BlockBed.FACING, player.getHorizontalFacing())
-							.withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+					                                            .withProperty(BlockBed.OCCUPIED, false)
+					                                            .withProperty(BlockBed.FACING, player.getHorizontalFacing())
+					                                            .withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 					IBlockState headState = BlocksTFC.THATCH_BED.getDefaultState()
-							.withProperty(BlockBed.OCCUPIED, false)
-							.withProperty(BlockBed.FACING, player.getHorizontalFacing()
-									.getOpposite())
-							.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
+					                                            .withProperty(BlockBed.OCCUPIED, false)
+					                                            .withProperty(BlockBed.FACING, player.getHorizontalFacing()
+					                                                                                 .getOpposite())
+					                                            .withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
 					worldIn.setBlockState(pos, footState, 10);
 					worldIn.setBlockState(headPos, headState, 10);
 					SoundType soundtype = BlocksTFC.THATCH_BED.getSoundType(footState, worldIn, pos, player);
@@ -87,7 +80,7 @@ public class ItemAnimalHide extends ItemTFC {
 			IBlockState stateAbove = worldIn.getBlockState(posAbove);
 			ItemStack stackAt = stateAt.getBlock().getPickBlock(stateAt, null, worldIn, pos, player);
 			if (facing == EnumFacing.UP && OreDictionaryHelper.doesStackMatchOre(stackAt, "logWood") && stateAbove.getBlock()
-					.isAir(stateAbove, worldIn, posAbove)) {
+			                                                                                                      .isAir(stateAbove, worldIn, posAbove)) {
 				if (!worldIn.isRemote) {
 					worldIn.setBlockState(posAbove, BlocksTFC.PLACED_HIDE.getDefaultState().withProperty(SIZE, size));
 				}
@@ -101,7 +94,7 @@ public class ItemAnimalHide extends ItemTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getContainerItem(ItemStack itemStack) {
 		switch (size) {
 			case SMALL:
@@ -119,14 +112,14 @@ public class ItemAnimalHide extends ItemTFC {
 		return type == HideType.SHEEPSKIN;
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL; // Stored in chests and Large Vessels
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Weight getWeight(ItemStack stack) {
 		switch (size) {
 			case LARGE:
@@ -146,7 +139,7 @@ public class ItemAnimalHide extends ItemTFC {
 
 		private static final HideSize[] VALUES = values();
 
-		@Nonnull
+		@NotNull
 		public static HideSize valueOf(int index) {
 			return index < 0 || index > VALUES.length ? MEDIUM : VALUES[index];
 		}

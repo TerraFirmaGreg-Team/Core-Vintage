@@ -8,10 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import tfcflorae.objects.blocks.BlockUrn;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
 
-@ParametersAreNonnullByDefault
+
 public class ItemBlockUrn extends ItemBlockTFC implements IItemSize {
 	public ItemBlockUrn(BlockUrn block) {
 		super(block);

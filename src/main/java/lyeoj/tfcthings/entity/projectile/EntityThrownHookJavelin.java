@@ -13,7 +13,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityThrownHookJavelin extends EntityThrownRopeJavelin {
 
@@ -109,7 +109,7 @@ public class EntityThrownHookJavelin extends EntityThrownRopeJavelin {
 
 	}
 
-	protected void onHit(@Nonnull RayTraceResult raytraceResultIn) {
+	protected void onHit(@NotNull RayTraceResult raytraceResultIn) {
 		super.onHit(raytraceResultIn);
 		if (getWeapon().getItem() instanceof ItemHookJavelin) {
 			EntityLivingBase thrower = (EntityLivingBase) this.getThrower();

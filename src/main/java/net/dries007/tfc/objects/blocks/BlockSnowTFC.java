@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.ConfigTFC;
@@ -21,10 +16,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
 	public BlockSnowTFC() {
 		setHardness(0.1F);

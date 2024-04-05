@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import com.google.common.collect.Lists;
@@ -13,11 +8,11 @@ import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.compat.jei.TFCJEIPlugin;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class BloomeryRecipeWrapper implements IRecipeWrapper {
 	private final List<ItemStack> ingredients;
 	private final List<ItemStack> additives;

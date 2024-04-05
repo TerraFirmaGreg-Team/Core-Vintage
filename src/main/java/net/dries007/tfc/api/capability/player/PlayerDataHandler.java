@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.player;
 
 import net.dries007.tfc.api.recipes.ChiselRecipe;
@@ -18,12 +13,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound>, IPlayerData {
 	public static final int MAX_INTOXICATED_TICKS = 36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
@@ -72,25 +68,25 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
 		return (S) skills.get(skillType.getName());
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public EntityPlayer getPlayer() {
 		return player;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getHarvestingTool() {
 		return harvestingTool;
 	}
 
 	@Override
-	public void setHarvestingTool(@Nonnull ItemStack stack) {
+	public void setHarvestingTool(@NotNull ItemStack stack) {
 		this.harvestingTool = stack.copy();
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ChiselRecipe.Mode getChiselMode() {
 		return chiselMode;
 	}

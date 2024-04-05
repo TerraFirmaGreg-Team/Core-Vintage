@@ -9,11 +9,10 @@ import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.*;
 
-@ParametersAreNonnullByDefault
+
 public class ContainerFirePit extends ContainerTE<TEFirePit> {
 	private final BlockFirePit.FirePitAttachment attachment;
 

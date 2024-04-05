@@ -13,7 +13,7 @@ import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
 import su.terrafirmagreg.api.model.ICustomModel;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemCoffeeBerries extends ItemFood implements ICustomModel {
 

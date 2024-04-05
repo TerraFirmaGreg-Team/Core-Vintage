@@ -6,8 +6,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import tfctech.registry.TechRegistries;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +81,7 @@ public class SmelteryRecipe extends IForgeRegistryEntry.Impl<SmelteryRecipe> {
 			listInput = new ArrayList<>();
 		}
 
-		public Builder addInput(@Nonnull IIngredient<ItemStack> ingredient) {
+		public Builder addInput(@NotNull IIngredient<ItemStack> ingredient) {
 			if (this.listInput.size() < 8) {
 				this.listInput.add(ingredient);
 			} else {
@@ -88,7 +90,7 @@ public class SmelteryRecipe extends IForgeRegistryEntry.Impl<SmelteryRecipe> {
 			return this;
 		}
 
-		public Builder setOutput(@Nonnull FluidStack fluidStack, float meltTemp) {
+		public Builder setOutput(@NotNull FluidStack fluidStack, float meltTemp) {
 			this.recipe.outputFluid = fluidStack;
 			this.recipe.meltTemp = meltTemp;
 			return this;

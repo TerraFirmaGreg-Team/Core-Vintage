@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.ConfigTFC;
@@ -17,8 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +35,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 	 * @param outputStack the output stack, when this recipe is completed
 	 * @param duration    the duration, in ticks, for this recipe to complete. 0 = Instant while negative means this recipe is infinite (for custom recipes that wait for unseal)
 	 */
-	public BarrelRecipe(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, @Nullable FluidStack outputFluid, @Nonnull ItemStack outputStack, int duration) {
+	public BarrelRecipe(@NotNull IIngredient<FluidStack> inputFluid, @NotNull IIngredient<ItemStack> inputStack, @Nullable FluidStack outputFluid, @NotNull ItemStack outputStack, int duration) {
 		this.inputStack = inputStack;
 		this.inputFluid = inputFluid;
 		this.outputFluid = outputFluid;
@@ -104,17 +101,17 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 	 *
 	 * @return the output item stack
 	 */
-	@Nonnull
+	@NotNull
 	public ItemStack getOutputStack() {
 		return outputStack;
 	}
 
-	@Nonnull
+	@NotNull
 	public IIngredient<ItemStack> getItemIngredient() {
 		return inputStack;
 	}
 
-	@Nonnull
+	@NotNull
 	public IIngredient<FluidStack> getFluidIngredient() {
 		return inputFluid;
 	}
@@ -136,7 +133,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
 		int multiplier = getMultiplier(inputFluid, inputStack);
 		List<ItemStack> outputList = new ArrayList<>();
@@ -205,7 +202,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 	 * @param inputStack the stack that was in the barrel when the recipe "broke"
 	 * @return a list of items to replace the input when the barrel is unsealed
 	 */
-	@Nonnull
+	@NotNull
 	public List<ItemStack> getOutputItemOnUnseal(FluidStack inputFluid, ItemStack inputStack) {
 		return Helpers.listOf(inputStack);
 	}

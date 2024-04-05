@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -17,11 +12,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockFireClay extends Block implements IItemSize {
 	public BlockFireClay() {
 		super(Material.CLAY);
@@ -34,19 +29,19 @@ public class BlockFireClay extends Block implements IItemSize {
 		return 4;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemsTFC.FIRE_CLAY;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.VERY_SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.HEAVY;

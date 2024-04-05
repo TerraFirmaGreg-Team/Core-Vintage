@@ -1,15 +1,11 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.block;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 /**
@@ -38,7 +34,7 @@ public class BoundingBox {
 	 * @param radiusZ     the Z direction radius
 	 * @param direction   the direction this bounding box is being created, or, if this was an AABB, which facing you are creating here
 	 */
-	public BoundingBox(Vec3d centerPoint, double radiusX, double radiusY, double radiusZ, @Nonnull EnumFacing direction) {
+	public BoundingBox(Vec3d centerPoint, double radiusX, double radiusY, double radiusZ, @NotNull EnumFacing direction) {
 		this(centerPoint.x, centerPoint.y, centerPoint.z, radiusX, radiusY, radiusZ, direction);
 	}
 
@@ -55,7 +51,7 @@ public class BoundingBox {
 	 * @param radiusZ   the Z direction radius
 	 * @param direction the direction this bounding box is being created, or, if this was an AABB, which facing you are creating here
 	 */
-	public BoundingBox(double x, double y, double z, double radiusX, double radiusY, double radiusZ, @Nonnull EnumFacing direction) {
+	public BoundingBox(double x, double y, double z, double radiusX, double radiusY, double radiusZ, @NotNull EnumFacing direction) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -72,7 +68,7 @@ public class BoundingBox {
 	 * @param facing the facing you want to get an AABB for
 	 * @return an AABB obj, which is computed only once and saved for performance purposes
 	 */
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getAABB(EnumFacing facing) {
 		if (values[facing.getHorizontalIndex()] == null) {
 			if (facing == this.direction) {

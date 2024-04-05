@@ -9,9 +9,7 @@ import tfctech.objects.items.itemblocks.ItemBlockWireDrawBench;
 import tfctech.objects.tileentities.TEFridge;
 import tfctech.objects.tileentities.TEWireDrawBench;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class TEISRTechDevices extends TileEntityItemStackRenderer {
 	private static final TEWireDrawBench teWireDrawBench = new TEWireDrawBench();

@@ -23,10 +23,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class ItemShovelTFCF extends ItemSpade implements IItemSize {
 	public final ToolMaterial material;
 
@@ -48,7 +47,7 @@ public class ItemShovelTFCF extends ItemSpade implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack itemstack = player.getHeldItem(hand);
 
@@ -78,13 +77,13 @@ public class ItemShovelTFCF extends ItemSpade implements IItemSize {
 		return EnumActionResult.PASS;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE; // Stored only in chests
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;

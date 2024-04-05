@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -25,11 +20,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 
-@ParametersAreNonnullByDefault
+
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
 	private final Fluid waterFluid;
 	private final float meltThreshold;

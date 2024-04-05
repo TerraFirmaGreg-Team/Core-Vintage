@@ -1,14 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.capability;
 
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This is a callback for various methods on an ItemStackHandler.
@@ -33,7 +28,7 @@ public interface ISlotCallback {
 	 * @param stack the stack to be inserted
 	 * @return true if the item can be inserted
 	 */
-	default boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	default boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		return true;
 	}
 
@@ -44,5 +39,5 @@ public interface ISlotCallback {
 	 */
 	default void setAndUpdateSlots(int slot) {}
 
-	default void beforePutStack(@Nonnull SlotCallback slot, @Nonnull ItemStack stack) {}
+	default void beforePutStack(@NotNull SlotCallback slot, @NotNull ItemStack stack) {}
 }

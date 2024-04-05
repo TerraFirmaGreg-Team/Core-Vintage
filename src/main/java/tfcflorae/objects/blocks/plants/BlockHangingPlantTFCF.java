@@ -29,14 +29,15 @@ import net.minecraft.world.World;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable, ITallPlant {
 	public static final AxisAlignedBB AABB = new AxisAlignedBB(0.25F, 0, 0.25F, 0.75F, 1, 0.75F);
 	private static final PropertyEnum<EnumBlockPart> PART = PropertyEnum.create("part", EnumBlockPart.class);
@@ -70,7 +71,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XZ;
 	}
@@ -91,7 +92,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos).withProperty(PART, getPlantPart(worldIn, pos));
 	}
@@ -145,7 +146,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE, PART);
 	}

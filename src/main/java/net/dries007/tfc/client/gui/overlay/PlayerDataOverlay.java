@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui.overlay;
 
 import net.dries007.tfc.ConfigTFC;
@@ -54,8 +49,8 @@ public final class PlayerDataOverlay {
 		vb.begin(7, DefaultVertexFormats.POSITION_TEX);
 		vb.pos(xCoord + 0.0F, yCoord + maxV, 0).tex((minU) * textureScaleU, (minV + maxV) * textureScaleV).endVertex();
 		vb.pos(xCoord + maxU, yCoord + maxV, 0)
-				.tex((minU + maxU) * textureScaleU, (minV + maxV) * textureScaleV)
-				.endVertex();
+		  .tex((minU + maxU) * textureScaleU, (minV + maxV) * textureScaleV)
+		  .endVertex();
 		vb.pos(xCoord + maxU, yCoord + 0.0F, 0).tex((minU + maxU) * textureScaleU, (minV) * textureScaleV).endVertex();
 		vb.pos(xCoord + 0.0F, yCoord + 0.0F, 0).tex((minU) * textureScaleU, (minV) * textureScaleV).endVertex();
 		tessellator.draw();

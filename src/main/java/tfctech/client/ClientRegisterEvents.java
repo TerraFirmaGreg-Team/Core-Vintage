@@ -42,7 +42,8 @@ import tfctech.objects.tileentities.TEFridge;
 import tfctech.objects.tileentities.TELatexExtractor;
 import tfctech.objects.tileentities.TEWireDrawBench;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 import java.util.Collections;
 import java.util.Map;
@@ -67,7 +68,7 @@ public final class ClientRegisterEvents {
 		// Simple Items
 		for (Item item : TechItems.getAllSimpleItems())
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
-					.toString()));
+			                                                                                  .toString()));
 
 		for (Block block : TechBlocks.getAllFluidBlocks())
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
@@ -90,8 +91,8 @@ public final class ClientRegisterEvents {
 			if (item instanceof ItemTechMetal) {
 				ItemTechMetal metalItem = (ItemTechMetal) item;
 				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem.getType()
-						.name()
-						.toLowerCase()), "inventory"));
+				                                                                                                                                      .name()
+				                                                                                                                                      .toLowerCase()), "inventory"));
 				if (((ItemTechMetal) item).getType() == ItemTechMetal.ItemType.WIRE) {
 					for (int i = 1; i <= 4; i++)
 						ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem
@@ -105,8 +106,8 @@ public final class ClientRegisterEvents {
 				final ModelResourceLocation FILLED = new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/blowpipe_filled"), "inventory");
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
-					@Nonnull
-					public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+					@NotNull
+					public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 						IFluidHandlerItem cap = stack.getCapability(FLUID_HANDLER_ITEM_CAPABILITY, null);
 						if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
 							FluidStack fluid = ((ItemGlassMolder.GlassMolderCapability) cap).getFluid();
@@ -124,13 +125,13 @@ public final class ClientRegisterEvents {
 		// Molds
 		for (Item item : TechItems.getAllCeramicMoldItems()) {
 			final ModelResourceLocation EMPTY = new ModelResourceLocation(new ResourceLocation(item.getRegistryName()
-					.toString() + "_empty"), "inventory");
+			                                                                                       .toString() + "_empty"), "inventory");
 			final ModelResourceLocation FILLED = new ModelResourceLocation(new ResourceLocation(item.getRegistryName()
-					.toString()), "inventory");
+			                                                                                        .toString()), "inventory");
 			ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 				@Override
-				@Nonnull
-				public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+				@NotNull
+				public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 					IFluidHandlerItem cap = stack.getCapability(FLUID_HANDLER_ITEM_CAPABILITY, null);
 					IFluidHandler moldCap = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
 					if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
@@ -153,15 +154,15 @@ public final class ClientRegisterEvents {
 		// Ignored states
 		ModelLoader.setCustomStateMapper(TechBlocks.WIRE_DRAW_BENCH, new IStateMapper() {
 			@Override
-			@Nonnull
-			public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@Nonnull Block blockIn) {
+			@NotNull
+			public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@NotNull Block blockIn) {
 				return Collections.emptyMap();
 			}
 		});
 		ModelLoader.setCustomStateMapper(TechBlocks.FRIDGE, new IStateMapper() {
 			@Override
-			@Nonnull
-			public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@Nonnull Block blockIn) {
+			@NotNull
+			public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@NotNull Block blockIn) {
 				return Collections.emptyMap();
 			}
 		});
@@ -183,7 +184,7 @@ public final class ClientRegisterEvents {
 					(stack, tintIndex) -> {
 						if (tintIndex == 1 && stack.getItem() instanceof ItemGear) {
 							return (new Color(((ItemGear) stack.getItem()).getSleeveMetal().getColor())).brighter()
-									.getRGB();
+							                                                                            .getRGB();
 						} else if (tintIndex == 1 && stack.getItem() instanceof ItemBlowpipe) {
 							IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 							if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
@@ -196,7 +197,7 @@ public final class ClientRegisterEvents {
 						}
 						//noinspection ConstantConditions
 						return (new Color(((IMetalItem) stack.getItem()).getMetal(stack).getColor())).brighter()
-								.getRGB();
+						                                                                             .getRGB();
 					},
 					item);
 		}

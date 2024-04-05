@@ -39,14 +39,14 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;
 import su.terrafirmagreg.modules.device.objects.container.ContainerBlastFurnace;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 public class TEBlastFurnace extends TETickableInventory implements ITickable, ITileFields, IContainerProvider<ContainerBlastFurnace, GuiBlastFurnace> {
 	public static final int SLOT_TUYERE = 0;
 	public static final int FIELD_TEMPERATURE = 0, FIELD_ORE = 1, FIELD_FUEL = 2, FIELD_MELT = 3, FIELD_ORE_UNITS = 4, CHIMNEY_LEVELS = 5;
@@ -105,7 +105,7 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		NBTTagList ores = new NBTTagList();
 		for (ItemStack stack : oreStacks) {

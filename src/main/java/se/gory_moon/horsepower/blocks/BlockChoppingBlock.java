@@ -28,8 +28,9 @@ import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInfoAccessor {
@@ -66,7 +67,7 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Class<?> getTileClass() {
 		return TileEntityManualChopper.class;
 	}

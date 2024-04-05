@@ -23,14 +23,15 @@ import net.minecraftforge.common.IShearable;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantTFCF;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 	private static final AxisAlignedBB SHORTER_GRASS_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.5D, 0.875D);
@@ -56,7 +57,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 
 		if (!worldIn.isRemote) {
 			if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
-					.getHarvestLevel(stack, "scythe", player, state) != -1) {
+			                                                                                 .getHarvestLevel(stack, "scythe", player, state) != -1) {
                 /*if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_BARLEY))
                 {
                     if (age == 3 && (currentStage == 1 || expectedStage == 1))
@@ -132,7 +133,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XZ;
 	}
@@ -167,7 +168,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		switch (state.getValue(AGE)) {
 			case 0:
@@ -182,7 +183,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, AGE, growthStageProperty, DAYPERIOD);
 	}
@@ -194,13 +195,13 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 		return new ItemStack(this, 1);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(this, 1);
 	}
@@ -211,7 +212,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return NonNullList.withSize(1, new ItemStack(this, 1));
 	}

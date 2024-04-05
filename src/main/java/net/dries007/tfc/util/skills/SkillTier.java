@@ -1,23 +1,21 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.skills;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public enum SkillTier {
-	NOVICE, ADEPT, EXPERT, MASTER;
+	NOVICE,
+	ADEPT,
+	EXPERT,
+	MASTER;
 
 	private static final SkillTier[] VALUES = values();
 
-	@Nonnull
+	@NotNull
 	public static SkillTier valueOf(int index) {
 		return index < 0 ? NOVICE : index >= VALUES.length ? MASTER : VALUES[index];
 	}
 
-	@Nonnull
+	@NotNull
 	public SkillTier next() {
 		return this == MASTER ? MASTER : VALUES[this.ordinal() + 1];
 	}

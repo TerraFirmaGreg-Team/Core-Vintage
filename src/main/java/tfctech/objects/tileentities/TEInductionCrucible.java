@@ -23,18 +23,18 @@ import tfctech.TFCTech;
 import tfctech.TechConfig;
 import tfctech.client.TechSounds;
 import tfctech.client.audio.IMachineSoundEffect;
-import tfctech.objects.blocks.devices.BlockElectricForge;
 import tfctech.objects.blocks.devices.BlockInductionCrucible;
 import tfctech.objects.storage.MachineEnergyContainer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static tfctech.objects.blocks.devices.BlockInductionCrucible.LIT;
+import org.jetbrains.annotations.Nullable;
 
-@ParametersAreNonnullByDefault
+
+import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
+
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TEInductionCrucible extends TECrucible implements IMachineSoundEffect, IEnergySink {
 	private final MachineEnergyContainer energyContainer;
@@ -87,7 +87,7 @@ public class TEInductionCrucible extends TECrucible implements IMachineSoundEffe
 	@Optional.Method(modid = "ic2")
 	@Override
 	public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
-		return TechConfig.DEVICES.acceptIc2EU && facing == world.getBlockState(pos).getValue(FACING);
+		return TechConfig.DEVICES.acceptIc2EU && facing == world.getBlockState(pos).getValue(HORIZONTAL);
 	}
 
 	public int getEnergyCapacity() {
@@ -119,13 +119,13 @@ public class TEInductionCrucible extends TECrucible implements IMachineSoundEffe
 			this.acceptHeat(TechConfig.DEVICES.inductionCrucibleTargetTemperature);
 			litTime = 15;
 			if (!isLit) {
-				state = state.withProperty(BlockElectricForge.LIT, true);
+				state = state.withProperty(LIT, true);
 				world.setBlockState(pos, state, 2);
 				isLit = true;
 			}
 		}
 		if (litTime > 0 && --litTime <= 0 && isLit) {
-			state = state.withProperty(BlockElectricForge.LIT, false);
+			state = state.withProperty(LIT, false);
 			world.setBlockState(pos, state, 2);
 		}
 	}
@@ -137,7 +137,7 @@ public class TEInductionCrucible extends TECrucible implements IMachineSoundEffe
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("energyContainer", energyContainer.serializeNBT());
 		return super.writeToNBT(nbt);
@@ -145,7 +145,7 @@ public class TEInductionCrucible extends TECrucible implements IMachineSoundEffe
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		if (facing == null || facing == world.getBlockState(pos).getValue(FACING)) {
+		if (facing == null || facing == world.getBlockState(pos).getValue(HORIZONTAL)) {
 			if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
 				return true;
 			} else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
@@ -158,7 +158,7 @@ public class TEInductionCrucible extends TECrucible implements IMachineSoundEffe
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		if (facing == null || facing == world.getBlockState(pos).getValue(FACING)) {
+		if (facing == null || facing == world.getBlockState(pos).getValue(HORIZONTAL)) {
 			if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
 				return (T) this.energyContainer;
 			} else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
@@ -209,7 +209,7 @@ public class TEInductionCrucible extends TECrucible implements IMachineSoundEffe
 		}
 		IBlockState state = world.getBlockState(pos);
 		return state.getBlock() instanceof BlockInductionCrucible && world.getBlockState(pos)
-		                                                                  .getValue(BlockElectricForge.LIT);
+		                                                                  .getValue(LIT);
 	}
 
 	@Override

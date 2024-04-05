@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.rock;
 
 import net.dries007.tfc.api.capability.size.Size;
@@ -15,8 +10,10 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,15 +38,15 @@ public class ItemRockToolHead extends ItemTFC implements IRockObject {
 		return TABLE.get(type).get(cat);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.SMALL; // Stored everywhere
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.LIGHT; // Stacksize = 32
 	}
 
@@ -59,7 +56,7 @@ public class ItemRockToolHead extends ItemTFC implements IRockObject {
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public RockCategory getRockCategory(ItemStack stack) {
 		return category;

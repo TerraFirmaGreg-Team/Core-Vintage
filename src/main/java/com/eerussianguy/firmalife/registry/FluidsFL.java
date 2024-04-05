@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 //duplicating the fluid registration logic from TFC as not to create conflicts
 public final class FluidsFL {
@@ -68,7 +68,7 @@ public final class FluidsFL {
 		).build();
 	}
 
-	private static FluidWrapper registerFluid(@Nonnull Fluid newFluid) {
+	private static FluidWrapper registerFluid(@NotNull Fluid newFluid) {
 		boolean isDefault = !FluidRegistry.isFluidRegistered(newFluid.getName());
 
 		if (!isDefault) {

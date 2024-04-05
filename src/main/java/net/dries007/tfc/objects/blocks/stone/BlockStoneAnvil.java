@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.stone;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -31,14 +26,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 
-@ParametersAreNonnullByDefault
+
 public class BlockStoneAnvil extends BlockRockVariant {
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
@@ -80,7 +76,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return AABB;
@@ -95,7 +91,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return AABB;
@@ -207,13 +203,13 @@ public class BlockStoneAnvil extends BlockRockVariant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(BlockRockRaw.get(rock, Rock.Type.RAW));
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemRock.get(rock);
 	}

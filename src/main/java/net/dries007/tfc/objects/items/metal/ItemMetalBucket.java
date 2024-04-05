@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -30,9 +25,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,7 +36,7 @@ import static net.dries007.tfc.api.types.Metal.BLUE_STEEL;
 import static net.dries007.tfc.api.types.Metal.RED_STEEL;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemMetalBucket extends ItemMetal // quite a bit copied out of ItemWoodenBucket
 {
 	private static final int CAPACITY = Fluid.BUCKET_VOLUME;
@@ -120,8 +116,8 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (bucketCap != null) {
 			FluidStack fluidStack = bucketCap.drain(CAPACITY, false);
@@ -165,7 +161,7 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new FluidWhitelistHandler(stack, CAPACITY, getValidFluids());
 	}
 }

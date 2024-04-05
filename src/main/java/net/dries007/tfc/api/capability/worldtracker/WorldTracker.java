@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.worldtracker;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -21,8 +16,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.Constants;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -93,14 +90,14 @@ public class WorldTracker implements ICapabilitySerializable<NBTTagCompound> {
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing enumFacing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing enumFacing) {
 		return capability == CapabilityWorldTracker.CAPABILITY;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing enumFacing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing enumFacing) {
 		return hasCapability(capability, enumFacing) ? (T) this : null;
 	}
 }

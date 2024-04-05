@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.genlayers.datalayers.rock;
 
 import net.dries007.tfc.ConfigTFC;
@@ -14,7 +9,8 @@ import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.registries.ForgeRegistry;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -41,7 +37,7 @@ public class GenLayerRockInit extends GenLayerTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public int[] getInts(int par1, int par2, int maxX, int maxZ) {
 		int[] cache = IntCache.getIntCache(maxX * maxZ);
 

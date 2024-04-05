@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -12,13 +7,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * Generic entity used for sitting on top of blocks
  */
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class EntitySeatOn extends Entity {
 	private BlockPos pos;

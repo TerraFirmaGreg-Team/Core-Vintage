@@ -22,8 +22,9 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRBellows;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 
@@ -43,7 +44,7 @@ public class BlockBellows extends BlockBase implements ITEBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
 	}
@@ -61,7 +62,7 @@ public class BlockBellows extends BlockBase implements ITEBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
 	}
@@ -82,7 +83,7 @@ public class BlockBellows extends BlockBase implements ITEBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @NotNull EntityLivingBase placer) {
 		if (facing.getAxis() == EnumFacing.Axis.Y) {
 			if (placer.isSneaking()) {
@@ -95,7 +96,7 @@ public class BlockBellows extends BlockBase implements ITEBlock {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACING);
 	}

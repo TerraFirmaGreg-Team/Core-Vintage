@@ -16,7 +16,8 @@ import tfctech.objects.tileentities.TEFridge;
 import tfctech.objects.tileentities.TELatexExtractor;
 import tfctech.objects.tileentities.TEWireDrawBench;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 @WailaPlugin
@@ -28,7 +29,7 @@ public final class WailaIntegration implements IWailaDataProvider, IWailaPlugin 
 		registrar.registerBodyProvider(this, TELatexExtractor.class);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		Block b = accessor.getBlock();

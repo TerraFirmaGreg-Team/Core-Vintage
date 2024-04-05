@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.heat;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -14,9 +9,10 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * Generic recipe for items that heat up and transform
@@ -24,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Note! This recipe only supports inputs of stack size = 1, as they get "transformed" independent of their size.
  * As of currently, all inventories that use this recipe also have a stack size limit of 1, which is as intended
  */
-@ParametersAreNonnullByDefault
+
 public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> implements IJEISimpleRecipe {
 	protected final IIngredient<ItemStack> ingredient;
 	private final float transformTemp;
@@ -94,7 +90,7 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
 	 * @param input the input stack
 	 * @return the stack to replace the input with
 	 */
-	@Nonnull
+	@NotNull
 	public ItemStack getOutputStack(ItemStack input) {
 		return ItemStack.EMPTY;
 	}

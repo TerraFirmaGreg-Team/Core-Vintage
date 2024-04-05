@@ -26,16 +26,17 @@ import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrate;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrate;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static net.dries007.tfc.objects.blocks.BlockLargeVessel.SEALED;
 
 /**
  * @see BlockLargeVessel
  */
-@ParametersAreNonnullByDefault
+
 public class TECrate extends TEBaseInventory implements IItemHandlerSidedCallback, IContainerProvider<ContainerCrate, GuiCrate> {
 	private boolean sealed;
 	private long sealedTick, sealedCalendarTick;
@@ -69,7 +70,7 @@ public class TECrate extends TEBaseInventory implements IItemHandlerSidedCallbac
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public String getSealedDate() {
 		return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
 	}
@@ -121,7 +122,7 @@ public class TECrate extends TEBaseInventory implements IItemHandlerSidedCallbac
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setLong("sealedTick", sealedTick);
 		nbt.setLong("sealedCalendarTick", sealedCalendarTick);
@@ -194,7 +195,7 @@ public class TECrate extends TEBaseInventory implements IItemHandlerSidedCallbac
 		}
 
 		@Override
-		@Nonnull
+		@NotNull
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
 			ItemStack stack = super.extractItem(slot, amount, simulate);
 			CapabilityFood.removeTrait(stack, FoodTrait.PRESERVED);

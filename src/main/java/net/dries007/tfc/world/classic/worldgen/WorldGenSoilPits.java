@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.dries007.tfc.ConfigTFC;
@@ -64,11 +59,11 @@ public class WorldGenSoilPits implements IWorldGenerator {
 					final IBlockState current = world.getBlockState(pos);
 					if (BlocksTFC.isDirt(current)) {
 						world.setBlockState(pos, BlockRockVariant.get(ChunkDataTFC.getRockHeight(world, pos), Rock.Type.CLAY)
-								.getDefaultState(), 2);
+						                                         .getDefaultState(), 2);
 						flag = true;
 					} else if (BlocksTFC.isGrass(current)) {
 						world.setBlockState(pos, BlockRockVariant.get(ChunkDataTFC.getRockHeight(world, pos), Rock.Type.CLAY_GRASS)
-								.getDefaultState(), 2);
+						                                         .getDefaultState(), 2);
 						flag = true;
 					}
 				}
@@ -103,7 +98,7 @@ public class WorldGenSoilPits implements IWorldGenerator {
 		if (rng.nextInt(30) != 0 || start.getY() > WorldTypeTFC.SEALEVEL) return false;
 		ChunkDataTFC data = ChunkDataTFC.get(world, start);
 		if (data.isInitialized() && data.getRainfall() >= 375f && data.getFloraDiversity() >= 0.5f && data.getFloraDensity() >= 0.5f && world.getBiome(start)
-				.getHeightVariation() < 0.15)
+		                                                                                                                                     .getHeightVariation() < 0.15)
 			return false;
 
 		for (int x = -radius; x <= radius; ++x) {

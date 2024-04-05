@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import mezz.jei.api.IGuiHelper;
@@ -16,11 +11,10 @@ import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class KnappingCategory extends BaseRecipeCategory<KnappingRecipeWrapper> {
 	private static final ResourceLocation KNAP_TEXTURES = new ResourceLocation(MODID_TFC, "textures/gui/knapping.png");
 

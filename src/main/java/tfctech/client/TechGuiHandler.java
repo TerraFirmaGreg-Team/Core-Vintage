@@ -35,8 +35,10 @@ import tfctech.objects.tileentities.TEInductionCrucible;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +109,7 @@ public class TechGuiHandler implements IGuiHandler {
 
 		private static final Type[] values = values();
 
-		@Nonnull
+		@NotNull
 		public static Type valueOf(int id) {
 			while (id >= values.length) id -= values.length;
 			while (id < 0) id += values.length;

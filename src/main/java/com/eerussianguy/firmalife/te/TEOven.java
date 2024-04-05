@@ -24,12 +24,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class TEOven extends TEInventory implements ITickable {
 	public static final int SLOT_FUEL_1 = 0;

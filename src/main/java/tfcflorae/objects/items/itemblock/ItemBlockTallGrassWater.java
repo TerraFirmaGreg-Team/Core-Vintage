@@ -17,10 +17,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import tfcflorae.objects.blocks.plants.BlockTallGrassWater;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class ItemBlockTallGrassWater extends ItemBlockTFC {
 	protected final BlockTallGrassWater block;
 
@@ -30,7 +29,7 @@ public class ItemBlockTallGrassWater extends ItemBlockTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);

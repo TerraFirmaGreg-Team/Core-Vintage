@@ -9,7 +9,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelSlingStone;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingStone extends Render<EntitySlingStone> {
 

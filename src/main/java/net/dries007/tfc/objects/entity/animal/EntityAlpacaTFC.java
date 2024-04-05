@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -26,8 +21,8 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -36,7 +31,7 @@ import java.util.function.BiConsumer;
  * A Sheep of the colder regions!
  * Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give birth to one individual
  */
-@ParametersAreNonnullByDefault
+
 public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
 	@SuppressWarnings("unused")
 	public EntityAlpacaTFC(World worldIn) {

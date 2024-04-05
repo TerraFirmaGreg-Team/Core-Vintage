@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.block.state.IBlockState;
@@ -15,14 +10,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * TE Implementation that syncs NBT on world / chunk load, and on block updates
  */
-@ParametersAreNonnullByDefault
+
 public abstract class TEBase extends TileEntity {
 	/**
 	 * Gets the update packet that is used to sync the TE on load
@@ -36,7 +32,7 @@ public abstract class TEBase extends TileEntity {
 	/**
 	 * Gets the update tag send by packets. Contains base data (i.e. position), as well as TE specific data
 	 */
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound getUpdateTag() {
 		NBTTagCompound nbt = new NBTTagCompound();

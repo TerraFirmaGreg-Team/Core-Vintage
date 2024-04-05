@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen.vein;
 
 import com.google.gson.JsonElement;
@@ -11,8 +6,10 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.util.collections.WeightedCollection;
 import net.dries007.tfc.world.classic.worldgen.WorldGenOreVeins;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -25,12 +22,12 @@ public enum VeinRegistry {
 	private final WeightedCollection<VeinType> weightedVeinTypes = new WeightedCollection<>();
 	private final Map<String, VeinType> veinTypeRegistry = new HashMap<>();
 
-	@Nonnull
+	@NotNull
 	public WeightedCollection<VeinType> getVeins() {
 		return weightedVeinTypes;
 	}
 
-	@Nonnull
+	@NotNull
 	public Set<String> keySet() {
 		return veinTypeRegistry.keySet();
 	}

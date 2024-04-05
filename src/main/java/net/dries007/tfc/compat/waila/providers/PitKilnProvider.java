@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.ConfigTFC;
@@ -16,15 +11,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class PitKilnProvider implements IWailaBlock {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
 		TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
 		if (te != null) {
@@ -65,7 +61,7 @@ public class PitKilnProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(TEPitKiln.class);

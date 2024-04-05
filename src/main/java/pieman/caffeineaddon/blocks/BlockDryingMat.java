@@ -26,7 +26,8 @@ import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
 import su.terrafirmagreg.api.model.ICustomModel;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 public class BlockDryingMat extends Block implements ICustomModel {

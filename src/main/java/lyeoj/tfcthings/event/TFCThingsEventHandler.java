@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
 
@@ -115,13 +115,13 @@ public class TFCThingsEventHandler {
 	@SubscribeEvent
 	public static void modifyBreakSpeed(PlayerEvent.BreakSpeed event) {
 		if (event.getEntityPlayer()
-				.getHeldItemMainhand()
-				.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+		         .getHeldItemMainhand()
+		         .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
 			ISharpness capability = getSharpnessCapability(event.getEntityPlayer().getHeldItemMainhand());
 			if (capability != null) {
 				if (shouldBoostSpeed(event.getEntityPlayer().getHeldItemMainhand(), event.getState())) {
 					if (event.getState().getBlock() instanceof BlockLogTFC && !event.getState()
-							.getValue(BlockLogTFC.PLACED)) {
+					                                                                .getValue(BlockLogTFC.PLACED)) {
 						return;
 					}
 					if (capability.getCharges() > 256) {
@@ -167,7 +167,7 @@ public class TFCThingsEventHandler {
 		if (event.getItemStack().getItem() instanceof ItemRopeJavelin) {
 			if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockToolRack) {
 				((ItemRopeJavelin) event.getItemStack()
-						.getItem()).retractJavelin(event.getItemStack(), event.getWorld());
+				                        .getItem()).retractJavelin(event.getItemStack(), event.getWorld());
 			}
 		}
 	}

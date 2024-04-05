@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -24,18 +19,18 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe {
-	public ShapelessFluidFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result) {
+	public ShapelessFluidFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @NotNull ItemStack result) {
 		super(group, input, result);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		NonNullList<ItemStack> ret = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
@@ -64,7 +59,7 @@ public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack out = output.copy();
 

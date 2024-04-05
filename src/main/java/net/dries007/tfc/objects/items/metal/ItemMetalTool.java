@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import com.google.common.collect.HashMultimap;
@@ -35,10 +30,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemMetalTool extends ItemMetal {
 	public final ToolMaterial material;
@@ -359,7 +353,7 @@ public class ItemMetalTool extends ItemMetal {
 	}
 
 	@Override
-	public boolean canApplyAtEnchantingTable(@Nonnull ItemStack stack, @Nonnull Enchantment enchantment) {
+	public boolean canApplyAtEnchantingTable(@NotNull ItemStack stack, @NotNull Enchantment enchantment) {
 		if (enchantment.type == EnumEnchantmentType.WEAPON) {
 			return isWeapon();
 		} else if (enchantment.type == EnumEnchantmentType.DIGGER) {

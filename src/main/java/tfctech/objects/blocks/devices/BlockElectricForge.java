@@ -7,7 +7,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,14 +24,16 @@ import org.jetbrains.annotations.NotNull;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TEElectricForge;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
+
 @MethodsReturnNonnullByDefault
 public class BlockElectricForge extends BlockHorizontal implements IItemSize {
-	public static final PropertyBool LIT = PropertyBool.create("lit");
 
 	public BlockElectricForge() {
 		super(Material.IRON);
@@ -44,7 +45,7 @@ public class BlockElectricForge extends BlockHorizontal implements IItemSize {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 		           .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
@@ -74,7 +75,7 @@ public class BlockElectricForge extends BlockHorizontal implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACING, LIT);
 	}
@@ -95,20 +96,20 @@ public class BlockElectricForge extends BlockHorizontal implements IItemSize {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return false;
 	}
 }

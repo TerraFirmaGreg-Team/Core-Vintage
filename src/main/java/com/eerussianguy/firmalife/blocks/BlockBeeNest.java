@@ -19,11 +19,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockBeeNest extends BlockNonCube {
 	public static final AxisAlignedBB SHAPE = new AxisAlignedBB(2.0D / 16, 4.0D / 16, 2.0D / 16, 14.0D / 16, 16.0D / 16, 14.0D / 16);
 
@@ -35,7 +35,7 @@ public class BlockBeeNest extends BlockNonCube {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return SHAPE;
 	}

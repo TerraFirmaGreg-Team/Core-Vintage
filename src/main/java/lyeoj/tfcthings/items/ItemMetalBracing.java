@@ -7,7 +7,7 @@ import net.dries007.tfc.objects.items.ItemTFC;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemMetalBracing extends ItemTFC {
 
@@ -17,15 +17,15 @@ public class ItemMetalBracing extends ItemTFC {
 		this.setCreativeTab(CreativeTabsTFC.CT_METAL);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.LIGHT;
 	}
 }

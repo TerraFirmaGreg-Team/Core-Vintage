@@ -43,8 +43,10 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.oredict.OreDictionary;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -67,15 +69,15 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
 		setTranslationKey("prospectors_hammer_" + name);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.NORMAL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 
@@ -127,7 +129,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
 				if (FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos)) != null && FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos))
 				                                                                                                        .isCollapsable()) {
 					boolean result = isThisBlockSafe(worldIn, blockpos);
-					
+
 					float falsePositiveChance = 0.3F;
 					if (skill != null) {
 						falsePositiveChance = 0.3F - 0.1F * (float) skill.getTier().ordinal();

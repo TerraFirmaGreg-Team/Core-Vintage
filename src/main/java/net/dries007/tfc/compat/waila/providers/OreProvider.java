@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
@@ -14,15 +9,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.List;
 
 public class OreProvider implements IWailaBlock {
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof BlockOreTFC) {
 			BlockOreTFC b = (BlockOreTFC) state.getBlock();
@@ -31,7 +27,7 @@ public class OreProvider implements IWailaBlock {
 		return ItemStack.EMPTY;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(BlockOreTFC.class);

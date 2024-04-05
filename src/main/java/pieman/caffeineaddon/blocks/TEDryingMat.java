@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pieman.caffeineaddon.recipes.DryingMatRecipe;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class TEDryingMat extends TEInventory implements ITickable {
 
@@ -67,19 +67,19 @@ public class TEDryingMat extends TEInventory implements ITickable {
 	}
 	//-----
 
-	@Nonnull
+	@NotNull
 	public String getSealedDate() {
 		return getStack().isEmpty() ? "" : ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
 	}
 
-	@Nonnull
+	@NotNull
 	public String getOutputName() {
 		return DryingMatRecipe.get(getStack()) == null ? "" : DryingMatRecipe.get(getStack())
 		                                                                     .getOutputStack()
 		                                                                     .getDisplayName();
 	}
 
-	@Nonnull
+	@NotNull
 	public float getProgress() {
 		return DryingMatRecipe.get(getStack()) == null ? 0 : ((float) getTicksSinceUpdate()) / ((float) DryingMatRecipe.get(getStack())
 		                                                                                                               .getDuration());
@@ -93,7 +93,7 @@ public class TEDryingMat extends TEInventory implements ITickable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setLong("tick", lastUpdateTick);
 		nbt.setLong("date", sealedCalendarTick);
@@ -107,7 +107,7 @@ public class TEDryingMat extends TEInventory implements ITickable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
 		return new AxisAlignedBB(getPos(), getPos().add(1D, 1D, 1D));

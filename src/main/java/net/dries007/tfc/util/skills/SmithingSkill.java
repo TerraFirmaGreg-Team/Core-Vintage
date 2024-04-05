@@ -1,16 +1,12 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.skills;
 
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class SmithingSkill extends Skill {
 	private static final String SKILL_VALUE = "tfc_smithing_value";
@@ -65,7 +61,7 @@ public class SmithingSkill extends Skill {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public SkillTier getTier() {
 		return SkillTier.valueOf(getSkillSum() / 40);
 	}

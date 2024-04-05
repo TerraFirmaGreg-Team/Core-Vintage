@@ -8,9 +8,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemDriedPineapple extends ItemMisc {
 	public ItemDriedPineapple() {

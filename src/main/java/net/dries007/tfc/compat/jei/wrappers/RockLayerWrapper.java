@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -25,11 +20,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-@ParametersAreNonnullByDefault
+
 public class RockLayerWrapper implements IRecipeWrapper {
 	private final Rock rock;
 	private final List<List<ItemStack>> oreList;

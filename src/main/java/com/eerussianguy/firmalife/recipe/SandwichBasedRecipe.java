@@ -10,17 +10,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SandwichBasedRecipe extends ShapedDamageRecipe {
-	public SandwichBasedRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
+	public SandwichBasedRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
 		super(group, input, result, damage);
 	}
 
 	@Override
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		if (super.matches(inv, world)) {
 			List<FoodData> ingredients = new ArrayList<>();
 			getIngredients(inv, ingredients);

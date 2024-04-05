@@ -10,8 +10,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
@@ -30,7 +31,7 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 	private final boolean isFluxStone;
 	private final boolean isNaturallyGenerating;
 
-	public BlockTypesTFCF(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone, boolean isNaturallyGenerating) {
+	public BlockTypesTFCF(@NotNull ResourceLocation name, @NotNull RockCategory rockCategory, boolean isFluxStone, boolean isNaturallyGenerating) {
 		//noinspection ConstantConditions
 		if (rockCategory == null)
 			throw new IllegalArgumentException("Rock category is not allowed to be null (on rock " + name + ")");
@@ -42,11 +43,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 		this.isNaturallyGenerating = isNaturallyGenerating;
 	}
 
-	public BlockTypesTFCF(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone) {
+	public BlockTypesTFCF(@NotNull ResourceLocation name, @NotNull RockCategory rockCategory, boolean isFluxStone) {
 		this(name, rockCategory, isFluxStone, true);
 	}
 
-	public BlockTypesTFCF(@Nonnull ResourceLocation name, @Nonnull ResourceLocation categoryName, boolean isFluxStone) {
+	public BlockTypesTFCF(@NotNull ResourceLocation name, @NotNull ResourceLocation categoryName, boolean isFluxStone) {
 		//noinspection ConstantConditions
 		this(name, TFCRegistries.ROCK_CATEGORIES.getValue(categoryName), isFluxStone, true);
 	}
@@ -579,7 +580,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 
 		public boolean shouldRockify() {
 			return switch (this) {
-				case MOSSY_RAW, MUD_BRICKS, MUD, PODZOL, SPARSE_GRASS, COARSE_DIRT, CLAY_PODZOL, DRY_CLAY_GRASS, SPARSE_CLAY_GRASS, COARSE_CLAY, EARTHENWARE_CLAY, EARTHENWARE_CLAY_GRASS, EARTHENWARE_CLAY_PODZOL, DRY_EARTHENWARE_CLAY_GRASS, SPARSE_EARTHENWARE_CLAY_GRASS, COARSE_EARTHENWARE_CLAY, KAOLINITE_CLAY, KAOLINITE_CLAY_GRASS, KAOLINITE_CLAY_PODZOL, DRY_KAOLINITE_CLAY_GRASS, SPARSE_KAOLINITE_CLAY_GRASS, COARSE_KAOLINITE_CLAY, STONEWARE_CLAY, STONEWARE_CLAY_GRASS, STONEWARE_CLAY_PODZOL, DRY_STONEWARE_CLAY_GRASS, SPARSE_STONEWARE_CLAY_GRASS, COARSE_STONEWARE_CLAY ->
+				case MOSSY_RAW, MUD_BRICKS, MUD, PODZOL, SPARSE_GRASS, COARSE_DIRT, CLAY_PODZOL, DRY_CLAY_GRASS, SPARSE_CLAY_GRASS, COARSE_CLAY,
+				     EARTHENWARE_CLAY, EARTHENWARE_CLAY_GRASS, EARTHENWARE_CLAY_PODZOL, DRY_EARTHENWARE_CLAY_GRASS, SPARSE_EARTHENWARE_CLAY_GRASS,
+				     COARSE_EARTHENWARE_CLAY, KAOLINITE_CLAY, KAOLINITE_CLAY_GRASS, KAOLINITE_CLAY_PODZOL, DRY_KAOLINITE_CLAY_GRASS,
+				     SPARSE_KAOLINITE_CLAY_GRASS, COARSE_KAOLINITE_CLAY, STONEWARE_CLAY, STONEWARE_CLAY_GRASS, STONEWARE_CLAY_PODZOL, DRY_STONEWARE_CLAY_GRASS,
+				     SPARSE_STONEWARE_CLAY_GRASS, COARSE_STONEWARE_CLAY ->
                 /*
                 case BOG_IRON:
                 case BOG_IRON_GRASS:

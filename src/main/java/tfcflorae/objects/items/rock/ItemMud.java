@@ -19,15 +19,15 @@ import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.items.ItemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemMud extends ItemTFCF implements IRockObject {
 	private static final Map<Rock, ItemMud> MAP = new HashMap<>();
 	private final Rock rock;
@@ -62,32 +62,32 @@ public class ItemMud extends ItemTFCF implements IRockObject {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Rock getRock(ItemStack stack) {
 		return rock;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public RockCategory getRockCategory(ItemStack stack) {
 		return rock.getRockCategory();
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL; // Stored everywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 2) {
 			GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.MUD);
@@ -95,7 +95,7 @@ public class ItemMud extends ItemTFCF implements IRockObject {
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
-	@Nonnull
+	@NotNull
 	public void onRightClick(PlayerInteractEvent.RightClickItem event) {
 		EnumHand hand = event.getHand();
 		if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "mud") && hand == EnumHand.MAIN_HAND) {

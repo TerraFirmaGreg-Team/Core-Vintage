@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import com.google.common.collect.ImmutableList;
@@ -37,13 +32,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockFruitTreeLeaves.EnumLeafState.class);
 	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
@@ -70,7 +66,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(HARVESTABLE, meta > 3)
 		                        .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11));
@@ -159,7 +155,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
 	}
@@ -220,7 +216,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 		return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
-	@Nonnull
+	@NotNull
 	public IFruitTree getTree() {
 		return tree;
 	}
@@ -280,11 +276,13 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 	 * Used to render the correct texture of this leaf block
 	 */
 	public enum EnumLeafState implements IStringSerializable {
-		NORMAL, FLOWERING, FRUIT;
+		NORMAL,
+		FLOWERING,
+		FRUIT;
 
 		private static final EnumLeafState[] VALUES = values();
 
-		@Nonnull
+		@NotNull
 		public static EnumLeafState valueOf(int index) {
 			return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
 		}

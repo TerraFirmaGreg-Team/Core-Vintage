@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.ConfigTFC;
@@ -40,15 +35,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.TextComponentTranslation;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class TEAnvilTFC extends TEInventory {
 	public static final int WORK_MAX = 145;
 	public static final int SLOT_INPUT_1 = 0;
@@ -72,7 +67,7 @@ public class TEAnvilTFC extends TEInventory {
 		return state.getBlock() instanceof BlockStoneAnvil;
 	}
 
-	@Nonnull
+	@NotNull
 	public Metal.Tier getTier() {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof BlockAnvilTFC) {
@@ -86,7 +81,7 @@ public class TEAnvilTFC extends TEInventory {
 		return recipe;
 	}
 
-	@Nonnull
+	@NotNull
 	public ForgeSteps getSteps() {
 		return steps;
 	}
@@ -158,7 +153,7 @@ public class TEAnvilTFC extends TEInventory {
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		if (recipe != null) {
@@ -193,7 +188,7 @@ public class TEAnvilTFC extends TEInventory {
 	/**
 	 * Only occurs on server side
 	 */
-	public void addStep(@Nonnull EntityPlayer player, @Nullable ForgeStep step) {
+	public void addStep(@NotNull EntityPlayer player, @Nullable ForgeStep step) {
 		ItemStack input = inventory.getStackInSlot(SLOT_INPUT_1);
 		IForgeable cap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
 		if (cap != null) {
@@ -290,7 +285,7 @@ public class TEAnvilTFC extends TEInventory {
 			if (fluxStack.isEmpty()) {
 				// No flux
 				TerraFirmaCraft.getNetwork()
-						.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
+				               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
 				return false;
 			}
 
@@ -300,10 +295,10 @@ public class TEAnvilTFC extends TEInventory {
 			if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
 				if (cap1 instanceof IItemHeat && cap2 instanceof IItemHeat) {
 					TerraFirmaCraft.getNetwork()
-							.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
+					               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
 				} else {
 					TerraFirmaCraft.getNetwork()
-							.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+					               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
 				}
 				return false;
 			}
@@ -332,7 +327,7 @@ public class TEAnvilTFC extends TEInventory {
 
 		// For when there is both inputs but no recipe that matches
 		TerraFirmaCraft.getNetwork()
-				.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+		               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, MODID_TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
 		return false;
 	}
 

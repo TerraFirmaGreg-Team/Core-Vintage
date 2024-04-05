@@ -5,7 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import tfctech.client.TechGuiHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class GuiButtonSetter extends GuiButton {
 	private final boolean isPlus;
@@ -16,7 +16,7 @@ public class GuiButtonSetter extends GuiButton {
 	}
 
 	@Override
-	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+	public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
 			mc.getTextureManager().bindTexture(TechGuiHandler.GUI_ELEMENTS);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

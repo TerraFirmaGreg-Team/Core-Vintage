@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.rock;
 
 import com.google.common.collect.ImmutableSet;
@@ -28,15 +23,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemRockKnife extends ItemTool implements IItemSize, IRockObject {
 	private static final Map<RockCategory, ItemRockKnife> MAP = new HashMap<>();
 	public final RockCategory category;
@@ -70,13 +66,13 @@ public class ItemRockKnife extends ItemTool implements IItemSize, IRockObject {
 		return true;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL; // Stored in large vessels
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;
@@ -93,7 +89,7 @@ public class ItemRockKnife extends ItemTool implements IItemSize, IRockObject {
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public RockCategory getRockCategory(ItemStack stack) {
 		return category;

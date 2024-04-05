@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem {
 
@@ -64,7 +64,7 @@ public class BlockRopeLadder extends Block implements TFCThingsConfigurableItem 
 		return new BlockStateContainer(this, new IProperty[]{FACING});
 	}
 
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4));
 	}

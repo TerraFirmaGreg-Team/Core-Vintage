@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -18,16 +13,16 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * todo: as per comment in ItemsTFC, turn this into a proper fluid handler item?
  */
-@ParametersAreNonnullByDefault
+
 public class ItemGlassBottleTFC extends ItemGlassBottle {
 	@Override
-	@Nonnull
+	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		RayTraceResult result = rayTrace(worldIn, playerIn, true);
 

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.ConfigTFC;
@@ -34,14 +29,15 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 public class BlockTorchTFC extends BlockTorch implements IItemSize {
 	public BlockTorchTFC() {
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
@@ -57,15 +53,15 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize {
 		return stack.getItem() == Item.getItemFromBlock(Blocks.TORCH) || ItemFireStarter.canIgnite(stack);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.SMALL; // Can store anywhere
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.LIGHT; // Stacksize = 32
 	}
 
@@ -77,7 +73,7 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return super.getStateFromMeta(meta % 6).withProperty(LIT, meta >= 6);
 	}
@@ -88,7 +84,7 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACING, LIT);
 	}
@@ -105,7 +101,7 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return state.getValue(LIT) ? Item.getItemFromBlock(Blocks.TORCH) : Items.STICK;
 	}

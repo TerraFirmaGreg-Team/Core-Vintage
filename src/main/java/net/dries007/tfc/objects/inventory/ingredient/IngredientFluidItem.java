@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.ingredient;
 
 import net.minecraft.item.ItemStack;
@@ -12,16 +7,16 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class IngredientFluidItem implements IIngredient<ItemStack> {
 	private final FluidStack stack;
 
-	public IngredientFluidItem(@Nonnull Fluid fluid, int amount) {
+	public IngredientFluidItem(@NotNull Fluid fluid, int amount) {
 		this(new FluidStack(fluid, amount));
 	}
 
-	public IngredientFluidItem(@Nonnull FluidStack stack) {
+	public IngredientFluidItem(@NotNull FluidStack stack) {
 		this.stack = stack;
 	}
 

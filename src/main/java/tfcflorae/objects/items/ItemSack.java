@@ -25,11 +25,11 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class ItemSack extends ItemTFCF {
 	public ItemSack(Object... oreNameParts) {
 		for (Object obj : oreNameParts) {
@@ -41,7 +41,7 @@ public class ItemSack extends ItemTFCF {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (!worldIn.isRemote && !playerIn.isSneaking()) {
@@ -51,7 +51,7 @@ public class ItemSack extends ItemTFCF {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getTranslationKey(ItemStack stack) {
 		return super.getTranslationKey(stack);
 	}
@@ -79,13 +79,13 @@ public class ItemSack extends ItemTFCF {
 		return false;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL; // Can't be stored in itself
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
@@ -108,19 +108,19 @@ public class ItemSack extends ItemTFCF {
 		}
 
 		@Override
-		public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 		}
 
 		@Nullable
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 			return hasCapability(capability, facing) ? (T) this : null;
 		}
 
 		@Override
-		public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+		public void setStackInSlot(int slot, @NotNull ItemStack stack) {
 			IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 			if (cap != null) {
 				CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
@@ -128,9 +128,9 @@ public class ItemSack extends ItemTFCF {
 			super.setStackInSlot(slot, stack);
 		}
 
-		@Nonnull
+		@NotNull
 		@Override
-		public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+		public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 			if (!simulate) {
 				IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 				if (cap != null) {
@@ -141,7 +141,7 @@ public class ItemSack extends ItemTFCF {
 		}
 
 		@Override
-		@Nonnull
+		@NotNull
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
 			ItemStack stack = super.extractItem(slot, amount, simulate).copy();
 			IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
@@ -152,7 +152,7 @@ public class ItemSack extends ItemTFCF {
 		}
 
 		@Override
-		public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+		public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 			IItemSize size = CapabilityItemSize.getIItemSize(stack);
 			if (size != null) {
 				return size.getSize(stack).isSmallerThan(Size.NORMAL);
@@ -176,7 +176,7 @@ public class ItemSack extends ItemTFCF {
 		 * Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different stack is being taken out.
 		 */
 		@Override
-		public void beforePutStack(SlotCallback slot, @Nonnull ItemStack stack) {
+		public void beforePutStack(SlotCallback slot, @NotNull ItemStack stack) {
 			IFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
 			if (cap != null) {
 				CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);

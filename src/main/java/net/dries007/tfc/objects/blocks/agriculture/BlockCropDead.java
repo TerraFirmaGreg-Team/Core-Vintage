@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -35,14 +30,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-@ParametersAreNonnullByDefault
+
 public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 	/* true if the crop spawned in the wild, means it ignores growth conditions i.e. farmland */
 	public static final PropertyBool MATURE = PropertyBool.create("mature");
@@ -74,13 +69,13 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 		return MAP.keySet();
 	}
 
-	@Nonnull
+	@NotNull
 	public ICrop getCrop() {
 		return crop;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(MATURE, (meta & META_MATURE) > 0);
@@ -91,20 +86,20 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 		return state.getValue(MATURE) ? META_MATURE : 0;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemSeedsTFC.get(crop);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, MATURE);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XZ;
 	}
@@ -131,7 +126,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(ItemSeedsTFC.get(crop));
 	}
@@ -158,12 +153,12 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
 	}
 
-	@Nonnull
+	@NotNull
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
 		return EnumPlantType.Crop;
 	}

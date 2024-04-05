@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelGrizzlyBearTFC;
@@ -14,13 +9,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderGrizzlyBearTFC extends RenderLiving<EntityGrizzlyBearTFC> {
 	private static final ResourceLocation BEAR_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/grizzlybear.png");
 
@@ -29,7 +24,7 @@ public class RenderGrizzlyBearTFC extends RenderLiving<EntityGrizzlyBearTFC> {
 	}
 
 	@Override
-	public void doRender(@Nonnull EntityGrizzlyBearTFC bear, double par2, double par4, double par6, float par8, float par9) {
+	public void doRender(@NotNull EntityGrizzlyBearTFC bear, double par2, double par4, double par6, float par8, float par9) {
 		this.shadowSize = (float) (0.35f + (bear.getPercentToAdulthood() * 0.35f));
 		super.doRender(bear, par2, par4, par6, par8, par9);
 	}

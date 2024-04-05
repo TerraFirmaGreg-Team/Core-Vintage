@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.objects.blocks.plants.*;
@@ -15,7 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Random;
@@ -81,7 +77,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 	 * @param movementMod   modifier for player X/Z movement through this plant
 	 * @param oreDictName   if not empty, the Ore Dictionary entry for this plant
 	 */
-	public Plant(@Nonnull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, int minWaterDepth, int maxWaterDepth, double movementMod, String oreDictName) {
+	public Plant(@NotNull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, int minWaterDepth, int maxWaterDepth, double movementMod, String oreDictName) {
 		this.stages = stages;
 		this.minGrowthTemp = minGrowthTemp;
 		this.maxGrowthTemp = maxGrowthTemp;
@@ -111,7 +107,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 		setRegistryName(name);
 	}
 
-	public Plant(@Nonnull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, double movementMod, String oreDictName) {
+	public Plant(@NotNull ResourceLocation name, PlantType plantType, int[] stages, boolean isClayMarking, boolean isSwampPlant, float minGrowthTemp, float maxGrowthTemp, float minTemp, float maxTemp, float minRain, float maxRain, int minSun, int maxSun, int maxHeight, double movementMod, String oreDictName) {
 		this(name, plantType, stages, isClayMarking, isSwampPlant, minGrowthTemp, maxGrowthTemp, minTemp, maxTemp, minRain, maxRain, minSun, maxSun, maxHeight, 0, 0, movementMod, oreDictName);
 	}
 
@@ -221,12 +217,12 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 		return getRegistryName().getPath();
 	}
 
-	@Nonnull
+	@NotNull
 	public PlantType getPlantType() {
 		return plantType;
 	}
 
-	@Nonnull
+	@NotNull
 	public Material getMaterial() {
 		return material;
 	}
@@ -339,7 +335,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
 		private final Function<Plant, BlockPlantTFC> supplier;
 
-		PlantType(@Nonnull Function<Plant, BlockPlantTFC> supplier) {
+		PlantType(@NotNull Function<Plant, BlockPlantTFC> supplier) {
 			this.supplier = supplier;
 		}
 

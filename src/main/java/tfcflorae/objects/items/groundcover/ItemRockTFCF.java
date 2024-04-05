@@ -14,37 +14,36 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceRock;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemRockTFCF extends ItemBlockTFC {
 	public ItemRockTFCF(BlockSurfaceRock block) {
 		super(block);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
 		return getStackSize(stack);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
 			TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);

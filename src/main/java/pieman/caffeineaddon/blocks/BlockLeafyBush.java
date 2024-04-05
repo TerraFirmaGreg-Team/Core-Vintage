@@ -23,7 +23,8 @@ import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
 import pieman.caffeineaddon.util.LeafyBush;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 public class BlockLeafyBush extends BlockBerryBush {
@@ -47,7 +48,7 @@ public class BlockLeafyBush extends BlockBerryBush {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(GROWTH, meta);
 	}
@@ -96,7 +97,7 @@ public class BlockLeafyBush extends BlockBerryBush {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 
 		return switch (source.getBlockState(pos).getValue(GROWTH)) {
@@ -108,7 +109,7 @@ public class BlockLeafyBush extends BlockBerryBush {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, GROWTH);
 	}

@@ -9,10 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceSeashells;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemSeashell extends ItemBlockTFC {
 	public ItemSeashell(BlockSurfaceSeashells block) {
@@ -21,13 +20,13 @@ public class ItemSeashell extends ItemBlockTFC {
 		OreDictionaryHelper.register(this, "seashells");
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;

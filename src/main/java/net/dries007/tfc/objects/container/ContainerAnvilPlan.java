@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -13,7 +8,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ContainerAnvilPlan extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
 	public ContainerAnvilPlan(InventoryPlayer playerInv, TEAnvilTFC tile) {

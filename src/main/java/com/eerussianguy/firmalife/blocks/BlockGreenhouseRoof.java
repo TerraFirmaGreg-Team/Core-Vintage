@@ -16,14 +16,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.GLASS;
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.TOP;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
-@ParametersAreNonnullByDefault
+
 public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 	public static final AxisAlignedBB BASE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	public static final AxisAlignedBB ROOF_SHAPE_EAST = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D, 1.0D, 0.5D).union(BASE);
@@ -68,7 +68,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
@@ -84,7 +84,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (state.getValue(TOP)) {
 			return BASE;
@@ -109,7 +109,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(FACING)
 		                                                                          .getOpposite())) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;

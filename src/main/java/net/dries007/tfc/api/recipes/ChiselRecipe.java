@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -11,8 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
 	private final IIngredient<IBlockState> ingredient;
@@ -51,12 +47,12 @@ public class ChiselRecipe extends IForgeRegistryEntry.Impl<ChiselRecipe> {
 
 		private static final Mode[] VALUES = values();
 
-		@Nonnull
+		@NotNull
 		public static Mode valueOf(int i) {
 			return i >= 0 && i < VALUES.length ? VALUES[i] : SMOOTH;
 		}
 
-		@Nonnull
+		@NotNull
 		public Mode next() {
 			return VALUES[(ordinal() + 1) % VALUES.length];
 		}

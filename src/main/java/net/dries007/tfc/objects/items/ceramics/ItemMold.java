@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
@@ -40,15 +35,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 import java.util.List;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
-@ParametersAreNonnullByDefault
+
 public class ItemMold extends ItemPottery {
 	private static final EnumMap<Metal.ItemType, ItemMold> MAP = new EnumMap<>(Metal.ItemType.class);
 	private final Metal.ItemType type;
@@ -65,8 +61,8 @@ public class ItemMold extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote) {
 			IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
@@ -99,7 +95,7 @@ public class ItemMold extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getTranslationKey(ItemStack stack) {
 		IFluidHandler capFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 		if (capFluidHandler instanceof IMoldHandler) {
@@ -208,7 +204,7 @@ public class ItemMold extends ItemPottery {
 
 		@SideOnly(Side.CLIENT)
 		@Override
-		public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+		public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 			Metal metal = getMetal();
 			if (metal != null) {
 				String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
@@ -233,7 +229,7 @@ public class ItemMold extends ItemPottery {
 		}
 
 		@Override
-		public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 			return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY
 					|| capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 		}
@@ -241,12 +237,12 @@ public class ItemMold extends ItemPottery {
 		@Nullable
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 			return hasCapability(capability, facing) ? (T) this : null;
 		}
 
 		@Override
-		@Nonnull
+		@NotNull
 		public NBTTagCompound serializeNBT() {
 			NBTTagCompound nbt = new NBTTagCompound();
 

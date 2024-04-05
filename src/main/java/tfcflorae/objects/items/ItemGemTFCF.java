@@ -10,13 +10,14 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.GemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemGemTFCF extends ItemTFCF {
 	private static final EnumMap<GemTFCF, ItemGemTFCF> MAP = new EnumMap<>(GemTFCF.class);
 	public final GemTFCF gem;
@@ -69,13 +70,13 @@ public class ItemGemTFCF extends ItemTFCF {
 		}
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT;

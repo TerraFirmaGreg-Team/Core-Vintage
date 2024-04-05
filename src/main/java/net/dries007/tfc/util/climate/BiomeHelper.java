@@ -1,12 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.climate;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +45,7 @@ public final class BiomeHelper {
 	 * @param density     the average flora density
 	 * @return a list of BiomeType
 	 */
-	@Nonnull
+	@NotNull
 	public static List<BiomeType> getValidBiomeTypes(float temperature, float rainfall, float density) {
 		List<BiomeType> biomeTypes = new ArrayList<>();
 		for (BiomeType biomeType : BiomeType.values()) {

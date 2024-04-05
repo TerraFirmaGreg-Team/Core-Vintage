@@ -28,7 +28,8 @@ import se.gory_moon.horsepower.util.RenderUtils;
 import se.gory_moon.horsepower.util.Utils;
 import su.terrafirmagreg.api.model.property.PropertyUnlistedString;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,8 +127,8 @@ public abstract class BlockHPChoppingBase extends BlockHPBase {
 		List<ItemStack> stacks = Utils.getCraftingItems(this);
 		for (ItemStack stack : stacks) {
 			if (!Configs.general.useDynamicDisplay && !MODID_TFC.equals(stack.getItem()
-					.getRegistryName()
-					.getNamespace()))
+			                                                                 .getRegistryName()
+			                                                                 .getNamespace()))
 				continue;
 			Block block = getBlockFromItem(stack.getItem());
 			int blockMeta = stack.getItemDamage();
@@ -174,7 +175,7 @@ public abstract class BlockHPChoppingBase extends BlockHPBase {
 		return super.getExtendedState(state, world, pos);
 	}
 
-	private void writeDataOntoItemstack(@Nonnull ItemStack item, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, boolean inventorySave) {
+	private void writeDataOntoItemstack(@NotNull ItemStack item, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, boolean inventorySave) {
 		// get block data from the block
 		TileEntity te = world.getTileEntity(pos);
 		if (te != null && (te instanceof TileEntityChopper || te instanceof TileEntityManualChopper)) {

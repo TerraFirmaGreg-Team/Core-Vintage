@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.ConfigTFC;
@@ -25,10 +20,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 	public static final float PASSIVE_HEAL_AMOUNT = 20 * 0.0002f; // On the display: 1 HP / 5 seconds
 	public static final float EXHAUSTION_MULTIPLIER = 0.4f; // Multiplier for vanilla sources of exhaustion (we use passive exhaustion to keep hunger decaying even when not sprinting everywhere. That said, vanilla exhaustion should be reduced to compensate
@@ -71,7 +65,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 			addStats(foodCap);
 		} else {
 			TerraFirmaCraft.getLog()
-					.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
+			               .info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
 		}
 	}
 
@@ -176,7 +170,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 		// Since this is only called server side, and vanilla has a custom packet for this stuff, we need our own
 		if (player instanceof EntityPlayerMP) {
 			TerraFirmaCraft.getNetwork()
-					.sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
+			               .sendTo(new PacketFoodStatsUpdate(nutritionStats.getNutrients(), thirst), (EntityPlayerMP) player);
 		}
 	}
 
@@ -266,7 +260,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NutritionStats getNutrition() {
 		return nutritionStats;

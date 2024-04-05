@@ -1,15 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.skills;
 
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A wrapper interface for a single skill. The individual skill class should have methods to add skill
@@ -26,7 +21,7 @@ public abstract class Skill implements INBTSerializable<NBTTagCompound> {
 	/**
 	 * @return the current tier of the skill
 	 */
-	@Nonnull
+	@NotNull
 	public abstract SkillTier getTier();
 
 	/**

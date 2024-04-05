@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.util;
 
 import net.minecraft.util.EnumFacing;
@@ -11,7 +6,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Blocks(not TEs) must implement this interface in order to work with bellows
@@ -26,10 +21,10 @@ public interface IBellowsConsumerBlock {
 	 * @param facing direction the bellows output to
 	 * @return self-explanatory
 	 */
-	boolean canIntakeFrom(@Nonnull Vec3i offset, @Nonnull EnumFacing facing);
+	boolean canIntakeFrom(@NotNull Vec3i offset, @NotNull EnumFacing facing);
 
 	/**
 	 * @param airAmount the amount of air that the bellows give. For reference, TFC bellows always give 200.
 	 */
-	void onAirIntake(@Nonnull World world, @Nonnull BlockPos pos, int airAmount);
+	void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount);
 }

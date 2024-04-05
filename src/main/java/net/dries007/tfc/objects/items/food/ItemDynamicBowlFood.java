@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.food;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -18,11 +13,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class ItemDynamicBowlFood extends ItemFoodTFC {
 	public ItemDynamicBowlFood(Food food) {
 		super(food);
@@ -34,7 +29,7 @@ public class ItemDynamicBowlFood extends ItemFoodTFC {
 		return new DynamicFoodHandler(nbt, food.getData());
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
 		IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
@@ -80,7 +75,7 @@ public class ItemDynamicBowlFood extends ItemFoodTFC {
 			return true;
 		}
 
-		@Nonnull
+		@NotNull
 		public ItemStack getBowlStack() {
 			return bowlStack.copy();
 		}

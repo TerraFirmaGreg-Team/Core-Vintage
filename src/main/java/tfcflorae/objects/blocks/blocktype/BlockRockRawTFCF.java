@@ -24,10 +24,9 @@ import net.minecraft.world.World;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockRockRawTFCF extends BlockRockVariantTFCF {
 	/* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
 	public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");

@@ -60,7 +60,8 @@ import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
 import tfcflorae.objects.items.ceramics.ItemStonewareMold;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
@@ -274,8 +275,8 @@ public class ClientRegisterEventsTFCF {
 				                                                                                            .toLowerCase());
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
-					@Nonnull
-					public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+					@NotNull
+					public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 						IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 						if (cap instanceof IMoldHandler) {
 							Metal metal = ((IMoldHandler) cap).getMetal();
@@ -302,8 +303,8 @@ public class ClientRegisterEventsTFCF {
 				                                                                                            .toLowerCase());
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
-					@Nonnull
-					public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+					@NotNull
+					public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 						IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 						if (cap instanceof IMoldHandler) {
 							Metal metal = ((IMoldHandler) cap).getMetal();
@@ -330,8 +331,8 @@ public class ClientRegisterEventsTFCF {
 				                                                                                            .toLowerCase());
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
-					@Nonnull
-					public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+					@NotNull
+					public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 						IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 						if (cap instanceof IMoldHandler) {
 							Metal metal = ((IMoldHandler) cap).getMetal();
@@ -408,8 +409,8 @@ public class ClientRegisterEventsTFCF {
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
-						@Nonnull
-						public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+						@NotNull
+						public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 							IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 							if (cap instanceof IMoldHandler) {
 								Metal metal = ((IMoldHandler) cap).getMetal();
@@ -434,8 +435,8 @@ public class ClientRegisterEventsTFCF {
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
-						@Nonnull
-						public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+						@NotNull
+						public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 							IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 							if (cap instanceof IMoldHandler) {
 								Metal metal = ((IMoldHandler) cap).getMetal();
@@ -460,8 +461,8 @@ public class ClientRegisterEventsTFCF {
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
-						@Nonnull
-						public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+						@NotNull
+						public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 							IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 							if (cap instanceof IMoldHandler) {
 								Metal metal = ((IMoldHandler) cap).getMetal();
@@ -490,8 +491,8 @@ public class ClientRegisterEventsTFCF {
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
-						@Nonnull
-						public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+						@NotNull
+						public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 							IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 							if (cap instanceof IMoldHandler) {
 								Metal metal = ((IMoldHandler) cap).getMetal();
@@ -520,8 +521,8 @@ public class ClientRegisterEventsTFCF {
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
-						@Nonnull
-						public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+						@NotNull
+						public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 							IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 							if (cap instanceof IMoldHandler) {
 								Metal metal = ((IMoldHandler) cap).getMetal();
@@ -550,8 +551,8 @@ public class ClientRegisterEventsTFCF {
 
 					ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 						@Override
-						@Nonnull
-						public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+						@NotNull
+						public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 							IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 							if (cap instanceof IMoldHandler) {
 								Metal metal = ((IMoldHandler) cap).getMetal();
@@ -578,8 +579,8 @@ public class ClientRegisterEventsTFCF {
 				                                                                   .toString() + "/mallet_head");
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
-					@Nonnull
-					public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+					@NotNull
+					public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 						IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 						if (cap instanceof IMoldHandler) {
 							Metal metal = ((IMoldHandler) cap).getMetal();
@@ -602,8 +603,8 @@ public class ClientRegisterEventsTFCF {
 				                                                                   .toString() + "/mallet_head");
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
-					@Nonnull
-					public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+					@NotNull
+					public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 						IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 						if (cap instanceof IMoldHandler) {
 							Metal metal = ((IMoldHandler) cap).getMetal();
@@ -626,8 +627,8 @@ public class ClientRegisterEventsTFCF {
 				                                                                   .toString() + "/mallet_head");
 				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 					@Override
-					@Nonnull
-					public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+					@NotNull
+					public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 						IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 						if (cap instanceof IMoldHandler) {
 							Metal metal = ((IMoldHandler) cap).getMetal();

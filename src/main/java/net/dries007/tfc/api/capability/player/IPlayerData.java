@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.player;
 
 
@@ -17,8 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Interface for the capability attached to a player
@@ -30,23 +26,23 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
 	@Nullable
 	<S extends Skill> S getSkill(SkillType<S> skillType);
 
-	@Nonnull
+	@NotNull
 	EntityPlayer getPlayer();
 
 	/*
 	 * Gets the tool that was used in the last {@link net.minecraftforge.event.world.BlockEvent.BreakEvent} event
 	 */
-	@Nonnull
+	@NotNull
 	ItemStack getHarvestingTool();
 
-	void setHarvestingTool(@Nonnull ItemStack stack);
+	void setHarvestingTool(@NotNull ItemStack stack);
 
 	/**
 	 * Gets the current chiseling mode.
 	 *
 	 * @return enum value of the chiseling mode
 	 */
-	@Nonnull
+	@NotNull
 	ChiselRecipe.Mode getChiselMode();
 
 	/**
@@ -54,7 +50,7 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
 	 *
 	 * @param chiselMode enum value for the new chiseling mode
 	 */
-	void setChiselMode(@Nonnull ChiselRecipe.Mode chiselMode);
+	void setChiselMode(@NotNull ChiselRecipe.Mode chiselMode);
 
 	/**
 	 * Makes the player intoxicated

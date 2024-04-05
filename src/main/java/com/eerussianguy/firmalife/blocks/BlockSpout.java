@@ -24,14 +24,14 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.NEEDS_SOURCE;
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WATERED;
 
-@ParametersAreNonnullByDefault
+
 public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreenhouseReceiverBlock {
 	private static final AxisAlignedBB SHAPE = new AxisAlignedBB(5.0D / 16, 7.0D / 16, 5.0D / 16, 11.0D / 16, 16.0D / 16, 11.0D / 16);
 	private final boolean range;
@@ -48,7 +48,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return SHAPE;
 	}
@@ -110,14 +110,14 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, WATERED, NEEDS_SOURCE);
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(WATERED, meta % 2 == 1).withProperty(NEEDS_SOURCE, meta > 1);
 	}

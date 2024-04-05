@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.heat;
 
 import net.minecraft.item.ItemStack;
@@ -11,7 +6,8 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -67,7 +63,7 @@ public interface IItemHeat extends INBTSerializable<NBTTagCompound> {
 	 * @param text  The list of tooltips
 	 */
 	@SideOnly(Side.CLIENT)
-	default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+	default void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 		String tooltip = Heat.getTooltip(getTemperature());
 		if (tooltip != null) {
 			text.add(tooltip);

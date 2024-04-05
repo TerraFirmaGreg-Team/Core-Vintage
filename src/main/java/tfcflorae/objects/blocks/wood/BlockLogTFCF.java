@@ -33,12 +33,12 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockLogTFCF extends BlockLog implements IItemSize {
 	public static final PropertyBool PLACED = PropertyBool.create("placed");
 	public static final PropertyBool SMALL = PropertyBool.create("small");

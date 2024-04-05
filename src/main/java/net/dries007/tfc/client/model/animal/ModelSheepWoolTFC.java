@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.model.animal;
 
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
@@ -13,10 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelSheepWoolTFC extends ModelQuadruped {
 	public ModelSheepWoolTFC() {
 		super(12, 0.0F);

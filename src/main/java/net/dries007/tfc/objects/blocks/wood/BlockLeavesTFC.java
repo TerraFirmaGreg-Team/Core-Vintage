@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import com.google.common.collect.ImmutableList;
@@ -32,14 +27,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 import static net.dries007.tfc.Constants.RNG;
 
-@ParametersAreNonnullByDefault
+
 public class BlockLeavesTFC extends BlockLeaves {
 	private static final Map<Tree, BlockLeavesTFC> MAP = new HashMap<>();
 	public final Tree wood;
@@ -63,7 +59,7 @@ public class BlockLeavesTFC extends BlockLeaves {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(DECAYABLE, (meta & 0b01) == 0b01);
 	}
@@ -101,7 +97,7 @@ public class BlockLeavesTFC extends BlockLeaves {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, DECAYABLE);
 	}
@@ -112,7 +108,7 @@ public class BlockLeavesTFC extends BlockLeaves {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlockSaplingTFC.get(wood)) : Items.AIR;
 	}
@@ -130,7 +126,7 @@ public class BlockLeavesTFC extends BlockLeaves {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockRenderLayer getRenderLayer() {
 		/*
 		 * This is a way to make sure the leave settings are updated.
@@ -143,7 +139,7 @@ public class BlockLeavesTFC extends BlockLeaves {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockPlanks.EnumType getWoodType(int meta) {
 		// Unused so return whatever
 		return BlockPlanks.EnumType.OAK;
@@ -184,7 +180,7 @@ public class BlockLeavesTFC extends BlockLeaves {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return ImmutableList.of(new ItemStack(this));
 	}

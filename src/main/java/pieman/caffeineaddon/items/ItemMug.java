@@ -10,7 +10,7 @@ import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
 import su.terrafirmagreg.api.model.ICustomModel;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemMug extends ItemJug implements ICustomModel {
 
@@ -25,8 +25,8 @@ public class ItemMug extends ItemJug implements ICustomModel {
 
 	//TODO: this is hardcoded as Mug should fix
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (bucketCap != null) {
 			FluidStack fluidStack = bucketCap.drain(100, false);

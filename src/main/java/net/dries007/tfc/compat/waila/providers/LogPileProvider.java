@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
@@ -15,15 +10,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.List;
 
 public class LogPileProvider implements IWailaBlock {
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		TELogPile logPile = Helpers.getTE(world, pos, TELogPile.class);
 		if (logPile != null) {
 			IItemHandler inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
@@ -44,7 +40,7 @@ public class LogPileProvider implements IWailaBlock {
 		return ItemStack.EMPTY;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(TELogPile.class);

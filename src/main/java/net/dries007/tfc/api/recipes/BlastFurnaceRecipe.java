@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes;
 
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -16,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRecipe> {
@@ -44,19 +39,19 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
 	@Nullable
 	public static BlastFurnaceRecipe get(ItemStack inputItem) {
 		return TFCRegistries.BLAST_FURNACE.getValuesCollection()
-				.stream()
-				.filter(x -> x.isValidInput(inputItem))
-				.findFirst()
-				.orElse(null);
+		                                  .stream()
+		                                  .filter(x -> x.isValidInput(inputItem))
+		                                  .findFirst()
+		                                  .orElse(null);
 	}
 
 	@Nullable
 	public static BlastFurnaceRecipe get(Metal inputMetal) {
 		return TFCRegistries.BLAST_FURNACE.getValuesCollection()
-				.stream()
-				.filter(x -> x.input == inputMetal)
-				.findFirst()
-				.orElse(null);
+		                                  .stream()
+		                                  .filter(x -> x.input == inputMetal)
+		                                  .findFirst()
+		                                  .orElse(null);
 	}
 
 	@Nullable

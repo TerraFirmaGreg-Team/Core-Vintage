@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -12,22 +7,22 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 public abstract class RenderAnimalTFC<T extends EntityLiving> extends RenderLiving<T> {
 	private final ResourceLocation youngTexture;
 	private final ResourceLocation oldTexture;
 
-	protected RenderAnimalTFC(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn, @Nonnull ResourceLocation youngTextures, @Nonnull ResourceLocation oldTextures) {
+	protected RenderAnimalTFC(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn, @NotNull ResourceLocation youngTextures, @NotNull ResourceLocation oldTextures) {
 		super(rendermanagerIn, modelbaseIn, shadowsizeIn);
 		this.youngTexture = youngTextures;
 		this.oldTexture = oldTextures;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
 		if (entity instanceof IAnimal && ((IAnimal) entity).getAge() == IAnimal.Age.OLD) {

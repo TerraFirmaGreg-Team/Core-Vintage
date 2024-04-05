@@ -33,15 +33,16 @@ import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockSurfaceRock extends BlockBush implements IRockObject {
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.9, 0.6, 0.9);
 	private static final Map<Rock, BlockSurfaceRock> MAP = new HashMap<>();
@@ -75,7 +76,7 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
 		return random.nextInt(3) + 1;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemRock.get(rock);
@@ -137,7 +138,7 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
@@ -150,7 +151,7 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return AABB.offset(state.getOffset(source, pos));
@@ -207,13 +208,13 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Rock getRock(ItemStack stack) {
 		return rock;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public RockCategory getRockCategory(ItemStack stack) {
 		return rock.getRockCategory();
 	}
@@ -229,8 +230,8 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
 		return this.canSustainBush(soil);
 	}
 
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
 			TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);
@@ -238,8 +239,8 @@ public class BlockSurfaceRock extends BlockBush implements IRockObject {
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
-	@Nonnull
-	public ActionResult<ItemStack> onRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
 			TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);

@@ -15,10 +15,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class WorldGenGourds implements IWorldGenerator {
 	public static final float RAINFALL_MELON = 160;
 	public static final float RAINFALL_PUMPKIN = 140;

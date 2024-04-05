@@ -21,11 +21,11 @@ import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockRockVariantConnectedTFCF extends BlockRockVariantFallableTFCF {
 	// Used for connected textures only.
 	public static final PropertyBool NORTH = PropertyBool.create("north");

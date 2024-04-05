@@ -21,12 +21,13 @@ import net.minecraftforge.items.ItemStackHandler;
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.objects.items.glassworking.ItemGlassMolder;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ContainerGlassworking extends Container implements IButtonHandler {
 	private final SimpleCraftMatrix matrix;
@@ -57,7 +58,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
 		requiresReset = true;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		Slot slot = this.inventorySlots.get(index);
 		if (slot != null && slot.getHasStack()) {
@@ -93,7 +94,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
 		if (slotID == this.itemIndex && (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {
 			return ItemStack.EMPTY;

@@ -21,13 +21,14 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static tfcflorae.objects.blocks.BlockUrn.SEALED;
 
-@ParametersAreNonnullByDefault
+
 public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
 	private boolean sealed;
 	private long sealedTick, sealedCalendarTick;
@@ -61,7 +62,7 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public String getSealedDate() {
 		return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
 	}
@@ -113,7 +114,7 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setLong("sealedTick", sealedTick);
 		nbt.setLong("sealedCalendarTick", sealedCalendarTick);
@@ -176,7 +177,7 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
 		}
 
 		@Override
-		@Nonnull
+		@NotNull
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
 			ItemStack stack = super.extractItem(slot, amount, simulate);
 			CapabilityFood.removeTrait(stack, FoodTrait.PRESERVED);

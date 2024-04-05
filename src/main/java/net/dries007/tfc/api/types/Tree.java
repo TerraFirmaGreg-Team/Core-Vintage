@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.api.util.ITreeGenerator;
@@ -23,8 +18,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 
@@ -83,7 +80,7 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
 	 * @param burnTemp         the temperature at which this will burn in a fire pit or similar
 	 * @param burnTicks        the number of ticks that this will burn in a fire pit or similar
 	 */
-	public Tree(@Nonnull ResourceLocation name, @Nonnull ITreeGenerator generator, float minTemp, float maxTemp, float minRain, float maxRain, float minDensity, float maxDensity, float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance, boolean isConifer, @Nullable ITreeGenerator bushGenerator, boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
+	public Tree(@NotNull ResourceLocation name, @NotNull ITreeGenerator generator, float minTemp, float maxTemp, float minRain, float maxRain, float minDensity, float maxDensity, float dominance, int maxGrowthRadius, int maxHeight, int maxDecayDistance, boolean isConifer, @Nullable ITreeGenerator bushGenerator, boolean canMakeTannin, float minGrowthTime, float burnTemp, int burnTicks) {
 		this.minTemp = minTemp;
 		this.maxTemp = maxTemp;
 		this.minRain = minRain;
@@ -211,7 +208,7 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
 		private float burnTemp;
 		private int burnTicks;
 
-		public Builder(@Nonnull ResourceLocation name, float minRain, float maxRain, float minTemp, float maxTemp, @Nonnull ITreeGenerator gen) {
+		public Builder(@NotNull ResourceLocation name, float minRain, float maxRain, float minTemp, float maxTemp, @NotNull ITreeGenerator gen) {
 			this.minTemp = minTemp; // required values
 			this.maxTemp = maxTemp;
 			this.minRain = minRain;

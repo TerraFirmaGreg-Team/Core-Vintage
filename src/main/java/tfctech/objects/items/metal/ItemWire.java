@@ -10,8 +10,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class ItemWire extends ItemTechMetal {
@@ -31,16 +33,16 @@ public class ItemWire extends ItemTechMetal {
 	}
 
 	@Override
-	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 			items.add(new ItemStack(this));
 			items.add(new ItemStack(this, 1, 4));
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		if (stack.getMetadata() > 0) {
 			//noinspection ConstantConditions
 			String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()

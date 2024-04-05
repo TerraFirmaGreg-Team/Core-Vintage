@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.metal;
 
 import net.dries007.tfc.api.types.Metal;
@@ -30,14 +25,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class BlockMetalSheet extends Block {
 	public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[]{
 			PropertyBool.create("down"),
@@ -85,7 +81,7 @@ public class BlockMetalSheet extends Block {
 		return new ItemStack(MAP.get(metal), amount);
 	}
 
-	@Nonnull
+	@NotNull
 	public Metal getMetal() {
 		return metal;
 	}
@@ -103,7 +99,7 @@ public class BlockMetalSheet extends Block {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
 		if (tile != null) {
@@ -133,7 +129,7 @@ public class BlockMetalSheet extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		TEMetalSheet tile = Helpers.getTE(source, pos, TEMetalSheet.class);
@@ -156,7 +152,7 @@ public class BlockMetalSheet extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
@@ -185,7 +181,7 @@ public class BlockMetalSheet extends Block {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return getBoundingBox(state, worldIn, pos);
@@ -242,7 +238,7 @@ public class BlockMetalSheet extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACE_PROPERTIES);
 	}
@@ -269,7 +265,7 @@ public class BlockMetalSheet extends Block {
 		return new TEMetalSheet();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(ItemMetalSheet.get(this.metal, Metal.ItemType.SHEET));

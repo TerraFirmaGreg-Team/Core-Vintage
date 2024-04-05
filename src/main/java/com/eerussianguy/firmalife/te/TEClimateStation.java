@@ -4,10 +4,9 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TEBase;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class TEClimateStation extends TEBase {
 	public int forward;
 	public int arcs;

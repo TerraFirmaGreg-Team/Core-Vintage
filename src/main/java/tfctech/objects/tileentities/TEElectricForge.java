@@ -34,15 +34,16 @@ import tfctech.client.audio.IMachineSoundEffect;
 import tfctech.objects.blocks.devices.BlockElectricForge;
 import tfctech.objects.storage.MachineEnergyContainer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 
-import static tfctech.objects.blocks.devices.BlockElectricForge.LIT;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TEElectricForge extends TEInventory implements ITickable, ITileFields, IMachineSoundEffect, IEnergySink {
 	public static final int SLOT_INPUT_MIN = 0;
@@ -142,7 +143,7 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setFloat("targetTemperature", targetTemperature);
 		nbt.setTag("energyContainer", energyContainer.serializeNBT());
@@ -152,8 +153,8 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
 		if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos)
-				.getValue(BlockElectricForge.FACING)
-				.getOpposite()) {
+		                                                                                             .getValue(BlockElectricForge.FACING)
+		                                                                                             .getOpposite()) {
 			if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
 				return true;
 			} else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
@@ -167,8 +168,8 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	@SuppressWarnings("unchecked")
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 		if (facing == null || facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos)
-				.getValue(BlockElectricForge.FACING)
-				.getOpposite()) {
+		                                                                                             .getValue(BlockElectricForge.FACING)
+		                                                                                             .getOpposite()) {
 			if (TechConfig.DEVICES.acceptFE && capability == CapabilityEnergy.ENERGY) {
 				return (T) this.energyContainer;
 			} else if (TechConfig.DEVICES.acceptGTCEEU && Loader.isModLoaded("gregtech") && capability == GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER) {
@@ -184,7 +185,7 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		if (slot <= SLOT_INPUT_MAX) {
 			return stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
 		} else {
@@ -279,8 +280,8 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
 	@Override
 	public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
 		return TechConfig.DEVICES.acceptIc2EU && (facing == EnumFacing.UP || facing == EnumFacing.DOWN || facing == world.getBlockState(pos)
-				.getValue(BlockElectricForge.FACING)
-				.getOpposite());
+		                                                                                                                 .getValue(BlockElectricForge.FACING)
+		                                                                                                                 .getOpposite());
 	}
 
 	private void handleInputMelting(ItemStack stack, int index) {

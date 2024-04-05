@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.interfaces;
 
 import mcp.mobius.waila.api.*;
@@ -14,7 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -47,13 +43,13 @@ public class HwylaBlockInterface implements IWailaDataProvider, IWailaPlugin {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		return internal.getIcon(accessor.getWorld(), accessor.getPosition(), accessor.getNBTData());
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<String> getWailaHead(ItemStack itemStack, List<String> currentTooltip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		String title = internal.getTitle(accessor.getWorld(), accessor.getPosition(), accessor.getNBTData());
@@ -64,7 +60,7 @@ public class HwylaBlockInterface implements IWailaDataProvider, IWailaPlugin {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currentTooltip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		List<String> body = internal.getTooltip(accessor.getWorld(), accessor.getPosition(), accessor.getNBTData());
@@ -74,7 +70,7 @@ public class HwylaBlockInterface implements IWailaDataProvider, IWailaPlugin {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
 		return te.writeToNBT(tag);

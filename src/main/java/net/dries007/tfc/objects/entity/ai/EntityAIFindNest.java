@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.ai;
 
 import net.dries007.tfc.util.Helpers;
@@ -13,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.objects.tiles.TENestBox;
+import su.terrafirmagreg.modules.device.objects.tiles.TENestBox;
 
 import java.util.HashMap;
 import java.util.List;

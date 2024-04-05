@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.quern;
 
 import net.dries007.tfc.Constants;
@@ -11,7 +6,7 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class QuernRecipeRandomGem extends QuernRecipe {
 	private final Gem gem;
@@ -21,7 +16,7 @@ public class QuernRecipeRandomGem extends QuernRecipe {
 		this.gem = gem;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getOutputItem(ItemStack stack) {
 		Gem.Grade grade = Gem.Grade.randomGrade(Constants.RNG);

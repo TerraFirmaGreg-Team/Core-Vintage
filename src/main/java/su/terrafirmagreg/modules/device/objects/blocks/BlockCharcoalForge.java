@@ -40,8 +40,10 @@ import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 import java.util.function.BiPredicate;
 
@@ -114,7 +116,7 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
@@ -133,14 +135,14 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return AABB;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return face.getAxis() == EnumFacing.Axis.Y ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
@@ -215,7 +217,7 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Items.COAL;
 	}
@@ -252,7 +254,7 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, LIT);
 	}
@@ -274,7 +276,7 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(Items.COAL, 1, 1);
 	}

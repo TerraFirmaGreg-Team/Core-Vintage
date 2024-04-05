@@ -2,10 +2,9 @@ package pieman.caffeineaddon.potion;
 
 import net.minecraft.entity.EntityLivingBase;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 public class PotionCaffeine extends PotionCA {
 	public PotionCaffeine() {
 		super(true, 0x0028120b);

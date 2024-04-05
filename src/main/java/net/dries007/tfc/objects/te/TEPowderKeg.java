@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.Constants;
@@ -26,17 +21,16 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.objects.blocks.BlockPowderKeg.SEALED;
 
 /**
  * @see BlockPowderKeg
  */
-@ParametersAreNonnullByDefault
+
 public class TEPowderKeg extends TETickableInventory implements IItemHandlerSidedCallback {
 	private boolean sealed;
 	private int fuse = -1;
@@ -97,7 +91,7 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("sealed", sealed);
 		return super.writeToNBT(nbt);

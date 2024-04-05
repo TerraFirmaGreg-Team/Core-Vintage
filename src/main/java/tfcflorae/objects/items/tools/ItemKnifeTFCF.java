@@ -17,11 +17,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemKnifeTFCF extends ItemTool implements IItemSize {
 	public final ToolMaterial material;
 
@@ -47,13 +47,13 @@ public class ItemKnifeTFCF extends ItemTool implements IItemSize {
 		return true;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL; // Stored in large vessels
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;

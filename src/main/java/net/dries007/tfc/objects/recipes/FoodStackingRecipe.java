@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -16,11 +11,11 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class FoodStackingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting inv, World worldIn) {
@@ -48,7 +43,7 @@ public class FoodStackingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implem
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack resultStack = ItemStack.EMPTY;
 		int outputAmount = 0;
@@ -90,7 +85,7 @@ public class FoodStackingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implem
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {
 		return ItemStack.EMPTY;
 	}

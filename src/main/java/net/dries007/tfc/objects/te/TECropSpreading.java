@@ -1,18 +1,12 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSpreading;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class TECropSpreading extends TECropBase {
 	private int maxGrowthStage; // The max value this crop can grow to
 	private int baseAge; // The current age, including all spreading attempts
@@ -31,7 +25,7 @@ public class TECropSpreading extends TECropBase {
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("maxGrowthStage", maxGrowthStage);

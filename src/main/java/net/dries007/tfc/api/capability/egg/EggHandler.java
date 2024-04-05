@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.egg;
 
 import net.minecraft.entity.Entity;
@@ -13,8 +8,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class EggHandler implements IEgg, ICapabilitySerializable<NBTTagCompound> {
 	private boolean fertilized;
@@ -51,21 +47,21 @@ public class EggHandler implements IEgg, ICapabilitySerializable<NBTTagCompound>
 		return fertilized;
 	}
 
-	public void setFertilized(@Nonnull Entity entity, long hatchDay) {
+	public void setFertilized(@NotNull Entity entity, long hatchDay) {
 		this.fertilized = true;
 		this.entitytag = entity.serializeNBT();
 		this.hatchDay = hatchDay;
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityEgg.CAPABILITY;
 	}
 
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityEgg.CAPABILITY ? (T) this : null;
 	}
 

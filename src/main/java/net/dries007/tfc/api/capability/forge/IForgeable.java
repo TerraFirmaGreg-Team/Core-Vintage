@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.forge;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -12,8 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Capability for forgeable items (not to be confused with forgeable items that needs heat)
@@ -55,7 +51,7 @@ public interface IForgeable extends INBTSerializable<NBTTagCompound> {
 	 * Gets the last three steps, wrapped in a {@link ForgeSteps} instance.
 	 * The return value is nonnull, however the individual steps might be
 	 */
-	@Nonnull
+	@NotNull
 	ForgeSteps getSteps();
 
 	/**

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -16,8 +11,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.function.Function;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -38,7 +35,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
 	private final boolean isFluxStone;
 	private final boolean isNaturallyGenerating;
 
-	public Rock(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone, boolean isNaturallyGenerating) {
+	public Rock(@NotNull ResourceLocation name, @NotNull RockCategory rockCategory, boolean isFluxStone, boolean isNaturallyGenerating) {
 		//noinspection ConstantConditions
 		if (rockCategory == null)
 			throw new IllegalArgumentException("Rock category is not allowed to be null (on rock " + name + ")");
@@ -50,11 +47,11 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
 		this.isNaturallyGenerating = isNaturallyGenerating;
 	}
 
-	public Rock(@Nonnull ResourceLocation name, @Nonnull RockCategory rockCategory, boolean isFluxStone) {
+	public Rock(@NotNull ResourceLocation name, @NotNull RockCategory rockCategory, boolean isFluxStone) {
 		this(name, rockCategory, isFluxStone, true);
 	}
 
-	public Rock(@Nonnull ResourceLocation name, @Nonnull ResourceLocation categoryName, boolean isFluxStone) {
+	public Rock(@NotNull ResourceLocation name, @NotNull ResourceLocation categoryName, boolean isFluxStone) {
 		//noinspection ConstantConditions
 		this(name, TFCRegistries.ROCK_CATEGORIES.getValue(categoryName), isFluxStone, true);
 	}
@@ -97,7 +94,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
 		private final Function<RockCategory, Item> supplier;
 		private final String[] pattern;
 
-		ToolType(@Nonnull Function<RockCategory, Item> supplier, String... pattern) {
+		ToolType(@NotNull Function<RockCategory, Item> supplier, String... pattern) {
 			this.supplier = supplier;
 			this.pattern = pattern;
 		}

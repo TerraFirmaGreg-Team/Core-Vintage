@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelLionTFC;
@@ -14,12 +9,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderLionTFC extends RenderLiving<EntityLionTFC> {
 	private static final ResourceLocation LIONS_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/lions.png");
 

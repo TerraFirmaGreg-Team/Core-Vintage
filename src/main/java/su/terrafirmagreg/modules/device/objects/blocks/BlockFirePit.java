@@ -46,16 +46,17 @@ import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 
 import static net.dries007.tfc.Constants.RNG;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, ITEBlock {
 	public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
 
@@ -78,7 +79,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 		           .withProperty(LIT, (meta & 1) > 0)
@@ -97,7 +98,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (state.getValue(ATTACHMENT) != FirePitAttachment.NONE) {
@@ -107,7 +108,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
@@ -209,13 +210,13 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Items.AIR;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
@@ -331,7 +332,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, LIT, ATTACHMENT);
 	}
@@ -406,7 +407,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 			return i < 0 || i >= VALUES.length ? NONE : VALUES[i];
 		}
 
-		@Nonnull
+		@NotNull
 		@Override
 		public String getName() {
 			return name().toLowerCase();

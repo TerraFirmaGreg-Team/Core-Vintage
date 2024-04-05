@@ -5,13 +5,13 @@ import net.dries007.tfc.objects.te.TECropBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class TEStemCrop extends TECropBase {
 	private EnumFacing fruitDirection = EnumFacing.Plane.HORIZONTAL.random(Constants.RNG);
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		tag.setInteger("fruitDirection", fruitDirection.getIndex());
 		return super.writeToNBT(tag);

@@ -1,10 +1,5 @@
 // Code mostly copied from net.dries007.tfc.util.agriculture.Crop
 
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package com.eerussianguy.firmalife.init;
 
 import com.eerussianguy.firmalife.registry.BlocksFL;
@@ -22,8 +17,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -92,7 +89,7 @@ public enum StemCrop implements ICrop {
 	// end crop life behavior copied from base tfc
 
 	//crop itself shouldn't drop anything
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getFoodDrop(int currentStage) {
 		return ItemStack.EMPTY;

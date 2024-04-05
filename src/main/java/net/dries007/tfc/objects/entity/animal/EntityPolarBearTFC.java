@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -37,7 +32,8 @@ import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -67,7 +63,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 	}
 
 	@Override
-	public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
+	public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
 		return new EntityPolarBearTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
 	}
 
@@ -130,7 +126,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 	}
 
 	@Override
-	public boolean attackEntityAsMob(@Nonnull Entity entityIn) {
+	public boolean attackEntityAsMob(@NotNull Entity entityIn) {
 		double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		if (this.isChild()) {
 			attackDamage /= 2;
@@ -220,8 +216,8 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                      .name()
+		                                                                                      .toLowerCase());
 	}
 
 	@Override
@@ -240,7 +236,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 		this.setScale((float) ageScale);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {
@@ -284,14 +280,14 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(IAnimal.Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -306,7 +302,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 	}
 
 	@Override
-	public boolean canMateWith(@Nonnull EntityAnimal otherAnimal) {
+	public boolean canMateWith(@NotNull EntityAnimal otherAnimal) {
 		return false; // This animal shouldn't have mating mechanics since it's not farmable
 	}
 }

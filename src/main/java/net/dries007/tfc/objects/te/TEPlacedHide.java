@@ -1,17 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
 
-@ParametersAreNonnullByDefault
 public class TEPlacedHide extends TEBase {
 	private short positions; // essentially a boolean[16]
 
@@ -42,7 +35,7 @@ public class TEPlacedHide extends TEBase {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setShort("positions", positions);
 		return super.writeToNBT(nbt);

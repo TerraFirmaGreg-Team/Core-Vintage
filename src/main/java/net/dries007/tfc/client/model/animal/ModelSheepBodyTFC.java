@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.model.animal;
 
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
@@ -14,10 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelSheepBodyTFC extends ModelQuadruped {
 	private final ModelRenderer horn1;
 	private final ModelRenderer horn2;

@@ -14,9 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 @SideOnly(Side.CLIENT)
 public class TESRString extends TileEntitySpecialRenderer<TEString> {
 	@Override

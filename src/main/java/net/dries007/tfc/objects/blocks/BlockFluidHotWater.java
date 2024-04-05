@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.Constants;
@@ -20,10 +15,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockFluidHotWater extends BlockFluidTFC {
 	public BlockFluidHotWater() {
 		super(FluidsTFC.HOT_WATER.get(), Material.WATER, false);

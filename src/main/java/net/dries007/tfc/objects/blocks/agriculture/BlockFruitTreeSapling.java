@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -31,16 +26,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrowingPlant {
 	private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
 
@@ -89,7 +85,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XZ;
 	}
@@ -107,7 +103,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return SAPLING_AABB;
 	}
@@ -134,7 +130,7 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public IFruitTree getTree() {
 		return tree;
 	}

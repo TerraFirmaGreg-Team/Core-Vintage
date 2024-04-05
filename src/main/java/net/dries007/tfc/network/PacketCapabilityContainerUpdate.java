@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.network;
 
 import gnu.trove.map.TIntObjectMap;
@@ -20,7 +15,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * This is a packet which is sent to the client to sync capability data
@@ -29,7 +23,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author Choonster
  * @author AlcatrazEscapee
  */
-@ParametersAreNonnullByDefault
+
 public class PacketCapabilityContainerUpdate implements IMessage {
 	private final TIntObjectMap<NBTTagCompound> capabilityData = new TIntObjectHashMap<>();
 	private int windowID;
@@ -86,7 +80,7 @@ public class PacketCapabilityContainerUpdate implements IMessage {
 		return !capabilityData.isEmpty();
 	}
 
-	@ParametersAreNonnullByDefault
+
 	public static class Handler implements IMessageHandler<PacketCapabilityContainerUpdate, IMessage> {
 		@Override
 		public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx) {

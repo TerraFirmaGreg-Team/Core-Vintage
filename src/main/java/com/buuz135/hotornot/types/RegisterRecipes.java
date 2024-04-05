@@ -23,11 +23,10 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
-@ParametersAreNonnullByDefault
+
 @EventBusSubscriber(modid = MODID_HOTORNOT)
 public final class RegisterRecipes {
 

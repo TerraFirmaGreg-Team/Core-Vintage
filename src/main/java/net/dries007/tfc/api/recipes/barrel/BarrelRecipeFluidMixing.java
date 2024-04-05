@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -12,12 +7,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class BarrelRecipeFluidMixing extends BarrelRecipe {
-	public BarrelRecipeFluidMixing(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IngredientFluidItem inputStack, @Nullable FluidStack outputFluid, int duration) {
+	public BarrelRecipeFluidMixing(@NotNull IIngredient<FluidStack> inputFluid, @NotNull IngredientFluidItem inputStack, @Nullable FluidStack outputFluid, int duration) {
 		super(inputFluid, inputStack, outputFluid, ItemStack.EMPTY, duration);
 	}
 
@@ -37,7 +34,7 @@ public class BarrelRecipeFluidMixing extends BarrelRecipe {
 		return super.getOutputFluid(inputFluid, inputStack);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
 		return Helpers.listOf(inputStack.getItem().getContainerItem(inputStack));

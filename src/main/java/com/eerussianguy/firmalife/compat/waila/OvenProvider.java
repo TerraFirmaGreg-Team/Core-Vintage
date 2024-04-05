@@ -14,7 +14,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,9 +24,9 @@ import static com.eerussianguy.firmalife.te.TEOven.SLOT_MAIN;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 public class OvenProvider implements IWailaBlock {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
 		IBlockState state = world.getBlockState(pos);
 		TileEntity te = world.getTileEntity(pos);
@@ -59,7 +60,7 @@ public class OvenProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(TEOven.class);

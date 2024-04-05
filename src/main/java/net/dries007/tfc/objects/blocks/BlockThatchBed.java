@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -26,12 +21,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockThatchBed extends BlockBed {
 	public BlockThatchBed() {
 		setSoundType(SoundType.PLANT);

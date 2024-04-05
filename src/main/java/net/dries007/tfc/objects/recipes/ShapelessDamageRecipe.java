@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -20,7 +15,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Much of this is borrowed from https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/d064915183a4a3b803d779576f982279268b1ca3/src/main/java/choonster/testmod3/crafting/recipe/ShapelessCuttingRecipe.java
@@ -29,7 +24,7 @@ import javax.annotation.Nonnull;
 public class ShapelessDamageRecipe extends ShapelessOreRecipe {
 	private final int damage;
 
-	public ShapelessDamageRecipe(ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result, int damage) {
+	public ShapelessDamageRecipe(ResourceLocation group, NonNullList<Ingredient> input, @NotNull ItemStack result, int damage) {
 		super(group, input, result);
 		this.isSimple = false;
 		this.damage = damage;
@@ -51,13 +46,13 @@ public class ShapelessDamageRecipe extends ShapelessOreRecipe {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
 		return getRemainingItemsDamaged(inventoryCrafting);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}

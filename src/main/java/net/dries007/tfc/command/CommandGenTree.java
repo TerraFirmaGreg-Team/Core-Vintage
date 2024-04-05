@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -20,13 +15,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class CommandGenTree extends CommandBase {
 	private static final Random random = new Random();
 

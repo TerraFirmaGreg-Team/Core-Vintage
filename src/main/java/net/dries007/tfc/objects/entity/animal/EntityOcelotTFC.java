@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -44,16 +39,17 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 // Changes in config allow placing this animal in livestock and still respawn
 public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock {
 	//Values that has a visual effect on client
@@ -130,7 +126,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimal male) {
+	public void onFertilized(@NotNull IAnimal male) {
 		this.pregnantTime = CalendarTFC.PLAYER_TIME.getTotalDays();
 	}
 
@@ -165,8 +161,8 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 	public TextComponentTranslation getAnimalName() {
 		String entityString = isTamed() ? "cattfc" : EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                      .name()
+		                                                                                      .toLowerCase());
 	}
 
 	@Override
@@ -297,7 +293,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -311,7 +307,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -330,7 +326,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 
 		if (!itemstack.isEmpty()) {
@@ -385,7 +381,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 						//Show tooltips
 						if (this.isFertilized() && this.getType() == Type.MAMMAL) {
 							TerraFirmaCraft.getNetwork()
-									.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+							               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
 						}
 					}
 				}
@@ -396,7 +392,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 
 	@Nullable
 	@Override
-	public EntityOcelotTFC createChild(@Nonnull EntityAgeable other) {
+	public EntityOcelotTFC createChild(@NotNull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
 		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.fertilized = true;
@@ -431,7 +427,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal, ILivestock
 				&& BlocksTFC.isGround(this.world.getBlockState(this.getPosition().down()));
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {

@@ -1,25 +1,21 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.ingredient;
 
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class IngredientFluidStack implements IIngredient<FluidStack> {
 	private final FluidStack inputFluid;
 
-	IngredientFluidStack(@Nonnull Fluid fluid, int amount) {
+	IngredientFluidStack(@NotNull Fluid fluid, int amount) {
 		this(new FluidStack(fluid, amount));
 	}
 
-	IngredientFluidStack(@Nonnull FluidStack inputFluid) {
+	IngredientFluidStack(@NotNull FluidStack inputFluid) {
 		this.inputFluid = inputFluid;
 	}
 

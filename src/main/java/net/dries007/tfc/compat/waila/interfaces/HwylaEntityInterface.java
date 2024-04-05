@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.interfaces;
 
 import mcp.mobius.waila.api.*;
@@ -12,7 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -39,21 +35,21 @@ public class HwylaEntityInterface implements IWailaEntityProvider, IWailaPlugin 
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<String> getWailaHead(Entity entity, List<String> currentTooltip, IWailaEntityAccessor accessor, IWailaConfigHandler config) {
 		currentTooltip.add(TextFormatting.WHITE.toString() + internal.getTitle(accessor.getEntity(), accessor.getNBTData()));
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<String> getWailaBody(Entity entity, List<String> currentTooltip, IWailaEntityAccessor accessor, IWailaConfigHandler config) {
 		currentTooltip.addAll(internal.getTooltip(entity, accessor.getNBTData()));
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP player, Entity ent, NBTTagCompound tag, World world) {
 		return ent.writeToNBT(tag);

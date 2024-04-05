@@ -23,12 +23,11 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.jetbrains.annotations.Nullable;
 import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import tfcflorae.compat.tfcelementia.ceramics.ItemStonewareMoldTFCE;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
@@ -37,14 +36,14 @@ import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_
  * Since TFC has Metal.ItemType we can't reuse {@link net.dries007.tfc.objects.recipes.UnmoldRecipe} directly
  */
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class UnmoldRecipeStoneware extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	private final NonNullList<Ingredient> input;
 	private final ResourceLocation group;
 	private final ItemMetalTFCE.ItemType type;
 	private final float chance; // Return chance
 
-	private UnmoldRecipeStoneware(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemMetalTFCE.ItemType type, float chance) {
+	private UnmoldRecipeStoneware(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @NotNull ItemMetalTFCE.ItemType type, float chance) {
 		this.group = group;
 		this.input = input;
 		this.type = type;
@@ -52,7 +51,7 @@ public class UnmoldRecipeStoneware extends IForgeRegistryEntry.Impl<IRecipe> imp
 	}
 
 	@Override
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		boolean foundMold = false;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
 			ItemStack stack = inv.getStackInSlot(slot);
@@ -85,7 +84,7 @@ public class UnmoldRecipeStoneware extends IForgeRegistryEntry.Impl<IRecipe> imp
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack moldStack = null;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -121,13 +120,13 @@ public class UnmoldRecipeStoneware extends IForgeRegistryEntry.Impl<IRecipe> imp
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inv) {
 		// Return empty molds
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -153,7 +152,7 @@ public class UnmoldRecipeStoneware extends IForgeRegistryEntry.Impl<IRecipe> imp
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<Ingredient> getIngredients() {
 		return input;
 	}
@@ -164,7 +163,7 @@ public class UnmoldRecipeStoneware extends IForgeRegistryEntry.Impl<IRecipe> imp
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}

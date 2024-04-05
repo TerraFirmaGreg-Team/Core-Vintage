@@ -1,15 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface IFoodStatsTFC {
 	float MAX_PLAYER_THIRST = 100f;
@@ -46,7 +41,7 @@ public interface IFoodStatsTFC {
 
 	void setThirst(float value);
 
-	@Nonnull
+	@NotNull
 	NutritionStats getNutrition();
 
 	/**

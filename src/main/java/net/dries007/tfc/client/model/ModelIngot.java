@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.model;
 
 import net.minecraft.client.model.ModelBox;
@@ -13,7 +8,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ModelIngot extends ModelBox {
 	private final TexturedQuad[] quadList;
@@ -66,7 +61,7 @@ public class ModelIngot extends ModelBox {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void render(@Nonnull BufferBuilder renderer, float scale) {
+	public void render(@NotNull BufferBuilder renderer, float scale) {
 		for (TexturedQuad quad : quadList) {
 			quad.draw(renderer, scale);
 		}

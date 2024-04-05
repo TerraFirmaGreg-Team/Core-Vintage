@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.Plant;
@@ -21,13 +16,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrowable {
 
 	private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
@@ -73,7 +68,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 		worldIn.getBlockState(pos).neighborChanged(worldIn, pos.up(), this, pos);
 	}
 
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		IBlockState actualState = super.getActualState(state, worldIn, pos);
 		if (worldIn.getBlockState(pos.down())
@@ -114,7 +109,7 @@ public class BlockHangingPlantTFC extends BlockCreepingPlantTFC implements IGrow
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, new IProperty[]{DOWN, UP, NORTH, EAST, WEST, SOUTH, this.growthStageProperty, DAYPERIOD, AGE, BOTTOM});
 	}

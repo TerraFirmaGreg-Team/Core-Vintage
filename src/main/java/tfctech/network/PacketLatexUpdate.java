@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import tfctech.objects.tileentities.TELatexExtractor;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Update latex status on client, for render purposes
@@ -27,7 +27,7 @@ public class PacketLatexUpdate implements IMessage {
 	@Deprecated
 	public PacketLatexUpdate() {}
 
-	public PacketLatexUpdate(@Nonnull TELatexExtractor tile) {
+	public PacketLatexUpdate(@NotNull TELatexExtractor tile) {
 		this.pos = tile.getPos();
 		cutState = tile.cutState();
 		fluid = tile.getFluidAmount();

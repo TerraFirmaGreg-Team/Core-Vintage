@@ -44,9 +44,10 @@ import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.container.ContainerFirePit;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -54,7 +55,7 @@ import java.util.Queue;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit.ATTACHMENT;
 
-@ParametersAreNonnullByDefault
+
 public class TEFirePit extends TETickableInventory implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IContainerProvider<ContainerFirePit, GuiFirePit> {
 	// Slot 0 - 3 = fuel slots with 3 being input, 4 = normal input slot, 5 and 6 are output slots 1 + 2
 	public static final int SLOT_FUEL_CONSUME = 0;
@@ -392,7 +393,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setFloat("temperature", temperature);
 		nbt.setInteger("burnTicks", burnTicks);
@@ -507,7 +508,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
 		temperature = 0;
 	}
 
-	@Nonnull
+	@NotNull
 	public CookingPotStage getCookingPotStage() {
 		return cookingPotStage;
 	}

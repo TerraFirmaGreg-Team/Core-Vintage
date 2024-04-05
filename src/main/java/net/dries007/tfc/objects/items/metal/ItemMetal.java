@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -28,14 +23,15 @@ import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class ItemMetal extends ItemTFC implements IMetalItem {
 	private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetal>> TABLE = new HashMap<>();
 	protected final Metal metal;
@@ -123,9 +119,9 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
 		return metal.getMeltTemp();
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		switch (type) {
 			case NUGGET:
 			case DUST:
@@ -152,9 +148,9 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		switch (type) {
 			case DUST:
 			case NUGGET:
@@ -181,7 +177,7 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		switch (type) {
 			case ROD:
 			case DUST:
@@ -225,8 +221,8 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
 	}
 
 	@Override
-	@Nonnull
-	public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+	@NotNull
+	public IRarity getForgeRarity(@NotNull ItemStack stack) {
 		switch (metal.getTier()) {
 			case TIER_I:
 			case TIER_II:

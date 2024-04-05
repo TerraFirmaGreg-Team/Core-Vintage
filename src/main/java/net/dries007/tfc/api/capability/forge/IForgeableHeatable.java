@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.forge;
 
 import net.dries007.tfc.api.capability.heat.Heat;
@@ -13,7 +8,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -64,7 +60,7 @@ public interface IForgeableHeatable extends IForgeable, IItemHeat {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	default void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+	default void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 		float temperature = getTemperature();
 		String tooltip = Heat.getTooltip(temperature);
 		if (tooltip != null) {

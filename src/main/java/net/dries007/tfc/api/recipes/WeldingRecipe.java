@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -19,16 +14,17 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * Welding Recipe
  * This takes two items and produces a single item out
  * todo: in 1.13+ move this to a json recipe type
  */
-@ParametersAreNonnullByDefault
+
 public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> implements IJEISimpleRecipe {
 	private final Metal.Tier minTier;
 	private final IIngredient<ItemStack> input1;
@@ -58,12 +54,12 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
 		                            .orElse(null);
 	}
 
-	@Nonnull
+	@NotNull
 	public Metal.Tier getTier() {
 		return minTier;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getOutput(@Nullable EntityPlayer player) {
 		ItemStack stack = output.copy();
 		if (player != null) {

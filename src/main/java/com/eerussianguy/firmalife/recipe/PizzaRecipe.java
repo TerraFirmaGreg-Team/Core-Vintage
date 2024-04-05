@@ -16,18 +16,19 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PizzaRecipe extends SandwichBasedRecipe {
-	public PizzaRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
+	public PizzaRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
 		super(group, input, result, damage);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
+	public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
 		ItemStack output = super.getCraftingResult(inv);
 		IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
 		if (food instanceof ItemPizza.PizzaHandler) {

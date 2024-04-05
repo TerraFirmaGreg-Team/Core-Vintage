@@ -6,7 +6,8 @@ import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
 import net.minecraft.util.ResourceLocation;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class PlantsFL {
 	}
 
 	private static class PlantWrapper extends Plant {
-		public PlantWrapper(@Nonnull String name, int[] stages, float minTemp, float maxTemp, float minRain, float maxRain) {
+		public PlantWrapper(@NotNull String name, int[] stages, float minTemp, float maxTemp, float minRain, float maxRain) {
 			super(new ResourceLocation(Constants.MODID_TFC, name), PlantType.STANDARD, stages, false, false, minTemp, maxTemp, minTemp, maxTemp, minRain, maxRain, 9, 15, 1, 0, 0, 0.8F, null);
 		}
 	}

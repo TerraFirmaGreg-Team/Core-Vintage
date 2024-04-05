@@ -17,7 +17,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.modules.device.data.SoundDevice;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -108,7 +109,7 @@ public class TEBellows extends TEBase {
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setLong("lastPushed", lastPushed);

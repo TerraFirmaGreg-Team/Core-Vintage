@@ -6,7 +6,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
@@ -48,7 +48,7 @@ public class ArmorMaterialsTFCF implements IArmorMaterialTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ArmorMaterial getMaterial() {
 		return material;
 	}

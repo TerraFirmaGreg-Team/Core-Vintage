@@ -19,16 +19,17 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import tfctech.api.recipes.SmelteryRecipe;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static tfctech.objects.blocks.devices.BlockSmelteryCauldron.LIT;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 public class TESmelteryCauldron extends TEInventory implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields {
 	public static final int FLUID_CAPACITY = 4000;
 	private final FluidTank tank = new FluidTankCallback(this, 0, FLUID_CAPACITY);
@@ -119,7 +120,7 @@ public class TESmelteryCauldron extends TEInventory implements ITickable, IFluid
 		tank.readFromNBT(nbt.getCompoundTag("tank"));
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
@@ -161,7 +162,7 @@ public class TESmelteryCauldron extends TEInventory implements ITickable, IFluid
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		return true;
 	}
 }

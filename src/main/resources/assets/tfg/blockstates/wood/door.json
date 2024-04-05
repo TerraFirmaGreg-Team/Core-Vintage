@@ -1,6 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
+    "model": "tfg:wood/door/inventory",
     "textures": {
       "bottom": "tfg:blocks/wood/door/lower",
       "top": "tfg:blocks/wood/door/upper",
@@ -12,9 +13,7 @@
       {}
     ],
     "inventory": [
-      {
-        "model": "tfg:wood/door/inventory"
-      }
+      {}
     ],
     "facing=east,half=lower,hinge=left,open=false": {
       "model": "tfg:wood/door/lower"

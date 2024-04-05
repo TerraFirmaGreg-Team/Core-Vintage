@@ -18,7 +18,8 @@ import se.gory_moon.horsepower.HPEventHandler;
 import se.gory_moon.horsepower.recipes.HPRecipeBase;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Map;
 
 public class TileEntityManualChopper extends TileEntityHPBase {

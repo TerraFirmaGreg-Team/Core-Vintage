@@ -15,8 +15,10 @@ import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.TreesTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 
@@ -56,7 +58,7 @@ public class BlockCassiaCinnamonLeaves extends BlockLeavesTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return ImmutableList.of(ItemStack.EMPTY);
 	}

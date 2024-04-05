@@ -19,7 +19,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemRopeBridge extends ItemTFC implements TFCThingsConfigurableItem {
 
@@ -35,15 +35,15 @@ public class ItemRopeBridge extends ItemTFC implements TFCThingsConfigurableItem
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.LIGHT;
 	}
 
@@ -74,7 +74,7 @@ public class ItemRopeBridge extends ItemTFC implements TFCThingsConfigurableItem
 	}
 
 	@Override
-	public int getStackSize(@Nonnull ItemStack stack) {
+	public int getStackSize(@NotNull ItemStack stack) {
 		return ConfigTFCThings.Items.ROPE_BRIDGE.maxStackSize;
 	}
 }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.stone;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -16,13 +11,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Stalactites and stalagmites in one block!
  */
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockRockSpike extends BlockRockVariant {
 	public static final PropertyBool CEILING = PropertyBool.create("ceiling"); //If this comes from ceiling
 	public static final PropertyBool BASE = PropertyBool.create("base"); //If this block is the base

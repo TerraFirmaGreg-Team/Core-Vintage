@@ -8,11 +8,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge.*;
 
-@ParametersAreNonnullByDefault
+
 public class ContainerCharcoalForge extends ContainerTE<TECharcoalForge> {
 	public ContainerCharcoalForge(InventoryPlayer playerInv, TECharcoalForge te) {
 		super(playerInv, te);

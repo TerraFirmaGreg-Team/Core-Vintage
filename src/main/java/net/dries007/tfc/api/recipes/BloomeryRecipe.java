@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes;
 
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -17,15 +12,17 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
 	private final Metal metal; // Melting metal (which will be stored in a bloom)
 	private final IIngredient<ItemStack> additive; // The additive used in the process (charcoal is the default for iron)
 
-	public BloomeryRecipe(@Nonnull Metal metal, IIngredient<ItemStack> additive) {
+	public BloomeryRecipe(@NotNull Metal metal, IIngredient<ItemStack> additive) {
 		this.metal = metal;
 		this.additive = additive;
 
@@ -35,21 +32,21 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
 	}
 
 	@Nullable
-	public static BloomeryRecipe get(@Nonnull ItemStack inputItem) {
+	public static BloomeryRecipe get(@NotNull ItemStack inputItem) {
 		return TFCRegistries.BLOOMERY.getValuesCollection()
-				.stream()
-				.filter(x -> x.isValidInput(inputItem))
-				.findFirst()
-				.orElse(null);
+		                             .stream()
+		                             .filter(x -> x.isValidInput(inputItem))
+		                             .findFirst()
+		                             .orElse(null);
 	}
 
 	@Nullable
-	public static BloomeryRecipe get(@Nonnull Metal metal) {
+	public static BloomeryRecipe get(@NotNull Metal metal) {
 		return TFCRegistries.BLOOMERY.getValuesCollection()
-				.stream()
-				.filter(x -> metal == x.metal)
-				.findFirst()
-				.orElse(null);
+		                             .stream()
+		                             .filter(x -> metal == x.metal)
+		                             .findFirst()
+		                             .orElse(null);
 	}
 
 	public ItemStack getOutput(List<ItemStack> inputs) {

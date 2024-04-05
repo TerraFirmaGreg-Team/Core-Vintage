@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import com.google.common.collect.ImmutableList;
@@ -26,16 +21,17 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBloom;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 public class BloomeryProvider implements IWailaBlock {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
 		IBlockState state = world.getBlockState(pos);
 		TileEntity tileEntity = world.getTileEntity(pos);
@@ -88,7 +84,7 @@ public class BloomeryProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return ImmutableList.of(TEBloom.class, TEBloomery.class);

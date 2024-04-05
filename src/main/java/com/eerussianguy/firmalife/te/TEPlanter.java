@@ -18,7 +18,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -62,7 +62,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setIntArray("stages", stages);

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.Plant;
@@ -12,14 +7,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 // todo: either pull some trickery to make this look like water or simply wait until 1.13 and implement ILiquidContainer
-@ParametersAreNonnullByDefault
+
 public class BlockWaterPlantTFC extends BlockPlantTFC {
 	private static final Map<Plant, BlockWaterPlantTFC> MAP = new HashMap<>();
 

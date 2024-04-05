@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
@@ -18,9 +13,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.function.BiFunction;
 
 /**
@@ -28,7 +24,7 @@ import java.util.function.BiFunction;
  * To provide side based automation, you must expose a IItemHandler wrapper based on the input side
  * Without overriding the getCapability methods, this will not accept items from external automation
  */
-@ParametersAreNonnullByDefault
+
 public abstract class TEInventory extends TEBase implements ISlotCallback {
 	protected final ItemStackHandler inventory;
 
@@ -56,7 +52,7 @@ public abstract class TEInventory extends TEBase implements ISlotCallback {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("inventory", inventory.serializeNBT());
 		return super.writeToNBT(nbt);

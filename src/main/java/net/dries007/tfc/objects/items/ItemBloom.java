@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -24,12 +19,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class ItemBloom extends ItemTFC implements IMetalItem {
 	private final boolean meltable;
 
@@ -37,15 +33,15 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
 		this.meltable = meltable;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.LARGE; // Stored in chests
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY; // Stacksize = 4
 	}
 
@@ -88,7 +84,7 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getTranslationKey(ItemStack stack) {
 		//noinspection ConstantConditions
 		return super.getTranslationKey(stack) + "." + getMetal(stack).getRegistryName().getPath();

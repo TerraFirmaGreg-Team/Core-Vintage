@@ -13,13 +13,14 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.items.ItemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class ItemFiredMudBrick extends ItemTFCF implements IRockObject {
 	private static final Map<ItemUnfiredMudBrick, ItemFiredMudBrick> MAP = new HashMap<>();
 	private final ItemUnfiredMudBrick rock;
@@ -49,25 +50,25 @@ public class ItemFiredMudBrick extends ItemTFCF implements IRockObject {
 		return new ItemStack(MAP.get(rock), amount);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL; // Stored everywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT; // Stacksize = 32
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Rock getRock(ItemStack stack) {
 		return rock.getRock();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public RockCategory getRockCategory(ItemStack stack) {
 		return rock.getRock().getRockCategory();

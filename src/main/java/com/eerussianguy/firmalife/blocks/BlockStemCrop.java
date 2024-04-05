@@ -18,11 +18,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public abstract class BlockStemCrop extends BlockCropSimple {
 	public static PropertyDirection FACING = BlockStem.FACING;
@@ -86,7 +86,7 @@ public abstract class BlockStemCrop extends BlockCropSimple {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, getStageProperty(), WILD, FACING);
 	}

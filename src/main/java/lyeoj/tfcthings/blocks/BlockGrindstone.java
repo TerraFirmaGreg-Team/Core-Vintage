@@ -32,8 +32,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfigurableItem {
 
@@ -64,7 +65,7 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
 		return new BlockStateContainer(this, new IProperty[]{FACING});
 	}
 
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4));
 	}
@@ -156,15 +157,15 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
 		return BlockFaceShape.UNDEFINED;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 

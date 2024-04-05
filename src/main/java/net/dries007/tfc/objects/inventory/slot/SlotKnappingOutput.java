@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.slot;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class SlotKnappingOutput extends SlotItemHandler {
 	private final Runnable onSlotTake;
@@ -21,14 +16,14 @@ public class SlotKnappingOutput extends SlotItemHandler {
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack onTake(EntityPlayer thePlayer, @Nonnull ItemStack stack) {
+	@NotNull
+	public ItemStack onTake(EntityPlayer thePlayer, @NotNull ItemStack stack) {
 		onSlotTake.run();
 		return super.onTake(thePlayer, stack);
 	}
 
 	@Override
-	public boolean isItemValid(@Nonnull ItemStack stack) {
+	public boolean isItemValid(@NotNull ItemStack stack) {
 		return false;
 	}
 }

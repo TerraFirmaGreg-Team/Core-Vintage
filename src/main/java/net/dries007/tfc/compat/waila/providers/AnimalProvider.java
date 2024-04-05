@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaEntity;
@@ -16,15 +11,16 @@ import net.minecraftforge.common.IShearable;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AnimalProvider implements IWailaEntity {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(@Nonnull Entity entity, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(@NotNull Entity entity, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
 		if (entity instanceof IAnimal) {
 			IAnimal animal = (IAnimal) entity;
@@ -78,7 +74,7 @@ public class AnimalProvider implements IWailaEntity {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(IAnimal.class);

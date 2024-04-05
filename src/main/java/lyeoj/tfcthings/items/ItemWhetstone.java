@@ -34,8 +34,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
@@ -51,15 +53,15 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
 		setMaxStackSize(1);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 
@@ -80,7 +82,7 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		if (handIn.equals(EnumHand.MAIN_HAND)) {
 			if (playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-					.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+			                                                     .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
 				playerIn.setActiveHand(handIn);
 				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 			}
@@ -93,7 +95,7 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
 		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer playerIn = (EntityPlayer) entityLiving;
 			if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-					.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+			                                                                       .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
 				ItemStack item = playerIn.getHeldItemOffhand();
 				ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(item);
 				if (capability != null && capability.getCharges() < getMaxCharges()) {

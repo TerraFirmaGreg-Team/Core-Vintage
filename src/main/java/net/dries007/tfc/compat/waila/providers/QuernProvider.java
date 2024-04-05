@@ -12,7 +12,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,9 +22,9 @@ import static su.terrafirmagreg.modules.device.objects.tiles.TEQuern.SLOT_HANDST
 
 public class QuernProvider implements IWailaBlock {
 
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>(1);
 		TEQuern quern = Helpers.getTE(world, pos, TEQuern.class);
 		IItemHandler handler;
@@ -34,7 +35,7 @@ public class QuernProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(BlockQuern.class);

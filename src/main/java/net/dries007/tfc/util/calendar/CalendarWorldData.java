@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.calendar;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,12 +7,12 @@ import net.minecraft.world.storage.WorldSavedData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class CalendarWorldData extends WorldSavedData {
 	private static final String NAME = MODID_TFC + "_calendar";
 	private static final String NAME_PRE_V1_5_0_X = MODID_TFC + ":calendar";
@@ -31,8 +26,8 @@ public class CalendarWorldData extends WorldSavedData {
 		this.calendar = new CalendarTFC();
 	}
 
-	@Nonnull
-	public static CalendarWorldData get(@Nonnull World world) {
+	@NotNull
+	public static CalendarWorldData get(@NotNull World world) {
 		MapStorage mapStorage = world.getMapStorage();
 		if (mapStorage != null) {
 			CalendarWorldData data = (CalendarWorldData) mapStorage.getOrLoadData(CalendarWorldData.class, NAME);
@@ -63,7 +58,7 @@ public class CalendarWorldData extends WorldSavedData {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("calendar", CalendarTFC.INSTANCE.serializeNBT());
 		return nbt;
@@ -77,7 +72,7 @@ public class CalendarWorldData extends WorldSavedData {
 		return true;
 	}
 
-	@Nonnull
+	@NotNull
 	public CalendarTFC getCalendar() {
 		return calendar;
 	}

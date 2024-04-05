@@ -9,9 +9,9 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
 @MethodsReturnNonnullByDefault
 public enum AgingFL implements IStringSerializable {
-	FRESH("fresh", 0, FoodDataFL.FRESH, TextFormatting.GRAY),
-	AGED("aged", 4, FoodDataFL.AGED, TextFormatting.DARK_RED),
-	VINTAGE("vintage", 8, FoodDataFL.VINTAGE, TextFormatting.GOLD);
+	FRESH("fresh", 0, FoodTrait.FRESH, TextFormatting.GRAY),
+	AGED("aged", 4, FoodTrait.AGED, TextFormatting.DARK_RED),
+	VINTAGE("vintage", 8, FoodTrait.VINTAGE, TextFormatting.GOLD);
 
 	private final int ID;
 	private final String name;

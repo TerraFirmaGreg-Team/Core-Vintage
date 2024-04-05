@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.anvil;
 
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -15,14 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * This is an anvil recipe that will split an {@link IForgeableMeasurableMetal} into a specific "chunk" size
  * Used by blooms to split a 560 -> 5x 100 blooms and 1x 60 bloom for example
  */
-@ParametersAreNonnullByDefault
+
 public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
 	protected int splitAmount;
 
@@ -44,7 +39,7 @@ public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
 
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getOutput(ItemStack input) {
 		if (matches(input)) {
 			IForgeable inCap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);

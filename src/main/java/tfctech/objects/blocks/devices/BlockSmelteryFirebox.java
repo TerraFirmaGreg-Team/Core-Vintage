@@ -36,14 +36,15 @@ import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsConsumerBlock, IItemSize {
 
@@ -57,21 +58,21 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 		setLightLevel(1f);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 		           .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
@@ -91,14 +92,14 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return FULL_BLOCK_AABB;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
@@ -207,12 +208,12 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 	}
 
 	@Override
-	public boolean canIntakeFrom(@Nonnull Vec3i offset, @Nonnull EnumFacing direction) {
+	public boolean canIntakeFrom(@NotNull Vec3i offset, @NotNull EnumFacing direction) {
 		return offset.equals(TEBellows.OFFSET_LEVEL);
 	}
 
 	@Override
-	public void onAirIntake(@Nonnull World world, @Nonnull BlockPos pos, int airAmount) {
+	public void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount) {
 		TESmelteryFirebox firebox = Helpers.getTE(world, pos, TESmelteryFirebox.class);
 		if (firebox != null) {
 			firebox.onAirIntake(airAmount);

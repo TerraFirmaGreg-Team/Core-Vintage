@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
 
 import com.google.common.base.Strings;
@@ -58,7 +53,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
@@ -138,8 +134,8 @@ public final class ClientRegisterEvents {
 				                                                                             .toString() + "/empty");
 
 				@Override
-				@Nonnull
-				public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
+				@NotNull
+				public ModelResourceLocation getModelLocation(@NotNull ItemStack stack) {
 					IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 					if (cap instanceof IMoldHandler) {
 						Metal metal = ((IMoldHandler) cap).getMetal();

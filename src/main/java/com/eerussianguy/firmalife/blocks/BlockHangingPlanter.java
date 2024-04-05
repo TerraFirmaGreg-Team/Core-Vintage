@@ -16,14 +16,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Supplier;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.STAGE;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockHangingPlanter extends BlockBonsai {
 	public static final PropertyEnum<EnumFacing.Axis> AXIS = StatePropertiesFL.XZ;
 	private static final AxisAlignedBB SHAPE = new AxisAlignedBB(0.0D, 0.75D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -37,7 +37,7 @@ public class BlockHangingPlanter extends BlockBonsai {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		EnumFacing.Axis axis = EnumFacing.Axis.Z;
 		if (meta > 2) {
@@ -55,7 +55,7 @@ public class BlockHangingPlanter extends BlockBonsai {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, AXIS, STAGE);
 	}
@@ -79,7 +79,7 @@ public class BlockHangingPlanter extends BlockBonsai {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		if (facing.getAxis() == EnumFacing.Axis.Y) {
 			facing = placer.getHorizontalFacing();

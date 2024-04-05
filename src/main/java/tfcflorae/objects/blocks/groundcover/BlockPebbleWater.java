@@ -35,8 +35,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -45,7 +45,7 @@ import java.util.Random;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
-@ParametersAreNonnullByDefault
+
 public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	public static final PropertyEnum<EnumPileType> PILE_TYPE = PropertyEnum.<EnumPileType>create("pile_type", EnumPileType.class);
 	private static final AxisAlignedBB AABB_1_STONE = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.1875D, 0.75D);
@@ -67,8 +67,8 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 		setResistance(2.0F);
 		setSoundType(SoundType.STONE);
 		setDefaultState(this.getDefaultState()
-				.withProperty(PILE_TYPE, EnumPileType.ONE)
-				.withProperty(LEVEL, 0));
+		                    .withProperty(PILE_TYPE, EnumPileType.ONE)
+		                    .withProperty(LEVEL, 0));
 
 		OreDictionaryHelper.register(this, rock);
 	}
@@ -94,14 +94,14 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		if (this.getFluid() == SALT_WATER)
 			return worldIn.getBlockState(pos)
-					.getBlock()
-					.isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
-					.isFullBlock() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
+			              .getBlock()
+			              .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
+			                                                     .isFullBlock() && BlocksTFC.isSaltWater(worldIn.getBlockState(pos)) && BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
 		else if (this.getFluid() == FRESH_WATER)
 			return worldIn.getBlockState(pos)
-					.getBlock()
-					.isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
-					.isFullBlock() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
+			              .getBlock()
+			              .isReplaceable(worldIn, pos) && worldIn.getBlockState(pos.down())
+			                                                     .isFullBlock() && BlocksTFC.isFreshWater(worldIn.getBlockState(pos)) && BlocksTFC.isFreshWater(worldIn.getBlockState(pos.up())) && !worldIn.isAirBlock(pos.up());
 		else
 			return false;
 	}
@@ -111,18 +111,18 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XZ;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.TINY; // Store anywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
@@ -222,7 +222,7 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	}
 
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
@@ -269,9 +269,9 @@ public class BlockPebbleWater extends BlockFluidTFC implements IItemSize {
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer.Builder(this).add(LEVEL)
-				.add(new IProperty[]{PILE_TYPE})
-				.add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
-				.build();
+		                                            .add(new IProperty[]{PILE_TYPE})
+		                                            .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+		                                            .build();
 	}
 
 	@Override

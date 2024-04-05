@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.anvil;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -18,9 +13,10 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -31,7 +27,7 @@ import java.util.stream.Collectors;
  * They all take a single item input and will produce a single item output
  * todo: in 1.13+ move this to a json recipe type
  */
-@ParametersAreNonnullByDefault
+
 public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implements IJEISimpleRecipe {
 	public static final NonNullList<ItemStack> EMPTY = NonNullList.create();
 	private static final Random RNG = new Random();
@@ -56,7 +52,7 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
 		workingSeed = ++SEED;
 	}
 
-	@Nonnull
+	@NotNull
 	public static List<AnvilRecipe> getAllFor(ItemStack stack) {
 		return TFCRegistries.ANVIL.getValuesCollection()
 		                          .stream()
@@ -76,22 +72,22 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
 		return true;
 	}
 
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getOutput(ItemStack input) {
 		return matches(input) ? NonNullList.withSize(1, output.copy()) : EMPTY;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getPlanIcon() {
 		return output;
 	}
 
-	@Nonnull
+	@NotNull
 	public ForgeRule[] getRules() {
 		return rules;
 	}
 
-	@Nonnull
+	@NotNull
 	public Metal.Tier getTier() {
 		return minTier;
 	}

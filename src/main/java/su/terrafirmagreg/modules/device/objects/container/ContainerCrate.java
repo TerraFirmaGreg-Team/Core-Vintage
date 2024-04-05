@@ -10,7 +10,7 @@ import su.terrafirmagreg.api.spi.container.IButtonHandler;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
 import su.terrafirmagreg.modules.device.objects.tiles.TECrate;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ContainerCrate extends ContainerBaseTE<TECrate> implements IButtonHandler {
 	public ContainerCrate(InventoryPlayer playerInv, TECrate tile) {

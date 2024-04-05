@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -36,11 +31,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class ItemMetalChisel extends ItemMetalTool {
 	private static final int[] STAIR_PATTERN_INDICES = {0, 3, 4, 6, 7, 8};
 	private static final int[] SLAB_PATTERN_INDICES = {0, 1, 2};
@@ -168,7 +163,7 @@ public class ItemMetalChisel extends ItemMetalTool {
 	 * @return SUCCESS if the block was chiseled, FAIL if no block was changed
 	 */
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		// Find the block to place for this action
 		IBlockState newState = getChiselResultState(player, worldIn, pos, facing, hitX, hitY, hitZ);

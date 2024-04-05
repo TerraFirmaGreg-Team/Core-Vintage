@@ -26,22 +26,23 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class UnmoldRecipeKaoliniteTFCF extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	private final NonNullList<Ingredient> input;
 	private final ResourceLocation group;
 	private final Metal.ItemType type;
 	private final float chance; // Return chance
 
-	private UnmoldRecipeKaoliniteTFCF(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull Metal.ItemType type, float chance) {
+	private UnmoldRecipeKaoliniteTFCF(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @NotNull Metal.ItemType type, float chance) {
 		this.group = group;
 		this.input = input;
 		this.type = type;
@@ -49,7 +50,7 @@ public class UnmoldRecipeKaoliniteTFCF extends IForgeRegistryEntry.Impl<IRecipe>
 	}
 
 	@Override
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		boolean foundMold = false;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
 			ItemStack stack = inv.getStackInSlot(slot);
@@ -82,7 +83,7 @@ public class UnmoldRecipeKaoliniteTFCF extends IForgeRegistryEntry.Impl<IRecipe>
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack moldStack = null;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -118,13 +119,13 @@ public class UnmoldRecipeKaoliniteTFCF extends IForgeRegistryEntry.Impl<IRecipe>
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inv) {
 		// Return empty molds
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -150,7 +151,7 @@ public class UnmoldRecipeKaoliniteTFCF extends IForgeRegistryEntry.Impl<IRecipe>
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<Ingredient> getIngredients() {
 		return input;
 	}
@@ -161,7 +162,7 @@ public class UnmoldRecipeKaoliniteTFCF extends IForgeRegistryEntry.Impl<IRecipe>
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}

@@ -20,13 +20,14 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CLAY;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockTurntable extends BlockNonCube {
 	private static final AxisAlignedBB SHAPE = new AxisAlignedBB(4.0D / 16, 0.0D, 4.0D / 16, 12.0D / 16, 5.0D / 16, 12.0D / 16);
@@ -88,7 +89,7 @@ public class BlockTurntable extends BlockNonCube {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, CLAY);
 	}

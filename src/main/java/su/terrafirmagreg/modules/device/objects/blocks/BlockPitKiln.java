@@ -42,8 +42,10 @@ import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.BlockPlacedItem.PLACED_ITEM_AABB;
@@ -164,7 +166,7 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomStateMap
 		super.breakBlock(worldIn, pos, state);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Items.AIR;

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.rock;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -22,13 +17,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemRock extends ItemTFC implements IRockObject {
 	private static final Map<Rock, ItemRock> MAP = new HashMap<>();
 	private final Rock rock;
@@ -55,32 +50,32 @@ public class ItemRock extends ItemTFC implements IRockObject {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Rock getRock(ItemStack stack) {
 		return rock;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public RockCategory getRockCategory(ItemStack stack) {
 		return rock.getRockCategory();
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL; // Stored everywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
 			TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.KNAPPING_STONE);

@@ -33,8 +33,10 @@ import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.util.Localization;
 import se.gory_moon.horsepower.util.color.Colors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -138,7 +140,7 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
 	public void emptiedOutput(World world, BlockPos pos) {
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Class<?> getTileClass() {
 		return TileEntityChopper.class;

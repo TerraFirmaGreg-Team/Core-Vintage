@@ -22,10 +22,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.types.PlantsTFCF;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class WorldGeneratorPlants implements IWorldGenerator {
 	private final WorldGenPlants plantGen;
 	private int waterCount = 1;

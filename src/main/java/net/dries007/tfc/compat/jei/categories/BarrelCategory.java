@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import mezz.jei.api.IGuiHelper;
@@ -16,10 +11,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class BarrelCategory extends BaseRecipeCategory<BarrelRecipeWrapper> {
 	private static final ResourceLocation ICONS = new ResourceLocation(Constants.MODID_TFC, "textures/gui/icons/jei.png");
 	private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(Constants.MODID_TFC, "textures/gui/barrel.png");

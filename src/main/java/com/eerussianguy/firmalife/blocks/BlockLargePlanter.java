@@ -35,14 +35,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockLargePlanter extends Block implements IItemSize {
 	public static final UnlistedCropProperty CROP = new UnlistedCropProperty(1);
@@ -174,14 +171,14 @@ public class BlockLargePlanter extends Block implements IItemSize {
 		return state;
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL;
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.HEAVY;
 	}
@@ -194,6 +191,6 @@ public class BlockLargePlanter extends Block implements IItemSize {
 
 	private boolean canStay(IBlockAccess world, BlockPos pos) {
 		return world.getBlockState(pos.down())
-				.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+		            .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
 	}
 }

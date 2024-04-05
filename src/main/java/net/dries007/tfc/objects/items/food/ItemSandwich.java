@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.food;
 
 import net.dries007.tfc.api.capability.food.FoodData;
@@ -13,14 +8,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class ItemSandwich extends ItemFoodTFC {
-	public ItemSandwich(@Nonnull Food food) {
+	public ItemSandwich(@NotNull Food food) {
 		super(food);
 	}
 

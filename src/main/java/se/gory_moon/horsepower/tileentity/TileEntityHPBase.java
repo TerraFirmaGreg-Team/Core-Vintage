@@ -23,7 +23,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 import se.gory_moon.horsepower.recipes.HPRecipeBase;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class TileEntityHPBase extends TileEntity {
 	private final IItemHandler handlerBottom;

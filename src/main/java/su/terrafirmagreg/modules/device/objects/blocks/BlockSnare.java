@@ -40,7 +40,8 @@ import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalG
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
 import su.terrafirmagreg.modules.device.objects.tiles.TESnare;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;

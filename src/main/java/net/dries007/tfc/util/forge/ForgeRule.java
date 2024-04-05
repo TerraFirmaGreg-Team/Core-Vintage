@@ -1,15 +1,11 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.forge;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import static net.dries007.tfc.util.forge.ForgeStep.*;
 
@@ -49,7 +45,7 @@ public enum ForgeRule {
 	private final Order order;
 	private final ForgeStep type;
 
-	ForgeRule(@Nonnull Order order, @Nonnull ForgeStep type) {
+	ForgeRule(@NotNull Order order, @NotNull ForgeStep type) {
 		this.order = order;
 		if (type == HIT_MEDIUM || type == HIT_HARD)
 			this.type = HIT_LIGHT;
@@ -81,7 +77,7 @@ public enum ForgeRule {
 		return order.v;
 	}
 
-	public boolean matches(@Nonnull ForgeSteps steps) {
+	public boolean matches(@NotNull ForgeSteps steps) {
 		switch (this.order) {
 			case ANY:
 				return matchesStep(steps.getStep(2)) || matchesStep(steps.getStep(1)) || matchesStep(steps.getStep(0));

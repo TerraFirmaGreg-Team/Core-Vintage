@@ -22,7 +22,6 @@ import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.SLOT_EXTRA_INPUT_END;
@@ -31,7 +30,7 @@ import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.SLOT_EXTR
 /**
  * Render water in the cooking pot
  */
-@ParametersAreNonnullByDefault
+
 @SideOnly(Side.CLIENT)
 public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit> {
 	@Override

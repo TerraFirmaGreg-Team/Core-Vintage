@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.objects.tiles.TENestBox;
+import su.terrafirmagreg.modules.device.objects.tiles.TENestBox;
 
 import java.util.HashMap;
 import java.util.List;

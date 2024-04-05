@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.objects.items.ItemAnimalHide;
@@ -31,15 +26,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * Due to implementation, this will only ever be a soaked hide -> scraped hide
  * Placement is restricted to the TFC item.
  */
-@ParametersAreNonnullByDefault
+
 public class BlockPlacedHide extends Block {
 	public static final PropertyEnum<ItemAnimalHide.HideSize> SIZE = PropertyEnum.create("size", ItemAnimalHide.HideSize.class);
 
@@ -69,7 +65,7 @@ public class BlockPlacedHide extends Block {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(SIZE, ItemAnimalHide.HideSize.valueOf(meta));
 	}
@@ -99,14 +95,14 @@ public class BlockPlacedHide extends Block {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return BlockPlacedItem.PLACED_ITEM_AABB;
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
@@ -121,7 +117,7 @@ public class BlockPlacedHide extends Block {
 	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return BlockPlacedItem.PLACED_ITEM_AABB;
 	}
@@ -156,7 +152,7 @@ public class BlockPlacedHide extends Block {
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, SIZE);
@@ -190,7 +186,7 @@ public class BlockPlacedHide extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return getItemStackDropped(world, pos, state);
 	}

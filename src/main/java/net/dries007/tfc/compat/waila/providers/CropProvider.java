@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import com.google.common.collect.ImmutableList;
@@ -23,14 +18,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CropProvider implements IWailaBlock {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		List<String> currentTooltip = new ArrayList<>();
 		IBlockState state = world.getBlockState(pos);
 		TECropBase te = Helpers.getTE(world, pos, TECropBase.class);
@@ -69,9 +65,9 @@ public class CropProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public String getTitle(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public String getTitle(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof BlockCropTFC) {
 			BlockCropTFC b = (BlockCropTFC) state.getBlock();
@@ -85,9 +81,9 @@ public class CropProvider implements IWailaBlock {
 		return "";
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof BlockCropTFC) {
 			BlockCropTFC b = (BlockCropTFC) state.getBlock();
@@ -101,7 +97,7 @@ public class CropProvider implements IWailaBlock {
 		return ItemStack.EMPTY;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return ImmutableList.of(BlockCropTFC.class, BlockCropDead.class);

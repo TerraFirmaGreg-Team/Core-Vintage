@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -17,11 +12,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class ItemBlockPowderKeg extends ItemBlockTFC implements IItemSize {
 	public ItemBlockPowderKeg(BlockPowderKeg block) {
 		super(block);

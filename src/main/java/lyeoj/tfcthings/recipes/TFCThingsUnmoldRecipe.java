@@ -25,8 +25,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	private final NonNullList<Ingredient> input;
@@ -34,14 +35,14 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 	private final String type;
 	private final float chance;
 
-	private TFCThingsUnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull String type, float chance) {
+	private TFCThingsUnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @NotNull String type, float chance) {
 		this.group = group;
 		this.input = input;
 		this.type = type;
 		this.chance = chance;
 	}
 
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		boolean foundMold = false;
 
 		for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
@@ -72,7 +73,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 		return foundMold;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack moldStack = null;
 
@@ -107,12 +108,12 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 		return true;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {
 		return ItemStack.EMPTY;
 	}
 
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		for (int slot = 0; slot < inv.getSizeInventory(); ++slot) {
 			ItemStack stack = inv.getStackInSlot(slot);
@@ -132,7 +133,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 		return ForgeHooks.defaultRecipeGetRemainingItems(inv);
 	}
 
-	@Nonnull
+	@NotNull
 	public NonNullList<Ingredient> getIngredients() {
 		return this.input;
 	}
@@ -141,7 +142,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
 		return true;
 	}
 
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return this.group == null ? "" : this.group.toString();
 	}

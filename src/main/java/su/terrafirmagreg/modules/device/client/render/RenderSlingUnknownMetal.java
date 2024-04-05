@@ -9,7 +9,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelUnknownProjectile;
 import su.terrafirmagreg.modules.device.objects.entity.EntityUnknownProjectile;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingUnknownMetal extends Render<EntityUnknownProjectile> {
 	private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.getID("textures/blocks/metal/base.png");

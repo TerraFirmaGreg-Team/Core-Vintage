@@ -22,7 +22,7 @@ import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.types.PlantsTFCF;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class OreDictionaryHelper {
 	private static final Multimap<Thing, String> MAP = HashMultimap.create();
@@ -184,7 +184,7 @@ public class OreDictionaryHelper {
 	/**
 	 * Checks if an ItemStack has an OreDictionary entry that matches 'name'.
 	 */
-	public static boolean doesStackMatchOre(@Nonnull ItemStack stack, String name) {
+	public static boolean doesStackMatchOre(@NotNull ItemStack stack, String name) {
 		if (!OreDictionary.doesOreNameExist(name)) {
 			TFCFlorae.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
 			return false;

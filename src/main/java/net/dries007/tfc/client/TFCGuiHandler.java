@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -31,8 +26,9 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -191,7 +187,7 @@ public class TFCGuiHandler implements IGuiHandler {
 
 		private static final Type[] values = values();
 
-		@Nonnull
+		@NotNull
 		public static Type valueOf(int id) {
 			return id < 0 || id >= values.length ? NULL : values[id];
 		}

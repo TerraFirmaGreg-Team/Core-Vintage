@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -24,10 +19,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class TEPlacedItem extends TEInventory {
 	public static final int SLOT_LARGE_ITEM = 0;
 	public boolean isHoldingLargeItem;
@@ -71,7 +65,7 @@ public class TEPlacedItem extends TEInventory {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
 		return new AxisAlignedBB(getPos(), getPos().add(1, 1, 1));
@@ -172,7 +166,7 @@ public class TEPlacedItem extends TEInventory {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("itemSize", isHoldingLargeItem);
 		return super.writeToNBT(nbt);

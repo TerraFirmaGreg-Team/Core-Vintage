@@ -10,15 +10,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class CheesewheelProvider implements IWailaBlock {
-	@Nonnull
+	@NotNull
 	@Override
-	public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound NBT) {
+	public List<String> getTooltip(World world, @NotNull BlockPos pos, @NotNull NBTTagCompound NBT) {
 		List<String> currentTooltip = new ArrayList<>();
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof BlockCheesewheel) {
@@ -29,7 +30,7 @@ public class CheesewheelProvider implements IWailaBlock {
 		return currentTooltip;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<Class<?>> getLookupClass() {
 		return Collections.singletonList(BlockCheesewheel.class);

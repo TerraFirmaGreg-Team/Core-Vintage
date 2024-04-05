@@ -10,18 +10,18 @@ import net.minecraftforge.oredict.DyeUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import tfcflorae.objects.items.ItemArmorTFCF;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class RecipeArmorDyeing extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	@Nonnull
+	@NotNull
 	public boolean matches(InventoryCrafting inv, World worldIn) {
 		ItemStack itemStack = ItemStack.EMPTY;
 		List<ItemStack> list = Lists.<ItemStack>newArrayList();
@@ -48,7 +48,7 @@ public class RecipeArmorDyeing extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	 * Returns an Item that is the result of this recipe
 	 */
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack itemStack = ItemStack.EMPTY;
 		int[] aint = new int[3];
@@ -117,13 +117,13 @@ public class RecipeArmorDyeing extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		NonNullList<ItemStack> nonnulllist = NonNullList.<ItemStack>withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 		for (int i = 0; i < nonnulllist.size(); ++i) {
@@ -134,7 +134,7 @@ public class RecipeArmorDyeing extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public boolean isDynamic() {
 		return true;
 	}
@@ -143,7 +143,7 @@ public class RecipeArmorDyeing extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	 * Used to determine if this recipe can fit in a grid of the given width/height
 	 */
 	@Override
-	@Nonnull
+	@NotNull
 	public boolean canFit(int width, int height) {
 		return width * height >= 2;
 	}

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.interfaces;
 
 import net.minecraft.item.ItemStack;
@@ -10,7 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -26,8 +22,8 @@ public interface IWailaBlock {
 	 * @param nbt   the server sync nbt (not always possible, but non null for checking)
 	 * @return a List containing tooltips to write on the panel's body
 	 */
-	@Nonnull
-	default List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	@NotNull
+	default List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		return Collections.emptyList();
 	}
 
@@ -39,8 +35,8 @@ public interface IWailaBlock {
 	 * @param nbt   the server sync nbt (not always possible, but non null for checking)
 	 * @return a List containing tooltips to write on the panel's head
 	 */
-	@Nonnull
-	default String getTitle(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	@NotNull
+	default String getTitle(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		return "";
 	}
 
@@ -52,8 +48,8 @@ public interface IWailaBlock {
 	 * @param nbt   the server sync nbt (not always possible, but non null for checking)
 	 * @return a ItemStack to be shown at the side of the panel.
 	 */
-	@Nonnull
-	default ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
+	@NotNull
+	default ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
 		return ItemStack.EMPTY;
 	}
 
@@ -62,7 +58,7 @@ public interface IWailaBlock {
 	 *
 	 * @return List of classes (eg: <Block>.class, <TileEntity>.class)
 	 */
-	@Nonnull
+	@NotNull
 	List<Class<?>> getLookupClass();
 
 	/**

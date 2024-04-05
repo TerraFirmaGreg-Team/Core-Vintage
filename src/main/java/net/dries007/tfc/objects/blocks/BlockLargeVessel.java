@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -33,17 +28,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Large vessel is an inventory that preserves the contents when sealed
  * It can be picked up and keeps it's inventory
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
-@ParametersAreNonnullByDefault
+
 public class BlockLargeVessel extends Block implements IItemSize {
 	public static final PropertyBool SEALED = PropertyBool.create("sealed");
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.625D, 0.8125D);
@@ -74,20 +67,20 @@ public class BlockLargeVessel extends Block implements IItemSize {
 		}
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Size getSize(ItemStack stack) {
 		return stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE; // Causes overburden if sealed
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return stack.getTagCompound() == null;
 	}
 
@@ -104,7 +97,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(SEALED, meta == 1);
@@ -133,7 +126,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return state.getValue(SEALED) ? BOUNDING_BOX_SEALED : BOUNDING_BOX;
@@ -141,7 +134,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
@@ -170,7 +163,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
@@ -214,7 +207,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, SEALED);
 	}

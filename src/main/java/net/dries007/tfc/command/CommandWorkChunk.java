@@ -9,21 +9,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.chunk.Chunk;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class CommandWorkChunk extends CommandBase {
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getName() {
 		return "work";
 	}
 
 	@Override
-	@Nonnull
-	public String getUsage(@Nonnull ICommandSender iCommandSender) {
+	@NotNull
+	public String getUsage(@NotNull ICommandSender iCommandSender) {
 		return "tfc.command.work.usage";
 	}
 

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -25,13 +20,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * We don't extend the item stack container because it's not linked to the item stack
  */
-@ParametersAreNonnullByDefault
+
 public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 	public static final int SLOT_INPUT_START = 0;
 	public static final int SLOT_INPUT_END = 4;
@@ -87,7 +82,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		switch (slot) {
 			case SLOT_BOWLS:
 				return OreDictionaryHelper.doesStackMatchOre(stack, "bowl");
@@ -168,9 +163,9 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack transferStackInSlot(@Nonnull EntityPlayer player, int index) {
+	public ItemStack transferStackInSlot(@NotNull EntityPlayer player, int index) {
 		// Slot that was clicked
 		Slot slot = inventorySlots.get(index);
 		if (slot != null && slot.getHasStack()) {
@@ -215,15 +210,15 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 		}
 		addSlotToContainer(new SlotCallback(inventory, SLOT_BOWLS, 44, 56, this));
 		addSlotToContainer(new SlotCallback(inventory, SLOT_OUTPUT, 116, 56, this) {
-			@Nonnull
+			@NotNull
 			@Override
-			public ItemStack onTake(EntityPlayer player, @Nonnull ItemStack stack) {
+			public ItemStack onTake(EntityPlayer player, @NotNull ItemStack stack) {
 				return ContainerSalad.this.onTakeSalad(stack);
 			}
 		});
 	}
 
-	@Nonnull
+	@NotNull
 	private Item getSaladItem(Nutrient nutrient) {
 		switch (nutrient) {
 			case GRAIN:

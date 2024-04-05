@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
@@ -19,7 +14,8 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 /**
@@ -114,7 +110,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
 	/**
 	 * Called when the mouse is clicked over a slot or outside the gui.
 	 */
-	protected void handleMouseClick(Slot slotIn, int slotId, int mouseButton, @Nonnull ClickType type) {
+	protected void handleMouseClick(Slot slotIn, int slotId, int mouseButton, @NotNull ClickType type) {
 		super.handleMouseClick(slotIn, slotId, mouseButton, type);
 		this.recipeBookGui.slotClicked(slotIn);
 	}
@@ -149,7 +145,7 @@ public class GuiInventoryCrafting extends GuiContainer implements IRecipeShownLi
 		this.recipeBookGui.recipesUpdated();
 	}
 
-	@Nonnull
+	@NotNull
 	public GuiRecipeBook func_194310_f() {
 		return this.recipeBookGui;
 	}

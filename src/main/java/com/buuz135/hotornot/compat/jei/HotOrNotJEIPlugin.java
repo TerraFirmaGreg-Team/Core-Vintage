@@ -10,14 +10,14 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.TFCJEIPlugin;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @JEIPlugin
-@ParametersAreNonnullByDefault
+
 public class HotOrNotJEIPlugin implements IModPlugin {
 
 	@Override

@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableItem {
 
@@ -29,15 +29,15 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
 		this.metal = metal;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 
@@ -50,7 +50,7 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
 		if (metal == TFCRegistries.METALS.getValue(DefaultMetals.PIG_IRON) && entity instanceof EntityAnimalPig piggy) {
 			float requiredFamiliarity = (float) ConfigTFCThings.Misc.PIGVIL.familiarityLevel;
 			if (piggy.getGender()
-					.equals(IAnimal.Gender.MALE) && piggy.getAge() == IAnimal.Age.ADULT && piggy.getFamiliarity() >= requiredFamiliarity) {
+			         .equals(IAnimal.Gender.MALE) && piggy.getAge() == IAnimal.Age.ADULT && piggy.getFamiliarity() >= requiredFamiliarity) {
 				player.world.playSound(player, piggy.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
 				if (!player.world.isRemote) {
 					if (!player.isCreative()) {

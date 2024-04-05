@@ -1,14 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.calendar;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface ICalendarFormatted extends ICalendar {
 	/* Total calculation methods */
@@ -46,7 +41,7 @@ public interface ICalendarFormatted extends ICalendar {
 		return TerraFirmaCraft.getProxy().getDate(hour, minute, monthName, day, years);
 	}
 
-	@Nonnull
+	@NotNull
 	static Month getMonthOfYear(long time, long daysInMonth) {
 		return Month.valueOf((int) ((time / (TICKS_IN_DAY * daysInMonth)) % 12));
 	}

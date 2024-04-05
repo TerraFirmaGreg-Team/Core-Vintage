@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemFlint extends ItemTFCF implements IItemSize {
 	private final Size size;
@@ -36,21 +36,21 @@ public class ItemFlint extends ItemTFCF implements IItemSize {
 		this.weight = weight;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return size;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return weight;
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
 			GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.FLINT);
@@ -58,7 +58,7 @@ public class ItemFlint extends ItemTFCF implements IItemSize {
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
-	@Nonnull
+	@NotNull
 	public void onRightClick(PlayerInteractEvent.RightClickItem event) {
 		EnumHand hand = event.getHand();
 		if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "flint") && hand == EnumHand.MAIN_HAND) {

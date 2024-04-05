@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.wood;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -16,12 +11,12 @@ import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemDoorTFC extends ItemDoor implements IItemSize {
 	private static final Map<Tree, ItemDoorTFC> MAP = new HashMap<>();
@@ -40,13 +35,13 @@ public class ItemDoorTFC extends ItemDoor implements IItemSize {
 		return MAP.get(wood);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.VERY_LARGE; // Can't be stored
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.HEAVY; // Stacksize = 4

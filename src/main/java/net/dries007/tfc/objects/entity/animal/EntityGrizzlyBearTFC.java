@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -41,14 +36,15 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
+
 public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredator, EntityAIStandAttack.IEntityStandAttack {
 	private static final int DAYS_TO_ADULTHOOD = 240;
 	private static final DataParameter<Boolean> IS_STANDING;
@@ -166,7 +162,7 @@ public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredato
 	}
 
 	@Override
-	public boolean attackEntityAsMob(@Nonnull Entity entityIn) {
+	public boolean attackEntityAsMob(@NotNull Entity entityIn) {
 		double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		if (this.isChild()) {
 			attackDamage /= 2;

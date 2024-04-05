@@ -9,10 +9,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ContainerLogPile extends ContainerTE<TELogPile> {
 	public ContainerLogPile(InventoryPlayer playerInv, TELogPile te) {
@@ -21,7 +20,7 @@ public class ContainerLogPile extends ContainerTE<TELogPile> {
 	}
 
 	@Override
-	public boolean canInteractWith(@Nonnull EntityPlayer player) {
+	public boolean canInteractWith(@NotNull EntityPlayer player) {
 		return tile.canInteractWith(player);
 	}
 

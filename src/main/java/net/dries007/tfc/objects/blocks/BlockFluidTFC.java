@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import com.google.common.primitives.Ints;
@@ -26,11 +21,11 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockFluidTFC extends BlockFluidClassic {
 	public BlockFluidTFC(Fluid fluid, Material material) {
 		super(fluid, material);
@@ -70,7 +65,7 @@ public class BlockFluidTFC extends BlockFluidClassic {
 	}
 
 	@Override
-	public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
+	public void updateTick(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
 		super.updateTick(world, pos, state, rand);
 
 		// have to catch the updates that the super call did
@@ -279,9 +274,9 @@ public class BlockFluidTFC extends BlockFluidClassic {
 		return this.density > density;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public IBlockState getExtendedState(@Nonnull IBlockState oldState, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+	public IBlockState getExtendedState(@NotNull IBlockState oldState, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
 		IExtendedBlockState state = (IExtendedBlockState) oldState;
 		state = state.withProperty(FLOW_DIRECTION, (float) getFlowDirection(world, pos));
 		IBlockState[][] upBlockState = new IBlockState[3][3];
@@ -348,7 +343,7 @@ public class BlockFluidTFC extends BlockFluidClassic {
 	}
 
 	@Override
-	public float getFluidHeightForRender(IBlockAccess world, BlockPos adjPos, @Nonnull IBlockState upState) {
+	public float getFluidHeightForRender(IBlockAccess world, BlockPos adjPos, @NotNull IBlockState upState) {
 		IBlockState adjState = world.getBlockState(adjPos);
 
 		// any adjacent above matching liquids merge to 1
@@ -373,7 +368,7 @@ public class BlockFluidTFC extends BlockFluidClassic {
 		return 0;
 	}
 
-	protected boolean isMergeableFluid(@Nonnull IBlockState blockstate) {
+	protected boolean isMergeableFluid(@NotNull IBlockState blockstate) {
 		return (blockstate.getMaterial() == getDefaultState().getMaterial()) && (blockstate.getMaterial().isLiquid());
 	}
 

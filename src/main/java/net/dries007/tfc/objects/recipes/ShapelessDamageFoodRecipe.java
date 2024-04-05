@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -24,18 +19,18 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.items.ItemHandlerHelper;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 @SuppressWarnings("unused")
-@ParametersAreNonnullByDefault
+
 public class ShapelessDamageFoodRecipe extends ShapelessDamageRecipe {
-	private ShapelessDamageFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result, int damage) {
+	private ShapelessDamageFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @NotNull ItemStack result, int damage) {
 		super(group, input, result, damage);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack out = output.copy();
 
@@ -55,7 +50,7 @@ public class ShapelessDamageFoodRecipe extends ShapelessDamageRecipe {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
 		// Give straw to player as well.
 		EntityPlayer player = ForgeHooks.getCraftingPlayer();

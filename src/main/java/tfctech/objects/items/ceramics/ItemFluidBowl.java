@@ -15,8 +15,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tfctech.objects.tileentities.TELatexExtractor;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class ItemFluidBowl extends ItemPottery {
@@ -24,7 +26,7 @@ public class ItemFluidBowl extends ItemPottery {
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return false;
 	}
 
@@ -44,8 +46,8 @@ public class ItemFluidBowl extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (cap != null) {
 			FluidStack fluidStack = cap.drain(1, false);
@@ -59,7 +61,7 @@ public class ItemFluidBowl extends ItemPottery {
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new FluidHandlerItemStack(stack, TELatexExtractor.MAX_FLUID);
 	}
 }

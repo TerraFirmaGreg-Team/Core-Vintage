@@ -15,11 +15,11 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemHoeTFCF extends ItemHoe implements IItemSize {
 	public final ToolMaterial material;
 
@@ -54,13 +54,13 @@ public class ItemHoeTFCF extends ItemHoe implements IItemSize {
 		return multimap;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE; // Stored only in chests
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;

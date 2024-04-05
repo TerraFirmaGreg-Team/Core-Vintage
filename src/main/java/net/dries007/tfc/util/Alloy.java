@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import com.google.common.collect.Sets;
@@ -21,8 +16,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Map;
 
 /**
@@ -73,7 +70,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 	 * @param stack a fluid stack
 	 * @return the alloy, for method chaining
 	 */
-	public Alloy add(@Nonnull FluidStack stack) {
+	public Alloy add(@NotNull FluidStack stack) {
 		MetalProperty metalProperty = FluidsTFC.getWrapper(stack.getFluid()).get(MetalProperty.METAL);
 		if (metalProperty != null) {
 			Metal metal = metalProperty.getMetal();
@@ -89,7 +86,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 	 * @param stack an item stack
 	 * @return the alloy, for method chaining
 	 */
-	public Alloy add(@Nonnull ItemStack stack) {
+	public Alloy add(@NotNull ItemStack stack) {
 		return add(stack, Metal.Tier.TIER_VI, Float.MAX_VALUE);
 	}
 
@@ -102,7 +99,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 	 * @param temperature the temperature to melt items
 	 * @return the alloy, for method chaining
 	 */
-	public Alloy add(@Nonnull ItemStack stack, @Nonnull Metal.Tier deviceTier, float temperature) {
+	public Alloy add(@NotNull ItemStack stack, @NotNull Metal.Tier deviceTier, float temperature) {
 		if (!stack.isEmpty()) {
 			HeatRecipe recipe = HeatRecipe.get(stack, deviceTier);
 			if (recipe != null && recipe.isValidTemperature(temperature)) {
@@ -125,7 +122,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 	 * @param recipe the recipe to use to convert the stack into fluid
 	 * @return the alloy, for method chaining
 	 */
-	public Alloy add(@Nonnull ItemStack stack, @Nonnull HeatRecipe recipe) {
+	public Alloy add(@NotNull ItemStack stack, @NotNull HeatRecipe recipe) {
 		if (!stack.isEmpty()) {
 			FluidStack fluidStack = recipe.getOutputFluid(stack);
 			if (fluidStack != null) {
@@ -143,7 +140,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 	 * @param other The other alloy
 	 * @return The alloy, for method chaining
 	 */
-	public Alloy add(@Nonnull Alloy other) {
+	public Alloy add(@NotNull Alloy other) {
 		int newTotalAmount = totalUnits + other.totalUnits;
 		double keepRatio = 1;
 		if (newTotalAmount > maxUnits) {
@@ -189,7 +186,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 	 *
 	 * @return the result metal. Unknown if it doesn't match any recipe
 	 */
-	@Nonnull
+	@NotNull
 	public Metal getResult() {
 		if (metalMap.size() == 1) {
 			return metalMap.keySet().iterator().next(); // Easy way to get the only metal in the alloy
@@ -347,8 +344,8 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
 		double actualTotalAmount = getAmountAccurately();
 		for (Metal metal : Sets.union(recipe.getMetals().keySet(), metals.keySet())) {
 			if (!metals.containsKey(metal) || !recipe.getMetals().containsKey(metal) || !recipe.getMetals()
-					.get(metal)
-					.test(metals.get(metal) / actualTotalAmount)) {
+			                                                                                   .get(metal)
+			                                                                                   .test(metals.get(metal) / actualTotalAmount)) {
 				return false;
 			}
 		}

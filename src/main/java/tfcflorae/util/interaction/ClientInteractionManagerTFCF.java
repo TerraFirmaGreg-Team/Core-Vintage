@@ -24,20 +24,20 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * Util class for handling right click actions with more precision than {@link net.minecraftforge.event.entity.player.PlayerInteractEvent} gives us
  *
  * @see net.minecraft.client.multiplayer.PlayerControllerMP
  */
-@ParametersAreNonnullByDefault
+
 final class ClientInteractionManagerTFCF {
 	/**
 	 * @see PlayerControllerMP#processRightClickBlock(EntityPlayerSP, WorldClient, BlockPos, EnumFacing, Vec3d, EnumHand)
 	 */
-	@Nonnull
+	@NotNull
 	static EnumActionResult processRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
 		EnumActionResult result = EnumActionResult.PASS;
 
@@ -140,7 +140,7 @@ final class ClientInteractionManagerTFCF {
 	/**
 	 * @see PlayerControllerMP#processRightClick(EntityPlayer, World, EnumHand)
 	 */
-	@Nonnull
+	@NotNull
 	static EnumActionResult processRightClickItem(PlayerInteractEvent.RightClickItem event, IRightClickItemAction action) {
 		// No special logic required, just fire the right click and return the result
 		return action.onRightClickItem(event.getWorld(), event.getEntityPlayer(), event.getHand());

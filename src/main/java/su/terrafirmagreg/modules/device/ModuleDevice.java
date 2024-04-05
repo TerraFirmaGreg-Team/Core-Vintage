@@ -9,11 +9,10 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
+import su.terrafirmagreg.api.network.IPacketService;
+import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
-import su.terrafirmagreg.modules.device.data.EntitiesDevice;
-import su.terrafirmagreg.modules.device.data.ItemsDevice;
-import su.terrafirmagreg.modules.device.data.SoundDevice;
+import su.terrafirmagreg.modules.device.data.*;
 
 @ModuleTFG(moduleID = "Device", name = "TFG Module Device")
 public final class ModuleDevice extends ModuleBase {
@@ -21,10 +20,15 @@ public final class ModuleDevice extends ModuleBase {
 	public static final Logger LOGGER = LogManager.getLogger(ModuleDevice.class.getSimpleName());
 	public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/firestarter");
 
+	public static IPacketService PACKET_SERVICE;
+	public static ITileDataService TILE_DATA_SERVICE;
 
 	public ModuleDevice() {
 		super(5);
 		this.enableAutoRegistry(DEVICES_TAB);
+
+		PACKET_SERVICE = this.enableNetwork();
+		TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
 
 	}
 
@@ -39,8 +43,13 @@ public final class ModuleDevice extends ModuleBase {
 	@SideOnly(Side.CLIENT)
 	public void onClientRegister() {
 		EntitiesDevice.onClientRegister(registryManager);
+
 	}
 
+	@Override
+	protected void onNetworkRegister() {
+		PacketDevice.onRegister(packetRegistry);
+	}
 
 	@Override
 	public @NotNull Logger getLogger() {

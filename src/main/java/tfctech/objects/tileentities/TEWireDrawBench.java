@@ -22,8 +22,9 @@ import tfctech.network.PacketTileEntityUpdate;
 import tfctech.objects.items.metal.ItemTechMetal;
 import tfctech.registry.TechRegistries;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class TEWireDrawBench extends TEInventory implements ITickable {
@@ -37,16 +38,16 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		switch (slot) {
 			case 0:
 				return stack.getItem() instanceof ItemTechMetal && ((ItemTechMetal) stack.getItem()).getType() == ItemTechMetal.ItemType.DRAW_PLATE;
 			case 1:
 				WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection()
-						.stream()
-						.filter(x -> x.matches(stack))
-						.findFirst()
-						.orElse(null);
+				                                                      .stream()
+				                                                      .filter(x -> x.matches(stack))
+				                                                      .findFirst()
+				                                                      .orElse(null);
 				return recipe != null;
 		}
 		return false;
@@ -58,10 +59,10 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 
 	public boolean hasWire() {
 		WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection()
-				.stream()
-				.filter(x -> x.matches(inventory.getStackInSlot(1)))
-				.findFirst()
-				.orElse(null);
+		                                                      .stream()
+		                                                      .filter(x -> x.matches(inventory.getStackInSlot(1)))
+		                                                      .findFirst()
+		                                                      .orElse(null);
 		return recipe != null;
 	}
 
@@ -69,13 +70,13 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 		if (canWork()) {
 			if (progress == 0) {
 				WireDrawingRecipe recipe = TechRegistries.WIRE_DRAWING.getValuesCollection()
-						.stream()
-						.filter(x -> x.matches(inventory.getStackInSlot(1)))
-						.findFirst()
-						.orElse(null);
+				                                                      .stream()
+				                                                      .filter(x -> x.matches(inventory.getStackInSlot(1)))
+				                                                      .findFirst()
+				                                                      .orElse(null);
 				Metal.Tier workableTier = ((ItemTechMetal) inventory.getStackInSlot(0)
-						.getItem()).getMetal(inventory.getStackInSlot(0))
-						.getTier();
+				                                                    .getItem()).getMetal(inventory.getStackInSlot(0))
+				                                                               .getTier();
 				if (recipe == null) {
 					player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.wiredraw.no_recipe"), true);
 					return false;
@@ -95,14 +96,14 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 		return false;
 	}
 
-	public ItemStack insertWire(@Nonnull ItemStack stack, boolean simulate) {
+	public ItemStack insertWire(@NotNull ItemStack stack, boolean simulate) {
 		if (!hasWire() && hasDrawPlate() && isItemValid(1, stack)) {
 			ItemStack output = inventory.insertItem(1, stack, simulate);
 			if (!simulate) {
 				cachedWireColor = 0x00000000;
 				TechRegistries.WIRE_DRAWING.getValuesCollection().stream()
-						.filter(x -> x.matches(stack))
-						.findFirst().ifPresent(x -> cachedWireColor = x.getWireColor());
+				                           .filter(x -> x.matches(stack))
+				                           .findFirst().ifPresent(x -> cachedWireColor = x.getWireColor());
 				setAndUpdateSlots(0);
 			}
 			return output;
@@ -110,7 +111,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 		return stack;
 	}
 
-	public ItemStack insertDrawPlate(@Nonnull ItemStack stack, boolean simulate) {
+	public ItemStack insertDrawPlate(@NotNull ItemStack stack, boolean simulate) {
 		if (!hasDrawPlate() && isItemValid(0, stack)) {
 			ItemStack output = inventory.insertItem(0, stack, simulate);
 			if (!simulate) {
@@ -124,7 +125,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 	@Override
 	public void setAndUpdateSlots(int slot) {
 		TFCTech.getNetwork()
-				.sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
+		       .sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
 		super.setAndUpdateSlots(slot);
 	}
 
@@ -137,7 +138,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("wireColor", cachedWireColor);
@@ -146,7 +147,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 		return super.writeToNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack extractItem(int slot, boolean simulate) {
 		if (slot < 0 || slot > 1 || (progress > 0 && progress < 100)) {
 			return ItemStack.EMPTY;
@@ -199,10 +200,10 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 						inventory.setStackInSlot(0, ItemStack.EMPTY);
 					}
 					TechRegistries.WIRE_DRAWING.getValuesCollection()
-							.stream()
-							.filter(x -> x.matches(inventory.getStackInSlot(1)))
-							.findFirst()
-							.ifPresent(recipe -> inventory.setStackInSlot(1, recipe.getOutput()));
+					                           .stream()
+					                           .filter(x -> x.matches(inventory.getStackInSlot(1)))
+					                           .findFirst()
+					                           .ifPresent(recipe -> inventory.setStackInSlot(1, recipe.getOutput()));
 					setAndUpdateSlots(1);
 				}
 			}
@@ -211,7 +212,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getRenderBoundingBox() {
 		return INFINITE_EXTENT_AABB;
 	}

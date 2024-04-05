@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.api.util.IFruitTreeGenerator;
@@ -13,8 +8,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public interface IFruitTree {
@@ -74,7 +71,7 @@ public interface IFruitTree {
 	/**
 	 * Return the tree generator used to generate this fruit tree.
 	 */
-	@Nonnull
+	@NotNull
 	default IFruitTreeGenerator getGenerator() {
 		return IFruitTreeGenerator.DEFAULT;
 	}

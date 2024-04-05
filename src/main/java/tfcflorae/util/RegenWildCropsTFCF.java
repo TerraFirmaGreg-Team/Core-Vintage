@@ -8,9 +8,7 @@ import net.minecraft.world.World;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.world.worldgen.WorldGenWildCropsTFCF;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class RegenWildCropsTFCF extends WorldGenWildCropsTFCF {
 	@Override
 	protected boolean isValidPosition(World world, BlockPos pos) {

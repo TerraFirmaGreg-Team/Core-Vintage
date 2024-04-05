@@ -26,20 +26,18 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRQuern;
 import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 import static su.terrafirmagreg.modules.device.objects.tiles.TEQuern.SLOT_HANDSTONE;
 
-@ParametersAreNonnullByDefault
+
 public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock {
 	private static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.625D, 1D);
 	private static final AxisAlignedBB QUERN_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.875D, 1D);
@@ -87,14 +85,14 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
 		return SelectionPlace.BASE;
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.VERY_LARGE; // Can't store anywhere, but don't overburden
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
@@ -131,7 +129,7 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		TEQuern teQuern = TileUtils.getTile(source, pos, TEQuern.class);
 		if (teQuern != null && teQuern.hasHandstone()) {
@@ -142,7 +140,7 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		if (face == EnumFacing.DOWN) {

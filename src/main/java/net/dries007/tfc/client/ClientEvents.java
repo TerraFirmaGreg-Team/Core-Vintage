@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
 
 import net.dries007.tfc.ConfigTFC;
@@ -133,13 +128,13 @@ public class ClientEvents {
 			int guiTop = ((GuiInventory) event.getGui()).getGuiTop();
 
 			event.getButtonList()
-					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.INVENTORY, guiLeft, guiTop, ++buttonId, false));
+			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.INVENTORY, guiLeft, guiTop, ++buttonId, false));
 			event.getButtonList()
-					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.SKILLS, guiLeft, guiTop, ++buttonId, true));
+			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.SKILLS, guiLeft, guiTop, ++buttonId, true));
 			event.getButtonList()
-					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.CALENDAR, guiLeft, guiTop, ++buttonId, true));
+			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.CALENDAR, guiLeft, guiTop, ++buttonId, true));
 			event.getButtonList()
-					.add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.NUTRITION, guiLeft, guiTop, ++buttonId, true));
+			     .add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.NUTRITION, guiLeft, guiTop, ++buttonId, true));
 		}
 	}
 
@@ -177,7 +172,7 @@ public class ClientEvents {
 		if (mc.gameSettings.showDebugInfo) {
 			//noinspection ConstantConditions
 			BlockPos blockpos = new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity()
-					.getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
+			                                                                  .getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
 			Chunk chunk = mc.world.getChunk(blockpos);
 			if (mc.world.isBlockLoaded(blockpos) && !chunk.isEmpty()) {
 				final int x = blockpos.getX() & 15, z = blockpos.getZ() & 15;
@@ -214,7 +209,7 @@ public class ClientEvents {
 
 						list.add(GRAY + "Valid Trees: ");
 						data.getValidTrees()
-								.forEach(t -> list.add(String.format("%s %s (%.1f)", WHITE, t.getRegistryName(), t.getDominance())));
+						    .forEach(t -> list.add(String.format("%s %s (%.1f)", WHITE, t.getRegistryName(), t.getDominance())));
 
 						list.add(GRAY + "Sea level offset: " + WHITE + data.getSeaLevelOffset(x, z));
 						list.add(GRAY + "Spawn Protection: " + WHITE + data.getSpawnProtection());

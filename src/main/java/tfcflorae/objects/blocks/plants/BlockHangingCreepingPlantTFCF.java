@@ -21,14 +21,15 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implements IGrowable {
 	private static final PropertyBool BOTTOM = PropertyBool.create("bottom");
 	private static final Map<Plant, BlockHangingCreepingPlantTFCF> MAP = new HashMap<>();
@@ -76,7 +77,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		IBlockState actualState = super.getActualState(state, worldIn, pos);
 		if (worldIn.getBlockState(pos.down())
@@ -120,7 +121,7 @@ public class BlockHangingCreepingPlantTFCF extends BlockCreepingPlantTFCF implem
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE, BOTTOM);
 	}

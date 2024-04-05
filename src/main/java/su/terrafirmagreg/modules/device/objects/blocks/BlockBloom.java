@@ -19,8 +19,9 @@ import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBloom;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 
 public class BlockBloom extends BlockBase implements ITEBlock {
@@ -68,7 +69,7 @@ public class BlockBloom extends BlockBase implements ITEBlock {
 		return new TEBloom();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		TEBloom tile = TileUtils.getTile(world, pos, TEBloom.class);

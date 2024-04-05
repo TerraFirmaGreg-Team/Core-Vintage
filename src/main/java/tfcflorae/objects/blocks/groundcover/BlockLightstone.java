@@ -30,11 +30,11 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class BlockLightstone extends BlockBush implements IItemSize {
 	private static final PropertyDirection FACING = PropertyDirection.create("facing");
 	private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
@@ -57,13 +57,13 @@ public class BlockLightstone extends BlockBush implements IItemSize {
 		OreDictionaryHelper.register(this, "gem", "yooperlite");
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.TINY; // Store anywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;
@@ -74,13 +74,13 @@ public class BlockLightstone extends BlockBush implements IItemSize {
 		this.onNeighborChangeInternal(worldIn, pos, state);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public BlockStateContainer getBlockState() {
 		return this.blockState;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
@@ -92,7 +92,7 @@ public class BlockLightstone extends BlockBush implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.NONE;
 	}
@@ -129,7 +129,7 @@ public class BlockLightstone extends BlockBush implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		switch (state.getValue(FACING)) {
 			case EAST:
@@ -147,27 +147,27 @@ public class BlockLightstone extends BlockBush implements IItemSize {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, FACING);
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		if (this.canPlaceAt(worldIn, pos, facing)) {
@@ -230,7 +230,7 @@ public class BlockLightstone extends BlockBush implements IItemSize {
 		}
 	}
 
-    /*@Nonnull
+    /*@NotNull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
@@ -238,13 +238,13 @@ public class BlockLightstone extends BlockBush implements IItemSize {
     }*/
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(state.getBlock());
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
@@ -252,7 +252,7 @@ public class BlockLightstone extends BlockBush implements IItemSize {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}

@@ -1,19 +1,15 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.forge;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.LinkedList;
 
-@ParametersAreNonnullByDefault
+
 public class ForgeSteps implements INBTSerializable<NBTTagCompound> {
 	private final LinkedList<ForgeStep> steps;
 
@@ -34,7 +30,7 @@ public class ForgeSteps implements INBTSerializable<NBTTagCompound> {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setInteger("last", getStepInt(0));
@@ -52,7 +48,7 @@ public class ForgeSteps implements INBTSerializable<NBTTagCompound> {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public ForgeSteps copy() {
 		ForgeSteps newSteps = new ForgeSteps();
 		for (ForgeStep step : this.steps)

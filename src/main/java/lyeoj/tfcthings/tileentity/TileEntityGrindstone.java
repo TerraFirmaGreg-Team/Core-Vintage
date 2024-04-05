@@ -20,7 +20,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class TileEntityGrindstone extends TEInventory implements ITickable {
 
@@ -39,7 +39,7 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("rotationTimer", this.rotationTimer);
 		return super.writeToNBT(nbt);

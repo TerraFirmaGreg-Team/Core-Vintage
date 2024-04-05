@@ -38,13 +38,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 	public static final Map<EnumDyeColor, BlockCoral> TUBE_CORAL = new HashMap<>();
 	public static final Map<EnumDyeColor, BlockCoral> BRAIN_CORAL = new HashMap<>();
@@ -85,13 +86,13 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		this.canCreateSources = false;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;
@@ -99,15 +100,15 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos)
-				.withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
-				.withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
-				.withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
-				.withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
-				.withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
-				.withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
+		            .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
+		            .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
+		            .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
+		            .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
+		            .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
+		            .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
 	}
 
 	protected boolean canSustainBush(IBlockState state) {
@@ -116,7 +117,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		state = state.getActualState(source, pos);
 
@@ -166,7 +167,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		return NULL_AABB;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	protected BlockStateContainer createBlockState() {
 		//return new BlockStateContainer(this, LEVEL, DOWN, UP, NORTH, EAST, WEST, SOUTH);
@@ -184,28 +185,28 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		return switch (rot) {
 			case CLOCKWISE_180 -> state.withProperty(NORTH, state.getValue(SOUTH))
-					.withProperty(EAST, state.getValue(WEST))
-					.withProperty(SOUTH, state.getValue(NORTH))
-					.withProperty(WEST, state.getValue(EAST));
+			                           .withProperty(EAST, state.getValue(WEST))
+			                           .withProperty(SOUTH, state.getValue(NORTH))
+			                           .withProperty(WEST, state.getValue(EAST));
 			case COUNTERCLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(EAST))
-					.withProperty(EAST, state.getValue(SOUTH))
-					.withProperty(SOUTH, state.getValue(WEST))
-					.withProperty(WEST, state.getValue(NORTH));
+			                                 .withProperty(EAST, state.getValue(SOUTH))
+			                                 .withProperty(SOUTH, state.getValue(WEST))
+			                                 .withProperty(WEST, state.getValue(NORTH));
 			case CLOCKWISE_90 -> state.withProperty(NORTH, state.getValue(WEST))
-					.withProperty(EAST, state.getValue(NORTH))
-					.withProperty(SOUTH, state.getValue(EAST))
-					.withProperty(WEST, state.getValue(SOUTH));
+			                          .withProperty(EAST, state.getValue(NORTH))
+			                          .withProperty(SOUTH, state.getValue(EAST))
+			                          .withProperty(WEST, state.getValue(SOUTH));
 			default -> state;
 		};
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		switch (mirrorIn) {
 			case LEFT_RIGHT:
@@ -217,27 +218,27 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
 		return true;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
@@ -250,12 +251,12 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer() {
@@ -263,7 +264,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!worldIn.isRemote) {
@@ -273,11 +274,11 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		return canConnectTo(world, pos.offset(facing), facing.getOpposite()) && !(world.getBlockState(pos.offset(facing))
-				.getBlock() instanceof BlockFence);
+		                                                                               .getBlock() instanceof BlockFence);
 	}
 
 	protected boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
@@ -305,13 +306,13 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		return false;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
 		this.onBlockHarvested(world, pos, state, player);
 		return world.setBlockState(pos, FluidsTFC.SALT_WATER.get()
-				.getBlock()
-				.getDefaultState(), world.isRemote ? 11 : 3);
+		                                                    .getBlock()
+		                                                    .getDefaultState(), world.isRemote ? 11 : 3);
 	}
 
 	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
@@ -321,7 +322,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
 		for (EnumFacing face : EnumFacing.values()) {
 			IBlockState up = worldIn.getBlockState(pos.up());
@@ -348,7 +349,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		return getDefaultState();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Block.EnumOffsetType getOffsetType() {
@@ -356,14 +357,14 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 	}
 
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return state.getBoundingBox(worldIn, pos).offset(pos);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {

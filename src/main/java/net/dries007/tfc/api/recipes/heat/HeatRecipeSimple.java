@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.heat;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -13,10 +8,9 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class HeatRecipeSimple extends HeatRecipe {
 	private final ItemStack output;
 	private final float maxTemp;
@@ -40,7 +34,7 @@ public class HeatRecipeSimple extends HeatRecipe {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getOutputStack(ItemStack input) {
 		// No need to check min temp, as it would of already been matched in HeatRecipe
 		IItemHeat heat = input.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);

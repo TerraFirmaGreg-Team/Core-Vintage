@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package tfcflorae.objects.blocks.plants;
 
 import net.dries007.tfc.api.types.Plant;
@@ -27,13 +22,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy2;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 	static final PropertyBool DOWN = PropertyBool.create("down");
 	static final PropertyBool UP = PropertyBool.create("up");
@@ -64,7 +60,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return super.getActualState(state, worldIn, pos)
 		            .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
@@ -76,7 +72,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.NONE;
 	}
@@ -103,7 +99,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		state = state.getActualState(source, pos);
 
@@ -153,14 +149,14 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, growthStageProperty, DAYPERIOD, AGE);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		switch (rot) {
 			case CLOCKWISE_180:
@@ -188,7 +184,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		switch (mirrorIn) {
 			case LEFT_RIGHT:
@@ -245,7 +241,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}

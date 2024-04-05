@@ -49,16 +49,14 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 import static net.dries007.tfc.Constants.RNG;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemMetalMallet extends ItemTFC implements IMetalItem {
 	public final ToolMaterial material;
@@ -76,7 +74,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
@@ -164,7 +162,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
 							int dropCount = Math.min(Constants.RNG.nextInt(4) + 1, leafCount);
 							BlockPos dropPos = logPos.offset(EnumFacing.random(Constants.RNG), Constants.RNG.nextInt(3) + 1);
 							Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut()
-									.getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
+							                                                            .getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
 							TFCParticles.LEAF1.sendToAllNear(worldIn, dropPos.getX() + RNG.nextFloat() / 10, dropPos.getY() - RNG.nextFloat() / 10, dropPos.getZ() + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, 90);
 							leafCount -= dropCount;
 						}
@@ -198,12 +196,12 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
 		return multimap;
 	}
 
-	@Nonnull
+
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.VERY_LARGE;
 	}
 
-	@Nonnull
+
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.HEAVY;
 	}

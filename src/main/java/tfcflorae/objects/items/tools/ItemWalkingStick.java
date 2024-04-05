@@ -15,12 +15,12 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.UUID;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemWalkingStick extends ItemHoe implements IItemSize {
 	public final static UUID MOVEMENT_SPEED_MODIFIER = UUID.fromString("dcd2b961-181e-4141-a891-8c1958670b8c");
 	public final ToolMaterial material;
@@ -58,13 +58,13 @@ public class ItemWalkingStick extends ItemHoe implements IItemSize {
 		return multimap;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE; // Stored only in chests
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;

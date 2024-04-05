@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import mezz.jei.api.IGuiHelper;
@@ -20,9 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class QuernCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 	private static final ResourceLocation ICONS = new ResourceLocation(Constants.MODID_TFC, "textures/gui/icons/jei.png");
 

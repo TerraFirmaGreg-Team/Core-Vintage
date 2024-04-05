@@ -39,14 +39,15 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockBeehive extends Block implements IItemSize {
 	public static final PropertyInteger STAGE = StatePropertiesFL.STAGE;
@@ -182,18 +183,18 @@ public class BlockBeehive extends Block implements IItemSize {
 	}
 
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.NORMAL;
 	}
 
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
 	}

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.size;
 
 import net.dries007.tfc.api.capability.DumbStorage;
@@ -19,8 +14,10 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import su.terrafirmagreg.api.lib.Constants;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -80,7 +77,7 @@ public final class CapabilityItemSize {
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	public static ICapabilityProvider getCustomSize(ItemStack stack) {
 		for (Map.Entry<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> entry : CUSTOM_ITEMS.entrySet()) {
 			if (entry.getKey().testIgnoreCount(stack)) {

@@ -24,16 +24,14 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.STASIS;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockClimateStation extends Block implements IItemSize, IHighlightHandler {
 	public final int tier;
@@ -117,15 +115,15 @@ public class BlockClimateStation extends Block implements IItemSize, IHighlightH
 		return new BlockStateContainer(this, FACING, STASIS);
 	}
 
+
 	@Override
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.NORMAL;
 	}
 
+
 	@Override
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.MEDIUM;
 	}
 

@@ -21,15 +21,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 import java.util.function.Supplier;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.STAGE;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockBonsai extends BlockNonCube {
 	protected final Supplier<? extends Item> fruit;
 	protected final Supplier<? extends Item> seed;

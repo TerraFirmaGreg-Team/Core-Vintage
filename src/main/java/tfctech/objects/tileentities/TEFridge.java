@@ -5,6 +5,7 @@ import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.Helpers;
@@ -34,16 +35,16 @@ import tfctech.network.PacketFridgeUpdate;
 import tfctech.network.PacketTileEntityUpdate;
 import tfctech.objects.blocks.devices.BlockFridge;
 import tfctech.objects.storage.MachineEnergyContainer;
-import tfctech.registry.TechFoodTraits;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static tfctech.objects.blocks.devices.BlockFridge.UPPER;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TEFridge extends TEInventory implements ITickable, IEnergySink {
@@ -108,8 +109,8 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
 		ItemStack stack = inventory.extractItem(slot, 64, false);
 		IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 		if (cap != null) {
-			CapabilityFood.removeTrait(cap, TechFoodTraits.FROZEN);
-			CapabilityFood.removeTrait(cap, TechFoodTraits.COLD);
+			CapabilityFood.removeTrait(cap, FoodTrait.FROZEN);
+			CapabilityFood.removeTrait(cap, FoodTrait.COLD);
 		}
 		setAndUpdateSlots(slot);
 		return stack;
@@ -132,7 +133,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setFloat("open", open);
@@ -212,7 +213,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getRenderBoundingBox() {
 		return INFINITE_EXTENT_AABB;
 	}
@@ -369,24 +370,24 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
 					for (int i = 0; i < inventory.getSlots(); i++) {
 						IFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
 						if (cap != null) {
-							CapabilityFood.removeTrait(cap, TechFoodTraits.COLD);
-							CapabilityFood.applyTrait(cap, TechFoodTraits.FROZEN);
+							CapabilityFood.removeTrait(cap, FoodTrait.COLD);
+							CapabilityFood.applyTrait(cap, FoodTrait.FROZEN);
 						}
 					}
 				} else if (efficiency >= 30.0F) {
 					for (int i = 0; i < inventory.getSlots(); i++) {
 						IFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
 						if (cap != null) {
-							CapabilityFood.removeTrait(cap, TechFoodTraits.FROZEN);
-							CapabilityFood.applyTrait(cap, TechFoodTraits.COLD);
+							CapabilityFood.removeTrait(cap, FoodTrait.FROZEN);
+							CapabilityFood.applyTrait(cap, FoodTrait.COLD);
 						}
 					}
 				} else {
 					for (int i = 0; i < inventory.getSlots(); i++) {
 						IFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
 						if (cap != null) {
-							CapabilityFood.removeTrait(cap, TechFoodTraits.FROZEN);
-							CapabilityFood.removeTrait(cap, TechFoodTraits.COLD);
+							CapabilityFood.removeTrait(cap, FoodTrait.FROZEN);
+							CapabilityFood.removeTrait(cap, FoodTrait.COLD);
 						}
 					}
 				}

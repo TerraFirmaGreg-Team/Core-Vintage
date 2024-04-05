@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
@@ -11,10 +6,9 @@ import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class TECropBase extends TETickCounter implements ICalendarTickable, ITickable {
 	protected long lastTickCalChecked;
 
@@ -45,7 +39,7 @@ public class TECropBase extends TETickCounter implements ICalendarTickable, ITic
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setLong("lastTickCalChecked", lastTickCalChecked);

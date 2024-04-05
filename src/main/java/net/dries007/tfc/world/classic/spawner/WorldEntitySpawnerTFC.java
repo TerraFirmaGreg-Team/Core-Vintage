@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.spawner;
 
 import net.dries007.tfc.ConfigTFC;
@@ -85,8 +80,8 @@ public final class WorldEntitySpawnerTFC {
 		EntityLiving entity = (EntityLiving) event.getEntity();
 
 		event.getWorld()
-				.getBiome(new BlockPos(event.getX(), event.getY(), event.getZ()))
-				.getSpawnableList(EnumCreatureType.CREATURE);
+		     .getBiome(new BlockPos(event.getX(), event.getY(), event.getZ()))
+		     .getSpawnableList(EnumCreatureType.CREATURE);
 
 		if (LIVESTOCK.containsKey(entity.getClass())) {
 			event.setResult(Event.Result.ALLOW); // Always cancel vanilla's spawning since we take it from here
@@ -127,17 +122,17 @@ public final class WorldEntitySpawnerTFC {
 
 		// Spawns only one group
 		ForgeRegistries.ENTITIES.getValuesCollection().stream()
-				.filter(x -> {
-					if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
-						Entity ent = x.newInstance(worldIn);
-						if (ent instanceof ICreature creature) {
-							int weight = creature.getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
-							return weight > 0 && randomIn.nextInt(weight) == 0;
-						}
-					}
-					return false;
-				}).findFirst()
-				.ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
+		                        .filter(x -> {
+			                        if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
+				                        Entity ent = x.newInstance(worldIn);
+				                        if (ent instanceof ICreature creature) {
+					                        int weight = creature.getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+					                        return weight > 0 && randomIn.nextInt(weight) == 0;
+				                        }
+			                        }
+			                        return false;
+		                        }).findFirst()
+		                        .ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
 	}
 
 	private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {

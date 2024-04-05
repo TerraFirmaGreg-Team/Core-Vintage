@@ -34,12 +34,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 import java.util.function.Supplier;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockCheesewheel extends BlockNonCube implements IItemSize {
 	public static final PropertyInteger WEDGES = StatePropertiesFL.WEDGES;
@@ -171,15 +169,15 @@ public class BlockCheesewheel extends BlockNonCube implements IItemSize {
 		drops.add(cheese);
 	}
 
+
 	@Override
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.VERY_LARGE;
 	}
 
+
 	@Override
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 }

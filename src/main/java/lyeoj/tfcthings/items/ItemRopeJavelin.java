@@ -31,8 +31,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.UUID;
 
 public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
@@ -90,15 +92,15 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
 		return 100;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.NORMAL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 
@@ -118,7 +120,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
 	}
 
 	@NotNull
-	public ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+	public ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		if (isThrown(itemstack)) {
 			EntityThrownRopeJavelin javelin = getJavelin(itemstack, worldIn);
@@ -143,7 +145,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 	}
 
-	@Nonnull
+	@NotNull
 	public EnumAction getItemUseAction(@NotNull ItemStack stack) {
 		return isThrown(stack) ? EnumAction.NONE : EnumAction.BOW;
 	}

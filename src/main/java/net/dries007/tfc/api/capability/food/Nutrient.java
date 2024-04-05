@@ -1,13 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.minecraft.util.text.TextFormatting;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public enum Nutrient {
 	GRAIN(TextFormatting.GOLD),
@@ -24,12 +19,12 @@ public enum Nutrient {
 		this.color = color;
 	}
 
-	@Nonnull
+	@NotNull
 	public static Nutrient valueOf(int i) {
 		return i >= 0 && i < VALUES.length ? VALUES[i] : GRAIN;
 	}
 
-	@Nonnull
+	@NotNull
 	public TextFormatting getColor() {
 		return color;
 	}

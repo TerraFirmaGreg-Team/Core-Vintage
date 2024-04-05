@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import mezz.jei.api.IGuiHelper;
@@ -14,9 +9,7 @@ import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public class AnvilCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 
 	public AnvilCategory(IGuiHelper helper, String Uid) {

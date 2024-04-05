@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.model.animal;
 
 import net.dries007.tfc.objects.entity.animal.EntityMuskOxTFC;
@@ -13,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelAlpacaWoolTFC
@@ -21,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelMuskOxWoolTFC extends ModelBase {
 	public ModelRenderer bodyShoulderQiviut;
 	public ModelRenderer bodyHairQiviut;

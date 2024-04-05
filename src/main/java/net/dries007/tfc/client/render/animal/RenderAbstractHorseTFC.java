@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import com.google.common.collect.Maps;
@@ -17,7 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 
 /**
@@ -46,7 +42,7 @@ public class RenderAbstractHorseTFC extends RenderLiving<AbstractHorse> {
 	}
 
 	@Override
-	protected void preRenderCallback(@Nonnull AbstractHorse entitylivingbaseIn, float partialTickTime) {
+	protected void preRenderCallback(@NotNull AbstractHorse entitylivingbaseIn, float partialTickTime) {
 		GlStateManager.scale(this.scale, this.scale, this.scale);
 		super.preRenderCallback(entitylivingbaseIn, partialTickTime);
 	}

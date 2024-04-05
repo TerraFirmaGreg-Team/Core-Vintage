@@ -4,7 +4,7 @@ import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class TEHangingPlanter extends TETickCounter implements GreenhouseHelpers.IGreenhouseReceiver {
 	private boolean isClimateValid;
@@ -38,7 +38,7 @@ public class TEHangingPlanter extends TETickCounter implements GreenhouseHelpers
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("isClimateValid", isClimateValid);

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.ingredient;
 
 import net.minecraft.block.Block;
@@ -13,7 +8,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Predicate;
 
 /**
@@ -37,39 +33,39 @@ public interface IIngredient<T> extends Predicate<T> {
 		return (IIngredient<P>) ANY;
 	}
 
-	static IIngredient<ItemStack> of(@Nonnull Block predicateBlock) {
+	static IIngredient<ItemStack> of(@NotNull Block predicateBlock) {
 		return new IngredientItemStack(new ItemStack(predicateBlock, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
-	static IIngredient<ItemStack> of(@Nonnull Item predicateItem) {
+	static IIngredient<ItemStack> of(@NotNull Item predicateItem) {
 		return new IngredientItemStack(new ItemStack(predicateItem, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
-	static IIngredient<ItemStack> of(@Nonnull Item predicateItem, int amount) {
+	static IIngredient<ItemStack> of(@NotNull Item predicateItem, int amount) {
 		return new IngredientItemStack(new ItemStack(predicateItem, amount, OreDictionary.WILDCARD_VALUE));
 	}
 
-	static IIngredient<ItemStack> of(@Nonnull ItemStack predicateStack) {
+	static IIngredient<ItemStack> of(@NotNull ItemStack predicateStack) {
 		return new IngredientItemStack(predicateStack);
 	}
 
-	static IIngredient<ItemStack> of(@Nonnull String oreName) {
+	static IIngredient<ItemStack> of(@NotNull String oreName) {
 		return new IngredientOreDict(oreName);
 	}
 
-	static IIngredient<ItemStack> of(@Nonnull String oreName, int amount) {
+	static IIngredient<ItemStack> of(@NotNull String oreName, int amount) {
 		return new IngredientOreDict(oreName, amount);
 	}
 
-	static IIngredient<FluidStack> of(@Nonnull FluidStack predicateStack) {
+	static IIngredient<FluidStack> of(@NotNull FluidStack predicateStack) {
 		return new IngredientFluidStack(predicateStack);
 	}
 
-	static IIngredient<FluidStack> of(@Nonnull Fluid fluid, int amount) {
+	static IIngredient<FluidStack> of(@NotNull Fluid fluid, int amount) {
 		return new IngredientFluidStack(fluid, amount);
 	}
 
-	static IIngredient<FluidStack> of(int amount, @Nonnull Fluid... fluids) {
+	static IIngredient<FluidStack> of(int amount, @NotNull Fluid... fluids) {
 		return new IngredientMultipleFluidStack(amount, fluids);
 	}
 

@@ -12,7 +12,8 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import static se.gory_moon.horsepower.blocks.BlockHPChoppingBase.createItemStack;
@@ -38,7 +39,7 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getRecipeOutput() {
 		if (!outputBlocks.isEmpty() && !output.isEmpty()) {
@@ -53,9 +54,9 @@ public class ShapelessChoppingRecipe extends ShapelessOreRecipe {
 		return super.getRecipeOutput();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getCraftingResult(@Nonnull InventoryCrafting craftMatrix) {
+	public ItemStack getCraftingResult(@NotNull InventoryCrafting craftMatrix) {
         /*boolean isTypeChopping = false;
         for (ItemStack outputBlock : outputBlocks)
         {

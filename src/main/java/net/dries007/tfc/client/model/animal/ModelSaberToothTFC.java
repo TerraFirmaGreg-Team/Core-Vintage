@@ -10,7 +10,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * ModelSabertoothTFC
@@ -18,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelSaberToothTFC extends ModelBase {
 	private final ModelRenderer frontBody;
 	private final ModelRenderer neckBase;

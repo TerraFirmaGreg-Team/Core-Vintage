@@ -37,12 +37,13 @@ import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.client.render.TESRCrucible;
 import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, ITEBlock {
 	private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0.0625, 0.0625, 0.9375, 0.9375, 0.9375);
 	private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 0.125D, 0.9375D);
@@ -67,9 +68,9 @@ public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, ITEB
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return stack.getTagCompound() == null ? Size.LARGE : Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
 	}
 
@@ -85,9 +86,9 @@ public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, ITEB
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.VERY_HEAVY;  // stacksize = 1
 	}
 
@@ -123,13 +124,13 @@ public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, ITEB
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return CRUCIBLE_AABB;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		if (face == EnumFacing.UP) {
@@ -158,7 +159,7 @@ public class BlockCrucible extends BlockBase implements IHeatConsumerBlock, ITEB
 	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return CRUCIBLE_AABB;
 	}

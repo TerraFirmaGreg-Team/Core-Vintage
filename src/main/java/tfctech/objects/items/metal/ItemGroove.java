@@ -15,11 +15,10 @@ import tfctech.client.TechSounds;
 import tfctech.objects.blocks.TechBlocks;
 import tfctech.objects.blocks.devices.BlockLatexExtractor;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemGroove extends ItemTechMetal {
 	public ItemGroove(Metal metal, ItemTechMetal.ItemType type) {

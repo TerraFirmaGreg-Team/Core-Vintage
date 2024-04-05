@@ -11,11 +11,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
-@ParametersAreNonnullByDefault
+
 public class GlassworkingCategory extends BaseRecipeCategory<GlassworkingRecipeWrapper> {
 	private static final ResourceLocation ICONS = new ResourceLocation(MODID_TFCTECH, "textures/gui/elements.png");
 

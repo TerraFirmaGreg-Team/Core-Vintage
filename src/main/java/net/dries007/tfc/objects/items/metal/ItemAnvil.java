@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.dries007.tfc.api.capability.size.Size;
@@ -21,25 +16,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import static net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC.AXIS;
 
-@ParametersAreNonnullByDefault
+
 public class ItemAnvil extends ItemMetal {
 	public ItemAnvil(Metal metal, Metal.ItemType type) {
 		super(metal, type);
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.HUGE; // Can't be stored and causes overburden
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY; // Stacksize = 1
 	}
@@ -50,7 +42,7 @@ public class ItemAnvil extends ItemMetal {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (facing != null) {
 			ItemStack stack = player.getHeldItem(hand);

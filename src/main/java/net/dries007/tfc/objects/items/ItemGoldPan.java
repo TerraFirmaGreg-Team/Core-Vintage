@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -36,8 +31,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -51,7 +46,7 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
  * - we also need to supply an implementation of a loot table / json that can access the chunk ore (current functionality)
  */
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemGoldPan extends ItemTFC {
 	public static final String[] TYPES = new String[]{"empty", "sand", "gravel", "clay", "dirt"};
 
@@ -118,8 +113,8 @@ public class ItemGoldPan extends ItemTFC {
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack onItemUseFinish(@Nonnull ItemStack stack, World world, EntityLivingBase entityLiving) {
+	@NotNull
+	public ItemStack onItemUseFinish(@NotNull ItemStack stack, World world, EntityLivingBase entityLiving) {
 		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityLiving;
 			if (stack.getItemDamage() > 0) {
@@ -203,13 +198,13 @@ public class ItemGoldPan extends ItemTFC {
 		}
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.NORMAL; // Stored in large vessels and chests
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;

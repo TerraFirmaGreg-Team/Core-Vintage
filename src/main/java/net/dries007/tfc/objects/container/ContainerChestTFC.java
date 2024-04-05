@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -14,7 +9,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ContainerChestTFC extends Container {
 	private final IInventory lowerChestInventory;
@@ -48,7 +43,7 @@ public class ContainerChestTFC extends Container {
 	 * Copied from {@link ContainerTE}
 	 */
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		// Slot that was clicked
 		Slot slot = inventorySlots.get(index);
@@ -92,7 +87,7 @@ public class ContainerChestTFC extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
+	public boolean canInteractWith(@NotNull EntityPlayer playerIn) {
 		return this.lowerChestInventory.isUsableByPlayer(playerIn);
 	}
 

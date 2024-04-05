@@ -6,7 +6,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemRoastedCocoaBeans extends ItemMisc {
 
@@ -15,7 +15,7 @@ public class ItemRoastedCocoaBeans extends ItemMisc {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getContainerItem(ItemStack itemStack) {
 		return new ItemStack(ItemsFL.COCOA_POWDER);
 	}

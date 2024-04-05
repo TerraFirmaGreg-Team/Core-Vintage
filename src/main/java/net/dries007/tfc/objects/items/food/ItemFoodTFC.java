@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.food;
 
 import net.dries007.tfc.api.capability.food.*;
@@ -18,17 +13,17 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
 	private static final Map<Food, ItemFoodTFC> MAP = new HashMap<>();
 	protected final Food food;
 
-	public ItemFoodTFC(@Nonnull Food food) {
+	public ItemFoodTFC(@NotNull Food food) {
 		super(0, 0, food.getCategory() == Food.Category.MEAT || food.getCategory() == Food.Category.COOKED_MEAT);
 		this.food = food;
 		if (MAP.put(food, this) != null) {
@@ -70,15 +65,15 @@ public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
 		return getStackSize(stack);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.VERY_LIGHT;
 	}
 

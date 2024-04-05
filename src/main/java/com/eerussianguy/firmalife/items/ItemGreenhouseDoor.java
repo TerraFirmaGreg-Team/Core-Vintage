@@ -19,10 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemGreenhouseDoor extends ItemDoor implements IItemSize {
 	private final Block block; // let's just duplicate the variable instead of using an AT
@@ -67,12 +64,12 @@ public class ItemGreenhouseDoor extends ItemDoor implements IItemSize {
 		}
 	}
 
-	@Nonnull
+
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.VERY_LARGE;
 	}
 
-	@Nonnull
+
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.HEAVY;
 	}

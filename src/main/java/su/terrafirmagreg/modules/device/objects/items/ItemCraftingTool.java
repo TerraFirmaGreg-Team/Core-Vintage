@@ -4,7 +4,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemCraftingTool extends ItemDeviceMisc {
 	public ItemCraftingTool(String name, int durability, Size size, Weight weight, Object... oreNameParts) {
@@ -15,7 +15,7 @@ public class ItemCraftingTool extends ItemDeviceMisc {
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return false;
 	}
 }

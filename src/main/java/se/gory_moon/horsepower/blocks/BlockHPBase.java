@@ -23,13 +23,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import se.gory_moon.horsepower.HorsePowerMod;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityHPHorseBase;
 import se.gory_moon.horsepower.util.Utils;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public abstract class BlockHPBase extends Block implements IItemSize {
@@ -41,13 +40,13 @@ public abstract class BlockHPBase extends Block implements IItemSize {
 		setCreativeTab(HorsePowerMod.creativeTab);
 	}
 
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY;
 	}
 
@@ -184,7 +183,7 @@ public abstract class BlockHPBase extends Block implements IItemSize {
 	}
 
 	@Override
-	public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
+	public boolean removedByPlayer(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player, boolean willHarvest) {
 		// we pull up a few calls to this point in time because we still have the TE here
 		// the execution otherwise is equivalent to vanilla order
 		this.onPlayerDestroy(world, pos, state);
@@ -214,7 +213,7 @@ public abstract class BlockHPBase extends Block implements IItemSize {
 		return null;
 	}
 
-	@Nonnull
+	@NotNull
 	public abstract Class<?> getTileClass();
 
 	protected <T extends TileEntityHPBase> T getTileEntity(IBlockAccess worldIn, BlockPos pos) {

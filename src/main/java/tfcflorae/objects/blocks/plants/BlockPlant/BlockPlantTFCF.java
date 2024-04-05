@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package tfcflorae.objects.blocks.plants.BlockPlant;
 
 import net.dries007.tfc.ConfigTFC;
@@ -42,12 +37,13 @@ import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockPlantTFCF extends BlockBush implements IItemSize {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 	/*
@@ -89,7 +85,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(AGE, meta);
 	}
@@ -101,7 +97,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return state.withProperty(DAYPERIOD, getDayPeriod())
 		            .withProperty(growthStageProperty, plant.getStageForMonth());
@@ -146,7 +142,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		if (!plant.getOreDictName().isPresent()) {
 			return Items.AIR;
@@ -187,14 +183,14 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public BlockStateContainer getBlockState() {
 		return this.blockState;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XYZ;
 	}
@@ -221,13 +217,13 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 		return plant;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.TINY; // Store anywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
@@ -291,7 +287,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return PLANT_AABB.offset(state.getOffset(source, pos));
 	}
@@ -308,7 +304,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumPlantType getPlantType(net.minecraft.world.IBlockAccess world, BlockPos pos) {
 		switch (plant.getPlantType()) {
 			case CACTUS:
@@ -325,12 +321,12 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public Plant.EnumPlantTypeTFC getPlantTypeTFC() {
 		return plant.getEnumPlantTypeTFC();
 	}
 
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, growthStageProperty, DAYPERIOD, AGE);
 	}

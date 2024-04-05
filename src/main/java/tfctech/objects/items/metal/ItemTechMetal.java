@@ -13,8 +13,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,9 +50,9 @@ public class ItemTechMetal extends ItemTFC implements IMetalItem {
 		return type;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		switch (type) {
 			case WIRE:
 			case BOWL_MOUNT:
@@ -63,9 +65,9 @@ public class ItemTechMetal extends ItemTFC implements IMetalItem {
 		}
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		switch (type) {
 			case RACKWHEEL:
 			case GEAR:
@@ -81,23 +83,23 @@ public class ItemTechMetal extends ItemTFC implements IMetalItem {
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		//noinspection ConstantConditions
 		String metalName = (new TextComponentTranslation("tfc.types.metal." + metal.getRegistryName()
-				.getPath()
-				.toLowerCase())).getFormattedText();
+		                                                                           .getPath()
+		                                                                           .toLowerCase())).getFormattedText();
 		return (new TextComponentTranslation("item.tfctech.metalitem." + type.name()
-				.toLowerCase() + ".name", metalName)).getFormattedText();
+		                                                                     .toLowerCase() + ".name", metalName)).getFormattedText();
 	}
 
 	@Nullable
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new ForgeableHeatableHandler(nbt, metal.getSpecificHeat(), metal.getMeltTemp());
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Metal getMetal(ItemStack itemStack) {
 		return metal;
@@ -137,7 +139,7 @@ public class ItemTechMetal extends ItemTFC implements IMetalItem {
 			this(smeltAmount, hasMold, ItemTechMetal::new);
 		}
 
-		ItemType(int smeltAmount, boolean hasMold, @Nonnull BiFunction<Metal, ItemType, Item> supplier) {
+		ItemType(int smeltAmount, boolean hasMold, @NotNull BiFunction<Metal, ItemType, Item> supplier) {
 			this.smeltAmount = smeltAmount;
 			this.hasMold = hasMold;
 			this.supplier = supplier;

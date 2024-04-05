@@ -7,12 +7,12 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.PowderTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.EnumMap;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 public class ItemPowderTFCF extends ItemTFCF {
 	private static final EnumMap<PowderTFCF, ItemPowderTFCF> MAP = new EnumMap<>(PowderTFCF.class);
 	private final PowderTFCF powder;
@@ -32,19 +32,19 @@ public class ItemPowderTFCF extends ItemTFCF {
 		return new ItemStack(MAP.get(powder), amount);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT;
 	}
 
-	@Nonnull
+	@NotNull
 	public PowderTFCF getPowder() {
 		return powder;
 	}

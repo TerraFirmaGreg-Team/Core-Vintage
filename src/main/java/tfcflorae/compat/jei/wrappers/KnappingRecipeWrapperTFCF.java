@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.objects.items.rock.ItemMud;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 

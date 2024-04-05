@@ -12,11 +12,10 @@ import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
-@ParametersAreNonnullByDefault
+
 public class WireDrawingCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 	private static final ResourceLocation ICONS = new ResourceLocation(MODID_TFCTECH, "textures/gui/elements.png");
 

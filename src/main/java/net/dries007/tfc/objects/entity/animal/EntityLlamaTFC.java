@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -48,16 +43,17 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	//Values that has a visual effect on client
 	protected static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityLlamaTFC.class, DataSerializers.BOOLEAN);
@@ -105,7 +101,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 
 		if (!stack.isEmpty()) {
@@ -152,7 +148,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 						//Show tooltips
 						if (this.isFertilized() && this.getType() == Type.MAMMAL) {
 							TerraFirmaCraft.getNetwork()
-									.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+							               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
 						}
 					}
 				}
@@ -207,7 +203,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimal male) {
+	public void onFertilized(@NotNull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		int selection = this.rand.nextInt(9);
 		int i;
@@ -222,14 +218,14 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 		this.geneVariant = i;
 		EntityLlamaTFC father = (EntityLlamaTFC) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-				.getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+		                                .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 
 		this.geneStrength = this.rand.nextInt(Math.max(this.getStrength(), father.getStrength())) + 1;
 		if (this.rand.nextFloat() < 0.03F) {
@@ -268,8 +264,8 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                      .name()
+		                                                                                      .toLowerCase());
 	}
 
 	@Override
@@ -290,7 +286,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 		return this.getAge() == IAnimal.Age.CHILD;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {
@@ -385,7 +381,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -404,7 +400,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -457,7 +453,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 
 	@Nullable
 	@Override
-	public EntityLlama createChild(@Nonnull EntityAgeable other) {
+	public EntityLlama createChild(@NotNull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
 		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);

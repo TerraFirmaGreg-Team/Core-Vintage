@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,10 +7,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public abstract class ContainerItemStack extends Container {
 	protected final ItemStack stack;
 	protected final EntityPlayer player;
@@ -41,7 +35,7 @@ public abstract class ContainerItemStack extends Container {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		// Slot that was clicked
 		Slot slot = inventorySlots.get(index);
@@ -86,7 +80,7 @@ public abstract class ContainerItemStack extends Container {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack slotClick(int slotID, int dragType, ClickType clickType, EntityPlayer player) {
 		// Prevent moving of the item stack that is currently open
 		if (slotID == itemIndex && (clickType == ClickType.QUICK_MOVE || clickType == ClickType.PICKUP || clickType == ClickType.THROW || clickType == ClickType.SWAP)) {

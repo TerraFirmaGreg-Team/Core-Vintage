@@ -11,10 +11,9 @@ import net.minecraft.item.ItemTool;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemHammerTFCF extends ItemTool implements IItemSize {
 	public final ToolMaterial material;
@@ -36,13 +35,13 @@ public class ItemHammerTFCF extends ItemTool implements IItemSize {
 		OreDictionaryHelper.registerDamageType(this, DamageType.CRUSHING);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE;  // Stored only in chests
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.MEDIUM;

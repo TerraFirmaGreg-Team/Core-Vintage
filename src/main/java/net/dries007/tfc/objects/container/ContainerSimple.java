@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,15 +6,15 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * A very simple container implementation.
  * Used for gui's that have no internal inventory, or no TE they need to access
  * Prefer using {@link ContainerTE} instead for tile entities or {@link ContainerItemStack} for items
  */
-@ParametersAreNonnullByDefault
+
 public class ContainerSimple extends Container {
 	public ContainerSimple() {}
 
@@ -28,7 +23,7 @@ public class ContainerSimple extends Container {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		ItemStack stackCopy = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);

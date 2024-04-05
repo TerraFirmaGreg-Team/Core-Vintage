@@ -12,7 +12,8 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import static se.gory_moon.horsepower.blocks.BlockHPChoppingBase.createItemStack;
@@ -38,9 +39,9 @@ public class ShapedChoppingRecipe extends ShapedOreRecipe {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getCraftingResult(@Nonnull InventoryCrafting craftMatrix) {
+	public ItemStack getCraftingResult(@NotNull InventoryCrafting craftMatrix) {
         /*boolean isTypeChopping = false;
         for (ItemStack outputBlock : outputBlocks)
         {
@@ -65,7 +66,7 @@ public class ShapedChoppingRecipe extends ShapedOreRecipe {
 		return super.getCraftingResult(craftMatrix);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getRecipeOutput() {
 		if (!outputBlocks.isEmpty() && !output.isEmpty()) {

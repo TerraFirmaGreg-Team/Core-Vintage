@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.anvil;
 
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -15,13 +10,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * AnvilRecipe implementation for copying {@link IForgeableMeasurableMetal} cap from one item to another
  */
-@ParametersAreNonnullByDefault
+
 public class AnvilRecipeMeasurable extends AnvilRecipe {
 	/**
 	 * Creates a new recipe that copies {@link IForgeableMeasurableMetal} capability from one item to another (both must implement it)
@@ -36,7 +31,7 @@ public class AnvilRecipeMeasurable extends AnvilRecipe {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getOutput(ItemStack input) {
 		if (matches(input)) {
 			NonNullList<ItemStack> out = super.getOutput(input);

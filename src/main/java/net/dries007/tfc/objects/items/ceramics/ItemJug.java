@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -35,13 +30,14 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.stream.Collectors;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ItemJug extends ItemPottery {
 	private static final int CAPACITY = 100;
 
@@ -91,8 +87,8 @@ public class ItemJug extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
-	public ItemStack onItemUseFinish(@Nonnull ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+	@NotNull
+	public ItemStack onItemUseFinish(@NotNull ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
 		IFluidHandler jugCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (jugCap != null) {
 			FluidStack fluidConsumed = jugCap.drain(CAPACITY, true);
@@ -113,8 +109,8 @@ public class ItemJug extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
-	public EnumAction getItemUseAction(@Nonnull ItemStack stack) {
+	@NotNull
+	public EnumAction getItemUseAction(@NotNull ItemStack stack) {
 		return EnumAction.DRINK;
 	}
 
@@ -124,8 +120,8 @@ public class ItemJug extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (bucketCap != null) {
 			FluidStack fluidStack = bucketCap.drain(CAPACITY, false);
@@ -160,7 +156,7 @@ public class ItemJug extends ItemPottery {
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new FluidWhitelistHandler(stack, CAPACITY, FluidsTFC.getAllWrappers()
 		                                                           .stream()
 		                                                           .filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)

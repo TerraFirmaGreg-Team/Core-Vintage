@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import pieman.caffeineaddon.potion.PotionEffects;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -51,8 +51,8 @@ public class ModFluids {
 		});
 	}
 
-	@Nonnull
-	private static FluidWrapper registerFluid(@Nonnull Fluid newFluid) {
+	@NotNull
+	private static FluidWrapper registerFluid(@NotNull Fluid newFluid) {
 		boolean isDefault = FluidRegistry.registerFluid(newFluid);
 		if (!isDefault) {
 			// Fluid was already registered with this name, default to that fluid

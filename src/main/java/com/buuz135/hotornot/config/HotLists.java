@@ -7,13 +7,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@ParametersAreNonnullByDefault
+
 public final class HotLists {
 
 	private static final List<Item> HOT_LIST = new ArrayList<>();

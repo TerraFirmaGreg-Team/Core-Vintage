@@ -1,6 +1,5 @@
 package com.eerussianguy.firmalife.te;
 
-import com.eerussianguy.firmalife.init.FoodDataFL;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -9,7 +8,7 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class TEString extends TEInventory {
 	private long lastUpdateTick;
@@ -23,7 +22,7 @@ public class TEString extends TEInventory {
 		HeatRecipe recipe = HeatRecipe.get(input);
 		ItemStack output = recipe != null ? recipe.getOutputStack(input) : input.copy();
 		CapabilityFood.updateFoodDecayOnCreate(output);
-		CapabilityFood.applyTrait(output, FoodDataFL.SMOKED);
+		CapabilityFood.applyTrait(output, FoodTrait.SMOKED);
 		CapabilityFood.removeTrait(output, FoodTrait.BRINED);
 		inventory.setStackInSlot(0, output);
 		markForSync();
@@ -50,7 +49,7 @@ public class TEString extends TEInventory {
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setLong("tick", lastUpdateTick);

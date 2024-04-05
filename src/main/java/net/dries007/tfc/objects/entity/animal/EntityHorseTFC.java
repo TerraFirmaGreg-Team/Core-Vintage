@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -50,16 +45,17 @@ import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, IRidable {
 	//Values that has a visual effect on client
@@ -144,7 +140,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	public void setFertilized(boolean value) {dataManager.set(FERTILIZED, value);}
 
 	@Override
-	public void onFertilized(@Nonnull IAnimal male) {
+	public void onFertilized(@NotNull IAnimal male) {
 		this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
 		// If mating with other types of horse, mark children to be mules
 		if (male.getClass() != this.getClass()) {
@@ -164,14 +160,14 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 		}
 		EntityAnimal father = (EntityAnimal) male;
 		this.geneHealth = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-				.getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
+		                                  .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
+		                                                        .getBaseValue() + this.getModifiedMaxHealth()) / 3.0D);
 		this.geneSpeed = (float) ((father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-				.getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+		                                 .getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+		                                                       .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
 		this.geneJump = (float) ((father.getEntityAttribute(JUMP_STRENGTH)
-				.getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
-				.getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
+		                                .getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH)
+		                                                      .getBaseValue() + this.getModifiedJumpStrength()) / 3.0D);
 	}
 
 	@Override
@@ -205,8 +201,8 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	public TextComponentTranslation getAnimalName() {
 		String entityString = EntityList.getEntityString(this);
 		return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender()
-				.name()
-				.toLowerCase());
+		                                                                                      .name()
+		                                                                                      .toLowerCase());
 	}
 
 	public boolean isHalter() {
@@ -235,7 +231,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 		return this.getAge() == Age.CHILD;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getName() {
 		if (this.hasCustomName()) {
@@ -290,7 +286,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound nbt) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("gender", getGender().toBool());
 		nbt.setInteger("birth", getBirthDay());
@@ -310,7 +306,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		this.setGender(Gender.valueOf(nbt.getBoolean("gender")));
 		this.setBirthDay(nbt.getInteger("birth"));
@@ -335,7 +331,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	}
 
 	@Override
-	public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
+	public boolean processInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 
 		if (!stack.isEmpty()) {
@@ -372,7 +368,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 						//Show tooltips
 						if (this.isFertilized() && this.getType() == Type.MAMMAL) {
 							TerraFirmaCraft.getNetwork()
-									.sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+							               .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
 						}
 					}
 				}
@@ -392,7 +388,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 
 	@Nullable
 	@Override
-	public EntityAgeable createChild(@Nonnull EntityAgeable other) {
+	public EntityAgeable createChild(@NotNull EntityAgeable other) {
 		// Cancel default vanilla behaviour (immediately spawns children of this animal) and set this female as fertilized
 		if (other != this && this.getGender() == Gender.FEMALE && other instanceof IAnimal) {
 			this.setFertilized(true);
@@ -487,7 +483,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
 	 */
 	private boolean findFemaleMate() {
 		List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class, this.getEntityBoundingBox()
-				.grow(8.0D));
+		                                                                                     .grow(8.0D));
 		for (AbstractHorse ent : list) {
 			if (ent instanceof EntityHorseTFC || ent instanceof EntityDonkeyTFC) {
 				IAnimal animal = (IAnimal) ent;

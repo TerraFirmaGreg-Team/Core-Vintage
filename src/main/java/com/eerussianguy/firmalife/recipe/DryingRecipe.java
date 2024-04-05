@@ -8,8 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class DryingRecipe extends IForgeRegistryEntry.Impl<DryingRecipe> implements IJEISimpleRecipe {
 	private final int duration;
@@ -42,7 +43,7 @@ public class DryingRecipe extends IForgeRegistryEntry.Impl<DryingRecipe> impleme
 		return recipe.duration;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getOutputItem(ItemStack stack) {
 		return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
 	}

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.dries007.tfc.api.capability.size.Size;
@@ -12,12 +7,12 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.EnumMap;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
+
 public class ItemPowder extends ItemTFC {
 	private static final EnumMap<Powder, ItemPowder> MAP = new EnumMap<>(Powder.class);
 	private final Powder powder;
@@ -40,19 +35,19 @@ public class ItemPowder extends ItemTFC {
 		return new ItemStack(MAP.get(powder), amount);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL; // Stored everywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
 	}
 
-	@Nonnull
+	@NotNull
 	public Powder getPowder() {
 		return powder;
 	}

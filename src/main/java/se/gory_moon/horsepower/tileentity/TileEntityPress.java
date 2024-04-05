@@ -20,7 +20,7 @@ import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.recipes.PressRecipe;
 import se.gory_moon.horsepower.util.Localization;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class TileEntityPress extends TileEntityHPHorseBase {
 	private final FluidTank tank = new FluidTank(Configs.general.pressFluidTankSize);

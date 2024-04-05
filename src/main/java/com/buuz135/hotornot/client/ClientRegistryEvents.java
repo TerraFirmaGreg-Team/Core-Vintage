@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
@@ -53,7 +53,7 @@ public final class ClientRegistryEvents {
 				                                                                                 .toString() + "/empty");
 
 				@Override
-				@Nonnull
+				@NotNull
 				public ModelResourceLocation getModelLocation(final ItemStack itemStack) {
 					final IFluidHandler fluidHandler = itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 					if (!(fluidHandler instanceof IMoldHandler)) return FALLBACK;

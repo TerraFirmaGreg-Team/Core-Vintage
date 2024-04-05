@@ -15,7 +15,7 @@ import se.gory_moon.horsepower.recipes.HPRecipeBase;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.util.Localization;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class TileEntityChopper extends TileEntityHPHorseBase {
 	private final float oldVisualWindup = -1;

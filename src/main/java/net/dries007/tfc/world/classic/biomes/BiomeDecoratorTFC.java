@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.biomes;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -21,10 +16,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BiomeDecoratorTFC extends BiomeDecorator {
 	private final int lilyPadPerChunk;
 	private final int waterPlantsPerChunk;

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -10,7 +5,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemUnfiredSmallVessel extends ItemPottery {
 	public final boolean glazed;
@@ -21,7 +16,7 @@ public class ItemUnfiredSmallVessel extends ItemPottery {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getTranslationKey(ItemStack stack) {
 		if (!glazed) {
 			return super.getTranslationKey(stack);
@@ -30,7 +25,7 @@ public class ItemUnfiredSmallVessel extends ItemPottery {
 	}
 
 	@Override
-	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
 		if (isInCreativeTab(tab)) {
 			if (!glazed) {
 				items.add(new ItemStack(this));

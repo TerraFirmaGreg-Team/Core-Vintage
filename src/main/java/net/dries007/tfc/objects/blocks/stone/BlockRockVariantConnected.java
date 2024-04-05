@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.stone;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -25,11 +20,11 @@ import net.minecraft.world.World;
 import su.terrafirmagreg.modules.soil.data.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockRockVariantConnected extends BlockRockVariantFallable {
 	// Used for connected textures only.
 	public static final PropertyBool NORTH = PropertyBool.create("north");
@@ -47,7 +42,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 		int neighborLight;
 		Block usBlock;
 		if (up.getMaterial()
-				.isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
+		      .isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
 			usBlock = us.getBlock();
 			if (usBlock instanceof BlockSoilPeat) {
 				world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
@@ -67,7 +62,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 				BlockPos targetUp = target.up();
 				IBlockState targetUpState;
 				if (world.getLightFromNeighbors(targetUp) < 4 || (targetUpState = world.getBlockState(targetUp)).getMaterial()
-						.isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
+				                                                                                                .isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
 					continue;
 				}
 				Block currentBlock = current.getBlock();
@@ -81,7 +76,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 					}
 					BlockRockVariant block = ((BlockRockVariant) current.getBlock());
 					world.setBlockState(target, block.getVariant(block.getType().getGrassVersion(spreader))
-							.getDefaultState());
+					                                 .getDefaultState());
 				}
 			}
 			for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
@@ -110,9 +105,9 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		pos = pos.add(0, -1, 0);
 		return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-				.withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-				.withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-				.withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+		            .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+		            .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+		            .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
 	}
 
 	@Override

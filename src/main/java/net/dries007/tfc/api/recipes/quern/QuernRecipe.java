@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.quern;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -13,8 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class QuernRecipe extends IForgeRegistryEntry.Impl<QuernRecipe> implements IJEISimpleRecipe {
 	protected IIngredient<ItemStack> inputItem;
@@ -38,7 +34,7 @@ public class QuernRecipe extends IForgeRegistryEntry.Impl<QuernRecipe> implement
 		                          .orElse(null);
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getOutputItem(ItemStack stack) {
 		return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
 	}

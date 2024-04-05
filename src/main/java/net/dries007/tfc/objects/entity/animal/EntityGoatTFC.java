@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -28,14 +23,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * A Cow of the colder regions!
  * Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one individual, but produce milk once every 3 days
  */
-@ParametersAreNonnullByDefault
+
 public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
 	public int sheepTimer;
 	private EntityAILawnmower entityAILawnmower;

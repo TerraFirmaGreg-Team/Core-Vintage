@@ -24,8 +24,10 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class ItemStonewareMalletMoldFL extends ItemPottery {
@@ -41,7 +43,7 @@ public class ItemStonewareMalletMoldFL extends ItemPottery {
 
 	@Nullable
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new FilledMoldCapability(nbt);
 	}
 
@@ -124,7 +126,7 @@ public class ItemStonewareMalletMoldFL extends ItemPottery {
 
 		@SideOnly(Side.CLIENT)
 		@Override
-		public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+		public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 			Metal metal = getMetal();
 			if (metal != null) {
 				String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
@@ -147,7 +149,7 @@ public class ItemStonewareMalletMoldFL extends ItemPottery {
 		}
 
 		@Override
-		public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 			return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY
 					|| capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 		}
@@ -155,12 +157,12 @@ public class ItemStonewareMalletMoldFL extends ItemPottery {
 		@Nullable
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 			return hasCapability(capability, facing) ? (T) this : null;
 		}
 
 		@Override
-		@Nonnull
+		@NotNull
 		public NBTTagCompound serializeNBT() {
 			NBTTagCompound nbt = new NBTTagCompound();
 			float temp = getTemperature();

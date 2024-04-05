@@ -9,22 +9,20 @@ import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemFruitDoor extends ItemDoor implements IItemSize {
 	public ItemFruitDoor(BlockFruitDoor block) {
 		super(block);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {return Size.VERY_LARGE;}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {return Weight.HEAVY;}
 

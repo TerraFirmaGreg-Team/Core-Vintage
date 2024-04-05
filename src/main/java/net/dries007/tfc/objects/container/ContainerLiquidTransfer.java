@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
@@ -20,10 +15,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class ContainerLiquidTransfer extends ContainerItemStack implements ISlotCallback {
 	private IItemHandlerModifiable inventory;
 
@@ -66,7 +60,7 @@ public class ContainerLiquidTransfer extends ContainerItemStack implements ISlot
 	}
 
 	@Override
-	public boolean canInteractWith(@Nonnull EntityPlayer player) {
+	public boolean canInteractWith(@NotNull EntityPlayer player) {
 		IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
 		return heat != null && heat.isMolten() && super.canInteractWith(player);
 	}
@@ -83,7 +77,7 @@ public class ContainerLiquidTransfer extends ContainerItemStack implements ISlot
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 	}
 }

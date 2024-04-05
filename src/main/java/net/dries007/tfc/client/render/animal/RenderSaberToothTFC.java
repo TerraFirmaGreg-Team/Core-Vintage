@@ -9,13 +9,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderSaberToothTFC extends RenderLiving<EntitySaberToothTFC> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/sabertooth.png");
 
@@ -24,7 +24,7 @@ public class RenderSaberToothTFC extends RenderLiving<EntitySaberToothTFC> {
 	}
 
 	@Override
-	public void doRender(@Nonnull EntitySaberToothTFC sabertooth, double par2, double par4, double par6, float par8, float par9) {
+	public void doRender(@NotNull EntitySaberToothTFC sabertooth, double par2, double par4, double par6, float par8, float par9) {
 		this.shadowSize = (float) (0.35f + (sabertooth.getPercentToAdulthood() * 0.35f));
 		super.doRender(sabertooth, par2, par4, par6, par8, par9);
 	}

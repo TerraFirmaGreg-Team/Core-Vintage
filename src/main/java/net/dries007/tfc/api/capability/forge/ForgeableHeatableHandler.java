@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.forge;
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
@@ -13,8 +8,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 public class ForgeableHeatableHandler extends ItemHeatHandler implements IForgeableHeatable {
 	private final ForgeableHandler internalForgeCap;
@@ -55,7 +51,7 @@ public class ForgeableHeatableHandler extends ItemHeatHandler implements IForgea
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ForgeSteps getSteps() {
 		return internalForgeCap.getSteps();
 	}
@@ -71,19 +67,19 @@ public class ForgeableHeatableHandler extends ItemHeatHandler implements IForgea
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityForgeable.FORGEABLE_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return hasCapability(capability, facing) ? (T) this : null;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound nbt = super.serializeNBT();
 		nbt.setTag("forge", internalForgeCap.serializeNBT());

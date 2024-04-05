@@ -20,7 +20,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import se.gory_moon.horsepower.HPEventHandler;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.util.Collections;

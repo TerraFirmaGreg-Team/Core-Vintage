@@ -35,20 +35,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.Nullable;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class BlockJoshuaTreeFlower extends Block {
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockJoshuaTreeFlower.EnumLeafState.class);
 	public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
@@ -64,9 +64,9 @@ public class BlockJoshuaTreeFlower extends Block {
 		if (MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
 
 		this.setDefaultState(this.blockState.getBaseState()
-				.withProperty(LEAF_STATE, EnumLeafState.NORMAL)
-				.withProperty(HARVESTABLE, true)
-				.withProperty(AGE, Integer.valueOf(0)));
+		                                    .withProperty(LEAF_STATE, EnumLeafState.NORMAL)
+		                                    .withProperty(HARVESTABLE, true)
+		                                    .withProperty(AGE, Integer.valueOf(0)));
 		this.setHardness(0.2F);
 		this.setLightOpacity(1);
 		this.setSoundType(SoundType.PLANT);
@@ -392,8 +392,8 @@ public class BlockJoshuaTreeFlower extends Block {
 				if (flag && areAllNeighborsEmpty(worldIn, blockpos, (EnumFacing) null) && worldIn.isAirBlock(currentBlock.up(2))) {
 					worldIn.setBlockState(currentBlock, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
 					worldIn.setBlockState(blockpos, BlockJoshuaTreeFlower.get(wood)
-							.getDefaultState()
-							.withProperty(AGE, Integer.valueOf(5)), 2);
+					                                                     .getDefaultState()
+					                                                     .withProperty(AGE, Integer.valueOf(5)), 2);
 					return 0;
 				} else if (age < 4) {
 					int l = 0;
@@ -417,8 +417,8 @@ public class BlockJoshuaTreeFlower extends Block {
 							worldIn.setBlockState(currentBlock, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
 							worldIn.setBlockState(blockpos1, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
 							worldIn.setBlockState(blockpos1.up(), BlockJoshuaTreeFlower.get(wood)
-									.getDefaultState()
-									.withProperty(AGE, Integer.valueOf(5)), 2);
+							                                                           .getDefaultState()
+							                                                           .withProperty(AGE, Integer.valueOf(5)), 2);
 							//this.placeGrownFlower(worldIn, blockpos1.up(), age + 1);
 							growTreeRecursive(worldIn, blockpos1.up(), rand, MathHelper.clamp(age + rand.nextInt(5 - age) + 1, 0, 4));
 							flag2 = true;
@@ -430,14 +430,14 @@ public class BlockJoshuaTreeFlower extends Block {
 					} else {
 						//worldIn.setBlockState(blockpos, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
 						worldIn.setBlockState(currentBlock, BlockJoshuaTreeFlower.get(wood)
-								.getDefaultState()
-								.withProperty(AGE, Integer.valueOf(5)), 2);
+						                                                         .getDefaultState()
+						                                                         .withProperty(AGE, Integer.valueOf(5)), 2);
 						return 2;
 					}
 				} else if (age == 4) {
 					worldIn.setBlockState(currentBlock, BlockJoshuaTreeFlower.get(wood)
-							.getDefaultState()
-							.withProperty(AGE, Integer.valueOf(5)), 2);
+					                                                         .getDefaultState()
+					                                                         .withProperty(AGE, Integer.valueOf(5)), 2);
 					return 2;
 					//this.placeDeadFlower(worldIn, pos);
 				}
@@ -598,9 +598,9 @@ public class BlockJoshuaTreeFlower extends Block {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(HARVESTABLE, meta > 3)
-				.withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11))
-				.withProperty(AGE, meta);
+		           .withProperty(HARVESTABLE, meta > 3)
+		           .withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11))
+		           .withProperty(AGE, meta);
 	}
 
 	/**
@@ -612,7 +612,7 @@ public class BlockJoshuaTreeFlower extends Block {
 		//return state.getValue(AGE) + state.getValue(LEAF_STATE).ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer.Builder(this)
@@ -660,7 +660,7 @@ public class BlockJoshuaTreeFlower extends Block {
 			case 2:
 				if (state.getValue(LEAF_STATE) != EnumLeafState.FLOWERING)
 					world.setBlockState(pos, world.getBlockState(pos)
-							.withProperty(LEAF_STATE, EnumLeafState.FLOWERING));
+					                              .withProperty(LEAF_STATE, EnumLeafState.FLOWERING));
 				break;
 			case 3:
 				if (state.getValue(LEAF_STATE) != EnumLeafState.FRUIT) {
@@ -669,7 +669,7 @@ public class BlockJoshuaTreeFlower extends Block {
 						long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
 						if (hours > (fruitTree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
 							world.setBlockState(pos, world.getBlockState(pos)
-									.withProperty(LEAF_STATE, EnumLeafState.FRUIT));
+							                              .withProperty(LEAF_STATE, EnumLeafState.FRUIT));
 							te.resetCounter();
 						}
 					}
@@ -724,7 +724,7 @@ public class BlockJoshuaTreeFlower extends Block {
 
 		private static final EnumLeafState[] VALUES = values();
 
-		@Nonnull
+		@NotNull
 		public static EnumLeafState valueOf(int index) {
 			return index < 0 || index > VALUES.length - 1 ? NORMAL : VALUES[index];
 		}

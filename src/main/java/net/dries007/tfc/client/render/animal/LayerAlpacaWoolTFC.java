@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelAlpacaWoolTFC;
@@ -13,11 +8,9 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class LayerAlpacaWoolTFC implements LayerRenderer<EntityAlpacaTFC> {
 	private final RenderAlpacaTFC alpacaRenderer;
 	private final ModelAlpacaWoolTFC alpacaModel = new ModelAlpacaWoolTFC();

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
 
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
@@ -21,10 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
 	protected final BlockFloatingWaterTFC block;
 
@@ -34,7 +28,7 @@ public class ItemBlockFloatingWaterTFC extends ItemBlockTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -19,25 +14,27 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class BarrelRecipeFoodTraits extends BarrelRecipe {
 	private final FoodTrait trait;
 	private final String tooltipName;
 
-	private BarrelRecipeFoodTraits(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
+	private BarrelRecipeFoodTraits(@NotNull IIngredient<FluidStack> inputFluid, @NotNull IIngredient<ItemStack> inputStack, FoodTrait trait, int duration, String tooltipName) {
 		super(inputFluid, inputStack, null, ItemStack.EMPTY, duration);
 		this.trait = trait;
 		this.tooltipName = tooltipName;
 	}
 
-	public static BarrelRecipe pickling(@Nonnull IIngredient<ItemStack> inputStack) {
+	public static BarrelRecipe pickling(@NotNull IIngredient<ItemStack> inputStack) {
 		return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.VINEGAR.get(), 125), new IngredientItemFoodTrait(inputStack, FoodTrait.BRINED), FoodTrait.PICKLED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_pickling");
 	}
 
-	public static BarrelRecipe brining(@Nonnull IIngredient<ItemStack> inputStack) {
+	public static BarrelRecipe brining(@NotNull IIngredient<ItemStack> inputStack) {
 		return new BarrelRecipeFoodTraits(IIngredient.of(FluidsTFC.BRINE.get(), 125), inputStack, FoodTrait.BRINED, 4 * ICalendar.TICKS_IN_HOUR, "barrel_recipe_brining");
 	}
 
@@ -48,7 +45,7 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
 		                                                                          .contains(trait); // Don't apply again and again.
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
 		int multiplier = getMultiplier(inputFluid, inputStack);

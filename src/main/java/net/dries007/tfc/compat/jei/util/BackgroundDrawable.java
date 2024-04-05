@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.util;
 
 import mezz.jei.api.gui.IDrawable;
@@ -11,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class BackgroundDrawable implements IDrawable {
 	private final int width;
@@ -35,7 +30,7 @@ public class BackgroundDrawable implements IDrawable {
 	}
 
 	@Override
-	public void draw(@Nonnull Minecraft minecraft, int xOffset, int yOffset) {
+	public void draw(@NotNull Minecraft minecraft, int xOffset, int yOffset) {
 		GlStateManager.resetColor();
 		minecraft.getTextureManager().bindTexture(this.location);
 		GuiUtils.drawTexturedModalRect(xOffset, yOffset, 0, 0, this.width, this.height, 0);

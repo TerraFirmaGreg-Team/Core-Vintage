@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import tfctech.objects.blocks.devices.BlockSmelteryCauldron;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
@@ -157,7 +157,7 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		return FuelManager.isItemFuel(stack);
 	}
 
@@ -171,7 +171,7 @@ public class TESmelteryFirebox extends TETickableInventory implements ITickable,
 		super.readFromNBT(nbt);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setFloat("temperature", temperature);

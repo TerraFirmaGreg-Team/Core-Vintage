@@ -23,7 +23,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import tfctech.objects.items.glassworking.ItemGlassMolder;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY;
 
@@ -38,7 +38,7 @@ public class UnmoldGlassRecipe extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	/* This is return chance, not break chance */
 	private final float chance;
 
-	public UnmoldGlassRecipe(ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result, float chance) {
+	public UnmoldGlassRecipe(ResourceLocation group, NonNullList<Ingredient> input, @NotNull ItemStack result, float chance) {
 		this.group = group;
 		this.input = input;
 		this.result = result;
@@ -50,7 +50,7 @@ public class UnmoldGlassRecipe extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		boolean found = false;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
 			ItemStack stack = inv.getStackInSlot(slot);
@@ -73,7 +73,7 @@ public class UnmoldGlassRecipe extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		ItemStack moldStack = null;
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -111,11 +111,11 @@ public class UnmoldGlassRecipe extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack getRecipeOutput() {return result.copy();}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inv) {
 		// Return empty molds
 		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
@@ -136,7 +136,7 @@ public class UnmoldGlassRecipe extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NonNullList<Ingredient> getIngredients() {
 		return input;
 	}
@@ -147,7 +147,7 @@ public class UnmoldGlassRecipe extends IForgeRegistryEntry.Impl<IRecipe> impleme
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}

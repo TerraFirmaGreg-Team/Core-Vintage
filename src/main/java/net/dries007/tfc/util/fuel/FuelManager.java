@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.fuel;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -12,7 +7,8 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import su.terrafirmagreg.modules.wood.data.ItemsWood;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +16,7 @@ public final class FuelManager {
 	private static final List<Fuel> FUELS = new ArrayList<>();
 	private static final Fuel EMPTY = new Fuel(IIngredient.empty(), 0, 0);
 
-	@Nonnull
+	@NotNull
 	public static Fuel getFuel(ItemStack stack) {
 		return FUELS.stream().filter(x -> x.matchesInput(stack)).findFirst().orElse(EMPTY);
 	}

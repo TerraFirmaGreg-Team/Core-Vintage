@@ -21,6 +21,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -28,14 +29,11 @@ import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
-@ParametersAreNonnullByDefault
+
 public class BlockBloomery extends BlockBase implements ITEBlock {
 	//[horizontal index][basic shape / door1 / door2]
 	private static final AxisAlignedBB[][] AABB =
@@ -197,21 +195,21 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
 		return BLOOMERY_BASE[facing.getHorizontalIndex()].test(world, centerPos);
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.LARGE; // Only in chests
 	}
 
+
 	@Override
-	@Nonnull
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_HEAVY;  // stacksize = 1
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 		           .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
@@ -234,21 +232,21 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return AABB[state.getValue(HORIZONTAL).getHorizontalIndex()][0];
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@ParametersAreNonnullByDefault
+
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		if (blockState.getValue(OPEN)) {
 			return NULL_AABB;
@@ -274,7 +272,7 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
 	@Override
 	@SuppressWarnings("deprecation")
 	@Nullable
-	@ParametersAreNonnullByDefault
+
 	public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
 		if (blockState.getValue(OPEN)) {
 			int index = blockState.getValue(HORIZONTAL).getHorizontalIndex();
@@ -294,7 +292,7 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, @Nonnull BlockPos pos) {
+	public boolean canPlaceBlockAt(World worldIn, @NotNull BlockPos pos) {
 		return super.canPlaceBlockAt(worldIn, pos) && (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.Z) || canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X));
 	}
 
@@ -322,7 +320,7 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		EnumFacing placeDirection;
 		float wrappedRotation = MathHelper.wrapDegrees(placer.rotationYaw);
@@ -348,7 +346,7 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, HORIZONTAL, LIT, OPEN);
 	}

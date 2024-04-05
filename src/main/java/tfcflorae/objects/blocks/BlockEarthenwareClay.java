@@ -13,11 +13,11 @@ import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockEarthenwareClay extends Block implements IItemSize {
 	public BlockEarthenwareClay() {
 		super(Material.CLAY);
@@ -31,19 +31,19 @@ public class BlockEarthenwareClay extends Block implements IItemSize {
 		return 4;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ItemsTFCF.EARTHENWARE_CLAY;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.LIGHT;

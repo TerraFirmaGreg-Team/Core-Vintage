@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.dries007.tfc.ConfigTFC;
@@ -14,9 +9,10 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +31,7 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
 		this(null, new FoodData(4, 0, 0, 0, 0, 0, 0, 0, 1));
 	}
 
-	public FoodHandler(@Nullable NBTTagCompound nbt, @Nonnull Food food) {
+	public FoodHandler(@Nullable NBTTagCompound nbt, @NotNull Food food) {
 		this(nbt, food.getData());
 	}
 
@@ -83,7 +79,7 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public FoodData getData() {
 		return data;
 	}
@@ -104,21 +100,21 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
 		isNonDecaying = true;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public List<FoodTrait> getTraits() {
 		return foodTraits;
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityFood.CAPABILITY;
 	}
 
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityFood.CAPABILITY ? (T) this : null;
 	}
 

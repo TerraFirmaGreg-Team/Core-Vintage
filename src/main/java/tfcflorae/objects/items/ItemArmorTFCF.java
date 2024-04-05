@@ -12,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.objects.ArmorMaterialsTFCF;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResistance {
 	public static final int DEFAULT_COLOR = 14277081; // Light Gray
@@ -49,20 +49,20 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
 		return materialTFC.getSlashingModifier();
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.LARGE; // Stored in chests
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.HEAVY; // Stacksize is already restricted to 1
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return false;
 	}
 

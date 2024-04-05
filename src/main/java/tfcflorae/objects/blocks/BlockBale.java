@@ -18,10 +18,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class BlockBale extends BlockRotatedPillar implements IItemSize {
 	public BlockBale() {
 		super(new Material(MapColor.FOLIAGE));
@@ -32,13 +31,13 @@ public class BlockBale extends BlockRotatedPillar implements IItemSize {
 		Blocks.FIRE.setFireInfo(this, 60, 20);
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.VERY_SMALL;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.HEAVY;
@@ -46,7 +45,7 @@ public class BlockBale extends BlockRotatedPillar implements IItemSize {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}

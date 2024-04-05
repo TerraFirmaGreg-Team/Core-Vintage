@@ -24,11 +24,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockJars extends BlockNonCube implements IItemSize {
 	public static final PropertyInteger JARS = StatePropertiesFL.JARS;
@@ -98,15 +96,15 @@ public class BlockJars extends BlockNonCube implements IItemSize {
 		return new BlockStateContainer(this, JARS);
 	}
 
+
 	@Override
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.VERY_LARGE;
 	}
 
+
 	@Override
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.MEDIUM;
 	}
 

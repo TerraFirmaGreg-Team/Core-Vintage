@@ -25,7 +25,7 @@ import net.sharkbark.cellars.ModConfig;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;

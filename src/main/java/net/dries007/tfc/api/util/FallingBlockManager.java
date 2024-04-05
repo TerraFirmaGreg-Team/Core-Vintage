@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.util;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -35,8 +30,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -408,7 +405,7 @@ public class FallingBlockManager {
 			return resultingState;
 		}
 
-		@Nonnull
+		@NotNull
 		public IBlockState getResultingState(IBlockState originalState) {
 			return resultingState == null ? originalState : resultingState;
 		}

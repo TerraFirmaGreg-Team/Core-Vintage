@@ -1,11 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.collections;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /**
@@ -23,7 +19,7 @@ public class WeightedCollection<E> {
 		values.forEach((k, v) -> add(v, k));
 	}
 
-	public WeightedCollection<E> add(double weight, @Nonnull E result) {
+	public WeightedCollection<E> add(double weight, @NotNull E result) {
 		if (weight > 0) {
 			totalWeight += weight;
 			backingMap.put(totalWeight, result);
@@ -31,7 +27,7 @@ public class WeightedCollection<E> {
 		return this;
 	}
 
-	@Nonnull
+	@NotNull
 	public E getRandomEntry(Random random) {
 		double value = random.nextDouble() * totalWeight;
 		return backingMap.higherEntry(value).getValue();

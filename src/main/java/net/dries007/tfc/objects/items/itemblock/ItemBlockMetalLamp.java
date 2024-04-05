@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
 
 import net.dries007.tfc.ConfigTFC;
@@ -32,8 +27,10 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
@@ -65,7 +62,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		IFluidHandler lampCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (lampCap != null) {
 			return lampCap.drain(CAPACITY, false) == null;
@@ -74,8 +71,8 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
 	}
 
 	@Override
-	@Nonnull
-	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+	@NotNull
+	public String getItemStackDisplayName(@NotNull ItemStack stack) {
 		IFluidHandler fluidCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (fluidCap != null) {
 			FluidStack fluidStack = fluidCap.drain(CAPACITY, false);
@@ -88,12 +85,12 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 		return new FluidWhitelistHandlerComplex(stack, CAPACITY, getValidFluids());
 	}
 
 	@Override
-	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
 		if (isInCreativeTab(tab)) {
 			items.add(new ItemStack(this));
 			for (Fluid fluid : getValidFluids()) {

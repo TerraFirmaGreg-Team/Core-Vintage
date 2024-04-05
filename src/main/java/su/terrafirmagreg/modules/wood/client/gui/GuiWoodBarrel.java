@@ -5,6 +5,7 @@ import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.util.Helpers;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -41,10 +42,10 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
 	public static final ResourceLocation BARREL_BACKGROUND = ModUtils.getID("textures/gui/container/barrel.png");
 	private final String translationKey;
 
-	public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, String translationKey) {
+	public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, IBlockState state) {
 		super(container, playerInv, tile, BARREL_BACKGROUND);
 
-		this.translationKey = translationKey;
+		this.translationKey = state.getBlock().getTranslationKey();
 	}
 
 	@Override

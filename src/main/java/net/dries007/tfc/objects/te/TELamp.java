@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.dries007.tfc.ConfigTFC;
@@ -19,11 +14,11 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+import org.jetbrains.annotations.Nullable;
+
+
 public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidHandlerSidedCallback {
 	public static int CAPACITY;
 	private final FluidTank tank = new FluidTankCallback(this, 0, CAPACITY);
@@ -97,7 +92,7 @@ public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidH
 		powered = nbt.getBoolean("powered");
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("tank", tank.writeToNBT(new NBTTagCompound()));

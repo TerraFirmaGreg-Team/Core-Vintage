@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import com.google.common.collect.Lists;
@@ -81,7 +76,7 @@ public class WorldRegenHandler {
 		if (event.getWorld().provider.getDimension() == 0 && chunkDataTFC.isInitialized() && POSITIONS.size() < 1000) {
 			//Only run this in the early months of each year
 			if (CalendarTFC.CALENDAR_TIME.getMonthOfYear()
-					.isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
+			                             .isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
 				POSITIONS.add(event.getChunk().getPos());
 			}
 		}
@@ -101,7 +96,7 @@ public class WorldRegenHandler {
 					IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
 
 					if (CalendarTFC.CALENDAR_TIME.getMonthOfYear()
-							.isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
+					                             .isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
 						if (ConfigTFC.General.WORLD_REGEN.sticksRocksModifier > 0) {
 							//Nuke any rocks and sticks in chunk.
 							removeAllPlacedItems(event.world, pos);
@@ -167,7 +162,7 @@ public class WorldRegenHandler {
 				IBlockState topState = world.getBlockState(topPos);
 				Block topBlock = topState.getBlock();
 				if (!topState.getMaterial()
-						.isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
+				             .isLiquid() && (topBlock instanceof BlockCropDead || topBlock instanceof BlockMushroomTFC)) {
 					IBlockState soil = world.getBlockState(topPos.down());
 					if (soil.getBlock() instanceof BlockRockVariant soilRock) {
 						//Stop removing dead crops from farmland please!
@@ -229,19 +224,19 @@ public class WorldRegenHandler {
 		final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
 		final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
 		ForgeRegistries.ENTITIES.getValuesCollection()
-				.stream()
-				.filter((x) -> {
-					if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
-						Entity ent = x.newInstance(worldIn);
-						if (ent instanceof IPredator || ent instanceof IHuntable) {
-							int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
-							return weight > 0 && randomIn.nextInt(weight) == 0;
-						}
-					}
-					return false;
-				})
-				.findAny()
-				.ifPresent((entityEntry) -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
+		                        .stream()
+		                        .filter((x) -> {
+			                        if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
+				                        Entity ent = x.newInstance(worldIn);
+				                        if (ent instanceof IPredator || ent instanceof IHuntable) {
+					                        int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+					                        return weight > 0 && randomIn.nextInt(weight) == 0;
+				                        }
+			                        }
+			                        return false;
+		                        })
+		                        .findAny()
+		                        .ifPresent((entityEntry) -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
 	}
 
 	private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {

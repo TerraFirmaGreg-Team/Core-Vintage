@@ -11,7 +11,8 @@ import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,8 +32,8 @@ public class AnimalRespawnWorldData extends WorldSavedData {
 		respawnMap = new HashMap<>();
 	}
 
-	@Nonnull
-	public static AnimalRespawnWorldData get(@Nonnull World world) {
+	@NotNull
+	public static AnimalRespawnWorldData get(@NotNull World world) {
 		MapStorage mapStorage = world.getMapStorage();
 		if (mapStorage != null) {
 			AnimalRespawnWorldData data = (AnimalRespawnWorldData) mapStorage.getOrLoadData(AnimalRespawnWorldData.class, NAME);
@@ -47,7 +48,7 @@ public class AnimalRespawnWorldData extends WorldSavedData {
 	}
 
 	@Override
-	public void readFromNBT(@Nonnull NBTTagCompound nbt) {
+	public void readFromNBT(@NotNull NBTTagCompound nbt) {
 		NBTTagList tag = nbt.getTagList("animal", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < tag.tagCount(); i++) {
 			NBTTagCompound animalNbt = tag.getCompoundTagAt(i);
@@ -65,8 +66,8 @@ public class AnimalRespawnWorldData extends WorldSavedData {
 	}
 
 	@Override
-	@Nonnull
-	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound nbt) {
+	@NotNull
+	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
 		NBTTagList tag = new NBTTagList();
 		for (ResourceLocation animal : respawnMap.keySet()) {
 			NBTTagCompound animalNbt = new NBTTagCompound();

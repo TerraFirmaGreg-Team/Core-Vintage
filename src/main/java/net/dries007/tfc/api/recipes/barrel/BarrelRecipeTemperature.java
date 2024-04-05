@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
 
 import net.dries007.tfc.Constants;
@@ -20,8 +15,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class BarrelRecipeTemperature extends BarrelRecipe {
@@ -58,7 +55,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
 		IItemHeat heat = inputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
 		if (heat != null) {

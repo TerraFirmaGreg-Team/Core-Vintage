@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigurableItem {
 
@@ -39,7 +39,7 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
 		return "hook_javelin";
 	}
 
-	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		if (!playerIn.onGround) {
 			ItemStack itemstack = playerIn.getHeldItem(handIn);
 			if (isThrown(itemstack) && getCapturedEntity(itemstack, worldIn) == null) {
@@ -97,8 +97,8 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
 					blockpos = new BlockPos(d11, playerIn.posY - 1.0D, d12);
 
 					if (playerIn.world.getBlockState(blockpos)
-							.isSideSolid(playerIn.world, blockpos, EnumFacing.UP) || playerIn.world.getBlockState(blockpos)
-							.getMaterial() == Material.WATER) {
+					                  .isSideSolid(playerIn.world, blockpos, EnumFacing.UP) || playerIn.world.getBlockState(blockpos)
+					                                                                                         .getMaterial() == Material.WATER) {
 						d1 = d11;
 						d13 = playerIn.posY + 1.0D;
 						d14 = d12;

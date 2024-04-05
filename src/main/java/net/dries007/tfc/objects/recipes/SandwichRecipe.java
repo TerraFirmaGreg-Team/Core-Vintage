@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -22,19 +17,20 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
 public class SandwichRecipe extends ShapedDamageRecipe {
-	public SandwichRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @Nonnull ItemStack result, int damage) {
+	public SandwichRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
 		super(group, input, result, damage);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
+	public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
 		ItemStack output = super.getCraftingResult(inv);
 		IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
 		if (food instanceof ItemSandwich.SandwichHandler) {
@@ -55,7 +51,7 @@ public class SandwichRecipe extends ShapedDamageRecipe {
 	}
 
 	@Override
-	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
+	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World world) {
 		if (super.matches(inv, world)) {
 			List<FoodData> breads = new ArrayList<>();
 			List<FoodData> ingredients = new ArrayList<>();

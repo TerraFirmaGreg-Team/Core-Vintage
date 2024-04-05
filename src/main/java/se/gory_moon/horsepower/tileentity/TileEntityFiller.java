@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import se.gory_moon.horsepower.blocks.BlockFiller;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class TileEntityFiller extends TileEntity {
 	public TileEntityHPBase getFilledTileEntity() {

@@ -1,15 +1,11 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -38,7 +34,7 @@ public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory> {
 	 * @param resistance   How resistant to explosion this type is
 	 * @param hasAnvil     if this rock should be able to create a stone anvil
 	 */
-	public RockCategory(@Nonnull ResourceLocation name, @Nonnull Item.ToolMaterial toolMaterial, boolean layer1, boolean layer2, boolean layer3, float caveGenMod, float caveFreqMod, float hardness, float resistance, boolean hasAnvil) {
+	public RockCategory(@NotNull ResourceLocation name, @NotNull Item.ToolMaterial toolMaterial, boolean layer1, boolean layer2, boolean layer3, float caveGenMod, float caveFreqMod, float hardness, float resistance, boolean hasAnvil) {
 		setRegistryName(name);
 		this.toolMaterial = toolMaterial;
 		this.caveGenMod = caveGenMod;
@@ -51,7 +47,7 @@ public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory> {
 		this.resistance = resistance;
 	}
 
-	@Nonnull
+	@NotNull
 	public Item.ToolMaterial getToolMaterial() {
 		return toolMaterial;
 	}

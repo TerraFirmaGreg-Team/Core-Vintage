@@ -40,15 +40,16 @@ import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.objects.items.food.PotionEffectToHave;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize, IItemFoodTFC {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 	/*
@@ -123,7 +124,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(AGE, meta);
 	}
@@ -138,13 +139,13 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 		return true;
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Size getSize(ItemStack stack) {
 		return Size.TINY; // Store anywhere
 	}
 
-	@Nonnull
+
 	@Override
 	public @NotNull Weight getWeight(ItemStack stack) {
 		return Weight.VERY_LIGHT; // Stacksize = 64
@@ -155,7 +156,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 		else return ConfigTFC.General.MISC.plantGrowthRate;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public BlockStateContainer getBlockState() {
 		return this.blockState;
@@ -166,7 +167,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return state
 				.withProperty(DAYPERIOD, getDayPeriod())
@@ -179,7 +180,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return EnumOffsetType.NONE;
 	}
@@ -206,7 +207,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		state = state.getActualState(source, pos);
 
@@ -255,14 +256,14 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 		return NULL_AABB;
 	}
 
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createPlantBlockState() {
 		return new BlockStateContainer(this, DOWN, UP, NORTH, EAST, WEST, SOUTH, DAYPERIOD, AGE);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		switch (rot) {
 			case CLOCKWISE_180:
@@ -287,7 +288,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		switch (mirrorIn) {
 			case LEFT_RIGHT:
@@ -340,7 +341,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
 	}

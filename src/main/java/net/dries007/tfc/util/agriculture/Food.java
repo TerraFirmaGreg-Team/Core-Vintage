@@ -1,16 +1,12 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.agriculture;
 
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import static net.dries007.tfc.util.agriculture.Food.Category.*;
 
@@ -138,11 +134,11 @@ public enum Food {
 
 	private final String[] oreDictNames;
 
-	Food(@Nonnull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, String... oreNames) {
+	Food(@NotNull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, String... oreNames) {
 		this(category, hunger, saturation, water, grain, veg, fruit, meat, dairy, decayModifier, 0, -1, oreNames);
 	}
 
-	Food(@Nonnull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, float heatCapacity, float cookingTemp, String... oreNames) {
+	Food(@NotNull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier, float heatCapacity, float cookingTemp, String... oreNames) {
 		this.category = category;
 		this.foodData = new FoodData(hunger, water, saturation, grain, fruit, veg, meat, dairy, decayModifier);
 
@@ -153,12 +149,12 @@ public enum Food {
 		this.oreDictNames = oreNames == null || oreNames.length == 0 ? null : oreNames;
 	}
 
-	@Nonnull
+	@NotNull
 	public Category getCategory() {
 		return category;
 	}
 
-	@Nonnull
+	@NotNull
 	public FoodData getData() {
 		return foodData;
 	}

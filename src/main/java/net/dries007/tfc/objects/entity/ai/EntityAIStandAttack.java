@@ -1,20 +1,14 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.ai;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Extended Melee AI for standing attacks (bears and polar bears)
  */
-@ParametersAreNonnullByDefault
+
 public class EntityAIStandAttack<T extends EntityCreature & IAnimal & EntityAIStandAttack.IEntityStandAttack> extends EntityAIAttackMeleeTFC<T> {
 	public EntityAIStandAttack(T creature, double speedIn, double attackReach) {
 		super(creature, speedIn, attackReach);

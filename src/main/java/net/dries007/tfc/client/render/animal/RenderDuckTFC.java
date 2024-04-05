@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -17,12 +12,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class RenderDuckTFC extends RenderLiving<EntityDuckTFC> {
 	private static final ResourceLocation DUCK_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/duck_old.png");
 	private static final ResourceLocation DUCK_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/duck_young.png");

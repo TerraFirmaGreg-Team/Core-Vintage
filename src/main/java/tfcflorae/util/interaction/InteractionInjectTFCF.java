@@ -18,10 +18,10 @@ import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import tfcflorae.util.agriculture.CropTFCF;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class InteractionInjectTFCF {
-	@Nonnull
+	@NotNull
 	public static EnumActionResult onItemUse(ItemSeedsTFC itemSeed, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack itemstack = player.getHeldItem(hand);
 		IBlockState state = worldIn.getBlockState(pos);

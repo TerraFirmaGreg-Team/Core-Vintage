@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -22,9 +17,10 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +33,7 @@ import java.util.Map;
  * To register a capability for synchronization, add it to {@link CapabilityContainerListener#SYNC_CAPS}
  * This will automatically sync any containers it can, as it is added during various spots from {@link net.dries007.tfc.CommonEventHandler}
  */
-@ParametersAreNonnullByDefault
+
 public class CapabilityContainerListener implements IContainerListener {
 	/**
 	 * Capability instances that need syncing, via calling deserializeNBT() on client
@@ -112,7 +108,7 @@ public class CapabilityContainerListener implements IContainerListener {
 	/**
 	 * Reads capability data and the stack compound tag into a joint share tag. Should be called by {@link net.minecraft.item.Item#getNBTShareTag(ItemStack)}
 	 */
-	@Nonnull
+	@NotNull
 	public static NBTTagCompound readShareTag(ItemStack stack) {
 		NBTTagCompound nbt = new NBTTagCompound();
 		NBTTagCompound stackNbt = stack.getTagCompound();
@@ -146,7 +142,7 @@ public class CapabilityContainerListener implements IContainerListener {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	public static NBTTagCompound readCapabilityData(ItemStack stack) {
 		NBTTagCompound nbt = new NBTTagCompound();
 		SYNC_CAPS.forEach((name, cap) -> {

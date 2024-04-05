@@ -29,15 +29,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
 	protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
@@ -62,7 +63,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(STAGE, meta);
 	}
@@ -88,13 +89,13 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, STAGE);
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Block.EnumOffsetType getOffsetType() {
 		return Block.EnumOffsetType.XZ;
 	}
@@ -131,13 +132,13 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return SAPLING_AABB;
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
 		return EnumPlantType.Plains;
 	}

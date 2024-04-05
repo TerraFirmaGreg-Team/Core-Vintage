@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.biomes;
 
 import net.dries007.tfc.ConfigTFC;
@@ -18,7 +13,8 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 
 public class BiomeTFC extends Biome {
@@ -79,13 +75,13 @@ public class BiomeTFC extends Biome {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BiomeDecorator createBiomeDecorator() {
 		return new BiomeDecoratorTFC(lilyPadPerChunk, waterPlantsPerChunk);
 	}
 
 	@Override
-	public float getTemperature(@Nonnull BlockPos pos) {
+	public float getTemperature(@NotNull BlockPos pos) {
 		// Vanilla spec: 0.15 = snow threshold, range = [-1, 1] for overworld temps.
 		return MathHelper.clamp(0.15f + ClimateTFC.getDailyTemp(pos) / 35, -1, 1);
 	}

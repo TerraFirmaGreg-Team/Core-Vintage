@@ -1,6 +1,5 @@
 package com.eerussianguy.firmalife.blocks;
 
-import com.eerussianguy.firmalife.init.FoodDataFL;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.te.TEString;
 import mcp.MethodsReturnNonnullByDefault;
@@ -31,16 +30,17 @@ import net.minecraftforge.items.IItemHandler;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class BlockString extends BlockNonCube {
 	public static final PropertyEnum<EnumFacing.Axis> AXIS = StatePropertiesFL.XZ;
@@ -82,7 +82,7 @@ public class BlockString extends BlockNonCube {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(AXIS, meta == 1 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
 	}
@@ -94,7 +94,7 @@ public class BlockString extends BlockNonCube {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return state.getValue(AXIS) == EnumFacing.Axis.X ? SHAPE : SHAPE_90;
 	}
@@ -118,7 +118,7 @@ public class BlockString extends BlockNonCube {
 				if (cap != null) {
 					List<FoodTrait> traits = cap.getTraits();
 					boolean isFoodValid = (traits.contains(FoodTrait.BRINED) && OreDictionaryHelper.doesStackMatchOre(held, "categoryMeat") && HeatRecipe.get(held) != null) || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
-					if (!traits.contains(FoodDataFL.SMOKED) && isFoodValid) {
+					if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
 						ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
 						Helpers.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
 						te.markForSync();
@@ -151,7 +151,7 @@ public class BlockString extends BlockNonCube {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return getStateForPlacement(worldIn, placer, facing, pos);
 	}
@@ -178,7 +178,7 @@ public class BlockString extends BlockNonCube {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, AXIS);
 	}

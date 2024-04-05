@@ -6,9 +6,9 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class DryingMatRecipe extends IForgeRegistryEntry.Impl<DryingMatRecipe> implements IJEISimpleRecipe {
 	private IIngredient<ItemStack> inputItem;
@@ -40,17 +40,17 @@ public class DryingMatRecipe extends IForgeRegistryEntry.Impl<DryingMatRecipe> i
 	 *
 	 * @return the output item stack
 	 */
-	@Nonnull
+	@NotNull
 	public ItemStack getOutputStack() {
 		return outputItem;
 	}
 
-	@Nonnull
+	@NotNull
 	public IIngredient<ItemStack> getItemIngredient() {
 		return inputItem;
 	}
 
-	@Nonnull
+	@NotNull
 	public ItemStack getOutputItem(ItemStack stack) {
 		return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
 	}

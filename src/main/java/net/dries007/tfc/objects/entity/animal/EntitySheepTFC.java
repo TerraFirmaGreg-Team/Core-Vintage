@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.dries007.tfc.ConfigTFC;
@@ -49,9 +44,10 @@ import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -60,7 +56,7 @@ import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-@ParametersAreNonnullByDefault
+
 public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, ILivestock {
 	private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntitySheepTFC.class, DataSerializers.VARINT);
 	private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntitySheepTFC.class, EntitiesTFC.getLongDataSerializer());
@@ -126,14 +122,14 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 	}
 
 	@Override
-	public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setLong("shearedTick", getShearedTick());
 		compound.setInteger("dyecolor", getDyeColor().getMetadata());
 	}
 
 	@Override
-	public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		setShearedTick(compound.getLong("shearedTick"));
 		setDyeColor(EnumDyeColor.byMetadata(compound.getByte("dyecolor")));
@@ -154,7 +150,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 					TextComponentTranslation tooltip = getTooltip();
 					if (tooltip != null) {
 						TerraFirmaCraft.getNetwork()
-								.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+						               .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
 					}
 				}
 			}
@@ -165,7 +161,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 					TextComponentTranslation tooltip = getTooltip();
 					if (tooltip != null) {
 						TerraFirmaCraft.getNetwork()
-								.sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
+						               .sendTo(new PacketSimpleMessage(MessageCategory.ANIMAL, tooltip), (EntityPlayerMP) player);
 					}
 				}
 			}
@@ -181,7 +177,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 	}
 
 	@Override
-	protected boolean eatFood(@Nonnull ItemStack stack, EntityPlayer player) {
+	protected boolean eatFood(@NotNull ItemStack stack, EntityPlayer player) {
 		// Refuses to eat rotten stuff
 		IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 		if (cap != null) {
@@ -249,13 +245,13 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 	}
 
 	@Override
-	public boolean isShearable(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos) {
+	public boolean isShearable(@NotNull ItemStack item, IBlockAccess world, BlockPos pos) {
 		return isReadyForAnimalProduct();
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+	public List<ItemStack> onSheared(@NotNull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		setProductsCooldown();
 		List<ItemStack> products = getProducts();
 		// Fortune makes this less random and more towards the maximum (3) amount.

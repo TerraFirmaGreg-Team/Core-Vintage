@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -22,19 +17,18 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
+
 public class CommandStripWorld extends CommandBase {
 	@Override
-	@Nonnull
+	@NotNull
 	public String getName() {
 		return "stripworld";
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public String getUsage(ICommandSender sender) {
 		return "tfc.command.stripworld.usage";
 	}

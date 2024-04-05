@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.size;
 
 import net.minecraft.item.ItemStack;
@@ -11,8 +6,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.EnumMap;
 
 public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
@@ -48,31 +45,31 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityItemSize.ITEM_SIZE_CAPABILITY;
 	}
 
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityItemSize.ITEM_SIZE_CAPABILITY ? (T) this : null;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return this.size;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return this.weight;
 	}
 
 	@Override
-	public boolean canStack(@Nonnull ItemStack stack) {
+	public boolean canStack(@NotNull ItemStack stack) {
 		return canStack;
 	}
 
@@ -80,7 +77,7 @@ public class ItemSizeHandler implements ICapabilityProvider, IItemSize {
 	 * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
 	 */
 	@Override
-	public int getStackSize(@Nonnull ItemStack stack) {
+	public int getStackSize(@NotNull ItemStack stack) {
 		return this.canStack ? this.weight.stackSize : 1;
 	}
 }

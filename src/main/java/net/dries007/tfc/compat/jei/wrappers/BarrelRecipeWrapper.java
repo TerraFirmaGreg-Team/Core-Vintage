@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -21,12 +16,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class BarrelRecipeWrapper implements IRecipeWrapper {
 	private final BarrelRecipe recipe;
 	private final List<ItemStack> itemIngredients;

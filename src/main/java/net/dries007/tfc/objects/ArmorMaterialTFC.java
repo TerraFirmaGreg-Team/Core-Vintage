@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects;
 
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
@@ -10,7 +5,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -65,7 +60,7 @@ public class ArmorMaterialTFC implements IArmorMaterialTFC {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ArmorMaterial getMaterial() {
 		return material;
 	}

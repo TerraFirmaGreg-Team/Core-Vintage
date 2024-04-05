@@ -22,6 +22,13 @@ public final class BlocksDevice {
 	public static BlockQuern QUERN;
 	public static BlockMolten MOLTEN;
 	public static BlockLogPile LOG_PILE;
+	public static BlockCellarShelf CELLAR_SHELF;
+	public static BlockCellarDoor CELLAR_DOOR;
+	public static BlockCellarWall CELLAR_WALL;
+	public static BlockIceBunker ICE_BUNKER;
+	public static BlockInfectedAir INFECTED_AIR;
+	public static BlockFreezeDryer FREEZE_DRYER;
+	public static BlockNestBox NEST_BOX;
 
 	public static void onRegister(RegistryManager registry) {
 		//==== Other =================================================================================================//
@@ -42,6 +49,13 @@ public final class BlocksDevice {
 		QUERN = registry.registerBlock(new BlockQuern());
 		MOLTEN = registry.registerBlock(new BlockMolten());
 		LOG_PILE = registry.registerBlock(new BlockLogPile());
+		CELLAR_SHELF = registry.registerBlock(new BlockCellarShelf());
+		CELLAR_DOOR = registry.registerBlock(new BlockCellarDoor());
+		CELLAR_WALL = registry.registerBlock(new BlockCellarWall());
+		ICE_BUNKER = registry.registerBlock(new BlockIceBunker());
+		INFECTED_AIR = registry.registerBlock(new BlockInfectedAir());
+		FREEZE_DRYER = registry.registerBlock(new BlockFreezeDryer());
+		NEST_BOX = registry.registerBlock(new BlockNestBox());
 	}
 
 }

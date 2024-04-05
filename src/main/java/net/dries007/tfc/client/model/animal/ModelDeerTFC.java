@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.model.animal;
 
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
@@ -15,11 +10,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelDeerTFC extends ModelBase {
 	//fields
 	private final ModelRenderer antler24;
@@ -325,7 +320,7 @@ public class ModelDeerTFC extends ModelBase {
 	}
 
 	@Override
-	public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(@NotNull Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 

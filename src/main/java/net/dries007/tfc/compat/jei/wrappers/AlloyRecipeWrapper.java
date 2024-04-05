@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import com.google.common.collect.Lists;
@@ -16,12 +11,12 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class AlloyRecipeWrapper implements IRecipeWrapper {
 	private final String[] slotContent = {"", "", "", ""};
 	private final AlloyRecipe recipe;

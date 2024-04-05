@@ -20,13 +20,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
-@ParametersAreNonnullByDefault
+
 @EventBusSubscriber(modid = MODID_HOTORNOT)
 public class ServerEvents {
 

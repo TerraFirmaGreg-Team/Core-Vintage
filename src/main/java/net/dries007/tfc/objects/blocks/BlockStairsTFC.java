@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.dries007.tfc.api.types.Rock;
@@ -17,13 +12,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
+
 public class BlockStairsTFC extends BlockStairs {
 	private static final Map<Rock, EnumMap<Rock.Type, BlockStairsTFC>> ROCK_TABLE = new HashMap<>();
 	private static final Map<Tree, BlockStairsTFC> WOOD_MAP = new HashMap<>();
@@ -81,7 +76,7 @@ public class BlockStairsTFC extends BlockStairs {
 	}
 
 	@Override
-	public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state) {
+	public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state) {
 		// Prevents cobble stairs from falling
 	}
 }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -19,7 +14,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -79,7 +75,7 @@ public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
 	}
 
 	@Override
-	protected void actionPerformed(@Nonnull GuiButton button) throws IOException {
+	protected void actionPerformed(@NotNull GuiButton button) throws IOException {
 		if (button instanceof GuiButtonPowderkegSeal) {
 			TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
 		}

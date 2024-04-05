@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.objects.te.ITileFields;
@@ -15,15 +10,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * This is the mother of all Container-with-a-Tile-Entity implementations
  *
  * @param <T> The Tile Entity class
  */
-@ParametersAreNonnullByDefault
+
 public abstract class ContainerTE<T extends TEInventory> extends ContainerSimple {
 	protected final T tile;
 	protected final EntityPlayer player;
@@ -64,7 +59,7 @@ public abstract class ContainerTE<T extends TEInventory> extends ContainerSimple
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		// Slot that was clicked
 		Slot slot = inventorySlots.get(index);

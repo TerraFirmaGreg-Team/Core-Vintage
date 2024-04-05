@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ContainerBag extends ContainerItemStack implements ISlotCallback {
 	public ContainerBag(InventoryPlayer playerInv, ItemStack stack) {
@@ -39,7 +39,7 @@ public class ContainerBag extends ContainerItemStack implements ISlotCallback {
 	 * Copied from ContainerItemStack, but modified to change preserved trait
 	 */
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		// Slot that was clicked
 		Slot slot = inventorySlots.get(index);

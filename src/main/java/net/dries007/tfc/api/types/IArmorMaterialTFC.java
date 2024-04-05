@@ -1,14 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.minecraft.item.ItemArmor;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see net.dries007.tfc.objects.ArmorMaterialTFC
@@ -40,6 +35,6 @@ public interface IArmorMaterialTFC {
 	 *
 	 * @return Vanilla "extended" ArmorMaterial
 	 */
-	@Nonnull
+	@NotNull
 	ItemArmor.ArmorMaterial getMaterial();
 }

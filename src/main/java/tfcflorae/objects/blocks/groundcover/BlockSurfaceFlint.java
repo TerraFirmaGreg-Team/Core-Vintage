@@ -32,12 +32,13 @@ import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class BlockSurfaceFlint extends BlockBush {
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.9, 0.4, 0.9);
 
@@ -68,7 +69,7 @@ public class BlockSurfaceFlint extends BlockBush {
 		return dropAmount + 1;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		int chance = rand.nextInt(100);
@@ -105,7 +106,7 @@ public class BlockSurfaceFlint extends BlockBush {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
@@ -118,7 +119,7 @@ public class BlockSurfaceFlint extends BlockBush {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return AABB.offset(state.getOffset(source, pos));
@@ -185,8 +186,8 @@ public class BlockSurfaceFlint extends BlockBush {
 		return this.canSustainBush(soil);
 	}
 
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && !player.isSneaking() && stack.getCount() > 0) {
 			GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.FLINT);
@@ -194,7 +195,7 @@ public class BlockSurfaceFlint extends BlockBush {
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
-	@Nonnull
+	@NotNull
 	public void onRightClick(PlayerInteractEvent.RightClickItem event) {
 		EnumHand hand = event.getHand();
 		if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "flint") && hand == EnumHand.MAIN_HAND) {

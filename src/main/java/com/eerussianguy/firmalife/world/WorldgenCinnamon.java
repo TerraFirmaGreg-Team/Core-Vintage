@@ -14,10 +14,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
+
 public class WorldgenCinnamon extends WorldGenerator {
 	public static boolean generateCinnamon(World world, Random rand, BlockPos pos, boolean worldgen) {
 		IBlockState state = world.getBlockState(pos.down());

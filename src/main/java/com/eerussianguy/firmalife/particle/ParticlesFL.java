@@ -13,7 +13,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Supplier;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
@@ -39,7 +40,7 @@ public enum ParticlesFL {
 	}
 
 	@SideOnly(Side.CLIENT)
-	private void registerSprite(@Nonnull TextureMap map) {
+	private void registerSprite(@NotNull TextureMap map) {
 		this.sprite = map.registerSprite(location);
 	}
 

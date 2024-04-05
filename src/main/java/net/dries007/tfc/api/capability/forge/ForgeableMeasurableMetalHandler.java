@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.forge;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -15,8 +10,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 /**
@@ -33,7 +30,7 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
 		this.meltTemp = metal.getMeltTemp();
 	}
 
-	public ForgeableMeasurableMetalHandler(@Nonnull NBTTagCompound nbt) {
+	public ForgeableMeasurableMetalHandler(@NotNull NBTTagCompound nbt) {
 		this.metalAmount = 0;
 		this.metal = Metal.UNKNOWN;
 		this.heatCapacity = Metal.UNKNOWN.getSpecificHeat();
@@ -58,7 +55,7 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound nbt = super.serializeNBT();
 		nbt.setInteger("metalAmount", metalAmount);
@@ -84,7 +81,7 @@ public class ForgeableMeasurableMetalHandler extends ForgeableHeatableHandler im
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+	public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
 		String desc = TextFormatting.WHITE + I18n.format("tfc.tooltip.units", metalAmount);
 		text.add(desc);
 		super.addHeatInfo(stack, text);

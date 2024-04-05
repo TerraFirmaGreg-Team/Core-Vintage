@@ -11,11 +11,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import tfctech.api.recipes.SmelteryRecipe;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class SmelteryRecipeWrapper implements IRecipeWrapper {
 	private final SmelteryRecipe recipe;
 

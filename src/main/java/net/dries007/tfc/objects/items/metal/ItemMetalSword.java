@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import com.google.common.collect.HashMultimap;
@@ -28,9 +23,10 @@ import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +35,7 @@ import java.util.Map;
  *
  * Extend vanilla class to add the sweeping effect
  */
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
 	private static final Map<Metal, ItemMetalSword> TABLE = new HashMap<>();
@@ -108,8 +104,8 @@ public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
 	}
 
 	@Override
-	@Nonnull
-	public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+	@NotNull
+	public IRarity getForgeRarity(@NotNull ItemStack stack) {
 		switch (metal.getTier()) {
 			case TIER_I:
 			case TIER_II:
@@ -124,15 +120,15 @@ public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
 		return super.getForgeRarity(stack);
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Size getSize(@Nonnull ItemStack stack) {
+	public @NotNull Size getSize(@NotNull ItemStack stack) {
 		return Size.LARGE;
 	}
 
-	@Nonnull
+
 	@Override
-	public @NotNull Weight getWeight(@Nonnull ItemStack stack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
 		return Weight.MEDIUM;
 	}
 }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.model.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -17,14 +12,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Need this for not insta-growing
  * This is a copy paste from vanilla, changing only the re-scale while animal is growing
  */
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class ModelWolfTFC extends ModelBase {
 	/**
 	 * main box for the wolf head

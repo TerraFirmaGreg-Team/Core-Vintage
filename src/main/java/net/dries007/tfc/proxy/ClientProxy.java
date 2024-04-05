@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.proxy;
 
 import net.dries007.tfc.util.Helpers;
@@ -17,13 +12,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)
 public class ClientProxy implements IProxy {
-	@Nonnull
+	@NotNull
 	@Override
 	public IThreadListener getThreadListener(MessageContext context) {
 		if (context.side.isClient()) {
@@ -53,13 +49,13 @@ public class ClientProxy implements IProxy {
 		}
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getMonthName(Month month, boolean useSeasons) {
 		return I18n.format(useSeasons ? "tfc.enum.season." + month.name().toLowerCase() : Helpers.getEnumName(month));
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getDayName(int dayOfMonth, long totalDays) {
 		String date = CalendarTFC.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
@@ -70,7 +66,7 @@ public class ClientProxy implements IProxy {
 		return I18n.format("tfc.enum.day." + CalendarTFC.DAY_NAMES[(int) (totalDays % 7)]);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getDate(int hour, int minute, String monthName, int day, long years) {
 		// We call an additional String.format for the time, because vanilla doesn't support %02d format specifiers

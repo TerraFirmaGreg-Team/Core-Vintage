@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.agriculture;
 
 import net.dries007.tfc.api.types.ICrop;
@@ -26,8 +21,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
@@ -147,7 +144,7 @@ public enum Crop implements ICrop {
 		return tempMinGrow < temperature && temperature < tempMaxGrow && rainMinGrow < rainfall && rainfall < rainMaxGrow;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ItemStack getFoodDrop(int currentStage) {
 		if (currentStage == getMaxStage()) {
@@ -184,6 +181,8 @@ public enum Crop implements ICrop {
 	}
 
 	enum CropType {
-		SIMPLE, PICKABLE, SPREADING
+		SIMPLE,
+		PICKABLE,
+		SPREADING
 	}
 }

@@ -1,14 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.skills;
 
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class SimpleSkill extends Skill {
 	private float amount;
@@ -19,7 +14,7 @@ public class SimpleSkill extends Skill {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public SkillTier getTier() {
 		return SkillTier.valueOf((int) amount);
 	}

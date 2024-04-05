@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.ingredient;
 
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -10,17 +5,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class IngredientOreDict implements IIngredient<ItemStack> {
 	private final String oreName;
 	private final int amount;
 
-	IngredientOreDict(@Nonnull String oreName) {
+	IngredientOreDict(@NotNull String oreName) {
 		this(oreName, 1);
 	}
 
-	IngredientOreDict(@Nonnull String oreName, int amount) {
+	IngredientOreDict(@NotNull String oreName, int amount) {
 		this.oreName = oreName;
 		this.amount = amount;
 	}
@@ -47,7 +42,7 @@ public class IngredientOreDict implements IIngredient<ItemStack> {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public ItemStack consume(ItemStack input) {
 		input.shrink(amount);
 		return input;
@@ -58,7 +53,7 @@ public class IngredientOreDict implements IIngredient<ItemStack> {
 		return amount;
 	}
 
-	@Nonnull
+	@NotNull
 	public String getOreName() {
 		return oreName;
 	}

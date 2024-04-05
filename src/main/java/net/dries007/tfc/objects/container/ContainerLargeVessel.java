@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.dries007.tfc.objects.blocks.BlockLargeVessel;
@@ -13,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ContainerLargeVessel extends ContainerTE<TELargeVessel> implements IButtonHandler {
 	public ContainerLargeVessel(InventoryPlayer playerInv, TELargeVessel tile) {

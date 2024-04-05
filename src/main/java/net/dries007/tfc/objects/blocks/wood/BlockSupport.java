@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.dries007.tfc.ConfigTFC;
@@ -29,12 +24,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
-@ParametersAreNonnullByDefault
+
 public class BlockSupport extends Block {
 	/* Axis of the support, Y for vertical placed, Z/X for horizontal */
 	public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
@@ -154,7 +150,7 @@ public class BlockSupport extends Block {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(AXIS, EnumFacing.Axis.values()[meta]);
 	}
@@ -166,8 +162,8 @@ public class BlockSupport extends Block {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
-	public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+	@NotNull
+	public IBlockState getActualState(@NotNull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return state.withProperty(NORTH, isConnectable(worldIn, pos, EnumFacing.NORTH))
 		            .withProperty(SOUTH, isConnectable(worldIn, pos, EnumFacing.SOUTH))
 		            .withProperty(EAST, isConnectable(worldIn, pos, EnumFacing.EAST))
@@ -182,7 +178,7 @@ public class BlockSupport extends Block {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		AxisAlignedBB value = state.getValue(AXIS) == EnumFacing.Axis.Y ? VERTICAL_SUPPORT_AABB : HORIZONTAL_SUPPORT_AABB;
 		if (isConnectable(source, pos, EnumFacing.NORTH)) {
@@ -201,7 +197,7 @@ public class BlockSupport extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	@SuppressWarnings("deprecation")
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.UNDEFINED;
@@ -209,7 +205,7 @@ public class BlockSupport extends Block {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void addCollisionBoxToList(IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox, @Nonnull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+	public void addCollisionBoxToList(IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull AxisAlignedBB entityBox, @NotNull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
 		EnumFacing.Axis axis = state.getValue(AXIS);
 		if (axis == EnumFacing.Axis.Y) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, VERTICAL_SUPPORT_AABB);
@@ -246,7 +242,7 @@ public class BlockSupport extends Block {
 	}
 
 	@Override
-	public boolean canPlaceBlockOnSide(@Nonnull World world, @Nonnull BlockPos pos, EnumFacing side) {
+	public boolean canPlaceBlockOnSide(@NotNull World world, @NotNull BlockPos pos, EnumFacing side) {
 		if (side.getAxis() == EnumFacing.Axis.Y) {
 			return world.getBlockState(pos.down()).isNormalCube() || isConnectable(world, pos, EnumFacing.DOWN);
 		} else {
@@ -281,7 +277,7 @@ public class BlockSupport extends Block {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	@Nonnull
+	@NotNull
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(AXIS, facing.getAxis());
 	}
@@ -332,7 +328,7 @@ public class BlockSupport extends Block {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, AXIS, NORTH, SOUTH, EAST, WEST);
 	}

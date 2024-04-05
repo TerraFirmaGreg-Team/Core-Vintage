@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects;
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -15,7 +10,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -41,7 +36,7 @@ public final class CreativeTabsTFC {
 
 		@SideOnly(Side.CLIENT)
 		@Override
-		@Nonnull
+		@NotNull
 		public ItemStack createIcon() {
 			//noinspection ConstantConditions
 			ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(iconResourceLocation));

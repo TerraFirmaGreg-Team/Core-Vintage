@@ -23,7 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -66,7 +67,7 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
 		return TFCThingsItems.ITEM_ROPE_BRIDGE;
 	}
 
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(OFFSET, meta % 8).withProperty(AXIS, meta > 7);
 	}

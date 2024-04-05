@@ -1,9 +1,0 @@
-{
-  "variants": {
-    "normal": { "model": "cellars:freeze_dryer" },
-    "facing=north": { "model": "cellars:freeze_dryer" },
-    "facing=east":  { "model": "cellars:freeze_dryer", "y": 90 },
-    "facing=south": { "model": "cellars:freeze_dryer", "y": 180 },
-    "facing=west":  { "model": "cellars:freeze_dryer", "y": 270 }
-  }
-}

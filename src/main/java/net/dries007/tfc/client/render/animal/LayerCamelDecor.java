@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelCamelTFC;
@@ -13,14 +8,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.stream.IntStream;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 
 @SideOnly(Side.CLIENT)
-@ParametersAreNonnullByDefault
+
 public class LayerCamelDecor implements LayerRenderer<EntityCamelTFC> {
 	private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16)
 	                                                                        .mapToObj(i -> new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i)

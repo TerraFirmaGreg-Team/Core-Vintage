@@ -17,13 +17,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * 1.12 is so wack
  */
-@ParametersAreNonnullByDefault
+
 @MethodsReturnNonnullByDefault
 public abstract class BlockNonCube extends Block implements IItemSize {
 	public BlockNonCube(Material materialIn) {
@@ -54,15 +52,15 @@ public abstract class BlockNonCube extends Block implements IItemSize {
 		return BlockRenderLayer.CUTOUT;
 	}
 
+	
 	@Override
-	@Nonnull
-	public @NotNull Size getSize(@Nonnull ItemStack itemStack) {
+	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
 		return Size.NORMAL;
 	}
 
+
 	@Override
-	@Nonnull
-	public @NotNull Weight getWeight(@Nonnull ItemStack itemStack) {
+	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
 		return Weight.MEDIUM;
 	}
 }

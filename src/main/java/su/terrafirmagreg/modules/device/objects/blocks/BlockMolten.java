@@ -21,13 +21,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@ParametersAreNonnullByDefault
+
 public class BlockMolten extends BlockBase {
 	public static final PropertyInteger LAYERS = PropertyInteger.create("layers", 1, 4);
 
@@ -58,7 +59,7 @@ public class BlockMolten extends BlockBase {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(LAYERS, (meta & 0b11) + 1).withProperty(LIT, meta > 3);
 	}
@@ -88,7 +89,7 @@ public class BlockMolten extends BlockBase {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return MOLTEN_AABB[state.getValue(LAYERS) - 1];
 	}
@@ -103,7 +104,7 @@ public class BlockMolten extends BlockBase {
 	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
 	@Override
-	@Nonnull
+	@NotNull
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return MOLTEN_AABB[state.getValue(LAYERS) - 1];
 	}
@@ -124,7 +125,7 @@ public class BlockMolten extends BlockBase {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, LIT, LAYERS);
 	}

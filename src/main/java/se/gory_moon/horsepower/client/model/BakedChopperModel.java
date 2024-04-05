@@ -31,8 +31,10 @@ import se.gory_moon.horsepower.blocks.BlockChopper;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
 import se.gory_moon.horsepower.util.RenderUtils;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import javax.vecmath.Matrix4f;
 import java.util.List;
 import java.util.Map;
@@ -172,9 +174,9 @@ public class BakedChopperModel implements IBakedModel {
 			super(ImmutableList.of());
 		}
 
-		@Nonnull
+		@NotNull
 		@Override
-		public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
+		public IBakedModel handleItemState(@NotNull IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
 			if (originalModel instanceof BakedChopperModel) {
 				// read out the data on the itemstack
 				ItemStack blockStack = new ItemStack(stack.hasTagCompound() ? stack.getTagCompound()

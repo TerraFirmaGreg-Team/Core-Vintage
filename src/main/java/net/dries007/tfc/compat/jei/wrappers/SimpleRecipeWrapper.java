@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -13,11 +8,11 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
+
 public class SimpleRecipeWrapper implements IRecipeWrapper {
 	private final IJEISimpleRecipe recipeWrapper;
 

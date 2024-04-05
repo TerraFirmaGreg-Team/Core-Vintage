@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
 
 import com.google.gson.JsonObject;
@@ -17,16 +12,16 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ShapedSkillRecipe extends ShapedOreRecipe {
-	private ShapedSkillRecipe(ResourceLocation group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
+	private ShapedSkillRecipe(ResourceLocation group, @NotNull ItemStack result, CraftingHelper.ShapedPrimer primer) {
 		super(group, result, primer);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getCraftingResult(@Nonnull InventoryCrafting inventory) {
+	public ItemStack getCraftingResult(@NotNull InventoryCrafting inventory) {
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			ItemStack inputStack = inventory.getStackInSlot(i);
 			float skillBonus = SmithingSkill.getSkillBonus(inputStack);

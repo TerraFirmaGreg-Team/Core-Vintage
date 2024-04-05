@@ -21,13 +21,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
-import net.sharkbark.cellars.Main;
 import net.sharkbark.cellars.ModConfig;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 
 import javax.annotation.Nullable;
 
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 @Mod.EventBusSubscriber(modid = MODID_CELLARS)
@@ -42,7 +42,7 @@ public class ItemIceSaw extends ItemBase implements IMetalItem {
 		this.metal = metal;
 		ToolMaterial material = metal.getToolMetal();
 		setMaxStackSize(1);
-		setCreativeTab(Main.creativeTab);
+		setCreativeTab(CT_METAL);
 		setMaxDamage(material.getMaxUses());
 		efficiency = material.getEfficiency();
 		attackDamage = 0.5 * material.getAttackDamage();

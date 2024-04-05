@@ -23,9 +23,6 @@ package com.buuz135.hotornot;
 
 import com.buuz135.hotornot.network.PacketClientSettings;
 import com.buuz135.hotornot.network.PacketServerSettings;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -43,14 +40,6 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 public class HotOrNot {
 
 	public static final String MOD_NAME = "Hot Or Not - TFC";
-
-	public static final CreativeTabs HOTORNOT_TAB = new CreativeTabs(MODID_HOTORNOT) {
-		@Override
-		public ItemStack createIcon() {
-			//ToDo: Replace with TFC Blue Steel Lava Bucket
-			return new ItemStack(Items.LAVA_BUCKET);
-		}
-	};
 
 	@Instance
 	private static HotOrNot INSTANCE = null;

@@ -21,14 +21,18 @@ public final class OreDictUtils {
 
 
 	public static void register(Item item, Object... parts) {
-		register(new ItemStack(item), toString(parts));
+		register(item, OreDictionary.WILDCARD_VALUE, parts);
+	}
+
+	public static void register(Item item, int meta, Object... parts) {
+		register(new ItemStack(item, 1, meta), toString(parts));
 	}
 
 	public static void register(Block block, Object... parts) {
 		register(new ItemStack(block), toString(parts));
 	}
 
-	private static void register(ItemStack itemStack, String parts) {
+	public static void register(ItemStack itemStack, String parts) {
 		if (itemStack != null && !itemStack.isEmpty()) {
 			OreDictionary.registerOre(parts, itemStack);
 		} else {

@@ -7,12 +7,16 @@ import net.dries007.tfc.api.types.Metal;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
+
 public class ItemToolHead extends ItemBase implements IMetalItem {
 	private final Metal metal;
 
 	public ItemToolHead(Metal metal, String name, String oreName) {
 		super(name);
 		this.metal = metal;
+
+		setCreativeTab(CT_METAL);
 	}
 
 	@Override

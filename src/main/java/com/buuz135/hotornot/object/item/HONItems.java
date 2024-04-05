@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static com.buuz135.hotornot.HotOrNot.HOTORNOT_TAB;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 @ObjectHolder(value = MODID_HOTORNOT)
@@ -62,7 +62,7 @@ public final class HONItems {
 	}
 
 	private static <T extends Item> T register(final IForgeRegistry<Item> r, final String name, final T item) {
-		return register(r, name, item, HOTORNOT_TAB);
+		return register(r, name, item, CT_METAL);
 	}
 
 	private static <T extends Item> T register(final IForgeRegistry<Item> r, final String name, final T item, final CreativeTabs ct) {

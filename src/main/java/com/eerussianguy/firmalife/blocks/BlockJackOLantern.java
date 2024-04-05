@@ -7,7 +7,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.BlockHorizontal;
@@ -27,9 +26,11 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockJackOLantern extends BlockHorizontal implements IItemSize, ILightableBlock {
+public class BlockJackOLantern extends BlockHorizontal implements IItemSize {
 	private final Carving carving;
 
 	public BlockJackOLantern(Carving carving) {

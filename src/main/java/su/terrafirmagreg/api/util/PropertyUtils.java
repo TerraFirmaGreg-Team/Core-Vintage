@@ -98,6 +98,10 @@ public final class PropertyUtils {
 	public static final PropertyBool CLOSED = PropertyBool.create("closed");
 	public static final PropertyBool BURIED = PropertyBool.create("buried");
 	public static final PropertyBool BAITED = PropertyBool.create("baited");
+	public static final PropertyBool OPEN = PropertyBool.create("open");
+	public static final PropertyBool UPPER = PropertyBool.create("upper");
+	public static final PropertyBool FULL = PropertyBool.create("full");
+	public static final PropertyBool LIT = PropertyBool.create("lit");
 
 	/**
 	 * Utility classes, such as this one, are not meant to be instantiated. Java adds an

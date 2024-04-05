@@ -1,9 +1,9 @@
 package com.lumintorious.ambiental.modifiers;
 
 import com.lumintorious.ambiental.capability.TemperatureCapability;
-import net.dries007.tfc.objects.te.TEBloomery;
-import net.dries007.tfc.objects.te.TECharcoalForge;
-import net.dries007.tfc.objects.te.TEFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
+import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
+import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 import net.dries007.tfc.objects.te.TELamp;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;

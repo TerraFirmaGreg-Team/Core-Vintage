@@ -1,7 +1,6 @@
 package net.sharkbark.cellars.blocks.tileentity;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.minecraft.block.*;
@@ -35,6 +34,7 @@ import su.terrafirmagreg.modules.core.data.ItemsCore;
 import javax.annotation.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 public class TEIceBunker extends TileEntityLockableLoot implements IInventory, ITickable {
 
@@ -406,14 +406,14 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 	}
 
 	private int getBlockType(int x, int y, int z) {
-		Block block = world.getBlockState(new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
-				.getBlock();
+		Block block = world.getBlockState(new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z)).getBlock();
 		if (block instanceof CellarWall) {
 			return 0;
 		} else if (block instanceof CellarDoor) {
 			return 1;
 		} else if (block instanceof BlockCellarShelf || block instanceof BlockWallSign || block instanceof BlockStandingSign ||
-				block instanceof BlockTorch || block instanceof BlockRedstoneTorch || block instanceof ILightableBlock || block instanceof BlockRedstoneLight ||
+				block instanceof BlockTorch || block instanceof BlockRedstoneTorch || block.getBlockState().getBaseState()
+				                                                                           .getValue(LIT) || block instanceof BlockRedstoneLight ||
 				world.isAirBlock(new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))) {
 			return 2;
 		}
@@ -437,7 +437,7 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 
 	private void updateContainer(int x, int y, int z) {
 		Block block = world.getBlockState(new BlockPos(getPos().getX() + x, getPos().getY() + y, getPos().getZ() + z))
-				.getBlock();
+		                   .getBlock();
 		if (block instanceof BlockCellarShelf) {
 			TileEntity tileEntity = world.getTileEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
 			if (tileEntity != null) {

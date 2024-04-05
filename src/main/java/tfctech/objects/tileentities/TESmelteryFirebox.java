@@ -16,7 +16,8 @@ import tfctech.objects.blocks.devices.BlockSmelteryCauldron;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
 
 public class TESmelteryFirebox extends TETickableInventory implements ITickable, ICalendarTickable, ITileFields {
 	private float temperature;

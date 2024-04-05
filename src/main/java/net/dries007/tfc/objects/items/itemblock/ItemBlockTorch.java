@@ -5,9 +5,6 @@
 
 package net.dries007.tfc.objects.items.itemblock;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TELogPile;
-import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -16,8 +13,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
 
 public class ItemBlockTorch extends ItemBlockTFC {
 	public ItemBlockTorch(Block block) {
@@ -30,10 +31,10 @@ public class ItemBlockTorch extends ItemBlockTFC {
 		World world = entityItem.getEntityWorld();
 		IBlockState state = entityItem.getEntityWorld().getBlockState(pos);
 
-		if (state.getBlock() == BlocksTFC.LOG_PILE || state.getBlock() == BlocksTFC.PIT_KILN) {
+		if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN) {
 			int count = entityItem.getEntityData().getInteger("torchCount");
 			if (count > 160) {
-				if (state.getBlock() == BlocksTFC.LOG_PILE) {
+				if (state.getBlock() == BlocksDevice.LOG_PILE) {
 					world.setBlockState(pos, state.withProperty(LIT, true));
 					TELogPile te = Helpers.getTE(world, pos, TELogPile.class);
 					if (te != null) {
@@ -42,7 +43,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
 					if (Blocks.FIRE.canPlaceBlockAt(world, pos.up())) {
 						world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
 					}
-				} else if (state.getBlock() == BlocksTFC.PIT_KILN) {
+				} else if (state.getBlock() == BlocksDevice.PIT_KILN) {
 					TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
 					if (te != null) {
 						te.tryLight();

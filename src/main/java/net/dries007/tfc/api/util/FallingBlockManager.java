@@ -17,7 +17,6 @@ import net.dries007.tfc.api.capability.worldtracker.CollapseData;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
@@ -34,6 +33,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -319,7 +319,7 @@ public class FallingBlockManager {
 	public static BlockPos checkAreaClear(World world, IBlockState state, BlockPos pos) {
 		// Check that there are no entities in the area, otherwise it would collide with them
 		if (!world.getEntitiesWithinAABB(EntityFallingBlock.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)))
-				.isEmpty()) {
+		          .isEmpty()) {
 			// If we can't fall due to a collision, wait for the block to move out of the way and try again later
 			world.scheduleUpdate(pos, state.getBlock(), 20);
 			return null;

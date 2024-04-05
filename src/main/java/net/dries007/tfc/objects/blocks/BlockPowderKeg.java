@@ -9,7 +9,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
@@ -43,13 +42,15 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
 /**
  * Powderkeg is an inventory that preserves the contents when sealed
  * It can be picked up and keeps it's inventory
  * Sealed state is stored in a block state property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock {
+public class BlockPowderKeg extends Block implements IItemSize {
 	public static final PropertyBool SEALED = PropertyBool.create("sealed");
 
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);

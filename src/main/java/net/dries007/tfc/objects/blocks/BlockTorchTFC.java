@@ -9,7 +9,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -40,8 +39,10 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
 @ParametersAreNonnullByDefault
-public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBlock {
+public class BlockTorchTFC extends BlockTorch implements IItemSize {
 	public BlockTorchTFC() {
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
 		setHardness(0f);

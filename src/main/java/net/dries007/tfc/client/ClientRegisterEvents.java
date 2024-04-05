@@ -219,7 +219,6 @@ public final class ClientRegisterEvents {
 		// todo: switch to hide rack (involves changing mechanics, etc)
 		final ModelResourceLocation hideRack = new ModelResourceLocation(MODID_TFC + ":hide_rack");
 
-		ModelLoader.setCustomStateMapper(BlocksTFC.PIT_KILN, blockIn -> ImmutableMap.of(BlocksTFC.PIT_KILN.getDefaultState(), empty));
 		ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM_FLAT.getDefaultState(), empty));
 		ModelLoader.setCustomStateMapper(BlocksTFC.INGOT_PILE, blockIn -> ImmutableMap.of(BlocksTFC.INGOT_PILE.getDefaultState(), empty));
 		ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_ITEM, blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM.getDefaultState(), empty));
@@ -232,19 +231,12 @@ public final class ClientRegisterEvents {
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
-		ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
-		ClientRegistry.bindTileEntitySpecialRenderer(TEIngotPile.class, new TESRIngotPile());
-		ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
-		ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEBarrel.class, new TESRBarrel());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
 		ClientRegistry.bindTileEntitySpecialRenderer(TELoom.class, new TESRLoom());
-		ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
-		ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
-		ClientRegistry.bindTileEntitySpecialRenderer(TESluice.class, new TESRSluice());
 	}
 
 	@SubscribeEvent

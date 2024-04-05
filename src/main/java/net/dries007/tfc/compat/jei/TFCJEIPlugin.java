@@ -45,6 +45,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
+import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
+import su.terrafirmagreg.modules.device.data.BlocksDevice;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -121,7 +124,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		                                                         .collect(Collectors.toList());
 
 		registry.addRecipes(quernList, QUERN_UID); //Register recipes to quern category
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.QUERN), QUERN_UID); //Register BlockQuern as the device that do quern recipes
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN), QUERN_UID); //Register BlockQuern as the device that do quern recipes
 
 		//Wraps all heating recipes, if they return ingredient(1 or more) -> itemstacks(1 or more)
 		List<HeatRecipeWrapper> heatList = TFCRegistries.HEAT.getValuesCollection()
@@ -132,8 +135,8 @@ public final class TFCJEIPlugin implements IModPlugin {
 		                                                     .collect(Collectors.toList());
 
 		registry.addRecipes(heatList, HEAT_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.FIREPIT), HEAT_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CHARCOAL_FORGE), HEAT_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.FIRE_PIT), HEAT_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CHARCOAL_FORGE), HEAT_UID);
 
 		//Wraps all anvil recipes
 		List<AnvilRecipeWrapper> anvilList = TFCRegistries.ANVIL.getValuesCollection()
@@ -168,7 +171,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		                                                            .collect(Collectors.toList());
 
 		registry.addRecipes(alloyRecipes, ALLOY_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), ALLOY_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), ALLOY_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), ALLOY_UID);
 
 		// Clay Knapping
@@ -240,7 +243,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		                                                                 .collect(Collectors.toList());
 
 		registry.addRecipes(bloomeryList, BLOOMERY_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.BLOOMERY), BLOOMERY_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.BLOOMERY), BLOOMERY_UID);
 
 		//Wraps all blast furnace recipes
 		List<BlastFurnaceRecipeWrapper> blastList = TFCRegistries.BLAST_FURNACE.getValuesCollection()
@@ -249,7 +252,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		                                                                       .collect(Collectors.toList());
 
 		registry.addRecipes(blastList, BLAST_FURNACE_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.BLAST_FURNACE), BLAST_FURNACE_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.BLAST_FURNACE), BLAST_FURNACE_UID);
 
 		//Wraps all metal melting recipes
 		List<MetalHeatingRecipeWrapper> heatMetalList = new ArrayList<>();
@@ -270,7 +273,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 			}
 		});
 		registry.addRecipes(heatMetalList, METAL_HEAT_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), METAL_HEAT_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), METAL_HEAT_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), METAL_HEAT_UID);
 
 		//Wraps all chisel recipes
@@ -328,7 +331,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 		}
 		registry.addRecipes(unmoldList, VanillaRecipeCategoryUid.CRAFTING);
 		registry.addRecipes(castingList, CASTING_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), CASTING_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
 
 		//Click areas
@@ -347,7 +350,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
 		//Add JEI descriptions for basic mechanics
 
-		registry.addIngredientInfo(new ItemStack(BlocksTFC.PIT_KILN, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.pit_kiln").getFormattedText());
+		registry.addIngredientInfo(new ItemStack(BlocksDevice.PIT_KILN, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.pit_kiln").getFormattedText());
 		registry.addIngredientInfo(new ItemStack(BlocksTFC.PLACED_ITEM, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.placed_item").getFormattedText());
 		registry.addIngredientInfo(new ItemStack(Items.COAL, 1, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.charcoal_pit").getFormattedText());
 

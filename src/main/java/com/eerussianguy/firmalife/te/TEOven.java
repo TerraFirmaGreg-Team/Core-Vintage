@@ -27,7 +27,7 @@ import su.terrafirmagreg.modules.core.data.ItemsCore;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

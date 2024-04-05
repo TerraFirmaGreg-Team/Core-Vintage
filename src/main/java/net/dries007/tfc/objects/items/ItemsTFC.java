@@ -59,7 +59,6 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 @GameRegistry.ObjectHolder(MODID_TFC)
 public final class ItemsTFC {
 	public static final ItemGoldPan GOLDPAN = getNull();
-	public static final Item HANDSTONE = getNull();
 	public static final Item WROUGHT_IRON_GRILL = getNull();
 	public static final Item BRASS_MECHANISMS = getNull();
 
@@ -305,8 +304,6 @@ public final class ItemsTFC {
 		simpleItems.add(register(r, "crop/product/olive_jute_disc", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_FOOD)); //not edible
 		simpleItems.add(register(r, "crop/product/jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 		simpleItems.add(register(r, "crop/product/dirty_jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
-
-		simpleItems.add(register(r, "handstone", new ItemCraftingTool(250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"), CT_MISC));
 
 		simpleItems.add(register(r, "spindle", new ItemCraftingTool(40, Size.NORMAL, Weight.MEDIUM, "spindle"), CT_MISC));
 

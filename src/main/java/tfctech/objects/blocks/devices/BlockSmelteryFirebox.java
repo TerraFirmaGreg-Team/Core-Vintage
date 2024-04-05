@@ -5,8 +5,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -34,6 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
@@ -42,9 +41,11 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsConsumerBlock, ILightableBlock, IItemSize {
+public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsConsumerBlock, IItemSize {
 
 	public BlockSmelteryFirebox() {
 		super(Material.IRON);
@@ -73,8 +74,8 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 	@Nonnull
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
-				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-				.withProperty(LIT, meta / 4 % 2 != 0);
+		           .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+		           .withProperty(LIT, meta / 4 % 2 != 0);
 	}
 
 	@Override

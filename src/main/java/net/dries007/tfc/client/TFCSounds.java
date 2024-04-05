@@ -24,8 +24,6 @@ public class TFCSounds {
 	public static final SoundEvent ROCK_SLIDE_SHORT = getNull();
 	@GameRegistry.ObjectHolder(MODID_TFC + ":dirt.slide.short")
 	public static final SoundEvent DIRT_SLIDE_SHORT = getNull();
-	@GameRegistry.ObjectHolder(MODID_TFC + ":bellows.blow.air")
-	public static final SoundEvent BELLOWS_BLOW_AIR = getNull();
 	@GameRegistry.ObjectHolder(MODID_TFC + ":quern.stonedrag")
 	public static final SoundEvent QUERN_USE = getNull();
 	@GameRegistry.ObjectHolder(MODID_TFC + ":item.ceramicbreak")
@@ -61,7 +59,6 @@ public class TFCSounds {
 				createSoundEvent("rock.slide.long"),
 				createSoundEvent("rock.slide.short"),
 				createSoundEvent("dirt.slide.short"),
-				createSoundEvent("bellows.blow.air"),
 				createSoundEvent("quern.stonedrag"),
 				createSoundEvent("item.ceramicbreak"),
 				createSoundEvent("anvil.metalimpact"),

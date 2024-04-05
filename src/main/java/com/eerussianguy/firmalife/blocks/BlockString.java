@@ -8,8 +8,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
-import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -30,6 +28,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,6 +37,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
+
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -60,7 +62,7 @@ public class BlockString extends BlockNonCube {
 		pos = pos.down();
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof BlockFirePit) {
-			if (state.getValue(BlockFirePit.LIT)) {
+			if (state.getValue(LIT)) {
 				TEFirePit te = Helpers.getTE(world, pos, TEFirePit.class);
 				if (te != null) {
 					IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

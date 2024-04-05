@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodToolRack;
@@ -118,7 +119,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
 		if (!Helpers.canHangAt(worldIn, pos, state.getValue(FACING))) {
 			dropBlockAsItem(worldIn, pos, state, 0);
-			var te = Helpers.getTE(worldIn, pos, TEWoodToolRack.class);
+			var te = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
 			if (te != null) {
 				te.onBreakBlock();
 			}
@@ -128,7 +129,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 
 	@Override
 	public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		var te = Helpers.getTE(worldIn, pos, TEWoodToolRack.class);
+		var te = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
 		if (te != null) {
 			te.onBreakBlock();
 		}
@@ -142,7 +143,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 
 	public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			var te = Helpers.getTE(worldIn, pos, TEWoodToolRack.class);
+			var te = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
 			if (te != null) {
 				return te.onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
 			}
@@ -183,7 +184,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 	public ItemStack getPickBlock(@NotNull IBlockState state, @Nullable RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
 		if (target != null) {
 			var vec = target.hitVec.subtract(pos.getX(), pos.getY(), pos.getZ());
-			var te = Helpers.getTE(world, pos, TEWoodToolRack.class);
+			var te = TileUtils.getTile(world, pos, TEWoodToolRack.class);
 			if (te != null) {
 				ItemStack item = te.getItems().get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
 				if (!item.isEmpty()) {

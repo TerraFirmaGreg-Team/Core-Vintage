@@ -5,11 +5,11 @@
 
 package net.dries007.tfc.api.util;
 
-import net.dries007.tfc.objects.te.TEBellows;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 
 import javax.annotation.Nonnull;
 

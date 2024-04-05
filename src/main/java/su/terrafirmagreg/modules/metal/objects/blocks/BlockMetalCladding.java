@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.metal.objects.blocks;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
@@ -27,6 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant;
@@ -101,7 +101,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	@Override
 	@NotNull
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+		TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
 		if (tile != null) {
 			for (EnumFacing face : EnumFacing.values()) {
 				state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
@@ -132,7 +132,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	@NotNull
 	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		TEMetalSheet tile = Helpers.getTE(source, pos, TEMetalSheet.class);
+		TEMetalSheet tile = TileUtils.getTile(source, pos, TEMetalSheet.class);
 		int sheets = 0;
 		AxisAlignedBB boundingBox = FULL_BLOCK_AABB;
 		if (tile != null) {
@@ -162,7 +162,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
-		TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+		TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
 		if (tile != null) {
 			for (EnumFacing face : EnumFacing.values()) {
 				if (tile.getFace(face)) {
@@ -197,7 +197,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	@Override
 	@SuppressWarnings("deprecation")
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+		TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
 		if (tile != null) {
 			for (EnumFacing face : EnumFacing.values()) {
 				if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
@@ -216,7 +216,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		TEMetalSheet te = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+		TEMetalSheet te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
 		if (te != null) te.onBreakBlock();
 		super.breakBlock(worldIn, pos, state);
 	}
@@ -225,7 +225,7 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 	@Override
 	@SuppressWarnings("deprecation")
 	public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-		TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+		TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
 		if (tile != null) {
 			for (EnumFacing face : EnumFacing.values()) {
 				if (tile.getFace(face)) {

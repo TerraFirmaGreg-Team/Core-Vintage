@@ -7,7 +7,6 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -35,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
@@ -173,7 +173,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
 
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		TEMetalAnvil te = Helpers.getTE(worldIn, pos, TEMetalAnvil.class);
+		TEMetalAnvil te = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
 		if (te != null) {
 			te.onBreakBlock(worldIn, pos, state);
 		}
@@ -190,7 +190,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
 		if (hand == EnumHand.OFF_HAND) {
 			return false;
 		}
-		TEMetalAnvil te = Helpers.getTE(worldIn, pos, TEMetalAnvil.class);
+		TEMetalAnvil te = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
 		if (te == null) {
 			return false;
 		}

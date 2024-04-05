@@ -19,11 +19,11 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.categories.KnappingCategory;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
+import su.terrafirmagreg.modules.device.data.BlocksDevice;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,7 +94,7 @@ public class JEIPluginFL implements IModPlugin {
 
 		registry.addRecipes(moldRecipes, "minecraft.crafting");
 		registry.addRecipes(castRecipes, CASTING_UID);
-		registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
+		registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), CASTING_UID);
 		registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
 		registry.addRecipes(pumpkinknapRecipes, KNAP_PUMPKIN_UID);
 		registry.addRecipeCatalyst(new ItemStack(Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT)), KNAP_PUMPKIN_UID);

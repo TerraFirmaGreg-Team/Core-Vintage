@@ -87,7 +87,6 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 public final class RecipesTFCF {
-	@SuppressWarnings("rawtypes")
 	@SubscribeEvent
 	public static void onRecipeRegister(RegistryEvent.Register<IRecipe> event) {
 		if (TFCFlorae.FirmaLifeAdded) {
@@ -803,17 +802,17 @@ public final class RecipesTFCF {
 			if (type.hasMold(null)) {
 				int amount = type == INGOT ? 2 : 1;
 				event.getRegistry()
-						.register(new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemUnfiredEarthenwareMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF, "earthenware_" + type
-								.name()
-								.toLowerCase() + "_mold"));
+				     .register(new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemUnfiredEarthenwareMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF, "earthenware_" + type
+						     .name()
+						     .toLowerCase() + "_mold"));
 				event.getRegistry()
-						.register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredKaoliniteMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF, "kaolinite_" + type
-								.name()
-								.toLowerCase() + "_mold"));
+				     .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredKaoliniteMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF, "kaolinite_" + type
+						     .name()
+						     .toLowerCase() + "_mold"));
 				event.getRegistry()
-						.register(new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemUnfiredStonewareMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF, "stoneware_" + type
-								.name()
-								.toLowerCase() + "_mold"));
+				     .register(new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemUnfiredStonewareMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF, "stoneware_" + type
+						     .name()
+						     .toLowerCase() + "_mold"));
 			}
 		}
 
@@ -966,14 +965,14 @@ public final class RecipesTFCF {
 
 			HeatRecipe recipe = new HeatRecipeSimple(IIngredient.of(ItemUnfiredMudBrick.get(rock)), new ItemStack(firedMudBrick), 600f, Metal.Tier.TIER_I);
 			event.getRegistry()
-					.register(recipe.setRegistryName(rock.getRegistryName()
-							.getPath()
-							.toLowerCase() + "_unfired_mud_brick"));
+			     .register(recipe.setRegistryName(rock.getRegistryName()
+			                                          .getPath()
+			                                          .toLowerCase() + "_unfired_mud_brick"));
 
 			// Fired Pottery - doesn't burn up
 			recipe = new HeatRecipeSimple(IIngredient.of(firedMudBrick), new ItemStack(firedMudBrick), 1599f, Metal.Tier.TIER_I);
 			event.getRegistry()
-					.register(recipe.setRegistryName(rock.getRegistryName().getPath().toLowerCase() + "_fired_mud_brick"));
+			     .register(recipe.setRegistryName(rock.getRegistryName().getPath().toLowerCase() + "_fired_mud_brick"));
 		}
 
 		// Clay Pottery Items with metadata
@@ -1083,7 +1082,7 @@ public final class RecipesTFCF {
 				// Bread
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.HASH_MUFFIN), 480).setRegistryName("burned_hash_muffin"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.AMARANTH_BREAD), 480)
-						.setRegistryName("burned_barley_bread"),
+				          .setRegistryName("burned_barley_bread"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.BUCKWHEAT_BREAD), 480).setRegistryName("burned_cornbread"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.FONIO_BREAD), 480).setRegistryName("burned_oat_bread"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.MILLET_BREAD), 480).setRegistryName("burned_rice_bread"),
@@ -1095,11 +1094,11 @@ public final class RecipesTFCF {
 				new HeatRecipeSimple(IIngredient.of("epiphyteSulphurShelf"), new ItemStack(ItemsTFCF.ROASTED_SULPHUR_SHELF), 200, 480).setRegistryName("roasted_sulphur_shelf"),
 				new HeatRecipeSimple(IIngredient.of("epiphyteTurkeyTail"), new ItemStack(ItemsTFCF.ROASTED_TURKEY_TAIL), 200, 480).setRegistryName("roasted_turkey_tail"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_ARTISTS_CONK), 480)
-						.setRegistryName("burned_artists_conk"),
+				          .setRegistryName("burned_artists_conk"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_SULPHUR_SHELF), 480)
-						.setRegistryName("burned_sulphur_shelf"),
+				          .setRegistryName("burned_sulphur_shelf"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_TURKEY_TAIL), 480)
-						.setRegistryName("burned_turkey_tail"),
+				          .setRegistryName("burned_turkey_tail"),
 
 				// Mushrooms
 				new HeatRecipeSimple(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))), new ItemStack(ItemsTFCF.ROASTED_PORCINI), 200, 480).setRegistryName("roasted_porcini_specific"),
@@ -1119,23 +1118,23 @@ public final class RecipesTFCF {
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_PORCINI), 480).setRegistryName("burned_porcini"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_AMANITA), 480).setRegistryName("burned_amanita"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_BLACK_POWDERPUFF), 480)
-						.setRegistryName("burned_black_powderpuff"),
+				          .setRegistryName("burned_black_powderpuff"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_CHANTERELLE), 480)
-						.setRegistryName("burned_chanterelle"),
+				          .setRegistryName("burned_chanterelle"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_DEATH_CAP), 480)
-						.setRegistryName("burned_death_cap"),
+				          .setRegistryName("burned_death_cap"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_GIANT_CLUB), 480)
-						.setRegistryName("burned_giant_club"),
+				          .setRegistryName("burned_giant_club"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_PARASOL_MUSHROOM), 480)
-						.setRegistryName("burned_parasol_mushroom"),
+				          .setRegistryName("burned_parasol_mushroom"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_STINKHORN), 480)
-						.setRegistryName("burned_stinkhorn"),
+				          .setRegistryName("burned_stinkhorn"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_WEEPING_MILK_CAP), 480)
-						.setRegistryName("burned_weeping_milk_cap"),
+				          .setRegistryName("burned_weeping_milk_cap"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_WOOD_BLEWIT), 480)
-						.setRegistryName("burned_wood_blewit"),
+				          .setRegistryName("burned_wood_blewit"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_WOOLLY_GOMPHUS), 480)
-						.setRegistryName("burned_woolly_gomphus"),
+				          .setRegistryName("burned_woolly_gomphus"),
 
 				// Food
 				new HeatRecipeSimple(IIngredient.of("rawEel"), new ItemStack(ItemsTFCF.COOKED_EEL), 200, 480).setRegistryName("cooked_eel"),
@@ -1163,15 +1162,15 @@ public final class RecipesTFCF {
 				new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.WALNUT_NUT)), new ItemStack(ItemsTFCF.ROASTED_WALNUT_NUT), 200, 480).setRegistryName("roasted_walnut"),
 
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_BEECHNUT_NUT), 480)
-						.setRegistryName("burned_beechnut"),
+				          .setRegistryName("burned_beechnut"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_BLACK_WALNUT_NUT), 480)
-						.setRegistryName("burned_black_walnut"),
+				          .setRegistryName("burned_black_walnut"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_BUTTERNUT_NUT), 480)
-						.setRegistryName("burned_butternut"),
+				          .setRegistryName("burned_butternut"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_GINKGO_NUT_NUT), 480)
-						.setRegistryName("burned_ginkgo_nut"),
+				          .setRegistryName("burned_ginkgo_nut"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_HAZELNUT_NUT), 480)
-						.setRegistryName("burned_hazelnut"),
+				          .setRegistryName("burned_hazelnut"),
 				HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_WALNUT_NUT), 480).setRegistryName("burned_walnut"),
 
 				// Kaolinite Clay
@@ -1203,15 +1202,15 @@ public final class RecipesTFCF {
 					new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.PINE_NUT)), new ItemStack(ItemsTFCF.ROASTED_PINE_NUT), 200, 480).setRegistryName("roasted_pine_nut"),
 
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_ACORN_NUT), 480)
-							.setRegistryName("burned_acorn"),
+					          .setRegistryName("burned_acorn"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_CHESTNUT_NUT), 480)
-							.setRegistryName("burned_chestnut"),
+					          .setRegistryName("burned_chestnut"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_HICKORY_NUT_NUT), 480)
-							.setRegistryName("burned_hickory_nut"),
+					          .setRegistryName("burned_hickory_nut"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_PECAN_NUT), 480)
-							.setRegistryName("burned_pecan"),
+					          .setRegistryName("burned_pecan"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_PINE_NUT), 480)
-							.setRegistryName("burned_pine_nut"),
+					          .setRegistryName("burned_pine_nut"),
 
 					// Food Roasting/Drying
 					new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.BLACK_TEA)), new ItemStack(ItemsTFCF.DRIED_BLACK_TEA), 200, 480).setRegistryName("dried_black_tea"),
@@ -1231,32 +1230,32 @@ public final class RecipesTFCF {
 
 					// Food Destroy
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_BLACK_TEA), 480)
-							.setRegistryName("burned_black_tea"),
+					          .setRegistryName("burned_black_tea"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_GREEN_TEA), 480)
-							.setRegistryName("burned_green_tea"),
+					          .setRegistryName("burned_green_tea"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_WHITE_TEA), 480)
-							.setRegistryName("burned_white_tea"),
+					          .setRegistryName("burned_white_tea"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_CANNABIS_BUD), 480)
-							.setRegistryName("burned_cannabis_bud"),
+					          .setRegistryName("burned_cannabis_bud"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_CANNABIS_LEAF), 480)
-							.setRegistryName("burned_cannabis_leaf"),
+					          .setRegistryName("burned_cannabis_leaf"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_COCA_LEAF), 480)
-							.setRegistryName("burned_coca_leaf"),
+					          .setRegistryName("burned_coca_leaf"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_OPIUM_POPPY_BULB), 480)
-							.setRegistryName("burned_opium_poppy_bulb"),
+					          .setRegistryName("burned_opium_poppy_bulb"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_PEYOTE), 480).setRegistryName("burned_peyote"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_TOBACCO_LEAF), 480)
-							.setRegistryName("burned_tobacco_leaf"),
+					          .setRegistryName("burned_tobacco_leaf"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.ROASTED_COFFEE_BEANS), 480)
-							.setRegistryName("burned_coffea_cherries"),
+					          .setRegistryName("burned_coffea_cherries"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_CHAMOMILE_HEAD), 480)
-							.setRegistryName("burned_chamomile_head"),
+					          .setRegistryName("burned_chamomile_head"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_DANDELION_HEAD), 480)
-							.setRegistryName("burned_dandelion_head"),
+					          .setRegistryName("burned_dandelion_head"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_LABRADOR_TEA_HEAD), 480)
-							.setRegistryName("burned_labrador_tea_head"),
+					          .setRegistryName("burned_labrador_tea_head"),
 					HeatRecipe.destroy(IIngredient.of(ItemsTFCF.DRIED_SUNFLOWER_HEAD), 480)
-							.setRegistryName("burned_sunflower_head")
+					          .setRegistryName("burned_sunflower_head")
 			);
 		}
 	}
@@ -1476,8 +1475,8 @@ public final class RecipesTFCF {
 				list.add(ingredient);
 				//noinspection ConstantConditions
 				r.register(new ShapelessDamageRecipe(groupSurfaceRock, list, output, 1).setRegistryName(MODID_TFCF, rock.getRegistryName()
-						.getPath()
-						.toLowerCase() + "_rock_hammer"));
+				                                                                                                        .getPath()
+				                                                                                                        .toLowerCase() + "_rock_hammer"));
 			}
 		}
 	}
@@ -1668,9 +1667,9 @@ public final class RecipesTFCF {
 
 				OvenRecipe mudBrick = new OvenRecipe(IIngredient.of(ItemUnfiredMudBrick.get(rock)), new ItemStack(firedMudBrick), 4 * hour);
 				event.getRegistry()
-						.register(mudBrick.setRegistryName(rock.getRegistryName()
-								.getPath()
-								.toLowerCase() + "_unfired_mud_brick"));
+				     .register(mudBrick.setRegistryName(rock.getRegistryName()
+				                                            .getPath()
+				                                            .toLowerCase() + "_unfired_mud_brick"));
 			}
 
 			r.registerAll(
@@ -1765,7 +1764,7 @@ public final class RecipesTFCF {
 
 				DryingRecipe mud = new DryingRecipe(IIngredient.of(ItemUnfiredMudBrick.get(rock)), new ItemStack(firedMudBrick), 6000);
 				event.getRegistry()
-						.register(mud.setRegistryName(rock.getRegistryName().getPath().toLowerCase() + "_wet_mud_brick"));
+				     .register(mud.setRegistryName(rock.getRegistryName().getPath().toLowerCase() + "_wet_mud_brick"));
 			}
 		}
 	}
@@ -1810,17 +1809,17 @@ public final class RecipesTFCF {
 				if (type.hasMold(null)) {
 					int amount = type == ItemMetalTFCE.ItemType.NAIL || type == ItemMetalTFCE.ItemType.RING ? 2 : 1;
 					event.getRegistry()
-							.register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredEarthenwareMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
-									.name()
-									.toLowerCase() + "_earthenware_mold"));
+					     .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredEarthenwareMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
+							     .name()
+							     .toLowerCase() + "_earthenware_mold"));
 					event.getRegistry()
-							.register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredKaoliniteMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
-									.name()
-									.toLowerCase() + "_kaolinite_mold"));
+					     .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredKaoliniteMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
+							     .name()
+							     .toLowerCase() + "_kaolinite_mold"));
 					event.getRegistry()
-							.register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredStonewareMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
-									.name()
-									.toLowerCase() + "_stoneware_mold"));
+					     .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredStonewareMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
+							     .name()
+							     .toLowerCase() + "_stoneware_mold"));
 				}
 			}
 		}

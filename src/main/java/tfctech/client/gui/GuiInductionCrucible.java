@@ -1,10 +1,10 @@
 package tfctech.client.gui;
 
-import net.dries007.tfc.client.gui.GuiCrucible;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TEInductionCrucible;
 

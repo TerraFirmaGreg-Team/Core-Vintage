@@ -7,8 +7,8 @@ package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
-import net.dries007.tfc.objects.te.TEBlastFurnace;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockBlastFurnace;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBlastFurnace;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;

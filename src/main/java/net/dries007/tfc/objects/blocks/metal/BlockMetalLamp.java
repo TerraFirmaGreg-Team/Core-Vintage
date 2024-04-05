@@ -8,7 +8,6 @@ package net.dries007.tfc.objects.blocks.metal;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TELamp;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -46,8 +45,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+
 @ParametersAreNonnullByDefault
-public class BlockMetalLamp extends Block implements ILightableBlock {
+public class BlockMetalLamp extends Block {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.VERTICAL);
 	private static final Map<Metal, BlockMetalLamp> MAP = new HashMap<>();

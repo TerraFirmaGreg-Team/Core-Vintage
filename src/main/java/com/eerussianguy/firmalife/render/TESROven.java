@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static com.eerussianguy.firmalife.te.TEOven.*;
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @ParametersAreNonnullByDefault
 @SideOnly(Side.CLIENT)

@@ -115,11 +115,11 @@ public class ModConfig {
 			//TFC containers
 			sizeContainers[0] = "net.dries007.tfc.objects.container.ContainerAnvilTFC";
 			sizeContainers[1] = "net.dries007.tfc.objects.container.ContainerBarrel";
-			sizeContainers[2] = "net.dries007.tfc.objects.container.ContainerLogPile";
-			sizeContainers[3] = "net.dries007.tfc.objects.container.ContainerQuern";
-			sizeContainers[4] = "net.dries007.tfc.objects.container.ContainerFirePit";
-			sizeContainers[5] = "net.dries007.tfc.objects.container.ContainerCharcoalForge";
-			sizeContainers[6] = "net.dries007.tfc.objects.container.ContainerCrucible";
+			sizeContainers[2] = "su.terrafirmagreg.modules.device.objects.container.ContainerLogPile";
+			sizeContainers[3] = "su.terrafirmagreg.modules.device.objects.container.ContainerQuern";
+			sizeContainers[4] = "su.terrafirmagreg.modules.device.objects.container.ContainerFirePit";
+			sizeContainers[5] = "su.terrafirmagreg.modules.device.objects.container.ContainerCharcoalForge";
+			sizeContainers[6] = "su.terrafirmagreg.modules.device.objects.container.ContainerCrucible";
 			//FTB Utils containers
 			sizeContainers[7] = "com.feed_the_beast.ftbutilities.command.InvSeeInventory";
 		}
@@ -173,7 +173,7 @@ public class ModConfig {
 		@Config.LangKey("oiisa.config.weight.inventoryarray")
 		@Config.Comment({"Full Class path names of inventories that are checked for weight limits. TURN ON DEBUG TO GET THE NAMES",
 				"Number = Max Weight for Inventory.",
-				"Example: net.dries007.tfc.objects.container.ContainerLogPile, 20"
+				"Example: su.terrafirmagreg.modules.device.objects.container.ContainerLogPile, 20"
 		})
 
 		public String[] weightInventoryArray = new String[1];
@@ -235,7 +235,7 @@ public class ModConfig {
 
 		{
 			disabledInventories[0] = "net.dries007.tfc.objects.container.ContainerBarrel";
-			disabledInventories[1] = "net.dries007.tfc.objects.container.ContainerFirePit";
+			disabledInventories[1] = "su.terrafirmagreg.modules.device.objects.container.ContainerFirePit";
 		}
 	}
 

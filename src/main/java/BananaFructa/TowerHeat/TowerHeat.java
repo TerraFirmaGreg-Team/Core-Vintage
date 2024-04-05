@@ -3,9 +3,7 @@ package BananaFructa.TowerHeat;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.client.gui.GuiBlastFurnace;
 import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.dries007.tfc.objects.te.TEBlastFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -18,6 +16,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBlastFurnace;
 
 import java.util.ArrayList;
 import java.util.List;

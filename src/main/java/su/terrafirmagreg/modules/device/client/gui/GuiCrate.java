@@ -20,11 +20,11 @@ import su.terrafirmagreg.modules.device.objects.tiles.TECrate;
 import java.io.IOException;
 
 public class GuiCrate extends GuiContainerTE<TECrate> {
-	public static final ResourceLocation CRATE_BACKGROUND = ModUtils.getID("textures/gui/container/crate.png");
+	public static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/crate.png");
 	private final String translationKey;
 
 	public GuiCrate(Container container, InventoryPlayer playerInv, TECrate tile, IBlockState state) {
-		super(container, playerInv, tile, CRATE_BACKGROUND);
+		super(container, playerInv, tile, BACKGROUND);
 
 		this.translationKey = state.getBlock().getTranslationKey();
 	}

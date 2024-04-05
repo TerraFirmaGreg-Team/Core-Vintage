@@ -13,7 +13,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.*;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.agriculture.*;
-import net.dries007.tfc.objects.blocks.devices.*;
 import net.dries007.tfc.objects.blocks.metal.*;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -55,23 +54,11 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 public final class BlocksTFC {
 	@GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
 	public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
-	public static final BlockFirePit FIREPIT = getNull();
 	public static final BlockThatchBed THATCH_BED = getNull();
-	public static final BlockPitKiln PIT_KILN = getNull();
 	public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
 	public static final BlockPlacedItem PLACED_ITEM = getNull();
 	public static final BlockPlacedHide PLACED_HIDE = getNull();
-	public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
-	public static final BlockNestBox NEST_BOX = getNull();
-	public static final BlockLogPile LOG_PILE = getNull();
 	public static final BlockIngotPile INGOT_PILE = getNull();
-	public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
-	public static final BlockCrucible CRUCIBLE = getNull();
-	public static final BlockMolten MOLTEN = getNull();
-	public static final BlockBlastFurnace BLAST_FURNACE = getNull();
-	public static final BlockBloom BLOOM = getNull();
-	public static final BlockBloomery BLOOMERY = getNull();
-	public static final BlockQuern QUERN = getNull();
 	public static final BlockIceTFC SEA_ICE = getNull();
 	public static final BlockPowderKeg POWDERKEG = getNull();
 	public static final Block FIRE_BRICKS = getNull();
@@ -262,13 +249,6 @@ public final class BlocksTFC {
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_DECORATIONS)));
 
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));
-		normalItemBlocks.add(new ItemBlockCrucible(register(r, "crucible", new BlockCrucible(), CT_MISC)));
-		normalItemBlocks.add(new ItemBlockTFC(register(r, "blast_furnace", new BlockBlastFurnace(), CT_MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bellows", new BlockBellows(), CT_MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), CT_MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "nest_box", new BlockNestBox(), CT_MISC)));
-		inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
 
 		normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsTFC.SALT_WATER.get()), CT_MISC)));
 
@@ -575,19 +555,12 @@ public final class BlocksTFC {
 		}
 
 		// Registering JEI only blocks (for info)
-		inventoryItemBlocks.add(new ItemBlock(register(r, "firepit", new BlockFirePit())));
-		inventoryItemBlocks.add(new ItemBlock(register(r, "charcoal_forge", new BlockCharcoalForge())));
-		inventoryItemBlocks.add(new ItemBlock(register(r, "pit_kiln", new BlockPitKiln())));
 		inventoryItemBlocks.add(new ItemBlock(register(r, "placed_item", new BlockPlacedItem())));
 		// technical blocks
 		// These have no ItemBlock or Creative Tab
 		register(r, "placed_item_flat", new BlockPlacedItemFlat());
 		register(r, "placed_hide", new BlockPlacedHide());
-		register(r, "charcoal_pile", new BlockCharcoalPile());
 		register(r, "ingot_pile", new BlockIngotPile());
-		register(r, "log_pile", new BlockLogPile());
-		register(r, "molten", new BlockMolten());
-		register(r, "bloom", new BlockBloom());
 		register(r, "thatch_bed", new BlockThatchBed());
 
 		// Note: if you add blocks you don't need to put them in this list of todos. Feel free to add them where they make sense :)
@@ -604,30 +577,18 @@ public final class BlocksTFC {
 		register(TEPlacedItem.class, "placed_item");
 		register(TEPlacedItemFlat.class, "placed_item_flat");
 		register(TEPlacedHide.class, "placed_hide");
-		register(TEPitKiln.class, "pit_kiln");
 		register(TEChestTFC.class, "chest");
-		register(TENestBox.class, "nest_box");
-		register(TELogPile.class, "log_pile");
 		register(TEIngotPile.class, "ingot_pile");
-		register(TEFirePit.class, "fire_pit");
 		register(TEToolRack.class, "tool_rack");
 		register(TELoom.class, "loom");
 		register(TELamp.class, "lamp");
-		register(TEBellows.class, "bellows");
 		register(TEBarrel.class, "barrel");
-		register(TECharcoalForge.class, "charcoal_forge");
 		register(TEAnvilTFC.class, "anvil");
-		register(TECrucible.class, "crucible");
 		register(TECropBase.class, "crop_base");
 		register(TECropSpreading.class, "crop_spreading");
-		register(TEBlastFurnace.class, "blast_furnace");
-		register(TEBloomery.class, "bloomery");
-		register(TEBloom.class, "bloom");
 		register(TEMetalSheet.class, "metal_sheet");
-		register(TEQuern.class, "quern");
 		register(TELargeVessel.class, "large_vessel");
 		register(TEPowderKeg.class, "powderkeg");
-		register(TESluice.class, "sluice");
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

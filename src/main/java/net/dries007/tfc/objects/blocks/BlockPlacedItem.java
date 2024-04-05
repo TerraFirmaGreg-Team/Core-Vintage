@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import net.dries007.tfc.objects.te.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;

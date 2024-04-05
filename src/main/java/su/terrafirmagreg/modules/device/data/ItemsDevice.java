@@ -21,6 +21,7 @@ public final class ItemsDevice {
 	public static ItemSlingAmmo SLING_AMMO_SPREAD;
 	public static ItemSlingAmmo SLING_AMMO_LIGHT;
 	public static ItemSlingAmmo SLING_AMMO_FIRE;
+	public static ItemCraftingTool HANDSTONE;
 
 
 	public static void onRegister(RegistryManager registry) {
@@ -41,5 +42,6 @@ public final class ItemsDevice {
 		SLING_AMMO_SPREAD = registry.registerItem(new ItemSlingAmmo(1, "spread"));
 		SLING_AMMO_LIGHT = registry.registerItem(new ItemSlingAmmo(2, "light"));
 		SLING_AMMO_FIRE = registry.registerItem(new ItemSlingAmmo(3, "fire"));
+		HANDSTONE = registry.registerItem(new ItemCraftingTool("handstone", 250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"));
 	}
 }

@@ -10,7 +10,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
-import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -38,11 +37,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.modules.core.data.PotionsCore;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
+
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -90,7 +92,7 @@ public class BlockBeehive extends Block implements IItemSize {
 		for (Vec3i v : VECTORS) {
 			BlockPos searchPos = pos.add(v);
 			IBlockState searchState = world.getBlockState(searchPos);
-			if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(BlockFirePit.LIT)) {
+			if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(LIT)) {
 				return false;
 			}
 		}

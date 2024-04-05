@@ -89,6 +89,12 @@ public class GuiHandler implements IGuiHandler {
 		WOOD_CHEST,
 		ALLOY_CALCULATOR,
 		CRATE,
+		CHARCOAL_FORGE,
+		BLAST_FURNACE,
+		FIRE_PIT,
+		NEST_BOX,
+		LOG_PILE,
+		CRUCIBLE,
 		NULL;
 
 		private static final Type[] values = values();

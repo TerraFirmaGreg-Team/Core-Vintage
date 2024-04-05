@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 import lombok.Getter;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -121,7 +120,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 		super.updateTick(world, pos, state, random);
 
 		if (!world.isRemote) {
-			TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+			TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
 			if (te != null) {
 				long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
 //                if (days > this.getTreeVariant().getMinGrowthTime()) {

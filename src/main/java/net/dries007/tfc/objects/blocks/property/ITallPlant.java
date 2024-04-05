@@ -10,6 +10,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import org.jetbrains.annotations.NotNull;
 
 public interface ITallPlant {
 	AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
@@ -18,13 +19,10 @@ public interface ITallPlant {
 	default AxisAlignedBB getTallBoundingBax(int age, IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (getPlantPart(source, pos) == EnumBlockPart.LOWER || getPlantPart(source, pos) == EnumBlockPart.MIDDLE)
 			return PLANT_AABB.offset(state.getOffset(source, pos));
-		switch (age) {
-			case 0:
-			case 1:
-				return SHORTER_PLANT_AABB.offset(state.getOffset(source, pos));
-			default:
-				return PLANT_AABB.offset(state.getOffset(source, pos));
-		}
+		return switch (age) {
+			case 0, 1 -> SHORTER_PLANT_AABB.offset(state.getOffset(source, pos));
+			default -> PLANT_AABB.offset(state.getOffset(source, pos));
+		};
 
 	}
 
@@ -51,7 +49,7 @@ public interface ITallPlant {
 			return this.getName();
 		}
 
-		public String getName() {
+		public @NotNull String getName() {
 			return name().toLowerCase();
 		}
 	}

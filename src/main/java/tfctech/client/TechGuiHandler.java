@@ -2,7 +2,6 @@ package tfctech.client;
 
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.container.ContainerCrucible;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -23,6 +22,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
 import tfctech.TFCTech;
 import tfctech.client.gui.*;
 import tfctech.objects.container.ContainerElectricForge;

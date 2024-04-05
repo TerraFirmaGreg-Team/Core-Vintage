@@ -7,7 +7,7 @@ package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.te.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;

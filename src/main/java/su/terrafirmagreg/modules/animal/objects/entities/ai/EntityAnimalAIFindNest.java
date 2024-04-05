@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.animal.objects.entities.ai;
 
-import net.dries007.tfc.objects.te.TENestBox;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.objects.tiles.TENestBox;
 
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +75,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 				this.end = true;
 			}
 		} else {
-			TENestBox te = Helpers.getTE(this.theWorld, nestPos, TENestBox.class);
+			TENestBox te = TileUtils.getTile(this.theWorld, nestPos, TENestBox.class);
 			if (te != null && theCreature instanceof IAnimal animal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
 				if (!te.hasBird()) {
 					te.seatOnThis(theCreature);
@@ -125,7 +125,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 			else
 				failureDepressionMap.remove(pos);
 		}
-		TENestBox te = Helpers.getTE(world, pos, TENestBox.class);
+		TENestBox te = TileUtils.getTile(world, pos, TENestBox.class);
 		return te != null && te.hasFreeSlot() && (!te.hasBird() || te.getBird() == this.theCreature);
 	}
 }

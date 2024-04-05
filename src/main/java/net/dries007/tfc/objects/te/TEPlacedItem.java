@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,7 +30,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class TEPlacedItem extends TEInventory {
 	public static final int SLOT_LARGE_ITEM = 0;
-	protected boolean isHoldingLargeItem;
+	public boolean isHoldingLargeItem;
 
 	public TEPlacedItem() {
 		// the capability is used for the main inventory

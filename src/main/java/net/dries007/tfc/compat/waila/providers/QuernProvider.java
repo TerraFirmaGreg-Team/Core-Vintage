@@ -1,8 +1,8 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.blocks.devices.BlockQuern;
-import net.dries007.tfc.objects.te.TEQuern;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
+import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.dries007.tfc.objects.te.TEQuern.SLOT_HANDSTONE;
+import static su.terrafirmagreg.modules.device.objects.tiles.TEQuern.SLOT_HANDSTONE;
 
 public class QuernProvider implements IWailaBlock {
 

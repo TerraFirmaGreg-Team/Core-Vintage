@@ -5,7 +5,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class BlockPlanksTFC extends Block {
 		OreDictionaryHelper.register(this, "plank", "wood");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "plank", "wood", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockPlanksTFC get(Tree wood) {

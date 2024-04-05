@@ -39,6 +39,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.types.PlantsTFCF;
@@ -71,7 +72,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 			this.setTickRandomly(true);
 			this.setSoundType(SoundType.PLANT);
 			this.setHardness(0.0F);
-			Blocks.FIRE.setFireInfo(this, 5, 20);
+			BlockUtils.setFireInfo(this, 5, 20);
 			this.blockState = this.createPlantBlockState();
 			this.setDefaultState(this.blockState.getBaseState());
 		}

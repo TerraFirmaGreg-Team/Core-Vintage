@@ -15,7 +15,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
@@ -28,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +63,7 @@ public class BlockChestTFC extends BlockChest implements IItemSize {
 		} else {
 			throw new IllegalStateException("TFC Chest must use TFC chest type");
 		}
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockChestTFC getBasic(Tree wood) {

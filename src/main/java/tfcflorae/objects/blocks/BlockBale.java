@@ -8,7 +8,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
@@ -16,9 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.util.OreDictionaryHelper;
-
-import org.jetbrains.annotations.NotNull;
 
 
 public class BlockBale extends BlockRotatedPillar implements IItemSize {
@@ -28,7 +26,7 @@ public class BlockBale extends BlockRotatedPillar implements IItemSize {
 		setHardness(0.6F);
 		OreDictionaryHelper.register(this, "thatch");
 		OreDictionaryHelper.register(this, "bale");
-		Blocks.FIRE.setFireInfo(this, 60, 20);
+		BlockUtils.setFireInfo(this, 60, 20);
 	}
 
 

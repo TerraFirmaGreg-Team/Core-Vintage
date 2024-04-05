@@ -7,13 +7,13 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.Random;
 
@@ -25,7 +25,7 @@ public class BlockGreenhouseDoor extends BlockDoor {
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(3.0F);
 		this.disableStats();
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public Item getItem() {

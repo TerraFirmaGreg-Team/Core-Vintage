@@ -13,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,6 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.*;
 
@@ -47,7 +47,7 @@ public class BlockLeavesTFC extends BlockLeaves {
 		OreDictionaryHelper.register(this, "tree", "leaves");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 30, 60);
+		BlockUtils.setFireInfo(this, 30, 60);
 		setTickRandomly(true);
 	}
 

@@ -40,8 +40,7 @@ public class RockType implements Comparable<RockType> {
 		this.material = builder.material;
 		this.isFlux = builder.isFlux;
 
-		if (name.isEmpty())
-			throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
+		if (name.isEmpty()) throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
 
 		if (!ROCK_TYPES.add(this)) throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
 	}

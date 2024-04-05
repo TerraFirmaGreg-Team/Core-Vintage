@@ -21,7 +21,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -35,6 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import java.util.HashMap;
@@ -56,7 +56,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 		super(Material.PLANTS);
 		this.bush = bush;
 		if (MAP.put(bush, this) != null) throw new IllegalStateException("There can only be one.");
-		Blocks.FIRE.setFireInfo(this, 30, 60);
+		BlockUtils.setFireInfo(this, 30, 60);
 		setHardness(1.0F);
 		setTickRandomly(true);
 		setSoundType(SoundType.PLANT);

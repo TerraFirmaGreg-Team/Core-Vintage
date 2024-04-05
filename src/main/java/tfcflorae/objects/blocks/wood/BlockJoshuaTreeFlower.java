@@ -37,6 +37,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
@@ -72,7 +73,7 @@ public class BlockJoshuaTreeFlower extends Block {
 		OreDictionaryHelper.register(this, "tree", "leaves");
 		OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
 
-		Blocks.FIRE.setFireInfo(this, 30, 60);
+		BlockUtils.setFireInfo(this, 30, 60);
 		this.setTickRandomly(true);
 	}
 

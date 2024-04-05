@@ -7,10 +7,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class BlockCoralBlock extends Block implements IItemSize {
 		super(Material.CORAL, blockMapColorIn);
 		setSoundType(SoundType.PLANT);
 		setHardness(0.5F);
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 

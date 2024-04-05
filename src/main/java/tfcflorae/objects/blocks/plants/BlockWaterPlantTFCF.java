@@ -25,7 +25,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -44,6 +43,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.util.OreDictionaryHelper;
 
 import java.util.HashMap;
@@ -83,7 +83,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
 		this.setTickRandomly(true);
 		setSoundType(SoundType.PLANT);
 		setHardness(0.0F);
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 		blockState = this.createPlantBlockState();
 
 		this.canCreateSources = false;

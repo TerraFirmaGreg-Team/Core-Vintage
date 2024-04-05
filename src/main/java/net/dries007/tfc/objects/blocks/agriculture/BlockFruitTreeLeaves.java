@@ -20,7 +20,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -33,6 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.*;
 
@@ -54,7 +54,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 		leavesFancy = true; // Fast / Fancy graphics works correctly
 		OreDictionaryHelper.register(this, "tree", "leaves");
 		OreDictionaryHelper.register(this, "tree", "leaves", tree.getName());
-		Blocks.FIRE.setFireInfo(this, 30, 60);
+		BlockUtils.setFireInfo(this, 30, 60);
 		setTickRandomly(true);
 	}
 

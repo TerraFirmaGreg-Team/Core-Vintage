@@ -36,6 +36,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
 import java.util.Random;
@@ -75,7 +76,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
 		this.setTickRandomly(true);
 		setSoundType(SoundType.PLANT);
 		setHardness(0.0F);
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 		blockState = this.createPlantBlockState();
 		this.setDefaultState(this.blockState.getBaseState());
 	}

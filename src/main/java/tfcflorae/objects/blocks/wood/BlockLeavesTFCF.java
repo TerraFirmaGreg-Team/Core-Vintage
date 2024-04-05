@@ -22,7 +22,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,6 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
@@ -64,7 +64,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 		leavesFancy = true; // Fast / Fancy graphics works correctly
 		OreDictionaryHelper.register(this, "tree", "leaves");
 		OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 30, 60);
+		BlockUtils.setFireInfo(this, 30, 60);
 		this.setTickRandomly(true);
 	}
 

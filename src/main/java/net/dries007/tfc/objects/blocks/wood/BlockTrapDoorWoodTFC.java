@@ -5,7 +5,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class BlockTrapDoorWoodTFC extends BlockTrapDoor {
 		OreDictionaryHelper.register(this, "trapdoor", "wood");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "trapdoor", "wood", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockTrapDoorWoodTFC get(Tree wood) {

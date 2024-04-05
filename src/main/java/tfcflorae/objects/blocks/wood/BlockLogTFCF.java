@@ -31,6 +31,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
@@ -67,7 +68,7 @@ public class BlockLogTFCF extends BlockLog implements IItemSize {
 			OreDictionaryHelper.register(this, "log", "wood", "tannin");
 		}
 
-		Blocks.FIRE.setFireInfo(this, 5, 5);
+		BlockUtils.setFireInfo(this, 5, 5);
 		setTickRandomly(true);
 	}
 

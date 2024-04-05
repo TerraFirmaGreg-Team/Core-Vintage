@@ -18,7 +18,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -38,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +78,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
 		this.setHardness(0.0F);
 		this.setLightOpacity(0);
 		//this.setLightLevel(1F);
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0));
 		this.canCreateSources = false;
 	}

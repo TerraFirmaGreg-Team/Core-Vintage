@@ -14,7 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -25,6 +24,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.*;
 
@@ -56,7 +56,7 @@ public class BlockSupport extends Block {
 		setSoundType(SoundType.WOOD);
 		this.wood = wood;
 		OreDictionaryHelper.register(this, "support");
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 		setDefaultState(blockState.getBaseState()
 		                          .withProperty(AXIS, EnumFacing.Axis.Y)
 		                          .withProperty(NORTH, false)

@@ -43,11 +43,9 @@ public class RockCategory implements Comparable<RockCategory> {
 		this.textFormatting = builder.textFormatting;
 		this.hasAnvil = builder.hasAnvil;
 
-		if (name.isEmpty())
-			throw new RuntimeException(String.format("RockCategory name must contain any character: [%s]", name));
+		if (name.isEmpty()) throw new RuntimeException(String.format("RockCategory name must contain any character: [%s]", name));
 
-		if (!ROCK_CATEGORIES.add(this))
-			throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
+		if (!ROCK_CATEGORIES.add(this)) throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
 
 	}
 

@@ -15,7 +15,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -27,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +49,7 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
 		OreDictionaryHelper.register(this, "tree", "sapling");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "tree", "sapling", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockSaplingTFC get(Tree wood) {

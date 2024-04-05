@@ -5,7 +5,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -20,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TENestBox;
@@ -32,7 +32,7 @@ public class BlockNestBox extends BlockBase implements ITEBlock {
 	public BlockNestBox() {
 		super(Material.GRASS);
 		setHardness(0.5F);
-		Blocks.FIRE.setFireInfo(this, 60, 20);
+		BlockUtils.setFireInfo(this, 60, 20);
 	}
 
 	@SuppressWarnings("deprecation")

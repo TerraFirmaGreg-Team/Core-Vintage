@@ -4,7 +4,7 @@ import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class BlockFenceTFC extends BlockFence {
 		OreDictionaryHelper.register(this, "fence", "wood");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "fence", "wood", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockFenceTFC get(Tree wood) {

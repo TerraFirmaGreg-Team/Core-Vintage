@@ -12,7 +12,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -24,6 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.Random;
 
@@ -38,7 +38,7 @@ public class BlockCinnamonLog extends Block {
 		setHarvestLevel("axe", 0);
 		setHardness(2.0F);
 		setResistance(5.0F);
-		Blocks.FIRE.setFireInfo(this, 5, 5);
+		BlockUtils.setFireInfo(this, 5, 5);
 		setTickRandomly(true);
 		this.setDefaultState(this.blockState.getBaseState()
 		                                    .withProperty(GROWN, true)

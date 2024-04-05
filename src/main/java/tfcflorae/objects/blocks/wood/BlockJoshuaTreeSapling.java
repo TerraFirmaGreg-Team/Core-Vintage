@@ -28,6 +28,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -52,7 +53,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
 		OreDictionaryHelper.register(this, "tree", "sapling");
 		//noinspection ConstantConditions
 		OreDictionaryHelper.register(this, "tree", "sapling", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockJoshuaTreeSapling get(Tree wood) {

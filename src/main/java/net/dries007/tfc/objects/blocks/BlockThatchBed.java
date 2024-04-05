@@ -8,7 +8,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -20,6 +19,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 
 import java.util.Random;
@@ -30,7 +30,7 @@ public class BlockThatchBed extends BlockBed {
 	public BlockThatchBed() {
 		setSoundType(SoundType.PLANT);
 		setHardness(0.6F);
-		Blocks.FIRE.setFireInfo(this, 60, 20);
+		BlockUtils.setFireInfo(this, 60, 20);
 	}
 
 	@Override

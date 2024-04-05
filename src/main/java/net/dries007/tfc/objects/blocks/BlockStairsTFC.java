@@ -8,10 +8,10 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -52,7 +52,7 @@ public class BlockStairsTFC extends BlockStairs {
 		OreDictionaryHelper.register(this, "stair", "wood");
 		OreDictionaryHelper.register(this, "stair", "wood", wood);
 
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockStairsTFC get(Rock rock, Rock.Type type) {

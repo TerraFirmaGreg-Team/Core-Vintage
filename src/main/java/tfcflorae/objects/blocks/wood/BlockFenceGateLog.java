@@ -3,7 +3,7 @@ package tfcflorae.objects.blocks.wood;
 import net.dries007.tfc.api.types.Tree;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.init.Blocks;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.util.OreDictionaryHelper;
 
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class BlockFenceGateLog extends BlockFenceGate {
 		OreDictionaryHelper.register(this, "fence", "gate", "wood", wood.getRegistryName().getPath());
 		OreDictionaryHelper.register(this, "fence", "gate", "log", "wood");
 		OreDictionaryHelper.register(this, "fence", "gate", "log", "wood", wood.getRegistryName().getPath());
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	public static BlockFenceGateLog get(Tree wood) {

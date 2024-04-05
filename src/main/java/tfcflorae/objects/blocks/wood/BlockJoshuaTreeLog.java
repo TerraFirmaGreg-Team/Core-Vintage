@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.BlockUtils;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.TreesTFCF;
 import tfcflorae.util.OreDictionaryHelper;
@@ -69,7 +70,7 @@ public class BlockJoshuaTreeLog extends Block {
 			OreDictionaryHelper.register(this, "log", "wood", "tannin");
 		}
 
-		Blocks.FIRE.setFireInfo(this, 5, 5);
+		BlockUtils.setFireInfo(this, 5, 5);
 		this.setTickRandomly(true);
 	}
 

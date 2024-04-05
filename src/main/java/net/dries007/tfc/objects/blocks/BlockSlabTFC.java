@@ -14,12 +14,12 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -47,7 +47,7 @@ public abstract class BlockSlabTFC extends BlockSlab {
 		//noinspection ConstantConditions
 		setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
 		useNeighborBrightness = true;
-		Blocks.FIRE.setFireInfo(this, 5, 20);
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	private BlockSlabTFC(Block block) {

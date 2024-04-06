@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
@@ -117,17 +118,17 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 	}
 
 	@Override
-	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
-		compound.setLong("shearedTick", getShearedTick());
-		compound.setInteger("dyecolor", getDyeColor().getMetadata());
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		NBTUtils.setGenericNBTValue(nbt, "shearedTick", getShearedTick());
+		NBTUtils.setGenericNBTValue(nbt, "dyecolor", getDyeColor().getMetadata());
 	}
 
 	@Override
-	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		setShearedTick(compound.getLong("shearedTick"));
-		setDyeColor(EnumDyeColor.byMetadata(compound.getByte("dyecolor")));
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setShearedTick(nbt.getLong("shearedTick"));
+		setDyeColor(EnumDyeColor.byMetadata(nbt.getByte("dyecolor")));
 	}
 
 	@Override

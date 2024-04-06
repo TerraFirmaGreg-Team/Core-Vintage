@@ -15,6 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 
@@ -139,20 +140,20 @@ public class EntityWoodBoat extends EntityBoat {
 	}
 
 	@Override
-	protected void writeEntityToNBT(@NotNull NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
+	protected void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
 		WoodType woodType = getWood();
 		if (woodType != null) {
 			//noinspection ConstantConditions
-			compound.setString("Wood", woodType.toString());
+			NBTUtils.setGenericNBTValue(nbt, "wood", woodType.toString());
 		}
 	}
 
 	@Override
-	protected void readEntityFromNBT(@NotNull NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		if (compound.hasKey("Wood")) {
-			this.dataManager.set(WOOD_NAME, compound.getString("Wood"));
+	protected void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		if (nbt.hasKey("wood")) {
+			this.dataManager.set(WOOD_NAME, nbt.getString("wood"));
 		}
 	}
 }

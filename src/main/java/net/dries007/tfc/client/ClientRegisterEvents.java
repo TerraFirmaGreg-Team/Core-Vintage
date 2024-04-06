@@ -231,7 +231,6 @@ public final class ClientRegisterEvents {
 		ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEBarrel.class, new TESRBarrel());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
-		ClientRegistry.bindTileEntitySpecialRenderer(TELoom.class, new TESRLoom());
 	}
 
 	@SubscribeEvent

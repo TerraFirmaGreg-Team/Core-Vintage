@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -109,15 +110,15 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 	}
 
 	@Override
-	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
-		compound.setLong("milkedTick", getMilkedTick());
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		NBTUtils.setGenericNBTValue(nbt, "milkedTick", getMilkedTick());
 	}
 
 	@Override
-	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		setMilkedTick(compound.getLong("milkedTick"));
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setMilkedTick(nbt.getLong("milkedTick"));
 	}
 
 	@Override

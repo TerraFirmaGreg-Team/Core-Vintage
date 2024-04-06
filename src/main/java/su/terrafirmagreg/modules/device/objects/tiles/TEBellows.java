@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.tile.TEBase;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.data.SoundDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
@@ -110,8 +111,8 @@ public class TEBellows extends TEBase {
 
 	@NotNull
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setLong("lastPushed", lastPushed);
+	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+		NBTUtils.setGenericNBTValue(nbt, "lastPushed", lastPushed);
 		return super.writeToNBT(nbt);
 	}
 }

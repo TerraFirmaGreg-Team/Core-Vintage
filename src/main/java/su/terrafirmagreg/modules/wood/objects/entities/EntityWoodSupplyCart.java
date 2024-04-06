@@ -20,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
@@ -124,17 +125,17 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory implements IIn
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
+	protected void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
 
-		this.dataManager.set(CARGO, compound.getInteger("Cargo"));
+		this.dataManager.set(CARGO, nbt.getInteger("cargo"));
 	}
 
 	@Override
-	protected void writeEntityToNBT(@NotNull NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
+	protected void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
 
-		compound.setInteger("Cargo", dataManager.get(CARGO));
+		NBTUtils.setGenericNBTValue(nbt, "cargo", dataManager.get(CARGO));
 	}
 
 	@Override

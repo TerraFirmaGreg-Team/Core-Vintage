@@ -2,13 +2,13 @@ package net.sharkbark.cellars.init;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.items.metal.ItemMetalIceSaw;
 import net.dries007.tfc.types.DefaultMetals;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.sharkbark.cellars.items.ItemIceSaw;
 import net.sharkbark.cellars.items.ItemToolHead;
 
 import java.util.ArrayList;
@@ -57,14 +57,14 @@ public class ModItems {
 
 	public static void registerItems(IForgeRegistry<Item> registry) {
 		Item[] saws = new Item[]{
-				new ItemIceSaw(Metal.BRONZE, "bronze_ice_saw"),
-				new ItemIceSaw(Metal.BISMUTH_BRONZE, "bismuth_bronze_ice_saw"),
-				new ItemIceSaw(Metal.BLACK_BRONZE, "black_bronze_ice_saw"),
-				new ItemIceSaw(Metal.WROUGHT_IRON, "wrought_iron_ice_saw"),
-				new ItemIceSaw(Metal.STEEL, "steel_ice_saw"),
-				new ItemIceSaw(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), "black_steel_ice_saw"),
-				new ItemIceSaw(Metal.RED_STEEL, "red_steel_ice_saw"),
-				new ItemIceSaw(Metal.BLUE_STEEL, "blue_steel_ice_saw")
+				new ItemMetalIceSaw(Metal.BRONZE, "bronze_ice_saw"),
+				new ItemMetalIceSaw(Metal.BISMUTH_BRONZE, "bismuth_bronze_ice_saw"),
+				new ItemMetalIceSaw(Metal.BLACK_BRONZE, "black_bronze_ice_saw"),
+				new ItemMetalIceSaw(Metal.WROUGHT_IRON, "wrought_iron_ice_saw"),
+				new ItemMetalIceSaw(Metal.STEEL, "steel_ice_saw"),
+				new ItemMetalIceSaw(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), "black_steel_ice_saw"),
+				new ItemMetalIceSaw(Metal.RED_STEEL, "red_steel_ice_saw"),
+				new ItemMetalIceSaw(Metal.BLUE_STEEL, "blue_steel_ice_saw")
 		};
 		registry.registerAll(saws);
 		registry.registerAll(

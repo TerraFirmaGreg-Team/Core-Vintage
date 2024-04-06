@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.TEBase;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.objects.container.ContainerAlloyCalculator;
 
@@ -41,16 +42,16 @@ public class TEAlloyCalculator extends TEBase implements IContainerProvider<Cont
 
 	@NotNull
 	@Override
-	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound compound) {
-		compound = super.writeToNBT(compound);
-		compound.setTag("Stacks", this.stacks.serializeNBT());
-		return compound;
+	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+		nbt = super.writeToNBT(nbt);
+		NBTUtils.setGenericNBTValue(nbt, "Stacks", this.stacks.serializeNBT());
+		return nbt;
 	}
 
 	@Override
-	public void readFromNBT(@NotNull NBTTagCompound compound) {
-		super.readFromNBT(compound);
-		this.stacks.deserializeNBT(compound.getCompoundTag("Stacks"));
+	public void readFromNBT(@NotNull NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		this.stacks.deserializeNBT(nbt.getCompoundTag("Stacks"));
 	}
 
 	@Nullable

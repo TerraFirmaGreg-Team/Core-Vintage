@@ -32,6 +32,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.rock.objects.blocks.BlockRockAnvil;
@@ -156,11 +157,11 @@ public class TEMetalAnvil extends TEInventory {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		if (recipe != null) {
-			nbt.setString("recipe", this.recipe.getRegistryName().toString());
+			NBTUtils.setGenericNBTValue(nbt, "recipe", this.recipe.getRegistryName().toString());
 		}
-		nbt.setTag("steps", this.steps.serializeNBT());
-		nbt.setInteger("work", this.workingProgress);
-		nbt.setInteger("target", this.workingTarget);
+		NBTUtils.setGenericNBTValue(nbt, "steps", this.steps.serializeNBT());
+		NBTUtils.setGenericNBTValue(nbt, "work", this.workingProgress);
+		NBTUtils.setGenericNBTValue(nbt, "target", this.workingTarget);
 		return super.writeToNBT(nbt);
 	}
 

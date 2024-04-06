@@ -33,6 +33,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
@@ -110,17 +111,17 @@ public class TEBlastFurnace extends TETickableInventory implements ITickable, IT
 		for (ItemStack stack : oreStacks) {
 			ores.appendTag(stack.serializeNBT());
 		}
-		nbt.setTag("ores", ores);
+		NBTUtils.setGenericNBTValue(nbt, "ores", ores);
 		NBTTagList fuels = new NBTTagList();
 		for (ItemStack stack : fuelStacks) {
 			fuels.appendTag(stack.serializeNBT());
 		}
-		nbt.setTag("fuels", fuels);
-		nbt.setLong("burnTicksLeft", burnTicksLeft);
-		nbt.setInteger("airTicks", airTicks);
-		nbt.setFloat("burnTemperature", burnTemperature);
-		nbt.setFloat("temperature", temperature);
-		nbt.setTag("alloy", alloy.serializeNBT());
+		NBTUtils.setGenericNBTValue(nbt, "fuels", fuels);
+		NBTUtils.setGenericNBTValue(nbt, "burnTicksLeft", burnTicksLeft);
+		NBTUtils.setGenericNBTValue(nbt, "airTicks", airTicks);
+		NBTUtils.setGenericNBTValue(nbt, "burnTemperature", burnTemperature);
+		NBTUtils.setGenericNBTValue(nbt, "temperature", temperature);
+		NBTUtils.setGenericNBTValue(nbt, "alloy", alloy.serializeNBT());
 		return super.writeToNBT(nbt);
 	}
 

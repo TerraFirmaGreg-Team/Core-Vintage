@@ -25,6 +25,7 @@ import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.RenderUtils;
 import su.terrafirmagreg.api.model.property.PropertyUnlistedString;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public abstract class BlockWoodChoppingBase extends BlockHPBase {
 
 		if (block != Blocks.AIR) {
 			ItemStack blockStack = new ItemStack(block, 1, blockItem.getItemDamage());
-			NBTTagCompound tag = new NBTTagCompound();
+			NBTTagCompound nbt = new NBTTagCompound();
 			NBTTagCompound subTag = new NBTTagCompound();
 			if (block instanceof BlockWoodChoppingBase) {
 				subTag = blockItem.getSubCompound("textureBlock");
@@ -54,8 +55,8 @@ public abstract class BlockWoodChoppingBase extends BlockHPBase {
 			} else {
 				blockStack.writeToNBT(subTag);
 			}
-			tag.setTag("textureBlock", subTag);
-			stack.setTagCompound(tag);
+			NBTUtils.setGenericNBTValue(nbt, "textureBlock", subTag);
+			stack.setTagCompound(nbt);
 		}
 
 		return stack;

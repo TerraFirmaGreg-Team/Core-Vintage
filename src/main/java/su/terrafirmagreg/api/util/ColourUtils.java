@@ -11,15 +11,19 @@ public final class ColourUtils {
 
 
 	/**
-	 * Устанавливает цвет дерева.
+	 * Устанавливает цвет.
 	 *
 	 * @param color цвет в формате RGB
 	 */
-	public static void setWoodColor(int color) {
+	public static void setColor(int color) {
 		float red = ((color >> 16) & 0xFF) / 255.0F;
 		float green = ((color >> 8) & 0xFF) / 255.0F;
 		float blue = (color & 0xFF) / 255.0F;
-		GlStateManager.color(red, green, blue, 1.0F);
+		GlStateManager.color(red, green, blue, 0.4F);
+	}
+
+	public static void clearColor() {
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 

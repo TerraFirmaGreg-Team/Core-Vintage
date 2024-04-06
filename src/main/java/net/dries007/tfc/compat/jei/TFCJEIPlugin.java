@@ -14,12 +14,10 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.gui.*;
 import net.dries007.tfc.compat.jei.categories.*;
 import net.dries007.tfc.compat.jei.wrappers.*;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLoom;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
@@ -43,6 +41,8 @@ import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -156,8 +156,8 @@ public final class TFCJEIPlugin implements IModPlugin {
 		                                                          .collect(Collectors.toList());
 
 		registry.addRecipes(loomRecipes, LOOM_UID);
-		for (Tree tree : TFCRegistries.TREES.getValuesCollection()) {
-			registry.addRecipeCatalyst(new ItemStack(BlockLoom.get(tree)), LOOM_UID);
+		for (var wood : WoodType.getTypes()) {
+			registry.addRecipeCatalyst(new ItemStack(WoodBlockVariants.LOOM.get(wood)), LOOM_UID);
 		}
 
 		// Alloy Recipes

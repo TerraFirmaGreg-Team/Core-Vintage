@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiLogPile;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
@@ -74,8 +75,8 @@ public class TELogPile extends TEInventory implements ITickable, IContainerProvi
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setLong("startBurningTick", startBurningTick);
-		nbt.setBoolean("burning", burning);
+		NBTUtils.setGenericNBTValue(nbt, "startBurningTick", startBurningTick);
+		NBTUtils.setGenericNBTValue(nbt, "burning", burning);
 		return super.writeToNBT(nbt);
 	}
 

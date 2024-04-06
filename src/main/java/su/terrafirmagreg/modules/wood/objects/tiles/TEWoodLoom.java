@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
+import lombok.Getter;
 import net.dries007.tfc.api.recipes.LoomRecipe;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLoom;
 
@@ -21,6 +24,7 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 
 	private WoodType cachedWoodType;
 
+	@Getter
 	private int progress = 0;
 
 	private LoomRecipe recipe = null;
@@ -29,6 +33,7 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 
 	public TEWoodLoom() {
 		super(2);
+
 	}
 
 	@Nullable
@@ -46,18 +51,18 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 		super.readFromNBT(nbt);
 		progress = nbt.getInteger("progress");
 		lastPushed = nbt.getLong("lastPushed");
-		//recipe = nbt.hasKey("recipe") ? RegistryWood.LOOM.getValue(new ResourceLocation(nbt.getString("recipe"))) : null;
+		recipe = nbt.hasKey("recipe") ? TFCRegistries.LOOM.getValue(new ResourceLocation(nbt.getString("recipe"))) : null;
 	}
 
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		nbt.setInteger("progress", progress);
-		nbt.setLong("lastPushed", lastPushed);
+		NBTUtils.setGenericNBTValue(nbt, "progress", progress);
+		NBTUtils.setGenericNBTValue(nbt, "lastPushed", lastPushed);
 		if (recipe != null) {
 			//noinspection ConstantConditions
-			nbt.setString("recipe", recipe.getRegistryName().toString());
+			NBTUtils.setGenericNBTValue(nbt, "recipe", recipe.getRegistryName().toString());
 		}
 		return nbt;
 	}
@@ -99,8 +104,7 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 		} else {
 			ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 
-			if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1)
-			                                                      .isEmpty() && LoomRecipe.get(heldItem) != null) {
+			if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty() && LoomRecipe.get(heldItem) != null) {
 				inventory.setStackInSlot(0, heldItem.copy());
 				inventory.getStackInSlot(0).setCount(1);
 				heldItem.shrink(1);
@@ -121,8 +125,7 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 			}
 
 			if (recipe != null && heldItem.isEmpty()) {
-				if (recipe.getInputCount() == inventory.getStackInSlot(0)
-				                                       .getCount() && progress < recipe.getStepCount() && !needsUpdate) {
+				if (recipe.getInputCount() == inventory.getStackInSlot(0).getCount() && progress < recipe.getStepCount() && !needsUpdate) {
 					if (!world.isRemote) {
 						long time = world.getTotalWorldTime() - lastPushed;
 						if (time < 20) {
@@ -179,10 +182,6 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
 
 	public int getMaxProgress() {
 		return (recipe == null) ? 1 : recipe.getStepCount();
-	}
-
-	public int getProgress() {
-		return progress;
 	}
 
 	public boolean hasRecipe() {

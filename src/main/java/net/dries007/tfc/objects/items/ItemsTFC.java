@@ -206,8 +206,9 @@ public final class ItemsTFC {
 			for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
 				if (type != Metal.ItemType.BUCKET && type.hasType(metal)) // buckets registered separately
 				{
-					simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName()
-					                                                                              .getPath(), Metal.ItemType.create(metal, type), CT_METAL));
+					simpleItems.add(
+							register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName().getPath(),
+									Metal.ItemType.create(metal, type), CT_METAL));
 				}
 			}
 		}

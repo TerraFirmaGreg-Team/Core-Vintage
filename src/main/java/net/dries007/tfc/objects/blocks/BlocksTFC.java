@@ -72,8 +72,6 @@ public final class BlocksTFC {
 	private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
 	private static ImmutableList<BlockFenceGateTFC> allFenceGateBlocks;
 	private static ImmutableList<BlockSaplingTFC> allSaplingBlocks;
-	private static ImmutableList<BlockDoorTFC> allDoorBlocks;
-	private static ImmutableList<BlockTrapDoorWoodTFC> allTrapDoorWoodBlocks;
 	private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
 	private static ImmutableList<BlockStairsTFC> allStairsBlocks;
 	private static ImmutableList<BlockSlabTFC.Half> allSlabBlocks;
@@ -86,8 +84,6 @@ public final class BlocksTFC {
 	private static ImmutableList<BlockCropDead> allDeadCropBlocks;
 	private static ImmutableList<BlockPlantTFC> allPlantBlocks;
 	private static ImmutableList<BlockPlantTFC> allGrassBlocks;
-	private static ImmutableList<BlockLoom> allLoomBlocks;
-	private static ImmutableList<BlockSupport> allSupportBlocks;
 	private static ImmutableList<BlockFlowerPotTFC> allFlowerPots;
 
 	private static ImmutableList<BlockFruitTreeSapling> allFruitTreeSaplingBlocks;
@@ -141,14 +137,6 @@ public final class BlocksTFC {
 		return allSaplingBlocks;
 	}
 
-	public static ImmutableList<BlockDoorTFC> getAllDoorBlocks() {
-		return allDoorBlocks;
-	}
-
-	public static ImmutableList<BlockTrapDoorWoodTFC> getAllTrapDoorWoodBlocks() {
-		return allTrapDoorWoodBlocks;
-	}
-
 	public static ImmutableList<BlockTrapDoorMetalTFC> getAllTrapDoorMetalBlocks() {
 		return allTrapDoorMetalBlocks;
 	}
@@ -195,14 +183,6 @@ public final class BlocksTFC {
 
 	public static ImmutableList<BlockPlantTFC> getAllGrassBlocks() {
 		return allGrassBlocks;
-	}
-
-	public static ImmutableList<BlockLoom> getAllLoomBlocks() {
-		return allLoomBlocks;
-	}
-
-	public static ImmutableList<BlockSupport> getAllSupportBlocks() {
-		return allSupportBlocks;
 	}
 
 	public static ImmutableList<BlockFlowerPotTFC> getAllFlowerPots() {
@@ -352,7 +332,6 @@ public final class BlocksTFC {
 			Builder<BlockToolRack> toolRacks = ImmutableList.builder();
 			Builder<ItemBlockBarrel> barrelItems = ImmutableList.builder();
 			Builder<BlockPlantTFC> plants = ImmutableList.builder();
-			Builder<BlockLoom> looms = ImmutableList.builder();
 
 			// Other blocks that don't have specific order requirements
 			for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
@@ -362,14 +341,12 @@ public final class BlocksTFC {
 				saplings.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockSaplingTFC(wood), CT_WOOD));
 				toolRacks.add(register(r, "wood/tool_rack/" + wood.getRegistryName().getPath(), new BlockToolRack(wood), CT_DECORATIONS));
 				barrelItems.add(new ItemBlockBarrel(register(r, "wood/barrel/" + wood.getRegistryName().getPath(), new BlockBarrel(), CT_DECORATIONS)));
-				looms.add(register(r, "wood/loom/" + wood.getRegistryName().getPath(), new BlockLoom(wood), CT_WOOD));
 			}
 
 			allLogBlocks = logs.build();
 			allLeafBlocks = leaves.build();
 			allSaplingBlocks = saplings.build();
 			allToolRackBlocks = toolRacks.build();
-			allLoomBlocks = looms.build();
 
 			allBarrelItemBlocks = barrelItems.build();
 
@@ -379,7 +356,6 @@ public final class BlocksTFC {
 
 			// doors are special
 			allToolRackBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-			allLoomBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
 		}
 
 		{
@@ -575,7 +551,6 @@ public final class BlocksTFC {
 		register(TEChestTFC.class, "chest");
 		register(TEIngotPile.class, "ingot_pile");
 		register(TEToolRack.class, "tool_rack");
-		register(TELoom.class, "loom");
 		register(TELamp.class, "lamp");
 		register(TEBarrel.class, "barrel");
 		register(TEAnvilTFC.class, "anvil");

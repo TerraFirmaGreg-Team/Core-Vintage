@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 import java.util.UUID;
 
@@ -42,19 +43,19 @@ public class TEBearTrap extends TileEntity {
 	}
 
 	@Override
-	public @NotNull NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		compound.setBoolean("open", open);
+	public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+		NBTUtils.setGenericNBTValue(nbt, "open", open);
 		if (this.capturedEntity != null) {
-			compound.setUniqueId("capturedId", this.capturedEntity.getUniqueID());
+			NBTUtils.setGenericNBTValue(nbt, "capturedId", this.capturedEntity.getUniqueID());
 		}
-		return super.writeToNBT(compound);
+		return super.writeToNBT(nbt);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		this.open = compound.getBoolean("open");
-		this.capturedId = compound.getUniqueId("capturedId");
-		super.readFromNBT(compound);
+	public void readFromNBT(NBTTagCompound nbt) {
+		this.open = nbt.getBoolean("open");
+		this.capturedId = nbt.getUniqueId("capturedId");
+		super.readFromNBT(nbt);
 	}
 
 	protected void sendUpdates() {

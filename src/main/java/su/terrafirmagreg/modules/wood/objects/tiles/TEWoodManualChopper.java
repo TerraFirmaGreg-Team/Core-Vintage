@@ -19,6 +19,7 @@ import se.gory_moon.horsepower.HPEventHandler;
 import se.gory_moon.horsepower.recipes.HPRecipeBase;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 import java.util.Map;
 
@@ -151,12 +152,12 @@ public class TEWoodManualChopper extends TileEntityHPBase {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 
 		if (getStackInSlot(0).getCount() > 0) {
-			currentItemChopAmount = compound.getInteger("chopTime");
-			totalItemChopAmount = compound.getInteger("totalChopTime");
+			currentItemChopAmount = nbt.getInteger("chopTime");
+			totalItemChopAmount = nbt.getInteger("totalChopTime");
 		} else {
 			currentItemChopAmount = 0;
 			totalItemChopAmount = 1;
@@ -164,11 +165,11 @@ public class TEWoodManualChopper extends TileEntityHPBase {
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		compound.setInteger("chopTime", currentItemChopAmount);
-		compound.setInteger("totalChopTime", totalItemChopAmount);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		NBTUtils.setGenericNBTValue(nbt, "chopTime", currentItemChopAmount);
+		NBTUtils.setGenericNBTValue(nbt, "totalChopTime", totalItemChopAmount);
 
-		return super.writeToNBT(compound);
+		return super.writeToNBT(nbt);
 	}
 
 	@Override

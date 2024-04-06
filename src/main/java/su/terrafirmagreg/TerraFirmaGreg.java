@@ -25,20 +25,18 @@ public class TerraFirmaGreg {
 	@Mod.Instance
 	@Getter
 	private static TerraFirmaGreg instance;
-	// Hold this so that we can reference non-interface methods without
-	// letting the GregTechAPI object see them as immediately.
+
 	private final ModuleManager moduleManager;
 
 	public TerraFirmaGreg() {
-
 		this.moduleManager = new ModuleManager(MOD_ID);
 	}
 
 	@EventHandler
 	public void onConstruction(FMLConstructionEvent event) {
-
 		this.moduleManager.setup(event.getASMHarvestedData());
 		this.moduleManager.routeFMLStateEvent(event);
+
 	}
 
 	@EventHandler

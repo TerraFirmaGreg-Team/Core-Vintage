@@ -16,17 +16,17 @@ public class TEInfectedAir extends TEBase implements ITickable {
 	@Override
 	public void update() {}
 
-	private void writeSyncData(NBTTagCompound tagCompound) {}
+	private void writeSyncData(NBTTagCompound nbt) {}
 
-	private void readSyncData(NBTTagCompound tagCompound) {}
+	private void readSyncData(NBTTagCompound nbt) {}
 
 	@Nullable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound tagCompound = new NBTTagCompound();
-		writeToNBT(tagCompound);
-		writeSyncData(tagCompound);
-		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, tagCompound);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		writeSyncData(nbt);
+		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
 	}
 
 	@Override

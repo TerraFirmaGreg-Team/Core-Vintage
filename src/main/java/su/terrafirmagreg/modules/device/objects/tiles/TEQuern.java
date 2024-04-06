@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiQuern;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerQuern;
@@ -88,7 +89,7 @@ public class TEQuern extends TEInventory implements ITickable, IContainerProvide
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("rotationTimer", rotationTimer);
+		NBTUtils.setGenericNBTValue(nbt, "rotationTimer", rotationTimer);
 		return super.writeToNBT(nbt);
 	}
 

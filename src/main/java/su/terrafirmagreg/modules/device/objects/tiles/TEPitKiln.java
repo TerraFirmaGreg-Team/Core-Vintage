@@ -31,6 +31,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.data.BlocksCore;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
@@ -233,10 +234,10 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setBoolean("isLit", isLit);
-		nbt.setLong("litTick", litTick);
-		nbt.setTag("strawItems", ItemStackHelper.saveAllItems(new NBTTagCompound(), strawItems));
-		nbt.setTag("logItems", ItemStackHelper.saveAllItems(new NBTTagCompound(), logItems));
+		NBTUtils.setGenericNBTValue(nbt, "isLit", isLit);
+		NBTUtils.setGenericNBTValue(nbt, "litTick", litTick);
+		NBTUtils.setGenericNBTValue(nbt, "strawItems", ItemStackHelper.saveAllItems(new NBTTagCompound(), strawItems));
+		NBTUtils.setGenericNBTValue(nbt, "logItems", ItemStackHelper.saveAllItems(new NBTTagCompound(), logItems));
 		return super.writeToNBT(nbt);
 	}
 

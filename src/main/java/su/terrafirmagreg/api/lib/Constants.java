@@ -5,6 +5,7 @@ import java.util.Random;
 public class Constants {
 
 	public static final Random RANDOM = new Random();
+	public static final String NEW_LINE = System.getProperty("line.separator");
 
 
 	public static final String MODID_TFC = "tfc";

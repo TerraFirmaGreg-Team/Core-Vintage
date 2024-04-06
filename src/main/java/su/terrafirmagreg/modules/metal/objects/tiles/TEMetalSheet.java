@@ -11,6 +11,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.spi.tile.TEBase;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 
 public class TEMetalSheet extends TEBase {
@@ -68,9 +69,9 @@ public class TEMetalSheet extends TEBase {
 
 	@Override
 	@NotNull
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
 		for (EnumFacing face : EnumFacing.values()) {
-			nbt.setBoolean(face.getName(), faces[face.getIndex()]);
+			NBTUtils.setGenericNBTValue(nbt, face.getName(), faces[face.getIndex()]);
 		}
 		return super.writeToNBT(nbt);
 	}

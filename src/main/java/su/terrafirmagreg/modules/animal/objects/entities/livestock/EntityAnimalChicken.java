@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -239,7 +240,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 	@Override
 	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setLong("laidTicks", getLaidTicks());
+		NBTUtils.setGenericNBTValue(nbt, "laidTicks", getLaidTicks());
 	}
 
 	@Override

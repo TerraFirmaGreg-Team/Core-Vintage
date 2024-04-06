@@ -35,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -380,20 +381,20 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 	@Override
 	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setBoolean("gender", getGender().toBool());
-		nbt.setInteger("birth", getBirthDay());
-		nbt.setLong("fed", lastFed);
-		nbt.setLong("decay", lastFDecay);
-		nbt.setBoolean("fertilized", this.isFertilized());
-		nbt.setLong("mating", matingTime);
-		nbt.setFloat("familiarity", getFamiliarity());
-		nbt.setLong("lastDeath", lastDeath);
-		nbt.setLong("pregnant", getPregnantTime());
-		nbt.setFloat("geneSpeed", geneSpeed);
-		nbt.setFloat("geneJump", geneJump);
-		nbt.setFloat("geneHealth", geneHealth);
-		nbt.setFloat("geneStrength", geneStrength);
-		nbt.setInteger("geneVariant", geneVariant);
+		NBTUtils.setGenericNBTValue(nbt, "gender", getGender().toBool());
+		NBTUtils.setGenericNBTValue(nbt, "birth", getBirthDay());
+		NBTUtils.setGenericNBTValue(nbt, "fed", lastFed);
+		NBTUtils.setGenericNBTValue(nbt, "decay", lastFDecay);
+		NBTUtils.setGenericNBTValue(nbt, "fertilized", this.isFertilized());
+		NBTUtils.setGenericNBTValue(nbt, "mating", matingTime);
+		NBTUtils.setGenericNBTValue(nbt, "familiarity", getFamiliarity());
+		NBTUtils.setGenericNBTValue(nbt, "lastDeath", lastDeath);
+		NBTUtils.setGenericNBTValue(nbt, "pregnant", getPregnantTime());
+		NBTUtils.setGenericNBTValue(nbt, "geneSpeed", geneSpeed);
+		NBTUtils.setGenericNBTValue(nbt, "geneJump", geneJump);
+		NBTUtils.setGenericNBTValue(nbt, "geneHealth", geneHealth);
+		NBTUtils.setGenericNBTValue(nbt, "geneStrength", geneStrength);
+		NBTUtils.setGenericNBTValue(nbt, "geneVariant", geneVariant);
 	}
 
 	@Override

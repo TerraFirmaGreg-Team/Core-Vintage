@@ -4,7 +4,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import lombok.Getter;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -15,7 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -27,8 +25,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.block.BlockBaseContainer;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -36,8 +35,10 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodLoom;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+
 @Getter
-public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBlock {
+public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITEBlock {
 
 	protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
 	protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
@@ -58,15 +59,14 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBloc
 		setHardness(0.5f);
 		setResistance(3f);
 		setDefaultState(this.blockState.getBaseState()
-		                               .withProperty(BlockHorizontal.FACING, EnumFacing.NORTH));
+		                               .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
-		//OreDictUtils.register(this, variant.toString(), type.toString());
+
 	}
 
-	@Nullable
 	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockBase(this);
+	public void onRegisterOreDict() {
+		OreDictUtils.register(this, blockVariant, type);
 	}
 
 	@NotNull
@@ -101,7 +101,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBloc
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isFullCube(IBlockState state) {
+	public boolean isFullCube(@NotNull IBlockState state) {
 		return false;
 	}
 
@@ -142,17 +142,17 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBloc
 	@Override
 	@SuppressWarnings("deprecation")
 	@NotNull
-	public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @NotNull EntityLivingBase placer) {
 		if (facing.getAxis() == EnumFacing.Axis.Y) {
 			facing = placer.getHorizontalFacing().getOpposite();
 		}
-		return getDefaultState().withProperty(BlockHorizontal.FACING, facing);
+		return getDefaultState().withProperty(HORIZONTAL, facing);
 	}
 
 	@Override
 	@NotNull
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, BlockHorizontal.FACING);
+		return new BlockStateContainer(this, HORIZONTAL);
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public class BlockWoodLoom extends BlockContainer implements IWoodBlock, ITEBloc
 
 	@Override
 	public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		TEWoodLoom te = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
+		var te = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
 		if (te != null) {
 			te.onBreakBlock(worldIn, pos, state);
 		}

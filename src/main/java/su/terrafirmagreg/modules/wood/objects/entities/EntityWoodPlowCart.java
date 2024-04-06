@@ -30,6 +30,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
@@ -152,18 +153,18 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory implements IInve
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		dataManager.set(PLOWING, compound.getBoolean("Plowing"));
+	protected void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		dataManager.set(PLOWING, nbt.getBoolean("Plowing"));
 		for (int i = 0; i < TOOLS.length; i++) {
 			this.dataManager.set(TOOLS[i], this.inventory.getStackInSlot(i));
 		}
 	}
 
 	@Override
-	protected void writeEntityToNBT(@NotNull NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
-		compound.setBoolean("Plowing", dataManager.get(PLOWING));
+	protected void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		NBTUtils.setGenericNBTValue(nbt, "Plowing", dataManager.get(PLOWING));
 	}
 
 	private void damageAndUpdateOnBreak(BlockPos pos, int slot, ItemStack itemstack, EntityPlayer player) {

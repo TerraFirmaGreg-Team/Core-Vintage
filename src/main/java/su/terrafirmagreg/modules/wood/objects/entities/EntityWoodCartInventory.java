@@ -13,6 +13,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 public abstract class EntityWoodCartInventory extends EntityWoodCart {
 
@@ -32,9 +33,9 @@ public abstract class EntityWoodCartInventory extends EntityWoodCart {
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		NBTTagList nbttaglist = compound.getTagList("Items", 10);
+	protected void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
@@ -43,19 +44,19 @@ public abstract class EntityWoodCartInventory extends EntityWoodCart {
 	}
 
 	@Override
-	protected void writeEntityToNBT(@NotNull NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
+	protected void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < this.inventory.getSizeInventory(); ++i) {
 			ItemStack itemstack = this.inventory.getStackInSlot(i);
 			if (!itemstack.isEmpty()) {
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
-				nbttagcompound.setByte("Slot", (byte) i);
+				NBTUtils.setGenericNBTValue(nbttagcompound, "Slot", (byte) i);
 				itemstack.writeToNBT(nbttagcompound);
 				nbttaglist.appendTag(nbttagcompound);
 			}
 		}
-		compound.setTag("Items", nbttaglist);
+		NBTUtils.setGenericNBTValue(nbt, "Items", nbttaglist);
 	}
 
 	@Override

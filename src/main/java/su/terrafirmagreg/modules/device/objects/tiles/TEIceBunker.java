@@ -27,8 +27,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.sharkbark.cellars.ModConfig;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
@@ -477,55 +479,55 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 		return true;
 	}
 
-	private void writeSyncData(NBTTagCompound tagCompound) {
+	private void writeSyncData(NBTTagCompound nbt) {
 		float temp = (error == 0) ? temperature : (-1 * error * 1000);
-		tagCompound.setFloat("Temperature", temp);
+		NBTUtils.setGenericNBTValue(nbt, "Temperature", temp);
 	}
 
-	private void readSyncData(NBTTagCompound tagCompound) {
-		temperature = tagCompound.getFloat("Temperature");
+	private void readSyncData(NBTTagCompound nbt) {
+		temperature = nbt.getFloat("Temperature");
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tagCompound) {
-		super.readFromNBT(tagCompound);
+	public void readFromNBT(@NotNull NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 
 		this.chestContents = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY);
 
-		if (!this.checkLootAndRead(tagCompound)) ItemStackHelper.loadAllItems(tagCompound, chestContents);
-		if (tagCompound.hasKey("CustomName", 8)) this.customName = tagCompound.getString("CustomName");
+		if (!this.checkLootAndRead(nbt)) ItemStackHelper.loadAllItems(nbt, chestContents);
+		if (nbt.hasKey("CustomName", 8)) this.customName = nbt.getString("CustomName");
 
-		lastUpdate = tagCompound.getInteger("LastUpdate");
-		coolantAmount = tagCompound.getInteger("CoolantAmount");
-		coolantRate = tagCompound.getInteger("CoolantRate");
-		error = tagCompound.getByte("ErrorCode");
-		isComplete = tagCompound.getBoolean("isCompliant");
-		iceTemp = tagCompound.getFloat("iceTemp");
-		dryIce = tagCompound.getBoolean("dryIce");
-		seaIce = tagCompound.getBoolean("seaIce");
+		lastUpdate = nbt.getInteger("LastUpdate");
+		coolantAmount = nbt.getInteger("CoolantAmount");
+		coolantRate = nbt.getInteger("CoolantRate");
+		error = nbt.getByte("ErrorCode");
+		isComplete = nbt.getBoolean("isCompliant");
+		iceTemp = nbt.getFloat("iceTemp");
+		dryIce = nbt.getBoolean("dryIce");
+		seaIce = nbt.getBoolean("seaIce");
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
-		super.writeToNBT(tagCompound);
+	public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 
-		if (!this.checkLootAndRead(tagCompound)) ItemStackHelper.saveAllItems(tagCompound, chestContents);
-		if (tagCompound.hasKey("CustomName", 8)) tagCompound.setString("CustomName", this.customName);
+		if (!this.checkLootAndRead(nbt)) ItemStackHelper.saveAllItems(nbt, chestContents);
+		if (nbt.hasKey("CustomName", 8)) NBTUtils.setGenericNBTValue(nbt, "CustomName", this.customName);
 
-		tagCompound.setInteger("LastUpdate", lastUpdate);
-		tagCompound.setInteger("CoolantAmount", coolantAmount);
-		tagCompound.setInteger("CoolantRate", coolantRate);
-		tagCompound.setByte("ErrorCode", error);
-		tagCompound.setBoolean("isCompliant", isComplete);
-		tagCompound.setFloat("iceTemp", iceTemp);
-		tagCompound.setBoolean("dryIce", dryIce);
-		tagCompound.setBoolean("seaIce", seaIce);
+		NBTUtils.setGenericNBTValue(nbt, "LastUpdate", lastUpdate);
+		NBTUtils.setGenericNBTValue(nbt, "CoolantAmount", coolantAmount);
+		NBTUtils.setGenericNBTValue(nbt, "CoolantRate", coolantRate);
+		NBTUtils.setGenericNBTValue(nbt, "ErrorCode", error);
+		NBTUtils.setGenericNBTValue(nbt, "isCompliant", isComplete);
+		NBTUtils.setGenericNBTValue(nbt, "iceTemp", iceTemp);
+		NBTUtils.setGenericNBTValue(nbt, "dryIce", dryIce);
+		NBTUtils.setGenericNBTValue(nbt, "seaIce", seaIce);
 
-		return tagCompound;
+		return nbt;
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+	public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
 		readFromNBT(packet.getNbtCompound());
 		readSyncData(packet.getNbtCompound());
 	}
@@ -533,10 +535,10 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 	@Nullable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound tagCompound = new NBTTagCompound();
-		writeToNBT(tagCompound);
-		writeSyncData(tagCompound);
-		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, tagCompound);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		writeSyncData(nbt);
+		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
 	}
 
 	@Override

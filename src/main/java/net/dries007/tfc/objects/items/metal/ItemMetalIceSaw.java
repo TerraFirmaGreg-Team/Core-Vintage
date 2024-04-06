@@ -1,4 +1,4 @@
-package net.sharkbark.cellars.items;
+package net.dries007.tfc.objects.items.metal;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -22,6 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.sharkbark.cellars.ModConfig;
+import net.sharkbark.cellars.items.ItemBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
@@ -30,13 +31,13 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 
 @Mod.EventBusSubscriber(modid = MODID_CELLARS)
-public class ItemIceSaw extends ItemBase implements IMetalItem {
+public class ItemMetalIceSaw extends ItemBase implements IMetalItem {
 	private final Metal metal;
 	private final double attackDamage;
 	private final float attackSpeed;
 	private final float efficiency;
 
-	public ItemIceSaw(Metal metal, String name) {
+	public ItemMetalIceSaw(Metal metal, String name) {
 		super(name);
 		this.metal = metal;
 		ToolMaterial material = metal.getToolMetal();

@@ -20,6 +20,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
@@ -69,19 +70,19 @@ public class TEBloomery extends TETickableInventory implements ITickable {
 	}
 
 	@Override
-	public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound tag) {
+	public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
 		NBTTagList ores = new NBTTagList();
 		for (ItemStack stack : oreStacks) {
 			ores.appendTag(stack.serializeNBT());
 		}
-		tag.setTag("ores", ores);
+		NBTUtils.setGenericNBTValue(nbt, "ores", ores);
 		NBTTagList fuels = new NBTTagList();
 		for (ItemStack stack : fuelStacks) {
 			fuels.appendTag(stack.serializeNBT());
 		}
-		tag.setTag("fuels", fuels);
-		tag.setLong("litTick", litTick);
-		return super.writeToNBT(tag);
+		NBTUtils.setGenericNBTValue(nbt, "fuels", fuels);
+		NBTUtils.setGenericNBTValue(nbt, "litTick", litTick);
+		return super.writeToNBT(nbt);
 	}
 
 	@Override

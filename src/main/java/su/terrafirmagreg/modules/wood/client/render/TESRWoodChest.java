@@ -6,16 +6,21 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodChest;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
 
+import java.util.Objects;
+
 @SideOnly(Side.CLIENT)
 public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
+
+	private static final ResourceLocation SINGLE_TEXTURE = ModUtils.getID("textures/entity/wood/chests/single.png");
+	private static final ResourceLocation DOUBLE_TEXTURE = ModUtils.getID("textures/entity/wood/chests/double.png");
 
 	private final ModelChest simpleChest = new ModelChest();
 	private final ModelChest largeChest = new ModelLargeChest();
@@ -26,16 +31,15 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 		GlStateManager.depthFunc(515);
 		GlStateManager.depthMask(true);
 		int meta = 0;
-		WoodType woodType = null;
+		var woodColor = Objects.requireNonNull(te.getWood()).getColor();
+
 
 		if (te.hasWorld()) {
 			Block block = te.getBlockType();
 			meta = te.getBlockMetadata();
-			woodType = te.getWood();
 
-			if (block instanceof BlockWoodChest && meta == 0) {
-				((BlockWoodChest) block).checkForSurroundingChests(te.getWorld(), te.getPos(), te.getWorld()
-				                                                                                 .getBlockState(te.getPos()));
+			if (block instanceof BlockWoodChest blockWoodChest && meta == 0) {
+				blockWoodChest.checkForSurroundingChests(te.getWorld(), te.getPos(), te.getWorld().getBlockState(te.getPos()));
 				meta = te.getBlockMetadata();
 			}
 
@@ -55,12 +59,12 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 				GlStateManager.scale(4.0F, 4.0F, 1.0F);
 				GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
 				GlStateManager.matrixMode(5888);
-			} else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/trap/single.png"));
-				ColourUtils.setWoodColor(woodType.getColor());
-			} else if (woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/normal/single.png"));
-				ColourUtils.setWoodColor(woodType.getColor());
+			} else if (te.getChestType() == BlockChest.Type.TRAP) {
+				bindTexture(SINGLE_TEXTURE);
+				ColourUtils.setColor(woodColor);
+			} else {
+				bindTexture(SINGLE_TEXTURE);
+				ColourUtils.setColor(woodColor);
 			}
 		} else {
 			modelchest = largeChest;
@@ -72,12 +76,10 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 				GlStateManager.scale(8.0F, 4.0F, 1.0F);
 				GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
 				GlStateManager.matrixMode(5888);
-			} else if (te.getChestType() == BlockChest.Type.TRAP && woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/trap/double.png"));
-				ColourUtils.setWoodColor(woodType.getColor());
-			} else if (woodType != null) {
-				bindTexture(ModUtils.getID("textures/entity/wood/chests/normal/double.png"));
-				ColourUtils.setWoodColor(woodType.getColor());
+			} else if (te.getChestType() == BlockChest.Type.TRAP) {
+				bindTexture(DOUBLE_TEXTURE);
+			} else {
+				bindTexture(DOUBLE_TEXTURE);
 			}
 		}
 
@@ -85,8 +87,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 		GlStateManager.enableRescaleNormal();
 
 		if (destroyStage < 0) {
-			assert woodType != null;
-			ColourUtils.setWoodColor(woodType.getColor());
+			ColourUtils.setColor(woodColor);
 		}
 
 		GlStateManager.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
@@ -124,11 +125,22 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
 		lidAngle = 1.0F - lidAngle;
 		lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
 		modelchest.chestLid.rotateAngleX = -(lidAngle * ((float) Math.PI / 2F));
-		modelchest.renderAll();
+
+		// Отрисовка частей сундука, кроме ручки
+		ColourUtils.setColor(woodColor);
+		modelchest.chestLid.render(0.0625F);
+		modelchest.chestBelow.render(0.0625F);
+		ColourUtils.clearColor();
+
+		if (te.getChestType() == BlockChest.Type.TRAP) {
+			GlStateManager.color(1.0F, 0.0F, 0.0F, 1.0F);
+		}
+		// Отрисовка ручки
+		modelchest.chestKnob.render(0.0625F);
+
+
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.popMatrix();
-		assert woodType != null;
-		ColourUtils.setWoodColor(woodType.getColor());
 
 		if (destroyStage >= 0) {
 			GlStateManager.matrixMode(5890);

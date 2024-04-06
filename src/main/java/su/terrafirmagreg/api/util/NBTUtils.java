@@ -1,13 +1,16 @@
 package su.terrafirmagreg.api.util;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import su.terrafirmagreg.api.lib.Constants;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.UUID;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
@@ -20,6 +23,39 @@ public final class NBTUtils {
 
 	private NBTUtils() {
 		throw new IllegalAccessError("Utility class");
+	}
+
+	/**
+	 * Sets an unknown data type to an NBTTagCompound. If the type of the data can not be
+	 * identified, and exception will be thrown. Current supported data types include String,
+	 * Integer, Float, Boolean, Double, Long, Short, Byte, ItemStack, Entity and Position.
+	 *
+	 * @param dataTag: An NBTTagCompound to write this unknown data to.
+	 * @param tagName: The name to save this unknown data under.
+	 * @param value:   The unknown data you wish to write to the dataTag.
+	 */
+	public static void setGenericNBTValue(NBTTagCompound dataTag, String tagName, Object value) {
+
+		if (value instanceof String stringValue) dataTag.setString(tagName, stringValue);
+		else if (value instanceof Integer integerValue) dataTag.setInteger(tagName, integerValue);
+		else if (value instanceof Float floatValue) dataTag.setFloat(tagName, floatValue);
+		else if (value instanceof Boolean boleanValue) dataTag.setBoolean(tagName, boleanValue);
+		else if (value instanceof Double doubleValue) dataTag.setDouble(tagName, doubleValue);
+		else if (value instanceof Long longValue) dataTag.setLong(tagName, longValue);
+		else if (value instanceof Short shortValue) dataTag.setShort(tagName, shortValue);
+		else if (value instanceof Byte byteValue) dataTag.setByte(tagName, byteValue);
+		else if (value instanceof UUID uuidValue) dataTag.setUniqueId(tagName, uuidValue);
+		else if (value instanceof ItemStack itemStackValue) dataTag.setTag(tagName, itemStackValue.writeToNBT(new NBTTagCompound()));
+		else if (value instanceof Entity entityValue) {
+			final NBTTagCompound newTag = new NBTTagCompound();
+			entityValue.writeToNBT(newTag);
+			dataTag.setTag(tagName, newTag);
+		} else {
+			throw new RuntimeException(
+					"The data type of " + value.getClass().getName() + " is currently not supported." + Constants.NEW_LINE +
+							"Raw Data: " + value
+			);
+		}
 	}
 
 	/**

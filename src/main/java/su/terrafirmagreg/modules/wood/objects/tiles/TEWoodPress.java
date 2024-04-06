@@ -21,6 +21,7 @@ import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.recipes.PressRecipe;
 import se.gory_moon.horsepower.tileentity.TileEntityHPHorseBase;
 import se.gory_moon.horsepower.util.Localization;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 public class TEWoodPress extends TileEntityHPHorseBase {
 
@@ -75,22 +76,22 @@ public class TEWoodPress extends TileEntityHPHorseBase {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
-		tank.readFromNBT(compound.getCompoundTag("fluid"));
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		tank.readFromNBT(nbt.getCompoundTag("fluid"));
 
 		if (getStackInSlot(0).getCount() > 0) {
-			currentPressStatus = compound.getInteger("currentPressStatus");
+			currentPressStatus = nbt.getInteger("currentPressStatus");
 		} else {
 			currentPressStatus = 0;
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		compound.setInteger("currentPressStatus", currentPressStatus);
-		compound.setTag("fluid", tank.writeToNBT(new NBTTagCompound()));
-		return super.writeToNBT(compound);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		NBTUtils.setGenericNBTValue(nbt, "currentPressStatus", currentPressStatus);
+		NBTUtils.setGenericNBTValue(nbt, "fluid", tank.writeToNBT(new NBTTagCompound()));
+		return super.writeToNBT(nbt);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 /**
  * This is an implementation of ItemHeat that automatically cools down over time
@@ -94,13 +95,13 @@ public class HeatProvider implements ICapabilitySerializable<NBTTagCompound>, IH
 		NBTTagCompound nbt = new NBTTagCompound();
 		if (getTemperature() <= 0) {
 			// Reset temperature to zero
-			nbt.setLong("ticks", -1);
-			nbt.setFloat("heat", 0);
+			NBTUtils.setGenericNBTValue(nbt, "ticks", -1);
+			NBTUtils.setGenericNBTValue(nbt, "heat", 0);
 		} else {
 			// Serialize existing values - this is intentionally lazy (and not using the result of getTemperature())
 			// Why? So we don't update the serialization unnecessarily. Important for not sending unnecessary client syncs.
-			nbt.setLong("ticks", lastUpdateTick);
-			nbt.setFloat("heat", temperature);
+			NBTUtils.setGenericNBTValue(nbt, "ticks", lastUpdateTick);
+			NBTUtils.setGenericNBTValue(nbt, "heat", temperature);
 		}
 		return nbt;
 	}

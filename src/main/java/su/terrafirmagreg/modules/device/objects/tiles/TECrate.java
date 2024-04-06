@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrate;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrate;
 
@@ -120,20 +121,20 @@ public class TECrate extends TEBaseInventory implements IItemHandlerSidedCallbac
 
 	@Override
 	@NotNull
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setLong("sealedTick", sealedTick);
-		nbt.setLong("sealedCalendarTick", sealedCalendarTick);
+	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+		NBTUtils.setGenericNBTValue(nbt, "sealedTick", sealedTick);
+		NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", sealedCalendarTick);
 		return super.writeToNBT(nbt);
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
 		}

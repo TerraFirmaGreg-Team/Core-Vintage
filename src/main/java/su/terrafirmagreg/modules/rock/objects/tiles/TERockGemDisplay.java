@@ -17,6 +17,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBase;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 @Getter
 public class TERockGemDisplay extends TEBase {
@@ -62,9 +63,9 @@ public class TERockGemDisplay extends TEBase {
 	@NotNull
 	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		nbt.setInteger("grade", grade);
-		nbt.setInteger("size", size);
-		nbt.setTag("items", ItemStackHelper.saveAllItems(new NBTTagCompound(), this.items));
+		NBTUtils.setGenericNBTValue(nbt, "grade", grade);
+		NBTUtils.setGenericNBTValue(nbt, "size", size);
+		NBTUtils.setGenericNBTValue(nbt, "items", ItemStackHelper.saveAllItems(new NBTTagCompound(), this.items));
 		return nbt;
 	}
 

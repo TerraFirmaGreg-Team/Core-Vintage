@@ -29,6 +29,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCharcoalForge;
 
@@ -256,11 +257,11 @@ public class TECharcoalForge extends TETickableInventory implements ICalendarTic
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setFloat("temperature", temperature);
-		nbt.setInteger("burnTicks", burnTicks);
-		nbt.setInteger("airTicks", airTicks);
-		nbt.setFloat("burnTemperature", burnTemperature);
-		nbt.setLong("lastPlayerTick", lastPlayerTick);
+		NBTUtils.setGenericNBTValue(nbt, "temperature", temperature);
+		NBTUtils.setGenericNBTValue(nbt, "burnTicks", burnTicks);
+		NBTUtils.setGenericNBTValue(nbt, "airTicks", airTicks);
+		NBTUtils.setGenericNBTValue(nbt, "burnTemperature", burnTemperature);
+		NBTUtils.setGenericNBTValue(nbt, "lastPlayerTick", lastPlayerTick);
 		return super.writeToNBT(nbt);
 	}
 
@@ -271,7 +272,7 @@ public class TECharcoalForge extends TETickableInventory implements ICalendarTic
 	}
 
 	@Override
-	public boolean isItemValid(int slot, ItemStack stack) {
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		if (slot <= SLOT_FUEL_MAX) {
 			// Fuel slots - anything that is a valid TFC fuel
 			return FuelManager.isItemForgeFuel(stack);

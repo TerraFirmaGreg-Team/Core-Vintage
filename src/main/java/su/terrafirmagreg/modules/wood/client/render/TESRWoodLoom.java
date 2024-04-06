@@ -12,7 +12,6 @@ import org.lwjgl.opengl.GL11;
 import su.terrafirmagreg.api.spi.render.TESRBase;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
 
 @SideOnly(Side.CLIENT)
@@ -24,15 +23,16 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
 		GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
 		GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
 		GlStateManager.popMatrix();
-		WoodType woodType;
+		var woodColor = te.getWood().getColor();
 
 		double tileZ = te.getAnimPos();
 
 		try {
-			woodType = te.getWood();
 			GlStateManager.pushMatrix();
-			ColourUtils.setWoodColor(woodType.getColor());
-			this.bindTexture(ModUtils.getID("textures/blocks/wood/planks.png"));
+
+			ColourUtils.setColor(woodColor);
+			bindTexture(ModUtils.getID("textures/blocks/wood/planks.png"));
+			ColourUtils.clearColor();
 
 			GlStateManager.disableLighting();
 
@@ -60,7 +60,8 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
 		if (te.hasRecipe()) {
 			try {
 				GlStateManager.pushMatrix();
-				ColourUtils.setWoodColor(woodType.getColor());
+
+
 				this.bindTexture(te.getInProgressTexture());
 
 				GlStateManager.disableLighting();

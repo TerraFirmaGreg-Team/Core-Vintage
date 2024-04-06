@@ -36,7 +36,7 @@ public class RenderWoodSupplyCart extends Render<EntityWoodSupplyCart> {
 			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
 		}
 
-		ColourUtils.setWoodColor(woodType.getColor());
+		ColourUtils.setColor(woodType.getColor());
 
 		this.model.render(entity, partialTicks, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 

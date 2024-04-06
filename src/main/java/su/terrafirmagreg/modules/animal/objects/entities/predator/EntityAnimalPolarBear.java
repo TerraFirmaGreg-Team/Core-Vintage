@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -283,8 +284,8 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 	@Override
 	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setBoolean("gender", getGender().toBool());
-		nbt.setInteger("birth", getBirthDay());
+		NBTUtils.setGenericNBTValue(nbt, "gender", getGender().toBool());
+		NBTUtils.setGenericNBTValue(nbt, "birth", getBirthDay());
 	}
 
 	@Override

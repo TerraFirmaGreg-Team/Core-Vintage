@@ -193,8 +193,8 @@ public final class StackUtils {
 	 */
 	public static ItemStack setLoreTag(ItemStack stack, NBTTagList lore) {
 
-		final NBTTagCompound displayTag = getDisplayTag(stack);
-		displayTag.setTag("Lore", lore);
+		final NBTTagCompound nbt = getDisplayTag(stack);
+		NBTUtils.setGenericNBTValue(nbt, "Lore", lore);
 		return stack;
 	}
 
@@ -207,13 +207,13 @@ public final class StackUtils {
 	public static NBTTagCompound getDisplayTag(ItemStack stack) {
 
 		prepareStackTag(stack);
-		final NBTTagCompound tag = stack.getTagCompound();
+		final NBTTagCompound nbt = stack.getTagCompound();
 
-		if (!tag.hasKey("display", NBT.TAG_COMPOUND)) {
-			tag.setTag("display", new NBTTagCompound());
+		if (!nbt.hasKey("display", NBT.TAG_COMPOUND)) {
+			NBTUtils.setGenericNBTValue(nbt, "display", new NBTTagCompound());
 		}
 
-		return tag.getCompoundTag("display");
+		return nbt.getCompoundTag("display");
 	}
 
 	/**
@@ -224,14 +224,14 @@ public final class StackUtils {
 	 */
 	public static NBTTagList getLoreTag(ItemStack stack) {
 
-		final NBTTagCompound displayTag = getDisplayTag(stack);
+		final NBTTagCompound nbt = getDisplayTag(stack);
 
-		if (!displayTag.hasKey("Lore")) {
+		if (!nbt.hasKey("Lore")) {
 
-			displayTag.setTag("Lore", new NBTTagList());
+			nbt.setTag("Lore", new NBTTagList());
 		}
 
-		return displayTag.getTagList("Lore", NBT.TAG_STRING);
+		return nbt.getTagList("Lore", NBT.TAG_STRING);
 	}
 
 	/**

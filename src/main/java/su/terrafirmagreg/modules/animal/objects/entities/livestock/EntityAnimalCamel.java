@@ -28,6 +28,7 @@ import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -230,12 +231,12 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 	@Override
 	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setInteger("Variant", this.getVariant());
-		nbt.setInteger("Strength", this.getStrength());
+		NBTUtils.setGenericNBTValue(nbt, "Variant", this.getVariant());
+		NBTUtils.setGenericNBTValue(nbt, "Strength", this.getStrength());
 		if (!this.horseChest.getStackInSlot(1).isEmpty()) {
-			nbt.setTag("DecorItem", this.horseChest.getStackInSlot(1).writeToNBT(new NBTTagCompound()));
+			NBTUtils.setGenericNBTValue(nbt, "DecorItem", this.horseChest.getStackInSlot(1).writeToNBT(new NBTTagCompound()));
 		}
-		nbt.setBoolean("halter", isHalter());
+		NBTUtils.setGenericNBTValue(nbt, "halter", isHalter());
 	}
 
 	@Override

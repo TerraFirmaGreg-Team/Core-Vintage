@@ -72,7 +72,7 @@ public class WoodType implements Comparable<WoodType> {
 
 		public Builder(@NotNull String name) {
 			this.name = name;
-			this.color = 0xFFFFFF;
+			this.color = 0xff000000;
 			this.burnTemp = 0;
 			this.burnTicks = 0;
 			this.canMakeTannin = false;

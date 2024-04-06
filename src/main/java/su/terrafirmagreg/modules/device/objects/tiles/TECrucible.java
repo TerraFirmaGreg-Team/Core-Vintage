@@ -35,6 +35,7 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
@@ -246,8 +247,8 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setTag("alloy", alloy.serializeNBT());
-		nbt.setFloat("temp", temperature);
+		NBTUtils.setGenericNBTValue(nbt, "alloy", alloy.serializeNBT());
+		NBTUtils.setGenericNBTValue(nbt, "temp", temperature);
 		return super.writeToNBT(nbt);
 	}
 

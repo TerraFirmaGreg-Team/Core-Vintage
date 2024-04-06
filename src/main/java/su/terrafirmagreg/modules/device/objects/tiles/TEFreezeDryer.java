@@ -37,6 +37,7 @@ import net.sharkbark.cellars.ModConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
 import su.terrafirmagreg.modules.device.objects.container.ContainerFreezeDryer;
@@ -313,72 +314,72 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
 		this.markForSync();
 	}
 
-	private void writeSyncData(NBTTagCompound tagCompound) {
-		tagCompound.setFloat("Temperature", temperature);
-		tagCompound.setDouble("Pressure", pressure);
-		tagCompound.setDouble("LocalPressure", localPressure);
-		tagCompound.setFloat("Coolant", coolant);
-		tagCompound.setBoolean("Seal", sealed);
-		tagCompound.setBoolean("Pump", pump);
-		tagCompound.setInteger("TicksSealed", ticksSealed);
-		tagCompound.setInteger("OverheatTicks", overheatTick);
-		tagCompound.setBoolean("Overheating", overheating);
-		tagCompound.setBoolean("Initialized", initialized);
+	private void writeSyncData(NBTTagCompound nbt) {
+		NBTUtils.setGenericNBTValue(nbt, "Temperature", temperature);
+		NBTUtils.setGenericNBTValue(nbt, "Pressure", pressure);
+		NBTUtils.setGenericNBTValue(nbt, "LocalPressure", localPressure);
+		NBTUtils.setGenericNBTValue(nbt, "Coolant", coolant);
+		NBTUtils.setGenericNBTValue(nbt, "Seal", sealed);
+		NBTUtils.setGenericNBTValue(nbt, "Pump", pump);
+		NBTUtils.setGenericNBTValue(nbt, "TicksSealed", ticksSealed);
+		NBTUtils.setGenericNBTValue(nbt, "OverheatTicks", overheatTick);
+		NBTUtils.setGenericNBTValue(nbt, "Overheating", overheating);
+		NBTUtils.setGenericNBTValue(nbt, "Initialized", initialized);
 	}
 
-	private void readSyncData(NBTTagCompound tagCompound) {
-		temperature = tagCompound.getFloat("Temperature");
-		pressure = tagCompound.getDouble("Pressure");
-		localPressure = tagCompound.getDouble("LocalPressure");
-		coolant = tagCompound.getFloat("Coolant");
-		sealed = tagCompound.getBoolean("Seal");
-		pump = tagCompound.getBoolean("Pump");
-		ticksSealed = tagCompound.getInteger("TicksSealed");
-		overheatTick = tagCompound.getInteger("OverheatTicks");
-		overheating = tagCompound.getBoolean("Overheating");
-		initialized = tagCompound.getBoolean("Initialized");
+	private void readSyncData(NBTTagCompound nbt) {
+		temperature = nbt.getFloat("Temperature");
+		pressure = nbt.getDouble("Pressure");
+		localPressure = nbt.getDouble("LocalPressure");
+		coolant = nbt.getFloat("Coolant");
+		sealed = nbt.getBoolean("Seal");
+		pump = nbt.getBoolean("Pump");
+		ticksSealed = nbt.getInteger("TicksSealed");
+		overheatTick = nbt.getInteger("OverheatTicks");
+		overheating = nbt.getBoolean("Overheating");
+		initialized = nbt.getBoolean("Initialized");
 	}
 
 
-	public void readFromNBT(NBTTagCompound tagCompound) {
-		super.readFromNBT(tagCompound);
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 
-		temperature = tagCompound.getFloat("Temperature");
-		pressure = tagCompound.getDouble("Pressure");
-		localPressure = tagCompound.getDouble("LocalPressure");
-		coolant = tagCompound.getFloat("Coolant");
-		sealed = tagCompound.getBoolean("Seal");
-		pump = tagCompound.getBoolean("Pump");
-		ticksSealed = tagCompound.getInteger("TicksSealed");
-		overheatTick = tagCompound.getInteger("OverheatTicks");
-		overheating = tagCompound.getBoolean("Overheating");
-		initialized = tagCompound.getBoolean("Initialized");
+		temperature = nbt.getFloat("Temperature");
+		pressure = nbt.getDouble("Pressure");
+		localPressure = nbt.getDouble("LocalPressure");
+		coolant = nbt.getFloat("Coolant");
+		sealed = nbt.getBoolean("Seal");
+		pump = nbt.getBoolean("Pump");
+		ticksSealed = nbt.getInteger("TicksSealed");
+		overheatTick = nbt.getInteger("OverheatTicks");
+		overheating = nbt.getBoolean("Overheating");
+		initialized = nbt.getBoolean("Initialized");
 	}
 
-	public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
-		super.writeToNBT(tagCompound);
+	public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 
-		tagCompound.setFloat("Temperature", temperature);
-		tagCompound.setDouble("Pressure", pressure);
-		tagCompound.setDouble("LocalPressure", localPressure);
-		tagCompound.setFloat("Coolant", coolant);
-		tagCompound.setBoolean("Seal", sealed);
-		tagCompound.setBoolean("Pump", pump);
-		tagCompound.setInteger("TicksSealed", ticksSealed);
-		tagCompound.setInteger("OverheatTicks", overheatTick);
-		tagCompound.setBoolean("Overheating", overheating);
-		tagCompound.setBoolean("Initialized", initialized);
+		NBTUtils.setGenericNBTValue(nbt, "Temperature", temperature);
+		NBTUtils.setGenericNBTValue(nbt, "Pressure", pressure);
+		NBTUtils.setGenericNBTValue(nbt, "LocalPressure", localPressure);
+		NBTUtils.setGenericNBTValue(nbt, "Coolant", coolant);
+		NBTUtils.setGenericNBTValue(nbt, "Seal", sealed);
+		NBTUtils.setGenericNBTValue(nbt, "Pump", pump);
+		NBTUtils.setGenericNBTValue(nbt, "TicksSealed", ticksSealed);
+		NBTUtils.setGenericNBTValue(nbt, "OverheatTicks", overheatTick);
+		NBTUtils.setGenericNBTValue(nbt, "Overheating", overheating);
+		NBTUtils.setGenericNBTValue(nbt, "Initialized", initialized);
 
-		return tagCompound;
+		return nbt;
 	}
 
 	@Nullable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound tagCompound = new NBTTagCompound();
-		writeToNBT(tagCompound);
-		writeSyncData(tagCompound);
-		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, tagCompound);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		writeSyncData(nbt);
+		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
 	}
 
 	@Override

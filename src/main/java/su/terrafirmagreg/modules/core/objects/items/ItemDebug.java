@@ -79,17 +79,17 @@ public class ItemDebug extends ItemBase {
 		int mode = nbt.getInteger("mode");
 		switch (mode) {
 			case 0: {
-				nbt.setString("Blockstate", world.getBlockState(pos).toString());
+				NBTUtils.setGenericNBTValue(nbt, "Blockstate", world.getBlockState(pos).toString());
 				break;
 			}
 			case 1: {
 				TileEntity tile = world.getTileEntity(pos);
 				if (tile == null) break;
-				nbt.setString("NBTTagCompound", tile.writeToNBT(new NBTTagCompound()).toString());
+				NBTUtils.setGenericNBTValue(nbt, "NBTTag", tile.writeToNBT(new NBTTagCompound()).toString());
 				break;
 			}
 			case 2: {
-				nbt.setString("BlockstateList", world.getBlockState(pos).getBlock().getBlockState().getValidStates().toString());
+				NBTUtils.setGenericNBTValue(nbt, "BlockstateList", world.getBlockState(pos).getBlock().getBlockState().getValidStates().toString());
 				break;
 			}
 			case 3: {

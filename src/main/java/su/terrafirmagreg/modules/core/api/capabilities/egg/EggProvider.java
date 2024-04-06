@@ -9,6 +9,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.util.NBTUtils;
 
 public class EggProvider implements ICapabilitySerializable<NBTTagCompound>, IEggCapability {
 	private boolean fertilized;
@@ -67,9 +68,9 @@ public class EggProvider implements ICapabilitySerializable<NBTTagCompound>, IEg
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		if (entitytag != null) {
-			nbt.setBoolean("fertilized", fertilized);
-			nbt.setLong("hatchDay", hatchDay);
-			nbt.setTag("entity", entitytag);
+			NBTUtils.setGenericNBTValue(nbt, "fertilized", fertilized);
+			NBTUtils.setGenericNBTValue(nbt, "hatchDay", hatchDay);
+			NBTUtils.setGenericNBTValue(nbt, "entity", entitytag);
 		}
 		return nbt;
 	}

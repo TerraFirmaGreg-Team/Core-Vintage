@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.wood.ModuleWood;
@@ -341,22 +342,22 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
-		this.firstPullingUUID = compound.getUniqueId("FirstPullingUUID");
-		if (compound.hasKey("Wood")) {
-			this.dataManager.set(WOOD_NAME, compound.getString("Wood"));
+	protected void readEntityFromNBT(NBTTagCompound nbt) {
+		this.firstPullingUUID = nbt.getUniqueId("FirstPullingUUID");
+		if (nbt.hasKey("wood")) {
+			this.dataManager.set(WOOD_NAME, nbt.getString("wood"));
 		}
 	}
 
 	@Override
-	protected void writeEntityToNBT(@NotNull NBTTagCompound compound) {
+	protected void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		if (this.pulling != null) {
-			compound.setUniqueId("FirstPullingUUID", this.pulling.getUniqueID());
+			NBTUtils.setGenericNBTValue(nbt, "FirstPullingUUID", this.pulling.getUniqueID());
 		}
 		WoodType woodType = getWood();
 		if (woodType != null) {
 			//noinspection ConstantConditions
-			compound.setString("Wood", this.getWood().toString());
+			NBTUtils.setGenericNBTValue(nbt, "wood", this.getWood().toString());
 		}
 	}
 

@@ -42,6 +42,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.container.ContainerFirePit;
@@ -393,30 +394,30 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setFloat("temperature", temperature);
-		nbt.setInteger("burnTicks", burnTicks);
-		nbt.setFloat("burnTemperature", burnTemperature);
-		nbt.setLong("lastPlayerTick", lastPlayerTick);
+		NBTUtils.setGenericNBTValue(nbt, "temperature", temperature);
+		NBTUtils.setGenericNBTValue(nbt, "burnTicks", burnTicks);
+		NBTUtils.setGenericNBTValue(nbt, "burnTemperature", burnTemperature);
+		NBTUtils.setGenericNBTValue(nbt, "lastPlayerTick", lastPlayerTick);
 		if (!leftover.isEmpty()) {
 			NBTTagList surplusList = new NBTTagList();
 			for (ItemStack stack : leftover) {
 				surplusList.appendTag(stack.serializeNBT());
 			}
-			nbt.setTag("leftover", surplusList);
+			NBTUtils.setGenericNBTValue(nbt, "leftover", surplusList);
 		}
-		nbt.setTag("attachedItemStack", attachedItemStack.serializeNBT());
+		NBTUtils.setGenericNBTValue(nbt, "attachedItemStack", attachedItemStack.serializeNBT());
 
 		BlockFirePit.FirePitAttachment attachment = world.getBlockState(pos).getValue(ATTACHMENT);
-		nbt.setInteger("attachment", attachment.ordinal()); // to de-serialize the correct stuff
+		NBTUtils.setGenericNBTValue(nbt, "attachment", attachment.ordinal()); // to de-serialize the correct stuff
 		if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
-			nbt.setInteger("cookingPotStage", cookingPotStage.ordinal());
+			NBTUtils.setGenericNBTValue(nbt, "cookingPotStage", cookingPotStage.ordinal());
 			if (cookingPotStage == CookingPotStage.BOILING) {
-				nbt.setInteger("boilingTicks", boilingTicks);
+				NBTUtils.setGenericNBTValue(nbt, "boilingTicks", boilingTicks);
 			} else if (cookingPotStage == CookingPotStage.FINISHED) {
-				nbt.setTag("soupContents", soupContents.serializeNBT());
-				nbt.setInteger("soupNutrient", soupNutrient.ordinal());
-				nbt.setInteger("soupServings", soupServings);
-				nbt.setLong("soupCreationDate", soupCreationDate);
+				NBTUtils.setGenericNBTValue(nbt, "soupContents", soupContents.serializeNBT());
+				NBTUtils.setGenericNBTValue(nbt, "soupNutrient", soupNutrient.ordinal());
+				NBTUtils.setGenericNBTValue(nbt, "soupServings", soupServings);
+				NBTUtils.setGenericNBTValue(nbt, "soupCreationDate", soupCreationDate);
 			}
 		}
 		return super.writeToNBT(nbt);

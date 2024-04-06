@@ -32,6 +32,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -195,14 +196,14 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 		}
 	}
 
-	public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
-		super.writeEntityToNBT(compound);
-		compound.setInteger("RabbitType", this.getRabbitType());
+	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		NBTUtils.setGenericNBTValue(nbt, "RabbitType", this.getRabbitType());
 	}
 
-	public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		this.setRabbitType(compound.getInteger("RabbitType"));
+	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		this.setRabbitType(nbt.getInteger("RabbitType"));
 	}
 
 	@NotNull

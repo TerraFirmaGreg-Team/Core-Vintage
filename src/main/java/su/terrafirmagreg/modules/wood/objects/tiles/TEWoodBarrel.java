@@ -39,6 +39,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodBarrel;
@@ -326,18 +327,18 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
-		nbt.setLong("sealedTick", sealedTick);
-		nbt.setLong("sealedCalendarTick", sealedCalendarTick);
-		nbt.setBoolean("sealed", sealed);
-		nbt.setLong("lastPlayerTick", lastPlayerTick);
+		NBTUtils.setGenericNBTValue(nbt, "tank", tank.writeToNBT(new NBTTagCompound()));
+		NBTUtils.setGenericNBTValue(nbt, "sealedTick", sealedTick);
+		NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", sealedCalendarTick);
+		NBTUtils.setGenericNBTValue(nbt, "sealed", sealed);
+		NBTUtils.setGenericNBTValue(nbt, "lastPlayerTick", lastPlayerTick);
 
 		if (!surplus.isEmpty()) {
 			NBTTagList surplusList = new NBTTagList();
 			for (ItemStack stack : surplus) {
 				surplusList.appendTag(stack.serializeNBT());
 			}
-			nbt.setTag("surplus", surplusList);
+			NBTUtils.setGenericNBTValue(nbt, "surplus", surplusList);
 		}
 
 		return super.writeToNBT(nbt);

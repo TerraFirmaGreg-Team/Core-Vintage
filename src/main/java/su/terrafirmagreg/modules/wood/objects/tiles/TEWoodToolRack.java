@@ -15,6 +15,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.spi.tile.TEBase;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
@@ -58,7 +59,7 @@ public class TEWoodToolRack extends TEBase {
 	@NotNull
 	public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		nbt.setTag("items", ItemStackHelper.saveAllItems(new NBTTagCompound(), items));
+		NBTUtils.setGenericNBTValue(nbt, "items", ItemStackHelper.saveAllItems(new NBTTagCompound(), items));
 		return nbt;
 	}
 

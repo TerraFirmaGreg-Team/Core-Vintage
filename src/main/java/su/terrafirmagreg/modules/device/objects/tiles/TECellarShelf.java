@@ -29,6 +29,7 @@ import net.sharkbark.cellars.ModConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCellarShelf;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCellarShelf;
 
@@ -161,10 +162,10 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
 		return temperature;
 	}
 
-	private void writeSyncData(NBTTagCompound tagCompound) {
+	private void writeSyncData(NBTTagCompound nbt) {
 		float temp = (lastUpdate < 0) ? -1000 : temperature;
-		tagCompound.setFloat("Temperature", temp);
-		tagCompound.setTag("Items", super.serializeNBT());
+		NBTUtils.setGenericNBTValue(nbt, "Temperature", temp);
+		NBTUtils.setGenericNBTValue(nbt, "Items", super.serializeNBT());
 	}
 
 	private void readSyncData(NBTTagCompound tagCompound) {
@@ -175,10 +176,10 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
 	@Nullable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound tagCompound = new NBTTagCompound();
-		writeToNBT(tagCompound);
-		writeSyncData(tagCompound);
-		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, tagCompound);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		writeSyncData(nbt);
+		return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
 	}
 
 	@Override

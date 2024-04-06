@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -58,12 +59,10 @@ public class EntitySeatOn extends Entity {
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
-	}
+	protected void readEntityFromNBT(@NotNull NBTTagCompound nbt) {}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound) {
-	}
+	protected void writeEntityToNBT(@NotNull NBTTagCompound nbt) {}
 
 	@Override
 	public double getMountedYOffset() {

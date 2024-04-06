@@ -6,6 +6,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 /**
@@ -77,7 +78,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
 	@Override
 	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setLong("pregnant", getPregnantTime());
+		NBTUtils.setGenericNBTValue(nbt, "pregnant", getPregnantTime());
 	}
 
 	@Override

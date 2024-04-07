@@ -90,7 +90,7 @@ public class TEWoodPress extends TileEntityHPHorseBase {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		NBTUtils.setGenericNBTValue(nbt, "currentPressStatus", currentPressStatus);
-		NBTUtils.setGenericNBTValue(nbt, "fluid", tank.writeToNBT(new NBTTagCompound()));
+		NBTUtils.setGenericNBTValue(nbt, "fluid", tank);
 		return super.writeToNBT(nbt);
 	}
 

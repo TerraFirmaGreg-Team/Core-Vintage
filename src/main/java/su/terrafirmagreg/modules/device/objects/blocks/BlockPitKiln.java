@@ -36,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.model.ICustomStateMapper;
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -193,9 +194,10 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomStateMap
 		return state.getActualState(world, pos).getValue(FULL);
 	}
 
+
 	@Override
 	public boolean isBurning(IBlockAccess world, BlockPos pos) {
-		return world.getBlockState(pos).getActualState(world, pos).getValue(LIT);
+		return BlockUtils.getActualState(world, pos).getValue(LIT);
 	}
 
 	@Override
@@ -212,7 +214,7 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomStateMap
 
 	@Override
 	public boolean isFireSource(World world, BlockPos pos, EnumFacing side) {
-		return world.getBlockState(pos).getActualState(world, pos).getValue(LIT);
+		return BlockUtils.getActualState(world, pos).getValue(LIT);
 	}
 
 	@Override

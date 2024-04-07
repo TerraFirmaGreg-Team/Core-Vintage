@@ -8,6 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.BlockDoorBase;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -28,6 +29,8 @@ public class BlockWoodDoor extends BlockDoorBase implements IWoodBlock {
 
 		setSoundType(SoundType.WOOD);
 		disableStats();
+
+		BlockUtils.setFireInfo(this, 5, 20);
 	}
 
 	@Override

@@ -547,12 +547,12 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 	}
 
 	@Override
-	public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
+	public @NotNull Container createContainer(@NotNull InventoryPlayer inventoryPlayer, @NotNull EntityPlayer entityPlayer) {
 		return new ContainerIceBunker(inventoryPlayer, this, entityPlayer);
 	}
 
 	@Override
-	public String getGuiID() {
+	public @NotNull String getGuiID() {
 		return MODID_CELLARS + "ice_bunker";
 	}
 
@@ -562,17 +562,17 @@ public class TEIceBunker extends TileEntityLockableLoot implements IInventory, I
 	}
 
 	@Override
-	protected NonNullList<ItemStack> getItems() {
+	protected @NotNull NonNullList<ItemStack> getItems() {
 		return this.chestContents;
 	}
 
 	@Override
-	public void openInventory(EntityPlayer entityPlayer) {
+	public void openInventory(@NotNull EntityPlayer entityPlayer) {
 		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer p_closeInventory_1_) {
+	public void closeInventory(@NotNull EntityPlayer player) {
 		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
 	}
 

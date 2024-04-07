@@ -327,7 +327,7 @@ public class TEWoodBarrel extends TETickableInventory implements ITickable, ICal
 	@Override
 	@NotNull
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		NBTUtils.setGenericNBTValue(nbt, "tank", tank.writeToNBT(new NBTTagCompound()));
+		NBTUtils.setGenericNBTValue(nbt, "tank", tank);
 		NBTUtils.setGenericNBTValue(nbt, "sealedTick", sealedTick);
 		NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", sealedCalendarTick);
 		NBTUtils.setGenericNBTValue(nbt, "sealed", sealed);

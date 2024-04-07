@@ -234,7 +234,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 		NBTUtils.setGenericNBTValue(nbt, "Variant", this.getVariant());
 		NBTUtils.setGenericNBTValue(nbt, "Strength", this.getStrength());
 		if (!this.horseChest.getStackInSlot(1).isEmpty()) {
-			NBTUtils.setGenericNBTValue(nbt, "DecorItem", this.horseChest.getStackInSlot(1).writeToNBT(new NBTTagCompound()));
+			NBTUtils.setGenericNBTValue(nbt, "DecorItem", this.horseChest.getStackInSlot(1));
 		}
 		NBTUtils.setGenericNBTValue(nbt, "halter", isHalter());
 	}

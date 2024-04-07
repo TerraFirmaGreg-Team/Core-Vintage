@@ -29,7 +29,7 @@
           "model": "tfc:plants/cinnamon_fern_big_short",
           "weight": 2
         }
-	  ]
+      ]
     },
     {
       "when": {
@@ -44,7 +44,7 @@
           "model": "tfc:plants/cinnamon_fern_big",
           "weight": 3
         }
-	  ]
+      ]
     }
   ]
 }

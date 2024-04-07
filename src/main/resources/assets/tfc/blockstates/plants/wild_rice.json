@@ -6,7 +6,7 @@
         "stage": "0"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice_shortest"
+        "model": "tfc:plants/wild_rice_shortest"
       }
     },
     {
@@ -15,7 +15,7 @@
         "stage": "0"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice_shorter"
+        "model": "tfc:plants/wild_rice_shorter"
       }
     },
     {
@@ -24,7 +24,7 @@
         "stage": "0"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice_short"
+        "model": "tfc:plants/wild_rice_short"
       }
     },
     {
@@ -33,7 +33,7 @@
         "stage": "0"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice"
+        "model": "tfc:plants/wild_rice"
       }
     },
     {
@@ -42,7 +42,7 @@
         "stage": "1"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice_shortest"
+        "model": "tfc:plants/wild_rice_shortest"
       }
     },
     {
@@ -51,7 +51,7 @@
         "stage": "1"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice_shorter"
+        "model": "tfc:plants/wild_rice_shorter"
       }
     },
     {
@@ -60,7 +60,7 @@
         "stage": "1"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice_short"
+        "model": "tfc:plants/wild_rice_short"
       }
     },
     {
@@ -69,7 +69,7 @@
         "stage": "1"
       },
       "apply": {
-		"model": "tfc:plants/wild_rice_tuft"
+        "model": "tfc:plants/wild_rice_tuft"
       }
     }
   ]

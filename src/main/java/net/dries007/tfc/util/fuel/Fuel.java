@@ -1,59 +1,61 @@
 package net.dries007.tfc.util.fuel;
 
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.minecraft.item.ItemStack;
 
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+
 public class Fuel {
-	private final IIngredient<ItemStack> ingredient;
-	private final int amount;
-	private final float temperature;
 
-	private final boolean isForgeValid, isBloomeryValid;
+    private final IIngredient<ItemStack> ingredient;
+    private final int amount;
+    private final float temperature;
 
-	public Fuel(IIngredient<ItemStack> ingredient, int amount, float temperature) {
-		this(ingredient, amount, temperature, false, false);
-	}
+    private final boolean isForgeValid, isBloomeryValid;
 
-	public Fuel(IIngredient<ItemStack> ingredient, int amount, float temperature, boolean isForgeValid, boolean isBloomeryValid) {
-		this.ingredient = ingredient;
-		this.amount = amount;
-		this.temperature = temperature;
-		this.isForgeValid = isForgeValid;
-		this.isBloomeryValid = isBloomeryValid;
-	}
+    public Fuel(IIngredient<ItemStack> ingredient, int amount, float temperature) {
+        this(ingredient, amount, temperature, false, false);
+    }
 
-	/**
-	 * Check if at least one itemstack from both fuel obj match
-	 *
-	 * @param fuel the other fuel to compare
-	 * @return true if at least one itemstack is equal
-	 */
-	public boolean matchesInput(Fuel fuel) {
-		for (ItemStack stack : fuel.ingredient.getValidIngredients()) {
-			if (matchesInput(stack)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public Fuel(IIngredient<ItemStack> ingredient, int amount, float temperature, boolean isForgeValid, boolean isBloomeryValid) {
+        this.ingredient = ingredient;
+        this.amount = amount;
+        this.temperature = temperature;
+        this.isForgeValid = isForgeValid;
+        this.isBloomeryValid = isBloomeryValid;
+    }
 
-	public boolean matchesInput(ItemStack stack) {
-		return ingredient.testIgnoreCount(stack);
-	}
+    /**
+     * Check if at least one itemstack from both fuel obj match
+     *
+     * @param fuel the other fuel to compare
+     * @return true if at least one itemstack is equal
+     */
+    public boolean matchesInput(Fuel fuel) {
+        for (ItemStack stack : fuel.ingredient.getValidIngredients()) {
+            if (matchesInput(stack)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public int getAmount() {
-		return amount;
-	}
+    public boolean matchesInput(ItemStack stack) {
+        return ingredient.testIgnoreCount(stack);
+    }
 
-	public float getTemperature() {
-		return temperature;
-	}
+    public int getAmount() {
+        return amount;
+    }
 
-	public boolean isForgeFuel() {
-		return isForgeValid;
-	}
+    public float getTemperature() {
+        return temperature;
+    }
 
-	public boolean isBloomeryFuel() {
-		return isBloomeryValid;
-	}
+    public boolean isForgeFuel() {
+        return isForgeValid;
+    }
+
+    public boolean isBloomeryFuel() {
+        return isBloomeryValid;
+    }
 }

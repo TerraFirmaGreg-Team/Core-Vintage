@@ -3,8 +3,8 @@
   "defaults": {
     "model": "tfg:rock/slab/mossy/half",
     "textures": {
-"overlay": "tfg:blocks/rock/overlay/mossy/cobble",
-"all": "tfg:blocks/rock/cobble/chalk"
+      "overlay": "tfg:blocks/rock/overlay/mossy/cobble",
+      "all": "tfg:blocks/rock/cobble/chalk"
     }
   },
   "variants": {

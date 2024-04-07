@@ -1,42 +1,42 @@
 {
-  "multipart":[
+  "multipart": [
     {
-      "when":{
-        "stage":"0"
+      "when": {
+        "stage": "0"
       },
-      "apply":[
+      "apply": [
         {
-          "model":"tfc:plants/phragmite_0"
+          "model": "tfc:plants/phragmite_0"
         }
       ]
     },
     {
-      "when":{
-        "stage":"1"
+      "when": {
+        "stage": "1"
       },
-      "apply":[
+      "apply": [
         {
-          "model":"tfc:plants/phragmite_1"
+          "model": "tfc:plants/phragmite_1"
         }
       ]
     },
     {
-      "when":{
-        "stage":"2"
+      "when": {
+        "stage": "2"
       },
-      "apply":[
+      "apply": [
         {
-          "model":"tfc:plants/phragmite_2"
+          "model": "tfc:plants/phragmite_2"
         }
       ]
     },
     {
-      "when":{
-        "stage":"3"
+      "when": {
+        "stage": "3"
       },
-      "apply":[
+      "apply": [
         {
-          "model":"tfc:plants/phragmite_3"
+          "model": "tfc:plants/phragmite_3"
         }
       ]
     }

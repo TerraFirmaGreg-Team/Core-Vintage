@@ -1,13 +1,15 @@
 package net.dries007.tfc.client.render.animal;
 
-import net.dries007.tfc.client.model.animal.ModelCoyoteTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCoyoteTFC;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.client.model.animal.ModelCoyoteTFC;
+import net.dries007.tfc.objects.entity.animal.EntityCoyoteTFC;
+
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -15,30 +17,31 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 @SideOnly(Side.CLIENT)
 
 public class RenderCoyoteTFC extends RenderLiving<EntityCoyoteTFC> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/coyote.png");
 
-	public RenderCoyoteTFC(RenderManager renderManager) {
-		super(renderManager, new ModelCoyoteTFC(), 0.7F);
-	}
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/coyote.png");
 
-	@Override
-	public void doRender(@NotNull EntityCoyoteTFC coyote, double par2, double par4, double par6, float par8, float par9) {
-		this.shadowSize = (float) (0.35f + (coyote.getPercentToAdulthood() * 0.35f));
-		super.doRender(coyote, par2, par4, par6, par8, par9);
-	}
+    public RenderCoyoteTFC(RenderManager renderManager) {
+        super(renderManager, new ModelCoyoteTFC(), 0.7F);
+    }
 
-	@Override
-	protected float handleRotationFloat(EntityCoyoteTFC par1EntityLiving, float par2) {
-		return 1.0f;
-	}
+    @Override
+    public void doRender(@NotNull EntityCoyoteTFC coyote, double par2, double par4, double par6, float par8, float par9) {
+        this.shadowSize = (float) (0.35f + (coyote.getPercentToAdulthood() * 0.35f));
+        super.doRender(coyote, par2, par4, par6, par8, par9);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityCoyoteTFC coyoteTFC, float par2) {
-		GlStateManager.scale(1.0f, 1.0f, 1.0f);
-	}
+    @Override
+    protected float handleRotationFloat(EntityCoyoteTFC par1EntityLiving, float par2) {
+        return 1.0f;
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(EntityCoyoteTFC entity) {
-		return TEXTURE;
-	}
+    @Override
+    protected void preRenderCallback(EntityCoyoteTFC coyoteTFC, float par2) {
+        GlStateManager.scale(1.0f, 1.0f, 1.0f);
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(EntityCoyoteTFC entity) {
+        return TEXTURE;
+    }
 }

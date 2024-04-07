@@ -6,7 +6,7 @@
       },
       "apply": {
         "model": "tfc:plants/shrub_dead"
-	  }
+      }
     },
     {
       "when": {
@@ -40,7 +40,7 @@
         {
           "model": "tfc:plants/shrub_a_5",
           "weight": 1
-		},
+        },
         {
           "model": "tfc:plants/shrub_a_6",
           "weight": 1
@@ -64,7 +64,7 @@
         {
           "model": "tfc:plants/shrub_a_11",
           "weight": 1
-		},
+        },
         {
           "model": "tfc:plants/shrub_b_0",
           "weight": 1
@@ -88,7 +88,7 @@
         {
           "model": "tfc:plants/shrub_b_5",
           "weight": 1
-		},
+        },
         {
           "model": "tfc:plants/shrub_b_6",
           "weight": 1
@@ -112,7 +112,7 @@
         {
           "model": "tfc:plants/shrub_b_11",
           "weight": 1
-		},
+        },
         {
           "model": "tfc:plants/shrub_c_0",
           "weight": 1
@@ -136,7 +136,7 @@
         {
           "model": "tfc:plants/shrub_c_5",
           "weight": 1
-		},
+        },
         {
           "model": "tfc:plants/shrub_c_6",
           "weight": 1
@@ -160,7 +160,7 @@
         {
           "model": "tfc:plants/shrub_c_11",
           "weight": 1
-		}
+        }
       ]
     }
   ]

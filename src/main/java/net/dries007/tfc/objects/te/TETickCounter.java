@@ -1,37 +1,39 @@
 package net.dries007.tfc.objects.te;
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.nbt.NBTTagCompound;
+
+import net.dries007.tfc.util.calendar.CalendarTFC;
+
 import org.jetbrains.annotations.NotNull;
 
-
 public class TETickCounter extends TEBase {
-	private long lastUpdateTick;
 
-	public long getTicksSinceUpdate() {
-		return CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick;
-	}
+    private long lastUpdateTick;
 
-	public void resetCounter() {
-		lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
-		markForSync();
-	}
+    public long getTicksSinceUpdate() {
+        return CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick;
+    }
 
-	public void reduceCounter(long amount) {
-		lastUpdateTick += amount;
-		markForSync();
-	}
+    public void resetCounter() {
+        lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+        markForSync();
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		lastUpdateTick = nbt.getLong("tick");
-		super.readFromNBT(nbt);
-	}
+    public void reduceCounter(long amount) {
+        lastUpdateTick += amount;
+        markForSync();
+    }
 
-	@NotNull
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setLong("tick", lastUpdateTick);
-		return super.writeToNBT(nbt);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        lastUpdateTick = nbt.getLong("tick");
+        super.readFromNBT(nbt);
+    }
+
+    @NotNull
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        nbt.setLong("tick", lastUpdateTick);
+        return super.writeToNBT(nbt);
+    }
 }

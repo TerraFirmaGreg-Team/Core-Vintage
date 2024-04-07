@@ -17,7 +17,6 @@
         "model": "tfg:rock/wall/mossy/inventory"
       }
     ],
-    
     "north": {
       "true": {
         "submodel": "tfg:rock/wall/mossy/side"

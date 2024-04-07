@@ -10,19 +10,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
-@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = MODID_TFCF)
+@Mod.EventBusSubscriber(value = { Side.CLIENT }, modid = MODID_TFCF)
 public class ClientProxy extends CommonProxy {
-	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent event) {
-	}
 
-	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-		super.preInit(event);
-	}
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event) {
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 }

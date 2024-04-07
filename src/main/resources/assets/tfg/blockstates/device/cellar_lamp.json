@@ -3,8 +3,8 @@
   "defaults": {
     "model": "tfg:device/cellar_lamp",
     "textures": {
-          "lamp": "tfg:blocks/device/cellar_lamp",
-          "wall": "tfg:blocks/device/cellar_wall"
+      "lamp": "tfg:blocks/device/cellar_lamp",
+      "wall": "tfg:blocks/device/cellar_wall"
     }
   },
   "variants": {
@@ -16,11 +16,21 @@
     ],
     "facing": {
       "north": {},
-      "east":  { "y": 90 },
-      "south": { "y": 180 },
-      "west":  { "y": 270 },
-      "down":  { "x": 90 },
-      "up":    { "x": 270 }
+      "east": {
+        "y": 90
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "down": {
+        "x": 90
+      },
+      "up": {
+        "x": 270
+      }
     }
   }
 }

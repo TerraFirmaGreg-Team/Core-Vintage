@@ -1,9 +1,11 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import su.terrafirmagreg.modules.animal.api.type.IHuntable;
+import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,140 +17,141 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.data.SoundAnimal;
-import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-
 public class EntityPheasantTFC extends su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase implements IHuntable {
-	private static final int DAYS_TO_ADULTHOOD = 24;
 
-	//Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap
-	public float wingRotation;
-	public float destPos;
-	public float oFlapSpeed;
-	public float oFlap;
-	public float wingRotDelta = 1.0F;
+    private static final int DAYS_TO_ADULTHOOD = 24;
 
-	@SuppressWarnings("unused")
-	public EntityPheasantTFC(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
-	}
+    //Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap
+    public float wingRotation;
+    public float destPos;
+    public float oFlapSpeed;
+    public float oFlap;
+    public float wingRotDelta = 1.0F;
 
-	public EntityPheasantTFC(World worldIn, Gender gender, int birthDay) {
-		super(worldIn, gender, birthDay);
-		this.setSize(0.9F, 0.9F);
-	}
+    @SuppressWarnings("unused")
+    public EntityPheasantTFC(World worldIn) {
+        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+    }
 
-	@Override
-	public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-				(biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-			return ConfigTFC.Animals.PHEASANT.rarity;
-		}
-		return 0;
-	}
+    public EntityPheasantTFC(World worldIn, Gender gender, int birthDay) {
+        super(worldIn, gender, birthDay);
+        this.setSize(0.9F, 0.9F);
+    }
 
-	@Override
-	public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
-		return AnimalGroupingRules.ELDER_AND_POPULATION;
-	}
+    @Override
+    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+        BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+        if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
+                (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.TAIGA)) {
+            return ConfigTFC.Animals.PHEASANT.rarity;
+        }
+        return 0;
+    }
 
-	@Override
-	public int getMinGroupSize() {
-		return 1;
-	}
+    @Override
+    public BiConsumer<List<EntityLiving>, Random> getGroupingRules() {
+        return AnimalGroupingRules.ELDER_AND_POPULATION;
+    }
 
-	@Override
-	public int getMaxGroupSize() {
-		return 4;
-	}
+    @Override
+    public int getMinGroupSize() {
+        return 1;
+    }
 
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-		this.oFlap = this.wingRotation;
-		this.oFlapSpeed = this.destPos;
-		this.destPos = (float) ((double) this.destPos + (double) (this.onGround ? -1 : 4) * 0.3D);
-		this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
+    @Override
+    public int getMaxGroupSize() {
+        return 4;
+    }
 
-		if (!this.onGround && this.wingRotDelta < 1.0F) {
-			this.wingRotDelta = 1.0F;
-		}
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        this.oFlap = this.wingRotation;
+        this.oFlapSpeed = this.destPos;
+        this.destPos = (float) ((double) this.destPos + (double) (this.onGround ? -1 : 4) * 0.3D);
+        this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
 
-		this.wingRotDelta = (float) ((double) this.wingRotDelta * 0.9D);
+        if (!this.onGround && this.wingRotDelta < 1.0F) {
+            this.wingRotDelta = 1.0F;
+        }
 
-		if (!this.onGround && this.motionY < 0.0D) {
-			this.motionY *= 0.6D;
-		}
+        this.wingRotDelta = (float) ((double) this.wingRotDelta * 0.9D);
 
-		this.wingRotation += this.wingRotDelta * 2.0F;
-	}
+        if (!this.onGround && this.motionY < 0.0D) {
+            this.motionY *= 0.6D;
+        }
 
-	@Override
-	public double getOldDeathChance() {
-		return 0;
-	}
+        this.wingRotation += this.wingRotDelta * 2.0F;
+    }
 
-	@Override
-	public int getDaysToAdulthood() {
-		return DAYS_TO_ADULTHOOD;
-	}
+    @Override
+    public double getOldDeathChance() {
+        return 0;
+    }
 
-	@Override
-	public int getDaysToElderly() {
-		return 0;
-	}
+    @Override
+    public int getDaysToAdulthood() {
+        return DAYS_TO_ADULTHOOD;
+    }
 
-	@Override
-	public Type getType() {
-		return Type.OVIPAROUS;
-	}
+    @Override
+    public int getDaysToElderly() {
+        return 0;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundAnimal.ANIMAL_PHEASANT_HURT;
-	}
+    @Override
+    public Type getType() {
+        return Type.OVIPAROUS;
+    }
 
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundAnimal.ANIMAL_PHEASANT_DEATH;
-	}
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundAnimal.ANIMAL_PHEASANT_HURT;
+    }
 
-	@Override
-	protected void initEntityAI() {
-		double speedMult = 1.3D;
-		EntityAnimalBase.addWildPreyAI(this, speedMult);
-		EntityAnimalBase.addCommonPreyAI(this, speedMult);
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundAnimal.ANIMAL_PHEASANT_DEATH;
+    }
 
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-	}
+    @Override
+    protected void initEntityAI() {
+        double speedMult = 1.3D;
+        EntityAnimalBase.addWildPreyAI(this, speedMult);
+        EntityAnimalBase.addCommonPreyAI(this, speedMult);
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundAnimal.ANIMAL_PHEASANT_SAY;
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+    }
 
-	@Nullable
-	protected ResourceLocation getLootTable() {
-		return LootTablesAnimal.ANIMALS_PHEASANT;
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundAnimal.ANIMAL_PHEASANT_SAY;
+    }
 
-	@Override
-	protected void playStepSound(BlockPos pos, Block blockIn) {
-		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.14F, 0.9F);
-	}
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTablesAnimal.ANIMALS_PHEASANT;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.14F, 0.9F);
+    }
 }

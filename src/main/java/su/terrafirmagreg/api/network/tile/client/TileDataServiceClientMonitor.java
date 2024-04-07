@@ -1,9 +1,10 @@
 package su.terrafirmagreg.api.network.tile.client;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
+import su.terrafirmagreg.TerraFirmaGregConfig;
+import su.terrafirmagreg.api.network.tile.TileDataServiceLogger;
+import su.terrafirmagreg.api.network.tile.TileDataTracker;
+import su.terrafirmagreg.api.network.tile.spi.ITileData;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Mod;
@@ -11,12 +12,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.TerraFirmaGregConfig;
-import su.terrafirmagreg.api.network.tile.TileDataServiceLogger;
-import su.terrafirmagreg.api.network.tile.TileDataTracker;
-import su.terrafirmagreg.api.network.tile.spi.ITileData;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -25,194 +28,193 @@ import java.util.concurrent.TimeUnit;
 @SideOnly(Side.CLIENT)
 public class TileDataServiceClientMonitor {
 
-	/**
-	 * Monitors all network traffic for all tile data services.
-	 */
-	public static final TileDataServiceClientMonitor TOTAL;
-	private static final short TOTAL_INTERVAL_COUNT = 2 * 60;
-	private static final int CACHE_CLEANUP_INTERVAL_TICKS = 10 * 20;
-	private static final TileDataTrackerUpdateMonitor TRACKER_UPDATE_MONITOR;
-	/**
-	 * Monitors network traffic, indexed by world position.
-	 */
-	private static final LoadingCache<BlockPos, TileDataServiceClientMonitor> PER_POS_TOTAL;
+    /**
+     * Monitors all network traffic for all tile data services.
+     */
+    public static final TileDataServiceClientMonitor TOTAL;
+    private static final short TOTAL_INTERVAL_COUNT = 2 * 60;
+    private static final int CACHE_CLEANUP_INTERVAL_TICKS = 10 * 20;
+    private static final TileDataTrackerUpdateMonitor TRACKER_UPDATE_MONITOR;
+    /**
+     * Monitors network traffic, indexed by world position.
+     */
+    private static final LoadingCache<BlockPos, TileDataServiceClientMonitor> PER_POS_TOTAL;
 
-	private static final CacheLoader<BlockPos, TileDataServiceClientMonitor> CACHE_LOADER = new CacheLoader<BlockPos, TileDataServiceClientMonitor>() {
+    private static final CacheLoader<BlockPos, TileDataServiceClientMonitor> CACHE_LOADER = new CacheLoader<BlockPos, TileDataServiceClientMonitor>() {
 
-		public TileDataServiceClientMonitor load(@NotNull BlockPos pos) {
+        public TileDataServiceClientMonitor load(@NotNull BlockPos pos) {
 
-			return new TileDataServiceClientMonitor(() -> TerraFirmaGregConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
-		}
-	};
+            return new TileDataServiceClientMonitor(() -> TerraFirmaGregConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
+        }
+    };
 
-	private static int cacheCleanupCounter;
+    private static int cacheCleanupCounter;
 
-	static {
-		TRACKER_UPDATE_MONITOR = new TileDataTrackerUpdateMonitor();
+    static {
+        TRACKER_UPDATE_MONITOR = new TileDataTrackerUpdateMonitor();
 
-		TOTAL = new TileDataServiceClientMonitor(() -> TerraFirmaGregConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
+        TOTAL = new TileDataServiceClientMonitor(() -> TerraFirmaGregConfig.TILE_DATA_SERVICE.UPDATE_INTERVAL_TICKS, TOTAL_INTERVAL_COUNT);
 
-		PER_POS_TOTAL = CacheBuilder.newBuilder()
-		                            .maximumSize(1000)
-		                            .expireAfterAccess(10, TimeUnit.MINUTES)
-		                            .build(CACHE_LOADER);
-	}
+        PER_POS_TOTAL = CacheBuilder.newBuilder()
+                .maximumSize(1000)
+                .expireAfterAccess(10, TimeUnit.MINUTES)
+                .build(CACHE_LOADER);
+    }
 
-	// ---------------------------------------------------------------------------
-	// - Events
-	// ---------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
+    // - Events
+    // ---------------------------------------------------------------------------
 
-	private final IntArrayList totalBytesReceivedPerSecond;
-	private final UpdateIntervalProvider updateIntervalTicks;
-	private final int totalIntervalCount;
+    private final IntArrayList totalBytesReceivedPerSecond;
+    private final UpdateIntervalProvider updateIntervalTicks;
+    private final int totalIntervalCount;
 
-	// ---------------------------------------------------------------------------
-	// - Static Accessors
-	// ---------------------------------------------------------------------------
-	private int totalBytesReceived;
-	private short tickCounter;
+    // ---------------------------------------------------------------------------
+    // - Static Accessors
+    // ---------------------------------------------------------------------------
+    private int totalBytesReceived;
+    private short tickCounter;
 
-	// ---------------------------------------------------------------------------
-	// - Monitor Instance
-	// ---------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
+    // - Monitor Instance
+    // ---------------------------------------------------------------------------
 
-	public TileDataServiceClientMonitor(UpdateIntervalProvider updateIntervalTicks, short totalIntervalCount) {
+    public TileDataServiceClientMonitor(UpdateIntervalProvider updateIntervalTicks, short totalIntervalCount) {
 
-		totalBytesReceivedPerSecond = new IntArrayList(totalIntervalCount);
-		this.updateIntervalTicks = updateIntervalTicks;
-		this.totalIntervalCount = totalIntervalCount;
-	}
+        totalBytesReceivedPerSecond = new IntArrayList(totalIntervalCount);
+        this.updateIntervalTicks = updateIntervalTicks;
+        this.totalIntervalCount = totalIntervalCount;
+    }
 
-	@SubscribeEvent
-	public static void onEvent(TickEvent.ClientTickEvent event) {
+    @SubscribeEvent
+    public static void onEvent(TickEvent.ClientTickEvent event) {
 
-		// Update all the monitors when the client ticks, limit phase so it only
-		// updates once.
+        // Update all the monitors when the client ticks, limit phase so it only
+        // updates once.
 
-		if (event.phase == TickEvent.Phase.START) {
+        if (event.phase == TickEvent.Phase.START) {
 
-			if (!Minecraft.getMinecraft().isGamePaused()
-					&& TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED) {
-				TOTAL.update();
+            if (!Minecraft.getMinecraft().isGamePaused()
+                    && TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED) {
+                TOTAL.update();
 
-				for (TileDataServiceClientMonitor value : PER_POS_TOTAL.asMap().values()) {
-					value.update();
-				}
+                for (TileDataServiceClientMonitor value : PER_POS_TOTAL.asMap().values()) {
+                    value.update();
+                }
 
-				TRACKER_UPDATE_MONITOR.update();
-			}
+                TRACKER_UPDATE_MONITOR.update();
+            }
 
-			cacheCleanupCounter += 1;
+            cacheCleanupCounter += 1;
 
-			if (cacheCleanupCounter >= CACHE_CLEANUP_INTERVAL_TICKS) {
-				cacheCleanupCounter = 0;
-				PER_POS_TOTAL.cleanUp();
-			}
-		}
-	}
+            if (cacheCleanupCounter >= CACHE_CLEANUP_INTERVAL_TICKS) {
+                cacheCleanupCounter = 0;
+                PER_POS_TOTAL.cleanUp();
+            }
+        }
+    }
 
-	/**
-	 * Called when a packet from the tile entity data service is received on
-	 * the client.
-	 *
-	 * @param tracker the tracker that received the packet
-	 * @param pos     the pos of the TE
-	 * @param size    the size of the packet's TE update buffer in bytes
-	 */
-	public static void onClientPacketReceived(TileDataTracker tracker, BlockPos pos, int size) {
+    /**
+     * Called when a packet from the tile entity data service is received on the client.
+     *
+     * @param tracker the tracker that received the packet
+     * @param pos     the pos of the TE
+     * @param size    the size of the packet's TE update buffer in bytes
+     */
+    public static void onClientPacketReceived(TileDataTracker tracker, BlockPos pos, int size) {
 
-		if (TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED) {
+        if (TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED) {
 
-			// --- Total ---
+            // --- Total ---
 
-			TOTAL.receiveBytes(size);
+            TOTAL.receiveBytes(size);
 
-			// --- Per Position ---
+            // --- Per Position ---
 
-			TileDataServiceClientMonitor monitor = null;
+            TileDataServiceClientMonitor monitor = null;
 
-			try {
-				monitor = PER_POS_TOTAL.get(pos);
+            try {
+                monitor = PER_POS_TOTAL.get(pos);
 
-			} catch (ExecutionException e) {
-				TileDataServiceLogger.LOGGER.error("", e);
-			}
+            } catch (ExecutionException e) {
+                TileDataServiceLogger.LOGGER.error("", e);
+            }
 
-			if (monitor != null) {
-				monitor.receiveBytes(size);
-			}
-		}
-	}
+            if (monitor != null) {
+                monitor.receiveBytes(size);
+            }
+        }
+    }
 
-	public static void onClientTrackerUpdateReceived(BlockPos pos, Class<? extends ITileData> tileDataClass) {
+    public static void onClientTrackerUpdateReceived(BlockPos pos, Class<? extends ITileData> tileDataClass) {
 
-		if (TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED) {
-			TRACKER_UPDATE_MONITOR.onClientTrackerUpdateReceived(pos, tileDataClass);
-		}
-	}
+        if (TerraFirmaGregConfig.TILE_DATA_SERVICE.ENABLED) {
+            TRACKER_UPDATE_MONITOR.onClientTrackerUpdateReceived(pos, tileDataClass);
+        }
+    }
 
-	@Nullable
-	public static TileDataServiceClientMonitor findMonitorForPosition(BlockPos pos) {
+    @Nullable
+    public static TileDataServiceClientMonitor findMonitorForPosition(BlockPos pos) {
 
-		if (PER_POS_TOTAL.asMap().containsKey(pos)) {
+        if (PER_POS_TOTAL.asMap().containsKey(pos)) {
 
-			try {
-				return PER_POS_TOTAL.get(pos);
+            try {
+                return PER_POS_TOTAL.get(pos);
 
-			} catch (ExecutionException e) {
-				TileDataServiceLogger.LOGGER.error("", e);
-			}
-		}
+            } catch (ExecutionException e) {
+                TileDataServiceLogger.LOGGER.error("", e);
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	public static TileDataTrackerUpdateMonitor getTrackerUpdateMonitor() {
+    public static TileDataTrackerUpdateMonitor getTrackerUpdateMonitor() {
 
-		return TRACKER_UPDATE_MONITOR;
-	}
+        return TRACKER_UPDATE_MONITOR;
+    }
 
-	/**
-	 * Call once per tick to update the monitor.
-	 */
-	public void update() {
+    /**
+     * Call once per tick to update the monitor.
+     */
+    public void update() {
 
-		this.tickCounter += 1;
+        this.tickCounter += 1;
 
-		if (this.tickCounter >= this.updateIntervalTicks.getUpdateInterval()) {
-			this.tickCounter = 0;
-			this.totalBytesReceivedPerSecond.add(0, this.totalBytesReceived);
-			this.totalBytesReceived = 0;
+        if (this.tickCounter >= this.updateIntervalTicks.getUpdateInterval()) {
+            this.tickCounter = 0;
+            this.totalBytesReceivedPerSecond.add(0, this.totalBytesReceived);
+            this.totalBytesReceived = 0;
 
-			if (this.totalBytesReceivedPerSecond.size() > this.totalIntervalCount) {
-				this.totalBytesReceivedPerSecond.removeInt(this.totalBytesReceivedPerSecond.size() - 1);
-			}
-		}
-	}
+            if (this.totalBytesReceivedPerSecond.size() > this.totalIntervalCount) {
+                this.totalBytesReceivedPerSecond.removeInt(this.totalBytesReceivedPerSecond.size() - 1);
+            }
+        }
+    }
 
-	private void receiveBytes(int size) {
+    private void receiveBytes(int size) {
 
-		this.totalBytesReceived += size;
-	}
+        this.totalBytesReceived += size;
+    }
 
-	public int size() {
+    public int size() {
 
-		return this.totalBytesReceivedPerSecond.size();
-	}
+        return this.totalBytesReceivedPerSecond.size();
+    }
 
-	public int get(int index) {
+    public int get(int index) {
 
-		return this.totalBytesReceivedPerSecond.getInt(index);
-	}
+        return this.totalBytesReceivedPerSecond.getInt(index);
+    }
 
-	public int getTotalIntervalCount() {
+    public int getTotalIntervalCount() {
 
-		return this.totalIntervalCount;
-	}
+        return this.totalIntervalCount;
+    }
 
-	interface UpdateIntervalProvider {
+    interface UpdateIntervalProvider {
 
-		short getUpdateInterval();
-	}
+        short getUpdateInterval();
+    }
 
 }

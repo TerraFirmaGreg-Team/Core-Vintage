@@ -1,6 +1,11 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -9,47 +14,44 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import lombok.Getter;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import java.util.List;
 
 @Getter
 public abstract class BlockRock extends BlockBase implements IRockBlock {
 
-	private final RockBlockVariant blockVariant;
-	private final RockType type;
+    private final RockBlockVariant blockVariant;
+    private final RockType type;
 
-	public BlockRock(Material material, RockBlockVariant blockVariant, RockType type) {
-		super(material);
+    public BlockRock(Material material, RockBlockVariant blockVariant, RockType type) {
+        super(material);
 
-		this.blockVariant = blockVariant;
-		this.type = type;
+        this.blockVariant = blockVariant;
+        this.type = type;
 
-		setSoundType(SoundType.STONE);
-		setHarvestLevel("pickaxe", 0);
-	}
+        setSoundType(SoundType.STONE);
+        setHarvestLevel("pickaxe", 0);
+    }
 
-	@Override
-	public void onRegisterOreDict() {
-		OreDictUtils.register(this, blockVariant);
-	}
+    public BlockRock(RockBlockVariant blockVariant, RockType type) {
+        this(Material.ROCK, blockVariant, type);
+    }
 
-	public BlockRock(RockBlockVariant blockVariant, RockType type) {
-		this(Material.ROCK, blockVariant, type);
-	}
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, blockVariant);
+    }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-
-		tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getCategory().getLocalizedName());
-	}
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getCategory().getLocalizedName());
+    }
 }

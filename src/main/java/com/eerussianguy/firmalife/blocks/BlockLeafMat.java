@@ -1,12 +1,5 @@
 package com.eerussianguy.firmalife.blocks;
 
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
-import com.eerussianguy.firmalife.te.TELeafMat;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -26,120 +19,128 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+
+import com.eerussianguy.firmalife.recipe.DryingRecipe;
+import com.eerussianguy.firmalife.te.TELeafMat;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.util.Helpers;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-
 @MethodsReturnNonnullByDefault
 public class BlockLeafMat extends Block implements IItemSize {
-	public static final AxisAlignedBB MAT_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 
-	public BlockLeafMat() {
-		super(Material.PLANTS, MapColor.GREEN);
-		setHardness(1.0F);
-		setResistance(1.0F);
-		setLightOpacity(0);
-		setSoundType(SoundType.PLANT);
-		setTickRandomly(true);
-	}
+    public static final AxisAlignedBB MAT_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			ItemStack held = player.getHeldItem(hand);
-			if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) return false;
-			TELeafMat te = Helpers.getTE(world, pos, TELeafMat.class);
-			if (te != null) {
-				IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-				if (inventory != null) {
-					ItemStack tryStack = new ItemStack(held.getItem(), 1);
-					if (DryingRecipe.get(tryStack) != null && inventory.getStackInSlot(0).isEmpty()) {
-						ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
-						ItemHandlerHelper.giveItemToPlayer(player, leftover);
-						te.start();
-						te.markForSync();
-						return true;
-					}
-					if (held.isEmpty() && player.isSneaking()) {
-						ItemStack takeStack = inventory.extractItem(0, 1, false);
-						Helpers.spawnItemStack(world, pos, takeStack);
-						te.deleteSlot();
-						te.clear();
-						te.markForSync();
-					}
-				}
-			}
-		}
-		return true;
-	}
+    public BlockLeafMat() {
+        super(Material.PLANTS, MapColor.GREEN);
+        setHardness(1.0F);
+        setResistance(1.0F);
+        setLightOpacity(0);
+        setSoundType(SoundType.PLANT);
+        setTickRandomly(true);
+    }
 
-	@Override
-	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		if (worldIn.isRainingAt(pos.up())) {
-			TELeafMat te = Helpers.getTE(worldIn, pos, TELeafMat.class);
-			if (te != null) {
-				te.rain();
-			}
-		}
-	}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
+        if (!world.isRemote) {
+            ItemStack held = player.getHeldItem(hand);
+            if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) return false;
+            TELeafMat te = Helpers.getTE(world, pos, TELeafMat.class);
+            if (te != null) {
+                IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                if (inventory != null) {
+                    ItemStack tryStack = new ItemStack(held.getItem(), 1);
+                    if (DryingRecipe.get(tryStack) != null && inventory.getStackInSlot(0).isEmpty()) {
+                        ItemStack leftover = inventory.insertItem(0, held.splitStack(1), false);
+                        ItemHandlerHelper.giveItemToPlayer(player, leftover);
+                        te.start();
+                        te.markForSync();
+                        return true;
+                    }
+                    if (held.isEmpty() && player.isSneaking()) {
+                        ItemStack takeStack = inventory.extractItem(0, 1, false);
+                        Helpers.spawnItemStack(world, pos, takeStack);
+                        te.deleteSlot();
+                        te.clear();
+                        te.markForSync();
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		TELeafMat te = Helpers.getTE(world, pos, TELeafMat.class);
-		if (te != null) {
-			te.onBreakBlock(world, pos, state);
-		}
-		super.breakBlock(world, pos, state);
-	}
+    @Override
+    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+        if (worldIn.isRainingAt(pos.up())) {
+            TELeafMat te = Helpers.getTE(worldIn, pos, TELeafMat.class);
+            if (te != null) {
+                te.rain();
+            }
+        }
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TELeafMat te = Helpers.getTE(world, pos, TELeafMat.class);
+        if (te != null) {
+            te.onBreakBlock(world, pos, state);
+        }
+        super.breakBlock(world, pos, state);
+    }
 
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public @NotNull Size getSize(@NotNull ItemStack stack) {
-		return Size.SMALL;
-	}
+    @Override
+    public @NotNull Size getSize(@NotNull ItemStack stack) {
+        return Size.SMALL;
+    }
 
+    @Override
+    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+        return Weight.LIGHT;
+    }
 
-	@Override
-	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-		return Weight.LIGHT;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    @NotNull
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return MAT_SHAPE;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	@NotNull
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return MAT_SHAPE;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    @NotNull
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	@NotNull
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.MODEL;
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return BlockFaceShape.UNDEFINED;
-	}
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
 
-	@Override
-	public boolean hasTileEntity(IBlockState state) {
-		return true;
-	}
-
-	@Nullable
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TELeafMat();
-	}
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TELeafMat();
+    }
 }

@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfc:plants/seashells_0",
     "textures": {
-	  "particle": "tfc:blocks/stonetypes/raw/chalk",
+      "particle": "tfc:blocks/stonetypes/raw/chalk",
       "andesite": "tfc:blocks/stonetypes/raw/andesite",
       "chalk": "tfc:blocks/stonetypes/raw/chalk",
       "chert": "tfc:blocks/stonetypes/raw/chert",

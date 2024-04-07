@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/mylonite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/mylonite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/mylonite",
+      "count": 4
+    }
+    }

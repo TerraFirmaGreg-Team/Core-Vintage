@@ -1,11 +1,5 @@
 package tfctech.objects.blocks.devices;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,136 +20,143 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.util.Helpers;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize {
 
-	public BlockSmelteryCauldron() {
-		super(Material.IRON);
-		setHardness(3.0F);
-		setSoundType(SoundType.STONE);
-		setHarvestLevel("pickaxe", 0);
-		setDefaultState(getBlockState().getBaseState().withProperty(LIT, false).withProperty(FACING, EnumFacing.NORTH));
-	}
+    public BlockSmelteryCauldron() {
+        super(Material.IRON);
+        setHardness(3.0F);
+        setSoundType(SoundType.STONE);
+        setHarvestLevel("pickaxe", 0);
+        setDefaultState(getBlockState().getBaseState().withProperty(LIT, false).withProperty(FACING, EnumFacing.NORTH));
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	@NotNull
-	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState()
-		           .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-		           .withProperty(LIT, meta / 4 % 2 != 0);
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    @NotNull
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState()
+                .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+                .withProperty(LIT, meta / 4 % 2 != 0);
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getHorizontalIndex()
-				+ (state.getValue(LIT) ? 4 : 0);
-	}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getHorizontalIndex()
+                + (state.getValue(LIT) ? 4 : 0);
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@SuppressWarnings("deprecation")
-	@NotNull
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return FULL_BLOCK_AABB;
-	}
+    @SuppressWarnings("deprecation")
+    @NotNull
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return FULL_BLOCK_AABB;
+    }
 
-	@Override
-	@NotNull
-	@SuppressWarnings("deprecation")
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return face == EnumFacing.UP ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-	}
+    @Override
+    @NotNull
+    @SuppressWarnings("deprecation")
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return face == EnumFacing.UP ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		TESmelteryCauldron te = Helpers.getTE(worldIn, pos, TESmelteryCauldron.class);
-		if (te != null) {
-			te.onBreakBlock(worldIn, pos, state);
-		}
-		super.breakBlock(worldIn, pos, state);
-	}
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TESmelteryCauldron te = Helpers.getTE(worldIn, pos, TESmelteryCauldron.class);
+        if (te != null) {
+            te.onBreakBlock(worldIn, pos, state);
+        }
+        super.breakBlock(worldIn, pos, state);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!player.isSneaking()) {
-			if (!world.isRemote) {
-				if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
-					TESmelteryCauldron smeltery = Helpers.getTE(world, pos, TESmelteryCauldron.class);
-					ItemStack held = player.getHeldItem(hand);
-					if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-						IFluidHandler fluidHandler = smeltery.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-						if (fluidHandler != null) {
-							if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
-								held = player.getHeldItem(hand); // Forge update item in hand
-								IItemHeat cap = held.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-								if (cap != null) {
-									cap.setTemperature(smeltery.getTemp());
-								}
-							}
-						}
-					} else {
-						TechGuiHandler.openGui(world, pos, player, TechGuiHandler.Type.SMELTERY_CAULDRON);
-					}
-				} else {
-					player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
-				}
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
+                                    float hitY, float hitZ) {
+        if (!player.isSneaking()) {
+            if (!world.isRemote) {
+                if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
+                    TESmelteryCauldron smeltery = Helpers.getTE(world, pos, TESmelteryCauldron.class);
+                    ItemStack held = player.getHeldItem(hand);
+                    if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+                        IFluidHandler fluidHandler = smeltery.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+                        if (fluidHandler != null) {
+                            if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
+                                held = player.getHeldItem(hand); // Forge update item in hand
+                                IItemHeat cap = held.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                                if (cap != null) {
+                                    cap.setTemperature(smeltery.getTemp());
+                                }
+                            }
+                        }
+                    } else {
+                        TechGuiHandler.openGui(world, pos, player, TechGuiHandler.Type.SMELTERY_CAULDRON);
+                    }
+                } else {
+                    player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@NotNull
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, LIT, FACING);
-	}
+    @NotNull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, LIT, FACING);
+    }
 
-	@Override
-	public boolean hasTileEntity(IBlockState state) {
-		return true;
-	}
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
 
-	@Nullable
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TESmelteryCauldron();
-	}
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TESmelteryCauldron();
+    }
 
-	@NotNull
-	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-	}
+    @NotNull
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+                                            EntityLivingBase placer, EnumHand hand) {
+        return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    }
 
+    @Override
+    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+        return Size.LARGE;
+    }
 
-	@Override
-	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-		return Size.LARGE;
-	}
-
-
-	@Override
-	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-		return Weight.MEDIUM;
-	}
+    @Override
+    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+        return Weight.MEDIUM;
+    }
 }

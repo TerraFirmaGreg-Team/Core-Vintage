@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/rocksalt"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/rocksalt",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/rocksalt",
+      "count": 4
+    }
+    }

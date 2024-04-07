@@ -2,14 +2,14 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-	  "side": "tfctech:blocks/devices/electric_forge/side",
-	  "front": "tfctech:blocks/devices/electric_forge/front",
+      "side": "tfctech:blocks/devices/electric_forge/side",
+      "front": "tfctech:blocks/devices/electric_forge/front",
       "back": "tfctech:blocks/devices/electric_forge/back",
       "coils": "tfctech:blocks/devices/electric_forge/coils",
       "casing": "tfctech:blocks/devices/electric_forge/casing",
       "box": "tfctech:blocks/devices/electric_forge/box",
       "particle": "tfctech:blocks/devices/electric_forge/back"
-	},
+    },
     "model": "tfctech:electric_forge"
   },
   "variants": {
@@ -17,17 +17,17 @@
       "true": {
         "textures": {
           "front": "tfctech:blocks/devices/electric_forge/front_on",
-		  "coils": "tfctech:blocks/devices/electric_forge/coils_on"
+          "coils": "tfctech:blocks/devices/electric_forge/coils_on"
         }
       },
       "false": {
         "textures": {
           "front": "tfctech:blocks/devices/electric_forge/front",
-		  "coils": "tfctech:blocks/devices/electric_forge/coils"
+          "coils": "tfctech:blocks/devices/electric_forge/coils"
         }
       }
     },
-	"facing": {
+    "facing": {
       "south": {
         "y": 180
       },

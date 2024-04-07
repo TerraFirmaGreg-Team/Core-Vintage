@@ -10,7 +10,7 @@
   "variants": {
     "normal": [
       {
-	  }
+      }
     ],
     "inventory": {
       "model": "firmalife:item/cinnamon_sapling"

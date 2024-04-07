@@ -1,130 +1,132 @@
 package net.dries007.tfc.api.types;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.util.Helpers;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-
 @GameRegistry.ObjectHolder(MODID_TFC)
 public class Ore extends IForgeRegistryEntry.Impl<Ore> {
-	public static final Ore LIMONITE = Helpers.getNull();
-	public static final Ore MALACHITE = Helpers.getNull();
-	public static final Ore HEMATITE = Helpers.getNull();
 
-	private final boolean graded;
-	private final Metal metal;
-	private final boolean canMelt;
-	private final double chunkChance, panChance;
+    public static final Ore LIMONITE = Helpers.getNull();
+    public static final Ore MALACHITE = Helpers.getNull();
+    public static final Ore HEMATITE = Helpers.getNull();
 
-	/**
-	 * Creates a registry object for an ore type
-	 *
-	 * @param name        The registry name of the ore
-	 * @param metal       The metal, or null if it's a non-metal ore
-	 * @param canMelt     If the metal can be melted directly from the ore
-	 * @param chunkChance the chance a chunk contains this ore when gold panning.
-	 * @param panChance   the chance to drop this ore when gold panning
-	 */
-	public Ore(ResourceLocation name, @Nullable Metal metal, boolean canMelt, double chunkChance, double panChance) {
-		this.graded = (metal != null);
-		this.metal = metal;
-		this.canMelt = canMelt;
-		this.chunkChance = chunkChance;
-		this.panChance = panChance;
+    private final boolean graded;
+    private final Metal metal;
+    private final boolean canMelt;
+    private final double chunkChance, panChance;
 
-		setRegistryName(name);
-	}
+    /**
+     * Creates a registry object for an ore type
+     *
+     * @param name        The registry name of the ore
+     * @param metal       The metal, or null if it's a non-metal ore
+     * @param canMelt     If the metal can be melted directly from the ore
+     * @param chunkChance the chance a chunk contains this ore when gold panning.
+     * @param panChance   the chance to drop this ore when gold panning
+     */
+    public Ore(ResourceLocation name, @Nullable Metal metal, boolean canMelt, double chunkChance, double panChance) {
+        this.graded = (metal != null);
+        this.metal = metal;
+        this.canMelt = canMelt;
+        this.chunkChance = chunkChance;
+        this.panChance = panChance;
 
-	public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt, double chunkChance, double panChance) {
-		this(name, TFCRegistries.METALS.getValue(metal), canMelt, chunkChance, panChance);
-	}
+        setRegistryName(name);
+    }
 
-	public Ore(ResourceLocation name, @NotNull ResourceLocation metal) {
-		this(name, TFCRegistries.METALS.getValue(metal), true, 0, 0);
-	}
+    public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt, double chunkChance, double panChance) {
+        this(name, TFCRegistries.METALS.getValue(metal), canMelt, chunkChance, panChance);
+    }
 
-	public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt) {
-		this(name, TFCRegistries.METALS.getValue(metal), canMelt, 0, 0);
-	}
+    public Ore(ResourceLocation name, @NotNull ResourceLocation metal) {
+        this(name, TFCRegistries.METALS.getValue(metal), true, 0, 0);
+    }
 
-	public Ore(ResourceLocation name, @NotNull ResourceLocation metal, double chunkChance, double panChance) {
-		this(name, TFCRegistries.METALS.getValue(metal), true, chunkChance, panChance);
-	}
+    public Ore(ResourceLocation name, @NotNull ResourceLocation metal, boolean canMelt) {
+        this(name, TFCRegistries.METALS.getValue(metal), canMelt, 0, 0);
+    }
 
-	public Ore(ResourceLocation name) {
-		this(name, (Metal) null, false, 0, 0);
-	}
+    public Ore(ResourceLocation name, @NotNull ResourceLocation metal, double chunkChance, double panChance) {
+        this(name, TFCRegistries.METALS.getValue(metal), true, chunkChance, panChance);
+    }
 
-	public boolean isGraded() {
-		return graded;
-	}
+    public Ore(ResourceLocation name) {
+        this(name, (Metal) null, false, 0, 0);
+    }
 
-	public boolean canPan() {
-		return chunkChance > 0;
-	}
+    public boolean isGraded() {
+        return graded;
+    }
 
-	public double getPanChance() {
-		return panChance;
-	}
+    public boolean canPan() {
+        return chunkChance > 0;
+    }
 
-	public double getChunkChance() {
-		return chunkChance;
-	}
+    public double getPanChance() {
+        return panChance;
+    }
 
-	@Nullable
-	public Metal getMetal() {
-		return metal;
-	}
+    public double getChunkChance() {
+        return chunkChance;
+    }
 
-	public boolean canMelt() {
-		return canMelt;
-	}
+    @Nullable
+    public Metal getMetal() {
+        return metal;
+    }
 
-	@Override
-	public String toString() {
-		//noinspection ConstantConditions
-		return getRegistryName().getPath();
-	}
+    public boolean canMelt() {
+        return canMelt;
+    }
 
-	public enum Grade implements IStringSerializable {
-		NORMAL,
-		POOR,
-		RICH;
+    @Override
+    public String toString() {
+        //noinspection ConstantConditions
+        return getRegistryName().getPath();
+    }
 
-		private static final Grade[] VALUES = values();
+    public enum Grade implements IStringSerializable {
+        NORMAL,
+        POOR,
+        RICH;
 
-		@NotNull
-		public static Grade valueOf(int value) {
-			return value < 0 || value >= VALUES.length ? NORMAL : VALUES[value];
-		}
+        private static final Grade[] VALUES = values();
 
-		public int getSmeltAmount() {
-			switch (this) {
-				case POOR:
-					return ConfigTFC.General.MISC.poorOreMetalAmount;
-				case RICH:
-					return ConfigTFC.General.MISC.richOreMetalAmount;
-				case NORMAL:
-				default:
-					return ConfigTFC.General.MISC.normalOreMetalAmount;
-			}
-		}
+        @NotNull
+        public static Grade valueOf(int value) {
+            return value < 0 || value >= VALUES.length ? NORMAL : VALUES[value];
+        }
 
-		@Override
-		public String getName() {
-			return this.name().toLowerCase();
-		}
+        public int getSmeltAmount() {
+            switch (this) {
+                case POOR:
+                    return ConfigTFC.General.MISC.poorOreMetalAmount;
+                case RICH:
+                    return ConfigTFC.General.MISC.richOreMetalAmount;
+                case NORMAL:
+                default:
+                    return ConfigTFC.General.MISC.normalOreMetalAmount;
+            }
+        }
 
-		public int getMeta() {
-			return this.ordinal();
-		}
-	}
+        @Override
+        public String getName() {
+            return this.name().toLowerCase();
+        }
+
+        public int getMeta() {
+            return this.ordinal();
+        }
+    }
 }

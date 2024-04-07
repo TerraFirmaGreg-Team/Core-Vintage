@@ -14,12 +14,12 @@
     "inventory": [
       {}
     ],
-"state": {
-  "normal": {},
-  "flowering": {},
-  "fruit": {},
-  "autumn": {},
-  "winter": {}
-}
+    "state": {
+      "normal": {},
+      "flowering": {},
+      "fruit": {},
+      "autumn": {},
+      "winter": {}
+    }
   }
 }

@@ -1,7 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import mcp.MethodsReturnNonnullByDefault;
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,32 +13,34 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import su.terrafirmagreg.api.util.BlockUtils;
+
+import com.eerussianguy.firmalife.registry.ItemsFL;
+import mcp.MethodsReturnNonnullByDefault;
 
 import java.util.Random;
 
-
 @MethodsReturnNonnullByDefault
 public class BlockGreenhouseDoor extends BlockDoor {
-	public BlockGreenhouseDoor() {
-		super(Material.WOOD);
-		this.setSoundType(SoundType.METAL);
-		this.setHardness(3.0F);
-		this.disableStats();
-		BlockUtils.setFireInfo(this, 5, 20);
-	}
 
-	public Item getItem() {
-		return ItemsFL.ITEM_GREENHOUSE_DOOR;
-	}
+    public BlockGreenhouseDoor() {
+        super(Material.WOOD);
+        this.setSoundType(SoundType.METAL);
+        this.setHardness(3.0F);
+        this.disableStats();
+        BlockUtils.setFireInfo(this, 5, 20);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : this.getItem();
-	}
+    public Item getItem() {
+        return ItemsFL.ITEM_GREENHOUSE_DOOR;
+    }
 
-	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this.getItem());
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : this.getItem();
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this.getItem());
+    }
 }

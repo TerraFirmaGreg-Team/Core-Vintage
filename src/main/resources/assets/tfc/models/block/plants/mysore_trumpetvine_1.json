@@ -3,6 +3,6 @@
   "textures": {
     "particle": "tfc:blocks/plants/mysore_trumpetvine/mysore_trumpetvine_1",
     "layer0": "tfc:blocks/plants/mysore_trumpetvine/mysore_trumpetvine_1",
-	"overlay": "tfc:blocks/plants/mysore_trumpetvine/mysore_trumpetvine_1b"
+    "overlay": "tfc:blocks/plants/mysore_trumpetvine/mysore_trumpetvine_1b"
   }
 }

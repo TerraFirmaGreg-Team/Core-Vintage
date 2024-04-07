@@ -1,5 +1,12 @@
 package se.gory_moon.horsepower.jei;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.google.common.collect.ImmutableList;
 import mezz.jei.api.gui.IGuiIngredientGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -9,12 +16,6 @@ import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.api.recipe.wrapper.ICustomCraftingRecipeWrapper;
 import mezz.jei.api.recipe.wrapper.IShapedCraftingRecipeWrapper;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.oredict.OreDictionary;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.blocks.BlockChopper;
 import se.gory_moon.horsepower.blocks.BlockHPChoppingBase;
@@ -25,143 +26,144 @@ import java.util.List;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapper, ICustomCraftingRecipeWrapper {
-	private final ShapedChoppingRecipe recipe;
-	private final int width;
-	private final int height;
-	private final List<List<ItemStack>> outputs;
 
-	public ShapedChoppingCraftingWrapper(ShapedChoppingRecipe recipe) {
-		this.recipe = recipe;
+    private final ShapedChoppingRecipe recipe;
+    private final int width;
+    private final int height;
+    private final List<List<ItemStack>> outputs;
 
-		for (Object input : this.recipe.getIngredients()) {
-			if (input instanceof ItemStack) {
-				ItemStack itemStack = (ItemStack) input;
-				if (itemStack.getCount() != 1) {
-					itemStack.setCount(1);
-				}
-			}
-		}
-		this.width = recipe.getWidth();
-		this.height = recipe.getHeight();
+    public ShapedChoppingCraftingWrapper(ShapedChoppingRecipe recipe) {
+        this.recipe = recipe;
 
-		ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
-		for (ItemStack stack : recipe.outputBlocks) {
-			BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(recipe.getSimpleRecipeOutput()
-			                                                                               .getItem());
-			if (!Configs.general.useDynamicCrafting && !MODID_TFC.equals(stack.getItem()
-			                                                                  .getRegistryName()
-			                                                                  .getNamespace())) {
-				builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
-				                                                             .getCount(), new ItemStack(Blocks.LOG)));
-				break;
-			}
-			if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-				for (ItemStack sub : HorsePowerPlugin.jeiHelpers.getStackHelper().getSubtypes(stack)) {
-					builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
-					                                                             .getCount(), sub));
-				}
-			} else if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase) {
-				NonNullList<ItemStack> stacks = NonNullList.create();
-				Block.getBlockFromItem(stack.getItem()).getSubBlocks(null, stacks);
-				for (ItemStack sub : stacks) {
-					builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
-					                                                             .getCount(), sub));
-				}
-			} else {
-				builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
-				                                                             .getCount(), stack));
-			}
-		}
-		outputs = ImmutableList.of(builder.build());
-	}
+        for (Object input : this.recipe.getIngredients()) {
+            if (input instanceof ItemStack) {
+                ItemStack itemStack = (ItemStack) input;
+                if (itemStack.getCount() != 1) {
+                    itemStack.setCount(1);
+                }
+            }
+        }
+        this.width = recipe.getWidth();
+        this.height = recipe.getHeight();
 
-	@Override
-	public void getIngredients(IIngredients ingredients) {
-		IStackHelper stackHelper = HorsePowerPlugin.jeiHelpers.getStackHelper();
+        ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
+        for (ItemStack stack : recipe.outputBlocks) {
+            BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(recipe.getSimpleRecipeOutput()
+                    .getItem());
+            if (!Configs.general.useDynamicCrafting && !MODID_TFC.equals(stack.getItem()
+                    .getRegistryName()
+                    .getNamespace())) {
+                builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
+                        .getCount(), new ItemStack(Blocks.LOG)));
+                break;
+            }
+            if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+                for (ItemStack sub : HorsePowerPlugin.jeiHelpers.getStackHelper().getSubtypes(stack)) {
+                    builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
+                            .getCount(), sub));
+                }
+            } else if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase) {
+                NonNullList<ItemStack> stacks = NonNullList.create();
+                Block.getBlockFromItem(stack.getItem()).getSubBlocks(null, stacks);
+                for (ItemStack sub : stacks) {
+                    builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
+                            .getCount(), sub));
+                }
+            } else {
+                builder.add(BlockHPChoppingBase.createItemStack(block, recipe.getSimpleRecipeOutput()
+                        .getCount(), stack));
+            }
+        }
+        outputs = ImmutableList.of(builder.build());
+    }
 
-		List<List<ItemStack>> inputs = stackHelper.expandRecipeItemStackInputs(recipe.getIngredients());
-		ingredients.setInputLists(ItemStack.class, inputs);
+    @Override
+    public void getIngredients(IIngredients ingredients) {
+        IStackHelper stackHelper = HorsePowerPlugin.jeiHelpers.getStackHelper();
 
-		if (!outputs.isEmpty())
-			ingredients.setOutputLists(ItemStack.class, outputs);
-	}
+        List<List<ItemStack>> inputs = stackHelper.expandRecipeItemStackInputs(recipe.getIngredients());
+        ingredients.setInputLists(ItemStack.class, inputs);
 
-	@Override
-	public int getWidth() {
-		return width;
-	}
+        if (!outputs.isEmpty())
+            ingredients.setOutputLists(ItemStack.class, outputs);
+    }
 
-	@Override
-	public int getHeight() {
-		return height;
-	}
+    @Override
+    public int getWidth() {
+        return width;
+    }
 
-	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IIngredients ingredients) {
-		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
+    @Override
+    public int getHeight() {
+        return height;
+    }
 
-		List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
-		List<ItemStack> outputs = ingredients.getOutputs(ItemStack.class).get(0);
+    @Override
+    public void setRecipe(IRecipeLayout recipeLayout, IIngredients ingredients) {
+        IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-		// determine the focused stack
-		IFocus<?> ifocus = recipeLayout.getFocus();
-		Object focusObj = ifocus.getValue();
+        List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
+        List<ItemStack> outputs = ingredients.getOutputs(ItemStack.class).get(0);
 
-		// if the thing in focus is an itemstack
-		if (focusObj instanceof ItemStack) {
-			IGuiIngredientGroup<ItemStack> guiIngredients = recipeLayout.getIngredientsGroup(ItemStack.class);
-			ItemStack focus = (ItemStack) focusObj;
-			IFocus.Mode mode = ifocus.getMode();
+        // determine the focused stack
+        IFocus<?> ifocus = recipeLayout.getFocus();
+        Object focusObj = ifocus.getValue();
 
-			// input means we clicked on an ingredient, make sure it is one that affects the base
-			if (mode == IFocus.Mode.INPUT && isOutputBlock(focus)) {
-				// first, get the output recipe
-				BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(recipe.getSimpleRecipeOutput()
-				                                                                               .getItem());
+        // if the thing in focus is an itemstack
+        if (focusObj instanceof ItemStack) {
+            IGuiIngredientGroup<ItemStack> guiIngredients = recipeLayout.getIngredientsGroup(ItemStack.class);
+            ItemStack focus = (ItemStack) focusObj;
+            IFocus.Mode mode = ifocus.getMode();
 
-				// then create a stack with the focus item (which we already validated above)
-				ItemStack outputFocus = BlockChopper.createItemStack(block, 1, focus);
+            // input means we clicked on an ingredient, make sure it is one that affects the base
+            if (mode == IFocus.Mode.INPUT && isOutputBlock(focus)) {
+                // first, get the output recipe
+                BlockHPChoppingBase block = (BlockHPChoppingBase) Block.getBlockFromItem(recipe.getSimpleRecipeOutput()
+                        .getItem());
 
-				// and finally, set the focus override for the recipe
-				guiIngredients.setOverrideDisplayFocus(HorsePowerPlugin.recipeRegistry.createFocus(IFocus.Mode.OUTPUT, outputFocus));
-			}
+                // then create a stack with the focus item (which we already validated above)
+                ItemStack outputFocus = BlockChopper.createItemStack(block, 1, focus);
 
-			// if we clicked the chopping block, remove all items which affect the base textures that are not the base item
-			else if (mode == IFocus.Mode.OUTPUT) {
-				// so determine the base
-				ItemStack base = new ItemStack(focus.hasTagCompound() ? focus.getTagCompound()
-				                                                             .getCompoundTag("textureBlock") : new NBTTagCompound());
-				if (Block.getBlockFromItem(recipe.outputBlocks.get(0).getItem()) instanceof BlockHPChoppingBase) {
-					base = recipe.outputBlocks.get(0).copy();
-					NBTTagCompound tag = new NBTTagCompound();
-					tag.setTag("textureBlock", focus.hasTagCompound() ? focus.getTagCompound()
-					                                                         .getCompoundTag("textureBlock") : new NBTTagCompound());
-					base.setTagCompound(tag);
-				}
-				if (!base.isEmpty()) {
-					// and loop through all slots removing leg affecting inputs which don't match
-					guiIngredients.setOverrideDisplayFocus(HorsePowerPlugin.recipeRegistry.createFocus(IFocus.Mode.INPUT, base));
-				}
-			}
-		}
+                // and finally, set the focus override for the recipe
+                guiIngredients.setOverrideDisplayFocus(HorsePowerPlugin.recipeRegistry.createFocus(IFocus.Mode.OUTPUT, outputFocus));
+            }
 
-		// add the itemstacks to the grid
-		HorsePowerPlugin.craftingGridHelper.setInputs(guiItemStacks, inputs, this.getWidth(), this.getHeight());
-		recipeLayout.getItemStacks().set(0, outputs);
-	}
+            // if we clicked the chopping block, remove all items which affect the base textures that are not the base item
+            else if (mode == IFocus.Mode.OUTPUT) {
+                // so determine the base
+                ItemStack base = new ItemStack(focus.hasTagCompound() ? focus.getTagCompound()
+                        .getCompoundTag("textureBlock") : new NBTTagCompound());
+                if (Block.getBlockFromItem(recipe.outputBlocks.get(0).getItem()) instanceof BlockHPChoppingBase) {
+                    base = recipe.outputBlocks.get(0).copy();
+                    NBTTagCompound tag = new NBTTagCompound();
+                    tag.setTag("textureBlock", focus.hasTagCompound() ? focus.getTagCompound()
+                            .getCompoundTag("textureBlock") : new NBTTagCompound());
+                    base.setTagCompound(tag);
+                }
+                if (!base.isEmpty()) {
+                    // and loop through all slots removing leg affecting inputs which don't match
+                    guiIngredients.setOverrideDisplayFocus(HorsePowerPlugin.recipeRegistry.createFocus(IFocus.Mode.INPUT, base));
+                }
+            }
+        }
 
-	private boolean isOutputBlock(ItemStack stack) {
-		if (stack.isEmpty()) {
-			return false;
-		}
+        // add the itemstacks to the grid
+        HorsePowerPlugin.craftingGridHelper.setInputs(guiItemStacks, inputs, this.getWidth(), this.getHeight());
+        recipeLayout.getItemStacks().set(0, outputs);
+    }
 
-		for (ItemStack output : recipe.outputBlocks) {
-			// if the item matches the oredict entry, it is an output block
-			if (OreDictionary.itemMatches(output, stack, false)) {
-				return true;
-			}
-		}
+    private boolean isOutputBlock(ItemStack stack) {
+        if (stack.isEmpty()) {
+            return false;
+        }
 
-		return false;
-	}
+        for (ItemStack output : recipe.outputBlocks) {
+            // if the item matches the oredict entry, it is an output block
+            if (OreDictionary.itemMatches(output, stack, false)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

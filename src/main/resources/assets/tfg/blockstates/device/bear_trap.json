@@ -14,7 +14,7 @@
       {}
     ],
     "buried": {
-      "true" : {
+      "true": {
         "model": "tfg:device/bear_trap/buried"
       },
       "false": {}

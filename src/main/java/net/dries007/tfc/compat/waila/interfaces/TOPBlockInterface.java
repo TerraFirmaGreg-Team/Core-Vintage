@@ -1,7 +1,5 @@
 package net.dries007.tfc.compat.waila.interfaces;
 
-import mcjty.theoneprobe.api.*;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,87 +9,97 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import mcjty.theoneprobe.api.ElementAlignment;
+import mcjty.theoneprobe.api.IBlockDisplayOverride;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.TextStyleClass;
+import net.dries007.tfc.TerraFirmaCraft;
+
 import java.util.List;
 
 /**
  * Does the direct "translation" from IWailaBlock to The One Probe
  */
 public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverride {
-	protected final IWailaBlock internal;
 
-	public TOPBlockInterface(IWailaBlock internal) {
-		this.internal = internal;
-	}
+    protected final IWailaBlock internal;
 
-	@Override
-	public String getID() {
-		return "top.tfc." + internal.getClass().getName();
-	}
+    public TOPBlockInterface(IWailaBlock internal) {
+        this.internal = internal;
+    }
 
-	@Override
-	public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
-		BlockPos pos = hitData.getPos();
-		TileEntity tileEntity = world.getTileEntity(pos);
-		if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
-			return;
-		}
-		NBTTagCompound nbt = new NBTTagCompound();
-		if (tileEntity != null) {
-			nbt = tileEntity.writeToNBT(nbt);
-		}
+    @Override
+    public String getID() {
+        return "top.tfc." + internal.getClass().getName();
+    }
 
-		if (internal.appendBody()) {
-			List<String> tooltip = internal.getTooltip(world, hitData.getPos(), nbt);
-			for (String string : tooltip) {
-				info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
-			}
-		}
-	}
+    @Override
+    public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
+        BlockPos pos = hitData.getPos();
+        TileEntity tileEntity = world.getTileEntity(pos);
+        if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
+            return;
+        }
+        NBTTagCompound nbt = new NBTTagCompound();
+        if (tileEntity != null) {
+            nbt = tileEntity.writeToNBT(nbt);
+        }
 
-	@Override
-	public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
-		BlockPos pos = hitData.getPos();
-		TileEntity tileEntity = world.getTileEntity(pos);
-		if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
-			return false;
-		}
+        if (internal.appendBody()) {
+            List<String> tooltip = internal.getTooltip(world, hitData.getPos(), nbt);
+            for (String string : tooltip) {
+                info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).text(string);
+            }
+        }
+    }
 
-		NBTTagCompound nbt = new NBTTagCompound();
-		if (tileEntity != null) {
-			nbt = tileEntity.writeToNBT(nbt);
-		}
+    @Override
+    public boolean overrideStandardInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
+        BlockPos pos = hitData.getPos();
+        TileEntity tileEntity = world.getTileEntity(pos);
+        if (!isLookingAtProvider(state.getBlock(), tileEntity)) {
+            return false;
+        }
 
-		ItemStack stack = internal.overrideIcon() ? internal.getIcon(world, pos, nbt) : ItemStack.EMPTY;
-		if (stack.isEmpty()) {
-			stack = hitData.getPickBlock();
-		}
-		String title = internal.overrideTitle() ? internal.getTitle(world, pos, nbt) : "";
-		if (title.isEmpty()) {
-			info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-			    .item(stack)
-			    .vertical()
-			    .itemLabel(stack)
-			    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
-		} else {
-			info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-			    .item(stack)
-			    .vertical()
-			    .text(TextStyleClass.NAME + title)
-			    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
-		}
-		return true;
-	}
+        NBTTagCompound nbt = new NBTTagCompound();
+        if (tileEntity != null) {
+            nbt = tileEntity.writeToNBT(nbt);
+        }
 
-	public boolean overridesHeadInfo() {
-		return internal.overrideIcon() || internal.overrideTitle();
-	}
+        ItemStack stack = internal.overrideIcon() ? internal.getIcon(world, pos, nbt) : ItemStack.EMPTY;
+        if (stack.isEmpty()) {
+            stack = hitData.getPickBlock();
+        }
+        String title = internal.overrideTitle() ? internal.getTitle(world, pos, nbt) : "";
+        if (title.isEmpty()) {
+            info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                    .item(stack)
+                    .vertical()
+                    .itemLabel(stack)
+                    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+        } else {
+            info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                    .item(stack)
+                    .vertical()
+                    .text(TextStyleClass.NAME + title)
+                    .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+        }
+        return true;
+    }
 
-	protected boolean isLookingAtProvider(Block block, TileEntity tileEntity) {
-		for (Class<?> clazz : internal.getLookupClass()) {
-			if (clazz.isInstance(block) || clazz.isInstance(tileEntity)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean overridesHeadInfo() {
+        return internal.overrideIcon() || internal.overrideTitle();
+    }
+
+    protected boolean isLookingAtProvider(Block block, TileEntity tileEntity) {
+        for (Class<?> clazz : internal.getLookupClass()) {
+            if (clazz.isInstance(block) || clazz.isInstance(tileEntity)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

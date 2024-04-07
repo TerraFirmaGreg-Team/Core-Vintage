@@ -1,6 +1,5 @@
 package net.dries007.tfc.objects.inventory.capability;
 
-import net.dries007.tfc.objects.te.TEChestTFC;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -11,139 +10,143 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.VanillaDoubleChestItemHandler;
+
+import net.dries007.tfc.objects.te.TEChestTFC;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
-	public TFCDoubleChestItemHandler(@Nullable TileEntityChest mainChest, @Nullable TileEntityChest other, boolean mainChestIsUpper) {
-		super(mainChest, other, mainChestIsUpper);
-	}
 
-	@Nullable
-	public static VanillaDoubleChestItemHandler get(TileEntityChest chest) {
-		World world = chest.getWorld();
-		BlockPos pos = chest.getPos();
-		//noinspection ConstantConditions
-		if (world == null || pos == null || !world.isBlockLoaded(pos))
-			return null; // Still loading
+    public TFCDoubleChestItemHandler(@Nullable TileEntityChest mainChest, @Nullable TileEntityChest other, boolean mainChestIsUpper) {
+        super(mainChest, other, mainChestIsUpper);
+    }
 
-		Block blockType = chest.getBlockType();
+    @Nullable
+    public static VanillaDoubleChestItemHandler get(TileEntityChest chest) {
+        World world = chest.getWorld();
+        BlockPos pos = chest.getPos();
+        //noinspection ConstantConditions
+        if (world == null || pos == null || !world.isBlockLoaded(pos))
+            return null; // Still loading
 
-		EnumFacing[] horizontals = EnumFacing.HORIZONTALS;
-		for (int i = horizontals.length - 1; i >= 0; i--)   // Use reverse order so we can return early
-		{
-			EnumFacing enumfacing = horizontals[i];
-			BlockPos blockpos = pos.offset(enumfacing);
-			Block block = world.getBlockState(blockpos).getBlock();
+        Block blockType = chest.getBlockType();
 
-			if (block == blockType) {
-				TileEntity otherTE = world.getTileEntity(blockpos);
+        EnumFacing[] horizontals = EnumFacing.HORIZONTALS;
+        for (int i = horizontals.length - 1; i >= 0; i--)   // Use reverse order so we can return early
+        {
+            EnumFacing enumfacing = horizontals[i];
+            BlockPos blockpos = pos.offset(enumfacing);
+            Block block = world.getBlockState(blockpos).getBlock();
 
-				if (otherTE instanceof TileEntityChest) {
-					TileEntityChest otherChest = (TileEntityChest) otherTE;
-					return new TFCDoubleChestItemHandler(chest, otherChest,
-							enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH);
+            if (block == blockType) {
+                TileEntity otherTE = world.getTileEntity(blockpos);
 
-				}
-			}
-		}
-		return NO_ADJACENT_CHESTS_INSTANCE; //All alone
-	}
+                if (otherTE instanceof TileEntityChest) {
+                    TileEntityChest otherChest = (TileEntityChest) otherTE;
+                    return new TFCDoubleChestItemHandler(chest, otherChest,
+                            enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH);
 
-	@Override
-	public int getSlots() {
-		return TEChestTFC.SIZE * 2;
-	}
+                }
+            }
+        }
+        return NO_ADJACENT_CHESTS_INSTANCE; //All alone
+    }
 
-	@Override
-	@NotNull
-	public ItemStack getStackInSlot(int slot) {
-		boolean accessingUpperChest = slot < TEChestTFC.SIZE;
-		int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
-		TileEntityChest chest = getChest(accessingUpperChest);
-		return chest != null ? chest.getStackInSlot(targetSlot) : ItemStack.EMPTY;
-	}
+    @Override
+    public int getSlots() {
+        return TEChestTFC.SIZE * 2;
+    }
 
-	@Override
-	public void setStackInSlot(int slot, @NotNull ItemStack stack) {
-		boolean accessingUpperChest = slot < TEChestTFC.SIZE;
-		int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
-		TileEntityChest chest = getChest(accessingUpperChest);
-		if (chest != null) {
-			IItemHandler singleHandler = chest.getSingleChestHandler();
-			if (singleHandler instanceof IItemHandlerModifiable) {
-				((IItemHandlerModifiable) singleHandler).setStackInSlot(targetSlot, stack);
-			}
-		}
+    @Override
+    @NotNull
+    public ItemStack getStackInSlot(int slot) {
+        boolean accessingUpperChest = slot < TEChestTFC.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
+        TileEntityChest chest = getChest(accessingUpperChest);
+        return chest != null ? chest.getStackInSlot(targetSlot) : ItemStack.EMPTY;
+    }
 
-		chest = getChest(!accessingUpperChest);
-		if (chest != null) {
-			chest.markDirty();
-		}
-	}
+    @Override
+    public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+        boolean accessingUpperChest = slot < TEChestTFC.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
+        TileEntityChest chest = getChest(accessingUpperChest);
+        if (chest != null) {
+            IItemHandler singleHandler = chest.getSingleChestHandler();
+            if (singleHandler instanceof IItemHandlerModifiable) {
+                ((IItemHandlerModifiable) singleHandler).setStackInSlot(targetSlot, stack);
+            }
+        }
 
-	@Override
-	@NotNull
-	public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-		boolean accessingUpperChest = slot < TEChestTFC.SIZE;
-		int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
-		TileEntityChest chest = getChest(accessingUpperChest);
-		if (chest == null) {
-			return stack;
-		}
-		if (chest instanceof ISlotCallback && !((ISlotCallback) chest).isItemValid(slot, stack)) {
-			return stack;
-		}
+        chest = getChest(!accessingUpperChest);
+        if (chest != null) {
+            chest.markDirty();
+        }
+    }
 
-		int starting = stack.getCount();
-		ItemStack ret = chest.getSingleChestHandler().insertItem(targetSlot, stack, simulate);
-		if (ret.getCount() != starting && !simulate) {
-			chest = getChest(!accessingUpperChest);
-			if (chest != null) {
-				chest.markDirty();
-			}
-		}
+    @Override
+    @NotNull
+    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+        boolean accessingUpperChest = slot < TEChestTFC.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
+        TileEntityChest chest = getChest(accessingUpperChest);
+        if (chest == null) {
+            return stack;
+        }
+        if (chest instanceof ISlotCallback && !((ISlotCallback) chest).isItemValid(slot, stack)) {
+            return stack;
+        }
 
-		return ret;
-	}
+        int starting = stack.getCount();
+        ItemStack ret = chest.getSingleChestHandler().insertItem(targetSlot, stack, simulate);
+        if (ret.getCount() != starting && !simulate) {
+            chest = getChest(!accessingUpperChest);
+            if (chest != null) {
+                chest.markDirty();
+            }
+        }
 
-	@Override
-	@NotNull
-	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		boolean accessingUpperChest = slot < TEChestTFC.SIZE;
-		int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
-		TileEntityChest chest = getChest(accessingUpperChest);
-		if (chest == null) {
-			return ItemStack.EMPTY;
-		}
+        return ret;
+    }
 
-		ItemStack ret = chest.getSingleChestHandler().extractItem(targetSlot, amount, simulate);
-		if (!ret.isEmpty() && !simulate) {
-			chest = getChest(!accessingUpperChest);
-			if (chest != null) {
-				chest.markDirty();
-			}
-		}
+    @Override
+    @NotNull
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        boolean accessingUpperChest = slot < TEChestTFC.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
+        TileEntityChest chest = getChest(accessingUpperChest);
+        if (chest == null) {
+            return ItemStack.EMPTY;
+        }
 
-		return ret;
-	}
+        ItemStack ret = chest.getSingleChestHandler().extractItem(targetSlot, amount, simulate);
+        if (!ret.isEmpty() && !simulate) {
+            chest = getChest(!accessingUpperChest);
+            if (chest != null) {
+                chest.markDirty();
+            }
+        }
 
-	@Override
-	public int getSlotLimit(int slot) {
-		boolean accessingUpperChest = slot < TEChestTFC.SIZE;
-		//noinspection ConstantConditions
-		return getChest(accessingUpperChest).getInventoryStackLimit();
-	}
+        return ret;
+    }
 
-	@Override
-	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-		boolean accessingUpperChest = slot < TEChestTFC.SIZE;
-		int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
-		TileEntityChest chest = getChest(accessingUpperChest);
-		if (chest != null) {
-			return chest.getSingleChestHandler().isItemValid(targetSlot, stack);
-		}
-		return true;
-	}
+    @Override
+    public int getSlotLimit(int slot) {
+        boolean accessingUpperChest = slot < TEChestTFC.SIZE;
+        //noinspection ConstantConditions
+        return getChest(accessingUpperChest).getInventoryStackLimit();
+    }
+
+    @Override
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+        boolean accessingUpperChest = slot < TEChestTFC.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TEChestTFC.SIZE;
+        TileEntityChest chest = getChest(accessingUpperChest);
+        if (chest != null) {
+            return chest.getSingleChestHandler().isItemValid(targetSlot, stack);
+        }
+        return true;
+    }
 }

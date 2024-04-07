@@ -8,10 +8,10 @@
     "X": {
       "item": "minecraft:bowl"
     },
-	"Y": {
-	  "type": "forge:ore_dict",
-	  "ore": "stickWood"
-	  }
+    "Y": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
   },
   "result": {
     "item": "firmalife:peel",

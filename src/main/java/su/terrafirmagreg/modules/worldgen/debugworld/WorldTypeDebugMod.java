@@ -1,66 +1,67 @@
 package su.terrafirmagreg.modules.worldgen.debugworld;
 
+import su.terrafirmagreg.modules.worldgen.ModuleWorldGen;
+
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.ChunkGeneratorDebug;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.Loader;
+
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.modules.worldgen.ModuleWorldGen;
 
 public class WorldTypeDebugMod extends WorldType {
 
-	/**
-	 * The ID that is automatically assigned to this world type. If it is 0 it hasn't been set
-	 * yet.
-	 */
-	private int ourId = 0;
+    /**
+     * The ID that is automatically assigned to this world type. If it is 0 it hasn't been set yet.
+     */
+    private int ourId = 0;
 
-	public WorldTypeDebugMod() {
-		super("debug_all_block_states");
+    public WorldTypeDebugMod() {
+        super("debug_all_block_states");
 
-		// Sets the ID field to the one that was assigned to us.
-		this.ourId = this.getId();
+        // Sets the ID field to the one that was assigned to us.
+        this.ourId = this.getId();
 
-		// Set our registry slot to null, to free up the ID space.
-		WorldType.WORLD_TYPES[this.ourId] = null;
+        // Set our registry slot to null, to free up the ID space.
+        WorldType.WORLD_TYPES[this.ourId] = null;
 
-		// Overrides the debug world ID with this world type.
-		WorldType.WORLD_TYPES[5] = this;
-	}
+        // Overrides the debug world ID with this world type.
+        WorldType.WORLD_TYPES[5] = this;
+    }
 
-	@Override
-	public int getId() {
+    private static String getWorldName(World world) {
 
-		// If ourId has not been set yet return the super id, otherwise hardcode for the debug
-		// world type id.
-		return this.ourId == 0 ? super.getId() : 5;
-	}
+        if (world instanceof WorldServer) {
+            return world.getSaveHandler().getWorldDirectory().getName();
+        }
 
-	@Override
-	public @NotNull IChunkGenerator getChunkGenerator(@NotNull World world, @NotNull String generatorOptions) {
+        return "";
+    }
 
-		// Try to get the modid from the world name.
-		final String modid = getWorldName(world).toLowerCase();
+    @Override
+    public int getId() {
 
-		// If the mod actually exists, use that generator.
-		if (Loader.isModLoaded(modid)) {
-			return new ChunkGeneratorDebugMod(world, modid);
-		} else {
-			ModuleWorldGen.LOGGER.error("No mod found for ID {}, falling back to default worldgen.", modid);
-		}
+        // If ourId has not been set yet return the super id, otherwise hardcode for the debug
+        // world type id.
+        return this.ourId == 0 ? super.getId() : 5;
+    }
 
-		// Use the fallback generator.
-		return new ChunkGeneratorDebug(world);
-	}
+    @Override
+    public @NotNull IChunkGenerator getChunkGenerator(@NotNull World world, @NotNull String generatorOptions) {
 
-	private static String getWorldName(World world) {
+        // Try to get the modid from the world name.
+        final String modid = getWorldName(world).toLowerCase();
 
-		if (world instanceof WorldServer) {
-			return world.getSaveHandler().getWorldDirectory().getName();
-		}
+        // If the mod actually exists, use that generator.
+        if (Loader.isModLoaded(modid)) {
+            return new ChunkGeneratorDebugMod(world, modid);
+        } else {
+            ModuleWorldGen.LOGGER.error("No mod found for ID {}, falling back to default worldgen.", modid);
+        }
 
-		return "";
-	}
+        // Use the fallback generator.
+        return new ChunkGeneratorDebug(world);
+    }
 }

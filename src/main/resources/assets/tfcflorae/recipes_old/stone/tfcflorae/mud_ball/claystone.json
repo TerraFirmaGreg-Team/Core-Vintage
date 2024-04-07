@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/claystone"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/claystone",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/claystone",
+      "count": 4
+    }
+    }

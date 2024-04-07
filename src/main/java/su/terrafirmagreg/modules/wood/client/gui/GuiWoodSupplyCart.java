@@ -7,9 +7,8 @@ import net.minecraft.inventory.IInventory;
 
 public class GuiWoodSupplyCart extends GuiChest {
 
-
-	public GuiWoodSupplyCart(Container container, InventoryPlayer playerInv, IInventory plowInventory) {
-		super(playerInv, plowInventory);
-	}
+    public GuiWoodSupplyCart(Container container, InventoryPlayer playerInv, IInventory plowInventory) {
+        super(playerInv, plowInventory);
+    }
 
 }

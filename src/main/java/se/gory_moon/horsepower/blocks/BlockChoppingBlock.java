@@ -1,10 +1,5 @@
 package se.gory_moon.horsepower.blocks;
 
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoAccessor;
-import mcjty.theoneprobe.api.ProbeMode;
-import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,121 +17,131 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.Optional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoAccessor;
+import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import se.gory_moon.horsepower.Configs;
 import se.gory_moon.horsepower.HPEventHandler;
 import se.gory_moon.horsepower.lib.Constants;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.Localization;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInfoAccessor {
-	private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 6D / 16D, 1.0D);
 
-	public BlockChoppingBlock() {
-		super();
-		setHardness(2.0F);
-		setResistance(5.0F);
-		setRegistryName(Constants.HAND_CHOPPING_BLOCK);
-		setTranslationKey(Constants.HAND_CHOPPING_BLOCK);
-	}
+    private static final AxisAlignedBB COLLISION_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 6D / 16D, 1.0D);
 
-	public static boolean isValidChoppingTool(ItemStack stack, EntityPlayer player) {
-		return !stack.isEmpty() && ((stack.getItem()
-		                                  .getHarvestLevel(stack, "axe", player, null) > -1) || isChoppingToolWhitelisted(stack));
-	}
+    public BlockChoppingBlock() {
+        super();
+        setHardness(2.0F);
+        setResistance(5.0F);
+        setRegistryName(Constants.HAND_CHOPPING_BLOCK);
+        setTranslationKey(Constants.HAND_CHOPPING_BLOCK);
+    }
 
-	private static boolean isChoppingToolWhitelisted(ItemStack stack) {
-		for (ItemStack itemStack : HPEventHandler.choppingAxes.keySet()) {
-			if (ItemStack.areItemsEqualIgnoreDurability(itemStack, stack))
-				return true;
-		}
-		return false;
-	}
+    public static boolean isValidChoppingTool(ItemStack stack, EntityPlayer player) {
+        return !stack.isEmpty() && ((stack.getItem()
+                .getHarvestLevel(stack, "axe", player, null) > -1) || isChoppingToolWhitelisted(stack));
+    }
 
-	@Override
-	public void emptiedOutput(World world, BlockPos pos) {
-	}
+    private static boolean isChoppingToolWhitelisted(ItemStack stack) {
+        for (ItemStack itemStack : HPEventHandler.choppingAxes.keySet()) {
+            if (ItemStack.areItemsEqualIgnoreDurability(itemStack, stack))
+                return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		return player instanceof FakePlayer || player == null || super.onBlockActivated(worldIn, pos, state, player, hand, facing, hitX, hitY, hitZ);
-	}
+    @Override
+    public void emptiedOutput(World world, BlockPos pos) {
+    }
 
-	@Override
-	@NotNull
-	public Class<?> getTileClass() {
-		return TileEntityManualChopper.class;
-	}
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
+                                    float hitY, float hitZ) {
+        return player instanceof FakePlayer || player == null || super.onBlockActivated(worldIn, pos, state, player, hand, facing, hitX, hitY, hitZ);
+    }
 
-	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		if (Configs.general.enableHandChoppingBlock)
-			super.getSubBlocks(tab, list);
-	}
+    @Override
+    @NotNull
+    public Class<?> getTileClass() {
+        return TileEntityManualChopper.class;
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return 0;
-	}
+    @Override
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+        if (Configs.general.enableHandChoppingBlock)
+            super.getSubBlocks(tab, list);
+    }
 
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return COLLISION_AABB;
-	}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
 
-	@Nullable
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return COLLISION_AABB;
-	}
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return COLLISION_AABB;
+    }
 
-	@Override
-	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
-		TileEntityManualChopper te = getTileEntity(world, pos);
-		if (te != null) {
-			ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (isValidChoppingTool(heldItem, player)) {
-				if (te.canWork()) {
-					return -1;
-				}
-			}
-		}
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return COLLISION_AABB;
+    }
 
-		return super.getPlayerRelativeBlockHardness(state, player, world, pos);
-	}
+    @Override
+    public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
+        TileEntityManualChopper te = getTileEntity(world, pos);
+        if (te != null) {
+            ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
+            if (isValidChoppingTool(heldItem, player)) {
+                if (te.canWork()) {
+                    return -1;
+                }
+            }
+        }
 
-	@Override
-	public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer player) {
-		if (player instanceof FakePlayer || player == null)
-			return;
+        return super.getPlayerRelativeBlockHardness(state, player, world, pos);
+    }
 
-		TileEntityManualChopper te = getTileEntity(worldIn, pos);
-		if (te != null) {
-			ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (isValidChoppingTool(held, player)) {
-				if (te.chop(player, held)) {
-					player.addExhaustion((float) Configs.general.choppingblockExhaustion);
-					if (Configs.general.shouldDamageAxe)
-						held.damageItem(1, player);
-				}
-			}
-		}
-	}
+    @Override
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer player) {
+        if (player instanceof FakePlayer || player == null)
+            return;
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new ExtendedBlockState(this, new IProperty[]{}, new IUnlistedProperty[]{SIDE_TEXTURE, TOP_TEXTURE});
-	}
+        TileEntityManualChopper te = getTileEntity(worldIn, pos);
+        if (te != null) {
+            ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
+            if (isValidChoppingTool(held, player)) {
+                if (te.chop(player, held)) {
+                    player.addExhaustion((float) Configs.general.choppingblockExhaustion);
+                    if (Configs.general.shouldDamageAxe)
+                        held.damageItem(1, player);
+                }
+            }
+        }
+    }
 
-	// The One Probe Integration
-	@Optional.Method(modid = "theoneprobe")
-	@Override
-	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-		TileEntityManualChopper tileEntity = getTileEntity(world, data.getPos());
-		if (tileEntity != null) {
-			probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L, new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ")
-			                                                                                                                                     .suffix("%"));
-		}
-	}
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new ExtendedBlockState(this, new IProperty[] {}, new IUnlistedProperty[] { SIDE_TEXTURE, TOP_TEXTURE });
+    }
+
+    // The One Probe Integration
+    @Optional.Method(modid = "theoneprobe")
+    @Override
+    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+        TileEntityManualChopper tileEntity = getTileEntity(world, data.getPos());
+        if (tileEntity != null) {
+            probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L,
+                    new ProgressStyle().prefix(Localization.TOP.CHOPPING_PROGRESS.translate() + " ")
+                            .suffix("%"));
+        }
+    }
 }

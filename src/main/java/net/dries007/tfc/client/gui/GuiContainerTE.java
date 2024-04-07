@@ -6,11 +6,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiContainerTE<T extends TileEntity> extends GuiContainerTFC {
-	protected final T tile;
 
-	public GuiContainerTE(Container container, InventoryPlayer playerInv, T tile, ResourceLocation background) {
-		super(container, playerInv, background);
+    protected final T tile;
 
-		this.tile = tile;
-	}
+    public GuiContainerTE(Container container, InventoryPlayer playerInv, T tile, ResourceLocation background) {
+        super(container, playerInv, background);
+
+        this.tile = tile;
+    }
 }

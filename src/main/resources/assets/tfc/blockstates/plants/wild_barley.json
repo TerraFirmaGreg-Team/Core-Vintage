@@ -6,9 +6,9 @@
         "stage": "0"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_0"
-		}
+        }
       ]
     },
     {
@@ -17,9 +17,9 @@
         "stage": "0"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_1"
-		}
+        }
       ]
     },
     {
@@ -28,9 +28,9 @@
         "stage": "0"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_2"
-		}
+        }
       ]
     },
     {
@@ -39,9 +39,9 @@
         "stage": "0"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_3"
-		}
+        }
       ]
     },
     {
@@ -50,9 +50,9 @@
         "stage": "1"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_0_tuft"
-		}
+        }
       ]
     },
     {
@@ -61,9 +61,9 @@
         "stage": "1"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_1_tuft"
-		}
+        }
       ]
     },
     {
@@ -72,9 +72,9 @@
         "stage": "1"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_2_tuft"
-		}
+        }
       ]
     },
     {
@@ -83,9 +83,9 @@
         "stage": "1"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/wild_barley_3_tuft"
-		}
+        }
       ]
     }
   ]

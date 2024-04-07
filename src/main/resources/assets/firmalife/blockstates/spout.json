@@ -4,13 +4,17 @@
     "model": "firmalife:spout"
   },
   "variants": {
-    "inventory": [{
-      "transform": "forge:default-block",
-      "model": "firmalife:spout"
-    }],
-    "normal": [{
-      "transform": "forge:default-block",
-      "model": "firmalife:spout"
-    }]
+    "inventory": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:spout"
+      }
+    ],
+    "normal": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:spout"
+      }
+    ]
   }
 }

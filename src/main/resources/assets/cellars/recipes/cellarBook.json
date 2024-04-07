@@ -1,29 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-
-  "pattern":
-  [
+  "pattern": [
     " S ",
     "SPS",
     " S "
   ],
-
-  "key":
-  {
-    "P":
-    {
+  "key": {
+    "P": {
       "item": "minecraft:paper"
     },
-    "S":
-    {
+    "S": {
       "item": "cellars:cellar_wall"
     }
   },
-
-  "result":
-  {
+  "result": {
     "item": "patchouli:guide_book",
-    "nbt": {"patchouli:book": "cellars:book"},
+    "nbt": {
+      "patchouli:book": "cellars:book"
+    },
     "count": 1
   }
 }

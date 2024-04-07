@@ -1,82 +1,86 @@
 package net.dries007.tfc.objects.items.food;
 
-import net.dries007.tfc.api.capability.food.*;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.agriculture.Food;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodHandler;
+import net.dries007.tfc.api.capability.food.FoodHeatHandler;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.api.capability.food.IItemFoodTFC;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.agriculture.Food;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
-	private static final Map<Food, ItemFoodTFC> MAP = new HashMap<>();
-	protected final Food food;
 
-	public ItemFoodTFC(@NotNull Food food) {
-		super(0, 0, food.getCategory() == Food.Category.MEAT || food.getCategory() == Food.Category.COOKED_MEAT);
-		this.food = food;
-		if (MAP.put(food, this) != null) {
-			throw new IllegalStateException("There can only be one.");
-		}
+    private static final Map<Food, ItemFoodTFC> MAP = new HashMap<>();
+    protected final Food food;
 
-		// Use "category" here as to not conflict with actual items, i.e. grain
-		OreDictionaryHelper.register(this, "category", food.getCategory());
-		if (food.getOreDictNames() != null) {
-			for (Object name : food.getOreDictNames()) {
-				OreDictionaryHelper.register(this, name);
-			}
-		}
-	}
+    public ItemFoodTFC(@NotNull Food food) {
+        super(0, 0, food.getCategory() == Food.Category.MEAT || food.getCategory() == Food.Category.COOKED_MEAT);
+        this.food = food;
+        if (MAP.put(food, this) != null) {
+            throw new IllegalStateException("There can only be one.");
+        }
 
-	public static ItemFoodTFC get(Food food) {
-		return MAP.get(food);
-	}
+        // Use "category" here as to not conflict with actual items, i.e. grain
+        OreDictionaryHelper.register(this, "category", food.getCategory());
+        if (food.getOreDictNames() != null) {
+            for (Object name : food.getOreDictNames()) {
+                OreDictionaryHelper.register(this, name);
+            }
+        }
+    }
 
-	public static ItemStack get(Food food, int amount) {
-		return new ItemStack(MAP.get(food), amount);
-	}
+    public static ItemFoodTFC get(Food food) {
+        return MAP.get(food);
+    }
 
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-		if (this.isInCreativeTab(tab)) {
-			// Makes creative items not decay (like JEI)
-			ItemStack stack = new ItemStack(this);
-			IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-			if (cap != null) {
-				cap.setNonDecaying();
-			}
-			items.add(stack);
-		}
-	}
+    public static ItemStack get(Food food, int amount) {
+        return new ItemStack(MAP.get(food), amount);
+    }
 
-	@Override
-	public int getItemStackLimit(ItemStack stack) {
-		return getStackSize(stack);
-	}
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (this.isInCreativeTab(tab)) {
+            // Makes creative items not decay (like JEI)
+            ItemStack stack = new ItemStack(this);
+            IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+            if (cap != null) {
+                cap.setNonDecaying();
+            }
+            items.add(stack);
+        }
+    }
 
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return getStackSize(stack);
+    }
 
-	@Override
-	public @NotNull Size getSize(@NotNull ItemStack stack) {
-		return Size.SMALL;
-	}
+    @Override
+    public @NotNull Size getSize(@NotNull ItemStack stack) {
+        return Size.SMALL;
+    }
 
+    @Override
+    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+        return Weight.VERY_LIGHT;
+    }
 
-	@Override
-	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-		return Weight.VERY_LIGHT;
-	}
-
-	@Override
-	public ICapabilityProvider getCustomFoodHandler() {
-		return food.isHeatable() ? new FoodHeatHandler(null, food) : new FoodHandler(null, food);
-	}
+    @Override
+    public ICapabilityProvider getCustomFoodHandler() {
+        return food.isHeatable() ? new FoodHeatHandler(null, food) : new FoodHandler(null, food);
+    }
 }

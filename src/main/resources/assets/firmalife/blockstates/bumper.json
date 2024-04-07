@@ -4,13 +4,17 @@
     "model": "firmalife:bumper"
   },
   "variants": {
-    "inventory": [{
-      "transform": "forge:default-block",
-      "model": "firmalife:bumper"
-    }],
-    "normal": [{
-      "transform": "forge:default-block",
-      "model": "firmalife:bumper"
-    }]
+    "inventory": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:bumper"
+      }
+    ],
+    "normal": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:bumper"
+      }
+    ]
   }
 }

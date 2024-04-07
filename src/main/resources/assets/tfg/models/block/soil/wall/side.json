@@ -1,7 +1,7 @@
 {
-    "parent": "block/wall_side",
-    "textures": {
-      "particle": "#all",
-      "wall": "#all"
-    }
+  "parent": "block/wall_side",
+  "textures": {
+    "particle": "#all",
+    "wall": "#all"
+  }
 }

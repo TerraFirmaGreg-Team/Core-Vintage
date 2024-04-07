@@ -3,6 +3,6 @@
   "textures": {
     "particle": "tfc:blocks/plants/variegated_persian_ivy/variegated_persian_ivy_1",
     "layer0": "tfc:blocks/plants/variegated_persian_ivy/variegated_persian_ivy_1",
-	"overlay": "tfc:blocks/plants/variegated_persian_ivy/variegated_persian_ivy_1b"
+    "overlay": "tfc:blocks/plants/variegated_persian_ivy/variegated_persian_ivy_1b"
   }
 }

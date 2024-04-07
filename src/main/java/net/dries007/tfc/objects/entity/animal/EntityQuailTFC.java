@@ -1,12 +1,9 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -17,94 +14,100 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.egg.CapabilityEgg;
+import net.dries007.tfc.api.capability.egg.IEgg;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.climate.BiomeHelper;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.modules.animal.api.type.ILivestock;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.data.SoundAnimal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class EntityQuailTFC extends EntityChickenTFC implements ILivestock {
-	public EntityQuailTFC(World worldIn) {
-		this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.QUAIL.adulthood, ConfigTFC.Animals.QUAIL.elder));
-	}
 
-	public EntityQuailTFC(World worldIn, Gender gender, int birthDay) {
-		super(worldIn, gender, birthDay);
-		this.setSize(0.7F, 0.7F);
-	}
+    public EntityQuailTFC(World worldIn) {
+        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.QUAIL.adulthood, ConfigTFC.Animals.QUAIL.elder));
+    }
 
-	@Override
-	public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-		BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-		if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-				(biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-			return ConfigTFC.Animals.QUAIL.rarity;
-		}
-		return 0;
-	}
+    public EntityQuailTFC(World worldIn, Gender gender, int birthDay) {
+        super(worldIn, gender, birthDay);
+        this.setSize(0.7F, 0.7F);
+    }
 
-	@Override
-	public int getDaysToAdulthood() {
-		return ConfigTFC.Animals.QUAIL.adulthood;
-	}
+    @Override
+    public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+        BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+        if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
+                (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+            return ConfigTFC.Animals.QUAIL.rarity;
+        }
+        return 0;
+    }
 
-	@Override
-	public int getDaysToElderly() {
-		return ConfigTFC.Animals.QUAIL.elder;
-	}
+    @Override
+    public int getDaysToAdulthood() {
+        return ConfigTFC.Animals.QUAIL.adulthood;
+    }
 
-	@Override
-	public List<ItemStack> getProducts() {
-		List<ItemStack> eggs = new ArrayList<>();
-		ItemStack egg = new ItemStack(Items.EGG);
-		if (this.isFertilized()) {
-			IEgg cap = egg.getCapability(CapabilityEgg.CAPABILITY, null);
-			if (cap != null) {
-				EntityQuailTFC chick = new EntityQuailTFC(this.world);
-				chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-				cap.setFertilized(chick, ConfigTFC.Animals.QUAIL.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
-			}
-		}
-		eggs.add(egg);
-		return eggs;
-	}
+    @Override
+    public int getDaysToElderly() {
+        return ConfigTFC.Animals.QUAIL.elder;
+    }
 
-	@Override
-	public long getProductsCooldown() {
-		return Math.max(0, ConfigTFC.Animals.QUAIL.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
-	}
+    @Override
+    public List<ItemStack> getProducts() {
+        List<ItemStack> eggs = new ArrayList<>();
+        ItemStack egg = new ItemStack(Items.EGG);
+        if (this.isFertilized()) {
+            IEgg cap = egg.getCapability(CapabilityEgg.CAPABILITY, null);
+            if (cap != null) {
+                EntityQuailTFC chick = new EntityQuailTFC(this.world);
+                chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
+                cap.setFertilized(chick, ConfigTFC.Animals.QUAIL.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+            }
+        }
+        eggs.add(egg);
+        return eggs;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundAnimal.ANIMAL_QUAIL_HURT;
-	}
+    @Override
+    public long getProductsCooldown() {
+        return Math.max(0, ConfigTFC.Animals.QUAIL.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+    }
 
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundAnimal.ANIMAL_QUAIL_DEATH;
-	}
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundAnimal.ANIMAL_QUAIL_HURT;
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundAnimal.ANIMAL_QUAIL_SAY;
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundAnimal.ANIMAL_QUAIL_DEATH;
+    }
 
-	@Nullable
-	protected ResourceLocation getLootTable() {
-		return LootTablesAnimal.ANIMALS_QUAIL;
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundAnimal.ANIMAL_QUAIL_SAY;
+    }
 
-	@Override
-	protected void playStepSound(BlockPos pos, Block blockIn) {
-		// Same sound, no need to create another
-		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.14F, 0.9F);
-	}
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTablesAnimal.ANIMALS_QUAIL;
+    }
 
-	@Override
-	public double getOldDeathChance() {
-		return ConfigTFC.Animals.QUAIL.oldDeathChance;
-	}
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        // Same sound, no need to create another
+        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.14F, 0.9F);
+    }
+
+    @Override
+    public double getOldDeathChance() {
+        return ConfigTFC.Animals.QUAIL.oldDeathChance;
+    }
 }

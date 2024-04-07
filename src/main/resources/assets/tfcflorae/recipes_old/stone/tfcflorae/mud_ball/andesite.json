@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/andesite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/andesite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/andesite",
+      "count": 4
+    }
+    }

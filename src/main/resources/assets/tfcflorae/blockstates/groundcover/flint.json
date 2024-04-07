@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfcflorae:groundcover/flint/rocks_0",
     "textures": {
-	  "rock": "tfc:blocks/stonetypes/sand/basalt",
+      "rock": "tfc:blocks/stonetypes/sand/basalt",
       "layer0": "items/flint"
     }
   },

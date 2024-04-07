@@ -1,6 +1,5 @@
 package net.dries007.tfc.client.render.projectile;
 
-import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -12,54 +11,58 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T> {
-	private final RenderItem itemRenderer;
 
-	public RenderThrownWeapon(RenderManager renderManagerIn) {
-		super(renderManagerIn);
-		this.itemRenderer = Minecraft.getMinecraft().getRenderItem();
-	}
+    private final RenderItem itemRenderer;
 
-	public void doRender(@NotNull T entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		GlStateManager.pushMatrix();
-		GlStateManager.translate((float) x, (float) y, (float) z);
-		GlStateManager.enableRescaleNormal();
+    public RenderThrownWeapon(RenderManager renderManagerIn) {
+        super(renderManagerIn);
+        this.itemRenderer = Minecraft.getMinecraft().getRenderItem();
+    }
 
-		doRenderTransformations(entity, partialTicks);
+    public void doRender(@NotNull T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float) x, (float) y, (float) z);
+        GlStateManager.enableRescaleNormal();
 
-		bindTexture(getEntityTexture(entity));
+        doRenderTransformations(entity, partialTicks);
 
-		if (this.renderOutlines) {
-			GlStateManager.enableColorMaterial();
-			GlStateManager.enableOutlineMode(getTeamColor(entity));
-		}
+        bindTexture(getEntityTexture(entity));
 
-		ItemStack weapon = entity.getWeapon();
-		if (!weapon.isEmpty()) {
-			this.itemRenderer.renderItem(weapon, ItemCameraTransforms.TransformType.GROUND);
-		}
+        if (this.renderOutlines) {
+            GlStateManager.enableColorMaterial();
+            GlStateManager.enableOutlineMode(getTeamColor(entity));
+        }
 
-		if (this.renderOutlines) {
-			GlStateManager.disableOutlineMode();
-			GlStateManager.disableColorMaterial();
-		}
+        ItemStack weapon = entity.getWeapon();
+        if (!weapon.isEmpty()) {
+            this.itemRenderer.renderItem(weapon, ItemCameraTransforms.TransformType.GROUND);
+        }
 
-		GlStateManager.disableRescaleNormal();
-		GlStateManager.popMatrix();
-		super.doRender(entity, x, y, z, entityYaw, partialTicks);
-	}
+        if (this.renderOutlines) {
+            GlStateManager.disableOutlineMode();
+            GlStateManager.disableColorMaterial();
+        }
 
-	@Override
-	@NotNull
-	protected ResourceLocation getEntityTexture(@NotNull T entity) {return TextureMap.LOCATION_BLOCKS_TEXTURE;}
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.popMatrix();
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    }
 
-	protected void doRenderTransformations(T entity, float partialTicks) {
-		GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks - 135.0F, 0.0F, 0.0F, 1.0F);
+    @Override
+    @NotNull
+    protected ResourceLocation getEntityTexture(@NotNull T entity) {return TextureMap.LOCATION_BLOCKS_TEXTURE;}
 
-		GlStateManager.translate(-0.15D, -0.15D, 0.0D);
-	}
+    protected void doRenderTransformations(T entity, float partialTicks) {
+        GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks - 135.0F, 0.0F, 0.0F, 1.0F);
+
+        GlStateManager.translate(-0.15D, -0.15D, 0.0D);
+    }
 }

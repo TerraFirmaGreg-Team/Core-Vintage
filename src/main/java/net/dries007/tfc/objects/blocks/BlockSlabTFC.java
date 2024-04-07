@@ -1,11 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -19,7 +15,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import su.terrafirmagreg.api.util.BlockUtils;
+
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -29,192 +31,195 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 
 public abstract class BlockSlabTFC extends BlockSlab {
-	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-	public final Block modelBlock;
-	protected Half halfSlab;
 
-	private BlockSlabTFC(Rock rock, Rock.Type type) {
-		this(BlockRockVariant.get(rock, type));
-		Block c = BlockRockVariant.get(rock, type);
-		//noinspection ConstantConditions
-		setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
-		useNeighborBrightness = true;
-	}
+    public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
+    public final Block modelBlock;
+    protected Half halfSlab;
 
-	private BlockSlabTFC(Tree wood) {
-		this(BlockPlanksTFC.get(wood));
-		Block c = BlockPlanksTFC.get(wood);
-		//noinspection ConstantConditions
-		setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
-		useNeighborBrightness = true;
-		BlockUtils.setFireInfo(this, 5, 20);
-	}
+    private BlockSlabTFC(Rock rock, Rock.Type type) {
+        this(BlockRockVariant.get(rock, type));
+        Block c = BlockRockVariant.get(rock, type);
+        //noinspection ConstantConditions
+        setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
+        useNeighborBrightness = true;
+    }
 
-	private BlockSlabTFC(Block block) {
-		super(block.getDefaultState().getMaterial());
-		IBlockState state = blockState.getBaseState();
-		if (!isDouble()) state = state.withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
-		setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
-		this.modelBlock = block;
-		setLightOpacity(255);
-	}
+    private BlockSlabTFC(Tree wood) {
+        this(BlockPlanksTFC.get(wood));
+        Block c = BlockPlanksTFC.get(wood);
+        //noinspection ConstantConditions
+        setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
+        useNeighborBrightness = true;
+        BlockUtils.setFireInfo(this, 5, 20);
+    }
 
-	@Override
-	public String getTranslationKey(int meta) {
-		return super.getTranslationKey();
-	}
+    private BlockSlabTFC(Block block) {
+        super(block.getDefaultState().getMaterial());
+        IBlockState state = blockState.getBaseState();
+        if (!isDouble()) state = state.withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+        setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
+        this.modelBlock = block;
+        setLightOpacity(255);
+    }
 
-	@Override
-	public IProperty<?> getVariantProperty() {
-		return VARIANT; // why is this not null-tolerable ...
-	}
+    @Override
+    public String getTranslationKey(int meta) {
+        return super.getTranslationKey();
+    }
 
-	@Override
-	public Comparable<?> getTypeForItem(ItemStack stack) {
-		return Variant.DEFAULT;
-	}
+    @Override
+    public IProperty<?> getVariantProperty() {
+        return VARIANT; // why is this not null-tolerable ...
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
+    @Override
+    public Comparable<?> getTypeForItem(ItemStack stack) {
+        return Variant.DEFAULT;
+    }
 
-		if (!this.isDouble()) {
-			iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
-		}
+    @SuppressWarnings("deprecation")
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
-		return iblockstate;
-	}
+        if (!this.isDouble()) {
+            iblockstate = iblockstate.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP);
+        }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		int i = 0;
+        return iblockstate;
+    }
 
-		if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
-			i |= 8;
-		}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int i = 0;
 
-		return i;
-	}
+        if (!this.isDouble() && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
+            i |= 8;
+        }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-		return modelBlock.getBlockHardness(blockState, worldIn, pos);
-	}
+        return i;
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(halfSlab);
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+        return modelBlock.getBlockHardness(blockState, worldIn, pos);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public float getExplosionResistance(Entity exploder) {
-		return modelBlock.getExplosionResistance(exploder);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(halfSlab);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-		return new ItemStack(halfSlab);
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public float getExplosionResistance(Entity exploder) {
+        return modelBlock.getExplosionResistance(exploder);
+    }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(halfSlab);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public SoundType getSoundType() {
-		return modelBlock.getSoundType();
-	}
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
+    }
 
-	public enum Variant implements IStringSerializable {
-		DEFAULT;
+    @SuppressWarnings("deprecation")
+    @Override
+    public SoundType getSoundType() {
+        return modelBlock.getSoundType();
+    }
 
-		@Override
-		public String getName() {
-			return "default";
-		}
-	}
+    public enum Variant implements IStringSerializable {
+        DEFAULT;
 
-	public static class Double extends BlockSlabTFC {
-		private static final Map<Rock, EnumMap<Rock.Type, Double>> ROCK_TABLE = new HashMap<>();
-		private static final Map<Tree, Double> WOOD_MAP = new HashMap<>();
+        @Override
+        public String getName() {
+            return "default";
+        }
+    }
 
-		public Double(Rock rock, Rock.Type type) {
-			super(rock, type);
+    public static class Double extends BlockSlabTFC {
 
-			if (!ROCK_TABLE.containsKey(rock))
-				ROCK_TABLE.put(rock, new EnumMap<>(Rock.Type.class));
-			ROCK_TABLE.get(rock).put(type, this);
+        private static final Map<Rock, EnumMap<Rock.Type, Double>> ROCK_TABLE = new HashMap<>();
+        private static final Map<Tree, Double> WOOD_MAP = new HashMap<>();
 
-			// No oredict, because no item.
-		}
+        public Double(Rock rock, Rock.Type type) {
+            super(rock, type);
 
-		public Double(Tree wood) {
-			super(wood);
-			if (WOOD_MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-			// No oredict, because no item.
-		}
+            if (!ROCK_TABLE.containsKey(rock))
+                ROCK_TABLE.put(rock, new EnumMap<>(Rock.Type.class));
+            ROCK_TABLE.get(rock).put(type, this);
 
-		public static Double get(Rock rock, Rock.Type type) {
-			return ROCK_TABLE.get(rock).get(type);
-		}
+            // No oredict, because no item.
+        }
 
-		public static Double get(Tree wood) {
-			return WOOD_MAP.get(wood);
-		}
+        public Double(Tree wood) {
+            super(wood);
+            if (WOOD_MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
+            // No oredict, because no item.
+        }
 
-		@Override
-		public boolean isDouble() {
-			return true;
-		}
-	}
+        public static Double get(Rock rock, Rock.Type type) {
+            return ROCK_TABLE.get(rock).get(type);
+        }
 
-	public static class Half extends BlockSlabTFC {
-		private static final Map<Rock, EnumMap<Rock.Type, Half>> ROCK_TABLE = new HashMap<>();
-		private static final Map<Tree, Half> WOOD_MAP = new HashMap<>();
-		public final Double doubleSlab;
+        public static Double get(Tree wood) {
+            return WOOD_MAP.get(wood);
+        }
 
-		public Half(Rock rock, Rock.Type type) {
-			super(rock, type);
+        @Override
+        public boolean isDouble() {
+            return true;
+        }
+    }
 
-			if (!ROCK_TABLE.containsKey(rock))
-				ROCK_TABLE.put(rock, new EnumMap<>(Rock.Type.class));
-			ROCK_TABLE.get(rock).put(type, this);
+    public static class Half extends BlockSlabTFC {
 
-			doubleSlab = Double.get(rock, type);
-			doubleSlab.halfSlab = this;
-			halfSlab = this;
-			OreDictionaryHelper.register(this, "slab");
-			OreDictionaryHelper.registerRockType(this, type, "slab");
-		}
+        private static final Map<Rock, EnumMap<Rock.Type, Half>> ROCK_TABLE = new HashMap<>();
+        private static final Map<Tree, Half> WOOD_MAP = new HashMap<>();
+        public final Double doubleSlab;
 
-		public Half(Tree wood) {
-			super(wood);
-			if (WOOD_MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-			doubleSlab = Double.get(wood);
-			doubleSlab.halfSlab = this;
-			halfSlab = this;
-			OreDictionaryHelper.register(this, "slab");
-			OreDictionaryHelper.register(this, "slab", "wood");
-			OreDictionaryHelper.register(this, "slab", "wood", wood);
-		}
+        public Half(Rock rock, Rock.Type type) {
+            super(rock, type);
 
-		public static Half get(Rock rock, Rock.Type type) {
-			return ROCK_TABLE.get(rock).get(type);
-		}
+            if (!ROCK_TABLE.containsKey(rock))
+                ROCK_TABLE.put(rock, new EnumMap<>(Rock.Type.class));
+            ROCK_TABLE.get(rock).put(type, this);
 
-		public static Half get(Tree wood) {
-			return WOOD_MAP.get(wood);
-		}
+            doubleSlab = Double.get(rock, type);
+            doubleSlab.halfSlab = this;
+            halfSlab = this;
+            OreDictionaryHelper.register(this, "slab");
+            OreDictionaryHelper.registerRockType(this, type, "slab");
+        }
 
-		@Override
-		public boolean isDouble() {
-			return false;
-		}
-	}
+        public Half(Tree wood) {
+            super(wood);
+            if (WOOD_MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
+            doubleSlab = Double.get(wood);
+            doubleSlab.halfSlab = this;
+            halfSlab = this;
+            OreDictionaryHelper.register(this, "slab");
+            OreDictionaryHelper.register(this, "slab", "wood");
+            OreDictionaryHelper.register(this, "slab", "wood", wood);
+        }
+
+        public static Half get(Rock rock, Rock.Type type) {
+            return ROCK_TABLE.get(rock).get(type);
+        }
+
+        public static Half get(Tree wood) {
+            return WOOD_MAP.get(wood);
+        }
+
+        @Override
+        public boolean isDouble() {
+            return false;
+        }
+    }
 }

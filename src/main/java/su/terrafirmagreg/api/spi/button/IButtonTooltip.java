@@ -5,7 +5,7 @@ package su.terrafirmagreg.api.spi.button;
  */
 public interface IButtonTooltip {
 
-	String getTooltip();
+    String getTooltip();
 
-	boolean hasTooltip();
+    boolean hasTooltip();
 }

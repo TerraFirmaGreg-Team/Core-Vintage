@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.util;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -14,6 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -24,233 +26,224 @@ import static su.terrafirmagreg.Tags.MOD_ID;
 @SuppressWarnings("unused")
 public final class ModUtils {
 
-	/**
-	 * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat
-	 * performance of the method. Calling {@link #getSortedEntries(IForgeRegistry)} before all
-	 * entries have been registered will lock out new ones from being found.
-	 */
-	private static final Map<IForgeRegistry<?>, Multimap<String, ?>> REGISTRY_CACHE = new HashMap<>();
+    /**
+     * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling
+     * {@link #getSortedEntries(IForgeRegistry)} before all entries have been registered will lock out new ones from being found.
+     */
+    private static final Map<IForgeRegistry<?>, Multimap<String, ?>> REGISTRY_CACHE = new HashMap<>();
 
+    private ModUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
-	private ModUtils() {
-		throw new IllegalAccessError("Utility class");
-	}
+    /**
+     * Возвращает идентификатор ресурса на основе строки.
+     *
+     * @param string строка идентификатора ресурса
+     * @return идентификатор ресурса
+     */
+    public static ResourceLocation getID(String string) {
+        return new ResourceLocation(MOD_ID, string);
+    }
 
-	/**
-	 * Возвращает идентификатор ресурса на основе строки.
-	 *
-	 * @param string строка идентификатора ресурса
-	 * @return идентификатор ресурса
-	 */
-	public static ResourceLocation getID(String string) {
-		return new ResourceLocation(MOD_ID, string);
-	}
+    public static String getIDName(String string) {
+        return String.format(MOD_ID + string);
+    }
 
-	public static String getIDName(String string) {
-		return String.format(MOD_ID + string);
-	}
+    /**
+     * Проверяет, включен ли мод JEI (Just Enough Items).
+     *
+     * @return true, если мод JEI включен; в противном случае - false
+     */
+    public static boolean isJEIEnabled() {
+        return Loader.isModLoaded("jei");
+    }
 
+    /**
+     * This is meant to avoid Intellij's warnings about null fields that are injected to at runtime Use this for things like @ObjectHolder,
+     *
+     * @param <T> anything and everything
+     * @return null, but not null
+     * @CapabilityInject, etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
+     */
+    @NotNull
+    @SuppressWarnings("ConstantConditions")
+    public static <T> T getNull() {
+        return null;
+    }
 
-	/**
-	 * Проверяет, включен ли мод JEI (Just Enough Items).
-	 *
-	 * @return true, если мод JEI включен; в противном случае - false
-	 */
-	public static boolean isJEIEnabled() {
-		return Loader.isModLoaded("jei");
-	}
+    /**
+     * Gets the name of a mod that registered the passed object. Has support for a wide range of registerable objects such as blocks, items,
+     * enchantments, potions, sounds, villagers, biomes, and so on.
+     *
+     * @param registerable The registerable object. Accepts anything that extends IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block,
+     *                     Enchantment, Item, Potion, PotionType, SoundEvent and VillagerProfession.
+     * @return String The name of the mod that registered the object.
+     */
+    public static String getModName(IForgeRegistryEntry.Impl<?> registerable) {
 
+        final String modID = registerable.getRegistryName().getNamespace();
+        final ModContainer mod = getModContainer(modID);
+        return mod != null ? mod.getName() : "minecraft".equals(modID) ? "Minecraft" : "Unknown";
+    }
 
-	/**
-	 * This is meant to avoid Intellij's warnings about null fields that are injected to at runtime
-	 * Use this for things like @ObjectHolder, @CapabilityInject, etc.
-	 * AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
-	 *
-	 * @param <T> anything and everything
-	 * @return null, but not null
-	 */
-	@NotNull
-	@SuppressWarnings("ConstantConditions")
-	public static <T> T getNull() {
-		return null;
-	}
+    /**
+     * Gets the name of a mod that registered the entity. Due to Entity not using IForgeRegistryEntry.Impl a special method is required.
+     *
+     * @param entity The entity to get the mod name for.
+     * @return String The name of the mod that registered the entity.
+     */
+    public static String getModName(Entity entity) {
 
-	/**
-	 * Gets the name of a mod that registered the passed object. Has support for a wide range
-	 * of registerable objects such as blocks, items, enchantments, potions, sounds, villagers,
-	 * biomes, and so on.
-	 *
-	 * @param registerable The registerable object. Accepts anything that extends
-	 *                     IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block, Enchantment,
-	 *                     Item, Potion, PotionType, SoundEvent and VillagerProfession.
-	 * @return String The name of the mod that registered the object.
-	 */
-	public static String getModName(IForgeRegistryEntry.Impl<?> registerable) {
+        if (entity == null) {
+            return "Unknown";
+        }
 
-		final String modID = registerable.getRegistryName().getNamespace();
-		final ModContainer mod = getModContainer(modID);
-		return mod != null ? mod.getName() : "minecraft".equals(modID) ? "Minecraft" : "Unknown";
-	}
+        final EntityRegistry.EntityRegistration reg = getRegistryInfo(entity);
 
-	/**
-	 * Gets the name of a mod that registered the entity. Due to Entity not using
-	 * IForgeRegistryEntry.Impl a special method is required.
-	 *
-	 * @param entity The entity to get the mod name for.
-	 * @return String The name of the mod that registered the entity.
-	 */
-	public static String getModName(Entity entity) {
+        if (reg != null) {
 
-		if (entity == null) {
-			return "Unknown";
-		}
+            final ModContainer mod = reg.getContainer();
 
-		final EntityRegistry.EntityRegistration reg = getRegistryInfo(entity);
+            if (mod != null) {
+                return mod.getName();
+            }
 
-		if (reg != null) {
+            return "Unknown";
+        }
 
-			final ModContainer mod = reg.getContainer();
+        return "Minecraft";
+    }
 
-			if (mod != null) {
-				return mod.getName();
-			}
+    /**
+     * Gets registry info for an entity.
+     *
+     * @param entity The entity to get registry info of.
+     * @return The entities registry info. Can be null.
+     */
+    public static EntityRegistry.EntityRegistration getRegistryInfo(Entity entity) {
 
-			return "Unknown";
-		}
+        return getRegistryInfo(entity.getClass());
+    }
 
-		return "Minecraft";
-	}
+    /**
+     * Gets registry info for an entity, from it's class.
+     *
+     * @param entity The class to look for.
+     * @return The entities registry info. Can be null.
+     */
+    public static EntityRegistry.EntityRegistration getRegistryInfo(Class<? extends Entity> entity) {
 
-	/**
-	 * Gets registry info for an entity.
-	 *
-	 * @param entity The entity to get registry info of.
-	 * @return The entities registry info. Can be null.
-	 */
-	public static EntityRegistry.EntityRegistration getRegistryInfo(Entity entity) {
+        return EntityRegistry.instance().lookupModSpawn(entity, false);
+    }
 
-		return getRegistryInfo(entity.getClass());
-	}
+    /**
+     * Gets a mod container by it's ID.
+     *
+     * @param modID The ID of the mod to grab.
+     * @return The ModContainer using that ID.
+     */
+    public static ModContainer getModContainer(String modID) {
 
-	/**
-	 * Gets registry info for an entity, from it's class.
-	 *
-	 * @param entity The class to look for.
-	 * @return The entities registry info. Can be null.
-	 */
-	public static EntityRegistry.EntityRegistration getRegistryInfo(Class<? extends Entity> entity) {
+        return Loader.instance().getIndexedModList().get(modID);
+    }
 
-		return EntityRegistry.instance().lookupModSpawn(entity, false);
-	}
+    /**
+     * Gets the name of a mod from it's ID.
+     *
+     * @param modId The mod to look up.
+     * @return The name of the mod.
+     */
+    public static String getModName(String modId) {
 
-	/**
-	 * Gets a mod container by it's ID.
-	 *
-	 * @param modID The ID of the mod to grab.
-	 * @return The ModContainer using that ID.
-	 */
-	public static ModContainer getModContainer(String modID) {
+        final ModContainer mod = getModContainer(modId);
+        return mod != null ? mod.getName() : modId;
+    }
 
-		return Loader.instance().getIndexedModList().get(modID);
-	}
+    /**
+     * Searches through the array of CreativeTabs and finds the first tab with the same label as the one passed.
+     *
+     * @param label: The label of the tab you are looking for.
+     * @return CreativeTabs: A CreativeTabs with the same label as the one passed. If this is not found, you will get null.
+     */
+    @SideOnly(Side.CLIENT)
+    public static CreativeTabs getTabFromLabel(String label) {
 
-	/**
-	 * Gets the name of a mod from it's ID.
-	 *
-	 * @param modId The mod to look up.
-	 * @return The name of the mod.
-	 */
-	public static String getModName(String modId) {
+        for (final CreativeTabs tab : CreativeTabs.CREATIVE_TAB_ARRAY) {
+            if (tab.getTabLabel().equalsIgnoreCase(label)) {
+                return tab;
+            }
+        }
 
-		final ModContainer mod = getModContainer(modId);
-		return mod != null ? mod.getName() : modId;
-	}
+        return null;
+    }
 
-	/**
-	 * Searches through the array of CreativeTabs and finds the first tab with the same label
-	 * as the one passed.
-	 *
-	 * @param label: The label of the tab you are looking for.
-	 * @return CreativeTabs: A CreativeTabs with the same label as the one passed. If this is
-	 * not found, you will get null.
-	 */
-	@SideOnly(Side.CLIENT)
-	public static CreativeTabs getTabFromLabel(String label) {
+    /**
+     * Creates a ResourceLocation for a string, using the active mod container as the owner of the ID.
+     *
+     * @param id The id for the specific entry.
+     * @return A ResourceLocation for the entry.
+     */
+    public static ResourceLocation getIdForCurrentContainer(String id) {
 
-		for (final CreativeTabs tab : CreativeTabs.CREATIVE_TAB_ARRAY) {
-			if (tab.getTabLabel().equalsIgnoreCase(label)) {
-				return tab;
-			}
-		}
+        final int index = id.lastIndexOf(':');
+        final String entryName = index == -1 ? id : id.substring(index + 1);
+        final ModContainer mod = Loader.instance().activeModContainer();
+        final String prefix =
+                mod == null || mod instanceof InjectedModContainer && ((InjectedModContainer) mod).wrappedContainer instanceof FMLContainer ?
+                        "minecraft" : mod.getModId()
+                        .toLowerCase();
 
-		return null;
-	}
+        return new ResourceLocation(prefix, entryName);
+    }
 
-	/**
-	 * Creates a ResourceLocation for a string, using the active mod container as the owner of
-	 * the ID.
-	 *
-	 * @param id The id for the specific entry.
-	 * @return A ResourceLocation for the entry.
-	 */
-	public static ResourceLocation getIdForCurrentContainer(String id) {
+    /**
+     * Creates a sorted version of a ForgeRegistry. This will only contain entries that were present at the time of calling it. Entries are sorted by
+     * their owning modid.
+     *
+     * @param registry The registry to sort.
+     * @return A map of all entries sorted by the owning mod id.
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends IForgeRegistryEntry<T>> Multimap<String, T> getSortedEntries(IForgeRegistry<T> registry) {
 
-		final int index = id.lastIndexOf(':');
-		final String entryName = index == -1 ? id : id.substring(index + 1);
-		final ModContainer mod = Loader.instance().activeModContainer();
-		final String prefix = mod == null || mod instanceof InjectedModContainer && ((InjectedModContainer) mod).wrappedContainer instanceof FMLContainer ? "minecraft" : mod.getModId()
-		                                                                                                                                                                     .toLowerCase();
+        if (REGISTRY_CACHE.containsKey(registry)) {
 
-		return new ResourceLocation(prefix, entryName);
-	}
+            return (Multimap<String, T>) REGISTRY_CACHE.get(registry);
+        }
 
-	/**
-	 * Creates a sorted version of a ForgeRegistry. This will only contain entries that were
-	 * present at the time of calling it. Entries are sorted by their owning modid.
-	 *
-	 * @param registry The registry to sort.
-	 * @return A map of all entries sorted by the owning mod id.
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T extends IForgeRegistryEntry<T>> Multimap<String, T> getSortedEntries(IForgeRegistry<T> registry) {
+        final Multimap<String, T> map = ArrayListMultimap.create();
 
-		if (REGISTRY_CACHE.containsKey(registry)) {
+        for (final T entry : registry.getValues()) {
 
-			return (Multimap<String, T>) REGISTRY_CACHE.get(registry);
-		}
+            if (entry.getRegistryName() != null) {
 
-		final Multimap<String, T> map = ArrayListMultimap.create();
+                map.put(entry.getRegistryName().getNamespace(), entry);
+            }
+        }
 
-		for (final T entry : registry.getValues()) {
+        REGISTRY_CACHE.put(registry, map);
+        return map;
+    }
 
-			if (entry.getRegistryName() != null) {
+    /**
+     * Gets a ResourceLocation where the domain/modid is pulled from the active mod id.
+     *
+     * @param name The name of the id to create.
+     * @return The ResourceLocation with the active mod as the domain/id.
+     */
+    public static ResourceLocation getIdForActiveMod(String name) {
 
-				map.put(entry.getRegistryName().getNamespace(), entry);
-			}
-		}
+        if (!name.contains(":")) {
 
-		REGISTRY_CACHE.put(registry, map);
-		return map;
-	}
+            final ModContainer container = Loader.instance().activeModContainer();
 
-	/**
-	 * Gets a ResourceLocation where the domain/modid is pulled from the active mod id.
-	 *
-	 * @param name The name of the id to create.
-	 * @return The ResourceLocation with the active mod as the domain/id.
-	 */
-	public static ResourceLocation getIdForActiveMod(String name) {
+            if (container != null) {
 
-		if (!name.contains(":")) {
+                return new ResourceLocation(container.getModId(), name);
+            }
+        }
 
-			final ModContainer container = Loader.instance().activeModContainer();
-
-			if (container != null) {
-
-				return new ResourceLocation(container.getModId(), name);
-			}
-		}
-
-		return new ResourceLocation(name);
-	}
+        return new ResourceLocation(name);
+    }
 }

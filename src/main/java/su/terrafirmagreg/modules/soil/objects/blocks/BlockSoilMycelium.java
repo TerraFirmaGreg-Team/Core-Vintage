@@ -1,8 +1,12 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
+import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
-import lombok.Getter;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMycelium;
 import net.minecraft.block.state.BlockStateContainer;
@@ -16,13 +20,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import lombok.Getter;
+import net.dries007.tfc.api.util.FallingBlockManager;
+
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import java.util.Random;
 
@@ -31,68 +33,65 @@ import static su.terrafirmagreg.api.util.PropertyUtils.*;
 @Getter
 public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
-	private final SoilBlockVariant blockVariant;
-	private final SoilType type;
+    private final SoilBlockVariant blockVariant;
+    private final SoilType type;
 
-	public BlockSoilMycelium(SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilMycelium(SoilBlockVariant blockVariant, SoilType type) {
 
-		this.blockVariant = blockVariant;
-		this.type = type;
+        this.blockVariant = blockVariant;
+        this.type = type;
 
-		FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
 
+        setDefaultState(this.blockState.getBaseState()
+                .withProperty(NORTH, Boolean.FALSE)
+                .withProperty(EAST, Boolean.FALSE)
+                .withProperty(SOUTH, Boolean.FALSE)
+                .withProperty(WEST, Boolean.FALSE)
+                .withProperty(SNOWY, Boolean.FALSE));
 
-		setDefaultState(this.blockState.getBaseState()
-		                               .withProperty(NORTH, Boolean.FALSE)
-		                               .withProperty(EAST, Boolean.FALSE)
-		                               .withProperty(SOUTH, Boolean.FALSE)
-		                               .withProperty(WEST, Boolean.FALSE)
-		                               .withProperty(SNOWY, Boolean.FALSE));
+        //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+    }
 
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, blockVariant);
+    }
 
-		//DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
-	}
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockBase(this);
+    }
 
-	@Override
-	public void onRegisterOreDict() {
-		OreDictUtils.register(this, blockVariant);
-	}
+    @NotNull
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
+        pos = pos.add(0, -1, 0);
+        Block blockUp = world.getBlockState(pos.up()).getBlock();
+        return state
+                .withProperty(NORTH, world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() instanceof BlockSoilMycelium)
+                .withProperty(EAST, world.getBlockState(pos.offset(EnumFacing.EAST)).getBlock() instanceof BlockSoilMycelium)
+                .withProperty(SOUTH, world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() instanceof BlockSoilMycelium)
+                .withProperty(WEST, world.getBlockState(pos.offset(EnumFacing.WEST)).getBlock() instanceof BlockSoilMycelium)
+                .withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
+    }
 
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockBase(this);
-	}
+    @NotNull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY);
+    }
 
-	@NotNull
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
-		pos = pos.add(0, -1, 0);
-		Block blockUp = world.getBlockState(pos.up()).getBlock();
-		return state
-				.withProperty(NORTH, world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() instanceof BlockSoilMycelium)
-				.withProperty(EAST, world.getBlockState(pos.offset(EnumFacing.EAST)).getBlock() instanceof BlockSoilMycelium)
-				.withProperty(SOUTH, world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() instanceof BlockSoilMycelium)
-				.withProperty(WEST, world.getBlockState(pos.offset(EnumFacing.WEST)).getBlock() instanceof BlockSoilMycelium)
-				.withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
-	}
+    @NotNull
+    @Override
+    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+        return SoilItemVariants.PILE.get(type);
+    }
 
-	@NotNull
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY);
-	}
-
-
-	@NotNull
-	@Override
-	public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-		return SoilItemVariants.PILE.get(type);
-	}
-
-	@NotNull
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
+    @NotNull
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 }

@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-	[
-		{
-		  "type": "forge:ore_dict",
-		  "ore": "mixFirmaCola"
-		}
-	],
-	[
-		{
-		  "type": "forge:ore_dict",
-		  "ore": "oilsFirmaCola"
-		}
-	]
+    [
+      {
+        "type": "forge:ore_dict",
+        "ore": "mixFirmaCola"
+      }
+    ],
+    [
+      {
+        "type": "forge:ore_dict",
+        "ore": "oilsFirmaCola"
+      }
+    ]
   ],
   "result": {
     "item": "tfcflorae:firma_cola_blend",

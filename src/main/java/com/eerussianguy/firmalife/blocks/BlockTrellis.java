@@ -1,6 +1,5 @@
 package com.eerussianguy.firmalife.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -10,43 +9,46 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 
+import mcp.MethodsReturnNonnullByDefault;
+
+import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
 public class BlockTrellis extends BlockNonCube {
-	private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2.0D / 16, 0.0D, 2.0D / 16, 14.0D / 16, 1.0D, 14.0D / 16);
 
-	public BlockTrellis() {
-		super(Material.IRON);
-		setHardness(1.0f);
-		setResistance(1.0f);
-		setLightOpacity(0);
-	}
+    private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2.0D / 16, 0.0D, 2.0D / 16, 14.0D / 16, 1.0D, 14.0D / 16);
 
-	@Override
-	@SuppressWarnings("deprecation")
-	@NotNull
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return SHAPE;
-	}
+    public BlockTrellis() {
+        super(Material.IRON);
+        setHardness(1.0f);
+        setResistance(1.0f);
+        setLightOpacity(0);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (!canStay(world, pos)) {
-			world.destroyBlock(pos, true);
-		}
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    @NotNull
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return SHAPE;
+    }
 
-	private boolean canStay(IBlockAccess world, BlockPos pos) {
-		IBlockState state = world.getBlockState(pos.down());
-		return state.getBlock() instanceof BlockTrellis || state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canStay(world, pos)) {
+            world.destroyBlock(pos, true);
+        }
+    }
 
-	@Override
-	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
-		if (!canStay(worldIn, pos)) return false;
-		return super.canPlaceBlockOnSide(worldIn, pos, side);
-	}
+    private boolean canStay(IBlockAccess world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos.down());
+        return state.getBlock() instanceof BlockTrellis || state.getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+        if (!canStay(worldIn, pos)) return false;
+        return super.canPlaceBlockOnSide(worldIn, pos, side);
+    }
 }

@@ -19,26 +19,26 @@ import java.util.stream.Collectors;
 
 public class HotOrNotJEIPlugin implements IModPlugin {
 
-	@Override
-	public void register(final IModRegistry registry) {
+    @Override
+    public void register(final IModRegistry registry) {
 
-		final List<Metal> tongMetalsInOrder = TFCRegistries.METALS.getValuesCollection()
-		                                                          .stream()
-		                                                          .sorted(Comparator.comparingInt(metal -> metal.getTier()
-		                                                                                                        .ordinal()))
-		                                                          .filter(metal -> metal.isToolMetal() && metal.getTier()
-		                                                                                                       .isAtMost(Metal.Tier.TIER_II))
-		                                                          .collect(Collectors.toList());
+        final List<Metal> tongMetalsInOrder = TFCRegistries.METALS.getValuesCollection()
+                .stream()
+                .sorted(Comparator.comparingInt(metal -> metal.getTier()
+                        .ordinal()))
+                .filter(metal -> metal.isToolMetal() && metal.getTier()
+                        .isAtMost(Metal.Tier.TIER_II))
+                .collect(Collectors.toList());
 
-		final List<UnMoldJawPieceRecipeWrapper> jawMoldRecipes = new ArrayList<>();
-		final List<CastJawMoldRecipeWrapper> castingList = new ArrayList<>();
+        final List<UnMoldJawPieceRecipeWrapper> jawMoldRecipes = new ArrayList<>();
+        final List<CastJawMoldRecipeWrapper> castingList = new ArrayList<>();
 
-		for (final Metal metal : tongMetalsInOrder) {
-			jawMoldRecipes.add(new UnMoldJawPieceRecipeWrapper(metal));
-			castingList.add(new CastJawMoldRecipeWrapper(metal));
-		}
+        for (final Metal metal : tongMetalsInOrder) {
+            jawMoldRecipes.add(new UnMoldJawPieceRecipeWrapper(metal));
+            castingList.add(new CastJawMoldRecipeWrapper(metal));
+        }
 
-		registry.addRecipes(jawMoldRecipes, VanillaRecipeCategoryUid.CRAFTING);
-		registry.addRecipes(castingList, TFCJEIPlugin.CASTING_UID);
-	}
+        registry.addRecipes(jawMoldRecipes, VanillaRecipeCategoryUid.CRAFTING);
+        registry.addRecipes(castingList, TFCJEIPlugin.CASTING_UID);
+    }
 }

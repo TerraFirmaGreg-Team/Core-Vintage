@@ -1,13 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import lombok.Getter;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.SoundType;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Nullable;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -15,40 +7,51 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.SoundType;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import lombok.Getter;
+
+import org.jetbrains.annotations.Nullable;
+
 @Getter
 public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
 
-	private final WoodBlockVariant blockVariant;
-	private final WoodType type;
+    private final WoodBlockVariant blockVariant;
+    private final WoodType type;
 
-	public BlockWoodFenceGate(WoodBlockVariant blockVariant, WoodType type) {
-		super(BlockPlanks.EnumType.OAK);
+    public BlockWoodFenceGate(WoodBlockVariant blockVariant, WoodType type) {
+        super(BlockPlanks.EnumType.OAK);
 
-		this.blockVariant = blockVariant;
-		this.type = type;
+        this.blockVariant = blockVariant;
+        this.type = type;
 
-		setSoundType(SoundType.WOOD);
-		setHarvestLevel("axe", 0);
-		setHardness(2.0F);
-		setResistance(15.0F);
+        setSoundType(SoundType.WOOD);
+        setHarvestLevel("axe", 0);
+        setHardness(2.0F);
+        setResistance(15.0F);
 
-		//OreDictUtils.register(this, variant.toString());
-		//OreDictUtils.register(this, variant.toString(), type.toString());
-	}
+        //OreDictUtils.register(this, variant.toString());
+        //OreDictUtils.register(this, variant.toString(), type.toString());
+    }
 
-	@Nullable
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockBase(this);
-	}
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockBase(this);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
-				.customResource(getResourceLocation())
-				.ignore(IN_WALL, POWERED)
-				.build());
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onStateMapperRegister() {
+        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
+                .customResource(getResourceLocation())
+                .ignore(IN_WALL, POWERED)
+                .build());
+    }
 
 }

@@ -5,7 +5,8 @@ import tfcflorae.objects.blocks.blocktype.BlockRockVariantFallableTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 public abstract class FarmlandTFCF extends BlockRockVariantFallableTFCF {
-	public FarmlandTFCF(RockTFCF rockTFCF, Rock rock) {
-		super(rockTFCF, rock);
-	}
+
+    public FarmlandTFCF(RockTFCF rockTFCF, Rock rock) {
+        super(rockTFCF, rock);
+    }
 }

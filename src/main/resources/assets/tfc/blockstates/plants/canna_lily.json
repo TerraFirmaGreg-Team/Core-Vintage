@@ -12,12 +12,12 @@
     },
     {
       "when": {
-        "stage": "1" 
+        "stage": "1"
       },
       "apply": [
         {
-		  "model": "tfc:plants/canna_lily_1"
-		}
+          "model": "tfc:plants/canna_lily_1"
+        }
       ]
     },
     {

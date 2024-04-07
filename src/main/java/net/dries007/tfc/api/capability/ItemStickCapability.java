@@ -1,10 +1,5 @@
 package net.dries007.tfc.api.capability;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +8,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.api.capability.size.CapabilityItemSize;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,43 +26,42 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
  * Custom heat + size capability for stick items.
  */
 public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
-	public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "stick");
-	private static final float MELTING_POINT = 40f;
-	private static final float HEAT_CAPACITY = 1f;
 
-	public ItemStickCapability() {
-		this(null);
-	}
+    public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "stick");
+    private static final float MELTING_POINT = 40f;
+    private static final float HEAT_CAPACITY = 1f;
 
-	public ItemStickCapability(@Nullable NBTTagCompound nbt) {
-		super(nbt, HEAT_CAPACITY, MELTING_POINT);
-	}
+    public ItemStickCapability() {
+        this(null);
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
-		float temperature = getTemperature();
-		if (temperature > getMeltTemp() * 0.9f) {
-			text.add(I18n.format("tfc.enum.heat.torch.lit"));
-		} else if (temperature > 1f) {
-			text.add(I18n.format("tfc.enum.heat.torch.catching_fire"));
-		}
-	}
+    public ItemStickCapability(@Nullable NBTTagCompound nbt) {
+        super(nbt, HEAT_CAPACITY, MELTING_POINT);
+    }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
+        float temperature = getTemperature();
+        if (temperature > getMeltTemp() * 0.9f) {
+            text.add(I18n.format("tfc.enum.heat.torch.lit"));
+        } else if (temperature > 1f) {
+            text.add(I18n.format("tfc.enum.heat.torch.catching_fire"));
+        }
+    }
 
-	@Override
-	public @NotNull Size getSize(@NotNull ItemStack stack) {
-		return Size.SMALL; // Store anywhere
-	}
+    @Override
+    public @NotNull Size getSize(@NotNull ItemStack stack) {
+        return Size.SMALL; // Store anywhere
+    }
 
+    @Override
+    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+        return Weight.VERY_LIGHT; // Stacksize = 64
+    }
 
-	@Override
-	public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-		return Weight.VERY_LIGHT; // Stacksize = 64
-	}
-
-	@Override
-	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityItemSize.ITEM_SIZE_CAPABILITY || super.hasCapability(capability, facing);
-	}
+    @Override
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityItemSize.ITEM_SIZE_CAPABILITY || super.hasCapability(capability, facing);
+    }
 }

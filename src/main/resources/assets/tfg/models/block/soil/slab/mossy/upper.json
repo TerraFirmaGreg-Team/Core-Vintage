@@ -1,9 +1,9 @@
 {
-	"parent": "tfg:block/soil/slab/upper",
+  "parent": "tfg:block/soil/slab/upper",
   "textures": {
     "overlay": "#overlay"
   },
-	"elements": [
+  "elements": [
     {
       "from": [
         0,

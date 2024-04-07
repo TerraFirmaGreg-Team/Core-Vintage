@@ -2,7 +2,7 @@
   "type": "tfc:damage_item_shapeless",
   "ingredients": [
     {
-		"item": "tfcflorae:ceramics/earthenware/earthenware_clay_block"
+      "item": "tfcflorae:ceramics/earthenware/earthenware_clay_block"
     }
   ],
   "result": {

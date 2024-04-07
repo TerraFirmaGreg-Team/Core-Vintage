@@ -15,14 +15,24 @@
   "variants": {
     "normal": [{}],
     "lit": {
-      "true": { "textures" : { "north":  "blocks/pumpkin_face_on" }},
+      "true": {
+        "textures": {
+          "north": "blocks/pumpkin_face_on"
+        }
+      },
       "false": {}
     },
     "facing": {
       "north": {},
-      "west": { "y": 270 },
-      "south": { "y": 180 },
-      "east": { "y": 90 }
+      "west": {
+        "y": 270
+      },
+      "south": {
+        "y": 180
+      },
+      "east": {
+        "y": 90
+      }
     }
   }
 }

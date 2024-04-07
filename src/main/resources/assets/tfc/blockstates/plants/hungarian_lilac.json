@@ -6,9 +6,9 @@
         "stage": "0"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/hungarian_lilac_single_0"
-		}
+        }
       ]
     },
     {
@@ -17,9 +17,9 @@
         "stage": "1"
       },
       "apply": [
-		{
+        {
           "model": "tfc:plants/hungarian_lilac_single_1"
-		}
+        }
       ]
     },
     {

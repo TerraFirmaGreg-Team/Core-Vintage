@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/catlinite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/catlinite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/catlinite",
+      "count": 4
+    }
+    }

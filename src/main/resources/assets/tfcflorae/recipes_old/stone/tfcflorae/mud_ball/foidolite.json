@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/foidolite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/foidolite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/foidolite",
+      "count": 4
+    }
+    }

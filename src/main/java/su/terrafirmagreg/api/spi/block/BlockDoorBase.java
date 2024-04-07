@@ -1,6 +1,10 @@
 package su.terrafirmagreg.api.spi.block;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.spi.itemblock.ItemBlockDoor;
+import su.terrafirmagreg.api.util.ModelUtils;
+
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -15,48 +19,47 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.api.capability.size.IItemSize;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
-import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockDoor;
-import su.terrafirmagreg.api.util.ModelUtils;
 
 import java.util.Random;
 
 public abstract class BlockDoorBase extends BlockDoor implements IAutoReg, IItemSize, ICustomStateMapper {
 
-	protected BlockDoorBase(Material material) {
-		super(material);
+    protected BlockDoorBase(Material material) {
+        super(material);
 
-		setHardness(3.0F);
+        setHardness(3.0F);
 
-	}
+    }
 
-	@Nullable
-	@Override
-	public ItemBlock getItemBlock() {
-		return new ItemBlockDoor(this);
-	}
+    @Nullable
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlockDoor(this);
+    }
 
+    @SuppressWarnings("ConstantConditions")
+    @NotNull
+    @Override
+    public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
+        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
+    }
 
-	@SuppressWarnings("ConstantConditions")
-	@NotNull
-	@Override
-	public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
-		return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
-	}
+    @SuppressWarnings("ConstantConditions")
+    @NotNull
+    @Override
+    public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos,
+                                  @NotNull EntityPlayer player) {
+        return new ItemStack(Item.getItemFromBlock(this));
+    }
 
-	@SuppressWarnings("ConstantConditions")
-	@NotNull
-	@Override
-	public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
-		return new ItemStack(Item.getItemFromBlock(this));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onStateMapperRegister() {
-		ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void onStateMapperRegister() {
+        ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
+    }
 }

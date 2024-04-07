@@ -6,17 +6,18 @@ import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import java.util.EnumMap;
 
 public class ItemUnfiredKaoliniteMoldTFCE extends ItemPottery {
-	private static final EnumMap<ItemMetalTFCE.ItemType, ItemUnfiredKaoliniteMoldTFCE> MAP = new EnumMap<>(ItemMetalTFCE.ItemType.class);
-	public final ItemMetalTFCE.ItemType type;
 
-	public ItemUnfiredKaoliniteMoldTFCE(ItemMetalTFCE.ItemType type) {
-		this.type = type;
-		if (MAP.put(type, this) != null) {
-			throw new IllegalStateException("There can only be one.");
-		}
-	}
+    private static final EnumMap<ItemMetalTFCE.ItemType, ItemUnfiredKaoliniteMoldTFCE> MAP = new EnumMap<>(ItemMetalTFCE.ItemType.class);
+    public final ItemMetalTFCE.ItemType type;
 
-	public static ItemUnfiredKaoliniteMoldTFCE get(ItemMetalTFCE.ItemType category) {
-		return MAP.get(category);
-	}
+    public ItemUnfiredKaoliniteMoldTFCE(ItemMetalTFCE.ItemType type) {
+        this.type = type;
+        if (MAP.put(type, this) != null) {
+            throw new IllegalStateException("There can only be one.");
+        }
+    }
+
+    public static ItemUnfiredKaoliniteMoldTFCE get(ItemMetalTFCE.ItemType category) {
+        return MAP.get(category);
+    }
 }

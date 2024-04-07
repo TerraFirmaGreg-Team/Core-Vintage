@@ -6,17 +6,18 @@ import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import java.util.EnumMap;
 
 public class ItemUnfiredEarthenwareMoldTFCE extends ItemPottery {
-	private static final EnumMap<ItemMetalTFCE.ItemType, ItemUnfiredEarthenwareMoldTFCE> MAP = new EnumMap<>(ItemMetalTFCE.ItemType.class);
-	public final ItemMetalTFCE.ItemType type;
 
-	public ItemUnfiredEarthenwareMoldTFCE(ItemMetalTFCE.ItemType type) {
-		this.type = type;
-		if (MAP.put(type, this) != null) {
-			throw new IllegalStateException("There can only be one.");
-		}
-	}
+    private static final EnumMap<ItemMetalTFCE.ItemType, ItemUnfiredEarthenwareMoldTFCE> MAP = new EnumMap<>(ItemMetalTFCE.ItemType.class);
+    public final ItemMetalTFCE.ItemType type;
 
-	public static ItemUnfiredEarthenwareMoldTFCE get(ItemMetalTFCE.ItemType category) {
-		return MAP.get(category);
-	}
+    public ItemUnfiredEarthenwareMoldTFCE(ItemMetalTFCE.ItemType type) {
+        this.type = type;
+        if (MAP.put(type, this) != null) {
+            throw new IllegalStateException("There can only be one.");
+        }
+    }
+
+    public static ItemUnfiredEarthenwareMoldTFCE get(ItemMetalTFCE.ItemType category) {
+        return MAP.get(category);
+    }
 }

@@ -1,10 +1,5 @@
 package net.dries007.tfc.api.capability.player;
 
-import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByte;
@@ -12,124 +7,131 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+
+import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.skills.Skill;
+import net.dries007.tfc.util.skills.SkillType;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-
 public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound>, IPlayerData {
-	public static final int MAX_INTOXICATED_TICKS = 36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
-	private final Map<String, Skill> skills;
-	private final EntityPlayer player;
-	private ItemStack harvestingTool;
-	private long intoxicatedTime;
-	private boolean hasBook;
+    public static final int MAX_INTOXICATED_TICKS = 36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
-	private ChiselRecipe.Mode chiselMode = ChiselRecipe.Mode.SMOOTH;
+    private final Map<String, Skill> skills;
+    private final EntityPlayer player;
+    private ItemStack harvestingTool;
+    private long intoxicatedTime;
+    private boolean hasBook;
 
-	public PlayerDataHandler(EntityPlayer player) {
-		this.skills = SkillType.createSkillMap(this);
-		this.player = player;
-		this.harvestingTool = ItemStack.EMPTY;
-		this.hasBook = false;
-		this.intoxicatedTime = 0;
-	}
+    private ChiselRecipe.Mode chiselMode = ChiselRecipe.Mode.SMOOTH;
 
-	@Override
-	public NBTTagCompound serializeNBT() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		skills.forEach((k, v) -> nbt.setTag(k, v.serializeNBT()));
-		nbt.setTag("chiselMode", new NBTTagByte((byte) chiselMode.ordinal()));
-		nbt.setTag("harvestingTool", harvestingTool.serializeNBT());
-		nbt.setBoolean("hasBook", hasBook);
-		nbt.setLong("intoxicatedTime", intoxicatedTime);
-		return nbt;
-	}
+    public PlayerDataHandler(EntityPlayer player) {
+        this.skills = SkillType.createSkillMap(this);
+        this.player = player;
+        this.harvestingTool = ItemStack.EMPTY;
+        this.hasBook = false;
+        this.intoxicatedTime = 0;
+    }
 
-	@Override
-	public void deserializeNBT(@Nullable NBTTagCompound nbt) {
-		if (nbt != null) {
-			skills.forEach((k, v) -> v.deserializeNBT(nbt.getCompoundTag(k)));
-			chiselMode = ChiselRecipe.Mode.valueOf(nbt.getByte("chiselMode"));
-			harvestingTool = new ItemStack(nbt.getCompoundTag("harvestingTool"));
-			hasBook = nbt.getBoolean("hasBook");
-			intoxicatedTime = nbt.getLong("intoxicatedTime");
-		}
-	}
+    @Override
+    public NBTTagCompound serializeNBT() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        skills.forEach((k, v) -> nbt.setTag(k, v.serializeNBT()));
+        nbt.setTag("chiselMode", new NBTTagByte((byte) chiselMode.ordinal()));
+        nbt.setTag("harvestingTool", harvestingTool.serializeNBT());
+        nbt.setBoolean("hasBook", hasBook);
+        nbt.setLong("intoxicatedTime", intoxicatedTime);
+        return nbt;
+    }
 
-	@Override
-	@Nullable
-	@SuppressWarnings("unchecked")
-	public <S extends Skill> S getSkill(SkillType<S> skillType) {
-		return (S) skills.get(skillType.getName());
-	}
+    @Override
+    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+        if (nbt != null) {
+            skills.forEach((k, v) -> v.deserializeNBT(nbt.getCompoundTag(k)));
+            chiselMode = ChiselRecipe.Mode.valueOf(nbt.getByte("chiselMode"));
+            harvestingTool = new ItemStack(nbt.getCompoundTag("harvestingTool"));
+            hasBook = nbt.getBoolean("hasBook");
+            intoxicatedTime = nbt.getLong("intoxicatedTime");
+        }
+    }
 
-	@NotNull
-	@Override
-	public EntityPlayer getPlayer() {
-		return player;
-	}
+    @Override
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public <S extends Skill> S getSkill(SkillType<S> skillType) {
+        return (S) skills.get(skillType.getName());
+    }
 
-	@NotNull
-	@Override
-	public ItemStack getHarvestingTool() {
-		return harvestingTool;
-	}
+    @NotNull
+    @Override
+    public EntityPlayer getPlayer() {
+        return player;
+    }
 
-	@Override
-	public void setHarvestingTool(@NotNull ItemStack stack) {
-		this.harvestingTool = stack.copy();
-	}
+    @NotNull
+    @Override
+    public ItemStack getHarvestingTool() {
+        return harvestingTool;
+    }
 
-	@Override
-	@NotNull
-	public ChiselRecipe.Mode getChiselMode() {
-		return chiselMode;
-	}
+    @Override
+    public void setHarvestingTool(@NotNull ItemStack stack) {
+        this.harvestingTool = stack.copy();
+    }
 
-	@Override
-	public void setChiselMode(ChiselRecipe.Mode chiselMode) {
-		this.chiselMode = chiselMode;
-	}
+    @Override
+    @NotNull
+    public ChiselRecipe.Mode getChiselMode() {
+        return chiselMode;
+    }
 
-	@Override
-	public void addIntoxicatedTime(long ticks) {
-		long currentTicks = CalendarTFC.PLAYER_TIME.getTicks();
-		if (this.intoxicatedTime < currentTicks) {
-			this.intoxicatedTime = currentTicks;
-		}
-		this.intoxicatedTime += ticks;
-		if (this.intoxicatedTime > currentTicks + MAX_INTOXICATED_TICKS) {
-			this.intoxicatedTime = currentTicks + MAX_INTOXICATED_TICKS;
-		}
-	}
+    @Override
+    public void setChiselMode(ChiselRecipe.Mode chiselMode) {
+        this.chiselMode = chiselMode;
+    }
 
-	@Override
-	public long getIntoxicatedTime() {
-		return Math.max(0, intoxicatedTime - CalendarTFC.PLAYER_TIME.getTicks());
-	}
+    @Override
+    public void addIntoxicatedTime(long ticks) {
+        long currentTicks = CalendarTFC.PLAYER_TIME.getTicks();
+        if (this.intoxicatedTime < currentTicks) {
+            this.intoxicatedTime = currentTicks;
+        }
+        this.intoxicatedTime += ticks;
+        if (this.intoxicatedTime > currentTicks + MAX_INTOXICATED_TICKS) {
+            this.intoxicatedTime = currentTicks + MAX_INTOXICATED_TICKS;
+        }
+    }
 
-	@Override
-	public boolean hasBook() {
-		return this.hasBook;
-	}
+    @Override
+    public long getIntoxicatedTime() {
+        return Math.max(0, intoxicatedTime - CalendarTFC.PLAYER_TIME.getTicks());
+    }
 
-	@Override
-	public void setHasBook(boolean value) {
-		this.hasBook = value;
-	}
+    @Override
+    public boolean hasBook() {
+        return this.hasBook;
+    }
 
-	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityPlayerData.CAPABILITY;
-	}
+    @Override
+    public void setHasBook(boolean value) {
+        this.hasBook = value;
+    }
 
-	@Nullable
-	@Override
-	@SuppressWarnings("unchecked")
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityPlayerData.CAPABILITY ? (T) this : null;
-	}
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityPlayerData.CAPABILITY;
+    }
+
+    @Nullable
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityPlayerData.CAPABILITY ? (T) this : null;
+    }
 }

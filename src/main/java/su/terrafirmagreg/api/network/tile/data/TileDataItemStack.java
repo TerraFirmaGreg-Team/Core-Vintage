@@ -1,49 +1,51 @@
 package su.terrafirmagreg.api.network.tile.data;
 
-import com.google.common.base.Preconditions;
+import su.terrafirmagreg.api.network.tile.spi.TileDataBase;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
-import su.terrafirmagreg.api.network.tile.spi.TileDataBase;
+
+import com.google.common.base.Preconditions;
 
 import java.io.IOException;
 
 public class TileDataItemStack extends TileDataBase {
 
-	private ItemStack itemStack;
+    private ItemStack itemStack;
 
-	public TileDataItemStack(ItemStack itemStack) {
+    public TileDataItemStack(ItemStack itemStack) {
 
-		this(itemStack, 1);
-	}
+        this(itemStack, 1);
+    }
 
-	public TileDataItemStack(ItemStack itemStack, int updateInterval) {
+    public TileDataItemStack(ItemStack itemStack, int updateInterval) {
 
-		super(updateInterval);
-		this.itemStack = Preconditions.checkNotNull(itemStack);
-	}
+        super(updateInterval);
+        this.itemStack = Preconditions.checkNotNull(itemStack);
+    }
 
-	public void set(ItemStack itemStack) {
+    public void set(ItemStack itemStack) {
 
-		if (this.itemStack != itemStack) {
-			this.itemStack = itemStack;
-			this.setDirty(true);
-		}
-	}
+        if (this.itemStack != itemStack) {
+            this.itemStack = itemStack;
+            this.setDirty(true);
+        }
+    }
 
-	public ItemStack get() {
+    public ItemStack get() {
 
-		return this.itemStack;
-	}
+        return this.itemStack;
+    }
 
-	@Override
-	public void read(PacketBuffer buffer) throws IOException {
+    @Override
+    public void read(PacketBuffer buffer) throws IOException {
 
-		this.itemStack = new ItemStack(Preconditions.checkNotNull(buffer.readCompoundTag()));
-	}
+        this.itemStack = new ItemStack(Preconditions.checkNotNull(buffer.readCompoundTag()));
+    }
 
-	@Override
-	public void write(PacketBuffer buffer) {
+    @Override
+    public void write(PacketBuffer buffer) {
 
-		buffer.writeCompoundTag(this.itemStack.serializeNBT());
-	}
+        buffer.writeCompoundTag(this.itemStack.serializeNBT());
+    }
 }

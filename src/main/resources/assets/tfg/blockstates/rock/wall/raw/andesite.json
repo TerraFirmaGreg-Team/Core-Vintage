@@ -16,7 +16,6 @@
         "model": "tfg:rock/wall/inventory"
       }
     ],
-    
     "north": {
       "true": {
         "submodel": "tfg:rock/wall/side"

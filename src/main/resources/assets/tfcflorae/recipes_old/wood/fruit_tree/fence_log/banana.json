@@ -10,7 +10,7 @@
     },
     "B": {
       "type": "forge:ore_dict",
-      "ore" : "lumberBanana"
+      "ore": "lumberBanana"
     }
   },
   "result": {

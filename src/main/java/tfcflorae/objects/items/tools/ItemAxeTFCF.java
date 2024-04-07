@@ -1,60 +1,60 @@
 package tfcflorae.objects.items.tools;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemStack;
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 import tfcflorae.util.OreDictionaryHelper;
 
+import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
 
 public class ItemAxeTFCF extends ItemAxe implements IItemSize {
-	public final ToolMaterial material;
 
-	public ItemAxeTFCF(ToolMaterial material, float AttackDamage, float AttackSpeed, int Durability, Object... oreNameParts) {
-		super(material, material.getAttackDamage(), AttackSpeed);
-		this.material = material;
-		this.attackDamage = (AttackDamage);
-		this.attackSpeed = (AttackSpeed);
-		this.setMaxDamage(Durability);
-		this.setHarvestLevel("axe", material.getHarvestLevel());
+    public final ToolMaterial material;
 
-		for (Object obj : oreNameParts) {
-			if (obj instanceof Object[])
-				OreDictionaryHelper.register(this, (Object[]) obj);
-			else
-				OreDictionaryHelper.register(this, obj);
-		}
-		OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
-	}
+    public ItemAxeTFCF(ToolMaterial material, float AttackDamage, float AttackSpeed, int Durability, Object... oreNameParts) {
+        super(material, material.getAttackDamage(), AttackSpeed);
+        this.material = material;
+        this.attackDamage = (AttackDamage);
+        this.attackSpeed = (AttackSpeed);
+        this.setMaxDamage(Durability);
+        this.setHarvestLevel("axe", material.getHarvestLevel());
 
-	@Override
-	public boolean canHarvestBlock(IBlockState state) {
-		Material material = state.getMaterial();
-		return material == Material.WOOD || material == Material.GOURD || material == Material.PLANTS || material == Material.VINE;
-	}
+        for (Object obj : oreNameParts) {
+            if (obj instanceof Object[])
+                OreDictionaryHelper.register(this, (Object[]) obj);
+            else
+                OreDictionaryHelper.register(this, obj);
+        }
+        OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
+    }
 
+    @Override
+    public boolean canHarvestBlock(IBlockState state) {
+        Material material = state.getMaterial();
+        return material == Material.WOOD || material == Material.GOURD || material == Material.PLANTS || material == Material.VINE;
+    }
 
-	@Override
-	public @NotNull Size getSize(ItemStack stack) {
-		return Size.LARGE; // Stored only in chests
-	}
+    @Override
+    public @NotNull Size getSize(ItemStack stack) {
+        return Size.LARGE; // Stored only in chests
+    }
 
+    @Override
+    public @NotNull Weight getWeight(ItemStack stack) {
+        return Weight.MEDIUM;
+    }
 
-	@Override
-	public @NotNull Weight getWeight(ItemStack stack) {
-		return Weight.MEDIUM;
-	}
-
-	@Override
-	public boolean canStack(ItemStack stack) {
-		return false;
-	}
+    @Override
+    public boolean canStack(ItemStack stack) {
+        return false;
+    }
 }

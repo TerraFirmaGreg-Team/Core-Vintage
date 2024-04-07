@@ -1,14 +1,5 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.container.ContainerBarrel;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -28,6 +19,16 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
+import net.dries007.tfc.client.button.IButtonTooltip;
+import net.dries007.tfc.network.PacketGuiButton;
+import net.dries007.tfc.objects.container.ContainerBarrel;
+import net.dries007.tfc.objects.te.TEBarrel;
+import net.dries007.tfc.util.Helpers;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
@@ -37,171 +38,174 @@ import java.util.List;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiBarrel extends GuiContainerTE<TEBarrel> {
-	public static final ResourceLocation BARREL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/barrel.png");
-	private final String translationKey;
 
-	public GuiBarrel(Container container, InventoryPlayer playerInv, TEBarrel tile, String translationKey) {
-		super(container, playerInv, tile, BARREL_BACKGROUND);
+    public static final ResourceLocation BARREL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/barrel.png");
+    private final String translationKey;
 
-		this.translationKey = translationKey;
-	}
+    public GuiBarrel(Container container, InventoryPlayer playerInv, TEBarrel tile, String translationKey) {
+        super(container, playerInv, tile, BARREL_BACKGROUND);
 
-	@Override
-	public void initGui() {
-		super.initGui();
-		addButton(new GuiButtonBarrelSeal(tile, 0, guiTop, guiLeft));
-	}
+        this.translationKey = translationKey;
+    }
 
-	@Override
-	protected void renderHoveredToolTip(int mouseX, int mouseY) {
-		super.renderHoveredToolTip(mouseX, mouseY);
+    @Override
+    public void initGui() {
+        super.initGui();
+        addButton(new GuiButtonBarrelSeal(tile, 0, guiTop, guiLeft));
+    }
 
-		int relX = mouseX - guiLeft;
-		int relY = mouseY - guiTop;
+    @Override
+    protected void renderHoveredToolTip(int mouseX, int mouseY) {
+        super.renderHoveredToolTip(mouseX, mouseY);
 
-		if (relX >= 7 && relY >= 19 && relX < 25 && relY < 71) {
-			IFluidHandler tank = ((ContainerBarrel) inventorySlots).getBarrelTank();
+        int relX = mouseX - guiLeft;
+        int relY = mouseY - guiTop;
 
-			if (tank != null) {
-				FluidStack fluid = tank.getTankProperties()[0].getContents();
-				List<String> tooltip = new ArrayList<>();
+        if (relX >= 7 && relY >= 19 && relX < 25 && relY < 71) {
+            IFluidHandler tank = ((ContainerBarrel) inventorySlots).getBarrelTank();
 
-				if (fluid == null || fluid.amount == 0) {
-					tooltip.add(I18n.format(MODID_TFC + ".tooltip.barrel_empty"));
-				} else {
-					tooltip.add(fluid.getLocalizedName());
-					tooltip.add(TextFormatting.GRAY + I18n.format(MODID_TFC + ".tooltip.barrel_fluid_amount", fluid.amount));
-				}
+            if (tank != null) {
+                FluidStack fluid = tank.getTankProperties()[0].getContents();
+                List<String> tooltip = new ArrayList<>();
 
-				this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);
-			}
-		}
+                if (fluid == null || fluid.amount == 0) {
+                    tooltip.add(I18n.format(MODID_TFC + ".tooltip.barrel_empty"));
+                } else {
+                    tooltip.add(fluid.getLocalizedName());
+                    tooltip.add(TextFormatting.GRAY + I18n.format(MODID_TFC + ".tooltip.barrel_fluid_amount", fluid.amount));
+                }
 
-		// Button Tooltips
-		for (GuiButton button : buttonList) {
-			if (button instanceof IButtonTooltip tooltip && button.isMouseOver()) {
-				if (tooltip.hasTooltip()) {
-					drawHoveringText(I18n.format(tooltip.getTooltip()), mouseX, mouseY);
-				}
-			}
-		}
-	}
+                this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);
+            }
+        }
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		String name = I18n.format(translationKey + ".name");
-		fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
+        // Button Tooltips
+        for (GuiButton button : buttonList) {
+            if (button instanceof IButtonTooltip tooltip && button.isMouseOver()) {
+                if (tooltip.hasTooltip()) {
+                    drawHoveringText(I18n.format(tooltip.getTooltip()), mouseX, mouseY);
+                }
+            }
+        }
+    }
 
-		if (tile.isSealed()) {
-			// Draw over the input items, making them look unavailable
-			IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-			if (handler != null) {
-				GL11.glDisable(GL11.GL_DEPTH_TEST);
-				for (int slotId = 0; slotId < handler.getSlots(); slotId++) {
-					drawSlotOverlay(inventorySlots.getSlot(slotId));
-				}
-				GL11.glEnable(GL11.GL_DEPTH_TEST);
-			}
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        String name = I18n.format(translationKey + ".name");
+        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
 
-			// Draw the text displaying both the seal date, and the recipe name
-			boolean isLong = false;
-			BarrelRecipe recipe = tile.getRecipe();
-			if (recipe != null) {
-				String resultName = recipe.getResultName();
-				int recipeWidth = fontRenderer.getStringWidth(resultName);
-				if (recipeWidth > 80)
-					isLong = true;
-				fontRenderer.drawString(resultName, xSize / 2 - (isLong ? recipeWidth / 2 - 6 : 28), isLong ? 73 : 61, 0x404040);
-			}
-			fontRenderer.drawString(tile.getSealedDate(), xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2), isLong ? 19 : 73, 0x404040);
-		}
-	}
+        if (tile.isSealed()) {
+            // Draw over the input items, making them look unavailable
+            IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (handler != null) {
+                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                for (int slotId = 0; slotId < handler.getSlots(); slotId++) {
+                    drawSlotOverlay(inventorySlots.getSlot(slotId));
+                }
+                GL11.glEnable(GL11.GL_DEPTH_TEST);
+            }
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-		if (Helpers.isJEIEnabled()) {
-			drawTexturedModalRect(guiLeft + 92, guiTop + 21, 227, 0, 9, 14);
-		}
+            // Draw the text displaying both the seal date, and the recipe name
+            boolean isLong = false;
+            BarrelRecipe recipe = tile.getRecipe();
+            if (recipe != null) {
+                String resultName = recipe.getResultName();
+                int recipeWidth = fontRenderer.getStringWidth(resultName);
+                if (recipeWidth > 80)
+                    isLong = true;
+                fontRenderer.drawString(resultName, xSize / 2 - (isLong ? recipeWidth / 2 - 6 : 28), isLong ? 73 : 61, 0x404040);
+            }
+            fontRenderer.drawString(tile.getSealedDate(), xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2),
+                    isLong ? 19 : 73, 0x404040);
+        }
+    }
 
-		ContainerBarrel container = (ContainerBarrel) inventorySlots;
-		IFluidHandler tank = container.getBarrelTank();
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+        if (Helpers.isJEIEnabled()) {
+            drawTexturedModalRect(guiLeft + 92, guiTop + 21, 227, 0, 9, 14);
+        }
 
-		if (tank != null) {
-			IFluidTankProperties t = tank.getTankProperties()[0];
-			FluidStack fs = t.getContents();
+        ContainerBarrel container = (ContainerBarrel) inventorySlots;
+        IFluidHandler tank = container.getBarrelTank();
 
-			if (fs != null) {
-				int fillHeightPixels = (int) (50 * fs.amount / (float) t.getCapacity());
+        if (tank != null) {
+            IFluidTankProperties t = tank.getTankProperties()[0];
+            FluidStack fs = t.getContents();
 
-				if (fillHeightPixels > 0) {
-					Fluid fluid = fs.getFluid();
-					TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
+            if (fs != null) {
+                int fillHeightPixels = (int) (50 * fs.amount / (float) t.getCapacity());
 
-					int positionX = guiLeft + 8;
-					int positionY = guiTop + 54;
+                if (fillHeightPixels > 0) {
+                    Fluid fluid = fs.getFluid();
+                    TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
 
-					Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-					BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+                    int positionX = guiLeft + 8;
+                    int positionY = guiTop + 54;
 
-					GlStateManager.enableAlpha();
-					GlStateManager.enableBlend();
-					GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                    Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                    BufferBuilder buffer = Tessellator.getInstance().getBuffer();
 
-					int color = fluid.getColor();
+                    GlStateManager.enableAlpha();
+                    GlStateManager.enableBlend();
+                    GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                            GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-					float r = ((color >> 16) & 0xFF) / 255f;
-					float g = ((color >> 8) & 0xFF) / 255f;
-					float b = (color & 0xFF) / 255f;
-					float a = ((color >> 24) & 0xFF) / 255f;
+                    int color = fluid.getColor();
 
-					GlStateManager.color(r, g, b, a);
+                    float r = ((color >> 16) & 0xFF) / 255f;
+                    float g = ((color >> 8) & 0xFF) / 255f;
+                    float b = (color & 0xFF) / 255f;
+                    float a = ((color >> 24) & 0xFF) / 255f;
 
-					buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+                    GlStateManager.color(r, g, b, a);
 
-					while (fillHeightPixels > 15) {
-						buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
-						buffer.pos(positionX, positionY + 16, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
-						buffer.pos(positionX + 16, positionY + 16, 0)
-						      .tex(sprite.getMaxU(), sprite.getMaxV())
-						      .endVertex();
-						buffer.pos(positionX + 16, positionY, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
+                    buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
-						fillHeightPixels -= 16;
-						positionY -= 16;
-					}
+                    while (fillHeightPixels > 15) {
+                        buffer.pos(positionX, positionY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
+                        buffer.pos(positionX, positionY + 16, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
+                        buffer.pos(positionX + 16, positionY + 16, 0)
+                                .tex(sprite.getMaxU(), sprite.getMaxV())
+                                .endVertex();
+                        buffer.pos(positionX + 16, positionY, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
 
-					if (fillHeightPixels > 0) {
-						int blank = 16 - fillHeightPixels;
-						positionY += blank;
-						buffer.pos(positionX, positionY, 0)
-						      .tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
-						      .endVertex();
-						buffer.pos(positionX, positionY + fillHeightPixels, 0)
-						      .tex(sprite.getMinU(), sprite.getMaxV())
-						      .endVertex();
-						buffer.pos(positionX + 16, positionY + fillHeightPixels, 0)
-						      .tex(sprite.getMaxU(), sprite.getMaxV())
-						      .endVertex();
-						buffer.pos(positionX + 16, positionY, 0)
-						      .tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
-						      .endVertex();
-					}
+                        fillHeightPixels -= 16;
+                        positionY -= 16;
+                    }
 
-					Tessellator.getInstance().draw();
+                    if (fillHeightPixels > 0) {
+                        int blank = 16 - fillHeightPixels;
+                        positionY += blank;
+                        buffer.pos(positionX, positionY, 0)
+                                .tex(sprite.getMinU(), sprite.getInterpolatedV(blank))
+                                .endVertex();
+                        buffer.pos(positionX, positionY + fillHeightPixels, 0)
+                                .tex(sprite.getMinU(), sprite.getMaxV())
+                                .endVertex();
+                        buffer.pos(positionX + 16, positionY + fillHeightPixels, 0)
+                                .tex(sprite.getMaxU(), sprite.getMaxV())
+                                .endVertex();
+                        buffer.pos(positionX + 16, positionY, 0)
+                                .tex(sprite.getMaxU(), sprite.getInterpolatedV(blank))
+                                .endVertex();
+                    }
 
-					Minecraft.getMinecraft().renderEngine.bindTexture(BARREL_BACKGROUND);
-					GlStateManager.color(1, 1, 1, 1);
-				}
-			}
-		}
+                    Tessellator.getInstance().draw();
 
-		drawTexturedModalRect(guiLeft + 7, guiTop + 19, 176, 0, 18, 52);
-	}
+                    Minecraft.getMinecraft().renderEngine.bindTexture(BARREL_BACKGROUND);
+                    GlStateManager.color(1, 1, 1, 1);
+                }
+            }
+        }
 
-	@Override
-	protected void actionPerformed(GuiButton button) throws IOException {
-		TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
-		super.actionPerformed(button);
-	}
+        drawTexturedModalRect(guiLeft + 7, guiTop + 19, 176, 0, 18, 52);
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton button) throws IOException {
+        TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
+        super.actionPerformed(button);
+    }
 }

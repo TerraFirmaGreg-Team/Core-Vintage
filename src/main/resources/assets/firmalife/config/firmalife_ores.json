@@ -1,7 +1,7 @@
 {
   "halite": {
     "ore": "tfc:halite",
-	"loose": "tfc:rock/rocksalt",
+    "loose": "tfc:rock/rocksalt",
     "width": 40,
     "height": 20,
     "shape": "cluster",
@@ -15,7 +15,7 @@
   },
   "sylvite": {
     "ore": "tfc:sylvite",
-	"loose": "tfc:ore/sylvite",
+    "loose": "tfc:ore/sylvite",
     "width": 16,
     "height": 16,
     "shape": "sphere",

@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/cataclasite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/cataclasite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/cataclasite",
+      "count": 4
+    }
+    }

@@ -4,13 +4,17 @@
     "model": "firmalife:sprinkler"
   },
   "variants": {
-    "inventory": [{
-      "transform": "forge:default-block",
-      "model": "firmalife:sprinkler"
-    }],
-    "normal": [{
-      "transform": "forge:default-block",
-      "model": "firmalife:sprinkler"
-    }]
+    "inventory": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:sprinkler"
+      }
+    ],
+    "normal": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:sprinkler"
+      }
+    ]
   }
 }

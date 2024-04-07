@@ -1,94 +1,97 @@
 package net.dries007.tfc.api.capability.forge;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.util.forge.ForgeStep;
-import net.dries007.tfc.util.forge.ForgeSteps;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
+
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.util.forge.ForgeStep;
+import net.dries007.tfc.util.forge.ForgeSteps;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ForgeableHeatableHandler extends ItemHeatHandler implements IForgeableHeatable {
-	private final ForgeableHandler internalForgeCap;
 
-	public ForgeableHeatableHandler(@Nullable NBTTagCompound nbt, float heatCapacity, float meltTemp) {
-		this.heatCapacity = heatCapacity;
-		this.meltTemp = meltTemp;
+    private final ForgeableHandler internalForgeCap;
 
-		internalForgeCap = new ForgeableHandler(nbt);
+    public ForgeableHeatableHandler(@Nullable NBTTagCompound nbt, float heatCapacity, float meltTemp) {
+        this.heatCapacity = heatCapacity;
+        this.meltTemp = meltTemp;
 
-		deserializeNBT(nbt);
-	}
+        internalForgeCap = new ForgeableHandler(nbt);
 
-	public ForgeableHeatableHandler() {
-		// for custom implementations
-		internalForgeCap = new ForgeableHandler();
-	}
+        deserializeNBT(nbt);
+    }
 
-	@Override
-	public int getWork() {
-		return internalForgeCap.getWork();
-	}
+    public ForgeableHeatableHandler() {
+        // for custom implementations
+        internalForgeCap = new ForgeableHandler();
+    }
 
-	@Override
-	public void setWork(int work) {
-		internalForgeCap.setWork(work);
-	}
+    @Override
+    public int getWork() {
+        return internalForgeCap.getWork();
+    }
 
-	@Override
-	@Nullable
-	public ResourceLocation getRecipeName() {
-		return internalForgeCap.getRecipeName();
-	}
+    @Override
+    public void setWork(int work) {
+        internalForgeCap.setWork(work);
+    }
 
-	@Override
-	public void setRecipe(@Nullable ResourceLocation recipeName) {
-		internalForgeCap.setRecipe(recipeName);
-	}
+    @Override
+    @Nullable
+    public ResourceLocation getRecipeName() {
+        return internalForgeCap.getRecipeName();
+    }
 
-	@Override
-	@NotNull
-	public ForgeSteps getSteps() {
-		return internalForgeCap.getSteps();
-	}
+    @Override
+    public void setRecipe(@Nullable ResourceLocation recipeName) {
+        internalForgeCap.setRecipe(recipeName);
+    }
 
-	@Override
-	public void addStep(ForgeStep step) {
-		internalForgeCap.addStep(step);
-	}
+    @Override
+    @NotNull
+    public ForgeSteps getSteps() {
+        return internalForgeCap.getSteps();
+    }
 
-	@Override
-	public void reset() {
-		internalForgeCap.reset();
-	}
+    @Override
+    public void addStep(ForgeStep step) {
+        internalForgeCap.addStep(step);
+    }
 
-	@Override
-	public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityForgeable.FORGEABLE_CAPABILITY || super.hasCapability(capability, facing);
-	}
+    @Override
+    public void reset() {
+        internalForgeCap.reset();
+    }
 
-	@SuppressWarnings("unchecked")
-	@Nullable
-	@Override
-	public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
-		return hasCapability(capability, facing) ? (T) this : null;
-	}
+    @Override
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityForgeable.FORGEABLE_CAPABILITY || super.hasCapability(capability, facing);
+    }
 
-	@Override
-	@NotNull
-	public NBTTagCompound serializeNBT() {
-		NBTTagCompound nbt = super.serializeNBT();
-		nbt.setTag("forge", internalForgeCap.serializeNBT());
-		return nbt;
-	}
+    @SuppressWarnings("unchecked")
+    @Nullable
+    @Override
+    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+        return hasCapability(capability, facing) ? (T) this : null;
+    }
 
-	@Override
-	public void deserializeNBT(@Nullable NBTTagCompound nbt) {
-		if (nbt != null) {
-			internalForgeCap.deserializeNBT(nbt.getCompoundTag("forge"));
-			super.deserializeNBT(nbt);
-		}
-	}
+    @Override
+    @NotNull
+    public NBTTagCompound serializeNBT() {
+        NBTTagCompound nbt = super.serializeNBT();
+        nbt.setTag("forge", internalForgeCap.serializeNBT());
+        return nbt;
+    }
+
+    @Override
+    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+        if (nbt != null) {
+            internalForgeCap.deserializeNBT(nbt.getCompoundTag("forge"));
+            super.deserializeNBT(nbt);
+        }
+    }
 }

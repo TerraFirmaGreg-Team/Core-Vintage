@@ -5,6 +5,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface ICustomStateMapper {
 
-	@SideOnly(Side.CLIENT)
-	void onStateMapperRegister();
+    @SideOnly(Side.CLIENT)
+    void onStateMapperRegister();
 }

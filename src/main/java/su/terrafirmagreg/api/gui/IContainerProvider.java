@@ -11,9 +11,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IContainerProvider<C extends Container, G extends GuiContainer> {
 
-	C getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
+    C getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
 
-	@SideOnly(Side.CLIENT)
-	G getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
+    @SideOnly(Side.CLIENT)
+    G getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos);
 
 }

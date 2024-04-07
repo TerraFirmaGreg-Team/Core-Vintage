@@ -1,12 +1,5 @@
 package com.eerussianguy.firmalife.recipe;
 
-import com.eerussianguy.firmalife.items.ItemTrailMix;
-import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.recipes.RecipeUtils;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -15,6 +8,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+
+import com.eerussianguy.firmalife.items.ItemTrailMix;
+import com.google.gson.JsonObject;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.objects.recipes.RecipeUtils;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -22,41 +24,44 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class TrailMixRecipe extends SandwichBasedRecipe {
-	public TrailMixRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
-		super(group, input, result, damage);
-	}
 
-	@NotNull
-	@Override
-	public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
-		ItemStack output = super.getCraftingResult(inv);
-		IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
-		if (food instanceof ItemTrailMix.TrailMixHandler) {
-			ItemTrailMix.TrailMixHandler trailMix = (ItemTrailMix.TrailMixHandler) food;
-			List<FoodData> ingredients = new ArrayList<>();
-			getIngredients(inv, ingredients);
-			if (ingredients.size() < 1) return ItemStack.EMPTY;
+    public TrailMixRecipe(ResourceLocation group, CraftingHelper.ShapedPrimer input, @NotNull ItemStack result, int damage) {
+        super(group, input, result, damage);
+    }
 
-			trailMix.initCreationFoods(ingredients);
-			trailMix.setCreationDate(CalendarTFC.PLAYER_TIME.getTicks()); // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
-		}
-		return output;
-	}
+    @NotNull
+    @Override
+    public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
+        ItemStack output = super.getCraftingResult(inv);
+        IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
+        if (food instanceof ItemTrailMix.TrailMixHandler) {
+            ItemTrailMix.TrailMixHandler trailMix = (ItemTrailMix.TrailMixHandler) food;
+            List<FoodData> ingredients = new ArrayList<>();
+            getIngredients(inv, ingredients);
+            if (ingredients.size() < 1) return ItemStack.EMPTY;
 
-	@SuppressWarnings("unused")
-	public static class Factory implements IRecipeFactory {
-		@Override
-		public IRecipe parse(final JsonContext context, final JsonObject json) {
-			String group = JsonUtils.getString(json, "group", "");
+            trailMix.initCreationFoods(ingredients);
+            trailMix.setCreationDate(
+                    CalendarTFC.PLAYER_TIME.getTicks()); // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
+        }
+        return output;
+    }
 
-			CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);
+    @SuppressWarnings("unused")
+    public static class Factory implements IRecipeFactory {
 
-			ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-			final int damage;
-			if (JsonUtils.hasField(json, "damage"))
-				damage = JsonUtils.getInt(json, "damage");
-			else damage = 1;
-			return new TrailMixRecipe(group.isEmpty() ? null : new ResourceLocation(group), primer, result, damage);
-		}
-	}
+        @Override
+        public IRecipe parse(final JsonContext context, final JsonObject json) {
+            String group = JsonUtils.getString(json, "group", "");
+
+            CraftingHelper.ShapedPrimer primer = RecipeUtils.parsePhaped(context, json);
+
+            ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+            final int damage;
+            if (JsonUtils.hasField(json, "damage"))
+                damage = JsonUtils.getInt(json, "damage");
+            else damage = 1;
+            return new TrailMixRecipe(group.isEmpty() ? null : new ResourceLocation(group), primer, result, damage);
+        }
+    }
 }

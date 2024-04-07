@@ -1,8 +1,5 @@
 package net.dries007.tfc.objects.recipes;
 
-import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -18,73 +15,79 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import org.jetbrains.annotations.NotNull;
 
+import com.google.gson.JsonObject;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 
 public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe {
-	public ShapelessFluidFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @NotNull ItemStack result) {
-		super(group, input, result);
-	}
 
-	@Override
-	@NotNull
-	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-		NonNullList<ItemStack> ret = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+    public ShapelessFluidFoodRecipe(ResourceLocation group, NonNullList<Ingredient> input, @NotNull ItemStack result) {
+        super(group, input, result);
+    }
 
-		for (int i = 0; i < ret.size(); i++) {
-			ItemStack itemStack = inv.getStackInSlot(i);
+    @Override
+    @NotNull
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+        NonNullList<ItemStack> ret = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
-			ItemStack stack = itemStack.copy();
-			stack.setCount(1);
+        for (int i = 0; i < ret.size(); i++) {
+            ItemStack itemStack = inv.getStackInSlot(i);
 
-			IFluidHandlerItem handler = itemStack.getCount() > 1 ? FluidUtil.getFluidHandler(stack) : FluidUtil.getFluidHandler(itemStack);
+            ItemStack stack = itemStack.copy();
+            stack.setCount(1);
 
-			if (handler == null) {
-				ret.set(i, ForgeHooks.getContainerItem(itemStack));
-			} else {
-				handler.drain(Fluid.BUCKET_VOLUME, true);
-				ItemStack updatedItem = handler.getContainer().copy();
-				ret.set(i, updatedItem);
-			}
-		}
-		return ret;
-	}
+            IFluidHandlerItem handler = itemStack.getCount() > 1 ? FluidUtil.getFluidHandler(stack) : FluidUtil.getFluidHandler(itemStack);
 
-	@Override
-	public boolean isDynamic() {
-		return true;
-	}
+            if (handler == null) {
+                ret.set(i, ForgeHooks.getContainerItem(itemStack));
+            } else {
+                handler.drain(Fluid.BUCKET_VOLUME, true);
+                ItemStack updatedItem = handler.getContainer().copy();
+                ret.set(i, updatedItem);
+            }
+        }
+        return ret;
+    }
 
-	@Override
-	@NotNull
-	public ItemStack getCraftingResult(InventoryCrafting inv) {
-		ItemStack out = output.copy();
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 
-		long smallestRottenDate = -1;
-		ItemStack foodStack = null;
-		for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
-			ItemStack stack = inv.getStackInSlot(slot);
-			if (!stack.isEmpty()) {
-				IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-				if (foodCap != null && (smallestRottenDate == -1 || smallestRottenDate > foodCap.getRottenDate())) {
-					smallestRottenDate = foodCap.getRottenDate();
-					foodStack = stack;
-				}
-			}
-		}
-		return foodStack != null ? CapabilityFood.updateFoodFromPrevious(foodStack, out) : ItemStack.EMPTY;
-	}
+    @Override
+    @NotNull
+    public ItemStack getCraftingResult(InventoryCrafting inv) {
+        ItemStack out = output.copy();
 
-	public static class Factory implements IRecipeFactory {
-		@Override
-		public IRecipe parse(final JsonContext context, final JsonObject json) {
-			final String group = JsonUtils.getString(json, "group", "");
-			final NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
-			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-			//noinspection ConstantConditions
-			return new ShapelessFluidFoodRecipe(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result);
-		}
-	}
+        long smallestRottenDate = -1;
+        ItemStack foodStack = null;
+        for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
+            ItemStack stack = inv.getStackInSlot(slot);
+            if (!stack.isEmpty()) {
+                IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+                if (foodCap != null && (smallestRottenDate == -1 || smallestRottenDate > foodCap.getRottenDate())) {
+                    smallestRottenDate = foodCap.getRottenDate();
+                    foodStack = stack;
+                }
+            }
+        }
+        return foodStack != null ? CapabilityFood.updateFoodFromPrevious(foodStack, out) : ItemStack.EMPTY;
+    }
+
+    public static class Factory implements IRecipeFactory {
+
+        @Override
+        public IRecipe parse(final JsonContext context, final JsonObject json) {
+            final String group = JsonUtils.getString(json, "group", "");
+            final NonNullList<Ingredient> ingredients = RecipeUtils.parseShapeless(context, json);
+            final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+            //noinspection ConstantConditions
+            return new ShapelessFluidFoodRecipe(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result);
+        }
+    }
 }

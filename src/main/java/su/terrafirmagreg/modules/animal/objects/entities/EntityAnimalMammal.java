@@ -1,89 +1,94 @@
 package su.terrafirmagreg.modules.animal.objects.entities;
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+
+import net.dries007.tfc.util.calendar.CalendarTFC;
+
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 /**
  * Implements pregnancy for mammals in TFC
  */
 
 public abstract class EntityAnimalMammal extends EntityAnimalBase {
-	// The time(in days) this entity became pregnant
-	private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class, TFCEntities.getLongDataSerializer());
 
-	@SuppressWarnings("unused")
-	public EntityAnimalMammal(World worldIn) {
-		super(worldIn);
-	}
+    // The time(in days) this entity became pregnant
+    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class,
+            TFCEntities.getLongDataSerializer());
 
-	public EntityAnimalMammal(World worldIn, IAnimal.Gender gender, int birthDay) {
-		super(worldIn, gender, birthDay);
-		setPregnantTime(-1);
-	}
+    @SuppressWarnings("unused")
+    public EntityAnimalMammal(World worldIn) {
+        super(worldIn);
+    }
 
-	public long getPregnantTime() {
-		return dataManager.get(PREGNANT_TIME);
-	}
+    public EntityAnimalMammal(World worldIn, IAnimal.Gender gender, int birthDay) {
+        super(worldIn, gender, birthDay);
+        setPregnantTime(-1);
+    }
 
-	private void setPregnantTime(long day) {
-		dataManager.set(PREGNANT_TIME, day);
-	}
+    public long getPregnantTime() {
+        return dataManager.get(PREGNANT_TIME);
+    }
 
-	@Override
-	public void onFertilized(@NotNull IAnimal male) {
-		//Mark the day this female became pregnant
-		setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
-	}
+    private void setPregnantTime(long day) {
+        dataManager.set(PREGNANT_TIME, day);
+    }
 
-	@Override
-	public Type getType() {
-		return Type.MAMMAL;
-	}
+    @Override
+    public void onFertilized(@NotNull IAnimal male) {
+        //Mark the day this female became pregnant
+        setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
+    }
 
-	/**
-	 * Spawns children of this animal
-	 */
-	public abstract void birthChildren();
+    @Override
+    public Type getType() {
+        return Type.MAMMAL;
+    }
 
-	/**
-	 * Return the number of days for a full gestation
-	 *
-	 * @return long value in days
-	 */
-	public abstract long gestationDays();
+    /**
+     * Spawns children of this animal
+     */
+    public abstract void birthChildren();
 
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		getDataManager().register(PREGNANT_TIME, -1L);
-	}
+    /**
+     * Return the number of days for a full gestation
+     *
+     * @return long value in days
+     */
+    public abstract long gestationDays();
 
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-		if (!this.world.isRemote) {
-			if (this.isFertilized() && CalendarTFC.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
-				birthChildren();
-				this.setFertilized(false);
-			}
-		}
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        getDataManager().register(PREGNANT_TIME, -1L);
+    }
 
-	@Override
-	public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-		NBTUtils.setGenericNBTValue(nbt, "pregnant", getPregnantTime());
-	}
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (!this.world.isRemote) {
+            if (this.isFertilized() && CalendarTFC.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
+                birthChildren();
+                this.setFertilized(false);
+            }
+        }
+    }
 
-	@Override
-	public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
-		super.readEntityFromNBT(nbt);
-		this.setPregnantTime(nbt.getLong("pregnant"));
-	}
+    @Override
+    public void writeEntityToNBT(@NotNull NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        NBTUtils.setGenericNBTValue(nbt, "pregnant", getPregnantTime());
+    }
+
+    @Override
+    public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
+        super.readEntityFromNBT(nbt);
+        this.setPregnantTime(nbt.getLong("pregnant"));
+    }
 }

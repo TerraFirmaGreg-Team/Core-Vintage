@@ -5,7 +5,7 @@
         "age": "0"
       },
       "apply": {
-		"model": "tfc:plants/undergrowth_low_shortest"
+        "model": "tfc:plants/undergrowth_low_shortest"
       }
     },
     {
@@ -13,7 +13,7 @@
         "age": "1"
       },
       "apply": {
-		"model": "tfc:plants/undergrowth_low_shorter"
+        "model": "tfc:plants/undergrowth_low_shorter"
       }
     },
     {
@@ -21,7 +21,7 @@
         "age": "2"
       },
       "apply": {
-		"model": "tfc:plants/undergrowth_low_short"
+        "model": "tfc:plants/undergrowth_low_short"
       }
     },
     {
@@ -29,7 +29,7 @@
         "age": "3"
       },
       "apply": {
-		"model": "tfc:plants/undergrowth_low"
+        "model": "tfc:plants/undergrowth_low"
       }
     }
   ]

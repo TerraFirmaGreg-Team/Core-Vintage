@@ -6,8 +6,7 @@
     "XXX"
   ],
   "key": {
-    "X": 
-	{
+    "X": {
       "type": "forge:ore_dict",
       "ore": "hemp"
     }

@@ -7,81 +7,82 @@ import com.lumintorious.ambiental.capability.TemperatureCapability;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
 public class BaseModifier {
-	private String unlocalizedName;
-	private float change = 0f;
-	private float potency = 0f;
-	private int count = 1;
-	private float multiplier = 1f;
 
-	public BaseModifier(String unlocalizedName) {
-		this.unlocalizedName = unlocalizedName;
-	}
+    private String unlocalizedName;
+    private float change = 0f;
+    private float potency = 0f;
+    private int count = 1;
+    private float multiplier = 1f;
 
-	public BaseModifier(String unlocalizedName, float change, float potency) {
-		this.unlocalizedName = unlocalizedName;
-		this.change = change;
-		this.potency = potency;
-	}
+    public BaseModifier(String unlocalizedName) {
+        this.unlocalizedName = unlocalizedName;
+    }
 
-	public float getMultiplier() {
-		return multiplier;
-	}
+    public BaseModifier(String unlocalizedName, float change, float potency) {
+        this.unlocalizedName = unlocalizedName;
+        this.change = change;
+        this.potency = potency;
+    }
 
-	public void setMultiplier(float multiplier) {
-		this.multiplier = multiplier;
-	}
+    public float getMultiplier() {
+        return multiplier;
+    }
 
-	public void addMultiplier(float multiplier) {
-		this.setMultiplier(this.getMultiplier() * multiplier);
-	}
+    public void setMultiplier(float multiplier) {
+        this.multiplier = multiplier;
+    }
 
-	public float getChange() {
-		return change * multiplier * (count == 1 ? 1f : TFCAmbientalConfig.GENERAL.diminishedModifierMultiplier);
-	}
+    public void addMultiplier(float multiplier) {
+        this.setMultiplier(this.getMultiplier() * multiplier);
+    }
 
-	public void setChange(float change) {
-		this.change = change;
-	}
+    public float getChange() {
+        return change * multiplier * (count == 1 ? 1f : TFCAmbientalConfig.GENERAL.diminishedModifierMultiplier);
+    }
 
-	public float getPotency() {
-		return potency * multiplier * (count == 1 ? 1f : TFCAmbientalConfig.GENERAL.diminishedModifierMultiplier);
-	}
+    public void setChange(float change) {
+        this.change = change;
+    }
 
-	public void setPotency(float potency) {
-		this.potency = potency;
-	}
+    public float getPotency() {
+        return potency * multiplier * (count == 1 ? 1f : TFCAmbientalConfig.GENERAL.diminishedModifierMultiplier);
+    }
 
-	public void addCount() {
-		count++;
-	}
+    public void setPotency(float potency) {
+        this.potency = potency;
+    }
 
-	public void absorb(BaseModifier modifier) {
-		if (count >= TFCAmbientalConfig.GENERAL.modifierCap) {
-			return;
-		}
-		this.count += modifier.count;
-		this.change += modifier.change;
-		this.potency += modifier.potency;
-		this.addMultiplier(modifier.getMultiplier());
-	}
+    public void addCount() {
+        count++;
+    }
 
-	public int getCount() {
-		return count;
-	}
+    public void absorb(BaseModifier modifier) {
+        if (count >= TFCAmbientalConfig.GENERAL.modifierCap) {
+            return;
+        }
+        this.count += modifier.count;
+        this.change += modifier.change;
+        this.potency += modifier.potency;
+        this.addMultiplier(modifier.getMultiplier());
+    }
 
-	public String getUnlocalizedName() {
-		return unlocalizedName;
-	}
+    public int getCount() {
+        return count;
+    }
 
-	public String getDisplayName() {
-		return Util.translate(MODID_TFCAMBIENTAL + ".modifier." + this.unlocalizedName);
-	}
+    public String getUnlocalizedName() {
+        return unlocalizedName;
+    }
 
-	public void apply(TemperatureCapability temp) {
-		// nothing;
-	}
+    public String getDisplayName() {
+        return Util.translate(MODID_TFCAMBIENTAL + ".modifier." + this.unlocalizedName);
+    }
 
-	public void cancel(TemperatureCapability temp) {
-		// nothing;
-	}
+    public void apply(TemperatureCapability temp) {
+        // nothing;
+    }
+
+    public void cancel(TemperatureCapability temp) {
+        // nothing;
+    }
 }

@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/wackestone"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/wackestone",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/wackestone",
+      "count": 4
+    }
+    }

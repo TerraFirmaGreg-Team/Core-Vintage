@@ -1,10 +1,5 @@
 package com.buuz135.hotornot.client;
 
-import com.buuz135.hotornot.object.item.HONItems;
-import com.buuz135.hotornot.object.item.ItemMetalTongsJawMold;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -18,6 +13,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.buuz135.hotornot.object.item.HONItems;
+import com.buuz135.hotornot.object.item.ItemMetalTongsJawMold;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+
 import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
@@ -26,48 +28,49 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 @EventBusSubscriber(modid = MODID_HOTORNOT, value = Side.CLIENT)
 public final class ClientRegistryEvents {
 
-	@SubscribeEvent
-	public static void onModelRegister(final ModelRegistryEvent event) {
-		HONItems.getAllSimpleItems().forEach(ClientRegistryEvents::registerModel);
+    @SubscribeEvent
+    public static void onModelRegister(final ModelRegistryEvent event) {
+        HONItems.getAllSimpleItems().forEach(ClientRegistryEvents::registerModel);
 
-		{ // Registering of our jaw molds
-			final ItemMetalTongsJawMold moldItem = HONItems.TONGS_JAW_FIRED_MOLD;
+        { // Registering of our jaw molds
+            final ItemMetalTongsJawMold moldItem = HONItems.TONGS_JAW_FIRED_MOLD;
 
-			//noinspection DataFlowIssue
-			ModelBakery.registerItemVariants(moldItem, new ModelResourceLocation(moldItem.getRegistryName()
-			                                                                             .toString() + "/empty"));
+            //noinspection DataFlowIssue
+            ModelBakery.registerItemVariants(moldItem, new ModelResourceLocation(moldItem.getRegistryName()
+                    .toString() + "/empty"));
 
-			//noinspection DataFlowIssue
-			ModelBakery.registerItemVariants(moldItem, TFCRegistries.METALS.getValuesCollection()
-			                                                               .stream()
-			                                                               .filter(metal -> metal.isToolMetal() && metal.getTier()
-			                                                                                                            .isAtMost(Metal.Tier.TIER_II))
-			                                                               .map(metal -> new ModelResourceLocation(
-					                                                               MODID_HOTORNOT + ":" + moldItem.getRegistryName()
-					                                                                                              .getPath() + "/" + metal.getRegistryName()
-					                                                                                                                      .getPath()))
-			                                                               .toArray(ModelResourceLocation[]::new));
-			ModelLoader.setCustomMeshDefinition(moldItem, new ItemMeshDefinition() {
-				private final ModelResourceLocation FALLBACK = new ModelResourceLocation(moldItem.getRegistryName()
-				                                                                                 .toString() + "/empty");
+            //noinspection DataFlowIssue
+            ModelBakery.registerItemVariants(moldItem, TFCRegistries.METALS.getValuesCollection()
+                    .stream()
+                    .filter(metal -> metal.isToolMetal() && metal.getTier()
+                            .isAtMost(Metal.Tier.TIER_II))
+                    .map(metal -> new ModelResourceLocation(
+                            MODID_HOTORNOT + ":" + moldItem.getRegistryName()
+                                    .getPath() + "/" + metal.getRegistryName()
+                                    .getPath()))
+                    .toArray(ModelResourceLocation[]::new));
+            ModelLoader.setCustomMeshDefinition(moldItem, new ItemMeshDefinition() {
 
-				@Override
-				@NotNull
-				public ModelResourceLocation getModelLocation(final ItemStack itemStack) {
-					final IFluidHandler fluidHandler = itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-					if (!(fluidHandler instanceof IMoldHandler)) return FALLBACK;
+                private final ModelResourceLocation FALLBACK = new ModelResourceLocation(moldItem.getRegistryName()
+                        .toString() + "/empty");
 
-					final Metal metal = ((IMoldHandler) fluidHandler).getMetal();
-					//noinspection DataFlowIssue
-					return metal != null ? new ModelResourceLocation(
-							itemStack.getItem().getRegistryName() + "/" + metal.getRegistryName().getPath()) : FALLBACK;
-				}
-			});
-		}
-	}
+                @Override
+                @NotNull
+                public ModelResourceLocation getModelLocation(final ItemStack itemStack) {
+                    final IFluidHandler fluidHandler = itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                    if (!(fluidHandler instanceof IMoldHandler)) return FALLBACK;
 
-	private static void registerModel(final Item item) {
-		//noinspection DataFlowIssue
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
+                    final Metal metal = ((IMoldHandler) fluidHandler).getMetal();
+                    //noinspection DataFlowIssue
+                    return metal != null ? new ModelResourceLocation(
+                            itemStack.getItem().getRegistryName() + "/" + metal.getRegistryName().getPath()) : FALLBACK;
+                }
+            });
+        }
+    }
+
+    private static void registerModel(final Item item) {
+        //noinspection DataFlowIssue
+        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+    }
 }

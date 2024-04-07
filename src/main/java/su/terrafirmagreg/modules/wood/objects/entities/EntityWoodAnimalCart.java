@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
+import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,117 +14,114 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 
 public class EntityWoodAnimalCart extends EntityWoodCart {
 
+    public EntityWoodAnimalCart(World worldIn) {
+        super(worldIn);
+        this.setSize(1.375F, 1.4F);
+        this.spacing = 2.4D;
+    }
 
-	public EntityWoodAnimalCart(World worldIn) {
-		super(worldIn);
-		this.setSize(1.375F, 1.4F);
-		this.spacing = 2.4D;
-	}
+    @Override
+    public boolean canBePulledBy(Entity pullingIn) {
+        if (this.isPassenger(pullingIn)) {
+            return false;
+        }
+        for (String entry : ModuleWoodConfig.ITEMS.ANIMAL_CART.canPull) {
+            if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    @Override
+    public Item getItemCart() {
+        var type = getWood();
+        if (type != null) {
+            return WoodItemVariants.ANIMAL_CART.get(type);
+        }
+        return getItemCart();
+    }
 
-	@Override
-	public boolean canBePulledBy(Entity pullingIn) {
-		if (this.isPassenger(pullingIn)) {
-			return false;
-		}
-		for (String entry : ModuleWoodConfig.ITEMS.ANIMAL_CART.canPull) {
-			if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public void applyEntityCollision(Entity entity) {
+        if (!entity.isPassenger(this)) {
+            if (!this.world.isRemote && this.pulling != entity &&
+                    !(this.getControllingPassenger() instanceof EntityPlayer) &&
+                    this.getPassengers().size() < 2 &&
+                    !entity.isRiding() &&
+                    entity.width < this.width &&
+                    entity instanceof EntityLivingBase &&
+                    !(entity instanceof EntityWaterMob) &&
+                    !(entity instanceof EntityPlayer)) {
+                entity.startRiding(this);
+            } else {
+                super.applyEntityCollision(entity);
+            }
+        }
+    }
 
-	@Override
-	public Item getItemCart() {
-		var type = getWood();
-		if (type != null) {
-			return WoodItemVariants.ANIMAL_CART.get(type);
-		}
-		return getItemCart();
-	}
+    @Override
+    public boolean processInitialInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
+        if (!this.world.isRemote) {
+            if (player.isSneaking()) {
+                for (Entity entity : this.getPassengers()) {
+                    if (!(entity instanceof EntityPlayer)) {
+                        entity.dismountRidingEntity();
+                        return true;
+                    }
+                }
+            } else if (this.pulling != player) {
+                player.startRiding(this);
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public void applyEntityCollision(Entity entity) {
-		if (!entity.isPassenger(this)) {
-			if (!this.world.isRemote && this.pulling != entity &&
-					!(this.getControllingPassenger() instanceof EntityPlayer) &&
-					this.getPassengers().size() < 2 &&
-					!entity.isRiding() &&
-					entity.width < this.width &&
-					entity instanceof EntityLivingBase &&
-					!(entity instanceof EntityWaterMob) &&
-					!(entity instanceof EntityPlayer)) {
-				entity.startRiding(this);
-			} else {
-				super.applyEntityCollision(entity);
-			}
-		}
-	}
+    @Override
+    public void updatePassenger(@NotNull Entity passenger) {
+        if (this.isPassenger(passenger)) {
+            double f = -0.1D;
 
-	@Override
-	public boolean processInitialInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
-		if (!this.world.isRemote) {
-			if (player.isSneaking()) {
-				for (Entity entity : this.getPassengers()) {
-					if (!(entity instanceof EntityPlayer)) {
-						entity.dismountRidingEntity();
-						return true;
-					}
-				}
-			} else if (this.pulling != player) {
-				player.startRiding(this);
-			}
-		}
-		return true;
-	}
+            if (this.getPassengers().size() > 1) {
+                f = this.getPassengers().indexOf(passenger) == 0 ? 0.2D : -0.6D;
 
-	@Override
-	public void updatePassenger(@NotNull Entity passenger) {
-		if (this.isPassenger(passenger)) {
-			double f = -0.1D;
+                if (passenger instanceof EntityAnimal) {
+                    f += 0.2D;
+                }
+            }
 
-			if (this.getPassengers().size() > 1) {
-				f = this.getPassengers().indexOf(passenger) == 0 ? 0.2D : -0.6D;
+            Vec3d vec3d = new Vec3d(f, 0.0D, 0.0D).rotateYaw(-this.rotationYaw * 0.017453292F - ((float) Math.PI / 2F));
+            passenger.setPosition(this.posX + vec3d.x, this.posY + this.getMountedYOffset() + passenger.getYOffset(), this.posZ + vec3d.z);
 
-				if (passenger instanceof EntityAnimal) {
-					f += 0.2D;
-				}
-			}
+            if (!(passenger instanceof EntityPlayer)) {
+                passenger.setRenderYawOffset(this.rotationYaw);
+                float f2 = MathHelper.wrapDegrees(passenger.rotationYaw - this.rotationYaw);
+                float f1 = MathHelper.clamp(f2, -105.0F, 105.0F);
+                passenger.prevRotationYaw += f1 - f2;
+                passenger.rotationYaw += f1 - f2;
+                passenger.setRotationYawHead(passenger.rotationYaw);
 
-			Vec3d vec3d = new Vec3d(f, 0.0D, 0.0D).rotateYaw(-this.rotationYaw * 0.017453292F - ((float) Math.PI / 2F));
-			passenger.setPosition(this.posX + vec3d.x, this.posY + this.getMountedYOffset() + passenger.getYOffset(), this.posZ + vec3d.z);
+                if (passenger instanceof EntityAnimal && this.getPassengers().size() > 1) {
+                    int j = passenger.getEntityId() % 2 == 0 ? 90 : 270;
+                    passenger.setRenderYawOffset(((EntityAnimal) passenger).renderYawOffset + (float) j);
+                    passenger.setRotationYawHead(passenger.getRotationYawHead() + (float) j);
+                }
+            }
+        }
+    }
 
-			if (!(passenger instanceof EntityPlayer)) {
-				passenger.setRenderYawOffset(this.rotationYaw);
-				float f2 = MathHelper.wrapDegrees(passenger.rotationYaw - this.rotationYaw);
-				float f1 = MathHelper.clamp(f2, -105.0F, 105.0F);
-				passenger.prevRotationYaw += f1 - f2;
-				passenger.rotationYaw += f1 - f2;
-				passenger.setRotationYawHead(passenger.rotationYaw);
+    @Override
+    public double getMountedYOffset() {
+        return 0.7D;
+    }
 
-				if (passenger instanceof EntityAnimal && this.getPassengers().size() > 1) {
-					int j = passenger.getEntityId() % 2 == 0 ? 90 : 270;
-					passenger.setRenderYawOffset(((EntityAnimal) passenger).renderYawOffset + (float) j);
-					passenger.setRotationYawHead(passenger.getRotationYawHead() + (float) j);
-				}
-			}
-		}
-	}
-
-	@Override
-	public double getMountedYOffset() {
-		return 0.7D;
-	}
-
-	protected boolean canFitPassenger(@NotNull Entity passenger) {
-		return this.getPassengers().size() < 2;
-	}
+    protected boolean canFitPassenger(@NotNull Entity passenger) {
+        return this.getPassengers().size() < 2;
+    }
 
 }

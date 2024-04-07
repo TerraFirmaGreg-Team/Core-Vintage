@@ -1,8 +1,5 @@
 package tfctech.objects.blocks;
 
-import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,11 +11,27 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
-import tfctech.objects.blocks.devices.*;
+
+import com.google.common.collect.ImmutableList;
+import net.dries007.tfc.objects.blocks.BlockFluidTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import tfctech.objects.blocks.devices.BlockElectricForge;
+import tfctech.objects.blocks.devices.BlockFridge;
+import tfctech.objects.blocks.devices.BlockInductionCrucible;
+import tfctech.objects.blocks.devices.BlockLatexExtractor;
+import tfctech.objects.blocks.devices.BlockSmelteryCauldron;
+import tfctech.objects.blocks.devices.BlockSmelteryFirebox;
+import tfctech.objects.blocks.devices.BlockWireDrawBench;
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.itemblocks.ItemBlockFridge;
 import tfctech.objects.items.itemblocks.ItemBlockWireDrawBench;
-import tfctech.objects.tileentities.*;
+import tfctech.objects.tileentities.TEElectricForge;
+import tfctech.objects.tileentities.TEFridge;
+import tfctech.objects.tileentities.TEInductionCrucible;
+import tfctech.objects.tileentities.TELatexExtractor;
+import tfctech.objects.tileentities.TESmelteryCauldron;
+import tfctech.objects.tileentities.TESmelteryFirebox;
+import tfctech.objects.tileentities.TEWireDrawBench;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.util.Helpers.getNull;
@@ -28,87 +41,87 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)
 @GameRegistry.ObjectHolder(MODID_TFCTECH)
 public final class TechBlocks {
-	public static final BlockElectricForge ELECTRIC_FORGE = getNull();
-	public static final BlockInductionCrucible INDUCTION_CRUCIBLE = getNull();
-	public static final BlockLatexExtractor LATEX_EXTRACTOR = getNull();
-	public static final BlockWireDrawBench WIRE_DRAW_BENCH = getNull();
-	public static final BlockFridge FRIDGE = getNull();
-	public static final BlockSmelteryCauldron SMELTERY_CAULDRON = getNull();
-	public static final BlockSmelteryFirebox SMELTERY_FIREBOX = getNull();
 
-	private static ImmutableList<ItemBlock> allInventoryItemBlocks, allTEISRBlocks;
-	private static ImmutableList<BlockFluidBase> allFluidBlocks;
+    public static final BlockElectricForge ELECTRIC_FORGE = getNull();
+    public static final BlockInductionCrucible INDUCTION_CRUCIBLE = getNull();
+    public static final BlockLatexExtractor LATEX_EXTRACTOR = getNull();
+    public static final BlockWireDrawBench WIRE_DRAW_BENCH = getNull();
+    public static final BlockFridge FRIDGE = getNull();
+    public static final BlockSmelteryCauldron SMELTERY_CAULDRON = getNull();
+    public static final BlockSmelteryFirebox SMELTERY_FIREBOX = getNull();
 
-	public static ImmutableList<ItemBlock> getAllInventoryItemBlocks() {
-		return allInventoryItemBlocks;
-	}
+    private static ImmutableList<ItemBlock> allInventoryItemBlocks, allTEISRBlocks;
+    private static ImmutableList<BlockFluidBase> allFluidBlocks;
 
-	public static ImmutableList<ItemBlock> getAllTEISRBlocks() {
-		return allTEISRBlocks;
-	}
+    public static ImmutableList<ItemBlock> getAllInventoryItemBlocks() {
+        return allInventoryItemBlocks;
+    }
 
-	public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
-		return allFluidBlocks;
-	}
+    public static ImmutableList<ItemBlock> getAllTEISRBlocks() {
+        return allTEISRBlocks;
+    }
 
-	@SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+    public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
+        return allFluidBlocks;
+    }
 
-		IForgeRegistry<Block> r = event.getRegistry();
-		TechFluids.registerFluids();
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
 
-		ImmutableList.Builder<BlockFluidBase> b = ImmutableList.builder();
-		if (TechFluids.LATEX.isDefault()) {
-			b.add(register(r, "fluid/" + TechFluids.LATEX.get()
-			                                             .getName(), new BlockFluidTFC(TechFluids.LATEX.get(), Material.WATER)));
-		}
-		allFluidBlocks = b.build();
+        IForgeRegistry<Block> r = event.getRegistry();
+        TechFluids.registerFluids();
 
-		//Normal inventory Blocks
-		ImmutableList.Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
+        ImmutableList.Builder<BlockFluidBase> b = ImmutableList.builder();
+        if (TechFluids.LATEX.isDefault()) {
+            b.add(register(r, "fluid/" + TechFluids.LATEX.get()
+                    .getName(), new BlockFluidTFC(TechFluids.LATEX.get(), Material.WATER)));
+        }
+        allFluidBlocks = b.build();
 
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "electric_forge", new BlockElectricForge(), CT_MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "induction_crucible", new BlockInductionCrucible(), CT_MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "smeltery_cauldron", new BlockSmelteryCauldron(), CT_MISC)));
-		inventoryItemBlocks.add(new ItemBlockTFC(register(r, "smeltery_firebox", new BlockSmelteryFirebox(), CT_MISC)));
+        //Normal inventory Blocks
+        ImmutableList.Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
-		allInventoryItemBlocks = inventoryItemBlocks.build();
+        inventoryItemBlocks.add(new ItemBlockTFC(register(r, "electric_forge", new BlockElectricForge(), CT_MISC)));
+        inventoryItemBlocks.add(new ItemBlockTFC(register(r, "induction_crucible", new BlockInductionCrucible(), CT_MISC)));
+        inventoryItemBlocks.add(new ItemBlockTFC(register(r, "smeltery_cauldron", new BlockSmelteryCauldron(), CT_MISC)));
+        inventoryItemBlocks.add(new ItemBlockTFC(register(r, "smeltery_firebox", new BlockSmelteryFirebox(), CT_MISC)));
 
-		//TEISR Blocks
-		ImmutableList.Builder<ItemBlock> teisrItemBlocks = ImmutableList.builder();
+        allInventoryItemBlocks = inventoryItemBlocks.build();
 
-		teisrItemBlocks.add(new ItemBlockWireDrawBench(register(r, "wire_draw_bench", new BlockWireDrawBench(), CT_MISC)));
-		teisrItemBlocks.add(new ItemBlockFridge(register(r, "fridge", new BlockFridge(), CT_MISC)));
+        //TEISR Blocks
+        ImmutableList.Builder<ItemBlock> teisrItemBlocks = ImmutableList.builder();
 
-		allTEISRBlocks = teisrItemBlocks.build();
+        teisrItemBlocks.add(new ItemBlockWireDrawBench(register(r, "wire_draw_bench", new BlockWireDrawBench(), CT_MISC)));
+        teisrItemBlocks.add(new ItemBlockFridge(register(r, "fridge", new BlockFridge(), CT_MISC)));
 
+        allTEISRBlocks = teisrItemBlocks.build();
 
-		//No itemblocks
-		register(r, "latex_extractor", new BlockLatexExtractor());
+        //No itemblocks
+        register(r, "latex_extractor", new BlockLatexExtractor());
 
-		//Register TEs
-		register(TEElectricForge.class, "electric_forge");
-		register(TEInductionCrucible.class, "induction_crucible");
-		register(TELatexExtractor.class, "latex_extractor");
-		register(TEWireDrawBench.class, "wire_draw_bench");
-		register(TEFridge.class, "fridge");
-		register(TESmelteryCauldron.class, "smeltery_cauldron");
-		register(TESmelteryFirebox.class, "smeltery_firebox");
-	}
+        //Register TEs
+        register(TEElectricForge.class, "electric_forge");
+        register(TEInductionCrucible.class, "induction_crucible");
+        register(TELatexExtractor.class, "latex_extractor");
+        register(TEWireDrawBench.class, "wire_draw_bench");
+        register(TEFridge.class, "fridge");
+        register(TESmelteryCauldron.class, "smeltery_cauldron");
+        register(TESmelteryFirebox.class, "smeltery_firebox");
+    }
 
-	private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
-		block.setCreativeTab(ct);
-		return register(r, name, block);
-	}
+    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {
+        block.setCreativeTab(ct);
+        return register(r, name, block);
+    }
 
-	private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
-		block.setRegistryName(MODID_TFCTECH, name);
-		block.setTranslationKey(MODID_TFCTECH + "." + name.replace('/', '.'));
-		r.register(block);
-		return block;
-	}
+    private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
+        block.setRegistryName(MODID_TFCTECH, name);
+        block.setTranslationKey(MODID_TFCTECH + "." + name.replace('/', '.'));
+        r.register(block);
+        return block;
+    }
 
-	private static <T extends TileEntity> void register(Class<T> te, String name) {
-		TileEntity.register(MODID_TFCTECH + ":" + name, te);
-	}
+    private static <T extends TileEntity> void register(Class<T> te, String name) {
+        TileEntity.register(MODID_TFCTECH + ":" + name, te);
+    }
 }

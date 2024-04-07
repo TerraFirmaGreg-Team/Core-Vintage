@@ -4,11 +4,11 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ISoilType {
 
-	/**
-	 * Возвращает тип почвы.
-	 *
-	 * @return Тип почвы.
-	 */
-	@NotNull
-	SoilType getType();
+    /**
+     * Возвращает тип почвы.
+     *
+     * @return Тип почвы.
+     */
+    @NotNull
+    SoilType getType();
 }

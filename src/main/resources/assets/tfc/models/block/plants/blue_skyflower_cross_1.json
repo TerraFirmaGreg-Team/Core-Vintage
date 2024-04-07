@@ -3,6 +3,6 @@
   "textures": {
     "cross": "tfc:blocks/plants/blue_skyflower/blue_skyflower_1",
     "particle": "tfc:blocks/plants/blue_skyflower/blue_skyflower_1",
-	"overlay": "tfc:blocks/plants/blue_skyflower/blue_skyflower_1b"
+    "overlay": "tfc:blocks/plants/blue_skyflower/blue_skyflower_1b"
   }
 }

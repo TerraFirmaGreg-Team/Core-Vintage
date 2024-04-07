@@ -1,7 +1,5 @@
 package tfcflorae.util.interaction;
 
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.util.interaction.IRightClickItemAction;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockStructure;
@@ -23,8 +21,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import org.jetbrains.annotations.NotNull;
 
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.util.interaction.IRightClickItemAction;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Util class for handling right click actions with more precision than {@link net.minecraftforge.event.entity.player.PlayerInteractEvent} gives us
@@ -33,115 +34,118 @@ import org.jetbrains.annotations.NotNull;
  */
 
 final class ClientInteractionManagerTFCF {
-	/**
-	 * @see PlayerControllerMP#processRightClickBlock(EntityPlayerSP, WorldClient, BlockPos, EnumFacing, Vec3d, EnumHand)
-	 */
-	@NotNull
-	static EnumActionResult processRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		EnumActionResult result = EnumActionResult.PASS;
 
-		EntityPlayerSP player = (EntityPlayerSP) event.getEntityPlayer();
-		ItemStack itemstack = event.getItemStack();
-		World worldIn = event.getWorld();
-		BlockPos pos = event.getPos();
-		EnumHand hand = event.getHand();
-		EnumFacing direction = event.getFace();
-		if (direction == null) {
-			direction = EnumFacing.UP;
-		}
-		Vec3d hitVec = event.getHitVec();
-		float hitX = 0, hitY = 0, hitZ = 0;
-		if (hitVec != null) {
-			hitX = ((float) (hitVec.x - pos.getX()));
-			hitY = ((float) (hitVec.y - pos.getY()));
-			hitZ = ((float) (hitVec.z - pos.getZ()));
-		}
-		boolean flag = false;
-		PlayerControllerMP controller = Minecraft.getMinecraft().playerController;
+    /**
+     * @see PlayerControllerMP#processRightClickBlock(EntityPlayerSP, WorldClient, BlockPos, EnumFacing, Vec3d, EnumHand)
+     */
+    @NotNull
+    static EnumActionResult processRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        EnumActionResult result = EnumActionResult.PASS;
 
-		if (controller.getCurrentGameType() != GameType.SPECTATOR) {
-			EnumActionResult ret = itemstack.onItemUseFirst(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
-			if (ret != EnumActionResult.PASS) {
-				return ret;
-			}
+        EntityPlayerSP player = (EntityPlayerSP) event.getEntityPlayer();
+        ItemStack itemstack = event.getItemStack();
+        World worldIn = event.getWorld();
+        BlockPos pos = event.getPos();
+        EnumHand hand = event.getHand();
+        EnumFacing direction = event.getFace();
+        if (direction == null) {
+            direction = EnumFacing.UP;
+        }
+        Vec3d hitVec = event.getHitVec();
+        float hitX = 0, hitY = 0, hitZ = 0;
+        if (hitVec != null) {
+            hitX = ((float) (hitVec.x - pos.getX()));
+            hitY = ((float) (hitVec.y - pos.getY()));
+            hitZ = ((float) (hitVec.z - pos.getZ()));
+        }
+        boolean flag = false;
+        PlayerControllerMP controller = Minecraft.getMinecraft().playerController;
 
-			IBlockState iblockstate = worldIn.getBlockState(pos);
-			boolean bypass = player.getHeldItemMainhand()
-			                       .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
-			                                                                          .doesSneakBypassUse(worldIn, pos, player);
+        if (controller.getCurrentGameType() != GameType.SPECTATOR) {
+            EnumActionResult ret = itemstack.onItemUseFirst(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
+            if (ret != EnumActionResult.PASS) {
+                return ret;
+            }
 
-			if ((!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW)) {
-				if (event.getUseBlock() != Event.Result.DENY)
-					flag = iblockstate.getBlock()
-					                  .onBlockActivated(worldIn, pos, iblockstate, player, hand, direction, hitX, hitY, hitZ);
-				if (flag) result = EnumActionResult.SUCCESS;
-			}
+            IBlockState iblockstate = worldIn.getBlockState(pos);
+            boolean bypass = player.getHeldItemMainhand()
+                    .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
+                    .doesSneakBypassUse(worldIn, pos, player);
 
-			if (!flag && itemstack.getItem() instanceof ItemBlock) {
-				ItemBlock itemblock = (ItemBlock) itemstack.getItem();
+            if ((!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW)) {
+                if (event.getUseBlock() != Event.Result.DENY)
+                    flag = iblockstate.getBlock()
+                            .onBlockActivated(worldIn, pos, iblockstate, player, hand, direction, hitX, hitY, hitZ);
+                if (flag) result = EnumActionResult.SUCCESS;
+            }
 
-				if (!itemblock.canPlaceBlockOnSide(worldIn, pos, direction, player, itemstack)) {
-					return EnumActionResult.FAIL;
-				}
-			}
-		}
+            if (!flag && itemstack.getItem() instanceof ItemBlock) {
+                ItemBlock itemblock = (ItemBlock) itemstack.getItem();
 
-		if (!flag && controller.getCurrentGameType() != GameType.SPECTATOR || event.getUseItem() == Event.Result.ALLOW) {
-			if (itemstack.isEmpty()) {
-				return EnumActionResult.PASS;
-			} else if (player.getCooldownTracker().hasCooldown(itemstack.getItem())) {
-				return EnumActionResult.PASS;
-			} else {
-				if (itemstack.getItem() instanceof ItemBlock && !player.canUseCommandBlock()) {
-					Block block = ((ItemBlock) itemstack.getItem()).getBlock();
+                if (!itemblock.canPlaceBlockOnSide(worldIn, pos, direction, player, itemstack)) {
+                    return EnumActionResult.FAIL;
+                }
+            }
+        }
 
-					if (block instanceof BlockCommandBlock || block instanceof BlockStructure) {
-						return EnumActionResult.FAIL;
-					}
-				}
+        if (!flag && controller.getCurrentGameType() != GameType.SPECTATOR || event.getUseItem() == Event.Result.ALLOW) {
+            if (itemstack.isEmpty()) {
+                return EnumActionResult.PASS;
+            } else if (player.getCooldownTracker().hasCooldown(itemstack.getItem())) {
+                return EnumActionResult.PASS;
+            } else {
+                if (itemstack.getItem() instanceof ItemBlock && !player.canUseCommandBlock()) {
+                    Block block = ((ItemBlock) itemstack.getItem()).getBlock();
 
-				if (controller.getCurrentGameType().isCreative()) {
-					int i = itemstack.getMetadata();
-					int j = itemstack.getCount();
-					if (event.getUseItem() != Event.Result.DENY) {
-						EnumActionResult enumactionresult;
-						// Fire the alternative item use action
-						if (itemstack.getItem() instanceof ItemSeedsTFC) {
-							enumactionresult = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
-						} else
-							// fire the normal one as well
-							enumactionresult = itemstack.onItemUse(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
+                    if (block instanceof BlockCommandBlock || block instanceof BlockStructure) {
+                        return EnumActionResult.FAIL;
+                    }
+                }
 
-						itemstack.setItemDamage(i);
-						itemstack.setCount(j);
-						return enumactionresult;
-					} else {
-						return result;
-					}
-				} else {
-					ItemStack copyForUse = itemstack.copy();
-					if (event.getUseItem() != Event.Result.DENY) {
-						if (itemstack.getItem() instanceof ItemSeedsTFC) {
-							result = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
-						} else
-							// fire the normal one as well
-							result = itemstack.onItemUse(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
-					}
-					if (itemstack.isEmpty()) ForgeEventFactory.onPlayerDestroyItem(player, copyForUse, hand);
-					return result;
-				}
-			}
-		} else {
-			return EnumActionResult.SUCCESS;
-		}
-	}
+                if (controller.getCurrentGameType().isCreative()) {
+                    int i = itemstack.getMetadata();
+                    int j = itemstack.getCount();
+                    if (event.getUseItem() != Event.Result.DENY) {
+                        EnumActionResult enumactionresult;
+                        // Fire the alternative item use action
+                        if (itemstack.getItem() instanceof ItemSeedsTFC) {
+                            enumactionresult = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand,
+                                    direction, hitX, hitY, hitZ);
+                        } else
+                            // fire the normal one as well
+                            enumactionresult = itemstack.onItemUse(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
 
-	/**
-	 * @see PlayerControllerMP#processRightClick(EntityPlayer, World, EnumHand)
-	 */
-	@NotNull
-	static EnumActionResult processRightClickItem(PlayerInteractEvent.RightClickItem event, IRightClickItemAction action) {
-		// No special logic required, just fire the right click and return the result
-		return action.onRightClickItem(event.getWorld(), event.getEntityPlayer(), event.getHand());
-	}
+                        itemstack.setItemDamage(i);
+                        itemstack.setCount(j);
+                        return enumactionresult;
+                    } else {
+                        return result;
+                    }
+                } else {
+                    ItemStack copyForUse = itemstack.copy();
+                    if (event.getUseItem() != Event.Result.DENY) {
+                        if (itemstack.getItem() instanceof ItemSeedsTFC) {
+                            result = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) itemstack.getItem()), player, worldIn, pos, hand, direction,
+                                    hitX, hitY, hitZ);
+                        } else
+                            // fire the normal one as well
+                            result = itemstack.onItemUse(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);
+                    }
+                    if (itemstack.isEmpty()) ForgeEventFactory.onPlayerDestroyItem(player, copyForUse, hand);
+                    return result;
+                }
+            }
+        } else {
+            return EnumActionResult.SUCCESS;
+        }
+    }
+
+    /**
+     * @see PlayerControllerMP#processRightClick(EntityPlayer, World, EnumHand)
+     */
+    @NotNull
+    static EnumActionResult processRightClickItem(PlayerInteractEvent.RightClickItem event, IRightClickItemAction action) {
+        // No special logic required, just fire the right click and return the result
+        return action.onRightClickItem(event.getWorld(), event.getEntityPlayer(), event.getHand());
+    }
 }

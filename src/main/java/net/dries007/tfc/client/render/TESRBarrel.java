@@ -1,8 +1,5 @@
 package net.dries007.tfc.client.render;
 
-import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.te.TEBarrel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -21,90 +18,96 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.te.TEBarrel;
 import org.lwjgl.opengl.GL11;
 
 public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel> {
-	@Override
-	public void render(TEBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		IBlockState state = te.getWorld().getBlockState(te.getPos());
-		if (!(state.getBlock() instanceof BlockBarrel) || state.getValue(BlockBarrel.SEALED)) {
-			return;
-		}
 
-		IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-		IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    @Override
+    public void render(TEBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        IBlockState state = te.getWorld().getBlockState(te.getPos());
+        if (!(state.getBlock() instanceof BlockBarrel) || state.getValue(BlockBarrel.SEALED)) {
+            return;
+        }
 
-		if (fluidHandler == null || itemHandler == null) {
-			return;
-		}
+        IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-		IFluidTankProperties properties = fluidHandler.getTankProperties()[0];
-		FluidStack fluidStack = properties.getContents();
-		ItemStack stack = itemHandler.getStackInSlot(TEBarrel.SLOT_ITEM);
+        if (fluidHandler == null || itemHandler == null) {
+            return;
+        }
 
-		GlStateManager.pushMatrix();
-		GlStateManager.translate(x, y, z);
+        IFluidTankProperties properties = fluidHandler.getTankProperties()[0];
+        FluidStack fluidStack = properties.getContents();
+        ItemStack stack = itemHandler.getStackInSlot(TEBarrel.SLOT_ITEM);
 
-		if (!stack.isEmpty()) {
-			GlStateManager.pushMatrix();
-			GlStateManager.translate(0.5D, 0.15625D, 0.5D);
-			GlStateManager.scale(0.5F, 0.5F, 0.5F);
-			GlStateManager.rotate(90F, 1F, 0F, 0F);
-			Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
-			GlStateManager.popMatrix();
-		}
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, z);
 
-		if (fluidStack != null) {
-			Fluid fluid = fluidStack.getFluid();
+        if (!stack.isEmpty()) {
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(0.5D, 0.15625D, 0.5D);
+            GlStateManager.scale(0.5F, 0.5F, 0.5F);
+            GlStateManager.rotate(90F, 1F, 0F, 0F);
+            Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+            GlStateManager.popMatrix();
+        }
 
-			TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
+        if (fluidStack != null) {
+            Fluid fluid = fluidStack.getFluid();
 
-			GlStateManager.enableAlpha();
-			GlStateManager.enableBlend();
-			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+            TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
 
-			int color = fluid.getColor();
+            GlStateManager.enableAlpha();
+            GlStateManager.enableBlend();
+            GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                    GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-			float r = ((color >> 16) & 0xFF) / 255F;
-			float g = ((color >> 8) & 0xFF) / 255F;
-			float b = (color & 0xFF) / 255F;
-			float a = ((color >> 24) & 0xFF) / 255F;
+            int color = fluid.getColor();
 
-			GlStateManager.color(r, g, b, a);
+            float r = ((color >> 16) & 0xFF) / 255F;
+            float g = ((color >> 8) & 0xFF) / 255F;
+            float b = (color & 0xFF) / 255F;
+            float a = ((color >> 24) & 0xFF) / 255F;
 
-			rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            GlStateManager.color(r, g, b, a);
 
-			BufferBuilder buffer = Tessellator.getInstance().getBuffer();
-			buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_NORMAL);
+            rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-			FluidStack content = properties.getContents();
+            BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+            buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_NORMAL);
 
-			if (content == null) {
-				return;
-			}
+            FluidStack content = properties.getContents();
 
-			double height = 0.140625D + (0.75D - 0.015625D) * content.amount / properties.getCapacity();
+            if (content == null) {
+                return;
+            }
 
-			buffer.pos(0.1875D, height, 0.1875D)
-			      .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
-			      .normal(0, 0, 1)
-			      .endVertex();
-			buffer.pos(0.1875D, height, 0.8125D)
-			      .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
-			      .normal(0, 0, 1)
-			      .endVertex();
-			buffer.pos(0.8125D, height, 0.8125D)
-			      .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
-			      .normal(0, 0, 1)
-			      .endVertex();
-			buffer.pos(0.8125D, height, 0.1875D)
-			      .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
-			      .normal(0, 0, 1)
-			      .endVertex();
+            double height = 0.140625D + (0.75D - 0.015625D) * content.amount / properties.getCapacity();
 
-			Tessellator.getInstance().draw();
-		}
+            buffer.pos(0.1875D, height, 0.1875D)
+                    .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(3))
+                    .normal(0, 0, 1)
+                    .endVertex();
+            buffer.pos(0.1875D, height, 0.8125D)
+                    .tex(sprite.getInterpolatedU(3), sprite.getInterpolatedV(13))
+                    .normal(0, 0, 1)
+                    .endVertex();
+            buffer.pos(0.8125D, height, 0.8125D)
+                    .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(13))
+                    .normal(0, 0, 1)
+                    .endVertex();
+            buffer.pos(0.8125D, height, 0.1875D)
+                    .tex(sprite.getInterpolatedU(13), sprite.getInterpolatedV(3))
+                    .normal(0, 0, 1)
+                    .endVertex();
 
-		GlStateManager.popMatrix();
-	}
+            Tessellator.getInstance().draw();
+        }
+
+        GlStateManager.popMatrix();
+    }
 }

@@ -1,6 +1,6 @@
 {
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "tfc:blocks/wood/leaves/larch"
-	}
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "tfc:blocks/wood/leaves/larch"
+  }
 }

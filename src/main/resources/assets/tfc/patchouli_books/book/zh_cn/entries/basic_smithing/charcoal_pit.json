@@ -23,15 +23,15 @@
       "multiblock_id": "tfc:charcoal_pit_3x3",
       "text": "这是一个更大的木炭坑图例。实际上，木炭坑可以是任意形状的！"
     },
-	{
-	  "type": "crafting",
-	  "recipe": "tfc:stick_bunch",
-	  "text": "木棍堆可用于储存木棍。可以烧成火把。"
-	},
-	{
-	  "type": "crafting",
-	  "recipe": "tfc:stick_bundle",
-	  "text": "木棍捆和原木别无二致，唯一的区别是你不能直接放置它。你可以用它烧木炭，也可以把它当燃料。"
-	}
+    {
+      "type": "crafting",
+      "recipe": "tfc:stick_bunch",
+      "text": "木棍堆可用于储存木棍。可以烧成火把。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "tfc:stick_bundle",
+      "text": "木棍捆和原木别无二致，唯一的区别是你不能直接放置它。你可以用它烧木炭，也可以把它当燃料。"
+    }
   ]
 }

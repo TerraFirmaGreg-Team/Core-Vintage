@@ -7,11 +7,11 @@
   "key": {
     "X": {
       "type": "forge:ore_dict",
-      "ore" : "lumberCassiaCinnamon"
+      "ore": "lumberCassiaCinnamon"
     },
     "B": {
       "type": "forge:ore_dict",
-      "ore" : "poleCassiaCinnamon"
+      "ore": "poleCassiaCinnamon"
     }
   },
   "result": {

@@ -1,7 +1,5 @@
 package net.dries007.tfc.objects.container;
 
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TEInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
@@ -9,8 +7,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 
+import net.dries007.tfc.objects.te.ITileFields;
+import net.dries007.tfc.objects.te.TEInventory;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This is the mother of all Container-with-a-Tile-Entity implementations
@@ -19,124 +20,125 @@ import org.jetbrains.annotations.NotNull;
  */
 
 public abstract class ContainerTE<T extends TEInventory> extends ContainerSimple {
-	protected final T tile;
-	protected final EntityPlayer player;
 
-	private final boolean shouldSyncFields;
-	private final int yOffset; // The number of pixels higher than normal (If the gui is larger than normal, see Anvil)
+    protected final T tile;
+    protected final EntityPlayer player;
 
-	private int[] cachedFields;
+    private final boolean shouldSyncFields;
+    private final int yOffset; // The number of pixels higher than normal (If the gui is larger than normal, see Anvil)
 
-	protected ContainerTE(InventoryPlayer playerInv, T tile) {
-		this(playerInv, tile, 0);
-	}
+    private int[] cachedFields;
 
-	protected ContainerTE(InventoryPlayer playerInv, T tile, int yOffset) {
-		this.tile = tile;
-		this.player = playerInv.player;
-		this.shouldSyncFields = tile instanceof ITileFields;
-		this.yOffset = yOffset;
+    protected ContainerTE(InventoryPlayer playerInv, T tile) {
+        this(playerInv, tile, 0);
+    }
 
-		addContainerSlots();
-		addPlayerInventorySlots(playerInv);
-	}
+    protected ContainerTE(InventoryPlayer playerInv, T tile, int yOffset) {
+        this.tile = tile;
+        this.player = playerInv.player;
+        this.shouldSyncFields = tile instanceof ITileFields;
+        this.yOffset = yOffset;
 
-	@Override
-	public void detectAndSendChanges() {
-		if (shouldSyncFields) {
-			detectAndSendFieldChanges();
-		}
-		super.detectAndSendChanges();
-	}
+        addContainerSlots();
+        addPlayerInventorySlots(playerInv);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int data) {
-		if (shouldSyncFields) {
-			((ITileFields) tile).setField(id, data);
-		}
-	}
+    @Override
+    public void detectAndSendChanges() {
+        if (shouldSyncFields) {
+            detectAndSendFieldChanges();
+        }
+        super.detectAndSendChanges();
+    }
 
-	@Override
-	@NotNull
-	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-		// Slot that was clicked
-		Slot slot = inventorySlots.get(index);
-		if (slot != null && slot.getHasStack()) {
-			ItemStack stack = slot.getStack();
-			ItemStack stackCopy = stack.copy();
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data) {
+        if (shouldSyncFields) {
+            ((ITileFields) tile).setField(id, data);
+        }
+    }
 
-			// Transfer out of the container
-			int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size();
-			if (index < containerSlots) {
-				if (transferStackOutOfContainer(stack, containerSlots)) {
-					return ItemStack.EMPTY;
-				}
-			}
-			// Transfer into the container
-			else if (transferStackIntoContainer(stack, containerSlots)) {
-				return ItemStack.EMPTY;
-			}
+    @Override
+    @NotNull
+    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+        // Slot that was clicked
+        Slot slot = inventorySlots.get(index);
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stack = slot.getStack();
+            ItemStack stackCopy = stack.copy();
 
-			if (stack.getCount() == 0) {
-				slot.putStack(ItemStack.EMPTY);
-			} else {
-				slot.onSlotChanged();
-			}
-			if (stack.getCount() == stackCopy.getCount()) {
-				return ItemStack.EMPTY;
-			}
-			slot.onTake(player, stackCopy);
-			return stackCopy;
-		}
-		return ItemStack.EMPTY;
-	}
+            // Transfer out of the container
+            int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size();
+            if (index < containerSlots) {
+                if (transferStackOutOfContainer(stack, containerSlots)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+            // Transfer into the container
+            else if (transferStackIntoContainer(stack, containerSlots)) {
+                return ItemStack.EMPTY;
+            }
 
-	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) {
-		return tile.canInteractWith(player);
-	}
+            if (stack.getCount() == 0) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+            if (stack.getCount() == stackCopy.getCount()) {
+                return ItemStack.EMPTY;
+            }
+            slot.onTake(player, stackCopy);
+            return stackCopy;
+        }
+        return ItemStack.EMPTY;
+    }
 
-	@Override
-	protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
-		super.addPlayerInventorySlots(playerInv, yOffset);
-	}
+    @Override
+    public boolean canInteractWith(EntityPlayer playerIn) {
+        return tile.canInteractWith(player);
+    }
 
-	protected abstract void addContainerSlots();
+    @Override
+    protected void addPlayerInventorySlots(InventoryPlayer playerInv) {
+        super.addPlayerInventorySlots(playerInv, yOffset);
+    }
 
-	protected void detectAndSendFieldChanges() {
-		ITileFields tileFields = (ITileFields) tile;
-		boolean allFieldsHaveChanged = false;
-		boolean[] fieldHasChanged = new boolean[tileFields.getFieldCount()];
+    protected abstract void addContainerSlots();
 
-		if (cachedFields == null) {
-			cachedFields = new int[tileFields.getFieldCount()];
-			allFieldsHaveChanged = true;
-		}
+    protected void detectAndSendFieldChanges() {
+        ITileFields tileFields = (ITileFields) tile;
+        boolean allFieldsHaveChanged = false;
+        boolean[] fieldHasChanged = new boolean[tileFields.getFieldCount()];
 
-		for (int i = 0; i < cachedFields.length; ++i) {
-			if (allFieldsHaveChanged || cachedFields[i] != tileFields.getField(i)) {
-				cachedFields[i] = tileFields.getField(i);
-				fieldHasChanged[i] = true;
-			}
-		}
+        if (cachedFields == null) {
+            cachedFields = new int[tileFields.getFieldCount()];
+            allFieldsHaveChanged = true;
+        }
 
-		// go through the list of listeners (players using this container) and update them if necessary
-		for (IContainerListener listener : this.listeners) {
-			for (int fieldID = 0; fieldID < tileFields.getFieldCount(); ++fieldID) {
-				if (fieldHasChanged[fieldID]) {
-					// Note that although sendWindowProperty takes 2 ints on a server these are truncated to shorts
-					listener.sendWindowProperty(this, fieldID, cachedFields[fieldID]);
-				}
-			}
-		}
-	}
+        for (int i = 0; i < cachedFields.length; ++i) {
+            if (allFieldsHaveChanged || cachedFields[i] != tileFields.getField(i)) {
+                cachedFields[i] = tileFields.getField(i);
+                fieldHasChanged[i] = true;
+            }
+        }
 
-	protected boolean transferStackOutOfContainer(ItemStack stack, int containerSlots) {
-		return !mergeItemStack(stack, containerSlots, inventorySlots.size(), true);
-	}
+        // go through the list of listeners (players using this container) and update them if necessary
+        for (IContainerListener listener : this.listeners) {
+            for (int fieldID = 0; fieldID < tileFields.getFieldCount(); ++fieldID) {
+                if (fieldHasChanged[fieldID]) {
+                    // Note that although sendWindowProperty takes 2 ints on a server these are truncated to shorts
+                    listener.sendWindowProperty(this, fieldID, cachedFields[fieldID]);
+                }
+            }
+        }
+    }
 
-	protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
-		return !mergeItemStack(stack, 0, containerSlots, false);
-	}
+    protected boolean transferStackOutOfContainer(ItemStack stack, int containerSlots) {
+        return !mergeItemStack(stack, containerSlots, inventorySlots.size(), true);
+    }
+
+    protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
+        return !mergeItemStack(stack, 0, containerSlots, false);
+    }
 }

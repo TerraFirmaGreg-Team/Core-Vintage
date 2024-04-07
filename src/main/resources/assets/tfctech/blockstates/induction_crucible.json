@@ -11,7 +11,7 @@
       "coils": "tfctech:blocks/devices/induction_crucible/coils",
       "casing": "tfctech:blocks/devices/induction_crucible/casing",
       "particle": "tfctech:blocks/devices/induction_crucible/bottom_external"
-	},
+    },
     "model": "tfctech:induction_crucible"
   },
   "variants": {
@@ -19,13 +19,13 @@
       "true": {
         "textures": {
           "controller": "tfctech:blocks/devices/induction_crucible/controller_on",
-		  "coils": "tfctech:blocks/devices/induction_crucible/coils_on"
+          "coils": "tfctech:blocks/devices/induction_crucible/coils_on"
         }
       },
       "false": {
         "textures": {
           "controller": "tfctech:blocks/devices/induction_crucible/controller",
-		  "coils": "tfctech:blocks/devices/induction_crucible/coils"
+          "coils": "tfctech:blocks/devices/induction_crucible/coils"
         }
       }
     },

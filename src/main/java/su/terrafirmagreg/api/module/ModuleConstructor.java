@@ -4,17 +4,17 @@ import org.jetbrains.annotations.Nullable;
 
 class ModuleConstructor {
 
-	@Nullable
-	ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
-		try {
-			ModuleBase module = moduleClass.newInstance();
-			ModuleManager.LOGGER.info("[{}] Loaded module: {}", modId, moduleClass.getSimpleName());
-			return module;
+    @Nullable
+    ModuleBase constructModule(String modId, Class<? extends ModuleBase> moduleClass) {
+        try {
+            ModuleBase module = moduleClass.newInstance();
+            ModuleManager.LOGGER.info("[{}] Loaded module: {}", modId, moduleClass.getSimpleName());
+            return module;
 
-		} catch (Exception e) {
-			ModuleManager.LOGGER.error("[{}] Error loading module: {} {}", modId, moduleClass.getSimpleName(), e);
-		}
+        } catch (Exception e) {
+            ModuleManager.LOGGER.error("[{}] Error loading module: {} {}", modId, moduleClass.getSimpleName(), e);
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

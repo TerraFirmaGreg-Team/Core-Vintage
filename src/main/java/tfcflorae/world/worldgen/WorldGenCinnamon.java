@@ -1,12 +1,5 @@
 package tfcflorae.world.worldgen;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.world.classic.StructureHelper;
-import net.dries007.tfc.world.classic.biomes.BiomeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +9,14 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.api.util.ITreeGenerator;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.world.classic.StructureHelper;
+import net.dries007.tfc.world.classic.biomes.BiomeTFC;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.TreesTFCF;
@@ -24,54 +25,57 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class WorldGenCinnamon extends WorldGenerator {
-	private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
 
-	private static final int numVariants = 1; // should always be 1 or higher
-	private static final String[] variants = IntStream.range(1, numVariants)
-	                                                  .mapToObj(String::valueOf)
-	                                                  .toArray(String[]::new);
-	private static boolean useRotation = false;
+    private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
 
-	@Override
-	public boolean generate(World world, Random rand, BlockPos pos) {
-		if (rand.nextInt(ConfigTFCF.General.WORLD.cinnamonRarity) < 5)
-			return false;
+    private static final int numVariants = 1; // should always be 1 or higher
+    private static final String[] variants = IntStream.range(1, numVariants)
+            .mapToObj(String::valueOf)
+            .toArray(String[]::new);
+    private static boolean useRotation = false;
 
-		ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
-		if (!chunkData.isInitialized()) return false;
+    @Override
+    public boolean generate(World world, Random rand, BlockPos pos) {
+        if (rand.nextInt(ConfigTFCF.General.WORLD.cinnamonRarity) < 5)
+            return false;
 
-		final Biome b = world.getBiome(pos);
-		if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN)
-			return false;
+        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        if (!chunkData.isInitialized()) return false;
 
-		final float diversity = chunkData.getFloraDiversity();
-		final float density = chunkData.getFloraDensity();
-		final float temp = chunkData.getAverageTemp();
-		final float rain = chunkData.getRainfall();
+        final Biome b = world.getBiome(pos);
+        if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN)
+            return false;
 
-		int x = pos.getX() - 7 + rand.nextInt(14);
-		int z = pos.getZ() - 7 + rand.nextInt(14);
-		BlockPos genPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+        final float diversity = chunkData.getFloraDiversity();
+        final float density = chunkData.getFloraDensity();
+        final float temp = chunkData.getAverageTemp();
+        final float rain = chunkData.getRainfall();
 
-		int gen = rand.nextInt(8);
+        int x = pos.getX() - 7 + rand.nextInt(14);
+        int z = pos.getZ() - 7 + rand.nextInt(14);
+        BlockPos genPos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
-		if (gen == 0 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
-		                                                                                           .isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
-			//return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CASSIA_CINNAMON_LOG.getDefaultState());
-			return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
-		}
-		if (gen == 1 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
-		                                                                                           .isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGround(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
-			//return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CEYLON_CINNAMON_LOG.getDefaultState());
-			return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
-		}
-		return false;
-	}
+        int gen = rand.nextInt(8);
 
-	private boolean generateCinnamonVariant(World world, Random rand, BlockPos pos, Tree tree, ITreeGenerator CinnamonToGen) {
-		IBlockState state = world.getBlockState(pos.down());
-		if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGrowableSoil(state))) {
-			TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
+        if (gen == 0 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
+                .isSideSolid(world, pos.down(), EnumFacing.UP) &&
+                (BlocksTFC.isGround(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
+            //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CASSIA_CINNAMON_LOG.getDefaultState());
+            return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
+        }
+        if (gen == 1 && rain > 250 && temp > 20 && density > 0.3f && world.isAirBlock(pos) && world.getBlockState(pos.down())
+                .isSideSolid(world, pos.down(), EnumFacing.UP) &&
+                (BlocksTFC.isGround(world.getBlockState(pos.down())) || BlocksTFCF.isGround(world.getBlockState(pos.down())))) {
+            //return generateCinnamon(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, BlocksTFCF.CEYLON_CINNAMON_LOG.getDefaultState());
+            return generateCinnamonVariant(world, rand, pos, TreesTFCF.CEYLON_CINNAMON_TREE, TreesTFCF.GEN_CASSIA_CINNAMON);
+        }
+        return false;
+    }
+
+    private boolean generateCinnamonVariant(World world, Random rand, BlockPos pos, Tree tree, ITreeGenerator CinnamonToGen) {
+        IBlockState state = world.getBlockState(pos.down());
+        if (world.isAirBlock(pos) && state.isSideSolid(world, pos.down(), EnumFacing.UP) && (BlocksTFC.isGrowableSoil(state))) {
+            TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
             /*String variant = variants[variants.length == 1 ? 0 : rand.nextInt(variants.length)];
             ResourceLocation base = new ResourceLocation(tree.getRegistryName() + "/" + variant);
 
@@ -89,11 +93,11 @@ public class WorldGenCinnamon extends WorldGenerator {
             pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
             StructureHelper.addStructureToWorld(world, pos, structureBase, settings2);*/
 
-			CinnamonToGen.generateTree(manager, world, pos, tree, rand, true);
-			return true;
-		}
-		return false;
-	}
+            CinnamonToGen.generateTree(manager, world, pos, tree, rand, true);
+            return true;
+        }
+        return false;
+    }
 
     /*private boolean generateCinnamon(World world, Random rand, BlockPos pos, Tree tree, IBlockState log)
     {

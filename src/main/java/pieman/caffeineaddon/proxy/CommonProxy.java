@@ -5,23 +5,22 @@ import net.minecraftforge.fml.common.Mod;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
 
-
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class CommonProxy {
 
-	public void registerItemRenderer(Item item, int metadata, String id) {
-	}
+    public void registerItemRenderer(Item item, int metadata, String id) {
+    }
 
-	public <E extends Enum<?>> void registerMetaItemRenderer(Item item, Class<E> variants, String id) {
-	}
+    public <E extends Enum<?>> void registerMetaItemRenderer(Item item, Class<E> variants, String id) {
+    }
 
-	public void preinit() {
-	}
+    public void preinit() {
+    }
 
-	public void init() {
-	}
+    public void init() {
+    }
 
-	public void postinit() {
-	}
+    public void postinit() {
+    }
 
 }

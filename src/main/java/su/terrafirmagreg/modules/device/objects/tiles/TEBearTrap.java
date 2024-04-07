@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.util.NBTUtils;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,94 +9,97 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
+
+import lombok.Getter;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.util.NBTUtils;
 
 import java.util.UUID;
 
 public class TEBearTrap extends TileEntity {
-	private EntityLivingBase capturedEntity;
-	private UUID capturedId;
-	@Getter
-	private boolean open;
 
-	public TEBearTrap() {
-		super();
-		this.open = true;
-	}
+    private EntityLivingBase capturedEntity;
+    private UUID capturedId;
+    @Getter
+    private boolean open;
 
-	@Override
-	@Nullable
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
-	}
+    public TEBearTrap() {
+        super();
+        this.open = true;
+    }
 
-	@Override
-	public @NotNull NBTTagCompound getUpdateTag() {
-		return this.writeToNBT(new NBTTagCompound());
-	}
+    @Override
+    @Nullable
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+    }
 
-	@Override
-	public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
-		super.onDataPacket(net, pkt);
-		handleUpdateTag(pkt.getNbtCompound());
-	}
+    @Override
+    public @NotNull NBTTagCompound getUpdateTag() {
+        return this.writeToNBT(new NBTTagCompound());
+    }
 
-	@Override
-	public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
-		NBTUtils.setGenericNBTValue(nbt, "open", open);
-		if (this.capturedEntity != null) {
-			NBTUtils.setGenericNBTValue(nbt, "capturedId", this.capturedEntity.getUniqueID());
-		}
-		return super.writeToNBT(nbt);
-	}
+    @Override
+    public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getNbtCompound());
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		this.open = nbt.getBoolean("open");
-		this.capturedId = nbt.getUniqueId("capturedId");
-		super.readFromNBT(nbt);
-	}
+    @Override
+    public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+        NBTUtils.setGenericNBTValue(nbt, "open", open);
+        if (this.capturedEntity != null) {
+            NBTUtils.setGenericNBTValue(nbt, "capturedId", this.capturedEntity.getUniqueID());
+        }
+        return super.writeToNBT(nbt);
+    }
 
-	protected void sendUpdates() {
-		this.world.markBlockRangeForRenderUpdate(pos, pos);
-		this.world.notifyBlockUpdate(pos, this.world.getBlockState(pos), this.world.getBlockState(pos), 3);
-		this.world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
-		markDirty();
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        this.open = nbt.getBoolean("open");
+        this.capturedId = nbt.getUniqueId("capturedId");
+        super.readFromNBT(nbt);
+    }
 
-	private void readCapturedEntity() {
-		if (this.capturedId != null) {
-			if (this.world.getPlayerEntityByUUID(capturedId) != null) {
-				this.capturedEntity = this.world.getPlayerEntityByUUID(capturedId);
-			} else if (this.world instanceof WorldServer) {
-				Entity entity = ((WorldServer) this.world).getEntityFromUuid(this.capturedId);
-				if (entity instanceof EntityLivingBase) {
-					this.capturedEntity = (EntityLivingBase) entity;
-				}
-			}
-		}
-	}
+    protected void sendUpdates() {
+        this.world.markBlockRangeForRenderUpdate(pos, pos);
+        this.world.notifyBlockUpdate(pos, this.world.getBlockState(pos), this.world.getBlockState(pos), 3);
+        this.world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
+        markDirty();
+    }
 
-	public void setOpen(boolean isOpen) {
-		this.open = isOpen;
-		sendUpdates();
-	}
+    private void readCapturedEntity() {
+        if (this.capturedId != null) {
+            if (this.world.getPlayerEntityByUUID(capturedId) != null) {
+                this.capturedEntity = this.world.getPlayerEntityByUUID(capturedId);
+            } else if (this.world instanceof WorldServer) {
+                Entity entity = ((WorldServer) this.world).getEntityFromUuid(this.capturedId);
+                if (entity instanceof EntityLivingBase) {
+                    this.capturedEntity = (EntityLivingBase) entity;
+                }
+            }
+        }
+    }
 
-	public EntityLivingBase getCapturedEntity() {
-		readCapturedEntity();
-		return this.capturedEntity;
-	}
+    public void setOpen(boolean isOpen) {
+        this.open = isOpen;
+        sendUpdates();
+    }
 
-	public void setCapturedEntity(EntityLivingBase entity) {
+    public EntityLivingBase getCapturedEntity() {
+        readCapturedEntity();
+        return this.capturedEntity;
+    }
 
-		this.capturedEntity = entity;
-		if (entity != null) {
-			this.capturedId = entity.getUniqueID();
-		} else {
-			this.capturedId = UUID.randomUUID();
-		}
-		sendUpdates();
-	}
+    public void setCapturedEntity(EntityLivingBase entity) {
+
+        this.capturedEntity = entity;
+        if (entity != null) {
+            this.capturedId = entity.getUniqueID();
+        } else {
+            this.capturedId = UUID.randomUUID();
+        }
+        sendUpdates();
+    }
 }

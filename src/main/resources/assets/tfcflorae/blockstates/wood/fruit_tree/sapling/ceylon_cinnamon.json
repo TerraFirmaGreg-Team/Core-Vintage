@@ -10,9 +10,9 @@
   "variants": {
     "normal": [
       {
-	    "model": "builtin/generated",
-		"transform": "forge:default-item"
-	  }
+        "model": "builtin/generated",
+        "transform": "forge:default-item"
+      }
     ],
     "inventory": {
       "model": "builtin/generated",

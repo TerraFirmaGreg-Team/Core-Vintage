@@ -2,16 +2,16 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-        "cauldron": "tfctech:blocks/devices/smeltery_cauldron/cauldron",
-		"top": "tfctech:blocks/devices/smeltery_cauldron/top",
-		"lip": "tfctech:blocks/devices/smeltery_cauldron/lip",
-		"stand": "tfctech:blocks/devices/smeltery_cauldron/stand",
-		"particle": "tfctech:blocks/devices/smeltery_cauldron/cauldron"
+      "cauldron": "tfctech:blocks/devices/smeltery_cauldron/cauldron",
+      "top": "tfctech:blocks/devices/smeltery_cauldron/top",
+      "lip": "tfctech:blocks/devices/smeltery_cauldron/lip",
+      "stand": "tfctech:blocks/devices/smeltery_cauldron/stand",
+      "particle": "tfctech:blocks/devices/smeltery_cauldron/cauldron"
     },
     "model": "tfctech:smeltery_cauldron"
   },
   "variants": {
-  "lit": {
+    "lit": {
       "true": {
         "textures": {
           "cauldron": "tfctech:blocks/devices/smeltery_cauldron/cauldron_lit"

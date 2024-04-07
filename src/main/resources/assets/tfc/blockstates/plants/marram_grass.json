@@ -5,7 +5,7 @@
         "age": "0"
       },
       "apply": {
-		"model": "tfc:plants/marram_grass_shortest_2"
+        "model": "tfc:plants/marram_grass_shortest_2"
       }
     },
     {
@@ -13,7 +13,7 @@
         "age": "1"
       },
       "apply": {
-		"model": "tfc:plants/marram_grass_shorter_2"
+        "model": "tfc:plants/marram_grass_shorter_2"
       }
     },
     {
@@ -21,14 +21,14 @@
         "age": "2"
       },
       "apply": [
-		{
-		  "model": "tfc:plants/marram_grass_short_1",
-		  "weight": 1
-		},
-		{
-		  "model": "tfc:plants/marram_grass_short_2",
-		  "weight": 3
-		}
+        {
+          "model": "tfc:plants/marram_grass_short_1",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/marram_grass_short_2",
+          "weight": 3
+        }
       ]
     },
     {
@@ -36,18 +36,18 @@
         "age": "3"
       },
       "apply": [
-		{
-		  "model": "tfc:plants/marram_grass_0",
-		  "weight": 1
-		},
-		{
-		  "model": "tfc:plants/marram_grass_1",
-		  "weight": 1
-		},
-		{
-		  "model": "tfc:plants/marram_grass_2",
-		  "weight": 3
-		}
+        {
+          "model": "tfc:plants/marram_grass_0",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/marram_grass_1",
+          "weight": 1
+        },
+        {
+          "model": "tfc:plants/marram_grass_2",
+          "weight": 3
+        }
       ]
     }
   ]

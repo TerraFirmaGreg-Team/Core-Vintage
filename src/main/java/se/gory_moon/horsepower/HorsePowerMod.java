@@ -1,11 +1,18 @@
 package se.gory_moon.horsepower;
 
+import su.terrafirmagreg.Tags;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import se.gory_moon.horsepower.blocks.ModBlocks;
@@ -14,50 +21,53 @@ import se.gory_moon.horsepower.network.PacketHandler;
 import se.gory_moon.horsepower.proxy.CommonProxy;
 import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.util.Utils;
-import su.terrafirmagreg.Tags;
 
 import static se.gory_moon.horsepower.lib.Reference.*;
 import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
 
-@Mod(modid = MODID_HORSEPOWER, version = Tags.VERSION, name = NAME, dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
+@Mod(modid = MODID_HORSEPOWER,
+     version = Tags.VERSION,
+     name = NAME,
+     dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
 @EventBusSubscriber
 public class HorsePowerMod {
-	@Instance(MODID_HORSEPOWER)
-	public static HorsePowerMod instance;
 
-	@SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
-	public static CommonProxy proxy;
+    @Instance(MODID_HORSEPOWER)
+    public static HorsePowerMod instance;
 
-	public static HorsePowerCreativeTab creativeTab = new HorsePowerCreativeTab();
-	public static Logger logger = LogManager.getLogger("HorsePower");
+    @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
+    public static CommonProxy proxy;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit();
-		PacketHandler.init();
+    public static HorsePowerCreativeTab creativeTab = new HorsePowerCreativeTab();
+    public static Logger logger = LogManager.getLogger("HorsePower");
 
-		FMLInterModComms.sendMessage("waila", "register", WAILA_PROVIDER);
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        proxy.preInit();
+        PacketHandler.init();
 
-		ModBlocks.registerTileEntities();
+        FMLInterModComms.sendMessage("waila", "register", WAILA_PROVIDER);
 
-	}
+        ModBlocks.registerTileEntities();
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		proxy.init();
-		ModItems.registerRecipes();
-	}
+    }
 
-	@EventHandler
-	public void loadComplete(FMLPostInitializationEvent event) {
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.init();
+        ModItems.registerRecipes();
+    }
 
-		HPEventHandler.reloadConfig();
-		proxy.loadComplete();
-	}
+    @EventHandler
+    public void loadComplete(FMLPostInitializationEvent event) {
 
-	@EventHandler
-	public void serverLoad(FMLServerAboutToStartEvent event) {
-		HPRecipes.instance().reloadRecipes();
-		Utils.sendSavedErrors();
-	}
+        HPEventHandler.reloadConfig();
+        proxy.loadComplete();
+    }
+
+    @EventHandler
+    public void serverLoad(FMLServerAboutToStartEvent event) {
+        HPRecipes.instance().reloadRecipes();
+        Utils.sendSavedErrors();
+    }
 }

@@ -1,9 +1,5 @@
 package com.eerussianguy.firmalife.blocks;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -15,8 +11,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 1.12 is so wack
@@ -24,43 +25,42 @@ import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
 public abstract class BlockNonCube extends Block implements IItemSize {
-	public BlockNonCube(Material materialIn) {
-		super(materialIn);
-	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
+    public BlockNonCube(Material materialIn) {
+        super(materialIn);
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return BlockFaceShape.UNDEFINED;
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	
-	@Override
-	public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-		return Size.NORMAL;
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
+    @Override
+    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+        return Size.NORMAL;
+    }
 
-	@Override
-	public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-		return Weight.MEDIUM;
-	}
+    @Override
+    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+        return Weight.MEDIUM;
+    }
 }

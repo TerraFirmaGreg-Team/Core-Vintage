@@ -7,7 +7,7 @@
       },
       "apply": [
         {
-		  "model": "tfc:plants/dead_bush",
+          "model": "tfc:plants/dead_bush",
           "weight": 2
         },
         {

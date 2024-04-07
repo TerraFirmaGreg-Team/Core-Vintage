@@ -1,22 +1,22 @@
 {
-  "multipart":[
+  "multipart": [
     {
-      "when":{
-        "stage":"0"
+      "when": {
+        "stage": "0"
       },
-      "apply":[
+      "apply": [
         {
-          "model":"tfc:plants/bur_reed_0"
+          "model": "tfc:plants/bur_reed_0"
         }
       ]
     },
     {
-      "when":{
-        "stage":"1"
+      "when": {
+        "stage": "1"
       },
-      "apply":[
+      "apply": [
         {
-          "model":"tfc:plants/bur_reed_1"
+          "model": "tfc:plants/bur_reed_1"
         }
       ]
     }

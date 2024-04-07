@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/phyllite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/phyllite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/phyllite",
+      "count": 4
+    }
+    }

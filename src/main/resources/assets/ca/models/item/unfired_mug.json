@@ -1,6 +1,6 @@
 {
-   "parent": "item/generated",
-   "textures": {
-       "layer0": "ca:items/unfired_mug"
-   }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ca:items/unfired_mug"
+  }
 }

@@ -4,7 +4,7 @@
     "model": "tfg:rock/slab/mossy/half",
     "textures": {
       "overlay": "tfg:blocks/rock/overlay/mossy/bricks",
-"all": "tfg:blocks/rock/cobble/boninite"
+      "all": "tfg:blocks/rock/cobble/boninite"
     }
   },
   "variants": {

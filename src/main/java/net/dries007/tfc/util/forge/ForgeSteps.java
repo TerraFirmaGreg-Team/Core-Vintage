@@ -2,88 +2,89 @@ package net.dries007.tfc.util.forge;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 
-
 public class ForgeSteps implements INBTSerializable<NBTTagCompound> {
-	private final LinkedList<ForgeStep> steps;
 
-	public ForgeSteps() {
-		steps = new LinkedList<>();
-		reset();
-	}
+    private final LinkedList<ForgeStep> steps;
 
-	public void reset() {
-		for (int i = 0; i < 3; i++) addStep(null);
-	}
+    public ForgeSteps() {
+        steps = new LinkedList<>();
+        reset();
+    }
 
-	public void addStep(@Nullable ForgeStep step) {
-		steps.add(step);
-		while (steps.size() > 3) {
-			steps.remove();
-		}
-	}
+    public void reset() {
+        for (int i = 0; i < 3; i++) addStep(null);
+    }
 
-	@Override
-	@NotNull
-	public NBTTagCompound serializeNBT() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setInteger("last", getStepInt(0));
-		nbt.setInteger("second", getStepInt(1));
-		nbt.setInteger("third", getStepInt(2));
-		return nbt;
-	}
+    public void addStep(@Nullable ForgeStep step) {
+        steps.add(step);
+        while (steps.size() > 3) {
+            steps.remove();
+        }
+    }
 
-	@Override
-	public void deserializeNBT(@Nullable NBTTagCompound nbt) {
-		if (nbt != null) {
-			addStep(ForgeStep.valueOf(nbt.getInteger("last")));
-			addStep(ForgeStep.valueOf(nbt.getInteger("second")));
-			addStep(ForgeStep.valueOf(nbt.getInteger("third")));
-		}
-	}
+    @Override
+    @NotNull
+    public NBTTagCompound serializeNBT() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setInteger("last", getStepInt(0));
+        nbt.setInteger("second", getStepInt(1));
+        nbt.setInteger("third", getStepInt(2));
+        return nbt;
+    }
 
-	@NotNull
-	public ForgeSteps copy() {
-		ForgeSteps newSteps = new ForgeSteps();
-		for (ForgeStep step : this.steps)
-			newSteps.addStep(step);
-		return newSteps;
-	}
+    @Override
+    public void deserializeNBT(@Nullable NBTTagCompound nbt) {
+        if (nbt != null) {
+            addStep(ForgeStep.valueOf(nbt.getInteger("last")));
+            addStep(ForgeStep.valueOf(nbt.getInteger("second")));
+            addStep(ForgeStep.valueOf(nbt.getInteger("third")));
+        }
+    }
 
-	@Nullable
-	public ForgeStep getStep(int idx) {
-		return steps.get(idx);
-	}
+    @NotNull
+    public ForgeSteps copy() {
+        ForgeSteps newSteps = new ForgeSteps();
+        for (ForgeStep step : this.steps)
+            newSteps.addStep(step);
+        return newSteps;
+    }
 
-	@Override
-	public String toString() {
-		return "[" + getStep(0) + ", " + getStep(1) + ", " + getStep(2) + "]";
-	}
+    @Nullable
+    public ForgeStep getStep(int idx) {
+        return steps.get(idx);
+    }
 
-	/**
-	 * Checks if this is fresh new (no forging has been done yet)
-	 *
-	 * @return true if has been worked at least once, false otherwise
-	 */
-	public boolean hasWork() {
-		for (ForgeStep step : steps) {
-			if (step != null) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public String toString() {
+        return "[" + getStep(0) + ", " + getStep(1) + ", " + getStep(2) + "]";
+    }
 
-	private int getStepInt(int idx) {
-		ForgeStep step = steps.get(idx);
-		return step == null ? -1 : step.ordinal();
-	}
+    /**
+     * Checks if this is fresh new (no forging has been done yet)
+     *
+     * @return true if has been worked at least once, false otherwise
+     */
+    public boolean hasWork() {
+        for (ForgeStep step : steps) {
+            if (step != null) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	private void setStepInt(int position, int step) {
-		steps.set(position, ForgeStep.valueOf(step));
-	}
+    private int getStepInt(int idx) {
+        ForgeStep step = steps.get(idx);
+        return step == null ? -1 : step.ordinal();
+    }
+
+    private void setStepInt(int position, int step) {
+        steps.set(position, ForgeStep.valueOf(step));
+    }
 }

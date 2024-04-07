@@ -6,13 +6,13 @@ import pieman.caffeineaddon.init.ModBlocks;
 
 public class BlockCoffeeTreeBranch extends BlockFruitTreeBranch {
 
-	public BlockCoffeeTreeBranch(IFruitTree tree) {
-		super(tree);
-		setTranslationKey(tree.getName() + "_branch");
-		setRegistryName(tree.getName() + "_branch");
-		//setCreativeTab(CreativeTabs.REDSTONE);
+    public BlockCoffeeTreeBranch(IFruitTree tree) {
+        super(tree);
+        setTranslationKey(tree.getName() + "_branch");
+        setRegistryName(tree.getName() + "_branch");
+        //setCreativeTab(CreativeTabs.REDSTONE);
 
-		ModBlocks.BLOCKS.add(this);
-		//ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(tree.getName() + "_branch"));
-	}
+        ModBlocks.BLOCKS.add(this);
+        //ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(tree.getName() + "_branch"));
+    }
 }

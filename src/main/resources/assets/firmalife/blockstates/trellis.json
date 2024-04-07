@@ -4,15 +4,19 @@
     "model": "firmalife:trellis"
   },
   "variants": {
-    "inventory": [{
-		   "transform": "forge:default-block",
-		   "model": "firmalife:trellis",
-		   "y": 180
-		}],
-		"normal": [{
-		   "transform": "forge:default-block",
-		   "model": "firmalife:trellis",
-		   "y": 180
-		}]
+    "inventory": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:trellis",
+        "y": 180
+      }
+    ],
+    "normal": [
+      {
+        "transform": "forge:default-block",
+        "model": "firmalife:trellis",
+        "y": 180
+      }
+    ]
   }
 }

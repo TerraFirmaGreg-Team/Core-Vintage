@@ -1,15 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -24,9 +16,20 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.IFruitTree;
+import net.dries007.tfc.api.util.IGrowingPlant;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,115 +39,116 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 
 public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrowingPlant {
-	private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
 
-	private static final Map<IFruitTree, BlockFruitTreeSapling> MAP = new HashMap<>();
-	private final IFruitTree tree;
+    private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
 
-	public BlockFruitTreeSapling(IFruitTree tree) {
-		if (MAP.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
-		this.tree = tree;
-		setSoundType(SoundType.PLANT);
-		setHardness(0.0F);
-		setTickRandomly(true);
-		OreDictionaryHelper.register(this, "tree", "sapling");
-		OreDictionaryHelper.register(this, "tree", "sapling", tree.getName());
-		BlockUtils.setFireInfo(this, 5, 20);
-	}
+    private static final Map<IFruitTree, BlockFruitTreeSapling> MAP = new HashMap<>();
+    private final IFruitTree tree;
 
-	public static BlockFruitTreeSapling get(IFruitTree tree) {
-		return MAP.get(tree);
-	}
+    public BlockFruitTreeSapling(IFruitTree tree) {
+        if (MAP.put(tree, this) != null) throw new IllegalStateException("There can only be one.");
+        this.tree = tree;
+        setSoundType(SoundType.PLANT);
+        setHardness(0.0F);
+        setTickRandomly(true);
+        OreDictionaryHelper.register(this, "tree", "sapling");
+        OreDictionaryHelper.register(this, "tree", "sapling", tree.getName());
+        BlockUtils.setFireInfo(this, 5, 20);
+    }
 
-	@Override
-	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-		super.updateTick(world, pos, state, random);
+    public static BlockFruitTreeSapling get(IFruitTree tree) {
+        return MAP.get(tree);
+    }
 
-		if (!world.isRemote) {
-			TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
-			if (te != null) {
-				float temp = ClimateTFC.getActualTemp(world, pos);
-				float rainfall = ChunkDataTFC.getRainfall(world, pos);
-				long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
-				if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
-					te.resetCounter();
-					grow(world, random, pos, state);
-				}
-			}
-		}
-	}
+    @Override
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+        super.updateTick(world, pos, state, random);
 
-	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-		TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
-		if (te != null) {
-			te.resetCounter();
-		}
-	}
+        if (!world.isRemote) {
+            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+            if (te != null) {
+                float temp = ClimateTFC.getActualTemp(world, pos);
+                float rainfall = ChunkDataTFC.getRainfall(world, pos);
+                long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+                if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
+                    te.resetCounter();
+                    grow(world, random, pos, state);
+                }
+            }
+        }
+    }
 
-	@Override
-	@NotNull
-	public Block.EnumOffsetType getOffsetType() {
-		return Block.EnumOffsetType.XZ;
-	}
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        if (te != null) {
+            te.resetCounter();
+        }
+    }
 
-	@Override
-	public boolean hasTileEntity(IBlockState state) {
-		return true;
-	}
+    @Override
+    @NotNull
+    public Block.EnumOffsetType getOffsetType() {
+        return Block.EnumOffsetType.XZ;
+    }
 
-	@Nullable
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TETickCounter();
-	}
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	@NotNull
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return SAPLING_AABB;
-	}
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TETickCounter();
+    }
 
-	@Override
-	public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
-		return true;
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    @NotNull
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return SAPLING_AABB;
+    }
 
-	@Override
-	public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
-		return true; //Only on sapling tho, so trunk still has to grow
-	}
+    @Override
+    public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
+        return true;
+    }
 
-	@Override
-	public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
-		if (!world.isRemote) {
-			world.setBlockState(blockPos, BlockFruitTreeTrunk.get(this.tree).getDefaultState());
-			if (world.getBlockState(blockPos.up()).getMaterial().isReplaceable()) {
-				world.setBlockState(blockPos.up(), BlockFruitTreeLeaves.get(tree)
-				                                                       .getDefaultState()
-				                                                       .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
-			}
-		}
-	}
+    @Override
+    public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
+        return true; //Only on sapling tho, so trunk still has to grow
+    }
 
-	@NotNull
-	public IFruitTree getTree() {
-		return tree;
-	}
+    @Override
+    public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
+        if (!world.isRemote) {
+            world.setBlockState(blockPos, BlockFruitTreeTrunk.get(this.tree).getDefaultState());
+            if (world.getBlockState(blockPos.up()).getMaterial().isReplaceable()) {
+                world.setBlockState(blockPos.up(), BlockFruitTreeLeaves.get(tree)
+                        .getDefaultState()
+                        .withProperty(BlockFruitTreeLeaves.HARVESTABLE, false));
+            }
+        }
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tree.addInfo(stack, worldIn, tooltip, flagIn);
-	}
+    @NotNull
+    public IFruitTree getTree() {
+        return tree;
+    }
 
-	@Override
-	public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-		float temp = ClimateTFC.getActualTemp(world, pos);
-		float rainfall = ChunkDataTFC.getRainfall(world, pos);
-		boolean canGrow = tree.isValidForGrowth(temp, rainfall);
-		return canGrow ? GrowthStatus.GROWING : GrowthStatus.NOT_GROWING;
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        tree.addInfo(stack, worldIn, tooltip, flagIn);
+    }
+
+    @Override
+    public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
+        float temp = ClimateTFC.getActualTemp(world, pos);
+        float rainfall = ChunkDataTFC.getRainfall(world, pos);
+        boolean canGrow = tree.isValidForGrowth(temp, rainfall);
+        return canGrow ? GrowthStatus.GROWING : GrowthStatus.NOT_GROWING;
+    }
 }

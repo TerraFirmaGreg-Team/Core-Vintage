@@ -3,24 +3,24 @@
   "pattern": [
     "BXB",
     "OYO",
-	"BXB"
+    "BXB"
   ],
   "key": {
     "X": {
       "type": "forge:ore_dict",
-      "ore" : "plankWood"
+      "ore": "plankWood"
     },
     "O": {
       "type": "forge:ore_dict",
-      "ore" : "dustRedstone"
+      "ore": "dustRedstone"
     },
-	"B": {
+    "B": {
       "type": "forge:ore_dict",
-      "ore" : "ingotWroughtIron"
+      "ore": "ingotWroughtIron"
     },
-	"Y": {
+    "Y": {
       "type": "forge:ore_dict",
-      "ore" : "blockGlassBlue"
+      "ore": "blockGlassBlue"
     }
   },
   "result": {

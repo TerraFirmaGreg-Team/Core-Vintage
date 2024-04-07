@@ -14,10 +14,18 @@
       }
     },
     "wedges": {
-      "0": {"model": "firmalife:cheesewheel_uncut"},
-      "1": {"model": "firmalife:cheesewheel_wedge1"},
-      "2": {"model": "firmalife:cheesewheel_wedge2"},
-      "3": {"model": "firmalife:cheesewheel_wedge3"}
+      "0": {
+        "model": "firmalife:cheesewheel_uncut"
+      },
+      "1": {
+        "model": "firmalife:cheesewheel_wedge1"
+      },
+      "2": {
+        "model": "firmalife:cheesewheel_wedge2"
+      },
+      "3": {
+        "model": "firmalife:cheesewheel_wedge3"
+      }
     },
     "age": {
       "fresh": {

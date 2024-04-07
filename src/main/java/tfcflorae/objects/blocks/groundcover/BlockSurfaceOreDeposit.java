@@ -1,11 +1,5 @@
 package tfcflorae.objects.blocks.groundcover;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -31,10 +25,18 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Ore;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,240 +45,242 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 
 public class BlockSurfaceOreDeposit extends BlockBush {
-	public static final PropertyEnum<Ore.Grade> GRADE = PropertyEnum.create("grade", Ore.Grade.class);
-	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.9, 0.6, 0.9);
-	private static final Map<Ore, Map<Rock, BlockSurfaceOreDeposit>> TABLE = new HashMap<>();
-	public final Ore ore;
-	public final Rock rock;
-	private Ore.Grade grade;
 
-	public BlockSurfaceOreDeposit(Ore ore, Rock rock) {
-		super(Material.GROUND);
-		//super(Rock.Type.RAW.material);
-		if (!TABLE.containsKey(ore))
-			TABLE.put(ore, new HashMap<>());
-		TABLE.get(ore).put(rock, this);
+    public static final PropertyEnum<Ore.Grade> GRADE = PropertyEnum.create("grade", Ore.Grade.class);
+    private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.9, 0.6, 0.9);
+    private static final Map<Ore, Map<Rock, BlockSurfaceOreDeposit>> TABLE = new HashMap<>();
+    public final Ore ore;
+    public final Rock rock;
+    private Ore.Grade grade;
 
-		this.ore = ore;
-		this.rock = rock;
-		if (!ore.isGraded()) {
-			grade = Ore.Grade.NORMAL;
-			setDefaultState(blockState.getBaseState().withProperty(GRADE, Ore.Grade.NORMAL));
-		} else {
-			grade = Ore.Grade.POOR;
-			setDefaultState(blockState.getBaseState().withProperty(GRADE, Ore.Grade.POOR));
-		}
-		setSoundType(SoundType.STONE);
-		setHardness(0.5f).setResistance(5.0F);
-		OreDictionaryHelper.register(this, "rock");
-		OreDictionaryHelper.register(this, "rock", rock);
-		OreDictionaryHelper.register(this, "rock", rock.getRockCategory());
+    public BlockSurfaceOreDeposit(Ore ore, Rock rock) {
+        super(Material.GROUND);
+        //super(Rock.Type.RAW.material);
+        if (!TABLE.containsKey(ore))
+            TABLE.put(ore, new HashMap<>());
+        TABLE.get(ore).put(rock, this);
 
-		if (rock.isFluxStone()) {
-			OreDictionaryHelper.register(this, "rock", "flux");
-		}
+        this.ore = ore;
+        this.rock = rock;
+        if (!ore.isGraded()) {
+            grade = Ore.Grade.NORMAL;
+            setDefaultState(blockState.getBaseState().withProperty(GRADE, Ore.Grade.NORMAL));
+        } else {
+            grade = Ore.Grade.POOR;
+            setDefaultState(blockState.getBaseState().withProperty(GRADE, Ore.Grade.POOR));
+        }
+        setSoundType(SoundType.STONE);
+        setHardness(0.5f).setResistance(5.0F);
+        OreDictionaryHelper.register(this, "rock");
+        OreDictionaryHelper.register(this, "rock", rock);
+        OreDictionaryHelper.register(this, "rock", rock.getRockCategory());
 
-		{
-			//noinspection ConstantConditions
-			String oreName = ore.getRegistryName().getPath();
-			switch (oreName) {
-				case "bituminous_coal":
-					OreDictionaryHelper.register(this, "gem", "bituminous_coal");
-					break;
-				case "lignite":
-					OreDictionaryHelper.register(this, "gem", "coal");
-					break;
-				case "anthracite":
-					OreDictionaryHelper.register(this, "gem", "coal");
-					OreDictionaryHelper.register(this, "gem", "anthracite");
-					break;
-			}
-		}
-	}
+        if (rock.isFluxStone()) {
+            OreDictionaryHelper.register(this, "rock", "flux");
+        }
 
-	public static BlockSurfaceOreDeposit get(Ore ore, Rock rock) {
-		return TABLE.get(ore).get(rock);
-	}
+        {
+            //noinspection ConstantConditions
+            String oreName = ore.getRegistryName().getPath();
+            switch (oreName) {
+                case "bituminous_coal":
+                    OreDictionaryHelper.register(this, "gem", "bituminous_coal");
+                    break;
+                case "lignite":
+                    OreDictionaryHelper.register(this, "gem", "coal");
+                    break;
+                case "anthracite":
+                    OreDictionaryHelper.register(this, "gem", "coal");
+                    OreDictionaryHelper.register(this, "gem", "anthracite");
+                    break;
+            }
+        }
+    }
 
-	public static IBlockState get(Ore ore, Rock rock, Ore.Grade grade) {
-		IBlockState state = TABLE.get(ore).get(rock).getDefaultState();
-		if (!ore.isGraded()) return state;
-		return state.withProperty(GRADE, grade);
-	}
+    public static BlockSurfaceOreDeposit get(Ore ore, Rock rock) {
+        return TABLE.get(ore).get(rock);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	@NotNull
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(GRADE, Ore.Grade.valueOf(meta));
-	}
+    public static IBlockState get(Ore ore, Rock rock, Ore.Grade grade) {
+        IBlockState state = TABLE.get(ore).get(rock).getDefaultState();
+        if (!ore.isGraded()) return state;
+        return state.withProperty(GRADE, grade);
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(GRADE).getMeta();
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    @NotNull
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(GRADE, Ore.Grade.valueOf(meta));
+    }
 
-	@NotNull
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ItemOreTFC.get(ore);
-	}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(GRADE).getMeta();
+    }
 
-	@Override
-	public int damageDropped(IBlockState state) {
-		return getMetaFromState(state);
-	}
+    @NotNull
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return ItemOreTFC.get(ore);
+    }
 
-	@Override
-	public int quantityDropped(Random random) {
-		return random.nextInt(2) + 1;
-	}
+    @Override
+    public int damageDropped(IBlockState state) {
+        return getMetaFromState(state);
+    }
 
-	@Override
-	public boolean canDropFromExplosion(Explosion explosionIn) {
-		return false;
-	}
+    @Override
+    public int quantityDropped(Random random) {
+        return random.nextInt(2) + 1;
+    }
 
-	@Override
-	@NotNull
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, GRADE);
-	}
+    @Override
+    public boolean canDropFromExplosion(Explosion explosionIn) {
+        return false;
+    }
 
-	@Override
-	public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
-		if (!world.isRemote) {
-			dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
-		}
-		super.onBlockExploded(world, pos, explosion);
-	}
+    @Override
+    @NotNull
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, GRADE);
+    }
 
-	@Override
-	@NotNull
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(state.getBlock());
-	}
+    @Override
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+        if (!world.isRemote) {
+            dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+        }
+        super.onBlockExploded(world, pos, explosion);
+    }
 
-	@Override
-	@NotNull
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
+    @Override
+    @NotNull
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(state.getBlock());
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isTopSolid(IBlockState state) {
-		return false;
-	}
+    @Override
+    @NotNull
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-		return false;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isTopSolid(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isFullBlock(IBlockState state) {
-		return false;
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return false;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isBlockNormalCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isNormalCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isBlockNormalCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return false;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isNormalCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@NotNull
-	@SuppressWarnings("deprecation")
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return BlockFaceShape.UNDEFINED;
-	}
+    @Override
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    @NotNull
+    @SuppressWarnings("deprecation")
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
+    }
 
-	@Override
-	@NotNull
-	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return AABB.offset(state.getOffset(source, pos));
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Nullable
-	@Override
-	@SuppressWarnings("deprecation")
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return NULL_AABB;
-	}
+    @Override
+    @NotNull
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return AABB.offset(state.getOffset(source, pos));
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
+    @Nullable
+    @Override
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return NULL_AABB;
+    }
 
-	@Override
-	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-		return true;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-		if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
-		                                                                .getBlock() instanceof BlockFarmlandTFC)) {
-			worldIn.setBlockToAir(pos);
-		}
-	}
+    @Override
+    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+        return true;
+    }
 
-	@Override
-	public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
-		return true;
-	}
+    @Override
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+        if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP) && !(worldIn.getBlockState(pos.down())
+                .getBlock() instanceof BlockFarmlandTFC)) {
+            worldIn.setBlockToAir(pos);
+        }
+    }
 
-	@Override
-	public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
-		return true;
-	}
+    @Override
+    public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
+                                     EntityLivingBase entity, int numberOfParticles) {
+        return true;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
-		return true;
-	}
+    @Override
+    public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
+        return true;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
-		return true;
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
+        return true;
+    }
 
-	@Override
-	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-		IBlockState soil = worldIn.getBlockState(pos.down());
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
+        return true;
+    }
 
-		if (state.getBlock() == this) {
-			return (BlocksTFC.isGround(soil) || BlocksTFCF.isGround(soil) || worldIn.getBlockState(pos.down())
-			                                                                        .isFullBlock()) && !(BlocksTFC.isSaltWater(soil) || BlocksTFC.isFreshWater(soil));
-		}
-		return this.canSustainBush(soil);
-	}
+    @Override
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+        IBlockState soil = worldIn.getBlockState(pos.down());
+
+        if (state.getBlock() == this) {
+            return (BlocksTFC.isGround(soil) || BlocksTFCF.isGround(soil) || worldIn.getBlockState(pos.down())
+                    .isFullBlock()) && !(BlocksTFC.isSaltWater(soil) || BlocksTFC.isFreshWater(soil));
+        }
+        return this.canSustainBush(soil);
+    }
 }

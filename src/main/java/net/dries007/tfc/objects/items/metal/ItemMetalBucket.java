@@ -1,9 +1,5 @@
 package net.dries007.tfc.objects.items.metal;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
@@ -13,20 +9,34 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.DispenseFluidContainer;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidActionResult;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import org.jetbrains.annotations.NotNull;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -39,129 +49,130 @@ import static net.dries007.tfc.api.types.Metal.RED_STEEL;
 
 public class ItemMetalBucket extends ItemMetal // quite a bit copied out of ItemWoodenBucket
 {
-	private static final int CAPACITY = Fluid.BUCKET_VOLUME;
 
-	public ItemMetalBucket(Metal metal, Metal.ItemType type) {
-		super(metal, type);
-		setHasSubtypes(true);
-		setContainerItem(this);
+    private static final int CAPACITY = Fluid.BUCKET_VOLUME;
 
-		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
-	}
+    public ItemMetalBucket(Metal metal, Metal.ItemType type) {
+        super(metal, type);
+        setHasSubtypes(true);
+        setContainerItem(this);
 
-	@SuppressWarnings("ConstantConditions")
+        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
+    }
 
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nullable EntityPlayer playerIn, EnumHand handIn) {
-		ItemStack stack = playerIn.getHeldItem(handIn);
-		if (!worldIn.isRemote && !stack.isEmpty()) {
-			IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-			RayTraceResult rayTrace = rayTrace(worldIn, playerIn, true);
+    @SuppressWarnings("ConstantConditions")
 
-			//noinspection ConstantConditions - ray trace can be null
-			if (rayTrace != null && bucketCap != null && rayTrace.typeOfHit == RayTraceResult.Type.BLOCK) {
-				BlockPos pos = rayTrace.getBlockPos();
-				if (bucketCap.drain(CAPACITY, false) == null) //Empty bucket, try to fill it
-				{
-					ItemStack single = stack.copy();
-					single.setCount(1);
-					FluidActionResult result = FluidUtil.tryPickUpFluid(single, playerIn, worldIn, pos, rayTrace.sideHit);
-					if (result.isSuccess()) {
-						stack.shrink(1);
-						if (stack.isEmpty()) {
-							return new ActionResult<>(EnumActionResult.SUCCESS, result.getResult());
-						}
-						if (!playerIn.isCreative()) {
-							// In creative, buckets function but don't give new items
-							ItemHandlerHelper.giveItemToPlayer(playerIn, result.getResult());
-						}
-						return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-					}
-				} else {
-					//Filled bucket, try to empty it.
-					IBlockState stateAt = worldIn.getBlockState(pos);
-					if (!(stateAt.getBlock().isReplaceable(worldIn, pos) || !stateAt.getMaterial().isSolid())) {
-						//if cant place in the block we found, try the side of it
-						pos = pos.offset(rayTrace.sideHit);
-					}
-					stateAt = worldIn.getBlockState(pos);
-					if (stateAt.getBlock().isReplaceable(worldIn, pos) || !stateAt.getMaterial().isSolid()) {
-						if (!stateAt.getMaterial().isLiquid()) {
-							worldIn.destroyBlock(pos, true); //drop the replaceable block (ie: torches, flowers...)
-						}
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nullable EntityPlayer playerIn, EnumHand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        if (!worldIn.isRemote && !stack.isEmpty()) {
+            IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            RayTraceResult rayTrace = rayTrace(worldIn, playerIn, true);
 
-						FluidStack fluidStack = bucketCap.drain(CAPACITY, !playerIn.isCreative());
-						if (fluidStack != null) {
-							Fluid fluid = fluidStack.getFluid();
-							// Place a flowing water block, not a source
-							if (fluid.getBlock() instanceof BlockFluidBase) {
-								worldIn.setBlockState(pos, fluid.getBlock().getDefaultState());
-							} else if (fluid.getBlock() instanceof BlockLiquid) {
-								// Vanilla water and lava, and hopefully nothing else
-								try {
-									BlockLiquid flowingBlock = BlockStaticLiquid.getFlowingBlock(fluid.getBlock()
-									                                                                  .getDefaultState()
-									                                                                  .getMaterial());
-									worldIn.setBlockState(pos, flowingBlock.getDefaultState());
-								} catch (IllegalArgumentException e) { /* Just skip */ }
-							}
-						}
-						worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.PLAYERS, 1.0F, 1.0F);
-						return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-					}
-				}
-			}
-		}
-		return new ActionResult<>(EnumActionResult.PASS, stack);
-	}
+            //noinspection ConstantConditions - ray trace can be null
+            if (rayTrace != null && bucketCap != null && rayTrace.typeOfHit == RayTraceResult.Type.BLOCK) {
+                BlockPos pos = rayTrace.getBlockPos();
+                if (bucketCap.drain(CAPACITY, false) == null) //Empty bucket, try to fill it
+                {
+                    ItemStack single = stack.copy();
+                    single.setCount(1);
+                    FluidActionResult result = FluidUtil.tryPickUpFluid(single, playerIn, worldIn, pos, rayTrace.sideHit);
+                    if (result.isSuccess()) {
+                        stack.shrink(1);
+                        if (stack.isEmpty()) {
+                            return new ActionResult<>(EnumActionResult.SUCCESS, result.getResult());
+                        }
+                        if (!playerIn.isCreative()) {
+                            // In creative, buckets function but don't give new items
+                            ItemHandlerHelper.giveItemToPlayer(playerIn, result.getResult());
+                        }
+                        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+                    }
+                } else {
+                    //Filled bucket, try to empty it.
+                    IBlockState stateAt = worldIn.getBlockState(pos);
+                    if (!(stateAt.getBlock().isReplaceable(worldIn, pos) || !stateAt.getMaterial().isSolid())) {
+                        //if cant place in the block we found, try the side of it
+                        pos = pos.offset(rayTrace.sideHit);
+                    }
+                    stateAt = worldIn.getBlockState(pos);
+                    if (stateAt.getBlock().isReplaceable(worldIn, pos) || !stateAt.getMaterial().isSolid()) {
+                        if (!stateAt.getMaterial().isLiquid()) {
+                            worldIn.destroyBlock(pos, true); //drop the replaceable block (ie: torches, flowers...)
+                        }
 
-	@Override
-	@NotNull
-	public String getItemStackDisplayName(@NotNull ItemStack stack) {
-		IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-		if (bucketCap != null) {
-			FluidStack fluidStack = bucketCap.drain(CAPACITY, false);
-			if (fluidStack != null) {
-				String fluidName = fluidStack.getLocalizedName();
-				return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
-			}
-		}
-		return super.getItemStackDisplayName(stack);
-	}
+                        FluidStack fluidStack = bucketCap.drain(CAPACITY, !playerIn.isCreative());
+                        if (fluidStack != null) {
+                            Fluid fluid = fluidStack.getFluid();
+                            // Place a flowing water block, not a source
+                            if (fluid.getBlock() instanceof BlockFluidBase) {
+                                worldIn.setBlockState(pos, fluid.getBlock().getDefaultState());
+                            } else if (fluid.getBlock() instanceof BlockLiquid) {
+                                // Vanilla water and lava, and hopefully nothing else
+                                try {
+                                    BlockLiquid flowingBlock = BlockStaticLiquid.getFlowingBlock(fluid.getBlock()
+                                            .getDefaultState()
+                                            .getMaterial());
+                                    worldIn.setBlockState(pos, flowingBlock.getDefaultState());
+                                } catch (IllegalArgumentException e) { /* Just skip */ }
+                            }
+                        }
+                        worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+                    }
+                }
+            }
+        }
+        return new ActionResult<>(EnumActionResult.PASS, stack);
+    }
 
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-		if (isInCreativeTab(tab)) {
-			items.add(new ItemStack(this));
-			for (Fluid fluid : getValidFluids()) {
-				ItemStack stack = new ItemStack(this);
-				IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-				if (cap != null) {
-					cap.fill(new FluidStack(fluid, CAPACITY), true);
-				}
-				items.add(stack);
-			}
-		}
-	}
+    @Override
+    @NotNull
+    public String getItemStackDisplayName(@NotNull ItemStack stack) {
+        IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        if (bucketCap != null) {
+            FluidStack fluidStack = bucketCap.drain(CAPACITY, false);
+            if (fluidStack != null) {
+                String fluidName = fluidStack.getLocalizedName();
+                return new TextComponentTranslation(getTranslationKey() + ".filled.name", fluidName).getFormattedText();
+            }
+        }
+        return super.getItemStackDisplayName(stack);
+    }
 
-	public Set<Fluid> getValidFluids() {
-		String[] fluidNames = {};
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (isInCreativeTab(tab)) {
+            items.add(new ItemStack(this));
+            for (Fluid fluid : getValidFluids()) {
+                ItemStack stack = new ItemStack(this);
+                IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+                if (cap != null) {
+                    cap.fill(new FluidStack(fluid, CAPACITY), true);
+                }
+                items.add(stack);
+            }
+        }
+    }
 
-		if (metal.equals(BLUE_STEEL)) {
-			fluidNames = ConfigTFC.General.MISC.blueSteelBucketWhitelist;
-		} else if (metal.equals(RED_STEEL)) {
-			fluidNames = ConfigTFC.General.MISC.redSteelBucketWhitelist;
-		} // No other metal buckets implemented
+    public Set<Fluid> getValidFluids() {
+        String[] fluidNames = {};
 
-		Set<Fluid> validFluids = new HashSet<>();
-		for (String fluidName : fluidNames) {
-			validFluids.add(FluidRegistry.getFluid(fluidName));
-		}
-		return validFluids;
-	}
+        if (metal.equals(BLUE_STEEL)) {
+            fluidNames = ConfigTFC.General.MISC.blueSteelBucketWhitelist;
+        } else if (metal.equals(RED_STEEL)) {
+            fluidNames = ConfigTFC.General.MISC.redSteelBucketWhitelist;
+        } // No other metal buckets implemented
 
-	@Override
-	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
-		return new FluidWhitelistHandler(stack, CAPACITY, getValidFluids());
-	}
+        Set<Fluid> validFluids = new HashSet<>();
+        for (String fluidName : fluidNames) {
+            validFluids.add(FluidRegistry.getFluid(fluidName));
+        }
+        return validFluids;
+    }
+
+    @Override
+    public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+        return new FluidWhitelistHandler(stack, CAPACITY, getValidFluids());
+    }
 }

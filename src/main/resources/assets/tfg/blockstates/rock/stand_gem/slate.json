@@ -5,7 +5,7 @@
     "textures": {
       "rock": "tfg:blocks/rock/smooth/slate"
     }
-      },
+  },
   "variants": {
     "normal": [
       {}

@@ -1,10 +1,5 @@
 package net.dries007.tfc.client.gui;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
-import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -15,55 +10,62 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.TFCGuiHandler;
+import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
+import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiCalendar extends GuiContainerTFC {
-	private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/player_calendar.png");
 
-	public GuiCalendar(Container container, InventoryPlayer playerInv) {
-		super(container, playerInv, BACKGROUND);
-	}
+    private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/player_calendar.png");
 
-	@Override
-	public void initGui() {
-		super.initGui();
+    public GuiCalendar(Container container, InventoryPlayer playerInv) {
+        super(container, playerInv, BACKGROUND);
+    }
 
-		int buttonId = 0;
-		addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.INVENTORY, guiLeft, guiTop, ++buttonId, true));
-		addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.SKILLS, guiLeft, guiTop, ++buttonId, true));
-		addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.CALENDAR, guiLeft, guiTop, ++buttonId, false));
-		addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.NUTRITION, guiLeft, guiTop, ++buttonId, true));
-	}
+    @Override
+    public void initGui() {
+        super.initGui();
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+        int buttonId = 0;
+        addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.INVENTORY, guiLeft, guiTop, ++buttonId, true));
+        addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.SKILLS, guiLeft, guiTop, ++buttonId, true));
+        addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.CALENDAR, guiLeft, guiTop, ++buttonId, false));
+        addButton(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.NUTRITION, guiLeft, guiTop, ++buttonId, true));
+    }
 
-		String tooltip = TextFormatting.WHITE + "" + TextFormatting.UNDERLINE + I18n.format("tfc.tooltip.calendar") + ":";
-		fontRenderer.drawString(tooltip, xSize / 2 - fontRenderer.getStringWidth(tooltip) / 2, 7, 0x404040);
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		String season, day, date;
+        String tooltip = TextFormatting.WHITE + "" + TextFormatting.UNDERLINE + I18n.format("tfc.tooltip.calendar") + ":";
+        fontRenderer.drawString(tooltip, xSize / 2 - fontRenderer.getStringWidth(tooltip) / 2, 7, 0x404040);
 
-		season = I18n.format("tfc.tooltip.season", CalendarTFC.CALENDAR_TIME.getSeasonDisplayName());
-		day = I18n.format("tfc.tooltip.day", CalendarTFC.CALENDAR_TIME.getDisplayDayName());
-		date = I18n.format("tfc.tooltip.date", CalendarTFC.CALENDAR_TIME.getTimeAndDate());
+        String season, day, date;
 
-		fontRenderer.drawString(season, xSize / 2 - fontRenderer.getStringWidth(season) / 2, 25, 0x404040);
-		fontRenderer.drawString(day, xSize / 2 - fontRenderer.getStringWidth(day) / 2, 34, 0x404040);
-		fontRenderer.drawString(date, xSize / 2 - fontRenderer.getStringWidth(date) / 2, 43, 0x404040);
-	}
+        season = I18n.format("tfc.tooltip.season", CalendarTFC.CALENDAR_TIME.getSeasonDisplayName());
+        day = I18n.format("tfc.tooltip.day", CalendarTFC.CALENDAR_TIME.getDisplayDayName());
+        date = I18n.format("tfc.tooltip.date", CalendarTFC.CALENDAR_TIME.getTimeAndDate());
 
-	@Override
-	protected void actionPerformed(GuiButton button) {
-		if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive()) {
-			GuiButtonPlayerInventoryTab tabButton = (GuiButtonPlayerInventoryTab) button;
-			if (tabButton.isActive()) {
-				if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
-					this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
-				}
-				TerraFirmaCraft.getNetwork().sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
-			}
-		}
-	}
+        fontRenderer.drawString(season, xSize / 2 - fontRenderer.getStringWidth(season) / 2, 25, 0x404040);
+        fontRenderer.drawString(day, xSize / 2 - fontRenderer.getStringWidth(day) / 2, 34, 0x404040);
+        fontRenderer.drawString(date, xSize / 2 - fontRenderer.getStringWidth(date) / 2, 43, 0x404040);
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton button) {
+        if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive()) {
+            GuiButtonPlayerInventoryTab tabButton = (GuiButtonPlayerInventoryTab) button;
+            if (tabButton.isActive()) {
+                if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
+                    this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
+                }
+                TerraFirmaCraft.getNetwork().sendToServer(new PacketSwitchPlayerInventoryTab(tabButton.getGuiType()));
+            }
+        }
+    }
 }

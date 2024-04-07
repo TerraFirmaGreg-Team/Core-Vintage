@@ -12,54 +12,55 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)
 public final class TechSounds {
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.groove.fit")
-	public static final SoundEvent RUBBER_GROOVE_FIT = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.mount.fit")
-	public static final SoundEvent RUBBER_MOUNT_FIT = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.groove.fit")
+    public static final SoundEvent RUBBER_GROOVE_FIT = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.bowl.fit")
-	public static final SoundEvent RUBBER_BOWL_FIT = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.mount.fit")
+    public static final SoundEvent RUBBER_MOUNT_FIT = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.bowl.grab")
-	public static final SoundEvent RUBBER_BOWL_GRAB = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.bowl.fit")
+    public static final SoundEvent RUBBER_BOWL_FIT = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.trunk.scratch")
-	public static final SoundEvent RUBBER_TRUNK_SCRATH = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.bowl.grab")
+    public static final SoundEvent RUBBER_BOWL_GRAB = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":wiredrawbench.tongs_fall")
-	public static final SoundEvent WIREDRAW_TONGS_FALL = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":rubbertapping.trunk.scratch")
+    public static final SoundEvent RUBBER_TRUNK_SCRATH = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":wiredrawbench.drawing")
-	public static final SoundEvent WIREDRAW_DRAWING = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":wiredrawbench.tongs_fall")
+    public static final SoundEvent WIREDRAW_TONGS_FALL = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":fridge.open")
-	public static final SoundEvent FRIDGE_OPEN = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":wiredrawbench.drawing")
+    public static final SoundEvent WIREDRAW_DRAWING = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":fridge.close")
-	public static final SoundEvent FRIDGE_CLOSE = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":fridge.open")
+    public static final SoundEvent FRIDGE_OPEN = getNull();
 
-	@GameRegistry.ObjectHolder(MODID_TFCTECH + ":induction_smelter.work")
-	public static final SoundEvent INDUCTION_WORK = getNull();
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":fridge.close")
+    public static final SoundEvent FRIDGE_CLOSE = getNull();
 
-	@SubscribeEvent
-	public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
-		event.getRegistry().registerAll(
-				createSoundEvent("rubbertapping.groove.fit"),
-				createSoundEvent("rubbertapping.mount.fit"),
-				createSoundEvent("rubbertapping.bowl.fit"),
-				createSoundEvent("rubbertapping.bowl.grab"),
-				createSoundEvent("rubbertapping.trunk.scratch"),
-				createSoundEvent("wiredrawbench.tongs_fall"),
-				createSoundEvent("wiredrawbench.drawing"),
-				createSoundEvent("fridge.open"),
-				createSoundEvent("fridge.close"),
-				createSoundEvent("induction_smelter.work")
-		);
-	}
+    @GameRegistry.ObjectHolder(MODID_TFCTECH + ":induction_smelter.work")
+    public static final SoundEvent INDUCTION_WORK = getNull();
 
-	private static SoundEvent createSoundEvent(String name) {
-		final ResourceLocation soundID = new ResourceLocation(MODID_TFCTECH, name);
-		return new SoundEvent(soundID).setRegistryName(soundID);
-	}
+    @SubscribeEvent
+    public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+        event.getRegistry().registerAll(
+                createSoundEvent("rubbertapping.groove.fit"),
+                createSoundEvent("rubbertapping.mount.fit"),
+                createSoundEvent("rubbertapping.bowl.fit"),
+                createSoundEvent("rubbertapping.bowl.grab"),
+                createSoundEvent("rubbertapping.trunk.scratch"),
+                createSoundEvent("wiredrawbench.tongs_fall"),
+                createSoundEvent("wiredrawbench.drawing"),
+                createSoundEvent("fridge.open"),
+                createSoundEvent("fridge.close"),
+                createSoundEvent("induction_smelter.work")
+        );
+    }
+
+    private static SoundEvent createSoundEvent(String name) {
+        final ResourceLocation soundID = new ResourceLocation(MODID_TFCTECH, name);
+        return new SoundEvent(soundID).setRegistryName(soundID);
+    }
 }

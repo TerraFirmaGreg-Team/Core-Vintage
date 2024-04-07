@@ -1,5 +1,9 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.ingredients.IIngredients;
@@ -10,94 +14,95 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.Helpers;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-
 public class KnappingRecipeWrapper implements IRecipeWrapper {
-	private static final ResourceLocation CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_disabled.png");
-	private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_fire_disabled.png");
-	private static final ResourceLocation CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button.png");
-	private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_fire.png");
-	private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/leather_button.png");
-	protected final KnappingRecipe recipe;
-	private final IDrawable squareHigh, squareLow;
 
-	public KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper guiHelper) {
-		this(recipe, guiHelper, getHighTexture(recipe.getType()), getLowTexture(recipe.getType()));
-	}
+    private static final ResourceLocation CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_disabled.png");
+    private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC,
+            "textures/gui/knapping/clay_button_fire_disabled.png");
+    private static final ResourceLocation CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button.png");
+    private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_fire.png");
+    private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/leather_button.png");
+    protected final KnappingRecipe recipe;
+    private final IDrawable squareHigh, squareLow;
 
-	protected KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture, @Nullable ResourceLocation lowTexture) {
-		this.recipe = recipe;
+    public KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper guiHelper) {
+        this(recipe, guiHelper, getHighTexture(recipe.getType()), getLowTexture(recipe.getType()));
+    }
 
-		this.squareHigh = highTexture == null ? null : helper.drawableBuilder(highTexture, 0, 0, 16, 16)
-		                                                     .setTextureSize(16, 16)
-		                                                     .build();
-		this.squareLow = lowTexture == null ? null : helper.drawableBuilder(lowTexture, 0, 0, 16, 16)
-		                                                   .setTextureSize(16, 16)
-		                                                   .build();
-	}
+    protected KnappingRecipeWrapper(KnappingRecipe recipe, IGuiHelper helper, @Nullable ResourceLocation highTexture,
+                                    @Nullable ResourceLocation lowTexture) {
+        this.recipe = recipe;
 
-	@Nullable
-	private static ResourceLocation getHighTexture(KnappingType type) {
-		if (type == KnappingType.CLAY) {
-			return CLAY_TEXTURE;
-		} else if (type == KnappingType.FIRE_CLAY) {
-			return FIRE_CLAY_TEXTURE;
-		} else if (type == KnappingType.LEATHER) {
-			return LEATHER_TEXTURE;
-		}
-		return null;
-	}
+        this.squareHigh = highTexture == null ? null : helper.drawableBuilder(highTexture, 0, 0, 16, 16)
+                .setTextureSize(16, 16)
+                .build();
+        this.squareLow = lowTexture == null ? null : helper.drawableBuilder(lowTexture, 0, 0, 16, 16)
+                .setTextureSize(16, 16)
+                .build();
+    }
 
-	@Nullable
-	private static ResourceLocation getLowTexture(KnappingType type) {
-		if (type == KnappingType.CLAY) {
-			return CLAY_DISABLED_TEXTURE;
-		} else if (type == KnappingType.FIRE_CLAY) {
-			return FIRE_CLAY_DISABLED_TEXTURE;
-		}
-		return null;
-	}
+    @Nullable
+    private static ResourceLocation getHighTexture(KnappingType type) {
+        if (type == KnappingType.CLAY) {
+            return CLAY_TEXTURE;
+        } else if (type == KnappingType.FIRE_CLAY) {
+            return FIRE_CLAY_TEXTURE;
+        } else if (type == KnappingType.LEATHER) {
+            return LEATHER_TEXTURE;
+        }
+        return null;
+    }
 
-	@Override
-	public void getIngredients(IIngredients ingredients) {
-		ItemStack output = recipe.getOutput(ItemStack.EMPTY);
-		ingredients.setOutput(VanillaTypes.ITEM, output);
-	}
+    @Nullable
+    private static ResourceLocation getLowTexture(KnappingType type) {
+        if (type == KnappingType.CLAY) {
+            return CLAY_DISABLED_TEXTURE;
+        } else if (type == KnappingType.FIRE_CLAY) {
+            return FIRE_CLAY_DISABLED_TEXTURE;
+        }
+        return null;
+    }
 
-	@Override
-	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		for (int y = 0; y < recipe.getMatrix().getHeight(); y++) {
-			for (int x = 0; x < recipe.getMatrix().getWidth(); x++) {
-				if (recipe.getMatrix().get(x, y) && squareHigh != null) {
-					squareHigh.draw(minecraft, 1 + x * 16, 1 + y * 16);
-				} else if (squareLow != null) {
-					squareLow.draw(minecraft, 1 + x * 16, 1 + y * 16);
-				}
-			}
-		}
-	}
+    @Override
+    public void getIngredients(IIngredients ingredients) {
+        ItemStack output = recipe.getOutput(ItemStack.EMPTY);
+        ingredients.setOutput(VanillaTypes.ITEM, output);
+    }
 
-	/**
-	 * Extra wrapper for stone, since it needs to check the rock for the input and texture
-	 */
-	public static class Stone extends KnappingRecipeWrapper {
-		private final Rock rock;
+    @Override
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+        for (int y = 0; y < recipe.getMatrix().getHeight(); y++) {
+            for (int x = 0; x < recipe.getMatrix().getWidth(); x++) {
+                if (recipe.getMatrix().get(x, y) && squareHigh != null) {
+                    squareHigh.draw(minecraft, 1 + x * 16, 1 + y * 16);
+                } else if (squareLow != null) {
+                    squareLow.draw(minecraft, 1 + x * 16, 1 + y * 16);
+                }
+            }
+        }
+    }
 
-		public Stone(KnappingRecipe recipe, IGuiHelper helper, Rock rock) {
-			super(recipe, helper, rock.getTexture(), null);
+    /**
+     * Extra wrapper for stone, since it needs to check the rock for the input and texture
+     */
+    public static class Stone extends KnappingRecipeWrapper {
 
-			this.rock = rock;
-		}
+        private final Rock rock;
 
-		@Override
-		public void getIngredients(IIngredients ingredients) {
-			ingredients.setOutputLists(VanillaTypes.ITEM, Helpers.listOf(Helpers.listOf(recipe.getOutput(new ItemStack(ItemRock.get(rock))))));
-		}
-	}
+        public Stone(KnappingRecipe recipe, IGuiHelper helper, Rock rock) {
+            super(recipe, helper, rock.getTexture(), null);
+
+            this.rock = rock;
+        }
+
+        @Override
+        public void getIngredients(IIngredients ingredients) {
+            ingredients.setOutputLists(VanillaTypes.ITEM, Helpers.listOf(Helpers.listOf(recipe.getOutput(new ItemStack(ItemRock.get(rock))))));
+        }
+    }
 }

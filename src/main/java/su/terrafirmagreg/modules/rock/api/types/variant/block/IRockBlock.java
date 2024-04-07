@@ -1,44 +1,46 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.modules.rock.api.types.type.IRockType;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import net.dries007.tfc.api.capability.size.IItemSize;
+
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.modules.rock.api.types.type.IRockType;
 
 /**
  * Интерфейс, представляющий блок породы.
  */
 public interface IRockBlock extends IRockType, IAutoReg, IItemSize {
 
-	/**
-	 * Возвращает вариант блока.
-	 *
-	 * @return Вариант блока.
-	 */
-	@NotNull
-	RockBlockVariant getBlockVariant();
+    /**
+     * Возвращает вариант блока.
+     *
+     * @return Вариант блока.
+     */
+    @NotNull
+    RockBlockVariant getBlockVariant();
 
-	/**
-	 * Возвращает окончательную твердость блока породы.
-	 *
-	 * @return Окончательная твердость блока породы.
-	 */
-	default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-		return this.getBlockVariant().getBaseHardness() + this.getType().getRockCategory().getHardnessModifier();
-	}
+    /**
+     * Возвращает окончательную твердость блока породы.
+     *
+     * @return Окончательная твердость блока породы.
+     */
+    default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+        return this.getBlockVariant().getBaseHardness() + this.getType().getRockCategory().getHardnessModifier();
+    }
 
-	/**
-	 * Возвращает имя объекта.
-	 *
-	 * @return Имя объекта.
-	 */
-	@NotNull
-	default String getName() {
-		return String.format("rock/%s/%s", this.getBlockVariant(), this.getType());
-	}
-
+    /**
+     * Возвращает имя объекта.
+     *
+     * @return Имя объекта.
+     */
+    @NotNull
+    default String getName() {
+        return String.format("rock/%s/%s", this.getBlockVariant(), this.getType());
+    }
 
 }

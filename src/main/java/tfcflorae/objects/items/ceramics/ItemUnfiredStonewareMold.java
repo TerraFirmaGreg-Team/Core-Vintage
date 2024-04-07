@@ -6,17 +6,18 @@ import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import java.util.EnumMap;
 
 public class ItemUnfiredStonewareMold extends ItemPottery {
-	private static final EnumMap<Metal.ItemType, ItemUnfiredStonewareMold> MAP = new EnumMap<>(Metal.ItemType.class);
-	public final Metal.ItemType type;
 
-	public ItemUnfiredStonewareMold(Metal.ItemType type) {
-		this.type = type;
-		if (MAP.put(type, this) != null) {
-			throw new IllegalStateException("There can only be one.");
-		}
-	}
+    private static final EnumMap<Metal.ItemType, ItemUnfiredStonewareMold> MAP = new EnumMap<>(Metal.ItemType.class);
+    public final Metal.ItemType type;
 
-	public static ItemUnfiredStonewareMold get(Metal.ItemType category) {
-		return MAP.get(category);
-	}
+    public ItemUnfiredStonewareMold(Metal.ItemType type) {
+        this.type = type;
+        if (MAP.put(type, this) != null) {
+            throw new IllegalStateException("There can only be one.");
+        }
+    }
+
+    public static ItemUnfiredStonewareMold get(Metal.ItemType category) {
+        return MAP.get(category);
+    }
 }

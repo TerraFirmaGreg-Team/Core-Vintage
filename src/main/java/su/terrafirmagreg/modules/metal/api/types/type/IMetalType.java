@@ -4,11 +4,11 @@ import org.jetbrains.annotations.NotNull;
 
 public interface IMetalType {
 
-	/**
-	 * Возвращает тип металла.
-	 *
-	 * @return Тип металла.
-	 */
-	@NotNull
-	MetalType getType();
+    /**
+     * Возвращает тип металла.
+     *
+     * @return Тип металла.
+     */
+    @NotNull
+    MetalType getType();
 }

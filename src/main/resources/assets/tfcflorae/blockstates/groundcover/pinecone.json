@@ -4,7 +4,7 @@
   "defaults": {
     "model": "tfcflorae:groundcover/pinecones_0",
     "textures": {
-	  "particle": "tfc:blocks/wood/log/oak",
+      "particle": "tfc:blocks/wood/log/oak",
       "0": "tfc:blocks/wood/log/oak"
     }
   },

@@ -1,9 +1,9 @@
 package BananaFructa.TowerHeat;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.client.gui.GuiContainerTE;
+import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
+import su.terrafirmagreg.modules.device.objects.tiles.TEBlastFurnace;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -15,9 +15,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBlastFurnace;
+
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.client.gui.GuiContainerTE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,93 +29,100 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTOWERHEAT;
 @Mod(modid = MODID_TFCTOWERHEAT, version = Tags.VERSION, name = TowerHeat.name)
 public class TowerHeat {
 
-	public static final String name = "TFC TowerHeat";
-	TEBlastFurnace cachedBlastFurnace = null;
-	List<Float> tempList = new ArrayList<>();
-	long lastBurningTicks = 0;
+    public static final String name = "TFC TowerHeat";
+    TEBlastFurnace cachedBlastFurnace = null;
+    List<Float> tempList = new ArrayList<>();
+    long lastBurningTicks = 0;
 
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void onGuiOpen(GuiOpenEvent event) {
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onGuiOpen(GuiOpenEvent event) {
 
-		if (event.getGui() instanceof GuiBlastFurnace) {
-			cachedBlastFurnace = Utils.readDeclaredField(GuiContainerTE.class, event.getGui(), "tile");
-			if (cachedBlastFurnace != null) {
-				readTemperatures();
-				lastBurningTicks = cachedBlastFurnace.getBurnTicksLeft();
-			}
-		}
+        if (event.getGui() instanceof GuiBlastFurnace) {
+            cachedBlastFurnace = Utils.readDeclaredField(GuiContainerTE.class, event.getGui(), "tile");
+            if (cachedBlastFurnace != null) {
+                readTemperatures();
+                lastBurningTicks = cachedBlastFurnace.getBurnTicksLeft();
+            }
+        }
 
-	}
+    }
 
-	@SideOnly(Side.CLIENT)
-	public String getLayerTemp(float avgTemp) {
+    @SideOnly(Side.CLIENT)
+    public String getLayerTemp(float avgTemp) {
 
-		String ttString = Heat.getTooltip(avgTemp);
-		if (ttString == null) return "Cold";
-		else return ttString.replaceAll("\u2605", "");
+        String ttString = Heat.getTooltip(avgTemp);
+        if (ttString == null) return "Cold";
+        else return ttString.replaceAll("\u2605", "");
 
-	}
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void readTemperatures() {
+    @SideOnly(Side.CLIENT)
+    public void readTemperatures() {
 
-		tempList.clear();
-		for (int i = 0; i < cachedBlastFurnace.getOreStacks().size(); i++) {
-			IItemHeat heatInf = cachedBlastFurnace.getOreStacks()
-			                                      .get(i)
-			                                      .getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-			if (heatInf != null)
-				tempList.add(heatInf.getTemperature());
-		}
+        tempList.clear();
+        for (int i = 0; i < cachedBlastFurnace.getOreStacks().size(); i++) {
+            IItemHeat heatInf = cachedBlastFurnace.getOreStacks()
+                    .get(i)
+                    .getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            if (heatInf != null)
+                tempList.add(heatInf.getTemperature());
+        }
 
-	}
+    }
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void onGuiRender(GuiScreenEvent.BackgroundDrawnEvent event) {
-		if (event.getGui() instanceof GuiBlastFurnace && tempList != null && cachedBlastFurnace != null) {
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onGuiRender(GuiScreenEvent.BackgroundDrawnEvent event) {
+        if (event.getGui() instanceof GuiBlastFurnace && tempList != null && cachedBlastFurnace != null) {
 
-			ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+            ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 
-			if (lastBurningTicks != cachedBlastFurnace.getBurnTicksLeft()) {
-				lastBurningTicks = cachedBlastFurnace.getBurnTicksLeft();
-				readTemperatures();
-			}
+            if (lastBurningTicks != cachedBlastFurnace.getBurnTicksLeft()) {
+                lastBurningTicks = cachedBlastFurnace.getBurnTicksLeft();
+                readTemperatures();
+            }
 
-			if (tempList.size() != 0) {
+            if (tempList.size() != 0) {
 
-				Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 82, sr.getScaledWidth() / 2 - 91, sr.getScaledHeight() / 2 - 81 + 11 * ((tempList.size()) / 4), 0x77000000);
+                Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 82, sr.getScaledWidth() / 2 - 91,
+                        sr.getScaledHeight() / 2 - 81 + 11 * ((tempList.size()) / 4), 0x77000000);
 
-				Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 81, sr.getScaledWidth() / 2 - 91, sr.getScaledHeight() / 2 - 82, 0xff000000);
-				Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 81 + 11 * ((tempList.size()) / 4), sr.getScaledWidth() / 2 - 91, sr.getScaledHeight() / 2 - 82 + 11 * ((tempList.size()) / 4), 0xff000000);
+                Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 81, sr.getScaledWidth() / 2 - 91,
+                        sr.getScaledHeight() / 2 - 82, 0xff000000);
+                Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 81 + 11 * ((tempList.size()) / 4),
+                        sr.getScaledWidth() / 2 - 91, sr.getScaledHeight() / 2 - 82 + 11 * ((tempList.size()) / 4), 0xff000000);
 
-				Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 81, sr.getScaledWidth() / 2 - 207, sr.getScaledHeight() / 2 - 82 + 11 * ((tempList.size()) / 4), 0xff000000);
-				Gui.drawRect(sr.getScaledWidth() / 2 - 91, sr.getScaledHeight() / 2 - 81, sr.getScaledWidth() / 2 - 90, sr.getScaledHeight() / 2 - 82 + 11 * ((tempList.size()) / 4), 0xff000000);
+                Gui.drawRect(sr.getScaledWidth() / 2 - 206, sr.getScaledHeight() / 2 - 81, sr.getScaledWidth() / 2 - 207,
+                        sr.getScaledHeight() / 2 - 82 + 11 * ((tempList.size()) / 4), 0xff000000);
+                Gui.drawRect(sr.getScaledWidth() / 2 - 91, sr.getScaledHeight() / 2 - 81, sr.getScaledWidth() / 2 - 90,
+                        sr.getScaledHeight() / 2 - 82 + 11 * ((tempList.size()) / 4), 0xff000000);
 
-				float sum = 0;
+                float sum = 0;
 
-				for (int i = 0; i < tempList.size(); i++) {
-					sum += tempList.get(i);
-					if ((i + 1) % 4 == 0) {
-						sum /= 4;
-						Minecraft.getMinecraft().fontRenderer.drawString("Layer " + ((i + 1) / 4) + ": " + getLayerTemp(sum), sr.getScaledWidth() / 2 - 205, sr.getScaledHeight() / 2 - 80 + 11 * ((i + 1) / 4 - 1), 0xffffff);
-						sum = 0;
-					} else if (i + 1 == tempList.size()) {
-						sum /= (i + 1) % 4;
-						Minecraft.getMinecraft().fontRenderer.drawString("Layer " + ((i + 1) / 4 + 1) + ": " + getLayerTemp(sum), sr.getScaledWidth() / 2 - 205, sr.getScaledHeight() / 2 - 80 + 11 * ((i + 1) / 4), 0xffffff);
-						sum = 0;
-					}
-				}
+                for (int i = 0; i < tempList.size(); i++) {
+                    sum += tempList.get(i);
+                    if ((i + 1) % 4 == 0) {
+                        sum /= 4;
+                        Minecraft.getMinecraft().fontRenderer.drawString("Layer " + ((i + 1) / 4) + ": " + getLayerTemp(sum),
+                                sr.getScaledWidth() / 2 - 205, sr.getScaledHeight() / 2 - 80 + 11 * ((i + 1) / 4 - 1), 0xffffff);
+                        sum = 0;
+                    } else if (i + 1 == tempList.size()) {
+                        sum /= (i + 1) % 4;
+                        Minecraft.getMinecraft().fontRenderer.drawString("Layer " + ((i + 1) / 4 + 1) + ": " + getLayerTemp(sum),
+                                sr.getScaledWidth() / 2 - 205, sr.getScaledHeight() / 2 - 80 + 11 * ((i + 1) / 4), 0xffffff);
+                        sum = 0;
+                    }
+                }
 
-			}
+            }
 
-		}
-	}
+        }
+    }
 
 }

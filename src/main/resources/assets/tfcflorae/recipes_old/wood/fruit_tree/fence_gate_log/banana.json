@@ -7,7 +7,7 @@
   "key": {
     "X": {
       "type": "forge:ore_dict",
-      "ore" : "lumberBanana"
+      "ore": "lumberBanana"
     },
     "B": {
       "item": "firmalife:banana_pole"

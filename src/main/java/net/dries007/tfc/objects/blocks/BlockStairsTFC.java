@@ -1,81 +1,84 @@
 package net.dries007.tfc.objects.blocks;
 
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import su.terrafirmagreg.api.util.BlockUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
+
 import org.jetbrains.annotations.NotNull;
-import su.terrafirmagreg.api.util.BlockUtils;
 
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class BlockStairsTFC extends BlockStairs {
-	private static final Map<Rock, EnumMap<Rock.Type, BlockStairsTFC>> ROCK_TABLE = new HashMap<>();
-	private static final Map<Tree, BlockStairsTFC> WOOD_MAP = new HashMap<>();
 
-	public BlockStairsTFC(Rock rock, Rock.Type type) {
-		super(BlockRockVariant.get(rock, type).getDefaultState());
+    private static final Map<Rock, EnumMap<Rock.Type, BlockStairsTFC>> ROCK_TABLE = new HashMap<>();
+    private static final Map<Tree, BlockStairsTFC> WOOD_MAP = new HashMap<>();
 
-		if (!ROCK_TABLE.containsKey(rock))
-			ROCK_TABLE.put(rock, new EnumMap<>(Rock.Type.class));
-		ROCK_TABLE.get(rock).put(type, this);
+    public BlockStairsTFC(Rock rock, Rock.Type type) {
+        super(BlockRockVariant.get(rock, type).getDefaultState());
 
-		Block baseBlock = BlockRockVariant.get(rock, type);
-		//noinspection ConstantConditions
-		setHarvestLevel(baseBlock.getHarvestTool(baseBlock.getDefaultState()), baseBlock.getHarvestLevel(baseBlock.getDefaultState()));
-		useNeighborBrightness = true;
-		OreDictionaryHelper.register(this, "stair");
-		OreDictionaryHelper.registerRockType(this, type, "stair");
-	}
+        if (!ROCK_TABLE.containsKey(rock))
+            ROCK_TABLE.put(rock, new EnumMap<>(Rock.Type.class));
+        ROCK_TABLE.get(rock).put(type, this);
 
-	public BlockStairsTFC(Tree wood) {
-		super(BlockPlanksTFC.get(wood).getDefaultState());
-		if (WOOD_MAP.put(wood, this) != null) {
-			throw new IllegalStateException("There can only be one.");
-		}
+        Block baseBlock = BlockRockVariant.get(rock, type);
+        //noinspection ConstantConditions
+        setHarvestLevel(baseBlock.getHarvestTool(baseBlock.getDefaultState()), baseBlock.getHarvestLevel(baseBlock.getDefaultState()));
+        useNeighborBrightness = true;
+        OreDictionaryHelper.register(this, "stair");
+        OreDictionaryHelper.registerRockType(this, type, "stair");
+    }
 
-		Block baseBlock = BlockPlanksTFC.get(wood);
-		//noinspection ConstantConditions
-		setHarvestLevel(baseBlock.getHarvestTool(baseBlock.getDefaultState()), baseBlock.getHarvestLevel(baseBlock.getDefaultState()));
-		useNeighborBrightness = true;
+    public BlockStairsTFC(Tree wood) {
+        super(BlockPlanksTFC.get(wood).getDefaultState());
+        if (WOOD_MAP.put(wood, this) != null) {
+            throw new IllegalStateException("There can only be one.");
+        }
 
-		OreDictionaryHelper.register(this, "stair");
-		OreDictionaryHelper.register(this, "stair", "wood");
-		OreDictionaryHelper.register(this, "stair", "wood", wood);
+        Block baseBlock = BlockPlanksTFC.get(wood);
+        //noinspection ConstantConditions
+        setHarvestLevel(baseBlock.getHarvestTool(baseBlock.getDefaultState()), baseBlock.getHarvestLevel(baseBlock.getDefaultState()));
+        useNeighborBrightness = true;
 
-		BlockUtils.setFireInfo(this, 5, 20);
-	}
+        OreDictionaryHelper.register(this, "stair");
+        OreDictionaryHelper.register(this, "stair", "wood");
+        OreDictionaryHelper.register(this, "stair", "wood", wood);
 
-	public static BlockStairsTFC get(Rock rock, Rock.Type type) {
-		return ROCK_TABLE.get(rock).get(type);
-	}
+        BlockUtils.setFireInfo(this, 5, 20);
+    }
 
-	public static BlockStairsTFC get(Tree wood) {
-		return WOOD_MAP.get(wood);
-	}
+    public static BlockStairsTFC get(Rock rock, Rock.Type type) {
+        return ROCK_TABLE.get(rock).get(type);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		// Prevents cobble stairs from falling
-	}
+    public static BlockStairsTFC get(Tree wood) {
+        return WOOD_MAP.get(wood);
+    }
 
-	@Override
-	public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
-		// Prevents chiseled smooth stone stairs from collapsing
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        // Prevents cobble stairs from falling
+    }
 
-	@Override
-	public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state) {
-		// Prevents cobble stairs from falling
-	}
+    @Override
+    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
+        // Prevents chiseled smooth stone stairs from collapsing
+    }
+
+    @Override
+    public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state) {
+        // Prevents cobble stairs from falling
+    }
 }

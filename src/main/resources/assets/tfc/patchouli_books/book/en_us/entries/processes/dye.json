@@ -30,7 +30,7 @@
     },
     {
       "type": "text",
-	  "text": "Only things that are in their natural state, such as White Wool and Aggregate, are able to be dyed. If you dye something the wrong color, use $(item)Lye$() to un-dye it. Lye is made by putting $(item)Wood Ash$() (dropped by campfires) in 125mB of Spring Water. Sealing 125mB of Lye with a dyed item will remove the dye."
-	}
+      "text": "Only things that are in their natural state, such as White Wool and Aggregate, are able to be dyed. If you dye something the wrong color, use $(item)Lye$() to un-dye it. Lye is made by putting $(item)Wood Ash$() (dropped by campfires) in 125mB of Spring Water. Sealing 125mB of Lye with a dyed item will remove the dye."
+    }
   ]
 }

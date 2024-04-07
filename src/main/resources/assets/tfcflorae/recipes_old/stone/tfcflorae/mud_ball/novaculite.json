@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/novaculite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/novaculite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/novaculite",
+      "count": 4
+    }
+    }

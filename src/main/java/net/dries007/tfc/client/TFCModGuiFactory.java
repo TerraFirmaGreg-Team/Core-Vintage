@@ -15,29 +15,31 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")
 public class TFCModGuiFactory implements IModGuiFactory {
-	@Override
-	public void initialize(Minecraft minecraftInstance) {
 
-	}
+    @Override
+    public void initialize(Minecraft minecraftInstance) {
 
-	@Override
-	public boolean hasConfigGui() {
-		return true;
-	}
+    }
 
-	@Override
-	public GuiScreen createConfigGui(GuiScreen parentScreen) {
-		return new TFCModGui(parentScreen);
-	}
+    @Override
+    public boolean hasConfigGui() {
+        return true;
+    }
 
-	@Override
-	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
-		return null;
-	}
+    @Override
+    public GuiScreen createConfigGui(GuiScreen parentScreen) {
+        return new TFCModGui(parentScreen);
+    }
 
-	public final class TFCModGui extends GuiConfig {
-		public TFCModGui(GuiScreen parentScreen) {
-			super(parentScreen, MODID_TFC, MOD_NAME);
-		}
-	}
+    @Override
+    public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
+        return null;
+    }
+
+    public final class TFCModGui extends GuiConfig {
+
+        public TFCModGui(GuiScreen parentScreen) {
+            super(parentScreen, MODID_TFC, MOD_NAME);
+        }
+    }
 }

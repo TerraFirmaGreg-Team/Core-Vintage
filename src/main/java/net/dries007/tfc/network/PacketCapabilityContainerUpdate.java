@@ -1,10 +1,5 @@
 package net.dries007.tfc.network;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -15,97 +10,102 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.objects.container.CapabilityContainerListener;
 
 /**
- * This is a packet which is sent to the client to sync capability data
- * It is used by {@link CapabilityContainerListener}
+ * This is a packet which is sent to the client to sync capability data It is used by {@link CapabilityContainerListener}
  *
  * @author Choonster
  * @author AlcatrazEscapee
  */
 
 public class PacketCapabilityContainerUpdate implements IMessage {
-	private final TIntObjectMap<NBTTagCompound> capabilityData = new TIntObjectHashMap<>();
-	private int windowID;
 
-	@SuppressWarnings("unused")
-	@Deprecated
-	public PacketCapabilityContainerUpdate() {}
+    private final TIntObjectMap<NBTTagCompound> capabilityData = new TIntObjectHashMap<>();
+    private int windowID;
 
-	public PacketCapabilityContainerUpdate(int windowID, int slotID, ItemStack stack) {
-		this.windowID = windowID;
+    @SuppressWarnings("unused")
+    @Deprecated
+    public PacketCapabilityContainerUpdate() {}
 
-		final NBTTagCompound data = CapabilityContainerListener.readCapabilityData(stack);
-		if (!data.isEmpty()) {
-			capabilityData.put(slotID, data);
-		}
-	}
+    public PacketCapabilityContainerUpdate(int windowID, int slotID, ItemStack stack) {
+        this.windowID = windowID;
 
-	public PacketCapabilityContainerUpdate(int windowID, NonNullList<ItemStack> items) {
-		this.windowID = windowID;
+        final NBTTagCompound data = CapabilityContainerListener.readCapabilityData(stack);
+        if (!data.isEmpty()) {
+            capabilityData.put(slotID, data);
+        }
+    }
 
-		for (int i = 0; i < items.size(); i++) {
-			final NBTTagCompound nbt = CapabilityContainerListener.readCapabilityData(items.get(i));
-			if (!nbt.isEmpty()) {
-				capabilityData.put(i, nbt);
-			}
-		}
-	}
+    public PacketCapabilityContainerUpdate(int windowID, NonNullList<ItemStack> items) {
+        this.windowID = windowID;
 
-	@Override
-	public final void fromBytes(final ByteBuf buf) {
-		windowID = buf.readInt();
+        for (int i = 0; i < items.size(); i++) {
+            final NBTTagCompound nbt = CapabilityContainerListener.readCapabilityData(items.get(i));
+            if (!nbt.isEmpty()) {
+                capabilityData.put(i, nbt);
+            }
+        }
+    }
 
-		final int numEntries = buf.readInt();
-		for (int i = 0; i < numEntries; i++) {
-			final int index = buf.readInt();
-			final NBTTagCompound data = ByteBufUtils.readTag(buf);
-			capabilityData.put(index, data);
-		}
-	}
+    @Override
+    public final void fromBytes(final ByteBuf buf) {
+        windowID = buf.readInt();
 
-	@Override
-	public final void toBytes(final ByteBuf buf) {
-		buf.writeInt(windowID);
+        final int numEntries = buf.readInt();
+        for (int i = 0; i < numEntries; i++) {
+            final int index = buf.readInt();
+            final NBTTagCompound data = ByteBufUtils.readTag(buf);
+            capabilityData.put(index, data);
+        }
+    }
 
-		buf.writeInt(capabilityData.size());
-		capabilityData.forEachEntry((index, data) -> {
-			buf.writeInt(index);
-			ByteBufUtils.writeTag(buf, data);
-			return true;
-		});
-	}
+    @Override
+    public final void toBytes(final ByteBuf buf) {
+        buf.writeInt(windowID);
 
-	public final boolean hasData() {
-		return !capabilityData.isEmpty();
-	}
+        buf.writeInt(capabilityData.size());
+        capabilityData.forEachEntry((index, data) -> {
+            buf.writeInt(index);
+            ByteBufUtils.writeTag(buf, data);
+            return true;
+        });
+    }
 
+    public final boolean hasData() {
+        return !capabilityData.isEmpty();
+    }
 
-	public static class Handler implements IMessageHandler<PacketCapabilityContainerUpdate, IMessage> {
-		@Override
-		public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx) {
-			if (!message.hasData()) return null; // Don't do anything if no data was sent
+    public static class Handler implements IMessageHandler<PacketCapabilityContainerUpdate, IMessage> {
 
-			TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-				final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-				final Container container;
+        @Override
+        public IMessage onMessage(final PacketCapabilityContainerUpdate message, final MessageContext ctx) {
+            if (!message.hasData()) return null; // Don't do anything if no data was sent
 
-				if (player != null) {
-					if (message.windowID == 0) {
-						container = player.inventoryContainer;
-					} else if (message.windowID == player.openContainer.windowId) {
-						container = player.openContainer;
-					} else {
-						return;
-					}
+            TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+                final EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+                final Container container;
 
-					message.capabilityData.forEachEntry((index, nbt) -> {
-						CapabilityContainerListener.applyCapabilityData(container.getSlot(index).getStack(), nbt);
-						return true;
-					});
-				}
-			});
-			return null;
-		}
-	}
+                if (player != null) {
+                    if (message.windowID == 0) {
+                        container = player.inventoryContainer;
+                    } else if (message.windowID == player.openContainer.windowId) {
+                        container = player.openContainer;
+                    } else {
+                        return;
+                    }
+
+                    message.capabilityData.forEachEntry((index, nbt) -> {
+                        CapabilityContainerListener.applyCapabilityData(container.getSlot(index).getStack(), nbt);
+                        return true;
+                    });
+                }
+            });
+            return null;
+        }
+    }
 }

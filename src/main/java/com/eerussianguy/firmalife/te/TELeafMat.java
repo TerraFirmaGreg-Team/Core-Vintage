@@ -1,124 +1,126 @@
 package com.eerussianguy.firmalife.te;
 
-import com.eerussianguy.firmalife.recipe.DryingRecipe;
-import com.eerussianguy.firmalife.util.HelpersFL;
-import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import com.eerussianguy.firmalife.recipe.DryingRecipe;
+import com.eerussianguy.firmalife.util.HelpersFL;
+import net.dries007.tfc.objects.te.TEInventory;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.CalendarTFC;
+
 import org.jetbrains.annotations.NotNull;
 
-
 public class TELeafMat extends TEInventory implements ITickable {
-	private long startTick;
-	private int tickGoal;
 
-	public TELeafMat() {
-		super(1);
-		startTick = 0;
-		tickGoal = 0;
-	}
+    private long startTick;
+    private int tickGoal;
 
-	@Override
-	public boolean isItemValid(int slot, ItemStack stack) {
-		return true;
-	}
+    public TELeafMat() {
+        super(1);
+        startTick = 0;
+        tickGoal = 0;
+    }
 
-	@Override
-	public void update() {
-		if (!world.isRemote) {
-			if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
-				if (recipeExists()) {
-					dry();
-				}
-			}
-		}
-	}
+    @Override
+    public boolean isItemValid(int slot, ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		startTick = nbt.getLong("startTick");
-		tickGoal = nbt.getInteger("tickGoal");
-		super.readFromNBT(nbt);
-	}
+    @Override
+    public void update() {
+        if (!world.isRemote) {
+            if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
+                if (recipeExists()) {
+                    dry();
+                }
+            }
+        }
+    }
 
-	@Override
-	@NotNull
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setLong("startTick", startTick);
-		nbt.setInteger("tickGoal", tickGoal);
-		return super.writeToNBT(nbt);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        startTick = nbt.getLong("startTick");
+        tickGoal = nbt.getInteger("tickGoal");
+        super.readFromNBT(nbt);
+    }
 
-	public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-		Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
-	}
+    @Override
+    @NotNull
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        nbt.setLong("startTick", startTick);
+        nbt.setInteger("tickGoal", tickGoal);
+        return super.writeToNBT(nbt);
+    }
 
-	public void clear() {
-		startTick = 0;
-		tickGoal = 0;
-		markDirty();
-	}
+    public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+        Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+    }
 
-	public void deleteSlot() {
-		inventory.setStackInSlot(0, ItemStack.EMPTY);
-	}
+    public void clear() {
+        startTick = 0;
+        tickGoal = 0;
+        markDirty();
+    }
 
-	public void start() {
-		if (recipeExists()) {
-			startTick = CalendarTFC.PLAYER_TIME.getTicks();
-			setDuration();
-		} else {
-			Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
-			deleteSlot();
-		}
-		markDirty();
-	}
+    public void deleteSlot() {
+        inventory.setStackInSlot(0, ItemStack.EMPTY);
+    }
 
-	public void rain() {
-		tickGoal += 25;
-	}
+    public void start() {
+        if (recipeExists()) {
+            startTick = CalendarTFC.PLAYER_TIME.getTicks();
+            setDuration();
+        } else {
+            Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+            deleteSlot();
+        }
+        markDirty();
+    }
 
-	private boolean recipeExists() {
-		ItemStack input = inventory.getStackInSlot(0);
-		DryingRecipe recipe = null;
-		if (!input.isEmpty() && !world.isRemote) {
-			recipe = DryingRecipe.get(input);
-		}
-		return recipe != null;
-	}
+    public void rain() {
+        tickGoal += 25;
+    }
 
-	private void setDuration() {
-		ItemStack input = inventory.getStackInSlot(0);
-		int recipeTime = 0;
-		if (!input.isEmpty() && !world.isRemote) {
-			DryingRecipe recipe = DryingRecipe.get(input);
-			if (recipe != null) {
-				recipeTime = DryingRecipe.getDuration(recipe);
-			}
-		}
-		tickGoal = recipeTime;
-	}
+    private boolean recipeExists() {
+        ItemStack input = inventory.getStackInSlot(0);
+        DryingRecipe recipe = null;
+        if (!input.isEmpty() && !world.isRemote) {
+            recipe = DryingRecipe.get(input);
+        }
+        return recipe != null;
+    }
 
-	private void dry() {
-		ItemStack input = inventory.getStackInSlot(0);
-		if (!input.isEmpty()) {
-			DryingRecipe recipe = DryingRecipe.get(input);
-			if (recipe != null && !world.isRemote) {
-				inventory.setStackInSlot(0, HelpersFL.updateFoodFuzzed(input, recipe.getOutputItem(input)));
-				setAndUpdateSlots(0);
-				markForSync();
-			}
-		}
-		markDirty();
-	}
+    private void setDuration() {
+        ItemStack input = inventory.getStackInSlot(0);
+        int recipeTime = 0;
+        if (!input.isEmpty() && !world.isRemote) {
+            DryingRecipe recipe = DryingRecipe.get(input);
+            if (recipe != null) {
+                recipeTime = DryingRecipe.getDuration(recipe);
+            }
+        }
+        tickGoal = recipeTime;
+    }
 
-	public long getTicksRemaining() {
-		return tickGoal - (CalendarTFC.PLAYER_TIME.getTicks() - startTick);
-	}
+    private void dry() {
+        ItemStack input = inventory.getStackInSlot(0);
+        if (!input.isEmpty()) {
+            DryingRecipe recipe = DryingRecipe.get(input);
+            if (recipe != null && !world.isRemote) {
+                inventory.setStackInSlot(0, HelpersFL.updateFoodFuzzed(input, recipe.getOutputItem(input)));
+                setAndUpdateSlots(0);
+                markForSync();
+            }
+        }
+        markDirty();
+    }
+
+    public long getTicksRemaining() {
+        return tickGoal - (CalendarTFC.PLAYER_TIME.getTicks() - startTick);
+    }
 }

@@ -4,9 +4,9 @@
     {
       "item": "tfcflorae:mud/diorite"
     }
-  },
-  "result": {
-    "item": "tfcflorae:mud/mud_ball/diorite",
-    "count": 4
-  }
-}
+    },
+    "result": {
+      "item": "tfcflorae:mud/mud_ball/diorite",
+      "count": 4
+    }
+    }

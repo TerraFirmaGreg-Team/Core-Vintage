@@ -1,91 +1,95 @@
 package com.eerussianguy.firmalife.recipe;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
 import com.eerussianguy.firmalife.init.RegistriesFL;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PlanterRecipe extends IForgeRegistryEntry.Impl<PlanterRecipe> {
-	private final int stages;
-	private final boolean large;
-	private final int tier;
-	protected IIngredient<ItemStack> inputItem;
-	protected ItemStack outputItem;
 
-	public PlanterRecipe(IIngredient<ItemStack> input, ItemStack output, int stages, boolean large) {
-		this(input, output, stages, large, 0);
-	}
+    private final int stages;
+    private final boolean large;
+    private final int tier;
+    protected IIngredient<ItemStack> inputItem;
+    protected ItemStack outputItem;
 
-	public PlanterRecipe(IIngredient<ItemStack> input, ItemStack output, int stages, boolean large, int tier) {
-		this.inputItem = input;
-		this.outputItem = output;
-		this.stages = stages;
-		this.large = large;
-		this.tier = tier;
+    public PlanterRecipe(IIngredient<ItemStack> input, ItemStack output, int stages, boolean large) {
+        this(input, output, stages, large, 0);
+    }
 
-		if (inputItem == null || outputItem == null) {
-			throw new IllegalArgumentException("Sorry, but the planter needs inputs and outputs.");
-		}
-		if (stages < 1) {
-			throw new IllegalArgumentException("Sorry, but crops need have to have stages.");
-		}
-	}
+    public PlanterRecipe(IIngredient<ItemStack> input, ItemStack output, int stages, boolean large, int tier) {
+        this.inputItem = input;
+        this.outputItem = output;
+        this.stages = stages;
+        this.large = large;
+        this.tier = tier;
 
-	@Nullable
-	public static PlanterRecipe get(ItemStack item) {
-		return RegistriesFL.PLANTER_QUAD.getValuesCollection()
-		                                .stream()
-		                                .filter(x -> x.isValidInput(item))
-		                                .findFirst()
-		                                .orElse(null);
-	}
+        if (inputItem == null || outputItem == null) {
+            throw new IllegalArgumentException("Sorry, but the planter needs inputs and outputs.");
+        }
+        if (stages < 1) {
+            throw new IllegalArgumentException("Sorry, but crops need have to have stages.");
+        }
+    }
 
-	public static int getMaxStage(PlanterRecipe recipe) {
-		return recipe.stages;
-	}
+    @Nullable
+    public static PlanterRecipe get(ItemStack item) {
+        return RegistriesFL.PLANTER_QUAD.getValuesCollection()
+                .stream()
+                .filter(x -> x.isValidInput(item))
+                .findFirst()
+                .orElse(null);
+    }
 
-	public static int getTier(PlanterRecipe recipe) {
-		return recipe.tier;
-	}
+    public static int getMaxStage(PlanterRecipe recipe) {
+        return recipe.stages;
+    }
 
-	public boolean isLarge() {
-		return large;
-	}
+    public static int getTier(PlanterRecipe recipe) {
+        return recipe.tier;
+    }
 
-	// Using this for HWYLA access
-	@NotNull
-	public ItemStack getOutputItem() {
-		return outputItem;
-	}
+    public boolean isLarge() {
+        return large;
+    }
 
-	@NotNull
-	public ItemStack getOutputItem(ItemStack stack) {
-		return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
-	}
+    // Using this for HWYLA access
+    @NotNull
+    public ItemStack getOutputItem() {
+        return outputItem;
+    }
 
-	private boolean isValidInput(ItemStack inputItem) {
-		return this.inputItem.test(inputItem);
-	}
+    @NotNull
+    public ItemStack getOutputItem(ItemStack stack) {
+        return CapabilityFood.updateFoodFromPrevious(stack, outputItem.copy());
+    }
 
-	@Nullable
-	public static class PlantInfo {
-		private final PlanterRecipe recipe;
-		private final int stage;
+    private boolean isValidInput(ItemStack inputItem) {
+        return this.inputItem.test(inputItem);
+    }
 
-		public PlantInfo(PlanterRecipe recipe, int stage) {
-			this.recipe = recipe;
-			this.stage = stage;
-		}
+    @Nullable
+    public static class PlantInfo {
 
-		public PlanterRecipe getRecipe() {
-			return recipe;
-		}
+        private final PlanterRecipe recipe;
+        private final int stage;
 
-		public int getStage() {
-			return stage;
-		}
-	}
+        public PlantInfo(PlanterRecipe recipe, int stage) {
+            this.recipe = recipe;
+            this.stage = stage;
+        }
+
+        public PlanterRecipe getRecipe() {
+            return recipe;
+        }
+
+        public int getStage() {
+            return stage;
+        }
+    }
 }

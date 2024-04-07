@@ -1,7 +1,5 @@
 package tfcflorae.util.interaction;
 
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.util.interaction.IRightClickItemAction;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockStructure;
@@ -19,8 +17,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import org.jetbrains.annotations.NotNull;
 
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.util.interaction.IRightClickItemAction;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Util class for handling right click actions with more precision than {@link net.minecraftforge.event.entity.player.PlayerInteractEvent} gives us
@@ -29,104 +30,108 @@ import org.jetbrains.annotations.NotNull;
  */
 
 final class ServerInteractionManagerTFCF {
-	/**
-	 * @see net.minecraft.server.management.PlayerInteractionManager#processRightClickBlock(EntityPlayer, World, ItemStack, EnumHand, BlockPos, EnumFacing, float, float, float)
-	 */
-	@NotNull
-	static EnumActionResult processRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		World worldIn = event.getWorld();
-		BlockPos pos = event.getPos();
-		EntityPlayerMP player = (EntityPlayerMP) event.getEntityPlayer();
-		EnumFacing facing = event.getFace();
-		if (facing == null) {
-			// Should never happen
-			facing = EnumFacing.UP;
-		}
-		EnumHand hand = event.getHand();
-		ItemStack stack = event.getItemStack();
 
-		float hitX = 0, hitY = 0, hitZ = 0;
-		Vec3d hitVec = event.getHitVec();
-		if (hitVec != null) {
-			hitX = ((float) (hitVec.x - pos.getX()));
-			hitY = ((float) (hitVec.y - pos.getY()));
-			hitZ = ((float) (hitVec.z - pos.getZ()));
-		}
+    /**
+     * @see net.minecraft.server.management.PlayerInteractionManager#processRightClickBlock(EntityPlayer, World, ItemStack, EnumHand, BlockPos,
+     * EnumFacing, float, float, float)
+     */
+    @NotNull
+    static EnumActionResult processRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        World worldIn = event.getWorld();
+        BlockPos pos = event.getPos();
+        EntityPlayerMP player = (EntityPlayerMP) event.getEntityPlayer();
+        EnumFacing facing = event.getFace();
+        if (facing == null) {
+            // Should never happen
+            facing = EnumFacing.UP;
+        }
+        EnumHand hand = event.getHand();
+        ItemStack stack = event.getItemStack();
 
-		EnumActionResult result = EnumActionResult.PASS;
-		if (event.getUseItem() != Event.Result.DENY) {
-			result = stack.onItemUseFirst(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-			if (result != EnumActionResult.PASS) return result;
-		}
+        float hitX = 0, hitY = 0, hitZ = 0;
+        Vec3d hitVec = event.getHitVec();
+        if (hitVec != null) {
+            hitX = ((float) (hitVec.x - pos.getX()));
+            hitY = ((float) (hitVec.y - pos.getY()));
+            hitZ = ((float) (hitVec.z - pos.getZ()));
+        }
 
-		boolean bypass = player.getHeldItemMainhand()
-		                       .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
-		                                                                          .doesSneakBypassUse(worldIn, pos, player);
+        EnumActionResult result = EnumActionResult.PASS;
+        if (event.getUseItem() != Event.Result.DENY) {
+            result = stack.onItemUseFirst(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+            if (result != EnumActionResult.PASS) return result;
+        }
 
-		if (!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW) {
-			IBlockState iblockstate = worldIn.getBlockState(pos);
-			if (event.getUseBlock() != Event.Result.DENY)
-				if (iblockstate.getBlock()
-				               .onBlockActivated(worldIn, pos, iblockstate, player, hand, facing, hitX, hitY, hitZ)) {
-					result = EnumActionResult.SUCCESS;
-				}
-		}
+        boolean bypass = player.getHeldItemMainhand()
+                .doesSneakBypassUse(worldIn, pos, player) && player.getHeldItemOffhand()
+                .doesSneakBypassUse(worldIn, pos, player);
 
-		if (stack.isEmpty()) {
-			return EnumActionResult.PASS;
-		} else if (player.getCooldownTracker().hasCooldown(stack.getItem())) {
-			return EnumActionResult.PASS;
-		} else {
-			if (stack.getItem() instanceof ItemBlock && !player.canUseCommandBlock()) {
-				Block block = ((ItemBlock) stack.getItem()).getBlock();
+        if (!player.isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW) {
+            IBlockState iblockstate = worldIn.getBlockState(pos);
+            if (event.getUseBlock() != Event.Result.DENY)
+                if (iblockstate.getBlock()
+                        .onBlockActivated(worldIn, pos, iblockstate, player, hand, facing, hitX, hitY, hitZ)) {
+                    result = EnumActionResult.SUCCESS;
+                }
+        }
 
-				if (block instanceof BlockCommandBlock || block instanceof BlockStructure) {
-					return EnumActionResult.FAIL;
-				}
-			}
+        if (stack.isEmpty()) {
+            return EnumActionResult.PASS;
+        } else if (player.getCooldownTracker().hasCooldown(stack.getItem())) {
+            return EnumActionResult.PASS;
+        } else {
+            if (stack.getItem() instanceof ItemBlock && !player.canUseCommandBlock()) {
+                Block block = ((ItemBlock) stack.getItem()).getBlock();
 
-			if (player.interactionManager.isCreative()) {
-				int j = stack.getMetadata();
-				int i = stack.getCount();
-				if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-						|| result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
-					// Fire the alternative item use action
-					EnumActionResult enumactionresult;
+                if (block instanceof BlockCommandBlock || block instanceof BlockStructure) {
+                    return EnumActionResult.FAIL;
+                }
+            }
 
-					if (stack.getItem() instanceof ItemSeedsTFC) {
-						enumactionresult = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) stack.getItem()), player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-					} else
-						// fire the normal one as well
-						enumactionresult = stack.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+            if (player.interactionManager.isCreative()) {
+                int j = stack.getMetadata();
+                int i = stack.getCount();
+                if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
+                        || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+                    // Fire the alternative item use action
+                    EnumActionResult enumactionresult;
 
-					stack.setItemDamage(j);
-					stack.setCount(i);
-					return enumactionresult;
-				} else return result;
-			} else {
-				if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
-						|| result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
-					ItemStack copyBeforeUse = stack.copy();
+                    if (stack.getItem() instanceof ItemSeedsTFC) {
+                        enumactionresult = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) stack.getItem()), player, worldIn, pos, hand, facing, hitX,
+                                hitY, hitZ);
+                    } else
+                        // fire the normal one as well
+                        enumactionresult = stack.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 
-					if (copyBeforeUse.getItem() instanceof ItemSeedsTFC) {
-						result = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) copyBeforeUse.getItem()), player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-					} else
-						// fire the normal one as well
-						result = copyBeforeUse.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+                    stack.setItemDamage(j);
+                    stack.setCount(i);
+                    return enumactionresult;
+                } else return result;
+            } else {
+                if (result != EnumActionResult.SUCCESS && event.getUseItem() != Event.Result.DENY
+                        || result == EnumActionResult.SUCCESS && event.getUseItem() == Event.Result.ALLOW) {
+                    ItemStack copyBeforeUse = stack.copy();
 
-					if (stack.isEmpty()) ForgeEventFactory.onPlayerDestroyItem(player, copyBeforeUse, hand);
-				}
-				return result;
-			}
-		}
-	}
+                    if (copyBeforeUse.getItem() instanceof ItemSeedsTFC) {
+                        result = InteractionInjectTFCF.onItemUse(((ItemSeedsTFC) copyBeforeUse.getItem()), player, worldIn, pos, hand, facing, hitX,
+                                hitY, hitZ);
+                    } else
+                        // fire the normal one as well
+                        result = copyBeforeUse.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 
-	/**
-	 * @see net.minecraft.server.management.PlayerInteractionManager#processRightClick(EntityPlayer, World, ItemStack, EnumHand)
-	 */
-	@NotNull
-	static EnumActionResult processRightClickItem(PlayerInteractEvent.RightClickItem event, IRightClickItemAction action) {
-		// No special logic required, just fire the right click and return the result
-		return action.onRightClickItem(event.getWorld(), event.getEntityPlayer(), event.getHand());
-	}
+                    if (stack.isEmpty()) ForgeEventFactory.onPlayerDestroyItem(player, copyBeforeUse, hand);
+                }
+                return result;
+            }
+        }
+    }
+
+    /**
+     * @see net.minecraft.server.management.PlayerInteractionManager#processRightClick(EntityPlayer, World, ItemStack, EnumHand)
+     */
+    @NotNull
+    static EnumActionResult processRightClickItem(PlayerInteractEvent.RightClickItem event, IRightClickItemAction action) {
+        // No special logic required, just fire the right click and return the result
+        return action.onRightClickItem(event.getWorld(), event.getEntityPlayer(), event.getHand());
+    }
 }

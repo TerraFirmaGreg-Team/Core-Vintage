@@ -1,7 +1,5 @@
 package tfctech.network;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -12,43 +10,48 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+
 public class PacketTileEntityUpdate implements IMessage {
-	private NBTTagCompound tileEntity;
-	private BlockPos pos;
 
-	@SuppressWarnings("unused")
-	@Deprecated
-	public PacketTileEntityUpdate() {}
+    private NBTTagCompound tileEntity;
+    private BlockPos pos;
 
-	public PacketTileEntityUpdate(TileEntity te) {
-		pos = te.getPos();
-		tileEntity = te.serializeNBT();
-	}
+    @SuppressWarnings("unused")
+    @Deprecated
+    public PacketTileEntityUpdate() {}
 
-	@Override
-	public void fromBytes(ByteBuf byteBuf) {
-		pos = BlockPos.fromLong(byteBuf.readLong());
-		tileEntity = ByteBufUtils.readTag(byteBuf);
-	}
+    public PacketTileEntityUpdate(TileEntity te) {
+        pos = te.getPos();
+        tileEntity = te.serializeNBT();
+    }
 
-	@Override
-	public void toBytes(ByteBuf byteBuf) {
-		byteBuf.writeLong(pos.toLong());
-		ByteBufUtils.writeTag(byteBuf, tileEntity);
-	}
+    @Override
+    public void fromBytes(ByteBuf byteBuf) {
+        pos = BlockPos.fromLong(byteBuf.readLong());
+        tileEntity = ByteBufUtils.readTag(byteBuf);
+    }
 
-	public static class Handler implements IMessageHandler<PacketTileEntityUpdate, IMessage> {
-		@Override
-		public IMessage onMessage(PacketTileEntityUpdate message, MessageContext ctx) {
-			EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
-			if (player != null) {
-				World world = player.getEntityWorld();
-				TileEntity te = world.getTileEntity(message.pos);
-				if (te != null) {
-					te.readFromNBT(message.tileEntity);
-				}
-			}
-			return null;
-		}
-	}
+    @Override
+    public void toBytes(ByteBuf byteBuf) {
+        byteBuf.writeLong(pos.toLong());
+        ByteBufUtils.writeTag(byteBuf, tileEntity);
+    }
+
+    public static class Handler implements IMessageHandler<PacketTileEntityUpdate, IMessage> {
+
+        @Override
+        public IMessage onMessage(PacketTileEntityUpdate message, MessageContext ctx) {
+            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+            if (player != null) {
+                World world = player.getEntityWorld();
+                TileEntity te = world.getTileEntity(message.pos);
+                if (te != null) {
+                    te.readFromNBT(message.tileEntity);
+                }
+            }
+            return null;
+        }
+    }
 }

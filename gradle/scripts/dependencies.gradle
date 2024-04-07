@@ -41,16 +41,47 @@ def use_immersive = false
 def use_util = true
 
 dependencies {
+
+    //    compileOnly fileTree(include: ["*.jar"], dir: "libs")
+
+    // Утилиты и вспомогательные моды
+    if (use_util.toBoolean()) {
+        implementation rfg.deobf("curse.maven:had-enough-items-557549:5229422")
+        implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
+        implementation rfg.deobf("curse.maven:reid-629017:5143492")
+        implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
+        implementation rfg.deobf("curse.maven:aainfo-573154:3627065")
+        implementation rfg.deobf("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
+        implementation rfg.deobf("curse.maven:ctm-267602:2915363")
+
+        implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
+
+
+        implementation rfg.deobf("curse.maven:common-capabilities-247007:3053017-sources-3053019-javadoc-3053020")
+        implementation rfg.deobf("curse.maven:cyclops-core-232758:3159497-sources-3159499-javadoc-3159500")
+//      implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
+//      implementation rfg.deobf("curse.maven:future-mc-310059:3924863")
+//      implementation rfg.deobf("curse.maven:shadowfacts-forgelin-248453:2785465")
+
+
+
+//      runtimeOnly("curse.maven:fancy-spawn-eggs-302277:2612571")
+//      runtimeOnly("curse.maven:nbt-tooltip-274816:2567902")
+//      runtimeOnly("curse.maven:spark-361579:3542217")
+//      runtimeOnly("curse.maven:tabula-minecraft-modeler-229092:2801271")
+//      runtimeOnly("curse.maven:ichunutil-229060:2801263")
+
+        compileOnly("curse.maven:hwyla-253449:2568751")
+        compileOnly("curse.maven:nyx-rotn-edition-437663:3840824")
+        compileOnly("curse.maven:industrial-craft-242638:3838713")
+    }
+
+
     // GregTech dependencies
     if (use_gregtech.toBoolean()) {
         implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5121638-sources-5121640")
         implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5121714-sources-5121718")
-
-        implementation rfg.deobf("curse.maven:3.2.3.358-codechicken-lib-1-8-242818:2779848")
-        implementation rfg.deobf("curse.maven:ctm-267602:2915363")
     }
-
-//    compileOnly fileTree(include: ["*.jar"], dir: "libs")
 
     // Forestry dependencies
     if (use_forestry.toBoolean()) {
@@ -68,36 +99,9 @@ dependencies {
         compileOnly rfg.deobf("curse.maven:dynamictreestfc-362368:4259841")
     }
 
-
     //TFC
     compileOnly rfg.deobf("curse.maven:tfc-pams-harvestcraft-compatibility-mod-452032:3257786")
     compileOnly rfg.deobf("curse.maven:tfc-elementia-389225:3574322")
-
-
-    // Утилиты и вспомогательные моды
-    if (use_util.toBoolean()) {
-        implementation rfg.deobf("curse.maven:had-enough-items-557549:4810661")
-        implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
-        implementation rfg.deobf("curse.maven:reid-629017:4505486")
-        implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
-        implementation rfg.deobf("curse.maven:common-capabilities-247007:3053017-sources-3053019-javadoc-3053020")
-        implementation rfg.deobf("curse.maven:cyclops-core-232758:3159497-sources-3159499-javadoc-3159500")
-//      implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
-//      implementation rfg.deobf("curse.maven:future-mc-310059:3924863")
-//      implementation rfg.deobf("curse.maven:shadowfacts-forgelin-248453:2785465")
-
-
-        runtimeOnly("curse.maven:aainfo-573154:3627065")
-//      runtimeOnly("curse.maven:fancy-spawn-eggs-302277:2612571")
-//      runtimeOnly("curse.maven:nbt-tooltip-274816:2567902")
-//      runtimeOnly("curse.maven:spark-361579:3542217")
-//      runtimeOnly("curse.maven:tabula-minecraft-modeler-229092:2801271")
-//      runtimeOnly("curse.maven:ichunutil-229060:2801263")
-
-        compileOnly("curse.maven:hwyla-253449:2568751")
-        compileOnly("curse.maven:nyx-rotn-edition-437663:3840824")
-        compileOnly("curse.maven:industrial-craft-242638:3838713")
-    }
 
     // Tinkers Construct dependencies
     if (use_tconstruct.toBoolean()) {

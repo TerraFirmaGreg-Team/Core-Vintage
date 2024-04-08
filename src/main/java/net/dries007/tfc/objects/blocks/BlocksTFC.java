@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.ConfigTFC;
@@ -56,7 +57,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
@@ -81,7 +81,6 @@ import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.objects.te.TEToolRack;
 import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
@@ -128,7 +127,6 @@ public final class BlocksTFC {
     private static ImmutableList<BlockAnvilTFC> allAnvils;
     private static ImmutableList<BlockMetalSheet> allSheets;
     private static ImmutableList<BlockMetalLamp> allLamps;
-    private static ImmutableList<BlockToolRack> allToolRackBlocks;
     private static ImmutableList<BlockCropTFC> allCropBlocks;
     private static ImmutableList<BlockCropDead> allDeadCropBlocks;
     private static ImmutableList<BlockPlantTFC> allPlantBlocks;
@@ -212,10 +210,6 @@ public final class BlocksTFC {
 
     public static ImmutableList<BlockMetalLamp> getAllLamps() {
         return allLamps;
-    }
-
-    public static ImmutableList<BlockToolRack> getAllToolRackBlocks() {
-        return allToolRackBlocks;
     }
 
     public static ImmutableList<BlockCropTFC> getAllCropBlocks() {
@@ -377,7 +371,6 @@ public final class BlocksTFC {
             Builder<BlockLogTFC> logs = ImmutableList.builder();
             Builder<BlockLeavesTFC> leaves = ImmutableList.builder();
             Builder<BlockSaplingTFC> saplings = ImmutableList.builder();
-            Builder<BlockToolRack> toolRacks = ImmutableList.builder();
             Builder<ItemBlockBarrel> barrelItems = ImmutableList.builder();
             Builder<BlockPlantTFC> plants = ImmutableList.builder();
 
@@ -387,7 +380,6 @@ public final class BlocksTFC {
                 logs.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockLogTFC(wood), CT_WOOD));
                 leaves.add(register(r, "wood/leaves/" + wood.getRegistryName().getPath(), new BlockLeavesTFC(wood), CT_WOOD));
                 saplings.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockSaplingTFC(wood), CT_WOOD));
-                toolRacks.add(register(r, "wood/tool_rack/" + wood.getRegistryName().getPath(), new BlockToolRack(wood), CT_DECORATIONS));
                 barrelItems.add(
                         new ItemBlockBarrel(register(r, "wood/barrel/" + wood.getRegistryName().getPath(), new BlockBarrel(), CT_DECORATIONS)));
             }
@@ -395,7 +387,6 @@ public final class BlocksTFC {
             allLogBlocks = logs.build();
             allLeafBlocks = leaves.build();
             allSaplingBlocks = saplings.build();
-            allToolRackBlocks = toolRacks.build();
 
             allBarrelItemBlocks = barrelItems.build();
 
@@ -403,8 +394,6 @@ public final class BlocksTFC {
             allLeafBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
             allSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockSaplingTFC(x)));
 
-            // doors are special
-            allToolRackBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
         }
 
         {
@@ -599,7 +588,6 @@ public final class BlocksTFC {
         register(TEPlacedHide.class, "placed_hide");
         register(TEChestTFC.class, "chest");
         register(TEIngotPile.class, "ingot_pile");
-        register(TEToolRack.class, "tool_rack");
         register(TELamp.class, "lamp");
         register(TEBarrel.class, "barrel");
         register(TEAnvilTFC.class, "anvil");

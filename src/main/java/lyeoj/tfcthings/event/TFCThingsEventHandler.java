@@ -29,7 +29,6 @@ import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -151,31 +150,28 @@ public class TFCThingsEventHandler {
 
     @Nullable
     public static ISharpness getSharpnessCapability(ItemStack itemStack) {
-        Object capability = itemStack.getCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null);
+        var capability = itemStack.getCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null);
         if (capability instanceof ISharpness) {
-            ISharpness sharpness = (ISharpness) capability;
-            return sharpness;
+            return capability;
         }
         return null;
     }
 
     @SubscribeEvent
     public static void onItemToss(ItemTossEvent event) {
-        if (event.getEntityItem().getItem().getItem() instanceof ItemRopeJavelin) {
-            ItemRopeJavelin javelin = (ItemRopeJavelin) event.getEntityItem().getItem().getItem();
+        if (event.getEntityItem().getItem().getItem() instanceof ItemRopeJavelin javelin) {
             javelin.retractJavelin(event.getEntityItem().getItem(), event.getEntity().getEntityWorld());
         }
     }
 
-    @SubscribeEvent
-    public static void onPlayerInteractBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getItemStack().getItem() instanceof ItemRopeJavelin) {
-            if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockToolRack) {
-                ((ItemRopeJavelin) event.getItemStack()
-                        .getItem()).retractJavelin(event.getItemStack(), event.getWorld());
-            }
-        }
-    }
+    //    @SubscribeEvent
+    //    public static void onPlayerInteractBlock(PlayerInteractEvent.RightClickBlock event) {
+    //        if (event.getItemStack().getItem() instanceof ItemRopeJavelin) {
+    //            if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockToolRack) {
+    //                ((ItemRopeJavelin) event.getItemStack().getItem()).retractJavelin(event.getItemStack(), event.getWorld());
+    //            }
+    //        }
+    //    }
 
     @SubscribeEvent
     public static void onPlayerInteractEntity(PlayerInteractEvent.EntityInteract event) {

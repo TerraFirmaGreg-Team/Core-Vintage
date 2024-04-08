@@ -29,6 +29,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.ConfigTFC;
@@ -45,7 +46,6 @@ import net.dries007.tfc.client.render.TESRChestTFC;
 import net.dries007.tfc.client.render.TESRPlacedHide;
 import net.dries007.tfc.client.render.TESRPlacedItem;
 import net.dries007.tfc.client.render.TESRPlacedItemFlat;
-import net.dries007.tfc.client.render.TESRToolRack;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlockThatchBed;
@@ -72,7 +72,6 @@ import net.dries007.tfc.objects.te.TEChestTFC;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.objects.te.TEToolRack;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -256,7 +255,6 @@ public final class ClientRegisterEvents {
         // TESRs //
 
         ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
         ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());

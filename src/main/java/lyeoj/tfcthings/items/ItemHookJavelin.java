@@ -14,6 +14,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.entity.projectile.EntityThrownHookJavelin;
@@ -51,7 +52,7 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
                         this.retractJavelin(itemstack, worldIn);
                     }
                 }
-                return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+                return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
             } else {
                 return super.onItemRightClick(worldIn, playerIn, handIn);
             }
@@ -80,8 +81,8 @@ public class ItemHookJavelin extends ItemRopeJavelin implements TFCThingsConfigu
                     Math.floor(playerIn.getEntityBoundingBox().minY) + (double) playerIn.height, d6 + d8 / 2.0D);
 
             for (int[] aint : aint1) {
-                double d9 = (double) (enumfacing1.getXOffset() * aint[0] + enumfacing.getXOffset() * aint[1]);
-                double d10 = (double) (enumfacing1.getZOffset() * aint[0] + enumfacing.getZOffset() * aint[1]);
+                double d9 = enumfacing1.getXOffset() * aint[0] + enumfacing.getXOffset() * aint[1];
+                double d10 = enumfacing1.getZOffset() * aint[0] + enumfacing.getZOffset() * aint[1];
                 double d11 = d5 + d9;
                 double d12 = d6 + d10;
                 AxisAlignedBB axisalignedbb1 = axisalignedbb.offset(d9, 0.0D, d10);

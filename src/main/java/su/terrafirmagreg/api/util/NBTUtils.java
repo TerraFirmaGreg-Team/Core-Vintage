@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.UUID;
@@ -47,6 +48,7 @@ public final class NBTUtils {
         else if (value instanceof Byte byteValue) dataTag.setByte(tagName, byteValue);
         else if (value instanceof UUID uuidValue) dataTag.setUniqueId(tagName, uuidValue);
         else if (value instanceof ItemStack itemStackValue) dataTag.setTag(tagName, itemStackValue.writeToNBT(new NBTTagCompound()));
+        else if (value instanceof NBTTagCompound nbtTagCompound) dataTag.setTag(tagName, nbtTagCompound);
         else if (value instanceof Entity entityValue) {
             final NBTTagCompound newTag = new NBTTagCompound();
             entityValue.writeToNBT(newTag);

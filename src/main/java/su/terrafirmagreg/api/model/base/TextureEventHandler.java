@@ -1,8 +1,9 @@
-package su.terrafirmagreg.api.model.block;
+package su.terrafirmagreg.api.model.base;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 
 import java.util.ArrayList;
 import java.util.List;

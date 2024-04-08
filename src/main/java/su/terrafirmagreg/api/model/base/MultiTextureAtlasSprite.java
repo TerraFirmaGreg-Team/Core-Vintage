@@ -1,9 +1,10 @@
-package su.terrafirmagreg.api.model.block;
+package su.terrafirmagreg.api.model.base;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+
 
 import com.google.common.collect.ImmutableList;
 

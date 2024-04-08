@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.spi.model;
 
-import su.terrafirmagreg.api.model.block.ModelBaker;
+import su.terrafirmagreg.api.model.base.ModelBaker;
 
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.model.IModelState;
+
 
 import com.google.common.collect.Lists;
 

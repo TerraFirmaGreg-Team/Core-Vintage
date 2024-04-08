@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.item.IOreDict;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -46,12 +47,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.Collection;
 import java.util.List;
@@ -186,7 +189,7 @@ public class RegistryManager {
      *
      * @return The Registry, for convenience.
      */
-    public RegistryManager enableAutoRegistration() {
+    public RegistryManager create() {
 
         this.registry = new Registry(this);
         MinecraftForge.EVENT_BUS.register(this.registry);
@@ -502,6 +505,12 @@ public class RegistryManager {
     public IRecipe registerRecipe(String name, IRecipe recipe) {
 
         recipe.setRegistryName(new ResourceLocation(this.modID, name));
+        this.recipes.add(recipe);
+        return recipe;
+    }
+
+    public IRecipe registerRecipe(IRecipe recipe) {
+
         this.recipes.add(recipe);
         return recipe;
     }

@@ -1,6 +1,9 @@
 package su.terrafirmagreg.api.registry;
 
+import su.terrafirmagreg.api.spi.item.IOreDict;
+
 import net.minecraft.item.ItemBlock;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

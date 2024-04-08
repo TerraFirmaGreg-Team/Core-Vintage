@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.registry;
+package su.terrafirmagreg.api.spi.item;
 
 public interface IOreDict {
 

@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,9 +28,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public abstract class BlockDoorBase extends BlockDoor implements IAutoReg, IItemSize, ICustomStateMapper {
+public abstract class BlockBaseDoor extends BlockDoor implements IAutoReg, IItemSize, ICustomStateMapper {
 
-    protected BlockDoorBase(Material material) {
+    protected BlockBaseDoor(Material material) {
         super(material);
 
         setHardness(3.0F);

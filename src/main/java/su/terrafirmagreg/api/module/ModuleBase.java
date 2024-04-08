@@ -6,11 +6,8 @@ import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.network.PacketRegistry;
 import su.terrafirmagreg.api.network.PacketService;
 import su.terrafirmagreg.api.network.ThreadedNetworkWrapper;
-import su.terrafirmagreg.api.network.tile.ITileDataService;
-import su.terrafirmagreg.api.network.tile.TileDataServiceContainer;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -29,10 +26,12 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
+
 import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.io.File;
 import java.util.Collections;
@@ -68,7 +67,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     protected IPacketRegistry packetRegistry;
     protected IPacketService packetService;
     protected ThreadedNetworkWrapper threadedNetworkWrapper;
-    protected ITileDataService tileDataService;
     protected NetworkEntityIdSupplier networkEntityIdSupplier;
 
     @Getter
@@ -99,7 +97,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     }
 
     protected void enableAutoRegistry(CreativeTabs tab) {
-        this.registryManager = new RegistryManager(tab).enableAutoRegistration();
+        this.registryManager = new RegistryManager(tab).create();
 
         this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modID, s -> new NetworkEntityIdSupplier());
         this.registryManager.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
@@ -123,15 +121,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
         }
 
         return this.packetService;
-    }
-
-    protected ITileDataService enableNetworkTileDataService(IPacketService packetService) {
-
-        if (this.tileDataService == null) {
-            this.tileDataService = TileDataServiceContainer.register(ModUtils.getID(this.name), packetService);
-        }
-
-        return this.tileDataService;
     }
 
     // ===== FML Lifecycle ======================================================================================================================== //
@@ -171,12 +160,14 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
     // ===== Registration ========================================================================================================================= //
 
+    protected void onNetworkRegister() {}
+
+    protected void onNewRegister() {}
+
     protected void onRegister() {}
 
     @SideOnly(Side.CLIENT)
     protected void onClientRegister() {}
-
-    protected void onNetworkRegister() {}
 
     /**
      * What other modules this module depends on.

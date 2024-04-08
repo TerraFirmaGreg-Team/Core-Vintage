@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.gui;
+package su.terrafirmagreg.api.spi.gui;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;

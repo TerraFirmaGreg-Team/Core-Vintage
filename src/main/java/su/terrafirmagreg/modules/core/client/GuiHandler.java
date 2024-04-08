@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.client;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

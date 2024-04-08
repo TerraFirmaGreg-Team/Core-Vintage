@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiQuern;
 import su.terrafirmagreg.modules.device.data.ItemsDevice;
@@ -20,6 +20,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
 
 import lombok.Getter;
 import net.dries007.tfc.api.capability.food.CapabilityFood;

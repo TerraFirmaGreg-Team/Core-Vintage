@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.data.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
@@ -38,6 +38,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
 
 import lombok.Getter;
 import net.dries007.tfc.objects.blocks.BlocksTFC;

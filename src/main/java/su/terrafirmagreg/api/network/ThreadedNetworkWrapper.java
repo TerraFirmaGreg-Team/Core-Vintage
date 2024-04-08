@@ -18,7 +18,6 @@ public class ThreadedNetworkWrapper {
     private final SimpleNetworkWrapper parent;
 
     public ThreadedNetworkWrapper(String channelName) {
-
         this.parent = new SimpleNetworkWrapper(channelName);
     }
 
@@ -52,12 +51,7 @@ public class ThreadedNetworkWrapper {
             Side side
     ) {
 
-        this.parent.registerMessage(
-                (Wrapper<Q, A>) new Wrapper(messageHandler),
-                requestMessageType,
-                discriminator,
-                side
-        );
+        this.parent.registerMessage((Wrapper<Q, A>) new Wrapper(messageHandler), requestMessageType, discriminator, side);
     }
 
     public Packet<?> getPacketFrom(IMessage message) {

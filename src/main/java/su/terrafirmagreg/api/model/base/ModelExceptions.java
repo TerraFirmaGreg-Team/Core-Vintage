@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.model.block;
+package su.terrafirmagreg.api.model.base;
 
 class QuadBuilderException extends RuntimeException {
 

@@ -1,12 +1,13 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockDoorBase;
+import su.terrafirmagreg.api.spi.block.BlockBaseDoor;
 
 import net.minecraft.block.material.Material;
 
+
 import org.jetbrains.annotations.NotNull;
 
-public class BlockCellarDoor extends BlockDoorBase {
+public class BlockCellarDoor extends BlockBaseDoor {
 
     public BlockCellarDoor() {
         super(Material.WOOD);

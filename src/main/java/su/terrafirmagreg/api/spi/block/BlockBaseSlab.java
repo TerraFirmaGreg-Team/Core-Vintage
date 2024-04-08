@@ -20,12 +20,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public abstract class BlockSlabBase extends BlockSlab implements IAutoReg, ICustomStateMapper {
+public abstract class BlockBaseSlab extends BlockSlab implements IAutoReg, ICustomStateMapper {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
@@ -33,7 +34,7 @@ public abstract class BlockSlabBase extends BlockSlab implements IAutoReg, ICust
     protected BlockSlab halfSlab;
     protected BlockSlab doubleSlab;
 
-    public BlockSlabBase(Material material) {
+    public BlockBaseSlab(Material material) {
         super(material);
 
         this.useNeighborBrightness = true;
@@ -69,8 +70,7 @@ public abstract class BlockSlabBase extends BlockSlab implements IAutoReg, ICust
         IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
 
         if (!this.isDouble()) {
-            iblockstate = iblockstate.withProperty(BlockSlab.HALF,
-                    (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
+            iblockstate = iblockstate.withProperty(BlockSlab.HALF, (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
         }
 
         return iblockstate;

@@ -11,7 +11,6 @@ public class PacketRegistry implements IPacketRegistry {
     private int id = 0;
 
     public PacketRegistry(ThreadedNetworkWrapper threadedNetworkWrapper) {
-
         this.threadedNetworkWrapper = threadedNetworkWrapper;
     }
 
@@ -38,7 +37,6 @@ public class PacketRegistry implements IPacketRegistry {
     }
 
     private int nextId() {
-
         return this.id++;
     }
 

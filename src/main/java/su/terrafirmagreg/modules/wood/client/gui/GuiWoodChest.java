@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.gui;
 
-import su.terrafirmagreg.api.gui.GuiContainerBase;
+import su.terrafirmagreg.api.spi.gui.GuiContainerBase;
 import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodChest;
 
 import net.minecraft.client.renderer.GlStateManager;

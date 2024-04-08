@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.model.block;
+package su.terrafirmagreg.api.model.base;
 
 import su.terrafirmagreg.api.util.ModelUtils;
 
@@ -9,6 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
+
 
 import java.util.Optional;
 

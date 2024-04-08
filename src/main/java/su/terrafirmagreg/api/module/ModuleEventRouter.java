@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,28 +53,28 @@ public class ModuleEventRouter {
                             module.getLogger().info("Construction start");
                             module.onConstruction(event);
                             module.getLogger().info("Construction complete");
+
+                            module.getLogger().info("Registering packets");
+                            module.onNetworkRegister();
                         })
         );
         this.routes.put(FMLPreInitializationEvent.class,
                 (IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
                         this.fireEvent(module -> {
-                            module.getLogger().info("Registering packets");
-                            module.onNetworkRegister();
-
-                            module.getLogger().info("Registering");
-                            module.onRegister();
-
                             module.getLogger().info("Pre-Init start");
                             module.onPreInit(event);
                             module.getLogger().info("Pre-Init complete");
 
-                            if (event.getSide().isClient()) {
-                                module.getLogger().info("Client Registering");
-                                module.onClientRegister();
+                            module.getLogger().info("Registering");
+                            module.onRegister();
 
+                            if (event.getSide().isClient()) {
                                 module.getLogger().info("Client Pre-Init start");
                                 module.onClientPreInit(event);
                                 module.getLogger().info("Client Pre-Init complete");
+
+                                module.getLogger().info("Client Registering");
+                                module.onClientRegister();
                             }
                         })
         );
@@ -158,6 +159,16 @@ public class ModuleEventRouter {
     // --------------------------------------------------------------------------
     // - Registration Events
     // --------------------------------------------------------------------------
+
+    @SubscribeEvent
+    @SuppressWarnings("unused")
+    protected void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
+        this.fireEvent(module -> {
+            module.getLogger().info("Register NewRegistryEvent start");
+            module.onNewRegister();
+            module.getLogger().info("Register NewRegistryEvent complete");
+        });
+    }
 
     @SubscribeEvent
     @SuppressWarnings("unused")

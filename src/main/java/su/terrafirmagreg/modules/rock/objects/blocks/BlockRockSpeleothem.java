@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-
 public class BlockRockSpeleothem extends BlockRock {
 
     public static final PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);

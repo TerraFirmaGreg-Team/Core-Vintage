@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.spi.itemblock;
 
-import su.terrafirmagreg.api.spi.block.BlockDoorBase;
+import su.terrafirmagreg.api.spi.block.BlockBaseDoor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -15,6 +15,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemBlockDoor extends ItemBlockBase {
 
-    public ItemBlockDoor(BlockDoorBase blockDoor) {
+    public ItemBlockDoor(BlockBaseDoor blockDoor) {
         super(blockDoor);
 
     }

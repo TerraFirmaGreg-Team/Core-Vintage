@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.BlockDoorBase;
+import su.terrafirmagreg.api.spi.block.BlockBaseDoor;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -15,10 +15,11 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import lombok.Getter;
 
 @Getter
-public class BlockWoodDoor extends BlockDoorBase implements IWoodBlock {
+public class BlockWoodDoor extends BlockBaseDoor implements IWoodBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;

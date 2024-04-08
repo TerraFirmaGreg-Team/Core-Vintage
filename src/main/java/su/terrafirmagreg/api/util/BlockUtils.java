@@ -22,7 +22,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.oredict.OreDictionary;
 
-import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -186,7 +188,7 @@ public final class BlockUtils {
      * @param checkName Whether or not the name of the ItemStack should be checked.
      * @return Whether or not the ItemStack is an ore.
      */
-    public static boolean isOre(@Nonnull ItemStack stack, boolean checkName) {
+    public static boolean isOre(@NotNull ItemStack stack, boolean checkName) {
 
         if (Block.getBlockFromItem(stack.getItem()) instanceof BlockOre) {
             return true;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockSlabBase;
+import su.terrafirmagreg.api.spi.block.BlockBaseSlab;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.Random;
 
 @Getter
-public abstract class BlockRockSlab extends BlockSlabBase implements IRockBlock {
+public abstract class BlockRockSlab extends BlockBaseSlab implements IRockBlock {
 
     private final RockBlockVariant blockVariant;
     private final RockType type;

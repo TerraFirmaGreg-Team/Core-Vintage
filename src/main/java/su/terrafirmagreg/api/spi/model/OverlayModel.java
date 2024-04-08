@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.spi.model;
 
-import su.terrafirmagreg.api.model.block.ModelBaker;
-import su.terrafirmagreg.api.model.block.MultiTextureAtlasSprite;
-import su.terrafirmagreg.api.model.block.TextureEventHandler;
+import su.terrafirmagreg.api.model.base.ModelBaker;
+import su.terrafirmagreg.api.model.base.MultiTextureAtlasSprite;
+import su.terrafirmagreg.api.model.base.TextureEventHandler;
 
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.model.IModelState;
+
 
 import org.jetbrains.annotations.NotNull;
 

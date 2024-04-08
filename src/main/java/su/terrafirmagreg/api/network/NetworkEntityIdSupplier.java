@@ -5,7 +5,6 @@ public class NetworkEntityIdSupplier {
     private int nextId;
 
     public int get() {
-
         return this.nextId;
     }
 

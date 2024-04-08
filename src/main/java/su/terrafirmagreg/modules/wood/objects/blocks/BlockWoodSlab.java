@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.BlockSlabBase;
+import su.terrafirmagreg.api.spi.block.BlockBaseSlab;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -22,6 +22,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 @Getter
-public abstract class BlockWoodSlab extends BlockSlabBase implements IWoodBlock {
+public abstract class BlockWoodSlab extends BlockBaseSlab implements IWoodBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;

@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
+
 import static net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class PacketService implements IPacketService {
@@ -19,7 +20,6 @@ public class PacketService implements IPacketService {
 
     public PacketService(ThreadedNetworkWrapper threadedNetworkWrapper) {
         this.threadedNetworkWrapper = threadedNetworkWrapper;
-
     }
 
     @Override

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.gui;
+package su.terrafirmagreg.api.spi.gui;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 import org.jetbrains.annotations.NotNull;
 

@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.device;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.network.tile.ITileDataService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.device.data.BlocksDevice;
 import su.terrafirmagreg.modules.device.data.EntitiesDevice;
@@ -14,6 +13,7 @@ import su.terrafirmagreg.modules.device.data.SoundDevice;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,15 +27,12 @@ public final class ModuleDevice extends ModuleBase {
     public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/firestarter");
 
     public static IPacketService PACKET_SERVICE;
-    public static ITileDataService TILE_DATA_SERVICE;
 
     public ModuleDevice() {
         super(5);
         this.enableAutoRegistry(DEVICES_TAB);
 
         PACKET_SERVICE = this.enableNetwork();
-        TILE_DATA_SERVICE = this.enableNetworkTileDataService(PACKET_SERVICE);
-
     }
 
     @Override

@@ -1,12 +1,11 @@
 package net.dries007.tfc.types;
 
 import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
-import su.terrafirmagreg.modules.core.data.BlocksCore;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
-import su.terrafirmagreg.modules.rock.data.BlocksRock;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,13 +21,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipeMeasurable;
@@ -881,23 +880,6 @@ public final class DefaultRecipes {
 
         // Special Recipes
         addWelding(r, KNIFE_BLADE, KNIFE_BLADE, SHEARS, true, TOOLS);
-    }
-
-    @SubscribeEvent
-    public static void onRegisterLoomRecipeEvent(RegistryEvent.Register<LoomRecipe> event) {
-        IForgeRegistry<LoomRecipe> r = event.getRegistry();
-
-        r.registerAll(
-                new LoomRecipe(new ResourceLocation(MODID_TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12),
-                        new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(MODID_TFC, "textures/blocks/devices/loom/product/burlap.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_cloth"), IIngredient.of(ItemsAnimal.WOOL_YARN, 16),
-                        new ItemStack(ItemsAnimal.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsAnimal.SILK_CLOTH),
-                        24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-
-                new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_block"), IIngredient.of(ItemsAnimal.WOOL_CLOTH, 4),
-                        new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
-        );
     }
 
     @SubscribeEvent

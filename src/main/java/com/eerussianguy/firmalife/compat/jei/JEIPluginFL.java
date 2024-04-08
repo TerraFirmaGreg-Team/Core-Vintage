@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.compat.jei;
 
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

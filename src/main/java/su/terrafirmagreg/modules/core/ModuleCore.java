@@ -6,10 +6,10 @@ import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
-import su.terrafirmagreg.modules.core.data.BlocksCore;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-import su.terrafirmagreg.modules.core.data.LootTablesCore;
-import su.terrafirmagreg.modules.core.data.PotionsCore;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.core.init.LootTablesCore;
+import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

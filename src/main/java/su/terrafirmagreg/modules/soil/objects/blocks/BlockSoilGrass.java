@@ -10,7 +10,7 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;

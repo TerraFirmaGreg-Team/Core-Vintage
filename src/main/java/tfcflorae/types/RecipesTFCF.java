@@ -1,7 +1,6 @@
 package tfcflorae.types;
 
-import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,6 +18,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
+
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.init.FoodFL;
@@ -29,7 +29,6 @@ import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeTemperature;
@@ -1695,33 +1694,6 @@ public final class RecipesTFCF {
                             .setRegistryName("burned_sunflower_head")
             );
         }
-    }
-
-    @SubscribeEvent
-    public static void onRegisterLoomRecipeEvent(RegistryEvent.Register<LoomRecipe> event) {
-        IForgeRegistry<LoomRecipe> r = event.getRegistry();
-
-        r.registerAll(
-
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "yucca_canvas"), IIngredient.of(ItemsTFCF.YUCCA_STRING, 12),
-                        new ItemStack(ItemsTFCF.YUCCA_CANVAS), 12,
-                        new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/yucca.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "cotton_cloth"), IIngredient.of(ItemsTFCF.COTTON_YARN, 12),
-                        new ItemStack(ItemsTFCF.COTTON_CLOTH), 12,
-                        new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/cotton.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "hemp_cloth"), IIngredient.of(ItemsTFCF.HEMP_STRING, 12),
-                        new ItemStack(ItemsTFCF.HEMP_CLOTH), 12, new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/hemp.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "linen_cloth"), IIngredient.of(ItemsTFCF.LINEN_STRING, 12),
-                        new ItemStack(ItemsTFCF.LINEN_CLOTH), 12, new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/linen.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "sisal_cloth"), IIngredient.of(ItemsTFCF.SISAL_STRING, 12),
-                        new ItemStack(ItemsTFCF.SISAL_CLOTH), 12, new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/sisal.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "wool_block_cotton"), IIngredient.of(ItemsTFCF.COTTON_CLOTH, 4),
-                        new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "wool_block_linen"), IIngredient.of(ItemsTFCF.LINEN_CLOTH, 4),
-                        new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-                new LoomRecipe(new ResourceLocation(MODID_TFCF, "wool_block_silk"), IIngredient.of(ItemsAnimal.SILK_CLOTH, 4),
-                        new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
-        );
     }
 
     @SubscribeEvent

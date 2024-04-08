@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.Block;
 

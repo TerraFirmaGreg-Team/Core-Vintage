@@ -1,7 +1,7 @@
 package tfctech;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;

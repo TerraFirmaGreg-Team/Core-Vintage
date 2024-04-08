@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.modules.core.data.BlocksCore;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;

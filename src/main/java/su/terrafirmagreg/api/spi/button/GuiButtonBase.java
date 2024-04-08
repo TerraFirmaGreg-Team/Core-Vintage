@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiButtonBase extends GuiButton {
+public abstract class GuiButtonBase extends GuiButton {
 
     public GuiButtonBase(int buttonId, int x, int y, String buttonText) {
         super(buttonId, x, y, buttonText);

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.fluids;
 
-import su.terrafirmagreg.modules.core.data.PotionsCore;
+import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;

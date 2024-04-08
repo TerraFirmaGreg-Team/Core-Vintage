@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

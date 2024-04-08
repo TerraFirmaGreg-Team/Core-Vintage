@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.te;
 
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

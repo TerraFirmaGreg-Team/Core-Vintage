@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;
 import su.terrafirmagreg.modules.device.objects.container.ContainerBlastFurnace;

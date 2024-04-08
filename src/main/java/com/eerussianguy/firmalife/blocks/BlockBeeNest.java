@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.blocks;
 
-import su.terrafirmagreg.modules.core.data.PotionsCore;
+import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

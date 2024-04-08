@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiLogPile;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockLogPile;
 import su.terrafirmagreg.modules.device.objects.container.ContainerLogPile;

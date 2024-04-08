@@ -20,8 +20,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -44,8 +42,6 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 
 import com.google.common.collect.HashMultimap;
@@ -121,11 +117,6 @@ public class RegistryManager {
      * A list of all the tile providers registered here.
      */
     private final List<ITEBlock> tileProviders = NonNullList.create();
-
-    /**
-     * A list of all recipes registered.
-     */
-    private final List<IRecipe> recipes = NonNullList.create();
 
     /**
      * A list of all enchantments registered.
@@ -464,56 +455,6 @@ public class RegistryManager {
     //endregion
 
     //region // ===== Villager Profession ==========================================================================================================//
-
-    //endregion
-
-    //region // ===== Recipe =======================================================================================================================//
-
-    /**
-     * Adds a shaped recipe to the game.
-     *
-     * @param name   The name of the recipe.
-     * @param output The output for the recipe.
-     * @param inputs The inputs. Pattern, then char followed by what it represents.
-     * @return The recipe registered.
-     */
-    public IRecipe addShapedRecipe(String name, ItemStack output, Object... inputs) {
-
-        return this.registerRecipe(name, new ShapedOreRecipe(null, output, inputs));
-    }
-
-    /**
-     * Adds a shapeless recipe to the game.
-     *
-     * @param name   The name of the recipe.
-     * @param output The output of the recipe.
-     * @param inputs The inputs for the recipe.
-     * @return The recipe registered.
-     */
-    public IRecipe addShapelessRecipe(String name, ItemStack output, Object... inputs) {
-
-        return this.registerRecipe(name, new ShapelessOreRecipe(null, output, inputs));
-    }
-
-    /**
-     * Adds a recipe to the game.
-     *
-     * @param name   The name of the recipe.
-     * @param recipe The recipe object.
-     * @return The registered registry object.
-     */
-    public IRecipe registerRecipe(String name, IRecipe recipe) {
-
-        recipe.setRegistryName(new ResourceLocation(this.modID, name));
-        this.recipes.add(recipe);
-        return recipe;
-    }
-
-    public IRecipe registerRecipe(IRecipe recipe) {
-
-        this.recipes.add(recipe);
-        return recipe;
-    }
 
     //endregion
 

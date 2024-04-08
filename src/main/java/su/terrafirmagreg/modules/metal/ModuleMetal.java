@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.metal;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.metal.data.BlocksMetal;
-import su.terrafirmagreg.modules.metal.data.ItemsMetal;
+import su.terrafirmagreg.modules.metal.init.BlocksMetal;
+import su.terrafirmagreg.modules.metal.init.ItemsMetal;
 
 import net.minecraft.creativetab.CreativeTabs;
 

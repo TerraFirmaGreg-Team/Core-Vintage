@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.event;
 
 import su.terrafirmagreg.modules.wood.ModuleWood;
-import su.terrafirmagreg.modules.wood.data.KeybindingsWood;
+import su.terrafirmagreg.modules.wood.init.KeybindingsWood;
 import su.terrafirmagreg.modules.wood.network.CSPacketActionKey;
 import su.terrafirmagreg.modules.wood.network.CSPacketOpenCartGui;
 import su.terrafirmagreg.modules.wood.network.CSPacketToggleSlow;

@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiQuern;
-import su.terrafirmagreg.modules.device.data.ItemsDevice;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerQuern;
 
 import net.minecraft.block.state.IBlockState;

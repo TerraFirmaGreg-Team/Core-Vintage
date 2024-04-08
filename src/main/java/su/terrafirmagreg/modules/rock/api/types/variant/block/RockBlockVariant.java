@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.data.BlocksRock;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

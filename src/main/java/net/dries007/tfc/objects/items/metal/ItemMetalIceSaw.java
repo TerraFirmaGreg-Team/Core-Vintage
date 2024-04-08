@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

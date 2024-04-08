@@ -32,6 +32,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.File;
 import java.util.Collections;
@@ -72,6 +73,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     @Getter
     private Registry registry;
     @Getter
+    @Setter
     private File configurationDirectory;
 
     protected ModuleBase() {
@@ -86,10 +88,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
         this.priority = priority;
         this.modID = modID;
         this.name = this.getClass().getSimpleName();
-    }
-
-    protected void setConfigurationDirectory(File file) {
-        this.configurationDirectory = file;
     }
 
     protected void enableAutoRegistry() {
@@ -146,7 +144,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     @SideOnly(Side.CLIENT)
     protected void onClientPostInit(FMLPostInitializationEvent event) {}
 
-    // ===== FML Lifecycle: Server =============================================================================================================== //
+    // ===== FML Lifecycle: Server ================================================================================================================ //
 
     protected void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
 
@@ -168,6 +166,10 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
     @SideOnly(Side.CLIENT)
     protected void onClientRegister() {}
+
+    protected void onRecipesRegister() {}
+
+    // ===== Other ================================================================================================================================ //
 
     /**
      * What other modules this module depends on.

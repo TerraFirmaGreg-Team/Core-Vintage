@@ -1,6 +1,6 @@
 package com.lumintorious.ambiental.modifiers;
 
-import su.terrafirmagreg.modules.core.data.PotionsCore;
+import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

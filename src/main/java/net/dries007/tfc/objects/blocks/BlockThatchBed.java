@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.modules.core.data.BlocksCore;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;

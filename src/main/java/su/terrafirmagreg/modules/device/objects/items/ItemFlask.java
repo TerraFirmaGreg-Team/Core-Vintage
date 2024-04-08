@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
-import su.terrafirmagreg.modules.device.data.ItemsDevice;
-import su.terrafirmagreg.modules.device.data.SoundDevice;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.device.init.SoundDevice;
 
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

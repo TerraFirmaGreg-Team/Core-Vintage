@@ -7,12 +7,13 @@ import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;
-import su.terrafirmagreg.modules.wood.data.BlocksWood;
-import su.terrafirmagreg.modules.wood.data.EntitiesWood;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
-import su.terrafirmagreg.modules.wood.data.KeybindingsWood;
-import su.terrafirmagreg.modules.wood.data.PacketWood;
-import su.terrafirmagreg.modules.wood.data.RegistryWood;
+import su.terrafirmagreg.modules.wood.init.BlocksWood;
+import su.terrafirmagreg.modules.wood.init.EntitiesWood;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.init.KeybindingsWood;
+import su.terrafirmagreg.modules.wood.init.PacketWood;
+import su.terrafirmagreg.modules.wood.init.RegistryWood;
+import su.terrafirmagreg.modules.wood.init.recipes.LoomRecipes;
 import su.terrafirmagreg.modules.wood.event.EntityJoinWorldEventHandler;
 import su.terrafirmagreg.modules.wood.event.KeyEventHandler;
 import su.terrafirmagreg.modules.wood.event.MissingMappingEventHandler;
@@ -58,6 +59,12 @@ public final class ModuleWood extends ModuleBase {
     }
 
     @Override
+    protected void onRecipesRegister() {
+        LoomRecipes.onRegister();
+
+    }
+
+    @Override
     public void onRegister() {
         WoodTypeHandler.init();
         WoodBlockVariantHandler.init();
@@ -67,7 +74,6 @@ public final class ModuleWood extends ModuleBase {
         ItemsWood.onRegister(registryManager);
         EntitiesWood.onRegister(registryManager);
 
-        //LoomRecipes.onRegister(registryManager);
     }
 
     @Override

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.rock.data.BlocksRock;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.item.EnumDyeColor;

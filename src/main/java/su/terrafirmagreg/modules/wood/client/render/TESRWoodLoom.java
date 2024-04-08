@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +35,6 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
 
             ColourUtils.setColor(woodColor);
             bindTexture(ModUtils.getID("textures/blocks/wood/planks.png"));
-            ColourUtils.clearColor();
 
             GlStateManager.disableLighting();
 
@@ -63,6 +63,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
             try {
                 GlStateManager.pushMatrix();
 
+                ColourUtils.clearColor();
                 this.bindTexture(te.getInProgressTexture());
 
                 GlStateManager.disableLighting();

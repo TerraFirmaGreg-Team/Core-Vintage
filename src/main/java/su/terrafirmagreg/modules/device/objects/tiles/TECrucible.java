@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
 
 import net.minecraft.block.state.IBlockState;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
 import su.terrafirmagreg.api.spi.effects.PotionBase;
-import su.terrafirmagreg.modules.core.data.PotionsCore;
+import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.entity.EntityLivingBase;
 

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.tile.TEBase;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.device.data.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 

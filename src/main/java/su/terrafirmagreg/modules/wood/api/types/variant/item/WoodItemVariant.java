@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.item.Item;
 

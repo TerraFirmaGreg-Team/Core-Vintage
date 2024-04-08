@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCellarDoor;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCellarShelf;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCellarWall;

@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.data.BlocksCore;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

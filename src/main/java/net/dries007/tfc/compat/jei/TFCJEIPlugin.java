@@ -3,7 +3,7 @@ package net.dries007.tfc.compat.jei;
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 
@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -81,6 +82,10 @@ import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
+
+
+import su.terrafirmagreg.modules.wood.init.RegistryWood;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -189,7 +194,7 @@ public final class TFCJEIPlugin implements IModPlugin {
         registry.addRecipes(weldList, WELDING_UID);
 
         //Wraps all loom recipes
-        List<SimpleRecipeWrapper> loomRecipes = TFCRegistries.LOOM.getValuesCollection()
+        List<SimpleRecipeWrapper> loomRecipes = RegistryWood.LOOM.getValuesCollection()
                 .stream()
                 .map(SimpleRecipeWrapper::new)
                 .collect(Collectors.toList());

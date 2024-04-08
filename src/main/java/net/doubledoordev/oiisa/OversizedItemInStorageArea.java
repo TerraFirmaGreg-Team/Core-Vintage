@@ -1,7 +1,7 @@
 package net.doubledoordev.oiisa;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;

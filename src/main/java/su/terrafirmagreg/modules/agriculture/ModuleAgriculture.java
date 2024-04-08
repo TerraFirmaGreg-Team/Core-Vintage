@@ -2,10 +2,11 @@ package su.terrafirmagreg.modules.agriculture;
 
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.agriculture.data.BlocksAgriculture;
-import su.terrafirmagreg.modules.agriculture.data.ItemsAgriculture;
+import su.terrafirmagreg.modules.agriculture.init.BlocksAgriculture;
+import su.terrafirmagreg.modules.agriculture.init.ItemsAgriculture;
 
 import net.minecraft.creativetab.CreativeTabs;
+
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

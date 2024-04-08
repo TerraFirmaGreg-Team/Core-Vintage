@@ -1,6 +1,6 @@
 package tfcflorae.util;
 
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Items;
 

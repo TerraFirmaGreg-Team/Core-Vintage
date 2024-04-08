@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.api.recipes;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.data.RegistryWood;
+import su.terrafirmagreg.modules.wood.init.RegistryWood;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -26,7 +26,7 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
     private final ResourceLocation inProgressTexture;
 
     protected LoomRecipe(Builder builder) {
-        setRegistryName(ModUtils.getID(builder.name));
+
         this.inputItem = builder.inputStack;
         this.outputItem = builder.outputStack;
         this.stepCount = builder.stepCount;
@@ -40,7 +40,7 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
             throw new RuntimeException(String.format("LoomRecipe name must contain any character: [%s]", builder.name));
         }
 
-        //        RegistryWood.LOOM.register(this);
+        RegistryWood.LOOM.register(this.setRegistryName(ModUtils.getID(builder.name)));
 
     }
 

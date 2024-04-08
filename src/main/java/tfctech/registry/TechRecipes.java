@@ -1,7 +1,7 @@
 package tfctech.registry;
 
 import su.terrafirmagreg.api.lib.Constants;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

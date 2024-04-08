@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.event;
 
-import su.terrafirmagreg.modules.device.data.ItemsDevice;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

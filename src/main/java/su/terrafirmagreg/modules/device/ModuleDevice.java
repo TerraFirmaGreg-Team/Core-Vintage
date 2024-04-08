@@ -4,11 +4,11 @@ import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
-import su.terrafirmagreg.modules.device.data.EntitiesDevice;
-import su.terrafirmagreg.modules.device.data.ItemsDevice;
-import su.terrafirmagreg.modules.device.data.PacketDevice;
-import su.terrafirmagreg.modules.device.data.SoundDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.EntitiesDevice;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.device.init.PacketDevice;
+import su.terrafirmagreg.modules.device.init.SoundDevice;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.relauncher.Side;

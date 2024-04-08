@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.fuel;
 
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.item.ItemStack;
 

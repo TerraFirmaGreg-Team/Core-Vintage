@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.data.ItemsSoil;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.item.Item;
 

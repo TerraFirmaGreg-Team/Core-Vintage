@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.registry;
 
-import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+
 
 import com.eerussianguy.firmalife.blocks.BlockBeeNest;
 import com.eerussianguy.firmalife.blocks.BlockBeehive;

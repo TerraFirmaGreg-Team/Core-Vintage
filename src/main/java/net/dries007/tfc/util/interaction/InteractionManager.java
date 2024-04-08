@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.interaction;
 
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 
 import net.minecraft.block.state.IBlockState;

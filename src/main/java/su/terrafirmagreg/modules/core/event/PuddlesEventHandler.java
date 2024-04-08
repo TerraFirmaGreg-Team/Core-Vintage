@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.event;
 
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
-import su.terrafirmagreg.modules.core.data.BlocksCore;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;

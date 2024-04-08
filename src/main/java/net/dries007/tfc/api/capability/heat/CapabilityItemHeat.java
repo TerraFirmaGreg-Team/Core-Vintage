@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.capability.heat;
 
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-import su.terrafirmagreg.modules.wood.data.ItemsWood;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

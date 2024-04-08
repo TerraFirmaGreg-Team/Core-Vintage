@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock.api.types.variant.item;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.data.ItemsRock;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.item.Item;
 

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
-import su.terrafirmagreg.modules.metal.data.ItemsMetal;
+import su.terrafirmagreg.modules.metal.init.ItemsMetal;
 
 import net.minecraft.item.Item;
 

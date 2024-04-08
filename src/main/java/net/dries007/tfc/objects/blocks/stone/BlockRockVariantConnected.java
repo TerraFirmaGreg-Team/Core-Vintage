@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.stone;
 
-import su.terrafirmagreg.modules.soil.data.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 
 import net.minecraft.block.Block;

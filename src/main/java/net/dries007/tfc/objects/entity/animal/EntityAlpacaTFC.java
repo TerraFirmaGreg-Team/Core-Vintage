@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.data.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -16,6 +16,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;

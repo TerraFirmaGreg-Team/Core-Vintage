@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife;
 
-import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
+
 
 import com.eerussianguy.firmalife.entity.CombatGreenhouseTask;
 import com.eerussianguy.firmalife.gui.FLGuiHandler;

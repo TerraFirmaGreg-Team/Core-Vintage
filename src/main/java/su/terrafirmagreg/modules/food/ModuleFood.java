@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.food;
 
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.food.data.BlocksFood;
-import su.terrafirmagreg.modules.food.data.ItemsFood;
+import su.terrafirmagreg.modules.food.init.BlocksFood;
+import su.terrafirmagreg.modules.food.init.ItemsFood;
 
 import net.minecraft.creativetab.CreativeTabs;
 

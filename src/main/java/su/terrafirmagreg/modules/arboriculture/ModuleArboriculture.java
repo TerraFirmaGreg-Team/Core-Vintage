@@ -2,10 +2,11 @@ package su.terrafirmagreg.modules.arboriculture;
 
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.arboriculture.data.BlocksArboriculture;
-import su.terrafirmagreg.modules.arboriculture.data.ItemsArboriculture;
+import su.terrafirmagreg.modules.arboriculture.init.BlocksArboriculture;
+import su.terrafirmagreg.modules.arboriculture.init.ItemsArboriculture;
 
 import net.minecraft.creativetab.CreativeTabs;
+
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

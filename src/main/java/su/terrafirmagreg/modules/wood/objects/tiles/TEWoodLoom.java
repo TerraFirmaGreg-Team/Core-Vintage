@@ -2,7 +2,9 @@ package su.terrafirmagreg.modules.wood.objects.tiles;
 
 import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.init.RegistryWood;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodLoom;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,13 +16,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
-import net.dries007.tfc.api.recipes.LoomRecipe;
-import net.dries007.tfc.api.registries.TFCRegistries;
+
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 public class TEWoodLoom extends TEBaseInventory implements ITickable {
 
@@ -53,7 +55,7 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
         super.readFromNBT(nbt);
         progress = nbt.getInteger("progress");
         lastPushed = nbt.getLong("lastPushed");
-        recipe = nbt.hasKey("recipe") ? TFCRegistries.LOOM.getValue(new ResourceLocation(nbt.getString("recipe"))) : null;
+        recipe = nbt.hasKey("recipe") ? RegistryWood.LOOM.getValue(new ResourceLocation(nbt.getString("recipe"))) : null;
     }
 
     @Override
@@ -106,7 +108,8 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
         } else {
             ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 
-            if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty() && LoomRecipe.get(heldItem) != null) {
+            if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty() &&
+                    su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe.get(heldItem) != null) {
                 inventory.setStackInSlot(0, heldItem.copy());
                 inventory.getStackInSlot(0).setCount(1);
                 heldItem.shrink(1);
@@ -115,9 +118,8 @@ public class TEWoodLoom extends TEBaseInventory implements ITickable {
                 markForBlockUpdate();
                 return true;
             } else if (!inventory.getStackInSlot(0).isEmpty()) {
-                if (IIngredient.of(inventory.getStackInSlot(0))
-                        .testIgnoreCount(heldItem) && recipe.getInputCount() > inventory.getStackInSlot(0)
-                        .getCount()) {
+                if (IIngredient.of(inventory.getStackInSlot(0)).testIgnoreCount(heldItem) &&
+                        recipe.getInputCount() > inventory.getStackInSlot(0).getCount()) {
                     heldItem.shrink(1);
                     inventory.getStackInSlot(0).grow(1);
 

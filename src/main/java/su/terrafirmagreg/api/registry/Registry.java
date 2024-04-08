@@ -11,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
@@ -27,6 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 import lombok.Getter;
 
@@ -97,12 +97,6 @@ public class Registry {
 
     public void onRegisterVillagerProfession(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
         // TODO: register villager profession event
-    }
-
-    public void onRegisterRecipes(RegistryEvent.Register<IRecipe> event) {
-        for (var recipe : this.registryManager.getRecipes()) {
-            event.getRegistry().register(recipe);
-        }
     }
 
     public void onRegisterTileEntities() {

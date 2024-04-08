@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.registry;
 
-import su.terrafirmagreg.modules.core.data.ItemsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;

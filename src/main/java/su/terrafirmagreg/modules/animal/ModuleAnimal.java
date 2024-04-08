@@ -3,11 +3,11 @@ package su.terrafirmagreg.modules.animal;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.modules.animal.data.BlocksAnimal;
-import su.terrafirmagreg.modules.animal.data.EntitiesAnimal;
-import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
-import su.terrafirmagreg.modules.animal.data.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
+import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
+import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

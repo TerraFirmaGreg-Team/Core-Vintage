@@ -1,19 +1,7 @@
 package tfcflorae.objects.blocks;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
-import hu.lebeg134.tfc_ph_compat.objects.items.ItemsTPC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Metal.ItemType;
-import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.items.ItemPowder;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -33,13 +21,25 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.jetbrains.annotations.NotNull;
 
-import su.terrafirmagreg.modules.animal.data.ItemsAnimal;
-import su.terrafirmagreg.modules.core.data.ItemsCore;
-
+import com.eerussianguy.firmalife.registry.ItemsFL;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
+import hu.lebeg134.tfc_ph_compat.objects.items.ItemsTPC;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Metal.ItemType;
+import net.dries007.tfc.objects.Powder;
+import net.dries007.tfc.objects.items.ItemPowder;
+import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.items.metal.ItemMetal;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.items.ItemsTFCF;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 

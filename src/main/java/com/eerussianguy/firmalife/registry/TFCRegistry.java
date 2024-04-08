@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
+
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.init.FoodFL;
@@ -20,7 +21,6 @@ import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.init.StemCrop;
 import com.eerussianguy.firmalife.recipe.KnappingRecipeFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
@@ -71,14 +71,6 @@ public class TFCRegistry {
     @SubscribeEvent
     public static void onPreRegisterPlant(TFCRegistryEvent.RegisterPreBlock<Plant> event) {
         event.getRegistry().registerAll(PlantsFL.WRAPPERS.toArray(new Plant[0]));
-    }
-
-    @SubscribeEvent
-    public static void onRegisterLoomRecipeEvent(RegistryEvent.Register<LoomRecipe> event) {
-        IForgeRegistry<LoomRecipe> r = event.getRegistry();
-
-        r.register(new LoomRecipe(new ResourceLocation(MODID_FL, "pineapple_yarn"), IIngredient.of(ItemsFL.PINEAPPLE_YARN, 8),
-                new ItemStack(ItemsFL.PINEAPPLE_LEATHER), 8, new ResourceLocation(MODID_FL, "textures/blocks/pineapple.png")));
     }
 
     @SubscribeEvent

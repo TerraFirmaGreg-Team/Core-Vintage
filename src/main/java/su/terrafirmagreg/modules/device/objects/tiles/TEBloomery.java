@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.data.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;

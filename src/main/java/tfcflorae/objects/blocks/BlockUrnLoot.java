@@ -25,7 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import hu.lebeg134.tfc_ph_compat.objects.items.ItemsTPC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -71,11 +70,11 @@ public class BlockUrnLoot extends Block implements IItemSize {
                     if (item.getRegistryName().getPath().contains("seeds/"))
                         buildSeeds.add(item);
             }
-            if (TFCFlorae.TFCPHCompatAdded) {
-                for (Item item : ItemsTPC.getAllSimpleItems())
-                    if (item.getRegistryName().getPath().contains("seeds/"))
-                        buildSeeds.add(item);
-            }
+            //            if (TFCFlorae.TFCPHCompatAdded) {
+            //                for (Item item : ItemsTPC.getAllSimpleItems())
+            //                    if (item.getRegistryName().getPath().contains("seeds/"))
+            //                        buildSeeds.add(item);
+            //            }
 
             seedsList = buildSeeds.build();
         }

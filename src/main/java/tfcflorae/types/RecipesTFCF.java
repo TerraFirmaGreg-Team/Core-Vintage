@@ -63,16 +63,9 @@ import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.agriculture.FruitTree;
 import net.dries007.tfc.util.calendar.ICalendar;
-import tfcelementia.objects.items.metal.ItemMetalTFCE;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
-import tfcflorae.compat.tfcelementia.ceramics.ItemEarthenwareMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemKaoliniteMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemStonewareMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemUnfiredEarthenwareMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemUnfiredKaoliniteMoldTFCE;
-import tfcflorae.compat.tfcelementia.ceramics.ItemUnfiredStonewareMoldTFCE;
 import tfcflorae.objects.PowderTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
@@ -2501,72 +2494,4 @@ public final class RecipesTFCF {
         );
     }
 
-    @SubscribeEvent
-    public static void onRegisterKnappingRecipeEventTFCE(RegistryEvent.Register<KnappingRecipe> event) {
-        if (TFCFlorae.TFCElementiaAdded) {
-            IForgeRegistry<KnappingRecipe> r = event.getRegistry();
-
-            for (ItemMetalTFCE.ItemType type : ItemMetalTFCE.ItemType.values()) {
-                if (!type.isTypeActive()) continue;
-                if (type.hasMold(null)) {
-                    int amount = type == ItemMetalTFCE.ItemType.NAIL || type == ItemMetalTFCE.ItemType.RING ? 2 : 1;
-                    event.getRegistry()
-                            .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true,
-                                    new ItemStack(ItemUnfiredEarthenwareMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
-                                    .name()
-                                    .toLowerCase() + "_earthenware_mold"));
-                    event.getRegistry()
-                            .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true,
-                                    new ItemStack(ItemUnfiredKaoliniteMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
-                                    .name()
-                                    .toLowerCase() + "_kaolinite_mold"));
-                    event.getRegistry()
-                            .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true,
-                                    new ItemStack(ItemUnfiredStonewareMoldTFCE.get(type), amount), type.getPattern()).setRegistryName(type
-                                    .name()
-                                    .toLowerCase() + "_stoneware_mold"));
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onRegisterHeatRecipeEventTFCE(RegistryEvent.Register<HeatRecipe> event) {
-        if (TFCFlorae.TFCElementiaAdded) {
-            IForgeRegistry<HeatRecipe> r = event.getRegistry();
-
-            // Molds
-            for (ItemMetalTFCE.ItemType type : ItemMetalTFCE.ItemType.values()) {
-                if (!type.isTypeActive()) continue;
-                ItemUnfiredEarthenwareMoldTFCE unfiredMoldEarthenware = ItemUnfiredEarthenwareMoldTFCE.get(type);
-                ItemEarthenwareMoldTFCE firedMoldEarthenware = ItemEarthenwareMoldTFCE.get(type);
-                if (unfiredMoldEarthenware != null && firedMoldEarthenware != null) {
-                    r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldEarthenware), new ItemStack(firedMoldEarthenware), 1599f,
-                            Metal.Tier.TIER_I).setRegistryName("fired_earthenware_mold_" + type
-                            .name()
-                            .toLowerCase()));
-                }
-
-                if (!type.isTypeActive()) continue;
-                ItemUnfiredKaoliniteMoldTFCE unfiredMoldKaolinite = ItemUnfiredKaoliniteMoldTFCE.get(type);
-                ItemKaoliniteMoldTFCE firedMoldKaolinite = ItemKaoliniteMoldTFCE.get(type);
-                if (unfiredMoldKaolinite != null && firedMoldKaolinite != null) {
-                    r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldKaolinite), new ItemStack(firedMoldKaolinite), 1599f,
-                            Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_mold_" + type
-                            .name()
-                            .toLowerCase()));
-                }
-
-                if (!type.isTypeActive()) continue;
-                ItemUnfiredStonewareMoldTFCE unfiredMoldStoneware = ItemUnfiredStonewareMoldTFCE.get(type);
-                ItemStonewareMoldTFCE firedMoldStoneware = ItemStonewareMoldTFCE.get(type);
-                if (unfiredMoldStoneware != null && firedMoldStoneware != null) {
-                    r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldStoneware), new ItemStack(firedMoldStoneware), 1599f,
-                            Metal.Tier.TIER_I).setRegistryName("fired_stoneware_mold_" + type
-                            .name()
-                            .toLowerCase()));
-                }
-            }
-        }
-    }
 }

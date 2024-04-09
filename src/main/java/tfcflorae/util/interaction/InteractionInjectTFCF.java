@@ -1,12 +1,5 @@
 package tfcflorae.util.interaction;
 
-import hu.lebeg134.tfc_ph_compat.util.agriculture.TPCrop;
-import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.util.agriculture.Crop;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,11 +9,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.jetbrains.annotations.NotNull;
 
+import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.util.agriculture.Crop;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import tfcflorae.util.agriculture.CropTFCF;
+
+import org.jetbrains.annotations.NotNull;
 
 public class InteractionInjectTFCF {
 
@@ -44,12 +43,12 @@ public class InteractionInjectTFCF {
                 for (CropTFCF crop : CropTFCF.values())
                     if (itemSeed == ItemSeedsTFC.get(crop))
                         seedCrop = crop;
-            if (TFCFlorae.TFCPHCompatAdded) {
-                if (seedCrop == null)
-                    for (TPCrop crop : TPCrop.values())
-                        if (itemSeed == ItemSeedsTFC.get(crop))
-                            seedCrop = crop;
-            }
+            //            if (TFCFlorae.TFCPHCompatAdded) {
+            //                if (seedCrop == null)
+            //                    for (TPCrop crop : TPCrop.values())
+            //                        if (itemSeed == ItemSeedsTFC.get(crop))
+            //                            seedCrop = crop;
+            //            }
 
             if (seedCrop == null) {
                 TFCFlorae.getLog().error("TFCFlorae: Couldn't find crop to place in TFCFlorae farmland");

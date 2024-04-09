@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
@@ -21,7 +22,7 @@ import net.dries007.tfc.util.skills.SkillTier;
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
-import tfcflorae.world.worldgen.WorldGenWildCropsTFCF;
+import net.dries007.tfc.world.classic.worldgen.WorldGenWildCropsTFCF;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

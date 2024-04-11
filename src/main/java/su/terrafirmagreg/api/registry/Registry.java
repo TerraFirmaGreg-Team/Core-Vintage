@@ -30,8 +30,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.module.ModuleManager.LOGGER;
-
 /**
  * This is used to automatically register things from the registry helper. The hope is that by registering the event while the owner is active, Forge
  * will shut up about harmless registry entries being dangerous.
@@ -135,8 +133,6 @@ public class Registry {
         for (var model : this.registryManager.getCustomModel()) model.onModelRegister();
 
         for (var item : this.registryManager.getCustomMeshes()) {
-
-            LOGGER.info("Registering custom mesh: {}", item);
             ModelUtils.registerCustomMeshDefinition(item, ((ICustomMesh) item).getCustomMesh());
         }
     }

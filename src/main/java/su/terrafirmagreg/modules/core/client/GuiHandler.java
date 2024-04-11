@@ -100,6 +100,7 @@ public class GuiHandler implements IGuiHandler {
         CELLAR_SHELF,
         ICE_BUNKER,
         FREEZE_DRYER,
+        POWDERKEG,
         NULL;
 
         private static final Type[] values = values();

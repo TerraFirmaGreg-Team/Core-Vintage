@@ -1,17 +1,21 @@
-package net.dries007.tfc.objects.container;
+package su.terrafirmagreg.modules.device.objects.container;
+
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
+import su.terrafirmagreg.api.spi.container.IButtonHandler;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockPowderKeg;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPowderKeg;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.blocks.BlockPowderKeg;
+
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEPowderKeg;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerPowderKeg extends ContainerTE<TEPowderKeg> implements IButtonHandler {
+public class ContainerPowderKeg extends ContainerBaseTE<TEPowderKeg> implements IButtonHandler {
 
     public ContainerPowderKeg(InventoryPlayer playerInv, TEPowderKeg tile) {
         super(playerInv, tile);

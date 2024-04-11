@@ -22,7 +22,6 @@ import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiLargeVessel;
 import net.dries007.tfc.client.gui.GuiLiquidTransfer;
 import net.dries007.tfc.client.gui.GuiNutrition;
-import net.dries007.tfc.client.gui.GuiPowderkeg;
 import net.dries007.tfc.client.gui.GuiSalad;
 import net.dries007.tfc.client.gui.GuiSkills;
 import net.dries007.tfc.objects.container.ContainerAnvilPlan;
@@ -31,7 +30,6 @@ import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.objects.container.ContainerLargeVessel;
 import net.dries007.tfc.objects.container.ContainerLiquidTransfer;
-import net.dries007.tfc.objects.container.ContainerPowderKeg;
 import net.dries007.tfc.objects.container.ContainerQuiver;
 import net.dries007.tfc.objects.container.ContainerSalad;
 import net.dries007.tfc.objects.container.ContainerSimple;
@@ -42,7 +40,6 @@ import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TELargeVessel;
-import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -97,7 +94,6 @@ public class TFCGuiHandler implements IGuiHandler {
             case KNAPPING_FIRE_CLAY -> new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
                     OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
             case LARGE_VESSEL -> new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
-            case POWDERKEG -> new ContainerPowderKeg(player.inventory, Helpers.getTE(world, pos, TEPowderKeg.class));
             case CALENDAR, SKILLS, NUTRITION -> new ContainerSimple(player.inventory);
             case CRAFTING -> new ContainerInventoryCrafting(player.inventory, player.world);
             case QUIVER -> new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
@@ -137,11 +133,6 @@ public class TFCGuiHandler implements IGuiHandler {
                 return new GuiKnapping(container, player, KnappingType.FIRE_CLAY, FIRE_CLAY_TEXTURE);
             case LARGE_VESSEL:
                 return new GuiLargeVessel(container, player.inventory, Helpers.getTE(world, pos, TELargeVessel.class), world
-                        .getBlockState(new BlockPos(x, y, z))
-                        .getBlock()
-                        .getTranslationKey());
-            case POWDERKEG:
-                return new GuiPowderkeg(container, player.inventory, Helpers.getTE(world, pos, TEPowderKeg.class), world
                         .getBlockState(new BlockPos(x, y, z))
                         .getBlock()
                         .getTranslationKey());

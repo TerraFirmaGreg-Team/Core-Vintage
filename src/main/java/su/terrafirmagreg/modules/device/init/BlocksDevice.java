@@ -22,8 +22,10 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockLogPile;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockNestBox;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPitKiln;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockSnare;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockThatchBed;
 
 public final class BlocksDevice {
 
@@ -50,6 +52,8 @@ public final class BlocksDevice {
     public static BlockInfectedAir INFECTED_AIR;
     public static BlockFreezeDryer FREEZE_DRYER;
     public static BlockNestBox NEST_BOX;
+    public static BlockPowderKeg POWDERKEG;
+    public static BlockThatchBed THATCH_BED;
 
     public static void onRegister(RegistryManager registry) {
         //==== Other =================================================================================================//
@@ -77,6 +81,8 @@ public final class BlocksDevice {
         INFECTED_AIR = registry.registerBlock(new BlockInfectedAir());
         FREEZE_DRYER = registry.registerBlock(new BlockFreezeDryer());
         NEST_BOX = registry.registerBlock(new BlockNestBox());
+        POWDERKEG = registry.registerBlock(new BlockPowderKeg());
+        THATCH_BED = registry.registerBlock(new BlockThatchBed());
     }
 
 }

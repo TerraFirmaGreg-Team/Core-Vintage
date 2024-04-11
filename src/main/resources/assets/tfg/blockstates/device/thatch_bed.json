@@ -1,0 +1,50 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/thatch_bed/part",
+    "textures": {
+      "thatch": "tfg:blocks/core/thatch",
+      "particle": "tfg:blocks/core/thatch"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {
+        "model": "tfg:device/thatch_bed/inventory"
+      }
+    ],
+    "part": {
+      "head": {
+        "textures": {
+          "side": "tfg:blocks/device/thatch_bed/head/side",
+          "end": "tfg:blocks/device/thatch_bed/head/end",
+          "top": "tfg:blocks/device/thatch_bed/head/top"
+        }
+      },
+      "foot": {
+        "textures": {
+          "side": "tfg:blocks/device/thatch_bed/foot/side",
+          "end": "tfg:blocks/device/thatch_bed/foot/end",
+          "top": "tfg:blocks/device/thatch_bed/foot/top"
+        }
+      }
+    },
+    "facing": {
+      "north": {
+        "y": 0
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "east": {
+        "y": 90
+      }
+    }
+  }
+}

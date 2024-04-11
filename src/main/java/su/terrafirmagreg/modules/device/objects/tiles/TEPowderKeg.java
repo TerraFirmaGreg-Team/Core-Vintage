@@ -1,7 +1,14 @@
-package net.dries007.tfc.objects.te;
+package su.terrafirmagreg.modules.device.objects.tiles;
+
+import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.tile.TEBaseTickableInventory;
+import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockPowderKeg;
+import su.terrafirmagreg.modules.device.objects.container.ContainerPowderKeg;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
@@ -20,22 +27,25 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
-import net.dries007.tfc.objects.blocks.BlockPowderKeg;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.PowderKegExplosion;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static net.dries007.tfc.objects.blocks.BlockPowderKeg.SEALED;
+import lombok.Getter;
+
+import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
 /**
  * @see BlockPowderKeg
  */
 
-public class TEPowderKeg extends TETickableInventory implements IItemHandlerSidedCallback {
+public class TEPowderKeg extends TEBaseTickableInventory implements IItemHandlerSidedCallback, IContainerProvider<ContainerPowderKeg, GuiPowderkeg> {
 
+    @Getter
     private boolean sealed;
+    @Getter
     private int fuse = -1;
 
     private boolean isLit = false;
@@ -78,10 +88,6 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
         return !sealed;
     }
 
-    public boolean isSealed() {
-        return sealed;
-    }
-
     public void setSealed(boolean sealed) {
         this.sealed = sealed;
         markForSync();
@@ -101,13 +107,13 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
         }
@@ -127,7 +133,7 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
     }
 
     @Override
-    public boolean isItemValid(int slot, ItemStack stack) {
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
         return OreDictionaryHelper.doesStackMatchOre(stack, "gunpowder");
     }
 
@@ -141,10 +147,6 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
             count += inventory.getStackInSlot(i).getCount();
         }
         return count / 12;
-    }
-
-    public int getFuse() {
-        return fuse;
     }
 
     public boolean isLit() {
@@ -207,4 +209,13 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
         explosion.doExplosionB(true);
     }
 
+    @Override
+    public ContainerPowderKeg getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+        return new ContainerPowderKeg(inventoryPlayer, this);
+    }
+
+    @Override
+    public GuiPowderkeg getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+        return new GuiPowderkeg(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
+    }
 }

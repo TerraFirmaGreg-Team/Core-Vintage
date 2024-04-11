@@ -1,5 +1,13 @@
-package net.dries007.tfc.client.gui;
+package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.spi.button.IButtonTooltip;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
+import su.terrafirmagreg.modules.device.ModuleDevice;
+import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPowderKeg;
+
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -8,28 +16,23 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.te.TEPowderKeg;
+
+import net.dries007.tfc.client.gui.GuiContainerTE;
 import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
-
 public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
 
-    public static final ResourceLocation POWDERKEG_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/powderkeg.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/powderkeg.png");
     private final String translationKey;
 
-    public GuiPowderkeg(Container container, InventoryPlayer playerInv, TEPowderKeg tile, String translationKey) {
-        super(container, playerInv, tile, POWDERKEG_BACKGROUND);
+    public GuiPowderkeg(Container container, InventoryPlayer playerInv, TEPowderKeg tile, IBlockState state) {
+        super(container, playerInv, tile, BACKGROUND);
 
-        this.translationKey = translationKey;
+        this.translationKey = state.getBlock().getTranslationKey();
     }
 
     @Override
@@ -44,8 +47,7 @@ public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
 
         // Button Tooltips
         for (GuiButton button : buttonList) {
-            if (button instanceof IButtonTooltip && button.isMouseOver()) {
-                IButtonTooltip tooltip = (IButtonTooltip) button;
+            if (button instanceof IButtonTooltip tooltip && button.isMouseOver()) {
                 if (tooltip.hasTooltip()) {
                     drawHoveringText(I18n.format(tooltip.getTooltip()), mouseX, mouseY);
                 }
@@ -79,7 +81,7 @@ public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
     @Override
     protected void actionPerformed(@NotNull GuiButton button) throws IOException {
         if (button instanceof GuiButtonPowderkegSeal) {
-            TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
+            ModuleDevice.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

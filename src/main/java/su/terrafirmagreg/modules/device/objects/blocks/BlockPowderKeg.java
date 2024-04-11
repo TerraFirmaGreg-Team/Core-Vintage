@@ -1,12 +1,20 @@
-package net.dries007.tfc.objects.blocks;
+package su.terrafirmagreg.modules.device.objects.blocks;
+
+import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.client.GuiHandler;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPowderKeg;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,58 +37,58 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.te.TEPowderKeg;
-import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
 /**
  * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block
  * state property, and cached in the TE (for gui purposes)
  */
 
-public class BlockPowderKeg extends Block implements IItemSize {
-
-    public static final PropertyBool SEALED = PropertyBool.create("sealed");
+public class BlockPowderKeg extends BlockBase implements ITEBlock {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
-    @SuppressWarnings("WeakerAccess")
     public BlockPowderKeg() {
         super(Material.WOOD);
         setSoundType(SoundType.WOOD);
         setHardness(2F);
         setTickRandomly(true);
 
-        setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
+        setDefaultState(blockState.getBaseState()
+                .withProperty(LIT, false)
+                .withProperty(SEALED, false));
     }
 
     /**
      * Used to update the keg seal state and the TE, in the correct order
      */
     public static void togglePowderKegSeal(World world, BlockPos pos) {
-        TEPowderKeg tile = Helpers.getTE(world, pos, TEPowderKeg.class);
-        if (tile != null) {
+        var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
+        if (te != null) {
             IBlockState state = world.getBlockState(pos);
             boolean previousSealed = state.getValue(SEALED);
             world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-            tile.setSealed(!previousSealed);
+            te.setSealed(!previousSealed);
         }
     }
 
     public void trigger(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityLivingBase igniter) {
         if (!worldIn.isRemote) {
-            TEPowderKeg te = Helpers.getTE(worldIn, pos, TEPowderKeg.class);
+            var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
             if (te != null && state.getValue(SEALED) && state.getValue(LIT) && te.getStrength() > 0) //lit state set before called
             {
                 worldIn.setBlockState(pos, state);
@@ -96,7 +104,7 @@ public class BlockPowderKeg extends Block implements IItemSize {
     }
 
     @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
+    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
         return Weight.VERY_HEAVY; // Stacksize = 1
     }
 
@@ -109,13 +117,13 @@ public class BlockPowderKeg extends Block implements IItemSize {
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isTopSolid(IBlockState state) {
+    public boolean isTopSolid(@NotNull IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullBlock(IBlockState state) {
+    public boolean isFullBlock(@NotNull IBlockState state) {
         return false;
     }
 
@@ -133,48 +141,49 @@ public class BlockPowderKeg extends Block implements IItemSize {
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isBlockNormalCube(IBlockState state) {
+    public boolean isBlockNormalCube(@NotNull IBlockState state) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isNormalCube(IBlockState state) {
+    public boolean isNormalCube(@NotNull IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@NotNull IBlockState state) {
         return false;
     }
 
     @NotNull
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         return BOUNDING_BOX;
     }
 
     @SuppressWarnings("deprecation")
     @Override
     @NotNull
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
+                                            @NotNull EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rng) {
+    public void randomDisplayTick(IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random rng) {
         if (!state.getValue(LIT))
             return;
 
-        TEPowderKeg te = Helpers.getTE(world, pos, TEPowderKeg.class);
+        var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
         if (te != null) {
             int fuse = te.getFuse();
             if (rng.nextInt(6) == 0 && fuse > 20) {
@@ -189,7 +198,7 @@ public class BlockPowderKeg extends Block implements IItemSize {
     /**
      * Called after a player destroys this Block - the position pos may no longer hold the state indicated.
      */
-    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
+    public void onPlayerDestroy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
         trigger(worldIn, pos, state, null);
     }
 
@@ -199,15 +208,15 @@ public class BlockPowderKeg extends Block implements IItemSize {
      */
     @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    public void neighborChanged(@NotNull IBlockState state, World world, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
         if (world.isBlockPowered(pos) || world.getBlockState(fromPos).getMaterial() == Material.FIRE) {
             onPlayerDestroy(world, pos, state.withProperty(LIT, true));
         } else if (state.getValue(LIT) && pos.up().equals(fromPos) && world.getBlockState(fromPos)
                 .getMaterial() == Material.WATER) {
-            TEPowderKeg tile = Helpers.getTE(world, pos, TEPowderKeg.class);
-            if (tile != null) {
+            var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
+            if (te != null) {
                 world.setBlockState(pos, state.withProperty(LIT, false));
-                tile.setLit(false);
+                te.setLit(false);
             }
         } // do not care otherwise, as canStay may be violated by an explosion, which we want to trigger off of
     }
@@ -215,7 +224,7 @@ public class BlockPowderKeg extends Block implements IItemSize {
     /**
      * Called after the block is set in the Chunk data, but before the Tile Entity is set
      */
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
         super.onBlockAdded(worldIn, pos, state);
         if (worldIn.isBlockPowered(pos)) {
             onPlayerDestroy(worldIn, pos, state.withProperty(LIT, true));
@@ -223,8 +232,8 @@ public class BlockPowderKeg extends Block implements IItemSize {
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEPowderKeg tile = Helpers.getTE(worldIn, pos, TEPowderKeg.class);
+    public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+        var tile = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
         if (tile != null && !tile.isLit()) {
             tile.onBreakBlock(worldIn, pos, state);
             super.breakBlock(worldIn, pos, state);
@@ -239,7 +248,7 @@ public class BlockPowderKeg extends Block implements IItemSize {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+    public boolean canPlaceBlockAt(@NotNull World world, @NotNull BlockPos pos) {
         return canStay(world, pos);
     }
 
@@ -247,11 +256,11 @@ public class BlockPowderKeg extends Block implements IItemSize {
      * Called when the block is right clicked by a player.
      */
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
+                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
-            TEPowderKeg te = Helpers.getTE(worldIn, pos, TEPowderKeg.class);
+            var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
             if (te != null) {
                 if (heldItem.isEmpty() && state.getValue(LIT)) {
                     worldIn.setBlockState(pos, state.withProperty(LIT, false));
@@ -271,7 +280,7 @@ public class BlockPowderKeg extends Block implements IItemSize {
                         }
                     }
                 } else {
-                    TFCGuiHandler.openGui(worldIn, pos, playerIn, TFCGuiHandler.Type.POWDERKEG);
+                    GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.POWDERKEG);
                 }
             }
         }
@@ -281,25 +290,24 @@ public class BlockPowderKeg extends Block implements IItemSize {
     /**
      * Called When an Entity Collided with the Block
      */
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!worldIn.isRemote && entityIn instanceof EntityArrow) {
-            EntityArrow entityarrow = (EntityArrow) entityIn;
+    public void onEntityCollision(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Entity entityIn) {
+        if (!worldIn.isRemote && entityIn instanceof EntityArrow entityarrow) {
 
             if (entityarrow.isBurning()) {
-                trigger(worldIn, pos, worldIn.getBlockState(pos)
-                                .withProperty(LIT, true),
+                trigger(worldIn, pos, worldIn.getBlockState(pos).withProperty(LIT, true),
                         entityarrow.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase) entityarrow.shootingEntity : null);
             }
         }
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer,
+                                @NotNull ItemStack stack) {
         // If the keg was sealed, then copy the contents from the item
         if (!worldIn.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                TEPowderKeg te = Helpers.getTE(worldIn, pos, TEPowderKeg.class);
+                var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
                 if (te != null) {
                     worldIn.setBlockState(pos, state.withProperty(SEALED, true));
                     te.readFromItemTag(nbt);
@@ -314,12 +322,12 @@ public class BlockPowderKeg extends Block implements IItemSize {
      * ^^^ See {@link this#dropBlockAsItemWithChance(World, BlockPos, IBlockState, float, int)}
      */
     @Override
-    public boolean canDropFromExplosion(Explosion explosionIn) {
+    public boolean canDropFromExplosion(@NotNull Explosion explosionIn) {
         return true;
     }
 
     @Override
-    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
+    public void dropBlockAsItemWithChance(@NotNull World world, @NotNull BlockPos pos, IBlockState state, float chance, int fortune) {
         if (state.getBlock() == this && !state.getValue(SEALED)) {
             super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
         }
@@ -332,34 +340,34 @@ public class BlockPowderKeg extends Block implements IItemSize {
     }
 
     @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public int getLightValue(IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return state.getValue(LIT) ? 14 : 0;
     }
 
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return false;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean isSideSolid(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
         return false;
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@NotNull IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
         return new TEPowderKeg();
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, IBlockState state, int fortune) {
         // Only drop the keg if it's not sealed, since the keg with contents will be already dropped by the TE
         if (!state.getValue(SEALED)) {
             super.getDrops(drops, world, pos, state, fortune);
@@ -370,8 +378,8 @@ public class BlockPowderKeg extends Block implements IItemSize {
      * Called when this Block is destroyed by an Explosion
      */
     @Override
-    public void onBlockExploded(World worldIn, BlockPos pos, Explosion explosionIn) {
-        TEPowderKeg te = Helpers.getTE(worldIn, pos, TEPowderKeg.class);
+    public void onBlockExploded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull Explosion explosionIn) {
+        var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
         if (!worldIn.isRemote && te != null && te.getStrength() > 0) // explode even if not sealed cause gunpowder
         {
             trigger(worldIn, pos, worldIn.getBlockState(pos).withProperty(SEALED, true).withProperty(LIT, true), null);
@@ -382,11 +390,11 @@ public class BlockPowderKeg extends Block implements IItemSize {
 
     @Override
     @NotNull
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world,
-                                  BlockPos pos, EntityPlayer player) {
-        TEPowderKeg tile = Helpers.getTE(world, pos, TEPowderKeg.class);
-        if (tile != null) {
-            return tile.getItemStack(state);
+    public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world,
+                                  @NotNull BlockPos pos, @NotNull EntityPlayer player) {
+        var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
+        if (te != null) {
+            return te.getItemStack(state);
         }
         return new ItemStack(state.getBlock());
     }
@@ -395,5 +403,41 @@ public class BlockPowderKeg extends Block implements IItemSize {
         boolean solid = world.getBlockState(pos.down())
                 .getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
         return solid || world.getBlockState(pos.down()).getBlock() instanceof BlockPowderKeg;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt != null) {
+            ItemStackHandler stackHandler = new ItemStackHandler();
+            stackHandler.deserializeNBT(nbt.getCompoundTag("inventory"));
+            int count = 0;
+            int firstSlot = -1;
+            for (int i = 0; i < stackHandler.getSlots(); i++) {
+                if (firstSlot < 0 && !stackHandler.getStackInSlot(i).isEmpty()) {
+                    firstSlot = i;
+                }
+                count += stackHandler.getStackInSlot(i).getCount();
+            }
+
+            if (count == 0) {
+                tooltip.add(I18n.format(ModUtils.getIDName(".tooltip.powderkeg_empty")));
+            } else {
+                ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
+                tooltip.add(I18n.format(ModUtils.getIDName(".tooltip.powderkeg_amount"), count, itemStack.getItem()
+                        .getItemStackDisplayName(itemStack)));
+            }
+        }
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return "device/powderkeg";
+    }
+
+    @Override
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return TEPowderKeg.class;
     }
 }

@@ -60,7 +60,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockFloatingWaterTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockHeat;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockPlant;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
@@ -73,7 +72,6 @@ import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -91,13 +89,11 @@ public final class BlocksTFC {
 
     @GameRegistry.ObjectHolder("ceramics/fired/large_vessel")
     public static final BlockLargeVessel FIRED_LARGE_VESSEL = getNull();
-    public static final BlockThatchBed THATCH_BED = getNull();
     public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
     public static final BlockPlacedItem PLACED_ITEM = getNull();
     public static final BlockPlacedHide PLACED_HIDE = getNull();
     public static final BlockIngotPile INGOT_PILE = getNull();
     public static final BlockIceTFC SEA_ICE = getNull();
-    public static final BlockPowderKeg POWDERKEG = getNull();
     public static final Block FIRE_BRICKS = getNull();
 
     // All these are for use in model registration. Do not use for block lookups.
@@ -249,7 +245,6 @@ public final class BlocksTFC {
         normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsTFC.SALT_WATER.get()), CT_MISC)));
 
         normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), CT_POTTERY)));
-        normalItemBlocks.add(new ItemBlockPowderKeg(register(r, "powderkeg", new BlockPowderKeg(), CT_WOOD)));
 
         {
             // Apparently this is the way we're supposed to do things even though the fluid registry defaults. So we'll do it this way.
@@ -544,7 +539,6 @@ public final class BlocksTFC {
         register(r, "placed_item_flat", new BlockPlacedItemFlat());
         register(r, "placed_hide", new BlockPlacedHide());
         register(r, "ingot_pile", new BlockIngotPile());
-        register(r, "thatch_bed", new BlockThatchBed());
 
         // Note: if you add blocks you don't need to put them in this list of todos. Feel free to add them where they make sense :)
 
@@ -567,7 +561,6 @@ public final class BlocksTFC {
         register(TECropSpreading.class, "crop_spreading");
         register(TEMetalSheet.class, "metal_sheet");
         register(TELargeVessel.class, "large_vessel");
-        register(TEPowderKeg.class, "powderkeg");
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -577,7 +570,7 @@ public final class BlocksTFC {
             TerraFirmaCraft.getLog()
                     .info("The below warnings about unintended overrides are normal. The override is intended. ;)");
             event.getRegistry().registerAll(
-                    new BlockIceTFC(FluidsTFC.FRESH_WATER.get()).setRegistryName("minecraft", "ice")
+                    new BlockIceTFC().setRegistryName("minecraft", "ice")
                             .setTranslationKey("ice"),
                     new BlockSnowTFC().setRegistryName("minecraft", "snow_layer").setTranslationKey("snow")
             );

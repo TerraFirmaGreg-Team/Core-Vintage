@@ -243,6 +243,7 @@ public class RegistryManager {
             if (block instanceof ICustomState state) this.customStateMapper.add(state);
             if (block instanceof ICustomModel blockModel) this.customModel.add(blockModel);
             else this.registerClientModel(() -> ModelUtils.registerBlockInventoryModel(block));
+
             if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
         }
         return block;

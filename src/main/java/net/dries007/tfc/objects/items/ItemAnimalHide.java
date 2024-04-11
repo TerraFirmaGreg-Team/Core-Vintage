@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -14,6 +15,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
@@ -63,18 +65,18 @@ public class ItemAnimalHide extends ItemTFC {
             //Creating a thatch bed
             if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(headPos, facing, stack)) {
                 if (!worldIn.isRemote) {
-                    IBlockState footState = BlocksTFC.THATCH_BED.getDefaultState()
+                    IBlockState footState = BlocksDevice.THATCH_BED.getDefaultState()
                             .withProperty(BlockBed.OCCUPIED, false)
                             .withProperty(BlockBed.FACING, player.getHorizontalFacing())
                             .withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
-                    IBlockState headState = BlocksTFC.THATCH_BED.getDefaultState()
+                    IBlockState headState = BlocksDevice.THATCH_BED.getDefaultState()
                             .withProperty(BlockBed.OCCUPIED, false)
                             .withProperty(BlockBed.FACING, player.getHorizontalFacing()
                                     .getOpposite())
                             .withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
                     worldIn.setBlockState(pos, footState, 10);
                     worldIn.setBlockState(headPos, headState, 10);
-                    SoundType soundtype = BlocksTFC.THATCH_BED.getSoundType(footState, worldIn, pos, player);
+                    SoundType soundtype = BlocksDevice.THATCH_BED.getSoundType(footState, worldIn, pos, player);
                     worldIn.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F,
                             soundtype.getPitch() * 0.8F);
 

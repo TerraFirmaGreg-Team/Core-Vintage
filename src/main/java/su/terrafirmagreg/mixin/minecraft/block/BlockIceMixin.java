@@ -1,6 +1,6 @@
-package net.dries007.tfc.objects.blocks;
+package su.terrafirmagreg.mixin.minecraft.block;
 
-import net.minecraft.block.BlockIce;
+import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,19 +27,26 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
+//@Mixin(BlockIce.class)
+public class BlockIceMixin extends BlockBreakable implements ITemperatureBlock {
 
     private final Fluid waterFluid;
     private final float meltThreshold;
 
-    public BlockIceTFC() {
+    public BlockIceMixin() {
         this(FluidsTFC.FRESH_WATER.get());
-
     }
 
-    public BlockIceTFC(Fluid waterFluid) {
+    public BlockIceMixin(Fluid waterFluid) {
+        super(Material.ICE, false);
+
         this.waterFluid = waterFluid;
-        this.meltThreshold = waterFluid == FluidsTFC.SALT_WATER.get() ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
+        this.meltThreshold = waterFluid ==
+                FluidsTFC.SALT_WATER.get() ?
+                IceMeltHandler.SALT_WATER_MELT_THRESHOLD :
+                IceMeltHandler.ICE_MELT_THRESHOLD;
+
+        this.slipperiness = 0.98F;
 
         setHardness(0.5F);
         setLightOpacity(3);
@@ -47,10 +54,6 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
         setTickRandomly(true);
     }
 
-    /**
-     * Copied from {@link BlockIce#harvestBlock(World, EntityPlayer, BlockPos, IBlockState, TileEntity, ItemStack)} with a few changes
-     */
-    @Override
     public void harvestBlock(@NotNull World worldIn, EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable TileEntity te,
                              @NotNull ItemStack stack) {
         //noinspection ConstantConditions
@@ -83,7 +86,6 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
         }
     }
 
-    @Override
     protected void turnIntoWater(World worldIn, BlockPos pos) {
         if (worldIn.provider.doesWaterVaporize()) {
             worldIn.setBlockToAir(pos);

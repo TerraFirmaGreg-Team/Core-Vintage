@@ -22,6 +22,7 @@ public final class ModuleWorldGen extends ModuleBase {
 
     public ModuleWorldGen() {
         this.enableAutoRegistry();
+
     }
 
     public static void setFinalStatic(Field field, Object newValue) throws Exception {

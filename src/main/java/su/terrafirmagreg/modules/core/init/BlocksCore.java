@@ -21,6 +21,7 @@ public final class BlocksCore {
         PUDDLE = registry.registerBlock(new BlockPuddle());
         THATCH = registry.registerBlock(new BlockThatch());
         AGGREGATE = registry.registerBlock(new BlockAggregate());
+
     }
 
 }

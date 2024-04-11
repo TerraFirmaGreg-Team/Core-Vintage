@@ -5,11 +5,12 @@ import su.terrafirmagreg.api.registry.IAutoReg;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ItemBase extends Item implements IItemSize, IAutoReg {
+public abstract class ItemBase extends Item implements IAutoReg {
 
     /**
      * This should NOT be overridden except for VERY SPECIAL cases If an item needs to not stack, i.e. small vessels, override

@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -43,7 +44,7 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize {
         super(Material.GOURD);
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(LIT, false));
         setTickRandomly(true);
-        setCreativeTab(CreativeTabsTFC.CT_DECORATIONS);
+        setCreativeTab(CreativeTabsTFC.CT_MISC);
         setHardness(1f);
         setLightLevel(0.75f);
         setTickRandomly(true);

@@ -8,11 +8,9 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BlockBaseContainer extends BlockContainer implements IAutoReg, IItemSize {
+public abstract class BlockBaseContainer extends BlockContainer implements IAutoReg {
 
     public BlockBaseContainer(Material materialIn) {
         super(materialIn);

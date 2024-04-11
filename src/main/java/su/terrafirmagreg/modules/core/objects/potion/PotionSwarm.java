@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.spi.effects.PotionBase;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
@@ -8,7 +9,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +26,7 @@ public class PotionSwarm extends PotionBase {
         World world = entity.getEntityWorld();
         if (world.isRemote) {
             BlockPos pos = entity.getPosition();
-            Random rand = Constants.RNG;
+            Random rand = Constants.RANDOM;
             double x = pos.getX() + 0.5;
             double y = pos.getY() + 0.5;
             double z = pos.getZ() + 0.5;

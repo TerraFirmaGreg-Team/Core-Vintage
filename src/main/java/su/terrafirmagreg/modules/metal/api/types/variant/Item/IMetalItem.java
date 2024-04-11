@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.modules.metal.api.types.type.IMetalType;
 
+
 import gregtech.api.unification.material.Material;
-import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Интерфейс, представляющий предмет породы.
  */
-public interface IMetalItem extends IMetalType, IItemSize, IAutoReg {
+public interface IMetalItem extends IMetalType, IAutoReg {
 
     /**
      * Возвращает вариант блока породы.

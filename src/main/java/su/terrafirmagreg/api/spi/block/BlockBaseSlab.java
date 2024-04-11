@@ -21,6 +21,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -40,9 +43,21 @@ public abstract class BlockBaseSlab extends BlockSlab implements IAutoReg, ICust
         this.useNeighborBrightness = true;
 
         var state = blockState.getBaseState();
-        if (!isDouble()) state = state.withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
-        setDefaultState(state.withProperty(VARIANT, Variant.DEFAULT));
+        if (!isDouble()) state = state
+                .withProperty(BlockSlab.HALF, EnumBlockHalf.BOTTOM);
+        setDefaultState(state
+                .withProperty(VARIANT, Variant.DEFAULT));
         setLightOpacity(255);
+    }
+
+    @Override
+    public @NotNull Size getSize(@NotNull ItemStack stack) {
+        return Size.SMALL; // if blocks fits in small vessels, this should too
+    }
+
+    @Override
+    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+        return Weight.VERY_LIGHT; // Double the stacksize of a block (or 64)
     }
 
     @Override

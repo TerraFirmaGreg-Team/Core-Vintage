@@ -26,10 +26,6 @@ import com.eerussianguy.firmalife.blocks.BlockCinnamonLeaves;
 import com.eerussianguy.firmalife.blocks.BlockCinnamonLog;
 import com.eerussianguy.firmalife.blocks.BlockCinnamonSapling;
 import com.eerussianguy.firmalife.blocks.BlockClimateStation;
-import com.eerussianguy.firmalife.blocks.BlockFruitDoor;
-import com.eerussianguy.firmalife.blocks.BlockFruitFence;
-import com.eerussianguy.firmalife.blocks.BlockFruitFenceGate;
-import com.eerussianguy.firmalife.blocks.BlockFruitTrapDoor;
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseRoof;
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseWall;
@@ -145,10 +141,6 @@ public class BlocksFL {
     private static ImmutableList<Block> allFoodIBs = Helpers.getNull();
     private static ImmutableList<BlockFruitTreeLeaves> allFruitLeaves = Helpers.getNull();
     private static ImmutableList<BlockFruitTreeSapling> allFruitSaps = Helpers.getNull();
-    private static ImmutableList<BlockFruitFence> allFruitFences = Helpers.getNull();
-    private static ImmutableList<BlockFruitFenceGate> allFruitFenceGates = Helpers.getNull();
-    private static ImmutableList<BlockFruitDoor> allFruitDoors = Helpers.getNull();
-    private static ImmutableList<BlockFruitTrapDoor> allFruitTrapDoors = Helpers.getNull();
     private static ImmutableList<BlockFluidBase> allFluidBlocks = Helpers.getNull();
     private static ImmutableList<BlockCropDead> allDeadCrops = Helpers.getNull();
     private static ImmutableList<BlockStemCrop> allCropBlocks = Helpers.getNull();
@@ -180,14 +172,6 @@ public class BlocksFL {
         return allFruitSaps;
     }
 
-    public static ImmutableList<BlockFruitFence> getAllFruitFences() {return allFruitFences;}
-
-    public static ImmutableList<BlockFruitFenceGate> getAllFruitFenceGates() {return allFruitFenceGates;}
-
-    public static ImmutableList<BlockFruitDoor> getAllFruitDoors() {return allFruitDoors;}
-
-    public static ImmutableList<BlockFruitTrapDoor> getAllFruitTrapdoors() {return allFruitTrapDoors;}
-
     public static ImmutableList<BlockCropDead> getAllDeadCrops() {
         return allDeadCrops;
     }
@@ -218,10 +202,6 @@ public class BlocksFL {
         Builder<Block> foodIBs = ImmutableList.builder();
         Builder<BlockFruitTreeLeaves> fruitLeaves = ImmutableList.builder();
         Builder<BlockFruitTreeSapling> fruitSaps = ImmutableList.builder();
-        Builder<BlockFruitFence> fruitFences = ImmutableList.builder();
-        Builder<BlockFruitFenceGate> fruitFenceGates = ImmutableList.builder();
-        Builder<BlockFruitDoor> fruitDoors = ImmutableList.builder();
-        Builder<BlockFruitTrapDoor> fruitTrapdoors = ImmutableList.builder();
         Builder<BlockCropDead> deadCrops = ImmutableList.builder();
         Builder<BlockStemCrop> cropBlocks = ImmutableList.builder();
         Builder<BlockJackOLantern> jackOLanterns = ImmutableList.builder();
@@ -234,47 +214,47 @@ public class BlocksFL {
             fruitLeaves.add(register(r, name + "_leaves", new BlockFruitTreeLeaves(fruitTree), CT_WOOD));
             fruitSaps.add(register(r, name + "_sapling", new BlockFruitTreeSapling(fruitTree), CT_WOOD));
             register(r, name + "_trunk", new BlockFruitTreeTrunk(fruitTree));
-            doFruitAdditions(r, name, fruitFences, fruitFenceGates, fruitDoors, fruitTrapdoors, bonsais, Optional.of(fruitTree));
+            doFruitAdditions(r, name, bonsais, Optional.of(fruitTree));
         }
-        doFruitAdditions(r, "cinnamon", fruitFences, fruitFenceGates, fruitDoors, fruitTrapdoors, bonsais, Optional.empty());
+        doFruitAdditions(r, "cinnamon", bonsais, Optional.empty());
         for (IFruitTree fruitTree : FruitTree.values()) {
             String name = fruitTree.getName().toLowerCase();
-            doFruitAdditions(r, name, fruitFences, fruitFenceGates, fruitDoors, fruitTrapdoors, bonsais, Optional.of(fruitTree));
+            doFruitAdditions(r, name, bonsais, Optional.of(fruitTree));
         }
 
-        normalIBs.add(register(r, "oven", new BlockOven(), CT_DECORATIONS));
-        normalIBs.add(register(r, "oven_wall", new BlockOvenWall(), CT_DECORATIONS));
-        normalIBs.add(register(r, "oven_chimney", new BlockOvenChimney(), CT_DECORATIONS));
-        normalIBs.add(register(r, "leaf_mat", new BlockLeafMat(), CT_DECORATIONS));
+        normalIBs.add(register(r, "oven", new BlockOven(), CT_MISC));
+        normalIBs.add(register(r, "oven_wall", new BlockOvenWall(), CT_MISC));
+        normalIBs.add(register(r, "oven_chimney", new BlockOvenChimney(), CT_MISC));
+        normalIBs.add(register(r, "leaf_mat", new BlockLeafMat(), CT_MISC));
         normalIBs.add(register(r, "cinnamon_log", new BlockCinnamonLog(), CT_WOOD));
         normalIBs.add(register(r, "cinnamon_leaves", new BlockCinnamonLeaves(), CT_WOOD));
         register(r, "cinnamon_sapling", new BlockCinnamonSapling(), CT_WOOD);
-        normalIBs.add(register(r, "greenhouse_wall", new BlockGreenhouseWall(), CT_DECORATIONS));
-        normalIBs.add(register(r, "greenhouse_roof", new BlockGreenhouseRoof(), CT_DECORATIONS));
-        register(r, "greenhouse_door", new BlockGreenhouseDoor(), CT_DECORATIONS);
-        normalIBs.add(register(r, "climate_station", new BlockClimateStation(0), CT_DECORATIONS));
+        normalIBs.add(register(r, "greenhouse_wall", new BlockGreenhouseWall(), CT_MISC));
+        normalIBs.add(register(r, "greenhouse_roof", new BlockGreenhouseRoof(), CT_MISC));
+        register(r, "greenhouse_door", new BlockGreenhouseDoor(), CT_MISC);
+        normalIBs.add(register(r, "climate_station", new BlockClimateStation(0), CT_MISC));
         for (int i = 1; i < 6; i++)
-            normalIBs.add(register(r, "climate_station_" + i, new BlockClimateStation(i), CT_DECORATIONS));
-        register(r, "quad_planter", new BlockQuadPlanter(), CT_DECORATIONS);
-        register(r, "large_planter", new BlockLargePlanter(), CT_DECORATIONS);
+            normalIBs.add(register(r, "climate_station_" + i, new BlockClimateStation(i), CT_MISC));
+        register(r, "quad_planter", new BlockQuadPlanter(), CT_MISC);
+        register(r, "large_planter", new BlockLargePlanter(), CT_MISC);
         normalIBs.add(register(r, "pumpkin_hanging_planter",
                 new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT), () -> ItemSeedsTFC.get(StemCrop.PUMPKIN), 13),
-                CT_DECORATIONS));
+                CT_MISC));
         normalIBs.add(register(r, "melon_hanging_planter",
                 new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.MELON_FRUIT), () -> ItemSeedsTFC.get(StemCrop.MELON), 13),
-                CT_DECORATIONS));
+                CT_MISC));
         normalIBs.add(register(r, "squash_hanging_planter",
-                new BlockHangingPlanter(() -> ItemFoodTFC.get(Food.SQUASH), () -> ItemSeedsTFC.get(Crop.SQUASH), 13), CT_DECORATIONS));
+                new BlockHangingPlanter(() -> ItemFoodTFC.get(Food.SQUASH), () -> ItemSeedsTFC.get(Crop.SQUASH), 13), CT_MISC));
         register(r, "wool_string", new BlockString(() -> ItemsAnimal.WOOL_YARN));
-        normalIBs.add(register(r, "trellis", new BlockTrellis(), CT_DECORATIONS));
-        normalIBs.add(register(r, "beehive", new BlockBeehive(), CT_DECORATIONS));
+        normalIBs.add(register(r, "trellis", new BlockTrellis(), CT_MISC));
+        normalIBs.add(register(r, "beehive", new BlockBeehive(), CT_MISC));
         register(r, "honey_jar", new BlockJars(() -> ItemsFL.HONEY_JAR), CT_FOOD);
-        normalIBs.add(register(r, "bumper", new BlockBumper(), CT_DECORATIONS));
-        normalIBs.add(register(r, "candle", new BlockTorchTFC(), CT_DECORATIONS));
-        register(r, "bee_nest", new BlockBeeNest(), CT_DECORATIONS);
-        normalIBs.add(register(r, "spout", new BlockSpout(false), CT_DECORATIONS));
-        normalIBs.add(register(r, "sprinkler", new BlockSpout(true), CT_DECORATIONS));
-        normalIBs.add(register(r, "turntable", new BlockTurntable(), CT_DECORATIONS));
+        normalIBs.add(register(r, "bumper", new BlockBumper(), CT_MISC));
+        normalIBs.add(register(r, "candle", new BlockTorchTFC(), CT_MISC));
+        register(r, "bee_nest", new BlockBeeNest(), CT_MISC);
+        normalIBs.add(register(r, "spout", new BlockSpout(false), CT_MISC));
+        normalIBs.add(register(r, "sprinkler", new BlockSpout(true), CT_MISC));
+        normalIBs.add(register(r, "turntable", new BlockTurntable(), CT_MISC));
 
         normalIBs.add(register(r, "cheddar_wheel", new BlockCheesewheel(() -> ItemsFL.CHEDDAR), CT_FOOD));
         normalIBs.add(register(r, "chevre_wheel", new BlockCheesewheel(() -> ItemsFL.CHEVRE), CT_FOOD));
@@ -285,17 +265,17 @@ public class BlocksFL {
 
         for (BerryBush bush : BerryBush.values()) {
             normalIBs.add(register(r, bush.name()
-                    .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
+                    .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_MISC));
         }
 
         for (BushFL bush : BushFL.values()) {
             normalIBs.add(register(r, bush.name().toLowerCase() + "_bush", new BlockBerryBush(bush), CT_FLORA));
             normalIBs.add(register(r, bush.name()
-                    .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_DECORATIONS));
+                    .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_MISC));
         }
 
         for (BlockJackOLantern.Carving carving : BlockJackOLantern.Carving.values()) {
-            jackOLanterns.add(register(r, "lit_pumpkin_" + carving.getName(), new BlockJackOLantern(carving), CT_DECORATIONS));
+            jackOLanterns.add(register(r, "lit_pumpkin_" + carving.getName(), new BlockJackOLantern(carving), CT_MISC));
         }
 
         foodIBs.add(register(r, "pumpkin_fruit", new BlockStemFruit(), CT_FLORA));
@@ -337,20 +317,6 @@ public class BlocksFL {
             ItemBlock ib = new ItemBlockTFC(x);
             IBs.add(ib);
         });
-        allFruitFences = fruitFences.build();
-        allFruitFences.forEach((x) -> {
-            IBs.add(new ItemBlockTFC(x));
-        });
-        allFruitFenceGates = fruitFenceGates.build();
-        allFruitFenceGates.forEach((x) -> {
-            IBs.add(new ItemBlockTFC(x));
-        });
-        allFruitDoors = fruitDoors.build();
-
-        allFruitTrapDoors = fruitTrapdoors.build();
-        allFruitTrapDoors.forEach((x) -> {
-            IBs.add(new ItemBlockTFC(x));
-        });
         allIBs = IBs.build();
         allDeadCrops = deadCrops.build();
         allCropBlocks = cropBlocks.build();
@@ -370,16 +336,11 @@ public class BlocksFL {
         FluidsTFC.getWrapper(FluidsFL.ZEBU_MILK.get());
     }
 
-    private static void doFruitAdditions(IForgeRegistry<Block> r, String name, Builder<BlockFruitFence> fruitFences,
-                                         Builder<BlockFruitFenceGate> fruitFenceGates, Builder<BlockFruitDoor> fruitDoors,
-                                         Builder<BlockFruitTrapDoor> fruitTrapdoors, Builder<BlockBonsai> bonsais,
+    private static void doFruitAdditions(IForgeRegistry<Block> r, String name,
+                                         Builder<BlockBonsai> bonsais,
                                          Optional<IFruitTree> optionalTree) {
-        fruitFences.add(register(r, name + "_fence", new BlockFruitFence(), CT_DECORATIONS));
-        fruitFenceGates.add(register(r, name + "_fence_gate", new BlockFruitFenceGate(), CT_DECORATIONS));
-        fruitDoors.add(register(r, name + "_door", new BlockFruitDoor(), CT_DECORATIONS));
-        fruitTrapdoors.add(register(r, name + "_trapdoor", new BlockFruitTrapDoor(), CT_DECORATIONS));
         optionalTree.ifPresent(tree -> bonsais.add(register(r, name + "_bonsai_pot", new BlockBonsai(() -> tree.getFoodDrop()
-                .getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_DECORATIONS))
+                .getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_MISC))
         );
     }
 

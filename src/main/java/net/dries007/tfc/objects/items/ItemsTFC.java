@@ -185,20 +185,20 @@ public final class ItemsTFC {
             for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
                 simpleItems.add(register(r, "rock/" + rock.getRegistryName()
                         .getPath()
-                        .toLowerCase(), new ItemRock(rock), CT_ROCK_ITEMS));
+                        .toLowerCase(), new ItemRock(rock), CT_ROCK_BLOCKS));
             for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
                 simpleItems.add(register(r, "brick/" + rock.getRegistryName()
                         .getPath()
-                        .toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
+                        .toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_BLOCKS));
         }
 
         {
             Builder<ItemOreTFC> b = new Builder<>();
             for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-                b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK_ITEMS));
+                b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK_BLOCKS));
                 if (ore.isGraded()) {
                     simpleItems.add(register(r, "ore/small/" + ore.getRegistryName()
-                            .getPath(), new ItemSmallOre(ore), CT_ROCK_ITEMS));
+                            .getPath(), new ItemSmallOre(ore), CT_ROCK_BLOCKS));
                 }
             }
             allOreItems = b.build();
@@ -232,9 +232,9 @@ public final class ItemsTFC {
         for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
             for (Rock.ToolType type : Rock.ToolType.values()) {
                 simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName()
-                        .getPath(), type.create(cat), CT_ROCK_ITEMS));
+                        .getPath(), type.create(cat), CT_ROCK_BLOCKS));
                 simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-                        .getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
+                        .getPath(), new ItemRockToolHead(cat, type), CT_ROCK_BLOCKS));
             }
         }
 

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import com.eerussianguy.firmalife.blocks.BlockFruitDoor;
+
 import com.eerussianguy.firmalife.init.FoodDataFL;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.Fruit;
@@ -20,7 +20,6 @@ import com.eerussianguy.firmalife.items.ItemBlockJar;
 import com.eerussianguy.firmalife.items.ItemCheesecloth;
 import com.eerussianguy.firmalife.items.ItemDriedPineapple;
 import com.eerussianguy.firmalife.items.ItemFoodFL;
-import com.eerussianguy.firmalife.items.ItemFruitDoor;
 import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.items.ItemGreenhouseDoor;
 import com.eerussianguy.firmalife.items.ItemHeatableFoodFL;
@@ -153,14 +152,11 @@ public class ItemsFL {
     private static final Map<FoodFL, ItemFoodFL> foods = new HashMap<>();
     public static ItemMetalMalletMold malletMold;
     private static ImmutableList<Item> allEasyItems;
-    private static ImmutableList<ItemFruitDoor> allFruitDoors;
     private static ImmutableList<Item> unused;
 
     public static ImmutableList<Item> getAllEasyItems() {
         return allEasyItems;
     }
-
-    public static ImmutableList<ItemFruitDoor> getAllFruitDoors() {return allFruitDoors;}
 
     public static ItemMetalMalletHead getMetalMalletHead(Metal metal) {return malletHeads.get(metal);}
 
@@ -181,7 +177,6 @@ public class ItemsFL {
         IForgeRegistry<Item> r = event.getRegistry();
 
         ImmutableList.Builder<Item> easyItems = ImmutableList.builder();
-        ImmutableList.Builder<ItemFruitDoor> fruitDoors = ImmutableList.builder();
         ImmutableList.Builder<Item> unu = ImmutableList.builder();
 
         for (FoodFL food : FoodFL.values()) {
@@ -269,10 +264,10 @@ public class ItemsFL {
         easyItems.add(register(r, "cinnamon_bark", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
         easyItems.add(register(r, "cinnamon", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
         easyItems.add(register(r, "ground_cinnamon", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
-        easyItems.add(register(r, "greenhouse_door", new ItemGreenhouseDoor(BlocksFL.GREENHOUSE_DOOR), CT_DECORATIONS));
-        easyItems.add(register(r, "quad_planter", new ItemBlock(BlocksFL.QUAD_PLANTER), CT_DECORATIONS));
-        easyItems.add(register(r, "large_planter", new ItemBlock(BlocksFL.LARGE_PLANTER), CT_DECORATIONS));
-        easyItems.add(register(r, "cinnamon_sapling", new ItemBlock(BlocksFL.CINNAMON_SAPLING), CT_DECORATIONS));
+        easyItems.add(register(r, "greenhouse_door", new ItemGreenhouseDoor(BlocksFL.GREENHOUSE_DOOR), CT_MISC));
+        easyItems.add(register(r, "quad_planter", new ItemBlock(BlocksFL.QUAD_PLANTER), CT_MISC));
+        easyItems.add(register(r, "large_planter", new ItemBlock(BlocksFL.LARGE_PLANTER), CT_MISC));
+        easyItems.add(register(r, "cinnamon_sapling", new ItemBlock(BlocksFL.CINNAMON_SAPLING), CT_MISC));
 
         easyItems.add(register(r, "pineapple_leather", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
         easyItems.add(register(r, "pineapple_fiber", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
@@ -296,8 +291,6 @@ public class ItemsFL {
             easyItems.add(registerPole(r, fruitTree));
         for (IFruitTree fruitTree : FruitTree.values())
             easyItems.add(registerPole(r, fruitTree));
-        for (BlockFruitDoor door : BlocksFL.getAllFruitDoors())
-            fruitDoors.add(register(r, door.getRegistryName().getPath(), new ItemFruitDoor(door), CT_DECORATIONS));
 
         for (Metal metal : TFCRegistries.METALS.getValuesCollection())
             if (metal.isToolMetal()) {
@@ -321,7 +314,6 @@ public class ItemsFL {
             easyItems.add(register(r, "crop/seeds/" + crop.name().toLowerCase(), new ItemSeedsTFC(crop), CT_FOOD));
         }
         allEasyItems = easyItems.build();
-        allFruitDoors = fruitDoors.build();
         unused = unu.build();
     }
 

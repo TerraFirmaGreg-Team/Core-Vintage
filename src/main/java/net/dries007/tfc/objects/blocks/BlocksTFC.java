@@ -45,12 +45,9 @@ import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockButtonStoneTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockPressurePlateTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
@@ -104,13 +101,10 @@ public final class BlocksTFC {
     private static ImmutableList<BlockFluidBase> allFluidBlocks;
     private static ImmutableList<BlockRockVariant> allBlockRockVariants;
     private static ImmutableList<BlockOreTFC> allOreBlocks;
-    private static ImmutableList<BlockWallTFC> allWallBlocks;
     private static ImmutableList<BlockLogTFC> allLogBlocks;
     private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
     private static ImmutableList<BlockSaplingTFC> allSaplingBlocks;
     private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
-    private static ImmutableList<BlockStairsTFC> allStairsBlocks;
-    private static ImmutableList<BlockSlabTFC.Half> allSlabBlocks;
     private static ImmutableList<BlockAnvilTFC> allAnvils;
     private static ImmutableList<BlockMetalSheet> allSheets;
     private static ImmutableList<BlockMetalLamp> allLamps;
@@ -155,24 +149,12 @@ public final class BlocksTFC {
         return allOreBlocks;
     }
 
-    public static ImmutableList<BlockWallTFC> getAllWallBlocks() {
-        return allWallBlocks;
-    }
-
     public static ImmutableList<BlockSaplingTFC> getAllSaplingBlocks() {
         return allSaplingBlocks;
     }
 
     public static ImmutableList<BlockTrapDoorMetalTFC> getAllTrapDoorMetalBlocks() {
         return allTrapDoorMetalBlocks;
-    }
-
-    public static ImmutableList<BlockStairsTFC> getAllStairsBlocks() {
-        return allStairsBlocks;
-    }
-
-    public static ImmutableList<BlockSlabTFC.Half> getAllSlabBlocks() {
-        return allSlabBlocks;
     }
 
     public static ImmutableList<BlockAnvilTFC> getAllAnvils() {
@@ -240,7 +222,7 @@ public final class BlocksTFC {
 
         normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), CT_ROCK_BLOCKS)));
 
-        normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_DECORATIONS)));
+        normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_MISC)));
 
         normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockIceTFC(FluidsTFC.SALT_WATER.get()), CT_MISC)));
 
@@ -363,50 +345,6 @@ public final class BlocksTFC {
             allLeafBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
             allSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockSaplingTFC(x)));
 
-        }
-
-        {
-            Builder<BlockWallTFC> b = ImmutableList.builder();
-            Builder<BlockStairsTFC> stairs = new Builder<>();
-            Builder<BlockSlabTFC.Half> slab = new Builder<>();
-
-            // Walls
-            for (Rock.Type type : new Rock.Type[] { SMOOTH, COBBLE, BRICKS })
-                for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-                    b.add(register(r, ("wall/" + type.name() + "/" + rock.getRegistryName()
-                            .getPath()).toLowerCase(), new BlockWallTFC(BlockRockVariant.get(rock, type)), CT_DECORATIONS));
-            // Stairs
-            for (Rock.Type type : new Rock.Type[] { SMOOTH, COBBLE, BRICKS })
-                for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-                    stairs.add(register(r, "stairs/" + (type.name() + "/" + rock.getRegistryName()
-                            .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_DECORATIONS));
-
-            // Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
-            for (Rock.Type type : new Rock.Type[] { SMOOTH, COBBLE, BRICKS })
-                for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-                    register(r, "double_slab/" + (type.name() + "/" + rock.getRegistryName()
-                            .getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
-            // Slabs
-            for (Rock.Type type : new Rock.Type[] { SMOOTH, COBBLE, BRICKS })
-                for (Rock rock : TFCRegistries.ROCKS.getValuesCollection())
-                    slab.add(register(r, "slab/" + (type.name() + "/" + rock.getRegistryName()
-                            .getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_DECORATIONS));
-
-            for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-                // Redstone things
-                inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/button/" + rock.getRegistryName()
-                        .getPath()
-                        .toLowerCase(), new BlockButtonStoneTFC(rock), CT_DECORATIONS)));
-                inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/pressure_plate/" + rock.getRegistryName()
-                        .getPath()
-                        .toLowerCase(), new BlockPressurePlateTFC(rock), CT_DECORATIONS)));
-            }
-
-            allWallBlocks = b.build();
-            allStairsBlocks = stairs.build();
-            allSlabBlocks = slab.build();
-            allWallBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
-            allStairsBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
         }
 
         {

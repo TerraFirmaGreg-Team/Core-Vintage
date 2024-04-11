@@ -7,14 +7,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Интерфейс, представляющий блок породы.
  */
-public interface IRockBlock extends IRockType, IAutoReg, IItemSize {
+public interface IRockBlock extends IRockType, IAutoReg {
 
     /**
      * Возвращает вариант блока.

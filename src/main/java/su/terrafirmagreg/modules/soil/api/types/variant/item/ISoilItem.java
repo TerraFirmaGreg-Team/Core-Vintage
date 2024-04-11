@@ -3,11 +3,10 @@ package su.terrafirmagreg.modules.soil.api.types.variant.item;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface ISoilItem extends ISoilType, IItemSize, IAutoReg {
+public interface ISoilItem extends ISoilType, IAutoReg {
 
     /**
      * Возвращает вариант блока породы.

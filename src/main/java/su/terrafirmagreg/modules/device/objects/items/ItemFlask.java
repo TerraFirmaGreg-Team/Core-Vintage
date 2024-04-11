@@ -34,8 +34,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
 import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
 import static su.terrafirmagreg.Tags.MOD_ID;
 
-public abstract class ItemFlask extends ItemFluidContainer implements IItemSize, IAutoReg, ICustomMesh {
+public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, ICustomMesh {
 
     private final int capacity;
     private final int drink;

@@ -17,14 +17,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, ICustomModel, ICustomState, IColorfulBlock {
+public interface IWoodBlock extends IWoodType, IAutoReg, ICustomModel, ICustomState, IColorfulBlock {
 
     /**
      * Возвращает вариант деревянного блока.

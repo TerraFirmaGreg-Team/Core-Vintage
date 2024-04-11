@@ -2,7 +2,6 @@ package com.eerussianguy.firmalife;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockStem;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -31,13 +30,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.eerussianguy.firmalife.blocks.BlockBonsai;
-import com.eerussianguy.firmalife.blocks.BlockFruitDoor;
-import com.eerussianguy.firmalife.blocks.BlockFruitFenceGate;
 import com.eerussianguy.firmalife.blocks.BlockStemCrop;
 import com.eerussianguy.firmalife.init.RegistriesFL;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
-import com.eerussianguy.firmalife.items.ItemFruitDoor;
 import com.eerussianguy.firmalife.items.ItemMetalMalletMold;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.registry.BlocksFL;
@@ -77,8 +74,6 @@ public class ClientRegisterEventsFL {
     public static void registerModels(ModelRegistryEvent event) {
         //Setting the model resource location for items
         for (Item i : ItemsFL.getAllEasyItems())
-            ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName().toString()));
-        for (ItemFruitDoor i : ItemsFL.getAllFruitDoors())
             ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName().toString()));
         for (ItemBlock ib : BlocksFL.getAllIBs())
             ModelLoader.setCustomModelResourceLocation(ib, 0, new ModelResourceLocation(ib.getRegistryName()
@@ -144,10 +139,6 @@ public class ClientRegisterEventsFL {
         //use vanilla stem rendering for StemCrops
         for (BlockStemCrop block : BlocksFL.getAllCropBlocks())
             ModelLoader.setCustomStateMapper(block, new VanillaStemStateMapper());
-        for (BlockFruitDoor door : BlocksFL.getAllFruitDoors())
-            ModelLoader.setCustomStateMapper(door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
-        for (BlockFruitFenceGate gate : BlocksFL.getAllFruitFenceGates())
-            ModelLoader.setCustomStateMapper(gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesFL.CAN_GROW)
                 .build());

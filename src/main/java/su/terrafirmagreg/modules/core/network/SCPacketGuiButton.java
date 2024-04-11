@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.spi.container.IButtonHandler;
 import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.objects.container.ContainerAnvilTFC;
-import net.dries007.tfc.objects.container.IButtonHandler;
 
 import org.jetbrains.annotations.Nullable;
 

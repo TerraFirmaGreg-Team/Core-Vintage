@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -11,6 +10,8 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -69,6 +70,22 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
     }
 
     @Override
+    public int damageDropped(@NotNull IBlockState state) {
+        return 0;
+    }
+
+    @Override
+    @NotNull
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState();
+    }
+
+    @Override
+    public int getMetaFromState(@NotNull IBlockState state) {
+        return 0;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
@@ -81,6 +98,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
     @Override
     @SideOnly(Side.CLIENT)
     public void onStateMapperRegister() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockWall.VARIANT).build());
+        ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
     }
 }

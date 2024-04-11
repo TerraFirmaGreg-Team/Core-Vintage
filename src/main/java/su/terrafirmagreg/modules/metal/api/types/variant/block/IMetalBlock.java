@@ -14,14 +14,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Интерфейс, представляющий блок металла.
  */
-public interface IMetalBlock extends IMetalType, IAutoReg, IItemSize, ICustomModel, ICustomState {
+public interface IMetalBlock extends IMetalType, IAutoReg, ICustomModel, ICustomState {
 
     /**
      * Возвращает вариант металлического блока.

@@ -3,14 +3,13 @@ package su.terrafirmagreg.modules.rock.api.types.variant.item;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.modules.rock.api.types.type.IRockType;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Интерфейс, представляющий предмет породы.
  */
-public interface IRockItem extends IRockType, IAutoReg, IItemSize {
+public interface IRockItem extends IRockType, IAutoReg {
 
     /**
      * Возвращает вариант предмета.

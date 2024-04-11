@@ -3,14 +3,13 @@ package su.terrafirmagreg.modules.soil.api.types.variant.block;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.modules.soil.api.types.type.ISoilType;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Интерфейс, представляющий блок почвы.
  */
-public interface ISoilBlock extends ISoilType, IAutoReg, IItemSize {
+public interface ISoilBlock extends ISoilType, IAutoReg {
 
     /**
      * Возвращает вариант блока почвы.

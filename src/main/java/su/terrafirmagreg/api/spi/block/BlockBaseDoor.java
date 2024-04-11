@@ -21,14 +21,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public abstract class BlockBaseDoor extends BlockDoor implements IAutoReg, IItemSize, ICustomState {
+public abstract class BlockBaseDoor extends BlockDoor implements IAutoReg, ICustomState {
 
     protected BlockBaseDoor(Material material) {
         super(material);

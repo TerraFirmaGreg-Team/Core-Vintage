@@ -6,21 +6,24 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import lombok.Getter;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.List;
 
@@ -37,10 +40,10 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
         this.type = type;
         this.useNeighborBrightness = true;
 
-        setSoundType(SoundType.STONE);
-        setHarvestLevel("pickaxe", 0);
+        var block = modelBlock.get(type);
 
-        //OreDictUtils.register(this, blockVariant.toString(), type.toString());
+        setSoundType(SoundType.STONE);
+        setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
     }
 
     @Override
@@ -61,6 +64,23 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
         return BlockRenderLayer.CUTOUT;
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void neighborChanged(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn,
+                                @NotNull BlockPos fromPos) {
+        // Prevents cobble stairs from falling
+    }
+
+    @Override
+    public void onPlayerDestroy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+        // Prevents chiseled smooth stone stairs from collapsing
+    }
+
+    @Override
+    public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+        // Prevents cobble stairs from falling
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
@@ -68,7 +88,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
         tooltip.add(
                 new TextComponentTranslation("rockcategory.name")
-                        .getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
+                        .getFormattedText() + ": " + this.getCategory().getLocalizedName());
     }
 
 }

@@ -12,7 +12,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -47,7 +46,7 @@ public abstract class BlockRockSlab extends BlockBaseSlab implements IRockBlock 
         this.block = model.get(type);
 
         setSoundType(SoundType.STONE);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
     }
 
     @Override
@@ -57,7 +56,7 @@ public abstract class BlockRockSlab extends BlockBaseSlab implements IRockBlock 
     }
 
     @Override
-    public @Nullable ItemBlock getItemBlock() {
+    public @Nullable ItemSlab getItemBlock() {
         return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
     }
 

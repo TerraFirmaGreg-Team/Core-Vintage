@@ -3,21 +3,18 @@ package su.terrafirmagreg.modules.wood.api.types.variant.item;
 import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
-import su.terrafirmagreg.api.spi.item.IOreDict;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
 
 import net.minecraft.util.ResourceLocation;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface IWoodItem extends IWoodType, IAutoReg, IItemSize, ICustomModel, IColorfulItem, IOreDict {
+public interface IWoodItem extends IWoodType, IAutoReg, ICustomModel, IColorfulItem {
 
     /**
      * Возвращает вариант блока породы.

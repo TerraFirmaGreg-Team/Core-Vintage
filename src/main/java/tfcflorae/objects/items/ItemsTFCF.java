@@ -2056,13 +2056,13 @@ public final class ItemsTFCF {
                 ItemUnfiredMudBrick unfiredMudBrick = new ItemUnfiredMudBrick(mud, rock);
                 simpleItems.add(register(r, "mud/mud_ball/" + rock.getRegistryName()
                         .getPath()
-                        .toLowerCase(), mud, CT_ROCK_ITEMS));
+                        .toLowerCase(), mud, CT_ROCK_BLOCKS));
                 simpleItems.add(register(r, "mud/unfired/mud_brick/" + rock.getRegistryName()
                         .getPath()
-                        .toLowerCase(), unfiredMudBrick, CT_ROCK_ITEMS));
+                        .toLowerCase(), unfiredMudBrick, CT_ROCK_BLOCKS));
                 simpleItems.add(register(r, "mud/fired/mud_brick/" + rock.getRegistryName()
                         .getPath()
-                        .toLowerCase(), new ItemFiredMudBrick(unfiredMudBrick), CT_ROCK_ITEMS));
+                        .toLowerCase(), new ItemFiredMudBrick(unfiredMudBrick), CT_ROCK_BLOCKS));
             }
         }
 
@@ -2083,35 +2083,37 @@ public final class ItemsTFCF {
                         CT_MISC));
 
         simpleItems.add(register(r, "tools/flint/axe/flint",
-                new ItemAxeTFCF(ToolMaterialsTFCF.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_ROCK_ITEMS));
+                new ItemAxeTFCF(ToolMaterialsTFCF.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/hammer/flint",
                 new ItemHammerTFCF(ToolMaterialsTFCF.FLINT, 2.5f, -3f, 50, "hammer", "hammer_flint", "hammer_stone", "hammer_stone_sedimentary"),
-                CT_ROCK_ITEMS));
+                CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/hoe/flint",
-                new ItemHoeTFCF(ToolMaterialsTFCF.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_ROCK_ITEMS));
+                new ItemHoeTFCF(ToolMaterialsTFCF.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/javelin/flint",
                 new ItemJavelinTFCF(ToolMaterialsTFCF.FLINT, 1.95f, -1.8f, 50, "javelin", "javelin_flint", "javelin_stone",
-                        "javelin_stone_sedimentary"), CT_ROCK_ITEMS));
+                        "javelin_stone_sedimentary"), CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/knife/flint",
                 new ItemKnifeTFCF(ToolMaterialsTFCF.FLINT, 1.5f, -1.5f, 50, "knife", "knife_flint", "knife_stone", "knife_stone_sedimentary"),
-                CT_ROCK_ITEMS));
+                CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/shovel/flint",
                 new ItemShovelTFCF(ToolMaterialsTFCF.FLINT, 1.25f, -3f, 50, "shovel", "shovel_flint", "shovel_stone", "shovel_stone_sedimentary"),
-                CT_ROCK_ITEMS));
+                CT_ROCK_BLOCKS));
 
         // Toolheads
         simpleItems.add(
-                register(r, "tools/flint/axe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_axe"), CT_ROCK_ITEMS));
+                register(r, "tools/flint/axe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_axe"),
+                        CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/hammer_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_hammer"),
-                CT_ROCK_ITEMS));
+                CT_ROCK_BLOCKS));
         simpleItems.add(
-                register(r, "tools/flint/hoe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_hoe"), CT_ROCK_ITEMS));
+                register(r, "tools/flint/hoe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_hoe"),
+                        CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/javelin_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_javelin"),
-                CT_ROCK_ITEMS));
+                CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/knife_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_knife"),
-                CT_ROCK_ITEMS));
+                CT_ROCK_BLOCKS));
         simpleItems.add(register(r, "tools/flint/shovel_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_shovel"),
-                CT_ROCK_ITEMS));
+                CT_ROCK_BLOCKS));
 
         // Bows
         itemBows.add(register(r, "tools/bows/shortbow/shortbow",

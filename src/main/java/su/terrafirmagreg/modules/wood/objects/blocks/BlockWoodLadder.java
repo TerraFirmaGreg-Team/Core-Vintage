@@ -1,17 +1,18 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.SoundType;
-import net.minecraft.item.ItemBlock;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
@@ -24,11 +25,12 @@ public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
         this.type = type;
 
         setSoundType(SoundType.LADDER);
+
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 }

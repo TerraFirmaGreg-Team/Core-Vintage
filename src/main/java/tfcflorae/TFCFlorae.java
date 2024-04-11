@@ -1,6 +1,7 @@
 package tfcflorae;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.LoggingUtils;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import org.apache.logging.log4j.Logger;
+
 import tfcflorae.client.GuiHandler;
 import tfcflorae.proxy.CommonProxy;
 import tfcflorae.util.CapabilityHeatHandler;
@@ -36,7 +37,7 @@ public class TFCFlorae {
 
     @Mod.Instance
     public static TFCFlorae instance;
-    public static Logger logger;
+    public static final LoggingUtils LOGGER = new LoggingUtils(MODID_TFCF);
     public static boolean signedBuild = true;
 
     public static boolean FirmaLifeAdded = false;
@@ -46,8 +47,8 @@ public class TFCFlorae {
     @SidedProxy(serverSide = "tfcflorae.proxy.CommonProxy", clientSide = "tfcflorae.proxy.ClientProxy")
     public static CommonProxy proxy;
 
-    public static Logger getLog() {
-        return logger;
+    public static LoggingUtils getLog() {
+        return LOGGER;
     }
 
     public static TFCFlorae getInstance() {
@@ -64,7 +65,6 @@ public class TFCFlorae {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
 
         for (ModContainer Mod : Loader.instance().getActiveModList()) {
             if (Mod.getModId().equals(MODID_FL))

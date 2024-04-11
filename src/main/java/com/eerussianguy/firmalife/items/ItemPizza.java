@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.init.FoodDataFL;
 import net.dries007.tfc.api.capability.food.FoodData;
@@ -43,7 +44,7 @@ public class ItemPizza extends ItemFoodFL {
             for (FoodData ingredient : ingredients) {
                 if (ingredient == FoodDataFL.PINEAPPLE) {
                     //data = new FoodData(4, water, saturation, new float[Nutrient.TOTAL], rootData.getDecayModifier());
-                    FirmaLife.logger.warn("Why did you put pineapple on your pizza?");
+                    FirmaLife.LOGGER.warn("Why did you put pineapple on your pizza?");
                 }
                 for (int i = 0; i < nutrition.length; i++) {
                     nutrition[i] += 0.8f * ingredient.getNutrients()[i];

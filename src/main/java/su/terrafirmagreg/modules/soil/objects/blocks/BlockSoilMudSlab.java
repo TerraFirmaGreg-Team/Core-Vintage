@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.BlockBaseSlab;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -16,14 +16,15 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 
 
-import lombok.Getter;
-
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.Random;
 
 @Getter
-public abstract class BlockSoilMudSlab extends BlockBaseSlab implements ISoilBlock, ICustomStateMapper {
+public abstract class BlockSoilMudSlab extends BlockBaseSlab implements ISoilBlock, ICustomState {
 
     private final SoilBlockVariant blockVariant;
     private final SoilType type;
@@ -50,7 +51,7 @@ public abstract class BlockSoilMudSlab extends BlockBaseSlab implements ISoilBlo
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlock getItemBlock() {
         return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
     }
 

@@ -1,15 +1,18 @@
 package su.terrafirmagreg.modules.wood.objects.itemblocks;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +42,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
+
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -53,11 +57,15 @@ import java.util.List;
  * Item block for {@link BlockWoodBarrel} Only has NBT data if the barrel is sealed and has contents
  */
 
-public class ItemBlockWoodBarrel extends ItemBlockBase {
+public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
 
-    public ItemBlockWoodBarrel(Block block) {
+    private final BlockWoodBarrel block;
+
+    public ItemBlockWoodBarrel(BlockWoodBarrel block) {
         super(block);
-        //OreDictUtils.register(this, "barrel");
+
+        this.block = block;
+
     }
 
     @NotNull
@@ -77,8 +85,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
                     if (fluid.getTemperature() < TEWoodBarrel.BARREL_MAX_FLUID_TEMPERATURE) {
                         boolean canCreateSources = false; //default
                         if (state.getBlock() instanceof BlockFluidClassic) {
-                            BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(fluidPos)
-                                    .getBlock();
+                            BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(fluidPos).getBlock();
                             canCreateSources = ObfuscationReflectionHelper.getPrivateValue(BlockFluidClassic.class, fluidblock, "canCreateSources");
                         } else if (state.getBlock() instanceof BlockLiquid) {
                             //Fire the event so other mods that prevent infinite water disable this
@@ -107,7 +114,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (barrelCap instanceof ItemBarrelFluidHandler &&
                 ((ItemBarrelFluidHandler) barrelCap).getBarrelContents() != null) // Have either fluid or items stored
@@ -138,15 +145,16 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
                 }
             }
 
-            String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound()
-                    .getLong("sealedCalendarTick"), CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+            assert stack.getTagCompound() != null;
+            String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound().getLong("sealedCalendarTick"),
+                    CalendarTFC.CALENDAR_TIME.getDaysInMonth());
             tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("top.tfc.barrel.sealed", formattedDate).getFormattedText());
         }
     }
 
     @NotNull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer player, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty()) {
             IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
@@ -210,13 +218,13 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
                 nbt = new NBTTagCompound();
             }
             if (inventoryTag != null) {
-                nbt.setTag("inventory", inventoryTag);
+                NBTUtils.setGenericNBTValue(nbt, "inventory", inventoryTag);
             }
             if (surplusTag != null) {
-                nbt.setTag("surplus", surplusTag);
+                NBTUtils.setGenericNBTValue(nbt, "surplus", surplusTag);
             }
-            nbt.setLong("sealedTick", sealedTick);
-            nbt.setLong("sealedCalendarTick", sealedCalendarTick);
+            NBTUtils.setGenericNBTValue(nbt, "sealedTick", sealedTick);
+            NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", sealedCalendarTick);
             container.setTagCompound(nbt);
         }
 
@@ -236,8 +244,8 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
             }
             NBTTagCompound nbt = container.getTagCompound();
             //noinspection ConstantConditions
-            nbt.setLong("sealedTick", CalendarTFC.PLAYER_TIME.getTicks());
-            nbt.setLong("sealedCalendarTick", CalendarTFC.CALENDAR_TIME.getTicks());
+            NBTUtils.setGenericNBTValue(nbt, "sealedTick", CalendarTFC.PLAYER_TIME.getTicks());
+            NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", CalendarTFC.CALENDAR_TIME.getTicks());
             container.setTagCompound(nbt);
             super.setFluid(fluid);
         }
@@ -252,5 +260,15 @@ public class ItemBlockWoodBarrel extends ItemBlockBase {
                 }
             }
         }
+    }
+
+    @Override
+    public ItemMeshDefinition getCustomMesh() {
+
+        final var resurceLocation = block.getResourceLocation();
+
+        return stack -> stack.getTagCompound() != null ?
+                new ModelResourceLocation(resurceLocation, "sealed=true") :
+                new ModelResourceLocation(resurceLocation, "sealed=false");
     }
 }

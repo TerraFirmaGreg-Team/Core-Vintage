@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.container;
 
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
@@ -10,13 +11,13 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
+
 import net.dries007.tfc.objects.container.IButtonHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerWoodBarrel extends ContainerTE<TEWoodBarrel> implements IButtonHandler {
+public class ContainerWoodBarrel extends ContainerBaseTE<TEWoodBarrel> implements IButtonHandler {
 
     public ContainerWoodBarrel(InventoryPlayer playerInv, TEWoodBarrel teWoodBarrel) {
         super(playerInv, teWoodBarrel);

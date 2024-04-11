@@ -23,6 +23,7 @@
 package com.buuz135.hotornot;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.LoggingUtils;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -32,10 +33,9 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
+
 import com.buuz135.hotornot.network.PacketClientSettings;
 import com.buuz135.hotornot.network.PacketServerSettings;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
@@ -47,14 +47,15 @@ public class HotOrNot {
     @Instance
     private static HotOrNot INSTANCE = null;
     private static SimpleNetworkWrapper network;
-    private final Logger log = LogManager.getLogger(MODID_HOTORNOT);
+
+    private final LoggingUtils log = new LoggingUtils(MODID_HOTORNOT);
 
     public static SimpleNetworkWrapper getNetwork() {
         return network;
     }
 
     @SuppressWarnings("unused")
-    public static Logger getLog() {
+    public static LoggingUtils getLog() {
         return INSTANCE.log;
     }
 

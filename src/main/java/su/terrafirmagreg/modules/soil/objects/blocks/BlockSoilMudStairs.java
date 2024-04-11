@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import org.jetbrains.annotations.Nullable;
+
+
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -8,10 +11,10 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 import lombok.Getter;
 
@@ -41,7 +44,7 @@ public class BlockSoilMudStairs extends BlockStairs implements ISoilBlock {
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

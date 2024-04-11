@@ -112,7 +112,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -130,7 +130,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -150,7 +150,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -168,7 +168,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -186,7 +186,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -205,7 +205,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -223,7 +223,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -238,7 +238,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -257,7 +257,7 @@ public final class RecipesTFCF {
                         IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                         if (recipe != null) {
                             registry.remove(recipe.getRegistryName());
-                            TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                            TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                         }
                     }
                 }
@@ -275,7 +275,7 @@ public final class RecipesTFCF {
                         IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                         if (recipe != null) {
                             registry.remove(recipe.getRegistryName());
-                            TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                            TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                         }
                     }
                 }
@@ -290,7 +290,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -312,7 +312,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -326,7 +326,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -346,7 +346,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -362,7 +362,7 @@ public final class RecipesTFCF {
                         IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                         if (recipe != null) {
                             registry.remove(recipe.getRegistryName());
-                            TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                            TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                         }
                     }
                 }
@@ -377,7 +377,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -399,7 +399,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -413,7 +413,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -433,7 +433,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -449,7 +449,7 @@ public final class RecipesTFCF {
                         IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                         if (recipe != null) {
                             registry.remove(recipe.getRegistryName());
-                            TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                            TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                         }
                     }
                 }
@@ -464,7 +464,7 @@ public final class RecipesTFCF {
                     IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
-                        TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -486,7 +486,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -500,7 +500,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -520,7 +520,7 @@ public final class RecipesTFCF {
                 IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
-                    TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                 }
             }
         }
@@ -538,7 +538,7 @@ public final class RecipesTFCF {
             BarrelRecipe recipe = TFCRegistries.BARREL.getValue(new ResourceLocation(MODID_TFC, name));
             if (recipe != null) {
                 modRegistry.remove(recipe.getRegistryName());
-                TFCFlorae.logger.info("Removed barrel recipe tfc:{}", name);
+                TFCFlorae.LOGGER.info("Removed barrel recipe tfc:{}", name);
             }
         }
 
@@ -1279,7 +1279,7 @@ public final class RecipesTFCF {
             HeatRecipe recipe = TFCRegistries.HEAT.getValue(new ResourceLocation(MODID_TFC, name));
             if (recipe != null) {
                 modRegistry.remove(recipe.getRegistryName());
-                TFCFlorae.logger.info("Removed heating recipe tfc:{}", name);
+                TFCFlorae.LOGGER.info("Removed heating recipe tfc:{}", name);
             }
         }
 
@@ -2104,7 +2104,7 @@ public final class RecipesTFCF {
                     if (recipe != null) {
                         modRegistry.remove(recipe.getRegistryName());
                         if (ConfigFL.General.COMPAT.logging)
-                            FirmaLife.logger.info("Removed heating recipe tfcflorae:{}", name);
+                            FirmaLife.LOGGER.info("Removed heating recipe tfcflorae:{}", name);
                     }
                 }
             }
@@ -2127,7 +2127,7 @@ public final class RecipesTFCF {
                     if (recipe != null) {
                         registry.remove(recipe.getRegistryName());
                         if (ConfigFL.General.COMPAT.logging)
-                            FirmaLife.logger.info("Removed crafting recipe tfcflorae:{}", name);
+                            FirmaLife.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
                     }
                 }
             }

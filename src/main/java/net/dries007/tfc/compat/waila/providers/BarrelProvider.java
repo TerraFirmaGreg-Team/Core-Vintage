@@ -1,9 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.util.Helpers;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +10,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+
+
+import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
+import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +27,7 @@ public class BarrelProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TEBarrel te = Helpers.getTE(world, pos, TEBarrel.class);
+        var te = TileUtils.getTile(world, pos, TEWoodBarrel.class);
         if (te != null) {
             IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
             FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
@@ -50,6 +52,6 @@ public class BarrelProvider implements IWailaBlock {
     @NotNull
     @Override
     public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TEBarrel.class);
+        return Collections.singletonList(TEWoodBarrel.class);
     }
 }

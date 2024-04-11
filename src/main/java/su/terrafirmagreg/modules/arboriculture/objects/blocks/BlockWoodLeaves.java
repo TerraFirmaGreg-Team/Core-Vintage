@@ -26,7 +26,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -40,8 +39,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.google.common.collect.ImmutableList;
+
 import lombok.Getter;
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -83,9 +85,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
         //OreDictUtils.register(this, variant.toString(), type.toString());
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

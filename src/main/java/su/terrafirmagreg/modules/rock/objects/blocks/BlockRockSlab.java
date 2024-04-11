@@ -21,10 +21,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import lombok.Getter;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Random;
@@ -57,7 +57,7 @@ public abstract class BlockRockSlab extends BlockBaseSlab implements IRockBlock 
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlock getItemBlock() {
         return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
     }
 

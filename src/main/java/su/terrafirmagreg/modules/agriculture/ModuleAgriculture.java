@@ -2,14 +2,12 @@ package su.terrafirmagreg.modules.agriculture;
 
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.agriculture.init.BlocksAgriculture;
 import su.terrafirmagreg.modules.agriculture.init.ItemsAgriculture;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public final class ModuleAgriculture extends ModuleBase {
 
     public static final CreativeTabs AGRICULTURE_TAB = new CreativeTabBase("agriculture", "agriculture/crop/seed/rice");
-    public static final Logger LOGGER = LogManager.getLogger(ModuleAgriculture.class.getSimpleName());
+    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleAgriculture.class.getSimpleName());
 
     public ModuleAgriculture() {
         super(7);
@@ -32,7 +30,7 @@ public final class ModuleAgriculture extends ModuleBase {
 
     @NotNull
     @Override
-    public Logger getLogger() {
+    public LoggingUtils getLogger() {
         return LOGGER;
     }
 }

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -24,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -50,6 +52,12 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
         setResistance(3f);
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(FACING, NORTH));
+    }
+
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, getBlockVariant());
+        OreDictUtils.register(this, getBlockVariant(), getType());
     }
 
     @NotNull

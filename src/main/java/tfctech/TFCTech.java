@@ -1,7 +1,7 @@
 package tfctech;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.api.util.LoggingUtils;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -11,9 +11,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.oredict.OreDictionary;
 
-import org.apache.logging.log4j.Logger;
+
 import tfctech.client.TechGuiHandler;
 import tfctech.network.PacketFridgeUpdate;
 import tfctech.network.PacketLatexUpdate;
@@ -31,15 +30,15 @@ public class TFCTech {
     @SuppressWarnings("FieldMayBeFinal")
     @Mod.Instance
     private static TFCTech instance = null;
-    private static Logger logger;
+    private static final LoggingUtils LOGGER = new LoggingUtils(MODID_TFCTECH);
     private SimpleNetworkWrapper network;
 
     public static SimpleNetworkWrapper getNetwork() {
         return instance.network;
     }
 
-    public static Logger getLog() {
-        return logger;
+    public static LoggingUtils getLog() {
+        return LOGGER;
     }
 
     public static TFCTech getInstance() {
@@ -48,15 +47,11 @@ public class TFCTech {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        // Register dust ash ore dictionary
-        // Unfortunately, this has to be done after TFC registered it's items, which is only safe after preInit
-        OreDictionary.registerOre("dustAsh", ItemsCore.WOOD_ASH);
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "tfctech.compat.waila.TOPPlugin");
     }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TechGuiHandler());
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_TFCTECH);
         int id = 0;
@@ -64,7 +59,7 @@ public class TFCTech {
         network.registerMessage(new PacketTileEntityUpdate.Handler(), PacketTileEntityUpdate.class, ++id, Side.CLIENT);
         network.registerMessage(new PacketFridgeUpdate.Handler(), PacketFridgeUpdate.class, ++id, Side.CLIENT);
         if (!signedBuild) {
-            logger.error("INVALID FINGERPRINT DETECTED! This means this jar file has been compromised and are not supported.");
+            LOGGER.error("INVALID FINGERPRINT DETECTED! This means this jar file has been compromised and are not supported.");
         }
     }
 }

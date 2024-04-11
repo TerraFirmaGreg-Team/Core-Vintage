@@ -1,6 +1,7 @@
 package se.gory_moon.horsepower;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.LoggingUtils;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -13,8 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.items.ModItems;
 import se.gory_moon.horsepower.network.PacketHandler;
@@ -39,7 +39,7 @@ public class HorsePowerMod {
     public static CommonProxy proxy;
 
     public static HorsePowerCreativeTab creativeTab = new HorsePowerCreativeTab();
-    public static Logger logger = LogManager.getLogger("HorsePower");
+    public static LoggingUtils logger = new LoggingUtils(MODID_HORSEPOWER);
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

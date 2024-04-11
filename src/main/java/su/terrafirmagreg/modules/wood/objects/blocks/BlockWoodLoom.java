@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BlockBaseContainer;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -30,12 +31,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 
@@ -63,6 +66,7 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
     @Override

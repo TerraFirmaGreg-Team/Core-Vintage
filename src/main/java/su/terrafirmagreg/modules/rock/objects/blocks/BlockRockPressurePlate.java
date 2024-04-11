@@ -10,12 +10,12 @@ import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 import lombok.Getter;
 
@@ -47,7 +47,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

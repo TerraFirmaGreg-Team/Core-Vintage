@@ -1,12 +1,12 @@
 package su.terrafirmagreg.api.module;
 
+import su.terrafirmagreg.api.util.LoggingUtils;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class ModuleManager {
 
-    public static final Logger LOGGER = LogManager.getLogger("Module Manager");
+    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleManager.class.getSimpleName());
 
     private final String modId;
     private final List<ModuleBase> moduleList;

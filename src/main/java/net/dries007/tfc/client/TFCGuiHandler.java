@@ -5,9 +5,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
@@ -15,9 +15,7 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.gui.GuiAnvilPlan;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
-import net.dries007.tfc.client.gui.GuiBarrel;
 import net.dries007.tfc.client.gui.GuiCalendar;
-import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.client.gui.GuiInventoryCrafting;
 import net.dries007.tfc.client.gui.GuiKnapping;
@@ -27,11 +25,8 @@ import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiPowderkeg;
 import net.dries007.tfc.client.gui.GuiSalad;
 import net.dries007.tfc.client.gui.GuiSkills;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.container.ContainerAnvilPlan;
 import net.dries007.tfc.objects.container.ContainerAnvilTFC;
-import net.dries007.tfc.objects.container.ContainerBarrel;
-import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.objects.container.ContainerLargeVessel;
@@ -46,7 +41,6 @@ import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
@@ -90,7 +84,6 @@ public class TFCGuiHandler implements IGuiHandler {
             case SMALL_VESSEL_LIQUID ->
                     new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
             case MOLD -> new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
-            case BARREL -> new ContainerBarrel(player.inventory, Helpers.getTE(world, pos, TEBarrel.class));
             case ANVIL ->
                 //noinspection ConstantConditions
                     new ContainerAnvilTFC(player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
@@ -108,17 +101,6 @@ public class TFCGuiHandler implements IGuiHandler {
             case CALENDAR, SKILLS, NUTRITION -> new ContainerSimple(player.inventory);
             case CRAFTING -> new ContainerInventoryCrafting(player.inventory, player.world);
             case QUIVER -> new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
-            case CHEST -> {
-                if (world.getBlockState(pos).getBlock() instanceof BlockChestTFC) {
-                    ILockableContainer chestContainer = ((BlockChestTFC) world.getBlockState(pos).getBlock()).getLockableContainer(world, pos);
-                    if (chestContainer == null) // This is null if the chest is blocked
-                    {
-                        yield null;
-                    }
-                    yield new ContainerChestTFC(player.inventory, chestContainer, player);
-                }
-                yield null; // This is null if the chest is blocked
-            }
             case SALAD -> new ContainerSalad(player.inventory);
             default -> null;
         };
@@ -137,11 +119,6 @@ public class TFCGuiHandler implements IGuiHandler {
                 return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemSmallVessel);
             case MOLD:
                 return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemMold);
-            case BARREL:
-                return new GuiBarrel(container, player.inventory, Helpers.getTE(world, pos, TEBarrel.class), world
-                        .getBlockState(new BlockPos(x, y, z))
-                        .getBlock()
-                        .getTranslationKey());
             case ANVIL:
                 return new GuiAnvilTFC(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
             case ANVIL_PLAN:
@@ -178,11 +155,6 @@ public class TFCGuiHandler implements IGuiHandler {
                 return new GuiInventoryCrafting(container);
             case QUIVER:
                 return new GuiContainerTFC(container, player.inventory, QUIVER_BACKGROUND);
-            case CHEST:
-                if (container instanceof ContainerChestTFC) {
-                    return new GuiChestTFC((ContainerChestTFC) container, player.inventory);
-                }
-                return null;
             case SALAD:
                 return new GuiSalad(container, player.inventory);
             default:
@@ -194,7 +166,6 @@ public class TFCGuiHandler implements IGuiHandler {
         SMALL_VESSEL,
         SMALL_VESSEL_LIQUID,
         MOLD,
-        BARREL,
         KNAPPING_STONE,
         KNAPPING_CLAY,
         KNAPPING_FIRE_CLAY,
@@ -206,7 +177,6 @@ public class TFCGuiHandler implements IGuiHandler {
         CALENDAR,
         NUTRITION,
         SKILLS,
-        CHEST,
         SALAD,
         INVENTORY, // This is special, it is used by GuiButtonPlayerInventoryTab to signal to open the vanilla inventory
         CRAFTING, // In-inventory 3x3 crafting grid

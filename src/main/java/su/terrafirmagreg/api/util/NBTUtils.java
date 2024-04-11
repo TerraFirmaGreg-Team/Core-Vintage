@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.lib.Constants;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -55,8 +53,7 @@ public final class NBTUtils {
             dataTag.setTag(tagName, newTag);
         } else {
             throw new RuntimeException(
-                    "The data type of " + value.getClass().getName() + " is currently not supported." + Constants.NEW_LINE +
-                            "Raw Data: " + value
+                    "The data type of " + value.getClass().getName() + " is currently not supported." + System.lineSeparator() + "Raw Data: " + value
             );
         }
     }
@@ -71,7 +68,7 @@ public final class NBTUtils {
     public static NBTTagCompound writeInventoryToNBT(NBTTagCompound tag, InventoryBasic inventory) {
 
         if (inventory.hasCustomName()) {
-            tag.setString("CustomName", inventory.getName());
+            NBTUtils.setGenericNBTValue(tag, "CustomName", inventory.getName());
         }
 
         final NBTTagList nbttaglist = new NBTTagList();

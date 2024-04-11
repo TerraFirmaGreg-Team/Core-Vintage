@@ -64,7 +64,6 @@ dependencies {
 //      implementation rfg.deobf("curse.maven:shadowfacts-forgelin-248453:2785465")
 
 //      runtimeOnly("curse.maven:fancy-spawn-eggs-302277:2612571")
-//      runtimeOnly("curse.maven:nbt-tooltip-274816:2567902")
 //      runtimeOnly("curse.maven:spark-361579:3542217")
 //      runtimeOnly("curse.maven:tabula-minecraft-modeler-229092:2801271")
 //      runtimeOnly("curse.maven:ichunutil-229060:2801263")

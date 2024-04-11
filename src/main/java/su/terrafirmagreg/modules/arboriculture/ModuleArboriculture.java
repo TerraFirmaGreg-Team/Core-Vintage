@@ -2,21 +2,19 @@ package su.terrafirmagreg.modules.arboriculture;
 
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.arboriculture.init.BlocksArboriculture;
 import su.terrafirmagreg.modules.arboriculture.init.ItemsArboriculture;
 
 import net.minecraft.creativetab.CreativeTabs;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import org.jetbrains.annotations.NotNull;
 
 //@Module(moduleID = "Arboriculture", name = "TFG Module Arboriculture")
 public final class ModuleArboriculture extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger("Module Arboriculture");
+    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleArboriculture.class.getSimpleName());
     public static final CreativeTabs ARBORICULTURE_TAB = new CreativeTabBase("arboriculture", "arboriculture/log/pine");
 
     public ModuleArboriculture() {
@@ -32,7 +30,7 @@ public final class ModuleArboriculture extends ModuleBase {
     }
 
     @Override
-    public @NotNull Logger getLogger() {
+    public @NotNull LoggingUtils getLogger() {
         return LOGGER;
     }
 }

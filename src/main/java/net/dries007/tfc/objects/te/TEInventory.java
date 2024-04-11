@@ -11,8 +11,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
+
+import net.dries007.tfc.api.capability.inventory.ISlotCallback;
+import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

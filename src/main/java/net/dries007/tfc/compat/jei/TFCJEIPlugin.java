@@ -6,10 +6,11 @@ import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
+import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
+import su.terrafirmagreg.modules.wood.init.RegistryWood;
 
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.FluidStack;
@@ -31,7 +32,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
-import net.dries007.tfc.client.gui.GuiBarrel;
 import net.dries007.tfc.client.gui.GuiCalendar;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiNutrition;
@@ -82,10 +82,6 @@ import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-
-
-import su.terrafirmagreg.modules.wood.init.RegistryWood;
-
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -272,7 +268,7 @@ public final class TFCJEIPlugin implements IModPlugin {
                 .collect(Collectors.toList());
 
         registry.addRecipes(barrelRecipes, BARREL_UID);
-        for (Item barrelItem : BlocksTFC.getAllBarrelItemBlocks()) {
+        for (var barrelItem : WoodBlockVariants.BARREL.get()) {
             registry.addRecipeCatalyst(new ItemStack(barrelItem), BARREL_UID);
         }
 
@@ -378,7 +374,7 @@ public final class TFCJEIPlugin implements IModPlugin {
         //Click areas
         registry.addRecipeClickArea(GuiKnapping.class, 97, 44, 22, 15, KNAP_CLAY_UID, KNAP_FIRECLAY_UID, KNAP_LEATHER_UID, KNAP_STONE_UID);
         registry.addRecipeClickArea(GuiAnvilTFC.class, 26, 24, 9, 14, ANVIL_UID, WELDING_UID);
-        registry.addRecipeClickArea(GuiBarrel.class, 92, 21, 9, 14, BARREL_UID);
+        registry.addRecipeClickArea(GuiWoodBarrel.class, 92, 21, 9, 14, BARREL_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 139, 100, 10, 15, ALLOY_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 82, 100, 10, 15, METAL_HEAT_UID);
         registry.addRecipeClickArea(GuiFirePit.class, 79, 37, 18, 10, HEAT_UID);

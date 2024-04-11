@@ -1,6 +1,7 @@
 package su.terrafirmagreg;
 
 import su.terrafirmagreg.api.module.ModuleManager;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
@@ -16,9 +17,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
+
 import lombok.Getter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;
 import static su.terrafirmagreg.Tags.*;
@@ -26,7 +26,7 @@ import static su.terrafirmagreg.Tags.*;
 @Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
-    public static final Logger LOGGER = LogManager.getLogger("TFG");
+    public static final LoggingUtils LOGGER = new LoggingUtils(MOD_ID);
 
     @Getter
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)

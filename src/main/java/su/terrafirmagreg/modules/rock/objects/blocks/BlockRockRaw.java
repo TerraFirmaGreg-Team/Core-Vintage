@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.util.FallingBlockManager;
 
@@ -33,7 +34,7 @@ import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.CAN_FALL;
 
-public class BlockRockRaw extends BlockRock implements ICustomStateMapper {
+public class BlockRockRaw extends BlockRock implements ICustomState {
 
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
 

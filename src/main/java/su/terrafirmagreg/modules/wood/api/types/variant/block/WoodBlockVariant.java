@@ -6,11 +6,15 @@ import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
 import net.minecraft.block.Block;
 
+
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -63,6 +67,16 @@ public class WoodBlockVariant implements Comparable<WoodBlockVariant> {
         var block = BlocksWood.WOOD_BLOCKS.get(Pair.of(this, type));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block wood is null: %s, %s", this, type));
+    }
+
+    public List<Block> get() {
+        final var list = new ArrayList<Block>();
+        BlocksWood.WOOD_BLOCKS.forEach((key, value) -> {
+            if (key.getLeft() == this) {
+                list.add(value);
+            }
+        });
+        return list;
     }
 
     /**

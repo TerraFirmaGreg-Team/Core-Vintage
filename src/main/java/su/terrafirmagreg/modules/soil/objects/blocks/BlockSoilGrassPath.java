@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import org.jetbrains.annotations.Nullable;
+
+
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -13,7 +16,6 @@ import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -23,7 +25,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import lombok.Getter;
+
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +60,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

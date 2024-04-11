@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodChest;
 import su.terrafirmagreg.modules.wood.objects.inventory.capability.WoodDoubleChestItemHandler;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -30,9 +29,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 
+import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,7 +68,7 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback, ICont
         if (world == null) return false;
 
         Block block = this.world.getBlockState(posIn).getBlock();
-        return block instanceof BlockWoodChest && ((BlockWoodChest) block).getType() == getWood() && ((BlockChest) block).chestType == getChestType();
+        return block instanceof BlockWoodChest blockWoodChest && blockWoodChest.getType() == getWood() && blockWoodChest.chestType == getChestType();
     }
 
     @Override
@@ -83,8 +82,8 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback, ICont
             for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(6, 6, 6)))) {
                 if (player.openContainer instanceof ContainerWoodChest containerWoodChest) {
                     IInventory iinventory = containerWoodChest.getLowerChestInventory();
-                    if (iinventory == this ||
-                            iinventory instanceof InventoryLargeChest && ((InventoryLargeChest) iinventory).isPartOfLargeChest(this)) {
+                    if (iinventory == this || iinventory instanceof InventoryLargeChest inventoryLargeChest &&
+                            inventoryLargeChest.isPartOfLargeChest(this)) {
                         ++numPlayersUsing;
                     }
                 }
@@ -189,9 +188,7 @@ public class TEWoodChest extends TileEntityChest implements ISlotCallback, ICont
     public ContainerWoodChest getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
         ILockableContainer chestContainer = ((BlockWoodChest) state.getBlock()).getLockableContainer(world, pos);
         // This is null if the chest is blocked
-        if (chestContainer == null) {
-            return null;
-        }
+        if (chestContainer == null) return null;
         return new ContainerWoodChest(inventoryPlayer, chestContainer, inventoryPlayer.player);
     }
 

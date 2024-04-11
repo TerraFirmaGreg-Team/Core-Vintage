@@ -8,7 +8,9 @@ import net.minecraft.block.BlockGravel;
 import net.minecraft.block.SoundType;
 import net.minecraft.item.ItemBlock;
 
+
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockAggregate extends BlockGravel implements IAutoReg {
 
@@ -18,7 +20,7 @@ public class BlockAggregate extends BlockGravel implements IAutoReg {
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlock getItemBlock() {
         return new ItemBlockBase(this);
     }
 

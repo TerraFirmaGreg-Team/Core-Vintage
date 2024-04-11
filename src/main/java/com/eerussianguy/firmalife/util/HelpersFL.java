@@ -10,6 +10,7 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
@@ -43,7 +44,7 @@ public class HelpersFL {
             Set<String> woodenBucketSet = new HashSet<>(Arrays.asList(ConfigTFC.General.MISC.woodenBucketWhitelist));
             for (String a : additions) {
                 if (woodenBucketSet.add(a) && ConfigFL.General.COMPAT.logging) {
-                    FirmaLife.logger.info("Added {} to TFC's wooden bucket fluid whitelist", a);
+                    FirmaLife.LOGGER.info("Added {} to TFC's wooden bucket fluid whitelist", a);
                 }
             }
             ConfigTFC.General.MISC.woodenBucketWhitelist = woodenBucketSet.toArray(new String[] {});
@@ -52,7 +53,7 @@ public class HelpersFL {
             Set<String> barrelSet = new HashSet<>(Arrays.asList(ConfigTFC.Devices.BARREL.fluidWhitelist));
             for (String a : additions) {
                 if (barrelSet.add(a) && ConfigFL.General.COMPAT.logging) {
-                    FirmaLife.logger.info("Added {} to TFC's barrel fluid whitelist", a);
+                    FirmaLife.LOGGER.info("Added {} to TFC's barrel fluid whitelist", a);
                 }
             }
             ConfigTFC.Devices.BARREL.fluidWhitelist = barrelSet.toArray(new String[] {});

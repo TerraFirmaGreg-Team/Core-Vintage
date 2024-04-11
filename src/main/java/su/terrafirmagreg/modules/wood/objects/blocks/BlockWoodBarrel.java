@@ -1,12 +1,14 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
 
 import net.minecraft.block.Block;
@@ -14,8 +16,6 @@ import net.minecraft.block.BlockRedstoneComparator;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +39,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
@@ -55,7 +56,7 @@ import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
  * @see TEWoodBarrel
  * @see BarrelRecipe
  */
-public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock {
+public class BlockWoodBarrel extends BlockWood implements ITEBlock {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
@@ -63,7 +64,18 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
         super(variant, type);
 
         setHardness(2F);
-        setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(SEALED, false));
+    }
+
+    @Override
+    public @Nullable ItemBlockBase getItemBlock() {
+        return new ItemBlockWoodBarrel(this);
+    }
+
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, getBlockVariant());
     }
 
     /**
@@ -299,13 +311,6 @@ public class BlockWoodBarrel extends BlockWood implements ICustomMesh, ITEBlock 
     @SuppressWarnings("deprecation")
     public int getComparatorInputOverride(IBlockState state, @NotNull World world, @NotNull BlockPos pos) {
         return state.getValue(SEALED) ? 15 : 0;
-    }
-
-    @Override
-    public ItemMeshDefinition getCustomMesh() {
-        return stack -> stack.getTagCompound() != null ?
-                new ModelResourceLocation(getResourceLocation(), "sealed=true") :
-                new ModelResourceLocation(getResourceLocation(), "sealed=false");
     }
 
     @Override

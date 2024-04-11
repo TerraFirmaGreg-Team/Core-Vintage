@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.spi.block;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.util.ModelUtils;
 
@@ -21,12 +21,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import lombok.Getter;
-
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 @Getter
-public abstract class BlockBaseSlab extends BlockSlab implements IAutoReg, ICustomStateMapper {
+public abstract class BlockBaseSlab extends BlockSlab implements IAutoReg, ICustomState {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 

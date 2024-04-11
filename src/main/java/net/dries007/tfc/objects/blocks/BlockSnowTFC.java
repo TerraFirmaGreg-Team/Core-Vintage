@@ -13,9 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -28,7 +31,7 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
     }
 
     @Override
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    public void randomTick(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random random) {
         super.randomTick(worldIn, pos, state, random);
         if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - getLightOpacity(state, worldIn, pos) || ClimateTFC.getActualTemp(worldIn, pos) > 4f) {
             if (state.getValue(LAYERS) > 1) {
@@ -40,16 +43,16 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
     }
 
     @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
+    public void onEntityWalk(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull Entity entityIn) {
+        if (!(entityIn instanceof EntityPlayer entityPlayer && entityPlayer.isCreative())) {
             entityIn.motionX *= ConfigTFC.General.MISC.snowMovementModifier;
             entityIn.motionZ *= ConfigTFC.General.MISC.snowMovementModifier;
         }
     }
 
     @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative())) {
+    public void onEntityCollision(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Entity entityIn) {
+        if (!(entityIn instanceof EntityPlayer entityPlayer && entityPlayer.isCreative())) {
             entityIn.motionX *= ConfigTFC.General.MISC.snowMovementModifier;
             entityIn.motionZ *= ConfigTFC.General.MISC.snowMovementModifier;
         }

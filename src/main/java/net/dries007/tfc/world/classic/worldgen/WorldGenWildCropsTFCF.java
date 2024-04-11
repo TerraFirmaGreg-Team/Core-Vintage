@@ -35,7 +35,7 @@ public class WorldGenWildCropsTFCF implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && CROPS.size() > 0 &&
+        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && !CROPS.isEmpty() &&
                 ConfigTFC.General.FOOD.cropRarity > 0) {
             // Guarantees crop generation if possible (easier to balance by config file while also making it random)
             BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
@@ -67,8 +67,7 @@ public class WorldGenWildCropsTFCF implements IWorldGenerator {
                                 if (growth > maxStage)
                                     growth = maxStage;
                                 TFCFlorae.getLog()
-                                        .warn(crop + " tried to generate at X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ() + " is " +
-                                                b);
+                                        .warn("{} tried to generate at X: {} Y: {} Z: {} is {}", crop, pos.getX(), pos.getY(), pos.getZ(), b);
                                 world.setBlockState(pos, cropBlock.getDefaultState()
                                         .withProperty(cropBlock.getStageProperty(), growth)
                                         .withProperty(BlockCropTFC.WILD, true), 2);

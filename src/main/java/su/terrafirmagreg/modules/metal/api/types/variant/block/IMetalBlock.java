@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок металла.
  */
-public interface IMetalBlock extends IMetalType, IAutoReg, IItemSize, ICustomModel, ICustomStateMapper {
+public interface IMetalBlock extends IMetalType, IAutoReg, IItemSize, ICustomModel, ICustomState {
 
     /**
      * Возвращает вариант металлического блока.

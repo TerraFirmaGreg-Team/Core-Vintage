@@ -5,7 +5,6 @@ import java.util.Random;
 public class Constants {
 
     public static final Random RANDOM = new Random();
-    public static final String NEW_LINE = System.getProperty("line.separator");
 
     public static final String MODID_TFC = "tfc";
     public static final String MODID_TFCF = "tfcflorae";
@@ -15,9 +14,7 @@ public class Constants {
     public static final String MODID_TIME4TFC = "time4tfc";
     public static final String MODID_OSA = "oversizediteminstoragearea";
     static public final String MODID_CELLARS = "cellars";
-    public static final String MODID_EASYBREEDINGTFC = "easybreedingtfc";
     public static final String MODID_TFCTHINGS = "tfcthings";
-    public static final String MODID_ASTIKORCARTS = "astikorcarts";
     public static final String MODID_HOTORNOT = "hotornot";
     public static final String MODID_FL = "firmalife";
     public static final String MODID_AGEDDRINKS = "aged_drinks";

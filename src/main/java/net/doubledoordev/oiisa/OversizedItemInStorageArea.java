@@ -1,6 +1,7 @@
 package net.doubledoordev.oiisa;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.state.IBlockState;
@@ -27,11 +28,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.util.Helpers;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +55,7 @@ public class OversizedItemInStorageArea {
      */
     @Mod.Instance(MODID_OSA)
     public static OversizedItemInStorageArea INSTANCE;
-    static Logger log;
+    static final LoggingUtils LOGGER = new LoggingUtils(MODID_OSA);
     DamageSource playerIncinerator = new DamageSource("oiisaincinerator").setDamageBypassesArmor().setDamageIsAbsolute();
     Map<String, Integer> weightMap = new HashMap<>();
     Map<String, Integer> containerSizeOverideMap = new HashMap<>();
@@ -64,7 +65,6 @@ public class OversizedItemInStorageArea {
      */
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
-        log = event.getModLog();
         MinecraftForge.EVENT_BUS.register(this);
         splitConfig();
     }
@@ -249,7 +249,7 @@ public class OversizedItemInStorageArea {
             }
         }
         if (ModConfig.debugOptions.debug && ModConfig.debugOptions.weightDebug) {
-            log.info("Total Weight of Container: " + currentWeight + " Maximum weight allowed: " + maxWeight);
+            LOGGER.info("Total Weight of Container: " + currentWeight + " Maximum weight allowed: " + maxWeight);
         }
         return toYeet;
     }
@@ -258,13 +258,13 @@ public class OversizedItemInStorageArea {
                                EntityPlayer player) {
         //Remove this entry if people put it in cause a shit ton of stuff uses this and warn them.
         if (slotClassNameList.remove("net.minecraft.inventory.InventoryBasic")) {
-            log.warn(
+            LOGGER.warn(
                     "Ignoring basic slot! DON'T PUT \"net.minecraft.inventory.InventoryBasic\" IN YOUR CONFIG, LIKE THE CONFIG SAYS! THIS IS NOT A BUG!");
         }
 
         // simple debug to get the container class name.
         if (ModConfig.debugOptions.debug) {
-            log.info(containerName);
+            LOGGER.info(containerName);
         }
 
         // Check over every slot inside the inventory to get the slots we want to mess with.
@@ -272,7 +272,7 @@ public class OversizedItemInStorageArea {
 
             // simple debug to get the slot class names.
             if (ModConfig.debugOptions.debug && ModConfig.debugOptions.slotDebug) {
-                log.info(slot.inventory.getClass());
+                LOGGER.info(String.valueOf(slot.inventory.getClass()));
             }
 
             //If the blacklist list doesn't contain this slot class and the slot can have items taken
@@ -343,7 +343,7 @@ public class OversizedItemInStorageArea {
                     if (tracedPos != null && world.getTileEntity(tracedPos) != null && heatCapability != null &&
                             heatCapability.getTemperature() >= ModConfig.overheatOptions.heatToStartFire) {
                         if (ModConfig.debugOptions.debug && ModConfig.debugOptions.heatDebug) {
-                            log.info("Current Item Temperature: " + heatCapability.getTemperature() + " Maximum Temperature allowed: " +
+                            LOGGER.info("Current Item Temperature: " + heatCapability.getTemperature() + " Maximum Temperature allowed: " +
                                     ModConfig.overheatOptions.heatToStartFire);
                         }
                         // get the blockstate at the pos location
@@ -358,7 +358,7 @@ public class OversizedItemInStorageArea {
                                         ModConfig.overheatOptions.heatActionBarMessage);
                         } else {
                             if (ModConfig.debugOptions.debug && ModConfig.debugOptions.heatDebug) {
-                                log.info("Fire was aborted as this block can't burn.");
+                                LOGGER.info("Fire was aborted as this block can't burn.");
                             }
                         }
                     }

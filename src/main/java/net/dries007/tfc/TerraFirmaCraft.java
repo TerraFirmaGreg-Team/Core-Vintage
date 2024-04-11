@@ -1,5 +1,7 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.util.LoggingUtils;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
@@ -17,6 +19,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
+
 
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
@@ -62,8 +65,6 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import static su.terrafirmagreg.Tags.VERSION;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -90,12 +91,12 @@ public final class TerraFirmaCraft {
         FluidRegistry.enableUniversalBucket();
     }
 
-    private final Logger log = LogManager.getLogger(MODID_TFC);
+    private final LoggingUtils log = new LoggingUtils(MODID_TFC);
     private final boolean isSignedBuild = true;
     private WorldTypeTFC worldTypeTFC;
     private SimpleNetworkWrapper network;
 
-    public static Logger getLog() {
+    public static LoggingUtils getLog() {
         return INSTANCE.log;
     }
 

@@ -2,7 +2,9 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -10,13 +12,13 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
@@ -35,13 +37,17 @@ public class BlockWoodFenceGate extends BlockFenceGate implements IWoodBlock {
         setHardness(2.0F);
         setResistance(15.0F);
 
-        //OreDictUtils.register(this, variant.toString());
-        //OreDictUtils.register(this, variant.toString(), type.toString());
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, "fence", "gate", "wood");
+        OreDictUtils.register(this, "fence", "gate", "wood", type);
+    }
+
+    @Override
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

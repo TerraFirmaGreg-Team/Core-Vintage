@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.objects.container.ContainerAnvilTFC;
 import net.dries007.tfc.objects.container.IButtonHandler;
@@ -28,8 +29,7 @@ public class SCPacketGuiButton implements IMessage, IMessageHandler<SCPacketGuiB
     private NBTTagCompound extraNBT;
 
     @SuppressWarnings("unused")
-    public SCPacketGuiButton() {
-    }
+    public SCPacketGuiButton() {}
 
     public SCPacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
         this.buttonID = buttonID;

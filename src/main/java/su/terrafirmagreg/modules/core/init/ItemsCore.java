@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.core.objects.items.ItemCoreMisc;
 import su.terrafirmagreg.modules.core.objects.items.ItemDebug;
 
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -32,7 +33,7 @@ public final class ItemsCore {
         SEA_ICE_SHARD = registry.registerItem(new ItemCoreMisc("sea_ice_shard", Size.TINY, Weight.LIGHT));
         PACKED_ICE_SHARD = registry.registerItem(new ItemCoreMisc("packed_ice_shard", Size.TINY, Weight.LIGHT));
         STRAW = registry.registerItem(new ItemCoreMisc("straw", Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"));
-        WOOD_ASH = registry.registerItem(new ItemCoreMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT));
+        WOOD_ASH = registry.registerItem(new ItemCoreMisc("wood_ash", Size.VERY_SMALL, Weight.VERY_LIGHT, "dustAsh"));
         JAR = registry.registerItem(new ItemCoreMisc("jar", Size.VERY_SMALL, Weight.VERY_LIGHT));
         HALTER = registry.registerItem(new ItemCoreMisc("halter", Size.SMALL, Weight.LIGHT, "halter"));
         MORTAR = registry.registerItem(new ItemCoreMisc("mortar", Size.TINY, Weight.VERY_LIGHT, "mortar"));

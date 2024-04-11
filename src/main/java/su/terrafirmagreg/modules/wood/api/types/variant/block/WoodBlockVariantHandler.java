@@ -21,6 +21,7 @@ import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodTrapDoor;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodWall;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodWorkbench;
 
+
 import static su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants.*;
 
 public class WoodBlockVariantHandler {
@@ -126,7 +127,7 @@ public class WoodBlockVariantHandler {
                 .setFireInfo(5, 20)
                 .build();
 
-        CHEST_TRAP = new WoodBlockVariant.Builder("chest_trap")
+        CHEST_TRAPPED = new WoodBlockVariant.Builder("chest_trapped")
                 .setFactory(BlockWoodChest::new)
                 .setFireInfo(5, 20)
                 .build();

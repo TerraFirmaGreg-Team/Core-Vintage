@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -8,11 +10,11 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodFence extends BlockFence implements IWoodBlock {
@@ -31,13 +33,17 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock {
         setHardness(2.0F);
         setResistance(15.0F);
 
-        //OreDictUtils.register(this, variant.toString());
-        //OreDictUtils.register(this, variant.toString(), type.toString());
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, "fence", "wood");
+        OreDictUtils.register(this, "fence", "wood", type);
+    }
+
+    @Override
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 }

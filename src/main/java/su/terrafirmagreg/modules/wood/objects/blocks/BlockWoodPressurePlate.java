@@ -10,11 +10,11 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodBlock {
@@ -31,7 +31,7 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
 
-        BlockUtils.setFireInfo(this, 5, 20);
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
     public void onRegisterOreDict() {
@@ -40,9 +40,8 @@ public class BlockWoodPressurePlate extends BlockPressurePlate implements IWoodB
         OreDictUtils.register(this, blockVariant, type);
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 }

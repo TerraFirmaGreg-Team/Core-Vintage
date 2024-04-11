@@ -1,5 +1,7 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.SoundType;
@@ -22,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.main.ConfigTFCThings;
@@ -37,7 +40,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.skills.ProspectingSkill;
 import net.dries007.tfc.util.skills.SkillType;
@@ -182,7 +184,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
                 }
                 playerIn.getCooldownTracker().setCooldown(this, 10);
             }
-            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
         }
     }
 
@@ -190,7 +192,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
         int radX = 4;
         int radY = 2;
         int radZ = 4;
-        Iterator var6 = BlockSupport.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))
+        Iterator var6 = BlockWoodSupport.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))
                 .iterator();
 
         while (var6.hasNext()) {
@@ -210,7 +212,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
         IBlockState iblockstate = worldIn.getBlockState(pos.up());
         Block block = iblockstate.getBlock();
         if (block instanceof BlockRockVariantFallable || block instanceof BlockFalling) {
-            return !BlockSupport.isBeingSupported(worldIn, pos.up());
+            return !BlockWoodSupport.isBeingSupported(worldIn, pos.up());
         }
         return false;
     }

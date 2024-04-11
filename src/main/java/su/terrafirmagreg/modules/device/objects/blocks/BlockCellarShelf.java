@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BlockBaseContainer;
+import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TECellarShelf;
@@ -9,7 +10,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -17,6 +17,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
 
 import net.dries007.tfc.util.Helpers;
 
@@ -81,8 +82,8 @@ public class BlockCellarShelf extends BlockBaseContainer implements ITEBlock {
     }
 
     @Override
-    public @Nullable ItemBlock getItemBlock() {
-        return new ItemBlock(this);
+    public @Nullable ItemBlockBase getItemBlock() {
+        return new ItemBlockBase(this);
     }
 
     @Override

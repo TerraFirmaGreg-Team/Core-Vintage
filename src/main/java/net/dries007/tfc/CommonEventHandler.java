@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
+import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -84,6 +85,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+
 import BananaFructa.deathdairydespair.Config;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.damage.DamageType;
@@ -125,7 +127,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
@@ -313,7 +314,7 @@ public final class CommonEventHandler {
         if (state.getBlock() instanceof BlockAnvilTFC
                 || state.getBlock() instanceof BlockStoneAnvil
                 || state.getBlock() instanceof BlockQuern
-                || state.getBlock() instanceof BlockSupport) {
+                || state.getBlock() instanceof BlockWoodSupport) {
             event.setUseBlock(Event.Result.ALLOW);
         }
 

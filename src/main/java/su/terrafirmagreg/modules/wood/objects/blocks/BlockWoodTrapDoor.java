@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -8,11 +10,11 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
@@ -28,13 +30,17 @@ public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
 
-        //OreDictUtils.register(this, variant.toString());
-        //OreDictUtils.register(this, variant.toString(), type.toString());
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, getBlockVariant(), "wood");
+        OreDictUtils.register(this, getBlockVariant(), "wood", getType());
+    }
+
+    @Override
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 }

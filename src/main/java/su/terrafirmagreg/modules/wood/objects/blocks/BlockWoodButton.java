@@ -9,11 +9,11 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
-import net.minecraft.item.ItemBlock;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
@@ -28,7 +28,7 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
 
-        BlockUtils.setFireInfo(this, 5, 20);
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
     public void onRegisterOreDict() {
@@ -36,9 +36,8 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
         OreDictUtils.register(this, blockVariant, type);
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

@@ -50,23 +50,23 @@ public class ModuleEventRouter {
         this.routes.put(FMLConstructionEvent.class,
                 (IFMLStateEventRoute<FMLConstructionEvent>) (event) ->
                         this.fireEvent(module -> {
+                            module.getLogger().debug("Registering packets");
+                            module.onNetworkRegister();
+
                             module.getLogger().debug("Construction start");
                             module.onConstruction(event);
                             module.getLogger().debug("Construction complete");
-
-                            module.getLogger().debug("Registering packets");
-                            module.onNetworkRegister();
                         })
         );
         this.routes.put(FMLPreInitializationEvent.class,
                 (IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
                         this.fireEvent(module -> {
+                            module.getLogger().debug("Registering");
+                            module.onRegister();
+                            
                             module.getLogger().debug("Pre-Init start");
                             module.onPreInit(event);
                             module.getLogger().debug("Pre-Init complete");
-
-                            module.getLogger().debug("Registering");
-                            module.onRegister();
 
                             if (event.getSide().isClient()) {
                                 module.getLogger().debug("Client Pre-Init start");

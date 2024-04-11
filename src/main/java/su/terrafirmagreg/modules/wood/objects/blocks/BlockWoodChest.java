@@ -3,7 +3,9 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -19,7 +21,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
@@ -32,12 +33,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
+
+import static net.minecraft.block.BlockChest.Type.BASIC;
+import static net.minecraft.block.BlockChest.Type.TRAP;
+import static su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants.CHEST;
 
 @Getter
 public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
@@ -46,7 +53,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
     private final WoodType type;
 
     public BlockWoodChest(WoodBlockVariant blockVariant, WoodType type) {
-        super(Type.BASIC);
+        super(blockVariant == CHEST ? BASIC : TRAP);
 
         this.blockVariant = blockVariant;
         this.type = type;
@@ -54,13 +61,18 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
         setHardness(2.5F);
         setSoundType(SoundType.WOOD);
 
-        //OreDictUtils.register(this, variant.toString());
-        //OreDictUtils.register(this, variant.toString(), type.toString());
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, "chest", "wood");
+        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, blockVariant, type);
+    }
+
+    @Override
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 
@@ -80,12 +92,12 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
     @Nullable
     @Override
     public ILockableContainer getContainer(World worldIn, @NotNull BlockPos pos, boolean allowBlocking) {
-        var tileentity = worldIn.getTileEntity(pos);
+        var te = worldIn.getTileEntity(pos);
 
-        if (!(tileentity instanceof TileEntityChest)) {
+        if (!(te instanceof TileEntityChest tileEntityChest)) {
             return null;
         } else {
-            ILockableContainer ilockablecontainer = (TileEntityChest) tileentity;
+            ILockableContainer ilockablecontainer = tileEntityChest;
 
             if (!allowBlocking && isBlocked(worldIn, pos)) {
                 return null;
@@ -102,13 +114,11 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 
                         TileEntity tileentity1 = worldIn.getTileEntity(blockpos);
 
-                        if (tileentity1 instanceof TileEntityChest) {
+                        if (tileentity1 instanceof TileEntityChest tileEntityChest1) {
                             if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer,
-                                        (TileEntityChest) tileentity1);
+                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest1);
                             } else {
-                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", (TileEntityChest) tileentity1,
-                                        ilockablecontainer);
+                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest1, ilockablecontainer);
                             }
                         }
                     }

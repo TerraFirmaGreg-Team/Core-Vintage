@@ -6,6 +6,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+
 import com.eerussianguy.firmalife.util.HelpersFL;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
@@ -18,7 +19,7 @@ public class ConfigFL {
     public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(MODID_FL)) {
             if (ConfigFL.General.COMPAT.logging)
-                FirmaLife.logger.warn("Config changed.");
+                FirmaLife.LOGGER.warn("Config changed.");
             ConfigManager.sync(MODID_TFC, Config.Type.INSTANCE);
         }
         if (event.getModID().equals(MODID_TFC)) {

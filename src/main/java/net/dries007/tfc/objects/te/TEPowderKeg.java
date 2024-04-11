@@ -16,10 +16,11 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+
 import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
+import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.blocks.BlockPowderKeg;
-import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
-import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.PowderKegExplosion;
 

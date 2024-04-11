@@ -19,6 +19,7 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.google.common.base.Preconditions;
 
 import org.jetbrains.annotations.NotNull;
@@ -78,7 +79,10 @@ public final class ModelUtils {
 
     public static void registerBlockInventoryModel(Block block, ResourceLocation modelLocation) {
         ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
+    }
 
+    public static void registerCustomMeshDefinition(Block block, ItemMeshDefinition meshDefinition) {
+        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), meshDefinition);
     }
 
     // ===== Item ================================================================================================================================//

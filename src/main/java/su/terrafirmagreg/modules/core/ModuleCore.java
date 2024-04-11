@@ -3,20 +3,21 @@ package su.terrafirmagreg.modules.core;
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
+import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
+import su.terrafirmagreg.modules.core.init.PacketCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,13 +25,21 @@ import org.jetbrains.annotations.NotNull;
            description = "Core TFG content. Disabling this disables the entire mod and all its module.")
 public final class ModuleCore extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger(ModuleCore.class.getSimpleName());
+    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleCore.class.getSimpleName());
     public static final CreativeTabs CORE_TAB = new CreativeTabBase("misc", "core/wand");
+
+    public static IPacketService PACKET_SERVICE;
 
     public ModuleCore() {
         super(1);
         this.enableAutoRegistry(CORE_TAB);
 
+        PACKET_SERVICE = this.enableNetwork();
+    }
+
+    @Override
+    public void onNetworkRegister() {
+        PacketCore.onRegister(packetRegistry);
     }
 
     @Override
@@ -49,7 +58,7 @@ public final class ModuleCore extends ModuleBase {
     }
 
     @Override
-    public @NotNull Logger getLogger() {
+    public @NotNull LoggingUtils getLogger() {
         return LOGGER;
     }
 }

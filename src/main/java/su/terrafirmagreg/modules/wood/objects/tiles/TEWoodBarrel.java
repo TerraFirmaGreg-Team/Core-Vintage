@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.tile.TEBaseTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
@@ -32,7 +33,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 
-import lombok.Getter;
+import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
+import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -41,9 +43,6 @@ import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
 import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
-import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
-import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -51,6 +50,8 @@ import net.dries007.tfc.util.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -62,7 +63,7 @@ import java.util.stream.Collectors;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
-public class TEWoodBarrel extends TETickableInventory
+public class TEWoodBarrel extends TEBaseTickableInventory
         implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback,
                    IContainerProvider<ContainerWoodBarrel, GuiWoodBarrel> {
 
@@ -93,7 +94,7 @@ public class TEWoodBarrel extends TETickableInventory
      */
     public void saveToItemStack(ItemStack stack) {
         IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (barrelCap instanceof ItemBlockWoodBarrel.ItemBarrelFluidHandler) {
+        if (barrelCap instanceof ItemBlockWoodBarrel.ItemBarrelFluidHandler itemBarrelFluidHandler) {
             NBTTagCompound inventoryTag = null;
             // Check if inventory has contents
             for (int i = 0; i < inventory.getSlots(); i++) {
@@ -112,7 +113,7 @@ public class TEWoodBarrel extends TETickableInventory
             }
             FluidStack storing = tank.getFluid();
             if (storing != null || inventoryTag != null || surplusTag != null) {
-                ((ItemBlockWoodBarrel.ItemBarrelFluidHandler) barrelCap).setBarrelContents(storing, inventoryTag, surplusTag, sealedTick,
+                itemBarrelFluidHandler.setBarrelContents(storing, inventoryTag, surplusTag, sealedTick,
                         sealedCalendarTick);
             }
         }
@@ -125,8 +126,8 @@ public class TEWoodBarrel extends TETickableInventory
      */
     public void loadFromItemStack(ItemStack stack) {
         IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (barrelCap instanceof ItemBlockWoodBarrel.ItemBarrelFluidHandler) {
-            NBTTagCompound contents = ((ItemBlockWoodBarrel.ItemBarrelFluidHandler) barrelCap).getBarrelContents();
+        if (barrelCap instanceof ItemBlockWoodBarrel.ItemBarrelFluidHandler itemBarrelFluidHandler) {
+            NBTTagCompound contents = itemBarrelFluidHandler.getBarrelContents();
             if (contents != null) {
                 inventory.deserializeNBT(contents.getCompoundTag("inventory"));
                 surplus.clear();
@@ -138,7 +139,7 @@ public class TEWoodBarrel extends TETickableInventory
                 }
                 sealedTick = contents.getLong("sealedTick");
                 sealedCalendarTick = contents.getLong("sealedCalendarTick");
-                tank.fill(((ItemBlockWoodBarrel.ItemBarrelFluidHandler) barrelCap).getFluid(), true);
+                tank.fill(itemBarrelFluidHandler.getFluid(), true);
                 sealed = true;
                 recipe = BarrelRecipe.get(inventory.getStackInSlot(SLOT_ITEM), tank.getFluid());
                 markForSync();
@@ -343,7 +344,7 @@ public class TEWoodBarrel extends TETickableInventory
     @Override
     @NotNull
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        NBTUtils.setGenericNBTValue(nbt, "tank", tank);
+        NBTUtils.setGenericNBTValue(nbt, "tank", tank.writeToNBT(new NBTTagCompound()));
         NBTUtils.setGenericNBTValue(nbt, "sealedTick", sealedTick);
         NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", sealedCalendarTick);
         NBTUtils.setGenericNBTValue(nbt, "sealed", sealed);

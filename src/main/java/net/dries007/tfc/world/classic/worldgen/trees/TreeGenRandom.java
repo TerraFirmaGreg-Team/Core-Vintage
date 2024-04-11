@@ -51,7 +51,7 @@ public class TreeGenRandom implements ITreeGenerator {
         Template structureOverlay = manager.get(world.getMinecraftServer(), overlay);
 
         if (structureBase == null) {
-            TFCFlorae.getLog().warn("TFCFlorae: Unable to find a template for " + base.toString());
+            TFCFlorae.getLog().warn("TFCFlorae: Unable to find a template for " + base);
             return;
         }
 

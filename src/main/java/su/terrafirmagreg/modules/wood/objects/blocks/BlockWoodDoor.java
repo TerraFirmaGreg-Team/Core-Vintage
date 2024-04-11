@@ -33,7 +33,7 @@ public class BlockWoodDoor extends BlockBaseDoor implements IWoodBlock {
         setSoundType(SoundType.WOOD);
         disableStats();
 
-        BlockUtils.setFireInfo(this, 5, 20);
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
     @Override

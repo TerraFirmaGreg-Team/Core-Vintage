@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import java.util.Objects;
 
 @SideOnly(Side.CLIENT)
@@ -59,9 +60,6 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
                 GlStateManager.scale(4.0F, 4.0F, 1.0F);
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
-            } else if (te.getChestType() == BlockChest.Type.TRAP) {
-                bindTexture(SINGLE_TEXTURE);
-                ColourUtils.setColor(woodColor);
             } else {
                 bindTexture(SINGLE_TEXTURE);
                 ColourUtils.setColor(woodColor);
@@ -76,8 +74,6 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
                 GlStateManager.scale(8.0F, 4.0F, 1.0F);
                 GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
                 GlStateManager.matrixMode(5888);
-            } else if (te.getChestType() == BlockChest.Type.TRAP) {
-                bindTexture(DOUBLE_TEXTURE);
             } else {
                 bindTexture(DOUBLE_TEXTURE);
             }
@@ -132,10 +128,9 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
         modelchest.chestBelow.render(0.0625F);
         ColourUtils.clearColor();
 
-        if (te.getChestType() == BlockChest.Type.TRAP) {
-            GlStateManager.color(1.0F, 0.0F, 0.0F, 1.0F);
-        }
         // Отрисовка ручки
+
+        if (te.getChestType() == BlockChest.Type.TRAP) GlStateManager.color(1.0F, 0.0F, 0.0F, 0.4F);
         modelchest.chestKnob.render(0.0625F);
 
         GlStateManager.disableRescaleNormal();

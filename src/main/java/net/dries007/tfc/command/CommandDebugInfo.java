@@ -1,5 +1,7 @@
 package net.dries007.tfc.command;
 
+import su.terrafirmagreg.api.util.LoggingUtils;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTBase;
@@ -8,12 +10,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistry;
 
+
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandDebugInfo extends CommandBase {
 
-    private static final Logger LOGGER = LogManager.getLogger("tfc-infodump");
+    private static final LoggingUtils LOGGER = new LoggingUtils("tfc-infodump");
 
     @Override
     @NotNull

@@ -15,8 +15,8 @@ public interface IAutoReg extends IOreDict {
      *
      * @return объект ItemBlock или null, если объект не определен
      */
-    @Nullable
-    default ItemBlock getItemBlock() {
+
+    default @Nullable ItemBlock getItemBlock() {
         return null;
     }
 

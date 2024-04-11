@@ -9,7 +9,6 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import net.minecraft.block.BlockMagma;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -17,7 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -50,7 +51,7 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         //        return this.getType().getRockCategory().isHasAnvil() ? new ItemBlockBase(this) : null;
         return new ItemBlockBase(this);
     }

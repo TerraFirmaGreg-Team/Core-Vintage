@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.rock;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategoryHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariantHandler;
@@ -12,8 +13,6 @@ import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +22,7 @@ import java.util.List;
 @ModuleTFG(moduleID = "Rock", name = "TFG Module Rock")
 public final class ModuleRock extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger(ModuleRock.class.getSimpleName());
+    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleRock.class.getSimpleName());
 
     public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/raw/basalt");
 
@@ -44,7 +43,7 @@ public final class ModuleRock extends ModuleBase {
     }
 
     @Override
-    public @NotNull Logger getLogger() {
+    public @NotNull LoggingUtils getLogger() {
         return LOGGER;
     }
 

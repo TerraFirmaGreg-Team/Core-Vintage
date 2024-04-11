@@ -24,7 +24,7 @@ public class WoodBlockVariants {
     public static WoodBlockVariant TOOL_RACK;
     public static WoodBlockVariant SUPPORT;
     public static WoodBlockVariant WORKBENCH;
-    public static WoodBlockVariant CHEST_TRAP;
+    public static WoodBlockVariant CHEST_TRAPPED;
     public static WoodBlockVariant CHEST;
     public static WoodBlockVariant LOOM;
     public static WoodBlockVariant BARREL;

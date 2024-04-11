@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
@@ -28,12 +29,14 @@ import net.dries007.tfc.api.recipes.ChiselRecipe.Mode;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.ContainerEmpty;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 public class ItemMetalChisel extends ItemMetalTool {
 
@@ -177,7 +180,7 @@ public class ItemMetalChisel extends ItemMetalTool {
                 if (ConfigTFC.General.FALLABLE.chiselCausesCollapse) {
                     IBlockState oldState = worldIn.getBlockState(pos);
                     FallingBlockManager.Specification oldSpec = FallingBlockManager.getSpecification(oldState);
-                    if (oldSpec != null && oldSpec.isCollapsable() && !BlockSupport.isBeingSupported(worldIn, pos)) {
+                    if (oldSpec != null && oldSpec.isCollapsable() && !BlockWoodSupport.isBeingSupported(worldIn, pos)) {
                         worldIn.setBlockToAir(pos); // Set block to air before attempting a collapse mechanic
                         if (FallingBlockManager.checkCollapsingArea(worldIn, pos)) {
                             return EnumActionResult.SUCCESS; // Collapse mechanic triggered, cancel chisel!

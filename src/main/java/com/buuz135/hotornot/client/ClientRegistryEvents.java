@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.buuz135.hotornot.object.item.HONItems;
 import com.buuz135.hotornot.object.item.ItemMetalTongsJawMold;
 import net.dries007.tfc.api.capability.IMoldHandler;
@@ -36,27 +37,23 @@ public final class ClientRegistryEvents {
             final ItemMetalTongsJawMold moldItem = HONItems.TONGS_JAW_FIRED_MOLD;
 
             //noinspection DataFlowIssue
-            ModelBakery.registerItemVariants(moldItem, new ModelResourceLocation(moldItem.getRegistryName()
-                    .toString() + "/empty"));
+            ModelBakery.registerItemVariants(moldItem, new ModelResourceLocation(moldItem.getRegistryName().toString() + "/empty"));
 
             //noinspection DataFlowIssue
             ModelBakery.registerItemVariants(moldItem, TFCRegistries.METALS.getValuesCollection()
                     .stream()
-                    .filter(metal -> metal.isToolMetal() && metal.getTier()
-                            .isAtMost(Metal.Tier.TIER_II))
-                    .map(metal -> new ModelResourceLocation(
-                            MODID_HOTORNOT + ":" + moldItem.getRegistryName()
-                                    .getPath() + "/" + metal.getRegistryName()
-                                    .getPath()))
+                    .filter(metal -> metal.isToolMetal() && metal.getTier().isAtMost(Metal.Tier.TIER_II))
+                    .map(metal -> new ModelResourceLocation(MODID_HOTORNOT + ":" +
+                            moldItem.getRegistryName().getPath() + "/" +
+                            metal.getRegistryName().getPath()))
                     .toArray(ModelResourceLocation[]::new));
             ModelLoader.setCustomMeshDefinition(moldItem, new ItemMeshDefinition() {
 
-                private final ModelResourceLocation FALLBACK = new ModelResourceLocation(moldItem.getRegistryName()
-                        .toString() + "/empty");
+                private final ModelResourceLocation FALLBACK = new ModelResourceLocation(moldItem.getRegistryName().toString() + "/empty");
 
                 @Override
                 @NotNull
-                public ModelResourceLocation getModelLocation(final ItemStack itemStack) {
+                public ModelResourceLocation getModelLocation(final @NotNull ItemStack itemStack) {
                     final IFluidHandler fluidHandler = itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
                     if (!(fluidHandler instanceof IMoldHandler)) return FALLBACK;
 

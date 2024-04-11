@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.soil;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariantHandler;
@@ -11,8 +12,6 @@ import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +21,7 @@ import java.util.List;
 @ModuleTFG(moduleID = "Soil", name = "TFG Module Soil")
 public final class ModuleSoil extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger(ModuleSoil.class.getSimpleName());
+    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleSoil.class.getSimpleName());
 
     public static final CreativeTabs SOIL_TAB = new CreativeTabBase("soil", "soil/grass/humus");
 
@@ -42,7 +41,7 @@ public final class ModuleSoil extends ModuleBase {
     }
 
     @Override
-    public @NotNull Logger getLogger() {
+    public @NotNull LoggingUtils getLogger() {
         return LOGGER;
     }
 

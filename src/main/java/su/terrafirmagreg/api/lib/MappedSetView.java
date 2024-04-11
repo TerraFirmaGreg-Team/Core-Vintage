@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.lib;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -37,7 +39,7 @@ public class MappedSetView<R, T> implements Set<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public @NotNull Iterator<T> iterator() {
         Iterator<R> iterator = this.set.iterator();
         return new Iterator<T>() {
 
@@ -54,12 +56,12 @@ public class MappedSetView<R, T> implements Set<T> {
     }
 
     @Override
-    public Object[] toArray() {
+    public Object @NotNull [] toArray() {
         return this.set.stream().map(this.mapper).toArray();
     }
 
     @Override
-    public <T1> T1[] toArray(T1[] a) {
+    public <T1> T1 @NotNull [] toArray(T1 @NotNull [] a) {
         return this.set.stream().map(this.mapper).collect(Collectors.toList()).toArray(a);
     }
 
@@ -74,22 +76,22 @@ public class MappedSetView<R, T> implements Set<T> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
+    public boolean containsAll(@NotNull Collection<?> c) {
         throw new UnsupportedOperationException("Mapped sets cannot be checked for contained elements!");
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> c) {
+    public boolean addAll(@NotNull Collection<? extends T> c) {
         throw new UnsupportedOperationException("Mapped set views cannot be added to!");
     }
 
     @Override
-    public boolean retainAll(Collection<?> c) {
+    public boolean retainAll(@NotNull Collection<?> c) {
         throw new UnsupportedOperationException("Mapped set views cannot be removed from!");
     }
 
     @Override
-    public boolean removeAll(Collection<?> c) {
+    public boolean removeAll(@NotNull Collection<?> c) {
         throw new UnsupportedOperationException("Mapped set views cannot be removed from!");
     }
 

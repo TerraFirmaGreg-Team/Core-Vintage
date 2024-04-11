@@ -1,7 +1,10 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import org.jetbrains.annotations.Nullable;
+
+
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -21,7 +24,6 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -33,15 +35,17 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import java.util.Random;
 
 @Getter
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IColorfulBlock, ICustomStateMapper {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IColorfulBlock, ICustomState {
 
     public static final int[] TINT = new int[] {
             0xffffffff,
@@ -94,7 +98,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

@@ -1,7 +1,10 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
+import org.jetbrains.annotations.Nullable;
+
+
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -12,19 +15,19 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 @Getter
-public class BlockSoilMudWall extends BlockWall implements ISoilBlock, ICustomStateMapper {
+public class BlockSoilMudWall extends BlockWall implements ISoilBlock, ICustomState {
 
     private final SoilBlockVariant blockVariant;
     private final SoilType type;
@@ -46,7 +49,7 @@ public class BlockSoilMudWall extends BlockWall implements ISoilBlock, ICustomSt
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

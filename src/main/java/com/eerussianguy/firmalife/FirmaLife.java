@@ -1,6 +1,7 @@
 package com.eerussianguy.firmalife;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.LoggingUtils;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+
 
 import com.eerussianguy.firmalife.compat.ModuleManager;
 import com.eerussianguy.firmalife.gui.FLGuiHandler;
@@ -25,7 +27,6 @@ import com.eerussianguy.firmalife.util.OreDictsFL;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import org.apache.logging.log4j.Logger;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
@@ -35,7 +36,7 @@ public class FirmaLife {
     public static final String MODNAME = "FirmaLife";
     @SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
     public static CommonProxy proxy;
-    public static Logger logger;
+    public static final LoggingUtils LOGGER = new LoggingUtils(MODID_FL);
     @Mod.Instance
     private static FirmaLife INSTANCE = null;
     private SimpleNetworkWrapper network;
@@ -50,7 +51,6 @@ public class FirmaLife {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
         proxy.preInit(event);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new FLGuiHandler());

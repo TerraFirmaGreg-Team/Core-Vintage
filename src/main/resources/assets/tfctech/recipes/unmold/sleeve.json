@@ -1,9 +1,0 @@
-{
-  "type": "tfctech:unmold_recipe",
-  "ingredients": [
-    {
-      "item": "tfctech:ceramics/mold/sleeve"
-    }
-  ],
-  "result": "sleeve"
-}

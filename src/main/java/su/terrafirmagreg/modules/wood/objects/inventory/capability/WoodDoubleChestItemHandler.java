@@ -13,7 +13,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.VanillaDoubleChestItemHandler;
 
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
+
+import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

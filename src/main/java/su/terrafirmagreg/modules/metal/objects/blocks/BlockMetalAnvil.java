@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.metal.objects.blocks;
 
 import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
@@ -17,7 +18,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
@@ -34,7 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -44,6 +44,8 @@ import net.dries007.tfc.client.particle.TFCParticles;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.Random;
 
@@ -76,8 +78,8 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
     }
 
     @Override
-    public ItemBlock getItemBlock() {
-        return new ItemBlock(this);
+    public @Nullable ItemBlockBase getItemBlock() {
+        return new ItemBlockBase(this);
     }
 
     //	@Nullable

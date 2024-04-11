@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
@@ -126,7 +126,7 @@ public class RegistryManager {
     /**
      * A list of all the custom stateMapper.
      */
-    private final List<ICustomStateMapper> customStateMapper = NonNullList.create();
+    private final List<ICustomState> customStateMapper = NonNullList.create();
 
     /**
      * A list of all the custom models.
@@ -213,7 +213,7 @@ public class RegistryManager {
         }
     }
 
-    public <T extends Block & IAutoReg> T registerBlock(T block) {
+    public <B extends Block & IAutoReg, I extends ItemBlock> B registerBlock(B block) {
         return this.registerBlock(block, block.getItemBlock(), block.getName());
     }
 
@@ -225,7 +225,7 @@ public class RegistryManager {
      * @param itemBlock The ItemBlock for the block.
      * @param name      The name to register the block with.
      */
-    public <T extends Block> T registerBlock(@NotNull T block, @Nullable ItemBlock itemBlock, @NotNull String name) {
+    public <B extends Block, I extends ItemBlock> @NotNull B registerBlock(@NotNull B block, @Nullable I itemBlock, @NotNull String name) {
 
         block.setRegistryName(this.modID, name);
         block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -240,13 +240,9 @@ public class RegistryManager {
         if (block instanceof ITEBlock te) this.tileProviders.add(te);
 
         if (GameUtils.isClient()) {
-            if (block instanceof ICustomStateMapper state) this.customStateMapper.add(state);
+            if (block instanceof ICustomState state) this.customStateMapper.add(state);
             if (block instanceof ICustomModel blockModel) this.customModel.add(blockModel);
-            else {
-                this.registerClientModel(() ->
-                        ModelUtils.registerBlockInventoryModel(block)
-                );
-            }
+            else this.registerClientModel(() -> ModelUtils.registerBlockInventoryModel(block));
             if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
         }
         return block;
@@ -279,24 +275,19 @@ public class RegistryManager {
 
         item.setRegistryName(this.modID, name);
         item.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
+        if (this.tab != null) item.setCreativeTab(this.tab);
+
         this.items.add(item);
 
-        if (this.tab != null)
-            item.setCreativeTab(this.tab);
-
-        if (item instanceof IOreDict oreDict)
-            this.oreDicts.add(oreDict);
+        if (item instanceof IOreDict oreDict) this.oreDicts.add(oreDict);
 
         if (GameUtils.isClient()) {
-            if (item instanceof ICustomModel itemModel) {
-                this.customModel.add(itemModel);
-            } else if (!(item instanceof ItemBlock)) {
-                this.registerClientModel(() ->
-                        ModelUtils.registerInventoryModel(item)
-                );
-            }
-            if (item instanceof ICustomMesh) this.customMeshes.add(item);
+            if (item instanceof ICustomModel itemModel) this.customModel.add(itemModel);
+            else if (!(item instanceof ItemBlock)) this.registerClientModel(() -> ModelUtils.registerInventoryModel(item));
+
             if (item instanceof IColorfulItem) this.coloredItems.add(item);
+            if (item instanceof ICustomMesh) this.customMeshes.add(item);
+
         }
         return item;
     }

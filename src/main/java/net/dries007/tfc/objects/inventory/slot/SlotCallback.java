@@ -4,7 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
+
+import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 

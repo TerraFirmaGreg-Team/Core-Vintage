@@ -14,7 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -27,11 +26,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
+
 import mcp.MethodsReturnNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
@@ -49,17 +50,16 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
         setResistance(5.0F);
         setHarvestLevel("axe", 0);
 
-        BlockUtils.setFireInfo(this, 5, 20);
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
-        OreDictUtils.register(this, blockVariant, type);
+        OreDictUtils.register(this, getBlockVariant());
+        OreDictUtils.register(this, getBlockVariant(), getType());
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

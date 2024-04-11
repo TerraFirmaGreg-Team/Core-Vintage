@@ -1,12 +1,14 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+
 
 import lombok.Getter;
 
@@ -24,8 +26,7 @@ public abstract class BlockWood extends BlockBase implements IWoodBlock {
 
         setSoundType(SoundType.WOOD);
 
-        //OreDictUtils.register(this, variant.toString());
-        //OreDictUtils.register(this, variant.toString(), type.toString());
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
 }

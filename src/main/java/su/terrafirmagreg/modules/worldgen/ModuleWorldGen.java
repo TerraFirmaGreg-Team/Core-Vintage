@@ -2,14 +2,13 @@ package su.terrafirmagreg.modules.worldgen;
 
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.module.ModuleTFG;
+import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.worldgen.debugworld.WorldTypeDebugMod;
 
 import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +18,7 @@ import java.lang.reflect.Modifier;
 @ModuleTFG(moduleID = "WorldGen", name = "TFG Module WorldGen")
 public final class ModuleWorldGen extends ModuleBase {
 
-    public static final Logger LOGGER = LogManager.getLogger(ModuleWorldGen.class.getSimpleName());
+    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleWorldGen.class.getSimpleName());
 
     public ModuleWorldGen() {
         this.enableAutoRegistry();
@@ -54,7 +53,7 @@ public final class ModuleWorldGen extends ModuleBase {
     }
 
     @Override
-    public @NotNull Logger getLogger() {
+    public @NotNull LoggingUtils getLogger() {
         return LOGGER;
     }
 }

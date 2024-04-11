@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
+
 
 import net.dries007.tfc.api.capability.size.IItemSize;
 
@@ -22,9 +22,8 @@ public abstract class BlockBase extends Block implements IAutoReg, IItemSize {
         super(blockMaterialIn, blockMapColorIn);
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 }

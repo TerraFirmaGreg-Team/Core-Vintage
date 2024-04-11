@@ -1,7 +1,5 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -16,11 +14,11 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import java.util.EnumMap;
@@ -42,15 +40,6 @@ public abstract class BlockSlabTFC extends BlockSlab {
         //noinspection ConstantConditions
         setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
         useNeighborBrightness = true;
-    }
-
-    private BlockSlabTFC(Tree wood) {
-        this(BlockPlanksTFC.get(wood));
-        Block c = BlockPlanksTFC.get(wood);
-        //noinspection ConstantConditions
-        setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
-        useNeighborBrightness = true;
-        BlockUtils.setFireInfo(this, 5, 20);
     }
 
     private BlockSlabTFC(Block block) {
@@ -158,18 +147,8 @@ public abstract class BlockSlabTFC extends BlockSlab {
             // No oredict, because no item.
         }
 
-        public Double(Tree wood) {
-            super(wood);
-            if (WOOD_MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-            // No oredict, because no item.
-        }
-
         public static Double get(Rock rock, Rock.Type type) {
             return ROCK_TABLE.get(rock).get(type);
-        }
-
-        public static Double get(Tree wood) {
-            return WOOD_MAP.get(wood);
         }
 
         @Override
@@ -198,23 +177,8 @@ public abstract class BlockSlabTFC extends BlockSlab {
             OreDictionaryHelper.registerRockType(this, type, "slab");
         }
 
-        public Half(Tree wood) {
-            super(wood);
-            if (WOOD_MAP.put(wood, this) != null) throw new IllegalStateException("There can only be one.");
-            doubleSlab = Double.get(wood);
-            doubleSlab.halfSlab = this;
-            halfSlab = this;
-            OreDictionaryHelper.register(this, "slab");
-            OreDictionaryHelper.register(this, "slab", "wood");
-            OreDictionaryHelper.register(this, "slab", "wood", wood);
-        }
-
         public static Half get(Rock rock, Rock.Type type) {
             return ROCK_TABLE.get(rock).get(type);
-        }
-
-        public static Half get(Tree wood) {
-            return WOOD_MAP.get(wood);
         }
 
         @Override

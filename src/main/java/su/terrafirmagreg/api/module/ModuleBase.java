@@ -8,6 +8,7 @@ import su.terrafirmagreg.api.network.PacketService;
 import su.terrafirmagreg.api.network.ThreadedNetworkWrapper;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.registry.RegistryManager;
+import su.terrafirmagreg.api.util.LoggingUtils;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -26,8 +27,6 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import org.apache.logging.log4j.Logger;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -198,7 +197,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
      * @return A logger to use for this module.
      */
     @NotNull
-    protected abstract Logger getLogger();
+    protected abstract LoggingUtils getLogger();
 
     // --------------------------------------------------------------------------
     // - Comparator

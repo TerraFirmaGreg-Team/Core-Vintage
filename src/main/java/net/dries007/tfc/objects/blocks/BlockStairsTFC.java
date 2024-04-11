@@ -1,17 +1,15 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.api.util.BlockUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,24 +36,6 @@ public class BlockStairsTFC extends BlockStairs {
         useNeighborBrightness = true;
         OreDictionaryHelper.register(this, "stair");
         OreDictionaryHelper.registerRockType(this, type, "stair");
-    }
-
-    public BlockStairsTFC(Tree wood) {
-        super(BlockPlanksTFC.get(wood).getDefaultState());
-        if (WOOD_MAP.put(wood, this) != null) {
-            throw new IllegalStateException("There can only be one.");
-        }
-
-        Block baseBlock = BlockPlanksTFC.get(wood);
-        //noinspection ConstantConditions
-        setHarvestLevel(baseBlock.getHarvestTool(baseBlock.getDefaultState()), baseBlock.getHarvestLevel(baseBlock.getDefaultState()));
-        useNeighborBrightness = true;
-
-        OreDictionaryHelper.register(this, "stair");
-        OreDictionaryHelper.register(this, "stair", "wood");
-        OreDictionaryHelper.register(this, "stair", "wood", wood);
-
-        BlockUtils.setFireInfo(this, 5, 20);
     }
 
     public static BlockStairsTFC get(Rock rock, Rock.Type type) {

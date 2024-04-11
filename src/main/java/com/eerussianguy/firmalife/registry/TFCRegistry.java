@@ -125,7 +125,7 @@ public class TFCRegistry {
                 if (recipe != null) {
                     modRegistry.remove(recipe.getRegistryName());
                     if (ConfigFL.General.COMPAT.logging) {
-                        FirmaLife.logger.info("Removed barrel recipe from tfc:{}", name);
+                        FirmaLife.LOGGER.info("Removed barrel recipe from tfc:{}", name);
                     }
                 }
             }
@@ -190,7 +190,7 @@ public class TFCRegistry {
                 if (recipe != null) {
                     modRegistry.remove(recipe.getRegistryName());
                     if (ConfigFL.General.COMPAT.logging)
-                        FirmaLife.logger.info("Removed heating recipe tfc:{}", name);
+                        FirmaLife.LOGGER.info("Removed heating recipe tfc:{}", name);
                 }
             }
         }
@@ -210,7 +210,7 @@ public class TFCRegistry {
                 if (recipe != null) {
                     registry.remove(recipe.getRegistryName());
                     if (ConfigFL.General.COMPAT.logging)
-                        FirmaLife.logger.info("Removed crafting recipe tfc:{}", name);
+                        FirmaLife.LOGGER.info("Removed crafting recipe tfc:{}", name);
                 }
 
             }

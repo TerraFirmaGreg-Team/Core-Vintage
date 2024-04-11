@@ -9,17 +9,17 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.SoundType;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
@@ -36,7 +36,7 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         setResistance(5.0F);
         setHarvestLevel("axe", 0);
 
-        BlockUtils.setFireInfo(this, 30, 20);
+        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
     public void onRegisterOreDict() {
@@ -44,9 +44,8 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         OreDictUtils.register(this, blockVariant, type);
     }
 
-    @Nullable
     @Override
-    public ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return new ItemBlockBase(this);
     }
 

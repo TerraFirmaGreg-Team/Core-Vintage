@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +51,12 @@ public class BlockWoodSupport extends BlockWood {
                 .withProperty(SOUTH, false)
                 .withProperty(EAST, false)
                 .withProperty(WEST, false));
+    }
+
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, getBlockVariant());
+        OreDictUtils.register(this, getBlockVariant(), getType());
     }
 
     /**

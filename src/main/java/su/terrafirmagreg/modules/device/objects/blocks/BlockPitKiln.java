@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -26,7 +27,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -41,6 +41,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.google.common.collect.ImmutableMap;
 import mcp.MethodsReturnNonnullByDefault;
 
@@ -54,7 +55,7 @@ import static su.terrafirmagreg.api.util.PropertyUtils.FULL;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @MethodsReturnNonnullByDefault
-public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomStateMapper {
+public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
 
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[] {
             PLACED_ITEM_AABB,
@@ -79,7 +80,7 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomStateMap
     }
 
     @Override
-    public @Nullable ItemBlock getItemBlock() {
+    public @Nullable ItemBlockBase getItemBlock() {
         return null;
     }
 

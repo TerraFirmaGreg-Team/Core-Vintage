@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.api.types.variant.block;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.model.ICustomStateMapper;
+import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -16,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, ICustomModel, ICustomStateMapper, IColorfulBlock {
+public interface IWoodBlock extends IWoodType, IAutoReg, IItemSize, ICustomModel, ICustomState, IColorfulBlock {
 
     /**
      * Возвращает вариант деревянного блока.

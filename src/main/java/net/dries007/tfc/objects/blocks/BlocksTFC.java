@@ -51,15 +51,11 @@ import net.dries007.tfc.objects.blocks.stone.BlockPressurePlateTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockFloatingWaterTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockHeat;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
@@ -68,8 +64,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.objects.te.TEChestTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TECropSpreading;
 import net.dries007.tfc.objects.te.TEIngotPile;
@@ -110,7 +104,6 @@ public final class BlocksTFC {
     // Use the static get methods in the classes instead.
     private static ImmutableList<ItemBlock> allNormalItemBlocks;
     private static ImmutableList<ItemBlock> allInventoryItemBlocks;
-    private static ImmutableList<ItemBlockBarrel> allBarrelItemBlocks;
 
     private static ImmutableList<BlockFluidBase> allFluidBlocks;
     private static ImmutableList<BlockRockVariant> allBlockRockVariants;
@@ -118,12 +111,10 @@ public final class BlocksTFC {
     private static ImmutableList<BlockWallTFC> allWallBlocks;
     private static ImmutableList<BlockLogTFC> allLogBlocks;
     private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
-    private static ImmutableList<BlockFenceGateTFC> allFenceGateBlocks;
     private static ImmutableList<BlockSaplingTFC> allSaplingBlocks;
     private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
     private static ImmutableList<BlockStairsTFC> allStairsBlocks;
     private static ImmutableList<BlockSlabTFC.Half> allSlabBlocks;
-    private static ImmutableList<BlockChestTFC> allChestBlocks;
     private static ImmutableList<BlockAnvilTFC> allAnvils;
     private static ImmutableList<BlockMetalSheet> allSheets;
     private static ImmutableList<BlockMetalLamp> allLamps;
@@ -148,10 +139,6 @@ public final class BlocksTFC {
         return allInventoryItemBlocks;
     }
 
-    public static ImmutableList<ItemBlockBarrel> getAllBarrelItemBlocks() {
-        return allBarrelItemBlocks;
-    }
-
     public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
         return allFluidBlocks;
     }
@@ -172,10 +159,6 @@ public final class BlocksTFC {
         return allOreBlocks;
     }
 
-    public static ImmutableList<BlockFenceGateTFC> getAllFenceGateBlocks() {
-        return allFenceGateBlocks;
-    }
-
     public static ImmutableList<BlockWallTFC> getAllWallBlocks() {
         return allWallBlocks;
     }
@@ -194,10 +177,6 @@ public final class BlocksTFC {
 
     public static ImmutableList<BlockSlabTFC.Half> getAllSlabBlocks() {
         return allSlabBlocks;
-    }
-
-    public static ImmutableList<BlockChestTFC> getAllChestBlocks() {
-        return allChestBlocks;
     }
 
     public static ImmutableList<BlockAnvilTFC> getAllAnvils() {
@@ -371,7 +350,6 @@ public final class BlocksTFC {
             Builder<BlockLogTFC> logs = ImmutableList.builder();
             Builder<BlockLeavesTFC> leaves = ImmutableList.builder();
             Builder<BlockSaplingTFC> saplings = ImmutableList.builder();
-            Builder<ItemBlockBarrel> barrelItems = ImmutableList.builder();
             Builder<BlockPlantTFC> plants = ImmutableList.builder();
 
             // Other blocks that don't have specific order requirements
@@ -380,15 +358,11 @@ public final class BlocksTFC {
                 logs.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockLogTFC(wood), CT_WOOD));
                 leaves.add(register(r, "wood/leaves/" + wood.getRegistryName().getPath(), new BlockLeavesTFC(wood), CT_WOOD));
                 saplings.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockSaplingTFC(wood), CT_WOOD));
-                barrelItems.add(
-                        new ItemBlockBarrel(register(r, "wood/barrel/" + wood.getRegistryName().getPath(), new BlockBarrel(), CT_DECORATIONS)));
             }
 
             allLogBlocks = logs.build();
             allLeafBlocks = leaves.build();
             allSaplingBlocks = saplings.build();
-
-            allBarrelItemBlocks = barrelItems.build();
 
             //logs are special
             allLeafBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
@@ -586,10 +560,8 @@ public final class BlocksTFC {
         register(TEPlacedItem.class, "placed_item");
         register(TEPlacedItemFlat.class, "placed_item_flat");
         register(TEPlacedHide.class, "placed_hide");
-        register(TEChestTFC.class, "chest");
         register(TEIngotPile.class, "ingot_pile");
         register(TELamp.class, "lamp");
-        register(TEBarrel.class, "barrel");
         register(TEAnvilTFC.class, "anvil");
         register(TECropBase.class, "crop_base");
         register(TECropSpreading.class, "crop_spreading");

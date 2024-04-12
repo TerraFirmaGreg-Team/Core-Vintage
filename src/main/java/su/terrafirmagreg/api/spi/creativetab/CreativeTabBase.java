@@ -6,8 +6,11 @@ import su.terrafirmagreg.api.util.ModUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+
+import net.dries007.tfc.api.capability.food.CapabilityFood;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,15 +26,15 @@ public class CreativeTabBase extends CreativeTabs {
     public CreativeTabBase(String TabName, String iconSupplier) {
         this(TabName, iconSupplier, false);
     }
-
+ 
     public CreativeTabBase(String TabName, String iconSupplier, boolean hasSearchBar) {
-        this(MOD_ID + "." + TabName, () -> new ItemStack(ForgeRegistries.ITEMS.getValue(ModUtils.getID(iconSupplier))), hasSearchBar);
+        this(TabName, ModUtils.getID(iconSupplier), hasSearchBar);
     }
 
-    public CreativeTabBase(String TabName, Supplier<ItemStack> iconSupplier, boolean hasSearchBar) {
+    public CreativeTabBase(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
         super(MOD_ID + "." + TabName);
 
-        this.iconSupplier = iconSupplier;
+        this.iconSupplier = () -> new ItemStack(ForgeRegistries.ITEMS.getValue(iconSupplier));
         this.hasSearchBar = hasSearchBar;
 
         if (hasSearchBar) setBackgroundImageName("item_search.png");
@@ -51,11 +54,13 @@ public class CreativeTabBase extends CreativeTabs {
             return new ItemStack(Items.STICK);
         }
 
-        if (stack == ItemStack.EMPTY) {
+        if (stack.isEmpty()) {
             TerraFirmaGreg.LOGGER.error("Icon built from iconSupplied is EMPTY for CreativeTab {}", getTabLabel());
             return new ItemStack(Items.STICK);
         }
 
+        // Food stacks shouldn't rot in creative tabs, and these are created on demand instead of beforehand and cached
+        CapabilityFood.setStackNonDecaying(stack);
         return stack;
     }
 

@@ -11,12 +11,15 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.te.TEMetalSheet;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 public class ItemMetalSheet extends ItemMetal {
 
@@ -64,7 +67,7 @@ public class ItemMetalSheet extends ItemMetal {
     }
 
     private EnumActionResult placeSheet(World world, BlockPos pos, EnumFacing facing) {
-        TEMetalSheet tile = Helpers.getTE(world, pos, TEMetalSheet.class);
+        TEMetalSheet tile = TileUtils.getTile(world, pos, TEMetalSheet.class);
         if (tile != null && !tile.getFace(facing)) {
             if (!world.isRemote) {
                 tile.setFace(facing, true);

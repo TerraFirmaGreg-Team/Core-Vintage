@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -36,52 +37,61 @@ public class GuiHandler implements IGuiHandler {
     @org.jetbrains.annotations.Nullable
     public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos blockPos = new BlockPos(x, y, z);
-        ItemStack stack = player.getHeldItemMainhand();
         IBlockState blockState = world.getBlockState(blockPos);
+
         TileEntity tileEntity = TileUtils.getTile(world, blockPos);
+
         Entity entity = world.getEntityByID(x);
+
+        ItemStack stack = player.getHeldItemMainhand();
+        Item item = stack.getItem();
+
         Type type = Type.valueOf(ID);
-        return switch (type) {
-            case NULL -> null;
 
-            default -> {
-                if (tileEntity instanceof IContainerProvider<?, ?> containerProvider) {
-                    yield containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+        if (tileEntity instanceof IContainerProvider<?, ?> containerProvider) {
+            return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+        }
 
-                } else if (entity instanceof IContainerProvider<?, ?> containerProvider) {
-                    yield containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+        if (entity instanceof IContainerProvider<?, ?> containerProvider) {
+            return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+        }
 
-                } else {
-                    yield null;
-                }
-            }
-        };
+        if (item instanceof IContainerProvider<?, ?> containerProvider) {
+            return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+        }
+
+        return null;
     }
 
     @Override
     @Nullable
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         Container container = getServerGuiElement(ID, player, world, x, y, z);
+
         BlockPos blockPos = new BlockPos(x, y, z);
         IBlockState blockState = world.getBlockState(blockPos);
+
         TileEntity tileEntity = TileUtils.getTile(world, blockPos);
+
         Entity entity = world.getEntityByID(x);
+
+        ItemStack stack = player.getHeldItemMainhand();
+        Item item = stack.getItem();
+
         Type type = Type.valueOf(ID);
-        return switch (type) {
-            case NULL -> null;
 
-            default -> {
-                if (tileEntity instanceof IContainerProvider<?, ?> containerProvider) {
-                    yield containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
+        if (tileEntity instanceof IContainerProvider<?, ?> containerProvider) {
+            return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
+        }
 
-                } else if (entity instanceof IContainerProvider<?, ?> containerProvider) {
-                    yield containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
+        if (entity instanceof IContainerProvider<?, ?> containerProvider) {
+            return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
+        }
 
-                } else {
-                    yield null;
-                }
-            }
-        };
+        if (item instanceof IContainerProvider<?, ?> containerProvider) {
+            return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
+        }
+        return null;
     }
 
     public enum Type {
@@ -101,6 +111,7 @@ public class GuiHandler implements IGuiHandler {
         ICE_BUNKER,
         FREEZE_DRYER,
         POWDERKEG,
+        KNAPPING_ROCK,
         NULL;
 
         private static final Type[] values = values();

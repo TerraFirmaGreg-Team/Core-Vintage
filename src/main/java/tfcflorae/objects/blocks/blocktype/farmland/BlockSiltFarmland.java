@@ -19,11 +19,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -119,7 +124,7 @@ public class BlockSiltFarmland extends FarmlandTFCF {
 
     private void updateCropAbove(World world, BlockPos pos, IBlockState state, Random rand) {
         if (!world.isRemote) {
-            TECropBase te = Helpers.getTE(world, pos, TECropBase.class);
+            TECropBase te = TileUtils.getTile(world, pos, TECropBase.class);
             if (te != null) {
                 // If can't see sky, or isn't moisturized, reset growth *evil laughter* >:)
                 IBlockState stateFarmland = world.getBlockState(pos);

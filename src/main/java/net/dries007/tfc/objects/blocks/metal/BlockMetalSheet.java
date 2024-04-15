@@ -21,13 +21,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetalSheet;
 import net.dries007.tfc.objects.te.TEMetalSheet;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +105,7 @@ public class BlockMetalSheet extends Block {
     @Override
     @NotNull
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
@@ -132,7 +136,7 @@ public class BlockMetalSheet extends Block {
     @NotNull
     @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        TEMetalSheet tile = Helpers.getTE(source, pos, TEMetalSheet.class);
+        TEMetalSheet tile = TileUtils.getTile(source, pos, TEMetalSheet.class);
         int sheets = 0;
         AxisAlignedBB boundingBox = FULL_BLOCK_AABB;
         if (tile != null) {
@@ -162,7 +166,7 @@ public class BlockMetalSheet extends Block {
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
                                       @Nullable Entity entityIn, boolean isActualState) {
-        TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face)) {
@@ -196,7 +200,7 @@ public class BlockMetalSheet extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
@@ -214,7 +218,7 @@ public class BlockMetalSheet extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEMetalSheet te = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+        TEMetalSheet te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (te != null) te.onBreakBlock(this.metal);
         super.breakBlock(worldIn, pos, state);
     }
@@ -223,7 +227,7 @@ public class BlockMetalSheet extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-        TEMetalSheet tile = Helpers.getTE(worldIn, pos, TEMetalSheet.class);
+        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face)) {

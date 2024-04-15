@@ -8,17 +8,21 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -104,7 +108,7 @@ public class WorldGenLooseRocks implements IWorldGenerator {
         if (world.isAirBlock(pos) && world.getBlockState(pos.down())
                 .isSideSolid(world, pos.down(), EnumFacing.UP) && BlocksTFC.isSoil(world.getBlockState(pos.down()))) {
             world.setBlockState(pos, BlocksTFC.PLACED_ITEM_FLAT.getDefaultState(), 2);
-            TEPlacedItemFlat tile = Helpers.getTE(world, pos, TEPlacedItemFlat.class);
+            TEPlacedItemFlat tile = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
             if (tile != null) {
                 ItemStack stack = ItemStack.EMPTY;
                 if (vein != null && vein.getType() != null) {

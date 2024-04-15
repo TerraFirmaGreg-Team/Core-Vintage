@@ -16,16 +16,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,14 +67,14 @@ public class BlockBushTrellis extends BlockTrellis {
             if (state.getValue(GROWN)) {
                 ItemHandlerHelper.giveItemToPlayer(player, bush.getFoodDrop());
                 world.setBlockState(pos, state.withProperty(GROWN, false));
-                TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
+                TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
                 if (te != null)
                     te.resetCounter();
                 return true;
             } else if (player.isSneaking()) {
                 ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(BlockBerryBush.get(bush)));
                 world.setBlockState(pos, BlocksFL.TRELLIS.getDefaultState());
-                TEHangingPlanter te = Helpers.getTE(world, pos.down(), TEHangingPlanter.class);
+                TEHangingPlanter te = TileUtils.getTile(world, pos.down(), TEHangingPlanter.class);
                 if (te != null)
                     te.resetCounter();
                 return true;
@@ -82,7 +86,7 @@ public class BlockBushTrellis extends BlockTrellis {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
-            TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
+            TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
             boolean grown = state.getValue(GROWN);
             if (te != null) {
                 boolean climateValid = te.isClimateValid();
@@ -97,7 +101,7 @@ public class BlockBushTrellis extends BlockTrellis {
                         if (te.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * 50) && upBlock instanceof BlockTrellis &&
                                 !(upBlock instanceof BlockBushTrellis)) {
                             world.setBlockState(upPos, getDefaultState());
-                            TEHangingPlanter teNew = Helpers.getTE(world, upPos, TEHangingPlanter.class);
+                            TEHangingPlanter teNew = TileUtils.getTile(world, upPos, TEHangingPlanter.class);
                             if (teNew != null)
                                 teNew.resetCounter();
                             te.resetCounter();
@@ -137,7 +141,7 @@ public class BlockBushTrellis extends BlockTrellis {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        TEHangingPlanter tile = Helpers.getTE(worldIn, pos, TEHangingPlanter.class);
+        TEHangingPlanter tile = TileUtils.getTile(worldIn, pos, TEHangingPlanter.class);
         if (tile != null) {
             tile.resetCounter();
         }

@@ -26,10 +26,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.te.TEUrn;
 
@@ -59,7 +64,7 @@ public class BlockUrn extends Block implements IItemSize {
      * Used to update the vessel seal state and the TE, in the correct order
      */
     public static void toggleUrnSeal(World world, BlockPos pos) {
-        TEUrn tile = Helpers.getTE(world, pos, TEUrn.class);
+        TEUrn tile = TileUtils.getTile(world, pos, TEUrn.class);
         if (tile != null) {
             IBlockState state = world.getBlockState(pos);
             boolean previousSealed = state.getValue(SEALED);
@@ -158,7 +163,7 @@ public class BlockUrn extends Block implements IItemSize {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEUrn tile = Helpers.getTE(worldIn, pos, TEUrn.class);
+        TEUrn tile = TileUtils.getTile(worldIn, pos, TEUrn.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }
@@ -182,7 +187,7 @@ public class BlockUrn extends Block implements IItemSize {
                                     float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
-            TEUrn te = Helpers.getTE(worldIn, pos, TEUrn.class);
+            TEUrn te = TileUtils.getTile(worldIn, pos, TEUrn.class);
             if (te != null) {
                 if (heldItem.isEmpty() && playerIn.isSneaking()) {
                     worldIn.playSound(null, pos, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
@@ -201,7 +206,7 @@ public class BlockUrn extends Block implements IItemSize {
         if (!worldIn.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                TEUrn te = Helpers.getTE(worldIn, pos, TEUrn.class);
+                TEUrn te = TileUtils.getTile(worldIn, pos, TEUrn.class);
                 if (te != null) {
                     worldIn.setBlockState(pos, state.withProperty(SEALED, true));
                     te.readFromItemTag(nbt);

@@ -33,16 +33,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class ModuleEventRouter {
 
-    private final List<ModuleBase> loadedModules;
+    private final Set<ModuleBase> loadedModules;
     private final Map<Class<? extends FMLStateEvent>, IFMLStateEventRoute> routes;
 
-    public ModuleEventRouter(List<ModuleBase> loadedModules) {
+    public ModuleEventRouter(Set<ModuleBase> loadedModules) {
 
         this.loadedModules = loadedModules;
         this.routes = new HashMap<>();
@@ -63,7 +63,7 @@ public class ModuleEventRouter {
                         this.fireEvent(module -> {
                             module.getLogger().debug("Registering");
                             module.onRegister();
-                            
+
                             module.getLogger().debug("Pre-Init start");
                             module.onPreInit(event);
                             module.getLogger().debug("Pre-Init complete");

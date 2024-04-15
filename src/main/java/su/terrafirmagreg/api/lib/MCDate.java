@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import lombok.Getter;
 
 /**
@@ -15,13 +16,19 @@ public class MCDate {
     /**
      * An array of all the days in a week.
      */
-    public static final String[] NAMES_DAYS = { "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday" };
+    public static final String[] NAMES_DAYS = {
+            "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
+    };
 
     /**
      * An array of all the months in a year.
      */
-    public static final String[] NAMES_MONTHS = { "january", "february", "march", "april", "may", "june", "july", "august", "september", "october",
-            "november", "december" };
+    public static final String[] NAMES_MONTHS = {
+            "january", "february", "march",
+            "april", "may", "june",
+            "july", "august", "september",
+            "october", "november", "december"
+    };
 
     /**
      * An array of the total days in a month. Matching by index.

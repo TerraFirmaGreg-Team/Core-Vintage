@@ -23,7 +23,7 @@
 package com.buuz135.hotornot;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -48,14 +48,14 @@ public class HotOrNot {
     private static HotOrNot INSTANCE = null;
     private static SimpleNetworkWrapper network;
 
-    private final LoggingUtils log = new LoggingUtils(MODID_HOTORNOT);
+    private final LoggingHelper log = new LoggingHelper(MODID_HOTORNOT);
 
     public static SimpleNetworkWrapper getNetwork() {
         return network;
     }
 
     @SuppressWarnings("unused")
-    public static LoggingUtils getLog() {
+    public static LoggingHelper getLog() {
         return INSTANCE.log;
     }
 

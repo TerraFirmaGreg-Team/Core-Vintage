@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.api.capabilities.metal;
 
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -12,10 +13,10 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -89,7 +90,7 @@ public final class MetalCapability {
             if (oreDict.startsWith(oreName)) {
                 //noinspection ConstantConditions
                 return TFCRegistries.METALS.getValuesCollection().stream()
-                        .filter(metal -> oreDict.equals(OreDictionaryHelper.toString(oreName, metal.getRegistryName().getPath())))
+                        .filter(metal -> oreDict.equals(OreDictUtils.toString(oreName, metal.getRegistryName().getPath())))
                         .findFirst()
                         .map(metal -> {
                             Metal.ItemType type = ORE_DICT_METAL_ITEMS.get(oreName);

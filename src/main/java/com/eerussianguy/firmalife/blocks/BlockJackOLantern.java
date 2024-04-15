@@ -26,9 +26,12 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -98,7 +101,7 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize {
 
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
         //taken from BlockTorchTFC
-        TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (te != null) {
             //last twice as long as a torch. balance this by being less bright
             if (!worldIn.isRemote && te.getTicksSinceUpdate() > (2 * ConfigTFC.General.OVERRIDES.torchTime) &&
@@ -114,7 +117,7 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize {
         //taken from BlockTorchTFC
         if (!worldIn.isRemote) {
             ItemStack stack = playerIn.getHeldItem(hand);
-            TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+            TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
             if (BlockTorchTFC.canLight(stack)) {
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
                 if (tile != null)
@@ -129,7 +132,7 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         //taken from BlockTorchTFC
         // Set the initial counter value
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }

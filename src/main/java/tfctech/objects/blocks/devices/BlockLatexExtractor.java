@@ -22,9 +22,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.client.TechSounds;
 import tfctech.objects.tileentities.TELatexExtractor;
 
@@ -76,7 +81,7 @@ public class BlockLatexExtractor extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        TELatexExtractor te = Helpers.getTE(worldIn, pos, TELatexExtractor.class);
+        TELatexExtractor te = TileUtils.getTile(worldIn, pos, TELatexExtractor.class);
         if (te != null) {
             return state.withProperty(BASE, te.hasBase())
                     .withProperty(POT, te.hasPot())
@@ -136,7 +141,7 @@ public class BlockLatexExtractor extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TELatexExtractor te = Helpers.getTE(worldIn, pos, TELatexExtractor.class);
+        TELatexExtractor te = TileUtils.getTile(worldIn, pos, TELatexExtractor.class);
         if (te != null) {
             if (te.cutState() > 0 && worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite()))
                     .getBlock() instanceof BlockLogTFC) {
@@ -156,7 +161,7 @@ public class BlockLatexExtractor extends Block {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
                                     float hitY, float hitZ) {
-        TELatexExtractor te = Helpers.getTE(world, pos, TELatexExtractor.class);
+        TELatexExtractor te = TileUtils.getTile(world, pos, TELatexExtractor.class);
         if (te != null && hand == EnumHand.MAIN_HAND) {
             ItemStack stack = player.getHeldItem(hand);
             if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1) {

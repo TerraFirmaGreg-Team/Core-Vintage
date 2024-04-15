@@ -1,12 +1,14 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+
 import net.minecraft.item.ItemStack;
 
+
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.te.TEInventory;
 
 @MethodsReturnNonnullByDefault
-public class TEBloom extends TEInventory {
+public class TEBloom extends TEBaseInventory {
 
     public TEBloom() {
         super(1);

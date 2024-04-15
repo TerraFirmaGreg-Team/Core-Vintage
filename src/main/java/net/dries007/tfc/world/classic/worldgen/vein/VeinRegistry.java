@@ -1,9 +1,11 @@
 package net.dries007.tfc.world.classic.worldgen.vein;
 
+import su.terrafirmagreg.api.lib.WeightedCollection;
+
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.util.collections.WeightedCollection;
 import net.dries007.tfc.world.classic.worldgen.WorldGenOreVeins;
 
 import org.jetbrains.annotations.NotNull;

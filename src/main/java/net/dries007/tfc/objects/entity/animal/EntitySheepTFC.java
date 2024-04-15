@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
@@ -41,7 +42,6 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -147,7 +147,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
                 if (isReadyForAnimalProduct()) {
                     stack.damageItem(1, player);
                     ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL, 1);
-                    Helpers.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
+                    StackUtils.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
                     playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
                     setProductsCooldown();
                 } else {

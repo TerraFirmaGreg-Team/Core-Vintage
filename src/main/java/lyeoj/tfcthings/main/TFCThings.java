@@ -2,7 +2,7 @@ package lyeoj.tfcthings.main;
 
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.Constants;
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -24,7 +24,7 @@ public class TFCThings {
     public static final String CLIENT_PROXY = "lyeoj.tfcthings.proxy.ClientProxy";
     public static final String COMMON_PROXY = "lyeoj.tfcthings.proxy.CommonProxy";
     public static final String DEPENDENCIES = "required-after:" + Constants.MODID_TFC;
-    public static final LoggingUtils LOGGER = new LoggingUtils(MODID_TFCTHINGS);
+    public static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCTHINGS);
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy proxy;
     @Mod.Instance

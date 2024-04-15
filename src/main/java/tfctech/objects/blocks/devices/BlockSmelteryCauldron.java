@@ -21,12 +21,17 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
+
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 
@@ -88,7 +93,7 @@ public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize 
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TESmelteryCauldron te = Helpers.getTE(worldIn, pos, TESmelteryCauldron.class);
+        TESmelteryCauldron te = TileUtils.getTile(worldIn, pos, TESmelteryCauldron.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -101,7 +106,7 @@ public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize 
         if (!player.isSneaking()) {
             if (!world.isRemote) {
                 if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
-                    TESmelteryCauldron smeltery = Helpers.getTE(world, pos, TESmelteryCauldron.class);
+                    TESmelteryCauldron smeltery = TileUtils.getTile(world, pos, TESmelteryCauldron.class);
                     ItemStack held = player.getHeldItem(hand);
                     if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
                         IFluidHandler fluidHandler = smeltery.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);

@@ -27,6 +27,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.render.UnlistedCropProperty;
 import com.eerussianguy.firmalife.te.TEPlanter;
@@ -34,10 +35,13 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 
@@ -127,7 +131,7 @@ public class BlockLargePlanter extends Block implements IItemSize {
                                     float hitY, float hitZ) {
         if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
             ItemStack held = player.getHeldItem(hand);
-            TEPlanter te = Helpers.getTE(world, pos, TEPlanter.class);
+            TEPlanter te = TileUtils.getTile(world, pos, TEPlanter.class);
             if (te != null) {
                 IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
@@ -186,7 +190,7 @@ public class BlockLargePlanter extends Block implements IItemSize {
 
     @Nullable
     public PlanterRecipe.PlantInfo getCrop(IBlockAccess world, BlockPos pos) {
-        TEPlanter te = Helpers.getTE(world, pos, TEPlanter.class);
+        TEPlanter te = TileUtils.getTile(world, pos, TEPlanter.class);
         return te != null ? new PlanterRecipe.PlantInfo(te.getRecipe(0), te.getStage(0)) : null;
     }
 

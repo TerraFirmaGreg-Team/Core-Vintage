@@ -1,5 +1,7 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.api.lib.WeightedCollection;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
@@ -7,12 +9,12 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
 import net.dries007.tfc.objects.items.metal.ItemMetalSword;
-import net.dries007.tfc.util.collections.WeightedCollection;
 
 import org.jetbrains.annotations.Nullable;
 

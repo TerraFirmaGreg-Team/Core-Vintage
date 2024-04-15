@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+
 import BananaFructa.tfcfarming.firmalife.TEHangingPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEStemCropN;
@@ -28,8 +29,12 @@ import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
 import java.lang.reflect.InvocationTargetException;
@@ -78,7 +83,7 @@ public class CommonProxy {
         if (!event.getWorld().isRemote) {
             setTileEntity(event.getWorld(), event.getPos());
             if (TFCFarming.firmalifeLoaded) {
-                TEPlanter pte = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanter.class);
+                TEPlanter pte = TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanter.class);
                 if (pte != null) {
                     event.getWorld().setTileEntity(event.getPos(), TEPlanterN.class.newInstance());
                     return;
@@ -91,7 +96,7 @@ public class CommonProxy {
                     Item i = supplier.get();
 
                     if (i instanceof ItemSeedsTFC seeds) {
-                        TEHangingPlanter hpte = Helpers.getTE(event.getWorld(), event.getPos(), TEHangingPlanter.class);
+                        TEHangingPlanter hpte = TileUtils.getTile(event.getWorld(), event.getPos(), TEHangingPlanter.class);
                         if (hpte != null) {
                             ICrop crop = Utils.readDeclaredField(ItemSeedsTFC.class, seeds, "crop");
                             if (crop != null) {
@@ -144,7 +149,7 @@ public class CommonProxy {
 
     private void setTileEntity(World w, BlockPos pos)
             throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        TECropBase te = (TECropBase) Helpers.getTE(w, pos, TECropBase.class);
+        TECropBase te = TileUtils.getTile(w, pos, TECropBase.class);
         if (te == null) return;
         if (TFCFarming.firmalifeLoaded && te instanceof TEStemCrop && !(te instanceof TEStemCropN)) {
             TETickCounter teStemCropN = TEStemCropN.class.getConstructor(TECropBase.class).newInstance(te);
@@ -188,12 +193,12 @@ public class CommonProxy {
                                 .getZ(), nutrientClass, value)) {
                             event.getItemStack().setCount(event.getItemStack().getCount() - 1);
                         } else if (planter) {
-                            TEPlanterN tePlanterN = Helpers.getTE(event.getWorld(), event.getPos(), TEPlanterN.class);
+                            TEPlanterN tePlanterN = TileUtils.getTile(event.getWorld(), event.getPos(), TEPlanterN.class);
                             if (tePlanterN != null && tePlanterN.fertilize(nutrientClass, value)) {
                                 event.getItemStack().setCount(event.getItemStack().getCount() - 1);
                             }
                         } else if (hangingPlanter) {
-                            TEHangingPlanterN teHangingPlanterN = Helpers.getTE(event.getWorld(), event.getPos(), TEHangingPlanterN.class);
+                            TEHangingPlanterN teHangingPlanterN = TileUtils.getTile(event.getWorld(), event.getPos(), TEHangingPlanterN.class);
                             if (teHangingPlanterN != null && teHangingPlanterN.fertilize(nutrientClass, value)) {
                                 event.getItemStack().setCount(event.getItemStack().getCount() - 1);
                             }

@@ -11,6 +11,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -73,9 +74,9 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
 
     /**
      * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item,
-     * and it was created before the post init, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we
-     * set it to non-decaying. This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See
-     * TerraFirmaCraft#458
+     * and it was created before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy.
+     * As such, we set it to non-decaying. This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()},
+     * See TerraFirmaCraft#458
      */
     void setNonDecaying();
 

@@ -7,6 +7,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlan;
@@ -18,6 +19,10 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
+
+
+import net.minecraftforge.fml.common.Loader;
+
 
 import java.io.IOException;
 
@@ -78,7 +83,7 @@ public class GuiAnvilTFC extends GuiContainerTE<TEAnvilTFC> {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
-        if (Helpers.isJEIEnabled()) {
+        if (Loader.isModLoaded("jei")) {
             drawTexturedModalRect(guiLeft + 26, guiTop + 24, 0, 192, 9, 14);
         }
 

@@ -2,6 +2,9 @@ package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
@@ -33,11 +36,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,8 +50,11 @@ import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 @MethodsReturnNonnullByDefault
 public class BlockLogPile extends BlockBase implements ITEBlock {
 
-    private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X,
-            EnumFacing.Axis.Z);
+    private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis",
+            EnumFacing.Axis.class,
+            EnumFacing.Axis.X,
+            EnumFacing.Axis.Z
+    );
 
     public BlockLogPile() {
         super(Material.WOOD);
@@ -59,7 +63,9 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
         setSoundType(SoundType.WOOD);
         setTickRandomly(true);
         setHarvestLevel("axe", 0);
-        this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
+        this.setDefaultState(this.getDefaultState()
+                .withProperty(AXIS, EnumFacing.Axis.X)
+                .withProperty(LIT, false));
     }
 
     // A simplified check for display (Patchouli) purposes
@@ -133,9 +139,9 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
             worldIn.setBlockState(pos, state.withProperty(LIT, true));
-            TELogPile te = Helpers.getTE(worldIn, pos, TELogPile.class);
-            if (te != null) {
-                te.light();
+            var tile = TileUtils.getTile(worldIn, pos, TELogPile.class);
+            if (tile != null) {
+                tile.light();
             }
         }
     }
@@ -143,8 +149,8 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
                                     float hitY, float hitZ) {
-        TELogPile te = Helpers.getTE(world, pos, TELogPile.class);
-        if (te != null) {
+        var tile = TileUtils.getTile(world, pos, TELogPile.class);
+        if (tile != null) {
             // Special Interactions
             // 1. Try and put a log inside (happens on right click event when sneaking)
             // 2. Try and light the TE
@@ -156,16 +162,16 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
                 // Light the Pile
                 if (!world.isRemote) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
-                    te.light();
+                    tile.light();
                     world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
                     world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 }
                 return true;
             }
-            if (OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {
+            if (OreDictUtils.contains(stack, "logWood")) {
                 // Copy from InteractionManager since this is called first when player is not sneaking
                 if (!player.isSneaking()) {
-                    if (te.insertLog(stack.copy())) {
+                    if (tile.insertLog(stack.copy())) {
                         if (!world.isRemote) {
                             world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                             stack.shrink(1);
@@ -174,7 +180,7 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
                         return true;
                     }
                 } else {
-                    int inserted = te.insertLogs(stack.copy());
+                    int inserted = tile.insertLogs(stack.copy());
                     if (inserted > 0) {
                         if (!world.isRemote) {
                             world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -209,8 +215,8 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         // This can't use breakBlock as it needs to not drop when broken in order to create a charcoal pile
-        if (!worldIn.isRemote && te instanceof TEInventory) {
-            ((TEInventory) te).onBreakBlock(worldIn, pos, state);
+        if (!worldIn.isRemote && te instanceof TEBaseInventory tile) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -248,9 +254,9 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        TELogPile te = Helpers.getTE(world, pos, TELogPile.class);
-        if (te != null) {
-            return te.getLog().copy();
+        var tile = TileUtils.getTile(world, pos, TELogPile.class);
+        if (tile != null) {
+            return tile.getLog().copy();
         }
         return ItemStack.EMPTY;
     }

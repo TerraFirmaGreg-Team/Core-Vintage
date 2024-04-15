@@ -2,6 +2,8 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -39,7 +41,6 @@ import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
 
@@ -80,7 +81,7 @@ public class TEBlastFurnace extends TETickableInventory
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
-        return OreDictionaryHelper.doesStackMatchOre(stack, "tuyere");
+        return OreDictUtils.contains(stack, "tuyere");
     }
 
     @SuppressWarnings("unused")
@@ -258,7 +259,7 @@ public class TEBlastFurnace extends TETickableInventory
                                     convertToMolten(stack);
                                     ItemStack tuyereStack = inventory.getStackInSlot(0);
                                     if (!tuyereStack.isEmpty()) {
-                                        Helpers.damageItem(tuyereStack);
+                                        StackUtils.damageItem(tuyereStack);
                                     }
                                     return true;
                                 }

@@ -18,6 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.te.TEStemCrop;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -28,7 +29,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
@@ -36,6 +36,9 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 @MethodsReturnNonnullByDefault
 
@@ -103,7 +106,7 @@ public class BlockStemFruit extends BlockDirectional implements IItemSize {
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
         if (world instanceof World && !((World) world).isRemote) {
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
             if (te != null) {
                 long currentTime = CalendarTFC.PLAYER_TIME.getTicks();
                 long foodCreationDate = currentTime - te.getTicksSinceUpdate();
@@ -133,7 +136,7 @@ public class BlockStemFruit extends BlockDirectional implements IItemSize {
                 if (block instanceof BlockStemCrop) {
                     BlockStemCrop crop = (BlockStemCrop) block;
                     //check the crop is pointing towards us
-                    TEStemCrop te = Helpers.getTE(world, cropPos, TEStemCrop.class);
+                    TEStemCrop te = TileUtils.getTile(world, cropPos, TEStemCrop.class);
                     if (te != null && te.getFruitDirection() == neighbor.getOpposite()) {
                         IBlockState cropState = world.getBlockState(cropPos);
                         int cropStage = cropState.getValue(crop.getStageProperty());

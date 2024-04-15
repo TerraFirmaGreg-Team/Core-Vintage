@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import net.dries007.tfc.util.Helpers;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
+import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -10,9 +13,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
@@ -33,7 +33,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
             if (count > 160) {
                 if (state.getBlock() == BlocksDevice.LOG_PILE) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
-                    TELogPile te = Helpers.getTE(world, pos, TELogPile.class);
+                    TELogPile te = TileUtils.getTile(world, pos, TELogPile.class);
                     if (te != null) {
                         te.light();
                     }
@@ -41,7 +41,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
                         world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
                     }
                 } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
-                    TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
+                    TEPitKiln te = TileUtils.getTile(world, pos, TEPitKiln.class);
                     if (te != null) {
                         te.tryLight();
                     }

@@ -24,8 +24,11 @@ import net.minecraftforge.oredict.OreDictionary;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -285,6 +288,45 @@ public final class BlockUtils {
             }
         }
 
+        return null;
+    }
+
+    /**
+     * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate
+     * allows for the specified direction!
+     *
+     * @param pos    position of the block that makes the check
+     * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it
+     *               sticks WITH. e.g: a sign facing north also hangs on the north side of the support block
+     * @return true if the side is solid, false otherwise.
+     */
+    public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
+        return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
+    }
+
+    /**
+     * Primarily for use in placing checks. Determines a solid side for the block to attach to.
+     *
+     * @param pos             position of the block/space to be checked.
+     * @param possibleSides   a list/array of all sides the block can attach to.
+     * @param preferredFacing this facing is checked first. It can be invalid or null.
+     * @return Found facing or null is none is found. This is the direction the block should be pointing and the side it stick TO, not the side it
+     * sticks WITH.
+     */
+    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
+        return getASolidFacing(worldIn, pos, preferredFacing, Arrays.asList(possibleSides));
+    }
+
+    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing,
+                                             Collection<EnumFacing> possibleSides) {
+        if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn, pos, preferredFacing)) {
+            return preferredFacing;
+        }
+        for (EnumFacing side : possibleSides) {
+            if (side != null && canHangAt(worldIn, pos, side)) {
+                return side;
+            }
+        }
         return null;
     }
 

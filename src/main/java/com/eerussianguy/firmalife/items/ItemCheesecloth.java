@@ -31,6 +31,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import mcp.MethodsReturnNonnullByDefault;
@@ -38,10 +39,13 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+
 
 import static net.minecraftforge.fluids.BlockFluidBase.LEVEL;
 
@@ -123,7 +127,7 @@ public class ItemCheesecloth extends ItemTFC {
                             if (recipeExists(fluidStack)) {
                                 ItemStack item = StrainingRecipe.get(fluidStack).getOutputItem();
                                 if (item != null)
-                                    Helpers.spawnItemStack(worldIn, pos, item);
+                                    StackUtils.spawnItemStack(worldIn, pos, item);
                             }
                         }
                         worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.PLAYERS, 1.0F, 1.0F);

@@ -21,14 +21,18 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.util.Helpers;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
 
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -55,7 +59,7 @@ public class BlockDryingMat extends Block implements ICustomModel {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
                                     EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
-            TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+            TEDryingMat te = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
             if (te != null && !worldIn.isRemote) {
                 if (playerIn.isSneaking()) {
                     ItemStack stack = te.getStack();
@@ -82,7 +86,7 @@ public class BlockDryingMat extends Block implements ICustomModel {
 
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+        TEDryingMat te = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
         if (te != null && !worldIn.isRemote) {
             if (worldIn.isRainingAt(pos.up())) {
                 te.resetCounter();
@@ -128,7 +132,7 @@ public class BlockDryingMat extends Block implements ICustomModel {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
                                 ItemStack stack) {
         // Set the initial counter value
-        TEDryingMat tile = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+        TEDryingMat tile = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
         if (tile != null) {
             tile.resetCounter();
         }
@@ -137,7 +141,7 @@ public class BlockDryingMat extends Block implements ICustomModel {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEDryingMat te = Helpers.getTE(worldIn, pos, TEDryingMat.class);
+        TEDryingMat te = TileUtils.getTile(worldIn, pos, TEDryingMat.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }

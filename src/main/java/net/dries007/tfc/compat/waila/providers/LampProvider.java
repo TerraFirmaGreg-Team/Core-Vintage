@@ -8,11 +8,15 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
+
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.te.TELamp;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +28,7 @@ public class LampProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TELamp te = Helpers.getTE(world, pos, TELamp.class);
+        TELamp te = TileUtils.getTile(world, pos, TELamp.class);
         if (te != null) {
             IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
             FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;

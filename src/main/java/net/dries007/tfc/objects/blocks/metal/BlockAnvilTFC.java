@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Metal;
@@ -31,10 +32,13 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -136,7 +140,7 @@ public class BlockAnvilTFC extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEAnvilTFC te = Helpers.getTE(worldIn, pos, TEAnvilTFC.class);
+        TEAnvilTFC te = TileUtils.getTile(worldIn, pos, TEAnvilTFC.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -155,7 +159,7 @@ public class BlockAnvilTFC extends Block {
         {
             return false;
         }
-        TEAnvilTFC te = Helpers.getTE(worldIn, pos, TEAnvilTFC.class);
+        TEAnvilTFC te = TileUtils.getTile(worldIn, pos, TEAnvilTFC.class);
         if (te == null) {
             return false;
         }

@@ -1,5 +1,6 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,9 +8,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 
@@ -25,7 +26,7 @@ public class PitKilnProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
+        TEPitKiln te = TileUtils.getTile(world, pos, TEPitKiln.class);
         if (te != null) {
             boolean isLit = te.isLit();
 

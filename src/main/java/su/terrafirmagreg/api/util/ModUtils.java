@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -47,7 +48,7 @@ public final class ModUtils {
     }
 
     public static String getIDName(String string) {
-        return String.format(MOD_ID + string);
+        return String.format(MOD_ID + ".%s", string);
     }
 
     /**
@@ -83,6 +84,7 @@ public final class ModUtils {
     public static String getModName(IForgeRegistryEntry.Impl<?> registerable) {
 
         final String modID = registerable.getRegistryName().getNamespace();
+
         final ModContainer mod = getModContainer(modID);
         return mod != null ? mod.getName() : "minecraft".equals(modID) ? "Minecraft" : "Unknown";
     }

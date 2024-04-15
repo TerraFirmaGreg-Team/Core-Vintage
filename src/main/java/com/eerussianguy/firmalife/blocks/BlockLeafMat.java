@@ -20,16 +20,21 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.te.TELeafMat;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -53,7 +58,7 @@ public class BlockLeafMat extends Block implements IItemSize {
         if (!world.isRemote) {
             ItemStack held = player.getHeldItem(hand);
             if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) return false;
-            TELeafMat te = Helpers.getTE(world, pos, TELeafMat.class);
+            TELeafMat te = TileUtils.getTile(world, pos, TELeafMat.class);
             if (te != null) {
                 IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
@@ -67,7 +72,7 @@ public class BlockLeafMat extends Block implements IItemSize {
                     }
                     if (held.isEmpty() && player.isSneaking()) {
                         ItemStack takeStack = inventory.extractItem(0, 1, false);
-                        Helpers.spawnItemStack(world, pos, takeStack);
+                        StackUtils.spawnItemStack(world, pos, takeStack);
                         te.deleteSlot();
                         te.clear();
                         te.markForSync();
@@ -81,7 +86,7 @@ public class BlockLeafMat extends Block implements IItemSize {
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (worldIn.isRainingAt(pos.up())) {
-            TELeafMat te = Helpers.getTE(worldIn, pos, TELeafMat.class);
+            TELeafMat te = TileUtils.getTile(worldIn, pos, TELeafMat.class);
             if (te != null) {
                 te.rain();
             }
@@ -90,7 +95,7 @@ public class BlockLeafMat extends Block implements IItemSize {
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TELeafMat te = Helpers.getTE(world, pos, TELeafMat.class);
+        TELeafMat te = TileUtils.getTile(world, pos, TELeafMat.class);
         if (te != null) {
             te.onBreakBlock(world, pos, state);
         }

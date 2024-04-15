@@ -1,10 +1,5 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
-import net.dries007.tfc.util.Helpers;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +12,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 @MethodsReturnNonnullByDefault
 
@@ -33,7 +36,7 @@ public class ItemBlockPlant extends ItemBlockTFC {
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
                                       float hitZ) {
         if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockFlowerPot) {
-            TileEntityFlowerPot te = Helpers.getTE(world, pos, TileEntityFlowerPot.class);
+            TileEntityFlowerPot te = TileUtils.getTile(world, pos, TileEntityFlowerPot.class);
             if (te == null || te.getFlowerItemStack().isEmpty()) {
                 world.setBlockState(pos, BlockFlowerPotTFC.get(plant).getDefaultState(), 3);
                 player.getHeldItem(hand).shrink(1);

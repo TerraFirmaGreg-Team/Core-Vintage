@@ -21,15 +21,19 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +77,7 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (te != null) {
             te.resetCounter();
         }
@@ -112,7 +116,7 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
         super.updateTick(world, pos, state, random);
 
         if (!world.isRemote) {
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
             if (te != null) {
                 long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
                 if (days > wood.getMinGrowthTime()) {

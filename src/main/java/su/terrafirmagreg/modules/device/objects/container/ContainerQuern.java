@@ -1,20 +1,21 @@
 package su.terrafirmagreg.modules.device.objects.container;
 
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
+
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import static su.terrafirmagreg.modules.device.objects.tiles.TEQuern.*;
 
-public class ContainerQuern extends ContainerTE<TEQuern> {
+public class ContainerQuern extends ContainerBaseTE<TEQuern> {
 
-    public ContainerQuern(InventoryPlayer playerInv, TEQuern te) {
-        super(playerInv, te);
+    public ContainerQuern(InventoryPlayer playerInv, TEQuern tile) {
+        super(playerInv, tile);
     }
 
     @Override

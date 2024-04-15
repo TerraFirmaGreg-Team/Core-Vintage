@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.animal;
 
+import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
@@ -16,17 +16,17 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
+import static su.terrafirmagreg.modules.Modules.Module_Animal;
 import static su.terrafirmagreg.modules.core.ModuleCore.CORE_TAB;
 
-@ModuleTFG(moduleID = "Animal", name = "TFG Module Animal")
+@Module(moduleID = Module_Animal)
 public final class ModuleAnimal extends ModuleBase {
 
-    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleAnimal.class.getSimpleName());
+    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleAnimal.class.getSimpleName());
 
     public static IPacketService PACKET_SERVICE;
 
     public ModuleAnimal() {
-        super(8);
         this.enableAutoRegistry(CORE_TAB);
 
         PACKET_SERVICE = this.enableNetwork();
@@ -52,7 +52,7 @@ public final class ModuleAnimal extends ModuleBase {
     }
 
     @Override
-    public @NotNull LoggingUtils getLogger() {
+    public @NotNull LoggingHelper getLogger() {
         return LOGGER;
     }
 }

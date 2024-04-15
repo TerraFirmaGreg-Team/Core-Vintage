@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.metal.client.gui;
 
+import net.minecraftforge.fml.common.Loader;
+
 import su.terrafirmagreg.api.spi.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
@@ -12,6 +14,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilStep;
@@ -77,7 +80,7 @@ public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
-        if (Helpers.isJEIEnabled()) {
+        if (Loader.isModLoaded("jei")) {
             drawTexturedModalRect(guiLeft + 26, guiTop + 24, 0, 192, 9, 14);
         }
 

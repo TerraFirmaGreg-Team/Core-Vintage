@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
@@ -15,11 +16,14 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,7 @@ public class CropProvider implements IWailaBlock {
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
-        TECropBase te = Helpers.getTE(world, pos, TECropBase.class);
+        TECropBase te = TileUtils.getTile(world, pos, TECropBase.class);
         if (state.getBlock() instanceof BlockCropTFC && te != null) {
             BlockCropTFC bs = (BlockCropTFC) state.getBlock();
             ICrop crop = bs.getCrop();

@@ -25,6 +25,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.client.TFCSounds;
 
 import org.jetbrains.annotations.NotNull;
@@ -156,9 +157,9 @@ public class BlockCharcoalPile extends BlockBase {
         if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
             if (!world.isRemote) {
                 world.setBlockState(pos, BlocksDevice.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
-                var te = TileUtils.getTile(world, pos, TECharcoalForge.class);
-                if (te != null) {
-                    te.onCreate();
+                var tile = TileUtils.getTile(world, pos, TECharcoalForge.class);
+                if (tile != null) {
+                    tile.onCreate();
                 }
             }
             return true;

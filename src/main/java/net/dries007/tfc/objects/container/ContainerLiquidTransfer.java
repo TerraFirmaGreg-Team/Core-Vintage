@@ -15,9 +15,11 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
 
 public class ContainerLiquidTransfer extends ContainerItemStack implements ISlotCallback {
 
@@ -55,7 +57,7 @@ public class ContainerLiquidTransfer extends ContainerItemStack implements ISlot
         if (!player.getEntityWorld().isRemote) {
             ItemStack stack = inventory.getStackInSlot(0);
             if (!stack.isEmpty()) {
-                Helpers.spawnItemStack(player.getEntityWorld(), player.getPosition(), stack);
+                StackUtils.spawnItemStack(player.getEntityWorld(), player.getPosition(), stack);
             }
         }
         super.onContainerClosed(player);

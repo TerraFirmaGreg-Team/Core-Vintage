@@ -22,6 +22,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
@@ -31,7 +32,11 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
@@ -169,7 +174,7 @@ public class BlockLogTFCF extends BlockLog implements IItemSize {
             player.addExhaustion(0.005F);
 
             if (!worldIn.isRemote) {
-                Helpers.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D), new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
+                StackUtils.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D), new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
             }
         } else if (ConfigTFC.General.TREE.requiresAxe) {
             // Here, there was no valid tool used. Deny spawning any drops since logs require axes
@@ -299,7 +304,7 @@ public class BlockLogTFCF extends BlockLog implements IItemSize {
                 // Explosions are 30% Efficient: no TNT powered tree farms.
                 if (Constants.RNG.nextFloat() < 0.3) {
                     if (!world.isRemote) {
-                        Helpers.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
+                        StackUtils.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
                     }
                 }
             } else {

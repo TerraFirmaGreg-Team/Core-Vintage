@@ -24,10 +24,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 public final class StackUtils {
@@ -71,6 +73,11 @@ public final class StackUtils {
 
     public static void damageItem(ItemStack stack) {
         damageItem(stack, 1);
+    }
+
+    public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
+        Set<String> toolClasses = stack.getItem().getToolClasses(stack);
+        return toolClasses.contains(toolClass);
     }
 
     /**

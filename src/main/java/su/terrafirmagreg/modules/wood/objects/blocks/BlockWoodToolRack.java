@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -29,7 +30,6 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -128,11 +128,11 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
     public void neighborChanged(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn,
                                 @NotNull BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        if (!Helpers.canHangAt(worldIn, pos, state.getValue(FACING))) {
+        if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(FACING))) {
             dropBlockAsItem(worldIn, pos, state, 0);
-            var te = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
-            if (te != null) {
-                te.onBreakBlock();
+            var tile = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
+            if (tile != null) {
+                tile.onBreakBlock();
             }
             worldIn.setBlockToAir(pos);
         }
@@ -140,24 +140,24 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 
     @Override
     public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
-        if (te != null) {
-            te.onBreakBlock();
+        var tile = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
+        if (tile != null) {
+            tile.onBreakBlock();
         }
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
     public boolean canPlaceBlockAt(@NotNull World worldIn, @NotNull BlockPos pos) {
-        return super.canPlaceBlockAt(worldIn, pos) && Helpers.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
+        return super.canPlaceBlockAt(worldIn, pos) && BlockUtils.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
     }
 
     public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
                                     @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            var te = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
-            if (te != null) {
-                return te.onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
+            var tile = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
+            if (tile != null) {
+                return tile.onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
             }
         }
         return true;
@@ -171,7 +171,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
         if (facing.getAxis() == Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
-        return this.getDefaultState().withProperty(FACING, Helpers.getASolidFacing(worldIn, pos, facing, HORIZONTALS));
+        return this.getDefaultState().withProperty(FACING, BlockUtils.getASolidFacing(worldIn, pos, facing, HORIZONTALS));
     }
 
     @Override
@@ -198,9 +198,9 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
                                   @NotNull EntityPlayer player) {
         if (target != null) {
             var vec = target.hitVec.subtract(pos.getX(), pos.getY(), pos.getZ());
-            var te = TileUtils.getTile(world, pos, TEWoodToolRack.class);
-            if (te != null) {
-                ItemStack item = te.getItems().get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
+            var tile = TileUtils.getTile(world, pos, TEWoodToolRack.class);
+            if (tile != null) {
+                ItemStack item = tile.getItems().get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
                 if (!item.isEmpty()) {
                     return item;
                 }

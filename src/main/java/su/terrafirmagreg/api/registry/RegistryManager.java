@@ -37,7 +37,6 @@ import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
@@ -170,8 +169,8 @@ public class RegistryManager {
      *
      * @param tab The tab for the registry helper.
      */
-    public RegistryManager(@Nullable CreativeTabs tab) {
-        this.modID = Loader.instance().activeModContainer().getModId().replaceAll("_", ".");
+    public RegistryManager(@Nullable CreativeTabs tab, String modID) {
+        this.modID = modID;
         this.tab = tab;
     }
 

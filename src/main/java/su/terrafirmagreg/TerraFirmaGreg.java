@@ -1,7 +1,8 @@
 package su.terrafirmagreg;
 
+import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleManager;
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.util.AnnotationUtils;
 import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
@@ -26,71 +27,82 @@ import static su.terrafirmagreg.Tags.*;
 @Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
-    public static final LoggingUtils LOGGER = new LoggingUtils(MOD_ID);
+    public static final LoggingHelper LOGGER = new LoggingHelper();
 
     @Getter
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
     public static IProxy proxy;
 
-    @SuppressWarnings("unused")
-    @Mod.Instance
     @Getter
+    @Mod.Instance
+    @SuppressWarnings("unused")
     private static TerraFirmaGreg instance;
 
     private final ModuleManager moduleManager;
 
     public TerraFirmaGreg() {
-        this.moduleManager = new ModuleManager(MOD_ID);
+        this.moduleManager = ModuleManager.getInstance();
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void onConstruction(FMLConstructionEvent event) {
-        this.moduleManager.setup(event.getASMHarvestedData());
-        this.moduleManager.routeFMLStateEvent(event);
+        AnnotationUtils.setAnnotationData(event.getASMHarvestedData());
 
+        this.moduleManager.setup();
+        this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void preInit(FMLPreInitializationEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void init(FMLInitializationEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void postInit(FMLPostInitializationEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void loadComplete(FMLLoadCompleteEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void serverAboutToStart(FMLServerAboutToStartEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void serverStarting(FMLServerStartingEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void serverStarted(FMLServerStartedEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void serverStopping(FMLServerStoppingEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void serverStopped(FMLServerStoppedEvent event) {
         this.moduleManager.routeFMLStateEvent(event);
     }

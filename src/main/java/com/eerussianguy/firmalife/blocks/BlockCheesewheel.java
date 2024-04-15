@@ -21,6 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.AgingFL;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
@@ -31,10 +32,13 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -111,7 +115,7 @@ public class BlockCheesewheel extends BlockNonCube implements IItemSize {
     }
 
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (te != null) {
             if (!worldIn.isRemote) {
                 long ticksSinceUpdate = te.getTicksSinceUpdate();
@@ -131,7 +135,7 @@ public class BlockCheesewheel extends BlockNonCube implements IItemSize {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         //taken from BlockJackOLantern which in turn was taken from BlockTorchTFC
         // Set the initial counter value
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null)
             tile.resetCounter();
 

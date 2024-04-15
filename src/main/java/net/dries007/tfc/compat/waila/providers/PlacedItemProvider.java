@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
@@ -13,9 +14,12 @@ import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +31,7 @@ public class PlacedItemProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TEPlacedItemFlat te = Helpers.getTE(world, pos, TEPlacedItemFlat.class);
+        TEPlacedItemFlat te = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
         if (te != null) {
             ItemStack stack = te.getStack();
             if (stack.getItem() instanceof ItemSmallOre) {

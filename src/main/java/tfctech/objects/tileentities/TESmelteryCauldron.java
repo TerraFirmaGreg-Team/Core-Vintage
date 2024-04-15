@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
 import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
@@ -17,7 +18,11 @@ import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.api.recipes.SmelteryRecipe;
 
 import org.jetbrains.annotations.NotNull;
@@ -47,7 +52,7 @@ public class TESmelteryCauldron extends TEInventory implements ITickable, IFluid
         if (!world.isRemote) {
             if (++reload >= 10) {
                 reload = 0;
-                TESmelteryFirebox firebox = Helpers.getTE(world, pos.down(), TESmelteryFirebox.class);
+                TESmelteryFirebox firebox = TileUtils.getTile(world, pos.down(), TESmelteryFirebox.class);
                 if (firebox != null) {
                     temp = firebox.getTemperature();
                 } else {

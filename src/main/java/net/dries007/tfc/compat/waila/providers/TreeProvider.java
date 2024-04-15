@@ -6,14 +6,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +33,7 @@ public class TreeProvider implements IWailaBlock {
         if (state.getBlock() instanceof BlockSaplingTFC) {
             BlockSaplingTFC block = ((BlockSaplingTFC) state.getBlock());
             Tree wood = block.getWood();
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
             if (te != null) {
                 long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
                 float perc = Math.min(0.99F, days / wood.getMinGrowthTime()) * 100;

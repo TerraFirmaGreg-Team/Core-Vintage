@@ -12,13 +12,16 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEIngotPile;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 public class ItemIngot extends ItemMetal {
 
@@ -44,7 +47,7 @@ public class ItemIngot extends ItemMetal {
                     if (worldIn.mayPlace(BlocksTFC.INGOT_PILE, up, false, EnumFacing.UP, null)) {
                         if (!worldIn.isRemote) {
                             worldIn.setBlockState(up, BlocksTFC.INGOT_PILE.getDefaultState());
-                            TEIngotPile te = Helpers.getTE(worldIn, up, TEIngotPile.class);
+                            TEIngotPile te = TileUtils.getTile(worldIn, up, TEIngotPile.class);
                             if (te != null) {
                                 te.setMetal(item.metal);
                                 te.setCount(1);
@@ -64,7 +67,7 @@ public class ItemIngot extends ItemMetal {
                     posTop = posTop.up();
                     stateTop = worldIn.getBlockState(posTop);
                     if (stateTop.getBlock() == BlocksTFC.INGOT_PILE) {
-                        TEIngotPile te = Helpers.getTE(worldIn, posTop, TEIngotPile.class);
+                        TEIngotPile te = TileUtils.getTile(worldIn, posTop, TEIngotPile.class);
                         if (te != null && te.getCount() < 64 && (te.getMetal() == item.metal) &&
                                 worldIn.checkNoEntityCollision(new AxisAlignedBB(0, 0, 0, 1, (1 + te.getCount()) / 64d, 1).offset(posTop))) {
                             te.setCount(te.getCount() + 1);
@@ -78,7 +81,7 @@ public class ItemIngot extends ItemMetal {
                             worldIn.getBlockState(posTop.down())
                                     .isSideSolid(worldIn, posTop.down(), EnumFacing.UP)) {
                         worldIn.setBlockState(posTop, BlocksTFC.INGOT_PILE.getDefaultState());
-                        TEIngotPile te = Helpers.getTE(worldIn, posTop, TEIngotPile.class);
+                        TEIngotPile te = TileUtils.getTile(worldIn, posTop, TEIngotPile.class);
                         if (te != null) {
                             te.setMetal(item.metal);
                             te.setCount(1);

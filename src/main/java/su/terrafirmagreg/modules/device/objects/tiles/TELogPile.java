@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiLogPile;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -26,15 +28,13 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile.LAYERS;
 
 @MethodsReturnNonnullByDefault
-public class TELogPile extends TEInventory implements ITickable, IContainerProvider<ContainerLogPile, GuiLogPile> {
+public class TELogPile extends TEBaseInventory implements ITickable, IContainerProvider<ContainerLogPile, GuiLogPile> {
 
     private static final int NUM_SLOTS = 4;
 
@@ -113,7 +113,7 @@ public class TELogPile extends TEInventory implements ITickable, IContainerProvi
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
-        return OreDictionaryHelper.doesStackMatchOre(stack, "logWood");
+        return OreDictUtils.contains(stack, "logWood");
     }
 
     /**

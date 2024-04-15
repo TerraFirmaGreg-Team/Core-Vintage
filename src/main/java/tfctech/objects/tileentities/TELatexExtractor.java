@@ -11,11 +11,16 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TEBase;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+
+
 import tfctech.TFCTech;
 import tfctech.network.PacketLatexUpdate;
 import tfctech.objects.fluids.TechFluids;
@@ -112,16 +117,16 @@ public class TELatexExtractor extends TEBase implements ITickable {
         if (hasPot()) {
             ItemStack pot = removePot();
             if (pot != ItemStack.EMPTY) {
-                Helpers.spawnItemStack(world, pos, pot);
+                StackUtils.spawnItemStack(world, pos, pot);
             }
         }
         if (hasBase()) {
             ItemStack base = removeBase();
             if (base != ItemStack.EMPTY) {
-                Helpers.spawnItemStack(world, pos, base);
+                StackUtils.spawnItemStack(world, pos, base);
             }
         }
-        Helpers.spawnItemStack(world, pos, new ItemStack(TechItems.IRON_GROOVE));
+        StackUtils.spawnItemStack(world, pos, new ItemStack(TechItems.IRON_GROOVE));
     }
 
     public boolean isValidPot(ItemStack pot) {

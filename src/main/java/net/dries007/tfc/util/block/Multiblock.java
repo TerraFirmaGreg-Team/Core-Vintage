@@ -5,7 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.util.Helpers;
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class Multiblock implements BiPredicate<World, BlockPos> {
 
     public <T extends TileEntity> Multiblock match(BlockPos posOffset, Predicate<T> tileEntityPredicate, Class<T> teClass) {
         conditions.add((world, pos) -> {
-            T tile = Helpers.getTE(world, pos.add(posOffset), teClass);
+            T tile = TileUtils.getTile(world, pos.add(posOffset), teClass);
             if (tile != null) {
                 return tileEntityPredicate.test(tile);
             }

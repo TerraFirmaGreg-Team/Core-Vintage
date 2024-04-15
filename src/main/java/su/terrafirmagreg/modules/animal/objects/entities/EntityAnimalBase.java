@@ -42,6 +42,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import com.google.common.base.Predicates;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -209,7 +210,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(ModUtils.getIDName(".animal." + entityString + "." + this.getGender().name().toLowerCase()));
+        return new TextComponentTranslation(ModUtils.getIDName("animal." + entityString + "." + this.getGender().name().toLowerCase()));
     }
 
     @Nullable

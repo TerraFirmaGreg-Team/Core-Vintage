@@ -3,9 +3,11 @@ package su.terrafirmagreg.api.util;
 import su.terrafirmagreg.TerraFirmaGreg;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
@@ -82,6 +84,25 @@ public final class OreDictUtils {
             }
         }
 
+        return false;
+    }
+
+    public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {
+        for (ItemStack stack : playerInv.mainInventory) {
+            if (!stack.isEmpty() && contains(stack, ore)) {
+                return true;
+            }
+        }
+        for (ItemStack stack : playerInv.armorInventory) {
+            if (!stack.isEmpty() && contains(stack, ore)) {
+                return true;
+            }
+        }
+        for (ItemStack stack : playerInv.offHandInventory) {
+            if (!stack.isEmpty() && contains(stack, ore)) {
+                return true;
+            }
+        }
         return false;
     }
 

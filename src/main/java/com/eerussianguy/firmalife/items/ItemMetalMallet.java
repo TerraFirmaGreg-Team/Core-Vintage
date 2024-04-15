@@ -1,5 +1,6 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.block.Block;
@@ -25,6 +26,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.player.CapPlayerDataFL;
@@ -48,7 +50,6 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 
@@ -107,7 +108,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
                     if (cap != null) {
                         if (!cap.isRotten()) {
                             for (int i = 0; i < 2 + RNG.nextInt(4); i++)
-                                Helpers.spawnItemStack(worldIn, pos, new ItemStack(ItemsFL.getFood(FoodFL.MELON)));
+                                StackUtils.spawnItemStack(worldIn, pos, new ItemStack(ItemsFL.getFood(FoodFL.MELON)));
                         }
                     }
                 }
@@ -165,7 +166,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
                         {
                             int dropCount = Math.min(Constants.RNG.nextInt(4) + 1, leafCount);
                             BlockPos dropPos = logPos.offset(EnumFacing.random(Constants.RNG), Constants.RNG.nextInt(3) + 1);
-                            Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut()
+                            StackUtils.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut()
                                     .getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
                             TFCParticles.LEAF1.sendToAllNear(worldIn, dropPos.getX() + RNG.nextFloat() / 10, dropPos.getY() - RNG.nextFloat() / 10,
                                     dropPos.getZ() + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10,

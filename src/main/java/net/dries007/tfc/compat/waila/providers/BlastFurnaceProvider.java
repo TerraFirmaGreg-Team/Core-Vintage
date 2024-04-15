@@ -1,5 +1,6 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBlastFurnace;
 
@@ -8,9 +9,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +25,7 @@ public class BlastFurnaceProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TEBlastFurnace blastFurnace = Helpers.getTE(world, pos, TEBlastFurnace.class);
+        TEBlastFurnace blastFurnace = TileUtils.getTile(world, pos, TEBlastFurnace.class);
         if (blastFurnace != null) {
             int chinmey = BlockBlastFurnace.getChimneyLevels(blastFurnace.getWorld(), blastFurnace.getPos());
             if (chinmey > 0) {

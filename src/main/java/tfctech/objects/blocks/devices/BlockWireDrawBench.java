@@ -26,8 +26,13 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.objects.tileentities.TEWireDrawBench;
 
 import org.jetbrains.annotations.Nullable;
@@ -154,7 +159,7 @@ public class BlockWireDrawBench extends BlockHorizontal {
         if (!state.getValue(UPPER)) {
             TEPos = pos.offset(state.getValue(FACING));
         }
-        TEWireDrawBench te = Helpers.getTE(world, TEPos, TEWireDrawBench.class);
+        TEWireDrawBench te = TileUtils.getTile(world, TEPos, TEWireDrawBench.class);
         if (te != null && hand == EnumHand.MAIN_HAND) {
             ItemStack stack = player.getHeldItem(hand);
             if (!stack.isEmpty()) {

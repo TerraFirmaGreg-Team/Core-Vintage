@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -28,6 +29,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.Heat;
@@ -35,7 +37,6 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TEPlacedItem;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -84,7 +85,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
                 }
                 // Copy misc data
                 teNew.isHoldingLargeItem = teOld.isHoldingLargeItem;
-                if (OreDictionaryHelper.doesStackMatchOre(strawStack, "blockStraw")) {
+                if (OreDictUtils.contains(strawStack, "blockStraw")) {
                     teNew.addStrawBlock();
                 } else {
                     teNew.addStraw(strawStack.splitStack(1));
@@ -191,7 +192,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
             int strawCount = getStrawCount(), logCount = getLogCount();
 
             // Straw
-            if (OreDictionaryHelper.doesStackMatchOre(stack, "straw") && strawCount < STRAW_NEEDED) {
+            if (OreDictUtils.contains(stack, "straw") && strawCount < STRAW_NEEDED) {
                 addStraw(stack.splitStack(1));
                 world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
                 updateBlock();
@@ -209,7 +210,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
             // Only insert logItems if all strawItems is inserted
             if (strawCount == STRAW_NEEDED) {
                 // Logs
-                if (OreDictionaryHelper.doesStackMatchOre(stack, "logWood") && logCount < WOOD_NEEDED) {
+                if (OreDictUtils.contains(stack, "logWood") && logCount < WOOD_NEEDED) {
                     addLog(stack.splitStack(1));
                     world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
                     updateBlock();

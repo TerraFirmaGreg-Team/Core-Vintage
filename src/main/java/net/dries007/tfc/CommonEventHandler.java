@@ -1,5 +1,6 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -322,7 +323,7 @@ public final class CommonEventHandler {
         // Only possible with main hand - fixes attempting to drink even when it doesn't make sense
         if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC foodStats &&
                 event.getHand() == EnumHand.MAIN_HAND) {
-            RayTraceResult result = Helpers.rayTrace(event.getWorld(), player, true);
+            RayTraceResult result = MathsUtils.rayTrace(event.getWorld(), player, true);
             if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
                 IBlockState waterState = world.getBlockState(result.getBlockPos());
                 boolean isFreshWater = BlocksTFC.isFreshWater(waterState), isSaltWater = BlocksTFC.isSaltWater(waterState);

@@ -1,5 +1,7 @@
 package net.dries007.tfc.util.interaction;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 
@@ -17,11 +19,11 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -62,7 +64,7 @@ public final class InteractionManager {
 
         // Leather knapping
         putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "leather"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "knife")) {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "knife")) {
                 if (!worldIn.isRemote) {
                     TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_LEATHER);
                 }
@@ -91,7 +93,7 @@ public final class InteractionManager {
                         if (stateAt.getBlock() == BlocksDevice.LOG_PILE) {
                             // Clicked on a log pile, so try to insert into the original
                             // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
-                            TELogPile te = Helpers.getTE(worldIn, pos, TELogPile.class);
+                            TELogPile te = TileUtils.getTile(worldIn, pos, TELogPile.class);
                             if (te != null) {
                                 if (!player.isSneaking()) {
                                     if (te.insertLog(stack)) {
@@ -130,7 +132,7 @@ public final class InteractionManager {
                                     worldIn.setBlockState(posAt,
                                             BlocksDevice.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
-                                    TELogPile te = Helpers.getTE(worldIn, posAt, TELogPile.class);
+                                    TELogPile te = TileUtils.getTile(worldIn, posAt, TELogPile.class);
                                     if (te != null) {
                                         te.insertLog(stack.copy());
                                     }

@@ -1,6 +1,6 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -91,12 +91,12 @@ public final class TerraFirmaCraft {
         FluidRegistry.enableUniversalBucket();
     }
 
-    private final LoggingUtils log = new LoggingUtils(MODID_TFC);
+    private final LoggingHelper log = new LoggingHelper(MODID_TFC);
     private final boolean isSignedBuild = true;
     private WorldTypeTFC worldTypeTFC;
     private SimpleNetworkWrapper network;
 
-    public static LoggingUtils getLog() {
+    public static LoggingHelper getLog() {
         return INSTANCE.log;
     }
 

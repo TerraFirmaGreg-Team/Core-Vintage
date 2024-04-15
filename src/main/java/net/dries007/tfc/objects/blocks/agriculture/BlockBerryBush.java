@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import net.minecraft.block.Block;
@@ -25,13 +26,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -138,7 +139,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
             if (te != null) {
                 float temp = ClimateTFC.getActualTemp(world, pos);
                 float rainfall = ChunkDataTFC.getRainfall(world, pos);
@@ -165,7 +166,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }
@@ -193,7 +194,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
             if (!worldIn.isRemote) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, bush.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
-                TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+                TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
                 if (te != null) {
                     te.resetCounter();
                 }

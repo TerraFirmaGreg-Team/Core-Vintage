@@ -3,6 +3,7 @@ package su.terrafirmagreg.api.util;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -26,6 +27,10 @@ public final class NBTUtils {
         throw new IllegalAccessError("Utility class");
     }
 
+    public static void setGenericNBTValue(String tagName, Object value) {
+        setGenericNBTValue(new NBTTagCompound(), tagName, value);
+    }
+
     /**
      * Sets an unknown data type to an NBTTagCompound. If the type of the data can not be identified, and exception will be thrown. Current supported
      * data types include String, Integer, Float, Boolean, Double, Long, Short, Byte, ItemStack, Entity and Position.
@@ -46,7 +51,7 @@ public final class NBTUtils {
         else if (value instanceof Byte byteValue) dataTag.setByte(tagName, byteValue);
         else if (value instanceof UUID uuidValue) dataTag.setUniqueId(tagName, uuidValue);
         else if (value instanceof ItemStack itemStackValue) dataTag.setTag(tagName, itemStackValue.writeToNBT(new NBTTagCompound()));
-        else if (value instanceof NBTTagCompound nbtTagCompound) dataTag.setTag(tagName, nbtTagCompound);
+        else if (value instanceof NBTBase nbtBase) dataTag.setTag(tagName, nbtBase);
         else if (value instanceof Entity entityValue) {
             final NBTTagCompound newTag = new NBTTagCompound();
             entityValue.writeToNBT(newTag);

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.objects.items;
 
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
@@ -9,11 +10,13 @@ import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 @Getter
 public class ItemWoodWheel extends ItemBase implements IWoodItem {
@@ -25,9 +28,12 @@ public class ItemWoodWheel extends ItemBase implements IWoodItem {
 
         this.itemVariant = itemVariant;
         this.type = type;
+    }
 
-        //        OreDictionaryHelper.onRegister(this, variant.toString());
-        //        OreDictionaryHelper.onRegister(this, variant.toString(), type.toString());
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, itemVariant);
+        OreDictUtils.register(this, itemVariant, type);
     }
 
     @NotNull

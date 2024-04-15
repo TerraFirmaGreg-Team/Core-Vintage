@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -25,10 +26,13 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -106,7 +110,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEAnvilTFC te = Helpers.getTE(worldIn, pos, TEAnvilTFC.class);
+        TEAnvilTFC te = TileUtils.getTile(worldIn, pos, TEAnvilTFC.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -125,7 +129,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
         {
             return false;
         }
-        TEAnvilTFC te = Helpers.getTE(worldIn, pos, TEAnvilTFC.class);
+        TEAnvilTFC te = TileUtils.getTile(worldIn, pos, TEAnvilTFC.class);
         if (te == null) {
             return false;
         }

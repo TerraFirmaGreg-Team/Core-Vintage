@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
 
@@ -21,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.te.TEString;
 import mcp.MethodsReturnNonnullByDefault;
@@ -28,7 +31,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
 
@@ -64,7 +66,7 @@ public class BlockString extends BlockNonCube {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockFirePit) {
             if (state.getValue(LIT)) {
-                TEFirePit te = Helpers.getTE(world, pos, TEFirePit.class);
+                TEFirePit te = TileUtils.getTile(world, pos, TEFirePit.class);
                 if (te != null) {
                     IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                     if (cap != null) {
@@ -108,7 +110,7 @@ public class BlockString extends BlockNonCube {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
                                     float hitY, float hitZ) {
         if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
-            TEString te = Helpers.getTE(world, pos, TEString.class);
+            TEString te = TileUtils.getTile(world, pos, TEString.class);
             if (te == null) return false;
             ItemStack held = player.getHeldItem(hand);
             if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) return false;
@@ -123,13 +125,13 @@ public class BlockString extends BlockNonCube {
                             HeatRecipe.get(held) != null) || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
                     if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
                         ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
-                        Helpers.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
+                        StackUtils.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);
                         te.markForSync();
                         return true;
                     }
                 }
             } else if (held.isEmpty() && !current.isEmpty()) {
-                Helpers.spawnItemStack(world, pos, inv.extractItem(0, 1, false));
+                StackUtils.spawnItemStack(world, pos, inv.extractItem(0, 1, false));
                 te.markForSync();
                 return true;
             }
@@ -140,7 +142,7 @@ public class BlockString extends BlockNonCube {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (world.isRemote) return;
-        TEString te = Helpers.getTE(world, pos, TEString.class);
+        TEString te = TileUtils.getTile(world, pos, TEString.class);
         if (te == null) return;
 
         if (world.isRainingAt(pos.up()) || !isFired(world, pos)) {
@@ -174,7 +176,7 @@ public class BlockString extends BlockNonCube {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        TEString tile = Helpers.getTE(worldIn, pos, TEString.class);
+        TEString tile = TileUtils.getTile(worldIn, pos, TEString.class);
         if (tile != null) {
             tile.resetCounter();
         }

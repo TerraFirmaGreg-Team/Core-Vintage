@@ -103,10 +103,6 @@ public final class PropertyUtils {
     public static final PropertyBool FULL = PropertyBool.create("full");
     public static final PropertyBool LIT = PropertyBool.create("lit");
 
-    /**
-     * Utility classes, such as this one, are not meant to be instantiated. Java adds an implicit public constructor to every class which does not
-     * define at lease one explicitly. Hence why this constructor was added.
-     */
     private PropertyUtils() {
 
         throw new IllegalAccessError("Utility class");

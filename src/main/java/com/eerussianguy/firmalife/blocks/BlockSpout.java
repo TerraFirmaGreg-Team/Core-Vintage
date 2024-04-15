@@ -17,15 +17,19 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.particle.ParticlesFL;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import com.eerussianguy.firmalife.util.HelpersFL;
 import com.eerussianguy.firmalife.util.IWaterable;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -85,7 +89,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
     }
 
     private boolean waterPosition(World world, BlockPos checkPos) {
-        TileEntity te = Helpers.getTE(world, checkPos, TileEntity.class);
+        TileEntity te = TileUtils.getTile(world, checkPos, TileEntity.class);
         if (te instanceof IWaterable) {
             ((IWaterable) te).setWater(2);
             IBlockState stateAt = world.getBlockState(checkPos);

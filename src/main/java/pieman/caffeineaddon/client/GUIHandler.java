@@ -7,8 +7,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-import net.dries007.tfc.util.Helpers;
+
 import pieman.caffeineaddon.blocks.TEDryingMat;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 public class GUIHandler implements IGuiHandler {
 
@@ -20,7 +23,7 @@ public class GUIHandler implements IGuiHandler {
         ItemStack stack = player.getHeldItemMainhand();
         switch (ID) {
             case DRYINGMATGUI:
-                TEDryingMat te = Helpers.getTE(world, pos, TEDryingMat.class);
+                TEDryingMat te = TileUtils.getTile(world, pos, TEDryingMat.class);
                 return te == null ? null : new ContainerDryingMat(player.inventory, te);
         }
         return null;
@@ -32,7 +35,7 @@ public class GUIHandler implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         switch (ID) {
             case DRYINGMATGUI:
-                return new GuiDryingMat(container, player.inventory, Helpers.getTE(world, pos, TEDryingMat.class),
+                return new GuiDryingMat(container, player.inventory, TileUtils.getTile(world, pos, TEDryingMat.class),
                         world.getBlockState(new BlockPos(x, y, z))
                                 .getBlock()
                                 .getTranslationKey());

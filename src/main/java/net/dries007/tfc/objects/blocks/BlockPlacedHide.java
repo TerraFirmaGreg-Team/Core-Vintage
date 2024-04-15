@@ -22,13 +22,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.te.TEPlacedHide;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 /**
  * Due to implementation, this will only ever be a soaked hide -> scraped hide Placement is restricted to the TFC item.
@@ -142,7 +145,7 @@ public class BlockPlacedHide extends Block {
                 // Account for the distance between the hitbox and where the hide is rendered
                 Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));
                 stack.damageItem(1, playerIn);
-                TEPlacedHide tile = Helpers.getTE(worldIn, pos, TEPlacedHide.class);
+                TEPlacedHide tile = TileUtils.getTile(worldIn, pos, TEPlacedHide.class);
                 if (tile != null) {
                     tile.onClicked((float) point.x, (float) point.z);
                 }
@@ -192,7 +195,7 @@ public class BlockPlacedHide extends Block {
     }
 
     private ItemStack getItemStackDropped(IBlockAccess world, BlockPos pos, IBlockState state) {
-        TEPlacedHide tile = Helpers.getTE(world, pos, TEPlacedHide.class);
+        TEPlacedHide tile = TileUtils.getTile(world, pos, TEPlacedHide.class);
         if (tile != null && tile.isComplete()) {
             return new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.SCRAPED, state.getValue(SIZE)));
         }

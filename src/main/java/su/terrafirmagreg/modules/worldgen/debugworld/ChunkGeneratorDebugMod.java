@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.worldgen.debugworld;
 
+import su.terrafirmagreg.api.lib.Injector;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.worldgen.ModuleWorldGen;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -11,14 +11,13 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.ChunkGeneratorDebug;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
 
 import com.google.common.collect.Lists;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 public class ChunkGeneratorDebugMod extends ChunkGeneratorDebug {
@@ -29,12 +28,10 @@ public class ChunkGeneratorDebugMod extends ChunkGeneratorDebug {
     private final World world;
 
     public ChunkGeneratorDebugMod(World world, String modid) {
-
         super(world);
 
         // Build a list of block states for the provided modid.
         for (final Block block : ModUtils.getSortedEntries(ForgeRegistries.BLOCKS).get(modid)) {
-
             allModStates.addAll(block.getBlockState().getValidStates());
         }
 
@@ -42,19 +39,10 @@ public class ChunkGeneratorDebugMod extends ChunkGeneratorDebug {
         width = MathHelper.ceil(MathHelper.sqrt(allModStates.size()));
         length = MathHelper.ceil((float) allModStates.size() / (float) width);
 
-        try {
-            // Set the fields, this is needed because vanilla hardcodes some references here.
-            Field fieldAllValidStates = ObfuscationReflectionHelper.findField(ChunkGeneratorDebug.class, "field_177464_a");
-            Field fieldWidth = ObfuscationReflectionHelper.findField(ChunkGeneratorDebug.class, "field_177462_b");
-            Field fieldHeight = ObfuscationReflectionHelper.findField(ChunkGeneratorDebug.class, "field_181039_c");
-
-            ModuleWorldGen.setFinalStatic(fieldAllValidStates, allModStates);
-            ModuleWorldGen.setFinalStatic(fieldWidth, width);
-            ModuleWorldGen.setFinalStatic(fieldHeight, length);
-        } catch (final Exception e) {
-
-            ModuleWorldGen.LOGGER.catching(e);
-        }
+        // Set the fields, this is needed because vanilla hardcodes some references here.
+        Injector.setFinalStaticFieldWithReflection(ChunkGeneratorDebug.class, "field_177464_a", allModStates);
+        Injector.setFinalStaticFieldWithReflection(ChunkGeneratorDebug.class, "field_177462_b", width);
+        Injector.setFinalStaticFieldWithReflection(ChunkGeneratorDebug.class, "field_181039_c", length);
 
         this.world = world;
     }

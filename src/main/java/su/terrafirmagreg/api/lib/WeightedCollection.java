@@ -1,6 +1,8 @@
-package net.dries007.tfc.util.collections;
+package su.terrafirmagreg.api.lib;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.util.Collection;
 import java.util.Map;
@@ -9,13 +11,14 @@ import java.util.Random;
 import java.util.TreeMap;
 
 /**
- * Modified from https://stackoverflow.com/questions/6409652/random-weighted-selection-in-java
+ * Modified from <a href="https://stackoverflow.com/questions/6409652/random-weighted-selection-in-java">...</a>
  *
  * @param <E> the type of the collection
  */
 public class WeightedCollection<E> {
 
     private final NavigableMap<Double, E> backingMap = new TreeMap<>();
+    @Getter
     private double totalWeight = 0;
 
     public WeightedCollection() {}
@@ -40,10 +43,6 @@ public class WeightedCollection<E> {
 
     public Collection<E> values() {
         return backingMap.values();
-    }
-
-    public double getTotalWeight() {
-        return totalWeight;
     }
 
     public void clear() {

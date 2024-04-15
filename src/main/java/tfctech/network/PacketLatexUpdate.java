@@ -7,9 +7,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.objects.tileentities.TELatexExtractor;
 
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +67,7 @@ public class PacketLatexUpdate implements IMessage {
             EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
             if (player != null) {
                 World world = player.getEntityWorld();
-                TELatexExtractor te = Helpers.getTE(world, message.pos, TELatexExtractor.class);
+                TELatexExtractor te = TileUtils.getTile(world, message.pos, TELatexExtractor.class);
                 if (te != null) {
                     te.updateClient(message.cutState, message.fluid, message.pot, message.base);
                 }

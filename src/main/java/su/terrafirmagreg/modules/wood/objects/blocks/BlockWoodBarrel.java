@@ -210,18 +210,18 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
     public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn,
                                     @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = playerIn.getHeldItem(hand);
-        var te = TileUtils.getTile(worldIn, pos, TEWoodBarrel.class);
-        if (te != null) {
+        var tile = TileUtils.getTile(worldIn, pos, TEWoodBarrel.class);
+        if (tile != null) {
             if (heldItem.isEmpty() && playerIn.isSneaking()) {
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
                 toggleBarrelSeal(worldIn, pos);
                 return true;
             } else if (heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null) && !state.getValue(SEALED)) {
-                IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
                 if (fluidHandler != null) {
                     if (!worldIn.isRemote) {
                         FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler);
-                        te.markDirty();
+                        tile.markDirty();
                     }
                     return true;
                 }
@@ -239,10 +239,10 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
     public void onBlockPlacedBy(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer,
                                 @NotNull ItemStack stack) {
         if (!worldIn.isRemote && stack.getTagCompound() != null) {
-            var te = TileUtils.getTile(worldIn, pos, TEWoodBarrel.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(worldIn, pos, TEWoodBarrel.class);
+            if (tile != null) {
                 worldIn.setBlockState(pos, state.withProperty(SEALED, true));
-                te.loadFromItemStack(stack);
+                tile.loadFromItemStack(stack);
             }
         }
     }

@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.soil;
 
+import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariantHandler;
@@ -18,15 +18,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-@ModuleTFG(moduleID = "Soil", name = "TFG Module Soil")
+import static su.terrafirmagreg.modules.Modules.Module_Soil;
+
+@Module(moduleID = Module_Soil)
 public final class ModuleSoil extends ModuleBase {
 
-    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleSoil.class.getSimpleName());
+    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleSoil.class.getSimpleName());
 
     public static final CreativeTabs SOIL_TAB = new CreativeTabBase("soil", "soil/grass/humus");
 
     public ModuleSoil() {
-        super(3);
         this.enableAutoRegistry(SOIL_TAB);
     }
 
@@ -41,7 +42,7 @@ public final class ModuleSoil extends ModuleBase {
     }
 
     @Override
-    public @NotNull LoggingUtils getLogger() {
+    public @NotNull LoggingHelper getLogger() {
         return LOGGER;
     }
 

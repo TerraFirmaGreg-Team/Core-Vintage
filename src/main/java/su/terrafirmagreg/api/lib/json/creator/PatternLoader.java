@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.lib.jsoncreator;
+package su.terrafirmagreg.api.lib.json.creator;
 
 public final class PatternLoader {
 

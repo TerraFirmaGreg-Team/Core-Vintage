@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public final class AnnotationUtils {
 
     private static ASMDataTable asmData;
@@ -81,17 +83,10 @@ public final class AnnotationUtils {
 
         for (final ASMData data : getData(table, annotation)) {
 
-            try {
+            final Class<?> clazz = ClassUtils.getClassFromString(data.getClassName());
 
-                final Class clazz = Class.forName(data.getClassName());
-
-                if (clazz != null) {
-
-                    classes.add(new Tuple<Class<?>, A>(clazz, (A) clazz.getAnnotation(annotation)));
-                }
-            } catch (final ClassNotFoundException e) {
-
-                TerraFirmaGreg.LOGGER.warn(e, "Could not load class {} ", data.getClassName());
+            if (clazz != null) {
+                classes.add(new Tuple<>(clazz, clazz.getAnnotation(annotation)));
             }
         }
 
@@ -152,11 +147,11 @@ public final class AnnotationUtils {
 
                 final Class<?> asmClass = Class.forName(asmData.getClassName());
                 final Class<? extends T> asmInstanceClass = asmClass.asSubclass(instance);
-                map.put(asmInstanceClass.newInstance(), asmInstanceClass.getAnnotation(annotation));
+                map.put(asmInstanceClass.getDeclaredConstructor().newInstance(), asmInstanceClass.getAnnotation(annotation));
             } catch (final ClassNotFoundException e) {
 
                 // Ignore missing clases, because Forge changed this behaviour to allow these.
-            } catch (InstantiationException | IllegalAccessException e) {
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 
                 TerraFirmaGreg.LOGGER.warn(e, "Could not load class {}", asmData.getClassName());
             }

@@ -13,14 +13,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
 
 @MethodsReturnNonnullByDefault
 
@@ -70,7 +73,7 @@ public class BlockRockRaw extends BlockRockVariant {
 
             // No supporting solid blocks, so pop off as an item
             worldIn.setBlockToAir(pos);
-            Helpers.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
+            StackUtils.spawnItemStack(worldIn, pos, new ItemStack(state.getBlock(), 1));
         }
     }
 

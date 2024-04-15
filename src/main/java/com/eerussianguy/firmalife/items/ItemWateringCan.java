@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.util.MathsUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+
 import com.eerussianguy.firmalife.util.IWaterable;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
@@ -21,7 +24,10 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemMisc;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 
@@ -69,7 +75,7 @@ public class ItemWateringCan extends ItemMisc {
             for (int y = -2; y <= 2; y++) {
                 for (int z = -2; z <= 2; z++) {
                     BlockPos addPos = pos.add(x, y, z);
-                    TileEntity te = Helpers.getTE(world, addPos, TileEntity.class);
+                    TileEntity te = TileUtils.getTile(world, addPos, TileEntity.class);
                     if (te instanceof IWaterable) {
                         ((IWaterable) te).setWater(2);
                         IBlockState state = world.getBlockState(addPos);
@@ -92,7 +98,7 @@ public class ItemWateringCan extends ItemMisc {
     public void onUsingTick(ItemStack stack, EntityLivingBase entity, int countLeft) {
         World world = entity.getEntityWorld();
         if (world.isRemote && entity instanceof EntityPlayer && countLeft % 2 == 0) {
-            RayTraceResult result = Helpers.rayTrace(world, (EntityPlayer) entity, false);
+            RayTraceResult result = MathsUtils.rayTrace(world, (EntityPlayer) entity, false);
             if (result == null || result.typeOfHit != RayTraceResult.Type.BLOCK) return;
             BlockPos pos = result.getBlockPos();
             double x = pos.getX() + Constants.RNG.nextFloat();

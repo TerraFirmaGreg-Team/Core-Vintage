@@ -1,5 +1,6 @@
 package tfctech.objects.blocks.devices;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
 
@@ -28,12 +29,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import net.dries007.tfc.util.Helpers;
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
@@ -144,7 +145,7 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TESmelteryFirebox te = Helpers.getTE(worldIn, pos, TESmelteryFirebox.class);
+        TESmelteryFirebox te = TileUtils.getTile(worldIn, pos, TESmelteryFirebox.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -158,7 +159,7 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
             if (!world.isRemote) {
                 ItemStack held = player.getHeldItem(hand);
                 if (world.getBlockState(pos.up()).getBlock() instanceof BlockSmelteryCauldron) {
-                    TESmelteryFirebox firebox = Helpers.getTE(world, pos, TESmelteryFirebox.class);
+                    TESmelteryFirebox firebox = TileUtils.getTile(world, pos, TESmelteryFirebox.class);
                     if (ItemFireStarter.canIgnite(held) && firebox.onIgnite()) {
                         ItemFireStarter.onIgnition(held);
                     } else {
@@ -214,7 +215,7 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 
     @Override
     public void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount) {
-        TESmelteryFirebox firebox = Helpers.getTE(world, pos, TESmelteryFirebox.class);
+        TESmelteryFirebox firebox = TileUtils.getTile(world, pos, TESmelteryFirebox.class);
         if (firebox != null) {
             firebox.onAirIntake(airAmount);
         }

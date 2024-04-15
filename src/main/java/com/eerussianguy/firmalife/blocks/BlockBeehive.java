@@ -1,5 +1,6 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
@@ -35,7 +37,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -120,7 +121,7 @@ public class BlockBeehive extends Block implements IItemSize {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (world.isRemote) return;
-        TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
+        TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
         if (te == null) return;
         if (!isValid(world, pos, te)) {
             te.resetCounter();
@@ -155,7 +156,7 @@ public class BlockBeehive extends Block implements IItemSize {
             if (isNotCalm(world, pos, state)) {
                 player.addPotionEffect(new PotionEffect(PotionsCore.SWARM, 30 * 20));
             }
-            TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
+            TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
             if (te != null)
                 te.resetCounter();
             return true;

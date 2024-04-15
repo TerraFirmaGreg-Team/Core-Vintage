@@ -19,11 +19,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 
-import lombok.Getter;
 import net.dries007.tfc.util.Alloy;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 public class TEAlloyCalculator extends TEBase implements IContainerProvider<ContainerAlloyCalculator, GuiAlloyCalculator> {
 

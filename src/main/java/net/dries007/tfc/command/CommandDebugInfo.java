@@ -1,6 +1,6 @@
 package net.dries007.tfc.command;
 
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandDebugInfo extends CommandBase {
 
-    private static final LoggingUtils LOGGER = new LoggingUtils("tfc-infodump");
+    private static final LoggingHelper LOGGER = new LoggingHelper("tfc-infodump");
 
     @Override
     @NotNull

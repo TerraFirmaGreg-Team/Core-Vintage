@@ -27,19 +27,23 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.google.common.collect.ImmutableList;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,7 +103,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
             if (state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
-                TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+                TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
                 if (te != null) {
                     long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                     if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
@@ -128,7 +132,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }
@@ -141,7 +145,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
             if (!worldIn.isRemote) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, tree.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
-                TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+                TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
                 if (te != null) {
                     te.resetCounter();
                 }

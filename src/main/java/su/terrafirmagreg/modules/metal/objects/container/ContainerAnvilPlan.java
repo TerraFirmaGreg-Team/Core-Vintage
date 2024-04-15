@@ -1,20 +1,21 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
+
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.container.ContainerTE;
 import net.dries007.tfc.objects.container.IButtonHandler;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerAnvilPlan extends ContainerTE<TEMetalAnvil> implements IButtonHandler {
+public class ContainerAnvilPlan extends ContainerBaseTE<TEMetalAnvil> implements IButtonHandler {
 
     public ContainerAnvilPlan(InventoryPlayer playerInv, TEMetalAnvil tile) {
         super(playerInv, tile);

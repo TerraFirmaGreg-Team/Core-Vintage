@@ -77,23 +77,23 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
      * Used to update the keg seal state and the TE, in the correct order
      */
     public static void togglePowderKegSeal(World world, BlockPos pos) {
-        var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
-        if (te != null) {
+        var tile = TileUtils.getTile(world, pos, TEPowderKeg.class);
+        if (tile != null) {
             IBlockState state = world.getBlockState(pos);
             boolean previousSealed = state.getValue(SEALED);
             world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-            te.setSealed(!previousSealed);
+            tile.setSealed(!previousSealed);
         }
     }
 
     public void trigger(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityLivingBase igniter) {
         if (!worldIn.isRemote) {
-            var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
-            if (te != null && state.getValue(SEALED) && state.getValue(LIT) && te.getStrength() > 0) //lit state set before called
+            var tile = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
+            if (tile != null && state.getValue(SEALED) && state.getValue(LIT) && tile.getStrength() > 0) //lit state set before called
             {
                 worldIn.setBlockState(pos, state);
-                te.setLit(true);
-                te.setIgniter(igniter);
+                tile.setLit(true);
+                tile.setIgniter(igniter);
             }
         }
     }
@@ -183,9 +183,9 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
         if (!state.getValue(LIT))
             return;
 
-        var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
-        if (te != null) {
-            int fuse = te.getFuse();
+        var tile = TileUtils.getTile(world, pos, TEPowderKeg.class);
+        if (tile != null) {
+            int fuse = tile.getFuse();
             if (rng.nextInt(6) == 0 && fuse > 20) {
                 world.playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F,
                         rng.nextFloat() * 1.3F + 0.3F / fuse, false);
@@ -213,10 +213,10 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
             onPlayerDestroy(world, pos, state.withProperty(LIT, true));
         } else if (state.getValue(LIT) && pos.up().equals(fromPos) && world.getBlockState(fromPos)
                 .getMaterial() == Material.WATER) {
-            var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(world, pos, TEPowderKeg.class);
+            if (tile != null) {
                 world.setBlockState(pos, state.withProperty(LIT, false));
-                te.setLit(false);
+                tile.setLit(false);
             }
         } // do not care otherwise, as canStay may be violated by an explosion, which we want to trigger off of
     }
@@ -260,11 +260,11 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
                                     @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
-            var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
+            if (tile != null) {
                 if (heldItem.isEmpty() && state.getValue(LIT)) {
                     worldIn.setBlockState(pos, state.withProperty(LIT, false));
-                    te.setLit(false);
+                    tile.setLit(false);
                 } else if (heldItem.isEmpty() && playerIn.isSneaking()) {
                     worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
                     togglePowderKegSeal(worldIn, pos);
@@ -307,10 +307,10 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
         if (!worldIn.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
-                if (te != null) {
+                var tile = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
+                if (tile != null) {
                     worldIn.setBlockState(pos, state.withProperty(SEALED, true));
-                    te.readFromItemTag(nbt);
+                    tile.readFromItemTag(nbt);
                 }
             }
         }
@@ -379,8 +379,8 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
      */
     @Override
     public void onBlockExploded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull Explosion explosionIn) {
-        var te = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
-        if (!worldIn.isRemote && te != null && te.getStrength() > 0) // explode even if not sealed cause gunpowder
+        var tile = TileUtils.getTile(worldIn, pos, TEPowderKeg.class);
+        if (!worldIn.isRemote && tile != null && tile.getStrength() > 0) // explode even if not sealed cause gunpowder
         {
             trigger(worldIn, pos, worldIn.getBlockState(pos).withProperty(SEALED, true).withProperty(LIT, true), null);
         } else {
@@ -392,9 +392,9 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
     @NotNull
     public ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target, @NotNull World world,
                                   @NotNull BlockPos pos, @NotNull EntityPlayer player) {
-        var te = TileUtils.getTile(world, pos, TEPowderKeg.class);
-        if (te != null) {
-            return te.getItemStack(state);
+        var tile = TileUtils.getTile(world, pos, TEPowderKeg.class);
+        if (tile != null) {
+            return tile.getItemStack(state);
         }
         return new ItemStack(state.getBlock());
     }
@@ -422,10 +422,10 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
             }
 
             if (count == 0) {
-                tooltip.add(I18n.format(ModUtils.getIDName(".tooltip.powderkeg_empty")));
+                tooltip.add(I18n.format(ModUtils.getIDName("tooltip.powderkeg_empty")));
             } else {
                 ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
-                tooltip.add(I18n.format(ModUtils.getIDName(".tooltip.powderkeg_amount"), count, itemStack.getItem()
+                tooltip.add(I18n.format(ModUtils.getIDName("tooltip.powderkeg_amount"), count, itemStack.getItem()
                         .getItemStackDisplayName(itemStack)));
             }
         }

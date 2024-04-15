@@ -17,12 +17,16 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.te.TETurntable;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CLAY;
 
@@ -44,7 +48,7 @@ public class BlockTurntable extends BlockNonCube {
         if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
             ItemStack held = player.getHeldItem(hand);
             if (player.isSneaking()) {
-                TETurntable te = Helpers.getTE(world, pos, TETurntable.class);
+                TETurntable te = TileUtils.getTile(world, pos, TETurntable.class);
                 if (te != null && te.hasPottery()) te.rotate();
                 return true;
             }
@@ -56,7 +60,7 @@ public class BlockTurntable extends BlockNonCube {
                     return true;
                 }
             } else {
-                TETurntable te = Helpers.getTE(world, pos, TETurntable.class);
+                TETurntable te = TileUtils.getTile(world, pos, TETurntable.class);
                 if (te != null) {
                     IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                     if (cap != null) {
@@ -107,7 +111,7 @@ public class BlockTurntable extends BlockNonCube {
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TETurntable te = Helpers.getTE(world, pos, TETurntable.class);
+        TETurntable te = TileUtils.getTile(world, pos, TETurntable.class);
         if (te != null) {
             te.onBreakBlock(world, pos, state);
         }

@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
-import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.util.Helpers;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,9 +10,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import org.jetbrains.annotations.NotNull;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
+import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +23,7 @@ public class LogPileProvider implements IWailaBlock {
     @NotNull
     @Override
     public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        TELogPile logPile = Helpers.getTE(world, pos, TELogPile.class);
+        TELogPile logPile = TileUtils.getTile(world, pos, TELogPile.class);
         if (logPile != null) {
             IItemHandler inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             ItemStack icon = ItemStack.EMPTY;

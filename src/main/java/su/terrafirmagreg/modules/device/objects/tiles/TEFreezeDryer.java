@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
@@ -39,7 +40,6 @@ import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.sharkbark.cellars.ModConfig;
 
@@ -48,7 +48,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockFreezeDryer.FACING;
 
-public class TEFreezeDryer extends TEInventory
+public class TEFreezeDryer extends TEBaseInventory
         implements IItemHandlerSidedCallback, ITickable, IContainerProvider<ContainerFreezeDryer, GuiFreezeDryer> {
 
     public boolean overheating = false;

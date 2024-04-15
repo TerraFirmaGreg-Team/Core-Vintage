@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCellarShelf;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCellarShelf;
@@ -31,13 +32,12 @@ import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.objects.te.TEInventory;
 import net.sharkbark.cellars.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TECellarShelf extends TEInventory
+public class TECellarShelf extends TEBaseInventory
         implements IItemHandlerSidedCallback, ITickable, IContainerProvider<ContainerCellarShelf, GuiCellarShelf> {
 
     public float temperature = -1;

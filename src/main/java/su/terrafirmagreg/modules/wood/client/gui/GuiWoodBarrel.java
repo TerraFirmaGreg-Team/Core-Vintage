@@ -25,14 +25,15 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
 
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.dries007.tfc.util.Helpers;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
@@ -71,10 +72,10 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
                 List<String> tooltip = new ArrayList<>();
 
                 if (fluid == null || fluid.amount == 0) {
-                    tooltip.add(I18n.format(ModUtils.getIDName(".tooltip.barrel_empty")));
+                    tooltip.add(I18n.format(ModUtils.getIDName("tooltip.barrel_empty")));
                 } else {
                     tooltip.add(fluid.getLocalizedName());
-                    tooltip.add(TextFormatting.GRAY + I18n.format(ModUtils.getIDName(".tooltip.barrel_fluid_amount"), fluid.amount));
+                    tooltip.add(TextFormatting.GRAY + I18n.format(ModUtils.getIDName("tooltip.barrel_fluid_amount"), fluid.amount));
                 }
 
                 this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);
@@ -125,7 +126,7 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-        if (Helpers.isJEIEnabled()) {
+        if (Loader.isModLoaded("jei")) {
             drawTexturedModalRect(guiLeft + 92, guiTop + 21, 227, 0, 9, 14);
         }
 

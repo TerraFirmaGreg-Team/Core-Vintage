@@ -21,6 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
@@ -30,13 +31,17 @@ import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import org.jetbrains.annotations.NotNull;
@@ -134,7 +139,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TECropBase tile = Helpers.getTE(worldIn, pos, TECropBase.class);
+        TECropBase tile = TileUtils.getTile(worldIn, pos, TECropBase.class);
         if (tile != null) {
             tile.resetCounter();
         }
@@ -204,7 +209,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
     public void checkGrowth(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (!worldIn.isRemote) {
-            TECropBase te = Helpers.getTE(worldIn, pos, TECropBase.class);
+            TECropBase te = TileUtils.getTile(worldIn, pos, TECropBase.class);
             if (te != null) {
                 // If can't see sky, or isn't moisturized, reset growth *evil laughter* >:)
                 IBlockState stateFarmland = worldIn.getBlockState(pos.down());

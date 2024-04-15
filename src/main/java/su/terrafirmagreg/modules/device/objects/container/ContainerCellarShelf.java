@@ -1,15 +1,16 @@
 package su.terrafirmagreg.modules.device.objects.container;
 
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.modules.device.objects.tiles.TECellarShelf;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
+
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
-public class ContainerCellarShelf extends ContainerTE<TECellarShelf> {
+public class ContainerCellarShelf extends ContainerBaseTE<TECellarShelf> {
 
     public ContainerCellarShelf(InventoryPlayer playerInv, TECellarShelf tile) {
         super(playerInv, tile);

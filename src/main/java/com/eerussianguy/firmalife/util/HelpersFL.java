@@ -1,63 +1,25 @@
 package com.eerussianguy.firmalife.util;
 
-import su.terrafirmagreg.api.lib.Constants;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 
-import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
 import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.ICalendar;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class HelpersFL {
 
     public HelpersFL() {
 
-    }
-
-    public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
-        Set<String> toolClasses = stack.getItem().getToolClasses(stack);
-        return toolClasses.contains(toolClass);
-    }
-
-    public static void insertWhitelist() {
-        ConfigManager.sync(Constants.MODID_TFC, Config.Type.INSTANCE);
-        String[] additions = { "yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk", "curdled_goat_milk", "curdled_yak_milk",
-                "pina_colada" };
-        if (ConfigFL.General.COMPAT.addToWoodenBucket) {
-            Set<String> woodenBucketSet = new HashSet<>(Arrays.asList(ConfigTFC.General.MISC.woodenBucketWhitelist));
-            for (String a : additions) {
-                if (woodenBucketSet.add(a) && ConfigFL.General.COMPAT.logging) {
-                    FirmaLife.LOGGER.info("Added {} to TFC's wooden bucket fluid whitelist", a);
-                }
-            }
-            ConfigTFC.General.MISC.woodenBucketWhitelist = woodenBucketSet.toArray(new String[] {});
-        }
-        if (ConfigFL.General.COMPAT.addToBarrel) {
-            Set<String> barrelSet = new HashSet<>(Arrays.asList(ConfigTFC.Devices.BARREL.fluidWhitelist));
-            for (String a : additions) {
-                if (barrelSet.add(a) && ConfigFL.General.COMPAT.logging) {
-                    FirmaLife.LOGGER.info("Added {} to TFC's barrel fluid whitelist", a);
-                }
-            }
-            ConfigTFC.Devices.BARREL.fluidWhitelist = barrelSet.toArray(new String[] {});
-        }
     }
 
     public static void sendVanillaParticleToClient(EnumParticleTypes particle, World worldIn, double x, double y, double z, double speedX,

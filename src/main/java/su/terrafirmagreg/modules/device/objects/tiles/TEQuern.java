@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiQuern;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerQuern;
@@ -22,17 +24,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import lombok.Getter;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
-import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import static net.minecraft.init.SoundEvents.*;
 
-public class TEQuern extends TEInventory implements ITickable, IContainerProvider<ContainerQuern, GuiQuern> {
+public class TEQuern extends TEBaseInventory implements ITickable, IContainerProvider<ContainerQuern, GuiQuern> {
 
     public static final int SLOT_HANDSTONE = 0;
     public static final int SLOT_INPUT = 1;
@@ -65,22 +66,19 @@ public class TEQuern extends TEInventory implements ITickable, IContainerProvide
     }
 
     @Override
-    public boolean isItemValid(int slot, ItemStack stack) {
-        switch (slot) {
-            case SLOT_HANDSTONE:
-                return OreDictionaryHelper.doesStackMatchOre(stack, "handstone");
-            case SLOT_INPUT:
-                return QuernRecipe.get(stack) != null;
-            default:
-                return false;
-        }
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+        return switch (slot) {
+            case SLOT_HANDSTONE -> OreDictUtils.contains(stack, "handstone");
+            case SLOT_INPUT -> QuernRecipe.get(stack) != null;
+            default -> false;
+        };
     }
 
     @Override
     public void setAndUpdateSlots(int slot) {
         markForBlockUpdate();
         if (slot == SLOT_HANDSTONE) {
-            hasHandstone = OreDictionaryHelper.doesStackMatchOre(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
+            hasHandstone = OreDictUtils.contains(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
         }
         super.setAndUpdateSlots(slot);
     }
@@ -89,7 +87,7 @@ public class TEQuern extends TEInventory implements ITickable, IContainerProvide
     public void readFromNBT(NBTTagCompound nbt) {
         rotationTimer = nbt.getInteger("rotationTimer");
         super.readFromNBT(nbt);
-        hasHandstone = OreDictionaryHelper.doesStackMatchOre(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
+        hasHandstone = OreDictUtils.contains(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
     }
 
     @Override
@@ -173,6 +171,6 @@ public class TEQuern extends TEInventory implements ITickable, IContainerProvide
 
     @Override
     public GuiQuern getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-        return null;
+        return new GuiQuern(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer);
     }
 }

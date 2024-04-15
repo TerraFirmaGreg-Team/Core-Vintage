@@ -11,12 +11,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 public class ItemBlockRot extends ItemBlockTFC {
 
@@ -40,7 +43,7 @@ public class ItemBlockRot extends ItemBlockTFC {
         }
         EnumActionResult result = super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
         if (!worldIn.isRemote && result == EnumActionResult.SUCCESS) {
-            TETickCounter te = Helpers.getTE(worldIn, pos.offset(facing), TETickCounter.class);
+            TETickCounter te = TileUtils.getTile(worldIn, pos.offset(facing), TETickCounter.class);
             if (te != null) {
                 long currentTime = CalendarTFC.PLAYER_TIME.getTicks();
                 te.resetCounter(); //te counter is at currentTime

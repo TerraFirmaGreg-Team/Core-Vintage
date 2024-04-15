@@ -1,13 +1,14 @@
 package su.terrafirmagreg.modules.worldgen.debugworld;
 
+import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.worldgen.ModuleWorldGen;
 
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.ChunkGeneratorDebug;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.Loader;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,15 +32,6 @@ public class WorldTypeDebugMod extends WorldType {
         WorldType.WORLD_TYPES[5] = this;
     }
 
-    private static String getWorldName(World world) {
-
-        if (world instanceof WorldServer) {
-            return world.getSaveHandler().getWorldDirectory().getName();
-        }
-
-        return "";
-    }
-
     @Override
     public int getId() {
 
@@ -52,7 +44,7 @@ public class WorldTypeDebugMod extends WorldType {
     public @NotNull IChunkGenerator getChunkGenerator(@NotNull World world, @NotNull String generatorOptions) {
 
         // Try to get the modid from the world name.
-        final String modid = getWorldName(world).toLowerCase();
+        final String modid = WorldUtils.getWorldName(world).toLowerCase();
 
         // If the mod actually exists, use that generator.
         if (Loader.isModLoaded(modid)) {

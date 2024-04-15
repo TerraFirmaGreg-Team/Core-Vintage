@@ -6,15 +6,18 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public interface IPacketRegistry {
 
-    <Q extends IMessage, A extends IMessage> IPacketRegistry register(
-            Class<? extends IMessageHandler<Q, A>> messageHandler,
-            Class<Q> requestMessageType,
+    @SuppressWarnings({ "rawtypes" })
+    IPacketRegistry register(Class clazz, Side side);
+
+    <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
+            Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
+            Class<REQ> requestMessageType,
             Side side
     );
 
-    <Q extends IMessage, A extends IMessage> IPacketRegistry register(
-            IMessageHandler<Q, A> messageHandler,
-            Class<Q> requestMessageType,
+    <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
+            IMessageHandler<REQ, REPLY> messageHandler,
+            Class<REQ> requestMessageType,
             Side side
     );
 }

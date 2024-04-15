@@ -27,8 +27,13 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.objects.tileentities.TEFridge;
 
 import org.jetbrains.annotations.Nullable;
@@ -169,7 +174,7 @@ public class BlockFridge extends BlockHorizontal {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEFridge te = Helpers.getTE(worldIn, pos, TEFridge.class);
+        TEFridge te = TileUtils.getTile(worldIn, pos, TEFridge.class);
         if (te != null) te.onBreakBlock(worldIn, pos, state);
         super.breakBlock(worldIn, pos, state);
     }
@@ -193,7 +198,7 @@ public class BlockFridge extends BlockHorizontal {
         if (!state.getValue(UPPER)) {
             TEPos = pos.up();
         }
-        TEFridge te = Helpers.getTE(world, TEPos, TEFridge.class);
+        TEFridge te = TileUtils.getTile(world, TEPos, TEFridge.class);
         if (te != null && !te.isAnimating() && hand == EnumHand.MAIN_HAND && facing == state.getValue(FACING)) {
             if (te.isOpen()) {
                 int slot = getPlayerLookingItem(TEPos.down(), player, facing);

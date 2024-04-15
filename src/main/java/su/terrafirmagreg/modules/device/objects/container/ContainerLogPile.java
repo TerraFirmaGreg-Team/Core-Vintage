@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.container;
 
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,14 +8,14 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.container.ContainerTE;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
-public class ContainerLogPile extends ContainerTE<TELogPile> {
+public class ContainerLogPile extends ContainerBaseTE<TELogPile> {
 
     public ContainerLogPile(InventoryPlayer playerInv, TELogPile te) {
         super(playerInv, te);

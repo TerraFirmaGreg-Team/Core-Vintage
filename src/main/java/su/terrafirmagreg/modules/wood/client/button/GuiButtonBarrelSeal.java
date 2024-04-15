@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class GuiButtonBarrelSeal extends GuiButtonBase implements IButtonTooltip {
@@ -23,7 +24,7 @@ public class GuiButtonBarrelSeal extends GuiButtonBase implements IButtonTooltip
 
     @Override
     public String getTooltip() {
-        return ModUtils.getIDName(".tooltip.") + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
+        return ModUtils.getIDName("tooltip.") + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
     }
 
     @Override

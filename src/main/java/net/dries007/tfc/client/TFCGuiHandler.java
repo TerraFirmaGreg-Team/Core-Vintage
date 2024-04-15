@@ -40,11 +40,14 @@ import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TELargeVessel;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -83,8 +86,8 @@ public class TFCGuiHandler implements IGuiHandler {
             case MOLD -> new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
             case ANVIL ->
                 //noinspection ConstantConditions
-                    new ContainerAnvilTFC(player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
-            case ANVIL_PLAN -> new ContainerAnvilPlan(player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
+                    new ContainerAnvilTFC(player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
+            case ANVIL_PLAN -> new ContainerAnvilPlan(player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
             case KNAPPING_STONE -> new ContainerKnapping(KnappingType.STONE, player.inventory,
                     stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
             case KNAPPING_CLAY -> new ContainerKnapping(KnappingType.CLAY, player.inventory,
@@ -93,7 +96,7 @@ public class TFCGuiHandler implements IGuiHandler {
                     OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
             case KNAPPING_FIRE_CLAY -> new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
                     OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
-            case LARGE_VESSEL -> new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
+            case LARGE_VESSEL -> new ContainerLargeVessel(player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class));
             case CALENDAR, SKILLS, NUTRITION -> new ContainerSimple(player.inventory);
             case CRAFTING -> new ContainerInventoryCrafting(player.inventory, player.world);
             case QUIVER -> new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
@@ -116,9 +119,9 @@ public class TFCGuiHandler implements IGuiHandler {
             case MOLD:
                 return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemMold);
             case ANVIL:
-                return new GuiAnvilTFC(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
+                return new GuiAnvilTFC(container, player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
             case ANVIL_PLAN:
-                return new GuiAnvilPlan(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
+                return new GuiAnvilPlan(container, player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
             case KNAPPING_STONE:
                 ItemStack stack = player.getHeldItemMainhand();
                 Rock rock = stack.getItem() instanceof IRockObject ? ((IRockObject) stack.getItem()).getRock(stack) :
@@ -132,7 +135,7 @@ public class TFCGuiHandler implements IGuiHandler {
             case KNAPPING_FIRE_CLAY:
                 return new GuiKnapping(container, player, KnappingType.FIRE_CLAY, FIRE_CLAY_TEXTURE);
             case LARGE_VESSEL:
-                return new GuiLargeVessel(container, player.inventory, Helpers.getTE(world, pos, TELargeVessel.class), world
+                return new GuiLargeVessel(container, player.inventory, TileUtils.getTile(world, pos, TELargeVessel.class), world
                         .getBlockState(new BlockPos(x, y, z))
                         .getBlock()
                         .getTranslationKey());

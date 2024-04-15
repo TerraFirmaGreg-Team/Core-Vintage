@@ -8,11 +8,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
+
 import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerKnapping;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.client.gui.GuiUrn;
@@ -121,7 +126,7 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerKnapping(KnappingTypes.FLINT, player.inventory,
                         OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
             case URN:
-                return new ContainerUrn(player.inventory, Helpers.getTE(world, pos, TEUrn.class));
+                return new ContainerUrn(player.inventory, TileUtils.getTile(world, pos, TEUrn.class));
             default:
                 return null;
         }
@@ -170,7 +175,7 @@ public class GuiHandler implements IGuiHandler {
             case FLINT:
                 return new GuiKnappingTFCF(container, player, KnappingTypes.FLINT, FLINT_TEXTURE);
             case URN:
-                return new GuiUrn(container, player.inventory, Helpers.getTE(world, pos, TEUrn.class), world.getBlockState(new BlockPos(x, y, z))
+                return new GuiUrn(container, player.inventory, TileUtils.getTile(world, pos, TEUrn.class), world.getBlockState(new BlockPos(x, y, z))
                         .getBlock()
                         .getTranslationKey());
             case CHEST:

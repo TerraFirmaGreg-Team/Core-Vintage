@@ -1,7 +1,7 @@
 package tfctech;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -30,14 +30,14 @@ public class TFCTech {
     @SuppressWarnings("FieldMayBeFinal")
     @Mod.Instance
     private static TFCTech instance = null;
-    private static final LoggingUtils LOGGER = new LoggingUtils(MODID_TFCTECH);
+    private static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCTECH);
     private SimpleNetworkWrapper network;
 
     public static SimpleNetworkWrapper getNetwork() {
         return instance.network;
     }
 
-    public static LoggingUtils getLog() {
+    public static LoggingHelper getLog() {
         return LOGGER;
     }
 

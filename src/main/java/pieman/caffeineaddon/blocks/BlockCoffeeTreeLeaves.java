@@ -7,16 +7,20 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -44,7 +48,7 @@ public class BlockCoffeeTreeLeaves extends BlockFruitTreeLeaves implements ICust
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
 
-        TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+        TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
         if (te != null) {
             float temp = ClimateTFC.getActualTemp(world, pos);
             float rainfall = ChunkDataTFC.getRainfall(world, pos);

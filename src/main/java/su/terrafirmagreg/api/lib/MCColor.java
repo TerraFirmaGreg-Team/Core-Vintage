@@ -7,10 +7,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.Random;
+
+import static su.terrafirmagreg.api.lib.Constants.RANDOM;
 
 /**
  * This class is an extension of the AWT Color class. It adds several things which make working with color in the MC environment less of a hassle.
@@ -193,8 +196,16 @@ public class MCColor extends Color {
      * @return A random MCColor.
      */
     public static MCColor getRandomColor(@NotNull Random rand) {
-
         return new MCColor(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+    }
+
+    /**
+     * Generates a random color as an integer, from Color and three random floats.
+     *
+     * @return int: An integer based representation of a Color.
+     */
+    public static int getRandomColor() {
+        return new Color(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat()).getRGB();
     }
 
     /**

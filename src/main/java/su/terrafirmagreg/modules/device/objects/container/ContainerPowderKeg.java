@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.container;
 
+import su.terrafirmagreg.api.spi.button.IButtonHandler;
 import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
-import su.terrafirmagreg.api.spi.container.IButtonHandler;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.objects.tiles.TEPowderKeg;
 

@@ -92,9 +92,9 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
     @Nullable
     @Override
     public ILockableContainer getContainer(World worldIn, @NotNull BlockPos pos, boolean allowBlocking) {
-        var te = worldIn.getTileEntity(pos);
+        var tile = worldIn.getTileEntity(pos);
 
-        if (!(te instanceof TileEntityChest tileEntityChest)) {
+        if (!(tile instanceof TileEntityChest tileEntityChest)) {
             return null;
         } else {
             ILockableContainer ilockablecontainer = tileEntityChest;

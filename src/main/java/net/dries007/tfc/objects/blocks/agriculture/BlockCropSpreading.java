@@ -7,11 +7,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.te.TECropSpreading;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -44,7 +48,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TECropSpreading tile = Helpers.getTE(worldIn, pos, TECropSpreading.class);
+        TECropSpreading tile = TileUtils.getTile(worldIn, pos, TECropSpreading.class);
         if (tile != null) {
             tile.onPlaced();
         }
@@ -65,7 +69,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
         // instead, on growth tick, they will attempt to create a new crop at [age] - 1 in adjacent block
         // additionally, they will increase the growth of a random nearby crop by 1
         if (!worldIn.isRemote) {
-            TECropSpreading tile = Helpers.getTE(worldIn, pos, TECropSpreading.class);
+            TECropSpreading tile = TileUtils.getTile(worldIn, pos, TECropSpreading.class);
             if (tile != null) {
                 int currentGrowthStage = state.getValue(getStageProperty());
                 // Should the crop grow at all?
@@ -81,7 +85,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
                         IBlockState newState = worldIn.getBlockState(newPos);
                         if (newState.getBlock() == this) {
                             // Increase the growth max on the adjacent existing crop
-                            TECropSpreading newTile = Helpers.getTE(worldIn, newPos, TECropSpreading.class);
+                            TECropSpreading newTile = TileUtils.getTile(worldIn, newPos, TECropSpreading.class);
                             if (newTile != null && newTile.getMaxGrowthStage() < currentGrowthStage) {
                                 newTile.setMaxGrowthStage(newTile.getMaxGrowthStage() + 1);
                             }
@@ -91,7 +95,7 @@ public abstract class BlockCropSpreading extends BlockCropTFC {
                                     .canSustainPlant(stateDown, worldIn, newPos.down(), EnumFacing.UP, this)) {
                                 // Spawn a crop on the new block
                                 worldIn.setBlockState(newPos, getDefaultState().withProperty(getStageProperty(), currentGrowthStage / 2));
-                                TECropSpreading newTile = Helpers.getTE(worldIn, newPos, TECropSpreading.class);
+                                TECropSpreading newTile = TileUtils.getTile(worldIn, newPos, TECropSpreading.class);
                                 if (newTile != null) {
                                     newTile.setMaxGrowthStage(tile.getMaxGrowthStage() + 2);
                                     newTile.setBaseAge(tile.getBaseAge() + currentGrowthStage);

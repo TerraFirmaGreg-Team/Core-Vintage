@@ -12,10 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -25,6 +25,10 @@ import pieman.caffeineaddon.init.ModItems;
 import pieman.caffeineaddon.util.LeafyBush;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -66,9 +70,9 @@ public class BlockLeafyBush extends BlockBerryBush {
         {
             if (!worldIn.isRemote)
             {
-                Helpers.spawnItemStack(worldIn, pos, bush.getFoodDrop());
+                StackUtils.spawnItemStack(worldIn, pos, bush.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FRUITING, false));
-                TETickCounter te = Helpers.getTile(worldIn, pos, TETickCounter.class);
+                TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
                 if (te != null)
                 {
                     te.resetCounter();
@@ -82,7 +86,7 @@ public class BlockLeafyBush extends BlockBerryBush {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
-            TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
             if (te != null) {
                 float temp = ClimateTFC.getActualTemp(world, pos);
                 float rainfall = ChunkDataTFC.getRainfall(world, pos);

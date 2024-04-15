@@ -1,6 +1,7 @@
-package su.terrafirmagreg.api.spi.container;
+package su.terrafirmagreg.api.spi.button;
 
 import net.minecraft.nbt.NBTTagCompound;
+
 
 import org.jetbrains.annotations.Nullable;
 

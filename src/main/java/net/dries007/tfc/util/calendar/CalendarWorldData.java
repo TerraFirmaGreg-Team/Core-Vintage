@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -17,7 +17,7 @@ public class CalendarWorldData extends WorldSavedData {
     private static final String NAME = MODID_TFC + "_calendar";
     private static final String NAME_PRE_V1_5_0_X = MODID_TFC + ":calendar";
 
-    private static final LoggingUtils LOGGER = new LoggingUtils(NAME);
+    private static final LoggingHelper LOGGER = new LoggingHelper(NAME);
     private final CalendarTFC calendar;
 
     @SuppressWarnings("unused")

@@ -1,5 +1,7 @@
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.api.util.MathsUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,11 +13,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 /**
  * This packet is send when the client player presses the "Place Block Special" keybind. It has no special information
@@ -31,7 +36,7 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                 TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
 
                     final World world = player.getEntityWorld();
-                    final RayTraceResult rayTrace = Helpers.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
+                    final RayTraceResult rayTrace = MathsUtils.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
                             .getAttributeValue(), 1);
                     final ItemStack stack = player.getHeldItemMainhand()
                             .isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
@@ -43,12 +48,12 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                         if (player.getDistanceSq(pos) <= placeReach * placeReach && hitFace != null) {
                             IBlockState offsetState = world.getBlockState(pos.offset(hitFace));
                             if (world.getBlockState(pos).getBlock() == BlocksTFC.PLACED_ITEM) {
-                                TEPlacedItem tile = Helpers.getTE(world, pos, TEPlacedItem.class);
+                                TEPlacedItem tile = TileUtils.getTile(world, pos, TEPlacedItem.class);
                                 if (tile != null) {
                                     tile.onRightClick(player, stack, rayTrace);
                                 }
                             } else if (offsetState.getBlock() == BlocksTFC.PLACED_ITEM) {
-                                TEPlacedItem tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItem.class);
+                                TEPlacedItem tile = TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItem.class);
                                 if (tile != null) {
                                     tile.onRightClick(player, stack, rayTrace);
                                 }
@@ -59,7 +64,7 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                                 if (player.isSneaking()) {
                                     // If sneaking, place a flat item
                                     world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM_FLAT.getDefaultState());
-                                    TEPlacedItemFlat tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItemFlat.class);
+                                    TEPlacedItemFlat tile = TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItemFlat.class);
                                     if (tile != null) {
                                         ItemStack input;
                                         if (player.isCreative()) {
@@ -72,7 +77,7 @@ public class PacketPlaceBlockSpecial implements IMessageEmpty {
                                     }
                                 } else {
                                     world.setBlockState(pos.offset(hitFace), BlocksTFC.PLACED_ITEM.getDefaultState());
-                                    TEPlacedItem tile = Helpers.getTE(world, pos.offset(hitFace), TEPlacedItem.class);
+                                    TEPlacedItem tile = TileUtils.getTile(world, pos.offset(hitFace), TEPlacedItem.class);
                                     if (tile != null) {
                                         tile.insertItem(player, stack, rayTrace);
                                     }

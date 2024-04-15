@@ -1,8 +1,11 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -13,7 +16,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -102,7 +104,8 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
 
         @Override
         public void getIngredients(IIngredients ingredients) {
-            ingredients.setOutputLists(VanillaTypes.ITEM, Helpers.listOf(Helpers.listOf(recipe.getOutput(new ItemStack(ItemRock.get(rock))))));
+            ingredients.setOutputLists(VanillaTypes.ITEM,
+                    CollectionUtils.listOf(CollectionUtils.listOf(recipe.getOutput(new ItemStack(ItemRock.get(rock))))));
         }
     }
 }

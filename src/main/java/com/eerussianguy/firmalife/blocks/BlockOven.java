@@ -1,5 +1,6 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
@@ -29,6 +30,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.te.TEOven;
 import mcp.MethodsReturnNonnullByDefault;
@@ -36,7 +38,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -165,7 +166,7 @@ public class BlockOven extends Block implements IItemSize {
             if (!state.getValue(LIT)) {
                 ItemStack held = player.getHeldItem(hand);
                 if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) return false;
-                TEOven te = Helpers.getTE(world, pos, TEOven.class);
+                TEOven te = TileUtils.getTile(world, pos, TEOven.class);
                 if (te == null) return false;
                 if (isValidHorizontal(world, pos, false) && hasChimney(world, pos, false) && ItemFireStarter.onIgnition(held)) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
@@ -209,7 +210,7 @@ public class BlockOven extends Block implements IItemSize {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.isRemote) {
             if (state.getValue(LIT) && !isValidHorizontal(worldIn, pos, false)) {
-                TEOven te = Helpers.getTE(worldIn, pos, TEOven.class);
+                TEOven te = TileUtils.getTile(worldIn, pos, TEOven.class);
                 if (te != null) {
                     te.turnOff();
                 }
@@ -221,7 +222,7 @@ public class BlockOven extends Block implements IItemSize {
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (state.getValue(LIT)) {
             if (!isValidHorizontal(world, pos, false)) {
-                TEOven te = Helpers.getTE(world, pos, TEOven.class);
+                TEOven te = TileUtils.getTile(world, pos, TEOven.class);
                 if (te != null) {
                     te.turnOff();
                 }
@@ -239,7 +240,7 @@ public class BlockOven extends Block implements IItemSize {
         IBlockState checkState = world.getBlockState(checkPos);
         if (checkState.getBlock() instanceof BlockOven && !checkState.getValue(LIT) && isValidHorizontal(world, checkPos, false) &&
                 hasChimney(world, checkPos, false)) {
-            TEOven te = Helpers.getTE(world, checkPos, TEOven.class);
+            TEOven te = TileUtils.getTile(world, checkPos, TEOven.class);
             if (te != null) {
                 world.setBlockState(checkPos, checkState.withProperty(LIT, true));
                 te.setWarmed();
@@ -316,7 +317,7 @@ public class BlockOven extends Block implements IItemSize {
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TEOven te = Helpers.getTE(world, pos, TEOven.class);
+        TEOven te = TileUtils.getTile(world, pos, TEOven.class);
         if (te != null) {
             te.onBreakBlock(world, pos, state);
         }

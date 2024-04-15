@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.rock;
 
+import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategoryHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariantHandler;
@@ -19,15 +19,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-@ModuleTFG(moduleID = "Rock", name = "TFG Module Rock")
+import static su.terrafirmagreg.modules.Modules.Module_Rock;
+
+@Module(moduleID = Module_Rock)
 public final class ModuleRock extends ModuleBase {
 
-    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleRock.class.getSimpleName());
+    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleRock.class.getSimpleName());
 
     public static final CreativeTabs ROCK_TAB = new CreativeTabBase("rock", "rock/raw/basalt");
 
     public ModuleRock() {
-        super(2);
         this.enableAutoRegistry(ROCK_TAB);
     }
 
@@ -43,7 +44,7 @@ public final class ModuleRock extends ModuleBase {
     }
 
     @Override
-    public @NotNull LoggingUtils getLogger() {
+    public @NotNull LoggingHelper getLogger() {
         return LOGGER;
     }
 

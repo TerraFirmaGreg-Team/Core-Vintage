@@ -27,15 +27,19 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.TELamp;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -147,7 +151,7 @@ public class BlockMetalLamp extends Block {
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (state.getValue(LIT) && ConfigTFC.Devices.LAMP.burnRate > 0) {
-            TELamp tel = Helpers.getTE(worldIn, pos, TELamp.class);
+            TELamp tel = TileUtils.getTile(worldIn, pos, TELamp.class);
             if (tel != null) {
                 checkFuel(worldIn, pos, state, tel);
             }
@@ -157,7 +161,7 @@ public class BlockMetalLamp extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        TELamp tel = Helpers.getTE(worldIn, pos, TELamp.class);
+        TELamp tel = TileUtils.getTile(worldIn, pos, TELamp.class);
         if (tel != null) {
             if (worldIn.isBlockPowered(pos) && !tel.isPowered()) //power on
             {
@@ -201,7 +205,7 @@ public class BlockMetalLamp extends Block {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
-        TELamp tel = Helpers.getTE(worldIn, pos, TELamp.class);
+        TELamp tel = TileUtils.getTile(worldIn, pos, TELamp.class);
         ItemStack stack = playerIn.getHeldItem(hand);
         if (!worldIn.isRemote && tel != null) {
             if (state.getValue(LIT)) {
@@ -254,7 +258,7 @@ public class BlockMetalLamp extends Block {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (!worldIn.isRemote && stack.getTagCompound() != null) {
             // Set the initial counter value and fill from item
-            TELamp tile = Helpers.getTE(worldIn, pos, TELamp.class);
+            TELamp tile = TileUtils.getTile(worldIn, pos, TELamp.class);
             if (tile != null) {
                 tile.resetCounter();
                 tile.loadFromItemStack(stack);
@@ -305,7 +309,7 @@ public class BlockMetalLamp extends Block {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        TELamp tile = Helpers.getTE(world, pos, TELamp.class);
+        TELamp tile = TileUtils.getTile(world, pos, TELamp.class);
         if (tile != null) {
             if (tile.getFuel() == 0) {
                 super.getDrops(drops, world, pos, state, fortune);
@@ -319,7 +323,7 @@ public class BlockMetalLamp extends Block {
     @NotNull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world,
                                   BlockPos pos, EntityPlayer player) {
-        TELamp tile = Helpers.getTE(world, pos, TELamp.class);
+        TELamp tile = TileUtils.getTile(world, pos, TELamp.class);
         if (tile != null) {
             return tile.getItemStack(tile, state);
         }

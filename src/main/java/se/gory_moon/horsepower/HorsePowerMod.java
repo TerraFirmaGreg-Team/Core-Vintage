@@ -1,7 +1,7 @@
 package se.gory_moon.horsepower;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -39,7 +39,7 @@ public class HorsePowerMod {
     public static CommonProxy proxy;
 
     public static HorsePowerCreativeTab creativeTab = new HorsePowerCreativeTab();
-    public static LoggingUtils logger = new LoggingUtils(MODID_HORSEPOWER);
+    public static LoggingHelper logger = new LoggingHelper(MODID_HORSEPOWER);
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

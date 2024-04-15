@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.objects.blocks.BlockFireBrick;
@@ -111,9 +112,9 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
 
     @Override
     public void breakBlock(@NotNull World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TEBlastFurnace.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TEBlastFurnace.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -123,11 +124,11 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
                                     float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (!state.getValue(LIT)) {
-                var te = TileUtils.getTile(worldIn, pos, TEBlastFurnace.class);
-                if (te == null)
+                var tile = TileUtils.getTile(worldIn, pos, TEBlastFurnace.class);
+                if (tile == null)
                     return true;
                 ItemStack held = playerIn.getHeldItem(hand);
-                if (te.canIgnite() && ItemFireStarter.onIgnition(held)) {
+                if (tile.canIgnite() && ItemFireStarter.onIgnition(held)) {
                     worldIn.setBlockState(pos, state.withProperty(LIT, true));
                     //te.onIgnite();
                     return true;
@@ -164,9 +165,9 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
 
     @Override
     public void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount) {
-        var teBlastFurnace = TileUtils.getTile(world, pos, TEBlastFurnace.class);
-        if (teBlastFurnace != null) {
-            teBlastFurnace.onAirIntake(airAmount);
+        var tile = TileUtils.getTile(world, pos, TEBlastFurnace.class);
+        if (tile != null) {
+            tile.onAirIntake(airAmount);
         }
     }
 

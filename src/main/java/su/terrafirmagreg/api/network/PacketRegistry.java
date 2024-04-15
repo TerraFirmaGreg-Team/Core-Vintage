@@ -8,29 +8,44 @@ public class PacketRegistry implements IPacketRegistry {
 
     private final ThreadedNetworkWrapper threadedNetworkWrapper;
 
+    /**
+     * The current discriminator value. This is ticked up automatically as messages are registered.
+     */
     private int id = 0;
 
     public PacketRegistry(ThreadedNetworkWrapper threadedNetworkWrapper) {
         this.threadedNetworkWrapper = threadedNetworkWrapper;
     }
 
+    /**
+     * Registers a new packet to the network handler.
+     *
+     * @param clazz The class of the packet. This class must implement IMessage and IMessageHandler!
+     * @param side  The side that receives this packet.
+     */
     @Override
-    public <Q extends IMessage, A extends IMessage> IPacketRegistry register(
-            Class<? extends IMessageHandler<Q, A>> messageHandler,
-            Class<Q> requestMessageType,
-            Side side
-    ) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public IPacketRegistry register(Class clazz, Side side) {
+
+        this.threadedNetworkWrapper.registerMessage(clazz, clazz, this.nextId(), side);
+        return this;
+    }
+
+    @Override
+    public <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
+            Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
+            Class<REQ> requestMessageType,
+            Side side) {
 
         this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(), side);
         return this;
     }
 
     @Override
-    public <Q extends IMessage, A extends IMessage> IPacketRegistry register(
-            IMessageHandler<Q, A> messageHandler,
-            Class<Q> requestMessageType,
-            Side side
-    ) {
+    public <REQ extends IMessage, REPLY extends IMessage> IPacketRegistry register(
+            IMessageHandler<REQ, REPLY> messageHandler,
+            Class<REQ> requestMessageType,
+            Side side) {
 
         this.threadedNetworkWrapper.registerMessage(messageHandler, requestMessageType, this.nextId(), side);
         return this;

@@ -32,16 +32,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
@@ -474,7 +480,7 @@ public class BlockJoshuaTreeFlower extends Block {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }
@@ -487,7 +493,7 @@ public class BlockJoshuaTreeFlower extends Block {
             if (!worldIn.isRemote) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, fruitTree.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
-                TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+                TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
                 if (te != null) {
                     te.resetCounter();
                 }
@@ -593,7 +599,7 @@ public class BlockJoshuaTreeFlower extends Block {
             player.addExhaustion(0.005F);
 
             if (!worldIn.isRemote) {
-                Helpers.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D), new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
+                StackUtils.spawnItemStack(worldIn, pos.add(0.5D, 0.5D, 0.5D), new ItemStack(Items.STICK, 1 + (int) (Math.random() * 3)));
             }
         } else if (ConfigTFC.General.TREE.requiresAxe) {
             // Here, there was no valid tool used. Deny spawning any drops since logs require axes
@@ -690,7 +696,7 @@ public class BlockJoshuaTreeFlower extends Block {
                 break;
             case 3:
                 if (state.getValue(LEAF_STATE) != EnumLeafState.FRUIT) {
-                    TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+                    TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
                     if (te != null) {
                         long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                         if (hours > (fruitTree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {

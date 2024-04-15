@@ -26,15 +26,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.te.TELargeVessel;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 /**
  * Large vessel is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block
@@ -59,7 +62,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
      * Used to update the vessel seal state and the TE, in the correct order
      */
     public static void toggleLargeVesselSeal(World world, BlockPos pos) {
-        TELargeVessel tile = Helpers.getTE(world, pos, TELargeVessel.class);
+        TELargeVessel tile = TileUtils.getTile(world, pos, TELargeVessel.class);
         if (tile != null) {
             IBlockState state = world.getBlockState(pos);
             boolean previousSealed = state.getValue(SEALED);
@@ -158,7 +161,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TELargeVessel tile = Helpers.getTE(worldIn, pos, TELargeVessel.class);
+        TELargeVessel tile = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }
@@ -182,7 +185,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
                                     float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
-            TELargeVessel te = Helpers.getTE(worldIn, pos, TELargeVessel.class);
+            TELargeVessel te = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
             if (te != null) {
                 if (heldItem.isEmpty() && playerIn.isSneaking()) {
                     worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
@@ -201,7 +204,7 @@ public class BlockLargeVessel extends Block implements IItemSize {
         if (!worldIn.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                TELargeVessel te = Helpers.getTE(worldIn, pos, TELargeVessel.class);
+                TELargeVessel te = TileUtils.getTile(worldIn, pos, TELargeVessel.class);
                 if (te != null) {
                     worldIn.setBlockState(pos, state.withProperty(SEALED, true));
                     te.readFromItemTag(nbt);

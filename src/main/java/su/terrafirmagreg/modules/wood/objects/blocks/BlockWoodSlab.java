@@ -15,7 +15,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -56,7 +55,7 @@ public abstract class BlockWoodSlab extends BlockBaseSlab implements IWoodBlock 
     }
 
     @Override
-    public @Nullable ItemBlock getItemBlock() {
+    public @Nullable ItemSlab getItemBlock() {
         return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
     }
 

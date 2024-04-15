@@ -5,13 +5,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import com.eerussianguy.firmalife.blocks.BlockHangingPlanter;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +38,7 @@ public class HangingPlanterProvider implements IWailaBlock {
                 String growth = String.format("%d%%", Math.round(curStagePercent));
                 currentTooltip.add(growth);
             }
-            TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
+            TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
             if (te != null) {
                 currentTooltip.add(te.isClimateValid() ? "Climate Valid" : "Climate Invalid");
             }

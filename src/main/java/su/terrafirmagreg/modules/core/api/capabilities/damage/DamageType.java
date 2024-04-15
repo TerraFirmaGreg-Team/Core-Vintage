@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.core.api.capabilities.damage;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -7,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
+
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -112,11 +114,11 @@ public enum DamageType {
 
     @NotNull
     private static DamageType getFromItem(ItemStack stack) {
-        if (OreDictionaryHelper.doesStackMatchOre(stack, "damageTypeCrushing")) {
+        if (OreDictUtils.contains(stack, "damageTypeCrushing")) {
             return CRUSHING;
-        } else if (OreDictionaryHelper.doesStackMatchOre(stack, "damageTypeSlashing")) {
+        } else if (OreDictUtils.contains(stack, "damageTypeSlashing")) {
             return SLASHING;
-        } else if (OreDictionaryHelper.doesStackMatchOre(stack, "damageTypePiercing")) {
+        } else if (OreDictUtils.contains(stack, "damageTypePiercing")) {
             return PIERCING;
         }
         return GENERIC;

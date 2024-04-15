@@ -10,14 +10,18 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.CollectionUtils;
+
 
 import java.util.List;
 
@@ -62,7 +66,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
         if (heat != null) {
             heat.setTemperature(heat.getTemperature() - coolAmount);
         }
-        return Helpers.listOf(inputStack);
+        return CollectionUtils.listOf(inputStack);
     }
 
     @Override

@@ -1,6 +1,7 @@
-package net.dries007.tfc.util.json;
+package su.terrafirmagreg.api.lib.json;
 
 import net.minecraft.util.ResourceLocation;
+
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

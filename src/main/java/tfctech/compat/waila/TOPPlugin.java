@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -16,7 +17,11 @@ import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.objects.blocks.devices.BlockFridge;
 import tfctech.objects.blocks.devices.BlockLatexExtractor;
 import tfctech.objects.blocks.devices.BlockWireDrawBench;
@@ -49,7 +54,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
             if (!iBlockState.getValue(BlockWireDrawBench.UPPER)) {
                 TEPos = TEPos.offset(iBlockState.getValue(BlockWireDrawBench.FACING));
             }
-            TEWireDrawBench bench = Helpers.getTE(world, TEPos, TEWireDrawBench.class);
+            TEWireDrawBench bench = TileUtils.getTile(world, TEPos, TEWireDrawBench.class);
             if (bench != null) {
                 if (bench.getProgress() > 0) {
                     IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle()
@@ -63,7 +68,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
             if (!iBlockState.getValue(BlockWireDrawBench.UPPER)) {
                 TEPos = TEPos.up();
             }
-            TEFridge fridge = Helpers.getTE(world, TEPos, TEFridge.class);
+            TEFridge fridge = TileUtils.getTile(world, TEPos, TEFridge.class);
             if (fridge != null) {
                 IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle()
                         .alignment(ElementAlignment.ALIGN_CENTER));
@@ -93,7 +98,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
             }
         }
         if (b instanceof BlockLatexExtractor) {
-            TELatexExtractor extractor = Helpers.getTE(world, pos, TELatexExtractor.class);
+            TELatexExtractor extractor = TileUtils.getTile(world, pos, TELatexExtractor.class);
             if (extractor != null) {
                 if (extractor.getFluidAmount() > 0) {
                     IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle()

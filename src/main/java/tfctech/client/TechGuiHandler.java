@@ -1,5 +1,6 @@
 package tfctech.client;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
 
 import net.minecraft.client.Minecraft;
@@ -21,9 +22,9 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.util.Helpers;
 import org.lwjgl.opengl.GL11;
 import tfctech.TFCTech;
 import tfctech.client.gui.GuiElectricForge;
@@ -65,16 +66,16 @@ public class TechGuiHandler implements IGuiHandler {
         Type type = Type.valueOf(ID);
         switch (type) {
             case ELECTRIC_FORGE:
-                TEElectricForge teElectricForge = Helpers.getTE(world, pos, TEElectricForge.class);
+                TEElectricForge teElectricForge = TileUtils.getTile(world, pos, TEElectricForge.class);
                 return teElectricForge == null ? null : new ContainerElectricForge(player.inventory, teElectricForge);
             case INDUCTION_CRUCIBLE:
-                TEInductionCrucible teInductionCrucible = Helpers.getTE(world, pos, TEInductionCrucible.class);
+                TEInductionCrucible teInductionCrucible = TileUtils.getTile(world, pos, TEInductionCrucible.class);
                 return teInductionCrucible == null ? null : new ContainerCrucible(player.inventory, teInductionCrucible);
             case SMELTERY_CAULDRON:
-                TESmelteryCauldron teSmelteryCauldron = Helpers.getTE(world, pos, TESmelteryCauldron.class);
+                TESmelteryCauldron teSmelteryCauldron = TileUtils.getTile(world, pos, TESmelteryCauldron.class);
                 return teSmelteryCauldron == null ? null : new ContainerSmelteryCauldron(player.inventory, teSmelteryCauldron);
             case SMELTERY_FIREBOX:
-                TESmelteryFirebox teSmelteryFirebox = Helpers.getTE(world, pos, TESmelteryFirebox.class);
+                TESmelteryFirebox teSmelteryFirebox = TileUtils.getTile(world, pos, TESmelteryFirebox.class);
                 return teSmelteryFirebox == null ? null : new ContainerSmelteryFirebox(player.inventory, teSmelteryFirebox);
             case GLASSWORKING:
                 return new ContainerGlassworking(player.inventory, stack.getItem() instanceof ItemBlowpipe ? stack : player.getHeldItemOffhand());
@@ -92,13 +93,13 @@ public class TechGuiHandler implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         switch (type) {
             case ELECTRIC_FORGE:
-                return new GuiElectricForge(container, player.inventory, Helpers.getTE(world, pos, TEElectricForge.class));
+                return new GuiElectricForge(container, player.inventory, TileUtils.getTile(world, pos, TEElectricForge.class));
             case INDUCTION_CRUCIBLE:
-                return new GuiInductionCrucible(container, player.inventory, Helpers.getTE(world, pos, TEInductionCrucible.class));
+                return new GuiInductionCrucible(container, player.inventory, TileUtils.getTile(world, pos, TEInductionCrucible.class));
             case SMELTERY_CAULDRON:
-                return new GuiSmelteryCauldron(container, player.inventory, Helpers.getTE(world, pos, TESmelteryCauldron.class));
+                return new GuiSmelteryCauldron(container, player.inventory, TileUtils.getTile(world, pos, TESmelteryCauldron.class));
             case SMELTERY_FIREBOX:
-                return new GuiSmelteryFirebox(container, player.inventory, Helpers.getTE(world, pos, TESmelteryFirebox.class));
+                return new GuiSmelteryFirebox(container, player.inventory, TileUtils.getTile(world, pos, TESmelteryFirebox.class));
             case GLASSWORKING:
                 return new GuiGlassworking(container, player);
             default:

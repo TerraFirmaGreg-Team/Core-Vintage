@@ -1,5 +1,6 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
 
@@ -11,8 +12,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,7 @@ public class QuernProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>(1);
-        TEQuern quern = Helpers.getTE(world, pos, TEQuern.class);
+        TEQuern quern = TileUtils.getTile(world, pos, TEQuern.class);
         IItemHandler handler;
         ItemStack handstone;
         if (quern != null && quern.hasHandstone() && (handler = quern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) != null &&

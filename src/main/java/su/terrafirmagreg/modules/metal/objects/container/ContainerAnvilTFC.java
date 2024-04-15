@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,13 +14,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.container.ContainerTE;
 import net.dries007.tfc.objects.container.IButtonHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.util.forge.ForgeStep;
@@ -28,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.*;
 
-public class ContainerAnvilTFC extends ContainerTE<TEMetalAnvil> implements IButtonHandler {
+public class ContainerAnvilTFC extends ContainerBaseTE<TEMetalAnvil> implements IButtonHandler {
 
     public ContainerAnvilTFC(InventoryPlayer playerInv, TEMetalAnvil te) {
         super(playerInv, te, 26);

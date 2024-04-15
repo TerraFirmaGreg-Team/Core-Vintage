@@ -5,8 +5,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+
 import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.dries007.tfc.util.Helpers;
+
+
+import net.minecraftforge.fml.common.Loader;
+
+
 import pieman.caffeineaddon.blocks.TEDryingMat;
 
 import java.util.ArrayList;
@@ -42,7 +47,7 @@ public class GuiDryingMat extends GuiContainerTE<TEDryingMat> {
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-        if (Helpers.isJEIEnabled()) {
+        if (Loader.isModLoaded("jei")) {
             drawTexturedModalRect(guiLeft + 103, guiTop + 35, 176, 0, 9, 14);
         }
         int progress = (int) Math.min(18 * tile.getProgress(), 18);

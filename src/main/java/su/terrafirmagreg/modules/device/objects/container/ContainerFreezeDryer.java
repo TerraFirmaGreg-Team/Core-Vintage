@@ -1,15 +1,16 @@
 package su.terrafirmagreg.modules.device.objects.container;
 
+import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFreezeDryer;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
+
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
-public class ContainerFreezeDryer extends ContainerTE<TEFreezeDryer> {
+public class ContainerFreezeDryer extends ContainerBaseTE<TEFreezeDryer> {
 
     public ContainerFreezeDryer(InventoryPlayer playerInv, TEFreezeDryer tile) {
         super(playerInv, tile);

@@ -1,4 +1,4 @@
-package net.dries007.tfc.util;
+package su.terrafirmagreg.api.lib;
 
 import net.minecraft.nbt.NBTTagCompound;
 

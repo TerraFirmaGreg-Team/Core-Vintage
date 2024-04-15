@@ -1,7 +1,10 @@
 package tfcflorae.compat.jei.wrappers;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
@@ -10,7 +13,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
-import net.dries007.tfc.util.Helpers;
 import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.objects.items.rock.ItemMud;
 
@@ -109,7 +111,8 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 
         @Override
         public void getIngredients(IIngredients ingredients) {
-            ingredients.setOutputLists(VanillaTypes.ITEM, Helpers.listOf(Helpers.listOf(recipe.getOutput(new ItemStack(ItemMud.get(rock))))));
+            ingredients.setOutputLists(VanillaTypes.ITEM,
+                    CollectionUtils.listOf(CollectionUtils.listOf(recipe.getOutput(new ItemStack(ItemMud.get(rock))))));
         }
     }
 }

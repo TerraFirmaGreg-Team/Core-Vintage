@@ -1,7 +1,8 @@
 package net.doubledoordev.oiisa;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +33,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.util.Helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +55,7 @@ public class OversizedItemInStorageArea {
      */
     @Mod.Instance(MODID_OSA)
     public static OversizedItemInStorageArea INSTANCE;
-    static final LoggingUtils LOGGER = new LoggingUtils(MODID_OSA);
+    static final LoggingHelper LOGGER = new LoggingHelper(MODID_OSA);
     DamageSource playerIncinerator = new DamageSource("oiisaincinerator").setDamageBypassesArmor().setDamageIsAbsolute();
     Map<String, Integer> weightMap = new HashMap<>();
     Map<String, Integer> containerSizeOverideMap = new HashMap<>();
@@ -104,7 +104,7 @@ public class OversizedItemInStorageArea {
         String containerName = container.getClass().getName();
 
         // raytrace to get the block the user is looking at.
-        BlockPos tracedPos = getTracedPos(Helpers.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
+        BlockPos tracedPos = getTracedPos(MathsUtils.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
                 .getAttributeValue(), 1));
         ArrayList<String> slotClassNameList = new ArrayList<>(Arrays.asList(ModConfig.slotClassNames));
         ArrayList<String> containerClassNameList = new ArrayList<>(Arrays.asList(ModConfig.sizeLimitOptions.sizeContainers));

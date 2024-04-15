@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.module.ModuleTFG;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.api.util.LoggingUtils;
 import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -21,17 +21,21 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import org.jetbrains.annotations.NotNull;
 
-@ModuleTFG(moduleID = "Core", name = "TFG Module Core",
-           description = "Core TFG content. Disabling this disables the entire mod and all its module.")
+import static su.terrafirmagreg.modules.Modules.Module_Core;
+
+@Module(
+        moduleID = Module_Core,
+        description = "Core TFG content. Disabling this disables the entire mod and all its module.",
+        coreModule = true
+)
 public final class ModuleCore extends ModuleBase {
 
-    public static final LoggingUtils LOGGER = new LoggingUtils(ModuleCore.class.getSimpleName());
+    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleCore.class.getSimpleName());
     public static final CreativeTabs CORE_TAB = new CreativeTabBase("misc", "core/wand");
 
     public static IPacketService PACKET_SERVICE;
 
     public ModuleCore() {
-        super(1);
         this.enableAutoRegistry(CORE_TAB);
 
         PACKET_SERVICE = this.enableNetwork();
@@ -58,7 +62,7 @@ public final class ModuleCore extends ModuleBase {
     }
 
     @Override
-    public @NotNull LoggingUtils getLogger() {
+    public @NotNull LoggingHelper getLogger() {
         return LOGGER;
     }
 }

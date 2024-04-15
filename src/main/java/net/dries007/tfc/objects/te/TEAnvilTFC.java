@@ -41,6 +41,10 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+
+import su.terrafirmagreg.api.util.StackUtils;
+
+
 import java.util.List;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
@@ -323,7 +327,7 @@ public class TEAnvilTFC extends TEInventory {
             // Set stacks in slots
             inventory.setStackInSlot(SLOT_INPUT_1, result);
             inventory.setStackInSlot(SLOT_INPUT_2, ItemStack.EMPTY);
-            inventory.setStackInSlot(SLOT_FLUX, Helpers.consumeItem(fluxStack, 1));
+            inventory.setStackInSlot(SLOT_FLUX, StackUtils.consumeItem(fluxStack, 1));
             markForSync();
 
             return true;

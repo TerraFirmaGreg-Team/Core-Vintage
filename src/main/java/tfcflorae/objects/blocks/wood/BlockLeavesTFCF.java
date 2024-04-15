@@ -29,6 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
@@ -36,11 +37,15 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
@@ -141,7 +146,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
                 break;
             case 3:
                 if (state.getValue(LEAF_STATE) != EnumLeafState.FRUIT) {
-                    TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
+                    TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
                     if (te != null) {
                         long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                         if (hours > (fruitTree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
@@ -177,7 +182,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }
@@ -190,7 +195,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
             if (!worldIn.isRemote) {
                 ItemHandlerHelper.giveItemToPlayer(playerIn, fruitTree.getFoodDrop());
                 worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
-                TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+                TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
                 if (te != null) {
                     te.resetCounter();
                 }

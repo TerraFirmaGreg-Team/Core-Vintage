@@ -7,11 +7,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
 
 public class TEPlacedItemFlat extends TEBase {
 
@@ -25,7 +28,7 @@ public class TEPlacedItemFlat extends TEBase {
 
     public void onBreakBlock(BlockPos pos) {
         if (!world.isRemote && !inventory.isEmpty()) {
-            Helpers.spawnItemStack(world, pos, getStack());
+            StackUtils.spawnItemStack(world, pos, getStack());
         }
     }
 

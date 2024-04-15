@@ -1,7 +1,7 @@
 package tfcflorae;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.util.LoggingUtils;
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -11,16 +11,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 
 import tfcflorae.client.GuiHandler;
 import tfcflorae.proxy.CommonProxy;
-import tfcflorae.util.CapabilityHeatHandler;
-import tfcflorae.util.HelpersTFCF;
-import tfcflorae.util.fuel.FuelsTFCF;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
@@ -37,7 +33,7 @@ public class TFCFlorae {
 
     @Mod.Instance
     public static TFCFlorae instance;
-    public static final LoggingUtils LOGGER = new LoggingUtils(MODID_TFCF);
+    public static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCF);
     public static boolean signedBuild = true;
 
     public static boolean FirmaLifeAdded = false;
@@ -47,7 +43,7 @@ public class TFCFlorae {
     @SidedProxy(serverSide = "tfcflorae.proxy.CommonProxy", clientSide = "tfcflorae.proxy.ClientProxy")
     public static CommonProxy proxy;
 
-    public static LoggingUtils getLog() {
+    public static LoggingHelper getLog() {
         return LOGGER;
     }
 
@@ -95,21 +91,12 @@ public class TFCFlorae {
         */
 
         proxy.preInit(event);
-
-        HelpersTFCF.insertWhitelistFluids();
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-        CapabilityHeatHandler.init();
         proxy.init(event);
-    }
-
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        FuelsTFCF.postInit();
-        proxy.postInit(event);
     }
 
     @Mod.EventHandler

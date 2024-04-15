@@ -14,10 +14,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.util.HelpersFL;
+
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.GLASS;
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.TOP;
@@ -57,7 +61,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
                     return true;
                 }
             }
-            if (HelpersFL.doesStackMatchTool(held, "hammer")) {
+            if (StackUtils.doesStackMatchTool(held, "hammer")) {
                 if (!player.isSneaking()) {
                     world.setBlockState(pos, state.withProperty(TOP, !state.getValue(TOP)));
                 } else if (!state.getValue(TOP)) {

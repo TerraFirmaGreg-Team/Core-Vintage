@@ -1,5 +1,7 @@
 package tfcflorae.util.interaction;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -8,12 +10,11 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.interaction.IRightClickBlockAction;
 import net.dries007.tfc.util.interaction.IRightClickItemAction;
 import tfcflorae.client.GuiHandler;
-import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -33,8 +34,8 @@ public final class InteractionManagerTFCF {
 
     static {
         // Pineapple Leather knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "leatherPineapple"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "leatherPineapple"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.PINEAPPLE_LEATHER);
                 }
@@ -44,8 +45,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Burlap Cloth knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clothBurlap"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "clothBurlap"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.BURLAP_CLOTH);
                 }
@@ -55,8 +56,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Wool Cloth knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clothWool"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "clothWool"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.WOOL_CLOTH);
                 }
@@ -66,8 +67,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Silk Cloth knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clothSilk"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "clothSilk"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.SILK_CLOTH);
                 }
@@ -77,8 +78,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Sisal Cloth knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clothSisal"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "clothSisal"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.SISAL_CLOTH);
                 }
@@ -88,8 +89,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Cotton Cloth knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clothCotton"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "clothCotton"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.COTTON_CLOTH);
                 }
@@ -99,8 +100,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Linen Cloth knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clothLinen"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "clothLinen"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.LINEN_CLOTH);
                 }
@@ -110,8 +111,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Hemp Cloth knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clothHemp"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "clothHemp"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.HEMP_CLOTH);
                 }
@@ -121,8 +122,8 @@ public final class InteractionManagerTFCF {
         }));
 
         // Yucca Canvas knapping
-        putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "canvasYucca"), ((worldIn, playerIn, handIn) -> {
-            if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
+        putBoth(stack -> OreDictUtils.contains(stack, "canvasYucca"), ((worldIn, playerIn, handIn) -> {
+            if (OreDictUtils.playerHasItemMatchingOre(playerIn.inventory, "shears")) {
                 if (!worldIn.isRemote) {
                     GuiHandler.openGui(worldIn, playerIn, GuiHandler.Type.YUCCA_CANVAS);
                 }

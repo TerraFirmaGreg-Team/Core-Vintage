@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.objects.blocks;
 import su.terrafirmagreg.api.spi.block.BlockBaseContainer;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TECellarShelf;
 
@@ -18,8 +19,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +57,7 @@ public class BlockCellarShelf extends BlockBaseContainer implements ITEBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TECellarShelf tile = Helpers.getTE(worldIn, pos, TECellarShelf.class);
+        var tile = TileUtils.getTile(worldIn, pos, TECellarShelf.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }

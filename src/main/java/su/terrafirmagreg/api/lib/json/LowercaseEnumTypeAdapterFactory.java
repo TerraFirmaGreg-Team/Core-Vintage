@@ -1,4 +1,4 @@
-package net.dries007.tfc.util.json;
+package su.terrafirmagreg.api.lib.json;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

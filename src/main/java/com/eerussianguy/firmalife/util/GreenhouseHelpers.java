@@ -7,11 +7,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseRoof;
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseWall;
 import com.eerussianguy.firmalife.te.TEClimateStation;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.GLASS;
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.TOP;
@@ -207,7 +211,7 @@ public class GreenhouseHelpers {
     }
 
     private static void seedPositionData(World world, BlockPos pos, IBlockState state, int arcs) {
-        TEClimateStation te = Helpers.getTE(world, pos, TEClimateStation.class);
+        TEClimateStation te = TileUtils.getTile(world, pos, TEClimateStation.class);
         if (te != null) {
             EnumFacing facing = state.getValue(FACING);
             int forwardCount = 1;
@@ -235,7 +239,7 @@ public class GreenhouseHelpers {
     public static void setApproval(World world, BlockPos pos, IBlockState state, EnumFacing wallDir, boolean approvalStatus, boolean visual,
                                    int tier) {
         final EnumFacing facing = state.getValue(FACING);
-        TEClimateStation te = Helpers.getTE(world, pos, TEClimateStation.class);
+        TEClimateStation te = TileUtils.getTile(world, pos, TEClimateStation.class);
         if (te != null) {
             for (int i = 0; i <= te.forward; i++) {
                 for (int j = 0; j <= te.arcs; j++) {

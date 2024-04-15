@@ -1,5 +1,6 @@
 package com.eerussianguy.firmalife;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGoat;
@@ -46,7 +47,6 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.Helpers;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 
@@ -134,7 +134,7 @@ public class CommonEventHandlerFL {
 
         EntityPlayer player = event.getEntityPlayer();
         BlockPos pos = event.getPos();
-        if (item == Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT) && Helpers.playerHasItemMatchingOre(player.inventory, "knife")) {
+        if (item == Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT) && OreDictUtils.playerHasItemMatchingOre(player.inventory, "knife")) {
             FLGuiHandler.openGui(world, pos, player, FLGuiHandler.Type.KNAPPING_PUMPKIN);
         }
     }

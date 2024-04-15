@@ -23,6 +23,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
@@ -30,10 +31,12 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
 
 public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfigurableItem {
 
@@ -102,10 +105,10 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
                                     float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
-            TileEntityGrindstone teGrindstone = (TileEntityGrindstone) Helpers.getTE(world, pos, TileEntityGrindstone.class);
+            TileEntityGrindstone teGrindstone = TileUtils.getTile(world, pos, TileEntityGrindstone.class);
             if (teGrindstone != null) {
                 ItemStack heldStack = playerIn.getHeldItem(hand);
-                IItemHandler inventory = (IItemHandler) teGrindstone.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
+                IItemHandler inventory = teGrindstone.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
                 if (inventory != null) {
 
                     int slot = inventory.getStackInSlot(TileEntityGrindstone.SLOT_GRINDSTONE)
@@ -140,7 +143,7 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
     }
 
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntityGrindstone grindstone = (TileEntityGrindstone) Helpers.getTE(world, pos, TileEntityGrindstone.class);
+        TileEntityGrindstone grindstone = TileUtils.getTile(world, pos, TileEntityGrindstone.class);
         if (grindstone != null) {
             grindstone.onBreakBlock(world, pos, state);
         }

@@ -19,12 +19,16 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.render.UnlistedCropProperty;
 import com.eerussianguy.firmalife.te.TEPlanter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 
@@ -56,7 +60,7 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
         if (!world.isRemote) {
             ItemStack held = player.getHeldItem(hand);
             int slot = getSlotForHit(hitX, hitZ);
-            TEPlanter te = Helpers.getTE(world, pos, TEPlanter.class);
+            TEPlanter te = TileUtils.getTile(world, pos, TEPlanter.class);
             if (te != null) {
                 IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
@@ -128,7 +132,7 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
     }
 
     public PlanterRecipe.PlantInfo[] getCrops(IBlockAccess world, BlockPos pos) {
-        TEPlanter te = Helpers.getTE(world, pos, TEPlanter.class);
+        TEPlanter te = TileUtils.getTile(world, pos, TEPlanter.class);
         PlanterRecipe.PlantInfo[] plants = new PlanterRecipe.PlantInfo[] { null, null, null, null };
         if (te != null) {
             for (int i = 0; i < 4; i++) {

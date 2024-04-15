@@ -13,13 +13,17 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import com.eerussianguy.firmalife.init.StemCrop;
 import com.eerussianguy.firmalife.te.TEStemCrop;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -54,7 +58,7 @@ public abstract class BlockStemCrop extends BlockCropSimple {
     @Override
     @SuppressWarnings("deprecation")
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        TEStemCrop te = Helpers.getTE(worldIn, pos, TEStemCrop.class);
+        TEStemCrop te = TileUtils.getTile(worldIn, pos, TEStemCrop.class);
         if (te != null)
             return state.withProperty(FACING, te.getFruitDirection());
         //even though the existing stemcrops only show direction when fully grown, this is made available
@@ -69,7 +73,7 @@ public abstract class BlockStemCrop extends BlockCropSimple {
             PropertyInteger stageProperty = getStageProperty();
             if (cropState.getProperties()
                     .containsKey(stageProperty) && cropState.getValue(stageProperty) == getCrop().getMaxStage() - 1) {
-                TEStemCrop te = Helpers.getTE(world, cropPos, TEStemCrop.class);
+                TEStemCrop te = TileUtils.getTile(world, cropPos, TEStemCrop.class);
                 EnumFacing fruitDirection = te.getFruitDirection();
                 BlockPos fruitPos = cropPos.offset(fruitDirection);
                 StemCrop crop = (StemCrop) getCrop();
@@ -129,7 +133,7 @@ public abstract class BlockStemCrop extends BlockCropSimple {
         super.onBlockAdded(worldIn, pos, state);
         //if adding a fully grown and wild crop
         if (state.getValue(getStageProperty()) == getCrop().getMaxStage() && state.getValue(WILD)) {
-            TEStemCrop te = Helpers.getTE(worldIn, pos, TEStemCrop.class);
+            TEStemCrop te = TileUtils.getTile(worldIn, pos, TEStemCrop.class);
             EnumFacing fruitDirection = te.getFruitDirection();
             BlockPos targetPos = pos.offset(fruitDirection);
             StemCrop crop = (StemCrop) getCrop();

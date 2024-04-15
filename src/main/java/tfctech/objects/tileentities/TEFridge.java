@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import gregtech.api.capability.GregtechCapabilities;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
@@ -28,7 +29,11 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.Helpers;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
+
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 import tfctech.client.TechSounds;
@@ -147,7 +152,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         if (!isMainBlock()) {
-            TEFridge te = Helpers.getTE(world, pos.up(), TEFridge.class);
+            TEFridge te = TileUtils.getTile(world, pos.up(), TEFridge.class);
             if (te != null) {
                 return te.hasCapability(capability, facing);
             } else {
@@ -169,7 +174,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (!isMainBlock()) {
-            TEFridge te = Helpers.getTE(world, pos.up(), TEFridge.class);
+            TEFridge te = TileUtils.getTile(world, pos.up(), TEFridge.class);
             if (te != null) {
                 return te.getCapability(capability, facing);
             } else {
@@ -192,12 +197,12 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
         if (Loader.isModLoaded("ic2")) {
             ic2Unload();
             if (isMainBlock()) {
-                TEFridge child = Helpers.getTE(world, pos.down(), TEFridge.class);
+                TEFridge child = TileUtils.getTile(world, pos.down(), TEFridge.class);
                 if (child != null) {
                     child.ic2Unload();
                 }
             } else {
-                TEFridge main = Helpers.getTE(world, pos.up(), TEFridge.class);
+                TEFridge main = TileUtils.getTile(world, pos.up(), TEFridge.class);
                 if (main != null) {
                     main.ic2Unload();
                 }
@@ -224,7 +229,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
     @Override
     public double getDemandedEnergy() {
         if (!isMainBlock()) {
-            TEFridge te = Helpers.getTE(world, pos.up(), TEFridge.class);
+            TEFridge te = TileUtils.getTile(world, pos.up(), TEFridge.class);
             if (te != null && te.addedToIc2Network) {
                 return Math.ceil(te.energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
             }
@@ -241,7 +246,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
     @Override
     public double injectEnergy(EnumFacing facing, double amount, double voltage) {
         if (!isMainBlock()) {
-            TEFridge te = Helpers.getTE(world, pos.up(), TEFridge.class);
+            TEFridge te = TileUtils.getTile(world, pos.up(), TEFridge.class);
             if (te != null && te.addedToIc2Network) {
                 te.energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
             }
@@ -271,7 +276,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
     @Override
     public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
         if (!isMainBlock()) {
-            TEFridge te = Helpers.getTE(world, pos.up(), TEFridge.class);
+            TEFridge te = TileUtils.getTile(world, pos.up(), TEFridge.class);
             if (te == null || !te.addedToIc2Network) {
                 return false;
             }

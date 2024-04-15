@@ -20,18 +20,22 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -154,7 +158,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
             // Attempt to grow
             float temp = ClimateTFC.getActualTemp(worldIn, pos);
             float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
-            TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+            TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
             if (te != null) {
                 long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
@@ -266,7 +270,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }

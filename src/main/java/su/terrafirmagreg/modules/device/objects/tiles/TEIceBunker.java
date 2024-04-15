@@ -40,7 +40,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 
-import lombok.Getter;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
@@ -48,6 +47,8 @@ import net.sharkbark.cellars.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;

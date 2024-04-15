@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 import net.minecraft.block.Block;
@@ -26,8 +27,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.objects.te.TEPlacedItem;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -100,7 +101,7 @@ public class BlockPlacedItem extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEPlacedItem te = Helpers.getTE(worldIn, pos, TEPlacedItem.class);
+        TEPlacedItem te = TileUtils.getTile(worldIn, pos, TEPlacedItem.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -116,7 +117,7 @@ public class BlockPlacedItem extends Block {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
-        TEPlacedItem te = Helpers.getTE(worldIn, pos, TEPlacedItem.class);
+        TEPlacedItem te = TileUtils.getTile(worldIn, pos, TEPlacedItem.class);
         if (te != null) {
             ItemStack stack = playerIn.getHeldItemMainhand();
             // Check for pit kiln conversion

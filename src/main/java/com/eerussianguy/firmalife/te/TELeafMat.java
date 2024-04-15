@@ -7,13 +7,16 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.util.HelpersFL;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
 
 public class TELeafMat extends TEInventory implements ITickable {
 
@@ -58,7 +61,7 @@ public class TELeafMat extends TEInventory implements ITickable {
     }
 
     public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-        Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+        StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(0));
     }
 
     public void clear() {
@@ -76,7 +79,7 @@ public class TELeafMat extends TEInventory implements ITickable {
             startTick = CalendarTFC.PLAYER_TIME.getTicks();
             setDuration();
         } else {
-            Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+            StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(0));
             deleteSlot();
         }
         markDirty();

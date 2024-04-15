@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
 import net.minecraft.block.BlockTorch;
@@ -22,12 +23,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -89,7 +90,7 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize {
 
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (te != null) {
             if (!worldIn.isRemote && te.getTicksSinceUpdate() > ConfigTFC.General.OVERRIDES.torchTime && ConfigTFC.General.OVERRIDES.torchTime > 0) {
                 worldIn.setBlockState(pos, state.withProperty(LIT, false));
@@ -117,7 +118,7 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize {
             } else {
                 if (BlockTorchTFC.canLight(stack)) {
                     worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
-                    TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+                    TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
                     if (tile != null) {
                         tile.resetCounter();
                     }
@@ -130,7 +131,7 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize {
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         // Set the initial counter value
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }

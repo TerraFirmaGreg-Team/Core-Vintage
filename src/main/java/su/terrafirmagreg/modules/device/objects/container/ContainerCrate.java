@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.container;
 
+import su.terrafirmagreg.api.spi.button.IButtonHandler;
 import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
-import su.terrafirmagreg.api.spi.container.IButtonHandler;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
 import su.terrafirmagreg.modules.device.objects.tiles.TECrate;
 
@@ -9,6 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
 
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 

@@ -4,12 +4,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 
+
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.CollectionUtils;
+
 
 import java.util.List;
 
@@ -39,7 +43,7 @@ public class BarrelRecipeFluidMixing extends BarrelRecipe {
     @NotNull
     @Override
     public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
-        return Helpers.listOf(inputStack.getItem().getContainerItem(inputStack));
+        return CollectionUtils.listOf(inputStack.getItem().getContainerItem(inputStack));
     }
 
     @Override

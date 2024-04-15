@@ -139,9 +139,9 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
     @Override
     public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
                                     @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var te = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
-        if (te != null) {
-            return te.onRightClick(playerIn);
+        var tile = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
+        if (tile != null) {
+            return tile.onRightClick(playerIn);
         }
         return true;
     }
@@ -172,9 +172,9 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
 
     @Override
     public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }

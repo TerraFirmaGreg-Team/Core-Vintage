@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.rock.objects.blocks.BlockRockAnvil;
@@ -31,8 +33,6 @@ import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SkillType;
@@ -45,7 +45,7 @@ import java.util.List;
 
 // TODO делать отдельный класс для каменной наковали, без интерфейса
 
-public class TEMetalAnvil extends TEInventory {
+public class TEMetalAnvil extends TEBaseInventory {
 
     public static final int WORK_MAX = 145;
     public static final int SLOT_INPUT_1 = 0;
@@ -175,17 +175,12 @@ public class TEMetalAnvil extends TEInventory {
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
-        switch (slot) {
-            case SLOT_INPUT_1:
-            case SLOT_INPUT_2:
-                return stack.hasCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-            case SLOT_FLUX:
-                return OreDictionaryHelper.doesStackMatchOre(stack, "dustFlux");
-            case SLOT_HAMMER:
-                return stack.getItem() == ToolItems.HARD_HAMMER.get();
-            default:
-                return false;
-        }
+        return switch (slot) {
+            case SLOT_INPUT_1, SLOT_INPUT_2 -> stack.hasCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+            case SLOT_FLUX -> OreDictUtils.contains(stack, "dustFlux");
+            case SLOT_HAMMER -> stack.getItem() == ToolItems.HARD_HAMMER.get();
+            default -> false;
+        };
     }
 
     /**

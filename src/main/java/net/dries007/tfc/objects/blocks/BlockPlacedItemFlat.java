@@ -25,12 +25,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 
@@ -124,7 +128,7 @@ public class BlockPlacedItemFlat extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEPlacedItemFlat te = Helpers.getTE(worldIn, pos, TEPlacedItemFlat.class);
+        TEPlacedItemFlat te = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
         if (te != null) {
             te.onBreakBlock(pos);
         }
@@ -140,7 +144,7 @@ public class BlockPlacedItemFlat extends Block {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
-        TEPlacedItemFlat te = Helpers.getTE(worldIn, pos, TEPlacedItemFlat.class);
+        TEPlacedItemFlat te = TileUtils.getTile(worldIn, pos, TEPlacedItemFlat.class);
         if (te != null && !worldIn.isRemote) {
             ItemStack stack = te.getStack();
             if (!stack.isEmpty()) {
@@ -171,7 +175,7 @@ public class BlockPlacedItemFlat extends Block {
     @NotNull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        TEPlacedItemFlat te = Helpers.getTE(world, pos, TEPlacedItemFlat.class);
+        TEPlacedItemFlat te = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
         if (te != null) {
             return te.getStack().copy();
         }

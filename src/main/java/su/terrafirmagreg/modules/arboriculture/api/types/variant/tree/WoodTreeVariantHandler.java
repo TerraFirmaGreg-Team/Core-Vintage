@@ -9,7 +9,7 @@
 //
 //public class WoodTreeVariantHandler {
 //
-//	public static void init() {
+//	public static void configureModules() {
 //		WoodTreeVariants.ACACIA = new su.terrafirmagreg.modules.arboriculture.api.types.variant.tree.WoodTreeVariant
 //				.Builder("acacia", 30f, 210f, 19f, 31f)
 //				.setWoodType(WoodTypes.ACACIA)

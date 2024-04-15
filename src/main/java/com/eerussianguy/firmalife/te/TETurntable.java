@@ -11,15 +11,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.te.TETickableInventory;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -88,7 +92,7 @@ public class TETurntable extends TETickableInventory {
                     if (!world.isRemote) {
                         world.setBlockState(pos, getBlockType().getDefaultState()
                                 .withProperty(StatePropertiesFL.CLAY, clay - 1));
-                        Helpers.spawnItemStack(world, pos.up(), item());
+                        StackUtils.spawnItemStack(world, pos.up(), item());
                         markForSync();
                     }
                 }
@@ -147,10 +151,10 @@ public class TETurntable extends TETickableInventory {
     }
 
     public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-        Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+        StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(0));
         int clay = state.getValue(StatePropertiesFL.CLAY);
         if (clay > 0) {
-            Helpers.spawnItemStack(world, pos, new ItemStack(Items.CLAY_BALL, 5 * clay));
+            StackUtils.spawnItemStack(world, pos, new ItemStack(Items.CLAY_BALL, 5 * clay));
         }
     }
 }

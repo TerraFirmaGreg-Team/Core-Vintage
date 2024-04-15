@@ -9,7 +9,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -25,26 +24,19 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySkeletonHorse;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.passive.EntityZombieHorse;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
 
 import com.google.common.base.Joiner;
 import io.netty.buffer.ByteBuf;
@@ -66,10 +58,8 @@ import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -78,12 +68,9 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static com.google.common.math.DoubleMath.mean;
-
 public final class Helpers {
 
     private static final Joiner JOINER_DOT = Joiner.on('.');
-    private static final boolean JEI = Loader.isModLoaded("jei");
     /**
      * Vanilla entities that are replaced to TFC counterparts on spawn
      */
@@ -112,10 +99,6 @@ public final class Helpers {
         VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityPolarBearTFC.class);
         VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityParrotTFC.class);
         VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityLlamaTFC.class);
-    }
-
-    public static boolean isJEIEnabled() {
-        return JEI;
     }
 
     /**
@@ -180,51 +163,9 @@ public final class Helpers {
         return null;
     }
 
-    /**
-     * Copy from Item#rayTrace Returns a RayTraceResult containing first found block in Players reach.
-     *
-     * @param worldIn    the world obj player stands in.
-     * @param playerIn   the player obj
-     * @param useLiquids do fluids counts as block?
-     */
-    @Nullable
-    public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
-        Vec3d playerVec = new Vec3d(playerIn.posX, playerIn.posY + playerIn.getEyeHeight(), playerIn.posZ);
-        float cosYaw = MathHelper.cos(-playerIn.rotationYaw * 0.017453292F - (float) Math.PI);
-        float sinYaw = MathHelper.sin(-playerIn.rotationYaw * 0.017453292F - (float) Math.PI);
-        float cosPitch = -MathHelper.cos(-playerIn.rotationPitch * 0.017453292F);
-        float sinPitch = MathHelper.sin(-playerIn.rotationPitch * 0.017453292F);
-        double reachDistance = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue();
-        Vec3d targetVec = playerVec.add((sinYaw * cosPitch) * reachDistance, sinPitch * reachDistance, (cosYaw * cosPitch) * reachDistance);
-        return worldIn.rayTraceBlocks(playerVec, targetVec, useLiquids, !useLiquids, false);
-    }
-
-    /**
-     * Copied from {@link net.minecraft.entity.Entity#rayTrace(double, float)} as it is client only
-     *
-     * @param blockReachDistance the reach distance
-     * @param partialTicks       idk
-     * @return the ray trace result
-     */
-    @Nullable
-    public static RayTraceResult rayTrace(Entity entity, double blockReachDistance, float partialTicks) {
-        Vec3d eyePosition = entity.getPositionEyes(partialTicks);
-        Vec3d lookVector = entity.getLook(partialTicks);
-        Vec3d rayTraceVector = eyePosition.add(lookVector.x * blockReachDistance, lookVector.y * blockReachDistance,
-                lookVector.z * blockReachDistance);
-        return entity.world.rayTraceBlocks(eyePosition, rayTraceVector, false, false, true);
-    }
-
     public static boolean containsAnyOfCaseInsensitive(Collection<String> input, String... items) {
         Set<String> itemsSet = Arrays.stream(items).map(String::toLowerCase).collect(Collectors.toSet());
         return input.stream().map(String::toLowerCase).anyMatch(itemsSet::contains);
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <T extends TileEntity> T getTE(IBlockAccess world, BlockPos pos, Class<T> aClass) {
-        TileEntity te = world.getTileEntity(pos);
-        if (!aClass.isInstance(te)) return null;
-        return (T) te;
     }
 
     public static String getEnumName(Enum<?> anEnum) {
@@ -237,104 +178,6 @@ public final class Helpers {
         return JOINER_DOT.join(Constants.MODID_TFC, "types", type.getRegistryType()
                         .getSimpleName(), type.getRegistryName().getPath())
                 .toLowerCase();
-    }
-
-    public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {
-        for (ItemStack stack : playerInv.mainInventory) {
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
-                return true;
-            }
-        }
-        for (ItemStack stack : playerInv.armorInventory) {
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
-                return true;
-            }
-        }
-        for (ItemStack stack : playerInv.offHandInventory) {
-            if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @NotNull
-    public static ItemStack consumeItem(ItemStack stack, int amount) {
-        if (stack.getCount() <= amount) {
-            return ItemStack.EMPTY;
-        }
-        stack.shrink(amount);
-        return stack;
-    }
-
-    @NotNull
-    public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
-        return player.isCreative() ? stack : consumeItem(stack, amount);
-    }
-
-    public static void damageItem(ItemStack stack) {
-        damageItem(stack, 1);
-    }
-
-    /**
-     * Utility method for damaging an item that doesn't take an entity
-     *
-     * @param stack the stack to be damaged
-     */
-    public static void damageItem(ItemStack stack, int amount) {
-        if (stack.attemptDamageItem(amount, net.dries007.tfc.Constants.RNG, null)) {
-            stack.shrink(1);
-            stack.setItemDamage(0);
-        }
-    }
-
-    /**
-     * Simple method to spawn items in the world at a precise location, rather than using InventoryHelper
-     */
-    public static void spawnItemStack(World world, BlockPos pos, ItemStack stack) {
-        if (stack.isEmpty())
-            return;
-        EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-        world.spawnEntity(entityitem);
-    }
-
-    /**
-     * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate
-     * allows for the specified direction!
-     *
-     * @param pos    position of the block that makes the check
-     * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it
-     *               sticks WITH. e.g: a sign facing north also hangs on the north side of the support block
-     * @return true if the side is solid, false otherwise.
-     */
-    public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
-        return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
-    }
-
-    /**
-     * Primarily for use in placing checks. Determines a solid side for the block to attach to.
-     *
-     * @param pos             position of the block/space to be checked.
-     * @param possibleSides   a list/array of all sides the block can attach to.
-     * @param preferredFacing this facing is checked first. It can be invalid or null.
-     * @return Found facing or null is none is found. This is the direction the block should be pointing and the side it stick TO, not the side it
-     * sticks WITH.
-     */
-    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
-        return getASolidFacing(worldIn, pos, preferredFacing, Arrays.asList(possibleSides));
-    }
-
-    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing,
-                                             Collection<EnumFacing> possibleSides) {
-        if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn, pos, preferredFacing)) {
-            return preferredFacing;
-        }
-        for (EnumFacing side : possibleSides) {
-            if (side != null && canHangAt(worldIn, pos, side)) {
-                return side;
-            }
-        }
-        return null;
     }
 
     /**
@@ -435,30 +278,11 @@ public final class Helpers {
     }
 
     /**
-     * Used because {@link Collections#singletonList(Object)} is immutable
-     */
-    public static <T> List<T> listOf(T element) {
-        List<T> list = new ArrayList<>(1);
-        list.add(element);
-        return list;
-    }
-
-    /**
-     * Used because {@link Arrays#asList(Object[])} is immutable
-     */
-    @SafeVarargs
-    public static <T> List<T> listOf(T... elements) {
-        List<T> list = new ArrayList<>(elements.length);
-        Collections.addAll(list, elements);
-        return list;
-    }
-
-    /**
      * This is meant to avoid Intellij's warnings about null fields that are injected to at runtime Use this for things like @ObjectHolder,
-     * @CapabilityInject, etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
      *
      * @param <T> anything and everything
      * @return null, but not null
+     * @CapabilityInject, etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
      */
     @NotNull
     @SuppressWarnings("ConstantConditions")
@@ -466,9 +290,4 @@ public final class Helpers {
         return null;
     }
 
-    public static double getTPS(World world, int dimId) {
-        if (world == null || world.getMinecraftServer() == null) return -1D;
-        double worldTickTime = mean(world.getMinecraftServer().worldTickTimes.get(dimId)) * 1.0E-6D;
-        return Math.min(1000.0D / worldTickTime, 20.0D);
-    }
 }

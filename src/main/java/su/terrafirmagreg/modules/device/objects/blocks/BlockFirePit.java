@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BlockBase;
 import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -49,10 +50,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -258,11 +259,11 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
             TEFirePit tile = TileUtils.getTile(worldIn, pos, TEFirePit.class);
             if (tile != null) {
                 if (attachment == FirePitAttachment.NONE) {
-                    if (OreDictionaryHelper.doesStackMatchOre(held, "cookingPot")) {
+                    if (OreDictUtils.contains(held, "cookingPot")) {
                         worldIn.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.COOKING_POT));
                         tile.onConvertToCookingPot(player, held);
                         return true;
-                    } else if (OreDictionaryHelper.doesStackMatchOre(held, "grill")) {
+                    } else if (OreDictUtils.contains(held, "grill")) {
                         worldIn.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.GRILL));
                         tile.onConvertToGrill(player, held);
                         return true;
@@ -282,7 +283,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
                             return true;
                         }
                     } else if (tile.getCookingPotStage() == TEFirePit.CookingPotStage.FINISHED) {
-                        if (OreDictionaryHelper.doesStackMatchOre(held, "bowl")) {
+                        if (OreDictUtils.contains(held, "bowl")) {
                             tile.onUseBowlOnCookingPot(player, held);
                             return true;
                         }

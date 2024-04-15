@@ -1,5 +1,6 @@
 package lyeoj.tfcthings.event;
 
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalSheep;
 
@@ -30,7 +31,6 @@ import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -181,7 +181,7 @@ public class TFCThingsEventHandler {
                     && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
                 if (!sheep.world.isRemote) {
                     ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL, 1);
-                    Helpers.spawnItemStack(sheep.world, new BlockPos(sheep.posX, sheep.posY, sheep.posZ), woolStack);
+                    StackUtils.spawnItemStack(sheep.world, new BlockPos(sheep.posX, sheep.posY, sheep.posZ), woolStack);
                 }
             }
         }

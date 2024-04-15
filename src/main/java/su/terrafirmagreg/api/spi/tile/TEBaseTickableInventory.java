@@ -3,12 +3,8 @@ package su.terrafirmagreg.api.spi.tile;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.items.ItemStackHandler;
 
-
-import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.objects.te.TETickableBase;
-
 /**
- * A merge of {@link TEInventory} and {@link TETickableBase}
+ * A merge of {@link TEBaseInventory} and {@link TEBaseTickable}
  */
 public class TEBaseTickableInventory extends TEBaseInventory implements ITickable {
 

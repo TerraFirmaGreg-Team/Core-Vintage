@@ -21,6 +21,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
@@ -32,11 +33,14 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
+
 
 import java.util.Random;
 
@@ -148,18 +152,18 @@ public class ItemGoldPan extends ItemTFC {
                                         .filter(x -> rand.nextDouble() < x.getChunkChance())
                                         .forEach(x -> {
                                             if (Constants.RNG.nextDouble() < x.getPanChance()) {
-                                                Helpers.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
+                                                StackUtils.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
                                             }
                                         });
                                 // player.inventory.setInventorySlotContents(player.inventory.currentItem, stack); //only way to get it to refresh! <- do we really *need* this?
                             } else if (damage == 3 || damage == 4) {
                                 Rock rock = chunkDataTFC.getRockHeight(position);
                                 if (Constants.RNG.nextDouble() < 0.35) {
-                                    Helpers.spawnItemStack(world, position, new ItemStack(ItemRock.get(rock), 1));
+                                    StackUtils.spawnItemStack(world, position, new ItemStack(ItemRock.get(rock), 1));
                                 } else if (damage == 3 && Constants.RNG.nextDouble() < 0.1) {
-                                    Helpers.spawnItemStack(world, position, new ItemStack(Items.BONE, 1));
+                                    StackUtils.spawnItemStack(world, position, new ItemStack(Items.BONE, 1));
                                 } else if (damage != 3 && Constants.RNG.nextDouble() < 0.1) {
-                                    Helpers.spawnItemStack(world, position, new ItemStack(Items.STICK, 1));
+                                    StackUtils.spawnItemStack(world, position, new ItemStack(Items.STICK, 1));
                                 }
                             }
                             chunkDataTFC.addWork(6);

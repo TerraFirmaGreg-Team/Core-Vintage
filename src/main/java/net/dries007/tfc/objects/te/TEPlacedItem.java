@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,11 +16,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +36,7 @@ public class TEPlacedItem extends TEInventory {
     }
 
     public static void convertPitKilnToPlacedItem(World world, BlockPos pos) {
-        TEPitKiln teOld = Helpers.getTE(world, pos, TEPitKiln.class);
+        TEPitKiln teOld = TileUtils.getTile(world, pos, TEPitKiln.class);
         if (teOld != null) {
             // Remove inventory items
             // This happens here to stop the block dropping its items in onBreakBlock()
@@ -50,7 +51,7 @@ public class TEPlacedItem extends TEInventory {
             world.setBlockState(pos, BlocksTFC.PLACED_ITEM.getDefaultState());
 
             // Replace inventory items
-            TEPlacedItem teNew = Helpers.getTE(world, pos, TEPlacedItem.class);
+            TEPlacedItem teNew = TileUtils.getTile(world, pos, TEPlacedItem.class);
             if (teNew != null) {
                 IItemHandler capNew = teNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (capNew != null) {

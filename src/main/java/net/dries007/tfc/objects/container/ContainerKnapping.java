@@ -9,6 +9,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
+
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -17,6 +18,9 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.SimpleCraftMatrix;
 
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.StackUtils;
 
 public class ContainerKnapping extends ContainerItemStack implements IButtonHandler {
 
@@ -45,7 +49,7 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
 
         if (!hasBeenModified) {
             if (!player.isCreative() && !type.consumeAfterComplete()) {
-                ItemStack consumedStack = Helpers.consumeItem(this.stack, type.getAmountToConsume());
+                ItemStack consumedStack = StackUtils.consumeItem(this.stack, type.getAmountToConsume());
                 if (isOffhand) {
                     player.setHeldItem(EnumHand.OFF_HAND, consumedStack);
                 } else {
@@ -137,7 +141,7 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
 
     private void consumeIngredientStackAfterComplete() {
         if (type.consumeAfterComplete() && !hasConsumedIngredient) {
-            ItemStack stack = Helpers.consumeItem(this.stack, type.getAmountToConsume());
+            ItemStack stack = StackUtils.consumeItem(this.stack, type.getAmountToConsume());
             if (isOffhand) {
                 player.setHeldItem(EnumHand.OFF_HAND, stack);
             } else {

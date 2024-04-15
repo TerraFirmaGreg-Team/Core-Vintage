@@ -1,4 +1,7 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.lib;
+
+import su.terrafirmagreg.api.util.ModUtils;
+
 
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.WordUtils;
@@ -12,25 +15,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static su.terrafirmagreg.Tags.MOD_ID;
+
 /**
  * A wrapper to the Log4J wrapper, which adds some extra utility, such as the stacktrace being added to warning messages.
  */
 @Getter
 @SuppressWarnings("unused")
-public class LoggingUtils {
+public class LoggingHelper {
 
     /**
      * The logger delegate.
      */
     private final Logger logger;
 
+    public LoggingHelper() {
+        this(LogManager.getLogger(MOD_ID));
+    }
+
     /**
      * Constructs the helper using a logger name.
      *
      * @param name The name of the logger to create.
      */
-    public LoggingUtils(String name) {
-        this(LogManager.getLogger(name));
+    public LoggingHelper(String name) {
+        this(LogManager.getLogger(ModUtils.getIDName(name)));
     }
 
     /**
@@ -38,7 +47,7 @@ public class LoggingUtils {
      *
      * @param logger The logger to use as a delegate.
      */
-    public LoggingUtils(Logger logger) {
+    public LoggingHelper(Logger logger) {
 
         this.logger = logger;
     }
@@ -158,7 +167,7 @@ public class LoggingUtils {
 
         for (final String line : lines) {
 
-            for (final String subline : wrapString(line, 78, false, new ArrayList<String>())) {
+            for (final String subline : wrapString(line, 78, false, new ArrayList<>())) {
 
                 this.error("* " + subline);
             }

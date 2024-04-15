@@ -1,5 +1,6 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -27,6 +28,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
@@ -92,7 +94,7 @@ public class WorldRegenHandler {
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         if (!event.world.isRemote && event.phase == TickEvent.Phase.END) {
             if (!POSITIONS.isEmpty()) {
-                double tps = Helpers.getTPS(event.world, 0);
+                double tps = WorldUtils.getTPS(event.world, 0);
                 ChunkPos pos = POSITIONS.remove(0);
                 if (tps > ConfigTFC.General.WORLD_REGEN.minRegenTps) {
                     Chunk chunk = event.world.getChunk(pos.x, pos.z);

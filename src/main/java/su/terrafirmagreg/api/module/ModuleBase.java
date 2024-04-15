@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.module;
 
+import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.network.IPacketRegistry;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
@@ -8,11 +9,9 @@ import su.terrafirmagreg.api.network.PacketService;
 import su.terrafirmagreg.api.network.ThreadedNetworkWrapper;
 import su.terrafirmagreg.api.registry.Registry;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.api.util.LoggingUtils;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
@@ -41,7 +40,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Getter
-public abstract class ModuleBase implements Comparable<ModuleBase> {
+public abstract class ModuleBase {
 
     /**
      * Stores a network wrapper for each mod id.
@@ -58,8 +57,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
 
     @Getter
     private final String name;
-    @Getter
-    private final int priority;
     @NotNull
     private final String modID;
 
@@ -76,16 +73,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     private File configurationDirectory;
 
     protected ModuleBase() {
-        this(-1);
-    }
-
-    protected ModuleBase(int priority) {
-        this(priority, Loader.instance().activeModContainer().getModId());
-    }
-
-    protected ModuleBase(int priority, @NotNull String modID) {
-        this.priority = priority;
-        this.modID = modID;
+        this.modID = this.getClass().getAnnotation(Module.class).moduleID().getID();
         this.name = this.getClass().getSimpleName();
     }
 
@@ -94,7 +82,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
     }
 
     protected void enableAutoRegistry(CreativeTabs tab) {
-        this.registryManager = new RegistryManager(tab).create();
+        this.registryManager = new RegistryManager(tab, modID).create();
 
         this.networkEntityIdSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(this.modID, s -> new NetworkEntityIdSupplier());
         this.registryManager.setNetworkEntityIdSupplier(this.networkEntityIdSupplier);
@@ -177,6 +165,7 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
      */
     @NotNull
     public Set<ResourceLocation> getDependencyUids() {
+        //Collections.singleton(ModUtils.getID(Container.Module_Core.getName()));
         return Collections.emptySet();
     }
 
@@ -197,21 +186,6 @@ public abstract class ModuleBase implements Comparable<ModuleBase> {
      * @return A logger to use for this module.
      */
     @NotNull
-    protected abstract LoggingUtils getLogger();
+    protected abstract LoggingHelper getLogger();
 
-    // --------------------------------------------------------------------------
-    // - Comparator
-    // --------------------------------------------------------------------------
-
-    public int compareTo(@NotNull ModuleBase otherModule) {
-        if (this.priority == -1 && otherModule.getPriority() == -1) {
-            return this.name.compareTo(otherModule.getName());
-        } else if (this.priority == -1) {
-            return -1;
-        } else if (otherModule.getPriority() == -1) {
-            return 1;
-        } else {
-            return Integer.compare(this.priority, otherModule.getPriority());
-        }
-    }
 }

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
@@ -39,7 +40,6 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -284,7 +284,7 @@ public class TECrucible extends TETickableInventory
         if (alloy.getAmount() > 0) {
             stack.setTagCompound(this.writeToItemTag());
         }
-        Helpers.spawnItemStack(world, pos, stack);
+        StackUtils.spawnItemStack(world, pos, stack);
     }
 
     @Override

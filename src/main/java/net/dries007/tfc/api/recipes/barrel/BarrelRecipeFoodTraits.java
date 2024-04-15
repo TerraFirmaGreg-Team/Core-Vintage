@@ -1,10 +1,14 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
@@ -12,7 +16,6 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFoodTrait;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -56,12 +59,12 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
         ItemStack stack = inputStack.copy();
         stack.setCount(multiplier);
 
-        ItemStack remainder = Helpers.consumeItem(inputStack.copy(), multiplier);
+        ItemStack remainder = StackUtils.consumeItem(inputStack.copy(), multiplier);
         IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (food != null) {
             CapabilityFood.applyTrait(food, trait);
         }
-        return Helpers.listOf(stack, remainder);
+        return CollectionUtils.listOf(stack, remainder);
     }
 
     @SideOnly(Side.CLIENT)

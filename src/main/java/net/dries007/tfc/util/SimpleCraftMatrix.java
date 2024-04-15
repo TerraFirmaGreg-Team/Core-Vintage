@@ -1,5 +1,7 @@
 package net.dries007.tfc.util;
 
+import lombok.Getter;
+
 import net.dries007.tfc.TerraFirmaCraft;
 
 import java.util.Arrays;
@@ -19,7 +21,9 @@ public class SimpleCraftMatrix {
      */
     private final boolean[] matrix;
     private final boolean outsideSlot;
+    @Getter
     private final int width;
+    @Getter
     private final int height;
     private final int area;
 
@@ -89,14 +93,6 @@ public class SimpleCraftMatrix {
 
     public boolean get(int index) {
         return index >= 0 && index < area && matrix[index];
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
     }
 
     /**

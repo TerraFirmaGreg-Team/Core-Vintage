@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -15,14 +17,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.util.TileUtils;
+
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -65,7 +71,7 @@ public class BlockBonsai extends BlockNonCube {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
-            TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
+            TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
             int stage = state.getValue(STAGE);
             if (te != null && te.isClimateValid(tier) && te.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * period) && stage < 2) {
                 world.setBlockState(pos, state.withProperty(STAGE, stage + 1));
@@ -79,14 +85,14 @@ public class BlockBonsai extends BlockNonCube {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
                                     float hitY, float hitZ) {
         if (!world.isRemote) {
-            TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
+            TEHangingPlanter te = TileUtils.getTile(world, pos, TEHangingPlanter.class);
             if (te == null) return false;
             ItemStack held = player.getHeldItem(hand);
             if (held.isEmpty() && state.getValue(STAGE) == 2) {
                 BlockPos spawnPos = tier == 4 ? pos.up() : pos.down(); // who let me learn to code???
-                Helpers.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
+                StackUtils.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
                 if (Constants.RNG.nextInt(7) == 0)
-                    Helpers.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));
+                    StackUtils.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));
                 world.setBlockState(pos, state.withProperty(STAGE, 0));
                 te.resetCounter();
                 return true;
@@ -97,7 +103,7 @@ public class BlockBonsai extends BlockNonCube {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
+        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }

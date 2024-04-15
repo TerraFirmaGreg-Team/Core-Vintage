@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class SCPacketBaseTileEntity<REQ extends SCPacketBaseTileEntity> extends PacketBlockPosBase<REQ> {
+public abstract class SCPacketBaseTileEntity<REQ extends SCPacketBaseTileEntity> extends PacketBaseBlockPos<REQ> {
 
     public SCPacketBaseTileEntity() {
         // serialization

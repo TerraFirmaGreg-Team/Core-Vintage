@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.network;
+package su.terrafirmagreg.api.spi.packet;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("rawtypes")
-public abstract class SerializableMessage<REQ extends SerializableMessage> implements Serializable, IMessage, IMessageHandler<REQ, IMessage> {
+public abstract class PacketSerializable<REQ extends PacketSerializable> implements Serializable, IMessage, IMessageHandler<REQ, IMessage> {
 
     /**
      * The serial version for this UID.
@@ -46,42 +46,42 @@ public abstract class SerializableMessage<REQ extends SerializableMessage> imple
     static {
 
         // Primitives
-        addIOHandler(byte.class, SerializableMessage::readByte, SerializableMessage::writeByte);
-        addIOHandler(short.class, SerializableMessage::readShort, SerializableMessage::writeShort);
-        addIOHandler(int.class, SerializableMessage::readInt, SerializableMessage::writeInt);
-        addIOHandler(long.class, SerializableMessage::readLong, SerializableMessage::writeLong);
-        addIOHandler(float.class, SerializableMessage::readFloat, SerializableMessage::writeFloat);
-        addIOHandler(double.class, SerializableMessage::readDouble, SerializableMessage::writeDouble);
-        addIOHandler(boolean.class, SerializableMessage::readBoolean, SerializableMessage::writeBoolean);
-        addIOHandler(char.class, SerializableMessage::readChar, SerializableMessage::writeChar);
+        addIOHandler(byte.class, PacketSerializable::readByte, PacketSerializable::writeByte);
+        addIOHandler(short.class, PacketSerializable::readShort, PacketSerializable::writeShort);
+        addIOHandler(int.class, PacketSerializable::readInt, PacketSerializable::writeInt);
+        addIOHandler(long.class, PacketSerializable::readLong, PacketSerializable::writeLong);
+        addIOHandler(float.class, PacketSerializable::readFloat, PacketSerializable::writeFloat);
+        addIOHandler(double.class, PacketSerializable::readDouble, PacketSerializable::writeDouble);
+        addIOHandler(boolean.class, PacketSerializable::readBoolean, PacketSerializable::writeBoolean);
+        addIOHandler(char.class, PacketSerializable::readChar, PacketSerializable::writeChar);
 
         // Primitive Arrays
-        addIOHandler(byte[].class, SerializableMessage::readByteArray, SerializableMessage::writeByteArray);
-        addIOHandler(short[].class, SerializableMessage::readShortArray, SerializableMessage::writeShortArray);
-        addIOHandler(int[].class, SerializableMessage::readIntArray, SerializableMessage::writeIntArray);
-        addIOHandler(long[].class, SerializableMessage::readLongArray, SerializableMessage::writeLongArray);
-        addIOHandler(float[].class, SerializableMessage::readFloatArray, SerializableMessage::writeFloatArray);
-        addIOHandler(double[].class, SerializableMessage::readDoubleArray, SerializableMessage::writeDoubleArray);
-        addIOHandler(boolean[].class, SerializableMessage::readBooleanArray, SerializableMessage::writeBooleanArray);
-        addIOHandler(char[].class, SerializableMessage::readCharArray, SerializableMessage::writeCharArray);
+        addIOHandler(byte[].class, PacketSerializable::readByteArray, PacketSerializable::writeByteArray);
+        addIOHandler(short[].class, PacketSerializable::readShortArray, PacketSerializable::writeShortArray);
+        addIOHandler(int[].class, PacketSerializable::readIntArray, PacketSerializable::writeIntArray);
+        addIOHandler(long[].class, PacketSerializable::readLongArray, PacketSerializable::writeLongArray);
+        addIOHandler(float[].class, PacketSerializable::readFloatArray, PacketSerializable::writeFloatArray);
+        addIOHandler(double[].class, PacketSerializable::readDoubleArray, PacketSerializable::writeDoubleArray);
+        addIOHandler(boolean[].class, PacketSerializable::readBooleanArray, PacketSerializable::writeBooleanArray);
+        addIOHandler(char[].class, PacketSerializable::readCharArray, PacketSerializable::writeCharArray);
 
         // Objects
-        addIOHandler(String.class, SerializableMessage::readString, SerializableMessage::writeString);
-        addIOHandler(NBTTagCompound.class, SerializableMessage::readNBT, SerializableMessage::writeNBT);
-        addIOHandler(ItemStack.class, SerializableMessage::readItemStack, SerializableMessage::writeItemStack);
-        addIOHandler(BlockPos.class, SerializableMessage::readBlockPos, SerializableMessage::writeBlockPos);
-        addIOHandler(IBlockState.class, SerializableMessage::readState, SerializableMessage::writeState);
-        addIOHandler(ResourceLocation.class, SerializableMessage::readResourceLocation, SerializableMessage::writeResourceLocation);
-        addIOHandler(EnchantmentData.class, SerializableMessage::readEnchantmentData, SerializableMessage::writeEnchantmentData);
+        addIOHandler(String.class, PacketSerializable::readString, PacketSerializable::writeString);
+        addIOHandler(NBTTagCompound.class, PacketSerializable::readNBT, PacketSerializable::writeNBT);
+        addIOHandler(ItemStack.class, PacketSerializable::readItemStack, PacketSerializable::writeItemStack);
+        addIOHandler(BlockPos.class, PacketSerializable::readBlockPos, PacketSerializable::writeBlockPos);
+        addIOHandler(IBlockState.class, PacketSerializable::readState, PacketSerializable::writeState);
+        addIOHandler(ResourceLocation.class, PacketSerializable::readResourceLocation, PacketSerializable::writeResourceLocation);
+        addIOHandler(EnchantmentData.class, PacketSerializable::readEnchantmentData, PacketSerializable::writeEnchantmentData);
 
         // Object Arrays
-        addIOHandler(String[].class, SerializableMessage::readStringArray, SerializableMessage::writeStringArray);
-        addIOHandler(NBTTagCompound[].class, SerializableMessage::readNBTArray, SerializableMessage::writeNBTArray);
-        addIOHandler(ItemStack[].class, SerializableMessage::readItemStackArray, SerializableMessage::writeItemStackArray);
-        addIOHandler(BlockPos[].class, SerializableMessage::readBlockPosArray, SerializableMessage::writeBlockPosArray);
-        addIOHandler(IBlockState[].class, SerializableMessage::readStateArray, SerializableMessage::writeStateArray);
-        addIOHandler(ResourceLocation[].class, SerializableMessage::readResourceLocationArray, SerializableMessage::writeResourceLocationArray);
-        addIOHandler(EnchantmentData[].class, SerializableMessage::readEnchantmentDataArray, SerializableMessage::writeEnchantmentDataArray);
+        addIOHandler(String[].class, PacketSerializable::readStringArray, PacketSerializable::writeStringArray);
+        addIOHandler(NBTTagCompound[].class, PacketSerializable::readNBTArray, PacketSerializable::writeNBTArray);
+        addIOHandler(ItemStack[].class, PacketSerializable::readItemStackArray, PacketSerializable::writeItemStackArray);
+        addIOHandler(BlockPos[].class, PacketSerializable::readBlockPosArray, PacketSerializable::writeBlockPosArray);
+        addIOHandler(IBlockState[].class, PacketSerializable::readStateArray, PacketSerializable::writeStateArray);
+        addIOHandler(ResourceLocation[].class, PacketSerializable::readResourceLocationArray, PacketSerializable::writeResourceLocationArray);
+        addIOHandler(EnchantmentData[].class, PacketSerializable::readEnchantmentDataArray, PacketSerializable::writeEnchantmentDataArray);
     }
 
     /**

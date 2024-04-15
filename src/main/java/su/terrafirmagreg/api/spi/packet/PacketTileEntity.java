@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.network;
+package su.terrafirmagreg.api.spi.packet;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 
@@ -9,7 +9,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class TileEntityMessage<T extends TileEntity> extends SerializableMessage {
+public abstract class PacketTileEntity<T extends TileEntity> extends PacketSerializable {
 
     /**
      * The serial version UID.
@@ -34,14 +34,14 @@ public abstract class TileEntityMessage<T extends TileEntity> extends Serializab
     /**
      * Blank constructor required for all messages.
      */
-    public TileEntityMessage() {}
+    public PacketTileEntity() {}
 
     /**
      * Basic constructor for a tile entity update message.
      *
      * @param pos The position of the tile entity.
      */
-    public TileEntityMessage(BlockPos pos) {
+    public PacketTileEntity(BlockPos pos) {
 
         this.pos = pos;
     }

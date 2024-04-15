@@ -5,17 +5,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 
+
 import io.netty.buffer.ByteBuf;
 
-public abstract class PacketBlockPosBase<REQ extends IMessage> implements IMessage, IMessageHandler<REQ, IMessage> {
+public abstract class PacketBaseBlockPos<REQ extends IMessage> implements IMessage, IMessageHandler<REQ, IMessage> {
 
     protected BlockPos blockPos;
 
-    public PacketBlockPosBase() {
+    public PacketBaseBlockPos() {
         // serialization
     }
 
-    public PacketBlockPosBase(BlockPos blockPos) {
+    public PacketBaseBlockPos(BlockPos blockPos) {
 
         this.blockPos = blockPos;
     }

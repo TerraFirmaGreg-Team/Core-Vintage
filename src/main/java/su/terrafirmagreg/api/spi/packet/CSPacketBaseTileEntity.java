@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class CSPacketBaseTileEntity<REQ extends CSPacketBaseTileEntity> extends PacketBlockPosBase<REQ> {
+public abstract class CSPacketBaseTileEntity<REQ extends CSPacketBaseTileEntity> extends PacketBaseBlockPos<REQ> {
 
     public CSPacketBaseTileEntity() {
         // serialization

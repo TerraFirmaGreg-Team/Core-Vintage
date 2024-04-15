@@ -63,8 +63,9 @@ public abstract class ModuleBase {
     protected RegistryManager registryManager;
     protected IPacketRegistry packetRegistry;
     protected IPacketService packetService;
-    protected ThreadedNetworkWrapper threadedNetworkWrapper;
-    protected NetworkEntityIdSupplier networkEntityIdSupplier;
+
+    private ThreadedNetworkWrapper threadedNetworkWrapper;
+    private NetworkEntityIdSupplier networkEntityIdSupplier;
 
     @Getter
     private Registry registry;

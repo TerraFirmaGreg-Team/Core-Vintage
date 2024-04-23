@@ -216,7 +216,7 @@ public final class ModUtils {
 
         final Multimap<String, T> map = ArrayListMultimap.create();
 
-        for (final T entry : registry.getValues()) {
+        for (final T entry : registry.getValuesCollection()) {
 
             if (entry.getRegistryName() != null) {
 

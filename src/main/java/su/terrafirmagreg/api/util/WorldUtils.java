@@ -25,10 +25,8 @@ public final class WorldUtils {
     public static String getWorldName(World world) {
 
         String result = "Unknown";
-
-        // TODO add more fallback options
-        if (world.provider != null) {
-            result = world.provider.getDimensionType().getName();
+        if (world instanceof WorldServer) {
+            result = world.getSaveHandler().getWorldDirectory().getName();
         }
 
         return result;
@@ -43,6 +41,18 @@ public final class WorldUtils {
     public static int getLoadedChunks(WorldServer world) {
 
         return world.getChunkProvider() != null ? world.getChunkProvider().getLoadedChunkCount() : -1;
+    }
+
+    public static String getDimensionName(World world) {
+
+        String result = "Unknown";
+
+        // TODO add more fallback options
+        if (world.provider != null) {
+            result = world.provider.getDimensionType().getName();
+        }
+
+        return result;
     }
 
     /**

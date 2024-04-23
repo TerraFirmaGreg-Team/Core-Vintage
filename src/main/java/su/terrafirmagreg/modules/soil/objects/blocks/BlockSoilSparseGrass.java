@@ -16,9 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class BlockSoilDryGrass extends BlockSoilGrass implements ISoilBlock {
+public class BlockSoilSparseGrass extends BlockSoilGrass implements ISoilBlock {
 
-    public BlockSoilDryGrass(SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilSparseGrass(SoilBlockVariant blockVariant, SoilType type) {
         super(blockVariant, type);
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

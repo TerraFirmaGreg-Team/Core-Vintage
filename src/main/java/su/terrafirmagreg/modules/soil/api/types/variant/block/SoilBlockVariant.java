@@ -6,10 +6,12 @@ import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.Block;
 
+
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -86,7 +88,7 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
      * @return Вариант блока почвы без травы.
      */
     public SoilBlockVariant getNonGrassVersion() {
-        if (this == GRASS || this == DRY_GRASS) return DIRT;
+        if (this == GRASS || this == DRY_GRASS || this == SPARSE_GRASS) return DIRT;
 
         if (this == CLAY_GRASS) return CLAY;
 
@@ -100,13 +102,11 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
      * @return Вариант блока почвы с травой.
      */
     public SoilBlockVariant getGrassVersion(SoilBlockVariant spreader) {
-        if (this == DIRT) return CLAY_GRASS;
+        if (this.isGrass()) return this;
+        if (this == DIRT) return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
+        if (this == CLAY) return spreader == DRY_CLAY_GRASS ? DRY_CLAY_GRASS : CLAY_GRASS;
 
-        if (this == CLAY) {
-            return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
-        }
-
-        throw new IllegalArgumentException(String.format("You cannot get grass from [%s] types.", spreader.toString()));
+        throw new IllegalArgumentException(String.format("You cannot get grass from [%s] types.", this));
     }
 
     /**
@@ -115,8 +115,7 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
      * @return true, если вариант блока почвы с травой, иначе false.
      */
     public boolean isGrass() {
-        return this == GRASS || this == DRY_GRASS ||
-                this == CLAY_GRASS;
+        return this == GRASS || this == DRY_GRASS || this == CLAY_GRASS || this == DRY_CLAY_GRASS || this == PODZOL || this == MYCELIUM;
     }
 
     @Override

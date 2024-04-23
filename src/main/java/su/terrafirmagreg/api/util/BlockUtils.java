@@ -1,7 +1,9 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeatGrass;
 
@@ -9,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.BlockStaticLiquid;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -22,6 +25,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.oredict.OreDictionary;
 
+
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -342,37 +347,159 @@ public final class BlockUtils {
         return world.getBlockState(pos).getActualState(world, pos);
     }
 
+    public static boolean isSoilBlockType(ISoilBlock soilBlock, SoilBlockVariant... variants) {
+        var blockVariant = soilBlock.getBlockVariant();
+        for (var variant : variants) {
+            if (blockVariant == variant) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isRockBlockType(IRockBlock rockBlock, RockBlockVariant... variants) {
+        var blockVariant = rockBlock.getBlockVariant();
+        for (var variant : variants) {
+            if (blockVariant == variant) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean isGrass(IBlockState current) {
-        if (current.getBlock() instanceof BlockSoilPeatGrass) return true;
-        if (current.getBlock() instanceof ISoilBlock soil) {
-            var variant = soil.getBlockVariant();
-            return variant == GRASS || variant == DRY_GRASS ||
-                    variant == CLAY_GRASS;
+        var block = current.getBlock();
+        if (block instanceof BlockSoilPeatGrass) return true;
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil, GRASS, DRY_GRASS, CLAY_GRASS, SPARSE_GRASS, DRY_CLAY_GRASS);
+        }
+        return false;
+    }
+
+    public static boolean isDirt(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil, DIRT, COARSE_DIRT, ROOTED_DIRT);
         }
         return false;
     }
 
     public static boolean isSoil(IBlockState current) {
-        if (current.getBlock() instanceof BlockSoilPeat) return true;
-        if (current.getBlock() instanceof ISoilBlock soil) {
-            var variant = soil.getBlockVariant();
-            return variant == GRASS || variant == DRY_GRASS ||
-                    variant == DIRT || variant == CLAY ||
-                    variant == CLAY_GRASS;
+        var block = current.getBlock();
+        if (block instanceof BlockSoilPeat) return true;
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil,
+                    GRASS, DRY_GRASS, PODZOL,
+                    MYCELIUM, DIRT, COARSE_DIRT,
+                    SPARSE_GRASS, ROOTED_DIRT, CLAY,
+                    CLAY_GRASS, DRY_CLAY_GRASS);
+        }
+        return false;
+    }
+
+    public static boolean isDryGrass(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil, DRY_GRASS, DRY_CLAY_GRASS);
+        }
+        return false;
+    }
+
+    public static boolean isSparseGrass(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil, SPARSE_GRASS);
+        }
+        return false;
+    }
+
+    public static boolean isClay(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil, CLAY, CLAY_GRASS, DRY_CLAY_GRASS);
         }
         return false;
     }
 
     public static boolean isGround(IBlockState current) {
-        if (current.getBlock() instanceof IRockBlock rockTypeBlock) {
-            var variant = rockTypeBlock.getBlockVariant();
-            return variant == GRAVEL || variant == SAND || variant == RAW;
+        var block = current.getBlock();
+        if (block instanceof IRockBlock rock) {
+            return isRockBlockType(rock, GRAVEL, SAND, RAW);
         }
-        if (current.getBlock() instanceof ISoilBlock soilTypeBlock) {
-            var variant = soilTypeBlock.getBlockVariant();
-            return variant == GRASS || variant == DRY_GRASS || variant == DIRT;
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil,
+                    GRASS, DRY_GRASS, COARSE_DIRT,
+                    SPARSE_GRASS, ROOTED_DIRT, DIRT,
+                    MUD, PODZOL, MYCELIUM, CLAY_GRASS,
+                    DRY_CLAY_GRASS, CLAY);
         }
         return false;
+    }
+
+    public static boolean isGrowableSoil(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil,
+                    GRASS, DRY_GRASS, SPARSE_GRASS,
+                    DIRT, PODZOL, MYCELIUM,
+                    CLAY_GRASS, DRY_CLAY_GRASS, CLAY);
+        }
+        return false;
+    }
+
+    public static boolean isSoilOrGravel(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof IRockBlock rock) {
+            return isRockBlockType(rock, GRAVEL);
+        }
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil,
+                    GRASS, DRY_GRASS, COARSE_DIRT,
+                    SPARSE_GRASS, ROOTED_DIRT, DIRT,
+                    MUD, PODZOL, MYCELIUM, CLAY_GRASS,
+                    DRY_CLAY_GRASS, CLAY);
+        }
+        return false;
+    }
+
+    public static boolean isRawStone(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof IRockBlock rock) {
+            return isRockBlockType(rock, RAW, MOSSY_RAW);
+        }
+        return false;
+    }
+
+    public static boolean isSand(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof IRockBlock rock) {
+            return isRockBlockType(rock, SAND);
+        }
+        return false;
+    }
+
+    public static boolean isPodzol(IBlockState current) {
+        var block = current.getBlock();
+        if (block instanceof ISoilBlock soil) {
+            return isSoilBlockType(soil, PODZOL);
+        }
+        return false;
+    }
+
+    public static boolean isWater(IBlockState current) {
+        return current.getMaterial() == Material.WATER;
+    }
+
+    public static boolean isFreshWater(IBlockState current) {
+        return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
+    }
+
+    public static boolean isSaltWater(IBlockState current) {
+        return current == FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
+    }
+
+    public static boolean isFreshWaterOrIce(IBlockState current) {
+        return current.getBlock() == Blocks.ICE || BlockUtils.isFreshWater(current);
     }
 
     public interface IBlockAction {

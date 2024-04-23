@@ -16,6 +16,7 @@ import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilMycelium;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPodzol;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilRootedDirt;
 
+
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_SOIL;
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
@@ -57,6 +58,11 @@ public class SoilBlockVariantHandler {
                 .setFactory(BlockSoilDirt::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
+
+        //        SPARSE_GRASS = new SoilBlockVariant.Builder("sparse_grass")
+        //                .setFactory(BlockSoilSparseGrass::new)
+        //                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+        //                .build();
 
         ROOTED_DIRT = new SoilBlockVariant.Builder("rooted_dirt")
                 .setFactory(BlockSoilRootedDirt::new)

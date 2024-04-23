@@ -9,6 +9,7 @@ public class SoilBlockVariants {
     public static SoilBlockVariant GRASS_PATH;
     public static SoilBlockVariant DIRT;
     public static SoilBlockVariant COARSE_DIRT;
+    public static SoilBlockVariant SPARSE_GRASS;
     public static SoilBlockVariant ROOTED_DIRT;
     public static SoilBlockVariant FARMLAND;
     public static SoilBlockVariant CLAY_GRASS;

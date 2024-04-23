@@ -113,8 +113,7 @@ public class TEWoodBarrel extends TEBaseTickableInventory
             }
             FluidStack storing = tank.getFluid();
             if (storing != null || inventoryTag != null || surplusTag != null) {
-                itemBarrelFluidHandler.setBarrelContents(storing, inventoryTag, surplusTag, sealedTick,
-                        sealedCalendarTick);
+                itemBarrelFluidHandler.setBarrelContents(storing, inventoryTag, surplusTag, sealedTick, sealedCalendarTick);
             }
         }
     }

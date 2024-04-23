@@ -5,13 +5,15 @@ import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
 import net.minecraft.util.ResourceLocation;
 
+
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Set;

@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import org.jetbrains.annotations.Nullable;
-
-
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.BlockUtils;
@@ -36,11 +33,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import lombok.Getter;
-
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.Random;
 
@@ -125,15 +123,23 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
                 // Генерируем траву в зависимости от типа текущего блока
                 if (currentBlock instanceof BlockSoilPeat) {
                     world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
-                } else if (currentBlock instanceof ISoilBlock block) {
+                } else if (currentBlock instanceof ISoilBlock soilBlock) {
                     SoilBlockVariant spreader = SoilBlockVariants.GRASS;
 
                     // Проверяем тип блока, с которого распространяется трава
-                    if (usBlock instanceof ISoilBlock && ((ISoilBlock) usBlock).getBlockVariant() == SoilBlockVariants.DRY_GRASS) {
-                        spreader = SoilBlockVariants.DRY_GRASS;
+                    if (usBlock instanceof ISoilBlock) {
+                        if (BlockUtils.isDryGrass(usBlock.getDefaultState())) {
+                            spreader = SoilBlockVariants.DRY_GRASS;
+                        } else if (BlockUtils.isSparseGrass(usBlock.getDefaultState())) {
+                            spreader = SoilBlockVariants.DRY_CLAY_GRASS;
+                        } else {
+                            spreader = SoilBlockVariants.GRASS;
+                        }
+
                     }
 
-                    world.setBlockState(pos, block.getBlockVariant().getGrassVersion(spreader).get(block.getType()).getDefaultState());
+                    var s = soilBlock.getBlockVariant().getGrassVersion(spreader);
+                    world.setBlockState(target, s.get(soilBlock.getType()).getDefaultState());
                 }
             }
             // Генерируем короткую траву на верхнем блоке с определенной вероятностью

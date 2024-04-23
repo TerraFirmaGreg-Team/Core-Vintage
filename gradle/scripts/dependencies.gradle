@@ -42,7 +42,7 @@ def use_util = true
 
 dependencies {
 
-    compileOnly fileTree(include: ["*.jar"], dir: "libs")
+    //compileOnly fileTree(include: ["*.jar"], dir: "libs")
 
     // Утилиты и вспомогательные моды
     if (use_util.toBoolean()) {

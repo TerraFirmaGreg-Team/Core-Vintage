@@ -40,7 +40,6 @@ import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.player.CapPlayerDataFL;
 import com.eerussianguy.firmalife.player.PlayerDataFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.FluidsFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IFruitTree;
@@ -91,13 +90,13 @@ public class CommonEventHandlerFL {
                     if (entity instanceof EntityAnimalYak)//have to check the original entity to get the proper instanceof however
                     {
                         foundMilkable = true;
-                        fluid = FluidsFL.YAK_MILK.get();
+                        fluid = FluidsTFC.YAK_MILK.get();
                     } else if (entity instanceof EntityAnimalGoat) {
                         foundMilkable = true;
-                        fluid = FluidsFL.GOAT_MILK.get();
+                        fluid = FluidsTFC.GOAT_MILK.get();
                     } else if (entity instanceof EntityAnimalZebu) {
                         foundMilkable = true;
-                        fluid = FluidsFL.ZEBU_MILK.get();
+                        fluid = FluidsTFC.ZEBU_MILK.get();
                     }
                     if (foundMilkable) {
                         if (cow.getFamiliarity() > 0.15f && cow.isReadyForAnimalProduct()) {

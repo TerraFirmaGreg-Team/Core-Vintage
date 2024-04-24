@@ -7,6 +7,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -16,6 +17,7 @@ import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import tfctech.client.gui.GuiGlassworking;
 import tfctech.client.gui.GuiSmelteryCauldron;
 import tfctech.compat.jei.categories.GlassworkingCategory;
@@ -26,7 +28,6 @@ import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
 import tfctech.compat.jei.wrappers.SmelteryRecipeWrapper;
 import tfctech.compat.jei.wrappers.UnmoldRecipeWrapper;
 import tfctech.objects.blocks.TechBlocks;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.TechItems;
 import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.metal.ItemTechMetal;
@@ -98,7 +99,7 @@ public class TechJEIPlugin implements IModPlugin {
 
         // Information
         registry.addIngredientInfo(new ItemStack(TechItems.IRON_GROOVE), VanillaTypes.ITEM, "jei.information.tfctech.groove");
-        registry.addIngredientInfo(new FluidStack(TechFluids.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
+        registry.addIngredientInfo(new FluidStack(FluidsTFC.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
         registry.addIngredientInfo(new ItemStack(TechBlocks.FRIDGE), VanillaTypes.ITEM, "jei.information.tfctech.fridge");
         registry.addIngredientInfo(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), VanillaTypes.ITEM, "jei.information.tfctech.wiredraw");
         registry.addIngredientInfo(new ItemStack(TechBlocks.INDUCTION_CRUCIBLE), VanillaTypes.ITEM, "jei.information.tfctech.crucible");
@@ -124,7 +125,7 @@ public class TechJEIPlugin implements IModPlugin {
         ItemStack input = new ItemStack(TechItems.MOLD_BLOCK);
         IFluidHandlerItem cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (cap != null) {
-            cap.fill(new FluidStack(TechFluids.GLASS.get(), 1000), true);
+            cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 1000), true);
         }
         unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS)));
         registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");
@@ -132,7 +133,7 @@ public class TechJEIPlugin implements IModPlugin {
         input = new ItemStack(TechItems.MOLD_PANE);
         cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (cap != null) {
-            cap.fill(new FluidStack(TechFluids.GLASS.get(), 375), true);
+            cap.fill(new FluidStack(FluidsTFC.GLASS.get(), 375), true);
         }
         unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS_PANE)));
         registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");

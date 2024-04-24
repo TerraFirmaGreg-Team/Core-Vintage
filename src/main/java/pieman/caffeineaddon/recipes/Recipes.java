@@ -1,11 +1,15 @@
 package pieman.caffeineaddon.recipes;
 
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+
 
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -17,7 +21,6 @@ import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.calendar.ICalendar;
-import pieman.caffeineaddon.init.ModFluids;
 import pieman.caffeineaddon.init.ModItems;
 
 import static net.dries007.tfc.objects.fluids.FluidsTFC.FRESH_WATER;
@@ -55,7 +58,7 @@ public class Recipes {
         event.getRegistry().registerAll(
                 //new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 500), IIngredient.of(ModItems.GroundCoffee), new FluidStack(ModFluids.COFFEE.get(), 500), ItemStack.EMPTY, 0).setRegistryName("coffee_hot"),
                 new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), IIngredient.of(ModItems.GroundCoffee),
-                        new FluidStack(ModFluids.COFFEE.get(), 500), ItemStack.EMPTY, 16 * ICalendar.TICKS_IN_HOUR).setRegistryName("coffee_cold")
+                        new FluidStack(FluidsTFC.COFFEE.get(), 500), ItemStack.EMPTY, 16 * ICalendar.TICKS_IN_HOUR).setRegistryName("coffee_cold")
         );
     }
 

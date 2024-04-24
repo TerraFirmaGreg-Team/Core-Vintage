@@ -15,6 +15,6 @@ public final class FluidProperty<T> {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof FluidProperty && ((FluidProperty) obj).name.equals(this.name);
+        return obj instanceof FluidProperty && ((FluidProperty<?>) obj).name.equals(this.name);
     }
 }

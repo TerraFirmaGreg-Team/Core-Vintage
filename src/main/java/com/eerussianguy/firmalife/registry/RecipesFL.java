@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.Fruit;
 import com.eerussianguy.firmalife.init.PlantsFL;
@@ -191,7 +192,7 @@ public class RecipesFL {
         ItemStack filled_coconut = new ItemStack(ItemsFL.CRACKED_COCONUT);
         IFluidHandler fluidHandler = filled_coconut.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (fluidHandler != null)
-            fluidHandler.fill(new FluidStack(FluidsFL.COCONUT_MILK.get(), 1000), true);
+            fluidHandler.fill(new FluidStack(FluidsTFC.COCONUT_MILK.get(), 1000), true);
 
         IForgeRegistry<CrackingRecipe> r = event.getRegistry();
         r.registerAll(
@@ -211,9 +212,9 @@ public class RecipesFL {
         r.registerAll(
                 new StrainingRecipe(IIngredient.of(FluidsTFC.CURDLED_MILK.get(), 500), new ItemStack(ItemsFL.MILK_CURD), null).setRegistryName(
                         "milk_curd"),
-                new StrainingRecipe(IIngredient.of(FluidsFL.CURDLED_GOAT_MILK.get(), 500), new ItemStack(ItemsFL.GOAT_CURD), null).setRegistryName(
+                new StrainingRecipe(IIngredient.of(FluidsTFC.CURDLED_GOAT_MILK.get(), 500), new ItemStack(ItemsFL.GOAT_CURD), null).setRegistryName(
                         "goat_curd"),
-                new StrainingRecipe(IIngredient.of(FluidsFL.CURDLED_YAK_MILK.get(), 500), new ItemStack(ItemsFL.YAK_CURD), null).setRegistryName(
+                new StrainingRecipe(IIngredient.of(FluidsTFC.CURDLED_YAK_MILK.get(), 500), new ItemStack(ItemsFL.YAK_CURD), null).setRegistryName(
                         "yak_curd")
         );
     }

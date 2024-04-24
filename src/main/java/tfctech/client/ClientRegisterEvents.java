@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -15,7 +14,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -25,6 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
@@ -71,10 +70,6 @@ public final class ClientRegisterEvents {
         for (Item item : TechItems.getAllSimpleItems())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
                     .toString()));
-
-        for (Block block : TechBlocks.getAllFluidBlocks())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
-
         // Item Blocks
         for (ItemBlock item : TechBlocks.getAllInventoryItemBlocks()) {
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
@@ -88,8 +83,7 @@ public final class ClientRegisterEvents {
 
         // Metals
         for (Item item : TechItems.getAllMetalItems()) {
-            if (item instanceof ItemTechMetal) {
-                ItemTechMetal metalItem = (ItemTechMetal) item;
+            if (item instanceof ItemTechMetal metalItem) {
                 ModelLoader.setCustomModelResourceLocation(item, 0,
                         new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem.getType()
                                 .name()

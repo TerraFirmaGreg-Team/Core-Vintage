@@ -1,5 +1,7 @@
 package tfctech.objects.tileentities;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,16 +16,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.te.TEBase;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
-
-
 import tfctech.TFCTech;
 import tfctech.network.PacketLatexUpdate;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.TechItems;
 
 import org.jetbrains.annotations.NotNull;
@@ -143,7 +140,7 @@ public class TELatexExtractor extends TEBase implements ITickable {
             if (cap != null) {
                 FluidStack fluidStack = cap.drain(MAX_FLUID, false);
                 if (fluidStack != null) {
-                    if (fluidStack.getFluid() != TechFluids.LATEX.get()) {
+                    if (fluidStack.getFluid() != FluidsTFC.LATEX.get()) {
                         return false;
                     } else {
                         fluid = Math.min(fluidStack.amount, MAX_FLUID);
@@ -168,7 +165,7 @@ public class TELatexExtractor extends TEBase implements ITickable {
         ItemStack stack = new ItemStack(TechItems.FLUID_BOWL);
         IFluidHandler cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (cap != null && hasFluid()) {
-            cap.fill(new FluidStack(TechFluids.LATEX.get(), fluid), true);
+            cap.fill(new FluidStack(FluidsTFC.LATEX.get(), fluid), true);
         }
         if (flowTicks > -1) {
             flowTicks = 0;

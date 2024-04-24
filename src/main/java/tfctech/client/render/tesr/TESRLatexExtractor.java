@@ -1,5 +1,8 @@
 package tfctech.client.render.tesr;
 
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -14,9 +17,9 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fluids.Fluid;
 
+
 import net.dries007.tfc.client.FluidSpriteCache;
 import org.lwjgl.opengl.GL11;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.tileentities.TELatexExtractor;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
@@ -29,7 +32,7 @@ public class TESRLatexExtractor extends TileEntitySpecialRenderer<TELatexExtract
     public void render(TELatexExtractor te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (te.hasWorld()) {
             IBlockState state = te.getBlockState();
-            Fluid flowing = TechFluids.LATEX.get();
+            Fluid flowing = FluidsTFC.LATEX.get();
 
             //Update state values according to TE
 

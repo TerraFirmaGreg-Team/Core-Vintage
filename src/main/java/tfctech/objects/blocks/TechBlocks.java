@@ -1,19 +1,17 @@
 package tfctech.objects.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import tfctech.objects.blocks.devices.BlockElectricForge;
 import tfctech.objects.blocks.devices.BlockFridge;
@@ -22,7 +20,6 @@ import tfctech.objects.blocks.devices.BlockLatexExtractor;
 import tfctech.objects.blocks.devices.BlockSmelteryCauldron;
 import tfctech.objects.blocks.devices.BlockSmelteryFirebox;
 import tfctech.objects.blocks.devices.BlockWireDrawBench;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.itemblocks.ItemBlockFridge;
 import tfctech.objects.items.itemblocks.ItemBlockWireDrawBench;
 import tfctech.objects.tileentities.TEElectricForge;
@@ -32,6 +29,8 @@ import tfctech.objects.tileentities.TELatexExtractor;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 import tfctech.objects.tileentities.TEWireDrawBench;
+
+import lombok.Getter;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.util.Helpers.getNull;
@@ -50,33 +49,15 @@ public final class TechBlocks {
     public static final BlockSmelteryCauldron SMELTERY_CAULDRON = getNull();
     public static final BlockSmelteryFirebox SMELTERY_FIREBOX = getNull();
 
-    private static ImmutableList<ItemBlock> allInventoryItemBlocks, allTEISRBlocks;
-    private static ImmutableList<BlockFluidBase> allFluidBlocks;
-
-    public static ImmutableList<ItemBlock> getAllInventoryItemBlocks() {
-        return allInventoryItemBlocks;
-    }
-
-    public static ImmutableList<ItemBlock> getAllTEISRBlocks() {
-        return allTEISRBlocks;
-    }
-
-    public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
-        return allFluidBlocks;
-    }
+    @Getter
+    private static ImmutableList<ItemBlock> allInventoryItemBlocks;
+    @Getter
+    private static ImmutableList<ItemBlock> allTEISRBlocks;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
 
         IForgeRegistry<Block> r = event.getRegistry();
-        TechFluids.registerFluids();
-
-        ImmutableList.Builder<BlockFluidBase> b = ImmutableList.builder();
-        if (TechFluids.LATEX.isDefault()) {
-            b.add(register(r, "fluid/" + TechFluids.LATEX.get()
-                    .getName(), new BlockFluidTFC(TechFluids.LATEX.get(), Material.WATER)));
-        }
-        allFluidBlocks = b.build();
 
         //Normal inventory Blocks
         ImmutableList.Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();

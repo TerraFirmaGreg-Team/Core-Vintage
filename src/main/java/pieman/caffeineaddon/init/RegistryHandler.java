@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.blocks.BlockCoffeeTreeLeaves;
 import pieman.caffeineaddon.blocks.TEDryingMat;
@@ -33,7 +34,6 @@ public class RegistryHandler {
 
     @SubscribeEvent
     public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-        ModFluids.registerFluids();
         event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
     }
 

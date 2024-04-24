@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -59,7 +58,6 @@ import com.eerussianguy.firmalife.te.TETurntable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
@@ -68,7 +66,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -141,7 +138,6 @@ public class BlocksFL {
     private static ImmutableList<Block> allFoodIBs = Helpers.getNull();
     private static ImmutableList<BlockFruitTreeLeaves> allFruitLeaves = Helpers.getNull();
     private static ImmutableList<BlockFruitTreeSapling> allFruitSaps = Helpers.getNull();
-    private static ImmutableList<BlockFluidBase> allFluidBlocks = Helpers.getNull();
     private static ImmutableList<BlockCropDead> allDeadCrops = Helpers.getNull();
     private static ImmutableList<BlockStemCrop> allCropBlocks = Helpers.getNull();
     private static ImmutableList<BlockJackOLantern> allJackOLanterns = Helpers.getNull();
@@ -180,10 +176,6 @@ public class BlocksFL {
         return allCropBlocks;
     }
 
-    public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
-        return allFluidBlocks;
-    }
-
     public static ImmutableList<BlockJackOLantern> getAllJackOLanterns() {
         return allJackOLanterns;
     }
@@ -194,7 +186,6 @@ public class BlocksFL {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        FluidsFL.registerFluids();//this has to come first
         IForgeRegistry<Block> r = event.getRegistry();
 
         Builder<ItemBlock> IBs = ImmutableList.builder();
@@ -286,11 +277,6 @@ public class BlocksFL {
             cropBlocks.add(register(r, "crop/" + crop.name().toLowerCase(), BlockStemCrop.create(crop)));
         }
 
-        Builder<BlockFluidBase> fluids = ImmutableList.builder();
-        for (FluidWrapper wrapper : FluidsFL.getAllFiniteFluids()) {
-            fluids.add(register(r, wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
-        }
-        allFluidBlocks = fluids.build();
         allNormalIBs = normalIBs.build();
         allNormalIBs.forEach((x) -> {
             IBs.add(new ItemBlockTFC(x));
@@ -330,10 +316,10 @@ public class BlocksFL {
         register(TEClimateStation.class, "climate_station");
         register(TETurntable.class, "turntable");
         //needs fix
-        FluidsTFC.getWrapper(FluidsFL.COCONUT_MILK.get());
-        FluidsTFC.getWrapper(FluidsFL.YAK_MILK.get());
-        FluidsTFC.getWrapper(FluidsFL.GOAT_MILK.get());
-        FluidsTFC.getWrapper(FluidsFL.ZEBU_MILK.get());
+        FluidsTFC.getWrapper(FluidsTFC.COCONUT_MILK.get());
+        FluidsTFC.getWrapper(FluidsTFC.YAK_MILK.get());
+        FluidsTFC.getWrapper(FluidsTFC.GOAT_MILK.get());
+        FluidsTFC.getWrapper(FluidsTFC.ZEBU_MILK.get());
     }
 
     private static void doFruitAdditions(IForgeRegistry<Block> r, String name,

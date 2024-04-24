@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import tfctech.objects.blocks.devices.BlockFridge;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
@@ -31,8 +32,7 @@ public final class ClientEvents {
         EntityPlayer player = event.getPlayer();
         IBlockState state = world.getBlockState(pos);
 
-        if (state.getBlock() instanceof BlockFridge) {
-            BlockFridge fridge = (BlockFridge) state.getBlock();
+        if (state.getBlock() instanceof BlockFridge fridge) {
             if (state.getValue(BlockFridge.UPPER)) {
                 pos = pos.down();
             }
@@ -43,8 +43,11 @@ public final class ClientEvents {
                 double d4 = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) event.getPartialTicks();
                 double d5 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) event.getPartialTicks();
                 GlStateManager.enableBlend();
-                GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                        GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                GlStateManager.tryBlendFuncSeparate(
+                        GlStateManager.SourceFactor.SRC_ALPHA,
+                        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                        GlStateManager.SourceFactor.ONE,
+                        GlStateManager.DestFactor.ZERO);
                 GlStateManager.glLineWidth(2.0F);
                 GlStateManager.disableTexture2D();
                 GlStateManager.depthMask(false);

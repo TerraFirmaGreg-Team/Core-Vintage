@@ -21,9 +21,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
+
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
@@ -31,17 +31,16 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.recipes.ShapelessDamageRecipe;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
 import tfctech.TechConfig;
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.api.recipes.SmelteryRecipe;
 import tfctech.api.recipes.WireDrawingRecipe;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.TechItems;
 import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.metal.ItemTechMetal;
@@ -70,14 +69,6 @@ public final class TechRecipes {
             });
             removeList.forEach(stack -> FurnaceRecipes.instance().getSmeltingList().remove(stack));
         }
-    }
-
-    @SubscribeEvent
-    public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
-        event.getRegistry().registerAll(
-                new BarrelRecipe(IIngredient.of(TechFluids.LATEX.get(), 100), IIngredient.of(new ItemStack(TechItems.VULCANIZING_AGENTS)), null,
-                        new ItemStack(TechItems.RUBBER_MIX, 6), 8 * ICalendar.TICKS_IN_HOUR).setRegistryName("rubber_mix")
-        );
     }
 
     @SubscribeEvent
@@ -213,24 +204,24 @@ public final class TechRecipes {
                         .addInput(IIngredient.of("dustPotash"))
                         .addInput(IIngredient.of("sandSilica"))
                         .addInput(IIngredient.of("dustLime"))
-                        .setOutput(new FluidStack(TechFluids.GLASS.get(), 1000), 800)
+                        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800)
                         .build()
                         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass")),
                 new SmelteryRecipe.Builder()
                         .addInput(IIngredient.of("blockGlass"))
-                        .setOutput(new FluidStack(TechFluids.GLASS.get(), 1000), 800).build()
+                        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 1000), 800).build()
                         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_block")),
                 new SmelteryRecipe.Builder()
                         .addInput(IIngredient.of("paneGlass"))
-                        .setOutput(new FluidStack(TechFluids.GLASS.get(), 375), 800).build()
+                        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 375), 800).build()
                         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_pane")),
                 new SmelteryRecipe.Builder()
                         .addInput(IIngredient.of(ItemsCore.GLASS_SHARD))
-                        .setOutput(new FluidStack(TechFluids.GLASS.get(), 500), 800).build()
+                        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 500), 800).build()
                         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_shard")),
                 new SmelteryRecipe.Builder()
                         .addInput(IIngredient.of(Items.GLASS_BOTTLE))
-                        .setOutput(new FluidStack(TechFluids.GLASS.get(), 250), 800).build()
+                        .setOutput(new FluidStack(FluidsTFC.GLASS.get(), 250), 800).build()
                         .setRegistryName(new ResourceLocation(MODID_TFCTECH, "glass_bottle"))
         );
     }

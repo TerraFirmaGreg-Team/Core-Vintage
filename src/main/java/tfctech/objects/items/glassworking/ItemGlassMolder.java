@@ -1,5 +1,8 @@
 package tfctech.objects.items.glassworking;
 
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+
+
 import su.terrafirmagreg.api.lib.Constants;
 
 import net.minecraft.client.resources.I18n;
@@ -17,6 +20,7 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
@@ -25,7 +29,6 @@ import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.ItemMiscTech;
 
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +68,7 @@ public class ItemGlassMolder extends ItemMiscTech {
             this.capacity = capacity;
             this.heatCapacity = 1;
             this.meltTemp = Heat.maxVisibleTemperature();
-            this.tank = new FluidWhitelistHandler(stack, capacity, Sets.newHashSet(TechFluids.GLASS.get()));
+            this.tank = new FluidWhitelistHandler(stack, capacity, Sets.newHashSet(FluidsTFC.GLASS.get()));
             deserializeNBT(nbt);
         }
 

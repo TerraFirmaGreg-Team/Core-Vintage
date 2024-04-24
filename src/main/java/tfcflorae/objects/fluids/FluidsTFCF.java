@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
+
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.api.capability.food.FoodData;
@@ -186,8 +187,7 @@ public final class FluidsTFCF {
 
     public static void registerFluids() {
         DrinkableProperty milkProperty = player -> {
-            if (player.getFoodStats() instanceof IFoodStatsTFC) {
-                IFoodStatsTFC foodStats = (IFoodStatsTFC) player.getFoodStats();
+            if (player.getFoodStats() instanceof IFoodStatsTFC foodStats) {
                 foodStats.addThirst(10);
                 foodStats.getNutrition().addBuff(FoodData.MILK);
             }

@@ -9,6 +9,7 @@ import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
 import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
 import su.terrafirmagreg.modules.core.init.PacketCore;
@@ -49,6 +50,7 @@ public final class ModuleCore extends ModuleBase {
     @Override
     public void onRegister() {
         BlocksCore.onRegister(registryManager);
+        FluidsCore.onRegister(registryManager);
         ItemsCore.onRegister(registryManager);
         PotionsCore.onRegister(registryManager);
         LootTablesCore.onRegister(registryManager);

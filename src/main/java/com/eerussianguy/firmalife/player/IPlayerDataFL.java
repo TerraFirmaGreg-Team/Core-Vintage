@@ -2,9 +2,9 @@ package com.eerussianguy.firmalife.player;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-public interface IPlayerDataFL extends INBTSerializable<NBTTagCompound> {
+public interface IPlayerDataFL extends ICapabilitySerializable<NBTTagCompound> {
 
     /**
      * Sets the time the player last hit a nut tree to current time

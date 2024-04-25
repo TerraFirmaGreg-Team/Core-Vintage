@@ -1,0 +1,123 @@
+package su.terrafirmagreg.modules.core.api.capabilities.heat;
+
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
+
+public final class CapabilityHeat {
+
+    public static final ResourceLocation KEY = ModUtils.id("heat_capability");
+    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
+
+    @CapabilityInject(ICapabilityHeat.class)
+    public static Capability<ICapabilityHeat> HEAT_CAPABILITY;
+
+    public static void preInit() {
+        CapabilityManager.INSTANCE.register(ICapabilityHeat.class, new StorageHeat(), ProviderHeat::new);
+
+    }
+
+    public static void init() {
+        //register heat on vanilla egg for cooking
+        CapabilityHeat.CUSTOM_ITEMS.put(IIngredient.of(Items.EGG), () -> new ProviderHeat(null, 1, 480));
+        CapabilityHeat.CUSTOM_ITEMS.put(IIngredient.of("blockClay"), () -> new ProviderHeat(null, 1, 600));
+        CapabilityHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.GLASS_SHARD), () -> new ProviderHeat(null, 1, 1000));
+        CapabilityHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsWood.STICK_BUNCH), () -> new ProviderHeat(null, 1, 200));
+        CapabilityHeat.CUSTOM_ITEMS.put(IIngredient.of("terracotta"), () -> new ProviderHeat(null, 1, 1200));
+        CapabilityHeat.CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS),
+                () -> new ProviderHeat(null, Metal.WROUGHT_IRON.getSpecificHeat(), Metal.WROUGHT_IRON.getMeltTemp()));
+    }
+
+    public static ICapabilityHeat get(ItemStack itemStack) {
+        return itemStack.getCapability(HEAT_CAPABILITY, null);
+    }
+
+    public static boolean has(ItemStack itemStack) {
+        return itemStack.hasCapability(HEAT_CAPABILITY, null);
+    }
+
+    /**
+     * Helper method to adjust temperature towards a value, without overshooting or stuttering
+     */
+    public static float adjustTempTowards(float temp, float target, float delta) {
+        return adjustTempTowards(temp, target, delta, delta);
+    }
+
+    public static float adjustTempTowards(float temp, float target, float deltaPositive, float deltaNegative) {
+        if (temp < target) {
+            return Math.min(temp + deltaPositive, target);
+        } else if (temp > target) {
+            return Math.max(temp - deltaNegative, target);
+        } else {
+            return target;
+        }
+    }
+
+    /**
+     * Call this from within {@link ICapabilityHeat#getTemperature()}
+     */
+    public static float adjustTemp(float temp, float heatCapacity, long ticksSinceUpdate) {
+        if (ticksSinceUpdate <= 0) return temp;
+        final float newTemp = temp - heatCapacity * (float) ticksSinceUpdate * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
+        return newTemp < 0 ? 0 : newTemp;
+    }
+
+    public static void addTemp(ICapabilityHeat instance) {
+        // Default modifier = 3 (2x normal cooling)
+        addTemp(instance, 3);
+    }
+
+    /**
+     * Use this to increase the heat on an IItemHeat instance.
+     *
+     * @param modifier the modifier for how much this will heat up: 0 - 1 slows down cooling, 1 = no heating or cooling, > 1 heats, 2 heats at the
+     *                 same rate of normal cooling, 2+ heats faster
+     */
+    public static void addTemp(ICapabilityHeat instance, float modifier) {
+        final float temp = instance.getTemperature() + modifier * instance.getHeatCapacity() * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
+        instance.setTemperature(temp);
+    }
+
+    public static float adjustToTargetTemperature(float temp, float burnTemp, int airTicks, int maxTempBonus) {
+        boolean hasAir = airTicks > 0;
+        float targetTemperature = burnTemp + (hasAir ? MathHelper.clamp(burnTemp, 0, maxTempBonus) : 0);
+        if (temp != targetTemperature) {
+            float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
+            return adjustTempTowards(temp, targetTemperature, delta * (hasAir ? 2 : 1), delta * (hasAir ? 0.5f : 1));
+        }
+        return temp;
+    }
+
+    @Nullable
+    public static ICapabilityProvider getCustomHeat(ItemStack stack) {
+        Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_ITEMS.keySet();
+        for (IIngredient<ItemStack> ingredient : itemItemSet) {
+            if (ingredient.testIgnoreCount(stack)) {
+                return CUSTOM_ITEMS.get(ingredient).get();
+            }
+        }
+        return null;
+    }
+}

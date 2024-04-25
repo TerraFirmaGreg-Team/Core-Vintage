@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.objects.items;
 
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.CapabilityTemperature;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -50,7 +51,7 @@ public class ItemDebug extends ItemBase {
         assert nbt != null;
         int mode = nbt.getInteger("mode");
         int newMode = (mode > 3) ? 0 : mode + 1;
-        nbt.setInteger("mode", newMode);
+        NBTUtils.setGenericNBTValue(nbt, "mode", newMode);
         switch (newMode) {
             case 0: {
                 player.sendStatusMessage(new TextComponentString(GOLD + "Blockstate"), true);
@@ -68,13 +69,17 @@ public class ItemDebug extends ItemBase {
                 player.sendStatusMessage(new TextComponentString(GOLD + "Transform"), true);
                 break;
             }
+            case 4: {
+                player.sendStatusMessage(new TextComponentString(GOLD + "Temperature Capability"), true);
+                break;
+            }
         }
     }
 
     @Override
     @NotNull
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                      float hitZ) {
+    public EnumActionResult onItemUse(@NotNull EntityPlayer player, World world, @NotNull BlockPos pos, @NotNull EnumHand hand,
+                                      @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (world.isRemote) return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
         ItemStack stack = player.getHeldItemMainhand();
         NBTTagCompound nbt = stack.getTagCompound();
@@ -84,17 +89,23 @@ public class ItemDebug extends ItemBase {
         int mode = nbt.getInteger("mode");
         switch (mode) {
             case 0: {
-                NBTUtils.setGenericNBTValue(nbt, "Blockstate", world.getBlockState(pos).toString());
+                var blockstate = world.getBlockState(pos).getBlock();
+                NBTUtils.setGenericNBTValue(nbt, "blockstate", blockstate.toString());
+                player.sendMessage(new TextComponentString("Blockstate: " + blockstate));
                 break;
             }
             case 1: {
                 TileEntity tile = world.getTileEntity(pos);
                 if (tile == null) break;
-                NBTUtils.setGenericNBTValue(nbt, "NBTTag", tile.writeToNBT(new NBTTagCompound()).toString());
+                var nbtTag = tile.writeToNBT(new NBTTagCompound());
+                NBTUtils.setGenericNBTValue(nbt, "nbtTag", nbtTag.toString());
+                player.sendMessage(new TextComponentString("NBTTagCompound: " + nbtTag));
                 break;
             }
             case 2: {
-                NBTUtils.setGenericNBTValue(nbt, "BlockstateList", world.getBlockState(pos).getBlock().getBlockState().getValidStates().toString());
+                var blockstateList = world.getBlockState(pos).getBlock().getBlockState().getValidStates();
+                NBTUtils.setGenericNBTValue(nbt, "blockstateList", blockstateList.toString());
+                player.sendMessage(new TextComponentString("Blockstate List: " + blockstateList));
                 break;
             }
             case 3: {
@@ -102,6 +113,11 @@ public class ItemDebug extends ItemBase {
                 int index = list.indexOf(world.getBlockState(pos));
                 int newState = (index + 1 >= list.size()) ? 0 : index + 1;
                 world.setBlockState(pos, list.get(newState));
+                player.sendMessage(new TextComponentString("New Blockstate: " + list.get(newState).toString()));
+                break;
+            }
+            case 4: {
+                player.sendMessage(new TextComponentString("Temperature Capability: \n" + CapabilityTemperature.get(player).toString()));
                 break;
             }
         }
@@ -110,37 +126,45 @@ public class ItemDebug extends ItemBase {
 
     @Override
     @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, @NotNull EntityPlayer player, @NotNull EnumHand hand) {
         if (world.isRemote) return ActionResult.newResult(EnumActionResult.FAIL, player.getHeldItem(hand));
-        if (player.isSneaking() && world.getBlockState(Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()).getBlock()
-                .isAir(world.getBlockState(
-                                Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()), world,
-                        Objects.requireNonNull(player.rayTrace(5, 1)).getBlockPos())) changeMode(player);
+        if (player.isSneaking() &&
+                world.getBlockState(Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()).getBlock()
+                        .isAir(
+                                world.getBlockState(Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()),
+                                world,
+                                Objects.requireNonNull(player.rayTrace(5, 1)).getBlockPos()))
+            changeMode(player);
+
         return super.onItemRightClick(world, player, hand);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         if (worldIn == null) return;
         NBTTagCompound nbt = stack.getTagCompound();
         if (nbt == null) return;
         int mode = nbt.getInteger("mode");
         switch (mode) {
             case 0: {
-                tooltip.add("Blockstate: " + nbt.getString("Blockstate"));
+                tooltip.add("Blockstate: " + nbt.getString("blockstate"));
                 break;
             }
             case 1: {
-                tooltip.add("NBTTagCompound: " + nbt.getString("NBTTagCompound"));
+                tooltip.add("NBTTagCompound: " + nbt.getString("nbtTag"));
                 break;
             }
             case 2: {
-                tooltip.add("Blockstate List: " + nbt.getString("BlockstateList"));
+                tooltip.add("Blockstate List: " + nbt.getString("blockstateList"));
                 break;
             }
             case 3: {
                 tooltip.add("Transform");
+                break;
+            }
+            case 4: {
+                tooltip.add("TemperatureCapability");
                 break;
             }
         }
@@ -148,17 +172,17 @@ public class ItemDebug extends ItemBase {
     }
 
     @Override
-    public boolean hasEffect(ItemStack stack) {
+    public boolean hasEffect(@NotNull ItemStack stack) {
         return true;
     }
 
     @Override
-    public int getEntityLifespan(ItemStack itemStack, World world) {
+    public int getEntityLifespan(@NotNull ItemStack itemStack, @NotNull World world) {
         return 60;
     }
 
     @Override
-    public IRarity getForgeRarity(ItemStack stack) {
+    public IRarity getForgeRarity(@NotNull ItemStack stack) {
         return EnumRarity.EPIC;
     }
 

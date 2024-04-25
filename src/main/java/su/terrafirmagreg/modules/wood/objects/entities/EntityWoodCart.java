@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.objects.entities;
 
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -140,7 +140,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
                             entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
                                     .removeModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER);
                         }
-                        this.pulling.getCapability(PullCapability.PULL_CAPABILITY, null).setDrawn(null);
+                        CapabilityPull.get(this.pulling).setDrawn(null);
                         this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
                     }
                     ((WorldServer) this.world).getEntityTracker()
@@ -149,7 +149,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
                     if (entityIn instanceof EntityLiving entityLiving) {
                         entityLiving.getNavigator().clearPath();
                     }
-                    entityIn.getCapability(PullCapability.PULL_CAPABILITY, null).setDrawn(this);
+                    CapabilityPull.get(entityIn).setDrawn(this);
                     ((WorldServer) this.world).getEntityTracker()
                             .sendToTracking(this,
                                     ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));

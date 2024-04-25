@@ -4,6 +4,10 @@ import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.api.capabilities.egg.ProviderEgg;
+import su.terrafirmagreg.modules.core.api.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.modules.core.api.capabilities.sharpness.ProviderSharpness;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -88,10 +92,10 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
 import BananaFructa.deathdairydespair.Config;
+import lyeoj.tfcthings.items.ItemRopeJavelin;
+import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.EggHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
@@ -131,6 +135,8 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
+import net.dries007.tfc.objects.items.metal.ItemMetalSword;
+import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -141,6 +147,8 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
+import java.util.Arrays;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
@@ -465,6 +473,14 @@ public final class CommonEventHandler {
                     }
                 }
             }
+
+            if (event.getObject().getItem() instanceof ItemMetalTool || event.getObject().getItem() instanceof ItemMetalSword
+                    || event.getObject().getItem() instanceof ItemRopeJavelin || (event.getObject().getItem().getRegistryName() != null
+                    &&
+                    Arrays.asList(ConfigTFCThings.Items.WHETSTONE.canSharpen).contains(event.getObject().getItem().getRegistryName().toString()))) {
+                event.addCapability(CapabilitySharpness.KEY, new ProviderSharpness(event.getObject()));
+            }
+
             // If one of the above is also heatable, skip this
             if (!isHeatable) {
                 ICapabilityProvider heatHandler = CapabilityItemHeat.getCustomHeat(stack);
@@ -483,7 +499,7 @@ public final class CommonEventHandler {
 
             // Eggs
             if (stack.getItem() == Items.EGG) {
-                event.addCapability(CapabilityEgg.KEY, new EggHandler());
+                event.addCapability(CapabilityEgg.KEY, new ProviderEgg());
             }
         }
     }

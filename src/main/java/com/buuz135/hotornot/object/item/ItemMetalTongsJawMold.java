@@ -224,7 +224,7 @@ public class ItemMetalTongsJawMold extends ItemPottery {
         }
 
         @Override
-        public NBTTagCompound serializeNBT() {
+        public @NotNull NBTTagCompound serializeNBT() {
             final NBTTagCompound compound = new NBTTagCompound();
             if (getTemperature() <= 0.0F) {
                 compound.setLong("ticks", -1L);

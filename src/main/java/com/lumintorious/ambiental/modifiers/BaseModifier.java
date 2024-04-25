@@ -1,8 +1,10 @@
 package com.lumintorious.ambiental.modifiers;
 
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTemperature;
+
+
 import com.lumintorious.ambiental.TFCAmbientalConfig;
 import com.lumintorious.ambiental.Util;
-import com.lumintorious.ambiental.capability.TemperatureCapability;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
@@ -78,11 +80,11 @@ public class BaseModifier {
         return Util.translate(MODID_TFCAMBIENTAL + ".modifier." + this.unlocalizedName);
     }
 
-    public void apply(TemperatureCapability temp) {
+    public void apply(ProviderTemperature temp) {
         // nothing;
     }
 
-    public void cancel(TemperatureCapability temp) {
+    public void cancel(ProviderTemperature temp) {
         // nothing;
     }
 }

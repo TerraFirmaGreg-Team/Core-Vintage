@@ -1,13 +1,13 @@
 package com.lumintorious.ambiental;
 
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTemperature;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
-import com.lumintorious.ambiental.capability.TemperatureCapability;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
@@ -32,11 +32,11 @@ public class TFCAmbientalConfig {
     public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(MODID_TFCAMBIENTAL)) {
             ConfigManager.sync(MODID_TFCAMBIENTAL, Config.Type.INSTANCE);
-            TemperatureCapability.AVERAGE = TFCAmbientalConfig.GENERAL.averageTemperature;
-            TemperatureCapability.HOT_THRESHOLD = TFCAmbientalConfig.GENERAL.hotTemperature;
-            TemperatureCapability.COOL_THRESHOLD = TFCAmbientalConfig.GENERAL.coldTemperature;
-            TemperatureCapability.BURN_THRESHOLD = TFCAmbientalConfig.GENERAL.burningTemperature;
-            TemperatureCapability.FREEZE_THRESHOLD = TFCAmbientalConfig.GENERAL.freezingTemperature;
+            ProviderTemperature.AVERAGE = TFCAmbientalConfig.GENERAL.averageTemperature;
+            ProviderTemperature.HOT_THRESHOLD = TFCAmbientalConfig.GENERAL.hotTemperature;
+            ProviderTemperature.COOL_THRESHOLD = TFCAmbientalConfig.GENERAL.coldTemperature;
+            ProviderTemperature.BURN_THRESHOLD = TFCAmbientalConfig.GENERAL.burningTemperature;
+            ProviderTemperature.FREEZE_THRESHOLD = TFCAmbientalConfig.GENERAL.freezingTemperature;
         }
     }
 

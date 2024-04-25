@@ -1,11 +1,12 @@
 package com.lumintorious.ambiental;
 
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTemperature;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
@@ -17,13 +18,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import com.lumintorious.ambiental.capability.TemperatureCapability;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 
 import java.lang.reflect.Field;
-
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
 public class AmbientalHandler {
 
@@ -71,9 +69,9 @@ public class AmbientalHandler {
         if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
             return;
         }
-        if (player.hasCapability(TemperatureCapability.CAPABILITY, null)) {
-            TemperatureCapability cap = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
-            cap.bodyTemperature = TemperatureCapability.AVERAGE;
+        if (CapabilityTemperature.has(player)) {
+            var cap = CapabilityTemperature.get(player);
+            cap.setTemperature(ProviderTemperature.AVERAGE);
         }
     }
 
@@ -88,46 +86,20 @@ public class AmbientalHandler {
         player.sendMessage(new TextComponentString("respawned"));
     }
 
-    //	@SubscribeEvent
-    //    public void onAttachWorldCapabilities(AttachCapabilitiesEvent<World> event)
-    //    {
-    //		if (event.getObject() instanceof World)
-    //        {
-    //            ResourceLocation loc = new ResourceLocation(TFCAmbiental.MODID, "time_extension");
-    //            World world = (World)event.getObject();
-    //            if (!event.getCapabilities().containsKey(loc))
-    //                event.addCapability(loc, new TimeExtensionCapability(world));
-    //        }
-    //    }
-
     @SubscribeEvent
     public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof EntityPlayer player) {
 
-            ResourceLocation loc = new ResourceLocation(MODID_TFCAMBIENTAL, "temperature");
-
             //Each player should have their own instance for each stat, as associated values may vary
-            if (!event.getCapabilities().containsKey(loc))
-                event.addCapability(loc, new TemperatureCapability(player));
+            if (!event.getCapabilities().containsKey(CapabilityTemperature.KEY))
+                event.addCapability(CapabilityTemperature.KEY, new ProviderTemperature(player));
         }
     }
 
     @SubscribeEvent
     public void onPlayerUpdate(LivingUpdateEvent event) {
-        if (!(event.getEntityLiving() instanceof EntityPlayer player)) {
-            return;
-        }
-
-        if (player.isCreative()) {
-            return;
-        }
-        TemperatureCapability temp = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
-        ItemStack stack = player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
-        if (stack != null && !player.world.isRemote) {
-            if (stack.getItem().getRegistryName().toString().equals("tfc:wand")) {
-                temp.say(temp);
-            }
-        }
-        temp.update();
+        if (!(event.getEntityLiving() instanceof EntityPlayer player)) return;
+        if (player.isCreative()) return;
+        CapabilityTemperature.get(player).update();
     }
 }

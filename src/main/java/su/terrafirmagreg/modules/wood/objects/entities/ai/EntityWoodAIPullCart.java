@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.entities.ai;
 
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.CapabilityPull;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -16,8 +16,8 @@ public class EntityWoodAIPullCart extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-        if (this.living.hasCapability(PullCapability.PULL_CAPABILITY, null)) {
-            return this.living.getCapability(PullCapability.PULL_CAPABILITY, null).getDrawn() != null;
+        if (CapabilityPull.has(this.living)) {
+            return CapabilityPull.get(this.living).getDrawn() != null;
         }
         return false;
     }

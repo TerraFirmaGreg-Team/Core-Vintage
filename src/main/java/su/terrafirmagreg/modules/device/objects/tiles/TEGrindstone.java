@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.modules.core.api.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemGrindstone;
 
@@ -16,9 +17,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
 
-import lyeoj.tfcthings.capability.CapabilitySharpness;
-import lyeoj.tfcthings.capability.ISharpness;
-import lyeoj.tfcthings.event.TFCThingsEventHandler;
 import lyeoj.tfcthings.init.TFCThingsSoundEvents;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockFluidWater;
@@ -60,10 +58,10 @@ public class TEGrindstone extends TEBaseInventory implements ITickable {
         return this.rotationTimer;
     }
 
-    public boolean isItemValid(int slot, ItemStack stack) {
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
         return switch (slot) {
             case SLOT_GRINDSTONE -> stack.getItem() instanceof ItemGrindstone;
-            case SLOT_INPUT -> stack.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null);
+            case SLOT_INPUT -> CapabilitySharpness.has(stack);
             default -> false;
         };
     }
@@ -111,10 +109,10 @@ public class TEGrindstone extends TEBaseInventory implements ITickable {
                         this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, (double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.875D,
                                 (double) this.pos.getZ() + 0.5D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
                                 this.world.rand.nextDouble() / 4.0D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
-                                new int[] { Item.getIdFromItem(ItemsDevice.GRINDSTONE_QUARTZ) });
+                                Item.getIdFromItem(ItemsDevice.GRINDSTONE_QUARTZ));
                     }
-                    this.world.playSound((EntityPlayer) null, this.pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
-                    this.world.playSound((EntityPlayer) null, this.pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.7F, 0.6F);
+                    this.world.playSound(null, this.pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
+                    this.world.playSound(null, this.pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.7F, 0.6F);
                 }
                 this.setAndUpdateSlots(0);
             }
@@ -166,8 +164,8 @@ public class TEGrindstone extends TEBaseInventory implements ITickable {
         if (inputStack.isEmpty() || grindstoneStack.isEmpty() || getFlowDirection() == 0) {
             return false;
         }
-        if (inputStack.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
-            ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(inputStack);
+        if (CapabilitySharpness.has(inputStack)) {
+            var capability = CapabilitySharpness.get(inputStack);
             ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
             return inputStack.getMaxDamage() - inputStack.getItemDamage() > 1 && capability.getCharges() < grindstone.getMaxCharges();
         }
@@ -175,7 +173,7 @@ public class TEGrindstone extends TEBaseInventory implements ITickable {
     }
 
     private void sharpenItem(ItemStack inputStack, ItemStack grindstoneStack) {
-        ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(inputStack);
+        var capability = CapabilitySharpness.get(inputStack);
         ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
         if (capability != null && capability.getCharges() < grindstone.getMaxCharges()) {
             for (int i = 0; i < grindstone.getTier(); i++) {

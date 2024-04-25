@@ -28,8 +28,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -132,6 +130,10 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
+
+import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -323,9 +325,9 @@ public class ClientEvents {
             if (nutrients != null) {
                 nutrients.addTooltipInfo(stack, tt, event.getEntityPlayer());
             }
-            IEgg eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
-            if (eggInfo != null) {
-                eggInfo.addEggInfo(stack, tt);
+            var egg = CapabilityEgg.get(stack);
+            if (egg != null) {
+                egg.addEggInfo(stack, tt);
             }
             float skillMod = SmithingSkill.getSkillBonus(stack);
             if (skillMod > 0) {

@@ -11,5 +11,5 @@ import com.lumintorious.ambiental.modifiers.BlockModifier;
 @FunctionalInterface
 public interface IBlockTemperatureProvider extends ITemperatureProvider {
 
-    public BlockModifier getModifier(IBlockState state, BlockPos blockPos, EntityPlayer player);
+    BlockModifier getModifier(IBlockState state, BlockPos blockPos, EntityPlayer player);
 }

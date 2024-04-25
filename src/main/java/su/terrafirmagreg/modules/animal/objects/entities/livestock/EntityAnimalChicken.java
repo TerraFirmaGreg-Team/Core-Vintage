@@ -11,6 +11,7 @@ import su.terrafirmagreg.modules.animal.init.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIFindNest;
+import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -32,8 +33,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -123,7 +122,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
         List<ItemStack> eggs = new ArrayList<>();
         ItemStack egg = new ItemStack(Items.EGG);
         if (this.isFertilized()) {
-            IEgg cap = egg.getCapability(CapabilityEgg.CAPABILITY, null);
+            var cap = CapabilityEgg.get(egg);
             if (cap != null) {
                 EntityAnimalChicken chick = new EntityAnimalChicken(this.world);
                 chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);

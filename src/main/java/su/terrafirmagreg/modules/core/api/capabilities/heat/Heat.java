@@ -10,6 +10,8 @@ import net.dries007.tfc.util.config.OreTooltipMode;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 public enum Heat {
     WARMING(1f, 80f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
     HOT(80f, 210f, TextFormatting.GRAY, TextFormatting.DARK_GRAY),
@@ -25,7 +27,9 @@ public enum Heat {
 
     private static final Heat[] VALUES = values();
     final TextFormatting format, alternate;
+    @Getter
     private final float min;
+    @Getter
     private final float max;
 
     Heat(float min, float max, TextFormatting format, TextFormatting alternate) {
@@ -102,11 +106,4 @@ public enum Heat {
         return tooltip;
     }
 
-    public float getMin() {
-        return min;
-    }
-
-    public float getMax() {
-        return max;
-    }
 }

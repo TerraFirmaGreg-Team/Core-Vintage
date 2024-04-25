@@ -3,7 +3,6 @@ package com.lumintorious.ambiental;
 import su.terrafirmagreg.Tags;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -11,10 +10,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 
-import com.lumintorious.ambiental.capability.ITemperatureCapability;
-import com.lumintorious.ambiental.capability.TemperaturePacket;
+import com.lumintorious.ambiental.network.TemperaturePacket;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.DumbStorage;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
 
@@ -32,7 +29,6 @@ public class TFCAmbiental {
         if (event.getSide() == Side.CLIENT) {
             MinecraftForge.EVENT_BUS.register(new GuiRenderer());
         }
-        CapabilityManager.INSTANCE.register(ITemperatureCapability.class, new DumbStorage(), () -> null);
         //    	CapabilityManager.INSTANCE.register(TimeExtensionCapability.class, new DumbStorage(), () -> null);
 
         TerraFirmaCraft.getNetwork()

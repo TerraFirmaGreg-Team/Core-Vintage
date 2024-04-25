@@ -1,6 +1,8 @@
 package com.lumintorious.ambiental;
 
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTemperature;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -21,8 +23,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import com.lumintorious.ambiental.capability.ITemperatureCapability;
-import com.lumintorious.ambiental.capability.TemperatureCapability;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
@@ -70,7 +70,7 @@ public class GuiRenderer {
         if (player.isCreative() || player.isDead || player.isSpectator()) {
             return;
         }
-        TemperatureCapability tempSystem = (TemperatureCapability) player.getCapability(TemperatureCapability.CAPABILITY, null);
+        var tempSystem = CapabilityTemperature.get(player);
         ScaledResolution resolution = event.getResolution();
         int width = resolution.getScaledWidth();
         int height = resolution.getScaledHeight();
@@ -90,8 +90,7 @@ public class GuiRenderer {
         }
         IBlockState state = player.world.getBlockState(pos2);
         Block block = state.getBlock();
-        if (block == FluidsTFC.HOT_WATER.get().getBlock() ||
-                block == FluidsTFC.SALT_WATER.get().getBlock() ||
+        if (block == FluidsTFC.HOT_WATER.get().getBlock() || block == FluidsTFC.SALT_WATER.get().getBlock() ||
                 block == FluidsTFC.FRESH_WATER.get().getBlock()) {
             offsetY = -10f;
             offsetX = 0;
@@ -108,15 +107,15 @@ public class GuiRenderer {
         int mid = sr.getScaledWidth() / 2;
         temperature = tempSystem.getTemperature();
         GL11.glEnable(GL11.GL_BLEND);
-        if (temperature > TemperatureCapability.AVERAGE) {
-            float hotRange = TemperatureCapability.HOT_THRESHOLD - TemperatureCapability.AVERAGE + 2;
-            float red = Math.max(0, Math.min(1, (temperature - TemperatureCapability.AVERAGE) / hotRange));
+        if (temperature > ProviderTemperature.AVERAGE) {
+            float hotRange = ProviderTemperature.HOT_THRESHOLD - ProviderTemperature.AVERAGE + 2;
+            float red = Math.max(0, Math.min(1, (temperature - ProviderTemperature.AVERAGE) / hotRange));
             redCol = 1F;
             greenCol = 1.0F - red / 2.4F;
             blueCol = 1.0F - red / 1.6F;
         } else {
-            float coolRange = TemperatureCapability.AVERAGE - TemperatureCapability.COOL_THRESHOLD - 2;
-            float blue = Math.max(0, Math.min(1, (TemperatureCapability.AVERAGE - temperature) / coolRange));
+            float coolRange = ProviderTemperature.AVERAGE - ProviderTemperature.COOL_THRESHOLD - 2;
+            float blue = Math.max(0, Math.min(1, (ProviderTemperature.AVERAGE - temperature) / coolRange));
             redCol = 1.0F - blue / 1.6F;
             greenCol = 1.0F - blue / 2.4F;
             blueCol = 1.0F;
@@ -128,23 +127,22 @@ public class GuiRenderer {
         float speed = tempSystem.getChangeSpeed();
         float change = tempSystem.getChange();
         if (change > 0) {
-            if (change > TemperatureCapability.HIGH_CHANGE) {
+            if (change > ProviderTemperature.HIGH_CHANGE) {
                 drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, PLUSER);
             } else {
                 drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, PLUS);
             }
         } else {
-            if (change < -TemperatureCapability.HIGH_CHANGE) {
+            if (change < -ProviderTemperature.HIGH_CHANGE) {
                 drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, MINUSER);
             } else {
                 drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, MINUS);
             }
         }
-        if ((player.isSneaking() || !TFCAmbientalConfig.CLIENT.sneakyDetails) && tempSystem instanceof TemperatureCapability) {
-            TemperatureCapability sys = (TemperatureCapability) tempSystem;
-            float targetFormatted = sys.getTargetTemperature();
-            float tempFormatted = sys.getTemperature();
-            float changeFormatted = sys.getChange();
+        if (player.isSneaking() || !TFCAmbientalConfig.CLIENT.sneakyDetails) {
+            float targetFormatted = tempSystem.getTarget();
+            float tempFormatted = tempSystem.getTemperature();
+            float changeFormatted = tempSystem.getChange();
             if (!TFCAmbientalConfig.CLIENT.celsius) {
                 targetFormatted = targetFormatted * (9 / 5) + 32;
                 tempFormatted = tempFormatted * (9 / 5) + 32;
@@ -153,8 +151,8 @@ public class GuiRenderer {
             FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
             String tempStr = String.format("%.1f\u00BA -> %.1f\u00BA", temperature, targetFormatted);
             String changeStr = String.format("%.3f\u00BA/s", change);
-            fr.drawStringWithShadow(tempStr, mid + 50 - fr.getStringWidth(tempStr) / 2 + offsetX, armorRowHeight + 1 + offsetY, c.getRGB());
-            fr.drawStringWithShadow(changeStr, mid - 50 - fr.getStringWidth(changeStr) / 2, armorRowHeight + 1, c.getRGB());
+            fr.drawStringWithShadow(tempStr, mid + 50 - (float) fr.getStringWidth(tempStr) / 2 + offsetX, armorRowHeight + 1 + offsetY, c.getRGB());
+            fr.drawStringWithShadow(changeStr, mid - 50 - (float) fr.getStringWidth(changeStr) / 2, armorRowHeight + 1, c.getRGB());
 
         }
         GL11.glColor4f(1f, 1f, 1f, 0.9F);
@@ -164,16 +162,16 @@ public class GuiRenderer {
     private void drawTemperatureVignettes(int width, int height, EntityPlayer player, RenderGameOverlayEvent.Pre event) {
         ResourceLocation vignetteLocation = null;
         float temperature = 1f;
-        ITemperatureCapability tempSystem = player.getCapability(TemperatureCapability.CAPABILITY, null);
+        var tempSystem = CapabilityTemperature.get(player);
         temperature = tempSystem.getTemperature();
 
         float opacity = 1f;
-        if (temperature > TemperatureCapability.HOT_THRESHOLD) {
+        if (temperature > ProviderTemperature.HOT_THRESHOLD) {
             vignetteLocation = HOT_VIGNETTE;
-            opacity = Math.min(0.95f, (temperature - TemperatureCapability.HOT_THRESHOLD) / 14);
-        } else if (temperature < TemperatureCapability.COOL_THRESHOLD) {
+            opacity = Math.min(0.95f, (temperature - ProviderTemperature.HOT_THRESHOLD) / 14);
+        } else if (temperature < ProviderTemperature.COOL_THRESHOLD) {
             vignetteLocation = COLD_VIGNETTE;
-            opacity = Math.min(0.95f, (TemperatureCapability.COOL_THRESHOLD - temperature) / 14);
+            opacity = Math.min(0.95f, (ProviderTemperature.COOL_THRESHOLD - temperature) / 14);
         }
 
         if (event.getType() == ElementType.PORTAL) {

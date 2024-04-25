@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.network;
 
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 import net.minecraft.entity.Entity;
@@ -46,8 +46,9 @@ public class CSPacketActionKey implements IMessage, IMessageHandler<CSPacketActi
                     }
                 }
                 if (closest.canBePulledBy(target)) {
-                    if (target.hasCapability(PullCapability.PULL_CAPABILITY, null)) {
-                        EntityWoodCart drawn = target.getCapability(PullCapability.PULL_CAPABILITY, null).getDrawn();
+                    assert target != null;
+                    if (CapabilityPull.has(target)) {
+                        EntityWoodCart drawn = CapabilityPull.get(target).getDrawn();
                         if (drawn != null && drawn.getPulling() == target) {
                             return;
                         }

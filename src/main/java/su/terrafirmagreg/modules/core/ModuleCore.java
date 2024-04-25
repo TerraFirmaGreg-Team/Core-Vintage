@@ -6,7 +6,14 @@ import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
+import su.terrafirmagreg.modules.core.api.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.api.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.CapabilityPull;
+import su.terrafirmagreg.modules.core.api.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.modules.core.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
@@ -60,7 +67,15 @@ public final class ModuleCore extends ModuleBase {
     public void onPreInit(FMLPreInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
-        PullCapability.preInit();
+        CapabilityDamageResistance.preInit();
+        CapabilityEgg.preInit();
+        CapabilityHeat.preInit();
+        CapabilityMetal.preInit();
+        CapabilityPull.preInit();
+        CapabilitySharpness.preInit();
+        CapabilitySize.preInit();
+        CapabilityTemperature.preInit();
+
     }
 
     @Override

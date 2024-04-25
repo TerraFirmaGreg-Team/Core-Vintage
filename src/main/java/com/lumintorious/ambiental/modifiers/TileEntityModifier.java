@@ -1,5 +1,6 @@
 package com.lumintorious.ambiental.modifiers;
 
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
 import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
 import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 
-import com.lumintorious.ambiental.capability.TemperatureCapability;
 import net.dries007.tfc.objects.te.TELamp;
 
 public class TileEntityModifier extends BlockModifier {
@@ -75,7 +75,7 @@ public class TileEntityModifier extends BlockModifier {
 
     public static TileEntityModifier handleLamps(TileEntity tile, EntityPlayer player) {
         if (tile instanceof TELamp lamp) {
-            if (EnvironmentalModifier.getEnvironmentTemperature(player) < TemperatureCapability.AVERAGE) {
+            if (EnvironmentalModifier.getEnvironmentTemperature(player) < ProviderTemperature.AVERAGE) {
                 float change = (lamp.isPowered() && lamp.getFuel() > 0) ? 1f : 0f;
                 float potency = 0f;
                 return new TileEntityModifier("lamp", change, potency, false);

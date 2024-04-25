@@ -1,5 +1,7 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.modules.core.api.capabilities.sharpness.CapabilitySharpness;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,9 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 
-import lyeoj.tfcthings.capability.CapabilitySharpness;
-import lyeoj.tfcthings.capability.ISharpness;
-import lyeoj.tfcthings.event.TFCThingsEventHandler;
 import lyeoj.tfcthings.init.TFCThingsSoundEvents;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
@@ -78,22 +77,19 @@ public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOr
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         if (handIn.equals(EnumHand.MAIN_HAND)) {
-            if (playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-                    .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+            if (playerIn.getHeldItemOffhand() != null && CapabilitySharpness.has(playerIn.getHeldItemOffhand())) {
                 playerIn.setActiveHand(handIn);
                 return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
             }
         }
-        return new ActionResult(EnumActionResult.FAIL, itemstack);
+        return new ActionResult<>(EnumActionResult.FAIL, itemstack);
     }
 
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-        if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer playerIn = (EntityPlayer) entityLiving;
-            if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-                    .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+        if (entityLiving instanceof EntityPlayer playerIn) {
+            if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && CapabilitySharpness.has(playerIn.getHeldItemOffhand())) {
                 ItemStack item = playerIn.getHeldItemOffhand();
-                ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(item);
+                var capability = CapabilitySharpness.get(item);
                 if (capability != null && capability.getCharges() < getMaxCharges()) {
                     for (int i = 0; i < tier; i++) {
                         if (capability.getCharges() >= getMaxCharges())

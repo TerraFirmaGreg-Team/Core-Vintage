@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.wood.network;
 
-import su.terrafirmagreg.modules.core.api.capabilities.pull.PullCapability;
-import su.terrafirmagreg.modules.wood.ModuleWood;
+import su.terrafirmagreg.modules.core.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 import net.minecraft.entity.Entity;
@@ -30,10 +29,8 @@ public class CSPacketToggleSlow implements IMessage, IMessageHandler<CSPacketTog
         EntityPlayerMP player = ctx.getServerHandler().player;
         if (player.isRiding()) {
             Entity ridden = player.getRidingEntity();
-            if (ridden instanceof EntityLivingBase entityLivingBase && ridden.hasCapability(PullCapability.PULL_CAPABILITY, null)) {
-                if (ridden.getCapability(PullCapability.PULL_CAPABILITY, null).getDrawn() != null) {
-                    ModuleWood.LOGGER.info("toggle slow");
-
+            if (ridden instanceof EntityLivingBase entityLivingBase && CapabilityPull.has(ridden)) {
+                if (CapabilityPull.get(ridden).getDrawn() != null) {
                     if (entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
                             .hasModifier(EntityWoodCart.PULL_SLOWLY_MODIFIER)) {
                         entityLivingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)

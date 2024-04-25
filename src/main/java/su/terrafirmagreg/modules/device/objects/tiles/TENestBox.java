@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.device.client.gui.GuiNestBox;
 import su.terrafirmagreg.modules.device.objects.container.ContainerNestBox;
 
@@ -21,8 +22,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Helpers;
@@ -48,7 +47,7 @@ public class TENestBox extends TEBaseInventory implements ITickable, IItemHandle
             for (int i = 0; i < inventory.getSlots(); i++) {
                 ItemStack stack = inventory.getStackInSlot(i);
                 if (!stack.isEmpty()) {
-                    IEgg cap = stack.getCapability(CapabilityEgg.CAPABILITY, null);
+                    var cap = CapabilityEgg.get(stack);
                     if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= CalendarTFC.PLAYER_TIME.getTotalDays()) {
                         Entity baby = cap.getEntity(this.world);
                         if (baby != null) {

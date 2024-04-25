@@ -1,12 +1,11 @@
 package com.lumintorious.ambiental.modifiers;
 
+import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTemperature;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-
-
-import com.lumintorious.ambiental.capability.TemperatureCapability;
 
 public class EquipmentModifier extends BaseModifier {
 
@@ -25,8 +24,8 @@ public class EquipmentModifier extends BaseModifier {
                 if (thing.armorType == EntityEquipmentSlot.HEAD) {
                     if (player.world.getLight(player.getPosition()) > 14) {
                         float envTemp = EnvironmentalModifier.getEnvironmentTemperature(player);
-                        if (envTemp > TemperatureCapability.AVERAGE + 3) {
-                            float diff = envTemp - TemperatureCapability.AVERAGE;
+                        if (envTemp > ProviderTemperature.AVERAGE + 3) {
+                            float diff = envTemp - ProviderTemperature.AVERAGE;
                             modifiers.add(new EquipmentModifier("helmet", -diff / 3f, -0.5f));
                         } else {
                             modifiers.add(new EquipmentModifier("armor", 3f, -0.25f));
@@ -34,7 +33,7 @@ public class EquipmentModifier extends BaseModifier {
                     }
                 } else {
                     float envTemp = EnvironmentalModifier.getEnvironmentTemperature(player);
-                    if (envTemp > TemperatureCapability.AVERAGE + 3) {
+                    if (envTemp > ProviderTemperature.AVERAGE + 3) {
                         modifiers.add(new EquipmentModifier("armor", 3f, -0.25f));
                     }
                 }

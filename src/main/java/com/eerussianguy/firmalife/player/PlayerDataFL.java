@@ -4,7 +4,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -13,7 +12,7 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerDataFL implements ICapabilitySerializable<NBTTagCompound>, IPlayerDataFL {
+public class PlayerDataFL implements IPlayerDataFL {
 
     private long nutted;
     private BlockPos nutPosition;

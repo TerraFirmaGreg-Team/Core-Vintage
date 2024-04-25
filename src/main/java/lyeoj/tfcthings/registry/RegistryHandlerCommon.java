@@ -12,7 +12,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 import lyeoj.tfcthings.init.TFCThingsBlocks;
@@ -21,7 +20,6 @@ import lyeoj.tfcthings.init.TFCThingsSoundEvents;
 import lyeoj.tfcthings.items.ItemOreDict;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -84,9 +82,6 @@ public class RegistryHandlerCommon {
             } else {
                 event.getRegistry().register(block);
             }
-        }
-        if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGrindstones) {
-            GameRegistry.registerTileEntity(TileEntityGrindstone.class, TFCThingsBlocks.GRINDSTONE_BLOCK.getRegistryName());
         }
     }
 
@@ -284,9 +279,9 @@ public class RegistryHandlerCommon {
         if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGrindstones) {
             event.getRegistry()
                     .register(new WeldingRecipe(new ResourceLocation(MODID_TFCTHINGS, "grindstone_steel"),
-                            IIngredient.of(new ItemStack(TFCThingsItems.ITEM_GRINDSTONE_QUARTZ)),
+                            IIngredient.of(new ItemStack(ItemsDevice.GRINDSTONE_QUARTZ)),
                             IIngredient.of(new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), DOUBLE_SHEET))),
-                            new ItemStack(TFCThingsItems.ITEM_GRINDSTONE_STEEL), Metal.Tier.TIER_V));
+                            new ItemStack(ItemsDevice.GRINDSTONE_STEEL), Metal.Tier.TIER_V));
         }
     }
 

@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 
-import lyeoj.tfcthings.blocks.BlockGrindstone;
 import lyeoj.tfcthings.blocks.BlockPigvil;
 import lyeoj.tfcthings.blocks.BlockRopeBridge;
 import lyeoj.tfcthings.blocks.BlockRopeLadder;
@@ -28,10 +27,6 @@ public class TFCThingsBlocks {
     public static final Item ROPE_BRIDGE_ITEM = new ItemBlock(ROPE_BRIDGE_BLOCK).setRegistryName(ROPE_BRIDGE_BLOCK.getRegistryName());
     public static final Block ROPE_LADDER_BLOCK = new BlockRopeLadder();
     public static final Item ROPE_LADDER_ITEM = new ItemBlock(ROPE_LADDER_BLOCK).setRegistryName(ROPE_LADDER_BLOCK.getRegistryName());
-    public static final Block GRINDSTONE_BLOCK = new BlockGrindstone();
-    public static final Item GRINDSTONE_ITEM = new ItemBlock(GRINDSTONE_BLOCK)
-            .setRegistryName(GRINDSTONE_BLOCK.getRegistryName())
-            .setMaxStackSize(4);
 
     public static final Block[] BLOCKLIST = {
             PIGVIL_BLOCK,
@@ -40,7 +35,6 @@ public class TFCThingsBlocks {
             PIGVIL_BLOCK_RED,
             PIGVIL_BLOCK_PURPLE,
             ROPE_BRIDGE_BLOCK,
-            ROPE_LADDER_BLOCK,
-            GRINDSTONE_BLOCK
+            ROPE_LADDER_BLOCK
     };
 }

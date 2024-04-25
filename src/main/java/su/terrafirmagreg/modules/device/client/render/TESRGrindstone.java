@@ -1,4 +1,6 @@
-package lyeoj.tfcthings.renderer;
+package su.terrafirmagreg.modules.device.client.render;
+
+import su.terrafirmagreg.modules.device.objects.tiles.TEGrindstone;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,36 +18,27 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
+import org.jetbrains.annotations.NotNull;
 
-public class TESRGrindstone extends TileEntitySpecialRenderer<TileEntityGrindstone> {
+public class TESRGrindstone extends TileEntitySpecialRenderer<TEGrindstone> {
 
     public TESRGrindstone() {
     }
 
-    public void render(TileEntityGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(@NotNull TEGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
-        IItemHandler cap = (IItemHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
+        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
         if (cap != null) {
-            ItemStack input = cap.getStackInSlot(TileEntityGrindstone.SLOT_INPUT);
-            ItemStack grindstone = cap.getStackInSlot(TileEntityGrindstone.SLOT_GRINDSTONE);
+            ItemStack input = cap.getStackInSlot(TEGrindstone.SLOT_INPUT);
+            ItemStack grindstone = cap.getStackInSlot(TEGrindstone.SLOT_GRINDSTONE);
             IBakedModel outputModel;
             int dir = te.getBlockMetadata();
-            float angle;
-            switch (dir) {
-                case 0:
-                    angle = 270;
-                    break;
-                case 1:
-                    angle = 180;
-                    break;
-                case 2:
-                    angle = 90;
-                    break;
-                default:
-                    angle = 0;
-                    break;
-            }
+            float angle = switch (dir) {
+                case 0 -> 270;
+                case 1 -> 180;
+                case 2 -> 90;
+                default -> 0;
+            };
             int rotationTicks;
             if (!grindstone.isEmpty()) {
                 rotationTicks = te.getRotationTimer();

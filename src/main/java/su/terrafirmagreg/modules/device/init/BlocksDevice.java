@@ -16,6 +16,7 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrucible;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFreezeDryer;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockGrindstone;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockIceBunker;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockInfectedAir;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockLogPile;
@@ -54,6 +55,7 @@ public final class BlocksDevice {
     public static BlockNestBox NEST_BOX;
     public static BlockPowderKeg POWDERKEG;
     public static BlockThatchBed THATCH_BED;
+    public static BlockGrindstone GRINDSTONE;
 
     public static void onRegister(RegistryManager registry) {
         //==== Other =================================================================================================//
@@ -83,6 +85,7 @@ public final class BlocksDevice {
         NEST_BOX = registry.registerBlock(new BlockNestBox());
         POWDERKEG = registry.registerBlock(new BlockPowderKeg());
         THATCH_BED = registry.registerBlock(new BlockThatchBed());
+        GRINDSTONE = registry.registerBlock(new BlockGrindstone());
     }
 
 }

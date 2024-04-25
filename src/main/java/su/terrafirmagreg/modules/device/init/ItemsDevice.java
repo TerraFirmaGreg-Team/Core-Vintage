@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.device.objects.items.ItemCraftingTool;
 import su.terrafirmagreg.modules.device.objects.items.ItemDeviceMisc;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
+import su.terrafirmagreg.modules.device.objects.items.ItemGrindstone;
 import su.terrafirmagreg.modules.device.objects.items.ItemLeatherFlask;
 import su.terrafirmagreg.modules.device.objects.items.ItemMetalFlask;
 import su.terrafirmagreg.modules.device.objects.items.ItemSling;
@@ -30,6 +31,9 @@ public final class ItemsDevice {
     public static ItemSlingAmmo SLING_AMMO_LIGHT;
     public static ItemSlingAmmo SLING_AMMO_FIRE;
     public static ItemCraftingTool HANDSTONE;
+    public static ItemGrindstone GRINDSTONE_QUARTZ;
+    public static ItemGrindstone GRINDSTONE_STEEL;
+    public static ItemGrindstone GRINDSTONE_DIAMOND;
 
     public static void onRegister(RegistryManager registry) {
 
@@ -50,5 +54,9 @@ public final class ItemsDevice {
         SLING_AMMO_LIGHT = registry.registerItem(new ItemSlingAmmo(2, "light"));
         SLING_AMMO_FIRE = registry.registerItem(new ItemSlingAmmo(3, "fire"));
         HANDSTONE = registry.registerItem(new ItemCraftingTool("handstone", 250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"));
+
+        GRINDSTONE_QUARTZ = registry.registerItem(new ItemGrindstone(1, 640, "quartz"));
+        GRINDSTONE_STEEL = registry.registerItem(new ItemGrindstone(2, 6400, "steel"));
+        GRINDSTONE_DIAMOND = registry.registerItem(new ItemGrindstone(3, 7000, "diamond"));
     }
 }

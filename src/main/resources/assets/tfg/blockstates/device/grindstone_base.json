@@ -1,11 +1,17 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfcthings:grindstone_base"
+    "model": "tfg:device/grindstone_base",
+    "textures": {
+        "all": "tfg:blocks/device/grindstone/base"
+    }
   },
   "variants": {
     "normal": [
-      {}
+        {}
+    ],
+    "inventory": [
+        {}
     ],
     "facing": {
       "north": {
@@ -17,10 +23,7 @@
       "south": {},
       "west": {
         "y": 90
-      }
-    },
-    "inventory": {
-      "model": "tfcthings:grindstone_inventory"
+    }
     }
   }
 }

@@ -1,32 +1,32 @@
-package lyeoj.tfcthings.items;
+package su.terrafirmagreg.modules.device.objects.items;
 
-import net.minecraft.creativetab.CreativeTabs;
+import su.terrafirmagreg.api.spi.item.ItemBase;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.forge.ForgeableHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.items.ItemTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ItemGrindstone extends ItemTFC implements TFCThingsConfigurableItem {
+public class ItemGrindstone extends ItemBase {
 
     private final int tier;
+    private final String name;
 
     public ItemGrindstone(int tier, int durability, String name) {
-        setCreativeTab(CreativeTabs.MISC);
-        setMaxDamage(durability);
+
         this.tier = tier;
+        this.name = name;
+
+        setMaxDamage(durability);
         setNoRepair();
         setMaxStackSize(1);
-        setTranslationKey(name);
-        setRegistryName(name);
     }
 
     public int getTier() {
@@ -34,14 +34,11 @@ public class ItemGrindstone extends ItemTFC implements TFCThingsConfigurableItem
     }
 
     public int getMaxCharges() {
-        switch (tier) {
-            case 2:
-                return 256;
-            case 3:
-                return 384;
-            default:
-                return 64;
-        }
+        return switch (tier) {
+            case 2 -> 256;
+            case 3 -> 384;
+            default -> 64;
+        };
     }
 
     @Override
@@ -68,7 +65,7 @@ public class ItemGrindstone extends ItemTFC implements TFCThingsConfigurableItem
     }
 
     @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGrindstones;
+    public @NotNull String getName() {
+        return "device/grindstone/" + name;
     }
 }

@@ -1,6 +1,10 @@
-package lyeoj.tfcthings.blocks;
+package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.tile.ITEBlock;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.client.render.TESRGrindstone;
+import su.terrafirmagreg.modules.device.objects.tiles.TEGrindstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -11,6 +15,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -26,39 +31,33 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
-import lyeoj.tfcthings.main.ConfigTFCThings;
-import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.CreativeTabsTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfigurableItem {
+public class BlockGrindstone extends BlockBase implements ITEBlock {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockGrindstone() {
         super(Material.WOOD);
-        this.setRegistryName("grindstone_base");
-        this.setTranslationKey("grindstone_base");
+
         this.setSoundType(SoundType.WOOD);
-        this.setCreativeTab(CreativeTabsTFC.CT_MISC);
         this.setHardness(1.5f);
         this.setHarvestLevel("pickaxe", 0);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setDefaultState(this.blockState.getBaseState()
+                .withProperty(FACING, EnumFacing.NORTH));
     }
 
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@NotNull IBlockState state) {
         return true;
     }
 
     @Nullable
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityGrindstone();
+    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+        return new TEGrindstone();
     }
 
     @Override
@@ -80,11 +79,11 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
     }
 
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return false;
     }
 
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@NotNull IBlockState state) {
         return false;
     }
 
@@ -104,20 +103,20 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
                                     float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
-            TileEntityGrindstone teGrindstone = TileUtils.getTile(world, pos, TileEntityGrindstone.class);
-            if (teGrindstone != null) {
+            var te = TileUtils.getTile(world, pos, TEGrindstone.class);
+            if (te != null) {
                 ItemStack heldStack = playerIn.getHeldItem(hand);
-                IItemHandler inventory = teGrindstone.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
+                IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
                 if (inventory != null) {
 
-                    int slot = inventory.getStackInSlot(TileEntityGrindstone.SLOT_GRINDSTONE)
-                            .isEmpty() && inventory.getStackInSlot(TileEntityGrindstone.SLOT_INPUT)
-                            .isEmpty() ? TileEntityGrindstone.SLOT_GRINDSTONE : TileEntityGrindstone.SLOT_INPUT;
+                    int slot = inventory.getStackInSlot(TEGrindstone.SLOT_GRINDSTONE)
+                            .isEmpty() && inventory.getStackInSlot(TEGrindstone.SLOT_INPUT)
+                            .isEmpty() ? TEGrindstone.SLOT_GRINDSTONE : TEGrindstone.SLOT_INPUT;
 
-                    if (slot == TileEntityGrindstone.SLOT_INPUT) {
+                    if (slot == TEGrindstone.SLOT_INPUT) {
                         if (inventory.isItemValid(slot, heldStack)) {
-                            playerIn.setHeldItem(EnumHand.MAIN_HAND, teGrindstone.insertOrSwapItem(slot, heldStack));
-                            teGrindstone.setAndUpdateSlots(slot);
+                            playerIn.setHeldItem(EnumHand.MAIN_HAND, te.insertOrSwapItem(slot, heldStack));
+                            te.setAndUpdateSlots(slot);
                             return true;
                         } else {
                             if (!inventory.getStackInSlot(slot).isEmpty()) {
@@ -128,10 +127,10 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
                         }
                     }
 
-                    if (slot == TileEntityGrindstone.SLOT_GRINDSTONE && inventory.getStackInSlot(slot)
+                    if (slot == TEGrindstone.SLOT_GRINDSTONE && inventory.getStackInSlot(slot)
                             .isEmpty() && inventory.isItemValid(slot, heldStack)) {
-                        playerIn.setHeldItem(EnumHand.MAIN_HAND, teGrindstone.insertOrSwapItem(slot, heldStack));
-                        teGrindstone.setAndUpdateSlots(slot);
+                        playerIn.setHeldItem(EnumHand.MAIN_HAND, te.insertOrSwapItem(slot, heldStack));
+                        te.setAndUpdateSlots(slot);
                         return true;
                     }
                 }
@@ -141,10 +140,10 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
         return false;
     }
 
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntityGrindstone grindstone = TileUtils.getTile(world, pos, TileEntityGrindstone.class);
-        if (grindstone != null) {
-            grindstone.onBreakBlock(world, pos, state);
+    public void breakBlock(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state) {
+        var te = TileUtils.getTile(world, pos, TEGrindstone.class);
+        if (te != null) {
+            te.onBreakBlock(world, pos, state);
         }
         super.breakBlock(world, pos, state);
     }
@@ -156,7 +155,7 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
         }
     }
 
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    public @NotNull BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
@@ -167,11 +166,21 @@ public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfig
 
     @Override
     public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-        return Weight.MEDIUM;
+        return Weight.HEAVY;
     }
 
     @Override
-    public boolean isEnabled() {
-        return ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGrindstones;
+    public @NotNull String getName() {
+        return "device/grindstone_base";
+    }
+
+    @Override
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return TEGrindstone.class;
+    }
+
+    @Override
+    public TileEntitySpecialRenderer<?> getTileRenderer() {
+        return new TESRGrindstone();
     }
 }

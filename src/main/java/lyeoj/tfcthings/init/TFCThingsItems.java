@@ -9,7 +9,6 @@ import net.minecraftforge.common.util.EnumHelper;
 import lyeoj.tfcthings.items.ItemBearTrapHalf;
 import lyeoj.tfcthings.items.ItemCrown;
 import lyeoj.tfcthings.items.ItemDiamondGrit;
-import lyeoj.tfcthings.items.ItemGrindstone;
 import lyeoj.tfcthings.items.ItemHikingBoots;
 import lyeoj.tfcthings.items.ItemHookJavelin;
 import lyeoj.tfcthings.items.ItemMetalBracing;
@@ -61,9 +60,6 @@ public class TFCThingsItems {
     public static final Item ITEM_HONING_STEEL_HEAD_DIAMOND = new ItemTFCThingsToolHead(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), 200,
             ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones, "honing_steel_head_diamond");
     public static final Item ITEM_DIAMOND_GRIT = new ItemDiamondGrit();
-    public static final Item ITEM_GRINDSTONE_QUARTZ = new ItemGrindstone(1, 640, "grindstone_quartz");
-    public static final Item ITEM_GRINDSTONE_STEEL = new ItemGrindstone(2, 6400, "grindstone_steel");
-    public static final Item ITEM_GRINDSTONE_DIAMOND = new ItemGrindstone(3, 7000, "grindstone_diamond");
     public static final Item ITEM_PIG_IRON_CARROT = new ItemPigIronCarrot(TFCRegistries.METALS.getValue(DefaultMetals.PIG_IRON))
             .setRegistryName("pig_iron_carrot")
             .setTranslationKey("pig_iron_carrot");
@@ -169,9 +165,6 @@ public class TFCThingsItems {
             ITEM_HONING_STEEL_HEAD,
             ITEM_HONING_STEEL_HEAD_DIAMOND,
             ITEM_DIAMOND_GRIT,
-            ITEM_GRINDSTONE_QUARTZ,
-            ITEM_GRINDSTONE_STEEL,
-            ITEM_GRINDSTONE_DIAMOND,
             ITEM_SNOWSHOES,
             ITEM_HIKING_BOOTS,
             ITEM_BEAR_TRAP_HALF,
@@ -252,7 +245,6 @@ public class TFCThingsItems {
             TFCThingsBlocks.PIGVIL_ITEM_RED,
             TFCThingsBlocks.PIGVIL_ITEM_PURPLE,
             TFCThingsBlocks.ROPE_BRIDGE_ITEM,
-            TFCThingsBlocks.ROPE_LADDER_ITEM,
-            TFCThingsBlocks.GRINDSTONE_ITEM
+            TFCThingsBlocks.ROPE_LADDER_ITEM
     };
 }

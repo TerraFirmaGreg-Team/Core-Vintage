@@ -1,4 +1,8 @@
-package lyeoj.tfcthings.tileentity;
+package su.terrafirmagreg.modules.device.objects.tiles;
+
+import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.device.objects.items.ItemGrindstone;
 
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,23 +19,20 @@ import net.minecraft.util.math.BlockPos;
 import lyeoj.tfcthings.capability.CapabilitySharpness;
 import lyeoj.tfcthings.capability.ISharpness;
 import lyeoj.tfcthings.event.TFCThingsEventHandler;
-import lyeoj.tfcthings.init.TFCThingsItems;
 import lyeoj.tfcthings.init.TFCThingsSoundEvents;
-import lyeoj.tfcthings.items.ItemGrindstone;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockFluidWater;
-import net.dries007.tfc.objects.te.TEInventory;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TileEntityGrindstone extends TEInventory implements ITickable {
+public class TEGrindstone extends TEBaseInventory implements ITickable {
 
     public static final int SLOT_GRINDSTONE = 0;
     public static final int SLOT_INPUT = 1;
     private int rotationTimer = 0;
     private boolean hasGrindstone;
 
-    public TileEntityGrindstone() {
+    public TEGrindstone() {
         super(2);
     }
 
@@ -60,14 +61,11 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
     }
 
     public boolean isItemValid(int slot, ItemStack stack) {
-        switch (slot) {
-            case SLOT_GRINDSTONE:
-                return stack.getItem() instanceof ItemGrindstone;
-            case SLOT_INPUT:
-                return stack.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null);
-            default:
-                return false;
-        }
+        return switch (slot) {
+            case SLOT_GRINDSTONE -> stack.getItem() instanceof ItemGrindstone;
+            case SLOT_INPUT -> stack.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null);
+            default -> false;
+        };
     }
 
     public int getSlotLimit(int slot) {
@@ -106,14 +104,14 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
             }
             if (this.rotationTimer == 1) {
                 sharpenItem(inputStack, grindstoneStack);
-                world.playSound((EntityPlayer) null, pos, TFCThingsSoundEvents.WHETSTONE_SHARPEN, SoundCategory.BLOCKS, 0.2F,
+                world.playSound(null, pos, TFCThingsSoundEvents.WHETSTONE_SHARPEN, SoundCategory.BLOCKS, 0.2F,
                         0.6F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
                 if (grindstoneStack.isEmpty()) {
                     for (int i = 0; i < 15; ++i) {
                         this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, (double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.875D,
                                 (double) this.pos.getZ() + 0.5D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
                                 this.world.rand.nextDouble() / 4.0D, (this.world.rand.nextDouble() - this.world.rand.nextDouble()) / 4.0D,
-                                new int[] { Item.getIdFromItem(TFCThingsItems.ITEM_GRINDSTONE_QUARTZ) });
+                                new int[] { Item.getIdFromItem(ItemsDevice.GRINDSTONE_QUARTZ) });
                     }
                     this.world.playSound((EntityPlayer) null, this.pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
                     this.world.playSound((EntityPlayer) null, this.pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.7F, 0.6F);
@@ -134,25 +132,17 @@ public class TileEntityGrindstone extends TEInventory implements ITickable {
     private BlockPos getFluidLocation() {
         int dir = getBlockMetadata();
         BlockPos check = pos.down();
-        switch (dir) {
-            case 0:
-                check = check.east();
-                break;
-            case 1:
-                check = check.south();
-                break;
-            case 2:
-                check = check.west();
-                break;
-            default:
-                check = check.north();
-        }
+        check = switch (dir) {
+            case 0 -> check.east();
+            case 1 -> check.south();
+            case 2 -> check.west();
+            default -> check.north();
+        };
         return check;
     }
 
     public int getFlowDirection() {
-        if (world.getBlockState(getFluidLocation()).getBlock() instanceof BlockFluidWater) {
-            BlockFluidWater water = (BlockFluidWater) world.getBlockState(getFluidLocation()).getBlock();
+        if (world.getBlockState(getFluidLocation()).getBlock() instanceof BlockFluidWater water) {
             if (getBlockMetadata() == 0 || getBlockMetadata() == 2) {
                 double flow = water.getFlowVector(world, getFluidLocation()).z;
                 if (flow > 0) {

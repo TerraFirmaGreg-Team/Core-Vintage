@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -42,13 +41,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 192;
 
     @SuppressWarnings("unused")
     public EntityAnimalSaberTooth(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -172,7 +173,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_SABERTOOTH_CRY : SoundAnimal.ANIMAL_SABERTOOTH_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_SABERTOOTH_CRY : SoundAnimal.ANIMAL_SABERTOOTH_SAY;
     }
 
     @Nullable

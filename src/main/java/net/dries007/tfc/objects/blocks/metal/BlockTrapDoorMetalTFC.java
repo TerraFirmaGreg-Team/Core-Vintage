@@ -4,6 +4,7 @@ import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.OreDictionaryHelper;
 

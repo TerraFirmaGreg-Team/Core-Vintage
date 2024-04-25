@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 
+
 import com.lumintorious.ambiental.api.IBlockTemperatureOwner;
 import com.lumintorious.ambiental.api.IBlockTemperatureProvider;
 import com.lumintorious.ambiental.api.ITileEntityTemperatureOwner;

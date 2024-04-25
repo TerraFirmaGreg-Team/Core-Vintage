@@ -33,7 +33,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -54,6 +53,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 
@@ -74,7 +74,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
 
     @SuppressWarnings("unused")
     public EntityLlamaTFC(World world) {
-        this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.LLAMA.adulthood, ConfigTFC.Animals.LLAMA.elder));
     }
 
@@ -367,7 +367,8 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ConfigTFC.Animals.LLAMA.oldDeathChance) {
                     this.setDead();
                 }
@@ -466,7 +467,8 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
         } else if (other == this) {
             // Only called if this animal is interacted with a spawn egg
             // Try to return to vanilla's default method a baby of this animal, as if bred normally
-            return new EntityLlamaTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+            return new EntityLlamaTFC(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
+                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
         }
         return null;
     }
@@ -474,7 +476,7 @@ public class EntityLlamaTFC extends EntityLlama implements IAnimal, ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.LLAMA.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityLlamaTFC baby = new EntityLlamaTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityLlamaTFC baby = new EntityLlamaTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             if (this.geneHealth > 0) {

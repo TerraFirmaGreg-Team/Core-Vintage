@@ -16,8 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-
 public class CreativeTabBase extends CreativeTabs {
 
     private final boolean hasSearchBar;
@@ -26,13 +24,13 @@ public class CreativeTabBase extends CreativeTabs {
     public CreativeTabBase(String TabName, String iconSupplier) {
         this(TabName, iconSupplier, false);
     }
- 
+
     public CreativeTabBase(String TabName, String iconSupplier, boolean hasSearchBar) {
-        this(TabName, ModUtils.getID(iconSupplier), hasSearchBar);
+        this(TabName, ModUtils.id(iconSupplier), hasSearchBar);
     }
 
     public CreativeTabBase(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
-        super(MOD_ID + "." + TabName);
+        super(ModUtils.idLocalized(TabName));
 
         this.iconSupplier = () -> new ItemStack(ForgeRegistries.ITEMS.getValue(iconSupplier));
         this.hasSearchBar = hasSearchBar;

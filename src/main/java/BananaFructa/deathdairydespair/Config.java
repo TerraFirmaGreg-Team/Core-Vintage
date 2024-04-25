@@ -2,6 +2,7 @@ package BananaFructa.deathdairydespair;
 
 import net.minecraftforge.common.config.Configuration;
 
+
 import java.io.File;
 
 public class Config {

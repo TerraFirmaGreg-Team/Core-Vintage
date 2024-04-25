@@ -1,5 +1,7 @@
 package lyeoj.tfcthings.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -34,9 +36,6 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfigurableItem {
 

@@ -61,7 +61,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.Constants.RNG;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, ITEBlock {

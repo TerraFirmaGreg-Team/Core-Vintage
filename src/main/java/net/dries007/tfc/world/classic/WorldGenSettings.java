@@ -1,7 +1,9 @@
 package net.dries007.tfc.world.classic;
 
+import su.terrafirmagreg.api.lib.Constants;
+
+
 import com.google.common.base.Strings;
-import net.dries007.tfc.Constants;
 
 @SuppressWarnings("WeakerAccess")
 public class WorldGenSettings {

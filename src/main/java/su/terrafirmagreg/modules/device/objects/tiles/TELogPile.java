@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -27,7 +28,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
@@ -206,7 +206,7 @@ public class TELogPile extends TEBaseInventory implements ITickable, IContainerP
             }
         } while (block == Blocks.AIR || block instanceof BlockCharcoalPile);
 
-        double logs = countLogs() * (0.25 + 0.25 * Constants.RNG.nextFloat());
+        double logs = countLogs() * (0.25 + 0.25 * MathConstants.RNG.nextFloat());
         int charcoal = (int) MathHelper.clamp(logs, 0, 8);
         if (charcoal == 0) {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());

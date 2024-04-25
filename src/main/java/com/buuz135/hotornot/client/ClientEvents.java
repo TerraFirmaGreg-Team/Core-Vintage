@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.util.ItemEffect;
 

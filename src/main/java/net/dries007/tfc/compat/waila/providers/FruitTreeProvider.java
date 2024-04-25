@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -24,10 +26,6 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.ArrayList;
 import java.util.List;

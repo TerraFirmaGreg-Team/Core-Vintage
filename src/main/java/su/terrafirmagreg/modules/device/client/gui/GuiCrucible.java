@@ -17,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;
 
+
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.FluidSpriteCache;
@@ -35,7 +36,7 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public class GuiCrucible extends GuiContainerTE<TECrucible> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/crucible.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/crucible.png");
     private static final int MAX_ELEMENTS = 3;
     private int scrollPos;
     private boolean scrollPress;

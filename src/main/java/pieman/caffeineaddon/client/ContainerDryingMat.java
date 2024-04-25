@@ -1,12 +1,12 @@
 package pieman.caffeineaddon.client;
 
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
+import net.dries007.tfc.objects.container.ContainerTE;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import pieman.caffeineaddon.blocks.TEDryingMat;
 
 public class ContainerDryingMat extends ContainerTE<TEDryingMat> {

@@ -1,5 +1,6 @@
 package tfctech.objects.tileentities;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.te.TEBase;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -104,7 +104,7 @@ public class TELatexExtractor extends TEBase implements ITickable {
 
     public boolean makeCut() {
         if (flowTicks < 1 && hasPot() && hasBase()) {
-            flowTicks = ICalendar.TICKS_IN_DAY / 2 + Constants.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
+            flowTicks = ICalendar.TICKS_IN_DAY / 2 + MathConstants.RNG.nextInt(ICalendar.TICKS_IN_DAY * 2);
             return true;
         }
         return false;

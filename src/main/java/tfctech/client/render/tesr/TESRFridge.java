@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
+
 import tfctech.client.render.models.ModelFridge;
 import tfctech.objects.tileentities.TEFridge;
 

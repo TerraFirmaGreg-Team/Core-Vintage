@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -19,10 +21,6 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Collections;
 import java.util.List;

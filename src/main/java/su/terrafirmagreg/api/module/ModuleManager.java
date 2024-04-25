@@ -36,6 +36,14 @@ public class ModuleManager {
         return INSTANCE;
     }
 
+    private static ModuleBase getCoreModule(List<ModuleBase> modules) {
+        for (ModuleBase module : modules) {
+            Module annotation = module.getClass().getAnnotation(Module.class);
+            if (annotation.coreModule()) return module;
+        }
+        return null;
+    }
+
     public void setup() {
 
         Map<String, List<ModuleBase>> modules = getModules();
@@ -132,14 +140,6 @@ public class ModuleManager {
         } while (changed);
 
         loadedModules.addAll(sortedModules.values());
-    }
-
-    private static ModuleBase getCoreModule(List<ModuleBase> modules) {
-        for (ModuleBase module : modules) {
-            Module annotation = module.getClass().getAnnotation(Module.class);
-            if (annotation.coreModule()) return module;
-        }
-        return null;
     }
 
     public boolean isModuleEnabled(ResourceLocation id) {

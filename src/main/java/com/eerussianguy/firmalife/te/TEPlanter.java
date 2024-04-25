@@ -8,18 +8,20 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import com.eerussianguy.firmalife.util.IWaterable;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
  *
@@ -115,7 +117,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
         long growthTicks = (long) (ICalendar.TICKS_IN_DAY * tierModifier * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
         while (getTicksSinceUpdate() > growthTicks) {
             reduceCounter(growthTicks);
-            int slot = Constants.RNG.nextInt(4);
+            int slot = RNG.nextInt(4);
             if (waterUses < 0) {
                 resetCounter();
                 return;
@@ -165,7 +167,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
         if (recipe != null && PlanterRecipe.getMaxStage(recipe) == getStage(slot)) {
             ItemStack returnStack = recipe.getOutputItem(inventory.getStackInSlot(slot));
             ItemHandlerHelper.giveItemToPlayer(player, returnStack);
-            final int seeds = 1 + Constants.RNG.nextInt(2);
+            final int seeds = 1 + RNG.nextInt(2);
             ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(inventory.getStackInSlot(slot).getItem(), seeds));
             inventory.setStackInSlot(slot, ItemStack.EMPTY);
             stages[slot] = 0;

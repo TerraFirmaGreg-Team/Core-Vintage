@@ -17,15 +17,17 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+
 import com.buuz135.hotornot.object.item.ItemMetalTongsHead;
 import com.buuz135.hotornot.object.item.ItemMetalTongsJawMold;
 import com.google.gson.JsonObject;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @SuppressWarnings("unused")
 public class UnMoldJawPiece extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
@@ -170,7 +172,7 @@ public class UnMoldJawPiece extends IForgeRegistryEntry.Impl<IRecipe> implements
      * @return ItemStack.EMPTY on break, the mold (empty) if pass
      */
     public ItemStack getMoldResult(final ItemStack moldStack) {
-        if (Constants.RNG.nextFloat() <= chance) {
+        if (RNG.nextFloat() <= chance) {
             return new ItemStack(moldStack.getItem());
         }
 

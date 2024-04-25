@@ -17,6 +17,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+
 import net.dries007.tfc.api.capability.ItemStickCapability;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -29,7 +30,7 @@ import java.util.function.Supplier;
 
 public final class SizeCapability {
 
-    public static final ResourceLocation KEY = ModUtils.getID("size_capability");
+    public static final ResourceLocation KEY = ModUtils.id("size_capability");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
     @CapabilityInject(ISizeCapability.class)
     public static Capability<ISizeCapability> SIZE_CAPABILITY;

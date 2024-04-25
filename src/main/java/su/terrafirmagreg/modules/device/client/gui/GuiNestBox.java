@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiNestBox extends GuiContainerBase {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/small_inventory.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/small_inventory.png");
 
     public GuiNestBox(Container container, InventoryPlayer playerInv) {
         super(container, playerInv, BACKGROUND);

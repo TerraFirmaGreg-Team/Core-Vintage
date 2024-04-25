@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
+
 import com.buuz135.hotornot.HotOrNot;
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.config.HotLists;

@@ -9,7 +9,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -17,6 +16,8 @@ import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.groundcover.BlockLightstone;
 
 import java.util.Random;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class WorldGenLightstones implements IWorldGenerator {
 
@@ -31,7 +32,7 @@ public class WorldGenLightstones implements IWorldGenerator {
         final float floraDensity = data.getFloraDensity();
         final float floraDiversity = data.getFloraDiversity();
 
-        int lightstoneCount = (Constants.RNG.nextInt(8) + 1);
+        int lightstoneCount = (RNG.nextInt(8) + 1);
         for (int i = rng.nextInt(Math.round(1 / floraDiversity)); i < (4 + floraDensity + floraDiversity) * lightstoneCount; i++) {
             BlockPos blockPos = chunkPos.add(rng.nextInt(16) + 8, rng.nextInt(16), rng.nextInt(16) + 8);
             if (blockPos.getY() < WorldTypeTFC.SEALEVEL - 30 && blockPos.getY() > 10) {

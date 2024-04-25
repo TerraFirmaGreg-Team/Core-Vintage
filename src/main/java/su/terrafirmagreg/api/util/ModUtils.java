@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 
 @SuppressWarnings("unused")
 public final class ModUtils {
@@ -43,12 +43,12 @@ public final class ModUtils {
      * @param string строка идентификатора ресурса
      * @return идентификатор ресурса
      */
-    public static ResourceLocation getID(String string) {
+    public static ResourceLocation id(String string) {
         return new ResourceLocation(MOD_ID, string);
     }
 
-    public static String getIDName(String string) {
-        return String.format(MOD_ID + ".%s", string);
+    public static String idLocalized(String string) {
+        return String.format(MOD_ID + ".%s", string).toLowerCase();
     }
 
     /**

@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalQuail extends RenderLiving<EntityAnimalQuail> {
 
-    private static final ResourceLocation FEMALE_YOUNG = ModUtils.getID("textures/entity/animal/livestock/quailf_young.png");
-    private static final ResourceLocation FEMALE_OLD = ModUtils.getID("textures/entity/animal/livestock/quailf_old.png");
+    private static final ResourceLocation FEMALE_YOUNG = ModUtils.id("textures/entity/animal/livestock/quailf_young.png");
+    private static final ResourceLocation FEMALE_OLD = ModUtils.id("textures/entity/animal/livestock/quailf_old.png");
 
-    private static final ResourceLocation MALE_YOUNG = ModUtils.getID("textures/entity/animal/livestock/quailm_young.png");
-    private static final ResourceLocation MALE_OLD = ModUtils.getID("textures/entity/animal/livestock/quailm_old.png");
+    private static final ResourceLocation MALE_YOUNG = ModUtils.id("textures/entity/animal/livestock/quailm_young.png");
+    private static final ResourceLocation MALE_OLD = ModUtils.id("textures/entity/animal/livestock/quailm_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = ModUtils.getID("textures/entity/animal/livestock/quail_chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = ModUtils.id("textures/entity/animal/livestock/quail_chick.png");
 
     public RenderAnimalQuail(RenderManager manager) {
         super(manager, new ModelAnimalQuail(), 0.3F);

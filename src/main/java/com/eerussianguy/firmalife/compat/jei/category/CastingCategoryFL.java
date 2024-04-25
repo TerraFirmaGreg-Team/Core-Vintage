@@ -3,6 +3,7 @@ package com.eerussianguy.firmalife.compat.jei.category;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
+
 import com.eerussianguy.firmalife.compat.jei.wrapper.CastingRecipeWrapperFL;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;

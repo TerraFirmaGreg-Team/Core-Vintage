@@ -10,13 +10,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 
 public class RenderAnimalBoar extends RenderLiving<EntityAnimalBoar> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.getID("textures/entity/animal/huntable/boar.png");
+    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/huntable/boar.png");
 
     public RenderAnimalBoar(RenderManager renderManager) {
         super(renderManager, new ModelAnimalBoar(), 0.7F);

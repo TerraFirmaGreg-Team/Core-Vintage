@@ -2,6 +2,7 @@ package lyeoj.tfcthings.proxy;
 
 import net.minecraft.client.Minecraft;
 
+
 import lyeoj.tfcthings.entity.projectile.EntityThrownHookJavelin;
 
 public class ClientProxy extends CommonProxy {

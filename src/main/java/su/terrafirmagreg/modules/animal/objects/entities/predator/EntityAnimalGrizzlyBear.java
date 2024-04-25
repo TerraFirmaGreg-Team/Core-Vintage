@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -53,6 +52,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPredator, EntityAnimalAIStandAttack.IEntityStandAttack {
 
     private static final int DAYS_TO_ADULTHOOD = 240;
@@ -68,7 +69,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
     @SuppressWarnings("unused")
     public EntityAnimalGrizzlyBear(World worldIn) {
-        this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, IAnimal.Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalGrizzlyBear(World worldIn, Gender gender, int birthDay) {
@@ -254,7 +255,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_BEAR_CRY : SoundAnimal.ANIMAL_BEAR_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_BEAR_CRY : SoundAnimal.ANIMAL_BEAR_SAY;
     }
 
     @Nullable

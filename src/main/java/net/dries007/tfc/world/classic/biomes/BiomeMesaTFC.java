@@ -12,6 +12,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
+
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -179,10 +180,10 @@ public class BiomeMesaTFC extends BiomeTFC {
 
     }
 
-    public void generateBands(long p_150619_1_) {
+    public void generateBands(long seed) {
         this.clayBands = new IBlockState[144];
         Arrays.fill(this.clayBands, HARDENED_CLAY);
-        Random random = new Random(p_150619_1_);
+        Random random = new Random(seed);
         this.clayBandsOffsetNoise = new NoiseGeneratorPerlin(random, 1);
 
         int i2;

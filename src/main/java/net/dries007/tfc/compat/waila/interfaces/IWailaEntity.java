@@ -3,6 +3,7 @@ package net.dries007.tfc.compat.waila.interfaces;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

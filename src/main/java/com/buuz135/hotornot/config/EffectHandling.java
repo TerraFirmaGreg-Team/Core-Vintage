@@ -4,6 +4,7 @@ import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.RangeInt;
 
+
 import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
 
 public final class EffectHandling {

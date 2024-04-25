@@ -8,6 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
+
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import tfctech.client.TechGuiHandler;

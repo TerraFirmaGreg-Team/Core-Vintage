@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -23,11 +22,13 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityAnimalZebu(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.ZEBU.adulthood, ModuleAnimalConfig.ENTITIES.ZEBU.elder));
     }
 
@@ -50,7 +51,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.ZEBU.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalZebu baby = new EntityAnimalZebu(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalZebu baby = new EntityAnimalZebu(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);

@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
@@ -58,6 +57,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 @MethodsReturnNonnullByDefault
 public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock, IRidable {
 
@@ -71,7 +72,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
     private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
     public EntityAnimalMule(World world) {
-        this(world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(world, Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.MULE.adulthood, ModuleAnimalConfig.ENTITIES.MULE.elder));
     }
 
@@ -159,9 +160,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender()
-                .name()
-                .toLowerCase());
+        return new TextComponentTranslation(ModUtils.idLocalized("animal." + entityString + "." + this.getGender().name()));
     }
 
     public boolean isHalter() {
@@ -284,7 +283,8 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.MULE.oldDeathChance) {
                     this.setDead();
                 }
@@ -302,7 +302,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
     public EntityAgeable createChild(@NotNull EntityAgeable other) {
         if (other == this) {
             // Only called if this animal is interacted with a spawn egg
-            EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             this.setOffspringAttributes(this, baby);
             return baby;
@@ -405,7 +405,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                             ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                                    Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                                    ModUtils.idLocalized("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

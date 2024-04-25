@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities;
 
-import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.network.PacketBuffer;
@@ -12,9 +12,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
 
+
 import org.jetbrains.annotations.NotNull;
 
-@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID)
 public class TFCEntities {
 
     @GameRegistry.ObjectHolder("tfc:long")

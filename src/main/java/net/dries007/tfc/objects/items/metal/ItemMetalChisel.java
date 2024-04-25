@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
@@ -34,9 +36,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 public class ItemMetalChisel extends ItemMetalTool {
 

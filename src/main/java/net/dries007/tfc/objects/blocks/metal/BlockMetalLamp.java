@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.metal;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -36,10 +38,6 @@ import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.HashMap;
 import java.util.Map;

@@ -33,7 +33,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -46,6 +45,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 192;
@@ -55,7 +56,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
 
     @SuppressWarnings("unused")
     public EntityLionTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityLionTFC(World worldIn, Gender gender, int birthDay) {
@@ -94,7 +95,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
     public void birthChildren() {
         int numberOfChildren = 1; //one always
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityLionTFC baby = new EntityLionTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityLionTFC baby = new EntityLionTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             this.world.spawnEntity(baby);
@@ -181,7 +182,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
     }
 
     @Override
-    protected SoundEvent getAmbientSound() {return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;}
+    protected SoundEvent getAmbientSound() {return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;}
 
     @Nullable
     protected ResourceLocation getLootTable() {return LootTablesAnimal.ANIMALS_LION;}

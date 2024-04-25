@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities;
 
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -95,7 +94,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
      */
     public static int getRandomGrowth(int daysToAdult, int daysToElder) {
         int randomFactor = daysToElder > 0 ? (int) (daysToElder * 1.25f) : daysToAdult * 4;
-        int lifeTimeDays = daysToAdult + Constants.RANDOM.nextInt(randomFactor);
+        int lifeTimeDays = daysToAdult + MathConstants.RNG.nextInt(randomFactor);
         return (int) (CalendarTFC.PLAYER_TIME.getTotalDays() - lifeTimeDays);
     }
 
@@ -210,7 +209,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(ModUtils.getIDName("animal." + entityString + "." + this.getGender().name().toLowerCase()));
+        return new TextComponentTranslation(ModUtils.idLocalized("animal." + entityString + "." + this.getGender().name().toLowerCase()));
     }
 
     @Nullable
@@ -226,7 +225,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
             // Try to return to vanilla's default method a baby of this animal, as if bred normally
             try {
                 EntityAnimalBase baby = this.getClass().getConstructor(World.class).newInstance(this.world);
-                baby.setGender(Gender.valueOf(Constants.RANDOM.nextBoolean()));
+                baby.setGender(Gender.valueOf(MathConstants.RNG.nextBoolean()));
                 baby.setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
                 baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
                 return baby;
@@ -307,7 +306,8 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < getOldDeathChance()) {
                     this.setDead();
                 }
@@ -373,7 +373,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                             ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                                    Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                                    ModUtils.idLocalized(".tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

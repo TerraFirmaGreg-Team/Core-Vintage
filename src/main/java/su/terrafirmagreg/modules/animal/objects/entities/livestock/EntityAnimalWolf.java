@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
@@ -57,6 +56,8 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 // Changes in config allow placing this animal in livestock and still respawn
 public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock {
 
@@ -75,7 +76,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
 
     @SuppressWarnings("unused")
     public EntityAnimalWolf(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.WOLF.adulthood, ModuleAnimalConfig.ENTITIES.WOLF.elder));
     }
 
@@ -122,7 +123,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.WOLF.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalWolf baby = new EntityAnimalWolf(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalWolf baby = new EntityAnimalWolf(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
@@ -218,9 +219,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender()
-                .name()
-                .toLowerCase());
+        return new TextComponentTranslation(ModUtils.idLocalized(".animal." + entityString + "." + this.getGender().name()));
     }
 
     @Override
@@ -364,7 +363,8 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.WOLF.oldDeathChance) {
                     this.setDead();
                 }
@@ -431,7 +431,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
                             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                                 ModuleAnimal.PACKET_SERVICE.sendTo(
                                         SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                                                Tags.MOD_ID + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
+                                                ModUtils.idLocalized("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                             }
                         }
                     }
@@ -455,7 +455,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
             // Try to return to vanilla's default method a baby of this animal, as if bred normally
             try {
                 EntityAnimalWolf baby = new EntityAnimalWolf(this.world);
-                baby.setGender(Gender.valueOf(Constants.RANDOM.nextBoolean()));
+                baby.setGender(Gender.valueOf(RNG.nextBoolean()));
                 baby.setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
                 baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
                 if (this.isTamed()) {

@@ -5,6 +5,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.util.EnumHelper;
 
+
 import lyeoj.tfcthings.items.ItemBearTrapHalf;
 import lyeoj.tfcthings.items.ItemCrown;
 import lyeoj.tfcthings.items.ItemDiamondGrit;

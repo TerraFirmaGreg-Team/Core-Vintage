@@ -25,11 +25,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Objects;

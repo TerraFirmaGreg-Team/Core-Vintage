@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -25,10 +27,6 @@ import com.eerussianguy.firmalife.render.UnlistedCropProperty;
 import com.eerussianguy.firmalife.te.TEPlanter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 

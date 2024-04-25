@@ -36,7 +36,6 @@ import net.minecraft.world.biome.Biome;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -56,6 +55,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, IRidable {
@@ -78,7 +78,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
     private int geneHorseVariant;
 
     public EntityHorseTFC(World world) {
-        this(world, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(world, Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.HORSE.adulthood, ConfigTFC.Animals.HORSE.elder));
     }
 
@@ -400,7 +400,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
             this.onFertilized((IAnimal) other);
         } else if (other == this) {
             // Only called if this animal is interacted with a spawn egg
-            EntityHorseTFC baby = new EntityHorseTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityHorseTFC baby = new EntityHorseTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             this.setOffspringAttributes(this, baby);
             baby.setHorseVariant(this.getHorseVariant());
@@ -467,7 +467,8 @@ public class EntityHorseTFC extends EntityHorse implements IAnimal, ILivestock, 
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ConfigTFC.Animals.HORSE.oldDeathChance) {
                     this.setDead();
                 }

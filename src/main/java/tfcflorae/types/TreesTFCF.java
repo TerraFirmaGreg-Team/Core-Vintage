@@ -9,8 +9,8 @@ import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenNormal;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenVariants;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenRandom;
+import net.dries007.tfc.world.classic.worldgen.trees.TreeGenVariants;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;

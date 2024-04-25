@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.te;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,9 +16,6 @@ import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
 
 public class TELeafMat extends TEInventory implements ITickable {
 

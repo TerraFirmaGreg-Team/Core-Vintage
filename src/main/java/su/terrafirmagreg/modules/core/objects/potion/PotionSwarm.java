@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.effects.PotionBase;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
@@ -26,7 +26,7 @@ public class PotionSwarm extends PotionBase {
         World world = entity.getEntityWorld();
         if (world.isRemote) {
             BlockPos pos = entity.getPosition();
-            Random rand = Constants.RANDOM;
+            Random rand = MathConstants.RNG;
             double x = pos.getX() + 0.5;
             double y = pos.getY() + 0.5;
             double z = pos.getZ() + 0.5;

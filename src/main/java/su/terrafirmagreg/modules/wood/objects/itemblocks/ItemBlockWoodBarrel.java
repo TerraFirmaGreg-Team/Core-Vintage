@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.itemblocks;
 
-import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
@@ -128,20 +128,22 @@ public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
 
             if (fluidStack == null || fluidStack.amount == 0) {
                 if (inventory.isEmpty()) {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_empty"));
+                    tooltip.add(TextFormatting.BLUE + I18n.format(ModUtils.idLocalized("tooltip.barrel_empty")));
                 } else {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_item", inventory.getCount(), inventory
+                    tooltip.add(TextFormatting.BLUE + I18n.format(ModUtils.idLocalized("tooltip.barrel_item"), inventory.getCount(), inventory
                             .getItem()
                             .getItemStackDisplayName(inventory)));
                 }
             } else {
                 tooltip.add(
-                        TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
+                        TextFormatting.BLUE +
+                                I18n.format(ModUtils.idLocalized("tooltip.barrel_fluid"), fluidStack.amount, fluidStack.getLocalizedName()));
 
                 if (!inventory.isEmpty()) {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(Tags.MOD_ID + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory
-                            .getItem()
-                            .getItemStackDisplayName(inventory)));
+                    tooltip.add(
+                            TextFormatting.BLUE + I18n.format(ModUtils.idLocalized("tooltip.barrel_item_in_fluid"), inventory.getCount(), inventory
+                                    .getItem()
+                                    .getItemStackDisplayName(inventory)));
                 }
             }
 
@@ -192,6 +194,16 @@ public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
     @Override
     public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new ItemBarrelFluidHandler(stack);
+    }
+
+    @Override
+    public ItemMeshDefinition getCustomMesh() {
+
+        final var resurceLocation = block.getResourceLocation();
+
+        return stack -> stack.getTagCompound() != null ?
+                new ModelResourceLocation(resurceLocation, "sealed=true") :
+                new ModelResourceLocation(resurceLocation, "sealed=false");
     }
 
     // This is not an item handler, but still saves items from a sealed barrel
@@ -260,15 +272,5 @@ public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
                 }
             }
         }
-    }
-
-    @Override
-    public ItemMeshDefinition getCustomMesh() {
-
-        final var resurceLocation = block.getResourceLocation();
-
-        return stack -> stack.getTagCompound() != null ?
-                new ModelResourceLocation(resurceLocation, "sealed=true") :
-                new ModelResourceLocation(resurceLocation, "sealed=false");
     }
 }

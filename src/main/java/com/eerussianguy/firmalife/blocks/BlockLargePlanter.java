@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -38,10 +40,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 

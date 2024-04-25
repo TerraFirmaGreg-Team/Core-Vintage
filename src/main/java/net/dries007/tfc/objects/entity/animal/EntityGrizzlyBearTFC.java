@@ -38,7 +38,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
@@ -51,6 +50,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredator, EntityAIStandAttack.IEntityStandAttack {
 
@@ -67,7 +68,7 @@ public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredato
 
     @SuppressWarnings("unused")
     public EntityGrizzlyBearTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityGrizzlyBearTFC(World worldIn, Gender gender, int birthDay) {
@@ -252,7 +253,7 @@ public class EntityGrizzlyBearTFC extends EntityAnimalMammal implements IPredato
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_BEAR_CRY : SoundAnimal.ANIMAL_BEAR_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_BEAR_CRY : SoundAnimal.ANIMAL_BEAR_SAY;
     }
 
     @Nullable

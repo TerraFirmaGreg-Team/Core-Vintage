@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -30,11 +29,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityAnimalPig(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.PIG.adulthood, ModuleAnimalConfig.ENTITIES.PIG.elder));
     }
 
@@ -77,7 +78,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.PIG.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalPig baby = new EntityAnimalPig(world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalPig baby = new EntityAnimalPig(world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);

@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
+
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 

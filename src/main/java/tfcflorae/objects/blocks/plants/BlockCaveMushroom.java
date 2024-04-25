@@ -1,5 +1,6 @@
 package tfcflorae.objects.blocks.plants;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.Block;
@@ -28,8 +29,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
@@ -121,7 +122,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if (!PotionEffects.isEmpty())
             for (PotionEffectToHave Effect : PotionEffects) {
-                if (Constants.RNG.nextInt(Effect.chance) == 0)
+                if (MathConstants.RNG.nextInt(Effect.chance) == 0)
                     player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));
             }
     }

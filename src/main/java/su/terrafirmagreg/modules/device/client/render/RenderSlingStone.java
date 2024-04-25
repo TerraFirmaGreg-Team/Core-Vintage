@@ -9,12 +9,13 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingStone extends Render<EntitySlingStone> {
 
-    private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.getID("textures/blocks/rock/raw/dacite.png");
+    private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.id("textures/blocks/rock/raw/dacite.png");
     private final ModelSlingStone slingStoneModel = new ModelSlingStone();
 
     public RenderSlingStone(RenderManager renderManager) {

@@ -40,7 +40,7 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
             throw new RuntimeException(String.format("LoomRecipe name must contain any character: [%s]", builder.name));
         }
 
-        RegistryWood.LOOM.register(this.setRegistryName(ModUtils.getID(builder.name)));
+        RegistryWood.LOOM.register(this.setRegistryName(ModUtils.id(builder.name)));
 
     }
 
@@ -120,7 +120,7 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> implements 
         }
 
         public Builder setInProgressTexture(String inProgressTexture) {
-            this.inProgressTexture = ModUtils.getID(inProgressTexture);
+            this.inProgressTexture = ModUtils.id(inProgressTexture);
             return this;
         }
 

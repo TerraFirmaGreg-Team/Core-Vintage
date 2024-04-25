@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.client.model.animal.ModelLlamaTFC;
 
 @SideOnly(Side.CLIENT)

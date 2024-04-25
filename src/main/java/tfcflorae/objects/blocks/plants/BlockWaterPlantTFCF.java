@@ -29,8 +29,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -54,6 +54,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPlantable {
 
@@ -278,7 +279,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
         if (!worldIn.isRemote && (stack.getItem()
                 .getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
                 .getHarvestLevel(stack, "scythe", player, state) != -1)) {
-            if (Constants.RNG.nextDouble() <= (state.getValue(AGE) + 1) / 3.0D) //+33% change for each age
+            if (RNG.nextDouble() <= (state.getValue(AGE) + 1) / 3.0D) //+33% change for each age
             {
                 spawnAsEntity(worldIn, pos, new ItemStack(ItemFoodTFC.get(Food.SEAWEED), 1));
             }

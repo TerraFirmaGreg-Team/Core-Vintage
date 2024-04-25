@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -21,9 +23,6 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
 
 @MethodsReturnNonnullByDefault
 

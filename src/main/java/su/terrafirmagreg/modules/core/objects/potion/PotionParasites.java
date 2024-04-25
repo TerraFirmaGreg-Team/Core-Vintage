@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import net.minecraft.entity.EntityLivingBase;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class PotionParasites extends PotionBase {

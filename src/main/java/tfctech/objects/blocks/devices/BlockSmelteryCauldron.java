@@ -1,5 +1,7 @@
 package tfctech.objects.blocks.devices;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,11 +29,6 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfctech.client.TechGuiHandler;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -36,13 +35,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHuntable {
 
     private static final int DAYS_TO_ADULTHOOD = 128;
 
     @SuppressWarnings("unused")
     public EntityAnimalWildebeest(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalWildebeest(World worldIn, Gender gender, int birthDay) {

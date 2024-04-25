@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
@@ -20,7 +21,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -135,7 +135,7 @@ public class TEFirePit extends TETickableInventory
         burnTicks -= ConfigTFC.Devices.FIRE_PIT.rainTicks;
         // Play the "tsssss" sound
         world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-                0.8f + net.dries007.tfc.Constants.RNG.nextFloat() * 0.4f);
+                0.8f + MathConstants.RNG.nextFloat() * 0.4f);
     }
 
     @Override
@@ -370,7 +370,7 @@ public class TEFirePit extends TETickableInventory
         burnTemperature = nbt.getFloat("burnTemperature");
         lastPlayerTick = nbt.getLong("lastPlayerTick");
         if (nbt.hasKey("leftover")) {
-            NBTTagList surplusItems = nbt.getTagList("leftover", Constants.NBT.TAG_COMPOUND);
+            NBTTagList surplusItems = nbt.getTagList("leftover", 10);
             for (int i = 0; i < surplusItems.tagCount(); i++) {
                 leftover.add(new ItemStack(surplusItems.getCompoundTagAt(i)));
             }

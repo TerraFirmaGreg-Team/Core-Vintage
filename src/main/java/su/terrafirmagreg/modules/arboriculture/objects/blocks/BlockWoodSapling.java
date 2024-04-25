@@ -33,14 +33,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import lombok.Getter;
-
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Random;

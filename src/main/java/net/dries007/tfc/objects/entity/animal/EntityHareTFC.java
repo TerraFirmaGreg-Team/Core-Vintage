@@ -15,12 +15,13 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityHareTFC extends EntityRabbitTFC implements IHuntable {
 
@@ -29,7 +30,7 @@ public class EntityHareTFC extends EntityRabbitTFC implements IHuntable {
 
     @SuppressWarnings("unused")
     public EntityHareTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityHareTFC(World worldIn, Gender gender, int birthDay) {

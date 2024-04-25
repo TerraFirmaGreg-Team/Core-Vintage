@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
 import net.dries007.tfc.objects.items.metal.ItemAnvil;

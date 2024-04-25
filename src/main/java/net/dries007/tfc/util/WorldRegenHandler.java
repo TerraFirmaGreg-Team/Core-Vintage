@@ -60,6 +60,7 @@ import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.
@@ -74,7 +75,6 @@ public class WorldRegenHandler {
     private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
     private static final RegenWildCropsTFCF CROPSTFCF_GEN = new RegenWildCropsTFCF();
     private static final WorldGenBerryBushes BUSH_GEN = new WorldGenBerryBushes();
-    private static final Random RANDOM = new Random();
     private static final List<ChunkPos> POSITIONS = new LinkedList<>();
 
     @SubscribeEvent
@@ -110,7 +110,7 @@ public class WorldRegenHandler {
                             //Nuke any rocks and sticks in chunk.
                             removeAllPlacedItems(event.world, pos);
                             double rockModifier = ConfigTFC.General.WORLD_REGEN.sticksRocksModifier;
-                            ROCKS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                            ROCKS_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
 
                             final float density = chunkDataTFC.getFloraDensity();
                             List<Tree> trees = chunkDataTFC.getValidTrees();
@@ -118,7 +118,7 @@ public class WorldRegenHandler {
                             if (trees.isEmpty()) {
                                 stickDensity = 1 + (int) (1.5f * density * rockModifier);
                             }
-                            WorldGenTrees.generateLooseSticks(RANDOM, pos.x, pos.z, event.world, stickDensity);
+                            WorldGenTrees.generateLooseSticks(RNG, pos.x, pos.z, event.world, stickDensity);
                         }
 
                         //Nuke crops/mushrooms/dead crops (not sure the latter is working.
@@ -129,19 +129,19 @@ public class WorldRegenHandler {
                         float floraDiversity = chunkDataTFC.getFloraDiversity();
                         Plant mushroom = TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI);
                         if (mushroom != null) PLANT_GEN.setGeneratedPlant(mushroom);
-                        for (float i = RANDOM.nextInt(Math.round(3 / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
-                            BlockPos blockMushroomPos = event.world.getHeight(blockPos.add(RANDOM.nextInt(16) + 8, 0, RANDOM.nextInt(16) + 8));
-                            PLANT_GEN.generate(event.world, RANDOM, blockMushroomPos);
+                        for (float i = RNG.nextInt(Math.round(3 / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
+                            BlockPos blockMushroomPos = event.world.getHeight(blockPos.add(RNG.nextInt(16) + 8, 0, RNG.nextInt(16) + 8));
+                            PLANT_GEN.generate(event.world, RNG, blockMushroomPos);
                         }
-                        CROPS_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
-                        CROPSTFCF_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
-                        BUSH_GEN.generate(RANDOM, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                        CROPS_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                        CROPSTFCF_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
+                        BUSH_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
                         int worldX = pos.x << 4;
                         int worldZ = pos.z << 4;
                         BlockPos blockpos = new BlockPos(worldX, 0, worldZ);
                         Biome biome = event.world.getBiome(blockpos.add(16, 0, 16));
                         removePredators(event.world, pos);
-                        regenPredators(event.world, biome, worldX + 8, worldZ + 8, 16, 16, RANDOM);
+                        regenPredators(event.world, biome, worldX + 8, worldZ + 8, 16, 16, RNG);
 
                         // notably missing: berry bushes
                         chunkDataTFC.resetLastUpdateYear();

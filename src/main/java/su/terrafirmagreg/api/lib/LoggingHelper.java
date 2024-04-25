@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 
 /**
  * A wrapper to the Log4J wrapper, which adds some extra utility, such as the stacktrace being added to warning messages.
@@ -39,7 +39,7 @@ public class LoggingHelper {
      * @param name The name of the logger to create.
      */
     public LoggingHelper(String name) {
-        this(LogManager.getLogger(ModUtils.getIDName(name)));
+        this(LogManager.getLogger(ModUtils.idLocalized(name)));
     }
 
     /**
@@ -50,6 +50,15 @@ public class LoggingHelper {
     public LoggingHelper(Logger logger) {
 
         this.logger = logger;
+    }
+
+    public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords, List<String> list) {
+
+        final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords).split(SystemUtils.LINE_SEPARATOR);
+
+        list.addAll(Arrays.asList(lines));
+
+        return list;
     }
 
     /**
@@ -183,14 +192,5 @@ public class LoggingHelper {
         }
 
         this.error("********************************************************************************");
-    }
-
-    public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords, List<String> list) {
-
-        final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords).split(SystemUtils.LINE_SEPARATOR);
-
-        list.addAll(Arrays.asList(lines));
-
-        return list;
     }
 }

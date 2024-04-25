@@ -48,14 +48,13 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_OSA;
 public class OversizedItemInStorageArea {
 
     public static final String MOD_NAME = "OversizedItemInStorageArea";
-
+    static final LoggingHelper LOGGER = new LoggingHelper(MODID_OSA);
     private static final Pattern splitter = Pattern.compile("\\b([A-Za-z0-9:._\\s]+)");
     /**
      * This is the instance of your mod as created by Forge. It will never be null.
      */
     @Mod.Instance(MODID_OSA)
     public static OversizedItemInStorageArea INSTANCE;
-    static final LoggingHelper LOGGER = new LoggingHelper(MODID_OSA);
     DamageSource playerIncinerator = new DamageSource("oiisaincinerator").setDamageBypassesArmor().setDamageIsAbsolute();
     Map<String, Integer> weightMap = new HashMap<>();
     Map<String, Integer> containerSizeOverideMap = new HashMap<>();

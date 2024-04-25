@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -32,7 +32,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
 
     @SuppressWarnings("unused")
     public EntityAnimalHare(World worldIn) {
-        this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalHare(World worldIn, IAnimal.Gender gender, int birthDay) {

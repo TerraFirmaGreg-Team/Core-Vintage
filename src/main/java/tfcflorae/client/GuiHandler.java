@@ -1,5 +1,7 @@
 package tfcflorae.client;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -13,11 +15,6 @@ import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerKnapping;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.client.gui.GuiUrn;

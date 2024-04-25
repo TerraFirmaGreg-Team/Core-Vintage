@@ -3,6 +3,7 @@ package net.dries007.tfc.api.capability.food;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
+
 import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -58,7 +58,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
     public float wingRotDelta = 1.0F;
 
     public EntityAnimalChicken(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.CHICKEN.adulthood, ModuleAnimalConfig.ENTITIES.CHICKEN.elder));
     }
 
@@ -147,15 +147,15 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
     @Override
     public TextComponentTranslation getTooltip() {
         if (this.getGender() == Gender.MALE) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.male_egg");
+            return new TextComponentTranslation(ModUtils.idLocalized(".tooltip.animal.product.male_egg"));
         } else if (this.getAge() == Age.OLD) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.old", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized(".tooltip.animal.product.old"), getAnimalName());
         } else if (this.getAge() == Age.CHILD) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.young", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized(".tooltip.animal.product.young"), getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized(".tooltip.animal.product.low_familiarity"), getAnimalName());
         } else if (!hasEggs()) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.no_egg", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized(".tooltip.animal.product.no_egg"), getAnimalName());
         }
         return null;
     }

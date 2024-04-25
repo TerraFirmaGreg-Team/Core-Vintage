@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -19,7 +20,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
@@ -40,7 +40,7 @@ public class EntityTurkeyTFC extends su.terrafirmagreg.modules.animal.objects.en
     public float wingRotDelta = 1.0F;
 
     public EntityTurkeyTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityTurkeyTFC(World worldIn, Gender gender, int birthDay) {

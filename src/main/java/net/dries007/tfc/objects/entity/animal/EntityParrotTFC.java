@@ -28,7 +28,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -43,6 +42,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock {
 
@@ -59,7 +59,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 
     @SuppressWarnings("unused")
     public EntityParrotTFC(World world) {
-        this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityParrotTFC(World world, IAnimal.Gender gender, int birthDay) {
@@ -176,7 +176,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 
     @Override
     public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
-        return new EntityParrotTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()),
+        return new EntityParrotTFC(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                 (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
     }
 

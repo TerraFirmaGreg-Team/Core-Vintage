@@ -1,5 +1,11 @@
 package net.dries007.tfc.api.recipes.anvil;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
@@ -9,17 +15,13 @@ import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
  * Anvil Recipe
@@ -31,7 +33,6 @@ import java.util.stream.Collectors;
 public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implements IJEISimpleRecipe {
 
     public static final NonNullList<ItemStack> EMPTY = NonNullList.create();
-    private static final Random RNG = new Random();
     private static long SEED = 0;
     protected final ForgeRule[] rules;
     protected final ItemStack output;

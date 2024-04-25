@@ -4,6 +4,7 @@ import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.ILockableContainer;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class InventoryWoodLargeChest extends InventoryLargeChest {

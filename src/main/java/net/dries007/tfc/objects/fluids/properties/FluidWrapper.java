@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.fluids.properties;
 
 import net.minecraftforge.fluids.Fluid;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

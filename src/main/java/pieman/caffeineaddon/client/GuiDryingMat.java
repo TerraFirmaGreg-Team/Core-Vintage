@@ -4,14 +4,10 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-
-
-import net.dries007.tfc.client.gui.GuiContainerTE;
-
-
 import net.minecraftforge.fml.common.Loader;
 
 
+import net.dries007.tfc.client.gui.GuiContainerTE;
 import pieman.caffeineaddon.blocks.TEDryingMat;
 
 import java.util.ArrayList;

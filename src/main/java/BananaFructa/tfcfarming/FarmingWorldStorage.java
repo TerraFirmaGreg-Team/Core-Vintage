@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
+
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
@@ -23,7 +24,6 @@ import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCFARMING;
@@ -44,7 +44,6 @@ public class FarmingWorldStorage extends WorldSavedData {
     private final int[] maximumNaturalNPK = { 255, 255, 255 };
     public TETickCounter teTickCounter = new TETickCounter();
     public HashMap<Long, Integer> nutrientMap;
-    private Random random = new Random();
 
     public FarmingWorldStorage(String name) {
         super(name);

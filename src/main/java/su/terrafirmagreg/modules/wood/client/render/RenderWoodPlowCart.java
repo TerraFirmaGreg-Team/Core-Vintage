@@ -16,6 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -76,7 +77,7 @@ public class RenderWoodPlowCart extends Render<EntityWoodPlowCart> {
 
     @Override
     protected ResourceLocation getEntityTexture(@NotNull EntityWoodPlowCart entity) {
-        return ModUtils.getID("textures/entity/wood/plow_cart.png");
+        return ModUtils.id("textures/entity/wood/plow_cart.png");
     }
 
     public void setupRotation(float entityYaw) {

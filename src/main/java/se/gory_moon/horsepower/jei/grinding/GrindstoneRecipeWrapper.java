@@ -1,5 +1,12 @@
 package se.gory_moon.horsepower.jei.grinding;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
+
+
 import com.google.common.collect.Lists;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -7,13 +14,6 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
-
 import se.gory_moon.horsepower.jei.HorsePowerCategory;
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.recipes.GrindstoneRecipe;

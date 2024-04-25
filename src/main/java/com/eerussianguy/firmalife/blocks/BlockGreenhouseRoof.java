@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
@@ -18,10 +20,6 @@ import net.minecraft.world.World;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
-
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.GLASS;
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.TOP;

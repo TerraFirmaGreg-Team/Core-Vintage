@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 @SideOnly(Side.CLIENT)
 public class TESRBellows extends TESRBase<TEBellows> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.getID("textures/blocks/device/bellows/tesr.png");
+    private static final ResourceLocation TEXTURE = ModUtils.id("textures/blocks/device/bellows/tesr.png");
 
     @Override
     public void render(TEBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

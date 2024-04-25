@@ -1,14 +1,15 @@
 package net.dries007.tfc.objects;
 
-import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import net.dries007.tfc.ConfigTFC;
+
 
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 
-import net.dries007.tfc.ConfigTFC;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 

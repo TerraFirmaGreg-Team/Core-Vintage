@@ -19,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
+
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 

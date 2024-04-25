@@ -11,13 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 
 public class RenderAnimalJackal extends RenderLiving<EntityAnimalJackal> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.getID("textures/entity/animal/predators/jackal.png");
+    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/jackal.png");
 
     public RenderAnimalJackal(RenderManager renderManager) {
         super(renderManager, new ModelAnimalJackal(), 0.7F);

@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -35,6 +35,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, ITallPlant {
 
@@ -139,7 +141,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
                 }
             } else {
                 for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-                    if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
+                    if (RNG.nextDouble() <= (double) (age + 1) / 4.0) {
                         spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
                     }
                 }

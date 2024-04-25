@@ -14,9 +14,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -24,6 +24,11 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.objects.items.ItemQuiver;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -100,7 +105,7 @@ public class ItemJavelinTFCF extends ItemTool implements IItemSize {
                     javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
                     worldIn.spawnEntity(javelin);
                     worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            1.0F / (MathConstants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                 }
                 player.inventory.deleteStack(stack);
                 player.addStat(StatList.getObjectUseStats(this));

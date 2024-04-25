@@ -6,10 +6,12 @@ import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 
 import net.minecraft.block.Block;
 
+
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.util.Set;
 import java.util.function.BiFunction;

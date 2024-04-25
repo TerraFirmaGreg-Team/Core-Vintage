@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.BlockUtils;
@@ -34,8 +33,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import lombok.Getter;
-
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
@@ -45,6 +42,8 @@ import net.dries007.tfc.api.capability.size.Weight;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -52,6 +51,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 import static su.terrafirmagreg.api.util.PropertyUtils.PLACED;
 import static su.terrafirmagreg.api.util.PropertyUtils.SMALL;
 
@@ -306,14 +306,14 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
         for (final BlockPos pos1 : logs.subList(0, Math.min(logs.size(), maxLogs))) {
             if (explosion) {
                 // Explosions are 30% Efficient: no TNT powered tree farms.
-                if (Constants.RANDOM.nextFloat() < 0.3) {
+                if (RNG.nextFloat() < 0.3) {
                     if (!world.isRemote) {
                         StackUtils.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
                     }
                 }
             } else {
                 // Stone tools are 60% efficient (default config)
-                if (!stoneTool || Constants.RANDOM.nextFloat() < ModuleArboricultureConfig.MISC.stoneAxeReturnRate && !world.isRemote) {
+                if (!stoneTool || RNG.nextFloat() < ModuleArboricultureConfig.MISC.stoneAxeReturnRate && !world.isRemote) {
                     harvestBlock(world, player, pos1, world.getBlockState(pos1), null, stack);
                 }
                 stack.damageItem(1, player);

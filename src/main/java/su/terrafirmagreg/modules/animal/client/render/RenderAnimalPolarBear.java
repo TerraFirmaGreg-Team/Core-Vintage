@@ -11,13 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 
 public class RenderAnimalPolarBear extends RenderLiving<EntityAnimalPolarBear> {
 
-    private static final ResourceLocation POLARBEAR_TEXTURE = ModUtils.getID("textures/entity/animal/predators/polarbear.png");
+    private static final ResourceLocation POLARBEAR_TEXTURE = ModUtils.id("textures/entity/animal/predators/polarbear.png");
 
     public RenderAnimalPolarBear(RenderManager renderManager) {
         super(renderManager, new ModelAnimalPolarBear(), 0.7F);

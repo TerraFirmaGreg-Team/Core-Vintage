@@ -4,12 +4,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+
 import com.eerussianguy.firmalife.init.RegistriesFL;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 // For now this is unnecessary, but it sets the groundwork for harvesting Whey + other straining recipes
 public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
@@ -38,7 +40,7 @@ public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
     }
 
     public int getDropAmount() {
-        return Constants.RNG.nextInt(3) + 1;
+        return RNG.nextInt(3) + 1;
     }
 
     public ItemStack getOutputItem() {

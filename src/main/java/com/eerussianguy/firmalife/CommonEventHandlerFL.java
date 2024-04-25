@@ -41,13 +41,13 @@ import com.eerussianguy.firmalife.player.CapPlayerDataFL;
 import com.eerussianguy.firmalife.player.PlayerDataFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class CommonEventHandlerFL {
@@ -58,7 +58,7 @@ public class CommonEventHandlerFL {
         final Block block = state.getBlock();
 
         if (block instanceof BlockFruitTreeLeaves) {
-            event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+            event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + RNG.nextInt(4)));
         } else if (block instanceof BlockFruitTreeTrunk) {
             if (event.isCanceled()) event.setCanceled(false);
             IFruitTree tree = ((BlockFruitTreeTrunk) block).getTree();

@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
@@ -52,7 +53,7 @@ public class RenderWoodAnimalCart extends Render<EntityWoodAnimalCart> {
 
     @Override
     protected ResourceLocation getEntityTexture(@NotNull EntityWoodAnimalCart entity) {
-        return ModUtils.getID("textures/entity/wood/animal_cart.png");
+        return ModUtils.id("textures/entity/wood/animal_cart.png");
     }
 
     public void setupRotation(float entityYaw) {

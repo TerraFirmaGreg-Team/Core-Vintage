@@ -1,5 +1,6 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 import net.minecraft.block.Block;
@@ -29,7 +30,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -116,7 +116,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
                     playerIn.getCooldownTracker().setCooldown(this, 10);
                     float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
                     boolean flag = true;
-                    if (skillModifier > 0.0F && Constants.RNG.nextFloat() < skillModifier) {
+                    if (skillModifier > 0.0F && MathConstants.RNG.nextFloat() < skillModifier) {
                         flag = false;
                     }
                     if (flag) {
@@ -176,7 +176,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
                 }
                 float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
                 boolean flag = true;
-                if (skillModifier > 0.0F && Constants.RNG.nextFloat() < skillModifier) {
+                if (skillModifier > 0.0F && MathConstants.RNG.nextFloat() < skillModifier) {
                     flag = false;
                 }
                 if (flag) {

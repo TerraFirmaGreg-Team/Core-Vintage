@@ -10,15 +10,16 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import org.lwjgl.opengl.GL11;
 
 public class GuiFirePit extends GuiContainerTE<TEFirePit> {
 
-    private static final ResourceLocation FIRE_PIT_BACKGROUND = ModUtils.getID("textures/gui/container/fire_pit.png");
-    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = ModUtils.getID("textures/gui/container/fire_pit_cooking_pot.png");
-    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = ModUtils.getID("textures/gui/container/fire_pit_grill.png");
+    private static final ResourceLocation FIRE_PIT_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit.png");
+    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit_cooking_pot.png");
+    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit_grill.png");
 
     private final BlockFirePit.FirePitAttachment attachment;
 

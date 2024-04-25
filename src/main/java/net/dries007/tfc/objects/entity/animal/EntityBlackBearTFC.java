@@ -20,7 +20,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
@@ -29,13 +28,15 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityBlackBearTFC extends EntityGrizzlyBearTFC implements IPredator, EntityAIStandAttack.IEntityStandAttack {
 
     private static final int DAYS_TO_ADULTHOOD = 240;
 
     @SuppressWarnings("unused")
     public EntityBlackBearTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityBlackBearTFC(World worldIn, Gender gender, int birthDay) {

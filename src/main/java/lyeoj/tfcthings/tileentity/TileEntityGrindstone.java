@@ -11,6 +11,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
+
 import lyeoj.tfcthings.capability.CapabilitySharpness;
 import lyeoj.tfcthings.capability.ISharpness;
 import lyeoj.tfcthings.event.TFCThingsEventHandler;

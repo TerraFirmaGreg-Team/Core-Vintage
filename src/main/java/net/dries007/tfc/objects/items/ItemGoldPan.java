@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,7 +26,6 @@ import net.minecraft.world.chunk.Chunk;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -38,13 +39,10 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-
-import su.terrafirmagreg.api.util.StackUtils;
-
-
 import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
  * todo: this whole thing needs to be rewritten, possibly sometime after 1.14
@@ -145,24 +143,25 @@ public class ItemGoldPan extends ItemTFC {
                         ChunkDataTFC chunkDataTFC = ChunkDataTFC.get(chunk);
                         if (chunkDataTFC.canWork(6)) {
                             if (damage == 1 || damage == 2) {
-                                Random rand = new Random(world.getSeed() + chunk.getPos().x * 241179128412L + chunk.getPos().z * 327910215471L);
+                                Random rand = new Random(
+                                        world.getSeed() + chunk.getPos().x * 241179128412L + chunk.getPos().z * 327910215471L);
                                 TFCRegistries.ORES.getValuesCollection()
                                         .stream()
                                         .filter(Ore::canPan)
                                         .filter(x -> rand.nextDouble() < x.getChunkChance())
                                         .forEach(x -> {
-                                            if (Constants.RNG.nextDouble() < x.getPanChance()) {
+                                            if (RNG.nextDouble() < x.getPanChance()) {
                                                 StackUtils.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
                                             }
                                         });
                                 // player.inventory.setInventorySlotContents(player.inventory.currentItem, stack); //only way to get it to refresh! <- do we really *need* this?
                             } else if (damage == 3 || damage == 4) {
                                 Rock rock = chunkDataTFC.getRockHeight(position);
-                                if (Constants.RNG.nextDouble() < 0.35) {
+                                if (RNG.nextDouble() < 0.35) {
                                     StackUtils.spawnItemStack(world, position, new ItemStack(ItemRock.get(rock), 1));
-                                } else if (damage == 3 && Constants.RNG.nextDouble() < 0.1) {
+                                } else if (damage == 3 && RNG.nextDouble() < 0.1) {
                                     StackUtils.spawnItemStack(world, position, new ItemStack(Items.BONE, 1));
-                                } else if (damage != 3 && Constants.RNG.nextDouble() < 0.1) {
+                                } else if (damage != 3 && RNG.nextDouble() < 0.1) {
                                     StackUtils.spawnItemStack(world, position, new ItemStack(Items.STICK, 1));
                                 }
                             }
@@ -172,7 +171,7 @@ public class ItemGoldPan extends ItemTFC {
                         }
                     }
                     stack.setItemDamage(0); // Set damage to an empty pan no matter what
-                    if (Constants.RNG.nextFloat() < 0.01) // 1/100 chance, same as 1.7.10
+                    if (RNG.nextFloat() < 0.01) // 1/100 chance, same as 1.7.10
                     {
                         stack.shrink(1);
                         world.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);

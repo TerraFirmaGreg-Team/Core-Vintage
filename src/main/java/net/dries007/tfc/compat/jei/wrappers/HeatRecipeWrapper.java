@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.jei.wrappers;
 
 import net.minecraft.client.Minecraft;
 
+
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 

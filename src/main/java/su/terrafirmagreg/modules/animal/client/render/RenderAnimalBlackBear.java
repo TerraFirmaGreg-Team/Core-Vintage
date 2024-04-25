@@ -11,13 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 
 public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
 
-    private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.getID("textures/entity/animal/predators/blackbear.png");
+    private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.id("textures/entity/animal/predators/blackbear.png");
 
     public RenderAnimalBlackBear(RenderManager renderManager) {
         super(renderManager, new ModelAnimalBlackBear(), 0.7F);

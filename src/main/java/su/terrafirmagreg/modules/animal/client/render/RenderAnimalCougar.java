@@ -11,13 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 
 public class RenderAnimalCougar extends RenderLiving<EntityAnimalCougar> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.getID("textures/entity/animal/predators/cougar.png");
+    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/cougar.png");
 
     public RenderAnimalCougar(RenderManager renderManager) {
         super(renderManager, new ModelAnimalCougar(), 0.7F);

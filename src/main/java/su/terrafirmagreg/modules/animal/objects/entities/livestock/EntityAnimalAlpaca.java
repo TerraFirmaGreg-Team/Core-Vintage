@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -41,9 +41,9 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
     @SuppressWarnings("unused")
     public EntityAnimalAlpaca(World worldIn) {
-        this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.ALPACA.adulthood, ModuleAnimalConfig.ENTITIES.ALPACA.elder),
-                EntitySheep.getRandomSheepColor(Constants.RANDOM));
+                EntitySheep.getRandomSheepColor(MathConstants.RNG));
     }
 
     public EntityAnimalAlpaca(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {
@@ -79,7 +79,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.ALPACA.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
@@ -129,7 +129,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_ALPACA_CRY : SoundAnimal.ANIMAL_ALPACA_SAY;
+        return MathConstants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_ALPACA_CRY : SoundAnimal.ANIMAL_ALPACA_SAY;
     }
 
     @Nullable

@@ -1,8 +1,8 @@
 package net.dries007.tfc.util;
 
-import lombok.Getter;
-
 import net.dries007.tfc.TerraFirmaCraft;
+
+import lombok.Getter;
 
 import java.util.Arrays;
 

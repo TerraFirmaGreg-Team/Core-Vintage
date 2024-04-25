@@ -1,5 +1,6 @@
 package tfcflorae.objects.blocks.plants;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
@@ -20,7 +21,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
@@ -186,7 +187,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
             if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1 || stack.getItem()
                     .getHarvestLevel(stack, "scythe", player, state) != -1) {
                 for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-                    if (Constants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
+                    if (MathConstants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i))
                             .getValue(AGE) + 1) / 4.0D) //+25% change for each age
                     {
                         spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.api.capabilities.damage;
 
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -26,12 +28,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.Constants.GSON;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public final class DamageResistanceCapability {
 
-    public static final ResourceLocation KEY = ModUtils.getID("damage_resistance_capability");
+    public static final ResourceLocation KEY = ModUtils.id("damage_resistance_capability");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ARMOR = new HashMap<>(); //Used inside CT, set custom IDamageResistance for armor items outside TFC
     public static final Map<String, Supplier<ICapabilityProvider>> ENTITY_RESISTANCE = new HashMap<>(); // Map entities -> Capability to damage resistance
     @CapabilityInject(IDamageResistanceCapability.class)
@@ -59,7 +60,7 @@ public final class DamageResistanceCapability {
             try {
                 String entityName = entry.getKey();
                 if ("#loader".equals(entityName)) continue; // Skip loader
-                DamageResistanceProvider resistance = GSON.fromJson(entry.getValue(), DamageResistanceProvider.class);
+                DamageResistanceProvider resistance = Constants.GSON.fromJson(entry.getValue(), DamageResistanceProvider.class);
 
                 ENTITY_RESISTANCE.put(entityName, () -> resistance);
             } catch (JsonParseException e) {

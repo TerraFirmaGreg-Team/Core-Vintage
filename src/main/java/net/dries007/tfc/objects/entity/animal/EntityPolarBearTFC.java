@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -36,7 +37,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
@@ -64,7 +64,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 
     @SuppressWarnings("unused")
     public EntityPolarBearTFC(World world) {
-        this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityPolarBearTFC(World world, IAnimal.Gender gender, int birthDay) {
@@ -78,7 +78,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
 
     @Override
     public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
-        return new EntityPolarBearTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()),
+        return new EntityPolarBearTFC(this.world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
     }
 

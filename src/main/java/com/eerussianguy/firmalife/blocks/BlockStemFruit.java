@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
@@ -36,9 +38,6 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 @MethodsReturnNonnullByDefault
 

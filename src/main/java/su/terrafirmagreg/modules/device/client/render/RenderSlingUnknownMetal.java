@@ -9,12 +9,13 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingUnknownMetal extends Render<EntityUnknownProjectile> {
 
-    private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.getID("textures/blocks/metal/base.png");
+    private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.id("textures/blocks/metal/base.png");
     private final ModelUnknownProjectile unknownModel = new ModelUnknownProjectile();
 
     public RenderSlingUnknownMetal(RenderManager renderManager) {

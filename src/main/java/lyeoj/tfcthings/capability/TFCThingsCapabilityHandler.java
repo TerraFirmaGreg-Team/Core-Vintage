@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.objects.items.metal.ItemMetalSword;

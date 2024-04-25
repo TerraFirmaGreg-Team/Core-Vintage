@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalZebu extends RenderAnimal<EntityAnimalZebu> {
 
-    private static final ResourceLocation ZEBU_YOUNG = ModUtils.getID("textures/entity/animal/livestock/zebu_young.png");
-    private static final ResourceLocation ZEBU_OLD = ModUtils.getID("textures/entity/animal/livestock/zebu_old.png");
+    private static final ResourceLocation ZEBU_YOUNG = ModUtils.id("textures/entity/animal/livestock/zebu_young.png");
+    private static final ResourceLocation ZEBU_OLD = ModUtils.id("textures/entity/animal/livestock/zebu_old.png");
 
     public RenderAnimalZebu(RenderManager renderManager) {
         super(renderManager, new ModelAnimalZebu(), 0.7F, ZEBU_YOUNG, ZEBU_OLD);

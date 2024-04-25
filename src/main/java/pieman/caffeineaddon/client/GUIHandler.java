@@ -1,5 +1,7 @@
 package pieman.caffeineaddon.client;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -9,9 +11,6 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 
 import pieman.caffeineaddon.blocks.TEDryingMat;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 public class GUIHandler implements IGuiHandler {
 

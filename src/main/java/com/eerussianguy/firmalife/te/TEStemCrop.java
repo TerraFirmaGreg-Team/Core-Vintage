@@ -3,14 +3,16 @@ package com.eerussianguy.firmalife.te;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.objects.te.TECropBase;
 
 import org.jetbrains.annotations.NotNull;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class TEStemCrop extends TECropBase {
 
-    private EnumFacing fruitDirection = EnumFacing.Plane.HORIZONTAL.random(Constants.RNG);
+    private EnumFacing fruitDirection = EnumFacing.Plane.HORIZONTAL.random(RNG);
 
     @Override
     @NotNull

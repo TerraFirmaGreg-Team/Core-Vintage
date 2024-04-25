@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiWoodPlow extends GuiContainerBase {
 
-    private static final ResourceLocation PLOW_GUI_TEXTURES = ModUtils.getID("textures/gui/container/plow.png");
+    private static final ResourceLocation PLOW_GUI_TEXTURES = ModUtils.id("textures/gui/container/plow.png");
     private final IInventory plowInventory;
 
     public GuiWoodPlow(Container container, InventoryPlayer playerInv, IInventory plowInventory) {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
@@ -17,7 +18,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -28,8 +28,9 @@ public class EntityMuskOxTFC extends EntitySheepTFC implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityMuskOxTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
-                getRandomGrowth(ConfigTFC.Animals.MUSKOX.adulthood, ConfigTFC.Animals.MUSKOX.elder), EntitySheep.getRandomSheepColor(Constants.RNG));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+                getRandomGrowth(ConfigTFC.Animals.MUSKOX.adulthood, ConfigTFC.Animals.MUSKOX.elder),
+                EntitySheep.getRandomSheepColor(MathConstants.RNG));
     }
 
     public EntityMuskOxTFC(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -61,7 +62,7 @@ public class EntityMuskOxTFC extends EntitySheepTFC implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.MUSKOX.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityMuskOxTFC baby = new EntityMuskOxTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityMuskOxTFC baby = new EntityMuskOxTFC(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);

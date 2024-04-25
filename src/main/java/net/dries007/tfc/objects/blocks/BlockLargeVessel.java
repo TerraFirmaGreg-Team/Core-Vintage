@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -35,9 +37,6 @@ import net.dries007.tfc.objects.te.TELargeVessel;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 /**
  * Large vessel is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block

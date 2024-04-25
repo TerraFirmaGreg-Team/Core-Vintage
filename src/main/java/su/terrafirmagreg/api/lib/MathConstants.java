@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.lib;
 
-import java.util.Random;
-
 @SuppressWarnings({ "WeakerAccess", "unused" })
 public final class MathConstants {
 
@@ -76,7 +74,7 @@ public final class MathConstants {
     /**
      * Pre-generated random object
      */
-    public static final Random rand = new Random(System.currentTimeMillis());
+    public static final ThermiteRandom RNG = new ThermiteRandom();
     // Used for fastFloor, fastRound, fastCeil
     // http://riven8192.blogspot.com/2010/02/fastmath-fast-floor.html
     private static final int BIG_ENOUGH_INT = 16 * 1024;

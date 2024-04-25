@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.metal;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -27,9 +29,6 @@ import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.te.TEIngotPile;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 @MethodsReturnNonnullByDefault
 

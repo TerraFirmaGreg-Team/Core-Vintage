@@ -1,5 +1,7 @@
 package pieman.caffeineaddon.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -25,10 +27,6 @@ import pieman.caffeineaddon.init.ModItems;
 import pieman.caffeineaddon.util.LeafyBush;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

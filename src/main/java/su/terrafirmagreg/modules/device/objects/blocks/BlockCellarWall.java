@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.spi.block.BlockBase;
 
 import net.minecraft.block.material.Material;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class BlockCellarWall extends BlockBase {

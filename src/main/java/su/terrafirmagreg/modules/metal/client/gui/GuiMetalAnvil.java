@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.metal.client.gui;
 
-import net.minecraftforge.fml.common.Loader;
-
 import su.terrafirmagreg.api.spi.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
@@ -14,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -28,7 +27,7 @@ import java.io.IOException;
 
 public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
 
-    public static final ResourceLocation ANVIL_BACKGROUND = ModUtils.getID("textures/gui/anvil.png");
+    public static final ResourceLocation ANVIL_BACKGROUND = ModUtils.id("textures/gui/anvil.png");
     public static final int BUTTON_ID_STEP_MIN = 0;
     public static final int BUTTON_ID_STEP_MAX = 7;
     public static final int BUTTON_ID_PLAN = 8;

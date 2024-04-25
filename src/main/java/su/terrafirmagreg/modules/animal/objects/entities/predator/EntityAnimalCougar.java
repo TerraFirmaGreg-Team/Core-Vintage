@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -33,13 +32,15 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 160;
 
     @SuppressWarnings("unused")
     public EntityAnimalCougar(World worldIn) {
-        this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -97,7 +98,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COUGAR_CRY : SoundAnimal.ANIMAL_COUGAR_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COUGAR_CRY : SoundAnimal.ANIMAL_COUGAR_SAY;
     }
 
     @Nullable

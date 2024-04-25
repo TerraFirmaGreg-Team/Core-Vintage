@@ -1,6 +1,7 @@
 package pieman.caffeineaddon.blocks;
 
 import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -29,10 +30,6 @@ import pieman.caffeineaddon.init.ModBlocks;
 import pieman.caffeineaddon.init.ModItems;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

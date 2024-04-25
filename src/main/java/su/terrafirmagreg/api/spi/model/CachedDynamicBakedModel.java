@@ -13,12 +13,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.IModel;
 
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import lombok.Getter;
 import org.apache.commons.lang3.tuple.Pair;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import javax.vecmath.Matrix4f;
 import java.util.List;

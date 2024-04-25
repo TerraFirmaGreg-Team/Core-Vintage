@@ -9,6 +9,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
 
 @SideOnly(Side.CLIENT)

@@ -4,14 +4,12 @@ import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
-import su.terrafirmagreg.modules.rock.api.types.category.RockCategoryHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariantHandler;
-import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariantHandler;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -30,17 +28,20 @@ public final class ModuleRock extends ModuleBase {
 
     public ModuleRock() {
         this.enableAutoRegistry(ROCK_TAB);
+        //MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());
     }
 
     @Override
     public void onRegister() {
-        RockCategoryHandler.init();
         RockTypeHandler.init();
-        RockBlockVariantHandler.init();
-        RockItemVariantHandler.init();
 
         BlocksRock.onRegister(registryManager);
         ItemsRock.onRegister(registryManager);
+    }
+
+    @Override
+    public void onPreInit(FMLPreInitializationEvent event) {
+
     }
 
     @Override

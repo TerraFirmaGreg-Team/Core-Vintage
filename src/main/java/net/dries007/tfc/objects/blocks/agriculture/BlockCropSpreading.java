@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -12,10 +14,6 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.te.TECropSpreading;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

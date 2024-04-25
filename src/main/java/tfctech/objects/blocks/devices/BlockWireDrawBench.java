@@ -1,5 +1,7 @@
 package tfctech.objects.blocks.devices;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -28,11 +30,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfctech.objects.tileentities.TEWireDrawBench;
 
 import org.jetbrains.annotations.Nullable;

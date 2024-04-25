@@ -42,7 +42,7 @@ import java.util.List;
 
 public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
 
-    public static final ResourceLocation BARREL_BACKGROUND = ModUtils.getID("textures/gui/container/barrel.png");
+    public static final ResourceLocation BARREL_BACKGROUND = ModUtils.id("textures/gui/container/barrel.png");
     private final String translationKey;
 
     public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, IBlockState state) {
@@ -72,10 +72,10 @@ public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
                 List<String> tooltip = new ArrayList<>();
 
                 if (fluid == null || fluid.amount == 0) {
-                    tooltip.add(I18n.format(ModUtils.getIDName("tooltip.barrel_empty")));
+                    tooltip.add(I18n.format(ModUtils.idLocalized("tooltip.barrel_empty")));
                 } else {
                     tooltip.add(fluid.getLocalizedName());
-                    tooltip.add(TextFormatting.GRAY + I18n.format(ModUtils.getIDName("tooltip.barrel_fluid_amount"), fluid.amount));
+                    tooltip.add(TextFormatting.GRAY + I18n.format(ModUtils.idLocalized("tooltip.barrel_fluid_amount"), fluid.amount));
                 }
 
                 this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);

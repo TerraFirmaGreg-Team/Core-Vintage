@@ -44,6 +44,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class StructureGenerator extends WorldGenerator {
 
@@ -142,8 +143,7 @@ public class StructureGenerator extends WorldGenerator {
      * @return A specific random rotation
      */
     public static Rotation getRotation() {
-        Random random = new Random();
-        if (random.nextInt(2) == 1) {
+        if (RNG.nextInt(2) == 1) {
             return Rotation.CLOCKWISE_180;
         } else {
             return Rotation.NONE;

@@ -2,6 +2,7 @@ package net.dries007.tfc.api.capability.food;
 
 import net.minecraft.util.text.TextFormatting;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public enum Nutrient {

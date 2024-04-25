@@ -12,19 +12,16 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 
-import java.util.Random;
-
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
-
 public class CommandGenTree extends CommandBase {
-
-    private static final Random random = new Random();
 
     @Override
     public String getName() {
@@ -50,7 +47,7 @@ public class CommandGenTree extends CommandBase {
         final BlockPos center = new BlockPos(sender.getCommandSenderEntity());
         final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
 
-        if (!tree.makeTree(manager, world, center, random, false)) {
+        if (!tree.makeTree(manager, world, center, RNG, false)) {
             sender.sendMessage(new TextComponentTranslation("tfc.command.gentree.failed.grow"));
         }
     }

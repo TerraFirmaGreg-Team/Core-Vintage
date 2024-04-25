@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.Alloy;
 
@@ -18,7 +19,7 @@ import java.util.Map;
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCalculator extends GuiContainer {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/alloy_calculator.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/alloy_calculator.png");
 
     private final ContainerAlloyCalculator container;
 

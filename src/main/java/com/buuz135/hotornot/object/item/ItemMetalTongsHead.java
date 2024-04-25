@@ -1,12 +1,13 @@
 package com.buuz135.hotornot.object.item;
 
+import net.minecraft.item.ItemStack;
+
+
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemTFC;
-
-import net.minecraft.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
 

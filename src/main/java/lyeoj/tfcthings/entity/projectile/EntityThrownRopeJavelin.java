@@ -19,12 +19,15 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
+
 import io.netty.buffer.ByteBuf;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
 
 public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
 
@@ -117,7 +120,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
                 EntityLivingBase thrower = (EntityLivingBase) this.getThrower();
                 float skillModifier = SmithingSkill.getSkillBonus(getWeapon(), SmithingSkill.Type.WEAPONS) / 2.0F;
                 int damageAmount = 1;
-                if (skillModifier > 0.0F && Constants.RNG.nextFloat() < skillModifier) {
+                if (skillModifier > 0.0F && MathConstants.RNG.nextFloat() < skillModifier) {
                     damageAmount -= 1;
                 }
                 if (entity != null) {

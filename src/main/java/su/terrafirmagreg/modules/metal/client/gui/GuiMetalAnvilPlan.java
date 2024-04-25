@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.metal.client.gui;
 
+import su.terrafirmagreg.api.lib.NBTBuilder;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
@@ -24,17 +25,13 @@ import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 
-
-import su.terrafirmagreg.api.lib.NBTBuilder;
-
-
 import java.io.IOException;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
 
-    public static final ResourceLocation PLAN_BACKGROUND = ModUtils.getID("textures/gui/anvil_plan.png");
+    public static final ResourceLocation PLAN_BACKGROUND = ModUtils.id("textures/gui/anvil_plan.png");
 
     private final ItemStack inputStack;
     private int page;

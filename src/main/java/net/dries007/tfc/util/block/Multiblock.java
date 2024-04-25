@@ -1,11 +1,11 @@
 package net.dries007.tfc.util.block;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 
 import java.util.ArrayList;

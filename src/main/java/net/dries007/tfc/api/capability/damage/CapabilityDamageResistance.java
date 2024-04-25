@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.capability.damage;
 
+import su.terrafirmagreg.api.lib.Constants;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
@@ -11,6 +13,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
@@ -25,7 +28,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.Constants.GSON;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
 public final class CapabilityDamageResistance {
@@ -58,7 +60,7 @@ public final class CapabilityDamageResistance {
             try {
                 String entityName = entry.getKey();
                 if ("#loader".equals(entityName)) continue; // Skip loader
-                DamageResistance resistance = GSON.fromJson(entry.getValue(), DamageResistance.class);
+                DamageResistance resistance = Constants.GSON.fromJson(entry.getValue(), DamageResistance.class);
 
                 ENTITY_RESISTANCE.put(entityName, () -> resistance);
             } catch (JsonParseException e) {

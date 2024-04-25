@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
@@ -32,6 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 
@@ -63,7 +65,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
                 if (stack.getItem() == Items.SHEARS) {
                     spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
                 }
-            } else if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
+            } else if (RNG.nextDouble() <= (double) (age + 1) / 4.0) {
                 spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
             }
         }

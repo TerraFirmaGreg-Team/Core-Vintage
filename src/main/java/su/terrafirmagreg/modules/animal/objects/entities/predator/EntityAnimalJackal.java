@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -34,13 +33,15 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalJackal extends EntityAnimalCoyote implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 112;
 
     @SuppressWarnings("unused")
     public EntityAnimalJackal(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -98,7 +99,7 @@ public class EntityAnimalJackal extends EntityAnimalCoyote implements IPredator 
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_JACKAL_CRY : SoundAnimal.ANIMAL_JACKAL_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_JACKAL_CRY : SoundAnimal.ANIMAL_JACKAL_SAY;
     }
 
     @Nullable

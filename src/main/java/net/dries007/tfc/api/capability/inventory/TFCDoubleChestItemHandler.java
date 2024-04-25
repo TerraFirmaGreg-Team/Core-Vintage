@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.capability.inventory;
 
+import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -14,9 +16,6 @@ import net.minecraftforge.items.VanillaDoubleChestItemHandler;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
 
 @SuppressWarnings("WeakerAccess")
 public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler {

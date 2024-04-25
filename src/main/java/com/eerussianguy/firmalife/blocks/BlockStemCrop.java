@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStem;
 import net.minecraft.block.properties.PropertyDirection;
@@ -20,10 +22,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropSimple;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.rock.api.types.category;
 
 import net.minecraft.util.text.TextComponentTranslation;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public interface IRockCategory {

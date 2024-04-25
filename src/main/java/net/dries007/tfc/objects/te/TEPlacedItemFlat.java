@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -9,12 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
 
 public class TEPlacedItemFlat extends TEBase {
 
@@ -22,7 +21,7 @@ public class TEPlacedItemFlat extends TEBase {
     private ItemStack inventory;
 
     public TEPlacedItemFlat() {
-        rotation = (byte) Constants.RNG.nextInt(4);
+        rotation = (byte) MathConstants.RNG.nextInt(4);
         inventory = ItemStack.EMPTY;
     }
 

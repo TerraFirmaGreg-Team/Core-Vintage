@@ -37,7 +37,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -49,13 +48,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestock, IRidable {
 
     private static final DataParameter<Integer> DATA_COLOR_ID = EntityDataManager.createKey(EntityCamelTFC.class, DataSerializers.VARINT);
     private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityCamelTFC.class, DataSerializers.BOOLEAN);
 
     public EntityCamelTFC(World world) {
-        this(world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.CAMEL.adulthood, ConfigTFC.Animals.CAMEL.elder));
         this.setSize(0.9F, 2.0F);
     }
@@ -70,7 +71,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_CAMEL_CRY : SoundAnimal.ANIMAL_CAMEL_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_CAMEL_CRY : SoundAnimal.ANIMAL_CAMEL_SAY;
     }
 
     @Override
@@ -281,7 +282,8 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
         } else if (other == this) {
             // Only called if this animal is interacted with a spawn egg
             // Try to return to vanilla's default method a baby of this animal, as if bred normally
-            return new EntityCamelTFC(this.world, IAnimal.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+            return new EntityCamelTFC(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
+                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
         }
         return null;
     }
@@ -290,7 +292,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.CAMEL.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityCamelTFC baby = new EntityCamelTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityCamelTFC baby = new EntityCamelTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             if (this.geneHealth > 0) {

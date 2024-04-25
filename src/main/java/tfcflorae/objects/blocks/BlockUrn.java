@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,11 +32,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.te.TEUrn;
 

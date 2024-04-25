@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -14,13 +16,9 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.SimpleCraftMatrix;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
 
 public class ContainerKnapping extends ContainerItemStack implements IButtonHandler {
 

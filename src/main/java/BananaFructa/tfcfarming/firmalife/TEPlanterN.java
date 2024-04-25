@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+
 import BananaFructa.tfcfarming.Config;
 import BananaFructa.tfcfarming.CropNutrients;
 import BananaFructa.tfcfarming.NutrientClass;
@@ -11,11 +12,14 @@ import BananaFructa.tfcfarming.NutrientValues;
 import BananaFructa.tfcfarming.Utils;
 import com.eerussianguy.firmalife.te.TEPlanter;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -40,7 +44,7 @@ public class TEPlanterN extends TEPlanter {
 
         while (this.getTicksSinceUpdate() > growthTicks) {
             this.reduceCounter(growthTicks);
-            int slot = Constants.RNG.nextInt(4);
+            int slot = MathConstants.RNG.nextInt(4);
             if (waterUses < 0) {
                 this.resetCounter();
                 return;

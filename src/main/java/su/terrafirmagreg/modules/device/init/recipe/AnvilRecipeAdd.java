@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 
+
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -20,7 +21,7 @@ public class AnvilRecipeAdd {
     public static void register(RegistryEvent.Register<AnvilRecipe> event) {
         event.getRegistry().registerAll(
                 new AnvilRecipe(
-                        ModUtils.getID("unfinished_iron_flask"),
+                        ModUtils.id("unfinished_iron_flask"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, SHEET))),
                         new ItemStack(ItemsDevice.UNFINISHED_FLASK), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST,
                         BEND_THIRD_LAST)

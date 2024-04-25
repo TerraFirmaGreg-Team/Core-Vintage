@@ -8,9 +8,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.Tags.MOD_NAME;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.lib.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "wood")
 public class ModuleWoodConfig {
@@ -98,17 +98,17 @@ public class ModuleWoodConfig {
 
             @Config.Comment("Horizontal radius of the support range of support beams.")
             @Config.RangeInt(min = 0, max = 8)
-            @Config.LangKey("config." + MODID_TFC + ".general.fallable.supportBeamRangeHor")
+            @Config.LangKey("config." + MOD_ID + ".general.fallable.supportBeamRangeHor")
             public int supportBeamRangeHor = 4;
 
             @Config.Comment("Upwards support range of support beams.")
             @Config.RangeInt(min = 0, max = 3)
-            @Config.LangKey("config." + MODID_TFC + ".general.fallable.supportBeamRangeUp")
+            @Config.LangKey("config." + MOD_ID + ".general.fallable.supportBeamRangeUp")
             public int supportBeamRangeUp = 1;
 
             @Config.Comment("Downwards support range of support beams.")
             @Config.RangeInt(min = 0, max = 3)
-            @Config.LangKey("config." + MODID_TFC + ".general.fallable.supportBeamRangeDown")
+            @Config.LangKey("config." + MOD_ID + ".general.fallable.supportBeamRangeDown")
             public int supportBeamRangeDown = 1;
         }
     }

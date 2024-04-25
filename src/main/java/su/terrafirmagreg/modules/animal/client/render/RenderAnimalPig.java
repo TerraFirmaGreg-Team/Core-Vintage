@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalPig extends RenderAnimal<EntityAnimalPig> {
 
-    private static final ResourceLocation PIG_YOUNG = ModUtils.getID("textures/entity/animal/livestock/pig_young.png");
-    private static final ResourceLocation PIG_OLD = ModUtils.getID("textures/entity/animal/livestock/pig_old.png");
+    private static final ResourceLocation PIG_YOUNG = ModUtils.id("textures/entity/animal/livestock/pig_young.png");
+    private static final ResourceLocation PIG_OLD = ModUtils.id("textures/entity/animal/livestock/pig_old.png");
 
     public RenderAnimalPig(RenderManager renderManager) {
         super(renderManager, new ModelAnimalPig(), 0.7F, PIG_YOUNG, PIG_OLD);

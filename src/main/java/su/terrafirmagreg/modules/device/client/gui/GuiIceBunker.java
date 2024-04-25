@@ -9,6 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+
 import net.dries007.tfc.client.gui.GuiContainerTE;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class GuiIceBunker extends GuiContainerTE<TEIceBunker> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/ice_bunker.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/ice_bunker.png");
     private final InventoryPlayer playerInventory;
     private final TEIceBunker te;
 

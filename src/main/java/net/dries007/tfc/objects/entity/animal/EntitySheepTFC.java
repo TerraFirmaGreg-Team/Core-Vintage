@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -35,7 +36,6 @@ import net.minecraftforge.common.IShearable;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -65,8 +65,9 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 
     @SuppressWarnings("unused")
     public EntitySheepTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.SHEEP.adulthood, ConfigTFC.Animals.SHEEP.elder),
-                EntitySheep.getRandomSheepColor(Constants.RNG));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+                getRandomGrowth(ConfigTFC.Animals.SHEEP.adulthood, ConfigTFC.Animals.SHEEP.elder),
+                EntitySheep.getRandomSheepColor(MathConstants.RNG));
     }
 
     public EntitySheepTFC(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -105,7 +106,8 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.SHEEP.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntitySheepTFC baby = new EntitySheepTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(),
+            EntitySheepTFC baby = new EntitySheepTFC(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+                    (int) CalendarTFC.PLAYER_TIME.getTotalDays(),
                     getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);

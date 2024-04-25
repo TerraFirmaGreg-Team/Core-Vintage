@@ -19,11 +19,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
@@ -33,6 +33,11 @@ import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.skills.SmithingSkill;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLeaves;
 import tfcflorae.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
@@ -271,10 +276,10 @@ public final class CommonEventHandlerTFCF {
         for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
             if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&
                     (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
-                int chance = Constants.RNG.nextInt(2);
+                int chance = MathConstants.RNG.nextInt(2);
                 if (chance == 0) {
                     event.getDrops().clear();
-                    event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + Constants.RNG.nextInt(3)));
+                    event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + MathConstants.RNG.nextInt(3)));
                 }
             }
         }
@@ -283,12 +288,12 @@ public final class CommonEventHandlerTFCF {
             ItemStack held = playerHarvest == null ? ItemStack.EMPTY : playerHarvest.getHeldItemMainhand();
 
             if (block instanceof BlockCassiaCinnamonLeaves || block instanceof BlockCeylonCinnamonLeaves || block instanceof BlockBambooLeaves) {
-                event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+                event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathConstants.RNG.nextInt(4)));
             }
             if (block == BlocksFL.MELON_FRUIT && (held.getItem()
                     .getHarvestLevel(held, "knife", playerHarvest, state) != -1)) {
                 event.getDrops().clear();
-                event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + Constants.RNG.nextInt(4)));
+                event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathConstants.RNG.nextInt(4)));
             }
         }
     }

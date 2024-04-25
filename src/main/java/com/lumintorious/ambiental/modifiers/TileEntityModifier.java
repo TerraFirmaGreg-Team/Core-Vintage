@@ -9,6 +9,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
+
 import com.lumintorious.ambiental.capability.TemperatureCapability;
 import net.dries007.tfc.objects.te.TELamp;
 

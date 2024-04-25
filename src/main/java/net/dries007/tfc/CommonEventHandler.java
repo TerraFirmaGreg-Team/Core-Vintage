@@ -143,6 +143,7 @@ import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFC)
@@ -251,7 +252,7 @@ public final class CommonEventHandler {
                     .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
                 chance = ConfigTFC.General.TREE.leafStickDropChanceBonus;
             }
-            if (Constants.RNG.nextFloat() < chance) {
+            if (RNG.nextFloat() < chance) {
                 event.getDrops().add(new ItemStack(Items.STICK));
             }
         }
@@ -272,7 +273,7 @@ public final class CommonEventHandler {
             }
             if (!tool.isEmpty()) {
                 float skillModifier = SmithingSkill.getSkillBonus(tool, SmithingSkill.Type.TOOLS) / 2.0F;
-                if (skillModifier > 0 && Constants.RNG.nextFloat() < skillModifier) {
+                if (skillModifier > 0 && RNG.nextFloat() < skillModifier) {
                     // Up to 50% negating damage, for double durability
                     player.setHeldItem(EnumHand.MAIN_HAND, tool);
                 }
@@ -759,7 +760,7 @@ public final class CommonEventHandler {
                 MonsterEquipment equipment = MonsterEquipment.get(entity);
                 if (equipment != null) {
                     for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
-                        equipment.getEquipment(slot, Constants.RNG)
+                        equipment.getEquipment(slot, RNG)
                                 .ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
                     }
                 }
@@ -805,7 +806,7 @@ public final class CommonEventHandler {
             }
             float itemTemp = heatCap.getTemperature();
             if (itemTemp > 0) {
-                float rand = Constants.RNG.nextFloat();
+                float rand = RNG.nextFloat();
                 BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos((int) entityItem.posX, (int) entityItem.posY, (int) entityItem.posZ);
                 IBlockState state;
                 if ((state = entityItem.world.getBlockState(pos)).getBlock() instanceof BlockFluidBase) {
@@ -1059,25 +1060,25 @@ public final class CommonEventHandler {
                     }
 
                     // Swap two letters
-                    if (Constants.RNG.nextFloat() < drunkChance && word.length() >= 2) {
-                        int pos = Constants.RNG.nextInt(word.length() - 1);
+                    if (RNG.nextFloat() < drunkChance && word.length() >= 2) {
+                        int pos = RNG.nextInt(word.length() - 1);
                         word = word.substring(0, pos) + word.charAt(pos + 1) + word.charAt(pos) + word.substring(pos + 2);
                     }
 
                     // Repeat / slur letters
-                    if (Constants.RNG.nextFloat() < drunkChance) {
-                        int pos = Constants.RNG.nextInt(word.length());
+                    if (RNG.nextFloat() < drunkChance) {
+                        int pos = RNG.nextInt(word.length());
                         char repeat = word.charAt(pos);
-                        int amount = 1 + Constants.RNG.nextInt(3);
+                        int amount = 1 + RNG.nextInt(3);
                         word = word.substring(0, pos) + new String(new char[amount]).replace('\0', repeat) +
                                 (pos + 1 < word.length() ? word.substring(pos + 1) : "");
                     }
 
                     // Add additional letters
-                    if (Constants.RNG.nextFloat() < drunkChance) {
-                        int pos = Constants.RNG.nextInt(word.length());
-                        char replacement = ALPHABET.charAt(Constants.RNG.nextInt(ALPHABET.length()));
-                        if (Character.isUpperCase(word.charAt(Constants.RNG.nextInt(word.length())))) {
+                    if (RNG.nextFloat() < drunkChance) {
+                        int pos = RNG.nextInt(word.length());
+                        char replacement = ALPHABET.charAt(RNG.nextInt(ALPHABET.length()));
+                        if (Character.isUpperCase(word.charAt(RNG.nextInt(word.length())))) {
                             replacement = Character.toUpperCase(replacement);
                         }
                         word = word.substring(0, pos) + replacement + (pos + 1 < word.length() ? word.substring(pos + 1) : "");

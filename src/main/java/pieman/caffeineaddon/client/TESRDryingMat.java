@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 
+
 import pieman.caffeineaddon.blocks.TEDryingMat;
 
 public class TESRDryingMat extends TileEntitySpecialRenderer<TEDryingMat> {

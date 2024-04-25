@@ -1,5 +1,7 @@
 package tfcflorae.objects.items.food;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,9 +19,6 @@ import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.CalendarTFC;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 public class ItemBlockRot extends ItemBlockTFC {
 

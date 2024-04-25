@@ -17,7 +17,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -29,10 +28,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityGrouseTFC extends EntityChickenTFC implements ILivestock {
 
     public EntityGrouseTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ConfigTFC.Animals.GROUSE.adulthood, ConfigTFC.Animals.GROUSE.elder));
     }
 

@@ -20,13 +20,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.entity.ai.EntityAILawnmower;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
  * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one
@@ -40,7 +41,8 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityGoatTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.GOAT.adulthood, ConfigTFC.Animals.GOAT.elder));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+                getRandomGrowth(ConfigTFC.Animals.GOAT.adulthood, ConfigTFC.Animals.GOAT.elder));
     }
 
     public EntityGoatTFC(World worldIn, Gender gender, int birthDay) {
@@ -93,7 +95,7 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.GOAT.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityGoatTFC baby = new EntityGoatTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityGoatTFC baby = new EntityGoatTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
@@ -149,7 +151,7 @@ public class EntityGoatTFC extends EntityCowTFC implements ILivestock {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_GOAT_CRY : SoundAnimal.ANIMAL_GOAT_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_GOAT_CRY : SoundAnimal.ANIMAL_GOAT_SAY;
     }
 
     @Nullable

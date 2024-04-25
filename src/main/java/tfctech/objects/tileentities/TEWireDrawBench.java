@@ -13,9 +13,14 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TEInventory;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import tfctech.TFCTech;
 import tfctech.api.recipes.WireDrawingRecipe;
 import tfctech.client.TechSounds;
@@ -198,7 +203,7 @@ public class TEWireDrawBench extends TEInventory implements ITickable {
                 working = false;
                 if (progress >= 100 && !world.isRemote) {
                     world.playSound(null, pos, TechSounds.WIREDRAW_TONGS_FALL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    if (inventory.getStackInSlot(0).attemptDamageItem(32, Constants.RNG, null)) {
+                    if (inventory.getStackInSlot(0).attemptDamageItem(32, MathConstants.RNG, null)) {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
                     TechRegistries.WIRE_DRAWING.getValuesCollection()

@@ -19,7 +19,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -30,6 +29,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 /**
  * A Sheep of the colder regions! Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give
  * birth to one individual
@@ -39,8 +40,9 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityAlpacaTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
-                getRandomGrowth(ConfigTFC.Animals.ALPACA.adulthood, ConfigTFC.Animals.ALPACA.elder), EntitySheep.getRandomSheepColor(Constants.RNG));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+                getRandomGrowth(ConfigTFC.Animals.ALPACA.adulthood, ConfigTFC.Animals.ALPACA.elder),
+                EntitySheep.getRandomSheepColor(RNG));
     }
 
     public EntityAlpacaTFC(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -76,7 +78,7 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.ALPACA.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAlpacaTFC baby = new EntityAlpacaTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityAlpacaTFC baby = new EntityAlpacaTFC(world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
@@ -126,7 +128,7 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_ALPACA_CRY : SoundAnimal.ANIMAL_ALPACA_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_ALPACA_CRY : SoundAnimal.ANIMAL_ALPACA_SAY;
     }
 
     @Nullable

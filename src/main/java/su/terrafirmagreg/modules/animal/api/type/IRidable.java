@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.api.type;
 
-import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
@@ -28,10 +28,10 @@ public interface IRidable {
             if (!world.isRemote) {
                 if (animal.getAge() == IAnimal.Age.CHILD) {
                     ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                            Tags.MOD_ID + ".tooltip.animal.product.young", animal.getAnimalName()), (EntityPlayerMP) player);
+                            ModUtils.idLocalized(".tooltip.animal.product.young"), animal.getAnimalName()), (EntityPlayerMP) player);
                 } else {
                     ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                            Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", animal.getAnimalName()), (EntityPlayerMP) player);
+                            ModUtils.idLocalized(".tooltip.animal.product.low_familiarity"), animal.getAnimalName()), (EntityPlayerMP) player);
                 }
             }
             return false;

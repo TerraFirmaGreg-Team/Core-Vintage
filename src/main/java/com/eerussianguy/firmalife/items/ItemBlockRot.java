@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,9 +22,6 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 @MethodsReturnNonnullByDefault
 

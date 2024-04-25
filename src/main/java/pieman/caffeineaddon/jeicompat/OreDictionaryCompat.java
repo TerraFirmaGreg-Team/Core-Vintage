@@ -3,6 +3,7 @@ package pieman.caffeineaddon.jeicompat;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import pieman.caffeineaddon.init.ModBlocks;
 
 public class OreDictionaryCompat {

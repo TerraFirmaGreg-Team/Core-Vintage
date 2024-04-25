@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.te;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -20,10 +22,6 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.te.TETickableInventory;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
-
 
 import java.util.List;
 import java.util.stream.Collectors;

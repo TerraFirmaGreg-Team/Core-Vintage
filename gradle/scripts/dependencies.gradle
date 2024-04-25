@@ -71,6 +71,7 @@ dependencies {
         compileOnly("curse.maven:hwyla-253449:2568751")
         compileOnly("curse.maven:nyx-rotn-edition-437663:3840824")
         compileOnly("curse.maven:industrial-craft-242638:3838713")
+        compileOnly("curse.maven:crafttweaker-239197:5013567")
     }
 
 

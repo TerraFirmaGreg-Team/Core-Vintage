@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -34,13 +35,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class ItemProspectorPick extends ItemMetalTool {
 
     private static final int PROSPECT_RADIUS = 12;
     private static final int COOLDOWN = 10;
-    private static final Random RANDOM = new Random();
 
     public ItemProspectorPick(Metal metal, Metal.ItemType type) {
         super(metal, type);
@@ -73,7 +74,7 @@ public class ItemProspectorPick extends ItemMetalTool {
                  * of pos.toLong(). Solved this by multiplying coordinates by primes and XOR's results. Verified produces
                  * more "random" results.
                  */
-                RANDOM.setSeed((pos.getX() * 92853) ^ (pos.getY() * 1959302) ^ (pos.getZ() * 2839402));
+                RNG.setSeed((pos.getX() * 92853) ^ (pos.getY() * 1959302) ^ (pos.getZ() * 2839402));
                 ItemStack targetStack = getOreStack(worldIn, pos, state, false);
                 if (!targetStack.isEmpty()) {
                     // Just clicked on an ore block
@@ -83,7 +84,7 @@ public class ItemProspectorPick extends ItemMetalTool {
                     if (skill != null) {
                         skill.addSkill(pos);
                     }
-                } else if (RANDOM.nextFloat() < falseNegativeChance) {
+                } else if (RNG.nextFloat() < falseNegativeChance) {
                     // False negative
                     event = new ProspectEvent.Server(player, pos, ProspectResult.Type.NOTHING, null);
                 } else {
@@ -93,7 +94,7 @@ public class ItemProspectorPick extends ItemMetalTool {
                         event = new ProspectEvent.Server(player, pos, ProspectResult.Type.NOTHING, null);
                     } else {
                         // Found something
-                        ProspectResult result = (ProspectResult) results.toArray()[RANDOM.nextInt(results.size())];
+                        ProspectResult result = (ProspectResult) results.toArray()[RNG.nextInt(results.size())];
                         event = new ProspectEvent.Server(player, pos, result.getType(), result.ore);
 
                         if (ConfigTFC.General.DEBUG.enable) {
@@ -165,9 +166,9 @@ public class ItemProspectorPick extends ItemMetalTool {
         int z = pos.getZ();
         AxisAlignedBB axisalignedbb = state.getBoundingBox(world, pos);
         for (int i = 0; i < 2; i++) {
-            double xOffset = x + RANDOM.nextDouble() * (axisalignedbb.maxX - axisalignedbb.minX - 0.2D) + 0.1D + axisalignedbb.minX;
-            double yOffset = y + RANDOM.nextDouble() * (axisalignedbb.maxY - axisalignedbb.minY - 0.2D) + 0.1D + axisalignedbb.minY;
-            double zOffset = z + RANDOM.nextDouble() * (axisalignedbb.maxZ - axisalignedbb.minZ - 0.2D) + 0.1D + axisalignedbb.minZ;
+            double xOffset = x + RNG.nextDouble() * (axisalignedbb.maxX - axisalignedbb.minX - 0.2D) + 0.1D + axisalignedbb.minX;
+            double yOffset = y + RNG.nextDouble() * (axisalignedbb.maxY - axisalignedbb.minY - 0.2D) + 0.1D + axisalignedbb.minY;
+            double zOffset = z + RNG.nextDouble() * (axisalignedbb.maxZ - axisalignedbb.minZ - 0.2D) + 0.1D + axisalignedbb.minZ;
 
             switch (side) {
                 case WEST:

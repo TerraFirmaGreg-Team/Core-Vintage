@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.lib.Constants;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +12,10 @@ import net.minecraft.world.World;
 
 
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -74,7 +76,7 @@ public final class MathsUtils {
      */
     public static int nextIntInclusive(int min, int max) {
 
-        return Constants.RANDOM.nextInt(max - min + 1) + min;
+        return MathConstants.RNG.nextInt(max - min + 1) + min;
     }
 
     /**

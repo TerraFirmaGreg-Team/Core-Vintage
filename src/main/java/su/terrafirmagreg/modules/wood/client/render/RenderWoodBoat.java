@@ -58,7 +58,7 @@ public class RenderWoodBoat extends Render<EntityWoodBoat> {
     @Override
     protected ResourceLocation getEntityTexture(EntityWoodBoat entity) {
         // Fallback
-        return ModUtils.getID("textures/entity/wood/boat.png");
+        return ModUtils.id("textures/entity/wood/boat.png");
     }
 
     @Override

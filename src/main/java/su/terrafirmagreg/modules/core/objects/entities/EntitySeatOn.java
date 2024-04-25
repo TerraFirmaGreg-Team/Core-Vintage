@@ -6,11 +6,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import lombok.Getter;
+
 import mcp.MethodsReturnNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 /**
  * Generic entity used for sitting on top of blocks

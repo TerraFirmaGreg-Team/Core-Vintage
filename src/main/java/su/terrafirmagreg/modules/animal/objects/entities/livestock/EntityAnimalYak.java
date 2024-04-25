@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -23,11 +22,13 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityAnimalYak(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.YAK.adulthood, ModuleAnimalConfig.ENTITIES.YAK.elder));
     }
 
@@ -50,7 +51,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.YAK.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);

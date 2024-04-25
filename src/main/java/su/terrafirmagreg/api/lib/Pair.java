@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.lib;
 
 import com.google.common.base.Objects;
+
 import lombok.Data;
 
 import java.util.function.BiConsumer;

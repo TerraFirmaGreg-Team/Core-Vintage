@@ -9,18 +9,17 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
 import com.google.common.base.Joiner;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Multimap;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import tfcflorae.TFCFlorae;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import org.jetbrains.annotations.NotNull;
 
+import static net.dries007.tfc.util.OreDictionaryHelper.MAP;
+import static net.dries007.tfc.util.OreDictionaryHelper.Thing;
+
 public class OreDictionaryHelper {
 
-    private static final Multimap<Thing, String> MAP = HashMultimap.create();
     private static final Converter<String, String> UPPER_UNDERSCORE_TO_LOWER_CAMEL = CaseFormat.UPPER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL);
     private static final Joiner JOINER_UNDERSCORE = Joiner.on('_').skipNulls();
     private static boolean done = false;
@@ -57,18 +56,12 @@ public class OreDictionaryHelper {
         register(thing, "damage", "type", type.name().toLowerCase());
     }
 
-    public static void init() {
-        done = true;
-        MAP.forEach((t, s) -> OreDictionary.registerOre(s, t.toItemStack()));
-        MAP.clear(); // No need to keep this stuff around
-    }
-
     /**
      * Checks if an ItemStack has an OreDictionary entry that matches 'name'.
      */
     public static boolean doesStackMatchOre(@NotNull ItemStack stack, String name) {
         if (!OreDictionary.doesOreNameExist(name)) {
-            TFCFlorae.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
+            //TFCFlorae.getLog().warn("doesStackMatchOre called with non-existing name. stack: {} name: {}", stack, name);
             return false;
         }
         if (stack.isEmpty()) return false;
@@ -279,39 +272,4 @@ public class OreDictionaryHelper {
         }
     }
 
-    private static class Thing {
-
-        private final Block block;
-        private final Item item;
-        private final int meta;
-
-        private Thing(Block thing) {
-            block = thing;
-            item = null;
-            meta = 0;
-        }
-
-        private Thing(Item thing) {
-            this(thing, -1);
-        }
-
-        private Thing(Item thing, int meta) {
-            block = null;
-            item = thing;
-            this.meta = meta;
-        }
-
-        private ItemStack toItemStack() {
-            if (block != null) {
-                return new ItemStack(block, 1, meta);
-            } else if (item != null) {
-                int meta = this.meta;
-                if (meta == -1 && item.isDamageable()) {
-                    meta = OreDictionary.WILDCARD_VALUE;
-                }
-                return new ItemStack(item, 1, meta);
-            }
-            return ItemStack.EMPTY;
-        }
-    }
 }

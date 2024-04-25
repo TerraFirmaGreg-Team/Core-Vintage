@@ -46,8 +46,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
-import static net.dries007.tfc.Constants.RNG;
 import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @MethodsReturnNonnullByDefault

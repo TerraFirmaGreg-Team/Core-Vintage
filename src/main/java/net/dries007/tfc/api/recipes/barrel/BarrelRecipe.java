@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,10 +17,6 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.CollectionUtils;
-
 
 import java.util.ArrayList;
 import java.util.List;

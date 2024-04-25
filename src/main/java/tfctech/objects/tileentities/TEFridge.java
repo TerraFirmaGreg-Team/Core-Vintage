@@ -1,5 +1,7 @@
 package tfctech.objects.tileentities;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -29,11 +31,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.te.TEInventory;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 import tfctech.client.TechSounds;

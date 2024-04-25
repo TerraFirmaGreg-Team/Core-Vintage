@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.entity.ai;
 
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 //AI to avoid players unless familiarized. Must be applied to EntityAnimal that implements IAnimalTFC
 public class EntityAITamableAvoidPlayer<T extends EntityCreature & IAnimal> extends EntityAIAvoidEntity<EntityPlayer> {

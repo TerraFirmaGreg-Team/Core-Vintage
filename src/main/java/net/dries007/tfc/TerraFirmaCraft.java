@@ -66,6 +66,7 @@ import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 
+import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
 import static su.terrafirmagreg.Tags.VERSION;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
@@ -75,11 +76,12 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
      name = TerraFirmaCraft.MOD_NAME,
      version = VERSION,
      useMetadata = true,
-     guiFactory = Constants.GUI_FACTORY,
+     guiFactory = GUI_FACTORY,
      dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
 public final class TerraFirmaCraft {
 
     public static final String MOD_NAME = "TerraFirmaCraft";
+    public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
 
     @Mod.Instance
     private static TerraFirmaCraft INSTANCE = null;

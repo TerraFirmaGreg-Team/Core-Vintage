@@ -26,9 +26,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
@@ -38,6 +38,10 @@ import net.dries007.tfc.util.FluidTransferHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
 
 import java.util.stream.Collectors;
 
@@ -108,7 +112,7 @@ public class ItemJug extends ItemPottery {
                     drinkable.onDrink((EntityPlayer) entityLiving);
                 }
             }
-            if (Constants.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
+            if (MathConstants.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
             {
                 stack.shrink(1);
                 worldIn.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);

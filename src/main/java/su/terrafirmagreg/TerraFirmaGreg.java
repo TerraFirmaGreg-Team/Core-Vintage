@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import lombok.Getter;
 
 import static net.minecraftforge.fml.common.Mod.EventHandler;
-import static su.terrafirmagreg.Tags.*;
+import static su.terrafirmagreg.api.lib.Constants.*;
 
 @Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {

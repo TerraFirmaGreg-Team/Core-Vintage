@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
@@ -40,7 +41,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static net.dries007.tfc.Constants.RNG;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockLeavesTFC extends BlockLeaves {
 

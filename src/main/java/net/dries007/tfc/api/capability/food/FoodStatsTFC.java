@@ -15,14 +15,16 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
@@ -85,9 +87,9 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         } else if (this.sourcePlayer instanceof EntityPlayerMP) // Check for server side first
         {
             // Minor effects from eating rotten food
-            if (Constants.RNG.nextFloat() < 0.6) {
+            if (RNG.nextFloat() < 0.6) {
                 sourcePlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1800, 1));
-                if (Constants.RNG.nextFloat() < 0.15) {
+                if (RNG.nextFloat() < 0.15) {
                     sourcePlayer.addPotionEffect(new PotionEffect(PotionsCore.PARASITES, 1800, 0));
                 }
             }
@@ -278,7 +280,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
                 resetCooldown();
                 addThirst(value);
                 // Salty drink effect
-                if (value < 0 && Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+                if (value < 0 && RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
                     sourcePlayer.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 600, 0));
                 }
             }

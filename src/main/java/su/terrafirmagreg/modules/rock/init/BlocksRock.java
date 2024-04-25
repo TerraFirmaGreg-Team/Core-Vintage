@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariantHandler;
 import su.terrafirmagreg.modules.rock.objects.blocks.BlockAlabasterBricks;
 import su.terrafirmagreg.modules.rock.objects.blocks.BlockAlabasterRaw;
 import su.terrafirmagreg.modules.rock.objects.blocks.BlockAlabasterSmooth;
@@ -11,6 +12,7 @@ import su.terrafirmagreg.modules.rock.objects.blocks.BlockRockDecorative;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumDyeColor;
+
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
@@ -26,6 +28,7 @@ public final class BlocksRock {
     public static BlockAlabasterRaw ALABASTER_RAW;
 
     public static void onRegister(RegistryManager registry) {
+        RockBlockVariantHandler.init();
 
         registry.registerBlocks(ROCK_BLOCKS.values());
 

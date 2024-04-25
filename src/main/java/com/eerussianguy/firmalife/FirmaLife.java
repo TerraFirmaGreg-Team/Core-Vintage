@@ -33,9 +33,9 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
 public class FirmaLife {
 
     public static final String MODNAME = "FirmaLife";
+    public static final LoggingHelper LOGGER = new LoggingHelper(MODID_FL);
     @SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
     public static CommonProxy proxy;
-    public static final LoggingHelper LOGGER = new LoggingHelper(MODID_FL);
     @Mod.Instance
     private static FirmaLife INSTANCE = null;
     private SimpleNetworkWrapper network;

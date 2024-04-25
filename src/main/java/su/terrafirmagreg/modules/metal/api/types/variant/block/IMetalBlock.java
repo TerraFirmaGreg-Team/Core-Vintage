@@ -45,7 +45,7 @@ public interface IMetalBlock extends IMetalType, IAutoReg, ICustomModel, ICustom
      */
     @NotNull
     default ResourceLocation getResourceLocation() {
-        return ModUtils.getID(String.format("metal/%s", getBlockVariant()));
+        return ModUtils.id(String.format("metal/%s", getBlockVariant()));
     }
 
     @Override

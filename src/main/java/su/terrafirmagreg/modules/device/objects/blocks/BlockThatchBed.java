@@ -50,9 +50,9 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomState {
                                     float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             playerIn.setSpawnPoint(pos, false);
-            playerIn.sendMessage(new TextComponentTranslation(ModUtils.getIDName("thatch_bed.spawnpoint")));
+            playerIn.sendMessage(new TextComponentTranslation(ModUtils.idLocalized("thatch_bed.spawnpoint")));
             if (!worldIn.isThundering()) {
-                playerIn.sendStatusMessage(new TextComponentTranslation(ModUtils.getIDName("thatch_bed.not_thundering")), true);
+                playerIn.sendStatusMessage(new TextComponentTranslation(ModUtils.idLocalized("thatch_bed.not_thundering")), true);
                 return true;
             }
         }

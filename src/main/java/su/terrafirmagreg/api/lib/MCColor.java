@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.lib.Constants.RANDOM;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
  * This class is an extension of the AWT Color class. It adds several things which make working with color in the MC environment less of a hassle.
@@ -205,7 +205,7 @@ public class MCColor extends Color {
      * @return int: An integer based representation of a Color.
      */
     public static int getRandomColor() {
-        return new Color(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat()).getRGB();
+        return new Color(RNG.nextFloat(), RNG.nextFloat(), RNG.nextFloat()).getRGB();
     }
 
     /**

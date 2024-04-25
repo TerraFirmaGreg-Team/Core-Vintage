@@ -20,7 +20,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -31,11 +30,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityPigTFC extends EntityAnimalMammal implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityPigTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.PIG.adulthood, ConfigTFC.Animals.PIG.elder));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.PIG.adulthood, ConfigTFC.Animals.PIG.elder));
     }
 
     public EntityPigTFC(World worldIn, Gender gender, int birthDay) {
@@ -77,7 +78,8 @@ public class EntityPigTFC extends EntityAnimalMammal implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.PIG.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityPigTFC baby = new EntityPigTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+            EntityPigTFC baby = new EntityPigTFC(world, Gender.valueOf(RNG.nextBoolean()),
+                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
             world.spawnEntity(baby);

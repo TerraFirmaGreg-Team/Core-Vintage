@@ -1,5 +1,6 @@
 package tfcflorae.objects.blocks.plants;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -136,15 +137,15 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
                     {
                         if (age == 3 && (currentStage == 1 || expectedStage == 1))
                         {
-                            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.WILD_BARLEY, 1 + Constants.RNG.nextInt(2)));
-                            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.BARLEY), Constants.RNG.nextInt(2)));
+                            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.WILD_BARLEY, 1 + MathConstants.RNG.nextInt(2)));
+                            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.BARLEY), MathConstants.RNG.nextInt(2)));
                         }
                         else
                         {
-                            if (Constants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
+                            if (MathConstants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
                             {
                                 spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
-                                int chance = Constants.RNG.nextInt(2);
+                                int chance = MathConstants.RNG.nextInt(2);
                                 if (chance == 0)
                                 {
                                     spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.BARLEY), 1));
@@ -156,15 +157,15 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
                     {
                         if (age == 3 && (currentStage == 1 || expectedStage == 1))
                         {
-                            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.WILD_WHEAT, 1 + Constants.RNG.nextInt(2)));
-                            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.WHEAT), Constants.RNG.nextInt(2)));
+                            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.WILD_WHEAT, 1 + MathConstants.RNG.nextInt(2)));
+                            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.WHEAT), MathConstants.RNG.nextInt(2)));
                         }
                         else
                         {
-                            if (Constants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
+                            if (MathConstants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
                             {
                                 spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
-                                int chance = Constants.RNG.nextInt(2);
+                                int chance = MathConstants.RNG.nextInt(2);
                                 if (chance == 0)
                                 {
                                     spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.WHEAT), 1));
@@ -176,15 +177,15 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
                     {
                         if (age == 3 && (currentStage == 1 || expectedStage == 1))
                         {
-                            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.WILD_RICE, 1 + Constants.RNG.nextInt(2)));
-                            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.RICE), Constants.RNG.nextInt(2)));
+                            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.WILD_RICE, 1 + MathConstants.RNG.nextInt(2)));
+                            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.RICE), MathConstants.RNG.nextInt(2)));
                         }
                         else
                         {
-                            if (Constants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
+                            if (MathConstants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
                             {
                                 spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
-                                int chance = Constants.RNG.nextInt(2);
+                                int chance = MathConstants.RNG.nextInt(2);
                                 if (chance == 0)
                                 {
                                     spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(Crop.RICE), 1));
@@ -194,7 +195,7 @@ public class BlockTallGrassTFCF extends BlockShortGrassTFCF implements IGrowable
                     }
                     else*/
                     {
-                        if (Constants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
+                        if (MathConstants.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
                         {
                             spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW, 1));
                         }

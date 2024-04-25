@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import org.jetbrains.annotations.Nullable;
-
-
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -16,9 +13,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import lombok.Getter;
-
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class BlockSoilMudStairs extends BlockStairs implements ISoilBlock {

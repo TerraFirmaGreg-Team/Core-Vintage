@@ -40,7 +40,6 @@ import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
 

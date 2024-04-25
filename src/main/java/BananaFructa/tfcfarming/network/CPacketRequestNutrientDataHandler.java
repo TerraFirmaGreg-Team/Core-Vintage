@@ -1,5 +1,7 @@
 package BananaFructa.tfcfarming.network;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -16,9 +18,6 @@ import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillTier;
 import net.dries007.tfc.util.skills.SkillType;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 public class CPacketRequestNutrientDataHandler implements IMessageHandler<CPacketRequestNutrientData, IMessage> {
 

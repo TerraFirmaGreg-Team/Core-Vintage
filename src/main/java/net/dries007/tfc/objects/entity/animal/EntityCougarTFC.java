@@ -23,7 +23,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -31,13 +30,15 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityCougarTFC extends EntityPantherTFC implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 160;
 
     @SuppressWarnings("unused")
     public EntityCougarTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -91,7 +92,7 @@ public class EntityCougarTFC extends EntityPantherTFC implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COUGAR_CRY : SoundAnimal.ANIMAL_COUGAR_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COUGAR_CRY : SoundAnimal.ANIMAL_COUGAR_SAY;
     }
 
     @Nullable

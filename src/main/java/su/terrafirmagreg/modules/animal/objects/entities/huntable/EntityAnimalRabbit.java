@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
@@ -63,7 +63,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
 
     @SuppressWarnings("unused")
     public EntityAnimalRabbit(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalRabbit(World worldIn, Gender gender, int birthDay) {
@@ -175,7 +175,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
     public void birthChildren() {
         int numberOfChildren = 5 + rand.nextInt(5); // 5-10
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalRabbit baby = new EntityAnimalRabbit(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalRabbit baby = new EntityAnimalRabbit(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             this.world.spawnEntity(baby);

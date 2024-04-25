@@ -13,6 +13,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -20,7 +21,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import org.jetbrains.annotations.NotNull;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
-import static net.dries007.tfc.Constants.RNG;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockOvenChimney extends Block implements IItemSize {
 

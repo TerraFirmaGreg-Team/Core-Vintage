@@ -2,6 +2,7 @@ package net.dries007.tfc.util.climate;
 
 import net.minecraft.util.math.MathHelper;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -9,13 +10,10 @@ import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.config.TemperatureMode;
 
-import java.util.Random;
-
 import static net.dries007.tfc.world.classic.WorldTypeTFC.SEALEVEL;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class ClimateHelper {
-
-    private static final Random RANDOM = new Random();
 
     private ClimateHelper() {}
 
@@ -41,9 +39,9 @@ public class ClimateHelper {
 
         // Note: this does not use world seed, as that is not synced from server - client, resulting in the seed being different
         long day = ICalendar.getTotalDays(CalendarTFC.CALENDAR_TIME.getTicks() + timeOffset);
-        RANDOM.setSeed(day);
+        RNG.setSeed(day);
         // Range: -1 - 1
-        final float dailyModifier = RANDOM.nextFloat() - RANDOM.nextFloat();
+        final float dailyModifier = RNG.nextFloat() - RNG.nextFloat();
 
         // Max daily / hourly variance is +/- 4 C
         return monthlyTemp(regionalTemp, z, timeOffset) + (dailyModifier + 0.3f * hourModifier) * 3f;

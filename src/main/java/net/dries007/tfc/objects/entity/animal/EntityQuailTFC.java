@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
@@ -17,7 +18,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -32,7 +32,8 @@ import java.util.List;
 public class EntityQuailTFC extends EntityChickenTFC implements ILivestock {
 
     public EntityQuailTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.QUAIL.adulthood, ConfigTFC.Animals.QUAIL.elder));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
+                getRandomGrowth(ConfigTFC.Animals.QUAIL.adulthood, ConfigTFC.Animals.QUAIL.elder));
     }
 
     public EntityQuailTFC(World worldIn, Gender gender, int birthDay) {

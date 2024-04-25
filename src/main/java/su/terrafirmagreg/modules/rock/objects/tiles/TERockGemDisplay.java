@@ -15,12 +15,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import lombok.Getter;
+
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class TERockGemDisplay extends TEBase {

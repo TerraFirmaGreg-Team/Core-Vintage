@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalLion extends RenderLiving<EntityAnimalLion> {
 
-    private static final ResourceLocation LIONS_TEXTURE = ModUtils.getID("textures/entity/animal/predators/lions.png");
+    private static final ResourceLocation LIONS_TEXTURE = ModUtils.id("textures/entity/animal/predators/lions.png");
 
     public RenderAnimalLion(RenderManager manager) {
         super(manager, new ModelAnimalLion(), 0.3F);

@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -28,10 +30,6 @@ import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

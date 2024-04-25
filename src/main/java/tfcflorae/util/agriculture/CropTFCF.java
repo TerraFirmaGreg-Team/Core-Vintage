@@ -20,9 +20,9 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillTier;
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
+import net.dries007.tfc.world.classic.worldgen.WorldGenWildCropsTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
-import net.dries007.tfc.world.classic.worldgen.WorldGenWildCropsTFCF;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

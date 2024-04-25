@@ -1,5 +1,7 @@
 package tfctech.objects.blocks.devices;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -25,11 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfctech.client.TechSounds;
 import tfctech.objects.tileentities.TELatexExtractor;
 

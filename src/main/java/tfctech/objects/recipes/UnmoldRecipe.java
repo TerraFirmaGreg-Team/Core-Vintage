@@ -18,13 +18,18 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+
 import com.google.gson.JsonObject;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import tfctech.objects.items.ceramics.ItemTechMold;
 import tfctech.objects.items.metal.ItemTechMetal;
 
@@ -183,7 +188,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
      * @return ItemStack.EMPTY on break, the mold (empty) if pass
      */
     public ItemStack getMoldResult(ItemStack moldIn) {
-        if (Constants.RNG.nextFloat() <= chance) {
+        if (MathConstants.RNG.nextFloat() <= chance) {
             return new ItemStack(moldIn.getItem());
         } else {
             return ItemStack.EMPTY;

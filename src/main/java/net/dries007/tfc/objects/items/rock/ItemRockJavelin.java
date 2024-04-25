@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
@@ -38,6 +38,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 
@@ -128,7 +130,7 @@ public class ItemRockJavelin extends ItemTool implements IItemSize, IRockObject 
                     javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
                     worldIn.spawnEntity(javelin);
                     worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                 }
                 player.inventory.deleteStack(stack);
                 player.addStat(StatList.getObjectUseStats(this));

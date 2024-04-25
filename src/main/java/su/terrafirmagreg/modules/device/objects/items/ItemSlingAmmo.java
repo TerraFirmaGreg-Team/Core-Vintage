@@ -4,11 +4,13 @@ import su.terrafirmagreg.api.spi.item.ItemBase;
 
 import net.minecraft.item.ItemStack;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 public class ItemSlingAmmo extends ItemBase {
 

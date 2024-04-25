@@ -7,17 +7,20 @@ import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 
+
 import gregtech.api.unification.ore.StoneType;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.rock.ModuleRock.LOGGER;
 
 /**
  * Класс, представляющий тип блока породы.
@@ -76,10 +79,17 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
     }
 
     public void createStoneType(int id, RockType type) {
-        new StoneType(id, type + "_" + this.name, SoundType.STONE, type.getOrePrefix(), type.getMaterial(),
-                () -> this.get(type).getDefaultState(),
-                state -> state.getBlock() == this.get(type), false
-        );
+        if (type.getMaterial() == null) {
+            LOGGER.warn("Material is null: " + type);
+        } else {
+            LOGGER.warn("Material is not null: " + type);
+            new StoneType(id, type + "_" + this.name, SoundType.STONE,
+                    type.getOrePrefix(), type.getMaterial(),
+                    () -> this.get(type).getDefaultState(),
+                    state -> state.getBlock() == this.get(type), false
+            );
+        }
+
     }
 
     @Override

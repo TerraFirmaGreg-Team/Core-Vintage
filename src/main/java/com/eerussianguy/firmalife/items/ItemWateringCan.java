@@ -1,6 +1,7 @@
 package com.eerussianguy.firmalife.items;
 
 import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,17 +20,13 @@ import net.minecraft.world.World;
 
 import com.eerussianguy.firmalife.util.IWaterable;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemMisc;
 
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 
@@ -101,10 +98,10 @@ public class ItemWateringCan extends ItemMisc {
             RayTraceResult result = MathsUtils.rayTrace(world, (EntityPlayer) entity, false);
             if (result == null || result.typeOfHit != RayTraceResult.Type.BLOCK) return;
             BlockPos pos = result.getBlockPos();
-            double x = pos.getX() + Constants.RNG.nextFloat();
+            double x = pos.getX() + RNG.nextFloat();
             double y = pos.getY() + 1.5f;
-            double z = pos.getZ() + Constants.RNG.nextFloat();
-            world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, Constants.RNG.nextFloat(), -0.2f, Constants.RNG.nextFloat());
+            double z = pos.getZ() + RNG.nextFloat();
+            world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, RNG.nextFloat(), -0.2f, RNG.nextFloat());
         }
     }
 }

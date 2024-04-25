@@ -21,11 +21,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+
 import gregtech.api.items.toolitem.IGTTool;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 @Getter
 public class TEWoodToolRack extends TEBase {

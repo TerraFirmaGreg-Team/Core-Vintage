@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -31,13 +30,15 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IPredator, EntityAnimalAIStandAttack.IEntityStandAttack {
 
     private static final int DAYS_TO_ADULTHOOD = 240;
 
     @SuppressWarnings("unused")
     public EntityAnimalBlackBear(World worldIn) {
-        this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, IAnimal.Gender.valueOf(RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalBlackBear(World worldIn, IAnimal.Gender gender, int birthDay) {

@@ -1,5 +1,7 @@
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -44,10 +46,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 

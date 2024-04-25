@@ -11,12 +11,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
 import java.util.Random;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockFluidHotWater extends BlockFluidTFC {
 
@@ -47,9 +49,8 @@ public class BlockFluidHotWater extends BlockFluidTFC {
     @Override
     public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         super.onEntityCollision(worldIn, pos, state, entityIn);
-        if (entityIn instanceof EntityLivingBase) {
-            EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
-            if (Constants.RNG.nextInt(10) == 0 && entityLiving.getHealth() < entityLiving.getMaxHealth()) {
+        if (entityIn instanceof EntityLivingBase entityLiving) {
+            if (RNG.nextInt(10) == 0 && entityLiving.getHealth() < entityLiving.getMaxHealth()) {
                 entityLiving.heal(FoodStatsTFC.PASSIVE_HEAL_AMOUNT * 7f);
             }
         }

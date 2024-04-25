@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
-import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
@@ -322,7 +322,8 @@ public class TEMetalAnvil extends TEBaseInventory {
 
         // For when there is both inputs but no recipe that matches
         ModuleMetal.PACKET_SERVICE.sendTo(
-                SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL, Tags.MOD_ID + ".tooltip.anvil_not_weldable"),
+                SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
+                        ModUtils.idLocalized("tooltip.anvil_not_weldable")),
                 (EntityPlayerMP) player);
         return false;
     }

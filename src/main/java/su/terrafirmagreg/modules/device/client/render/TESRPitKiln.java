@@ -23,8 +23,8 @@ import net.minecraftforge.items.IItemHandler;
 @SideOnly(Side.CLIENT)
 public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln> {
 
-    private static final ResourceLocation THATCH = ModUtils.getID("textures/blocks/thatch.png");
-    private static final ResourceLocation BARK = ModUtils.getID("textures/blocks/wood/log/oak.png");
+    private static final ResourceLocation THATCH = ModUtils.id("textures/blocks/thatch.png");
+    private static final ResourceLocation BARK = ModUtils.id("textures/blocks/wood/log/oak.png");
     private static final ModelStraw[] STRAW = new ModelStraw[TEPitKiln.STRAW_NEEDED];
     private static final int LOG_ROWS = 2;
     private static final int LOGS_PER_ROW = TEPitKiln.WOOD_NEEDED / LOG_ROWS;

@@ -11,9 +11,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
 import java.util.Iterator;
-import java.util.Random;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
  * Vanilla ice melting is hardcoded to the world. However, we can replicate most of the behavior by watching world ticks, and performing the same
@@ -30,12 +30,11 @@ public class IceMeltHandler {
     /**
      * Duplicated field from world, idk how this really works or the merits to it, but it should function the same as vanilla
      */
-    private static int updateLCG = new Random().nextInt();
+    private static int updateLCG = RNG.nextInt();
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
-        if (event.world instanceof WorldServer && event.phase == TickEvent.Phase.END) {
-            final WorldServer world = (WorldServer) event.world;
+        if (event.world instanceof WorldServer world && event.phase == TickEvent.Phase.END) {
             world.profiler.startSection("tfciceandsnow");
             if (world.getWorldInfo().getTerrainType() != WorldType.DEBUG_ALL_BLOCK_STATES) {
                 for (Iterator<Chunk> iterator = world.getPersistentChunkIterable(world.getPlayerChunkMap()

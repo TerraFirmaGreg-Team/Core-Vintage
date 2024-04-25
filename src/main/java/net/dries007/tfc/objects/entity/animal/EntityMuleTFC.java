@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
@@ -38,7 +39,6 @@ import net.minecraft.world.biome.Biome;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -72,7 +72,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
     private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
     public EntityMuleTFC(World world) {
-        this(world, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.MULE.adulthood, ConfigTFC.Animals.MULE.elder));
     }
 
@@ -283,7 +283,8 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ConfigTFC.Animals.MULE.oldDeathChance) {
                     this.setDead();
                 }
@@ -301,7 +302,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
     public EntityAgeable createChild(@NotNull EntityAgeable other) {
         if (other == this) {
             // Only called if this animal is interacted with a spawn egg
-            EntityMuleTFC baby = new EntityMuleTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityMuleTFC baby = new EntityMuleTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             this.setOffspringAttributes(this, baby);
             return baby;

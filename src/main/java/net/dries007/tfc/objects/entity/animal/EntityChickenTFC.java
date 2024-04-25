@@ -27,7 +27,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
@@ -45,6 +44,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
 
@@ -58,7 +58,7 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
     public float wingRotDelta = 1.0F;
 
     public EntityChickenTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ConfigTFC.Animals.CHICKEN.adulthood, ConfigTFC.Animals.CHICKEN.elder));
     }
 

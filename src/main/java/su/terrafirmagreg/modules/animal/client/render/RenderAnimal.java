@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")

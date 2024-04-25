@@ -17,13 +17,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockBeeNest extends BlockNonCube {
 
@@ -53,9 +55,9 @@ public class BlockBeeNest extends BlockNonCube {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        int count1 = Constants.RNG.nextInt(3);
+        int count1 = RNG.nextInt(3);
         drops.add(new ItemStack(ItemsFL.HONEYCOMB, count1));
-        int count2 = Constants.RNG.nextInt(3);
+        int count2 = RNG.nextInt(3);
         drops.add(new ItemStack(ItemsFL.getFood(FoodFL.RAW_HONEY), count2));
     }
 

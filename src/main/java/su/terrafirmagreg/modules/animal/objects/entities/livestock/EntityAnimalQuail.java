@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -32,7 +32,7 @@ import java.util.List;
 public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock {
 
     public EntityAnimalQuail(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.QUAIL.adulthood, ModuleAnimalConfig.ENTITIES.QUAIL.elder));
     }
 

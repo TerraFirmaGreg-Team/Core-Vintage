@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public final class PullCapability {
 
-    public static final ResourceLocation KEY = ModUtils.getID("pull_capability");
+    public static final ResourceLocation KEY = ModUtils.id("pull_capability");
 
     @CapabilityInject(IPullCapability.class)
     public static Capability<IPullCapability> PULL_CAPABILITY;

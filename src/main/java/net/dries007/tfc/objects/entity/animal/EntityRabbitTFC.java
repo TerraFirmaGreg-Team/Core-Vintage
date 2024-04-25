@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -39,7 +40,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -63,7 +63,7 @@ public class EntityRabbitTFC extends EntityAnimalMammal implements IHuntable {
 
     @SuppressWarnings("unused")
     public EntityRabbitTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityRabbitTFC(World worldIn, Gender gender, int birthDay) {
@@ -175,7 +175,7 @@ public class EntityRabbitTFC extends EntityAnimalMammal implements IHuntable {
     public void birthChildren() {
         int numberOfChildren = 5 + rand.nextInt(5); // 5-10
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityRabbitTFC baby = new EntityRabbitTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityRabbitTFC baby = new EntityRabbitTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             this.world.spawnEntity(baby);

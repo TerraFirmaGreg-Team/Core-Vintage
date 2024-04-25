@@ -2,6 +2,7 @@ package se.gory_moon.horsepower.client.renderer;
 
 import net.minecraft.client.renderer.GlStateManager;
 
+
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 
 public class TileEntityChoppingBlockRender extends TileEntityHPBaseRenderer<TileEntityManualChopper> {

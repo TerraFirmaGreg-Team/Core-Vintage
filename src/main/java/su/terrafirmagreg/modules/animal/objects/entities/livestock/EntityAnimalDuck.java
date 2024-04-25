@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -29,6 +28,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 /**
  * A Chicken of the colder regions! Actually, ducks takes longer to reach maturity, but hey, they are cute!
  */
@@ -36,7 +37,7 @@ import java.util.List;
 public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock {
 
     public EntityAnimalDuck(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.DUCK.adulthood, ModuleAnimalConfig.ENTITIES.DUCK.elder));
     }
 
@@ -98,7 +99,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DUCK_CRY : SoundAnimal.ANIMAL_DUCK_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DUCK_CRY : SoundAnimal.ANIMAL_DUCK_SAY;
     }
 
     @Nullable

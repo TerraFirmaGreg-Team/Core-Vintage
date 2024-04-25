@@ -14,6 +14,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -27,7 +28,7 @@ import java.util.function.Supplier;
 
 public final class HeatCapability {
 
-    public static final ResourceLocation KEY = ModUtils.getID("heat_capability");
+    public static final ResourceLocation KEY = ModUtils.id("heat_capability");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
 
     @CapabilityInject(IHeatCapability.class)

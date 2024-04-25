@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumFacing;
 
+
 import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.Nullable;

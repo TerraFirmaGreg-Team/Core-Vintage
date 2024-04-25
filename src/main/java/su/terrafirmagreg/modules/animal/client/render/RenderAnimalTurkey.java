@@ -12,14 +12,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 
 public class RenderAnimalTurkey extends RenderLiving<EntityAnimalTurkey> {
 
-    private static final ResourceLocation MALE = ModUtils.getID("textures/entity/animal/huntable/turkeym.png");
-    private static final ResourceLocation FEMALE = ModUtils.getID("textures/entity/animal/huntable/turkeyf.png");
+    private static final ResourceLocation MALE = ModUtils.id("textures/entity/animal/huntable/turkeym.png");
+    private static final ResourceLocation FEMALE = ModUtils.id("textures/entity/animal/huntable/turkeyf.png");
 
     public RenderAnimalTurkey(RenderManager manager) {
         super(manager, new ModelAnimalTurkey(), 0.5F);

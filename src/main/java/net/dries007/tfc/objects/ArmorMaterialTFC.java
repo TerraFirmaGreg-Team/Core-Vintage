@@ -4,6 +4,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
+
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
 import org.jetbrains.annotations.NotNull;

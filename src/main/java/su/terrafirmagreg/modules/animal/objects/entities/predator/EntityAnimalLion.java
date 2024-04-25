@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -46,6 +45,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 192;
@@ -55,7 +56,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
     @SuppressWarnings("unused")
     public EntityAnimalLion(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalLion(World worldIn, Gender gender, int birthDay) {
@@ -102,7 +103,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
     public void birthChildren() {
         int numberOfChildren = 1; //one always
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             this.world.spawnEntity(baby);
@@ -200,7 +201,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;
     }
 
     @Nullable

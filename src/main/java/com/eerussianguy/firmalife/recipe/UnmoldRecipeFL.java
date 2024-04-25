@@ -18,10 +18,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+
 import com.eerussianguy.firmalife.items.ItemMetalMalletMold;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.gson.JsonObject;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
@@ -31,6 +31,8 @@ import net.dries007.tfc.objects.recipes.RecipeUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class UnmoldRecipeFL extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
@@ -164,7 +166,7 @@ public class UnmoldRecipeFL extends IForgeRegistryEntry.Impl<IRecipe> implements
     }
 
     public ItemStack getMoldResult(ItemStack moldIn) {
-        return Constants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
+        return RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
     }
 
     public ItemStack getOutputItem(IMoldHandler moldHandler) {

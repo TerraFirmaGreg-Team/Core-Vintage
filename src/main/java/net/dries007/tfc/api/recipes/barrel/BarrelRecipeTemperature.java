@@ -1,5 +1,8 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.api.util.CollectionUtils;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -11,17 +14,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.CollectionUtils;
-
 
 import java.util.List;
 
@@ -72,7 +70,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
     @Override
     public void onRecipeComplete(World world, BlockPos pos) {
         if (world.getTotalWorldTime() % 4 == 0) {
-            world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + Constants.RNG.nextFloat() * 0.4f);
+            world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + MathConstants.RNG.nextFloat() * 0.4f);
         }
     }
 

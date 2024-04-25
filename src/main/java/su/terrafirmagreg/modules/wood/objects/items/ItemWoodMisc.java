@@ -3,9 +3,11 @@ package su.terrafirmagreg.modules.wood.objects.items;
 import su.terrafirmagreg.api.spi.item.ItemBase;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+
+import lombok.Getter;
 
 public class ItemWoodMisc extends ItemBase {
 

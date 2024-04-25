@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import com.buuz135.hotornot.network.PacketServerSettings;
 
 import java.util.ArrayList;

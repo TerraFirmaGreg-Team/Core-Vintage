@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.wood.api.types.type;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.Getter;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.util.Set;
 

@@ -1,6 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,20 +21,16 @@ import net.minecraft.world.World;
 
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
 
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import java.util.Random;
 import java.util.function.Supplier;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.STAGE;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 
@@ -91,7 +88,7 @@ public class BlockBonsai extends BlockNonCube {
             if (held.isEmpty() && state.getValue(STAGE) == 2) {
                 BlockPos spawnPos = tier == 4 ? pos.up() : pos.down(); // who let me learn to code???
                 StackUtils.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
-                if (Constants.RNG.nextInt(7) == 0)
+                if (RNG.nextInt(7) == 0)
                     StackUtils.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));
                 world.setBlockState(pos, state.withProperty(STAGE, 0));
                 te.resetCounter();

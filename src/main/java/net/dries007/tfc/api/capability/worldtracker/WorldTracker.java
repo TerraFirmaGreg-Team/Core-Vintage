@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.Constants;
+
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.ConfigTFC;
@@ -20,14 +20,15 @@ import net.dries007.tfc.client.TFCSounds;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 public class WorldTracker implements ICapabilitySerializable<NBTTagCompound> {
-
-    private static final Random RANDOM = new Random();
 
     private final List<CollapseData> collapsesInProgress;
 
@@ -41,7 +42,7 @@ public class WorldTracker implements ICapabilitySerializable<NBTTagCompound> {
 
     public void tick(World world) {
         if (!world.isRemote) {
-            if (!collapsesInProgress.isEmpty() && RANDOM.nextInt(20) == 0) {
+            if (!collapsesInProgress.isEmpty() && MathConstants.RNG.nextInt(20) == 0) {
                 for (CollapseData collapse : collapsesInProgress) {
                     Set<BlockPos> updatedPositions = new ObjectOpenHashSet<>();
                     for (BlockPos posAt : collapse.nextPositions) {
@@ -50,7 +51,7 @@ public class WorldTracker implements ICapabilitySerializable<NBTTagCompound> {
                         FallingBlockManager.Specification specAt = FallingBlockManager.getSpecification(stateAt);
                         if (specAt != null && specAt.isCollapsable() && FallingBlockManager.canFallThrough(world, posAt.down(), Material.ROCK) &&
                                 specAt.canCollapse(world, posAt) && posAt.distanceSq(collapse.centerPos) < collapse.radiusSquared &&
-                                RANDOM.nextFloat() < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
+                                MathConstants.RNG.nextFloat() < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
                             IBlockState fallState = specAt.getResultingState(stateAt);
                             world.setBlockState(posAt, fallState);
                             FallingBlockManager.checkFalling(world, posAt, fallState, true);
@@ -85,7 +86,7 @@ public class WorldTracker implements ICapabilitySerializable<NBTTagCompound> {
     public void deserializeNBT(NBTTagCompound nbt) {
         if (nbt != null) {
             collapsesInProgress.clear();
-            NBTTagList list = nbt.getTagList("collapsesInProgress", Constants.NBT.TAG_COMPOUND);
+            NBTTagList list = nbt.getTagList("collapsesInProgress", 10);
             for (int i = 0; i < list.tagCount(); i++) {
                 collapsesInProgress.add(new CollapseData(list.getCompoundTagAt(i)));
             }

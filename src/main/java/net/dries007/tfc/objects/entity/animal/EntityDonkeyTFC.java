@@ -40,7 +40,6 @@ import net.minecraft.world.biome.Biome;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -60,6 +59,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 
@@ -82,7 +82,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
     private float geneJump, geneHealth, geneSpeed; // Basic genetic selection based on vanilla's horse offspring
 
     public EntityDonkeyTFC(World world) {
-        this(world, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(world, Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.DONKEY.adulthood, ConfigTFC.Animals.DONKEY.elder));
     }
 
@@ -467,7 +467,8 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ConfigTFC.Animals.DONKEY.oldDeathChance) {
                     this.setDead();
                 }
@@ -504,7 +505,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
             this.onFertilized((IAnimal) other);
         } else if (other == this) {
             // Only called if this animal is interacted with a spawn egg
-            EntityDonkeyTFC baby = new EntityDonkeyTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityDonkeyTFC baby = new EntityDonkeyTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             this.setOffspringAttributes(this, baby);
             return baby;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -43,7 +43,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
     @SuppressWarnings("unused")
     public EntityAnimalPheasant(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalPheasant(World worldIn, Gender gender, int birthDay) {

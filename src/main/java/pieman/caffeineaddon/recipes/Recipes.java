@@ -1,8 +1,5 @@
 package pieman.caffeineaddon.recipes;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidStack;
@@ -19,6 +16,7 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.calendar.ICalendar;
 import pieman.caffeineaddon.init.ModItems;

@@ -2,7 +2,11 @@ package su.terrafirmagreg;
 
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = Tags.MOD_ID, name = Tags.MOD_NAME + "/modules")
+
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.lib.Constants.MOD_NAME;
+
+@Config(modid = MOD_ID, name = MOD_NAME + "/modules")
 public class TerraFirmaGregConfig {
 
 }

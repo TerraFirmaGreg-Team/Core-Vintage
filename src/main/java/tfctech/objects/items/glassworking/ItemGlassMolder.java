@@ -1,8 +1,5 @@
 package tfctech.objects.items.glassworking;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-
-
 import su.terrafirmagreg.api.lib.Constants;
 
 import net.minecraft.client.resources.I18n;
@@ -28,6 +25,7 @@ import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import tfctech.objects.items.ItemMiscTech;
 

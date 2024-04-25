@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -50,13 +49,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILivestock, IRidable {
 
     private static final DataParameter<Integer> DATA_COLOR_ID = EntityDataManager.createKey(EntityAnimalCamel.class, DataSerializers.VARINT);
     private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityAnimalCamel.class, DataSerializers.BOOLEAN);
 
     public EntityAnimalCamel(World world) {
-        this(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.CAMEL.adulthood, ModuleAnimalConfig.ENTITIES.CAMEL.elder));
         this.setSize(0.9F, 2.0F);
     }
@@ -71,7 +72,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_CAMEL_CRY : SoundAnimal.ANIMAL_CAMEL_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_CAMEL_CRY : SoundAnimal.ANIMAL_CAMEL_SAY;
     }
 
     @Override
@@ -290,7 +291,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
         } else if (other == this) {
             // Only called if this animal is interacted with a spawn egg
             // Try to return to vanilla's default method a baby of this animal, as if bred normally
-            return new EntityAnimalCamel(this.world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            return new EntityAnimalCamel(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
         }
         return null;
@@ -300,7 +301,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.CAMEL.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             if (this.geneHealth > 0) {

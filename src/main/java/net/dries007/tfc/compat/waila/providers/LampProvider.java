@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -13,10 +15,6 @@ import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.te.TELamp;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.ArrayList;
 import java.util.Collections;

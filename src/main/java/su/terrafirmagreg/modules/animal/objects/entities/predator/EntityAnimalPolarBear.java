@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -53,6 +52,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, IPredator, EntityAnimalAIStandAttack.IEntityStandAttack {
 
     private static final int DAYS_TO_ADULTHOOD = 180;
@@ -64,7 +65,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 
     @SuppressWarnings("unused")
     public EntityAnimalPolarBear(World world) {
-        this(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+        this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()), EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
     public EntityAnimalPolarBear(World world, IAnimal.Gender gender, int birthDay) {
@@ -78,7 +79,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 
     @Override
     public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
-        return new EntityAnimalPolarBear(this.world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        return new EntityAnimalPolarBear(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                 (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
     }
 
@@ -233,9 +234,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(Tags.MOD_ID + ".animal." + entityString + "." + this.getGender()
-                .name()
-                .toLowerCase());
+        return new TextComponentTranslation(ModUtils.idLocalized("animal." + entityString + "." + this.getGender().name()));
     }
 
     @Override

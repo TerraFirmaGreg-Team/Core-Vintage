@@ -38,7 +38,6 @@ import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
@@ -58,7 +57,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static net.dries007.tfc.Constants.RNG;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 public class ItemMetalMallet extends ItemTFC implements IMetalItem {
@@ -90,7 +89,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
                 CrackingRecipe entry = CrackingRecipe.get(tile.getStack());
                 if (entry == null) return EnumActionResult.FAIL;
 
-                if (Constants.RNG.nextInt(100) < entry.getChance()) {
+                if (RNG.nextInt(100) < entry.getChance()) {
                     InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), entry.getOutputItem(tile.getStack()));
                     worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 2.0F, 1.0F);
                 } else
@@ -164,10 +163,10 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
                         leafCount = (int) Math.ceil(leafCount * 0.66);
                         while (leafCount > 0)// batches drops a few times
                         {
-                            int dropCount = Math.min(Constants.RNG.nextInt(4) + 1, leafCount);
-                            BlockPos dropPos = logPos.offset(EnumFacing.random(Constants.RNG), Constants.RNG.nextInt(3) + 1);
+                            int dropCount = Math.min(RNG.nextInt(4) + 1, leafCount);
+                            BlockPos dropPos = logPos.offset(EnumFacing.random(RNG), RNG.nextInt(3) + 1);
                             StackUtils.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut()
-                                    .getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
+                                    .getItem(), RNG.nextInt(dropCount)));//should be querying nut
                             TFCParticles.LEAF1.sendToAllNear(worldIn, dropPos.getX() + RNG.nextFloat() / 10, dropPos.getY() - RNG.nextFloat() / 10,
                                     dropPos.getZ() + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10,
                                     (RNG.nextFloat() - 0.5) / 10, 90);

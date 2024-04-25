@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
-import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -94,12 +94,12 @@ public class ContainerAnvilTFC extends ContainerBaseTE<TEMetalAnvil> implements 
         }
         //		if (!MetalUtil.isAtLeast(tile.getTier(), recipe.getTier())) {
         //			ModuleMetal.LOGGER.info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
-        //			player.sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_tier_too_low"));
+        //			player.sendMessage(new TextComponentTranslation(ModUtils.idLocalized("tooltip.anvil_tier_too_low")));
         //			return false;
         //		}
 
         if (!cap.isWorkable()) {
-            player.sendMessage(new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_too_cold"));
+            player.sendMessage(new TextComponentTranslation(ModUtils.idLocalized("tooltip.anvil_too_cold")));
             return false;
         }
 
@@ -124,7 +124,7 @@ public class ContainerAnvilTFC extends ContainerBaseTE<TEMetalAnvil> implements 
                 return true;
             } else {
                 player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(
-                        new TextComponentTranslation(Tags.MOD_ID + ".tooltip.anvil_no_hammer")));
+                        new TextComponentTranslation(ModUtils.idLocalized("tooltip.anvil_no_hammer"))));
                 return false;
             }
         }

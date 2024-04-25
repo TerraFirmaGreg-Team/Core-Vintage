@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 
@@ -18,7 +19,7 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 @SideOnly(Side.CLIENT)
 public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/blast_furnace.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/blast_furnace.png");
 
     public GuiBlastFurnace(Container container, InventoryPlayer playerInv, TEBlastFurnace tile) {
         super(container, playerInv, tile, BACKGROUND);

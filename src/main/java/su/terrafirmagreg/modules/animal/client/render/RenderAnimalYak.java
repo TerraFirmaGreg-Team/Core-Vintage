@@ -15,8 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalYak extends RenderAnimal<EntityAnimalYak> {
 
-    private static final ResourceLocation TEXTURE_YOUNG = ModUtils.getID("textures/entity/animal/livestock/yak_young.png");
-    private static final ResourceLocation TEXTURE_OLD = ModUtils.getID("textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_YOUNG = ModUtils.id("textures/entity/animal/livestock/yak_young.png");
+    private static final ResourceLocation TEXTURE_OLD = ModUtils.id("textures/entity/animal/livestock/yak_young.png");
 
     public RenderAnimalYak(RenderManager renderManager) {
         super(renderManager, new ModelAnimalYak(), 0.7F, TEXTURE_YOUNG, TEXTURE_OLD);

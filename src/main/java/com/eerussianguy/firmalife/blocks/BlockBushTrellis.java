@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -26,10 +28,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.HashMap;
 import java.util.Map;

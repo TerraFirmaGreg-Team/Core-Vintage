@@ -10,7 +10,8 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
+
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 
 public class EntityJoinWorldEventHandler {
 

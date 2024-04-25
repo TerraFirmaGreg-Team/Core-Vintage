@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
-import tfcflorae.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCropsTFCF;
+import tfcflorae.objects.blocks.BlocksTFCF;
 
 public class RegenWildCropsTFCF extends WorldGenWildCropsTFCF {
 

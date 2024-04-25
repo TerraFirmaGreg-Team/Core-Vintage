@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -56,6 +55,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
 
     private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.VARINT);
@@ -63,9 +64,9 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
     @SuppressWarnings("unused")
     public EntityAnimalSheep(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.SHEEP.adulthood, ModuleAnimalConfig.ENTITIES.SHEEP.elder),
-                EntitySheep.getRandomSheepColor(Constants.RANDOM));
+                EntitySheep.getRandomSheepColor(RNG));
     }
 
     public EntityAnimalSheep(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -104,7 +105,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.SHEEP.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
@@ -230,11 +231,11 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
     @Override
     public TextComponentTranslation getTooltip() {
         if (getAge() == Age.CHILD) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.young", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.young"), getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.low_familiarity"), getAnimalName());
         } else if (!hasWool()) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.no_wool", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.no_wool"), getAnimalName());
         }
         return null;
     }

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -29,10 +31,6 @@ import net.dries007.tfc.objects.te.TEAnvilTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

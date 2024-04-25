@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.client.gui.GuiContainerTE;
@@ -23,7 +24,7 @@ import java.io.IOException;
 
 public class GuiCrate extends GuiContainerTE<TECrate> {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/crate.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/crate.png");
     private final String translationKey;
 
     public GuiCrate(Container container, InventoryPlayer playerInv, TECrate tile, IBlockState state) {

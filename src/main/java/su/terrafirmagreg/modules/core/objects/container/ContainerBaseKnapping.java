@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.objects.container;
 
 import su.terrafirmagreg.api.spi.button.IButtonHandler;
 import su.terrafirmagreg.api.spi.container.ContainerBaseItemStack;
+import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -17,13 +18,9 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.SimpleCraftMatrix;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
 
 public abstract class ContainerBaseKnapping extends ContainerBaseItemStack implements IButtonHandler {
 

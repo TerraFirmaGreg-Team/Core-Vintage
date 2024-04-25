@@ -3,6 +3,7 @@ package com.lumintorious.ambiental.modifiers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+
 import com.lumintorious.ambiental.api.IItemTemperatureOwner;
 import com.lumintorious.ambiental.api.IItemTemperatureProvider;
 import com.lumintorious.ambiental.api.TemperatureRegistry;

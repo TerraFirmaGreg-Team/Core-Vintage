@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.entity.EntityLivingBase;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class PotionResistHeat extends PotionBase {

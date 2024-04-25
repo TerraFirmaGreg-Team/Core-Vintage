@@ -2,6 +2,7 @@ package pieman.caffeineaddon.jeicompat;
 
 import net.minecraft.item.ItemStack;
 
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;

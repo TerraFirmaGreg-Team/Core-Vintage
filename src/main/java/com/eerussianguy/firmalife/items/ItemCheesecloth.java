@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
@@ -42,10 +44,6 @@ import net.dries007.tfc.objects.items.ItemTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
-
 
 import static net.minecraftforge.fluids.BlockFluidBase.LEVEL;
 

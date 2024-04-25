@@ -16,6 +16,7 @@ import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.client.model.pipeline.VertexTransformer;
 import net.minecraftforge.common.model.TRSRTransformation;
 
+
 import com.google.common.collect.ImmutableList;
 
 import org.jetbrains.annotations.NotNull;

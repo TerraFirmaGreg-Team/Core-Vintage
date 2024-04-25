@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,9 +19,6 @@ import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
 
 public class ContainerLiquidTransfer extends ContainerItemStack implements ISlotCallback {
 

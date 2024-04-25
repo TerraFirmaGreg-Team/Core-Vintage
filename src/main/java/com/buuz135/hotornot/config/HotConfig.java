@@ -9,6 +9,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEve
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+
 import com.buuz135.hotornot.HotOrNot;
 import com.buuz135.hotornot.network.PacketClientSettings;
 

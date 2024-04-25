@@ -1,8 +1,5 @@
 package se.gory_moon.horsepower.jei.chopping.manual;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -12,6 +9,12 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IStackHelper;
+
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
+
 import se.gory_moon.horsepower.jei.HorsePowerPlugin;
 import se.gory_moon.horsepower.tileentity.TileEntityManualChopper;
 import se.gory_moon.horsepower.util.Localization;

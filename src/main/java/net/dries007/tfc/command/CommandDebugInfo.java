@@ -1,6 +1,10 @@
 package net.dries007.tfc.command;
 
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -11,12 +15,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistry;
 
 
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
 import org.jetbrains.annotations.NotNull;
+
+
+import su.terrafirmagreg.api.lib.LoggingHelper;
 
 /**
  * This is part of an effort to find the cause of TerraFirmaCraft#355 and TerraFirmaCraft#361

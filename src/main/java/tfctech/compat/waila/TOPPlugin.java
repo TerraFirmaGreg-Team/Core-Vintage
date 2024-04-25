@@ -1,5 +1,7 @@
 package tfctech.compat.waila;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,11 +19,6 @@ import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfctech.objects.blocks.devices.BlockFridge;
 import tfctech.objects.blocks.devices.BlockLatexExtractor;
 import tfctech.objects.blocks.devices.BlockWireDrawBench;

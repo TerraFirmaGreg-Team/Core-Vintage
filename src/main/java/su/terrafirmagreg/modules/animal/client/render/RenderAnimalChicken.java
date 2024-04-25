@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalChicken extends RenderLiving<EntityAnimalChicken> {
 
-    private static final ResourceLocation CHICKEN_YOUNG = ModUtils.getID("textures/entity/animal/livestock/chicken_young.png");
-    private static final ResourceLocation CHICKEN_OLD = ModUtils.getID("textures/entity/animal/livestock/chicken_old.png");
+    private static final ResourceLocation CHICKEN_YOUNG = ModUtils.id("textures/entity/animal/livestock/chicken_young.png");
+    private static final ResourceLocation CHICKEN_OLD = ModUtils.id("textures/entity/animal/livestock/chicken_old.png");
 
-    private static final ResourceLocation ROOSTER_YOUNG = ModUtils.getID("textures/entity/animal/livestock/rooster_young.png");
-    private static final ResourceLocation ROOSTER_OLD = ModUtils.getID("textures/entity/animal/livestock/rooster_old.png");
+    private static final ResourceLocation ROOSTER_YOUNG = ModUtils.id("textures/entity/animal/livestock/rooster_young.png");
+    private static final ResourceLocation ROOSTER_OLD = ModUtils.id("textures/entity/animal/livestock/rooster_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = ModUtils.getID("textures/entity/animal/livestock/chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = ModUtils.id("textures/entity/animal/livestock/chick.png");
 
     public RenderAnimalChicken(RenderManager manager) {
         super(manager, new ModelAnimalChicken(), 0.3F);

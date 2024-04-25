@@ -22,7 +22,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.CollapseData;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
@@ -43,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class FallingBlockManager {
 
@@ -190,7 +191,7 @@ public class FallingBlockManager {
                 }
             }
 
-            return candidates.isEmpty() ? null : checkAreaClear(world, state, candidates.get(Constants.RNG.nextInt(candidates.size())));
+            return candidates.isEmpty() ? null : checkAreaClear(world, state, candidates.get(RNG.nextInt(candidates.size())));
         }
 
         return null;
@@ -261,12 +262,12 @@ public class FallingBlockManager {
         if (world.isRemote || !world.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
             return false; // First, let's check if this area is loaded and is on server
         }
-        if (Constants.RNG.nextDouble() < ConfigTFC.General.FALLABLE.collapseChance) // Then, we check rng if a collapse should trigger
+        if (RNG.nextDouble() < ConfigTFC.General.FALLABLE.collapseChance) // Then, we check rng if a collapse should trigger
         {
             //Rng the radius
-            int radX = (Constants.RNG.nextInt(5) + 4) / 2;
-            int radY = (Constants.RNG.nextInt(3) + 2) / 2;
-            int radZ = (Constants.RNG.nextInt(5) + 4) / 2;
+            int radX = (RNG.nextInt(5) + 4) / 2;
+            int radY = (RNG.nextInt(3) + 2) / 2;
+            int radZ = (RNG.nextInt(5) + 4) / 2;
             for (BlockPos checking : BlockWoodSupport.getAllUnsupportedBlocksIn(world, pos.add(-radX, -radY, -radZ),
                     pos.add(radX, radY, radZ))) //9x5x9 max
             {

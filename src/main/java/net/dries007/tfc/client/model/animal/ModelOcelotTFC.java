@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.util.math.MathHelper;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class ModelOcelotTFC extends ModelBase {

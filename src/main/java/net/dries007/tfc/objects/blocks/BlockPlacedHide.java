@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -29,9 +31,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 /**
  * Due to implementation, this will only ever be a soaked hide -> scraped hide Placement is restricted to the TFC item.

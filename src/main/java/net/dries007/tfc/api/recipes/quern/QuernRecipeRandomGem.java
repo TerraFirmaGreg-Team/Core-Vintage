@@ -2,12 +2,14 @@ package net.dries007.tfc.api.recipes.quern;
 
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemGem;
 
 import org.jetbrains.annotations.NotNull;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class QuernRecipeRandomGem extends QuernRecipe {
 
@@ -21,7 +23,7 @@ public class QuernRecipeRandomGem extends QuernRecipe {
     @NotNull
     @Override
     public ItemStack getOutputItem(ItemStack stack) {
-        Gem.Grade grade = Gem.Grade.randomGrade(Constants.RNG);
+        Gem.Grade grade = Gem.Grade.randomGrade(RNG);
         return ItemGem.get(gem, grade, 1);
     }
 }

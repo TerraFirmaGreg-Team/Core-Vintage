@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class GuiContainerKnapping extends GuiContainerBase {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/knapping.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/knapping.png");
 
     private final ResourceLocation buttonTexture;
     private final KnappingType type;

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.TEBaseTickableInventory;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -35,7 +36,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 
@@ -173,7 +173,7 @@ public class TEPowderKeg extends TEBaseTickableInventory implements IItemHandler
             fuse = 80;
         } else {
             world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
-                    0.6f + Constants.RNG.nextFloat() * 0.4f);
+                    0.6f + MathConstants.RNG.nextFloat() * 0.4f);
             fuse = -1;
         }
         markForSync();

@@ -15,9 +15,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalDeer extends RenderLiving<EntityAnimalDeer> {
 
-    private static final ResourceLocation DEER_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/deer.png");
+    private static final ResourceLocation DEER_TEXTURE = ModUtils.id("textures/entity/animal/huntable/deer.png");
 
-    private static final ResourceLocation FAWN_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/deer_fawn.png");
+    private static final ResourceLocation FAWN_TEXTURE = ModUtils.id("textures/entity/animal/huntable/deer_fawn.png");
 
     public RenderAnimalDeer(RenderManager manager) {
         super(manager, new ModelAnimalDeer(), 0.7F);

@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 
 import net.minecraft.client.settings.KeyBinding;
 
+
 import org.lwjgl.input.Keyboard;
 
 public final class KeybindingsWood {

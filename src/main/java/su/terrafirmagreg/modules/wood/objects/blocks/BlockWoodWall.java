@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import org.jetbrains.annotations.Nullable;
-
-
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.BlockUtils;
@@ -23,6 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 

@@ -3,6 +3,7 @@ package se.gory_moon.horsepower.recipes;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import se.gory_moon.horsepower.util.Utils;
 
 public class ComparableItemStack {

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
@@ -51,13 +50,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
     private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, TFCEntities.getLongDataSerializer());
 
     @SuppressWarnings("unused")
     public EntityAnimalCow(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.COW.adulthood, ModuleAnimalConfig.ENTITIES.COW.elder));
     }
 
@@ -96,7 +97,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.COW.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
@@ -204,15 +205,15 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
     @Override
     public TextComponentTranslation getTooltip() {
         if (getGender() == Gender.MALE) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.male_milk");
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.male_milk"));
         } else if (getAge() == Age.OLD) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.old", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.old"), getAnimalName());
         } else if (getAge() == Age.CHILD) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.young", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.young"), getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.low_familiarity", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.low_familiarity"), getAnimalName());
         } else if (!hasMilk()) {
-            return new TextComponentTranslation(Tags.MOD_ID + ".tooltip.animal.product.no_milk", getAnimalName());
+            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.no_milk"), getAnimalName());
         }
         return null;
     }

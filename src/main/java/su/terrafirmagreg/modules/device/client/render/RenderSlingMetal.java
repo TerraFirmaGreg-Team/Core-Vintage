@@ -9,11 +9,12 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
+
 import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingMetal extends Render<EntitySlingStone> {
 
-    private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.getID("textures/blocks/metal/base.png");
+    private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.id("textures/blocks/metal/base.png");
     private final ModelSlingStone slingStoneModel = new ModelSlingStone();
 
     public RenderSlingMetal(RenderManager renderManager) {

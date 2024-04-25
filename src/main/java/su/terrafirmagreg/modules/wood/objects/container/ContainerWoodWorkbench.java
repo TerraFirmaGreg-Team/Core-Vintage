@@ -8,6 +8,7 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class ContainerWoodWorkbench extends ContainerWorkbench {

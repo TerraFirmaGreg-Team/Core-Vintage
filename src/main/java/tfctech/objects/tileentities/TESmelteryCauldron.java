@@ -1,5 +1,7 @@
 package tfctech.objects.tileentities;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,11 +20,6 @@ import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfctech.api.recipes.SmelteryRecipe;
 
 import org.jetbrains.annotations.NotNull;

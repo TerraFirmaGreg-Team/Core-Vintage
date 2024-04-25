@@ -8,7 +8,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
+
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class MissingMappingEventHandler {

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.lib.Constants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -30,6 +29,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @SuppressWarnings("unused")
 public final class StackUtils {
@@ -86,7 +87,7 @@ public final class StackUtils {
      * @param stack the stack to be damaged
      */
     public static void damageItem(ItemStack stack, int amount) {
-        if (stack.attemptDamageItem(amount, Constants.RANDOM, null)) {
+        if (stack.attemptDamageItem(amount, RNG, null)) {
             stack.shrink(1);
             stack.setItemDamage(0);
         }

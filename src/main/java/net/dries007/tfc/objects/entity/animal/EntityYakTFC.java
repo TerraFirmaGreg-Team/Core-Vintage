@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
@@ -16,7 +17,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -27,7 +27,7 @@ public class EntityYakTFC extends EntityCowTFC implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityYakTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.YAK.adulthood, ConfigTFC.Animals.YAK.elder));
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.YAK.adulthood, ConfigTFC.Animals.YAK.elder));
     }
 
     public EntityYakTFC(World worldIn, Gender gender, int birthDay) {
@@ -49,7 +49,7 @@ public class EntityYakTFC extends EntityCowTFC implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.YAK.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityYakTFC baby = new EntityYakTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityYakTFC baby = new EntityYakTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);

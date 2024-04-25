@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -30,11 +33,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

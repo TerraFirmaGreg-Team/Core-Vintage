@@ -5,6 +5,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+
 import com.lumintorious.ambiental.capability.TemperatureCapability;
 
 public class EquipmentModifier extends BaseModifier {

@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -12,10 +14,6 @@ import net.dries007.tfc.objects.items.metal.ItemIngot;
 import net.dries007.tfc.objects.te.TEIngotPile;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Collections;
 import java.util.List;

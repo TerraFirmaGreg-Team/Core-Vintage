@@ -1,14 +1,15 @@
 package net.anodecathode.time4tfc.network;
 
+import net.anodecathode.time4tfc.data.SessionData;
+import net.anodecathode.time4tfc.network.packet.PacketServerSettings;
+import net.anodecathode.time4tfc.time4tfc;
+
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
-
-import net.anodecathode.time4tfc.data.SessionData;
-import net.anodecathode.time4tfc.network.packet.PacketServerSettings;
-import net.anodecathode.time4tfc.time4tfc;
 
 /**
  * @author dmillerw

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -42,13 +41,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalPanther extends EntityAnimalMammal implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 160;
 
     @SuppressWarnings("unused")
     public EntityAnimalPanther(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -164,7 +165,7 @@ public class EntityAnimalPanther extends EntityAnimalMammal implements IPredator
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_PANTHER_CRY : SoundAnimal.ANIMAL_PANTHER_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_PANTHER_CRY : SoundAnimal.ANIMAL_PANTHER_SAY;
     }
 
     @Nullable

@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IEntityDisplayOverride;
 import mcjty.theoneprobe.api.IProbeHitEntityData;

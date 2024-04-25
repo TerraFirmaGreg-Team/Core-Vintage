@@ -6,6 +6,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -19,10 +20,6 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
-
-
-import net.minecraftforge.fml.common.Loader;
-
 
 import java.io.IOException;
 

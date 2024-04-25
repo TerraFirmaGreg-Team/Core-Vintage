@@ -22,11 +22,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -39,6 +39,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
 
@@ -172,7 +174,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
                     getJavelin(stack, worldIn);
                     worldIn.spawnEntity(javelin);
                     worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                            1.0F / (RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                 }
             }
         }

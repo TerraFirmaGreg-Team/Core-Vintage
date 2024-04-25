@@ -33,7 +33,6 @@ import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -52,6 +51,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 
@@ -59,7 +59,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityCowTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.COW.adulthood, ConfigTFC.Animals.COW.elder));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.COW.adulthood, ConfigTFC.Animals.COW.elder));
     }
 
     public EntityCowTFC(World worldIn, Gender gender, int birthDay) {
@@ -97,7 +97,8 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.COW.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityCowTFC baby = new EntityCowTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+            EntityCowTFC baby = new EntityCowTFC(world, Gender.valueOf(RNG.nextBoolean()),
+                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
             world.spawnEntity(baby);

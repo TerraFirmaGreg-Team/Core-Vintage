@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.lib.NBTBuilder;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -20,10 +22,6 @@ import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
-
-
-import su.terrafirmagreg.api.lib.NBTBuilder;
-
 
 import java.io.IOException;
 import java.util.List;

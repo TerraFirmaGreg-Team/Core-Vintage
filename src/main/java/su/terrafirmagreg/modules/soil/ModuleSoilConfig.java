@@ -10,9 +10,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.Tags.MOD_NAME;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+
+import static su.terrafirmagreg.api.lib.Constants.*;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "soil")
 public class ModuleSoilConfig {

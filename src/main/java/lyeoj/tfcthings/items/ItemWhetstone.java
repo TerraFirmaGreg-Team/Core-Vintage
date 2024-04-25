@@ -20,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import lyeoj.tfcthings.capability.CapabilitySharpness;
 import lyeoj.tfcthings.capability.ISharpness;
 import lyeoj.tfcthings.event.TFCThingsEventHandler;

@@ -280,6 +280,6 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
     public void onStateMapperRegister() {
         ModelUtils.registerStateMapper(this,
                 blockIn -> ImmutableMap.of(this.getDefaultState(),
-                        new ModelResourceLocation(ModUtils.getID("empty").toString())));
+                        new ModelResourceLocation(ModUtils.id("empty").toString())));
     }
 }

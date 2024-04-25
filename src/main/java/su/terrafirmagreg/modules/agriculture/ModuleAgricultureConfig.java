@@ -8,8 +8,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.Tags.MOD_NAME;
+
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.lib.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "agriculture")
 public class ModuleAgricultureConfig {

@@ -1,8 +1,5 @@
 package tfctech.client.render.tesr;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -19,6 +16,7 @@ import net.minecraftforge.fluids.Fluid;
 
 
 import net.dries007.tfc.client.FluidSpriteCache;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 import tfctech.objects.tileentities.TELatexExtractor;
 

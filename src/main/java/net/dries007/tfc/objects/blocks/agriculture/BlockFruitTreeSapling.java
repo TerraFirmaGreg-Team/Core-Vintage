@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -30,10 +31,6 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.HashMap;
 import java.util.List;

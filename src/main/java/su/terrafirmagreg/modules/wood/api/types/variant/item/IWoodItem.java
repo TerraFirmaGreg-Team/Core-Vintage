@@ -41,6 +41,6 @@ public interface IWoodItem extends IWoodType, IAutoReg, ICustomModel, IColorfulI
      */
     @NotNull
     default ResourceLocation getResourceLocation() {
-        return ModUtils.getID(String.format("wood/%s", getItemVariant()));
+        return ModUtils.id(String.format("wood/%s", getItemVariant()));
     }
 }

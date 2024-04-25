@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -35,7 +36,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -76,7 +76,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
 
     @SuppressWarnings("unused")
     public EntityWolfTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 EntityAnimalBase.getRandomGrowth(ConfigTFC.Animals.WOLF.adulthood, ConfigTFC.Animals.WOLF.elder));
     }
 
@@ -121,7 +121,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
     public void birthChildren() {
         int numberOfChildren = ConfigTFC.Animals.WOLF.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityWolfTFC baby = new EntityWolfTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()),
+            EntityWolfTFC baby = new EntityWolfTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
@@ -357,7 +357,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
             if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
-                final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                final Random random = new Random(
+                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ConfigTFC.Animals.WOLF.oldDeathChance) {
                     this.setDead();
                 }
@@ -448,7 +449,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {
             // Try to return to vanilla's default method a baby of this animal, as if bred normally
             try {
                 EntityWolfTFC baby = new EntityWolfTFC(this.world);
-                baby.setGender(Gender.valueOf(Constants.RNG.nextBoolean()));
+                baby.setGender(Gender.valueOf(MathConstants.RNG.nextBoolean()));
                 baby.setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
                 baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
                 if (this.isTamed()) {

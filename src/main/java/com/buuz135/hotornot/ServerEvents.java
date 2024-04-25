@@ -16,6 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.config.HotLists;
 import com.buuz135.hotornot.object.item.ItemHotHolder;

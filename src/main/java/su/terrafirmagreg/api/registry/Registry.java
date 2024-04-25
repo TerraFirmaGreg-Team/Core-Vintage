@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -103,7 +104,7 @@ public class Registry {
         for (var provider : this.registryManager.getTileProviders()) {
             GameRegistry.registerTileEntity(
                     provider.getTileEntityClass(),
-                    ModUtils.getID("tile." + provider.getTileEntityClass().getSimpleName())
+                    ModUtils.id("tile." + provider.getTileEntityClass().getSimpleName())
             );
         }
     }
@@ -112,6 +113,7 @@ public class Registry {
         for (var oreDict : this.registryManager.getOreDicts()) {
             oreDict.onRegisterOreDict();
         }
+        OreDictUtils.init();
     }
 
     public void onRegisterLootTableLoad(LootTableLoadEvent event) {

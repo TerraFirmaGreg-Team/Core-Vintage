@@ -17,7 +17,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -29,6 +28,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 /**
  * A Chicken of the colder regions! Actually, ducks takes longer to reach maturity, but hey, they are cute!
  */
@@ -36,7 +37,8 @@ import java.util.List;
 public class EntityDuckTFC extends EntityChickenTFC implements ILivestock {
 
     public EntityDuckTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()), getRandomGrowth(ConfigTFC.Animals.DUCK.adulthood, ConfigTFC.Animals.DUCK.elder));
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+                getRandomGrowth(ConfigTFC.Animals.DUCK.adulthood, ConfigTFC.Animals.DUCK.elder));
     }
 
     public EntityDuckTFC(World worldIn, Gender gender, int birthDay) {
@@ -97,7 +99,7 @@ public class EntityDuckTFC extends EntityChickenTFC implements ILivestock {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DUCK_CRY : SoundAnimal.ANIMAL_DUCK_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DUCK_CRY : SoundAnimal.ANIMAL_DUCK_SAY;
     }
 
     @Nullable

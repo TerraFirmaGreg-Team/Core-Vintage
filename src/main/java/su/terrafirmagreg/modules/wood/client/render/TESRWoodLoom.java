@@ -34,7 +34,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
             GlStateManager.pushMatrix();
 
             ColourUtils.setColor(woodColor);
-            bindTexture(ModUtils.getID("textures/blocks/wood/planks.png"));
+            bindTexture(ModUtils.id("textures/blocks/wood/planks.png"));
 
             GlStateManager.disableLighting();
 

@@ -21,6 +21,8 @@ import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
 import org.jetbrains.annotations.NotNull;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public final class FluidsTFCF {
 
     private static final ResourceLocation STILL = new ResourceLocation(Constants.MODID_TFC, "blocks/fluid_still");
@@ -201,7 +203,7 @@ public final class FluidsTFCF {
         WASTE = registerFluid(new Fluid("waste", STILL, FLOW, 0xFF858678)).with(DrinkableProperty.DRINKABLE, player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(-20);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 400, 1));
                     player.addPotionEffect(new PotionEffect(MobEffects.POISON, 400, 1));
                 }
@@ -210,7 +212,7 @@ public final class FluidsTFCF {
         BASE_POTASH_LIQUOR = registerFluid(new Fluid("base_potash_liquor", STILL, FLOW, 0xFF86888B)).with(DrinkableProperty.DRINKABLE, player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(-20);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 400, 1));
                     player.addPotionEffect(new PotionEffect(MobEffects.POISON, 400, 1));
                 }
@@ -220,7 +222,7 @@ public final class FluidsTFCF {
         DrinkableProperty teaProperty = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(20);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1200, 1));
                 }
             }
@@ -245,7 +247,7 @@ public final class FluidsTFCF {
         DrinkableProperty coffeeProperty = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(20);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 1));
                 }
             }
@@ -307,7 +309,7 @@ public final class FluidsTFCF {
         DrinkableProperty fermentedAlcoholProperty = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 400, 1));
                 }
             }
@@ -352,7 +354,7 @@ public final class FluidsTFCF {
         DrinkableProperty alcoholProperty = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1200, 2));
                 }
             }
@@ -397,7 +399,7 @@ public final class FluidsTFCF {
         DrinkableProperty alcoholBeer = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 1));
                 }
             }
@@ -430,7 +432,7 @@ public final class FluidsTFCF {
         DrinkableProperty juiceBerryProperty = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(15);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1));
                 }
             }
@@ -468,7 +470,7 @@ public final class FluidsTFCF {
         DrinkableProperty juiceFruitProperty = player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(15);
-                if (net.dries007.tfc.Constants.RNG.nextFloat() < 0.25f) {
+                if (RNG.nextFloat() < 0.25f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1));
                 }
             }

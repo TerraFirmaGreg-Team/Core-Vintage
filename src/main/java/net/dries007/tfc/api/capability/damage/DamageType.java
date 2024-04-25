@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 

@@ -10,11 +10,13 @@ import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 @Getter
 public class ItemWoodLumber extends ItemBase implements IWoodItem {

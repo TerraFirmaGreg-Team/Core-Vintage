@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -48,7 +48,7 @@ public class EntitySaberToothTFC extends EntityAnimalMammal implements IPredator
 
     @SuppressWarnings("unused")
     public EntitySaberToothTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -168,7 +168,7 @@ public class EntitySaberToothTFC extends EntityAnimalMammal implements IPredator
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_SABERTOOTH_CRY : SoundAnimal.ANIMAL_SABERTOOTH_SAY;
+        return MathConstants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_SABERTOOTH_CRY : SoundAnimal.ANIMAL_SABERTOOTH_SAY;
     }
 
     @Nullable

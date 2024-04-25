@@ -53,12 +53,6 @@ public class BlockWoodSupport extends BlockWood {
                 .withProperty(WEST, false));
     }
 
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant());
-        OreDictUtils.register(this, getBlockVariant(), getType());
-    }
-
     /**
      * Checks if this pos is being supported by a support beam
      *
@@ -128,6 +122,12 @@ public class BlockWoodSupport extends BlockWood {
                 || content.getZ() < minZ || content.getZ() > maxZ);
 
         return listUnsupported;
+    }
+
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, getBlockVariant());
+        OreDictUtils.register(this, getBlockVariant(), getType());
     }
 
     @SuppressWarnings("deprecation")

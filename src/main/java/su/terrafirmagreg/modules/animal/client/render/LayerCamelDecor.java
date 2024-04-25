@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import java.util.stream.IntStream;
 
 @SideOnly(Side.CLIENT)
@@ -17,7 +18,7 @@ import java.util.stream.IntStream;
 public class LayerCamelDecor implements LayerRenderer<EntityAnimalCamel> {
 
     private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16)
-            .mapToObj(i -> ModUtils.getID("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i)
+            .mapToObj(i -> ModUtils.id("textures/entity/animal/livestock/decor/" + EnumDyeColor.byMetadata(i)
                     .getName() + ".png"))
             .toArray(ResourceLocation[]::new);
     private final RenderAnimalCamel renderer;

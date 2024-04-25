@@ -85,54 +85,6 @@ public abstract class PacketSerializable<REQ extends PacketSerializable> impleme
     }
 
     /**
-     * Called when the message is received and handled. This is where you process the message.
-     *
-     * @param context The context for the message.
-     * @return A message to send as a response.
-     */
-    public abstract IMessage handleMessage(MessageContext context);
-
-    @Override
-    public final IMessage onMessage(REQ message, MessageContext context) {
-
-        return message.handleMessage(context);
-    }
-
-    @Override
-    public final void fromBytes(ByteBuf buf) {
-
-        try {
-            final Class<?> clazz = this.getClass();
-            final Field[] clFields = getClassFields(clazz);
-            for (final Field f : clFields) {
-                final Class<?> type = f.getType();
-                if (acceptField(f, type)) {
-                    this.readField(f, type, buf);
-                }
-            }
-        } catch (final Exception e) {
-            throw new RuntimeException("Error at reading packet " + this, e);
-        }
-    }
-
-    @Override
-    public final void toBytes(ByteBuf buf) {
-
-        try {
-            final Class<?> clazz = this.getClass();
-            final Field[] clFields = getClassFields(clazz);
-            for (final Field f : clFields) {
-                final Class<?> type = f.getType();
-                if (acceptField(f, type)) {
-                    this.writeField(f, type, buf);
-                }
-            }
-        } catch (final Exception e) {
-            throw new RuntimeException("Error at writing packet " + this, e);
-        }
-    }
-
-    /**
      * Gets an array of fields from a class. These arrays will be cached.
      *
      * @param clazz The class to get fields for.
@@ -150,32 +102,6 @@ public abstract class PacketSerializable<REQ extends PacketSerializable> impleme
             fieldCache.put(clazz, fields);
             return fields;
         }
-    }
-
-    /**
-     * Writes the value of a field to the packet byte buffer.
-     *
-     * @param field The field to write.
-     * @param type  The type for the field.
-     * @param buf   The buffer to write to.
-     */
-    private final void writeField(Field field, Class<?> type, ByteBuf buf) throws IllegalArgumentException, IllegalAccessException {
-
-        final Pair<Reader, Writer> handler = getHandler(type);
-        handler.getRight().write(field.get(this), buf);
-    }
-
-    /**
-     * Reads the value of a field from the packet byte buffer.
-     *
-     * @param field The field to read.
-     * @param type  The type for the field.
-     * @param buf   The buffer to read from.
-     */
-    private final void readField(Field field, Class<?> type, ByteBuf buf) throws IllegalArgumentException, IllegalAccessException {
-
-        final Pair<Reader, Writer> handler = getHandler(type);
-        field.set(this, handler.getLeft().read(buf));
     }
 
     /**
@@ -708,6 +634,80 @@ public abstract class PacketSerializable<REQ extends PacketSerializable> impleme
 
             writeEnchantmentData(object, buf);
         }
+    }
+
+    /**
+     * Called when the message is received and handled. This is where you process the message.
+     *
+     * @param context The context for the message.
+     * @return A message to send as a response.
+     */
+    public abstract IMessage handleMessage(MessageContext context);
+
+    @Override
+    public final IMessage onMessage(REQ message, MessageContext context) {
+
+        return message.handleMessage(context);
+    }
+
+    @Override
+    public final void fromBytes(ByteBuf buf) {
+
+        try {
+            final Class<?> clazz = this.getClass();
+            final Field[] clFields = getClassFields(clazz);
+            for (final Field f : clFields) {
+                final Class<?> type = f.getType();
+                if (acceptField(f, type)) {
+                    this.readField(f, type, buf);
+                }
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException("Error at reading packet " + this, e);
+        }
+    }
+
+    @Override
+    public final void toBytes(ByteBuf buf) {
+
+        try {
+            final Class<?> clazz = this.getClass();
+            final Field[] clFields = getClassFields(clazz);
+            for (final Field f : clFields) {
+                final Class<?> type = f.getType();
+                if (acceptField(f, type)) {
+                    this.writeField(f, type, buf);
+                }
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException("Error at writing packet " + this, e);
+        }
+    }
+
+    /**
+     * Writes the value of a field to the packet byte buffer.
+     *
+     * @param field The field to write.
+     * @param type  The type for the field.
+     * @param buf   The buffer to write to.
+     */
+    private final void writeField(Field field, Class<?> type, ByteBuf buf) throws IllegalArgumentException, IllegalAccessException {
+
+        final Pair<Reader, Writer> handler = getHandler(type);
+        handler.getRight().write(field.get(this), buf);
+    }
+
+    /**
+     * Reads the value of a field from the packet byte buffer.
+     *
+     * @param field The field to read.
+     * @param type  The type for the field.
+     * @param buf   The buffer to read from.
+     */
+    private final void readField(Field field, Class<?> type, ByteBuf buf) throws IllegalArgumentException, IllegalAccessException {
+
+        final Pair<Reader, Writer> handler = getHandler(type);
+        field.set(this, handler.getLeft().read(buf));
     }
 
     // Functional interfaces

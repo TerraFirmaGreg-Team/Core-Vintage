@@ -1,6 +1,7 @@
 package pieman.caffeineaddon.blocks;
 
 import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -17,10 +18,6 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModBlocks;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.Random;
 

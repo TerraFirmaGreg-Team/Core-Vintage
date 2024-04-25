@@ -18,15 +18,20 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.gson.JsonObject;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import tfcflorae.compat.firmalife.ceramics.ItemKaoliniteMalletMoldFL;
 
 import org.jetbrains.annotations.NotNull;
@@ -164,7 +169,7 @@ public class UnmoldKaoliniteMalletRecipe extends IForgeRegistryEntry.Impl<IRecip
     }
 
     public ItemStack getMoldResult(ItemStack moldIn) {
-        return Constants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
+        return MathConstants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
     }
 
     public ItemStack getOutputItem(IMoldHandler moldHandler) {

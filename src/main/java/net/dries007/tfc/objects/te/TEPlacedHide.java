@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.te;
 
 import net.minecraft.nbt.NBTTagCompound;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public class TEPlacedHide extends TEBase {

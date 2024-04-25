@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class EggCapability {
 
-    public static final ResourceLocation KEY = ModUtils.getID("egg_capability");
+    public static final ResourceLocation KEY = ModUtils.id("egg_capability");
     @CapabilityInject(IEggCapability.class)
     public static Capability<IEggCapability> EGG_CAPABILITY;
 

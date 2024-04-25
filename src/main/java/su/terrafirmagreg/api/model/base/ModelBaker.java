@@ -8,6 +8,7 @@ import net.minecraftforge.common.model.IModelState;
 
 
 import com.google.common.collect.ImmutableList;
+
 import lombok.Getter;
 
 import java.util.List;

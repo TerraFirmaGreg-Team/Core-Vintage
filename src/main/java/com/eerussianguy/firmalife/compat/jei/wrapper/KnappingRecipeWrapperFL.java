@@ -2,6 +2,7 @@ package com.eerussianguy.firmalife.compat.jei.wrapper;
 
 import net.minecraft.util.ResourceLocation;
 
+
 import com.eerussianguy.firmalife.init.KnappingFL;
 import com.google.common.collect.Maps;
 import mezz.jei.api.IGuiHelper;

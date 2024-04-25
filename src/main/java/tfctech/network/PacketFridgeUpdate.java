@@ -1,5 +1,7 @@
 package tfctech.network;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,11 +12,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfctech.objects.tileentities.TEFridge;
 
 import org.jetbrains.annotations.NotNull;

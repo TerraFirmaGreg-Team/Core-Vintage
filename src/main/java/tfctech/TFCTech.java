@@ -27,10 +27,10 @@ public class TFCTech {
     public static final String NAME = "TFCTech Unofficial";
     public static final String DEPENDENCIES = "after:tfc;after:ic2;after:gregtech";
     private static final boolean signedBuild = true;
+    private static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCTECH);
     @SuppressWarnings("FieldMayBeFinal")
     @Mod.Instance
     private static TFCTech instance = null;
-    private static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCTECH);
     private SimpleNetworkWrapper network;
 
     public static SimpleNetworkWrapper getNetwork() {

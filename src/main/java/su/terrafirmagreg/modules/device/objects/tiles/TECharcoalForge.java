@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
@@ -20,7 +21,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
@@ -101,7 +101,7 @@ public class TECharcoalForge extends TETickableInventory
     public void onRainDrop() {
         burnTicks -= ConfigTFC.Devices.CHARCOAL_FORGE.rainTicks;
         // Play the "tsssss" sound
-        world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + Constants.RNG.nextFloat() * 0.4f);
+        world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + MathConstants.RNG.nextFloat() * 0.4f);
     }
 
     @Override

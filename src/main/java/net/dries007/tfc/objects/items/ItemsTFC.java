@@ -340,7 +340,6 @@ public final class ItemsTFC {
 
         allSimpleItems = simpleItems.build();
 
-        OreDictionaryHelper.init();
     }
 
     @SuppressWarnings("ConstantConditions")

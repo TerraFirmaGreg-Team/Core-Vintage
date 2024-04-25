@@ -26,7 +26,7 @@ import java.io.IOException;
 
 public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/powderkeg.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/powderkeg.png");
     private final String translationKey;
 
     public GuiPowderkeg(Container container, InventoryPlayer playerInv, TEPowderKeg tile, IBlockState state) {

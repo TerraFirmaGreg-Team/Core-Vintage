@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 @MethodsReturnNonnullByDefault
 

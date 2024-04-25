@@ -7,6 +7,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Rock;
@@ -21,9 +22,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class WorldGenOreVeins implements IWorldGenerator {
 
-    private static final Random LOCAL_RANDOM = new Random();
     public static int CHUNK_RADIUS = 1;
 
     // Used to generate chunk
@@ -39,10 +41,10 @@ public class WorldGenOreVeins implements IWorldGenerator {
 
     // Gets veins at a single chunk. Deterministic for a specific chunk x/z and world seed
     private static void getVeinsAtChunk(List<Vein> listToAdd, int chunkX, int chunkZ, long worldSeed) {
-        LOCAL_RANDOM.setSeed(worldSeed + chunkX * 341873128712L + chunkZ * 132897987541L);
+        RNG.setSeed(worldSeed + chunkX * 341873128712L + chunkZ * 132897987541L);
         listToAdd.addAll(VeinRegistry.INSTANCE.getVeins().values().stream()
-                .filter(veinType -> LOCAL_RANDOM.nextInt(veinType.getRarity()) == 0)
-                .map(veinType -> veinType.createVein(LOCAL_RANDOM, chunkX, chunkZ))
+                .filter(veinType -> RNG.nextInt(veinType.getRarity()) == 0)
+                .map(veinType -> veinType.createVein(RNG, chunkX, chunkZ))
                 .collect(Collectors.toList()));
     }
 

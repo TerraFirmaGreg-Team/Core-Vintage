@@ -8,11 +8,13 @@ import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
 
 import net.minecraft.item.ItemStack;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 @Getter
 public class ItemSoilMudWetBrick extends ItemBase implements ISoilItem {

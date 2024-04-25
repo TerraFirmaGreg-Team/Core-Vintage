@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -40,10 +41,6 @@ import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;

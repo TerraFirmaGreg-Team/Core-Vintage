@@ -1,6 +1,7 @@
 package tfcflorae.objects.blocks.wood;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -41,11 +42,6 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
@@ -60,7 +56,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static net.dries007.tfc.Constants.RNG;
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class BlockLeavesTFCF extends BlockLeaves {
 

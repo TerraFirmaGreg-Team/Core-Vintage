@@ -36,6 +36,22 @@ public class ThreadedNetworkWrapper {
 
     private static final @Nonnull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesClient = new IdentityHashMap<>();
     private static final @Nonnull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesServer = new IdentityHashMap<>();
+    /**
+     * The network wrapper instance, created when a new handler is constructed.
+     */
+    private final @NotNull SimpleNetworkWrapper parent;
+
+    /**
+     * Constructs a new NetworkHandler, which is basically a wrapper for SimpleNetworkWrapper.
+     *
+     * @param netId The id for the new network channel. This should probably be your mod id.
+     */
+    public ThreadedNetworkWrapper(String netId) {
+        if (netId.length() > 20) {
+            throw new RuntimeException("Channel name '" + netId + "' is too long for Forge. Maximum length supported is 20 characters.");
+        }
+        this.parent = NetworkRegistry.INSTANCE.newSimpleChannel(netId);
+    }
 
     static synchronized void registerChannelMapping(Class<? extends IMessage> requestMessageType, @Nonnull SimpleNetworkWrapper parent, Side side) {
         (side == Side.CLIENT ? typesClient : typesServer).put(requestMessageType, parent);
@@ -57,21 +73,14 @@ public class ThreadedNetworkWrapper {
         return parent;
     }
 
-    /**
-     * The network wrapper instance, created when a new handler is constructed.
-     */
-    private final @NotNull SimpleNetworkWrapper parent;
-
-    /**
-     * Constructs a new NetworkHandler, which is basically a wrapper for SimpleNetworkWrapper.
-     *
-     * @param netId The id for the new network channel. This should probably be your mod id.
-     */
-    public ThreadedNetworkWrapper(String netId) {
-        if (netId.length() > 20) {
-            throw new RuntimeException("Channel name '" + netId + "' is too long for Forge. Maximum length supported is 20 characters.");
+    private static <REQ extends IMessage, REPLY extends IMessage> IMessageHandler<? super REQ, ? extends REPLY> instantiate(
+            Class<? extends IMessageHandler<? super REQ, ? extends REPLY>> handler) {
+        try {
+            return handler.getDeclaredConstructor().newInstance();
+        } catch (Throwable e) {
+            TerraFirmaGreg.LOGGER.error("Failed to instanciate " + handler);
+            throw Throwables.propagate(e);
         }
-        this.parent = NetworkRegistry.INSTANCE.newSimpleChannel(netId);
     }
 
     public <REQ extends IMessage, REPLY extends IMessage> void registerMessage(
@@ -86,16 +95,6 @@ public class ThreadedNetworkWrapper {
             return;
         }
         registerMessage(instantiate(messageHandler), requestMessageType, discriminator, side);
-    }
-
-    private static <REQ extends IMessage, REPLY extends IMessage> IMessageHandler<? super REQ, ? extends REPLY> instantiate(
-            Class<? extends IMessageHandler<? super REQ, ? extends REPLY>> handler) {
-        try {
-            return handler.getDeclaredConstructor().newInstance();
-        } catch (Throwable e) {
-            TerraFirmaGreg.LOGGER.error("Failed to instanciate " + handler);
-            throw Throwables.propagate(e);
-        }
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

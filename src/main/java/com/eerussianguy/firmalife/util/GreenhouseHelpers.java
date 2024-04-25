@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.util;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -12,10 +14,6 @@ import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseRoof;
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseWall;
 import com.eerussianguy.firmalife.te.TEClimateStation;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.GLASS;
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.TOP;

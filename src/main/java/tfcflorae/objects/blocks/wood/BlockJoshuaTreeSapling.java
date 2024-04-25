@@ -1,6 +1,7 @@
 package tfcflorae.objects.blocks.wood;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -29,11 +30,6 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 

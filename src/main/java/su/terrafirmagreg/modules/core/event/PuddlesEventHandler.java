@@ -30,12 +30,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+
 import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)

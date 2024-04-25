@@ -1,6 +1,8 @@
 package tfcflorae.objects.blocks.wood;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -42,12 +44,6 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
-
-
-import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;

@@ -48,7 +48,7 @@ public interface IWoodBlock extends IWoodType, IAutoReg, ICustomModel, ICustomSt
      */
     @NotNull
     default ResourceLocation getResourceLocation() {
-        return ModUtils.getID(String.format("wood/%s", getBlockVariant()));
+        return ModUtils.id(String.format("wood/%s", getBlockVariant()));
     }
 
     @Override

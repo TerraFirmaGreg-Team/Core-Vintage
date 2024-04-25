@@ -2,6 +2,7 @@ package net.dries007.tfc.util.fuel;
 
 import net.minecraft.item.ItemStack;
 
+
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 public class Fuel {

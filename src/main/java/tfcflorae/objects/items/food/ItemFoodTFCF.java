@@ -7,10 +7,15 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.Constants;
+
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import tfcflorae.objects.items.ItemTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -56,7 +61,7 @@ public class ItemFoodTFCF extends ItemFood implements IItemFoodTFC {
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if (!PotionEffects.isEmpty())
             for (PotionEffectToHave Effect : PotionEffects) {
-                if (Constants.RNG.nextInt(Effect.chance) == 0)
+                if (MathConstants.RNG.nextInt(Effect.chance) == 0)
                     player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));
             }
     }

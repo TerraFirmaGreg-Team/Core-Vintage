@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -10,10 +12,6 @@ import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.util.CollectionUtils;
-
 
 import java.util.List;
 

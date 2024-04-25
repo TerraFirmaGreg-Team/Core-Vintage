@@ -17,10 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lombok.Getter;
+
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 import java.util.Random;
 

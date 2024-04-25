@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")
@@ -34,7 +35,7 @@ public abstract class PotionBase extends Potion {
     }
 
     protected void formatTexture(String icon) {
-        this.texture = ModUtils.getID("textures/potions/" + icon + ".png");
+        this.texture = ModUtils.id("textures/potions/" + icon + ".png");
     }
 
     @Override

@@ -31,7 +31,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -43,13 +42,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityHyenaTFC extends EntityAnimalMammal implements IPredator {
 
     private static final int DAYS_TO_ADULTHOOD = 112;
 
     @SuppressWarnings("unused")
     public EntityHyenaTFC(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -171,7 +172,7 @@ public class EntityHyenaTFC extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_HYENA_CRY : SoundAnimal.ANIMAL_HYENA_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_HYENA_CRY : SoundAnimal.ANIMAL_HYENA_SAY;
     }
 
     @Nullable

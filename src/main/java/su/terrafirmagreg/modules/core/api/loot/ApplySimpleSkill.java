@@ -11,6 +11,7 @@ import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -59,7 +60,7 @@ public class ApplySimpleSkill extends LootFunction {
     public static class Serializer extends LootFunction.Serializer<ApplySimpleSkill> {
 
         public Serializer() {
-            super(ModUtils.getID("apply_skill"), ApplySimpleSkill.class);
+            super(ModUtils.id("apply_skill"), ApplySimpleSkill.class);
         }
 
         @Override

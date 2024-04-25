@@ -10,8 +10,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-import tfcflorae.ConfigTFCF;
-import tfcflorae.TFCFlorae;
 import net.dries007.tfc.world.classic.worldgen.WorldGenCorals;
 import net.dries007.tfc.world.classic.worldgen.WorldGenGlowPlant;
 import net.dries007.tfc.world.classic.worldgen.WorldGenGourds;
@@ -32,6 +30,8 @@ import net.dries007.tfc.world.classic.worldgen.soil.WorldGenSoilDecorative;
 import net.dries007.tfc.world.classic.worldgen.soil.WorldGenSoilTypes;
 import net.dries007.tfc.world.classic.worldgen.structures.WorldGenStructures;
 import net.dries007.tfc.world.classic.worldgen.structures.WorldGenStructuresCorals;
+import tfcflorae.ConfigTFCF;
+import tfcflorae.TFCFlorae;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 

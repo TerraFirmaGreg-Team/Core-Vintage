@@ -17,9 +17,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalPheasant extends RenderLiving<EntityAnimalPheasant> {
 
-    private static final ResourceLocation CHICK_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/pheasant_chick.png");
-    private static final ResourceLocation MALE_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/pheasant_male.png");
-    private static final ResourceLocation FEMALE_TEXTURE = ModUtils.getID("textures/entity/animal/huntable/pheasant_female.png");
+    private static final ResourceLocation CHICK_TEXTURE = ModUtils.id("textures/entity/animal/huntable/pheasant_chick.png");
+    private static final ResourceLocation MALE_TEXTURE = ModUtils.id("textures/entity/animal/huntable/pheasant_male.png");
+    private static final ResourceLocation FEMALE_TEXTURE = ModUtils.id("textures/entity/animal/huntable/pheasant_female.png");
 
     public RenderAnimalPheasant(RenderManager manager) {
         super(manager, new ModelAnimalPheasant(), 0.3F);

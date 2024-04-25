@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -28,6 +27,8 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 /**
  * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one
  * individual, but produce milk once every 3 days
@@ -40,7 +41,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityAnimalGoat(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.GOAT.adulthood, ModuleAnimalConfig.ENTITIES.GOAT.elder));
     }
 
@@ -94,7 +95,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.GOAT.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
@@ -150,7 +151,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_GOAT_CRY : SoundAnimal.ANIMAL_GOAT_SAY;
+        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_GOAT_CRY : SoundAnimal.ANIMAL_GOAT_SAY;
     }
 
     @Nullable

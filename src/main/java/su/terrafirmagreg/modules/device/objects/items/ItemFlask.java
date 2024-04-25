@@ -50,7 +50,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
-import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 
 public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, ICustomMesh {
 
@@ -103,12 +103,12 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
 
     @Override
     public ItemMeshDefinition getCustomMesh() {
-        var modelFull = new ModelResourceLocation(ModUtils.getID(getName()), "inventory");
-        var model4 = new ModelResourceLocation(ModUtils.getID(getName() + "/4"), "inventory");
-        var model3 = new ModelResourceLocation(ModUtils.getID(getName() + "/3"), "inventory");
-        var model2 = new ModelResourceLocation(ModUtils.getID(getName() + "/2"), "inventory");
-        var model1 = new ModelResourceLocation(ModUtils.getID(getName() + "/1"), "inventory");
-        var model0 = new ModelResourceLocation(ModUtils.getID(getName() + "/0"), "inventory");
+        var modelFull = new ModelResourceLocation(ModUtils.id(getName()), "inventory");
+        var model4 = new ModelResourceLocation(ModUtils.id(getName() + "/4"), "inventory");
+        var model3 = new ModelResourceLocation(ModUtils.id(getName() + "/3"), "inventory");
+        var model2 = new ModelResourceLocation(ModUtils.id(getName() + "/2"), "inventory");
+        var model1 = new ModelResourceLocation(ModUtils.id(getName() + "/1"), "inventory");
+        var model0 = new ModelResourceLocation(ModUtils.id(getName() + "/0"), "inventory");
 
         return stack -> switch ((int) Math.floor(getLiquidAmount(stack) / (double) capacity * 5F)) {
             case 5 -> modelFull;

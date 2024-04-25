@@ -26,7 +26,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.size.IItemSize;
@@ -46,6 +45,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 
@@ -290,14 +291,14 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
         for (final BlockPos pos1 : logs.subList(0, Math.min(logs.size(), maxLogs))) {
             if (explosion) {
                 // Explosions are 30% Efficient: no TNT powered tree farms.
-                if (Constants.RNG.nextFloat() < 0.3) {
+                if (RNG.nextFloat() < 0.3) {
                     if (!world.isRemote) {
                         StackUtils.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
                     }
                 }
             } else {
                 // Stone tools are 60% efficient (default config)
-                if (!stoneTool || Constants.RNG.nextFloat() < ConfigTFC.General.TREE.stoneAxeReturnRate && !world.isRemote) {
+                if (!stoneTool || RNG.nextFloat() < ConfigTFC.General.TREE.stoneAxeReturnRate && !world.isRemote) {
                     harvestBlock(world, player, pos1, world.getBlockState(pos1), null, stack);
                 }
                 stack.damageItem(1, player);

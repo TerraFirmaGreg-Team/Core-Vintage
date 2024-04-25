@@ -1,5 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen.vein;
 
+import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.api.lib.WeightedCollection;
 
 
@@ -14,8 +15,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import static net.dries007.tfc.Constants.GSON;
 
 public enum VeinRegistry {
     INSTANCE;
@@ -70,13 +69,13 @@ public enum VeinRegistry {
                 if (!subfolder.isEmpty()) {
                     properVeinName = subfolder + "/" + properVeinName;
                 }
-                VeinType vein = GSON.fromJson(entry.getValue(), VeinType.class);
+                VeinType vein = Constants.GSON.fromJson(entry.getValue(), VeinType.class);
                 vein.setRegistryName(properVeinName);
 
                 veinTypeRegistry.put(properVeinName, vein);
                 weightedVeinTypes.add(vein.getWeight(), vein);
 
-                TerraFirmaCraft.getLog().info("Registered new vein " + vein.toString());
+                TerraFirmaCraft.getLog().debug("Registered new vein " + vein.toString());
             } catch (JsonParseException e) {
                 TerraFirmaCraft.getLog().error("An ore vein is specified incorrectly! Skipping.");
                 TerraFirmaCraft.getLog().error("Error: ", e);

@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 
+
 import lyeoj.tfcthings.entity.projectile.EntityRopeBridgeThrown;
 
 public class RenderThrownRopeBridge extends Render<EntityRopeBridgeThrown> {

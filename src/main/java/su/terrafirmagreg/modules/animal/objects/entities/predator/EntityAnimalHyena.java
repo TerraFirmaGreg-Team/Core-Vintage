@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -49,7 +49,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
 
     @SuppressWarnings("unused")
     public EntityAnimalHyena(World worldIn) {
-        this(worldIn, Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                 getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
     }
 
@@ -175,7 +175,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return Constants.RANDOM.nextInt(100) < 5 ? SoundAnimal.ANIMAL_HYENA_CRY : SoundAnimal.ANIMAL_HYENA_SAY;
+        return MathConstants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_HYENA_CRY : SoundAnimal.ANIMAL_HYENA_SAY;
     }
 
     @Nullable

@@ -12,13 +12,18 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemStackHandler;
 
+
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.objects.container.IButtonHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
 import net.dries007.tfc.util.SimpleCraftMatrix;
+
+
+import su.terrafirmagreg.api.lib.MathConstants;
+
+
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.objects.items.glassworking.ItemGlassMolder;
 
@@ -172,7 +177,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
         if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
             ((ItemGlassMolder.GlassMolderCapability) cap).empty();
         }
-        emptyBlowpipe.attemptDamageItem(1, Constants.RNG, null);
+        emptyBlowpipe.attemptDamageItem(1, MathConstants.RNG, null);
         if (emptyBlowpipe.getItemDamage() >= emptyBlowpipe.getMaxDamage()) {
             emptyBlowpipe = ItemStack.EMPTY;
         }

@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.sharkbark.cellars.ModConfig;
 import org.lwjgl.opengl.GL11;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class GuiFreezeDryer extends GuiContainerTE<TEFreezeDryer> {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.getID("textures/gui/container/freeze_dryer.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/freeze_dryer.png");
     private static TEFreezeDryer TE;
     private final String translationKey;
     private final InventoryPlayer playerInventory;

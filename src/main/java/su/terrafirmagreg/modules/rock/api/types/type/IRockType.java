@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
 import net.minecraft.util.text.TextComponentTranslation;
 
+
 import org.jetbrains.annotations.NotNull;
 
 public interface IRockType extends IRockCategory {

@@ -22,10 +22,10 @@ import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.world.classic.worldgen.structures.StructureGeneratorCorals;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.wood.BlockJoshuaTreeFlower;
 import tfcflorae.types.TreesTFCF;
-import net.dries007.tfc.world.classic.worldgen.structures.StructureGeneratorCorals;
 
 import java.util.Collections;
 import java.util.List;

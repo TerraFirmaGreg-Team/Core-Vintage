@@ -1,5 +1,7 @@
 package BananaFructa.tfcfarming;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.Tuple;
@@ -30,11 +32,6 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.CalendarTFC;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
-
-
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
 import java.lang.reflect.InvocationTargetException;

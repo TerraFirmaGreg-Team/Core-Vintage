@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.api.lib.Constants;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -25,13 +24,15 @@ import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.Nullable;
 
+import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+
 public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock {
 
     @SuppressWarnings("unused")
     public EntityAnimalMuskOx(World worldIn) {
-        this(worldIn, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
+        this(worldIn, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                 getRandomGrowth(ModuleAnimalConfig.ENTITIES.MUSKOX.adulthood, ModuleAnimalConfig.ENTITIES.MUSKOX.elder),
-                EntitySheep.getRandomSheepColor(Constants.RANDOM));
+                EntitySheep.getRandomSheepColor(RNG));
     }
 
     public EntityAnimalMuskOx(World worldIn, IAnimal.Gender gender, int birthDay, EnumDyeColor dye) {
@@ -63,7 +64,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
     public void birthChildren() {
         int numberOfChildren = ModuleAnimalConfig.ENTITIES.MUSKOX.babies;
         for (int i = 0; i < numberOfChildren; i++) {
-            EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world, IAnimal.Gender.valueOf(Constants.RANDOM.nextBoolean()),
+            EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);

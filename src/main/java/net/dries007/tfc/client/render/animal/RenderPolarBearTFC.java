@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import net.dries007.tfc.client.model.animal.ModelPolarBearTFC;
 import net.dries007.tfc.objects.entity.animal.EntityPolarBearTFC;
 

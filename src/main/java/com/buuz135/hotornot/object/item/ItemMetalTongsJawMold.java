@@ -1,27 +1,16 @@
 package com.buuz135.hotornot.object.item;
 
-import com.buuz135.hotornot.HotGuiHandler;
-import com.buuz135.hotornot.object.recipe.UnMoldJawPiece;
-import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.container.ContainerEmpty;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.items.ceramics.ItemPottery;
-import net.dries007.tfc.util.Helpers;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -36,6 +25,22 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
+
+
+import com.buuz135.hotornot.HotGuiHandler;
+import com.buuz135.hotornot.object.recipe.UnMoldJawPiece;
+import net.dries007.tfc.api.capability.IMoldHandler;
+import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
+import net.dries007.tfc.api.capability.heat.Heat;
+import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.container.CapabilityContainerListener;
+import net.dries007.tfc.objects.container.ContainerEmpty;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.items.ceramics.ItemPottery;
+import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

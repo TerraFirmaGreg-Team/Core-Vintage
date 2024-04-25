@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.util.TileUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -19,9 +21,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEIngotPile;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 public class ItemIngot extends ItemMetal {
 

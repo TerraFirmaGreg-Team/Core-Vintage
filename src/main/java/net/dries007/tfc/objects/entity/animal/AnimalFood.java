@@ -1,10 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
+import su.terrafirmagreg.api.lib.Constants;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -13,11 +9,20 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-
-import static net.dries007.tfc.Constants.GSON;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AnimalFood {
 
@@ -52,10 +57,10 @@ public class AnimalFood {
                 } else if (get(entityEntry.getEntityClass()) != null) {
                     throw new JsonParseException("Another json already registered foods for " + entityName);
                 }
-                AnimalFood animalFood = GSON.fromJson(entry.getValue(), AnimalFood.class);
+                AnimalFood animalFood = Constants.GSON.fromJson(entry.getValue(), AnimalFood.class);
 
                 ANIMAL_FOOD_MAP.put(entityEntry.getEntityClass(), animalFood);
-                TerraFirmaCraft.getLog().info("Registered animal food data for " + entityName);
+                TerraFirmaCraft.getLog().debug("Registered animal food data for " + entityName);
             } catch (JsonParseException e) {
                 TerraFirmaCraft.getLog().error("Error while reading an entry! Skipping.");
                 TerraFirmaCraft.getLog().error("Error: ", e);

@@ -1,6 +1,7 @@
 package net.dries007.tfc.network;
 
 import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,9 +19,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-
-
-import su.terrafirmagreg.api.util.TileUtils;
 
 /**
  * This packet is send when the client player presses the "Place Block Special" keybind. It has no special information

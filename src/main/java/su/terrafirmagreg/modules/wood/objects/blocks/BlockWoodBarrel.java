@@ -68,16 +68,6 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
                 .withProperty(SEALED, false));
     }
 
-    @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockWoodBarrel(this);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant());
-    }
-
     /**
      * Used to toggle the barrel seal state and update the tile entity, in the correct order
      */
@@ -93,6 +83,16 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
                 tile.onSealed();
             }
         }
+    }
+
+    @Override
+    public @Nullable ItemBlockBase getItemBlock() {
+        return new ItemBlockWoodBarrel(this);
+    }
+
+    @Override
+    public void onRegisterOreDict() {
+        OreDictUtils.register(this, getBlockVariant());
     }
 
     @NotNull

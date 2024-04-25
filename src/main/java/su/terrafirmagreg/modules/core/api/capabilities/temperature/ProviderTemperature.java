@@ -139,9 +139,10 @@ public class ProviderTemperature implements ICapabilityTemperature {
                     .append("\n");
         }
         return String.format(
-                "Body: %.1f ( %.4f )\n"
-                        + "Target: %.1f \n"
-                        + "Potency: %.4f",
+                """
+                        Body: %.1f ( %.4f )
+                        Target: %.1f
+                        Potency: %.4f""",
                 temperature,
                 this.getTemperatureChange(),
                 this.getTarget(),

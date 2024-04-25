@@ -55,8 +55,11 @@ public interface IHighlightHandler {
      */
     static void drawBox(AxisAlignedBB box, float lineWidth, float red, float green, float blue, float alpha) {
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        GlStateManager.tryBlendFuncSeparate(
+                GlStateManager.SourceFactor.SRC_ALPHA,
+                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                GlStateManager.SourceFactor.ONE,
+                GlStateManager.DestFactor.ZERO);
         GlStateManager.glLineWidth(lineWidth);
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);

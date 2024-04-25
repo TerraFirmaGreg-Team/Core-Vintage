@@ -83,8 +83,7 @@ public final class PlayerDataOverlay {
         }
         float baseMaxHealth = 20 * displayModifier;
         float currentThirst = 100;
-        if (foodStats instanceof IFoodStatsTFC) {
-            IFoodStatsTFC foodStatsTFC = (IFoodStatsTFC) foodStats;
+        if (foodStats instanceof IFoodStatsTFC foodStatsTFC) {
             baseMaxHealth = 20 * foodStatsTFC.getHealthModifier() * displayModifier;
             currentThirst = foodStatsTFC.getThirst();
         }
@@ -185,10 +184,9 @@ public final class PlayerDataOverlay {
             }
 
             // Draw mount's health bar
-            if (player.getRidingEntity() instanceof EntityLivingBase && !ConfigTFC.Client.DISPLAY.useVanillaHealth) {
+            if (player.getRidingEntity() instanceof EntityLivingBase mount && !ConfigTFC.Client.DISPLAY.useVanillaHealth) {
                 GuiIngameForge.renderHealthMount = false;
                 mc.renderEngine.bindTexture(ICONS);
-                EntityLivingBase mount = ((EntityLivingBase) player.getRidingEntity());
                 drawTexturedModalRect(mid + 1, armorRowHeight, 90, 0, 90, 10);
                 double mountMaxHealth = mount.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue();
                 double mountCurrentHealth = mount.getHealth();
@@ -213,17 +211,11 @@ public final class PlayerDataOverlay {
             if (ItemMetalChisel.hasHammerForChisel(player)) {
                 IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
                 if (capability != null) {
-                    switch (capability.getChiselMode()) {
-                        case SMOOTH:
-                            iconU = 0;
-                            break;
-                        case STAIR:
-                            iconU = 20;
-                            break;
-                        case SLAB:
-                            iconU = 40;
-                            break;
-                    }
+                    iconU = switch (capability.getChiselMode()) {
+                        case SMOOTH -> 0;
+                        case STAIR -> 20;
+                        case SLAB -> 40;
+                    };
                 }
             } else {
                 // todo: display missing hammer art
@@ -245,7 +237,7 @@ public final class PlayerDataOverlay {
 
         if (player.isSneaking()) {
             EntityLivingBase entity = event.getEntity();
-            if (entity instanceof IAnimal && ((IAnimal) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
+            if (entity instanceof IAnimal animal && animal.getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
                 double x, y, z;
                 x = event.getX();
                 y = event.getY();
@@ -257,7 +249,6 @@ public final class PlayerDataOverlay {
                 float f2 = 5.0F;
 
                 if (d3 < f2) {
-                    IAnimal animal = (IAnimal) entity;
                     RenderManager rendermanager = mc.getRenderManager();
 
                     GL11.glPushMatrix();

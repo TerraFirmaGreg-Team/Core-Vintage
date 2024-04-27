@@ -30,7 +30,7 @@ public class CreativeTabBase extends CreativeTabs {
     }
 
     public CreativeTabBase(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
-        super(ModUtils.idLocalized(TabName));
+        super(ModUtils.name(TabName));
 
         this.iconSupplier = () -> new ItemStack(ForgeRegistries.ITEMS.getValue(iconSupplier));
         this.hasSearchBar = hasSearchBar;

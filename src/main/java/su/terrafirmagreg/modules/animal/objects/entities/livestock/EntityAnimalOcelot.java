@@ -168,7 +168,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = isTamed() ? "cattfc" : EntityList.getEntityString(this);
-        return new TextComponentTranslation(ModUtils.idLocalized("animal." + entityString + "." + this.getGender().name()));
+        return new TextComponentTranslation(ModUtils.name("animal." + entityString + "." + this.getGender().name()));
     }
 
     @Override
@@ -390,7 +390,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                             ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                                    ModUtils.idLocalized("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
+                                    ModUtils.name("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

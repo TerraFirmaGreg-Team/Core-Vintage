@@ -195,7 +195,7 @@ public class ProviderTemperature implements ICapabilityTemperature {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, EnumFacing facing) {
-        return capability == CapabilityTemperature.TEMPERATURE_CAPABILITY;
+        return capability == CapabilityTemperature.CAPABILITY;
     }
 
     @Override

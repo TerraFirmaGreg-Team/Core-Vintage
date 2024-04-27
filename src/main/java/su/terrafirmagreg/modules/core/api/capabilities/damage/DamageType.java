@@ -32,16 +32,16 @@ public enum DamageType {
         if (type != DamageType.GENERIC) {
             // Apply damage type specific resistances, from the entity under attack and from their armor
             {
-                ICapabilityDamageResistance resist = entityUnderAttack.getCapability(CapabilityDamageResistance.DAMAGE_RESISTANCE_CAPABILITY, null);
+                ICapabilityDamageResistance resist = CapabilityDamageResistance.get(entityUnderAttack);
                 resistance += type.getModifier(resist);
             }
             if (!source.isUnblockable()) {
                 for (ItemStack stack : entityUnderAttack.getArmorInventoryList()) {
                     ICapabilityDamageResistance resist;
-                    if (stack.getItem() instanceof ICapabilityDamageResistance) {
-                        resist = (ICapabilityDamageResistance) stack.getItem();
+                    if (stack.getItem() instanceof ICapabilityDamageResistance iCapabilityDamageResistance) {
+                        resist = iCapabilityDamageResistance;
                     } else {
-                        resist = stack.getCapability(CapabilityDamageResistance.DAMAGE_RESISTANCE_CAPABILITY, null);
+                        resist = CapabilityDamageResistance.get(stack);
                     }
                     resistance += type.getModifier(resist);
                 }

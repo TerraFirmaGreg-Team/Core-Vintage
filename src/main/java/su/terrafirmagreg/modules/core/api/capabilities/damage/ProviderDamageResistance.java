@@ -2,13 +2,12 @@ package su.terrafirmagreg.modules.core.api.capabilities.damage;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ProviderDamageResistance implements ICapabilityDamageResistance, ICapabilityProvider {
+public class ProviderDamageResistance implements ICapabilityDamageResistance {
 
     private final float crushingModifier;
     private final float piercingModifier;
@@ -41,7 +40,7 @@ public class ProviderDamageResistance implements ICapabilityDamageResistance, IC
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityDamageResistance.DAMAGE_RESISTANCE_CAPABILITY;
+        return capability == CapabilityDamageResistance.CAPABILITY;
     }
 
     @SuppressWarnings("unchecked")

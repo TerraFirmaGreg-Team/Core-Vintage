@@ -13,7 +13,7 @@ public final class CapabilityPull {
     public static final ResourceLocation KEY = ModUtils.id("pull_capability");
 
     @CapabilityInject(ICapabilityPull.class)
-    public static Capability<ICapabilityPull> PULL_CAPABILITY;
+    public static Capability<ICapabilityPull> CAPABILITY;
 
     public static void preInit() {
         CapabilityManager.INSTANCE.register(ICapabilityPull.class, new StoragePull(), ProviderPull::new);
@@ -21,10 +21,10 @@ public final class CapabilityPull {
     }
 
     public static ICapabilityPull get(Entity entity) {
-        return entity.getCapability(PULL_CAPABILITY, null);
+        return entity.getCapability(CAPABILITY, null);
     }
 
     public static boolean has(Entity entity) {
-        return entity.hasCapability(PULL_CAPABILITY, null);
+        return entity.hasCapability(CAPABILITY, null);
     }
 }

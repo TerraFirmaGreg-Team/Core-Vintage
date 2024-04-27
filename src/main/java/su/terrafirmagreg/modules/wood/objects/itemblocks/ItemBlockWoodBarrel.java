@@ -128,20 +128,20 @@ public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
 
             if (fluidStack == null || fluidStack.amount == 0) {
                 if (inventory.isEmpty()) {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(ModUtils.idLocalized("tooltip.barrel_empty")));
+                    tooltip.add(TextFormatting.BLUE + I18n.format(ModUtils.name("tooltip.barrel_empty")));
                 } else {
-                    tooltip.add(TextFormatting.BLUE + I18n.format(ModUtils.idLocalized("tooltip.barrel_item"), inventory.getCount(), inventory
+                    tooltip.add(TextFormatting.BLUE + I18n.format(ModUtils.name("tooltip.barrel_item"), inventory.getCount(), inventory
                             .getItem()
                             .getItemStackDisplayName(inventory)));
                 }
             } else {
                 tooltip.add(
                         TextFormatting.BLUE +
-                                I18n.format(ModUtils.idLocalized("tooltip.barrel_fluid"), fluidStack.amount, fluidStack.getLocalizedName()));
+                                I18n.format(ModUtils.name("tooltip.barrel_fluid"), fluidStack.amount, fluidStack.getLocalizedName()));
 
                 if (!inventory.isEmpty()) {
                     tooltip.add(
-                            TextFormatting.BLUE + I18n.format(ModUtils.idLocalized("tooltip.barrel_item_in_fluid"), inventory.getCount(), inventory
+                            TextFormatting.BLUE + I18n.format(ModUtils.name("tooltip.barrel_item_in_fluid"), inventory.getCount(), inventory
                                     .getItem()
                                     .getItemStackDisplayName(inventory)));
                 }

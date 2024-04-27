@@ -47,7 +47,7 @@ dependencies {
     // Утилиты и вспомогательные моды
     if (use_util.toBoolean()) {
         implementation rfg.deobf("curse.maven:had-enough-items-557549:5229422")
-        implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:4746213")
+        implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:5171095")
         implementation rfg.deobf("curse.maven:reid-629017:5272391")
         implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
         implementation rfg.deobf("curse.maven:modularui-624243:5153413")

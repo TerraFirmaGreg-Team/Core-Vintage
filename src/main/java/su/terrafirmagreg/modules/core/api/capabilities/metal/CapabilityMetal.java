@@ -34,7 +34,7 @@ public final class CapabilityMetal {
     public static final Map<String, Metal.ItemType> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
 
     @CapabilityInject(ICapabilityMetal.class)
-    public static Capability<ICapabilityMetal> METAL_CAPABILITY;
+    public static Capability<ICapabilityMetal> CAPABILITY;
 
     public static void preInit() {
         CapabilityManager.INSTANCE.register(ICapabilityMetal.class, new StorageMetal(), ProviderMetal::new);
@@ -47,11 +47,11 @@ public final class CapabilityMetal {
     }
 
     public static ICapabilityMetal get(ItemStack itemStack) {
-        return itemStack.getCapability(METAL_CAPABILITY, null);
+        return itemStack.getCapability(CAPABILITY, null);
     }
 
     public static boolean has(ItemStack itemStack) {
-        return itemStack.hasCapability(METAL_CAPABILITY, null);
+        return itemStack.hasCapability(CAPABILITY, null);
     }
 
     /**

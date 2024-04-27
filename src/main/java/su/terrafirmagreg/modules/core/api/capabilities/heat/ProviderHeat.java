@@ -41,6 +41,13 @@ public class ProviderHeat implements ICapabilityHeat {
         deserializeNBT(nbt);
     }
 
+    public ProviderHeat(float heatCapacity, float meltTemp) {
+        this.heatCapacity = heatCapacity;
+        this.meltTemp = meltTemp;
+
+        deserializeNBT(null);
+    }
+
     public ProviderHeat() {} // This is here so you can do a custom implementation
 
     /**
@@ -82,7 +89,7 @@ public class ProviderHeat implements ICapabilityHeat {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityHeat.HEAT_CAPABILITY;
+        return capability == CapabilityHeat.CAPABILITY;
     }
 
     @Nullable

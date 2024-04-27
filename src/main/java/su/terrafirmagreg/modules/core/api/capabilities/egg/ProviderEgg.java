@@ -57,7 +57,7 @@ public class ProviderEgg implements ICapabilityEgg {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityEgg.EGG_CAPABILITY;
+        return capability == CapabilityEgg.CAPABILITY;
     }
 
     @Nullable

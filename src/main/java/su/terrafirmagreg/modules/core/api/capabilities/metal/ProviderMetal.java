@@ -44,7 +44,7 @@ public class ProviderMetal implements ICapabilityMetal {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityMetal.METAL_CAPABILITY;
+        return capability == CapabilityMetal.CAPABILITY;
     }
 
     @Nullable

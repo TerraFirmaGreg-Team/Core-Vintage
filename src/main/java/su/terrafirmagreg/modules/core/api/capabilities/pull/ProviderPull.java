@@ -33,7 +33,7 @@ public class ProviderPull implements ICapabilityPull {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityPull.PULL_CAPABILITY;
+        return capability == CapabilityPull.CAPABILITY;
     }
 
     @Nullable

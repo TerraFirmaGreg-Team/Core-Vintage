@@ -51,7 +51,7 @@ public class ProviderSharpness implements ICapabilitySharpness {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilitySharpness.SHARPNESS_CAPABILITY;
+        return capability == CapabilitySharpness.CAPABILITY;
     }
 
     @Nullable

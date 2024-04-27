@@ -33,7 +33,7 @@ public final class CapabilitySize {
     public static final ResourceLocation KEY = ModUtils.id("size_capability");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
     @CapabilityInject(ICapabilitySize.class)
-    public static Capability<ICapabilitySize> SIZE_CAPABILITY;
+    public static Capability<ICapabilitySize> CAPABILITY;
 
     public static void preInit() {
         // Register the capability
@@ -59,11 +59,11 @@ public final class CapabilitySize {
     }
 
     public static ICapabilitySize get(ItemStack itemStack) {
-        return itemStack.getCapability(SIZE_CAPABILITY, null);
+        return itemStack.getCapability(CAPABILITY, null);
     }
 
     public static boolean has(ItemStack itemStack) {
-        return itemStack.hasCapability(SIZE_CAPABILITY, null);
+        return itemStack.hasCapability(CAPABILITY, null);
     }
 
     /**

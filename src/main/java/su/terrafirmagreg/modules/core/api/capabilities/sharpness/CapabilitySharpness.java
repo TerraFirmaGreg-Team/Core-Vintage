@@ -13,7 +13,7 @@ public class CapabilitySharpness {
     public static final ResourceLocation KEY = ModUtils.id("sharpness_capability");
 
     @CapabilityInject(ICapabilitySharpness.class)
-    public static Capability<ICapabilitySharpness> SHARPNESS_CAPABILITY;
+    public static Capability<ICapabilitySharpness> CAPABILITY;
 
     public static void preInit() {
         CapabilityManager.INSTANCE.register(ICapabilitySharpness.class, new StorageSharpness(), ProviderSharpness::new);
@@ -21,10 +21,10 @@ public class CapabilitySharpness {
     }
 
     public static ICapabilitySharpness get(ItemStack itemStack) {
-        return itemStack.getCapability(SHARPNESS_CAPABILITY, null);
+        return itemStack.getCapability(CAPABILITY, null);
     }
 
     public static boolean has(ItemStack itemStack) {
-        return itemStack.hasCapability(SHARPNESS_CAPABILITY, null);
+        return itemStack.hasCapability(CAPABILITY, null);
     }
 }

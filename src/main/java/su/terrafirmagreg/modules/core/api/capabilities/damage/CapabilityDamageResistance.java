@@ -38,7 +38,7 @@ public final class CapabilityDamageResistance {
     public static final ResourceLocation KEY = ModUtils.id("damage_resistance_capability");
 
     @CapabilityInject(ICapabilityDamageResistance.class)
-    public static Capability<ICapabilityDamageResistance> DAMAGE_RESISTANCE_CAPABILITY;
+    public static Capability<ICapabilityDamageResistance> CAPABILITY;
 
     public static void preInit() {
         CapabilityManager.INSTANCE.register(ICapabilityDamageResistance.class, new StorageDamageResistance(), ProviderDamageResistance::new);
@@ -52,11 +52,19 @@ public final class CapabilityDamageResistance {
     }
 
     public static ICapabilityDamageResistance get(ItemStack itemStack) {
-        return itemStack.getCapability(DAMAGE_RESISTANCE_CAPABILITY, null);
+        return itemStack.getCapability(CAPABILITY, null);
+    }
+
+    public static ICapabilityDamageResistance get(Entity entity) {
+        return entity.getCapability(CAPABILITY, null);
     }
 
     public static boolean has(ItemStack itemStack) {
-        return itemStack.hasCapability(DAMAGE_RESISTANCE_CAPABILITY, null);
+        return itemStack.hasCapability(CAPABILITY, null);
+    }
+
+    public static boolean has(Entity entity) {
+        return entity.hasCapability(CAPABILITY, null);
     }
 
     /**

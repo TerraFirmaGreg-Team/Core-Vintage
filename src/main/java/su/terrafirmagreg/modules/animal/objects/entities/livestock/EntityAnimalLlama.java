@@ -152,7 +152,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                             ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                                    ModUtils.idLocalized("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
+                                    ModUtils.name("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }
@@ -269,7 +269,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(ModUtils.idLocalized("animal." + entityString + "." + this.getGender().name()));
+        return new TextComponentTranslation(ModUtils.name("animal." + entityString + "." + this.getGender().name()));
     }
 
     @Override

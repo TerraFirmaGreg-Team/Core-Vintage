@@ -13,7 +13,7 @@ public class CapabilityTemperature {
     public static final ResourceLocation KEY = ModUtils.id("temperature_capability");
 
     @CapabilityInject(ICapabilityTemperature.class)
-    public static Capability<ICapabilityTemperature> TEMPERATURE_CAPABILITY;
+    public static Capability<ICapabilityTemperature> CAPABILITY;
 
     public static void preInit() {
         CapabilityManager.INSTANCE.register(ICapabilityTemperature.class, new StorageTemperature(), ProviderTemperature::new);
@@ -21,10 +21,10 @@ public class CapabilityTemperature {
     }
 
     public static ICapabilityTemperature get(Entity entity) {
-        return entity.getCapability(TEMPERATURE_CAPABILITY, null);
+        return entity.getCapability(CAPABILITY, null);
     }
 
     public static boolean has(Entity entity) {
-        return entity.hasCapability(TEMPERATURE_CAPABILITY, null);
+        return entity.hasCapability(CAPABILITY, null);
     }
 }

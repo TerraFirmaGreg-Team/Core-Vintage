@@ -196,7 +196,6 @@ public final class TerraFirmaCraft {
         worldTypeTFC = new WorldTypeTFC();
 
         CapabilityItemSize.init();
-        CapabilityItemHeat.init();
         CapabilityMetalItem.init();
 
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");

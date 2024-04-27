@@ -67,7 +67,7 @@ public class ProviderSize implements ICapabilitySize {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilitySize.SIZE_CAPABILITY;
+        return capability == CapabilitySize.CAPABILITY;
     }
 
     @Nullable

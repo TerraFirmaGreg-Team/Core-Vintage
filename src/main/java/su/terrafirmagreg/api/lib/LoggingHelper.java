@@ -39,7 +39,7 @@ public class LoggingHelper {
      * @param name The name of the logger to create.
      */
     public LoggingHelper(String name) {
-        this(LogManager.getLogger(ModUtils.idLocalized(name)));
+        this(LogManager.getLogger(ModUtils.name(name)));
     }
 
     /**

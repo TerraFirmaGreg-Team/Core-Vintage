@@ -47,8 +47,8 @@ public final class ModUtils {
         return new ResourceLocation(MOD_ID, string);
     }
 
-    public static String idLocalized(String string) {
-        return String.format(MOD_ID + ".%s", string).toLowerCase();
+    public static String name(String name) {
+        return MOD_ID + "." + name.toLowerCase().replace("_", ".");
     }
 
     /**

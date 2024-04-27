@@ -54,7 +54,7 @@ public class CapabilityContainerListener implements IContainerListener {
         SYNC_CAPS.put(CapabilityItemHeat.KEY.toString(), CapabilityItemHeat.ITEM_HEAT_CAPABILITY);
         SYNC_CAPS.put(CapabilityForgeable.KEY.toString(), CapabilityForgeable.FORGEABLE_CAPABILITY);
         SYNC_CAPS.put(CapabilityFood.KEY.toString(), CapabilityFood.CAPABILITY);
-        SYNC_CAPS.put(CapabilityEgg.KEY.toString(), CapabilityEgg.EGG_CAPABILITY);
+        SYNC_CAPS.put(CapabilityEgg.KEY.toString(), CapabilityEgg.CAPABILITY);
     }
 
     private final EntityPlayerMP player;

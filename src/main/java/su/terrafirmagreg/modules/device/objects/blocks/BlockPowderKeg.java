@@ -422,10 +422,10 @@ public class BlockPowderKeg extends BlockBase implements ITEBlock {
             }
 
             if (count == 0) {
-                tooltip.add(I18n.format(ModUtils.idLocalized("tooltip.powderkeg_empty")));
+                tooltip.add(I18n.format(ModUtils.name("tooltip.powderkeg_empty")));
             } else {
                 ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
-                tooltip.add(I18n.format(ModUtils.idLocalized("tooltip.powderkeg_amount"), count, itemStack.getItem()
+                tooltip.add(I18n.format(ModUtils.name("tooltip.powderkeg_amount"), count, itemStack.getItem()
                         .getItemStackDisplayName(itemStack)));
             }
         }

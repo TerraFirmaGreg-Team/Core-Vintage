@@ -12,7 +12,7 @@ public class CapabilityEgg {
 
     public static final ResourceLocation KEY = ModUtils.id("egg_capability");
     @CapabilityInject(ICapabilityEgg.class)
-    public static Capability<ICapabilityEgg> EGG_CAPABILITY;
+    public static Capability<ICapabilityEgg> CAPABILITY;
 
     public static void preInit() {
         CapabilityManager.INSTANCE.register(ICapabilityEgg.class, new StorageEgg(), ProviderEgg::new);
@@ -20,10 +20,10 @@ public class CapabilityEgg {
     }
 
     public static ICapabilityEgg get(ItemStack itemStack) {
-        return itemStack.getCapability(EGG_CAPABILITY, null);
+        return itemStack.getCapability(CAPABILITY, null);
     }
 
     public static boolean has(ItemStack itemStack) {
-        return itemStack.hasCapability(EGG_CAPABILITY, null);
+        return itemStack.hasCapability(CAPABILITY, null);
     }
 }

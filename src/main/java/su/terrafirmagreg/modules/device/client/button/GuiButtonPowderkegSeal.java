@@ -24,7 +24,7 @@ public class GuiButtonPowderkegSeal extends GuiButtonBase implements IButtonTool
 
     @Override
     public String getTooltip() {
-        return ModUtils.idLocalized("tooltip.") + (tile.isSealed() ? "powderkeg_unseal" : "powderkeg_seal");
+        return ModUtils.name("tooltip.") + (tile.isSealed() ? "powderkeg_unseal" : "powderkeg_seal");
     }
 
     @Override

@@ -95,8 +95,7 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
             for (int i = 100; i <= 400; i += 100) {
                 ItemStack stack = new ItemStack(this);
                 IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-                if (cap instanceof IForgeableMeasurableMetal) {
-                    IForgeableMeasurableMetal handler = (IForgeableMeasurableMetal) cap;
+                if (cap instanceof IForgeableMeasurableMetal handler) {
                     handler.setMetal(Metal.WROUGHT_IRON);
                     handler.setMetalAmount(i);
                     items.add(stack);
@@ -107,7 +106,7 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
 
     @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
         if (nbt == null) {
             return new ForgeableMeasurableMetalHandler(Metal.WROUGHT_IRON, 100);
         } else {

@@ -231,11 +231,11 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
     @Override
     public TextComponentTranslation getTooltip() {
         if (getAge() == Age.CHILD) {
-            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.young"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.young"), getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.low_familiarity"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.low_familiarity"), getAnimalName());
         } else if (!hasWool()) {
-            return new TextComponentTranslation(ModUtils.idLocalized("tooltip.animal.product.no_wool"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.no_wool"), getAnimalName());
         }
         return null;
     }

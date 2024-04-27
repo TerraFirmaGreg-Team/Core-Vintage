@@ -26,8 +26,8 @@ import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-import static tfcflorae.api.stateproperty.StatePropertiesTFCF.CONNECTED;
-import static tfcflorae.api.stateproperty.StatePropertiesTFCF.GROWN;
+import static su.terrafirmagreg.api.util.PropertyUtils.CONNECTED;
+import static su.terrafirmagreg.api.util.PropertyUtils.GROWN;
 
 public class BlockBambooLog extends Block {
 

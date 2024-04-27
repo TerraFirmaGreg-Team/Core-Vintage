@@ -38,7 +38,6 @@ public class HorsePowerMod {
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy proxy;
 
-    public static HorsePowerCreativeTab creativeTab = new HorsePowerCreativeTab();
     public static LoggingHelper logger = new LoggingHelper(MODID_HORSEPOWER);
 
     @EventHandler

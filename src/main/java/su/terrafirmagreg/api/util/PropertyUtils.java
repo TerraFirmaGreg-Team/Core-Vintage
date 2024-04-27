@@ -102,6 +102,9 @@ public final class PropertyUtils {
     public static final PropertyBool UPPER = PropertyBool.create("upper");
     public static final PropertyBool FULL = PropertyBool.create("full");
     public static final PropertyBool LIT = PropertyBool.create("lit");
+    public static final PropertyBool GROWN = PropertyBool.create("grown");
+    public static final PropertyBool CAN_GROW = PropertyBool.create("can_grow");
+    public static final PropertyBool CONNECTED = PropertyBool.create("connected");
 
     private PropertyUtils() {
 

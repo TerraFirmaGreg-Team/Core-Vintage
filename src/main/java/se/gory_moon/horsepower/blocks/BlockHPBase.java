@@ -24,7 +24,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import se.gory_moon.horsepower.HorsePowerMod;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityHPHorseBase;
 import se.gory_moon.horsepower.util.Utils;
@@ -41,7 +41,7 @@ public abstract class BlockHPBase extends Block implements IItemSize {
 
     public BlockHPBase(Material materialIn) {
         super(materialIn);
-        setCreativeTab(HorsePowerMod.creativeTab);
+        setCreativeTab(CreativeTabsTFC.CT_WOOD);
     }
 
     public @NotNull Size getSize(@NotNull ItemStack stack) {

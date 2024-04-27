@@ -27,8 +27,8 @@ import net.minecraftforge.registries.RegistryManager;
 
 
 import com.google.common.collect.Maps;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import se.gory_moon.horsepower.Configs;
-import se.gory_moon.horsepower.HorsePowerMod;
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.recipes.ShapedChoppingRecipe;
 import se.gory_moon.horsepower.recipes.ShapelessChoppingRecipe;
@@ -45,10 +45,10 @@ public class ModItems {
 
     public static final Item FLOUR = new Item().setRegistryName(se.gory_moon.horsepower.lib.Constants.FLOUR_ITEM)
             .setTranslationKey(se.gory_moon.horsepower.lib.Constants.FLOUR_ITEM)
-            .setCreativeTab(HorsePowerMod.creativeTab);
+            .setCreativeTab(CreativeTabsTFC.CT_MISC);
     public static final Item DOUGH = new Item().setRegistryName(se.gory_moon.horsepower.lib.Constants.DOUGH_ITEM)
             .setTranslationKey(se.gory_moon.horsepower.lib.Constants.DOUGH_ITEM)
-            .setCreativeTab(HorsePowerMod.creativeTab);
+            .setCreativeTab(CreativeTabsTFC.CT_MISC);
     private static final List<ResourceLocation> recipesToRemove = new LinkedList<>();
     private static Set<Map.Entry<ResourceLocation, IRecipe>> recipes;
 

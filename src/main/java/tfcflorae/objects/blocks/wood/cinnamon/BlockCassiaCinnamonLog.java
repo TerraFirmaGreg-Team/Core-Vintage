@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static tfcflorae.api.stateproperty.StatePropertiesTFCF.*;
+import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
 public class BlockCassiaCinnamonLog extends Block {
 

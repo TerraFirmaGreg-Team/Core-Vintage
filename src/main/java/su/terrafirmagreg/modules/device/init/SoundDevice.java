@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.api.registry.RegistryManager;
-
 import net.minecraft.util.SoundEvent;
+
+import su.terrafirmagreg.api.registry.RegistryManager;
 
 public final class SoundDevice {
 

@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPowderKeg;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePowderKeg;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;
@@ -24,12 +24,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
+public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
 
     public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/powderkeg.png");
     private final String translationKey;
 
-    public GuiPowderkeg(Container container, InventoryPlayer playerInv, TEPowderKeg tile, IBlockState state) {
+    public GuiPowderkeg(Container container, InventoryPlayer playerInv, TilePowderKeg tile, IBlockState state) {
         super(container, playerInv, tile, BACKGROUND);
 
         this.translationKey = state.getBlock().getTranslationKey();

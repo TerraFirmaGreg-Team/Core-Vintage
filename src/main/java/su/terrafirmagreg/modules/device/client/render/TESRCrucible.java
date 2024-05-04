@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCrucible;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,10 +23,10 @@ import org.lwjgl.opengl.GL11;
  * Render molten metal inside crucible
  */
 @SideOnly(Side.CLIENT)
-public class TESRCrucible extends TileEntitySpecialRenderer<TECrucible> {
+public class TESRCrucible extends TileEntitySpecialRenderer<TileCrucible> {
 
     @Override
-    public void render(TECrucible te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileCrucible te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         int amount = te.getAlloy().getAmount();
         if (amount < 1) return;
         Metal metal = te.getAlloyResult();

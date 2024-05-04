@@ -26,7 +26,6 @@ import com.google.common.base.Throwables;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
@@ -34,8 +33,8 @@ import java.util.Map;
 
 public class ThreadedNetworkWrapper {
 
-    private static final @Nonnull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesClient = new IdentityHashMap<>();
-    private static final @Nonnull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesServer = new IdentityHashMap<>();
+    private static final @NotNull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesClient = new IdentityHashMap<>();
+    private static final @NotNull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesServer = new IdentityHashMap<>();
     /**
      * The network wrapper instance, created when a new handler is constructed.
      */
@@ -53,7 +52,7 @@ public class ThreadedNetworkWrapper {
         this.parent = NetworkRegistry.INSTANCE.newSimpleChannel(netId);
     }
 
-    static synchronized void registerChannelMapping(Class<? extends IMessage> requestMessageType, @Nonnull SimpleNetworkWrapper parent, Side side) {
+    static synchronized void registerChannelMapping(Class<? extends IMessage> requestMessageType, @NotNull SimpleNetworkWrapper parent, Side side) {
         (side == Side.CLIENT ? typesClient : typesServer).put(requestMessageType, parent);
     }
 

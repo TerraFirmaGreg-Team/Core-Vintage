@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -123,7 +123,7 @@ public class BlockPlacedItem extends Block {
             // Check for pit kiln conversion
             if (!playerIn.isSneaking() &&
                     (OreDictionaryHelper.doesStackMatchOre(stack, "straw") || OreDictionaryHelper.doesStackMatchOre(stack, "blockStraw"))) {
-                TEPitKiln.convertPlacedItemToPitKiln(worldIn, pos, stack.splitStack(1));
+                TilePitKiln.convertPlacedItemToPitKiln(worldIn, pos, stack.splitStack(1));
                 return true;
             }
             return te.onRightClick(playerIn, playerIn.getHeldItem(hand), hitX < 0.5, hitZ < 0.5);

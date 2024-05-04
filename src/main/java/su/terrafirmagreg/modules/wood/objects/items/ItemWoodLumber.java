@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 
 @Getter
-public class ItemWoodLumber extends ItemBase implements IWoodItem {
+public class ItemWoodLumber extends BaseItem implements IWoodItem {
 
     private final WoodItemVariant itemVariant;
     private final WoodType type;
@@ -39,13 +39,13 @@ public class ItemWoodLumber extends ItemBase implements IWoodItem {
 
     @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.SMALL;
     }
 
     @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.VERY_LIGHT;
     }
 

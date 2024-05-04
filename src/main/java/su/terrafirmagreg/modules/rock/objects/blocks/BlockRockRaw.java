@@ -74,8 +74,8 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn,
-                                @NotNull BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+                                BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         // Raw blocks that can't fall also can't pop off
         if (state.getValue(CAN_FALL)) {
@@ -94,8 +94,8 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
     }
 
     @Override
-    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItemMainhand();
         if (ModuleRockConfig.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(
                 pos.up(), true)) {
@@ -118,7 +118,7 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
     }
 
     @Override
-    public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state,
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state,
                          int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
 
@@ -129,7 +129,7 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
     }
 
     @Override
-    public int quantityDropped(@NotNull IBlockState state, int fortune, Random random) {
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
         return 1 + random.nextInt(3);
     }
 

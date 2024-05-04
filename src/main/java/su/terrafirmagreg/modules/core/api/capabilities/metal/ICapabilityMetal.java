@@ -35,8 +35,7 @@ public interface ICapabilityMetal extends ICapabilityProvider {
     int getSmeltAmount(ItemStack stack);
 
     /**
-     * Can the metal melt directly from the stack into a fluid? This is used by {@link HeatRecipeMetalMelting} to determine if metal melting is
-     * possible
+     * Can the metal melt directly from the stack into a fluid? This is used by {@link HeatRecipeMetalMelting} to determine if metal melting is possible
      *
      * @param stack The item stack
      * @return true if the metal can be melted

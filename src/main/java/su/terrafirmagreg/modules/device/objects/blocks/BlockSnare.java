@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalHare;
@@ -12,7 +12,7 @@ import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalC
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
-import su.terrafirmagreg.modules.device.objects.tiles.TESnare;
+import su.terrafirmagreg.modules.device.objects.tiles.TileSnare;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -42,47 +42,41 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
-public class BlockSnare extends BlockBase implements ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockSnare extends BaseBlock implements ITileBlock {
 
     protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
     public BlockSnare() {
-        super(Material.WOOD);
+        super(Settings.of()
+                .material(Material.WOOD)
+                .soundType(SoundType.WOOD)
+                .hardness(1.5f)
+                .nonFullCube()
+                .nonOpaque()
+                .size(Size.LARGE)
+                .weight(Weight.MEDIUM));
 
-        this.setTickRandomly(true);
-        this.setSoundType(SoundType.WOOD);
-        this.setHardness(1.5f);
-        this.setHarvestLevel("axe", 0);
-        this.setDefaultState(this.blockState.getBaseState()
+        setTickRandomly(true);
+        setHarvestLevel("axe", 0);
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)
                 .withProperty(BAITED, Boolean.FALSE)
                 .withProperty(CLOSED, Boolean.FALSE));
     }
 
     @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
-        return true;
-    }
-
-    @Override
-    public TESnare createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TESnare();
-    }
-
-    @Override
-    protected @NotNull BlockStateContainer createBlockState() {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, HORIZONTAL, BAITED, CLOSED);
     }
 
-    @NotNull
-    @SuppressWarnings("deprecation")
+    @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
                 .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
@@ -90,24 +84,23 @@ public class BlockSnare extends BlockBase implements ITEBlock {
                 .withProperty(CLOSED, meta / 8 != 0);
     }
 
+    @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BAITED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
     }
 
-    @SuppressWarnings("deprecation")
-    public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX,
-                                                     float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    @Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
     }
 
-    @Nullable
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+    @Override
+    public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F,
-                axisalignedbb.maxZ);
+        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
     }
 
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState iblockstate = worldIn.getBlockState(pos.down());
         Block block = iblockstate.getBlock();
@@ -121,19 +114,9 @@ public class BlockSnare extends BlockBase implements ITEBlock {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    public void harvestBlock(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state,
-                             @Nullable TileEntity te, @NotNull ItemStack stack) {
-        TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
         assert snare != null;
         if (!snare.isOpen()) {
             if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
@@ -146,8 +129,8 @@ public class BlockSnare extends BlockBase implements ITEBlock {
         }
     }
 
-    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state, @NotNull EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!state.getValue(BAITED)) {
             ItemStack stack = playerIn.getHeldItem(hand);
             if ((stack.getItem() instanceof ItemSeedsTFC || isFood(stack)) && !worldIn.isRemote) {
@@ -170,9 +153,9 @@ public class BlockSnare extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public void onEntityCollision(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Entity entityIn) {
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (isCapturable(entityIn)) {
-            TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
+            TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
             EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
             assert snare != null;
             if (snare.isOpen()) {
@@ -188,13 +171,12 @@ public class BlockSnare extends BlockBase implements ITEBlock {
         }
     }
 
-    public void updateTick(@NotNull World worldIn, BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
-        AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
-                pos.getZ() + 10.0D);
-        TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D, pos.getZ() + 10.0D);
+        TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
         assert snare != null;
-        if (snare.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox)
-                .isEmpty() && !worldIn.isRemote) {
+        if (snare.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty() && !worldIn.isRemote) {
             for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox)) {
                 if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition())
                         .getBlock() instanceof BlockSnare)) {
@@ -250,9 +232,11 @@ public class BlockSnare extends BlockBase implements ITEBlock {
                 entityIn instanceof EntityAnimalChicken || entityIn instanceof EntityAnimalTurkey;
     }
 
-    public void neighborChanged(@NotNull IBlockState state, World worldIn, BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-            TESnare snare = TileUtils.getTile(worldIn, pos, TESnare.class);
+            TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
+            assert snare != null;
             if (!snare.isOpen()) {
                 if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
                     worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
@@ -267,37 +251,27 @@ public class BlockSnare extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-        return Size.LARGE;
-    }
-
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-        return Weight.MEDIUM;
-    }
-
-    @SuppressWarnings("deprecation")
-    public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return TRAP_AABB;
     }
 
-    public boolean isPassable(@NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return true;
     }
 
-    @SuppressWarnings("deprecation")
-    public @NotNull BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
-                                                     @NotNull EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/snare";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TESnare.class;
+        return TileSnare.class;
+    }
+
+    @Override
+    public TileSnare createNewTileEntity(World worldIn, int meta) {
+        return new TileSnare();
     }
 }

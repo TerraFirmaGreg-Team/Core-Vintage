@@ -3,7 +3,7 @@ package net.dries007.tfc.util.interaction;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
+import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
@@ -93,7 +93,7 @@ public final class InteractionManager {
                         if (stateAt.getBlock() == BlocksDevice.LOG_PILE) {
                             // Clicked on a log pile, so try to insert into the original
                             // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
-                            TELogPile te = TileUtils.getTile(worldIn, pos, TELogPile.class);
+                            TileLogPile te = TileUtils.getTile(worldIn, pos, TileLogPile.class);
                             if (te != null) {
                                 if (!player.isSneaking()) {
                                     if (te.insertLog(stack)) {
@@ -132,7 +132,7 @@ public final class InteractionManager {
                                     worldIn.setBlockState(posAt,
                                             BlocksDevice.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
-                                    TELogPile te = TileUtils.getTile(worldIn, posAt, TELogPile.class);
+                                    TileLogPile te = TileUtils.getTile(worldIn, posAt, TileLogPile.class);
                                     if (te != null) {
                                         te.insertLog(stack.copy());
                                     }

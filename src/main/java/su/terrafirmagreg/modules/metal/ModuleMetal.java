@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 import su.terrafirmagreg.modules.metal.init.ItemsMetal;
 
@@ -13,13 +13,13 @@ import net.minecraft.creativetab.CreativeTabs;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.Module_Metal;
+import static su.terrafirmagreg.modules.Modules.Metal;
 
-@Module(moduleID = Module_Metal)
+@Module(moduleID = Metal)
 public final class ModuleMetal extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleMetal.class.getSimpleName());
-    public static final CreativeTabs METAL_TAB = new CreativeTabBase("metal", "metal/anvil/red_steel");
+    public static final CreativeTabs METAL_TAB = new BaseCreativeTab("metal", "metal/anvil/red_steel");
 
     public static IPacketService PACKET_SERVICE;
 

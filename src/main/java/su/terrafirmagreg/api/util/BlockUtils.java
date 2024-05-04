@@ -189,8 +189,8 @@ public final class BlockUtils {
     }
 
     /**
-     * Checks if an ItemStack contains an ore item. This is done by checking the item extends BlockOre, or if the ore dictionary for entries that
-     * start with 'ore'. It will also check the display name of the stack to see if it has the word Ore in it.
+     * Checks if an ItemStack contains an ore item. This is done by checking the item extends BlockOre, or if the ore dictionary for entries that start with 'ore'. It will also
+     * check the display name of the stack to see if it has the word Ore in it.
      *
      * @param stack     The ItemStack to check.
      * @param checkName Whether or not the name of the ItemStack should be checked.
@@ -280,9 +280,9 @@ public final class BlockUtils {
         final IBlockState state = getActualState(world, pos);
         final Block block = state.getBlock();
 
-        if (block instanceof IFluidBlock && ((IFluidBlock) block).canDrain(world, pos)) {
+        if (block instanceof IFluidBlock fluidBlock && fluidBlock.canDrain(world, pos)) {
 
-            return ((IFluidBlock) block).drain(world, pos, true);
+            return fluidBlock.drain(world, pos, true);
         } else if (block instanceof BlockStaticLiquid && isFluidFull(state)) {
 
             final Fluid fluid = block == Blocks.WATER ? FluidRegistry.WATER : block == Blocks.LAVA ? FluidRegistry.LAVA : null;
@@ -297,12 +297,12 @@ public final class BlockUtils {
     }
 
     /**
-     * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate
-     * allows for the specified direction!
+     * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate allows for the specified
+     * direction!
      *
      * @param pos    position of the block that makes the check
-     * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it
-     *               sticks WITH. e.g: a sign facing north also hangs on the north side of the support block
+     * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it sticks WITH. e.g: a sign facing
+     *               north also hangs on the north side of the support block
      * @return true if the side is solid, false otherwise.
      */
     public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
@@ -315,8 +315,7 @@ public final class BlockUtils {
      * @param pos             position of the block/space to be checked.
      * @param possibleSides   a list/array of all sides the block can attach to.
      * @param preferredFacing this facing is checked first. It can be invalid or null.
-     * @return Found facing or null is none is found. This is the direction the block should be pointing and the side it stick TO, not the side it
-     * sticks WITH.
+     * @return Found facing or null is none is found. This is the direction the block should be pointing and the side it stick TO, not the side it sticks WITH.
      */
     public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
         return getASolidFacing(worldIn, pos, preferredFacing, Arrays.asList(possibleSides));

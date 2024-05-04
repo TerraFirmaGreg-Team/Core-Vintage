@@ -14,10 +14,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * Interface for item size. To implement this, you can (preferred) implement this interface on your Item / Block and return the size or Expose this
- * capability via Item#initCapabilities() Note: if you implement this via an interface, you must also change the stack-size of the item to agree with
- * {@link ICapabilitySize#getStackSize} If you implement the capability, TFC will try and auto-adjust the max stacksize of the item for you Otherwise,
- * your item will be assigned a default capability on creation
+ * Interface for item size. To implement this, you can (preferred) implement this interface on your Item / Block and return the size or Expose this capability via
+ * Item#initCapabilities() Note: if you implement this via an interface, you must also change the stack-size of the item to agree with {@link ICapabilitySize#getStackSize} If you
+ * implement the capability, TFC will try and auto-adjust the max stacksize of the item for you Otherwise, your item will be assigned a default capability on creation
  *
  * @see net.dries007.tfc.objects.items.ItemTFC
  * @see net.dries007.tfc.objects.items.itemblock.ItemBlockTFC

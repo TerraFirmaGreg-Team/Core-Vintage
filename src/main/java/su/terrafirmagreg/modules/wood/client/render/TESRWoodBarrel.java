@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.render;
 
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -31,10 +31,10 @@ import org.lwjgl.opengl.GL11;
 import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
 @SideOnly(Side.CLIENT)
-public class TESRWoodBarrel extends TileEntitySpecialRenderer<TEWoodBarrel> {
+public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {
 
     @Override
-    public void render(TEWoodBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileWoodBarrel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState state = te.getWorld().getBlockState(te.getPos());
         if (!(state.getBlock() instanceof BlockWoodBarrel) || state.getValue(SEALED)) {
             return;
@@ -49,7 +49,7 @@ public class TESRWoodBarrel extends TileEntitySpecialRenderer<TEWoodBarrel> {
 
         IFluidTankProperties properties = fluidHandler.getTankProperties()[0];
         FluidStack fluidStack = properties.getContents();
-        ItemStack stack = itemHandler.getStackInSlot(TEWoodBarrel.SLOT_ITEM);
+        ItemStack stack = itemHandler.getStackInSlot(TileWoodBarrel.SLOT_ITEM);
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);

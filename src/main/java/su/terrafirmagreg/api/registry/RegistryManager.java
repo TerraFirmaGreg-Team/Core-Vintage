@@ -8,7 +8,7 @@ import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.item.IOreDict;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 
@@ -115,7 +115,7 @@ public class RegistryManager {
     /**
      * A list of all the tile providers registered here.
      */
-    private final List<ITEBlock> tileProviders = NonNullList.create();
+    private final List<ITileBlock> tileProviders = NonNullList.create();
 
     /**
      * A list of all enchantments registered.
@@ -212,19 +212,18 @@ public class RegistryManager {
         }
     }
 
-    public <B extends Block & IAutoReg, I extends ItemBlock> B registerBlock(B block) {
+    public <B extends Block & IAutoReg, I extends Item> B registerBlock(B block) {
         return this.registerBlock(block, block.getItemBlock(), block.getName());
     }
 
     /**
-     * Registers a block to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The block will also be
-     * cached in {@link #blocks}.
+     * Registers a block to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The block will also be cached in {@link #blocks}.
      *
      * @param block     The block to register.
      * @param itemBlock The ItemBlock for the block.
      * @param name      The name to register the block with.
      */
-    public <B extends Block, I extends ItemBlock> @NotNull B registerBlock(@NotNull B block, @Nullable I itemBlock, @NotNull String name) {
+    public <B extends Block, I extends Item> @NotNull B registerBlock(@NotNull B block, @Nullable I itemBlock, @NotNull String name) {
 
         block.setRegistryName(this.modID, name);
         block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -236,7 +235,7 @@ public class RegistryManager {
             this.registerItem(itemBlock, name);
             if (block instanceof IOreDict oreDict) this.oreDicts.add(oreDict);
         }
-        if (block instanceof ITEBlock te) this.tileProviders.add(te);
+        if (block instanceof ITileBlock te) this.tileProviders.add(te);
 
         if (GameUtils.isClient()) {
             if (block instanceof ICustomState state) this.customStateMapper.add(state);
@@ -265,8 +264,7 @@ public class RegistryManager {
     }
 
     /**
-     * Registers an item to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The item will also be
-     * cached in {@link #items}.
+     * Registers an item to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The item will also be cached in {@link #items}.
      *
      * @param item The item to register.
      * @param name The name to register the item with.
@@ -544,8 +542,8 @@ public class RegistryManager {
      * @param name       The name of the entry being added. This will be prefixed with {@link #modID} .
      * @param pool       The name of the pool to add the entry to. This pool must already exist.
      * @param weight     The weight of the entry.
-     * @param quality    The quality of the entry. Quality is an optional value which modifies the weight of an entry based on the player's luck
-     *                   level. totalWeight = weight + (quality * luck)
+     * @param quality    The quality of the entry. Quality is an optional value which modifies the weight of an entry based on the player's luck level. totalWeight = weight +
+     *                   (quality * luck)
      * @param item       The item to add.
      * @param conditions A list of loot conditions.
      * @param functions  A list of loot functions.

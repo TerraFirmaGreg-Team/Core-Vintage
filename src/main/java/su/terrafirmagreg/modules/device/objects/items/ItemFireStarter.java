@@ -1,15 +1,15 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.SoundDevice;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -31,7 +31,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ import java.util.List;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @MethodsReturnNonnullByDefault
-public class ItemFireStarter extends ItemBase {
+public class ItemFireStarter extends BaseItem {
 
     public ItemFireStarter() {
         setMaxDamage(8);
@@ -85,7 +84,7 @@ public class ItemFireStarter extends ItemBase {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/firestarter";
     }
 
@@ -156,7 +155,7 @@ public class ItemFireStarter extends ItemBase {
                 // Log pile
                 if (itemRand.nextFloat() < chance) {
                     world.setBlockState(pos.down(), state.withProperty(LIT, true));
-                    TELogPile te = TileUtils.getTile(world, pos.down(), TELogPile.class);
+                    TileLogPile te = TileUtils.getTile(world, pos.down(), TileLogPile.class);
                     if (te != null) {
                         te.light();
                     }
@@ -167,7 +166,7 @@ public class ItemFireStarter extends ItemBase {
             } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
                 // Pit Kiln
                 if (itemRand.nextFloat() < chance) {
-                    TEPitKiln te = TileUtils.getTile(world, pos.down(), TEPitKiln.class);
+                    TilePitKiln te = TileUtils.getTile(world, pos.down(), TilePitKiln.class);
                     if (te != null) {
                         te.tryLight();
                     }
@@ -199,7 +198,7 @@ public class ItemFireStarter extends ItemBase {
                     final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
                     if (itemRand.nextFloat() < chance + kindlingModifier) {
                         world.setBlockState(pos, BlocksDevice.FIRE_PIT.getDefaultState().withProperty(LIT, true));
-                        TEFirePit te = TileUtils.getTile(world, pos, TEFirePit.class);
+                        TileFirePit te = TileUtils.getTile(world, pos, TileFirePit.class);
                         if (te != null) {
                             te.onCreate(log.getItem());
                         }
@@ -220,7 +219,7 @@ public class ItemFireStarter extends ItemBase {
     }
 
     @Override
-    public boolean canStack(@NotNull ItemStack stack) {
+    public boolean canStack(ItemStack stack) {
         return false;
     }
 

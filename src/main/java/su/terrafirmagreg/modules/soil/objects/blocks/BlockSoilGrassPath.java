@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.block.ISettingsBlock;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -25,7 +26,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -33,18 +33,22 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
+@SuppressWarnings("deprecation")
+public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock, ISettingsBlock {
 
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
     private final SoilBlockVariant blockVariant;
     private final SoilType type;
 
+    protected final Settings settings;
+
     public BlockSoilGrassPath(SoilBlockVariant blockVariant, SoilType type) {
 
         this.blockVariant = blockVariant;
         this.type = type;
         this.useNeighborBrightness = true;
+        this.settings = Settings.of();
 
         setSoundType(SoundType.PLANT);
         setHardness(2.0F);
@@ -58,26 +62,23 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
-    @NotNull
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
-    @NotNull
     @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return GRASS_PATH_AABB;
     }
 
     @Override
-    public void neighborChanged(@NotNull IBlockState state, @NotNull World world, BlockPos pos, @NotNull Block blockIn, BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (fromPos.getY() == pos.getY() + 1) {
             IBlockState up = world.getBlockState(fromPos);
             if (up.isSideSolid(world, fromPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
@@ -87,7 +88,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
     }
 
     @Override
-    public void onBlockAdded(World world, BlockPos pos, @NotNull IBlockState state) {
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
         BlockPos upPos = pos.up();
         IBlockState up = world.getBlockState(upPos);
         if (up.isSideSolid(world, upPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
@@ -95,16 +96,14 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock {
         }
     }
 
-    @NotNull
     @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return SoilItemVariants.PILE.get(getType());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(@NotNull IBlockState blockState, @NotNull IBlockAccess blockAccess, @NotNull BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         switch (side) {
             case UP:
                 return true;

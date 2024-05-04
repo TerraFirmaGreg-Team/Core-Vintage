@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.BlockBaseSlab;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -11,28 +12,17 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import lombok.Getter;
 
-import java.util.Random;
-
 @Getter
-public abstract class BlockWoodSlab extends BlockBaseSlab implements IWoodBlock {
+public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
@@ -42,33 +32,16 @@ public abstract class BlockWoodSlab extends BlockBaseSlab implements IWoodBlock 
     protected Double doubleSlab;
 
     private BlockWoodSlab(WoodBlockVariant model, WoodBlockVariant blockVariant, WoodType type) {
-        super(Material.WOOD);
+        super(Settings.of()
+                .material(Material.WOOD)
+                .soundType(SoundType.WOOD));
 
         this.blockVariant = blockVariant;
         this.type = type;
         this.block = model.get(type);
 
-        setSoundType(SoundType.STONE);
-        setHarvestLevel("axe", 0);
-
+        setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
         BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
-    }
-
-    @Override
-    public @Nullable ItemSlab getItemBlock() {
-        return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
-    }
-
-    @Override
-    @NotNull
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return Item.getItemFromBlock(halfSlab);
-    }
-
-    @Override
-    @NotNull
-    public ItemStack getItem(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        return new ItemStack(halfSlab);
     }
 
     @Override

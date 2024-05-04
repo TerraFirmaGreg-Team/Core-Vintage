@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.wood.client.button;
 
-import su.terrafirmagreg.api.spi.button.GuiButtonBase;
+import su.terrafirmagreg.api.spi.button.BaseGuiButton;
 import su.terrafirmagreg.api.spi.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -13,11 +13,11 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import org.jetbrains.annotations.NotNull;
 
-public class GuiButtonBarrelSeal extends GuiButtonBase implements IButtonTooltip {
+public class GuiButtonBarrelSeal extends BaseGuiButton implements IButtonTooltip {
 
-    private final TEWoodBarrel tile;
+    private final TileWoodBarrel tile;
 
-    public GuiButtonBarrelSeal(TEWoodBarrel tile, int buttonId, int guiTop, int guiLeft) {
+    public GuiButtonBarrelSeal(TileWoodBarrel tile, int buttonId, int guiTop, int guiLeft) {
         super(buttonId, guiLeft + 123, guiTop + 35, 20, 20, "");
         this.tile = tile;
     }

@@ -16,8 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Resistances are positive, weaknesses are negative Calculations are done per <a href="https://www.desmos.com/calculator/689oqycw1t">this
- * spreadsheet</a>
+ * Resistances are positive, weaknesses are negative Calculations are done per <a href="https://www.desmos.com/calculator/689oqycw1t">this spreadsheet</a>
  */
 
 public enum DamageType {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -53,8 +53,8 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     @NotNull
@@ -66,24 +66,24 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn,
-                                @NotNull BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
+                                BlockPos fromPos) {
         // Prevents cobble stairs from falling
     }
 
     @Override
-    public void onPlayerDestroy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
         // Prevents chiseled smooth stone stairs from collapsing
     }
 
     @Override
-    public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         // Prevents cobble stairs from falling
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(

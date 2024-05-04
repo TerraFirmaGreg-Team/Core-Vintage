@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.spi.gui.GuiContainerBase;
+import su.terrafirmagreg.api.spi.gui.BaseGuiContainer;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiNestBox extends GuiContainerBase {
+public class GuiNestBox extends BaseGuiContainer {
 
     public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/small_inventory.png");
 

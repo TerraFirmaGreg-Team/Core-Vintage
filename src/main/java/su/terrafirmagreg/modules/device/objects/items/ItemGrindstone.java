@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,11 +11,13 @@ import net.dries007.tfc.api.capability.forge.ForgeableHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ItemGrindstone extends ItemBase {
+import lombok.Getter;
 
+public class ItemGrindstone extends BaseItem {
+
+    @Getter
     private final int tier;
     private final String name;
 
@@ -29,10 +31,6 @@ public class ItemGrindstone extends ItemBase {
         setMaxStackSize(1);
     }
 
-    public int getTier() {
-        return tier;
-    }
-
     public int getMaxCharges() {
         return switch (tier) {
             case 2 -> 256;
@@ -42,17 +40,17 @@ public class ItemGrindstone extends ItemBase {
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    public Size getSize(ItemStack itemStack) {
         return Size.LARGE;
     }
 
     @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+    public Weight getWeight(ItemStack itemStack) {
         return Weight.HEAVY;
     }
 
     @Override
-    public boolean canStack(@NotNull ItemStack stack) {
+    public boolean canStack(ItemStack stack) {
         return false;
     }
 
@@ -65,7 +63,7 @@ public class ItemGrindstone extends ItemBase {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/grindstone/" + name;
     }
 }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 
 @Getter
-public class ItemRockBrick extends ItemBase implements IRockItem {
+public class ItemRockBrick extends BaseItem implements IRockItem {
 
     private final RockItemVariant itemVariant;
     private final RockType type;
@@ -35,13 +35,13 @@ public class ItemRockBrick extends ItemBase implements IRockItem {
 
     @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.SMALL; // Stored everywhere
     }
 
     @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.LIGHT; // Stacksize = 32
     }
 }

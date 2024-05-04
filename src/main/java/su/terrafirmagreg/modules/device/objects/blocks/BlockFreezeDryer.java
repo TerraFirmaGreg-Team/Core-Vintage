@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBaseContainer;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFreezeDryer;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFreezeDryer;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,39 +23,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockFreezeDryer extends BlockBaseContainer implements ITEBlock {
+import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 
-    public static final PropertyDirection FACING;
-
-    static {
-        FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-    }
+@SuppressWarnings("deprecation")
+public class BlockFreezeDryer extends BaseBlockContainer implements ITileBlock {
 
     public BlockFreezeDryer() {
-        super(Material.WOOD);
+        super(Settings.of()
+                .material(Material.WOOD)
+                .nonOpaque()
+                .nonFullCube()
+                .hardness(2F));
 
-        setHardness(2F);
-
-        this.setDefaultState(getBlockState().getBaseState()
-                .withProperty(FACING, EnumFacing.NORTH));
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-
-        return false;
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(HORIZONTAL, EnumFacing.NORTH));
     }
 
     public EnumFacing getFacing(IBlockState state) {
-        return state.getValue(FACING);
+        return state.getValue(HORIZONTAL);
     }
 
     @Override
@@ -73,7 +60,7 @@ public class BlockFreezeDryer extends BlockBaseContainer implements ITEBlock {
             IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
             IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
             IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = state.getValue(FACING);
+            EnumFacing enumfacing = state.getValue(HORIZONTAL);
 
             if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock()) {
                 enumfacing = EnumFacing.SOUTH;
@@ -85,73 +72,63 @@ public class BlockFreezeDryer extends BlockBaseContainer implements ITEBlock {
                 enumfacing = EnumFacing.WEST;
             }
 
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+            worldIn.setBlockState(pos, state.withProperty(HORIZONTAL, enumfacing), 2);
         }
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
+        return new BlockStateContainer(this, HORIZONTAL);
     }
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
-        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+        return state.withProperty(HORIZONTAL, rot.rotate(state.getValue(HORIZONTAL)));
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         EnumFacing enumfacing = EnumFacing.byHorizontalIndex(meta);
-
         if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
             enumfacing = EnumFacing.NORTH;
         }
-
-        return this.getDefaultState().withProperty(FACING, enumfacing);
+        return this.getDefaultState().withProperty(HORIZONTAL, enumfacing);
     }
 
     /**
      * Convert the BlockState into the correct metadata value
      */
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
+        return state.getValue(HORIZONTAL).getIndex();
     }
 
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing,
-                                    float hitX, float hitY, float hitZ) {
-
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
+                                    float hitZ) {
         if (!worldIn.isRemote) {
             GuiHandler.openGui(worldIn, pos, player, GuiHandler.Type.FREEZE_DRYER);
         }
-
         return true;
-
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-
         if (stack.hasDisplayName()) {
-            TileEntity entity = worldIn.getTileEntity(pos);
-
-            if (entity instanceof TEFreezeDryer) {
-                //((TECellarShelf)entity).setCustomName(stack.getDisplayName());
-            }
+            var te = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
+            //te.setCustomName(stack.getDisplayName());
         }
 
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TEFreezeDryer.class);
-        if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+        var te = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
+        if (te != null) {
+            te.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -159,7 +136,7 @@ public class BlockFreezeDryer extends BlockBaseContainer implements ITEBlock {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World world, int i) {
-        return new TEFreezeDryer();
+        return new TileFreezeDryer();
     }
 
     @Override
@@ -168,13 +145,13 @@ public class BlockFreezeDryer extends BlockBaseContainer implements ITEBlock {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/freeze_dryer";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEFreezeDryer.class;
+        return TileFreezeDryer.class;
     }
 
 }

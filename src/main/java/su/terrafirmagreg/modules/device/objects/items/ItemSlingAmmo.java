@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 
 import net.minecraft.item.ItemStack;
 
@@ -8,11 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
-
 import lombok.Getter;
 
-public class ItemSlingAmmo extends ItemBase {
+public class ItemSlingAmmo extends BaseItem {
 
     @Getter
     private final int type;
@@ -24,17 +22,17 @@ public class ItemSlingAmmo extends ItemBase {
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    public Size getSize(ItemStack itemStack) {
         return Size.SMALL;
     }
 
     @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+    public Weight getWeight(ItemStack itemStack) {
         return Weight.LIGHT;
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/sling/ammo/" + name;
     }
 }

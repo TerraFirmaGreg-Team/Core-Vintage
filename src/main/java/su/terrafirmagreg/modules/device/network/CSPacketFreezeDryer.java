@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.network;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TEFreezeDryer;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFreezeDryer;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -52,7 +52,7 @@ public class CSPacketFreezeDryer implements IMessage, IMessageHandler<CSPacketFr
     public IMessage onMessage(CSPacketFreezeDryer msg, MessageContext ctx) {
         if (ctx.side == Side.SERVER) {
             TileEntity tile = ctx.getServerHandler().player.world.getTileEntity(new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord));
-            TEFreezeDryer freezeDryer = (TEFreezeDryer) tile;
+            TileFreezeDryer freezeDryer = (TileFreezeDryer) tile;
 
             if (msg.bool == 0) {
                 if (msg.mode) {

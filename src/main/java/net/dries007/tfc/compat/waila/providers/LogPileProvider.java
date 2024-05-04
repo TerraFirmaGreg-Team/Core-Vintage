@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
+import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,7 +23,7 @@ public class LogPileProvider implements IWailaBlock {
     @NotNull
     @Override
     public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        TELogPile logPile = TileUtils.getTile(world, pos, TELogPile.class);
+        TileLogPile logPile = TileUtils.getTile(world, pos, TileLogPile.class);
         if (logPile != null) {
             IItemHandler inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             ItemStack icon = ItemStack.EMPTY;
@@ -46,7 +46,7 @@ public class LogPileProvider implements IWailaBlock {
     @NotNull
     @Override
     public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TELogPile.class);
+        return Collections.singletonList(TileLogPile.class);
     }
 
     @Override

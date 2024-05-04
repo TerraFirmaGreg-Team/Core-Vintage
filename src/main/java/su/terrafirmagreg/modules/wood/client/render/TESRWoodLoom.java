@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.client.render;
 
-import su.terrafirmagreg.api.spi.render.TESRBase;
+import su.terrafirmagreg.api.spi.render.BaseTESR;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodLoom;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,13 +15,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import org.jetbrains.annotations.NotNull;
-
 @SideOnly(Side.CLIENT)
-public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
+public class TESRWoodLoom extends BaseTESR<TileWoodLoom> {
 
     @Override
-    public void render(TEWoodLoom te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileWoodLoom te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
         GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
@@ -91,7 +89,7 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
     }
 
     @Override
-    public boolean isGlobalRenderer(@NotNull TEWoodLoom te) {
+    public boolean isGlobalRenderer(TileWoodLoom te) {
         return false;
     }
 
@@ -169,19 +167,19 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
     }
 
     private void drawUpper(BufferBuilder b, double z) {
-        double[][] sidesX = TESRBase.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "x");
+        double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "x");
 
         for (double[] v : sidesX) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
         }
 
-        double[][] sidesY = TESRBase.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "y");
+        double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "y");
 
         for (double[] v : sidesY) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
         }
 
-        double[][] sidesZ = TESRBase.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "z");
+        double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.3125, 0.5626 - z, 0.9375, 0.375, 0.625 - z, "z");
 
         for (double[] v : sidesZ) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();
@@ -189,19 +187,19 @@ public class TESRWoodLoom extends TESRBase<TEWoodLoom> {
     }
 
     private void drawLower(BufferBuilder b, double z) {
-        double[][] sidesX = TESRBase.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "x");
+        double[][] sidesX = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "x");
 
         for (double[] v : sidesX) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.0625).endVertex();
         }
 
-        double[][] sidesY = TESRBase.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "y");
+        double[][] sidesY = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "y");
 
         for (double[] v : sidesY) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.0625, v[4] * 0.875).endVertex();
         }
 
-        double[][] sidesZ = TESRBase.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "z");
+        double[][] sidesZ = BaseTESR.getVerticesBySide(0.0625, 0.09375, 0.5626 - z, 0.9375, 0.15625, 0.625 - z, "z");
 
         for (double[] v : sidesZ) {
             b.pos(v[0], v[1], v[2]).tex(v[3] * 0.875, v[4] * 0.0625).endVertex();

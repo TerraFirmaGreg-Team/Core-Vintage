@@ -2,7 +2,7 @@ package BananaFructa.TowerHeat;
 
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBlastFurnace;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -31,7 +31,7 @@ import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTOWERHEAT;
 public class TowerHeat {
 
     public static final String name = "TFC TowerHeat";
-    TEBlastFurnace cachedBlastFurnace = null;
+    TileBlastFurnace cachedBlastFurnace = null;
     List<Float> tempList = new ArrayList<>();
     long lastBurningTicks = 0;
 

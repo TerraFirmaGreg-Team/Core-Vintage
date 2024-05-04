@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItem;
@@ -12,12 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
-
 import lombok.Getter;
 
 @Getter
-public class ItemSoilPile extends ItemBase implements ISoilItem {
+public class ItemSoilPile extends BaseItem implements ISoilItem {
 
     private final SoilItemVariant itemVariant;
     private final SoilType type;
@@ -33,15 +31,13 @@ public class ItemSoilPile extends ItemBase implements ISoilItem {
         OreDictUtils.register(this, itemVariant);
     }
 
-    @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.SMALL;
     }
 
-    @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.VERY_LIGHT;
     }
 

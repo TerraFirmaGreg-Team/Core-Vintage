@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -26,22 +26,22 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
-import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.SLOT_EXTRA_INPUT_END;
-import static su.terrafirmagreg.modules.device.objects.tiles.TEFirePit.SLOT_EXTRA_INPUT_START;
+import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_END;
+import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_START;
 
 /**
  * Render water in the cooking pot
  */
 
 @SideOnly(Side.CLIENT)
-public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit> {
+public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
 
     @Override
-    public void render(TEFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
         // Rendering liquid in the soup pot
-        if (te.getCookingPotStage() != TEFirePit.CookingPotStage.EMPTY) {
+        if (te.getCookingPotStage() != TileFirePit.CookingPotStage.EMPTY) {
             Fluid water = FluidsTFC.FRESH_WATER.get();
 
             GlStateManager.pushMatrix();
@@ -61,7 +61,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TEFirePit> {
             float b = (color & 0xFF) / 255F;
             float a = ((color >> 24) & 0xFF) / 255F;
 
-            if (te.getCookingPotStage() == TEFirePit.CookingPotStage.FINISHED) {
+            if (te.getCookingPotStage() == TileFirePit.CookingPotStage.FINISHED) {
                 b = 0;
                 g /= 4;
                 r *= 3;

@@ -8,8 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemMetalFlask extends ItemFlask {
 
     protected static int capacity = ModuleDeviceConfig.ITEMS.WATER_FLASKS.ironCap;
@@ -20,17 +18,17 @@ public class ItemMetalFlask extends ItemFlask {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/flask/metal";
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.NORMAL;
     }
 
     @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.HEAVY;
     }
 

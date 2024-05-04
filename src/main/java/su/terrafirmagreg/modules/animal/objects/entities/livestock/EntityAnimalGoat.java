@@ -30,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**
- * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one
- * individual, but produce milk once every 3 days
+ * A Cow of the colder regions! Actually, goats also reach maturity + finish gestation faster than cows, and even give birth to more than one individual, but produce milk once
+ * every 3 days
  */
 
 public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {

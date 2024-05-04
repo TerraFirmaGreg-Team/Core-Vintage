@@ -75,25 +75,27 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
 
     // Fix #12 by actually implementing the MC function that limits stack sizes
     @Override
-    public int getItemStackLimit(@NotNull ItemStack stack) {
+    public int getItemStackLimit(ItemStack stack) {
         return getStackSize(stack);
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.SMALL;
     }
 
     @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.MEDIUM;
     }
 
     @Override
-    public boolean canStack(@NotNull ItemStack stack) {return false;}
+    public boolean canStack(ItemStack stack) {
+        return false;
+    }
 
     @Override
-    public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new FluidWhitelistHandlerComplex(stack, capacity, FluidsTFC.getAllWrappers()
                 .stream()
                 .filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
@@ -133,8 +135,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
     }
 
     /**
-     * Returns the packed int RGB value used to render the durability bar in the GUI. Retrieves no-alpha RGB color from liquid to use in durability
-     * bar
+     * Returns the packed int RGB value used to render the durability bar in the GUI. Retrieves no-alpha RGB color from liquid to use in durability bar
      *
      * @param stack Stack to get color from
      * @return A packed RGB value for the durability colour (0x00RRGGBB)
@@ -154,7 +155,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, EntityPlayer player, @NotNull EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty()) {
             // Do not use in creative game mode
@@ -204,7 +205,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
 
     @Override
     @NotNull
-    public ItemStack onItemUseFinish(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull EntityLivingBase entityLiving) {
+    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
         IFluidHandler flaskCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (flaskCap != null) {
             FluidStack total = flaskCap.drain(capacity, false);
@@ -238,18 +239,18 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
 
     @Override
     @NotNull
-    public EnumAction getItemUseAction(@NotNull ItemStack stack) {
+    public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.DRINK;
     }
 
     @Override
-    public int getMaxItemUseDuration(@NotNull ItemStack stack) {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 32;
     }
 
     @Override
     @NotNull
-    public String getItemStackDisplayName(@NotNull ItemStack stack) {
+    public String getItemStackDisplayName(ItemStack stack) {
         IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (bucketCap != null) {
             FluidStack fluidStack = bucketCap.drain(capacity, false);
@@ -263,7 +264,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
     }
 
     @Override
-    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (isInCreativeTab(tab)) {
             items.add(new ItemStack(this));
             //			for (FluidWrapper wrapper : FluidsTFC.getAllWrappers()) {

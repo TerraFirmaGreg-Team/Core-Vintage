@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
-import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
+import su.terrafirmagreg.api.spi.container.BaseContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil.*;
 
-public class ContainerAnvilTFC extends ContainerBaseTE<TEMetalAnvil> implements IButtonHandler {
+public class ContainerAnvilTFC extends BaseContainerTile<TEMetalAnvil> implements IButtonHandler {
 
     public ContainerAnvilTFC(InventoryPlayer playerInv, TEMetalAnvil te) {
         super(playerInv, te, 26);

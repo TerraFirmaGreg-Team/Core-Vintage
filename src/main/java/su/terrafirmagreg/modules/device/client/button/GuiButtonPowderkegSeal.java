@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.client.button;
 
-import su.terrafirmagreg.api.spi.button.GuiButtonBase;
+import su.terrafirmagreg.api.spi.button.BaseGuiButton;
 import su.terrafirmagreg.api.spi.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPowderKeg;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePowderKeg;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,11 +13,11 @@ import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg.BACKGROUND;
 
-public class GuiButtonPowderkegSeal extends GuiButtonBase implements IButtonTooltip {
+public class GuiButtonPowderkegSeal extends BaseGuiButton implements IButtonTooltip {
 
-    private final TEPowderKeg tile;
+    private final TilePowderKeg tile;
 
-    public GuiButtonPowderkegSeal(TEPowderKeg tile, int buttonId, int guiTop, int guiLeft) {
+    public GuiButtonPowderkegSeal(TilePowderKeg tile, int buttonId, int guiTop, int guiLeft) {
         super(buttonId, guiLeft + 123, guiTop + 35, 20, 20, "");
         this.tile = tile;
     }

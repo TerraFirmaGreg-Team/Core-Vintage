@@ -16,14 +16,14 @@ import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 @Container
 public enum Modules implements IStringSerializable, IModuleContainer {
 
-    Module_Core(true),
-    Module_Rock(true),
-    Module_Soil(true),
-    Module_Wood(true),
-    Module_Metal(false),
-    Module_Animal(true),
-    Module_Device(true),
-    Module_WorldGen(true);
+    Core(true),
+    Rock(true),
+    Soil(true),
+    Wood(true),
+    Metal(false),
+    Animal(true),
+    Device(true),
+    WorldGen(true);
 
     // TODO переделать с enum на статические финальные поля
 

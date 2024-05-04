@@ -39,7 +39,6 @@ import java.util.Random;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
-
 public class BlockRockVariant extends Block implements IItemSize {
 
     private static final Map<Rock, EnumMap<Rock.Type, BlockRockVariant>> TABLE = new HashMap<>();

@@ -1,17 +1,17 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
-import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
+import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
+import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -24,6 +24,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -37,18 +38,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@MethodsReturnNonnullByDefault
-public class BlockLogPile extends BlockBase implements ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockLogPile extends BaseBlockContainer implements ITileBlock {
 
     private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis",
             EnumFacing.Axis.class,
@@ -57,27 +56,21 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     );
 
     public BlockLogPile() {
-        super(Material.WOOD);
+        super(Settings.of()
+                .material(Material.WOOD)
+                .soundType(SoundType.WOOD)
+                .hardness(2.0F));
 
-        setHardness(2.0F);
-        setSoundType(SoundType.WOOD);
         setTickRandomly(true);
         setHarvestLevel("axe", 0);
-        this.setDefaultState(this.getDefaultState()
-                .withProperty(AXIS, EnumFacing.Axis.X)
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(AXIS, EnumFacing.Axis.Z)
                 .withProperty(LIT, false));
     }
 
-    // A simplified check for display (Patchouli) purposes
-    public static boolean isValidCoverBlock(IBlockState state) {
-        if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == BlocksDevice.CHARCOAL_PILE) {
-            return true;
-        } else if (ConfigTFC.Devices.CHARCOAL_PIT.canAcceptGlass) {
-            return state.getMaterial() == Material.GLASS &&
-                    !(state.getBlock() instanceof BlockPane); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
-        }
-        return !state.getMaterial()
-                .getCanBurn() && state.isNormalCube(); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
@@ -92,7 +85,6 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
                 .withProperty(AXIS, meta == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X)
@@ -135,11 +127,10 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
             worldIn.setBlockState(pos, state.withProperty(LIT, true));
-            var tile = TileUtils.getTile(worldIn, pos, TELogPile.class);
+            var tile = TileUtils.getTile(worldIn, pos, TileLogPile.class);
             if (tile != null) {
                 tile.light();
             }
@@ -147,9 +138,8 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
-        var tile = TileUtils.getTile(world, pos, TELogPile.class);
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+        var tile = TileUtils.getTile(world, pos, TileLogPile.class);
         if (tile != null) {
             // Special Interactions
             // 1. Try and put a log inside (happens on right click event when sneaking)
@@ -203,9 +193,7 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         if (placer.getHorizontalFacing().getAxis().isHorizontal()) {
             return getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
         }
@@ -215,7 +203,7 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         // This can't use breakBlock as it needs to not drop when broken in order to create a charcoal pile
-        if (!worldIn.isRemote && te instanceof TEBaseInventory tile) {
+        if (!worldIn.isRemote && te instanceof BaseTileInventory tile) {
             tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
@@ -237,24 +225,13 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TELogPile();
-    }
-
-    @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         drops.clear();
     }
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        var tile = TileUtils.getTile(world, pos, TELogPile.class);
+        var tile = TileUtils.getTile(world, pos, TileLogPile.class);
         if (tile != null) {
             return tile.getLog().copy();
         }
@@ -263,11 +240,16 @@ public class BlockLogPile extends BlockBase implements ITEBlock {
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TELogPile.class;
+        return TileLogPile.class;
     }
 
     @Override
-    public @NotNull String getName() {
+    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileLogPile();
+    }
+
+    @Override
+    public String getName() {
         return "device/log_pile";
     }
 }

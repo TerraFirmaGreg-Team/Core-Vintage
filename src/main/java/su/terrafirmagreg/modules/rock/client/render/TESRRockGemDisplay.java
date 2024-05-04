@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.rock.client.model.ModelGemExquisite;
 import su.terrafirmagreg.modules.rock.client.model.ModelGemFlawed;
 import su.terrafirmagreg.modules.rock.client.model.ModelGemFlawless;
 import su.terrafirmagreg.modules.rock.client.model.ModelGemNormal;
-import su.terrafirmagreg.modules.rock.objects.tiles.TERockGemDisplay;
+import su.terrafirmagreg.modules.rock.objects.tiles.TileRockGemDisplay;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -20,7 +20,7 @@ import net.dries007.tfc.objects.items.ItemGem;
 
 import java.util.ArrayList;
 
-public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TERockGemDisplay> {
+public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TileRockGemDisplay> {
 
     private static final float[][][] ITEM_LOCATION = new float[4][8][3];
 
@@ -68,7 +68,7 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TERockGemDispl
 
     public TESRRockGemDisplay() {}
 
-    public void render(TERockGemDisplay te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileRockGemDisplay te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         int dir = te.getBlockMetadata();
         float blockScale = 0.5F;
         ArrayList<Vec3d> location = getLocation(te);
@@ -98,7 +98,7 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TERockGemDispl
 
     }
 
-    private ArrayList<Vec3d> getLocation(TERockGemDisplay te) {
+    private ArrayList<Vec3d> getLocation(TileRockGemDisplay te) {
         switch (Gem.Grade.valueOf(te.getGrade())) {
             case EXQUISITE:
                 return EXQUISITE_LOCATION;
@@ -113,7 +113,7 @@ public class TESRRockGemDisplay extends TileEntitySpecialRenderer<TERockGemDispl
         }
     }
 
-    private ModelGemBase getModel(TERockGemDisplay te) {
+    private ModelGemBase getModel(TileRockGemDisplay te) {
         switch (Gem.Grade.valueOf(te.getGrade())) {
             case EXQUISITE:
                 return EXQUISITE_MODEL;

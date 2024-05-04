@@ -34,11 +34,13 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
     private final String name;
     private final float baseHardness;
     private final Specification specification;
+    private final BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
 
     private RockBlockVariant(Builder builder) {
         this.name = builder.name;
         this.baseHardness = builder.baseHardness;
         this.specification = builder.specification;
+        this.factory = builder.factory;
 
         if (name.isEmpty())
             throw new RuntimeException(String.format("RockBlockVariant name must contain any character: [%s]", name));
@@ -47,7 +49,7 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
             throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
 
         for (var type : RockType.getTypes()) {
-            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), builder.factory.apply(this, type)) != null)
+            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 
             if (builder.hasStoneType) createStoneType(idCounter.getAndIncrement(), type);
@@ -69,6 +71,10 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
         throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
     }
 
+    //    public Block get(RockType type) {
+    //        return BlocksRock.ROCK_BLOCKS2.get(this).get(type);
+    //    }
+
     @Override
     public String toString() {
         return name;
@@ -76,6 +82,10 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
     public boolean canFall() {
         return specification != null;
+    }
+
+    public Block create(RockType type) {
+        return factory.apply(this, type);
     }
 
     public void createStoneType(int id, RockType type) {

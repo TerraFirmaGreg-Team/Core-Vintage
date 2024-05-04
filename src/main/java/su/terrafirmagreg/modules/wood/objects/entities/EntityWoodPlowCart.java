@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
-import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodPlowCart;
+import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodPlowCart;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

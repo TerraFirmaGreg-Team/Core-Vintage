@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -21,24 +21,24 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 @SideOnly(Side.CLIENT)
-public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln> {
+public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
 
     private static final ResourceLocation THATCH = ModUtils.id("textures/blocks/thatch.png");
     private static final ResourceLocation BARK = ModUtils.id("textures/blocks/wood/log/oak.png");
-    private static final ModelStraw[] STRAW = new ModelStraw[TEPitKiln.STRAW_NEEDED];
+    private static final ModelStraw[] STRAW = new ModelStraw[TilePitKiln.STRAW_NEEDED];
     private static final int LOG_ROWS = 2;
-    private static final int LOGS_PER_ROW = TEPitKiln.WOOD_NEEDED / LOG_ROWS;
+    private static final int LOGS_PER_ROW = TilePitKiln.WOOD_NEEDED / LOG_ROWS;
     private static final ModelLog LOG = new ModelLog();
     private static final float SCALE = 1f / 16f;
 
     static {
-        for (int i = 0; i < TEPitKiln.STRAW_NEEDED; i++) {
+        for (int i = 0; i < TilePitKiln.STRAW_NEEDED; i++) {
             STRAW[i] = new ModelStraw(i);
         }
     }
 
     @Override
-    public void render(TEPitKiln te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TilePitKiln te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
         World world = te.getWorld();
         //noinspection ConstantConditions

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.inventory.capability;
 
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodChest;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -58,22 +58,22 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
 
     @Override
     public int getSlots() {
-        return TEWoodChest.SIZE * 2;
+        return TileWoodChest.SIZE * 2;
     }
 
     @Override
     @NotNull
     public ItemStack getStackInSlot(int slot) {
-        boolean accessingUpperChest = slot < TEWoodChest.SIZE;
-        int targetSlot = accessingUpperChest ? slot : slot - TEWoodChest.SIZE;
+        boolean accessingUpperChest = slot < TileWoodChest.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TileWoodChest.SIZE;
         TileEntityChest chest = getChest(accessingUpperChest);
         return chest != null ? chest.getStackInSlot(targetSlot) : ItemStack.EMPTY;
     }
 
     @Override
     public void setStackInSlot(int slot, @NotNull ItemStack stack) {
-        boolean accessingUpperChest = slot < TEWoodChest.SIZE;
-        int targetSlot = accessingUpperChest ? slot : slot - TEWoodChest.SIZE;
+        boolean accessingUpperChest = slot < TileWoodChest.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TileWoodChest.SIZE;
         TileEntityChest chest = getChest(accessingUpperChest);
         if (chest != null) {
             IItemHandler singleHandler = chest.getSingleChestHandler();
@@ -91,8 +91,8 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
     @Override
     @NotNull
     public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-        boolean accessingUpperChest = slot < TEWoodChest.SIZE;
-        int targetSlot = accessingUpperChest ? slot : slot - TEWoodChest.SIZE;
+        boolean accessingUpperChest = slot < TileWoodChest.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TileWoodChest.SIZE;
         TileEntityChest chest = getChest(accessingUpperChest);
         if (chest == null) {
             return stack;
@@ -116,8 +116,8 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
     @Override
     @NotNull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        boolean accessingUpperChest = slot < TEWoodChest.SIZE;
-        int targetSlot = accessingUpperChest ? slot : slot - TEWoodChest.SIZE;
+        boolean accessingUpperChest = slot < TileWoodChest.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TileWoodChest.SIZE;
         TileEntityChest chest = getChest(accessingUpperChest);
         if (chest == null) {
             return ItemStack.EMPTY;
@@ -136,15 +136,15 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
 
     @Override
     public int getSlotLimit(int slot) {
-        boolean accessingUpperChest = slot < TEWoodChest.SIZE;
+        boolean accessingUpperChest = slot < TileWoodChest.SIZE;
         //noinspection ConstantConditions
         return getChest(accessingUpperChest).getInventoryStackLimit();
     }
 
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        boolean accessingUpperChest = slot < TEWoodChest.SIZE;
-        int targetSlot = accessingUpperChest ? slot : slot - TEWoodChest.SIZE;
+        boolean accessingUpperChest = slot < TileWoodChest.SIZE;
+        int targetSlot = accessingUpperChest ? slot : slot - TileWoodChest.SIZE;
         TileEntityChest chest = getChest(accessingUpperChest);
         if (chest != null) {
             return chest.getSingleChestHandler().isItemValid(targetSlot, stack);

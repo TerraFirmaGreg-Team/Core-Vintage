@@ -11,7 +11,7 @@ public class LateMixinLoader implements ILateMixinLoader {
     public List<String> getMixinConfigs() {
         final var someList = new ArrayList<String>();
 
-        someList.add("mixins.tfg.json");
+        //        someList.add("mixins.tfg.json");
 
         return someList;
     }

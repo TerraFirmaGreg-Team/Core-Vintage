@@ -1,20 +1,19 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.model.ICustomState;
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
@@ -43,9 +42,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import com.google.common.collect.ImmutableMap;
-import mcp.MethodsReturnNonnullByDefault;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -54,8 +51,8 @@ import static net.dries007.tfc.objects.blocks.BlockPlacedItem.PLACED_ITEM_AABB;
 import static su.terrafirmagreg.api.util.PropertyUtils.FULL;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-@MethodsReturnNonnullByDefault
-public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
+@SuppressWarnings("deprecation")
+public class BlockPitKiln extends BaseBlock implements ITileBlock, ICustomState {
 
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[] {
             PLACED_ITEM_AABB,
@@ -72,26 +69,28 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
     };
 
     public BlockPitKiln() {
-        super(Material.CIRCUITS);
-        setHardness(0.5f);
-        setDefaultState(blockState.getBaseState()
+        super(Settings.of()
+                .material(Material.CIRCUITS)
+                .nonFullCube()
+                .nonOpaque()
+                .hardness(0.5f));
+
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(FULL, false)
                 .withProperty(LIT, false));
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
+    public @Nullable BaseItemBlock getItemBlock() {
         return null;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isTopSolid(IBlockState state) {
         return state.getValue(FULL);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(LIT, (meta & 1) > 0).withProperty(FULL, (meta & 2) > 0);
     }
@@ -102,21 +101,13 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return true;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        TEPitKiln tile = TileUtils.getTile(source, pos, TEPitKiln.class);
+        TilePitKiln tile = TileUtils.getTile(source, pos, TilePitKiln.class);
         if (tile != null) {
             int height = tile.getStrawCount();
             if (tile.getLogCount() > 4) {
@@ -130,21 +121,8 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        TEPitKiln te = TileUtils.getTile(worldIn, pos, TEPitKiln.class);
+        TilePitKiln te = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
         if (te != null) {
             if (blockIn == Blocks.FIRE) {
                 te.tryLight();
@@ -161,23 +139,21 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEPitKiln te = TileUtils.getTile(worldIn, pos, TEPitKiln.class);
+        TilePitKiln te = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
 
-    @NotNull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.AIR;
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
-        TEPitKiln te = TileUtils.getTile(worldIn, pos, TEPitKiln.class);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        TilePitKiln te = TileUtils.getTile(worldIn, pos, TilePitKiln.class);
         if (te != null) {
             // Skip interacting if using a fire starter (wait for fire in #neighborChanged)
             if (ItemFireStarter.canIgnite(playerIn.getHeldItem(hand))) {
@@ -194,7 +170,6 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return state.getActualState(world, pos).getValue(FULL);
     }
@@ -211,9 +186,7 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
 
     @Override
     public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
-        return world.getBlockState(pos)
-                .getActualState(world, pos)
-                .getValue(LIT) ? 120 : 0; // Twice as much as the highest vanilla level (60)
+        return world.getBlockState(pos).getActualState(world, pos).getValue(LIT) ? 120 : 0; // Twice as much as the highest vanilla level (60)
     }
 
     @Override
@@ -222,19 +195,12 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEPitKiln();
+    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TilePitKiln();
     }
 
     @Override
-    public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate,
-                                     EntityLivingBase entity, int numberOfParticles) {
+    public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
         return true;
     }
 
@@ -262,13 +228,13 @@ public class BlockPitKiln extends BlockBase implements ITEBlock, ICustomState {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/pit_kiln";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEPitKiln.class;
+        return TilePitKiln.class;
     }
 
     @Override

@@ -33,8 +33,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 /**
- * A Sheep of the colder regions! Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give
- * birth to one individual
+ * A Sheep of the colder regions! Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give birth to one individual
  */
 
 public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock {

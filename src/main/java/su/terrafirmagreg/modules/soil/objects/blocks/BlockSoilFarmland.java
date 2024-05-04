@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -76,7 +76,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
                 .withProperty(BlockFarmland.MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     }
 
-    protected static void turnToDirt(World world, @NotNull BlockPos pos) {
+    protected static void turnToDirt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
         if (block instanceof ISoilBlock soilBlockVariant) {
             var soil = soilBlockVariant.getType();
@@ -96,8 +96,8 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     @Override

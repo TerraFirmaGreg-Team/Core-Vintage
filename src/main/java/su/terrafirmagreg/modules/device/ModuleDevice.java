@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.EntitiesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.Module_Device;
+import static su.terrafirmagreg.modules.Modules.Device;
 
-@Module(moduleID = Module_Device)
+@Module(moduleID = Device)
 public final class ModuleDevice extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleDevice.class.getSimpleName());
-    public static final CreativeTabs DEVICES_TAB = new CreativeTabBase("device", "device/firestarter");
+    public static final CreativeTabs DEVICES_TAB = new BaseCreativeTab("device", "device/firestarter");
 
     public static IPacketService PACKET_SERVICE;
 

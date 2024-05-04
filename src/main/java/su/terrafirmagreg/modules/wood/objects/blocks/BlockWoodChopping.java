@@ -78,7 +78,7 @@ public class BlockWoodChopping extends BlockWoodChoppingBase {
         return 0;
     }
 
-    public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return COLLISION_AABB;
     }
 

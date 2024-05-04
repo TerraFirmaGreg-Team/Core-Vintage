@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -51,20 +51,20 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        //        return this.getType().getRockCategory().isHasAnvil() ? new ItemBlockBase(this) : null;
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        //        return this.getType().getRockCategory().isHasAnvil() ? new BaseItemBlock(this) : null;
+        return new BaseItemBlock(this);
     }
 
     @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.SMALL;
     }
 
     @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.LIGHT;
     }
 
@@ -77,7 +77,7 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation(

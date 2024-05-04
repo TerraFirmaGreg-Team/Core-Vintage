@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.model.ICustomState;
-import su.terrafirmagreg.api.spi.block.BlockBaseSlab;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -10,21 +11,12 @@ import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSlab;
 
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import java.util.Random;
-
 @Getter
-public abstract class BlockSoilMudSlab extends BlockBaseSlab implements ISoilBlock, ICustomState {
+public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlock, ICustomState {
 
     private final SoilBlockVariant blockVariant;
     private final SoilType type;
@@ -34,31 +26,21 @@ public abstract class BlockSoilMudSlab extends BlockBaseSlab implements ISoilBlo
     protected Double doubleSlab;
 
     private BlockSoilMudSlab(SoilBlockVariant model, SoilBlockVariant blockVariant, SoilType type) {
-        super(Material.GROUND);
+        super(Settings.of()
+                .material(Material.GROUND)
+                .soundType(SoundType.GROUND));
 
         this.blockVariant = blockVariant;
         this.type = type;
         this.block = model.get(type);
 
-        setSoundType(SoundType.GROUND);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
     }
 
     @Override
     public void onRegisterOreDict() {
         OreDictUtils.register(this, "slab");
         OreDictUtils.register(this, "slab", "mud", "bricks");
-    }
-
-    @Override
-    public @Nullable ItemBlock getItemBlock() {
-        return this.isDouble() ? null : new ItemSlab(this.halfSlab, this.halfSlab, this.halfSlab.doubleSlab);
-    }
-
-    @Override
-    @NotNull
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
-        return Item.getItemFromBlock(halfSlab);
     }
 
     public static class Double extends BlockSoilMudSlab {
@@ -71,6 +53,12 @@ public abstract class BlockSoilMudSlab extends BlockBaseSlab implements ISoilBlo
         public boolean isDouble() {
             return true;
         }
+
+        @Override
+        public Double getDoubleSlab() {
+            return this;
+        }
+
     }
 
     public static class Half extends BlockSoilMudSlab {
@@ -86,6 +74,11 @@ public abstract class BlockSoilMudSlab extends BlockBaseSlab implements ISoilBlo
         @Override
         public boolean isDouble() {
             return false;
+        }
+
+        @Override
+        public Half getHalfSlab() {
+            return this;
         }
 
     }

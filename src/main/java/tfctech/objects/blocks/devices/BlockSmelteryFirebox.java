@@ -2,7 +2,7 @@ package tfctech.objects.blocks.devices;
 
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -210,7 +210,7 @@ public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsCon
 
     @Override
     public boolean canIntakeFrom(@NotNull Vec3i offset, @NotNull EnumFacing direction) {
-        return offset.equals(TEBellows.OFFSET_LEVEL);
+        return offset.equals(TileBellows.OFFSET_LEVEL);
     }
 
     @Override

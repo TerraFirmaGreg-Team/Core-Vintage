@@ -152,7 +152,7 @@ public class MCColor extends Color {
      *
      * @param colors The array to construct a color from.
      */
-    public MCColor(@NotNull int[] colors) {
+    public MCColor(int[] colors) {
 
         this(colors[0], colors[1], colors[2]);
     }
@@ -209,8 +209,8 @@ public class MCColor extends Color {
     }
 
     /**
-     * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is
-     * deemed acceptable by {@link #isAcceptable(NBTTagCompound)}.
+     * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is deemed acceptable by
+     * {@link #isAcceptable(NBTTagCompound)}.
      *
      * @param stack The ItemStack to check.
      * @return Whether or not the ItemStack was acceptable.
@@ -233,25 +233,24 @@ public class MCColor extends Color {
     }
 
     /**
-     * Checks if a tile entity is acceptable. For a TileEntity to be acceptable, it must not be null or invalid, and must have an NBTTagCompound which
-     * is deemed acceptable by {@link #isAcceptable(NBTTagCompound)}.
+     * Checks if a tile entity is acceptable. For a TileEntity to be acceptable, it must not be null or invalid, and must have an NBTTagCompound which is deemed acceptable by
+     * {@link #isAcceptable(NBTTagCompound)}.
      *
      * @param tile The TileEntity to check.
      * @return Whether or not the TileEntity was acceptable.
      */
-    public static boolean isAcceptable(@NotNull TileEntity tile) {
+    public static boolean isAcceptable(TileEntity tile) {
 
         return tile != null && !tile.isInvalid() && isAcceptable(tile.getTileData());
     }
 
     /**
-     * Checks if a NBTTagCompound is acceptable. For an NBTTagCompound to be acceptable, it must not be null, and must have an integer array named
-     * Color with 3 elements.
+     * Checks if a NBTTagCompound is acceptable. For an NBTTagCompound to be acceptable, it must not be null, and must have an integer array named Color with 3 elements.
      *
      * @param tag The NBTTagCompound to check.
      * @return Whether or not the ItemStack was acceptable.
      */
-    public static boolean isAcceptable(@NotNull NBTTagCompound tag) {
+    public static boolean isAcceptable(NBTTagCompound tag) {
 
         return tag.hasKey("Color") && tag.getIntArray("Color").length == 3;
     }
@@ -261,7 +260,7 @@ public class MCColor extends Color {
      *
      * @param stack The ItemStack to write the color data to.
      */
-    public void writeToStack(@NotNull ItemStack stack) {
+    public void writeToStack(ItemStack stack) {
 
         this.writeToNBT(stack.getTagCompound());
     }
@@ -271,7 +270,7 @@ public class MCColor extends Color {
      *
      * @param tag The NBTTagCompound to write the color data to.
      */
-    public void writeToNBT(@NotNull NBTTagCompound tag) {
+    public void writeToNBT(NBTTagCompound tag) {
 
         tag.setIntArray("Color", new int[] { this.getRed(), this.getGreen(), this.getBlue() });
     }

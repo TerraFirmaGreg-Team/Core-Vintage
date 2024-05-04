@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItem;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 
 @Getter
-public class ItemSoilMudBrick extends ItemBase implements ISoilItem {
+public class ItemSoilMudBrick extends BaseItem implements ISoilItem {
 
     private final SoilItemVariant itemVariant;
     private final SoilType type;
@@ -34,13 +34,13 @@ public class ItemSoilMudBrick extends ItemBase implements ISoilItem {
 
     @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.SMALL; // Stored everywhere
     }
 
     @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.LIGHT; // Stacksize = 32
     }
 }

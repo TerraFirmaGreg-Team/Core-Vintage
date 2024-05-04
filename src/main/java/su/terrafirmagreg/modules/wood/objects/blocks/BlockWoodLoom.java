@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBaseContainer;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -9,13 +9,12 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodLoom;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodLoom;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodLoom;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -35,7 +34,6 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -43,7 +41,8 @@ import lombok.Getter;
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 
 @Getter
-public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITileBlock {
 
     protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
     protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);
@@ -54,16 +53,20 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
     private final WoodType type;
 
     public BlockWoodLoom(WoodBlockVariant blockVariant, WoodType type) {
-        super(Material.WOOD, MapColor.AIR);
+        super(Settings.of()
+                .material(Material.WOOD)
+                .mapColor(MapColor.AIR)
+                .soundType(SoundType.WOOD)
+                .nonOpaque()
+                .nonFullCube()
+                .hardness(0.5f)
+                .resistance(3f));
 
         this.blockVariant = blockVariant;
         this.type = type;
 
-        setSoundType(SoundType.WOOD);
         setHarvestLevel("axe", 0);
-        setHardness(0.5f);
-        setResistance(3f);
-        setDefaultState(this.blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
         BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
@@ -74,27 +77,22 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
         OreDictUtils.register(this, blockVariant, type);
     }
 
-    @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.LARGE;
     }
 
-    @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.VERY_HEAVY;
     }
 
-    @Nullable
     @Override
-    public TileEntity createNewTileEntity(@NotNull World worldIn, int meta) {
-        return new TEWoodLoom();
+    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileWoodLoom();
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.byHorizontalIndex(meta));
     }
@@ -105,15 +103,7 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return switch (state.getValue(BlockHorizontal.FACING)) {
             default -> LOOM_NORTH_AABB;
             case SOUTH -> LOOM_SOUTH_AABB;
@@ -123,34 +113,16 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
-                                            @NotNull EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var tile = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
-        if (tile != null) {
-            return tile.onRightClick(playerIn);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        var te = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
+        if (te != null) {
+            return te.onRightClick(playerIn);
         }
         return true;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-                                            int meta, @NotNull EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
@@ -158,30 +130,27 @@ public class BlockWoodLoom extends BlockBaseContainer implements IWoodBlock, ITE
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, HORIZONTAL);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public EnumBlockRenderType getRenderType(@NotNull IBlockState state) {
+    public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
 
     @Override
-    public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TEWoodLoom.class);
-        if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        var te = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
+        if (te != null) {
+            te.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEWoodLoom.class;
+        return TileWoodLoom.class;
     }
 
     @Override

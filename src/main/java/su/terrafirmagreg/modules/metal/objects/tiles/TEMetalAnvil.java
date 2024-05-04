@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
-import su.terrafirmagreg.api.spi.tile.TEBaseInventory;
+import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -45,7 +45,7 @@ import java.util.List;
 
 // TODO делать отдельный класс для каменной наковали, без интерфейса
 
-public class TEMetalAnvil extends TEBaseInventory {
+public class TEMetalAnvil extends BaseTileInventory {
 
     public static final int WORK_MAX = 145;
     public static final int SLOT_INPUT_1 = 0;
@@ -142,7 +142,7 @@ public class TEMetalAnvil extends TEBaseInventory {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt) {
+    public void readFromNBT(@NotNull NBTTagCompound nbt) {
         String recipe = nbt.getString("recipe");
         if (StringUtils.isNullOrEmpty(recipe)) {
             this.recipe = null;
@@ -158,7 +158,7 @@ public class TEMetalAnvil extends TEBaseInventory {
     @SuppressWarnings("ConstantConditions")
     @NotNull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
         if (recipe != null) {
             NBTUtils.setGenericNBTValue(nbt, "recipe", this.recipe.getRegistryName().toString());
         }

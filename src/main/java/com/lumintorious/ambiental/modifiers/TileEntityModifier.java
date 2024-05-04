@@ -1,9 +1,9 @@
 package com.lumintorious.ambiental.modifiers;
 
 import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTemperature;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
-import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBloomery;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCharcoalForge;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -33,8 +33,8 @@ public class TileEntityModifier extends BlockModifier {
     }
 
     public static TileEntityModifier handleCharcoalForge(TileEntity tile, EntityPlayer player) {
-        if (tile instanceof TECharcoalForge forge) {
-            float temp = forge.getField(TECharcoalForge.FIELD_TEMPERATURE);
+        if (tile instanceof TileCharcoalForge forge) {
+            float temp = forge.getField(TileCharcoalForge.FIELD_TEMPERATURE);
             float change = temp / 140f;
             float potency = temp / 350f;
             if (hasProtection(player)) {
@@ -47,8 +47,8 @@ public class TileEntityModifier extends BlockModifier {
     }
 
     public static TileEntityModifier handleFirePit(TileEntity tile, EntityPlayer player) {
-        if (tile instanceof TEFirePit pit) {
-            float temp = pit.getField(TEFirePit.FIELD_TEMPERATURE);
+        if (tile instanceof TileFirePit pit) {
+            float temp = pit.getField(TileFirePit.FIELD_TEMPERATURE);
             float change = temp / 100f;
             float potency = temp / 350f;
             if (hasProtection(player)) {
@@ -61,7 +61,7 @@ public class TileEntityModifier extends BlockModifier {
     }
 
     public static TileEntityModifier handleBloomery(TileEntity tile, EntityPlayer player) {
-        if (tile instanceof TEBloomery bloomery) {
+        if (tile instanceof TileBloomery bloomery) {
             float change = bloomery.getRemainingTicks() > 0 ? 4f : 0f;
             float potency = change;
             if (hasProtection(player)) {

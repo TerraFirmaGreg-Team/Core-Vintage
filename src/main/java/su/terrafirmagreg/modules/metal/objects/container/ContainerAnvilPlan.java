@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
-import su.terrafirmagreg.api.spi.container.ContainerBaseTE;
+import su.terrafirmagreg.api.spi.container.BaseContainerTile;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,7 +15,7 @@ import net.dries007.tfc.objects.container.IButtonHandler;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ContainerAnvilPlan extends ContainerBaseTE<TEMetalAnvil> implements IButtonHandler {
+public class ContainerAnvilPlan extends BaseContainerTile<TEMetalAnvil> implements IButtonHandler {
 
     public ContainerAnvilPlan(InventoryPlayer playerInv, TEMetalAnvil tile) {
         super(playerInv, tile);

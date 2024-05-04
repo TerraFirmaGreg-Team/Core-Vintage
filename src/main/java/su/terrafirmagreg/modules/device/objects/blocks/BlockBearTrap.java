@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBearTrap;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBearTrap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -37,64 +37,47 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
-public class BlockBearTrap extends BlockBase implements ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockBearTrap extends BaseBlock implements ITileBlock {
 
     protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
     public BlockBearTrap() {
-        super(Material.IRON);
+        super(Settings.of()
+                .material(Material.IRON)
+                .hardness(10.0F)
+                .resistance(10.0F)
+                .nonOpaque()
+                .nonFullCube()
+                .size(Size.LARGE)
+                .weight(Weight.HEAVY));
 
-        this.setHardness(10.0F);
-        this.setResistance(10.0F);
-        this.setHarvestLevel("pickaxe", 0);
-        this.setDefaultState(this.blockState.getBaseState()
+        setHarvestLevel("pickaxe", 0);
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)
                 .withProperty(BURIED, Boolean.FALSE)
                 .withProperty(CLOSED, Boolean.FALSE));
     }
 
     @Override
-    public @NotNull String getName() {
-        return "device/bear_trap";
-    }
-
-    @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
-        return true;
-    }
-
-    @Override
-    public TEBearTrap createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TEBearTrap();
-    }
-
-    @SuppressWarnings("deprecation")
-    public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return TRAP_AABB;
     }
 
-    public boolean isPassable(@NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return true;
     }
 
     @Override
-    protected @NotNull BlockStateContainer createBlockState() {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, HORIZONTAL, BURIED, CLOSED);
     }
 
-    @SuppressWarnings("deprecation")
-    public @NotNull BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
-                                                     @NotNull EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @NotNull
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
                 .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
@@ -102,24 +85,23 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
                 .withProperty(CLOSED, meta / 8 != 0);
     }
 
+    @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
     }
 
-    @SuppressWarnings("deprecation")
-    public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX,
-                                                     float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    @Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
     }
 
-    @Nullable
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+    @Override
+    public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F,
-                axisalignedbb.maxZ);
+        return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
     }
 
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState iblockstate = worldIn.getBlockState(pos.down());
         Block block = iblockstate.getBlock();
@@ -133,19 +115,10 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    public void harvestBlock(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state,
-                             @Nullable TileEntity te, @NotNull ItemStack stack) {
-        TEBearTrap trap = TileUtils.getTile(worldIn, pos, TEBearTrap.class);
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
+        assert trap != null;
         if (!trap.isOpen()) {
             if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
                 worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
@@ -157,11 +130,12 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
         }
     }
 
-    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade || (playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
-                ((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType()
-                        .equals(Metal.ItemType.SHOVEL))) {
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (playerIn.getHeldItem(hand).getItem() instanceof ItemSpade ||
+                (playerIn.getHeldItem(hand).getItem() instanceof ItemMetalTool &&
+                        ((ItemMetalTool) playerIn.getHeldItem(hand).getItem()).getType().equals(Metal.ItemType.SHOVEL))) {
+
             playerIn.getHeldItem(hand).damageItem(1, playerIn);
             state = state.cycleProperty(BURIED);
             worldIn.setBlockState(pos, state, 2);
@@ -171,9 +145,10 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public void onEntityCollision(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Entity entityIn) {
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase entityLiving) {
-            TEBearTrap trap = TileUtils.getTile(worldIn, pos, TEBearTrap.class);
+            TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
+            assert trap != null;
             if (trap.isOpen()) {
                 int debuffDuration = ConfigTFCThings.Items.BEAR_TRAP.debuffDuration;
                 double healthCut = ConfigTFCThings.Items.BEAR_TRAP.healthCut;
@@ -207,10 +182,11 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(@NotNull IBlockState state, World worldIn, BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-            TEBearTrap trap = TileUtils.getTile(worldIn, pos, TEBearTrap.class);
+            TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
+            assert trap != null;
             if (!trap.isOpen()) {
                 if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
                     worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
@@ -225,17 +201,17 @@ public class BlockBearTrap extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
-        return Size.LARGE;
-    }
-
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
-        return Weight.HEAVY;
+    public String getName() {
+        return "device/bear_trap";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEBearTrap.class;
+        return TileBearTrap.class;
+    }
+
+    @Override
+    public @Nullable TileBearTrap createNewTileEntity(World worldIn, int meta) {
+        return new TileBearTrap();
     }
 }

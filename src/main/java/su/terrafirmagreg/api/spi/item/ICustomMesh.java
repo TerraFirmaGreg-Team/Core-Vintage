@@ -5,8 +5,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * This interface is used by registry to automatically detect an item that has custom mesh definitions. This can be used to register your own model
- * stuff.
+ * This interface is used by registry to automatically detect an item that has custom mesh definitions. This can be used to register your own model stuff.
  */
 public interface ICustomMesh {
 

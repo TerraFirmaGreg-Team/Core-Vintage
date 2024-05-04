@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
+import su.terrafirmagreg.modules.device.objects.tiles.TileQuern;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,17 +19,17 @@ import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TESRQuern extends TileEntitySpecialRenderer<TEQuern> {
+public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
 
     @Override
-    public void render(@NotNull TEQuern te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(@NotNull TileQuern te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
         IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
-            ItemStack input = cap.getStackInSlot(TEQuern.SLOT_INPUT);
-            ItemStack output = cap.getStackInSlot(TEQuern.SLOT_OUTPUT);
-            ItemStack handstone = cap.getStackInSlot(TEQuern.SLOT_HANDSTONE);
+            ItemStack input = cap.getStackInSlot(TileQuern.SLOT_INPUT);
+            ItemStack output = cap.getStackInSlot(TileQuern.SLOT_OUTPUT);
+            ItemStack handstone = cap.getStackInSlot(TileQuern.SLOT_HANDSTONE);
 
             if (!output.isEmpty()) {
                 for (int i = 0; i < output.getCount(); i++) {

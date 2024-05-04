@@ -81,8 +81,8 @@ public class BlockWoodSupport extends BlockWood {
     }
 
     /**
-     * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and
-     * calling BlockSupper#isBeingSupported
+     * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and calling
+     * BlockSupper#isBeingSupported
      */
     public static Set<BlockPos> getAllUnsupportedBlocksIn(World worldIn, BlockPos from, BlockPos to) {
         Set<BlockPos> listSupported = new HashSet<>();

@@ -1,15 +1,14 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBloomery;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,14 +33,14 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.block.Multiblock;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
-public class BlockBloomery extends BlockBase implements ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockBloomery extends BaseBlock implements ITileBlock {
 
     //[horizontal index][basic shape / door1 / door2]
     private static final AxisAlignedBB[][] AABB =
@@ -166,11 +165,17 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     public BlockBloomery() {
-        super(Material.IRON);
-        setSoundType(SoundType.METAL);
+        super(Settings.of()
+                .material(Material.IRON)
+                .soundType(SoundType.METAL)
+                .hardness(20.0F)
+                .size(Size.LARGE)
+                .weight(Weight.VERY_HEAVY)
+                .nonFullCube()
+                .nonOpaque());
+
         setHarvestLevel("pickaxe", 0);
-        setHardness(20.0F);
-        setDefaultState(this.blockState.getBaseState()
+        setDefaultState(this.getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)
                 .withProperty(LIT, false)
                 .withProperty(OPEN, false));
@@ -204,18 +209,6 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.LARGE; // Only in chests
-    }
-
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.VERY_HEAVY;  // stacksize = 1
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
                 .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
@@ -231,28 +224,11 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return AABB[state.getValue(HORIZONTAL).getHorizontalIndex()][0];
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         if (blockState.getValue(OPEN)) {
             return NULL_AABB;
@@ -261,14 +237,8 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEBloomery te = TileUtils.getTile(worldIn, pos, TEBloomery.class);
+        TileBloomery te = TileUtils.getTile(worldIn, pos, TileBloomery.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -276,10 +246,7 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @Nullable
-
-    public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
+    public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
         if (blockState.getValue(OPEN)) {
             int index = blockState.getValue(HORIZONTAL).getHorizontalIndex();
             RayTraceResult rayTraceDoor1 = rayTrace(pos, start, end, AABB[index][1]), rayTraceDoor2 = rayTrace(pos, start, end, AABB[index][2]);
@@ -298,20 +265,18 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World worldIn, @NotNull BlockPos pos) {
-        return super.canPlaceBlockAt(worldIn, pos) &&
-                (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.Z) || canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X));
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        return super.canPlaceBlockAt(worldIn, pos) && (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.Z) || canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X));
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
-                                    float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (!state.getValue(LIT)) {
                 worldIn.setBlockState(pos, state.cycleProperty(OPEN));
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             }
-            TEBloomery te = TileUtils.getTile(worldIn, pos, TEBloomery.class);
+            TileBloomery te = TileUtils.getTile(worldIn, pos, TileBloomery.class);
             if (te != null) {
                 if (!state.getValue(LIT) && te.canIgnite()) {
                     ItemStack held = player.getHeldItem(hand);
@@ -327,10 +292,7 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         EnumFacing placeDirection;
         float wrappedRotation = MathHelper.wrapDegrees(placer.rotationYaw);
         if (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X)) {
@@ -355,7 +317,6 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, HORIZONTAL, LIT, OPEN);
     }
@@ -366,22 +327,17 @@ public class BlockBloomery extends BlockBase implements ITEBlock {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
+    public TileBloomery createNewTileEntity(World worldIn, int meta) {
+        return new TileBloomery();
     }
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEBloomery();
-    }
-
-    @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/bloomery";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEBloomery.class;
+        return TileBloomery.class;
     }
 }

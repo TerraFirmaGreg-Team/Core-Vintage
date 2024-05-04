@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TECellarShelf;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCellarShelf;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,14 +16,14 @@ import net.dries007.tfc.client.gui.GuiContainerTE;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiCellarShelf extends GuiContainerTE<TECellarShelf> {
+public class GuiCellarShelf extends GuiContainerTE<TileCellarShelf> {
 
     public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/cellar_shelf.png");
-    private static TECellarShelf TE;
+    private static TileCellarShelf TE;
     private final String translationKey;
     private final InventoryPlayer playerInventory;
 
-    public GuiCellarShelf(Container container, InventoryPlayer playerInv, TECellarShelf tile, IBlockState state) {
+    public GuiCellarShelf(Container container, InventoryPlayer playerInv, TileCellarShelf tile, IBlockState state) {
         super(container, playerInv, tile, BACKGROUND);
         this.playerInventory = playerInv;
         TE = tile;

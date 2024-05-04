@@ -6,8 +6,9 @@
   "minVersion": "0.8.5",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "gregtech.api.unification.ore.OrePrefixMixin"
+    "minecraft.block.MixinBlock"
   ],
   "server": [],
   "client": []
 }
+

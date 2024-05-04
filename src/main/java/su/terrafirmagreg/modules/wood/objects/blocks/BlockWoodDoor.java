@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.BlockBaseDoor;
+import su.terrafirmagreg.api.spi.block.BaseBlockDoor;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -19,27 +19,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import lombok.Getter;
 
 @Getter
-public class BlockWoodDoor extends BlockBaseDoor implements IWoodBlock {
+public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
 
     public BlockWoodDoor(WoodBlockVariant blockVariant, WoodType type) {
-        super(Material.WOOD);
+        super(Settings.of()
+                .material(Material.WOOD)
+                .soundType(SoundType.WOOD));
 
         this.blockVariant = blockVariant;
         this.type = type;
 
-        setSoundType(SoundType.WOOD);
         disableStats();
-
         BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant, "wood");
-        OreDictUtils.register(this, blockVariant, "wood", type);
+        OreDictUtils.register(this, getBlockVariant(), "wood");
+        OreDictUtils.register(this, getBlockVariant(), "wood", getType());
     }
 
     @Override

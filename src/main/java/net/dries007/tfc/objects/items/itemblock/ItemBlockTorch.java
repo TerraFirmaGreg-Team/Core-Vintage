@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.objects.tiles.TELogPile;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -33,7 +33,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
             if (count > 160) {
                 if (state.getBlock() == BlocksDevice.LOG_PILE) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
-                    TELogPile te = TileUtils.getTile(world, pos, TELogPile.class);
+                    TileLogPile te = TileUtils.getTile(world, pos, TileLogPile.class);
                     if (te != null) {
                         te.light();
                     }
@@ -41,7 +41,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
                         world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
                     }
                 } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
-                    TEPitKiln te = TileUtils.getTile(world, pos, TEPitKiln.class);
+                    TilePitKiln te = TileUtils.getTile(world, pos, TilePitKiln.class);
                     if (te != null) {
                         te.tryLight();
                     }

@@ -1,14 +1,11 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import su.terrafirmagreg.api.spi.effects.PotionBase;
+import su.terrafirmagreg.api.spi.effects.BasePotion;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.entity.EntityLivingBase;
 
-
-import org.jetbrains.annotations.NotNull;
-
-public class PotionResistHeat extends PotionBase {
+public class PotionResistHeat extends BasePotion {
 
     public PotionResistHeat() {
         super(false, 0xFFCD72);
@@ -17,7 +14,7 @@ public class PotionResistHeat extends PotionBase {
     }
 
     @Override
-    public void performEffect(@NotNull EntityLivingBase entity, int amplifier) {
+    public void performEffect(EntityLivingBase entity, int amplifier) {
         removePotionCoreEffect(entity, PotionsCore.HYPERTHERMIA);
     }
 }

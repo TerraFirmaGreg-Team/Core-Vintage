@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
@@ -50,20 +50,20 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
 
 /**
- * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes. Sealed state is stored in block state and cached in
- * TE, synced when updated via custom packet
+ * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes. Sealed state is stored in block state and cached in TE, synced when updated via
+ * custom packet
  *
- * @see TEWoodBarrel
+ * @see TileWoodBarrel
  * @see BarrelRecipe
  */
-public class BlockWoodBarrel extends BlockWood implements ITEBlock {
+public class BlockWoodBarrel extends BlockWood implements ITileBlock {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
     public BlockWoodBarrel(WoodBlockVariant variant, WoodType type) {
         super(variant, type);
 
-        setHardness(2F);
+        getSettings().hardness(2F);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(SEALED, false));
     }
@@ -72,7 +72,7 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
      * Used to toggle the barrel seal state and update the tile entity, in the correct order
      */
     public static void toggleBarrelSeal(World world, BlockPos pos) {
-        var tile = TileUtils.getTile(world, pos, TEWoodBarrel.class);
+        var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
         if (tile != null) {
             IBlockState state = world.getBlockState(pos);
             boolean previousSealed = state.getValue(SEALED);
@@ -86,7 +86,7 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
+    public @Nullable BaseItemBlock getItemBlock() {
         return new ItemBlockWoodBarrel(this);
     }
 
@@ -191,7 +191,7 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
 
     @Override
     public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TEWoodBarrel.class);
+        var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }
@@ -210,7 +210,7 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
     public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn,
                                     @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = playerIn.getHeldItem(hand);
-        var tile = TileUtils.getTile(worldIn, pos, TEWoodBarrel.class);
+        var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
         if (tile != null) {
             if (heldItem.isEmpty() && playerIn.isSneaking()) {
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
@@ -239,7 +239,7 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
     public void onBlockPlacedBy(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer,
                                 @NotNull ItemStack stack) {
         if (!worldIn.isRemote && stack.getTagCompound() != null) {
-            var tile = TileUtils.getTile(worldIn, pos, TEWoodBarrel.class);
+            var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
             if (tile != null) {
                 worldIn.setBlockState(pos, state.withProperty(SEALED, true));
                 tile.loadFromItemStack(stack);
@@ -272,7 +272,7 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TEWoodBarrel();
+        return new TileWoodBarrel();
     }
 
     /**
@@ -294,7 +294,7 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
     public ItemStack getPickBlock(IBlockState state, @NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos,
                                   @NotNull EntityPlayer player) {
         ItemStack stack = new ItemStack(state.getBlock());
-        var tile = TileUtils.getTile(world, pos, TEWoodBarrel.class);
+        var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
         if (tile != null && tile.isSealed()) {
             tile.saveToItemStack(stack);
         }
@@ -315,12 +315,18 @@ public class BlockWoodBarrel extends BlockWood implements ITEBlock {
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEWoodBarrel.class;
+        return TileWoodBarrel.class;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public TileEntitySpecialRenderer<?> getTileRenderer() {
         return new TESRWoodBarrel();
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileWoodBarrel();
     }
 }

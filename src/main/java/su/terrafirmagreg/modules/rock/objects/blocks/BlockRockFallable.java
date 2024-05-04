@@ -14,8 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 
 public abstract class BlockRockFallable extends BlockRock {
@@ -26,12 +24,12 @@ public abstract class BlockRockFallable extends BlockRock {
     }
 
     public BlockRockFallable(Material material, RockBlockVariant blockVariant, RockType type) {
-        super(material, blockVariant, type);
+        super(Settings.of().material(material), blockVariant, type);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void randomDisplayTick(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random rand) {
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
         if (rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;

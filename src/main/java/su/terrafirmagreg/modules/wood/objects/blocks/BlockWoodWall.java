@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -11,16 +10,12 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
@@ -48,21 +43,11 @@ public class BlockWoodWall extends BlockWall implements IWoodBlock {
         OreDictUtils.register(this, getBlockVariant(), "wood", getType());
     }
 
-    @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
-    }
-
     @NotNull
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    public void getSubBlocks(@NotNull CreativeTabs itemIn, @NotNull NonNullList<ItemStack> items) {
-        items.add(new ItemStack(this));
     }
 
     @Override

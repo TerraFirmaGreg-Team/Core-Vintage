@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetal;
@@ -31,10 +31,9 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ItemSling extends ItemBase {
+public class ItemSling extends BaseItem {
 
     public ItemSling() {
         this.setMaxDamage(64);
@@ -43,7 +42,7 @@ public class ItemSling extends ItemBase {
         this.addPropertyOverride(new ResourceLocation("spinning"), new IItemPropertyGetter() {
 
             @SideOnly(Side.CLIENT)
-            public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack && entityIn.getItemInUseMaxCount() > 0) {
                     int maxPower = ConfigTFCThings.Items.SLING.maxPower;
                     int chargeSpeed = ConfigTFCThings.Items.SLING.chargeSpeed;
@@ -57,7 +56,7 @@ public class ItemSling extends ItemBase {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/sling/normal";
     }
 
@@ -72,16 +71,16 @@ public class ItemSling extends ItemBase {
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    public Size getSize(ItemStack itemStack) {
         return Size.NORMAL;
     }
 
     @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+    public Weight getWeight(ItemStack itemStack) {
         return Weight.MEDIUM;
     }
 
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         boolean flag = !this.findAmmo(playerIn).isEmpty();
@@ -94,7 +93,7 @@ public class ItemSling extends ItemBase {
         }
     }
 
-    public void onPlayerStoppedUsing(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull EntityLivingBase entityLiving, int timeLeft) {
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
         if (entityLiving instanceof EntityPlayer entityplayer) {
 
             boolean flag = entityplayer.isCreative();
@@ -194,11 +193,11 @@ public class ItemSling extends ItemBase {
         return false;
     }
 
-    public int getMaxItemUseDuration(@NotNull ItemStack stack) {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 72000;
     }
 
-    public @NotNull EnumAction getItemUseAction(@NotNull ItemStack stack) {
+    public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.BOW;
     }
 

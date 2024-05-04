@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -27,22 +27,22 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public abstract class BlockSoil extends BlockBase implements ISoilBlock {
+public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
 
     private final SoilBlockVariant blockVariant;
     private final SoilType type;
 
     public BlockSoil(SoilBlockVariant blockVariant, SoilType type) {
-        super(Material.GROUND);
-
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        super(Settings.of()
+                .material(Material.GROUND)
+                .soundType(SoundType.GROUND)
+                .hardness(2.0F));
 
         this.blockVariant = blockVariant;
         this.type = type;
 
-        setSoundType(SoundType.GROUND);
-        setHardness(2.0F);
         setHarvestLevel("shovel", 0);
+        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
     }
 
     @Override
@@ -51,13 +51,13 @@ public abstract class BlockSoil extends BlockBase implements ISoilBlock {
     }
 
     @Override
-    public int getMetaFromState(@NotNull IBlockState state) {
+    public int getMetaFromState(IBlockState state) {
         return 0;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void randomDisplayTick(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random rand) {
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
         if (blockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
@@ -67,7 +67,7 @@ public abstract class BlockSoil extends BlockBase implements ISoilBlock {
     }
 
     @Override
-    public int damageDropped(@NotNull IBlockState state) {
+    public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
     }
 

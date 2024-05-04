@@ -37,7 +37,7 @@ public class BlockSoilPodzol extends BlockSoil {
 
     @NotNull
     @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
         return state
                 .withProperty(NORTH, world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() instanceof BlockSoilPodzol)
@@ -54,7 +54,7 @@ public class BlockSoilPodzol extends BlockSoil {
 
     @NotNull
     @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return SoilItemVariants.PILE.get(this.getType());
     }
 

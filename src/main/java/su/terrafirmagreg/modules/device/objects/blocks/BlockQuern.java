@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRQuern;
-import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
+import su.terrafirmagreg.modules.device.objects.tiles.TileQuern;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -34,14 +34,14 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.modules.device.objects.tiles.TEQuern.SLOT_HANDSTONE;
+import static su.terrafirmagreg.modules.device.objects.tiles.TileQuern.SLOT_HANDSTONE;
 
-public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlock {
 
     private static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.625D, 1D);
     private static final AxisAlignedBB QUERN_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.875D, 1D);
@@ -52,9 +52,14 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
     private static final AxisAlignedBB INPUT_SLOT_AABB = new AxisAlignedBB(0.375D, 0.86D, 0.375D, 0.625D, 1.015D, 0.625D);
 
     public BlockQuern() {
-        super(Material.ROCK);
-        setHardness(3.0f);
-        setSoundType(SoundType.STONE);
+        super(Settings.of()
+                .material(Material.ROCK)
+                .soundType(SoundType.STONE)
+                .hardness(3.0f)
+                .nonOpaque()
+                .nonFullCube()
+                .size(Size.VERY_LARGE)
+                .weight(Weight.VERY_HEAVY));
     }
 
     /**
@@ -67,7 +72,7 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
         Vec3d eyePos = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
         Vec3d lookingPos = eyePos.add(new Vec3d(player.getLookVec().x * length, player.getLookVec().y * length, player.getLookVec().z * length));
 
-        TEQuern teQuern = TileUtils.getTile(world, pos, TEQuern.class);
+        TileQuern teQuern = TileUtils.getTile(world, pos, TileQuern.class);
 
         if (teQuern != null) {
             IItemHandler inventory = teQuern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
@@ -76,11 +81,11 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
                     .calculateIntercept(eyePos, lookingPos) != null) {
                 return SelectionPlace.HANDLE;
             } else if (!teQuern.isGrinding() && teQuern.hasHandstone() && (!player.getHeldItem(EnumHand.MAIN_HAND)
-                    .isEmpty() || (inventory != null && !inventory.getStackInSlot(TEQuern.SLOT_INPUT)
+                    .isEmpty() || (inventory != null && !inventory.getStackInSlot(TileQuern.SLOT_INPUT)
                     .isEmpty())) && INPUT_SLOT_AABB.offset(pos)
                     .calculateIntercept(eyePos, lookingPos) != null) {
                 return SelectionPlace.INPUT_SLOT;
-            } else if ((teQuern.hasHandstone() || teQuern.isItemValid(TEQuern.SLOT_HANDSTONE, player.getHeldItem(EnumHand.MAIN_HAND))) &&
+            } else if ((teQuern.hasHandstone() || teQuern.isItemValid(TileQuern.SLOT_HANDSTONE, player.getHeldItem(EnumHand.MAIN_HAND))) &&
                     HANDSTONE_AABB.offset(pos)
                             .calculateIntercept(eyePos, lookingPos) != null) {
                 return SelectionPlace.HANDSTONE;
@@ -90,50 +95,8 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
     }
 
     @Override
-    public @NotNull Size getSize(ItemStack stack) {
-        return Size.VERY_LARGE; // Can't store anywhere, but don't overburden
-    }
-
-    @Override
-    public @NotNull Weight getWeight(ItemStack stack) {
-        return Weight.VERY_HEAVY; // Stacksize = 1
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isTopSolid(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullBlock(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isBlockNormalCube(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isNormalCube(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        TEQuern teQuern = TileUtils.getTile(source, pos, TEQuern.class);
+        TileQuern teQuern = TileUtils.getTile(source, pos, TileQuern.class);
         if (teQuern != null && teQuern.hasHandstone()) {
             return QUERN_AABB;
         } else {
@@ -142,8 +105,6 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
     }
 
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         if (face == EnumFacing.DOWN) {
             return BlockFaceShape.SOLID;
@@ -151,26 +112,19 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
         return BlockFaceShape.UNDEFINED;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                      @Nullable Entity entityIn, boolean isActualState) {
+    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+                                      boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BASE_AABB);
-        TEQuern teQuern = TileUtils.getTile(world, pos, TEQuern.class);
-        if (teQuern != null && teQuern.hasHandstone()) {
+        var te = TileUtils.getTile(world, pos, TileQuern.class);
+        if (te != null && te.hasHandstone()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, HANDSTONE_AABB);
         }
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TEQuern teQuern = TileUtils.getTile(world, pos, TEQuern.class);
+        TileQuern teQuern = TileUtils.getTile(world, pos, TileQuern.class);
         if (teQuern != null) {
             teQuern.onBreakBlock(world, pos, state);
         }
@@ -178,10 +132,9 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
-                                    float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
-            TEQuern teQuern = TileUtils.getTile(world, pos, TEQuern.class);
+            TileQuern teQuern = TileUtils.getTile(world, pos, TileQuern.class);
             if (teQuern != null && !teQuern.isGrinding()) {
                 ItemStack heldStack = playerIn.getHeldItem(hand);
                 SelectionPlace selection = getPlayerSelection(world, pos, playerIn);
@@ -193,20 +146,20 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
                                 1 + ((world.rand.nextFloat() - world.rand.nextFloat()) / 16));
                         return true;
                     } else if (selection == SelectionPlace.INPUT_SLOT) {
-                        playerIn.setHeldItem(EnumHand.MAIN_HAND, teQuern.insertOrSwapItem(TEQuern.SLOT_INPUT, heldStack));
-                        teQuern.setAndUpdateSlots(TEQuern.SLOT_INPUT);
+                        playerIn.setHeldItem(EnumHand.MAIN_HAND, teQuern.insertOrSwapItem(TileQuern.SLOT_INPUT, heldStack));
+                        teQuern.setAndUpdateSlots(TileQuern.SLOT_INPUT);
                         return true;
                     } else if (selection == SelectionPlace.HANDSTONE && inventory.getStackInSlot(SLOT_HANDSTONE)
                             .isEmpty() && inventory.isItemValid(SLOT_HANDSTONE, heldStack)) {
                         playerIn.setHeldItem(EnumHand.MAIN_HAND, teQuern.insertOrSwapItem(SLOT_HANDSTONE, heldStack));
                         teQuern.setAndUpdateSlots(SLOT_HANDSTONE);
                         return true;
-                    } else if (selection == SelectionPlace.BASE && !inventory.getStackInSlot(TEQuern.SLOT_OUTPUT)
+                    } else if (selection == SelectionPlace.BASE && !inventory.getStackInSlot(TileQuern.SLOT_OUTPUT)
                             .isEmpty()) {
                         ItemHandlerHelper.giveItemToPlayer(playerIn,
-                                inventory.extractItem(TEQuern.SLOT_OUTPUT, inventory.getStackInSlot(TEQuern.SLOT_OUTPUT)
+                                inventory.extractItem(TileQuern.SLOT_OUTPUT, inventory.getStackInSlot(TileQuern.SLOT_OUTPUT)
                                         .getCount(), false));
-                        teQuern.setAndUpdateSlots(TEQuern.SLOT_OUTPUT);
+                        teQuern.setAndUpdateSlots(TileQuern.SLOT_OUTPUT);
                         return true;
                     }
                 }
@@ -216,25 +169,8 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
     }
 
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
     public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return side == EnumFacing.DOWN;
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEQuern();
     }
 
     @Override
@@ -263,13 +199,18 @@ public class BlockQuern extends BlockBase implements IHighlightHandler, ITEBlock
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/quern";
     }
 
     @Override
+    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileQuern();
+    }
+
+    @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEQuern.class;
+        return TileQuern.class;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCrucible;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -34,14 +34,14 @@ import java.util.Map;
 
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
 
-public class GuiCrucible extends GuiContainerTE<TECrucible> {
+public class GuiCrucible extends GuiContainerTE<TileCrucible> {
 
     private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/crucible.png");
     private static final int MAX_ELEMENTS = 3;
     private int scrollPos;
     private boolean scrollPress;
 
-    public GuiCrucible(Container container, InventoryPlayer playerInv, TECrucible tile) {
+    public GuiCrucible(Container container, InventoryPlayer playerInv, TileCrucible tile) {
         super(container, playerInv, tile, BACKGROUND);
 
         this.ySize = 221;
@@ -92,7 +92,7 @@ public class GuiCrucible extends GuiContainerTE<TECrucible> {
         super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
         // Draw the temperature indicator
-        int temperature = (int) (51 * tile.getField(TECrucible.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
+        int temperature = (int) (51 * tile.getField(TileCrucible.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
         if (temperature > 0) {
             if (temperature > 51) {
                 temperature = 51;

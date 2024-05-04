@@ -1,13 +1,14 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
-import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCharcoalForge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -26,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -42,7 +44,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.util.block.Multiblock;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -50,7 +51,8 @@ import java.util.function.BiPredicate;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlock, ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsConsumerBlock, ITileBlock {
 
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
     private static final Multiblock CHARCOAL_FORGE_MULTIBLOCK;
@@ -82,13 +84,22 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
     }
 
     public BlockCharcoalForge() {
-        super(BlockCharcoalPile.CHARCOAL_MATERIAL);
+        super(Settings.of()
+                .material(BlockCharcoalPile.CHARCOAL_MATERIAL)
+                .soundType(SoundType.GROUND)
+                .hardness(1.0F)
+                .nonFullCube()
+                .nonOpaque());
 
-        setSoundType(SoundType.GROUND);
-        setHarvestLevel("shovel", 0);
-        setHardness(1.0F);
         setTickRandomly(true); // Used for chimney checks -> extinguish
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, false));
+        setHarvestLevel("shovel", 0);
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(LIT, false));
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     public static boolean isValid(World world, BlockPos pos) {
@@ -101,25 +112,22 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
 
     @Override
     public boolean canIntakeFrom(Vec3i offset, EnumFacing facing) {
-        return offset.equals(TEBellows.OFFSET_INSET);
+        return offset.equals(TileBellows.OFFSET_INSET);
     }
 
     @Override
     public void onAirIntake(World world, BlockPos pos, int airAmount) {
-        TECharcoalForge teForge = TileUtils.getTile(world, pos, TECharcoalForge.class);
+        TileCharcoalForge teForge = TileUtils.getTile(world, pos, TileCharcoalForge.class);
         if (teForge != null) {
             teForge.onAirIntake(airAmount);
         }
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isTopSolid(IBlockState state) {
         return false;
     }
 
-    @NotNull
-    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(LIT, meta == 1);
@@ -131,41 +139,23 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return AABB;
     }
 
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return face.getAxis() == EnumFacing.Axis.Y ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     @Override
-    @Nullable
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return AABB;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TECharcoalForge te = TileUtils.getTile(worldIn, pos, TECharcoalForge.class);
+        TileCharcoalForge te = TileUtils.getTile(worldIn, pos, TileCharcoalForge.class);
         // Have to check the above block, since minecraft think this block is "roof"
         if (te != null && state.getValue(LIT) && worldIn.isRainingAt(pos.up())) {
             te.onRainDrop();
@@ -194,7 +184,6 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.isRemote) {
             if (state.getValue(LIT) && !isValid(worldIn, pos)) {
@@ -206,7 +195,7 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TECharcoalForge te = TileUtils.getTile(worldIn, pos, TECharcoalForge.class);
+        TileCharcoalForge te = TileUtils.getTile(worldIn, pos, TileCharcoalForge.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -219,7 +208,6 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
     }
 
     @Override
-    @NotNull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.COAL;
     }
@@ -230,8 +218,7 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             if (!state.getValue(LIT)) {
                 ItemStack held = player.getHeldItem(hand);
@@ -257,7 +244,6 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, LIT);
     }
@@ -272,31 +258,28 @@ public class BlockCharcoalForge extends BlockBase implements IBellowsConsumerBlo
         return true;
     }
 
-    @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TECharcoalForge();
+    public @Nullable TileCharcoalForge createNewTileEntity(World worldIn, int meta) {
+        return new TileCharcoalForge();
     }
 
     @Override
-    @NotNull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(Items.COAL, 1, 1);
     }
 
-    @Nullable
     @Override
-    public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
+    public @Nullable PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
         return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire()) ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/charcoal_forge";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TECharcoalForge.class;
+        return TileCharcoalForge.class;
     }
 }

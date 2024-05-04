@@ -37,8 +37,8 @@ public final class TileUtils {
     }
 
     /**
-     * Returns the tile at the specified position, returns null if it is the wrong type or does not exist. Avoids creating new tile entities when
-     * using a ChunkCache (off the main thread). see {@link BlockFlowerPot#getActualState(IBlockState, IBlockAccess, BlockPos)}
+     * Returns the tile at the specified position, returns null if it is the wrong type or does not exist. Avoids creating new tile entities when using a ChunkCache (off the main
+     * thread). see {@link BlockFlowerPot#getActualState(IBlockState, IBlockAccess, BlockPos)}
      */
     @Nullable
     public static TileEntity getTile(IBlockAccess world, BlockPos pos) {

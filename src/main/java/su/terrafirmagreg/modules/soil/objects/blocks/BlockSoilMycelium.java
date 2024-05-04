@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -61,13 +61,13 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     @NotNull
     @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
         Block blockUp = world.getBlockState(pos.up()).getBlock();
         return state
@@ -86,7 +86,7 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
     @NotNull
     @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return SoilItemVariants.PILE.get(type);
     }
 

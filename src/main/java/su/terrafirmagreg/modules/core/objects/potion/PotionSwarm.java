@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.api.spi.effects.PotionBase;
+import su.terrafirmagreg.api.spi.effects.BasePotion;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -10,11 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 
-public class PotionSwarm extends PotionBase {
+public class PotionSwarm extends BasePotion {
 
     public PotionSwarm() {
         super(true, 0xffff1a);
@@ -22,7 +20,7 @@ public class PotionSwarm extends PotionBase {
     }
 
     @Override
-    public void performEffect(@NotNull EntityLivingBase entity, int amplifier) {
+    public void performEffect(EntityLivingBase entity, int amplifier) {
         World world = entity.getEntityWorld();
         if (world.isRemote) {
             BlockPos pos = entity.getPosition();

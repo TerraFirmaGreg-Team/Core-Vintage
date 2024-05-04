@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.entity.ai;
 
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.device.objects.tiles.TENestBox;
+import su.terrafirmagreg.modules.device.objects.tiles.TileNestBox;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -80,7 +80,7 @@ public class EntityAIFindNest extends EntityAIBase {
                 this.end = true;
             }
         } else {
-            TENestBox te = TileUtils.getTile(this.theWorld, nestPos, TENestBox.class);
+            TileNestBox te = TileUtils.getTile(this.theWorld, nestPos, TileNestBox.class);
             if (te != null && theCreature instanceof IAnimal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
                 IAnimal animal = (IAnimal) theCreature;
                 if (!te.hasBird()) {
@@ -131,7 +131,7 @@ public class EntityAIFindNest extends EntityAIBase {
             else
                 failureDepressionMap.remove(pos);
         }
-        TENestBox te = TileUtils.getTile(world, pos, TENestBox.class);
+        TileNestBox te = TileUtils.getTile(world, pos, TileNestBox.class);
         return te != null && te.hasFreeSlot() && (!te.hasBird() || te.getBird() == this.theCreature);
     }
 }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -49,14 +49,14 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     @NotNull
     @Override
-    public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY,
-                                            float hitZ, int meta, @NotNull EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+                                            float hitZ, int meta, EntityLivingBase placer) {
         IBlockState state = getStateFromMeta(meta);
         return BlockButton.canPlaceBlock(worldIn, pos, facing) ? state.withProperty(BlockDirectional.FACING, facing) :
                 state.withProperty(BlockDirectional.FACING, EnumFacing.DOWN);
@@ -64,7 +64,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());

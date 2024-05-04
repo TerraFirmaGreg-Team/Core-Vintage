@@ -8,8 +8,6 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.item.EnumDyeColor;
 
 
-import org.jetbrains.annotations.NotNull;
-
 import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.SMOOTH;
 
 public class BlockAlabasterSmooth extends BlockRockDecorative {
@@ -39,7 +37,7 @@ public class BlockAlabasterSmooth extends BlockRockDecorative {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return String.format("rock/alabaster/smooth/%s", color);
     }
 }

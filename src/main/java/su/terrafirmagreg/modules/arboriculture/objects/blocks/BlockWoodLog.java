@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -90,8 +90,8 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     @SuppressWarnings("deprecation")

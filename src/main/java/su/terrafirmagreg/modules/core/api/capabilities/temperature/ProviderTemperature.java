@@ -36,14 +36,12 @@ public class ProviderTemperature implements ICapabilityTemperature {
     public static float COOL_THRESHOLD = TFCAmbientalConfig.GENERAL.coldTemperature;
     public static float BURN_THRESHOLD = TFCAmbientalConfig.GENERAL.burningTemperature;
     public static float FREEZE_THRESHOLD = TFCAmbientalConfig.GENERAL.freezingTemperature;
+    @Getter
+    private final EntityPlayer player;
     /**
      * The capability this is for
      */
     public ModifierStorage modifiers = new ModifierStorage();
-
-    @Getter
-    private final EntityPlayer player;
-
     public boolean isRising;
     @Getter
     public float temperature = AVERAGE;

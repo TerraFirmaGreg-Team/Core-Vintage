@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodToolRack;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodToolRack;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodToolRack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.*;
 
-public class BlockWoodToolRack extends BlockWood implements ITEBlock {
+public class BlockWoodToolRack extends BlockWood implements ITileBlock {
 
     protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
     protected static final AxisAlignedBB RACK_WEST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -130,7 +130,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(FACING))) {
             dropBlockAsItem(worldIn, pos, state, 0);
-            var tile = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
+            var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
             if (tile != null) {
                 tile.onBreakBlock();
             }
@@ -140,7 +140,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 
     @Override
     public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
+        var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
         if (tile != null) {
             tile.onBreakBlock();
         }
@@ -155,7 +155,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
     public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
                                     @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            var tile = TileUtils.getTile(worldIn, pos, TEWoodToolRack.class);
+            var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
             if (tile != null) {
                 return tile.onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
             }
@@ -188,7 +188,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TEWoodToolRack();
+        return new TileWoodToolRack();
     }
 
     @Override
@@ -198,7 +198,7 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
                                   @NotNull EntityPlayer player) {
         if (target != null) {
             var vec = target.hitVec.subtract(pos.getX(), pos.getY(), pos.getZ());
-            var tile = TileUtils.getTile(world, pos, TEWoodToolRack.class);
+            var tile = TileUtils.getTile(world, pos, TileWoodToolRack.class);
             if (tile != null) {
                 ItemStack item = tile.getItems().get(getSlotFromPos(state, (float) vec.x, (float) vec.y, (float) vec.z));
                 if (!item.isEmpty()) {
@@ -222,11 +222,17 @@ public class BlockWoodToolRack extends BlockWood implements ITEBlock {
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEWoodToolRack.class;
+        return TileWoodToolRack.class;
     }
 
     @Override
     public TileEntitySpecialRenderer<?> getTileRenderer() {
         return new TESRWoodToolRack();
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileWoodToolRack();
     }
 }

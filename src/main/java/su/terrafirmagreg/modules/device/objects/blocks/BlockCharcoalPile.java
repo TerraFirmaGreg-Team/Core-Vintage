@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TECharcoalForge;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCharcoalForge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -28,14 +28,14 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.client.TFCSounds;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-public class BlockCharcoalPile extends BlockBase {
+@SuppressWarnings("deprecation")
+public class BlockCharcoalPile extends BaseBlock {
 
     public static final Material CHARCOAL_MATERIAL = new Material(MapColor.BROWN);
 
@@ -53,23 +53,22 @@ public class BlockCharcoalPile extends BlockBase {
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D) };
 
     public BlockCharcoalPile() {
-        super(CHARCOAL_MATERIAL);
+        super(Settings.of()
+                .material(CHARCOAL_MATERIAL)
+                .hardness(1.0F)
+                .soundType(TFCSounds.CHARCOAL_PILE));
 
-        setSoundType(TFCSounds.CHARCOAL_PILE);
         setHarvestLevel("shovel", 0);
-        setHardness(1.0F);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(LAYERS, 1));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isTopSolid(IBlockState state) {
         return state.getValue(LAYERS) == 8;
     }
 
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(LAYERS, meta + 1);
     }
@@ -80,40 +79,31 @@ public class BlockCharcoalPile extends BlockBase {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isFullCube(IBlockState state) {
         return state.getValue(LAYERS) == 8;
     }
 
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return PILE_AABB[state.getValue(LAYERS)];
     }
 
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return face == EnumFacing.DOWN || state.getValue(LAYERS) == 8 ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     @Override
-    @Nullable
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return PILE_AABB[state.getValue(LAYERS)];
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isOpaqueCube(IBlockState state) {
         return state.getValue(LAYERS) == 8;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.isRemote) {
             // Try to drop the rock down
@@ -140,7 +130,6 @@ public class BlockCharcoalPile extends BlockBase {
     }
 
     @Override
-    @NotNull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.COAL;
     }
@@ -151,13 +140,12 @@ public class BlockCharcoalPile extends BlockBase {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
             if (!world.isRemote) {
                 world.setBlockState(pos, BlocksDevice.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
-                var tile = TileUtils.getTile(world, pos, TECharcoalForge.class);
+                var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
                 if (tile != null) {
                     tile.onCreate();
                 }
@@ -168,7 +156,6 @@ public class BlockCharcoalPile extends BlockBase {
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, LAYERS);
     }
@@ -193,13 +180,12 @@ public class BlockCharcoalPile extends BlockBase {
     }
 
     @Override
-    @NotNull
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(Items.COAL, 1, 1);
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/charcoal_pile";
     }
 }

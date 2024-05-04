@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 
 @Getter
-public class ItemWoodSupplyCart extends ItemBase implements IWoodItem {
+public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
 
     private final WoodItemVariant itemVariant;
     private final WoodType type;
@@ -48,18 +48,18 @@ public class ItemWoodSupplyCart extends ItemBase implements IWoodItem {
 
     @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack itemStack) {
+    public Size getSize(ItemStack itemStack) {
         return Size.HUGE;
     }
 
     @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack itemStack) {
+    public Weight getWeight(ItemStack itemStack) {
         return Weight.VERY_HEAVY;
     }
 
     @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         Vec3d vec3d = new Vec3d(playerIn.posX, playerIn.posY + playerIn.getEyeHeight(), playerIn.posZ);
         Vec3d lookVec = playerIn.getLookVec();

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
@@ -11,6 +10,7 @@ import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -41,7 +41,6 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -52,7 +51,8 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 
 @Getter
-public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
+@SuppressWarnings("deprecation")
+public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
 
     private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
     private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
@@ -61,25 +61,22 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
     private final MetalType type;
 
     public BlockMetalAnvil(MetalBlockVariant blockVariant, MetalType type) {
-        super(net.minecraft.block.material.Material.IRON);
+        super(Settings.of()
+                .material(Material.IRON)
+                .soundType(SoundType.ANVIL)
+                .nonFullCube()
+                .nonOpaque()
+                .hardness(4.0F)
+                .resistance(10F));
 
         this.blockVariant = blockVariant;
         this.type = type;
 
-        setSoundType(SoundType.ANVIL);
-        setHardness(4.0F);
-        setResistance(10F);
         setHarvestLevel("pickaxe", 0);
-
-        setDefaultState(this.blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
         FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
-    }
-
-    @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
     }
 
     //	@Nullable
@@ -93,8 +90,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
     //		return 2016;
     //	}
 
-    protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
-                                         float hitX, float hitY, float hitZ) {
+    protected EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (facing != null) {
             BlockPos placedPos = pos.offset(facing);
             BlockPos supportPos = placedPos.down();
@@ -115,14 +111,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
         return EnumActionResult.FAIL;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullBlock(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta));
     }
@@ -132,54 +121,25 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
         return state.getValue(HORIZONTAL).getHorizontalIndex();
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isBlockNormalCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isNormalCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public @NotNull AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return state.getValue(HORIZONTAL).getAxis() == EnumFacing.Axis.X ? AABB_Z : AABB_X;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    @NotNull
-    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
-                                            @NotNull EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         return getBoundingBox(state, worldIn, pos).offset(pos);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEMetalAnvil te = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
+        var te = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
         if (te != null) {
             te.onBreakBlock(worldIn, pos, state);
         }
@@ -192,8 +152,7 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (hand == EnumHand.OFF_HAND) {
             return false;
         }
@@ -266,22 +225,6 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
         return new BlockStateContainer(this, HORIZONTAL);
     }
 
-    @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        return false;
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
@@ -294,13 +237,11 @@ public class BlockMetalAnvil extends BlockBase implements IMetalBlock {
     }
 
     @Override
-    @NotNull
     public Size getSize(ItemStack stack) {
         return Size.HUGE; // Can't be stored and causes overburden
     }
 
     @Override
-    @NotNull
     public Weight getWeight(ItemStack stack) {
         return Weight.VERY_HEAVY; // Stacksize = 1
     }

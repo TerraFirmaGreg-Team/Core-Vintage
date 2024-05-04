@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -15,7 +15,7 @@ import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import org.lwjgl.opengl.GL11;
 
-public class GuiFirePit extends GuiContainerTE<TEFirePit> {
+public class GuiFirePit extends GuiContainerTE<TileFirePit> {
 
     private static final ResourceLocation FIRE_PIT_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit.png");
     private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit_cooking_pot.png");
@@ -23,7 +23,7 @@ public class GuiFirePit extends GuiContainerTE<TEFirePit> {
 
     private final BlockFirePit.FirePitAttachment attachment;
 
-    public GuiFirePit(Container container, InventoryPlayer playerInv, TEFirePit tile) {
+    public GuiFirePit(Container container, InventoryPlayer playerInv, TileFirePit tile) {
         super(container, playerInv, tile, FIRE_PIT_BACKGROUND);
 
         attachment = tile.getWorld().getBlockState(tile.getPos()).getValue(BlockFirePit.ATTACHMENT);
@@ -34,7 +34,7 @@ public class GuiFirePit extends GuiContainerTE<TEFirePit> {
         drawBackground();
 
         // Draw the fire / burn time indicator
-        int temperature = (int) (51 * tile.getField(TEFirePit.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
+        int temperature = (int) (51 * tile.getField(TileFirePit.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
         if (temperature > 0) {
             if (temperature > 51) {
                 temperature = 51;
@@ -44,17 +44,17 @@ public class GuiFirePit extends GuiContainerTE<TEFirePit> {
 
         if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
             // Draw soup overlays + text
-            TEFirePit.CookingPotStage stage = tile.getCookingPotStage();
+            TileFirePit.CookingPotStage stage = tile.getCookingPotStage();
             String caption;
-            if (stage == TEFirePit.CookingPotStage.WAITING || stage == TEFirePit.CookingPotStage.BOILING) {
+            if (stage == TileFirePit.CookingPotStage.WAITING || stage == TileFirePit.CookingPotStage.BOILING) {
                 drawTexturedModalRect(guiLeft + 58, guiTop + 52, 191, 0, 24, 4);
-                if (stage == TEFirePit.CookingPotStage.WAITING) {
+                if (stage == TileFirePit.CookingPotStage.WAITING) {
                     caption = I18n.format("tfc.tooltip.firepit_cooking_pot_waiting");
                 } else // boiling
                 {
                     caption = I18n.format("tfc.tooltip.firepit_cooking_pot_boiling");
                 }
-            } else if (stage == TEFirePit.CookingPotStage.FINISHED) {
+            } else if (stage == TileFirePit.CookingPotStage.FINISHED) {
                 drawTexturedModalRect(guiLeft + 58, guiTop + 52, 191, 4, 24, 4);
                 caption = I18n.format("tfc.tooltip.firepit_cooking_pot_servings", tile.getSoupServings());
             } else {
@@ -70,11 +70,11 @@ public class GuiFirePit extends GuiContainerTE<TEFirePit> {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
         if (attachment == BlockFirePit.FirePitAttachment.COOKING_POT) {
-            TEFirePit.CookingPotStage stage = tile.getCookingPotStage();
-            if (stage == TEFirePit.CookingPotStage.BOILING || stage == TEFirePit.CookingPotStage.FINISHED) {
+            TileFirePit.CookingPotStage stage = tile.getCookingPotStage();
+            if (stage == TileFirePit.CookingPotStage.BOILING || stage == TileFirePit.CookingPotStage.FINISHED) {
                 // slots are disabled while boiling
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
-                for (int i = TEFirePit.SLOT_EXTRA_INPUT_START; i <= TEFirePit.SLOT_EXTRA_INPUT_END; i++) {
+                for (int i = TileFirePit.SLOT_EXTRA_INPUT_START; i <= TileFirePit.SLOT_EXTRA_INPUT_END; i++) {
                     drawSlotOverlay(inventorySlots.getSlot(i - 3)); // index of extra inputs
                 }
                 GL11.glEnable(GL11.GL_DEPTH_TEST);

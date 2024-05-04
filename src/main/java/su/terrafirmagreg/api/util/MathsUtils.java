@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,10 +14,6 @@ import net.minecraft.world.World;
 
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.lib.MathConstants;
-
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -146,8 +144,7 @@ public final class MathsUtils {
     }
 
     /**
-     * A method which handles the calculating of percentages. While this isn't a particularly difficult piece of code, it has been added for the sake
-     * of simplicity.
+     * A method which handles the calculating of percentages. While this isn't a particularly difficult piece of code, it has been added for the sake of simplicity.
      *
      * @param percent: The percent chance that this method should return true. 1.00 = 100%
      * @return boolean: Returns are randomly true or false, based on the suplied percentage.
@@ -218,13 +215,12 @@ public final class MathsUtils {
      */
     public static AxisAlignedBB getBoundsForPixels(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
 
-        return new AxisAlignedBB(getPixelDistance(minX), getPixelDistance(minY), getPixelDistance(minZ), getPixelDistance(maxX),
-                getPixelDistance(maxY), getPixelDistance(maxZ));
+        return new AxisAlignedBB(getPixelDistance(minX), getPixelDistance(minY), getPixelDistance(minZ), getPixelDistance(maxX), getPixelDistance(maxY), getPixelDistance(maxZ));
     }
 
     /**
-     * Takes an integer value and fits it within a range. If the initial value is less than the minimum it will be set to the minimum. If the initial
-     * value is greater than the maximum it will be lowered to the maximum.
+     * Takes an integer value and fits it within a range. If the initial value is less than the minimum it will be set to the minimum. If the initial value is greater than the
+     * maximum it will be lowered to the maximum.
      *
      * @param initial The initial value.
      * @param min     The minimum value.

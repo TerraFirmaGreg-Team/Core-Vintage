@@ -27,7 +27,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import tfctech.client.TechGuiHandler;
-import tfctech.objects.tileentities.TEInductionCrucible;
+import tfctech.objects.tileentities.TileInductionCrucible;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -190,7 +190,7 @@ public class BlockInductionCrucible extends Block implements IItemSize {
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEInductionCrucible();
+        return new TileInductionCrucible();
     }
 
     @Override

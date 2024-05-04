@@ -2,12 +2,11 @@ package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.spi.item.IOreDict;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 
 
 import net.dries007.tfc.api.capability.size.IItemSize;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface IAutoReg extends IOreDict, IItemSize {
@@ -18,10 +17,9 @@ public interface IAutoReg extends IOreDict, IItemSize {
      * @return объект ItemBlock или null, если объект не определен
      */
 
-    default @Nullable ItemBlock getItemBlock() {
+    default @Nullable Item getItemBlock() {
         return null;
     }
 
-    @NotNull
     String getName();
 }

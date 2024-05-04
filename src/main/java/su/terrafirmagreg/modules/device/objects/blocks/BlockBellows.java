@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRBellows;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -23,26 +23,28 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 
-public class BlockBellows extends BlockBase implements ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockBellows extends BaseBlock implements ITileBlock {
 
     public BlockBellows() {
-        super(Material.CIRCUITS, MapColor.GRAY);
-        setSoundType(SoundType.WOOD);
-        setHardness(2.0F);
-        setResistance(2.0F);
+        super(Settings.of()
+                .material(Material.CIRCUITS)
+                .mapColor(MapColor.GRAY)
+                .soundType(SoundType.WOOD)
+                .nonFullCube()
+                .nonOpaque()
+                .hardness(2.0F)
+                .resistance(2.0F));
+
         setHarvestLevel("axe", 0);
-        this.setDefaultState(this.blockState.getBaseState()
-                .withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
@@ -53,27 +55,12 @@ public class BlockBellows extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TEBellows te = TileUtils.getTile(worldIn, pos, TEBellows.class);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        TileBellows te = TileUtils.getTile(worldIn, pos, TileBellows.class);
         if (te != null) {
             return te.onRightClick();
         }
@@ -81,10 +68,7 @@ public class BlockBellows extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-                                            int meta, @NotNull EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             if (placer.isSneaking()) {
                 facing = placer.getHorizontalFacing().getOpposite();
@@ -96,34 +80,28 @@ public class BlockBellows extends BlockBase implements ITEBlock {
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
     }
 
     @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TEBellows();
-    }
-
-    @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/bellows";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEBellows.class;
+        return TileBellows.class;
     }
 
     @Override
     public TileEntitySpecialRenderer<?> getTileRenderer() {
         return new TESRBellows();
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileBellows();
     }
 }

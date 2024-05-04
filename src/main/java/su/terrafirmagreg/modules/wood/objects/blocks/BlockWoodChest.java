@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -12,7 +12,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.objects.inventory.capability.InventoryWoodLargeChest;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodChest;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -47,7 +47,7 @@ import static net.minecraft.block.BlockChest.Type.TRAP;
 import static su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants.CHEST;
 
 @Getter
-public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
+public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock {
 
     private final WoodBlockVariant blockVariant;
     private final WoodType type;
@@ -72,8 +72,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     @Override
@@ -86,8 +86,8 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
     }
 
     /**
-     * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest
-     * insertions, which means we need to block them (to stop inserting items that aren't the correct size)
+     * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions, which means we need
+     * to block them (to stop inserting items that aren't the correct size)
      */
     @Nullable
     @Override
@@ -131,7 +131,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 
     @Override
     public TileEntity createNewTileEntity(@NotNull World worldIn, int meta) {
-        return new TEWoodChest();
+        return new TileWoodChest();
     }
 
     @NotNull
@@ -172,7 +172,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITEBlock {
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEWoodChest.class;
+        return TileWoodChest.class;
     }
 
     @Override

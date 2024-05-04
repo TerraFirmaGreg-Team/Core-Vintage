@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TEGrindstone;
+import su.terrafirmagreg.modules.device.objects.tiles.TileGrindstone;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,17 +20,17 @@ import net.minecraftforge.items.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TESRGrindstone extends TileEntitySpecialRenderer<TEGrindstone> {
+public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
 
     public TESRGrindstone() {
     }
 
-    public void render(@NotNull TEGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(@NotNull TileGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
         IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
         if (cap != null) {
-            ItemStack input = cap.getStackInSlot(TEGrindstone.SLOT_INPUT);
-            ItemStack grindstone = cap.getStackInSlot(TEGrindstone.SLOT_GRINDSTONE);
+            ItemStack input = cap.getStackInSlot(TileGrindstone.SLOT_INPUT);
+            ItemStack grindstone = cap.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE);
             IBakedModel outputModel;
             int dir = te.getBlockMetadata();
             float angle = switch (dir) {

@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.client.render;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodChest;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodChest;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodChest;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Objects;
 
 @SideOnly(Side.CLIENT)
-public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
+public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
 
     private static final ResourceLocation SINGLE_TEXTURE = ModUtils.id("textures/entity/wood/chests/single.png");
     private static final ResourceLocation DOUBLE_TEXTURE = ModUtils.id("textures/entity/wood/chests/double.png");
@@ -28,7 +28,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TEWoodChest> {
     private final ModelChest largeChest = new ModelLargeChest();
 
     @Override
-    public void render(TEWoodChest te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileWoodChest te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);

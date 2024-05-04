@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodSupplyCart;
-import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodSupplyCart;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

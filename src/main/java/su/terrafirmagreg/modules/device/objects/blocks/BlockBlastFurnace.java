@@ -1,13 +1,14 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBlastFurnace;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -15,6 +16,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -29,14 +31,14 @@ import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.util.block.Multiblock;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBlock, ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsConsumerBlock, ITileBlock {
 
     private static final Multiblock BLAST_FURNACE_CHIMNEY;
 
@@ -74,10 +76,17 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
     }
 
     public BlockBlastFurnace() {
-        super(Material.IRON);
-        setHardness(2.0F);
-        setResistance(2.0F);
+        super(Settings.of()
+                .material(Material.IRON)
+                .hardness(2.0F)
+                .resistance(2.0F));
+
         setHarvestLevel("pickaxe", 0);
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     /**
@@ -98,8 +107,6 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
         return 5;
     }
 
-    @SuppressWarnings("deprecation")
-    @NotNull
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(LIT, meta == 1);
@@ -111,8 +118,8 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
     }
 
     @Override
-    public void breakBlock(@NotNull World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TEBlastFurnace.class);
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(worldIn, pos, TileBlastFurnace.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }
@@ -120,11 +127,10 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (!state.getValue(LIT)) {
-                var tile = TileUtils.getTile(worldIn, pos, TEBlastFurnace.class);
+                var tile = TileUtils.getTile(worldIn, pos, TileBlastFurnace.class);
                 if (tile == null)
                     return true;
                 ItemStack held = playerIn.getHeldItem(hand);
@@ -142,42 +148,35 @@ public class BlockBlastFurnace extends BlockBase implements IBellowsConsumerBloc
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, LIT);
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TEBlastFurnace();
+    public boolean canIntakeFrom(Vec3i offset, EnumFacing facing) {
+        return offset.equals(TileBellows.OFFSET_LEVEL);
     }
 
     @Override
-    public boolean canIntakeFrom(@NotNull Vec3i offset, @NotNull EnumFacing facing) {
-        return offset.equals(TEBellows.OFFSET_LEVEL);
-    }
-
-    @Override
-    public void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount) {
-        var tile = TileUtils.getTile(world, pos, TEBlastFurnace.class);
+    public void onAirIntake(World world, BlockPos pos, int airAmount) {
+        var tile = TileUtils.getTile(world, pos, TileBlastFurnace.class);
         if (tile != null) {
             tile.onAirIntake(airAmount);
         }
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/blast_furnace";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEBlastFurnace.class;
+        return TileBlastFurnace.class;
+    }
+
+    @Override
+    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileBlastFurnace();
     }
 }

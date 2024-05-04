@@ -48,7 +48,7 @@ public class ApplyRequiredSkill extends LootFunction {
 
     @Override
     @NotNull
-    public ItemStack apply(@NotNull ItemStack stack, @NotNull Random rand, LootContext context) {
+    public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
         Entity entity = context.getKillerPlayer();
         if (entity instanceof EntityPlayer) {
             IPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
@@ -82,8 +82,8 @@ public class ApplyRequiredSkill extends LootFunction {
 
         @Override
         @NotNull
-        public ApplyRequiredSkill deserialize(@NotNull JsonObject object, @NotNull JsonDeserializationContext deserializationContext,
-                                              LootCondition @NotNull [] conditionsIn) {
+        public ApplyRequiredSkill deserialize(JsonObject object, JsonDeserializationContext deserializationContext,
+                                              LootCondition[] conditionsIn) {
             String skillName = JsonUtils.getString(object, "skill");
             SkillType<? extends SimpleSkill> skillType = SkillType.get(skillName, SimpleSkill.class);
             if (skillType == null) {

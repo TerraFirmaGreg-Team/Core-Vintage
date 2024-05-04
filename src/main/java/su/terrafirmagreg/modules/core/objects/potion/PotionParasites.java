@@ -1,14 +1,11 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import su.terrafirmagreg.api.spi.effects.PotionBase;
+import su.terrafirmagreg.api.spi.effects.BasePotion;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
 
 import net.minecraft.entity.EntityLivingBase;
 
-
-import org.jetbrains.annotations.NotNull;
-
-public class PotionParasites extends PotionBase {
+public class PotionParasites extends BasePotion {
 
     public PotionParasites() {
         super(true, 0xFFE1B7);
@@ -16,7 +13,7 @@ public class PotionParasites extends PotionBase {
     }
 
     @Override
-    public void performEffect(@NotNull EntityLivingBase entity, int amplifier) {
+    public void performEffect(EntityLivingBase entity, int amplifier) {
         entity.attackEntityFrom(DamageSources.FOOD_POISON, 1.0F * (amplifier + 1));
     }
 

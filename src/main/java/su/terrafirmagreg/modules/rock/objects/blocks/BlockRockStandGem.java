@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.client.render.TESRRockGemDisplay;
-import su.terrafirmagreg.modules.rock.objects.tiles.TERockGemDisplay;
+import su.terrafirmagreg.modules.rock.objects.tiles.TileRockGemDisplay;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 import static su.terrafirmagreg.api.util.PropertyUtils.UP;
 
-public class BlockRockStandGem extends BlockRock implements ITEBlock {
+public class BlockRockStandGem extends BlockRock implements ITileBlock {
 
     public BlockRockStandGem(RockBlockVariant blockVariant, RockType type) {
         super(blockVariant, type);
@@ -50,24 +50,24 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
     }
 
     @Override
-    public @NotNull Size getSize(@NotNull ItemStack itemStack) {
+    public Size getSize(ItemStack itemStack) {
         return Size.LARGE;
     }
 
     @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack itemStack) {
+    public Weight getWeight(ItemStack itemStack) {
         return Weight.HEAVY;
     }
 
-    public boolean isFullCube(@NotNull IBlockState state) {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
-    protected @NotNull BlockStateContainer createBlockState() {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, HORIZONTAL, UP);
     }
 
-    public @NotNull IBlockState getStateFromMeta(int meta) {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
                 .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
                 .withProperty(UP, meta / 4 % 2 != 0);
@@ -77,34 +77,30 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
         return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(UP) ? 4 : 0);
     }
 
-    public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX,
-                                                     float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX,
+                                            float hitY, float hitZ, int meta, EntityLivingBase placer) {
         return this.getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing());
     }
 
     @NotNull
-    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
-                                            @NotNull EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
+                                            EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-    public boolean hasTileEntity(@NotNull IBlockState state) {
-        return true;
-    }
-
     @Nullable
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TERockGemDisplay();
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileRockGemDisplay();
     }
 
-    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            TERockGemDisplay te = TileUtils.getTile(worldIn, pos, TERockGemDisplay.class);
+            TileRockGemDisplay te = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
             if (te != null) {
                 return te.onRightClick(playerIn, hand);
             }
@@ -113,15 +109,15 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
         return true;
     }
 
-    public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        TERockGemDisplay te = TileUtils.getTile(worldIn, pos, TERockGemDisplay.class);
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileRockGemDisplay te = TileUtils.getTile(worldIn, pos, TileRockGemDisplay.class);
         if (te != null) {
             te.onBreakBlock();
         }
         super.breakBlock(worldIn, pos, state);
     }
 
-    public void neighborChanged(@NotNull IBlockState state, @NotNull World worldIn, BlockPos pos, @NotNull Block blockIn, BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (fromPos.equals(pos.up())) {
             if (worldIn.getBlockState(fromPos).getBlock() instanceof BlockAir) {
                 state = state.withProperty(UP, Boolean.TRUE);
@@ -133,25 +129,31 @@ public class BlockRockStandGem extends BlockRock implements ITEBlock {
     }
 
     @Override
-    public boolean hasComparatorInputOverride(@NotNull IBlockState state) {
+    public boolean hasComparatorInputOverride(IBlockState state) {
         return true;
     }
 
     @Override
-    public int getComparatorInputOverride(@NotNull IBlockState state, World world, @NotNull BlockPos pos) {
-        TERockGemDisplay te = TileUtils.getTile(world, pos, TERockGemDisplay.class);
+    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+        TileRockGemDisplay te = TileUtils.getTile(world, pos, TileRockGemDisplay.class);
         assert te != null;
         return (int) Math.floor(15 * ((double) te.getSize() / (double) te.getMaxStackSize()));
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TERockGemDisplay.class;
+        return TileRockGemDisplay.class;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public TileEntitySpecialRenderer<?> getTileRenderer() {
         return new TESRRockGemDisplay();
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileRockGemDisplay();
     }
 }

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonCrate;
-import su.terrafirmagreg.modules.device.objects.tiles.TECrate;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;
@@ -22,12 +22,12 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-public class GuiCrate extends GuiContainerTE<TECrate> {
+public class GuiCrate extends GuiContainerTE<TileCrate> {
 
     public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/crate.png");
     private final String translationKey;
 
-    public GuiCrate(Container container, InventoryPlayer playerInv, TECrate tile, IBlockState state) {
+    public GuiCrate(Container container, InventoryPlayer playerInv, TileCrate tile, IBlockState state) {
         super(container, playerInv, tile, BACKGROUND);
 
         this.translationKey = state.getBlock().getTranslationKey();

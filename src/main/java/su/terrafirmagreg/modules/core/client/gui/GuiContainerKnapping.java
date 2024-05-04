@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.client.gui;
 
-import su.terrafirmagreg.api.spi.gui.GuiContainerBase;
+import su.terrafirmagreg.api.spi.gui.BaseGuiContainer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.client.button.GuiButtonKnapping;
 import su.terrafirmagreg.modules.core.objects.container.ContainerBaseKnapping;
@@ -20,7 +20,7 @@ import net.dries007.tfc.client.TFCGuiHandler;
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class GuiContainerKnapping extends GuiContainerBase {
+public abstract class GuiContainerKnapping extends BaseGuiContainer {
 
     private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/knapping.png");
 

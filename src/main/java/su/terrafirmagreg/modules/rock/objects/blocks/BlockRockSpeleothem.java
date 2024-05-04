@@ -44,20 +44,20 @@ public class BlockRockSpeleothem extends BlockRock {
     }
 
     @Override
-    public boolean canPlaceBlockAt(@NotNull World worldIn, @NotNull BlockPos pos) {
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         return getBearing(worldIn, pos) > 0;
     }
 
     @Override
-    public void onBlockPlacedBy(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state, @NotNull EntityLivingBase placer,
-                                @NotNull ItemStack stack) {
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
+                                ItemStack stack) {
         var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
         worldIn.setBlockState(pos, state.withProperty(SIZE, size));
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         int size = state.getValue(SIZE).strength;
         if (getBearing(worldIn, pos) < size + 1) {
             worldIn.playEvent(2001, pos, Block.getStateId(worldIn.getBlockState(pos)));
@@ -67,22 +67,22 @@ public class BlockRockSpeleothem extends BlockRock {
     }
 
     @Override
-    public int quantityDropped(@NotNull IBlockState state, int fortune, Random random) {
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
         return 1 + random.nextInt(3);
     }
 
     @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return RockItemVariants.LOOSE.get(type);
     }
 
     @Override
-    public boolean canSilkHarvest(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer player) {
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return true;
     }
 
     @Override
-    public boolean isPassable(@NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return false;
     }
 
@@ -102,44 +102,44 @@ public class BlockRockSpeleothem extends BlockRock {
     @NotNull
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return state.getValue(SIZE).aabb;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(@NotNull IBlockState blockState, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return getBoundingBox(blockState, worldIn, pos);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullBlock(@NotNull IBlockState state) {
+    public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @NotNull
     @Override
     @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos blockPos,
-                                            @NotNull EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos blockPos,
+                                            EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
     @Override
-    public boolean canPlaceTorchOnTop(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
         return true;
     }
 
@@ -163,7 +163,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public IBlockState getActualState(final @NotNull IBlockState state, final @NotNull IBlockAccess worldIn, final @NotNull BlockPos pos) {
+    public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos) {
         var size = EnumSize.values()[Math.max(0, getBearing(worldIn, pos) - 1)];
         if (isCenter(worldIn, pos)) size = EnumSize.MEDIUM;
         return state.withProperty(SIZE, size);

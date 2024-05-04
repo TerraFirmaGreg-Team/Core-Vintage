@@ -1,20 +1,20 @@
 package su.terrafirmagreg.modules.arboriculture.objects.itemblocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodSapling;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
-public class ItemBlockWoodSapling extends ItemBlockBase {
+public class ItemBlockWoodSapling extends BaseItemBlock {
 
-    private final BlockWoodSapling blockWoodSapling;
+    private final BlockWoodSapling block;
 
-    public ItemBlockWoodSapling(BlockWoodSapling blockWoodSapling) {
-        super(blockWoodSapling);
+    public ItemBlockWoodSapling(BlockWoodSapling block) {
+        super(block);
 
-        this.blockWoodSapling = blockWoodSapling;
+        this.block = block;
     }
 
     @Override

@@ -21,10 +21,10 @@ public class SoilBlockVariants {
     public static SoilBlockVariant SLAB_DOUBLE_MUD_BRICKS;
     public static SoilBlockVariant SLAB_MUD_BRICKS;
     public static SoilBlockVariant WALL_MUD_BRICKS;
-    public static SoilBlockVariant MUD_MOSSY_BRICKS;
+    public static SoilBlockVariant MOSSY_MUD_BRICKS;
     public static SoilBlockVariant STAIRS_MOSSY_MUD_BRICKS;
     public static SoilBlockVariant SLAB_DOUBLE_MOSSY_MUD_BRICKS;
-    public static SoilBlockVariant SLAB_MUD_MOSSY_BRICKS;
-    public static SoilBlockVariant WALL_MUD_MOSSY_BRICKS;
+    public static SoilBlockVariant SLAB_MOSSY_MUD_BRICKS;
+    public static SoilBlockVariant WALL_MOSSY_MUD_BRICKS;
     public static SoilBlockVariant DRYING_BRICKS;
 }

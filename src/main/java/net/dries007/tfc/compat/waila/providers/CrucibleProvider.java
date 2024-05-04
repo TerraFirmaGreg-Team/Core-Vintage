@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TECrucible;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCrucible;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +25,7 @@ public class CrucibleProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TECrucible crucible = TileUtils.getTile(world, pos, TECrucible.class);
+        TileCrucible crucible = TileUtils.getTile(world, pos, TileCrucible.class);
         if (crucible != null) {
             if (crucible.getAlloy().getAmount() > 0) {
                 Metal metal = crucible.getAlloyResult();
@@ -44,6 +44,6 @@ public class CrucibleProvider implements IWailaBlock {
     @NotNull
     @Override
     public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TECrucible.class);
+        return Collections.singletonList(TileCrucible.class);
     }
 }

@@ -27,13 +27,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This model class allows for the quads of a model to change based on various in world context information. For example this can allow for certain
- * textures in a model to be changed based on an upgrade or other change. Variants of the model are automatically stored in a cache to allow for less
- * memory use and object construction when rendering block models.
+ * This model class allows for the quads of a model to change based on various in world context information. For example this can allow for certain textures in a model to be
+ * changed based on an upgrade or other change. Variants of the model are automatically stored in a cache to allow for less memory use and object construction when rendering block
+ * models.
  * <p>
- * This model works by passing item context to {@link #getCacheKey(ItemStack, World, EntityLivingBase)} and block context to
- * {@link #getCacheKey(IBlockState, EnumFacing)} to get a cache key for the context. This key is then sent to {@link #generateBlockModel(String)} to
- * build the new model instance. Both item and block models share the same cache.
+ * This model works by passing item context to {@link #getCacheKey(ItemStack, World, EntityLivingBase)} and block context to {@link #getCacheKey(IBlockState, EnumFacing)} to get a
+ * cache key for the context. This key is then sent to {@link #generateBlockModel(String)} to build the new model instance. Both item and block models share the same cache.
  */
 public abstract class CachedDynamicBakedModel implements IBakedModel {
 
@@ -61,8 +60,8 @@ public abstract class CachedDynamicBakedModel implements IBakedModel {
     }
 
     /**
-     * Generates a cache key from a block context. This method should always return the same result for the same input. The result is used by
-     * {@link #generateBlockModel(String)} to create a new model version so the result should also be descriptive.
+     * Generates a cache key from a block context. This method should always return the same result for the same input. The result is used by {@link #generateBlockModel(String)} to
+     * create a new model version so the result should also be descriptive.
      *
      * @param state The block state. If you use an extended block state this can contain arbitrary objects from
      *              {@link Block#getExtendedState(IBlockState, net.minecraft.world.IBlockAccess, net.minecraft.util.math.BlockPos)}.
@@ -72,8 +71,8 @@ public abstract class CachedDynamicBakedModel implements IBakedModel {
     public abstract String getCacheKey(IBlockState state, EnumFacing side);
 
     /**
-     * Generates a cache key from an item context. This method should always return the same result for the same input. The result is used by
-     * {@link #generateBlockModel(String)} to create a new model version so the result should also be descriptive.
+     * Generates a cache key from an item context. This method should always return the same result for the same input. The result is used by {@link #generateBlockModel(String)} to
+     * create a new model version so the result should also be descriptive.
      *
      * @param stack  The ItemStack. This is the actual item, and has nbt.
      * @param world  The world instance.
@@ -169,8 +168,7 @@ public abstract class CachedDynamicBakedModel implements IBakedModel {
     }
 
     /**
-     * This class handles getting an IBakedModel for an item context. It is
-     * {@link CachedDynamicBakedModel#getCacheKey(ItemStack, World, EntityLivingBase)} works.
+     * This class handles getting an IBakedModel for an item context. It is {@link CachedDynamicBakedModel#getCacheKey(ItemStack, World, EntityLivingBase)} works.
      */
     private static class ItemOverrideListRetexturable extends ItemOverrideList {
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
-import su.terrafirmagreg.api.spi.tile.TEBase;
+import su.terrafirmagreg.api.spi.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
 
 import net.minecraft.inventory.InventoryHelper;
@@ -17,7 +17,7 @@ import gregtech.api.unification.ore.OrePrefix;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TEMetalSheet extends TEBase {
+public class TEMetalSheet extends BaseTile {
 
     private final boolean[] faces;
 
@@ -26,7 +26,7 @@ public class TEMetalSheet extends TEBase {
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+    public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
         markForBlockUpdate();
     }

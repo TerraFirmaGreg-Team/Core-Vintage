@@ -24,7 +24,7 @@ import tfctech.objects.items.itemblocks.ItemBlockFridge;
 import tfctech.objects.items.itemblocks.ItemBlockWireDrawBench;
 import tfctech.objects.tileentities.TEElectricForge;
 import tfctech.objects.tileentities.TEFridge;
-import tfctech.objects.tileentities.TEInductionCrucible;
+import tfctech.objects.tileentities.TileInductionCrucible;
 import tfctech.objects.tileentities.TELatexExtractor;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 import tfctech.objects.tileentities.TESmelteryFirebox;
@@ -82,7 +82,7 @@ public final class TechBlocks {
 
         //Register TEs
         register(TEElectricForge.class, "electric_forge");
-        register(TEInductionCrucible.class, "induction_crucible");
+        register(TileInductionCrucible.class, "induction_crucible");
         register(TELatexExtractor.class, "latex_extractor");
         register(TEWireDrawBench.class, "wire_draw_bench");
         register(TEFridge.class, "fridge");

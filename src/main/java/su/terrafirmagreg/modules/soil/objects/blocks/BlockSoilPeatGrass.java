@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -29,14 +29,16 @@ import java.util.Random;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
-public class BlockSoilPeatGrass extends BlockBase implements IColorfulBlock {
+@SuppressWarnings("deprecation")
+public class BlockSoilPeatGrass extends BaseBlock implements IColorfulBlock {
 
     public BlockSoilPeatGrass() {
-        super(Material.GRASS);
+        super(Settings.of()
+                .material(Material.GRASS)
+                .soundType(SoundType.PLANT));
 
-        setSoundType(SoundType.PLANT);
         setTickRandomly(true);
-        setDefaultState(this.getDefaultState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
@@ -46,7 +48,7 @@ public class BlockSoilPeatGrass extends BlockBase implements IColorfulBlock {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "soil/peat_grass";
     }
 
@@ -57,14 +59,13 @@ public class BlockSoilPeatGrass extends BlockBase implements IColorfulBlock {
     }
 
     @Override
-    public int getMetaFromState(@NotNull IBlockState state) {
+    public int getMetaFromState(IBlockState state) {
         return 0;
     }
 
-    @SuppressWarnings("deprecation")
     @NotNull
     @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, @NotNull BlockPos pos) {
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
         return state.withProperty(NORTH, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
                 .withProperty(EAST, BlockUtils.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
@@ -73,26 +74,23 @@ public class BlockSoilPeatGrass extends BlockBase implements IColorfulBlock {
     }
 
     @Override
-    public void randomTick(World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (world.isRemote) return;
         BlockSoilGrass.spreadGrass(world, pos, state, rand);
     }
 
     @Override
-    @NotNull
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(BlocksSoil.PEAT);
     }
 
     @Override
-    @NotNull
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
     }

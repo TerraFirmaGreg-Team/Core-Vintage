@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.api.capabilities.temperature.CapabilityTemperature;
 
@@ -24,7 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import com.google.common.collect.ImmutableList;
-import mcp.MethodsReturnNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,9 +33,7 @@ import java.util.Objects;
 
 import static net.minecraft.util.text.TextFormatting.GOLD;
 
-@MethodsReturnNonnullByDefault
-
-public class ItemDebug extends ItemBase {
+public class ItemDebug extends BaseItem {
 
     public ItemDebug() {
         setNoRepair();
@@ -77,9 +74,7 @@ public class ItemDebug extends ItemBase {
     }
 
     @Override
-    @NotNull
-    public EnumActionResult onItemUse(@NotNull EntityPlayer player, World world, @NotNull BlockPos pos, @NotNull EnumHand hand,
-                                      @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (world.isRemote) return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
         ItemStack stack = player.getHeldItemMainhand();
         NBTTagCompound nbt = stack.getTagCompound();
@@ -125,8 +120,7 @@ public class ItemDebug extends ItemBase {
     }
 
     @Override
-    @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World world, @NotNull EntityPlayer player, @NotNull EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         if (world.isRemote) return ActionResult.newResult(EnumActionResult.FAIL, player.getHeldItem(hand));
         if (player.isSneaking() &&
                 world.getBlockState(Objects.requireNonNull(player.rayTrace(10, 1)).getBlockPos()).getBlock()
@@ -141,7 +135,7 @@ public class ItemDebug extends ItemBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (worldIn == null) return;
         NBTTagCompound nbt = stack.getTagCompound();
         if (nbt == null) return;
@@ -172,22 +166,22 @@ public class ItemDebug extends ItemBase {
     }
 
     @Override
-    public boolean hasEffect(@NotNull ItemStack stack) {
+    public boolean hasEffect(ItemStack stack) {
         return true;
     }
 
     @Override
-    public int getEntityLifespan(@NotNull ItemStack itemStack, @NotNull World world) {
+    public int getEntityLifespan(ItemStack itemStack, World world) {
         return 60;
     }
 
     @Override
-    public IRarity getForgeRarity(@NotNull ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.EPIC;
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "core/wand";
     }
 

@@ -2,9 +2,6 @@ package su.terrafirmagreg.modules.device.objects.items;
 
 import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 
-
-import org.jetbrains.annotations.NotNull;
-
 public class ItemLeatherFlask extends ItemFlask {
 
     protected static int capacity = ModuleDeviceConfig.ITEMS.WATER_FLASKS.leatherCap;
@@ -15,7 +12,7 @@ public class ItemLeatherFlask extends ItemFlask {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/flask/leather";
     }
 

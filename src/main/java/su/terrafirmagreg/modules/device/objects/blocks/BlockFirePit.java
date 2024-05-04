@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.tile.ITEBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
@@ -9,13 +10,12 @@ import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -31,6 +31,7 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -64,7 +65,8 @@ import java.util.Random;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
-public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, ITEBlock {
+@SuppressWarnings("deprecation")
+public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumerBlock, ITileBlock {
 
     public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
 
@@ -73,21 +75,26 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     private static final AxisAlignedBB ATTACHMENT_COLLISION_ADDITION_AABB = new AxisAlignedBB(0.1875, 0.125, 0.1875, 0.8125, 0.9375, 0.8125);
 
     public BlockFirePit() {
-        super(Material.WOOD);
+        super(Settings.of()
+                .material(Material.WOOD)
+                .hardness(0.3F)
+                .nonFullCube()
+                .nonOpaque());
 
         disableStats();
         setTickRandomly(true);
         setLightLevel(1F);
-        setHardness(0.3F);
-
-        setDefaultState(blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)
                 .withProperty(ATTACHMENT, FirePitAttachment.NONE));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
+
+    @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
                 .withProperty(LIT, (meta & 1) > 0)
@@ -100,14 +107,6 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @NotNull
-    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         if (state.getValue(ATTACHMENT) != FirePitAttachment.NONE) {
             return FIREPIT_ATTACHMENT_SELECTION_AABB;
@@ -116,16 +115,8 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                      @Nullable Entity entityIn, boolean isActualState) {
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+                                      boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, FIREPIT_AABB);
         if (state.getValue(ATTACHMENT) != FirePitAttachment.NONE) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, ATTACHMENT_COLLISION_ADDITION_AABB);
@@ -133,14 +124,8 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TEFirePit te = TileUtils.getTile(worldIn, pos, TEFirePit.class);
+        TileFirePit te = TileUtils.getTile(worldIn, pos, TileFirePit.class);
         // Have to check the above block, since minecraft think this block is "roof"
         if (te != null && state.getValue(LIT) && worldIn.isRainingAt(pos.up())) {
             te.onRainDrop();
@@ -173,8 +158,8 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
         }
 
         if (state.getValue(ATTACHMENT) == FirePitAttachment.COOKING_POT) {
-            TEFirePit tile = TileUtils.getTile(world, pos, TEFirePit.class);
-            if (tile != null && tile.getCookingPotStage() == TEFirePit.CookingPotStage.BOILING) {
+            TileFirePit tile = TileUtils.getTile(world, pos, TileFirePit.class);
+            if (tile != null && tile.getCookingPotStage() == TileFirePit.CookingPotStage.BOILING) {
                 for (int i = 0; i < rng.nextInt(5) + 4; i++)
                     TFCParticles.BUBBLE.spawn(world, x + rng.nextFloat() * 0.375 - 0.1875, y + 0.525, z + rng.nextFloat() * 0.375 - 0.1875, 0, 0.05D,
                             0, 3);
@@ -183,12 +168,12 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
             }
         }
         if ((state.getValue(ATTACHMENT) == FirePitAttachment.GRILL)) {
-            TEFirePit tile = TileUtils.getTile(world, pos, TEFirePit.class);
+            TileFirePit tile = TileUtils.getTile(world, pos, TileFirePit.class);
             if (tile != null) {
                 IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (cap != null) {
                     boolean anythingInInv = false;
-                    for (int i = TEFirePit.SLOT_EXTRA_INPUT_START; i <= TEFirePit.SLOT_EXTRA_INPUT_END; i++) {
+                    for (int i = TileFirePit.SLOT_EXTRA_INPUT_START; i <= TileFirePit.SLOT_EXTRA_INPUT_END; i++) {
                         if (!cap.getStackInSlot(i).isEmpty()) {
                             anythingInInv = true;
                             break;
@@ -206,7 +191,6 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!canBePlacedOn(worldIn, pos.add(0, -1, 0))) {
             worldIn.setBlockToAir(pos);
@@ -215,7 +199,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEFirePit tile = TileUtils.getTile(worldIn, pos, TEFirePit.class);
+        TileFirePit tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }
@@ -223,13 +207,11 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    @NotNull
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.AIR;
     }
 
     @Override
-    @NotNull
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
@@ -241,8 +223,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
-                                    float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack held = player.getHeldItem(hand);
 
@@ -256,7 +237,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 
             // Try to attach an item
             FirePitAttachment attachment = state.getValue(ATTACHMENT);
-            TEFirePit tile = TileUtils.getTile(worldIn, pos, TEFirePit.class);
+            TileFirePit tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
             if (tile != null) {
                 if (attachment == FirePitAttachment.NONE) {
                     if (OreDictUtils.contains(held, "cookingPot")) {
@@ -270,7 +251,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
                     }
                 } else if (attachment == FirePitAttachment.COOKING_POT) {
                     // Interact with the cooking pot
-                    if (tile.getCookingPotStage() == TEFirePit.CookingPotStage.EMPTY) {
+                    if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.EMPTY) {
                         FluidStack fluidStack = FluidUtil.getFluidContained(held);
                         if (fluidStack != null && fluidStack.amount >= 1000 && fluidStack.getFluid() == FluidsTFC.FRESH_WATER.get()) {
                             // Add water
@@ -282,7 +263,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
                             worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 0.5f, 1.0f);
                             return true;
                         }
-                    } else if (tile.getCookingPotStage() == TEFirePit.CookingPotStage.FINISHED) {
+                    } else if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.FINISHED) {
                         if (OreDictUtils.contains(held, "bowl")) {
                             tile.onUseBowlOnCookingPot(player, held);
                             return true;
@@ -298,7 +279,7 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
                 if (tile != null) {
                     IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                     if (cap != null) {
-                        for (int i = TEFirePit.SLOT_EXTRA_INPUT_START; i <= TEFirePit.SLOT_EXTRA_INPUT_END; i++) {
+                        for (int i = TileFirePit.SLOT_EXTRA_INPUT_START; i <= TileFirePit.SLOT_EXTRA_INPUT_END; i++) {
                             if (!cap.getStackInSlot(i).isEmpty()) {
                                 anythingInTheInv = true;
                                 break;
@@ -346,7 +327,6 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, LIT, ATTACHMENT);
     }
@@ -357,14 +337,8 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEFirePit();
+    public @Nullable TileFirePit createNewTileEntity(World worldIn, int meta) {
+        return new TileFirePit();
     }
 
     @Override
@@ -380,12 +354,12 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
 
     @Override
     public boolean canIntakeFrom(Vec3i offset, EnumFacing facing) {
-        return offset.equals(TEBellows.OFFSET_LEVEL);
+        return offset.equals(TileBellows.OFFSET_LEVEL);
     }
 
     @Override
     public void onAirIntake(World world, BlockPos pos, int airAmount) {
-        TEFirePit teFirePit = TileUtils.getTile(world, pos, TEFirePit.class);
+        TileFirePit teFirePit = TileUtils.getTile(world, pos, TileFirePit.class);
         if (teFirePit != null) {
             teFirePit.onAirIntake(airAmount);
         }
@@ -396,13 +370,13 @@ public class BlockFirePit extends BlockBase implements IBellowsConsumerBlock, IT
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/fire_pit";
     }
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEFirePit.class;
+        return TileFirePit.class;
     }
 
     @Override

@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
-import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodWorkbench;
+import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodWorkbench;
 
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
@@ -59,8 +59,8 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     @SideOnly(Side.CLIENT)

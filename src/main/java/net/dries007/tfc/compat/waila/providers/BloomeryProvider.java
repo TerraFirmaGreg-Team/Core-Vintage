@@ -1,8 +1,8 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBloom;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBloomery;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBloom;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBloomery;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -39,7 +39,7 @@ public class BloomeryProvider implements IWailaBlock {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof TEBloomery bloomery) {
+        if (tileEntity instanceof TileBloomery bloomery) {
             if (state.getValue(LIT)) {
                 List<ItemStack> oreStacks = bloomery.getOreStacks();
                 BloomeryRecipe recipe = oreStacks.size() > 0 ? BloomeryRecipe.get(oreStacks.get(0)) : null;
@@ -75,7 +75,7 @@ public class BloomeryProvider implements IWailaBlock {
                 currentTooltip.add(new TextComponentTranslation("waila.tfc.bloomery.ores", ores, max).getFormattedText());
                 currentTooltip.add(new TextComponentTranslation("waila.tfc.bloomery.fuel", fuel, max).getFormattedText());
             }
-        } else if (tileEntity instanceof TEBloom bloom) {
+        } else if (tileEntity instanceof TileBloom bloom) {
             IItemHandler cap = bloom.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (cap != null) {
                 ItemStack bloomStack = cap.getStackInSlot(0);
@@ -93,6 +93,6 @@ public class BloomeryProvider implements IWailaBlock {
     @NotNull
     @Override
     public List<Class<?>> getLookupClass() {
-        return ImmutableList.of(TEBloom.class, TEBloomery.class);
+        return ImmutableList.of(TileBloom.class, TileBloomery.class);
     }
 }

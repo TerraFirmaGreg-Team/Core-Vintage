@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -69,7 +69,7 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
+    public @Nullable BaseItemBlock getItemBlock() {
         return new ItemBlockWoodSapling(this);
     }
 

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
@@ -9,6 +9,7 @@ import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalSheet;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -33,14 +34,14 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 import static su.terrafirmagreg.api.util.PropertyUtils.*;
 
-public class BlockMetalCladding extends BlockBase implements IMetalBlock {
+@SuppressWarnings("deprecation")
+public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
     public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[] { DOWN, UP, NORTH, SOUTH, WEST, EAST };
     private static final AxisAlignedBB[] SHEET_AABB = new AxisAlignedBB[] {
@@ -56,16 +57,18 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
     private final MetalType type;
 
     public BlockMetalCladding(MetalBlockVariant variant, MetalType type) {
-        super(net.minecraft.block.material.Material.IRON);
+        super(Settings.of()
+                .material(Material.IRON)
+                .nonOpaque()
+                .nonFullCube()
+                .hardness(40F)
+                .resistance(25F));
 
         this.variant = variant;
         this.type = type;
 
-        setHardness(40F);
-        setResistance(25F);
         setHarvestLevel("pickaxe", 0);
-
-        setDefaultState(this.blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACE_PROPERTIES[0], false)
                 .withProperty(FACE_PROPERTIES[1], false)
                 .withProperty(FACE_PROPERTIES[2], false)
@@ -80,19 +83,13 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
     }
 
     @Override
-    public @NotNull MetalType getType() {
+    public MetalType getType() {
         return type;
     }
 
     @Override
-    public @Nullable ItemBlockBase getItemBlock() {
+    public @Nullable BaseItemBlock getItemBlock() {
         return null;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isTopSolid(IBlockState state) {
-        return false;
     }
 
     @Override
@@ -100,40 +97,18 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
         return 0;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    @NotNull
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (tile != null) {
+        var te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        if (te != null) {
             for (EnumFacing face : EnumFacing.values()) {
-                state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
+                state = state.withProperty(FACE_PROPERTIES[face.getIndex()], te.getFace(face));
             }
         }
         return state;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isBlockNormalCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isNormalCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         TEMetalSheet tile = TileUtils.getTile(source, pos, TEMetalSheet.class);
         int sheets = 0;
@@ -155,49 +130,35 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
     }
 
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                      @Nullable Entity entityIn, boolean isActualState) {
-        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (tile != null) {
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+                                      boolean isActualState) {
+        var te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        if (te != null) {
             for (EnumFacing face : EnumFacing.values()) {
-                if (tile.getFace(face)) {
+                if (te.getFace(face)) {
                     addCollisionBoxToList(pos, entityBox, collidingBoxes, SHEET_AABB[face.getIndex()]);
                 }
             }
         }
     }
 
-    @Nullable
     @Override
-    @SuppressWarnings("deprecation")
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         return getBoundingBox(state, worldIn, pos);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
@@ -218,15 +179,13 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEMetalSheet te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        var te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (te != null) te.onBreakBlock();
         super.breakBlock(worldIn, pos, state);
     }
 
-    @Nullable
     @Override
-    @SuppressWarnings("deprecation")
-    public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
+    public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
         TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
@@ -242,34 +201,15 @@ public class BlockMetalCladding extends BlockBase implements IMetalBlock {
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACE_PROPERTIES);
     }
 
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        return false;
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public @Nullable TileEntity createTileEntity(World world, IBlockState state) {
         return new TEMetalSheet();
     }
 
-    @NotNull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(OreDictUnifier.get(OrePrefix.plate, Materials.Iron).getItem());

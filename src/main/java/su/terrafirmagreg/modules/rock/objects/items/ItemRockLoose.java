@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
 import su.terrafirmagreg.modules.rock.client.gui.GuiContainerKnappingRock;
-import su.terrafirmagreg.modules.rock.objects.container.ContainerKnappingRock;
+import su.terrafirmagreg.modules.rock.objects.containers.ContainerKnappingRock;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -37,7 +37,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ItemRockLoose extends ItemBase implements IRockItem, IContainerProvider<ContainerKnappingRock, GuiContainerKnappingRock> {
+public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProvider<ContainerKnappingRock, GuiContainerKnappingRock> {
 
     private final RockItemVariant itemVariant;
     private final RockType type;
@@ -58,19 +58,19 @@ public class ItemRockLoose extends ItemBase implements IRockItem, IContainerProv
 
     @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.SMALL;
     }
 
     @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.VERY_LIGHT;
     }
 
     @Override
     @NotNull
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
             GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.KNAPPING_ROCK);
@@ -80,7 +80,7 @@ public class ItemRockLoose extends ItemBase implements IRockItem, IContainerProv
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation(

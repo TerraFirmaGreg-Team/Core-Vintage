@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;
@@ -29,13 +29,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.Modules.Module_Wood;
+import static su.terrafirmagreg.modules.Modules.Wood;
 
-@Module(moduleID = Module_Wood)
+@Module(moduleID = Wood)
 public final class ModuleWood extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleWood.class.getSimpleName());
-    public static final CreativeTabs WOOD_TAB = new CreativeTabBase("wood", "wood/planks/pine");
+    public static final CreativeTabs WOOD_TAB = new BaseCreativeTab("wood", "wood/planks/pine");
 
     public static IPacketService PACKET_SERVICE;
 

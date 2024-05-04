@@ -41,8 +41,7 @@ public class TFCSounds {
     private static final SoundEvent CHARCOAL_PILE_PLACE = createSoundEvent("block.charcoal.place");
     private static final SoundEvent CHARCOAL_PILE_STEP = createSoundEvent("block.charcoal.step");
 
-    public static final SoundType CHARCOAL_PILE = new SoundType(1.0F, 1.0F, CHARCOAL_PILE_BREAK, CHARCOAL_PILE_STEP, CHARCOAL_PILE_PLACE,
-            CHARCOAL_PILE_HIT, CHARCOAL_PILE_FALL);
+    public static final SoundType CHARCOAL_PILE = new SoundType(1.0F, 1.0F, CHARCOAL_PILE_BREAK, CHARCOAL_PILE_STEP, CHARCOAL_PILE_PLACE, CHARCOAL_PILE_HIT, CHARCOAL_PILE_FALL);
 
     @SubscribeEvent
     public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {

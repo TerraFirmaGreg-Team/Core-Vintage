@@ -199,8 +199,7 @@ public class ItemMetalTool extends ItemMetal {
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                      float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
 
         if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
@@ -208,12 +207,11 @@ public class ItemMetalTool extends ItemMetal {
         } else if (type == Metal.ItemType.SHOVEL) {
             IBlockState iblockstate = worldIn.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            if (!(block instanceof BlockRockVariant)) {
+            if (!(block instanceof BlockRockVariant rockVariant)) {
                 return EnumActionResult.PASS;
             }
-            BlockRockVariant rockVariant = (BlockRockVariant) block;
-            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up())
-                    .getMaterial() == Material.AIR && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS ||
+            if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR &&
+                    rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS ||
                     rockVariant.getType() == Rock.Type.DIRT) {
                 IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH)
                         .getDefaultState();
@@ -276,8 +274,7 @@ public class ItemMetalTool extends ItemMetal {
                 stack.damageItem(1, entityLiving);
             }
         }
-        if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer && !worldIn.isRemote) {
-            EntityPlayer player = (EntityPlayer) entityLiving;
+        if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer player && !worldIn.isRemote) {
             int areaPlus = areaOfEffect - 1; //First block already added
             for (BlockPos.MutableBlockPos extraPos : BlockPos.getAllInBoxMutable(pos.add(-areaPlus, -areaPlus, -areaPlus),
                     pos.add(areaPlus, areaPlus, areaPlus))) {
@@ -296,21 +293,15 @@ public class ItemMetalTool extends ItemMetal {
     @Override
     public boolean canHarvestBlock(IBlockState state) {
         Material material = state.getMaterial();
-        switch (type) {
-            case AXE:
-                return material == Material.WOOD || material == Material.PLANTS || material == Material.VINE;
-            case PICK:
-                return material == Material.IRON || material == Material.ANVIL || material == Material.ROCK;
-            case SHOVEL:
-                return material == Material.SNOW || material == Material.CRAFTED_SNOW;
-            case SCYTHE:
-                return material == Material.PLANTS || material == Material.VINE || material == Material.LEAVES;
-            case KNIFE:
-                return material == Material.VINE || material == Material.LEAVES;
-            case SWORD:
-                return material == Material.WEB;
-        }
-        return false;
+        return switch (type) {
+            case AXE -> material == Material.WOOD || material == Material.PLANTS || material == Material.VINE;
+            case PICK -> material == Material.IRON || material == Material.ANVIL || material == Material.ROCK;
+            case SHOVEL -> material == Material.SNOW || material == Material.CRAFTED_SNOW;
+            case SCYTHE -> material == Material.PLANTS || material == Material.VINE || material == Material.LEAVES;
+            case KNIFE -> material == Material.VINE || material == Material.LEAVES;
+            case SWORD -> material == Material.WEB;
+            default -> false;
+        };
     }
 
     @Override

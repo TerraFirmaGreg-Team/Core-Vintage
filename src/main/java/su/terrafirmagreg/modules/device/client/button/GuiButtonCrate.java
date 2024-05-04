@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.client.button;
 
-import su.terrafirmagreg.api.spi.button.GuiButtonBase;
+import su.terrafirmagreg.api.spi.button.BaseGuiButton;
 import su.terrafirmagreg.api.spi.button.IButtonTooltip;
-import su.terrafirmagreg.modules.device.objects.tiles.TECrate;
+import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,11 +13,11 @@ import org.jetbrains.annotations.NotNull;
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
 import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
 
-public class GuiButtonCrate extends GuiButtonBase implements IButtonTooltip {
+public class GuiButtonCrate extends BaseGuiButton implements IButtonTooltip {
 
-    private final TECrate tile;
+    private final TileCrate tile;
 
-    public GuiButtonCrate(TECrate tile, int buttonId, int guiTop, int guiLeft) {
+    public GuiButtonCrate(TileCrate tile, int buttonId, int guiTop, int guiLeft) {
         super(buttonId, guiLeft + 123, guiTop + 35, 20, 20, "");
         this.tile = tile;
     }

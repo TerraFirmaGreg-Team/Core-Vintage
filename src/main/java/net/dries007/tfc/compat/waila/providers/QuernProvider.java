@@ -2,7 +2,7 @@ package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
-import su.terrafirmagreg.modules.device.objects.tiles.TEQuern;
+import su.terrafirmagreg.modules.device.objects.tiles.TileQuern;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.device.objects.tiles.TEQuern.SLOT_HANDSTONE;
+import static su.terrafirmagreg.modules.device.objects.tiles.TileQuern.SLOT_HANDSTONE;
 
 public class QuernProvider implements IWailaBlock {
 
@@ -29,7 +29,7 @@ public class QuernProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>(1);
-        TEQuern quern = TileUtils.getTile(world, pos, TEQuern.class);
+        TileQuern quern = TileUtils.getTile(world, pos, TileQuern.class);
         IItemHandler handler;
         ItemStack handstone;
         if (quern != null && quern.hasHandstone() && (handler = quern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) != null &&

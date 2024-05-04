@@ -10,8 +10,8 @@ import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Makes predators wanders only in it's designed hunting area Area = {@link EntityCreature#setHomePosAndDistance} A nice addition for 1.15: Make the
- * home area changes over time, as if this entity is migrating to another place
+ * Makes predators wanders only in it's designed hunting area Area = {@link EntityCreature#setHomePosAndDistance} A nice addition for 1.15: Make the home area changes over time, as
+ * if this entity is migrating to another place
  */
 public class EntityAnimalAIWanderHuntArea extends EntityAIWander {
 

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.api.spi.render.TESRBase;
+import su.terrafirmagreg.api.spi.render.BaseTESR;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TEBellows;
+import su.terrafirmagreg.modules.device.objects.tiles.TileBellows;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,12 +18,12 @@ import org.lwjgl.opengl.GL11;
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
-public class TESRBellows extends TESRBase<TEBellows> {
+public class TESRBellows extends BaseTESR<TileBellows> {
 
     private static final ResourceLocation TEXTURE = ModUtils.id("textures/blocks/device/bellows/tesr.png");
 
     @Override
-    public void render(TEBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.03125D, z + 0.5D);
         GlStateManager.rotate((te.getBlockMetadata() & 3) * 90f, 0.0F, 1.0F, 0.0F);
@@ -55,7 +55,7 @@ public class TESRBellows extends TESRBase<TEBellows> {
     }
 
     @Override
-    public boolean isGlobalRenderer(@NotNull TEBellows te) {
+    public boolean isGlobalRenderer(@NotNull TileBellows te) {
         return false;
     }
 

@@ -1,7 +1,7 @@
 package tfctech.client;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.container.ContainerCrucible;
+import su.terrafirmagreg.modules.device.objects.containers.ContainerCrucible;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -38,9 +38,9 @@ import tfctech.objects.container.ContainerSmelteryCauldron;
 import tfctech.objects.container.ContainerSmelteryFirebox;
 import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.tileentities.TEElectricForge;
-import tfctech.objects.tileentities.TEInductionCrucible;
 import tfctech.objects.tileentities.TESmelteryCauldron;
 import tfctech.objects.tileentities.TESmelteryFirebox;
+import tfctech.objects.tileentities.TileInductionCrucible;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,7 +69,7 @@ public class TechGuiHandler implements IGuiHandler {
                 TEElectricForge teElectricForge = TileUtils.getTile(world, pos, TEElectricForge.class);
                 return teElectricForge == null ? null : new ContainerElectricForge(player.inventory, teElectricForge);
             case INDUCTION_CRUCIBLE:
-                TEInductionCrucible teInductionCrucible = TileUtils.getTile(world, pos, TEInductionCrucible.class);
+                TileInductionCrucible teInductionCrucible = TileUtils.getTile(world, pos, TileInductionCrucible.class);
                 return teInductionCrucible == null ? null : new ContainerCrucible(player.inventory, teInductionCrucible);
             case SMELTERY_CAULDRON:
                 TESmelteryCauldron teSmelteryCauldron = TileUtils.getTile(world, pos, TESmelteryCauldron.class);
@@ -95,7 +95,7 @@ public class TechGuiHandler implements IGuiHandler {
             case ELECTRIC_FORGE:
                 return new GuiElectricForge(container, player.inventory, TileUtils.getTile(world, pos, TEElectricForge.class));
             case INDUCTION_CRUCIBLE:
-                return new GuiInductionCrucible(container, player.inventory, TileUtils.getTile(world, pos, TEInductionCrucible.class));
+                return new GuiInductionCrucible(container, player.inventory, TileUtils.getTile(world, pos, TileInductionCrucible.class));
             case SMELTERY_CAULDRON:
                 return new GuiSmelteryCauldron(container, player.inventory, TileUtils.getTile(world, pos, TESmelteryCauldron.class));
             case SMELTERY_FIREBOX:

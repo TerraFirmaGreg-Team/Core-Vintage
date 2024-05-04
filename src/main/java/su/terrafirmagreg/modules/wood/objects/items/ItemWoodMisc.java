@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
 
@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 
 import lombok.Getter;
 
-public class ItemWoodMisc extends ItemBase {
+public class ItemWoodMisc extends BaseItem {
 
     @Getter
     private final Size size;

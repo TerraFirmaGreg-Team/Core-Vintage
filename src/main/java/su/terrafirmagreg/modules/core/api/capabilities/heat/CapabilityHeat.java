@@ -211,8 +211,8 @@ public final class CapabilityHeat {
     /**
      * Use this to increase the heat on an IItemHeat instance.
      *
-     * @param modifier the modifier for how much this will heat up: 0 - 1 slows down cooling, 1 = no heating or cooling, > 1 heats, 2 heats at the
-     *                 same rate of normal cooling, 2+ heats faster
+     * @param modifier the modifier for how much this will heat up: 0 - 1 slows down cooling, 1 = no heating or cooling, > 1 heats, 2 heats at the same rate of normal cooling, 2+
+     *                 heats faster
      */
     public static void addTemp(ICapabilityHeat instance, float modifier) {
         final float temp = instance.getTemperature() + modifier * instance.getHeatCapacity() * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;

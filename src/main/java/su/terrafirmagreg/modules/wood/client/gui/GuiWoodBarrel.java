@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.client.button.GuiButtonBarrelSeal;
-import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -40,12 +40,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiWoodBarrel extends GuiContainerTE<TEWoodBarrel> {
+public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
 
     public static final ResourceLocation BARREL_BACKGROUND = ModUtils.id("textures/gui/container/barrel.png");
     private final String translationKey;
 
-    public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TEWoodBarrel tile, IBlockState state) {
+    public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TileWoodBarrel tile, IBlockState state) {
         super(container, playerInv, tile, BARREL_BACKGROUND);
 
         this.translationKey = state.getBlock().getTranslationKey();

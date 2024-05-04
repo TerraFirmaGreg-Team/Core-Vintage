@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.wood.objects.itemblocks;
 
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -57,7 +57,7 @@ import java.util.List;
  * Item block for {@link BlockWoodBarrel} Only has NBT data if the barrel is sealed and has contents
  */
 
-public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
+public class ItemBlockWoodBarrel extends BaseItemBlock implements ICustomMesh {
 
     private final BlockWoodBarrel block;
 
@@ -68,10 +68,8 @@ public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
 
     }
 
-    @NotNull
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                      float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty()) {
             IFluidHandler barrelCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
@@ -82,7 +80,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
                 if (handler != null && handler.drain(Fluid.BUCKET_VOLUME, false) != null) {
                     //noinspection ConstantConditions
                     Fluid fluid = handler.drain(Fluid.BUCKET_VOLUME, false).getFluid();
-                    if (fluid.getTemperature() < TEWoodBarrel.BARREL_MAX_FLUID_TEMPERATURE) {
+                    if (fluid.getTemperature() < TileWoodBarrel.BARREL_MAX_FLUID_TEMPERATURE) {
                         boolean canCreateSources = false; //default
                         if (state.getBlock() instanceof BlockFluidClassic) {
                             BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(fluidPos).getBlock();
@@ -124,7 +122,7 @@ public class ItemBlockWoodBarrel extends ItemBlockBase implements ICustomMesh {
             //noinspection ConstantConditions
             stackHandler.deserializeNBT(((ItemBarrelFluidHandler) barrelCap).getBarrelContents()
                     .getCompoundTag("inventory"));
-            ItemStack inventory = stackHandler.getStackInSlot(TEWoodBarrel.SLOT_ITEM);
+            ItemStack inventory = stackHandler.getStackInSlot(TileWoodBarrel.SLOT_ITEM);
 
             if (fluidStack == null || fluidStack.amount == 0) {
                 if (inventory.isEmpty()) {

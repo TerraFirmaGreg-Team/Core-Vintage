@@ -22,7 +22,7 @@ public class BlockSoilDirt extends BlockSoil {
 
     @NotNull
     @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return SoilItemVariants.PILE.get(getType());
     }
 }

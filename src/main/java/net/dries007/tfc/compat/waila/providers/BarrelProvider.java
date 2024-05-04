@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodBarrel;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -27,7 +27,7 @@ public class BarrelProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        var te = TileUtils.getTile(world, pos, TEWoodBarrel.class);
+        var te = TileUtils.getTile(world, pos, TileWoodBarrel.class);
         if (te != null) {
             IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
             FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
@@ -52,6 +52,6 @@ public class BarrelProvider implements IWailaBlock {
     @NotNull
     @Override
     public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TEWoodBarrel.class);
+        return Collections.singletonList(TileWoodBarrel.class);
     }
 }

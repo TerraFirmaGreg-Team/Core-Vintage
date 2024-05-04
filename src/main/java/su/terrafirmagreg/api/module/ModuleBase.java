@@ -93,8 +93,8 @@ public abstract class ModuleBase {
     /**
      * Call this in the constructor to enable network functionality for this module.
      * <p>
-     * This will create a new network wrapper and packet registry for this module's mod id if they don't already exist. If they do already exist, the
-     * existing network wrapper and packet registry will be used.
+     * This will create a new network wrapper and packet registry for this module's mod id if they don't already exist. If they do already exist, the existing network wrapper and
+     * packet registry will be used.
      *
      * @return a reference to the module's packet service
      */
@@ -171,8 +171,7 @@ public abstract class ModuleBase {
     }
 
     /**
-     * @return A list of classes to subscribe to the Forge event bus. As the class gets subscribed, not any specific instance, event handlers must be
-     * static!
+     * @return A list of classes to subscribe to the Forge event bus. As the class gets subscribed, not any specific instance, event handlers must be static!
      */
     @NotNull
     public List<Class<?>> getEventBusSubscribers() {

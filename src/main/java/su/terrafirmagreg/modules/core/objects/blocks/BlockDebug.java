@@ -1,20 +1,17 @@
 package su.terrafirmagreg.modules.core.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
 
 import net.minecraft.block.material.Material;
 
-
-import org.jetbrains.annotations.NotNull;
-
-public class BlockDebug extends BlockBase {
+public class BlockDebug extends BaseBlock {
 
     public BlockDebug() {
-        super(Material.SPONGE);
+        super(Settings.of().material(Material.SPONGE));
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "core/debug";
     }
 

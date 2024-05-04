@@ -115,25 +115,25 @@ public class SoilBlockVariantHandler {
                 .setFactory((v, t) -> new BlockSoilMudWall(MUD_BRICKS, v, t))
                 .build();
 
-        MUD_MOSSY_BRICKS = new SoilBlockVariant.Builder("mossy_mud_bricks")
+        MOSSY_MUD_BRICKS = new SoilBlockVariant.Builder("mossy_mud_bricks")
                 .setFactory(BlockSoilMudBrick::new)
                 .setFallingSpecification(VERTICAL_ONLY_SOIL)
                 .build();
 
         STAIRS_MOSSY_MUD_BRICKS = new SoilBlockVariant.Builder("stairs/mossy_mud_bricks")
-                .setFactory((v, t) -> new BlockSoilMudStairs(MUD_MOSSY_BRICKS, v, t))
+                .setFactory((v, t) -> new BlockSoilMudStairs(MOSSY_MUD_BRICKS, v, t))
                 .build();
 
         SLAB_DOUBLE_MOSSY_MUD_BRICKS = new SoilBlockVariant.Builder("slab_double/mossy_mud_bricks")
-                .setFactory((v, t) -> new BlockSoilMudSlab.Double(MUD_MOSSY_BRICKS, v, t))
+                .setFactory((v, t) -> new BlockSoilMudSlab.Double(MOSSY_MUD_BRICKS, v, t))
                 .build();
 
-        SLAB_MUD_MOSSY_BRICKS = new SoilBlockVariant.Builder("slab/mossy_mud_bricks")
-                .setFactory((v, t) -> new BlockSoilMudSlab.Half(MUD_MOSSY_BRICKS, SLAB_DOUBLE_MOSSY_MUD_BRICKS, v, t))
+        SLAB_MOSSY_MUD_BRICKS = new SoilBlockVariant.Builder("slab/mossy_mud_bricks")
+                .setFactory((v, t) -> new BlockSoilMudSlab.Half(MOSSY_MUD_BRICKS, SLAB_DOUBLE_MOSSY_MUD_BRICKS, v, t))
                 .build();
 
-        WALL_MUD_MOSSY_BRICKS = new SoilBlockVariant.Builder("wall/mossy_mud_bricks")
-                .setFactory((v, t) -> new BlockSoilMudWall(MUD_MOSSY_BRICKS, v, t))
+        WALL_MOSSY_MUD_BRICKS = new SoilBlockVariant.Builder("wall/mossy_mud_bricks")
+                .setFactory((v, t) -> new BlockSoilMudWall(MOSSY_MUD_BRICKS, v, t))
                 .build();
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -64,10 +63,10 @@ public class EntitySeatOn extends Entity {
     }
 
     @Override
-    protected void readEntityFromNBT(@NotNull NBTTagCompound nbt) {}
+    protected void readEntityFromNBT(NBTTagCompound nbt) {}
 
     @Override
-    protected void writeEntityToNBT(@NotNull NBTTagCompound nbt) {}
+    protected void writeEntityToNBT(NBTTagCompound nbt) {}
 
     @Override
     public double getMountedYOffset() {

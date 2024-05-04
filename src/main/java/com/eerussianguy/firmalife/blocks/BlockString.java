@@ -3,7 +3,7 @@ package com.eerussianguy.firmalife.blocks;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFirePit;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -66,11 +66,11 @@ public class BlockString extends BlockNonCube {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockFirePit) {
             if (state.getValue(LIT)) {
-                TEFirePit te = TileUtils.getTile(world, pos, TEFirePit.class);
+                TileFirePit te = TileUtils.getTile(world, pos, TileFirePit.class);
                 if (te != null) {
                     IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                     if (cap != null) {
-                        for (int i = TEFirePit.SLOT_FUEL_CONSUME; i <= TEFirePit.SLOT_FUEL_INPUT; i++) {
+                        for (int i = TileFirePit.SLOT_FUEL_CONSUME; i <= TileFirePit.SLOT_FUEL_INPUT; i++) {
                             ItemStack stack = cap.getStackInSlot(i);
                             if (stack.isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) continue;
                             return false;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import su.terrafirmagreg.api.spi.effects.PotionBase;
+import su.terrafirmagreg.api.spi.effects.BasePotion;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,9 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 
-import org.jetbrains.annotations.NotNull;
-
-public class PotionThirst extends PotionBase {
+public class PotionThirst extends BasePotion {
 
     public PotionThirst() {
         super(true, 0x2c86d4);
@@ -18,7 +16,7 @@ public class PotionThirst extends PotionBase {
     }
 
     @Override
-    public void performEffect(@NotNull EntityLivingBase entity, int amplifier) {
+    public void performEffect(EntityLivingBase entity, int amplifier) {
         EntityPlayerMP player = null;
         IFoodStatsTFC foodStatsTFC = null;
         if (entity instanceof EntityPlayerMP entityPlayerMP) {

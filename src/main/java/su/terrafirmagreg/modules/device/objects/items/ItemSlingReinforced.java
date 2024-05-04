@@ -8,8 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ItemSlingReinforced extends ItemSling {
 
     public ItemSlingReinforced() {
@@ -17,7 +15,7 @@ public class ItemSlingReinforced extends ItemSling {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/sling/reinforced";
     }
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -16,7 +16,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -24,23 +23,22 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public abstract class BlockRock extends BlockBase implements IRockBlock {
+public abstract class BlockRock extends BaseBlock implements IRockBlock {
 
     private final RockBlockVariant blockVariant;
     private final RockType type;
 
-    public BlockRock(Material material, RockBlockVariant blockVariant, RockType type) {
-        super(material);
+    public BlockRock(Settings settings, RockBlockVariant blockVariant, RockType type) {
+        super(settings.soundType(SoundType.STONE));
 
         this.blockVariant = blockVariant;
         this.type = type;
 
-        setSoundType(SoundType.STONE);
         setHarvestLevel("pickaxe", 0);
     }
 
     public BlockRock(RockBlockVariant blockVariant, RockType type) {
-        this(Material.ROCK, blockVariant, type);
+        this(Settings.of().material(Material.ROCK), blockVariant, type);
     }
 
     @Override
@@ -50,7 +48,7 @@ public abstract class BlockRock extends BlockBase implements IRockBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + getCategory().getLocalizedName());

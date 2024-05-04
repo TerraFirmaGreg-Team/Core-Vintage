@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.objects.tiles.TEPitKiln;
+import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +26,7 @@ public class PitKilnProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TEPitKiln te = TileUtils.getTile(world, pos, TEPitKiln.class);
+        TilePitKiln te = TileUtils.getTile(world, pos, TilePitKiln.class);
         if (te != null) {
             boolean isLit = te.isLit();
 
@@ -68,6 +68,6 @@ public class PitKilnProvider implements IWailaBlock {
     @NotNull
     @Override
     public List<Class<?>> getLookupClass() {
-        return Collections.singletonList(TEPitKiln.class);
+        return Collections.singletonList(TilePitKiln.class);
     }
 }

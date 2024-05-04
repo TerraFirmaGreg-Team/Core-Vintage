@@ -29,7 +29,6 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -45,8 +44,8 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomState {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing,
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+                                    EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             playerIn.setSpawnPoint(pos, false);
@@ -60,7 +59,7 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomState {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         EnumFacing enumfacing = state.getValue(FACING);
         if (state.getValue(PART) == EnumPartType.FOOT) {
             if (!(worldIn.getBlockState(pos.offset(enumfacing)).getBlock() instanceof BlockThatchBed)) {
@@ -76,12 +75,12 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomState {
     }
 
     @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(BlocksCore.THATCH);
     }
 
     @Override
-    public void dropBlockAsItemWithChance(@NotNull World worldIn, @NotNull BlockPos pos, IBlockState state, float chance, int fortune) {
+    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
         if (state.getValue(PART) == EnumPartType.HEAD) {
             spawnAsEntity(worldIn, pos, new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, ItemAnimalHide.HideSize.LARGE)));
             spawnAsEntity(worldIn, pos, new ItemStack(BlocksCore.THATCH, 2));
@@ -90,39 +89,34 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomState {
 
     @SuppressWarnings("deprecation")
     @Override
-    public EnumBlockRenderType getRenderType(@NotNull IBlockState state) {
+    public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
 
     @Override
-    public ItemStack getItem(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return new ItemStack(BlocksCore.THATCH);
     }
 
     @Override
-    public void harvestBlock(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull BlockPos pos, @NotNull IBlockState state,
-                             @NotNull TileEntity te, @NotNull ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
+                             TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, null, stack); //Force vanilla to use #dropBlockAsItemWithChance
     }
 
     @Override
-    public TileEntity createNewTileEntity(@NotNull World worldIn, int meta) {
-        return null;
-    }
-
-    @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
+    public boolean hasTileEntity(IBlockState state) {
         return false;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
         return null;
     }
 
     @Override
-    public boolean isBed(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @Nullable Entity player) {
+    public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity player) {
         return true;
     }
 
@@ -132,7 +126,7 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomState {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "device/thatch_bed";
     }
 }

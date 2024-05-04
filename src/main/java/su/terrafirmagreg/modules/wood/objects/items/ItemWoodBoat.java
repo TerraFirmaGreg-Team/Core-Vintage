@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
-import su.terrafirmagreg.api.spi.item.ItemBase;
+import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class ItemWoodBoat extends ItemBase implements IWoodItem {
+public class ItemWoodBoat extends BaseItem implements IWoodItem {
 
     private final WoodItemVariant itemVariant;
     private final WoodType type;
@@ -55,18 +55,18 @@ public class ItemWoodBoat extends ItemBase implements IWoodItem {
 
     @NotNull
     @Override
-    public Size getSize(@NotNull ItemStack stack) {
+    public Size getSize(ItemStack stack) {
         return Size.LARGE;
     }
 
     @NotNull
     @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
+    public Weight getWeight(ItemStack stack) {
         return Weight.MEDIUM;
     }
 
     @Override
-    public boolean canStack(@NotNull ItemStack stack) {
+    public boolean canStack(ItemStack stack) {
         return false;
     }
 
@@ -75,7 +75,7 @@ public class ItemWoodBoat extends ItemBase implements IWoodItem {
      */
     @NotNull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         float f = 1.0F;
         float f1 = playerIn.prevRotationPitch + (playerIn.rotationPitch - playerIn.prevRotationPitch);

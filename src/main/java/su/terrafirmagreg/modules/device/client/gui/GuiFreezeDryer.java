@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;
-import su.terrafirmagreg.modules.device.objects.tiles.TEFreezeDryer;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFreezeDryer;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,14 +23,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiFreezeDryer extends GuiContainerTE<TEFreezeDryer> {
+public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
     public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/freeze_dryer.png");
-    private static TEFreezeDryer TE;
+    private static TileFreezeDryer TE;
     private final String translationKey;
     private final InventoryPlayer playerInventory;
 
-    public GuiFreezeDryer(Container container, InventoryPlayer playerInv, TEFreezeDryer tile, IBlockState state) {
+    public GuiFreezeDryer(Container container, InventoryPlayer playerInv, TileFreezeDryer tile, IBlockState state) {
         super(container, playerInv, tile, BACKGROUND);
         this.playerInventory = playerInv;
         TE = tile;

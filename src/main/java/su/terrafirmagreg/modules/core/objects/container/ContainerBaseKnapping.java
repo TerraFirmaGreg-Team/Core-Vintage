@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.container;
 
 import su.terrafirmagreg.api.spi.button.IButtonHandler;
-import su.terrafirmagreg.api.spi.container.ContainerBaseItemStack;
+import su.terrafirmagreg.api.spi.container.BaseContainerItemStack;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +22,7 @@ import net.dries007.tfc.util.SimpleCraftMatrix;
 
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ContainerBaseKnapping extends ContainerBaseItemStack implements IButtonHandler {
+public abstract class ContainerBaseKnapping extends BaseContainerItemStack implements IButtonHandler {
 
     private final SimpleCraftMatrix matrix;
     private final KnappingType type;
@@ -85,8 +85,7 @@ public abstract class ContainerBaseKnapping extends ContainerBaseItemStack imple
     }
 
     /**
-     * Used in client to check a slot state in the matrix JEI won't cause issues anymore see
-     * https://github.com/TerraFirmaCraft/TerraFirmaCraft/issues/718
+     * Used in client to check a slot state in the matrix JEI won't cause issues anymore see https://github.com/TerraFirmaCraft/TerraFirmaCraft/issues/718
      *
      * @param index the slot index
      * @return the boolean state for the checked slot
@@ -96,8 +95,7 @@ public abstract class ContainerBaseKnapping extends ContainerBaseItemStack imple
     }
 
     /**
-     * Used in client to set a slot state in the matrix JEI won't cause issues anymore see
-     * https://github.com/TerraFirmaCraft/TerraFirmaCraft/issues/718
+     * Used in client to set a slot state in the matrix JEI won't cause issues anymore see https://github.com/TerraFirmaCraft/TerraFirmaCraft/issues/718
      *
      * @param index the slot index
      * @param value the value you wish to set the state to

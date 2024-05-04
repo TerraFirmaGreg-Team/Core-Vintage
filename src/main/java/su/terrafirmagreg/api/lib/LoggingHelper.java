@@ -94,8 +94,8 @@ public class LoggingHelper {
     }
 
     /**
-     * Logs a fatal error message. This should be used to log errors which will prevent the game from working as expected and are likely to cause a
-     * crash. Fatal messages are printed to the console and the log file.
+     * Logs a fatal error message. This should be used to log errors which will prevent the game from working as expected and are likely to cause a crash. Fatal messages are
+     * printed to the console and the log file.
      *
      * @param message The message to print. Likely uses log4J's format which is {} for parameters.
      * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
@@ -129,8 +129,7 @@ public class LoggingHelper {
     }
 
     /**
-     * Logs a trace message. This is for fine grained debug messages. Trace messages are not printed to the console, but they are added to the console
-     * file.
+     * Logs a trace message. This is for fine grained debug messages. Trace messages are not printed to the console, but they are added to the console file.
      *
      * @param message The message to print. Likely uses log4J's format which is {} for parameters.
      * @param params  The parameters for the messages. This can be used to insert info directly to the message, or completely ignored.
@@ -167,8 +166,7 @@ public class LoggingHelper {
      * Creates a noticeable warning, similar to the ones created by the FMLLog.
      *
      * @param trace If true, a small stack trace will be included in the error message.
-     * @param lines Each entry will be printed as part of the error message. If any entry is longer than 78 chars it will be auto wrapped into
-     *              multiple lines.
+     * @param lines Each entry will be printed as part of the error message. If any entry is longer than 78 chars it will be auto wrapped into multiple lines.
      */
     public void noticableWarning(boolean trace, List<String> lines) {
 

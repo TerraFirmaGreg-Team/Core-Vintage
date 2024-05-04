@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.objects.container.ContainerAlloyCalculator;
+import su.terrafirmagreg.modules.device.objects.containers.ContainerAlloyCalculator;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

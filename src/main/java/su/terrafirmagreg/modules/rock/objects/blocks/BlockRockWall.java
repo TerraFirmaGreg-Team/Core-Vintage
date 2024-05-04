@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.model.ICustomState;
-import su.terrafirmagreg.api.spi.itemblock.ItemBlockBase;
+import su.terrafirmagreg.api.spi.block.BaseBlockWall;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -10,13 +10,10 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,7 +28,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState {
+public class BlockRockWall extends BaseBlockWall implements IRockBlock, ICustomState {
 
     private final RockBlockVariant blockVariant;
     private final RockType type;
@@ -52,11 +49,6 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
         OreDictUtils.register(this, "wall", "stone");
     }
 
-    @Override
-    public @Nullable ItemBlockBase getItemBlock() {
-        return new ItemBlockBase(this);
-    }
-
     @NotNull
     @Override
     @SideOnly(Side.CLIENT)
@@ -65,34 +57,11 @@ public class BlockRockWall extends BlockWall implements IRockBlock, ICustomState
     }
 
     @Override
-    public void getSubBlocks(@NotNull CreativeTabs itemIn, @NotNull NonNullList<ItemStack> items) {
-        items.add(new ItemStack(this));
-    }
-
-    @Override
-    public int damageDropped(@NotNull IBlockState state) {
-        return 0;
-    }
-
-    @Override
-    @NotNull
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState();
-    }
-
-    @Override
-    public int getMetaFromState(@NotNull IBlockState state) {
-        return 0;
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(
-                new TextComponentTranslation("rockcategory.name")
-                        .getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
+        tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + type.getRockCategory().getLocalizedName());
     }
 
     @Override

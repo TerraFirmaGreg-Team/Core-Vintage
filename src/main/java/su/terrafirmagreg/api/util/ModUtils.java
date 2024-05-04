@@ -28,8 +28,8 @@ import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
 public final class ModUtils {
 
     /**
-     * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling
-     * {@link #getSortedEntries(IForgeRegistry)} before all entries have been registered will lock out new ones from being found.
+     * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling {@link #getSortedEntries(IForgeRegistry)} before all
+     * entries have been registered will lock out new ones from being found.
      */
     private static final Map<IForgeRegistry<?>, Multimap<String, ?>> REGISTRY_CACHE = new HashMap<>();
 
@@ -74,11 +74,11 @@ public final class ModUtils {
     }
 
     /**
-     * Gets the name of a mod that registered the passed object. Has support for a wide range of registerable objects such as blocks, items,
-     * enchantments, potions, sounds, villagers, biomes, and so on.
+     * Gets the name of a mod that registered the passed object. Has support for a wide range of registerable objects such as blocks, items, enchantments, potions, sounds,
+     * villagers, biomes, and so on.
      *
-     * @param registerable The registerable object. Accepts anything that extends IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block,
-     *                     Enchantment, Item, Potion, PotionType, SoundEvent and VillagerProfession.
+     * @param registerable The registerable object. Accepts anything that extends IForgeRegistryEntry.Impl. Current list includes BiomeGenBase, Block, Enchantment, Item, Potion,
+     *                     PotionType, SoundEvent and VillagerProfession.
      * @return String The name of the mod that registered the object.
      */
     public static String getModName(IForgeRegistryEntry.Impl<?> registerable) {
@@ -200,8 +200,7 @@ public final class ModUtils {
     }
 
     /**
-     * Creates a sorted version of a ForgeRegistry. This will only contain entries that were present at the time of calling it. Entries are sorted by
-     * their owning modid.
+     * Creates a sorted version of a ForgeRegistry. This will only contain entries that were present at the time of calling it. Entries are sorted by their owning modid.
      *
      * @param registry The registry to sort.
      * @return A map of all entries sorted by the owning mod id.

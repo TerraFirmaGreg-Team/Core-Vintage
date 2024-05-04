@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.wood.client.gui;
 
-import su.terrafirmagreg.api.spi.gui.GuiContainerBase;
-import su.terrafirmagreg.modules.wood.objects.container.ContainerWoodChest;
+import su.terrafirmagreg.api.spi.gui.BaseGuiContainer;
+import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodChest;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiWoodChest extends GuiContainerBase {
+public class GuiWoodChest extends BaseGuiContainer {
 
     private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
     private final int inventoryRows;

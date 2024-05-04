@@ -27,6 +27,21 @@ public class ProviderSize implements ICapabilitySize {
         this.canStack = canStack;
     }
 
+    public static ProviderSize get(Size size, Weight weight, boolean canStack) {
+        EnumMap<Weight, ProviderSize[]> nested = CACHE.get(size);
+        if (nested == null) {
+            CACHE.put(size, nested = new EnumMap<>(Weight.class));
+        }
+        ProviderSize[] handlers = nested.get(weight);
+        if (handlers == null) {
+            nested.put(weight, handlers = new ProviderSize[2]);
+        }
+        if (handlers[canStack ? 1 : 0] == null) {
+            handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);
+        }
+        return handlers[canStack ? 1 : 0];
+    }
+
     @Override
     public @NotNull Size getSize(@NotNull ItemStack stack) {
         return this.size;
@@ -48,21 +63,6 @@ public class ProviderSize implements ICapabilitySize {
     @Override
     public int getStackSize(@NotNull ItemStack stack) {
         return this.canStack ? this.weight.stackSize : 1;
-    }
-
-    public static ProviderSize get(Size size, Weight weight, boolean canStack) {
-        EnumMap<Weight, ProviderSize[]> nested = CACHE.get(size);
-        if (nested == null) {
-            CACHE.put(size, nested = new EnumMap<>(Weight.class));
-        }
-        ProviderSize[] handlers = nested.get(weight);
-        if (handlers == null) {
-            nested.put(weight, handlers = new ProviderSize[2]);
-        }
-        if (handlers[canStack ? 1 : 0] == null) {
-            handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);
-        }
-        return handlers[canStack ? 1 : 0];
     }
 
     @Override

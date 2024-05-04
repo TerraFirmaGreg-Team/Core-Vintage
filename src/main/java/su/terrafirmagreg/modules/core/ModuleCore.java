@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.spi.creativetab.CreativeTabBase;
+import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.core.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.api.capabilities.heat.CapabilityHeat;
@@ -29,17 +29,17 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.Module_Core;
+import static su.terrafirmagreg.modules.Modules.Core;
 
 @Module(
-        moduleID = Module_Core,
+        moduleID = Core,
         description = "Core TFG content. Disabling this disables the entire mod and all its module.",
         coreModule = true
 )
 public final class ModuleCore extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleCore.class.getSimpleName());
-    public static final CreativeTabs CORE_TAB = new CreativeTabBase("misc", "core/wand");
+    public static final CreativeTabs CORE_TAB = new BaseCreativeTab("misc", "core/wand");
 
     public static IPacketService PACKET_SERVICE;
 

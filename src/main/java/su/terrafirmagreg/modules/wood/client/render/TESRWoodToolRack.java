@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.render;
 
-import su.terrafirmagreg.modules.wood.objects.tiles.TEWoodToolRack;
+import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodToolRack;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TESRWoodToolRack extends TileEntitySpecialRenderer<TEWoodToolRack> {
+public class TESRWoodToolRack extends TileEntitySpecialRenderer<TileWoodToolRack> {
 
     //direction, slot, axis, that's the order.
     private static final float[][][] ITEM_LOCATION = new float[4][4][3];
@@ -62,7 +62,7 @@ public class TESRWoodToolRack extends TileEntitySpecialRenderer<TEWoodToolRack> 
     }
 
     @Override
-    public void render(TEWoodToolRack te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileWoodToolRack te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         {
             int dir = te.getBlockMetadata();
             float blockScale = .5f;

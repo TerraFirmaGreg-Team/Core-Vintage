@@ -21,13 +21,13 @@ public class BlockSoilClayGrass extends BlockSoilGrass {
     }
 
     @Override
-    public int quantityDropped(@NotNull IBlockState state, int fortune, @NotNull Random random) {
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
         return random.nextInt(4);
     }
 
     @NotNull
     @Override
-    public Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.CLAY_BALL;
     }
 

@@ -89,8 +89,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
      *
      * @param daysToAdult number of days needed for this animal to be an adult
      * @param daysToElder number of days needed after adult to this animal be an elder. 0 = ignore
-     * @return a random long value containing the days of growth for this animal to spawn **Always spawn adults** (so vanilla respawn mechanics only
-     * creates adults of this animal)
+     * @return a random long value containing the days of growth for this animal to spawn **Always spawn adults** (so vanilla respawn mechanics only creates adults of this animal)
      */
     public static int getRandomGrowth(int daysToAdult, int daysToElder) {
         int randomFactor = daysToElder > 0 ? (int) (daysToElder * 1.25f) : daysToAdult * 4;
@@ -261,8 +260,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     }
 
     /**
-     * Ignore fall damage like vanilla chickens. Implemented here because all TFC Oviparous animals don't take fall damage. Ostriches would escape
-     * fall damage too.
+     * Ignore fall damage like vanilla chickens. Implemented here because all TFC Oviparous animals don't take fall damage. Ostriches would escape fall damage too.
      */
     @Override
     public void fall(float distance, float damageMultiplier) {
@@ -392,8 +390,8 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     public abstract double getOldDeathChance();
 
     /**
-     * Eat food + raises familiarization If your animal would refuse to eat said stack (because rotten or anything), return false here This function
-     * is called after every other check is made (animal is hungry for the day + this is a valid food)
+     * Eat food + raises familiarization If your animal would refuse to eat said stack (because rotten or anything), return false here This function is called after every other
+     * check is made (animal is hungry for the day + this is a valid food)
      *
      * @param stack the food stack to eat
      * @return true if eaten, false otherwise

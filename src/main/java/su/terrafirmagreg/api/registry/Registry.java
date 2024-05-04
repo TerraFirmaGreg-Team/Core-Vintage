@@ -1,5 +1,8 @@
 package su.terrafirmagreg.api.registry;
 
+import com.github.bsideup.jabel.Desugar;
+
+
 import su.terrafirmagreg.api.model.CustomModelLoader;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
@@ -28,25 +31,14 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import lombok.Getter;
-
 /**
- * This is used to automatically register things from the registry helper. The hope is that by registering the event while the owner is active, Forge
- * will shut up about harmless registry entries being dangerous.
+ * This is used to automatically register things from the registry helper. The hope is that by registering the event while the owner is active, Forge will shut up about harmless
+ * registry entries being dangerous.
+ *
+ * @param registryManager The registry helper to register things from.
  */
-@Getter
-public class Registry {
-
-    /**
-     * The registry helper to register things from.
-     */
-    private final RegistryManager registryManager;
-
-    public Registry(RegistryManager registryManager) {
-        this.registryManager = registryManager;
-
-    }
+@Desugar
+public record Registry(RegistryManager registryManager) {
 
     public void onRegisterBlock(RegistryEvent.Register<Block> event) {
         for (var block : this.registryManager.getBlocks()) {
@@ -102,10 +94,7 @@ public class Registry {
 
     public void onRegisterTileEntities() {
         for (var provider : this.registryManager.getTileProviders()) {
-            GameRegistry.registerTileEntity(
-                    provider.getTileEntityClass(),
-                    ModUtils.id("tile." + provider.getTileEntityClass().getSimpleName())
-            );
+            GameRegistry.registerTileEntity(provider.getTileEntityClass(), ModUtils.id("tile." + provider.getTileEntityClass().getSimpleName()));
         }
     }
 

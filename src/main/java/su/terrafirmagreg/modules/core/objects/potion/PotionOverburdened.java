@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import su.terrafirmagreg.api.spi.effects.PotionBase;
+import su.terrafirmagreg.api.spi.effects.BasePotion;
 
 import net.minecraft.entity.EntityLivingBase;
 
 @SuppressWarnings("WeakerAccess")
 
-public class PotionOverburdened extends PotionBase {
+public class PotionOverburdened extends BasePotion {
 
     public PotionOverburdened() {
         super(true, 0x5A6C91);

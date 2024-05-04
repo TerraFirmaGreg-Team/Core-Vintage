@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.spi.itemblock;
 
+import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.IMultiItemBlock;
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 import su.terrafirmagreg.api.spi.item.BaseItem;
 
 import net.minecraft.block.Block;
@@ -11,8 +11,6 @@ import net.minecraft.item.ItemStack;
 
 
 import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 
 import lombok.Getter;
 
@@ -20,12 +18,25 @@ import lombok.Getter;
 @SuppressWarnings("deprecation")
 public class BaseItemBlock extends ItemBlock implements IItemSize {
 
-    protected final ISettingsBlock.Settings settings;
+    private final EnumRarity rarity;
 
     public BaseItemBlock(Block block) {
         super(block);
 
-        this.settings = ISettingsBlock.Settings.copy(block);
+        this.rarity = EnumRarity.COMMON;
+
+        if (block instanceof IMultiItemBlock multiItemBlock) {
+            setMaxDamage(multiItemBlock.getMaxItemDamage());
+            setHasSubtypes(multiItemBlock.getHasItemSubtypes());
+        } else {
+            setMaxDamage(0);
+        }
+    }
+
+    public BaseItemBlock(BaseBlock block) {
+        super(block);
+
+        this.rarity = block.getSettings().getRarity();
 
         if (block instanceof IMultiItemBlock multiItemBlock) {
             setMaxDamage(multiItemBlock.getMaxItemDamage());
@@ -37,7 +48,7 @@ public class BaseItemBlock extends ItemBlock implements IItemSize {
 
     @Override
     public EnumRarity getRarity(ItemStack stack) {
-        return settings.getRarity();
+        return rarity;
     }
 
     @Override
@@ -52,21 +63,6 @@ public class BaseItemBlock extends ItemBlock implements IItemSize {
         } else {
             return super.getTranslationKey(stack);
         }
-    }
-
-    @Override
-    public Size getSize(ItemStack stack) {
-        return settings.getSize();
-    }
-
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return settings.getWeight();
-    }
-
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return settings.isCanStack();
     }
 
     /**

@@ -18,6 +18,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -33,7 +36,9 @@ public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock,
         super(settings.material);
 
         this.settings = settings;
-        this.settings.hardness = 3.0F;
+        this.settings.weight(Weight.HEAVY);
+        this.settings.size(Size.VERY_LARGE);
+        this.settings.hardness(3.0F);
 
     }
 

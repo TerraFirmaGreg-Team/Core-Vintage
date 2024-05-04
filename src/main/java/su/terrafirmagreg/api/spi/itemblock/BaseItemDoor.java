@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.spi.itemblock;
 
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
@@ -16,23 +14,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-
 import lombok.Getter;
 
 @Getter
 public class BaseItemDoor extends BaseItemBlock {
 
-    private final ISettingsBlock.Settings settings;
-
     public BaseItemDoor(Block block) {
         super(block);
-
-        this.settings = ISettingsBlock.Settings
-                .copy(block)
-                .weight(Weight.HEAVY)
-                .size(Size.VERY_LARGE);
     }
 
     /**

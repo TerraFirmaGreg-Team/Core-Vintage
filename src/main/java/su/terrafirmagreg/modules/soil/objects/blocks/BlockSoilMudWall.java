@@ -18,13 +18,13 @@ import lombok.Getter;
 @Getter
 public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock, ICustomState {
 
-    private final SoilBlockVariant blockVariant;
+    private final SoilBlockVariant variant;
     private final SoilType type;
 
-    public BlockSoilMudWall(SoilBlockVariant modelBlock, SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilMudWall(SoilBlockVariant modelBlock, SoilBlockVariant variant, SoilType type) {
         super(modelBlock.get(type));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.STONE);

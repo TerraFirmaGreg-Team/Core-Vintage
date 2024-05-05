@@ -91,8 +91,8 @@ public class WoodBlockVariant implements Comparable<WoodBlockVariant> {
     }
 
     @Override
-    public int compareTo(@NotNull WoodBlockVariant blockVariant) {
-        return this.name.compareTo(blockVariant.toString());
+    public int compareTo(@NotNull WoodBlockVariant variant) {
+        return this.name.compareTo(variant.toString());
     }
 
     public static class Builder {

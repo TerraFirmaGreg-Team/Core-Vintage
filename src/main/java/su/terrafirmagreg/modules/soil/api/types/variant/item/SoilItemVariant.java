@@ -66,8 +66,8 @@ public class SoilItemVariant implements Comparable<SoilItemVariant> {
     }
 
     @Override
-    public int compareTo(@NotNull SoilItemVariant itemVariant) {
-        return this.name.compareTo(itemVariant.toString());
+    public int compareTo(@NotNull SoilItemVariant variant) {
+        return this.name.compareTo(variant.toString());
     }
 
     public static class Builder {

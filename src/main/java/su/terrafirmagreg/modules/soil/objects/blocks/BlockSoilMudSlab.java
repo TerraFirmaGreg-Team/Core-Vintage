@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.model.ICustomState;
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -18,19 +17,19 @@ import lombok.Getter;
 @Getter
 public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlock, ICustomState {
 
-    private final SoilBlockVariant blockVariant;
+    private final SoilBlockVariant variant;
     private final SoilType type;
 
     protected Block block;
     protected Half halfSlab;
     protected Double doubleSlab;
 
-    private BlockSoilMudSlab(SoilBlockVariant model, SoilBlockVariant blockVariant, SoilType type) {
+    private BlockSoilMudSlab(SoilBlockVariant model, SoilBlockVariant variant, SoilType type) {
         super(Settings.of()
                 .material(Material.GROUND)
                 .soundType(SoundType.GROUND));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
         this.block = model.get(type);
 

@@ -63,11 +63,11 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodLog(WoodBlockVariant blockVariant, WoodType type) {
-        this.blockVariant = blockVariant;
+    public BlockWoodLog(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
         this.type = type;
 
         setTickRandomly(true);

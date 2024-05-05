@@ -40,8 +40,8 @@ public class BlockWoodSupport extends BlockWood {
     private static final AxisAlignedBB CONNECTION_E_AABB = new AxisAlignedBB(0.6875D, 0.625D, 0.3125D, 1.0D, 1.0D, 0.6875D);
     private static final AxisAlignedBB CONNECTION_W_AABB = new AxisAlignedBB(0.0D, 0.625D, 0.3125D, 0.3125D, 1.0D, 0.6875D);
 
-    public BlockWoodSupport(WoodBlockVariant blockVariant, WoodType type) {
-        super(blockVariant, type);
+    public BlockWoodSupport(WoodBlockVariant variant, WoodType type) {
+        super(variant, type);
 
         setHardness(2.0F);
         setHarvestLevel("axe", 0);
@@ -126,8 +126,8 @@ public class BlockWoodSupport extends BlockWood {
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant());
-        OreDictUtils.register(this, getBlockVariant(), getType());
+        OreDictUtils.register(this, getVariant());
+        OreDictUtils.register(this, getVariant(), getType());
     }
 
     @SuppressWarnings("deprecation")

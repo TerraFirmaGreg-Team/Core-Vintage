@@ -38,14 +38,14 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock, IS
 
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
-    private final SoilBlockVariant blockVariant;
+    private final SoilBlockVariant variant;
     private final SoilType type;
 
     protected final Settings settings;
 
-    public BlockSoilGrassPath(SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilGrassPath(SoilBlockVariant variant, SoilType type) {
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
         this.useNeighborBrightness = true;
         this.settings = Settings.of();
@@ -58,7 +58,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock, IS
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @Override

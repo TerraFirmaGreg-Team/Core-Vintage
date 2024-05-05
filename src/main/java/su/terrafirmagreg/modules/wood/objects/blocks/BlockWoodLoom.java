@@ -49,10 +49,10 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
     protected static final AxisAlignedBB LOOM_SOUTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.125D, 0.9375D, 1.0D, 0.5625D);
     protected static final AxisAlignedBB LOOM_NORTH_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 0.9375D, 1.0D, 0.875D);
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodLoom(WoodBlockVariant blockVariant, WoodType type) {
+    public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
         super(Settings.of()
                 .material(Material.WOOD)
                 .mapColor(MapColor.AIR)
@@ -62,19 +62,19 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
                 .hardness(0.5f)
                 .resistance(3f));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setHarvestLevel("axe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant, type);
+        OreDictUtils.register(this, variant, type);
     }
 
     @Override

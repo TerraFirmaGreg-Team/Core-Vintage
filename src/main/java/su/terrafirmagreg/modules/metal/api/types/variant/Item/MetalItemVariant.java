@@ -65,8 +65,8 @@ public class MetalItemVariant implements Comparable<MetalItemVariant> {
     }
 
     @Override
-    public int compareTo(@NotNull MetalItemVariant itemVariant) {
-        return this.name.compareTo(itemVariant.toString());
+    public int compareTo(@NotNull MetalItemVariant variant) {
+        return this.name.compareTo(variant.toString());
     }
 
     public static class Builder {

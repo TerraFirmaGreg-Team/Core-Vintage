@@ -22,25 +22,25 @@ import lombok.Getter;
 @Getter
 public class BlockWoodWall extends BlockWall implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodWall(WoodBlockVariant modelBlock, WoodBlockVariant blockVariant, WoodType type) {
+    public BlockWoodWall(WoodBlockVariant modelBlock, WoodBlockVariant variant, WoodType type) {
         super(modelBlock.get(type));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
         setHarvestLevel("axe", 0);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant(), "wood");
-        OreDictUtils.register(this, getBlockVariant(), "wood", getType());
+        OreDictUtils.register(this, getVariant(), "wood");
+        OreDictUtils.register(this, getVariant(), "wood", getType());
     }
 
     @NotNull

@@ -12,25 +12,21 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 
 public class BlockSoilSparseGrass extends BlockSoilGrass implements ISoilBlock {
 
-    public BlockSoilSparseGrass(SoilBlockVariant blockVariant, SoilType type) {
-        super(blockVariant, type);
+    public BlockSoilSparseGrass(SoilBlockVariant variant, SoilType type) {
+        super(variant, type);
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
 
-    @NotNull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return SoilItemVariants.PILE.get(getType());
     }
 
-    @NotNull
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {

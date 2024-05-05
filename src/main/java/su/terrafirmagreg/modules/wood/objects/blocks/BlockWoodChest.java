@@ -49,26 +49,26 @@ import static su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVa
 @Getter
 public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodChest(WoodBlockVariant blockVariant, WoodType type) {
-        super(blockVariant == CHEST ? BASIC : TRAP);
+    public BlockWoodChest(WoodBlockVariant variant, WoodType type) {
+        super(variant == CHEST ? BASIC : TRAP);
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setHardness(2.5F);
         setSoundType(SoundType.WOOD);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override
     public void onRegisterOreDict() {
         OreDictUtils.register(this, "chest", "wood");
-        OreDictUtils.register(this, blockVariant);
-        OreDictUtils.register(this, blockVariant, type);
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, type);
     }
 
     @Override

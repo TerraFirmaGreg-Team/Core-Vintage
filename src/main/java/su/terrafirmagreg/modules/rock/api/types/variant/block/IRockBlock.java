@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
 import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.modules.rock.api.types.type.IRockType;
+import su.terrafirmagreg.api.spi.types.IType;
+import su.terrafirmagreg.api.spi.types.IVariant;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -13,15 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок породы.
  */
-public interface IRockBlock extends IRockType, IAutoReg {
-
-    /**
-     * Возвращает вариант блока.
-     *
-     * @return Вариант блока.
-     */
-    @NotNull
-    RockBlockVariant getBlockVariant();
+public interface IRockBlock extends IType<RockType>, IVariant<RockBlockVariant>, IAutoReg {
 
     /**
      * Возвращает окончательную твердость блока породы.
@@ -29,7 +23,7 @@ public interface IRockBlock extends IRockType, IAutoReg {
      * @return Окончательная твердость блока породы.
      */
     default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-        return this.getBlockVariant().getBaseHardness() + this.getType().getRockCategory().getHardnessModifier();
+        return this.getVariant().getBaseHardness() + this.getType().getRockCategory().getHardnessModifier();
     }
 
     /**
@@ -39,7 +33,7 @@ public interface IRockBlock extends IRockType, IAutoReg {
      */
     @NotNull
     default String getName() {
-        return String.format("rock/%s/%s", this.getBlockVariant(), this.getType());
+        return String.format("rock/%s/%s", this.getVariant(), this.getType());
     }
 
 }

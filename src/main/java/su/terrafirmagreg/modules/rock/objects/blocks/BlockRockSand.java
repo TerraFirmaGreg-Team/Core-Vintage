@@ -11,12 +11,12 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 
 public class BlockRockSand extends BlockRockFallable {
 
-    public BlockRockSand(RockBlockVariant blockVariant, RockType type) {
-        super(Material.SAND, blockVariant, type);
+    public BlockRockSand(RockBlockVariant variant, RockType type) {
+        super(Material.SAND, variant, type);
 
         setSoundType(SoundType.SAND);
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
         //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.SANDLIKE);
     }
 

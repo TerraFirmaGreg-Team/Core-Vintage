@@ -38,13 +38,13 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
 
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
 
-    public BlockRockRaw(RockBlockVariant blockVariant, RockType type) {
-        super(blockVariant, type);
+    public BlockRockRaw(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
         setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
-        var spec = new FallingBlockManager.Specification(blockVariant.getSpecification());
+        var spec = new FallingBlockManager.Specification(variant.getSpecification());
         spec.setResultingState(RockBlockVariants.COBBLE.get(type).getDefaultState());
 
         FallingBlockManager.registerFallable(this, spec);
@@ -52,7 +52,7 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant());
+        OreDictUtils.register(this, getVariant());
         OreDictUtils.register(this, "stone");
     }
 

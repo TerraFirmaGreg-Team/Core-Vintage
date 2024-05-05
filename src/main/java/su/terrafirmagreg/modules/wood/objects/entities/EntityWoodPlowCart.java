@@ -189,7 +189,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
         Item item = itemstack.getItem();
 
         if (state.getBlock() instanceof ISoilBlock soil) {
-            var variant = soil.getBlockVariant();
+            var variant = soil.getVariant();
             if (variant == GRASS || variant == DIRT || variant == DRY_GRASS) {
                 if (item instanceof ItemHoe || item instanceof ItemMetalHoe) {
                     if (!world.isRemote) {

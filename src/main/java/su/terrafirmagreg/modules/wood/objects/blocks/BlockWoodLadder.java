@@ -17,16 +17,16 @@ import lombok.Getter;
 @Getter
 public class BlockWoodLadder extends BlockLadder implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodLadder(WoodBlockVariant blockVariant, WoodType type) {
-        this.blockVariant = blockVariant;
+    public BlockWoodLadder(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.LADDER);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override

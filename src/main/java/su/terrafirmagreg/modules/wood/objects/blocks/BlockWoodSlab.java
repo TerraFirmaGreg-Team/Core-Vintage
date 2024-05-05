@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -24,24 +23,24 @@ import lombok.Getter;
 @Getter
 public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
     protected Block block;
     protected Half halfSlab;
     protected Double doubleSlab;
 
-    private BlockWoodSlab(WoodBlockVariant model, WoodBlockVariant blockVariant, WoodType type) {
+    private BlockWoodSlab(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
         super(Settings.of()
                 .material(Material.WOOD)
                 .soundType(SoundType.WOOD));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
         this.block = model.get(type);
 
         setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override
@@ -62,8 +61,8 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
 
     public static class Double extends BlockWoodSlab {
 
-        public Double(WoodBlockVariant model, WoodBlockVariant blockVariant, WoodType type) {
-            super(model, blockVariant, type);
+        public Double(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
+            super(model, variant, type);
 
         }
 
@@ -75,8 +74,8 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
 
     public static class Half extends BlockWoodSlab {
 
-        public Half(WoodBlockVariant model, WoodBlockVariant doubleSlab, WoodBlockVariant blockVariant, WoodType type) {
-            super(model, blockVariant, type);
+        public Half(WoodBlockVariant model, WoodBlockVariant doubleSlab, WoodBlockVariant variant, WoodType type) {
+            super(model, variant, type);
 
             this.doubleSlab = (Double) doubleSlab.get(type);
             this.doubleSlab.halfSlab = this;
@@ -86,9 +85,9 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
 
         @Override
         public void onRegisterOreDict() {
-            OreDictUtils.register(this, getBlockVariant());
-            OreDictUtils.register(this, getBlockVariant(), "wood");
-            OreDictUtils.register(this, getBlockVariant(), "wood", getType());
+            OreDictUtils.register(this, getVariant());
+            OreDictUtils.register(this, getVariant(), "wood");
+            OreDictUtils.register(this, getVariant(), "wood", getType());
         }
 
         @Override

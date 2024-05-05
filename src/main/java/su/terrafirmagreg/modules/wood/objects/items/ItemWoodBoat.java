@@ -39,18 +39,18 @@ import java.util.Objects;
 @Getter
 public class ItemWoodBoat extends BaseItem implements IWoodItem {
 
-    private final WoodItemVariant itemVariant;
+    private final WoodItemVariant variant;
     private final WoodType type;
 
-    public ItemWoodBoat(WoodItemVariant itemVariant, WoodType type) {
+    public ItemWoodBoat(WoodItemVariant variant, WoodType type) {
         this.type = type;
-        this.itemVariant = itemVariant;
+        this.variant = variant;
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, itemVariant);
-        OreDictUtils.register(this, itemVariant, type);
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, type);
     }
 
     @NotNull

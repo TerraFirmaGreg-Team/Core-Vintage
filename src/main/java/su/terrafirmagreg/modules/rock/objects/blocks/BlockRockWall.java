@@ -30,13 +30,13 @@ import java.util.List;
 @Getter
 public class BlockRockWall extends BaseBlockWall implements IRockBlock, ICustomState {
 
-    private final RockBlockVariant blockVariant;
+    private final RockBlockVariant variant;
     private final RockType type;
 
-    public BlockRockWall(RockBlockVariant modelBlock, RockBlockVariant blockVariant, RockType type) {
+    public BlockRockWall(RockBlockVariant modelBlock, RockBlockVariant variant, RockType type) {
         super(modelBlock.get(type));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.STONE);

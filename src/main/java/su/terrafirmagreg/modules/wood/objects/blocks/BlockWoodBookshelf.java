@@ -24,11 +24,11 @@ import lombok.Getter;
 @Getter
 public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodBookshelf(WoodBlockVariant blockVariant, WoodType type) {
-        this.blockVariant = blockVariant;
+    public BlockWoodBookshelf(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -36,12 +36,12 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
         setResistance(5.0F);
         setHarvestLevel("axe", 0);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
-        OreDictUtils.register(this, blockVariant, type);
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, type);
     }
 
     @Override

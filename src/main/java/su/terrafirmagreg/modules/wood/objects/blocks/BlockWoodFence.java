@@ -19,13 +19,13 @@ import lombok.Getter;
 @Getter
 public class BlockWoodFence extends BlockFence implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodFence(WoodBlockVariant blockVariant, WoodType type) {
+    public BlockWoodFence(WoodBlockVariant variant, WoodType type) {
         super(Material.WOOD, Material.WOOD.getMaterialMapColor());
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -33,7 +33,7 @@ public class BlockWoodFence extends BlockFence implements IWoodBlock {
         setHardness(2.0F);
         setResistance(15.0F);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override

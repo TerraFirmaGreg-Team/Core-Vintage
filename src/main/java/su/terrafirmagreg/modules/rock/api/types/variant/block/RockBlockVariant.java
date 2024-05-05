@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.util.text.TextComponentTranslation;
 
 
 import gregtech.api.unification.ore.StoneType;
@@ -102,9 +103,14 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
     }
 
+    public String getLocalizedName() {
+        return new TextComponentTranslation(
+                String.format("rock.variant.%s.name", this)).getFormattedText();
+    }
+
     @Override
-    public int compareTo(@NotNull RockBlockVariant blockVariant) {
-        return this.name.compareTo(blockVariant.toString());
+    public int compareTo(@NotNull RockBlockVariant variant) {
+        return this.name.compareTo(variant.toString());
     }
 
     public static class Builder {

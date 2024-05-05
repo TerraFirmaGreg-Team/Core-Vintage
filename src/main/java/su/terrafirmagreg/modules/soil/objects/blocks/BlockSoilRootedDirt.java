@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class BlockSoilRootedDirt extends BlockSoil {
 
-    public BlockSoilRootedDirt(SoilBlockVariant blockVariant, SoilType type) {
-        super(blockVariant, type);
+    public BlockSoilRootedDirt(SoilBlockVariant variant, SoilType type) {
+        super(variant, type);
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }

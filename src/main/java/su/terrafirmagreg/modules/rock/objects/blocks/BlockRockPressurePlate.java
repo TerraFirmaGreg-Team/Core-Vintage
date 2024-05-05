@@ -26,13 +26,13 @@ import java.util.List;
 @Getter
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
 
-    private final RockBlockVariant blockVariant;
+    private final RockBlockVariant variant;
     private final RockType type;
 
-    public BlockRockPressurePlate(RockBlockVariant blockVariant, RockType type) {
+    public BlockRockPressurePlate(RockBlockVariant variant, RockType type) {
         super(Material.ROCK, Sensitivity.MOBS);
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.STONE);
@@ -41,7 +41,7 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, variant);
         OreDictUtils.register(this, "pressure_plate_stone");
     }
 

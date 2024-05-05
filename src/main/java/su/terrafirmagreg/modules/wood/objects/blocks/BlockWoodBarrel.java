@@ -92,7 +92,7 @@ public class BlockWoodBarrel extends BlockWood implements ITileBlock {
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant());
+        OreDictUtils.register(this, getVariant());
     }
 
     @NotNull

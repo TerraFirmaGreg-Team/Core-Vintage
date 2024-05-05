@@ -19,18 +19,18 @@ import lombok.Getter;
 @Getter
 public class ItemRockBrick extends BaseItem implements IRockItem {
 
-    private final RockItemVariant itemVariant;
+    private final RockItemVariant variant;
     private final RockType type;
 
     public ItemRockBrick(RockItemVariant variant, RockType type) {
-        this.itemVariant = variant;
+        this.variant = variant;
         this.type = type;
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, itemVariant);
-        OreDictUtils.register(this, itemVariant, getCategory());
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, this.getType().getRockCategory());
     }
 
     @NotNull

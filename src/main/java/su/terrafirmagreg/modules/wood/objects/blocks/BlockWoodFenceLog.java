@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockWoodFenceLog extends BlockWoodFence {
 
-    public BlockWoodFenceLog(WoodBlockVariant blockVariant, WoodType type) {
-        super(blockVariant, type);
+    public BlockWoodFenceLog(WoodBlockVariant variant, WoodType type) {
+        super(variant, type);
     }
 
     @Override

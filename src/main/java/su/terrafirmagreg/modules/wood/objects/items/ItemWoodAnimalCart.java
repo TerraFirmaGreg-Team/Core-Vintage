@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 public class ItemWoodAnimalCart extends ItemWoodSupplyCart {
 
-    public ItemWoodAnimalCart(WoodItemVariant itemVariant, WoodType type) {
-        super(itemVariant, type);
+    public ItemWoodAnimalCart(WoodItemVariant variant, WoodType type) {
+        super(variant, type);
 
     }
 

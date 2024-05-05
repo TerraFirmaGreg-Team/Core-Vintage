@@ -32,11 +32,11 @@ import java.util.List;
 @Getter
 public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
-    private final RockBlockVariant blockVariant;
+    private final RockBlockVariant variant;
     private final RockType type;
 
-    public BlockRockButton(RockBlockVariant blockVariant, RockType type) {
-        this.blockVariant = blockVariant;
+    public BlockRockButton(RockBlockVariant variant, RockType type) {
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.STONE);
@@ -45,7 +45,7 @@ public class BlockRockButton extends BlockButtonStone implements IRockBlock {
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @Override

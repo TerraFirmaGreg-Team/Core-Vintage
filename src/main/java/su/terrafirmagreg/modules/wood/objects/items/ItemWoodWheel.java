@@ -21,19 +21,19 @@ import lombok.Getter;
 @Getter
 public class ItemWoodWheel extends BaseItem implements IWoodItem {
 
-    private final WoodItemVariant itemVariant;
+    private final WoodItemVariant variant;
     private final WoodType type;
 
-    public ItemWoodWheel(WoodItemVariant itemVariant, WoodType type) {
+    public ItemWoodWheel(WoodItemVariant variant, WoodType type) {
 
-        this.itemVariant = itemVariant;
+        this.variant = variant;
         this.type = type;
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, itemVariant);
-        OreDictUtils.register(this, itemVariant, type);
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, type);
     }
 
     @NotNull

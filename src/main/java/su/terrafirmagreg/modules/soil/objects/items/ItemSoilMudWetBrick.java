@@ -19,17 +19,17 @@ import lombok.Getter;
 @Getter
 public class ItemSoilMudWetBrick extends BaseItem implements ISoilItem {
 
-    private final SoilItemVariant itemVariant;
+    private final SoilItemVariant variant;
     private final SoilType type;
 
-    public ItemSoilMudWetBrick(SoilItemVariant itemVariant, SoilType type) {
-        this.itemVariant = itemVariant;
+    public ItemSoilMudWetBrick(SoilItemVariant variant, SoilType type) {
+        this.variant = variant;
         this.type = type;
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, itemVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @NotNull

@@ -19,24 +19,24 @@ import lombok.Getter;
 @Getter
 public class BlockWoodTrapDoor extends BlockTrapDoor implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodTrapDoor(WoodBlockVariant blockVariant, WoodType type) {
+    public BlockWoodTrapDoor(WoodBlockVariant variant, WoodType type) {
         super(Material.WOOD);
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant(), "wood");
-        OreDictUtils.register(this, getBlockVariant(), "wood", getType());
+        OreDictUtils.register(this, getVariant(), "wood");
+        OreDictUtils.register(this, getVariant(), "wood", getType());
     }
 
     @Override

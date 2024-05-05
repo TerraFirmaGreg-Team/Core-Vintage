@@ -119,8 +119,8 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
     }
 
     @Override
-    public int compareTo(@NotNull SoilBlockVariant blockVariant) {
-        return this.name.compareTo(blockVariant.toString());
+    public int compareTo(@NotNull SoilBlockVariant variant) {
+        return this.name.compareTo(variant.toString());
     }
 
     public static class Builder {

@@ -21,7 +21,7 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTIC
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_SOIL;
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
-public class SoilBlockVariantHandler {
+public final class SoilBlockVariantHandler {
 
     public static void init() {
         GRASS = new SoilBlockVariant.Builder("grass")

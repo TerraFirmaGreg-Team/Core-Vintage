@@ -18,22 +18,22 @@ import lombok.Getter;
 @Getter
 public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodButton(WoodBlockVariant blockVariant, WoodType type) {
-        this.blockVariant = blockVariant;
+    public BlockWoodButton(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
         this.type = type;
 
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
-        OreDictUtils.register(this, blockVariant, type);
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, type);
     }
 
     @Override

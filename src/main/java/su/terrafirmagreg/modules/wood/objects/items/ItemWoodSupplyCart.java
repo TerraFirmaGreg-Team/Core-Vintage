@@ -31,19 +31,19 @@ import lombok.Getter;
 @Getter
 public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
 
-    private final WoodItemVariant itemVariant;
+    private final WoodItemVariant variant;
     private final WoodType type;
 
-    public ItemWoodSupplyCart(WoodItemVariant itemVariant, WoodType type) {
+    public ItemWoodSupplyCart(WoodItemVariant variant, WoodType type) {
         this.type = type;
-        this.itemVariant = itemVariant;
+        this.variant = variant;
         this.setMaxStackSize(1);
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, itemVariant);
-        OreDictUtils.register(this, itemVariant, type);
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, type);
     }
 
     @NotNull

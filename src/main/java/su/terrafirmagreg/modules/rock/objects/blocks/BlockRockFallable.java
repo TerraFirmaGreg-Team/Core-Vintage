@@ -18,13 +18,13 @@ import java.util.Random;
 
 public abstract class BlockRockFallable extends BlockRock {
 
-    public BlockRockFallable(RockBlockVariant blockVariant, RockType type) {
-        this(Material.ROCK, blockVariant, type);
+    public BlockRockFallable(RockBlockVariant variant, RockType type) {
+        this(Material.ROCK, variant, type);
 
     }
 
-    public BlockRockFallable(Material material, RockBlockVariant blockVariant, RockType type) {
-        super(Settings.of().material(material), blockVariant, type);
+    public BlockRockFallable(Material material, RockBlockVariant variant, RockType type) {
+        super(Settings.of().material(material), variant, type);
     }
 
     @SideOnly(Side.CLIENT)

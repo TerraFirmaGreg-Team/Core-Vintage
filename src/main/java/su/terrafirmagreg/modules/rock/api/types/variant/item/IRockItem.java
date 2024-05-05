@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.item;
 
 import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.modules.rock.api.types.type.IRockType;
+import su.terrafirmagreg.api.spi.types.IType;
+import su.terrafirmagreg.api.spi.types.IVariant;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -9,15 +11,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий предмет породы.
  */
-public interface IRockItem extends IRockType, IAutoReg {
-
-    /**
-     * Возвращает вариант предмета.
-     *
-     * @return Вариант предмета.
-     */
-    @NotNull
-    RockItemVariant getItemVariant();
+public interface IRockItem extends IType<RockType>, IVariant<RockItemVariant>, IAutoReg {
 
     /**
      * Возвращает имя объекта.
@@ -26,7 +20,7 @@ public interface IRockItem extends IRockType, IAutoReg {
      */
     @NotNull
     default String getName() {
-        return String.format("rock/%s/%s", getItemVariant(), getType());
+        return String.format("rock/%s/%s", getVariant(), getType());
     }
 
 }

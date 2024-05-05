@@ -21,13 +21,13 @@ import lombok.Getter;
 @Getter
 public class BlockSoilMudStairs extends BlockStairs implements ISoilBlock {
 
-    private final SoilBlockVariant blockVariant;
+    private final SoilBlockVariant variant;
     private final SoilType type;
 
-    public BlockSoilMudStairs(SoilBlockVariant modelBlock, SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilMudStairs(SoilBlockVariant modelBlock, SoilBlockVariant variant, SoilType type) {
         super(modelBlock.get(type).getDefaultState());
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
         this.useNeighborBrightness = true;
 

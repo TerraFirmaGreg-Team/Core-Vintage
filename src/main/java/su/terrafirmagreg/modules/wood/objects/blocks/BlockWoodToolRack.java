@@ -44,8 +44,8 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
     protected static final AxisAlignedBB RACK_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
     protected static final AxisAlignedBB RACK_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 
-    public BlockWoodToolRack(WoodBlockVariant blockVariant, WoodType type) {
-        super(blockVariant, type);
+    public BlockWoodToolRack(WoodBlockVariant variant, WoodType type) {
+        super(variant, type);
 
         setHarvestLevel("axe", 0);
         setHardness(0.5f);
@@ -56,8 +56,8 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant());
-        OreDictUtils.register(this, getBlockVariant(), getType());
+        OreDictUtils.register(this, getVariant());
+        OreDictUtils.register(this, getVariant(), getType());
     }
 
     @NotNull

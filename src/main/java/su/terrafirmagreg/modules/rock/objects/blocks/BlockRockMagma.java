@@ -31,23 +31,23 @@ import java.util.List;
 @Getter
 public class BlockRockMagma extends BlockMagma implements IRockBlock {
 
-    private final RockBlockVariant blockVariant;
+    private final RockBlockVariant variant;
     private final RockType type;
 
-    public BlockRockMagma(RockBlockVariant blockVariant, RockType type) {
+    public BlockRockMagma(RockBlockVariant variant, RockType type) {
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.STONE);
         setHarvestLevel("pickaxe", 0);
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @Override

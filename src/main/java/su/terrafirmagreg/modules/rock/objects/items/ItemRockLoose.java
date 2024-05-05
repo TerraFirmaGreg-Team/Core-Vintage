@@ -39,12 +39,12 @@ import java.util.List;
 @Getter
 public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProvider<ContainerKnappingRock, GuiContainerKnappingRock> {
 
-    private final RockItemVariant itemVariant;
+    private final RockItemVariant variant;
     private final RockType type;
 
-    public ItemRockLoose(RockItemVariant itemVariant, RockType type) {
+    public ItemRockLoose(RockItemVariant variant, RockType type) {
 
-        this.itemVariant = itemVariant;
+        this.variant = variant;
         this.type = type;
     }
 
@@ -52,7 +52,7 @@ public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProv
     public void onRegisterOreDict() {
         OreDictUtils.register(this, "rock");
         OreDictUtils.register(this, "rock", getType());
-        OreDictUtils.register(this, "rock", getCategory());
+        OreDictUtils.register(this, "rock", this.getType().getRockCategory());
         if (type.isFlux()) OreDictUtils.register(this, "rock", "flux");
     }
 

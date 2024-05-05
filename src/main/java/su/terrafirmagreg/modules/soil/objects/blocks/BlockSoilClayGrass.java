@@ -14,8 +14,8 @@ import java.util.Random;
 
 public class BlockSoilClayGrass extends BlockSoilGrass {
 
-    public BlockSoilClayGrass(SoilBlockVariant blockVariant, SoilType type) {
-        super(blockVariant, type);
+    public BlockSoilClayGrass(SoilBlockVariant variant, SoilType type) {
+        super(variant, type);
 
         //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.DIRTLIKE);
     }

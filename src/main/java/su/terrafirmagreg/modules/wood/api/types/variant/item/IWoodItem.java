@@ -1,29 +1,22 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
+import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.spi.item.IColorfulItem;
+import su.terrafirmagreg.api.spi.types.IType;
+import su.terrafirmagreg.api.spi.types.IVariant;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+
 import net.minecraft.util.ResourceLocation;
 
 
 import org.jetbrains.annotations.NotNull;
 
-
-import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.api.spi.item.IColorfulItem;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
-
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface IWoodItem extends IWoodType, IAutoReg, ICustomModel, IColorfulItem {
-
-    /**
-     * Возвращает вариант блока породы.
-     *
-     * @return Вариант блока породы.
-     */
-    @NotNull
-    WoodItemVariant getItemVariant();
+public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>, IAutoReg, ICustomModel, IColorfulItem {
 
     /**
      * Возвращает расположение в реестре для данного подтипа предмета.
@@ -32,7 +25,7 @@ public interface IWoodItem extends IWoodType, IAutoReg, ICustomModel, IColorfulI
      */
     @NotNull
     default String getName() {
-        return String.format("wood/%s/%s", getItemVariant(), getType());
+        return String.format("wood/%s/%s", getVariant(), getType());
     }
 
     /**
@@ -42,6 +35,6 @@ public interface IWoodItem extends IWoodType, IAutoReg, ICustomModel, IColorfulI
      */
     @NotNull
     default ResourceLocation getResourceLocation() {
-        return ModUtils.id(String.format("wood/%s", getItemVariant()));
+        return ModUtils.id(String.format("wood/%s", getVariant()));
     }
 }

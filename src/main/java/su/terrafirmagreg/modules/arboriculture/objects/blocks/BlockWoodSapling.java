@@ -50,11 +50,11 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodSapling(WoodBlockVariant blockVariant, WoodType type) {
-        this.blockVariant = blockVariant;
+    public BlockWoodSapling(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
         this.type = type;
 
         setHardness(0.0F);

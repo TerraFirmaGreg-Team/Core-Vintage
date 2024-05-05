@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
-public class SoilItemVariants {
+public final class SoilItemVariants {
 
     public static SoilItemVariant PILE;
     public static SoilItemVariant MUD_BRICK;

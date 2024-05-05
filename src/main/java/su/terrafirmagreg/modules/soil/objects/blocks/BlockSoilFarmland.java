@@ -57,15 +57,15 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
     };
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    private final SoilBlockVariant blockVariant;
+    private final SoilBlockVariant variant;
     private final SoilType type;
 
-    public BlockSoilFarmland(SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilFarmland(SoilBlockVariant variant, SoilType type) {
 
-        if (blockVariant.canFall())
-            FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        if (variant.canFall())
+            FallingBlockManager.registerFallable(this, variant.getSpecification());
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
         this.useNeighborBrightness = true;
 
@@ -92,7 +92,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @Override

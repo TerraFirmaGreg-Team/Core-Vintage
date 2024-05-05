@@ -57,10 +57,10 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
     private static final AxisAlignedBB AABB_Z = new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.6875, 1);
     private static final AxisAlignedBB AABB_X = new AxisAlignedBB(0, 0, 0.1875, 1, 0.6875, 0.8125);
 
-    private final MetalBlockVariant blockVariant;
+    private final MetalBlockVariant variant;
     private final MetalType type;
 
-    public BlockMetalAnvil(MetalBlockVariant blockVariant, MetalType type) {
+    public BlockMetalAnvil(MetalBlockVariant variant, MetalType type) {
         super(Settings.of()
                 .material(Material.IRON)
                 .soundType(SoundType.ANVIL)
@@ -69,14 +69,14 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
                 .hardness(4.0F)
                 .resistance(10F));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     //	@Nullable

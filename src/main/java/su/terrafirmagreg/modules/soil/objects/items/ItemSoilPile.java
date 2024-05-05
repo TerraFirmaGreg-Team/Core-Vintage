@@ -17,18 +17,18 @@ import lombok.Getter;
 @Getter
 public class ItemSoilPile extends BaseItem implements ISoilItem {
 
-    private final SoilItemVariant itemVariant;
+    private final SoilItemVariant variant;
     private final SoilType type;
 
-    public ItemSoilPile(SoilItemVariant itemVariant, SoilType type) {
+    public ItemSoilPile(SoilItemVariant variant, SoilType type) {
 
-        this.itemVariant = itemVariant;
+        this.variant = variant;
         this.type = type;
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, itemVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @Override

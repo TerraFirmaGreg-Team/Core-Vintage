@@ -37,12 +37,12 @@ import lombok.Getter;
 @Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodWorkbench(WoodBlockVariant blockVariant, WoodType type) {
+    public BlockWoodWorkbench(WoodBlockVariant variant, WoodType type) {
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
         setSoundType(SoundType.WOOD);
@@ -50,12 +50,12 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
         setResistance(5.0F);
         setHarvestLevel("axe", 0);
 
-        BlockUtils.setFireInfo(this, blockVariant.getEncouragement(), blockVariant.getFlammability());
+        BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, getBlockVariant());
-        OreDictUtils.register(this, getBlockVariant(), getType());
+        OreDictUtils.register(this, getVariant());
+        OreDictUtils.register(this, getVariant(), getType());
     }
 
     @Override

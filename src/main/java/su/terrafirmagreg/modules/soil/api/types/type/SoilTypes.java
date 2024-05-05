@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.api.types.type;
 
-public class SoilTypes {
+public final class SoilTypes {
 
     public static SoilType SILT;
     public static SoilType LOAM;

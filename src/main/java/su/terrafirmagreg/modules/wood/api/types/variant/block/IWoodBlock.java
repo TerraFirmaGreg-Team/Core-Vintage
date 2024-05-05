@@ -5,9 +5,11 @@ import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.types.IType;
+import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.modules.wood.api.types.type.IWoodType;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -22,14 +24,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IWoodType, IAutoReg, ICustomModel, ICustomState, IColorfulBlock {
-
-    /**
-     * Возвращает вариант деревянного блока.
-     *
-     * @return вариант деревянного блока
-     */
-    WoodBlockVariant getBlockVariant();
+public interface IWoodBlock extends IType<WoodType>, IVariant<WoodBlockVariant>, IAutoReg, ICustomModel, ICustomState, IColorfulBlock {
 
     /**
      * Возвращает расположение в реестре для данного деревянного блока.
@@ -38,7 +33,7 @@ public interface IWoodBlock extends IWoodType, IAutoReg, ICustomModel, ICustomSt
      */
     @NotNull
     default String getName() {
-        return String.format("wood/%s/%s", getBlockVariant(), getType());
+        return String.format("wood/%s/%s", getVariant(), getType());
     }
 
     /**
@@ -48,7 +43,7 @@ public interface IWoodBlock extends IWoodType, IAutoReg, ICustomModel, ICustomSt
      */
     @NotNull
     default ResourceLocation getResourceLocation() {
-        return ModUtils.id(String.format("wood/%s", getBlockVariant()));
+        return ModUtils.id(String.format("wood/%s", getVariant()));
     }
 
     @Override

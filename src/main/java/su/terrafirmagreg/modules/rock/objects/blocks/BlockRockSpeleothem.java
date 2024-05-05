@@ -32,12 +32,8 @@ public class BlockRockSpeleothem extends BlockRock {
 
     public static final PropertyEnum<EnumSize> SIZE = PropertyEnum.create("size", EnumSize.class);
 
-    private final RockType type;
-
     public BlockRockSpeleothem(RockBlockVariant variant, RockType type) {
         super(variant, type);
-
-        this.type = type;
 
         setDefaultState(blockState.getBaseState()
                 .withProperty(SIZE, EnumSize.MEDIUM));
@@ -73,7 +69,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return RockItemVariants.LOOSE.get(type);
+        return RockItemVariants.LOOSE.get(getType());
     }
 
     @Override

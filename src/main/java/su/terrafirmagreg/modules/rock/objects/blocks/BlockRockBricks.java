@@ -8,9 +8,9 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 
 public class BlockRockBricks extends BlockRock {
 
-    public BlockRockBricks(RockBlockVariant blockVariant, RockType type) {
-        super(blockVariant, type);
+    public BlockRockBricks(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 }

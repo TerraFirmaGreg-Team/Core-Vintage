@@ -23,8 +23,8 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 
 public class BlockSoilPodzol extends BlockSoil {
 
-    public BlockSoilPodzol(SoilBlockVariant blockVariant, SoilType type) {
-        super(blockVariant, type);
+    public BlockSoilPodzol(SoilBlockVariant variant, SoilType type) {
+        super(variant, type);
 
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)

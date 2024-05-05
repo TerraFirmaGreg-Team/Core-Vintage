@@ -34,14 +34,14 @@ public class BlockRockAnvil extends BlockRock {
 
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
-    public BlockRockAnvil(RockBlockVariant blockVariant, RockType type) {
+    public BlockRockAnvil(RockBlockVariant variant, RockType type) {
         super(Settings.of()
                         .material(Material.ROCK)
                         .nonOpaque()
                         .nonFullCube(),
-                blockVariant, type);
+                variant, type);
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     @Override

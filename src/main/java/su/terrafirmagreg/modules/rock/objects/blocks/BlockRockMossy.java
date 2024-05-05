@@ -17,10 +17,10 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BlockRockMossy extends BlockRock {
 
-    public BlockRockMossy(RockBlockVariant blockVariant, RockType type) {
-        super(blockVariant, type);
+    public BlockRockMossy(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     @NotNull

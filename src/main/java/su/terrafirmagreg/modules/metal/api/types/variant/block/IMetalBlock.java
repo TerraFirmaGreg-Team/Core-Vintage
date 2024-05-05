@@ -4,9 +4,11 @@ import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.spi.types.IType;
+import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.modules.metal.api.types.type.IMetalType;
+import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
@@ -19,14 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок металла.
  */
-public interface IMetalBlock extends IMetalType, IAutoReg, ICustomModel, ICustomState {
-
-    /**
-     * Возвращает вариант металлического блока.
-     *
-     * @return Вариант металлического блока.
-     */
-    MetalBlockVariant getBlockVariant();
+public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IAutoReg, ICustomModel, ICustomState {
 
     /**
      * Возвращает местоположение регистрации блока почвы.
@@ -35,7 +30,7 @@ public interface IMetalBlock extends IMetalType, IAutoReg, ICustomModel, ICustom
      */
     @NotNull
     default String getName() {
-        return String.format("metal/%s/%s", getBlockVariant(), getType());
+        return String.format("metal/%s/%s", getVariant(), getType());
     }
 
     /**
@@ -45,7 +40,7 @@ public interface IMetalBlock extends IMetalType, IAutoReg, ICustomModel, ICustom
      */
     @NotNull
     default ResourceLocation getResourceLocation() {
-        return ModUtils.id(String.format("metal/%s", getBlockVariant()));
+        return ModUtils.id(String.format("metal/%s", getVariant()));
     }
 
     @Override

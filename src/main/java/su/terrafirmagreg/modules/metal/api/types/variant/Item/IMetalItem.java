@@ -1,34 +1,17 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
 import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.modules.metal.api.types.type.IMetalType;
+import su.terrafirmagreg.api.spi.types.IType;
+import su.terrafirmagreg.api.spi.types.IVariant;
+import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 
-
-import gregtech.api.unification.material.Material;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Интерфейс, представляющий предмет породы.
  */
-public interface IMetalItem extends IMetalType, IAutoReg {
-
-    /**
-     * Возвращает вариант блока породы.
-     *
-     * @return Вариант блока породы.
-     */
-    @NotNull
-    MetalItemVariant getItemVariant();
-
-    /**
-     * Возвращает тип породы.
-     *
-     * @return Тип породы.
-     */
-    @Nullable
-    Material getMaterial();
+public interface IMetalItem extends IType<MetalType>, IVariant<MetalItemVariant>, IAutoReg {
 
     /**
      * Возвращает расположение в реестре для данного подтипа предмета.
@@ -37,7 +20,7 @@ public interface IMetalItem extends IMetalType, IAutoReg {
      */
     @NotNull
     default String getName() {
-        return String.format("metal.%s.%s", getItemVariant(), getMaterial());
+        return String.format("metal/%s/%s", getVariant(), getType());
     }
 
 }

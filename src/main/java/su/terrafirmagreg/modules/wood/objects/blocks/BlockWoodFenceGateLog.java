@@ -11,8 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
 
-    public BlockWoodFenceGateLog(WoodBlockVariant blockVariant, WoodType type) {
-        super(blockVariant, type);
+    public BlockWoodFenceGateLog(WoodBlockVariant variant, WoodType type) {
+        super(variant, type);
     }
 
     @Override

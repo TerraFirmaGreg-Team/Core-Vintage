@@ -21,20 +21,20 @@ import lombok.Getter;
 @Getter
 public class ItemWoodLumber extends BaseItem implements IWoodItem {
 
-    private final WoodItemVariant itemVariant;
+    private final WoodItemVariant variant;
     private final WoodType type;
 
-    public ItemWoodLumber(WoodItemVariant itemVariant, WoodType type) {
+    public ItemWoodLumber(WoodItemVariant variant, WoodType type) {
         this.type = type;
-        this.itemVariant = itemVariant;
+        this.variant = variant;
 
         setMaxDamage(0);
     }
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, itemVariant);
-        OreDictUtils.register(this, itemVariant, type);
+        OreDictUtils.register(this, variant);
+        OreDictUtils.register(this, variant, type);
     }
 
     @NotNull

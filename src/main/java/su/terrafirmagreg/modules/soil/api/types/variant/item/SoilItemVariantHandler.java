@@ -4,7 +4,7 @@ import su.terrafirmagreg.modules.soil.objects.items.ItemSoilMudBrick;
 import su.terrafirmagreg.modules.soil.objects.items.ItemSoilMudWetBrick;
 import su.terrafirmagreg.modules.soil.objects.items.ItemSoilPile;
 
-public class SoilItemVariantHandler {
+public final class SoilItemVariantHandler {
 
     public static void init() {
 

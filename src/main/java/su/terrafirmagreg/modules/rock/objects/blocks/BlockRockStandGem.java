@@ -38,13 +38,13 @@ import static su.terrafirmagreg.api.data.Blockstates.UP;
 
 public class BlockRockStandGem extends BlockRock implements ITileBlock {
 
-    public BlockRockStandGem(RockBlockVariant blockVariant, RockType type) {
-        super(blockVariant, type);
+    public BlockRockStandGem(RockBlockVariant variant, RockType type) {
+        super(variant, type);
 
-        this.setSoundType(SoundType.STONE);
-        this.setHarvestLevel("pickaxe", 0);
-        this.setHardness(1.0F);
-        this.setDefaultState(this.blockState.getBaseState()
+        setSoundType(SoundType.STONE);
+        setHarvestLevel("pickaxe", 0);
+        setHardness(1.0F);
+        setDefaultState(this.blockState.getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.EAST)
                 .withProperty(UP, Boolean.TRUE));
     }

@@ -11,12 +11,14 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -26,19 +28,19 @@ import java.util.List;
 @Getter
 public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock {
 
-    private final RockBlockVariant blockVariant;
+    private final RockBlockVariant variant;
     private final RockType type;
 
     protected final Block block;
     protected Half halfSlab;
     protected Double doubleSlab;
 
-    private BlockRockSlab(RockBlockVariant model, RockBlockVariant blockVariant, RockType type) {
+    private BlockRockSlab(RockBlockVariant model, RockBlockVariant variant, RockType type) {
         super(Settings.of()
                 .material(Material.ROCK)
                 .soundType(SoundType.STONE));
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
         this.block = model.get(type);
 
@@ -49,6 +51,13 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
     public void onRegisterOreDict() {
         OreDictUtils.register(this, "slab");
         OreDictUtils.register(this, "slab", "stone");
+    }
+
+    @NotNull
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
     }
 
     @Override

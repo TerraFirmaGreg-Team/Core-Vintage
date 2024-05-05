@@ -30,13 +30,13 @@ import java.util.List;
 @Getter
 public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
-    private final RockBlockVariant blockVariant;
+    private final RockBlockVariant variant;
     private final RockType type;
 
-    public BlockRockStairs(RockBlockVariant modelBlock, RockBlockVariant blockVariant, RockType type) {
+    public BlockRockStairs(RockBlockVariant modelBlock, RockBlockVariant variant, RockType type) {
         super(modelBlock.get(type).getDefaultState());
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
         this.useNeighborBrightness = true;
 
@@ -88,7 +88,7 @@ public class BlockRockStairs extends BlockStairs implements IRockBlock {
 
         tooltip.add(
                 new TextComponentTranslation("rockcategory.name")
-                        .getFormattedText() + ": " + this.getCategory().getLocalizedName());
+                        .getFormattedText() + ": " + this.getType().getRockCategory().getLocalizedName());
     }
 
 }

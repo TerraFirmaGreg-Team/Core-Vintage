@@ -66,8 +66,8 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
     }
 
     @Override
-    public int compareTo(@NotNull WoodItemVariant itemVariant) {
-        return this.name.compareTo(itemVariant.toString());
+    public int compareTo(@NotNull WoodItemVariant variant) {
+        return this.name.compareTo(variant.toString());
     }
 
     public static class Builder {

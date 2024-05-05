@@ -63,11 +63,11 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 
     public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
 
-    private final WoodBlockVariant blockVariant;
+    private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodLeaves(WoodBlockVariant blockVariant, WoodType type) {
-        this.blockVariant = blockVariant;
+    public BlockWoodLeaves(WoodBlockVariant variant, WoodType type) {
+        this.variant = variant;
         this.type = type;
 
         this.leavesFancy = true; // Fast / Fancy graphics works correctly

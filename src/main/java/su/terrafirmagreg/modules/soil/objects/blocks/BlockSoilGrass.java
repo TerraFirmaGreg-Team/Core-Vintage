@@ -47,15 +47,15 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 @Getter
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulBlock {
 
-    private final SoilBlockVariant blockVariant;
+    private final SoilBlockVariant variant;
     private final SoilType type;
 
-    public BlockSoilGrass(SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilGrass(SoilBlockVariant variant, SoilType type) {
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
 
         setSoundType(SoundType.PLANT);
         setHardness(2.1F);
@@ -86,7 +86,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
             if (usBlock instanceof BlockSoilPeat) {
                 world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
             } else if (usBlock instanceof ISoilBlock soil) {
-                world.setBlockState(pos, soil.getBlockVariant().getNonGrassVersion().get(soil.getType()).getDefaultState());
+                world.setBlockState(pos, soil.getVariant().getNonGrassVersion().get(soil.getType()).getDefaultState());
             }
         } else if (neighborLight >= 9) {
             for (int i = 0; i < 4; ++i) {
@@ -138,7 +138,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 
                     }
 
-                    var s = soilBlock.getBlockVariant().getGrassVersion(spreader);
+                    var s = soilBlock.getVariant().getGrassVersion(spreader);
                     world.setBlockState(target, s.get(soilBlock.getType()).getDefaultState());
                 }
             }
@@ -162,7 +162,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @Override
@@ -240,7 +240,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-        if (this.blockVariant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+        if (this.variant.canFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
             double d0 = (float) pos.getX() + rand.nextFloat();
             double d1 = (double) pos.getY() - 0.05D;
             double d2 = (float) pos.getZ() + rand.nextFloat();

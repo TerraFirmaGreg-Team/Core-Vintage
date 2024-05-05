@@ -347,7 +347,7 @@ public final class BlockUtils {
     }
 
     public static boolean isSoilBlockType(ISoilBlock soilBlock, SoilBlockVariant... variants) {
-        var blockVariant = soilBlock.getBlockVariant();
+        var blockVariant = soilBlock.getVariant();
         for (var variant : variants) {
             if (blockVariant == variant) {
                 return true;
@@ -357,7 +357,7 @@ public final class BlockUtils {
     }
 
     public static boolean isRockBlockType(IRockBlock rockBlock, RockBlockVariant... variants) {
-        var blockVariant = rockBlock.getBlockVariant();
+        var blockVariant = rockBlock.getVariant();
         for (var variant : variants) {
             if (blockVariant == variant) {
                 return true;

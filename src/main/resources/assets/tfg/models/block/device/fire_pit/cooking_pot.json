@@ -1,7 +1,7 @@
 {
   "parent": "block/block",
   "textures": {
-    "stick": "tfc:blocks/device/fire_pit/stick",
+    "stick": "tfg:blocks/device/fire_pit/stick",
     "particle": "#base",
     "pot_side": "tfc:blocks/ceramics/large_vessel_side",
     "pot_bottom": "tfc:blocks/ceramics/large_vessel_bottom"

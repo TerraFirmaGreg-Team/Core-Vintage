@@ -78,7 +78,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     }
 
     @Override
-    public MetalBlockVariant getBlockVariant() {
+    public MetalBlockVariant getVariant() {
         return variant;
     }
 

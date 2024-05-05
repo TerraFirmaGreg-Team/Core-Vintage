@@ -35,15 +35,15 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 @Getter
 public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
-    private final SoilBlockVariant blockVariant;
+    private final SoilBlockVariant variant;
     private final SoilType type;
 
-    public BlockSoilMycelium(SoilBlockVariant blockVariant, SoilType type) {
+    public BlockSoilMycelium(SoilBlockVariant variant, SoilType type) {
 
-        this.blockVariant = blockVariant;
+        this.variant = variant;
         this.type = type;
 
-        FallingBlockManager.registerFallable(this, blockVariant.getSpecification());
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
 
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
@@ -57,7 +57,7 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, blockVariant);
+        OreDictUtils.register(this, variant);
     }
 
     @Override

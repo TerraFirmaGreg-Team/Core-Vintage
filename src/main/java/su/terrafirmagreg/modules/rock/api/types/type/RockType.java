@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 
 
 import gregtech.api.unification.material.Material;
@@ -102,6 +103,11 @@ public class RockType implements Comparable<RockType> {
     @NotNull
     public ResourceLocation getTexture() {
         return ModUtils.id("textures/blocks/rock/raw/" + this + ".png");
+    }
+
+    public String getLocalizedName() {
+        return new TextComponentTranslation(
+                String.format("rock.type.%s.name", this)).getFormattedText();
     }
 
     @Override

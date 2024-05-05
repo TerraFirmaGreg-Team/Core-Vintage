@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.text.TextComponentTranslation;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -64,9 +65,14 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
         return name;
     }
 
+    public String getLocalizedName() {
+        return new TextComponentTranslation(
+                String.format("rock.variant.%s.name", this)).getFormattedText();
+    }
+
     @Override
-    public int compareTo(@NotNull RockItemVariant itemVariant) {
-        return this.name.compareTo(itemVariant.toString());
+    public int compareTo(@NotNull RockItemVariant variant) {
+        return this.name.compareTo(variant.toString());
     }
 
     public static class Builder {

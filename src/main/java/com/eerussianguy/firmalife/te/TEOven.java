@@ -28,7 +28,7 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @MethodsReturnNonnullByDefault
 public class TEOven extends TEInventory implements ITickable {

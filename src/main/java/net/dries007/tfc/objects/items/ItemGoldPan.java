@@ -41,7 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**

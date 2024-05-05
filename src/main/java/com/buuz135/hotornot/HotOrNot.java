@@ -37,7 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import com.buuz135.hotornot.network.PacketClientSettings;
 import com.buuz135.hotornot.network.PacketServerSettings;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
 
 @Mod(modid = MODID_HOTORNOT, name = HotOrNot.MOD_NAME, version = Tags.VERSION, useMetadata = true)
 public class HotOrNot {

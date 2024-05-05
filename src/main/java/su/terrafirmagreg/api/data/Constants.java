@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.lib;
+package su.terrafirmagreg.api.data;
 
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.json.LowercaseEnumTypeAdapterFactory;

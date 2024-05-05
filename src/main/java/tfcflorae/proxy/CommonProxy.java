@@ -33,7 +33,7 @@ import net.dries007.tfc.world.classic.worldgen.structures.WorldGenStructuresCora
 import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 public class CommonProxy {

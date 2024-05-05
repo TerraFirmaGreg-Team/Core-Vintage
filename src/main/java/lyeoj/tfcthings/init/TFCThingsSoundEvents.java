@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
 
 public class TFCThingsSoundEvents {
 

@@ -47,7 +47,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
+import static su.terrafirmagreg.api.data.Blockstates.SEALED;
 
 /**
  * @see BlockPowderKeg

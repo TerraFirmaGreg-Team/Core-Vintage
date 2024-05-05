@@ -47,8 +47,8 @@ import java.util.Random;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @MethodsReturnNonnullByDefault
 public class BlockOven extends Block implements IItemSize {
@@ -65,8 +65,8 @@ public class BlockOven extends Block implements IItemSize {
     }
 
     /**
-     * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's
-     * not something a real dev would write.
+     * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's not something a real dev
+     * would write.
      *
      * @param world     The world! What more did you want
      * @param ovenPos   The oven

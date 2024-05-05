@@ -35,7 +35,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @JEIPlugin
 public class TFCFJEIPlugin implements IModPlugin {

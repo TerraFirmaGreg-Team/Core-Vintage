@@ -50,7 +50,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 @GameRegistry.ObjectHolder(MODID_FL)

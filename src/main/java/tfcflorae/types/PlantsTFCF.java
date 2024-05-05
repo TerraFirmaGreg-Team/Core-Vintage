@@ -9,7 +9,7 @@ import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Plant;
 import tfcflorae.ConfigTFCF;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

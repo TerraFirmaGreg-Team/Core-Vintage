@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
 /**
  * A wrapper to the Log4J wrapper, which adds some extra utility, such as the stacktrace being added to warning messages.

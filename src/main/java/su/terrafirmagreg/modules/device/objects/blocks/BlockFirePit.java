@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -62,8 +61,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumerBlock, ITileBlock {

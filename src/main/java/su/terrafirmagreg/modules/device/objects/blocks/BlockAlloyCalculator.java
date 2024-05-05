@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockAlloyCalculator extends BaseBlockContainer implements ITileBlock {

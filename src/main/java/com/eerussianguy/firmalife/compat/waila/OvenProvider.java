@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.eerussianguy.firmalife.te.TEOven.SLOT_MAIN;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class OvenProvider implements IWailaBlock {
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

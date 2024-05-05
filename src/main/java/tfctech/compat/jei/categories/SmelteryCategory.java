@@ -15,7 +15,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import tfctech.compat.jei.wrappers.SmelteryRecipeWrapper;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper> {
 

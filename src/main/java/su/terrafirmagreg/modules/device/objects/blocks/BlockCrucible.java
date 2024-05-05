@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.lib.Constants;
-import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;

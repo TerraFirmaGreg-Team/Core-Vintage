@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 

@@ -56,7 +56,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 // Changes in config allow placing this animal in livestock and still respawn
 public class EntityWolfTFC extends EntityWolf implements IAnimal, ILivestock {

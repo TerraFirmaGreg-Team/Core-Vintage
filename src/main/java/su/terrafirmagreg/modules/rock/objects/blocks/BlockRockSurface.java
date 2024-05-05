@@ -29,7 +29,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockRockSurface extends BlockRock {

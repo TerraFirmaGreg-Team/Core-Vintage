@@ -3,7 +3,7 @@ package com.eerussianguy.firmalife.init;
 import net.minecraft.util.ResourceLocation;
 
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 public class RegistryNamesFL {
 

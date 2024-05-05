@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class ItemBlockTorch extends ItemBlockTFC {
 

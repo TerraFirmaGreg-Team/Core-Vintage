@@ -25,7 +25,7 @@ import net.dries007.tfc.client.gui.GuiContainerTE;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTOWERHEAT;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTOWERHEAT;
 
 @Mod(modid = MODID_TFCTOWERHEAT, version = Tags.VERSION, name = TowerHeat.name)
 public class TowerHeat {

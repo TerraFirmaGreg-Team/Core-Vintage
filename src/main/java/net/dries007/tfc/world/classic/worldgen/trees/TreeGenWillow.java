@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.util.ResourceLocation;

@@ -14,7 +14,7 @@ import pieman.caffeineaddon.recipes.Registries;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
 
 @JEIPlugin
 public class CAJEIPlugin implements IModPlugin {

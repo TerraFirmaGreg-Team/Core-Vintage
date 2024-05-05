@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.lang.reflect.Method;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_DDD;
+import static su.terrafirmagreg.api.data.Constants.MODID_DDD;
 
 @Mod(modid = MODID_DDD, name = DeathDairyDespair.NAME, version = Tags.VERSION)
 public class DeathDairyDespair {

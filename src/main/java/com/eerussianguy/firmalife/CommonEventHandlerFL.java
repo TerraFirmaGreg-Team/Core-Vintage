@@ -46,7 +46,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)

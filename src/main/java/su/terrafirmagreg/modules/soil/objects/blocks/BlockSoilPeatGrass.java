@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.*;
+import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
 public class BlockSoilPeatGrass extends BaseBlock implements IColorfulBlock {

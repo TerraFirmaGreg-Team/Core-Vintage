@@ -24,7 +24,7 @@ import com.eerussianguy.firmalife.util.ClientHelpers;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = MODID_FL, value = Side.CLIENT)

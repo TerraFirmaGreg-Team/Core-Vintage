@@ -50,8 +50,8 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.api.data.Constants.MODID_CELLARS;
 
 public class TileIceBunker extends TileEntityLockableLoot implements IInventory, ITickable, IContainerProvider<ContainerIceBunker, GuiIceBunker> {
 

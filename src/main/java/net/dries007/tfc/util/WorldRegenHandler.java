@@ -59,7 +59,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 /**

@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
 

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.lib;
+package su.terrafirmagreg.api.data;
 
 import lombok.Getter;
 

@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @MethodsReturnNonnullByDefault
 public class BlockInductionCrucible extends Block implements IItemSize {

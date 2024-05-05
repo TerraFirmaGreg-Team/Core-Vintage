@@ -4,7 +4,7 @@ import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.LangKey;
 
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
 
 public final class TemperatureValues {
 

@@ -47,7 +47,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
+import static su.terrafirmagreg.api.data.Blockstates.SEALED;
 
 /**
  * Barrel block. Can be filled with fluids (10 B), and one item stack. Performs barrel recipes. Sealed state is stored in block state and cached in TE, synced when updated via

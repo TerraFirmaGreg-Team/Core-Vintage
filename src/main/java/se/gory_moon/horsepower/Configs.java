@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.config.Config;

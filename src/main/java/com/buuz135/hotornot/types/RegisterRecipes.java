@@ -25,7 +25,7 @@ import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.skills.SmithingSkill.Type;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
 
 @EventBusSubscriber(modid = MODID_HOTORNOT)
 public final class RegisterRecipes {

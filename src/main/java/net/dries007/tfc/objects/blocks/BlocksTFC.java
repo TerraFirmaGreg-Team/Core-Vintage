@@ -79,7 +79,7 @@ import lombok.Getter;
 import static net.dries007.tfc.api.types.Rock.Type.*;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFC)

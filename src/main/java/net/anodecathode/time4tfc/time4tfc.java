@@ -13,7 +13,7 @@ import net.anodecathode.time4tfc.network.NetworkEventHandler;
 import net.anodecathode.time4tfc.network.PacketHandler;
 import net.anodecathode.time4tfc.world.WorldProviderTooMuchTime;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TIME4TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TIME4TFC;
 
 /**
  * @author AnodeCathode, dmillerw

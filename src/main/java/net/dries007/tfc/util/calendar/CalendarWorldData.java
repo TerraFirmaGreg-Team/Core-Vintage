@@ -10,7 +10,7 @@ import net.minecraft.world.storage.WorldSavedData;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class CalendarWorldData extends WorldSavedData {
 

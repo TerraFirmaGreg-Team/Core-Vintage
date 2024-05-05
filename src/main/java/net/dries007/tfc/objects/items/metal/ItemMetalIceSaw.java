@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
-import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.data.Constants.MODID_CELLARS;
 
 @Mod.EventBusSubscriber(modid = MODID_CELLARS)
 public class ItemMetalIceSaw extends ItemBase implements IMetalItem {

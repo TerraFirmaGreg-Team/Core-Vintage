@@ -12,7 +12,7 @@ import lyeoj.tfcthings.model.ModelPigvil;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
 
 public class RenderPigvil extends RenderLiving<EntityPigvil> {
 

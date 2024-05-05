@@ -47,8 +47,8 @@ import lombok.Getter;
 
 import java.util.Random;
 
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")

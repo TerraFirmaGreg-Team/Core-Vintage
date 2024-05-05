@@ -38,7 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.*;
+import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
 public class BlockMetalCladding extends BaseBlock implements IMetalBlock {

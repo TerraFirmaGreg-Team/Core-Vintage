@@ -32,7 +32,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS)
 public class TFCThingsEventHandler {

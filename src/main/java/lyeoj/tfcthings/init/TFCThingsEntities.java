@@ -14,7 +14,7 @@ import lyeoj.tfcthings.renderer.RenderPigvil;
 import lyeoj.tfcthings.renderer.RenderThrownRopeBridge;
 import lyeoj.tfcthings.renderer.RenderThrownRopeJavelin;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
 
 public class TFCThingsEntities {
 

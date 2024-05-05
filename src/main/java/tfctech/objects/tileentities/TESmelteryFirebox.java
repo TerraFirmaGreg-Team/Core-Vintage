@@ -18,7 +18,7 @@ import tfctech.objects.blocks.devices.BlockSmelteryCauldron;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TESmelteryFirebox extends TETickableInventory implements ITickable, ICalendarTickable, ITileFields {
 

@@ -11,7 +11,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
 public class EntityJoinWorldEventHandler {
 

@@ -67,7 +67,7 @@ import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
 import static su.terrafirmagreg.Tags.VERSION;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber

@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 public class GuiSmelteryFirebox extends GuiContainerTE<TESmelteryFirebox> {
 

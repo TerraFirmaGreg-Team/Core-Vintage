@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -25,7 +24,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockFreezeDryer extends BaseBlockContainer implements ITileBlock {

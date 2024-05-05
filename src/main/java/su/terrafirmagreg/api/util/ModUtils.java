@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
 @SuppressWarnings("unused")
 public final class ModUtils {

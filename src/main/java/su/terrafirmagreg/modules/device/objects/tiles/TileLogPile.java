@@ -32,7 +32,7 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile.LAYERS;
 
 @MethodsReturnNonnullByDefault

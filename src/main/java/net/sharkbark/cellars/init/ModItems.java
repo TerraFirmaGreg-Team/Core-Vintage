@@ -16,7 +16,7 @@ import net.sharkbark.cellars.items.ItemToolHead;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.data.Constants.MODID_CELLARS;
 
 public class ModItems {
 

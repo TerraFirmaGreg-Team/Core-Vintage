@@ -33,8 +33,8 @@ import net.dries007.tfc.api.capability.size.Weight;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
-import static su.terrafirmagreg.api.util.PropertyUtils.UP;
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.UP;
 
 public class BlockRockStandGem extends BlockRock implements ITileBlock {
 

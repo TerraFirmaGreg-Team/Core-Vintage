@@ -32,8 +32,8 @@ import tfctech.objects.storage.MachineEnergyContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect, IEnergySink {

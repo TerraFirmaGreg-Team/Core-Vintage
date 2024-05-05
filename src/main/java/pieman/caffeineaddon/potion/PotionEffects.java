@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)

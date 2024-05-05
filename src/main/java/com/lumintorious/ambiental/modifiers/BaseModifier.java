@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.core.api.capabilities.temperature.ProviderTempe
 import com.lumintorious.ambiental.TFCAmbientalConfig;
 import com.lumintorious.ambiental.Util;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCAMBIENTAL;
 
 public class BaseModifier {
 

@@ -41,8 +41,8 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.FULL;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.FULL;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TilePitKiln extends TEPlacedItem implements ITickable {
 

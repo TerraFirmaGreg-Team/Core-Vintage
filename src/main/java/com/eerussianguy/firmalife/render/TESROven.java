@@ -17,7 +17,7 @@ import com.eerussianguy.firmalife.te.TEOven;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static com.eerussianguy.firmalife.te.TEOven.*;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SideOnly(Side.CLIENT)
 public class TESROven extends TileEntitySpecialRenderer<TEOven> {

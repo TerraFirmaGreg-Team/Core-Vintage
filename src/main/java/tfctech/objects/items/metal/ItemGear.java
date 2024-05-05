@@ -1,6 +1,6 @@
 package tfctech.objects.items.metal;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.util.ResourceLocation;
 

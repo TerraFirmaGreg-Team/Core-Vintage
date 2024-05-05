@@ -7,7 +7,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 public class CompatibleRecipeRegistry {
 

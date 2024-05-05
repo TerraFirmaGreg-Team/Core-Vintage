@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 public class ConfigTFCF {

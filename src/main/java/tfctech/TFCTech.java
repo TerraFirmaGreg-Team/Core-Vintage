@@ -18,7 +18,7 @@ import tfctech.network.PacketFridgeUpdate;
 import tfctech.network.PacketLatexUpdate;
 import tfctech.network.PacketTileEntityUpdate;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("WeakerAccess")
 @Mod(modid = MODID_TFCTECH, name = TFCTech.NAME, version = Tags.VERSION, dependencies = TFCTech.DEPENDENCIES)

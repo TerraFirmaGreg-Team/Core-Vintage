@@ -150,7 +150,7 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import java.util.Arrays;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @SuppressWarnings("unused")

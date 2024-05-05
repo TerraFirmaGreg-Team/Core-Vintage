@@ -14,7 +14,7 @@ import net.dries007.tfc.objects.ArmorMaterialTFC;
 import net.dries007.tfc.objects.ToolMaterialsTFC;
 
 import static net.dries007.tfc.api.types.Metal.Tier.*;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = MODID_TFC)

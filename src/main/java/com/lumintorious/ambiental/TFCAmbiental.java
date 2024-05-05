@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import com.lumintorious.ambiental.network.TemperaturePacket;
 import net.dries007.tfc.TerraFirmaCraft;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCAMBIENTAL;
 
 @Mod(modid = MODID_TFCAMBIENTAL, name = TFCAmbiental.NAME, version = Tags.VERSION)
 public class TFCAmbiental {

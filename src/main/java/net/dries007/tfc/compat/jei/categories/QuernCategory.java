@@ -1,6 +1,6 @@
 package net.dries007.tfc.compat.jei.categories;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 
 import net.minecraft.client.Minecraft;

@@ -38,7 +38,7 @@ import java.util.Iterator;
 import java.util.function.Supplier;
 
 import static net.minecraftforge.fml.common.eventhandler.EventPriority.LOW;
-import static su.terrafirmagreg.api.lib.Constants.*;
+import static su.terrafirmagreg.api.data.Constants.*;
 
 @Mod(modid = MODID_FF, name = FloraeFixes.name, version = Tags.VERSION, dependencies = "after:firmalife;after:tfcflorae")
 public class FloraeFixes {

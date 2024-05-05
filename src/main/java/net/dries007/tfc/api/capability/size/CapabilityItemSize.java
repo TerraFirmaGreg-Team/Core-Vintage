@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.size;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.block.BlockLadder;
 import net.minecraft.init.Blocks;

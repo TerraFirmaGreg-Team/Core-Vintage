@@ -54,8 +54,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static su.terrafirmagreg.api.data.Blockstates.HARVESTABLE;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
-import static su.terrafirmagreg.api.util.PropertyUtils.HARVESTABLE;
 import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 @Getter

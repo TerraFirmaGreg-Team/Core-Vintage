@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.ceramics;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -65,7 +65,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class ItemSmallVessel extends ItemPottery {
 

@@ -56,7 +56,7 @@ import net.dries007.tfc.util.agriculture.Food;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 @GameRegistry.ObjectHolder(MODID_TFC)

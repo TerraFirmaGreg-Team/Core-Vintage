@@ -59,7 +59,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit.ATTACHMENT;
 
 public class TileFirePit extends TETickableInventory

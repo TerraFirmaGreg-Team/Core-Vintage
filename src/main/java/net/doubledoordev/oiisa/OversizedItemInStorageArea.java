@@ -42,7 +42,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static net.doubledoordev.oiisa.OversizedItemInStorageArea.MOD_NAME;
-import static su.terrafirmagreg.api.lib.Constants.MODID_OSA;
+import static su.terrafirmagreg.api.data.Constants.MODID_OSA;
 
 @Mod(modid = MODID_OSA, name = MOD_NAME, version = Tags.VERSION)
 public class OversizedItemInStorageArea {

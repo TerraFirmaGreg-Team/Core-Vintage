@@ -20,7 +20,7 @@ import pieman.caffeineaddon.blocks.TEDryingMat;
 import pieman.caffeineaddon.client.GUIHandler;
 import pieman.caffeineaddon.jeicompat.OreDictionaryCompat;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
 
 @EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class RegistryHandler {

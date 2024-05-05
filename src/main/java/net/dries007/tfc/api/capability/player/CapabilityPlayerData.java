@@ -13,7 +13,7 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public final class CapabilityPlayerData {
 

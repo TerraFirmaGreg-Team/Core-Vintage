@@ -46,7 +46,7 @@ import net.sharkbark.cellars.ModConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSidedCallback, ITickable, IContainerProvider<ContainerFreezeDryer, GuiFreezeDryer> {
 

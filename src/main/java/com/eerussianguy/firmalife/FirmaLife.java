@@ -27,7 +27,7 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 @Mod(modid = MODID_FL, name = FirmaLife.MODNAME, version = Tags.VERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
 public class FirmaLife {

@@ -48,8 +48,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.BlockPlacedItem.PLACED_ITEM_AABB;
-import static su.terrafirmagreg.api.util.PropertyUtils.FULL;
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.FULL;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockPitKiln extends BaseBlock implements ITileBlock, ICustomState {

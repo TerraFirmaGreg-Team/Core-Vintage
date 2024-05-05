@@ -25,7 +25,7 @@ import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_START;
 

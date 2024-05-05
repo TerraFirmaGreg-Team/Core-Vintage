@@ -36,7 +36,7 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)

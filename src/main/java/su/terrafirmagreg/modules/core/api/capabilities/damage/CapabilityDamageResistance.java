@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.api.capabilities.damage;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.Entity;
@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public final class CapabilityDamageResistance {
 

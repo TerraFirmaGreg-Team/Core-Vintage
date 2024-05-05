@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.*;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.*;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
 

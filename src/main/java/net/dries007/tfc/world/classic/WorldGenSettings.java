@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 
 import com.google.common.base.Strings;

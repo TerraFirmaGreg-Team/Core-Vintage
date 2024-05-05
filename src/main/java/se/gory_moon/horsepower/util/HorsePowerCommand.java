@@ -29,7 +29,7 @@ import java.awt.datatransfer.StringSelection;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.data.Constants.MODID_HORSEPOWER;
 
 @SideOnly(Side.CLIENT)
 public class HorsePowerCommand extends CommandBase implements IClientCommand {

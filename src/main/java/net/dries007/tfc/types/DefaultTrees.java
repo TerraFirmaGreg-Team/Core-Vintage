@@ -17,7 +17,7 @@ import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenVariants;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenWillow;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = MODID_TFC)

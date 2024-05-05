@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.compat.jei.category;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;

@@ -18,7 +18,7 @@ import BananaFructa.tfcfarming.firmalife.TEPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEStemCropN;
 import BananaFructa.tfcfarming.network.PacketHandler;
 
-import static su.terrafirmagreg.api.lib.Constants.*;
+import static su.terrafirmagreg.api.data.Constants.*;
 
 @Mod(modid = MODID_TFCFARMING, name = TFCFarming.name, version = Tags.VERSION, dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
 public class TFCFarming {

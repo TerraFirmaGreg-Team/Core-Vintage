@@ -9,7 +9,7 @@ import net.dries007.tfc.objects.te.TELargeVessel;
 import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class GuiButtonLargeVesselSeal extends GuiButtonTFC implements IButtonTooltip {
 

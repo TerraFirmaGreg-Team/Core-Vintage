@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.CAN_FALL;
+import static su.terrafirmagreg.api.data.Blockstates.CAN_FALL;
 
 public class BlockRockRaw extends BlockRock implements ICustomState {
 

@@ -34,7 +34,7 @@ import lombok.Getter;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import se.gory_moon.horsepower.blocks.ModBlocks;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.data.Constants.MODID_HORSEPOWER;
 
 public class HorsePowerCreativeTab extends CreativeTabs {
 

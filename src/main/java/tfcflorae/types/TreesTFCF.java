@@ -12,8 +12,8 @@ import net.dries007.tfc.world.classic.worldgen.trees.TreeGenNormal;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenRandom;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenVariants;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @SuppressWarnings({ "unused", "WeakerAccess" })
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

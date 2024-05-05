@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.sharkbark.cellars.proxy.CommonProxy;
 import net.sharkbark.cellars.util.Reference;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.api.data.Constants.MODID_CELLARS;
 
 @Mod(modid = MODID_CELLARS, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
 @Mod.EventBusSubscriber(modid = MODID_CELLARS)

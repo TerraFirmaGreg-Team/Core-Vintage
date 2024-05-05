@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 
-import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
 @SuppressWarnings("unused")

@@ -18,7 +18,7 @@ import net.dries007.tfc.util.config.QuiverSearch;
 import net.dries007.tfc.util.config.TemperatureMode;
 import net.dries007.tfc.util.config.TimeTooltipMode;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 /**
  * Top level items must be static, the subclasses' fields must not be static.

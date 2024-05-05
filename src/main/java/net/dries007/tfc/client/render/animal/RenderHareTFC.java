@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.client.model.animal.ModelHareTFC;
 import net.dries007.tfc.objects.entity.animal.EntityHareTFC;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 

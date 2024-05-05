@@ -1,6 +1,6 @@
 package tfctech.objects.items;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -49,7 +49,7 @@ import java.util.function.Function;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)

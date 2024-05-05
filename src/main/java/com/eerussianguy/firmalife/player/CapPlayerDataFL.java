@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 import net.dries007.tfc.api.capability.DumbStorage;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 public final class CapPlayerDataFL {
 

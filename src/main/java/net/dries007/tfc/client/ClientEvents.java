@@ -140,7 +140,7 @@ import java.util.List;
 import java.util.Set;
 
 import static net.minecraft.util.text.TextFormatting.*;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
 public class ClientEvents {

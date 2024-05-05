@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class BlockTorchTFC extends BlockTorch implements IItemSize {
 

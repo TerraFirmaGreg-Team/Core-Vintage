@@ -13,7 +13,7 @@ import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.api.recipes.SmelteryRecipe;
 import tfctech.api.recipes.WireDrawingRecipe;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)
 public final class TechRegistries {

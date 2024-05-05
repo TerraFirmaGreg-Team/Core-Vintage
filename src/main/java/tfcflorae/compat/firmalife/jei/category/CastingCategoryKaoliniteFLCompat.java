@@ -15,7 +15,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import tfcflorae.compat.firmalife.jei.wrappers.CastingRecipeWrapperKaoliniteFL;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class CastingCategoryKaoliniteFLCompat extends BaseRecipeCategory<CastingRecipeWrapperKaoliniteFL> {
 

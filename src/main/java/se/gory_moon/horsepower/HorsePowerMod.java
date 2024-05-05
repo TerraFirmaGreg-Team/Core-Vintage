@@ -23,7 +23,7 @@ import se.gory_moon.horsepower.recipes.HPRecipes;
 import se.gory_moon.horsepower.util.Utils;
 
 import static se.gory_moon.horsepower.lib.Reference.*;
-import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.data.Constants.MODID_HORSEPOWER;
 
 @Mod(modid = MODID_HORSEPOWER,
      version = Tags.VERSION,

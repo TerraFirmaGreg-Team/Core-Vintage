@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import BananaFructa.tfcpassingdays.fixes.BlockDaylightDetectorFixed;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCPASSINGDAYS;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCPASSINGDAYS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCPASSINGDAYS)
 public class FixHandler {

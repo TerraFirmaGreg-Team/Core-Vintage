@@ -23,7 +23,7 @@ import se.gory_moon.horsepower.util.color.Colors;
 import java.util.List;
 
 import static se.gory_moon.horsepower.lib.Reference.NAME;
-import static su.terrafirmagreg.api.lib.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.api.data.Constants.MODID_HORSEPOWER;
 
 public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingRecipeWrapper> {
 

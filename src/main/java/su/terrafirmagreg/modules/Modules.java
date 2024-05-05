@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
 @Getter
 @Container

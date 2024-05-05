@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
@@ -44,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockLogPile extends BaseBlockContainer implements ITileBlock {

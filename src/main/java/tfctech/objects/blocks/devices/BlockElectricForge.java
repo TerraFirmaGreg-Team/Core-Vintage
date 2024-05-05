@@ -28,7 +28,7 @@ import tfctech.objects.tileentities.TEElectricForge;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @MethodsReturnNonnullByDefault
 public class BlockElectricForge extends BlockHorizontal implements IItemSize {

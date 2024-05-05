@@ -29,7 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.*;
+import static su.terrafirmagreg.api.data.Blockstates.*;
 
 public class BlockWoodSupport extends BlockWood {
 

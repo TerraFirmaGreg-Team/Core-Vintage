@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.util;
+package su.terrafirmagreg.api.data;
 
 import su.terrafirmagreg.api.model.property.PropertyObject;
 
@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 @SuppressWarnings("unused")
-public final class PropertyUtils {
+public final class Blockstates {
 
     /**
      * Used to hold another block state. This is useful for mimicking other blocks.
@@ -106,7 +106,7 @@ public final class PropertyUtils {
     public static final PropertyBool CAN_GROW = PropertyBool.create("can_grow");
     public static final PropertyBool CONNECTED = PropertyBool.create("connected");
 
-    private PropertyUtils() {
+    private Blockstates() {
 
         throw new IllegalAccessError("Utility class");
     }

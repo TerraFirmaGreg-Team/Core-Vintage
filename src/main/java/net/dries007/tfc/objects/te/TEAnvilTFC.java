@@ -44,7 +44,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class TEAnvilTFC extends TEInventory {
 

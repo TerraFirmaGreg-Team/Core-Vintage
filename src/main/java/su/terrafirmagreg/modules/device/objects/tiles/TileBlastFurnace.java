@@ -48,7 +48,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TileBlastFurnace extends TETickableInventory
         implements ITickable, ITileFields, IContainerProvider<ContainerBlastFurnace, GuiBlastFurnace> {

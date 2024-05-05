@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCAMBIENTAL;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCAMBIENTAL;
 
 @Config(modid = MODID_TFCAMBIENTAL, category = "")
 @Mod.EventBusSubscriber(modid = MODID_TFCAMBIENTAL)

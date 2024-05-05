@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lyeoj.tfcthings.init.TFCThingsEntities;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(value = { Side.CLIENT }, modid = MODID_FL)
 @SuppressWarnings("unused")

@@ -23,7 +23,7 @@ import net.dries007.tfc.types.DefaultMetals;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
 
 public class BlockPigvil extends BlockAnvilTFC {
 

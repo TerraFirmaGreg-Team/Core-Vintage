@@ -35,7 +35,7 @@ import tfctech.objects.tileentities.TESmelteryCauldron;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class BlockSmelteryCauldron extends BlockHorizontal implements IItemSize {
 

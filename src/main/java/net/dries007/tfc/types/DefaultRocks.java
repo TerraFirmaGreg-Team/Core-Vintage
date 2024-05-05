@@ -11,8 +11,8 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.ToolMaterialsTFC;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = MODID_TFC)

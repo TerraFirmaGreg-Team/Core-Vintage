@@ -1,6 +1,6 @@
 package tfcflorae.objects.fluids;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;

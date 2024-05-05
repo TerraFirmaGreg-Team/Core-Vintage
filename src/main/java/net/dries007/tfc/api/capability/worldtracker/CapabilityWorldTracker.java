@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.util.Helpers;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class CapabilityWorldTracker {
 

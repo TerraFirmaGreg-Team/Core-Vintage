@@ -38,7 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")

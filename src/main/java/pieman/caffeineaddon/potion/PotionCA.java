@@ -7,7 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
 
 @SuppressWarnings("WeakerAccess")
 public abstract class PotionCA extends Potion {

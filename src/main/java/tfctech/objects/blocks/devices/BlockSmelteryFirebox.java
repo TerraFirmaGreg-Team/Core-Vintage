@@ -43,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @MethodsReturnNonnullByDefault
 public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsConsumerBlock, IItemSize {

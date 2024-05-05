@@ -7,7 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import net.anodecathode.time4tfc.network.packet.PacketServerSettings;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TIME4TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TIME4TFC;
 
 /**
  * @author dmillerw

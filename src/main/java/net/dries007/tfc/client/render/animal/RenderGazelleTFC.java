@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.client.model.animal.ModelGazelleTFC;
 import net.dries007.tfc.objects.entity.animal.EntityGazelleTFC;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 

@@ -14,7 +14,7 @@ import net.minecraftforge.items.IItemHandler;
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.util.ItemEffect;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
 
 @SideOnly(Side.CLIENT)
 @EventBusSubscriber(modid = MODID_HOTORNOT, value = Side.CLIENT)

@@ -18,8 +18,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.proxy.CommonProxy;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @SuppressWarnings({ "WeakerAccess", "unused" })
 @Mod(modid = MODID_TFCF, name = TFCFlorae.NAME, version = Tags.VERSION, dependencies = TFCFlorae.DEPENDENCIES)

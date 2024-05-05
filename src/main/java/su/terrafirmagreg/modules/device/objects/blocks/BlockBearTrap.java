@@ -39,7 +39,7 @@ import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.*;
+import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
 public class BlockBearTrap extends BaseBlock implements ITileBlock {

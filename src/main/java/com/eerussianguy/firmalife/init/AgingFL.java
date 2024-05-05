@@ -7,7 +7,7 @@ import net.minecraft.util.text.TextFormatting;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 @MethodsReturnNonnullByDefault
 public enum AgingFL implements IStringSerializable {

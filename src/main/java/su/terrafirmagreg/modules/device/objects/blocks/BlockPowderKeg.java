@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -51,8 +50,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
-import static su.terrafirmagreg.api.util.PropertyUtils.SEALED;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.SEALED;
 
 /**
  * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and cached in

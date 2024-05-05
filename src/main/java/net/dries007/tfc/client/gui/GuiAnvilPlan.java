@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiAnvilPlan extends GuiContainerTE<TEAnvilTFC> {

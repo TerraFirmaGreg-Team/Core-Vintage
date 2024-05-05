@@ -9,7 +9,7 @@ import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 /**
  * This is an extension enum for the vanilla's ArmorMaterials. We register a new material in vanilla and bind crushing, slashing and piercing

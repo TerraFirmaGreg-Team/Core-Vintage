@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @MethodsReturnNonnullByDefault
 public class BlockString extends BlockNonCube {

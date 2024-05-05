@@ -89,8 +89,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.dries007.tfc.api.types.Metal.ItemType.INGOT;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCF;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

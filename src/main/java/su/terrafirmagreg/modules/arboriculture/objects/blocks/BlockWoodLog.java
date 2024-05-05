@@ -51,9 +51,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static su.terrafirmagreg.api.data.Blockstates.PLACED;
+import static su.terrafirmagreg.api.data.Blockstates.SMALL;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
-import static su.terrafirmagreg.api.util.PropertyUtils.PLACED;
-import static su.terrafirmagreg.api.util.PropertyUtils.SMALL;
 
 @MethodsReturnNonnullByDefault
 @Getter

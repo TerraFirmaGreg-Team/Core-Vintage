@@ -13,7 +13,7 @@ import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @GameRegistry.ObjectHolder(MODID_TFC)
 public class Ore extends IForgeRegistryEntry.Impl<Ore> {

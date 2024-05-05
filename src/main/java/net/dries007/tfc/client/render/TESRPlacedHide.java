@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {

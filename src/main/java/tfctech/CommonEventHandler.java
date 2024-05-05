@@ -12,7 +12,7 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)

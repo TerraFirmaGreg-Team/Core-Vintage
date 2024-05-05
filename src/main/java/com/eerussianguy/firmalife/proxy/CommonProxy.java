@@ -12,7 +12,7 @@ import lyeoj.tfcthings.init.TFCThingsEntities;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_FL;
+import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class CommonProxy {

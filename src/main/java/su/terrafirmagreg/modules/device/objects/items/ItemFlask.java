@@ -50,7 +50,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
-import static su.terrafirmagreg.api.lib.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
 public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, ICustomMesh {
 

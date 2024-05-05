@@ -39,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TileCharcoalForge extends TETickableInventory
         implements ICalendarTickable, ITileFields, IContainerProvider<ContainerCharcoalForge, GuiCharcoalForge> {

@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.damage;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public final class CapabilityDamageResistance {
 

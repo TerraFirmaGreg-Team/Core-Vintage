@@ -41,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
-import static su.terrafirmagreg.api.util.PropertyUtils.LIT;
+import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("WeakerAccess")
 

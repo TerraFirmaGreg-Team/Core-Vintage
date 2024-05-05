@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.api.lib.Constants;
+import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;

@@ -11,7 +11,7 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.model.ModelIngotPile;
 import net.dries007.tfc.objects.te.TEIngotPile;
 
-import static su.terrafirmagreg.api.lib.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRIngotPile extends TileEntitySpecialRenderer<TEIngotPile> {

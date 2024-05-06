@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -29,9 +31,7 @@ import net.dries007.tfc.objects.items.metal.ItemMetal;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-
-import su.terrafirmagreg.api.lib.MathConstants;
-
+import lombok.Getter;
 
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
@@ -42,7 +42,9 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
     private final NonNullList<Ingredient> input;
     private final ResourceLocation group;
+    @Getter
     private final Metal.ItemType type;
+    @Getter
     private final float chance; // Return chance
 
     private UnmoldRecipe(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @NotNull Metal.ItemType type, float chance) {
@@ -58,8 +60,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
             ItemStack stack = inv.getStackInSlot(slot);
             if (!stack.isEmpty()) {
-                if (stack.getItem() instanceof ItemMold) {
-                    ItemMold moldItem = ((ItemMold) stack.getItem());
+                if (stack.getItem() instanceof ItemMold moldItem) {
                     IFluidHandler cap = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
 
                     if (cap instanceof IMoldHandler) {
@@ -92,8 +93,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
             ItemStack stack = inv.getStackInSlot(slot);
             if (!stack.isEmpty()) {
-                if (stack.getItem() instanceof ItemMold) {
-                    ItemMold tmp = ((ItemMold) stack.getItem());
+                if (stack.getItem() instanceof ItemMold tmp) {
                     if (tmp.getType().equals(this.type) && moldStack == null) {
                         moldStack = stack;
                     } else {
@@ -106,8 +106,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         }
         if (moldStack != null) {
             IFluidHandler moldCap = moldStack.getCapability(FLUID_HANDLER_CAPABILITY, null);
-            if (moldCap instanceof IMoldHandler) {
-                IMoldHandler moldHandler = (IMoldHandler) moldCap;
+            if (moldCap instanceof IMoldHandler moldHandler) {
                 if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
                     return getOutputItem(moldHandler);
                 }
@@ -168,14 +167,6 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     @NotNull
     public String getGroup() {
         return group == null ? "" : group.toString();
-    }
-
-    public Metal.ItemType getType() {
-        return type;
-    }
-
-    public float getChance() {
-        return chance;
     }
 
     /**

@@ -16,6 +16,8 @@ import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.api.recipes.GlassworkingRecipe;
+import net.dries007.tfc.api.recipes.SmelteryRecipe;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
@@ -63,6 +65,8 @@ public final class Registries {
         newRegistry(CHISEL_RECIPE, ChiselRecipe.class, false);
         newRegistry(BLOOMERY_RECIPE, BloomeryRecipe.class, false);
         newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class, false);
+        newRegistry(SMELTERY, SmelteryRecipe.class, false);
+        newRegistry(GLASSWORKING, GlassworkingRecipe.class, false);
     }
 
     /**

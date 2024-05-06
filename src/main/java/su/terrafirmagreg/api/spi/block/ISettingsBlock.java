@@ -335,7 +335,7 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
             return this;
         }
 
-        public Settings notCanStack() {
+        public Settings nonCanStack() {
             this.canStack = false;
             return this;
         }

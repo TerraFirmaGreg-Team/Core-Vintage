@@ -4,7 +4,6 @@
     "bottom": "tfg:blocks/device/quern/handstone/bottom",
     "side": "tfg:blocks/device/quern/handstone/side",
     "top": "tfg:blocks/device/quern/handstone/top",
-    "particle": "#top",
     "handle": "tfg:blocks/wood/sheet"
   },
   "elements": [

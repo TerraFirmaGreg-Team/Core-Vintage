@@ -16,102 +16,33 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import tfctech.client.gui.GuiGlassworking;
-import tfctech.client.gui.GuiSmelteryCauldron;
-import tfctech.compat.jei.categories.GlassworkingCategory;
-import tfctech.compat.jei.categories.SmelteryCategory;
-import tfctech.compat.jei.categories.WireDrawingCategory;
+import net.dries007.tfc.objects.items.TechItems;
+import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 import tfctech.compat.jei.wrappers.CastingRecipeWrapper;
-import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
-import tfctech.compat.jei.wrappers.SmelteryRecipeWrapper;
 import tfctech.compat.jei.wrappers.UnmoldRecipeWrapper;
-import tfctech.objects.blocks.TechBlocks;
-import tfctech.objects.items.TechItems;
-import tfctech.objects.items.glassworking.ItemBlowpipe;
-import tfctech.objects.items.metal.ItemTechMetal;
-import tfctech.registry.TechRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 @JEIPlugin
 public class TechJEIPlugin implements IModPlugin {
 
-    private static final String WIRE_DRAWING_UID = MODID_TFCTECH + ".wire_drawing";
-    private static final String SMELTERY_UID = MODID_TFCTECH + ".smeltery";
-    private static final String GLASSWORKING_UID = MODID_TFCTECH + ".glassworking";
-
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry) {
         //Add new JEI recipe categories
-        registry.addRecipeCategories(new WireDrawingCategory(registry.getJeiHelpers()
-                .getGuiHelper(), WIRE_DRAWING_UID));
-        registry.addRecipeCategories(new SmelteryCategory(registry.getJeiHelpers().getGuiHelper(), SMELTERY_UID));
-        registry.addRecipeCategories(new GlassworkingCategory(registry.getJeiHelpers()
-                .getGuiHelper(), GLASSWORKING_UID));
+
     }
 
     @Override
     public void register(IModRegistry registry) {
-        // Wire drawing
-        List<SimpleRecipeWrapper> wireList = TechRegistries.WIRE_DRAWING.getValuesCollection()
-                .stream()
-                .filter(x -> x.getIngredients()
-                        .size() == 2) //Only shows recipes which have a wire drawing plate (so, it can be obtained)
-                .map(SimpleRecipeWrapper::new)
-                .collect(Collectors.toList());
-
-        registry.addRecipes(wireList, WIRE_DRAWING_UID);
-        registry.addRecipeCatalyst(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), WIRE_DRAWING_UID);
-
-        // Glassworking (blowpipe)
-        List<GlassworkingRecipeWrapper> glassList = TechRegistries.GLASSWORKING.getValuesCollection()
-                .stream()
-                .map(x -> new GlassworkingRecipeWrapper(x, registry.getJeiHelpers()
-                        .getGuiHelper()))
-                .collect(Collectors.toList());
-
-        registry.addRecipes(glassList, GLASSWORKING_UID);
-        TFCRegistries.METALS.getValuesCollection().forEach(metal -> {
-            ItemBlowpipe blowpipe = ItemBlowpipe.get(metal);
-            if (blowpipe != null) {
-                registry.addRecipeCatalyst(new ItemStack(blowpipe), GLASSWORKING_UID);
-            }
-        });
-
-        // Smeltery
-        List<SmelteryRecipeWrapper> smelteryList = TechRegistries.SMELTERY.getValuesCollection()
-                .stream()
-                .map(SmelteryRecipeWrapper::new)
-                .collect(Collectors.toList());
-
-        registry.addRecipes(smelteryList, SMELTERY_UID);
-        registry.addRecipeCatalyst(new ItemStack(TechBlocks.SMELTERY_CAULDRON), SMELTERY_UID);
-
-        // Click areas
-        registry.addRecipeClickArea(GuiSmelteryCauldron.class, 52, 58, 72, 15, SMELTERY_UID);
-        registry.addRecipeClickArea(GuiGlassworking.class, 132, 27, 9, 14, GLASSWORKING_UID);
-
-        // Information
-        registry.addIngredientInfo(new ItemStack(TechItems.IRON_GROOVE), VanillaTypes.ITEM, "jei.information.tfctech.groove");
-        registry.addIngredientInfo(new FluidStack(FluidsTFC.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
-        registry.addIngredientInfo(new ItemStack(TechBlocks.FRIDGE), VanillaTypes.ITEM, "jei.information.tfctech.fridge");
-        registry.addIngredientInfo(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), VanillaTypes.ITEM, "jei.information.tfctech.wiredraw");
-        registry.addIngredientInfo(new ItemStack(TechBlocks.INDUCTION_CRUCIBLE), VanillaTypes.ITEM, "jei.information.tfctech.crucible");
-        registry.addIngredientInfo(new ItemStack(TechBlocks.ELECTRIC_FORGE), VanillaTypes.ITEM, "jei.information.tfctech.forge");
 
         //Wraps all unmold and casting recipes
         List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();
         List<CastingRecipeWrapper> castingList = new ArrayList<>();
         TFCRegistries.METALS.getValuesCollection()
                 .forEach(metal -> {
-                    if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable")
-                            .equals(true)) {
+                    if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(true)) {
                         for (ItemTechMetal.ItemType type : ItemTechMetal.ItemType.values()) {
                             if (type.hasMold() && ItemTechMetal.get(metal, type) != null) {
                                 unmoldList.add(new UnmoldRecipeWrapper(metal, type));

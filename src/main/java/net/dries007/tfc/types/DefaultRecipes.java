@@ -64,6 +64,7 @@ import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredMold;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
@@ -78,7 +79,6 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.skills.SmithingSkill;
-import tfctech.objects.items.TechItems;
 
 import org.jetbrains.annotations.Nullable;
 

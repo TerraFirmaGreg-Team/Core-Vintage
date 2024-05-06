@@ -14,17 +14,23 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrucible;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockElectricForge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFreezeDryer;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockGrindstone;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockIceBunker;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockInductionCrucible;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockInfectedAir;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockLatexExtractor;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockLogPile;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockNestBox;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPitKiln;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockSmelteryCauldron;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockSmelteryFirebox;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockSnare;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockThatchBed;
 
@@ -56,6 +62,12 @@ public final class BlocksDevice {
     public static BlockPowderKeg POWDERKEG;
     public static BlockThatchBed THATCH_BED;
     public static BlockGrindstone GRINDSTONE;
+    public static BlockElectricForge ELECTRIC_FORGE;
+    public static BlockInductionCrucible INDUCTION_CRUCIBLE;
+    public static BlockFridge FRIDGE;
+    public static BlockLatexExtractor LATEX_EXTRACTOR;
+    public static BlockSmelteryCauldron SMELTERY_CAULDRON;
+    public static BlockSmelteryFirebox SMELTERY_FIREBOX;
 
     public static void onRegister(RegistryManager registry) {
         //==== Other =================================================================================================//
@@ -86,6 +98,12 @@ public final class BlocksDevice {
         POWDERKEG = registry.registerBlock(new BlockPowderKeg());
         THATCH_BED = registry.registerBlock(new BlockThatchBed());
         GRINDSTONE = registry.registerBlock(new BlockGrindstone());
+        ELECTRIC_FORGE = registry.registerBlock(new BlockElectricForge());
+        INDUCTION_CRUCIBLE = registry.registerBlock(new BlockInductionCrucible());
+        FRIDGE = registry.registerBlock(new BlockFridge());
+        LATEX_EXTRACTOR = registry.registerBlock(new BlockLatexExtractor());
+        SMELTERY_CAULDRON = registry.registerBlock(new BlockSmelteryCauldron());
+        SMELTERY_FIREBOX = registry.registerBlock(new BlockSmelteryFirebox());
     }
 
 }

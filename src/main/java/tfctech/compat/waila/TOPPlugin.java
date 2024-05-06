@@ -1,6 +1,10 @@
 package tfctech.compat.waila;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockLatexExtractor;
+import su.terrafirmagreg.modules.device.objects.tiles.TileFridge;
+import su.terrafirmagreg.modules.device.objects.tiles.TileLatexExtractor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -19,12 +23,6 @@ import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import tfctech.objects.blocks.devices.BlockFridge;
-import tfctech.objects.blocks.devices.BlockLatexExtractor;
-import tfctech.objects.blocks.devices.BlockWireDrawBench;
-import tfctech.objects.tileentities.TEFridge;
-import tfctech.objects.tileentities.TELatexExtractor;
-import tfctech.objects.tileentities.TEWireDrawBench;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -42,30 +40,15 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
     }
 
     @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState,
-                             IProbeHitData iProbeHitData) {
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
         Block b = iBlockState.getBlock();
         BlockPos pos = iProbeHitData.getPos();
-        if (b instanceof BlockWireDrawBench) {
-            BlockPos TEPos = pos;
-            if (!iBlockState.getValue(BlockWireDrawBench.UPPER)) {
-                TEPos = TEPos.offset(iBlockState.getValue(BlockWireDrawBench.FACING));
-            }
-            TEWireDrawBench bench = TileUtils.getTile(world, TEPos, TEWireDrawBench.class);
-            if (bench != null) {
-                if (bench.getProgress() > 0) {
-                    IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle()
-                            .alignment(ElementAlignment.ALIGN_CENTER));
-                    horizontalPane.text((new TextComponentTranslation("waila.tfctech.wiredraw.progress", bench.getProgress())).getFormattedText());
-                }
-            }
-        }
         if (b instanceof BlockFridge) {
             BlockPos TEPos = pos;
-            if (!iBlockState.getValue(BlockWireDrawBench.UPPER)) {
+            if (!iBlockState.getValue(BlockFridge.UPPER)) {
                 TEPos = TEPos.up();
             }
-            TEFridge fridge = TileUtils.getTile(world, TEPos, TEFridge.class);
+            TileFridge fridge = TileUtils.getTile(world, TEPos, TileFridge.class);
             if (fridge != null) {
                 IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle()
                         .alignment(ElementAlignment.ALIGN_CENTER));
@@ -95,7 +78,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
             }
         }
         if (b instanceof BlockLatexExtractor) {
-            TELatexExtractor extractor = TileUtils.getTile(world, pos, TELatexExtractor.class);
+            TileLatexExtractor extractor = TileUtils.getTile(world, pos, TileLatexExtractor.class);
             if (extractor != null) {
                 if (extractor.getFluidAmount() > 0) {
                     IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle()

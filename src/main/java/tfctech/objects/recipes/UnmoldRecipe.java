@@ -1,5 +1,7 @@
 package tfctech.objects.recipes;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -24,14 +26,9 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.objects.items.ceramics.ItemTechMold;
+import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
-
-
-import su.terrafirmagreg.api.lib.MathConstants;
-
-
-import tfctech.objects.items.ceramics.ItemTechMold;
-import tfctech.objects.items.metal.ItemTechMetal;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -63,12 +60,10 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
             ItemStack stack = inv.getStackInSlot(slot);
             if (!stack.isEmpty()) {
-                if (stack.getItem() instanceof ItemTechMold) {
-                    ItemTechMold moldItem = ((ItemTechMold) stack.getItem());
+                if (stack.getItem() instanceof ItemTechMold moldItem) {
                     IFluidHandler cap = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
 
-                    if (cap instanceof IMoldHandler) {
-                        IMoldHandler moldHandler = (IMoldHandler) cap;
+                    if (cap instanceof IMoldHandler moldHandler) {
                         if (!moldHandler.isMolten()) {
                             Metal metal = moldHandler.getMetal();
                             if (metal != null && moldItem.type.equals(this.type) && !foundMold) {

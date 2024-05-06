@@ -2,11 +2,9 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -16,8 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Blockstates.*;
 
@@ -35,7 +31,6 @@ public class BlockSoilPodzol extends BlockSoil {
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
 
-    @NotNull
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
@@ -46,16 +41,9 @@ public class BlockSoilPodzol extends BlockSoil {
                 .withProperty(WEST, world.getBlockState(pos.offset(EnumFacing.WEST)).getBlock() instanceof BlockSoilPodzol);
     }
 
-    @NotNull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
-    }
-
-    @NotNull
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilItemVariants.PILE.get(this.getType());
     }
 
     @NotNull

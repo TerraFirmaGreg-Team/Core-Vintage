@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @MethodsReturnNonnullByDefault
-
 public class ItemRock extends ItemTFC implements IRockObject {
 
     private static final Map<Rock, ItemRock> MAP = new HashMap<>();

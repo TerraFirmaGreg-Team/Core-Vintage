@@ -11,8 +11,8 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import tfctech.objects.items.ceramics.ItemTechMold;
-import tfctech.objects.items.metal.ItemTechMetal;
+import net.dries007.tfc.objects.items.ceramics.ItemTechMold;
+import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 
 public class CastingRecipeWrapper extends net.dries007.tfc.compat.jei.wrappers.CastingRecipeWrapper {
 

@@ -110,6 +110,10 @@ public class GuiHandler implements IGuiHandler {
         CELLAR_SHELF,
         ICE_BUNKER,
         FREEZE_DRYER,
+        ELECTRIC_FORGE,
+        INDUCTION_CRUCIBLE,
+        SMELTERY_CAULDRON,
+        SMELTERY_FIREBOX,
         POWDERKEG,
         KNAPPING_ROCK,
         NULL;

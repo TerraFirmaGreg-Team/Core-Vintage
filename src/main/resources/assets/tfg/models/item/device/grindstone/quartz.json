@@ -1,8 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-        "all": "tfg:blocks/device/grindstone/quartz",
-		"particle": "#all"
+    "all": "tfg:blocks/device/grindstone/quartz"
 	},
 	"elements": [
 		{

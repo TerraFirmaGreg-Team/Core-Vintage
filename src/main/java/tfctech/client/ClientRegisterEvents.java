@@ -1,14 +1,10 @@
 package tfctech.client;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -18,7 +14,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,25 +23,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
-import tfctech.client.render.teisr.TEISRTechDevices;
-import tfctech.client.render.tesr.TESRFridge;
-import tfctech.client.render.tesr.TESRLatexExtractor;
-import tfctech.client.render.tesr.TESRWireDrawBench;
-import tfctech.objects.blocks.TechBlocks;
-import tfctech.objects.items.TechItems;
-import tfctech.objects.items.glassworking.ItemBlowpipe;
-import tfctech.objects.items.glassworking.ItemGlassMolder;
-import tfctech.objects.items.metal.ItemGear;
-import tfctech.objects.items.metal.ItemTechMetal;
-import tfctech.objects.tileentities.TEFridge;
-import tfctech.objects.tileentities.TELatexExtractor;
-import tfctech.objects.tileentities.TEWireDrawBench;
+import net.dries007.tfc.objects.items.TechItems;
+import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
+import net.dries007.tfc.objects.items.glassworking.ItemGlassMolder;
+import net.dries007.tfc.objects.items.metal.ItemGear;
+import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.util.Collections;
-import java.util.Map;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY;
@@ -70,16 +55,6 @@ public final class ClientRegisterEvents {
         for (Item item : TechItems.getAllSimpleItems())
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName()
                     .toString()));
-        // Item Blocks
-        for (ItemBlock item : TechBlocks.getAllInventoryItemBlocks()) {
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-        }
-
-        //TEISR item blocks
-        for (ItemBlock item : TechBlocks.getAllTEISRBlocks()) {
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-            item.setTileEntityItemStackRenderer(new TEISRTechDevices());
-        }
 
         // Metals
         for (Item item : TechItems.getAllMetalItems()) {
@@ -150,30 +125,6 @@ public final class ClientRegisterEvents {
             });
             ModelBakery.registerItemVariants(item, EMPTY, FILLED);
         }
-
-        // Ignored states
-        ModelLoader.setCustomStateMapper(TechBlocks.WIRE_DRAW_BENCH, new IStateMapper() {
-
-            @Override
-            @NotNull
-            public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@NotNull Block blockIn) {
-                return Collections.emptyMap();
-            }
-        });
-        ModelLoader.setCustomStateMapper(TechBlocks.FRIDGE, new IStateMapper() {
-
-            @Override
-            @NotNull
-            public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@NotNull Block blockIn) {
-                return Collections.emptyMap();
-            }
-        });
-
-        // TESRs //
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TELatexExtractor.class, new TESRLatexExtractor());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEWireDrawBench.class, new TESRWireDrawBench());
-        ClientRegistry.bindTileEntitySpecialRenderer(TEFridge.class, new TESRFridge());
     }
 
     @SubscribeEvent

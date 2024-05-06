@@ -106,6 +106,7 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -137,6 +138,7 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.metal.ItemMetalSword;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
+import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -367,8 +369,7 @@ public final class CommonEventHandler {
                 if (blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DIRT) {
                     if (!world.isRemote) {
                         world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.FARMLAND)
-                                .getDefaultState());
+                        world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.FARMLAND).getDefaultState());
                     }
                     event.setResult(Event.Result.ALLOW);
                 }
@@ -458,6 +459,12 @@ public final class CommonEventHandler {
                 event.addCapability(CapabilityForgeable.KEY, forgeHandler);
                 isHeatable = forgeHandler instanceof IItemHeat;
             }
+            //TODO: TFCTECH
+            // Attach missing heat capability to rocks
+            if (item instanceof ItemRock) {
+                ICapabilityProvider heatCap = new ItemHeatHandler(stack.getTagCompound(), 0.2f, 2000f);
+                event.addCapability(CapabilityItemHeat.KEY, heatCap);
+            }
             // Metal
             ICapabilityProvider metalCapability = CapabilityMetalItem.getCustomMetalItem(stack);
             if (metalCapability != null) {
@@ -476,8 +483,7 @@ public final class CommonEventHandler {
 
             if (event.getObject().getItem() instanceof ItemMetalTool || event.getObject().getItem() instanceof ItemMetalSword
                     || event.getObject().getItem() instanceof ItemRopeJavelin || (event.getObject().getItem().getRegistryName() != null
-                    &&
-                    Arrays.asList(ConfigTFCThings.Items.WHETSTONE.canSharpen).contains(event.getObject().getItem().getRegistryName().toString()))) {
+                    && Arrays.asList(ConfigTFCThings.Items.WHETSTONE.canSharpen).contains(event.getObject().getItem().getRegistryName().toString()))) {
                 event.addCapability(CapabilitySharpness.KEY, new ProviderSharpness(event.getObject()));
             }
 
@@ -606,8 +612,7 @@ public final class CommonEventHandler {
     }
 
     /**
-     * Fired on server only when a player dies and respawns. Used to copy skill level before respawning since we need the original (AKA the body)
-     * player entity
+     * Fired on server only when a player dies and respawns. Used to copy skill level before respawning since we need the original (AKA the body) player entity
      *
      * @param event {@link net.minecraftforge.event.entity.player.PlayerEvent.Clone}
      */
@@ -796,14 +801,13 @@ public final class CommonEventHandler {
     /**
      * This implementation utilizes EntityJoinWorldEvent and ItemExpireEvent, they go hand-in-hand with each other.
      * <p>
-     * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We
-     * also apply an extremely short lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via
-     * config). Then all the checks are done in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
+     * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We also apply an extremely short
+     * lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via config). Then all the checks are done in ItemExpireEvent to set a
+     * new cooler temperature depending on if the conditions are met.
      * <p>
      * First of all, if temperature is 0 or less, then nothing needs to be done and the original lifespan is restored/added on.
      * <p>
-     * If no conditions are met, the same, short length of lifespan is added on so a quick check can be done once again in case the condition will be
-     * met later.
+     * If no conditions are met, the same, short length of lifespan is added on so a quick check can be done once again in case the condition will be met later.
      * <p>
      * Now if, this has been repeated for a long time up until it meets the item's normal lifespan, it will despawn.
      * <p>

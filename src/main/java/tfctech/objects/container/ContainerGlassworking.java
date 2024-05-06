@@ -1,5 +1,7 @@
 package tfctech.objects.container;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -16,16 +18,11 @@ import net.minecraftforge.items.ItemStackHandler;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
+import net.dries007.tfc.api.recipes.GlassworkingRecipe;
 import net.dries007.tfc.objects.container.IButtonHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
+import net.dries007.tfc.objects.items.glassworking.ItemGlassMolder;
 import net.dries007.tfc.util.SimpleCraftMatrix;
-
-
-import su.terrafirmagreg.api.lib.MathConstants;
-
-
-import tfctech.api.recipes.GlassworkingRecipe;
-import tfctech.objects.items.glassworking.ItemGlassMolder;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -9,6 +9,8 @@ import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
+import net.dries007.tfc.api.recipes.GlassworkingRecipe;
+import net.dries007.tfc.api.recipes.SmelteryRecipe;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
@@ -31,8 +33,8 @@ import java.lang.reflect.Modifier;
 public class TFCRegistries {
 
     /**
-     * To developers: If you are considering creating one of these pre-block registries, take a minute to ask "is this the best idea" i.e create an
-     * interface + enum, so addons register their own instances of TFC block classes using a custom implementation of the enum - AlcatrazEscapee
+     * To developers: If you are considering creating one of these pre-block registries, take a minute to ask "is this the best idea" i.e create an interface + enum, so addons
+     * register their own instances of TFC block classes using a custom implementation of the enum - AlcatrazEscapee
      */
     public static final IForgeRegistry<Rock> ROCKS = GameRegistry.findRegistry(Rock.class);
     public static final IForgeRegistry<RockCategory> ROCK_CATEGORIES = GameRegistry.findRegistry(RockCategory.class);
@@ -50,6 +52,9 @@ public class TFCRegistries {
     public static final IForgeRegistry<ChiselRecipe> CHISEL = GameRegistry.findRegistry(ChiselRecipe.class);
     public static final IForgeRegistry<BloomeryRecipe> BLOOMERY = GameRegistry.findRegistry(BloomeryRecipe.class);
     public static final IForgeRegistry<BlastFurnaceRecipe> BLAST_FURNACE = GameRegistry.findRegistry(BlastFurnaceRecipe.class);
+
+    public static final IForgeRegistry<SmelteryRecipe> SMELTERY = GameRegistry.findRegistry(SmelteryRecipe.class);
+    public static final IForgeRegistry<GlassworkingRecipe> GLASSWORKING = GameRegistry.findRegistry(GlassworkingRecipe.class);
 
     public static final IForgeRegistry<Plant> PLANTS = GameRegistry.findRegistry(Plant.class);
 

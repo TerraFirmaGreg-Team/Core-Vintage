@@ -1,0 +1,54 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "side": "tfg:blocks/device/electric_forge/side",
+      "front": "tfg:blocks/device/electric_forge/front",
+      "back": "tfg:blocks/device/electric_forge/back",
+      "coils": "tfg:blocks/device/electric_forge/coils",
+      "casing": "tfg:blocks/device/electric_forge/casing",
+      "box": "tfg:blocks/device/electric_forge/box",
+      "particle": "tfg:blocks/device/electric_forge/back"
+    },
+    "model": "tfg:device/electric_forge"
+  },
+  "variants": {
+    "lit": {
+      "true": {
+        "textures": {
+          "front": "tfg:blocks/device/electric_forge/front_on",
+          "coils": "tfg:blocks/device/electric_forge/coils_on"
+        }
+      },
+      "false": {
+        "textures": {
+          "front": "tfg:blocks/device/electric_forge/front",
+          "coils": "tfg:blocks/device/electric_forge/coils"
+        }
+      }
+    },
+    "facing": {
+      "south": {
+        "y": 180
+      },
+      "east": {
+        "y": 90
+      },
+      "north": {},
+      "west": {
+        "y": 270
+      }
+    },
+    "inventory": [
+      {
+        "transform": "forge:default-block",
+        "textures": {
+          "front": "tfg:blocks/device/electric_forge/front_on"
+        }
+      }
+    ],
+    "normal": [
+      {}
+    ]
+  }
+}

@@ -29,6 +29,8 @@ import net.dries007.tfc.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.function.BiFunction;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
@@ -56,10 +58,15 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
     @GameRegistry.ObjectHolder("tfc:red_steel")
     public static final Metal RED_STEEL = Helpers.getNull();
 
+    @Getter
     private final Tier tier;
+    @Getter
     private final float specificHeat;
+    @Getter
     private final float meltTemp;
+    @Getter
     private final boolean usable;
+    @Getter
     private final int color;
 
     private final Item.ToolMaterial toolMetal;
@@ -73,8 +80,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
      * @param usable       is the metal usable to create basic metal items? (not tools)
      * @param specificHeat specific heat capacity. Higher = harder to heat up / cool down. Most IRL metals are between 0.3 - 0.7
      * @param meltTemp     melting point. See @link Heat for temperature scale. Similar to IRL melting point in celsius.
-     * @param color        color of the metal when in fluid form. Used to auto generate a fluid texture. In future this may be used to color items as
-     *                     well
+     * @param color        color of the metal when in fluid form. Used to auto generate a fluid texture. In future this may be used to color items as well
      * @param toolMetal    The tool material. Null if metal is not able to create tools
      */
     public Metal(@NotNull ResourceLocation name, Tier tier, boolean usable, float specificHeat, float meltTemp, int color,
@@ -104,26 +110,6 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 
     public boolean isArmorMetal() {return getArmorMetal() != null;}
 
-    public Tier getTier() {
-        return tier;
-    }
-
-    public float getSpecificHeat() {
-        return specificHeat;
-    }
-
-    public float getMeltTemp() {
-        return meltTemp;
-    }
-
-    public boolean isUsable() {
-        return usable;
-    }
-
-    public int getColor() {
-        return color;
-    }
-
     public String getTranslationKey() {
         //noinspection ConstantConditions
         return MODID_TFC + ".types.metal." + getRegistryName().getPath();
@@ -136,9 +122,8 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
     }
 
     /**
-     * Metals / Anvils: T0 - Stone - Work None, Weld T1 T1 - Copper - Work T1, Weld T2 T2 - Bronze / Bismuth Bronze / Black Bronze - Work T2, Weld T3
-     * T3 - Wrought Iron - Work T3, Weld T4 T4 - Steel - Work T4, Weld T5 T5 - Black Steel - Work T5, Weld T6 T6 - Red Steel / Blue Steel - Work T6,
-     * Weld T6
+     * Metals / Anvils: T0 - Stone - Work None, Weld T1 T1 - Copper - Work T1, Weld T2 T2 - Bronze / Bismuth Bronze / Black Bronze - Work T2, Weld T3 T3 - Wrought Iron - Work T3,
+     * Weld T4 T4 - Steel - Work T4, Weld T5 T5 - Black Steel - Work T5, Weld T6 T6 - Red Steel / Blue Steel - Work T6, Weld T6
      * <p>
      * Devices: T0 - Stone Anvil T1 - Pit Kiln / Fire pit T2 - Forge T3 - Bloomery T4 - Blast Furnace / Crucible
      */
@@ -232,15 +217,18 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
         SHIELD(true, 400, ItemMetalShield::new),
         BUCKET(false, 200, ItemMetalBucket::new);
 
-        private final boolean toolItem;
+        @Getter
+        private final boolean toolItem; //true if this must be made from a tool item type
+        @Getter
         private final int armorSlot; //Which armor slot this armor should go, from 0 = Helmet to 4 = Boots
+        @Getter
         private final int smeltAmount;
         private final boolean hasMold;
         private final BiFunction<Metal, ItemType, Item> supplier;
+        @Getter
         private final String[] pattern;
 
-        ItemType(boolean toolItem, int armorSlot, int smeltAmount, @NotNull BiFunction<Metal, ItemType, Item> supplier, boolean hasMold,
-                 String... moldPattern) {
+        ItemType(boolean toolItem, int armorSlot, int smeltAmount, @NotNull BiFunction<Metal, ItemType, Item> supplier, boolean hasMold, String... moldPattern) {
             this.toolItem = toolItem;
             this.armorSlot = armorSlot;
             this.smeltAmount = smeltAmount;
@@ -307,19 +295,6 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
             return false;
         }
 
-        /**
-         * Does this item type require a tool metal to be made
-         *
-         * @return true if this must be made from a tool item type
-         */
-        public boolean isToolItem() {
-            return toolItem;
-        }
-
-        public int getArmorSlot() {
-            return armorSlot;
-        }
-
         public boolean isArmor() {return armorSlot != -1;}
 
         /**
@@ -328,26 +303,14 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
          * @return which slot this item should be equipped.
          */
         public EntityEquipmentSlot getEquipmentSlot() {
-            switch (armorSlot) {
-                case 0:
-                    return EntityEquipmentSlot.HEAD;
-                case 1:
-                    return EntityEquipmentSlot.CHEST;
-                case 2:
-                    return EntityEquipmentSlot.LEGS;
-                case 3:
-                    return EntityEquipmentSlot.FEET;
-                default:
-                    return EntityEquipmentSlot.MAINHAND;
-            }
+            return switch (armorSlot) {
+                case 0 -> EntityEquipmentSlot.HEAD;
+                case 1 -> EntityEquipmentSlot.CHEST;
+                case 2 -> EntityEquipmentSlot.LEGS;
+                case 3 -> EntityEquipmentSlot.FEET;
+                default -> EntityEquipmentSlot.MAINHAND;
+            };
         }
 
-        public int getSmeltAmount() {
-            return smeltAmount;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
     }
 }

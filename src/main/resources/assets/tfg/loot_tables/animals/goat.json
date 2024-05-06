@@ -86,7 +86,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "tfg:animal/bladder",
+          "name": "tfg:animal/product/bladder",
           "functions": [
             {
               "function": "tfg:apply_req_skill",

@@ -28,4 +28,8 @@ public final class TFCRegistryNames {
     public static final ResourceLocation CHISEL_RECIPE = new ResourceLocation(MODID_TFC, "chisel_recipe");
     public static final ResourceLocation BLOOMERY_RECIPE = new ResourceLocation(MODID_TFC, "bloomery_recipe");
     public static final ResourceLocation BLAST_FURNACE_RECIPE = new ResourceLocation(MODID_TFC, "blast_furnace_recipe");
+
+    public static final ResourceLocation WIRE_DRAWING = new ResourceLocation(MODID_TFC, "wire_drawing_recipe");
+    public static final ResourceLocation SMELTERY = new ResourceLocation(MODID_TFC, "smeltery_recipe");
+    public static final ResourceLocation GLASSWORKING = new ResourceLocation(MODID_TFC, "glassworking_recipe");
 }

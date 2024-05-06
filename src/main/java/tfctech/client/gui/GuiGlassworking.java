@@ -42,8 +42,8 @@ public class GuiGlassworking extends GuiContainerTFC {
             }
         }
         // JEI reloads this after it's recipe gui is closed
-        if (inventorySlots instanceof ContainerGlassworking) {
-            ((ContainerGlassworking) inventorySlots).setRequiresReset(true);
+        if (inventorySlots instanceof ContainerGlassworking containerGlassworking) {
+            containerGlassworking.setRequiresReset(true);
         }
     }
 

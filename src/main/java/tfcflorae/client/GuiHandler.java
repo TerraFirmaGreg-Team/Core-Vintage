@@ -48,16 +48,6 @@ public class GuiHandler implements IGuiHandler {
     public static final ResourceLocation YUCCA_CANVAS_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/yucca.png");
     public static final ResourceLocation MUD_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/mud_button.png");
     public static final ResourceLocation MUD_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/mud_button_disabled.png");
-    public static final ResourceLocation EARTHENWARE_CLAY_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/earthenware_clay_button.png");
-    public static final ResourceLocation EARTHENWARE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/earthenware_clay_button_disabled.png");
-    public static final ResourceLocation KAOLINITE_CLAY_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/kaolinite_clay_button.png");
-    public static final ResourceLocation KAOLINITE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/kaolinite_clay_button_disabled.png");
-    public static final ResourceLocation STONEWARE_CLAY_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/stoneware_clay_button.png");
-    public static final ResourceLocation STONEWARE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/stoneware_clay_button_disabled.png");
     public static final ResourceLocation FLINT_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/flint_button.png");
     public static final ResourceLocation FLINT_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/flint_button_disabled.png");
 
@@ -110,15 +100,6 @@ public class GuiHandler implements IGuiHandler {
             case MUD:
                 return new ContainerKnapping(KnappingTypes.MUD, player.inventory,
                         OreDictionaryHelper.doesStackMatchOre(stack, "mud") ? stack : player.getHeldItemOffhand());
-            case EARTHENWARE_CLAY:
-                return new ContainerKnapping(KnappingTypes.EARTHENWARE_CLAY, player.inventory,
-                        OreDictionaryHelper.doesStackMatchOre(stack, "clayEarthenware") ? stack : player.getHeldItemOffhand());
-            case KAOLINITE_CLAY:
-                return new ContainerKnapping(KnappingTypes.KAOLINITE_CLAY, player.inventory,
-                        OreDictionaryHelper.doesStackMatchOre(stack, "clayKaolinite") ? stack : player.getHeldItemOffhand());
-            case STONEWARE_CLAY:
-                return new ContainerKnapping(KnappingTypes.STONEWARE_CLAY, player.inventory,
-                        OreDictionaryHelper.doesStackMatchOre(stack, "clayStoneware") ? stack : player.getHeldItemOffhand());
             case FLINT:
                 return new ContainerKnapping(KnappingTypes.FLINT, player.inventory,
                         OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
@@ -163,12 +144,6 @@ public class GuiHandler implements IGuiHandler {
                 stackMud = OreDictionaryHelper.doesStackMatchOre(stackMud, "mud") ? stackMud : player.getHeldItemOffhand();
                 ItemMud mud = (ItemMud) (stackMud.getItem());
                 return new GuiKnappingTFCF(container, player, KnappingTypes.MUD, mud.getForegroundTexture(), mud.getBackgroundTexture());
-            case EARTHENWARE_CLAY:
-                return new GuiKnappingTFCF(container, player, KnappingTypes.EARTHENWARE_CLAY, EARTHENWARE_CLAY_TEXTURE);
-            case KAOLINITE_CLAY:
-                return new GuiKnappingTFCF(container, player, KnappingTypes.KAOLINITE_CLAY, KAOLINITE_CLAY_TEXTURE);
-            case STONEWARE_CLAY:
-                return new GuiKnappingTFCF(container, player, KnappingTypes.STONEWARE_CLAY, STONEWARE_CLAY_TEXTURE);
             case FLINT:
                 return new GuiKnappingTFCF(container, player, KnappingTypes.FLINT, FLINT_TEXTURE);
             case URN:
@@ -198,9 +173,6 @@ public class GuiHandler implements IGuiHandler {
         HEMP_CLOTH,
         YUCCA_CANVAS,
         MUD,
-        EARTHENWARE_CLAY,
-        KAOLINITE_CLAY,
-        STONEWARE_CLAY,
         FLINT,
         CHEST,
         URN,

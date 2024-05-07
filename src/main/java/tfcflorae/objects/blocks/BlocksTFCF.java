@@ -25,7 +25,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlockLargeVessel;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
@@ -81,9 +80,6 @@ import tfcflorae.objects.items.food.PotionEffectToHave;
 import tfcflorae.objects.items.itemblock.ItemBlockTallGrassWater;
 import tfcflorae.objects.items.itemblock.ItemBlockUrn;
 import tfcflorae.objects.items.itemblock.ItemBlockUrnLoot;
-import tfcflorae.objects.te.TELargeEarthenwareVessel;
-import tfcflorae.objects.te.TELargeKaoliniteVessel;
-import tfcflorae.objects.te.TELargeStonewareVessel;
 import tfcflorae.objects.te.TEUrn;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import tfcflorae.types.PlantsTFCF;
@@ -104,13 +100,6 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 @Mod.EventBusSubscriber(modid = MODID_TFCF)
 @GameRegistry.ObjectHolder(MODID_TFCF)
 public final class BlocksTFCF {
-
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/large_vessel")
-    public static final BlockLargeVessel FIRED_EARTHENWARE_LARGE_VESSEL = getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/large_vessel")
-    public static final BlockLargeVessel FIRED_KAOLINITE_LARGE_VESSEL = getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/large_vessel")
-    public static final BlockLargeVessel FIRED_STONEWARE_LARGE_VESSEL = getNull();
 
     @GameRegistry.ObjectHolder("storage/urn")
     public static final BlockUrn FIRED_URN = getNull();
@@ -288,6 +277,7 @@ public final class BlocksTFCF {
     private static ImmutableList<ItemBlock> allNormalItemBlocks;
     @Getter
     private static ImmutableList<Block> allInventoryItemBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<Block> allFoodItemBlocks = Helpers.getNull();
     @Getter
     private static ImmutableList<BlockFruitTreeLeaves> allFruitLeaves = Helpers.getNull();
@@ -358,10 +348,6 @@ public final class BlocksTFCF {
     private static ImmutableList<BlockJoshuaTreeLog> allJoshuaTreeLogBlocks = Helpers.getNull();
     @Getter
     private static ImmutableList<BlockJoshuaTreeSapling> allJoshuaTreeSaplingBlocks = Helpers.getNull();
-
-    public static ImmutableList<Block> getAllFoodIBs() {
-        return allFoodItemBlocks;
-    }
 
     /*public static ImmutableList<MultiBlockBase> getAllMultiBlocks()
     {
@@ -916,15 +902,6 @@ public final class BlocksTFCF {
 
         allNormalItemBlocks = normalItemBlocks.build();
 
-        if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-            register(TELargeEarthenwareVessel.class, "large_earthenware_vessel");
-        }
-        if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-            register(TELargeKaoliniteVessel.class, "large_kaolinite_vessel");
-        }
-        if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-            register(TELargeStonewareVessel.class, "large_stoneware_vessel");
-        }
         register(TEUrn.class, "urn");
     }
 

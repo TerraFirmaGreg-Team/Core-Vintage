@@ -336,7 +336,7 @@ public class ItemsFL {
     private static ItemFruitPole registerPole(IForgeRegistry<Item> r, IFruitTree fruitTree) {
         String name = fruitTree.getName().toLowerCase();
         ItemFruitPole pole = new ItemFruitPole(fruitTree);
-        ItemFruitPole entry = register(r, name + "_pole", pole, CT_MISC);
+        ItemFruitPole entry = register(r, name + "_pole", pole, CT_WOOD);
         OreDictionary.registerOre("poleWooden", pole);
         return entry;
     }

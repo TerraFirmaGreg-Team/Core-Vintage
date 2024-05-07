@@ -34,18 +34,6 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
     private static final ResourceLocation YUCCA_CANVAS_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/blocks/devices/loom/product/yucca.png");
     private static final ResourceLocation MUD_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/mud_button.png");
     private static final ResourceLocation MUD_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/mud_button_disabled.png");
-    private static final ResourceLocation EARTHENWARE_CLAY_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/earthenware_clay_button.png");
-    private static final ResourceLocation EARTHENWARE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/earthenware_clay_button_disabled.png");
-    private static final ResourceLocation KAOLINITE_CLAY_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/kaolinite_clay_button.png");
-    private static final ResourceLocation KAOLINITE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/kaolinite_clay_button_disabled.png");
-    private static final ResourceLocation STONEWARE_CLAY_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/stoneware_clay_button.png");
-    private static final ResourceLocation STONEWARE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFCF,
-            "textures/gui/knapping/stoneware_clay_button_disabled.png");
     private static final ResourceLocation FLINT_TEXTURE = new ResourceLocation(MODID_TFCF, "textures/gui/knapping/flint_button.png");
 
     public KnappingRecipeWrapperTFCF(KnappingRecipe recipe, IGuiHelper helper) {
@@ -76,12 +64,6 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
             return HEMP_CLOTH_TEXTURE;
         } else if (type == KnappingTypes.YUCCA_CANVAS) {
             return YUCCA_CANVAS_TEXTURE;
-        } else if (type == KnappingTypes.EARTHENWARE_CLAY) {
-            return EARTHENWARE_CLAY_TEXTURE;
-        } else if (type == KnappingTypes.KAOLINITE_CLAY) {
-            return KAOLINITE_CLAY_TEXTURE;
-        } else if (type == KnappingTypes.STONEWARE_CLAY) {
-            return STONEWARE_CLAY_TEXTURE;
         } else if (type == KnappingTypes.FLINT) {
             return FLINT_TEXTURE;
         }
@@ -89,13 +71,6 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
     }
 
     private static ResourceLocation getLowTexture(KnappingType type) {
-        if (type == KnappingTypes.EARTHENWARE_CLAY) {
-            return EARTHENWARE_CLAY_DISABLED_TEXTURE;
-        } else if (type == KnappingTypes.KAOLINITE_CLAY) {
-            return KAOLINITE_CLAY_DISABLED_TEXTURE;
-        } else if (type == KnappingTypes.STONEWARE_CLAY) {
-            return STONEWARE_CLAY_DISABLED_TEXTURE;
-        }
         return null;
     }
 

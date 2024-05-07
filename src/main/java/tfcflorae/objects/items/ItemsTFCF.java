@@ -28,11 +28,7 @@ import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.FruitTree;
-import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
-import tfcflorae.compat.firmalife.ceramics.ItemEarthenwareMalletMoldFL;
-import tfcflorae.compat.firmalife.ceramics.ItemKaoliniteMalletMoldFL;
-import tfcflorae.compat.firmalife.ceramics.ItemStonewareMalletMoldFL;
 import tfcflorae.objects.GemTFCF;
 import tfcflorae.objects.PowderTFCF;
 import tfcflorae.objects.ToolMaterialsTFCF;
@@ -1149,9 +1145,6 @@ public final class ItemsTFCF {
     public static final ItemArmorTFCF YUCCA_CANVAS_LEGGINGS = Helpers.getNull();
     @GameRegistry.ObjectHolder("armor/boots/yucca_canvas")
     public static final ItemArmorTFCF YUCCA_CANVAS_BOOTS = Helpers.getNull();
-    public static ItemEarthenwareMalletMoldFL malletMoldEarthenware;
-    public static ItemKaoliniteMalletMoldFL malletMoldKaolinite;
-    public static ItemStonewareMalletMoldFL malletMoldStoneware;
     @Getter
     private static ImmutableList<Item> allSimpleItems;
     @Getter
@@ -2280,11 +2273,6 @@ public final class ItemsTFCF {
         allSimpleItems = simpleItems.build();
         allItemBows = itemBows.build();
         allArmorItems = armorItems.build();
-
-        if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay || ConfigTFCF.General.WORLD.enableAllKaoliniteClay ||
-                ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-            allCeramicMoldItems = ceramicItems.build();
-        }
     }
 
     @SuppressWarnings("ConstantConditions")

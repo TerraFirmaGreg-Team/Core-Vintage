@@ -27,7 +27,6 @@ import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
@@ -768,14 +767,6 @@ public final class RecipesTFCF {
                         new FluidStack(FluidsTFCF.RICE_WATER.get(), 500), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("rice_water"),
                 //new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 500), IIngredient.of("wildRice"), new FluidStack(FluidsTFCF.RICE_WATER.get(), 500), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("wild_rice_water"),
 
-                //Special Clay Washing
-                new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("clayEarthenware"), null,
-                        new ItemStack(Items.CLAY_BALL), 0).setRegistryName("earthenware_clay_wash"),
-                new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("clayKaolinite"), null,
-                        new ItemStack(Items.CLAY_BALL), 0).setRegistryName("kaolinite_clay_wash"),
-                new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("clayStoneware"), null,
-                        new ItemStack(Items.CLAY_BALL), 0).setRegistryName("stoneware_clay_wash"),
-
                 // Cooling
                 new BarrelRecipeTemperature(IIngredient.of(FluidsTFCF.DISTILLED_WATER.get(), 1), 50).setRegistryName("distilled_water_cooling")
         );
@@ -819,12 +810,6 @@ public final class RecipesTFCF {
 
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X",
                         "XXXXX").setRegistryName(MODID_TFCF, "clay_urn"),
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X",
-                        "X   X", "XXXXX").setRegistryName(MODID_TFCF, "earthenware_urn"),
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X",
-                        "XXXXX").setRegistryName(MODID_TFCF, "kaolinite_urn"),
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X",
-                        "XXXXX").setRegistryName(MODID_TFCF, "stoneware_urn"),
 
                 // Containers
                 new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsTFCF.LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ",
@@ -1554,38 +1539,6 @@ public final class RecipesTFCF {
                         .getPath()
                         .toLowerCase() + "_rock_hammer"));
             }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onRegisterKnappingRecipeEventFL(RegistryEvent.Register<KnappingRecipe> event) {
-        if (TFCFlorae.FirmaLifeAdded) {
-            event.getRegistry().registerAll(
-                    // Earthenware Clay
-                    new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
-                            "XXXXX").setRegistryName(MODID_TFCF, "earthenware_clay_oven"),
-                    new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X",
-                            "X   X", "X   X").setRegistryName(MODID_TFCF, "earthenware_clay_oven_chimney"),
-                    new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX",
-                            "  XXX", "  XXX").setRegistryName(MODID_TFCF, "earthenware_clay_oven_wall"),
-
-                    // Kaolinite Clay
-                    new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
-                            "XXXXX").setRegistryName(MODID_TFCF, "kaolinite_clay_oven"),
-                    new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X",
-                            "X   X", "X   X").setRegistryName(MODID_TFCF, "kaolinite_clay_oven_chimney"),
-                    new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX",
-                            "  XXX", "  XXX").setRegistryName(MODID_TFCF, "kaolinite_clay_oven_wall"),
-
-                    // Stoneware Clay
-                    new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
-                            "XXXXX").setRegistryName(MODID_TFCF, "stoneware_clay_oven"),
-                    new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X",
-                            "X   X", "X   X").setRegistryName(MODID_TFCF, "stoneware_clay_oven_chimney"),
-                    new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX",
-                            "  XXX", "  XXX").setRegistryName(MODID_TFCF, "stoneware_clay_oven_wall")
-
-            );
         }
     }
 

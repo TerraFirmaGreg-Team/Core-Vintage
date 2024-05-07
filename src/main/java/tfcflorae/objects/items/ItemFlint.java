@@ -58,7 +58,6 @@ public class ItemFlint extends ItemTFCF implements IItemSize {
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
-    @NotNull
     public void onRightClick(PlayerInteractEvent.RightClickItem event) {
         EnumHand hand = event.getHand();
         if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "flint") && hand == EnumHand.MAIN_HAND) {

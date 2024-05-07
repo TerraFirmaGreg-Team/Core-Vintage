@@ -41,9 +41,6 @@ public class TFCFJEIPlugin implements IModPlugin {
     public static final String KNAP_HEMP_CLOTH_UID = MODID_TFCF + ".knap.hemp_cloth";
     public static final String KNAP_YUCCA_CANVAS_UID = MODID_TFCF + ".knap.yucca_canvas";
     public static final String KNAP_MUD_UID = MODID_TFCF + ".knap.mud";
-    public static final String KNAP_EARTHENWARE_CLAY_UID = MODID_TFCF + ".knap.earthenware_clay";
-    public static final String KNAP_KAOLINITE_CLAY_UID = MODID_TFCF + ".knap.kaolinite_clay";
-    public static final String KNAP_STONEWARE_CLAY_UID = MODID_TFCF + ".knap.stoneware_clay";
     public static final String KNAP_FLINT_UID = MODID_TFCF + ".knap.flint";
     public static final String CASTING_UID = MODID_TFCF + ".casting";
     private static IModRegistry REGISTRY;
@@ -78,12 +75,6 @@ public class TFCFJEIPlugin implements IModPlugin {
         registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
                 .getGuiHelper(), KNAP_YUCCA_CANVAS_UID));
         registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_MUD_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-                .getGuiHelper(), KNAP_EARTHENWARE_CLAY_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-                .getGuiHelper(), KNAP_KAOLINITE_CLAY_UID));
-        registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers()
-                .getGuiHelper(), KNAP_STONEWARE_CLAY_UID));
         registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_FLINT_UID));
         registry.addRecipeCategories(new CastingCategory(registry.getJeiHelpers().getGuiHelper(), CASTING_UID));
     }
@@ -131,8 +122,7 @@ public class TFCFJEIPlugin implements IModPlugin {
         // Knapping Silk Cloth
         List<KnappingRecipeWrapperTFCF> clothSilkRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
                 .filter(recipe -> recipe.getType() == KnappingTypes.SILK_CLOTH)
-                .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
-                        .getGuiHelper()))
+                .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers().getGuiHelper()))
                 .collect(Collectors.toList());
         registry.addRecipes(clothSilkRecipes, KNAP_SILK_CLOTH_UID);
         NonNullList<ItemStack> clothSilk = OreDictionary.getOres("clothSilk");
@@ -226,8 +216,7 @@ public class TFCFJEIPlugin implements IModPlugin {
         for (ItemStack itemStack : oresFlint) {
             registry.addRecipeCatalyst(itemStack, KNAP_FLINT_UID);
         }
-        registry.addRecipeClickArea(GuiKnappingTFCF.class, 97, 44, 22, 15, KNAP_MUD_UID, KNAP_EARTHENWARE_CLAY_UID, KNAP_KAOLINITE_CLAY_UID,
-                KNAP_STONEWARE_CLAY_UID, KNAP_FLINT_UID);
+        registry.addRecipeClickArea(GuiKnappingTFCF.class, 97, 44, 22, 15, KNAP_MUD_UID, KNAP_FLINT_UID);
 
         //ContainerInventoryCrafting - Add ability to transfer recipe items
         IRecipeTransferRegistry transferRegistry = registry.getRecipeTransferRegistry();

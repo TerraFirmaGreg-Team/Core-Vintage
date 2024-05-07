@@ -93,12 +93,6 @@ public final class CapabilityHeat {
 
         CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL),
                 () -> new ProviderHeat(1, 1599));
-        CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.EARTHENWARE_CLAY),
-                () -> new ProviderHeat(1, 1599));
-        CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.KAOLINITE_CLAY),
-                () -> new ProviderHeat(1, 1599));
-        CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.STONEWARE_CLAY),
-                () -> new ProviderHeat(1, 1599));
         CUSTOM_ITEMS.put(IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(TreesTFCF.EUCALYPTUS))),
                 () -> new ProviderHeat(1, 1599));
         CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW),

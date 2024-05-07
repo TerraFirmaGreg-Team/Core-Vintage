@@ -21,15 +21,10 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.objects.items.ceramics.ItemJug;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
-import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
-import net.dries007.tfc.objects.items.ceramics.ItemUnfiredLargeVessel;
-import net.dries007.tfc.objects.items.ceramics.ItemUnfiredSmallVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.FruitTree;
@@ -45,15 +40,6 @@ import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceOreDeposit;
 import tfcflorae.objects.blocks.wood.BlockLogTFCF;
 import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLog;
-import tfcflorae.objects.items.ceramics.ItemClayEarthenware;
-import tfcflorae.objects.items.ceramics.ItemClayKaolinite;
-import tfcflorae.objects.items.ceramics.ItemClayStoneware;
-import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
-import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
-import tfcflorae.objects.items.ceramics.ItemStonewareMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredEarthenwareMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredKaoliniteMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredStonewareMold;
 import tfcflorae.objects.items.ceramics.ItemUnfiredUrn;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.objects.items.food.ItemSandwichTFCF;
@@ -1088,123 +1074,6 @@ public final class ItemsTFCF {
     @GameRegistry.ObjectHolder("wood/fruit_tree/lumber/ceylon_cinnamon")
     public static final ItemMisc CEYLON_CINNAMON_LUMBER = Helpers.getNull();
 
-    // Earthenware Clay Ceramics
-    @GameRegistry.ObjectHolder("ceramics/earthenware/earthenware_clay")
-    public static final ItemClayEarthenware EARTHENWARE_CLAY = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/earthenware_brick")
-    public static final ItemPottery UNFIRED_EARTHENWARE_BRICK = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/earthenware_brick")
-    public static final ItemPottery FIRED_EARTHENWARE_BRICK = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/vessel")
-    public static final ItemPottery UNFIRED_EARTHENWARE_VESSEL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/vessel")
-    public static final ItemPottery FIRED_EARTHENWARE_VESSEL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/vessel_glazed")
-    public static final ItemPottery UNFIRED_EARTHENWARE_VESSEL_GLAZED = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/vessel_glazed")
-    public static final ItemPottery FIRED_EARTHENWARE_VESSEL_GLAZED = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/jug")
-    public static final ItemPottery UNFIRED_EARTHENWARE_JUG = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/jug")
-    public static final ItemPottery FIRED_EARTHENWARE_JUG = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/pot")
-    public static final ItemPottery UNFIRED_EARTHENWARE_POT = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/pot")
-    public static final ItemPottery FIRED_EARTHENWARE_POT = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/bowl")
-    public static final ItemPottery UNFIRED_EARTHENWARE_BOWL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/bowl")
-    public static final ItemPottery FIRED_EARTHENWARE_BOWL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/spindle")
-    public static final ItemPottery UNFIRED_EARTHENWARE_SPINDLE = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/spindle")
-    public static final ItemPottery FIRED_EARTHENWARE_SPINDLE = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/large_vessel")
-    public static final ItemPottery UNFIRED_EARTHENWARE_LARGE_VESSEL = Helpers.getNull();
-
-    @GameRegistry.ObjectHolder("ceramics/earthenware/unfired/mold/mallet_head")
-    public static final ItemPottery UNFIRED_EARTHENWARE_MALLET_MOLD = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/earthenware/fired/mold/mallet_head")
-    public static final ItemPottery EARTHENWARE_MALLET_MOLD = Helpers.getNull();
-
-    // Kaolinite Clay Ceramics
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/kaolinite_clay")
-    public static final ItemClayKaolinite KAOLINITE_CLAY = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/kaolinite_brick")
-    public static final ItemPottery UNFIRED_KAOLINITE_BRICK = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/kaolinite_brick")
-    public static final ItemPottery FIRED_KAOLINITE_BRICK = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/vessel")
-    public static final ItemPottery UNFIRED_KAOLINITE_VESSEL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/vessel")
-    public static final ItemPottery FIRED_KAOLINITE_VESSEL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/vessel_glazed")
-    public static final ItemPottery UNFIRED_KAOLINITE_VESSEL_GLAZED = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/vessel_glazed")
-    public static final ItemPottery FIRED_KAOLINITE_VESSEL_GLAZED = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/jug")
-    public static final ItemPottery UNFIRED_KAOLINITE_JUG = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/jug")
-    public static final ItemPottery FIRED_KAOLINITE_JUG = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/pot")
-    public static final ItemPottery UNFIRED_KAOLINITE_POT = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/pot")
-    public static final ItemPottery FIRED_KAOLINITE_POT = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/bowl")
-    public static final ItemPottery UNFIRED_KAOLINITE_BOWL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/bowl")
-    public static final ItemPottery FIRED_KAOLINITE_BOWL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/spindle")
-    public static final ItemPottery UNFIRED_KAOLINITE_SPINDLE = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/spindle")
-    public static final ItemPottery FIRED_KAOLINITE_SPINDLE = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/large_vessel")
-    public static final ItemPottery UNFIRED_KAOLINITE_LARGE_VESSEL = Helpers.getNull();
-
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/unfired/mold/mallet_head")
-    public static final ItemPottery UNFIRED_KAOLINITE_MALLET_MOLD = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/kaolinite/fired/mold/mallet_head")
-    public static final ItemPottery KAOLINITE_MALLET_MOLD = Helpers.getNull();
-
-    // Stoneware Clay Ceramics
-    @GameRegistry.ObjectHolder("ceramics/stoneware/stoneware_clay")
-    public static final ItemClayStoneware STONEWARE_CLAY = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/stoneware_brick")
-    public static final ItemPottery UNFIRED_STONEWARE_BRICK = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/stoneware_brick")
-    public static final ItemPottery FIRED_STONEWARE_BRICK = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/vessel")
-    public static final ItemPottery UNFIRED_STONEWARE_VESSEL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/vessel")
-    public static final ItemPottery FIRED_STONEWARE_VESSEL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/vessel_glazed")
-    public static final ItemPottery UNFIRED_STONEWARE_VESSEL_GLAZED = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/vessel_glazed")
-    public static final ItemPottery FIRED_STONEWARE_VESSEL_GLAZED = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/jug")
-    public static final ItemPottery UNFIRED_STONEWARE_JUG = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/jug")
-    public static final ItemPottery FIRED_STONEWARE_JUG = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/pot")
-    public static final ItemPottery UNFIRED_STONEWARE_POT = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/pot")
-    public static final ItemPottery FIRED_STONEWARE_POT = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/bowl")
-    public static final ItemPottery UNFIRED_STONEWARE_BOWL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/bowl")
-    public static final ItemPottery FIRED_STONEWARE_BOWL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/spindle")
-    public static final ItemPottery UNFIRED_STONEWARE_SPINDLE = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/spindle")
-    public static final ItemPottery FIRED_STONEWARE_SPINDLE = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/large_vessel")
-    public static final ItemPottery UNFIRED_STONEWARE_LARGE_VESSEL = Helpers.getNull();
-
-    @GameRegistry.ObjectHolder("ceramics/stoneware/unfired/mold/mallet_head")
-    public static final ItemPottery UNFIRED_STONEWARE_MALLET_MOLD = Helpers.getNull();
-    @GameRegistry.ObjectHolder("ceramics/stoneware/fired/mold/mallet_head")
-    public static final ItemPottery STONEWARE_MALLET_MOLD = Helpers.getNull();
-
     @GameRegistry.ObjectHolder("storage/unfired/urn")
     public static final ItemPottery UNFIRED_URN = Helpers.getNull();
 
@@ -1906,142 +1775,6 @@ public final class ItemsTFCF {
 
         // Pottery
         {
-            // Earthenware
-
-            if (ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-                for (Metal.ItemType type : Metal.ItemType.values()) {
-                    if (type.hasMold(null)) {
-                        // Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
-                        ItemPottery item = new ItemEarthenwareMold(type);
-                        ceramicItems.add(register(r, "ceramics/earthenware/fired/mold/" + type.name()
-                                .toLowerCase(), item, CT_POTTERY));
-                        simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/" + type.name()
-                                .toLowerCase(), new ItemUnfiredEarthenwareMold(type), CT_POTTERY));
-                    }
-                }
-
-                if (TFCFlorae.FirmaLifeAdded) {
-                    simpleItems.add(register(r, "ceramics/earthenware/unfired/mold/mallet_head", new ItemPottery(), CT_POTTERY));
-                    malletMoldEarthenware = register(r, "ceramics/earthenware/fired/mold/mallet_head", new ItemEarthenwareMalletMoldFL("mallet"),
-                            CT_POTTERY);
-                }
-
-                simpleItems.add(register(r, "ceramics/earthenware/earthenware_clay",
-                        new ItemClayEarthenware(Size.VERY_SMALL, Weight.VERY_LIGHT, "clay_earthenware"), CT_MISC));
-                registerPottery(simpleItems, r, "ceramics/earthenware/unfired/earthenware_brick", "ceramics/earthenware/fired/earthenware_brick");
-
-                simpleItems.add(register(r, "ceramics/earthenware/unfired/large_vessel", new ItemUnfiredLargeVessel(), CT_POTTERY));
-
-                registerPottery(simpleItems, r, "ceramics/earthenware/unfired/vessel", "ceramics/earthenware/fired/vessel",
-                        new ItemUnfiredSmallVessel(false), new ItemSmallVessel(false));
-                registerPottery(null, r, "ceramics/earthenware/unfired/vessel_glazed", "ceramics/earthenware/fired/vessel_glazed",
-                        new ItemUnfiredSmallVessel(true), new ItemSmallVessel(true));
-
-                ItemPottery firedPotEarthenware = new ItemPottery(Size.LARGE, Weight.LIGHT);
-                registerPottery(simpleItems, r, "ceramics/earthenware/unfired/pot", "ceramics/earthenware/fired/pot",
-                        new ItemPottery(Size.LARGE, Weight.LIGHT), firedPotEarthenware);
-                OreDictionaryHelper.register(firedPotEarthenware, "cooking_pot");
-
-                ItemPottery firedBowlEarthenware = new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT);
-                registerPottery(simpleItems, r, "ceramics/earthenware/unfired/bowl", "ceramics/earthenware/fired/bowl",
-                        new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT), firedBowlEarthenware);
-                OreDictionaryHelper.register(firedBowlEarthenware, "bowl");
-
-                simpleItems.add(register(r, "ceramics/earthenware/unfired/jug", new ItemPottery(), CT_POTTERY));
-                register(r, "ceramics/earthenware/fired/jug", new ItemJug(), CT_POTTERY);
-            }
-
-            // Kaolinite
-
-            if (ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-                for (Metal.ItemType type : Metal.ItemType.values()) {
-                    if (type.hasMold(null)) {
-                        // Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
-                        ItemPottery item = new ItemKaoliniteMold(type);
-                        ceramicItems.add(register(r, "ceramics/kaolinite/fired/mold/" + type.name()
-                                .toLowerCase(), item, CT_POTTERY));
-                        simpleItems.add(register(r, "ceramics/kaolinite/unfired/mold/" + type.name()
-                                .toLowerCase(), new ItemUnfiredKaoliniteMold(type), CT_POTTERY));
-                    }
-                }
-
-                if (TFCFlorae.FirmaLifeAdded) {
-                    simpleItems.add(register(r, "ceramics/kaolinite/unfired/mold/mallet_head", new ItemPottery(), CT_POTTERY));
-                    malletMoldKaolinite = register(r, "ceramics/kaolinite/fired/mold/mallet_head", new ItemKaoliniteMalletMoldFL("mallet"),
-                            CT_POTTERY);
-                }
-
-                simpleItems.add(
-                        register(r, "ceramics/kaolinite/kaolinite_clay", new ItemClayKaolinite(Size.VERY_SMALL, Weight.VERY_LIGHT, "clay_kaolinite"),
-                                CT_MISC));
-                registerPottery(simpleItems, r, "ceramics/kaolinite/unfired/kaolinite_brick", "ceramics/kaolinite/fired/kaolinite_brick");
-
-                simpleItems.add(register(r, "ceramics/kaolinite/unfired/large_vessel", new ItemUnfiredLargeVessel(), CT_POTTERY));
-
-                registerPottery(simpleItems, r, "ceramics/kaolinite/unfired/vessel", "ceramics/kaolinite/fired/vessel",
-                        new ItemUnfiredSmallVessel(false), new ItemSmallVessel(false));
-                registerPottery(null, r, "ceramics/kaolinite/unfired/vessel_glazed", "ceramics/kaolinite/fired/vessel_glazed",
-                        new ItemUnfiredSmallVessel(true), new ItemSmallVessel(true));
-
-                ItemPottery firedPotKaolinite = new ItemPottery(Size.LARGE, Weight.LIGHT);
-                registerPottery(simpleItems, r, "ceramics/kaolinite/unfired/pot", "ceramics/kaolinite/fired/pot",
-                        new ItemPottery(Size.LARGE, Weight.LIGHT), firedPotKaolinite);
-                OreDictionaryHelper.register(firedPotKaolinite, "cooking_pot");
-
-                ItemPottery firedBowlKaolinite = new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT);
-                registerPottery(simpleItems, r, "ceramics/kaolinite/unfired/bowl", "ceramics/kaolinite/fired/bowl",
-                        new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT), firedBowlKaolinite);
-                OreDictionaryHelper.register(firedBowlKaolinite, "bowl");
-
-                simpleItems.add(register(r, "ceramics/kaolinite/unfired/jug", new ItemPottery(), CT_POTTERY));
-                register(r, "ceramics/kaolinite/fired/jug", new ItemJug(), CT_POTTERY);
-            }
-
-            // Stoneware
-
-            if (ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-                for (Metal.ItemType type : Metal.ItemType.values()) {
-                    if (type.hasMold(null)) {
-                        // Not using registerPottery here because the ItemMold uses a custom ItemModelMesher, meaning it can't be in simpleItems
-                        ItemPottery item = new ItemStonewareMold(type);
-                        ceramicItems.add(register(r, "ceramics/stoneware/fired/mold/" + type.name()
-                                .toLowerCase(), item, CT_POTTERY));
-                        simpleItems.add(register(r, "ceramics/stoneware/unfired/mold/" + type.name()
-                                .toLowerCase(), new ItemUnfiredStonewareMold(type), CT_POTTERY));
-                    }
-                }
-
-                if (TFCFlorae.FirmaLifeAdded) {
-                    simpleItems.add(register(r, "ceramics/stoneware/unfired/mold/mallet_head", new ItemPottery(), CT_POTTERY));
-                    malletMoldStoneware = register(r, "ceramics/stoneware/fired/mold/mallet_head", new ItemStonewareMalletMoldFL("mallet"),
-                            CT_POTTERY);
-                }
-
-                simpleItems.add(
-                        register(r, "ceramics/stoneware/stoneware_clay", new ItemClayStoneware(Size.VERY_SMALL, Weight.VERY_LIGHT, "clay_stoneware"),
-                                CT_MISC));
-                registerPottery(simpleItems, r, "ceramics/stoneware/unfired/stoneware_brick", "ceramics/stoneware/fired/stoneware_brick");
-
-                simpleItems.add(register(r, "ceramics/stoneware/unfired/large_vessel", new ItemUnfiredLargeVessel(), CT_POTTERY));
-
-                registerPottery(simpleItems, r, "ceramics/stoneware/unfired/vessel", "ceramics/stoneware/fired/vessel",
-                        new ItemUnfiredSmallVessel(false), new ItemSmallVessel(false));
-                registerPottery(null, r, "ceramics/stoneware/unfired/vessel_glazed", "ceramics/stoneware/fired/vessel_glazed",
-                        new ItemUnfiredSmallVessel(true), new ItemSmallVessel(true));
-
-                ItemPottery firedPotStoneware = new ItemPottery(Size.LARGE, Weight.LIGHT);
-                registerPottery(simpleItems, r, "ceramics/stoneware/unfired/pot", "ceramics/stoneware/fired/pot",
-                        new ItemPottery(Size.LARGE, Weight.LIGHT), firedPotStoneware);
-                OreDictionaryHelper.register(firedPotStoneware, "cooking_pot");
-
-                ItemPottery firedBowlStoneware = new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT);
-                registerPottery(simpleItems, r, "ceramics/stoneware/unfired/bowl", "ceramics/stoneware/fired/bowl",
-                        new ItemPottery(Size.VERY_SMALL, Weight.VERY_LIGHT), firedBowlStoneware);
-                OreDictionaryHelper.register(firedBowlStoneware, "bowl");
-
-                simpleItems.add(register(r, "ceramics/stoneware/unfired/jug", new ItemPottery(), CT_POTTERY));
-                register(r, "ceramics/stoneware/fired/jug", new ItemJug(), CT_POTTERY);
-            }
 
             simpleItems.add(register(r, "storage/unfired/urn", new ItemUnfiredUrn(), CT_POTTERY));
         }

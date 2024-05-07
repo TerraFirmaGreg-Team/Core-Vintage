@@ -34,7 +34,6 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeTemperature;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
-import net.dries007.tfc.api.recipes.heat.HeatRecipeVessel;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
@@ -74,12 +73,6 @@ import tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
 import tfcflorae.objects.fluids.FluidsTFCF;
 import tfcflorae.objects.items.ItemPowderTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
-import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
-import tfcflorae.objects.items.ceramics.ItemStonewareMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredEarthenwareMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredKaoliniteMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredStonewareMold;
 import tfcflorae.objects.items.rock.ItemFiredMudBrick;
 import tfcflorae.objects.items.rock.ItemUnfiredMudBrick;
 import tfcflorae.util.agriculture.CropTFCF;
@@ -88,7 +81,6 @@ import tfcflorae.util.agriculture.SeasonalTrees;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.api.types.Metal.ItemType.INGOT;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
@@ -263,267 +255,7 @@ public final class RecipesTFCF {
                 }
             }
         }
-        if (!ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-            for (Metal.ItemType type : Metal.ItemType.values()) {
-                if (type.hasMold(null)) {
-                    IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-                    String[] regNames = {
-                            "metal/unmold/earthenware/" + type,
-                            "ceramics/unfired_clay_recycle_earthenware/" + type
-                    };
-                    for (String name : regNames) {
-                        IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                        if (recipe != null) {
-                            registry.remove(recipe.getRegistryName());
-                            TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                        }
-                    }
-                }
-            }
-            for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-                IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-                String[] regNames = {
-                        "ceramics/glazed_vessel_earthenware/" + dyeColor,
-                        "ceramics/unfired_clay_recycle_earthenware/vessel_glazed/" + dyeColor
-                };
-                for (String name : regNames) {
-                    IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                    if (recipe != null) {
-                        registry.remove(recipe.getRegistryName());
-                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                    }
-                }
-            }
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "ceramics/unfired_clay_recycle_earthenware/bowl",
-                    "ceramics/unfired_clay_recycle_earthenware/flowerpot",
-                    "ceramics/unfired_clay_recycle_earthenware/jug",
-                    "ceramics/unfired_clay_recycle_earthenware/large_vessel",
-                    "ceramics/unfired_clay_recycle_earthenware/pot",
-                    "ceramics/unfired_clay_recycle_earthenware/spindle",
-                    "ceramics/unfired_clay_recycle_earthenware/vessel",
-                    "earthenware_block",
-                    "earthenware_bricks",
-                    "earthenware_clay",
-                    "unfired_spindle_head_earthenware"
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllEarthenwareClay || !TFCFlorae.FirmaLifeAdded) {
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "metal/unmold/earthenware/mallet_head",
-                    "ceramics/unfired_clay_recycle_earthenware/mallet",
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllEarthenwareClay || !TFCFlorae.TFCElementiaAdded) {
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "metal/unmold/earthenware/nail",
-                    "metal/unmold/earthenware/ring",
-                    "metal/unmold/earthenware/halberd_blade",
-                    "metal/unmold/earthenware/metal_block",
-                    "ceramics/unfired_clay_recycle_earthenware/nail",
-                    "ceramics/unfired_clay_recycle_earthenware/ring",
-                    "ceramics/unfired_clay_recycle_earthenware/halberd_blade",
-                    "ceramics/unfired_clay_recycle_earthenware/metal_block"
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-            for (Metal.ItemType type : Metal.ItemType.values()) {
-                if (type.hasMold(null)) {
-                    IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-                    String[] regNames = {
-                            "metal/unmold/kaolinite/" + type,
-                            "ceramics/unfired_clay_recycle_kaolinite/" + type
-                    };
-                    for (String name : regNames) {
-                        IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                        if (recipe != null) {
-                            registry.remove(recipe.getRegistryName());
-                            TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                        }
-                    }
-                }
-            }
-            for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-                IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-                String[] regNames = {
-                        "ceramics/glazed_vessel_kaolinite/" + dyeColor,
-                        "ceramics/unfired_clay_recycle_kaolinite/vessel_glazed/" + dyeColor
-                };
-                for (String name : regNames) {
-                    IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                    if (recipe != null) {
-                        registry.remove(recipe.getRegistryName());
-                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                    }
-                }
-            }
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "ceramics/unfired_clay_recycle_kaolinite/bowl",
-                    "ceramics/unfired_clay_recycle_kaolinite/flowerpot",
-                    "ceramics/unfired_clay_recycle_kaolinite/jug",
-                    "ceramics/unfired_clay_recycle_kaolinite/large_vessel",
-                    "ceramics/unfired_clay_recycle_kaolinite/pot",
-                    "ceramics/unfired_clay_recycle_kaolinite/spindle",
-                    "ceramics/unfired_clay_recycle_kaolinite/vessel",
-                    "kaolinite_block",
-                    "kaolinite_bricks",
-                    "kaolinite_clay",
-                    "unfired_spindle_head_kaolinite"
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllKaoliniteClay || !TFCFlorae.FirmaLifeAdded) {
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "metal/unmold/kaolinite/mallet_head",
-                    "ceramics/unfired_clay_recycle_kaolinite/mallet",
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllKaoliniteClay || !TFCFlorae.TFCElementiaAdded) {
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "metal/unmold/kaolinite/nail",
-                    "metal/unmold/kaolinite/ring",
-                    "metal/unmold/kaolinite/halberd_blade",
-                    "metal/unmold/kaolinite/metal_block",
-                    "ceramics/unfired_clay_recycle_kaolinite/nail",
-                    "ceramics/unfired_clay_recycle_kaolinite/ring",
-                    "ceramics/unfired_clay_recycle_kaolinite/halberd_blade",
-                    "ceramics/unfired_clay_recycle_kaolinite/metal_block"
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-            for (Metal.ItemType type : Metal.ItemType.values()) {
-                if (type.hasMold(null)) {
-                    IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-                    String[] regNames = {
-                            "metal/unmold/stoneware/" + type,
-                            "ceramics/unfired_clay_recycle_stoneware/" + type
-                    };
-                    for (String name : regNames) {
-                        IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                        if (recipe != null) {
-                            registry.remove(recipe.getRegistryName());
-                            TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                        }
-                    }
-                }
-            }
-            for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-                IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-                String[] regNames = {
-                        "ceramics/glazed_vessel_stoneware/" + dyeColor,
-                        "ceramics/unfired_clay_recycle_stoneware/vessel_glazed/" + dyeColor
-                };
-                for (String name : regNames) {
-                    IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                    if (recipe != null) {
-                        registry.remove(recipe.getRegistryName());
-                        TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                    }
-                }
-            }
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "ceramics/unfired_clay_recycle_stoneware/bowl",
-                    "ceramics/unfired_clay_recycle_stoneware/flowerpot",
-                    "ceramics/unfired_clay_recycle_stoneware/jug",
-                    "ceramics/unfired_clay_recycle_stoneware/large_vessel",
-                    "ceramics/unfired_clay_recycle_stoneware/pot",
-                    "ceramics/unfired_clay_recycle_stoneware/spindle",
-                    "ceramics/unfired_clay_recycle_stoneware/vessel",
-                    "stoneware_block",
-                    "stoneware_bricks",
-                    "stoneware_clay",
-                    "unfired_spindle_head_stoneware"
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllStonewareClay || !TFCFlorae.FirmaLifeAdded) {
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "metal/unmold/stoneware/mallet_head",
-                    "ceramics/unfired_clay_recycle_stoneware/mallet",
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
-        if (!ConfigTFCF.General.WORLD.enableAllStonewareClay || !TFCFlorae.TFCElementiaAdded) {
-            IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-            String[] regNames = {
-                    "metal/unmold/stoneware/nail",
-                    "metal/unmold/stoneware/ring",
-                    "metal/unmold/stoneware/halberd_blade",
-                    "metal/unmold/stoneware/metal_block",
-                    "ceramics/unfired_clay_recycle_stoneware/nail",
-                    "ceramics/unfired_clay_recycle_stoneware/ring",
-                    "ceramics/unfired_clay_recycle_stoneware/halberd_blade",
-                    "ceramics/unfired_clay_recycle_stoneware/metal_block"
-            };
-            for (String name : regNames) {
-                IRecipe recipe = registry.getValue(new ResourceLocation(MODID_TFCF, name));
-                if (recipe != null) {
-                    registry.remove(recipe.getRegistryName());
-                    TFCFlorae.LOGGER.info("Removed crafting recipe tfcflorae:{}", name);
-                }
-            }
-        }
+
     }
 
     @SuppressWarnings("rawtypes")
@@ -1036,10 +768,6 @@ public final class RecipesTFCF {
                         new FluidStack(FluidsTFCF.RICE_WATER.get(), 500), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("rice_water"),
                 //new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 500), IIngredient.of("wildRice"), new FluidStack(FluidsTFCF.RICE_WATER.get(), 500), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("wild_rice_water"),
 
-                // Kaolinite Clay
-                new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("dustKaolinite"), null,
-                        new ItemStack(ItemsTFCF.KAOLINITE_CLAY), 0).setRegistryName("kaolinite_clay"),
-
                 //Special Clay Washing
                 new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("clayEarthenware"), null,
                         new ItemStack(Items.CLAY_BALL), 0).setRegistryName("earthenware_clay_wash"),
@@ -1059,80 +787,7 @@ public final class RecipesTFCF {
                 "XXXXX", "     ", "XXXXX");
         event.getRegistry().register(r.setRegistryName(MODID_TFCF, "knapping_mud_brick"));
 
-        // Clay Items
-        for (Metal.ItemType type : Metal.ItemType.values()) {
-            if (type.hasMold(null)) {
-                int amount = type == INGOT ? 2 : 1;
-                event.getRegistry()
-                        .register(new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true,
-                                new ItemStack(ItemUnfiredEarthenwareMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF,
-                                "earthenware_" + type
-                                        .name()
-                                        .toLowerCase() + "_mold"));
-                event.getRegistry()
-                        .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true,
-                                new ItemStack(ItemUnfiredKaoliniteMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF,
-                                "kaolinite_" + type
-                                        .name()
-                                        .toLowerCase() + "_mold"));
-                event.getRegistry()
-                        .register(new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true,
-                                new ItemStack(ItemUnfiredStonewareMold.get(type), amount), type.getPattern()).setRegistryName(MODID_TFCF,
-                                "stoneware_" + type
-                                        .name()
-                                        .toLowerCase() + "_mold"));
-            }
-        }
-
         event.getRegistry().registerAll(
-
-                // Earthenware
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_BRICK, 3), "XXXXX",
-                        "     ", "XXXXX", "     ", "XXXXX").setRegistryName(MODID_TFCF, "earthenware_clay_brick"),
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL), " XXX ", "XXXXX",
-                        "XXXXX", "XXXXX", " XXX ").setRegistryName(MODID_TFCF, "earthenware_clay_small_vessel"),
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_JUG), " X   ", "XXXX ",
-                        "XXX X", "XXXX ", "XXX  ").setRegistryName(MODID_TFCF, "earthenware_clay_jug"),
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_POT), "X   X", "X   X",
-                        "X   X", "XXXXX", " XXX ").setRegistryName(MODID_TFCF, "earthenware_clay_pot"),
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, false, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_BOWL, 2), "X   X",
-                        " XXX ").setRegistryName(MODID_TFCF, "earthenware_clay_bowl"),
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_BOWL, 4), "X   X", " XXX ",
-                        "     ", "X   X", " XXX ").setRegistryName(MODID_TFCF, "earthenware_clay_bowl_2"),
-                new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_LARGE_VESSEL), "X   X",
-                        "X   X", "X   X", "X   X", "XXXXX").setRegistryName(MODID_TFCF, "earthenware_clay_large_vessel"),
-
-                // Kaolinite Clay
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_BRICK, 3), "XXXXX", "     ",
-                        "XXXXX", "     ", "XXXXX").setRegistryName(MODID_TFCF, "kaolinite_clay_brick"),
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL), " XXX ", "XXXXX",
-                        "XXXXX", "XXXXX", " XXX ").setRegistryName(MODID_TFCF, "kaolinite_clay_small_vessel"),
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_JUG), " X   ", "XXXX ",
-                        "XXX X", "XXXX ", "XXX  ").setRegistryName(MODID_TFCF, "kaolinite_clay_jug"),
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_POT), "X   X", "X   X",
-                        "X   X", "XXXXX", " XXX ").setRegistryName(MODID_TFCF, "kaolinite_clay_pot"),
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, false, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_BOWL, 2), "X   X",
-                        " XXX ").setRegistryName(MODID_TFCF, "kaolinite_clay_bowl"),
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_BOWL, 4), "X   X", " XXX ",
-                        "     ", "X   X", " XXX ").setRegistryName(MODID_TFCF, "kaolinite_clay_bowl_2"),
-                new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_LARGE_VESSEL), "X   X",
-                        "X   X", "X   X", "X   X", "XXXXX").setRegistryName(MODID_TFCF, "kaolinite_clay_large_vessel"),
-
-                // Stoneware
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_BRICK, 3), "XXXXX", "     ",
-                        "XXXXX", "     ", "XXXXX").setRegistryName(MODID_TFCF, "stoneware_clay_brick"),
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_VESSEL), " XXX ", "XXXXX",
-                        "XXXXX", "XXXXX", " XXX ").setRegistryName(MODID_TFCF, "stoneware_clay_small_vessel"),
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_JUG), " X   ", "XXXX ",
-                        "XXX X", "XXXX ", "XXX  ").setRegistryName(MODID_TFCF, "stoneware_clay_jug"),
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_POT), "X   X", "X   X",
-                        "X   X", "XXXXX", " XXX ").setRegistryName(MODID_TFCF, "stoneware_clay_pot"),
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, false, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_BOWL, 2), "X   X",
-                        " XXX ").setRegistryName(MODID_TFCF, "stoneware_clay_bowl"),
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_BOWL, 4), "X   X", " XXX ",
-                        "     ", "X   X", " XXX ").setRegistryName(MODID_TFCF, "stoneware_clay_bowl_2"),
-                new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_LARGE_VESSEL), "X   X",
-                        "X   X", "X   X", "X   X", "XXXXX").setRegistryName(MODID_TFCF, "stoneware_clay_large_vessel"),
 
                 // Flint Tool Heads
                 new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_AXE_HEAD, 1), " X   ", "XXXX ", "XXXXX", "XXXX ",
@@ -1300,49 +955,6 @@ public final class RecipesTFCF {
                     .register(recipe.setRegistryName(rock.getRegistryName().getPath().toLowerCase() + "_fired_mud_brick"));
         }
 
-        // Clay Pottery Items with metadata
-        for (EnumDyeColor dye : EnumDyeColor.values()) {
-            r.register(new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL_GLAZED, 1, dye.getMetadata())),
-                    new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                    "unfired_earthenware_vessel_glazed_" + dye.getName()));
-            r.register(new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL_GLAZED, 1, dye.getMetadata())),
-                    new ItemStack(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                    "unfired_kaolinite_vessel_glazed_" + dye.getName()));
-            r.register(new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_VESSEL_GLAZED, 1, dye.getMetadata())),
-                    new ItemStack(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                    "unfired_stoneware_vessel_glazed_" + dye.getName()));
-        }
-
-        // Clay Molds
-        for (Metal.ItemType type : Metal.ItemType.values()) {
-            ItemUnfiredEarthenwareMold unfiredMoldEarthenware = ItemUnfiredEarthenwareMold.get(type);
-            ItemEarthenwareMold firedMoldEarthenware = ItemEarthenwareMold.get(type);
-            if (unfiredMoldEarthenware != null && firedMoldEarthenware != null) {
-                r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldEarthenware), new ItemStack(firedMoldEarthenware), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_earthenware_mold_" + type
-                        .name()
-                        .toLowerCase()));
-            }
-
-            ItemUnfiredKaoliniteMold unfiredMoldKaolinite = ItemUnfiredKaoliniteMold.get(type);
-            ItemKaoliniteMold firedMoldKaolinite = ItemKaoliniteMold.get(type);
-            if (unfiredMoldKaolinite != null && firedMoldKaolinite != null) {
-                r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldKaolinite), new ItemStack(firedMoldKaolinite), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_mold_" + type
-                        .name()
-                        .toLowerCase()));
-            }
-
-            ItemUnfiredStonewareMold unfiredMoldStoneware = ItemUnfiredStonewareMold.get(type);
-            ItemStonewareMold firedMoldStoneware = ItemStonewareMold.get(type);
-            if (unfiredMoldStoneware != null && firedMoldStoneware != null) {
-                r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldStoneware), new ItemStack(firedMoldStoneware), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_stoneware_mold_" + type
-                        .name()
-                        .toLowerCase()));
-            }
-        }
-
         // Bread
         if (!ConfigFL.General.COMPAT.removeTFC) {
             r.registerAll(
@@ -1364,98 +976,6 @@ public final class RecipesTFCF {
 
         // Standard / Simple recipes
         r.registerAll(
-
-                // Earthenware Pottery
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BRICK), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_brick"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_VESSEL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_vessel"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_JUG), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_JUG), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_POT), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_POT), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BOWL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_bowl"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_LARGE_VESSEL),
-                        new ItemStack(BlocksTFCF.FIRED_EARTHENWARE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "unfired_earthenware_large_vessel"),
-
-                // Fired Earthenware Pottery - doesn't burn up
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BRICK), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_earthenware_brick"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "fired_earthenware_vessel"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "fired_earthenware_vessel_glazed_all"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_JUG), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_JUG), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_earthenware_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_POT), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_POT), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_earthenware_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BOWL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_earthenware_bowl"),
-                new HeatRecipeSimple(IIngredient.of(BlocksTFCF.FIRED_EARTHENWARE_LARGE_VESSEL),
-                        new ItemStack(BlocksTFCF.FIRED_EARTHENWARE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "fired_earthenware_large_vessel"),
-
-                // Kaolinite Pottery
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_BRICK), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BRICK), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_brick"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_VESSEL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_vessel"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_JUG), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_JUG), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_POT), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_POT), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_BOWL), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BOWL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_bowl"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_KAOLINITE_LARGE_VESSEL),
-                        1599f, Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_large_vessel"),
-
-                // Fired Kaolinite Pottery - doesn't burn up
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_BRICK), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BRICK), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_brick"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "fired_kaolinite_vessel"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "fired_kaolinite_vessel_glazed_all"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_JUG), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_JUG), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_POT), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_POT), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_BOWL), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BOWL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_bowl"),
-                new HeatRecipeSimple(IIngredient.of(BlocksTFCF.FIRED_KAOLINITE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_KAOLINITE_LARGE_VESSEL),
-                        1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_large_vessel"),
-
-                // Stoneware Pottery
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BRICK), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_brick"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_VESSEL), new ItemStack(ItemsTFCF.FIRED_STONEWARE_VESSEL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_vessel"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_JUG), new ItemStack(ItemsTFCF.FIRED_STONEWARE_JUG), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_POT), new ItemStack(ItemsTFCF.FIRED_STONEWARE_POT), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BOWL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_bowl"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_STONEWARE_LARGE_VESSEL),
-                        1599f, Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_large_vessel"),
-
-                // Fired Stoneware Pottery - doesn't burn up
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BRICK), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_stoneware_brick"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "fired_stoneware_vessel"),
-                new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED), 1599f, Metal.Tier.TIER_I).setRegistryName(
-                        "fired_stoneware_vessel_glazed_all"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_JUG), new ItemStack(ItemsTFCF.FIRED_STONEWARE_JUG), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_stoneware_jug"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_POT), new ItemStack(ItemsTFCF.FIRED_STONEWARE_POT), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_stoneware_pot"),
-                new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BOWL), 1599f,
-                        Metal.Tier.TIER_I).setRegistryName("fired_stoneware_bowl"),
-                new HeatRecipeSimple(IIngredient.of(BlocksTFCF.FIRED_STONEWARE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_STONEWARE_LARGE_VESSEL),
-                        1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_large_vessel"),
 
                 new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_URN), new ItemStack(BlocksTFCF.FIRED_URN), 1599f,
                         Metal.Tier.TIER_I).setRegistryName("unfired_urn"),
@@ -2049,10 +1569,6 @@ public final class RecipesTFCF {
                     new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX",
                             "  XXX", "  XXX").setRegistryName(MODID_TFCF, "earthenware_clay_oven_wall"),
 
-                    // Earthenware Mallet Mold
-                    new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_MALLET_MOLD, 1),
-                            "XXXXX", "     ", "   X ", "XXXXX", "XXXXX").setRegistryName(MODID_TFCF, "unfired_earthenware_clay_mallet_mold"),
-
                     // Kaolinite Clay
                     new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
                             "XXXXX").setRegistryName(MODID_TFCF, "kaolinite_clay_oven"),
@@ -2061,21 +1577,14 @@ public final class RecipesTFCF {
                     new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX",
                             "  XXX", "  XXX").setRegistryName(MODID_TFCF, "kaolinite_clay_oven_wall"),
 
-                    // Kaolinite Mallet Mold
-                    new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_MALLET_MOLD, 1), "XXXXX",
-                            "     ", "   X ", "XXXXX", "XXXXX").setRegistryName(MODID_TFCF, "unfired_kaolinite_clay_mallet_mold"),
-
                     // Stoneware Clay
                     new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
                             "XXXXX").setRegistryName(MODID_TFCF, "stoneware_clay_oven"),
                     new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X",
                             "X   X", "X   X").setRegistryName(MODID_TFCF, "stoneware_clay_oven_chimney"),
                     new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX",
-                            "  XXX", "  XXX").setRegistryName(MODID_TFCF, "stoneware_clay_oven_wall"),
+                            "  XXX", "  XXX").setRegistryName(MODID_TFCF, "stoneware_clay_oven_wall")
 
-                    // Stoneware Mallet Mold
-                    new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_MALLET_MOLD, 1), "XXXXX",
-                            "     ", "   X ", "XXXXX", "XXXXX").setRegistryName(MODID_TFCF, "unfired_stoneware_clay_mallet_mold")
             );
         }
     }
@@ -2085,15 +1594,6 @@ public final class RecipesTFCF {
     public static void onRegisterHeatRecipeEventFL(RegistryEvent.Register<HeatRecipe> event) {
         if (TFCFlorae.FirmaLifeAdded) {
             IForgeRegistry<HeatRecipe> r = event.getRegistry();
-            event.getRegistry().registerAll(
-
-                    new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_MALLET_MOLD), new ItemStack(ItemsTFCF.EARTHENWARE_MALLET_MOLD),
-                            1599.0F, Metal.Tier.TIER_I).setRegistryName(MODID_TFCF, "earthenware_clay_mallet_mold"),
-                    new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_MALLET_MOLD), new ItemStack(ItemsTFCF.KAOLINITE_MALLET_MOLD),
-                            1599.0F, Metal.Tier.TIER_I).setRegistryName(MODID_TFCF, "kaolinite_clay_mallet_mold"),
-                    new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_MALLET_MOLD), new ItemStack(ItemsTFCF.STONEWARE_MALLET_MOLD),
-                            1599.0F, Metal.Tier.TIER_I).setRegistryName(MODID_TFCF, "stoneware_clay_mallet_mold")
-            );
 
             //Remove recipes
             if (ConfigFL.General.COMPAT.removeTFC) {

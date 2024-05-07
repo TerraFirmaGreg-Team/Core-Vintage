@@ -170,135 +170,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
         SPARSE_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_AND_HORIZONTAL),
         SPARSE_CLAY_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_ONLY),
 
-        // Earthenware Clays
-        EARTHENWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_EARTHENWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SANDY_EARTHENWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SANDY_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_EARTHENWARE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_EARTHENWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SANDY_EARTHENWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SANDY_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_EARTHENWARE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        EARTHENWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_EARTHENWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        EARTHENWARE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        COARSE_EARTHENWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        EARTHENWARE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_EARTHENWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SILTY_EARTHENWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SILTY_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_EARTHENWARE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_EARTHENWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SILTY_EARTHENWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SILTY_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_EARTHENWARE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SANDY_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SILTY_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        EARTHENWARE_CLAY_HUMUS(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        EARTHENWARE_CLAY_HUMUS_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_EARTHENWARE_CLAY_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_ONLY),
-        COARSE_EARTHENWARE_CLAY_HUMUS(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SANDY_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SILTY_EARTHENWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_ONLY),
-
-        // Kaolinite Clays
-        KAOLINITE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_KAOLINITE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SANDY_KAOLINITE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SANDY_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_KAOLINITE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_KAOLINITE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SANDY_KAOLINITE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SANDY_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_KAOLINITE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        KAOLINITE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_KAOLINITE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        KAOLINITE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        COARSE_KAOLINITE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        KAOLINITE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_KAOLINITE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SILTY_KAOLINITE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SILTY_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_KAOLINITE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_KAOLINITE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SILTY_KAOLINITE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SILTY_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_KAOLINITE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SANDY_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SILTY_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        KAOLINITE_CLAY_HUMUS(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        KAOLINITE_CLAY_HUMUS_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_KAOLINITE_CLAY_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_ONLY),
-        COARSE_KAOLINITE_CLAY_HUMUS(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SANDY_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SILTY_KAOLINITE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_KAOLINITE_CLAY_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_ONLY),
-
-        // Stoneware Clays
-        STONEWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_STONEWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SANDY_STONEWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SANDY_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_STONEWARE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_STONEWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SANDY_STONEWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SANDY_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SANDY_STONEWARE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        STONEWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_STONEWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        STONEWARE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        COARSE_STONEWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        STONEWARE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_STONEWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SILTY_STONEWARE_CLAY(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SILTY_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_STONEWARE_CLAY_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_STONEWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        COARSE_SILTY_STONEWARE_CLAY_LOAM(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SILTY_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SILTY_STONEWARE_CLAY_LOAM_PODZOL(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SANDY_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SILTY_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        STONEWARE_CLAY_HUMUS(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        STONEWARE_CLAY_HUMUS_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        DRY_STONEWARE_CLAY_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_ONLY),
-        COARSE_STONEWARE_CLAY_HUMUS(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
-        SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SANDY_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SILTY_STONEWARE_CLAY_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS(Material.GRASS, true, Specification.VERTICAL_ONLY),
-        SPARSE_STONEWARE_CLAY_HUMUS_GRASS(Material.GROUND, true, Specification.VERTICAL_ONLY),
-
         // Farmland
         LOAMY_SAND_FARMLAND(Material.GROUND, false, Specification.VERTICAL_ONLY),
         SANDY_LOAM_FARMLAND(Material.GROUND, false, Specification.VERTICAL_ONLY),
@@ -353,41 +224,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SANDY_CLAY_LOAM_GRASS:
                 case SANDY_CLAY_LOAM_PODZOL:
                     return SANDY_CLAY_LOAM;
-                case SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SANDY_EARTHENWARE_CLAY_LOAM_PODZOL:
-                    return SANDY_EARTHENWARE_CLAY_LOAM;
-                case SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SANDY_KAOLINITE_CLAY_LOAM_PODZOL:
-                    return SANDY_KAOLINITE_CLAY_LOAM;
-                case SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS:
-                case DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS:
-                case SANDY_STONEWARE_CLAY_LOAM_GRASS:
-                case SANDY_STONEWARE_CLAY_LOAM_PODZOL:
-                    return SANDY_STONEWARE_CLAY_LOAM;
                 case SPARSE_SANDY_CLAY_GRASS:
                 case DRY_SANDY_CLAY_GRASS:
                 case SANDY_CLAY_GRASS:
                 case SANDY_CLAY_PODZOL:
                     return SANDY_CLAY;
-                case SPARSE_SANDY_EARTHENWARE_CLAY_GRASS:
-                case DRY_SANDY_EARTHENWARE_CLAY_GRASS:
-                case SANDY_EARTHENWARE_CLAY_GRASS:
-                case SANDY_EARTHENWARE_CLAY_PODZOL:
-                    return SANDY_EARTHENWARE_CLAY;
-                case SPARSE_SANDY_KAOLINITE_CLAY_GRASS:
-                case DRY_SANDY_KAOLINITE_CLAY_GRASS:
-                case SANDY_KAOLINITE_CLAY_GRASS:
-                case SANDY_KAOLINITE_CLAY_PODZOL:
-                    return SANDY_KAOLINITE_CLAY;
-                case SPARSE_SANDY_STONEWARE_CLAY_GRASS:
-                case DRY_SANDY_STONEWARE_CLAY_GRASS:
-                case SANDY_STONEWARE_CLAY_GRASS:
-                case SANDY_STONEWARE_CLAY_PODZOL:
-                    return SANDY_STONEWARE_CLAY;
                 case SPARSE_LOAM_GRASS:
                 case DRY_LOAM_GRASS:
                 case LOAM_GRASS:
@@ -398,61 +239,16 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case CLAY_LOAM_GRASS:
                 case CLAY_LOAM_PODZOL:
                     return CLAY_LOAM;
-                case SPARSE_EARTHENWARE_CLAY_LOAM_GRASS:
-                case DRY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case EARTHENWARE_CLAY_LOAM_GRASS:
-                case EARTHENWARE_CLAY_LOAM_PODZOL:
-                    return EARTHENWARE_CLAY_LOAM;
-                case SPARSE_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_KAOLINITE_CLAY_LOAM_GRASS:
-                case KAOLINITE_CLAY_LOAM_GRASS:
-                case KAOLINITE_CLAY_LOAM_PODZOL:
-                    return KAOLINITE_CLAY_LOAM;
-                case SPARSE_STONEWARE_CLAY_LOAM_GRASS:
-                case DRY_STONEWARE_CLAY_LOAM_GRASS:
-                case STONEWARE_CLAY_LOAM_GRASS:
-                case STONEWARE_CLAY_LOAM_PODZOL:
-                    return STONEWARE_CLAY_LOAM;
                 case SPARSE_SILTY_CLAY_GRASS:
                 case DRY_SILTY_CLAY_GRASS:
                 case SILTY_CLAY_GRASS:
                 case SILTY_CLAY_PODZOL:
                     return SILTY_CLAY;
-                case SPARSE_SILTY_EARTHENWARE_CLAY_GRASS:
-                case DRY_SILTY_EARTHENWARE_CLAY_GRASS:
-                case SILTY_EARTHENWARE_CLAY_GRASS:
-                case SILTY_EARTHENWARE_CLAY_PODZOL:
-                    return SILTY_EARTHENWARE_CLAY;
-                case SPARSE_SILTY_KAOLINITE_CLAY_GRASS:
-                case DRY_SILTY_KAOLINITE_CLAY_GRASS:
-                case SILTY_KAOLINITE_CLAY_GRASS:
-                case SILTY_KAOLINITE_CLAY_PODZOL:
-                    return SILTY_KAOLINITE_CLAY;
-                case SPARSE_SILTY_STONEWARE_CLAY_GRASS:
-                case DRY_SILTY_STONEWARE_CLAY_GRASS:
-                case SILTY_STONEWARE_CLAY_GRASS:
-                case SILTY_STONEWARE_CLAY_PODZOL:
-                    return SILTY_STONEWARE_CLAY;
                 case SPARSE_SILTY_CLAY_LOAM_GRASS:
                 case DRY_SILTY_CLAY_LOAM_GRASS:
                 case SILTY_CLAY_LOAM_GRASS:
                 case SILTY_CLAY_LOAM_PODZOL:
                     return SILTY_CLAY_LOAM;
-                case SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SILTY_EARTHENWARE_CLAY_LOAM_PODZOL:
-                    return SILTY_EARTHENWARE_CLAY_LOAM;
-                case SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SILTY_KAOLINITE_CLAY_LOAM_PODZOL:
-                    return SILTY_KAOLINITE_CLAY_LOAM;
-                case SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS:
-                case DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS:
-                case SILTY_STONEWARE_CLAY_LOAM_GRASS:
-                case SILTY_STONEWARE_CLAY_LOAM_PODZOL:
-                    return SILTY_STONEWARE_CLAY_LOAM;
                 case SPARSE_SILT_LOAM_GRASS:
                 case DRY_SILT_LOAM_GRASS:
                 case SILT_LOAM_GRASS:
@@ -463,21 +259,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SILT_GRASS:
                 case SILT_PODZOL:
                     return SILT;
-                case EARTHENWARE_CLAY_GRASS:
-                case SPARSE_EARTHENWARE_CLAY_GRASS:
-                case DRY_EARTHENWARE_CLAY_GRASS:
-                case EARTHENWARE_CLAY_PODZOL:
-                    return EARTHENWARE_CLAY;
-                case KAOLINITE_CLAY_GRASS:
-                case SPARSE_KAOLINITE_CLAY_GRASS:
-                case DRY_KAOLINITE_CLAY_GRASS:
-                case KAOLINITE_CLAY_PODZOL:
-                    return KAOLINITE_CLAY;
-                case STONEWARE_CLAY_GRASS:
-                case SPARSE_STONEWARE_CLAY_GRASS:
-                case DRY_STONEWARE_CLAY_GRASS:
-                case STONEWARE_CLAY_PODZOL:
-                    return STONEWARE_CLAY;
                 case HUMUS_GRASS:
                 case SPARSE_HUMUS_GRASS:
                 case DRY_HUMUS_GRASS:
@@ -486,18 +267,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SPARSE_CLAY_HUMUS_GRASS:
                 case DRY_CLAY_HUMUS_GRASS:
                     return CLAY_HUMUS;
-                case EARTHENWARE_CLAY_HUMUS_GRASS:
-                case SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS:
-                case DRY_EARTHENWARE_CLAY_HUMUS_GRASS:
-                    return EARTHENWARE_CLAY_HUMUS;
-                case KAOLINITE_CLAY_HUMUS_GRASS:
-                case SPARSE_KAOLINITE_CLAY_HUMUS_GRASS:
-                case DRY_KAOLINITE_CLAY_HUMUS_GRASS:
-                    return KAOLINITE_CLAY_HUMUS;
-                case STONEWARE_CLAY_HUMUS_GRASS:
-                case SPARSE_STONEWARE_CLAY_HUMUS_GRASS:
-                case DRY_STONEWARE_CLAY_HUMUS_GRASS:
-                    return STONEWARE_CLAY_HUMUS;
                 case SPARSE_GRASS:
                 case SPARSE_CLAY_GRASS:
                 case DRY_CLAY_GRASS:
@@ -582,131 +351,7 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 
         public boolean shouldRockify() {
             return switch (this) {
-                case MOSSY_RAW, MUD_BRICKS, MUD, PODZOL, SPARSE_GRASS, COARSE_DIRT, CLAY_PODZOL, DRY_CLAY_GRASS, SPARSE_CLAY_GRASS, COARSE_CLAY,
-                     EARTHENWARE_CLAY, EARTHENWARE_CLAY_GRASS, EARTHENWARE_CLAY_PODZOL, DRY_EARTHENWARE_CLAY_GRASS, SPARSE_EARTHENWARE_CLAY_GRASS,
-                     COARSE_EARTHENWARE_CLAY, KAOLINITE_CLAY, KAOLINITE_CLAY_GRASS, KAOLINITE_CLAY_PODZOL, DRY_KAOLINITE_CLAY_GRASS,
-                     SPARSE_KAOLINITE_CLAY_GRASS, COARSE_KAOLINITE_CLAY, STONEWARE_CLAY, STONEWARE_CLAY_GRASS, STONEWARE_CLAY_PODZOL,
-                     DRY_STONEWARE_CLAY_GRASS,
-                     SPARSE_STONEWARE_CLAY_GRASS, COARSE_STONEWARE_CLAY ->
-                /*
-                case BOG_IRON:
-                case BOG_IRON_GRASS:
-                case DRY_BOG_IRON_GRASS:
-                case SPARSE_BOG_IRON_GRASS:
-                case BOG_IRON_PODZOL:
-                case LOAMY_SAND:
-                case COARSE_LOAMY_SAND:
-                case LOAMY_SAND_GRASS:
-                case LOAMY_SAND_PODZOL:
-                case SANDY_LOAM:
-                case COARSE_SANDY_LOAM:
-                case SANDY_LOAM_GRASS:
-                case SANDY_LOAM_PODZOL:
-                case SANDY_CLAY_LOAM:
-                case COARSE_SANDY_CLAY_LOAM:
-                case SANDY_CLAY_LOAM_GRASS:
-                case SANDY_CLAY_LOAM_PODZOL:
-                case SANDY_CLAY:
-                case COARSE_SANDY_CLAY:
-                case SANDY_CLAY_GRASS:
-                case SANDY_CLAY_PODZOL:
-                case LOAM:
-                case COARSE_LOAM:
-                case LOAM_GRASS:
-                case LOAM_PODZOL:
-                case CLAY_LOAM:
-                case COARSE_CLAY_LOAM:
-                case CLAY_LOAM_GRASS:
-                case CLAY_LOAM_PODZOL:
-                case SILTY_CLAY:
-                case COARSE_SILTY_CLAY:
-                case SILTY_CLAY_GRASS:
-                case SILTY_CLAY_PODZOL:
-                case SILTY_CLAY_LOAM:
-                case COARSE_SILTY_CLAY_LOAM:
-                case SILTY_CLAY_LOAM_GRASS:
-                case SILTY_CLAY_LOAM_PODZOL:
-                case SILT_LOAM:
-                case COARSE_SILT_LOAM:
-                case SILT_LOAM_GRASS:
-                case SILT_LOAM_PODZOL:
-                case SILT:
-                case COARSE_SILT:
-                case SILT_GRASS:
-                case SILT_PODZOL:
-                case DRY_LOAMY_SAND_GRASS:
-                case DRY_SANDY_LOAM_GRASS:
-                case DRY_SANDY_CLAY_LOAM_GRASS:
-                case DRY_SANDY_CLAY_GRASS:
-                case DRY_LOAM_GRASS:
-                case DRY_CLAY_LOAM_GRASS:
-                case DRY_SILTY_CLAY_GRASS:
-                case DRY_SILTY_CLAY_LOAM_GRASS:
-                case DRY_SILT_LOAM_GRASS:
-                case DRY_SILT_GRASS:
-                case HUMUS:
-                case COARSE_HUMUS:
-                case HUMUS_GRASS:
-                case DRY_HUMUS_GRASS:
-                case CLAY_HUMUS:
-                case CLAY_HUMUS_GRASS:
-                case DRY_CLAY_HUMUS_GRASS:
-                case COARSE_CLAY_HUMUS:
-                case SPARSE_LOAMY_SAND_GRASS:
-                case SPARSE_SANDY_LOAM_GRASS:
-                case SPARSE_SANDY_CLAY_LOAM_GRASS:
-                case SPARSE_SANDY_CLAY_GRASS:
-                case SPARSE_LOAM_GRASS:
-                case SPARSE_CLAY_LOAM_GRASS:
-                case SPARSE_SILTY_CLAY_GRASS:
-                case SPARSE_SILTY_CLAY_LOAM_GRASS:
-                case SPARSE_SILT_LOAM_GRASS:
-                case SPARSE_SILT_GRASS:
-                case SPARSE_HUMUS_GRASS:
-                case SPARSE_CLAY_HUMUS_GRASS:
-                case SANDY_KAOLINITE_CLAY_LOAM:
-                case COARSE_SANDY_KAOLINITE_CLAY_LOAM:
-                case SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SANDY_KAOLINITE_CLAY_LOAM_PODZOL:
-                case SANDY_KAOLINITE_CLAY:
-                case COARSE_SANDY_KAOLINITE_CLAY:
-                case SANDY_KAOLINITE_CLAY_GRASS:
-                case SANDY_KAOLINITE_CLAY_PODZOL:
-                case KAOLINITE_CLAY_LOAM:
-                case COARSE_KAOLINITE_CLAY_LOAM:
-                case KAOLINITE_CLAY_LOAM_GRASS:
-                case KAOLINITE_CLAY_LOAM_PODZOL:
-                case SILTY_KAOLINITE_CLAY:
-                case COARSE_SILTY_KAOLINITE_CLAY:
-                case SILTY_KAOLINITE_CLAY_GRASS:
-                case SILTY_KAOLINITE_CLAY_PODZOL:
-                case SILTY_KAOLINITE_CLAY_LOAM:
-                case COARSE_SILTY_KAOLINITE_CLAY_LOAM:
-                case SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SILTY_KAOLINITE_CLAY_LOAM_PODZOL:
-                case DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_SANDY_KAOLINITE_CLAY_GRASS:
-                case DRY_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_SILTY_KAOLINITE_CLAY_GRASS:
-                case DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case KAOLINITE_CLAY_HUMUS:
-                case KAOLINITE_CLAY_HUMUS_GRASS:
-                case DRY_KAOLINITE_CLAY_HUMUS_GRASS:
-                case COARSE_KAOLINITE_CLAY_HUMUS:
-                case SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SPARSE_SANDY_KAOLINITE_CLAY_GRASS:
-                case SPARSE_KAOLINITE_CLAY_LOAM_GRASS:
-                case SPARSE_SILTY_KAOLINITE_CLAY_GRASS:
-                case SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SPARSE_KAOLINITE_CLAY_HUMUS_GRASS:
-                case LOAMY_SAND_FARMLAND:
-                case SANDY_LOAM_FARMLAND:
-                case LOAM_FARMLAND:
-                case SILT_LOAM_FARMLAND:
-                case SILT_FARMLAND:
-                case HUMUS_FARMLAND:
-                */
-                        true;
+                case MOSSY_RAW, MUD_BRICKS, MUD, PODZOL, SPARSE_GRASS, COARSE_DIRT, CLAY_PODZOL, DRY_CLAY_GRASS, SPARSE_CLAY_GRASS, COARSE_CLAY -> true;
                 default -> false;
             };
         }
@@ -734,41 +379,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SANDY_CLAY_LOAM_GRASS:
                 case SANDY_CLAY_LOAM_PODZOL:
                     return SANDY_CLAY_LOAM;
-                case SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SANDY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SANDY_EARTHENWARE_CLAY_LOAM_PODZOL:
-                    return SANDY_EARTHENWARE_CLAY_LOAM;
-                case SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SANDY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SANDY_KAOLINITE_CLAY_LOAM_PODZOL:
-                    return SANDY_KAOLINITE_CLAY_LOAM;
-                case SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS:
-                case DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS:
-                case SANDY_STONEWARE_CLAY_LOAM_GRASS:
-                case SANDY_STONEWARE_CLAY_LOAM_PODZOL:
-                    return SANDY_STONEWARE_CLAY_LOAM;
                 case SPARSE_SANDY_CLAY_GRASS:
                 case DRY_SANDY_CLAY_GRASS:
                 case SANDY_CLAY_GRASS:
                 case SANDY_CLAY_PODZOL:
                     return SANDY_CLAY;
-                case SPARSE_SANDY_EARTHENWARE_CLAY_GRASS:
-                case DRY_SANDY_EARTHENWARE_CLAY_GRASS:
-                case SANDY_EARTHENWARE_CLAY_GRASS:
-                case SANDY_EARTHENWARE_CLAY_PODZOL:
-                    return SANDY_EARTHENWARE_CLAY;
-                case SPARSE_SANDY_KAOLINITE_CLAY_GRASS:
-                case DRY_SANDY_KAOLINITE_CLAY_GRASS:
-                case SANDY_KAOLINITE_CLAY_GRASS:
-                case SANDY_KAOLINITE_CLAY_PODZOL:
-                    return SANDY_KAOLINITE_CLAY;
-                case SPARSE_SANDY_STONEWARE_CLAY_GRASS:
-                case DRY_SANDY_STONEWARE_CLAY_GRASS:
-                case SANDY_STONEWARE_CLAY_GRASS:
-                case SANDY_STONEWARE_CLAY_PODZOL:
-                    return SANDY_STONEWARE_CLAY;
                 case SPARSE_LOAM_GRASS:
                 case DRY_LOAM_GRASS:
                 case LOAM_GRASS:
@@ -779,61 +394,16 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case CLAY_LOAM_GRASS:
                 case CLAY_LOAM_PODZOL:
                     return CLAY_LOAM;
-                case SPARSE_EARTHENWARE_CLAY_LOAM_GRASS:
-                case DRY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case EARTHENWARE_CLAY_LOAM_GRASS:
-                case EARTHENWARE_CLAY_LOAM_PODZOL:
-                    return EARTHENWARE_CLAY_LOAM;
-                case SPARSE_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_KAOLINITE_CLAY_LOAM_GRASS:
-                case KAOLINITE_CLAY_LOAM_GRASS:
-                case KAOLINITE_CLAY_LOAM_PODZOL:
-                    return KAOLINITE_CLAY_LOAM;
-                case SPARSE_STONEWARE_CLAY_LOAM_GRASS:
-                case DRY_STONEWARE_CLAY_LOAM_GRASS:
-                case STONEWARE_CLAY_LOAM_GRASS:
-                case STONEWARE_CLAY_LOAM_PODZOL:
-                    return STONEWARE_CLAY_LOAM;
                 case SPARSE_SILTY_CLAY_GRASS:
                 case DRY_SILTY_CLAY_GRASS:
                 case SILTY_CLAY_GRASS:
                 case SILTY_CLAY_PODZOL:
                     return SILTY_CLAY;
-                case SPARSE_SILTY_EARTHENWARE_CLAY_GRASS:
-                case DRY_SILTY_EARTHENWARE_CLAY_GRASS:
-                case SILTY_EARTHENWARE_CLAY_GRASS:
-                case SILTY_EARTHENWARE_CLAY_PODZOL:
-                    return SILTY_EARTHENWARE_CLAY;
-                case SPARSE_SILTY_KAOLINITE_CLAY_GRASS:
-                case DRY_SILTY_KAOLINITE_CLAY_GRASS:
-                case SILTY_KAOLINITE_CLAY_GRASS:
-                case SILTY_KAOLINITE_CLAY_PODZOL:
-                    return SILTY_KAOLINITE_CLAY;
-                case SPARSE_SILTY_STONEWARE_CLAY_GRASS:
-                case DRY_SILTY_STONEWARE_CLAY_GRASS:
-                case SILTY_STONEWARE_CLAY_GRASS:
-                case SILTY_STONEWARE_CLAY_PODZOL:
-                    return SILTY_STONEWARE_CLAY;
                 case SPARSE_SILTY_CLAY_LOAM_GRASS:
                 case DRY_SILTY_CLAY_LOAM_GRASS:
                 case SILTY_CLAY_LOAM_GRASS:
                 case SILTY_CLAY_LOAM_PODZOL:
                     return SILTY_CLAY_LOAM;
-                case SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SILTY_EARTHENWARE_CLAY_LOAM_GRASS:
-                case SILTY_EARTHENWARE_CLAY_LOAM_PODZOL:
-                    return SILTY_EARTHENWARE_CLAY_LOAM;
-                case SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SILTY_KAOLINITE_CLAY_LOAM_GRASS:
-                case SILTY_KAOLINITE_CLAY_LOAM_PODZOL:
-                    return SILTY_KAOLINITE_CLAY_LOAM;
-                case SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS:
-                case DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS:
-                case SILTY_STONEWARE_CLAY_LOAM_GRASS:
-                case SILTY_STONEWARE_CLAY_LOAM_PODZOL:
-                    return SILTY_STONEWARE_CLAY_LOAM;
                 case SPARSE_SILT_LOAM_GRASS:
                 case DRY_SILT_LOAM_GRASS:
                 case SILT_LOAM_GRASS:
@@ -844,21 +414,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SILT_GRASS:
                 case SILT_PODZOL:
                     return SILT;
-                case EARTHENWARE_CLAY_GRASS:
-                case SPARSE_EARTHENWARE_CLAY_GRASS:
-                case DRY_EARTHENWARE_CLAY_GRASS:
-                case EARTHENWARE_CLAY_PODZOL:
-                    return EARTHENWARE_CLAY;
-                case KAOLINITE_CLAY_GRASS:
-                case SPARSE_KAOLINITE_CLAY_GRASS:
-                case DRY_KAOLINITE_CLAY_GRASS:
-                case KAOLINITE_CLAY_PODZOL:
-                    return KAOLINITE_CLAY;
-                case STONEWARE_CLAY_GRASS:
-                case SPARSE_STONEWARE_CLAY_GRASS:
-                case DRY_STONEWARE_CLAY_GRASS:
-                case STONEWARE_CLAY_PODZOL:
-                    return STONEWARE_CLAY;
                 case HUMUS_GRASS:
                 case SPARSE_HUMUS_GRASS:
                 case DRY_HUMUS_GRASS:
@@ -867,18 +422,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                 case SPARSE_CLAY_HUMUS_GRASS:
                 case DRY_CLAY_HUMUS_GRASS:
                     return CLAY_HUMUS;
-                case EARTHENWARE_CLAY_HUMUS_GRASS:
-                case SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS:
-                case DRY_EARTHENWARE_CLAY_HUMUS_GRASS:
-                    return EARTHENWARE_CLAY_HUMUS;
-                case KAOLINITE_CLAY_HUMUS_GRASS:
-                case SPARSE_KAOLINITE_CLAY_HUMUS_GRASS:
-                case DRY_KAOLINITE_CLAY_HUMUS_GRASS:
-                    return KAOLINITE_CLAY_HUMUS;
-                case STONEWARE_CLAY_HUMUS_GRASS:
-                case SPARSE_STONEWARE_CLAY_HUMUS_GRASS:
-                case DRY_STONEWARE_CLAY_HUMUS_GRASS:
-                    return STONEWARE_CLAY_HUMUS;
                 case SPARSE_GRASS:
                 case SPARSE_CLAY_GRASS:
                 case DRY_CLAY_GRASS:
@@ -997,153 +540,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                         return SPARSE_CLAY_HUMUS_GRASS;
                     else
                         return CLAY_HUMUS_GRASS;
-                case EARTHENWARE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_EARTHENWARE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_EARTHENWARE_CLAY_GRASS;
-                    else
-                        return EARTHENWARE_CLAY_GRASS;
-                case SANDY_EARTHENWARE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_SANDY_EARTHENWARE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SANDY_EARTHENWARE_CLAY_LOAM_GRASS;
-                    else
-                        return SANDY_EARTHENWARE_CLAY_LOAM_GRASS;
-                case SANDY_EARTHENWARE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_SANDY_EARTHENWARE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SANDY_EARTHENWARE_CLAY_GRASS;
-                    else
-                        return SANDY_EARTHENWARE_CLAY_GRASS;
-                case EARTHENWARE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_EARTHENWARE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_EARTHENWARE_CLAY_LOAM_GRASS;
-                    else
-                        return EARTHENWARE_CLAY_LOAM_GRASS;
-                case SILTY_EARTHENWARE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_SILTY_EARTHENWARE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SILTY_EARTHENWARE_CLAY_GRASS;
-                    else
-                        return SILTY_EARTHENWARE_CLAY_GRASS;
-                case SILTY_EARTHENWARE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_SILTY_EARTHENWARE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SILTY_EARTHENWARE_CLAY_LOAM_GRASS;
-                    else
-                        return SILTY_EARTHENWARE_CLAY_LOAM_GRASS;
-                case EARTHENWARE_CLAY_HUMUS:
-                    if (isDryGrass(spreader))
-                        return DRY_EARTHENWARE_CLAY_HUMUS_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_EARTHENWARE_CLAY_HUMUS_GRASS;
-                    else
-                        return EARTHENWARE_CLAY_HUMUS_GRASS;
-                case KAOLINITE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_KAOLINITE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_KAOLINITE_CLAY_GRASS;
-                    else
-                        return KAOLINITE_CLAY_GRASS;
-                case SANDY_KAOLINITE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_SANDY_KAOLINITE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SANDY_KAOLINITE_CLAY_LOAM_GRASS;
-                    else
-                        return SANDY_KAOLINITE_CLAY_LOAM_GRASS;
-                case SANDY_KAOLINITE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_SANDY_KAOLINITE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SANDY_KAOLINITE_CLAY_GRASS;
-                    else
-                        return SANDY_KAOLINITE_CLAY_GRASS;
-                case KAOLINITE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_KAOLINITE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_KAOLINITE_CLAY_LOAM_GRASS;
-                    else
-                        return KAOLINITE_CLAY_LOAM_GRASS;
-                case SILTY_KAOLINITE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_SILTY_KAOLINITE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SILTY_KAOLINITE_CLAY_GRASS;
-                    else
-                        return SILTY_KAOLINITE_CLAY_GRASS;
-                case SILTY_KAOLINITE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_SILTY_KAOLINITE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SILTY_KAOLINITE_CLAY_LOAM_GRASS;
-                    else
-                        return SILTY_KAOLINITE_CLAY_LOAM_GRASS;
-                case KAOLINITE_CLAY_HUMUS:
-                    if (isDryGrass(spreader))
-                        return DRY_KAOLINITE_CLAY_HUMUS_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_KAOLINITE_CLAY_HUMUS_GRASS;
-                    else
-                        return KAOLINITE_CLAY_HUMUS_GRASS;
-                case STONEWARE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_STONEWARE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_STONEWARE_CLAY_GRASS;
-                    else
-                        return STONEWARE_CLAY_GRASS;
-                case SANDY_STONEWARE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_SANDY_STONEWARE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SANDY_STONEWARE_CLAY_LOAM_GRASS;
-                    else
-                        return SANDY_STONEWARE_CLAY_LOAM_GRASS;
-                case SANDY_STONEWARE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_SANDY_STONEWARE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SANDY_STONEWARE_CLAY_GRASS;
-                    else
-                        return SANDY_STONEWARE_CLAY_GRASS;
-                case STONEWARE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_STONEWARE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_STONEWARE_CLAY_LOAM_GRASS;
-                    else
-                        return STONEWARE_CLAY_LOAM_GRASS;
-                case SILTY_STONEWARE_CLAY:
-                    if (isDryGrass(spreader))
-                        return DRY_SILTY_STONEWARE_CLAY_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SILTY_STONEWARE_CLAY_GRASS;
-                    else
-                        return SILTY_STONEWARE_CLAY_GRASS;
-                case SILTY_STONEWARE_CLAY_LOAM:
-                    if (isDryGrass(spreader))
-                        return DRY_SILTY_STONEWARE_CLAY_LOAM_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_SILTY_STONEWARE_CLAY_LOAM_GRASS;
-                    else
-                        return SILTY_STONEWARE_CLAY_LOAM_GRASS;
-                case STONEWARE_CLAY_HUMUS:
-                    if (isDryGrass(spreader))
-                        return DRY_STONEWARE_CLAY_HUMUS_GRASS;
-                    else if (isSparseGrass(spreader))
-                        return SPARSE_STONEWARE_CLAY_HUMUS_GRASS;
-                    else
-                        return STONEWARE_CLAY_HUMUS_GRASS;
             }
             throw new IllegalArgumentException("You cannot get grass from rock types.");
         }

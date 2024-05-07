@@ -72,7 +72,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
         setSoundType(SoundType.GROUND);
         setHardness(2.0F);
         setHarvestLevel("shovel", 0);
-        setDefaultState(blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(BlockFarmland.MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     }
 

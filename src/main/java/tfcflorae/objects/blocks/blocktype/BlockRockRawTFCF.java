@@ -37,8 +37,7 @@ public class BlockRockRawTFCF extends BlockRockVariantTFCF {
     public BlockRockRawTFCF(RockTFCF rockTFCF, Rock rock) {
         super(rockTFCF, rock);
 
-        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(
-                rockTFCF.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
+        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(rockTFCF.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
         spec.setResultingState(BlockRockVariant.get(rock, Rock.Type.COBBLE).getDefaultState());
         FallingBlockManager.registerFallable(this, spec);
 

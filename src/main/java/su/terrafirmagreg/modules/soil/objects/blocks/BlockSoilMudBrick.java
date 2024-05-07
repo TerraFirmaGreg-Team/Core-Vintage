@@ -4,6 +4,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
@@ -14,7 +15,10 @@ public class BlockSoilMudBrick extends BlockSoil {
 
     public BlockSoilMudBrick(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
+        getSettings()
+                .soundType(SoundType.STONE);
 
+        setHarvestLevel("pickaxe", 0);
     }
 
     @Override

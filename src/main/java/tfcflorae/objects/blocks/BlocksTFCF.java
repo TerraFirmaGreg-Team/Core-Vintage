@@ -93,6 +93,8 @@ import tfcflorae.util.agriculture.CropTFCF;
 import tfcflorae.util.agriculture.FoodDataTFCF;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
+import lombok.Getter;
+
 import static net.dries007.tfc.api.types.Rock.Type.DIRT;
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import static net.dries007.tfc.util.Helpers.getNull;
@@ -282,191 +284,83 @@ public final class BlocksTFCF {
     public static Tree[] bambooTrees = { TreesTFCF.ARROW_BAMBOO, TreesTFCF.BLACK_BAMBOO, TreesTFCF.BLUE_BAMBOO, TreesTFCF.DRAGON_BAMBOO,
             TreesTFCF.GOLDEN_BAMBOO, TreesTFCF.NARROW_LEAF_BAMBOO, TreesTFCF.RED_BAMBOO, TreesTFCF.TEMPLE_BAMBOO, TreesTFCF.THORNY_BAMBOO,
             TreesTFCF.TIMBER_BAMBOO, TreesTFCF.TINWA_BAMBOO, TreesTFCF.WEAVERS_BAMBOO };
+    @Getter
     private static ImmutableList<ItemBlock> allNormalItemBlocks;
+    @Getter
     private static ImmutableList<Block> allInventoryItemBlocks = Helpers.getNull();
     private static ImmutableList<Block> allFoodItemBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockFruitTreeLeaves> allFruitLeaves = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockFruitTreeSapling> allFruitSapling = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockFluidBase> allFluidBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockCropTFC> allCropBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockCropDead> allDeadCrops = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockBerryBush> allBerryBushBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockRockVariantTFCF> allBlockRockVariantsTFCF = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockSurfaceSeashells> allSurfaceSeashells = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockSurfaceFlint> allSurfaceFlint = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockSurfaceBones> allSurfaceBones = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockDriftwood> allSurfaceDriftwood = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockTwig> allSurfaceTwig = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockPinecone> allSurfacePinecone = Helpers.getNull();
+    @Getter
     private static ImmutableList<Block> allBambooLog = Helpers.getNull();
+    @Getter
     private static ImmutableList<Block> allBambooLeaves = Helpers.getNull();
+    @Getter
     private static ImmutableList<Block> allBambooSapling = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockLeavesTFCF> allNormalTreeLeaves = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockLogTFCF> allNormalTreeLog = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockCoral> allCoralPlants = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockWaterGlowPlant> allGlowWaterPlants = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockWaterPlantTFCF> allWaterPlantBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockHangingPlantTFCF> allHangingPlantBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockHangingCreepingPlantTFCF> allHangingCreepingPlantBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockCreepingPlantTFCF> allCreepingPlantBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockTallGrassWater> allTallGrassWaterBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockShortGrassTFCF> allShortGrassBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockTallGrassTFCF> allTallGrassBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockPlantDummy1> allStandardBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockPebbleWater> allPebbleWater = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockLightstone> allLightstoneBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockJoshuaTreeFlower> allJoshuaTreeFlowerBlocks = Helpers.getNull();
     //private static ImmutableList<MultiBlockBase> allMultiBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockJoshuaTreeLog> allJoshuaTreeLogBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockJoshuaTreeSapling> allJoshuaTreeSaplingBlocks = Helpers.getNull();
-
-    public static ImmutableList<ItemBlock> getAllNormalItemBlocks() {
-        return allNormalItemBlocks;
-    }
-
-    public static ImmutableList<Block> getAllInventoryItemBlocks() {
-        return allInventoryItemBlocks;
-    }
 
     public static ImmutableList<Block> getAllFoodIBs() {
         return allFoodItemBlocks;
-    }
-
-    public static ImmutableList<BlockFruitTreeLeaves> getAllFruitLeaves() {
-        return allFruitLeaves;
-    }
-
-    public static ImmutableList<BlockFruitTreeSapling> getAllFruitSapling() {
-        return allFruitSapling;
-    }
-
-    public static ImmutableList<BlockCropTFC> getAllCropBlocks() {
-        return allCropBlocks;
-    }
-
-    public static ImmutableList<BlockCropDead> getAllDeadCrops() {
-        return allDeadCrops;
-    }
-
-    public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
-        return allFluidBlocks;
-    }
-
-    public static ImmutableList<BlockBerryBush> getAllBerryBushBlocks() {
-        return allBerryBushBlocks;
-    }
-
-    public static ImmutableList<BlockRockVariantTFCF> getAllBlockRockVariantsTFCF() {
-        return allBlockRockVariantsTFCF;
-    }
-
-    public static ImmutableList<BlockSurfaceSeashells> getAllSurfaceSeashells() {
-        return allSurfaceSeashells;
-    }
-
-    public static ImmutableList<BlockSurfaceFlint> getAllSurfaceFlint() {
-        return allSurfaceFlint;
-    }
-
-    public static ImmutableList<BlockSurfaceBones> getAllSurfaceBones() {
-        return allSurfaceBones;
-    }
-
-    public static ImmutableList<BlockDriftwood> getAllSurfaceDriftwood() {
-        return allSurfaceDriftwood;
-    }
-
-    public static ImmutableList<BlockTwig> getAllSurfaceTwig() {
-        return allSurfaceTwig;
-    }
-
-    public static ImmutableList<BlockPinecone> getAllSurfacePinecone() {
-        return allSurfacePinecone;
-    }
-
-    public static ImmutableList<Block> getAllBambooLog() {
-        return allBambooLog;
-    }
-
-    public static ImmutableList<Block> getAllBambooLeaves() {
-        return allBambooLeaves;
-    }
-
-    public static ImmutableList<Block> getAllBambooSapling() {
-        return allBambooSapling;
-    }
-
-    public static ImmutableList<BlockLeavesTFCF> getAllNormalTreeLeaves() {
-        return allNormalTreeLeaves;
-    }
-
-    public static ImmutableList<BlockLogTFCF> getAllNormalTreeLog() {
-        return allNormalTreeLog;
-    }
-
-    public static ImmutableList<BlockCoral> getAllCoralPlants() {
-        return allCoralPlants;
-    }
-
-    public static ImmutableList<BlockWaterGlowPlant> getAllGlowWaterPlants() {
-        return allGlowWaterPlants;
-    }
-
-    public static ImmutableList<BlockWaterPlantTFCF> getAllWaterPlantBlocks() {
-        return allWaterPlantBlocks;
-    }
-
-    public static ImmutableList<BlockHangingPlantTFCF> getAllHangingPlantBlocks() {
-        return allHangingPlantBlocks;
-    }
-
-    public static ImmutableList<BlockHangingCreepingPlantTFCF> getAllHangingCreepingPlantBlocks() {
-        return allHangingCreepingPlantBlocks;
-    }
-
-    public static ImmutableList<BlockCreepingPlantTFCF> getAllCreepingPlantBlocks() {
-        return allCreepingPlantBlocks;
-    }
-
-    public static ImmutableList<BlockTallGrassWater> getAllTallGrassWaterBlocks() {
-        return allTallGrassWaterBlocks;
-    }
-
-    public static ImmutableList<BlockShortGrassTFCF> getAllShortGrassBlocks() {
-        return allShortGrassBlocks;
-    }
-
-    public static ImmutableList<BlockTallGrassTFCF> getAllTallGrassBlocks() {
-        return allTallGrassBlocks;
-    }
-
-    public static ImmutableList<BlockPlantDummy1> getAllStandardBlocks() {
-        return allStandardBlocks;
-    }
-
-    public static ImmutableList<BlockCaveMushroom> getAllMushroomPlantBlocks() {
-        return allMushroomPlantBlocks;
-    }
-
-    public static ImmutableList<BlockPebbleWater> getAllPebbleWater() {
-        return allPebbleWater;
-    }
-
-    public static ImmutableList<BlockLightstone> getAllLightstoneBlocks() {
-        return allLightstoneBlocks;
-    }
-
-    public static ImmutableList<BlockJoshuaTreeFlower> getAllJoshuaTreeFlowerBlocks() {
-        return allJoshuaTreeFlowerBlocks;
-    }
-
-    public static ImmutableList<BlockJoshuaTreeLog> getAllJoshuaTreeLogBlocks() {
-        return allJoshuaTreeLogBlocks;
-    }
-
-    public static ImmutableList<BlockJoshuaTreeSapling> getAllJoshuaTreeSaplingBlocks() {
-        return allJoshuaTreeSaplingBlocks;
     }
 
     /*public static ImmutableList<MultiBlockBase> getAllMultiBlocks()

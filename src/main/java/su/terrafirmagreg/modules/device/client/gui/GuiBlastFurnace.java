@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.device.client.gui;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
@@ -36,9 +35,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
 
     public GuiBlastFurnace(Container container, InventoryPlayer playerInv, TileBlastFurnace tile) {
         super(container, playerInv, tile, BACKGROUND);
-        ScaledResolution sr = new ScaledResolution(mc);
-        scaledWidth = sr.getScaledWidth();
-        scaledHeight = sr.getScaledHeight();
+
     }
 
     @Override
@@ -47,6 +44,9 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
 
         readTemperatures();
         lastBurningTicks = tile.getBurnTicksLeft();
+        ScaledResolution sr = new ScaledResolution(mc);
+        scaledWidth = sr.getScaledWidth();
+        scaledHeight = sr.getScaledHeight();
 
         // Отображение текущей температуры
         int temperature = (int) (51 * tile.getField(TileBlastFurnace.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
@@ -128,7 +128,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
                 sum += tempList.get(i);
                 if ((i + 1) % 4 == 0) {
                     sum /= 4;
-                    Minecraft.getMinecraft().fontRenderer.drawString(
+                    fontRenderer.drawString(
                             "Layer " + ((i + 1) / 4) + ": " + getLayerTemp(sum),
                             scaledWidth / 2 - 205,
                             scaledHeight / 2 - 80 + 11 * ((i + 1) / 4 - 1),
@@ -136,7 +136,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
                     sum = 0;
                 } else if (i + 1 == tempList.size()) {
                     sum /= (i + 1) % 4;
-                    Minecraft.getMinecraft().fontRenderer.drawString(
+                    fontRenderer.drawString(
                             "Layer " + ((i + 1) / 4 + 1) + ": " + getLayerTemp(sum),
                             scaledWidth / 2 - 205,
                             scaledHeight / 2 - 80 + 11 * ((i + 1) / 4),

@@ -25,7 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.ImmutableList;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -80,7 +79,6 @@ public class ItemDebug extends BaseItem {
         NBTTagCompound nbt = stack.getTagCompound();
 
         if (nbt == null) NBTUtils.resetNBT(stack);
-        assert nbt != null;
         int mode = nbt.getInteger("mode");
         switch (mode) {
             case 0: {

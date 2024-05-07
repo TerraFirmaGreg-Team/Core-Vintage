@@ -63,8 +63,7 @@ public class ClientProxy extends CommonProxy {
         {
             if (worldIn != null && pos != null) {
                 TileEntity tileEntity = worldIn.getTileEntity(pos);
-                if (tileEntity instanceof TileEntityGrindstone) {
-                    TileEntityGrindstone te = (TileEntityGrindstone) tileEntity;
+                if (tileEntity instanceof TileEntityGrindstone te) {
                     ItemStack outputStack = te.getStackInSlot(1);
                     ItemStack secondaryStack = te.getStackInSlot(2);
                     if (outputStack.getCount() < secondaryStack.getCount())

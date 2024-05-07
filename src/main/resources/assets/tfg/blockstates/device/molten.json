@@ -3,7 +3,7 @@
   "defaults": {
     "model": "tfg:device/molten/1",
     "textures": {
-      "all": "tfg:blocks/device/molten/off"
+      "all": "tfg:blocks/device/molten/lit"
     }
   },
   "variants": {
@@ -29,11 +29,12 @@
     },
     "lit": {
       "true": {
-        "textures": {
-          "all": "tfg:blocks/device/molten/lit"
-        }
       },
-      "false": {}
+      "false": {
+        "textures": {
+          "all": "tfg:blocks/device/molten/off"
+        }
+      }
     }
   }
 }

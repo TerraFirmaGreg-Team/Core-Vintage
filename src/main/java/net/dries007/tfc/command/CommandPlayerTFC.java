@@ -45,8 +45,7 @@ public class CommandPlayerTFC extends CommandBase {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
+        if (sender.getCommandSenderEntity() instanceof EntityPlayer player) {
             if (args.length < 1) {
                 throw new WrongUsageException("tfc.command.playertfc.usage_expected_first_argument");
             }

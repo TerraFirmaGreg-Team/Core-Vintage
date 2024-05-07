@@ -1,14 +1,14 @@
 {
     "animation": {
-        "interpolate": true,
-        "frametime": 40
+        "frametime": 10,
+        "interpolate": true
     },
     "ctm": {
         "ctm_version": 1,
         "layer": "BLOOM",
         "gregtech": true,
         "extra": {
-            "light": 4
+            "light": 5
         }
     }
 }

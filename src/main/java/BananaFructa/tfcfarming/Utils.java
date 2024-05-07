@@ -88,21 +88,16 @@ public class Utils {
         }
     }
 
-    public static void drawTooltipBox(int tooltipX, int tooltipY, int width, int height, int backgroundColor, int borderColorStart,
-                                      int borderColorEnd) {
+    public static void drawTooltipBox(int tooltipX, int tooltipY, int width, int height, int backgroundColor, int borderColorStart, int borderColorEnd) {
         GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 4, tooltipX + width + 3, tooltipY - 3, backgroundColor, backgroundColor);
-        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 3, tooltipX + width + 3, tooltipY + height + 4, backgroundColor,
-                backgroundColor);
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 3, tooltipX + width + 3, tooltipY + height + 4, backgroundColor, backgroundColor);
         GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3, tooltipX + width + 3, tooltipY + height + 3, backgroundColor, backgroundColor);
         GuiUtils.drawGradientRect(0, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + height + 3, backgroundColor, backgroundColor);
-        GuiUtils.drawGradientRect(0, tooltipX + width + 3, tooltipY - 3, tooltipX + width + 4, tooltipY + height + 3, backgroundColor,
-                backgroundColor);
+        GuiUtils.drawGradientRect(0, tooltipX + width + 3, tooltipY - 3, tooltipX + width + 4, tooltipY + height + 3, backgroundColor, backgroundColor);
         GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3 + 1, tooltipX - 3 + 1, tooltipY + height + 3 - 1, borderColorStart, borderColorEnd);
-        GuiUtils.drawGradientRect(0, tooltipX + width + 2, tooltipY - 3 + 1, tooltipX + width + 3, tooltipY + height + 3 - 1, borderColorStart,
-                borderColorEnd);
+        GuiUtils.drawGradientRect(0, tooltipX + width + 2, tooltipY - 3 + 1, tooltipX + width + 3, tooltipY + height + 3 - 1, borderColorStart, borderColorEnd);
         GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3, tooltipX + width + 3, tooltipY - 3 + 1, borderColorStart, borderColorStart);
-        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 2, tooltipX + width + 3, tooltipY + height + 3, borderColorEnd,
-                borderColorEnd);
+        GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 2, tooltipX + width + 3, tooltipY + height + 3, borderColorEnd, borderColorEnd);
     }
 
     public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {

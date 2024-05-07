@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.event;
 
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.soil.ModuleSoil;
 import su.terrafirmagreg.modules.soil.ModuleSoilConfig;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
@@ -54,10 +55,10 @@ public class PathEventHandler {
                 player_speed = player_speed_current;
             }
 
-            if (ModuleCoreConfig.MISC.DEBUG) {
+            if (ModuleCoreConfig.MISC.DEBUG.enable) {
                 if (player_debug_cooldown == 0) {
-                    System.out.println("[Player] Random: " + player_random);
-                    System.out.println("[Player] Speed: " + player_speed);
+                    ModuleSoil.LOGGER.info("[Player] Random: " + player_random);
+                    ModuleSoil.LOGGER.info("[Player] Speed: " + player_speed);
                     player_debug_cooldown = 100;
                 } else {
                     player_debug_cooldown--;
@@ -72,8 +73,7 @@ public class PathEventHandler {
                     if (ModuleSoilConfig.BLOCKS.PATH.DESTROY_VEGETATION) {
                         BlockPos upPos = posPlayer.up();
                         Material upMaterial = world.getBlockState(upPos).getMaterial();
-                        if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos)
-                                .getBlock() instanceof BlockPlacedItemFlat) {
+                        if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat) {
                             world.destroyBlock(upPos, true);
                         }
                     }
@@ -103,10 +103,10 @@ public class PathEventHandler {
                 double mob_random = Math.random() * 1000.0D + 1.0D;
                 double mob_speed = Math.sqrt(entity.motionX * entity.motionX + entity.motionY * entity.motionY + entity.motionZ * entity.motionZ);
 
-                if (ModuleCoreConfig.MISC.DEBUG) {
+                if (ModuleCoreConfig.MISC.DEBUG.enable) {
                     if (mob_debug_cooldown == 0) {
-                        System.out.println("[Mob] Random: " + mob_random);
-                        System.out.println("[Mob] Speed: " + mob_speed);
+                        ModuleSoil.LOGGER.info("[Mob] Random: " + mob_random);
+                        ModuleSoil.LOGGER.info("[Mob] Speed: " + mob_speed);
                         mob_debug_cooldown = 100;
                     } else {
                         mob_debug_cooldown--;

@@ -293,7 +293,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
             double moveX = targetVec.x - this.posX + lookX * this.spacing;
             double moveZ = targetVec.z - this.posZ + lookZ * this.spacing;
             this.motionX = moveX;
-            if (ModuleCoreConfig.MISC.DEBUG && this.pulling instanceof EntityPlayer && !this.world.isRemote) {
+            if (ModuleCoreConfig.MISC.DEBUG.enable && this.pulling instanceof EntityPlayer && !this.world.isRemote) {
                 System.out.println(this.pulling.fallDistance);
             }
             if (!this.pulling.onGround && this.pulling.fallDistance == 0.0F) {

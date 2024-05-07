@@ -17,27 +17,23 @@ public class ModuleCoreConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".core.blocks")
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Items settings")
-    @Config.LangKey("config." + MOD_ID + ".core.items")
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
-    @Config.Name("Misc")
-    @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".core.misc")
-    public static final MiscCategory MISC = new MiscCategory();
+    @Config.Name("Entities")
+    @Config.Comment("Entities settings")
+    public static final EntitiesCategory ENTITY = new EntitiesCategory();
 
-    static {
-        ConfigAnytime.register(ModuleCoreConfig.class);
-    }
+    @Config.Name("Misc")
+    @Config.Comment("Misc settings")
+    public static final MiscCategory MISC = new MiscCategory();
 
     public static final class BlocksCategory {
 
-        @Config.Comment("Barrel")
-        @Config.LangKey("config." + MOD_ID + ".core.blocks.puddle")
+        @Config.Comment("Puddle")
         public final Puddle PUDDLE = new Puddle();
 
         public static final class Puddle {
@@ -62,47 +58,71 @@ public class ModuleCoreConfig {
 
     public static final class ItemsCategory {
 
-        @Config.Comment("Chance for the fire starter to be successful")
+        @Config.Comment("Chance for the fire starter to be successful. Default = 0.5")
         @Config.RangeDouble(min = 0d, max = 1d)
-        @Config.LangKey("config." + MOD_ID + ".core.items.fireStarterChance")
         public double fireStarterChance = 0.5;
+
+    }
+
+    public static final class EntitiesCategory {
+
+        @Config.Comment("Player settings")
+        public final Player PLAYER = new Player();
+
+        public static final class Player {
+
+            @Config.RequiresMcRestart
+            @Config.Comment("The hunger value with which a player respawns. Default = 100")
+            @Config.RangeInt(min = 0, max = 100)
+            public int respawnHungerLevel = 100;
+
+            @Config.RequiresMcRestart
+            @Config.Comment("The thirst value with which a player respawns. Default = 100")
+            @Config.RangeInt(min = 0, max = 100)
+            public int respawnThirstLevel = 100;
+        }
 
     }
 
     public static final class MiscCategory {
 
         public final Weight WEIGHT = new Weight();
-        @Config.Name("Debug Mode")
-        @Config.Comment("When enabled, prints debug values to console")
-        public boolean DEBUG = false;
+        public final Debug DEBUG = new Debug();
 
         public static final class Weight {
 
             @Config.RequiresMcRestart
             @Config.Comment("Stack size of Very Heavy items. I wouldn't change this one. Default = 1")
-            @Config.LangKey("config." + MOD_ID + ".core.misc.weight.very_heavy")
-            public int VERY_HEAVY = 1;
+            public int veryHeavy = 1;
 
             @Config.RequiresMcRestart
             @Config.Comment("Stack size of Heavy items. Default = 4")
-            @Config.LangKey("config." + MOD_ID + ".core.misc.weight.heavy")
-            public int HEAVY = 4;
+            public int heavy = 4;
 
             @Config.RequiresMcRestart
             @Config.Comment("Stack size of Medium items. Default = 16")
-            @Config.LangKey("config." + MOD_ID + ".core.misc.weight.medium")
-            public int MEDIUM = 16;
+            public int medium = 16;
 
             @Config.RequiresMcRestart
             @Config.Comment("Stack size of Light items. Default = 32")
-            @Config.LangKey("config." + MOD_ID + ".core.misc.weight.light")
-            public int LIGHT = 32;
+            public int light = 32;
 
             @Config.RequiresMcRestart
             @Config.Comment("Stack size of Very Light items. Default = 64")
-            @Config.LangKey("config." + MOD_ID + ".core.misc.weight.very_light")
-            public int VERY_LIGHT = 64;
+            public int veryLight = 64;
         }
+
+        public static final class Debug {
+
+            @Config.Name("Debug Mode")
+            @Config.Comment("When enabled, prints debug values to console. Activates some extra wand features. Enables extra item tooltips.")
+            public boolean enable = false;
+        }
+    }
+
+    //@formatter:off
+    static {
+        ConfigAnytime.register(ModuleCoreConfig.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -116,4 +136,5 @@ public class ModuleCoreConfig {
             }
         }
     }
+
 }

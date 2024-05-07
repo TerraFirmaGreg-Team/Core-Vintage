@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.api.capabilities.egg.ProviderEgg;
 import su.terrafirmagreg.modules.core.api.capabilities.sharpness.CapabilitySharpness;
@@ -91,7 +92,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
-import BananaFructa.deathdairydespair.Config;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
@@ -586,17 +586,15 @@ public final class CommonEventHandler {
             // ==========================================
             // Loads the saved player food stats
 
-            if (player.getFoodStats() instanceof IFoodStatsTFC) {
+            if (player.getFoodStats() instanceof FoodStatsTFC foodStatsTFC) {
                 MinecraftServer server = player.world.getMinecraftServer();
                 if (server != null) {
                     NBTTagCompound nbt = server.getPlayerList().getPlayerNBT(player);
                     if (nbt != null) {
                         player.getFoodStats().readNBT(nbt);
 
-                        FoodStatsTFC tfc = (FoodStatsTFC) player.getFoodStats();
-
-                        tfc.setFoodLevel(Config.respawnHungerLevel / 5);
-                        tfc.setThirst(Config.respawnThirstLevel); // Why isn't this also on an 0 - 20 interval ?
+                        foodStatsTFC.setFoodLevel(ModuleCoreConfig.ENTITY.PLAYER.respawnHungerLevel / 5);
+                        foodStatsTFC.setThirst(ModuleCoreConfig.ENTITY.PLAYER.respawnThirstLevel); // Why isn't this also on an 0 - 20 interval ?
                     }
                 }
             }
@@ -605,7 +603,6 @@ public final class CommonEventHandler {
             // Skills / Player data
             IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
             if (cap != null) {
-
                 TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
         }

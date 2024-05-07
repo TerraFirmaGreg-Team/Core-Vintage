@@ -7,11 +7,11 @@ import lombok.Getter;
 
 @Getter
 public enum Weight {
-    VERY_LIGHT("very_light", ModuleCoreConfig.MISC.WEIGHT.VERY_LIGHT),
-    LIGHT("light", ModuleCoreConfig.MISC.WEIGHT.LIGHT),
-    MEDIUM("medium", ModuleCoreConfig.MISC.WEIGHT.MEDIUM),
-    HEAVY("heavy", ModuleCoreConfig.MISC.WEIGHT.HEAVY),
-    VERY_HEAVY("very_heavy", ModuleCoreConfig.MISC.WEIGHT.VERY_HEAVY);
+    VERY_LIGHT("very_light", ModuleCoreConfig.MISC.WEIGHT.veryLight),
+    LIGHT("light", ModuleCoreConfig.MISC.WEIGHT.light),
+    MEDIUM("medium", ModuleCoreConfig.MISC.WEIGHT.medium),
+    HEAVY("heavy", ModuleCoreConfig.MISC.WEIGHT.heavy),
+    VERY_HEAVY("very_heavy", ModuleCoreConfig.MISC.WEIGHT.veryHeavy);
 
     public final int stackSize;
     public final String name;

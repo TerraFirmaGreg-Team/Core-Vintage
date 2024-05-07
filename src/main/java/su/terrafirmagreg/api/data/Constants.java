@@ -50,7 +50,6 @@ public final class Constants {
     public static final String MODID_FF = "floraefixes";
     public static final String MODID_TFCFARMING = "tfcfarming";
     public static final String MODID_TFCPASSINGDAYS = "tfcpassingdays";
-    public static final String MODID_TFCTOWERHEAT = "tfctowerheat";
 
     public static final String FLUIDLOGGED = "fluidlogged_api";
 

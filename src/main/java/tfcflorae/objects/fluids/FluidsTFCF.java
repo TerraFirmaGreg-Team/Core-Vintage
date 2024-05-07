@@ -21,6 +21,8 @@ import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public final class FluidsTFCF {
@@ -141,51 +143,24 @@ public final class FluidsTFCF {
     public static FluidWrapper JUICE_PURPLE_GRAPE;
     public static FluidWrapper JUICE_BARREL_CACTUS;
 
+    @Getter
     private static ImmutableSet<FluidWrapper> allFiniteFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allFermentedAlcoholsFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allAlcoholsFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allBeerFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allTeaFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allCoffeeFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allJuiceBerryFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allJuiceFruitFluids;
+    @Getter
     private static ImmutableSet<FluidWrapper> allMiscFluids;
-
-    public static ImmutableSet<FluidWrapper> getAllFiniteFluids() {
-        return allFiniteFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllFermentedAlcoholsFluids() {
-        return allFermentedAlcoholsFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllAlcoholsFluids() {
-        return allAlcoholsFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllBeerFluids() {
-        return allBeerFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllTeaFluids() {
-        return allTeaFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllCoffeeFluids() {
-        return allCoffeeFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllJuiceBerryFluids() {
-        return allJuiceBerryFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllJuiceFruitFluids() {
-        return allJuiceFruitFluids;
-    }
-
-    public static ImmutableSet<FluidWrapper> getAllMiscFluids() {
-        return allMiscFluids;
-    }
 
     public static void registerFluids() {
         DrinkableProperty milkProperty = player -> {

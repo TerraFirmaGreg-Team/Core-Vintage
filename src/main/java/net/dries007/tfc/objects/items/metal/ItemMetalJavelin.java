@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -19,9 +21,6 @@ import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.objects.items.ItemQuiver;
 
 import org.jetbrains.annotations.NotNull;
-
-
-import su.terrafirmagreg.api.lib.MathConstants;
 
 public class ItemMetalJavelin extends ItemMetalTool {
 
@@ -59,8 +58,7 @@ public class ItemMetalJavelin extends ItemMetalTool {
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-        if (entityLiving instanceof EntityPlayer && type == Metal.ItemType.JAVELIN) {
-            EntityPlayer player = (EntityPlayer) entityLiving;
+        if (entityLiving instanceof EntityPlayer player && type == Metal.ItemType.JAVELIN) {
             int charge = this.getMaxItemUseDuration(stack) - timeLeft;
             if (charge > 5) {
                 float f = ItemBow.getArrowVelocity(charge); //Same charge time as bow
@@ -75,8 +73,7 @@ public class ItemMetalJavelin extends ItemMetalTool {
                     worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
                             1.0F / (MathConstants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                 }
-                if (!((EntityPlayer) entityLiving).isCreative())
-                    player.inventory.deleteStack(stack);
+                if (!((EntityPlayer) entityLiving).isCreative()) player.inventory.deleteStack(stack);
                 player.addStat(StatList.getObjectUseStats(this));
                 ItemQuiver.replenishJavelin(player.inventory); //Use a quiver if possible
             }

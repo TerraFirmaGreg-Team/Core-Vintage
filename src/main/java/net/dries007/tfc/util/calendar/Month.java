@@ -23,6 +23,7 @@ public enum Month {
             .mapToDouble(Month::getTemperatureModifier)
             .average()
             .orElse(0);
+    
     private final float temperatureModifier;
 
     Month(float temperatureModifier) {

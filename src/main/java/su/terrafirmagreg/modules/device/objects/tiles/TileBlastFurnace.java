@@ -43,8 +43,6 @@ import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +52,13 @@ public class TileBlastFurnace extends TETickableInventory
         implements ITickable, ITileFields, IContainerProvider<ContainerBlastFurnace, GuiBlastFurnace> {
 
     public static final int SLOT_TUYERE = 0;
-    public static final int FIELD_TEMPERATURE = 0, FIELD_ORE = 1, FIELD_FUEL = 2, FIELD_MELT = 3, FIELD_ORE_UNITS = 4, CHIMNEY_LEVELS = 5;
+    public static final int FIELD_TEMPERATURE = 0;
+    public static final int FIELD_ORE = 1;
+    public static final int FIELD_FUEL = 2;
+    public static final int FIELD_MELT = 3;
+    public static final int FIELD_ORE_UNITS = 4;
+    public static final int CHIMNEY_LEVELS = 5;
+
     private static final int MAX_AIR_TICKS = ConfigTFC.Devices.BELLOWS.maxTicks;
 
     private final List<ItemStack> oreStacks = new ArrayList<>();
@@ -110,7 +114,6 @@ public class TileBlastFurnace extends TETickableInventory
     }
 
     @Override
-    @NotNull
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         NBTTagList ores = new NBTTagList();
         for (ItemStack stack : oreStacks) {
@@ -241,8 +244,8 @@ public class TileBlastFurnace extends TETickableInventory
                     temperature = CapabilityItemHeat.adjustToTargetTemperature(temperature, burnTemperature, airTicks, MAX_AIR_TICKS);
                     // Provide heat to blocks that are one block bellow AKA crucible
                     Block blockCrucible = world.getBlockState(pos.down()).getBlock();
-                    if (blockCrucible instanceof IHeatConsumerBlock) {
-                        ((IHeatConsumerBlock) blockCrucible).acceptHeat(world, pos.down(), temperature);
+                    if (blockCrucible instanceof IHeatConsumerBlock heatConsumerBlock) {
+                        heatConsumerBlock.acceptHeat(world, pos.down(), temperature);
                     }
                     if (!world.isRemote) {
                         oreStacks.removeIf(stack ->
@@ -336,8 +339,7 @@ public class TileBlastFurnace extends TETickableInventory
 
     public void debug() {
         TerraFirmaCraft.getLog().debug("Debugging Blast Furnace:");
-        TerraFirmaCraft.getLog()
-                .debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
+        TerraFirmaCraft.getLog().debug("Temp {} | Burn Temp {} | Fuel Ticks {}", temperature, burnTemperature, burnTicksLeft);
         TerraFirmaCraft.getLog().debug("Burning? {}", world.getBlockState(pos).getValue(LIT));
         int i = 0;
         for (ItemStack item : oreStacks) {
@@ -375,8 +377,7 @@ public class TileBlastFurnace extends TETickableInventory
 
     private void addItemsFromWorld() {
         EntityItem fluxEntity = null, oreEntity = null;
-        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.up(), pos.up()
-                .add(1, 5, 1)), EntitySelectors.IS_ALIVE);
+        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.up(), pos.up().add(1, 5, 1)), EntitySelectors.IS_ALIVE);
         for (EntityItem entityItem : items) {
             ItemStack stack = entityItem.getItem();
             BlastFurnaceRecipe recipe = BlastFurnaceRecipe.get(stack);

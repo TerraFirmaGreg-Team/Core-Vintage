@@ -83,8 +83,8 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
      * @param color        color of the metal when in fluid form. Used to auto generate a fluid texture. In future this may be used to color items as well
      * @param toolMetal    The tool material. Null if metal is not able to create tools
      */
-    public Metal(@NotNull ResourceLocation name, Tier tier, boolean usable, float specificHeat, float meltTemp, int color,
-                 @Nullable Item.ToolMaterial toolMetal, @Nullable IArmorMaterialTFC armorMetal) {
+    public Metal(@NotNull ResourceLocation name, Tier tier, boolean usable, float specificHeat, float meltTemp, int color, @Nullable Item.ToolMaterial toolMetal,
+                 @Nullable IArmorMaterialTFC armorMetal) {
         this.usable = usable;
         this.tier = tier;
         this.specificHeat = specificHeat;

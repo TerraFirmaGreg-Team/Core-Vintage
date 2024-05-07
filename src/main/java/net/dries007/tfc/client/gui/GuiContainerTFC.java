@@ -11,6 +11,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
+import org.jetbrains.annotations.NotNull;
+
 @SideOnly(Side.CLIENT)
 public class GuiContainerTFC extends GuiContainer {
 
@@ -41,7 +44,7 @@ public class GuiContainerTFC extends GuiContainer {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
-    protected void drawItemStack(ItemStack stack, int x, int y, String altText) {
+    protected void drawItemStack(ItemStack stack, int x, int y, @NotNull String altText) {
         this.zLevel = 200.0F;
         this.itemRender.zLevel = 200.0F;
         FontRenderer font = stack.getItem().getFontRenderer(stack);

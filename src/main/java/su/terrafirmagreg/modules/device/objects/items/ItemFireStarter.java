@@ -58,7 +58,7 @@ public class ItemFireStarter extends BaseItem {
         if (stack.isEmpty()) {
             return false;
         }
-        if (OreDictUtils.contains(stack, "fireStarter")) {
+        if (OreDictUtils.contains(stack, "firestarter")) {
             if (stack.getItem().isDamageable()) {
                 StackUtils.damageItem(stack);
             } else {
@@ -90,7 +90,7 @@ public class ItemFireStarter extends BaseItem {
 
     @Override
     public void onRegisterOreDict() {
-        OreDictUtils.register(this, "fireStarter");
+        OreDictUtils.register(this, "firestarter");
     }
 
     @Override

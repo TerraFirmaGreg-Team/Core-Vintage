@@ -34,10 +34,13 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 @MethodsReturnNonnullByDefault
 public class ItemMetalTool extends ItemMetal {
 
     public final ToolMaterial material;
+    @Getter
     private final double attackDamage;
     private final int areaOfEffect;
     private final float attackSpeed;
@@ -330,14 +333,10 @@ public class ItemMetalTool extends ItemMetal {
     @Override
     public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
         //This stops swords and other weapons breaking blocks in creative
-        switch (type) {
-            case SWORD:
-            case JAVELIN:
-            case MACE:
-                return false;
-            default:
-                return true;
-        }
+        return switch (type) {
+            case SWORD, JAVELIN, MACE -> false;
+            default -> true;
+        };
     }
 
     @Override
@@ -365,38 +364,17 @@ public class ItemMetalTool extends ItemMetal {
         return false;
     }
 
-    public double getAttackDamage() {return this.attackDamage;}
-
     private boolean isWeapon() {
-        switch (type) {
-            case AXE:
-            case SWORD:
-            case MACE:
-            case KNIFE:
-            case HAMMER:
-            case JAVELIN:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case AXE, SWORD, MACE, KNIFE, HAMMER, JAVELIN -> true;
+            default -> false;
+        };
     }
 
     private boolean isTool() {
-        switch (type) {
-            case PICK:
-            case HAMMER:
-            case KNIFE:
-            case AXE:
-            case HOE:
-            case SAW:
-            case CHISEL:
-            case SCYTHE:
-            case SHEARS:
-            case SHOVEL:
-            case PROPICK:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case PICK, HAMMER, KNIFE, AXE, HOE, SAW, CHISEL, SCYTHE, SHEARS, SHOVEL, PROPICK -> true;
+            default -> false;
+        };
     }
 }

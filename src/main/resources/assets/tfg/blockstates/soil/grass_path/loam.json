@@ -3,8 +3,8 @@
   "defaults": {
     "model": "tfg:soil/grass_path",
     "textures": {
-      "top": "tfg:blocks/soil/overlay/grass_path/top",
-      "overlay": "tfg:blocks/soil/overlay/grass_path/side",
+      "top": "tfg:blocks/soil/overlay/path/top",
+      "overlay": "tfg:blocks/soil/overlay/path/side",
       "all": "tfg:blocks/soil/dirt/loam"
     }
   },

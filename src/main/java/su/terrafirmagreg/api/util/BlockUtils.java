@@ -370,7 +370,7 @@ public final class BlockUtils {
         var block = current.getBlock();
         if (block instanceof BlockSoilPeatGrass) return true;
         if (block instanceof ISoilBlock soil) {
-            return isSoilBlockType(soil, GRASS, DRY_GRASS, CLAY_GRASS, SPARSE_GRASS, DRY_CLAY_GRASS);
+            return isSoilBlockType(soil, GRASS, DRY_GRASS, GRASS_CLAY, SPARSE_GRASS, DRY_GRASS_CLAY);
         }
         return false;
     }
@@ -390,8 +390,8 @@ public final class BlockUtils {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, PODZOL,
                     MYCELIUM, DIRT, COARSE_DIRT,
-                    SPARSE_GRASS, ROOTED_DIRT, CLAY,
-                    CLAY_GRASS, DRY_CLAY_GRASS);
+                    SPARSE_GRASS, ROOTED_DIRT, DIRT_CLAY,
+                    GRASS_CLAY, DRY_GRASS_CLAY);
         }
         return false;
     }
@@ -399,7 +399,7 @@ public final class BlockUtils {
     public static boolean isDryGrass(IBlockState current) {
         var block = current.getBlock();
         if (block instanceof ISoilBlock soil) {
-            return isSoilBlockType(soil, DRY_GRASS, DRY_CLAY_GRASS);
+            return isSoilBlockType(soil, DRY_GRASS, DRY_GRASS_CLAY);
         }
         return false;
     }
@@ -415,7 +415,7 @@ public final class BlockUtils {
     public static boolean isClay(IBlockState current) {
         var block = current.getBlock();
         if (block instanceof ISoilBlock soil) {
-            return isSoilBlockType(soil, CLAY, CLAY_GRASS, DRY_CLAY_GRASS);
+            return isSoilBlockType(soil, DIRT_CLAY, GRASS_CLAY, DRY_GRASS_CLAY);
         }
         return false;
     }
@@ -429,8 +429,8 @@ public final class BlockUtils {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, COARSE_DIRT,
                     SPARSE_GRASS, ROOTED_DIRT, DIRT,
-                    MUD, PODZOL, MYCELIUM, CLAY_GRASS,
-                    DRY_CLAY_GRASS, CLAY);
+                    MUD, PODZOL, MYCELIUM, GRASS_CLAY,
+                    DRY_GRASS_CLAY, DIRT_CLAY);
         }
         return false;
     }
@@ -441,7 +441,7 @@ public final class BlockUtils {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, SPARSE_GRASS,
                     DIRT, PODZOL, MYCELIUM,
-                    CLAY_GRASS, DRY_CLAY_GRASS, CLAY);
+                    GRASS_CLAY, DRY_GRASS_CLAY, DIRT_CLAY);
         }
         return false;
     }
@@ -455,8 +455,8 @@ public final class BlockUtils {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, COARSE_DIRT,
                     SPARSE_GRASS, ROOTED_DIRT, DIRT,
-                    MUD, PODZOL, MYCELIUM, CLAY_GRASS,
-                    DRY_CLAY_GRASS, CLAY);
+                    MUD, PODZOL, MYCELIUM, GRASS_CLAY,
+                    DRY_GRASS_CLAY, DIRT_CLAY);
         }
         return false;
     }

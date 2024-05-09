@@ -32,48 +32,48 @@ public class RockBlockVariantHandler {
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
                 .build();
 
-        STAIRS_COBBLE = new RockBlockVariant.Builder("stairs/cobble")
+        COBBLE_STAIRS = new RockBlockVariant.Builder("cobble/stairs")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockStairs(COBBLE, v, t))
                 .build();
 
-        SLAB_DOUBLE_COBBLE = new RockBlockVariant.Builder("slab_double/cobble")
+        COBBLE_SLAB_DOUBLE = new RockBlockVariant.Builder("cobble/slab_double")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockSlab.Double(COBBLE, v, t))
                 .build();
 
-        SLAB_COBBLE = new RockBlockVariant.Builder("slab/cobble")
+        COBBLE_SLAB = new RockBlockVariant.Builder("cobble/slab")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Half(COBBLE, SLAB_DOUBLE_COBBLE, v, t))
+                .setFactory((v, t) -> new BlockRockSlab.Half(COBBLE, COBBLE_SLAB_DOUBLE, v, t))
                 .build();
 
-        WALL_COBBLE = new RockBlockVariant.Builder("wall/cobble")
+        COBBLE_WALL = new RockBlockVariant.Builder("cobble/wall")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockWall(COBBLE, v, t))
                 .build();
 
-        MOSSY_COBBLE = new RockBlockVariant.Builder("mossy_cobble")
+        MOSSY_COBBLE = new RockBlockVariant.Builder("cobble_mossy")
                 .setBaseHardness(6f)
                 .setFactory(BlockRockMossy::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL_ROCK)
                 .build();
 
-        STAIRS_MOSSY_COBBLE = new RockBlockVariant.Builder("stairs/mossy_cobble")
+        MOSSY_COBBLE_STAIRS = new RockBlockVariant.Builder("cobble_mossy/stairs")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockStairs(MOSSY_COBBLE, v, t))
                 .build();
 
-        SLAB_DOUBLE_MOSSY_COBBLE = new RockBlockVariant.Builder("slab_double/mossy_cobble")
+        MOSSY_COBBLE_SLAB_DOUBLE = new RockBlockVariant.Builder("cobble_mossy/slab_double")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockSlab.Double(MOSSY_COBBLE, v, t))
                 .build();
 
-        SLAB_MOSSY_COBBLE = new RockBlockVariant.Builder("slab/mossy_cobble")
+        MOSSY_COBBLE_SLAB = new RockBlockVariant.Builder("cobble_mossy/slab")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Half(MOSSY_COBBLE, SLAB_DOUBLE_MOSSY_COBBLE, v, t))
+                .setFactory((v, t) -> new BlockRockSlab.Half(MOSSY_COBBLE, MOSSY_COBBLE_SLAB_DOUBLE, v, t))
                 .build();
 
-        WALL_MOSSY_COBBLE = new RockBlockVariant.Builder("wall/mossy_cobble")
+        MOSSY_COBBLE_WALL = new RockBlockVariant.Builder("cobble_mossy/wall")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockWall(MOSSY_COBBLE, v, t))
                 .build();
@@ -85,76 +85,51 @@ public class RockBlockVariantHandler {
                 .setFallingSpecification(COLLAPSABLE_ROCK)
                 .build();
 
-        STAIRS_RAW = new RockBlockVariant.Builder("stairs/raw")
+        RAW_STAIRS = new RockBlockVariant.Builder("raw/stairs")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockStairs(RAW, v, t))
                 .build();
 
-        SLAB_DOUBLE_RAW = new RockBlockVariant.Builder("slab_double/raw")
+        RAW_SLAB_DOUBLE = new RockBlockVariant.Builder("raw/slab_double")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockSlab.Double(RAW, v, t))
                 .build();
 
-        SLAB_RAW = new RockBlockVariant.Builder("slab/raw")
+        RAW_SLAB = new RockBlockVariant.Builder("raw/slab")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Half(RAW, SLAB_DOUBLE_RAW, v, t))
+                .setFactory((v, t) -> new BlockRockSlab.Half(RAW, RAW_SLAB_DOUBLE, v, t))
                 .build();
 
-        WALL_RAW = new RockBlockVariant.Builder("wall/raw")
+        RAW_WALL = new RockBlockVariant.Builder("raw/wall")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockWall(RAW, v, t))
                 .build();
 
-        MOSSY_RAW = new RockBlockVariant.Builder("mossy_raw")
+        MOSSY_RAW = new RockBlockVariant.Builder("raw_mossy")
                 .setBaseHardness(6f)
                 .setFactory(BlockRockRaw::new)
                 .setStoneType()
                 .setFallingSpecification(COLLAPSABLE_ROCK)
                 .build();
 
-        STAIRS_MOSSY_RAW = new RockBlockVariant.Builder("stairs/mossy_raw")
+        MOSSY_RAW_STAIRS = new RockBlockVariant.Builder("raw_mossy/stairs")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockStairs(MOSSY_RAW, v, t))
                 .build();
 
-        SLAB_DOUBLE_MOSSY_RAW = new RockBlockVariant.Builder("slab_double/mossy_raw")
+        MOSSY_RAW_SLAB_DOUBLE = new RockBlockVariant.Builder("raw_mossy/slab_double")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockSlab.Double(MOSSY_RAW, v, t))
                 .build();
 
-        SLAB_MOSSY_RAW = new RockBlockVariant.Builder("slab/mossy_raw")
+        MOSSY_RAW_SLAB = new RockBlockVariant.Builder("raw_mossy/slab")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Half(MOSSY_RAW, SLAB_DOUBLE_MOSSY_RAW, v, t))
+                .setFactory((v, t) -> new BlockRockSlab.Half(MOSSY_RAW, MOSSY_RAW_SLAB_DOUBLE, v, t))
                 .build();
 
-        WALL_MOSSY_RAW = new RockBlockVariant.Builder("wall/mossy_raw")
+        MOSSY_RAW_WALL = new RockBlockVariant.Builder("raw_mossy/wall")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockWall(MOSSY_RAW, v, t))
-                .build();
-
-        SMOOTH = new RockBlockVariant.Builder("smooth")
-                .setBaseHardness(6f)
-                .setFactory(BlockRockSmooth::new)
-                .build();
-
-        STAIRS_SMOOTH = new RockBlockVariant.Builder("stairs/smooth")
-                .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockStairs(SMOOTH, v, t))
-                .build();
-
-        SLAB_DOUBLE_SMOOTH = new RockBlockVariant.Builder("slab_double/smooth")
-                .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Double(SMOOTH, v, t))
-                .build();
-
-        SLAB_SMOOTH = new RockBlockVariant.Builder("slab/smooth")
-                .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Half(SMOOTH, SLAB_DOUBLE_SMOOTH, v, t))
-                .build();
-
-        WALL_SMOOTH = new RockBlockVariant.Builder("wall/smooth")
-                .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockWall(SMOOTH, v, t))
                 .build();
 
         BRICKS = new RockBlockVariant.Builder("bricks")
@@ -162,52 +137,77 @@ public class RockBlockVariantHandler {
                 .setFactory(BlockRockBricks::new)
                 .build();
 
-        STAIRS_BRICK = new RockBlockVariant.Builder("stairs/bricks")
+        BRICKS_STAIRS = new RockBlockVariant.Builder("bricks/stairs")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockStairs(BRICKS, v, t))
                 .build();
 
-        SLAB_DOUBLE_BRICK = new RockBlockVariant.Builder("slab_double/bricks")
+        BRICKS_SLAB_DOUBLE = new RockBlockVariant.Builder("bricks/slab_double")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockSlab.Double(BRICKS, v, t))
                 .build();
 
-        SLAB_BRICK = new RockBlockVariant.Builder("slab/bricks")
+        BRICKS_SLAB = new RockBlockVariant.Builder("bricks/slab")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Half(BRICKS, SLAB_DOUBLE_BRICK, v, t))
+                .setFactory((v, t) -> new BlockRockSlab.Half(BRICKS, BRICKS_SLAB_DOUBLE, v, t))
                 .build();
 
-        WALL_BRICK = new RockBlockVariant.Builder("wall/bricks")
+        BRICKS_WALL = new RockBlockVariant.Builder("bricks/wall")
                 .setBaseHardness(6f)
                 .setFactory((v, t) -> new BlockRockWall(BRICKS, v, t))
                 .build();
 
-        MOSSY_BRICKS = new RockBlockVariant.Builder("mossy_bricks")
+        BRICKS_MOSSY = new RockBlockVariant.Builder("bricks_mossy")
                 .setBaseHardness(6f)
                 .setFactory(BlockRockMossy::new)
                 .build();
 
-        STAIRS_MOSSY_BRICKS = new RockBlockVariant.Builder("stairs/mossy_bricks")
+        BRICKS_MOSSY_STAIRS = new RockBlockVariant.Builder("bricks_mossy/stairs")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockStairs(MOSSY_BRICKS, v, t))
+                .setFactory((v, t) -> new BlockRockStairs(BRICKS_MOSSY, v, t))
                 .build();
 
-        SLAB_DOUBLE_MOSSY_BRICKS = new RockBlockVariant.Builder("slab_double/mossy_bricks")
+        BRICKS_MOSSY_SLAB_DOUBLE = new RockBlockVariant.Builder("bricks_mossy/slab_double")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Double(MOSSY_BRICKS, v, t))
+                .setFactory((v, t) -> new BlockRockSlab.Double(BRICKS_MOSSY, v, t))
                 .build();
 
-        SLAB_MOSSY_BRICKS = new RockBlockVariant.Builder("slab/mossy_bricks")
+        BRICKS_MOSSY_SLAB = new RockBlockVariant.Builder("bricks_mossy/slab")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockSlab.Half(MOSSY_BRICKS, SLAB_DOUBLE_MOSSY_BRICKS, v, t))
+                .setFactory((v, t) -> new BlockRockSlab.Half(BRICKS_MOSSY, BRICKS_MOSSY_SLAB_DOUBLE, v, t))
                 .build();
 
-        WALL_MOSSY_BRICKS = new RockBlockVariant.Builder("wall/mossy_bricks")
+        BRICKS_MOSSY_WALL = new RockBlockVariant.Builder("bricks_mossy/wall")
                 .setBaseHardness(6f)
-                .setFactory((v, t) -> new BlockRockWall(MOSSY_BRICKS, v, t))
+                .setFactory((v, t) -> new BlockRockWall(BRICKS_MOSSY, v, t))
                 .build();
 
-        CRACKED_BRICKS = new RockBlockVariant.Builder("cracked_bricks")
+        SMOOTH = new RockBlockVariant.Builder("smooth")
+                .setBaseHardness(6f)
+                .setFactory(BlockRockSmooth::new)
+                .build();
+
+        SMOOTH_STAIRS = new RockBlockVariant.Builder("smooth/stairs")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockStairs(SMOOTH, v, t))
+                .build();
+
+        SMOOTH_SLAB_DOUBLE = new RockBlockVariant.Builder("smooth/slab_double")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockSlab.Double(SMOOTH, v, t))
+                .build();
+
+        SMOOTH_SLAB = new RockBlockVariant.Builder("smooth/slab")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockSlab.Half(SMOOTH, SMOOTH_SLAB_DOUBLE, v, t))
+                .build();
+
+        SMOOTH_WALL = new RockBlockVariant.Builder("smooth/wall")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockWall(SMOOTH, v, t))
+                .build();
+
+        BRICKS_CRACKED = new RockBlockVariant.Builder("bricks_cracked")
                 .setBaseHardness(6f)
                 .setFactory(BlockRockBricks::new)
                 .build();

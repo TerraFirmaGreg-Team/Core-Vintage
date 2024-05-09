@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 
@@ -12,19 +12,23 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class BlockSoilDirt extends BlockSoil {
+public class BlockSoilGrassClay extends BlockSoilGrass {
 
-    public BlockSoilDirt(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilGrassClay(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
 
-        //        setDefaultState(getBlockState().getBaseState().withProperty(AGE, 0));
+        //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.DIRTLIKE);
+    }
 
-        //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+    @Override
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
+        return random.nextInt(4);
     }
 
     @NotNull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilItemVariants.PILE.get(getType());
+        return Items.CLAY_BALL;
     }
+
 }

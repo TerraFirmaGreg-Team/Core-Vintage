@@ -12,12 +12,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class BlockSoilClayGrass extends BlockSoilGrass {
+public class BlockSoilDirtClay extends BlockSoilDirt {
 
-    public BlockSoilClayGrass(SoilBlockVariant variant, SoilType type) {
+    public BlockSoilDirtClay(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
 
-        //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.DIRTLIKE);
+        //        DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.DIRTLIKE);
     }
 
     @Override
@@ -30,5 +30,4 @@ public class BlockSoilClayGrass extends BlockSoilGrass {
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.CLAY_BALL;
     }
-
 }

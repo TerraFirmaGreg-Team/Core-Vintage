@@ -1,9 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -35,9 +33,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -45,6 +40,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @Getter
+@SuppressWarnings("deprecation")
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulBlock {
 
     private final SoilBlockVariant variant;
@@ -60,7 +56,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
         setSoundType(SoundType.PLANT);
         setHardness(2.1F);
         setHarvestLevel("shovel", 0);
-        setDefaultState(this.blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
@@ -131,7 +127,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
                         if (BlockUtils.isDryGrass(usBlock.getDefaultState())) {
                             spreader = SoilBlockVariants.DRY_GRASS;
                         } else if (BlockUtils.isSparseGrass(usBlock.getDefaultState())) {
-                            spreader = SoilBlockVariants.DRY_CLAY_GRASS;
+                            spreader = SoilBlockVariants.DRY_GRASS_CLAY;
                         } else {
                             spreader = SoilBlockVariants.GRASS;
                         }
@@ -158,16 +154,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
             //                }
             //            }
         }
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
     }
 
     @Override
@@ -205,7 +191,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
         }
     }
 
-    @NotNull
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
@@ -218,13 +203,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
                 .withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
     }
 
-    @NotNull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY);
     }
 
-    @NotNull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return SoilItemVariants.PILE.get(type);
@@ -250,22 +233,19 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos,
-                                        EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return super.shouldSideBeRendered(blockState, world, pos, side);
     }
 
-    @NotNull
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
+    // TODO
     @Override
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
-                                   IPlantable plantable) {
+    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
         int beachDistance = 2;
 
         //        if (plantable instanceof BlockPlant) {

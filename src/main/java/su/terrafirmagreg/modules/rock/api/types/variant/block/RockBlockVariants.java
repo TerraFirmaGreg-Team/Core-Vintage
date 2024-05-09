@@ -3,48 +3,48 @@ package su.terrafirmagreg.modules.rock.api.types.variant.block;
 public class RockBlockVariants {
 
     public static RockBlockVariant COBBLE;
-    public static RockBlockVariant STAIRS_COBBLE;
-    public static RockBlockVariant SLAB_DOUBLE_COBBLE;
-    public static RockBlockVariant SLAB_COBBLE;
-    public static RockBlockVariant WALL_COBBLE;
+    public static RockBlockVariant COBBLE_STAIRS;
+    public static RockBlockVariant COBBLE_SLAB_DOUBLE;
+    public static RockBlockVariant COBBLE_SLAB;
+    public static RockBlockVariant COBBLE_WALL;
 
     public static RockBlockVariant MOSSY_COBBLE;
-    public static RockBlockVariant STAIRS_MOSSY_COBBLE;
-    public static RockBlockVariant SLAB_DOUBLE_MOSSY_COBBLE;
-    public static RockBlockVariant SLAB_MOSSY_COBBLE;
-    public static RockBlockVariant WALL_MOSSY_COBBLE;
+    public static RockBlockVariant MOSSY_COBBLE_STAIRS;
+    public static RockBlockVariant MOSSY_COBBLE_SLAB_DOUBLE;
+    public static RockBlockVariant MOSSY_COBBLE_SLAB;
+    public static RockBlockVariant MOSSY_COBBLE_WALL;
 
     public static RockBlockVariant RAW;
-    public static RockBlockVariant STAIRS_RAW;
-    public static RockBlockVariant SLAB_DOUBLE_RAW;
-    public static RockBlockVariant SLAB_RAW;
-    public static RockBlockVariant WALL_RAW;
+    public static RockBlockVariant RAW_STAIRS;
+    public static RockBlockVariant RAW_SLAB_DOUBLE;
+    public static RockBlockVariant RAW_SLAB;
+    public static RockBlockVariant RAW_WALL;
 
     public static RockBlockVariant MOSSY_RAW;
-    public static RockBlockVariant STAIRS_MOSSY_RAW;
-    public static RockBlockVariant SLAB_DOUBLE_MOSSY_RAW;
-    public static RockBlockVariant SLAB_MOSSY_RAW;
-    public static RockBlockVariant WALL_MOSSY_RAW;
-
-    public static RockBlockVariant SMOOTH;
-    public static RockBlockVariant STAIRS_SMOOTH;
-    public static RockBlockVariant SLAB_DOUBLE_SMOOTH;
-    public static RockBlockVariant SLAB_SMOOTH;
-    public static RockBlockVariant WALL_SMOOTH;
+    public static RockBlockVariant MOSSY_RAW_STAIRS;
+    public static RockBlockVariant MOSSY_RAW_SLAB_DOUBLE;
+    public static RockBlockVariant MOSSY_RAW_SLAB;
+    public static RockBlockVariant MOSSY_RAW_WALL;
 
     public static RockBlockVariant BRICKS;
-    public static RockBlockVariant STAIRS_BRICK;
-    public static RockBlockVariant SLAB_DOUBLE_BRICK;
-    public static RockBlockVariant SLAB_BRICK;
-    public static RockBlockVariant WALL_BRICK;
+    public static RockBlockVariant BRICKS_STAIRS;
+    public static RockBlockVariant BRICKS_SLAB_DOUBLE;
+    public static RockBlockVariant BRICKS_SLAB;
+    public static RockBlockVariant BRICKS_WALL;
 
-    public static RockBlockVariant MOSSY_BRICKS;
-    public static RockBlockVariant STAIRS_MOSSY_BRICKS;
-    public static RockBlockVariant SLAB_DOUBLE_MOSSY_BRICKS;
-    public static RockBlockVariant SLAB_MOSSY_BRICKS;
-    public static RockBlockVariant WALL_MOSSY_BRICKS;
+    public static RockBlockVariant BRICKS_MOSSY;
+    public static RockBlockVariant BRICKS_MOSSY_STAIRS;
+    public static RockBlockVariant BRICKS_MOSSY_SLAB_DOUBLE;
+    public static RockBlockVariant BRICKS_MOSSY_SLAB;
+    public static RockBlockVariant BRICKS_MOSSY_WALL;
 
-    public static RockBlockVariant CRACKED_BRICKS;
+    public static RockBlockVariant SMOOTH;
+    public static RockBlockVariant SMOOTH_STAIRS;
+    public static RockBlockVariant SMOOTH_SLAB_DOUBLE;
+    public static RockBlockVariant SMOOTH_SLAB;
+    public static RockBlockVariant SMOOTH_WALL;
+
+    public static RockBlockVariant BRICKS_CRACKED;
     public static RockBlockVariant CHISELED;
 
     public static RockBlockVariant GRAVEL;

@@ -90,7 +90,7 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
     public SoilBlockVariant getNonGrassVersion() {
         if (this == GRASS || this == DRY_GRASS || this == SPARSE_GRASS) return DIRT;
 
-        if (this == CLAY_GRASS) return CLAY;
+        if (this == GRASS_CLAY) return DIRT_CLAY;
 
         throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
     }
@@ -104,7 +104,7 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
     public SoilBlockVariant getGrassVersion(SoilBlockVariant spreader) {
         if (this.isGrass()) return this;
         if (this == DIRT) return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
-        if (this == CLAY) return spreader == DRY_CLAY_GRASS ? DRY_CLAY_GRASS : CLAY_GRASS;
+        if (this == DIRT_CLAY) return spreader == DRY_GRASS_CLAY ? DRY_GRASS_CLAY : GRASS_CLAY;
 
         throw new IllegalArgumentException(String.format("You cannot get grass from [%s] types.", this));
     }
@@ -115,7 +115,7 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
      * @return true, если вариант блока почвы с травой, иначе false.
      */
     public boolean isGrass() {
-        return this == GRASS || this == DRY_GRASS || this == CLAY_GRASS || this == DRY_CLAY_GRASS || this == PODZOL || this == MYCELIUM;
+        return this == GRASS || this == DRY_GRASS || this == GRASS_CLAY || this == DRY_GRASS_CLAY || this == PODZOL || this == MYCELIUM;
     }
 
     @Override

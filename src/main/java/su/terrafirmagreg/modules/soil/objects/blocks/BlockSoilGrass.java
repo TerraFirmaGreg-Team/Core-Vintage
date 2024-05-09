@@ -19,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
@@ -64,7 +65,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE)
-                .withProperty(SNOWY, Boolean.FALSE));
+                .withProperty(SNOWY, Boolean.FALSE)
+                .withProperty(CLAY, Boolean.FALSE));
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
@@ -134,8 +136,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
                     if (usBlock instanceof ISoilBlock) {
                         if (BlockUtils.isDryGrass(usBlock.getDefaultState())) {
                             spreader = SoilBlockVariants.DRY_GRASS;
-                        } else if (BlockUtils.isSparseGrass(usBlock.getDefaultState())) {
-                            spreader = SoilBlockVariants.DRY_GRASS_CLAY;
                         } else {
                             spreader = SoilBlockVariants.GRASS;
                         }
@@ -213,12 +213,17 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY);
+        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY, CLAY);
+    }
+
+    @Override
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
+        return state.getValue(CLAY) ? random.nextInt(4) : super.quantityDropped(state, fortune, random);
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilItemVariants.PILE.get(type);
+        return state.getValue(CLAY) ? Items.CLAY_BALL : SoilItemVariants.PILE.get(getType());
     }
 
     @Override

@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class BlockSoilMudBrick extends BlockSoil {
+public class BlockSoilMudBrick extends BlockSoilMud {
 
     public BlockSoilMudBrick(SoilBlockVariant variant, SoilType type) {
         super(variant, type);

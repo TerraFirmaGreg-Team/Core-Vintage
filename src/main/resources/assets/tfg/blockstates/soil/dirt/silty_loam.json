@@ -12,6 +12,15 @@
     ],
     "inventory": [
       {}
-    ]
+    ],
+    "clay": {
+      "true": {
+        "model": "tfg:soil/clay",
+        "textures": {
+          "clay": "tfg:blocks/soil/overlay/clay"
+        }
+      },
+      "false": {}
+    }
   }
 }

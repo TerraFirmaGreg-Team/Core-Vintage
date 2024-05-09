@@ -9,4 +9,9 @@ public class BlockSoilMud extends BlockSoil {
         super(variant, type);
 
     }
+
+    //    @Override
+    //    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    //        return SoilItemVariants.MUD.get(getType());
+    //    }
 }

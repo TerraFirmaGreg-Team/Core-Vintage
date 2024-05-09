@@ -18,6 +18,15 @@
     "inventory": [
       {}
     ],
+    "clay": {
+      "true": {
+        "model": "tfg:soil/clay_grass",
+        "textures": {
+          "clay": "tfg:blocks/soil/overlay/clay"
+        }
+      },
+      "false": {}
+    },
     "east": {
       "true": {
         "textures": {

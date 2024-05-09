@@ -12,13 +12,6 @@ public final class SoilBlockVariants {
     public static SoilBlockVariant ROOTED_DIRT;
     public static SoilBlockVariant DIRT;
 
-    public static SoilBlockVariant DIRT_CLAY;
-    public static SoilBlockVariant GRASS_CLAY;
-    public static SoilBlockVariant DRY_GRASS_CLAY;
-    public static SoilBlockVariant SPARSE_GRASS_CLAY;
-    public static SoilBlockVariant PODZOL_CLAY;
-    public static SoilBlockVariant MYCELIUM_CLAY;
-
     public static SoilBlockVariant FARMLAND;
     public static SoilBlockVariant GRASS_PATH;
 

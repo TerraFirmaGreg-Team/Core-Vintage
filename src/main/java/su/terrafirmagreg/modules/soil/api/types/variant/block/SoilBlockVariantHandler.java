@@ -1,12 +1,8 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilDirt;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilDirtClay;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilDryGrass;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilDryGrassClay;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilFarmland;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrass;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrassClay;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilGrassPath;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilMud;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilMudBrick;
@@ -16,7 +12,6 @@ import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilMudWall;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilMycelium;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPodzol;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilRootedDirt;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilSparseGrass;
 
 
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
@@ -33,12 +28,12 @@ public final class SoilBlockVariantHandler {
                 .build();
 
         DRY_GRASS = new SoilBlockVariant.Builder("dry_grass")
-                .setFactory(BlockSoilDryGrass::new)
+                .setFactory(BlockSoilGrass::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 
         SPARSE_GRASS = new SoilBlockVariant.Builder("sparse_grass")
-                .setFactory(BlockSoilSparseGrass::new)
+                .setFactory(BlockSoilGrass::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 
@@ -66,36 +61,6 @@ public final class SoilBlockVariantHandler {
                 .setFactory(BlockSoilRootedDirt::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
-
-        DIRT_CLAY = new SoilBlockVariant.Builder("dirt_clay")
-                .setFactory(BlockSoilDirtClay::new)
-                .setFallingSpecification(VERTICAL_ONLY_SOIL)
-                .build();
-
-        GRASS_CLAY = new SoilBlockVariant.Builder("grass_clay")
-                .setFactory(BlockSoilGrassClay::new)
-                .setFallingSpecification(VERTICAL_ONLY_SOIL)
-                .build();
-
-        DRY_GRASS_CLAY = new SoilBlockVariant.Builder("dry_grass_clay")
-                .setFactory(BlockSoilDryGrassClay::new)
-                .setFallingSpecification(VERTICAL_ONLY_SOIL)
-                .build();
-
-        //        SPARSE_GRASS_CLAY = new SoilBlockVariant.Builder("sparse_grass_clay")
-        //                .setFactory(BlockSoilSparseGrassClay::new)
-        //                .setFallingSpecification(VERTICAL_ONLY_SOIL)
-        //                .build();
-
-        //        PODZOL_CLAY = new SoilBlockVariant.Builder("podzol_clay")
-        //                .setFactory(BlockSoilGrassClay::new)
-        //                .setFallingSpecification(VERTICAL_ONLY_SOIL)
-        //                .build();
-        //
-        //        MYCELIUM_CLAY = new SoilBlockVariant.Builder("mycelium_clay")
-        //                .setFactory(BlockSoilGrassClay::new)
-        //                .setFallingSpecification(VERTICAL_ONLY_SOIL)
-        //                .build();
 
         FARMLAND = new SoilBlockVariant.Builder("farmland")
                 .setFactory(BlockSoilFarmland::new)

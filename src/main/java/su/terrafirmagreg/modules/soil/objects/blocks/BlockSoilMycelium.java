@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -12,6 +11,7 @@ import net.minecraft.block.BlockMycelium;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -45,19 +45,16 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
         FallingBlockManager.registerFallable(this, variant.getSpecification());
 
-        setDefaultState(this.blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)
                 .withProperty(SOUTH, Boolean.FALSE)
                 .withProperty(WEST, Boolean.FALSE)
-                .withProperty(SNOWY, Boolean.FALSE));
+                .withProperty(SNOWY, Boolean.FALSE)
+                .withProperty(CLAY, Boolean.FALSE)
+        );
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
     }
 
     @Override
@@ -81,13 +78,17 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
     @NotNull
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY);
+        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY, CLAY);
     }
 
-    @NotNull
+    @Override
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
+        return state.getValue(CLAY) ? random.nextInt(4) : super.quantityDropped(state, fortune, random);
+    }
+
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilItemVariants.PILE.get(type);
+        return state.getValue(CLAY) ? Items.CLAY_BALL : SoilItemVariants.PILE.get(getType());
     }
 
     @NotNull

@@ -12,6 +12,7 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -37,6 +38,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import static su.terrafirmagreg.api.data.Blockstates.CLAY;
 import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
@@ -346,6 +348,17 @@ public final class BlockUtils {
         return world.getBlockState(pos).getActualState(world, pos);
     }
 
+    /**
+     * Проверяет наличие определенного свойства у блока.
+     *
+     * @param blockState Состояние блока для проверки.
+     * @param property   Свойство для проверки.
+     * @return true, если свойство присутствует у блока, иначе false.
+     */
+    public static boolean hasProperty(IBlockState blockState, IProperty<?> property) {
+        return blockState.getPropertyKeys().contains(property);
+    }
+
     public static boolean isSoilBlockType(ISoilBlock soilBlock, SoilBlockVariant... variants) {
         var blockVariant = soilBlock.getVariant();
         for (var variant : variants) {
@@ -370,7 +383,7 @@ public final class BlockUtils {
         var block = current.getBlock();
         if (block instanceof BlockSoilPeatGrass) return true;
         if (block instanceof ISoilBlock soil) {
-            return isSoilBlockType(soil, GRASS, DRY_GRASS, GRASS_CLAY, SPARSE_GRASS, DRY_GRASS_CLAY);
+            return isSoilBlockType(soil, GRASS, DRY_GRASS, SPARSE_GRASS);
         }
         return false;
     }
@@ -390,8 +403,7 @@ public final class BlockUtils {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, PODZOL,
                     MYCELIUM, DIRT, COARSE_DIRT,
-                    SPARSE_GRASS, ROOTED_DIRT, DIRT_CLAY,
-                    GRASS_CLAY, DRY_GRASS_CLAY);
+                    SPARSE_GRASS, ROOTED_DIRT);
         }
         return false;
     }
@@ -399,7 +411,7 @@ public final class BlockUtils {
     public static boolean isDryGrass(IBlockState current) {
         var block = current.getBlock();
         if (block instanceof ISoilBlock soil) {
-            return isSoilBlockType(soil, DRY_GRASS, DRY_GRASS_CLAY);
+            return isSoilBlockType(soil, DRY_GRASS);
         }
         return false;
     }
@@ -413,11 +425,7 @@ public final class BlockUtils {
     }
 
     public static boolean isClay(IBlockState current) {
-        var block = current.getBlock();
-        if (block instanceof ISoilBlock soil) {
-            return isSoilBlockType(soil, DIRT_CLAY, GRASS_CLAY, DRY_GRASS_CLAY);
-        }
-        return false;
+        return hasProperty(current, CLAY);
     }
 
     public static boolean isGround(IBlockState current) {
@@ -429,8 +437,7 @@ public final class BlockUtils {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, COARSE_DIRT,
                     SPARSE_GRASS, ROOTED_DIRT, DIRT,
-                    MUD, PODZOL, MYCELIUM, GRASS_CLAY,
-                    DRY_GRASS_CLAY, DIRT_CLAY);
+                    MUD, PODZOL, MYCELIUM);
         }
         return false;
     }
@@ -440,8 +447,7 @@ public final class BlockUtils {
         if (block instanceof ISoilBlock soil) {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, SPARSE_GRASS,
-                    DIRT, PODZOL, MYCELIUM,
-                    GRASS_CLAY, DRY_GRASS_CLAY, DIRT_CLAY);
+                    DIRT, PODZOL, MYCELIUM);
         }
         return false;
     }
@@ -455,8 +461,7 @@ public final class BlockUtils {
             return isSoilBlockType(soil,
                     GRASS, DRY_GRASS, COARSE_DIRT,
                     SPARSE_GRASS, ROOTED_DIRT, DIRT,
-                    MUD, PODZOL, MYCELIUM, GRASS_CLAY,
-                    DRY_GRASS_CLAY, DIRT_CLAY);
+                    MUD, PODZOL, MYCELIUM);
         }
         return false;
     }

@@ -2,15 +2,15 @@ package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 public final class SoilBlockVariants {
 
-    public static SoilBlockVariant COARSE_DIRT;
-    public static SoilBlockVariant ROOTED_DIRT;
-    public static SoilBlockVariant DIRT;
-
     public static SoilBlockVariant GRASS;
     public static SoilBlockVariant DRY_GRASS;
     public static SoilBlockVariant SPARSE_GRASS;
     public static SoilBlockVariant PODZOL;
     public static SoilBlockVariant MYCELIUM;
+
+    public static SoilBlockVariant COARSE_DIRT;
+    public static SoilBlockVariant ROOTED_DIRT;
+    public static SoilBlockVariant DIRT;
 
     public static SoilBlockVariant DIRT_CLAY;
     public static SoilBlockVariant GRASS_CLAY;

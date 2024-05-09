@@ -27,21 +27,6 @@ public final class SoilBlockVariantHandler {
 
     public static void init() {
 
-        COARSE_DIRT = new SoilBlockVariant.Builder("coarse_dirt")
-                .setFactory(BlockSoilDirt::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-                .build();
-
-        ROOTED_DIRT = new SoilBlockVariant.Builder("rooted_dirt")
-                .setFactory(BlockSoilRootedDirt::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-                .build();
-
-        DIRT = new SoilBlockVariant.Builder("dirt")
-                .setFactory(BlockSoilDirt::new)
-                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
-                .build();
-
         GRASS = new SoilBlockVariant.Builder("grass")
                 .setFactory(BlockSoilGrass::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
@@ -64,6 +49,21 @@ public final class SoilBlockVariantHandler {
 
         MYCELIUM = new SoilBlockVariant.Builder("mycelium")
                 .setFactory(BlockSoilMycelium::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .build();
+
+        DIRT = new SoilBlockVariant.Builder("dirt")
+                .setFactory(BlockSoilDirt::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .build();
+
+        COARSE_DIRT = new SoilBlockVariant.Builder("coarse_dirt")
+                .setFactory(BlockSoilDirt::new)
+                .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
+                .build();
+
+        ROOTED_DIRT = new SoilBlockVariant.Builder("rooted_dirt")
+                .setFactory(BlockSoilRootedDirt::new)
                 .setFallingSpecification(VERTICAL_AND_HORIZONTAL)
                 .build();
 

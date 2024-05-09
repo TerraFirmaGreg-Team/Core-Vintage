@@ -105,6 +105,7 @@ public final class Blockstates {
     public static final PropertyBool GROWN = PropertyBool.create("grown");
     public static final PropertyBool CAN_GROW = PropertyBool.create("can_grow");
     public static final PropertyBool CONNECTED = PropertyBool.create("connected");
+    public static final PropertyBool CLAY = PropertyBool.create("clay");
 
     private Blockstates() {
 

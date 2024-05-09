@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -33,6 +34,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
+import org.jetbrains.annotations.Nullable;
+
 import lombok.Getter;
 
 import java.util.Random;
@@ -64,6 +67,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
                 .withProperty(SNOWY, Boolean.FALSE));
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+    }
+
+    @Override
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new BaseItemBlock(this);
     }
 
     public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {

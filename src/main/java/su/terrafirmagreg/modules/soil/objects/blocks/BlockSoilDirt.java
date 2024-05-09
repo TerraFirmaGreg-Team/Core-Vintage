@@ -17,7 +17,7 @@ public class BlockSoilDirt extends BlockSoil {
     public BlockSoilDirt(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
 
-        //        setDefaultState(getBlockState().getBaseState().withProperty(AGE, 0));
+        //setDefaultState(getBlockState().getBaseState().withProperty(CLAY, false));
 
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }

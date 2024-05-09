@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.spi.block;
 
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemDoor;
 import su.terrafirmagreg.api.util.ModelUtils;
 
@@ -28,7 +27,7 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock, ICustomState {
+public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock, ICustomStateBlock {
 
     protected final Settings settings;
 
@@ -59,7 +58,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
     }
 }

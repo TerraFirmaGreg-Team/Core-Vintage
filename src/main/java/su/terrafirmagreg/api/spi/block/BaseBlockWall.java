@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.spi.block;
 
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.util.ModelUtils;
 
 import net.minecraft.block.Block;
@@ -28,7 +27,7 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @Getter
-public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock, ICustomState {
+public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock, ICustomStateBlock {
 
     protected final Settings settings;
     private final Block modelBlock;
@@ -115,7 +114,7 @@ public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
     }
 }

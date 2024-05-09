@@ -409,7 +409,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
                 .ignore(BlockLeaves.DECAYABLE, HARVESTABLE)
                 .build());

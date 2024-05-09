@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +23,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
@@ -85,6 +88,11 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
     @Override
     default @Nullable Item getItemBlock() {
         return new BaseItemBlock((Block) this);
+    }
+
+    @SideOnly(Side.CLIENT)
+    default BlockRenderLayer getRenderLayer() {
+        return getSettings().renderLayer;
     }
 
     default Item asItem() {
@@ -156,6 +164,7 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
         ContextFunction<Integer> lightValue;
         ContextFunction<Float> slipperiness;
         EnumRarity rarity;
+        BlockRenderLayer renderLayer;
 
         Size size;
         Weight weight;
@@ -175,6 +184,7 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
             this.lightValue = (state, world, pos) -> 0;
             this.slipperiness = (state, world, pos) -> 0.6F;
             this.rarity = EnumRarity.COMMON;
+            this.renderLayer = BlockRenderLayer.SOLID;
 
             this.size = Size.SMALL;
             this.weight = Weight.LIGHT;
@@ -322,6 +332,11 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
 
         public Settings rarity(EnumRarity rarity) {
             this.rarity = rarity;
+            return this;
+        }
+
+        public Settings renderLayer(BlockRenderLayer renderLayer) {
+            this.renderLayer = renderLayer;
             return this;
         }
 

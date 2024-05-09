@@ -2,9 +2,9 @@ package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
 import su.terrafirmagreg.api.spi.item.IColorfulItem;
 import su.terrafirmagreg.api.spi.item.ICustomMesh;
 import su.terrafirmagreg.api.spi.item.IOreDict;
@@ -125,7 +125,7 @@ public class RegistryManager {
     /**
      * A list of all the custom stateMapper.
      */
-    private final List<ICustomState> customStateMapper = NonNullList.create();
+    private final List<ICustomStateBlock> customStateMapper = NonNullList.create();
 
     /**
      * A list of all the custom models.
@@ -202,7 +202,7 @@ public class RegistryManager {
         this.networkEntityIdSupplier = supplier;
     }
 
-    //region // ===== Block ========================================================================================================================//
+    //region ===== Block
 
     public <T extends Block> void registerBlocks(Collection<T> collection) {
         for (var item : collection) {
@@ -238,7 +238,7 @@ public class RegistryManager {
         if (block instanceof ITileBlock te) this.tileProviders.add(te);
 
         if (GameUtils.isClient()) {
-            if (block instanceof ICustomState state) this.customStateMapper.add(state);
+            if (block instanceof ICustomStateBlock state) this.customStateMapper.add(state);
             if (block instanceof ICustomModel blockModel) this.customModel.add(blockModel);
             else this.registerClientModel(() -> ModelUtils.registerBlockInventoryModel(block));
 
@@ -249,7 +249,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Item =========================================================================================================================//
+    //region ===== Item
 
     public <T extends Item> void registerItems(Collection<T> collection) {
         for (var item : collection) {
@@ -292,7 +292,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Potions ======================================================================================================================//
+    //region ===== Potions
 
     public Potion registerPotion(@NotNull String name, @NotNull Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
 
@@ -309,7 +309,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Potion Types =================================================================================================================//
+    //region ===== Potion Types
 
     public PotionType registerPotionType(@NotNull String name, @NotNull Potion potion, int duration) {
 
@@ -326,7 +326,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Biome ========================================================================================================================//
+    //region ===== Biome
 
     public Biome registerBiome(Biome biome, String name) {
         return this.registerBiome(biome, name, new BiomeDictionary.Type[0]);
@@ -346,7 +346,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Sound ========================================================================================================================//
+    //region ===== Sound
 
     /**
      * Registers a new sound with the game. The sound must also exist in the sounds.json file.
@@ -364,7 +364,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== KeyBinding ===================================================================================================================//
+    //region ===== KeyBinding
 
     public KeyBinding registerKeyBinding(String description, int keyCode) {
 
@@ -377,7 +377,8 @@ public class RegistryManager {
     }
 
     //endregion
-    //region // ===== Entity =======================================================================================================================//
+
+    //region ===== Entity
 
     /**
      * Registers any sort of entity. Will not have a spawn egg.
@@ -425,7 +426,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Enchantment ==================================================================================================================//
+    //region ===== Enchantment
 
     /**
      * Registers an enchantment.
@@ -443,11 +444,11 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Villager Profession ==========================================================================================================//
+    //region ===== Villager Profession
 
     //endregion
 
-    //region // ===== Loot Table ===================================================================================================================//
+    //region ===== Loot Table
 
     /**
      * Registers a loot table with the loot table list. This needs to be called before a loot table can be used.
@@ -570,7 +571,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region // ===== Models =======================================================================================================================//
+    //region ===== Models
 
     @SideOnly(Side.CLIENT)
     public void registerClientModel(ICustomModel model) {

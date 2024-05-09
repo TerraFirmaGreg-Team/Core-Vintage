@@ -1,7 +1,6 @@
 package su.terrafirmagreg.api.spi.block;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemSlab;
 import su.terrafirmagreg.api.util.ModelUtils;
 
@@ -31,7 +30,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock, ICustomState {
+public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock, ICustomStateBlock {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
@@ -113,7 +112,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(VARIANT).build());
     }
 

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -43,7 +43,7 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IColorfulBlock, ICustomState {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IColorfulBlock, ICustomStateBlock {
 
     public static final int[] TINT = new int[] {
             0xffffffff,
@@ -256,7 +256,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, ICol
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(MOISTURE).build());
     }
 }

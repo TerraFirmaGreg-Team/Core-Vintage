@@ -17,7 +17,7 @@ public class PropertyString extends PropertyHelper<String> {
 
     private final Map<String, Integer> valueMap = new HashMap<>();
 
-    public PropertyString(String name, String... values) {
+    private PropertyString(String name, String... values) {
 
         super(name, String.class);
         this.possibleValues = new ArrayList<>(Arrays.asList(values));
@@ -26,6 +26,10 @@ public class PropertyString extends PropertyHelper<String> {
 
             this.valueMap.put(values[i], i);
         }
+    }
+
+    public static PropertyString create(String name, String... values) {
+        return new PropertyString(name, values);
     }
 
     @Override

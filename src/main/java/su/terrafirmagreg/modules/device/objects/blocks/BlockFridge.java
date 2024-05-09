@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
+import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRFridge;
@@ -52,7 +52,7 @@ import java.util.Random;
 import static net.minecraft.util.EnumFacing.NORTH;
 
 @SuppressWarnings("deprecation")
-public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ICustomState {
+public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ICustomStateBlock {
 
     public static final PropertyBool UPPER = PropertyBool.create("upper"); //true if this is the upper half
 
@@ -279,7 +279,7 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ICus
     }
 
     @Override
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelLoader.setCustomStateMapper(this, new IStateMapper() {
 
             @Override

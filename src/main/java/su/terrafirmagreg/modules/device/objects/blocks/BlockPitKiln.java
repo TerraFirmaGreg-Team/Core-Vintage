@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
@@ -52,7 +52,7 @@ import static su.terrafirmagreg.api.data.Blockstates.FULL;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockPitKiln extends BaseBlock implements ITileBlock, ICustomState {
+public class BlockPitKiln extends BaseBlock implements ITileBlock, ICustomStateBlock {
 
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[] {
             PLACED_ITEM_AABB,
@@ -243,7 +243,7 @@ public class BlockPitKiln extends BaseBlock implements ITileBlock, ICustomState 
     }
 
     @Override
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this,
                 blockIn -> ImmutableMap.of(this.getDefaultState(),
                         new ModelResourceLocation(ModUtils.id("empty").toString())));

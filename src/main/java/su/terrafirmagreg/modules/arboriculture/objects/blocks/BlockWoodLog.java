@@ -333,7 +333,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(PLACED).build());
     }
 }

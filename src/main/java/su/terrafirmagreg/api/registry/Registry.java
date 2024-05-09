@@ -120,7 +120,7 @@ public record Registry(RegistryManager registryManager) {
     public void onRegisterModels(ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(new CustomModelLoader());
 
-        for (var model : this.registryManager.getCustomStateMapper()) model.onStateMapperRegister();
+        for (var model : this.registryManager.getCustomStateMapper()) model.onStateRegister();
         for (var model : this.registryManager.getCustomModel()) model.onModelRegister();
 
         for (var item : this.registryManager.getCustomMeshes()) {

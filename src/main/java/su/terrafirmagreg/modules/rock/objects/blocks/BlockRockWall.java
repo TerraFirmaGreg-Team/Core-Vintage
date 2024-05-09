@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
+import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -28,7 +28,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class BlockRockWall extends BaseBlockWall implements IRockBlock, ICustomState {
+public class BlockRockWall extends BaseBlockWall implements IRockBlock, ICustomStateBlock {
 
     private final RockBlockVariant variant;
     private final RockType type;
@@ -66,7 +66,7 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock, ICustomS
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
     }
 }

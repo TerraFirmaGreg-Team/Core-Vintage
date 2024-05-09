@@ -22,7 +22,7 @@ public class BlockWoodFenceLog extends BlockWoodFence {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new StateMap.Builder().build());
     }
 }

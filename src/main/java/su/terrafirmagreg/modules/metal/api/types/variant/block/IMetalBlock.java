@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.model.ICustomState;
 import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок металла.
  */
-public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IAutoReg, ICustomModel, ICustomState {
+public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IAutoReg, ICustomModel, ICustomStateBlock {
 
     /**
      * Возвращает местоположение регистрации блока почвы.
@@ -51,7 +51,7 @@ public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVarian
 
     @Override
     @SideOnly(Side.CLIENT)
-    default void onStateMapperRegister() {
+    default void onStateRegister() {
         ModelUtils.registerStateMapper((Block) this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
     }
 

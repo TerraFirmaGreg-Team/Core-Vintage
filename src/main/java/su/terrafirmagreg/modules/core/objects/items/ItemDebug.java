@@ -46,7 +46,7 @@ public class ItemDebug extends BaseItem {
         if (nbt == null) NBTUtils.resetNBT(stack);
         assert nbt != null;
         int mode = nbt.getInteger("mode");
-        int newMode = (mode > 3) ? 0 : mode + 1;
+        int newMode = (mode > 4) ? 0 : mode + 1;
         NBTUtils.setGenericNBTValue(nbt, "mode", newMode);
         switch (newMode) {
             case 0: {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.model.base;
 
-import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.RenderUtils;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -69,9 +69,9 @@ public class QuadBuilder {
         alreadyBuilding = true;
 
         if (!textured)
-            ModelUtils.putVertex(builderQ, currentFormat, transform, currentSide, x, y, z, -1, -1, r, g, b, a);
+            RenderUtils.putVertex(builderQ, currentFormat, transform, currentSide, x, y, z, -1, -1, r, g, b, a);
         else
-            ModelUtils.putVertex(builderQ, currentFormat, transform, currentSide, x, y, z, u, v, r, g, b, a);
+            RenderUtils.putVertex(builderQ, currentFormat, transform, currentSide, x, y, z, u, v, r, g, b, a);
         return this;
     }
 

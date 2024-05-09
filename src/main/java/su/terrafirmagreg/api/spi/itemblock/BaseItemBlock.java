@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.spi.itemblock;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.IMultiItemBlock;
+import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 import su.terrafirmagreg.api.spi.item.BaseItem;
 
 import net.minecraft.block.Block;
@@ -23,20 +23,11 @@ public class BaseItemBlock extends ItemBlock implements IItemSize {
     public BaseItemBlock(Block block) {
         super(block);
 
-        this.rarity = EnumRarity.COMMON;
-
-        if (block instanceof IMultiItemBlock multiItemBlock) {
-            setMaxDamage(multiItemBlock.getMaxItemDamage());
-            setHasSubtypes(multiItemBlock.getHasItemSubtypes());
+        if (block instanceof ISettingsBlock settingsBlock) {
+            this.rarity = settingsBlock.getSettings().getRarity();
         } else {
-            setMaxDamage(0);
+            this.rarity = EnumRarity.COMMON;
         }
-    }
-
-    public BaseItemBlock(BaseBlock block) {
-        super(block);
-
-        this.rarity = block.getSettings().getRarity();
 
         if (block instanceof IMultiItemBlock multiItemBlock) {
             setMaxDamage(multiItemBlock.getMaxItemDamage());
@@ -58,8 +49,8 @@ public class BaseItemBlock extends ItemBlock implements IItemSize {
 
     @Override
     public String getTranslationKey(ItemStack stack) {
-        if (block instanceof IMultiItemBlock multiItemBlock) {
-            return multiItemBlock.getTranslationKey(stack.getMetadata());
+        if (block instanceof IMultiItemBlock multiItemBlock && multiItemBlock.getTranslationKey(stack.getMetadata()) != null) {
+            return super.getTranslationKey(stack) + "." + multiItemBlock.getTranslationKey(stack.getMetadata());
         } else {
             return super.getTranslationKey(stack);
         }

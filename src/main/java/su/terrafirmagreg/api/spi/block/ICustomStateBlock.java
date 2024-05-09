@@ -1,10 +1,10 @@
-package su.terrafirmagreg.api.model;
+package su.terrafirmagreg.api.spi.block;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface ICustomState {
+public interface ICustomStateBlock {
 
     @SideOnly(Side.CLIENT)
-    void onStateMapperRegister();
+    void onStateRegister();
 }

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomState;
+import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -34,14 +34,17 @@ import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Blockstates.CAN_FALL;
 
-public class BlockRockRaw extends BlockRock implements ICustomState {
+@SuppressWarnings("deprecation")
+public class BlockRockRaw extends BlockRock implements ICustomStateBlock {
+
 
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
 
     public BlockRockRaw(RockBlockVariant variant, RockType type) {
         super(variant, type);
 
-        setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(CAN_FALL, true));
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(variant.getSpecification());
@@ -56,9 +59,7 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
         OreDictUtils.register(this, "stone");
     }
 
-    @NotNull
     @Override
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(CAN_FALL, meta == 0);
     }
@@ -72,10 +73,8 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,
-                                BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         // Raw blocks that can't fall also can't pop off
         if (state.getValue(CAN_FALL)) {
@@ -94,11 +93,9 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItemMainhand();
-        if (ModuleRockConfig.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(
-                pos.up(), true)) {
+        if (ModuleRockConfig.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
                 var anvil = RockBlockVariants.ANVIL.get(getType());
@@ -118,8 +115,7 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state,
-                         int fortune) {
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
 
         // TODO
@@ -135,7 +131,7 @@ public class BlockRockRaw extends BlockRock implements ICustomState {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateMapperRegister() {
+    public void onStateRegister() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(CAN_FALL).build());
     }
 }

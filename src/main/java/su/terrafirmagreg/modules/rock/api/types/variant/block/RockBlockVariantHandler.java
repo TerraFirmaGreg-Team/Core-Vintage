@@ -105,6 +105,33 @@ public class RockBlockVariantHandler {
                 .setFactory((v, t) -> new BlockRockWall(RAW, v, t))
                 .build();
 
+        MOSSY_RAW = new RockBlockVariant.Builder("mossy_raw")
+                .setBaseHardness(6f)
+                .setFactory(BlockRockRaw::new)
+                .setStoneType()
+                .setFallingSpecification(COLLAPSABLE_ROCK)
+                .build();
+
+        STAIRS_MOSSY_RAW = new RockBlockVariant.Builder("stairs/mossy_raw")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockStairs(MOSSY_RAW, v, t))
+                .build();
+
+        SLAB_DOUBLE_MOSSY_RAW = new RockBlockVariant.Builder("slab_double/mossy_raw")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockSlab.Double(MOSSY_RAW, v, t))
+                .build();
+
+        SLAB_MOSSY_RAW = new RockBlockVariant.Builder("slab/mossy_raw")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockSlab.Half(MOSSY_RAW, SLAB_DOUBLE_MOSSY_RAW, v, t))
+                .build();
+
+        WALL_MOSSY_RAW = new RockBlockVariant.Builder("wall/mossy_raw")
+                .setBaseHardness(6f)
+                .setFactory((v, t) -> new BlockRockWall(MOSSY_RAW, v, t))
+                .build();
+
         SMOOTH = new RockBlockVariant.Builder("smooth")
                 .setBaseHardness(6f)
                 .setFactory(BlockRockSmooth::new)

@@ -4,8 +4,8 @@
     "model": "tfg:rock/wall/mossy/inventory",
     "uvlock": true,
     "textures": {
-      "overlay": "tfg:blocks/rock/overlay/mossy/bricks",
-      "all": "tfg:blocks/rock/bricks/arkose"
+      "overlay": "tfg:blocks/rock/overlay/mossy/raw",
+      "all": "tfg:blocks/rock/raw/komatiite"
     }
   },
   "variants": {
@@ -13,7 +13,9 @@
       {}
     ],
     "inventory": [
-      {}
+      {
+        "model": "tfg:rock/wall/mossy/inventory"
+      }
     ],
     "north": {
       "true": {

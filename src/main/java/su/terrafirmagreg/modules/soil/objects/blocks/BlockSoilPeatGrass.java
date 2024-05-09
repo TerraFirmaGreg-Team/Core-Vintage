@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
@@ -30,7 +30,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
-public class BlockSoilPeatGrass extends BaseBlock implements IColorfulBlock {
+public class BlockSoilPeatGrass extends BaseBlock implements IBlockColorProvider {
 
     public BlockSoilPeatGrass() {
         super(Settings.of()
@@ -96,12 +96,12 @@ public class BlockSoilPeatGrass extends BaseBlock implements IColorfulBlock {
     }
 
     @Override
-    public IBlockColor getColorHandler() {
+    public IBlockColor getBlockColor() {
         return GrassColorHandler::computeGrassColor;
     }
 
     @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
+    public IItemColor getItemColor() {
+        return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
     }
 }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.spi.item;
 
-public interface IOreDict {
+public interface IOreDictProvider {
 
     default void onRegisterOreDict() {}
 }

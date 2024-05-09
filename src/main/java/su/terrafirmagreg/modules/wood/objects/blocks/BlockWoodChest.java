@@ -166,7 +166,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customResource(getResourceLocation()).build());
     }
 

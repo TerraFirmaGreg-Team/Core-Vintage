@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
-import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок породы.
  */
-public interface IRockBlock extends IType<RockType>, IVariant<RockBlockVariant>, IAutoReg {
+public interface IRockBlock extends IType<RockType>, IVariant<RockBlockVariant>, ISettingsBlock {
 
     /**
      * Возвращает окончательную твердость блока породы.

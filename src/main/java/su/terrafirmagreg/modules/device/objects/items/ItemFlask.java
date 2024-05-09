@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
 import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
 import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
-public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, ICustomMesh {
+public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, IItemMeshProvider {
 
     private final int capacity;
     private final int drink;
@@ -104,7 +104,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
     }
 
     @Override
-    public ItemMeshDefinition getCustomMesh() {
+    public ItemMeshDefinition getItemMesh() {
         var modelFull = new ModelResourceLocation(ModUtils.id(getName()), "inventory");
         var model4 = new ModelResourceLocation(ModUtils.id(getName() + "/4"), "inventory");
         var model3 = new ModelResourceLocation(ModUtils.id(getName() + "/3"), "inventory");

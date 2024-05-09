@@ -3,11 +3,11 @@ package su.terrafirmagreg.api.registry;
 import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
-import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
-import su.terrafirmagreg.api.spi.item.IColorfulItem;
-import su.terrafirmagreg.api.spi.item.ICustomMesh;
-import su.terrafirmagreg.api.spi.item.IOreDict;
+import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.spi.item.IItemColorProvider;
+import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
+import su.terrafirmagreg.api.spi.item.IOreDictProvider;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -125,7 +125,7 @@ public class RegistryManager {
     /**
      * A list of all the custom stateMapper.
      */
-    private final List<ICustomStateBlock> customStateMapper = NonNullList.create();
+    private final List<IStateMapperProvider> customStateMapper = NonNullList.create();
 
     /**
      * A list of all the custom models.
@@ -150,7 +150,7 @@ public class RegistryManager {
     /**
      * A list of all the oreDict registered here.
      */
-    private final List<IOreDict> oreDicts = NonNullList.create();
+    private final List<IOreDictProvider> oreDicts = NonNullList.create();
 
     /**
      * The creative tab used by the mod. This can be null.
@@ -233,16 +233,16 @@ public class RegistryManager {
 
         if (itemBlock != null) {
             this.registerItem(itemBlock, name);
-            if (block instanceof IOreDict oreDict) this.oreDicts.add(oreDict);
+            if (block instanceof IOreDictProvider oreDict) this.oreDicts.add(oreDict);
         }
         if (block instanceof ITileBlock te) this.tileProviders.add(te);
 
         if (GameUtils.isClient()) {
-            if (block instanceof ICustomStateBlock state) this.customStateMapper.add(state);
+            if (block instanceof IStateMapperProvider state) this.customStateMapper.add(state);
             if (block instanceof ICustomModel blockModel) this.customModel.add(blockModel);
             else this.registerClientModel(() -> ModelUtils.registerBlockInventoryModel(block));
 
-            if (block instanceof IColorfulBlock) this.coloredBlocks.add(block);
+            if (block instanceof IBlockColorProvider) this.coloredBlocks.add(block);
         }
         return block;
     }
@@ -277,14 +277,14 @@ public class RegistryManager {
 
         this.items.add(item);
 
-        if (item instanceof IOreDict oreDict) this.oreDicts.add(oreDict);
+        if (item instanceof IOreDictProvider oreDict) this.oreDicts.add(oreDict);
 
         if (GameUtils.isClient()) {
             if (item instanceof ICustomModel itemModel) this.customModel.add(itemModel);
             else if (!(item instanceof ItemBlock)) this.registerClientModel(() -> ModelUtils.registerInventoryModel(item));
 
-            if (item instanceof IColorfulItem) this.coloredItems.add(item);
-            if (item instanceof ICustomMesh) this.customMeshes.add(item);
+            if (item instanceof IItemColorProvider) this.coloredItems.add(item);
+            if (item instanceof IItemMeshProvider) this.customMeshes.add(item);
 
         }
         return item;

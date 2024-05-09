@@ -44,18 +44,18 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
     }
 
     @Override
-    public IBlockColor getColorHandler() {
+    public IBlockColor getBlockColor() {
         return (s, w, p, i) -> this.getType().getColor();
     }
 
     @Override
-    public IItemColor getItemColorHandler() {
+    public IItemColor getItemColor() {
         return (s, i) -> this.getType().getColor();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(VARIANT).build());
     }
 

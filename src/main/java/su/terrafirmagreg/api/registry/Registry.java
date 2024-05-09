@@ -1,12 +1,9 @@
 package su.terrafirmagreg.api.registry;
 
-import com.github.bsideup.jabel.Desugar;
-
-
 import su.terrafirmagreg.api.model.CustomModelLoader;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
-import su.terrafirmagreg.api.spi.item.IColorfulItem;
-import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.item.IItemColorProvider;
+import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -30,6 +27,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+
+import com.github.bsideup.jabel.Desugar;
 
 /**
  * This is used to automatically register things from the registry helper. The hope is that by registering the event while the owner is active, Forge will shut up about harmless
@@ -120,11 +120,11 @@ public record Registry(RegistryManager registryManager) {
     public void onRegisterModels(ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(new CustomModelLoader());
 
-        for (var model : this.registryManager.getCustomStateMapper()) model.onStateRegister();
+        for (var model : this.registryManager.getCustomStateMapper()) model.onRegisterState();
         for (var model : this.registryManager.getCustomModel()) model.onModelRegister();
 
         for (var item : this.registryManager.getCustomMeshes()) {
-            ModelUtils.registerCustomMeshDefinition(item, ((ICustomMesh) item).getCustomMesh());
+            ModelUtils.registerCustomMeshDefinition(item, ((IItemMeshProvider) item).getItemMesh());
         }
     }
 
@@ -140,8 +140,8 @@ public record Registry(RegistryManager registryManager) {
     @SideOnly(Side.CLIENT)
     public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
         for (var block : this.registryManager.getColoredBlocks()) {
-            if (block instanceof IColorfulBlock colorfulBlock) {
-                event.getBlockColors().registerBlockColorHandler(colorfulBlock.getColorHandler(), block);
+            if (block instanceof IBlockColorProvider colorfulBlock) {
+                event.getBlockColors().registerBlockColorHandler(colorfulBlock.getBlockColor(), block);
             }
 
         }
@@ -150,16 +150,16 @@ public record Registry(RegistryManager registryManager) {
     @SideOnly(Side.CLIENT)
     public void onRegisterItemColor(ColorHandlerEvent.Item event) {
         for (var block : this.registryManager.getColoredBlocks()) {
-            if (block instanceof IColorfulBlock colorfulBlock) {
-                if (colorfulBlock.getItemColorHandler() != null) {
-                    event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColorHandler(), Item.getItemFromBlock(block));
+            if (block instanceof IBlockColorProvider colorfulBlock) {
+                if (colorfulBlock.getItemColor() != null) {
+                    event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColor(), Item.getItemFromBlock(block));
                 }
             }
         }
 
         for (var item : this.registryManager.getColoredItems()) {
-            if (item instanceof IColorfulItem colorfulItem) {
-                event.getItemColors().registerItemColorHandler(colorfulItem.getColorHandler(), item);
+            if (item instanceof IItemColorProvider colorfulItem) {
+                event.getItemColors().registerItemColorHandler(colorfulItem.getItemColor(), item);
             }
         }
     }

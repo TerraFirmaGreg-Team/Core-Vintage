@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
-import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
+import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import lombok.Getter;
 
 @Getter
-public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock, ICustomStateBlock {
+public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock, IStateMapperProvider {
 
     private final SoilBlockVariant variant;
     private final SoilType type;

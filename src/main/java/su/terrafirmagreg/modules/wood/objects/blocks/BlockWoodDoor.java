@@ -44,7 +44,7 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(BlockDoor.POWERED).build());
     }
 }

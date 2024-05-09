@@ -159,6 +159,10 @@ public abstract class ModuleBase {
 
     // ===== Other ================================================================================================================================ //
 
+    protected boolean processIMC(FMLInterModComms.IMCMessage message) {
+        return false;
+    }
+
     /**
      * What other modules this module depends on.
      * <p>
@@ -176,10 +180,6 @@ public abstract class ModuleBase {
     @NotNull
     public List<Class<?>> getEventBusSubscribers() {
         return Collections.emptyList();
-    }
-
-    public boolean processIMC(FMLInterModComms.IMCMessage message) {
-        return false;
     }
 
     /**

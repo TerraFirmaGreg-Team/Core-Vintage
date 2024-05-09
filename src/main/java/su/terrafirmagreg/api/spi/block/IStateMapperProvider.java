@@ -3,8 +3,8 @@ package su.terrafirmagreg.api.spi.block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface ICustomStateBlock {
+public interface IStateMapperProvider {
 
     @SideOnly(Side.CLIENT)
-    void onStateRegister();
+    void onRegisterState();
 }

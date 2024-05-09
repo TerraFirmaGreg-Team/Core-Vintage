@@ -27,7 +27,7 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock, ICustomStateBlock {
+public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock, IStateMapperProvider {
 
     protected final Settings settings;
 
@@ -58,7 +58,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
     }
 }

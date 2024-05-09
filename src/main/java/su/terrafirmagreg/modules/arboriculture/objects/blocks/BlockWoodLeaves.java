@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -59,7 +59,7 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 @Getter
-public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfulBlock {
+public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockColorProvider {
 
     public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
 
@@ -392,13 +392,13 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
     }
 
     @Override
-    public IBlockColor getColorHandler() {
+    public IBlockColor getBlockColor() {
         return GrassColorHandler::computeGrassColor;
     }
 
     @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
+    public IItemColor getItemColor() {
+        return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
     }
 
     @Override
@@ -409,7 +409,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IColorfu
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
                 .ignore(BlockLeaves.DECAYABLE, HARVESTABLE)
                 .build());

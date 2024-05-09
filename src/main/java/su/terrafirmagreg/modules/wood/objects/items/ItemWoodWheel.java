@@ -55,7 +55,7 @@ public class ItemWoodWheel extends BaseItem implements IWoodItem {
     }
 
     @Override
-    public IItemColor getColorHandler() {
+    public IItemColor getItemColor() {
         return (s, i) -> this.getType().getColor();
     }
 }

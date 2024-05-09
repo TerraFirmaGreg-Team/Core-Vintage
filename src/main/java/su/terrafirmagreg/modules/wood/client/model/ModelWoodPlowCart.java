@@ -131,8 +131,7 @@ public class ModelWoodPlowCart extends ModelBase {
     }
 
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale,
-                                  @NotNull Entity entity) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale, @NotNull Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, rotationYaw, rotationPitch, scale, entity);
         this.leftWheel.rotateAngleX = ((EntityWoodPlowCart) entity).getWheelRotation();
         this.rightWheel.rotateAngleX = this.leftWheel.rotateAngleX;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.api.spi.block.ICustomStateBlock;
+import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
-public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomStateBlock {
+public class BlockThatchBed extends BlockBed implements IAutoReg, IStateMapperProvider {
 
     public BlockThatchBed() {
         setSoundType(SoundType.PLANT);
@@ -121,7 +121,7 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, ICustomStateBl
     }
 
     @Override
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(OCCUPIED).build());
     }
 

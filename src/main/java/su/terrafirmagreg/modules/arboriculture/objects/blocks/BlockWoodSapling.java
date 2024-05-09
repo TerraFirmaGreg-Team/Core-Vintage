@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -46,7 +46,7 @@ import java.util.List;
 import java.util.Random;
 
 @Getter
-public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable, IGrowingPlant, IColorfulBlock {
+public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable, IGrowingPlant, IBlockColorProvider {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
@@ -181,18 +181,18 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(STAGE).build());
     }
 
     @Override
-    public IBlockColor getColorHandler() {
+    public IBlockColor getBlockColor() {
         return GrassColorHandler::computeGrassColor;
     }
 
     @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getColorHandler().colorMultiplier(this.getDefaultState(), null, null, i);
+    public IItemColor getItemColor() {
+        return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
     }
 
 }

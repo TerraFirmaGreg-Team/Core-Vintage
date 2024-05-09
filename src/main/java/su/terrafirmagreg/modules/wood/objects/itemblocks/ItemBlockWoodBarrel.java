@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.itemblocks;
 
-import su.terrafirmagreg.api.spi.item.ICustomMesh;
+import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -57,7 +57,7 @@ import java.util.List;
  * Item block for {@link BlockWoodBarrel} Only has NBT data if the barrel is sealed and has contents
  */
 
-public class ItemBlockWoodBarrel extends BaseItemBlock implements ICustomMesh {
+public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvider {
 
     private final BlockWoodBarrel block;
 
@@ -195,7 +195,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements ICustomMesh {
     }
 
     @Override
-    public ItemMeshDefinition getCustomMesh() {
+    public ItemMeshDefinition getItemMesh() {
 
         final var resurceLocation = block.getResourceLocation();
 

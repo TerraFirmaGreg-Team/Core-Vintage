@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.IColorfulBlock;
+import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -21,7 +21,6 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -45,7 +44,7 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulBlock {
+public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColorProvider {
 
     private final SoilBlockVariant variant;
     private final SoilType type;
@@ -359,12 +358,12 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IColorfulB
     }
 
     @Override
-    public IBlockColor getColorHandler() {
+    public IBlockColor getBlockColor() {
         return GrassColorHandler::computeGrassColor;
     }
 
     @Override
-    public IItemColor getItemColorHandler() {
-        return (s, i) -> this.getColorHandler().colorMultiplier(((ItemBlock) s.getItem()).getBlock().getDefaultState(), null, null, i);
+    public IItemColor getItemColor() {
+        return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
     }
 }

@@ -27,7 +27,7 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @Getter
-public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock, ICustomStateBlock {
+public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock, IStateMapperProvider {
 
     protected final Settings settings;
     private final Block modelBlock;
@@ -114,7 +114,7 @@ public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
     }
 }

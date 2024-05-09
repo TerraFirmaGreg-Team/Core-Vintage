@@ -170,7 +170,7 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
         Weight weight;
         boolean canStack;
 
-        private Settings() {
+        protected Settings() {
 
             this.material = Material.AIR;
             this.mapColor = (state, world, pos) -> material.getMaterialMapColor();

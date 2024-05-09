@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
+import su.terrafirmagreg.api.spi.block.BaseBlockWall;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -10,17 +11,14 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
-
 import lombok.Getter;
 
 @Getter
-public class BlockWoodWall extends BlockWall implements IWoodBlock {
+public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
 
     private final WoodBlockVariant variant;
     private final WoodType type;
@@ -43,16 +41,9 @@ public class BlockWoodWall extends BlockWall implements IWoodBlock {
         OreDictUtils.register(this, getVariant(), "wood", getType());
     }
 
-    @NotNull
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
                 .customResource(getResourceLocation())
                 .ignore(BlockWall.VARIANT)

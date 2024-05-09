@@ -30,7 +30,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock, ICustomStateBlock {
+public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock, IStateMapperProvider {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
@@ -112,7 +112,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onStateRegister() {
+    public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(VARIANT).build());
     }
 

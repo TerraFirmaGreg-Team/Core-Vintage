@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood.objects.items;
 
 import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
@@ -29,8 +28,6 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
-
 import lombok.Getter;
 
 import java.util.List;
@@ -45,35 +42,18 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
     public ItemWoodBoat(WoodItemVariant variant, WoodType type) {
         this.type = type;
         this.variant = variant;
-    }
 
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-        OreDictUtils.register(this, variant, type);
-    }
-
-    @NotNull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.LARGE;
-    }
-
-    @NotNull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.MEDIUM;
-    }
-
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
+        getSettings()
+                .weight(Weight.MEDIUM)
+                .size(Size.LARGE)
+                .notCanStack()
+                .addOreDict(variant)
+                .addOreDict(variant, type);
     }
 
     /**
      * Copy from vanilla ItemBoat, but setting EntityBoatTFC's wood type
      */
-    @NotNull
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);

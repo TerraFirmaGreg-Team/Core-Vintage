@@ -34,8 +34,8 @@ public class BlockAlloyCalculator extends BaseBlockContainer implements ITileBlo
     private static final AxisAlignedBB BOUNDS_WE = new AxisAlignedBB(5 / 16d, 0, 3 / 16d, 11 / 16d, 4 / 16d, 13 / 16d);
 
     public BlockAlloyCalculator() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/alloy_calculator")
                 .nonFullCube()
                 .nonOpaque());
 
@@ -97,11 +97,6 @@ public class BlockAlloyCalculator extends BaseBlockContainer implements ITileBlo
     @Override
     public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileAlloyCalculator();
-    }
-
-    @Override
-    public String getName() {
-        return "device/alloy_calculator";
     }
 
     @Override

@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -20,7 +19,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -53,14 +51,17 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
     private final WoodType type;
 
     public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of()
-                .material(Material.WOOD)
-                .mapColor(MapColor.AIR)
+        super(Settings.of(Material.WOOD)
+                .mapColor(MapColor.AIR) // ?
                 .soundType(SoundType.WOOD)
                 .nonOpaque()
                 .nonFullCube()
                 .hardness(0.5f)
-                .resistance(3f));
+                .resistance(3f)
+                .weight(Weight.VERY_HEAVY)
+                .size(Size.LARGE)
+                .addOreDict(variant)
+                .addOreDict(variant, type));
 
         this.variant = variant;
         this.type = type;
@@ -70,26 +71,6 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant, type);
-    }
-
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.LARGE;
-    }
-
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.VERY_HEAVY;
-    }
-
-    @Override
-    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileWoodLoom();
     }
 
     @Override
@@ -114,9 +95,9 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var te = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
-        if (te != null) {
-            return te.onRightClick(playerIn);
+        var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
+        if (tile != null) {
+            return tile.onRightClick(playerIn);
         }
         return true;
     }
@@ -141,11 +122,16 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
+    }
+
+    @Override
+    public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileWoodLoom();
     }
 
     @Override

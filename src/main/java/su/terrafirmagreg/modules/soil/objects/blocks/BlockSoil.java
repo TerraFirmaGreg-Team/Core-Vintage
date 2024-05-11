@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -32,21 +31,16 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
     private final SoilType type;
 
     public BlockSoil(SoilBlockVariant variant, SoilType type) {
-        super(Settings.of()
-                .material(Material.GROUND)
+        super(Settings.of(Material.GROUND)
                 .soundType(SoundType.GROUND)
-                .hardness(2.0F));
+                .hardness(2.0F)
+                .addOreDict(variant));
 
         this.variant = variant;
         this.type = type;
 
         setHarvestLevel("shovel", 0);
         FallingBlockManager.registerFallable(this, variant.getSpecification());
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
     }
 
     @Override

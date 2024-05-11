@@ -55,8 +55,8 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
 
     public BlockCrucible() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/crucible")
                 .soundType(SoundType.METAL)
                 .nonFullCube()
                 .nonOpaque()
@@ -73,7 +73,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
     @Override
     public void acceptHeat(World world, BlockPos pos, float temperature) {
-        TileCrucible tile = TileUtils.getTile(world, pos, TileCrucible.class);
+        var tile = TileUtils.getTile(world, pos, TileCrucible.class);
         if (tile != null) {
             tile.acceptHeat(temperature);
         }
@@ -94,11 +94,6 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
             String metalName = new TextComponentTranslation(alloy.getResult().getTranslationKey()).getFormattedText();
             tooltip.add(I18n.format(Constants.MODID_TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
         }
-    }
-
-    @Override
-    public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        return false;
     }
 
     @Override
@@ -137,9 +132,9 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileCrucible te = TileUtils.getTile(worldIn, pos, TileCrucible.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileCrucible.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -166,18 +161,13 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     }
 
     @Override
-    public @Nullable TileCrucible createNewTileEntity(World worldIn, int meta) {
-        return new TileCrucible();
-    }
-
-    @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         //breakBlock already handle this
     }
 
     @Override
-    public String getName() {
-        return "device/crucible";
+    public @Nullable TileCrucible createNewTileEntity(World worldIn, int meta) {
+        return new TileCrucible();
     }
 
     @Override

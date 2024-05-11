@@ -165,8 +165,8 @@ public class BlockBloomery extends BaseBlock implements ITileBlock {
     }
 
     public BlockBloomery() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/bloomery")
                 .soundType(SoundType.METAL)
                 .hardness(20.0F)
                 .size(Size.LARGE)
@@ -175,7 +175,7 @@ public class BlockBloomery extends BaseBlock implements ITileBlock {
                 .nonOpaque());
 
         setHarvestLevel("pickaxe", 0);
-        setDefaultState(this.getBlockState().getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)
                 .withProperty(LIT, false)
                 .withProperty(OPEN, false));
@@ -238,9 +238,9 @@ public class BlockBloomery extends BaseBlock implements ITileBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileBloomery te = TileUtils.getTile(worldIn, pos, TileBloomery.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileBloomery.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -276,13 +276,13 @@ public class BlockBloomery extends BaseBlock implements ITileBlock {
                 worldIn.setBlockState(pos, state.cycleProperty(OPEN));
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             }
-            TileBloomery te = TileUtils.getTile(worldIn, pos, TileBloomery.class);
-            if (te != null) {
-                if (!state.getValue(LIT) && te.canIgnite()) {
+            var tile = TileUtils.getTile(worldIn, pos, TileBloomery.class);
+            if (tile != null) {
+                if (!state.getValue(LIT) && tile.canIgnite()) {
                     ItemStack held = player.getHeldItem(hand);
                     if (ItemFireStarter.onIgnition(held)) {
                         worldIn.setBlockState(pos, state.withProperty(LIT, true).withProperty(OPEN, false));
-                        te.onIgnite();
+                        tile.onIgnite();
                         return true;
                     }
                 }
@@ -329,11 +329,6 @@ public class BlockBloomery extends BaseBlock implements ITileBlock {
     @Override
     public TileBloomery createNewTileEntity(World worldIn, int meta) {
         return new TileBloomery();
-    }
-
-    @Override
-    public String getName() {
-        return "device/bloomery";
     }
 
     @Override

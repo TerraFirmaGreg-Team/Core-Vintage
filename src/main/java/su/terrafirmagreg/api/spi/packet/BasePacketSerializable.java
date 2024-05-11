@@ -713,11 +713,11 @@ public abstract class BasePacketSerializable<REQ extends BasePacketSerializable>
     // Functional interfaces
     public interface Writer<T extends Object> {
 
-        public void write(T t, ByteBuf buf);
+        void write(T t, ByteBuf buf);
     }
 
     public interface Reader<T extends Object> {
 
-        public T read(ByteBuf buf);
+        T read(ByteBuf buf);
     }
 }

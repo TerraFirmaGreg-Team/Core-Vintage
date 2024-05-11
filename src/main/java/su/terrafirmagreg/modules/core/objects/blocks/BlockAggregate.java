@@ -1,35 +1,24 @@
 package su.terrafirmagreg.modules.core.objects.blocks;
 
-import su.terrafirmagreg.api.registry.IAutoReg;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 
 import net.minecraft.block.BlockGravel;
 import net.minecraft.block.SoundType;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.material.Material;
 
 
-import org.jetbrains.annotations.Nullable;
+import lombok.Getter;
 
-public class BlockAggregate extends BlockGravel implements IAutoReg {
+@Getter
+public class BlockAggregate extends BlockGravel implements ISettingsBlock {
+
+    protected final Settings settings;
 
     public BlockAggregate() {
-        setSoundType(SoundType.SAND);
-        setHardness(0.4f);
-    }
-
-    @Override
-    public @Nullable ItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "aggregate");
-    }
-
-    @Override
-    public String getName() {
-        return "core/aggregate";
+        this.settings = Settings.of(Material.SAND)
+                .registryKey("core/aggregate")
+                .addOreDict("aggregate")
+                .soundType(SoundType.SAND)
+                .hardness(0.4f);
     }
 }

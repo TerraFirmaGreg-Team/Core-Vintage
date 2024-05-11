@@ -18,7 +18,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,8 +34,12 @@ import static net.minecraft.util.text.TextFormatting.GOLD;
 public class ItemDebug extends BaseItem {
 
     public ItemDebug() {
+        getSettings()
+                .registryKey("core/wand")
+                .maxCount(1)
+                .rarity(EnumRarity.EPIC);
+
         setNoRepair();
-        setMaxStackSize(1);
         setFull3D();
     }
 
@@ -171,16 +174,6 @@ public class ItemDebug extends BaseItem {
     @Override
     public int getEntityLifespan(ItemStack itemStack, World world) {
         return 60;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
-    }
-
-    @Override
-    public String getName() {
-        return "core/wand";
     }
 
 }

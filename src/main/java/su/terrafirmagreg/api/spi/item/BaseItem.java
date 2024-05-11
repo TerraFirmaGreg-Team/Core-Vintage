@@ -9,6 +9,9 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
+@Getter
 public abstract class BaseItem extends Item implements ISettingsItem {
 
     protected final Settings settings;
@@ -17,22 +20,26 @@ public abstract class BaseItem extends Item implements ISettingsItem {
 
         this.settings = settings;
 
+        setMaxStackSize(settings.maxCount);
         setMaxDamage(settings.maxDamage);
-        setCreativeTab(settings.tab);
         setTranslationKey(settings.translationKey);
     }
 
     public BaseItem() {
         this.settings = Settings.of();
 
+        setMaxStackSize(settings.maxCount);
         setMaxDamage(settings.maxDamage);
-        setCreativeTab(settings.tab);
         setTranslationKey(settings.translationKey);
     }
 
     @Override
     public IRarity getForgeRarity(ItemStack stack) {
         return settings.rarity;
+    }
+
+    public boolean canStack(ItemStack stack) {
+        return settings.canStack;
     }
 
     /**

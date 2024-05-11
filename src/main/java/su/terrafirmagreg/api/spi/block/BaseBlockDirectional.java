@@ -33,12 +33,7 @@ public abstract class BaseBlockDirectional extends BlockDirectional implements I
     public BaseBlockDirectional(Settings settings) {
         super(settings.material);
         this.settings = settings;
-
-        setResistance(settings.resistance);
-        setHardness(settings.hardness);
-        setSoundType(settings.soundType);
         setTranslationKey(settings.translationKey);
-        setCreativeTab(settings.tab);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, EnumFacing.NORTH));

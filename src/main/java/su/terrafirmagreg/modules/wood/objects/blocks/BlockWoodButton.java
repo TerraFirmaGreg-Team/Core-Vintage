@@ -1,23 +1,21 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 
-
-import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
 @Getter
 public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
 
+    protected final Settings settings;
     private final WoodBlockVariant variant;
     private final WoodType type;
 
@@ -25,20 +23,13 @@ public class BlockWoodButton extends BlockButtonWood implements IWoodBlock {
         this.variant = variant;
         this.type = type;
 
-        setHardness(0.5F);
-        setSoundType(SoundType.WOOD);
+        this.settings = Settings.of(Material.CIRCUITS)
+                .hardness(0.5F)
+                .soundType(SoundType.WOOD)
+                .addOreDict(variant, "wood")
+                .addOreDict(variant, "wood", type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
-
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-        OreDictUtils.register(this, variant, type);
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
     }
 
 }

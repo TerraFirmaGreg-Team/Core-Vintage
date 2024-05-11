@@ -4,10 +4,12 @@ import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
 import su.terrafirmagreg.api.spi.item.IItemColorProvider;
 import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
 import su.terrafirmagreg.api.spi.item.IOreDictProvider;
+import su.terrafirmagreg.api.spi.item.ISettingsItem;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -205,15 +207,15 @@ public class RegistryManager {
     //region ===== Block
 
     public <T extends Block> void registerBlocks(Collection<T> collection) {
-        for (var item : collection) {
-            if (item instanceof IAutoReg provider) {
-                this.registerBlock(item, provider.getItemBlock(), provider.getName());
+        for (var block : collection) {
+            if (block instanceof ISettingsBlock provider) {
+                this.registerBlock(provider.getBlock(), provider.getItemBlock(), provider.getName());
             }
         }
     }
 
-    public <B extends Block & IAutoReg, I extends Item> B registerBlock(B block) {
-        return this.registerBlock(block, block.getItemBlock(), block.getName());
+    public <B extends Block & ISettingsBlock> B registerBlock(B provider) {
+        return this.registerBlock(provider, provider.getItemBlock(), provider.getName());
     }
 
     /**
@@ -253,13 +255,13 @@ public class RegistryManager {
 
     public <T extends Item> void registerItems(Collection<T> collection) {
         for (var item : collection) {
-            if (item instanceof IAutoReg provider) {
+            if (item instanceof ISettingsItem provider) {
                 this.registerItem(item, provider.getName());
             }
         }
     }
 
-    public <T extends Item & IAutoReg> T registerItem(T item) {
+    public <T extends Item & ISettingsItem> T registerItem(T item) {
         return this.registerItem(item, item.getName());
     }
 

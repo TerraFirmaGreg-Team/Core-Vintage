@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.ISettingsBlock;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -12,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
@@ -26,8 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.Nullable;
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -38,38 +35,22 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock, IS
 
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 
+    protected final Settings settings;
     private final SoilBlockVariant variant;
     private final SoilType type;
-
-    protected final Settings settings;
 
     public BlockSoilGrassPath(SoilBlockVariant variant, SoilType type) {
 
         this.variant = variant;
         this.type = type;
         this.useNeighborBrightness = true;
-        this.settings = Settings.of();
+        this.settings = Settings.of(Material.GROUND)
+                .soundType(SoundType.PLANT)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .hardness(2.0F)
+                .addOreDict(variant);
 
-        setSoundType(SoundType.PLANT);
-        setHardness(2.0F);
         setHarvestLevel("shovel", 0);
-        setLightOpacity(255);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override

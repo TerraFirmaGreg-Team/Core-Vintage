@@ -12,11 +12,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -27,6 +23,9 @@ public class BlockSoilPodzol extends BlockSoil {
 
     public BlockSoilPodzol(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
+
+        getSettings()
+                .renderLayer(BlockRenderLayer.CUTOUT);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
@@ -61,12 +60,5 @@ public class BlockSoilPodzol extends BlockSoil {
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, CLAY);
-    }
-
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 }

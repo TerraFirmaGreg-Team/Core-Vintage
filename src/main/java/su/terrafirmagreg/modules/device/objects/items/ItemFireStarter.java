@@ -29,8 +29,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 
-import mcp.MethodsReturnNonnullByDefault;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -38,13 +36,16 @@ import java.util.List;
 
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
-@MethodsReturnNonnullByDefault
 public class ItemFireStarter extends BaseItem {
 
     public ItemFireStarter() {
-        setMaxDamage(8);
-        setMaxStackSize(1);
         setNoRepair();
+        getSettings()
+                .registryKey("device/firestarter")
+                .addOreDict("firestarter")
+                .notCanStack()
+                .maxDamage(8)
+                .maxCount(1);
 
     }
 
@@ -84,18 +85,7 @@ public class ItemFireStarter extends BaseItem {
     }
 
     @Override
-    public String getName() {
-        return "device/firestarter";
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "firestarter");
-    }
-
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                      float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (hand != EnumHand.MAIN_HAND || worldIn.isRemote) {
             return EnumActionResult.PASS;
         }
@@ -216,11 +206,6 @@ public class ItemFireStarter extends BaseItem {
                 }
             }
         }
-    }
-
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
     }
 
     @Nullable

@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 @SuppressWarnings({ "WeakerAccess", "deprecation" })
 public abstract class BasePotion extends Potion {
@@ -21,7 +21,8 @@ public abstract class BasePotion extends Potion {
 
     protected int xOffset = 0;
     protected int yOffset = 0;
-    protected boolean drawHUD = true;
+    @Getter
+    protected boolean statusIcon = true;
     protected boolean drawInventory = true;
     protected boolean drawInventoryText = true;
     protected ResourceLocation texture;
@@ -40,7 +41,7 @@ public abstract class BasePotion extends Potion {
 
     @Override
     public boolean hasStatusIcon() {
-        return drawHUD;
+        return statusIcon;
     }
 
     public void removePotionCoreEffect(EntityLivingBase entity, final Potion potion) {
@@ -71,27 +72,27 @@ public abstract class BasePotion extends Potion {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void renderInventoryEffect(@NotNull PotionEffect effect, @NotNull Gui gui, int x, int y, float z) {
+    public void renderInventoryEffect(PotionEffect effect, Gui gui, int x, int y, float z) {
         renderInventoryEffect(x, y, effect, Minecraft.getMinecraft());
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void renderInventoryEffect(int x, int y, @NotNull PotionEffect effect, @NotNull Minecraft mc) {
+    public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
         if (texture != null) {
-            Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+            mc.getTextureManager().bindTexture(texture);
             Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 6, y + yOffset + 7, 0, 0, 18, 18, 18, 18);
         }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void renderHUDEffect(@NotNull PotionEffect effect, @NotNull Gui gui, int x, int y, float z, float alpha) {
+    public void renderHUDEffect(PotionEffect effect, Gui gui, int x, int y, float z, float alpha) {
         renderHUDEffect(x, y, effect, Minecraft.getMinecraft(), alpha);
     }
 
     @Override
-    public void renderHUDEffect(int x, int y, @NotNull PotionEffect effect, @NotNull Minecraft mc, float alpha) {
+    public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
         if (texture != null) {
             mc.getTextureManager().bindTexture(texture);
             Gui.drawModalRectWithCustomSizedTexture(x + xOffset + 3, y + yOffset + 3, 0, 0, 18, 18, 18, 18);
@@ -99,17 +100,17 @@ public abstract class BasePotion extends Potion {
     }
 
     @Override
-    public boolean shouldRenderHUD(@NotNull PotionEffect effect) {
-        return drawHUD;
+    public boolean shouldRenderHUD(PotionEffect effect) {
+        return statusIcon;
     }
 
     @Override
-    public boolean shouldRender(@NotNull PotionEffect effect) {
+    public boolean shouldRender(PotionEffect effect) {
         return drawInventory;
     }
 
     @Override
-    public boolean shouldRenderInvText(@NotNull PotionEffect effect) {
+    public boolean shouldRenderInvText(PotionEffect effect) {
         return drawInventoryText;
     }
 

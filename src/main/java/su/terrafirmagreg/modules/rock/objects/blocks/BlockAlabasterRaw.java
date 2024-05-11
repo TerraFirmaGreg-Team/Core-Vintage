@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
 
@@ -12,12 +12,14 @@ import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVa
 
 public class BlockAlabasterRaw extends BlockRockDecorative {
 
-    private final String color;
-
     public BlockAlabasterRaw() {
-        super(MapColor.getBlockColor(EnumDyeColor.WHITE));
+        super(Settings.of(Material.ROCK));
 
-        this.color = "plain";
+        getSettings()
+                .mapColor(MapColor.getBlockColor(EnumDyeColor.WHITE))
+                .registryKey("rock/alabaster/raw/plain")
+                .addOreDict("alabaster")
+                .addOreDict("alabaster", "raw");
 
         for (var color : EnumDyeColor.values()) {
             BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(RAW, color), new BlockAlabasterRaw(color));
@@ -25,19 +27,13 @@ public class BlockAlabasterRaw extends BlockRockDecorative {
     }
 
     public BlockAlabasterRaw(EnumDyeColor color) {
-        super(MapColor.getBlockColor(color));
+        super(Settings.of(Material.ROCK));
 
-        this.color = color.getName();
+        getSettings()
+                .mapColor(MapColor.getBlockColor(color))
+                .registryKey("rock/alabaster/raw/" + color.getName())
+                .addOreDict("alabaster")
+                .addOreDict("alabaster", "raw");
     }
 
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "alabaster");
-        OreDictUtils.register(this, "alabaster", "raw");
-    }
-
-    @Override
-    public String getName() {
-        return String.format("rock/alabaster/raw/%s", color);
-    }
 }

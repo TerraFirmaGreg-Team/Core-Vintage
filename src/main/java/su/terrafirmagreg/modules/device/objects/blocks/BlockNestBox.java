@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
@@ -34,8 +33,9 @@ public class BlockNestBox extends BaseBlockContainer implements ITileBlock {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
 
     public BlockNestBox() {
-        super(Settings.of()
-                .material(Material.GRASS)
+        super(Settings.of(Material.GRASS)
+                .registryKey("device/nest_box")
+                .renderLayer(BlockRenderLayer.CUTOUT)
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(0.5F));
@@ -73,17 +73,11 @@ public class BlockNestBox extends BaseBlockContainer implements ITileBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TileNestBox.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileNestBox.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
@@ -93,8 +87,8 @@ public class BlockNestBox extends BaseBlockContainer implements ITileBlock {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        var te = TileUtils.getTile(world, pos, TileNestBox.class);
-        if (te != null && !world.isRemote) {
+        var tile = TileUtils.getTile(world, pos, TileNestBox.class);
+        if (tile != null && !world.isRemote) {
             GuiHandler.openGui(world, pos, player, GuiHandler.Type.NEST_BOX);
         }
         return true;
@@ -108,11 +102,6 @@ public class BlockNestBox extends BaseBlockContainer implements ITileBlock {
     @Override
     public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileNestBox();
-    }
-
-    @Override
-    public String getName() {
-        return "device/nest_box";
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 /**
  * A wrapper to the Log4J wrapper, which adds some extra utility, such as the stacktrace being added to warning messages.
@@ -30,7 +30,7 @@ public class LoggingHelper {
     private final Logger logger;
 
     public LoggingHelper() {
-        this(LogManager.getLogger(MOD_ID));
+        this(LogManager.getLogger(MOD_NAME));
     }
 
     /**

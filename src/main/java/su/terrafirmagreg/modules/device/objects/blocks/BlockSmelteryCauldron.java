@@ -40,8 +40,8 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileBlock {
 
     public BlockSmelteryCauldron() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/smeltery_cauldron")
                 .soundType(SoundType.STONE)
                 .nonOpaque()
                 .nonFullCube()
@@ -64,8 +64,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileB
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex()
-                + (state.getValue(LIT) ? 4 : 0);
+        return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
     }
 
     @Override
@@ -80,9 +79,9 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileB
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileSmelteryCauldron te = TileUtils.getTile(worldIn, pos, TileSmelteryCauldron.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileSmelteryCauldron.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -131,11 +130,6 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileB
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileSmelteryCauldron();
-    }
-
-    @Override
-    public String getName() {
-        return "device/smeltery_cauldron";
     }
 
     @Override

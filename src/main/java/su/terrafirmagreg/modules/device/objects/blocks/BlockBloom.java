@@ -26,8 +26,8 @@ import org.jetbrains.annotations.Nullable;
 public class BlockBloom extends BaseBlock implements ITileBlock {
 
     public BlockBloom() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/bloom")
                 .hardness(3.0f)
                 .soundType(SoundType.STONE));
 
@@ -36,9 +36,9 @@ public class BlockBloom extends BaseBlock implements ITileBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileBloom te = TileUtils.getTile(worldIn, pos, TileBloom.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileBloom.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -47,7 +47,7 @@ public class BlockBloom extends BaseBlock implements ITileBlock {
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, @Nullable EntityPlayer player, boolean willHarvest) {
         if (player != null && player.canHarvestBlock(state) && !player.isCreative()) {
             // Try to give the contents of the TE directly to the player if possible
-            TileBloom tile = TileUtils.getTile(world, pos, TileBloom.class);
+            var tile = TileUtils.getTile(world, pos, TileBloom.class);
             if (tile != null) {
                 IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (cap != null) {
@@ -62,7 +62,7 @@ public class BlockBloom extends BaseBlock implements ITileBlock {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        TileBloom tile = TileUtils.getTile(world, pos, TileBloom.class);
+        var tile = TileUtils.getTile(world, pos, TileBloom.class);
         if (tile != null) {
             IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (cap != null) {
@@ -73,11 +73,6 @@ public class BlockBloom extends BaseBlock implements ITileBlock {
             }
         }
         return new ItemStack(ItemsTFC.UNREFINED_BLOOM);
-    }
-
-    @Override
-    public String getName() {
-        return "device/bloom";
     }
 
     @Override

@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
 
@@ -15,7 +16,7 @@ public class BlockAlabasterBricks extends BlockRockDecorative {
     private final String color;
 
     public BlockAlabasterBricks() {
-        super(MapColor.getBlockColor(EnumDyeColor.WHITE));
+        super(Settings.of(Material.ROCK).mapColor(MapColor.getBlockColor(EnumDyeColor.WHITE)));
 
         this.color = "plain";
 
@@ -25,7 +26,7 @@ public class BlockAlabasterBricks extends BlockRockDecorative {
     }
 
     public BlockAlabasterBricks(EnumDyeColor color) {
-        super(MapColor.getBlockColor(color));
+        super(Settings.of(Material.ROCK).mapColor(MapColor.getBlockColor(color)));
 
         this.color = color.getName();
     }

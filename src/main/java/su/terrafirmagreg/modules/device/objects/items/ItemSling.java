@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
 import su.terrafirmagreg.api.spi.item.BaseItem;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetal;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetalLight;
@@ -35,11 +34,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemSling extends BaseItem {
 
-    public ItemSling() {
-        this.setMaxDamage(64);
-        this.setNoRepair();
-        this.setMaxStackSize(1);
-        this.addPropertyOverride(new ResourceLocation("spinning"), new IItemPropertyGetter() {
+    public ItemSling(String name) {
+
+        getSettings()
+                .registryKey("device/sling/" + name)
+                .maxDamage(64)
+                .maxCount(1)
+                .size(Size.NORMAL)
+                .weight(Weight.MEDIUM)
+                .addOreDict("tool");
+
+        setNoRepair();
+        setFull3D();
+        addPropertyOverride(new ResourceLocation("spinning"), new IItemPropertyGetter() {
 
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
@@ -53,31 +60,6 @@ public class ItemSling extends BaseItem {
             }
         });
 
-    }
-
-    @Override
-    public String getName() {
-        return "device/sling/normal";
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "tool");
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean isFull3D() {
-        return true;
-    }
-
-    @Override
-    public Size getSize(ItemStack itemStack) {
-        return Size.NORMAL;
-    }
-
-    @Override
-    public Weight getWeight(ItemStack itemStack) {
-        return Weight.MEDIUM;
     }
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {

@@ -20,7 +20,6 @@ public abstract class BaseItemArmor extends ItemArmor implements ISettingsItem {
         this.settings = settings;
 
         setMaxStackSize(1);
-        setCreativeTab(settings.tab);
         setTranslationKey(settings.translationKey);
     }
 

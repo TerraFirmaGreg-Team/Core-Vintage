@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -12,6 +11,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -63,19 +63,21 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
     public static final AxisAlignedBB SMALL_AABB_Z = new AxisAlignedBB(0.25, 0.25, 0, 0.75, 0.75, 1);
 
+    protected final Settings settings;
     private final WoodBlockVariant variant;
     private final WoodType type;
 
     public BlockWoodLog(WoodBlockVariant variant, WoodType type) {
         this.variant = variant;
         this.type = type;
+        this.settings = Settings.of(Material.WOOD);
 
         setTickRandomly(true);
         setHarvestLevel("axe", 0);
         setHardness(20.0F); //TODO 2.0 в тфк
         setResistance(5.0F);
 
-        setDefaultState(blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(LOG_AXIS, EnumAxis.Y)
                 .withProperty(PLACED, true)
                 .withProperty(SMALL, false));
@@ -89,14 +91,9 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
         //        }
     }
 
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullBlock(IBlockState state) {
+    public boolean isFullBlock(@NotNull IBlockState state) {
         return !state.getValue(SMALL);
     }
 
@@ -108,7 +105,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@NotNull IBlockState state) {
         return !state.getValue(SMALL);
     }
 
@@ -134,7 +131,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return !state.getValue(SMALL);
     }
 

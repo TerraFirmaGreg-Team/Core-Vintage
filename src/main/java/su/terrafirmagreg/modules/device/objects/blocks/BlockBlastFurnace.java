@@ -75,17 +75,12 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
     }
 
     public BlockBlastFurnace() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/blast_furnace")
                 .hardness(2.0F)
                 .resistance(2.0F));
 
         setHarvestLevel("pickaxe", 0);
-    }
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
     }
 
     /**
@@ -104,6 +99,11 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
         }
         // Maximum levels
         return 5;
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
@@ -162,11 +162,6 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
         if (tile != null) {
             tile.onAirIntake(airAmount);
         }
-    }
-
-    @Override
-    public String getName() {
-        return "device/blast_furnace";
     }
 
     @Override

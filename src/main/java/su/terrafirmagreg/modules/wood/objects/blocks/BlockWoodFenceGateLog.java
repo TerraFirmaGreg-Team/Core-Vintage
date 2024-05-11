@@ -13,6 +13,7 @@ public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
 
     public BlockWoodFenceGateLog(WoodBlockVariant variant, WoodType type) {
         super(variant, type);
+
     }
 
     @Override
@@ -24,8 +25,9 @@ public class BlockWoodFenceGateLog extends BlockWoodFenceGate {
     @Override
     @SideOnly(Side.CLIENT)
     public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new StateMap.Builder()
-                .ignore(BlockFenceGate.IN_WALL, BlockFenceGate.POWERED)
-                .build());
+        ModelUtils.registerStateMapper(this,
+                new StateMap.Builder()
+                        .ignore(BlockFenceGate.IN_WALL, BlockFenceGate.POWERED)
+                        .build());
     }
 }

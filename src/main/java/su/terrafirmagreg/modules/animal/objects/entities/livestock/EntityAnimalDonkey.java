@@ -200,7 +200,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(ModUtils.name("animal." + entityString + "." + this.getGender().name()));
+        return new TextComponentTranslation(ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
     }
 
     public boolean isHalter() {
@@ -381,7 +381,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            player.sendMessage(new TextComponentTranslation(ModUtils.name("tooltip.animal.mating.pregnant"), getName()));
+                            player.sendMessage(new TextComponentTranslation(ModUtils.localize("tooltip.animal.mating.pregnant"), getName()));
                         }
                     }
                 }

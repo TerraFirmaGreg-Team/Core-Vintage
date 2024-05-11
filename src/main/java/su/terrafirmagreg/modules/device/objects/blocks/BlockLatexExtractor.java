@@ -15,7 +15,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -27,8 +26,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
@@ -51,8 +48,10 @@ public class BlockLatexExtractor extends BaseBlock implements ITileBlock {
     private static final AxisAlignedBB AABB_W = new AxisAlignedBB(0.3125D, 0.125D, 0.1875D, 1.0D, 0.875D, 0.8125D);
 
     public BlockLatexExtractor() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/latex_extractor")
+                .noItemBlock()
+                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
                 .hardness(2.0F)
                 .nonFullCube()
                 .nonOpaque());
@@ -63,11 +62,6 @@ public class BlockLatexExtractor extends BaseBlock implements ITileBlock {
                 .withProperty(BASE, false)
                 .withProperty(POT, false)
                 .withProperty(CUT, 0));
-    }
-
-    @Override
-    public @Nullable Item getItemBlock() {
-        return null;
     }
 
     @Override
@@ -82,11 +76,11 @@ public class BlockLatexExtractor extends BaseBlock implements ITileBlock {
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        TileLatexExtractor te = TileUtils.getTile(worldIn, pos, TileLatexExtractor.class);
-        if (te != null) {
-            return state.withProperty(BASE, te.hasBase())
-                    .withProperty(POT, te.hasPot())
-                    .withProperty(CUT, te.cutState());
+        var tile = TileUtils.getTile(worldIn, pos, TileLatexExtractor.class);
+        if (tile != null) {
+            return state.withProperty(BASE, tile.hasBase())
+                    .withProperty(POT, tile.hasPot())
+                    .withProperty(CUT, tile.cutState());
         }
         return super.getActualState(state, worldIn, pos);
     }
@@ -116,21 +110,15 @@ public class BlockLatexExtractor extends BaseBlock implements ITileBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileLatexExtractor te = TileUtils.getTile(worldIn, pos, TileLatexExtractor.class);
-        if (te != null) {
-            if (te.cutState() > 0 && worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite()))
+        var tile = TileUtils.getTile(worldIn, pos, TileLatexExtractor.class);
+        if (tile != null) {
+            if (tile.cutState() > 0 && worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite()))
                     .getBlock() instanceof BlockLogTFC) {
                 worldIn.destroyBlock(pos.offset(state.getValue(FACING).getOpposite()), true);
             }
-            te.onBreakBlock();
+            tile.onBreakBlock();
         }
 
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
@@ -173,11 +161,6 @@ public class BlockLatexExtractor extends BaseBlock implements ITileBlock {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileLatexExtractor();
-    }
-
-    @Override
-    public String getName() {
-        return "device/latex_extractor";
     }
 
     @Override

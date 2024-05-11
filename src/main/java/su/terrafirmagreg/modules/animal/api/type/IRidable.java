@@ -28,10 +28,10 @@ public interface IRidable {
             if (!world.isRemote) {
                 if (animal.getAge() == IAnimal.Age.CHILD) {
                     ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                            ModUtils.name(".tooltip.animal.product.young"), animal.getAnimalName()), (EntityPlayerMP) player);
+                            ModUtils.localize("tooltip.animal.product.young"), animal.getAnimalName()), (EntityPlayerMP) player);
                 } else {
                     ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                            ModUtils.name(".tooltip.animal.product.low_familiarity"), animal.getAnimalName()), (EntityPlayerMP) player);
+                            ModUtils.localize("tooltip.animal.product.low_familiarity"), animal.getAnimalName()), (EntityPlayerMP) player);
                 }
             }
             return false;

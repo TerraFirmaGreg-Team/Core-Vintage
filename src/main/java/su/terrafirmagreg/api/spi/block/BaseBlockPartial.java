@@ -31,50 +31,50 @@ public abstract class BaseBlockPartial extends BaseBlock {
     // ---------------------------------------------------------------------------
 
     @Override
-    public boolean isSideSolid(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
+    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
 
         return false;
     }
 
     @Override
-    public boolean isFullBlock(@NotNull IBlockState state) {
+    public boolean isFullBlock(IBlockState state) {
 
         return false;
     }
 
     @Override
-    public boolean isFullCube(@NotNull IBlockState state) {
+    public boolean isFullCube(IBlockState state) {
 
         return this.isFullBlock(state);
     }
 
     @Override
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
+    public boolean isOpaqueCube(IBlockState state) {
 
         return this.isFullBlock(state);
     }
 
     @Override
-    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
 
         return this.isFullBlock(state);
     }
 
     @NotNull
     @Override
-    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos, @NotNull EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 
         return BlockFaceShape.UNDEFINED;
     }
 
     @Override
-    public boolean shouldSideBeRendered(@NotNull IBlockState blockState, @NotNull IBlockAccess blockAccess, @NotNull BlockPos pos, @NotNull EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 
         return true;
     }
 
     @Override
-    public boolean doesSideBlockRendering(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing face) {
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
 
         return false;
     }

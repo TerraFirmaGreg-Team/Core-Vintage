@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.device.objects.itemblocks;
 
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.modules.device.client.render.TEISRFridge;
-import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +12,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+
+import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
 public class ItemBlockFridge extends BaseItemBlock {
 
@@ -34,11 +37,11 @@ public class ItemBlockFridge extends BaseItemBlock {
             if (!worldIn.isRemote) {
                 stack.shrink(1);
                 IBlockState lowerState = this.block.getDefaultState()
-                        .withProperty(BlockFridge.FACING, player.getHorizontalFacing().getOpposite())
-                        .withProperty(BlockFridge.UPPER, false);
+                        .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
+                        .withProperty(UPPER, false);
                 IBlockState upperState = this.block.getDefaultState()
-                        .withProperty(BlockFridge.FACING, player.getHorizontalFacing().getOpposite())
-                        .withProperty(BlockFridge.UPPER, true);
+                        .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
+                        .withProperty(UPPER, true);
                 worldIn.setBlockState(pos, lowerState);
                 worldIn.setBlockState(pos.up(), upperState);
             }

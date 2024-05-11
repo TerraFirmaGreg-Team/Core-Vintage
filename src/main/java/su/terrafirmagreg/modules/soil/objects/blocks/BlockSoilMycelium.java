@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -8,6 +7,8 @@ import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMycelium;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -17,14 +18,9 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
@@ -35,6 +31,7 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 @Getter
 public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
+    protected final Settings settings;
     private final SoilBlockVariant variant;
     private final SoilType type;
 
@@ -42,8 +39,11 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
         this.variant = variant;
         this.type = type;
-
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
+        this.settings = Settings.of(Material.GRASS)
+                .mapColor(MapColor.PURPLE)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict(variant)
+                .addOreDict(variant, type);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
@@ -54,15 +54,10 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
                 .withProperty(CLAY, Boolean.FALSE)
         );
 
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
 
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @NotNull
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         pos = pos.add(0, -1, 0);
@@ -75,7 +70,6 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
                 .withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
     }
 
-    @NotNull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY, CLAY);
@@ -91,10 +85,4 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
         return state.getValue(CLAY) ? Items.CLAY_BALL : SoilItemVariants.PILE.get(getType());
     }
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
 }

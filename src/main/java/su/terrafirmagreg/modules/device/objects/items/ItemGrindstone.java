@@ -15,20 +15,23 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+@Getter
 public class ItemGrindstone extends BaseItem {
 
-    @Getter
     private final int tier;
-    private final String name;
 
     public ItemGrindstone(int tier, int durability, String name) {
-
         this.tier = tier;
-        this.name = name;
 
-        setMaxDamage(durability);
         setNoRepair();
-        setMaxStackSize(1);
+        getSettings()
+                .registryKey("device/grindstone/" + name)
+                .weight(Weight.HEAVY)
+                .size(Size.LARGE)
+                .notCanStack()
+                .maxDamage(durability)
+                .maxCount(1);
+
     }
 
     public int getMaxCharges() {
@@ -39,31 +42,11 @@ public class ItemGrindstone extends BaseItem {
         };
     }
 
-    @Override
-    public Size getSize(ItemStack itemStack) {
-        return Size.LARGE;
-    }
-
-    @Override
-    public Weight getWeight(ItemStack itemStack) {
-        return Weight.HEAVY;
-    }
-
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
-    }
-
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
         if (tier == 1) {
             return new ForgeableHandler(nbt);
         } else {
             return null;
         }
-    }
-
-    @Override
-    public String getName() {
-        return "device/grindstone/" + name;
     }
 }

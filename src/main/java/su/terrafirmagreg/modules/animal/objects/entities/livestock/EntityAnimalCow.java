@@ -205,15 +205,15 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
     @Override
     public TextComponentTranslation getTooltip() {
         if (getGender() == Gender.MALE) {
-            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.male_milk"));
+            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.male_milk"));
         } else if (getAge() == Age.OLD) {
-            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.old"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.old"), getAnimalName());
         } else if (getAge() == Age.CHILD) {
-            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.young"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.young"), getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.low_familiarity"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.low_familiarity"), getAnimalName());
         } else if (!hasMilk()) {
-            return new TextComponentTranslation(ModUtils.name("tooltip.animal.product.no_milk"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.no_milk"), getAnimalName());
         }
         return null;
     }

@@ -7,13 +7,8 @@ import net.minecraft.block.material.Material;
 public class BlockCellarDoor extends BaseBlockDoor {
 
     public BlockCellarDoor() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/cellar/door")
                 .hardness(2F));
-    }
-
-    @Override
-    public String getName() {
-        return "device/cellar/door";
     }
 }

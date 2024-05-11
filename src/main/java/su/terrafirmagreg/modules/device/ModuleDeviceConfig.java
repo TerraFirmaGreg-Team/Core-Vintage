@@ -48,17 +48,14 @@ public class ModuleDeviceConfig {
 
             @Config.Comment("Liquid Capacity of Leather Flask (500 = 1/2 bucket = 5 drinks or 2 water bars)")
             @Config.RangeInt(min = 100)
-            @Config.LangKey("config." + MOD_ID + ".device.water_flasks.leatherCap")
             public int leatherCap = 500;
 
             @Config.Comment("Liquid Capacity of Iron Flask (1000 = 1 bucket = 10 drinks or 4 water bars)")
             @Config.RangeInt(min = 100)
-            @Config.LangKey("config." + MOD_ID + ".device.water_flasks.ironCap")
             public int ironCap = 2000;
 
             @Config.Comment("Damage Capability of Flasks are Capacity/(this value) 0 = MAXINT uses")
             @Config.RangeInt(min = 0)
-            @Config.LangKey("config." + MOD_ID + ".device.water_flasks.damageFactor")
             public int damageFactor = 5;
 
         }

@@ -234,7 +234,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(ModUtils.name("animal." + entityString + "." + this.getGender().name()));
+        return new TextComponentTranslation(ModUtils.localize("animal." + entityString + "." + this.getGender().name()));
     }
 
     @Override

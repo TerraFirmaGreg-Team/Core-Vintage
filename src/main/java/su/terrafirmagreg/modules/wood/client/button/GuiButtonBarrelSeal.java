@@ -24,7 +24,7 @@ public class GuiButtonBarrelSeal extends BaseGuiButton implements IButtonTooltip
 
     @Override
     public String getTooltip() {
-        return ModUtils.name("tooltip.") + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
+        return ModUtils.localize("tooltip.") + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
     }
 
     @Override

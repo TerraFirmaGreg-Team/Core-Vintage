@@ -99,7 +99,7 @@ public class ContainerAnvilTFC extends BaseContainerTile<TEMetalAnvil> implement
         //		}
 
         if (!cap.isWorkable()) {
-            player.sendMessage(new TextComponentTranslation(ModUtils.name("tooltip.anvil_too_cold")));
+            player.sendMessage(new TextComponentTranslation(ModUtils.localize("tooltip.anvil_too_cold")));
             return false;
         }
 
@@ -124,7 +124,7 @@ public class ContainerAnvilTFC extends BaseContainerTile<TEMetalAnvil> implement
                 return true;
             } else {
                 player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(
-                        new TextComponentTranslation(ModUtils.name("tooltip.anvil_no_hammer"))));
+                        new TextComponentTranslation(ModUtils.localize("tooltip.anvil_no_hammer"))));
                 return false;
             }
         }

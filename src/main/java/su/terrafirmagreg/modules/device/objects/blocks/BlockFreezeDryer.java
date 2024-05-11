@@ -30,11 +30,12 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 public class BlockFreezeDryer extends BaseBlockContainer implements ITileBlock {
 
     public BlockFreezeDryer() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/freeze_dryer")
                 .nonOpaque()
                 .nonFullCube()
-                .hardness(2F));
+                .hardness(2F)
+                .renderLayer(BlockRenderLayer.CUTOUT));
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
@@ -42,11 +43,6 @@ public class BlockFreezeDryer extends BaseBlockContainer implements ITileBlock {
 
     public EnumFacing getFacing(IBlockState state) {
         return state.getValue(HORIZONTAL);
-    }
-
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
@@ -117,17 +113,17 @@ public class BlockFreezeDryer extends BaseBlockContainer implements ITileBlock {
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
-            var te = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
-            //te.setCustomName(stack.getDisplayName());
+            var tile = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
+            //tile.setCustomName(stack.getDisplayName());
         }
 
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -141,11 +137,6 @@ public class BlockFreezeDryer extends BaseBlockContainer implements ITileBlock {
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
-    }
-
-    @Override
-    public String getName() {
-        return "device/freeze_dryer";
     }
 
     @Override

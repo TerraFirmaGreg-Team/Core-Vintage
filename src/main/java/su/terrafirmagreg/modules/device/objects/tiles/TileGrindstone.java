@@ -6,7 +6,6 @@ import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemGrindstone;
 
 import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -118,7 +117,7 @@ public class TileGrindstone extends BaseTileInventory implements ITickable {
             }
             if (this.rotationTimer == 0) {
                 this.rotationTimer = 90;
-                world.playSound((EntityPlayer) null, pos, TFCSounds.QUERN_USE, SoundCategory.BLOCKS, 0.2F,
+                world.playSound(null, pos, TFCSounds.QUERN_USE, SoundCategory.BLOCKS, 0.2F,
                         0.8F + (world.rand.nextFloat() - world.rand.nextFloat()) / 16.0F);
             }
         } else {

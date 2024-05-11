@@ -142,8 +142,7 @@ public final class BlockUtils {
         }
     }
 
-    public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockFilter filter,
-                                                  List<BlockPos> result) {
+    public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockFilter filter, List<BlockPos> result) {
 
         for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
             for (int y = pos.getY() - rangeY; y <= pos.getY() + rangeY; y++) {

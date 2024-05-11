@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -14,6 +13,7 @@ import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -34,8 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.Nullable;
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -46,6 +44,7 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 @SuppressWarnings("deprecation")
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColorProvider {
 
+    protected final Settings settings;
     private final SoilBlockVariant variant;
     private final SoilType type;
 
@@ -53,11 +52,11 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColo
 
         this.variant = variant;
         this.type = type;
+        this.settings = Settings.of(Material.GRASS)
+                .soundType(SoundType.PLANT)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .hardness(2.1F);
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
-
-        setSoundType(SoundType.PLANT);
-        setHardness(2.1F);
         setHarvestLevel("shovel", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
@@ -67,12 +66,8 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColo
                 .withProperty(SNOWY, Boolean.FALSE)
                 .withProperty(CLAY, Boolean.FALSE));
 
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
     }
 
     public static void spreadGrass(World world, BlockPos pos, IBlockState us, Random rand) {
@@ -247,12 +242,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColo
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return super.shouldSideBeRendered(blockState, world, pos, side);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     // TODO

@@ -26,7 +26,7 @@ assertProperty 'mod_name'
 assertSubProperties 'use_tags', 'tag_class_name'
 assertSubProperties 'use_access_transformer', 'access_transformer_locations'
 assertSubProperties 'use_mixins', 'mixin_booter_version', 'mixin_refmap'
-assertSubProperties 'is_coremod', 'coremod_includes_mod', 'coremod_plugin_class_name'
+assertSubProperties 'is_coremod', 'coremod_includes_mod', 'coremod_debug', 'coremod_plugin_class_name'
 assertSubProperties 'use_asset_mover', 'asset_mover_version'
 
 setDefaultProperty 'use_modern_java_syntax', false, false
@@ -75,6 +75,18 @@ minecraft {
 
     // Add various JVM arguments here for runtime
     def args = ['-ea:' + group]
+    if (propertyBool('is_coremod')) {
+        args << '-Dfml.coreMods.load=' + coremod_plugin_class_name
+        args << '-Dlegacy.debugClassLoading=true'
+        args << '-Dlegacy.debugClassLoadingFiner=true'
+        args << '-Dlegacy.debugClassLoadingSave=true'
+//        if (propertyBool('coremod_debug')) {
+//            args << '-Dlegacy.debugClassLoading=true'
+//            args << '-Dlegacy.debugClassLoadingFiner=true'
+//            args << '-Dlegacy.debugClassLoadingSave=true'
+//        }
+    }
+
     if (propertyBool('use_mixins')) {
         args << '-Dmixin.hotSwap=true'
         args << '-Dmixin.checks.interfaces=true'

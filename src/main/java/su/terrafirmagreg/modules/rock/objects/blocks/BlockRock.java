@@ -28,16 +28,21 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
     private final RockType type;
 
     public BlockRock(Settings settings, RockBlockVariant variant, RockType type) {
-        super(settings.soundType(SoundType.STONE));
+        super(settings);
 
         this.variant = variant;
         this.type = type;
+
+        getSettings()
+                .soundType(SoundType.STONE)
+                .addOreDict(variant)
+                .addOreDict(variant, type);
 
         setHarvestLevel("pickaxe", 0);
     }
 
     public BlockRock(RockBlockVariant variant, RockType type) {
-        this(Settings.of().material(Material.ROCK), variant, type);
+        this(Settings.of(Material.ROCK), variant, type);
 
     }
 

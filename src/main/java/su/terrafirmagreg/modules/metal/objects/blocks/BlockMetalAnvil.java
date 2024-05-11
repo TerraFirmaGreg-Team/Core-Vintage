@@ -61,8 +61,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
     private final MetalType type;
 
     public BlockMetalAnvil(MetalBlockVariant variant, MetalType type) {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
                 .soundType(SoundType.ANVIL)
                 .nonFullCube()
                 .nonOpaque()

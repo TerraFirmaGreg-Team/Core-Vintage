@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
@@ -24,9 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -35,30 +31,17 @@ public class BlockRockAnvil extends BlockRock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
     public BlockRockAnvil(RockBlockVariant variant, RockType type) {
-        super(Settings.of()
-                        .material(Material.ROCK)
-                        .nonOpaque()
-                        .nonFullCube(),
-                variant, type);
+        super(Settings.of(Material.ROCK)
+                .nonOpaque()
+                .nonFullCube()
+                .renderLayer(BlockRenderLayer.CUTOUT), variant, type);
 
         FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        //        return this.getType().getRockCategory().isHasAnvil() ? new BaseItemBlock(this) : null;
-        return new BaseItemBlock(this);
-    }
-
-    @Override
     public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return side == EnumFacing.DOWN;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
@@ -73,8 +56,6 @@ public class BlockRockAnvil extends BlockRock {
 
     @SideOnly(Side.CLIENT)
     @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         return AABB;
     }

@@ -323,7 +323,7 @@ public class TEMetalAnvil extends BaseTileInventory {
         // For when there is both inputs but no recipe that matches
         ModuleMetal.PACKET_SERVICE.sendTo(
                 SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANVIL,
-                        ModUtils.name("tooltip.anvil_not_weldable")),
+                        ModUtils.localize("tooltip.anvil_not_weldable")),
                 (EntityPlayerMP) player);
         return false;
     }

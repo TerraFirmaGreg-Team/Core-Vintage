@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood.objects.items;
 
 import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
@@ -37,25 +36,13 @@ public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
     public ItemWoodSupplyCart(WoodItemVariant variant, WoodType type) {
         this.type = type;
         this.variant = variant;
-        this.setMaxStackSize(1);
-    }
 
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-        OreDictUtils.register(this, variant, type);
-    }
-
-    @NotNull
-    @Override
-    public Size getSize(ItemStack itemStack) {
-        return Size.HUGE;
-    }
-
-    @NotNull
-    @Override
-    public Weight getWeight(ItemStack itemStack) {
-        return Weight.VERY_HEAVY;
+        getSettings()
+                .size(Size.HUGE)
+                .weight(Weight.VERY_HEAVY)
+                .maxCount(1)
+                .addOreDict(variant)
+                .addOreDict(variant, type);
     }
 
     @NotNull

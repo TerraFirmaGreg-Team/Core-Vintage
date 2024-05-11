@@ -3,9 +3,7 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -16,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.Entity;
@@ -35,14 +34,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import lombok.Getter;
 
 import java.util.Random;
 
 @Getter
+@SuppressWarnings("deprecation")
 public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlockColorProvider, IStateMapperProvider {
 
     public static final int[] TINT = new int[] {
@@ -57,6 +54,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
     };
     private static final AxisAlignedBB FLIPPED_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
 
+    protected final Settings settings;
     private final SoilBlockVariant variant;
     private final SoilType type;
 
@@ -68,12 +66,15 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
         this.variant = variant;
         this.type = type;
         this.useNeighborBrightness = true;
+        this.settings = Settings.of(Material.GROUND)
+                .soundType(SoundType.GROUND)
+                .hardness(2.0F)
+                .addOreDict(variant)
+                .addOreDict(variant, type);
 
-        setSoundType(SoundType.GROUND);
-        setHardness(2.0F);
         setHarvestLevel("shovel", 0);
         setDefaultState(getBlockState().getBaseState()
-                .withProperty(BlockFarmland.MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+                .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     }
 
     protected static void turnToDirt(World world, BlockPos pos) {
@@ -91,22 +92,10 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
     }
 
     @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
     public boolean isSideSolid(IBlockState baseState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return (side != EnumFacing.DOWN && side != EnumFacing.UP);
     }
 
-    @NotNull
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(this);
@@ -223,7 +212,6 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
         }
     }
 
-    @NotNull
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return SoilItemVariants.PILE.get(getType());
@@ -231,7 +219,6 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings("deprecation")
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         switch (side) {
             case UP:

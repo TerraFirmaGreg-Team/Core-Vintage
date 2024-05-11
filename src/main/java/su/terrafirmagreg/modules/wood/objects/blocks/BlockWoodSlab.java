@@ -3,12 +3,10 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -26,20 +24,17 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
     private final WoodBlockVariant variant;
     private final WoodType type;
 
-    protected Block block;
     protected Half halfSlab;
     protected Double doubleSlab;
 
     private BlockWoodSlab(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
                 .soundType(SoundType.WOOD));
 
         this.variant = variant;
         this.type = type;
-        this.block = model.get(type);
 
-        setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
+        setHarvestLevel("pickaxe", model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
@@ -81,13 +76,10 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
             this.doubleSlab.halfSlab = this;
             this.halfSlab = this;
 
-        }
+            getSettings()
+                    .addOreDict("slab", "wood")
+                    .addOreDict("slab", "wood", type);
 
-        @Override
-        public void onRegisterOreDict() {
-            OreDictUtils.register(this, getVariant());
-            OreDictUtils.register(this, getVariant(), "wood");
-            OreDictUtils.register(this, getVariant(), "wood", getType());
         }
 
         @Override

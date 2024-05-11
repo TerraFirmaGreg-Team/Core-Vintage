@@ -4,24 +4,15 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-
-import org.jetbrains.annotations.NotNull;
 
 public class BlockSoilRootedDirt extends BlockSoil {
 
     public BlockSoilRootedDirt(SoilBlockVariant variant, SoilType type) {
         super(variant, type);
 
-        //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
-    }
+        getSettings()
+                .renderLayer(BlockRenderLayer.CUTOUT);
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+        //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
 }

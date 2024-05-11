@@ -29,11 +29,7 @@ public abstract class BaseBlockRotatedPillar extends BlockRotatedPillar implemen
         super(settings.material, settings.material.getMaterialMapColor());
         this.settings = settings;
 
-        setResistance(settings.resistance);
-        setHardness(settings.hardness);
-        setSoundType(settings.soundType);
         setTranslationKey(settings.translationKey);
-        setCreativeTab(settings.tab);
 
         // Fix some potential issues with these fields being set prematurely by the super ctor
         this.fullBlock = getDefaultState().isOpaqueCube();

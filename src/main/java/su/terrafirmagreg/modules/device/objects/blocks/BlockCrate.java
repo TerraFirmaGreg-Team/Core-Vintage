@@ -29,14 +29,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.data.Blockstates.SEALED;
@@ -45,31 +42,31 @@ import static su.terrafirmagreg.api.data.Blockstates.SEALED;
  * Crate is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and cached in the TE
  * (for gui purposes)
  */
+@SuppressWarnings("deprecation")
 public class BlockCrate extends BaseBlockContainer implements ITileBlock {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D, 0.875D, 0.95D);
     private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D, 0.875D, 0.95D);
 
-    @SuppressWarnings("WeakerAccess")
     public BlockCrate() {
-        super(Settings.of()
-                .material(Material.CIRCUITS));
-        setSoundType(SoundType.WOOD);
-        setHardness(2F);
-        setDefaultState(blockState.getBaseState()
-                .withProperty(SEALED, false));
-    }
+        super(Settings.of(Material.CIRCUITS)
+                .registryKey("device/crate")
+                .soundType(SoundType.WOOD)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .hardness(2F)
+                .nonOpaque()
+                .nonFullCube()
+                .weight(Weight.VERY_HEAVY));
 
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(SEALED, false));
     }
 
     /**
      * Used to update the vessel seal state and the TE, in the correct order
      */
     public static void toggleCrateSeal(World world, BlockPos pos) {
-        TileCrate tile = TileUtils.getTile(world, pos, TileCrate.class);
+        var tile = TileUtils.getTile(world, pos, TileCrate.class);
         if (tile != null) {
             IBlockState state = world.getBlockState(pos);
             boolean previousSealed = state.getValue(SEALED);
@@ -83,8 +80,8 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
     }
 
     @Override
-    public String getName() {
-        return "device/crate";
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
@@ -98,30 +95,11 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
     }
 
     @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.VERY_HEAVY; // Stacksize = 1
-    }
-
-    @Override
     public boolean canStack(ItemStack stack) {
         return stack.getTagCompound() == null;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isTopSolid(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullBlock(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @NotNull
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(SEALED, meta == 1);
     }
@@ -131,48 +109,12 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
         return state.getValue(SEALED) ? 1 : 0;
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isBlockNormalCube(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isNormalCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @NotNull
-    @SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return state.getValue(SEALED) ? BOUNDING_BOX_SEALED : BOUNDING_BOX;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    @NotNull
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-                                            EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn,
-                                BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!canStay(world, pos)) {
             world.destroyBlock(pos, true);
         }
@@ -180,18 +122,11 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileCrate tile = TileUtils.getTile(worldIn, pos, TileCrate.class);
+        var tile = TileUtils.getTile(worldIn, pos, TileCrate.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
-    }
-
-    @Override
-    @NotNull
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
@@ -200,12 +135,11 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
-            TileCrate te = TileUtils.getTile(worldIn, pos, TileCrate.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(worldIn, pos, TileCrate.class);
+            if (tile != null) {
                 if (heldItem.isEmpty() && playerIn.isSneaking()) {
                     worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
                     toggleCrateSeal(worldIn, pos);
@@ -218,41 +152,23 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-                                ItemStack stack) {
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         // If the barrel was sealed, then copy the contents from the item
         if (!worldIn.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                TileCrate te = TileUtils.getTile(worldIn, pos, TileCrate.class);
-                if (te != null) {
+                var tile = TileUtils.getTile(worldIn, pos, TileCrate.class);
+                if (tile != null) {
                     worldIn.setBlockState(pos, state.withProperty(SEALED, true));
-                    te.readFromItemTag(nbt);
+                    tile.readFromItemTag(nbt);
                 }
             }
         }
     }
 
     @Override
-    @NotNull
     public BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, SEALED);
-    }
-
-    @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        return false;
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
     }
 
     @Nullable

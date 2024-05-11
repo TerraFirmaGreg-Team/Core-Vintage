@@ -3,10 +3,7 @@ package su.terrafirmagreg.modules.soil.api.types.variant.block;
 import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
-
-import net.minecraft.block.Block;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -27,8 +24,4 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
         return String.format("soil/%s/%s", getVariant(), getType());
     }
 
-    @Override
-    default void onRegisterOreDict() {
-        OreDictUtils.register((Block) this, getVariant());
-    }
 }

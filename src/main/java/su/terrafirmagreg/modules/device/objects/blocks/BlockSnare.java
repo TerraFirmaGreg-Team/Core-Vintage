@@ -54,8 +54,8 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
     protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
     public BlockSnare() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/snare")
                 .soundType(SoundType.WOOD)
                 .hardness(1.5f)
                 .nonFullCube()
@@ -116,9 +116,8 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
 
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
-        assert snare != null;
-        if (!snare.isOpen()) {
+        var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
+        if (!tile.isOpen()) {
             if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
                 worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
             } else {
@@ -155,17 +154,17 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
     @Override
     public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (isCapturable(entityIn)) {
-            TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
+            var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
             EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
-            assert snare != null;
-            if (snare.isOpen()) {
-                snare.setCapturedEntity(entityLiving);
+            assert tile != null;
+            if (tile.isOpen()) {
+                tile.setCapturedEntity(entityLiving);
                 entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-                snare.setOpen(false);
+                tile.setOpen(false);
                 state = state.withProperty(CLOSED, Boolean.TRUE);
                 state = state.withProperty(BAITED, Boolean.FALSE);
                 worldIn.setBlockState(pos, state, 2);
-            } else if (snare.getCapturedEntity() != null && snare.getCapturedEntity().equals(entityLiving)) {
+            } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity().equals(entityLiving)) {
                 entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             }
         }
@@ -174,14 +173,13 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D, pos.getZ() + 10.0D);
-        TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
-        assert snare != null;
-        if (snare.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty() && !worldIn.isRemote) {
+        var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
+        if (tile.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty() && !worldIn.isRemote) {
             for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox)) {
                 if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition())
                         .getBlock() instanceof BlockSnare)) {
-                    snare.setCapturedEntity(animal);
-                    snare.setOpen(false);
+                    tile.setCapturedEntity(animal);
+                    tile.setOpen(false);
                     state = state.withProperty(CLOSED, Boolean.TRUE);
                     state = state.withProperty(BAITED, Boolean.FALSE);
                     worldIn.setBlockState(pos, state, 2);
@@ -214,8 +212,8 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
                     }
                     animal.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
                     worldIn.spawnEntity(animal);
-                    snare.setCapturedEntity(animal);
-                    snare.setOpen(false);
+                    tile.setCapturedEntity(animal);
+                    tile.setOpen(false);
                     state = state.withProperty(CLOSED, Boolean.TRUE);
                     state = state.withProperty(BAITED, Boolean.FALSE);
                     worldIn.setBlockState(pos, state, 2);
@@ -235,9 +233,8 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
-            TileSnare snare = TileUtils.getTile(worldIn, pos, TileSnare.class);
-            assert snare != null;
-            if (!snare.isOpen()) {
+            var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
+            if (!tile.isOpen()) {
                 if (Math.random() < ConfigTFCThings.Items.SNARE.breakChance) {
                     worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
                 } else {
@@ -258,11 +255,6 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
     @Override
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return "device/snare";
     }
 
     @Override

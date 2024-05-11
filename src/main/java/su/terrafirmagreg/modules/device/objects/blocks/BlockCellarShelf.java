@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -26,8 +25,8 @@ import org.jetbrains.annotations.Nullable;
 public class BlockCellarShelf extends BaseBlockContainer implements ITileBlock {
 
     public BlockCellarShelf() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/cellar/shelf")
                 .hardness(2F)
                 .nonOpaque());
     }
@@ -44,24 +43,19 @@ public class BlockCellarShelf extends BaseBlockContainer implements ITileBlock {
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
-            var te = TileUtils.getTile(worldIn, pos, TileCellarShelf.class);
-            //te.setCustomName(stack.getDisplayName());
+            var tile = TileUtils.getTile(worldIn, pos, TileCellarShelf.class);
+            //tile.setCustomName(stack.getDisplayName());
         }
 
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TileCellarShelf.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileCellarShelf.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
-    }
-
-    @Override
-    public @Nullable TileEntity createNewTileEntity(World world, int i) {
-        return new TileCellarShelf();
     }
 
     @Override
@@ -70,8 +64,8 @@ public class BlockCellarShelf extends BaseBlockContainer implements ITileBlock {
     }
 
     @Override
-    public String getName() {
-        return "device/cellar/shelf";
+    public @Nullable TileEntity createNewTileEntity(World world, int i) {
+        return new TileCellarShelf();
     }
 
     @Override

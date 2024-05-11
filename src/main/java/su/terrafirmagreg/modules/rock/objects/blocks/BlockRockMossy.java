@@ -4,13 +4,9 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.util.FallingBlockManager;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Пока это почти полная копия {@link BlockRock} Этот клас в будущем планируется использовать для механики распространения мха
@@ -20,13 +16,9 @@ public class BlockRockMossy extends BlockRock {
     public BlockRockMossy(RockBlockVariant variant, RockType type) {
         super(variant, type);
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
-    }
+        getSettings()
+                .renderLayer(BlockRenderLayer.CUTOUT);
 
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 }

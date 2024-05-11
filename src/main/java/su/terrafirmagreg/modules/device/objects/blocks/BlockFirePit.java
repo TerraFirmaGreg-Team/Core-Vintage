@@ -74,15 +74,16 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     private static final AxisAlignedBB ATTACHMENT_COLLISION_ADDITION_AABB = new AxisAlignedBB(0.1875, 0.125, 0.1875, 0.8125, 0.9375, 0.8125);
 
     public BlockFirePit() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/fire_pit")
                 .hardness(0.3F)
                 .nonFullCube()
-                .nonOpaque());
+                .nonOpaque()
+                .lightValue(15)
+                .renderLayer(BlockRenderLayer.CUTOUT));
 
         disableStats();
         setTickRandomly(true);
-        setLightLevel(1F);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)
                 .withProperty(ATTACHMENT, FirePitAttachment.NONE));
@@ -124,10 +125,10 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
     @Override
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        TileFirePit te = TileUtils.getTile(worldIn, pos, TileFirePit.class);
+        var tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
         // Have to check the above block, since minecraft think this block is "roof"
-        if (te != null && state.getValue(LIT) && worldIn.isRainingAt(pos.up())) {
-            te.onRainDrop();
+        if (tile != null && state.getValue(LIT) && worldIn.isRainingAt(pos.up())) {
+            tile.onRainDrop();
         }
     }
 
@@ -198,7 +199,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileFirePit tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
+        var tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
         if (tile != null) {
             tile.onBreakBlock(worldIn, pos, state);
         }
@@ -208,12 +209,6 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.AIR;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
@@ -336,11 +331,6 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     @Override
-    public @Nullable TileFirePit createNewTileEntity(World worldIn, int meta) {
-        return new TileFirePit();
-    }
-
-    @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         drops.add(new ItemStack(ItemsCore.WOOD_ASH, 3 + RNG.nextInt(5)));
     }
@@ -358,19 +348,14 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
     @Override
     public void onAirIntake(World world, BlockPos pos, int airAmount) {
-        TileFirePit teFirePit = TileUtils.getTile(world, pos, TileFirePit.class);
-        if (teFirePit != null) {
-            teFirePit.onAirIntake(airAmount);
+        var tile = TileUtils.getTile(world, pos, TileFirePit.class);
+        if (tile != null) {
+            tile.onAirIntake(airAmount);
         }
     }
 
     private boolean canBePlacedOn(World worldIn, BlockPos pos) {
         return worldIn.getBlockState(pos).isSideSolid(worldIn, pos, EnumFacing.UP);
-    }
-
-    @Override
-    public String getName() {
-        return "device/fire_pit";
     }
 
     @Override
@@ -381,6 +366,11 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     @Override
     public TileEntitySpecialRenderer<?> getTileRenderer() {
         return new TESRFirePit();
+    }
+
+    @Override
+    public @Nullable TileFirePit createNewTileEntity(World worldIn, int meta) {
+        return new TileFirePit();
     }
 
     public enum FirePitAttachment implements IStringSerializable {

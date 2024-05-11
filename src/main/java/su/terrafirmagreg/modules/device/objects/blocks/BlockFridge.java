@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRFridge;
@@ -10,7 +11,6 @@ import su.terrafirmagreg.modules.device.objects.tiles.TileFridge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
@@ -50,11 +50,10 @@ import java.util.Map;
 import java.util.Random;
 
 import static net.minecraft.util.EnumFacing.NORTH;
+import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
 @SuppressWarnings("deprecation")
 public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, IStateMapperProvider {
-
-    public static final PropertyBool UPPER = PropertyBool.create("upper"); //true if this is the upper half
 
     private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0D, 0D, 0.125D, 1D, 1D, 1D);
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0D, 0D, 0.0D, 1D, 1D, 0.875D);
@@ -76,8 +75,8 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ISta
     }
 
     public BlockFridge() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/fridge")
                 .hardness(3.0F)
                 .nonOpaque()
                 .nonFullCube()
@@ -92,7 +91,7 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ISta
     }
 
     @Override
-    public @Nullable Item getItemBlock() {
+    public @Nullable BaseItemBlock getItemBlock() {
         return new ItemBlockFridge(this);
     }
 
@@ -195,35 +194,35 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ISta
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        BlockPos TEPos = pos;
+        BlockPos tilePos = pos;
         if (!state.getValue(UPPER)) {
-            TEPos = pos.up();
+            tilePos = pos.up();
         }
-        TileFridge te = TileUtils.getTile(world, TEPos, TileFridge.class);
-        if (te != null && !te.isAnimating() && hand == EnumHand.MAIN_HAND && facing == state.getValue(FACING)) {
-            if (te.isOpen()) {
-                int slot = getPlayerLookingItem(TEPos.down(), player, facing);
+        var tile = TileUtils.getTile(world, tilePos, TileFridge.class);
+        if (tile != null && !tile.isAnimating() && hand == EnumHand.MAIN_HAND && facing == state.getValue(FACING)) {
+            if (tile.isOpen()) {
+                int slot = getPlayerLookingItem(tilePos.down(), player, facing);
                 ItemStack stack = player.getHeldItem(hand);
                 if (!stack.isEmpty()) {
                     if (slot != -1) {
                         if (!world.isRemote) {
-                            player.setHeldItem(hand, te.insertItem(slot, stack));
+                            player.setHeldItem(hand, tile.insertItem(slot, stack));
                         }
                         return true;
                     }
                 } else {
-                    if (slot != -1 && te.hasStack(slot)) {
+                    if (slot != -1 && tile.hasStack(slot)) {
                         if (!world.isRemote) {
-                            player.setHeldItem(hand, te.extractItem(slot));
+                            player.setHeldItem(hand, tile.extractItem(slot));
                         }
                         return true;
                     } else {
-                        return te.setOpening(false);
+                        return tile.setOpening(false);
                     }
                 }
             } else {
                 if (!player.isSneaking()) {
-                    return te.setOpening(true);
+                    return tile.setOpening(true);
                 }
             }
         }
@@ -261,11 +260,6 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ISta
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileFridge();
-    }
-
-    @Override
-    public String getName() {
-        return "device/fridge";
     }
 
     @Override

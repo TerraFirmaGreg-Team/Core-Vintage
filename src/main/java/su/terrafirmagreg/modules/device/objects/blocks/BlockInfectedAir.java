@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 public class BlockInfectedAir extends BaseBlock implements ITileBlock {
 
     public BlockInfectedAir() {
-        super(Settings.of()
-                .material(Material.AIR)
+        super(Settings.of(Material.AIR)
+                .registryKey("device/infected_air")
                 .hardness(2F)
                 .nonOpaque()
                 .nonFullCube());
@@ -45,11 +45,6 @@ public class BlockInfectedAir extends BaseBlock implements ITileBlock {
 
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    public String getName() {
-        return "device/infected_air";
     }
 
     @Override

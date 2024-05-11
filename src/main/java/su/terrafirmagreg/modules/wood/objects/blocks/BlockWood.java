@@ -19,9 +19,10 @@ public abstract class BlockWood extends BaseBlock implements IWoodBlock {
     private final WoodType type;
 
     protected BlockWood(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of()
-                .material(Material.WOOD)
-                .soundType(SoundType.WOOD));
+        super(Settings.of(Material.WOOD)
+                .soundType(SoundType.WOOD)
+                .addOreDict(variant)
+                .addOreDict(variant, type));
 
         this.variant = variant;
         this.type = type;

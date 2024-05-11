@@ -17,8 +17,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.capability.size.Size;
@@ -31,12 +29,13 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 public class BlockElectricForge extends BaseBlockHorizontal implements ITileBlock {
 
     public BlockElectricForge() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/electric_forge")
                 .soundType(SoundType.METAL)
                 .hardness(4.0F)
                 .size(Size.LARGE)
                 .weight(Weight.MEDIUM)
+                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
                 .nonCanStack());
 
         setHarvestLevel("pickaxe", 0);
@@ -55,12 +54,6 @@ public class BlockElectricForge extends BaseBlockHorizontal implements ITileBloc
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
@@ -93,11 +86,6 @@ public class BlockElectricForge extends BaseBlockHorizontal implements ITileBloc
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
         return TileElectricForge.class;
-    }
-
-    @Override
-    public String getName() {
-        return "device/electric_forge";
     }
 
 }

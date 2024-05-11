@@ -1,13 +1,12 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import net.minecraft.block.BlockMagma;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -21,7 +20,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -31,6 +29,7 @@ import java.util.List;
 @Getter
 public class BlockRockMagma extends BlockMagma implements IRockBlock {
 
+    protected final Settings settings;
     private final RockBlockVariant variant;
     private final RockType type;
 
@@ -38,41 +37,17 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
 
         this.variant = variant;
         this.type = type;
+        this.settings = Settings.of(Material.ROCK)
+                .soundType(SoundType.STONE)
+                .size(Size.SMALL)
+                .weight(Weight.LIGHT)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict(variant)
+                .addOreDict(variant, type);
 
-        setSoundType(SoundType.STONE);
         setHarvestLevel("pickaxe", 0);
 
         FallingBlockManager.registerFallable(this, variant.getSpecification());
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        //        return this.getType().getRockCategory().isHasAnvil() ? new BaseItemBlock(this) : null;
-        return new BaseItemBlock(this);
-    }
-
-    @NotNull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
-
-    @NotNull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.LIGHT;
-    }
-
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override

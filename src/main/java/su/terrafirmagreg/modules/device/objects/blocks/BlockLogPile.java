@@ -55,8 +55,8 @@ public class BlockLogPile extends BaseBlockContainer implements ITileBlock {
     );
 
     public BlockLogPile() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/log_pile")
                 .soundType(SoundType.WOOD)
                 .hardness(2.0F));
 
@@ -65,11 +65,6 @@ public class BlockLogPile extends BaseBlockContainer implements ITileBlock {
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(AXIS, EnumFacing.Axis.Z)
                 .withProperty(LIT, false));
-    }
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
     }
 
     private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
@@ -81,6 +76,11 @@ public class BlockLogPile extends BaseBlockContainer implements ITileBlock {
         return !offsetState.getMaterial()
                 .getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID) ||
                 offsetState.isSideSolid(world, pos, side);
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
@@ -247,8 +247,4 @@ public class BlockLogPile extends BaseBlockContainer implements ITileBlock {
         return new TileLogPile();
     }
 
-    @Override
-    public String getName() {
-        return "device/log_pile";
-    }
 }

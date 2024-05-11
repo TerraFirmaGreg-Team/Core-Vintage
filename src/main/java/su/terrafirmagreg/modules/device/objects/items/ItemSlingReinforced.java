@@ -1,31 +1,23 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.modules.rock.objects.items.ItemRockLoose;
-
 import net.minecraft.item.ItemStack;
-
-
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.items.metal.ItemIngot;
 
 public class ItemSlingReinforced extends ItemSling {
 
-    public ItemSlingReinforced() {
-        this.setMaxDamage(256);
-    }
+    public ItemSlingReinforced(String name) {
+        super(name);
 
-    @Override
-    public String getName() {
-        return "device/sling/reinforced";
+        getSettings()
+                .maxDamage(256);
     }
 
     @Override
     protected boolean isStone(ItemStack stack) {
-        if (stack.getItem() instanceof ItemRockLoose) {
+        if (stack.getItem() instanceof ItemSlingAmmo) {
             return true;
-        } else if (stack.getItem() instanceof ItemIngot ingot) {
-            return ingot.getMetal(stack) == Metal.UNKNOWN;
-        } else return stack.getItem() instanceof ItemSlingAmmo;
+        } else {
+            return super.isStone(stack);
+        }
     }
 
 }

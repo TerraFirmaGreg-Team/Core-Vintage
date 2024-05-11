@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.rock.ModuleRockConfig;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -43,6 +42,11 @@ public class BlockRockRaw extends BlockRock implements IStateMapperProvider {
     public BlockRockRaw(RockBlockVariant variant, RockType type) {
         super(variant, type);
 
+        getSettings()
+                .addOreDict(variant)
+                .addOreDict(variant, type)
+                .addOreDict("stone");
+
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(CAN_FALL, true));
 
@@ -51,12 +55,6 @@ public class BlockRockRaw extends BlockRock implements IStateMapperProvider {
         spec.setResultingState(RockBlockVariants.COBBLE.get(type).getDefaultState());
 
         FallingBlockManager.registerFallable(this, spec);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, getVariant());
-        OreDictUtils.register(this, "stone");
     }
 
     @Override

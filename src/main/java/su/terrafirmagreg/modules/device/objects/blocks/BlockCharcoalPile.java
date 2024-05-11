@@ -53,8 +53,8 @@ public class BlockCharcoalPile extends BaseBlock {
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D) };
 
     public BlockCharcoalPile() {
-        super(Settings.of()
-                .material(CHARCOAL_MATERIAL)
+        super(Settings.of(CHARCOAL_MATERIAL)
+                .registryKey("device/charcoal_pile")
                 .hardness(1.0F)
                 .soundType(TFCSounds.CHARCOAL_PILE));
 
@@ -184,8 +184,4 @@ public class BlockCharcoalPile extends BaseBlock {
         return new ItemStack(Items.COAL, 1, 1);
     }
 
-    @Override
-    public String getName() {
-        return "device/charcoal_pile";
-    }
 }

@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -10,7 +9,6 @@ import su.terrafirmagreg.modules.wood.client.render.TESRWoodToolRack;
 import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodToolRack;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -31,12 +29,12 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.*;
 
+@SuppressWarnings("deprecation")
 public class BlockWoodToolRack extends BlockWood implements ITileBlock {
 
     protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
@@ -47,34 +45,20 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
     public BlockWoodToolRack(WoodBlockVariant variant, WoodType type) {
         super(variant, type);
 
+        getSettings()
+                .hardness(0.5f)
+                .resistance(3f)
+                .size(Size.LARGE)
+                .weight(Weight.VERY_HEAVY)
+                .nonOpaque()
+                .nonFullCube();
+
         setHarvestLevel("axe", 0);
-        setHardness(0.5f);
-        setResistance(3f);
-        setDefaultState(this.blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, NORTH));
     }
 
     @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, getVariant());
-        OreDictUtils.register(this, getVariant(), getType());
-    }
-
-    @NotNull
-    @Override
-    public Size getSize(@NotNull ItemStack stack) {
-        return Size.LARGE;
-    }
-
-    @NotNull
-    @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
-        return Weight.VERY_HEAVY;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, byHorizontalIndex(meta));
     }
@@ -85,22 +69,12 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public EnumBlockRenderType getRenderType(@NotNull IBlockState state) {
+    public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return switch (state.getValue(FACING)) {
             default -> RACK_NORTH_AABB;
             case SOUTH -> RACK_SOUTH_AABB;
@@ -111,22 +85,7 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    @NotNull
-    public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state, @NotNull BlockPos pos,
-                                            @NotNull EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(@NotNull IBlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn,
-                                @NotNull BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(FACING))) {
             dropBlockAsItem(worldIn, pos, state, 0);
@@ -139,7 +98,7 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
     }
 
     @Override
-    public void breakBlock(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
         if (tile != null) {
             tile.onBreakBlock();
@@ -148,12 +107,11 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
     }
 
     @Override
-    public boolean canPlaceBlockAt(@NotNull World worldIn, @NotNull BlockPos pos) {
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         return super.canPlaceBlockAt(worldIn, pos) && BlockUtils.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
     }
 
-    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
             if (tile != null) {
@@ -164,10 +122,7 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-                                            int meta, @NotNull EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         if (facing.getAxis() == Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
@@ -175,27 +130,13 @@ public class BlockWoodToolRack extends BlockWood implements ITileBlock {
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
     }
 
     @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
-        return new TileWoodToolRack();
-    }
-
-    @Override
-    @NotNull
     @SuppressWarnings("ConstantConditions")
-    public ItemStack getPickBlock(@NotNull IBlockState state, @Nullable RayTraceResult target, @NotNull World world, @NotNull BlockPos pos,
-                                  @NotNull EntityPlayer player) {
+    public ItemStack getPickBlock(IBlockState state, @Nullable RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         if (target != null) {
             var vec = target.hitVec.subtract(pos.getX(), pos.getY(), pos.getZ());
             var tile = TileUtils.getTile(world, pos, TileWoodToolRack.class);

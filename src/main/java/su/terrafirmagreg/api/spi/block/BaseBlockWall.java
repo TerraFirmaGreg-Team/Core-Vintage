@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -39,6 +40,11 @@ public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock,
         this.settings = Settings.copy(modelBlock);
         this.modelBlock = modelBlock;
         this.modelState = modelBlock.getDefaultState();
+    }
+
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return getSettings().getRenderLayer();
     }
 
     @Override

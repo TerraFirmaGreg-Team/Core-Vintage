@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
+import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 /**
@@ -133,14 +134,8 @@ public interface IHighlightHandler {
 
                     IHighlightHandler.drawBox(box, 5f, 1, 0, 0, 0.8f);
                 }
-            } else if (block instanceof IHighlightHandler highlightHandler) {
-                // Pass on to custom implementations
-                if (highlightHandler.drawHighlight(world, pos, player, traceResult, event.getPartialTicks())) {
-                    // Cancel drawing this block's bounding box
-                    event.setCanceled(true);
-                }
-            } else if (block instanceof BlockFridge fridge) {
-                if (fridge.getDefaultState().getValue(BlockFridge.UPPER)) {
+            } else if (block instanceof BlockFridge) {
+                if (state.getValue(UPPER)) {
                     pos = pos.down();
                 }
                 int slot = BlockFridge.getPlayerLookingItem(pos, player, state.getValue(BlockFridge.FACING));
@@ -163,6 +158,12 @@ public interface IHighlightHandler {
                     GlStateManager.depthMask(true);
                     GlStateManager.enableTexture2D();
                     GlStateManager.disableBlend();
+                }
+            } else if (block instanceof IHighlightHandler highlightHandler) {
+                // Pass on to custom implementations
+                if (highlightHandler.drawHighlight(world, pos, player, traceResult, event.getPartialTicks())) {
+                    // Cancel drawing this block's bounding box
+                    event.setCanceled(true);
                 }
             }
         }

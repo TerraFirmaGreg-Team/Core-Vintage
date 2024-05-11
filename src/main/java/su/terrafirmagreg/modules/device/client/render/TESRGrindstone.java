@@ -9,9 +9,7 @@ import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -27,10 +25,11 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
 
     public void render(@NotNull TileGrindstone te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
+        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
             ItemStack input = cap.getStackInSlot(TileGrindstone.SLOT_INPUT);
             ItemStack grindstone = cap.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE);
+            var renderItem = Minecraft.getMinecraft().getRenderItem();
             IBakedModel outputModel;
             int dir = te.getBlockMetadata();
             float angle = switch (dir) {
@@ -55,12 +54,10 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
                             axis <= 2 ? 0.0F : 1.0F);
                 }
                 GlStateManager.rotate(angle, 0.0F, 1.0F, 0.0F);
-                outputModel = Minecraft.getMinecraft()
-                        .getRenderItem()
-                        .getItemModelWithOverrides(grindstone, te.getWorld(), (EntityLivingBase) null);
+                outputModel = renderItem.getItemModelWithOverrides(grindstone, te.getWorld(), null);
                 outputModel = ForgeHooksClient.handleCameraTransforms(outputModel, ItemCameraTransforms.TransformType.FIXED, false);
-                Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                Minecraft.getMinecraft().getRenderItem().renderItem(grindstone, outputModel);
+                rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                renderItem.renderItem(grindstone, outputModel);
                 GlStateManager.popMatrix();
                 GlStateManager.disableRescaleNormal();
                 GlStateManager.disableBlend();
@@ -81,12 +78,11 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
                 GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
                 GlStateManager.rotate(270 - angle, 0.0F, 0.0F, 1.0F);
                 GlStateManager.scale(0.65D, 0.65D, 0.65);
-                IBakedModel inputModel = Minecraft.getMinecraft()
-                        .getRenderItem()
-                        .getItemModelWithOverrides(input, te.getWorld(), (EntityLivingBase) null);
+
+                IBakedModel inputModel = renderItem.getItemModelWithOverrides(input, te.getWorld(), null);
                 inputModel = ForgeHooksClient.handleCameraTransforms(inputModel, ItemCameraTransforms.TransformType.GROUND, false);
-                Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                Minecraft.getMinecraft().getRenderItem().renderItem(input, inputModel);
+                rendererDispatcher.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                renderItem.renderItem(input, inputModel);
                 GlStateManager.popMatrix();
                 GlStateManager.disableRescaleNormal();
                 GlStateManager.disableBlend();

@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -23,22 +22,20 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
     private final WoodBlockVariant variant;
     private final WoodType type;
 
-    public BlockWoodWall(WoodBlockVariant modelBlock, WoodBlockVariant variant, WoodType type) {
-        super(modelBlock.get(type));
+    public BlockWoodWall(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
+        super(model.get(type));
 
         this.variant = variant;
         this.type = type;
 
-        setSoundType(SoundType.WOOD);
-        setHarvestLevel("axe", 0);
+        getSettings()
+                .soundType(SoundType.WOOD)
+                .addOreDict("wall", "wood")
+                .addOreDict("wall", "wood", type);
+
+        setHarvestLevel("axe", model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, getVariant(), "wood");
-        OreDictUtils.register(this, getVariant(), "wood", getType());
     }
 
     @Override

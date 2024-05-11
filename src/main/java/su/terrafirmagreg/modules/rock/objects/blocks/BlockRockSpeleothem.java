@@ -35,7 +35,7 @@ public class BlockRockSpeleothem extends BlockRock {
     public BlockRockSpeleothem(RockBlockVariant variant, RockType type) {
         super(variant, type);
 
-        setDefaultState(blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(SIZE, EnumSize.MEDIUM));
     }
 

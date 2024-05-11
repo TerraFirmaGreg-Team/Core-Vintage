@@ -7,12 +7,8 @@ import net.minecraft.block.material.Material;
 public class BlockDebug extends BaseBlock {
 
     public BlockDebug() {
-        super(Settings.of().material(Material.SPONGE));
-    }
-
-    @Override
-    public String getName() {
-        return "core/debug";
+        super(Settings.of(Material.SPONGE)
+                .registryKey("core/debug"));
     }
 
 }

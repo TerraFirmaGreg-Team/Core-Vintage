@@ -1,11 +1,10 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
@@ -17,11 +16,11 @@ import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
@@ -37,7 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -49,6 +47,7 @@ import static su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVa
 @Getter
 public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock {
 
+    protected final Settings settings;
     private final WoodBlockVariant variant;
     private final WoodType type;
 
@@ -58,27 +57,20 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock
         this.variant = variant;
         this.type = type;
 
-        setHardness(2.5F);
-        setSoundType(SoundType.WOOD);
+        this.settings = Settings.of(Material.WOOD)
+                .soundType(SoundType.WOOD)
+                .hardness(2.5f)
+                .size(Size.LARGE)
+                .weight(Weight.MEDIUM)
+                .addOreDict("chest")
+                .addOreDict("chest", "wood")
+                .addOreDict("chest", "wood", type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
     @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "chest", "wood");
-        OreDictUtils.register(this, variant);
-        OreDictUtils.register(this, variant, type);
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @Override
-    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.WOOD_CHEST);
         }
@@ -91,59 +83,37 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock
      */
     @Nullable
     @Override
-    public ILockableContainer getContainer(World worldIn, @NotNull BlockPos pos, boolean allowBlocking) {
-        var tile = worldIn.getTileEntity(pos);
+    public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
 
-        if (!(tile instanceof TileEntityChest tileEntityChest)) {
+        ILockableContainer ilockablecontainer = TileUtils.getTile(worldIn, pos, TileEntityChest.class);
+
+        if (!allowBlocking && isBlocked(worldIn, pos)) {
             return null;
         } else {
-            ILockableContainer ilockablecontainer = tileEntityChest;
+            for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+                BlockPos blockpos = pos.offset(enumfacing);
+                Block block = worldIn.getBlockState(blockpos).getBlock();
 
-            if (!allowBlocking && isBlocked(worldIn, pos)) {
-                return null;
-            } else {
-                for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-                    BlockPos blockpos = pos.offset(enumfacing);
-                    Block block = worldIn.getBlockState(blockpos).getBlock();
+                if (block == this) {
+                    // Forge: fix MC-99321
+                    if (!allowBlocking && isBlocked(worldIn, blockpos)) {
+                        return null;
+                    }
 
-                    if (block == this) {
-                        // Forge: fix MC-99321
-                        if (!allowBlocking && isBlocked(worldIn, blockpos)) {
-                            return null;
-                        }
+                    TileEntity tileentity1 = worldIn.getTileEntity(blockpos);
 
-                        TileEntity tileentity1 = worldIn.getTileEntity(blockpos);
-
-                        if (tileentity1 instanceof TileEntityChest tileEntityChest1) {
-                            if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest1);
-                            } else {
-                                ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest1, ilockablecontainer);
-                            }
+                    if (tileentity1 instanceof TileEntityChest tileEntityChest1) {
+                        if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
+                            ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest1);
+                        } else {
+                            ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest1, ilockablecontainer);
                         }
                     }
                 }
-
-                return ilockablecontainer;
             }
+
+            return ilockablecontainer;
         }
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(@NotNull World worldIn, int meta) {
-        return new TileWoodChest();
-    }
-
-    @NotNull
-    @Override
-    public Size getSize(@NotNull ItemStack stack) {
-        return Size.LARGE;
-    }
-
-    @NotNull
-    @Override
-    public Weight getWeight(@NotNull ItemStack stack) {
-        return Weight.LIGHT;
     }
 
     private boolean isBlocked(World worldIn, BlockPos pos) {
@@ -167,7 +137,16 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock
     @Override
     @SideOnly(Side.CLIENT)
     public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(BlockChest.FACING).customResource(getResourceLocation()).build());
+        ModelUtils.registerStateMapper(this,
+                new CustomStateMap.Builder()
+                        .ignore(BlockChest.FACING)
+                        .customResource(getResourceLocation())
+                        .build());
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileWoodChest();
     }
 
     @Override

@@ -48,8 +48,8 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock, ITileBlock {
 
     public BlockSmelteryFirebox() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/smeltery_firebox")
                 .soundType(SoundType.STONE)
                 .hardness(3.0F)
                 .lightValue(1)
@@ -75,8 +75,7 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex()
-                + (state.getValue(LIT) ? 4 : 0);
+        return state.getValue(FACING).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
     }
 
     @Override
@@ -138,8 +137,8 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
             if (!world.isRemote) {
                 ItemStack held = player.getHeldItem(hand);
                 if (world.getBlockState(pos.up()).getBlock() instanceof BlockSmelteryCauldron) {
-                    TileSmelteryFirebox firebox = TileUtils.getTile(world, pos, TileSmelteryFirebox.class);
-                    if (ItemFireStarter.canIgnite(held) && firebox.onIgnite()) {
+                    var tile = TileUtils.getTile(world, pos, TileSmelteryFirebox.class);
+                    if (ItemFireStarter.canIgnite(held) && tile.onIgnite()) {
                         ItemFireStarter.onIgnition(held);
                     } else {
                         GuiHandler.openGui(world, pos, player, GuiHandler.Type.SMELTERY_FIREBOX);
@@ -182,9 +181,9 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
 
     @Override
     public void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount) {
-        TileSmelteryFirebox firebox = TileUtils.getTile(world, pos, TileSmelteryFirebox.class);
-        if (firebox != null) {
-            firebox.onAirIntake(airAmount);
+        var tile = TileUtils.getTile(world, pos, TileSmelteryFirebox.class);
+        if (tile != null) {
+            tile.onAirIntake(airAmount);
         }
     }
 
@@ -192,11 +191,6 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileSmelteryFirebox();
-    }
-
-    @Override
-    public String getName() {
-        return "device/smeltery_firebox";
     }
 
     @Override

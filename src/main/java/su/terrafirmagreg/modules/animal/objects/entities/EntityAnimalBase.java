@@ -208,7 +208,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     @Override
     public TextComponentTranslation getAnimalName() {
         String entityString = EntityList.getEntityString(this);
-        return new TextComponentTranslation(ModUtils.name("animal." + entityString + "." + this.getGender().name().toLowerCase()));
+        return new TextComponentTranslation(ModUtils.localize("animal." + entityString + "." + this.getGender().name().toLowerCase()));
     }
 
     @Nullable
@@ -371,7 +371,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                             ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
-                                    ModUtils.name(".tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
+                                    ModUtils.localize("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                         }
                     }
                 }

@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.core.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,47 +16,32 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SuppressWarnings("deprecation")
 public class BlockThatch extends BaseBlock {
 
     public BlockThatch() {
-        super(Settings.of()
-                .material(Material.PLANTS)
+        super(Settings.of(Material.PLANTS)
+                .registryKey("core/thatch")
                 .soundType(SoundType.PLANT)
+                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
                 .nonOpaque()
                 .nonFullCube()
-                .hardness(0.6F));
+                .hardness(0.6F)
+                .addOreDict("thatch")
+                .addOreDict("block", "straw"));
 
         BlockUtils.setFireInfo(this, 60, 20);
     }
 
-    @Override
-    public String getName() {
-        return "core/thatch";
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "thatch");
-        OreDictUtils.register(this, "block", "straw");
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
-    @SuppressWarnings("deprecation")
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return true;
     }
-
-    @SuppressWarnings("deprecation")
+    
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override

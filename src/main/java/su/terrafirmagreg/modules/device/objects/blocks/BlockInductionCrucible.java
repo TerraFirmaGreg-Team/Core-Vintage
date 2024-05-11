@@ -46,11 +46,12 @@ public class BlockInductionCrucible extends BaseBlock implements ITileBlock {
     private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
 
     public BlockInductionCrucible() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/induction_crucible")
                 .soundType(SoundType.METAL)
                 .size(Size.LARGE)
                 .weight(Weight.MEDIUM)
+                .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
                 .nonFullCube()
                 .nonCanStack()
                 .nonOpaque()
@@ -110,12 +111,6 @@ public class BlockInductionCrucible extends BaseBlock implements ITileBlock {
         return CRUCIBLE_AABB;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
-
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!player.isSneaking()) {
@@ -146,11 +141,6 @@ public class BlockInductionCrucible extends BaseBlock implements ITileBlock {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileInductionCrucible();
-    }
-
-    @Override
-    public String getName() {
-        return "device/induction_crucible";
     }
 
     @Override

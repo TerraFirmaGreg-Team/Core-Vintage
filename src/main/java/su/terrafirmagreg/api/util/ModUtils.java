@@ -17,12 +17,11 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @SuppressWarnings("unused")
 public final class ModUtils {
@@ -47,17 +46,12 @@ public final class ModUtils {
         return new ResourceLocation(MOD_ID, string);
     }
 
-    public static String name(String name) {
-        return MOD_ID + "." + name.toLowerCase().replace("_", ".");
+    public static String name(String string) {
+        return String.format("%s [%s]", MOD_NAME, string);
     }
 
-    /**
-     * Проверяет, включен ли мод JEI (Just Enough Items).
-     *
-     * @return true, если мод JEI включен; в противном случае - false
-     */
-    public static boolean isJEIEnabled() {
-        return Loader.isModLoaded("jei");
+    public static String localize(String name) {
+        return MOD_ID + "." + name.toLowerCase().replace("_", ".");
     }
 
     /**
@@ -65,9 +59,8 @@ public final class ModUtils {
      *
      * @param <T> anything and everything
      * @return null, but not null
-     * @CapabilityInject, etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
+     * @CapabilityInject etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
      */
-    @NotNull
     @SuppressWarnings("ConstantConditions")
     public static <T> T getNull() {
         return null;

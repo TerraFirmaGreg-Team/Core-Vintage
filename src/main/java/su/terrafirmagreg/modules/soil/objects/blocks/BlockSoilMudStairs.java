@@ -1,56 +1,35 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.spi.block.BaseBlockStairs;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
-import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
 @Getter
-public class BlockSoilMudStairs extends BlockStairs implements ISoilBlock {
+public class BlockSoilMudStairs extends BaseBlockStairs implements ISoilBlock {
 
     private final SoilBlockVariant variant;
     private final SoilType type;
 
-    public BlockSoilMudStairs(SoilBlockVariant modelBlock, SoilBlockVariant variant, SoilType type) {
-        super(modelBlock.get(type).getDefaultState());
+    public BlockSoilMudStairs(SoilBlockVariant model, SoilBlockVariant variant, SoilType type) {
+        super(model.get(type));
 
         this.variant = variant;
         this.type = type;
-        this.useNeighborBrightness = true;
 
-        setSoundType(SoundType.GROUND);
+        getSettings()
+                .soundType(SoundType.GROUND)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict("stairs")
+                .addOreDict("stairs", "mud", "bricks");
+
         setHarvestLevel("pickaxe", 0);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "stairs");
-        OreDictUtils.register(this, "stairs", "mud", "bricks");
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
 }

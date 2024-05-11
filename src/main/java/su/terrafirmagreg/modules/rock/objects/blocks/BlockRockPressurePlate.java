@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -26,6 +24,7 @@ import java.util.List;
 @Getter
 public class BlockRockPressurePlate extends BlockPressurePlate implements IRockBlock {
 
+    protected final Settings settings;
     private final RockBlockVariant variant;
     private final RockType type;
 
@@ -34,20 +33,13 @@ public class BlockRockPressurePlate extends BlockPressurePlate implements IRockB
 
         this.variant = variant;
         this.type = type;
+        this.settings = Settings.of(Material.ROCK)
+                .soundType(SoundType.STONE)
+                .hardness(0.5f)
+                .addOreDict(variant)
+                .addOreDict(variant, "stone")
+                .addOreDict(variant, "stone", type);
 
-        setSoundType(SoundType.STONE);
-        setHardness(0.5f);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, variant);
-        OreDictUtils.register(this, "pressure_plate_stone");
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
     }
 
     @Override

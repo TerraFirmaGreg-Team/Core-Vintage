@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -10,6 +8,7 @@ import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodWorkbench;
 
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,13 +22,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import mcp.MethodsReturnNonnullByDefault;
-
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -37,42 +31,30 @@ import lombok.Getter;
 @Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
 
+    protected Settings settings;
     private final WoodBlockVariant variant;
     private final WoodType type;
 
     public BlockWoodWorkbench(WoodBlockVariant variant, WoodType type) {
-
         this.variant = variant;
         this.type = type;
 
-        setSoundType(SoundType.WOOD);
-        setHardness(2.0F);
-        setResistance(5.0F);
+        this.settings = Settings.of(Material.WOOD)
+                .soundType(SoundType.WOOD)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .hardness(2.0F)
+                .resistance(5.0F)
+                .addOreDict(variant)
+                .addOreDict(variant, type);
+
         setHarvestLevel("axe", 0);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, getVariant());
-        OreDictUtils.register(this, getVariant(), getType());
-    }
-
     @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @NotNull
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @Nullable EntityPlayer playerIn,
-                                    @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY,
+                                    float hitZ) {
         if (!worldIn.isRemote && playerIn != null) {
             playerIn.displayGui(new InterfaceCraftingTable(this, worldIn, pos));
             playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
@@ -81,8 +63,6 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
     }
 
     @SuppressWarnings("WeakerAccess")
-
-    @MethodsReturnNonnullByDefault
     public static class InterfaceCraftingTable implements IInteractionObject {
 
         //todo: replace with proper workbench mechanics + normal forge gui code
@@ -121,7 +101,7 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
         }
 
         @Override
-        public Container createContainer(@NotNull InventoryPlayer inv, @NotNull EntityPlayer player) {
+        public Container createContainer(InventoryPlayer inv, EntityPlayer player) {
             return new ContainerWoodWorkbench(inv, world, position, workbench);
         }
 

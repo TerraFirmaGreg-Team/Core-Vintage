@@ -39,8 +39,8 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 public class BlockGrindstone extends BaseBlock implements ITileBlock {
 
     public BlockGrindstone() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/grindstone_base")
                 .soundType(SoundType.WOOD)
                 .hardness(1.5f)
                 .nonOpaque()
@@ -89,7 +89,7 @@ public class BlockGrindstone extends BaseBlock implements ITileBlock {
             var te = TileUtils.getTile(world, pos, TileGrindstone.class);
             if (te != null) {
                 ItemStack heldStack = playerIn.getHeldItem(hand);
-                IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
+                IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
 
                     int slot = inventory.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE)
@@ -124,9 +124,9 @@ public class BlockGrindstone extends BaseBlock implements ITileBlock {
     }
 
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(world, pos, TileGrindstone.class);
-        if (te != null) {
-            te.onBreakBlock(world, pos, state);
+        var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
+        if (tile != null) {
+            tile.onBreakBlock(world, pos, state);
         }
         super.breakBlock(world, pos, state);
     }
@@ -136,11 +136,6 @@ public class BlockGrindstone extends BaseBlock implements ITileBlock {
             this.dropBlockAsItem(worldIn, pos, state, 0);
             worldIn.setBlockToAir(pos);
         }
-    }
-
-    @Override
-    public String getName() {
-        return "device/grindstone_base";
     }
 
     @Nullable

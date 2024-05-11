@@ -39,7 +39,9 @@ import tfctech.objects.storage.MachineEnergyContainer;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.modules.device.objects.blocks.BlockFridge.UPPER;
+import lombok.Getter;
+
+import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileFridge extends TEInventory implements ITickable, IEnergySink {
@@ -50,6 +52,7 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
     private float open = 0.0F;
     private float lastOpen = 0.0F;
     private int openingState = 0;
+    @Getter
     private float efficiency = 0.0F;
     private int applyTrait = 0;
     private int serverUpdate;
@@ -60,10 +63,6 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
     public TileFridge() {
         super(8);
         energyContainer = new MachineEnergyContainer(TechConfig.DEVICES.fridgeEnergyCapacity, TechConfig.DEVICES.fridgeEnergyCapacity, 0);
-    }
-
-    public float getEfficiency() {
-        return efficiency;
     }
 
     /**

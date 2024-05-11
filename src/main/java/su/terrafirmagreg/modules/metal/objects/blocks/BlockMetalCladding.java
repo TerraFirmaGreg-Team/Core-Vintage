@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
@@ -36,11 +35,14 @@ import gregtech.api.unification.ore.OrePrefix;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.List;
 
 import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
+@Getter
 public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
     public static final PropertyBool[] FACE_PROPERTIES = new PropertyBool[] { DOWN, UP, NORTH, SOUTH, WEST, EAST };
@@ -57,10 +59,11 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     private final MetalType type;
 
     public BlockMetalCladding(MetalBlockVariant variant, MetalType type) {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("metal/cladding")
                 .nonOpaque()
                 .nonFullCube()
+                .noItemBlock()
                 .hardness(40F)
                 .resistance(25F));
 
@@ -78,31 +81,16 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     }
 
     @Override
-    public MetalBlockVariant getVariant() {
-        return variant;
-    }
-
-    @Override
-    public MetalType getType() {
-        return type;
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return null;
-    }
-
-    @Override
     public int getMetaFromState(IBlockState state) {
         return 0;
     }
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        var te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (te != null) {
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
-                state = state.withProperty(FACE_PROPERTIES[face.getIndex()], te.getFace(face));
+                state = state.withProperty(FACE_PROPERTIES[face.getIndex()], tile.getFace(face));
             }
         }
         return state;
@@ -110,7 +98,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        TEMetalSheet tile = TileUtils.getTile(source, pos, TEMetalSheet.class);
+        var tile = TileUtils.getTile(source, pos, TEMetalSheet.class);
         int sheets = 0;
         AxisAlignedBB boundingBox = FULL_BLOCK_AABB;
         if (tile != null) {
@@ -137,10 +125,10 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
                                       boolean isActualState) {
-        var te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (te != null) {
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
-                if (te.getFace(face)) {
+                if (tile.getFace(face)) {
                     addCollisionBoxToList(pos, entityBox, collidingBoxes, SHEET_AABB[face.getIndex()]);
                 }
             }
@@ -179,14 +167,14 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (te != null) te.onBreakBlock();
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        if (tile != null) tile.onBreakBlock();
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
     public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face)) {

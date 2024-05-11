@@ -2,12 +2,10 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
@@ -20,26 +18,21 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlo
     private final SoilBlockVariant variant;
     private final SoilType type;
 
-    protected Block block;
     protected Half halfSlab;
     protected Double doubleSlab;
 
     private BlockSoilMudSlab(SoilBlockVariant model, SoilBlockVariant variant, SoilType type) {
-        super(Settings.of()
-                .material(Material.GROUND)
-                .soundType(SoundType.GROUND));
+        super(Settings.of(Material.GROUND));
 
         this.variant = variant;
         this.type = type;
-        this.block = model.get(type);
 
-        setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
-    }
+        getSettings()
+                .soundType(SoundType.GROUND)
+                .addOreDict("slab")
+                .addOreDict("slab", "mud", "bricks");
 
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "slab");
-        OreDictUtils.register(this, "slab", "mud", "bricks");
+        setHarvestLevel("pickaxe", model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
     }
 
     public static class Double extends BlockSoilMudSlab {

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.api.registry.IAutoReg;
 import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
+import su.terrafirmagreg.api.spi.item.ISettingsItem;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -36,32 +36,37 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.util.FluidTransferHelper;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.stream.Collectors;
 
 import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
-public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, IItemMeshProvider {
+@Getter
+public abstract class ItemFlask extends ItemFluidContainer implements ISettingsItem, IItemMeshProvider {
 
+    protected final Settings settings;
     private final int capacity;
     private final int drink;
 
-    public ItemFlask(int capacity, int drink) {
+    public ItemFlask(String name, int capacity, int drink) {
         super(capacity);
 
         this.capacity = capacity;
         this.drink = drink;
+
+        this.settings = Settings.of()
+                .registryKey("device/flask/" + name)
+                .notCanStack();
 
         setHasSubtypes(true);
 
@@ -77,21 +82,6 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
     @Override
     public int getItemStackLimit(ItemStack stack) {
         return getStackSize(stack);
-    }
-
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
-
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.MEDIUM;
-    }
-
-    @Override
-    public boolean canStack(ItemStack stack) {
-        return false;
     }
 
     @Override
@@ -204,7 +194,6 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
     }
 
     @Override
-    @NotNull
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
         IFluidHandler flaskCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (flaskCap != null) {
@@ -238,7 +227,6 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
     }
 
     @Override
-    @NotNull
     public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.DRINK;
     }
@@ -249,7 +237,6 @@ public abstract class ItemFlask extends ItemFluidContainer implements IAutoReg, 
     }
 
     @Override
-    @NotNull
     public String getItemStackDisplayName(ItemStack stack) {
         IFluidHandler bucketCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         if (bucketCap != null) {

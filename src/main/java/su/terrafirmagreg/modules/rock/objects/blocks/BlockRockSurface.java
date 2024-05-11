@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -43,8 +40,10 @@ public class BlockRockSurface extends BlockRock {
 
         getSettings()
                 .hardness(0.1f)
+                .renderLayer(BlockRenderLayer.CUTOUT)
                 .nonOpaque()
                 .nonFullCube();
+
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
         FallingBlockManager.registerFallable(this, variant.getSpecification());
@@ -55,11 +54,6 @@ public class BlockRockSurface extends BlockRock {
         if (!worldIn.isSideSolid(pos.down(), EnumFacing.UP)) {
             worldIn.destroyBlock(pos, false);
         }
-    }
-
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
     }
 
     @Override
@@ -112,12 +106,6 @@ public class BlockRockSurface extends BlockRock {
     @Override
     public Block.EnumOffsetType getOffsetType() {
         return Block.EnumOffsetType.XZ;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override

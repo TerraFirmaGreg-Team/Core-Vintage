@@ -38,14 +38,14 @@ public enum MoonPhase {
     }
 
     @SideOnly(Side.CLIENT)
-    public String getPhaseName() {
-
-        return I18n.format("moon.phase." + this.key + ".name");
-    }
-
-    @SideOnly(Side.CLIENT)
     public static MoonPhase getCurrentPhase() {
 
         return getPhase(Minecraft.getMinecraft().world.getMoonPhase());
+    }
+
+    @SideOnly(Side.CLIENT)
+    public String getPhaseName() {
+
+        return I18n.format("moon.phase." + this.key + ".name");
     }
 }

@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -20,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -39,21 +37,13 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock, IStateMa
         this.variant = variant;
         this.type = type;
 
-        setSoundType(SoundType.STONE);
+        getSettings()
+                .soundType(SoundType.STONE)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict("wall")
+                .addOreDict("wall", "stone");
+
         setHarvestLevel("pickaxe", 0);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "wall");
-        OreDictUtils.register(this, "wall", "stone");
-    }
-
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override

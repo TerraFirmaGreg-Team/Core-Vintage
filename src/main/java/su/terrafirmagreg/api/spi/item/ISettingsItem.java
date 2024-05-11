@@ -1,9 +1,11 @@
 package su.terrafirmagreg.api.spi.item;
 
-import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.registry.IAutoRegProvider;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
 
@@ -11,26 +13,64 @@ import net.minecraftforge.common.IRarity;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-public interface ISettingsItem extends IAutoReg {
+import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public interface ISettingsItem extends IAutoRegProvider {
+
+    Settings getSettings();
+
+    default String getName() {
+        return getSettings().getRegistryKey();
+    }
+
+    default Size getSize(ItemStack stack) {
+        return getSettings().getSize();
+    }
+
+    default Weight getWeight(ItemStack stack) {
+        return getSettings().getWeight();
+    }
+
+    default boolean canStack(ItemStack stack) {
+        return getSettings().isCanStack();
+    }
+
+    default int getItemStackLimit(@NotNull ItemStack stack) {
+        return getStackSize(stack);
+    }
 
     default IRarity getForgeRarity(ItemStack stack) {
-        return getSettings().rarity;
+        return getSettings().getRarity();
     }
 
-    default Settings getSettings() {
-        return Settings.of();
+    default void onRegisterOreDict() {
+        if (!getSettings().getOreDict().isEmpty()) {
+            for (var ore : getSettings().getOreDict()) {
+                if (ore != null) OreDictUtils.register((Item) this, ore);
+            }
+            getSettings().getOreDict().clear();
+        }
     }
 
+    @Getter
     class Settings {
 
-        Size size;
-        Weight weight;
-        boolean canStack;
-        int maxCount;
-        int maxDamage;
-        CreativeTabs tab;
-        EnumRarity rarity;
-        String translationKey;
+        protected List<Object[]> oreDict = new ArrayList<>();
+
+        protected String registryKey;
+        protected Size size;
+        protected Weight weight;
+        protected boolean canStack;
+        protected int maxCount;
+        protected int maxDamage;
+        protected CreativeTabs tab;
+        protected EnumRarity rarity;
+        protected String translationKey;
 
         private Settings() {
             this.maxCount = 64;
@@ -46,13 +86,18 @@ public interface ISettingsItem extends IAutoReg {
             return new Settings();
         }
 
-        public Settings maxCount(int count) {
-            maxCount = count;
+        public Settings registryKey(String registryKey) {
+            this.registryKey = registryKey;
+            return this;
+        }
+
+        public Settings maxCount(int maxCount) {
+            this.maxCount = maxCount;
             return this;
         }
 
         public Settings maxDamage(int damage) {
-            maxDamage = damage;
+            this.maxDamage = damage;
             return this;
         }
 
@@ -68,6 +113,11 @@ public interface ISettingsItem extends IAutoReg {
 
         public Settings translationKey(String translationKey) {
             this.translationKey = translationKey;
+            return this;
+        }
+
+        public Settings addOreDict(Object... oreDict) {
+            this.oreDict.add(oreDict);
             return this;
         }
 

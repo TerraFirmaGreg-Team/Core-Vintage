@@ -38,8 +38,8 @@ public class BlockMolten extends BaseBlock {
     };
 
     public BlockMolten() {
-        super(Settings.of()
-                .material(Material.ROCK)
+        super(Settings.of(Material.ROCK)
+                .registryKey("device/molten")
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(-1));
@@ -104,8 +104,4 @@ public class BlockMolten extends BaseBlock {
         return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire()) ? net.minecraft.pathfinding.PathNodeType.DAMAGE_FIRE : null;
     }
 
-    @Override
-    public String getName() {
-        return "device/molten";
-    }
 }

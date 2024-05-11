@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -18,7 +17,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -28,36 +26,24 @@ import java.util.List;
 @Getter
 public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock {
 
+    protected final Block model;
     private final RockBlockVariant variant;
     private final RockType type;
-
-    protected final Block block;
     protected Half halfSlab;
     protected Double doubleSlab;
 
     private BlockRockSlab(RockBlockVariant model, RockBlockVariant variant, RockType type) {
-        super(Settings.of()
-                .material(Material.ROCK)
-                .soundType(SoundType.STONE));
+        super(Settings.of(Material.ROCK)
+                .soundType(SoundType.STONE)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict("slab")
+                .addOreDict("slab", "stone"));
 
         this.variant = variant;
         this.type = type;
-        this.block = model.get(type);
+        this.model = model.get(type);
 
-        setHarvestLevel("pickaxe", block.getHarvestLevel(block.getDefaultState()));
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "slab");
-        OreDictUtils.register(this, "slab", "stone");
-    }
-
-    @NotNull
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+        setHarvestLevel("pickaxe", this.model.getHarvestLevel(this.model.getDefaultState()));
     }
 
     @Override

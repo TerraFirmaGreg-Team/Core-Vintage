@@ -346,12 +346,10 @@ public final class ItemsTFC {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerVanillaOverrides(RegistryEvent.Register<Item> event) {
         // Vanilla Overrides. Used for small tweaks on vanilla items, rather than replacing them outright
-        TerraFirmaCraft.getLog()
-                .info("The below warnings about unintended overrides are normal. The override is intended. ;)");
+        TerraFirmaCraft.getLog().info("The below warnings about unintended overrides are normal. The override is intended. ;)");
         event.getRegistry().registerAll(
                 new ItemSnow(Blocks.SNOW_LAYER).setRegistryName("minecraft", "snow_layer"),
-                new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName())
-                        .setTranslationKey("glassBottle")
+                new ItemGlassBottleTFC().setRegistryName(Items.GLASS_BOTTLE.getRegistryName()).setTranslationKey("glassBottle")
         );
 
         if (ConfigTFC.General.OVERRIDES.enableTorchOverride) {

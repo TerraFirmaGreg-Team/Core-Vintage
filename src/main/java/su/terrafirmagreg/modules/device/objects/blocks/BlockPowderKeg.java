@@ -63,8 +63,9 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
     public BlockPowderKeg() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/powderkeg")
+                .renderLayer(BlockRenderLayer.CUTOUT)
                 .soundType(SoundType.WOOD)
                 .hardness(2F)
                 .nonOpaque()
@@ -75,11 +76,6 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)
                 .withProperty(SEALED, false));
-    }
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
     }
 
     /**
@@ -93,6 +89,11 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
             world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
             tile.setSealed(!previousSealed);
         }
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     public void trigger(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityLivingBase igniter) {
@@ -145,9 +146,9 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
         if (!state.getValue(LIT))
             return;
 
-        var te = TileUtils.getTile(world, pos, TilePowderKeg.class);
-        if (te != null) {
-            int fuse = te.getFuse();
+        var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
+        if (tile != null) {
+            int fuse = tile.getFuse();
             if (rng.nextInt(6) == 0 && fuse > 20) {
                 world.playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F,
                         rng.nextFloat() * 1.3F + 0.3F / fuse, false);
@@ -195,17 +196,11 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
-        if (te != null && !te.isLit()) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
+        if (tile != null && !tile.isLit()) {
+            tile.onBreakBlock(worldIn, pos, state);
             super.breakBlock(worldIn, pos, state);
         }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
@@ -316,8 +311,8 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
      */
     @Override
     public void onBlockExploded(World worldIn, BlockPos pos, Explosion explosionIn) {
-        var te = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
-        if (!worldIn.isRemote && te != null && te.getStrength() > 0) // explode even if not sealed cause gunpowder
+        var tile = TileUtils.getTile(worldIn, pos, TilePowderKeg.class);
+        if (!worldIn.isRemote && tile != null && tile.getStrength() > 0) // explode even if not sealed cause gunpowder
         {
             trigger(worldIn, pos, worldIn.getBlockState(pos).withProperty(SEALED, true).withProperty(LIT, true), null);
         } else {
@@ -327,9 +322,9 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        var te = TileUtils.getTile(world, pos, TilePowderKeg.class);
-        if (te != null) {
-            return te.getItemStack(state);
+        var tile = TileUtils.getTile(world, pos, TilePowderKeg.class);
+        if (tile != null) {
+            return tile.getItemStack(state);
         }
         return new ItemStack(state.getBlock());
     }
@@ -357,18 +352,13 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
             }
 
             if (count == 0) {
-                tooltip.add(I18n.format(ModUtils.name("tooltip.powderkeg_empty")));
+                tooltip.add(I18n.format(ModUtils.localize("tooltip.powderkeg_empty")));
             } else {
                 ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
-                tooltip.add(I18n.format(ModUtils.name("tooltip.powderkeg_amount"), count, itemStack.getItem()
+                tooltip.add(I18n.format(ModUtils.localize("tooltip.powderkeg_amount"), count, itemStack.getItem()
                         .getItemStackDisplayName(itemStack)));
             }
         }
-    }
-
-    @Override
-    public String getName() {
-        return "device/powderkeg";
     }
 
     @Override

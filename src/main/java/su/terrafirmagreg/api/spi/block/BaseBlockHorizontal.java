@@ -9,12 +9,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.capability.size.Size;
@@ -34,11 +37,7 @@ public abstract class BaseBlockHorizontal extends BlockHorizontal implements ISe
         super(settings.material, settings.material.getMaterialMapColor());
         this.settings = settings;
 
-        setResistance(settings.resistance);
-        setHardness(settings.hardness);
-        setSoundType(settings.soundType);
         setTranslationKey(settings.translationKey);
-        setCreativeTab(settings.tab);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, EnumFacing.NORTH));
@@ -65,6 +64,12 @@ public abstract class BaseBlockHorizontal extends BlockHorizontal implements ISe
 
     public boolean getHasItemSubtypes() {
         return settings.hasItemSubtypes;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return settings.renderLayer;
     }
 
     @Override

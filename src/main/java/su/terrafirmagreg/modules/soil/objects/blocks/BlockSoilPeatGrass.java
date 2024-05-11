@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
@@ -19,8 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -33,9 +30,14 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 public class BlockSoilPeatGrass extends BaseBlock implements IBlockColorProvider {
 
     public BlockSoilPeatGrass() {
-        super(Settings.of()
-                .material(Material.GRASS)
-                .soundType(SoundType.PLANT));
+        super(Settings.of(Material.GRASS));
+
+        getSettings()
+                .soundType(SoundType.PLANT)
+                .registryKey("soil/peat_grass")
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict("peat")
+                .addOreDict("peat", "grass");
 
         setTickRandomly(true);
         setDefaultState(getBlockState().getBaseState()
@@ -45,17 +47,6 @@ public class BlockSoilPeatGrass extends BaseBlock implements IBlockColorProvider
                 .withProperty(WEST, Boolean.FALSE));
 
         BlockUtils.setFireInfo(this, 5, 5);
-    }
-
-    @Override
-    public String getName() {
-        return "soil/peat_grass";
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "peat");
-        OreDictUtils.register(this, "peat", "grass");
     }
 
     @Override
@@ -82,12 +73,6 @@ public class BlockSoilPeatGrass extends BaseBlock implements IBlockColorProvider
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(BlocksSoil.PEAT);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     @Override

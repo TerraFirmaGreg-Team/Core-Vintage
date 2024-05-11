@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -27,8 +26,8 @@ import org.jetbrains.annotations.Nullable;
 public class BlockIceBunker extends BaseBlockContainer implements ITileBlock {
 
     public BlockIceBunker() {
-        super(Settings.of()
-                .material(Material.WOOD)
+        super(Settings.of(Material.WOOD)
+                .registryKey("device/ice_bunker")
                 .hardness(2F));
     }
 
@@ -43,10 +42,9 @@ public class BlockIceBunker extends BaseBlockContainer implements ITileBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-
-        var te = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
-        if (te != null) {
-            InventoryHelper.dropInventoryItems(worldIn, pos, te);
+        var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
+        if (tile != null) {
+            InventoryHelper.dropInventoryItems(worldIn, pos, tile);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -68,11 +66,6 @@ public class BlockIceBunker extends BaseBlockContainer implements ITileBlock {
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
-    }
-
-    @Override
-    public String getName() {
-        return "device/ice_bunker";
     }
 
     @Override

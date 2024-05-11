@@ -31,8 +31,8 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 public class BlockBellows extends BaseBlock implements ITileBlock {
 
     public BlockBellows() {
-        super(Settings.of()
-                .material(Material.CIRCUITS)
+        super(Settings.of(Material.CIRCUITS)
+                .registryKey("device/bellows")
                 .mapColor(MapColor.GRAY)
                 .soundType(SoundType.WOOD)
                 .nonFullCube()
@@ -60,9 +60,9 @@ public class BlockBellows extends BaseBlock implements ITileBlock {
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileBellows te = TileUtils.getTile(worldIn, pos, TileBellows.class);
-        if (te != null) {
-            return te.onRightClick();
+        var tile = TileUtils.getTile(worldIn, pos, TileBellows.class);
+        if (tile != null) {
+            return tile.onRightClick();
         }
         return true;
     }
@@ -82,11 +82,6 @@ public class BlockBellows extends BaseBlock implements ITileBlock {
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
-    }
-
-    @Override
-    public String getName() {
-        return "device/bellows";
     }
 
     @Override

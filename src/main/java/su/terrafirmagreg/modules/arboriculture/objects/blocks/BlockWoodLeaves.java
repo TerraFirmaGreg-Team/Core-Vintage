@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -15,6 +13,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -59,21 +58,24 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 @Getter
-public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockColorProvider {
+@SuppressWarnings("deprecation")
+public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
     public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
 
+    protected final Settings settings;
     private final WoodBlockVariant variant;
     private final WoodType type;
 
     public BlockWoodLeaves(WoodBlockVariant variant, WoodType type) {
         this.variant = variant;
         this.type = type;
+        this.settings = Settings.of(Material.LEAVES);
 
         this.leavesFancy = true; // Fast / Fancy graphics works correctly
 
         setTickRandomly(true);
-        setDefaultState(blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(LEAF_STATE, NORMAL)
                 .withProperty(HARVESTABLE, false)
                 .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
@@ -85,13 +87,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
     }
 
     @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new BaseItemBlock(this);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    @NotNull
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
                 .withProperty(HARVESTABLE, meta > 3)
@@ -105,7 +100,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
                 .ordinal() + (state.getValue(HARVESTABLE) ? 4 : 0) + (state.getValue(DECAYABLE) ? 1 : 0);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return Block.NULL_AABB;
@@ -116,7 +110,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
         else return ConfigTFC.General.MISC.plantGrowthRate;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
         //world.scheduleUpdate(pos, this, 0);
@@ -178,7 +171,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
     //    }
 
     @Override
-    public void onBlockAdded(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
@@ -217,30 +210,28 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
     }
 
     @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TETickCounter();
     }
 
     @Override
-    public void updateTick(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         doLeafDecay(worldIn, pos, state);
     }
 
     @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, DECAYABLE, LEAF_STATE, HARVESTABLE);
     }
 
     @Override
-    @NotNull
-    public Item getItemDropped(IBlockState state, @NotNull Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         if (state.getValue(LEAF_STATE) != WINTER) {
             return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(WoodBlockVariants.SAPLING.get(type)) : Items.AIR;
         }
@@ -248,19 +239,17 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
     }
 
     @Override
-    protected int getSaplingDropChance(@NotNull IBlockState state) {
+    protected int getSaplingDropChance(IBlockState state) {
         return 25;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    @NotNull
     public BlockRenderLayer getRenderLayer() {
         /*
          * This is a way to make sure the leave settings are updated.
@@ -280,12 +269,12 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
     }
 
     @Override
-    public void beginLeavesDecay(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos) {
+    public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
         // Don't do vanilla decay
     }
 
     @Override
-    public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, IBlockState state, int fortune) {
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         if (state.getValue(LEAF_STATE) != WINTER) {
             int chance = this.getSaplingDropChance(state);
             if (chance > 0) {
@@ -307,8 +296,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
     @SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(@NotNull IBlockState blockState, @NotNull IBlockAccess blockAccess, @NotNull BlockPos pos,
-                                        @NotNull EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+                                        EnumFacing side) {
         /*
          * See comment on getRenderLayer()
          */
@@ -317,7 +306,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IBlockCo
     }
 
     @Override
-    @NotNull
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         return ImmutableList.of(new ItemStack(this));
     }

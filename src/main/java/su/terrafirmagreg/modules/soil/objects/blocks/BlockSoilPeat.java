@@ -10,8 +10,7 @@ import net.minecraft.block.material.Material;
 public class BlockSoilPeat extends BaseBlock {
 
     public BlockSoilPeat() {
-        super(Settings.of()
-                .material(Material.GROUND)
+        super(Settings.of(Material.GROUND)
                 .soundType(SoundType.GROUND)
                 .hardness(0.6F));
 

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.spi.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +12,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -34,10 +36,7 @@ public abstract class BaseBlock extends Block implements ISettingsBlock {
         this.settings = settings;
 
         setResistance(settings.resistance);
-        setHardness(settings.hardness);
-        setSoundType(settings.soundType);
         setTranslationKey(settings.translationKey);
-        setCreativeTab(settings.tab);
 
         // Fix some potential issues with these fields being set prematurely by the super ctor
         this.fullBlock = getDefaultState().isOpaqueCube();
@@ -47,21 +46,22 @@ public abstract class BaseBlock extends Block implements ISettingsBlock {
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return settings != null && settings.opaque;
+        return getSettings() != null && getSettings().isOpaque();
     }
 
     @Override
     public boolean isFullCube(IBlockState state) {
-        return settings.fullCube;
+        return getSettings().isFullCube();
     }
 
     @Override
     public boolean isCollidable() {
-        return settings.collidable;
+        return getSettings().isCollidable();
     }
 
-    public boolean getHasItemSubtypes() {
-        return settings.hasItemSubtypes;
+    @Override
+    public SoundType getSoundType() {
+        return getSettings().getSoundType();
     }
 
     @Override
@@ -72,41 +72,62 @@ public abstract class BaseBlock extends Block implements ISettingsBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
-        return settings.renderLayer;
-    }
-
-    @Override
-    public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
-        return settings.slipperiness.apply(state, world, pos);
-    }
-
-    @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return settings.lightValue.apply(state, world, pos);
+        return getSettings().getRenderLayer();
     }
 
     @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return settings.mapColor != null ? settings.mapColor.apply(state, world, pos) : settings.material.getMaterialMapColor();
+        return getSettings().getMapColor() != null ? getSettings().getMapColor().apply(state, world, pos) : getSettings().getMaterial().getMaterialMapColor();
     }
 
+    @Override
+    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+        return getSettings().getHardness().apply(blockState, worldIn, pos);
+    }
+
+    @Override
+    public float getExplosionResistance(Entity exploder) {
+        return getSettings().getResistance() / 5.0F;
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return "tile." + getSettings().getTranslationKey();
+    }
+
+    @Override
+    public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
+        return getSettings().getSlipperiness().apply(state, world, pos);
+    }
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return getSettings().getLightValue().apply(state, world, pos);
+    }
+
+    @Override
     public Item asItem() {
         return Item.getItemFromBlock(this);
     }
 
     @Override
+    public boolean getHasItemSubtypes() {
+        return getSettings().isHasItemSubtypes();
+    }
+
+    @Override
     public Size getSize(ItemStack stack) {
-        return settings.size;
+        return getSettings().getSize();
     }
 
     @Override
     public Weight getWeight(ItemStack stack) {
-        return settings.weight;
+        return getSettings().getWeight();
     }
 
     @Override
     public boolean canStack(ItemStack stack) {
-        return settings.canStack;
+        return getSettings().isCanStack();
     }
 
 }

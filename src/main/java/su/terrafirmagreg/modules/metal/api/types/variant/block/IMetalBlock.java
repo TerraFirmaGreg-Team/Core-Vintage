@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
 import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок металла.
  */
-public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IAutoReg, ICustomModel, IStateMapperProvider {
+public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, ISettingsBlock, ICustomModel, IStateMapperProvider {
 
     /**
      * Возвращает местоположение регистрации блока почвы.

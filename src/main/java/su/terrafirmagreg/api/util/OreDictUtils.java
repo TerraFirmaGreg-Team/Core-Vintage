@@ -71,6 +71,12 @@ public final class OreDictUtils {
         return names;
     }
 
+    /**
+     * Преобразует массив объектов в строку в формате lowerCamelCase, разделяя элементы подчеркиванием.
+     *
+     * @param parts Массив объектов для преобразования в строку.
+     * @return Строка, представляющая объединенные элементы массива в формате lowerCamelCase.
+     */
     public static String toString(@NotNull Object... parts) {
         return CaseFormat.UPPER_UNDERSCORE
                 .converterTo(CaseFormat.LOWER_CAMEL)

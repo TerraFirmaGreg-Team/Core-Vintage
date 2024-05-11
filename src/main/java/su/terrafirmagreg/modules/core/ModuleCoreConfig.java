@@ -31,6 +31,11 @@ public class ModuleCoreConfig {
     @Config.Comment("Misc settings")
     public static final MiscCategory MISC = new MiscCategory();
 
+    //@formatter:off
+    static {
+        ConfigAnytime.register(ModuleCoreConfig.class);
+    }
+
     public static final class BlocksCategory {
 
         @Config.Comment("Puddle")
@@ -118,11 +123,6 @@ public class ModuleCoreConfig {
             @Config.Comment("When enabled, prints debug values to console. Activates some extra wand features. Enables extra item tooltips.")
             public boolean enable = false;
         }
-    }
-
-    //@formatter:off
-    static {
-        ConfigAnytime.register(ModuleCoreConfig.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

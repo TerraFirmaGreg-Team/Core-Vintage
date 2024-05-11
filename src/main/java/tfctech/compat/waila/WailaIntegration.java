@@ -26,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static su.terrafirmagreg.api.data.Blockstates.UPPER;
+
 @WailaPlugin
 public final class WailaIntegration implements IWailaDataProvider, IWailaPlugin {
 
@@ -41,7 +43,7 @@ public final class WailaIntegration implements IWailaDataProvider, IWailaPlugin 
         Block b = accessor.getBlock();
         if (b instanceof BlockFridge) {
             BlockPos TEPos = accessor.getPosition();
-            if (!accessor.getBlockState().getValue(BlockFridge.UPPER)) {
+            if (!accessor.getBlockState().getValue(UPPER)) {
                 TEPos = TEPos.up();
             }
             TileFridge fridge = TileUtils.getTile(accessor.getWorld(), TEPos, TileFridge.class);

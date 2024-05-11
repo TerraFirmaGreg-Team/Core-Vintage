@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.spi.block;
 
-import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.registry.IAutoRegProvider;
 import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -17,7 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -28,45 +27,52 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public interface ISettingsBlock extends IAutoReg, IFluidloggable {
+@MethodsReturnNonnullByDefault
+public interface ISettingsBlock extends IAutoRegProvider, IFluidloggable {
 
-    default boolean isOpaqueCube(IBlockState state) {
-        return getSettings().opaque;
+    Settings getSettings();
+
+    // Override Block methods
+
+    default SoundType getSoundType() {
+        return getSettings().getSoundType();
     }
 
-    default boolean isFullBlock(IBlockState state) {
-        return isFullCube(state);
+    default String getTranslationKey() {
+        return "tile." + getSettings().getTranslationKey();
+    }
+
+    default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+        return getSettings().getHardness().apply(blockState, worldIn, pos);
+    }
+
+    default float getExplosionResistance(Entity exploder) {
+        return getSettings().getResistance() / 5.0F;
+    }
+
+    default boolean isOpaqueCube(IBlockState state) {
+        return getSettings() != null && getSettings().isOpaque();
     }
 
     default boolean isFullCube(IBlockState state) {
-        return getSettings().fullCube;
-    }
-
-    default boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
-        return isFullBlock(state);
-    }
-
-    default boolean isSideSolid(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
-        return isFullBlock(state);
+        return getSettings().isFullCube();
     }
 
     default boolean isCollidable() {
-        return getSettings().collidable;
-    }
-
-    default boolean getHasItemSubtypes() {
-        return getSettings().hasItemSubtypes;
+        return getSettings().isCollidable();
     }
 
     default BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
@@ -74,45 +80,58 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
     }
 
     default float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
-        return getSettings().slipperiness.apply(state, world, pos);
+        return getSettings().getSlipperiness().apply(state, world, pos);
     }
 
     default int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getSettings().lightValue.apply(state, world, pos);
+        return getSettings().getLightValue().apply(state, world, pos);
     }
 
     default MapColor getMapColor(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getSettings().mapColor != null ? getSettings().mapColor.apply(state, world, pos) : getSettings().material.getMaterialMapColor();
-    }
-
-    @Override
-    default @Nullable Item getItemBlock() {
-        return new BaseItemBlock((Block) this);
+        return getSettings().getMapColor() != null ? getSettings().getMapColor().apply(state, world, pos) : getSettings().getMaterial().getMaterialMapColor();
     }
 
     @SideOnly(Side.CLIENT)
     default BlockRenderLayer getRenderLayer() {
-        return getSettings().renderLayer;
+        return getSettings().getRenderLayer();
     }
 
-    default Item asItem() {
-        return Item.getItemFromBlock((Block) this);
+    // Override IOreDictProvider methods
+
+    default void onRegisterOreDict() {
+        if (!getSettings().getOreDict().isEmpty()) {
+            for (var ore : getSettings().getOreDict()) {
+                if (ore != null) OreDictUtils.register(getBlock(), ore);
+            }
+            getSettings().getOreDict().clear();
+        }
     }
+
+    // Override IAutoRegProvider methods
+
+    @Override
+    default String getName() {
+        return getSettings().getRegistryKey();
+    }
+
+    // Override IItemSize methods
 
     @Override
     default Size getSize(ItemStack stack) {
-        return getSettings().size;
+        return getSettings().getSize();
     }
 
     @Override
     default Weight getWeight(ItemStack stack) {
-        return getSettings().weight;
+        return getSettings().getWeight();
     }
 
     @Override
     default boolean canStack(ItemStack stack) {
-        return getSettings().canStack;
+        return getSettings().isCanStack();
     }
+
+    // Override IFluidloggable methods
 
     @Override
     default boolean isFluidloggable(IBlockState state, World world, BlockPos pos) {
@@ -139,77 +158,97 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
         return state.getBlockFaceShape(world, pos, side) != BlockFaceShape.SOLID;
     }
 
-    default Settings getSettings() {
-        return Settings.of();
+    // New methods
+
+    default boolean getHasItemSubtypes() {
+        return getSettings().isHasItemSubtypes();
     }
 
-    static AxisAlignedBB createShape(int x1, int y1, int z1, int x2, int y2, int z2) {
-        return MathsUtils.getBoundsForPixels(x1, y1, z1, x2, y2, z2);
+    default @Nullable Item getItemBlock() {
+        return getSettings().isItemBlock() ? new BaseItemBlock(getBlock()) : null;
+    }
+
+    default Block getBlock() {
+        return (Block) this;
+    }
+
+    default Item asItem() {
+        return Item.getItemFromBlock(getBlock());
     }
 
     @Getter
+    @SuppressWarnings("deprecation")
     class Settings {
 
-        Material material;
-        ContextFunction<MapColor> mapColor;
-        String translationKey;
-        CreativeTabs tab;
-        boolean collidable;
-        boolean opaque;
-        boolean fullCube;
-        boolean hasItemSubtypes;
-        float resistance;
-        float hardness;
-        SoundType soundType;
-        ContextFunction<Integer> lightValue;
-        ContextFunction<Float> slipperiness;
-        EnumRarity rarity;
-        BlockRenderLayer renderLayer;
+        protected List<Object[]> oreDict = new ArrayList<>();
 
-        Size size;
-        Weight weight;
-        boolean canStack;
+        protected final Material material;
+        protected ContextFunction<MapColor> mapColor;
+        protected String translationKey;
+        protected String registryKey;
+        protected CreativeTabs tab;
+        protected SoundType soundType;
+        protected ContextFunction<Float> hardness;
+        protected ContextFunction<Integer> lightValue;
+        protected ContextFunction<Float> slipperiness;
+        protected EnumRarity rarity;
+        protected BlockRenderLayer renderLayer;
+        protected Size size;
+        protected Weight weight;
 
-        protected Settings() {
+        protected float resistance;
 
-            this.material = Material.AIR;
+        protected boolean itemBlock;
+        protected boolean canStack;
+        protected boolean collidable;
+        protected boolean opaque;
+        protected boolean fullCube;
+        protected boolean hasItemSubtypes;
+
+        protected Settings(Material material) {
+
+            this.material = material;
             this.mapColor = (state, world, pos) -> material.getMaterialMapColor();
-            this.collidable = true;
-            this.opaque = true;
-            this.fullCube = true;
-            this.hasItemSubtypes = false;
             this.resistance = 1.0F;
-            this.hardness = 1.0F;
+            this.hardness = (state, world, pos) -> 1.0F;
             this.soundType = SoundType.STONE;
             this.lightValue = (state, world, pos) -> 0;
             this.slipperiness = (state, world, pos) -> 0.6F;
             this.rarity = EnumRarity.COMMON;
             this.renderLayer = BlockRenderLayer.SOLID;
-
             this.size = Size.SMALL;
             this.weight = Weight.LIGHT;
+
+            this.itemBlock = true;
             this.canStack = true;
+            this.collidable = true;
+            this.opaque = true;
+            this.fullCube = true;
+            this.hasItemSubtypes = false;
         }
 
         public static Settings of() {
-            return new Settings();
+            return new Settings(Material.AIR);
         }
 
-        public static Settings copy(Block block) {
+        public static Settings of(Material material) {
+            return new Settings(material);
+        }
+
+        public static <B extends Block> Settings copy(B block) {
             return copy(block, 0);
         }
 
-        public static Settings copy(Block block, int meta) {
+        public static <B extends Block> Settings copy(B block, int meta) {
             IBlockState state = block.getStateFromMeta(meta);
-            Settings settings = Settings.of();
-            settings.material = block.getMaterial(state);
+            Settings settings = Settings.of(block.getMaterial(state));
             settings.mapColor = ($, world, pos) -> block.getMapColor(state, world, pos);
             settings.tab = block.getCreativeTab();
             settings.collidable = block.isCollidable();
             settings.opaque = block.isOpaqueCube(state);
             settings.fullCube = block.isFullCube(state);
             settings.resistance = block.getExplosionResistance(null) * 5.0F / 3.0F;
-            settings.hardness = block.getBlockHardness(null, null, null);
+            settings.hardness = ($, world, pos) -> block.getBlockHardness(null, null, null);
             settings.soundType = block.getSoundType();
             settings.lightValue = ($, world, pos) -> block.getLightValue(state, world, pos);
             settings.slipperiness = ($, world, pos) -> block.getSlipperiness(state, world, pos, null);
@@ -232,14 +271,18 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
         //            return settings;
         //        }
 
-        public Settings material(Material material) {
-            this.material = material;
-            this.mapColor = (state, world, pos) -> material.getMaterialMapColor();
+        public Settings mapColor(MapColor mapColor) {
+            this.mapColor = (state, world, pos) -> mapColor;
             return this;
         }
 
-        public Settings mapColor(MapColor mapColor) {
-            this.mapColor = (state, world, pos) -> mapColor;
+        public Settings registryKey(String registryKey) {
+            this.registryKey = registryKey;
+            return this;
+        }
+
+        public Settings noItemBlock() {
+            this.itemBlock = false;
             return this;
         }
 
@@ -271,22 +314,22 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
 
         public Settings strength(float strength) {
             resistance = strength;
-            hardness = strength;
+            hardness = (state, world, pos) -> strength;
             return this;
         }
 
         public Settings resistance(float resistance) {
-            this.resistance = resistance;
+            this.resistance = resistance * 3.0F;
             return this;
         }
 
         public Settings hardness(float hardness) {
-            this.hardness = hardness;
+            this.hardness = (state, world, pos) -> hardness;
             return this;
         }
 
         public Settings unbreakable() {
-            this.hardness = -1.0F;
+            this.hardness = (state, world, pos) -> -1.0F;
             return this;
         }
 
@@ -337,6 +380,11 @@ public interface ISettingsBlock extends IAutoReg, IFluidloggable {
 
         public Settings renderLayer(BlockRenderLayer renderLayer) {
             this.renderLayer = renderLayer;
+            return this;
+        }
+
+        public Settings addOreDict(Object... oreDict) {
+            this.oreDict.add(oreDict);
             return this;
         }
 

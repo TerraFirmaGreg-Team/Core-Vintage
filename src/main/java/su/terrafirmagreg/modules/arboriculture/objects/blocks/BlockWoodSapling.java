@@ -15,6 +15,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -50,16 +51,19 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
+
+    protected final Settings settings;
     private final WoodBlockVariant variant;
     private final WoodType type;
 
     public BlockWoodSapling(WoodBlockVariant variant, WoodType type) {
         this.variant = variant;
         this.type = type;
+        this.settings = Settings.of(Material.PLANTS);
 
         setHardness(0.0F);
         setSoundType(SoundType.PLANT);
-        setDefaultState(blockState.getBaseState()
+        setDefaultState(getBlockState().getBaseState()
                 .withProperty(STAGE, 0));
 
         BlockUtils.setFireInfo(this, 5, 20);

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.registry.IAutoReg;
+import su.terrafirmagreg.api.spi.block.ISettingsBlock;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -10,6 +10,7 @@ import su.terrafirmagreg.modules.core.init.BlocksCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
@@ -26,32 +27,37 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.Random;
 
-@MethodsReturnNonnullByDefault
-public class BlockThatchBed extends BlockBed implements IAutoReg, IStateMapperProvider {
+@Getter
+@SuppressWarnings("deprecation")
+public class BlockThatchBed extends BlockBed implements ISettingsBlock, IStateMapperProvider {
+
+    protected final Settings settings;
 
     public BlockThatchBed() {
-        setSoundType(SoundType.PLANT);
-        setHardness(0.6F);
+
+        this.settings = Settings.of(Material.CLOTH)
+                .registryKey("device/thatch_bed")
+                .soundType(SoundType.CLOTH)
+                .hardness(0.6F);
 
         BlockUtils.setFireInfo(this, 60, 20);
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                    EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             playerIn.setSpawnPoint(pos, false);
-            playerIn.sendMessage(new TextComponentTranslation(ModUtils.name("thatch_bed.spawnpoint")));
+            playerIn.sendMessage(new TextComponentTranslation(ModUtils.localize("thatch_bed.spawnpoint")));
             if (!worldIn.isThundering()) {
-                playerIn.sendStatusMessage(new TextComponentTranslation(ModUtils.name("thatch_bed.not_thundering")), true);
+                playerIn.sendStatusMessage(new TextComponentTranslation(ModUtils.localize("thatch_bed.not_thundering")), true);
                 return true;
             }
         }
@@ -87,7 +93,6 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, IStateMapperPr
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
@@ -99,8 +104,7 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, IStateMapperPr
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-                             TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, null, stack); //Force vanilla to use #dropBlockAsItemWithChance
     }
 
@@ -125,8 +129,4 @@ public class BlockThatchBed extends BlockBed implements IAutoReg, IStateMapperPr
         ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(OCCUPIED).build());
     }
 
-    @Override
-    public String getName() {
-        return "device/thatch_bed";
-    }
 }

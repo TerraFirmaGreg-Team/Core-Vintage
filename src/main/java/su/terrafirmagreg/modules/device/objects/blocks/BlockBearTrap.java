@@ -47,8 +47,8 @@ public class BlockBearTrap extends BaseBlock implements ITileBlock {
     protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
     public BlockBearTrap() {
-        super(Settings.of()
-                .material(Material.IRON)
+        super(Settings.of(Material.IRON)
+                .registryKey("device/bear_trap")
                 .hardness(10.0F)
                 .resistance(10.0F)
                 .nonOpaque()
@@ -198,11 +198,6 @@ public class BlockBearTrap extends BaseBlock implements ITileBlock {
             }
             worldIn.setBlockToAir(pos);
         }
-    }
-
-    @Override
-    public String getName() {
-        return "device/bear_trap";
     }
 
     @Override

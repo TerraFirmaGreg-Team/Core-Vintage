@@ -52,8 +52,8 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlo
     private static final AxisAlignedBB INPUT_SLOT_AABB = new AxisAlignedBB(0.375D, 0.86D, 0.375D, 0.625D, 1.015D, 0.625D);
 
     public BlockQuern() {
-        super(Settings.of()
-                .material(Material.ROCK)
+        super(Settings.of(Material.ROCK)
+                .registryKey("device/quern")
                 .soundType(SoundType.STONE)
                 .hardness(3.0f)
                 .nonOpaque()
@@ -72,20 +72,20 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlo
         Vec3d eyePos = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
         Vec3d lookingPos = eyePos.add(new Vec3d(player.getLookVec().x * length, player.getLookVec().y * length, player.getLookVec().z * length));
 
-        TileQuern teQuern = TileUtils.getTile(world, pos, TileQuern.class);
+        var tile = TileUtils.getTile(world, pos, TileQuern.class);
 
-        if (teQuern != null) {
-            IItemHandler inventory = teQuern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (tile != null) {
+            IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             // Draws the correct selection box depending on where the player is looking at
-            if (!teQuern.isGrinding() && teQuern.hasHandstone() && HANDLE_AABB.offset(pos)
+            if (!tile.isGrinding() && tile.hasHandstone() && HANDLE_AABB.offset(pos)
                     .calculateIntercept(eyePos, lookingPos) != null) {
                 return SelectionPlace.HANDLE;
-            } else if (!teQuern.isGrinding() && teQuern.hasHandstone() && (!player.getHeldItem(EnumHand.MAIN_HAND)
+            } else if (!tile.isGrinding() && tile.hasHandstone() && (!player.getHeldItem(EnumHand.MAIN_HAND)
                     .isEmpty() || (inventory != null && !inventory.getStackInSlot(TileQuern.SLOT_INPUT)
                     .isEmpty())) && INPUT_SLOT_AABB.offset(pos)
                     .calculateIntercept(eyePos, lookingPos) != null) {
                 return SelectionPlace.INPUT_SLOT;
-            } else if ((teQuern.hasHandstone() || teQuern.isItemValid(TileQuern.SLOT_HANDSTONE, player.getHeldItem(EnumHand.MAIN_HAND))) &&
+            } else if ((tile.hasHandstone() || tile.isItemValid(TileQuern.SLOT_HANDSTONE, player.getHeldItem(EnumHand.MAIN_HAND))) &&
                     HANDSTONE_AABB.offset(pos)
                             .calculateIntercept(eyePos, lookingPos) != null) {
                 return SelectionPlace.HANDSTONE;
@@ -96,8 +96,8 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlo
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        TileQuern teQuern = TileUtils.getTile(source, pos, TileQuern.class);
-        if (teQuern != null && teQuern.hasHandstone()) {
+        var tile = TileUtils.getTile(source, pos, TileQuern.class);
+        if (tile != null && tile.hasHandstone()) {
             return QUERN_AABB;
         } else {
             return BASE_AABB;
@@ -116,17 +116,17 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlo
     public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
                                       boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BASE_AABB);
-        var te = TileUtils.getTile(world, pos, TileQuern.class);
-        if (te != null && te.hasHandstone()) {
+        var tile = TileUtils.getTile(world, pos, TileQuern.class);
+        if (tile != null && tile.hasHandstone()) {
             addCollisionBoxToList(pos, entityBox, collidingBoxes, HANDSTONE_AABB);
         }
     }
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileQuern teQuern = TileUtils.getTile(world, pos, TileQuern.class);
-        if (teQuern != null) {
-            teQuern.onBreakBlock(world, pos, state);
+        var tile = TileUtils.getTile(world, pos, TileQuern.class);
+        if (tile != null) {
+            tile.onBreakBlock(world, pos, state);
         }
         super.breakBlock(world, pos, state);
     }
@@ -134,32 +134,32 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlo
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
-            TileQuern teQuern = TileUtils.getTile(world, pos, TileQuern.class);
-            if (teQuern != null && !teQuern.isGrinding()) {
+            var tile = TileUtils.getTile(world, pos, TileQuern.class);
+            if (tile != null && !tile.isGrinding()) {
                 ItemStack heldStack = playerIn.getHeldItem(hand);
                 SelectionPlace selection = getPlayerSelection(world, pos, playerIn);
-                IItemHandler inventory = teQuern.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
                     if (selection == SelectionPlace.HANDLE) {
-                        teQuern.grind();
+                        tile.grind();
                         world.playSound(null, pos, TFCSounds.QUERN_USE, SoundCategory.BLOCKS, 1,
                                 1 + ((world.rand.nextFloat() - world.rand.nextFloat()) / 16));
                         return true;
                     } else if (selection == SelectionPlace.INPUT_SLOT) {
-                        playerIn.setHeldItem(EnumHand.MAIN_HAND, teQuern.insertOrSwapItem(TileQuern.SLOT_INPUT, heldStack));
-                        teQuern.setAndUpdateSlots(TileQuern.SLOT_INPUT);
+                        playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(TileQuern.SLOT_INPUT, heldStack));
+                        tile.setAndUpdateSlots(TileQuern.SLOT_INPUT);
                         return true;
                     } else if (selection == SelectionPlace.HANDSTONE && inventory.getStackInSlot(SLOT_HANDSTONE)
                             .isEmpty() && inventory.isItemValid(SLOT_HANDSTONE, heldStack)) {
-                        playerIn.setHeldItem(EnumHand.MAIN_HAND, teQuern.insertOrSwapItem(SLOT_HANDSTONE, heldStack));
-                        teQuern.setAndUpdateSlots(SLOT_HANDSTONE);
+                        playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(SLOT_HANDSTONE, heldStack));
+                        tile.setAndUpdateSlots(SLOT_HANDSTONE);
                         return true;
                     } else if (selection == SelectionPlace.BASE && !inventory.getStackInSlot(TileQuern.SLOT_OUTPUT)
                             .isEmpty()) {
                         ItemHandlerHelper.giveItemToPlayer(playerIn,
                                 inventory.extractItem(TileQuern.SLOT_OUTPUT, inventory.getStackInSlot(TileQuern.SLOT_OUTPUT)
                                         .getCount(), false));
-                        teQuern.setAndUpdateSlots(TileQuern.SLOT_OUTPUT);
+                        tile.setAndUpdateSlots(TileQuern.SLOT_OUTPUT);
                         return true;
                     }
                 }
@@ -196,11 +196,6 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlo
             IHighlightHandler.drawBox(BASE_AABB.offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 1f, 0, 0, 0, 0.4f);
         }
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return "device/quern";
     }
 
     @Override

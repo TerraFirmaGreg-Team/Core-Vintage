@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.rock.objects.items;
 
 import su.terrafirmagreg.api.spi.gui.IContainerProvider;
 import su.terrafirmagreg.api.spi.item.BaseItem;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
@@ -46,26 +45,14 @@ public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProv
 
         this.variant = variant;
         this.type = type;
-    }
 
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "rock");
-        OreDictUtils.register(this, "rock", getType());
-        OreDictUtils.register(this, "rock", this.getType().getRockCategory());
-        if (type.isFlux()) OreDictUtils.register(this, "rock", "flux");
-    }
-
-    @NotNull
-    @Override
-    public Size getSize(ItemStack stack) {
-        return Size.SMALL;
-    }
-
-    @NotNull
-    @Override
-    public Weight getWeight(ItemStack stack) {
-        return Weight.VERY_LIGHT;
+        getSettings()
+                .size(Size.SMALL)
+                .weight(Weight.VERY_LIGHT)
+                .addOreDict("rock")
+                .addOreDict("rock", type)
+                .addOreDict("rock", type.getRockCategory());
+        if (type.isFlux()) getSettings().addOreDict("rock", "flux");
     }
 
     @Override

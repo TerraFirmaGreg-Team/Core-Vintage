@@ -72,10 +72,10 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
                 List<String> tooltip = new ArrayList<>();
 
                 if (fluid == null || fluid.amount == 0) {
-                    tooltip.add(I18n.format(ModUtils.name("tooltip.barrel_empty")));
+                    tooltip.add(I18n.format(ModUtils.localize("tooltip.barrel_empty")));
                 } else {
                     tooltip.add(fluid.getLocalizedName());
-                    tooltip.add(TextFormatting.GRAY + I18n.format(ModUtils.name("tooltip.barrel_fluid_amount"), fluid.amount));
+                    tooltip.add(TextFormatting.GRAY + I18n.format(ModUtils.localize("tooltip.barrel_fluid_amount"), fluid.amount));
                 }
 
                 this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
+import su.terrafirmagreg.api.spi.tile.BaseTile;
+
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -14,9 +16,6 @@ import se.gory_moon.horsepower.blocks.BlockHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
 
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.spi.tile.BaseTile;
 
 public class TileWoodFiller extends BaseTile {
 

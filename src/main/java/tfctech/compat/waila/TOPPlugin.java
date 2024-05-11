@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvider {
@@ -45,7 +46,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
         BlockPos pos = iProbeHitData.getPos();
         if (b instanceof BlockFridge) {
             BlockPos TEPos = pos;
-            if (!iBlockState.getValue(BlockFridge.UPPER)) {
+            if (!iBlockState.getValue(UPPER)) {
                 TEPos = TEPos.up();
             }
             TileFridge fridge = TileUtils.getTile(world, TEPos, TileFridge.class);

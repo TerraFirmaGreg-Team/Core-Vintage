@@ -2,15 +2,12 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
 import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import lombok.Getter;
@@ -27,20 +24,13 @@ public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock, IStat
         this.variant = variant;
         this.type = type;
 
-        setSoundType(SoundType.STONE);
+        getSettings()
+                .soundType(SoundType.STONE)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict("wall")
+                .addOreDict("wall", "mud", "bricks");
+
         setHarvestLevel("pickaxe", 0);
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "wall");
-        OreDictUtils.register(this, "wall", "mud", "bricks");
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
 }

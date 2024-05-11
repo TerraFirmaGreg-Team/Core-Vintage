@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.BaseBlockDoor;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -25,9 +24,10 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
     private final WoodType type;
 
     public BlockWoodDoor(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of()
-                .material(Material.WOOD)
-                .soundType(SoundType.WOOD));
+        super(Settings.of(Material.WOOD)
+                .soundType(SoundType.WOOD)
+                .addOreDict(variant, "wood")
+                .addOreDict(variant, "wood", type));
 
         this.variant = variant;
         this.type = type;
@@ -37,14 +37,12 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
     }
 
     @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, getVariant(), "wood");
-        OreDictUtils.register(this, getVariant(), "wood", getType());
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(BlockDoor.POWERED).build());
+        ModelUtils.registerStateMapper(this,
+                new CustomStateMap.Builder()
+                        .customResource(getResourceLocation())
+                        .ignore(BlockDoor.POWERED)
+                        .build());
     }
 }

@@ -11,7 +11,6 @@ public class ItemWoodAnimalCart extends ItemWoodSupplyCart {
 
     public ItemWoodAnimalCart(WoodItemVariant variant, WoodType type) {
         super(variant, type);
-
     }
 
     @Override

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
 
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -20,13 +21,39 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
+@MethodsReturnNonnullByDefault
 public interface ISettingsItem extends IAutoRegProvider {
 
     Settings getSettings();
 
+    // Override Item methods
+
+    default int getItemStackLimit(@NotNull ItemStack stack) {
+        return getStackSize(stack);
+    }
+
+    default IRarity getForgeRarity(ItemStack stack) {
+        return getSettings().getRarity();
+    }
+
+    // Override IOreDictProvider methods
+
+    default void onRegisterOreDict() {
+        if (!getSettings().getOreDict().isEmpty()) {
+            for (var ore : getSettings().getOreDict()) {
+                if (ore != null) OreDictUtils.register((Item) this, ore);
+            }
+            getSettings().getOreDict().clear();
+        }
+    }
+
+    // Override IAutoRegProvider methods
+
     default String getName() {
         return getSettings().getRegistryKey();
     }
+
+    // Override IItemSize methods
 
     default Size getSize(ItemStack stack) {
         return getSettings().getSize();
@@ -38,23 +65,6 @@ public interface ISettingsItem extends IAutoRegProvider {
 
     default boolean canStack(ItemStack stack) {
         return getSettings().isCanStack();
-    }
-
-    default int getItemStackLimit(@NotNull ItemStack stack) {
-        return getStackSize(stack);
-    }
-
-    default IRarity getForgeRarity(ItemStack stack) {
-        return getSettings().getRarity();
-    }
-
-    default void onRegisterOreDict() {
-        if (!getSettings().getOreDict().isEmpty()) {
-            for (var ore : getSettings().getOreDict()) {
-                if (ore != null) OreDictUtils.register((Item) this, ore);
-            }
-            getSettings().getOreDict().clear();
-        }
     }
 
     @Getter

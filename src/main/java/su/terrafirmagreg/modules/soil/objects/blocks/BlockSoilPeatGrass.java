@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.soil.objects.blocks;
 import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
@@ -27,7 +28,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
-public class BlockSoilPeatGrass extends BaseBlock implements IBlockColorProvider {
+public class BlockSoilPeatGrass extends BaseBlock implements IBlockColorProvider, IGrass {
 
     public BlockSoilPeatGrass() {
         super(Settings.of(Material.GRASS));
@@ -67,7 +68,7 @@ public class BlockSoilPeatGrass extends BaseBlock implements IBlockColorProvider
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (world.isRemote) return;
-        BlockSoilGrass.spreadGrass(world, pos, state, rand);
+        spreadGrass(world, pos, state, rand);
     }
 
     @Override

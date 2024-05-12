@@ -2,10 +2,10 @@ package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
+import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
-import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeatGrass;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -379,12 +379,7 @@ public final class BlockUtils {
     }
 
     public static boolean isGrass(IBlockState current) {
-        var block = current.getBlock();
-        if (block instanceof BlockSoilPeatGrass) return true;
-        if (block instanceof ISoilBlock soil) {
-            return isSoilBlockType(soil, GRASS, DRY_GRASS, SPARSE_GRASS);
-        }
-        return false;
+        return current.getBlock() instanceof IGrass;
     }
 
     public static boolean isDirt(IBlockState current) {

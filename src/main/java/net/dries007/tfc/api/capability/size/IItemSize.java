@@ -41,6 +41,6 @@ public interface IItemSize {
      * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
      */
     default int getStackSize(ItemStack stack) {
-        return canStack(stack) ? getWeight(stack).stackSize : 1;
+        return canStack(stack) ? getWeight(stack).getStackSize() : 1;
     }
 }

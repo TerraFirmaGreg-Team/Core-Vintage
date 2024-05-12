@@ -38,10 +38,6 @@ public abstract class BaseItem extends Item implements ISettingsItem {
         return settings.rarity;
     }
 
-    public boolean canStack(ItemStack stack) {
-        return settings.canStack;
-    }
-
     /**
      * This should NOT be overridden except for VERY SPECIAL cases If an item needs to not stack, i.e. small vessels, override {@link IItemSize#canStack(ItemStack)} If an item
      * needs a variable stack size, override {@link IItemSize#getWeight(ItemStack)} / {@link IItemSize#getSize(ItemStack)} and return a different value to get a different stack
@@ -50,6 +46,10 @@ public abstract class BaseItem extends Item implements ISettingsItem {
     @Override
     public int getItemStackLimit(@NotNull ItemStack stack) {
         return getStackSize(stack);
+    }
+
+    public boolean canStack(ItemStack stack) {
+        return settings.canStack;
     }
 
 }

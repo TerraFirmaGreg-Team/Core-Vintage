@@ -1,7 +1,6 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tfg:rock/wall/inventory",
     "uvlock": true,
     "textures": {
       "all": "tfg:blocks/rock/bricks/andesite"

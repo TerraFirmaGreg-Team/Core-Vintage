@@ -1,6 +1,5 @@
 package su.terrafirmagreg.mixin;
 
-import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @IFMLLoadingPlugin.Name("TFGLoadingPlugin")
-@IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
+@IFMLLoadingPlugin.SortingIndex(1001)
 public class EarlyMixinLoader implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
     @Override
@@ -47,10 +46,5 @@ public class EarlyMixinLoader implements IEarlyMixinLoader, IFMLLoadingPlugin {
         configs.add("mixins.tfg.json");
 
         return configs;
-    }
-
-    @Override
-    public boolean shouldMixinConfigQueue(String mixinConfig) {
-        return IEarlyMixinLoader.super.shouldMixinConfigQueue(mixinConfig);
     }
 }

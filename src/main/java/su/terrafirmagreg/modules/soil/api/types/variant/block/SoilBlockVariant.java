@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
@@ -88,7 +89,12 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
      * @return Вариант блока почвы без травы.
      */
     public SoilBlockVariant getNonGrassVersion() {
-        if (this == GRASS || this == DRY_GRASS || this == SPARSE_GRASS) return DIRT;
+        if (this == GRASS ||
+                this == DRY_GRASS ||
+                this == SPARSE_GRASS ||
+                this == PODZOL ||
+                this == MYCELIUM)
+            return DIRT;
 
         throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
     }
@@ -100,19 +106,30 @@ public class SoilBlockVariant implements Comparable<SoilBlockVariant> {
      * @return Вариант блока почвы с травой.
      */
     public SoilBlockVariant getGrassVersion(SoilBlockVariant spreader) {
-        if (this.isGrass()) return this;
+        if (this instanceof IGrass) return this;
         if (this == DIRT) return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
+        if (this == ROOTED_DIRT || this == COARSE_DIRT) return spreader == SPARSE_GRASS ? SPARSE_GRASS : DRY_GRASS;
 
         throw new IllegalArgumentException(String.format("You cannot get grass from [%s] types.", this));
     }
 
-    /**
-     * Проверяет, является ли вариант блока почвы с травой.
-     *
-     * @return true, если вариант блока почвы с травой, иначе false.
-     */
-    public boolean isGrass() {
-        return this == GRASS || this == DRY_GRASS || this == PODZOL || this == MYCELIUM;
+    private SoilBlockVariant transform() {
+        if (this == DIRT) {
+            return GRASS;
+        } else if (this == COARSE_DIRT) {
+            return SPARSE_GRASS;
+        } else if (this == GRASS ||
+                this == DRY_GRASS ||
+                this == SPARSE_GRASS ||
+                this == PODZOL ||
+                this == MYCELIUM ||
+                this == FARMLAND ||
+                this == GRASS_PATH ||
+                this == ROOTED_DIRT) {
+            return DIRT;
+        } else {
+            throw new IllegalArgumentException(String.format("You cannot get grass from [%s] types.", this));
+        }
     }
 
     @Override

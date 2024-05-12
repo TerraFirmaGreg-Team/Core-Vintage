@@ -30,8 +30,10 @@ import org.spongepowered.asm.mixin.Unique;
 
 import lombok.Getter;
 
+import javax.annotation.Nullable;
+
 @Getter
-@Mixin(Block.class)
+@Mixin(value = Block.class, remap = false)
 public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements ISettingsBlock {
 
     @Shadow
@@ -141,25 +143,25 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
         return "tile." + getSettings().getTranslationKey();
     }
 
-    //    /**
-    //     * @author Xikaro
-    //     * @reason Адаптация под ISettingsBlock
-    //     */
-    //    @Override
-    //    @Overwrite
-    //    public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
-    //        return getSettings().getSlipperiness().apply(state, world, pos);
-    //    }
-    //
-    //    /**
-    //     * @author Xikaro
-    //     * @reason Адаптация под ISettingsBlock
-    //     */
-    //    @Override
-    //    @Overwrite
-    //    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-    //        return getSettings().getLightValue().apply(state, world, pos);
-    //    }
+    /**
+     * @author Xikaro
+     * @reason Адаптация под ISettingsBlock
+     */
+    @Override
+    @Overwrite
+    public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
+        return getSettings().getSlipperiness().apply(state, world, pos);
+    }
+
+    /**
+     * @author Xikaro
+     * @reason Адаптация под ISettingsBlock
+     */
+    @Override
+    @Overwrite
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return getSettings().getLightValue().apply(state, world, pos);
+    }
 
     @Override
     public Item asItem() {

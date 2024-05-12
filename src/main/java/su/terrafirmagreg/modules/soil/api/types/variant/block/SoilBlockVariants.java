@@ -5,6 +5,7 @@ public final class SoilBlockVariants {
     public static SoilBlockVariant GRASS;
     public static SoilBlockVariant DRY_GRASS;
     public static SoilBlockVariant SPARSE_GRASS;
+    
     public static SoilBlockVariant PODZOL;
     public static SoilBlockVariant MYCELIUM;
 

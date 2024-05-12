@@ -44,11 +44,12 @@ dependencies {
 
     //compileOnly fileTree(include: ["*.jar"], dir: "libs")
 
-    // Утилиты и вспомогательные моды
+    // Утилиты
     if (use_util.toBoolean()) {
         implementation rfg.deobf("curse.maven:had-enough-items-557549:5229422")
         implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:5171095")
         implementation rfg.deobf("curse.maven:reid-629017:5272391")
+        implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5252395-dev-5252397")
         implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
         implementation rfg.deobf("curse.maven:modularui-624243:5153413")
         implementation rfg.deobf("curse.maven:aainfo-573154:3627065")
@@ -56,7 +57,10 @@ dependencies {
         implementation rfg.deobf("curse.maven:ctm-267602:2915363")
         implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
 
+    }
 
+    // Вспомогательные моды
+    if (use_util.toBoolean()) {
         implementation rfg.deobf("curse.maven:common-capabilities-247007:3053017-sources-3053019-javadoc-3053020")
         implementation rfg.deobf("curse.maven:cyclops-core-232758:3159497-sources-3159499-javadoc-3159500")
 //      implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
@@ -77,6 +81,7 @@ dependencies {
 
     // GregTech dependencies
     if (use_gregtech.toBoolean()) {
+//        implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5322654-sources-5322656-dev-5322655")
         implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5121638-sources-5121640")
         implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5121714-sources-5121718")
     }

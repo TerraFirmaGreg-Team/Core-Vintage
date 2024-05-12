@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
 
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -21,7 +20,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-@MethodsReturnNonnullByDefault
+@SuppressWarnings("unused")
 public interface ISettingsItem extends IAutoRegProvider {
 
     Settings getSettings();
@@ -34,6 +33,18 @@ public interface ISettingsItem extends IAutoRegProvider {
 
     default IRarity getForgeRarity(ItemStack stack) {
         return getSettings().getRarity();
+    }
+
+    default String getTranslationKey() {
+        return "item." + getSettings().getTranslationKey();
+    }
+
+    default int getMaxDamage() {
+        return getSettings().getMaxDamage();
+    }
+
+    default int getItemStackLimit() {
+        return getSettings().getMaxCount();
     }
 
     // Override IOreDictProvider methods
@@ -73,6 +84,8 @@ public interface ISettingsItem extends IAutoRegProvider {
         protected List<Object[]> oreDict = new ArrayList<>();
 
         protected String registryKey;
+        protected String translationKey;
+
         protected Size size;
         protected Weight weight;
         protected boolean canStack;
@@ -80,7 +93,6 @@ public interface ISettingsItem extends IAutoRegProvider {
         protected int maxDamage;
         protected CreativeTabs tab;
         protected EnumRarity rarity;
-        protected String translationKey;
 
         private Settings() {
             this.maxCount = 64;

@@ -27,7 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -40,7 +39,6 @@ import java.util.List;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-@MethodsReturnNonnullByDefault
 public interface ISettingsBlock extends IAutoRegProvider, IFluidloggable {
 
     Settings getSettings();

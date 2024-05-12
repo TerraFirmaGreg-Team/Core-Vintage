@@ -23,17 +23,10 @@ import java.util.Random;
 
 public class BiomeMesaTFC extends BiomeTFC {
 
-    protected static final IBlockState HARDENED_CLAY;
-    protected static final IBlockState STAINED_HARDENED_CLAY;
-    protected static final IBlockState ORANGE_STAINED_HARDENED_CLAY;
-    protected static final IBlockState SAND;
-
-    static {
-        HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
-        STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
-        ORANGE_STAINED_HARDENED_CLAY = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE);
-        SAND = Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND);
-    }
+    protected static final IBlockState HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
+    protected static final IBlockState STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
+    protected static final IBlockState ORANGE_STAINED_HARDENED_CLAY = STAINED_HARDENED_CLAY.withProperty(BlockColored.COLOR, EnumDyeColor.ORANGE);
+    protected static final IBlockState SAND = Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND);
 
     private final boolean brycePillars;
     private final boolean hasForest;

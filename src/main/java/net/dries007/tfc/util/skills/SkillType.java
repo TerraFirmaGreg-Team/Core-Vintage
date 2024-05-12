@@ -14,8 +14,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * The instance (i.e. Block or Item) of a skill. This holds the name, class, and supplier for the skill capability To create a new skill all you need
- * to do is create a new instance of this class. Registration will be automatically handled for you.
+ * The instance (i.e. Block or Item) of a skill. This holds the name, class, and supplier for the skill capability To create a new skill all you need to do is create a new instance
+ * of this class. Registration will be automatically handled for you.
  *
  * @param <S> the skill class
  */
@@ -72,8 +72,7 @@ public final class SkillType<S extends Skill> {
         try {
             return ((SkillType<S>) skill);
         } catch (ClassCastException e) {
-            TerraFirmaCraft.getLog()
-                    .warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
+            TerraFirmaCraft.getLog().warn("Tried to cast skill '" + skill + "' to an incorrect instance type: " + name + " / " + returnClass);
             return null;
         }
     }

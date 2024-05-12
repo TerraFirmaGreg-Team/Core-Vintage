@@ -3,7 +3,6 @@ package su.terrafirmagreg.api.util;
 import su.terrafirmagreg.api.lib.MathConstants;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -78,15 +77,6 @@ public final class MathsUtils {
     }
 
     /**
-     * This method is deprecated, please use {@link #rayTrace(EntityLiving, double)} instead.
-     */
-    @Deprecated
-    public static RayTraceResult rayTrace(EntityPlayer player, double length) {
-
-        return rayTrace((EntityLivingBase) player, length);
-    }
-
-    /**
      * Performs a ray trace on where an entity is looking. This will return information about the blocks in their way.
      *
      * @param entity The entity to perform the ray trace on.
@@ -106,7 +96,7 @@ public final class MathsUtils {
      *
      * @param worldIn    the world obj player stands in.
      * @param playerIn   the player obj
-     * @param useLiquids do fluids counts as block?
+     * @param useLiquids do fluids count as block?
      */
     @Nullable
     public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {

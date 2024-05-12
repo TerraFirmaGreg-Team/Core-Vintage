@@ -79,20 +79,6 @@ public final class WorldUtils {
     }
 
     /**
-     * Checks if two block positions are in the same chunk in a given world.
-     *
-     * @param world  The world to check within.
-     * @param first  The first position.
-     * @param second The second position.
-     * @return Whether or not the two positions are in the same chunk.
-     */
-    @Deprecated
-    public static boolean areSameChunk(World world, BlockPos first, BlockPos second) {
-
-        return areSameChunk(first, second);
-    }
-
-    /**
      * Checks if the dimension id of a world matches the provided dimension id.
      *
      * @param world The world to check.

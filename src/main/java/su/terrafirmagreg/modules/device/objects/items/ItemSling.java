@@ -36,6 +36,8 @@ public class ItemSling extends BaseItem {
 
     public ItemSling(String name) {
 
+        setNoRepair();
+        setFull3D();
         getSettings()
                 .registryKey("device/sling/" + name)
                 .maxDamage(64)
@@ -44,8 +46,6 @@ public class ItemSling extends BaseItem {
                 .weight(Weight.MEDIUM)
                 .addOreDict("tool");
 
-        setNoRepair();
-        setFull3D();
         addPropertyOverride(new ResourceLocation("spinning"), new IItemPropertyGetter() {
 
             @SideOnly(Side.CLIENT)

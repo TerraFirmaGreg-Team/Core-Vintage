@@ -6,8 +6,8 @@ import net.minecraftforge.common.IRarity;
 
 
 import net.dries007.tfc.api.capability.size.IItemSize;
-
-import org.jetbrains.annotations.NotNull;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 
 import lombok.Getter;
 
@@ -16,26 +16,27 @@ public abstract class BaseItem extends Item implements ISettingsItem {
 
     protected final Settings settings;
 
-    public BaseItem(Settings settings) {
-
-        this.settings = settings;
-
-        setMaxStackSize(settings.maxCount);
-        setMaxDamage(settings.maxDamage);
-        setTranslationKey(settings.translationKey);
-    }
-
     public BaseItem() {
         this.settings = Settings.of();
+    }
 
-        setMaxStackSize(settings.maxCount);
-        setMaxDamage(settings.maxDamage);
-        setTranslationKey(settings.translationKey);
+    public IRarity getForgeRarity(ItemStack stack) {
+        return getSettings().getRarity();
     }
 
     @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return settings.rarity;
+    public String getTranslationKey() {
+        return "item." + getSettings().getTranslationKey();
+    }
+
+    @Override
+    public int getMaxDamage() {
+        return getSettings().getMaxDamage();
+    }
+
+    @Override
+    public int getItemStackLimit() {
+        return getSettings().getMaxCount();
     }
 
     /**
@@ -44,12 +45,23 @@ public abstract class BaseItem extends Item implements ISettingsItem {
      * size
      */
     @Override
-    public int getItemStackLimit(@NotNull ItemStack stack) {
+    public int getItemStackLimit(ItemStack stack) {
         return getStackSize(stack);
     }
 
+    @Override
+    public Size getSize(ItemStack stack) {
+        return getSettings().getSize();
+    }
+
+    @Override
+    public Weight getWeight(ItemStack stack) {
+        return getSettings().getWeight();
+    }
+
+    @Override
     public boolean canStack(ItemStack stack) {
-        return settings.canStack;
+        return getSettings().isCanStack();
     }
 
 }

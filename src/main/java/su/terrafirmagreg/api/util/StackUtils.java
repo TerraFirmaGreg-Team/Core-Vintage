@@ -3,7 +3,6 @@ package su.terrafirmagreg.api.util;
 import su.terrafirmagreg.TerraFirmaGreg;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -594,32 +593,6 @@ public final class StackUtils {
     public static void readTileEntityFromStack(TileEntity tile, ItemStack stack) {
 
         tile.readFromNBT(stack.getTagCompound().getCompoundTag("TileData"));
-    }
-
-    /**
-     * Creates an ItemStack representation of an IBlockState.
-     *
-     * @param state The state to use.
-     * @param size  The stack size to create.
-     * @return An ItemStack which represents the passed state.
-     */
-    @Deprecated
-    public static ItemStack getStackFromState(IBlockState state, int size) {
-
-        return new ItemStack(state.getBlock(), size, state.getBlock().damageDropped(state));
-    }
-
-    /**
-     * Gets an IBlockState from an ItemStack.
-     *
-     * @param stack The stack to get stuff from.
-     * @return The IBlockState from the ItemStack.
-     */
-    @Deprecated
-    public static IBlockState getStateFromStack(ItemStack stack) {
-
-        final Block block = Block.getBlockFromItem(stack.getItem());
-        return block != null ? block.getStateFromMeta(stack.getMetadata()) : null;
     }
 
     /**

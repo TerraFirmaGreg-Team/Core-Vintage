@@ -34,13 +34,13 @@ import static net.minecraft.util.text.TextFormatting.GOLD;
 public class ItemDebug extends BaseItem {
 
     public ItemDebug() {
+
+        setNoRepair();
+        setFull3D();
         getSettings()
                 .registryKey("core/wand")
                 .maxCount(1)
                 .rarity(EnumRarity.EPIC);
-
-        setNoRepair();
-        setFull3D();
     }
 
     public static void changeMode(EntityPlayer player) {

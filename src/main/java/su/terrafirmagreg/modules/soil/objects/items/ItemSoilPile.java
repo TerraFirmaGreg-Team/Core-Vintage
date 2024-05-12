@@ -18,7 +18,6 @@ public class ItemSoilPile extends BaseItem implements ISoilItem {
     private final SoilType type;
 
     public ItemSoilPile(SoilItemVariant variant, SoilType type) {
-
         this.variant = variant;
         this.type = type;
 

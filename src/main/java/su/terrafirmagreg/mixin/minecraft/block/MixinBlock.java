@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -25,7 +24,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 import lombok.Getter;
@@ -35,9 +33,6 @@ import javax.annotation.Nullable;
 @Getter
 @Mixin(value = Block.class, remap = false)
 public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements ISettingsBlock {
-
-    @Shadow
-    public abstract BlockStateContainer getBlockState();
 
     @Unique
     protected final Settings settings = Settings.of();

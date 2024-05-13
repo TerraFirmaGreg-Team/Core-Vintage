@@ -52,14 +52,16 @@ public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlo
     private static final AxisAlignedBB INPUT_SLOT_AABB = new AxisAlignedBB(0.375D, 0.86D, 0.375D, 0.625D, 1.015D, 0.625D);
 
     public BlockQuern() {
-        super(Settings.of(Material.ROCK)
+        super(Settings.of(Material.ROCK));
+
+        getSettings()
                 .registryKey("device/quern")
                 .soundType(SoundType.STONE)
                 .hardness(3.0f)
                 .nonOpaque()
                 .nonFullCube()
                 .size(Size.VERY_LARGE)
-                .weight(Weight.VERY_HEAVY));
+                .weight(Weight.VERY_HEAVY);
     }
 
     /**

@@ -13,13 +13,10 @@ import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVa
 public class BlockAlabasterRaw extends BlockRockDecorative {
 
     public BlockAlabasterRaw() {
-        super(Settings.of(Material.ROCK));
+        this(EnumDyeColor.WHITE);
 
         getSettings()
-                .mapColor(MapColor.getBlockColor(EnumDyeColor.WHITE))
-                .registryKey("rock/alabaster/raw/plain")
-                .addOreDict("alabaster")
-                .addOreDict("alabaster", "raw");
+                .registryKey("rock/alabaster/raw/plain");
 
         for (var color : EnumDyeColor.values()) {
             BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(RAW, color), new BlockAlabasterRaw(color));

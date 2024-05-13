@@ -33,15 +33,17 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
     protected Double doubleSlab;
 
     private BlockRockSlab(RockBlockVariant model, RockBlockVariant variant, RockType type) {
-        super(Settings.of(Material.ROCK)
-                .soundType(SoundType.STONE)
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("slab")
-                .addOreDict("slab", "stone"));
+        super(Settings.of(Material.ROCK));
 
         this.variant = variant;
         this.type = type;
         this.model = model.get(type);
+
+        getSettings()
+                .soundType(SoundType.STONE)
+                .renderLayer(BlockRenderLayer.CUTOUT)
+                .addOreDict("slab")
+                .addOreDict("slab", "stone");
 
         setHarvestLevel("pickaxe", this.model.getHarvestLevel(this.model.getDefaultState()));
     }

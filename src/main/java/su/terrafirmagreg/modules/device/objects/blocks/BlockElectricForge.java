@@ -29,15 +29,16 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 public class BlockElectricForge extends BaseBlockHorizontal implements ITileBlock {
 
     public BlockElectricForge() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/electric_forge")
                 .soundType(SoundType.METAL)
                 .hardness(4.0F)
                 .size(Size.LARGE)
                 .weight(Weight.MEDIUM)
                 .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
-                .nonCanStack());
-
+                .nonCanStack();
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)

@@ -28,7 +28,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -74,14 +73,13 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     private static final AxisAlignedBB ATTACHMENT_COLLISION_ADDITION_AABB = new AxisAlignedBB(0.1875, 0.125, 0.1875, 0.8125, 0.9375, 0.8125);
 
     public BlockFirePit() {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        getSettings()
                 .registryKey("device/fire_pit")
                 .hardness(0.3F)
-                .nonFullCube()
-                .nonOpaque()
-                .lightValue(15)
-                .renderLayer(BlockRenderLayer.CUTOUT));
-
+                .nonCube()
+                .lightValue(15);
         disableStats();
         setTickRandomly(true);
         setDefaultState(getBlockState().getBaseState()

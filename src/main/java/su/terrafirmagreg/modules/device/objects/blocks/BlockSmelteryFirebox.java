@@ -48,7 +48,9 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock, ITileBlock {
 
     public BlockSmelteryFirebox() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/smeltery_firebox")
                 .soundType(SoundType.STONE)
                 .hardness(3.0F)
@@ -56,8 +58,7 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
                 .nonFullCube()
                 .nonOpaque()
                 .weight(Weight.MEDIUM)
-                .size(Size.LARGE));
-
+                .size(Size.LARGE);
         setTickRandomly(true);
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()

@@ -48,14 +48,16 @@ public class BlockLatexExtractor extends BaseBlock implements ITileBlock {
     private static final AxisAlignedBB AABB_W = new AxisAlignedBB(0.3125D, 0.125D, 0.1875D, 1.0D, 0.875D, 0.8125D);
 
     public BlockLatexExtractor() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/latex_extractor")
                 .noItemBlock()
                 .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
                 .hardness(2.0F)
                 .nonFullCube()
-                .nonOpaque());
-
+                .nonOpaque();
+        
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, NORTH)

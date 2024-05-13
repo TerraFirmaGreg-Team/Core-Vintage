@@ -19,13 +19,15 @@ public abstract class BlockWood extends BaseBlock implements IWoodBlock {
     private final WoodType type;
 
     protected BlockWood(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
-                .addOreDict(variant)
-                .addOreDict(variant, type));
+        super(Settings.of(Material.WOOD));
 
         this.variant = variant;
         this.type = type;
+
+        getSettings()
+                .soundType(SoundType.WOOD)
+                .addOreDict(variant)
+                .addOreDict(variant, type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

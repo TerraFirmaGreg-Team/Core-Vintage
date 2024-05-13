@@ -83,12 +83,14 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
     }
 
     public BlockCharcoalForge() {
-        super(Settings.of(BlockCharcoalPile.CHARCOAL_MATERIAL)
+        super(Settings.of(BlockCharcoalPile.CHARCOAL_MATERIAL));
+
+        getSettings()
                 .registryKey("device/charcoal_forge")
                 .soundType(SoundType.GROUND)
                 .hardness(1.0F)
                 .nonFullCube()
-                .nonOpaque());
+                .nonOpaque();
 
         setTickRandomly(true); // Used for chimney checks -> extinguish
         setHarvestLevel("shovel", 0);

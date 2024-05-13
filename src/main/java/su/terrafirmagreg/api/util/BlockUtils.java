@@ -504,11 +504,6 @@ public final class BlockUtils {
 
         /**
          * Return false to stop processing, true to keep processing.
-         *
-         * @param w
-         * @param p
-         * @param bs
-         * @return
          */
         boolean execute(World w, BlockPos p, IBlockState bs);
     }

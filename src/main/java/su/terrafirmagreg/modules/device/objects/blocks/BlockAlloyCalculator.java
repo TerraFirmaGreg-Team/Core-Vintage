@@ -34,11 +34,12 @@ public class BlockAlloyCalculator extends BaseBlockContainer implements ITileBlo
     private static final AxisAlignedBB BOUNDS_WE = new AxisAlignedBB(5 / 16d, 0, 3 / 16d, 11 / 16d, 4 / 16d, 13 / 16d);
 
     public BlockAlloyCalculator() {
-        super(Settings.of(Material.IRON)
-                .registryKey("device/alloy_calculator")
-                .nonFullCube()
-                .nonOpaque());
+        super(Settings.of(Material.IRON));
 
+        getSettings()
+                .registryKey("device/alloy_calculator")
+                .nonCube();
+        
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
     }

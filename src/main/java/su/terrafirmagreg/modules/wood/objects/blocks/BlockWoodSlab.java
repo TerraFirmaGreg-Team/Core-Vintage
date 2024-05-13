@@ -28,11 +28,13 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
     protected Double doubleSlab;
 
     private BlockWoodSlab(WoodBlockVariant model, WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD));
+        super(Settings.of(Material.WOOD));
 
         this.variant = variant;
         this.type = type;
+
+        getSettings()
+                .soundType(SoundType.WOOD);
 
         setHarvestLevel("pickaxe", model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());

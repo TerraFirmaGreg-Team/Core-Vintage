@@ -18,7 +18,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -49,15 +48,15 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
     private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D, 0.875D, 0.95D);
 
     public BlockCrate() {
-        super(Settings.of(Material.CIRCUITS)
+        super(Settings.of(Material.CIRCUITS));
+
+        getSettings()
                 .registryKey("device/crate")
                 .soundType(SoundType.WOOD)
-                .renderLayer(BlockRenderLayer.CUTOUT)
                 .hardness(2F)
-                .nonOpaque()
-                .nonFullCube()
-                .weight(Weight.VERY_HEAVY));
-
+                .nonCube()
+                .weight(Weight.VERY_HEAVY);
+        
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(SEALED, false));
     }

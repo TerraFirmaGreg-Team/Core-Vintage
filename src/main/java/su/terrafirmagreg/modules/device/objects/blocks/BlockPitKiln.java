@@ -68,12 +68,14 @@ public class BlockPitKiln extends BaseBlock implements ITileBlock, IStateMapperP
     };
 
     public BlockPitKiln() {
-        super(Settings.of(Material.CIRCUITS)
+        super(Settings.of(Material.CIRCUITS));
+
+        getSettings()
                 .registryKey("device/pit_kiln")
                 .nonFullCube()
                 .noItemBlock()
                 .nonOpaque()
-                .hardness(0.5f));
+                .hardness(0.5f);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FULL, false)

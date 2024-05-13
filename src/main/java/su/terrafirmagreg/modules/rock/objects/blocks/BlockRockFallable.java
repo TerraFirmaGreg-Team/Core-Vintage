@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -18,13 +17,8 @@ import java.util.Random;
 
 public abstract class BlockRockFallable extends BlockRock {
 
-    public BlockRockFallable(RockBlockVariant variant, RockType type) {
-        this(Material.ROCK, variant, type);
-
-    }
-
-    public BlockRockFallable(Material material, RockBlockVariant variant, RockType type) {
-        super(Settings.of(material), variant, type);
+    public BlockRockFallable(Settings settings, RockBlockVariant variant, RockType type) {
+        super(settings, variant, type);
     }
 
     @SideOnly(Side.CLIENT)

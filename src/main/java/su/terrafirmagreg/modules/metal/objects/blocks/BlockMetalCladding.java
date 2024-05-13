@@ -59,16 +59,18 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     private final MetalType type;
 
     public BlockMetalCladding(MetalBlockVariant variant, MetalType type) {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        this.variant = variant;
+        this.type = type;
+
+        getSettings()
                 .registryKey("metal/cladding")
                 .nonOpaque()
                 .nonFullCube()
                 .noItemBlock()
                 .hardness(40F)
-                .resistance(25F));
-
-        this.variant = variant;
-        this.type = type;
+                .resistance(25F);
 
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()

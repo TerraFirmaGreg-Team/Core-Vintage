@@ -39,15 +39,16 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 public class BlockGrindstone extends BaseBlock implements ITileBlock {
 
     public BlockGrindstone() {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        getSettings()
                 .registryKey("device/grindstone_base")
                 .soundType(SoundType.WOOD)
                 .hardness(1.5f)
                 .nonOpaque()
                 .nonFullCube()
                 .size(Size.LARGE)
-                .weight(Weight.HEAVY));
-
+                .weight(Weight.HEAVY);
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));

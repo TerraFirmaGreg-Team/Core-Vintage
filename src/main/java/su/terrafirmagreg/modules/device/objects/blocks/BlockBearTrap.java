@@ -47,15 +47,15 @@ public class BlockBearTrap extends BaseBlock implements ITileBlock {
     protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
     public BlockBearTrap() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/bear_trap")
                 .hardness(10.0F)
                 .resistance(10.0F)
-                .nonOpaque()
-                .nonFullCube()
+                .nonCube()
                 .size(Size.LARGE)
-                .weight(Weight.HEAVY));
-
+                .weight(Weight.HEAVY);
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)

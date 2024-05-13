@@ -75,15 +75,16 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, ISta
     }
 
     public BlockFridge() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/fridge")
                 .hardness(3.0F)
                 .nonOpaque()
                 .nonFullCube()
                 .size(Size.HUGE)
                 .weight(Weight.MEDIUM)
-                .nonCanStack());
-
+                .nonCanStack();
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, NORTH)

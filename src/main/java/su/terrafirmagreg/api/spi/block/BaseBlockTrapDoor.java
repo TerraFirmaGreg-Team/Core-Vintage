@@ -14,7 +14,5 @@ public abstract class BaseBlockTrapDoor extends BlockTrapDoor implements ISettin
         super(settings.material);
 
         this.settings = settings;
-
-        setTranslationKey(settings.translationKey);
     }
 }

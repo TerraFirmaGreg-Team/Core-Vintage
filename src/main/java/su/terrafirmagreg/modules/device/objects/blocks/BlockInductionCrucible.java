@@ -46,7 +46,9 @@ public class BlockInductionCrucible extends BaseBlock implements ITileBlock {
     private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
 
     public BlockInductionCrucible() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/induction_crucible")
                 .soundType(SoundType.METAL)
                 .size(Size.LARGE)
@@ -55,8 +57,8 @@ public class BlockInductionCrucible extends BaseBlock implements ITileBlock {
                 .nonFullCube()
                 .nonCanStack()
                 .nonOpaque()
-                .hardness(3.0f));
-
+                .hardness(3.0f);
+        
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)

@@ -13,7 +13,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -30,13 +29,12 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 public class BlockFreezeDryer extends BaseBlockContainer implements ITileBlock {
 
     public BlockFreezeDryer() {
-        super(Settings.of(Material.WOOD)
-                .registryKey("device/freeze_dryer")
-                .nonOpaque()
-                .nonFullCube()
-                .hardness(2F)
-                .renderLayer(BlockRenderLayer.CUTOUT));
+        super(Settings.of(Material.WOOD));
 
+        getSettings()
+                .registryKey("device/freeze_dryer")
+                .nonCube()
+                .hardness(2F);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
     }

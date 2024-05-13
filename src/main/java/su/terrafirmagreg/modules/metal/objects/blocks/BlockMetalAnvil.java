@@ -61,15 +61,17 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
     private final MetalType type;
 
     public BlockMetalAnvil(MetalBlockVariant variant, MetalType type) {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        this.variant = variant;
+        this.type = type;
+
+        getSettings()
                 .soundType(SoundType.ANVIL)
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(4.0F)
-                .resistance(10F));
-
-        this.variant = variant;
-        this.type = type;
+                .resistance(10F);
 
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()

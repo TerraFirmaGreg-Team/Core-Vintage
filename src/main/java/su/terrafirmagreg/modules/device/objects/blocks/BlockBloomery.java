@@ -165,15 +165,16 @@ public class BlockBloomery extends BaseBlock implements ITileBlock {
     }
 
     public BlockBloomery() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/bloomery")
                 .soundType(SoundType.METAL)
                 .hardness(20.0F)
                 .size(Size.LARGE)
                 .weight(Weight.VERY_HEAVY)
                 .nonFullCube()
-                .nonOpaque());
-
+                .nonOpaque();
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)

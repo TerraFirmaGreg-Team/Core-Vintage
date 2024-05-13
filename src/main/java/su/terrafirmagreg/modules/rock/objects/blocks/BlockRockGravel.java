@@ -12,7 +12,7 @@ import net.dries007.tfc.api.util.FallingBlockManager;
 public class BlockRockGravel extends BlockRockFallable {
 
     public BlockRockGravel(RockBlockVariant variant, RockType type) {
-        super(Material.SAND, variant, type);
+        super(Settings.of(Material.SAND), variant, type);
 
         getSettings()
                 .soundType(SoundType.GROUND);

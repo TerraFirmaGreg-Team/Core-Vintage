@@ -19,14 +19,16 @@ public class BlockWoodTrapDoor extends BaseBlockTrapDoor implements IWoodBlock {
     private final WoodType type;
 
     public BlockWoodTrapDoor(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
-                .hardness(0.5F)
-                .addOreDict(variant, "wood")
-                .addOreDict(variant, "wood", type));
+        super(Settings.of(Material.WOOD));
 
         this.variant = variant;
         this.type = type;
+
+        getSettings()
+                .soundType(SoundType.WOOD)
+                .hardness(0.5F)
+                .addOreDict(variant, "wood")
+                .addOreDict(variant, "wood", type);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

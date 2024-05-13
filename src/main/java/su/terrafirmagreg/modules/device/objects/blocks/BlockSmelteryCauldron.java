@@ -40,14 +40,16 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileBlock {
 
     public BlockSmelteryCauldron() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/smeltery_cauldron")
                 .soundType(SoundType.STONE)
                 .nonOpaque()
                 .nonFullCube()
                 .size(Size.LARGE)
                 .weight(Weight.MEDIUM)
-                .hardness(3.0F));
+                .hardness(3.0F);
 
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()

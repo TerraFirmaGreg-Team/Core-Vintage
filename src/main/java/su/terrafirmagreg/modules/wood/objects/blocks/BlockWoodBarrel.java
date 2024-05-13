@@ -18,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -63,9 +62,7 @@ public class BlockWoodBarrel extends BlockWood implements ITileBlock {
         getSettings()
                 .hardness(2F)
                 .weight(Weight.VERY_HEAVY)
-                .nonOpaque()
-                .nonFullCube()
-                .renderLayer(BlockRenderLayer.CUTOUT);
+                .nonCube();
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(SEALED, false));

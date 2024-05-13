@@ -26,9 +26,11 @@ import org.jetbrains.annotations.Nullable;
 public class BlockIceBunker extends BaseBlockContainer implements ITileBlock {
 
     public BlockIceBunker() {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        getSettings()
                 .registryKey("device/ice_bunker")
-                .hardness(2F));
+                .hardness(2F);
     }
 
     @Override

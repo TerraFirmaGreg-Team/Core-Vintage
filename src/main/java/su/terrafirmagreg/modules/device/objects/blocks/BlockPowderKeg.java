@@ -23,7 +23,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -63,15 +62,15 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileBlock {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
     public BlockPowderKeg() {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        getSettings()
                 .registryKey("device/powderkeg")
-                .renderLayer(BlockRenderLayer.CUTOUT)
                 .soundType(SoundType.WOOD)
                 .hardness(2F)
-                .nonOpaque()
-                .nonFullCube()
-                .weight(Weight.VERY_HEAVY));
-
+                .nonCube()
+                .weight(Weight.VERY_HEAVY);
+        
         setTickRandomly(true);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)

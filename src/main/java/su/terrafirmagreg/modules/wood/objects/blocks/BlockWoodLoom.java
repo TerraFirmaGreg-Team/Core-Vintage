@@ -51,7 +51,12 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
     private final WoodType type;
 
     public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        this.variant = variant;
+        this.type = type;
+
+        getSettings()
                 .mapColor(MapColor.AIR) // ?
                 .soundType(SoundType.WOOD)
                 .nonOpaque()
@@ -61,10 +66,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITi
                 .weight(Weight.VERY_HEAVY)
                 .size(Size.LARGE)
                 .addOreDict(variant)
-                .addOreDict(variant, type));
-
-        this.variant = variant;
-        this.type = type;
+                .addOreDict(variant, type);
 
         setHarvestLevel("axe", 0);
         setDefaultState(getBlockState().getBaseState()

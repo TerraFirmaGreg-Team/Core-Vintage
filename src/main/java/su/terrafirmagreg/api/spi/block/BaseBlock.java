@@ -34,14 +34,6 @@ public abstract class BaseBlock extends Block implements ISettingsBlock {
         super(settings.material, settings.material.getMaterialMapColor());
 
         this.settings = settings;
-
-        setResistance(settings.resistance);
-        setTranslationKey(settings.translationKey);
-
-        // Fix some potential issues with these fields being set prematurely by the super ctor
-        this.fullBlock = getDefaultState().isOpaqueCube();
-        this.lightOpacity = this.fullBlock ? 255 : 0;
-
     }
 
     @Override

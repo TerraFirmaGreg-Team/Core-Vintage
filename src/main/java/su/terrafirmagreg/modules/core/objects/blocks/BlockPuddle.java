@@ -25,14 +25,15 @@ import java.util.Random;
 public class BlockPuddle extends BaseBlock {
 
     public BlockPuddle() {
-        super(Settings.of(Material.GROUND)
+        super(Settings.of(Material.GROUND));
+
+        setTickRandomly(true);
+        getSettings()
                 .registryKey("core/puddle")
                 .renderLayer(BlockRenderLayer.TRANSLUCENT)
                 .unbreakable()
                 .nonFullCube()
-                .noCollision());
-
-        setTickRandomly(true);
+                .noCollision();
     }
 
     @Override

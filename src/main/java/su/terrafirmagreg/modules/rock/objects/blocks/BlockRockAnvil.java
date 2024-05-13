@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -31,10 +30,9 @@ public class BlockRockAnvil extends BlockRock {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
 
     public BlockRockAnvil(RockBlockVariant variant, RockType type) {
-        super(Settings.of(Material.ROCK)
-                .nonOpaque()
-                .nonFullCube()
-                .renderLayer(BlockRenderLayer.CUTOUT), variant, type);
+        super(Settings.of(Material.ROCK), variant, type);
+
+        getSettings().nonCube();
 
         FallingBlockManager.registerFallable(this, variant.getSpecification());
     }

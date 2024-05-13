@@ -75,11 +75,12 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
     }
 
     public BlockBlastFurnace() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/blast_furnace")
                 .hardness(2.0F)
-                .resistance(2.0F));
-
+                .resistance(2.0F);
         setHarvestLevel("pickaxe", 0);
     }
 

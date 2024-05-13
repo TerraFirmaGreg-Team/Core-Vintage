@@ -31,15 +31,16 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 public class BlockBellows extends BaseBlock implements ITileBlock {
 
     public BlockBellows() {
-        super(Settings.of(Material.CIRCUITS)
+        super(Settings.of(Material.CIRCUITS));
+
+        getSettings()
                 .registryKey("device/bellows")
                 .mapColor(MapColor.GRAY)
                 .soundType(SoundType.WOOD)
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(2.0F)
-                .resistance(2.0F));
-
+                .resistance(2.0F);
         setHarvestLevel("axe", 0);
         setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }

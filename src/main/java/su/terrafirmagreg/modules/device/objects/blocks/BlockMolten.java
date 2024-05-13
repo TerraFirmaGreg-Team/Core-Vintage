@@ -38,11 +38,13 @@ public class BlockMolten extends BaseBlock {
     };
 
     public BlockMolten() {
-        super(Settings.of(Material.ROCK)
+        super(Settings.of(Material.ROCK));
+
+        getSettings()
                 .registryKey("device/molten")
                 .nonFullCube()
                 .nonOpaque()
-                .hardness(-1));
+                .hardness(-1);
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)

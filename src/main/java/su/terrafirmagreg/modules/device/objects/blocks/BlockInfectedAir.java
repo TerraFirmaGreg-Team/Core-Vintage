@@ -21,11 +21,13 @@ import org.jetbrains.annotations.Nullable;
 public class BlockInfectedAir extends BaseBlock implements ITileBlock {
 
     public BlockInfectedAir() {
-        super(Settings.of(Material.AIR)
+        super(Settings.of(Material.AIR));
+
+        getSettings()
                 .registryKey("device/infected_air")
                 .hardness(2F)
                 .nonOpaque()
-                .nonFullCube());
+                .nonFullCube();
     }
 
     @Nullable

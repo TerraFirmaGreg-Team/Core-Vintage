@@ -20,7 +20,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockThatch extends BaseBlock {
 
     public BlockThatch() {
-        super(Settings.of(Material.PLANTS)
+        super(Settings.of(Material.PLANTS));
+
+        getSettings()
                 .registryKey("core/thatch")
                 .soundType(SoundType.PLANT)
                 .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
@@ -28,7 +30,7 @@ public class BlockThatch extends BaseBlock {
                 .nonFullCube()
                 .hardness(0.6F)
                 .addOreDict("thatch")
-                .addOreDict("block", "straw"));
+                .addOreDict("block", "straw");
 
         BlockUtils.setFireInfo(this, 60, 20);
     }
@@ -38,7 +40,7 @@ public class BlockThatch extends BaseBlock {
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return true;
     }
-    
+
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;

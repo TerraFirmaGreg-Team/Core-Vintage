@@ -53,11 +53,12 @@ public class BlockCharcoalPile extends BaseBlock {
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D) };
 
     public BlockCharcoalPile() {
-        super(Settings.of(CHARCOAL_MATERIAL)
+        super(Settings.of(CHARCOAL_MATERIAL));
+
+        getSettings()
                 .registryKey("device/charcoal_pile")
                 .hardness(1.0F)
-                .soundType(TFCSounds.CHARCOAL_PILE));
-
+                .soundType(TFCSounds.CHARCOAL_PILE);
         setHarvestLevel("shovel", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LAYERS, 1));

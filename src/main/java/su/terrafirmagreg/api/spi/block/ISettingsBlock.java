@@ -249,6 +249,11 @@ public interface ISettingsBlock extends IAutoRegProvider {
             return this;
         }
 
+        public Settings translationKey(String translationKey) {
+            this.translationKey = translationKey;
+            return this;
+        }
+
         public Settings noItemBlock() {
             this.itemBlock = false;
             return this;
@@ -260,6 +265,13 @@ public interface ISettingsBlock extends IAutoRegProvider {
             return this;
         }
 
+        public Settings nonCube() {
+            this.opaque = false;
+            this.fullCube = false;
+            this.renderLayer = BlockRenderLayer.CUTOUT;
+            return this;
+        }
+
         public Settings nonOpaque() {
             this.opaque = false;
             return this;
@@ -267,11 +279,6 @@ public interface ISettingsBlock extends IAutoRegProvider {
 
         public Settings nonFullCube() {
             this.fullCube = false;
-            return this;
-        }
-
-        public Settings translationKey(String translationKey) {
-            this.translationKey = translationKey;
             return this;
         }
 

@@ -10,11 +10,12 @@ import net.minecraft.block.material.Material;
 public class BlockSoilPeat extends BaseBlock {
 
     public BlockSoilPeat() {
-        super(Settings.of(Material.GROUND)
-                .soundType(SoundType.GROUND)
-                .hardness(0.6F));
+        super(Settings.of(Material.GROUND));
 
         setHarvestLevel("shovel", 0);
+        getSettings()
+                .soundType(SoundType.GROUND)
+                .hardness(0.6F);
 
         BlockUtils.setFireInfo(this, 5, 10);
         //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.GRAVELLIKE);

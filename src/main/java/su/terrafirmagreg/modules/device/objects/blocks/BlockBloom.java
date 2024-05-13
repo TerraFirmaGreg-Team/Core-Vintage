@@ -26,11 +26,12 @@ import org.jetbrains.annotations.Nullable;
 public class BlockBloom extends BaseBlock implements ITileBlock {
 
     public BlockBloom() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/bloom")
                 .hardness(3.0f)
-                .soundType(SoundType.STONE));
-
+                .soundType(SoundType.STONE);
         setHarvestLevel("pickaxe", 0);
     }
 

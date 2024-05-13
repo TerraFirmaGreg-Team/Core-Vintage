@@ -54,14 +54,16 @@ public class BlockSnare extends BaseBlock implements ITileBlock {
     protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
     public BlockSnare() {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        getSettings()
                 .registryKey("device/snare")
                 .soundType(SoundType.WOOD)
                 .hardness(1.5f)
                 .nonFullCube()
                 .nonOpaque()
                 .size(Size.LARGE)
-                .weight(Weight.MEDIUM));
+                .weight(Weight.MEDIUM);
 
         setTickRandomly(true);
         setHarvestLevel("axe", 0);

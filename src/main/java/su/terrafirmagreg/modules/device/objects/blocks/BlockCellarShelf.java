@@ -25,10 +25,12 @@ import org.jetbrains.annotations.Nullable;
 public class BlockCellarShelf extends BaseBlockContainer implements ITileBlock {
 
     public BlockCellarShelf() {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        getSettings()
                 .registryKey("device/cellar/shelf")
                 .hardness(2F)
-                .nonOpaque());
+                .nonOpaque();
     }
 
     @Override

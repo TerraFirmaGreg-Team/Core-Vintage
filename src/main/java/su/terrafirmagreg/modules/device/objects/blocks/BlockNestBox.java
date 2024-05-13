@@ -13,7 +13,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -33,12 +32,12 @@ public class BlockNestBox extends BaseBlockContainer implements ITileBlock {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.25D, 0.875D);
 
     public BlockNestBox() {
-        super(Settings.of(Material.GRASS)
+        super(Settings.of(Material.GRASS));
+
+        getSettings()
                 .registryKey("device/nest_box")
-                .renderLayer(BlockRenderLayer.CUTOUT)
-                .nonFullCube()
-                .nonOpaque()
-                .hardness(0.5F));
+                .nonCube()
+                .hardness(0.5F);
 
         BlockUtils.setFireInfo(this, 60, 20);
     }

@@ -32,19 +32,19 @@ public class SCPacketLatex implements IMessage, IMessageHandler<SCPacketLatex, I
 
     public SCPacketLatex(@NotNull TileLatexExtractor tile) {
         this.pos = tile.getPos();
-        cutState = tile.cutState();
-        fluid = tile.getFluidAmount();
-        pot = tile.hasPot();
-        base = tile.hasBase();
+        this.cutState = tile.cutState();
+        this.fluid = tile.getFluidAmount();
+        this.pot = tile.hasPot();
+        this.base = tile.hasBase();
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        pos = BlockPos.fromLong(buf.readLong());
-        cutState = buf.readInt();
-        fluid = buf.readInt();
-        pot = buf.readBoolean();
-        base = buf.readBoolean();
+        this.pos = BlockPos.fromLong(buf.readLong());
+        this.cutState = buf.readInt();
+        this.fluid = buf.readInt();
+        this.pot = buf.readBoolean();
+        this.base = buf.readBoolean();
     }
 
     @Override
@@ -61,9 +61,9 @@ public class SCPacketLatex implements IMessage, IMessageHandler<SCPacketLatex, I
         EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
         if (player != null) {
             World world = player.getEntityWorld();
-            TileLatexExtractor te = TileUtils.getTile(world, message.pos, TileLatexExtractor.class);
-            if (te != null) {
-                te.updateClient(message.cutState, message.fluid, message.pot, message.base);
+            var tile = TileUtils.getTile(world, message.pos, TileLatexExtractor.class);
+            if (tile != null) {
+                tile.updateClient(message.cutState, message.fluid, message.pot, message.base);
             }
         }
         return null;

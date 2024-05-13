@@ -55,14 +55,15 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
 
     public BlockCrucible() {
-        super(Settings.of(Material.IRON)
+        super(Settings.of(Material.IRON));
+
+        getSettings()
                 .registryKey("device/crucible")
                 .soundType(SoundType.METAL)
                 .nonFullCube()
                 .nonOpaque()
                 .hardness(3.0f)
-                .weight(Weight.VERY_HEAVY));
-
+                .weight(Weight.VERY_HEAVY);
         setHarvestLevel("pickaxe", 0);
     }
 

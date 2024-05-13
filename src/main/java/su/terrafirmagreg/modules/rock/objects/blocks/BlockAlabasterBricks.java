@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.material.MapColor;
@@ -13,12 +12,11 @@ import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVa
 
 public class BlockAlabasterBricks extends BlockRockDecorative {
 
-    private final String color;
-
     public BlockAlabasterBricks() {
-        super(Settings.of(Material.ROCK).mapColor(MapColor.getBlockColor(EnumDyeColor.WHITE)));
+        this(EnumDyeColor.WHITE);
 
-        this.color = "plain";
+        getSettings()
+                .registryKey("rock/alabaster/bricks/plain");
 
         for (var color : EnumDyeColor.values()) {
             BlocksRock.ALABASTER_COLOR_BLOCKS.put(Pair.of(BRICKS, color), new BlockAlabasterBricks(color));
@@ -26,19 +24,12 @@ public class BlockAlabasterBricks extends BlockRockDecorative {
     }
 
     public BlockAlabasterBricks(EnumDyeColor color) {
-        super(Settings.of(Material.ROCK).mapColor(MapColor.getBlockColor(color)));
+        super(Settings.of(Material.ROCK));
 
-        this.color = color.getName();
-    }
-
-    @Override
-    public void onRegisterOreDict() {
-        OreDictUtils.register(this, "alabaster");
-        OreDictUtils.register(this, "alabaster", "bricks");
-    }
-
-    @Override
-    public String getName() {
-        return String.format("rock/alabaster/bricks/%s", color);
+        getSettings()
+                .mapColor(MapColor.getBlockColor(color))
+                .addOreDict("alabaster")
+                .addOreDict("alabaster", "bricks")
+                .registryKey("rock/alabaster/bricks/" + color.getName());
     }
 }

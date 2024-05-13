@@ -31,13 +31,15 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
     private final SoilType type;
 
     public BlockSoil(SoilBlockVariant variant, SoilType type) {
-        super(Settings.of(Material.GROUND)
-                .soundType(SoundType.GROUND)
-                .hardness(2.0F)
-                .addOreDict(variant));
+        super(Settings.of(Material.GROUND));
 
         this.variant = variant;
         this.type = type;
+
+        getSettings()
+                .soundType(SoundType.GROUND)
+                .hardness(2.0F)
+                .addOreDict(variant);
 
         setHarvestLevel("shovel", 0);
         FallingBlockManager.registerFallable(this, variant.getSpecification());

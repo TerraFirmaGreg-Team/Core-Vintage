@@ -55,10 +55,12 @@ public class BlockLogPile extends BaseBlockContainer implements ITileBlock {
     );
 
     public BlockLogPile() {
-        super(Settings.of(Material.WOOD)
+        super(Settings.of(Material.WOOD));
+
+        getSettings()
                 .registryKey("device/log_pile")
                 .soundType(SoundType.WOOD)
-                .hardness(2.0F));
+                .hardness(2.0F);
 
         setTickRandomly(true);
         setHarvestLevel("axe", 0);

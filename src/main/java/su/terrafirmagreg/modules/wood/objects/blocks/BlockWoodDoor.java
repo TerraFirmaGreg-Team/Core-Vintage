@@ -24,13 +24,15 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
     private final WoodType type;
 
     public BlockWoodDoor(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD)
-                .soundType(SoundType.WOOD)
-                .addOreDict(variant, "wood")
-                .addOreDict(variant, "wood", type));
+        super(Settings.of(Material.WOOD));
 
         this.variant = variant;
         this.type = type;
+
+        getSettings()
+                .soundType(SoundType.WOOD)
+                .addOreDict(variant, "wood")
+                .addOreDict(variant, "wood", type);
 
         disableStats();
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());

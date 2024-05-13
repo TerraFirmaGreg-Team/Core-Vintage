@@ -20,13 +20,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -39,7 +36,7 @@ import java.util.List;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public interface ISettingsBlock extends IAutoRegProvider, IFluidloggable {
+public interface ISettingsBlock extends IAutoRegProvider {
 
     Settings getSettings();
 
@@ -127,33 +124,6 @@ public interface ISettingsBlock extends IAutoRegProvider, IFluidloggable {
     @Override
     default boolean canStack(ItemStack stack) {
         return getSettings().isCanStack();
-    }
-
-    // Override IFluidloggable methods
-
-    @Override
-    default boolean isFluidloggable(IBlockState state, World world, BlockPos pos) {
-        return isWaterloggable(state, world, pos);
-    }
-
-    @Override
-    default boolean isFluidValid(IBlockState state, World world, BlockPos pos, Fluid fluid) {
-        return isWaterloggable(state, world, pos) && fluid == FluidRegistry.WATER;
-    }
-
-    @Override
-    default boolean canFluidFlow(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
-        return isWaterloggable(state, world, pos) && canWaterFlow(world, pos, state, side);
-    }
-
-    /** Whether this block can be water-logged or not. */
-    default boolean isWaterloggable(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return false;
-    }
-
-    /** Whether water can flow into/out of this block. */
-    default boolean canWaterFlow(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
-        return state.getBlockFaceShape(world, pos, side) != BlockFaceShape.SOLID;
     }
 
     // New methods

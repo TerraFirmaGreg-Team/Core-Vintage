@@ -11,13 +11,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -114,26 +110,6 @@ public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock,
     @SideOnly(Side.CLIENT)
     public void onRegisterState() {
         ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(VARIANT).build());
-    }
-
-    @Override
-    public final boolean isFluidloggable(IBlockState state, World world, BlockPos pos) {
-        return isWaterloggable(state, world, pos);
-    }
-
-    @Override
-    public final boolean isFluidValid(IBlockState state, World world, BlockPos pos, Fluid fluid) {
-        return isWaterloggable(state, world, pos) && fluid == FluidRegistry.WATER;
-    }
-
-    @Override
-    public final boolean canFluidFlow(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
-        return isWaterloggable(state, world, pos) && canWaterFlow(world, pos, state, side);
-    }
-
-    /** Whether this block can be water-logged or not. */
-    public boolean isWaterloggable(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return this.isDouble();
     }
 
     public enum Variant implements IStringSerializable {

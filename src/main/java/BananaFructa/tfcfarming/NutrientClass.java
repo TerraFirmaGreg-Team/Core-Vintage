@@ -5,7 +5,7 @@ public enum NutrientClass {
     PHOSPHORUS("\u00A75Phosphorus (P)\u00A7r"),
     POTASSIUM("\u00A76Potassium (K)\u00A7r");
 
-    public String name;
+    public final String name;
 
     NutrientClass(String name) {
         this.name = name;

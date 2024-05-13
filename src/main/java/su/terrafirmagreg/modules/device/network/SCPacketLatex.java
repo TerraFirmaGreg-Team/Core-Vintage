@@ -28,7 +28,7 @@ public class SCPacketLatex implements IMessage, IMessageHandler<SCPacketLatex, I
     private boolean base = false;
 
     @SuppressWarnings("unused")
-    private SCPacketLatex() {}
+    public SCPacketLatex() {}
 
     public SCPacketLatex(@NotNull TileLatexExtractor tile) {
         this.pos = tile.getPos();

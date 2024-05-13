@@ -59,8 +59,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 
     @Override
     public void startExecuting() {
-        this.theCreature.getNavigator()
-                .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1, this.nestPos.getZ() + 0.5D, this.speed);
+        this.theCreature.getNavigator().tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY() + 1, this.nestPos.getZ() + 0.5D, this.speed);
         this.currentTick = 0;
         this.end = false;
         this.maxSittingTicks = this.theCreature.getRNG().nextInt(200) + 100;
@@ -71,8 +70,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
         ++this.currentTick;
         if (nestPos == null) return;
         if (this.theCreature.getDistanceSq(nestPos) > 1.25D) {
-            this.theCreature.getNavigator()
-                    .tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D, this.speed);
+            this.theCreature.getNavigator().tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D, this.speed);
             if (this.currentTick > 200) {
                 //We never reached it in 10 secs, lets give up on this nest box
                 failureDepressionMap.put(nestPos, theWorld.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);

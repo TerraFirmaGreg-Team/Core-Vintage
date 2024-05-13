@@ -20,7 +20,7 @@ public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTil
     private BlockPos pos;
 
     @SuppressWarnings("unused")
-    private SCPacketTileEntity() {}
+    public SCPacketTileEntity() {}
 
     public SCPacketTileEntity(TileEntity te) {
         pos = te.getPos();

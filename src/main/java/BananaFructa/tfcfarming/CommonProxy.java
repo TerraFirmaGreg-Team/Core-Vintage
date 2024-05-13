@@ -6,14 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
@@ -44,23 +42,22 @@ public class CommonProxy {
     /**
      * Each plant uses all the nutrient of its type from the soil block on which it is place in a complete growth phase
      * <p>
-     * The average plant in TFC takes ~4 months to mature The passive nutrient replenish parameters are set such that a nutrient goes from empty to
-     * full in a period of 32 months.
+     * The average plant in TFC takes ~4 months to mature The passive nutrient replenish parameters are set such that a nutrient goes from empty to full in a period of 32 months.
      * <p>
-     * Going a bit more in depth, if we exclude the usage of fertilizers, considering that a plant takes 4 months to mature (as that is the average
-     * time) the 32 month come into play like this:
+     * Going a bit more in depth, if we exclude the usage of fertilizers, considering that a plant takes 4 months to mature (as that is the average time) the 32 month come into
+     * play like this:
      * <p>
      * 4 growth months + 8 waiting months = 12 month = 1 year 24 waiting months            = 2 years
      * <p>
-     * Thus, a plant can be planted again on the same spot as it first grew after exactly 3 years (3 years after it started first growing). This is
-     * done to keep growing seasons in sync, otherwise if it were to be 3 years after the plant matured then if you planted a crop in June, and it
-     * matured in September then the soonest you will be able to plant it again would be in September after 3 years not in June.
+     * Thus, a plant can be planted again on the same spot as it first grew after exactly 3 years (3 years after it started first growing). This is done to keep growing seasons in
+     * sync, otherwise if it were to be 3 years after the plant matured then if you planted a crop in June, and it matured in September then the soonest you will be able to plant
+     * it again would be in September after 3 years not in June.
      * <p>
-     * The period is of 3 years because there are 3 types of nutrients and this makes the strategy of splitting farmland into 3/6/9/... slices
-     * (depending on how many times the temperatures allow you to grow a crop every year) the best way of growing stuff without using fertilizers
+     * The period is of 3 years because there are 3 types of nutrients and this makes the strategy of splitting farmland into 3/6/9/... slices (depending on how many times the
+     * temperatures allow you to grow a crop every year) the best way of growing stuff without using fertilizers
      * <p>
-     * Using a number that is not a multiple of three would break the symmetry of the rotation and using a multiple of 3 would invalidate the simple 3
-     * slice split solution, fact which can make it harder or discourage others to understand the system.
+     * Using a number that is not a multiple of three would break the symmetry of the rotation and using a multiple of 3 would invalidate the simple 3 slice split solution, fact
+     * which can make it harder or discourage others to understand the system.
      */
 
     private final List<Tuple<BlockPos, World>> awaiting = new ArrayList<>();
@@ -173,16 +170,14 @@ public class CommonProxy {
         Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
         if (!event.getWorld().isRemote) {
             boolean farmlandTFC = b instanceof BlockFarmlandTFC;
-            boolean farmlandTFCF = TFCFarming.tfcfloraeLoaded && b instanceof FarmlandTFCF;
             boolean planter = TFCFarming.firmalifeLoaded && b instanceof BlockLargePlanter;
             boolean hangingPlanter = Config.hangingPlanters && TFCFarming.firmalifeLoaded && b instanceof BlockHangingPlanter;
-            if (farmlandTFC || farmlandTFCF || planter || hangingPlanter) {
+            if (farmlandTFC || planter || hangingPlanter) {
 
                 // fertilizer logic
                 if (hangingPlanter || planter || canSeeSky(event.getPos(), event.getWorld())) {
                     if (TFCFarmingContent.isFertilizer(event.getItemStack())) {
-                        int meta = event.getItemStack().getItem().getHasSubtypes() ? event.getItemStack()
-                                .getMetadata() : 0;
+                        int meta = event.getItemStack().getItem().getHasSubtypes() ? event.getItemStack().getMetadata() : 0;
                         NutrientClass nutrientClass = TFCFarmingContent.getFertilizerClass(event.getItemStack());
                         int value = TFCFarmingContent.getFertilizerValue(event.getItemStack());
                         if (!planter && TFCFarming.INSTANCE.worldStorage.fertilizerBlock(event.getPos()
@@ -210,10 +205,5 @@ public class CommonProxy {
                 }
             }
         }
-    }
-
-    @SubscribeEvent
-    public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        event.player.sendMessage(new TextComponentString("\u00a7eTFC Farming\u00a7r is enabled and soil nutrient mechanics are in effect."));
     }
 }

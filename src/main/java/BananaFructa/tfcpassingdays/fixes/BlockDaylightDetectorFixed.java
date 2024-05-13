@@ -41,8 +41,8 @@ public class BlockDaylightDetectorFixed extends BlockDaylightDetector {
 
             i = MathHelper.clamp(i, 0, 15);
 
-            if (((Integer) iblockstate.getValue(POWER)).intValue() != i) {
-                worldIn.setBlockState(pos, iblockstate.withProperty(POWER, Integer.valueOf(i)), 3);
+            if (iblockstate.getValue(POWER) != i) {
+                worldIn.setBlockState(pos, iblockstate.withProperty(POWER, i), 3);
             }
         }
     }

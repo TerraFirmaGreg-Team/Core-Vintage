@@ -65,9 +65,7 @@ public class FloraeFixes {
     }
 
     public void fixCropItemSupplierTFCFlorae(Class<?> objType, Object obj, ItemFoodTFCF food) {
-        Supplier<ItemStack> foodDrop = () -> {
-            return new ItemStack(food);
-        };
+        Supplier<ItemStack> foodDrop = () -> new ItemStack(food);
         Utils.writeDeclaredField(objType, obj, "foodDrop", foodDrop, true);
     }
 
@@ -140,8 +138,7 @@ public class FloraeFixes {
                     Block down = event.getWorld().getBlockState(pos).getBlock();
                     if ((down instanceof BlockFarmlandTFC || down instanceof FarmlandTFCF) && event.getWorld()
                             .getBlockState(pos.up())
-                            .getBlock()
-                            .getMaterial(null) == Material.WATER) {
+                            .getMaterial() == Material.WATER) {
                         Utils.ricePlaceFixed(Crop.RICE, event.getItemStack()
                                 .getItem(), event.getWorld(), event.getEntityPlayer(), event.getHand());
                     }

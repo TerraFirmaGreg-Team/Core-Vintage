@@ -17,6 +17,7 @@ import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
 import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
+import net.dries007.tfc.objects.items.metal.ItemMetalIceSaw;
 import net.dries007.tfc.objects.items.metal.ItemMetalJavelin;
 import net.dries007.tfc.objects.items.metal.ItemMetalShears;
 import net.dries007.tfc.objects.items.metal.ItemMetalSheet;
@@ -57,6 +58,8 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
     public static final Metal BLUE_STEEL = Helpers.getNull();
     @GameRegistry.ObjectHolder("tfc:red_steel")
     public static final Metal RED_STEEL = Helpers.getNull();
+    @GameRegistry.ObjectHolder("tfc:black_steel")
+    public static final Metal BLACK_STEEL = Helpers.getNull();
 
     @Getter
     private final Tier tier;
@@ -174,7 +177,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 
         ANVIL(true, 1400, ItemAnvil::new),
         TUYERE(true, 400),
-        LAMP(false, 100, (metal, itemType) -> new ItemBlockMetalLamp(metal)),
+        LAMP(false, 100, ItemBlockMetalLamp::new),
         TRAPDOOR(false, 200, (metal, itemType) -> new ItemBlock(BlockTrapDoorMetalTFC.get(metal))),
 
         PICK(true, 100, ItemMetalTool::new),
@@ -187,7 +190,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
         HOE_HEAD(true, 100, true, "XXXXX", "     ", "  XXX", "XXXXX"),
         CHISEL(true, 100, ItemMetalChisel::new),
         CHISEL_HEAD(true, 100, true, "X X", "X X", "X X", "X X", "X X"),
-        SWORD(true, 100, (metal, itemType) -> new ItemMetalSword(metal)),
+        SWORD(true, 100, ItemMetalSword::new),
         SWORD_BLADE(true, 100, true, "XXX  ", "XX   ", "X   X", "X  XX", " XXXX"),
         MACE(true, 100, ItemMetalTool::new),
         MACE_HEAD(true, 100, true, "XX XX", "X   X", "X   X", "X   X", "XX XX"),
@@ -203,6 +206,10 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
         KNIFE_BLADE(true, 100, true, "XX X", "X  X", "X  X", "X  X", "X  X"),
         SCYTHE(true, 100, ItemMetalTool::new),
         SCYTHE_BLADE(true, 100, true, "XXXXX", "X    ", "    X", "  XXX", "XXXXX"),
+
+        ICE_SAW(true, 100, ItemMetalIceSaw::new),
+        ICE_SAW_HEAD(true, 100, false),
+
         SHEARS(true, 200, ItemMetalShears::new),
 
         UNFINISHED_HELMET(true, 400),

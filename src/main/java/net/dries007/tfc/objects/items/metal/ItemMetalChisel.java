@@ -49,12 +49,11 @@ public class ItemMetalChisel extends ItemMetalTool {
     }
 
     /**
-     * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null,
-     * then a successful chisel operation can be completed.
+     * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null, then a successful chisel
+     * operation can be completed.
      * <br><br>
-     * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack =
-     * block.getPickBlock(state, pos)<br> resultStack = CraftingInventory.getResult(itemStack)<br> resultBlock = (resultStack.getItem() as
-     * ItemBlock).getBlock()<br> resultState = resultBlock.getPlacementState()<br>
+     * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack = block.getPickBlock(state, pos)<br> resultStack =
+     * CraftingInventory.getResult(itemStack)<br> resultBlock = (resultStack.getItem() as ItemBlock).getBlock()<br> resultState = resultBlock.getPlacementState()<br>
      * <br>
      *
      * @param player  player who clicked on the block
@@ -64,8 +63,7 @@ public class ItemMetalChisel extends ItemMetalTool {
      * @return null if the operation would not succeed. resulting state for if it would succeed.
      */
     @Nullable
-    public static IBlockState getChiselResultState(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-                                                   float hitZ) {
+    public static IBlockState getChiselResultState(EntityPlayer player, World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
         // no chiseling if no hammer is present
         if (hasHammerForChisel(player)) {
             IBlockState state = worldIn.getBlockState(pos);
@@ -156,9 +154,9 @@ public class ItemMetalChisel extends ItemMetalTool {
     }
 
     /**
-     * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned
-     * into that stair. If the chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is
-     * polish and the block is a TFC Raw stone, it will be crafted into a polished stone.
+     * attempts to change a block in place using the chisel. If the chiselMode is stair and the block can be crafted into a stair, it will be turned into that stair. If the
+     * chiselMode is slab and the block can be crafted into a slab, it will be crafted into a slab. If the chiselMode is polish and the block is a TFC Raw stone, it will be crafted
+     * into a polished stone.
      *
      * @return SUCCESS if the block was chiseled, FAIL if no block was changed
      */

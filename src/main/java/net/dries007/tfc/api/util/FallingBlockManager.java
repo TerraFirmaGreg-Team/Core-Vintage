@@ -393,14 +393,15 @@ public class FallingBlockManager {
 
         public Specification(boolean canFallHorizontally, Supplier<SoundEvent> soundEventDelegate) {
             this(canFallHorizontally, false, soundEventDelegate, DEFAULT_DROPS_PROVIDER);
+
         }
 
         public Specification(boolean canFallHorizontally, boolean collapsable, Supplier<SoundEvent> soundEventDelegate) {
             this(canFallHorizontally, collapsable, soundEventDelegate, DEFAULT_DROPS_PROVIDER);
+
         }
 
-        public Specification(boolean canFallHorizontally, boolean collapsable, Supplier<SoundEvent> soundEventDelegate,
-                             IFallDropsProvider fallDropsProvider) {
+        public Specification(boolean canFallHorizontally, boolean collapsable, Supplier<SoundEvent> soundEventDelegate, IFallDropsProvider fallDropsProvider) {
             this.canFallHorizontally = canFallHorizontally;
             this.collapsable = collapsable;
             if (this.collapsable) {
@@ -432,13 +433,13 @@ public class FallingBlockManager {
             return resultingState == null ? originalState : resultingState;
         }
 
-        public Iterable<ItemStack> getDrops(World world, BlockPos pos, IBlockState state, @Nullable NBTTagCompound teData, int fallTime,
-                                            float fallDistance) {
+        public Iterable<ItemStack> getDrops(World world, BlockPos pos, IBlockState state, @Nullable NBTTagCompound teData, int fallTime, float fallDistance) {
             return fallDropsProvider.getDropsFromFall(world, pos, state, teData, fallTime, fallDistance);
         }
 
         public boolean canCollapse(World world, BlockPos pos) {
             return this.collapseChecker.canCollapse(world, pos);
+
         }
 
         public void beginFall(World world, BlockPos pos) {

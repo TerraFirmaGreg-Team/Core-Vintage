@@ -26,7 +26,7 @@ public abstract class BaseItem extends Item implements ISettingsItem {
 
     @Override
     public String getTranslationKey() {
-        return "item." + getSettings().getTranslationKey();
+        return getSettings().getTranslationKey() == null ? super.getTranslationKey() : "item." + getSettings().getTranslationKey();
     }
 
     @Override

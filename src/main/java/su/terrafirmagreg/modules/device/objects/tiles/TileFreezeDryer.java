@@ -41,7 +41,7 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.sharkbark.cellars.ModConfig;
+import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

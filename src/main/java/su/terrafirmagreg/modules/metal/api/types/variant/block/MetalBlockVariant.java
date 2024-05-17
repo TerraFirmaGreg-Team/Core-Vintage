@@ -9,8 +9,6 @@ import net.minecraft.block.Block;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
-import org.jetbrains.annotations.NotNull;
-
 import lombok.Getter;
 
 import java.util.Set;
@@ -25,7 +23,6 @@ public class MetalBlockVariant implements Comparable<MetalBlockVariant> {
 
     private static final Set<MetalBlockVariant> METAL_BLOCK_VARIANTS = new ObjectLinkedOpenHashSet<>();
 
-    @NotNull
     private final String name;
     @Getter
     private final Specification specification;
@@ -52,7 +49,7 @@ public class MetalBlockVariant implements Comparable<MetalBlockVariant> {
      *
      * @return Набор всех вариантов металлического блока.
      */
-    public static Set<MetalBlockVariant> getMetalBlockVariants() {
+    public static Set<MetalBlockVariant> getVariants() {
         return METAL_BLOCK_VARIANTS;
     }
 
@@ -67,14 +64,13 @@ public class MetalBlockVariant implements Comparable<MetalBlockVariant> {
      *
      * @return Строковое представление варианта металлического блока.
      */
-    @NotNull
     @Override
     public String toString() {
         return name;
     }
 
     @Override
-    public int compareTo(@NotNull MetalBlockVariant variant) {
+    public int compareTo(MetalBlockVariant variant) {
         return this.name.compareTo(variant.toString());
     }
 
@@ -84,7 +80,7 @@ public class MetalBlockVariant implements Comparable<MetalBlockVariant> {
         private BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory;
         private Specification specification = null;
 
-        public Builder(@NotNull String name) {
+        public Builder(String name) {
             this.name = name;
         }
 

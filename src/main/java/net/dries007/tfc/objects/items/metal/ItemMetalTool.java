@@ -135,6 +135,14 @@ public class ItemMetalTool extends ItemMetal {
                 canDisableShield = false;
                 OreDictionaryHelper.registerDamageType(this, DamageType.PIERCING);
                 break;
+            case ICE_SAW:
+                // Non-Weapon (should be even worse than non-weapons)
+                typeDamage = 0.5f;
+                areaOfEffect = 2;
+                attackSpeed = -2.8F;
+                canDisableShield = false;
+                OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
+                break;
             case SHEARS:
                 // Worst Non-Weapon, ever!
                 setHarvestLevel("shears", harvestLevel);

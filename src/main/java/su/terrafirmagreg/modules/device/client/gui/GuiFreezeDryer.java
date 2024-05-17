@@ -16,8 +16,8 @@ import net.minecraftforge.items.IItemHandler;
 
 
 import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.sharkbark.cellars.ModConfig;
 import org.lwjgl.opengl.GL11;
+import pieman.caffeineaddon.ModConfig;
 
 import java.io.IOException;
 import java.util.ArrayList;

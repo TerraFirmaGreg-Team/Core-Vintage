@@ -3,30 +3,36 @@ package su.terrafirmagreg.modules.metal.api.types.type;
 import gregtech.api.unification.material.Material;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 import java.util.Set;
 
 /**
  * Класс, представляющий тип почвы.
  */
-public class MetalType {
+public class MetalType implements Comparable<MetalType> {
 
     private static final Set<MetalType> METAL_TYPES = new ObjectLinkedOpenHashSet<>();
 
-    @NotNull
     private final String name;
-    @NotNull
+    @Getter
     private final Material material;
+    @Getter
+    private final int tier;
+    @Getter
+    private final float specificHeat;
+    @Getter
+    private final float meltTemp;
+    @Getter
+    private final int color;
 
-    /**
-     * Создает экземпляр класса MetalType с указанным именем.
-     *
-     * @param name Имя типа почвы.
-     */
-    public MetalType(@NotNull String name, @NotNull Material material) {
-        this.name = name;
-        this.material = material;
+    public MetalType(Builder builder) {
+        this.name = builder.name;
+        this.material = builder.material;
+        this.tier = builder.tier;
+        this.specificHeat = builder.specificHeat;
+        this.meltTemp = builder.meltTemp;
+        this.color = builder.color;
 
         if (name.isEmpty()) {
             throw new RuntimeException(String.format("MetalType name must contain any character: [%s]", name));
@@ -51,14 +57,50 @@ public class MetalType {
      *
      * @return Строковое представление типа почвы.
      */
-    @NotNull
     @Override
     public String toString() {
         return name;
     }
 
-    @NotNull
-    public Material getMaterial() {
-        return material;
+    @Override
+    public int compareTo(MetalType type) {
+        return this.name.compareTo(type.toString());
+    }
+
+    public static class Builder {
+
+        private final String name;
+        private Material material;
+        private float meltTemp;
+        private float specificHeat;
+        private int color;
+        private int tier;
+
+        public Builder(String name) {
+            this.name = name;
+
+        }
+
+        public Builder material(Material material) {
+            this.material = material;
+            this.color = material.getMaterialRGB();
+            return this;
+        }
+
+        public Builder heat(float specificHeat, float meltTemp) {
+            this.specificHeat = specificHeat;
+            this.meltTemp = meltTemp;
+            return this;
+        }
+
+        public Builder tier(int tier) {
+            this.tier = tier;
+            return this;
+        }
+
+        public MetalType build() {
+            return new MetalType(this);
+        }
+
     }
 }

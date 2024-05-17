@@ -140,9 +140,9 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var te = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }

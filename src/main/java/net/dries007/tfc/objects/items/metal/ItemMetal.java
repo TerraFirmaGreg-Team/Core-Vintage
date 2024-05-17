@@ -139,6 +139,7 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
             case SAW_BLADE:
             case SCYTHE_BLADE:
             case SWORD_BLADE:
+            case ICE_SAW_HEAD:
                 return Size.NORMAL; // Tool heads fits in large vessels
             case ANVIL:
                 return Size.HUGE; // Overburdens

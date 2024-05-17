@@ -134,16 +134,6 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
      */
     @Override
     @Overwrite
-    public String getTranslationKey() {
-        return "tile." + getSettings().getTranslationKey();
-    }
-
-    /**
-     * @author Xikaro
-     * @reason Адаптация под ISettingsBlock
-     */
-    @Override
-    @Overwrite
     public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
         return getSettings().getSlipperiness().apply(state, world, pos);
     }

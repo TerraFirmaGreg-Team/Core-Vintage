@@ -39,16 +39,6 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
      */
     @Override
     @Overwrite
-    public String getTranslationKey() {
-        return "item." + getSettings().getTranslationKey();
-    }
-
-    /**
-     * @author Xikaro
-     * @reason Адаптация под ISettingsItem
-     */
-    @Override
-    @Overwrite
     public int getMaxDamage() {
         return getSettings().getMaxDamage();
     }

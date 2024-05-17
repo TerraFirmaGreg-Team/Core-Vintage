@@ -32,7 +32,7 @@ import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
-import net.sharkbark.cellars.ModConfig;
+import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

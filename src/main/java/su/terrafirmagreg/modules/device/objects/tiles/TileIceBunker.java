@@ -43,7 +43,7 @@ import net.minecraft.world.World;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.sharkbark.cellars.ModConfig;
+import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

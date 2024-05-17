@@ -81,7 +81,7 @@ dependencies {
 
     // GregTech dependencies
     if (use_gregtech.toBoolean()) {
-        implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5322654-sources-5322656-dev-5322655")
+        implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5322654-sources-5322656")
         implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5121714-sources-5121718")
     }
 

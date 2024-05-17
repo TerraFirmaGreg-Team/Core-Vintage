@@ -6,7 +6,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.sharkbark.cellars.ModConfig;
+import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This is a trait that can be applied to a food to modify it's decay date. To add new traits, simply create new instances of this class, and assign a
- * unique name
+ * This is a trait that can be applied to a food to modify it's decay date. To add new traits, simply create new instances of this class, and assign a unique name
  */
 public class FoodTrait {
 

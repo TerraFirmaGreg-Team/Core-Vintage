@@ -43,7 +43,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
     private static final Map<Metal, ItemBlockMetalLamp> TABLE = new HashMap<>();
     public static int CAPACITY;
 
-    public ItemBlockMetalLamp(Metal metal) {
+    public ItemBlockMetalLamp(Metal metal, Metal.ItemType type) {
         super(BlockMetalLamp.get(metal));
         CAPACITY = ConfigTFC.Devices.LAMP.tank;
         if (!TABLE.containsKey(metal))

@@ -90,7 +90,7 @@ public abstract class BaseBlockDirectional extends BlockDirectional implements I
 
     @Override
     public String getTranslationKey() {
-        return "tile." + getSettings().getTranslationKey();
+        return getSettings().getTranslationKey() == null ? super.getTranslationKey() : "tile." + getSettings().getTranslationKey();
     }
 
     @Override

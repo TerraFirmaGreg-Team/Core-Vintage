@@ -44,7 +44,7 @@ public class MetalItemVariant implements Comparable<MetalItemVariant> {
      *
      * @return Набор всех типов блоков породы.
      */
-    public static Set<MetalItemVariant> getMetalItemVariants() {
+    public static Set<MetalItemVariant> getVariants() {
         return METAL_ITEM_VARIANTS;
     }
 

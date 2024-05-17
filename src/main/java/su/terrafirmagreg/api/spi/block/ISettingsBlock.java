@@ -46,9 +46,9 @@ public interface ISettingsBlock extends IAutoRegProvider {
         return getSettings().getSoundType();
     }
 
-    default String getTranslationKey() {
-        return "tile." + getSettings().getTranslationKey();
-    }
+    //    default String getTranslationKey() {
+    //        return "tile." + getSettings().getTranslationKey();
+    //    }
 
     default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
         return getSettings().getHardness().apply(blockState, worldIn, pos);

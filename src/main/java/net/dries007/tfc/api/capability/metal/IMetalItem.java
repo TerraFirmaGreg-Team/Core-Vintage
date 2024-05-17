@@ -34,8 +34,7 @@ public interface IMetalItem {
     int getSmeltAmount(ItemStack stack);
 
     /**
-     * Can the metal melt directly from the stack into a fluid? This is used by {@link HeatRecipeMetalMelting} to determine if metal melting is
-     * possible
+     * Can the metal melt directly from the stack into a fluid? This is used by {@link HeatRecipeMetalMelting} to determine if metal melting is possible
      *
      * @param stack The item stack
      * @return true if the metal can be melted
@@ -58,11 +57,10 @@ public interface IMetalItem {
     default void addMetalInfo(ItemStack stack, List<String> text) {
         Metal metal = getMetal(stack);
         if (metal != null) {
-            int melttemp = (int) metal.getMeltTemp();
             text.add("");
             text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(metal))));
             text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));
-            text.add(I18n.format("tfc.tooltip.melttemp", melttemp));
+            text.add(I18n.format("tfc.tooltip.melttemp", (int) metal.getMeltTemp()));
             text.add(I18n.format(Helpers.getEnumName(metal.getTier())));
         }
     }

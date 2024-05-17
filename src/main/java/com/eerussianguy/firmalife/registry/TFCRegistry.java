@@ -48,7 +48,6 @@ import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.skills.SmithingSkill;
-import net.sharkbark.cellars.init.ModItems;
 
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
@@ -222,7 +221,7 @@ public class TFCRegistry {
         IForgeRegistry<AnvilRecipe> r = event.getRegistry();
         for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
             if (metal.isToolMetal())
-                r.register(new AnvilRecipe(new ResourceLocation(MODID_FL, metal.toString() + "_mallet_head"),
+                r.register(new AnvilRecipe(new ResourceLocation(MODID_FL, metal + "_mallet_head"),
                         IIngredient.of(new ItemStack(ItemMetal.get(metal, Metal.ItemType.INGOT))),
                         new ItemStack(ItemsFL.getMetalMalletHead(metal)), metal.getTier(), TOOLS, PUNCH_LAST, PUNCH_SECOND_LAST, SHRINK_THIRD_LAST));
         }
@@ -242,30 +241,28 @@ public class TFCRegistry {
         event.getRegistry().registerAll(
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bronze_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BRONZE_ICE_SAW_HEAD), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "bismuth_bronze_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BISMUTH_BRONZE_ICE_SAW_HEAD), Metal.BISMUTH_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BISMUTH_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BISMUTH_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_bronze_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BLACK_BRONZE_ICE_SAW_HEAD), Metal.BLACK_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BLACK_BRONZE, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_BRONZE.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "wrought_iron_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.WROUGHT_IRON_ICE_SAW_HEAD), Metal.WROUGHT_IRON.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.ICE_SAW_HEAD)), Metal.WROUGHT_IRON.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "steel_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.STEEL_ICE_SAW_HEAD), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "black_steel_ice_saw"), IIngredient.of(
                         new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BLACK_STEEL_ICE_SAW_HEAD), TFCRegistries.METALS
-                        .getValue(DefaultMetals.BLACK_STEEL)
-                        .getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.BLACK_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLACK_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "red_steel_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.RED_STEEL_ICE_SAW_HEAD), Metal.RED_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
+                        new ItemStack(ItemMetal.get(Metal.RED_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.RED_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules),
                 new AnvilRecipe(new ResourceLocation(MODID_CELLARS, "blue_steel_ice_saw"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.DOUBLE_INGOT))),
-                        new ItemStack(ModItems.BLUE_STEEL_ICE_SAW_HEAD), Metal.BLUE_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules)
+                        new ItemStack(ItemMetal.get(Metal.BLUE_STEEL, Metal.ItemType.ICE_SAW_HEAD)), Metal.BLUE_STEEL.getTier(), SmithingSkill.Type.TOOLS, iceSawRules)
         );
     }
 }

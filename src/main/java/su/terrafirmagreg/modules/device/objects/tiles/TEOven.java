@@ -1,6 +1,10 @@
-package com.eerussianguy.firmalife.te;
+package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockOven;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockOvenChimney;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockOvenWall;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -15,22 +19,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import com.eerussianguy.firmalife.blocks.BlockOven;
-import com.eerussianguy.firmalife.blocks.BlockOvenChimney;
-import com.eerussianguy.firmalife.blocks.BlockOvenWall;
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
-import com.eerussianguy.firmalife.registry.BlocksFL;
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
-import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
+import static su.terrafirmagreg.api.data.Blockstates.CURED;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
-@MethodsReturnNonnullByDefault
 public class TEOven extends TEInventory implements ITickable {
 
     public static final int SLOT_FUEL_1 = 0;
@@ -119,7 +117,7 @@ public class TEOven extends TEInventory implements ITickable {
         if (world != null) {
             Block block = world.getBlockState(pos).getBlock();
             if (block instanceof BlockOven)
-                world.scheduleBlockUpdate(pos, BlocksFL.OVEN, 1, 1);
+                world.scheduleBlockUpdate(pos, BlocksDevice.OVEN, 1, 1);
         }
         if (recipeExists() && hasFuel()) {
             isBurning = true;

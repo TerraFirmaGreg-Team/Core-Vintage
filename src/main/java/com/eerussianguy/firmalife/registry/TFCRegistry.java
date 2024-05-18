@@ -91,11 +91,11 @@ public class TFCRegistry {
     @SubscribeEvent
     public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
         event.getRegistry().registerAll(
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN), "XXXXX", "XX XX", "X   X", "X   X",
                         "XXXXX").setRegistryName("clay_oven"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X",
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X",
                         "X   X").setRegistryName("clay_oven_chimney"),
-                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX", "  XXX",
+                new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN_WALL), "    X", "   XX", "   XX", "  XXX",
                         "  XXX").setRegistryName("clay_oven_wall"),
                 new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsFL.UNFIRED_MALLET_MOLD), "XXXXX", "     ", "   X ", "XXXXX",
                         "XXXXX").setRegistryName("unfired_mallet_mold"),

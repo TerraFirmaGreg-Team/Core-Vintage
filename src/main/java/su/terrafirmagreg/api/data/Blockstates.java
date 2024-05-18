@@ -108,6 +108,7 @@ public final class Blockstates {
     public static final PropertyBool CLAY = PropertyBool.create("clay");
     public static final PropertyBool GLASS = PropertyBool.create("glass");
     public static final PropertyBool TOP = PropertyBool.create("top");
+    public static final PropertyBool CURED = PropertyBool.create("cured");
 
     private Blockstates() {
 

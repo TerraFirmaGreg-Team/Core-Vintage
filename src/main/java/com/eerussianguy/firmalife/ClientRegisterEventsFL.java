@@ -42,12 +42,10 @@ import com.eerussianguy.firmalife.render.LargePlanterStateMapper;
 import com.eerussianguy.firmalife.render.QuadPlanterBakedModel;
 import com.eerussianguy.firmalife.render.QuadPlanterStateMapper;
 import com.eerussianguy.firmalife.render.TESRLeafMat;
-import com.eerussianguy.firmalife.render.TESROven;
 import com.eerussianguy.firmalife.render.TESRString;
 import com.eerussianguy.firmalife.render.TESRTurntable;
 import com.eerussianguy.firmalife.render.VanillaStemStateMapper;
 import com.eerussianguy.firmalife.te.TELeafMat;
-import com.eerussianguy.firmalife.te.TEOven;
 import com.eerussianguy.firmalife.te.TEString;
 import com.eerussianguy.firmalife.te.TETurntable;
 import net.dries007.tfc.api.capability.IMoldHandler;
@@ -144,7 +142,7 @@ public class ClientRegisterEventsFL {
                 .build());
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
                 .build());
-        
+
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesFL.CAN_GROW)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
@@ -155,7 +153,6 @@ public class ClientRegisterEventsFL {
         ModelLoader.setCustomStateMapper(BlocksFL.QUAD_PLANTER, new QuadPlanterStateMapper());
         ModelLoader.setCustomStateMapper(BlocksFL.LARGE_PLANTER, new LargePlanterStateMapper());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TEOven.class, new TESROven());
         ClientRegistry.bindTileEntitySpecialRenderer(TEString.class, new TESRString());
         ClientRegistry.bindTileEntitySpecialRenderer(TELeafMat.class, new TESRLeafMat());
         ClientRegistry.bindTileEntitySpecialRenderer(TETurntable.class, new TESRTurntable());

@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.compat.waila;
 
+import su.terrafirmagreg.modules.device.objects.tiles.TEOven;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +13,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
-import com.eerussianguy.firmalife.te.TEOven;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -22,8 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.eerussianguy.firmalife.te.TEOven.SLOT_MAIN;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.modules.device.objects.tiles.TEOven.SLOT_MAIN;
 
 public class OvenProvider implements IWailaBlock {
 
@@ -34,8 +35,7 @@ public class OvenProvider implements IWailaBlock {
         IBlockState state = world.getBlockState(pos);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof TEOven oven) {
-            ItemStack mainSlot = oven.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
-                    .getStackInSlot(SLOT_MAIN);
+            ItemStack mainSlot = oven.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(SLOT_MAIN);
             OvenRecipe recipe = OvenRecipe.get(mainSlot);
             if (state.getValue(LIT) && recipe != null) {
                 long remainingTicks = oven.getTicksRemaining();

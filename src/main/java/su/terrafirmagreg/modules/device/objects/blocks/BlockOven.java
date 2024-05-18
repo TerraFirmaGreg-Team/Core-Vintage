@@ -1,14 +1,19 @@
-package com.eerussianguy.firmalife.blocks;
+package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.spi.tile.ITileBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.api.util.DamageSources;
+import su.terrafirmagreg.modules.device.client.render.TESROven;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
+import su.terrafirmagreg.modules.device.objects.tiles.TEOven;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -32,36 +37,40 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.te.TEOven;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
 import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.api.data.Blockstates.CURED;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
-@MethodsReturnNonnullByDefault
-public class BlockOven extends Block implements IItemSize {
+@SuppressWarnings("deprecation")
+public class BlockOven extends BaseBlock implements ITileBlock {
 
     public BlockOven() {
-        super(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY);
-        setHardness(2.0f);
-        setResistance(3.0f);
+        super(Settings.of(Material.ROCK));
+
+        getSettings()
+                .mapColor(MapColor.RED_STAINED_HARDENED_CLAY)
+                .registryKey("device/oven")
+                .hardness(2.0f)
+                .resistance(3.0f)
+                .nonOpaque()
+                .size(Size.LARGE)
+                .weight(Weight.HEAVY);
+
         setTickRandomly(true);
-        this.setDefaultState(this.blockState.getBaseState()
-                .withProperty(CURED, false)
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(CURED, Boolean.FALSE)
                 .withProperty(FACING, EnumFacing.NORTH)
-                .withProperty(LIT, false));
+                .withProperty(LIT, Boolean.FALSE));
     }
 
     /**
@@ -153,15 +162,15 @@ public class BlockOven extends Block implements IItemSize {
      * @return false if it's not cured, or if it's not an oven block
      */
     private static boolean isCuredBlock(IBlockState state) {
-        if ((state.getBlock() instanceof BlockOven || state.getBlock() instanceof BlockOvenChimney) || state.getBlock() instanceof BlockOvenWall) {
+        var block = state.getBlock();
+        if ((block instanceof BlockOven || block instanceof BlockOvenChimney) || block instanceof BlockOvenWall) {
             return state.getValue(CURED);
         }
         return false;
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-                                    float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             if (!state.getValue(LIT)) {
                 ItemStack held = player.getHeldItem(hand);
@@ -206,7 +215,6 @@ public class BlockOven extends Block implements IItemSize {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.isRemote) {
             if (state.getValue(LIT) && !isValidHorizontal(worldIn, pos, false)) {
@@ -240,11 +248,11 @@ public class BlockOven extends Block implements IItemSize {
         IBlockState checkState = world.getBlockState(checkPos);
         if (checkState.getBlock() instanceof BlockOven && !checkState.getValue(LIT) && isValidHorizontal(world, checkPos, false) &&
                 hasChimney(world, checkPos, false)) {
-            TEOven te = TileUtils.getTile(world, checkPos, TEOven.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(world, checkPos, TEOven.class);
+            if (tile != null) {
                 world.setBlockState(checkPos, checkState.withProperty(LIT, true));
-                te.setWarmed();
-                te.light();
+                tile.setWarmed();
+                tile.light();
             }
         }
     }
@@ -254,17 +262,14 @@ public class BlockOven extends Block implements IItemSize {
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if (stateIn.getValue(LIT)) {
             if (worldIn.getBlockState(pos.up()).getBlock() instanceof BlockOvenChimney) {
-                TFCParticles particle = TFCParticles.FIRE_PIT_SMOKE1;
+                TFCParticles particle = switch (rand.nextInt(3)) {
+                    case 0 -> TFCParticles.FIRE_PIT_SMOKE2;
+                    case 1 -> TFCParticles.FIRE_PIT_SMOKE3;
+                    default -> TFCParticles.FIRE_PIT_SMOKE1;
+                };
                 //chimney particles
-                switch (rand.nextInt(3)) {
-                    case 0:
-                        particle = TFCParticles.FIRE_PIT_SMOKE2;
-                        break;
-                    case 1:
-                        particle = TFCParticles.FIRE_PIT_SMOKE3;
-                }
-                particle.spawn(worldIn, pos.getX() + (rand.nextFloat() / 2) + 0.25, pos.getY() + 3, pos.getZ() + (rand.nextFloat() / 2) + 0.25,
-                        0f, 0.2F + rand.nextFloat() / 2, 0f, 110);
+                particle.spawn(worldIn, pos.getX() + (rand.nextFloat() / 2) + 0.25, pos.getY() + 3, pos.getZ() + (rand.nextFloat() / 2) + 0.25, 0f, 0.2F + rand.nextFloat() / 2, 0f,
+                        110);
             }
             // inside the oven
             worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + rand.nextFloat(), pos.getY() + 0.11, pos.getZ() + rand.nextFloat() / 2,
@@ -279,10 +284,7 @@ public class BlockOven extends Block implements IItemSize {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-                                            EntityLivingBase placer) {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
@@ -290,8 +292,6 @@ public class BlockOven extends Block implements IItemSize {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public IBlockState getStateFromMeta(int meta) {
         boolean cured = meta > 7;
         boolean lit = meta > 11 || (meta > 3 && meta < 8);
@@ -339,42 +339,28 @@ public class BlockOven extends Block implements IItemSize {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public @NotNull Size getSize(@NotNull ItemStack stack) {
-        return Size.LARGE; // Can only store in chests
-    }
-
-    @Override
-    public @NotNull Weight getWeight(@NotNull ItemStack stack) {
-        return Weight.VERY_HEAVY; // Stacksize = 1
-    }
-
-    @Override
-    @NotNull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, LIT, CURED);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    @NotNull
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return TEOven.class;
+    }
+
+    @Override
+    public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
+        return new TESROven();
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TEOven();
     }
 }

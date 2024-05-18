@@ -20,6 +20,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
+import org.jetbrains.annotations.Nullable;
+
 import lombok.Getter;
 
 import java.util.Random;
@@ -41,7 +43,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock,
     }
 
     @Override
-    public BaseItemDoor getItemBlock() {
+    public @Nullable BaseItemDoor getItemBlock() {
         return new BaseItemDoor(this);
     }
 

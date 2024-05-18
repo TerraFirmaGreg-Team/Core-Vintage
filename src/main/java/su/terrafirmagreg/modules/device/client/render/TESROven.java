@@ -1,4 +1,6 @@
-package com.eerussianguy.firmalife.render;
+package su.terrafirmagreg.modules.device.client.render;
+
+import su.terrafirmagreg.modules.device.objects.tiles.TEOven;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -13,11 +15,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import com.eerussianguy.firmalife.te.TEOven;
-
-import static com.eerussianguy.firmalife.init.StatePropertiesFL.CURED;
-import static com.eerussianguy.firmalife.te.TEOven.*;
+import static su.terrafirmagreg.api.data.Blockstates.CURED;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.modules.device.objects.tiles.TEOven.*;
 
 @SideOnly(Side.CLIENT)
 public class TESROven extends TileEntitySpecialRenderer<TEOven> {

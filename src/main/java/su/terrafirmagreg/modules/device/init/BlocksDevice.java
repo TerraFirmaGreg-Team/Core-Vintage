@@ -29,6 +29,9 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockLatexExtractor;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockLogPile;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockNestBox;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockOven;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockOvenChimney;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockOvenWall;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPitKiln;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
@@ -74,6 +77,9 @@ public final class BlocksDevice {
     public static BlockGreenhouseDoor GREENHOUSE_DOOR;
     public static BlockGreenhouseRoof GREENHOUSE_ROOF;
     public static BlockGreenhouseWall GREENHOUSE_WALL;
+    public static BlockOven OVEN;
+    public static BlockOvenWall OVEN_WALL;
+    public static BlockOvenChimney OVEN_CHIMNEY;
 
     public static void onRegister(RegistryManager registry) {
         //==== Other =================================================================================================//
@@ -113,6 +119,9 @@ public final class BlocksDevice {
         GREENHOUSE_DOOR = registry.registerBlock(new BlockGreenhouseDoor());
         GREENHOUSE_ROOF = registry.registerBlock(new BlockGreenhouseRoof());
         GREENHOUSE_WALL = registry.registerBlock(new BlockGreenhouseWall());
+        OVEN = registry.registerBlock(new BlockOven());
+        OVEN_WALL = registry.registerBlock(new BlockOvenWall());
+        OVEN_CHIMNEY = registry.registerBlock(new BlockOvenChimney());
     }
 
 }

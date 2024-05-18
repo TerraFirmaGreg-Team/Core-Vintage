@@ -30,9 +30,6 @@ import com.eerussianguy.firmalife.blocks.BlockJackOLantern;
 import com.eerussianguy.firmalife.blocks.BlockJars;
 import com.eerussianguy.firmalife.blocks.BlockLargePlanter;
 import com.eerussianguy.firmalife.blocks.BlockLeafMat;
-import com.eerussianguy.firmalife.blocks.BlockOven;
-import com.eerussianguy.firmalife.blocks.BlockOvenChimney;
-import com.eerussianguy.firmalife.blocks.BlockOvenWall;
 import com.eerussianguy.firmalife.blocks.BlockQuadPlanter;
 import com.eerussianguy.firmalife.blocks.BlockSpout;
 import com.eerussianguy.firmalife.blocks.BlockStemCrop;
@@ -47,7 +44,6 @@ import com.eerussianguy.firmalife.items.ItemBlockRot;
 import com.eerussianguy.firmalife.te.TEClimateStation;
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import com.eerussianguy.firmalife.te.TELeafMat;
-import com.eerussianguy.firmalife.te.TEOven;
 import com.eerussianguy.firmalife.te.TEPlanter;
 import com.eerussianguy.firmalife.te.TEStemCrop;
 import com.eerussianguy.firmalife.te.TEString;
@@ -81,12 +77,6 @@ import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 @GameRegistry.ObjectHolder(MODID_FL)
 public class BlocksFL {
 
-    @GameRegistry.ObjectHolder("oven")
-    public static final BlockOven OVEN = Helpers.getNull();
-    @GameRegistry.ObjectHolder("oven_wall")
-    public static final BlockOvenWall OVEN_WALL = Helpers.getNull();
-    @GameRegistry.ObjectHolder("oven_chimney")
-    public static final BlockOvenChimney OVEN_CHIMNEY = Helpers.getNull();
     @GameRegistry.ObjectHolder("pumpkin_fruit")
     public static final BlockStemFruit PUMPKIN_FRUIT = Helpers.getNull();
     @GameRegistry.ObjectHolder("melon_fruit")
@@ -204,9 +194,6 @@ public class BlocksFL {
             doFruitAdditions(r, name, bonsais, Optional.of(fruitTree));
         }
 
-        normalIBs.add(register(r, "oven", new BlockOven(), CT_MISC));
-        normalIBs.add(register(r, "oven_wall", new BlockOvenWall(), CT_MISC));
-        normalIBs.add(register(r, "oven_chimney", new BlockOvenChimney(), CT_MISC));
         normalIBs.add(register(r, "leaf_mat", new BlockLeafMat(), CT_MISC));
         normalIBs.add(register(r, "cinnamon_log", new BlockCinnamonLog(), CT_WOOD));
         normalIBs.add(register(r, "cinnamon_leaves", new BlockCinnamonLeaves(), CT_WOOD));
@@ -295,7 +282,6 @@ public class BlocksFL {
         allDeadCrops = deadCrops.build();
         allCropBlocks = cropBlocks.build();
 
-        register(TEOven.class, "oven");
         register(TEPlanter.class, "quad_planter");
         register(TELeafMat.class, "leaf_mat");
         register(TEHangingPlanter.class, "hanging_planter");

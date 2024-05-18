@@ -87,11 +87,8 @@ public final class Blockstates {
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
     public static final PropertyBool MOSSY = PropertyBool.create("mossy");
-
     public static final PropertyBool CAN_FALL = PropertyBool.create("can_fall");
-
     public static final PropertyBool SEALED = PropertyBool.create("sealed");
-
     public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
     public static final PropertyBool PLACED = PropertyBool.create("placed");
     public static final PropertyBool SMALL = PropertyBool.create("small");
@@ -111,7 +108,6 @@ public final class Blockstates {
     public static final PropertyBool CURED = PropertyBool.create("cured");
 
     private Blockstates() {
-
         throw new IllegalAccessError("Utility class");
     }
 }

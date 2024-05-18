@@ -58,4 +58,8 @@ public final class TileUtils {
                 player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
     }
 
+    public static boolean isNotNull(TileEntity tileEntity) {
+        return tileEntity != null;
+    }
+
 }

@@ -8,6 +8,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 
+import com.eerussianguy.firmalife.init.Fruit;
+import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
@@ -18,6 +20,8 @@ import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
 import pieman.caffeineaddon.init.ModItems;
 
@@ -45,7 +49,7 @@ public class Recipes {
     public static void onRegisterQuernRecipeEvent(RegistryEvent.Register<QuernRecipe> event) {
         IForgeRegistry<QuernRecipe> r = event.getRegistry();
         r.registerAll(
-                new QuernRecipe(IIngredient.of(ModItems.DriedCoffeeCherries), new ItemStack(ModItems.GreenCoffeeBeans, 1)).setRegistryName(
+                new QuernRecipe(IIngredient.of(ItemsFL.getDriedFruit(Fruit.COFFEE_CHERRIES)), new ItemStack(ModItems.GreenCoffeeBeans, 1)).setRegistryName(
                         "green_coffee_beans"),
                 new QuernRecipe(IIngredient.of(ModItems.CoffeeBeans), new ItemStack(ModItems.GroundCoffee, 1)).setRegistryName("ground_coffee")
         );
@@ -64,7 +68,7 @@ public class Recipes {
     public static void onRegisterDryingMatRecipeEvent(RegistryEvent.Register<DryingMatRecipe> event) {
         IForgeRegistry<DryingMatRecipe> r = event.getRegistry();
         r.registerAll(
-                new DryingMatRecipe(IIngredient.of(new ItemStack(ModItems.CoffeeCherries)), new ItemStack(ModItems.DriedCoffeeCherries),
+                new DryingMatRecipe(IIngredient.of(new ItemStack(ItemFoodTFC.get(Food.COFFEE_CHERRIES))), new ItemStack(ItemsFL.getDriedFruit(Fruit.COFFEE_CHERRIES)),
                         72000).setRegistryName("dried_coffee_cherries")
         );
     }

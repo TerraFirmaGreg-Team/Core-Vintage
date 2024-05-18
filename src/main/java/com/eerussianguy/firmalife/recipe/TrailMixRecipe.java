@@ -35,15 +35,14 @@ public class TrailMixRecipe extends SandwichBasedRecipe {
     public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
         ItemStack output = super.getCraftingResult(inv);
         IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
-        if (food instanceof ItemTrailMix.TrailMixHandler) {
-            ItemTrailMix.TrailMixHandler trailMix = (ItemTrailMix.TrailMixHandler) food;
+        if (food instanceof ItemTrailMix.TrailMixHandler trailMix) {
             List<FoodData> ingredients = new ArrayList<>();
             getIngredients(inv, ingredients);
-            if (ingredients.size() < 1) return ItemStack.EMPTY;
+            if (ingredients.isEmpty()) return ItemStack.EMPTY;
 
             trailMix.initCreationFoods(ingredients);
-            trailMix.setCreationDate(
-                    CalendarTFC.PLAYER_TIME.getTicks()); // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
+            // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
+            trailMix.setCreationDate(CalendarTFC.PLAYER_TIME.getTicks());
         }
         return output;
     }

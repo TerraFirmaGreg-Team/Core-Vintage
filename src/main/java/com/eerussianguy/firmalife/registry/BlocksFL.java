@@ -68,6 +68,8 @@ import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.agriculture.FruitTree;
 
+import lombok.Getter;
+
 import java.util.Optional;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
@@ -114,56 +116,26 @@ public class BlocksFL {
     @GameRegistry.ObjectHolder("turntable")
     public static final BlockTurntable TURNTABLE = Helpers.getNull();
 
+    @Getter
     private static ImmutableList<ItemBlock> allIBs;
+    @Getter
     private static ImmutableList<Block> allNormalIBs = Helpers.getNull();
+    @Getter
     private static ImmutableList<Block> allFoodIBs = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockFruitTreeLeaves> allFruitLeaves = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockFruitTreeSapling> allFruitSaps = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockCropDead> allDeadCrops = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockStemCrop> allCropBlocks = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockJackOLantern> allJackOLanterns = Helpers.getNull();
+    @Getter
     private static ImmutableList<Block> allInventoryIBs = Helpers.getNull();
+    @Getter
     private static ImmutableList<BlockBonsai> allBonsai = Helpers.getNull();
-
-    public static ImmutableList<ItemBlock> getAllIBs() {
-        return allIBs;
-    }
-
-    public static ImmutableList<Block> getAllNormalIBs() {
-        return allNormalIBs;
-    }
-
-    public static ImmutableList<Block> getAllFoodIBs() {
-        return allFoodIBs;
-    }
-
-    public static ImmutableList<BlockFruitTreeLeaves> getAllFruitLeaves() {
-        return allFruitLeaves;
-    }
-
-    public static ImmutableList<BlockBonsai> getAllBonsai() {
-        return allBonsai;
-    }
-
-    public static ImmutableList<BlockFruitTreeSapling> getAllFruitSaps() {
-        return allFruitSaps;
-    }
-
-    public static ImmutableList<BlockCropDead> getAllDeadCrops() {
-        return allDeadCrops;
-    }
-
-    public static ImmutableList<BlockStemCrop> getAllCropBlocks() {
-        return allCropBlocks;
-    }
-
-    public static ImmutableList<BlockJackOLantern> getAllJackOLanterns() {
-        return allJackOLanterns;
-    }
-
-    public static ImmutableList<Block> getAllInventoryIBs() {
-        return allInventoryIBs;
-    }
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {

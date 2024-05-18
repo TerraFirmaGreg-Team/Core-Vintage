@@ -29,6 +29,8 @@ public enum Food {
     PLUM(FRUIT, 4, 0.5f, 5f, 0f, 0f, 0.75f, 0f, 0f, 2.8f),
     RASPBERRY(FRUIT, 4, 0.5f, 5f, 0f, 0f, 0.75f, 0f, 0f, 4.9f),
     RED_APPLE(FRUIT, 4, 0.5f, 0f, 0f, 0f, 1f, 0f, 0f, 1.7f, "apple"),
+    COFFEE_CHERRIES(FRUIT, 4, 0f, 0f, 0f, 0.75f, 0f, 0f, 0f, 4f),
+    TEA(VEGETABLE, 4, 0f, 0f, 0f, 0.75f, 0f, 0f, 0f, 4f),
     SNOW_BERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 1f, 0f, 0f, 4.9f),
     STRAWBERRY(FRUIT, 4, 0.5f, 10f, 0f, 0f, 0.5f, 0f, 0f, 4.9f),
     WINTERGREEN_BERRY(FRUIT, 4, 0.2f, 5f, 0f, 0f, 1f, 0f, 0f, 4.9f),
@@ -140,8 +142,19 @@ public enum Food {
         this(category, hunger, saturation, water, grain, veg, fruit, meat, dairy, decayModifier, 0, -1, oreNames);
     }
 
-    Food(@NotNull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy,
-         float decayModifier, float heatCapacity, float cookingTemp, String... oreNames) {
+    Food(@NotNull Category category, FoodData foodData, String... oreNames) {
+        this.category = category;
+        this.foodData = foodData;
+
+        this.heatable = false;
+        this.heatCapacity = 0;
+        this.cookingTemp = -1;
+
+        this.oreDictNames = oreNames == null || oreNames.length == 0 ? null : oreNames;
+    }
+
+    Food(@NotNull Category category, int hunger, float saturation, float water, float grain, float veg, float fruit, float meat, float dairy, float decayModifier,
+         float heatCapacity, float cookingTemp, String... oreNames) {
         this.category = category;
         this.foodData = new FoodData(hunger, water, saturation, grain, fruit, veg, meat, dairy, decayModifier);
 

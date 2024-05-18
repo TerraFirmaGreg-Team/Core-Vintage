@@ -100,12 +100,12 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
             if (state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
-                TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-                if (te != null) {
-                    long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+                var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+                if (TileUtils.isNotNull(tile)) {
+                    long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                     if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
                         world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.FRUIT));
-                        te.resetCounter();
+                        tile.resetCounter();
                     }
                 }
             } else if (tree.isFlowerMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {

@@ -7,7 +7,9 @@ import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 
-import static com.eerussianguy.firmalife.init.FoodDataFL.*;
+import lombok.Getter;
+
+import static net.dries007.tfc.api.capability.food.FoodData.*;
 
 /**
  * This is an easy way to wrap all the TFC fruits with our data
@@ -32,10 +34,13 @@ public enum Fruit {
     RED_APPLE(ItemFoodTFC.get(Food.RED_APPLE), true, DRIED_FRUIT_DECAY),
     SNOW_BERRY(ItemFoodTFC.get(Food.SNOW_BERRY), true, DRIED_FRUIT_CATEGORY),
     STRAWBERRY(ItemFoodTFC.get(Food.STRAWBERRY), true, DRIED_FRUIT_SATURATION),
-    WINTERGREEN_BERRY(ItemFoodTFC.get(Food.WINTERGREEN_BERRY), true, DRIED_FRUIT_CATEGORY);
+    WINTERGREEN_BERRY(ItemFoodTFC.get(Food.WINTERGREEN_BERRY), true, DRIED_FRUIT_CATEGORY),
+    COFFEE_CHERRIES(ItemFoodTFC.get(Food.COFFEE_CHERRIES), true, DRIED_FRUIT_CATEGORY);
 
+    @Getter
     private final Item fruit;
     private final boolean dry;
+    @Getter
     private final FoodData driedData;
 
     Fruit(Item fruit, boolean dry, FoodData driedData) {
@@ -44,16 +49,8 @@ public enum Fruit {
         this.driedData = driedData;
     }
 
-    public Item getFruit() {
-        return this.fruit;
-    }
-
     public boolean canDry() {
         return this.dry;
-    }
-
-    public FoodData getDriedData() {
-        return this.driedData;
     }
 
 }

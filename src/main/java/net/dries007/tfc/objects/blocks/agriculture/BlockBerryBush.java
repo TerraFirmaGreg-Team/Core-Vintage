@@ -139,17 +139,17 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            if (TileUtils.isNotNull(tile)) {
                 float temp = ClimateTFC.getActualTemp(world, pos);
                 float rainfall = ChunkDataTFC.getRainfall(world, pos);
-                long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
+                long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
                     if (bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
                         //Fruiting
                         world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
                     }
-                    te.resetCounter();
+                    tile.resetCounter();
                 }
             }
         }

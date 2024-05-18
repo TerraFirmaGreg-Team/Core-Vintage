@@ -5,7 +5,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-import com.eerussianguy.firmalife.init.FoodDataFL;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.Nutrient;
@@ -17,7 +16,7 @@ import java.util.List;
 public class ItemTrailMix extends ItemFoodFL {
 
     public ItemTrailMix() {
-        super(FoodDataFL.TRAIL_MIX);
+        super(FoodData.TRAIL_MIX);
     }
 
     @Nullable

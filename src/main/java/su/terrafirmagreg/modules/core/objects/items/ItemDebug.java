@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static net.minecraft.util.text.TextFormatting.GOLD;
+import static se.gory_moon.horsepower.util.color.Colors.RED;
 
 public class ItemDebug extends BaseItem {
 
@@ -53,23 +53,23 @@ public class ItemDebug extends BaseItem {
         NBTUtils.setGenericNBTValue(nbt, "mode", newMode);
         switch (newMode) {
             case 0: {
-                player.sendStatusMessage(new TextComponentString(GOLD + "Blockstate"), true);
+                player.sendStatusMessage(new TextComponentString(RED + "Blockstate"), true);
                 break;
             }
             case 1: {
-                player.sendStatusMessage(new TextComponentString(GOLD + "NBT"), true);
+                player.sendStatusMessage(new TextComponentString(RED + "NBT"), true);
                 break;
             }
             case 2: {
-                player.sendStatusMessage(new TextComponentString(GOLD + "Blockstate list"), true);
+                player.sendStatusMessage(new TextComponentString(RED + "Blockstate list"), true);
                 break;
             }
             case 3: {
-                player.sendStatusMessage(new TextComponentString(GOLD + "Transform"), true);
+                player.sendStatusMessage(new TextComponentString(RED + "Transform"), true);
                 break;
             }
             case 4: {
-                player.sendStatusMessage(new TextComponentString(GOLD + "Temperature Capability"), true);
+                player.sendStatusMessage(new TextComponentString(RED + "Temperature Capability"), true);
                 break;
             }
         }
@@ -86,7 +86,7 @@ public class ItemDebug extends BaseItem {
         switch (mode) {
             case 0: {
                 var blockstate = world.getBlockState(pos).getBlock();
-                NBTUtils.setGenericNBTValue(nbt, "blockstate", blockstate);
+                NBTUtils.setGenericNBTValue(nbt, "blockstate", blockstate.toString());
                 player.sendMessage(new TextComponentString("Blockstate: " + blockstate));
                 break;
             }
@@ -94,13 +94,13 @@ public class ItemDebug extends BaseItem {
                 TileEntity tile = world.getTileEntity(pos);
                 if (tile == null) break;
                 var nbtTag = tile.writeToNBT(new NBTTagCompound());
-                NBTUtils.setGenericNBTValue(nbt, "nbtTag", nbtTag);
+                NBTUtils.setGenericNBTValue(nbt, "nbtTag", nbtTag.toString());
                 player.sendMessage(new TextComponentString("NBTTagCompound: " + nbtTag));
                 break;
             }
             case 2: {
                 var blockstateList = world.getBlockState(pos).getBlock().getBlockState().getValidStates();
-                NBTUtils.setGenericNBTValue(nbt, "blockstateList", blockstateList);
+                NBTUtils.setGenericNBTValue(nbt, "blockstateList", blockstateList.toString());
                 player.sendMessage(new TextComponentString("Blockstate List: " + blockstateList));
                 break;
             }

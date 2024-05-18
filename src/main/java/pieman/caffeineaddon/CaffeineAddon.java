@@ -1,7 +1,5 @@
 package pieman.caffeineaddon;
 
-import su.terrafirmagreg.api.lib.LoggingHelper;
-
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -13,12 +11,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import pieman.caffeineaddon.init.RegistryHandler;
 import pieman.caffeineaddon.proxy.CommonProxy;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
-
 //@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
 public class CaffeineAddon {
 
-    public static final LoggingHelper LOG = new LoggingHelper(MODID_CAFFEINEADDON);
     @Instance
     public static CaffeineAddon instance;
 

@@ -109,9 +109,10 @@ public class TFCRegistry {
         event.getRegistry()
                 .registerAll(BlocksFL.getAllJackOLanterns()
                         .stream()
-                        .map(j -> new KnappingRecipeSimple(KnappingFL.PUMPKIN, true, new ItemStack(Item.getItemFromBlock(j)), j.getCarving()
-                                .getCraftPattern()).setRegistryName("pumpkin_carve_" + j.getCarving()
-                                .getName()))
+                        .map(j -> new KnappingRecipeSimple(
+                                KnappingFL.PUMPKIN, true,
+                                new ItemStack(Item.getItemFromBlock(j)), j.getCarving().getCraftPattern())
+                                .setRegistryName("pumpkin_carve_" + j.getCarving().getName()))
                         .toArray(KnappingRecipe[]::new));
     }
 

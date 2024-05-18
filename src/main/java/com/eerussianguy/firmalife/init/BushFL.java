@@ -11,6 +11,8 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 
+import lombok.Getter;
+
 import java.util.function.Supplier;
 
 import static net.dries007.tfc.api.types.IBerryBush.Size.LARGE;
@@ -32,11 +34,12 @@ public enum BushFL implements IBerryBush {
     private final float maxTemp;
     private final float minRain;
     private final float maxRain;
+    @Getter
     private final Size size;
     private final boolean hasSpikes;
 
-    BushFL(Supplier<Item> fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain,
-           float growthTime, Size size, boolean spiky) {
+    BushFL(Supplier<Item> fruit, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, Size size,
+           boolean spiky) {
         this.fruit = fruit;
         this.harvestMonthStart = harvestMonthStart;
         this.harvestingMonths = harvestingMonths;
@@ -75,8 +78,6 @@ public enum BushFL implements IBerryBush {
     public boolean isValidForGrowth(float temperature, float rainfall) {
         return minTemp < temperature && temperature < maxTemp && minRain < rainfall && rainfall < maxRain;
     }
-
-    public Size getSize() {return this.size;}
 
     @Override
     public boolean isSpiky() {

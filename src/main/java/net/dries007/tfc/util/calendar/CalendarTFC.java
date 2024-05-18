@@ -22,14 +22,13 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
     public static final CalendarTFC INSTANCE = new CalendarTFC();
 
     /**
-     * Player time. Advances when player sleeps, stops when no players are online NOT synced with the daylight cycle. Used for almost everything that
-     * tracks time.
+     * Player time. Advances when player sleeps, stops when no players are online NOT synced with the daylight cycle. Used for almost everything that tracks time.
      */
     public static final ICalendar PLAYER_TIME = () -> CalendarTFC.INSTANCE.playerTime;
 
     /**
-     * Calendar time. Advances when player sleeps, stops when doDaylightCycle is false Synced with the daylight cycle Players can see this via the
-     * calendar GUI tab Calendar Time 0 = Midnight, January 1, 1000
+     * Calendar time. Advances when player sleeps, stops when doDaylightCycle is false Synced with the daylight cycle Players can see this via the calendar GUI tab Calendar Time 0
+     * = Midnight, January 1, 1000
      */
     public static final ICalendarFormatted CALENDAR_TIME = new ICalendarFormatted() {
 
@@ -73,14 +72,14 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
         // Initialize to default values
         daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;
         playerTime = 0;
-        calendarTime = (5 * daysInMonth * ICalendar.TICKS_IN_DAY) + (6 * ICalendar.TICKS_IN_HOUR);
+        calendarTime = (5L * daysInMonth * ICalendar.TICKS_IN_DAY) + (6 * ICalendar.TICKS_IN_HOUR);
         doDaylightCycle = true;
         arePlayersLoggedOn = false;
     }
 
     /**
-     * This runs a sequence of code, but first will set the calendar and player time by an offset Useful if we need to run code that technically needs
-     * to happen at a different calendar time The offsets are removed once the transaction is complete
+     * This runs a sequence of code, but first will set the calendar and player time by an offset Useful if we need to run code that technically needs to happen at a different
+     * calendar time The offsets are removed once the transaction is complete
      *
      * @param transactionPlayerTimeOffset   the offset to be added to the player time
      * @param transactionCalendarTimeOffset the offset to be added to the calendar time
@@ -198,8 +197,8 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
     }
 
     /**
-     * Called from {@link net.minecraftforge.fml.common.event.FMLServerStartingEvent} Initializes the calendar with the current minecraft server
-     * instance, reloading all values from world saved data
+     * Called from {@link net.minecraftforge.fml.common.event.FMLServerStartingEvent} Initializes the calendar with the current minecraft server instance, reloading all values from
+     * world saved data
      */
     public void init(MinecraftServer server) {
         this.server = server;
@@ -239,7 +238,7 @@ public final class CalendarTFC implements INBTSerializable<NBTTagCompound> {
                             arePlayersLoggedOn);
 
             // Check if tracking values are wrong
-            boolean checkArePlayersLoggedOn = server.getPlayerList().getPlayers().size() > 0;
+            boolean checkArePlayersLoggedOn = !server.getPlayerList().getPlayers().isEmpty();
             if (arePlayersLoggedOn != checkArePlayersLoggedOn) {
                 // Whoops, somehow we missed this.
                 TerraFirmaCraft.getLog().info("Setting ArePlayersLoggedOn = {}", checkArePlayersLoggedOn);

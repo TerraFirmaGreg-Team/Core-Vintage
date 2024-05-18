@@ -7,6 +7,8 @@ import net.minecraft.util.text.TextFormatting;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 
+import lombok.Getter;
+
 import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
 @MethodsReturnNonnullByDefault
@@ -15,9 +17,12 @@ public enum AgingFL implements IStringSerializable {
     AGED("aged", 4, FoodTrait.AGED, TextFormatting.DARK_RED),
     VINTAGE("vintage", 8, FoodTrait.VINTAGE, TextFormatting.GOLD);
 
+    @Getter
     private final int ID;
     private final String name;
+    @Getter
     private final FoodTrait trait;
+    @Getter
     private final TextFormatting format;
 
     AgingFL(String name, int ID, FoodTrait trait, TextFormatting format) {
@@ -30,18 +35,6 @@ public enum AgingFL implements IStringSerializable {
     @Override
     public String getName() {
         return this.name;
-    }
-
-    public int getID() {
-        return this.ID;
-    }
-
-    public FoodTrait getTrait() {
-        return this.trait;
-    }
-
-    public TextFormatting getFormat() {
-        return this.format;
     }
 
     public String getTranslationKey() {

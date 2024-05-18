@@ -19,6 +19,8 @@ import net.dries007.tfc.world.classic.worldgen.WorldGenFruitTrees;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.List;
 
 public enum FruitTree implements IFruitTree {
@@ -30,7 +32,8 @@ public enum FruitTree implements IFruitTree {
     ORANGE(Food.ORANGE, Month.FEBRUARY, 3, Month.NOVEMBER, 1, 23f, 36f, 250f, 400f, 0.33f),
     PEACH(Food.PEACH, Month.APRIL, 2, Month.SEPTEMBER, 1, 9f, 27f, 60f, 230f, 0.33f),
     PLUM(Food.PLUM, Month.MAY, 2, Month.JULY, 2, 18f, 31f, 250f, 400f, 0.33f),
-    RED_APPLE(Food.RED_APPLE, Month.MAY, 2, Month.OCTOBER, 2, 9f, 25f, 100f, 280f, 0.33f);
+    RED_APPLE(Food.RED_APPLE, Month.MAY, 2, Month.OCTOBER, 2, 9f, 25f, 100f, 280f, 0.33f),
+    COFFEE(Food.COFFEE_CHERRIES, Month.APRIL, 2, Month.SEPTEMBER, 3, 5f, 35f, 100f, 400f, 0.33f);
 
     static {
         for (IFruitTree tree : values()) {
@@ -38,6 +41,7 @@ public enum FruitTree implements IFruitTree {
         }
     }
 
+    @Getter
     private final Food fruit;
     private final Month flowerMonthStart;
     private final int floweringMonths;
@@ -49,8 +53,8 @@ public enum FruitTree implements IFruitTree {
     private final float minRain;
     private final float maxRain;
 
-    FruitTree(Food fruit, Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp,
-              float minRain, float maxRain, float growthTime) {
+    FruitTree(Food fruit, Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain,
+              float growthTime) {
         this.fruit = fruit;
         this.flowerMonthStart = flowerMonthStart;
         this.floweringMonths = floweringMonths;
@@ -62,10 +66,6 @@ public enum FruitTree implements IFruitTree {
         this.maxTemp = maxTemp;
         this.minRain = minRain;
         this.maxRain = maxRain;
-    }
-
-    public Food getFruit() {
-        return this.fruit;
     }
 
     @Override

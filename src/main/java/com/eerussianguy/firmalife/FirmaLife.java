@@ -15,7 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import com.eerussianguy.firmalife.compat.ModuleManager;
 import com.eerussianguy.firmalife.gui.FLGuiHandler;
-import com.eerussianguy.firmalife.init.VeinAdder;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
 import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
 import com.eerussianguy.firmalife.player.CapPlayerDataFL;
@@ -58,8 +57,6 @@ public class FirmaLife {
         // received client side
         network.registerMessage(new PacketSpawnVanillaParticle.Handler(), PacketSpawnVanillaParticle.class, ++id, Side.CLIENT);
         network.registerMessage(new PacketDrawBoundingBox.Handler(), PacketDrawBoundingBox.class, ++id, Side.CLIENT);
-
-        VeinAdder.ADDER.addVeins(event.getModConfigurationDirectory());
 
         CapPlayerDataFL.preInit();
 

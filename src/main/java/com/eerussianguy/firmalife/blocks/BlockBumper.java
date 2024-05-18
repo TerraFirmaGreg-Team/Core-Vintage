@@ -30,8 +30,7 @@ public class BlockBumper extends BlockNonCube {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
-                                    float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
             playerIn.sendMessage(new TextComponentTranslation("tooltip.firmalife.bumper"));
         }

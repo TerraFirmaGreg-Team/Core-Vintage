@@ -98,17 +98,18 @@ public class RecipesFL {
         IForgeRegistry<DryingRecipe> r = event.getRegistry();
         int day = ICalendar.TICKS_IN_DAY;
         for (Fruit fruit : Fruit.values()) {
-            r.register(new DryingRecipe(IIngredient.of(fruit.getFruit()), new ItemStack(ItemsFL.getDriedFruit(fruit)), day / 2).setRegistryName(
-                    fruit.name()
-                            .toLowerCase()));
+            r.register(new DryingRecipe(IIngredient.of(fruit.getFruit()),
+                    new ItemStack(ItemsFL.getDriedFruit(fruit)), day * 3).setRegistryName(fruit.name().toLowerCase()));
         }
         r.registerAll(
-                new DryingRecipe(IIngredient.of(new ItemStack(ItemsFL.CINNAMON_BARK)), new ItemStack(ItemsFL.CINNAMON), day).setRegistryName(
-                        "cinnamon_bark"),
+                new DryingRecipe(IIngredient.of(new ItemStack(ItemsFL.CINNAMON_BARK)),
+                        new ItemStack(ItemsFL.CINNAMON), day).setRegistryName("cinnamon_bark"),
+
                 new DryingRecipe(IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.COCOA_BEANS))),
                         new ItemStack(ItemsFL.getFood(FoodFL.DRIED_COCOA_BEANS)), day / 2).setRegistryName("cocoa_beans"),
-                new DryingRecipe(IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.PINEAPPLE))), new ItemStack(ItemsFL.DRIED_PINEAPPLE),
-                        day / 2).setRegistryName("pineapple")
+
+                new DryingRecipe(IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.PINEAPPLE))),
+                        new ItemStack(ItemsFL.DRIED_PINEAPPLE), day / 2).setRegistryName("pineapple")
         );
     }
 

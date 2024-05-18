@@ -54,13 +54,11 @@ public class RenderHandler {
         final Item item = stack.getItem();
         if (item instanceof ItemBlock) {
             Block block = ((ItemBlock) item).getBlock();
-            if (block instanceof BlockClimateStation) {
-                BlockClimateStation station = (BlockClimateStation) block;
+            if (block instanceof BlockClimateStation station) {
                 switch (station.tier) {
                     case 1:
                         event.getToolTip().add("Enables enhanced flaw detection for your greenhouse.");
-                        event.getToolTip()
-                                .add("Right click to show either the protected region, or the incorrect block.");
+                        event.getToolTip().add("Right click to show either the protected region, or the incorrect block.");
                         break;
                     case 2:
                         event.getToolTip().add("Enhanced climate regulation makes planters grow 10.5% faster.");
@@ -72,8 +70,7 @@ public class RenderHandler {
                         event.getToolTip().add("Enables growing fruit trees in the greenhouse.");
                         break;
                     case 5:
-                        event.getToolTip()
-                                .add("Distributes steam to your spouts and sprinklers, eliminating the need to feed them with barrels.");
+                        event.getToolTip().add("Distributes steam to your spouts and sprinklers, eliminating the need to feed them with barrels.");
                         break;
                 }
             }

@@ -21,7 +21,6 @@ import com.eerussianguy.firmalife.items.ItemCheesecloth;
 import com.eerussianguy.firmalife.items.ItemDriedPineapple;
 import com.eerussianguy.firmalife.items.ItemFoodFL;
 import com.eerussianguy.firmalife.items.ItemFruitPole;
-import com.eerussianguy.firmalife.items.ItemGreenhouseDoor;
 import com.eerussianguy.firmalife.items.ItemHeatableFoodFL;
 import com.eerussianguy.firmalife.items.ItemMetalMallet;
 import com.eerussianguy.firmalife.items.ItemMetalMalletHead;
@@ -80,8 +79,6 @@ public class ItemsFL {
     public static final ItemMisc CINNAMON_POLE = Helpers.getNull();
     @GameRegistry.ObjectHolder("frothy_coconut")
     public static final ItemMisc FROTHY_COCONUT = Helpers.getNull();
-    @GameRegistry.ObjectHolder("greenhouse_door")
-    public static final ItemGreenhouseDoor ITEM_GREENHOUSE_DOOR = Helpers.getNull();
     @GameRegistry.ObjectHolder("cracked_coconut")
     public static final ItemWoodenBucket CRACKED_COCONUT = Helpers.getNull();
     @GameRegistry.ObjectHolder("barley_flatbread")
@@ -264,7 +261,6 @@ public class ItemsFL {
         easyItems.add(register(r, "cinnamon_bark", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
         easyItems.add(register(r, "cinnamon", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
         easyItems.add(register(r, "ground_cinnamon", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
-        easyItems.add(register(r, "greenhouse_door", new ItemGreenhouseDoor(BlocksFL.GREENHOUSE_DOOR), CT_MISC));
         easyItems.add(register(r, "quad_planter", new ItemBlock(BlocksFL.QUAD_PLANTER), CT_MISC));
         easyItems.add(register(r, "large_planter", new ItemBlock(BlocksFL.LARGE_PLANTER), CT_MISC));
         easyItems.add(register(r, "cinnamon_sapling", new ItemBlock(BlocksFL.CINNAMON_SAPLING), CT_MISC));

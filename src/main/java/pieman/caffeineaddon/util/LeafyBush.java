@@ -22,8 +22,7 @@ public enum LeafyBush implements IBerryBush {
     private final float maxRain;
     private final boolean hasSpikes;
 
-    LeafyBush(Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime,
-              boolean spiky) {
+    LeafyBush(Month harvestMonthStart, int harvestingMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, boolean spiky) {
         this.harvestMonthStart = harvestMonthStart;
         this.harvestingMonths = harvestingMonths;
         this.growthTime = growthTime * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;

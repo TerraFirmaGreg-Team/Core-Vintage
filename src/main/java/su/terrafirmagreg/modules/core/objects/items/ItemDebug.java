@@ -82,11 +82,11 @@ public class ItemDebug extends BaseItem {
         NBTTagCompound nbt = stack.getTagCompound();
 
         if (nbt == null) NBTUtils.resetNBT(stack);
-        int mode = nbt.getInteger("mode");
+        int mode = stack.getTagCompound().getInteger("mode");
         switch (mode) {
             case 0: {
                 var blockstate = world.getBlockState(pos).getBlock();
-                NBTUtils.setGenericNBTValue(nbt, "blockstate", blockstate.toString());
+                NBTUtils.setGenericNBTValue(nbt, "blockstate", blockstate);
                 player.sendMessage(new TextComponentString("Blockstate: " + blockstate));
                 break;
             }
@@ -94,13 +94,13 @@ public class ItemDebug extends BaseItem {
                 TileEntity tile = world.getTileEntity(pos);
                 if (tile == null) break;
                 var nbtTag = tile.writeToNBT(new NBTTagCompound());
-                NBTUtils.setGenericNBTValue(nbt, "nbtTag", nbtTag.toString());
+                NBTUtils.setGenericNBTValue(nbt, "nbtTag", nbtTag);
                 player.sendMessage(new TextComponentString("NBTTagCompound: " + nbtTag));
                 break;
             }
             case 2: {
                 var blockstateList = world.getBlockState(pos).getBlock().getBlockState().getValidStates();
-                NBTUtils.setGenericNBTValue(nbt, "blockstateList", blockstateList.toString());
+                NBTUtils.setGenericNBTValue(nbt, "blockstateList", blockstateList);
                 player.sendMessage(new TextComponentString("Blockstate List: " + blockstateList));
                 break;
             }

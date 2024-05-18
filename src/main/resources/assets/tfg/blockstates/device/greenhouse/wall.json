@@ -1,23 +1,22 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "firmalife:greenhouse_wall",
+    "model": "tfg:device/greenhouse/wall",
     "particle": "firmalife:blocks/greenhouse_steel"
   },
   "variants": {
     "glass": {
       "true": {
-        "submodel": "firmalife:greenhouse_wall_glass"
+        "submodel": "tfg:device/greenhouse/wall_glass"
       },
-      "false": {
-      }
+      "false": {}
     },
     "top": {
       "true": {
-        "model": "firmalife:greenhouse_wall_top"
+        "model": "tfg:device/greenhouse/wall_top"
       },
       "false": {
-        "model": "firmalife:greenhouse_wall"
+        "model": "tfg:device/greenhouse/wall"
       }
     },
     "facing": {
@@ -35,13 +34,12 @@
       }
     },
     "inventory": [
-      {
-      }
+      {}
     ],
     "normal": [
       {
         "transform": "forge:default-block",
-        "model": "firmalife:greenhouse_wall"
+        "model": "tfg:device/greenhouse/wall"
       }
     ]
   }

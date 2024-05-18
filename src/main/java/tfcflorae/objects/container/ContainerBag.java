@@ -27,8 +27,7 @@ public class ContainerBag extends ContainerItemStack implements ISlotCallback {
     @Override
     protected void addContainerSlots() {
         IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (inventory instanceof ISlotCallback) {
-            ISlotCallback callback = (ISlotCallback) inventory;
+        if (inventory instanceof ISlotCallback callback) {
             addSlotToContainer(new SlotCallback(inventory, 0, 62, 23, callback));
             addSlotToContainer(new SlotCallback(inventory, 1, 80, 23, callback));
             addSlotToContainer(new SlotCallback(inventory, 2, 98, 23, callback));

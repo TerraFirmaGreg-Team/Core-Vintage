@@ -25,9 +25,6 @@ import com.eerussianguy.firmalife.blocks.BlockCinnamonLeaves;
 import com.eerussianguy.firmalife.blocks.BlockCinnamonLog;
 import com.eerussianguy.firmalife.blocks.BlockCinnamonSapling;
 import com.eerussianguy.firmalife.blocks.BlockClimateStation;
-import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
-import com.eerussianguy.firmalife.blocks.BlockGreenhouseRoof;
-import com.eerussianguy.firmalife.blocks.BlockGreenhouseWall;
 import com.eerussianguy.firmalife.blocks.BlockHangingPlanter;
 import com.eerussianguy.firmalife.blocks.BlockJackOLantern;
 import com.eerussianguy.firmalife.blocks.BlockJars;
@@ -102,12 +99,6 @@ public class BlocksFL {
     public static final BlockCinnamonLeaves CINNAMON_LEAVES = Helpers.getNull();
     @GameRegistry.ObjectHolder("cinnamon_sapling")
     public static final BlockCinnamonSapling CINNAMON_SAPLING = Helpers.getNull();
-    @GameRegistry.ObjectHolder("greenhouse_door")
-    public static final BlockGreenhouseDoor GREENHOUSE_DOOR = Helpers.getNull();
-    @GameRegistry.ObjectHolder("greenhouse_roof")
-    public static final BlockGreenhouseRoof GREENHOUSE_ROOF = Helpers.getNull();
-    @GameRegistry.ObjectHolder("greenhouse_wall")
-    public static final BlockGreenhouseWall GREENHOUSE_WALL = Helpers.getNull();
     @GameRegistry.ObjectHolder("quad_planter")
     public static final BlockQuadPlanter QUAD_PLANTER = Helpers.getNull();
     @GameRegistry.ObjectHolder("large_planter")
@@ -220,9 +211,6 @@ public class BlocksFL {
         normalIBs.add(register(r, "cinnamon_log", new BlockCinnamonLog(), CT_WOOD));
         normalIBs.add(register(r, "cinnamon_leaves", new BlockCinnamonLeaves(), CT_WOOD));
         register(r, "cinnamon_sapling", new BlockCinnamonSapling(), CT_WOOD);
-        normalIBs.add(register(r, "greenhouse_wall", new BlockGreenhouseWall(), CT_MISC));
-        normalIBs.add(register(r, "greenhouse_roof", new BlockGreenhouseRoof(), CT_MISC));
-        register(r, "greenhouse_door", new BlockGreenhouseDoor(), CT_MISC);
         normalIBs.add(register(r, "climate_station", new BlockClimateStation(0), CT_MISC));
         for (int i = 1; i < 6; i++)
             normalIBs.add(register(r, "climate_station_" + i, new BlockClimateStation(i), CT_MISC));

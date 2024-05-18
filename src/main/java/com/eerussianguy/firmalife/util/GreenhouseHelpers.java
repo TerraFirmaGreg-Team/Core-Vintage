@@ -1,6 +1,9 @@
 package com.eerussianguy.firmalife.util;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseDoor;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseRoof;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseWall;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -10,14 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
-import com.eerussianguy.firmalife.blocks.BlockGreenhouseRoof;
-import com.eerussianguy.firmalife.blocks.BlockGreenhouseWall;
 import com.eerussianguy.firmalife.te.TEClimateStation;
 
-import static com.eerussianguy.firmalife.init.StatePropertiesFL.GLASS;
-import static com.eerussianguy.firmalife.init.StatePropertiesFL.TOP;
 import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.api.data.Blockstates.GLASS;
+import static su.terrafirmagreg.api.data.Blockstates.TOP;
 
 public class GreenhouseHelpers {
 
@@ -30,8 +30,7 @@ public class GreenhouseHelpers {
         for (int i = 1; i <= 48; i++) // safer than a while loop
         {
             BlockPos checkPos = pos.up(i);
-            if (world.getBlockState(checkPos)
-                    .getBlock() instanceof BlockGreenhouseRoof && world.canSeeSky(checkPos.up())) {
+            if (world.getBlockState(checkPos).getBlock() instanceof BlockGreenhouseRoof && world.canSeeSky(checkPos.up())) {
                 return true; // we found a roof that is seeing sky
             }
         }
@@ -40,7 +39,8 @@ public class GreenhouseHelpers {
 
     private static boolean validEndWallBlock(World world, BlockPos pos, IBlockState checkState, EnumFacing wallFacing, boolean visual) {
         return packet(world, pos,
-                (checkState.getBlock() instanceof BlockGreenhouseWall && checkState.getValue(GLASS) && checkState.getValue(FACING) == wallFacing) ||
+                (checkState.getBlock() instanceof BlockGreenhouseWall &&
+                        checkState.getValue(GLASS) && checkState.getValue(FACING) == wallFacing) ||
                         checkState.getBlock() instanceof BlockGreenhouseDoor, visual);
     }
 

@@ -149,8 +149,9 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
     private boolean canGrow(int slot) {
         PlanterRecipe recipe = getRecipe(slot);
         return isClimateValid && recipe != null && getStage(slot) < PlanterRecipe.getMaxStage(recipe) &&
-                tier >= PlanterRecipe.getTier(recipe) && world.getBlockState(pos)
-                .getValue(StatePropertiesFL.WET) && GreenhouseHelpers.isSkylightValid(world, pos);
+                tier >= PlanterRecipe.getTier(recipe) &&
+                world.getBlockState(pos).getValue(StatePropertiesFL.WET) &&
+                GreenhouseHelpers.isSkylightValid(world, pos);
     }
 
     public PlanterRecipe getRecipe(int slot) {

@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.registry;
 
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -227,13 +229,13 @@ public class TFCRegistry {
         }
         r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_wall"),
                 IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-                new ItemStack(BlocksFL.GREENHOUSE_WALL, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, PUNCH_NOT_LAST, SHRINK_LAST));
+                new ItemStack(BlocksDevice.GREENHOUSE_WALL, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, PUNCH_NOT_LAST, SHRINK_LAST));
         r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_roof"),
                 IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-                new ItemStack(BlocksFL.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST, PUNCH_LAST));
+                new ItemStack(BlocksDevice.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST, PUNCH_LAST));
         r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_door"),
                 IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-                new ItemStack(ItemsFL.ITEM_GREENHOUSE_DOOR), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, HIT_NOT_LAST, PUNCH_LAST));
+                new ItemStack(BlocksDevice.GREENHOUSE_DOOR), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, HIT_NOT_LAST, PUNCH_LAST));
         r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "spout"), IIngredient.of("ingotBlackSteel"),
                 new ItemStack(BlocksFL.SPOUT), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_THIRD_LAST, SHRINK_SECOND_LAST, HIT_LAST));
 

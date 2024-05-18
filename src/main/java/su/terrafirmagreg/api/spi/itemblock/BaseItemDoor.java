@@ -51,8 +51,7 @@ public class BaseItemDoor extends BaseItemBlock {
         }
 
         BlockPos topDoorPos = pos.up();
-        boolean flag2 = worldIn.isBlockPowered(pos) ||
-                worldIn.isBlockPowered(topDoorPos);
+        boolean flag2 = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(topDoorPos);
 
         IBlockState doorState = door.getDefaultState()
                 .withProperty(BlockDoor.FACING, facing)
@@ -87,7 +86,7 @@ public class BaseItemDoor extends BaseItemBlock {
                 int i = enumfacing.getXOffset();
                 int j = enumfacing.getZOffset();
                 boolean flag = i < 0 && hitZ < 0.5F || i > 0 && hitZ > 0.5F || j < 0 && hitX > 0.5F || j > 0 && hitX < 0.5F;
-                placeDoor(worldIn, pos, enumfacing, this.block, flag);
+                placeDoor(worldIn, pos, enumfacing.getOpposite(), this.block, flag); // only line that we change
 
                 SoundType soundtype = bottomDoorBlock.getSoundType(bottomDoorState, worldIn, pos, player);
 

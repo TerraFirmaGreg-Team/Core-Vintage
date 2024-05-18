@@ -18,6 +18,9 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockElectricForge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFreezeDryer;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseDoor;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseRoof;
+import su.terrafirmagreg.modules.device.objects.blocks.BlockGreenhouseWall;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockGrindstone;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockIceBunker;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockInductionCrucible;
@@ -68,6 +71,9 @@ public final class BlocksDevice {
     public static BlockLatexExtractor LATEX_EXTRACTOR;
     public static BlockSmelteryCauldron SMELTERY_CAULDRON;
     public static BlockSmelteryFirebox SMELTERY_FIREBOX;
+    public static BlockGreenhouseDoor GREENHOUSE_DOOR;
+    public static BlockGreenhouseRoof GREENHOUSE_ROOF;
+    public static BlockGreenhouseWall GREENHOUSE_WALL;
 
     public static void onRegister(RegistryManager registry) {
         //==== Other =================================================================================================//
@@ -104,6 +110,9 @@ public final class BlocksDevice {
         LATEX_EXTRACTOR = registry.registerBlock(new BlockLatexExtractor());
         SMELTERY_CAULDRON = registry.registerBlock(new BlockSmelteryCauldron());
         SMELTERY_FIREBOX = registry.registerBlock(new BlockSmelteryFirebox());
+        GREENHOUSE_DOOR = registry.registerBlock(new BlockGreenhouseDoor());
+        GREENHOUSE_ROOF = registry.registerBlock(new BlockGreenhouseRoof());
+        GREENHOUSE_WALL = registry.registerBlock(new BlockGreenhouseWall());
     }
 
 }

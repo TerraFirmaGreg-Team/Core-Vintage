@@ -28,8 +28,7 @@ public class ItemBlockJar extends ItemBlockTFC {
 
     @Override
     @NotNull
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-                                      float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState state = worldIn.getBlockState(pos);
         if (state.getBlock() == block) {
             if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {

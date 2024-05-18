@@ -1,7 +1,6 @@
 package com.eerussianguy.firmalife;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockStem;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -145,9 +144,7 @@ public class ClientRegisterEventsFL {
                 .build());
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
                 .build());
-
-        ModelLoader.setCustomStateMapper(BlocksFL.GREENHOUSE_DOOR, new StateMap.Builder().ignore(BlockDoor.POWERED)
-                .build());
+        
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesFL.CAN_GROW)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)

@@ -1,87 +1,87 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "firmalife:greenhouse_roof",
+    "model": "tfg:device/greenhouse/roof",
     "uvlock": true
   },
   "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
     "facing=east,glass=false,top=false": {
-      "model": "firmalife:greenhouse_roof",
+      "model": "tfg:device/greenhouse/roof",
       "y": 90,
       "uvlock": true
     },
     "facing=west,glass=false,top=false": {
-      "model": "firmalife:greenhouse_roof",
+      "model": "tfg:device/greenhouse/roof",
       "y": 270,
       "uvlock": true
     },
     "facing=north,glass=false,top=false": {
-      "model": "firmalife:greenhouse_roof"
+      "model": "tfg:device/greenhouse/roof"
     },
     "facing=south,glass=false,top=false": {
-      "model": "firmalife:greenhouse_roof",
+      "model": "tfg:device/greenhouse/roof",
       "y": 180,
       "uvlock": true
     },
     "facing=east,glass=true,top=false": {
-      "model": "firmalife:greenhouse_roof_glass",
+      "model": "tfg:device/greenhouse/roof_glass",
       "y": 90,
       "uvlock": true
     },
     "facing=west,glass=true,top=false": {
-      "model": "firmalife:greenhouse_roof_glass",
+      "model": "tfg:device/greenhouse/roof_glass",
       "y": 270,
       "uvlock": true
     },
     "facing=north,glass=true,top=false": {
-      "model": "firmalife:greenhouse_roof_glass"
+      "model": "tfg:device/greenhouse/roof_glass"
     },
     "facing=south,glass=true,top=false": {
-      "model": "firmalife:greenhouse_roof_glass",
+      "model": "tfg:device/greenhouse/roof_glass",
       "y": 180,
       "uvlock": true
     },
     "facing=east,glass=false,top=true": {
-      "model": "firmalife:greenhouse_roof_top",
+      "model": "tfg:device/greenhouse/roof_top",
       "y": 90,
       "uvlock": true
     },
     "facing=west,glass=false,top=true": {
-      "model": "firmalife:greenhouse_roof_top",
+      "model": "tfg:device/greenhouse/roof_top",
       "y": 270,
       "uvlock": true
     },
     "facing=north,glass=false,top=true": {
-      "model": "firmalife:greenhouse_roof_top"
+      "model": "tfg:device/greenhouse/roof_top"
     },
     "facing=south,glass=false,top=true": {
-      "model": "firmalife:greenhouse_roof_top",
+      "model": "tfg:device/greenhouse/roof_top",
       "y": 180,
       "uvlock": true
     },
     "facing=east,glass=true,top=true": {
-      "model": "firmalife:greenhouse_roof_top_glass",
+      "model": "tfg:device/greenhouse/roof_top_glass",
       "y": 90,
       "uvlock": true
     },
     "facing=west,glass=true,top=true": {
-      "model": "firmalife:greenhouse_roof_top_glass",
+      "model": "tfg:device/greenhouse/roof_top_glass",
       "y": 270,
       "uvlock": true
     },
     "facing=north,glass=true,top=true": {
-      "model": "firmalife:greenhouse_roof_top_glass"
+      "model": "tfg:device/greenhouse/roof_top_glass"
     },
     "facing=south,glass=true,top=true": {
-      "model": "firmalife:greenhouse_roof_top_glass",
+      "model": "tfg:device/greenhouse/roof_top_glass",
       "y": 180,
       "uvlock": true
-    },
-    "normal": [
-      {
-        "transform": "forge:default-block",
-        "model": "firmalife:greenhouse_roof"
-      }
-    ]
+    }
   }
 }

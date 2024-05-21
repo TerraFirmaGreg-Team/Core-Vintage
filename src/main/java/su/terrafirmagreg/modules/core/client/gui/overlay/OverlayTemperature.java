@@ -30,8 +30,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class OverlayTemperature {
 
-    public static final ResourceLocation COLD_VIGNETTE = ModUtils.id("textures/gui/icons/cold_vignette.png");
-    public static final ResourceLocation HOT_VIGNETTE = ModUtils.id("textures/gui/icons/hot_vignette.png");
+    public static final ResourceLocation COLD_VIGNETTE = ModUtils.id("textures/gui/cold_vignette.png");
+    public static final ResourceLocation HOT_VIGNETTE = ModUtils.id("textures/gui/hot_vignette.png");
     public static final ResourceLocation MINUS = ModUtils.id("textures/gui/icons/lower.png");
     public static final ResourceLocation PLUS = ModUtils.id("textures/gui/icons/higher.png");
     public static final ResourceLocation MINUSER = ModUtils.id("textures/gui/icons/lowerer.png");

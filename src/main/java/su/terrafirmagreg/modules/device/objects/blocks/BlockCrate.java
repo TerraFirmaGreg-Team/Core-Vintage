@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
@@ -42,7 +42,7 @@ import static su.terrafirmagreg.api.data.Blockstates.SEALED;
  * (for gui purposes)
  */
 @SuppressWarnings("deprecation")
-public class BlockCrate extends BaseBlockContainer implements ITileBlock {
+public class BlockCrate extends BaseBlockContainer implements ITileProvider {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D, 0.875D, 0.95D);
     private static final AxisAlignedBB BOUNDING_BOX_SEALED = new AxisAlignedBB(0.05D, 0.0D, 0.05D, 0.95D, 0.875D, 0.95D);
@@ -56,7 +56,7 @@ public class BlockCrate extends BaseBlockContainer implements ITileBlock {
                 .hardness(2F)
                 .nonCube()
                 .weight(Weight.VERY_HEAVY);
-        
+
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(SEALED, false));
     }

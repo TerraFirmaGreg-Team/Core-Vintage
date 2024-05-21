@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.minecraft.item;
 
-import su.terrafirmagreg.api.spi.item.ISettingsItem;
+import su.terrafirmagreg.api.spi.item.IItemSettings;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ import lombok.Getter;
 
 @Getter
 @Mixin(value = Item.class, remap = false)
-public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements ISettingsItem {
+public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemSettings {
 
     @Unique
     protected final Settings settings = Settings.of();

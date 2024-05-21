@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.items;
 
-import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
 
 import net.minecraft.item.Item;
 
@@ -9,7 +9,7 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
 
-public class ItemCoffee extends Item implements ICustomModel {
+public class ItemCoffee extends Item implements IModelProvider {
 
     public ItemCoffee(String name) {
         super();

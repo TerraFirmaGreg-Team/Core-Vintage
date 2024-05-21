@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiInductionCrucible;
@@ -7,25 +10,23 @@ import su.terrafirmagreg.modules.device.init.SoundDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockInductionCrucible;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.capability.GregtechCapabilities;
-import ic2.api.energy.tile.IEnergyEmitter;
-import ic2.api.energy.tile.IEnergySink;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import tfctech.TFCTech;
@@ -35,11 +36,13 @@ import tfctech.objects.storage.MachineEnergyContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
-@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect, IEnergySink {
+//@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
+public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect, ITemperatureTileProvider {
 
     private final MachineEnergyContainer energyContainer;
     private int litTime = 0; //Client "effects" only
@@ -52,47 +55,47 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
         energyContainer = new MachineEnergyContainer(TechConfig.DEVICES.inductionCrucibleEnergyCapacity, TechConfig.DEVICES.inductionCrucibleEnergyCapacity, 0);
     }
 
-    @Optional.Method(modid = "ic2")
-    @Override
-    public void invalidate() {
-        super.invalidate();
-        if (!world.isRemote && addedToIc2Network) {
-            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileUnloadEvent(this));
-            addedToIc2Network = false;
-        }
-    }
+    //    @Optional.Method(modid = "ic2")
+    //    @Override
+    //    public void invalidate() {
+    //        super.invalidate();
+    //        if (!world.isRemote && addedToIc2Network) {
+    //            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileUnloadEvent(this));
+    //            addedToIc2Network = false;
+    //        }
+    //    }
+    //
+    //    @Optional.Method(modid = "ic2")
+    //    @Override
+    //    public void validate() {
+    //        super.validate();
+    //        if (!world.isRemote && TechConfig.DEVICES.acceptIc2EU && !addedToIc2Network) {
+    //            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileLoadEvent(this));
+    //            addedToIc2Network = true;
+    //        }
+    //    }
 
-    @Optional.Method(modid = "ic2")
-    @Override
-    public void validate() {
-        super.validate();
-        if (!world.isRemote && TechConfig.DEVICES.acceptIc2EU && !addedToIc2Network) {
-            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileLoadEvent(this));
-            addedToIc2Network = true;
-        }
-    }
-
-    @Override
-    public double getDemandedEnergy() {
-        return Math.ceil(energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
-    }
-
-    @Override
-    public int getSinkTier() {
-        return TechConfig.DEVICES.ic2Voltage;
-    }
-
-    @Override
-    public double injectEnergy(EnumFacing facing, double amount, double voltage) {
-        energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
-        return 0;
-    }
-
-    @Optional.Method(modid = "ic2")
-    @Override
-    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
-        return TechConfig.DEVICES.acceptIc2EU && facing == world.getBlockState(pos).getValue(HORIZONTAL);
-    }
+    //    @Override
+    //    public double getDemandedEnergy() {
+    //        return Math.ceil(energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
+    //    }
+    //
+    //    @Override
+    //    public int getSinkTier() {
+    //        return TechConfig.DEVICES.ic2Voltage;
+    //    }
+    //
+    //    @Override
+    //    public double injectEnergy(EnumFacing facing, double amount, double voltage) {
+    //        energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
+    //        return 0;
+    //    }
+    //
+    //    @Optional.Method(modid = "ic2")
+    //    @Override
+    //    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
+    //        return TechConfig.DEVICES.acceptIc2EU && facing == world.getBlockState(pos).getValue(HORIZONTAL);
+    //    }
 
     public int getEnergyCapacity() {
         return energyContainer.getMaxEnergyStored();
@@ -241,5 +244,16 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     @Override
     public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
         return new GuiInductionCrucible(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+    }
+
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+        float temp = FIELD_TEMPERATURE;
+        float change = temp / 100f;
+        float potency = temp / 350f;
+        if (ModifierTile.hasProtection(player)) {
+            change = change * 0.3F;
+        }
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
     }
 }

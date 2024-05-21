@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower.blocks;
 
-import su.terrafirmagreg.api.model.property.PropertyUnlistedString;
+import su.terrafirmagreg.api.client.property.PropertyUnlistedString;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

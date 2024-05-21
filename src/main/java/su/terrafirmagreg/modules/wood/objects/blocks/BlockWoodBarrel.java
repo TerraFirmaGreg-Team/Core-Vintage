@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -52,7 +52,7 @@ import static su.terrafirmagreg.api.data.Blockstates.SEALED;
  * @see BarrelRecipe
  */
 @SuppressWarnings("deprecation")
-public class BlockWoodBarrel extends BlockWood implements ITileBlock {
+public class BlockWoodBarrel extends BlockWood implements ITileProvider {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 

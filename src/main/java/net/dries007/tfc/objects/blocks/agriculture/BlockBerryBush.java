@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.api.util.DamageSources;
+import su.terrafirmagreg.api.data.DamageSources;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

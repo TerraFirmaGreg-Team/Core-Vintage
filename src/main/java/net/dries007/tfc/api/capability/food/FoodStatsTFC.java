@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.food;
 
-import su.terrafirmagreg.modules.core.api.util.DamageSources;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,6 +1,6 @@
 package lyeoj.tfcthings.items;
 
-import su.terrafirmagreg.modules.core.api.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;

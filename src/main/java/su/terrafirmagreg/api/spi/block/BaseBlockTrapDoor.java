@@ -6,7 +6,7 @@ import net.minecraft.block.BlockTrapDoor;
 import lombok.Getter;
 
 @Getter
-public abstract class BaseBlockTrapDoor extends BlockTrapDoor implements ISettingsBlock {
+public abstract class BaseBlockTrapDoor extends BlockTrapDoor implements IBlockSettings {
 
     protected final Settings settings;
 

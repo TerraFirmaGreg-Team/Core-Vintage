@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;

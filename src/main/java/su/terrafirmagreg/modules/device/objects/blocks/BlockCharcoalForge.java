@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -51,7 +51,7 @@ import java.util.function.BiPredicate;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsConsumerBlock, ITileBlock {
+public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsConsumerBlock, ITileProvider {
 
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
     private static final Multiblock CHARCOAL_FORGE_MULTIBLOCK;

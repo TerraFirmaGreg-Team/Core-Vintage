@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.network;
 
-import su.terrafirmagreg.modules.core.api.capabilities.pull.CapabilityPull;
+import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 import net.minecraft.entity.Entity;

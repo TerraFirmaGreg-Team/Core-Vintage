@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.blocks;
 
-import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class BlockDryingMat extends Block implements ICustomModel {
+public class BlockDryingMat extends Block implements IModelProvider {
 
     public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 

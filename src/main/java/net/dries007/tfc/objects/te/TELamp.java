@@ -1,8 +1,15 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierEnvironmental;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
+
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
@@ -23,10 +30,17 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidHandlerSidedCallback {
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Optional;
+
+public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidHandlerSidedCallback, ITemperatureTileProvider {
 
     public static int CAPACITY;
     private final FluidTank tank = new FluidTankCallback(this, 0, CAPACITY);
+    @Setter
+    @Getter
     private boolean powered = false;
 
     public TELamp() {
@@ -121,11 +135,14 @@ public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidH
         }
     }
 
-    public boolean isPowered() {
-        return powered;
-    }
-
-    public void setPowered(boolean pow) {
-        powered = pow;
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+        if (ModifierEnvironmental.getEnvironmentTemperature(player) < ProviderTemperature.AVERAGE) {
+            float change = (this.isPowered() && this.getFuel() > 0) ? 1f : 0f;
+            float potency = 0f;
+            return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+        } else {
+            return ModifierBase.none();
+        }
     }
 }

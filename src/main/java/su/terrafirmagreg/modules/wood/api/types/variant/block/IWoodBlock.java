@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.block;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.client.model.CustomStateMap;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.spi.block.IBlockSettings;
+import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс IWoodBlock представляет деревянный блок.
  */
-public interface IWoodBlock extends IType<WoodType>, IVariant<WoodBlockVariant>, ISettingsBlock, ICustomModel, IStateMapperProvider, IBlockColorProvider {
+public interface IWoodBlock extends IType<WoodType>, IVariant<WoodBlockVariant>, IBlockSettings, IModelProvider, IBlockStateProvider, IBlockColorProvider {
 
     /**
      * Возвращает расположение в реестре для данного деревянного блока.

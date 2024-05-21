@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.client.render.TESRCrucible;
@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBlock, ITileBlock {
+public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBlock, ITileProvider {
 
     private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0.0625, 0.0625, 0.9375, 0.9375, 0.9375);
     private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 0.125D, 0.9375D);

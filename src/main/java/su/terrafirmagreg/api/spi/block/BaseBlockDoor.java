@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.spi.block;
 
-import su.terrafirmagreg.api.spi.itemblock.BaseItemDoor;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
+import su.terrafirmagreg.api.spi.item.BaseItemDoor;
 import su.terrafirmagreg.api.util.ModelUtils;
 
 import net.minecraft.block.BlockDoor;
@@ -27,7 +28,7 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public abstract class BaseBlockDoor extends BlockDoor implements ISettingsBlock, IStateMapperProvider {
+public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings, IBlockStateProvider {
 
     protected final Settings settings;
 

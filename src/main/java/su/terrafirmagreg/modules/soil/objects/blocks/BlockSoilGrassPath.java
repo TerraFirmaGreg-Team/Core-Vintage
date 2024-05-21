@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
+import su.terrafirmagreg.api.spi.block.IBlockSettings;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -31,7 +31,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock, ISettingsBlock {
+public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock, IBlockSettings {
 
     private static final AxisAlignedBB GRASS_PATH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9375D, 1.0D);
 

@@ -1,14 +1,20 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerSmelteryCauldron;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -28,16 +34,17 @@ import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TileSmelteryCauldron extends TEInventory
-        implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, IContainerProvider<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
+        implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, ITemperatureTileProvider,
+                   IContainerProvider<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
 
     public static final int FLUID_CAPACITY = 4000;
     private final FluidTank tank = new FluidTankCallback(this, 0, FLUID_CAPACITY);
@@ -118,8 +125,7 @@ public class TileSmelteryCauldron extends TEInventory
 
     @Override
     public void setAndUpdateFluidTank(int i) {
-        IBlockState state = world.getBlockState(pos);
-        world.notifyBlockUpdate(pos, state, state, 3);
+        BlockUtils.notifyBlockUpdate(world, pos);
     }
 
     @Override
@@ -169,7 +175,7 @@ public class TileSmelteryCauldron extends TEInventory
     }
 
     @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+    public boolean isItemValid(int slot, ItemStack stack) {
         return true;
     }
 
@@ -181,5 +187,16 @@ public class TileSmelteryCauldron extends TEInventory
     @Override
     public GuiSmelteryCauldron getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
         return new GuiSmelteryCauldron(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+    }
+
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+        float temp = TileCrucible.FIELD_TEMPERATURE;
+        float change = temp / 120f;
+        float potency = temp / 370f;
+        if (ModifierTile.hasProtection(player)) {
+            change = change * 0.3f;
+        }
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
     }
 }

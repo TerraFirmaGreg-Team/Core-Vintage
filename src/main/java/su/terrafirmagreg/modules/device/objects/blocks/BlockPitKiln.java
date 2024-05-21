@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -51,7 +51,7 @@ import static su.terrafirmagreg.api.data.Blockstates.FULL;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockPitKiln extends BaseBlock implements ITileBlock, IStateMapperProvider {
+public class BlockPitKiln extends BaseBlock implements ITileProvider, IBlockStateProvider {
 
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[] {
             PLACED_ITEM_AABB,

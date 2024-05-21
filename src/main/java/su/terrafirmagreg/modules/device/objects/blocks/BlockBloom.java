@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBloom;
 
@@ -23,7 +23,7 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockBloom extends BaseBlock implements ITileBlock {
+public class BlockBloom extends BaseBlock implements ITileProvider {
 
     public BlockBloom() {
         super(Settings.of(Material.IRON));

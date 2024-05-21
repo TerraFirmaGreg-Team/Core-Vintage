@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.button;
 
-import su.terrafirmagreg.api.spi.button.BaseGuiButton;
-import su.terrafirmagreg.api.spi.button.IButtonTooltip;
+import su.terrafirmagreg.api.spi.gui.component.button.BaseGuiButton;
+import su.terrafirmagreg.api.spi.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCrate;
 
 import net.minecraft.client.Minecraft;

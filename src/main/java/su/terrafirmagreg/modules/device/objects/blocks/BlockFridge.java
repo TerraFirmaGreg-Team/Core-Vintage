@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
+import su.terrafirmagreg.api.spi.item.BaseItemBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRFridge;
 import su.terrafirmagreg.modules.device.objects.itemblocks.ItemBlockFridge;
@@ -53,7 +53,7 @@ import static net.minecraft.util.EnumFacing.NORTH;
 import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
 @SuppressWarnings("deprecation")
-public class BlockFridge extends BaseBlockHorizontal implements ITileBlock, IStateMapperProvider {
+public class BlockFridge extends BaseBlockHorizontal implements ITileProvider, IBlockStateProvider {
 
     private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0D, 0D, 0.125D, 1D, 1D, 1D);
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0D, 0D, 0.0D, 1D, 1D, 0.875D);

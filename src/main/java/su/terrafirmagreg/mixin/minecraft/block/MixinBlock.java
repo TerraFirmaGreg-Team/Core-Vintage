@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.minecraft.block;
 
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
+import su.terrafirmagreg.api.spi.block.IBlockSettings;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 
 @Getter
 @Mixin(value = Block.class, remap = false)
-public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements ISettingsBlock {
+public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockSettings {
 
     @Unique
     protected final Settings settings = Settings.of();

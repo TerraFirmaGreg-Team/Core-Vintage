@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.spi.button.IButtonTooltip;
+import su.terrafirmagreg.api.spi.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
 import su.terrafirmagreg.modules.device.ModuleDevice;

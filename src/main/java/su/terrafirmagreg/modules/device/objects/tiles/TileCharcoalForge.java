@@ -1,17 +1,22 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerCharcoalForge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -38,11 +43,12 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TileCharcoalForge extends TETickableInventory
-        implements ICalendarTickable, ITileFields, IContainerProvider<ContainerCharcoalForge, GuiCharcoalForge> {
+        implements ICalendarTickable, ITileFields, ITemperatureTileProvider, IContainerProvider<ContainerCharcoalForge, GuiCharcoalForge> {
 
     public static final int SLOT_FUEL_MIN = 0;
     public static final int SLOT_FUEL_MAX = 4;
@@ -383,5 +389,16 @@ public class TileCharcoalForge extends TETickableInventory
                 cachedRecipes[i - SLOT_INPUT_MIN] = HeatRecipe.get(inputStack);
             }
         }
+    }
+
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+
+        float change = FIELD_TEMPERATURE / 140f;
+        float potency = FIELD_TEMPERATURE / 350f;
+        if (ModifierTile.hasProtection(player)) {
+            change = 1.0F;
+        }
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
     }
 }

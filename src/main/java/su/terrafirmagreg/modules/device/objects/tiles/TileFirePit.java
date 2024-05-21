@@ -1,7 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
@@ -16,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -55,15 +59,18 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Optional;
 import java.util.Queue;
 
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit.ATTACHMENT;
 
 public class TileFirePit extends TETickableInventory
-        implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IContainerProvider<ContainerFirePit, GuiFirePit> {
+        implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, ITemperatureTileProvider, IContainerProvider<ContainerFirePit, GuiFirePit> {
 
     // Slot 0 - 3 = fuel slots with 3 being input, 4 = normal input slot, 5 and 6 are output slots 1 + 2
     public static final int SLOT_FUEL_CONSUME = 0;
@@ -99,6 +106,7 @@ public class TileFirePit extends TETickableInventory
     private CookingPotStage cookingPotStage;
     private int boilingTicks;
     private FoodData soupContents;
+    @Getter
     private int soupServings;
     private Nutrient soupNutrient;
     private long soupCreationDate;
@@ -493,10 +501,6 @@ public class TileFirePit extends TETickableInventory
         burnTemperature = fuel.getTemperature();
     }
 
-    public int getSoupServings() {
-        return soupServings;
-    }
-
     public void onConvertToCookingPot(EntityPlayer player, ItemStack stack) {
         dumpNonExtraItems(player);
         cookingPotStage = CookingPotStage.EMPTY;
@@ -549,17 +553,15 @@ public class TileFirePit extends TETickableInventory
 
     @Override
     public int getField(int index) {
-        switch (index) {
-            case FIELD_TEMPERATURE:
-                return (int) temperature;
-            case FIELD_COOKING_POT_STAGE:
-                return cookingPotStage.ordinal();
-            case FIELD_COOKING_POT_SERVINGS:
-                return soupServings;
-            default:
+        return switch (index) {
+            case FIELD_TEMPERATURE -> (int) temperature;
+            case FIELD_COOKING_POT_STAGE -> cookingPotStage.ordinal();
+            case FIELD_COOKING_POT_SERVINGS -> soupServings;
+            default -> {
                 TerraFirmaCraft.getLog().warn("Invalid Field ID {} in TEFirePit#getField", index);
-                return 0;
-        }
+                yield 0;
+            }
+        };
     }
 
     public void onAirIntake(int amount) {
@@ -710,18 +712,13 @@ public class TileFirePit extends TETickableInventory
     }
 
     private Item getSoupItem() {
-        switch (soupNutrient) {
-            case GRAIN:
-                return ItemFoodTFC.get(Food.SOUP_GRAIN);
-            case VEGETABLES:
-                return ItemFoodTFC.get(Food.SOUP_VEGETABLE);
-            case FRUIT:
-                return ItemFoodTFC.get(Food.SOUP_FRUIT);
-            case PROTEIN:
-                return ItemFoodTFC.get(Food.SOUP_MEAT);
-            default:
-                return ItemFoodTFC.get(Food.SOUP_DAIRY);
-        }
+        return switch (soupNutrient) {
+            case GRAIN -> ItemFoodTFC.get(Food.SOUP_GRAIN);
+            case VEGETABLES -> ItemFoodTFC.get(Food.SOUP_VEGETABLE);
+            case FRUIT -> ItemFoodTFC.get(Food.SOUP_FRUIT);
+            case PROTEIN -> ItemFoodTFC.get(Food.SOUP_MEAT);
+            default -> ItemFoodTFC.get(Food.SOUP_DAIRY);
+        };
     }
 
     @Override
@@ -732,6 +729,17 @@ public class TileFirePit extends TETickableInventory
     @Override
     public GuiFirePit getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
         return new GuiFirePit(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+    }
+
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+        float temp = FIELD_TEMPERATURE;
+        float change = temp / 100f;
+        float potency = temp / 350f;
+        if (ModifierTile.hasProtection(player)) {
+            change = 1.0F;
+        }
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
     }
 
     public enum CookingPotStage {

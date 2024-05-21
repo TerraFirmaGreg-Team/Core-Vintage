@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
@@ -45,7 +45,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock, ITileBlock {
+public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock, ITileProvider {
 
     public BlockSmelteryFirebox() {
         super(Settings.of(Material.IRON));

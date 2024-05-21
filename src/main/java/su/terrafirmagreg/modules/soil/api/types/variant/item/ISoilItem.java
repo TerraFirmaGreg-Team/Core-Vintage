@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
-import su.terrafirmagreg.api.spi.item.ISettingsItem;
+import su.terrafirmagreg.api.spi.item.IItemSettings;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
@@ -8,7 +8,7 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface ISoilItem extends IType<SoilType>, IVariant<SoilItemVariant>, ISettingsItem {
+public interface ISoilItem extends IType<SoilType>, IVariant<SoilItemVariant>, IItemSettings {
 
     /**
      * Возвращает расположение в реестре для данного подтипа деревянного предмета.

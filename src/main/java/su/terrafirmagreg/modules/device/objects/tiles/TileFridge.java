@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.init.SoundDevice;
@@ -9,8 +11,10 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
@@ -18,18 +22,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.capability.GregtechCapabilities;
-import ic2.api.energy.tile.IEnergyEmitter;
-import ic2.api.energy.tile.IEnergySink;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -41,10 +41,12 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.Optional;
+
 import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
-@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileFridge extends TEInventory implements ITickable, IEnergySink {
+//@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
+public class TileFridge extends TEInventory implements ITickable, ITemperatureTileProvider {
 
     private static final float MAX_DEGREE = 90F;
     private static final float DOOR_SPEED = 6F;
@@ -181,29 +183,29 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
 
     @Override
     public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-        if (Loader.isModLoaded("ic2")) {
-            ic2Unload();
-            if (isMainBlock()) {
-                TileFridge child = TileUtils.getTile(world, pos.down(), TileFridge.class);
-                if (child != null) {
-                    child.ic2Unload();
-                }
-            } else {
-                TileFridge main = TileUtils.getTile(world, pos.up(), TileFridge.class);
-                if (main != null) {
-                    main.ic2Unload();
-                }
-            }
-        }
+        //        if (Loader.isModLoaded("ic2")) {
+        //            ic2Unload();
+        //            if (isMainBlock()) {
+        //                TileFridge child = TileUtils.getTile(world, pos.down(), TileFridge.class);
+        //                if (child != null) {
+        //                    child.ic2Unload();
+        //                }
+        //            } else {
+        //                TileFridge main = TileUtils.getTile(world, pos.up(), TileFridge.class);
+        //                if (main != null) {
+        //                    main.ic2Unload();
+        //                }
+        //            }
+        //        }
         super.onBreakBlock(world, pos, state);
     }
 
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
-        if (Loader.isModLoaded("ic2")) {
-            ic2Unload();
-        }
+        //        if (Loader.isModLoaded("ic2")) {
+        //            ic2Unload();
+        //        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -212,63 +214,63 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
         return INFINITE_EXTENT_AABB;
     }
 
-    @Override
-    public double getDemandedEnergy() {
-        if (!isMainBlock()) {
-            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-            if (te != null && te.addedToIc2Network) {
-                return Math.ceil(te.energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
-            }
-            return 0;
-        }
-        return Math.ceil(energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
-    }
-
-    @Override
-    public int getSinkTier() {
-        return TechConfig.DEVICES.ic2Voltage;
-    }
-
-    @Override
-    public double injectEnergy(EnumFacing facing, double amount, double voltage) {
-        if (!isMainBlock()) {
-            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-            if (te != null && te.addedToIc2Network) {
-                te.energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
-            }
-            return 0;
-        }
-        energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
-        return 0;
-    }
-
-    @Optional.Method(modid = "ic2")
-    public void ic2Unload() {
-        if (!world.isRemote && addedToIc2Network) {
-            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileUnloadEvent(this));
-            addedToIc2Network = false;
-        }
-    }
-
-    @Optional.Method(modid = "ic2")
-    public void ic2Load() {
-        if (!world.isRemote && TechConfig.DEVICES.acceptIc2EU && !addedToIc2Network) {
-            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileLoadEvent(this));
-            addedToIc2Network = true;
-        }
-    }
-
-    @Optional.Method(modid = "ic2")
-    @Override
-    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
-        if (!isMainBlock()) {
-            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-            if (te == null || !te.addedToIc2Network) {
-                return false;
-            }
-        }
-        return TechConfig.DEVICES.acceptIc2EU && facing == this.getRotation().getOpposite();
-    }
+    //    @Override
+    //    public double getDemandedEnergy() {
+    //        if (!isMainBlock()) {
+    //            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
+    //            if (te != null && te.addedToIc2Network) {
+    //                return Math.ceil(te.energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
+    //            }
+    //            return 0;
+    //        }
+    //        return Math.ceil(energyContainer.receiveEnergy(Integer.MAX_VALUE, true) / (double) TechConfig.DEVICES.ratioIc2);
+    //    }
+    //
+    //    @Override
+    //    public int getSinkTier() {
+    //        return TechConfig.DEVICES.ic2Voltage;
+    //    }
+    //
+    //    @Override
+    //    public double injectEnergy(EnumFacing facing, double amount, double voltage) {
+    //        if (!isMainBlock()) {
+    //            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
+    //            if (te != null && te.addedToIc2Network) {
+    //                te.energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
+    //            }
+    //            return 0;
+    //        }
+    //        energyContainer.receiveEnergy((int) Math.ceil(amount) * TechConfig.DEVICES.ratioIc2, false);
+    //        return 0;
+    //    }
+    //
+    //    @Optional.Method(modid = "ic2")
+    //    public void ic2Unload() {
+    //        if (!world.isRemote && addedToIc2Network) {
+    //            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileUnloadEvent(this));
+    //            addedToIc2Network = false;
+    //        }
+    //    }
+    //
+    //    @Optional.Method(modid = "ic2")
+    //    public void ic2Load() {
+    //        if (!world.isRemote && TechConfig.DEVICES.acceptIc2EU && !addedToIc2Network) {
+    //            MinecraftForge.EVENT_BUS.post(new ic2.api.energy.event.EnergyTileLoadEvent(this));
+    //            addedToIc2Network = true;
+    //        }
+    //    }
+    //
+    //    @Optional.Method(modid = "ic2")
+    //    @Override
+    //    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing facing) {
+    //        if (!isMainBlock()) {
+    //            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
+    //            if (te == null || !te.addedToIc2Network) {
+    //                return false;
+    //            }
+    //        }
+    //        return TechConfig.DEVICES.acceptIc2EU && facing == this.getRotation().getOpposite();
+    //    }
 
     public ItemStack getSlot(int slot) {
         return inventory.extractItem(slot, 64, true);
@@ -324,9 +326,9 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
 
     @Override
     public void update() {
-        if (Loader.isModLoaded("ic2")) {
-            ic2Load();
-        }
+        //        if (Loader.isModLoaded("ic2")) {
+        //            ic2Load();
+        //        }
         if (!isMainBlock()) return;
         lastOpen = open;
         if (openingState == 1) {
@@ -391,5 +393,17 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
                 ModuleDevice.PACKET_SERVICE.sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(), pos, 20);
             }
         }
+    }
+
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+        float change = 0f;
+        float potency = 0f;
+
+        if (this.isOpen()) {
+            change = -10f;
+            potency = -0.7f;
+        }
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
     }
 }

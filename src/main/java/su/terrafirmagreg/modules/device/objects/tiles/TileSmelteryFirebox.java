@@ -1,14 +1,19 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryFirebox;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockSmelteryCauldron;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerSmelteryFirebox;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,10 +30,12 @@ import net.dries007.tfc.util.fuel.FuelManager;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TileSmelteryFirebox extends TETickableInventory
-        implements ITickable, ICalendarTickable, ITileFields, IContainerProvider<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
+        implements ITickable, ICalendarTickable, ITileFields, ITemperatureTileProvider, IContainerProvider<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
 
     private float temperature;
     private float burnTemperature;
@@ -226,5 +233,16 @@ public class TileSmelteryFirebox extends TETickableInventory
     @Override
     public GuiSmelteryFirebox getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
         return new GuiSmelteryFirebox(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+    }
+
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+        float temp = TileCrucible.FIELD_TEMPERATURE;
+        float change = temp / 120f;
+        float potency = temp / 370f;
+        if (ModifierTile.hasProtection(player)) {
+            change = change * 0.3f;
+        }
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
     }
 }

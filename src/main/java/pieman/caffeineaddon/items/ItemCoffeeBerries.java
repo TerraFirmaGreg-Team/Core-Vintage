@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.items;
 
-import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
@@ -18,7 +18,7 @@ import pieman.caffeineaddon.init.ModItems;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ItemCoffeeBerries extends ItemFood implements ICustomModel {
+public class ItemCoffeeBerries extends ItemFood implements IModelProvider {
 
     public ItemCoffeeBerries(String name) {
         super(0, 0, false);

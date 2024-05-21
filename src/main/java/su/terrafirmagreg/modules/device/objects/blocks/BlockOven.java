@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.api.util.DamageSources;
 import su.terrafirmagreg.modules.device.client.render.TESROven;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
-import su.terrafirmagreg.modules.device.objects.tiles.TEOven;
+import su.terrafirmagreg.modules.device.objects.tiles.TileOven;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -52,7 +52,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @SuppressWarnings("deprecation")
-public class BlockOven extends BaseBlock implements ITileBlock {
+public class BlockOven extends BaseBlock implements ITileProvider {
 
     public BlockOven() {
         super(Settings.of(Material.ROCK));
@@ -175,7 +175,7 @@ public class BlockOven extends BaseBlock implements ITileBlock {
             if (!state.getValue(LIT)) {
                 ItemStack held = player.getHeldItem(hand);
                 if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) return false;
-                TEOven te = TileUtils.getTile(world, pos, TEOven.class);
+                TileOven te = TileUtils.getTile(world, pos, TileOven.class);
                 if (te == null) return false;
                 if (isValidHorizontal(world, pos, false) && hasChimney(world, pos, false) && ItemFireStarter.onIgnition(held)) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
@@ -218,7 +218,7 @@ public class BlockOven extends BaseBlock implements ITileBlock {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.isRemote) {
             if (state.getValue(LIT) && !isValidHorizontal(worldIn, pos, false)) {
-                TEOven te = TileUtils.getTile(worldIn, pos, TEOven.class);
+                TileOven te = TileUtils.getTile(worldIn, pos, TileOven.class);
                 if (te != null) {
                     te.turnOff();
                 }
@@ -230,7 +230,7 @@ public class BlockOven extends BaseBlock implements ITileBlock {
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (state.getValue(LIT)) {
             if (!isValidHorizontal(world, pos, false)) {
-                TEOven te = TileUtils.getTile(world, pos, TEOven.class);
+                TileOven te = TileUtils.getTile(world, pos, TileOven.class);
                 if (te != null) {
                     te.turnOff();
                 }
@@ -248,7 +248,7 @@ public class BlockOven extends BaseBlock implements ITileBlock {
         IBlockState checkState = world.getBlockState(checkPos);
         if (checkState.getBlock() instanceof BlockOven && !checkState.getValue(LIT) && isValidHorizontal(world, checkPos, false) &&
                 hasChimney(world, checkPos, false)) {
-            var tile = TileUtils.getTile(world, checkPos, TEOven.class);
+            var tile = TileUtils.getTile(world, checkPos, TileOven.class);
             if (tile != null) {
                 world.setBlockState(checkPos, checkState.withProperty(LIT, true));
                 tile.setWarmed();
@@ -317,7 +317,7 @@ public class BlockOven extends BaseBlock implements ITileBlock {
 
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TEOven te = TileUtils.getTile(world, pos, TEOven.class);
+        TileOven te = TileUtils.getTile(world, pos, TileOven.class);
         if (te != null) {
             te.onBreakBlock(world, pos, state);
         }
@@ -350,7 +350,7 @@ public class BlockOven extends BaseBlock implements ITileBlock {
 
     @Override
     public Class<? extends TileEntity> getTileEntityClass() {
-        return TEOven.class;
+        return TileOven.class;
     }
 
     @Override
@@ -361,6 +361,6 @@ public class BlockOven extends BaseBlock implements ITileBlock {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TEOven();
+        return new TileOven();
     }
 }

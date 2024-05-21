@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodChest;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodChest;

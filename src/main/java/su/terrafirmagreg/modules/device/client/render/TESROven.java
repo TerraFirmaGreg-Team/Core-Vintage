@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.modules.device.objects.tiles.TEOven;
+import su.terrafirmagreg.modules.device.objects.tiles.TileOven;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -17,13 +17,13 @@ import net.minecraftforge.items.IItemHandler;
 
 import static su.terrafirmagreg.api.data.Blockstates.CURED;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
-import static su.terrafirmagreg.modules.device.objects.tiles.TEOven.*;
+import static su.terrafirmagreg.modules.device.objects.tiles.TileOven.*;
 
 @SideOnly(Side.CLIENT)
-public class TESROven extends TileEntitySpecialRenderer<TEOven> {
+public class TESROven extends TileEntitySpecialRenderer<TileOven> {
 
     @Override
-    public void render(TEOven te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileOven te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
         if (te.hasWorld()) {

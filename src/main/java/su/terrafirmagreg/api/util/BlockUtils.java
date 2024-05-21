@@ -49,12 +49,25 @@ public final class BlockUtils {
         throw new IllegalAccessError("Utility class");
     }
 
+    /**
+     * Уведомляет мир о том, что блок был обновлен.
+     *
+     * @param world мир, в котором находится блок
+     * @param pos   позиция блока
+     */
     public static void notifyBlockUpdate(World world, BlockPos pos) {
 
         IBlockState blockState = world.getBlockState(pos);
         world.notifyBlockUpdate(pos, blockState, blockState, 3);
     }
 
+    /**
+     * Проверяет, окружен ли блок только воздухом по горизонтали.
+     *
+     * @param world мир, в котором находится блок
+     * @param pos   позиция блока
+     * @return true, если блок окружен только воздухом по горизонтали, иначе false
+     */
     public static boolean isBlockSurroundedByAirHorizontal(World world, BlockPos pos) {
 
         return world.isAirBlock(pos.offset(EnumFacing.NORTH))
@@ -63,6 +76,14 @@ public final class BlockUtils {
                 && world.isAirBlock(pos.offset(EnumFacing.WEST));
     }
 
+    /**
+     * Выполняет действие для каждого блока в заданном радиусе вокруг заданной позиции.
+     *
+     * @param world  мир, в котором выполняется действие
+     * @param pos    начальная позиция
+     * @param range  радиус действия
+     * @param action действие, которое выполняется для каждого блока
+     */
     public static void forBlocksInRange(World world, BlockPos pos, int range, IBlockAction action) {
 
         int rangeSq = range * range;
@@ -87,6 +108,14 @@ public final class BlockUtils {
         }
     }
 
+    /**
+     * Выполняет действие для каждого блока в заданном радиусе вокруг заданной позиции в случайном порядке.
+     *
+     * @param world  мир, в котором выполняется действие
+     * @param pos    начальная позиция
+     * @param range  радиус действия
+     * @param action действие, которое выполняется для каждого блока
+     */
     public static void forBlocksInRangeShuffled(World world, BlockPos pos, int range, IBlockAction action) {
 
         ArrayList<BlockPos> blockList = new ArrayList<>();
@@ -109,6 +138,16 @@ public final class BlockUtils {
         }
     }
 
+    /**
+     * Выполняет действие для каждого блока в заданном кубе вокруг заданной позиции.
+     *
+     * @param world  мир, в котором выполняется действие
+     * @param pos    начальная позиция
+     * @param rangeX радиус действия по оси X
+     * @param rangeY радиус действия по оси Y
+     * @param rangeZ радиус действия по оси Z
+     * @param action действие, которое выполняется для каждого блока
+     */
     public static void forBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockAction action) {
 
         complete:
@@ -127,6 +166,16 @@ public final class BlockUtils {
         }
     }
 
+    /**
+     * Выполняет действие для каждого блока в заданном кубе вокруг заданной позиции в случайном порядке.
+     *
+     * @param world  мир, в котором выполняется действие
+     * @param pos    начальная позиция
+     * @param rangeX радиус действия по оси X
+     * @param rangeY радиус действия по оси Y
+     * @param rangeZ радиус действия по оси Z
+     * @param action действие, которое выполняется для каждого блока
+     */
     public static void forBlocksInCubeShuffled(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockAction action) {
 
         ArrayList<BlockPos> blockList = new ArrayList<>();
@@ -142,6 +191,18 @@ public final class BlockUtils {
         }
     }
 
+    /**
+     * Находит все блоки в заданном кубе и добавляет их в заданный список.
+     *
+     * @param world  мир, в котором выполняется поиск блоков
+     * @param pos    начальная позиция
+     * @param rangeX радиус действия по оси X
+     * @param rangeY радиус действия по оси Y
+     * @param rangeZ радиус действия по оси Z
+     * @param filter фильтр, который определяет, какие блоки добавляются в список
+     * @param result список, в который добавляются найденные блоки
+     * @return список найденных блоков
+     */
     public static List<BlockPos> findBlocksInCube(World world, BlockPos pos, int rangeX, int rangeY, int rangeZ, IBlockFilter filter, List<BlockPos> result) {
 
         for (int x = pos.getX() - rangeX; x <= pos.getX() + rangeX; x++) {
@@ -161,6 +222,16 @@ public final class BlockUtils {
         return result;
     }
 
+    /**
+     * Находит все блоки в заданном радиусе вокруг заданной позиции и добавляет их в заданный список.
+     *
+     * @param world  мир, в котором выполняется поиск блоков
+     * @param pos    начальная позиция
+     * @param range  радиус действия
+     * @param filter фильтр, который определяет, какие блоки добавляются в список
+     * @param result список, в который добавляются найденные блоки
+     * @return список найденных блоков
+     */
     public static List<BlockPos> findBlocksInRange(World world, BlockPos pos, int range, IBlockFilter filter, List<BlockPos> result) {
 
         int rangeSq = range * range;
@@ -185,17 +256,24 @@ public final class BlockUtils {
         return result;
     }
 
+    /**
+     * Устанавливает информацию о пожаре для блока.
+     *
+     * @param blockIn       Блок, для которого устанавливается информация о пожаре.
+     * @param encouragement Поощрение огня.
+     * @param flammability  Горючесть огня.
+     */
     public static void setFireInfo(Block blockIn, int encouragement, int flammability) {
         Blocks.FIRE.setFireInfo(blockIn, encouragement, flammability);
     }
 
     /**
-     * Checks if an ItemStack contains an ore item. This is done by checking the item extends BlockOre, or if the ore dictionary for entries that start with 'ore'. It will also
-     * check the display name of the stack to see if it has the word Ore in it.
+     * Проверяет, содержит ли ItemStack элемент руды. Это делается путем проверки элемента, расширяющего BlockOre, или наличия в словаре руд записей, начинающихся с «ore». Это
+     * также будет проверьте отображаемое имя стака, чтобы увидеть, есть ли в ней слово Ore.
      *
-     * @param stack     The ItemStack to check.
-     * @param checkName Whether or not the name of the ItemStack should be checked.
-     * @return Whether or not the ItemStack is an ore.
+     * @param stack     Стек ItemStack для проверки.
+     * @param checkName Следует ли проверять имя ItemStack.
+     * @return Является ли ItemStack рудой.
      */
     public static boolean isOre(@NotNull ItemStack stack, boolean checkName) {
 
@@ -213,10 +291,10 @@ public final class BlockUtils {
     }
 
     /**
-     * Checks if a block is a fluid or not.
+     * Проверяет, является ли блок жидкостью или нет.
      *
-     * @param block An instance of the block being checked.
-     * @return If the block is a fluid, true will be returned. If not, false will be returned.
+     * @param block Экземпляр проверяемого блока.
+     * @return Если блок представляет собой жидкость, будет возвращено значение true. Если нет, будет возвращено false.
      */
     public static boolean isFluid(Block block) {
 
@@ -224,11 +302,11 @@ public final class BlockUtils {
     }
 
     /**
-     * Checks if the fluid level is full.
+     * Проверяет, полон ли уровень жидкости.
      *
-     * @param world The world.
-     * @param pos   The position.
-     * @return Whether or not the fluid is full.
+     * @param world Мир.
+     * @param pos   Позиция.
+     * @return Независимо от того, заполнена ли жидкость.
      */
     public static boolean isFluidFull(World world, BlockPos pos) {
 
@@ -236,10 +314,10 @@ public final class BlockUtils {
     }
 
     /**
-     * Checks if the fluid level is full.
+     * Проверяет, полон ли уровень жидкости.
      *
-     * @param state The block state.
-     * @return Whether or not the fluid is full.
+     * @param state Состояние блокировки.
+     * @return Независимо от того, заполнена ли жидкость.
      */
     public static boolean isFluidFull(IBlockState state) {
 
@@ -247,11 +325,11 @@ public final class BlockUtils {
     }
 
     /**
-     * Get the fluid level.
+     * Проверьте уровень жидкости.
      *
-     * @param world The world.
-     * @param pos   The position.
-     * @return The level of the fluid. 0 is full.
+     * @param world Мир.
+     * @param pos   Позиция.
+     * @return Уровень жидкости. 0 заполнен.
      */
     public static int getFluidLevel(World world, BlockPos pos) {
 
@@ -259,10 +337,10 @@ public final class BlockUtils {
     }
 
     /**
-     * Get the fluid level.
+     * Проверьте уровень жидкости.
      *
-     * @param state The block state.
-     * @return The level of the fluid. 0 is full.
+     * @param state Состояние блокировки.
+     * @return Уровень жидкости. 0 заполнен.
      */
     public static int getFluidLevel(IBlockState state) {
 
@@ -270,11 +348,11 @@ public final class BlockUtils {
     }
 
     /**
-     * Attempts to get a fluid stack from a block pos.
+     * Попытки получить стек жидкости из поз. блока.
      *
-     * @param world The world.
-     * @param pos   The position.
-     * @return The fluid stack.
+     * @param world Мир.
+     * @param pos   Позиция.
+     * @return Жидкий стек.
      */
     public static FluidStack getFluid(World world, BlockPos pos) {
 
@@ -298,32 +376,36 @@ public final class BlockUtils {
     }
 
     /**
-     * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate allows for the specified
-     * direction!
+     * Метод подвешивания блоков, чтобы проверить, могут ли они висеть. Описание 11/10. ПРИМЕЧАНИЕ. Там, где это применимо, не забудьте проверить, допускает ли состояние блока
+     * указанное направление!
      *
-     * @param pos    position of the block that makes the check
-     * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it sticks WITH. e.g: a sign facing
-     *               north also hangs on the north side of the support block
-     * @return true if the side is solid, false otherwise.
+     * @param worldIn мир
+     * @param pos     позиция блока, который выполняет проверку
+     * @param facing  в том направлении, в котором смотрит блок. Это направление, в котором должен быть указан блок, и сторона, НА которой он висит, а не сторона, С которой он
+     *                прилипает. Например: знак, обращенный к северу также висит на северной стороне опорного блока
+     * @return true, если сторона сплошная, в противном случае — false.
      */
     public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
+
         return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
     }
 
     /**
-     * Primarily for use in placing checks. Determines a solid side for the block to attach to.
+     * В первую очередь для использования при размещении чеков. Определяет твердую сторону, к которой прикрепляется блок.
      *
-     * @param pos             position of the block/space to be checked.
-     * @param possibleSides   a list/array of all sides the block can attach to.
-     * @param preferredFacing this facing is checked first. It can be invalid or null.
-     * @return Found facing or null is none is found. This is the direction the block should be pointing and the side it stick TO, not the side it sticks WITH.
+     * @param worldIn         мир
+     * @param pos             позиция проверяемого блока/пространства.
+     * @param preferredFacing это выравнивание проверяется в первую очередь. Оно может быть недействительным или нулевым.
+     * @param possibleSides   — список/массив всех сторон, к которым может прикрепиться блок.
+     * @return Обнаружено столкновение или значение null означает, что ничего не найдено. Это направление, в котором должен быть указан блок, и сторона, К которой он прилипает, а
+     * не сторона, С которой он прилипает.
      */
     public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, EnumFacing... possibleSides) {
+
         return getASolidFacing(worldIn, pos, preferredFacing, Arrays.asList(possibleSides));
     }
 
-    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing,
-                                             Collection<EnumFacing> possibleSides) {
+    public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, Collection<EnumFacing> possibleSides) {
         if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn, pos, preferredFacing)) {
             return preferredFacing;
         }
@@ -336,11 +418,11 @@ public final class BlockUtils {
     }
 
     /**
-     * Gets the actual state of the block.
+     * Получает фактическое состояние блока.
      *
-     * @param world The world.
-     * @param pos   The position.
-     * @return The actual block state.
+     * @param world Мир.
+     * @param pos   Позиция.
+     * @return Фактическое состояние блока.
      */
     public static IBlockState getActualState(IBlockAccess world, BlockPos pos) {
 
@@ -355,6 +437,7 @@ public final class BlockUtils {
      * @return true, если свойство присутствует у блока, иначе false.
      */
     public static boolean hasProperty(IBlockState blockState, IProperty<?> property) {
+
         return blockState.getPropertyKeys().contains(property);
     }
 

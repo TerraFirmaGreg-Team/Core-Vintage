@@ -377,7 +377,8 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                            ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(
+                                    SCPacketSimpleMessage.MessageCategory.ANIMAL,
                                     ModUtils.localize("tooltip.animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                         }
                     }

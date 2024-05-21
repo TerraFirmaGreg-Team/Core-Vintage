@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRGrindstone;
 import su.terrafirmagreg.modules.device.objects.tiles.TileGrindstone;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockGrindstone extends BaseBlock implements ITileBlock {
+public class BlockGrindstone extends BaseBlock implements ITileProvider {
 
     public BlockGrindstone() {
         super(Settings.of(Material.WOOD));

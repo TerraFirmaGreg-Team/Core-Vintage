@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"bottom": "tfg:blocks/device/greenhouse/greenhouse_door_bottom"
+		"bottom": "tfg:blocks/device/greenhouse/door/bottom"
 	},
 	"elements": [
 		{

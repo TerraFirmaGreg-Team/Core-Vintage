@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
+import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;

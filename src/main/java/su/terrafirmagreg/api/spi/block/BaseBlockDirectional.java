@@ -30,7 +30,7 @@ import lombok.Getter;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockDirectional extends BlockDirectional implements ISettingsBlock {
+public abstract class BaseBlockDirectional extends BlockDirectional implements IBlockSettings {
 
     protected final Settings settings;
 

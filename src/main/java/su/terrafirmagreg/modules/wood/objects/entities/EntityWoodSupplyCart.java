@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;

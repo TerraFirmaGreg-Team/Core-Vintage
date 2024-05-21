@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -13,7 +13,7 @@ import net.minecraft.util.BlockRenderLayer;
 import lombok.Getter;
 
 @Getter
-public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock, IStateMapperProvider {
+public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock, IBlockStateProvider {
 
     private final SoilBlockVariant variant;
     private final SoilType type;

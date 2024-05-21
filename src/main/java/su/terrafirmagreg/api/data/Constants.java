@@ -45,7 +45,6 @@ public final class Constants {
     public static final String MODID_HOTORNOT = "hotornot";
     public static final String MODID_FL = "firmalife";
     public static final String MODID_AGEDDRINKS = "aged_drinks";
-    public static final String MODID_TFCAMBIENTAL = "tfcambiental";
     public static final String MODID_DDD = "deathdairydespair";
     public static final String MODID_FF = "floraefixes";
     public static final String MODID_TFCFARMING = "tfcfarming";

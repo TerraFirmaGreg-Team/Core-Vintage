@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.lib.LoggingHelper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -33,7 +32,6 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
-import net.dries007.tfc.client.gui.overlay.PlayerDataOverlay;
 import net.dries007.tfc.command.CommandDebugInfo;
 import net.dries007.tfc.command.CommandFindVeins;
 import net.dries007.tfc.command.CommandHeat;
@@ -93,7 +91,6 @@ public final class TerraFirmaCraft {
     }
 
     private final LoggingHelper log = new LoggingHelper(MODID_TFC);
-    private final boolean isSignedBuild = true;
     private WorldTypeTFC worldTypeTFC;
     private SimpleNetworkWrapper network;
 
@@ -119,11 +116,6 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        log.debug("If you can see this, debug logging is working :)");
-        if (!isSignedBuild) {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
-
         // No need to sync config here, forge magic
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TFCGuiHandler());
@@ -168,22 +160,16 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        if (!isSignedBuild) {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
 
         ItemsTFC.init();
         CapabilityFood.init();
 
         if (event.getSide().isClient()) {
             TFCKeybindings.init();
-            // Enable overlay to render health, thirst and hunger bars, TFC style.
-            // Also renders animal familiarity
-            MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
         } else {
             MinecraftServer server = FMLServerHandler.instance().getServer();
-            if (server instanceof DedicatedServer) {
-                PropertyManager settings = ((DedicatedServer) server).settings;
+            if (server instanceof DedicatedServer dedicatedServer) {
+                PropertyManager settings = dedicatedServer.settings;
                 if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
                     // This is called before vanilla defaults it, meaning we intercept it's default with ours
                     // However, we can't actually set this due to fears of overriding the existing world
@@ -203,9 +189,6 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        if (!isSignedBuild) {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
         FuelManager.postInit();
         JsonConfigRegistry.INSTANCE.postInit();
     }
@@ -219,9 +202,6 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
-        if (!isSignedBuild) {
-            log.warn("You are not running an official build. Please do not use this and then report bugs or issues.");
-        }
 
         event.registerServerCommand(new CommandStripWorld());
         event.registerServerCommand(new CommandHeat());

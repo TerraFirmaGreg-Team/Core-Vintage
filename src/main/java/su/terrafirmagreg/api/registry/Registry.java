@@ -1,9 +1,9 @@
 package su.terrafirmagreg.api.registry;
 
-import su.terrafirmagreg.api.model.CustomModelLoader;
-import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.item.IItemColorProvider;
-import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
+import su.terrafirmagreg.api.client.model.CustomModelLoader;
+import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.item.provider.IItemColorProvider;
+import su.terrafirmagreg.api.spi.item.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;

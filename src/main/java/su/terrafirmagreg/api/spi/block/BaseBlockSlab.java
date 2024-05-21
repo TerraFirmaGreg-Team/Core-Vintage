@@ -1,7 +1,8 @@
 package su.terrafirmagreg.api.spi.block;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.itemblock.BaseItemSlab;
+import su.terrafirmagreg.api.client.model.CustomStateMap;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
+import su.terrafirmagreg.api.spi.item.BaseItemSlab;
 import su.terrafirmagreg.api.util.ModelUtils;
 
 import net.minecraft.block.BlockSlab;
@@ -26,14 +27,14 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockSlab extends BlockSlab implements ISettingsBlock, IStateMapperProvider {
+public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings, IBlockStateProvider {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
     protected final Settings settings;
 
     public BaseBlockSlab(Settings settings) {
-        super(settings.material);
+        super(settings.getMaterial());
 
         this.settings = settings;
         this.useNeighborBrightness = true;

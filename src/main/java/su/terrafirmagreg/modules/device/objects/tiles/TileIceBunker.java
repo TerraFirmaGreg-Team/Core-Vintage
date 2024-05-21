@@ -1,6 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
@@ -50,10 +53,13 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.Optional;
+
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.data.Constants.MODID_CELLARS;
 
-public class TileIceBunker extends TileEntityLockableLoot implements IInventory, ITickable, IContainerProvider<ContainerIceBunker, GuiIceBunker> {
+public class TileIceBunker extends TileEntityLockableLoot
+        implements IInventory, ITickable, ITemperatureTileProvider, IContainerProvider<ContainerIceBunker, GuiIceBunker> {
 
     private final int[] entrance = new int[4];    //x, z of the first door + offsetX, offsetZ of the second door
     private final int[] size = new int[4];        //internal size, +z -x -z + x
@@ -597,5 +603,25 @@ public class TileIceBunker extends TileEntityLockableLoot implements IInventory,
     @Override
     public GuiIceBunker getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
         return new GuiIceBunker(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+    }
+
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+
+        float change = 0.0f;
+        float potency = 0.0f;
+
+        if (isComplete) {
+            if (temperature < 10) {
+                change = -2f * (12 - temperature);
+                potency = -0.5f;
+            }
+
+            if (ModifierTile.hasProtection(player)) {
+                change = change * 0.3F;
+            }
+        }
+
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
     }
 }

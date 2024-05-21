@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TileIceBunker;
@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class BlockIceBunker extends BaseBlockContainer implements ITileBlock {
+public class BlockIceBunker extends BaseBlockContainer implements ITileProvider {
 
     public BlockIceBunker() {
         super(Settings.of(Material.WOOD));

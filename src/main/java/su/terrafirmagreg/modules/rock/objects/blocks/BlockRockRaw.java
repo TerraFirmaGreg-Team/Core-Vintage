@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.client.model.CustomStateMap;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.rock.ModuleRockConfig;
@@ -34,7 +34,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.CAN_FALL;
 
 @SuppressWarnings("deprecation")
-public class BlockRockRaw extends BlockRock implements IStateMapperProvider {
+public class BlockRockRaw extends BlockRock implements IBlockStateProvider {
 
 
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */

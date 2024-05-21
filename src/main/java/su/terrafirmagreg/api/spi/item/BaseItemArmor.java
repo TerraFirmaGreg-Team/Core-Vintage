@@ -8,7 +8,7 @@ import net.minecraftforge.common.IRarity;
 
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BaseItemArmor extends ItemArmor implements ISettingsItem {
+public abstract class BaseItemArmor extends ItemArmor implements IItemSettings {
 
     protected final Settings settings;
 
@@ -20,11 +20,11 @@ public abstract class BaseItemArmor extends ItemArmor implements ISettingsItem {
         this.settings = settings;
 
         setMaxStackSize(1);
-        setTranslationKey(settings.translationKey);
+        setTranslationKey(settings.getTranslationKey());
     }
 
     @Override
     public IRarity getForgeRarity(ItemStack stack) {
-        return settings.rarity;
+        return settings.getRarity();
     }
 }

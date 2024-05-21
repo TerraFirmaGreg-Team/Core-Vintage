@@ -1,6 +1,6 @@
 package lyeoj.tfcthings.entity.living;
 
-import su.terrafirmagreg.modules.core.api.util.DamageSources;
+import su.terrafirmagreg.api.data.DamageSources;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;

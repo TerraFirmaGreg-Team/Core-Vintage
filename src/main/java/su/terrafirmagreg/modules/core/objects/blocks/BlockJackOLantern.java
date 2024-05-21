@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.material.Material;
@@ -34,7 +34,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @Getter
-public class BlockJackOLantern extends BaseBlockHorizontal implements ITileBlock {
+public class BlockJackOLantern extends BaseBlockHorizontal implements ITileProvider {
 
     private final Carving carving;
 

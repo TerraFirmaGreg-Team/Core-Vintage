@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.client.model.CustomStateMap;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -45,7 +45,7 @@ import static net.minecraft.block.BlockChest.Type.TRAP;
 import static su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants.CHEST;
 
 @Getter
-public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileBlock {
+public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileProvider {
 
     protected final Settings settings;
     private final WoodBlockVariant variant;

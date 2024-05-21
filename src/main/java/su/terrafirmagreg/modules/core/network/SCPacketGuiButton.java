@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.spi.button.IButtonHandler;
+import su.terrafirmagreg.api.spi.gui.component.button.IButtonHandler;
 import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
 
 import net.minecraft.entity.player.EntityPlayer;

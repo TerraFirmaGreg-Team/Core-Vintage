@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.api.util.DamageSources;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
@@ -64,7 +64,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @SuppressWarnings("deprecation")
-public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumerBlock, ITileBlock {
+public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumerBlock, ITileProvider {
 
     public static final PropertyEnum<FirePitAttachment> ATTACHMENT = PropertyEnum.create("attachment", FirePitAttachment.class);
 

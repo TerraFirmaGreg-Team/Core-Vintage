@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.init;
 
-import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -35,12 +35,12 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item : ModItems.ITEMS) {
-            if (item instanceof ICustomModel) {
-                ((ICustomModel) item).onModelRegister();
+            if (item instanceof IModelProvider) {
+                ((IModelProvider) item).onModelRegister();
             }
         }
         for (Block block : ModBlocks.BLOCKS) {
-            if (block instanceof ICustomModel customModel) {
+            if (block instanceof IModelProvider customModel) {
                 customModel.onModelRegister();
             }
         }

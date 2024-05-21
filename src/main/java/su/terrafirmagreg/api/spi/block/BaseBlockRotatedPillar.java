@@ -26,7 +26,7 @@ import lombok.Getter;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockRotatedPillar extends BlockRotatedPillar implements ISettingsBlock {
+public abstract class BaseBlockRotatedPillar extends BlockRotatedPillar implements IBlockSettings {
 
     protected final Settings settings;
 

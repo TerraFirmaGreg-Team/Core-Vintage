@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import lombok.Getter;
 
 @Getter
-public abstract class BaseBlockStairs extends BlockStairs implements ISettingsBlock {
+public abstract class BaseBlockStairs extends BlockStairs implements IBlockSettings {
 
     protected final Settings settings;
 

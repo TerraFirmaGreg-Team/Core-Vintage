@@ -26,7 +26,7 @@ import lombok.Getter;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockContainer extends BlockContainer implements ISettingsBlock {
+public abstract class BaseBlockContainer extends BlockContainer implements IBlockSettings {
 
     protected final Settings settings;
 

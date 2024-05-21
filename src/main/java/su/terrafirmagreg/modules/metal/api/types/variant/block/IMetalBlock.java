@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.client.model.CustomStateMap;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.spi.block.IBlockSettings;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок металла.
  */
-public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, ISettingsBlock, ICustomModel, IStateMapperProvider {
+public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IBlockSettings, IModelProvider, IBlockStateProvider {
 
     /**
      * Возвращает местоположение регистрации блока почвы.

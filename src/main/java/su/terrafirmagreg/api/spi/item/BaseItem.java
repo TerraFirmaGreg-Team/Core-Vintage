@@ -12,7 +12,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 import lombok.Getter;
 
 @Getter
-public abstract class BaseItem extends Item implements ISettingsItem {
+public abstract class BaseItem extends Item implements IItemSettings {
 
     protected final Settings settings;
 

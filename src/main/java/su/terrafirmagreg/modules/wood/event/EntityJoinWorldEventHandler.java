@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.event;
 
-import su.terrafirmagreg.modules.core.api.capabilities.pull.ProviderPull;
+import su.terrafirmagreg.api.capabilities.pull.ProviderPull;
 import su.terrafirmagreg.modules.wood.objects.entities.ai.EntityWoodAIPullCart;
 
 import net.minecraft.entity.Entity;

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
-import su.terrafirmagreg.api.model.ICustomModel;
-import su.terrafirmagreg.api.spi.item.IItemColorProvider;
-import su.terrafirmagreg.api.spi.item.ISettingsItem;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.spi.item.IItemSettings;
+import su.terrafirmagreg.api.spi.item.provider.IItemColorProvider;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс ICropItem представляет деревянный предмет.
  */
-public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>, ISettingsItem, ICustomModel, IItemColorProvider {
+public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>, IItemSettings, IModelProvider, IItemColorProvider {
 
     /**
      * Возвращает расположение в реестре для данного подтипа предмета.

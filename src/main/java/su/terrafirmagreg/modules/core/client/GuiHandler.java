@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.client;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.state.IBlockState;

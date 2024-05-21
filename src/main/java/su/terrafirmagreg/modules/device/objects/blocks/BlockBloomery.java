@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
@@ -40,7 +40,7 @@ import java.util.function.Predicate;
 import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
-public class BlockBloomery extends BaseBlock implements ITileBlock {
+public class BlockBloomery extends BaseBlock implements ITileProvider {
 
     //[horizontal index][basic shape / door1 / door2]
     private static final AxisAlignedBB[][] AABB =

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;

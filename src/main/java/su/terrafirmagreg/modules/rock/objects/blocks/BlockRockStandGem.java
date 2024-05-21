@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -32,7 +32,7 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 import static su.terrafirmagreg.api.data.Blockstates.UP;
 
 @SuppressWarnings("deprecation")
-public class BlockRockStandGem extends BlockRock implements ITileBlock {
+public class BlockRockStandGem extends BlockRock implements ITileProvider {
 
     public BlockRockStandGem(RockBlockVariant variant, RockType type) {
         super(variant, type);

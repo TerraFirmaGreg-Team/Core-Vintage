@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TileInductionCrucible;
 
@@ -36,7 +36,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockInductionCrucible extends BaseBlock implements ITileBlock {
+public class BlockInductionCrucible extends BaseBlock implements ITileProvider {
 
     private static final AxisAlignedBB CRUCIBLE_AABB = new AxisAlignedBB(0.0625, 0, 0.0625, 0.9375, 0.9375, 0.9375);
     private static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.9375D, 0.125D, 0.9375D);
@@ -58,7 +58,7 @@ public class BlockInductionCrucible extends BaseBlock implements ITileBlock {
                 .nonCanStack()
                 .nonOpaque()
                 .hardness(3.0f);
-        
+
         setHarvestLevel("pickaxe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)

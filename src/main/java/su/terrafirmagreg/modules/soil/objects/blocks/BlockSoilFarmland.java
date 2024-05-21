@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.client.model.CustomStateMap;
+import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -40,7 +40,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlockColorProvider, IStateMapperProvider {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlockColorProvider, IBlockStateProvider {
 
     public static final int[] TINT = new int[] {
             0xffffffff,

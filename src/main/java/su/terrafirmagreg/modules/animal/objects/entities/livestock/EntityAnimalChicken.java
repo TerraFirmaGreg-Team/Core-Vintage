@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.animal.init.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIFindNest;
-import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;

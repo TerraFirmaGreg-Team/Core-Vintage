@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.items;
 
-import su.terrafirmagreg.api.model.ICustomModel;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
 
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -8,7 +8,7 @@ import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.init.ModItems;
 
-public class ItemPotteryCA extends ItemPottery implements ICustomModel {
+public class ItemPotteryCA extends ItemPottery implements IModelProvider {
 
     public ItemPotteryCA(String name) {
         super();

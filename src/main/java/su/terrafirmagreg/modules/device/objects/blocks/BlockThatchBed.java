@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.spi.block.IBlockSettings;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -37,7 +37,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockThatchBed extends BlockBed implements ISettingsBlock, IStateMapperProvider {
+public class BlockThatchBed extends BlockBed implements IBlockSettings, IBlockStateProvider {
 
     protected final Settings settings;
 

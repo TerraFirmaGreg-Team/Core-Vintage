@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -46,7 +46,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockLogPile extends BaseBlockContainer implements ITileBlock {
+public class BlockLogPile extends BaseBlockContainer implements ITileProvider {
 
     private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis",
             EnumFacing.Axis.class,

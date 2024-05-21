@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TileAlloyCalculator;
 
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockAlloyCalculator extends BaseBlockContainer implements ITileBlock {
+public class BlockAlloyCalculator extends BaseBlockContainer implements ITileProvider {
 
     private static final AxisAlignedBB BOUNDS_NS = new AxisAlignedBB(3 / 16d, 0, 5 / 16d, 13 / 16d, 4 / 16d, 11 / 16d);
     private static final AxisAlignedBB BOUNDS_WE = new AxisAlignedBB(5 / 16d, 0, 3 / 16d, 11 / 16d, 4 / 16d, 13 / 16d);
@@ -39,7 +39,7 @@ public class BlockAlloyCalculator extends BaseBlockContainer implements ITileBlo
         getSettings()
                 .registryKey("device/alloy_calculator")
                 .nonCube();
-        
+
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
     }

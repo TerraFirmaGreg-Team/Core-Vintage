@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.spi.block;
 
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
 
 import net.minecraft.block.Block;
@@ -27,7 +28,7 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @Getter
-public abstract class BaseBlockWall extends BlockWall implements ISettingsBlock, IStateMapperProvider {
+public abstract class BaseBlockWall extends BlockWall implements IBlockSettings, IBlockStateProvider {
 
     protected final Settings settings;
     private final Block modelBlock;

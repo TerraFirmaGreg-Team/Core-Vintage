@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.container;
 
-import su.terrafirmagreg.api.spi.button.IButtonHandler;
-import su.terrafirmagreg.api.spi.container.BaseContainerItemStack;
+import su.terrafirmagreg.api.spi.gui.component.button.IButtonHandler;
+import su.terrafirmagreg.api.spi.gui.container.BaseContainerItemStack;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.entity.player.EntityPlayer;

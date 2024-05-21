@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalHare;
@@ -49,7 +49,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
-public class BlockSnare extends BaseBlock implements ITileBlock {
+public class BlockSnare extends BaseBlock implements ITileProvider {
 
     protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 

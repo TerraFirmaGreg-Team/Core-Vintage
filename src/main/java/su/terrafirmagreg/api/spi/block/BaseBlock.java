@@ -26,12 +26,12 @@ import lombok.Getter;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlock extends Block implements ISettingsBlock {
+public abstract class BaseBlock extends Block implements IBlockSettings {
 
     protected final Settings settings;
 
     public BaseBlock(Settings settings) {
-        super(settings.material, settings.material.getMaterialMapColor());
+        super(settings.getMaterial(), settings.getMaterial().getMaterialMapColor());
 
         this.settings = settings;
     }

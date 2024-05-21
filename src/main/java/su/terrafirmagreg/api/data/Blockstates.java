@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.data;
 
-import su.terrafirmagreg.api.model.property.PropertyObject;
+import su.terrafirmagreg.api.client.property.PropertyObject;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;

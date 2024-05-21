@@ -132,7 +132,7 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 
-import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 
 
 import java.util.ArrayList;

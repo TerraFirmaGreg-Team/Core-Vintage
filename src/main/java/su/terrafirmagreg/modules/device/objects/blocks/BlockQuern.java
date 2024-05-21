@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRQuern;
 import su.terrafirmagreg.modules.device.objects.tiles.TileQuern;
@@ -41,7 +41,7 @@ import java.util.List;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileQuern.SLOT_HANDSTONE;
 
 @SuppressWarnings("deprecation")
-public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileBlock {
+public class BlockQuern extends BaseBlock implements IHighlightHandler, ITileProvider {
 
     private static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.625D, 1D);
     private static final AxisAlignedBB QUERN_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.875D, 1D);

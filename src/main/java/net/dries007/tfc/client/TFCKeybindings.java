@@ -59,8 +59,8 @@ public class TFCKeybindings {
     public static void onKeyEvent(GuiScreenEvent.KeyboardInputEvent.Pre event) {
         //Only handle when key was pressed, ignore release and hold
         if (!Keyboard.isRepeatEvent() && Keyboard.getEventKeyState() && Keyboard.getEventKey() == STACK_FOOD.getKeyCode()) {
-            if (event.getGui() instanceof GuiContainer) {
-                Slot slotUnderMouse = ((GuiContainer) event.getGui()).getSlotUnderMouse();
+            if (event.getGui() instanceof GuiContainer gui) {
+                Slot slotUnderMouse = gui.getSlotUnderMouse();
                 if (slotUnderMouse != null) {
                     TerraFirmaCraft.getNetwork().sendToServer(new PacketStackFood(slotUnderMouse.slotNumber));
                 }

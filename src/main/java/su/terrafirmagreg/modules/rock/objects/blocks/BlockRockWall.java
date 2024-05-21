@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
@@ -26,7 +26,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class BlockRockWall extends BaseBlockWall implements IRockBlock, IStateMapperProvider {
+public class BlockRockWall extends BaseBlockWall implements IRockBlock, IBlockStateProvider {
 
     private final RockBlockVariant variant;
     private final RockType type;

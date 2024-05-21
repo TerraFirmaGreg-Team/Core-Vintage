@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -9,10 +12,12 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockMolten;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -33,12 +38,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("WeakerAccess")
-public class TileBloomery extends TETickableInventory implements ITickable {
+public class TileBloomery extends TETickableInventory implements ITickable, ITemperatureTileProvider {
 
     // Gets the internal block, should be charcoal pile/bloom
     private static final Vec3i OFFSET_INTERNAL = new Vec3i(1, 0, 0);
@@ -324,4 +330,13 @@ public class TileBloomery extends TETickableInventory implements ITickable {
         }
     }
 
+    @Override
+    public Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile) {
+        float change = this.getRemainingTicks() > 0 ? 4f : 0f;
+        float potency = change;
+        if (ModifierTile.hasProtection(player)) {
+            change = 1.0F;
+        }
+        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+    }
 }

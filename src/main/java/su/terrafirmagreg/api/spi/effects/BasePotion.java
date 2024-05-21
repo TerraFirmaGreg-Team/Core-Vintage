@@ -36,7 +36,7 @@ public abstract class BasePotion extends Potion {
     }
 
     protected void formatTexture(String icon) {
-        this.texture = ModUtils.id("textures/potions/" + icon + ".png");
+        this.texture = ModUtils.id("textures/gui/icons/potion/" + icon + ".png");
     }
 
     @Override

@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.spi.gui.IContainerProvider;
+import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.core.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.device.client.gui.GuiNestBox;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerNestBox;
 

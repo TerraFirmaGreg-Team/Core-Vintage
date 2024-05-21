@@ -1,16 +1,16 @@
 package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.lib.LootBuilder;
-import su.terrafirmagreg.api.model.ICustomModel;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
-import su.terrafirmagreg.api.spi.block.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.block.ISettingsBlock;
-import su.terrafirmagreg.api.spi.block.IStateMapperProvider;
-import su.terrafirmagreg.api.spi.item.IItemColorProvider;
-import su.terrafirmagreg.api.spi.item.IItemMeshProvider;
-import su.terrafirmagreg.api.spi.item.IOreDictProvider;
-import su.terrafirmagreg.api.spi.item.ISettingsItem;
-import su.terrafirmagreg.api.spi.tile.ITileBlock;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.registry.provider.IOreDictProvider;
+import su.terrafirmagreg.api.spi.block.IBlockSettings;
+import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
+import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
+import su.terrafirmagreg.api.spi.item.IItemSettings;
+import su.terrafirmagreg.api.spi.item.provider.IItemColorProvider;
+import su.terrafirmagreg.api.spi.item.provider.IItemMeshProvider;
+import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 
@@ -117,7 +117,7 @@ public class RegistryManager {
     /**
      * A list of all the tile providers registered here.
      */
-    private final List<ITileBlock> tileProviders = NonNullList.create();
+    private final List<ITileProvider> tileProviders = NonNullList.create();
 
     /**
      * A list of all enchantments registered.
@@ -127,12 +127,12 @@ public class RegistryManager {
     /**
      * A list of all the custom stateMapper.
      */
-    private final List<IStateMapperProvider> customStateMapper = NonNullList.create();
+    private final List<IBlockStateProvider> customStateMapper = NonNullList.create();
 
     /**
      * A list of all the custom models.
      */
-    private final List<ICustomModel> customModel = NonNullList.create();
+    private final List<IModelProvider> customModel = NonNullList.create();
 
     /**
      * A list of all the custom mesh definitions.
@@ -208,13 +208,13 @@ public class RegistryManager {
 
     public <T extends Block> void registerBlocks(Collection<T> collection) {
         for (var block : collection) {
-            if (block instanceof ISettingsBlock provider) {
+            if (block instanceof IBlockSettings provider) {
                 this.registerBlock(provider.getBlock(), provider.getItemBlock(), provider.getName());
             }
         }
     }
 
-    public <B extends Block & ISettingsBlock> B registerBlock(B provider) {
+    public <B extends Block & IBlockSettings> B registerBlock(B provider) {
         return this.registerBlock(provider, provider.getItemBlock(), provider.getName());
     }
 
@@ -237,11 +237,11 @@ public class RegistryManager {
             this.registerItem(itemBlock, name);
             if (block instanceof IOreDictProvider oreDict) this.oreDicts.add(oreDict);
         }
-        if (block instanceof ITileBlock te) this.tileProviders.add(te);
+        if (block instanceof ITileProvider te) this.tileProviders.add(te);
 
         if (GameUtils.isClient()) {
-            if (block instanceof IStateMapperProvider state) this.customStateMapper.add(state);
-            if (block instanceof ICustomModel blockModel) this.customModel.add(blockModel);
+            if (block instanceof IBlockStateProvider state) this.customStateMapper.add(state);
+            if (block instanceof IModelProvider blockModel) this.customModel.add(blockModel);
             else this.registerClientModel(() -> ModelUtils.registerBlockInventoryModel(block));
 
             if (block instanceof IBlockColorProvider) this.coloredBlocks.add(block);
@@ -255,13 +255,13 @@ public class RegistryManager {
 
     public <T extends Item> void registerItems(Collection<T> collection) {
         for (var item : collection) {
-            if (item instanceof ISettingsItem provider) {
+            if (item instanceof IItemSettings provider) {
                 this.registerItem(item, provider.getName());
             }
         }
     }
 
-    public <T extends Item & ISettingsItem> T registerItem(T item) {
+    public <T extends Item & IItemSettings> T registerItem(T item) {
         return this.registerItem(item, item.getName());
     }
 
@@ -282,7 +282,7 @@ public class RegistryManager {
         if (item instanceof IOreDictProvider oreDict) this.oreDicts.add(oreDict);
 
         if (GameUtils.isClient()) {
-            if (item instanceof ICustomModel itemModel) this.customModel.add(itemModel);
+            if (item instanceof IModelProvider itemModel) this.customModel.add(itemModel);
             else if (!(item instanceof ItemBlock)) this.registerClientModel(() -> ModelUtils.registerInventoryModel(item));
 
             if (item instanceof IItemColorProvider) this.coloredItems.add(item);
@@ -576,7 +576,7 @@ public class RegistryManager {
     //region ===== Models
 
     @SideOnly(Side.CLIENT)
-    public void registerClientModel(ICustomModel model) {
+    public void registerClientModel(IModelProvider model) {
         this.customModel.add(model);
 
     }

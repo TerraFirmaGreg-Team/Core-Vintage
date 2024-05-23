@@ -21,7 +21,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
-import static su.terrafirmagreg.modules.rock.ModuleRock.LOGGER;
 
 /**
  * Класс, представляющий тип блока породы.
@@ -31,7 +30,6 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
     private static final Set<RockBlockVariant> ROCK_BLOCK_VARIANTS = new ObjectOpenHashSet<>();
     private static final AtomicInteger idCounter = new AtomicInteger(16);
-
     private final String name;
     private final float baseHardness;
     private final Specification specification;
@@ -53,7 +51,8 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
             if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), create(type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 
-            if (builder.hasStoneType) createStoneType(idCounter.getAndIncrement(), type);
+            if (builder.hasStoneType) createStoneType(idCounter.get(), type);
+
         }
     }
 
@@ -72,10 +71,6 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
         throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
     }
 
-    //    public Block get(RockType type) {
-    //        return BlocksRock.ROCK_BLOCKS2.get(this).get(type);
-    //    }
-
     @Override
     public String toString() {
         return name;
@@ -90,16 +85,12 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
     }
 
     public void createStoneType(int id, RockType type) {
-        if (type.getMaterial() == null) {
-            LOGGER.warn("Material is null: " + type);
-        } else {
-            LOGGER.warn("Material is not null: " + type);
-            new StoneType(id, type + "_" + this.name, SoundType.STONE,
-                    type.getOrePrefix(), type.getMaterial(),
-                    () -> this.get(type).getDefaultState(),
-                    state -> state.getBlock() == this.get(type), false
-            );
-        }
+        new StoneType(id, type + "_" + this.name, SoundType.STONE,
+                type.getOrePrefix(), type.getMaterial(),
+                () -> this.get(type).getDefaultState(),
+                state -> state.getBlock() == this.get(type), false
+        );
+        idCounter.incrementAndGet();
 
     }
 

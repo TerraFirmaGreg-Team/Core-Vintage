@@ -5,10 +5,12 @@ import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
+import su.terrafirmagreg.modules.rock.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
@@ -28,7 +30,9 @@ public final class ModuleRock extends ModuleBase {
 
     public ModuleRock() {
         this.enableAutoRegistry(ROCK_TAB);
-        //MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());
+
+        MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());
+
     }
 
     @Override

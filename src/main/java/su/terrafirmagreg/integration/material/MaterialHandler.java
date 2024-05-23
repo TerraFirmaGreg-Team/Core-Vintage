@@ -7,11 +7,12 @@ import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.util.GTUtility;
 
 import static su.terrafirmagreg.integration.material.Materials.*;
+import static su.terrafirmagreg.modules.core.ModuleCore.LOGGER;
 
-public class MaterialHandler {
+public final class MaterialHandler {
 
     public static void init() {
-
+        LOGGER.info("Registered materials");
         // Metals
         Unknown = new Material.Builder(32000, GTUtility.gregtechId("unknown"))
                 .ingot()

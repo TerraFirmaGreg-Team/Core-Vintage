@@ -85,10 +85,10 @@ public class ItemCrown extends ItemArmor implements IItemSize, IDamageResistance
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (gem == null) {
-            tooltip.add(I18n.format("tfcthings.tooltip.crown.gem.empty", new Object[0]));
-            tooltip.add(I18n.format("tfcthings.tooltip.crown.missing", new Object[0]));
+            tooltip.add(I18n.format("tfcthings.tooltip.crown.gem.empty"));
+            tooltip.add(I18n.format("tfcthings.tooltip.crown.missing"));
         } else {
-            String gemName = I18n.format(ItemGem.get(gem).getTranslationKey() + ".normal.name", new Object[0]);
+            String gemName = I18n.format(ItemGem.get(gem).getTranslationKey() + ".normal.name");
             tooltip.add(I18n.format("tfcthings.tooltip.crown.gem", gemName));
         }
         super.addInformation(stack, worldIn, tooltip, flagIn);

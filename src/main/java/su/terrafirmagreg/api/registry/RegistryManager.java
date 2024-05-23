@@ -206,12 +206,13 @@ public class RegistryManager {
 
     //region ===== Block
 
-    public <T extends Block> void registerBlocks(Collection<T> collection) {
+    public <T extends Block> Collection<T> registerBlocks(Collection<T> collection) {
         for (var block : collection) {
             if (block instanceof IBlockSettings provider) {
                 this.registerBlock(provider.getBlock(), provider.getItemBlock(), provider.getName());
             }
         }
+        return collection;
     }
 
     public <B extends Block & IBlockSettings> B registerBlock(B provider) {

@@ -9,10 +9,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import gregtech.api.unification.material.event.MaterialEvent;
 
+@SuppressWarnings("unused")
 public final class MaterialEventHandler {
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void on(MaterialEvent event) {
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void registerMaterials(MaterialEvent event) {
 
         MaterialRockHandler.init();
         ModuleRock.LOGGER.info("Registered materials");

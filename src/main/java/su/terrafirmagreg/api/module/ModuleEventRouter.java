@@ -55,26 +55,29 @@ public class ModuleEventRouter {
 
                             module.getLogger().debug("Construction start");
                             module.onConstruction(event);
+
                             module.getLogger().debug("Construction complete");
                         })
         );
         this.routes.put(FMLPreInitializationEvent.class,
                 (IFMLStateEventRoute<FMLPreInitializationEvent>) (event) ->
                         this.fireEvent(module -> {
+                            module.getLogger().debug("Pre-Init start");
+                            module.onPreInit(event);
+
                             module.getLogger().debug("Registering");
                             module.onRegister();
 
-                            module.getLogger().debug("Pre-Init start");
-                            module.onPreInit(event);
                             module.getLogger().debug("Pre-Init complete");
 
                             if (event.getSide().isClient()) {
                                 module.getLogger().debug("Client Pre-Init start");
                                 module.onClientPreInit(event);
-                                module.getLogger().debug("Client Pre-Init complete");
 
                                 module.getLogger().debug("Client Registering");
                                 module.onClientRegister();
+
+                                module.getLogger().debug("Client Pre-Init complete");
                             }
                         })
         );

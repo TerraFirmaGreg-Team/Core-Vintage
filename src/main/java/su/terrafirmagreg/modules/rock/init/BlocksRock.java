@@ -21,7 +21,6 @@ import java.util.Map;
 public final class BlocksRock {
 
     public static final Map<Pair<RockBlockVariant, RockType>, Block> ROCK_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
-    public static final Map<RockBlockVariant, Map<RockType, Block>> ROCK_BLOCKS2 = new Object2ObjectLinkedOpenHashMap<>();
     public static final Map<Pair<RockBlockVariant, EnumDyeColor>, BlockRockDecorative> ALABASTER_COLOR_BLOCKS = new Object2ObjectLinkedOpenHashMap<>();
 
     public static BlockAlabasterBricks ALABASTER_BRICKS;

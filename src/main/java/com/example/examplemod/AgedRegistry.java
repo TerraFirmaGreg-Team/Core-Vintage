@@ -44,7 +44,7 @@ public class AgedRegistry {
             if (AgedDrinksConfig.General.enableDrunkness) {
                 if (Math.random() < 0.25) {
                     PotionEffect effect = new PotionEffect(MobEffects.NAUSEA, 1500, 0, false, false);
-                    effect.setCurativeItems(new ArrayList<ItemStack>());
+                    effect.setCurativeItems(new ArrayList<>());
                     player.addPotionEffect(effect);
                 }
             }

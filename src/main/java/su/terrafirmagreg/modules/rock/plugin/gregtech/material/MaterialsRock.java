@@ -5,9 +5,6 @@ import gregtech.api.unification.material.Material;
 public class MaterialsRock {
 
     // Igneous Intrusive
-    public static Material GraniteRed;
-    public static Material Granite;
-    public static Material Diorite;
     public static Material Gabbro;
     public static Material Breccia;
     public static Material Foidolite;
@@ -31,8 +28,6 @@ public class MaterialsRock {
     public static Material BlackbandIronstone;
 
     // Igneous Extrusive
-    public static Material Andesite;
-    public static Material Basalt;
     public static Material Rhyolite;
     public static Material Dacite;
     public static Material Porphyry;
@@ -42,13 +37,10 @@ public class MaterialsRock {
     public static Material Carbonatite;
 
     // Metamorphic
-    public static Material Quartzite;
-    public static Material Marble;
     public static Material Slate;
     public static Material Phyllite;
     public static Material Schist;
     public static Material Gneiss;
-    public static Material Soapstone;
     public static Material Blueschist;
     public static Material Catlinite;
     public static Material Greenschist;

@@ -113,32 +113,17 @@ public class BlockRockVariant extends Block implements IItemSize {
     }
 
     public static BlockRockVariant create(Rock rock, Rock.Type type) {
-        switch (type) {
-            case RAW:
-                return new BlockRockRaw(type, rock);
-            case SMOOTH:
-                return new BlockRockSmooth(type, rock);
-            case ANVIL:
-                return new BlockStoneAnvil(type, rock);
-            case SPIKE:
-                return new BlockRockSpike(type, rock);
-            case FARMLAND:
-                return new BlockFarmlandTFC(type, rock);
-            case PATH:
-                return new BlockPathTFC(type, rock);
-            case GRASS:
-            case DRY_GRASS:
-            case CLAY_GRASS:
-                return new BlockRockVariantConnected(type, rock);
-            case SAND:
-            case DIRT:
-            case CLAY:
-            case GRAVEL:
-            case COBBLE:
-                return new BlockRockVariantFallable(type, rock);
-            default:
-                return new BlockRockVariant(type, rock);
-        }
+        return switch (type) {
+            case RAW -> new BlockRockRaw(type, rock);
+            case SMOOTH -> new BlockRockSmooth(type, rock);
+            case ANVIL -> new BlockStoneAnvil(type, rock);
+            case SPIKE -> new BlockRockSpike(type, rock);
+            case FARMLAND -> new BlockFarmlandTFC(type, rock);
+            case PATH -> new BlockPathTFC(type, rock);
+            case GRASS, DRY_GRASS, CLAY_GRASS -> new BlockRockVariantConnected(type, rock);
+            case SAND, DIRT, CLAY, GRAVEL, COBBLE -> new BlockRockVariantFallable(type, rock);
+            default -> new BlockRockVariant(type, rock);
+        };
     }
 
     public BlockRockVariant getVariant(Rock.Type t) {
@@ -163,14 +148,11 @@ public class BlockRockVariant extends Block implements IItemSize {
                         Block block = state.getBlock();
                         if (state.isOpaqueCube()) return false;
                         if (block instanceof BlockFarmland || block instanceof BlockGrassPath) return false;
-                        if (block instanceof BlockRockVariant) {
-                            switch (((BlockRockVariant) block).type) {
-                                case FARMLAND:
-                                case PATH:
-                                    return false;
-                                default:
-                                    return true;
-                            }
+                        if (block instanceof BlockRockVariant blockRockVariant) {
+                            return switch (blockRockVariant.type) {
+                                case FARMLAND, PATH -> false;
+                                default -> true;
+                            };
                         }
                         return true;
                     case DOWN:
@@ -190,20 +172,12 @@ public class BlockRockVariant extends Block implements IItemSize {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        switch (type) {
-            case RAW:
-            case SPIKE:
-                return ItemRock.get(rock);
-            case CLAY:
-            case CLAY_GRASS:
-                return Items.CLAY_BALL;
-            default:
-                return super.getItemDropped(state, rand, fortune);
-            case GRASS:
-            case DRY_GRASS:
-            case PATH:
-                return Item.getItemFromBlock(get(rock, Rock.Type.DIRT));
-        }
+        return switch (type) {
+            case RAW, SPIKE -> ItemRock.get(rock);
+            case CLAY, CLAY_GRASS -> Items.CLAY_BALL;
+            default -> super.getItemDropped(state, rand, fortune);
+            case GRASS, DRY_GRASS, PATH -> Item.getItemFromBlock(get(rock, Rock.Type.DIRT));
+        };
     }
 
     @Override
@@ -219,16 +193,11 @@ public class BlockRockVariant extends Block implements IItemSize {
 
     @Override
     public int quantityDropped(IBlockState state, int fortune, Random random) {
-        switch (type) {
-            case CLAY:
-            case CLAY_GRASS:
-                return 4;
-            case RAW:
-            case SPIKE:
-                return 1 + random.nextInt(3);
-            default:
-                return super.quantityDropped(state, fortune, random);
-        }
+        return switch (type) {
+            case CLAY, CLAY_GRASS -> 4;
+            case RAW, SPIKE -> 1 + random.nextInt(3);
+            default -> super.quantityDropped(state, fortune, random);
+        };
     }
 
     @Override

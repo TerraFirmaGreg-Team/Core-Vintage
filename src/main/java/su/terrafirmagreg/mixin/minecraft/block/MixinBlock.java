@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.spi.block.IBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -22,8 +23,10 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 import lombok.Getter;
@@ -34,8 +37,13 @@ import javax.annotation.Nullable;
 @Mixin(value = Block.class, remap = false)
 public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockSettings {
 
+
+    @Final
+    @Shadow
+    protected Material material;
+
     @Unique
-    protected final Settings settings = Settings.of();
+    protected final Settings settings = Settings.of(material);
 
     /**
      * @author Xikaro

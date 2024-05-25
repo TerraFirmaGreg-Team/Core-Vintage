@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.spi.item.provider;
+package su.terrafirmagreg.api.registry.provider;
 
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraftforge.fml.relauncher.Side;

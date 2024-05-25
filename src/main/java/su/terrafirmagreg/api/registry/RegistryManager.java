@@ -2,17 +2,10 @@ package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
-import su.terrafirmagreg.api.registry.provider.IModelProvider;
 import su.terrafirmagreg.api.registry.provider.IOreDictProvider;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
-import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.item.IItemSettings;
-import su.terrafirmagreg.api.spi.item.provider.IItemColorProvider;
-import su.terrafirmagreg.api.spi.item.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
-import su.terrafirmagreg.api.util.GameUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.settings.KeyBinding;
@@ -21,7 +14,6 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -41,14 +33,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -73,6 +62,11 @@ public class RegistryManager {
      * A list of all blocks registered by the helper.
      */
     private final NonNullList<Block> blocks = NonNullList.create();
+
+    /**
+     * A list of all the tile providers registered here.
+     */
+    private final NonNullList<ITileProvider> tiles = NonNullList.create();
 
     /**
      * A list of all potions registered by the helper.
@@ -115,39 +109,9 @@ public class RegistryManager {
     private final Multimap<ResourceLocation, LootBuilder> lootTableEntries = HashMultimap.create();
 
     /**
-     * A list of all the tile providers registered here.
-     */
-    private final List<ITileProvider> tileProviders = NonNullList.create();
-
-    /**
      * A list of all enchantments registered.
      */
     private final List<Enchantment> enchantments = NonNullList.create();
-
-    /**
-     * A list of all the custom stateMapper.
-     */
-    private final List<IBlockStateProvider> customStateMapper = NonNullList.create();
-
-    /**
-     * A list of all the custom models.
-     */
-    private final List<IModelProvider> customModel = NonNullList.create();
-
-    /**
-     * A list of all the custom mesh definitions.
-     */
-    private final List<Item> customMeshes = NonNullList.create();
-
-    /**
-     * A list of all the colored items registered here.
-     */
-    private final List<Item> coloredItems = NonNullList.create();
-
-    /**
-     * A list of all the colored blocks registered here.
-     */
-    private final List<Block> coloredBlocks = NonNullList.create();
 
     /**
      * A list of all the oreDict registered here.
@@ -172,6 +136,7 @@ public class RegistryManager {
      * @param tab The tab for the registry helper.
      */
     public RegistryManager(@Nullable CreativeTabs tab, String modID) {
+
         this.modID = modID;
         this.tab = tab;
     }
@@ -209,14 +174,16 @@ public class RegistryManager {
     public <T extends Block> Collection<T> registerBlocks(Collection<T> collection) {
         for (var block : collection) {
             if (block instanceof IBlockSettings provider) {
-                this.registerBlock(provider.getBlock(), provider.getItemBlock(), provider.getName());
+                this.registerBlock(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
             }
+
         }
         return collection;
     }
 
     public <B extends Block & IBlockSettings> B registerBlock(B provider) {
-        return this.registerBlock(provider, provider.getItemBlock(), provider.getName());
+
+        return this.registerBlock(provider, provider.getItemBlock(), provider.getRegistryKey());
     }
 
     /**
@@ -226,7 +193,7 @@ public class RegistryManager {
      * @param itemBlock The ItemBlock for the block.
      * @param name      The name to register the block with.
      */
-    public <B extends Block, I extends Item> @NotNull B registerBlock(@NotNull B block, @Nullable I itemBlock, @NotNull String name) {
+    public <B extends Block, I extends Item> B registerBlock(B block, @Nullable I itemBlock, String name) {
 
         block.setRegistryName(this.modID, name);
         block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -234,19 +201,8 @@ public class RegistryManager {
 
         this.blocks.add(block);
 
-        if (itemBlock != null) {
-            this.registerItem(itemBlock, name);
-            if (block instanceof IOreDictProvider oreDict) this.oreDicts.add(oreDict);
-        }
-        if (block instanceof ITileProvider te) this.tileProviders.add(te);
-
-        if (GameUtils.isClient()) {
-            if (block instanceof IBlockStateProvider state) this.customStateMapper.add(state);
-            if (block instanceof IModelProvider blockModel) this.customModel.add(blockModel);
-            else this.registerClientModel(() -> ModelUtils.registerBlockInventoryModel(block));
-
-            if (block instanceof IBlockColorProvider) this.coloredBlocks.add(block);
-        }
+        if (itemBlock != null) this.registerItem(itemBlock, name);
+        if (block instanceof ITileProvider tile) this.tiles.add(tile);
         return block;
     }
 
@@ -257,13 +213,13 @@ public class RegistryManager {
     public <T extends Item> void registerItems(Collection<T> collection) {
         for (var item : collection) {
             if (item instanceof IItemSettings provider) {
-                this.registerItem(item, provider.getName());
+                this.registerItem(item, provider.getRegistryKey());
             }
         }
     }
 
     public <T extends Item & IItemSettings> T registerItem(T item) {
-        return this.registerItem(item, item.getName());
+        return this.registerItem(item, item.getRegistryKey());
     }
 
     /**
@@ -272,24 +228,13 @@ public class RegistryManager {
      * @param item The item to register.
      * @param name The name to register the item with.
      */
-    public <T extends Item> T registerItem(@NotNull T item, @NotNull String name) {
+    public <T extends Item> T registerItem(T item, String name) {
 
         item.setRegistryName(this.modID, name);
         item.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
         if (this.tab != null) item.setCreativeTab(this.tab);
 
         this.items.add(item);
-
-        if (item instanceof IOreDictProvider oreDict) this.oreDicts.add(oreDict);
-
-        if (GameUtils.isClient()) {
-            if (item instanceof IModelProvider itemModel) this.customModel.add(itemModel);
-            else if (!(item instanceof ItemBlock)) this.registerClientModel(() -> ModelUtils.registerInventoryModel(item));
-
-            if (item instanceof IItemColorProvider) this.coloredItems.add(item);
-            if (item instanceof IItemMeshProvider) this.customMeshes.add(item);
-
-        }
         return item;
     }
 
@@ -297,13 +242,13 @@ public class RegistryManager {
 
     //region ===== Potions
 
-    public Potion registerPotion(@NotNull String name, @NotNull Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
+    public Potion registerPotion(String name, Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
 
         potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
         return this.registerPotion(name, potion);
     }
 
-    public Potion registerPotion(@NotNull String name, @NotNull Potion potion) {
+    public Potion registerPotion(String name, Potion potion) {
         potion.setRegistryName(this.modID, name);
         potion.setPotionName(this.modID + ".effect." + name.toLowerCase().replace("_", "."));
         this.potions.add(potion);
@@ -314,13 +259,13 @@ public class RegistryManager {
 
     //region ===== Potion Types
 
-    public PotionType registerPotionType(@NotNull String name, @NotNull Potion potion, int duration) {
+    public PotionType registerPotionType(String name, Potion potion, int duration) {
 
         var potionType = new PotionType(new PotionEffect(potion, duration));
         return registerPotionType(name, potionType);
     }
 
-    public PotionType registerPotionType(@NotNull String name, @NotNull PotionType potionType) {
+    public PotionType registerPotionType(String name, PotionType potionType) {
 
         potionType.setRegistryName(this.modID, name);
         this.potionType.add(potionType);
@@ -574,13 +519,4 @@ public class RegistryManager {
 
     //endregion
 
-    //region ===== Models
-
-    @SideOnly(Side.CLIENT)
-    public void registerClientModel(IModelProvider model) {
-        this.customModel.add(model);
-
-    }
-
-    //endregion
 }

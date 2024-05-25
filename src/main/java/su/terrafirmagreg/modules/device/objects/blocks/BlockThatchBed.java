@@ -1,10 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
@@ -12,7 +10,6 @@ import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -37,7 +34,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockThatchBed extends BlockBed implements IBlockSettings, IBlockStateProvider {
+public class BlockThatchBed extends BlockBed implements IBlockSettings {
 
     protected final Settings settings;
 
@@ -45,6 +42,7 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings, IBlockSt
 
         this.settings = Settings.of(Material.CLOTH)
                 .registryKey("device/thatch_bed")
+                .ignoresProperties(OCCUPIED)
                 .soundType(SoundType.CLOTH)
                 .hardness(0.6F);
 
@@ -122,11 +120,6 @@ public class BlockThatchBed extends BlockBed implements IBlockSettings, IBlockSt
     @Override
     public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity player) {
         return true;
-    }
-
-    @Override
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(OCCUPIED).build());
     }
 
 }

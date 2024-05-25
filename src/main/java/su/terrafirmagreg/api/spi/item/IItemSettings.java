@@ -52,15 +52,19 @@ public interface IItemSettings extends IAutoRegProvider {
     default void onRegisterOreDict() {
         if (!getSettings().getOreDict().isEmpty()) {
             for (var ore : getSettings().getOreDict()) {
-                if (ore != null) OreDictUtils.register((Item) this, ore);
+                if (ore != null) OreDictUtils.register(getItem(), ore);
             }
             getSettings().getOreDict().clear();
         }
     }
 
+    default Item getItem() {
+        return (Item) this;
+    }
+
     // Override IAutoRegProvider methods
 
-    default String getName() {
+    default String getRegistryKey() {
         return getSettings().getRegistryKey();
     }
 

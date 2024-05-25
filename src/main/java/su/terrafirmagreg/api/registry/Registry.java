@@ -1,9 +1,11 @@
 package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.client.model.CustomModelLoader;
-import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.item.provider.IItemColorProvider;
-import su.terrafirmagreg.api.spi.item.provider.IItemMeshProvider;
+import su.terrafirmagreg.api.registry.provider.IBlockColorProvider;
+import su.terrafirmagreg.api.registry.provider.IBlockStateProvider;
+import su.terrafirmagreg.api.registry.provider.IItemColorProvider;
+import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
+import su.terrafirmagreg.api.registry.provider.IModelProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -12,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
@@ -93,7 +96,7 @@ public record Registry(RegistryManager registryManager) {
     }
 
     public void onRegisterTileEntities() {
-        for (var provider : this.registryManager.getTileProviders()) {
+        for (var provider : this.registryManager.getTiles()) {
             GameRegistry.registerTileEntity(provider.getTileEntityClass(), ModUtils.id("tile." + provider.getTileEntityClass().getSimpleName()));
         }
     }
@@ -120,17 +123,36 @@ public record Registry(RegistryManager registryManager) {
     public void onRegisterModels(ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(new CustomModelLoader());
 
-        for (var model : this.registryManager.getCustomStateMapper()) model.onRegisterState();
-        for (var model : this.registryManager.getCustomModel()) model.onModelRegister();
+        for (var block : this.registryManager.getBlocks()) {
 
-        for (var item : this.registryManager.getCustomMeshes()) {
-            ModelUtils.registerCustomMeshDefinition(item, ((IItemMeshProvider) item).getItemMesh());
+            if (block instanceof IModelProvider provider) {
+                ModelUtils.registerBlockInventoryModel(block, provider.getResourceLocation());
+            } else {
+                ModelUtils.registerBlockInventoryModel(block);
+            }
+
+            if (block instanceof IBlockStateProvider provider) {
+                ModelUtils.registerStateMapper(block, provider.getStateMapper());
+            }
+        }
+
+        for (var item : this.registryManager.getItems()) {
+
+            if (item instanceof IModelProvider provider) {
+                ModelUtils.registerInventoryModel(item, provider.getResourceLocation());
+            } else if (!(item instanceof ItemBlock)) {
+                ModelUtils.registerInventoryModel(item);
+            }
+
+            if (item instanceof IItemMeshProvider provider) {
+                ModelUtils.registerCustomMeshDefinition(item, provider.getItemMesh());
+            }
         }
     }
 
     @SideOnly(Side.CLIENT)
     public void onRegisterTileEntitySpecialRenderer() {
-        for (var provider : this.registryManager.getTileProviders()) {
+        for (var provider : this.registryManager.getTiles()) {
             final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
             if (tesr != null) ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
@@ -139,9 +161,9 @@ public record Registry(RegistryManager registryManager) {
 
     @SideOnly(Side.CLIENT)
     public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
-        for (var block : this.registryManager.getColoredBlocks()) {
-            if (block instanceof IBlockColorProvider colorfulBlock) {
-                event.getBlockColors().registerBlockColorHandler(colorfulBlock.getBlockColor(), block);
+        for (var block : this.registryManager.getBlocks()) {
+            if (block instanceof IBlockColorProvider provider) {
+                event.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
             }
 
         }
@@ -149,17 +171,17 @@ public record Registry(RegistryManager registryManager) {
 
     @SideOnly(Side.CLIENT)
     public void onRegisterItemColor(ColorHandlerEvent.Item event) {
-        for (var block : this.registryManager.getColoredBlocks()) {
-            if (block instanceof IBlockColorProvider colorfulBlock) {
-                if (colorfulBlock.getItemColor() != null) {
-                    event.getItemColors().registerItemColorHandler(colorfulBlock.getItemColor(), Item.getItemFromBlock(block));
+        for (var block : this.registryManager.getBlocks()) {
+            if (block instanceof IBlockColorProvider provider) {
+                if (provider.getItemColor() != null) {
+                    event.getItemColors().registerItemColorHandler(provider.getItemColor(), Item.getItemFromBlock(block));
                 }
             }
         }
 
-        for (var item : this.registryManager.getColoredItems()) {
-            if (item instanceof IItemColorProvider colorfulItem) {
-                event.getItemColors().registerItemColorHandler(colorfulItem.getItemColor(), item);
+        for (var item : this.registryManager.getItems()) {
+            if (item instanceof IItemColorProvider provider) {
+                event.getItemColors().registerItemColorHandler(provider.getItemColor(), item);
             }
         }
     }

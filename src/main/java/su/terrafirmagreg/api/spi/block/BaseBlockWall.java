@@ -1,12 +1,10 @@
 package su.terrafirmagreg.api.spi.block;
 
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
-import su.terrafirmagreg.api.util.ModelUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -28,7 +26,7 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @Getter
-public abstract class BaseBlockWall extends BlockWall implements IBlockSettings, IBlockStateProvider {
+public abstract class BaseBlockWall extends BlockWall implements IBlockSettings {
 
     protected final Settings settings;
     private final Block modelBlock;
@@ -38,6 +36,7 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings,
         super(modelBlock);
 
         this.settings = Settings.copy(modelBlock);
+
         this.modelBlock = modelBlock;
         this.modelState = modelBlock.getDefaultState();
     }
@@ -114,8 +113,7 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings,
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
+    public IStateMapper getStateMapper() {
+        return new StateMap.Builder().ignore(VARIANT).build();
     }
 }

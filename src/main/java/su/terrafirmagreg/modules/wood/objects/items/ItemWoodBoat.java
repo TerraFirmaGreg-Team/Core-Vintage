@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
 import su.terrafirmagreg.api.spi.item.BaseItem;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
+import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodBoat;
 
 import net.minecraft.block.Block;
@@ -52,7 +52,7 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
     }
 
     /**
-     * Copy from vanilla ItemBoat, but setting EntityBoatTFC's wood type
+     * Copy from vanilla ItemBoat, but setting EntityBoat's wood type
      */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
@@ -63,6 +63,7 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
         double d0 = playerIn.prevPosX + (playerIn.posX - playerIn.prevPosX);
         double d1 = playerIn.prevPosY + (playerIn.posY - playerIn.prevPosY) + (double) playerIn.getEyeHeight();
         double d2 = playerIn.prevPosZ + (playerIn.posZ - playerIn.prevPosZ);
+
         Vec3d vec3d = new Vec3d(d0, d1, d2);
         float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);
         float f4 = MathHelper.sin(-f2 * 0.017453292F - (float) Math.PI);
@@ -70,6 +71,7 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
         float f6 = MathHelper.sin(-f1 * 0.017453292F);
         float f7 = f4 * f5;
         float f8 = f3 * f5;
+
         Vec3d vec3d1 = vec3d.add((double) f7 * 5.0D, (double) f6 * 5.0D, (double) f8 * 5.0D);
         RayTraceResult raytraceresult = worldIn.rayTraceBlocks(vec3d, vec3d1, true);
 
@@ -125,13 +127,8 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
     }
 
     @Override
-    public void onModelRegister() {
-        ModelUtils.registerInventoryModel(this, getResourceLocation());
-
-    }
-
-    @Override
     public IItemColor getItemColor() {
         return (s, i) -> this.getType().getColor();
     }
+
 }

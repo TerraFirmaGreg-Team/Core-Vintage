@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
 import su.terrafirmagreg.api.spi.item.BaseItem;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
+import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 
@@ -75,12 +75,6 @@ public class ItemWoodSupplyCart extends BaseItem implements IWoodItem {
 
     public EntityWoodCart newCart(World worldIn) {
         return new EntityWoodSupplyCart(worldIn);
-    }
-
-    @Override
-    public void onModelRegister() {
-        ModelUtils.registerInventoryModel(this, getResourceLocation());
-
     }
 
     @Override

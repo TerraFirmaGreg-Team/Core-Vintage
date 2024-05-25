@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.spi.block;
 
 import su.terrafirmagreg.api.registry.provider.IAutoRegProvider;
+import su.terrafirmagreg.api.registry.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.item.BaseItemBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
@@ -8,8 +9,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
@@ -24,6 +28,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import com.google.common.collect.Lists;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -31,18 +36,18 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public interface IBlockSettings extends IAutoRegProvider {
+public interface IBlockSettings extends IAutoRegProvider, IBlockStateProvider {
 
     Settings getSettings();
 
     // Override Block methods
 
     default SoundType getSoundType() {
+
         return getSettings().getSoundType();
     }
 
@@ -51,61 +56,84 @@ public interface IBlockSettings extends IAutoRegProvider {
     //    }
 
     default float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+
         return getSettings().getHardness().apply(blockState, worldIn, pos);
     }
 
     default float getExplosionResistance(Entity exploder) {
+
         return getSettings().getResistance() / 5.0F;
     }
 
     default boolean isOpaqueCube(IBlockState state) {
-        return getSettings() != null && getSettings().isOpaque();
+
+        return getSettings().isOpaque();
     }
 
     default boolean isFullCube(IBlockState state) {
+
         return getSettings().isFullCube();
     }
 
     default boolean isCollidable() {
+
         return getSettings().isCollidable();
     }
 
     default BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
+
         return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     default float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
+
         return getSettings().getSlipperiness().apply(state, world, pos);
     }
 
     default int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+
         return getSettings().getLightValue().apply(state, world, pos);
     }
 
     default MapColor getMapColor(IBlockState state, IBlockAccess world, BlockPos pos) {
+
         return getSettings().getMapColor() != null ? getSettings().getMapColor().apply(state, world, pos) : getSettings().getMaterial().getMaterialMapColor();
     }
 
     @SideOnly(Side.CLIENT)
     default BlockRenderLayer getRenderLayer() {
+
         return getSettings().getRenderLayer();
     }
 
     // Override IOreDictProvider methods
 
+    @Override
     default void onRegisterOreDict() {
         if (!getSettings().getOreDict().isEmpty()) {
             for (var ore : getSettings().getOreDict()) {
-                if (ore != null) OreDictUtils.register(getBlock(), ore);
+                OreDictUtils.register(getBlock(), ore);
             }
             getSettings().getOreDict().clear();
         }
     }
 
+    @Override
+    @Nullable
+    @SideOnly(Side.CLIENT)
+    default IStateMapper getStateMapper() {
+        var ignored = getSettings().getIgnoredProperties();
+        if (ignored != null && ignored.length > 0) {
+            return new StateMap.Builder().ignore(ignored).build();
+        }
+        return new StateMap.Builder().build();
+    }
+
     // Override IAutoRegProvider methods
 
     @Override
-    default String getName() {
+    default String getRegistryKey() {
+
         return getSettings().getRegistryKey();
     }
 
@@ -113,34 +141,41 @@ public interface IBlockSettings extends IAutoRegProvider {
 
     @Override
     default Size getSize(ItemStack stack) {
+
         return getSettings().getSize();
     }
 
     @Override
     default Weight getWeight(ItemStack stack) {
+
         return getSettings().getWeight();
     }
 
     @Override
     default boolean canStack(ItemStack stack) {
+
         return getSettings().isCanStack();
     }
 
     // New methods
 
     default boolean getHasItemSubtypes() {
+
         return getSettings().isHasItemSubtypes();
     }
 
     default @Nullable Item getItemBlock() {
-        return getSettings().isItemBlock() ? new BaseItemBlock(getBlock()) : null;
+
+        return getSettings().isHasItemBlock() ? new BaseItemBlock(getBlock()) : null;
     }
 
     default Block getBlock() {
+
         return (Block) this;
     }
 
     default Item asItem() {
+
         return Item.getItemFromBlock(getBlock());
     }
 
@@ -148,8 +183,10 @@ public interface IBlockSettings extends IAutoRegProvider {
     @SuppressWarnings("deprecation")
     class Settings {
 
-        protected List<Object[]> oreDict = new ArrayList<>();
+        protected final List<Object[]> oreDict = Lists.newArrayList();
+        protected IProperty<?>[] ignoredProperties;
 
+        // Block
         protected final Material material;
         protected ContextFunction<MapColor> mapColor;
         protected String translationKey;
@@ -161,16 +198,17 @@ public interface IBlockSettings extends IAutoRegProvider {
         protected ContextFunction<Float> slipperiness;
         protected EnumRarity rarity;
         protected BlockRenderLayer renderLayer;
-        protected Size size;
-        protected Weight weight;
-
-        protected float resistance;
-
-        protected boolean itemBlock;
-        protected boolean canStack;
         protected boolean collidable;
         protected boolean opaque;
         protected boolean fullCube;
+        protected boolean hasItemBlock;
+        protected float resistance;
+
+        // Size
+        protected Size size;
+        protected Weight weight;
+        protected boolean canStack;
+
         protected boolean hasItemSubtypes;
 
         protected Settings(Material material) {
@@ -187,7 +225,7 @@ public interface IBlockSettings extends IAutoRegProvider {
             this.size = Size.SMALL;
             this.weight = Weight.LIGHT;
 
-            this.itemBlock = true;
+            this.hasItemBlock = true;
             this.canStack = true;
             this.collidable = true;
             this.opaque = true;
@@ -255,7 +293,7 @@ public interface IBlockSettings extends IAutoRegProvider {
         }
 
         public Settings noItemBlock() {
-            this.itemBlock = false;
+            this.hasItemBlock = false;
             return this;
         }
 
@@ -360,6 +398,11 @@ public interface IBlockSettings extends IAutoRegProvider {
 
         public Settings addOreDict(Object... oreDict) {
             this.oreDict.add(oreDict);
+            return this;
+        }
+
+        public Settings ignoresProperties(IProperty<?>... properties) {
+            this.ignoredProperties = properties;
             return this;
         }
 

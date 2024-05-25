@@ -3,14 +3,12 @@ package su.terrafirmagreg.modules.metal.api.types.variant.block;
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.registry.provider.IModelProvider;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 
-import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Интерфейс, представляющий блок металла.
  */
-public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IBlockSettings, IModelProvider, IBlockStateProvider {
+public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVariant>, IBlockSettings, IModelProvider {
 
     /**
      * Возвращает местоположение регистрации блока почвы.
@@ -29,7 +27,7 @@ public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVarian
      * @return Местоположение регистрации блока почвы.
      */
     @NotNull
-    default String getName() {
+    default String getRegistryKey() {
         return String.format("metal/%s/%s", getVariant(), getType());
     }
 
@@ -45,14 +43,7 @@ public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVarian
 
     @Override
     @SideOnly(Side.CLIENT)
-    default void onModelRegister() {
-        ModelUtils.registerBlockInventoryModel((Block) this, getResourceLocation());
+    default IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder().customResource(getResourceLocation()).build();
     }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    default void onRegisterState() {
-        ModelUtils.registerStateMapper((Block) this, new CustomStateMap.Builder().customResource(getResourceLocation()).build());
-    }
-
 }

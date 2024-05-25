@@ -19,7 +19,7 @@ public interface IMetalItem extends IType<MetalType>, IVariant<MetalItemVariant>
      * @return Расположение в реестре
      */
     @NotNull
-    default String getName() {
+    default String getRegistryKey() {
         return String.format("metal/%s/%s", getVariant(), getType());
     }
 

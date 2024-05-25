@@ -23,7 +23,6 @@ public class CaffeineAddon {
     @EventHandler
     public static void PreInit(FMLPreInitializationEvent event) {
         proxy.preinit();
-        RegistryHandler.preInitRegistries();
         ModConfig.loadConfig(event);
     }
 

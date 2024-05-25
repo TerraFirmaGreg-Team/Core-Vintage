@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.arboriculture.ModuleArboricultureConfig;
@@ -14,6 +14,7 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,6 +25,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -156,7 +158,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
     @Override
     public boolean isToolEffective(@NotNull String type, @NotNull IBlockState state) {
-        return ("hammer".equals(type) && ModuleArboricultureConfig.MISC.enableHammerSticks) ||
+        return ("hammer" .equals(type) && ModuleArboricultureConfig.MISC.enableHammerSticks) ||
                 super.isToolEffective(type, state);
     }
 
@@ -323,14 +325,13 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelUtils.registerBlockInventoryModel(this);
+    public ResourceLocation getResourceLocation() {
+        return ModUtils.id(getRegistryKey());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(PLACED).build());
+    public IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder().ignore(PLACED).build();
     }
 }

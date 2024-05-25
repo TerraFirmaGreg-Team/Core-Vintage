@@ -3,13 +3,13 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.BaseBlockWall;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -40,10 +40,7 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
-                .customResource(getResourceLocation())
-                .ignore(BlockWall.VARIANT)
-                .build());
+    public IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(BlockWall.VARIANT).build();
     }
 }

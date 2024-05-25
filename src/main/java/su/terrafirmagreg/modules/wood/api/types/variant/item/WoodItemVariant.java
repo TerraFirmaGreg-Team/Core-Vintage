@@ -19,7 +19,7 @@ import java.util.function.BiFunction;
  */
 public class WoodItemVariant implements Comparable<WoodItemVariant> {
 
-    private static final Set<WoodItemVariant> WOOD_ITEM_VARIANTS = new ObjectOpenHashSet<>();
+    private static final Set<WoodItemVariant> ITEM_VARIANTS = new ObjectOpenHashSet<>();
 
     @NotNull
     private final String name;
@@ -30,7 +30,7 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
         if (name.isEmpty())
             throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
 
-        if (!WOOD_ITEM_VARIANTS.add(this))
+        if (!ITEM_VARIANTS.add(this))
             throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
 
         for (var type : WoodType.getTypes()) {
@@ -44,8 +44,8 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
      *
      * @return множество вариантов деревянных блоков
      */
-    public static Set<WoodItemVariant> getWoodItemVariants() {
-        return WOOD_ITEM_VARIANTS;
+    public static Set<WoodItemVariant> getItemVariants() {
+        return ITEM_VARIANTS;
     }
 
     public Item get(WoodType type) {
@@ -81,6 +81,7 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
          * @param name Имя породы.
          */
         public Builder(@NotNull String name) {
+
             this.name = name;
         }
 

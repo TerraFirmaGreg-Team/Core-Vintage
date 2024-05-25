@@ -16,7 +16,7 @@ public interface ISoilItem extends IType<SoilType>, IVariant<SoilItemVariant>, I
      * @return расположение в реестре
      */
     @NotNull
-    default String getName() {
+    default String getRegistryKey() {
         return String.format("soil/%s/%s", getVariant(), getType());
     }
 }

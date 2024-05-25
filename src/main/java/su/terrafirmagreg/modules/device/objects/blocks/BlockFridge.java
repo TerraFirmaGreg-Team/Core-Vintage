@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.item.BaseItemBlock;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -34,7 +33,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -53,7 +51,7 @@ import static net.minecraft.util.EnumFacing.NORTH;
 import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
 @SuppressWarnings("deprecation")
-public class BlockFridge extends BaseBlockHorizontal implements ITileProvider, IBlockStateProvider {
+public class BlockFridge extends BaseBlockHorizontal implements ITileProvider {
 
     private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0D, 0D, 0.125D, 1D, 1D, 1D);
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0D, 0D, 0.0D, 1D, 1D, 0.875D);
@@ -274,14 +272,14 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileProvider, I
     }
 
     @Override
-    public void onRegisterState() {
-        ModelLoader.setCustomStateMapper(this, new IStateMapper() {
+    public IStateMapper getStateMapper() {
+        return new IStateMapper() {
 
             @Override
             @NotNull
             public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@NotNull Block blockIn) {
                 return Collections.emptyMap();
             }
-        });
+        };
     }
 }

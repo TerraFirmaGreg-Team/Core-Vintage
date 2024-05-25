@@ -33,7 +33,7 @@ public interface IRockBlock extends IType<RockType>, IVariant<RockBlockVariant>,
      */
     @NotNull
     @Override
-    default String getName() {
+    default String getRegistryKey() {
         return String.format("rock/%s/%s", getVariant(), getType());
     }
 }

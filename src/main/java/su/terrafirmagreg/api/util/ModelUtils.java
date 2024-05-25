@@ -38,8 +38,9 @@ public final class ModelUtils {
 
     @SideOnly(Side.CLIENT)
     public static void registerStateMapper(@NotNull Block block, IStateMapper stateMap) {
-        ModelLoader.setCustomStateMapper(block, stateMap);
-
+        if (stateMap != null) {
+            ModelLoader.setCustomStateMapper(block, stateMap);
+        }
     }
 
     //endregion

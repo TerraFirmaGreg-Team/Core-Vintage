@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.spi.block.provider;
+package su.terrafirmagreg.api.registry.provider;
 
 import org.jetbrains.annotations.Nullable;
 

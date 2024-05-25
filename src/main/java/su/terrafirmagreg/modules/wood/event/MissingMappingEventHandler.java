@@ -55,7 +55,7 @@ public final class MissingMappingEventHandler {
                     }
 
                     // TFC Items
-                    for (var variant : WoodItemVariant.getWoodItemVariants()) {
+                    for (var variant : WoodItemVariant.getItemVariants()) {
                         var mappingKeyBlock = "tfc:wood/" + variant.toString() + "/" + type.toString();
                         var mappingKeyBlockFruit = "tfc:wood/fruit_trees/" + variant + "/" + type;
                         if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
@@ -77,7 +77,7 @@ public final class MissingMappingEventHandler {
                     }
 
                     // TFCFlorae Items
-                    for (var variant : WoodItemVariant.getWoodItemVariants()) {
+                    for (var variant : WoodItemVariant.getItemVariants()) {
                         var mappingKeyBlock = "tfcflorae:wood/" + variant.toString() + "/" + type.toString();
                         var mappingKeyBlockFruit = "tfcflorae:wood/fruit_tree/" + variant + "/" + type;
                         if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {
@@ -99,7 +99,7 @@ public final class MissingMappingEventHandler {
                     }
 
                     // FirmaLife Items
-                    for (var variant : WoodItemVariant.getWoodItemVariants()) {
+                    for (var variant : WoodItemVariant.getItemVariants()) {
                         var mappingKeyBlock = "firmalife:wood/" + variant.toString() + "/" + type.toString();
                         var mappingKeyBlockFruit = "firmalife:wood/fruit_tree/" + variant + "/" + type;
                         if (mappingKey.equals(mappingKeyBlock) || mappingKey.equals(mappingKeyBlockFruit)) {

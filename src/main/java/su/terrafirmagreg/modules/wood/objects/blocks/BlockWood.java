@@ -31,5 +31,4 @@ public abstract class BlockWood extends BaseBlock implements IWoodBlock {
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
-
 }

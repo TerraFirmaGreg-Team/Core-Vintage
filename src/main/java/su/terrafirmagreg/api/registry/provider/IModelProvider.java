@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.registry.provider;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -7,5 +8,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public interface IModelProvider {
 
     @SideOnly(Side.CLIENT)
-    void onModelRegister();
+    default void onModelRegister() {
+
+    }
+
+    default ResourceLocation getResourceLocation() {
+        return null;
+    }
 }

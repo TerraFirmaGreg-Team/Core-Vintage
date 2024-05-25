@@ -22,7 +22,7 @@ public class BlockSoilPeat extends BaseBlock {
     }
 
     @Override
-    public String getName() {
+    public String getRegistryKey() {
         return "soil/peat";
     }
 

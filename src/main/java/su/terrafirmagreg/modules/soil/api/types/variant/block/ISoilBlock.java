@@ -20,7 +20,7 @@ public interface ISoilBlock extends IType<SoilType>, IVariant<SoilBlockVariant>,
      */
     @NotNull
     @Override
-    default String getName() {
+    default String getRegistryKey() {
         return String.format("soil/%s/%s", getVariant(), getType());
     }
 

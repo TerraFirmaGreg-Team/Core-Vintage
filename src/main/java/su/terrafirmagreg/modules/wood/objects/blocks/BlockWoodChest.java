@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -18,6 +17,7 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
@@ -136,12 +136,11 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileProvi
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this,
-                new CustomStateMap.Builder()
-                        .ignore(BlockChest.FACING)
-                        .customResource(getResourceLocation())
-                        .build());
+    public IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder()
+                .ignore(BlockChest.FACING)
+                .customResource(getResourceLocation())
+                .build();
     }
 
     @Override

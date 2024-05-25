@@ -1,11 +1,10 @@
 package su.terrafirmagreg.api.spi.block;
 
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.item.BaseItemDoor;
-import su.terrafirmagreg.api.util.ModelUtils;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -28,7 +27,7 @@ import lombok.Getter;
 import java.util.Random;
 
 @Getter
-public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings, IBlockStateProvider {
+public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings {
 
     protected final Settings settings;
 
@@ -60,7 +59,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
+    public IStateMapper getStateMapper() {
+        return new StateMap.Builder().ignore(BlockDoor.POWERED).build();
     }
 }

@@ -85,13 +85,13 @@ public class CustomStateMap extends StateMapperBase {
         private String subfolder;
         private String path;
 
-        public Builder withName(IProperty<?> builderPropertyIn) {
-            this.name = builderPropertyIn;
+        public Builder withName(IProperty<?> name) {
+            this.name = name;
             return this;
         }
 
-        public Builder withSuffix(String builderSuffixIn) {
-            this.suffix = builderSuffixIn;
+        public Builder withSuffix(String suffix) {
+            this.suffix = suffix;
             return this;
         }
 

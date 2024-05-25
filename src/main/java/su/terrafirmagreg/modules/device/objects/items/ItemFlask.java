@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
+import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.spi.item.IItemSettings;
-import su.terrafirmagreg.api.spi.item.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -95,12 +95,12 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
 
     @Override
     public ItemMeshDefinition getItemMesh() {
-        var modelFull = new ModelResourceLocation(ModUtils.id(getName()), "inventory");
-        var model4 = new ModelResourceLocation(ModUtils.id(getName() + "/4"), "inventory");
-        var model3 = new ModelResourceLocation(ModUtils.id(getName() + "/3"), "inventory");
-        var model2 = new ModelResourceLocation(ModUtils.id(getName() + "/2"), "inventory");
-        var model1 = new ModelResourceLocation(ModUtils.id(getName() + "/1"), "inventory");
-        var model0 = new ModelResourceLocation(ModUtils.id(getName() + "/0"), "inventory");
+        var modelFull = new ModelResourceLocation(ModUtils.id(getRegistryKey()), "inventory");
+        var model4 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/4"), "inventory");
+        var model3 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/3"), "inventory");
+        var model2 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/2"), "inventory");
+        var model1 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/1"), "inventory");
+        var model0 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/0"), "inventory");
 
         return stack -> switch ((int) Math.floor(getLiquidAmount(stack) / (double) capacity * 5F)) {
             case 5 -> modelFull;
@@ -243,7 +243,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
             FluidStack fluidStack = bucketCap.drain(capacity, false);
             if (fluidStack != null) {
                 String fluidname = fluidStack.getLocalizedName();
-                return new TextComponentTranslation("item." + MOD_ID + this.getName().replaceAll("/", ".") + ".filled.name",
+                return new TextComponentTranslation("item." + MOD_ID + this.getRegistryKey().replaceAll("/", ".") + ".filled.name",
                         fluidname).getFormattedText();
             }
         }

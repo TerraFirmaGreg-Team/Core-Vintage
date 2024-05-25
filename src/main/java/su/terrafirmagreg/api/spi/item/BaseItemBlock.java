@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.spi.item;
 
+import su.terrafirmagreg.api.registry.provider.IMultiItemBlock;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
-import su.terrafirmagreg.api.spi.block.provider.IMultiItemBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;

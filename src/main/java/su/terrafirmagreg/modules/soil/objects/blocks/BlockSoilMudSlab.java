@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlockSlab;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -13,7 +12,7 @@ import net.minecraft.block.material.Material;
 import lombok.Getter;
 
 @Getter
-public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlock, IBlockStateProvider {
+public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlock {
 
     private final SoilBlockVariant variant;
     private final SoilType type;

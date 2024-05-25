@@ -1,6 +1,4 @@
-package su.terrafirmagreg.api.spi.block.provider;
-
-import su.terrafirmagreg.api.spi.item.provider.IItemColorProvider;
+package su.terrafirmagreg.api.registry.provider;
 
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;

@@ -9,9 +9,9 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -52,8 +52,8 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelLoader.setCustomStateMapper(this, new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(VARIANT).build());
+    public IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(VARIANT).build();
     }
 
     public static class Double extends BlockWoodSlab {

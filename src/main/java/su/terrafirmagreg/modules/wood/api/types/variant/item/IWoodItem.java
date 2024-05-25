@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
+import su.terrafirmagreg.api.registry.provider.IItemColorProvider;
 import su.terrafirmagreg.api.registry.provider.IModelProvider;
 import su.terrafirmagreg.api.spi.item.IItemSettings;
-import su.terrafirmagreg.api.spi.item.provider.IItemColorProvider;
 import su.terrafirmagreg.api.spi.types.IType;
 import su.terrafirmagreg.api.spi.types.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -24,7 +24,7 @@ public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>, I
      * @return Расположение в реестре
      */
     @NotNull
-    default String getName() {
+    default String getRegistryKey() {
         return String.format("wood/%s/%s", getVariant(), getType());
     }
 
@@ -33,7 +33,6 @@ public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>, I
      *
      * @return Расположение ресурса
      */
-    @NotNull
     default ResourceLocation getResourceLocation() {
         return ModUtils.id(String.format("wood/%s", getVariant()));
     }

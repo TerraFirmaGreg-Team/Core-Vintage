@@ -35,8 +35,8 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item : ModItems.ITEMS) {
-            if (item instanceof IModelProvider) {
-                ((IModelProvider) item).onModelRegister();
+            if (item instanceof IModelProvider customModel) {
+                customModel.onModelRegister();
             }
         }
         for (Block block : ModBlocks.BLOCKS) {
@@ -45,10 +45,7 @@ public class RegistryHandler {
             }
         }
     }
-
-    public static void preInitRegistries() {
-    }
-
+    
     public static void initRegistries() {
         GameRegistry.registerTileEntity(TEDryingMat.class, MODID_CAFFEINEADDON + ":drying_mat");
         NetworkRegistry.INSTANCE.registerGuiHandler(CaffeineAddon.instance, new GUIHandler());

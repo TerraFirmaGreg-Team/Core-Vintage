@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.wood.objects.blocks;
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.spi.block.BaseBlockDoor;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -11,8 +10,7 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 
 
 import lombok.Getter;
@@ -39,12 +37,7 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this,
-                new CustomStateMap.Builder()
-                        .customResource(getResourceLocation())
-                        .ignore(BlockDoor.POWERED)
-                        .build());
+    public IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder().customResource(getResourceLocation()).ignore(BlockDoor.POWERED).build();
     }
 }

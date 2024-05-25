@@ -1,22 +1,19 @@
 package su.terrafirmagreg.api.spi.block;
 
 import su.terrafirmagreg.api.client.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.item.BaseItemSlab;
-import su.terrafirmagreg.api.util.ModelUtils;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -27,7 +24,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings, IBlockStateProvider {
+public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings {
 
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
@@ -108,9 +105,8 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockSettings,
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(VARIANT).build());
+    public IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder().ignore(VARIANT).build();
     }
 
     public enum Variant implements IStringSerializable {

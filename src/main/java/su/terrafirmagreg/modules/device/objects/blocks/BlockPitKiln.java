@@ -1,11 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
@@ -17,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -51,7 +50,7 @@ import static su.terrafirmagreg.api.data.Blockstates.FULL;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockPitKiln extends BaseBlock implements ITileProvider, IBlockStateProvider {
+public class BlockPitKiln extends BaseBlock implements ITileProvider {
 
     private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[] {
             PLACED_ITEM_AABB,
@@ -235,9 +234,8 @@ public class BlockPitKiln extends BaseBlock implements ITileProvider, IBlockStat
     }
 
     @Override
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this,
-                blockIn -> ImmutableMap.of(this.getDefaultState(),
-                        new ModelResourceLocation(ModUtils.id("empty").toString())));
+    public IStateMapper getStateMapper() {
+        return blockIn -> ImmutableMap.of(this.getDefaultState(),
+                new ModelResourceLocation(ModUtils.id("empty").toString()));
     }
 }

@@ -1,10 +1,12 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -16,15 +18,13 @@ public class BlockWoodFenceLog extends BlockWoodFence {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelUtils.registerBlockInventoryModel(this);
+    public ResourceLocation getResourceLocation() {
+        return ModUtils.id(getRegistryKey());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this,
-                new StateMap.Builder().build());
+    public IStateMapper getStateMapper() {
+        return new StateMap.Builder().build();
     }
 }

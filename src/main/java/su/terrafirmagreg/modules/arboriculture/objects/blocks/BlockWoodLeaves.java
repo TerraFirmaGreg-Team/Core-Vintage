@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -18,6 +18,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
@@ -30,6 +31,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -390,17 +392,14 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void onModelRegister() {
-        ModelUtils.registerBlockInventoryModel(this);
+    public ResourceLocation getResourceLocation() {
+        return ModUtils.id(getRegistryKey());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder()
-                .ignore(BlockLeaves.DECAYABLE, HARVESTABLE)
-                .build());
+    public IStateMapper getStateMapper() {
+        return new CustomStateMap.Builder().ignore(BlockLeaves.DECAYABLE, HARVESTABLE).build();
     }
 
     public enum EnumLeafState implements IStringSerializable {

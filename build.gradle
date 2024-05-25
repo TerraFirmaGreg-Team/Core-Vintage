@@ -80,11 +80,11 @@ minecraft {
         args << '-Dlegacy.debugClassLoading=true'
         args << '-Dlegacy.debugClassLoadingFiner=true'
         args << '-Dlegacy.debugClassLoadingSave=true'
-//        if (propertyBool('coremod_debug')) {
-//            args << '-Dlegacy.debugClassLoading=true'
-//            args << '-Dlegacy.debugClassLoadingFiner=true'
-//            args << '-Dlegacy.debugClassLoadingSave=true'
-//        }
+        if (propertyBool('coremod_debug')) {
+            args << '-Dlegacy.debugClassLoading=true'
+            args << '-Dlegacy.debugClassLoadingFiner=true'
+            args << '-Dlegacy.debugClassLoadingSave=true'
+        }
     }
 
     if (propertyBool('use_mixins')) {

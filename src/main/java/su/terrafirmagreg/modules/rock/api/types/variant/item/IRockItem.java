@@ -19,7 +19,7 @@ public interface IRockItem extends IType<RockType>, IVariant<RockItemVariant>, I
      * @return Имя объекта.
      */
     @NotNull
-    default String getName() {
+    default String getRegistryKey() {
         return String.format("rock/%s/%s", getVariant(), getType());
     }
 

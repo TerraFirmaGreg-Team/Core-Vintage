@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.client.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
-import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.rock.ModuleRockConfig;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
@@ -14,14 +11,13 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.common.items.ToolItems;
@@ -34,7 +30,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.CAN_FALL;
 
 @SuppressWarnings("deprecation")
-public class BlockRockRaw extends BlockRock implements IBlockStateProvider {
+public class BlockRockRaw extends BlockRock {
 
 
     /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */
@@ -43,6 +39,8 @@ public class BlockRockRaw extends BlockRock implements IBlockStateProvider {
         super(variant, type);
 
         getSettings()
+                .ignoresProperties(CAN_FALL)
+                .renderLayer(BlockRenderLayer.CUTOUT)
                 .addOreDict(variant)
                 .addOreDict(variant, type)
                 .addOreDict("stone");
@@ -127,9 +125,4 @@ public class BlockRockRaw extends BlockRock implements IBlockStateProvider {
         return 1 + random.nextInt(3);
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(CAN_FALL).build());
-    }
 }

@@ -47,11 +47,13 @@ public final class OreDictUtils {
         register(new ItemStack(block), toString(parts));
     }
 
-    public static void register(ItemStack itemStack, String parts) {
+    public static void register(ItemStack itemStack, String oreName) {
+        if (oreName == null) return;
+
         if (itemStack != null && !itemStack.isEmpty()) {
-            OreDictionary.registerOre(parts, itemStack);
+            OreDictionary.registerOre(oreName, itemStack);
         } else {
-            TerraFirmaGreg.LOGGER.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", parts);
+            TerraFirmaGreg.LOGGER.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", oreName);
         }
     }
 
@@ -124,6 +126,7 @@ public final class OreDictUtils {
     }
 
     public static void init() {
+
         OreDictionaryHelper.MAP.forEach((t, s) -> OreDictionary.registerOre(s, t.toItemStack()));
         OreDictionaryHelper.MAP.clear();
 

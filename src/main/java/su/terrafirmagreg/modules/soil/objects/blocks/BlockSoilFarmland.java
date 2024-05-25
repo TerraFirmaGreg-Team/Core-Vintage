@@ -1,9 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.client.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.block.provider.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.block.provider.IBlockStateProvider;
-import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.api.registry.provider.IBlockColorProvider;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -40,7 +37,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlockColorProvider, IBlockStateProvider {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlockColorProvider {
 
     public static final int[] TINT = new int[] {
             0xffffffff,
@@ -67,6 +64,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
         this.type = type;
         this.useNeighborBrightness = true;
         this.settings = Settings.of(Material.GROUND)
+                .ignoresProperties(MOISTURE)
                 .soundType(SoundType.GROUND)
                 .hardness(2.0F)
                 .addOreDict(variant)
@@ -241,9 +239,4 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
         return (s, w, p, i) -> BlockSoilFarmland.TINT[s.getValue(BlockSoilFarmland.MOISTURE)];
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onRegisterState() {
-        ModelUtils.registerStateMapper(this, new CustomStateMap.Builder().ignore(MOISTURE).build());
-    }
 }

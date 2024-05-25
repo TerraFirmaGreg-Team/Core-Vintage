@@ -1,5 +1,8 @@
 package tfctech.client;
 
+import su.terrafirmagreg.modules.metal.client.gui.GuiGlassworking;
+import su.terrafirmagreg.modules.metal.objects.container.ContainerGlassworking;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -11,8 +14,6 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import tfctech.TFCTech;
-import tfctech.client.gui.GuiGlassworking;
-import tfctech.objects.container.ContainerGlassworking;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +22,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 public class TechGuiHandler implements IGuiHandler {
 
-    public static final ResourceLocation GUI_ELEMENTS = new ResourceLocation(MODID_TFCTECH, "textures/gui/elements.png");
+    public static final ResourceLocation GUI_ELEMENTS = new ResourceLocation(MODID_TFCTECH, "textures/gui/glassworking.png");
 
     public static void openGui(World world, BlockPos pos, EntityPlayer player, Type type) {
         player.openGui(TFCTech.getInstance(), type.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());

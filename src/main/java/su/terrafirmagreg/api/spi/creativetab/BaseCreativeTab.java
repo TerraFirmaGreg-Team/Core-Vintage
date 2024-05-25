@@ -26,7 +26,7 @@ public class BaseCreativeTab extends CreativeTabs {
     }
 
     public BaseCreativeTab(String TabName, String iconSupplier, boolean hasSearchBar) {
-        this(TabName, ModUtils.id(iconSupplier), hasSearchBar);
+        this(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
     }
 
     public BaseCreativeTab(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {

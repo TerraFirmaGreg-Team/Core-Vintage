@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalGazelle extends RenderLiving<EntityAnimalGazelle> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/huntable/gazelle.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/huntable/gazelle.png");
 
     public RenderAnimalGazelle(RenderManager manager) {
         super(manager, new ModelAnimalGazelle(), 0.7F);

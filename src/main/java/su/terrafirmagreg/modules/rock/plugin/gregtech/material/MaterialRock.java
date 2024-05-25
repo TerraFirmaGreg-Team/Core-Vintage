@@ -25,7 +25,7 @@ public class MaterialRock extends Material {
     public static class Builder extends Material.Builder {
 
         public Builder(@NotNull String name) {
-            super(idCounter.getAndIncrement(), ModUtils.id(name));
+            super(idCounter.getAndIncrement(), ModUtils.resource(name));
 
             LOGGER.info("Registered material: " + name);
         }

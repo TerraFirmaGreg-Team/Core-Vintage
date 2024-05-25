@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalDireWolf extends RenderLiving<EntityAnimalDireWolf> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/direwolf.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/predators/direwolf.png");
 
     public RenderAnimalDireWolf(RenderManager renderManager) {
         super(renderManager, new ModelAnimalDireWolf(), 0.7F);

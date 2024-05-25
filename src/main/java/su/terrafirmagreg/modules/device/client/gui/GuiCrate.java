@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class GuiCrate extends GuiContainerTE<TileCrate> {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/crate.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/crate.png");
     private final String translationKey;
 
     public GuiCrate(Container container, InventoryPlayer playerInv, TileCrate tile, IBlockState state) {

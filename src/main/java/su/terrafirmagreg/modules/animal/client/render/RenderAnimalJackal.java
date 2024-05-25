@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalJackal extends RenderLiving<EntityAnimalJackal> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/jackal.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/predators/jackal.png");
 
     public RenderAnimalJackal(RenderManager renderManager) {
         super(renderManager, new ModelAnimalJackal(), 0.7F);

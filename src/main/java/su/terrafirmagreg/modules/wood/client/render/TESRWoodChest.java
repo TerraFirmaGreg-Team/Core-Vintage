@@ -21,8 +21,8 @@ import java.util.Objects;
 @SideOnly(Side.CLIENT)
 public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
 
-    private static final ResourceLocation SINGLE_TEXTURE = ModUtils.id("textures/entity/wood/chests/single.png");
-    private static final ResourceLocation DOUBLE_TEXTURE = ModUtils.id("textures/entity/wood/chests/double.png");
+    private static final ResourceLocation SINGLE_TEXTURE = ModUtils.resource("textures/entity/wood/chests/single.png");
+    private static final ResourceLocation DOUBLE_TEXTURE = ModUtils.resource("textures/entity/wood/chests/double.png");
 
     private final ModelChest simpleChest = new ModelChest();
     private final ModelChest largeChest = new ModelLargeChest();

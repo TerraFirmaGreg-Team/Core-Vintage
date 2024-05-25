@@ -16,7 +16,7 @@ import net.dries007.tfc.client.gui.GuiContainerTE;
 @SideOnly(Side.CLIENT)
 public class GuiCharcoalForge extends GuiContainerTE<TileCharcoalForge> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/charcoal_forge.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/charcoal_forge.png");
 
     public GuiCharcoalForge(Container container, InventoryPlayer playerInv, TileCharcoalForge tile) {
         super(container, playerInv, tile, BACKGROUND);

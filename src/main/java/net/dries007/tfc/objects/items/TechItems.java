@@ -207,8 +207,7 @@ public final class TechItems {
         ImmutableList.Builder<Item> metalItems = ImmutableList.builder();
 
         metalItems.add(register(r, "metal/iron_groove", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.GROOVE), CT_METAL));
-        metalItems.add(
-                register(r, "metal/iron_bowl_mount", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.BOWL_MOUNT), CT_METAL));
+        metalItems.add(register(r, "metal/iron_bowl_mount", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.BOWL_MOUNT), CT_METAL));
 
         metalItems.add(register(r, "metal/iron_draw_plate", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.DRAW_PLATE)
                 .setMaxDamage(ToolMaterialsTFC.WROUGHT_IRON.getMaxUses())

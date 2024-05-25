@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class CapabilityTemperature {
 
-    public static final ResourceLocation KEY = ModUtils.id("temperature_capability");
+    public static final ResourceLocation KEY = ModUtils.resource("temperature_capability");
 
     @CapabilityInject(ICapabilityTemperature.class)
     public static Capability<ICapabilityTemperature> CAPABILITY;

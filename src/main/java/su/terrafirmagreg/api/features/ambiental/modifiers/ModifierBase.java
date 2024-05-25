@@ -28,6 +28,7 @@ public class ModifierBase implements Comparable<ModifierBase> {
     private float multiplier = 1f;
 
     public ModifierBase(String name) {
+
         this.name = name;
     }
 
@@ -72,7 +73,7 @@ public class ModifierBase implements Comparable<ModifierBase> {
     }
 
     public String getDisplayName() {
-        return TranslatorUtil.translate(ModUtils.localize("modifier." + this.name));
+        return TranslatorUtil.translate(ModUtils.localize("ambient.modifier." + this.name));
     }
 
     public void apply(ProviderTemperature temp) {

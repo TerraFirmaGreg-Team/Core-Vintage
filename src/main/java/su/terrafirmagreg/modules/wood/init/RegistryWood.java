@@ -13,7 +13,7 @@ public final class RegistryWood {
     public static void onRegister() {
 
         LOOM = new RegistryBuilder<LoomRecipe>()
-                .setName(ModUtils.id("loom_recipe"))
+                .setName(ModUtils.resource("loom_recipe"))
                 .setType(LoomRecipe.class)
                 .allowModification()
                 .create();

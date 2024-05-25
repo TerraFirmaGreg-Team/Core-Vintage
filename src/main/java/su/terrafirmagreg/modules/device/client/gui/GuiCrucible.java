@@ -36,7 +36,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 public class GuiCrucible extends GuiContainerTE<TileCrucible> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/crucible.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/crucible.png");
     private static final int MAX_ELEMENTS = 3;
     private int scrollPos;
     private boolean scrollPress;

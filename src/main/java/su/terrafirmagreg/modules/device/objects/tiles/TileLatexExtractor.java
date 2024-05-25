@@ -192,7 +192,7 @@ public class TileLatexExtractor extends BaseTile implements ITickable {
             }
             if (++serverUpdate % 40 == 0) {
                 serverUpdate = 0;
-                ModuleDevice.PACKET_SERVICE.sendToAllAround(new SCPacketLatex(this), world.provider.getDimension(), pos, 64);
+                ModuleDevice.getPacketService().sendToAllAround(new SCPacketLatex(this), world.provider.getDimension(), pos, 64);
             }
         }
     }

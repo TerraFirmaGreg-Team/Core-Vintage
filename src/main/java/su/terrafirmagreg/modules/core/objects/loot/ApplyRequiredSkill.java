@@ -63,7 +63,7 @@ public class ApplyRequiredSkill extends LootFunction {
     public static class Serializer extends LootFunction.Serializer<ApplyRequiredSkill> {
 
         public Serializer() {
-            super(ModUtils.id("apply_req_skill"), ApplyRequiredSkill.class);
+            super(ModUtils.resource("apply_req_skill"), ApplyRequiredSkill.class);
         }
 
         @Override

@@ -36,7 +36,7 @@ import java.util.function.Supplier;
 
 public final class CapabilityHeat {
 
-    public static final ResourceLocation KEY = ModUtils.id("heat_capability");
+    public static final ResourceLocation KEY = ModUtils.resource("heat_capability");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IItemHeat for items outside TFC
 
     @CapabilityInject(ICapabilityHeat.class)

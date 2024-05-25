@@ -19,8 +19,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalTurkey extends RenderLiving<EntityAnimalTurkey> {
 
-    private static final ResourceLocation MALE = ModUtils.id("textures/entity/animal/huntable/turkeym.png");
-    private static final ResourceLocation FEMALE = ModUtils.id("textures/entity/animal/huntable/turkeyf.png");
+    private static final ResourceLocation MALE = ModUtils.resource("textures/entity/animal/huntable/turkeym.png");
+    private static final ResourceLocation FEMALE = ModUtils.resource("textures/entity/animal/huntable/turkeyf.png");
 
     public RenderAnimalTurkey(RenderManager manager) {
         super(manager, new ModelAnimalTurkey(), 0.5F);

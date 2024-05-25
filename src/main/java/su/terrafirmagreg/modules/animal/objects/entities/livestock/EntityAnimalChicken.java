@@ -146,15 +146,15 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
     @Override
     public TextComponentTranslation getTooltip() {
         if (this.getGender() == Gender.MALE) {
-            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.male_egg"));
+            return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.male_egg"));
         } else if (this.getAge() == Age.OLD) {
-            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.old"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.old"), getAnimalName());
         } else if (this.getAge() == Age.CHILD) {
-            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.young"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.young"), getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {
-            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.low_familiarity"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
         } else if (!hasEggs()) {
-            return new TextComponentTranslation(ModUtils.localize("tooltip.animal.product.no_egg"), getAnimalName());
+            return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.no_egg"), getAnimalName());
         }
         return null;
     }

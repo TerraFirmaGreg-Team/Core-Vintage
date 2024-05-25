@@ -77,7 +77,7 @@ public class RenderWoodPlowCart extends Render<EntityWoodPlowCart> {
 
     @Override
     protected ResourceLocation getEntityTexture(@NotNull EntityWoodPlowCart entity) {
-        return ModUtils.id("textures/entity/wood/plow_cart.png");
+        return ModUtils.resource("textures/entity/wood/plow_cart.png");
     }
 
     public void setupRotation(float entityYaw) {

@@ -19,7 +19,7 @@ import java.util.Map;
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCalculator extends GuiContainer {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/alloy_calculator.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/alloy_calculator.png");
 
     private final ContainerAlloyCalculator container;
 

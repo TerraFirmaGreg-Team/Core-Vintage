@@ -26,7 +26,7 @@ import java.io.IOException;
 
 public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/powderkeg.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/powderkeg.png");
     private final String translationKey;
 
     public GuiPowderkeg(Container container, InventoryPlayer playerInv, TilePowderKeg tile, IBlockState state) {
@@ -81,7 +81,7 @@ public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
     @Override
     protected void actionPerformed(@NotNull GuiButton button) throws IOException {
         if (button instanceof GuiButtonPowderkegSeal) {
-            ModuleDevice.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id));
+            ModuleDevice.getPacketService().sendToServer(new SCPacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

@@ -53,7 +53,7 @@ public class RenderWoodAnimalCart extends Render<EntityWoodAnimalCart> {
 
     @Override
     protected ResourceLocation getEntityTexture(@NotNull EntityWoodAnimalCart entity) {
-        return ModUtils.id("textures/entity/wood/animal_cart.png");
+        return ModUtils.resource("textures/entity/wood/animal_cart.png");
     }
 
     public void setupRotation(float entityYaw) {

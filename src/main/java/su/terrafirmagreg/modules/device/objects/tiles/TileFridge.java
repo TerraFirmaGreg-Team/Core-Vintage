@@ -115,7 +115,7 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
 
     @Override
     public void setAndUpdateSlots(int slot) {
-        ModuleDevice.PACKET_SERVICE.sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
+        ModuleDevice.getPacketService().sendToAllAround(new SCPacketTileEntity(this), world.provider.getDimension(), pos, 64);
         super.setAndUpdateSlots(slot);
     }
 
@@ -390,7 +390,7 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
             }
             if (++serverUpdate % 40 == 0) {
                 serverUpdate = 0;
-                ModuleDevice.PACKET_SERVICE.sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(), pos, 20);
+                ModuleDevice.getPacketService().sendToAllAround(new SCPacketFridge(pos, efficiency), world.provider.getDimension(), pos, 20);
             }
         }
     }

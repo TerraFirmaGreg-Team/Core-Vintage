@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalGoat extends RenderAnimal<EntityAnimalGoat> {
 
-    private static final ResourceLocation GOAT_OLD = ModUtils.id("textures/entity/animal/livestock/goat_old.png");
-    private static final ResourceLocation GOAT_YOUNG = ModUtils.id("textures/entity/animal/livestock/goat_young.png");
+    private static final ResourceLocation GOAT_OLD = ModUtils.resource("textures/entity/animal/livestock/goat_old.png");
+    private static final ResourceLocation GOAT_YOUNG = ModUtils.resource("textures/entity/animal/livestock/goat_young.png");
 
     public RenderAnimalGoat(RenderManager renderManager) {
         super(renderManager, new ModelAnimalGoat(), 0.7F, GOAT_YOUNG, GOAT_OLD);

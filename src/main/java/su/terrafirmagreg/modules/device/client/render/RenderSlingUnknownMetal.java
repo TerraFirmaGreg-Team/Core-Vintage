@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingUnknownMetal extends Render<EntityUnknownProjectile> {
 
-    private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.id("textures/blocks/metal/base.png");
+    private static final ResourceLocation UNKNOWN_INGOT_TEXTURE = ModUtils.resource("textures/blocks/metal/base.png");
     private final ModelUnknownProjectile unknownModel = new ModelUnknownProjectile();
 
     public RenderSlingUnknownMetal(RenderManager renderManager) {

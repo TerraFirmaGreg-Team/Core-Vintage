@@ -28,7 +28,7 @@ import java.util.function.Supplier;
 
 public final class CapabilityMetal {
 
-    public static final ResourceLocation KEY = ModUtils.id("metal_capability");
+    public static final ResourceLocation KEY = ModUtils.resource("metal_capability");
 
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_METAL_ITEMS = new HashMap<>(); //Used inside CT, set custom IMetalItem for items outside TFC
     public static final Map<String, Metal.ItemType> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();

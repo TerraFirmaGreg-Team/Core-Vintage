@@ -32,7 +32,7 @@ import static tfctech.client.TechGuiHandler.GUI_ELEMENTS;
 
 public class GuiSmelteryCauldron extends GuiContainerTE<TileSmelteryCauldron> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/smeltery_cauldron.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/smeltery_cauldron.png");
 
     public GuiSmelteryCauldron(Container container, InventoryPlayer playerInv, TileSmelteryCauldron tile) {
         super(container, playerInv, tile, BACKGROUND);

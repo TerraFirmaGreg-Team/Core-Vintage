@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalCoyote extends RenderLiving<EntityAnimalCoyote> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/coyote.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/predators/coyote.png");
 
     public RenderAnimalCoyote(RenderManager renderManager) {
         super(renderManager, new ModelAnimalCoyote(), 0.7F);

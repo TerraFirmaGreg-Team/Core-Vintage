@@ -14,10 +14,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalHare extends RenderLiving<EntityAnimalHare> {
 
-    private static final ResourceLocation BROWN = ModUtils.id("textures/entity/animal/huntable/hare/brown.png");
-    private static final ResourceLocation SPOTTED = ModUtils.id("textures/entity/animal/huntable/hare/spotted.png");
-    private static final ResourceLocation BLACK = ModUtils.id("textures/entity/animal/huntable/hare/black.png");
-    private static final ResourceLocation CREAM = ModUtils.id("textures/entity/animal/huntable/hare/cream.png");
+    private static final ResourceLocation BROWN = ModUtils.resource("textures/entity/animal/huntable/hare/brown.png");
+    private static final ResourceLocation SPOTTED = ModUtils.resource("textures/entity/animal/huntable/hare/spotted.png");
+    private static final ResourceLocation BLACK = ModUtils.resource("textures/entity/animal/huntable/hare/black.png");
+    private static final ResourceLocation CREAM = ModUtils.resource("textures/entity/animal/huntable/hare/cream.png");
 
     public RenderAnimalHare(RenderManager renderManager) {
         super(renderManager, new ModelAnimalHare(), 0.3F);

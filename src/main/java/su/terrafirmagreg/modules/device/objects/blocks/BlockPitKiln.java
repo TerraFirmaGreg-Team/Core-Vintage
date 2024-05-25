@@ -236,6 +236,6 @@ public class BlockPitKiln extends BaseBlock implements ITileProvider {
     @Override
     public IStateMapper getStateMapper() {
         return blockIn -> ImmutableMap.of(this.getDefaultState(),
-                new ModelResourceLocation(ModUtils.id("empty").toString()));
+                new ModelResourceLocation(ModUtils.resource("empty").toString()));
     }
 }

@@ -27,7 +27,7 @@ import java.io.IOException;
 
 public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
 
-    public static final ResourceLocation ANVIL_BACKGROUND = ModUtils.id("textures/gui/anvil.png");
+    public static final ResourceLocation ANVIL_BACKGROUND = ModUtils.resource("textures/gui/anvil.png");
     public static final int BUTTON_ID_STEP_MIN = 0;
     public static final int BUTTON_ID_STEP_MAX = 7;
     public static final int BUTTON_ID_PLAN = 8;

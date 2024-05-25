@@ -62,7 +62,7 @@ public final class TileUtils {
     }
 
     public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String name) {
-        GameRegistry.registerTileEntity(tileEntityClass, ModUtils.id("tile." + name));
+        GameRegistry.registerTileEntity(tileEntityClass, ModUtils.resource("tile." + name));
     }
 
 }

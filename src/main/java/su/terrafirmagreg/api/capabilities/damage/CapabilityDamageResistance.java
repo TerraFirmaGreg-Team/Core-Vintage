@@ -35,7 +35,7 @@ public final class CapabilityDamageResistance {
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ARMOR = new HashMap<>(); //Used inside CT, set custom IDamageResistance for armor items outside TFC
     public static final Map<String, Supplier<ICapabilityProvider>> ENTITY_RESISTANCE = new HashMap<>(); // Map entities -> Capability to damage resistance
 
-    public static final ResourceLocation KEY = ModUtils.id("damage_resistance_capability");
+    public static final ResourceLocation KEY = ModUtils.resource("damage_resistance_capability");
 
     @CapabilityInject(ICapabilityDamageResistance.class)
     public static Capability<ICapabilityDamageResistance> CAPABILITY;

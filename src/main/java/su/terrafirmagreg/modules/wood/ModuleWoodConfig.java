@@ -17,17 +17,17 @@ public class ModuleWoodConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".wood.blocks")
+
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Item settings")
-    @Config.LangKey("config." + MOD_ID + ".wood.items")
+
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".wood.misc")
+
     public static final MiscCategory MISC = new MiscCategory();
 
     static {
@@ -37,22 +37,22 @@ public class ModuleWoodConfig {
     public static final class BlocksCategory {
 
         @Config.Comment("Barrel")
-        @Config.LangKey("config." + MOD_ID + ".wood.barrel")
+
         public final Barrel BARREL = new Barrel();
 
         @Config.Comment("Barrel")
-        @Config.LangKey("config." + MOD_ID + ".wood.barrel")
+
         public final Support SUPPORT = new Support();
 
         public static final class Barrel {
 
             @Config.Comment("How much fluid (mB) can a barrel hold?")
             @Config.RangeInt(min = 100)
-            @Config.LangKey("config." + MOD_ID + ".wood.barrel.tank")
+
             public int tank = 10_000;
 
             @Config.Comment("List of fluids allowed to be inserted into a barrel.")
-            @Config.LangKey("config." + MOD_ID + ".wood.barrel.fluidWhitelist")
+
             public String[] fluidWhitelist = {
                     "fresh_water",
                     "hot_water",
@@ -98,17 +98,17 @@ public class ModuleWoodConfig {
 
             @Config.Comment("Horizontal radius of the support range of support beams.")
             @Config.RangeInt(min = 0, max = 8)
-            @Config.LangKey("config." + MOD_ID + ".general.fallable.supportBeamRangeHor")
+
             public int supportBeamRangeHor = 4;
 
             @Config.Comment("Upwards support range of support beams.")
             @Config.RangeInt(min = 0, max = 3)
-            @Config.LangKey("config." + MOD_ID + ".general.fallable.supportBeamRangeUp")
+
             public int supportBeamRangeUp = 1;
 
             @Config.Comment("Downwards support range of support beams.")
             @Config.RangeInt(min = 0, max = 3)
-            @Config.LangKey("config." + MOD_ID + ".general.fallable.supportBeamRangeDown")
+
             public int supportBeamRangeDown = 1;
         }
     }

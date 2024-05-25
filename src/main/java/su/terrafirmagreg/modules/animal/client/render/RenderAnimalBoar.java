@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalBoar extends RenderLiving<EntityAnimalBoar> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/huntable/boar.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/huntable/boar.png");
 
     public RenderAnimalBoar(RenderManager renderManager) {
         super(renderManager, new ModelAnimalBoar(), 0.7F);

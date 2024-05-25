@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalDuck extends RenderLiving<EntityAnimalDuck> {
 
-    private static final ResourceLocation DUCK_OLD = ModUtils.id("textures/entity/animal/livestock/duck_old.png");
-    private static final ResourceLocation DUCK_YOUNG = ModUtils.id("textures/entity/animal/livestock/duck_young.png");
+    private static final ResourceLocation DUCK_OLD = ModUtils.resource("textures/entity/animal/livestock/duck_old.png");
+    private static final ResourceLocation DUCK_YOUNG = ModUtils.resource("textures/entity/animal/livestock/duck_young.png");
 
-    private static final ResourceLocation DRAKE_OLD = ModUtils.id("textures/entity/animal/livestock/drake_old.png");
-    private static final ResourceLocation DRAKE_YOUNG = ModUtils.id("textures/entity/animal/livestock/drake_young.png");
+    private static final ResourceLocation DRAKE_OLD = ModUtils.resource("textures/entity/animal/livestock/drake_old.png");
+    private static final ResourceLocation DRAKE_YOUNG = ModUtils.resource("textures/entity/animal/livestock/drake_young.png");
 
-    private static final ResourceLocation DUCKLING_TEXTURE = ModUtils.id("textures/entity/animal/livestock/duckling.png");
+    private static final ResourceLocation DUCKLING_TEXTURE = ModUtils.resource("textures/entity/animal/livestock/duckling.png");
 
     public RenderAnimalDuck(RenderManager manager) {
         super(manager, new ModelAnimalDuck(), 0.3F);

@@ -95,12 +95,12 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
 
     @Override
     public ItemMeshDefinition getItemMesh() {
-        var modelFull = new ModelResourceLocation(ModUtils.id(getRegistryKey()), "inventory");
-        var model4 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/4"), "inventory");
-        var model3 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/3"), "inventory");
-        var model2 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/2"), "inventory");
-        var model1 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/1"), "inventory");
-        var model0 = new ModelResourceLocation(ModUtils.id(getRegistryKey() + "/0"), "inventory");
+        var modelFull = new ModelResourceLocation(ModUtils.resource(getRegistryKey()), "inventory");
+        var model4 = new ModelResourceLocation(ModUtils.resource(getRegistryKey() + "/4"), "inventory");
+        var model3 = new ModelResourceLocation(ModUtils.resource(getRegistryKey() + "/3"), "inventory");
+        var model2 = new ModelResourceLocation(ModUtils.resource(getRegistryKey() + "/2"), "inventory");
+        var model1 = new ModelResourceLocation(ModUtils.resource(getRegistryKey() + "/1"), "inventory");
+        var model0 = new ModelResourceLocation(ModUtils.resource(getRegistryKey() + "/0"), "inventory");
 
         return stack -> switch ((int) Math.floor(getLiquidAmount(stack) / (double) capacity * 5F)) {
             case 5 -> modelFull;

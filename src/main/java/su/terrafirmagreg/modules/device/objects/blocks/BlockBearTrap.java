@@ -150,6 +150,7 @@ public class BlockBearTrap extends BaseBlock implements ITileProvider {
         if (entityIn instanceof EntityLivingBase entityLiving) {
             var tile = TileUtils.getTile(world, pos, TileBearTrap.class);
             if (tile == null) return;
+
             if (tile.isOpen()) {
                 int debuffDuration = ConfigTFCThings.Items.BEAR_TRAP.debuffDuration;
                 double healthCut = ConfigTFCThings.Items.BEAR_TRAP.healthCut;

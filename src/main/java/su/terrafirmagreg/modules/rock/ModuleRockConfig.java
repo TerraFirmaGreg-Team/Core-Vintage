@@ -17,17 +17,17 @@ public class ModuleRockConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".rock.blocks")
+
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Item settings")
-    @Config.LangKey("config." + MOD_ID + ".rock.items")
+
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".rock.misc")
+
     public static final MiscCategory MISC = new MiscCategory();
 
     static {
@@ -37,7 +37,7 @@ public class ModuleRockConfig {
     public static final class BlocksCategory {
 
         @Config.Comment("Enable the creation of stone anvils.")
-        @Config.LangKey("config." + MOD_ID + ".rock.blocks.enableStoneAnvil")
+
         public boolean enableStoneAnvil = true;
 
     }
@@ -45,7 +45,7 @@ public class ModuleRockConfig {
     public static final class ItemsCategory {
 
         @Config.Comment("Enable the creation of stone anvils.")
-        @Config.LangKey("config." + MOD_ID + ".rock.blocks.enableStoneAnvil")
+
         public boolean enableStoneAnvil = true;
 
     }

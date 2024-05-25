@@ -8,8 +8,6 @@ import net.minecraft.util.ResourceLocation;
 
 import com.google.common.collect.ImmutableList;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collection;
 import java.util.function.Function;
 
@@ -27,18 +25,17 @@ public class MultiTextureAtlasSprite extends TextureAtlasSprite {
     }
 
     @Override
-    public boolean hasCustomLoader(@NotNull IResourceManager manager, @NotNull ResourceLocation location) {
+    public boolean hasCustomLoader(IResourceManager manager, ResourceLocation location) {
         return true;
     }
 
     @Override
-    public @NotNull Collection<ResourceLocation> getDependencies() {
+    public Collection<ResourceLocation> getDependencies() {
         return dependencies;
     }
 
     @Override
-    public boolean load(@NotNull IResourceManager manager, @NotNull ResourceLocation location,
-                        Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
+    public boolean load(IResourceManager manager, ResourceLocation location, Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
         //получаем текстуры по отдельности
         TextureAtlasSprite sprite = textureGetter.apply(texture1);
         TextureAtlasSprite mappingSprite = textureGetter.apply(texture2);

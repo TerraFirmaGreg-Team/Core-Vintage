@@ -17,9 +17,9 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFirePit extends GuiContainerTE<TileFirePit> {
 
-    private static final ResourceLocation FIRE_PIT_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit.png");
-    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit_cooking_pot.png");
-    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = ModUtils.id("textures/gui/container/fire_pit_grill.png");
+    private static final ResourceLocation FIRE_PIT_BACKGROUND = ModUtils.resource("textures/gui/container/fire_pit.png");
+    private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = ModUtils.resource("textures/gui/container/fire_pit_cooking_pot.png");
+    private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = ModUtils.resource("textures/gui/container/fire_pit_grill.png");
 
     private final BlockFirePit.FirePitAttachment attachment;
 

@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalBlackBear extends RenderLiving<EntityAnimalBlackBear> {
 
-    private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.id("textures/entity/animal/predators/blackbear.png");
+    private static final ResourceLocation BLACKBEAR_TEXTURE = ModUtils.resource("textures/entity/animal/predators/blackbear.png");
 
     public RenderAnimalBlackBear(RenderManager renderManager) {
         super(renderManager, new ModelAnimalBlackBear(), 0.7F);

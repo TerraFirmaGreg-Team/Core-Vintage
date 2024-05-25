@@ -38,7 +38,7 @@ public interface IMetalBlock extends IType<MetalType>, IVariant<MetalBlockVarian
      */
     @NotNull
     default ResourceLocation getResourceLocation() {
-        return ModUtils.id(String.format("metal/%s", getVariant()));
+        return ModUtils.resource(String.format("metal/%s", getVariant()));
     }
 
     @Override

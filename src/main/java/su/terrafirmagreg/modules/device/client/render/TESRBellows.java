@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 @SideOnly(Side.CLIENT)
 public class TESRBellows extends BaseTESR<TileBellows> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/blocks/device/bellows/tesr.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/blocks/device/bellows/tesr.png");
 
     @Override
     public void render(TileBellows te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalMongoose extends RenderLiving<EntityAnimalMongoose> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/huntable/mongoose.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/huntable/mongoose.png");
 
     public RenderAnimalMongoose(RenderManager renderManager) {
         super(renderManager, new ModelAnimalMongoose(), 0.7F);

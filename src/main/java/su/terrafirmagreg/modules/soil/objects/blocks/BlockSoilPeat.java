@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import gregtech.api.items.toolitem.ToolClasses;
-
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
+
+import gregtech.api.items.toolitem.ToolClasses;
 
 public class BlockSoilPeat extends BaseBlock {
 

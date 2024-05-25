@@ -34,6 +34,6 @@ public interface IWoodItem extends IType<WoodType>, IVariant<WoodItemVariant>, I
      * @return Расположение ресурса
      */
     default ResourceLocation getResourceLocation() {
-        return ModUtils.id(String.format("wood/%s", getVariant()));
+        return ModUtils.resource(String.format("wood/%s", getVariant()));
     }
 }

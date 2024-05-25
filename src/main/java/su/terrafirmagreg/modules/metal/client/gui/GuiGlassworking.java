@@ -1,6 +1,7 @@
-package tfctech.client.gui;
+package su.terrafirmagreg.modules.metal.client.gui;
 
 import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.modules.metal.objects.container.ContainerGlassworking;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -16,7 +17,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
-import tfctech.objects.container.ContainerGlassworking;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 

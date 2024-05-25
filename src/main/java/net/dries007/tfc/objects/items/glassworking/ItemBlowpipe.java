@@ -13,7 +13,7 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
-import tfctech.client.TechGuiHandler;
+import net.dries007.tfc.client.TFCGuiHandler;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,7 +49,7 @@ public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
         if (!world.isRemote && !player.isSneaking()) {
             IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
             if (cap instanceof GlassMolderCapability glassMolderCapability && glassMolderCapability.canWork()) {
-                TechGuiHandler.openGui(world, player.getPosition(), player, TechGuiHandler.Type.GLASSWORKING);
+                TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.GLASSWORKING);
             }
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);

@@ -17,32 +17,24 @@ public class ModuleDeviceConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".device.blocks")
-    public static final BlocksCategory BLOCKS = new BlocksCategory();
+    public static BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Item settings")
-    @Config.LangKey("config." + MOD_ID + ".device.items")
-    public static final ItemsCategory ITEMS = new ItemsCategory();
+    public static ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".device.misc")
-    public static final MiscCategory MISC = new MiscCategory();
+    public static MiscCategory MISC = new MiscCategory();
 
-    static {
-        ConfigAnytime.register(ModuleDeviceConfig.class);
-    }
-
-    public static final class BlocksCategory {
+    public static class BlocksCategory {
 
     }
 
-    public static final class ItemsCategory {
+    public static class ItemsCategory {
 
         @Config.Comment("Water Flasks")
-        @Config.LangKey("config." + MOD_ID + ".device.water_flasks")
-        public final WaterFlasks WATER_FLASKS = new WaterFlasks();
+        public WaterFlasks WATER_FLASKS = new WaterFlasks();
 
         public static final class WaterFlasks {
 
@@ -62,8 +54,12 @@ public class ModuleDeviceConfig {
 
     }
 
-    public static final class MiscCategory {
+    public static class MiscCategory {
 
+    }
+
+    static {
+        ConfigAnytime.register(ModuleDeviceConfig.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

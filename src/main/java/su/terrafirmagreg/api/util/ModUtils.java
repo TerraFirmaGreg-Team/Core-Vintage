@@ -39,15 +39,23 @@ public final class ModUtils {
     /**
      * Возвращает идентификатор ресурса на основе строки.
      *
-     * @param string строка идентификатора ресурса
+     * @param name строка идентификатора ресурса
      * @return идентификатор ресурса
      */
-    public static ResourceLocation id(String string) {
-        return new ResourceLocation(MOD_ID, string);
+    public static ResourceLocation resource(String name) {
+        return new ResourceLocation(MOD_ID, name);
     }
 
-    public static String name(String string) {
-        return String.format("%s [%s]", MOD_NAME, string);
+    public static String id(String name) {
+        return String.format("%s:%s", MOD_ID, name);
+    }
+
+    public static String name(String name) {
+        return String.format("%s [%s]", MOD_NAME, name);
+    }
+
+    public static String localize(String key, String name) {
+        return String.format("%s.%s", key, ModUtils.localize(name));
     }
 
     public static String localize(String name) {

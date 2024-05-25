@@ -17,17 +17,17 @@ public class ModuleMetalConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".metal.blocks")
+
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Items settings")
-    @Config.LangKey("config." + MOD_ID + ".metal.items")
+
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".metal.misc")
+
     public static final MiscCategory MISC = new MiscCategory();
 
     static {

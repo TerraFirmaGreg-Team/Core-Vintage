@@ -26,7 +26,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 @SideOnly(Side.CLIENT)
 public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/blast_furnace.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/blast_furnace.png");
 
     List<Float> tempList = new ArrayList<>();
     long lastBurningTicks = 0;

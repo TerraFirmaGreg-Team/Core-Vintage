@@ -38,7 +38,7 @@ import java.awt.*;
 @SideOnly(Side.CLIENT)
 public final class OverlayPlayerData {
 
-    private static final ResourceLocation ICONS = ModUtils.id("textures/gui/icons/overlay.png");
+    private static final ResourceLocation ICONS = ModUtils.resource("textures/gui/icons/overlay.png");
     private static final ResourceLocation MC_ICONS = new ResourceLocation("minecraft:textures/gui/icons.png");
 
     private static void drawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV) {

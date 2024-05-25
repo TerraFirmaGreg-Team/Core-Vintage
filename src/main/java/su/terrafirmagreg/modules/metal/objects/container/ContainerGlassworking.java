@@ -1,4 +1,4 @@
-package tfctech.objects.container;
+package su.terrafirmagreg.modules.metal.objects.container;
 
 import su.terrafirmagreg.api.lib.MathConstants;
 

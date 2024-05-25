@@ -17,7 +17,7 @@ import java.util.List;
 
 public class GuiIceBunker extends GuiContainerTE<TileIceBunker> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/ice_bunker.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/ice_bunker.png");
     private final InventoryPlayer playerInventory;
     private final TileIceBunker te;
 

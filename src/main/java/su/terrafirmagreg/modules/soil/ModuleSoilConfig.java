@@ -11,29 +11,30 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.cleanroommc.configanytime.ConfigAnytime;
 
 
-import static su.terrafirmagreg.api.data.Constants.*;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
+import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "soil")
 public class ModuleSoilConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".soil.blocks")
+
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Item settings")
-    @Config.LangKey("config." + MOD_ID + ".soil.items")
+
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".soil.misc")
+
     public static final MiscCategory MISC = new MiscCategory();
 
     @Config.Name("Client")
     @Config.Comment("Client Side")
-    @Config.LangKey("config." + MOD_ID + ".soil.client")
+
     public static final ClientCategory CLIENT = new ClientCategory();
 
     static {
@@ -87,39 +88,39 @@ public class ModuleSoilConfig {
     public static final class ClientCategory {
 
         @Config.Comment("If true, grass and foliage will be slightly varied in color.")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseEnable")
+
         public boolean noiseEnable = true;
 
         @Config.Comment("If true, grass and foliage will be colored seasonally.")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorEnable")
+
         public boolean seasonColorEnable = true;
 
         @Config.Comment("The noise scale. Default = 10")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseScale")
+
         public float noiseScale = 10f;
 
         @Config.Comment("How many darkness levels should the noise have? Default = 5")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseLevels")
+
         public int noiseLevels = 5;
 
         @Config.Comment("How potent should the darkness be? Default = 0.15")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.noiseDarkness")
+
         public float noiseDarkness = 0.15f;
 
         @Config.Comment("ARGB code for summer coloring in hexadecimal. Default: 1155FF44")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorSummer")
+
         public String seasonColorSummer = "1155FF44";
 
         @Config.Comment("ARGB code for summer coloring in hexadecimal. Default: 55FFDD44")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorAutumn")
+
         public String seasonColorAutumn = "55FFDD44";
 
         @Config.Comment("ARGB code for winter coloring in hexadecimal. Default: 335566FF")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorWinter")
+
         public String seasonColorWinter = "335566FF";
 
         @Config.Comment("ARGB code for spring coloring in hexadecimal. Default: 3355FFBB")
-        @Config.LangKey("config." + MODID_TFC + ".client.grassColor.seasonColorSpring")
+
         public String seasonColorSpring = "3355FFBB";
 
     }

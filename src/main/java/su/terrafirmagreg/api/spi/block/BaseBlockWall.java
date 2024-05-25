@@ -4,8 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -39,6 +37,9 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
 
         this.modelBlock = modelBlock;
         this.modelState = modelBlock.getDefaultState();
+
+        getSettings()
+                .ignoresProperties(VARIANT);
     }
 
     @Override
@@ -112,8 +113,4 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
         return this.modelBlock.getMapColor(this.modelState, worldIn, pos);
     }
 
-    @Override
-    public IStateMapper getStateMapper() {
-        return new StateMap.Builder().ignore(VARIANT).build();
-    }
 }

@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalGrouse extends RenderLiving<EntityAnimalGrouse> {
 
-    private static final ResourceLocation FEMALE_YOUNG = ModUtils.id("textures/entity/animal/livestock/grousef_young.png");
-    private static final ResourceLocation FEMALE_OLD = ModUtils.id("textures/entity/animal/livestock/grousef_old.png");
+    private static final ResourceLocation FEMALE_YOUNG = ModUtils.resource("textures/entity/animal/livestock/grousef_young.png");
+    private static final ResourceLocation FEMALE_OLD = ModUtils.resource("textures/entity/animal/livestock/grousef_old.png");
 
-    private static final ResourceLocation MALE_YOUNG = ModUtils.id("textures/entity/animal/livestock/grousem_young.png");
-    private static final ResourceLocation MALE_OLD = ModUtils.id("textures/entity/animal/livestock/grousem_old.png");
+    private static final ResourceLocation MALE_YOUNG = ModUtils.resource("textures/entity/animal/livestock/grousem_young.png");
+    private static final ResourceLocation MALE_OLD = ModUtils.resource("textures/entity/animal/livestock/grousem_old.png");
 
-    private static final ResourceLocation CHICK_TEXTURE = ModUtils.id("textures/entity/animal/livestock/grouse_chick.png");
+    private static final ResourceLocation CHICK_TEXTURE = ModUtils.resource("textures/entity/animal/livestock/grouse_chick.png");
 
     public RenderAnimalGrouse(RenderManager manager) {
         super(manager, new ModelAnimalGrouse(), 0.3F);

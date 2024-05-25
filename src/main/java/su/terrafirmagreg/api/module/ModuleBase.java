@@ -62,7 +62,8 @@ public abstract class ModuleBase {
 
     protected RegistryManager registryManager;
     protected IPacketRegistry packetRegistry;
-    protected IPacketService packetService;
+    @Getter
+    protected static IPacketService packetService;
 
     private ThreadedNetworkWrapper threadedNetworkWrapper;
     private NetworkEntityIdSupplier networkEntityIdSupplier;
@@ -103,10 +104,10 @@ public abstract class ModuleBase {
         if (this.threadedNetworkWrapper == null) {
             this.threadedNetworkWrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(this.modID, ThreadedNetworkWrapper::new);
             this.packetRegistry = PACKET_REGISTRY_MAP.computeIfAbsent(this.modID, s -> new PacketRegistry(this.threadedNetworkWrapper));
-            this.packetService = new PacketService(this.threadedNetworkWrapper);
+            packetService = new PacketService(this.threadedNetworkWrapper);
         }
 
-        return this.packetService;
+        return packetService;
     }
 
     // ===== FML Lifecycle ======================================================================================================================== //

@@ -381,7 +381,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            player.sendMessage(new TextComponentTranslation(ModUtils.localize("tooltip.animal.mating.pregnant"), getName()));
+                            player.sendMessage(new TextComponentTranslation(ModUtils.localize("tooltip", "animal.mating.pregnant"), getName()));
                         }
                     }
                 }

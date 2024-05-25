@@ -21,7 +21,7 @@ public class AnvilRecipeAdd {
     public static void register(RegistryEvent.Register<AnvilRecipe> event) {
         event.getRegistry().registerAll(
                 new AnvilRecipe(
-                        ModUtils.id("unfinished_iron_flask"),
+                        ModUtils.resource("unfinished_iron_flask"),
                         IIngredient.of(new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, SHEET))),
                         new ItemStack(ItemsDevice.UNFINISHED_FLASK), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST,
                         BEND_THIRD_LAST)

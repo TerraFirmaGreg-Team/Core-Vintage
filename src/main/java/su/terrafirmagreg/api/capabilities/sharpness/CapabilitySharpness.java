@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class CapabilitySharpness {
 
-    public static final ResourceLocation KEY = ModUtils.id("sharpness_capability");
+    public static final ResourceLocation KEY = ModUtils.resource("sharpness_capability");
 
     @CapabilityInject(ICapabilitySharpness.class)
     public static Capability<ICapabilitySharpness> CAPABILITY;

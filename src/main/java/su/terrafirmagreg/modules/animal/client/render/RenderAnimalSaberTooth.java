@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalSaberTooth extends RenderLiving<EntityAnimalSaberTooth> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/sabertooth.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/predators/sabertooth.png");
 
     public RenderAnimalSaberTooth(RenderManager renderManager) {
         super(renderManager, new ModelAnimalSaberTooth(), 0.7F);

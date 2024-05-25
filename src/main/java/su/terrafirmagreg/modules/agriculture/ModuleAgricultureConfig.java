@@ -17,17 +17,14 @@ public class ModuleAgricultureConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".agriculture.blocks")
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Items settings")
-    @Config.LangKey("config." + MOD_ID + ".agriculture.items")
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".agriculture.misc")
     public static final MiscCategory MISC = new MiscCategory();
 
     static {

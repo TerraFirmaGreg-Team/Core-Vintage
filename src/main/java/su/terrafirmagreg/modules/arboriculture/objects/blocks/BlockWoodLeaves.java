@@ -393,7 +393,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
     @Override
     public ResourceLocation getResourceLocation() {
-        return ModUtils.id(getRegistryKey());
+        return ModUtils.resource(getRegistryKey());
     }
 
     @Override

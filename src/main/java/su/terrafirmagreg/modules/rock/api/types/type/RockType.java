@@ -102,7 +102,7 @@ public class RockType implements Comparable<RockType> {
      */
     @NotNull
     public ResourceLocation getTexture() {
-        return ModUtils.id("textures/blocks/rock/raw/" + this + ".png");
+        return ModUtils.resource("textures/blocks/rock/raw/" + this + ".png");
     }
 
     public String getLocalizedName() {

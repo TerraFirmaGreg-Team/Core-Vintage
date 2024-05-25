@@ -18,7 +18,7 @@ import java.util.List;
 
 public class GuiCellarShelf extends GuiContainerTE<TileCellarShelf> {
 
-    public static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/cellar_shelf.png");
+    public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/cellar_shelf.png");
     private static TileCellarShelf TE;
     private final String translationKey;
     private final InventoryPlayer playerInventory;

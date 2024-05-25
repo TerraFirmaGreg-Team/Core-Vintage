@@ -29,6 +29,7 @@ public class MachineEnergyContainer extends EnergyStorage implements INBTSeriali
 
     public MachineEnergyContainer(int capacity, int maxReceive, int energy) {
         super(capacity, maxReceive, 0, energy);
+
     }
 
     /**

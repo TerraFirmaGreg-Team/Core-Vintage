@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalHyena extends RenderLiving<EntityAnimalHyena> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/hyena.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/predators/hyena.png");
 
     public RenderAnimalHyena(RenderManager renderManager) {
         super(renderManager, new ModelAnimalHyena(), 0.7F);

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderSlingMetal extends Render<EntitySlingStone> {
 
-    private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.id("textures/blocks/metal/base.png");
+    private static final ResourceLocation SLING_STONE_TEXTURE = ModUtils.resource("textures/blocks/metal/base.png");
     private final ModelSlingStone slingStoneModel = new ModelSlingStone();
 
     public RenderSlingMetal(RenderManager renderManager) {

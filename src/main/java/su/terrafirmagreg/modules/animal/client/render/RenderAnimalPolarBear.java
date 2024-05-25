@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalPolarBear extends RenderLiving<EntityAnimalPolarBear> {
 
-    private static final ResourceLocation POLARBEAR_TEXTURE = ModUtils.id("textures/entity/animal/predators/polarbear.png");
+    private static final ResourceLocation POLARBEAR_TEXTURE = ModUtils.resource("textures/entity/animal/predators/polarbear.png");
 
     public RenderAnimalPolarBear(RenderManager renderManager) {
         super(renderManager, new ModelAnimalPolarBear(), 0.7F);

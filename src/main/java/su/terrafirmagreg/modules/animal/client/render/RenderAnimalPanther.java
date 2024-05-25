@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RenderAnimalPanther extends RenderLiving<EntityAnimalPanther> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/predators/panther.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/predators/panther.png");
 
     public RenderAnimalPanther(RenderManager renderManager) {
         super(renderManager, new ModelAnimalPanther(), 0.7F);

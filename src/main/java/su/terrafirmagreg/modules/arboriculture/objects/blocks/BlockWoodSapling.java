@@ -196,6 +196,6 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
 
     @Override
     public ResourceLocation getResourceLocation() {
-        return ModUtils.id(getRegistryKey());
+        return ModUtils.resource(getRegistryKey());
     }
 }

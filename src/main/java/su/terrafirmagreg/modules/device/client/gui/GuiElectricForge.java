@@ -21,7 +21,7 @@ import java.io.IOException;
 
 public class GuiElectricForge extends GuiContainerTE<TileElectricForge> {
 
-    private static final ResourceLocation BACKGROUND = ModUtils.id("textures/gui/container/electric_forge.png");
+    private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/electric_forge.png");
 
     public GuiElectricForge(Container container, InventoryPlayer playerInv, TileElectricForge tile) {
         super(container, playerInv, tile, BACKGROUND);

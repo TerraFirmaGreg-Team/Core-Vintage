@@ -17,17 +17,17 @@ public class ModuleFoodConfig {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-    @Config.LangKey("config." + MOD_ID + ".food.blocks")
+
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Items settings")
-    @Config.LangKey("config." + MOD_ID + ".food.items")
+
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-    @Config.LangKey("config." + MOD_ID + ".food.misc")
+
     public static final MiscCategory MISC = new MiscCategory();
 
     static {

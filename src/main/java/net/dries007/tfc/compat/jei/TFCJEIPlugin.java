@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.metal.client.gui.GuiGlassworking;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
@@ -89,7 +90,6 @@ import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-import tfctech.client.gui.GuiGlassworking;
 
 import java.util.ArrayList;
 import java.util.Collection;

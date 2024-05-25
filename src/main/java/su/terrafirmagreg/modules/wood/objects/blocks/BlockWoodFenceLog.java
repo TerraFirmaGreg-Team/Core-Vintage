@@ -19,7 +19,7 @@ public class BlockWoodFenceLog extends BlockWoodFence {
 
     @Override
     public ResourceLocation getResourceLocation() {
-        return ModUtils.id(getRegistryKey());
+        return ModUtils.resource(getRegistryKey());
     }
 
     @Override

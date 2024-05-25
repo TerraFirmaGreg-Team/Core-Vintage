@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderAnimalWildebeest extends RenderLiving<EntityAnimalWildebeest> {
 
-    private static final ResourceLocation TEXTURE = ModUtils.id("textures/entity/animal/huntable/wildebeest.png");
+    private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/huntable/wildebeest.png");
 
     public RenderAnimalWildebeest(RenderManager manager) {
         super(manager, new ModelAnimalWildebeest(), 0.7F);

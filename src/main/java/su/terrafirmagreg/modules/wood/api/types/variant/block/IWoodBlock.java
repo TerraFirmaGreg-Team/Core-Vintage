@@ -40,7 +40,7 @@ public interface IWoodBlock extends IType<WoodType>, IVariant<WoodBlockVariant>,
      * @return расположение ресурса
      */
     default ResourceLocation getResourceLocation() {
-        return ModUtils.id(String.format("wood/%s", getVariant()));
+        return ModUtils.resource(String.format("wood/%s", getVariant()));
     }
 
     @Override

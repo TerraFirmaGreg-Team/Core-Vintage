@@ -31,7 +31,7 @@ import java.util.List;
 @SideOnly(Side.CLIENT)
 public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
 
-    public static final ResourceLocation PLAN_BACKGROUND = ModUtils.id("textures/gui/anvil_plan.png");
+    public static final ResourceLocation PLAN_BACKGROUND = ModUtils.resource("textures/gui/anvil_plan.png");
 
     private final ItemStack inputStack;
     private int page;

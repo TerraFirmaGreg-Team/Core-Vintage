@@ -61,9 +61,9 @@ public class TileSmelteryCauldron extends TEInventory
         if (!world.isRemote) {
             if (++reload >= 10) {
                 reload = 0;
-                TileSmelteryFirebox firebox = TileUtils.getTile(world, pos.down(), TileSmelteryFirebox.class);
-                if (firebox != null) {
-                    temp = firebox.getTemperature();
+                var tile = TileUtils.getTile(world, pos.down(), TileSmelteryFirebox.class);
+                if (tile != null) {
+                    temp = tile.getTemperature();
                 } else {
                     temp = 0;
                 }
@@ -88,8 +88,8 @@ public class TileSmelteryCauldron extends TEInventory
                         }
                         tank.fillInternal(output, true);
                         temp -= ConfigTFC.Devices.TEMPERATURE.heatingModifier * 150;
-                        if (firebox != null) {
-                            firebox.setTemperature(temp);
+                        if (tile != null) {
+                            tile.setTemperature(temp);
                         }
                     }
                 }

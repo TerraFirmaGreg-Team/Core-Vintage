@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import lombok.Getter;
 
 @Getter
@@ -33,7 +35,7 @@ public class BlockWoodBookshelf extends BlockBookshelf implements IWoodBlock {
                 .addOreDict(variant)
                 .addOreDict(variant, type);
 
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

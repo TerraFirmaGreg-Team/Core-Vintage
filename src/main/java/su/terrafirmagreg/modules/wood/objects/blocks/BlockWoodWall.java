@@ -14,6 +14,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import lombok.Getter;
 
 @Getter
@@ -33,7 +35,7 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodBlock {
                 .addOreDict("wall", "wood")
                 .addOreDict("wall", "wood", type);
 
-        setHarvestLevel("axe", model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+        setHarvestLevel(ToolClasses.AXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

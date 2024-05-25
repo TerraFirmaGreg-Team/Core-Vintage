@@ -15,6 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -38,7 +40,7 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
                 .addOreDict(variant)
                 .addOreDict(variant, type);
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
     public BlockRock(RockBlockVariant variant, RockType type) {

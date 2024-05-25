@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -39,7 +38,7 @@ public class GuiHandler implements IGuiHandler {
         BlockPos blockPos = new BlockPos(x, y, z);
         IBlockState blockState = world.getBlockState(blockPos);
 
-        TileEntity tileEntity = TileUtils.getTile(world, blockPos);
+        var tile = TileUtils.getTile(world, blockPos);
 
         Entity entity = world.getEntityByID(x);
 
@@ -48,7 +47,7 @@ public class GuiHandler implements IGuiHandler {
 
         Type type = Type.valueOf(ID);
 
-        if (tileEntity instanceof IContainerProvider<?, ?> containerProvider) {
+        if (tile instanceof IContainerProvider<?, ?> containerProvider) {
             return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
         }
 
@@ -71,7 +70,7 @@ public class GuiHandler implements IGuiHandler {
         BlockPos blockPos = new BlockPos(x, y, z);
         IBlockState blockState = world.getBlockState(blockPos);
 
-        TileEntity tileEntity = TileUtils.getTile(world, blockPos);
+        var tile = TileUtils.getTile(world, blockPos);
 
         Entity entity = world.getEntityByID(x);
 
@@ -80,7 +79,7 @@ public class GuiHandler implements IGuiHandler {
 
         Type type = Type.valueOf(ID);
 
-        if (tileEntity instanceof IContainerProvider<?, ?> containerProvider) {
+        if (tile instanceof IContainerProvider<?, ?> containerProvider) {
             return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
         }
 

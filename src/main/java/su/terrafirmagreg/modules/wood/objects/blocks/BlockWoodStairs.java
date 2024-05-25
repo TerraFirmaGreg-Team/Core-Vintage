@@ -7,6 +7,8 @@ import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import lombok.Getter;
 
 @Getter
@@ -25,7 +27,7 @@ public class BlockWoodStairs extends BaseBlockStairs implements IWoodBlock {
                 .addOreDict("stairs")
                 .addOreDict("stairs", "wood");
 
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

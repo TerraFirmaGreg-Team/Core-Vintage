@@ -30,6 +30,10 @@ public class ModuleRockConfig {
     @Config.LangKey("config." + MOD_ID + ".rock.misc")
     public static final MiscCategory MISC = new MiscCategory();
 
+    static {
+        ConfigAnytime.register(ModuleRockConfig.class);
+    }
+
     public static final class BlocksCategory {
 
         @Config.Comment("Enable the creation of stone anvils.")
@@ -48,10 +52,6 @@ public class ModuleRockConfig {
 
     public static final class MiscCategory {
 
-    }
-    
-    static {
-        ConfigAnytime.register(ModuleRockConfig.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

@@ -21,7 +21,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 
     private final double speed;
     private final EntityAnimal theCreature;
-    private final World theWorld;
+    private final World world;
     //This is a helper map to prevent chickens not choose unreachable nest boxes.
     private final Map<BlockPos, Long> failureDepressionMap;
     private int currentTick;
@@ -33,7 +33,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
     public EntityAnimalAIFindNest(EntityAnimal eAnimal, double speed) {
         this.theCreature = eAnimal;
         this.speed = speed;
-        this.theWorld = eAnimal.world;
+        this.world = eAnimal.world;
         this.failureDepressionMap = new HashMap<>();
         this.setMutexBits(5);
     }
@@ -48,7 +48,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
 
     @Override
     public boolean shouldContinueExecuting() {
-        if (this.end || !this.isNestBlock(this.theWorld, nestPos)) {
+        if (this.end || !this.isNestBlock(this.world, nestPos)) {
             this.end = false;
             this.theCreature.getNavigator().clearPath();
             if (this.theCreature.isRiding()) this.theCreature.dismountRidingEntity();
@@ -73,27 +73,27 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
             this.theCreature.getNavigator().tryMoveToXYZ(this.nestPos.getX() + 0.5D, this.nestPos.getY(), this.nestPos.getZ() + 0.5D, this.speed);
             if (this.currentTick > 200) {
                 //We never reached it in 10 secs, lets give up on this nest box
-                failureDepressionMap.put(nestPos, theWorld.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
+                failureDepressionMap.put(nestPos, world.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
                 this.end = true;
             }
         } else {
-            TileNestBox te = TileUtils.getTile(this.theWorld, nestPos, TileNestBox.class);
-            if (te != null && theCreature instanceof IAnimal animal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
-                if (!te.hasBird()) {
-                    te.seatOnThis(theCreature);
+            var tile = TileUtils.getTile(world, nestPos, TileNestBox.class);
+            if (tile != null && theCreature instanceof IAnimal animal && ((IAnimal) theCreature).getType() == IAnimal.Type.OVIPAROUS) {
+                if (!tile.hasBird()) {
+                    tile.seatOnThis(theCreature);
                     this.currentTick = 0;
                 }
                 if (this.currentTick >= this.maxSittingTicks) {
                     List<ItemStack> eggs = animal.getProducts();
                     for (ItemStack egg : eggs) {
-                        te.insertEgg(egg);
+                        tile.insertEgg(egg);
                     }
                     animal.setFertilized(false);
                     animal.setProductsCooldown();
                     this.end = true;
-                } else if (te.getBird() != theCreature) {
+                } else if (tile.getBird() != theCreature) {
                     //Used by another bird, give up on this one for now
-                    failureDepressionMap.put(nestPos, theWorld.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
+                    failureDepressionMap.put(nestPos, world.getTotalWorldTime() + ICalendar.TICKS_IN_HOUR * 4);
                     this.end = true;
                 }
             }
@@ -106,7 +106,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
         for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(theCreature.getPosition()
                 .add(-16, 0, -16), theCreature.getPosition()
                 .add(16, 4, 16))) {
-            if (this.isNestBlock(this.theWorld, pos) && this.theWorld.isAirBlock(pos.up())) {
+            if (this.isNestBlock(this.world, pos) && this.world.isAirBlock(pos.up())) {
                 double d1 = this.theCreature.getDistanceSq(pos);
 
                 if (d1 < d0) {
@@ -127,7 +127,7 @@ public class EntityAnimalAIFindNest extends EntityAIBase {
             else
                 failureDepressionMap.remove(pos);
         }
-        TileNestBox te = TileUtils.getTile(world, pos, TileNestBox.class);
-        return te != null && te.hasFreeSlot() && (!te.hasBird() || te.getBird() == this.theCreature);
+        var tile = TileUtils.getTile(world, pos, TileNestBox.class);
+        return tile != null && tile.hasFreeSlot() && (!tile.hasBird() || tile.getBird() == this.theCreature);
     }
 }

@@ -182,7 +182,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable, IContai
             if (state.getBlock() instanceof BlockLogPile) {
                 if (state.getValue(LIT)) continue;
                 world.setBlockState(pos.offset(side), state.withProperty(LIT, true));
-                TileLogPile tile = TileUtils.getTile(world, pos.offset(side), TileLogPile.class);
+                var tile = TileUtils.getTile(world, pos.offset(side), TileLogPile.class);
                 if (tile != null) {
                     tile.light();
                 }

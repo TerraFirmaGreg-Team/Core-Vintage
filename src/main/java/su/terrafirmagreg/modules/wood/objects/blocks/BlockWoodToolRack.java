@@ -26,6 +26,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -53,7 +54,7 @@ public class BlockWoodToolRack extends BlockWood implements ITileProvider {
                 .nonOpaque()
                 .nonFullCube();
 
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, NORTH));
     }
@@ -111,9 +112,9 @@ public class BlockWoodToolRack extends BlockWood implements ITileProvider {
         return super.canPlaceBlockAt(worldIn, pos) && BlockUtils.getASolidFacing(worldIn, pos, null, HORIZONTALS) != null;
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            var tile = TileUtils.getTile(worldIn, pos, TileWoodToolRack.class);
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            var tile = TileUtils.getTile(world, pos, TileWoodToolRack.class);
             if (tile != null) {
                 return tile.onRightClick(playerIn, hand, getSlotFromPos(state, hitX, hitY, hitZ));
             }

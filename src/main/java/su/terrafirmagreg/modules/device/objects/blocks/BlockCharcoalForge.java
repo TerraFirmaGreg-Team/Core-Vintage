@@ -40,6 +40,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.util.block.Multiblock;
 
@@ -93,7 +94,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
                 .nonOpaque();
 
         setTickRandomly(true); // Used for chimney checks -> extinguish
-        setHarvestLevel("shovel", 0);
+        setHarvestLevel(ToolClasses.SHOVEL, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false));
     }
@@ -150,10 +151,10 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
     }
 
     @Override
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        var tile = TileUtils.getTile(worldIn, pos, TileCharcoalForge.class);
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+        var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
         // Have to check the above block, since minecraft think this block is "roof"
-        if (tile != null && state.getValue(LIT) && worldIn.isRainingAt(pos.up())) {
+        if (tile != null && state.getValue(LIT) && world.isRainingAt(pos.up())) {
             tile.onRainDrop();
         }
     }
@@ -190,12 +191,12 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileCharcoalForge.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileCharcoalForge.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override

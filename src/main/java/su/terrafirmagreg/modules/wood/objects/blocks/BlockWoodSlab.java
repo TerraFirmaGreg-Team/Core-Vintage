@@ -16,6 +16,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import lombok.Getter;
 
 @Getter
@@ -36,7 +38,7 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock 
         getSettings()
                 .soundType(SoundType.WOOD);
 
-        setHarvestLevel("pickaxe", model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+        setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }
 

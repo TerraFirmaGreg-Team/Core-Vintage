@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import se.gory_moon.horsepower.blocks.BlockFiller;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
 import se.gory_moon.horsepower.client.model.modelvariants.PressModels;
@@ -50,7 +51,7 @@ public class BlockWoodPress extends BlockHPBase {
         super(Material.WOOD);
         setHardness(5.0F);
         setResistance(5.0F);
-        setHarvestLevel("axe", 1);
+        setHarvestLevel(ToolClasses.AXE, 1);
         setSoundType(SoundType.WOOD);
         setRegistryName(Constants.PRESS_BLOCK);
         setTranslationKey(Constants.PRESS_BLOCK);

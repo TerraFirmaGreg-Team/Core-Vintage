@@ -174,7 +174,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        TETickCounter tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
         if (tile != null) {
             tile.resetCounter();
         }

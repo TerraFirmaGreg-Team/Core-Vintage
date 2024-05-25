@@ -23,6 +23,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
@@ -41,7 +43,7 @@ public class BlockBellows extends BaseBlock implements ITileProvider {
                 .nonOpaque()
                 .hardness(2.0F)
                 .resistance(2.0F);
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
         setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
@@ -60,8 +62,8 @@ public class BlockBellows extends BaseBlock implements ITileProvider {
         return face == state.getValue(FACING) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var tile = TileUtils.getTile(worldIn, pos, TileBellows.class);
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        var tile = TileUtils.getTile(world, pos, TileBellows.class);
         if (tile != null) {
             return tile.onRightClick();
         }

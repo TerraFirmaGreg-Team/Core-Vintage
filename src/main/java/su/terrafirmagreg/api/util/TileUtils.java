@@ -9,6 +9,7 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -30,10 +31,10 @@ public final class TileUtils {
      * @return экземпляр типизированного объекта TileEntity
      */
     @SuppressWarnings("unchecked")
-    public static <T extends TileEntity> T getTile(IBlockAccess world, BlockPos pos, Class<T> aClass) {
-        TileEntity te = world.getTileEntity(pos);
-        if (!aClass.isInstance(te)) return null;
-        return (T) te;
+    public static @Nullable <T extends TileEntity> T getTile(IBlockAccess world, BlockPos pos, Class<T> aClass) {
+        var tile = TileUtils.getTile(world, pos);
+        if (!aClass.isInstance(tile)) return null;
+        return (T) tile;
     }
 
     /**
@@ -53,13 +54,15 @@ public final class TileUtils {
         BlockPos pos = tile.getPos();
         World world = tile.getWorld();
 
-        return !tile.isInvalid() &&
-                getTile(world, pos) == tile &&
-                player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+        return !tile.isInvalid() && getTile(world, pos) == tile && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
     }
 
     public static boolean isNotNull(TileEntity tileEntity) {
         return tileEntity != null;
+    }
+
+    public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String name) {
+        GameRegistry.registerTileEntity(tileEntityClass, ModUtils.id("tile." + name));
     }
 
 }

@@ -9,7 +9,7 @@ import net.dries007.tfc.api.capability.size.Weight;
 public class ItemDeviceMisc extends BaseItem {
 
     public ItemDeviceMisc(String name, Size size, Weight weight, Object... oreNameParts) {
-        
+
         getSettings()
                 .registryKey("device/" + name)
                 .size(size)

@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import lombok.Getter;
@@ -41,7 +42,7 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
                 .hardness(2.0F)
                 .addOreDict(variant);
 
-        setHarvestLevel("shovel", 0);
+        setHarvestLevel(ToolClasses.SHOVEL, 0);
         FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 

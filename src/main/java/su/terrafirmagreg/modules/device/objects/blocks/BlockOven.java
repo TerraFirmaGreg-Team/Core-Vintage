@@ -175,14 +175,14 @@ public class BlockOven extends BaseBlock implements ITileProvider {
             if (!state.getValue(LIT)) {
                 ItemStack held = player.getHeldItem(hand);
                 if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) return false;
-                TileOven te = TileUtils.getTile(world, pos, TileOven.class);
-                if (te == null) return false;
+                var tile = TileUtils.getTile(world, pos, TileOven.class);
+                if (tile == null) return false;
                 if (isValidHorizontal(world, pos, false) && hasChimney(world, pos, false) && ItemFireStarter.onIgnition(held)) {
                     world.setBlockState(pos, state.withProperty(LIT, true));
-                    te.light();
+                    tile.light();
                     return true;
                 }
-                IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory == null) return false;
                 boolean handEmpty = held.isEmpty();
                 if (!handEmpty && !player.isSneaking() && !OreDictionaryHelper.doesStackMatchOre(held, "peel")) {
@@ -190,7 +190,7 @@ public class BlockOven extends BaseBlock implements ITileProvider {
                         if (inventory.getStackInSlot(i).isEmpty()) {
                             ItemStack leftover = inventory.insertItem(i, held.splitStack(1), false);
                             ItemHandlerHelper.giveItemToPlayer(player, leftover);
-                            te.markForSync();
+                            tile.markForSync();
                             return true;
                         }
                     }
@@ -201,8 +201,8 @@ public class BlockOven extends BaseBlock implements ITileProvider {
                         if (!slotStack.isEmpty()) {
                             ItemStack takeStack = inventory.extractItem(i, 1, false);
                             ItemHandlerHelper.giveItemToPlayer(player, takeStack);
-                            te.markForSync();
-                            if (ConfigFL.General.BALANCE.peelNeeded && te.willDamage() && !OreDictionaryHelper.doesStackMatchOre(held, "peel") &&
+                            tile.markForSync();
+                            if (ConfigFL.General.BALANCE.peelNeeded && tile.willDamage() && !OreDictionaryHelper.doesStackMatchOre(held, "peel") &&
                                     state.getValue(CURED))
                                 player.attackEntityFrom(DamageSources.GRILL, 2.0F); // damage player if they don't use peel
                             return true;

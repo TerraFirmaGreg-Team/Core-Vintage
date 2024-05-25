@@ -13,7 +13,7 @@ public class BlockRockCobble extends BlockRockFallable {
 
     public BlockRockCobble(RockBlockVariant variant, RockType type) {
         super(Settings.of(Material.ROCK), variant, type);
-        
+
         getSettings()
                 .renderLayer(BlockRenderLayer.CUTOUT)
                 .addOreDict("cobblestone");

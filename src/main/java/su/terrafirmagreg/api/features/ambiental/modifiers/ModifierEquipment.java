@@ -1,11 +1,11 @@
 package su.terrafirmagreg.api.features.ambiental.modifiers;
 
-import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+
+import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 
 public class ModifierEquipment extends ModifierBase {
 

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
-import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBearTrap;
 
 import net.minecraft.block.Block;
@@ -31,6 +31,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -56,7 +57,7 @@ public class BlockBearTrap extends BaseBlock implements ITileProvider {
                 .nonCube()
                 .size(Size.LARGE)
                 .weight(Weight.HEAVY);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)
                 .withProperty(BURIED, Boolean.FALSE)
@@ -116,17 +117,17 @@ public class BlockBearTrap extends BaseBlock implements ITileProvider {
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
-        assert trap != null;
-        if (!trap.isOpen()) {
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        var tile = TileUtils.getTile(world, pos, TileBearTrap.class);
+        assert tile != null;
+        if (!tile.isOpen()) {
             if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
-                worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
+                world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
             } else {
-                super.harvestBlock(worldIn, player, pos, state, te, stack);
+                super.harvestBlock(world, player, pos, state, te, stack);
             }
         } else {
-            super.harvestBlock(worldIn, player, pos, state, te, stack);
+            super.harvestBlock(world, player, pos, state, te, stack);
         }
     }
 
@@ -145,11 +146,11 @@ public class BlockBearTrap extends BaseBlock implements ITileProvider {
     }
 
     @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase entityLiving) {
-            TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
-            assert trap != null;
-            if (trap.isOpen()) {
+            var tile = TileUtils.getTile(world, pos, TileBearTrap.class);
+            if (tile == null) return;
+            if (tile.isOpen()) {
                 int debuffDuration = ConfigTFCThings.Items.BEAR_TRAP.debuffDuration;
                 double healthCut = ConfigTFCThings.Items.BEAR_TRAP.healthCut;
                 entityLiving.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, debuffDuration));
@@ -160,23 +161,23 @@ public class BlockBearTrap extends BaseBlock implements ITileProvider {
                 } else if (healthCut > 0) {
                     entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP, entityLiving.getHealth() / (float) healthCut);
                 }
-                trap.setCapturedEntity(entityLiving);
+                tile.setCapturedEntity(entityLiving);
                 entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-                trap.setOpen(false);
+                tile.setOpen(false);
                 state = state.withProperty(CLOSED, Boolean.TRUE);
-                worldIn.setBlockState(pos, state, 2);
+                world.setBlockState(pos, state, 2);
                 entityLiving.playSound(SoundEvents.ENTITY_ITEM_BREAK, 2.0F, 0.4F);
-            } else if (trap.getCapturedEntity() != null && trap.getCapturedEntity().equals(entityLiving)) {
+            } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity().equals(entityLiving)) {
                 entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
                 if (entityLiving instanceof IPredator && Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakoutChance) {
-                    worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
+                    world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
                     if (Math.random() > 2 * ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
-                        this.dropBlockAsItem(worldIn, pos, state, 0);
+                        this.dropBlockAsItem(world, pos, state, 0);
                     }
-                    worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), worldIn.isRemote ? 11 : 3);
+                    world.setBlockState(pos, Blocks.AIR.getDefaultState(), world.isRemote ? 11 : 3);
                 }
                 if (entityLiving.isDead) {
-                    trap.setCapturedEntity(null);
+                    tile.setCapturedEntity(null);
                 }
             }
         }

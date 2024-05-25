@@ -37,7 +37,6 @@ import javax.annotation.Nullable;
 @Mixin(value = Block.class, remap = false)
 public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockSettings {
 
-
     @Final
     @Shadow
     protected Material material;

@@ -9,6 +9,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import java.util.Random;
 
 public class BlockSoilMudBrick extends BlockSoilMud {
@@ -18,7 +20,7 @@ public class BlockSoilMudBrick extends BlockSoilMud {
         getSettings()
                 .soundType(SoundType.STONE);
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import su.terrafirmagreg.api.spi.effects.BasePotion;
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.spi.effects.BasePotion;
 
 import net.minecraft.entity.EntityLivingBase;
 

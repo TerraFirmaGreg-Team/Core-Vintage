@@ -1,6 +1,10 @@
 package su.terrafirmagreg.mixin.minecraft.item;
 
-import su.terrafirmagreg.api.spi.item.IItemSettings;
+import lombok.Getter;
+
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
+
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -8,13 +12,12 @@ import net.minecraftforge.common.IRarity;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
 
-import lombok.Getter;
+
+import su.terrafirmagreg.api.spi.item.IItemSettings;
 
 @Getter
 @Mixin(value = Item.class, remap = false)

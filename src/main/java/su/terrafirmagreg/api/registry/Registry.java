@@ -6,9 +6,9 @@ import su.terrafirmagreg.api.registry.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.registry.provider.IItemColorProvider;
 import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.registry.provider.IModelProvider;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -24,9 +24,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -97,7 +95,7 @@ public record Registry(RegistryManager registryManager) {
 
     public void onRegisterTileEntities() {
         for (var provider : this.registryManager.getTiles()) {
-            GameRegistry.registerTileEntity(provider.getTileEntityClass(), ModUtils.id("tile." + provider.getTileEntityClass().getSimpleName()));
+            TileUtils.registerTileEntity(provider.getTileEntityClass(), provider.getTileEntityClass().getSimpleName());
         }
     }
 
@@ -151,11 +149,12 @@ public record Registry(RegistryManager registryManager) {
     }
 
     @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unchecked")
     public void onRegisterTileEntitySpecialRenderer() {
         for (var provider : this.registryManager.getTiles()) {
             final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
-            if (tesr != null) ClientRegistry.bindTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
+            ModelUtils.registerTileEntitySpecialRenderer(provider.getTileEntityClass(), tesr);
         }
     }
 

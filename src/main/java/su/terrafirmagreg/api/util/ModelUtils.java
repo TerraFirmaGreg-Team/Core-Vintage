@@ -8,10 +8,13 @@ import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -61,29 +64,28 @@ public final class ModelUtils {
         for (Block block : blocks) {
             ModelUtils.registerBlockInventoryModel(block);
         }
-
     }
 
     public static void registerBlockInventoryModel(Block block) {
         ResourceLocation registryName = block.getRegistryName();
         Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
-        ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), registryName);
 
+        ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), registryName);
     }
 
     public static void registerBlockInventoryModel(Block block, String modelLocation) {
-        ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
 
+        ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
     }
 
     public static void registerBlockInventoryModel(Block block, ResourceLocation modelLocation) {
-        ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
 
+        ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
     }
 
     public static void registerCustomMeshDefinition(Block block, ItemMeshDefinition meshDefinition) {
-        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), meshDefinition);
 
+        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), meshDefinition);
     }
 
     //endregion
@@ -91,8 +93,9 @@ public final class ModelUtils {
     //region ===== Item
 
     public static void registerInventoryModel(String subfolder, Item... items) {
-        for (Item item : items) ModelUtils.registerInventoryModel(subfolder, item);
-
+        for (Item item : items) {
+            ModelUtils.registerInventoryModel(subfolder, item);
+        }
     }
 
     public static void registerInventoryModel(String subfolder, Item item) {
@@ -101,12 +104,13 @@ public final class ModelUtils {
         String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
         ModelUtils.registerInventoryModel(item, modelLocation);
-
     }
 
     public static void registerInventoryModel(Item... items) {
-        for (Item item : items) registerInventoryModel(item);
 
+        for (Item item : items) {
+            ModelUtils.registerInventoryModel(item);
+        }
     }
 
     public static void registerInventoryModel(Item item) {
@@ -114,22 +118,21 @@ public final class ModelUtils {
         Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 
         ModelUtils.registerInventoryModel(item, registryName);
-
     }
 
     public static void registerInventoryModel(Item item, String modelLocation) {
-        ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
 
+        ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
     }
 
     public static void registerInventoryModel(Item item, ResourceLocation modelLocation) {
-        ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
 
+        ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
     }
 
     public static void registerInventoryModel(Item item, ModelResourceLocation resourceLocation) {
-        ModelUtils.registerInventoryModel(item, 0, resourceLocation);
 
+        ModelUtils.registerInventoryModel(item, 0, resourceLocation);
     }
 
     public static void registerInventoryModel(@NotNull Item item, int metadata, @NotNull String variant) {
@@ -140,13 +143,13 @@ public final class ModelUtils {
     }
 
     public static void registerInventoryModel(@NotNull Item item, int metadata, @NotNull ModelResourceLocation resourceLocation) {
-        ModelLoader.setCustomModelResourceLocation(item, metadata, resourceLocation);
 
+        ModelLoader.setCustomModelResourceLocation(item, metadata, resourceLocation);
     }
 
     public static void registerCustomMeshDefinition(Item item, ItemMeshDefinition meshDefinition) {
-        ModelLoader.setCustomMeshDefinition(item, meshDefinition);
 
+        ModelLoader.setCustomMeshDefinition(item, meshDefinition);
     }
 
     //endregion
@@ -154,8 +157,21 @@ public final class ModelUtils {
     //region ===== Backed
 
     public static void registerBackedModel(ResourceLocation resourceLocation, @NotNull IModel model) {
-        CustomModelLoader.registerModel(resourceLocation, model);
 
+        CustomModelLoader.registerModel(resourceLocation, model);
+    }
+
+    //endregion
+
+    //endregion
+
+    //region ===== TileEntitySpecialRenderer
+
+    public static <T extends TileEntity> void registerTileEntitySpecialRenderer(Class<T> tileEntityClass, TileEntitySpecialRenderer<? super T> specialRenderer) {
+
+        if (specialRenderer != null) {
+            ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);
+        }
     }
 
     //endregion

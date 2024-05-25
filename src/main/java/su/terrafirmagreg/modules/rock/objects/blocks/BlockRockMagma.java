@@ -16,6 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -45,7 +46,7 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
                 .addOreDict(variant)
                 .addOreDict(variant, type);
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
 
         FallingBlockManager.registerFallable(this, variant.getSpecification());
     }

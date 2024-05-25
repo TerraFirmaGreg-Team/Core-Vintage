@@ -29,6 +29,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.block.Multiblock;
@@ -175,7 +176,7 @@ public class BlockBloomery extends BaseBlock implements ITileProvider {
                 .weight(Weight.VERY_HEAVY)
                 .nonFullCube()
                 .nonOpaque();
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH)
                 .withProperty(LIT, false)
@@ -238,12 +239,12 @@ public class BlockBloomery extends BaseBlock implements ITileProvider {
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileBloomery.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileBloomery.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override

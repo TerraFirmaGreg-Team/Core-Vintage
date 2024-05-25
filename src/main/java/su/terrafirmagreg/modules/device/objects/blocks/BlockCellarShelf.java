@@ -43,21 +43,21 @@ public class BlockCellarShelf extends BaseBlockContainer implements ITileProvide
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
-            var tile = TileUtils.getTile(worldIn, pos, TileCellarShelf.class);
+            var tile = TileUtils.getTile(world, pos, TileCellarShelf.class);
             //tile.setCustomName(stack.getDisplayName());
         }
 
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileCellarShelf.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileCellarShelf.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override

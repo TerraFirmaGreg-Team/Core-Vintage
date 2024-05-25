@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -11,7 +12,6 @@ import su.terrafirmagreg.modules.animal.init.SoundAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIFindNest;
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;

@@ -33,6 +33,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
@@ -59,8 +60,9 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
                 .nonOpaque()
                 .weight(Weight.MEDIUM)
                 .size(Size.LARGE);
+
         setTickRandomly(true);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)
                 .withProperty(FACING, EnumFacing.NORTH));

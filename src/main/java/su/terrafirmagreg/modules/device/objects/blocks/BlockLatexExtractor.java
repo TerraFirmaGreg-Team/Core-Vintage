@@ -28,6 +28,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +59,7 @@ public class BlockLatexExtractor extends BaseBlock implements ITileProvider {
                 .nonFullCube()
                 .nonOpaque();
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, NORTH)
                 .withProperty(BASE, false)

@@ -73,13 +73,13 @@ public class BlockJackOLantern extends BaseBlockHorizontal implements ITileProvi
         return new BlockStateContainer(this, FACING, LIT);
     }
 
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         //taken from BlockTorchTFC
-        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        var tile = TileUtils.getTile(world, pos, TETickCounter.class);
         if (TileUtils.isNotNull(tile)) {
             //last twice as long as a torch. balance this by being less bright
-            if (!worldIn.isRemote && tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0) {
-                worldIn.setBlockState(pos, state.withProperty(LIT, false));
+            if (!world.isRemote && tile.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0) {
+                world.setBlockState(pos, state.withProperty(LIT, false));
                 tile.resetCounter();
             }
         }

@@ -184,10 +184,9 @@ public interface IBlockSettings extends IAutoRegProvider, IBlockStateProvider {
     class Settings {
 
         protected final List<Object[]> oreDict = Lists.newArrayList();
-        protected IProperty<?>[] ignoredProperties;
-
         // Block
         protected final Material material;
+        protected IProperty<?>[] ignoredProperties;
         protected ContextFunction<MapColor> mapColor;
         protected String translationKey;
         protected String registryKey;

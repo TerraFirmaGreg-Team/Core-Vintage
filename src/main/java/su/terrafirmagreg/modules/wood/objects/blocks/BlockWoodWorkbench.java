@@ -24,6 +24,8 @@ import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -31,9 +33,9 @@ import lombok.Getter;
 @Getter
 public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
 
-    protected Settings settings;
     private final WoodBlockVariant variant;
     private final WoodType type;
+    protected Settings settings;
 
     public BlockWoodWorkbench(WoodBlockVariant variant, WoodType type) {
         this.variant = variant;
@@ -47,7 +49,7 @@ public class BlockWoodWorkbench extends BlockWorkbench implements IWoodBlock {
                 .addOreDict(variant)
                 .addOreDict(variant, type);
 
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
 
         BlockUtils.setFireInfo(this, variant.getEncouragement(), variant.getFlammability());
     }

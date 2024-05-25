@@ -35,6 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
@@ -75,7 +76,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
         this.settings = Settings.of(Material.WOOD);
 
         setTickRandomly(true);
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
         setHardness(20.0F); //TODO 2.0 в тфк
         setResistance(5.0F);
 
@@ -158,7 +159,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
 
     @Override
     public boolean isToolEffective(@NotNull String type, @NotNull IBlockState state) {
-        return ("hammer" .equals(type) && ModuleArboricultureConfig.MISC.enableHammerSticks) ||
+        return ("hammer".equals(type) && ModuleArboricultureConfig.MISC.enableHammerSticks) ||
                 super.isToolEffective(type, state);
     }
 

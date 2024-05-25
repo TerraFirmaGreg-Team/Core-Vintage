@@ -27,6 +27,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -49,7 +50,7 @@ public class BlockGrindstone extends BaseBlock implements ITileProvider {
                 .nonFullCube()
                 .size(Size.LARGE)
                 .weight(Weight.HEAVY);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
     }
@@ -87,10 +88,10 @@ public class BlockGrindstone extends BaseBlock implements ITileProvider {
 
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (hand.equals(EnumHand.MAIN_HAND)) {
-            var te = TileUtils.getTile(world, pos, TileGrindstone.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(world, pos, TileGrindstone.class);
+            if (tile != null) {
                 ItemStack heldStack = playerIn.getHeldItem(hand);
-                IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (inventory != null) {
 
                     int slot = inventory.getStackInSlot(TileGrindstone.SLOT_GRINDSTONE)
@@ -99,8 +100,8 @@ public class BlockGrindstone extends BaseBlock implements ITileProvider {
 
                     if (slot == TileGrindstone.SLOT_INPUT) {
                         if (inventory.isItemValid(slot, heldStack)) {
-                            playerIn.setHeldItem(EnumHand.MAIN_HAND, te.insertOrSwapItem(slot, heldStack));
-                            te.setAndUpdateSlots(slot);
+                            playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
+                            tile.setAndUpdateSlots(slot);
                             return true;
                         } else {
                             if (!inventory.getStackInSlot(slot).isEmpty()) {
@@ -113,8 +114,8 @@ public class BlockGrindstone extends BaseBlock implements ITileProvider {
 
                     if (slot == TileGrindstone.SLOT_GRINDSTONE && inventory.getStackInSlot(slot)
                             .isEmpty() && inventory.isItemValid(slot, heldStack)) {
-                        playerIn.setHeldItem(EnumHand.MAIN_HAND, te.insertOrSwapItem(slot, heldStack));
-                        te.setAndUpdateSlots(slot);
+                        playerIn.setHeldItem(EnumHand.MAIN_HAND, tile.insertOrSwapItem(slot, heldStack));
+                        tile.setAndUpdateSlots(slot);
                         return true;
                     }
                 }

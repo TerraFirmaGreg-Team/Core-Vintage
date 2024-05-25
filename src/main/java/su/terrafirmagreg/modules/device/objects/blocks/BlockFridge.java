@@ -37,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -83,15 +84,11 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileProvider {
                 .size(Size.HUGE)
                 .weight(Weight.MEDIUM)
                 .nonCanStack();
-        setHarvestLevel("pickaxe", 0);
+
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACING, NORTH)
                 .withProperty(UPPER, false));
-    }
-
-    @Override
-    public @Nullable BaseItemBlock getItemBlock() {
-        return new ItemBlockFridge(this);
     }
 
     public static Vec3d[] getItems(EnumFacing facing) {
@@ -122,6 +119,11 @@ public class BlockFridge extends BaseBlockHorizontal implements ITileProvider {
             }
         }
         return -1;
+    }
+
+    @Override
+    public @Nullable BaseItemBlock getItemBlock() {
+        return new ItemBlockFridge(this);
     }
 
     @Override

@@ -29,6 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import lombok.Getter;
@@ -70,7 +71,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
                 .addOreDict(variant)
                 .addOreDict(variant, type);
 
-        setHarvestLevel("shovel", 0);
+        setHarvestLevel(ToolClasses.SHOVEL, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     }

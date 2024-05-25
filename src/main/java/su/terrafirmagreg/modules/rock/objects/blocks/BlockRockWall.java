@@ -15,6 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -39,7 +41,7 @@ public class BlockRockWall extends BaseBlockWall implements IRockBlock {
                 .addOreDict("wall")
                 .addOreDict("wall", "stone");
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
     @Override

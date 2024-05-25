@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -17,6 +16,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -26,7 +27,6 @@ import java.util.List;
 @Getter
 public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock {
 
-    protected final Block model;
     private final RockBlockVariant variant;
     private final RockType type;
     protected Half halfSlab;
@@ -37,7 +37,6 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
 
         this.variant = variant;
         this.type = type;
-        this.model = model.get(type);
 
         getSettings()
                 .soundType(SoundType.STONE)
@@ -45,7 +44,7 @@ public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock 
                 .addOreDict("slab")
                 .addOreDict("slab", "stone");
 
-        setHarvestLevel("pickaxe", this.model.getHarvestLevel(this.model.getDefaultState()));
+        setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
     }
 
     @Override

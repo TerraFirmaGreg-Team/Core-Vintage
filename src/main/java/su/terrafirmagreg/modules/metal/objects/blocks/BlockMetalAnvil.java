@@ -34,6 +34,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -73,7 +74,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
                 .hardness(4.0F)
                 .resistance(10F);
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
@@ -157,11 +158,11 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
         if (hand == EnumHand.OFF_HAND) {
             return false;
         }
-        TEMetalAnvil te = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
-        if (te == null) {
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalAnvil.class);
+        if (tile == null) {
             return false;
         }
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap == null) {
             return false;
         }
@@ -181,8 +182,8 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
                 }
             }
             // Welding requires a hammer in main hand
-            else if (te.isItemValid(TEMetalAnvil.SLOT_HAMMER, heldItem)) {
-                if (!worldIn.isRemote && te.attemptWelding(playerIn)) {
+            else if (tile.isItemValid(TEMetalAnvil.SLOT_HAMMER, heldItem)) {
+                if (!worldIn.isRemote && tile.attemptWelding(playerIn)) {
                     // Valid welding occurred.
                     worldIn.playSound(null, pos, TFCSounds.ANVIL_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     double x = pos.getX() + 0.5;
@@ -203,7 +204,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
                     if (i == TEMetalAnvil.SLOT_HAMMER) continue;
                     // Try to insert an item
                     // Hammers will not be inserted since we already checked if heldItem is a hammer for attemptWelding
-                    if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
+                    if (tile.isItemValid(i, heldItem) && tile.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
                         ItemStack result = cap.insertItem(i, heldItem, false);
                         playerIn.setHeldItem(hand, result);
                         ModuleMetal.LOGGER.info("Inserted {} into slot {}", heldItem.getDisplayName(), i);

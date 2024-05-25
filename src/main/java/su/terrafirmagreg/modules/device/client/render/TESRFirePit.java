@@ -25,6 +25,8 @@ import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.lwjgl.opengl.GL11;
 
+import org.jetbrains.annotations.NotNull;
+
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_START;
@@ -37,11 +39,11 @@ import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EX
 public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
 
     @Override
-    public void render(TileFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void render(@NotNull TileFirePit tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
         // Rendering liquid in the soup pot
-        if (te.getCookingPotStage() != TileFirePit.CookingPotStage.EMPTY) {
+        if (tile.getCookingPotStage() != TileFirePit.CookingPotStage.EMPTY) {
             Fluid water = FluidsTFC.FRESH_WATER.get();
 
             GlStateManager.pushMatrix();
@@ -61,7 +63,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
             float b = (color & 0xFF) / 255F;
             float a = ((color >> 24) & 0xFF) / 255F;
 
-            if (te.getCookingPotStage() == TileFirePit.CookingPotStage.FINISHED) {
+            if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.FINISHED) {
                 b = 0;
                 g /= 4;
                 r *= 3;
@@ -98,12 +100,12 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
             GlStateManager.popMatrix();
         }
         // Render food on the grill
-        if (te.hasWorld()) {
-            IBlockState state = te.getWorld().getBlockState(te.getPos());
+        if (tile.hasWorld()) {
+            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
             if (state.getBlock() instanceof BlockFirePit && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
-                IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (cap != null) {
-                    int rotation = te.getBlockMetadata();
+                    int rotation = tile.getBlockMetadata();
                     if (state.getValue(LIT))
                         rotation -= 1;
                     float yOffset = 0.625f;

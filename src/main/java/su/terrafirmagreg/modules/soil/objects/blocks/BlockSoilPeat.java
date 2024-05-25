@@ -1,18 +1,21 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.OreDictUtils;
+import gregtech.api.items.toolitem.ToolClasses;
+
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+
+import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 public class BlockSoilPeat extends BaseBlock {
 
     public BlockSoilPeat() {
         super(Settings.of(Material.GROUND));
 
-        setHarvestLevel("shovel", 0);
+        setHarvestLevel(ToolClasses.SHOVEL, 0);
         getSettings()
                 .soundType(SoundType.GROUND)
                 .hardness(0.6F);

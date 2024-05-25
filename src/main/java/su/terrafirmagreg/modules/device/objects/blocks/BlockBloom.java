@@ -19,6 +19,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.objects.items.ItemsTFC;
 
 import org.jetbrains.annotations.Nullable;
@@ -32,16 +33,16 @@ public class BlockBloom extends BaseBlock implements ITileProvider {
                 .registryKey("device/bloom")
                 .hardness(3.0f)
                 .soundType(SoundType.STONE);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileBloom.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileBloom.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override

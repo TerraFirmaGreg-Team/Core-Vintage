@@ -1,9 +1,7 @@
 package su.terrafirmagreg.modules.soil.event;
 
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
-import su.terrafirmagreg.modules.soil.ModuleSoil;
-import su.terrafirmagreg.modules.soil.ModuleSoilConfig;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
+import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
+
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,8 +15,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.soil.ModuleSoil;
+import su.terrafirmagreg.modules.soil.ModuleSoilConfig;
+import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
-import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;

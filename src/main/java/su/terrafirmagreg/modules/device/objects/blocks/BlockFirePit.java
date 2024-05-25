@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
@@ -113,7 +113,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
                                       boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, FIREPIT_AABB);
         if (state.getValue(ATTACHMENT) != FirePitAttachment.NONE) {
@@ -122,10 +122,10 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     @Override
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        var tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+        var tile = TileUtils.getTile(world, pos, TileFirePit.class);
         // Have to check the above block, since minecraft think this block is "roof"
-        if (tile != null && state.getValue(LIT) && worldIn.isRainingAt(pos.up())) {
+        if (tile != null && state.getValue(LIT) && world.isRainingAt(pos.up())) {
             tile.onRainDrop();
         }
     }
@@ -156,7 +156,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
         }
 
         if (state.getValue(ATTACHMENT) == FirePitAttachment.COOKING_POT) {
-            TileFirePit tile = TileUtils.getTile(world, pos, TileFirePit.class);
+            var tile = TileUtils.getTile(world, pos, TileFirePit.class);
             if (tile != null && tile.getCookingPotStage() == TileFirePit.CookingPotStage.BOILING) {
                 for (int i = 0; i < rng.nextInt(5) + 4; i++)
                     TFCParticles.BUBBLE.spawn(world, x + rng.nextFloat() * 0.375 - 0.1875, y + 0.525, z + rng.nextFloat() * 0.375 - 0.1875, 0, 0.05D,
@@ -166,7 +166,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
             }
         }
         if ((state.getValue(ATTACHMENT) == FirePitAttachment.GRILL)) {
-            TileFirePit tile = TileUtils.getTile(world, pos, TileFirePit.class);
+            var tile = TileUtils.getTile(world, pos, TileFirePit.class);
             if (tile != null) {
                 IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 if (cap != null) {
@@ -189,19 +189,19 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!canBePlacedOn(worldIn, pos.add(0, -1, 0))) {
-            worldIn.setBlockToAir(pos);
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canBePlacedOn(world, pos.add(0, -1, 0))) {
+            world.setBlockToAir(pos);
         }
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileFirePit.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override
@@ -215,29 +215,29 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
             ItemStack held = player.getHeldItem(hand);
 
             // Try to light the fire pit
             if (!state.getValue(LIT)) {
                 if (ItemFireStarter.onIgnition(held)) {
-                    worldIn.setBlockState(pos, state.withProperty(LIT, true));
+                    world.setBlockState(pos, state.withProperty(LIT, true));
                     return true;
                 }
             }
 
             // Try to attach an item
             FirePitAttachment attachment = state.getValue(ATTACHMENT);
-            TileFirePit tile = TileUtils.getTile(worldIn, pos, TileFirePit.class);
+            var tile = TileUtils.getTile(world, pos, TileFirePit.class);
             if (tile != null) {
                 if (attachment == FirePitAttachment.NONE) {
                     if (OreDictUtils.contains(held, "cookingPot")) {
-                        worldIn.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.COOKING_POT));
+                        world.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.COOKING_POT));
                         tile.onConvertToCookingPot(player, held);
                         return true;
                     } else if (OreDictUtils.contains(held, "grill")) {
-                        worldIn.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.GRILL));
+                        world.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.GRILL));
                         tile.onConvertToGrill(player, held);
                         return true;
                     }
@@ -252,7 +252,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
                             if (fluidHandler != null) {
                                 fluidHandler.drain(1000, true);
                             }
-                            worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 0.5f, 1.0f);
+                            world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 0.5f, 1.0f);
                             return true;
                         }
                     } else if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.FINISHED) {
@@ -265,7 +265,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
             }
 
             if (!player.isSneaking()) {
-                GuiHandler.openGui(worldIn, pos, player, GuiHandler.Type.FIRE_PIT);
+                GuiHandler.openGui(world, pos, player, GuiHandler.Type.FIRE_PIT);
             } else if ((held == ItemStack.EMPTY) && (attachment != FirePitAttachment.NONE)) {
                 boolean anythingInTheInv = false;
                 if (tile != null) {
@@ -287,7 +287,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
                             } else {
                                 tile.onRemoveAttachment(player, held);
-                                worldIn.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.NONE));
+                                world.setBlockState(pos, state.withProperty(ATTACHMENT, FirePitAttachment.NONE));
                                 return true;
                             }
 
@@ -362,7 +362,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     }
 
     @Override
-    public TileEntitySpecialRenderer<?> getTileRenderer() {
+    public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
         return new TESRFirePit();
     }
 

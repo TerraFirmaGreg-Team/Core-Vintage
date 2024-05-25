@@ -20,6 +20,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -46,7 +48,7 @@ public class BlockWoodSupport extends BlockWood {
                 .nonFullCube()
                 .nonOpaque();
 
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(AXIS, EnumFacing.Axis.Y)
                 .withProperty(NORTH, Boolean.FALSE)

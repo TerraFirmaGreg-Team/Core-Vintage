@@ -9,6 +9,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.util.BlockRenderLayer;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import lombok.Getter;
 
 @Getter
@@ -29,7 +31,7 @@ public class BlockSoilMudWall extends BaseBlockWall implements ISoilBlock {
                 .addOreDict("wall")
                 .addOreDict("wall", "mud", "bricks");
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
 }

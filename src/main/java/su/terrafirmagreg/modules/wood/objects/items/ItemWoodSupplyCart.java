@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 

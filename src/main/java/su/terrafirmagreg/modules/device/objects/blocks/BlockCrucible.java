@@ -34,6 +34,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -64,7 +65,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
                 .nonOpaque()
                 .hardness(3.0f)
                 .weight(Weight.VERY_HEAVY);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
     @Override
@@ -132,30 +133,30 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileCrucible.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileCrucible.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote && !playerIn.isSneaking()) {
-            GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.CRUCIBLE);
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote && !playerIn.isSneaking()) {
+            GuiHandler.openGui(world, pos, playerIn, GuiHandler.Type.CRUCIBLE);
         }
         return true;
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if (!worldIn.isRemote) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        if (!world.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                TileCrucible te = TileUtils.getTile(worldIn, pos, TileCrucible.class);
-                if (te != null) {
-                    te.readFromItemTag(nbt);
+                var tile = TileUtils.getTile(world, pos, TileCrucible.class);
+                if (tile != null) {
+                    tile.readFromItemTag(nbt);
                 }
             }
         }
@@ -167,7 +168,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     }
 
     @Override
-    public @Nullable TileCrucible createNewTileEntity(World worldIn, int meta) {
+    public @Nullable TileCrucible createNewTileEntity(World world, int meta) {
         return new TileCrucible();
     }
 

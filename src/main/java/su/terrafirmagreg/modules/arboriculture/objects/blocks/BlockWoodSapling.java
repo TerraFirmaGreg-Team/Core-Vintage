@@ -92,11 +92,10 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     }
 
     @Override
-    public void onBlockPlacedBy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer,
-                                @NotNull ItemStack stack) {
-        TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
-        if (te != null) {
-            te.resetCounter();
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        var tile = TileUtils.getTile(worldIn, pos, TETickCounter.class);
+        if (tile != null) {
+            tile.resetCounter();
         }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
@@ -129,9 +128,9 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
         super.updateTick(world, pos, state, random);
 
         if (!world.isRemote) {
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (te != null) {
-                long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            if (tile != null) {
+                long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
                 //                if (days > this.getTreeVariant().getMinGrowthTime()) {
                 //                    grow(world, random, pos, state);
                 //                }
@@ -142,34 +141,34 @@ public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable
     @SuppressWarnings("deprecation")
     @Override
     @NotNull
-    public AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return SAPLING_AABB;
     }
 
     @Override
     @NotNull
-    public EnumPlantType getPlantType(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
+    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
         return EnumPlantType.Plains;
     }
 
     @Override
-    public boolean canGrow(@NotNull World world, @NotNull BlockPos blockPos, @NotNull IBlockState blockState, boolean b) {
+    public boolean canGrow(World world, BlockPos blockPos, IBlockState blockState, boolean b) {
         return true;
     }
 
     @Override
-    public boolean canUseBonemeal(@NotNull World world, @NotNull Random random, @NotNull BlockPos blockPos, @NotNull IBlockState blockState) {
+    public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState blockState) {
         return false;
     }
 
     @Override
-    public void grow(@NotNull World world, @NotNull Random random, @NotNull BlockPos blockPos, @NotNull IBlockState blockState) {
+    public void grow(World world, Random random, BlockPos blockPos, IBlockState blockState) {
         //        this.getTreeVariant().makeTree(world, blockPos, random, false);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         //this.getTreeVariant().addInfo(stack, worldIn, tooltip, flagIn);
     }

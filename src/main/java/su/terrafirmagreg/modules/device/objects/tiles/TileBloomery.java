@@ -125,9 +125,9 @@ public class TileBloomery extends TETickableInventory implements ITickable, ITem
                     }
                     if (cachedRecipe != null) {
                         world.setBlockState(getInternalBlock(), BlocksDevice.BLOOM.getDefaultState());
-                        TileBloom te = TileUtils.getTile(world, getInternalBlock(), TileBloom.class);
-                        if (te != null) {
-                            te.setBloom(cachedRecipe.getOutput(oreStacks));
+                        var tile = TileUtils.getTile(world, getInternalBlock(), TileBloom.class);
+                        if (tile != null) {
+                            tile.setBloom(cachedRecipe.getOutput(oreStacks));
                         }
                     }
 

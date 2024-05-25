@@ -329,8 +329,8 @@ public class TileBlastFurnace extends TETickableInventory
                 // Move already molten liquid metal to the crucible.
                 // This makes the effect of slowly filling up the crucible.
                 // Take into account full or non-existent (removed) crucibles
-                TileCrucible te = TileUtils.getTile(world, pos.down(), TileCrucible.class);
-                if (te != null && te.addMetal(alloy.getResult(), 1) <= 0) {
+                var tile = TileUtils.getTile(world, pos.down(), TileCrucible.class);
+                if (tile != null && tile.addMetal(alloy.getResult(), 1) <= 0) {
                     alloy.removeAlloy(1, false);
                 }
             }

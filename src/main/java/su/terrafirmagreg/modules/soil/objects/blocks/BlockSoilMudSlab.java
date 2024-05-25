@@ -9,6 +9,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
+
 import lombok.Getter;
 
 @Getter
@@ -31,7 +33,7 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilBlo
                 .addOreDict("slab")
                 .addOreDict("slab", "mud", "bricks");
 
-        setHarvestLevel("pickaxe", model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
+        setHarvestLevel(ToolClasses.PICKAXE, model.get(type).getHarvestLevel(model.get(type).getDefaultState()));
     }
 
     public static class Double extends BlockSoilMudSlab {

@@ -31,6 +31,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.util.FallingBlockManager;
 
 import lombok.Getter;
@@ -56,7 +57,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColo
                 .renderLayer(BlockRenderLayer.CUTOUT)
                 .hardness(2.1F);
 
-        setHarvestLevel("shovel", 0);
+        setHarvestLevel(ToolClasses.SHOVEL, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)

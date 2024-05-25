@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -39,7 +40,7 @@ public class BlockElectricForge extends BaseBlockHorizontal implements ITileProv
                 .weight(Weight.MEDIUM)
                 .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
                 .nonCanStack();
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)
                 .withProperty(FACING, EnumFacing.NORTH));

@@ -54,8 +54,8 @@ public class BlockIceBunker extends BaseBlockContainer implements ITileProvider 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
-            var te = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
-            //te.setCustomName(stack.getDisplayName());
+            var tile = TileUtils.getTile(worldIn, pos, TileIceBunker.class);
+            //tile.setCustomName(stack.getDisplayName());
         }
 
     }

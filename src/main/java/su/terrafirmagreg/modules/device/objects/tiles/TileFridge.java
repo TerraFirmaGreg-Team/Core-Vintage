@@ -141,9 +141,9 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         if (!isMainBlock()) {
-            TileFridge te = TileUtils.getTile(world, pos.up(), TileFridge.class);
-            if (te != null) {
-                return te.hasCapability(capability, facing);
+            var tile = TileUtils.getTile(world, pos.up(), TileFridge.class);
+            if (tile != null) {
+                return tile.hasCapability(capability, facing);
             } else {
                 return false;
             }

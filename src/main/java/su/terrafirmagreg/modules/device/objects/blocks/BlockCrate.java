@@ -120,12 +120,12 @@ public class BlockCrate extends BaseBlockContainer implements ITileProvider {
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileCrate.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileCrate.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override
@@ -134,16 +134,16 @@ public class BlockCrate extends BaseBlockContainer implements ITileProvider {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(hand);
-            var tile = TileUtils.getTile(worldIn, pos, TileCrate.class);
+            var tile = TileUtils.getTile(world, pos, TileCrate.class);
             if (tile != null) {
                 if (heldItem.isEmpty() && playerIn.isSneaking()) {
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
-                    toggleCrateSeal(worldIn, pos);
+                    world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
+                    toggleCrateSeal(world, pos);
                 } else {
-                    GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.CRATE);
+                    GuiHandler.openGui(world, pos, playerIn, GuiHandler.Type.CRATE);
                 }
             }
         }
@@ -151,14 +151,14 @@ public class BlockCrate extends BaseBlockContainer implements ITileProvider {
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         // If the barrel was sealed, then copy the contents from the item
-        if (!worldIn.isRemote) {
+        if (!world.isRemote) {
             NBTTagCompound nbt = stack.getTagCompound();
             if (nbt != null) {
-                var tile = TileUtils.getTile(worldIn, pos, TileCrate.class);
+                var tile = TileUtils.getTile(world, pos, TileCrate.class);
                 if (tile != null) {
-                    worldIn.setBlockState(pos, state.withProperty(SEALED, true));
+                    world.setBlockState(pos, state.withProperty(SEALED, true));
                     tile.readFromItemTag(nbt);
                 }
             }

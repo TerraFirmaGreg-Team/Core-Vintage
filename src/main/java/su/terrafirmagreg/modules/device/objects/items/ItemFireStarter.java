@@ -145,9 +145,9 @@ public class ItemFireStarter extends BaseItem {
                 // Log pile
                 if (itemRand.nextFloat() < chance) {
                     world.setBlockState(pos.down(), state.withProperty(LIT, true));
-                    TileLogPile te = TileUtils.getTile(world, pos.down(), TileLogPile.class);
-                    if (te != null) {
-                        te.light();
+                    var tile = TileUtils.getTile(world, pos.down(), TileLogPile.class);
+                    if (tile != null) {
+                        tile.light();
                     }
                     if (Blocks.FIRE.canPlaceBlockAt(world, pos)) {
                         world.setBlockState(pos, Blocks.FIRE.getDefaultState());
@@ -156,9 +156,9 @@ public class ItemFireStarter extends BaseItem {
             } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
                 // Pit Kiln
                 if (itemRand.nextFloat() < chance) {
-                    TilePitKiln te = TileUtils.getTile(world, pos.down(), TilePitKiln.class);
-                    if (te != null) {
-                        te.tryLight();
+                    var tile = TileUtils.getTile(world, pos.down(), TilePitKiln.class);
+                    if (tile != null) {
+                        tile.tryLight();
                     }
                 }
             } else {
@@ -188,9 +188,9 @@ public class ItemFireStarter extends BaseItem {
                     final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
                     if (itemRand.nextFloat() < chance + kindlingModifier) {
                         world.setBlockState(pos, BlocksDevice.FIRE_PIT.getDefaultState().withProperty(LIT, true));
-                        TileFirePit te = TileUtils.getTile(world, pos, TileFirePit.class);
-                        if (te != null) {
-                            te.onCreate(log.getItem());
+                        var tile = TileUtils.getTile(world, pos, TileFirePit.class);
+                        if (tile != null) {
+                            tile.onCreate(log.getItem());
                         }
                         stuffToUse.forEach(Entity::setDead);
                         log.getItem().shrink(1);

@@ -29,6 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -72,7 +73,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
                 .hardness(40F)
                 .resistance(25F);
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FACE_PROPERTIES[0], false)
                 .withProperty(FACE_PROPERTIES[1], false)
@@ -150,7 +151,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
 
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        TEMetalSheet tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
+        var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
         if (tile != null) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {

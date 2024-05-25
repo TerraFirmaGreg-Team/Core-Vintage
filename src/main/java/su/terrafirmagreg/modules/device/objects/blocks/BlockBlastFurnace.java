@@ -23,6 +23,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.objects.blocks.BlockFireBrick;
@@ -81,7 +82,7 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
                 .registryKey("device/blast_furnace")
                 .hardness(2.0F)
                 .resistance(2.0F);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
     /**
@@ -118,12 +119,12 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        var tile = TileUtils.getTile(worldIn, pos, TileBlastFurnace.class);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        var tile = TileUtils.getTile(world, pos, TileBlastFurnace.class);
         if (tile != null) {
-            tile.onBreakBlock(worldIn, pos, state);
+            tile.onBreakBlock(world, pos, state);
         }
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(world, pos, state);
     }
 
     @Override

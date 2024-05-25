@@ -26,6 +26,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.client.TFCSounds;
 
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +60,7 @@ public class BlockCharcoalPile extends BaseBlock {
                 .registryKey("device/charcoal_pile")
                 .hardness(1.0F)
                 .soundType(TFCSounds.CHARCOAL_PILE);
-        setHarvestLevel("shovel", 0);
+        setHarvestLevel(ToolClasses.SHOVEL, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LAYERS, 1));
     }

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;

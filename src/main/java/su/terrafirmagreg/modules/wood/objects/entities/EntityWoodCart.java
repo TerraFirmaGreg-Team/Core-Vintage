@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
+import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
-import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;

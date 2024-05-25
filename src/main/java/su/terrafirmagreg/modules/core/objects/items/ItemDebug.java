@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.objects.items;
 
+import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;

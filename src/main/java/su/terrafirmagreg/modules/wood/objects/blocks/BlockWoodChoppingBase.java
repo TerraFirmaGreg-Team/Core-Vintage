@@ -23,6 +23,7 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.event.ForgeEventFactory;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import se.gory_moon.horsepower.blocks.BlockHPBase;
 import se.gory_moon.horsepower.tileentity.TileEntityChopper;
 import se.gory_moon.horsepower.tileentity.TileEntityHPBase;
@@ -41,7 +42,7 @@ public abstract class BlockWoodChoppingBase extends BlockHPBase {
 
     public BlockWoodChoppingBase() {
         super(Material.WOOD);
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
         setSoundType(SoundType.WOOD);
     }
 

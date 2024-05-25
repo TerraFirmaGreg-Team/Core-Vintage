@@ -37,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.ConfigTFC;
 
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +64,7 @@ public class BlockLogPile extends BaseBlockContainer implements ITileProvider {
                 .hardness(2.0F);
 
         setTickRandomly(true);
-        setHarvestLevel("axe", 0);
+        setHarvestLevel(ToolClasses.AXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(AXIS, EnumFacing.Axis.Z)
                 .withProperty(LIT, false));

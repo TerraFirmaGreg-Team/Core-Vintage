@@ -55,43 +55,47 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
     private boolean isLit;
 
     public static void convertPlacedItemToPitKiln(World world, BlockPos pos, ItemStack strawStack) {
-        TEPlacedItem teOld = TileUtils.getTile(world, pos, TEPlacedItem.class);
-        if (teOld != null) {
-            // Remove inventory items
-            // This happens here to stop the block dropping its items in onBreakBlock()
-            IItemHandler capOld = teOld.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            ItemStack[] inventory = new ItemStack[4];
-            if (capOld != null) {
-                for (int i = 0; i < 4; i++) {
-                    inventory[i] = capOld.extractItem(i, 64, false);
-                }
-            }
 
-            // Replace the block
-            world.setBlockState(pos, BlocksDevice.PIT_KILN.getDefaultState());
-            // Play placement sound
-            world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
-            // Copy TE data
-            TilePitKiln teNew = TileUtils.getTile(world, pos, TilePitKiln.class);
-            if (teNew != null) {
-                // Copy inventory
-                IItemHandler capNew = teNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (capNew != null) {
-                    for (int i = 0; i < 4; i++) {
-                        if (inventory[i] != null && !inventory[i].isEmpty()) {
-                            capNew.insertItem(i, inventory[i], false);
-                        }
-                    }
-                }
-                // Copy misc data
-                teNew.isHoldingLargeItem = teOld.isHoldingLargeItem;
-                if (OreDictUtils.contains(strawStack, "blockStraw")) {
-                    teNew.addStrawBlock();
-                } else {
-                    teNew.addStraw(strawStack.splitStack(1));
+        var tileOld = TileUtils.getTile(world, pos, TEPlacedItem.class);
+        if (tileOld != null) return;
+
+        // Remove inventory items
+        // This happens here to stop the block dropping its items in onBreakBlock()
+        IItemHandler capOld = tileOld.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        ItemStack[] inventory = new ItemStack[4];
+        if (capOld != null) {
+            for (int i = 0; i < 4; i++) {
+                inventory[i] = capOld.extractItem(i, 64, false);
+            }
+        }
+
+        // Replace the block
+        world.setBlockState(pos, BlocksDevice.PIT_KILN.getDefaultState());
+        // Play placement sound
+        world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
+
+        // Copy TE data
+        var tileNew = TileUtils.getTile(world, pos, TilePitKiln.class);
+        if (tileNew != null) return;
+
+        // Copy inventory
+        IItemHandler capNew = tileNew.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (capNew != null) {
+            for (int i = 0; i < 4; i++) {
+                if (inventory[i] != null && !inventory[i].isEmpty()) {
+                    capNew.insertItem(i, inventory[i], false);
                 }
             }
         }
+
+        // Copy misc data
+        tileNew.isHoldingLargeItem = tileOld.isHoldingLargeItem;
+        if (OreDictUtils.contains(strawStack, "blockStraw")) {
+            tileNew.addStrawBlock();
+        } else {
+            tileNew.addStraw(strawStack.splitStack(1));
+        }
+
     }
 
     @Override
@@ -277,9 +281,9 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
                 //Light other adjacent pit kilns
                 for (Vec3i diagonal : DIAGONALS) {
                     BlockPos pitPos = pos.add(diagonal);
-                    TilePitKiln pitKiln = TileUtils.getTile(world, pitPos, TilePitKiln.class);
-                    if (pitKiln != null) {
-                        pitKiln.tryLight();
+                    var tile = TileUtils.getTile(world, pitPos, TilePitKiln.class);
+                    if (tile != null) {
+                        tile.tryLight();
                     }
                 }
                 return true;

@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
@@ -43,7 +44,8 @@ public class BlockRockStandGem extends BlockRock implements ITileProvider {
                 .weight(Weight.HEAVY)
                 .nonFullCube()
                 .nonOpaque();
-        setHarvestLevel("pickaxe", 0);
+
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.EAST)
                 .withProperty(UP, Boolean.TRUE));

@@ -27,6 +27,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 
+import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.size.Size;
@@ -51,7 +52,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileP
                 .weight(Weight.MEDIUM)
                 .hardness(3.0F);
 
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel(ToolClasses.PICKAXE, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(LIT, false)
                 .withProperty(FACING, EnumFacing.NORTH));
@@ -93,16 +94,16 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileP
         if (!player.isSneaking()) {
             if (!world.isRemote) {
                 if (world.getBlockState(pos.down()).getBlock() instanceof BlockSmelteryFirebox) {
-                    TileSmelteryCauldron smeltery = TileUtils.getTile(world, pos, TileSmelteryCauldron.class);
+                    var tile = TileUtils.getTile(world, pos, TileSmelteryCauldron.class);
                     ItemStack held = player.getHeldItem(hand);
                     if (held.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-                        IFluidHandler fluidHandler = smeltery.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+                        IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
                         if (fluidHandler != null) {
                             if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
                                 held = player.getHeldItem(hand); // Forge update item in hand
                                 IItemHeat cap = held.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
                                 if (cap != null) {
-                                    cap.setTemperature(smeltery.getTemp());
+                                    cap.setTemperature(tile.getTemp());
                                 }
                             }
                         }

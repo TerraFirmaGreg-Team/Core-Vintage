@@ -23,9 +23,9 @@ public class IngotPileProvider implements IWailaBlock {
     @NotNull
     @Override
     public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
-        TEIngotPile ingotPile = TileUtils.getTile(world, pos, TEIngotPile.class);
-        if (ingotPile != null) {
-            return new ItemStack(ItemIngot.get(ingotPile.getMetal(), Metal.ItemType.INGOT), ingotPile.getCount());
+        var tile = TileUtils.getTile(world, pos, TEIngotPile.class);
+        if (tile != null) {
+            return new ItemStack(ItemIngot.get(tile.getMetal(), Metal.ItemType.INGOT), tile.getCount());
         }
         return ItemStack.EMPTY;
     }

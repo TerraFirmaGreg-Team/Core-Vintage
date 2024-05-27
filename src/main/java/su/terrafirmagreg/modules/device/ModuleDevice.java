@@ -9,17 +9,19 @@ import su.terrafirmagreg.modules.device.init.EntitiesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.PacketDevice;
 import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.plugin.top.PluginTheOneProbe;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.Device;
+import static su.terrafirmagreg.modules.Modules.DEVICE;
 
-@Module(moduleID = Device)
+@Module(moduleID = DEVICE)
 public final class ModuleDevice extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleDevice.class.getSimpleName());
@@ -47,6 +49,11 @@ public final class ModuleDevice extends ModuleBase {
     @Override
     protected void onNetworkRegister() {
         PacketDevice.onRegister(packetRegistry);
+    }
+
+    @Override
+    protected void onInit(FMLInitializationEvent event) {
+        PluginTheOneProbe.init();
     }
 
     @Override

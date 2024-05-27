@@ -52,8 +52,7 @@ public class FruitTreeProvider implements IWailaBlock {
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockFruitTreeLeaves) {
-            BlockFruitTreeLeaves block = (BlockFruitTreeLeaves) state.getBlock();
+        if (state.getBlock() instanceof BlockFruitTreeLeaves block) {
             if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree()
                     .isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
                 if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
@@ -68,8 +67,7 @@ public class FruitTreeProvider implements IWailaBlock {
                     }
                 }
             }
-        } else if (state.getBlock() instanceof BlockFruitTreeSapling) {
-            BlockFruitTreeSapling block = (BlockFruitTreeSapling) state.getBlock();
+        } else if (state.getBlock() instanceof BlockFruitTreeSapling block) {
             TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
             addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
         } else if (state.getBlock() instanceof BlockFruitTreeTrunk) {

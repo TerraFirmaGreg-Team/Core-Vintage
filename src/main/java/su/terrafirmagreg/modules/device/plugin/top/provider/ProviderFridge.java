@@ -31,39 +31,40 @@ public final class ProviderFridge implements IProbeInfoProvider {
 
     @Override
     public String getID() {
-        return ModUtils.id("device.fridge");
+        return ModUtils.localize("top", "device.fridge");
     }
 
     @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, EntityPlayer entityPlayer, World world, IBlockState iBlockState, IProbeHitData iProbeHitData) {
-        Block block = iBlockState.getBlock();
-        BlockPos pos = iProbeHitData.getPos();
+    public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
+        Block block = state.getBlock();
+        BlockPos pos = hitData.getPos();
         if (block instanceof BlockFridge) {
-            BlockPos tilePos = pos;
-            if (!iBlockState.getValue(UPPER)) {
-                tilePos = tilePos.up();
-            }
-            var tile = TileUtils.getTile(world, tilePos, TileFridge.class);
+
+            var tile = TileUtils.getTile(world, pos, TileFridge.class);
             if (tile == null) return;
 
-            IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
+            if (!state.getValue(UPPER)) {
+                pos = pos.up();
+            }
+
+            IProbeInfo horizontalPane = info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
             horizontalPane.text(new TextComponentTranslation(ModUtils.localize("top", "device.fridge.efficiency"), (int) tile.getEfficiency()).getFormattedText());
             if (tile.isOpen()) {
-                int slot = BlockFridge.getPlayerLookingItem(tilePos.down(), entityPlayer, iBlockState.getValue(BlockFridge.FACING));
+                int slot = BlockFridge.getPlayerLookingItem(pos.down(), player, state.getValue(BlockFridge.FACING));
                 if (slot > -1) {
                     ItemStack stack = tile.getSlot(slot);
                     if (!stack.isEmpty()) {
-                        iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                        info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
                                 .item(stack)
                                 .vertical()
                                 .itemLabel(stack);
                         IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
                         List<String> list = new ArrayList<>();
                         if (cap != null) {
-                            cap.addTooltipInfo(stack, list, entityPlayer);
+                            cap.addTooltipInfo(stack, list, player);
                         }
                         for (String text : list) {
-                            iProbeInfo.text(text);
+                            info.text(text);
                         }
                     }
                 }

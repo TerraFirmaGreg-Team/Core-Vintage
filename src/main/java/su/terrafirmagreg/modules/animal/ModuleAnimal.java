@@ -16,10 +16,10 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.Animal;
+import static su.terrafirmagreg.modules.Modules.ANIMAL;
 import static su.terrafirmagreg.modules.core.ModuleCore.CORE_TAB;
 
-@Module(moduleID = Animal)
+@Module(moduleID = ANIMAL)
 public final class ModuleAnimal extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleAnimal.class.getSimpleName());

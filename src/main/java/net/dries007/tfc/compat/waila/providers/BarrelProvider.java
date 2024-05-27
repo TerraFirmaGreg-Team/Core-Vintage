@@ -27,14 +27,14 @@ public class BarrelProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        var te = TileUtils.getTile(world, pos, TileWoodBarrel.class);
-        if (te != null) {
-            IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        var tile = TileUtils.getTile(world, pos, TileWoodBarrel.class);
+        if (tile != null) {
+            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
             FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
 
-            if (te.isSealed()) {
-                currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.sealed", te.getSealedDate()).getFormattedText());
-                BarrelRecipe recipe = te.getRecipe();
+            if (tile.isSealed()) {
+                currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.sealed", tile.getSealedDate()).getFormattedText());
+                BarrelRecipe recipe = tile.getRecipe();
                 if (recipe != null) {
                     currentTooltip.add(new TextComponentTranslation("waila.tfc.barrel.recipe", recipe.getResultName()).getFormattedText());
                 } else {

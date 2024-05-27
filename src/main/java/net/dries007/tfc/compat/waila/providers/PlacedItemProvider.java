@@ -32,8 +32,8 @@ public class PlacedItemProvider implements IWailaBlock {
         TEPlacedItemFlat te = TileUtils.getTile(world, pos, TEPlacedItemFlat.class);
         if (te != null) {
             ItemStack stack = te.getStack();
-            if (stack.getItem() instanceof ItemSmallOre) {
-                ItemSmallOre nugget = (ItemSmallOre) stack.getItem();
+            if (stack.getItem() instanceof ItemSmallOre nugget) {
+
                 Ore ore = nugget.getOre();
                 Metal metal = ore.getMetal();
                 if (metal != null) {

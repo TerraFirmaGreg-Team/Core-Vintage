@@ -33,13 +33,12 @@ public class CropProvider implements IWailaBlock {
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
-        TECropBase te = TileUtils.getTile(world, pos, TECropBase.class);
-        if (state.getBlock() instanceof BlockCropTFC && te != null) {
-            BlockCropTFC bs = (BlockCropTFC) state.getBlock();
+        TECropBase tile = TileUtils.getTile(world, pos, TECropBase.class);
+        if (state.getBlock() instanceof BlockCropTFC bs && tile != null) {
             ICrop crop = bs.getCrop();
 
             boolean isWild = state.getValue(BlockCropTFC.WILD);
-            float temp = ClimateTFC.getActualTemp(world, pos, -te.getLastUpdateTick());
+            float temp = ClimateTFC.getActualTemp(world, pos, -tile.getLastUpdateTick());
             float rainfall = ChunkDataTFC.getRainfall(world, pos);
 
             if (isWild) {
@@ -58,7 +57,7 @@ public class CropProvider implements IWailaBlock {
                         new TextComponentTranslation("waila.tfc.crop.mature").getFormattedText()).getFormattedText());
             } else {
                 float remainingTicksToGrow = Math.max(0,
-                        (crop.getGrowthTicks() * (float) ConfigTFC.General.FOOD.cropGrowthTimeModifier) - te.getTicksSinceUpdate());
+                        (crop.getGrowthTicks() * (float) ConfigTFC.General.FOOD.cropGrowthTimeModifier) - tile.getTicksSinceUpdate());
                 float curStagePerc = 1.0F - remainingTicksToGrow / crop.getGrowthTicks();
                 // Don't show 100% since it still needs to check on randomTick to grow
                 float totalPerc = Math.min(0.99f, curStagePerc / maxStage + (float) curStage / maxStage) * 100;
@@ -75,14 +74,11 @@ public class CropProvider implements IWailaBlock {
     @Override
     public String getTitle(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockCropTFC) {
-            BlockCropTFC b = (BlockCropTFC) state.getBlock();
+        if (state.getBlock() instanceof BlockCropTFC b) {
             return new TextComponentTranslation(b.getTranslationKey() + ".name").getFormattedText();
-        } else if (state.getBlock() instanceof BlockCropDead) {
-            BlockCropDead b = (BlockCropDead) state.getBlock();
+        } else if (state.getBlock() instanceof BlockCropDead b) {
             ICrop crop = b.getCrop();
-            return new TextComponentTranslation("tile.tfc.crop." + crop.toString()
-                    .toLowerCase() + ".name").getFormattedText();
+            return new TextComponentTranslation("tile.tfc.crop." + crop.toString().toLowerCase() + ".name").getFormattedText();
         }
         return "";
     }

@@ -12,9 +12,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.WorldGen;
+import static su.terrafirmagreg.modules.Modules.WORLD_GEN;
 
-@Module(moduleID = WorldGen)
+@Module(moduleID = WORLD_GEN)
 public final class ModuleWorldGen extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleWorldGen.class.getSimpleName());

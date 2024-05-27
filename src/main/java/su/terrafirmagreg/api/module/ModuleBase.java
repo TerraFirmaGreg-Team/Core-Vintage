@@ -80,6 +80,7 @@ public abstract class ModuleBase {
     }
 
     protected void enableAutoRegistry() {
+        
         enableAutoRegistry(null);
     }
 
@@ -110,7 +111,7 @@ public abstract class ModuleBase {
         return packetService;
     }
 
-    // ===== FML Lifecycle ======================================================================================================================== //
+    // ===== FML Lifecycle
 
     protected void onConstruction(FMLConstructionEvent event) {}
 
@@ -122,7 +123,7 @@ public abstract class ModuleBase {
 
     protected void onLoadComplete(FMLLoadCompleteEvent event) {}
 
-    // ===== FML Lifecycle: Client ================================================================================================================ //
+    // ===== FML Lifecycle: Client
 
     @SideOnly(Side.CLIENT)
     protected void onClientPreInit(FMLPreInitializationEvent event) {}
@@ -133,7 +134,7 @@ public abstract class ModuleBase {
     @SideOnly(Side.CLIENT)
     protected void onClientPostInit(FMLPostInitializationEvent event) {}
 
-    // ===== FML Lifecycle: Server ================================================================================================================ //
+    // ===== FML Lifecycle: Server
 
     protected void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
 
@@ -145,7 +146,7 @@ public abstract class ModuleBase {
 
     protected void onServerStopped(FMLServerStoppedEvent event) {}
 
-    // ===== Registration ========================================================================================================================= //
+    // ===== Registration
 
     protected void onNetworkRegister() {}
 
@@ -158,7 +159,7 @@ public abstract class ModuleBase {
 
     protected void onRecipesRegister() {}
 
-    // ===== Other ================================================================================================================================ //
+    // ===== Other
 
     protected boolean processIMC(FMLInterModComms.IMCMessage message) {
         return false;
@@ -171,7 +172,6 @@ public abstract class ModuleBase {
      */
     @NotNull
     public Set<ResourceLocation> getDependencyUids() {
-        //Collections.singleton(ModUtils.getID(Container.Module_Core.getName()));
         return Collections.emptySet();
     }
 

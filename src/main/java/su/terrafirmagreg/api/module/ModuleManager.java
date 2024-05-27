@@ -116,9 +116,7 @@ public class ModuleManager {
                     Module annotation = module.getClass().getAnnotation(Module.class);
                     String moduleID = annotation.moduleID().getName();
                     toLoad.remove(new ResourceLocation(moduleID));
-                    ModuleManager.LOGGER.info(
-                            "Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies
-                    );
+                    ModuleManager.LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies);
                 }
             }
         } while (changed);

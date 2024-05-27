@@ -41,6 +41,8 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import static su.terrafirmagreg.api.data.Blockstates.FULL;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
@@ -51,6 +53,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
     public static final Vec3i[] DIAGONALS = new Vec3i[] { new Vec3i(1, 0, 1), new Vec3i(-1, 0, 1), new Vec3i(1, 0, -1), new Vec3i(-1, 0, -1) };
     private final NonNullList<ItemStack> logItems = NonNullList.withSize(WOOD_NEEDED, ItemStack.EMPTY);
     private final NonNullList<ItemStack> strawItems = NonNullList.withSize(STRAW_NEEDED, ItemStack.EMPTY);
+    @Getter
     private long litTick;
     private boolean isLit;
 
@@ -154,10 +157,6 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
 
     public boolean isLit() {
         return isLit;
-    }
-
-    public long getLitTick() {
-        return litTick;
     }
 
     public boolean hasFuel() {

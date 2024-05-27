@@ -19,9 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.Modules.Rock;
+import static su.terrafirmagreg.modules.Modules.ROCK;
 
-@Module(moduleID = Rock)
+@Module(moduleID = ROCK)
 public final class ModuleRock extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleRock.class.getSimpleName());

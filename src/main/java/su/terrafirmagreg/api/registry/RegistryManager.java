@@ -176,7 +176,6 @@ public class RegistryManager {
             if (block instanceof IBlockSettings provider) {
                 this.registerBlock(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
             }
-
         }
         return collection;
     }
@@ -203,6 +202,7 @@ public class RegistryManager {
 
         if (itemBlock != null) this.registerItem(itemBlock, name);
         if (block instanceof ITileProvider tile) this.tiles.add(tile);
+
         return block;
     }
 
@@ -219,6 +219,7 @@ public class RegistryManager {
     }
 
     public <T extends Item & IItemSettings> T registerItem(T item) {
+
         return this.registerItem(item, item.getRegistryKey());
     }
 
@@ -235,6 +236,7 @@ public class RegistryManager {
         if (this.tab != null) item.setCreativeTab(this.tab);
 
         this.items.add(item);
+
         return item;
     }
 

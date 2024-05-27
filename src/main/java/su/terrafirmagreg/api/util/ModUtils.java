@@ -51,7 +51,7 @@ public final class ModUtils {
     }
 
     public static String name(String name) {
-        return String.format("%s [%s]", MOD_NAME, name);
+        return String.format("%s [ %s ]", MOD_NAME, name);
     }
 
     public static String localize(String key, String name) {

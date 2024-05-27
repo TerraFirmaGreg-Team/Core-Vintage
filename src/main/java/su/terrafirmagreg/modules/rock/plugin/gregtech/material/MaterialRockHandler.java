@@ -1,12 +1,8 @@
 package su.terrafirmagreg.modules.rock.plugin.gregtech.material;
 
-import static su.terrafirmagreg.modules.rock.ModuleRock.LOGGER;
-
 public final class MaterialRockHandler {
 
     public static void init() {
-
-        LOGGER.info("Registered materials");
         // Igneous Intrusive
 
         MaterialsRock.Gabbro = new MaterialRock.Builder("gabbro")

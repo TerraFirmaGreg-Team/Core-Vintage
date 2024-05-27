@@ -119,8 +119,8 @@ public final class TFCJEIPlugin implements IModPlugin {
     public static final String VEIN_UID = Constants.MODID_TFC + ".vein";
     public static final String WELDING_UID = Constants.MODID_TFC + ".welding";
     public static final String SCRAPING_UID = Constants.MODID_TFC + ".scraping";
-    private static final String SMELTERY_UID = Constants.MODID_TFC + ".smeltery";
-    private static final String GLASSWORKING_UID = Constants.MODID_TFC + ".glassworking";
+    public static final String SMELTERY_UID = Constants.MODID_TFC + ".smeltery";
+    public static final String GLASSWORKING_UID = Constants.MODID_TFC + ".glassworking";
 
     private static IModRegistry REGISTRY;
 

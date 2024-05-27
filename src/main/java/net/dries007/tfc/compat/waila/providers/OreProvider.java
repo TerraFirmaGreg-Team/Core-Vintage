@@ -22,8 +22,7 @@ public class OreProvider implements IWailaBlock {
     @Override
     public ItemStack getIcon(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockOreTFC) {
-            BlockOreTFC b = (BlockOreTFC) state.getBlock();
+        if (state.getBlock() instanceof BlockOreTFC b) {
             return ItemOreTFC.get(b.ore, 1);
         }
         return ItemStack.EMPTY;

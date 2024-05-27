@@ -28,12 +28,11 @@ public class TreeProvider implements IWailaBlock {
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockSaplingTFC) {
-            BlockSaplingTFC block = ((BlockSaplingTFC) state.getBlock());
+        if (state.getBlock() instanceof BlockSaplingTFC block) {
             Tree wood = block.getWood();
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (te != null) {
-                long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            if (tile != null) {
+                long days = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
                 float perc = Math.min(0.99F, days / wood.getMinGrowthTime()) * 100;
                 String growth = String.format("%d%%", Math.round(perc));
                 currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.growth", growth).getFormattedText());

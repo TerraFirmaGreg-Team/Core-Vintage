@@ -29,9 +29,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.Modules.Wood;
+import static su.terrafirmagreg.modules.Modules.WOOD;
 
-@Module(moduleID = Wood)
+@Module(moduleID = WOOD)
 public final class ModuleWood extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleWood.class.getSimpleName());

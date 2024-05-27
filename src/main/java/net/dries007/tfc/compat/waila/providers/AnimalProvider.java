@@ -26,8 +26,7 @@ public class AnimalProvider implements IWailaEntity {
     @Override
     public List<String> getTooltip(@NotNull Entity entity, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        if (entity instanceof IAnimal) {
-            IAnimal animal = (IAnimal) entity;
+        if (entity instanceof IAnimal animal) {
             boolean familiarized = animal.getFamiliarity() > 0.15f;
             if (animal.getAdultFamiliarityCap() > 0) {
                 currentTooltip.add(new TextComponentTranslation(
@@ -35,7 +34,7 @@ public class AnimalProvider implements IWailaEntity {
             }
             switch (animal.getAge()) {
                 case CHILD:
-                    long endPlayerTick = (animal.getBirthDay() + animal.getDaysToAdulthood()) * ICalendar.TICKS_IN_DAY;
+                    long endPlayerTick = (long) (animal.getBirthDay() + animal.getDaysToAdulthood()) * ICalendar.TICKS_IN_DAY;
                     long delta = endPlayerTick - CalendarTFC.PLAYER_TIME.getTicks();
                     long endCalendarTick = CalendarTFC.CALENDAR_TIME.getTicks() + delta;
                     String date = ICalendarFormatted.getTimeAndDate(endCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
@@ -54,8 +53,7 @@ public class AnimalProvider implements IWailaEntity {
                                 currentTooltip.add(new TextComponentTranslation("waila.tfc.animal.pregnant").getFormattedText());
                                 // In 1.15+ this will move to AnimalProperties and everything needed will be there
                                 // For 1.12, addons will need to either extend EntityAnimalMammal or handle the tooltip themselves
-                                if (animal instanceof EntityAnimalMammal) {
-                                    EntityAnimalMammal mother = (EntityAnimalMammal) animal;
+                                if (animal instanceof EntityAnimalMammal mother) {
                                     long gestationDaysRemaining =
                                             mother.getPregnantTime() + mother.gestationDays() - CalendarTFC.PLAYER_TIME.getTotalDays();
                                     currentTooltip.add(

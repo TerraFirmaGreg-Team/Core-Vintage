@@ -26,9 +26,9 @@ public class LampProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        TELamp te = TileUtils.getTile(world, pos, TELamp.class);
-        if (te != null) {
-            IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        var tile = TileUtils.getTile(world, pos, TELamp.class);
+        if (tile != null) {
+            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
             FluidStack fluid = fluidHandler != null ? fluidHandler.drain(Integer.MAX_VALUE, false) : null;
             if (fluid != null && fluid.amount > 0) {
                 currentTooltip.add(

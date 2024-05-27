@@ -76,6 +76,7 @@ public class BlockPitKiln extends BaseBlock implements ITileProvider {
                 .nonOpaque()
                 .hardness(0.5f);
 
+        setHarvestLevel("axe", 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(FULL, false)
                 .withProperty(LIT, false));

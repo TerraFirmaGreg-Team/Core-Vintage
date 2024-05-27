@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.rock.event;
 
-import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.modules.rock.plugin.gregtech.material.MaterialRockHandler;
 
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -16,6 +15,5 @@ public final class MaterialEventHandler {
     public void registerMaterials(MaterialEvent event) {
 
         MaterialRockHandler.init();
-        ModuleRock.LOGGER.info("Registered materials");
     }
 }

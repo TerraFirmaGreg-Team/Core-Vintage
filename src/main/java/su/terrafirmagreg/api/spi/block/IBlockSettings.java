@@ -119,7 +119,6 @@ public interface IBlockSettings extends IAutoRegProvider, IBlockStateProvider {
     }
 
     @Override
-    @Nullable
     @SideOnly(Side.CLIENT)
     default IStateMapper getStateMapper() {
         var ignored = getSettings().getIgnoredProperties();

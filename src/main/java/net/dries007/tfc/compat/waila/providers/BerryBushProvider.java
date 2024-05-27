@@ -33,8 +33,7 @@ public class BerryBushProvider implements IWailaBlock {
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof BlockBerryBush) {
-            BlockBerryBush block = (BlockBerryBush) state.getBlock();
+        if (state.getBlock() instanceof BlockBerryBush block) {
             if (block.getBush()
                     .isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
                 float temp = ClimateTFC.getActualTemp(world, pos);

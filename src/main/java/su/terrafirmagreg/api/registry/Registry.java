@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.registry.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.registry.provider.IItemColorProvider;
 import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.registry.provider.IOreDictProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -100,8 +101,15 @@ public record Registry(RegistryManager registryManager) {
     }
 
     public void onRegisterOreDict() {
-        for (var oreDict : this.registryManager.getOreDicts()) {
-            oreDict.onRegisterOreDict();
+        for (var block : this.registryManager.getBlocks()) {
+            if (block instanceof IOreDictProvider provider) {
+                provider.onRegisterOreDict();
+            }
+        }
+        for (var item : this.registryManager.getItems()) {
+            if (item instanceof IOreDictProvider provider) {
+                provider.onRegisterOreDict();
+            }
         }
         OreDictUtils.init();
     }

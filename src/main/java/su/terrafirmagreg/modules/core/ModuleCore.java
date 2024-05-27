@@ -33,10 +33,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.Core;
+import static su.terrafirmagreg.modules.Modules.CORE;
 
 @Module(
-        moduleID = Core,
+        moduleID = CORE,
         description = "Core TFG content. Disabling this disables the entire mod and all its module.",
         coreModule = true
 )

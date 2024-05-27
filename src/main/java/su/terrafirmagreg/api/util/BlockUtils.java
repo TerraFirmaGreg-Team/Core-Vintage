@@ -256,20 +256,13 @@ public final class BlockUtils {
         return result;
     }
 
-    /**
-     * Устанавливает информацию о пожаре для блока.
-     *
-     * @param blockIn       Блок, для которого устанавливается информация о пожаре.
-     * @param encouragement Поощрение огня.
-     * @param flammability  Горючесть огня.
-     */
     public static void setFireInfo(Block blockIn, int encouragement, int flammability) {
         Blocks.FIRE.setFireInfo(blockIn, encouragement, flammability);
     }
 
     /**
      * Проверяет, содержит ли ItemStack элемент руды. Это делается путем проверки элемента, расширяющего BlockOre, или наличия в словаре руд записей, начинающихся с «ore». Это
-     * также будет проверьте отображаемое имя стака, чтобы увидеть, есть ли в ней слово Ore.
+     * также будет проверять отображаемое имя стака, чтобы увидеть, есть ли в ней слово Ore.
      *
      * @param stack     Стек ItemStack для проверки.
      * @param checkName Следует ли проверять имя ItemStack.

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCow;
 
@@ -38,7 +39,7 @@ public class ModelAnimalCow extends ModelQuadruped {
         horn1b = new ModelRenderer(this, 22, 0);
         horn1b.addBox(0, -2.1f, -0.5f, 1, 3, 1, 0F);
         horn1b.setRotationPoint(0f, 0f, 0f);
-        horn1b.rotateAngleX = (float) Math.PI / 3f;
+        horn1b.rotateAngleX = MathConstants.PI / 3f;
         horn1b.rotateAngleY = (float) -Math.PI / 12f;
         horn1.addChild(horn1b);
 
@@ -104,13 +105,13 @@ public class ModelAnimalCow extends ModelQuadruped {
 
     @Override
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
-        this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
-        this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
-        this.body.rotateAngleX = (float) Math.PI / 2F;
-        this.udders.rotateAngleX = (float) Math.PI / 2F;
+        this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
+        this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
+        this.body.rotateAngleX = MathConstants.PI / 2F;
+        this.udders.rotateAngleX = MathConstants.PI / 2F;
         this.leg1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-        this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
-        this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+        this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+        this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
         this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
         horn1.rotateAngleX = 0F;
         horn2.rotateAngleX = 0F;

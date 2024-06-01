@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.model.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -247,12 +249,12 @@ public class ModelCoyoteTFC extends ModelBase {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        setRotateAngle(head, f4 / (180F / (float) Math.PI), f3 / (180F / (float) Math.PI), 0F);
-        setRotateAngle(neck, f4 / (1.5F * (180F / (float) Math.PI)) + -0.7853981633974483F, f3 / (1.5F * (180F / (float) Math.PI)), 0F);
+        setRotateAngle(head, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
+        setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.7853981633974483F, f3 / (1.5F * (180F / MathConstants.PI)), 0F);
 
         frontRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1 + 0.13962634015954636F;
-        frontLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + (float) Math.PI) * 0.8F * f1 + 0.13962634015954636F;
-        backRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + (float) Math.PI) * 0.8F * f1;
+        frontLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1 + 0.13962634015954636F;
+        backRLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F + MathConstants.PI) * 0.8F * f1;
         backLLegTop.rotateAngleX = MathHelper.cos(f * 0.4862F) * 0.8F * f1;
     }
 

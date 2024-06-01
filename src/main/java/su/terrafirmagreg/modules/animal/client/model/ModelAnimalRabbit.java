@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.huntable.EntityAnimalRabbit;
 
 import net.minecraft.client.model.ModelBase;
@@ -151,7 +152,7 @@ public class ModelAnimalRabbit extends ModelBase {
         this.rabbitHead.rotateAngleY = netHeadYaw * 0.017453292F;
         this.rabbitRightEar.rotateAngleY = this.rabbitNose.rotateAngleY - 0.2617994F;
         this.rabbitLeftEar.rotateAngleY = this.rabbitNose.rotateAngleY + 0.2617994F;
-        this.jumpRotation = MathHelper.sin(EntityAnimalRabbit.getJumpCompletion(f) * (float) Math.PI);
+        this.jumpRotation = MathHelper.sin(EntityAnimalRabbit.getJumpCompletion(f) * MathConstants.PI);
         this.rabbitLeftThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
         this.rabbitRightThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
         this.rabbitLeftFoot.rotateAngleX = this.jumpRotation * 50.0F * 0.017453292F;
@@ -162,7 +163,7 @@ public class ModelAnimalRabbit extends ModelBase {
 
     public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
-        this.jumpRotation = MathHelper.sin(((EntityAnimalRabbit) entitylivingbaseIn).getJumpCompletion(partialTickTime) * (float) Math.PI);
+        this.jumpRotation = MathHelper.sin(((EntityAnimalRabbit) entitylivingbaseIn).getJumpCompletion(partialTickTime) * MathConstants.PI);
     }
 
     private void setRotationOffset(ModelRenderer renderer, float x, float y, float z) {

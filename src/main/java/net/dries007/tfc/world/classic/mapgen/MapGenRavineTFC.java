@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.mapgen;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -35,7 +37,7 @@ public class MapGenRavineTFC extends MapGenBase {
             double startX = chunkX * 16 + rand.nextInt(16);
             double startY = rand.nextInt(variability) + height;
             double startZ = chunkZ * 16 + rand.nextInt(16);
-            float angleY = rand.nextFloat() * (float) Math.PI * 2.0F;
+            float angleY = rand.nextFloat() * MathConstants.PI * 2.0F;
             float angleZ = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
             float angleX = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
             double scaleY = 1.2 + rand.nextFloat() + rand.nextFloat();
@@ -64,7 +66,7 @@ public class MapGenRavineTFC extends MapGenBase {
 
         outer:
         for (int round = 0; round < rounds; ++round) {
-            final double min = (1.5D + MathHelper.sin(round * (float) Math.PI / rounds) * angleX * 1.0F) * RNG.nextFloat() * 0.25D + 0.75D;
+            final double min = (1.5D + MathHelper.sin(round * MathConstants.PI / rounds) * angleX * 1.0F) * RNG.nextFloat() * 0.25D + 0.75D;
             final double max = (min * yScale) * RNG.nextFloat() * 0.25D + 0.75D;
             final float cosZ = MathHelper.cos(angleZ);
             final float sinZ = MathHelper.sin(angleZ);

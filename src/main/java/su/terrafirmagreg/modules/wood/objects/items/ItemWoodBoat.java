@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.items;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
@@ -22,10 +25,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import lombok.Getter;
@@ -65,8 +64,8 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
         double d2 = playerIn.prevPosZ + (playerIn.posZ - playerIn.prevPosZ);
 
         Vec3d vec3d = new Vec3d(d0, d1, d2);
-        float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);
-        float f4 = MathHelper.sin(-f2 * 0.017453292F - (float) Math.PI);
+        float f3 = MathHelper.cos(-f2 * 0.017453292F - MathConstants.PI);
+        float f4 = MathHelper.sin(-f2 * 0.017453292F - MathConstants.PI);
         float f5 = -MathHelper.cos(-f1 * 0.017453292F);
         float f6 = MathHelper.sin(-f1 * 0.017453292F);
         float f7 = f4 * f5;
@@ -74,7 +73,7 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
 
         Vec3d vec3d1 = vec3d.add((double) f7 * 5.0D, (double) f6 * 5.0D, (double) f8 * 5.0D);
         RayTraceResult raytraceresult = worldIn.rayTraceBlocks(vec3d, vec3d1, true);
-
+ 
         if (raytraceresult == null) {
             return new ActionResult<>(EnumActionResult.PASS, itemstack);
         } else {

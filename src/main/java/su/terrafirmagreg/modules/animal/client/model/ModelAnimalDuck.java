@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
 
 import net.minecraft.client.model.ModelBase;
@@ -199,10 +200,10 @@ public class ModelAnimalDuck extends ModelBase {
 
     @Override
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
-        this.neck.rotateAngleX = -(par5 / (180F / (float) Math.PI));
-        this.neck.rotateAngleY = par4 / (180F / (float) Math.PI);
+        this.neck.rotateAngleX = -(par5 / (180F / MathConstants.PI));
+        this.neck.rotateAngleY = par4 / (180F / MathConstants.PI);
         this.legR1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-        this.legL1.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+        this.legL1.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
         this.rightWing1.rotateAngleZ = par3;
         this.leftWing1.rotateAngleZ = -par3;
         this.rightWing1.rotateAngleX = 0;

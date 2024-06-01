@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalCamel;
 
@@ -480,12 +481,12 @@ public class ModelAnimalCamel extends ModelBase {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        head.rotateAngleX = f4 / (180F / (float) Math.PI);
-        head.rotateAngleY = f3 / (180F / (float) Math.PI);
+        head.rotateAngleX = f4 / (180F / MathConstants.PI);
+        head.rotateAngleY = f3 / (180F / MathConstants.PI);
 
         frontLegRightTop.rotateAngleX = MathHelper.cos(f * 0.4662F) * 1.0F * f1 + 0.13962634015954636F;
-        frontLegLeftTop.rotateAngleX = MathHelper.cos(f * 0.4662F + (float) Math.PI) * 1.0F * f1 + 0.13962634015954636F;
-        backLegLeftTop.rotateAngleX = MathHelper.cos(f * 0.4662F + (float) Math.PI) * 1.0F * f1 + -0.10471975511965977F;
+        frontLegLeftTop.rotateAngleX = MathHelper.cos(f * 0.4662F + MathConstants.PI) * 1.0F * f1 + 0.13962634015954636F;
+        backLegLeftTop.rotateAngleX = MathHelper.cos(f * 0.4662F + MathConstants.PI) * 1.0F * f1 + -0.10471975511965977F;
         backLegRightTop.rotateAngleX = MathHelper.cos(f * 0.4662F) * 1.0F * f1 + -0.10471975511965977F;
     }
 

@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.client.model.ModelBase;
@@ -85,10 +86,10 @@ public class ModelChickenTFC extends ModelBase {
 
         if (percent >= 0.75 && chicken.getGender() == EntityAnimalBase.Gender.MALE) {
             crown.isHidden = false;
-            this.body.rotateAngleX = (float) Math.PI / 4F;
-            this.rightWing.rotateAngleX = (float) Math.PI / 4F;
+            this.body.rotateAngleX = MathConstants.PI / 4F;
+            this.rightWing.rotateAngleX = MathConstants.PI / 4F;
             rightWing.setRotationPoint(-4.0F, 13.5f, -2.5F);
-            this.leftWing.rotateAngleX = (float) Math.PI / 4F;
+            this.leftWing.rotateAngleX = MathConstants.PI / 4F;
             leftWing.setRotationPoint(4.0F, 13.5f, -2.5F);
             this.head.setRotationPoint(0.0F, 13, -1.0F);
             this.bill.setRotationPoint(0.0F, 13, -1.0F);
@@ -123,23 +124,23 @@ public class ModelChickenTFC extends ModelBase {
 
     @Override
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
-        this.head.rotateAngleX = -(par5 / (180F / (float) Math.PI));
-        this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
-        this.crown.rotateAngleX = -(par5 / (180F / (float) Math.PI));
-        this.crown.rotateAngleY = par4 / (180F / (float) Math.PI);
+        this.head.rotateAngleX = -(par5 / (180F / MathConstants.PI));
+        this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
+        this.crown.rotateAngleX = -(par5 / (180F / MathConstants.PI));
+        this.crown.rotateAngleY = par4 / (180F / MathConstants.PI);
         this.bill.rotateAngleX = this.head.rotateAngleX;
         this.bill.rotateAngleY = this.head.rotateAngleY;
         this.chin.rotateAngleX = this.head.rotateAngleX;
         this.chin.rotateAngleY = this.head.rotateAngleY;
-        this.body.rotateAngleX = (float) Math.PI / 2F;
+        this.body.rotateAngleX = MathConstants.PI / 2F;
         crown.isHidden = true;
 
         for (int i = 0; i < 32; i++) {
-            tails[i].rotateAngleX = (float) Math.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
-            tails[i].rotateAngleZ = (float) Math.PI / -2 + (float) Math.PI * i / 31;
+            tails[i].rotateAngleX = MathConstants.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
+            tails[i].rotateAngleZ = MathConstants.PI / -2 + MathConstants.PI * i / 31;
         }
         this.rightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-        this.leftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+        this.leftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
         this.rightWing.rotateAngleZ = par3;
         this.leftWing.rotateAngleZ = -par3;
         this.rightWing.rotateAngleX = 0;

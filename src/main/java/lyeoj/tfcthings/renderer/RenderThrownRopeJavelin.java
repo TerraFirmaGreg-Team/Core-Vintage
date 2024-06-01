@@ -1,5 +1,7 @@
 package lyeoj.tfcthings.renderer;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -100,11 +102,11 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
             }
 
             float f7 = entityplayer.getSwingProgress(partialTicks);
-            float f8 = MathHelper.sin(MathHelper.sqrt(f7) * (float) Math.PI);
+            float f8 = MathHelper.sin(MathHelper.sqrt(f7) * MathConstants.PI);
             float f9 = (entityplayer.prevRenderYawOffset + (entityplayer.renderYawOffset - entityplayer.prevRenderYawOffset) * partialTicks) *
                     0.017453292F;
-            double d0 = (double) MathHelper.sin(f9);
-            double d1 = (double) MathHelper.cos(f9);
+            double d0 = MathHelper.sin(f9);
+            double d1 = MathHelper.cos(f9);
             double d2 = (double) k * 0.35D;
             double d4;
             double d5;

@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.mapgen;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -37,7 +39,7 @@ public class MapGenRiverRavine extends MapGenBase {
         double x = chunkX * 16 + rand.nextInt(16);
         double y = 80;
         double z = chunkZ * 16 + rand.nextInt(16);
-        float angleY = rand.nextFloat() * (float) Math.PI * 2.0F;
+        float angleY = rand.nextFloat() * MathConstants.PI * 2.0F;
         float angleZ = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
         float angleX = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
 
@@ -65,7 +67,7 @@ public class MapGenRiverRavine extends MapGenBase {
 
         outer:
         for (int round = 0; round < rounds; round++) {
-            double min = 3.5D + MathHelper.sin(round * (float) Math.PI / rounds) * angleX * 1.0F;
+            double min = 3.5D + MathHelper.sin(round * MathConstants.PI / rounds) * angleX * 1.0F;
             double max = min * 0.8;
             min *= rand.nextFloat() * 0.25D + 0.75D;
             max *= rand.nextFloat() * 0.25D + 0.75D;

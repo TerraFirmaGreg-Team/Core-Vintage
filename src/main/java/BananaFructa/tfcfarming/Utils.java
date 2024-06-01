@@ -1,5 +1,7 @@
 package BananaFructa.tfcfarming;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -107,8 +109,8 @@ public class Utils {
         double d1 = playerIn.posY + (double) playerIn.getEyeHeight();
         double d2 = playerIn.posZ;
         Vec3d vec3d = new Vec3d(d0, d1, d2);
-        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float) Math.PI);
-        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float) Math.PI);
+        float f2 = MathHelper.cos(-f1 * 0.017453292F - MathConstants.PI);
+        float f3 = MathHelper.sin(-f1 * 0.017453292F - MathConstants.PI);
         float f4 = -MathHelper.cos(-f * 0.017453292F);
         float f5 = MathHelper.sin(-f * 0.017453292F);
         float f6 = f3 * f4;

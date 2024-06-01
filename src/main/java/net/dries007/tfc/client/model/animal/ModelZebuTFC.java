@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.client.model.ModelBase;
@@ -563,12 +564,12 @@ public class ModelZebuTFC extends ModelBase {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        setRotateAngle(headNode, f4 / (180F / (float) Math.PI), f3 / (180F / (float) Math.PI), 0F);
-        setRotateAngle(neck, f4 / (1.5F * (180F / (float) Math.PI)) + -0.7475245186291712F, f3 / (1.5F * (180F / (float) Math.PI)), 0F);
+        setRotateAngle(headNode, f4 / (180F / MathConstants.PI), f3 / (180F / MathConstants.PI), 0F);
+        setRotateAngle(neck, f4 / (1.5F * (180F / MathConstants.PI)) + -0.7475245186291712F, f3 / (1.5F * (180F / MathConstants.PI)), 0F);
 
         this.legRFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-        this.legLFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-        this.legRBackTop.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+        this.legLFrontTop.rotateAngleX = MathHelper.cos(f * 0.6662F + MathConstants.PI) * 1.4F * f1;
+        this.legRBackTop.rotateAngleX = MathHelper.cos(f * 0.6662F + MathConstants.PI) * 1.4F * f1;
         this.legLBackTop.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 
         hornML1.isHidden = false;

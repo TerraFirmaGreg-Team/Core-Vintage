@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
 
@@ -164,8 +165,8 @@ public class ModelAnimalWolf extends ModelBase {
             this.wolfLeg3.setRotationPoint(-2.5F, 16.0F, -4.0F);
             this.wolfLeg4.setRotationPoint(0.5F, 16.0F, -4.0F);
             this.wolfLeg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-            this.wolfLeg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-            this.wolfLeg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+            this.wolfLeg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
+            this.wolfLeg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
             this.wolfLeg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         }
 

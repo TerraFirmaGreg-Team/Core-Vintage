@@ -1,5 +1,7 @@
 package BananaFructa.tfcpassingdays.fixes;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +36,7 @@ public class BlockDaylightDetectorFixed extends BlockDaylightDetector {
             }
 
             if (i > 0 && !this.inverted) {
-                float f1 = f < (float) Math.PI ? 0.0F : ((float) Math.PI * 2F);
+                float f1 = f < MathConstants.PI ? 0.0F : ((float) Math.PI * 2F);
                 f = f + (f1 - f) * 0.2F;
                 i = Math.round((float) i * MathHelper.cos(f));
             }

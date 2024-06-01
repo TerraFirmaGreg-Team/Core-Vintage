@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.predator.EntityAnimalGrizzlyBear;
 
@@ -150,12 +151,12 @@ public class ModelAnimalGrizzlyBear extends ModelBase {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
                                   Entity entityIn) {
-        bearHead.rotateAngleX = headPitch / (180F / (float) Math.PI);
-        bearHead.rotateAngleY = netHeadYaw / (180F / (float) Math.PI);
+        bearHead.rotateAngleX = headPitch / (180F / MathConstants.PI);
+        bearHead.rotateAngleY = netHeadYaw / (180F / MathConstants.PI);
 
         leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        leg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        leg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+        leg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
+        leg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
         leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 
         float f1 = ((EntityAnimalGrizzlyBear) entityIn).getStandingAnimationScale(ageInTicks);

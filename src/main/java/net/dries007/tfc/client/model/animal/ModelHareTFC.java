@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.model.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -138,7 +140,7 @@ public class ModelHareTFC extends ModelBase {
         this.hareHead.rotateAngleX = headPitch * 0.017453292F;
         this.hareNose.rotateAngleY = netHeadYaw * 0.017453292F;
         this.hareHead.rotateAngleY = netHeadYaw * 0.017453292F;
-        this.jumpRotation = MathHelper.sin(EntityHareTFC.getJumpCompletion(f) * (float) Math.PI);
+        this.jumpRotation = MathHelper.sin(EntityHareTFC.getJumpCompletion(f) * MathConstants.PI);
         this.hareLeftThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
         this.hareRightThigh.rotateAngleX = (this.jumpRotation * 50.0F - 21.0F) * 0.017453292F;
         this.hareLeftFoot.rotateAngleX = this.jumpRotation * 50.0F * 0.017453292F;
@@ -149,7 +151,7 @@ public class ModelHareTFC extends ModelBase {
 
     public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
-        this.jumpRotation = MathHelper.sin(((EntityHareTFC) entitylivingbaseIn).getJumpCompletion(partialTickTime) * (float) Math.PI);
+        this.jumpRotation = MathHelper.sin(((EntityHareTFC) entitylivingbaseIn).getJumpCompletion(partialTickTime) * MathConstants.PI);
     }
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {

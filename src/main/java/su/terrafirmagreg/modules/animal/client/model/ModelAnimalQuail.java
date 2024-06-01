@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
 
 import net.minecraft.client.model.ModelBase;
@@ -158,14 +159,14 @@ public class ModelAnimalQuail extends ModelBase {
 
     @Override
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity ent) {
-        this.head.rotateAngleX = -(par5 / (180F / (float) Math.PI));
-        this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
+        this.head.rotateAngleX = -(par5 / (180F / MathConstants.PI));
+        this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
 
         setRotateAngle(wingR, -0.2617993877991494F, 0.0F, 0.0F);
         setRotateAngle(wingL, -0.2617993877991494F, 0.0F, -0.0F);
 
         this.legR1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-        this.legL1.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+        this.legL1.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
         this.wingR.rotateAngleZ = par3;
         this.wingL.rotateAngleZ = -par3;
 

@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 import net.minecraft.client.model.ModelBase;
@@ -115,8 +116,8 @@ public class ModelWolfTFC extends ModelBase {
     }
 
     /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms and legs, where par1 represents
-     * the time(so that arms and legs swing back and forth) and par2 represents how "far" arms and legs can swing at most.
+     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms and legs, where par1 represents the time(so that arms and
+     * legs swing back and forth) and par2 represents how "far" arms and legs can swing at most.
      */
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
@@ -128,8 +129,7 @@ public class ModelWolfTFC extends ModelBase {
     }
 
     /**
-     * Used for easily adding entity-dependent animations. The second and third float params here are the same second and third as in the
-     * setRotationAngles method.
+     * Used for easily adding entity-dependent animations. The second and third float params here are the same second and third as in the setRotationAngles method.
      */
     @Override
     public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
@@ -167,8 +167,8 @@ public class ModelWolfTFC extends ModelBase {
             this.wolfLeg3.setRotationPoint(-2.5F, 16.0F, -4.0F);
             this.wolfLeg4.setRotationPoint(0.5F, 16.0F, -4.0F);
             this.wolfLeg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-            this.wolfLeg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-            this.wolfLeg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+            this.wolfLeg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
+            this.wolfLeg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + MathConstants.PI) * 1.4F * limbSwingAmount;
             this.wolfLeg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         }
 

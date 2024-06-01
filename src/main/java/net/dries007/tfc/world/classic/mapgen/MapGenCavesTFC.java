@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.mapgen;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -71,7 +73,7 @@ public class MapGenCavesTFC extends MapGenBase {
             }
 
             for (int j = 0; j < runs2; j++) {
-                float d1 = this.rand.nextFloat() * (float) Math.PI * 2.0F;
+                float d1 = this.rand.nextFloat() * MathConstants.PI * 2.0F;
                 float d2 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
                 float d3 = this.rand.nextFloat() * 2.0F + this.rand.nextFloat();
                 if (this.rand.nextInt(10) == 0) d3 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
@@ -132,7 +134,7 @@ public class MapGenCavesTFC extends MapGenBase {
                 return;
             }
 
-            double radius = width + MathHelper.sin(i1 * (float) Math.PI / rndRange) * f1 * 1.0F;
+            double radius = width + MathHelper.sin(i1 * MathConstants.PI / rndRange) * f1 * 1.0F;
             double yRadius = radius * yRadiusMult;
             if (onlyOne || RNG.nextInt(4) != 0) {
                 final double localXOffset = xOffset - worldX;

@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.model.animal;
 
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -342,11 +344,11 @@ public class ModelBoarTFC extends ModelBase {
         tuskR1.isHidden = true;
         tuskL1.isHidden = true;
 
-        this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
-        this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
+        this.head.rotateAngleX = par5 / (180F / MathConstants.PI);
+        this.head.rotateAngleY = par4 / (180F / MathConstants.PI);
         this.legRFrontTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-        this.legLFrontTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
-        this.legRBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+        this.legLFrontTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
+        this.legRBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F + MathConstants.PI) * 1.4F * par2;
         this.legLBackTop.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     }
 

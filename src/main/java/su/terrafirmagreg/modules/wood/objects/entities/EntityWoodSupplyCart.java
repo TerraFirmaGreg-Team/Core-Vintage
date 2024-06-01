@@ -75,7 +75,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
     public boolean processInitialInteract(@NotNull EntityPlayer player, @NotNull EnumHand hand) {
         if (!this.world.isRemote) {
             if (player.isSneaking()) {
-                GuiHandler.openGui(world, new BlockPos(this.getEntityId(), 0, 0), player, GuiHandler.Type.WOOD_SUPPLY_CART);
+                GuiHandler.openGui(world, new BlockPos(this.getEntityId(), 0, 0), player);
             } else if (this.pulling != player) {
                 player.startRiding(this);
             }

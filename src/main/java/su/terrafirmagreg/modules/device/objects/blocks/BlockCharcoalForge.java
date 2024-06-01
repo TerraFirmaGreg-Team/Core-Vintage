@@ -225,7 +225,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
                 }
             }
             if (!player.isSneaking()) {
-                GuiHandler.openGui(world, pos, player, GuiHandler.Type.CHARCOAL_FORGE);
+                GuiHandler.openGui(world, pos, player);
             }
         }
         return true;

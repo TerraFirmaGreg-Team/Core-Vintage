@@ -142,7 +142,7 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
                 }
             }
             if (!playerIn.isSneaking()) {
-                GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.BLAST_FURNACE);
+                GuiHandler.openGui(worldIn, pos, playerIn);
             }
         }
         return true;

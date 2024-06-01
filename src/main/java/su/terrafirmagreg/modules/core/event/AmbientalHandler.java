@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -85,16 +84,6 @@ public class AmbientalHandler {
             return;
         }
         player.sendMessage(new TextComponentString("respawned"));
-    }
-
-    @SubscribeEvent
-    public void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof EntityPlayer player) {
-
-            //Each player should have their own instance for each stat, as associated values may vary
-            if (!event.getCapabilities().containsKey(CapabilityTemperature.KEY))
-                event.addCapability(CapabilityTemperature.KEY, new ProviderTemperature(player));
-        }
     }
 
     @SubscribeEvent

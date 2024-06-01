@@ -186,7 +186,7 @@ public class BlockLogPile extends BaseBlockContainer implements ITileProvider {
 
             if (!player.isSneaking() && !state.getValue(LIT)) {
                 if (!world.isRemote) {
-                    GuiHandler.openGui(world, pos, player, GuiHandler.Type.LOG_PILE);
+                    GuiHandler.openGui(world, pos, player);
                 }
                 return true;
             }

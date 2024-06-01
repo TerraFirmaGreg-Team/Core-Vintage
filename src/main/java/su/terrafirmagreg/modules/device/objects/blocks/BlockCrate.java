@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -28,10 +30,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -144,7 +142,7 @@ public class BlockCrate extends BaseBlockContainer implements ITileProvider {
                     world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.85F);
                     toggleCrateSeal(world, pos);
                 } else {
-                    GuiHandler.openGui(world, pos, playerIn, GuiHandler.Type.CRATE);
+                    GuiHandler.openGui(world, pos, playerIn);
                 }
             }
         }

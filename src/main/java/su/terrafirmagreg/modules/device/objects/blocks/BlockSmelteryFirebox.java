@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -34,13 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 
 import org.jetbrains.annotations.NotNull;
@@ -149,7 +144,7 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
                     if (ItemFireStarter.canIgnite(held) && tile.onIgnite()) {
                         ItemFireStarter.onIgnition(held);
                     } else {
-                        GuiHandler.openGui(world, pos, player, GuiHandler.Type.SMELTERY_FIREBOX);
+                        GuiHandler.openGui(world, pos, player);
                     }
                 } else {
                     if (held.getItem() instanceof ItemBlock && ((ItemBlock) held.getItem()).getBlock() instanceof BlockSmelteryCauldron && world

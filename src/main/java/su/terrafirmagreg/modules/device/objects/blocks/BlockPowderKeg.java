@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -38,10 +40,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
@@ -236,7 +234,7 @@ public class BlockPowderKeg extends BaseBlockContainer implements ITileProvider 
                         }
                     }
                 } else {
-                    GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.POWDERKEG);
+                    GuiHandler.openGui(worldIn, pos, playerIn);
                 }
             }
         }

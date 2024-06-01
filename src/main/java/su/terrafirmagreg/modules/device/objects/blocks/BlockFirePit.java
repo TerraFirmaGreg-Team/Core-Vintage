@@ -265,7 +265,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
             }
 
             if (!player.isSneaking()) {
-                GuiHandler.openGui(world, pos, player, GuiHandler.Type.FIRE_PIT);
+                GuiHandler.openGui(world, pos, player);
             } else if ((held == ItemStack.EMPTY) && (attachment != FirePitAttachment.NONE)) {
                 boolean anythingInTheInv = false;
                 if (tile != null) {

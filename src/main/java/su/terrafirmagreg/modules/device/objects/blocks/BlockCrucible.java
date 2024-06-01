@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
@@ -36,13 +38,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.ConfigTFC;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.util.Alloy;
 
@@ -149,7 +144,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote && !playerIn.isSneaking()) {
-            GuiHandler.openGui(world, pos, playerIn, GuiHandler.Type.CRUCIBLE);
+            GuiHandler.openGui(world, pos, playerIn);
         }
         return true;
     }

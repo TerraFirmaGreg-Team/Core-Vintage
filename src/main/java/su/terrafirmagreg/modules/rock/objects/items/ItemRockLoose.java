@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -23,10 +25,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +60,7 @@ public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProv
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
-            GuiHandler.openGui(world, player.getPosition(), player, GuiHandler.Type.KNAPPING_ROCK);
+            GuiHandler.openGui(world, player.getPosition(), player);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }

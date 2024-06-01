@@ -37,7 +37,7 @@ public class BlockIceBunker extends BaseBlockContainer implements ITileProvider 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
                                     float hitZ) {
         if (!worldIn.isRemote) {
-            GuiHandler.openGui(worldIn, pos, player, GuiHandler.Type.ICE_BUNKER);
+            GuiHandler.openGui(worldIn, pos, player);
         }
         return true;
     }

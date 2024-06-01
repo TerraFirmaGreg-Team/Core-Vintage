@@ -45,27 +45,27 @@ public class MapGenRavineTFC extends MapGenBase {
 
     private void generateRavine(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double xCoord, double yCoord, double zCoord, float angleX,
                                 float angleY, float angleZ, double yScale) {
-        final Random rng = new Random(seed);
+        final Random RNG = new Random(seed);
         final double chunkMidX = chunkX * 16 + 8;
         final double chunkMidZ = chunkZ * 16 + 8;
         float runningYMultiplier = 0.0F;
         float runningZMultiplier = 0.0F;
 
-        final int rounds = (range * 16 - 16) - rng.nextInt((range * 16 - 16) / 4);
+        final int rounds = (range * 16 - 16) - RNG.nextInt((range * 16 - 16) / 4);
 
         {
-            float f = 1.0F + rng.nextFloat() * rng.nextFloat() * 1.0F;
+            float f = 1.0F + RNG.nextFloat() * RNG.nextFloat() * 1.0F;
             multipliers[0] = f * f;
             for (int i = 1; i < 256; i++) {
-                if (rng.nextInt(3) == 0) f = 1.0F + rng.nextFloat() * rng.nextFloat() * 1.0F;
+                if (RNG.nextInt(3) == 0) f = 1.0F + RNG.nextFloat() * RNG.nextFloat() * 1.0F;
                 multipliers[i] = f * f;
             }
         }
 
         outer:
         for (int round = 0; round < rounds; ++round) {
-            final double min = (1.5D + MathHelper.sin(round * (float) Math.PI / rounds) * angleX * 1.0F) * rng.nextFloat() * 0.25D + 0.75D;
-            final double max = (min * yScale) * rng.nextFloat() * 0.25D + 0.75D;
+            final double min = (1.5D + MathHelper.sin(round * (float) Math.PI / rounds) * angleX * 1.0F) * RNG.nextFloat() * 0.25D + 0.75D;
+            final double max = (min * yScale) * RNG.nextFloat() * 0.25D + 0.75D;
             final float cosZ = MathHelper.cos(angleZ);
             final float sinZ = MathHelper.sin(angleZ);
             xCoord += MathHelper.cos(angleY) * cosZ;
@@ -76,10 +76,10 @@ public class MapGenRavineTFC extends MapGenBase {
             angleZ += runningZMultiplier * 0.05F;
             runningZMultiplier *= 0.8F;
             runningYMultiplier *= 0.5F;
-            runningZMultiplier += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 2.0F;
-            runningYMultiplier += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 4.0F;
+            runningZMultiplier += (RNG.nextFloat() - RNG.nextFloat()) * RNG.nextFloat() * 2.0F;
+            runningYMultiplier += (RNG.nextFloat() - RNG.nextFloat()) * RNG.nextFloat() * 4.0F;
 
-            if (rng.nextInt(4) == 0) continue; // <--Determines the length of the ravine // todo: make setting?
+            if (RNG.nextInt(4) == 0) continue; // <--Determines the length of the ravine // todo: make setting?
 
             {
                 final double xOffset = xCoord - chunkMidX;

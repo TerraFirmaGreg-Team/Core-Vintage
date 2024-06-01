@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -30,12 +32,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import gregtech.api.items.toolitem.ToolClasses;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -112,7 +108,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileP
                             }
                         }
                     } else {
-                        GuiHandler.openGui(world, pos, player, GuiHandler.Type.SMELTERY_CAULDRON);
+                        GuiHandler.openGui(world, pos, player);
                     }
                 } else {
                     player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);

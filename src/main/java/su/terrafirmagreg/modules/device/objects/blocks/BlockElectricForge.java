@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -20,12 +22,6 @@ import net.minecraft.world.World;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -66,7 +62,7 @@ public class BlockElectricForge extends BaseBlockHorizontal implements ITileProv
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!player.isSneaking()) {
             if (!world.isRemote) {
-                GuiHandler.openGui(world, pos, player, GuiHandler.Type.ELECTRIC_FORGE);
+                GuiHandler.openGui(world, pos, player);
             }
             return true;
         }

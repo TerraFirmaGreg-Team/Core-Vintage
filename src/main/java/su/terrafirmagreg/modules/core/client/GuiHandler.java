@@ -26,6 +26,11 @@ public class GuiHandler implements IGuiHandler {
 
     }
 
+    public static void openGui(World world, BlockPos pos, EntityPlayer player) {
+        player.openGui(TerraFirmaGreg.getInstance(), 0, world, pos.getX(), pos.getY(), pos.getZ());
+
+    }
+
     // Only use this for things that don't need a BlockPos to identify TE's!!!
     public static void openGui(World world, EntityPlayer player, Type type) {
         player.openGui(TerraFirmaGreg.getInstance(), type.ordinal(), world, 0, 0, 0);

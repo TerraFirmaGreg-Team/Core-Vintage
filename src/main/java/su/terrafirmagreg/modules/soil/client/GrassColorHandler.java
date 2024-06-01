@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.soil.client;
 
+import su.terrafirmagreg.api.lib.ThermiteRandom;
 import su.terrafirmagreg.modules.soil.ModuleSoilConfig;
 
 import net.minecraft.block.state.IBlockState;
@@ -15,11 +16,10 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.awt.*;
 import java.time.Month;
-import java.util.Random;
 
 public class GrassColorHandler {
 
-    public static NoiseGeneratorPerlin noiseGenerator = new NoiseGeneratorPerlin(new Random("NOISE_GRASS".hashCode()), 2);
+    public static NoiseGeneratorPerlin noiseGenerator = new NoiseGeneratorPerlin(new ThermiteRandom("NOISE_GRASS".hashCode()), 2);
     public static Color[] monthlyColors = new Color[12];
 
     static {

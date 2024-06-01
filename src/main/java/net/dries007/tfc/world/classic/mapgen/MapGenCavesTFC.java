@@ -92,13 +92,13 @@ public class MapGenCavesTFC extends MapGenBase {
      */
     protected void generateCaveNode(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double xOffset, double yOffset, double zOffset, float f1,
                                     float f2, float f3, int i1, double yRadiusMult, double width) {
-        final Random rng = new Random(seed);
+        final Random RNG = new Random(seed);
         final int worldX = chunkX * 16 + 8;
         final int worldZ = chunkZ * 16 + 8;
         float lf1 = 0.0F;
         float lf2 = 0.0F;
 
-        final int rndRange = (this.range * 16 - 16) - rng.nextInt((this.range * 16 - 16) / 4);
+        final int rndRange = (this.range * 16 - 16) - RNG.nextInt((this.range * 16 - 16) / 4);
 
         boolean onlyOne = false;
         if (i1 == -1) {
@@ -106,8 +106,8 @@ public class MapGenCavesTFC extends MapGenBase {
             onlyOne = true;
         }
 
-        final int rndRange2 = rng.nextInt(rndRange / 2) + rndRange / 4;
-        boolean smallRnd = rng.nextInt(6) == 0;
+        final int rndRange2 = RNG.nextInt(rndRange / 2) + rndRange / 4;
+        boolean smallRnd = RNG.nextInt(6) == 0;
         outer:
         for (; i1 < rndRange; ++i1) {
             float var33 = MathHelper.cos(f3);
@@ -121,20 +121,20 @@ public class MapGenCavesTFC extends MapGenBase {
             f2 += lf1 * 0.1F;
             lf2 *= 0.9F;
             lf1 *= 0.75F;
-            lf2 += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 2.0F;
-            lf1 += (rng.nextFloat() - rng.nextFloat()) * rng.nextFloat() * 4.0F;
+            lf2 += (RNG.nextFloat() - RNG.nextFloat()) * RNG.nextFloat() * 2.0F;
+            lf1 += (RNG.nextFloat() - RNG.nextFloat()) * RNG.nextFloat() * 4.0F;
 
             if (!onlyOne && i1 == rndRange2 && f1 > 1.0F && rndRange > 0) {
-                this.generateCaveNode(rng.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset, rng.nextFloat() * 0.5F + 0.5F,
+                this.generateCaveNode(RNG.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset, RNG.nextFloat() * 0.5F + 0.5F,
                         f2 - ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
-                this.generateCaveNode(rng.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset, rng.nextFloat() * 0.5F + 0.5F,
+                this.generateCaveNode(RNG.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset, RNG.nextFloat() * 0.5F + 0.5F,
                         f2 + ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
                 return;
             }
 
             double radius = width + MathHelper.sin(i1 * (float) Math.PI / rndRange) * f1 * 1.0F;
             double yRadius = radius * yRadiusMult;
-            if (onlyOne || rng.nextInt(4) != 0) {
+            if (onlyOne || RNG.nextInt(4) != 0) {
                 final double localXOffset = xOffset - worldX;
                 final double localZOffset = zOffset - worldZ;
                 final double var39 = rndRange - i1;

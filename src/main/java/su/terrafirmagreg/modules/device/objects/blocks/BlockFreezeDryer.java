@@ -103,7 +103,7 @@ public class BlockFreezeDryer extends BaseBlockContainer implements ITileProvide
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
                                     float hitZ) {
         if (!worldIn.isRemote) {
-            GuiHandler.openGui(worldIn, pos, player, GuiHandler.Type.FREEZE_DRYER);
+            GuiHandler.openGui(worldIn, pos, player);
         }
         return true;
     }

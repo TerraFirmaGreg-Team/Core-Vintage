@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -33,10 +35,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
@@ -155,7 +153,7 @@ public class BlockWoodBarrel extends BlockWood implements ITileProvider {
                 }
             } else {
                 if (!worldIn.isRemote) {
-                    GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.WOOD_BARREL);
+                    GuiHandler.openGui(worldIn, pos, playerIn);
                 }
                 return true;
             }

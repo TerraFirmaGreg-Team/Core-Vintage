@@ -88,7 +88,7 @@ public class BlockNestBox extends BaseBlockContainer implements ITileProvider {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         var tile = TileUtils.getTile(world, pos, TileNestBox.class);
         if (tile != null && !world.isRemote) {
-            GuiHandler.openGui(world, pos, player, GuiHandler.Type.NEST_BOX);
+            GuiHandler.openGui(world, pos, player);
         }
         return true;
     }

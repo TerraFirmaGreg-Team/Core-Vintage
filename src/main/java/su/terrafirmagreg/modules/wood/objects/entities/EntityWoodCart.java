@@ -151,8 +151,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
                     }
                     CapabilityPull.get(entityIn).setDrawn(this);
                     ((WorldServer) this.world).getEntityTracker()
-                            .sendToTracking(this,
-                                    ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
+                            .sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
                     this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);
                 }
             }

@@ -18,49 +18,38 @@ import java.util.function.Predicate;
 /**
  * Класс, представляющий категорию породы.
  */
+@Getter
 public class RockCategory implements Comparable<RockCategory> {
 
-    private static final Set<RockCategory> ROCK_CATEGORIES = new ObjectOpenHashSet<>();
+    @Getter
+    private static final Set<RockCategory> categories = new ObjectOpenHashSet<>();
 
     private final String name;
     private final boolean layer1;
     private final boolean layer2;
     private final boolean layer3;
-    @Getter
-    private final float caveGenMod;
-    @Getter
-    private final float caveFreqMod;
-    @Getter
-    private final float hardnessModifier;
-    @Getter
-    private final TextFormatting textFormatting;
-    @Getter
     private final boolean hasAnvil;
+    private final float caveGenMod;
+    private final float caveFreqMod;
+    private final float hardnessModifier;
+    private final TextFormatting textFormatting;
 
     private RockCategory(Builder builder) {
+
         this.name = builder.name;
         this.layer1 = builder.layer1;
         this.layer2 = builder.layer2;
         this.layer3 = builder.layer3;
+        this.hasAnvil = builder.hasAnvil;
         this.caveGenMod = builder.caveGenMod;
         this.caveFreqMod = builder.caveFreqMod;
         this.hardnessModifier = builder.hardnessModifier;
         this.textFormatting = builder.textFormatting;
-        this.hasAnvil = builder.hasAnvil;
 
         if (name.isEmpty()) throw new RuntimeException(String.format("RockCategory name must contain any character: [%s]", name));
 
-        if (!ROCK_CATEGORIES.add(this)) throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
+        if (!categories.add(this)) throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
 
-    }
-
-    /**
-     * Возвращает набор всех категорий пород.
-     *
-     * @return Набор всех категорий пород.
-     */
-    public static Set<RockCategory> getRockCategories() {
-        return ROCK_CATEGORIES;
     }
 
     /**
@@ -79,13 +68,12 @@ public class RockCategory implements Comparable<RockCategory> {
      * @return Локализованное имя категории породы.
      */
     public String getLocalizedName() {
-        return textFormatting + new TextComponentTranslation(
-                String.format("rock.category.%s.name", this)).getFormattedText();
+        return textFormatting + new TextComponentTranslation(String.format("rock.category.%s.name", this)).getFormattedText();
     }
 
     @Override
     public int compareTo(@NotNull RockCategory category) {
-        return this.name.compareTo(category.toString());
+        return this.name.compareTo(category.getName());
     }
 
     /**
@@ -122,9 +110,6 @@ public class RockCategory implements Comparable<RockCategory> {
         }
     }
 
-    /**
-     * Класс Builder используется для создания объекта RockCategory с указанными параметрами.
-     */
     public static class Builder {
 
         private final String name;
@@ -140,9 +125,10 @@ public class RockCategory implements Comparable<RockCategory> {
         /**
          * Конструктор класса Builder.
          *
-         * @param name Название категории породы.
+         * @param name Название категории.
          */
         public Builder(@NotNull String name) {
+
             this.name = name;
         }
 
@@ -207,6 +193,7 @@ public class RockCategory implements Comparable<RockCategory> {
         }
 
         public RockCategory build() {
+
             return new RockCategory(this);
         }
     }

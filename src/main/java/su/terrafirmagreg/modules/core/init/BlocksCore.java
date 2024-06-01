@@ -19,10 +19,10 @@ public final class BlocksCore {
 
         //==== Other =================================================================================================//
 
-        DEBUG = registry.registerBlock(new BlockDebug());
-        PUDDLE = registry.registerBlock(new BlockPuddle());
-        THATCH = registry.registerBlock(new BlockThatch());
-        AGGREGATE = registry.registerBlock(new BlockAggregate());
+        DEBUG = registry.block(new BlockDebug());
+        PUDDLE = registry.block(new BlockPuddle());
+        THATCH = registry.block(new BlockThatch());
+        AGGREGATE = registry.block(new BlockAggregate());
 
     }
 

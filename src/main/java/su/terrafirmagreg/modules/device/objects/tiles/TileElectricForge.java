@@ -365,6 +365,6 @@ public class TileElectricForge extends TEInventory
         if (ModifierTile.hasProtection(player)) {
             change = change * 0.3F;
         }
-        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+        return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
     }
 }

@@ -8,7 +8,7 @@ public final class LootTablesCore {
 
     public static void onRegister(RegistryManager registry) {
 
-        registry.registerLootFunction(new ApplySimpleSkill.Serializer());
-        registry.registerLootFunction(new ApplyRequiredSkill.Serializer());
+        registry.lootFunction(new ApplySimpleSkill.Serializer());
+        registry.lootFunction(new ApplyRequiredSkill.Serializer());
     }
 }

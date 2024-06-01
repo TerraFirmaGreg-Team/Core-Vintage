@@ -8,6 +8,10 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 @SuppressWarnings("unused")
 public final class EntityUtils {
 
@@ -20,10 +24,6 @@ public final class EntityUtils {
             EntityEquipmentSlot.LEGS,
             EntityEquipmentSlot.FEET
     };
-
-    private EntityUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Возвращает экземпляр типизированного объекта Entity по его классу.

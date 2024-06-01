@@ -17,12 +17,15 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class ModUtils {
 
@@ -31,10 +34,6 @@ public final class ModUtils {
      * entries have been registered will lock out new ones from being found.
      */
     private static final Map<IForgeRegistry<?>, Multimap<String, ?>> REGISTRY_CACHE = new HashMap<>();
-
-    private ModUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Возвращает идентификатор ресурса на основе строки.

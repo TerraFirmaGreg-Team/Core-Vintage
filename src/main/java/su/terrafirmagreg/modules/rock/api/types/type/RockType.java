@@ -22,19 +22,16 @@ import java.util.Set;
 /**
  * Основной класс для типов камней.
  */
-
+@Getter
 public class RockType implements Comparable<RockType> {
 
-    private static final Set<RockType> ROCK_TYPES = new ObjectOpenHashSet<>();
+    @Getter
+    private static final Set<RockType> types = new ObjectOpenHashSet<>();
 
     private final String name;
-    @Getter
     private final RockCategory rockCategory;
-    @Getter
     private final OrePrefix orePrefix;
-    @Getter
     private final Material material;
-    @Getter
     private final boolean isFlux;
 
     private RockType(Builder builder) {
@@ -46,16 +43,7 @@ public class RockType implements Comparable<RockType> {
 
         if (name.isEmpty()) throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
 
-        if (!ROCK_TYPES.add(this)) throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
-    }
-
-    /**
-     * Возвращает список всех типов пород.
-     *
-     * @return Список всех типов пород.
-     */
-    public static Set<RockType> getTypes() {
-        return ROCK_TYPES;
+        if (!types.add(this)) throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
     }
 
     @Nullable
@@ -74,8 +62,8 @@ public class RockType implements Comparable<RockType> {
      * @return Экземпляр породы.
      */
     public static RockType valueOf(int i) {
-        var values = new RockType[ROCK_TYPES.size()];
-        values = ROCK_TYPES.toArray(values);
+        var values = new RockType[types.size()];
+        values = types.toArray(values);
 
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
     }
@@ -87,7 +75,7 @@ public class RockType implements Comparable<RockType> {
      * @return Индекс породы.
      */
     public static int indexOf(RockType type) {
-        return new ArrayList<>(ROCK_TYPES).indexOf(type);
+        return new ArrayList<>(types).indexOf(type);
     }
 
     @Override
@@ -106,13 +94,12 @@ public class RockType implements Comparable<RockType> {
     }
 
     public String getLocalizedName() {
-        return new TextComponentTranslation(
-                String.format("rock.type.%s.name", this)).getFormattedText();
+        return new TextComponentTranslation(String.format("rock.type.%s.name", this)).getFormattedText();
     }
 
     @Override
     public int compareTo(@NotNull RockType type) {
-        return this.name.compareTo(type.toString());
+        return this.name.compareTo(type.getName());
     }
 
     public static class Builder {

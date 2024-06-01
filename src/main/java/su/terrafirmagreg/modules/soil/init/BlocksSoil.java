@@ -23,10 +23,10 @@ public final class BlocksSoil {
 
     public static void onRegister(RegistryManager registry) {
 
-        registry.registerBlocks(SOIL_BLOCKS.values());
+        registry.blocks(SOIL_BLOCKS.values());
 
-        PEAT_GRASS = registry.registerBlock(new BlockSoilPeatGrass());
-        PEAT = registry.registerBlock(new BlockSoilPeat());
+        PEAT_GRASS = registry.block(new BlockSoilPeatGrass());
+        PEAT = registry.block(new BlockSoilPeat());
 
     }
 }

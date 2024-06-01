@@ -2,11 +2,12 @@ package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 
-public final class ClassUtils {
 
-    private ClassUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+@SuppressWarnings("unused")
+public final class ClassUtils {
 
     /**
      * A basic check to see if two classes are the same. For the classes to be the same, neither can be null, and they must share the same name.

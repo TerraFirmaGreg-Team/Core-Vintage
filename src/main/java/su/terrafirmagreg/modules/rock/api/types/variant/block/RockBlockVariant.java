@@ -28,41 +28,30 @@ import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
 @Getter
 public class RockBlockVariant implements Comparable<RockBlockVariant> {
 
-    private static final Set<RockBlockVariant> ROCK_BLOCK_VARIANTS = new ObjectOpenHashSet<>();
+    @Getter
+    private static final Set<RockBlockVariant> blockVariants = new ObjectOpenHashSet<>();
     private static final AtomicInteger idCounter = new AtomicInteger(16);
+
     private final String name;
     private final float baseHardness;
     private final Specification specification;
     private final BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
+    private final boolean hasStoneType;
 
     private RockBlockVariant(Builder builder) {
         this.name = builder.name;
         this.baseHardness = builder.baseHardness;
         this.specification = builder.specification;
         this.factory = builder.factory;
+        this.hasStoneType = builder.hasStoneType;
 
         if (name.isEmpty())
             throw new RuntimeException(String.format("RockBlockVariant name must contain any character: [%s]", name));
 
-        if (!ROCK_BLOCK_VARIANTS.add(this))
+        if (!blockVariants.add(this))
             throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
 
-        for (var type : RockType.getTypes()) {
-            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), create(type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-
-            if (builder.hasStoneType) createStoneType(idCounter.get(), type);
-
-        }
-    }
-
-    /**
-     * Возвращает набор всех типов блоков породы.
-     *
-     * @return Набор всех типов блоков породы.
-     */
-    public static Set<RockBlockVariant> getBlockVariants() {
-        return ROCK_BLOCK_VARIANTS;
+        createBlock();
     }
 
     public Block get(RockType type) {
@@ -80,28 +69,34 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
         return specification != null;
     }
 
-    public Block create(RockType type) {
+    private Block create(RockType type) {
         return factory.apply(this, type);
     }
 
-    public void createStoneType(int id, RockType type) {
+    private void createBlock() {
+        for (var type : RockType.getTypes()) {
+            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), create(type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+
+            if (hasStoneType) createStoneType(idCounter.getAndIncrement(), type);
+        }
+    }
+
+    private void createStoneType(int id, RockType type) {
         new StoneType(id, type + "_" + this.name, SoundType.STONE,
                 type.getOrePrefix(), type.getMaterial(),
                 () -> this.get(type).getDefaultState(),
                 state -> state.getBlock() == this.get(type), false
         );
-        idCounter.incrementAndGet();
-
     }
 
     public String getLocalizedName() {
-        return new TextComponentTranslation(
-                String.format("rock.variant.%s.name", this)).getFormattedText();
+        return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
     }
 
     @Override
     public int compareTo(@NotNull RockBlockVariant variant) {
-        return this.name.compareTo(variant.toString());
+        return this.name.compareTo(variant.getName());
     }
 
     public static class Builder {

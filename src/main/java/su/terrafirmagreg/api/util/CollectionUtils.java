@@ -1,16 +1,15 @@
 package su.terrafirmagreg.api.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class CollectionUtils {
-
-    private CollectionUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Used because {@link Collections#singletonList(Object)} is immutable

@@ -23,6 +23,9 @@ import com.google.common.base.Preconditions;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 @SuppressWarnings("unused")
 public final class ModelUtils {
 

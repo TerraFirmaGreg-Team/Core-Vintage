@@ -9,11 +9,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 
 
+import lombok.experimental.UtilityClass;
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.UUID;
 import java.util.function.Function;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class NBTUtils {
 
@@ -22,10 +25,6 @@ public final class NBTUtils {
      */
     public static final Comparator<NBTTagCompound> NBT_COMPARATOR = (firstTag, secondTag) -> firstTag != null ? firstTag.equals(secondTag) ? 0 : 1 :
             secondTag != null ? -1 : 0;
-
-    private NBTUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     public static void setGenericNBTValue(String tagName, Object value) {
         setGenericNBTValue(new NBTTagCompound(), tagName, value);

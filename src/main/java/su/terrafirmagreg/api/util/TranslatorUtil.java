@@ -4,15 +4,14 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 
 
+import lombok.experimental.UtilityClass;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class TranslatorUtil {
-
-    private TranslatorUtil() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     public static String translate(String key) {
         if (GameUtils.isClient()) {

@@ -6,7 +6,8 @@ public class RockCategoryHandler {
 
     public static void init() {
 
-        RockCategories.IGNEOUS_INTRUSIVE = new RockCategory.Builder("igneous_intrusive")
+        RockCategories.IGNEOUS_INTRUSIVE = new RockCategory
+                .Builder("igneous_intrusive")
                 .setLayer(true, true, true)
                 .setCaveMod(-0.4f, 0f)
                 .setHardnessModifier(0.2f)
@@ -14,7 +15,8 @@ public class RockCategoryHandler {
                 .setAnvil()
                 .build();
 
-        RockCategories.IGNEOUS_EXTRUSIVE = new RockCategory.Builder("igneous_extrusive")
+        RockCategories.IGNEOUS_EXTRUSIVE = new RockCategory
+                .Builder("igneous_extrusive")
                 .setLayer(true, true, true)
                 .setCaveMod(-0.5f, 0f)
                 .setHardnessModifier(0f)
@@ -22,14 +24,16 @@ public class RockCategoryHandler {
                 .setAnvil()
                 .build();
 
-        RockCategories.METAMORPHIC = new RockCategory.Builder("metamorphic")
+        RockCategories.METAMORPHIC = new RockCategory
+                .Builder("metamorphic")
                 .setLayer(true, true, false)
                 .setCaveMod(0.2f, 0f)
                 .setHardnessModifier(-0.2f)
                 .setTextFormatting(TextFormatting.AQUA)
                 .build();
 
-        RockCategories.SEDIMENTARY = new RockCategory.Builder("sedimentary")
+        RockCategories.SEDIMENTARY = new RockCategory
+                .Builder("sedimentary")
                 .setLayer(true, false, false)
                 .setCaveMod(0.3f, 5f)
                 .setHardnessModifier(-0.4f)

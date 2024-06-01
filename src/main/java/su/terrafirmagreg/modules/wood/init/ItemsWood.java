@@ -22,9 +22,9 @@ public final class ItemsWood {
     public static ItemWoodMisc STICK_BUNCH;
 
     public static void onRegister(RegistryManager registry) {
-        registry.registerItems(WOOD_ITEMS.values());
+        registry.items(WOOD_ITEMS.values());
 
-        STICK_BUNDLE = registry.registerItem(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
-        STICK_BUNCH = registry.registerItem(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
+        STICK_BUNDLE = registry.item(new ItemWoodMisc("stick_bundle", Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"));
+        STICK_BUNCH = registry.item(new ItemWoodMisc("stick_bunch", Size.NORMAL, Weight.LIGHT));
     }
 }

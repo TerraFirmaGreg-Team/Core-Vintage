@@ -12,41 +12,34 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import java.util.Set;
 import java.util.function.BiFunction;
 
 /**
  * Класс, представляющий тип блока породы.
  */
+@Getter
 public class RockItemVariant implements Comparable<RockItemVariant> {
 
-    private static final Set<RockItemVariant> ROCK_ITEM_VARIANTS = new ObjectOpenHashSet<>();
+    @Getter
+    private static final Set<RockItemVariant> itemVariants = new ObjectOpenHashSet<>();
 
-    @NotNull
     private final String name;
+    private final BiFunction<RockItemVariant, RockType, ? extends Item> factory;
 
     private RockItemVariant(Builder builder) {
         this.name = builder.name;
+        this.factory = builder.factory;
 
         if (name.isEmpty())
-            throw new RuntimeException(String.format("MetalItemVariant name must contain any character: [%s]", name));
+            throw new RuntimeException(String.format("RockItemVariant name must contain any character: [%s]", name));
 
-        if (!ROCK_ITEM_VARIANTS.add(this))
-            throw new RuntimeException(String.format("MetalItemVariant: [%s] already exists!", name));
+        if (!itemVariants.add(this))
+            throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
 
-        for (var type : RockType.getTypes()) {
-            if (ItemsRock.ROCK_ITEMS.put(Pair.of(this, type), builder.factory.apply(this, type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-        }
-    }
-
-    /**
-     * Возвращает набор всех типов блоков породы.
-     *
-     * @return Набор всех типов блоков породы.
-     */
-    public static Set<RockItemVariant> getItemVariants() {
-        return ROCK_ITEM_VARIANTS;
+        createItem();
     }
 
     public Item get(RockType type) {
@@ -66,13 +59,20 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
     }
 
     public String getLocalizedName() {
-        return new TextComponentTranslation(
-                String.format("rock.variant.%s.name", this)).getFormattedText();
+        return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
+    }
+
+    private void createItem() {
+
+        for (var type : RockType.getTypes()) {
+            if (ItemsRock.ROCK_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
+        }
     }
 
     @Override
     public int compareTo(@NotNull RockItemVariant variant) {
-        return this.name.compareTo(variant.toString());
+        return this.name.compareTo(variant.getName());
     }
 
     public static class Builder {
@@ -86,6 +86,7 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
          * @param name Имя породы.
          */
         public Builder(@NotNull String name) {
+
             this.name = name;
         }
 
@@ -95,6 +96,7 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
         }
 
         public RockItemVariant build() {
+
             return new RockItemVariant(this);
         }
     }

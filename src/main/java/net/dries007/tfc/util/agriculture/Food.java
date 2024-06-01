@@ -9,6 +9,8 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import static net.dries007.tfc.util.agriculture.Food.Category.*;
 
 public enum Food {
@@ -131,8 +133,11 @@ public enum Food {
     private final Category category;
     private final FoodData foodData;
 
+    @Getter
     private final boolean heatable;
+    @Getter
     private final float heatCapacity;
+    @Getter
     private final float cookingTemp;
 
     private final String[] oreDictNames;
@@ -173,18 +178,6 @@ public enum Food {
     @NotNull
     public FoodData getData() {
         return foodData;
-    }
-
-    public boolean isHeatable() {
-        return heatable;
-    }
-
-    public float getHeatCapacity() {
-        return heatCapacity;
-    }
-
-    public float getCookingTemp() {
-        return cookingTemp;
     }
 
     @Nullable

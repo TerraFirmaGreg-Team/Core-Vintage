@@ -9,7 +9,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * Класс Pair представляет тройку значений.
+ * Класс Pair представляет пару значений.
  *
  * @param <X> тип левого элемента
  * @param <Y> тип правого элемента
@@ -37,6 +37,7 @@ public class Pair<X, Y> {
      * Applies the given mapper to the left value.
      */
     public <S> Pair<S, Y> mapLeft(Function<X, S> mapper) {
+
         return Pair.of(mapper.apply(this.left), this.right);
     }
 
@@ -44,6 +45,7 @@ public class Pair<X, Y> {
      * Applies the given mapper to the right value.
      */
     public <S> Pair<X, S> mapRight(Function<Y, S> mapper) {
+
         return Pair.of(this.left, mapper.apply(this.right));
     }
 
@@ -51,6 +53,7 @@ public class Pair<X, Y> {
      * Applies the respective mapper to the left or right values.
      */
     public <R, S> Pair<R, S> map(Function<X, R> mapLeft, Function<Y, S> mapRight) {
+
         return Pair.of(mapLeft.apply(this.left), mapRight.apply(this.right));
     }
 

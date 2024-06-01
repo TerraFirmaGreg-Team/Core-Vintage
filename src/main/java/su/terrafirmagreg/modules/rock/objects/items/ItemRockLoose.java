@@ -52,6 +52,7 @@ public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProv
                 .addOreDict("rock")
                 .addOreDict("rock", type)
                 .addOreDict("rock", type.getRockCategory());
+        
         if (type.isFlux()) getSettings().addOreDict("rock", "flux");
     }
 

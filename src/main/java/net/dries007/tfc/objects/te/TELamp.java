@@ -140,7 +140,7 @@ public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidH
         if (ModifierEnvironmental.getEnvironmentTemperature(player) < ProviderTemperature.AVERAGE) {
             float change = (this.isPowered() && this.getFuel() > 0) ? 1f : 0f;
             float potency = 0f;
-            return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+            return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
         } else {
             return ModifierBase.none();
         }

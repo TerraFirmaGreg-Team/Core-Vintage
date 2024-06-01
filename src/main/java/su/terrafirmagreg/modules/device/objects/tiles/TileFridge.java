@@ -404,6 +404,6 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
             change = -10f;
             potency = -0.7f;
         }
-        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+        return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
     }
 }

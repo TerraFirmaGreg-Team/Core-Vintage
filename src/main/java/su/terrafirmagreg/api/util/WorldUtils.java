@@ -7,14 +7,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 
+import lombok.experimental.UtilityClass;
+
 import static com.google.common.math.Stats.meanOf;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class WorldUtils {
-
-    private WorldUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Gets the display name of a world.

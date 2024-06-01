@@ -7,7 +7,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.te.TEBase;
 
 @MethodsReturnNonnullByDefault
-
 public class TEClimateStation extends TEBase {
 
     public int forward;

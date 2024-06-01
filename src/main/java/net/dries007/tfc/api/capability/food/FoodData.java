@@ -6,6 +6,8 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 public class FoodData implements INBTSerializable<NBTTagCompound> {
 
     // Instances for special vanilla foods (with relation to decay)
@@ -51,10 +53,15 @@ public class FoodData implements INBTSerializable<NBTTagCompound> {
     public static final FoodData PINEAPPLE = new FoodData(4, 0.5F, 4.1F, 0.0F, 0.75F, 0.0F, 0.0F, 0.0F, 4.9F);
     public static final FoodData MELON = new FoodData(4, 1.5F, 1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 4.9F);
 
+    @Getter
     private final float[] nutrients; // Nutritional values
+    @Getter
     private int hunger; // Hunger. In TFC (for now) this is almost always 4
+    @Getter
     private float saturation; // Saturation, only provided by some basic foods and meal bonuses
+    @Getter
     private float water; // Water, provided by some foods
+    @Getter
     private float decayModifier; // Decay modifier - higher = shorter decay
     private boolean buffed; // if this data instance has been buffed externally.
 
@@ -77,26 +84,6 @@ public class FoodData implements INBTSerializable<NBTTagCompound> {
     public FoodData(@Nullable NBTTagCompound nbt) {
         this.nutrients = new float[5];
         deserializeNBT(nbt);
-    }
-
-    public float[] getNutrients() {
-        return nutrients;
-    }
-
-    public int getHunger() {
-        return hunger;
-    }
-
-    public float getSaturation() {
-        return saturation;
-    }
-
-    public float getWater() {
-        return water;
-    }
-
-    public float getDecayModifier() {
-        return decayModifier;
     }
 
     @Override

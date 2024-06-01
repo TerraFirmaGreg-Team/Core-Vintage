@@ -17,25 +17,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public final class EntitiesDevice {
 
     public static void onRegister(RegistryManager registry) {
-        registry.registerEntity("slingstone",
+        registry.entity("slingstone",
                 EntityEntryBuilder.create()
                         .entity(EntitySlingStone.class)
                         .tracker(64, 1, true)
         );
 
-        registry.registerEntity("slingstonemetal",
+        registry.entity("slingstonemetal",
                 EntityEntryBuilder.create()
                         .entity(EntitySlingStoneMetal.class)
                         .tracker(64, 1, true)
         );
 
-        registry.registerEntity("slingstonemetallight",
+        registry.entity("slingstonemetallight",
                 EntityEntryBuilder.create()
                         .entity(EntitySlingStoneMetalLight.class)
                         .tracker(64, 1, true)
         );
 
-        registry.registerEntity("unknownprojectile",
+        registry.entity("unknownprojectile",
                 EntityEntryBuilder.create()
                         .entity(EntityUnknownProjectile.class)
                         .tracker(64, 1, true)

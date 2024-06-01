@@ -14,15 +14,14 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.experimental.UtilityClass;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class MathsUtils {
-
-    private MathsUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Checks if a double is within range of two other doubles.

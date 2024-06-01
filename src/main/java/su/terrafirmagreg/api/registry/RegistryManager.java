@@ -171,18 +171,18 @@ public class RegistryManager {
 
     //region ===== Block
 
-    public <T extends Block> Collection<T> registerBlocks(Collection<T> collection) {
+    public <T extends Block> Collection<T> blocks(Collection<T> collection) {
         for (var block : collection) {
             if (block instanceof IBlockSettings provider) {
-                this.registerBlock(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
+                this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
             }
         }
         return collection;
     }
 
-    public <B extends Block & IBlockSettings> B registerBlock(B provider) {
+    public <B extends Block & IBlockSettings> B block(B provider) {
 
-        return this.registerBlock(provider, provider.getItemBlock(), provider.getRegistryKey());
+        return this.block(provider, provider.getItemBlock(), provider.getRegistryKey());
     }
 
     /**
@@ -192,7 +192,7 @@ public class RegistryManager {
      * @param itemBlock The ItemBlock for the block.
      * @param name      The name to register the block with.
      */
-    public <B extends Block, I extends Item> B registerBlock(B block, @Nullable I itemBlock, String name) {
+    public <B extends Block, I extends Item> B block(B block, @Nullable I itemBlock, String name) {
 
         block.setRegistryName(this.modID, name);
         block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -200,7 +200,7 @@ public class RegistryManager {
 
         this.blocks.add(block);
 
-        if (itemBlock != null) this.registerItem(itemBlock, name);
+        if (itemBlock != null) this.item(itemBlock, name);
         if (block instanceof ITileProvider tile) this.tiles.add(tile);
 
         return block;
@@ -210,17 +210,17 @@ public class RegistryManager {
 
     //region ===== Item
 
-    public <T extends Item> void registerItems(Collection<T> collection) {
+    public <T extends Item> void items(Collection<T> collection) {
         for (var item : collection) {
             if (item instanceof IItemSettings provider) {
-                this.registerItem(item, provider.getRegistryKey());
+                this.item(item, provider.getRegistryKey());
             }
         }
     }
 
-    public <T extends Item & IItemSettings> T registerItem(T item) {
+    public <T extends Item & IItemSettings> T item(T item) {
 
-        return this.registerItem(item, item.getRegistryKey());
+        return this.item(item, item.getRegistryKey());
     }
 
     /**
@@ -229,7 +229,7 @@ public class RegistryManager {
      * @param item The item to register.
      * @param name The name to register the item with.
      */
-    public <T extends Item> T registerItem(T item, String name) {
+    public <T extends Item> T item(T item, String name) {
 
         item.setRegistryName(this.modID, name);
         item.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
@@ -244,13 +244,13 @@ public class RegistryManager {
 
     //region ===== Potions
 
-    public Potion registerPotion(String name, Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
+    public Potion potion(String name, Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
 
         potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
-        return this.registerPotion(name, potion);
+        return this.potion(name, potion);
     }
 
-    public Potion registerPotion(String name, Potion potion) {
+    public Potion potion(String name, Potion potion) {
         potion.setRegistryName(this.modID, name);
         potion.setPotionName(this.modID + ".effect." + name.toLowerCase().replace("_", "."));
         this.potions.add(potion);
@@ -261,13 +261,13 @@ public class RegistryManager {
 
     //region ===== Potion Types
 
-    public PotionType registerPotionType(String name, Potion potion, int duration) {
+    public PotionType potionType(String name, Potion potion, int duration) {
 
         var potionType = new PotionType(new PotionEffect(potion, duration));
-        return registerPotionType(name, potionType);
+        return potionType(name, potionType);
     }
 
-    public PotionType registerPotionType(String name, PotionType potionType) {
+    public PotionType potionType(String name, PotionType potionType) {
 
         potionType.setRegistryName(this.modID, name);
         this.potionType.add(potionType);
@@ -278,11 +278,12 @@ public class RegistryManager {
 
     //region ===== Biome
 
-    public Biome registerBiome(Biome biome, String name) {
-        return this.registerBiome(biome, name, new BiomeDictionary.Type[0]);
+    public Biome biome(Biome biome, String name) {
+
+        return this.biome(biome, name, new BiomeDictionary.Type[0]);
     }
 
-    public Biome registerBiome(Biome biome, String name, BiomeDictionary.Type[] types) {
+    public Biome biome(Biome biome, String name, BiomeDictionary.Type[] types) {
 
         biome.setRegistryName(this.modID, name);
         this.biomes.add(biome);
@@ -303,7 +304,7 @@ public class RegistryManager {
      *
      * @param name The name of the sound file. No upper case chars!
      */
-    public SoundEvent registerSound(String name) {
+    public SoundEvent sound(String name) {
 
         final ResourceLocation soundNameIn = new ResourceLocation(this.modID, name);
         final SoundEvent sound = new SoundEvent(soundNameIn).setRegistryName(soundNameIn);
@@ -316,7 +317,7 @@ public class RegistryManager {
 
     //region ===== KeyBinding
 
-    public KeyBinding registerKeyBinding(String description, int keyCode) {
+    public KeyBinding keyBinding(String description, int keyCode) {
 
         var prefix = "key." + modID + ".";
         final KeyBinding key = new KeyBinding(prefix + description, keyCode, prefix + "categories");
@@ -337,17 +338,17 @@ public class RegistryManager {
      * @param name     The string name for the entity.
      * @return The entity that was registered.
      */
-    public <T extends Entity> EntityEntryBuilder<T> registerEntity(String name, Class<T> entClass) {
+    public <T extends Entity> EntityEntryBuilder<T> entity(String name, Class<T> entClass) {
 
         final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
         builder.entity(entClass);
 
-        registerEntity(name, builder);
+        entity(name, builder);
 
         return builder;
     }
 
-    public <E extends Entity> void registerEntity(String name, EntityEntryBuilder<E> builder) {
+    public <E extends Entity> void entity(String name, EntityEntryBuilder<E> builder) {
         final ResourceLocation entId = new ResourceLocation(this.modID, name);
         builder.id(entId, this.networkEntityIdSupplier.getAndIncrement());
         builder.name(this.modID + "." + name);
@@ -363,14 +364,14 @@ public class RegistryManager {
      * @param name     The string name for the entity.
      * @return The entity that was registered.
      */
-    public <T extends Entity> EntityEntryBuilder<T> registerEntity(String name, Class<T> entClass, int primary, int seconday) {
+    public <T extends Entity> EntityEntryBuilder<T> entity(String name, Class<T> entClass, int primary, int seconday) {
 
         final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
         builder.entity(entClass);
         builder.tracker(64, 1, true);
         builder.egg(primary, seconday);
 
-        this.registerEntity(name, builder);
+        this.entity(name, builder);
         return builder;
     }
 
@@ -385,7 +386,7 @@ public class RegistryManager {
      * @param name    The ID of the enchantment.
      * @return The enchantment that was registered.
      */
-    public Enchantment registerEnchantment(Enchantment enchant, String name) {
+    public Enchantment enchantment(Enchantment enchant, String name) {
 
         enchant.setRegistryName(new ResourceLocation(this.modID, name));
         this.enchantments.add(enchant);
@@ -406,12 +407,12 @@ public class RegistryManager {
      * @param name The name of the loot table to use.
      * @return A ResourceLocation pointing to the table.
      */
-    public ResourceLocation registerLootTable(String name) {
+    public ResourceLocation lootTable(String name) {
 
         return LootTableList.register(new ResourceLocation(this.modID, name));
     }
 
-    public <T extends LootFunction> void registerLootFunction(LootFunction.Serializer<? extends T> serializer) {
+    public <T extends LootFunction> void lootFunction(LootFunction.Serializer<? extends T> serializer) {
 
         LootFunctionManager.registerFunction(serializer);
     }
@@ -428,9 +429,9 @@ public class RegistryManager {
      * @param amount   The amount of the item to set.
      * @return A builder object. It can be used to fine tune the loot entry.
      */
-    public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int amount) {
+    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int amount) {
 
-        return this.addLoot(location, name, pool, weight, item, meta, amount, amount);
+        return this.loot(location, name, pool, weight, item, meta, amount, amount);
     }
 
     /**
@@ -446,9 +447,9 @@ public class RegistryManager {
      * @param max      The largest item size.
      * @return A builder object. It can be used to fine tune the loot entry.
      */
-    public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int min, int max) {
+    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int min, int max) {
 
-        final LootBuilder loot = this.addLoot(location, name, pool, weight, item, meta);
+        final LootBuilder loot = this.loot(location, name, pool, weight, item, meta);
         loot.addFunction(new SetCount(new LootCondition[0], new RandomValueRange(min, max)));
         return loot;
     }
@@ -464,9 +465,9 @@ public class RegistryManager {
      * @param meta     The metadata for the loot.
      * @return A builder object. It can be used to fine tune the loot entry.
      */
-    public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item, int meta) {
+    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta) {
 
-        final LootBuilder loot = this.addLoot(location, name, pool, weight, item);
+        final LootBuilder loot = this.loot(location, name, pool, weight, item);
         loot.addFunction(new SetMetadata(new LootCondition[0], new RandomValueRange(meta, meta)));
         return loot;
     }
@@ -481,9 +482,9 @@ public class RegistryManager {
      * @param item     The item to add.
      * @return A builder object. It can be used to fine tune the loot entry.
      */
-    public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, Item item) {
+    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item) {
 
-        return this.addLoot(location, new LootBuilder(this.modID + ":" + name, pool, weight, item));
+        return this.loot(location, new LootBuilder(this.modID + ":" + name, pool, weight, item));
     }
 
     /**
@@ -500,10 +501,10 @@ public class RegistryManager {
      * @param functions  A list of loot functions.
      * @return A builder object. It can be used to fine tune the loot entry.
      */
-    public LootBuilder addLoot(ResourceLocation location, String name, String pool, int weight, int quality, Item item,
-                               List<LootCondition> conditions, List<LootFunction> functions) {
+    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, int quality, Item item,
+                            List<LootCondition> conditions, List<LootFunction> functions) {
 
-        return this.addLoot(location, new LootBuilder(this.modID + ":" + name, pool, weight, quality, item, conditions, functions));
+        return this.loot(location, new LootBuilder(this.modID + ":" + name, pool, weight, quality, item, conditions, functions));
     }
 
     /**
@@ -513,7 +514,7 @@ public class RegistryManager {
      * @param builder  The loot builder to add.
      * @return A builder object. It can be used to fine tune the loot entry.
      */
-    public LootBuilder addLoot(ResourceLocation location, LootBuilder builder) {
+    public LootBuilder loot(ResourceLocation location, LootBuilder builder) {
 
         this.lootTableEntries.put(location, builder);
         return builder;

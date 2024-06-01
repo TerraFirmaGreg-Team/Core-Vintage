@@ -337,6 +337,6 @@ public class TileBloomery extends TETickableInventory implements ITickable, ITem
         if (ModifierTile.hasProtection(player)) {
             change = 1.0F;
         }
-        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+        return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
     }
 }

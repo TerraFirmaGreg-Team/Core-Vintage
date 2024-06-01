@@ -243,6 +243,6 @@ public class TileSmelteryFirebox extends TETickableInventory
         if (ModifierTile.hasProtection(player)) {
             change = change * 0.3f;
         }
-        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+        return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
     }
 }

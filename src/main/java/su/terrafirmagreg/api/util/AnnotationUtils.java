@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 
 
+import lombok.experimental.UtilityClass;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -17,14 +19,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class AnnotationUtils {
 
     private static ASMDataTable asmData;
-
-    private AnnotationUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     public static ASMDataTable getASMDataTable() {
 

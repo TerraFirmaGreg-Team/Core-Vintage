@@ -44,8 +44,7 @@ public class GuiUrn extends GuiContainerTE<TEUrn> {
 
         // Button Tooltips
         for (GuiButton button : buttonList) {
-            if (button instanceof IButtonTooltip && button.isMouseOver()) {
-                IButtonTooltip tooltip = (IButtonTooltip) button;
+            if (button instanceof IButtonTooltip tooltip && button.isMouseOver()) {
                 if (tooltip.hasTooltip()) {
                     drawHoveringText(I18n.format(tooltip.getTooltip()), mouseX, mouseY);
                 }

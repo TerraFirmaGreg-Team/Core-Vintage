@@ -25,18 +25,17 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class StackUtils {
-
-    private StackUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {
         for (ItemStack stack : playerInv.mainInventory) {

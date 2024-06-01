@@ -18,6 +18,6 @@ public final class ItemsSoil {
 
     public static void onRegister(RegistryManager registry) {
 
-        registry.registerItems(SOIL_ITEMS.values());
+        registry.items(SOIL_ITEMS.values());
     }
 }

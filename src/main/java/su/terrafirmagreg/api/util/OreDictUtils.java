@@ -25,15 +25,14 @@ import tfcflorae.types.PlantsTFCF;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.HashSet;
 import java.util.Set;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class OreDictUtils {
-
-    private OreDictUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     public static void register(Item item, Object... parts) {
         register(item, OreDictionary.WILDCARD_VALUE, parts);

@@ -18,7 +18,7 @@ public class ItemsMetal {
 
     public static void onRegister(RegistryManager registry) {
 
-        registry.registerItems(METAL_ITEMS.values());
+        registry.items(METAL_ITEMS.values());
 
     }
 

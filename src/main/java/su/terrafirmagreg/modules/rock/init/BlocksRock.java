@@ -30,13 +30,13 @@ public final class BlocksRock {
     public static void onRegister(RegistryManager registry) {
         RockBlockVariantHandler.init();
 
-        registry.registerBlocks(ROCK_BLOCKS.values());
+        registry.blocks(ROCK_BLOCKS.values());
 
-        ALABASTER_BRICKS = registry.registerBlock(new BlockAlabasterBricks());
-        ALABASTER_SMOOTH = registry.registerBlock(new BlockAlabasterSmooth());
-        ALABASTER_RAW = registry.registerBlock(new BlockAlabasterRaw());
+        ALABASTER_BRICKS = registry.block(new BlockAlabasterBricks());
+        ALABASTER_SMOOTH = registry.block(new BlockAlabasterSmooth());
+        ALABASTER_RAW = registry.block(new BlockAlabasterRaw());
 
-        registry.registerBlocks(ALABASTER_COLOR_BLOCKS.values());
+        registry.blocks(ALABASTER_COLOR_BLOCKS.values());
     }
 
 }

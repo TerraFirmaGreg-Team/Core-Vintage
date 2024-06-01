@@ -16,24 +16,20 @@ import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.client.model.pipeline.VertexTransformer;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import org.jetbrains.annotations.NotNull;
+
+import lombok.experimental.UtilityClass;
 
 import javax.vecmath.Vector4f;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SideOnly(Side.CLIENT)
+@UtilityClass
 @SuppressWarnings("unused")
 public final class RenderUtils {
-
-    private RenderUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     public static void putVertex(UnpackedBakedQuad.Builder builder, VertexFormat format, Optional<TRSRTransformation> transform, EnumFacing side,
                                  float x, float y, float z, float u, float v, float r, float g, float b, float a) {

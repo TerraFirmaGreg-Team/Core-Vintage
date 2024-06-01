@@ -739,7 +739,7 @@ public class TileFirePit extends TETickableInventory
         if (ModifierTile.hasProtection(player)) {
             change = 1.0F;
         }
-        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+        return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
     }
 
     public enum CookingPotStage {

@@ -20,6 +20,6 @@ public final class ItemsRock {
     public static void onRegister(RegistryManager registry) {
         RockItemVariantHandler.init();
 
-        registry.registerItems(ROCK_ITEMS.values());
+        registry.items(ROCK_ITEMS.values());
     }
 }

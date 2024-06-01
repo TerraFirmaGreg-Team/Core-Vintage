@@ -17,11 +17,11 @@ public final class ItemsAnimal {
 
     public static void onRegister(RegistryManager registry) {
 
-        BLADDER = registry.registerItem(new ItemAnimalMisc("product/bladder", Size.SMALL, Weight.LIGHT));
-        WOOL = registry.registerItem(new ItemAnimalMisc("product/wool", Size.SMALL, Weight.LIGHT));
-        WOOL_YARN = registry.registerItem(new ItemAnimalMisc("product/wool_yarn", Size.VERY_SMALL, Weight.VERY_LIGHT, "string"));
-        WOOL_CLOTH = registry.registerItem(new ItemAnimalMisc("product/wool_cloth", Size.SMALL, Weight.LIGHT, "cloth_high_quality"));
-        SILK_CLOTH = registry.registerItem(new ItemAnimalMisc("product/silk_cloth", Size.SMALL, Weight.LIGHT, "cloth_high_quality"));
+        BLADDER = registry.item(new ItemAnimalMisc("product/bladder", Size.SMALL, Weight.LIGHT));
+        WOOL = registry.item(new ItemAnimalMisc("product/wool", Size.SMALL, Weight.LIGHT));
+        WOOL_YARN = registry.item(new ItemAnimalMisc("product/wool_yarn", Size.VERY_SMALL, Weight.VERY_LIGHT, "string"));
+        WOOL_CLOTH = registry.item(new ItemAnimalMisc("product/wool_cloth", Size.SMALL, Weight.LIGHT, "cloth_high_quality"));
+        SILK_CLOTH = registry.item(new ItemAnimalMisc("product/silk_cloth", Size.SMALL, Weight.LIGHT, "cloth_high_quality"));
 
     }
 }

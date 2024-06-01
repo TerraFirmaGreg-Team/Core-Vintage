@@ -7,12 +7,12 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 @SuppressWarnings("unused")
 public final class GameUtils {
-
-    private GameUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Checks if the game is running on the client or not.

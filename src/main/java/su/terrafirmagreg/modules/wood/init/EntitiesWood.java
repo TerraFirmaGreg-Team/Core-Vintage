@@ -18,25 +18,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public final class EntitiesWood {
 
     public static void onRegister(RegistryManager registry) {
-        registry.registerEntity("boat",
+        registry.entity("boat",
                 EntityEntryBuilder.create()
                         .entity(EntityWoodBoat.class)
                         .tracker(160, 20, true)
         );
 
-        registry.registerEntity("supply_cart",
+        registry.entity("supply_cart",
                 EntityEntryBuilder.create()
                         .entity(EntityWoodSupplyCart.class)
                         .tracker(80, 3, false)
         );
 
-        registry.registerEntity("animal_cart",
+        registry.entity("animal_cart",
                 EntityEntryBuilder.create()
                         .entity(EntityWoodAnimalCart.class)
                         .tracker(80, 3, false)
         );
 
-        registry.registerEntity("plow_cart",
+        registry.entity("plow_cart",
                 EntityEntryBuilder.create()
                         .entity(EntityWoodPlowCart.class)
                         .tracker(80, 3, false)

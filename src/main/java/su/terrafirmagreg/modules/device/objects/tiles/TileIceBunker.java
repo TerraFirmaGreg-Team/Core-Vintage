@@ -622,6 +622,6 @@ public class TileIceBunker extends TileEntityLockableLoot
             }
         }
 
-        return ModifierBase.defined(this.blockType.getTranslationKey(), change, potency);
+        return ModifierBase.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
     }
 }

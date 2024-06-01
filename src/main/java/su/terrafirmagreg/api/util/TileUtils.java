@@ -14,12 +14,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 @SuppressWarnings("unused")
 public final class TileUtils {
-
-    private TileUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Возвращает экземпляр типизированного объекта TileEntity по его классу.

@@ -37,26 +37,26 @@ public final class ItemsDevice {
 
     public static void onRegister(RegistryManager registry) {
 
-        FIRESTARTER = registry.registerItem(new ItemFireStarter());
+        FIRESTARTER = registry.item(new ItemFireStarter());
 
-        LEATHER_SIDE = registry.registerItem(new ItemDeviceMisc("flask/leather/side", Size.SMALL, Weight.LIGHT));
-        LEATHER_FLASK = registry.registerItem(new ItemLeatherFlask());
-        BROKEN_LEATHER_FLASK = registry.registerItem(new ItemDeviceMisc("flask/leather/broken", Size.SMALL, Weight.LIGHT));
+        LEATHER_SIDE = registry.item(new ItemDeviceMisc("flask/leather/side", Size.SMALL, Weight.LIGHT));
+        LEATHER_FLASK = registry.item(new ItemLeatherFlask());
+        BROKEN_LEATHER_FLASK = registry.item(new ItemDeviceMisc("flask/leather/broken", Size.SMALL, Weight.LIGHT));
 
-        UNFINISHED_FLASK = registry.registerItem(new ItemDeviceMisc("flask/metal/unfinished", Size.SMALL, Weight.LIGHT));
-        IRON_FLASK = registry.registerItem(new ItemMetalFlask());
-        BROKEN_IRON_FLASK = registry.registerItem(new ItemDeviceMisc("flask/metal/broken", Size.SMALL, Weight.LIGHT));
+        UNFINISHED_FLASK = registry.item(new ItemDeviceMisc("flask/metal/unfinished", Size.SMALL, Weight.LIGHT));
+        IRON_FLASK = registry.item(new ItemMetalFlask());
+        BROKEN_IRON_FLASK = registry.item(new ItemDeviceMisc("flask/metal/broken", Size.SMALL, Weight.LIGHT));
 
-        SLING = registry.registerItem(new ItemSling("normal"));
-        SLING_REINFORCED = registry.registerItem(new ItemSlingReinforced("reinforced"));
-        SLING_AMMO = registry.registerItem(new ItemSlingAmmo(0, "heavy"));
-        SLING_AMMO_SPREAD = registry.registerItem(new ItemSlingAmmo(1, "spread"));
-        SLING_AMMO_LIGHT = registry.registerItem(new ItemSlingAmmo(2, "light"));
-        SLING_AMMO_FIRE = registry.registerItem(new ItemSlingAmmo(3, "fire"));
-        HANDSTONE = registry.registerItem(new ItemCraftingTool("handstone", 250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"));
+        SLING = registry.item(new ItemSling("normal"));
+        SLING_REINFORCED = registry.item(new ItemSlingReinforced("reinforced"));
+        SLING_AMMO = registry.item(new ItemSlingAmmo(0, "heavy"));
+        SLING_AMMO_SPREAD = registry.item(new ItemSlingAmmo(1, "spread"));
+        SLING_AMMO_LIGHT = registry.item(new ItemSlingAmmo(2, "light"));
+        SLING_AMMO_FIRE = registry.item(new ItemSlingAmmo(3, "fire"));
+        HANDSTONE = registry.item(new ItemCraftingTool("handstone", 250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"));
 
-        GRINDSTONE_QUARTZ = registry.registerItem(new ItemGrindstone(1, 640, "quartz"));
-        GRINDSTONE_STEEL = registry.registerItem(new ItemGrindstone(2, 6400, "steel"));
-        GRINDSTONE_DIAMOND = registry.registerItem(new ItemGrindstone(3, 7000, "diamond"));
+        GRINDSTONE_QUARTZ = registry.item(new ItemGrindstone(1, 640, "quartz"));
+        GRINDSTONE_STEEL = registry.item(new ItemGrindstone(2, 6400, "steel"));
+        GRINDSTONE_DIAMOND = registry.item(new ItemGrindstone(3, 7000, "diamond"));
     }
 }

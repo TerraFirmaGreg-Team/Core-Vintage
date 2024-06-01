@@ -103,8 +103,7 @@ public class OversizedItemInStorageArea {
         String containerName = container.getClass().getName();
 
         // raytrace to get the block the user is looking at.
-        BlockPos tracedPos = getTracedPos(MathsUtils.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
-                .getAttributeValue(), 1));
+        BlockPos tracedPos = getTracedPos(MathsUtils.rayTrace(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), 1));
         ArrayList<String> slotClassNameList = new ArrayList<>(Arrays.asList(ModConfig.slotClassNames));
         ArrayList<String> containerClassNameList = new ArrayList<>(Arrays.asList(ModConfig.sizeLimitOptions.sizeContainers));
         ArrayList<String> blockedItemNameList = new ArrayList<>(Arrays.asList(ModConfig.ignoredItems));
@@ -227,22 +226,14 @@ public class OversizedItemInStorageArea {
                 ItemStack itemStack = slot.getStack();
                 //Get the weight based off the config and add it to the current weight.
                 if (currentWeight < maxWeight) {
-                    switch (CapabilityItemSize.getIItemSize(slot.getStack()).getWeight(itemStack).ordinal()) {
-                        case 0:
-                            currentWeight = ModConfig.weightLimitOptions.veryLightItemWeight * itemStack.getCount() + currentWeight;
-                            break;
-                        case 1:
-                            currentWeight = ModConfig.weightLimitOptions.lightItemWeight * itemStack.getCount() + currentWeight;
-                            break;
-                        case 2:
-                            currentWeight = ModConfig.weightLimitOptions.mediumItemWeight * itemStack.getCount() + currentWeight;
-                            break;
-                        case 3:
-                            currentWeight = ModConfig.weightLimitOptions.heavyItemWeight * itemStack.getCount() + currentWeight;
-                            break;
-                        case 4:
-                            currentWeight = ModConfig.weightLimitOptions.veryHeavyItemWeight * itemStack.getCount() + currentWeight;
-                    }
+                    currentWeight = switch (CapabilityItemSize.getIItemSize(slot.getStack()).getWeight(itemStack).ordinal()) {
+                        case 0 -> ModConfig.weightLimitOptions.veryLightItemWeight * itemStack.getCount() + currentWeight;
+                        case 1 -> ModConfig.weightLimitOptions.lightItemWeight * itemStack.getCount() + currentWeight;
+                        case 2 -> ModConfig.weightLimitOptions.mediumItemWeight * itemStack.getCount() + currentWeight;
+                        case 3 -> ModConfig.weightLimitOptions.heavyItemWeight * itemStack.getCount() + currentWeight;
+                        case 4 -> ModConfig.weightLimitOptions.veryHeavyItemWeight * itemStack.getCount() + currentWeight;
+                        default -> currentWeight;
+                    };
                 } else
                     toYeet.add(slot);
             }
@@ -253,12 +244,10 @@ public class OversizedItemInStorageArea {
         return toYeet;
     }
 
-    private void cleanSlotList(Container container, ArrayList<String> slotClassNameList, ArrayList<Slot> slotsToEffect, String containerName,
-                               EntityPlayer player) {
+    private void cleanSlotList(Container container, ArrayList<String> slotClassNameList, ArrayList<Slot> slotsToEffect, String containerName, EntityPlayer player) {
         //Remove this entry if people put it in cause a shit ton of stuff uses this and warn them.
         if (slotClassNameList.remove("net.minecraft.inventory.InventoryBasic")) {
-            LOGGER.warn(
-                    "Ignoring basic slot! DON'T PUT \"net.minecraft.inventory.InventoryBasic\" IN YOUR CONFIG, LIKE THE CONFIG SAYS! THIS IS NOT A BUG!");
+            LOGGER.warn("Ignoring basic slot! DON'T PUT \"net.minecraft.inventory.InventoryBasic\" IN YOUR CONFIG, LIKE THE CONFIG SAYS! THIS IS NOT A BUG!");
         }
 
         // simple debug to get the container class name.
@@ -323,8 +312,7 @@ public class OversizedItemInStorageArea {
         return null;
     }
 
-    private void checkItemHeat(BlockPos tracedPos, String containerName, World world, ArrayList<Slot> slotsToEffect, EntityPlayer player,
-                               ArrayList<String> blockedItemNameList) {
+    private void checkItemHeat(BlockPos tracedPos, String containerName, World world, ArrayList<Slot> slotsToEffect, EntityPlayer player, ArrayList<String> blockedItemNameList) {
         ArrayList<String> disabledInvs = new ArrayList<>(Arrays.asList(ModConfig.overheatOptions.disabledInventories));
         if (ModConfig.overheatOptions.heatStartsFires && !disabledInvs.contains(containerName)) {
             //Loop over the slots.

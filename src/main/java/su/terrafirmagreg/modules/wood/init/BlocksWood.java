@@ -21,7 +21,7 @@ public final class BlocksWood {
 
     public static void onRegister(RegistryManager registry) {
 
-        registry.registerBlocks(WOOD_BLOCKS.values());
+        registry.blocks(WOOD_BLOCKS.values());
         //for (var block : TREE_BLOCKS) registry.registerBlock(block);
 
         //registry.registerBlocks(LeavesPaging.getLeavesMapForModId(Tags.MOD_ID).values().toArray(new Block[0]));

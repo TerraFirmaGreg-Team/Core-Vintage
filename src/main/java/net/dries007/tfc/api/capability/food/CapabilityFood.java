@@ -30,14 +30,15 @@ public class CapabilityFood {
     public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "food");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
     /**
-     * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay) That puts decay times at 25% - 100% of this value So meat / fruit
-     * will decay in ~5 days, grains take ~20 days Other modifiers are applied on top of that
+     * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay) That puts decay times at 25% - 100% of this value So meat / fruit will decay in ~5 days, grains
+     * take ~20 days Other modifiers are applied on top of that
      */
     public static final int DEFAULT_ROT_TICKS = ICalendar.TICKS_IN_DAY * 22;
     @CapabilityInject(IFood.class)
     public static Capability<IFood> CAPABILITY;
 
     public static void preInit() {
+
         CapabilityManager.INSTANCE.register(IFood.class, new DumbStorage<>(), FoodHandler::new);
     }
 
@@ -50,9 +51,8 @@ public class CapabilityFood {
     }
 
     /**
-     * Helper method to handle applying a trait to a food item. Do NOT just directly apply the trait, as that can lead to strange interactions with
-     * decay dates / creation dates This calculates a creation date that interpolates between no preservation (if the food is rotten), to full
-     * preservation (if the food is new)
+     * Helper method to handle applying a trait to a food item. Do NOT just directly apply the trait, as that can lead to strange interactions with decay dates / creation dates
+     * This calculates a creation date that interpolates between no preservation (if the food is rotten), to full preservation (if the food is new)
      */
     public static void applyTrait(IFood instance, FoodTrait trait) {
         if (!instance.getTraits().contains(trait)) {
@@ -72,8 +72,7 @@ public class CapabilityFood {
     }
 
     /**
-     * Helper method to handle removing a trait to a food item. Do NOT just directly remove the trait, as that can lead to strange interactions with
-     * decay dates / creation dates
+     * Helper method to handle removing a trait to a food item. Do NOT just directly remove the trait, as that can lead to strange interactions with decay dates / creation dates
      */
     public static void removeTrait(IFood instance, FoodTrait trait) {
         if (instance.getTraits().contains(trait)) {
@@ -93,8 +92,8 @@ public class CapabilityFood {
     }
 
     /**
-     * This is used to update a stack from an old stack, in the case where a food is created from another Any method that creates derivative food
-     * should call this, as it avoids extending the decay of the item If called with non food items, nothing happens
+     * This is used to update a stack from an old stack, in the case where a food is created from another Any method that creates derivative food should call this, as it avoids
+     * extending the decay of the item If called with non food items, nothing happens
      *
      * @param oldStack the old stack
      * @param newStack the new stack
@@ -114,9 +113,8 @@ public class CapabilityFood {
     }
 
     /**
-     * Call this from any function that is meant to create a new item stack. In MOST cases, you should use
-     * {@link CapabilityFood#updateFoodFromPrevious(ItemStack, ItemStack)}, as the decay should transfer from input -> output This is only for where
-     * there is no input. (i.e. on a direct {@code stack.copy()} from non-food inputs
+     * Call this from any function that is meant to create a new item stack. In MOST cases, you should use {@link CapabilityFood#updateFoodFromPrevious(ItemStack, ItemStack)}, as
+     * the decay should transfer from input -> output This is only for where there is no input. (i.e. on a direct {@code stack.copy()} from non-food inputs
      *
      * @param stack the new stack
      * @return the input stack, for chaining
@@ -178,8 +176,8 @@ public class CapabilityFood {
     }
 
     /**
-     * This is a nice way of checking if two stacks are stackable, ignoring the creation date: copy both stacks, give them the same creation date,
-     * then check compatibility This will also not stack stacks which have different traits, which is intended
+     * This is a nice way of checking if two stacks are stackable, ignoring the creation date: copy both stacks, give them the same creation date, then check compatibility This
+     * will also not stack stacks which have different traits, which is intended
      *
      * @return true if the stacks are otherwise stackable ignoring their creation date
      */
@@ -208,15 +206,13 @@ public class CapabilityFood {
     }
 
     /**
-     * T = current time, Ci / Cf = initial / final creation date, Ei / Ef = initial / final expiration date, d = decay time, p = preservation
-     * modifier
+     * T = current time, Ci / Cf = initial / final creation date, Ei / Ef = initial / final expiration date, d = decay time, p = preservation modifier
      * <p>
-     * To apply preservation p at time T: want remaining decay fraction to be invariant under preservation Let Ri = (T - Ci) / (Ei - Ci) = (T - Ci) /
-     * d, Rf = (T - Cf) / (d * p) Then if Ri = Rf => d * p * (T - Ci) = d * (T - Cf) => Cf = (1 - p) * T + p * Ci (affine combination)
+     * To apply preservation p at time T: want remaining decay fraction to be invariant under preservation Let Ri = (T - Ci) / (Ei - Ci) = (T - Ci) / d, Rf = (T - Cf) / (d * p)
+     * Then if Ri = Rf => d * p * (T - Ci) = d * (T - Cf) => Cf = (1 - p) * T + p * Ci (affine combination)
      * <p>
-     * In order to show that E > T is invariant under preservation: (i.e. see TerraFirmaCraft#352) Let T, Ci, Ei, d, p > 0 such that Ei > T (1.), and
-     * Ei = Ci + d Cf = (1 - p) * T + p * Ci => Ef = Cf + p * d = (1 - p) * T + p * Ci + p * d = (1 - p) * T + p * (Ci + d) via 1. > (1 - p) * T + p *
-     * T = T QED
+     * In order to show that E > T is invariant under preservation: (i.e. see TerraFirmaCraft#352) Let T, Ci, Ei, d, p > 0 such that Ei > T (1.), and Ei = Ci + d Cf = (1 - p) * T +
+     * p * Ci => Ef = Cf + p * d = (1 - p) * T + p * Ci + p * d = (1 - p) * T + p * (Ci + d) via 1. > (1 - p) * T + p * T = T QED
      *
      * @param ci The initial creation date
      * @param p  The decay date modifier (1 / standard decay modifier)

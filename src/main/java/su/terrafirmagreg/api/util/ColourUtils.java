@@ -2,12 +2,12 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.client.renderer.GlStateManager;
 
+
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 @SuppressWarnings("unused")
 public final class ColourUtils {
-
-    private ColourUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Устанавливает цвет.

@@ -32,6 +32,8 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -42,12 +44,9 @@ import static su.terrafirmagreg.api.data.Blockstates.CLAY;
 import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
 import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class BlockUtils {
-
-    private BlockUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
 
     /**
      * Уведомляет мир о том, что блок был обновлен.

@@ -22,7 +22,7 @@ import su.terrafirmagreg.modules.rock.objects.blocks.BlockRockWall;
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
 import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
 
-public class RockBlockVariantHandler {
+public final class RockBlockVariantHandler {
 
     public static void init() {
 

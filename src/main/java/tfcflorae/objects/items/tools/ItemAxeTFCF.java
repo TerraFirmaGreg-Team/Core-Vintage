@@ -1,5 +1,9 @@
 package tfcflorae.objects.items.tools;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemAxe;
@@ -8,16 +12,13 @@ import net.minecraft.item.ItemStack;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
 
-public class ItemAxeTFCF extends ItemAxe implements IItemSize {
+public class ItemAxeTFCF extends ItemAxe implements ICapabilitySize {
 
     public final ToolMaterial material;
 

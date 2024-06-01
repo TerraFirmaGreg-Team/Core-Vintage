@@ -1,5 +1,9 @@
 package tfcflorae.objects.items;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -9,15 +13,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemFlint extends ItemTFCF implements IItemSize {
+public class ItemFlint extends ItemTFCF implements ICapabilitySize {
 
     private final Size size;
     private final Weight weight;

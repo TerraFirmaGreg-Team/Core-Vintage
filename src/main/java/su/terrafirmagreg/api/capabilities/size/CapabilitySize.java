@@ -1,10 +1,10 @@
 package su.terrafirmagreg.api.capabilities.size;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.BlockLadder;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
@@ -18,44 +18,23 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-import net.dries007.tfc.api.capability.ItemStickCapability;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public final class CapabilitySize {
 
     public static final ResourceLocation KEY = ModUtils.resource("size_capability");
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
+
     @CapabilityInject(ICapabilitySize.class)
-    public static Capability<ICapabilitySize> CAPABILITY;
+    public static final Capability<ICapabilitySize> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
-        // Register the capability
+    public static void register() {
         CapabilityManager.INSTANCE.register(ICapabilitySize.class, new StorageSize(), ProviderSize::new);
-    }
-
-    public static void init() {
-        // Add hardcoded size values for vanilla items
-        CUSTOM_ITEMS.put(IIngredient.of(Items.COAL), () -> ProviderSize.get(Size.SMALL, Weight.LIGHT, true)); // Store anywhere stacksize = 32
-        CUSTOM_ITEMS.put(IIngredient.of(Items.STICK), ItemStickCapability::new); // Store anywhere stacksize = 64
-        CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL),
-                () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
-        CUSTOM_ITEMS.put(IIngredient.of(Items.BED),
-                () -> ProviderSize.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Store only in chests stacksize = 1
-        CUSTOM_ITEMS.put(IIngredient.of(Items.MINECART),
-                () -> ProviderSize.get(Size.LARGE, Weight.VERY_HEAVY, false)); // Store only in chests stacksize = 1
-        CUSTOM_ITEMS.put(IIngredient.of(Items.ARMOR_STAND),
-                () -> ProviderSize.get(Size.LARGE, Weight.HEAVY, true)); // Store only in chests stacksize = 4
-        CUSTOM_ITEMS.put(IIngredient.of(Items.CAULDRON),
-                () -> ProviderSize.get(Size.LARGE, Weight.LIGHT, true)); // Store only in chests stacksize = 32
-        CUSTOM_ITEMS.put(IIngredient.of(Blocks.TRIPWIRE_HOOK),
-                () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
     }
 
     public static ICapabilitySize get(ItemStack itemStack) {
@@ -91,8 +70,8 @@ public final class CapabilitySize {
                 return size;
             } else if (stack.getItem() instanceof ICapabilitySize item) {
                 return item;
-            } else if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof ICapabilitySize) {
-                return (ICapabilitySize) ((ItemBlock) stack.getItem()).getBlock();
+            } else if (stack.getItem() instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof ICapabilitySize capabilitySize) {
+                return capabilitySize;
             }
         }
         return null;
@@ -100,7 +79,7 @@ public final class CapabilitySize {
 
     @NotNull
     public static ICapabilityProvider getCustomSize(ItemStack stack) {
-        for (Map.Entry<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> entry : CUSTOM_ITEMS.entrySet()) {
+        for (Map.Entry<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> entry : HandlerSize.CUSTOM_ITEMS.entrySet()) {
             if (entry.getKey().testIgnoreCount(stack)) {
                 return entry.getValue().get();
             }

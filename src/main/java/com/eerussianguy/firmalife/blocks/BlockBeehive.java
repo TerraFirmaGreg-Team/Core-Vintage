@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
@@ -31,9 +34,6 @@ import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -49,7 +49,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @MethodsReturnNonnullByDefault
-public class BlockBeehive extends Block implements IItemSize {
+public class BlockBeehive extends Block implements ICapabilitySize {
 
     public static final PropertyInteger STAGE = StatePropertiesFL.STAGE;
     private static final Vec3i[] VECTORS = {

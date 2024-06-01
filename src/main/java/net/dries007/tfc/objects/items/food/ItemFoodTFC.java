@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.items.food;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -12,9 +16,6 @@ import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemFoodTFC extends ItemFood implements IItemSize, IItemFoodTFC {
+public class ItemFoodTFC extends ItemFood implements ICapabilitySize, IItemFoodTFC {
 
     private static final Map<Food, ItemFoodTFC> MAP = new HashMap<>();
     protected final Food food;

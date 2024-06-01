@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.items.rock;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,9 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
@@ -43,7 +44,7 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 
-public class ItemRockJavelin extends ItemTool implements IItemSize, IRockObject {
+public class ItemRockJavelin extends ItemTool implements ICapabilitySize, IRockObject {
 
     private static final Map<RockCategory, ItemRockJavelin> MAP = new HashMap<>();
     public final RockCategory category;

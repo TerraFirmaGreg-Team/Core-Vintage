@@ -1,5 +1,7 @@
-package su.terrafirmagreg.api.capabilities.damage;
+package su.terrafirmagreg.api.capabilities.damage.spi;
 
+import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.api.capabilities.damage.ICapabilityDamageResistance;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.entity.Entity;

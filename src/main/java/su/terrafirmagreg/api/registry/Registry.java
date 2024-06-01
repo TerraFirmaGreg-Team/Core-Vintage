@@ -50,7 +50,7 @@ public record Registry(RegistryManager registryManager) {
 
     public void onRegisterItem(RegistryEvent.Register<Item> event) {
         for (var item : this.registryManager.getItems()) {
-            event.getRegistry().register(item);
+            event.getRegistry().registerAll(item);
         }
     }
 

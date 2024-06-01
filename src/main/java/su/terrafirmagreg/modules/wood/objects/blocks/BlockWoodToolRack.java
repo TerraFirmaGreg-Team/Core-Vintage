@@ -27,8 +27,12 @@ import net.minecraft.world.World;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 
 import org.jetbrains.annotations.Nullable;
 

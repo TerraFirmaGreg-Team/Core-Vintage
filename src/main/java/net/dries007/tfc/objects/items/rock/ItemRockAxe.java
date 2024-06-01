@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.items.rock;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -10,9 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @MethodsReturnNonnullByDefault
 
-public class ItemRockAxe extends ItemAxe implements IItemSize, IRockObject {
+public class ItemRockAxe extends ItemAxe implements ICapabilitySize, IRockObject {
 
     private static final Map<RockCategory, ItemRockAxe> MAP = new HashMap<>();
     public final RockCategory category;

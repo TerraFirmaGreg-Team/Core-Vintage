@@ -1,8 +1,12 @@
 package su.terrafirmagreg.api.capabilities.size;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
 
-public class ProviderSize implements ICapabilitySize {
+public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
 
     private static final EnumMap<Size, EnumMap<Weight, ProviderSize[]>> CACHE = new EnumMap<>(Size.class);
     private final Size size;
@@ -18,10 +22,16 @@ public class ProviderSize implements ICapabilitySize {
     private final boolean canStack;
 
     public ProviderSize() {
+
         this(Size.SMALL, Weight.LIGHT, true);
     }
 
+    public static ProviderSize getDefault() {
+        return get(Size.SMALL, Weight.LIGHT, true); // Default to fitting in small vessels and stacksize = 32
+    }
+
     public ProviderSize(Size size, Weight weight, boolean canStack) {
+
         this.size = size;
         this.weight = weight;
         this.canStack = canStack;
@@ -32,10 +42,7 @@ public class ProviderSize implements ICapabilitySize {
         if (nested == null) {
             CACHE.put(size, nested = new EnumMap<>(Weight.class));
         }
-        ProviderSize[] handlers = nested.get(weight);
-        if (handlers == null) {
-            nested.put(weight, handlers = new ProviderSize[2]);
-        }
+        ProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new ProviderSize[2]);
         if (handlers[canStack ? 1 : 0] == null) {
             handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);
         }

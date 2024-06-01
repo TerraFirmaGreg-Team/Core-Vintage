@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -26,9 +29,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -41,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 
 @MethodsReturnNonnullByDefault
 
-public class BlockStemFruit extends BlockDirectional implements IItemSize {
+public class BlockStemFruit extends BlockDirectional implements ICapabilitySize {
 
     public BlockStemFruit() {
         super(Material.GOURD);

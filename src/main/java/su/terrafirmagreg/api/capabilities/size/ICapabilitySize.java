@@ -1,8 +1,11 @@
 package su.terrafirmagreg.api.capabilities.size;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.lib.Unicode;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,7 +24,7 @@ import java.util.List;
  * @see net.dries007.tfc.objects.items.ItemTFC
  * @see net.dries007.tfc.objects.items.itemblock.ItemBlockTFC
  */
-public interface ICapabilitySize extends ICapabilityProvider {
+public interface ICapabilitySize {
 
     @NotNull
     default Size getSize(@NotNull ItemStack stack) {
@@ -39,7 +42,7 @@ public interface ICapabilitySize extends ICapabilityProvider {
 
     @SideOnly(Side.CLIENT)
     default void addSizeInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
-        text.add("\u2696 " + I18n.format(Helpers.getEnumName(getWeight(stack))) + " \u21F2 " + I18n.format(Helpers.getEnumName(getSize(stack))));
+        text.add(Unicode.WEIGHT + " " + I18n.format(Helpers.getEnumName(getWeight(stack))) + Unicode.SIZE + " " + I18n.format(Helpers.getEnumName(getSize(stack))));
     }
 
     /**

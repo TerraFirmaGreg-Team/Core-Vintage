@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.registry.provider;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 
-public interface IAutoRegProvider extends IOreDictProvider, IItemSize {
+public interface IAutoRegProvider extends IOreDictProvider, ICapabilitySize {
 
     default String getRegistryKey() {
         throw new IllegalArgumentException("Must override");

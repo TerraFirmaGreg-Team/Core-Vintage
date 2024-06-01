@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.device.objects.items;
 
 import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 public class ItemLeatherFlask extends ItemFlask {
 

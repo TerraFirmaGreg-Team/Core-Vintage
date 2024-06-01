@@ -1,5 +1,9 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -14,9 +18,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 @MethodsReturnNonnullByDefault
-public abstract class BlockNonCube extends Block implements IItemSize {
+public abstract class BlockNonCube extends Block implements ICapabilitySize {
 
     public BlockNonCube(Material materialIn) {
         super(materialIn);

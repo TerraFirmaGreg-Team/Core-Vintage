@@ -2,9 +2,11 @@ package lyeoj.tfcthings.items;
 
 import net.minecraft.item.ItemStack;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 

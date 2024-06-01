@@ -21,7 +21,7 @@ public class TFCEntities {
     @GameRegistry.ObjectHolder("tfc:long")
     public static final DataSerializerEntry LONG_DATA_SERIALIZER_ENTRY = ModUtils.getNull();
 
-    private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<Long>() {
+    private static final DataSerializer<Long> LONG_DATA_SERIALIZER = new DataSerializer<>() {
 
         public void write(PacketBuffer buf, @NotNull Long value) {
             buf.writeLong(value);

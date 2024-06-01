@@ -17,9 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.api.data.Blockstates.CURED;

@@ -1,5 +1,9 @@
 package tfcflorae.objects.items.tools;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
@@ -7,15 +11,12 @@ import net.minecraft.item.ItemTool;
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
-public class ItemHammerTFCF extends ItemTool implements IItemSize {
+public class ItemHammerTFCF extends ItemTool implements ICapabilitySize {
 
     public final ToolMaterial material;
 

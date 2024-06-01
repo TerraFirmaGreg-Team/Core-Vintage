@@ -28,8 +28,13 @@ import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.CreativeTabsTFC;

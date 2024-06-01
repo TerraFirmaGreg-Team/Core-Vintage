@@ -5,9 +5,10 @@ import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 
 import lombok.Getter;
 

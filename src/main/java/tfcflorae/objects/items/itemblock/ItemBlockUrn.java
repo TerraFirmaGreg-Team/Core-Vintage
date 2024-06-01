@@ -1,18 +1,19 @@
 package tfcflorae.objects.items.itemblock;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import tfcflorae.objects.blocks.BlockUrn;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ItemBlockUrn extends ItemBlockTFC implements IItemSize {
+public class ItemBlockUrn extends ItemBlockTFC implements ICapabilitySize {
 
     public ItemBlockUrn(BlockUrn block) {
         super(block);

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.capabilities.heat;
 
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;

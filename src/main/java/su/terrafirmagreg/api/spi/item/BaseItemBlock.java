@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.spi.item;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.registry.provider.IMultiItemBlock;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
 
@@ -9,13 +10,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-
 import lombok.Getter;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BaseItemBlock extends ItemBlock implements IItemSize {
+public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
 
     private final EnumRarity rarity;
 

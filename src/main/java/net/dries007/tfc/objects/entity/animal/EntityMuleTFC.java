@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -42,9 +45,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -257,7 +257,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
                 int hugeHeavyCount = 0;
                 for (int i = 2; i < this.horseChest.getSizeInventory(); ++i) {
                     ItemStack stack = this.horseChest.getStackInSlot(i);
-                    if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+                    if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
                         hugeHeavyCount++;
                         if (hugeHeavyCount >= 2) {
                             break;

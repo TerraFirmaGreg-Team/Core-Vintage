@@ -3,11 +3,13 @@ package su.terrafirmagreg.modules.core;
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.HandlerSize;
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
@@ -27,6 +29,7 @@ import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -76,14 +79,15 @@ public final class ModuleCore extends ModuleBase {
 
         MinecraftForge.EVENT_BUS.register(new AmbientalHandler());
 
-        CapabilityDamageResistance.preInit();
-        CapabilityEgg.preInit();
-        CapabilityHeat.preInit();
-        CapabilityMetal.preInit();
-        CapabilityPull.preInit();
-        CapabilitySharpness.preInit();
-        CapabilitySize.preInit();
-        CapabilityTemperature.preInit();
+        CapabilityDamageResistance.register();
+        CapabilityEgg.register();
+        CapabilityHeat.register();
+        CapabilityFood.register();
+        CapabilityMetal.register();
+        CapabilityPull.register();
+        CapabilitySharpness.register();
+        CapabilitySize.register();
+        CapabilityTemperature.register();
 
     }
 
@@ -92,6 +96,11 @@ public final class ModuleCore extends ModuleBase {
 
         MinecraftForge.EVENT_BUS.register(new OverlayTemperature());
         MinecraftForge.EVENT_BUS.register(new OverlayPlayerData());
+    }
+
+    @Override
+    protected void onInit(FMLInitializationEvent event) {
+        HandlerSize.init();
     }
 
     @Override

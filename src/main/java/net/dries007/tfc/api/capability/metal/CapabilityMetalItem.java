@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.capability.metal;
 
+import su.terrafirmagreg.api.capabilities.metal.HandlerMetal;
 import su.terrafirmagreg.api.data.Constants;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -21,16 +21,14 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public final class CapabilityMetalItem {
 
     public static final ResourceLocation KEY = new ResourceLocation(Constants.MODID_TFC, "metal_object");
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_METAL_ITEMS = new HashMap<>(); //Used inside CT, set custom IMetalItem for items outside TFC
+
     public static final Map<String, Metal.ItemType> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
     @CapabilityInject(IMetalItem.class)
     public static Capability<IMetalItem> METAL_OBJECT_CAPABILITY;
@@ -46,10 +44,6 @@ public final class CapabilityMetalItem {
         ORE_DICT_METAL_ITEMS.put("scrap", Metal.ItemType.SCRAP);
         ORE_DICT_METAL_ITEMS.put("dust", Metal.ItemType.DUST);
         ORE_DICT_METAL_ITEMS.put("nugget", Metal.ItemType.NUGGET);
-    }
-
-    public static void init() {
-        CUSTOM_METAL_ITEMS.put(IIngredient.of(Blocks.IRON_BARS), () -> new MetalItemHandler(Metal.WROUGHT_IRON, 25, true));
     }
 
     /**
@@ -76,10 +70,10 @@ public final class CapabilityMetalItem {
     @Nullable
     public static ICapabilityProvider getCustomMetalItem(ItemStack stack) {
         if (!stack.isEmpty()) {
-            Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_METAL_ITEMS.keySet();
+            Set<IIngredient<ItemStack>> itemItemSet = HandlerMetal.CUSTOM_METAL_ITEMS.keySet();
             for (IIngredient<ItemStack> ingredient : itemItemSet) {
                 if (ingredient.testIgnoreCount(stack)) {
-                    return CUSTOM_METAL_ITEMS.get(ingredient).get();
+                    return HandlerMetal.CUSTOM_METAL_ITEMS.get(ingredient).get();
                 }
             }
             // Try using ore dict prefix-suffix common values (ie: ingotCopper)

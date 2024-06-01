@@ -10,6 +10,8 @@ import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import java.util.Map;
 /**
  * This is a trait that can be applied to a food to modify it's decay date. To add new traits, simply create new instances of this class, and assign a unique name
  */
+@Getter
 public class FoodTrait {
 
     public static final FoodTrait SALTED;
@@ -89,15 +92,6 @@ public class FoodTrait {
         return TRAITS;
     }
 
-    public float getDecayModifier() {
-        return decayModifier;
-    }
-
-    @NotNull
-    public String getName() {
-        return name;
-    }
-
     /**
      * Adds information about the trait to the food stack
      *
@@ -106,7 +100,7 @@ public class FoodTrait {
      */
     @SideOnly(Side.CLIENT)
     public void addTraitInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
-        if (hasTooltip) {
+        if (isHasTooltip()) {
             text.add(I18n.format("tfc.food_traits." + getName()));
         }
     }

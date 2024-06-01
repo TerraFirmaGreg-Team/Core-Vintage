@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.client.gui.overlay;
 
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.api.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 
@@ -149,8 +150,8 @@ public class OverlayTemperature {
                 changeFormatted = changeFormatted * ((float) 9 / 5);
             }
             FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
-            String tempStr = String.format("%.1f\u00BA -> %.1f\u00BA", temperature, targetFormatted);
-            String changeStr = String.format("%.3f\u00BA/s", change);
+            String tempStr = String.format("%.1f" + Unicode.DEGREE + " -> %.1f" + Unicode.DEGREE, temperature, targetFormatted);
+            String changeStr = String.format("%.3f" + Unicode.DEGREE + "/s", change);
             fr.drawStringWithShadow(tempStr, mid + 50 - (float) fr.getStringWidth(tempStr) / 2 + offsetX, armorRowHeight + 1 + offsetY, c.getRGB());
             fr.drawStringWithShadow(changeStr, mid - 50 - (float) fr.getStringWidth(changeStr) / 2, armorRowHeight + 1, c.getRGB());
 

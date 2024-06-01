@@ -13,9 +13,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 public class ProviderEgg implements ICapabilityEgg {
 
+    @Getter
     private boolean fertilized;
+    @Getter
     private long hatchDay;
     private NBTTagCompound entitytag;
 
@@ -33,20 +37,11 @@ public class ProviderEgg implements ICapabilityEgg {
         this.entitytag = entity.serializeNBT();
     }
 
-    @Override
-    public long getHatchDay() {
-        return hatchDay;
-    }
-
     @Nullable
     @Override
     public Entity getEntity(World world) {
-        return entitytag != null ? EntityList.createEntityFromNBT(entitytag, world) : null;
-    }
 
-    @Override
-    public boolean isFertilized() {
-        return fertilized;
+        return entitytag != null ? EntityList.createEntityFromNBT(entitytag, world) : null;
     }
 
     public void setFertilized(@NotNull Entity entity, long hatchDay) {
@@ -57,6 +52,7 @@ public class ProviderEgg implements ICapabilityEgg {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+
         return capability == CapabilityEgg.CAPABILITY;
     }
 
@@ -64,6 +60,7 @@ public class ProviderEgg implements ICapabilityEgg {
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+
         return hasCapability(capability, facing) ? (T) this : null;
     }
 

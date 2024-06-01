@@ -209,7 +209,6 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
                             ResourceLocation name = stack.getItem().getRegistryName();
                             //break item, play sound
                             worldIn.playSound(null, entityLiving.getPosition(), SoundDevice.FLASK_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                            assert name != null;
                             if (name.toString().contains("leather")) {
                                 ItemHandlerHelper.giveItemToPlayer((EntityPlayer) entityLiving, new ItemStack(ItemsDevice.BROKEN_LEATHER_FLASK));
                             } else {

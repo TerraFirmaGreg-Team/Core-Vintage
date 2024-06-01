@@ -1,6 +1,9 @@
 package lyeoj.tfcthings.items;
 
 import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -27,9 +30,6 @@ import lyeoj.tfcthings.init.TFCThingsSoundEvents;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.types.DefaultMetals;
@@ -39,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ItemWhetstone extends Item implements IItemSize, IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
+public class ItemWhetstone extends Item implements ICapabilitySize, IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
 
     private int tier;
 

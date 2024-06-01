@@ -2,9 +2,10 @@ package su.terrafirmagreg.mixin.minecraft.item;
 
 import lombok.Getter;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -12,9 +12,9 @@ public class CapabilityEgg {
 
     public static final ResourceLocation KEY = ModUtils.resource("egg_capability");
     @CapabilityInject(ICapabilityEgg.class)
-    public static Capability<ICapabilityEgg> CAPABILITY;
+    public static final Capability<ICapabilityEgg> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
+    public static void register() {
         CapabilityManager.INSTANCE.register(ICapabilityEgg.class, new StorageEgg(), ProviderEgg::new);
 
     }

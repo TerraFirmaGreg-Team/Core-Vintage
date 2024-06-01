@@ -42,8 +42,13 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;

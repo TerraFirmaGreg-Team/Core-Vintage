@@ -1,5 +1,10 @@
 package tfcflorae.objects.items.tools;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -18,24 +23,16 @@ import net.minecraft.world.World;
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.objects.items.ItemQuiver;
-
-
-import su.terrafirmagreg.api.lib.MathConstants;
-
-
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
 @MethodsReturnNonnullByDefault
 
-public class ItemJavelinTFCF extends ItemTool implements IItemSize {
+public class ItemJavelinTFCF extends ItemTool implements ICapabilitySize {
 
     public final ToolMaterial material;
 

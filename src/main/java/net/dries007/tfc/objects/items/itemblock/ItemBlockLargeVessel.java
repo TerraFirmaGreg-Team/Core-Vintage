@@ -1,17 +1,18 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.objects.blocks.BlockLargeVessel;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ItemBlockLargeVessel extends ItemBlockTFC implements IItemSize {
+public class ItemBlockLargeVessel extends ItemBlockTFC implements ICapabilitySize {
 
     public ItemBlockLargeVessel(BlockLargeVessel block) {
         super(block);

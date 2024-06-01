@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.BlockHorizontal;
@@ -22,9 +25,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -39,7 +39,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @MethodsReturnNonnullByDefault
 
-public class BlockJackOLantern extends BlockHorizontal implements IItemSize {
+public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySize {
 
     private final Carving carving;
 

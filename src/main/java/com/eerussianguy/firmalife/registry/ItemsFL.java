@@ -32,8 +32,13 @@ import com.eerussianguy.firmalife.items.ItemWateringCan;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Metal;

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
 
@@ -190,7 +191,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
 
         String ttString = Heat.getTooltip(avgTemp);
         if (ttString == null) return "Cold";
-        else return ttString.replaceAll("\u2605", "");
+        else return ttString.replaceAll(String.valueOf(Unicode.STAR), "");
 
     }
 }

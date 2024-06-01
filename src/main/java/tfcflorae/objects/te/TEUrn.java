@@ -1,5 +1,9 @@
 package tfcflorae.objects.te;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -16,9 +20,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -38,8 +39,7 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
     }
 
     /**
-     * Called when this TileEntity was created by placing a sealed Barrel Item. Loads its data from the Item's NBTTagCompound without loading xyz
-     * coordinates.
+     * Called when this TileEntity was created by placing a sealed Barrel Item. Loads its data from the Item's NBTTagCompound without loading xyz coordinates.
      *
      * @param nbt The NBTTagCompound to load from.
      */
@@ -52,8 +52,7 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
     }
 
     /**
-     * Called once per side when the TileEntity has finished loading. On servers, this is the earliest point in time to safely access the TE's World
-     * object.
+     * Called once per side when the TileEntity has finished loading. On servers, this is the earliest point in time to safely access the TE's World object.
      */
     @Override
     public void onLoad() {
@@ -150,7 +149,7 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
-        IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+        ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
         if (sizeCap != null) {
             return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
         }

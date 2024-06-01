@@ -1,6 +1,7 @@
 package net.doubledoordev.oiisa;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -32,7 +33,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -196,7 +196,7 @@ public class OversizedItemInStorageArea {
                 // get the stack from the slot.
                 ItemStack stackToActOn = slot.getStack();
                 // get the ItemSize capability that holds the Size & Weight of the item.
-                int size = CapabilityItemSize.getIItemSize(stackToActOn).getSize(stackToActOn).ordinal();
+                int size = CapabilitySize.getIItemSize(stackToActOn).getSize(stackToActOn).ordinal();
 
                 // Check the size listed on the item.
                 if (size >= maxSize) {
@@ -226,7 +226,7 @@ public class OversizedItemInStorageArea {
                 ItemStack itemStack = slot.getStack();
                 //Get the weight based off the config and add it to the current weight.
                 if (currentWeight < maxWeight) {
-                    currentWeight = switch (CapabilityItemSize.getIItemSize(slot.getStack()).getWeight(itemStack).ordinal()) {
+                    currentWeight = switch (CapabilitySize.getIItemSize(slot.getStack()).getWeight(itemStack).ordinal()) {
                         case 0 -> ModConfig.weightLimitOptions.veryLightItemWeight * itemStack.getCount() + currentWeight;
                         case 1 -> ModConfig.weightLimitOptions.lightItemWeight * itemStack.getCount() + currentWeight;
                         case 2 -> ModConfig.weightLimitOptions.mediumItemWeight * itemStack.getCount() + currentWeight;
@@ -417,8 +417,7 @@ public class OversizedItemInStorageArea {
 
                             insultingAshList.appendTag(insultingAshLore);
                             insultingAshNBT.setTag("display", new NBTTagCompound());
-                            insultingAshNBT.getCompoundTag("display")
-                                    .setTag("Name", new NBTTagString("\u00a78Ash of " + playerDisplayName));
+                            insultingAshNBT.getCompoundTag("display").setTag("Name", new NBTTagString("\u00a78Ash of " + playerDisplayName));
                             insultingAshNBT.getCompoundTag("display").setTag("Lore", insultingAshList);
 
                             ItemStack insultingAsh = new ItemStack(ItemsCore.WOOD_ASH, 1);

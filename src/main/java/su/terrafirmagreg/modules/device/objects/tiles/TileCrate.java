@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -23,9 +26,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlockLargeVessel;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -159,7 +159,7 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
-        IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+        ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
         if (sizeCap != null) {
             return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
         }

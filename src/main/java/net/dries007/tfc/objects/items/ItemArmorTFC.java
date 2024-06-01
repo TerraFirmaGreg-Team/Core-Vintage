@@ -1,19 +1,20 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
 
 import net.dries007.tfc.api.capability.damage.IDamageResistance;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResistance {
+public class ItemArmorTFC extends ItemArmor implements ICapabilitySize, IDamageResistance {
 
     private final IArmorMaterialTFC materialTFC;
 

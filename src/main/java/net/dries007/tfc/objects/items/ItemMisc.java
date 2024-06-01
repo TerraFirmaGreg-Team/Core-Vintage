@@ -1,16 +1,17 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.item.ItemStack;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemMisc extends ItemTFC implements IItemSize {
+public class ItemMisc extends ItemTFC implements ICapabilitySize {
 
     private final Size size;
     private final Weight weight;

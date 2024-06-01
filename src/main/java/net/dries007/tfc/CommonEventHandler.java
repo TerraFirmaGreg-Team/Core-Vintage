@@ -1,15 +1,18 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.egg.ProviderEgg;
+import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.api.capabilities.sharpness.ProviderSharpness;
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.api.capabilities.egg.ProviderEgg;
-import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.api.capabilities.sharpness.ProviderSharpness;
-import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
@@ -112,10 +115,6 @@ import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.player.PlayerDataHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Metal;
@@ -421,19 +420,6 @@ public final class CommonEventHandler {
         ItemStack stack = event.getObject();
         Item item = stack.getItem();
         if (!stack.isEmpty()) {
-            // Size
-            if (CapabilityItemSize.getIItemSize(stack) == null) {
-                ICapabilityProvider sizeHandler = CapabilityItemSize.getCustomSize(stack);
-                event.addCapability(CapabilityItemSize.KEY, sizeHandler);
-                if (sizeHandler instanceof IItemSize) {
-                    // Only modify the stack size if the item was stackable in the first place
-                    // Note: this is called in many cases BEFORE all custom capabilities are added.
-                    int prevStackSize = stack.getMaxStackSize();
-                    if (prevStackSize != 1) {
-                        item.setMaxStackSize(((IItemSize) sizeHandler).getStackSize(stack));
-                    }
-                }
-            }
 
             // Food
             // Because our foods supply a custom capability in Item#initCapabilities, we need to avoid attaching a duplicate, otherwise it breaks food stacking recipes.
@@ -1112,7 +1098,7 @@ public final class CommonEventHandler {
         // This is just optimized (probably uselessly, but whatever) for use in onPlayerTick
         int hugeHeavyCount = 0;
         for (ItemStack stack : inventory.mainInventory) {
-            if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+            if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
                 hugeHeavyCount++;
                 if (hugeHeavyCount >= 2) {
                     return hugeHeavyCount;
@@ -1120,7 +1106,7 @@ public final class CommonEventHandler {
             }
         }
         for (ItemStack stack : inventory.armorInventory) {
-            if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+            if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
                 hugeHeavyCount++;
                 if (hugeHeavyCount >= 2) {
                     return hugeHeavyCount;
@@ -1128,7 +1114,7 @@ public final class CommonEventHandler {
             }
         }
         for (ItemStack stack : inventory.offHandInventory) {
-            if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+            if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
                 hugeHeavyCount++;
                 if (hugeHeavyCount >= 2) {
                     return hugeHeavyCount;

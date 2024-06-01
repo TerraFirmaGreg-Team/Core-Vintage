@@ -13,11 +13,10 @@ public class CapabilityTemperature {
     public static final ResourceLocation KEY = ModUtils.resource("temperature_capability");
 
     @CapabilityInject(ICapabilityTemperature.class)
-    public static Capability<ICapabilityTemperature> CAPABILITY;
+    public static final Capability<ICapabilityTemperature> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
+    public static void register() {
         CapabilityManager.INSTANCE.register(ICapabilityTemperature.class, new StorageTemperature(), ProviderTemperature::new);
-
     }
 
     public static ICapabilityTemperature get(Entity entity) {

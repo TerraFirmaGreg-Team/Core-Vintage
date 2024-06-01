@@ -1,5 +1,10 @@
 package net.dries007.tfc.api.capability;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,10 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +27,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 /**
  * Custom heat + size capability for stick items.
  */
-public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
+public class ItemStickCapability extends ItemHeatHandler implements ICapabilitySize {
 
     public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "stick");
     private static final float MELTING_POINT = 40f;
@@ -63,6 +64,6 @@ public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemSize.ITEM_SIZE_CAPABILITY || super.hasCapability(capability, facing);
+        return capability == CapabilitySize.CAPABILITY || super.hasCapability(capability, facing);
     }
 }

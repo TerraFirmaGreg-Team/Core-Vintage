@@ -13,9 +13,9 @@ public final class CapabilityPull {
     public static final ResourceLocation KEY = ModUtils.resource("pull_capability");
 
     @CapabilityInject(ICapabilityPull.class)
-    public static Capability<ICapabilityPull> CAPABILITY;
+    public static final Capability<ICapabilityPull> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
+    public static void register() {
         CapabilityManager.INSTANCE.register(ICapabilityPull.class, new StoragePull(), ProviderPull::new);
 
     }

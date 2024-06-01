@@ -27,7 +27,6 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -144,7 +143,6 @@ public final class TerraFirmaCraft {
         JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
 
         CapabilityChunkData.preInit();
-        CapabilityItemSize.preInit();
         CapabilityItemHeat.preInit();
         CapabilityForgeable.preInit();
         CapabilityFood.preInit();
@@ -180,9 +178,6 @@ public final class TerraFirmaCraft {
         }
 
         worldTypeTFC = new WorldTypeTFC();
-
-        CapabilityItemSize.init();
-        CapabilityMetalItem.init();
 
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
     }

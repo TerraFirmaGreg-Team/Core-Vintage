@@ -5,9 +5,10 @@ import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.ISoilItem;
 import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariant;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 
 import lombok.Getter;
 

@@ -38,8 +38,13 @@ import net.minecraft.world.World;
 
 import gregtech.api.items.toolitem.ToolClasses;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 
@@ -159,7 +164,6 @@ public class BlockSnare extends BaseBlock implements ITileProvider {
         if (isCapturable(entityIn)) {
             var tile = TileUtils.getTile(worldIn, pos, TileSnare.class);
             EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
-            assert tile != null;
             if (tile.isOpen()) {
                 tile.setCapturedEntity(entityLiving);
                 entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);

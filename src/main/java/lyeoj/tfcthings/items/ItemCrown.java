@@ -1,5 +1,9 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.init.SoundEvents;
@@ -14,9 +18,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.damage.IDamageResistance;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ItemCrown extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
+public class ItemCrown extends ItemArmor implements ICapabilitySize, IDamageResistance, TFCThingsConfigurableItem {
 
     private final Gem gem;
 

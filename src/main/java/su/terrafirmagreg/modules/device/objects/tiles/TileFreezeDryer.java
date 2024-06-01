@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -36,14 +39,10 @@ import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import pieman.caffeineaddon.ModConfig;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
@@ -346,7 +345,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
         initialized = nbt.getBoolean("Initialized");
     }
 
-    public void readFromNBT(@NotNull NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
 
         temperature = nbt.getFloat("Temperature");
@@ -361,7 +360,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
         initialized = nbt.getBoolean("Initialized");
     }
 
-    public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
         NBTUtils.setGenericNBTValue(nbt, "Temperature", temperature);
@@ -388,7 +387,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, @NotNull SPacketUpdateTileEntity packet) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         readFromNBT(packet.getNbtCompound());
         readSyncData(packet.getNbtCompound());
     }
@@ -405,13 +404,13 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
     }
 
     @Override
-    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
         }
@@ -442,7 +441,7 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
-        IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+        ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
         if (sizeCap != null) {
             return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
         }
@@ -475,11 +474,11 @@ public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSi
             this.deserializeNBT(new NBTTagCompound());
         }
 
-        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
             return super.insertItem(slot, stack, simulate);
         }
 
-        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
             ItemStack stack = super.extractItem(slot, amount, simulate);
             CapabilityFood.removeTrait(stack, FoodTrait.PRESERVING);
             return stack;

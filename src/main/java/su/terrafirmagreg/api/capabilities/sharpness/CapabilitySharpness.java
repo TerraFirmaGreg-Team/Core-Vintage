@@ -13,9 +13,9 @@ public class CapabilitySharpness {
     public static final ResourceLocation KEY = ModUtils.resource("sharpness_capability");
 
     @CapabilityInject(ICapabilitySharpness.class)
-    public static Capability<ICapabilitySharpness> CAPABILITY;
+    public static final Capability<ICapabilitySharpness> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
+    public static void register() {
         CapabilityManager.INSTANCE.register(ICapabilitySharpness.class, new StorageSharpness(), ProviderSharpness::new);
 
     }

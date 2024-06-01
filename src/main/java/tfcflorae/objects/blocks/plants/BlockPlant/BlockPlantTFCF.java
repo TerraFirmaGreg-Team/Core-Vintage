@@ -1,5 +1,8 @@
 package tfcflorae.objects.blocks.plants.BlockPlant;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.Block;
@@ -27,9 +30,6 @@ import net.minecraftforge.common.ForgeHooks;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class BlockPlantTFCF extends BlockBush implements IItemSize {
+public class BlockPlantTFCF extends BlockBush implements ICapabilitySize {
 
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
     /*

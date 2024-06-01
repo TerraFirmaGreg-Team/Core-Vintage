@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
@@ -42,9 +45,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -430,7 +430,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimal, ILivestock
                 int hugeHeavyCount = 0;
                 for (int i = 2; i < this.horseChest.getSizeInventory(); ++i) {
                     ItemStack stack = this.horseChest.getStackInSlot(i);
-                    if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+                    if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
                         hugeHeavyCount++;
                         if (hugeHeavyCount >= 2) {
                             break;

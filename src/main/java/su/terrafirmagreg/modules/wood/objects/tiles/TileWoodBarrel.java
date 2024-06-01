@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -35,9 +38,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
 import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
@@ -310,7 +310,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     }
 
     @Override
-    public void readFromNBT(@NotNull NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
 
         tank.readFromNBT(nbt.getCompoundTag("tank"));
@@ -340,7 +340,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
 
     @Override
     @NotNull
-    public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         NBTUtils.setGenericNBTValue(nbt, "tank", tank.writeToNBT(new NBTTagCompound()));
         NBTUtils.setGenericNBTValue(nbt, "sealedTick", sealedTick);
         NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", sealedCalendarTick);
@@ -359,13 +359,13 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     }
 
     @Override
-    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
         }
@@ -378,7 +378,7 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     }
 
     @Override
-    public void onBreakBlock(@NotNull World world, @NotNull BlockPos pos, IBlockState state) {
+    public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
         ItemStack barrelStack = new ItemStack(state.getBlock());
 
         if (state.getValue(SEALED)) {
@@ -401,13 +401,13 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     }
 
     @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+    public boolean isItemValid(int slot, ItemStack stack) {
         switch (slot) {
             case SLOT_FLUID_CONTAINER_IN -> {
                 return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
             }
             case SLOT_ITEM -> {
-                IItemSize size = CapabilityItemSize.getIItemSize(stack);
+                ICapabilitySize size = CapabilitySize.getIItemSize(stack);
                 if (size != null) {
                     return size.getSize(stack).isSmallerThan(Size.HUGE);
                 }

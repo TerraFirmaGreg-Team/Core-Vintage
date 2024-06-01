@@ -1,5 +1,9 @@
 package tfcflorae.objects.items.tools;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,16 +21,13 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemShovelTFCF extends ItemSpade implements IItemSize {
+public class ItemShovelTFCF extends ItemSpade implements ICapabilitySize {
 
     public final ToolMaterial material;
 

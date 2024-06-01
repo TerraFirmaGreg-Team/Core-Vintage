@@ -1,5 +1,9 @@
 package tfcflorae.objects.items;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -7,15 +11,12 @@ import net.minecraft.nbt.NBTTagCompound;
 
 
 import net.dries007.tfc.api.capability.damage.IDamageResistance;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
 import tfcflorae.objects.ArmorMaterialsTFCF;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResistance {
+public class ItemArmorTFCF extends ItemArmor implements ICapabilitySize, IDamageResistance {
 
     public static final int DEFAULT_COLOR = 14277081; // Light Gray
     public static final int BURLAP_COLOR = 12497798;
@@ -67,8 +68,8 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
     }
 
     /**
-     * Determines if this armor will be rendered with the secondary 'overlay' texture. If this is true, the first texture will be rendered using a
-     * tint of the color specified by getColor(ItemStack)
+     * Determines if this armor will be rendered with the secondary 'overlay' texture. If this is true, the first texture will be rendered using a tint of the color specified by
+     * getColor(ItemStack)
      *
      * @param stack The stack
      * @return true/false

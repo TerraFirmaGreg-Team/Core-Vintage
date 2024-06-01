@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
@@ -17,9 +20,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -118,7 +118,7 @@ public class TEPlacedItem extends TEInventory {
     public boolean insertItem(EntityPlayer player, ItemStack stack, int slot) {
         // Try and insert an item
         // Check the size of item to determine if insertion is possible, or if it requires the large slot
-        IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+        ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
         Size size = Size.NORMAL;
         if (sizeCap != null) {
             size = sizeCap.getSize(stack);

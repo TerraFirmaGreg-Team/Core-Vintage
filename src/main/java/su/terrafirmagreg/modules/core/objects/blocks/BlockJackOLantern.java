@@ -20,8 +20,13 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 

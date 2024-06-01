@@ -37,8 +37,13 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
 

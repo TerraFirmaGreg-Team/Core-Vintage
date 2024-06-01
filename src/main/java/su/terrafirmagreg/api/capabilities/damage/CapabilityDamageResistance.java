@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.capabilities.damage;
 
 import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.ModuleCore;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -18,7 +19,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.Nullable;
@@ -28,27 +28,19 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 
 public final class CapabilityDamageResistance {
 
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ARMOR = new HashMap<>(); //Used inside CT, set custom IDamageResistance for armor items outside TFC
     public static final Map<String, Supplier<ICapabilityProvider>> ENTITY_RESISTANCE = new HashMap<>(); // Map entities -> Capability to damage resistance
 
     public static final ResourceLocation KEY = ModUtils.resource("damage_resistance_capability");
 
     @CapabilityInject(ICapabilityDamageResistance.class)
-    public static Capability<ICapabilityDamageResistance> CAPABILITY;
+    public static final Capability<ICapabilityDamageResistance> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
+    public static void register() {
         CapabilityManager.INSTANCE.register(ICapabilityDamageResistance.class, new StorageDamageResistance(), ProviderDamageResistance::new);
-    }
-
-    /**
-     * Output to log
-     */
-    public static void postInit() {
-        TerraFirmaCraft.getLog().info("Entity resistance data initialized, loaded a total of {} resistance configurations", ENTITY_RESISTANCE.size());
     }
 
     public static ICapabilityDamageResistance get(ItemStack itemStack) {
@@ -81,24 +73,24 @@ public final class CapabilityDamageResistance {
 
                 ENTITY_RESISTANCE.put(entityName, () -> resistance);
             } catch (JsonParseException e) {
-                TerraFirmaCraft.getLog().error("An entity resistance is specified incorrectly! Skipping.");
-                TerraFirmaCraft.getLog().error("Error: ", e);
+                ModuleCore.LOGGER.error("An entity resistance is specified incorrectly! Skipping.");
+                ModuleCore.LOGGER.error("Error: ", e);
             }
         }
     }
 
     @Nullable
     public static ICapabilityProvider getCustomDamageResistance(ItemStack stack) {
-        Set<IIngredient<ItemStack>> itemArmorSet = CUSTOM_ARMOR.keySet();
+        Set<IIngredient<ItemStack>> itemArmorSet = HandlerDamageResistance.CUSTOM_ARMOR.keySet();
         for (IIngredient<ItemStack> ingredient : itemArmorSet) {
             if (ingredient.testIgnoreCount(stack)) {
-                return CUSTOM_ARMOR.get(ingredient).get();
+                return HandlerDamageResistance.CUSTOM_ARMOR.get(ingredient).get();
             }
         }
         return null;
     }
 
-    @Mod.EventBusSubscriber(modid = MODID_TFC)
+    @Mod.EventBusSubscriber(modid = MOD_ID)
     public static final class EventHandler {
 
         @SubscribeEvent

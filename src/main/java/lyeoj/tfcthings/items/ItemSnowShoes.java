@@ -1,5 +1,9 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -14,15 +18,12 @@ import net.minecraft.world.World;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.damage.IDamageResistance;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.IArmorMaterialTFC;
 import net.dries007.tfc.objects.blocks.BlockSnowTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemSnowShoes extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
+public class ItemSnowShoes extends ItemArmor implements ICapabilitySize, IDamageResistance, TFCThingsConfigurableItem {
 
     private static final String STEPS_NBT_KEY = "Steps";
     private IArmorMaterialTFC materialTFC;

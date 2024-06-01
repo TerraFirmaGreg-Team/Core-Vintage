@@ -33,8 +33,13 @@ import net.minecraft.world.World;
 
 import gregtech.api.items.toolitem.ToolClasses;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
@@ -119,7 +124,6 @@ public class BlockBearTrap extends BaseBlock implements ITileProvider {
     @Override
     public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         var tile = TileUtils.getTile(world, pos, TileBearTrap.class);
-        assert tile != null;
         if (!tile.isOpen()) {
             if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
                 world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
@@ -188,7 +192,6 @@ public class BlockBearTrap extends BaseBlock implements ITileProvider {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)) {
             TileBearTrap trap = TileUtils.getTile(worldIn, pos, TileBearTrap.class);
-            assert trap != null;
             if (!trap.isOpen()) {
                 if (Math.random() < ConfigTFCThings.Items.BEAR_TRAP.breakChance) {
                     worldIn.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);

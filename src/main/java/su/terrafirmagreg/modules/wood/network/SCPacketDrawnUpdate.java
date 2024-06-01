@@ -38,7 +38,6 @@ public class SCPacketDrawnUpdate implements IMessage, IMessageHandler<SCPacketDr
     public IMessage onMessage(SCPacketDrawnUpdate message, MessageContext ctx) {
         Minecraft.getMinecraft().addScheduledTask(() -> {
             EntityWoodCart cart = (EntityWoodCart) Minecraft.getMinecraft().world.getEntityByID(message.cartId);
-            assert cart != null;
             if (message.pullingId < 0) {
                 cart.setPulling(null);
             } else {

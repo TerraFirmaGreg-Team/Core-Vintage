@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.capability.heat;
 
+import su.terrafirmagreg.api.lib.Unicode;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 
@@ -67,7 +69,7 @@ public enum Heat {
                 for (int i = 1; i <= 4; i++) {
                     if (temperature <= heat.getMin() + ((float) i * 0.2f) * (heat.getMax() - heat.getMin()))
                         continue;
-                    b.append("\u2605");
+                    b.append(Unicode.STAR);
                 }
             }
             return b.toString();

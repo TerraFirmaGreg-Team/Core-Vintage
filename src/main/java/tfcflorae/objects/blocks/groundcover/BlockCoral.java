@@ -1,5 +1,8 @@
 package tfcflorae.objects.blocks.groundcover;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.Block;
@@ -31,9 +34,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -46,7 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
+public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
     public static final Map<EnumDyeColor, BlockCoral> TUBE_CORAL = new HashMap<>();
     public static final Map<EnumDyeColor, BlockCoral> BRAIN_CORAL = new HashMap<>();

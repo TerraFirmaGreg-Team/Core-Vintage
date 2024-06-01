@@ -1,5 +1,10 @@
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.lib.Unicode;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -36,8 +41,6 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.render.animal.RenderAbstractHorseTFC;
@@ -130,10 +133,6 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
-
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -265,12 +264,16 @@ public class ClientEvents {
                 boolean chunkDataValid = data != null && data.isInitialized();
 
                 if (chunkDataValid) {
-                    list.add(String.format("%sRegion: %s%.1f\u00b0C%s Avg: %s%.1f\u00b0C%s Min: %s%.1f\u00b0C%s Max: %s%.1f\u00b0C",
+                    list.add(String.format(
+                            "%sRegion: %s%.1f" + Unicode.DEGREE + "C%s" +
+                                    " Avg: %s%.1f" + Unicode.DEGREE + "C%s" +
+                                    " Min: %s%.1f" + Unicode.DEGREE + "C%s" +
+                                    " Max: %s%.1f" + Unicode.DEGREE + "C",
                             GRAY, WHITE, data.getRegionalTemp(), GRAY,
                             WHITE, data.getAverageTemp(), GRAY,
                             WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(), blockpos.getZ()), GRAY,
                             WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockpos.getZ())));
-                    list.add(String.format("%sTemperature: %s%.1f\u00b0C Daily: %s%.1f\u00b0C",
+                    list.add(String.format("%sTemperature: %s%.1f" + Unicode.DEGREE + "C Daily: %s%.1f" + Unicode.DEGREE + "C",
                             GRAY, WHITE, ClimateTFC.getMonthlyTemp(blockpos),
                             WHITE, ClimateTFC.getActualTemp(blockpos)));
                     list.add(GRAY + "Rainfall: " + WHITE + data.getRainfall());
@@ -309,7 +312,7 @@ public class ClientEvents {
         List<String> tt = event.getToolTip();
         if (!stack.isEmpty()) {
             // Stuff that should always be shown as part of the tooltip
-            IItemSize size = CapabilityItemSize.getIItemSize(stack);
+            ICapabilitySize size = CapabilitySize.getIItemSize(stack);
             if (size != null) {
                 size.addSizeInfo(stack, tt);
             }

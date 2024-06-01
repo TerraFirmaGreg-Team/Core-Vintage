@@ -23,8 +23,13 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.ArmorMaterialTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;

@@ -1,5 +1,8 @@
 package tfcflorae.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.BlockRotatedPillar;
@@ -15,14 +18,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-public class BlockBale extends BlockRotatedPillar implements IItemSize {
+public class BlockBale extends BlockRotatedPillar implements ICapabilitySize {
 
     public BlockBale() {
         super(new Material(MapColor.FOLIAGE));

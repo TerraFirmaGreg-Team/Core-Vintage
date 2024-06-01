@@ -1,4 +1,6 @@
-package su.terrafirmagreg.api.capabilities.heat;
+package su.terrafirmagreg.api.capabilities.heat.spi;
+
+import su.terrafirmagreg.api.lib.Unicode;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
@@ -71,7 +73,7 @@ public enum Heat {
                 for (int i = 1; i <= 4; i++) {
                     if (temperature <= heat.getMin() + ((float) i * 0.2f) * (heat.getMax() - heat.getMin()))
                         continue;
-                    b.append("\u2605");
+                    b.append(Unicode.STAR);
                 }
             }
             return b.toString();

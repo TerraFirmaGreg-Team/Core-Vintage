@@ -1,5 +1,8 @@
 package tfcflorae.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
@@ -25,9 +28,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Metal.ItemType;
@@ -42,7 +42,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class BlockUrnLoot extends Block implements IItemSize {
+public class BlockUrnLoot extends Block implements ICapabilitySize {
 
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1D, 0.875D);
 

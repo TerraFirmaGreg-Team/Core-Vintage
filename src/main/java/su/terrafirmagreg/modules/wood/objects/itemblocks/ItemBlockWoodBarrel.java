@@ -145,7 +145,6 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvi
                 }
             }
 
-            assert stack.getTagCompound() != null;
             String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound().getLong("sealedCalendarTick"),
                     CalendarTFC.CALENDAR_TIME.getDaysInMonth());
             tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("top.tfc.barrel.sealed", formattedDate).getFormattedText());

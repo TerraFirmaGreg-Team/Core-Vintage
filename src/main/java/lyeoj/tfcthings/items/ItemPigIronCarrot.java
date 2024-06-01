@@ -14,8 +14,13 @@ import net.minecraft.util.SoundCategory;
 import lyeoj.tfcthings.entity.living.EntityPigvil;
 import lyeoj.tfcthings.init.TFCThingsBlocks;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+
+
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemTFC;

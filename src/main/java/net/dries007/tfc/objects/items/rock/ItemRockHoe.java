@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.items.rock;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -15,9 +19,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
@@ -32,7 +33,7 @@ import java.util.Map;
 
 @MethodsReturnNonnullByDefault
 
-public class ItemRockHoe extends ItemHoe implements IItemSize, IRockObject {
+public class ItemRockHoe extends ItemHoe implements ICapabilitySize, IRockObject {
 
     private static final Map<RockCategory, ItemRockHoe> MAP = new HashMap<>();
     public final RockCategory category;

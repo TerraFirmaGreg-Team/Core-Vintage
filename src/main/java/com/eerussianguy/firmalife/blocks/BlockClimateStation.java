@@ -1,5 +1,9 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -21,9 +25,6 @@ import net.minecraft.world.World;
 import com.eerussianguy.firmalife.te.TEClimateStation;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ import static com.eerussianguy.firmalife.init.StatePropertiesFL.STASIS;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 @MethodsReturnNonnullByDefault
-public class BlockClimateStation extends Block implements IItemSize, IHighlightHandler {
+public class BlockClimateStation extends Block implements ICapabilitySize, IHighlightHandler {
 
     public final int tier;
 

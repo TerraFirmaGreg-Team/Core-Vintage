@@ -17,6 +17,8 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
+import org.jetbrains.annotations.NotNull;
+
 import lombok.experimental.UtilityClass;
 
 import java.util.HashMap;
@@ -68,6 +70,7 @@ public final class ModUtils {
      * @return null, but not null
      * @CapabilityInject etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
      */
+    @NotNull
     @SuppressWarnings("ConstantConditions")
     public static <T> T getNull() {
         return null;

@@ -47,7 +47,6 @@ public class ItemDebug extends BaseItem {
         ItemStack stack = player.getHeldItemMainhand();
         NBTTagCompound nbt = stack.getTagCompound();
         if (nbt == null) NBTUtils.resetNBT(stack);
-        assert nbt != null;
         int mode = nbt.getInteger("mode");
         int newMode = (mode > 4) ? 0 : mode + 1;
         NBTUtils.setGenericNBTValue(nbt, "mode", newMode);

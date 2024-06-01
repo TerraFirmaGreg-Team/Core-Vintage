@@ -3,9 +3,9 @@ package su.terrafirmagreg.modules.animal.init;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.animal.objects.items.ItemAnimalMisc;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 public final class ItemsAnimal {
 

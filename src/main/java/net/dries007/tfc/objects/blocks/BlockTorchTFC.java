@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 
@@ -25,9 +28,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -38,7 +38,7 @@ import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
-public class BlockTorchTFC extends BlockTorch implements IItemSize {
+public class BlockTorchTFC extends BlockTorch implements ICapabilitySize {
 
     public BlockTorchTFC() {
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));

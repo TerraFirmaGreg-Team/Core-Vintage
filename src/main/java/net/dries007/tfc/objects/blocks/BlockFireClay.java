@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -8,16 +12,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.items.ItemsTFC;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class BlockFireClay extends Block implements IItemSize {
+public class BlockFireClay extends Block implements ICapabilitySize {
 
     public BlockFireClay() {
         super(Material.CLAY);

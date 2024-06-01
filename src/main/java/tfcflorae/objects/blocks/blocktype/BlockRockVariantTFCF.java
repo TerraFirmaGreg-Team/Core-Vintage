@@ -1,5 +1,9 @@
 package tfcflorae.objects.blocks.blocktype;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -18,9 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
@@ -51,7 +52,7 @@ import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 @MethodsReturnNonnullByDefault
 
-public class BlockRockVariantTFCF extends Block implements IItemSize {
+public class BlockRockVariantTFCF extends Block implements ICapabilitySize {
 
     private static final Map<RockTFCF, BlockRockVariantTFCF> TABLETFCF = new HashMap<>();
     private static final Map<Rock, EnumMap<RockTFCF, BlockRockVariantTFCF>> TABLE = new HashMap<>();

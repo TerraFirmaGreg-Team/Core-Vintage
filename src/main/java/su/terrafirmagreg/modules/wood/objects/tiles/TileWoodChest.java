@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodChest;
@@ -30,8 +32,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -172,7 +172,7 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback, ICo
     @Override
     public boolean isItemValidForSlot(int index, @NotNull ItemStack stack) {
         // Blocks input from hopper
-        var cap = CapabilityItemSize.getIItemSize(stack);
+        var cap = CapabilitySize.getIItemSize(stack);
         if (cap != null) {
             return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
         }

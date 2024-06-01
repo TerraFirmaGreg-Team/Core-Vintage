@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.block.Block;
@@ -22,8 +24,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;

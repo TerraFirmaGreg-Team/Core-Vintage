@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -42,12 +45,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -59,7 +58,6 @@ import java.util.function.BiConsumer;
 
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
-@MethodsReturnNonnullByDefault
 public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock, IRidable {
 
     //Values that has a visual effect on client
@@ -257,7 +255,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
                 int hugeHeavyCount = 0;
                 for (int i = 2; i < this.horseChest.getSizeInventory(); ++i) {
                     ItemStack stack = this.horseChest.getStackInSlot(i);
-                    if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+                    if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
                         hugeHeavyCount++;
                         if (hugeHeavyCount >= 2) {
                             break;

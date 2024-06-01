@@ -3,7 +3,6 @@ package su.terrafirmagreg.api.capabilities.metal;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -34,16 +33,10 @@ public final class CapabilityMetal {
     public static final Map<String, Metal.ItemType> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
 
     @CapabilityInject(ICapabilityMetal.class)
-    public static Capability<ICapabilityMetal> CAPABILITY;
+    public static final Capability<ICapabilityMetal> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
+    public static void register() {
         CapabilityManager.INSTANCE.register(ICapabilityMetal.class, new StorageMetal(), ProviderMetal::new);
-
-    }
-
-    public static void init() {
-        CUSTOM_METAL_ITEMS.put(IIngredient.of(Blocks.IRON_BARS), () -> new ProviderMetal(Metal.WROUGHT_IRON, 25, true));
-
     }
 
     public static ICapabilityMetal get(ItemStack itemStack) {

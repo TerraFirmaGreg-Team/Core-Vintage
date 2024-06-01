@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.lib.MCColor;
+import su.terrafirmagreg.api.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;
@@ -93,11 +94,11 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
 
             if (ModConfig.isDebugging) {
                 infoText.add("---Debug---");
-                infoText.add("Pump Temperature: " + String.format("%.2f", tile.getTemperature()) + "\u2103");
+                infoText.add("Pump Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
                 infoText.add("Internal Pressure: " + String.format("%.2f", tile.getPressure()));
-                infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature()) + "\u2103");
+                infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature()) + Unicode.CELSIUS);
                 infoText.add("External Pressure: " + String.format("%.2f", tile.getLocalPressure()));
-                infoText.add("Temperature Delta: " + String.format("%.2f", (tile.getTemperature() - tile.getLocalTemperature())) + "\u2103");
+                infoText.add("Temperature Delta: " + String.format("%.2f", (tile.getTemperature() - tile.getLocalTemperature())) + Unicode.CELSIUS);
                 infoText.add("Pressure Delta: " + String.format("%.2f", (tile.getPressure() - tile.getLocalPressure())));
                 infoText.add("Coolant: " + String.format("%.2f", tile.getCoolant()));
                 infoText.add("Progress: " + (tile.getSealedFor() / ModConfig.sealedDuration) * 100 + "%");
@@ -116,12 +117,12 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
                 infoText.add("Heat Per Power: " + ModConfig.heatPerPower);
                 infoText.add("Change in Pressure: " + ModConfig.pressureChange);
                 infoText.add("Dissipation: " + ModConfig.temperatureDissipation);
-                infoText.add("Temperature Max: " + ModConfig.maxTemp + "\u2103");
+                infoText.add("Temperature Max: " + ModConfig.maxTemp + Unicode.CELSIUS);
                 infoText.add("Coolant Max: " + ModConfig.coolantMax);
                 infoText.add("Initialized: " + tile.initialized);
             } else {
                 infoText.add("---Info---");
-                infoText.add("Temperature: " + String.format("%.2f", tile.getTemperature()) + "\u2103");
+                infoText.add("Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
                 infoText.add("Pressure: " + String.format("%.2f", tile.getPressure()));
                 infoText.add("Coolant: " + String.format("%.2f", tile.getCoolant()));
                 infoText.add("Progress: " + (tile.getSealedFor() / ModConfig.sealedDuration) * 100 + "%");
@@ -182,11 +183,11 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
         if (mouseX >= guiLeft + 133 && mouseX <= guiLeft + 137 && mouseY >= guiTop + 18 && mouseY <= guiTop + 69) {
 
             if (ModConfig.isDebugging) {
-                infoText.add("Heat: " + String.format("%.5f", tile.getTemperature()) + "\u2103");
-                infoText.add("External Temperature: " + String.format("%.5f", tile.getLocalTemperature()) + "\u2103");
+                infoText.add("Heat: " + String.format("%.5f", tile.getTemperature()) + Unicode.CELSIUS);
+                infoText.add("External Temperature: " + String.format("%.5f", tile.getLocalTemperature()) + Unicode.CELSIUS);
             } else {
-                infoText.add("Heat: " + String.format("%.2f", tile.getTemperature()) + "\u2103");
-                infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature()) + "\u2103");
+                infoText.add("Heat: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
+                infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature()) + Unicode.CELSIUS);
             }
 
             this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);

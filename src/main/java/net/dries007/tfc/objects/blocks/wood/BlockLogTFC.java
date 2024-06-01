@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 
@@ -28,9 +31,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -50,7 +50,7 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 
-public class BlockLogTFC extends BlockLog implements IItemSize {
+public class BlockLogTFC extends BlockLog implements ICapabilitySize {
 
     public static final PropertyBool PLACED = PropertyBool.create("placed");
     public static final PropertyBool SMALL = PropertyBool.create("small");

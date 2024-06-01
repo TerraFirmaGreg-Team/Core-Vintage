@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileIceBunker;
 
@@ -60,7 +61,7 @@ public class GuiIceBunker extends GuiContainerTE<TileIceBunker> {
                 if (temperature < 0) {
                     infoText.add("Temperature: below zero");
                 } else {
-                    infoText.add("Temperature: " + String.format("%.2f", temperature) + "\u2103");
+                    infoText.add("Temperature: " + String.format("%.2f", temperature) + Unicode.CELSIUS);
                 }
                 infoText.add("Coolant: " + coolant + " units");
             }

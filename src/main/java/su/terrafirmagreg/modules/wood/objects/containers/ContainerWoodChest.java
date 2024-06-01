@@ -1,5 +1,9 @@
 package su.terrafirmagreg.modules.wood.objects.containers;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -7,12 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.container.ContainerTE;
-
-import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
@@ -50,8 +49,7 @@ public class ContainerWoodChest extends Container {
      * Copied from {@link ContainerTE}
      */
     @Override
-    @NotNull
-    public ItemStack transferStackInSlot(@NotNull EntityPlayer player, int index) {
+    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
         // Slot that was clicked
         Slot slot = inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
@@ -88,13 +86,13 @@ public class ContainerWoodChest extends Container {
      * Called when the container is closed.
      */
     @Override
-    public void onContainerClosed(@NotNull EntityPlayer playerIn) {
+    public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
         this.lowerChestInventory.closeInventory(playerIn);
     }
 
     @Override
-    public boolean canInteractWith(@NotNull EntityPlayer playerIn) {
+    public boolean canInteractWith(EntityPlayer playerIn) {
         return this.lowerChestInventory.isUsableByPlayer(playerIn);
     }
 
@@ -105,8 +103,8 @@ public class ContainerWoodChest extends Container {
         }
 
         @Override
-        public boolean isItemValid(@NotNull ItemStack stack) {
-            IItemSize cap = CapabilityItemSize.getIItemSize(stack);
+        public boolean isItemValid(ItemStack stack) {
+            ICapabilitySize cap = CapabilitySize.getIItemSize(stack);
             if (cap != null) {
                 return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
             }

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.capabilities.size;
+package su.terrafirmagreg.api.capabilities.size.spi;
 
 import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 

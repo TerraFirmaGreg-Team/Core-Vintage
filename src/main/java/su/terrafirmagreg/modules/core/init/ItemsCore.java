@@ -4,9 +4,9 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.core.objects.items.ItemCoreMisc;
 import su.terrafirmagreg.modules.core.objects.items.ItemDebug;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 public final class ItemsCore {
 

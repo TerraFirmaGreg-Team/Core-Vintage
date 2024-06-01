@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
+import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -46,9 +49,6 @@ import net.minecraft.world.biome.Biome;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -74,8 +74,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
     private static final DataParameter<Boolean> FERTILIZED = EntityDataManager.createKey(EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HALTER = EntityDataManager.createKey(EntityAnimalDonkey.class, DataSerializers.BOOLEAN);
     // The time(in days) this entity became pregnant
-    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalDonkey.class,
-            TFCEntities.getLongDataSerializer());
+    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalDonkey.class, TFCEntities.getLongDataSerializer());
     private long lastFed; //Last time(in days) this entity was fed
     private long lastFDecay; //Last time(in days) this entity's familiarity had decayed
     private long matingTime; //The last time(in ticks) this male tried fertilizing females
@@ -429,7 +428,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
                 int hugeHeavyCount = 0;
                 for (int i = 2; i < this.horseChest.getSizeInventory(); ++i) {
                     ItemStack stack = this.horseChest.getStackInSlot(i);
-                    if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+                    if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
                         hugeHeavyCount++;
                         if (hugeHeavyCount >= 2) {
                             break;
@@ -557,7 +556,6 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
             }
             world.spawnEntity(animal);
         }
-        geneJump = 0;
         geneSpeed = 0;
         geneJump = 0;
         birthMule = false;

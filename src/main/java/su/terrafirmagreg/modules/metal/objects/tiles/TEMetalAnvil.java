@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -29,7 +30,6 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCSounds;
@@ -214,7 +214,7 @@ public class TEMetalAnvil extends BaseTileInventory {
                     inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
 
                     // Add Skill
-                    SmithingSkill skill = CapabilityPlayerData.getSkill(player, SkillType.SMITHING);
+                    SmithingSkill skill = CapabilitySkill.getSkill(player, SkillType.SMITHING);
                     if (skill != null && completedRecipe.getSkillBonusType() != null) {
                         skill.addSkill(completedRecipe.getSkillBonusType(), 1);
                     }

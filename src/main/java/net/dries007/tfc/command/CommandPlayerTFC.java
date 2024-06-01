@@ -1,5 +1,7 @@
 package net.dries007.tfc.command;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -17,7 +19,6 @@ import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.api.capability.food.NutritionStats;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
@@ -143,7 +144,7 @@ public class CommandPlayerTFC extends CommandBase {
         if (inputSkill == null) {
             throw new WrongUsageException("tfc.command.playertfc.usage_unknown_skill", args[2]);
         }
-        Skill skill = CapabilityPlayerData.getSkill(player, inputSkill);
+        Skill skill = CapabilitySkill.getSkill(player, inputSkill);
         if (skill != null) {
             if (executeType == ExecuteType.GET) {
                 sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_skill", inputSkill.getName(), skill.getTotalLevel(),

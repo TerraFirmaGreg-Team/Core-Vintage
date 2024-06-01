@@ -3,6 +3,7 @@ package com.eerussianguy.firmalife.blocks;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -28,7 +29,6 @@ import com.eerussianguy.firmalife.te.TEStemCrop;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -141,7 +141,7 @@ public class BlockStemFruit extends BlockDirectional implements ICapabilitySize 
                         int cropStage = cropState.getValue(crop.getStageProperty());
                         if (cropStage == crop.getCrop().getMaxStage()) {
                             world.setBlockState(cropPos, cropState.withProperty(crop.getStageProperty(), cropStage - 3));
-                            SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
+                            SimpleSkill skill = CapabilitySkill.getSkill(player, SkillType.AGRICULTURE);
                             ItemStack seedDrop = new ItemStack(ItemSeedsTFC.get(crop.getCrop()), 0);
                             if (skill != null) {
                                 seedDrop.setCount(Crop.getSkillSeedBonus(skill, RANDOM));

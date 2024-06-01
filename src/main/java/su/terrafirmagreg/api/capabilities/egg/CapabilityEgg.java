@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-public class CapabilityEgg {
+public final class CapabilityEgg {
 
     public static final ResourceLocation KEY = ModUtils.resource("egg_capability");
     @CapabilityInject(ICapabilityEgg.class)

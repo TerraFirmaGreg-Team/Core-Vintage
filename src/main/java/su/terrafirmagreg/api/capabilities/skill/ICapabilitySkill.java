@@ -1,10 +1,11 @@
-package net.dries007.tfc.api.capability.player;
+package su.terrafirmagreg.api.capabilities.skill;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -21,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see SkillType
  */
-public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
+public interface ICapabilitySkill extends ICapabilitySerializable<NBTTagCompound> {
 
     @Nullable
     <S extends Skill> S getSkill(SkillType<S> skillType);
@@ -50,7 +51,7 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
      *
      * @param chiselMode enum value for the new chiseling mode
      */
-    void setChiselMode(@NotNull ChiselRecipe.Mode chiselMode);
+    void setChiselMode(ChiselRecipe.Mode chiselMode);
 
     /**
      * Makes the player intoxicated
@@ -65,14 +66,24 @@ public interface IPlayerData extends INBTSerializable<NBTTagCompound> {
     long getIntoxicatedTime();
 
     /**
-     * If the player has been given the guide book
+     * Sets the time the player last hit a nut tree to current time
      */
-    boolean hasBook();
+    void setNuttedTime();
 
     /**
-     * Sets if the player has been given the guide book
+     * Retrieves the time the player last hit a nut tree
      */
-    void setHasBook(boolean value);
+    long getNuttedTime();
+
+    /**
+     * @param pos The block position of the last hammering
+     */
+    void setNutPosition(BlockPos pos);
+
+    /**
+     * @return Distance in blocks of how far the last hammering was.
+     */
+    int getNutDistance(BlockPos pos);
 
     default void updateAndSync() {
         EntityPlayer player = getPlayer();

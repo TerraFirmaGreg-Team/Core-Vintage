@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks.wood;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 
@@ -29,8 +30,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -179,7 +178,7 @@ public class BlockLogTFC extends BlockLog implements ICapabilitySize {
     @Override
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         ItemStack stack = ItemStack.EMPTY;
-        IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+        var cap = CapabilitySkill.get(player);
         if (cap != null) {
             stack = cap.getHarvestingTool();
         }

@@ -1,5 +1,8 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -37,14 +40,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.items.toolitem.ToolClasses;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -246,7 +241,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     @Override // TODO DT
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         ItemStack stack = ItemStack.EMPTY;
-        IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+        var cap = CapabilitySkill.get(player);
         if (cap != null) {
             stack = cap.getHarvestingTool();
         }

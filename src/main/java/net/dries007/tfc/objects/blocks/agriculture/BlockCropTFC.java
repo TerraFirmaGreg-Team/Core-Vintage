@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -25,7 +26,6 @@ import net.minecraftforge.common.EnumPlantType;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
@@ -173,7 +173,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
         // if player and skills are present, update skills and increase amounts of items depending on skill
         if (player != null) {
-            SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
+            SimpleSkill skill = CapabilitySkill.getSkill(player, SkillType.AGRICULTURE);
 
             if (skill != null) {
                 if (!foodStack.isEmpty()) {

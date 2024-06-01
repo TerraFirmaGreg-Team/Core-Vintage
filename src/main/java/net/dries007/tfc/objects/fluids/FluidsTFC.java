@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.fluids;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
@@ -20,8 +21,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
@@ -258,11 +257,11 @@ public final class FluidsTFC {
         });
 
         DrinkableProperty alcoholProperty = player -> {
-            IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-            if (player.getFoodStats() instanceof FoodStatsTFC && playerData != null) {
+            var cap = CapabilitySkill.get(player);
+            if (player.getFoodStats() instanceof FoodStatsTFC && cap != null) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
-                playerData.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);
-                if (playerData.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && MathConstants.RNG.nextFloat() < 0.5f) {
+                cap.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);
+                if (cap.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && MathConstants.RNG.nextFloat() < 0.5f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1200, 1));
                 }
 

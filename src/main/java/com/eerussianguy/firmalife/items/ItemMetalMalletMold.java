@@ -68,8 +68,9 @@ public class ItemMetalMalletMold extends ItemPottery {
         public FilledMoldCapability(@Nullable NBTTagCompound nbt) {
             tank = new FluidTank(100);
 
-            if (nbt != null)
+            if (nbt != null) {
                 deserializeNBT(nbt);
+            }
         }
 
         @Nullable

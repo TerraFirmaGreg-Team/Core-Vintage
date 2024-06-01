@@ -1,4 +1,6 @@
-package net.dries007.tfc.api.capability.player;
+package su.terrafirmagreg.api.capabilities.skill;
+
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -7,23 +9,28 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 
-import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+public final class CapabilitySkill {
 
-public final class CapabilityPlayerData {
+    public static final ResourceLocation KEY = ModUtils.resource("skill_capability");
 
-    public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "player_skills");
-    @CapabilityInject(IPlayerData.class)
-    public static Capability<IPlayerData> CAPABILITY;
+    @CapabilityInject(ICapabilitySkill.class)
+    public static final Capability<ICapabilitySkill> CAPABILITY = ModUtils.getNull();
 
-    public static void preInit() {
-        // Player skills
-        CapabilityManager.INSTANCE.register(IPlayerData.class, new DumbStorage<>(), () -> null);
+    public static void register() {
+        CapabilityManager.INSTANCE.register(ICapabilitySkill.class, new StorageSkill(), ProviderSkill::new);
+    }
+
+    public static ICapabilitySkill get(EntityPlayer player) {
+        return player.getCapability(CAPABILITY, null);
+    }
+
+    public static boolean has(EntityPlayer player) {
+        return player.hasCapability(CAPABILITY, null);
     }
 
     /**
@@ -35,7 +42,7 @@ public final class CapabilityPlayerData {
      */
     @Nullable
     public static <S extends Skill> S getSkill(EntityPlayer player, SkillType<S> skillType) {
-        IPlayerData skills = player.getCapability(CAPABILITY, null);
+        ICapabilitySkill skills = CapabilitySkill.get(player);
         if (skills != null) {
             return skills.getSkill(skillType);
         }

@@ -1,6 +1,5 @@
 package net.dries007.tfc.api.capability.food;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -25,7 +24,7 @@ import java.util.function.Supplier;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
-public class CapabilityFood {
+public final class CapabilityFood {
 
     public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "food");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
@@ -40,14 +39,6 @@ public class CapabilityFood {
     public static void preInit() {
 
         CapabilityManager.INSTANCE.register(IFood.class, new DumbStorage<>(), FoodHandler::new);
-    }
-
-    public static void init() {
-        // Add custom vanilla food instances
-        CUSTOM_FOODS.put(IIngredient.of(Items.ROTTEN_FLESH), () -> new FoodHandler(null, FoodData.ROTTEN_FLESH));
-        CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_APPLE), () -> new FoodHandler(null, FoodData.GOLDEN_APPLE));
-        CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_CARROT), () -> new FoodHandler(null, FoodData.GOLDEN_CARROT));
-        CUSTOM_FOODS.put(IIngredient.of(Items.EGG), () -> new FoodHandler(null, FoodData.RAW_EGG));
     }
 
     /**

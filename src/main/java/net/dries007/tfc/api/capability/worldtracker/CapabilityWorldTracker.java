@@ -11,7 +11,7 @@ import net.dries007.tfc.util.Helpers;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
-public class CapabilityWorldTracker {
+public final class CapabilityWorldTracker {
 
     public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "world_tracker");
     @CapabilityInject(WorldTracker.class)

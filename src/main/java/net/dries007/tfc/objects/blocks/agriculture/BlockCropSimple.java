@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -62,7 +63,7 @@ public abstract class BlockCropSimple extends BlockCropTFC {
             ItemStack foodDrop = getCrop().getFoodDrop(state.getValue(getStageProperty()));
             if (!foodDrop.isEmpty()) {
                 ItemStack seedDrop = new ItemStack(ItemSeedsTFC.get(getCrop()), 0);
-                SimpleSkill skill = CapabilityPlayerData.getSkill(playerIn, SkillType.AGRICULTURE);
+                SimpleSkill skill = CapabilitySkill.getSkill(playerIn, SkillType.AGRICULTURE);
 
                 if (skill != null) {
                     foodDrop.setCount(1 + Crop.getSkillFoodBonus(skill, RANDOM));

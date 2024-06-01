@@ -1,5 +1,6 @@
 package BananaFructa.tfcfarming.network;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,8 +14,6 @@ import BananaFructa.tfcfarming.NutrientValues;
 import BananaFructa.tfcfarming.TFCFarming;
 import BananaFructa.tfcfarming.firmalife.TEHangingPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEPlanterN;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillTier;
 import net.dries007.tfc.util.skills.SkillType;
@@ -25,9 +24,9 @@ public class CPacketRequestNutrientDataHandler implements IMessageHandler<CPacke
     public IMessage onMessage(CPacketRequestNutrientData message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         // Request protection
-        IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-        Skill skill = playerData.getSkill(SkillType.AGRICULTURE);
-        // TODO:                                                                                                     V config
+        var cap = CapabilitySkill.get(player);
+        Skill skill = cap.getSkill(SkillType.AGRICULTURE);
+        // TODO: V config
         if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier()
                 .isAtLeast(SkillTier.ADEPT) || player.capabilities.isCreativeMode)) {
             if (message.y == -1) {

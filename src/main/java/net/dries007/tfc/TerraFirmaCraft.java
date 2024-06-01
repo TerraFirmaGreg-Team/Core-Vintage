@@ -26,7 +26,6 @@ import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -146,7 +145,6 @@ public final class TerraFirmaCraft {
         CapabilityItemHeat.preInit();
         CapabilityForgeable.preInit();
         CapabilityFood.preInit();
-        CapabilityPlayerData.preInit();
         CapabilityDamageResistance.preInit();
         CapabilityMetalItem.preInit();
         CapabilityWorldTracker.preInit();
@@ -160,7 +158,6 @@ public final class TerraFirmaCraft {
     public void init(FMLInitializationEvent event) {
 
         ItemsTFC.init();
-        CapabilityFood.init();
 
         if (event.getSide().isClient()) {
             TFCKeybindings.init();

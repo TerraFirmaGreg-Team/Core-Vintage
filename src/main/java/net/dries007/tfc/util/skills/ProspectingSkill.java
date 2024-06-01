@@ -1,10 +1,10 @@
 package net.dries007.tfc.util.skills;
 
+import su.terrafirmagreg.api.capabilities.skill.ICapabilitySkill;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
-
-import net.dries007.tfc.api.capability.player.IPlayerData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +18,7 @@ public class ProspectingSkill extends Skill {
     private final Set<BlockPos> foundPositions;
     private int level;
 
-    public ProspectingSkill(IPlayerData rootSkills) {
+    public ProspectingSkill(ICapabilitySkill rootSkills) {
         super(rootSkills);
         this.foundPositions = new HashSet<>(40);
     }

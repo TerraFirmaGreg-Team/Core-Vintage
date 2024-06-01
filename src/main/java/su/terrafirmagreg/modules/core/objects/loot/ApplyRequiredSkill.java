@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.loot;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.Entity;
@@ -15,8 +16,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillTier;
 import net.dries007.tfc.util.skills.SkillType;
@@ -44,10 +43,10 @@ public class ApplyRequiredSkill extends LootFunction {
     public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
         Entity entity = context.getKillerPlayer();
         if (entity instanceof EntityPlayer) {
-            IPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
-            if (skills != null) {
+            var cap = CapabilitySkill.get((EntityPlayer) entity);
+            if (cap != null) {
                 stack.setCount(0);
-                SimpleSkill skill = skills.getSkill(this.skillType);
+                SimpleSkill skill = cap.getSkill(this.skillType);
                 if (skill != null && skill.getTier().isAtLeast(tier)) {
                     //[0..1] + [0..1] > .5 for 50 rarity. Since Adept = .25, setting rarity to 75 means
                     // a 50% chance of drop at ADEPT, and 100% at MASTER

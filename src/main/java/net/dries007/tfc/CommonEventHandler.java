@@ -7,6 +7,8 @@ import su.terrafirmagreg.api.capabilities.sharpness.ProviderSharpness;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.skill.ProviderSkill;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -112,9 +114,6 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.capability.player.PlayerDataHandler;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Metal;
@@ -234,7 +233,7 @@ public final class CommonEventHandler {
         final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
 
         if (player != null) {
-            IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+            var cap = CapabilitySkill.get(player);
             if (cap != null) {
                 cap.setHarvestingTool(player.getHeldItemMainhand());
             }
@@ -276,7 +275,7 @@ public final class CommonEventHandler {
         // Apply durability modifier on tools
         if (player != null) {
             ItemStack tool = ItemStack.EMPTY;
-            IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+            var cap = CapabilitySkill.get(player);
             if (cap != null) {
                 tool = cap.getHarvestingTool();
             }
@@ -496,16 +495,6 @@ public final class CommonEventHandler {
         }
     }
 
-    @SubscribeEvent
-    public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof EntityPlayer player) {
-            // Player skills
-            if (!player.hasCapability(CapabilityPlayerData.CAPABILITY, null)) {
-                event.addCapability(CapabilityPlayerData.KEY, new PlayerDataHandler(player));
-            }
-        }
-    }
-
     /**
      * Fired on server only when a player logs in
      *
@@ -533,11 +522,11 @@ public final class CommonEventHandler {
             }
 
             // layer Data
-            IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-            if (playerData != null) {
+            var cap = CapabilitySkill.get(player);
+            if (cap != null) {
 
                 // Sync
-                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
+                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
         }
     }
@@ -587,7 +576,7 @@ public final class CommonEventHandler {
             // =========================================
 
             // Skills / Player data
-            IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+            var cap = CapabilitySkill.get(player);
             if (cap != null) {
                 TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
@@ -604,8 +593,9 @@ public final class CommonEventHandler {
         if (event.getEntityPlayer() instanceof EntityPlayerMP player) {
 
             // Skills
-            IPlayerData newSkills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-            IPlayerData originalSkills = event.getOriginal().getCapability(CapabilityPlayerData.CAPABILITY, null);
+
+            var newSkills = CapabilitySkill.get(player);
+            var originalSkills = CapabilitySkill.get(event.getOriginal());
             if (newSkills != null && originalSkills != null) {
                 newSkills.deserializeNBT(originalSkills.serializeNBT());
                 // To properly sync, we need to use PlayerRespawnEvent
@@ -626,9 +616,9 @@ public final class CommonEventHandler {
             FoodStatsTFC.replaceFoodStats(player);
 
             // Skills
-            IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-            if (skills != null) {
-                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
+            var cap = CapabilitySkill.get(player);
+            if (cap != null) {
+                TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
         }
     }
@@ -1049,11 +1039,11 @@ public final class CommonEventHandler {
 
     @SubscribeEvent
     public static void onServerChatEvent(ServerChatEvent event) {
-        IPlayerData cap = event.getPlayer().getCapability(CapabilityPlayerData.CAPABILITY, null);
+        var cap = CapabilitySkill.get(event.getPlayer());
         if (cap != null) {
             long intoxicatedTicks = cap.getIntoxicatedTime() - 6 * ICalendar.TICKS_IN_HOUR; // Only apply intoxication after 6 hr
             if (intoxicatedTicks > 0) {
-                float drunkChance = MathHelper.clamp((float) intoxicatedTicks / PlayerDataHandler.MAX_INTOXICATED_TICKS, 0, 0.7f);
+                float drunkChance = MathHelper.clamp((float) intoxicatedTicks / ProviderSkill.MAX_INTOXICATED_TICKS, 0, 0.7f);
                 String originalMessage = event.getMessage();
                 String[] words = originalMessage.split(" ");
                 for (int i = 0; i < words.length; i++) {

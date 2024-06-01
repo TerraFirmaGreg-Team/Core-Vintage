@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
@@ -29,8 +32,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.player.CapPlayerDataFL;
-import com.eerussianguy.firmalife.player.IPlayerDataFL;
 import com.eerussianguy.firmalife.recipe.CrackingRecipe;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 import com.eerussianguy.firmalife.registry.BlocksFL;
@@ -42,13 +43,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
@@ -158,13 +152,13 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
                     return EnumActionResult.PASS;
                 }
 
-                IPlayerDataFL playerData = player.getCapability(CapPlayerDataFL.CAPABILITY, null);
-                if (playerData != null) {
-                    boolean timePassed = (int) CalendarTFC.CALENDAR_TIME.getTicks() - playerData.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
-                    boolean distanced = playerData.getNutDistance(pos) > ConfigFL.General.BALANCE.nutDistance;
+                var cap = CapabilitySkill.get(player);
+                if (cap != null) {
+                    boolean timePassed = (int) CalendarTFC.CALENDAR_TIME.getTicks() - cap.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
+                    boolean distanced = cap.getNutDistance(pos) > ConfigFL.General.BALANCE.nutDistance;
                     if (distanced && timePassed) {
-                        playerData.setNuttedTime();
-                        playerData.setNutPosition(pos);
+                        cap.setNuttedTime();
+                        cap.setNutPosition(pos);
                         leafCount = (int) Math.ceil(leafCount * 0.66);
                         while (leafCount > 0)// batches drops a few times
                         {

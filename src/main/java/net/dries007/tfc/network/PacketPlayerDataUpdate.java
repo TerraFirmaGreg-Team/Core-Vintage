@@ -1,5 +1,7 @@
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -10,8 +12,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 
 public class PacketPlayerDataUpdate implements IMessage {
 
@@ -42,9 +42,9 @@ public class PacketPlayerDataUpdate implements IMessage {
             TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 if (player != null) {
-                    IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-                    if (skills != null) {
-                        skills.deserializeNBT(message.skillsNbt);
+                    var cap = CapabilitySkill.get(player);
+                    if (cap != null) {
+                        cap.deserializeNBT(message.skillsNbt);
                     }
                 }
             });

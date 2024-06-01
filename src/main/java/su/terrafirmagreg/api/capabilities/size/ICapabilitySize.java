@@ -12,8 +12,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.Helpers;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 /**
@@ -26,29 +24,27 @@ import java.util.List;
  */
 public interface ICapabilitySize {
 
-    @NotNull
-    default Size getSize(@NotNull ItemStack stack) {
+    default Size getSize(ItemStack stack) {
         return Size.SMALL;
     }
 
-    @NotNull
-    default Weight getWeight(@NotNull ItemStack stack) {
+    default Weight getWeight(ItemStack stack) {
         return Weight.LIGHT;
     }
 
-    default boolean canStack(@NotNull ItemStack stack) {
+    default boolean canStack(ItemStack stack) {
         return true;
     }
 
     @SideOnly(Side.CLIENT)
-    default void addSizeInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
+    default void addSizeInfo(ItemStack stack, List<String> text) {
         text.add(Unicode.WEIGHT + " " + I18n.format(Helpers.getEnumName(getWeight(stack))) + Unicode.SIZE + " " + I18n.format(Helpers.getEnumName(getSize(stack))));
     }
 
     /**
      * Should be called from {@link net.minecraft.item.Item#getItemStackLimit(ItemStack)}
      */
-    default int getStackSize(@NotNull ItemStack stack) {
+    default int getStackSize(ItemStack stack) {
         return canStack(stack) ? getWeight(stack).getStackSize() : 1;
     }
 }

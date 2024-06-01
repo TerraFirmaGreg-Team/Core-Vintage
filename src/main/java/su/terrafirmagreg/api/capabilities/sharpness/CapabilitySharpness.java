@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-public class CapabilitySharpness {
+public final class CapabilitySharpness {
 
     public static final ResourceLocation KEY = ModUtils.resource("sharpness_capability");
 

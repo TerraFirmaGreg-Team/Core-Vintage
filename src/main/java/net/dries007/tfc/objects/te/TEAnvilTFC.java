@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.state.IBlockState;
@@ -23,7 +24,6 @@ import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -218,7 +218,7 @@ public class TEAnvilTFC extends TEInventory {
                     inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
 
                     // Add Skill
-                    SmithingSkill skill = CapabilityPlayerData.getSkill(player, SkillType.SMITHING);
+                    SmithingSkill skill = CapabilitySkill.getSkill(player, SkillType.SMITHING);
                     if (skill != null && completedRecipe.getSkillBonusType() != null) {
                         skill.addSkill(completedRecipe.getSkillBonusType(), 1);
                     }

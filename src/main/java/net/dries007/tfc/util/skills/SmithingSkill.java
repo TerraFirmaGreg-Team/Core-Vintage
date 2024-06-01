@@ -1,10 +1,10 @@
 package net.dries007.tfc.util.skills;
 
+import su.terrafirmagreg.api.capabilities.skill.ICapabilitySkill;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-
-import net.dries007.tfc.api.capability.player.IPlayerData;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +15,7 @@ public class SmithingSkill extends Skill {
     private static final String SKILL_TYPE = "tfc_smithing_type";
     private final int[] skillLevels = new int[4];
 
-    public SmithingSkill(IPlayerData rootSkills) {
+    public SmithingSkill(ICapabilitySkill rootSkills) {
         super(rootSkills);
     }
 

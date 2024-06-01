@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public class CapabilityFood {
+public final class CapabilityFood {
 
     public static final ResourceLocation KEY = ModUtils.resource("food_capability");
 

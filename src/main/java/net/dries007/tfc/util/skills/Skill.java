@@ -1,10 +1,10 @@
 package net.dries007.tfc.util.skills;
 
+import su.terrafirmagreg.api.capabilities.skill.ICapabilitySkill;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-
-import net.dries007.tfc.api.capability.player.IPlayerData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,9 +15,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class Skill implements INBTSerializable<NBTTagCompound> {
 
-    private final IPlayerData playerData;
+    private final ICapabilitySkill playerData;
 
-    public Skill(IPlayerData playerData) {
+    public Skill(ICapabilitySkill playerData) {
         this.playerData = playerData;
     }
 

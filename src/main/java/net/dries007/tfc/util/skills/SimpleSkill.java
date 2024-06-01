@@ -1,9 +1,9 @@
 package net.dries007.tfc.util.skills;
 
+import su.terrafirmagreg.api.capabilities.skill.ICapabilitySkill;
+
 import net.minecraft.nbt.NBTTagCompound;
 
-
-import net.dries007.tfc.api.capability.player.IPlayerData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -11,7 +11,7 @@ public class SimpleSkill extends Skill {
 
     private float amount;
 
-    public SimpleSkill(IPlayerData rootSkills) {
+    public SimpleSkill(ICapabilitySkill rootSkills) {
         super(rootSkills);
         this.amount = 0;
     }

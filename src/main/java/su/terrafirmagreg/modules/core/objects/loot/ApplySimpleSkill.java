@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.loot;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.Entity;
@@ -16,8 +17,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 
@@ -43,9 +42,9 @@ public class ApplySimpleSkill extends LootFunction {
     public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
         Entity entity = context.getKillerPlayer();
         if (entity instanceof EntityPlayer) {
-            IPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
-            if (skills != null) {
-                SimpleSkill skill = skills.getSkill(this.skillType);
+            var cap = CapabilitySkill.get((EntityPlayer) entity);
+            if (cap != null) {
+                SimpleSkill skill = cap.getSkill(this.skillType);
                 if (skill != null) {
                     // Minimum of 1, At 0 skill, returns a bonus of an amount between the difference, At max skill, returns the actual range
                     stack.setCount(1 + (int) (valueRange.generateInt(rand) - valueRange.getMin() * (1 - skill.getTotalLevel())));

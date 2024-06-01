@@ -18,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -37,8 +36,6 @@ import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 import com.eerussianguy.firmalife.entity.CombatGreenhouseTask;
 import com.eerussianguy.firmalife.gui.FLGuiHandler;
 import com.eerussianguy.firmalife.items.ItemFruitPole;
-import com.eerussianguy.firmalife.player.CapPlayerDataFL;
-import com.eerussianguy.firmalife.player.PlayerDataFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.types.IFruitTree;
@@ -111,16 +108,6 @@ public class CommonEventHandlerFL {
                     }
                 }
 
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.getObject();
-            if (!player.hasCapability(CapPlayerDataFL.CAPABILITY, null)) {
-                event.addCapability(CapPlayerDataFL.NAMESPACE, new PlayerDataFL());
             }
         }
     }

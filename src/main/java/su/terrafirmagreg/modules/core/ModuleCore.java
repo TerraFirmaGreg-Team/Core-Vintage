@@ -10,6 +10,7 @@ import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.HandlerSize;
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
@@ -20,6 +21,8 @@ import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayPlayerData;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayTemperature;
 import su.terrafirmagreg.modules.core.event.AmbientalHandler;
+import su.terrafirmagreg.modules.core.event.CapabilitiesEntityHandler;
+import su.terrafirmagreg.modules.core.event.CapabilitiesItemHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -77,8 +80,6 @@ public final class ModuleCore extends ModuleBase {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
-        MinecraftForge.EVENT_BUS.register(new AmbientalHandler());
-
         CapabilityDamageResistance.register();
         CapabilityEgg.register();
         CapabilityHeat.register();
@@ -87,7 +88,12 @@ public final class ModuleCore extends ModuleBase {
         CapabilityPull.register();
         CapabilitySharpness.register();
         CapabilitySize.register();
+        CapabilitySkill.register();
         CapabilityTemperature.register();
+
+        MinecraftForge.EVENT_BUS.register(new AmbientalHandler());
+        MinecraftForge.EVENT_BUS.register(new CapabilitiesItemHandler());
+        MinecraftForge.EVENT_BUS.register(new CapabilitiesEntityHandler());
 
     }
 

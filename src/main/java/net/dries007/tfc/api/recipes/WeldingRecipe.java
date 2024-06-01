@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -7,8 +9,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
@@ -64,7 +64,7 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
     public ItemStack getOutput(@Nullable EntityPlayer player) {
         ItemStack stack = output.copy();
         if (player != null) {
-            IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+            var cap = CapabilitySkill.get(player);
             if (cap != null) {
                 SmithingSkill skill = cap.getSkill(SkillType.SMITHING);
                 if (skill != null && skillType != null) {

@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -11,8 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
@@ -111,8 +111,8 @@ public class GuiSkills extends GuiContainerTFC {
         buttonLeft.enabled = currentPage >= 1;
         buttonRight.enabled = false;
 
-        IPlayerData skills = playerInv.player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-        if (skills != null) {
+        var cap = CapabilitySkill.get(playerInv.player);
+        if (cap != null) {
             List<SkillType<? extends Skill>> skillOrder = SkillType.getSkills();
             int totalSkills = skillOrder.size();
             int startSkill = currentPage * 4;
@@ -132,7 +132,7 @@ public class GuiSkills extends GuiContainerTFC {
             for (int i = 0; i < skillsToDisplay; i++) {
                 // Load the skills as per the skill order
                 SkillType<? extends Skill> skillType = skillOrder.get(startSkill + i);
-                Skill skill = skills.getSkill(skillType);
+                Skill skill = cap.getSkill(skillType);
                 if (skill != null) {
                     skillTooltips[i] = I18n.format("tfc.skill." + skillType.getName(), I18n.format(Helpers.getEnumName(skill.getTier())));
                     skillBarWidths[i] = (int) (160 * skill.getLevel());

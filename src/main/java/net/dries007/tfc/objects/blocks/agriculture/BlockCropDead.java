@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
@@ -20,7 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
 
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
@@ -116,7 +117,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
             // mature crops have a chance to drop a bonus, dead or alive
             EntityPlayer player = harvesters.get();
             if (player != null) {
-                SimpleSkill skill = CapabilityPlayerData.getSkill(player, SkillType.AGRICULTURE);
+                SimpleSkill skill = CapabilitySkill.getSkill(player, SkillType.AGRICULTURE);
                 if (skill != null) {
                     count += Crop.getSkillSeedBonus(skill, RANDOM);
                     skill.add(0.04f);

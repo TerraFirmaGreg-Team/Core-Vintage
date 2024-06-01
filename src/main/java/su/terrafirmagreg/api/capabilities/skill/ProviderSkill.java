@@ -1,12 +1,12 @@
-package net.dries007.tfc.api.capability.player;
+package su.terrafirmagreg.api.capabilities.skill;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.api.recipes.ChiselRecipe;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound>, IPlayerData {
+public class ProviderSkill implements ICapabilitySkill {
 
     public static final int MAX_INTOXICATED_TICKS = 36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
@@ -28,16 +28,22 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
     private final EntityPlayer player;
     private ItemStack harvestingTool;
     private long intoxicatedTime;
-    private boolean hasBook;
 
     private ChiselRecipe.Mode chiselMode = ChiselRecipe.Mode.SMOOTH;
+    private long nutted;
+    private BlockPos nutPosition;
 
-    public PlayerDataHandler(EntityPlayer player) {
+    public ProviderSkill() {
+        this(null);
+    }
+
+    public ProviderSkill(EntityPlayer player) {
         this.skills = SkillType.createSkillMap(this);
         this.player = player;
         this.harvestingTool = ItemStack.EMPTY;
-        this.hasBook = false;
         this.intoxicatedTime = 0;
+        this.nutted = 0;
+        this.nutPosition = new BlockPos(0, 0, 0);
     }
 
     @Override
@@ -46,8 +52,9 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
         skills.forEach((k, v) -> nbt.setTag(k, v.serializeNBT()));
         nbt.setTag("chiselMode", new NBTTagByte((byte) chiselMode.ordinal()));
         nbt.setTag("harvestingTool", harvestingTool.serializeNBT());
-        nbt.setBoolean("hasBook", hasBook);
         nbt.setLong("intoxicatedTime", intoxicatedTime);
+        nbt.setLong("nutted", nutted);
+        nbt.setLong("pos", nutPosition.toLong());
         return nbt;
     }
 
@@ -57,8 +64,9 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
             skills.forEach((k, v) -> v.deserializeNBT(nbt.getCompoundTag(k)));
             chiselMode = ChiselRecipe.Mode.valueOf(nbt.getByte("chiselMode"));
             harvestingTool = new ItemStack(nbt.getCompoundTag("harvestingTool"));
-            hasBook = nbt.getBoolean("hasBook");
             intoxicatedTime = nbt.getLong("intoxicatedTime");
+            nutted = nbt.getLong("nutted");
+            nutPosition = BlockPos.fromLong(nbt.getLong("pos"));
         }
     }
 
@@ -115,24 +123,34 @@ public class PlayerDataHandler implements ICapabilitySerializable<NBTTagCompound
     }
 
     @Override
-    public boolean hasBook() {
-        return this.hasBook;
+    public void setNuttedTime() {
+        nutted = CalendarTFC.CALENDAR_TIME.getTicks();
     }
 
     @Override
-    public void setHasBook(boolean value) {
-        this.hasBook = value;
+    public long getNuttedTime() {
+        return nutted;
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityPlayerData.CAPABILITY;
+    public void setNutPosition(BlockPos pos) {
+        nutPosition = pos;
+    }
+
+    @Override
+    public int getNutDistance(BlockPos pos) {
+        return (int) Math.sqrt(nutPosition.distanceSq(pos));
+    }
+
+    @Override
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilitySkill.CAPABILITY;
     }
 
     @Nullable
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityPlayerData.CAPABILITY ? (T) this : null;
+        return hasCapability(capability, facing) ? (T) this : null;
     }
 }

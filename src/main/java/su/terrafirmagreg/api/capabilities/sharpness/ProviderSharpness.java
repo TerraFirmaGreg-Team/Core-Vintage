@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import lombok.Getter;
 
 @Getter
-public class ProviderSharpness implements ICapabilitySharpness {
+public class ProviderSharpness implements ICapabilitySharpness, ICapabilityProvider {
 
     protected ItemStack container;
 
@@ -56,6 +57,7 @@ public class ProviderSharpness implements ICapabilitySharpness {
 
     @Nullable
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         return hasCapability(capability, facing) ? (T) this : null;
     }

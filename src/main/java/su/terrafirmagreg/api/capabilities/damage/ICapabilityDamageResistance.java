@@ -1,8 +1,6 @@
 package su.terrafirmagreg.api.capabilities.damage;
 
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-public interface ICapabilityDamageResistance extends ICapabilityProvider {
+public interface ICapabilityDamageResistance {
 
     default float getCrushingModifier() {
         return 0;

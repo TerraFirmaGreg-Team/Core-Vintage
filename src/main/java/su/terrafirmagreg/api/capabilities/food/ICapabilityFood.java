@@ -4,9 +4,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,7 +27,7 @@ import java.util.List;
 /**
  * Capability for any food item Allows foods to have nutrients, and also to decay / rot
  */
-public interface ICapabilityFood extends ICapabilitySerializable<NBTTagCompound> {
+public interface ICapabilityFood {
 
     /**
      * The timestamp that this food was created Used to calculate expiration date Rotten food uses {@code Long.MIN_VALUE} as the creation date

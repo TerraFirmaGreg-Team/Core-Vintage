@@ -23,7 +23,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.damage.DamageType;
+
+
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+
+
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;

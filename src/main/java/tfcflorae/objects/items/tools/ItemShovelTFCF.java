@@ -20,7 +20,11 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.damage.DamageType;
+
+
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+
+
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import tfcflorae.util.OreDictionaryHelper;

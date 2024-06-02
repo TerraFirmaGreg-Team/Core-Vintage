@@ -10,7 +10,11 @@ import net.minecraft.item.ItemTool;
 
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.damage.DamageType;
+
+
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;

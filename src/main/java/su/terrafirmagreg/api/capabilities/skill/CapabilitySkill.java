@@ -42,9 +42,9 @@ public final class CapabilitySkill {
      */
     @Nullable
     public static <S extends Skill> S getSkill(EntityPlayer player, SkillType<S> skillType) {
-        ICapabilitySkill skills = CapabilitySkill.get(player);
-        if (skills != null) {
-            return skills.getSkill(skillType);
+        var cap = CapabilitySkill.get(player);
+        if (cap != null) {
+            return cap.getSkill(skillType);
         }
         return null;
     }

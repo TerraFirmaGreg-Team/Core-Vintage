@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 import org.apache.commons.io.FileUtils;
@@ -97,9 +96,7 @@ public enum JsonConfigRegistry {
                 String fileContents = new String(Files.readAllBytes(path), Charset.defaultCharset());
                 JsonObject jsonObject = new JsonParser().parse(fileContents).getAsJsonObject();
                 JsonElement loader = jsonObject.get("#loader");
-                if (loader != null && "tfc:damage_resistance".equals(loader.getAsString())) {
-                    CapabilityDamageResistance.readFile(jsonObject.entrySet());
-                } else if (loader != null && "tfc:animal_food".equals(loader.getAsString())) {
+                if (loader != null && "tfc:animal_food".equals(loader.getAsString())) {
                     AnimalFood.readFile(jsonObject.entrySet());
                 } else {
                     // Defaults to the vein loader, this will be thrown out at 1.15 anyway
@@ -114,7 +111,6 @@ public enum JsonConfigRegistry {
             }
         }
         VeinRegistry.INSTANCE.postInit();
-        CapabilityDamageResistance.postInit();
     }
 
 }

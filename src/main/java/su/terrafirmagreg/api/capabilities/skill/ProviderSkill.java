@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.api.recipes.ChiselRecipe;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class ProviderSkill implements ICapabilitySkill {
+public class ProviderSkill implements ICapabilitySkill, ICapabilitySerializable<NBTTagCompound> {
 
     public static final int MAX_INTOXICATED_TICKS = 36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
@@ -150,7 +151,7 @@ public class ProviderSkill implements ICapabilitySkill {
     @Nullable
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         return hasCapability(capability, facing) ? (T) this : null;
     }
 }

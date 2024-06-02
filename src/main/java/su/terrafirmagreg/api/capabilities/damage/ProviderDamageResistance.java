@@ -2,12 +2,13 @@ package su.terrafirmagreg.api.capabilities.damage;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ProviderDamageResistance implements ICapabilityDamageResistance {
+public class ProviderDamageResistance implements ICapabilityDamageResistance, ICapabilityProvider {
 
     private final float crushingModifier;
     private final float piercingModifier;

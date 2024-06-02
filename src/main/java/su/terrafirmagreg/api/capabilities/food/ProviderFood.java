@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.ConfigTFC;
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProviderFood implements ICapabilityFood {
+public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NBTTagCompound> {
 
     private static final long ROTTEN_DATE = Long.MIN_VALUE;
     private static final long NEVER_DECAY_DATE = Long.MAX_VALUE;

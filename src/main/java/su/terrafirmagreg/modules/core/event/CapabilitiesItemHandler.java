@@ -1,8 +1,10 @@
 package su.terrafirmagreg.modules.core.event;
 
+import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -31,7 +33,8 @@ public class CapabilitiesItemHandler {
 
         if (CapabilitySize.getIItemSize(stack) != null) return;
 
-        ICapabilityProvider provider = CapabilitySize.getCustomSize(stack);
+        ICapabilityProvider provider = CapabilitySize.getCustom(stack);
+
         event.addCapability(CapabilitySize.KEY, provider);
 
         if (provider instanceof ICapabilitySize itemSize) {
@@ -59,6 +62,11 @@ public class CapabilitiesItemHandler {
 
     public void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
-    }
+        if (stack.getItem() instanceof ItemArmor) {
+            ICapabilityProvider provider = CapabilityDamageResistance.getCustom(stack);
+            if (provider == null) return;
 
+            event.addCapability(CapabilityDamageResistance.KEY, provider);
+        }
+    }
 }

@@ -3,6 +3,7 @@ package su.terrafirmagreg.api.capabilities.damage.spi;
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.damage.ICapabilityDamageResistance;
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -11,8 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
-
-import net.dries007.tfc.ConfigTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -56,17 +55,17 @@ public enum DamageType {
         // Unblockable damage types don't have a special damage source
         if (!source.isUnblockable()) {
             // First try and match damage types specified via config
-            for (String damageType : ConfigTFC.General.DAMAGE.slashingSources) {
+            for (String damageType : ModuleCoreConfig.MISC.DAMAGE.slashingSources) {
                 if (damageType.equals(source.damageType)) {
                     return SLASHING;
                 }
             }
-            for (String damageType : ConfigTFC.General.DAMAGE.crushingSources) {
+            for (String damageType : ModuleCoreConfig.MISC.DAMAGE.crushingSources) {
                 if (damageType.equals(source.damageType)) {
                     return CRUSHING;
                 }
             }
-            for (String damageType : ConfigTFC.General.DAMAGE.piercingSources) {
+            for (String damageType : ModuleCoreConfig.MISC.DAMAGE.piercingSources) {
                 if (damageType.equals(source.damageType)) {
                     return PIERCING;
                 }
@@ -76,8 +75,8 @@ public enum DamageType {
             Entity sourceEntity = source.getTrueSource();
             if (sourceEntity != null) {
                 // Check for the attacking weapon
-                if (sourceEntity instanceof EntityLivingBase) {
-                    ItemStack heldItem = ((EntityLivingBase) sourceEntity).getHeldItemMainhand();
+                if (sourceEntity instanceof EntityLivingBase entityLivingBase) {
+                    ItemStack heldItem = entityLivingBase.getHeldItemMainhand();
                     if (!heldItem.isEmpty()) {
                         // Find a unique damage type for the weapon, if it exists
                         DamageType weaponDamageType = getFromItem(heldItem);
@@ -91,17 +90,17 @@ public enum DamageType {
                 ResourceLocation entityType = EntityList.getKey(sourceEntity);
                 if (entityType != null) {
                     String entityTypeName = entityType.toString();
-                    for (String damageType : ConfigTFC.General.DAMAGE.slashingEntities) {
+                    for (String damageType : ModuleCoreConfig.MISC.DAMAGE.slashingEntities) {
                         if (damageType.equals(entityTypeName)) {
                             return SLASHING;
                         }
                     }
-                    for (String damageType : ConfigTFC.General.DAMAGE.crushingEntities) {
+                    for (String damageType : ModuleCoreConfig.MISC.DAMAGE.crushingEntities) {
                         if (damageType.equals(entityTypeName)) {
                             return CRUSHING;
                         }
                     }
-                    for (String damageType : ConfigTFC.General.DAMAGE.piercingEntities) {
+                    for (String damageType : ModuleCoreConfig.MISC.DAMAGE.piercingEntities) {
                         if (damageType.equals(entityTypeName)) {
                             return PIERCING;
                         }

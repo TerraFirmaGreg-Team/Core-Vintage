@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
@@ -80,7 +81,6 @@ public final class ModuleCore extends ModuleBase {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
-        CapabilityDamageResistance.register();
         CapabilityEgg.register();
         CapabilityHeat.register();
         CapabilityFood.register();
@@ -90,6 +90,7 @@ public final class ModuleCore extends ModuleBase {
         CapabilitySize.register();
         CapabilitySkill.register();
         CapabilityTemperature.register();
+        CapabilityDamageResistance.register();
 
         MinecraftForge.EVENT_BUS.register(new AmbientalHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilitiesItemHandler());
@@ -107,6 +108,7 @@ public final class ModuleCore extends ModuleBase {
     @Override
     protected void onInit(FMLInitializationEvent event) {
         HandlerSize.init();
+        HandlerDamageResistance.init();
     }
 
     @Override

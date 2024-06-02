@@ -4,12 +4,13 @@ import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodCart;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ProviderPull implements ICapabilityPull {
+public class ProviderPull implements ICapabilityPull, ICapabilityProvider {
 
     private EntityWoodCart drawn;
 

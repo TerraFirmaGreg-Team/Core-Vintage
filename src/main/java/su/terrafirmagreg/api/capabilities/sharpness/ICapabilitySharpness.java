@@ -1,8 +1,6 @@
 package su.terrafirmagreg.api.capabilities.sharpness;
 
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-public interface ICapabilitySharpness extends ICapabilityProvider {
+public interface ICapabilitySharpness {
 
     int getCharges();
 

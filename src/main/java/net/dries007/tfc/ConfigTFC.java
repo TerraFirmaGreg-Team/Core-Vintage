@@ -63,10 +63,6 @@ public final class ConfigTFC {
         @Config.LangKey("config." + MODID_TFC + ".general.spawn_protection")
         public static final SpawnProtectionCFG SPAWN_PROTECTION = new SpawnProtectionCFG();
 
-        @Config.Comment("Damage settings")
-        @Config.LangKey("config." + MODID_TFC + ".general.damage")
-        public static final DamageCFG DAMAGE = new DamageCFG();
-
         @Config.Comment("Player settings")
         @Config.LangKey("config." + MODID_TFC + ".general.player")
         public static final PlayerCFG PLAYER = new PlayerCFG();
@@ -331,36 +327,6 @@ public final class ConfigTFC {
             @Config.RangeInt(min = 1, max = 255)
             @Config.LangKey("config." + MODID_TFC + ".general.spawn_protection.maxYPredators")
             public int maxYPredators = 255;
-        }
-
-        public static final class DamageCFG {
-
-            @Config.Comment("Damage Source Types that will default to Slashing damage.")
-            @Config.LangKey("config." + MODID_TFC + ".general.damage.slashingSources")
-            public String[] slashingSources = new String[] {};
-
-            @Config.Comment("Damage Source Types that will default to Piercing damage.")
-            @Config.LangKey("config." + MODID_TFC + ".general.damage.piercingSources")
-            public String[] piercingSources = new String[] { "arrow", "cactus", "thorns" };
-
-            @Config.Comment("Damage Source Types that will default to Crushing damage.")
-            @Config.LangKey("config." + MODID_TFC + ".general.damage.crushingSources")
-            public String[] crushingSources = new String[] { "anvil", "falling_block" };
-
-            @Config.Comment("Damage Source Entities that will default to Slashing damage.")
-            @Config.LangKey("config." + MODID_TFC + ".general.damage.slashingEntities")
-            public String[] slashingEntities = new String[] { "minecraft:wither_skeleton", "minecraft:vex", "minecraft:vindication_illager",
-                    "minecraft:zombie_pigman", "minecraft:wolf", "minecraft:polar_bear" };
-
-            @Config.Comment("Damage Source Entities that will default to Piercing damage.")
-            @Config.LangKey("config." + MODID_TFC + ".general.damage.piercingEntities")
-            public String[] piercingEntities = new String[] { "minecraft:stray", "minecraft:skeleton" };
-
-            @Config.Comment("Damage Source Entities that will default to Crushing damage.")
-            @Config.LangKey("config." + MODID_TFC + ".general.damage.crushingEntities")
-            public String[] crushingEntities = new String[] { "minecraft:husk", "minecraft:skeleton_horse", "minecraft:zombie_horse",
-                    "minecraft:spider", "minecraft:giant", "minecraft:zombie", "minecraft:slime", "minecraft:cave_spider", "minecraft:silverfish",
-                    "minecraft:villager_golem", "minecraft:zombie_villager" };
         }
 
         public static final class PlayerCFG {

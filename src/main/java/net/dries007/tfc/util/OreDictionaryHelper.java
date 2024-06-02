@@ -12,15 +12,19 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
-import net.dries007.tfc.api.capability.damage.DamageType;
+
+
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+
+
 import net.dries007.tfc.api.types.Rock;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This is not the best example of good coding practice, but I do think it works rather well. The reason for the delayed registration it because now
- * the helper's functions can be called in the constructor of the blocks/items (BEFORE they are actually in registries). At this point you cannot yet
- * make an itemstack. Storing based on RegistryName is also not possible, as they don't have one yet.
+ * This is not the best example of good coding practice, but I do think it works rather well. The reason for the delayed registration it because now the helper's functions can be
+ * called in the constructor of the blocks/items (BEFORE they are actually in registries). At this point you cannot yet make an itemstack. Storing based on RegistryName is also not
+ * possible, as they don't have one yet.
  */
 public class OreDictionaryHelper {
 

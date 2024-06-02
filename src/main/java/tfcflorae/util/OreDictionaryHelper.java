@@ -10,7 +10,11 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.api.capability.damage.DamageType;
+
+
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+
+
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import org.jetbrains.annotations.NotNull;

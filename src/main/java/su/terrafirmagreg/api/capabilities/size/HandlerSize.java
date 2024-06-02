@@ -18,7 +18,8 @@ import java.util.function.Supplier;
 
 public class HandlerSize {
 
-    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
+    //Used inside CT, set custom IItemSize for items outside TFC
+    public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>();
 
     public static void init() {
         // Add hardcoded size values for vanilla items

@@ -3,6 +3,7 @@ package su.terrafirmagreg.api.capabilities.metal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import net.dries007.tfc.api.types.Metal;
@@ -10,7 +11,7 @@ import net.dries007.tfc.api.types.Metal;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ProviderMetal implements ICapabilityMetal {
+public class ProviderMetal implements ICapabilityMetal, ICapabilityProvider {
 
     private final Metal metal;
     private final int amount;

@@ -1,38 +1,19 @@
 package su.terrafirmagreg.api.capabilities.damage;
 
-import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.ModuleCore;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Supplier;
-
-import static su.terrafirmagreg.api.data.Constants.MOD_ID;
-
 public final class CapabilityDamageResistance {
-
-    public static final Map<String, Supplier<ICapabilityProvider>> ENTITY_RESISTANCE = new HashMap<>(); // Map entities -> Capability to damage resistance
 
     public static final ResourceLocation KEY = ModUtils.resource("damage_resistance_capability");
 
@@ -59,50 +40,14 @@ public final class CapabilityDamageResistance {
         return entity.hasCapability(CAPABILITY, null);
     }
 
-    /**
-     * Read json data and load entities damage resistances from it
-     *
-     * @param jsonElements the json elements to read
-     */
-    public static void readFile(Set<Map.Entry<String, JsonElement>> jsonElements) {
-        for (Map.Entry<String, JsonElement> entry : jsonElements) {
-            try {
-                String entityName = entry.getKey();
-                if ("#loader".equals(entityName)) continue; // Skip loader
-                ProviderDamageResistance resistance = Constants.GSON.fromJson(entry.getValue(), ProviderDamageResistance.class);
-
-                ENTITY_RESISTANCE.put(entityName, () -> resistance);
-            } catch (JsonParseException e) {
-                ModuleCore.LOGGER.error("An entity resistance is specified incorrectly! Skipping.");
-                ModuleCore.LOGGER.error("Error: ", e);
-            }
-        }
-    }
-
     @Nullable
-    public static ICapabilityProvider getCustomDamageResistance(ItemStack stack) {
-        Set<IIngredient<ItemStack>> itemArmorSet = HandlerDamageResistance.CUSTOM_ARMOR.keySet();
-        for (IIngredient<ItemStack> ingredient : itemArmorSet) {
-            if (ingredient.testIgnoreCount(stack)) {
-                return HandlerDamageResistance.CUSTOM_ARMOR.get(ingredient).get();
+    public static ICapabilityProvider getCustom(ItemStack stack) {
+
+        for (var entry : HandlerDamageResistance.CUSTOM_ITEMS.entrySet()) {
+            if (entry.getKey().testIgnoreCount(stack)) {
+                return entry.getValue().get();
             }
         }
         return null;
-    }
-
-    @Mod.EventBusSubscriber(modid = MOD_ID)
-    public static final class EventHandler {
-
-        @SubscribeEvent
-        public static void attachEntityCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
-            // Give certain entities damage resistance
-            ResourceLocation entityType = EntityList.getKey(event.getObject());
-            if (entityType != null) {
-                String entityTypeName = entityType.toString();
-                if (ENTITY_RESISTANCE.containsKey(entityTypeName)) {
-                    event.addCapability(KEY, ENTITY_RESISTANCE.get(entityTypeName).get());
-                }
-            }
-        }
     }
 }

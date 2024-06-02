@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.core.event;
 
+import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
 import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.capabilities.pull.ProviderPull;
 import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
@@ -8,6 +10,7 @@ import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -64,6 +67,14 @@ public class CapabilitiesEntityHandler {
             }
         }
 
+    }
+
+    public void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+
+        // Give certain entities damage resistance
+        if (!CapabilityDamageResistance.has(entity)) {
+            event.addCapability(CapabilityDamageResistance.KEY, HandlerDamageResistance.CUSTOM_ENTITY.get(EntityList.getKey(entity)).get());
+        }
     }
 
 }

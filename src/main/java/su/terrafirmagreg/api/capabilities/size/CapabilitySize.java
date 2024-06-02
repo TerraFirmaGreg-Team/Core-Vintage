@@ -18,13 +18,8 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Map;
-import java.util.function.Supplier;
 
 public final class CapabilitySize {
 
@@ -78,8 +73,9 @@ public final class CapabilitySize {
     }
 
     @NotNull
-    public static ICapabilityProvider getCustomSize(ItemStack stack) {
-        for (Map.Entry<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> entry : HandlerSize.CUSTOM_ITEMS.entrySet()) {
+    public static ICapabilityProvider getCustom(ItemStack stack) {
+
+        for (var entry : HandlerSize.CUSTOM_ITEMS.entrySet()) {
             if (entry.getKey().testIgnoreCount(stack)) {
                 return entry.getValue().get();
             }
@@ -90,7 +86,7 @@ public final class CapabilitySize {
             return ProviderSize.get(Size.LARGE, Weight.MEDIUM, true); // Stored only in chests, stacksize should be limited to 1 since it is a tool
         } else if (item instanceof ItemArmor) {
             return ProviderSize.get(Size.LARGE, Weight.VERY_HEAVY, true); // Stored only in chests and stacksize = 1
-        } else if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockLadder) {
+        } else if (item instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof BlockLadder) {
             return ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true); // Fits small vessels and stacksize = 64
         } else if (item instanceof ItemBlock) {
             return ProviderSize.get(Size.SMALL, Weight.LIGHT, true); // Fits small vessels and stacksize = 32

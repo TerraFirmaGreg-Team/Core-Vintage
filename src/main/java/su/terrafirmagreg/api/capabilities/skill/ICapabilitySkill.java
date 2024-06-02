@@ -87,8 +87,8 @@ public interface ICapabilitySkill extends ICapabilitySerializable<NBTTagCompound
 
     default void updateAndSync() {
         EntityPlayer player = getPlayer();
-        if (player instanceof EntityPlayerMP) {
-            TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), (EntityPlayerMP) player);
+        if (player instanceof EntityPlayerMP entityPlayerMP) {
+            TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
         }
     }
 }

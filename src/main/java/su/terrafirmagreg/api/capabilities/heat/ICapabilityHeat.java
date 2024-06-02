@@ -3,8 +3,6 @@ package su.terrafirmagreg.api.capabilities.heat;
 import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -17,7 +15,7 @@ import java.util.List;
  * It is recommended that if you extend {@link ProviderHeat} rather than implement this directly. If you do extend this, look at ItemHeatHandler to observe how heat decays over
  * time.
  */
-public interface ICapabilityHeat extends ICapabilitySerializable<NBTTagCompound> {
+public interface ICapabilityHeat {
 
     /**
      * Gets the current temperature. Should call {@link CapabilityHeat#adjustTemp(float, float, long)} internally

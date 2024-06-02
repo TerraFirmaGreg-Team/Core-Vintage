@@ -1,5 +1,6 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.capabilities.egg.ProviderEgg;
 import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
@@ -45,7 +46,6 @@ import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -99,8 +99,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
@@ -477,14 +475,6 @@ public final class CommonEventHandler {
                 ICapabilityProvider heatHandler = CapabilityItemHeat.getCustomHeat(stack);
                 if (heatHandler != null) {
                     event.addCapability(CapabilityItemHeat.KEY, heatHandler);
-                }
-            }
-
-            // Armor
-            if (item instanceof ItemArmor) {
-                ICapabilityProvider damageResistance = CapabilityDamageResistance.getCustomDamageResistance(stack);
-                if (damageResistance != null) {
-                    event.addCapability(CapabilityDamageResistance.KEY, damageResistance);
                 }
             }
 

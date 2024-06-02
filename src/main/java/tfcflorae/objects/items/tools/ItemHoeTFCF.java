@@ -14,7 +14,11 @@ import net.minecraft.item.ItemStack;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.damage.DamageType;
+
+
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+
+
 import tfcflorae.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;

@@ -15,7 +15,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "soil")
-public class ModuleSoilConfig {
+public class ConfigSoil {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -38,7 +38,7 @@ public class ModuleSoilConfig {
     public static final ClientCategory CLIENT = new ClientCategory();
 
     static {
-        ConfigAnytime.register(ModuleSoilConfig.class);
+        ConfigAnytime.register(ConfigSoil.class);
     }
 
     public static final class BlocksCategory {

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.client;
 
 import su.terrafirmagreg.api.lib.ThermiteRandom;
-import su.terrafirmagreg.modules.soil.ModuleSoilConfig;
+import su.terrafirmagreg.modules.soil.ConfigSoil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -32,10 +32,10 @@ public class GrassColorHandler {
         int januaryCode = 0x00;
         int aprilCode = 0x00;
         try {
-            julyCode = Integer.parseUnsignedInt(ModuleSoilConfig.CLIENT.seasonColorSummer, 16);
-            octoberCode = Integer.parseUnsignedInt(ModuleSoilConfig.CLIENT.seasonColorAutumn, 16);
-            januaryCode = Integer.parseUnsignedInt(ModuleSoilConfig.CLIENT.seasonColorWinter, 16);
-            aprilCode = Integer.parseUnsignedInt(ModuleSoilConfig.CLIENT.seasonColorSpring, 16);
+            julyCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorSummer, 16);
+            octoberCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorAutumn, 16);
+            januaryCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorWinter, 16);
+            aprilCode = Integer.parseUnsignedInt(ConfigSoil.CLIENT.seasonColorSpring, 16);
         } finally {
             monthlyColors[Month.JULY.ordinal()] = new Color(julyCode, true);
             monthlyColors[Month.OCTOBER.ordinal()] = new Color(octoberCode, true);
@@ -56,14 +56,14 @@ public class GrassColorHandler {
             Color seasonalColor = getSeasonalColor();
             Color finalColor = originalColor;
 
-            if (ModuleSoilConfig.CLIENT.seasonColorEnable) {
+            if (ConfigSoil.CLIENT.seasonColorEnable) {
                 finalColor = blendByAlpha(finalColor, seasonalColor);
             }
 
-            if (ModuleSoilConfig.CLIENT.noiseEnable) {
-                int levels = ModuleSoilConfig.CLIENT.noiseLevels;
-                float scale = ModuleSoilConfig.CLIENT.noiseScale;
-                double darkness = ModuleSoilConfig.CLIENT.noiseDarkness;
+            if (ConfigSoil.CLIENT.noiseEnable) {
+                int levels = ConfigSoil.CLIENT.noiseLevels;
+                float scale = ConfigSoil.CLIENT.noiseScale;
+                double darkness = ConfigSoil.CLIENT.noiseDarkness;
                 double value = noiseGenerator.getValue(pos.getX() / scale, pos.getZ() / scale);
                 value = curve(0, 1, remap(value, -((1 << levels) - 1), (1 << levels) - 1, 0, 1), 1) * darkness;
                 finalColor = blendByWeight(Color.BLACK, finalColor, value);

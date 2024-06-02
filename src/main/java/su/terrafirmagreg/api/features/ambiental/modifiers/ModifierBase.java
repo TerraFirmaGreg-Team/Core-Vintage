@@ -3,7 +3,7 @@ package su.terrafirmagreg.api.features.ambiental.modifiers;
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtil;
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -51,11 +51,11 @@ public class ModifierBase implements Comparable<ModifierBase> {
     }
 
     public float getChange() {
-        return change * multiplier * (count == 1 ? 1f : ModuleCoreConfig.MISC.TEMPERATURE.diminishedModifierMultiplier);
+        return change * multiplier * (count == 1 ? 1f : ConfigCore.MISC.TEMPERATURE.diminishedModifierMultiplier);
     }
 
     public float getPotency() {
-        return potency * multiplier * (count == 1 ? 1f : ModuleCoreConfig.MISC.TEMPERATURE.diminishedModifierMultiplier);
+        return potency * multiplier * (count == 1 ? 1f : ConfigCore.MISC.TEMPERATURE.diminishedModifierMultiplier);
     }
 
     public void addCount() {
@@ -63,7 +63,7 @@ public class ModifierBase implements Comparable<ModifierBase> {
     }
 
     public void absorb(ModifierBase modifier) {
-        if (count >= ModuleCoreConfig.MISC.TEMPERATURE.modifierCap) {
+        if (count >= ConfigCore.MISC.TEMPERATURE.modifierCap) {
             return;
         }
         this.count += modifier.count;

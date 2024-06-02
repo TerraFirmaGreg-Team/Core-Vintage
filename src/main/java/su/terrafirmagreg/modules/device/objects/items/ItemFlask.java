@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.objects.items;
 import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.spi.item.IItemSettings;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.device.ModuleDeviceConfig;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.SoundDevice;
 
@@ -70,10 +70,10 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
 
         setHasSubtypes(true);
 
-        if (ModuleDeviceConfig.ITEMS.WATER_FLASKS.damageFactor == 0) {
+        if (ConfigDevice.ITEMS.WATER_FLASKS.damageFactor == 0) {
             setMaxDamage(Integer.MAX_VALUE);
         } else {
-            setMaxDamage(capacity / ModuleDeviceConfig.ITEMS.WATER_FLASKS.damageFactor);
+            setMaxDamage(capacity / ConfigDevice.ITEMS.WATER_FLASKS.damageFactor);
         }
 
     }

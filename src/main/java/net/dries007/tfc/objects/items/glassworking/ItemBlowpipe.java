@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.glassworking;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -9,8 +11,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -47,7 +47,7 @@ public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && !player.isSneaking()) {
-            IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            var cap = CapabilityHeat.get(stack);
             if (cap instanceof GlassMolderCapability glassMolderCapability && glassMolderCapability.canWork()) {
                 TFCGuiHandler.openGui(world, player.getPosition(), player, TFCGuiHandler.Type.GLASSWORKING);
             }

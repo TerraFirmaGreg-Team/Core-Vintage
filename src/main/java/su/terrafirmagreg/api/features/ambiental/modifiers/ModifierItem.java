@@ -1,14 +1,11 @@
 package su.terrafirmagreg.api.features.ambiental.modifiers;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.features.ambiental.AmbientalRegistry;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureItemProvider;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-
-
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 public class ModifierItem extends ModifierBase {
 
@@ -22,9 +19,9 @@ public class ModifierItem extends ModifierBase {
 
     public static void computeModifiers(EntityPlayer player, ModifierStorage modifiers) {
         for (ItemStack stack : player.inventoryContainer.inventoryItemStacks) {
-            if (stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
-                IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-                float temp = heat.getTemperature() / 500;
+            if (CapabilityHeat.has(stack)) {
+                var cap = CapabilityHeat.get(stack);
+                float temp = cap.getTemperature() / 500;
                 float change = temp;
                 float potency = 0f;
                 modifiers.add(new ModifierItem("heat_item", change, potency * stack.getCount()));

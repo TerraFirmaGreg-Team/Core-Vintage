@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.ceramics;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
@@ -44,7 +45,6 @@ import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
@@ -216,7 +216,7 @@ public class ItemSmallVessel extends ItemPottery {
 
         @Override
         public float getTemperature() {
-            return CapabilityItemHeat.adjustTemp(temperature, heatCapacity, CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick);
+            return CapabilityHeat.adjustTemp(temperature, heatCapacity, CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick);
         }
 
         @Override
@@ -307,7 +307,7 @@ public class ItemSmallVessel extends ItemPottery {
         @Override
         public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
             return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
-                    capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+                    capability == CapabilityHeat.CAPABILITY;
         }
 
         @Nullable

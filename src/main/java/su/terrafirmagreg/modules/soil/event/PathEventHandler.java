@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.event;
 
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.soil.ConfigSoil;
 import su.terrafirmagreg.modules.soil.ModuleSoil;
-import su.terrafirmagreg.modules.soil.ModuleSoilConfig;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 
 import net.minecraft.block.material.Material;
@@ -55,7 +55,7 @@ public class PathEventHandler {
                 player_speed = player_speed_current;
             }
 
-            if (ModuleCoreConfig.MISC.DEBUG.enable) {
+            if (ConfigCore.MISC.DEBUG.enable) {
                 if (player_debug_cooldown == 0) {
                     ModuleSoil.LOGGER.info("[Player] Random: " + player_random);
                     ModuleSoil.LOGGER.info("[Player] Speed: " + player_speed);
@@ -67,10 +67,10 @@ public class PathEventHandler {
 
             if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && player_speed > 0.2) {
 
-                if (player_random < ModuleSoilConfig.BLOCKS.PATH.PLAYER_GRASS_TO_DIRT && soil.getVariant() == GRASS ||
+                if (player_random < ConfigSoil.BLOCKS.PATH.PLAYER_GRASS_TO_DIRT && soil.getVariant() == GRASS ||
                         soil.getVariant() == DRY_GRASS) {
                     world.setBlockState(posPlayer, DIRT.get(soil.getType()).getDefaultState());
-                    if (ModuleSoilConfig.BLOCKS.PATH.DESTROY_VEGETATION) {
+                    if (ConfigSoil.BLOCKS.PATH.DESTROY_VEGETATION) {
                         BlockPos upPos = posPlayer.up();
                         Material upMaterial = world.getBlockState(upPos).getMaterial();
                         if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat) {
@@ -80,7 +80,7 @@ public class PathEventHandler {
                     return;
                 }
 
-                if (player_random < ModuleSoilConfig.BLOCKS.PATH.PLAYER_DIRT_TO_PATH && soil.getVariant() == DIRT) {
+                if (player_random < ConfigSoil.BLOCKS.PATH.PLAYER_DIRT_TO_PATH && soil.getVariant() == DIRT) {
                     world.setBlockState(posPlayer, GRASS_PATH.get(soil.getType()).getDefaultState());
                     return;
                 }
@@ -88,7 +88,7 @@ public class PathEventHandler {
         }
 
         // MOB PATHING
-        if (ModuleSoilConfig.BLOCKS.PATH.ALL_ENTITIES) {
+        if (ConfigSoil.BLOCKS.PATH.ALL_ENTITIES) {
             if (event.getEntity() != null && !(event.getEntity() instanceof EntityPlayer)) {
                 // GET MOB INFORMATION
                 EntityLivingBase entity = event.getEntityLiving();
@@ -103,7 +103,7 @@ public class PathEventHandler {
                 double mob_random = Math.random() * 1000.0D + 1.0D;
                 double mob_speed = Math.sqrt(entity.motionX * entity.motionX + entity.motionY * entity.motionY + entity.motionZ * entity.motionZ);
 
-                if (ModuleCoreConfig.MISC.DEBUG.enable) {
+                if (ConfigCore.MISC.DEBUG.enable) {
                     if (mob_debug_cooldown == 0) {
                         ModuleSoil.LOGGER.info("[Mob] Random: " + mob_random);
                         ModuleSoil.LOGGER.info("[Mob] Speed: " + mob_speed);
@@ -115,10 +115,10 @@ public class PathEventHandler {
 
                 if (!world.isRemote && state.getBlock() instanceof ISoilBlock soil && mob_speed > 0.08) {
 
-                    if (mob_random < ModuleSoilConfig.BLOCKS.PATH.MOB_GRASS_TO_DIRT && soil.getVariant() == GRASS ||
+                    if (mob_random < ConfigSoil.BLOCKS.PATH.MOB_GRASS_TO_DIRT && soil.getVariant() == GRASS ||
                             soil.getVariant() == DRY_GRASS) {
                         world.setBlockState(posEntity, DIRT.get(soil.getType()).getDefaultState());
-                        if (ModuleSoilConfig.BLOCKS.PATH.DESTROY_VEGETATION) {
+                        if (ConfigSoil.BLOCKS.PATH.DESTROY_VEGETATION) {
                             BlockPos upPos = posEntity.up();
                             Material upMaterial = world.getBlockState(upPos).getMaterial();
                             if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos)
@@ -129,7 +129,7 @@ public class PathEventHandler {
                         return;
                     }
 
-                    if (mob_random < ModuleSoilConfig.BLOCKS.PATH.MOB_DIRT_TO_PATH && soil.getVariant() == DIRT ||
+                    if (mob_random < ConfigSoil.BLOCKS.PATH.MOB_DIRT_TO_PATH && soil.getVariant() == DIRT ||
                             soil.getVariant() == COARSE_DIRT) {
                         world.setBlockState(posEntity, GRASS_PATH.get(soil.getType()).getDefaultState());
                     }

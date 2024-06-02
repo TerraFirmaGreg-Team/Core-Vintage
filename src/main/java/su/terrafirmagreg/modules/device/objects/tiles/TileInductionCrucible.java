@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
@@ -27,8 +28,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.capability.GregtechCapabilities;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
 import tfctech.objects.storage.MachineEnergyContainer;
@@ -115,7 +114,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
         if (!acceptHeat) {
             for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++) {
                 ItemStack stack = inventory.getStackInSlot(i);
-                IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                var cap = CapabilityHeat.get(stack);
                 if (cap != null) {
                     acceptHeat = true;
                     break;

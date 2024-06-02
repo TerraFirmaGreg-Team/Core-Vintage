@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -59,7 +59,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
     @SuppressWarnings("unused")
     public EntityAnimalCow(World worldIn) {
         this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.COW.adulthood, ModuleAnimalConfig.ENTITIES.COW.elder));
+                getRandomGrowth(ConfigAnimal.ENTITIES.COW.adulthood, ConfigAnimal.ENTITIES.COW.elder));
     }
 
     public EntityAnimalCow(World worldIn, Gender gender, int birthDay) {
@@ -73,7 +73,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS)) {
-            return ModuleAnimalConfig.ENTITIES.COW.rarity;
+            return ConfigAnimal.ENTITIES.COW.rarity;
         }
         return 0;
     }
@@ -95,7 +95,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.COW.babies; //one always
+        int numberOfChildren = ConfigAnimal.ENTITIES.COW.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
@@ -107,7 +107,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.COW.gestation;
+        return ConfigAnimal.ENTITIES.COW.gestation;
     }
 
     @Override
@@ -157,7 +157,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.COW.oldDeathChance;
+        return ConfigAnimal.ENTITIES.COW.oldDeathChance;
     }
 
     @Override
@@ -179,12 +179,12 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.COW.adulthood;
+        return ConfigAnimal.ENTITIES.COW.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.COW.elder;
+        return ConfigAnimal.ENTITIES.COW.elder;
     }
 
     @Override
@@ -199,7 +199,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.COW.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.COW.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override

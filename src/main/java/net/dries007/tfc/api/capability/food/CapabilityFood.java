@@ -127,7 +127,7 @@ public final class CapabilityFood {
     }
 
     @Nullable
-    public static ICapabilityProvider getCustomFood(ItemStack stack) {
+    public static ICapabilityProvider getCustom(ItemStack stack) {
         Set<IIngredient<ItemStack>> itemFoodSet = CUSTOM_FOODS.keySet();
         for (IIngredient<ItemStack> ingredient : itemFoodSet) {
             if (ingredient.testIgnoreCount(stack)) {

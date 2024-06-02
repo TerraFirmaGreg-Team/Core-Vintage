@@ -1,12 +1,12 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +25,6 @@ public class ItemBlockHeat extends ItemBlockTFC {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ItemHeatHandler(nbt, heatCapacity, meltingPoint);
+        return new ProviderHeat(nbt, heatCapacity, meltingPoint);
     }
 }

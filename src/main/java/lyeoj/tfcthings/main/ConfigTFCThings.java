@@ -171,11 +171,6 @@ public class ConfigTFCThings {
 
         public static final class WhetstoneCFG {
 
-            @Config.Comment({ "List of items that can be sharpened by a whetstone.",
-                    "You must provide the registry name for each item you want to add." })
-            @Config.LangKey("config.tfcthings.items.canSharpen")
-            public String[] canSharpen = new String[0];
-
             @Config.Comment("The additional mining speed added to a sharpened tool.")
             @Config.RangeInt(
                     min = 0

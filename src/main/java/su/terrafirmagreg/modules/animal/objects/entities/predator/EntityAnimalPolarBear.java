@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.predator;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -96,7 +96,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
         int priority = 2;
-        for (String input : ModuleAnimalConfig.ENTITIES.POLAR_BEAR.huntCreatures) {
+        for (String input : ConfigAnimal.ENTITIES.POLAR_BEAR.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
             if (entityEntry != null) {
@@ -268,7 +268,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-            return ModuleAnimalConfig.ENTITIES.POLAR_BEAR.rarity;
+            return ConfigAnimal.ENTITIES.POLAR_BEAR.rarity;
         }
         return 0;
     }

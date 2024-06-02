@@ -13,7 +13,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "rock")
-public class ModuleRockConfig {
+public class ConfigRock {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -31,7 +31,7 @@ public class ModuleRockConfig {
     public static final MiscCategory MISC = new MiscCategory();
 
     static {
-        ConfigAnytime.register(ModuleRockConfig.class);
+        ConfigAnytime.register(ConfigRock.class);
     }
 
     public static final class BlocksCategory {

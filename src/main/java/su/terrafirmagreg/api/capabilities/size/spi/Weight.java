@@ -1,17 +1,17 @@
 package su.terrafirmagreg.api.capabilities.size.spi;
 
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
 
 
 import lombok.Getter;
 
 @Getter
 public enum Weight {
-    VERY_LIGHT("very_light", ModuleCoreConfig.MISC.WEIGHT.veryLight),
-    LIGHT("light", ModuleCoreConfig.MISC.WEIGHT.light),
-    MEDIUM("medium", ModuleCoreConfig.MISC.WEIGHT.medium),
-    HEAVY("heavy", ModuleCoreConfig.MISC.WEIGHT.heavy),
-    VERY_HEAVY("very_heavy", ModuleCoreConfig.MISC.WEIGHT.veryHeavy);
+    VERY_LIGHT("very_light", ConfigCore.MISC.WEIGHT.veryLight),
+    LIGHT("light", ConfigCore.MISC.WEIGHT.light),
+    MEDIUM("medium", ConfigCore.MISC.WEIGHT.medium),
+    HEAVY("heavy", ConfigCore.MISC.WEIGHT.heavy),
+    VERY_HEAVY("very_heavy", ConfigCore.MISC.WEIGHT.veryHeavy);
 
     public final int stackSize;
     public final String name;

@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.features.ambiental.modifiers;
 
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureEnvironmentalProvider;
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.block.state.IBlockState;
@@ -58,11 +58,11 @@ public class ModifierEnvironmental extends ModifierBase {
     public static float getEnvironmentTemperature(EntityPlayer player) {
         float avg = ClimateTFC.getAvgTemp(player.world, player.getPosition());
         float actual = ClimateTFC.getActualTemp(player.world, player.getPosition());
-        if (ModuleCoreConfig.MISC.TEMPERATURE.harsherTemperateAreas) {
+        if (ConfigCore.MISC.TEMPERATURE.harsherTemperateAreas) {
             float diff = actual - ProviderTemperature.AVERAGE;
             float sign = Math.signum(diff);
             float generalDiff = Math.abs(avg - 15);
-            float mult0 = Math.max(0f, ModuleCoreConfig.MISC.TEMPERATURE.harsherMultiplier - 1f);
+            float mult0 = Math.max(0f, ConfigCore.MISC.TEMPERATURE.harsherMultiplier - 1f);
             float multiplier = 1 + Math.max(0, 1 - generalDiff / 55) * mult0;
             actual = 20 + (diff + 0.5f * sign);
         }

@@ -28,7 +28,7 @@ public enum Heat {
     BRILLIANT_WHITE(1500f, 1601f, TextFormatting.WHITE);
 
     private static final Heat[] VALUES = values();
-    final TextFormatting format, alternate;
+    private final TextFormatting format, alternate;
     @Getter
     private final float min;
     @Getter

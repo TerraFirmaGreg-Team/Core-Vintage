@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
 import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodPlowCart;
@@ -69,7 +69,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
         if (this.isPassenger(pullingIn)) {
             return false;
         }
-        for (String entry : ModuleWoodConfig.ITEMS.PLOW.canPull) {
+        for (String entry : ConfigWood.ITEMS.PLOW.canPull) {
             if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
                 return true;
             }

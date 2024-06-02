@@ -26,4 +26,5 @@ public final class CapabilityEgg {
     public static boolean has(ItemStack itemStack) {
         return itemStack.hasCapability(CAPABILITY, null);
     }
+
 }

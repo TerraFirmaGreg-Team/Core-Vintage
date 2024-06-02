@@ -13,7 +13,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "arboriculture")
-public class ModuleArboricultureConfig {
+public class ConfigArboriculture {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -31,7 +31,7 @@ public class ModuleArboricultureConfig {
     public static final MiscCategory MISC = new MiscCategory();
 
     static {
-        ConfigAnytime.register(ModuleArboricultureConfig.class);
+        ConfigAnytime.register(ConfigArboriculture.class);
     }
 
     public static final class BlocksCategory {

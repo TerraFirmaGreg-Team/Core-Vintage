@@ -68,7 +68,7 @@ public final class CapabilityMetalItem {
     }
 
     @Nullable
-    public static ICapabilityProvider getCustomMetalItem(ItemStack stack) {
+    public static ICapabilityProvider getCustom(ItemStack stack) {
         if (!stack.isEmpty()) {
             Set<IIngredient<ItemStack>> itemItemSet = HandlerMetal.CUSTOM_METAL_ITEMS.keySet();
             for (IIngredient<ItemStack> ingredient : itemItemSet) {

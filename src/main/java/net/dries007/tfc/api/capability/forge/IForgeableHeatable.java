@@ -1,14 +1,16 @@
 package net.dries007.tfc.api.capability.forge;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,10 +19,10 @@ import java.util.List;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 /**
- * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement
- * {@link net.dries007.tfc.api.capability.heat.CapabilityItemHeat} as well You should return the same instance from the getCapability calls
+ * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement {@link CapabilityHeat} as well You should return the same
+ * instance from the getCapability calls
  */
-public interface IForgeableHeatable extends IForgeable, IItemHeat {
+public interface IForgeableHeatable extends IForgeable, ICapabilityHeat {
 
     /**
      * Gets the working temperature of the item

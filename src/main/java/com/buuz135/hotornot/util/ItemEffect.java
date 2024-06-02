@@ -1,5 +1,7 @@
 package com.buuz135.hotornot.util;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -13,20 +15,18 @@ import net.minecraftforge.items.IItemHandler;
 
 import com.buuz135.hotornot.config.HotConfig;
 import com.buuz135.hotornot.config.HotLists;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public enum ItemEffect {
-    FLUID_HOT(itemStack -> {
+    FLUID_HOT(stack -> {
         if (!HotConfig.EFFECT_HANDLING.handleHotFluids) return false;
 
         // Item has been added to the hot list
-        if (HotLists.isHot(itemStack)) return true;
+        if (HotLists.isHot(stack)) return true;
 
-        final IFluidHandlerItem itemFluidHandler = itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        final IFluidHandlerItem itemFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         // Make sure we have a fluid handler
         if (itemFluidHandler == null) return false;
 
@@ -39,24 +39,24 @@ public enum ItemEffect {
             player -> player.setFire(1),
             "tooltip.hotornot.toohot",
             true),
-    HOT_ITEM(itemStack -> {
+    HOT_ITEM(stack -> {
         if (!HotConfig.EFFECT_HANDLING.handleHotItems) return false;
 
-        final IItemHeat itemHeat = itemStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        var cap = CapabilityHeat.get(stack);
         // Just checked this
-        if (itemHeat == null) return false;
+        if (cap == null) return false;
 
-        return itemHeat.getTemperature() >= HotConfig.TEMPERATURE_VALUES.hotItemTemp;
+        return cap.getTemperature() >= HotConfig.TEMPERATURE_VALUES.hotItemTemp;
     }, player -> player.setFire(1),
             "tooltip.hotornot.item_hot",
             true),
-    FLUID_COLD(itemStack -> {
+    FLUID_COLD(stack -> {
         if (!HotConfig.EFFECT_HANDLING.handleColdFluids) return false;
 
         // Item has been added to the cold list
-        if (HotLists.isCold(itemStack)) return true;
+        if (HotLists.isCold(stack)) return true;
 
-        final IFluidHandlerItem itemFluidHandler = itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        final IFluidHandlerItem itemFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         // Make sure we have a fluid handler
         if (itemFluidHandler == null) return false;
 
@@ -72,13 +72,13 @@ public enum ItemEffect {
             },
             "tooltip.hotornot.toocold",
             false),
-    FLUID_GAS(itemStack -> {
+    FLUID_GAS(stack -> {
         if (!HotConfig.EFFECT_HANDLING.handleGaseousFluids) return false;
 
         // Item has been added to the gas list
-        if (HotLists.isGaseous(itemStack)) return true;
+        if (HotLists.isGaseous(stack)) return true;
 
-        final IFluidHandlerItem itemFluidHandler = itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        final IFluidHandlerItem itemFluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
         // Make sure we have a fluid handler
         if (itemFluidHandler == null) return false;
 

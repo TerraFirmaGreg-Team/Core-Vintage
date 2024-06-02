@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -31,9 +32,11 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+
+
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+
+
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TEPlacedItem;
@@ -301,9 +304,9 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
             ItemStack stack = inventory.getStackInSlot(i);
             ItemStack outputStack = ItemStack.EMPTY;
             // First, heat up the item to max temperature, so the recipe can properly check the temperature of the item
-            IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (heat != null) {
-                heat.setTemperature(Heat.maxVisibleTemperature());
+            var cap = CapabilityHeat.get(stack);
+            if (cap != null) {
+                cap.setTemperature(Heat.maxVisibleTemperature());
 
                 // Only Tier I and below can be melted in a pit kiln
                 HeatRecipe recipe = HeatRecipe.get(stack, Metal.Tier.TIER_I);
@@ -312,7 +315,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
                 }
 
                 // Heat up the output as well
-                IItemHeat outputHeat = outputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                var outputHeat = CapabilityHeat.get(outputStack);
                 if (outputHeat != null) {
                     outputHeat.setTemperature(Heat.maxVisibleTemperature());
                 }

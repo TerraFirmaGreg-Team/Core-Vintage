@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
@@ -62,7 +62,7 @@ public class PuddlesEventHandler {
                         BlockPos puddlePos = pos.add(0, y, 0);
 
                         if (this.canSpawnPuddle(world, puddlePos)) {
-                            if (random.nextInt(100) < ModuleCoreConfig.BLOCKS.PUDDLE.puddleRate) {
+                            if (random.nextInt(100) < ConfigCore.BLOCKS.PUDDLE.puddleRate) {
                                 world.setBlockState(puddlePos.up(), BlocksCore.PUDDLE.getDefaultState(), 2);
                             }
                         }
@@ -106,7 +106,7 @@ public class PuddlesEventHandler {
         BlockPos pos = event.getPos().up();
         EntityPlayer player = event.getEntityPlayer();
         if (world.getBlockState(pos).getBlock() == BlocksCore.PUDDLE) {
-            if (stack.getItem() == Items.GLASS_BOTTLE && ModuleCoreConfig.BLOCKS.PUDDLE.canUseGlassBottle) {
+            if (stack.getItem() == Items.GLASS_BOTTLE && ConfigCore.BLOCKS.PUDDLE.canUseGlassBottle) {
                 if (event.getFace() == EnumFacing.UP) {
                     if (!world.isRemote) {
                         stack.shrink(1);

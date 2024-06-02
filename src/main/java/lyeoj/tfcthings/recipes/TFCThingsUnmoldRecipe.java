@@ -1,5 +1,8 @@
 package lyeoj.tfcthings.recipes;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.lib.MathConstants;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -24,17 +27,12 @@ import com.google.gson.JsonObject;
 import lyeoj.tfcthings.init.TFCThingsItems;
 import lyeoj.tfcthings.items.ItemTFCThingsMold;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import su.terrafirmagreg.api.lib.MathConstants;
 
 public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
@@ -171,9 +169,10 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
         Metal m = moldHandler.getMetal();
         if (m != null) {
             ItemStack output = new ItemStack(TFCThingsItems.TOOLS_HEADS_BY_METAL.get(type).get(m));
-            IItemHeat heat = (IItemHeat) output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, (EnumFacing) null);
-            if (heat != null) {
-                heat.setTemperature(moldHandler.getTemperature());
+
+            var cap = CapabilityHeat.get(output);
+            if (cap != null) {
+                cap.setTemperature(moldHandler.getTemperature());
             }
 
             return output;

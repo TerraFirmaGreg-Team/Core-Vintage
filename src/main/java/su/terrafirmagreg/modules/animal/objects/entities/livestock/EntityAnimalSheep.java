@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
@@ -65,7 +65,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
     @SuppressWarnings("unused")
     public EntityAnimalSheep(World worldIn) {
         this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.SHEEP.adulthood, ModuleAnimalConfig.ENTITIES.SHEEP.elder),
+                getRandomGrowth(ConfigAnimal.ENTITIES.SHEEP.adulthood, ConfigAnimal.ENTITIES.SHEEP.elder),
                 EntitySheep.getRandomSheepColor(RNG));
     }
 
@@ -81,7 +81,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS)) {
-            return ModuleAnimalConfig.ENTITIES.SHEEP.rarity;
+            return ConfigAnimal.ENTITIES.SHEEP.rarity;
         }
         return 0;
     }
@@ -103,7 +103,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
     @Override
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.SHEEP.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.SHEEP.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
@@ -115,7 +115,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
     @Override
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.SHEEP.gestation;
+        return ConfigAnimal.ENTITIES.SHEEP.gestation;
     }
 
     @Override
@@ -177,7 +177,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.SHEEP.oldDeathChance;
+        return ConfigAnimal.ENTITIES.SHEEP.oldDeathChance;
     }
 
     @Override
@@ -199,12 +199,12 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.SHEEP.adulthood;
+        return ConfigAnimal.ENTITIES.SHEEP.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.SHEEP.elder;
+        return ConfigAnimal.ENTITIES.SHEEP.elder;
     }
 
     @Override
@@ -225,7 +225,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.SHEEP.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.SHEEP.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override

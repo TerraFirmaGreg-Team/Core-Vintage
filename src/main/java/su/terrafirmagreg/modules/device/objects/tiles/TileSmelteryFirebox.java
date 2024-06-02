@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
@@ -20,7 +21,6 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -112,7 +112,7 @@ public class TileSmelteryFirebox extends TETickableInventory
                 float targetTemperature = burnTemperature + airTicks;
                 if (temperature != targetTemperature) {
                     float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
-                    temperature = CapabilityItemHeat.adjustTempTowards(temperature, targetTemperature, delta * (airTicks > 0 ? 2 : 1));
+                    temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature, delta * (airTicks > 0 ? 2 : 1));
                 }
             }
         }
@@ -145,12 +145,12 @@ public class TileSmelteryFirebox extends TETickableInventory
             if (burnTicks > deltaPlayerTicks) {
                 burnTicks -= deltaPlayerTicks;
                 float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier * deltaPlayerTicks;
-                temperature = CapabilityItemHeat.adjustTempTowards(temperature, burnTemperature, delta, delta);
+                temperature = CapabilityHeat.adjustTempTowards(temperature, burnTemperature, delta, delta);
                 deltaPlayerTicks = 0;
             } else {
                 deltaPlayerTicks -= burnTicks;
                 float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier * burnTicks;
-                temperature = CapabilityItemHeat.adjustTempTowards(temperature, burnTemperature, delta, delta);
+                temperature = CapabilityHeat.adjustTempTowards(temperature, burnTemperature, delta, delta);
                 consumeFuel();
             }
         }

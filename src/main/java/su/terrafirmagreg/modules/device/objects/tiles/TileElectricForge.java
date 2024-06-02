@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
@@ -33,8 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.ITileFields;
@@ -113,7 +112,7 @@ public class TileElectricForge extends TEInventory
         if (energyUsage < 1) energyUsage = 1;
         for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
             ItemStack stack = inventory.getStackInSlot(i);
-            IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            var cap = CapabilityHeat.get(stack);
             float modifier = stack.getItem() instanceof IMetalItem ? ((IMetalItem) stack.getItem()).getSmeltAmount(stack) / 100.0F : 1.0F;
             if (cap != null) {
                 // Update temperature of item
@@ -200,10 +199,10 @@ public class TileElectricForge extends TEInventory
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
         if (slot <= SLOT_INPUT_MAX) {
-            return stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            return CapabilityHeat.has(stack);
         } else {
             return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
-                    stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                    CapabilityHeat.has(stack);
         }
     }
 
@@ -300,7 +299,7 @@ public class TileElectricForge extends TEInventory
 
     private void handleInputMelting(ItemStack stack, int index) {
         HeatRecipe recipe = cachedRecipes[index];
-        IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        var cap = CapabilityHeat.get(stack);
 
         if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature())) {
             // Handle possible metal output
@@ -323,7 +322,7 @@ public class TileElectricForge extends TEInventory
                             fluidStack.amount -= amountFilled;
 
                             // If the fluid was filled, make sure to make it the same temperature
-                            IItemHeat heatHandler = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                            var heatHandler = CapabilityHeat.get(stack);
                             if (heatHandler != null) {
                                 heatHandler.setTemperature(itemTemperature);
                             }

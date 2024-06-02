@@ -1,16 +1,12 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +33,6 @@ public class ItemMiscHeatable extends ItemMisc {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ItemHeatHandler(nbt, heatCapacity, meltTemp);
+        return new ProviderHeat(nbt, heatCapacity, meltTemp);
     }
 }

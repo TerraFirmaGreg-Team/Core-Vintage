@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -71,7 +71,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
     @SuppressWarnings("unused")
     public EntityAnimalOcelot(World world) {
         this(world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.OCELOT.adulthood, ModuleAnimalConfig.ENTITIES.OCELOT.elder));
+                EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.OCELOT.adulthood, ConfigAnimal.ENTITIES.OCELOT.elder));
     }
 
     public EntityAnimalOcelot(World world, IAnimal.Gender gender, int birthDay) {
@@ -140,12 +140,12 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.OCELOT.adulthood;
+        return ConfigAnimal.ENTITIES.OCELOT.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.OCELOT.elder;
+        return ConfigAnimal.ENTITIES.OCELOT.elder;
     }
 
     @Override
@@ -192,7 +192,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ModuleAnimalConfig.ENTITIES.OCELOT.rarity;
+            return ConfigAnimal.ENTITIES.OCELOT.rarity;
         }
         return 0;
     }
@@ -213,7 +213,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
     }
 
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.OCELOT.gestation;
+        return ConfigAnimal.ENTITIES.OCELOT.gestation;
     }
 
     @Override
@@ -247,7 +247,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
                 // Randomly die of old age, tied to entity UUID and calendar time
                 final Random random = new Random(
                         this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-                if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.OCELOT.oldDeathChance) {
+                if (random.nextDouble() < ConfigAnimal.ENTITIES.OCELOT.oldDeathChance) {
                     this.setDead();
                 }
             }
@@ -260,7 +260,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
     }
 
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.OCELOT.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.OCELOT.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalOcelot baby = new EntityAnimalOcelot(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
@@ -279,7 +279,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
         super.initEntityAI();
 
         int priority = 1;
-        for (String input : ModuleAnimalConfig.ENTITIES.OCELOT.huntCreatures) {
+        for (String input : ConfigAnimal.ENTITIES.OCELOT.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
             if (entityEntry != null) {

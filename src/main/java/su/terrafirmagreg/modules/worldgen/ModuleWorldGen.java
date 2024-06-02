@@ -33,8 +33,8 @@ public final class ModuleWorldGen extends ModuleBase {
         // world type name. If this is not null, the new world type can not be created with
         // the same ID.
         Injector.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", null);
-        Injector.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g",
-                new WorldTypeDebugMod()); // Sets the world type to the new type.
+        // Sets the world type to the new type.
+        Injector.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", new WorldTypeDebugMod());
     }
 
     @Override

@@ -1,8 +1,9 @@
 package net.dries007.tfc.objects.items.glassworking;
 
-import net.dries007.tfc.objects.items.ItemMisc;
-
-
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.data.Constants;
 
 import net.minecraft.client.resources.I18n;
@@ -23,18 +24,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 
 
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
+import net.dries007.tfc.objects.items.ItemMisc;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,7 +61,7 @@ public class ItemGlassMolder extends ItemMisc {
         return new GlassMolderCapability(stack, capacity, nbt);
     }
 
-    public static class GlassMolderCapability extends ItemHeatHandler implements ICapabilityProvider, IFluidHandlerItem {
+    public static class GlassMolderCapability extends ProviderHeat implements ICapabilityProvider, IFluidHandlerItem {
 
         private final FluidWhitelistHandler tank;
         private final int capacity;
@@ -91,8 +88,7 @@ public class ItemGlassMolder extends ItemMisc {
 
         @Override
         public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-            return capability == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY
-                    || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+            return capability == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY || capability == CapabilityHeat.CAPABILITY;
         }
 
         @Nullable

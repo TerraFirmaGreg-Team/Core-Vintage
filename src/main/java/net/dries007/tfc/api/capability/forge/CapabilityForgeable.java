@@ -32,7 +32,7 @@ public final class CapabilityForgeable {
     }
 
     @Nullable
-    public static ICapabilityProvider getCustomForgeable(ItemStack stack) {
+    public static ICapabilityProvider getCustom(ItemStack stack) {
         Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_ITEMS.keySet();
         for (IIngredient<ItemStack> ingredient : itemItemSet) {
             if (ingredient.testIgnoreCount(stack)) {

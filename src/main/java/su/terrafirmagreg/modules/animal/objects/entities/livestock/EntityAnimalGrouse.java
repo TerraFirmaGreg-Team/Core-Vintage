@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
@@ -32,7 +32,7 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 
     public EntityAnimalGrouse(World worldIn) {
         this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.GROUSE.adulthood, ModuleAnimalConfig.ENTITIES.GROUSE.elder));
+                getRandomGrowth(ConfigAnimal.ENTITIES.GROUSE.adulthood, ConfigAnimal.ENTITIES.GROUSE.elder));
     }
 
     public EntityAnimalGrouse(World worldIn, Gender gender, int birthDay) {
@@ -45,19 +45,19 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ModuleAnimalConfig.ENTITIES.GROUSE.rarity;
+            return ConfigAnimal.ENTITIES.GROUSE.rarity;
         }
         return 0;
     }
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.GROUSE.adulthood;
+        return ConfigAnimal.ENTITIES.GROUSE.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.GROUSE.elder;
+        return ConfigAnimal.ENTITIES.GROUSE.elder;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
             if (cap != null) {
                 EntityAnimalGrouse chick = new EntityAnimalGrouse(this.world);
                 chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.GROUSE.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+                cap.setFertilized(chick, ConfigAnimal.ENTITIES.GROUSE.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
             }
         }
         eggs.add(egg);
@@ -78,7 +78,7 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.GROUSE.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.GROUSE.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override
@@ -109,6 +109,6 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.GROUSE.oldDeathChance;
+        return ConfigAnimal.ENTITIES.GROUSE.oldDeathChance;
     }
 }

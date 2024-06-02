@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,9 +20,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+
+
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
@@ -60,7 +65,7 @@ public class ItemMetalMalletMold extends ItemPottery {
 
     // Extends ItemHeatHandler for ease of use
 
-    public class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler {
+    public class FilledMoldCapability extends ProviderHeat implements ICapabilityProvider, IMoldHandler {
 
         private final FluidTank tank;
         private IFluidTankProperties[] fluidTankProperties;
@@ -155,7 +160,7 @@ public class ItemMetalMalletMold extends ItemPottery {
         @Override
         public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
             return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY
-                    || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+                    || capability == CapabilityHeat.CAPABILITY;
         }
 
         @Nullable

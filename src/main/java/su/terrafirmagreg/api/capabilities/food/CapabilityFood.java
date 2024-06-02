@@ -7,19 +7,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
-
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 public final class CapabilityFood {
 
@@ -129,17 +123,6 @@ public final class CapabilityFood {
         if (cap != null) {
             cap.setNonDecaying();
         }
-    }
-
-    @Nullable
-    public static ICapabilityProvider getCustomFood(ItemStack stack) {
-        Set<IIngredient<ItemStack>> itemFoodSet = HandlerFood.CUSTOM_FOODS.keySet();
-        for (IIngredient<ItemStack> ingredient : itemFoodSet) {
-            if (ingredient.testIgnoreCount(stack)) {
-                return HandlerFood.CUSTOM_FOODS.get(ingredient).get();
-            }
-        }
-        return null;
     }
 
     /**

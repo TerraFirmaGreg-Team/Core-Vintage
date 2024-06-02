@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -41,7 +41,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
     @SuppressWarnings("unused")
     public EntityAnimalAlpaca(World worldIn) {
         this(worldIn, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.ALPACA.adulthood, ModuleAnimalConfig.ENTITIES.ALPACA.elder),
+                EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.ALPACA.adulthood, ConfigAnimal.ENTITIES.ALPACA.elder),
                 EntitySheep.getRandomSheepColor(MathConstants.RNG));
     }
 
@@ -54,7 +54,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TAIGA)) {
-            return ModuleAnimalConfig.ENTITIES.ALPACA.rarity;
+            return ConfigAnimal.ENTITIES.ALPACA.rarity;
         }
         return 0;
     }
@@ -76,7 +76,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.ALPACA.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.ALPACA.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
@@ -88,12 +88,12 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.ALPACA.gestation;
+        return ConfigAnimal.ENTITIES.ALPACA.gestation;
     }
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.ALPACA.oldDeathChance;
+        return ConfigAnimal.ENTITIES.ALPACA.oldDeathChance;
     }
 
     @Override
@@ -103,17 +103,17 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.ALPACA.adulthood;
+        return ConfigAnimal.ENTITIES.ALPACA.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.ALPACA.elder;
+        return ConfigAnimal.ENTITIES.ALPACA.elder;
     }
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.ALPACA.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.ALPACA.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override

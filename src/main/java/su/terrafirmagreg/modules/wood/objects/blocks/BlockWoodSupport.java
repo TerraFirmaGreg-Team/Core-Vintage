@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 
@@ -65,10 +65,10 @@ public class BlockWoodSupport extends BlockWood {
      * @return true if there is a support in 4 block radius
      */
     public static boolean isBeingSupported(World worldIn, BlockPos pos) {
-        int sRangeHor = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor;
-        int sRangeVert = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeUp;
-        int sRangeHorNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
-        int sRangeVertNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
+        int sRangeHor = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor;
+        int sRangeVert = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeUp;
+        int sRangeHorNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
+        int sRangeVertNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
         if (!worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
             return true; // If world isn't loaded...
         }
@@ -96,10 +96,10 @@ public class BlockWoodSupport extends BlockWood {
         int maxY = Math.max(from.getY(), to.getY());
         int minZ = Math.min(from.getZ(), to.getZ());
         int maxZ = Math.max(from.getZ(), to.getZ());
-        int sRangeHor = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor;
-        int sRangeVert = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeUp;
-        int sRangeHorNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
-        int sRangeVertNeg = ModuleWoodConfig.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
+        int sRangeHor = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor;
+        int sRangeVert = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeUp;
+        int sRangeHorNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeHor * -1;
+        int sRangeVertNeg = ConfigWood.BLOCKS.SUPPORT.supportBeamRangeDown * -1;
         BlockPos minPoint = new BlockPos(minX, minY, minZ);
         BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
         for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(

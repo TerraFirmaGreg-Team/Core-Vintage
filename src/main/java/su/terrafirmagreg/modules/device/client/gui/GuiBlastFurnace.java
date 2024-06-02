@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
@@ -13,10 +14,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+
 import net.dries007.tfc.client.gui.GuiContainerTE;
 
 import java.util.ArrayList;
@@ -171,11 +171,9 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
 
         tempList.clear();
         for (int i = 0; i < tile.getOreStacks().size(); i++) {
-            IItemHeat heatInf = tile.getOreStacks()
-                    .get(i)
-                    .getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (heatInf != null)
-                tempList.add(heatInf.getTemperature());
+            var cap = CapabilityHeat.get(tile.getOreStacks().get(i));
+            if (cap != null)
+                tempList.add(cap.getTemperature());
         }
 
     }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -50,7 +50,7 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.DESERT)) {
-            return ModuleAnimalConfig.ENTITIES.MONGOOSE.rarity;
+            return ConfigAnimal.ENTITIES.MONGOOSE.rarity;
         }
         return 0;
     }

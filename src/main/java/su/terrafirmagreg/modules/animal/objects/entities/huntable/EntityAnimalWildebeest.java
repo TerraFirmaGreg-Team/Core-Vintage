@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -66,7 +66,7 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ModuleAnimalConfig.ENTITIES.WILDEBEEST.rarity;
+            return ConfigAnimal.ENTITIES.WILDEBEEST.rarity;
         }
         return 0;
     }

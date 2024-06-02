@@ -8,10 +8,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-
-import org.jetbrains.annotations.Nullable;
 
 public final class CapabilityDamageResistance {
 
@@ -40,14 +36,4 @@ public final class CapabilityDamageResistance {
         return entity.hasCapability(CAPABILITY, null);
     }
 
-    @Nullable
-    public static ICapabilityProvider getCustom(ItemStack stack) {
-
-        for (var entry : HandlerDamageResistance.CUSTOM_ITEMS.entrySet()) {
-            if (entry.getKey().testIgnoreCount(stack)) {
-                return entry.getValue().get();
-            }
-        }
-        return null;
-    }
 }

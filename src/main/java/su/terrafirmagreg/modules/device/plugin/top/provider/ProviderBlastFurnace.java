@@ -19,7 +19,10 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.dries007.tfc.api.capability.heat.Heat;
+
+
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+
 
 import java.util.ArrayList;
 import java.util.List;

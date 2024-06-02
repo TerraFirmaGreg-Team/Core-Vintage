@@ -1,11 +1,16 @@
 package su.terrafirmagreg.api.capabilities.damage;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,5 +50,24 @@ public class HandlerDamageResistance {
         CUSTOM_ENTITY.put(new ResourceLocation("minecraft", "zombie_villager"),
                 () -> new ProviderDamageResistance(50, 15, 0));
 
+    }
+
+    @Nullable
+    public static ICapabilityProvider getCustom(ItemStack stack) {
+        for (var entry : CUSTOM_ITEMS.entrySet()) {
+            if (entry.getKey().testIgnoreCount(stack)) {
+                return entry.getValue().get();
+            }
+        }
+        if (stack.getItem() instanceof ItemArmor) {
+            return new ProviderDamageResistance();
+        }
+        return null;
+    }
+
+    @Nullable
+    public static ICapabilityProvider getCustom(Entity entity) {
+
+        return CUSTOM_ENTITY.get(EntityList.getKey(entity)).get();
     }
 }

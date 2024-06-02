@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
@@ -37,7 +37,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
     public EntityAnimalDuck(World worldIn) {
         this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.DUCK.adulthood, ModuleAnimalConfig.ENTITIES.DUCK.elder));
+                getRandomGrowth(ConfigAnimal.ENTITIES.DUCK.adulthood, ConfigAnimal.ENTITIES.DUCK.elder));
     }
 
     public EntityAnimalDuck(World worldIn, Gender gender, int birthDay) {
@@ -50,19 +50,19 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-            return ModuleAnimalConfig.ENTITIES.DUCK.rarity;
+            return ConfigAnimal.ENTITIES.DUCK.rarity;
         }
         return 0;
     }
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.DUCK.adulthood;
+        return ConfigAnimal.ENTITIES.DUCK.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.DUCK.elder;
+        return ConfigAnimal.ENTITIES.DUCK.elder;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
             if (cap != null) {
                 EntityAnimalDuck chick = new EntityAnimalDuck(this.world);
                 chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.DUCK.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+                cap.setFertilized(chick, ConfigAnimal.ENTITIES.DUCK.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
             }
         }
         eggs.add(egg);
@@ -83,7 +83,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.DUCK.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.DUCK.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override
@@ -114,6 +114,6 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.DUCK.oldDeathChance;
+        return ConfigAnimal.ENTITIES.DUCK.oldDeathChance;
     }
 }

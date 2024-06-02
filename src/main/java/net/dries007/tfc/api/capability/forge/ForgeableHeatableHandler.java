@@ -1,19 +1,20 @@
 package net.dries007.tfc.api.capability.forge;
 
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ForgeableHeatableHandler extends ItemHeatHandler implements IForgeableHeatable {
+public class ForgeableHeatableHandler extends ProviderHeat implements IForgeableHeatable {
 
     private final ForgeableHandler internalForgeCap;
 

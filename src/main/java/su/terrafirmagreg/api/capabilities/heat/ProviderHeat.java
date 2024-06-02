@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
  * This is an implementation of ItemHeat that automatically cools down over time Prefer extending or using this than implementing IItemHeat directly Exceptions if you want to
  * extend another capability object (see SmallVessel) but you should still implement this functionality somewhere
  */
-public class ProviderHeat implements ICapabilityHeat, ICapabilitySerializable<NBTTagCompound> {
+public class ProviderHeat implements ICapabilityHeat {
 
     // These are "constants". Some implementations will want to change these based on other factors. (See ItemMold)
     protected float heatCapacity;

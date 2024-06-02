@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -80,7 +80,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TAIGA || biomeType == BiomeHelper.BiomeType.PLAINS
                         || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-            return ModuleAnimalConfig.ENTITIES.RABBIT.rarity;
+            return ConfigAnimal.ENTITIES.RABBIT.rarity;
         }
         return 0;
     }

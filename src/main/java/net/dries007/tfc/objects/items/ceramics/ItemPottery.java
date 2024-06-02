@@ -1,16 +1,12 @@
 package net.dries007.tfc.objects.items.ceramics;
 
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.objects.items.ItemTFC;
@@ -46,6 +42,6 @@ public class ItemPottery extends ItemTFC {
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
         // Heat capability, as pottery needs to be able to be fired, or survive despite not having a heat capability
-        return new ItemHeatHandler(nbt, 1.0f, 1599f);
+        return new ProviderHeat(nbt, 1.0f, 1599f);
     }
 }

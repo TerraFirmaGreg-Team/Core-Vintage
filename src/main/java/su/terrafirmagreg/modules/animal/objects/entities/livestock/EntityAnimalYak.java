@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
@@ -29,7 +29,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
     @SuppressWarnings("unused")
     public EntityAnimalYak(World worldIn) {
         this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.YAK.adulthood, ModuleAnimalConfig.ENTITIES.YAK.elder));
+                getRandomGrowth(ConfigAnimal.ENTITIES.YAK.adulthood, ConfigAnimal.ENTITIES.YAK.elder));
     }
 
     public EntityAnimalYak(World worldIn, Gender gender, int birthDay) {
@@ -42,14 +42,14 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TAIGA)) {
-            return ModuleAnimalConfig.ENTITIES.YAK.rarity;
+            return ConfigAnimal.ENTITIES.YAK.rarity;
         }
         return 0;
     }
 
     @Override
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.YAK.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.YAK.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
@@ -61,12 +61,12 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
     @Override
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.YAK.gestation;
+        return ConfigAnimal.ENTITIES.YAK.gestation;
     }
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.YAK.oldDeathChance;
+        return ConfigAnimal.ENTITIES.YAK.oldDeathChance;
     }
 
     @Override
@@ -76,17 +76,17 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.YAK.adulthood;
+        return ConfigAnimal.ENTITIES.YAK.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.YAK.elder;
+        return ConfigAnimal.ENTITIES.YAK.elder;
     }
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.YAK.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.YAK.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override

@@ -12,7 +12,11 @@ import net.minecraft.util.ResourceLocation;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.heat.Heat;
+
+
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+
+
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.network.PacketGuiButton;
 import tfctech.client.TechGuiHandler;

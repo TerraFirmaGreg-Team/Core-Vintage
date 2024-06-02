@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -31,8 +32,6 @@ import net.minecraftforge.fluids.FluidStack;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
@@ -241,7 +240,7 @@ public class TileBlastFurnace extends TETickableInventory
                 }
 
                 if (temperature > 0 || burnTemperature > 0) {
-                    temperature = CapabilityItemHeat.adjustToTargetTemperature(temperature, burnTemperature, airTicks, MAX_AIR_TICKS);
+                    temperature = CapabilityHeat.adjustToTargetTemperature(temperature, burnTemperature, airTicks, MAX_AIR_TICKS);
                     // Provide heat to blocks that are one block bellow AKA crucible
                     Block blockCrucible = world.getBlockState(pos.down()).getBlock();
                     if (blockCrucible instanceof IHeatConsumerBlock heatConsumerBlock) {
@@ -250,12 +249,12 @@ public class TileBlastFurnace extends TETickableInventory
                     if (!world.isRemote) {
                         oreStacks.removeIf(stack ->
                         {
-                            IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                            var cap = CapabilityHeat.get(stack);
                             if (cap != null) {
                                 // Update temperature of item
                                 float itemTemp = cap.getTemperature();
                                 if (temperature > itemTemp) {
-                                    CapabilityItemHeat.addTemp(cap);
+                                    CapabilityHeat.addTemp(cap);
                                 }
                                 if (cap.isMolten()) {
                                     convertToMolten(stack);

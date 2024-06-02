@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.CollectionUtils;
 
@@ -14,8 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +33,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
 
     @Override
     public boolean isValidInput(FluidStack inputFluid, ItemStack inputStack) {
-        IItemHeat cap = inputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        var cap = CapabilityHeat.get(inputStack);
         if (cap != null) {
             return cap.getTemperature() > 0 && this.inputFluid.testIgnoreCount(inputFluid);
         }
@@ -60,9 +59,9 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
     @Override
     @NotNull
     public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
-        IItemHeat heat = inputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-        if (heat != null) {
-            heat.setTemperature(heat.getTemperature() - coolAmount);
+        var cap = CapabilityHeat.get(inputStack);
+        if (cap != null) {
+            cap.setTemperature(cap.getTemperature() - coolAmount);
         }
         return CollectionUtils.listOf(inputStack);
     }

@@ -23,7 +23,6 @@ import net.minecraftforge.fml.server.FMLServerHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.client.ClientEvents;
@@ -141,7 +140,6 @@ public final class TerraFirmaCraft {
         JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
 
         CapabilityChunkData.preInit();
-        CapabilityItemHeat.preInit();
         CapabilityForgeable.preInit();
         CapabilityFood.preInit();
         CapabilityMetalItem.preInit();

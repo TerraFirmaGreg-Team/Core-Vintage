@@ -1,6 +1,7 @@
 package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.lib.Unicode;
@@ -37,8 +38,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.util.IRockObject;
@@ -316,9 +315,9 @@ public class ClientEvents {
             if (size != null) {
                 size.addSizeInfo(stack, tt);
             }
-            IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (heat != null) {
-                heat.addHeatInfo(stack, tt);
+            var cap = CapabilityHeat.get(stack);
+            if (cap != null) {
+                cap.addHeatInfo(stack, tt);
             }
             IForgeable forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (forging != null && forging.getWork() > 0) {

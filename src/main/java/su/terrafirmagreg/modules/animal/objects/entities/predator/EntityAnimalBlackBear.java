@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -51,7 +51,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-            return ModuleAnimalConfig.ENTITIES.BLACK_BEAR.rarity;
+            return ConfigAnimal.ENTITIES.BLACK_BEAR.rarity;
         }
         return 0;
     }
@@ -69,7 +69,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
         int priority = 2;
-        for (String input : ModuleAnimalConfig.ENTITIES.BLACK_BEAR.huntCreatures) {
+        for (String input : ConfigAnimal.ENTITIES.BLACK_BEAR.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
             if (entityEntry != null) {

@@ -3,9 +3,9 @@ package su.terrafirmagreg.modules.wood.objects.entities;
 import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.ModuleWood;
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.network.SCPacketDrawnUpdate;
 
@@ -49,7 +49,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
 
     public static final UUID PULL_SLOWLY_MODIFIER_UUID = UUID.fromString("49B0E52E-48F2-4D89-BED7-4F5DF26F1263");
     public static final AttributeModifier PULL_SLOWLY_MODIFIER = new AttributeModifier(PULL_SLOWLY_MODIFIER_UUID, "Pull slowly modifier",
-            ModuleWoodConfig.MISC.SPEED_MODIFIER, 2).setSaved(false);
+            ConfigWood.MISC.SPEED_MODIFIER, 2).setSaved(false);
     private static final DataParameter<String> WOOD_NAME = EntityDataManager.createKey(EntityWoodCart.class, DataSerializers.STRING);
     private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.createKey(EntityWoodCart.class, DataSerializers.VARINT);
     private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.createKey(EntityWoodCart.class, DataSerializers.FLOAT);
@@ -293,7 +293,7 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
             double moveX = targetVec.x - this.posX + lookX * this.spacing;
             double moveZ = targetVec.z - this.posZ + lookZ * this.spacing;
             this.motionX = moveX;
-            if (ModuleCoreConfig.MISC.DEBUG.enable && this.pulling instanceof EntityPlayer && !this.world.isRemote) {
+            if (ConfigCore.MISC.DEBUG.enable && this.pulling instanceof EntityPlayer && !this.world.isRemote) {
                 System.out.println(this.pulling.fallDistance);
             }
             if (!this.pulling.onGround && this.pulling.fallDistance == 0.0F) {

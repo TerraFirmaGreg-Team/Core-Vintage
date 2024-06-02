@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.lib.MathConstants;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +17,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.GlassworkingRecipe;
 import net.dries007.tfc.objects.container.IButtonHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
@@ -153,13 +152,13 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
     }
 
     public boolean isSolidified() {
-        IItemHeat capHeat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-        return capHeat instanceof ItemGlassMolder.GlassMolderCapability && ((ItemGlassMolder.GlassMolderCapability) capHeat).isSolidified();
+        var cap = CapabilityHeat.get(stack);
+        return cap instanceof ItemGlassMolder.GlassMolderCapability && ((ItemGlassMolder.GlassMolderCapability) cap).isSolidified();
     }
 
     public boolean canWork() {
-        IItemHeat capHeat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-        return capHeat instanceof ItemGlassMolder.GlassMolderCapability && ((ItemGlassMolder.GlassMolderCapability) capHeat).canWork();
+        var cap = CapabilityHeat.get(stack);
+        return cap instanceof ItemGlassMolder.GlassMolderCapability && ((ItemGlassMolder.GlassMolderCapability) cap).canWork();
     }
 
     private void addContainerSlots() {

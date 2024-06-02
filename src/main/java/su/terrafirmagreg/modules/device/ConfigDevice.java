@@ -13,7 +13,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "device")
-public class ModuleDeviceConfig {
+public class ConfigDevice {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -59,7 +59,7 @@ public class ModuleDeviceConfig {
     }
 
     static {
-        ConfigAnytime.register(ModuleDeviceConfig.class);
+        ConfigAnytime.register(ConfigDevice.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

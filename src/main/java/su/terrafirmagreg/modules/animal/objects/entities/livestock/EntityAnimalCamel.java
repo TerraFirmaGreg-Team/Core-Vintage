@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
@@ -58,7 +58,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
     public EntityAnimalCamel(World world) {
         this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-                EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.CAMEL.adulthood, ModuleAnimalConfig.ENTITIES.CAMEL.elder));
+                EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.CAMEL.adulthood, ConfigAnimal.ENTITIES.CAMEL.elder));
         this.setSize(0.9F, 2.0F);
     }
 
@@ -193,12 +193,12 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.CAMEL.adulthood;
+        return ConfigAnimal.ENTITIES.CAMEL.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.CAMEL.elder;
+        return ConfigAnimal.ENTITIES.CAMEL.elder;
     }
 
     @Override
@@ -206,7 +206,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ModuleAnimalConfig.ENTITIES.CAMEL.rarity;
+            return ConfigAnimal.ENTITIES.CAMEL.rarity;
         }
         return 0;
     }
@@ -235,7 +235,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
     @Override
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.CAMEL.gestation;
+        return ConfigAnimal.ENTITIES.CAMEL.gestation;
     }
 
     @Override
@@ -299,7 +299,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
     @Override
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.CAMEL.babies; //one always
+        int numberOfChildren = ConfigAnimal.ENTITIES.CAMEL.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());

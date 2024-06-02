@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -36,7 +36,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
     @SuppressWarnings("unused")
     public EntityAnimalPig(World worldIn) {
         this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.PIG.adulthood, ModuleAnimalConfig.ENTITIES.PIG.elder));
+                getRandomGrowth(ConfigAnimal.ENTITIES.PIG.adulthood, ConfigAnimal.ENTITIES.PIG.elder));
     }
 
     public EntityAnimalPig(World worldIn, Gender gender, int birthDay) {
@@ -46,7 +46,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.PIG.oldDeathChance;
+        return ConfigAnimal.ENTITIES.PIG.oldDeathChance;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-            return ModuleAnimalConfig.ENTITIES.PIG.rarity;
+            return ConfigAnimal.ENTITIES.PIG.rarity;
         }
         return 0;
     }
@@ -76,7 +76,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.PIG.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.PIG.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalPig baby = new EntityAnimalPig(world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
@@ -88,7 +88,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.PIG.gestation;
+        return ConfigAnimal.ENTITIES.PIG.gestation;
     }
 
     @Override
@@ -98,12 +98,12 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.PIG.adulthood;
+        return ConfigAnimal.ENTITIES.PIG.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.PIG.elder;
+        return ConfigAnimal.ENTITIES.PIG.elder;
     }
 
     @Override

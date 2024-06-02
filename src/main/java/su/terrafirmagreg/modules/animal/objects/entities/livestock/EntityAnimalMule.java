@@ -6,8 +6,8 @@ import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
@@ -71,7 +71,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
     public EntityAnimalMule(World world) {
         this(world, Gender.valueOf(RNG.nextBoolean()),
-                EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.MULE.adulthood, ModuleAnimalConfig.ENTITIES.MULE.elder));
+                EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.MULE.adulthood, ConfigAnimal.ENTITIES.MULE.elder));
     }
 
     public EntityAnimalMule(World world, Gender gender, int birthDay) {
@@ -132,12 +132,12 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.MULE.adulthood;
+        return ConfigAnimal.ENTITIES.MULE.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.MULE.elder;
+        return ConfigAnimal.ENTITIES.MULE.elder;
     }
 
     @Override
@@ -199,7 +199,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
 
     @Override
     public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-        return ModuleAnimalConfig.ENTITIES.MULE.rarity; // Not naturally spawned, must be bred
+        return ConfigAnimal.ENTITIES.MULE.rarity; // Not naturally spawned, must be bred
     }
 
     @Override
@@ -283,7 +283,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
                 // Randomly die of old age, tied to entity UUID and calendar time
                 final Random random = new Random(
                         this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-                if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.MULE.oldDeathChance) {
+                if (random.nextDouble() < ConfigAnimal.ENTITIES.MULE.oldDeathChance) {
                     this.setDead();
                 }
             }

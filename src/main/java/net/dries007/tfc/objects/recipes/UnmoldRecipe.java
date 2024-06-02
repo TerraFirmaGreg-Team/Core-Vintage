@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.lib.MathConstants;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +23,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
@@ -33,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @SuppressWarnings("unused")
@@ -187,9 +186,9 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
         Metal m = moldHandler.getMetal();
         if (m != null) {
             ItemStack output = new ItemStack(ItemMetal.get(m, type));
-            IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
-            if (heat != null) {
-                heat.setTemperature(moldHandler.getTemperature());
+            var cap = CapabilityHeat.get(output);
+            if (cap != null) {
+                cap.setTemperature(moldHandler.getTemperature());
             }
             return output;
         }

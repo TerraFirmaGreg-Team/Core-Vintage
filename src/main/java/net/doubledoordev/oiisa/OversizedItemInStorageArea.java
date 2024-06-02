@@ -1,6 +1,7 @@
 package net.doubledoordev.oiisa;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.util.MathsUtils;
@@ -30,9 +31,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -318,19 +316,16 @@ public class OversizedItemInStorageArea {
             //Loop over the slots.
             for (Slot slot : slotsToEffect) {
                 //If the stack has a heat capability and isn't on the ignore list we can get the cap off the item and check the heat.
-                if (slot.getStack()
-                        .hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null) && !blockedItemNameList.contains(slot.getStack()
-                        .getItem()
-                        .getRegistryName()
-                        .toString())) {
-                    IItemHeat heatCapability = slot.getStack()
-                            .getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                ItemStack stack = slot.getStack();
+                if (CapabilityHeat.has(stack) && !blockedItemNameList.contains(stack.getItem().getRegistryName().toString())) {
+
+                    var cap = CapabilityHeat.get(stack);
 
                     // if we should do overheat stuff, Needs to be enabled, Traced pos needs to be valid, It needs to be a TE, The item needs a valid heatcap and the temp needs to be high enough.
-                    if (tracedPos != null && world.getTileEntity(tracedPos) != null && heatCapability != null &&
-                            heatCapability.getTemperature() >= ModConfig.overheatOptions.heatToStartFire) {
+                    if (tracedPos != null && world.getTileEntity(tracedPos) != null && cap != null &&
+                            cap.getTemperature() >= ModConfig.overheatOptions.heatToStartFire) {
                         if (ModConfig.debugOptions.debug && ModConfig.debugOptions.heatDebug) {
-                            LOGGER.info("Current Item Temperature: " + heatCapability.getTemperature() + " Maximum Temperature allowed: " +
+                            LOGGER.info("Current Item Temperature: " + cap.getTemperature() + " Maximum Temperature allowed: " +
                                     ModConfig.overheatOptions.heatToStartFire);
                         }
                         // get the blockstate at the pos location
@@ -367,12 +362,12 @@ public class OversizedItemInStorageArea {
 
             for (ItemStack item : playerArmorInv) {
                 //If the stack has a heat capability and isn't on the ignore list we can get the cap off the item and check the heat.
-                if (item.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
-                    IItemHeat heatCapability = item.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                if (CapabilityHeat.has(item)) {
+                    var cap = CapabilityHeat.get(item);
 
                     //Make sure it's not null.
-                    if (heatCapability != null) {
-                        float itemTemp = heatCapability.getTemperature();
+                    if (cap != null) {
+                        float itemTemp = cap.getTemperature();
                         //First check for incineration as it's the higher value (or should be)...
                         if (itemTemp >= ModConfig.overheatOptions.heatToIncineratePlayer) {
                             //Check each inventory to incinerate items based off if they have a furnace fuel value.
@@ -442,7 +437,7 @@ public class OversizedItemInStorageArea {
                         //If they aren't hot enough to incinerate :(, Burn them instead! (if they are hot enough)
                         else if (itemTemp >= ModConfig.overheatOptions.heatToCombustPlayer) {
                             //Make with the hots.
-                            player.setFire((int) (heatCapability.getTemperature() - ModConfig.overheatOptions.heatToIncineratePlayer));
+                            player.setFire((int) (cap.getTemperature() - ModConfig.overheatOptions.heatToIncineratePlayer));
                         }
                     }
                 }

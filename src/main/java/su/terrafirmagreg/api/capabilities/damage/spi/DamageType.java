@@ -3,7 +3,7 @@ package su.terrafirmagreg.api.capabilities.damage.spi;
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.damage.ICapabilityDamageResistance;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -55,17 +55,17 @@ public enum DamageType {
         // Unblockable damage types don't have a special damage source
         if (!source.isUnblockable()) {
             // First try and match damage types specified via config
-            for (String damageType : ModuleCoreConfig.MISC.DAMAGE.slashingSources) {
+            for (String damageType : ConfigCore.MISC.DAMAGE.slashingSources) {
                 if (damageType.equals(source.damageType)) {
                     return SLASHING;
                 }
             }
-            for (String damageType : ModuleCoreConfig.MISC.DAMAGE.crushingSources) {
+            for (String damageType : ConfigCore.MISC.DAMAGE.crushingSources) {
                 if (damageType.equals(source.damageType)) {
                     return CRUSHING;
                 }
             }
-            for (String damageType : ModuleCoreConfig.MISC.DAMAGE.piercingSources) {
+            for (String damageType : ConfigCore.MISC.DAMAGE.piercingSources) {
                 if (damageType.equals(source.damageType)) {
                     return PIERCING;
                 }
@@ -90,17 +90,17 @@ public enum DamageType {
                 ResourceLocation entityType = EntityList.getKey(sourceEntity);
                 if (entityType != null) {
                     String entityTypeName = entityType.toString();
-                    for (String damageType : ModuleCoreConfig.MISC.DAMAGE.slashingEntities) {
+                    for (String damageType : ConfigCore.MISC.DAMAGE.slashingEntities) {
                         if (damageType.equals(entityTypeName)) {
                             return SLASHING;
                         }
                     }
-                    for (String damageType : ModuleCoreConfig.MISC.DAMAGE.crushingEntities) {
+                    for (String damageType : ConfigCore.MISC.DAMAGE.crushingEntities) {
                         if (damageType.equals(entityTypeName)) {
                             return CRUSHING;
                         }
                     }
-                    for (String damageType : ModuleCoreConfig.MISC.DAMAGE.piercingEntities) {
+                    for (String damageType : ConfigCore.MISC.DAMAGE.piercingEntities) {
                         if (damageType.equals(entityTypeName)) {
                             return PIERCING;
                         }

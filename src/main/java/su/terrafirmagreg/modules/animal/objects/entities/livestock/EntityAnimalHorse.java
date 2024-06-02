@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
@@ -80,7 +80,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 
     public EntityAnimalHorse(World world) {
         this(world, Gender.valueOf(RNG.nextBoolean()),
-                EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.HORSE.adulthood, ModuleAnimalConfig.ENTITIES.HORSE.elder));
+                EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.HORSE.adulthood, ConfigAnimal.ENTITIES.HORSE.elder));
     }
 
     public EntityAnimalHorse(World world, Gender gender, int birthDay) {
@@ -180,12 +180,12 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.HORSE.adulthood;
+        return ConfigAnimal.ENTITIES.HORSE.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.HORSE.elder;
+        return ConfigAnimal.ENTITIES.HORSE.elder;
     }
 
     @Override
@@ -252,7 +252,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.PLAINS)) {
-            return ModuleAnimalConfig.ENTITIES.HORSE.rarity;
+            return ConfigAnimal.ENTITIES.HORSE.rarity;
         }
         return 0;
     }
@@ -281,7 +281,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
     }
 
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.HORSE.gestation;
+        return ConfigAnimal.ENTITIES.HORSE.gestation;
     }
 
     @Override
@@ -476,7 +476,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
                 // Randomly die of old age, tied to entity UUID and calendar time
                 final Random random = new Random(
                         this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-                if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.HORSE.oldDeathChance) {
+                if (random.nextDouble() < ConfigAnimal.ENTITIES.HORSE.oldDeathChance) {
                     this.setDead();
                 }
             }
@@ -509,7 +509,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
     }
 
     private void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.HORSE.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.HORSE.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             // Birth one animal
             IAnimal baby;

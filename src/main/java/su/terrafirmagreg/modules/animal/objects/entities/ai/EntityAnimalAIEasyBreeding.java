@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.ai;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.entity.ai.EntityAIBase;
@@ -68,12 +68,12 @@ public class EntityAnimalAIEasyBreeding extends EntityAIBase {
         return world.getEntitiesWithinAABB(
                 EntityItem.class,
                 new AxisAlignedBB(
-                        animal.posX - ModuleAnimalConfig.MISC.searchDistance,
-                        animal.posY - ModuleAnimalConfig.MISC.searchDistance,
-                        animal.posZ - ModuleAnimalConfig.MISC.searchDistance,
-                        animal.posX + ModuleAnimalConfig.MISC.searchDistance,
-                        animal.posY + ModuleAnimalConfig.MISC.searchDistance,
-                        animal.posZ + ModuleAnimalConfig.MISC.searchDistance
+                        animal.posX - ConfigAnimal.MISC.searchDistance,
+                        animal.posY - ConfigAnimal.MISC.searchDistance,
+                        animal.posZ - ConfigAnimal.MISC.searchDistance,
+                        animal.posX + ConfigAnimal.MISC.searchDistance,
+                        animal.posY + ConfigAnimal.MISC.searchDistance,
+                        animal.posZ + ConfigAnimal.MISC.searchDistance
                 ));
     }
 }

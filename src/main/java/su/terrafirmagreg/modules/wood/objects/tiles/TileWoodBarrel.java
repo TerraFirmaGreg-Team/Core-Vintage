@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.spi.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.itemblocks.ItemBlockWoodBarrel;
@@ -240,11 +240,11 @@ public class TileWoodBarrel extends BaseTileTickableInventory
 
                 ItemStack fluidContainerIn = inventory.getStackInSlot(SLOT_FLUID_CONTAINER_IN);
                 FluidActionResult result = FluidTransferHelper.emptyContainerIntoTank(fluidContainerIn, tank, inventory, SLOT_FLUID_CONTAINER_OUT,
-                        ModuleWoodConfig.BLOCKS.BARREL.tank, world, pos);
+                        ConfigWood.BLOCKS.BARREL.tank, world, pos);
 
                 if (!result.isSuccess()) {
                     result = FluidTransferHelper.fillContainerFromTank(fluidContainerIn, tank, inventory, SLOT_FLUID_CONTAINER_OUT,
-                            ModuleWoodConfig.BLOCKS.BARREL.tank, world, pos);
+                            ConfigWood.BLOCKS.BARREL.tank, world, pos);
                 }
 
                 if (result.isSuccess()) {
@@ -477,8 +477,8 @@ public class TileWoodBarrel extends BaseTileTickableInventory
         private final Set<Fluid> whitelist;
 
         public BarrelFluidTank(IFluidTankCallback callback, int fluidTankID) {
-            super(callback, fluidTankID, ModuleWoodConfig.BLOCKS.BARREL.tank);
-            whitelist = Arrays.stream(ModuleWoodConfig.BLOCKS.BARREL.fluidWhitelist)
+            super(callback, fluidTankID, ConfigWood.BLOCKS.BARREL.tank);
+            whitelist = Arrays.stream(ConfigWood.BLOCKS.BARREL.fluidWhitelist)
                     .map(FluidRegistry::getFluid)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());

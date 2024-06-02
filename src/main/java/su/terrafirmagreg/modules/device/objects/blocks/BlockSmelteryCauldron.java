@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
@@ -30,8 +31,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -101,7 +100,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileP
                         if (fluidHandler != null) {
                             if (FluidUtil.interactWithFluidHandler(player, hand, fluidHandler)) {
                                 held = player.getHeldItem(hand); // Forge update item in hand
-                                IItemHeat cap = held.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                                var cap = CapabilityHeat.get(held);
                                 if (cap != null) {
                                     cap.setTemperature(tile.getTemp());
                                 }

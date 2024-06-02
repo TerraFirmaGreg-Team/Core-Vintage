@@ -4,8 +4,11 @@ import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.egg.HandlerEgg;
 import su.terrafirmagreg.api.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.api.capabilities.food.HandlerFood;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.HandlerHeat;
 import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
@@ -108,6 +111,9 @@ public final class ModuleCore extends ModuleBase {
     @Override
     protected void onInit(FMLInitializationEvent event) {
         HandlerSize.init();
+        HandlerFood.init();
+        HandlerEgg.init();
+        HandlerHeat.init();
         HandlerDamageResistance.init();
     }
 

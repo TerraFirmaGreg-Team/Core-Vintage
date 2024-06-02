@@ -1,10 +1,15 @@
 package su.terrafirmagreg.modules.core.event;
 
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
+import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.egg.HandlerEgg;
+import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.api.capabilities.sharpness.HandlerSharpness;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.api.capabilities.size.HandlerSize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -25,6 +30,8 @@ public class CapabilitiesItemHandler {
         size(event, stack);
         food(event, stack);
         metal(event, stack);
+        heat(event, stack);
+        sharpness(event, stack);
         egg(event, stack);
         damageResistance(event, stack);
     }
@@ -33,7 +40,7 @@ public class CapabilitiesItemHandler {
 
         if (CapabilitySize.getIItemSize(stack) != null) return;
 
-        ICapabilityProvider provider = CapabilitySize.getCustom(stack);
+        ICapabilityProvider provider = HandlerSize.getCustom(stack);
 
         event.addCapability(CapabilitySize.KEY, provider);
 
@@ -56,17 +63,31 @@ public class CapabilitiesItemHandler {
 
     }
 
+    public void heat(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+
+    }
+
+    public void sharpness(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+
+        ICapabilityProvider provider = HandlerSharpness.getCustom(stack);
+        if (provider == null) return;
+
+        event.addCapability(CapabilitySharpness.KEY, provider);
+    }
+
     public void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
+        ICapabilityProvider provider = HandlerEgg.getCustom(stack);
+        if (provider == null) return;
+
+        event.addCapability(CapabilityEgg.KEY, provider);
     }
 
     public void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
-        if (stack.getItem() instanceof ItemArmor) {
-            ICapabilityProvider provider = CapabilityDamageResistance.getCustom(stack);
-            if (provider == null) return;
+        ICapabilityProvider provider = HandlerDamageResistance.getCustom(stack);
+        if (provider == null) return;
 
-            event.addCapability(CapabilityDamageResistance.KEY, provider);
-        }
+        event.addCapability(CapabilityDamageResistance.KEY, provider);
     }
 }

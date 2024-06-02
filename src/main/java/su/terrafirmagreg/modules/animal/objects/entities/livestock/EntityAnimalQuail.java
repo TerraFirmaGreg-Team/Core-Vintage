@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundAnimal;
@@ -32,7 +32,7 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
     public EntityAnimalQuail(World worldIn) {
         this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.QUAIL.adulthood, ModuleAnimalConfig.ENTITIES.QUAIL.elder));
+                getRandomGrowth(ConfigAnimal.ENTITIES.QUAIL.adulthood, ConfigAnimal.ENTITIES.QUAIL.elder));
     }
 
     public EntityAnimalQuail(World worldIn, Gender gender, int birthDay) {
@@ -45,19 +45,19 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
-            return ModuleAnimalConfig.ENTITIES.QUAIL.rarity;
+            return ConfigAnimal.ENTITIES.QUAIL.rarity;
         }
         return 0;
     }
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.QUAIL.adulthood;
+        return ConfigAnimal.ENTITIES.QUAIL.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.QUAIL.elder;
+        return ConfigAnimal.ENTITIES.QUAIL.elder;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
             if (cap != null) {
                 EntityAnimalQuail chick = new EntityAnimalQuail(this.world);
                 chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.QUAIL.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+                cap.setFertilized(chick, ConfigAnimal.ENTITIES.QUAIL.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
             }
         }
         eggs.add(egg);
@@ -78,7 +78,7 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.QUAIL.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.QUAIL.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override
@@ -109,6 +109,6 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.QUAIL.oldDeathChance;
+        return ConfigAnimal.ENTITIES.QUAIL.oldDeathChance;
     }
 }

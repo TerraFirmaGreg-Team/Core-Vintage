@@ -13,7 +13,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "wood")
-public class ModuleWoodConfig {
+public class ConfigWood {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -31,28 +31,24 @@ public class ModuleWoodConfig {
     public static final MiscCategory MISC = new MiscCategory();
 
     static {
-        ConfigAnytime.register(ModuleWoodConfig.class);
+        ConfigAnytime.register(ConfigWood.class);
     }
 
     public static final class BlocksCategory {
 
         @Config.Comment("Barrel")
-
         public final Barrel BARREL = new Barrel();
 
-        @Config.Comment("Barrel")
-
+        @Config.Comment("Support")
         public final Support SUPPORT = new Support();
 
         public static final class Barrel {
 
             @Config.Comment("How much fluid (mB) can a barrel hold?")
             @Config.RangeInt(min = 100)
-
             public int tank = 10_000;
 
             @Config.Comment("List of fluids allowed to be inserted into a barrel.")
-
             public String[] fluidWhitelist = {
                     "fresh_water",
                     "hot_water",
@@ -98,17 +94,14 @@ public class ModuleWoodConfig {
 
             @Config.Comment("Horizontal radius of the support range of support beams.")
             @Config.RangeInt(min = 0, max = 8)
-
             public int supportBeamRangeHor = 4;
 
             @Config.Comment("Upwards support range of support beams.")
             @Config.RangeInt(min = 0, max = 3)
-
             public int supportBeamRangeUp = 1;
 
             @Config.Comment("Downwards support range of support beams.")
             @Config.RangeInt(min = 0, max = 3)
-
             public int supportBeamRangeDown = 1;
         }
     }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -82,7 +82,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TAIGA)) {
-            return ModuleAnimalConfig.ENTITIES.GRIZZLY_BEAR.rarity;
+            return ConfigAnimal.ENTITIES.GRIZZLY_BEAR.rarity;
         }
         return 0;
     }
@@ -212,7 +212,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
         this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
         int priority = 2;
-        for (String input : ModuleAnimalConfig.ENTITIES.GRIZZLY_BEAR.huntCreatures) {
+        for (String input : ConfigAnimal.ENTITIES.GRIZZLY_BEAR.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
             if (entityEntry != null) {

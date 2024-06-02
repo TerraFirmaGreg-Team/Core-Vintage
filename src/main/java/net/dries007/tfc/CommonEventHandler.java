@@ -1,10 +1,9 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.api.capabilities.egg.ProviderEgg;
-import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.api.capabilities.sharpness.ProviderSharpness;
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.HandlerHeat;
+import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
@@ -15,7 +14,7 @@ import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
@@ -97,8 +96,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
-import lyeoj.tfcthings.items.ItemRopeJavelin;
-import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
@@ -107,9 +104,6 @@ import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
@@ -132,9 +126,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
-import net.dries007.tfc.objects.items.metal.ItemMetalSword;
-import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -145,8 +136,6 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
-import java.util.Arrays;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
@@ -422,7 +411,7 @@ public final class CommonEventHandler {
             // Because our foods supply a custom capability in Item#initCapabilities, we need to avoid attaching a duplicate, otherwise it breaks food stacking recipes.
             // This problem goes away in 1.15 as all of these definitions (including ours) become tags)
             // We allow custom defined capabilities to attach to non-food items, that should have rot (such as eggs).
-            ICapabilityProvider foodHandler = CapabilityFood.getCustomFood(stack);
+            ICapabilityProvider foodHandler = CapabilityFood.getCustom(stack);
             if (foodHandler != null || stack.getItem() instanceof ItemFood) {
                 if (stack.getItem() instanceof IItemFoodTFC) {
                     foodHandler = ((IItemFoodTFC) stack.getItem()).getCustomFoodHandler();
@@ -434,22 +423,16 @@ public final class CommonEventHandler {
             }
 
             // Forge / Metal / Heat. Try forge first, because it's more specific
-            ICapabilityProvider forgeHandler = CapabilityForgeable.getCustomForgeable(stack);
+            ICapabilityProvider forgeHandler = CapabilityForgeable.getCustom(stack);
             boolean isForgeable = false;
             boolean isHeatable = false;
             if (forgeHandler != null) {
                 isForgeable = true;
                 event.addCapability(CapabilityForgeable.KEY, forgeHandler);
-                isHeatable = forgeHandler instanceof IItemHeat;
-            }
-            //TODO: TFCTECH
-            // Attach missing heat capability to rocks
-            if (item instanceof ItemRock) {
-                ICapabilityProvider heatCap = new ItemHeatHandler(stack.getTagCompound(), 0.2f, 2000f);
-                event.addCapability(CapabilityItemHeat.KEY, heatCap);
+                isHeatable = forgeHandler instanceof ICapabilityHeat;
             }
             // Metal
-            ICapabilityProvider metalCapability = CapabilityMetalItem.getCustomMetalItem(stack);
+            ICapabilityProvider metalCapability = CapabilityMetalItem.getCustom(stack);
             if (metalCapability != null) {
                 event.addCapability(CapabilityMetalItem.KEY, metalCapability);
                 if (!isForgeable) {
@@ -457,30 +440,18 @@ public final class CommonEventHandler {
                     IMetalItem cap = (IMetalItem) metalCapability;
                     Metal metal = cap.getMetal(stack);
                     if (metal != null) {
-                        event.addCapability(CapabilityForgeable.KEY,
-                                new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+                        event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
                         isHeatable = true;
                     }
                 }
             }
 
-            if (event.getObject().getItem() instanceof ItemMetalTool || event.getObject().getItem() instanceof ItemMetalSword
-                    || event.getObject().getItem() instanceof ItemRopeJavelin || (event.getObject().getItem().getRegistryName() != null
-                    && Arrays.asList(ConfigTFCThings.Items.WHETSTONE.canSharpen).contains(event.getObject().getItem().getRegistryName().toString()))) {
-                event.addCapability(CapabilitySharpness.KEY, new ProviderSharpness(event.getObject()));
-            }
-
             // If one of the above is also heatable, skip this
             if (!isHeatable) {
-                ICapabilityProvider heatHandler = CapabilityItemHeat.getCustomHeat(stack);
+                ICapabilityProvider heatHandler = HandlerHeat.getCustom(stack);
                 if (heatHandler != null) {
-                    event.addCapability(CapabilityItemHeat.KEY, heatHandler);
+                    event.addCapability(CapabilityHeat.KEY, heatHandler);
                 }
-            }
-
-            // Eggs
-            if (stack.getItem() == Items.EGG) {
-                event.addCapability(CapabilityEgg.KEY, new ProviderEgg());
             }
         }
     }
@@ -558,8 +529,8 @@ public final class CommonEventHandler {
                     if (nbt != null) {
                         player.getFoodStats().readNBT(nbt);
 
-                        foodStatsTFC.setFoodLevel(ModuleCoreConfig.ENTITY.PLAYER.respawnHungerLevel / 5);
-                        foodStatsTFC.setThirst(ModuleCoreConfig.ENTITY.PLAYER.respawnThirstLevel); // Why isn't this also on an 0 - 20 interval ?
+                        foodStatsTFC.setFoodLevel(ConfigCore.ENTITY.PLAYER.respawnHungerLevel / 5);
+                        foodStatsTFC.setThirst(ConfigCore.ENTITY.PLAYER.respawnThirstLevel); // Why isn't this also on an 0 - 20 interval ?
                     }
                 }
             }
@@ -752,8 +723,8 @@ public final class CommonEventHandler {
         }
         if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entity instanceof EntityItem entityItem) {
             ItemStack stack = entityItem.getItem();
-            IItemHeat heatCap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-            if (heatCap != null) {
+            var cap = CapabilityHeat.get(stack);
+            if (cap != null) {
                 // Add a NBT tag here to make sure our ItemExpireEvent listener picks this entity up as valid (and as an extra check)
                 entityItem.addTag("TFCHeatableItem");
                 entityItem.lifespan = ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool;
@@ -780,9 +751,9 @@ public final class CommonEventHandler {
     public static void onItemEntityExpire(ItemExpireEvent event) {
         EntityItem entityItem = event.getEntityItem();
         ItemStack stack = entityItem.getItem();
-        IItemHeat heatCap;
-        if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entityItem.getTags()
-                .contains("TFCHeatableItem") && (heatCap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) != null) {
+        ICapabilityHeat heatCap;
+        if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entityItem.getTags().contains("TFCHeatableItem") &&
+                (heatCap = CapabilityHeat.get(stack)) != null) {
             int lifespan = stack.getItem().getEntityLifespan(stack, entityItem.world);
             if (entityItem.lifespan >= lifespan) {
                 return; // If the ItemEntity has been there for as long or if not longer than the original unmodified lifespan, we return and setDead

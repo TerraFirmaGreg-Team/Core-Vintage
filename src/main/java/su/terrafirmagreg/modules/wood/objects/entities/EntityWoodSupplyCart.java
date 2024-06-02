@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.objects.entities;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodSupplyCart;
@@ -48,7 +48,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
         if (this.isPassenger(pullingIn)) {
             return false;
         }
-        for (String entry : ModuleWoodConfig.ITEMS.SUPPLY_CART.canPull) {
+        for (String entry : ConfigWood.ITEMS.SUPPLY_CART.canPull) {
             if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
                 return true;
             }

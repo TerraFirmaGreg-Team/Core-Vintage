@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 
 import net.minecraft.entity.Entity;
@@ -31,7 +31,7 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
         if (this.isPassenger(pullingIn)) {
             return false;
         }
-        for (String entry : ModuleWoodConfig.ITEMS.ANIMAL_CART.canPull) {
+        for (String entry : ConfigWood.ITEMS.ANIMAL_CART.canPull) {
             if (entry.equals(pullingIn instanceof EntityPlayer ? "minecraft:player" : EntityList.getKey(pullingIn).toString())) {
                 return true;
             }

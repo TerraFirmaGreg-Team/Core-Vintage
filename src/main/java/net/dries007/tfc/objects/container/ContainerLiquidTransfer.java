@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +14,6 @@ import net.minecraftforge.items.SlotItemHandler;
 
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 
@@ -64,8 +63,8 @@ public class ContainerLiquidTransfer extends ContainerItemStack implements ISlot
 
     @Override
     public boolean canInteractWith(@NotNull EntityPlayer player) {
-        IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-        return heat != null && heat.isMolten() && super.canInteractWith(player);
+        var cap = CapabilityHeat.get(stack);
+        return cap != null && cap.isMolten() && super.canInteractWith(player);
     }
 
     @Override

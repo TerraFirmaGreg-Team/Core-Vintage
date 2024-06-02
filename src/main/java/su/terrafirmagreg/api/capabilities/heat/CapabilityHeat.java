@@ -8,15 +8,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 public final class CapabilityHeat {
 
@@ -90,14 +84,4 @@ public final class CapabilityHeat {
         return temp;
     }
 
-    @Nullable
-    public static ICapabilityProvider getCustomHeat(ItemStack stack) {
-        Set<IIngredient<ItemStack>> itemItemSet = HandlerHeat.CUSTOM_ITEMS.keySet();
-        for (IIngredient<ItemStack> ingredient : itemItemSet) {
-            if (ingredient.testIgnoreCount(stack)) {
-                return HandlerHeat.CUSTOM_ITEMS.get(ingredient).get();
-            }
-        }
-        return null;
-    }
 }

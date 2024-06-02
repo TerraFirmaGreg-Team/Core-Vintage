@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
@@ -40,9 +42,11 @@ import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
+
+
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+
+
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -184,7 +188,7 @@ public class TileFirePit extends TETickableInventory
             // Always update temperature / cooking, until the fire pit is not hot anymore
             if (temperature > 0 || burnTemperature > 0) {
                 // Update temperature
-                temperature = CapabilityItemHeat.adjustToTargetTemperature(temperature, burnTemperature, airTicks, MAX_AIR_TICKS);
+                temperature = CapabilityHeat.adjustToTargetTemperature(temperature, burnTemperature, airTicks, MAX_AIR_TICKS);
             }
 
             BlockFirePit.FirePitAttachment attachment = state.getValue(ATTACHMENT);
@@ -193,11 +197,11 @@ public class TileFirePit extends TETickableInventory
                 if (temperature > 0) {
                     // The fire pit is nice: it will automatically move input to output for you, saving the trouble of losing the input due to melting / burning
                     ItemStack stack = inventory.getStackInSlot(SLOT_ITEM_INPUT);
-                    IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                    var cap = CapabilityHeat.get(stack);
                     if (cap != null) {
                         float itemTemp = cap.getTemperature();
                         if (temperature > itemTemp) {
-                            CapabilityItemHeat.addTemp(cap);
+                            CapabilityHeat.addTemp(cap);
                         }
 
                         handleInputMelting(stack);
@@ -285,11 +289,11 @@ public class TileFirePit extends TETickableInventory
                 // Only difference is we do the same heating recipe manipulations, just with five extra slots instead.
                 for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
                     ItemStack stack = inventory.getStackInSlot(i);
-                    IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                    var cap = CapabilityHeat.get(stack);
                     if (cap != null) {
                         float itemTemp = cap.getTemperature();
                         if (temperature > itemTemp) {
-                            CapabilityItemHeat.addTemp(cap);
+                            CapabilityHeat.addTemp(cap);
                         }
                         handleGrillCooking(i, stack, cap);
                     }
@@ -338,7 +342,7 @@ public class TileFirePit extends TETickableInventory
             burnTemperature = 0;
             temperature = 0;
             ItemStack stack = inventory.getStackInSlot(SLOT_ITEM_INPUT);
-            IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            var cap = CapabilityHeat.get(stack);
             if (cap != null) {
                 cap.setTemperature(0f);
             }
@@ -470,11 +474,11 @@ public class TileFirePit extends TETickableInventory
             case SLOT_FUEL_INPUT: // Valid fuel if it is registered correctly
                 return FuelManager.isItemFuel(stack) && !FuelManager.isItemForgeFuel(stack);
             case SLOT_ITEM_INPUT: // Valid input as long as it can be heated
-                return stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                return CapabilityHeat.has(stack);
             case SLOT_OUTPUT_1:
             case SLOT_OUTPUT_2: // Valid insert into output as long as it can hold fluids and is heat-able
                 return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
-                        stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                        CapabilityHeat.has(stack);
             case SLOT_EXTRA_INPUT_START:
             case SLOT_EXTRA_INPUT_START + 1:
             case SLOT_EXTRA_INPUT_START + 2:
@@ -488,7 +492,7 @@ public class TileFirePit extends TETickableInventory
                                     Food.Category.MEAT);
                 } else if (attachment == BlockFirePit.FirePitAttachment.GRILL) {
                     // Grill can only do food + heatable
-                    return stack.hasCapability(CapabilityFood.CAPABILITY, null) && stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                    return stack.hasCapability(CapabilityFood.CAPABILITY, null) && CapabilityHeat.has(stack);
                 }
             default: // Other fuel slots + output slots
                 return false;
@@ -633,7 +637,7 @@ public class TileFirePit extends TETickableInventory
     }
 
     private void handleInputMelting(ItemStack stack) {
-        IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        var cap = CapabilityHeat.get(stack);
 
         if (cachedRecipe != null && cap != null && cachedRecipe.isValidTemperature(cap.getTemperature())) {
             HeatRecipe recipe = cachedRecipe; // Avoids NPE on slot changes
@@ -648,9 +652,9 @@ public class TileFirePit extends TETickableInventory
                     fluidStack.amount -= amountFilled;
 
                     // If the fluid was filled, make sure to make it the same temperature
-                    IItemHeat heatHandler = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-                    if (heatHandler != null) {
-                        heatHandler.setTemperature(itemTemperature);
+                    var capability = CapabilityHeat.get(output);
+                    if (capability != null) {
+                        capability.setTemperature(itemTemperature);
                     }
                 }
                 if (fluidStack.amount > 0) {
@@ -662,9 +666,9 @@ public class TileFirePit extends TETickableInventory
 
                         if (amountFilled > 0) {
                             // If the fluid was filled, make sure to make it the same temperature
-                            IItemHeat heatHandler = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-                            if (heatHandler != null) {
-                                heatHandler.setTemperature(itemTemperature);
+                            var capability = CapabilityHeat.get(output);
+                            if (capability != null) {
+                                capability.setTemperature(itemTemperature);
                             }
                         }
                     }
@@ -685,7 +689,7 @@ public class TileFirePit extends TETickableInventory
         }
     }
 
-    private void handleGrillCooking(int slot, ItemStack stack, IItemHeat heat) {
+    private void handleGrillCooking(int slot, ItemStack stack, ICapabilityHeat heat) {
         HeatRecipe recipe = cachedGrillRecipes[slot - SLOT_EXTRA_INPUT_START];
         if (recipe != null && recipe.isValidTemperature(heat.getTemperature())) {
             ItemStack output = recipe.getOutputStack(stack);

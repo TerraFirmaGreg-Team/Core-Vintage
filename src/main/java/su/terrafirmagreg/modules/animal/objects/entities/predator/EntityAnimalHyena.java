@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -73,7 +73,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ModuleAnimalConfig.ENTITIES.HYENA.rarity;
+            return ConfigAnimal.ENTITIES.HYENA.rarity;
         }
         return 0;
     }
@@ -150,7 +150,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
         this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 16.0F, 1.0D, 1.25D));
 
         int priority = 2;
-        for (String input : ModuleAnimalConfig.ENTITIES.HYENA.huntCreatures) {
+        for (String input : ConfigAnimal.ENTITIES.HYENA.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
             if (entityEntry != null) {

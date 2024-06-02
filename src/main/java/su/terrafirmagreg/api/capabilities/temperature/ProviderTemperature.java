@@ -9,8 +9,8 @@ import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierItem;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierStorage;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
 import su.terrafirmagreg.modules.core.network.SCPacketTemperature;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,11 +32,11 @@ public class ProviderTemperature implements ICapabilityTemperature {
     public static final float GOOD_MULTIPLIER = 0.002f;
     public static final float CHANGE_CAP = 7.5f;
     public static final float HIGH_CHANGE = 0.20f;
-    public static float AVERAGE = ModuleCoreConfig.MISC.TEMPERATURE.averageTemperature;
-    public static float HOT_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.hotTemperature;
-    public static float COOL_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.coldTemperature;
-    public static float BURN_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.burningTemperature;
-    public static float FREEZE_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.freezingTemperature;
+    public static float AVERAGE = ConfigCore.MISC.TEMPERATURE.averageTemperature;
+    public static float HOT_THRESHOLD = ConfigCore.MISC.TEMPERATURE.hotTemperature;
+    public static float COOL_THRESHOLD = ConfigCore.MISC.TEMPERATURE.coldTemperature;
+    public static float BURN_THRESHOLD = ConfigCore.MISC.TEMPERATURE.burningTemperature;
+    public static float FREEZE_THRESHOLD = ConfigCore.MISC.TEMPERATURE.freezingTemperature;
     @Getter
     private final EntityPlayer player;
     /**
@@ -79,14 +79,14 @@ public class ProviderTemperature implements ICapabilityTemperature {
 
     public float getTemperatureChange() {
         float target = this.getTarget();
-        float speed = getPotency() * ModuleCoreConfig.MISC.TEMPERATURE.temperatureMultiplier;
+        float speed = getPotency() * ConfigCore.MISC.TEMPERATURE.temperatureMultiplier;
         float change = Math.min(CHANGE_CAP, Math.max(-CHANGE_CAP, target - temperature));
         float newTemp = temperature + change;
         boolean isRising = true;
         if ((temperature < AVERAGE && newTemp > temperature) || (temperature > AVERAGE && newTemp < temperature)) {
-            speed *= GOOD_MULTIPLIER * ModuleCoreConfig.MISC.TEMPERATURE.positiveModifier;
+            speed *= GOOD_MULTIPLIER * ConfigCore.MISC.TEMPERATURE.positiveModifier;
         } else {
-            speed *= BAD_MULTIPLIER * ModuleCoreConfig.MISC.TEMPERATURE.negativeModifier;
+            speed *= BAD_MULTIPLIER * ConfigCore.MISC.TEMPERATURE.negativeModifier;
         }
         return (change * speed);
     }
@@ -95,23 +95,23 @@ public class ProviderTemperature implements ICapabilityTemperature {
     public void update() {
         boolean server = !player.world.isRemote;
         if (server) {
-            this.setTemperature(this.getTemperature() + this.getTemperatureChange() / ModuleCoreConfig.MISC.TEMPERATURE.tickInterval);
+            this.setTemperature(this.getTemperature() + this.getTemperatureChange() / ConfigCore.MISC.TEMPERATURE.tickInterval);
 
-            if (tick <= ModuleCoreConfig.MISC.TEMPERATURE.tickInterval) {
+            if (tick <= ConfigCore.MISC.TEMPERATURE.tickInterval) {
                 tick++;
                 return;
             } else {
                 tick = 0;
                 if (damageTick > 40) {
                     damageTick = 0;
-                    if (ModuleCoreConfig.MISC.TEMPERATURE.takeDamage) {
+                    if (ConfigCore.MISC.TEMPERATURE.takeDamage) {
                         if (this.getTemperature() > BURN_THRESHOLD) {
                             player.attackEntityFrom(DamageSources.HYPERTHERMIA, 4f);
                         } else if (this.getTemperature() < FREEZE_THRESHOLD) {
                             player.attackEntityFrom(DamageSources.HYPOTHERMIA, 4f);
                         }
                     }
-                    if (ModuleCoreConfig.MISC.TEMPERATURE.loseHungerThirst) {
+                    if (ConfigCore.MISC.TEMPERATURE.loseHungerThirst) {
                         if (player.getFoodStats() instanceof FoodStatsTFC stats) {
                             if (this.getTemperature() > (HOT_THRESHOLD * 2f + BURN_THRESHOLD) / 3f) {
                                 stats.addThirst(-8);

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -69,7 +69,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.SAVANNA)) {
-            return ModuleAnimalConfig.ENTITIES.LION.rarity;
+            return ConfigAnimal.ENTITIES.LION.rarity;
         }
         return 0;
     }
@@ -176,7 +176,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
         int priority = 2;
-        for (String input : ModuleAnimalConfig.ENTITIES.LION.huntCreatures) {
+        for (String input : ConfigAnimal.ENTITIES.LION.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
             if (entityEntry != null) {

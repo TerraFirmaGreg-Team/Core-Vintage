@@ -18,12 +18,8 @@ import com.eerussianguy.firmalife.gui.FLGuiHandler;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
 import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
 import com.eerussianguy.firmalife.proxy.CommonProxy;
-import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.eerussianguy.firmalife.registry.LootTablesFL;
 import com.eerussianguy.firmalife.util.OreDictsFL;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
@@ -67,7 +63,6 @@ public class FirmaLife {
         LootTablesFL.init();
         ModuleManager.getModules().forEach(mod -> mod.init(event));
 
-        CapabilityItemHeat.CUSTOM_ITEMS.put(IIngredient.of(ItemsFL.HONEYCOMB), () -> new ItemHeatHandler(null, 1, 600));
     }
 
     @Mod.EventHandler

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
@@ -29,8 +30,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.objects.te.ITileFields;
@@ -153,7 +152,7 @@ public class TileCharcoalForge extends TETickableInventory
             // Always update temperature / cooking, until the fire pit is not hot anymore
             if (temperature > 0 || burnTemperature > 0) {
                 // Update temperature
-                temperature = CapabilityItemHeat.adjustToTargetTemperature(temperature, burnTemperature, airTicks, MAX_AIR_TICKS);
+                temperature = CapabilityHeat.adjustToTargetTemperature(temperature, burnTemperature, airTicks, MAX_AIR_TICKS);
 
                 // Provide heat to blocks that are one block above
                 Block blockUp = world.getBlockState(pos.up()).getBlock();
@@ -165,12 +164,12 @@ public class TileCharcoalForge extends TETickableInventory
                 // Loop through input + 2 output slots
                 for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
                     ItemStack stack = inventory.getStackInSlot(i);
-                    IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                    var cap = CapabilityHeat.get(stack);
                     if (cap != null) {
                         // Update temperature of item
                         float itemTemp = cap.getTemperature();
                         if (temperature > itemTemp) {
-                            CapabilityItemHeat.addTemp(cap);
+                            CapabilityHeat.addTemp(cap);
                         }
 
                         // Handle possible melting, or conversion (if reach 1599 = pit kiln temperature)
@@ -222,7 +221,7 @@ public class TileCharcoalForge extends TETickableInventory
             temperature = 0;
             for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
                 ItemStack stack = inventory.getStackInSlot(i);
-                IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                var cap = CapabilityHeat.get(stack);
                 if (cap != null) {
                     cap.setTemperature(0f);
                 }
@@ -289,11 +288,11 @@ public class TileCharcoalForge extends TETickableInventory
             return FuelManager.isItemForgeFuel(stack);
         } else if (slot <= SLOT_INPUT_MAX) {
             // Input slots - anything that can heat up
-            return stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            return CapabilityHeat.has(stack);
         } else {
             // Extra slots - anything that can heat up and hold fluids
             return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) &&
-                    stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                    CapabilityHeat.has(stack);
         }
     }
 
@@ -322,7 +321,7 @@ public class TileCharcoalForge extends TETickableInventory
 
     private void handleInputMelting(ItemStack stack, int startIndex) {
         HeatRecipe recipe = cachedRecipes[startIndex - SLOT_INPUT_MIN];
-        IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        var cap = CapabilityHeat.get(stack);
 
         if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature())) {
             // Handle possible metal output
@@ -346,7 +345,7 @@ public class TileCharcoalForge extends TETickableInventory
                             fluidStack.amount -= amountFilled;
 
                             // If the fluid was filled, make sure to make it the same temperature
-                            IItemHeat heatHandler = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+                            var heatHandler = CapabilityHeat.get(output);
                             if (heatHandler != null) {
                                 heatHandler.setTemperature(itemTemperature);
                             }

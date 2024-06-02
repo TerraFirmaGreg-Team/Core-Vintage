@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -51,7 +51,7 @@ public class EntityAnimalBoar extends EntityAnimalMammal implements IHuntable {
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.SAVANNA
                         || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
-            return ModuleAnimalConfig.ENTITIES.BOAR.rarity;
+            return ConfigAnimal.ENTITIES.BOAR.rarity;
         }
         return 0;
     }

@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.capability;
 
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
@@ -15,8 +16,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,7 +26,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 /**
  * Custom heat + size capability for stick items.
  */
-public class ItemStickCapability extends ItemHeatHandler implements ICapabilitySize {
+public class ItemStickCapability extends ProviderHeat implements ICapabilitySize {
 
     public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "stick");
     private static final float MELTING_POINT = 40f;

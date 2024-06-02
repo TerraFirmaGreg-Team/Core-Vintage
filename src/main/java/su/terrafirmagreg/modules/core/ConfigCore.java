@@ -15,7 +15,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "core")
-public class ModuleCoreConfig {
+public class ConfigCore {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -227,7 +227,7 @@ public class ModuleCoreConfig {
     }
 
     static {
-        ConfigAnytime.register(ModuleCoreConfig.class);
+        ConfigAnytime.register(ConfigCore.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -239,11 +239,11 @@ public class ModuleCoreConfig {
                 ModuleCore.LOGGER.warn("Config changed");
                 ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
 
-                ProviderTemperature.AVERAGE = ModuleCoreConfig.MISC.TEMPERATURE.averageTemperature;
-                ProviderTemperature.HOT_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.hotTemperature;
-                ProviderTemperature.COOL_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.coldTemperature;
-                ProviderTemperature.BURN_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.burningTemperature;
-                ProviderTemperature.FREEZE_THRESHOLD = ModuleCoreConfig.MISC.TEMPERATURE.freezingTemperature;
+                ProviderTemperature.AVERAGE = ConfigCore.MISC.TEMPERATURE.averageTemperature;
+                ProviderTemperature.HOT_THRESHOLD = ConfigCore.MISC.TEMPERATURE.hotTemperature;
+                ProviderTemperature.COOL_THRESHOLD = ConfigCore.MISC.TEMPERATURE.coldTemperature;
+                ProviderTemperature.BURN_THRESHOLD = ConfigCore.MISC.TEMPERATURE.burningTemperature;
+                ProviderTemperature.FREEZE_THRESHOLD = ConfigCore.MISC.TEMPERATURE.freezingTemperature;
             }
         }
     }

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -26,8 +28,6 @@ import gregtech.common.items.ToolItems;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -222,9 +222,9 @@ public class TEMetalAnvil extends BaseTileInventory {
                     //Produce output
                     for (ItemStack output : completedRecipe.getOutput(input)) {
                         if (!output.isEmpty()) {
-                            IItemHeat outputCap = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-                            if (outputCap != null && cap instanceof IItemHeat) {
-                                outputCap.setTemperature(((IItemHeat) cap).getTemperature());
+                            var outputCap = CapabilityHeat.get(output);
+                            if (outputCap != null && cap instanceof ICapabilityHeat heat) {
+                                outputCap.setTemperature(heat.getTemperature());
                             }
                             if (skill != null && completedRecipe.getSkillBonusType() != null) {
                                 SmithingSkill.applySkillBonus(skill, output, completedRecipe.getSkillBonusType());
@@ -298,7 +298,7 @@ public class TEMetalAnvil extends BaseTileInventory {
         //				return false;
         //			}
         //			ItemStack result = recipe.getOutput(player);
-        //			IItemHeat heatResult = result.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        //          var heatResult = CapabilityHeat.get(result);
         //			float resultTemperature = 0;
         //			if (cap1 instanceof IItemHeat) {
         //				resultTemperature = ((IItemHeat) cap1).getTemperature();

@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -58,7 +58,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
     public EntityAnimalChicken(World worldIn) {
         this(worldIn, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.CHICKEN.adulthood, ModuleAnimalConfig.ENTITIES.CHICKEN.elder));
+                getRandomGrowth(ConfigAnimal.ENTITIES.CHICKEN.adulthood, ConfigAnimal.ENTITIES.CHICKEN.elder));
     }
 
     public EntityAnimalChicken(World worldIn, Gender gender, int birthDay) {
@@ -71,7 +71,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS)) {
-            return ModuleAnimalConfig.ENTITIES.CHICKEN.rarity;
+            return ConfigAnimal.ENTITIES.CHICKEN.rarity;
         }
         return 0;
     }
@@ -98,12 +98,12 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.CHICKEN.adulthood;
+        return ConfigAnimal.ENTITIES.CHICKEN.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.CHICKEN.elder;
+        return ConfigAnimal.ENTITIES.CHICKEN.elder;
     }
 
     @Override
@@ -126,7 +126,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
             if (cap != null) {
                 EntityAnimalChicken chick = new EntityAnimalChicken(this.world);
                 chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ModuleAnimalConfig.ENTITIES.CHICKEN.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+                cap.setFertilized(chick, ConfigAnimal.ENTITIES.CHICKEN.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
             }
         }
         eggs.add(egg);
@@ -140,7 +140,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.CHICKEN.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.CHICKEN.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override
@@ -256,6 +256,6 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.CHICKEN.oldDeathChance;
+        return ConfigAnimal.ENTITIES.CHICKEN.oldDeathChance;
     }
 }

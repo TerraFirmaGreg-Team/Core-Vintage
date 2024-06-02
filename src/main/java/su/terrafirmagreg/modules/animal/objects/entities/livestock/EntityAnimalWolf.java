@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -77,7 +77,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     @SuppressWarnings("unused")
     public EntityAnimalWolf(World worldIn) {
         this(worldIn, Gender.valueOf(RNG.nextBoolean()),
-                EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.WOLF.adulthood, ModuleAnimalConfig.ENTITIES.WOLF.elder));
+                EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.WOLF.adulthood, ConfigAnimal.ENTITIES.WOLF.elder));
     }
 
     public EntityAnimalWolf(World worldIn, Gender gender, int birthDay) {
@@ -100,7 +100,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.PLAINS || biomeType == BiomeHelper.BiomeType.TAIGA)) {
-            return ModuleAnimalConfig.ENTITIES.WOLF.rarity;
+            return ConfigAnimal.ENTITIES.WOLF.rarity;
         }
         return 0;
     }
@@ -121,7 +121,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     }
 
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.WOLF.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.WOLF.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalWolf baby = new EntityAnimalWolf(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());
@@ -191,12 +191,12 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.WOLF.adulthood;
+        return ConfigAnimal.ENTITIES.WOLF.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.WOLF.elder;
+        return ConfigAnimal.ENTITIES.WOLF.elder;
     }
 
     @Override
@@ -265,7 +265,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     }
 
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.WOLF.gestation;
+        return ConfigAnimal.ENTITIES.WOLF.gestation;
     }
 
     @Override
@@ -275,7 +275,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
         super.initEntityAI();
 
         int priority = 1;
-        for (String input : ModuleAnimalConfig.ENTITIES.WOLF.huntCreatures) {
+        for (String input : ConfigAnimal.ENTITIES.WOLF.huntCreatures) {
             ResourceLocation key = new ResourceLocation(input);
             EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
             if (entityEntry != null) {
@@ -365,7 +365,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
                 // Randomly die of old age, tied to entity UUID and calendar time
                 final Random random = new Random(
                         this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-                if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.WOLF.oldDeathChance) {
+                if (random.nextDouble() < ConfigAnimal.ENTITIES.WOLF.oldDeathChance) {
                     this.setDead();
                 }
             }

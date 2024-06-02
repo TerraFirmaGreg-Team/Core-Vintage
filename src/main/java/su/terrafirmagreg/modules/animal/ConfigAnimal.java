@@ -13,7 +13,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "Animal")
-public class ModuleAnimalConfig {
+public class ConfigAnimal {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -913,7 +913,7 @@ public class ModuleAnimalConfig {
     }
 
     static {
-        ConfigAnytime.register(ModuleAnimalConfig.class);
+        ConfigAnytime.register(ConfigAnimal.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

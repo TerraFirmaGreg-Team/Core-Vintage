@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.api.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.ModuleCoreConfig;
+import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -140,11 +140,11 @@ public class OverlayTemperature {
                 drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, MINUS);
             }
         }
-        if (player.isSneaking() || !ModuleCoreConfig.MISC.TEMPERATURE.sneakyDetails) {
+        if (player.isSneaking() || !ConfigCore.MISC.TEMPERATURE.sneakyDetails) {
             float targetFormatted = tempSystem.getTarget();
             float tempFormatted = tempSystem.getTemperature();
             float changeFormatted = tempSystem.getChange();
-            if (!ModuleCoreConfig.MISC.TEMPERATURE.celsius) {
+            if (!ConfigCore.MISC.TEMPERATURE.celsius) {
                 targetFormatted = targetFormatted * ((float) 9 / 5) + 32;
                 tempFormatted = tempFormatted * ((float) 9 / 5) + 32;
                 changeFormatted = changeFormatted * ((float) 9 / 5);

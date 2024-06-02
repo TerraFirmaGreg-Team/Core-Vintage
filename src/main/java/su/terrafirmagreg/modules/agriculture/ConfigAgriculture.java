@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.food;
+package su.terrafirmagreg.modules.agriculture;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -12,26 +12,23 @@ import com.cleanroommc.configanytime.ConfigAnytime;
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
-@Config(modid = MOD_ID, name = MOD_NAME + "/" + "food")
-public class ModuleFoodConfig {
+@Config(modid = MOD_ID, name = MOD_NAME + "/" + "agriculture")
+public class ConfigAgriculture {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Items settings")
-
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-
     public static final MiscCategory MISC = new MiscCategory();
 
     static {
-        ConfigAnytime.register(ModuleFoodConfig.class);
+        ConfigAnytime.register(ConfigAgriculture.class);
     }
 
     public static final class BlocksCategory {
@@ -42,7 +39,7 @@ public class ModuleFoodConfig {
 
     }
 
-    public static final class MiscCategory {
+    public static class MiscCategory {
 
     }
 
@@ -52,7 +49,7 @@ public class ModuleFoodConfig {
         @SubscribeEvent
         public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
             if (event.getModID().equals(MOD_ID)) {
-                ModuleFood.LOGGER.warn("Config changed");
+                ModuleAgriculture.LOGGER.warn("Config changed");
                 ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
             }
         }

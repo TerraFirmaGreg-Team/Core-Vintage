@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.modules.rock.ModuleRockConfig;
+import su.terrafirmagreg.modules.rock.ConfigRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
@@ -91,7 +91,7 @@ public class BlockRockRaw extends BlockRock {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItemMainhand();
-        if (ModuleRockConfig.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
+        if (ConfigRock.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
                 var anvil = RockBlockVariants.ANVIL.get(getType());

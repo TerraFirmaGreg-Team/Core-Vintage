@@ -1,11 +1,11 @@
 package pieman.caffeineaddon.items;
 
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -18,7 +18,7 @@ public class ItemCoffeeHeatable extends ItemCoffee {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ItemHeatHandler(nbt, 1.0f, 1599f);
+        return new ProviderHeat(nbt, 1.0f, 1599f);
     }
 
 }

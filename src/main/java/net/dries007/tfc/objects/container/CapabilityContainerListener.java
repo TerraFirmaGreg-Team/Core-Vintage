@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.container;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -17,7 +18,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +50,7 @@ public class CapabilityContainerListener implements IContainerListener {
     private static final Map<EntityPlayerMP, IContainerListener> CAPABILITY_LISTENERS = new HashMap<>();
 
     static {
-        SYNC_CAPS.put(CapabilityItemHeat.KEY.toString(), CapabilityItemHeat.ITEM_HEAT_CAPABILITY);
+        SYNC_CAPS.put(CapabilityHeat.KEY.toString(), CapabilityHeat.CAPABILITY);
         SYNC_CAPS.put(CapabilityForgeable.KEY.toString(), CapabilityForgeable.FORGEABLE_CAPABILITY);
         SYNC_CAPS.put(CapabilityFood.KEY.toString(), CapabilityFood.CAPABILITY);
         SYNC_CAPS.put(CapabilityEgg.KEY.toString(), CapabilityEgg.CAPABILITY);

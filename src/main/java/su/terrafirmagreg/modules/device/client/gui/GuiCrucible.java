@@ -17,8 +17,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;
 
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 
-import net.dries007.tfc.api.capability.heat.Heat;
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.client.gui.GuiContainerTE;

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.objects.entities.huntable;
 
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -50,7 +50,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
                 (biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST || biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST ||
                         biomeType == BiomeHelper.BiomeType.SAVANNA ||
                         biomeType == BiomeHelper.BiomeType.DESERT)) {
-            return ModuleAnimalConfig.ENTITIES.HARE.rarity;
+            return ConfigAnimal.ENTITIES.HARE.rarity;
         }
         return 0;
     }

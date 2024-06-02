@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
 import su.terrafirmagreg.api.spi.item.BaseItemBlock;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.wood.ModuleWoodConfig;
+import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 
@@ -92,7 +92,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvi
                         }
                         FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
                         if (canCreateSources && fluidStack != null) {
-                            fluidStack.amount = ModuleWoodConfig.BLOCKS.BARREL.tank;
+                            fluidStack.amount = ConfigWood.BLOCKS.BARREL.tank;
                         }
                         barrelCap.fill(fluidStack, true);
                         return EnumActionResult.SUCCESS;
@@ -165,7 +165,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvi
                     IBlockState state = worldIn.getBlockState(pos);
                     IFluidHandler handler = FluidUtil.getFluidHandler(worldIn, pos, rayTrace.sideHit);
                     if (handler != null && handler.drain(Fluid.BUCKET_VOLUME, false) != null) {
-                        FluidTank tank = new FluidTank(ModuleWoodConfig.BLOCKS.BARREL.tank);
+                        FluidTank tank = new FluidTank(ConfigWood.BLOCKS.BARREL.tank);
                         boolean canCreateSources = false; //default
                         if (state.getBlock() instanceof BlockFluidClassic) {
                             BlockFluidClassic fluidblock = (BlockFluidClassic) worldIn.getBlockState(pos).getBlock();
@@ -176,7 +176,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvi
                         }
                         FluidStack fluidStack = handler.drain(Fluid.BUCKET_VOLUME, true);
                         if (canCreateSources && fluidStack != null) {
-                            fluidStack.amount = ModuleWoodConfig.BLOCKS.BARREL.tank;
+                            fluidStack.amount = ConfigWood.BLOCKS.BARREL.tank;
                         }
                         barrelCap.fill(fluidStack, true);
                         return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
@@ -207,7 +207,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvi
     public static class ItemBarrelFluidHandler extends FluidWhitelistHandlerComplex {
 
         protected ItemBarrelFluidHandler(@NotNull ItemStack container) {
-            super(container, ModuleWoodConfig.BLOCKS.BARREL.tank, ModuleWoodConfig.BLOCKS.BARREL.fluidWhitelist);
+            super(container, ConfigWood.BLOCKS.BARREL.tank, ConfigWood.BLOCKS.BARREL.fluidWhitelist);
         }
 
         @Override

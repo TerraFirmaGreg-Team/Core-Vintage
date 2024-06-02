@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -31,7 +31,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
     @SuppressWarnings("unused")
     public EntityAnimalMuskOx(World worldIn) {
         this(worldIn, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-                getRandomGrowth(ModuleAnimalConfig.ENTITIES.MUSKOX.adulthood, ModuleAnimalConfig.ENTITIES.MUSKOX.elder),
+                getRandomGrowth(ConfigAnimal.ENTITIES.MUSKOX.adulthood, ConfigAnimal.ENTITIES.MUSKOX.elder),
                 EntitySheep.getRandomSheepColor(RNG));
     }
 
@@ -45,7 +45,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-            return ModuleAnimalConfig.ENTITIES.MUSKOX.rarity;
+            return ConfigAnimal.ENTITIES.MUSKOX.rarity;
         }
         return 0;
     }
@@ -62,7 +62,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.MUSKOX.babies;
+        int numberOfChildren = ConfigAnimal.ENTITIES.MUSKOX.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
@@ -74,12 +74,12 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.MUSKOX.gestation;
+        return ConfigAnimal.ENTITIES.MUSKOX.gestation;
     }
 
     @Override
     public double getOldDeathChance() {
-        return ModuleAnimalConfig.ENTITIES.MUSKOX.oldDeathChance;
+        return ConfigAnimal.ENTITIES.MUSKOX.oldDeathChance;
     }
 
     @Override
@@ -89,17 +89,17 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.MUSKOX.adulthood;
+        return ConfigAnimal.ENTITIES.MUSKOX.adulthood;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.MUSKOX.elder;
+        return ConfigAnimal.ENTITIES.MUSKOX.elder;
     }
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ModuleAnimalConfig.ENTITIES.MUSKOX.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.MUSKOX.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
     }
 
     @Override

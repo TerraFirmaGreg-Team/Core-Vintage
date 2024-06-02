@@ -1,5 +1,8 @@
 package com.buuz135.hotornot.object.item;
 
+import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -30,10 +33,11 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.buuz135.hotornot.HotGuiHandler;
 import com.buuz135.hotornot.object.recipe.UnMoldJawPiece;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
+
+
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
@@ -70,7 +74,7 @@ public class ItemMetalTongsJawMold extends ItemPottery {
         final ItemStack heldStack = player.getHeldItem(hand);
         if (world.isRemote) return new ActionResult<>(EnumActionResult.SUCCESS, heldStack);
 
-        final IItemHeat cap = heldStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        final var cap = CapabilityHeat.get(heldStack);
         if (!player.isSneaking() && cap != null && cap.isMolten()) {
             HotGuiHandler.openMoldGui(world, player);
         }
@@ -124,7 +128,7 @@ public class ItemMetalTongsJawMold extends ItemPottery {
     /**
      * Copy of the TFC mold capability which we don't have access to
      */
-    private static class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler {
+    private static class FilledMoldCapability extends ProviderHeat implements ICapabilityProvider, IMoldHandler {
 
         private final FluidTank tank = new FluidTank(100);
         private final IFluidTankProperties[] fluidTankProperties = { new FluidTankPropertiesWrapper(tank) };

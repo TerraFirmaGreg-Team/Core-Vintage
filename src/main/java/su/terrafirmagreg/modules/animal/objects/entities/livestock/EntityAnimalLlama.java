@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimalConfig;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -77,7 +77,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
     @SuppressWarnings("unused")
     public EntityAnimalLlama(World world) {
         this(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-                EntityAnimalBase.getRandomGrowth(ModuleAnimalConfig.ENTITIES.LLAMA.adulthood, ModuleAnimalConfig.ENTITIES.LLAMA.elder));
+                EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITIES.LLAMA.adulthood, ConfigAnimal.ENTITIES.LLAMA.elder));
     }
 
     public EntityAnimalLlama(World world, IAnimal.Gender gender, int birthDay) {
@@ -241,12 +241,12 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
     @Override
     public int getDaysToAdulthood() {
-        return ModuleAnimalConfig.ENTITIES.LLAMA.gestation;
+        return ConfigAnimal.ENTITIES.LLAMA.gestation;
     }
 
     @Override
     public int getDaysToElderly() {
-        return ModuleAnimalConfig.ENTITIES.LLAMA.elder;
+        return ConfigAnimal.ENTITIES.LLAMA.elder;
     }
 
     @Override
@@ -305,7 +305,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
         if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.TUNDRA)) {
-            return ModuleAnimalConfig.ENTITIES.LLAMA.rarity;
+            return ConfigAnimal.ENTITIES.LLAMA.rarity;
         }
         return 0;
     }
@@ -369,7 +369,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
                 // Randomly die of old age, tied to entity UUID and calendar time
                 final Random random = new Random(
                         this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
-                if (random.nextDouble() < ModuleAnimalConfig.ENTITIES.LLAMA.oldDeathChance) {
+                if (random.nextDouble() < ConfigAnimal.ENTITIES.LLAMA.oldDeathChance) {
                     this.setDead();
                 }
             }
@@ -382,7 +382,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
     }
 
     public long gestationDays() {
-        return ModuleAnimalConfig.ENTITIES.LLAMA.gestation;
+        return ConfigAnimal.ENTITIES.LLAMA.gestation;
     }
 
     @Override
@@ -474,7 +474,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
     }
 
     public void birthChildren() {
-        int numberOfChildren = ModuleAnimalConfig.ENTITIES.LLAMA.babies; //one always
+        int numberOfChildren = ConfigAnimal.ENTITIES.LLAMA.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalLlama baby = new EntityAnimalLlama(this.world, Gender.valueOf(RNG.nextBoolean()),
                     (int) CalendarTFC.PLAYER_TIME.getTotalDays());

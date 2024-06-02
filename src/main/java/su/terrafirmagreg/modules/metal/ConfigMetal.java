@@ -13,7 +13,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "metal")
-public class ModuleMetalConfig {
+public class ConfigMetal {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
@@ -31,7 +31,7 @@ public class ModuleMetalConfig {
     public static final MiscCategory MISC = new MiscCategory();
 
     static {
-        ConfigAnytime.register(ModuleMetalConfig.class);
+        ConfigAnytime.register(ConfigMetal.class);
     }
 
     public static final class BlocksCategory {

@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes;
 
+import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -7,8 +9,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -54,15 +54,14 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
     public ItemStack getOutput(List<ItemStack> inputs) {
         int metalAmount = 0;
         for (ItemStack stack : inputs) {
-            IMetalItem metalItem = CapabilityMetalItem.getMetalItem(stack);
+            var metalItem = CapabilityMetal.getMetalItem(stack);
             if (metalItem != null) {
                 metalAmount += metalItem.getSmeltAmount(stack);
             }
         }
         ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
         IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap instanceof IForgeableMeasurableMetal) {
-            IForgeableMeasurableMetal capBloom = (IForgeableMeasurableMetal) cap;
+        if (cap instanceof IForgeableMeasurableMetal capBloom) {
             capBloom.setMetalAmount(metalAmount);
             capBloom.setMetal(metal);
             capBloom.setTemperature(capBloom.getMeltTemp() - 1);
@@ -78,8 +77,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
     public ItemStack getOutput() {
         ItemStack bloom = new ItemStack(ItemsTFC.UNREFINED_BLOOM);
         IForgeable cap = bloom.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-        if (cap instanceof IForgeableMeasurableMetal) {
-            IForgeableMeasurableMetal capBloom = (IForgeableMeasurableMetal) cap;
+        if (cap instanceof IForgeableMeasurableMetal capBloom) {
             capBloom.setMetalAmount(100);
             capBloom.setMetal(metal);
             capBloom.setTemperature(capBloom.getMeltTemp() - 1);
@@ -88,7 +86,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
     }
 
     public boolean isValidInput(ItemStack inputItem) {
-        IMetalItem metalItem = CapabilityMetalItem.getMetalItem(inputItem);
+        var metalItem = CapabilityMetal.getMetalItem(inputItem);
         return metalItem != null && metalItem.getMetal(inputItem) == metal;
     }
 

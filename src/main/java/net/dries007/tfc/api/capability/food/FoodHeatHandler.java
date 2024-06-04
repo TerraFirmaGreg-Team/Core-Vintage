@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.capability.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
 

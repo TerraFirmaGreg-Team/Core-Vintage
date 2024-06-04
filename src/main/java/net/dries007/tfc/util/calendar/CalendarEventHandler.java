@@ -1,5 +1,7 @@
 package net.dries007.tfc.util.calendar;
 
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -16,7 +18,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 
 import java.util.List;
 import java.util.Objects;

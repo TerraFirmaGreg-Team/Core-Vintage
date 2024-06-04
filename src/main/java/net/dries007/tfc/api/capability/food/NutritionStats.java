@@ -1,5 +1,8 @@
 package net.dries007.tfc.api.capability.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
@@ -11,12 +14,13 @@ import net.dries007.tfc.ConfigTFC;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
- * A wrapper class for nutrition stats for a player This acts as a FIFO queue for the last N foods eaten. It has capability to manage the total hunger
- * and averages over that value
+ * A wrapper class for nutrition stats for a player This acts as a FIFO queue for the last N foods eaten. It has capability to manage the total hunger and averages over that value
  * <p>
  * This only executes logic on server side, on client side it simply sets the lastAverageNutrients
  */
@@ -24,6 +28,7 @@ public class NutritionStats implements INBTSerializable<NBTTagCompound> {
 
     private final LinkedList<FoodData> records;
     private final float defaultNutritionValue, defaultDairyNutritionValue;
+    @Getter
     private final float[] nutrients;
     private float averageNutrients;
     private int hungerWindow;
@@ -56,10 +61,6 @@ public class NutritionStats implements INBTSerializable<NBTTagCompound> {
         return nutrients[nutrient.ordinal()];
     }
 
-    public float[] getNutrients() {
-        return nutrients;
-    }
-
     public void onReceivePacket(float[] nutrients) {
         System.arraycopy(nutrients, 0, this.nutrients, 0, this.nutrients.length);
         // Only need to update the average
@@ -72,9 +73,8 @@ public class NutritionStats implements INBTSerializable<NBTTagCompound> {
     }
 
     /**
-     * This adds a small amount of nutrition directly to the last food data consumed. It marks said food data as "buffed", and each food data can only
-     * be buffed once. This is used for non-food related nutrition bonuses, for instance drinking milk (which is not a food as it dosen't expire,
-     * which is unbalanced)
+     * This adds a small amount of nutrition directly to the last food data consumed. It marks said food data as "buffed", and each food data can only be buffed once. This is used
+     * for non-food related nutrition bonuses, for instance drinking milk (which is not a food as it dosen't expire, which is unbalanced)
      */
     public void addBuff(@NotNull FoodData data) {
         FoodData recentFood = getMostRecentRecord();

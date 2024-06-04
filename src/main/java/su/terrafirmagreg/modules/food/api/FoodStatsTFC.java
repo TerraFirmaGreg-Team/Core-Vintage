@@ -1,5 +1,6 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.modules.food.api;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
@@ -18,6 +19,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
+import net.dries007.tfc.api.capability.food.NutritionStats;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;
 import net.dries007.tfc.util.calendar.ICalendar;

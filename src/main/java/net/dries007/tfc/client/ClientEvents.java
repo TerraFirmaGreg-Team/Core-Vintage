@@ -2,6 +2,7 @@ package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.lib.Unicode;
@@ -38,8 +39,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.render.animal.RenderAbstractHorseTFC;
@@ -130,8 +129,8 @@ import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -339,7 +338,7 @@ public class ClientEvents {
 
             if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
             {
-                IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
+                var metalObject = CapabilityMetal.getMetalItem(stack);
                 if (metalObject != null) {
                     metalObject.addMetalInfo(stack, tt);
                 }

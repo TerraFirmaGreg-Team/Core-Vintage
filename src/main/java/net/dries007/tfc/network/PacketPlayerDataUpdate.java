@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,7 +42,7 @@ public class PacketPlayerDataUpdate implements IMessage {
             TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 if (player != null) {
-                    var cap = CapabilitySkill.get(player);
+                    var cap = CapabilityPlayer.get(player);
                     if (cap != null) {
                         cap.deserializeNBT(message.skillsNbt);
                     }

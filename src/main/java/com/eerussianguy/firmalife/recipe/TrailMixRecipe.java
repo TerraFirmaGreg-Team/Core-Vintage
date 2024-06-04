@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.recipe;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -13,7 +15,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 import com.eerussianguy.firmalife.items.ItemTrailMix;
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
 import net.dries007.tfc.util.calendar.CalendarTFC;

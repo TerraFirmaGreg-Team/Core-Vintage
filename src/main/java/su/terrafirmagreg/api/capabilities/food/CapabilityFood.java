@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.capabilities.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 
@@ -29,6 +29,7 @@ public final class CapabilityFood {
     public static final Capability<ICapabilityFood> CAPABILITY = ModUtils.getNull();
 
     public static void register() {
+
         CapabilityManager.INSTANCE.register(ICapabilityFood.class, new StorageFood(), ProviderFood::new);
     }
 

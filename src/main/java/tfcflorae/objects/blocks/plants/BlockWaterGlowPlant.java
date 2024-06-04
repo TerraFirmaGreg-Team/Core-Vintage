@@ -36,7 +36,7 @@ import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
 
 import org.jetbrains.annotations.NotNull;

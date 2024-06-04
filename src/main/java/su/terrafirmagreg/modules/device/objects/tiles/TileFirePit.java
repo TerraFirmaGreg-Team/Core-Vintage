@@ -1,7 +1,11 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
@@ -38,15 +42,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.Nutrient;
-
-
-import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
-
-
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;

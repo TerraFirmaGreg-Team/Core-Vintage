@@ -1,6 +1,8 @@
 package tfcflorae.objects.fluids;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
@@ -12,8 +14,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;

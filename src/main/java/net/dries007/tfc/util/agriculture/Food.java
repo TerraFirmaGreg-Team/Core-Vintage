@@ -1,9 +1,10 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+
 import net.minecraft.item.ItemStack;
 
 
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;

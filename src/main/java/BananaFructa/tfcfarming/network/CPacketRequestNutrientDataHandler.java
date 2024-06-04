@@ -1,6 +1,6 @@
 package BananaFructa.tfcfarming.network;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -24,7 +24,7 @@ public class CPacketRequestNutrientDataHandler implements IMessageHandler<CPacke
     public IMessage onMessage(CPacketRequestNutrientData message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         // Request protection
-        var cap = CapabilitySkill.get(player);
+        var cap = CapabilityPlayer.get(player);
         Skill skill = cap.getSkill(SkillType.AGRICULTURE);
         // TODO: V config
         if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier()

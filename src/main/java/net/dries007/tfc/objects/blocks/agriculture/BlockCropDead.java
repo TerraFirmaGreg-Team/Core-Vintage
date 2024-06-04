@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -117,7 +117,7 @@ public class BlockCropDead extends BlockBush { //implements IGrowingPlant
             // mature crops have a chance to drop a bonus, dead or alive
             EntityPlayer player = harvesters.get();
             if (player != null) {
-                SimpleSkill skill = CapabilitySkill.getSkill(player, SkillType.AGRICULTURE);
+                SimpleSkill skill = CapabilityPlayer.getSkill(player, SkillType.AGRICULTURE);
                 if (skill != null) {
                     count += Crop.getSkillSeedBonus(skill, RANDOM);
                     skill.add(0.04f);

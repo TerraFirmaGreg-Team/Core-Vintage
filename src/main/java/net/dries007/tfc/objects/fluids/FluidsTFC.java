@@ -1,8 +1,10 @@
 package net.dries007.tfc.objects.fluids;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
@@ -18,8 +20,6 @@ import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
@@ -241,11 +241,12 @@ public final class FluidsTFC {
     }
 
     public static void registerFluids() {
-        FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
-            if (player.getFoodStats() instanceof FoodStatsTFC) {
-                ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
-            }
-        });
+        FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD))
+                .with(DrinkableProperty.DRINKABLE, player -> {
+                    if (player.getFoodStats() instanceof FoodStatsTFC) {
+                        ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
+                    }
+                });
         HOT_WATER = registerFluid(new Fluid("hot_water", STILL, FLOW, 0xFF345FDA).setTemperature(350));
         SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
             if (player.getFoodStats() instanceof FoodStatsTFC) {
@@ -257,7 +258,7 @@ public final class FluidsTFC {
         });
 
         DrinkableProperty alcoholProperty = player -> {
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (player.getFoodStats() instanceof FoodStatsTFC && cap != null) {
                 ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
                 cap.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);

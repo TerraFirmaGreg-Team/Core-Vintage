@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
 import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.capabilities.pull.ProviderPull;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
-import su.terrafirmagreg.api.capabilities.skill.ProviderSkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.api.capabilities.player.ProviderPlayer;
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 
@@ -35,8 +35,8 @@ public class CapabilitiesEntityHandler {
 
         if (entity instanceof EntityPlayer player) {
             // Player skills
-            if (!CapabilitySkill.has(player)) {
-                event.addCapability(CapabilitySkill.KEY, new ProviderSkill(player));
+            if (!CapabilityPlayer.has(player)) {
+                event.addCapability(CapabilityPlayer.KEY, new ProviderPlayer(player));
             }
         }
 

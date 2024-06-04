@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.plants.BlockCaveMushroom;
 

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.capabilities.skill;
+package su.terrafirmagreg.api.capabilities.player;
 
 import su.terrafirmagreg.api.util.ModUtils;
 
@@ -14,18 +14,18 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.Nullable;
 
-public final class CapabilitySkill {
+public final class CapabilityPlayer {
 
     public static final ResourceLocation KEY = ModUtils.resource("skill_capability");
 
-    @CapabilityInject(ICapabilitySkill.class)
-    public static final Capability<ICapabilitySkill> CAPABILITY = ModUtils.getNull();
+    @CapabilityInject(ICapabilityPlayer.class)
+    public static final Capability<ICapabilityPlayer> CAPABILITY = ModUtils.getNull();
 
     public static void register() {
-        CapabilityManager.INSTANCE.register(ICapabilitySkill.class, new StorageSkill(), ProviderSkill::new);
+        CapabilityManager.INSTANCE.register(ICapabilityPlayer.class, new StoragePlayer(), ProviderPlayer::new);
     }
 
-    public static ICapabilitySkill get(EntityPlayer player) {
+    public static ICapabilityPlayer get(EntityPlayer player) {
         return player.getCapability(CAPABILITY, null);
     }
 
@@ -42,7 +42,7 @@ public final class CapabilitySkill {
      */
     @Nullable
     public static <S extends Skill> S getSkill(EntityPlayer player, SkillType<S> skillType) {
-        var cap = CapabilitySkill.get(player);
+        var cap = CapabilityPlayer.get(player);
         if (cap != null) {
             return cap.getSkill(skillType);
         }

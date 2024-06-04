@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -32,8 +33,6 @@ import net.minecraftforge.fluids.FluidStack;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.objects.te.ITileFields;
@@ -312,7 +311,7 @@ public class TileBlastFurnace extends TETickableInventory
 
                 oreCount = oreStacks.size();
                 oreUnits = oreStacks.stream().mapToInt(stack -> {
-                    IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
+                    var metalObject = CapabilityMetal.getMetalItem(stack);
                     if (metalObject != null) {
                         return metalObject.getSmeltAmount(stack);
                     }

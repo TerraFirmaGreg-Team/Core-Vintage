@@ -1,5 +1,8 @@
 package su.terrafirmagreg.api.capabilities.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -9,8 +12,6 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 

@@ -1,8 +1,9 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
@@ -42,7 +43,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
@@ -59,7 +59,7 @@ import java.util.List;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
-public class ItemMetalMallet extends ItemTFC implements IMetalItem {
+public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
 
     public final ToolMaterial material;
     private final Metal metal;
@@ -152,7 +152,7 @@ public class ItemMetalMallet extends ItemTFC implements IMetalItem {
                     return EnumActionResult.PASS;
                 }
 
-                var cap = CapabilitySkill.get(player);
+                var cap = CapabilityPlayer.get(player);
                 if (cap != null) {
                     boolean timePassed = (int) CalendarTFC.CALENDAR_TIME.getTicks() - cap.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
                     boolean distanced = cap.getNutDistance(pos) > ConfigFL.General.BALANCE.nutDistance;

@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.items.ceramics;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
@@ -43,11 +45,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.network.PacketSimpleMessage;
@@ -254,7 +253,7 @@ public class ItemSmallVessel extends ItemPottery {
                 boolean onlySmeltables = true;
                 for (ItemStack slot : super.stacks) {
                     if (!slot.isEmpty()) {
-                        IMetalItem itemMetal = CapabilityMetalItem.getMetalItem(slot);
+                        var itemMetal = CapabilityMetal.getMetalItem(slot);
                         if (itemMetal != null) {
                             materials.merge(itemMetal.getMetal(slot), itemMetal.getSmeltAmount(slot) * slot.getCount(), Integer::sum);
                         } else {

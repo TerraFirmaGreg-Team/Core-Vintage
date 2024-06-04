@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.capabilities.skill;
+package su.terrafirmagreg.api.capabilities.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see SkillType
  */
-public interface ICapabilitySkill extends ICapabilitySerializable<NBTTagCompound> {
+public interface ICapabilityPlayer extends ICapabilitySerializable<NBTTagCompound> {
 
     @Nullable
     <S extends Skill> S getSkill(SkillType<S> skillType);

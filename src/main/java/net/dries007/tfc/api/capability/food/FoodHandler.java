@@ -1,5 +1,8 @@
 package net.dries007.tfc.api.capability.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -157,8 +160,8 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
     }
 
     /**
-     * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via
-     * CapabilityFood. Only mark this if food data will change per item stack
+     * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only mark this if food
+     * data will change per item stack
      */
     protected boolean isDynamic() {
         return false;

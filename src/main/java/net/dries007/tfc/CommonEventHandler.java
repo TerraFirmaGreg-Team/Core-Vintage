@@ -1,14 +1,18 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.heat.HandlerHeat;
 import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.api.capabilities.metal.HandlerMetal;
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.api.capabilities.player.ProviderPlayer;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
-import su.terrafirmagreg.api.capabilities.skill.ProviderSkill;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -19,6 +23,7 @@ import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 import net.minecraft.block.Block;
@@ -97,15 +102,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Metal;
@@ -135,7 +136,7 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
@@ -220,7 +221,7 @@ public final class CommonEventHandler {
         final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
 
         if (player != null) {
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (cap != null) {
                 cap.setHarvestingTool(player.getHeldItemMainhand());
             }
@@ -262,7 +263,7 @@ public final class CommonEventHandler {
         // Apply durability modifier on tools
         if (player != null) {
             ItemStack tool = ItemStack.EMPTY;
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (cap != null) {
                 tool = cap.getHarvestingTool();
             }
@@ -432,12 +433,12 @@ public final class CommonEventHandler {
                 isHeatable = forgeHandler instanceof ICapabilityHeat;
             }
             // Metal
-            ICapabilityProvider metalCapability = CapabilityMetalItem.getCustom(stack);
+            ICapabilityProvider metalCapability = HandlerMetal.getCustom(stack);
             if (metalCapability != null) {
-                event.addCapability(CapabilityMetalItem.KEY, metalCapability);
+                event.addCapability(CapabilityMetal.KEY, metalCapability);
                 if (!isForgeable) {
                     // Add a forgeable capability for this item, if none is found
-                    IMetalItem cap = (IMetalItem) metalCapability;
+                    ICapabilityMetal cap = (ICapabilityMetal) metalCapability;
                     Metal metal = cap.getMetal(stack);
                     if (metal != null) {
                         event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
@@ -483,7 +484,7 @@ public final class CommonEventHandler {
             }
 
             // layer Data
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (cap != null) {
 
                 // Sync
@@ -537,7 +538,7 @@ public final class CommonEventHandler {
             // =========================================
 
             // Skills / Player data
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (cap != null) {
                 TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
@@ -555,8 +556,8 @@ public final class CommonEventHandler {
 
             // Skills
 
-            var newSkills = CapabilitySkill.get(player);
-            var originalSkills = CapabilitySkill.get(event.getOriginal());
+            var newSkills = CapabilityPlayer.get(player);
+            var originalSkills = CapabilityPlayer.get(event.getOriginal());
             if (newSkills != null && originalSkills != null) {
                 newSkills.deserializeNBT(originalSkills.serializeNBT());
                 // To properly sync, we need to use PlayerRespawnEvent
@@ -577,7 +578,7 @@ public final class CommonEventHandler {
             FoodStatsTFC.replaceFoodStats(player);
 
             // Skills
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (cap != null) {
                 TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
             }
@@ -1000,11 +1001,11 @@ public final class CommonEventHandler {
 
     @SubscribeEvent
     public static void onServerChatEvent(ServerChatEvent event) {
-        var cap = CapabilitySkill.get(event.getPlayer());
+        var cap = CapabilityPlayer.get(event.getPlayer());
         if (cap != null) {
             long intoxicatedTicks = cap.getIntoxicatedTime() - 6 * ICalendar.TICKS_IN_HOUR; // Only apply intoxication after 6 hr
             if (intoxicatedTicks > 0) {
-                float drunkChance = MathHelper.clamp((float) intoxicatedTicks / ProviderSkill.MAX_INTOXICATED_TICKS, 0, 0.7f);
+                float drunkChance = MathHelper.clamp((float) intoxicatedTicks / ProviderPlayer.MAX_INTOXICATED_TICKS, 0, 0.7f);
                 String originalMessage = event.getMessage();
                 String[] words = originalMessage.split(" ");
                 for (int i = 0; i < words.length; i++) {

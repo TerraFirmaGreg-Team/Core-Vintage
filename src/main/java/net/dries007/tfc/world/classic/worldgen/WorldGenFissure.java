@@ -16,7 +16,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC.getRock3;
+import static net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC.getRock3;
 
 /**
  * Rewrite on fissure generation logic *EXPERIMENTAL* Needs more tweaking in rock placement

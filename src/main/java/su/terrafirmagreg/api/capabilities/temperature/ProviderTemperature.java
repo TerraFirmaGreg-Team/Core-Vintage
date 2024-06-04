@@ -12,6 +12,7 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.network.SCPacketTemperature;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,8 +20,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
-
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 
 import org.jetbrains.annotations.NotNull;
 

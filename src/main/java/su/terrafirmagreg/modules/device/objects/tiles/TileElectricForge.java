@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
@@ -34,7 +35,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.capability.GregtechCapabilities;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
@@ -113,7 +113,7 @@ public class TileElectricForge extends TEInventory
         for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
             ItemStack stack = inventory.getStackInSlot(i);
             var cap = CapabilityHeat.get(stack);
-            float modifier = stack.getItem() instanceof IMetalItem ? ((IMetalItem) stack.getItem()).getSmeltAmount(stack) / 100.0F : 1.0F;
+            float modifier = stack.getItem() instanceof ICapabilityMetal metal ? metal.getSmeltAmount(stack) / 100.0F : 1.0F;
             if (cap != null) {
                 // Update temperature of item
                 float itemTemp = cap.getTemperature();

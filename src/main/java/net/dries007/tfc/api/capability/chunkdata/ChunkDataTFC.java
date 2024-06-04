@@ -1,4 +1,4 @@
-package net.dries007.tfc.world.classic.chunkdata;
+package net.dries007.tfc.api.capability.chunkdata;
 
 import su.terrafirmagreg.api.lib.NBTBuilder;
 
@@ -158,8 +158,7 @@ public final class ChunkDataTFC {
     }
 
     /**
-     * @return the veins generated in this chunk. Note: the veins here are soft (non-functional) copies. They are used for data markers, not for
-     * actual world generation
+     * @return the veins generated in this chunk. Note: the veins here are soft (non-functional) copies. They are used for data markers, not for actual world generation
      */
     public Set<Vein> getGeneratedVeins() {
         return generatedVeins;

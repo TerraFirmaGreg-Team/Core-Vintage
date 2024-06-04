@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.food.api.types.variant.item;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.food.api.types.category.FoodCategory;
 
-
-import net.dries007.tfc.api.capability.food.FoodData;
 
 import lombok.Getter;
 

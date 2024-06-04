@@ -40,7 +40,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,8 +94,8 @@ public final class WorldEntitySpawnerTFC {
     }
 
     /**
-     * Experimental: Handles wild livestock respawning This event runs after CheckSpawn, which means you can safely assume that all other restrictions
-     * passed (biome, temp, rainfall, etc)
+     * Experimental: Handles wild livestock respawning This event runs after CheckSpawn, which means you can safely assume that all other restrictions passed (biome, temp,
+     * rainfall, etc)
      */
     @SubscribeEvent
     public static void onLivestockRespawn(LivingSpawnEvent.SpecialSpawn event) {
@@ -126,8 +126,7 @@ public final class WorldEntitySpawnerTFC {
     }
 
     /**
-     * **Modified version from vanilla's {@link net.minecraft.world.WorldEntitySpawner} Called during chunk generation to spawn initial creatures.
-     * Spawns group of animals together
+     * **Modified version from vanilla's {@link net.minecraft.world.WorldEntitySpawner} Called during chunk generation to spawn initial creatures. Spawns group of animals together
      *
      * @param centerX   The X coordinate of the point to spawn mobs around.
      * @param centerZ   The Z coordinate of the point to spawn mobs around.

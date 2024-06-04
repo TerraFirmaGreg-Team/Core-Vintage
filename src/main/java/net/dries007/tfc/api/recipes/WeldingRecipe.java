@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.recipes;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -64,7 +64,7 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
     public ItemStack getOutput(@Nullable EntityPlayer player) {
         ItemStack stack = output.copy();
         if (player != null) {
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (cap != null) {
                 SmithingSkill skill = cap.getSkill(SkillType.SMITHING);
                 if (skill != null && skillType != null) {

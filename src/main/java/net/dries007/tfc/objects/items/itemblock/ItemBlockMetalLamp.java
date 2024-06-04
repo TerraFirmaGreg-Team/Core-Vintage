@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.api.capabilities.heat.HandlerHeat;
 import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
+public class ItemBlockMetalLamp extends ItemBlockTFC implements ICapabilityMetal {
 
     private static final Map<Metal, ItemBlockMetalLamp> TABLE = new HashMap<>();
     public static int CAPACITY;

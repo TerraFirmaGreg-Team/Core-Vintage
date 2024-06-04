@@ -15,7 +15,7 @@ import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.plants.BlockHangingPlantTFCF;
 import tfcflorae.objects.blocks.plants.BlockTallGrassWater;
 import tfcflorae.objects.blocks.plants.BlockTallWaterPlantTFCF;

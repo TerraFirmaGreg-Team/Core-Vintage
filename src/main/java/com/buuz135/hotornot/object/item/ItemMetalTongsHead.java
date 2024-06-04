@@ -1,14 +1,10 @@
 package com.buuz135.hotornot.object.item;
 
-import net.minecraft.item.ItemStack;
-
-
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-
-
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
+import net.minecraft.item.ItemStack;
 
 
 import net.dries007.tfc.api.types.Metal;
@@ -19,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemMetalTongsHead extends ItemTFC implements IMetalItem {
+public class ItemMetalTongsHead extends ItemTFC implements ICapabilityMetal {
 
     private static final Map<Metal, ItemMetalTongsHead> TONGS_HEAD_MAP = new HashMap<>();
 

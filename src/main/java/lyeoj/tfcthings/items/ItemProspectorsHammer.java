@@ -1,8 +1,9 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
@@ -34,7 +35,6 @@ import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
+public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, ItemOreDict, TFCThingsConfigurableItem {
 
     public final ToolMaterial material;
     private final Metal metal;
@@ -110,7 +110,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
             worldIn.playSound(playerIn, blockpos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0F, soundType.getPitch());
             Block block = iblockstate.getBlock();
             if (!worldIn.isRemote) {
-                ProspectingSkill skill = CapabilitySkill.getSkill(playerIn, SkillType.PROSPECTING);
+                ProspectingSkill skill = CapabilityPlayer.getSkill(playerIn, SkillType.PROSPECTING);
                 if (playerIn.isSneaking()) {
                     checkRockLayers(playerIn, worldIn, blockpos, skill);
                     playerIn.getCooldownTracker().setCooldown(this, 10);

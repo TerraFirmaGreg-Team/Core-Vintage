@@ -1,10 +1,11 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 

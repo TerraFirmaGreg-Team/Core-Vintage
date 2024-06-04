@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,14 +12,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemTFC;
 
@@ -32,7 +28,7 @@ import java.util.function.BiFunction;
 /**
  * Since TFC has Metal.ItemType we can't reuse {@link net.dries007.tfc.objects.items.metal.ItemMetal} directly
  */
-public class ItemTechMetal extends ItemTFC implements IMetalItem {
+public class ItemTechMetal extends ItemTFC implements ICapabilityMetal {
 
     private static final Map<Metal, EnumMap<ItemType, ItemTechMetal>> TABLE = new HashMap<>();
     protected final Metal metal;

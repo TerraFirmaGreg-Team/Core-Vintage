@@ -1,5 +1,7 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -9,8 +11,6 @@ import net.minecraftforge.fluids.FluidStack;
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -31,9 +31,9 @@ import java.util.Map;
 public class Alloy implements INBTSerializable<NBTTagCompound> {
 
     /**
-     * This is the maximum safe value for an alloy. If an alloy is larger than this, due to epsilon based comparisons, the following duplication
-     * glitch can be observed: Add SAFE_MAX_ALLOY amount of metal A Add 1 unit of metal B Then {@code 1 / (1 + SAFE_MAX_ALLOY) < EPSILON}, so you can
-     * extract (1 + SAFE_MAX_ALLOY) units of metal A, effectively transmuting metal B into A.
+     * This is the maximum safe value for an alloy. If an alloy is larger than this, due to epsilon based comparisons, the following duplication glitch can be observed: Add
+     * SAFE_MAX_ALLOY amount of metal A Add 1 unit of metal B Then {@code 1 / (1 + SAFE_MAX_ALLOY) < EPSILON}, so you can extract (1 + SAFE_MAX_ALLOY) units of metal A, effectively
+     * transmuting metal B into A.
      */
     public static final int SAFE_MAX_ALLOY = 100_000;
     /**
@@ -103,7 +103,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
             if (recipe != null && recipe.isValidTemperature(temperature)) {
                 return add(stack, recipe);
             } else {
-                IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
+                var metalObject = CapabilityMetal.getMetalItem(stack);
                 if (metalObject != null) {
                     // Melt into unknown alloy (so items aren't simply voided and becomes something)
                     add(new FluidStack(FluidsTFC.getFluidFromMetal(Metal.UNKNOWN), metalObject.getSmeltAmount(stack) * stack.getCount()));
@@ -254,8 +254,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
     }
 
     /**
-     * Returns a read-only copy of the metals in an alloy The alloy may also contain values with a % content less than epsilon, which are not visible
-     * in this view
+     * Returns a read-only copy of the metals in an alloy The alloy may also contain values with a % content less than epsilon, which are not visible in this view
      *
      * @return a map of metals -> unit values
      */

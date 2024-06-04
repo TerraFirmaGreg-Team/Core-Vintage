@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.metal.objects.tiles;
 
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -214,7 +214,7 @@ public class TEMetalAnvil extends BaseTileInventory {
                     inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
 
                     // Add Skill
-                    SmithingSkill skill = CapabilitySkill.getSkill(player, SkillType.SMITHING);
+                    SmithingSkill skill = CapabilityPlayer.getSkill(player, SkillType.SMITHING);
                     if (skill != null && completedRecipe.getSkillBonusType() != null) {
                         skill.addSkill(completedRecipe.getSkillBonusType(), 1);
                     }

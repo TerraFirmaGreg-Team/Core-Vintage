@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -60,7 +60,7 @@ public class ItemProspectorPick extends ItemMetalTool {
             if (!worldIn.isRemote) {
                 ProspectEvent event;
                 float falseNegativeChance = 0.3f; //Classic value was random(100) >= (60 + rank)
-                ProspectingSkill skill = CapabilitySkill.getSkill(player, SkillType.PROSPECTING);
+                ProspectingSkill skill = CapabilityPlayer.getSkill(player, SkillType.PROSPECTING);
                 if (skill != null) {
                     falseNegativeChance = 0.3f - (0.1f * skill.getTier().ordinal());
                 }

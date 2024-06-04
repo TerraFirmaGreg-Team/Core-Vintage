@@ -1,5 +1,6 @@
 package pieman.caffeineaddon.items;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.registry.provider.IModelProvider;
 
 import net.minecraft.init.MobEffects;
@@ -10,7 +11,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import pieman.caffeineaddon.CaffeineAddon;

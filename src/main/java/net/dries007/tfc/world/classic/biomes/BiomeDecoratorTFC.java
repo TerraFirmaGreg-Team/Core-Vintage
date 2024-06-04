@@ -13,7 +13,7 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenSandTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;

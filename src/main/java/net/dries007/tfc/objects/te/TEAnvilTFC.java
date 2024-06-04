@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.state.IBlockState;
@@ -218,7 +218,7 @@ public class TEAnvilTFC extends TEInventory {
                     inventory.setStackInSlot(SLOT_INPUT_1, ItemStack.EMPTY);
 
                     // Add Skill
-                    SmithingSkill skill = CapabilitySkill.getSkill(player, SkillType.SMITHING);
+                    SmithingSkill skill = CapabilityPlayer.getSkill(player, SkillType.SMITHING);
                     if (skill != null && completedRecipe.getSkillBonusType() != null) {
                         skill.addSkill(completedRecipe.getSkillBonusType(), 1);
                     }

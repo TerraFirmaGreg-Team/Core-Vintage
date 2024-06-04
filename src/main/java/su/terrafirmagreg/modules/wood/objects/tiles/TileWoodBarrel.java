@@ -19,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -64,7 +63,7 @@ import java.util.stream.Collectors;
 import static su.terrafirmagreg.api.data.Blockstates.SEALED;
 
 public class TileWoodBarrel extends BaseTileTickableInventory
-        implements ITickable, ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback, IContainerProvider<ContainerWoodBarrel, GuiWoodBarrel> {
+        implements ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback, IContainerProvider<ContainerWoodBarrel, GuiWoodBarrel> {
 
     public static final int SLOT_FLUID_CONTAINER_IN = 0;
     public static final int SLOT_FLUID_CONTAINER_OUT = 1;

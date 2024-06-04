@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -35,7 +36,6 @@ import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;

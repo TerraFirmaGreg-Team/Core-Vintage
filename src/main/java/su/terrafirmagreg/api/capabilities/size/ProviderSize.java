@@ -38,10 +38,7 @@ public class ProviderSize implements ICapabilitySize, ICapabilityProvider {
     }
 
     public static ProviderSize get(Size size, Weight weight, boolean canStack) {
-        EnumMap<Weight, ProviderSize[]> nested = CACHE.get(size);
-        if (nested == null) {
-            CACHE.put(size, nested = new EnumMap<>(Weight.class));
-        }
+        EnumMap<Weight, ProviderSize[]> nested = CACHE.computeIfAbsent(size, k -> new EnumMap<>(Weight.class));
         ProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new ProviderSize[2]);
         if (handlers[canStack ? 1 : 0] == null) {
             handlers[canStack ? 1 : 0] = new ProviderSize(size, weight, canStack);

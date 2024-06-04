@@ -1,5 +1,7 @@
 package com.buuz135.hotornot.object.item;
 
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
@@ -7,7 +9,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemMetalTongs extends ItemHotHolder implements IMetalItem {
+public class ItemMetalTongs extends ItemHotHolder implements ICapabilityMetal {
 
     private static final Map<Metal, ItemMetalTongs> TONGS_MAP = new HashMap<>();
     private final Metal metal;

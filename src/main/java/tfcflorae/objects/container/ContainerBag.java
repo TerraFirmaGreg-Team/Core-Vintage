@@ -1,5 +1,7 @@
 package tfcflorae.objects.container;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -9,7 +11,6 @@ import net.minecraftforge.items.IItemHandler;
 
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.objects.container.ContainerItemStack;

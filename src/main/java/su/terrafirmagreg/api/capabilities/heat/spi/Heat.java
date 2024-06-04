@@ -64,24 +64,6 @@ public enum Heat {
     }
 
     @Nullable
-    public static String getTooltipColorless(float temperature) {
-        Heat heat = Heat.getHeat(temperature);
-        if (heat != null) {
-            StringBuilder b = new StringBuilder();
-            b.append(I18n.format(Helpers.getEnumName(heat)));
-            if (heat != Heat.BRILLIANT_WHITE) {
-                for (int i = 1; i <= 4; i++) {
-                    if (temperature <= heat.getMin() + ((float) i * 0.2f) * (heat.getMax() - heat.getMin()))
-                        continue;
-                    b.append(Unicode.STAR);
-                }
-            }
-            return b.toString();
-        }
-        return null;
-    }
-
-    @Nullable
     public static String getTooltip(float temperature) {
         Heat heat = Heat.getHeat(temperature);
         String tooltip = getTooltipColorless(temperature);
@@ -106,6 +88,24 @@ public enum Heat {
             }
         }
         return tooltip;
+    }
+
+    @Nullable
+    public static String getTooltipColorless(float temperature) {
+        Heat heat = Heat.getHeat(temperature);
+        if (heat != null) {
+            StringBuilder b = new StringBuilder();
+            b.append(I18n.format(Helpers.getEnumName(heat)));
+            if (heat != Heat.BRILLIANT_WHITE) {
+                for (int i = 1; i <= 4; i++) {
+                    if (temperature <= heat.getMin() + ((float) i * 0.2f) * (heat.getMax() - heat.getMin()))
+                        continue;
+                    b.append(Unicode.STAR);
+                }
+            }
+            return b.toString();
+        }
+        return null;
     }
 
 }

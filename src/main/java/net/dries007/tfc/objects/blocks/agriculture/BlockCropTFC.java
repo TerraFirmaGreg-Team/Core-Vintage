@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -38,7 +38,7 @@ import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import org.jetbrains.annotations.NotNull;
@@ -173,7 +173,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
 
         // if player and skills are present, update skills and increase amounts of items depending on skill
         if (player != null) {
-            SimpleSkill skill = CapabilitySkill.getSkill(player, SkillType.AGRICULTURE);
+            SimpleSkill skill = CapabilityPlayer.getSkill(player, SkillType.AGRICULTURE);
 
             if (skill != null) {
                 if (!foodStack.isEmpty()) {

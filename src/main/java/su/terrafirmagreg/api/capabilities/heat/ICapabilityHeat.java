@@ -2,14 +2,14 @@ package su.terrafirmagreg.api.capabilities.heat;
 
 import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -63,10 +63,19 @@ public interface ICapabilityHeat extends ICapabilitySerializable<NBTTagCompound>
      * @param text  The list of tooltips
      */
     @SideOnly(Side.CLIENT)
-    default void addHeatInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
-        String tooltip = Heat.getTooltip(getTemperature());
-        if (tooltip != null) {
-            text.add(tooltip);
+    default void addHeatInfo(ItemStack stack, List<String> text) {
+        float temperature = getTemperature();
+        if (stack.getItem() == Items.STICK) {
+            if (temperature > getMeltTemp() * 0.9f) {
+                text.add(I18n.format("tfc.enum.heat.torch.lit"));
+            } else if (temperature > 1f) {
+                text.add(I18n.format("tfc.enum.heat.torch.catching_fire"));
+            }
+        } else {
+            String tooltip = Heat.getTooltip(temperature);
+            if (tooltip != null) {
+                text.add(tooltip);
+            }
         }
     }
 }

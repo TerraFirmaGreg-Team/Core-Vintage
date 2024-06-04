@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.client.gui.overlay;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
@@ -202,7 +202,7 @@ public final class OverlayPlayerData {
             int iconU = 0;
 
             if (ItemMetalChisel.hasHammerForChisel(player)) {
-                var cap = CapabilitySkill.get(player);
+                var cap = CapabilityPlayer.get(player);
                 if (cap != null) {
                     iconU = switch (cap.getChiselMode()) {
                         case SMOOTH -> 0;

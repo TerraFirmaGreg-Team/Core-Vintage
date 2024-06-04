@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.loot;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.Entity;
@@ -42,7 +42,7 @@ public class ApplySimpleSkill extends LootFunction {
     public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
         Entity entity = context.getKillerPlayer();
         if (entity instanceof EntityPlayer) {
-            var cap = CapabilitySkill.get((EntityPlayer) entity);
+            var cap = CapabilityPlayer.get((EntityPlayer) entity);
             if (cap != null) {
                 SimpleSkill skill = cap.getSkill(this.skillType);
                 if (skill != null) {

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -16,7 +18,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 
 import org.jetbrains.annotations.NotNull;

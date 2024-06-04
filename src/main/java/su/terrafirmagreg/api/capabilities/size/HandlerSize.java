@@ -15,7 +15,6 @@ import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
-import net.dries007.tfc.api.capability.ItemStickCapability;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +33,8 @@ public class HandlerSize {
         CUSTOM_ITEMS.put(IIngredient.of(Items.COAL),
                 () -> ProviderSize.get(Size.SMALL, Weight.LIGHT, true)); // Store anywhere stacksize = 32
 
-        CUSTOM_ITEMS.put(IIngredient.of(Items.STICK), ItemStickCapability::new); // Store anywhere stacksize = 64
+        CUSTOM_ITEMS.put(IIngredient.of(Items.STICK),
+                () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64
 
         CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL),
                 () -> ProviderSize.get(Size.SMALL, Weight.VERY_LIGHT, true)); // Store anywhere stacksize = 64

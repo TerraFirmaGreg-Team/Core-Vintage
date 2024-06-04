@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.features.ambiental.modifiers;
 
+import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureEnvironmentalProvider;
 import su.terrafirmagreg.modules.core.ConfigCore;
@@ -14,7 +15,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 

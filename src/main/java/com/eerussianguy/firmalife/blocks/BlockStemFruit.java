@@ -1,9 +1,9 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -96,19 +96,19 @@ public class BlockStemFruit extends BlockDirectional implements ICapabilitySize 
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        TETickCounter te = new TETickCounter();
-        te.resetCounter();
-        return te;
+        TETickCounter tile = new TETickCounter();
+        tile.resetCounter();
+        return tile;
     }
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
         if (world instanceof World && !((World) world).isRemote) {
-            TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            if (te != null) {
+            var tile = TileUtils.getTile(world, pos, TETickCounter.class);
+            if (tile != null) {
                 long currentTime = CalendarTFC.PLAYER_TIME.getTicks();
-                long foodCreationDate = currentTime - te.getTicksSinceUpdate();
+                long foodCreationDate = currentTime - tile.getTicksSinceUpdate();
                 drops.forEach(stack -> {
                     FoodHandler handler = (FoodHandler) stack.getCapability(CapabilityFood.CAPABILITY, null);
                     if (handler != null)
@@ -135,13 +135,13 @@ public class BlockStemFruit extends BlockDirectional implements ICapabilitySize 
                 if (block instanceof BlockStemCrop) {
                     BlockStemCrop crop = (BlockStemCrop) block;
                     //check the crop is pointing towards us
-                    TEStemCrop te = TileUtils.getTile(world, cropPos, TEStemCrop.class);
-                    if (te != null && te.getFruitDirection() == neighbor.getOpposite()) {
+                    var tile = TileUtils.getTile(world, cropPos, TEStemCrop.class);
+                    if (tile != null && tile.getFruitDirection() == neighbor.getOpposite()) {
                         IBlockState cropState = world.getBlockState(cropPos);
                         int cropStage = cropState.getValue(crop.getStageProperty());
                         if (cropStage == crop.getCrop().getMaxStage()) {
                             world.setBlockState(cropPos, cropState.withProperty(crop.getStageProperty(), cropStage - 3));
-                            SimpleSkill skill = CapabilitySkill.getSkill(player, SkillType.AGRICULTURE);
+                            SimpleSkill skill = CapabilityPlayer.getSkill(player, SkillType.AGRICULTURE);
                             ItemStack seedDrop = new ItemStack(ItemSeedsTFC.get(crop.getCrop()), 0);
                             if (skill != null) {
                                 seedDrop.setCount(Crop.getSkillSeedBonus(skill, RANDOM));

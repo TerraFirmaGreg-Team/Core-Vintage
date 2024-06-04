@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -11,9 +14,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import net.dries007.tfc.api.capability.inventory.ItemStackHandlerCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;

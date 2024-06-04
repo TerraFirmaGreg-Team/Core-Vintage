@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.container;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,7 +17,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -111,7 +111,7 @@ public class GuiSkills extends GuiContainerTFC {
         buttonLeft.enabled = currentPage >= 1;
         buttonRight.enabled = false;
 
-        var cap = CapabilitySkill.get(playerInv.player);
+        var cap = CapabilityPlayer.get(playerInv.player);
         if (cap != null) {
             List<SkillType<? extends Skill>> skillOrder = SkillType.getSkills();
             int totalSkills = skillOrder.size();

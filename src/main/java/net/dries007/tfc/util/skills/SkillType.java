@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.skills;
 
-import su.terrafirmagreg.api.capabilities.skill.ICapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.ICapabilityPlayer;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
@@ -41,9 +41,9 @@ public final class SkillType<S extends Skill> {
     }
 
     private final String name;
-    private final Function<ICapabilitySkill, S> skillSupplier;
+    private final Function<ICapabilityPlayer, S> skillSupplier;
 
-    public SkillType(String name, Function<ICapabilitySkill, S> skillSupplier) {
+    public SkillType(String name, Function<ICapabilityPlayer, S> skillSupplier) {
         this.name = name;
         this.skillSupplier = skillSupplier;
 
@@ -61,7 +61,7 @@ public final class SkillType<S extends Skill> {
     }
 
     @NotNull
-    public static Map<String, Skill> createSkillMap(ICapabilitySkill rootInstance) {
+    public static Map<String, Skill> createSkillMap(ICapabilityPlayer rootInstance) {
         return SKILL_TYPES.values()
                 .stream()
                 .collect(Collectors.toMap(SkillType::getName, e -> e.skillSupplier.apply(rootInstance)));

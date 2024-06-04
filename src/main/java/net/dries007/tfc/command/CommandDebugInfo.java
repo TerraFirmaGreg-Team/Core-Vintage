@@ -2,8 +2,8 @@ package net.dries007.tfc.command;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 
 import net.minecraft.command.CommandBase;

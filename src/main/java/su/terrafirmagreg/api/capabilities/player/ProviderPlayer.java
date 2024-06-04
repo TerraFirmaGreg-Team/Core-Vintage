@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.capabilities.skill;
+package su.terrafirmagreg.api.capabilities.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class ProviderSkill implements ICapabilitySkill, ICapabilitySerializable<NBTTagCompound> {
+public class ProviderPlayer implements ICapabilityPlayer, ICapabilitySerializable<NBTTagCompound> {
 
     public static final int MAX_INTOXICATED_TICKS = 36 * ICalendar.TICKS_IN_HOUR; // A day and a half. Each drink gives you 4 hours of time
 
@@ -34,11 +34,11 @@ public class ProviderSkill implements ICapabilitySkill, ICapabilitySerializable<
     private long nutted;
     private BlockPos nutPosition;
 
-    public ProviderSkill() {
+    public ProviderPlayer() {
         this(null);
     }
 
-    public ProviderSkill(EntityPlayer player) {
+    public ProviderPlayer(EntityPlayer player) {
         this.skills = SkillType.createSkillMap(this);
         this.player = player;
         this.harvestingTool = ItemStack.EMPTY;
@@ -145,7 +145,7 @@ public class ProviderSkill implements ICapabilitySkill, ICapabilitySerializable<
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilitySkill.CAPABILITY;
+        return capability == CapabilityPlayer.CAPABILITY;
     }
 
     @Nullable

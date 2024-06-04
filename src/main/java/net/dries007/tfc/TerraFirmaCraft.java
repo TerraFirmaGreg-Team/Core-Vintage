@@ -23,7 +23,6 @@ import net.minecraftforge.fml.server.FMLServerHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -57,7 +56,7 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
+import net.dries007.tfc.api.capability.chunkdata.CapabilityChunkData;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
 import static su.terrafirmagreg.Tags.VERSION;
@@ -142,7 +141,6 @@ public final class TerraFirmaCraft {
         CapabilityChunkData.preInit();
         CapabilityForgeable.preInit();
         CapabilityFood.preInit();
-        CapabilityMetalItem.preInit();
         CapabilityWorldTracker.preInit();
 
         if (event.getSide().isClient()) {

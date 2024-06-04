@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 import net.minecraft.block.Block;
@@ -67,7 +67,7 @@ public class ItemMetalChisel extends ItemMetalTool {
         if (hasHammerForChisel(player)) {
             IBlockState state = worldIn.getBlockState(pos);
             // get the capability that tells us the current player selected mode for chiseling
-            var cap = CapabilitySkill.get(player);
+            var cap = CapabilityPlayer.get(player);
             if (cap != null) {
                 return getRecipeResult(player, worldIn, pos, facing, cap.getChiselMode(), state, hitX, hitY, hitZ);
             }
@@ -189,7 +189,7 @@ public class ItemMetalChisel extends ItemMetalTool {
                 worldIn.setBlockState(pos, newState);
 
                 // spawn a slab if necessary
-                var cap = CapabilitySkill.get(player);
+                var cap = CapabilityPlayer.get(player);
                 if (cap != null) {
                     if (cap.getChiselMode() == Mode.SLAB) {
                         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(newState.getBlock(), 1));

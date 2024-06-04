@@ -1,5 +1,6 @@
 package com.eerussianguy.firmalife.registry;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.init.Items;
@@ -22,7 +23,6 @@ import com.eerussianguy.firmalife.init.KnappingFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.init.StemCrop;
 import com.eerussianguy.firmalife.recipe.KnappingRecipeFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;

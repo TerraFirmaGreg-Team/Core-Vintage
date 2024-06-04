@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 public final class ClimateTFC {
 

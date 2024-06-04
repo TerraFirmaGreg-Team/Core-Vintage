@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.skills;
 
-import su.terrafirmagreg.api.capabilities.skill.ICapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.ICapabilityPlayer;
 
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -11,7 +11,7 @@ public class SimpleSkill extends Skill {
 
     private float amount;
 
-    public SimpleSkill(ICapabilitySkill rootSkills) {
+    public SimpleSkill(ICapabilityPlayer rootSkills) {
         super(rootSkills);
         this.amount = 0;
     }

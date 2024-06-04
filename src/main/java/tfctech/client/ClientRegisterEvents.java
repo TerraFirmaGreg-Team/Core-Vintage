@@ -1,5 +1,7 @@
 package tfctech.client;
 
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -21,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
@@ -148,7 +149,7 @@ public final class ClientRegisterEvents {
                             return -1;
                         }
                         //noinspection ConstantConditions
-                        return (new Color(((IMetalItem) stack.getItem()).getMetal(stack).getColor())).brighter()
+                        return (new Color(((ICapabilityMetal) stack.getItem()).getMetal(stack).getColor())).brighter()
                                 .getRGB();
                     },
                     item);

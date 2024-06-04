@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -241,7 +241,7 @@ public class BlockWoodLog extends BlockLog implements IWoodBlock {
     @Override // TODO DT
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         ItemStack stack = ItemStack.EMPTY;
-        var cap = CapabilitySkill.get(player);
+        var cap = CapabilityPlayer.get(player);
         if (cap != null) {
             stack = cap.getHarvestingTool();
         }

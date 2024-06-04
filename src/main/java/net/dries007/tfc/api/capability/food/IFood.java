@@ -1,5 +1,9 @@
 package net.dries007.tfc.api.capability.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,18 +69,17 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
     FoodData getData();
 
     /**
-     * Gets the current decay date modifier, including traits Note: there's a difference between the DECAY modifier, and the DECAY DATE modifier, in
-     * that they are reciprocals of eachother
+     * Gets the current decay date modifier, including traits Note: there's a difference between the DECAY modifier, and the DECAY DATE modifier, in that they are reciprocals of
+     * eachother
      *
      * @return a value between 0 and infinity (0 = instant decay, infinity = never decay)
      */
     float getDecayDateModifier();
 
     /**
-     * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item,
-     * and it was created before the post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy.
-     * As such, we set it to non-decaying. This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()},
-     * See TerraFirmaCraft#458
+     * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was created before the
+     * post configureModules, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to non-decaying. This is NOT SERIALIZED on
+     * the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
      */
     void setNonDecaying();
 

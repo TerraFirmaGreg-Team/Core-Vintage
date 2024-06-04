@@ -1,5 +1,9 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,14 +12,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import lyeoj.tfcthings.init.TFCThingsItems;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
@@ -26,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemTFCThingsToolHead extends ItemTFC implements IMetalItem, TFCThingsConfigurableItem {
+public class ItemTFCThingsToolHead extends ItemTFC implements ICapabilityMetal, TFCThingsConfigurableItem {
 
     private final Metal metal;
     private final int smeltAmount;

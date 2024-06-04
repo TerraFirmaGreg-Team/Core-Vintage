@@ -1,19 +1,22 @@
 package su.terrafirmagreg.api.capabilities.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -27,7 +30,7 @@ import java.util.List;
 /**
  * Capability for any food item Allows foods to have nutrients, and also to decay / rot
  */
-public interface ICapabilityFood {
+public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
 
     /**
      * The timestamp that this food was created Used to calculate expiration date Rotten food uses {@code Long.MIN_VALUE} as the creation date

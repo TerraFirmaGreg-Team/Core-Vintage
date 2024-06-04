@@ -34,6 +34,7 @@ public class ProviderHeat implements ICapabilityHeat {
      * @param heatCapacity The heat capacity
      * @param meltTemp     The melting point
      */
+
     public ProviderHeat(@Nullable NBTTagCompound nbt, float heatCapacity, float meltTemp) {
         this.heatCapacity = heatCapacity;
         this.meltTemp = meltTemp;

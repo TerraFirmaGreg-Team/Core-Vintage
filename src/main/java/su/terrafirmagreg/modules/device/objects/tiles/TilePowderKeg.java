@@ -53,7 +53,8 @@ import static su.terrafirmagreg.api.data.Blockstates.SEALED;
  * @see BlockPowderKeg
  */
 
-public class TilePowderKeg extends BaseTileTickableInventory implements IItemHandlerSidedCallback, IContainerProvider<ContainerPowderKeg, GuiPowderkeg> {
+public class TilePowderKeg extends BaseTileTickableInventory
+        implements IItemHandlerSidedCallback, IContainerProvider<ContainerPowderKeg, GuiPowderkeg> {
 
     @Getter
     private boolean sealed;

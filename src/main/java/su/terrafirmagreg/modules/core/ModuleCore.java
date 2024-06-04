@@ -10,11 +10,12 @@ import su.terrafirmagreg.api.capabilities.food.HandlerFood;
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.heat.HandlerHeat;
 import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.api.capabilities.metal.HandlerMetal;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.HandlerSize;
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
@@ -91,7 +92,7 @@ public final class ModuleCore extends ModuleBase {
         CapabilityPull.register();
         CapabilitySharpness.register();
         CapabilitySize.register();
-        CapabilitySkill.register();
+        CapabilityPlayer.register();
         CapabilityTemperature.register();
         CapabilityDamageResistance.register();
 
@@ -113,6 +114,7 @@ public final class ModuleCore extends ModuleBase {
         HandlerSize.init();
         HandlerFood.init();
         HandlerEgg.init();
+        HandlerMetal.init();
         HandlerHeat.init();
         HandlerDamageResistance.init();
     }

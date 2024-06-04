@@ -1,4 +1,4 @@
-package net.dries007.tfc.world.classic.chunkdata;
+package net.dries007.tfc.api.capability.chunkdata;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.capability.food;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -28,11 +30,13 @@ public final class CapabilityFood {
 
     public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "food");
     public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
+
     /**
      * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay) That puts decay times at 25% - 100% of this value So meat / fruit will decay in ~5 days, grains
      * take ~20 days Other modifiers are applied on top of that
      */
     public static final int DEFAULT_ROT_TICKS = ICalendar.TICKS_IN_DAY * 22;
+
     @CapabilityInject(IFood.class)
     public static Capability<IFood> CAPABILITY;
 

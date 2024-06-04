@@ -1,5 +1,9 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,14 +31,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -47,7 +43,7 @@ import java.util.UUID;
 
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
-public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
+public class ItemRopeJavelin extends ItemTFC implements ICapabilityMetal, ItemOreDict, TFCThingsConfigurableItem {
 
     private static final String THROWN_NBT_KEY = "Thrown";
     private static final String JAVELIN_NBT_KEY = "JavelinID";

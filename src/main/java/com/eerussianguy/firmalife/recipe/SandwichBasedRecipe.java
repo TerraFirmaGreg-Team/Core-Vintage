@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.recipe;
 
+import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -8,7 +10,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.recipes.ShapedDamageRecipe;
 

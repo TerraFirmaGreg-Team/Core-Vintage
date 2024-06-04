@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.api.capabilities.skill.CapabilitySkill;
+import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -22,7 +22,7 @@ public class PacketCycleItemMode implements IMessageEmpty {
                 EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
                 if (player != null) {
                     if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel) {
-                        var cap = CapabilitySkill.get(player);
+                        var cap = CapabilityPlayer.get(player);
 
                         if (cap != null) {
                             ChiselRecipe.Mode mode = cap.getChiselMode();

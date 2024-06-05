@@ -31,17 +31,14 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
-import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
@@ -72,20 +69,6 @@ public class TFCRegistry {
     @SubscribeEvent
     public static void onPreRegisterPlant(TFCRegistryEvent.RegisterPreBlock<Plant> event) {
         event.getRegistry().registerAll(PlantsFL.WRAPPERS.toArray(new Plant[0]));
-    }
-
-    @SubscribeEvent
-    public static void onRegisterQuernRecipeEvent(RegistryEvent.Register<QuernRecipe> event) {
-        IForgeRegistry<QuernRecipe> r = event.getRegistry();
-
-        r.register(new QuernRecipe(IIngredient.of("gemHalite"), new ItemStack(ItemPowder.get(Powder.SALT), 2)).setRegistryName("halite"));
-        r.register(new QuernRecipe(IIngredient.of(ItemsFL.CINNAMON), new ItemStack(ItemsFL.GROUND_CINNAMON, 2)).setRegistryName("cinnamon"));
-        r.register(new QuernRecipe(IIngredient.of(ItemsFL.getFood(FoodFL.ROASTED_CHESTNUTS)),
-                new ItemStack(ItemsFL.getFood(FoodFL.CHESTNUT_FLOUR))).setRegistryName("roasted_chestnuts"));
-        r.register(new QuernRecipe(IIngredient.of(ItemFoodTFC.get(Food.SOYBEAN)),
-                new ItemStack(ItemsFL.getFood(FoodFL.GROUND_SOYBEANS))).setRegistryName("soybean"));
-        r.register(new QuernRecipe(IIngredient.of(ItemFoodTFC.get(Food.TOMATO)), new ItemStack(ItemsFL.getFood(FoodFL.TOMATO_SAUCE))).setRegistryName(
-                "tomato"));
     }
 
     @SubscribeEvent

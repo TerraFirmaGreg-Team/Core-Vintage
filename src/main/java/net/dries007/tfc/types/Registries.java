@@ -23,7 +23,6 @@ import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
@@ -61,7 +60,6 @@ public final class Registries {
         newRegistry(WELDING_RECIPE, WeldingRecipe.class, false);
         newRegistry(HEAT_RECIPE, HeatRecipe.class, false);
         newRegistry(BARREL_RECIPE, BarrelRecipe.class, false);
-        newRegistry(QUERN_RECIPE, QuernRecipe.class, false);
         newRegistry(CHISEL_RECIPE, ChiselRecipe.class, false);
         newRegistry(BLOOMERY_RECIPE, BloomeryRecipe.class, false);
         newRegistry(BLAST_FURNACE_RECIPE, BlastFurnaceRecipe.class, false);

@@ -16,7 +16,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -42,16 +41,6 @@ public class Recipes {
                         "unfired_mug"),
                 new HeatRecipeSimple(IIngredient.of(ModItems.Mug), new ItemStack(ModItems.Mug), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_jug")
 
-        );
-    }
-
-    @SubscribeEvent
-    public static void onRegisterQuernRecipeEvent(RegistryEvent.Register<QuernRecipe> event) {
-        IForgeRegistry<QuernRecipe> r = event.getRegistry();
-        r.registerAll(
-                new QuernRecipe(IIngredient.of(ItemsFL.getDriedFruit(Fruit.COFFEE_CHERRIES)), new ItemStack(ModItems.GreenCoffeeBeans, 1)).setRegistryName(
-                        "green_coffee_beans"),
-                new QuernRecipe(IIngredient.of(ModItems.CoffeeBeans), new ItemStack(ModItems.GroundCoffee, 1)).setRegistryName("ground_coffee")
         );
     }
 

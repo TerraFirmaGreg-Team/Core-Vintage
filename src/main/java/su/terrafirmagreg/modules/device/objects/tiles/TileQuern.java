@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiQuern;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerQuern;
+import su.terrafirmagreg.modules.device.objects.recipes.quern.QuernRecipeManager;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityCow;
@@ -25,7 +26,6 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -69,7 +69,7 @@ public class TileQuern extends BaseTileInventory implements ITickable, IContaine
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
         return switch (slot) {
             case SLOT_HANDSTONE -> OreDictUtils.contains(stack, "handstone");
-            case SLOT_INPUT -> QuernRecipe.get(stack) != null;
+            case SLOT_INPUT -> QuernRecipeManager.findMatchingRecipe(stack) != null;
             default -> false;
         };
     }
@@ -147,13 +147,12 @@ public class TileQuern extends BaseTileInventory implements ITickable, IContaine
     private void grindItem() {
         ItemStack inputStack = inventory.getStackInSlot(SLOT_INPUT);
         if (!inputStack.isEmpty()) {
-            QuernRecipe recipe = QuernRecipe.get(inputStack);
+            var recipe = QuernRecipeManager.findMatchingRecipe(inputStack);
             if (recipe != null && !world.isRemote) {
-                inputStack.shrink(recipe.getIngredients().get(0).getAmount());
+                inputStack.shrink(recipe.getInputItem().getAmount());
                 ItemStack outputStack = recipe.getOutputItem(inputStack);
                 outputStack = inventory.insertItem(SLOT_OUTPUT, outputStack, false);
-                inventory.setStackInSlot(SLOT_OUTPUT,
-                        CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT), outputStack));
+                inventory.setStackInSlot(SLOT_OUTPUT, CapabilityFood.mergeItemStacksIgnoreCreationDate(inventory.getStackInSlot(SLOT_OUTPUT), outputStack));
                 if (!outputStack.isEmpty()) {
                     // Still having leftover items, dumping in world
                     InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY() + 1, pos.getZ(), outputStack);

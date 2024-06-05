@@ -37,6 +37,32 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 @SuppressWarnings("unused")
 public final class StackUtils {
 
+    /**
+     * Compare two item stacks for crafting equivalency without oreDictionary or craftingTools
+     */
+    public static boolean isCraftingEquivalent(ItemStack base, ItemStack comparison) {
+        if (base.isEmpty() || comparison.isEmpty()) {
+            return false;
+        }
+
+        if (base.getItem() != comparison.getItem()) {
+            return false;
+        }
+
+        if (base.getItemDamage() != OreDictionary.WILDCARD_VALUE) {
+            if (base.getItemDamage() != comparison.getItemDamage()) {
+                return false;
+            }
+        }
+
+        // When the base stackTagCompound is null or empty, treat it as a wildcard for crafting
+        if (base.getTagCompound() == null || base.getTagCompound().isEmpty()) {
+            return true;
+        } else {
+            return ItemStack.areItemStackTagsEqual(base, comparison);
+        }
+    }
+
     public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {
         for (ItemStack stack : playerInv.mainInventory) {
             if (!stack.isEmpty() && OreDictUtils.contains(stack, ore)) {
@@ -67,10 +93,12 @@ public final class StackUtils {
 
     @NotNull
     public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
+
         return player.isCreative() ? stack : consumeItem(stack, amount);
     }
 
     public static void damageItem(ItemStack stack) {
+
         damageItem(stack, 1);
     }
 
@@ -126,14 +154,6 @@ public final class StackUtils {
         prepareStackTag(stack);
         return stack;
     }
-
-    /**
-     * Sets the lore for an ItemStack. This will override any existing lore on that item.
-     *
-     * @param stackAn instance of an ItemStack to write the lore to.
-     * @param loreAn array containing the lore to write. Each line is a new entry.
-     * @return ItemStackThe same instance of ItemStack that was passed to this method.
-     */
 
     /**
      * Sets the lore for an ItemStack. This will completely override any existing lore for that item.
@@ -626,8 +646,8 @@ public final class StackUtils {
                 } catch (final Exception e) {
 
                     TerraFirmaGreg.LOGGER.error(
-                            "Caught the following exception while getting sub items for {}. It should be reported to that mod's author.", item
-                                    .getRegistryName().toString());
+                            "Caught the following exception while getting sub items for {}. It should be reported to that mod's author.",
+                            item.getRegistryName().toString());
                     TerraFirmaGreg.LOGGER.catching(e);
                 }
 

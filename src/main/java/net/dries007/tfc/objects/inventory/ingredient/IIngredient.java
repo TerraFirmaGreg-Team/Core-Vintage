@@ -35,38 +35,47 @@ public interface IIngredient<T> extends Predicate<T> {
     }
 
     static IIngredient<ItemStack> of(@NotNull Block predicateBlock) {
+
         return new IngredientItemStack(new ItemStack(predicateBlock, 1, OreDictionary.WILDCARD_VALUE));
     }
 
     static IIngredient<ItemStack> of(@NotNull Item predicateItem) {
+
         return new IngredientItemStack(new ItemStack(predicateItem, 1, OreDictionary.WILDCARD_VALUE));
     }
 
     static IIngredient<ItemStack> of(@NotNull Item predicateItem, int amount) {
+
         return new IngredientItemStack(new ItemStack(predicateItem, amount, OreDictionary.WILDCARD_VALUE));
     }
 
     static IIngredient<ItemStack> of(@NotNull ItemStack predicateStack) {
+
         return new IngredientItemStack(predicateStack);
     }
 
     static IIngredient<ItemStack> of(@NotNull String oreName) {
+
         return new IngredientOreDict(oreName);
     }
 
     static IIngredient<ItemStack> of(@NotNull String oreName, int amount) {
+
         return new IngredientOreDict(oreName, amount);
     }
 
     static IIngredient<FluidStack> of(@NotNull FluidStack predicateStack) {
+
         return new IngredientFluidStack(predicateStack);
     }
 
     static IIngredient<FluidStack> of(@NotNull Fluid fluid, int amount) {
+
         return new IngredientFluidStack(fluid, amount);
     }
 
     static IIngredient<FluidStack> of(int amount, @NotNull Fluid... fluids) {
+
         return new IngredientMultipleFluidStack(amount, fluids);
     }
 
@@ -89,8 +98,8 @@ public interface IIngredient<T> extends Predicate<T> {
     boolean test(T input);
 
     /**
-     * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot,
-     * not if the recipe will complete.
+     * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot, not if the recipe will
+     * complete.
      *
      * @param input the input supplied to the recipe
      * @return true if the ingredient matches the input, ignoring the amount of input

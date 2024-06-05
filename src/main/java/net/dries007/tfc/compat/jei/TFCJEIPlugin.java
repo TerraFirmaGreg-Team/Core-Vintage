@@ -50,7 +50,6 @@ import net.dries007.tfc.compat.jei.categories.HeatCategory;
 import net.dries007.tfc.compat.jei.categories.KnappingCategory;
 import net.dries007.tfc.compat.jei.categories.LoomCategory;
 import net.dries007.tfc.compat.jei.categories.MetalHeatingCategory;
-import net.dries007.tfc.compat.jei.categories.QuernCategory;
 import net.dries007.tfc.compat.jei.categories.RockLayerCategory;
 import net.dries007.tfc.compat.jei.categories.ScrapingCategory;
 import net.dries007.tfc.compat.jei.categories.SmelteryCategory;
@@ -114,7 +113,6 @@ public final class TFCJEIPlugin implements IModPlugin {
     public static final String KNAP_STONE_UID = Constants.MODID_TFC + ".knap.stone";
     public static final String METAL_HEAT_UID = Constants.MODID_TFC + ".metal_heat";
     public static final String LOOM_UID = Constants.MODID_TFC + ".loom";
-    public static final String QUERN_UID = Constants.MODID_TFC + ".quern";
     public static final String ROCK_LAYER_UID = Constants.MODID_TFC + ".rock_layer";
     public static final String VEIN_UID = Constants.MODID_TFC + ".vein";
     public static final String WELDING_UID = Constants.MODID_TFC + ".welding";
@@ -150,7 +148,6 @@ public final class TFCJEIPlugin implements IModPlugin {
         registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_STONE_UID));
         registry.addRecipeCategories(new LoomCategory(registry.getJeiHelpers().getGuiHelper(), LOOM_UID));
         registry.addRecipeCategories(new MetalHeatingCategory(registry.getJeiHelpers().getGuiHelper(), METAL_HEAT_UID));
-        registry.addRecipeCategories(new QuernCategory(registry.getJeiHelpers().getGuiHelper(), QUERN_UID));
         registry.addRecipeCategories(new RockLayerCategory(registry.getJeiHelpers().getGuiHelper(), ROCK_LAYER_UID));
         registry.addRecipeCategories(new VeinCategory(registry.getJeiHelpers().getGuiHelper(), VEIN_UID));
         registry.addRecipeCategories(new WeldingCategory(registry.getJeiHelpers().getGuiHelper(), WELDING_UID));
@@ -162,15 +159,6 @@ public final class TFCJEIPlugin implements IModPlugin {
     @Override
     public void register(IModRegistry registry) {
         REGISTRY = registry;
-
-        //Wraps all quern recipes
-        List<SimpleRecipeWrapper> quernList = TFCRegistries.QUERN.getValuesCollection()
-                .stream()
-                .map(SimpleRecipeWrapper::new)
-                .collect(Collectors.toList());
-
-        registry.addRecipes(quernList, QUERN_UID); //Register recipes to quern category
-        registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN), QUERN_UID); //Register BlockQuern as the device that do quern recipes
 
         //Wraps all heating recipes, if they return ingredient(1 or more) -> itemstacks(1 or more)
         List<HeatRecipeWrapper> heatList = TFCRegistries.HEAT.getValuesCollection()

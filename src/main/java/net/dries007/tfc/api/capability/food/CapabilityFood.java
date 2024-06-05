@@ -116,7 +116,7 @@ public final class CapabilityFood {
      */
     @SuppressWarnings("unused")
     public static ItemStack updateFoodDecayOnCreate(ItemStack stack) {
-        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        var cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
             cap.setCreationDate(CalendarTFC.PLAYER_TIME.getTicks());
         }
@@ -124,7 +124,7 @@ public final class CapabilityFood {
     }
 
     public static void setStackNonDecaying(ItemStack stack) {
-        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        var cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
             cap.setNonDecaying();
         }
@@ -150,8 +150,8 @@ public final class CapabilityFood {
         if (!stackToMerge.isEmpty()) {
             if (!stackToMergeInto.isEmpty()) {
                 if (CapabilityFood.areStacksStackableExceptCreationDate(stackToMergeInto, stackToMerge)) {
-                    IFood mergeIntoFood = stackToMergeInto.getCapability(CapabilityFood.CAPABILITY, null);
-                    IFood mergeFood = stackToMerge.getCapability(CapabilityFood.CAPABILITY, null);
+                    var mergeIntoFood = stackToMergeInto.getCapability(CapabilityFood.CAPABILITY, null);
+                    var mergeFood = stackToMerge.getCapability(CapabilityFood.CAPABILITY, null);
                     if (mergeIntoFood != null && mergeFood != null) {
                         int mergeAmount = Math.min(stackToMerge.getCount(), stackToMergeInto.getMaxStackSize() - stackToMergeInto.getCount());
                         if (mergeAmount > 0) {

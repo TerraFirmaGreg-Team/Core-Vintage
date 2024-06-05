@@ -27,14 +27,11 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
-import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
-import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.types.DefaultMetals;
-import net.dries007.tfc.types.DefaultRocks;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.skills.SmithingSkill;
@@ -282,15 +279,6 @@ public class RegistryHandlerCommon {
                             IIngredient.of(new ItemStack(ItemsDevice.GRINDSTONE_QUARTZ)),
                             IIngredient.of(new ItemStack(ItemMetal.get(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL), DOUBLE_SHEET))),
                             new ItemStack(ItemsDevice.GRINDSTONE_STEEL), Metal.Tier.TIER_V));
-        }
-    }
-
-    @SubscribeEvent
-    public static void registerQuernRecipes(RegistryEvent.Register<QuernRecipe> event) {
-        if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones) {
-            event.getRegistry()
-                    .register(new QuernRecipe(IIngredient.of(ItemBrickTFC.get(TFCRegistries.ROCKS.getValue(DefaultRocks.QUARTZITE))),
-                            new ItemStack((TFCThingsItems.ITEM_WHETSTONE))).setRegistryName("whetstone"));
         }
     }
 

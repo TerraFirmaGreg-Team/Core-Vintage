@@ -38,7 +38,7 @@ public interface ICapabilitySize {
 
     @SideOnly(Side.CLIENT)
     default void addSizeInfo(ItemStack stack, List<String> text) {
-        text.add(Unicode.WEIGHT + " " + I18n.format(Helpers.getEnumName(getWeight(stack))) + Unicode.SIZE + " " + I18n.format(Helpers.getEnumName(getSize(stack))));
+        text.add(Unicode.WEIGHT + " " + I18n.format(Helpers.getEnumName(getWeight(stack))) + " " + Unicode.SIZE + " " + I18n.format(Helpers.getEnumName(getSize(stack))));
     }
 
     /**

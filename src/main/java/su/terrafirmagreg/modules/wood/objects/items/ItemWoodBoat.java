@@ -73,7 +73,7 @@ public class ItemWoodBoat extends BaseItem implements IWoodItem {
 
         Vec3d vec3d1 = vec3d.add((double) f7 * 5.0D, (double) f6 * 5.0D, (double) f8 * 5.0D);
         RayTraceResult raytraceresult = worldIn.rayTraceBlocks(vec3d, vec3d1, true);
- 
+
         if (raytraceresult == null) {
             return new ActionResult<>(EnumActionResult.PASS, itemstack);
         } else {

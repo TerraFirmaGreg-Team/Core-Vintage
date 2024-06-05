@@ -14,10 +14,10 @@ import org.jetbrains.annotations.Nullable;
 
 public final class ChunkDataProvider implements ICapabilitySerializable<NBTTagCompound> {
 
-    @CapabilityInject(ChunkDataTFC.class)
-    public static final Capability<ChunkDataTFC> CHUNK_DATA_CAPABILITY = Helpers.getNull();
+    @CapabilityInject(ChunkData.class)
+    public static final Capability<ChunkData> CHUNK_DATA_CAPABILITY = Helpers.getNull();
 
-    private final ChunkDataTFC instance = CHUNK_DATA_CAPABILITY.getDefaultInstance();
+    private final ChunkData instance = CHUNK_DATA_CAPABILITY.getDefaultInstance();
 
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {

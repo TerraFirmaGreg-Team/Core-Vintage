@@ -11,14 +11,14 @@ import net.minecraft.world.World;
 
 
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
@@ -300,11 +300,11 @@ public class BlockRockVariantConnectedTFCF extends BlockRockVariantFallableTFCF 
             }
             for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
                 if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
-                    float temp = ClimateTFC.getActualTemp(world, pos.up());
+                    float temp = Climate.getActualTemp(world, pos.up());
                     BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 
                     if (world.isAirBlock(pos.up()) &&
-                            plant.isValidLocation(temp, ChunkDataTFC.getRainfall(world, pos.up()),
+                            plant.isValidLocation(temp, ChunkData.getRainfall(world, pos.up()),
                                     Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, pos.up()), world.getSkylightSubtracted())) &&
                             plant.isValidGrowthTemp(temp) &&
                             rand.nextDouble() < plantBlock.getGrowthRate(world, pos.up())) {

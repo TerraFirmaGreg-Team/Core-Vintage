@@ -25,9 +25,12 @@ import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayPlayerData;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayTemperature;
-import su.terrafirmagreg.modules.core.event.AmbientalHandler;
-import su.terrafirmagreg.modules.core.event.CapabilitiesEntityHandler;
-import su.terrafirmagreg.modules.core.event.CapabilitiesItemHandler;
+import su.terrafirmagreg.modules.core.event.AmbientalEventHandler;
+import su.terrafirmagreg.modules.core.event.CapabilitiesEntityEventHandler;
+import su.terrafirmagreg.modules.core.event.CapabilitiesItemEventHandler;
+import su.terrafirmagreg.modules.core.event.DebugInfoEventHandler;
+import su.terrafirmagreg.modules.core.event.MaterialEventHandler;
+import su.terrafirmagreg.modules.core.event.PuddlesEventHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -96,9 +99,11 @@ public final class ModuleCore extends ModuleBase {
         CapabilityTemperature.register();
         CapabilityDamageResistance.register();
 
-        MinecraftForge.EVENT_BUS.register(new AmbientalHandler());
-        MinecraftForge.EVENT_BUS.register(new CapabilitiesItemHandler());
-        MinecraftForge.EVENT_BUS.register(new CapabilitiesEntityHandler());
+        MinecraftForge.EVENT_BUS.register(new AmbientalEventHandler());
+        MinecraftForge.EVENT_BUS.register(new CapabilitiesItemEventHandler());
+        MinecraftForge.EVENT_BUS.register(new CapabilitiesEntityEventHandler());
+        MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());
+        MinecraftForge.EVENT_BUS.register(new PuddlesEventHandler());
 
     }
 
@@ -107,6 +112,7 @@ public final class ModuleCore extends ModuleBase {
 
         MinecraftForge.EVENT_BUS.register(new OverlayTemperature());
         MinecraftForge.EVENT_BUS.register(new OverlayPlayerData());
+        MinecraftForge.EVENT_BUS.register(new DebugInfoEventHandler());
     }
 
     @Override

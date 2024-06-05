@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
@@ -32,7 +32,7 @@ public class WorldGenMossyRaw implements IWorldGenerator {
         int rarity = (random.nextInt(20) + 1);
 
         for (float r = rarity; r < (5 + rarity); r++) {
-            ChunkDataTFC data = ChunkDataTFC.get(world, chunkBlockPos);
+            ChunkData data = ChunkData.get(world, chunkBlockPos);
             final float floraDensity = data.getFloraDensity();
             final float floraDiversity = data.getFloraDiversity();
 
@@ -44,7 +44,7 @@ public class WorldGenMossyRaw implements IWorldGenerator {
                             (world.isAirBlock(blockPos.up()) || world.isAirBlock(blockPos.down()) || world.isAirBlock(blockPos.north()) ||
                                     world.isAirBlock(blockPos.south()) || world.isAirBlock(blockPos.east()) || world.isAirBlock(blockPos.west())) &&
                             world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
-                        world.setBlockState(blockPos, BlockRockVariantTFCF.get(ChunkDataTFC.getRockHeight(world, blockPos), RockTFCF.MOSSY_RAW)
+                        world.setBlockState(blockPos, BlockRockVariantTFCF.get(ChunkData.getRockHeight(world, blockPos), RockTFCF.MOSSY_RAW)
                                 .getDefaultState(), 2);
                     }
                 }

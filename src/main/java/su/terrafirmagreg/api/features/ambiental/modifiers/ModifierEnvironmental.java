@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureEnvironmentalProvider;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,9 +15,8 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
 
 
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Optional;
 
@@ -56,8 +56,8 @@ public class ModifierEnvironmental extends ModifierBase {
     }
 
     public static float getEnvironmentTemperature(EntityPlayer player) {
-        float avg = ClimateTFC.getAvgTemp(player.world, player.getPosition());
-        float actual = ClimateTFC.getActualTemp(player.world, player.getPosition());
+        float avg = Climate.getAvgTemp(player.world, player.getPosition());
+        float actual = Climate.getActualTemp(player.world, player.getPosition());
         if (ConfigCore.MISC.TEMPERATURE.harsherTemperateAreas) {
             float diff = actual - ProviderTemperature.AVERAGE;
             float sign = Math.signum(diff);
@@ -70,7 +70,7 @@ public class ModifierEnvironmental extends ModifierBase {
     }
 
     public static float getEnvironmentHumidity(EntityPlayer player) {
-        return ClimateTFC.getRainfall(player.world, player.getPosition()) / 3000;
+        return Climate.getRainfall(player.world, player.getPosition()) / 3000;
     }
 
     public static Optional<ModifierBase> handleFire(EntityPlayer player) {

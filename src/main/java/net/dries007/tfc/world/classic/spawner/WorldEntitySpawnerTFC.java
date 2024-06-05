@@ -37,10 +37,10 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,10 +137,10 @@ public final class WorldEntitySpawnerTFC {
                                                Random randomIn) {
         final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
 
-        final float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
-        final float rainfall = ChunkDataTFC.getRainfall(worldIn, chunkBlockPos);
-        final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
-        final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
+        final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
+        final float rainfall = ChunkData.getRainfall(worldIn, chunkBlockPos);
+        final float floraDensity = ChunkData.getFloraDensity(worldIn, chunkBlockPos);
+        final float floraDiversity = ChunkData.getFloraDiversity(worldIn, chunkBlockPos);
 
         // Spawns only one group
         ForgeRegistries.ENTITIES.getValuesCollection().stream()

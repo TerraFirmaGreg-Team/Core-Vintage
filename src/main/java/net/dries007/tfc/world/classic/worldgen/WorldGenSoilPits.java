@@ -12,16 +12,16 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import java.util.Random;
 
@@ -50,7 +50,7 @@ public class WorldGenSoilPits implements IWorldGenerator {
         int radius = rng.nextInt(6) + 2;
         int depth = rng.nextInt(3) + 1;
         if (rng.nextInt(ConfigTFC.General.WORLD.clayRarity) != 0 || start.getY() > WorldTypeTFC.SEALEVEL + 6) return;
-        if (ChunkDataTFC.getRainfall(world, start) < ConfigTFC.General.WORLD.clayRainfallThreshold) return;
+        if (ChunkData.getRainfall(world, start) < ConfigTFC.General.WORLD.clayRainfallThreshold) return;
 
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -62,11 +62,11 @@ public class WorldGenSoilPits implements IWorldGenerator {
                     final BlockPos pos = posHorizontal.add(0, y, 0);
                     final IBlockState current = world.getBlockState(pos);
                     if (BlocksTFC.isDirt(current)) {
-                        world.setBlockState(pos, BlockRockVariant.get(ChunkDataTFC.getRockHeight(world, pos), Rock.Type.CLAY)
+                        world.setBlockState(pos, BlockRockVariant.get(ChunkData.getRockHeight(world, pos), Rock.Type.CLAY)
                                 .getDefaultState(), 2);
                         flag = true;
                     } else if (BlocksTFC.isGrass(current)) {
-                        world.setBlockState(pos, BlockRockVariant.get(ChunkDataTFC.getRockHeight(world, pos), Rock.Type.CLAY_GRASS)
+                        world.setBlockState(pos, BlockRockVariant.get(ChunkData.getRockHeight(world, pos), Rock.Type.CLAY_GRASS)
                                 .getDefaultState(), 2);
                         flag = true;
                     }
@@ -78,10 +78,10 @@ public class WorldGenSoilPits implements IWorldGenerator {
                         if (plant.getIsClayMarking()) {
                             BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
                             IBlockState state = plantBlock.getDefaultState();
-                            int plantAge = plant.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(world, pos));
+                            int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));
 
                             if (!world.provider.isNether() && !world.isOutsideBuildHeight(pos) &&
-                                    plant.isValidLocation(ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos),
+                                    plant.isValidLocation(Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos),
                                             world.getLightFor(EnumSkyBlock.SKY, pos)) &&
                                     world.isAirBlock(pos) &&
                                     plantBlock.canBlockStay(world, pos, state)) {
@@ -101,7 +101,7 @@ public class WorldGenSoilPits implements IWorldGenerator {
         byte depth = 2;
 
         if (rng.nextInt(30) != 0 || start.getY() > WorldTypeTFC.SEALEVEL) return false;
-        ChunkDataTFC data = ChunkDataTFC.get(world, start);
+        ChunkData data = ChunkData.get(world, start);
         if (data.isInitialized() && data.getRainfall() >= 375f && data.getFloraDiversity() >= 0.5f && data.getFloraDensity() >= 0.5f &&
                 world.getBiome(start)
                         .getHeightVariation() < 0.15)

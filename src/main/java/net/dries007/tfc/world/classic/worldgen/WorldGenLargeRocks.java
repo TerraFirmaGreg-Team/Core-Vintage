@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import java.util.Random;
 
@@ -48,7 +48,7 @@ public class WorldGenLargeRocks implements IWorldGenerator {
     }
 
     private void genFromPoint(World world, Random rng, BlockPos start) {
-        Rock rock = ChunkDataTFC.getRockHeight(world, start);
+        Rock rock = ChunkData.getRockHeight(world, start);
         final int size = rng.nextInt(10) == 0 ? 4 : 3;
         for (int x = -size; x <= size; x++) {
             for (int z = -size; z <= size; z++) {

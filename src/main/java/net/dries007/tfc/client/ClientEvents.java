@@ -5,10 +5,8 @@ import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.lib.Unicode;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -17,11 +15,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -124,19 +119,12 @@ import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateHelper;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static net.minecraft.util.text.TextFormatting.*;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
@@ -238,65 +226,6 @@ public class ClientEvents {
             for (GuiButton button : event.getButtonList()) {
                 if (button instanceof GuiButtonPlayerInventoryTab) {
                     ((GuiButtonPlayerInventoryTab) button).updateGuiLeft(((GuiInventory) event.getGui()).getGuiLeft());
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void onRenderGameOverlayText(RenderGameOverlayEvent.Text event) {
-        Minecraft mc = Minecraft.getMinecraft();
-        List<String> list = event.getRight();
-        if (mc.gameSettings.showDebugInfo) {
-            //noinspection ConstantConditions
-            BlockPos blockpos = new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity()
-                    .getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
-            Chunk chunk = mc.world.getChunk(blockpos);
-            if (mc.world.isBlockLoaded(blockpos) && !chunk.isEmpty()) {
-                final int x = blockpos.getX() & 15, z = blockpos.getZ() & 15;
-                ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
-
-                list.add("");
-                list.add(AQUA + "TerraFirmaCraft");
-                boolean chunkDataValid = data != null && data.isInitialized();
-
-                if (chunkDataValid) {
-                    list.add(String.format(
-                            "%sRegion: %s%.1f" + Unicode.DEGREE + "C%s" +
-                                    " Avg: %s%.1f" + Unicode.DEGREE + "C%s" +
-                                    " Min: %s%.1f" + Unicode.DEGREE + "C%s" +
-                                    " Max: %s%.1f" + Unicode.DEGREE + "C",
-                            GRAY, WHITE, data.getRegionalTemp(), GRAY,
-                            WHITE, data.getAverageTemp(), GRAY,
-                            WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(), blockpos.getZ()), GRAY,
-                            WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockpos.getZ())));
-                    list.add(String.format("%sTemperature: %s%.1f" + Unicode.DEGREE + "C Daily: %s%.1f" + Unicode.DEGREE + "C",
-                            GRAY, WHITE, ClimateTFC.getMonthlyTemp(blockpos),
-                            WHITE, ClimateTFC.getActualTemp(blockpos)));
-                    list.add(GRAY + "Rainfall: " + WHITE + data.getRainfall());
-                    list.add(GRAY + "Spawn Protection = " + WHITE + data.isSpawnProtected());
-                } else if (mc.world.provider.getDimension() == 0) {
-                    list.add("Invalid Chunk Data (?)");
-                }
-
-                // Always add calendar info
-                list.add(I18n.format("tfc.tooltip.date", CalendarTFC.CALENDAR_TIME.getTimeAndDate()));
-
-                if (ConfigTFC.General.DEBUG.enable) {
-                    list.add(I18n.format("tfc.tooltip.debug_times", CalendarTFC.PLAYER_TIME.getTicks(), CalendarTFC.CALENDAR_TIME.getTicks()));
-
-                    if (chunkDataValid) {
-                        list.add(GRAY + "Flora Density: " + WHITE + data.getFloraDensity());
-                        list.add(GRAY + "Flora Diversity: " + WHITE + data.getFloraDiversity());
-
-                        list.add(GRAY + "Valid Trees: ");
-                        data.getValidTrees()
-                                .forEach(t -> list.add(String.format("%s %s (%.1f)", WHITE, t.getRegistryName(), t.getDominance())));
-
-                        list.add(GRAY + "Sea level offset: " + WHITE + data.getSeaLevelOffset(x, z));
-                        list.add(GRAY + "Spawn Protection: " + WHITE + data.getSpawnProtection());
-                    }
                 }
             }
         }

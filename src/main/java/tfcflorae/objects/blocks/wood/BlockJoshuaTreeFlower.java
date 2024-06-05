@@ -43,7 +43,7 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
@@ -532,8 +532,8 @@ public class BlockJoshuaTreeFlower extends Block {
     }
 
     /**
-     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include
-     * when redstone power is updated, cactus blocks popping off due to a neighboring solid block, etc.
+     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone power is updated,
+     * cactus blocks popping off due to a neighboring solid block, etc.
      */
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
@@ -676,7 +676,7 @@ public class BlockJoshuaTreeFlower extends Block {
 
         Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
         int expectedStage = fruitTree.getStageForMonth(currentMonth);
-        float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
+        float avgTemperature = Climate.getAvgTemp(world, pos);
 
         switch (expectedStage) {
             case 1:

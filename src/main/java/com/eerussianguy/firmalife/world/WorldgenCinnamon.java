@@ -14,7 +14,7 @@ import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import java.util.Random;
 
@@ -59,7 +59,7 @@ public class WorldgenCinnamon extends WorldGenerator {
         if (rand.nextInt(cinnamonRarity) != 1)
             return false;
 
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return false;
 
         final Biome b = world.getBiome(pos);

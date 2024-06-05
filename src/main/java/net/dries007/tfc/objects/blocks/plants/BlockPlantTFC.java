@@ -32,6 +32,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -39,8 +40,7 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.types.PlantsTFCF;
@@ -257,7 +257,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (worldIn.isAreaLoaded(pos, 1)) {
             int j;
-            if (this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+            if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
                     this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
                 j = (Integer) state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -267,7 +267,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
 
                     ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
                 }
-            } else if (!this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+            } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                     !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
                 j = (Integer) state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -290,7 +290,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
         } else {
             return soil.getBlock()
                     .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-                    this.plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+                    this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
         }
     }
 

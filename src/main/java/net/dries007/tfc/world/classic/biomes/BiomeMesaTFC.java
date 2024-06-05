@@ -16,7 +16,7 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -95,7 +95,7 @@ public class BiomeMesaTFC extends BiomeTFC {
 
         for (int j1 = 255; j1 >= 0; --j1) {
             if (chunkPrimerIn.getBlockState(l1, j1, k1).getMaterial() == Material.AIR && j1 < (int) d4) {
-                chunkPrimerIn.setBlockState(l1, j1, k1, BlockRockVariant.get(ChunkDataTFC.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
+                chunkPrimerIn.setBlockState(l1, j1, k1, BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
                         .getDefaultState());
             }
 
@@ -105,13 +105,13 @@ public class BiomeMesaTFC extends BiomeTFC {
                 IBlockState iblockstate1 = chunkPrimerIn.getBlockState(l1, j1, k1);
                 if (iblockstate1.getMaterial() == Material.AIR) {
                     l = -1;
-                } else if (iblockstate1.getBlock() == BlockRockVariant.get(ChunkDataTFC.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
+                } else if (iblockstate1.getBlock() == BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
                         .getDefaultState()) {
                     if (l == -1) {
                         flag1 = false;
                         if (k <= 0) {
                             iblockstate = AIR;
-                            iblockstate3 = BlockRockVariant.get(ChunkDataTFC.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
+                            iblockstate3 = BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.RAW)
                                     .getDefaultState();
                         } else if (j1 >= i2 - 4 && j1 <= i2 + 1) {
                             iblockstate = STAINED_HARDENED_CLAY;
@@ -127,11 +127,11 @@ public class BiomeMesaTFC extends BiomeTFC {
                             if (this.hasForest && j1 > 86 + k * 2) {
                                 if (flag) {
                                     chunkPrimerIn.setBlockState(l1, j1, k1,
-                                            BlockRockVariant.get(ChunkDataTFC.getRockHeight(worldIn, chunkBlockPos), Rock.Type.DIRT)
+                                            BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.DIRT)
                                                     .getDefaultState());
                                 } else {
                                     chunkPrimerIn.setBlockState(l1, j1, k1,
-                                            BlockRockVariant.get(ChunkDataTFC.getRockHeight(worldIn, chunkBlockPos), Rock.Type.GRASS)
+                                            BlockRockVariant.get(ChunkData.getRockHeight(worldIn, chunkBlockPos), Rock.Type.GRASS)
                                                     .getDefaultState());
                                 }
                             } else if (j1 > i2 + 3 + k) {

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.groundcover.BlockLightstone;
 
@@ -28,7 +28,7 @@ public class WorldGenLightstones implements IWorldGenerator {
         int y = rng.nextInt(70) + 1;
         BlockPos chunkPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
 
-        ChunkDataTFC data = ChunkDataTFC.get(world, chunkPos);
+        ChunkData data = ChunkData.get(world, chunkPos);
         final float floraDensity = data.getFloraDensity();
         final float floraDiversity = data.getFloraDiversity();
 

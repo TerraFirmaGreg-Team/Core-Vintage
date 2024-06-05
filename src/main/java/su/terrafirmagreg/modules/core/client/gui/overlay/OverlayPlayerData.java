@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.client.gui.overlay;
 import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -27,7 +28,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
 import org.lwjgl.opengl.GL11;

@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.GameUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -139,10 +139,10 @@ public class BlockLeavesTFC extends BlockLeaves {
         /*
          * This is a way to make sure the leave settings are updated.
          * The result of this call is cached somewhere, so it's not that important, but:
-         * The alternative would be to use `Minecraft.getMinecraft().gameSettings.fancyGraphics` directly in the 2 relevant methods.
+         * The alternative would be to use `GameUtils.getGameSettings().fancyGraphics` directly in the 2 relevant methods.
          * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
          */
-        leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+        leavesFancy = GameUtils.getGameSettings().fancyGraphics;
         return super.getRenderLayer();
     }
 
@@ -183,7 +183,7 @@ public class BlockLeavesTFC extends BlockLeaves {
         /*
          * See comment on getRenderLayer()
          */
-        leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+        leavesFancy = GameUtils.getGameSettings().fancyGraphics;
         return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 

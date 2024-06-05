@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,8 +22,8 @@ public class InfoProvider implements IWailaBlock {
     @Override
     public List<String> getTooltip(@NotNull World world, @NotNull BlockPos pos, @NotNull NBTTagCompound nbt) {
         List<String> currentTooltip = new ArrayList<>();
-        int temperature = Math.round(ClimateTFC.getActualTemp(world, pos, 0));
-        int rainfall = Math.round(ClimateTFC.getRainfall(world, pos));
+        int temperature = Math.round(Climate.getActualTemp(world, pos, 0));
+        int rainfall = Math.round(Climate.getRainfall(world, pos));
         currentTooltip.add(new TextComponentTranslation("waila.tfc.temperature", temperature).getFormattedText());
         currentTooltip.add(new TextComponentTranslation("waila.tfc.rainfall", rainfall).getFormattedText());
         return currentTooltip;

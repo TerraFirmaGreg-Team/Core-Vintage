@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
 
 import org.jetbrains.annotations.NotNull;
@@ -86,7 +86,7 @@ public class BiomeTFC extends Biome {
     @Override
     public float getTemperature(@NotNull BlockPos pos) {
         // Vanilla spec: 0.15 = snow threshold, range = [-1, 1] for overworld temps.
-        return MathHelper.clamp(0.15f + ClimateTFC.getDailyTemp(pos) / 35, -1, 1);
+        return MathHelper.clamp(0.15f + Climate.getDailyTemp(pos) / 35, -1, 1);
     }
 
     @Override

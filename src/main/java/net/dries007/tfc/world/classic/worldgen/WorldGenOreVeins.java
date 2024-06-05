@@ -13,7 +13,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 
@@ -52,7 +52,7 @@ public class WorldGenOreVeins implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (!(chunkGenerator instanceof ChunkGenTFC)) return;
         final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, chunkBlockPos);
+        ChunkData chunkData = ChunkData.get(world, chunkBlockPos);
         if (!chunkData.isInitialized()) return;
         if (world.provider.getDimension() != 0) return;
 

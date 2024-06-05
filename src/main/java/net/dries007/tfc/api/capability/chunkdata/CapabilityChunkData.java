@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketChunkData;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
@@ -22,7 +22,7 @@ public final class CapabilityChunkData {
     public static final ResourceLocation CHUNK_DATA = new ResourceLocation(MODID_TFC, "chunkdata");
 
     public static void preInit() {
-        CapabilityManager.INSTANCE.register(ChunkDataTFC.class, new ChunkDataTFC.ChunkDataStorage(), ChunkDataTFC::new);
+        CapabilityManager.INSTANCE.register(ChunkData.class, new ChunkData.ChunkDataStorage(), ChunkData::new);
     }
 
     @SubscribeEvent
@@ -40,10 +40,10 @@ public final class CapabilityChunkData {
     public static void onChunkWatchWatch(ChunkWatchEvent.Watch event) {
         Chunk chunk = event.getChunkInstance();
         if (chunk != null) {
-            ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+            ChunkData data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
             if (data != null && data.isInitialized()) {
                 // Update server side climate
-                ClimateTFC.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
+                Climate.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
 
                 // Update client side data
                 NBTTagCompound nbt = (NBTTagCompound) ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(data, null);

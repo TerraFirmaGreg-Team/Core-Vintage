@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.event;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.init.KeybindingsWood;
 import su.terrafirmagreg.modules.wood.network.CSPacketActionKey;
@@ -23,7 +24,7 @@ public class KeyEventHandler {
                 if (KeybindingsWood.ACTION_CART.isPressed()) {
                     ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketActionKey());
                 }
-                if (Minecraft.getMinecraft().gameSettings.keyBindSprint.isPressed()) {
+                if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
                     ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketToggleSlow());
                 }
             }
@@ -36,7 +37,7 @@ public class KeyEventHandler {
     //			ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketActionKey());
     //			ModuleWood.LOGGER.info("key pressed");
     //		}
-    //		if (Minecraft.getMinecraft().gameSettings.keyBindSprint.isPressed()) {
+    //		if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
     //			ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketToggleSlow());
     //			ModuleWood.LOGGER.info("key not pressed");
     //		}

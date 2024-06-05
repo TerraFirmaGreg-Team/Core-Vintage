@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.gui;
 
 import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -14,7 +15,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;

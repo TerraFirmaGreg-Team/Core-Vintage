@@ -9,14 +9,14 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -40,9 +40,9 @@ public class WorldGenWildCropsTFCF implements IWorldGenerator {
             BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
             Collections.shuffle(CROPS);
-            ChunkDataTFC data = ChunkDataTFC.get(world, chunkBlockPos);
-            float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
-            float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
+            ChunkData data = ChunkData.get(world, chunkBlockPos);
+            float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+            float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
             float floraDensity = data.getFloraDensity();
             float floraDiversity = data.getFloraDiversity();
             Biome b = world.getBiome(chunkBlockPos);

@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-public class CapabilitiesItemHandler {
+public class CapabilitiesItemEventHandler {
 
     @SubscribeEvent
     public void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {

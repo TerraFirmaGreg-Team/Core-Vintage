@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.ConfigTFCF;
 
 import java.util.Random;
@@ -26,7 +26,7 @@ public class WorldGenStructures implements IWorldGenerator {
             final int z = (chunkZ << 4) + random.nextInt(16) + 8;
             final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
             final Biome b = world.getBiome(pos);
-            ChunkDataTFC data = ChunkDataTFC.get(world, pos);
+            ChunkData data = ChunkData.get(world, pos);
             IBlockState down = world.getBlockState(pos.down());
 
             if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {

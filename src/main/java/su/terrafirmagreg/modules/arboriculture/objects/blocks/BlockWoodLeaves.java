@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
 import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
@@ -17,7 +18,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -256,10 +256,10 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         /*
          * This is a way to make sure the leave settings are updated.
          * The result of this call is cached somewhere, so it's not that important, but:
-         * The alternative would be to use `Minecraft.getMinecraft().gameSettings.fancyGraphics` directly in the 2 relevant methods.
+         * The alternative would be to use `GameUtils.getGameSettings().fancyGraphics` directly in the 2 relevant methods.
          * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
          */
-        leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+        leavesFancy = GameUtils.getGameSettings().fancyGraphics;
         return super.getRenderLayer();
     }
 
@@ -303,7 +303,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
         /*
          * See comment on getRenderLayer()
          */
-        leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+        leavesFancy = GameUtils.getGameSettings().fancyGraphics;
         return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 

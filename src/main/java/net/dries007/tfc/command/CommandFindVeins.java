@@ -18,7 +18,7 @@ import net.minecraftforge.common.WorldWorkerManager;
 
 import gnu.trove.map.hash.TObjectIntHashMap;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
 
@@ -203,7 +203,7 @@ public class CommandFindVeins extends CommandBase {
                 }
 
                 Chunk target = world.getChunk(next.x, next.z);
-                ChunkDataTFC chunkData = ChunkDataTFC.get(target);
+                ChunkData chunkData = ChunkData.get(target);
 
                 chunkData.getGeneratedVeins().stream()
                         .filter(vein -> !veinsFound.contains(vein.getPos()))

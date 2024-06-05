@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -17,7 +18,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 
 
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.NutritionStats;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.skills.Skill;

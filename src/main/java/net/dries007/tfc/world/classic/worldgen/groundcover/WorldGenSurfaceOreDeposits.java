@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.world.classic.worldgen.WorldGenOreVeins;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 import tfcflorae.ConfigTFCF;
@@ -44,7 +44,7 @@ public class WorldGenSurfaceOreDeposits implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
             final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-            final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
+            final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
 
             // Get the proper list of veins
             List<Vein> veins = Collections.emptyList();
@@ -53,11 +53,11 @@ public class WorldGenSurfaceOreDeposits implements IWorldGenerator {
 
             if (generateOres) {
                 // Grab 2x2 area
-                ChunkDataTFC[] chunkData = {
+                ChunkData[] chunkData = {
                         baseChunkData, // This chunk
-                        ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 0)),
-                        ChunkDataTFC.get(world, chunkBlockPos.add(0, 0, 16)),
-                        ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 16))
+                        ChunkData.get(world, chunkBlockPos.add(16, 0, 0)),
+                        ChunkData.get(world, chunkBlockPos.add(0, 0, 16)),
+                        ChunkData.get(world, chunkBlockPos.add(16, 0, 16))
                 };
                 if (!chunkData[0].isInitialized()) {
                     return;
@@ -72,7 +72,7 @@ public class WorldGenSurfaceOreDeposits implements IWorldGenerator {
                         if (v.getType() == null || !v.getType().hasLooseRocks() || v.getHighestY() < lowestYScan) {
                             return true;
                         }
-                        for (ChunkDataTFC data : chunkData) {
+                        for (ChunkData data : chunkData) {
                             // No need to check for initialized chunk data, ores will be empty.
                             if (data.getGeneratedVeins().contains(v)) {
                                 return false;

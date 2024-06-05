@@ -32,6 +32,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
@@ -45,8 +46,7 @@ import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
@@ -79,12 +79,12 @@ public class WorldRegenHandler {
 
     @SubscribeEvent
     public static void onChunkLoad(ChunkDataEvent.Load event) {
-        ChunkDataTFC chunkDataTFC = ChunkDataTFC.get(event.getChunk());
-        if (event.getWorld().provider.getDimension() == 0 && chunkDataTFC.isInitialized() && POSITIONS.size() < 1000) {
+        ChunkData chunkData = ChunkData.get(event.getChunk());
+        if (event.getWorld().provider.getDimension() == 0 && chunkData.isInitialized() && POSITIONS.size() < 1000) {
             //Only run this in the early months of each year
             if (CalendarTFC.CALENDAR_TIME.getMonthOfYear()
-                    .isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() &&
-                    CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
+                    .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
+                    CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
                 POSITIONS.add(event.getChunk().getPos());
             }
         }
@@ -99,21 +99,21 @@ public class WorldRegenHandler {
                 if (tps > ConfigTFC.General.WORLD_REGEN.minRegenTps) {
                     Chunk chunk = event.world.getChunk(pos.x, pos.z);
                     BlockPos blockPos = pos.getBlock(0, 0, 0);
-                    ChunkDataTFC chunkDataTFC = ChunkDataTFC.get(event.world, pos.getBlock(0, 0, 0));
+                    ChunkData chunkData = ChunkData.get(event.world, pos.getBlock(0, 0, 0));
                     IChunkProvider chunkProvider = event.world.getChunkProvider();
                     IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
 
                     if (CalendarTFC.CALENDAR_TIME.getMonthOfYear()
-                            .isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected() &&
-                            CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
+                            .isWithin(Month.APRIL, Month.JULY) && !chunkData.isSpawnProtected() &&
+                            CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkData.getLastUpdateYear()) {
                         if (ConfigTFC.General.WORLD_REGEN.sticksRocksModifier > 0) {
                             //Nuke any rocks and sticks in chunk.
                             removeAllPlacedItems(event.world, pos);
                             double rockModifier = ConfigTFC.General.WORLD_REGEN.sticksRocksModifier;
                             ROCKS_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
 
-                            final float density = chunkDataTFC.getFloraDensity();
-                            List<Tree> trees = chunkDataTFC.getValidTrees();
+                            final float density = chunkData.getFloraDensity();
+                            List<Tree> trees = chunkData.getValidTrees();
                             int stickDensity = 3 + (int) (4f * density + 1.5f * trees.size() * rockModifier);
                             if (trees.isEmpty()) {
                                 stickDensity = 1 + (int) (1.5f * density * rockModifier);
@@ -125,8 +125,8 @@ public class WorldRegenHandler {
                         removeCropsAndMushrooms(event.world, pos);
                         removeSeedBags(event.world, pos);
 
-                        float floraDensity = chunkDataTFC.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
-                        float floraDiversity = chunkDataTFC.getFloraDiversity();
+                        float floraDensity = chunkData.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
+                        float floraDiversity = chunkData.getFloraDiversity();
                         Plant mushroom = TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI);
                         if (mushroom != null) PLANT_GEN.setGeneratedPlant(mushroom);
                         for (float i = RNG.nextInt(Math.round(3 / floraDiversity)); i < (1 + floraDensity) * 5; i++) {
@@ -144,7 +144,7 @@ public class WorldRegenHandler {
                         regenPredators(event.world, biome, worldX + 8, worldZ + 8, 16, 16, RNG);
 
                         // notably missing: berry bushes
-                        chunkDataTFC.resetLastUpdateYear();
+                        chunkData.resetLastUpdateYear();
                     }
                     chunk.markDirty();
                     ((ChunkProviderServer) chunkProvider).queueUnload(chunk);
@@ -227,10 +227,10 @@ public class WorldRegenHandler {
 
     public static void regenPredators(World worldIn, Biome biomeIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
         final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
-        final float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
-        final float rainfall = ChunkDataTFC.getRainfall(worldIn, chunkBlockPos);
-        final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
-        final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
+        final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
+        final float rainfall = ChunkData.getRainfall(worldIn, chunkBlockPos);
+        final float floraDensity = ChunkData.getFloraDensity(worldIn, chunkBlockPos);
+        final float floraDiversity = ChunkData.getFloraDiversity(worldIn, chunkBlockPos);
         ForgeRegistries.ENTITIES.getValuesCollection()
                 .stream()
                 .filter((x) -> {

@@ -21,7 +21,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.NutritionStats;
 import net.dries007.tfc.network.PacketFoodStatsReplace;
 import net.dries007.tfc.network.PacketFoodStatsUpdate;

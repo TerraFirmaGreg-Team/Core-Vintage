@@ -8,11 +8,11 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,8 +36,8 @@ public class WorldGenBerryBushes implements IWorldGenerator {
                 Collections.shuffle(BUSHES);
                 BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-                float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
-                float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
+                float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+                float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
                 IBerryBush bush = BUSHES.stream()
                         .filter(x -> x.isValidConditions(temperature, rainfall))
                         .findFirst()

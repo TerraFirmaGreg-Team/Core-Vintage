@@ -35,13 +35,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 
+import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
+import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
+import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
+import net.dries007.tfc.api.capability.fluid.IFluidTankCallback;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
-import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.util.FluidTransferHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;

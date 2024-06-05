@@ -23,12 +23,12 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -72,7 +72,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
         } else {
             return soil.getBlock()
                     .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) &&
-                    this.plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+                    this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && this.plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
         }
     }
 
@@ -168,7 +168,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (worldIn.isAreaLoaded(pos, 1)) {
             int j;
-            if (this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+            if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
                     this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
                 j = (Integer) state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
@@ -181,7 +181,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
                     ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
                 }
-            } else if (!this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+            } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                     !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
                 j = (Integer) state.getValue(AGE);
                 if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {

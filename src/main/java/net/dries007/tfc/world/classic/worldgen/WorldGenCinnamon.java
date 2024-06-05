@@ -17,7 +17,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.StructureHelper;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.types.TreesTFCF;
@@ -40,7 +40,7 @@ public class WorldGenCinnamon extends WorldGenerator {
         if (rand.nextInt(ConfigTFCF.General.WORLD.cinnamonRarity) < 5)
             return false;
 
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return false;
 
         final Biome b = world.getBiome(pos);

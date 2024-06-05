@@ -24,12 +24,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -188,8 +188,8 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
         }
         world.setBlockState(pos.offset(EnumFacing.UP, height), flower);*/
 
-        float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
-        float rainfall = ChunkDataTFC.getRainfall(world, pos);
+        float avgTemperature = Climate.getAvgTemp(world, pos);
+        float rainfall = ChunkData.getRainfall(world, pos);
 
         int j = rand.nextInt(5);
         for (int k = 0; k < j; ++k) {

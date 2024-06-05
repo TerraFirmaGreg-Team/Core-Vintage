@@ -9,7 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.chunk.Chunk;
 
 
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +36,7 @@ public class CommandWorkChunk extends CommandBase {
         Entity entity = iCommandSender.getCommandSenderEntity();
         if (entity != null) {
             Chunk chunk = minecraftServer.getEntityWorld().getChunk(entity.getPosition());
-            ChunkDataTFC data = ChunkDataTFC.get(chunk);
+            ChunkData data = ChunkData.get(chunk);
             if (action.equals("add")) {
                 data.addWork(work);
             } else if (action.equals("set")) {

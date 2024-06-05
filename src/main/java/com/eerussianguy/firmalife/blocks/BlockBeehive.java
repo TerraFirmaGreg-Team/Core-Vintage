@@ -39,7 +39,7 @@ import net.dries007.tfc.objects.blocks.BlockFlowerPotTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -141,7 +141,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     }
 
     private boolean isValid(World world, BlockPos pos, TEHangingPlanter te) {
-        return te.isClimateValid() || ClimateTFC.getDailyTemp(world, pos) > 10;
+        return te.isClimateValid() || Climate.getDailyTemp(world, pos) > 10;
     }
 
     @Override

@@ -35,13 +35,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.objects.items.food.PotionEffectToHave;
 import tfcflorae.util.OreDictionaryHelper;
@@ -195,8 +195,8 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
 
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f &&
-                ChunkDataTFC.getRainfall(worldIn, pos) >= 250f && ChunkDataTFC.getRainfall(worldIn, pos) <= 500;
+        return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
+                ChunkData.getRainfall(worldIn, pos) >= 250f && ChunkData.getRainfall(worldIn, pos) <= 500;
     }
 
     @Override
@@ -205,8 +205,8 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
             IBlockState blockState = worldIn.getBlockState(pos.offset(face));
             if (!(blockState.getBlock() instanceof BlockLeavesTFC) &&
                     (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID)) {
-                return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f &&
-                        ChunkDataTFC.getRainfall(worldIn, pos) >= 250f && ChunkDataTFC.getRainfall(worldIn, pos) <= 500;
+                return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f &&
+                        ChunkData.getRainfall(worldIn, pos) >= 250f && ChunkData.getRainfall(worldIn, pos) <= 500;
             }
         }
         return false;
@@ -369,7 +369,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-        if (ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f &&
+        if (Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f &&
                 Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) <= 5f) {
             int j = state.getValue(AGE);
 
@@ -382,7 +382,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
                 }
                 net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
             }
-        } else if (!(ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f) ||
+        } else if (!(Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f) ||
                 (Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) > 5f)) {
             int j = state.getValue(AGE);
 

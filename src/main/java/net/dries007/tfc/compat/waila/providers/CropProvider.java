@@ -12,14 +12,14 @@ import net.minecraft.world.World;
 
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,8 +38,8 @@ public class CropProvider implements IWailaBlock {
             ICrop crop = bs.getCrop();
 
             boolean isWild = state.getValue(BlockCropTFC.WILD);
-            float temp = ClimateTFC.getActualTemp(world, pos, -tile.getLastUpdateTick());
-            float rainfall = ChunkDataTFC.getRainfall(world, pos);
+            float temp = Climate.getActualTemp(world, pos, -tile.getLastUpdateTick());
+            float rainfall = ChunkData.getRainfall(world, pos);
 
             if (isWild) {
                 currentTooltip.add(new TextComponentTranslation("waila.tfc.crop.wild").getFormattedText());

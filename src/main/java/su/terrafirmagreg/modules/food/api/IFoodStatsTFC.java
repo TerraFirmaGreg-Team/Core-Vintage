@@ -1,10 +1,13 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.modules.food.api;
 
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.tfc.api.capability.food.NutritionStats;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,8 +52,7 @@ public interface IFoodStatsTFC {
     NutritionStats getNutrition();
 
     /**
-     * Used to drink from a water source. Has an internal cooldown Attention: Simulation updates the cooldown, if you need to update the value after a
-     * simulation, use #addThirst
+     * Used to drink from a water source. Has an internal cooldown Attention: Simulation updates the cooldown, if you need to update the value after a simulation, use #addThirst
      *
      * @param value    the amount to drink = the value to increase thirst by
      * @param simulate determines if this is a simulated drink (eg: the thirst value is not updated, but still checks if this attempt would happen)
@@ -66,8 +68,7 @@ public interface IFoodStatsTFC {
     }
 
     /**
-     * Resets cooldown to prevent arm swinging in client when it attempts to drink water Client also needs to update cooldown after a sucessful drink
-     * attempt
+     * Resets cooldown to prevent arm swinging in client when it attempts to drink water Client also needs to update cooldown after a sucessful drink attempt
      */
     void resetCooldown();
 }

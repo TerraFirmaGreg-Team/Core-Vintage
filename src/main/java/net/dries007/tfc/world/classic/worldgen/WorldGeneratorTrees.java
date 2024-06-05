@@ -13,15 +13,15 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.structures.StructureGeneratorCorals;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.wood.BlockJoshuaTreeFlower;
@@ -39,11 +39,11 @@ public class WorldGeneratorTrees implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         BlockPos chunkPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, chunkPos);
+        ChunkData chunkData = ChunkData.get(world, chunkPos);
         final Biome b = world.getBiome(chunkPos);
         final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
-        final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
-        final float rainfall = ChunkDataTFC.getRainfall(world, chunkPos);
+        final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
+        final float rainfall = ChunkData.getRainfall(world, chunkPos);
         final float diversity = chunkData.getFloraDiversity();
         final float density = chunkData.getFloraDensity();
         float gauss = 2f * (float) random.nextGaussian();
@@ -168,7 +168,7 @@ public class WorldGeneratorTrees implements IWorldGenerator {
         }
     }
 
-    private void genBush(Random random, int chunkX, int chunkZ, World world, ChunkDataTFC chunkData, float minFlora, float maxFlora,
+    private void genBush(Random random, int chunkX, int chunkZ, World world, ChunkData chunkData, float minFlora, float maxFlora,
                          float minRainfall, float maxRainfall, int numBushes, List<Tree> trees) {
         final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
         final float density = chunkData.getFloraDensity();

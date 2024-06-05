@@ -26,7 +26,7 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
     }
 
     public static BlockEmergentTallWaterPlantTFC get(Plant plant) {
-        return BlockEmergentTallWaterPlantTFC.MAP.get(plant);
+        return MAP.get(plant);
     }
 
     @Override

@@ -12,7 +12,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.world.classic.worldgen.WorldGenLooseRocks;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
@@ -38,7 +38,7 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
             final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-            final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
+            final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
 
             // Get the proper list of veins
             Set<Vein> veins = Sets.newHashSet();
@@ -47,11 +47,11 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
 
             if (generateOres) {
                 // Grab 2x2 area
-                ChunkDataTFC[] chunkData = {
+                ChunkData[] chunkData = {
                         baseChunkData, // This chunk
-                        ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 0)),
-                        ChunkDataTFC.get(world, chunkBlockPos.add(0, 0, 16)),
-                        ChunkDataTFC.get(world, chunkBlockPos.add(16, 0, 16))
+                        ChunkData.get(world, chunkBlockPos.add(16, 0, 0)),
+                        ChunkData.get(world, chunkBlockPos.add(0, 0, 16)),
+                        ChunkData.get(world, chunkBlockPos.add(16, 0, 16))
                 };
                 if (!chunkData[0].isInitialized()) return;
 
@@ -59,7 +59,7 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
                 int lowestYScan = Math.max(10, world.getTopSolidOrLiquidBlock(chunkBlockPos)
                         .getY() - ConfigTFC.General.WORLD.looseRockScan);
 
-                for (ChunkDataTFC data : chunkData) {
+                for (ChunkData data : chunkData) {
                     veins.addAll(data.getGeneratedVeins());
                 }
 

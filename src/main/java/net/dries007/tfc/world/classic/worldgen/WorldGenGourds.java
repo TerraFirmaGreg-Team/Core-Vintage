@@ -10,10 +10,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import com.eerussianguy.firmalife.registry.BlocksFL;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -36,9 +36,9 @@ public class WorldGenGourds implements IWorldGenerator {
         // Guarantees crop generation if possible (easier to balance by config file while also making it random)
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-        float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
-        float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
-        float floraDensity = ChunkDataTFC.getFloraDensity(world, chunkBlockPos);
+        float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+        float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
+        float floraDensity = ChunkData.getFloraDensity(world, chunkBlockPos);
 
         if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && random.nextInt(20) == 0 && rainfall >= RAINFALL_MELON &&
                 temperature >= 18f && floraDensity >= 0.3f) {
@@ -74,9 +74,9 @@ public class WorldGenGourds implements IWorldGenerator {
         // Guarantees crop generation if possible (easier to balance by config file while also making it random)
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-        float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
-        float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
-        float floraDensity = ChunkDataTFC.getFloraDensity(world, chunkBlockPos);
+        float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+        float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
+        float floraDensity = ChunkData.getFloraDensity(world, chunkBlockPos);
 
         if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0 && random.nextInt(20) == 0 && rainfall >= RAINFALL_PUMPKIN &&
                 temperature >= 10f && floraDensity >= 0.2f) {

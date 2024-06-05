@@ -3,7 +3,7 @@ package net.dries007.tfc.command;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 
 import net.minecraft.command.CommandBase;
@@ -46,7 +46,7 @@ public class CommandDebugInfo extends CommandBase {
         BlockPos pos = sender.getPosition();
 
         // Chunk data
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
 
         LOGGER.info("ROCK LAYER DATA");
         for (int x = 0; x < 16; x++) {

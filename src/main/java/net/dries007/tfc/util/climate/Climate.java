@@ -5,21 +5,21 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
-public final class ClimateTFC {
+public final class Climate {
 
     private static final ClimateCache CACHE = new ClimateCache();
 
-    private ClimateTFC() {}
+    private Climate() {}
 
     public static float getActualTemp(World world, BlockPos pos) {
         return getActualTemp(world, pos, 0);
     }
 
     public static float getActualTemp(World world, BlockPos pos, long timeOffset) {
-        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
+        ChunkData data = ChunkData.get(world, pos);
         if (data.isInitialized()) {
             return ClimateHelper.actualTemp(data.getRegionalTemp(), pos.getY(), pos.getZ(), timeOffset);
         }
@@ -39,7 +39,7 @@ public final class ClimateTFC {
     }
 
     public static float getDailyTemp(World world, BlockPos pos, long timeOffset) {
-        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
+        ChunkData data = ChunkData.get(world, pos);
         if (data.isInitialized()) {
             return ClimateHelper.dailyTemp(data.getRegionalTemp(), pos.getZ(), timeOffset);
         }
@@ -59,7 +59,7 @@ public final class ClimateTFC {
     }
 
     public static float getMonthlyTemp(World world, BlockPos pos, long timeOffset) {
-        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
+        ChunkData data = ChunkData.get(world, pos);
         if (data.isInitialized()) {
             return ClimateHelper.monthlyTemp(data.getRegionalTemp(), pos.getZ(), timeOffset);
         }
@@ -75,7 +75,7 @@ public final class ClimateTFC {
     }
 
     public static float getAvgTemp(World world, BlockPos pos) {
-        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
+        ChunkData data = ChunkData.get(world, pos);
         if (data.isInitialized()) {
             return data.getAverageTemp();
         }
@@ -88,7 +88,7 @@ public final class ClimateTFC {
     }
 
     public static float getRainfall(World world, BlockPos pos) {
-        return ChunkDataTFC.getRainfall(world, pos);
+        return ChunkData.getRainfall(world, pos);
     }
 
     public static float getRainfall(BlockPos pos) {

@@ -222,7 +222,7 @@ public class ConfigCore {
 
             @Config.Name("Debug Mode")
             @Config.Comment("When enabled, prints debug values to console. Activates some extra wand features. Enables extra item tooltips.")
-            public boolean enable = false;
+            public boolean enable = true;
         }
     }
 

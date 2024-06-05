@@ -24,6 +24,7 @@ import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 
 import net.minecraft.block.Block;
@@ -101,9 +102,9 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
@@ -133,10 +134,9 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.CalendarWorldData;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
@@ -604,7 +604,7 @@ public final class CommonEventHandler {
             if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity()
                     .isCreatureType(EnumCreatureType.MONSTER, false)) {
                 // Prevent Mobs
-                ChunkDataTFC data = ChunkDataTFC.get(event.getWorld(), pos);
+                ChunkData data = ChunkData.get(event.getWorld(), pos);
                 int minY = ConfigTFC.General.SPAWN_PROTECTION.minYMobs;
                 int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYMobs;
                 if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -614,7 +614,7 @@ public final class CommonEventHandler {
 
             if (ConfigTFC.General.SPAWN_PROTECTION.preventPredators && event.getEntity() instanceof IPredator) {
                 // Prevent Predators
-                ChunkDataTFC data = ChunkDataTFC.get(event.getWorld(), pos);
+                ChunkData data = ChunkData.get(event.getWorld(), pos);
                 int minY = ConfigTFC.General.SPAWN_PROTECTION.minYPredators;
                 int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYPredators;
                 if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -633,10 +633,10 @@ public final class CommonEventHandler {
 
             // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
             if (event.getEntity() instanceof ICreature creature) {
-                float rainfall = ChunkDataTFC.getRainfall(world, pos);
-                float temperature = ClimateTFC.getAvgTemp(world, pos);
-                float floraDensity = ChunkDataTFC.getFloraDensity(world, pos);
-                float floraDiversity = ChunkDataTFC.getFloraDiversity(world, pos);
+                float rainfall = ChunkData.getRainfall(world, pos);
+                float temperature = Climate.getAvgTemp(world, pos);
+                float floraDensity = ChunkData.getFloraDensity(world, pos);
+                float floraDiversity = ChunkData.getFloraDiversity(world, pos);
                 Biome biome = world.getBiome(pos);
 
                 // We don't roll spawning again since vanilla is handling it
@@ -907,7 +907,7 @@ public final class CommonEventHandler {
                     BlockPos chunkPos = basePos.add(16 * i, 0, 16 * j);
                     World world = event.player.getEntityWorld();
                     if (world.isBlockLoaded(basePos)) {
-                        ChunkDataTFC data = ChunkDataTFC.get(world, chunkPos);
+                        ChunkData data = ChunkData.get(world, chunkPos);
                         data.addSpawnProtection(1);
                     }
                 }

@@ -5,11 +5,11 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,8 +101,8 @@ public class TECropBaseN extends TECropBase {
     public void reduceCounter(long amount) {
         super.reduceCounter((long) (amount / factor));
 
-        float temp = ClimateTFC.getActualTemp(getWorld(), pos, -getTicksSinceUpdate());
-        float rainfall = ChunkDataTFC.getRainfall(getWorld(), pos);
+        float temp = Climate.getActualTemp(getWorld(), pos, -getTicksSinceUpdate());
+        float rainfall = ChunkData.getRainfall(getWorld(), pos);
         if (this.crop.isValidForGrowth(temp, rainfall)) {
             NutrientValues nutrientValues = TFCFarming.INSTANCE.worldStorage.getNutrientValues(pos.getX(), pos.getZ());
 

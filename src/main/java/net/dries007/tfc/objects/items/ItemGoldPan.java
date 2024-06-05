@@ -40,7 +40,7 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -145,8 +145,8 @@ public class ItemGoldPan extends ItemTFC {
                     final BlockPos position = player.getPosition();
                     if (!world.isRemote) {
                         Chunk chunk = world.getChunk(position);
-                        ChunkDataTFC chunkDataTFC = ChunkDataTFC.get(chunk);
-                        if (chunkDataTFC.canWork(6)) {
+                        ChunkData chunkData = ChunkData.get(chunk);
+                        if (chunkData.canWork(6)) {
                             if (damage == 1 || damage == 2) {
                                 Random rand = new Random(
                                         world.getSeed() + chunk.getPos().x * 241179128412L + chunk.getPos().z * 327910215471L);
@@ -161,7 +161,7 @@ public class ItemGoldPan extends ItemTFC {
                                         });
                                 // player.inventory.setInventorySlotContents(player.inventory.currentItem, stack); //only way to get it to refresh! <- do we really *need* this?
                             } else if (damage == 3 || damage == 4) {
-                                Rock rock = chunkDataTFC.getRockHeight(position);
+                                Rock rock = chunkData.getRockHeight(position);
                                 if (RNG.nextDouble() < 0.35) {
                                     StackUtils.spawnItemStack(world, position, new ItemStack(ItemRock.get(rock), 1));
                                 } else if (damage == 3 && RNG.nextDouble() < 0.1) {
@@ -170,7 +170,7 @@ public class ItemGoldPan extends ItemTFC {
                                     StackUtils.spawnItemStack(world, position, new ItemStack(Items.STICK, 1));
                                 }
                             }
-                            chunkDataTFC.addWork(6);
+                            chunkData.addWork(6);
                         } else {
                             player.sendMessage(new TextComponentTranslation(MODID_TFC + ".tooltip.goldpan.chunkworked"));
                         }

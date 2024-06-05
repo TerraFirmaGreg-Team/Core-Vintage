@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.client.model.base;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -41,7 +42,7 @@ public class MultiTextureAtlasSprite extends TextureAtlasSprite {
         TextureAtlasSprite mappingSprite = textureGetter.apply(texture2);
         width = sprite.getIconWidth();
         height = sprite.getIconHeight();
-        int[][] pixels = new int[Minecraft.getMinecraft().gameSettings.mipmapLevels + 1][];
+        int[][] pixels = new int[GameUtils.getGameSettings().mipmapLevels + 1][];
         //кол-во пикселей в новой текстуре
         pixels[0] = new int[width * height];
 

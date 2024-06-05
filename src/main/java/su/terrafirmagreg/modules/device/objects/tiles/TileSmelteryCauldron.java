@@ -26,11 +26,11 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
+import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
+import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
+import net.dries007.tfc.api.capability.fluid.IFluidTankCallback;
 import net.dries007.tfc.api.recipes.SmelteryRecipe;
-import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
-import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
 

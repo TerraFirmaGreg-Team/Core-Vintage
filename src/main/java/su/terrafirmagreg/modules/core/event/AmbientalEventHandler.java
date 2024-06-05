@@ -23,7 +23,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import java.lang.reflect.Field;
 
 @SuppressWarnings("unused")
-public class AmbientalHandler {
+public class AmbientalEventHandler {
 
     // Ignore this code!
     @SubscribeEvent

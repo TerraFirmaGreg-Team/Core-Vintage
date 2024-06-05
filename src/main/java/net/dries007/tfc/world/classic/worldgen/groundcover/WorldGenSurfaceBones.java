@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -31,7 +31,7 @@ public class WorldGenSurfaceBones implements IWorldGenerator {
     }
 
     public int getBoneFrequency(World world, BlockPos pos, double groundBoneFrequency) {
-        float rainfall = ChunkDataTFC.get(world, pos).getRainfall();
+        float rainfall = ChunkData.get(world, pos).getRainfall();
 
         if (rainfall <= 20)
             return (int) (groundBoneFrequency / (1D + Math.pow(0.7D, (double) rainfall - 5.9D)));
@@ -42,7 +42,7 @@ public class WorldGenSurfaceBones implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
+        final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
 
         if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
 
@@ -62,7 +62,7 @@ public class WorldGenSurfaceBones implements IWorldGenerator {
     }
 
     private void generateRock(World world, BlockPos pos) {
-        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
+        ChunkData data = ChunkData.get(world, pos);
         if (pos.getY() > 146 && pos.getY() < 170 && data.getRainfall() <= 75) {
             if (world.isAirBlock(pos) && world.getBlockState(pos.down())
                     .isSideSolid(world, pos.down(), EnumFacing.UP) &&

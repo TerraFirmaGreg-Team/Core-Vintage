@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
@@ -20,7 +21,6 @@ import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;

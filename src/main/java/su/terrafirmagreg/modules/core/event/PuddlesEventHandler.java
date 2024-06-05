@@ -26,20 +26,16 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Constants.MOD_ID;
-
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MOD_ID)
 public class PuddlesEventHandler {
 
     @SubscribeEvent
@@ -87,7 +83,7 @@ public class PuddlesEventHandler {
         }
 
         Biome biome = world.getBiomeForCoordsBody(pos);
-        if (biome.canRain() && !biome.getEnableSnow() && (ClimateTFC.getActualTemp(pos) > 0)) {
+        if (biome.canRain() && !biome.getEnableSnow() && (Climate.getActualTemp(pos) > 0)) {
             for (int y = pos.getY() + 1; y < world.getHeight(); y++) {
                 BlockPos up = new BlockPos(pos.getX(), y, pos.getZ());
                 if (!world.isAirBlock(up)) {

@@ -7,10 +7,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.plants.BlockHangingPlantTFCF;
 
 import java.util.Random;
@@ -28,20 +28,20 @@ public class WorldGenCaveVines extends WorldGenerator {
         BlockHangingPlantTFCF plantBlock = BlockHangingPlantTFCF.get(plant);
         IBlockState state = plantBlock.getDefaultState();
 
-        for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, pos) / 4; ++i) {
+        for (int i = 0; i < ChunkData.getRainfall(worldIn, pos) / 4; ++i) {
             BlockPos blockpos = pos.add(rng.nextInt(7) - rng.nextInt(7), rng.nextInt(16), rng.nextInt(7) - rng.nextInt(7));
 
             int j = 1 + rng.nextInt(plant.getMaxHeight());
 
             for (int k = 0; k < j; ++k) {
-                if (plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, blockpos)) &&
+                if (plant.isValidTemp(Climate.getActualTemp(worldIn, blockpos)) &&
                         plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, blockpos.down(k))) &&
                         worldIn.isAirBlock(blockpos.down(k)) &&
                         pos.getY() < WorldTypeTFC.SEALEVEL - 3 &&
                         worldIn.getLightFor(EnumSkyBlock.SKY, blockpos) < 14 &&
                         plantBlock.canBlockStay(worldIn, blockpos.down(k), state) &&
                         plantBlock.canPlaceBlockAt(worldIn, blockpos.down(k))) {
-                    int plantAge = plant.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(worldIn, blockpos));
+                    int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(worldIn, blockpos));
                     setBlockAndNotifyAdequately(worldIn, blockpos.down(k), state.withProperty(BlockHangingPlantTFCF.AGE, plantAge));
                 }
             }

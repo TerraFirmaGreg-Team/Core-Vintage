@@ -9,7 +9,7 @@ import BananaFructa.tfcfarming.NutrientClass;
 import BananaFructa.tfcfarming.NutrientValues;
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 public class TEHangingPlanterN extends TEHangingPlanter {
 
@@ -50,7 +50,7 @@ public class TEHangingPlanterN extends TEHangingPlanter {
     }
 
     public boolean isTempBelowMax() {
-        return !Config.enforceTemperature || maxTemp > ClimateTFC.getActualTemp(world, pos, 0);
+        return !Config.enforceTemperature || maxTemp > Climate.getActualTemp(world, pos, 0);
     }
 
     public boolean isLow() {

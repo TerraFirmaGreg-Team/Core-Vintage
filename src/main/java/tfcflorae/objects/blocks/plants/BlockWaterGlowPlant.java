@@ -32,11 +32,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.objects.blocks.groundcover.BlockCoralBlock;
 
 import org.jetbrains.annotations.NotNull;
@@ -294,7 +294,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySiz
                     BlocksTFC.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
                     (BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
                             up.getBlock() instanceof BlockWaterGlowPlant)) {
-                return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ChunkDataTFC.getRainfall(worldIn, pos) >= 100f;
+                return Climate.getAvgTemp(worldIn, pos) >= 10f && ChunkData.getRainfall(worldIn, pos) >= 100f;
             }
         }
         return false;
@@ -325,7 +325,7 @@ public class BlockWaterGlowPlant extends BlockFluidTFC implements ICapabilitySiz
                     BlocksTFC.isGround(blockState) || blockState.getBlock() instanceof BlockCoralBlock) &&
                     (BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up())) || up.getBlock() instanceof BlockCoralBlock ||
                             up.getBlock() instanceof BlockWaterGlowPlant)) {
-                return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ChunkDataTFC.getRainfall(worldIn, pos) >= 100f;
+                return Climate.getAvgTemp(worldIn, pos) >= 10f && ChunkData.getRainfall(worldIn, pos) >= 100f;
             }
         }
         return false;

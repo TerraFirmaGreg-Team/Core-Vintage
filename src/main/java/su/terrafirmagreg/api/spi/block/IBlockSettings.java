@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.spi.block;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.registry.provider.IAutoRegProvider;
 import su.terrafirmagreg.api.registry.provider.IBlockStateProvider;
 import su.terrafirmagreg.api.spi.item.BaseItemBlock;
@@ -29,12 +31,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import com.google.common.collect.Lists;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -233,10 +229,6 @@ public interface IBlockSettings extends IAutoRegProvider, IBlockStateProvider {
             this.opaque = true;
             this.fullCube = true;
             this.hasItemSubtypes = false;
-        }
-
-        public static Settings of() {
-            return new Settings(Material.AIR);
         }
 
         public static Settings of(Material material) {

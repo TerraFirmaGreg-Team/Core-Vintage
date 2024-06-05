@@ -22,7 +22,7 @@ import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -59,7 +59,7 @@ public class WorldGenTrees implements IWorldGenerator {
         if (!(chunkGenerator instanceof ChunkGenTFC)) return;
 
         final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, chunkBlockPos);
+        ChunkData chunkData = ChunkData.get(world, chunkBlockPos);
         if (!chunkData.isInitialized()) return;
 
         final Biome b = world.getBiome(chunkBlockPos);

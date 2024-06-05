@@ -28,6 +28,8 @@ import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -38,11 +40,11 @@ import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
 import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
 
 @SuppressWarnings("WeakerAccess")
-public final class ChunkDataTFC {
+public final class ChunkData {
 
     public static final int FISH_POP_MAX = 60;
 
-    private static final ChunkDataTFC EMPTY = new ChunkDataTFC();
+    private static final ChunkData EMPTY = new ChunkData();
 
     static {
         Arrays.fill(EMPTY.drainageLayer, DataLayer.ERROR);
@@ -56,26 +58,35 @@ public final class ChunkDataTFC {
     private final DataLayer[] drainageLayer = new DataLayer[256]; // To be removed / replaced?
     private final DataLayer[] stabilityLayer = new DataLayer[256]; // To be removed / replaced?
     private final int[] seaLevelOffset = new int[256];
+    @Getter
     private boolean initialized = false;
+    @Getter
     private int fishPopulation = FISH_POP_MAX; // todo: Set this based on biome? temp? rng?
+    @Getter
     private float rainfall;
+    @Getter
     private float regionalTemp;
-    private float avgTemp;
+    private float averagTemp;
+    @Getter
     private float floraDensity;
+    @Getter
     private float floraDiversity;
     private Set<Vein> generatedVeins = new HashSet<>();
     private int chunkWorkage;
     private long protectedTicks; // Used for hostile spawn protection. Starts negative, increases by players in the area
-    private long lastUpdateTick, lastUpdateYear; // The last time this chunk was updated by world regen
+    @Getter
+    private long lastUpdateTick; // The last time this chunk was updated by world regen
+    @Getter
+    private long lastUpdateYear;
 
     @NotNull
-    public static ChunkDataTFC get(World world, BlockPos pos) {
+    public static ChunkData get(World world, BlockPos pos) {
         return get(world.getChunk(pos));
     }
 
     @NotNull
-    public static ChunkDataTFC get(Chunk chunk) {
-        ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+    public static ChunkData get(Chunk chunk) {
+        ChunkData data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
         return data == null ? EMPTY : data;
     }
 
@@ -138,7 +149,7 @@ public final class ChunkDataTFC {
 
         this.rainfall = rainfall;
         this.regionalTemp = regionalTemp;
-        this.avgTemp = avgTemp;
+        this.averagTemp = avgTemp;
         this.floraDensity = floraDensity;
         this.floraDiversity = floraDiversity;
 
@@ -178,10 +189,6 @@ public final class ChunkDataTFC {
 
     public void setWork(int amount) {
         chunkWorkage = amount;
-    }
-
-    public boolean isInitialized() {
-        return initialized;
     }
 
     public Rock getRock1(BlockPos pos) {
@@ -232,28 +239,8 @@ public final class ChunkDataTFC {
         return seaLevelOffset[z << 4 | x];
     }
 
-    public int getFishPopulation() {
-        return fishPopulation;
-    }
-
-    public float getRainfall() {
-        return rainfall;
-    }
-
-    public float getRegionalTemp() {
-        return regionalTemp;
-    }
-
     public float getAverageTemp() {
-        return avgTemp;
-    }
-
-    public float getFloraDensity() {
-        return floraDensity;
-    }
-
-    public float getFloraDiversity() {
-        return floraDiversity;
+        return averagTemp;
     }
 
     public void addSpawnProtection(int multiplier) {
@@ -271,16 +258,8 @@ public final class ChunkDataTFC {
         return getSpawnProtection() > 0L;
     }
 
-    public long getLastUpdateTick() {
-        return lastUpdateTick;
-    }
-
     public void resetLastUpdateTick() {
         this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
-    }
-
-    public long getLastUpdateYear() {
-        return lastUpdateYear;
     }
 
     public void resetLastUpdateYear() {
@@ -289,7 +268,7 @@ public final class ChunkDataTFC {
 
     public List<Tree> getValidTrees() {
         return TFCRegistries.TREES.getValuesCollection().stream()
-                .filter(t -> t.isValidLocation(avgTemp, rainfall, floraDensity))
+                .filter(t -> t.isValidLocation(averagTemp, rainfall, floraDensity))
                 .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
                 .collect(Collectors.toList());
     }
@@ -297,7 +276,7 @@ public final class ChunkDataTFC {
     @Nullable
     public Tree getSparseGenTree() {
         return TFCRegistries.TREES.getValuesCollection().stream()
-                .filter(t -> t.isValidLocation(0.5f * avgTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
+                .filter(t -> t.isValidLocation(0.5f * averagTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
                 .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
                 .orElse(null);
     }
@@ -330,7 +309,7 @@ public final class ChunkDataTFC {
         return getRockLayer1(x, z);
     }
 
-    public static final class ChunkDataStorage implements Capability.IStorage<ChunkDataTFC> {
+    public static final class ChunkDataStorage implements Capability.IStorage<ChunkData> {
 
         public static NBTTagByteArray write(DataLayer[] layers) {
             return new NBTTagByteArray(Arrays.stream(layers).map(x -> (byte) x.layerID).collect(Collectors.toList()));
@@ -344,7 +323,7 @@ public final class ChunkDataTFC {
 
         @Nullable
         @Override
-        public NBTBase writeNBT(Capability<ChunkDataTFC> capability, ChunkDataTFC instance, EnumFacing side) {
+        public NBTBase writeNBT(Capability<ChunkData> capability, ChunkData instance, EnumFacing side) {
             if (instance == null || !instance.isInitialized()) {
                 return new NBTBuilder().setBoolean("valid", false).build();
             }
@@ -363,7 +342,7 @@ public final class ChunkDataTFC {
 
             root.setFloat("rainfall", instance.rainfall);
             root.setFloat("regionalTemp", instance.regionalTemp);
-            root.setFloat("avgTemp", instance.avgTemp);
+            root.setFloat("avgTemp", instance.averagTemp);
             root.setFloat("floraDensity", instance.floraDensity);
             root.setFloat("floraDiversity", instance.floraDiversity);
 
@@ -382,7 +361,7 @@ public final class ChunkDataTFC {
         }
 
         @Override
-        public void readNBT(Capability<ChunkDataTFC> capability, ChunkDataTFC instance, EnumFacing side, NBTBase nbt) {
+        public void readNBT(Capability<ChunkData> capability, ChunkData instance, EnumFacing side, NBTBase nbt) {
             NBTTagCompound root = (NBTTagCompound) nbt;
             if (nbt != null && root.getBoolean("valid")) {
                 System.arraycopy(root.getIntArray("rockLayer1"), 0, instance.rockLayer1, 0, 256);
@@ -397,7 +376,7 @@ public final class ChunkDataTFC {
 
                 instance.rainfall = root.getFloat("rainfall");
                 instance.regionalTemp = root.getFloat("regionalTemp");
-                instance.avgTemp = root.getFloat("avgTemp");
+                instance.averagTemp = root.getFloat("avgTemp");
                 instance.floraDensity = root.getFloat("floraDensity");
                 instance.floraDiversity = root.getFloat("floraDiversity");
 

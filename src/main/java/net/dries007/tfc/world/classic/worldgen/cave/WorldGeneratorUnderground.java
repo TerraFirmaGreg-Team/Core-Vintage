@@ -8,14 +8,14 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.types.PlantsTFCF;
 
@@ -51,10 +51,10 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
         int y = rng.nextInt(WorldTypeTFC.SEALEVEL);
         BlockPos chunkPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
 
-        ChunkDataTFC data = ChunkDataTFC.get(world, chunkPos);
+        ChunkData data = ChunkData.get(world, chunkPos);
         Biome b = world.getBiome(chunkPos);
-        final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
-        final float rainfall = ChunkDataTFC.getRainfall(world, chunkPos);
+        final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
+        final float rainfall = ChunkData.getRainfall(world, chunkPos);
         final float floraDensity = data.getFloraDensity();
         final float floraDiversity = data.getFloraDiversity();
 

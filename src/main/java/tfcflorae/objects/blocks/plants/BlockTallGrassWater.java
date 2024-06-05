@@ -22,13 +22,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -82,7 +82,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
                     ((material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == plant.getWaterType()) ||
                             material == Material.ICE ||
                             (material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC)))) &&
-                    plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+                    plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkData.getRainfall(worldIn, pos));
         } else {
             return this.canSustainBush(soil);
         }
@@ -224,7 +224,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-        if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) &&
+        if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) &&
                 plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
             int j = state.getValue(AGE);
 
@@ -238,7 +238,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
                 }
                 net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
             }
-        } else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) ||
+        } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) ||
                 !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
             int j = state.getValue(AGE);
 

@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
@@ -22,8 +23,7 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -57,7 +57,7 @@ public class FruitTreeProvider implements IWailaBlock {
                     .isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
                 if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
                     TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-                    addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
+                    addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
                 }
             } else {
                 currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
@@ -69,7 +69,7 @@ public class FruitTreeProvider implements IWailaBlock {
             }
         } else if (state.getBlock() instanceof BlockFruitTreeSapling block) {
             TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
+            addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
         } else if (state.getBlock() instanceof BlockFruitTreeTrunk) {
             // Gets the top most trunk, since that one is the responsible for growth
             IBlockState topMost = state;
@@ -83,7 +83,7 @@ public class FruitTreeProvider implements IWailaBlock {
             }
             BlockFruitTreeTrunk block = (BlockFruitTreeTrunk) topMost.getBlock();
             TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
-            addInfo(block.getTree(), te, ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
+            addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);
         }
         return currentTooltip;
     }

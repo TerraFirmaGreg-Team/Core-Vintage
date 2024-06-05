@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -33,7 +33,7 @@ public class WorldGenSurfacePinecone implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
+        final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
 
         if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
 
@@ -52,7 +52,7 @@ public class WorldGenSurfacePinecone implements IWorldGenerator {
     }
 
     private void generateRock(World world, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float diversity = chunkData.getFloraDiversity();

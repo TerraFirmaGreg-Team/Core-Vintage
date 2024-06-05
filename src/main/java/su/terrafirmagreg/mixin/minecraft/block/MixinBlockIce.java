@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.Fluid;
 
 
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
 
@@ -100,7 +100,7 @@ public class MixinBlockIce extends BlockBreakable implements ITemperatureBlock {
     public void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state) {
         // Either block light (i.e. from torches) or high enough temperature
         if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - getLightOpacity(state, world, pos) ||
-                ClimateTFC.getActualTemp(world, pos) > meltThreshold) {
+                Climate.getActualTemp(world, pos) > meltThreshold) {
             turnIntoWater(world, pos);
         }
     }

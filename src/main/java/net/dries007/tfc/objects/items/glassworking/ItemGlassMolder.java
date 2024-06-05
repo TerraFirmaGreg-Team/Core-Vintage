@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.items.glassworking;
 
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.data.Constants;
@@ -24,13 +25,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
-
-
-import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
-
-
+import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfc.objects.items.ItemMisc;
 
 import org.jetbrains.annotations.NotNull;

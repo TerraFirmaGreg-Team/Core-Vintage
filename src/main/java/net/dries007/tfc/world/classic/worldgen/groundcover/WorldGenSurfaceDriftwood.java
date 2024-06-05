@@ -13,7 +13,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -40,7 +40,7 @@ public class WorldGenSurfaceDriftwood implements IWorldGenerator {
             int zoff = chunkZ * 16 + 8;
 
             final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-            final ChunkDataTFC baseChunkData = ChunkDataTFC.get(world, chunkBlockPos);
+            final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
 
             for (int i = 0; i < ConfigTFCF.General.WORLD.groundcoverDriftwoodFrequency * factor; i++) {
                 BlockPos pos = new BlockPos(

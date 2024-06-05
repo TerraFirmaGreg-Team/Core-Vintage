@@ -2,10 +2,10 @@ package su.terrafirmagreg.modules.core.event;
 
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
-import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
-import su.terrafirmagreg.api.capabilities.pull.ProviderPull;
 import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.capabilities.player.ProviderPlayer;
+import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
+import su.terrafirmagreg.api.capabilities.pull.ProviderPull;
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
 
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-public class CapabilitiesEntityHandler {
+public class CapabilitiesEntityEventHandler {
 
     @SubscribeEvent
     public void attachItemCapabilities(AttachCapabilitiesEvent<Entity> event) {

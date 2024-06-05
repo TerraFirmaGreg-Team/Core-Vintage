@@ -21,13 +21,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -68,8 +68,8 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
         if (!world.isRemote) {
             TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
             if (te != null) {
-                float temp = ClimateTFC.getActualTemp(world, pos);
-                float rainfall = ChunkDataTFC.getRainfall(world, pos);
+                float temp = Climate.getActualTemp(world, pos);
+                float rainfall = ChunkData.getRainfall(world, pos);
                 long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier) && tree.isValidForGrowth(temp, rainfall)) {
                     te.resetCounter();
@@ -147,8 +147,8 @@ public class BlockFruitTreeSapling extends BlockBush implements IGrowable, IGrow
 
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-        float temp = ClimateTFC.getActualTemp(world, pos);
-        float rainfall = ChunkDataTFC.getRainfall(world, pos);
+        float temp = Climate.getActualTemp(world, pos);
+        float rainfall = ChunkData.getRainfall(world, pos);
         boolean canGrow = tree.isValidForGrowth(temp, rainfall);
         return canGrow ? GrowthStatus.GROWING : GrowthStatus.NOT_GROWING;
     }

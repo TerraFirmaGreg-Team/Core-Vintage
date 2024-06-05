@@ -39,6 +39,7 @@ public class ProviderPull implements ICapabilityPull, ICapabilityProvider {
 
     @Nullable
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         return hasCapability(capability, facing) ? (T) this : null;
     }

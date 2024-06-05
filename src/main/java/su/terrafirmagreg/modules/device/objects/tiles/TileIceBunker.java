@@ -45,7 +45,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
@@ -136,9 +136,9 @@ public class TileIceBunker extends TileEntityLockableLoot
 
     private void updateCellar(boolean checkCompliance) {
         if (ModConfig.tempMonthAvg) {
-            temperature = ClimateTFC.getMonthlyTemp(this.getPos());
+            temperature = Climate.getMonthlyTemp(this.getPos());
         } else {
-            temperature = ClimateTFC.getActualTemp(this.getPos());
+            temperature = Climate.getActualTemp(this.getPos());
         }
 
         if (checkCompliance) {
@@ -146,7 +146,7 @@ public class TileIceBunker extends TileEntityLockableLoot
         }
 
         if (isComplete) {
-            float outsideTemp = ClimateTFC.getActualTemp(this.getPos());
+            float outsideTemp = Climate.getActualTemp(this.getPos());
 
             if (coolantAmount <= 0) {
                 for (int slot = 3; slot >= 0; slot--) {

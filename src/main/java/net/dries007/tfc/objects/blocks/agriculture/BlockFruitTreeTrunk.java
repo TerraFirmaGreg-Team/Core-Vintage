@@ -23,13 +23,13 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -153,8 +153,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
         super.updateTick(worldIn, pos, state, random);
         if (!worldIn.isRemote) {
             // Attempt to grow
-            float temp = ClimateTFC.getActualTemp(worldIn, pos);
-            float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
+            float temp = Climate.getActualTemp(worldIn, pos);
+            float rainfall = ChunkData.getRainfall(worldIn, pos);
             TETickCounter te = TileUtils.getTile(worldIn, pos, TETickCounter.class);
             if (te != null) {
                 long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
@@ -400,8 +400,8 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
     @Override
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-        float temp = ClimateTFC.getActualTemp(world, pos);
-        float rainfall = ChunkDataTFC.getRainfall(world, pos);
+        float temp = Climate.getActualTemp(world, pos);
+        float rainfall = ChunkData.getRainfall(world, pos);
         boolean canGrow = tree.isValidForGrowth(temp, rainfall);
         if (canGrow) {
             return GrowthStatus.GROWING;

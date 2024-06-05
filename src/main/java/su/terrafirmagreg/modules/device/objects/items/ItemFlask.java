@@ -36,8 +36,8 @@ import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
+import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.util.FluidTransferHelper;
@@ -48,8 +48,8 @@ import lombok.Getter;
 
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
+import static su.terrafirmagreg.modules.food.api.IFoodStatsTFC.MAX_PLAYER_THIRST;
 
 @Getter
 public abstract class ItemFlask extends ItemFluidContainer implements IItemSettings, IItemMeshProvider {

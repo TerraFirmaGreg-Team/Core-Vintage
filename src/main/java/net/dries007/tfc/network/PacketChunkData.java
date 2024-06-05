@@ -12,9 +12,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.util.climate.Climate;
 
 public class PacketChunkData implements IMessage {
 
@@ -61,13 +61,13 @@ public class PacketChunkData implements IMessage {
                 TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                     // Update client-side chunk data capability
                     Chunk chunk = world.getChunk(message.x, message.z);
-                    ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+                    ChunkData data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
                     if (data != null) {
                         ChunkDataProvider.CHUNK_DATA_CAPABILITY.readNBT(data, null, message.nbt);
                     }
 
                     // Update climate cache
-                    ClimateTFC.update(chunk.getPos(), message.regionalTemp, message.rainfall);
+                    Climate.update(chunk.getPos(), message.regionalTemp, message.rainfall);
                 });
             }
             return null;

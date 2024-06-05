@@ -12,7 +12,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -22,7 +22,7 @@ public class WorldGenBamboo extends WorldGenerator {
 
     @Override
     public boolean generate(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return false;
 
         final Biome b = world.getBiome(pos);
@@ -138,7 +138,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateArrowBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -182,7 +182,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateBlackBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -212,7 +212,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateBlueBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -243,7 +243,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateDragonBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -273,7 +273,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateGoldenBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -303,7 +303,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateNarrowLeafBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -333,7 +333,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateRedBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -363,7 +363,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateTempleBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -393,7 +393,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateThornyBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -423,7 +423,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateTimberBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -453,7 +453,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateTinwaBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();
@@ -483,7 +483,7 @@ public class WorldGenBamboo extends WorldGenerator {
     }
 
     private void generateWeaversBamboo(World world, Random rand, BlockPos pos) {
-        ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
+        ChunkData chunkData = ChunkData.get(world, pos);
         if (!chunkData.isInitialized()) return;
 
         final float density = chunkData.getFloraDensity();

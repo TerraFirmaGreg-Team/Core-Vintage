@@ -26,6 +26,7 @@ import net.minecraftforge.common.EnumPlantType;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
@@ -34,11 +35,10 @@ import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import org.jetbrains.annotations.NotNull;
@@ -224,8 +224,8 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
                     te.reduceCounter(growthTicks);
 
                     // find stats for the time in which the crop would have grown
-                    float temp = ClimateTFC.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
-                    float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
+                    float temp = Climate.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
+                    float rainfall = ChunkData.getRainfall(worldIn, pos);
 
                     // check if the crop could grow, if so, grow
                     if (crop.isValidForGrowth(temp, rainfall)) {

@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.BlockDispenser;
@@ -37,14 +39,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 import mcp.MethodsReturnNonnullByDefault;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
+import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
 
 import org.jetbrains.annotations.NotNull;

@@ -1,10 +1,10 @@
-package net.dries007.tfc.objects.fluids.capability;
+package net.dries007.tfc.api.capability.fluid;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStackSimple;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -14,19 +14,18 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//This extends from the non-simple fluid handler, and FluidWhitelistHandler isn't labeled simple, so added -Complex here
-public class FluidWhitelistHandlerComplex extends FluidHandlerItemStack {
+public class FluidWhitelistHandler extends FluidHandlerItemStackSimple {
 
     private final Set<Fluid> whitelist;
 
-    public FluidWhitelistHandlerComplex(@NotNull ItemStack container, int capacity, String[] fluidNames) {
+    public FluidWhitelistHandler(@NotNull ItemStack container, int capacity, String[] fluidNames) {
         this(container, capacity, Arrays.stream(fluidNames)
                 .map(FluidRegistry::getFluid)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet()));
     }
 
-    public FluidWhitelistHandlerComplex(@NotNull ItemStack container, int capacity, Set<Fluid> whitelist) {
+    public FluidWhitelistHandler(@NotNull ItemStack container, int capacity, Set<Fluid> whitelist) {
         super(container, capacity);
         this.whitelist = whitelist;
     }
@@ -34,5 +33,13 @@ public class FluidWhitelistHandlerComplex extends FluidHandlerItemStack {
     @Override
     public boolean canFillFluidType(FluidStack fluid) {
         return whitelist.contains(fluid.getFluid());
+    }
+
+    @Override
+    protected void setContainerToEmpty() {
+        super.setContainerToEmpty();
+        if (container.getTagCompound() != null && container.getTagCompound().isEmpty()) {
+            container.setTagCompound(null);
+        }
     }
 }

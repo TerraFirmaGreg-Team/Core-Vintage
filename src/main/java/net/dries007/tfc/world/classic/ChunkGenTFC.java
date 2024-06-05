@@ -35,7 +35,7 @@ import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.world.classic.genlayers.GenLayerTFC;
 import net.dries007.tfc.world.classic.genlayers.datalayers.drainage.GenDrainageLayer;
 import net.dries007.tfc.world.classic.genlayers.datalayers.ph.GenPHLayer;
@@ -262,7 +262,7 @@ public class ChunkGenTFC implements IChunkGenerator {
 
         Chunk chunk = new Chunk(world, chunkPrimerOut, chunkX, chunkZ);
 
-        ChunkDataTFC chunkData = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
+        ChunkData chunkData = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
         if (chunkData == null) throw new IllegalStateException("ChunkData capability is missing.");
         chunkData.setGenerationData(rockLayer1, rockLayer2, rockLayer3, stabilityLayer, drainageLayer, seaLevelOffsetMap, rainfall, regionalFactor,
                 averageTemp, floraDensity, floraDiversity);

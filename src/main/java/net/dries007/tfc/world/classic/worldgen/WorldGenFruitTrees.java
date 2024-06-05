@@ -10,10 +10,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,8 @@ public class WorldGenFruitTrees implements IWorldGenerator {
             if (random.nextInt(ConfigTFC.General.FOOD.fruitTreeRarity) == 0) {
                 BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-                float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
-                float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
+                float temperature = Climate.getAvgTemp(world, chunkBlockPos);
+                float rainfall = ChunkData.getRainfall(world, chunkBlockPos);
                 List<IFruitTree> trees = TREES.stream()
                         .filter(x -> x.isValidConditions(temperature, rainfall))
                         .collect(Collectors.toList());

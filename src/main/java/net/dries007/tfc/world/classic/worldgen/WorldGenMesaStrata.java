@@ -12,12 +12,12 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkDataTFC;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -33,7 +33,7 @@ public class WorldGenMesaStrata implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
-        ChunkDataTFC data = ChunkDataTFC.get(world, chunkBlockPos);
+        ChunkData data = ChunkData.get(world, chunkBlockPos);
         if (!data.isInitialized() && !ConfigTFCF.General.WORLD.enableMesaStrata) return;
 
         for (int x = 0; x < 16; ++x) {
@@ -41,8 +41,8 @@ public class WorldGenMesaStrata implements IWorldGenerator {
                 BlockPos strataLayer = chunkBlockPos.add(x, WorldTypeTFC.SEALEVEL, z);
                 //TFCFlorae.getLog().warn("TFCFlorae: Current 'strataLayer' is " + "X: " + strataLayer.getX() + ", Y: " + strataLayer.getY() + ", Z: " + strataLayer.getZ());
                 final Biome b = world.getBiome(strataLayer);
-                final float avgTemperature = ClimateTFC.getAvgTemp(world, strataLayer);
-                final float rainfall = ChunkDataTFC.getRainfall(world, strataLayer);
+                final float avgTemperature = Climate.getAvgTemp(world, strataLayer);
+                final float rainfall = ChunkData.getRainfall(world, strataLayer);
 
                 if (rainfall < +1.3 * random.nextGaussian() + RAINFALL_DRY_GRASS && avgTemperature >= 15f) {
                     //TFCFlorae.getLog().warn("Biome at X: " + strataLayer.getX() + " Z: " + strataLayer.getZ() + " is " + b);

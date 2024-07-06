@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.metal.client.gui;
 
 import su.terrafirmagreg.api.spi.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
+import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
@@ -129,7 +129,7 @@ public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        ModuleMetal.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id));
+        ModuleMetal.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id));
         super.actionPerformed(button);
     }
 }

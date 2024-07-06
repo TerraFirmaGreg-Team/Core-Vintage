@@ -1,7 +1,7 @@
-package su.terrafirmagreg.modules.worldgen.debugworld;
+package su.terrafirmagreg.modules.world.debug;
 
 import su.terrafirmagreg.api.util.WorldUtils;
-import su.terrafirmagreg.modules.worldgen.ModuleWorldGen;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -50,7 +50,7 @@ public class WorldTypeDebugMod extends WorldType {
         if (Loader.isModLoaded(modid)) {
             return new ChunkGeneratorDebugMod(world, modid);
         } else {
-            ModuleWorldGen.LOGGER.error("No mod found for ID {}, falling back to default worldgen.", modid);
+            ModuleWorld.LOGGER.error("No mod found for ID {}, falling back to default worldgen.", modid);
         }
 
         // Use the fallback generator.

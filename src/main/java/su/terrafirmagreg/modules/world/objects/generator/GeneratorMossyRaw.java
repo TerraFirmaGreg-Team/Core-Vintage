@@ -1,4 +1,10 @@
-package net.dries007.tfc.world.classic.worldgen;
+package su.terrafirmagreg.modules.world.objects.generator;
+
+import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.api.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.world.classic.WorldTypeTFG;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -8,16 +14,11 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import java.util.Random;
 
-public class WorldGenMossyRaw implements IWorldGenerator {
+public class GeneratorMossyRaw implements IWorldGenerator {
 
     public static final float RAINFALL_SAND = 75;
     public static final float RAINFALL_SAND_SANDY_MIX = 125;
@@ -26,13 +27,13 @@ public class WorldGenMossyRaw implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (!(chunkGenerator instanceof ChunkGenTFC)) return;
 
-        int y = random.nextInt(200 - WorldTypeTFC.ROCKLAYER2) + WorldTypeTFC.ROCKLAYER2;
+        int y = random.nextInt(200 - WorldTypeTFG.ROCKLAYER2) + WorldTypeTFG.ROCKLAYER2;
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
 
-        int rarity = (random.nextInt(20) + 1);
+        int rarity = random.nextInt(20) + 1;
 
         for (float r = rarity; r < (5 + rarity); r++) {
-            ChunkData data = ChunkData.get(world, chunkBlockPos);
+            var data = CapabilityChunkData.get(world, chunkBlockPos);
             final float floraDensity = data.getFloraDensity();
             final float floraDiversity = data.getFloraDiversity();
 
@@ -40,12 +41,9 @@ public class WorldGenMossyRaw implements IWorldGenerator {
                 int mossyCount = (random.nextInt(20) + 1);
                 for (int i = random.nextInt(Math.round(1 + floraDiversity)); i < (mossyCount + floraDensity) * 10; i++) {
                     BlockPos blockPos = chunkBlockPos.add(random.nextInt(16) + 8, random.nextInt(16), random.nextInt(16) + 8);
-                    if (BlocksTFC.isRawStone(world.getBlockState(blockPos)) &&
-                            (world.isAirBlock(blockPos.up()) || world.isAirBlock(blockPos.down()) || world.isAirBlock(blockPos.north()) ||
-                                    world.isAirBlock(blockPos.south()) || world.isAirBlock(blockPos.east()) || world.isAirBlock(blockPos.west())) &&
+                    if (BlockUtils.isRawStone(world.getBlockState(blockPos)) && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
                             world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
-                        world.setBlockState(blockPos, BlockRockVariantTFCF.get(ChunkData.getRockHeight(world, blockPos), RockTFCF.MOSSY_RAW)
-                                .getDefaultState(), 2);
+                        world.setBlockState(blockPos, RockBlockVariants.MOSSY_RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState(), 2);
                     }
                 }
             }

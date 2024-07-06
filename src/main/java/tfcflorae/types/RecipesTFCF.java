@@ -1,6 +1,8 @@
 package tfcflorae.types;
 
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -44,7 +46,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -64,7 +65,6 @@ import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
 import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.objects.blocks.groundcover.BlockSurfaceRock;
 import tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
 import tfcflorae.objects.fluids.FluidsTFCF;
@@ -270,14 +270,12 @@ public final class RecipesTFCF {
             }
         }
 
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+        for (var rock : RockType.getTypes()) {
             event.getRegistry().registerAll(
-                    new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 200), IIngredient.of(BlockRockVariant.get(rock, Rock.Type.RAW)),
+                    new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 200), IIngredient.of(RockBlockVariants.RAW.get(rock)),
                             new FluidStack(FluidsTFC.FRESH_WATER.get(), 50),
-                            new ItemStack(BlockRockVariantTFCF.get(rock, BlockTypesTFCF.RockTFCF.MOSSY_RAW), 1),
-                            8 * ICalendar.TICKS_IN_HOUR).setRegistryName(MODID_TFCF, "mossy_raw_" + rock
-                            .getRegistryName()
-                            .getPath())
+                            new ItemStack(RockBlockVariants.MOSSY_RAW.get(rock), 1),
+                            8 * ICalendar.TICKS_IN_HOUR).setRegistryName(MODID_TFCF, "mossy_raw_" + rock.getName())
             );
         }
 

@@ -51,10 +51,12 @@ public final class FluidsTFC {
     private static final ResourceLocation LAVA_STILL = new ResourceLocation(MODID_TFC, "blocks/lava_still");
     private static final ResourceLocation LAVA_FLOW = new ResourceLocation(MODID_TFC, "blocks/lava_flow");
     private static final Map<EnumDyeColor, FluidWrapper> DYE_FLUIDS = new EnumMap<>(EnumDyeColor.class);
+
     // Water variants
     public static FluidWrapper HOT_WATER;
     public static FluidWrapper FRESH_WATER;
     public static FluidWrapper SALT_WATER;
+
     // Other fluids
     public static FluidWrapper LATEX;
     public static FluidWrapper GLASS;
@@ -80,6 +82,7 @@ public final class FluidsTFC {
     public static FluidWrapper SWEET_COFFEE;
     public static FluidWrapper TEA;
     public static FluidWrapper SWEET_TEA;
+
     // Alcohols
     public static FluidWrapper CIDER;
     public static FluidWrapper VODKA;
@@ -243,14 +246,14 @@ public final class FluidsTFC {
     public static void registerFluids() {
         FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD))
                 .with(DrinkableProperty.DRINKABLE, player -> {
-                    if (player.getFoodStats() instanceof FoodStatsTFC) {
-                        ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
+                    if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                        foodStats.addThirst(40);
                     }
                 });
         HOT_WATER = registerFluid(new Fluid("hot_water", STILL, FLOW, 0xFF345FDA).setTemperature(350));
         SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
-            if (player.getFoodStats() instanceof FoodStatsTFC) {
-                ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
+            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                foodStats.addThirst(-10);
                 if (MathConstants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
                     player.addPotionEffect(new PotionEffect(PotionsCore.THIRST, 600, 0));
                 }
@@ -259,8 +262,8 @@ public final class FluidsTFC {
 
         DrinkableProperty alcoholProperty = player -> {
             var cap = CapabilityPlayer.get(player);
-            if (player.getFoodStats() instanceof FoodStatsTFC && cap != null) {
-                ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
+            if (player.getFoodStats() instanceof FoodStatsTFC foodStats && cap != null) {
+                foodStats.addThirst(10);
                 cap.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);
                 if (cap.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && MathConstants.RNG.nextFloat() < 0.5f) {
                     player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1200, 1));
@@ -310,8 +313,7 @@ public final class FluidsTFC {
                         MILK_VINEGAR = registerFluid(new Fluid("milk_vinegar", STILL, FLOW, 0xFFFFFBE8)),
                         LYE = registerFluid(new Fluid("lye", STILL, FLOW, 0xFFfeffde)),
                         YEAST_STARTER = registerFluid(new Fluid("yeast_starter", STILL, FLOW, 0xFFa79464)),
-                        COCONUT_MILK = registerFluid(new Fluid("coconut_milk", STILL, FLOW, 0xFFfcfae2)).with(DrinkableProperty.DRINKABLE,
-                                milkProperty),
+                        COCONUT_MILK = registerFluid(new Fluid("coconut_milk", STILL, FLOW, 0xFFfcfae2)).with(DrinkableProperty.DRINKABLE, milkProperty),
                         YAK_MILK = registerFluid(new Fluid("yak_milk", STILL, FLOW, 0xFFfcfaec)).with(DrinkableProperty.DRINKABLE, milkProperty),
                         GOAT_MILK = registerFluid(new Fluid("goat_milk", STILL, FLOW, 0xFFf6f6eb)).with(DrinkableProperty.DRINKABLE, milkProperty),
                         ZEBU_MILK = registerFluid(new Fluid("zebu_milk", STILL, FLOW, 0xFFefede6)).with(DrinkableProperty.DRINKABLE, milkProperty),
@@ -330,26 +332,26 @@ public final class FluidsTFC {
                         GLASS = registerFluid(new Fluid("glass", STILL, FLOW, 0xFFED97B5).setTemperature(1073)),
 
                         TEA = registerFluid(new Fluid("tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
-                            if (player.getFoodStats() instanceof FoodStatsTFC) {
-                                ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
+                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                foodStats.addThirst(40);
                                 player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 0));
                             }
                         }),
                         SWEET_TEA = registerFluid(new Fluid("sweet_tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
-                            if (player.getFoodStats() instanceof FoodStatsTFC) {
-                                ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
+                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                foodStats.addThirst(40);
                                 player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 1));
                             }
                         }),
                         COFFEE = registerFluid(new Fluid("coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
-                            if (player.getFoodStats() instanceof FoodStatsTFC) {
-                                ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
+                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                foodStats.addThirst(40);
                                 player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 2));
                             }
                         }),
                         SWEET_COFFEE = registerFluid(new Fluid("sweet_coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
-                            if (player.getFoodStats() instanceof FoodStatsTFC) {
-                                ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
+                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
+                                foodStats.addThirst(40);
                                 player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 3));
                             }
                         })

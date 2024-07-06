@@ -15,6 +15,7 @@ import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -600,7 +601,7 @@ public final class CommonEventHandler {
     public static void onLivingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
         World world = event.getWorld();
         BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
-        if (world.getWorldType() == TerraFirmaCraft.getWorldType() && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
+        if (world.getWorldType() == TerraFirmaCraft.getWorldType() && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
             if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity()
                     .isCreatureType(EnumCreatureType.MONSTER, false)) {
                 // Prevent Mobs
@@ -668,11 +669,10 @@ public final class CommonEventHandler {
     @SubscribeEvent
     public static void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
-        if (event.getWorld()
-                .getWorldType() == TerraFirmaCraft.getWorldType() && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
+        var world = event.getWorld();
+        if (world.getWorldType() == TerraFirmaCraft.getWorldType() && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
             // Fix skeleton rider traps spawning during thunderstorms
-            if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface &&
-                    ((EntitySkeletonHorse) entity).isTrap()) {
+            if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface && ((EntitySkeletonHorse) entity).isTrap()) {
                 entity.setDropItemsWhenDead(false);
                 entity.setDead();
                 event.setCanceled(true);

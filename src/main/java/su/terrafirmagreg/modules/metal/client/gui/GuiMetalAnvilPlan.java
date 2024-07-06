@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.metal.client.gui;
 
 import su.terrafirmagreg.api.lib.NBTBuilder;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
+import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
@@ -77,7 +77,7 @@ public class GuiMetalAnvilPlan extends GuiContainerTE<TEMetalAnvil> {
         if (button instanceof GuiButtonAnvilPlanIcon) {
             // This fires when you select a plan in the Plan GUI
             ResourceLocation recipeName = ((GuiButtonAnvilPlanIcon) button).getRecipeName();
-            ModuleMetal.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString())
+            ModuleMetal.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id, new NBTBuilder().setString("recipe", recipeName.toString())
                     .build()));
         } else if (button == buttonLeft) {
             page--;

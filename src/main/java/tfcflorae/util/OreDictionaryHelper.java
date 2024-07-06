@@ -1,5 +1,7 @@
 package tfcflorae.util;
 
+import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,11 +12,6 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
-
-
-import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
-
-
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import org.jetbrains.annotations.NotNull;
@@ -83,12 +80,6 @@ public class OreDictionaryHelper {
 
     private static void registerRockType(Thing thing, RockTFCF rockTFCF, Object... prefixParts) {
         switch (rockTFCF) {
-            case MOSSY_RAW:
-                MAP.put(thing, toString(prefixParts, "stone"));
-                //MAP.put(thing, toString(prefixParts, "stone", rock));
-                MAP.put(thing, toString(prefixParts, "stone_mossy"));
-                //MAP.put(thing, toString(prefixParts, "stone_mossy", rock));
-                break;
             case MUD:
                 MAP.put(thing, toString(prefixParts, "block", rockTFCF));
                 //MAP.put(thing, toString(prefixParts, "block", rockTFCF, rock));

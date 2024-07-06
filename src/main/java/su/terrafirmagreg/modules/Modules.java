@@ -23,7 +23,7 @@ public enum Modules implements IStringSerializable, IModuleContainer {
     METAL(false),
     ANIMAL(true),
     DEVICE(true),
-    WORLD_GEN(true);
+    WORLD(true);
 
     // TODO переделать с enum на статические финальные поля
 

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.gui;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
+import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.client.button.GuiButtonBarrelSeal;
 import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodBarrel;
@@ -208,7 +208,7 @@ public class GuiWoodBarrel extends GuiContainerTE<TileWoodBarrel> {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        ModuleWood.PACKET_SERVICE.sendToServer(new SCPacketGuiButton(button.id));
+        ModuleWood.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id));
         super.actionPerformed(button);
     }
 }

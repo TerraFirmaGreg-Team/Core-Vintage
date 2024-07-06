@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.registry.provider.IOreDictProvider;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
 import su.terrafirmagreg.api.spi.item.IItemSettings;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.util.WorldUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.settings.KeyBinding;
@@ -31,6 +32,7 @@ import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 
@@ -276,11 +278,26 @@ public class RegistryManager {
 
     //endregion
 
+    //region ===== World Gen
+
+    public IWorldGenerator worldGenerator(IWorldGenerator generator) {
+
+        return worldGenerator(generator, 0);
+    }
+
+    public IWorldGenerator worldGenerator(IWorldGenerator generator, int modGenerationWeight) {
+        WorldUtils.registerWorldGenerator(generator, modGenerationWeight);
+
+        return generator;
+    }
+
+    //endregion
+
     //region ===== Biome
 
     public Biome biome(Biome biome, String name) {
 
-        return this.biome(biome, name, new BiomeDictionary.Type[0]);
+        return biome(biome, name, new BiomeDictionary.Type[0]);
     }
 
     public Biome biome(Biome biome, String name, BiomeDictionary.Type[] types) {

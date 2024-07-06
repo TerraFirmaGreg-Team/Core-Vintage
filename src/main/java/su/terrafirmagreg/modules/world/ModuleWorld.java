@@ -1,10 +1,11 @@
-package su.terrafirmagreg.modules.worldgen;
+package su.terrafirmagreg.modules.world;
 
 import su.terrafirmagreg.api.lib.Injector;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.modules.worldgen.debugworld.WorldTypeDebugMod;
+import su.terrafirmagreg.modules.world.debug.WorldTypeDebugMod;
+import su.terrafirmagreg.modules.world.init.GeneratorWorld;
 
 import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -12,16 +13,21 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.WORLD_GEN;
+import static su.terrafirmagreg.modules.Modules.WORLD;
 
-@Module(moduleID = WORLD_GEN)
-public final class ModuleWorldGen extends ModuleBase {
+@Module(moduleID = WORLD)
+public final class ModuleWorld extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleWorldGen.class.getSimpleName());
+    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleWorld.class.getSimpleName());
 
-    public ModuleWorldGen() {
+    public ModuleWorld() {
         this.enableAutoRegistry();
 
+    }
+
+    @Override
+    public void onRegister() {
+        GeneratorWorld.onRegister(registryManager);
     }
 
     @Override

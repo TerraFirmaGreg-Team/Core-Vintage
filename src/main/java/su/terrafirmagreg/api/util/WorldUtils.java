@@ -5,6 +5,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 import lombok.experimental.UtilityClass;
@@ -127,5 +129,9 @@ public final class WorldUtils {
         if (world == null || world.getMinecraftServer() == null) return -1D;
         double worldTickTime = meanOf(world.getMinecraftServer().worldTickTimes.get(dimId)) * 1.0E-6D;
         return Math.min(1000.0D / worldTickTime, 20.0D);
+    }
+
+    public static void registerWorldGenerator(IWorldGenerator generator, int modGenerationWeight) {
+        GameRegistry.registerWorldGenerator(generator, modGenerationWeight);
     }
 }

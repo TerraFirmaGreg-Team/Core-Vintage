@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.api.network.IPacketRegistry;
-import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
+import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
+import su.terrafirmagreg.modules.core.network.SCPacketChunkData;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 import su.terrafirmagreg.modules.core.network.SCPacketTemperature;
 
@@ -12,8 +13,8 @@ public final class PacketCore {
     public static void onRegister(IPacketRegistry registry) {
 
         registry.register(
-                SCPacketGuiButton.class,
-                SCPacketGuiButton.class,
+                CSPacketGuiButton.class,
+                CSPacketGuiButton.class,
                 Side.SERVER
         );
 
@@ -26,6 +27,12 @@ public final class PacketCore {
         registry.register(
                 SCPacketTemperature.class,
                 SCPacketTemperature.class,
+                Side.CLIENT
+        );
+
+        registry.register(
+                SCPacketChunkData.class,
+                SCPacketChunkData.class,
                 Side.CLIENT
         );
     }

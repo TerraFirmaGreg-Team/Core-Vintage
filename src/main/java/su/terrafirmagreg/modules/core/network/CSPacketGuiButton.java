@@ -23,20 +23,20 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author AlcatrazEscapee
  */
-public class SCPacketGuiButton implements IMessage, IMessageHandler<SCPacketGuiButton, IMessage> {
+public class CSPacketGuiButton implements IMessage, IMessageHandler<CSPacketGuiButton, IMessage> {
 
     private int buttonID;
     private NBTTagCompound extraNBT;
 
     @SuppressWarnings("unused")
-    public SCPacketGuiButton() {}
+    public CSPacketGuiButton() {}
 
-    public SCPacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
+    public CSPacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
         this.buttonID = buttonID;
         this.extraNBT = extraNBT;
     }
 
-    public SCPacketGuiButton(int buttonID) {
+    public CSPacketGuiButton(int buttonID) {
         this(buttonID, null);
     }
 
@@ -58,7 +58,7 @@ public class SCPacketGuiButton implements IMessage, IMessageHandler<SCPacketGuiB
     }
 
     @Override
-    public IMessage onMessage(SCPacketGuiButton message, MessageContext ctx) {
+    public IMessage onMessage(CSPacketGuiButton message, MessageContext ctx) {
         EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
         if (player != null) {
             TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {

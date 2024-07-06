@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
@@ -20,12 +21,12 @@ import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayPlayerData;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayTemperature;
 import su.terrafirmagreg.modules.core.event.AmbientalEventHandler;
+import su.terrafirmagreg.modules.core.event.CapabilitiesChunkEventHandler;
 import su.terrafirmagreg.modules.core.event.CapabilitiesEntityEventHandler;
 import su.terrafirmagreg.modules.core.event.CapabilitiesItemEventHandler;
 import su.terrafirmagreg.modules.core.event.DebugInfoEventHandler;
@@ -59,12 +60,9 @@ public final class ModuleCore extends ModuleBase {
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleCore.class.getSimpleName());
     public static final CreativeTabs CORE_TAB = new BaseCreativeTab("misc", "core/wand");
 
-    public static IPacketService PACKET_SERVICE;
-
     public ModuleCore() {
         this.enableAutoRegistry(CORE_TAB);
-
-        PACKET_SERVICE = this.enableNetwork();
+        this.enableNetwork();
     }
 
     @Override
@@ -88,6 +86,7 @@ public final class ModuleCore extends ModuleBase {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaGreg.getInstance(), new GuiHandler());
 
+        CapabilityChunkData.register();
         CapabilityEgg.register();
         CapabilityHeat.register();
         CapabilityFood.register();
@@ -100,6 +99,7 @@ public final class ModuleCore extends ModuleBase {
         CapabilityDamageResistance.register();
 
         MinecraftForge.EVENT_BUS.register(new AmbientalEventHandler());
+        MinecraftForge.EVENT_BUS.register(new CapabilitiesChunkEventHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilitiesItemEventHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilitiesEntityEventHandler());
         MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());

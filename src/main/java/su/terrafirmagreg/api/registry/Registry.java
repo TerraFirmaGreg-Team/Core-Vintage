@@ -79,8 +79,8 @@ public record Registry(RegistryManager registryManager) {
     }
 
     public void onRegisterEntity(RegistryEvent.Register<EntityEntry> event) {
-        for (var entry : this.registryManager.getEntities()) {
-            event.getRegistry().register(entry);
+        for (var entity : this.registryManager.getEntities()) {
+            event.getRegistry().register(entity);
         }
     }
 

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.worldgen.debugworld;
+package su.terrafirmagreg.modules.world.debug;
 
 import su.terrafirmagreg.api.lib.Injector;
 import su.terrafirmagreg.api.util.ModUtils;

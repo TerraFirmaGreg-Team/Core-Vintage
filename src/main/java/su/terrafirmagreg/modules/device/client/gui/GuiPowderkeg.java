@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.spi.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.network.SCPacketGuiButton;
+import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
 import su.terrafirmagreg.modules.device.objects.tiles.TilePowderKeg;
@@ -81,7 +81,7 @@ public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
     @Override
     protected void actionPerformed(@NotNull GuiButton button) throws IOException {
         if (button instanceof GuiButtonPowderkegSeal) {
-            ModuleDevice.getPacketService().sendToServer(new SCPacketGuiButton(button.id));
+            ModuleDevice.getPacketService().sendToServer(new CSPacketGuiButton(button.id));
         }
         super.actionPerformed(button);
     }

@@ -141,9 +141,9 @@ public class ProviderTemperature implements ICapabilityTemperature {
                         Body: %.1f ( %.4f )
                         Target: %.1f
                         Potency: %.4f""",
-                temperature,
-                this.getTemperatureChange(),
-                this.getTarget(),
+                getTemperature(),
+                getTemperatureChange(),
+                getTarget(),
                 modifiers.getTotalPotency()
         ) + "\n" + str;
     }
@@ -176,8 +176,8 @@ public class ProviderTemperature implements ICapabilityTemperature {
     public void deserializeNBT(NBTTagCompound tag) {
         if (tag.hasKey("temperature")) {
             this.setTemperature(tag.getFloat("temperature"));
-            this.target = (tag.getFloat("target"));
-            this.potency = (tag.getFloat("potency"));
+            this.target = tag.getFloat("target");
+            this.potency = tag.getFloat("potency");
 
         } else {
             this.setTemperature(23.4f);
@@ -187,7 +187,7 @@ public class ProviderTemperature implements ICapabilityTemperature {
     public void updateAndSync() {
         EntityPlayer player = getPlayer();
         if (player instanceof EntityPlayerMP entityPlayerMP) {
-            ModuleCore.PACKET_SERVICE.sendTo(new SCPacketTemperature(serializeNBT()), entityPlayerMP);
+            ModuleCore.getPacketService().sendTo(new SCPacketTemperature(serializeNBT()), entityPlayerMP);
         }
     }
 

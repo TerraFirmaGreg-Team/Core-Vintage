@@ -14,7 +14,6 @@ import net.dries007.tfc.world.classic.worldgen.WorldGenCorals;
 import net.dries007.tfc.world.classic.worldgen.WorldGenGlowPlant;
 import net.dries007.tfc.world.classic.worldgen.WorldGenGourds;
 import net.dries007.tfc.world.classic.worldgen.WorldGenMesaStrata;
-import net.dries007.tfc.world.classic.worldgen.WorldGenMossyRaw;
 import net.dries007.tfc.world.classic.worldgen.WorldGeneratorPlants;
 import net.dries007.tfc.world.classic.worldgen.WorldGeneratorTrees;
 import net.dries007.tfc.world.classic.worldgen.cave.WorldGenLightstones;
@@ -59,9 +58,6 @@ public class CommonProxy {
             //GameRegistry.registerWorldGenerator(new WorldGenWildCropsTFCF(), 0);
             if (ConfigTFCF.General.WORLD.enableCoralWorldGen) {
                 GameRegistry.registerWorldGenerator(new WorldGenCorals(), 0);
-            }
-            if (ConfigTFCF.General.WORLD.enableMossyRawWorldGen) {
-                GameRegistry.registerWorldGenerator(new WorldGenMossyRaw(), 0);
             }
             if (ConfigTFCF.General.WORLD.enablePlantWorldGen) {
                 GameRegistry.registerWorldGenerator(new WorldGeneratorPlants(), 0);

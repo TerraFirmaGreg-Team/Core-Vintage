@@ -75,6 +75,15 @@ public final class BlockUtils {
                 && world.isAirBlock(pos.offset(EnumFacing.WEST));
     }
 
+    public static boolean isBlockSurroundedByAir(World world, BlockPos blockPos) {
+        return (world.isAirBlock(blockPos.up()) ||
+                world.isAirBlock(blockPos.down()) ||
+                world.isAirBlock(blockPos.north()) ||
+                world.isAirBlock(blockPos.south()) ||
+                world.isAirBlock(blockPos.east()) ||
+                world.isAirBlock(blockPos.west()));
+    }
+
     /**
      * Выполняет действие для каждого блока в заданном радиусе вокруг заданной позиции.
      *

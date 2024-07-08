@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.world;
 
+import su.terrafirmagreg.api.spi.biome.BaseBiome;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -11,10 +14,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.world.classic.biomes.BiomeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import java.util.Random;
 
@@ -63,7 +64,7 @@ public class WorldgenCinnamon extends WorldGenerator {
         if (!chunkData.isInitialized()) return false;
 
         final Biome b = world.getBiome(pos);
-        if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN)
+        if (!(b instanceof BaseBiome) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN)
             return false;
 
         final float temp = chunkData.getAverageTemp();

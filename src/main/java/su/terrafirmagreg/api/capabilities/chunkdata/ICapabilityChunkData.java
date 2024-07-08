@@ -2,14 +2,13 @@ package su.terrafirmagreg.api.capabilities.chunkdata;
 
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
+import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
-import net.dries007.tfc.world.classic.DataLayer;
-import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 import java.util.Set;
 
@@ -23,9 +22,9 @@ public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagComp
 
     int[] getSeaLevelOffset();
 
-    DataLayer[] getDrainageLayer(); // To be removed / replaced?
+    DataLayerClassic[] getDrainageLayer(); // To be removed / replaced?
 
-    DataLayer[] getStabilityLayer(); // To be removed / replaced?
+    DataLayerClassic[] getStabilityLayer(); // To be removed / replaced?
 
     boolean isInitialized();
 
@@ -73,9 +72,9 @@ public interface ICapabilityChunkData extends ICapabilitySerializable<NBTTagComp
 
     Set<Vein> getGeneratedVeins();
 
-    DataLayer getStabilityLayer(int x, int z);
+    DataLayerClassic getStabilityLayer(int x, int z);
 
-    DataLayer getDrainageLayer(int x, int z);
+    DataLayerClassic getDrainageLayer(int x, int z);
 
     int getSeaLevelOffset(BlockPos pos);
 

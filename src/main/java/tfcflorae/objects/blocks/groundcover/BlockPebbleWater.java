@@ -48,8 +48,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
-import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.FRESH_WATER;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
 public class BlockPebbleWater extends BlockFluidTFC implements ICapabilitySize {
 

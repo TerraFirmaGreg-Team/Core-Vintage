@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -38,7 +39,6 @@ import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
 import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import org.jetbrains.annotations.NotNull;
@@ -283,7 +283,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
         if (this.crop != Crop.RICE) {
             return super.canSustainBush(state);
         } else {
-            return BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenTFC.FRESH_WATER ||
+            return BlocksTFC.isWater(state) || state.getMaterial() == Material.ICE && state == ChunkGenClassic.FRESH_WATER ||
                     state.getMaterial() == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
         }
     }
@@ -302,7 +302,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
                     return soil.getBlock()
                             .canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) ||
                             material == Material.WATER && (Integer) stateDown.getValue(BlockLiquid.LEVEL) == 0 &&
-                                    stateDown == ChunkGenTFC.FRESH_WATER || material == Material.ICE ||
+                                    stateDown == ChunkGenClassic.FRESH_WATER || material == Material.ICE ||
                             material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
                 }
             } else {

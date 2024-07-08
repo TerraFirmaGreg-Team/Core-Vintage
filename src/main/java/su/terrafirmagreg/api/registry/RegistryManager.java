@@ -3,6 +3,7 @@ package su.terrafirmagreg.api.registry;
 import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.registry.provider.IOreDictProvider;
+import su.terrafirmagreg.api.spi.biome.BaseBiome;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
 import su.terrafirmagreg.api.spi.item.IItemSettings;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
@@ -29,7 +30,7 @@ import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
-import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.IWorldGenerator;
@@ -83,7 +84,7 @@ public class RegistryManager {
     /**
      * A list of all biomes registered by the helper.
      */
-    private final NonNullList<Biome> biomes = NonNullList.create();
+    private final NonNullList<BaseBiome> biomes = NonNullList.create();
 
     /**
      * A list of all the sounds registered by the helper.
@@ -295,19 +296,25 @@ public class RegistryManager {
 
     //region ===== Biome
 
-    public Biome biome(Biome biome, String name) {
+    public Biome biome(BaseBiome biome) {
 
-        return biome(biome, name, new BiomeDictionary.Type[0]);
+        return biome(biome, biome.getRegistryKey());
     }
 
-    public Biome biome(Biome biome, String name, BiomeDictionary.Type[] types) {
+    public Biome biome(BaseBiome biome, String name) {
 
-        biome.setRegistryName(this.modID, name);
+        biome.setRegistryName(this.modID, name.replace(' ', '_').toLowerCase());
         this.biomes.add(biome);
 
-        if (types.length > 0) {
-            BiomeDictionary.addTypes(biome, types);
+        if (biome.ignorePlayerSpawnSuitability()) {
+            BiomeManager.addSpawnBiome(biome);
         }
+
+        //        if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.WATER)) {
+        //            // Register aquatic creatures
+        //            biome.getSpawnableList(EnumCreatureType.WATER_CREATURE).add(new Biome.SpawnListEntry(EntitySquid.class, 20, 3, 7));
+        //            // todo add fish (either in 1.15+ or if someone makes fish entities)
+        //        }
 
         return biome;
     }

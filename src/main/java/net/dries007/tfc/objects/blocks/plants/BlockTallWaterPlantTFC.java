@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
 public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowable, ITallPlant {
 

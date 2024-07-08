@@ -1,5 +1,7 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorFruitTrees;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,7 +17,6 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.world.classic.worldgen.WorldGenFruitTrees;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +38,7 @@ public enum FruitTree implements IFruitTree {
 
     static {
         for (IFruitTree tree : values()) {
-            WorldGenFruitTrees.register(tree);
+            GeneratorFruitTrees.register(tree);
         }
     }
 

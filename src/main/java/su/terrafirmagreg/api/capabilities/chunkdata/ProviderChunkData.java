@@ -2,6 +2,8 @@ package su.terrafirmagreg.api.capabilities.chunkdata;
 
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
+import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -15,8 +17,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.world.classic.DataLayer;
-import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,9 +30,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
-import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
+import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER2;
+import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER3;
 
+@Getter
 @SuppressWarnings("WeakerAccess")
 public final class ProviderChunkData implements ICapabilityChunkData {
 
@@ -41,93 +42,75 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     public static final ProviderChunkData EMPTY = new ProviderChunkData();
 
     static {
-        Arrays.fill(EMPTY.drainageLayer, DataLayer.ERROR);
-        Arrays.fill(EMPTY.stabilityLayer, DataLayer.ERROR);
+        Arrays.fill(EMPTY.drainageLayer, DataLayerClassic.ERROR);
+        Arrays.fill(EMPTY.stabilityLayer, DataLayerClassic.ERROR);
         Arrays.fill(EMPTY.seaLevelOffset, -1);
     }
 
     /**
      * Массивы для хранения данных о слоях горных пород.
      */
-    @Getter
     private final int[] rockLayer1 = new int[256];
-    @Getter
     private final int[] rockLayer2 = new int[256];
-    @Getter
     private final int[] rockLayer3 = new int[256];
 
     /**
      * Массивы для хранения данных о слоях дренажа и стабильности.
      */
-    @Getter
-    private final DataLayer[] drainageLayer = new DataLayer[256];
-    @Getter
-    private final DataLayer[] stabilityLayer = new DataLayer[256];
+    private final DataLayerClassic[] drainageLayer = new DataLayerClassic[256];
+    private final DataLayerClassic[] stabilityLayer = new DataLayerClassic[256];
 
     /**
      * Массив для хранения данных о смещении уровня моря.
      */
-    @Getter
     private final int[] seaLevelOffset = new int[256];
 
     /**
      * Флаг инициализации данных.
      */
-    @Getter
     @Setter
     private boolean initialized = false;
 
     /**
      * Популяция рыбы в чанке. Может быть установлена на основе биома, температуры или случайного числа.
      */
-    @Getter
     @Setter
     private int fishPopulation = FISH_POP_MAX; // todo: Set this based on biome? temp? rng?
 
     /**
      * Данные о осадках, региональной температуре, средней температуре, плотности и разнообразии растительности.
      */
-    @Getter
     @Setter
     private float rainfall;
-    @Getter
     @Setter
     private float regionalTemp;
-    @Getter
     @Setter
     private float averageTemp;
-    @Getter
     @Setter
     private float floraDensity;
-    @Getter
     @Setter
     private float floraDiversity;
 
     /**
      * Рабочая нагрузка чанка.
      */
-    @Getter
     @Setter
     private int chunkWorkage;
 
     /**
      * Количество тиков защиты от появления враждебных мобов. Начинается с отрицательного значения и увеличивается при наличии игроков в области.
      */
-    @Getter
     @Setter
     private long protectedTicks; // Used for hostile spawn protection. Starts negative, increases by players in the area
 
     /**
      * Время последнего обновления чанка.
      */
-    @Getter
     @Setter
     private long lastUpdateTick;
-    @Getter
     @Setter
     private long lastUpdateYear;
 
-    @Getter
     private Set<Vein> generatedVeins = new HashSet<>();
 
     /**
@@ -279,7 +262,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
      * @param floraDensity   Плотность растительности.
      * @param floraDiversity Разнообразие растительности.
      */
-    public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, DataLayer[] stabilityLayer, DataLayer[] drainageLayer,
+    public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer,
                                   int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
         this.initialized = true;
         System.arraycopy(rockLayer1, 0, this.rockLayer1, 0, 256);
@@ -584,7 +567,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
      * @param z Координата Z.
      * @return Слой стабильности.
      */
-    public DataLayer getStabilityLayer(int x, int z) {
+    public DataLayerClassic getStabilityLayer(int x, int z) {
         return stabilityLayer[z << 4 | x];
     }
 
@@ -595,7 +578,7 @@ public final class ProviderChunkData implements ICapabilityChunkData {
      * @param z Координата Z.
      * @return Слой дренажа.
      */
-    public DataLayer getDrainageLayer(int x, int z) {
+    public DataLayerClassic getDrainageLayer(int x, int z) {
         return drainageLayer[z << 4 | x];
     }
 

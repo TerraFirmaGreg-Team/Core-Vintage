@@ -31,8 +31,8 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.function.Function;
 
-import static net.dries007.tfc.world.classic.ChunkGenTFC.FRESH_WATER;
-import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.FRESH_WATER;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class Plant extends IForgeRegistryEntry.Impl<Plant> {
@@ -59,15 +59,14 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
     private final Optional<String> oreDictName;
 
     /**
-     * Addon mods that want to add plants should subscribe to the registry event for this class They also must put (in their mod) the required
-     * resources in /assets/tfc/...
+     * Addon mods that want to add plants should subscribe to the registry event for this class They also must put (in their mod) the required resources in /assets/tfc/...
      * <p>
      * Plant world generation is determined dynamically based on valid temperature and rainfall values
      * <p>
      * Valid average biome temperatures are those that fall within the range plus or minus one quarter of the plants full temperature range
      * <p>
-     * Example: Lotus Full temperature range: 10-50 Average temp: 30 ( (10+50)/2 ) Difference between max and min temps: 40 (50-10) One quarter of
-     * this range: 10 (40/4) Worldgen temp range: 20-40 (30 +- 10)
+     * Example: Lotus Full temperature range: 10-50 Average temp: 30 ( (10+50)/2 ) Difference between max and min temps: 40 (50-10) One quarter of this range: 10 (40/4) Worldgen
+     * temp range: 20-40 (30 +- 10)
      *
      * @param name          the ResourceLocation registry name of this plant
      * @param plantType     the type of plant

@@ -1,11 +1,9 @@
 package su.terrafirmagreg.modules.animal.init;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.animal.objects.items.ItemAnimalMisc;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 public final class ItemsAnimal {
 

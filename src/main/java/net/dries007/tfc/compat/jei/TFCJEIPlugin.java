@@ -10,6 +10,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.init.RegistryWood;
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
 
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
@@ -88,7 +89,6 @@ import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 
 import java.util.ArrayList;
 import java.util.Collection;

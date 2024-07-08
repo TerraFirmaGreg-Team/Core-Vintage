@@ -23,6 +23,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -69,7 +70,12 @@ public record Registry(RegistryManager registryManager) {
     public void onRegisterBiome(RegistryEvent.Register<Biome> event) {
         for (var biome : this.registryManager.getBiomes()) {
             event.getRegistry().register(biome);
+
+            if (biome.getTypes().length > 0) {
+                BiomeDictionary.addTypes(biome, biome.getTypes());
+            }
         }
+
     }
 
     public void onRegisterSound(RegistryEvent.Register<SoundEvent> event) {

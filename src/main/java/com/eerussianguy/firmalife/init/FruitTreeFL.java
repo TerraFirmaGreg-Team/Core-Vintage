@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.init;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorFruitTrees;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -16,7 +18,6 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.world.classic.worldgen.WorldGenFruitTrees;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +29,7 @@ public enum FruitTreeFL implements IFruitTree {
 
     static {
         for (FruitTreeFL tree : values()) {
-            WorldGenFruitTrees.register(tree);
+            GeneratorFruitTrees.register(tree);
         }
     }
 

@@ -1,5 +1,7 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,7 +23,6 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillTier;
-import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,7 +62,7 @@ public enum Crop implements ICrop {
 
     static {
         for (ICrop crop : values()) {
-            WorldGenWildCrops.register(crop);
+            GeneratorWildCrops.register(crop);
         }
     }
 

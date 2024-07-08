@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.lib.Injector;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.modules.world.debug.WorldTypeDebugMod;
-import su.terrafirmagreg.modules.world.init.GeneratorWorld;
+import su.terrafirmagreg.modules.world.debug.WorldTypeDebug;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -27,7 +27,9 @@ public final class ModuleWorld extends ModuleBase {
 
     @Override
     public void onRegister() {
-        GeneratorWorld.onRegister(registryManager);
+
+        BiomesWorld.onRegister(registryManager);
+        //GeneratorWorld.onRegister(registryManager);
     }
 
     @Override
@@ -40,7 +42,7 @@ public final class ModuleWorld extends ModuleBase {
         // the same ID.
         Injector.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", null);
         // Sets the world type to the new type.
-        Injector.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", new WorldTypeDebugMod());
+        Injector.setFinalStaticFieldWithReflection(WorldType.class, "field_180272_g", new WorldTypeDebug());
     }
 
     @Override

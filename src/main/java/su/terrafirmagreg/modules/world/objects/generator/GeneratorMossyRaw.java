@@ -4,7 +4,8 @@ import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.api.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
-import su.terrafirmagreg.modules.world.classic.WorldTypeTFG;
+import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -13,8 +14,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-
-import net.dries007.tfc.world.classic.ChunkGenTFC;
 
 import java.util.Random;
 
@@ -25,9 +24,9 @@ public class GeneratorMossyRaw implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (!(chunkGenerator instanceof ChunkGenTFC)) return;
+        if (!(chunkGenerator instanceof ChunkGenClassic)) return;
 
-        int y = random.nextInt(200 - WorldTypeTFG.ROCKLAYER2) + WorldTypeTFG.ROCKLAYER2;
+        int y = random.nextInt(200 - WorldTypeClassic.ROCKLAYER2) + WorldTypeClassic.ROCKLAYER2;
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y, chunkZ << 4);
 
         int rarity = random.nextInt(20) + 1;

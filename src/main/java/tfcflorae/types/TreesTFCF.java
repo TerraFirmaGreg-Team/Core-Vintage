@@ -1,5 +1,9 @@
 package tfcflorae.types;
 
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeNormal;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeRandom;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeVariants;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -8,9 +12,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenNormal;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenRandom;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenVariants;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
@@ -85,79 +86,79 @@ public final class TreesTFCF {
     public static final ResourceLocation ZEBRAWOOD = new ResourceLocation(MODID_TFC, "zebrawood");
 
     // Custom Tree Models
-    public static final ITreeGenerator GEN_ASPEN = new TreeGenVariants(true, 54);
+    public static final ITreeGenerator GEN_ASPEN = new GeneratorTreeVariants(true, 54);
 
-    public static final ITreeGenerator GEN_AFRICAN_PADAUK = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_ALDER = new TreeGenVariants(true, 30);
-    public static final ITreeGenerator GEN_ANGELIM = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_BALD_CYPRESS = new TreeGenVariants(true, 13);
-    public static final ITreeGenerator GEN_BAOBAB = new TreeGenVariants(true, 2);
-    public static final ITreeGenerator GEN_BEECH = new TreeGenVariants(true, 33);
-    public static final ITreeGenerator GEN_BLACK_WALNUT = new TreeGenVariants(true, 45);
+    public static final ITreeGenerator GEN_AFRICAN_PADAUK = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_ALDER = new GeneratorTreeVariants(true, 30);
+    public static final ITreeGenerator GEN_ANGELIM = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_BALD_CYPRESS = new GeneratorTreeVariants(true, 13);
+    public static final ITreeGenerator GEN_BAOBAB = new GeneratorTreeVariants(true, 2);
+    public static final ITreeGenerator GEN_BEECH = new GeneratorTreeVariants(true, 33);
+    public static final ITreeGenerator GEN_BLACK_WALNUT = new GeneratorTreeVariants(true, 45);
     //public static final ITreeGenerator GEN_BOX = new TreeGenVariants(true, 9);			// Tall Tree Model
-    public static final ITreeGenerator GEN_BRAZILWOOD = new TreeGenVariants(true, 14);
-    public static final ITreeGenerator GEN_BUTTERNUT = new TreeGenVariants(true, 45);
-    public static final ITreeGenerator GEN_COCOBOLO = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_CYPRESS = new TreeGenVariants(true, 5);
-    public static final ITreeGenerator GEN_EBONY = new TreeGenVariants(true, 20);
-    public static final ITreeGenerator GEN_EUCALYPTUS = new TreeGenVariants(true, 48);
-    public static final ITreeGenerator GEN_EUROPEAN_OAK = new TreeGenVariants(true, 45);
-    public static final ITreeGenerator GEN_FEVER = new TreeGenVariants(true, 13);
-    public static final ITreeGenerator GEN_FRUITWOOD = new TreeGenVariants(true, 3);
+    public static final ITreeGenerator GEN_BRAZILWOOD = new GeneratorTreeVariants(true, 14);
+    public static final ITreeGenerator GEN_BUTTERNUT = new GeneratorTreeVariants(true, 45);
+    public static final ITreeGenerator GEN_COCOBOLO = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_CYPRESS = new GeneratorTreeVariants(true, 5);
+    public static final ITreeGenerator GEN_EBONY = new GeneratorTreeVariants(true, 20);
+    public static final ITreeGenerator GEN_EUCALYPTUS = new GeneratorTreeVariants(true, 48);
+    public static final ITreeGenerator GEN_EUROPEAN_OAK = new GeneratorTreeVariants(true, 45);
+    public static final ITreeGenerator GEN_FEVER = new GeneratorTreeVariants(true, 13);
+    public static final ITreeGenerator GEN_FRUITWOOD = new GeneratorTreeVariants(true, 3);
     //public static final ITreeGenerator GEN_GIGANTEUM = new TreeGenVariants(true, 10);		// Redwood
-    public static final ITreeGenerator GEN_GINKGO = new TreeGenVariants(true, 20);
-    public static final ITreeGenerator GEN_GREENHEART = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_HAWTHORN = new TreeGenVariants(true, 15);
-    public static final ITreeGenerator GEN_HAZEL = new TreeGenVariants(true, 45);
-    public static final ITreeGenerator GEN_HEMLOCK = new TreeGenVariants(true, 16);
-    public static final ITreeGenerator GEN_HOLLY = new TreeGenVariants(true, 16);
-    public static final ITreeGenerator GEN_HORNBEAM = new TreeGenVariants(true, 35);
-    public static final ITreeGenerator GEN_IPE = new TreeGenVariants(true, 66);
-    public static final ITreeGenerator GEN_IROKO = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_IRONWOOD = new TreeGenVariants(true, 16);
-    public static final ITreeGenerator GEN_JACARANDA = new TreeGenVariants(true, 30);
-    public static final ITreeGenerator GEN_JOSHUA_TREE = new TreeGenVariants(true, 1);
-    public static final ITreeGenerator GEN_JUNIPER = new TreeGenVariants(true, 17);
-    public static final ITreeGenerator GEN_KAURI = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_LARCH = new TreeGenVariants(true, 10);
-    public static final ITreeGenerator GEN_LIMBA = new TreeGenVariants(true, 13);
-    public static final ITreeGenerator GEN_LOCUST = new TreeGenVariants(true, 15);
-    public static final ITreeGenerator GEN_LOGWOOD = new TreeGenVariants(true, 10);
-    public static final ITreeGenerator GEN_MACLURA = new TreeGenVariants(true, 15);
-    public static final ITreeGenerator GEN_MAHOE = new TreeGenVariants(true, 15);
-    public static final ITreeGenerator GEN_MAHOGANY = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_MANGROVE = new TreeGenVariants(true, 13);
-    public static final ITreeGenerator GEN_MARBLEWOOD = new TreeGenVariants(true, 24);
-    public static final ITreeGenerator GEN_MESSMATE = new TreeGenVariants(true, 18);
-    public static final ITreeGenerator GEN_MOUNTAIN_ASH = new TreeGenVariants(true, 20);
-    public static final ITreeGenerator GEN_NORDMANN_FIR = new TreeGenVariants(true, 26);
-    public static final ITreeGenerator GEN_NORWAY_SPRUCE = new TreeGenVariants(true, 16);
-    public static final ITreeGenerator GEN_PINK_CHERRY = new TreeGenVariants(true, 45);
-    public static final ITreeGenerator GEN_PINK_IVORY = new TreeGenVariants(true, 19);
-    public static final ITreeGenerator GEN_POPLAR = new TreeGenVariants(true, 51);
-    public static final ITreeGenerator GEN_PURPLEHEART = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_RED_CEDAR = new TreeGenVariants(true, 25);
-    public static final ITreeGenerator GEN_RED_ELM = new TreeGenVariants(true, 60);
-    public static final ITreeGenerator GEN_REDWOOD = new TreeGenVariants(true, 22);
-    public static final ITreeGenerator GEN_ROWAN = new TreeGenVariants(true, 18);
-    public static final ITreeGenerator GEN_RUBBER_FIG = new TreeGenVariants(true, 9);
-    public static final ITreeGenerator GEN_SWEETGUM = new TreeGenVariants(true, 60);
-    public static final ITreeGenerator GEN_SYZYGIUM = new TreeGenVariants(true, 14);
-    public static final ITreeGenerator GEN_TEAK = new TreeGenVariants(true, 13);
-    public static final ITreeGenerator GEN_WALNUT = new TreeGenVariants(true, 45);
-    public static final ITreeGenerator GEN_WENGE = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_WHITE_CHERRY = new TreeGenVariants(true, 45);
-    public static final ITreeGenerator GEN_WHITE_ELM = new TreeGenVariants(true, 60);
-    public static final ITreeGenerator GEN_WHITEBEAM = new TreeGenVariants(true, 42);
-    public static final ITreeGenerator GEN_YELLOW_MERANTI = new TreeGenVariants(true, 34);
-    public static final ITreeGenerator GEN_YEW = new TreeGenVariants(true, 19);
-    public static final ITreeGenerator GEN_ZEBRAWOOD = new TreeGenVariants(true, 34);
+    public static final ITreeGenerator GEN_GINKGO = new GeneratorTreeVariants(true, 20);
+    public static final ITreeGenerator GEN_GREENHEART = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_HAWTHORN = new GeneratorTreeVariants(true, 15);
+    public static final ITreeGenerator GEN_HAZEL = new GeneratorTreeVariants(true, 45);
+    public static final ITreeGenerator GEN_HEMLOCK = new GeneratorTreeVariants(true, 16);
+    public static final ITreeGenerator GEN_HOLLY = new GeneratorTreeVariants(true, 16);
+    public static final ITreeGenerator GEN_HORNBEAM = new GeneratorTreeVariants(true, 35);
+    public static final ITreeGenerator GEN_IPE = new GeneratorTreeVariants(true, 66);
+    public static final ITreeGenerator GEN_IROKO = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_IRONWOOD = new GeneratorTreeVariants(true, 16);
+    public static final ITreeGenerator GEN_JACARANDA = new GeneratorTreeVariants(true, 30);
+    public static final ITreeGenerator GEN_JOSHUA_TREE = new GeneratorTreeVariants(true, 1);
+    public static final ITreeGenerator GEN_JUNIPER = new GeneratorTreeVariants(true, 17);
+    public static final ITreeGenerator GEN_KAURI = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_LARCH = new GeneratorTreeVariants(true, 10);
+    public static final ITreeGenerator GEN_LIMBA = new GeneratorTreeVariants(true, 13);
+    public static final ITreeGenerator GEN_LOCUST = new GeneratorTreeVariants(true, 15);
+    public static final ITreeGenerator GEN_LOGWOOD = new GeneratorTreeVariants(true, 10);
+    public static final ITreeGenerator GEN_MACLURA = new GeneratorTreeVariants(true, 15);
+    public static final ITreeGenerator GEN_MAHOE = new GeneratorTreeVariants(true, 15);
+    public static final ITreeGenerator GEN_MAHOGANY = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_MANGROVE = new GeneratorTreeVariants(true, 13);
+    public static final ITreeGenerator GEN_MARBLEWOOD = new GeneratorTreeVariants(true, 24);
+    public static final ITreeGenerator GEN_MESSMATE = new GeneratorTreeVariants(true, 18);
+    public static final ITreeGenerator GEN_MOUNTAIN_ASH = new GeneratorTreeVariants(true, 20);
+    public static final ITreeGenerator GEN_NORDMANN_FIR = new GeneratorTreeVariants(true, 26);
+    public static final ITreeGenerator GEN_NORWAY_SPRUCE = new GeneratorTreeVariants(true, 16);
+    public static final ITreeGenerator GEN_PINK_CHERRY = new GeneratorTreeVariants(true, 45);
+    public static final ITreeGenerator GEN_PINK_IVORY = new GeneratorTreeVariants(true, 19);
+    public static final ITreeGenerator GEN_POPLAR = new GeneratorTreeVariants(true, 51);
+    public static final ITreeGenerator GEN_PURPLEHEART = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_RED_CEDAR = new GeneratorTreeVariants(true, 25);
+    public static final ITreeGenerator GEN_RED_ELM = new GeneratorTreeVariants(true, 60);
+    public static final ITreeGenerator GEN_REDWOOD = new GeneratorTreeVariants(true, 22);
+    public static final ITreeGenerator GEN_ROWAN = new GeneratorTreeVariants(true, 18);
+    public static final ITreeGenerator GEN_RUBBER_FIG = new GeneratorTreeVariants(true, 9);
+    public static final ITreeGenerator GEN_SWEETGUM = new GeneratorTreeVariants(true, 60);
+    public static final ITreeGenerator GEN_SYZYGIUM = new GeneratorTreeVariants(true, 14);
+    public static final ITreeGenerator GEN_TEAK = new GeneratorTreeVariants(true, 13);
+    public static final ITreeGenerator GEN_WALNUT = new GeneratorTreeVariants(true, 45);
+    public static final ITreeGenerator GEN_WENGE = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_WHITE_CHERRY = new GeneratorTreeVariants(true, 45);
+    public static final ITreeGenerator GEN_WHITE_ELM = new GeneratorTreeVariants(true, 60);
+    public static final ITreeGenerator GEN_WHITEBEAM = new GeneratorTreeVariants(true, 42);
+    public static final ITreeGenerator GEN_YELLOW_MERANTI = new GeneratorTreeVariants(true, 34);
+    public static final ITreeGenerator GEN_YEW = new GeneratorTreeVariants(true, 19);
+    public static final ITreeGenerator GEN_ZEBRAWOOD = new GeneratorTreeVariants(true, 34);
 
-    public static final ITreeGenerator GEN_TALL_TFC = new TreeGenNormal(3, 3);
-    public static final ITreeGenerator GEN_NORMAL = new TreeGenRandom(1, 3, 3);
-    public static final ITreeGenerator GEN_MEDIUM = new TreeGenRandom(2, 2, 3);
-    public static final ITreeGenerator GEN_TALL = new TreeGenRandom(3, 3, 3);
-    public static final ITreeGenerator GEN_TALL_SINGLE = new TreeGenRandom(3, 3, 1);
+    public static final ITreeGenerator GEN_TALL_TFC = new GeneratorTreeNormal(3, 3);
+    public static final ITreeGenerator GEN_NORMAL = new GeneratorTreeRandom(1, 3, 3);
+    public static final ITreeGenerator GEN_MEDIUM = new GeneratorTreeRandom(2, 2, 3);
+    public static final ITreeGenerator GEN_TALL = new GeneratorTreeRandom(3, 3, 3);
+    public static final ITreeGenerator GEN_TALL_SINGLE = new GeneratorTreeRandom(3, 3, 1);
 
     // Seasonal & Fruit-bearing Trees
     public static final Tree ASH_TREE = new Tree.Builder(new ResourceLocation(MODID_TFC, "ash"), 60f, 140f, -6f, 12f, GEN_NORMAL).setBushes()
@@ -396,24 +397,24 @@ public final class TreesTFCF {
             .setTannin()
             .setBurnInfo(728f, 1750)
             .build();
-    public static final ITreeGenerator GEN_CASSIA_CINNAMON = new TreeGenVariants(true, 6);
-    public static final ITreeGenerator GEN_CEYLON_CINNAMON = new TreeGenVariants(true, 6);
+    public static final ITreeGenerator GEN_CASSIA_CINNAMON = new GeneratorTreeVariants(true, 6);
+    public static final ITreeGenerator GEN_CEYLON_CINNAMON = new GeneratorTreeVariants(true, 6);
     public static final Tree CASSIA_CINNAMON_TREE = new Tree(new ResourceLocation(MODID_TFC, "cassia_cinnamon"), GEN_CASSIA_CINNAMON, 20, 35, 250,
             400, 0.1f, 1, 2, 4, 15, 6, false, null, false, 15, 710f, 1000);
     public static final Tree CEYLON_CINNAMON_TREE = new Tree(new ResourceLocation(MODID_TFC, "ceylon_cinnamon"), GEN_CEYLON_CINNAMON, 20, 35, 250,
             400, 0.1f, 1, 2, 4, 15, 6, false, null, false, 15, 710f, 1000);
-    public static final ITreeGenerator GEN_ARROW_BAMBOO = new TreeGenVariants(true, 4);    // Pseudosasa japonica
-    public static final ITreeGenerator GEN_BLACK_BAMBOO = new TreeGenVariants(true, 4); // Phyllostachys nigra
-    public static final ITreeGenerator GEN_BLUE_BAMBOO = new TreeGenVariants(true, 4); // Himalayacalamus hookerianus
-    public static final ITreeGenerator GEN_DRAGON_BAMBOO = new TreeGenVariants(true, 4); // Dendrocalamus giganteus
-    public static final ITreeGenerator GEN_GOLDEN_BAMBOO = new TreeGenVariants(true, 4); // Alphonse Karr
-    public static final ITreeGenerator GEN_NARROW_LEAF_BAMBOO = new TreeGenVariants(true, 4); // Guadua angustifolia
-    public static final ITreeGenerator GEN_RED_BAMBOO = new TreeGenVariants(true, 4); // Fargesia nitida Jiuzhaigou
-    public static final ITreeGenerator GEN_TEMPLE_BAMBOO = new TreeGenVariants(true, 4); // Semiarundinaria fastuosa
-    public static final ITreeGenerator GEN_THORNY_BAMBOO = new TreeGenVariants(true, 4); // Chimonobambusa pachystachys
-    public static final ITreeGenerator GEN_TIMBER_BAMBOO = new TreeGenVariants(true, 4); // Phyllostachys vivax
-    public static final ITreeGenerator GEN_TINWA_BAMBOO = new TreeGenVariants(true, 4); // Cephalostachyum pergracile
-    public static final ITreeGenerator GEN_WEAVERS_BAMBOO = new TreeGenVariants(true, 4); // Bambusa textilis
+    public static final ITreeGenerator GEN_ARROW_BAMBOO = new GeneratorTreeVariants(true, 4);    // Pseudosasa japonica
+    public static final ITreeGenerator GEN_BLACK_BAMBOO = new GeneratorTreeVariants(true, 4); // Phyllostachys nigra
+    public static final ITreeGenerator GEN_BLUE_BAMBOO = new GeneratorTreeVariants(true, 4); // Himalayacalamus hookerianus
+    public static final ITreeGenerator GEN_DRAGON_BAMBOO = new GeneratorTreeVariants(true, 4); // Dendrocalamus giganteus
+    public static final ITreeGenerator GEN_GOLDEN_BAMBOO = new GeneratorTreeVariants(true, 4); // Alphonse Karr
+    public static final ITreeGenerator GEN_NARROW_LEAF_BAMBOO = new GeneratorTreeVariants(true, 4); // Guadua angustifolia
+    public static final ITreeGenerator GEN_RED_BAMBOO = new GeneratorTreeVariants(true, 4); // Fargesia nitida Jiuzhaigou
+    public static final ITreeGenerator GEN_TEMPLE_BAMBOO = new GeneratorTreeVariants(true, 4); // Semiarundinaria fastuosa
+    public static final ITreeGenerator GEN_THORNY_BAMBOO = new GeneratorTreeVariants(true, 4); // Chimonobambusa pachystachys
+    public static final ITreeGenerator GEN_TIMBER_BAMBOO = new GeneratorTreeVariants(true, 4); // Phyllostachys vivax
+    public static final ITreeGenerator GEN_TINWA_BAMBOO = new GeneratorTreeVariants(true, 4); // Cephalostachyum pergracile
+    public static final ITreeGenerator GEN_WEAVERS_BAMBOO = new GeneratorTreeVariants(true, 4); // Bambusa textilis
     public static final Tree ARROW_BAMBOO = new Tree(new ResourceLocation(MODID_TFC, "arrow_bamboo"), GEN_ARROW_BAMBOO, 24, 35, 240, 420, 1, 2, 1, 4,
             15, 6, false, null, false, 10, 400f, 800);
     public static final Tree BLACK_BAMBOO = new Tree(new ResourceLocation(MODID_TFC, "black_bamboo"), GEN_BLACK_BAMBOO, 24, 35, 240, 420, 1, 2, 1, 4,

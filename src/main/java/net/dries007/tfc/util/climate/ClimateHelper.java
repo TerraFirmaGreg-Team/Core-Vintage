@@ -10,8 +10,8 @@ import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.config.TemperatureMode;
 
-import static net.dries007.tfc.world.classic.WorldTypeTFC.SEALEVEL;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.SEALEVEL;
 
 public class ClimateHelper {
 
@@ -64,8 +64,8 @@ public class ClimateHelper {
     }
 
     /**
-     * Internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. Our temperature is scales the 110 m
-     * against 2750 m, so that gives us a change of 1.6225 / 10 blocks. The amount to reduce temperature by after applying height transformations
+     * Internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. Our temperature is scales the 110 m against 2750 m, so that gives us a
+     * change of 1.6225 / 10 blocks. The amount to reduce temperature by after applying height transformations
      *
      * @param y the y level
      * @return a value between 0 and 17.822

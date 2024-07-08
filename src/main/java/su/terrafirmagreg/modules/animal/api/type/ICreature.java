@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.animal.api.type;
 
+import su.terrafirmagreg.modules.world.objects.spawner.WorldEntitySpawnerTFC;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.biome.Biome;
 
-
-import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
 
 import java.util.List;
 import java.util.Random;

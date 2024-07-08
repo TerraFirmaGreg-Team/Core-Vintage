@@ -1,6 +1,8 @@
 package net.dries007.tfc.api.capability.chunkdata;
 
 import su.terrafirmagreg.api.lib.NBTBuilder;
+import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
+import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByteArray;
@@ -22,8 +24,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.world.classic.DataLayer;
-import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,8 +36,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER2;
-import static net.dries007.tfc.world.classic.WorldTypeTFC.ROCKLAYER3;
+import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER2;
+import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER3;
 
 @SuppressWarnings("WeakerAccess")
 public final class ChunkData {
@@ -47,16 +47,16 @@ public final class ChunkData {
     private static final ChunkData EMPTY = new ChunkData();
 
     static {
-        Arrays.fill(EMPTY.drainageLayer, DataLayer.ERROR);
-        Arrays.fill(EMPTY.stabilityLayer, DataLayer.ERROR);
+        Arrays.fill(EMPTY.drainageLayer, DataLayerClassic.ERROR);
+        Arrays.fill(EMPTY.stabilityLayer, DataLayerClassic.ERROR);
         Arrays.fill(EMPTY.seaLevelOffset, -1);
     }
 
     private final int[] rockLayer1 = new int[256];
     private final int[] rockLayer2 = new int[256];
     private final int[] rockLayer3 = new int[256];
-    private final DataLayer[] drainageLayer = new DataLayer[256]; // To be removed / replaced?
-    private final DataLayer[] stabilityLayer = new DataLayer[256]; // To be removed / replaced?
+    private final DataLayerClassic[] drainageLayer = new DataLayerClassic[256]; // To be removed / replaced?
+    private final DataLayerClassic[] stabilityLayer = new DataLayerClassic[256]; // To be removed / replaced?
     private final int[] seaLevelOffset = new int[256];
     @Getter
     private boolean initialized = false;
@@ -137,7 +137,7 @@ public final class ChunkData {
     /**
      * INTERNAL USE ONLY. No need to mark as dirty, since this will only ever be called on worldgen, before the first chunk save.
      */
-    public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, DataLayer[] stabilityLayer, DataLayer[] drainageLayer,
+    public void setGenerationData(int[] rockLayer1, int[] rockLayer2, int[] rockLayer3, DataLayerClassic[] stabilityLayer, DataLayerClassic[] drainageLayer,
                                   int[] seaLevelOffset, float rainfall, float regionalTemp, float avgTemp, float floraDensity, float floraDiversity) {
         this.initialized = true;
         System.arraycopy(rockLayer1, 0, this.rockLayer1, 0, 256);
@@ -294,11 +294,11 @@ public final class ChunkData {
         return ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getValue(rockLayer3[z << 4 | x]);
     }
 
-    public DataLayer getStabilityLayer(int x, int z) {
+    public DataLayerClassic getStabilityLayer(int x, int z) {
         return stabilityLayer[z << 4 | x];
     }
 
-    public DataLayer getDrainageLayer(int x, int z) {
+    public DataLayerClassic getDrainageLayer(int x, int z) {
         return drainageLayer[z << 4 | x];
     }
 
@@ -311,13 +311,13 @@ public final class ChunkData {
 
     public static final class ChunkDataStorage implements Capability.IStorage<ChunkData> {
 
-        public static NBTTagByteArray write(DataLayer[] layers) {
+        public static NBTTagByteArray write(DataLayerClassic[] layers) {
             return new NBTTagByteArray(Arrays.stream(layers).map(x -> (byte) x.layerID).collect(Collectors.toList()));
         }
 
-        public static void read(DataLayer[] layers, byte[] bytes) {
+        public static void read(DataLayerClassic[] layers, byte[] bytes) {
             for (int i = bytes.length - 1; i >= 0; i--) {
-                layers[i] = DataLayer.get(bytes[i]);
+                layers[i] = DataLayerClassic.get(bytes[i]);
             }
         }
 

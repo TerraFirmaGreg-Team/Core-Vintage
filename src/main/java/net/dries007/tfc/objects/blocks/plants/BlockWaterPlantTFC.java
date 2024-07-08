@@ -12,7 +12,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
+import static su.terrafirmagreg.modules.world.classic.ChunkGenClassic.SALT_WATER;
 
 // todo: either pull some trickery to make this look like water or simply wait until 1.13 and implement ILiquidContainer
 

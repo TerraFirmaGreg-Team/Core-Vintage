@@ -27,6 +27,7 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -137,7 +138,6 @@ import net.dries007.tfc.util.calendar.CalendarWorldData;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SmithingSkill;
-import net.dries007.tfc.world.classic.WorldTypeTFC;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
@@ -649,7 +649,7 @@ public final class CommonEventHandler {
             // Stop mob spawning on surface
             if (ConfigTFC.General.DIFFICULTY.preventMobsOnSurface) {
                 if (Helpers.shouldPreventOnSurface(event.getEntity())) {
-                    int maximumY = (WorldTypeTFC.SEALEVEL - WorldTypeTFC.ROCKLAYER2) / 2 + WorldTypeTFC.ROCKLAYER2; // Half through rock layer 1
+                    int maximumY = (WorldTypeClassic.SEALEVEL - WorldTypeClassic.ROCKLAYER2) / 2 + WorldTypeClassic.ROCKLAYER2; // Half through rock layer 1
                     if (pos.getY() >= maximumY || world.canSeeSky(pos)) {
                         event.setResult(Event.Result.DENY);
                     }

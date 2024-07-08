@@ -31,6 +31,10 @@ public class ConfigAnimal {
     @Config.Comment("Miscellaneous")
     public static MiscCategory MISC = new MiscCategory();
 
+    static {
+        ConfigAnytime.register(ConfigAnimal.class);
+    }
+
     public static class BlocksCategory {}
 
     public static class ItemsCategory {}
@@ -910,10 +914,6 @@ public class ConfigAnimal {
         @Config.Comment("The distance for animals to search for food")
         public double searchDistance = 10;
 
-    }
-
-    static {
-        ConfigAnytime.register(ConfigAnimal.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

@@ -1,5 +1,8 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.modules.world.classic.WorldGenSettings;
+import su.terrafirmagreg.modules.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiPageButtonList;
@@ -13,8 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.base.Strings;
 import com.google.gson.JsonParseException;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.world.classic.WorldGenSettings;
-import net.dries007.tfc.world.classic.WorldGenSettings.WorldGenSettingsBuilder;
 
 import java.io.IOException;
 

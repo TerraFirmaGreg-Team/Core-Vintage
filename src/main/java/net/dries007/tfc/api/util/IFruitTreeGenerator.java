@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.util;
 
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeFruit;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.TemplateManager;
@@ -7,13 +9,12 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.world.classic.worldgen.trees.FruitTreeGen;
 
 import java.util.Random;
 
 public interface IFruitTreeGenerator {
 
-    IFruitTreeGenerator DEFAULT = new FruitTreeGen();
+    IFruitTreeGenerator DEFAULT = new GeneratorTreeFruit();
 
     /**
      * Called to generate a tree. Each Tree must have one of these. Used for world gen and sapling growth

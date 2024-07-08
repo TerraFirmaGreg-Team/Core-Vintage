@@ -1,5 +1,8 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -19,8 +22,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
 
 import java.util.ArrayList;
 import java.util.Collections;

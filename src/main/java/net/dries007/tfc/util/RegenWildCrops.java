@@ -1,5 +1,7 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
+
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -7,15 +9,15 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
+import tfcflorae.objects.blocks.BlocksTFCF;
 
-public class RegenWildCrops extends WorldGenWildCrops {
+public class RegenWildCrops extends GeneratorWildCrops {
 
     @Override
     protected boolean isValidPosition(World world, BlockPos pos) {
         //Modified to allow replacement of grass during spring regen
-        Block test = world.getBlockState(pos).getBlock();
-        return (test instanceof BlockShortGrassTFC ||
-                test.isAir(world.getBlockState(pos), world, pos) && BlocksTFC.isSoil(world.getBlockState(pos.down())));
+        Block block = world.getBlockState(pos).getBlock();
+        return (block instanceof BlockShortGrassTFC ||
+                block.isAir(world.getBlockState(pos), world, pos) && (BlocksTFC.isSoil(world.getBlockState(pos.down())) || BlocksTFCF.isSoil(world.getBlockState(pos.down()))));
     }
 }

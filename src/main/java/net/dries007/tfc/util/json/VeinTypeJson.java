@@ -1,5 +1,7 @@
 package net.dries007.tfc.util.json;
 
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -21,7 +23,6 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
 
 import java.lang.reflect.Type;
 import java.util.HashSet;

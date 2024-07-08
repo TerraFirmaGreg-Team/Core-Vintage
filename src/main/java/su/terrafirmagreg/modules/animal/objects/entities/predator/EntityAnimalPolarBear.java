@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.predator;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -44,7 +45,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.BiomeHelper;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -266,7 +266,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     @Override
     public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
         BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
-        if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
+        if (!BiomeUtils.isOceanicBiome(biome) && !BiomeUtils.isBeachBiome(biome) &&
                 (biomeType == BiomeHelper.BiomeType.TUNDRA || biomeType == BiomeHelper.BiomeType.TAIGA)) {
             return ConfigAnimal.ENTITIES.POLAR_BEAR.rarity;
         }

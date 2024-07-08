@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -27,7 +29,6 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.util.climate.Climate;
-import net.dries007.tfc.world.classic.WorldTypeTFC;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -183,7 +184,7 @@ public class BlockHangingPlantTFCF extends BlockPlantDummy1 implements IGrowable
 
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (pos.getY() < WorldTypeTFC.SEALEVEL) {
+        if (pos.getY() < WorldTypeClassic.SEALEVEL) {
             if (rand.nextInt(40) == 0) {
                 float dripRange = 0.4F;
                 float px = rand.nextFloat() - 0.5F;

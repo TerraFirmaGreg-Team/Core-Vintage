@@ -1,5 +1,7 @@
 package tfcflorae.util.agriculture;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -19,8 +21,6 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillTier;
-import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
-import net.dries007.tfc.world.classic.worldgen.WorldGenWildCropsTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 
@@ -76,8 +76,7 @@ public enum CropTFCF implements ICrop {
 
     static {
         for (ICrop crop : values()) {
-            WorldGenWildCrops.register(crop);
-            WorldGenWildCropsTFCF.register(crop);
+            GeneratorWildCrops.register(crop);
         }
     }
 

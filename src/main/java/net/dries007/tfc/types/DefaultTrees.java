@@ -1,5 +1,14 @@
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeAcacia;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeBushes;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeComposite;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeKapok;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeNormal;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeSequoia;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeVariants;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeWillow;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -8,14 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenAcacia;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenBushes;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenComposite;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenKapok;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenNormal;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenVariants;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenWillow;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
@@ -50,18 +51,18 @@ public final class DefaultTrees {
     /**
      * Simple ITreeGenerator instances.
      */
-    public static final ITreeGenerator GEN_NORMAL = new TreeGenNormal(1, 3);
-    public static final ITreeGenerator GEN_MEDIUM = new TreeGenNormal(2, 2);
-    public static final ITreeGenerator GEN_TALL = new TreeGenNormal(3, 3);
-    public static final ITreeGenerator GEN_CONIFER = new TreeGenVariants(false, 7);
-    public static final ITreeGenerator GEN_TROPICAL = new TreeGenVariants(true, 7);
-    public static final ITreeGenerator GEN_WILLOW = new TreeGenWillow();
-    public static final ITreeGenerator GEN_ACACIA = new TreeGenAcacia();
-    public static final ITreeGenerator GEN_KAPOK = new TreeGenKapok();
-    public static final ITreeGenerator GEN_SEQUOIA = new TreeGenSequoia();
-    public static final ITreeGenerator GEN_KAPOK_COMPOSITE = new TreeGenComposite().add(0.4f, GEN_TALL)
+    public static final ITreeGenerator GEN_NORMAL = new GeneratorTreeNormal(1, 3);
+    public static final ITreeGenerator GEN_MEDIUM = new GeneratorTreeNormal(2, 2);
+    public static final ITreeGenerator GEN_TALL = new GeneratorTreeNormal(3, 3);
+    public static final ITreeGenerator GEN_CONIFER = new GeneratorTreeVariants(false, 7);
+    public static final ITreeGenerator GEN_TROPICAL = new GeneratorTreeVariants(true, 7);
+    public static final ITreeGenerator GEN_WILLOW = new GeneratorTreeWillow();
+    public static final ITreeGenerator GEN_ACACIA = new GeneratorTreeAcacia();
+    public static final ITreeGenerator GEN_KAPOK = new GeneratorTreeKapok();
+    public static final ITreeGenerator GEN_SEQUOIA = new GeneratorTreeSequoia();
+    public static final ITreeGenerator GEN_KAPOK_COMPOSITE = new GeneratorTreeComposite().add(0.4f, GEN_TALL)
             .add(0.6f, GEN_KAPOK);
-    public static final ITreeGenerator GEN_BUSHES = new TreeGenBushes();
+    public static final ITreeGenerator GEN_BUSHES = new GeneratorTreeBushes();
 
     @SubscribeEvent
     public static void onPreRegisterRockCategory(TFCRegistryEvent.RegisterPreBlock<Tree> event) {

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +22,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +51,7 @@ public class ItemBlockCropDeadWaterTFC extends ItemBlockTFC {
                 BlockPos blockpos1 = blockpos.up();
                 IBlockState iblockstate = worldIn.getBlockState(blockpos);
                 if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
-                        worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenTFC.FRESH_WATER) {
+                        worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER) {
                     BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                     worldIn.setBlockState(blockpos1, this.block.getDefaultState());
                     if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn)

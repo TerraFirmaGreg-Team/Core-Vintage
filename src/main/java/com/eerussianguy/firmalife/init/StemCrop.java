@@ -2,6 +2,8 @@
 
 package com.eerussianguy.firmalife.init;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -17,7 +19,6 @@ import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,7 +36,7 @@ public enum StemCrop implements ICrop {
 
     static {
         for (ICrop crop : values()) {
-            WorldGenWildCrops.register(crop);
+            GeneratorWildCrops.register(crop);
         }
     }
 

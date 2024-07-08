@@ -1,6 +1,7 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -20,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
 
+import net.dries007.tfc.api.capability.chunkdata.CapabilityChunkData;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -55,8 +57,6 @@ import net.dries007.tfc.proxy.IProxy;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
-import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.api.capability.chunkdata.CapabilityChunkData;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
 import static su.terrafirmagreg.Tags.VERSION;
@@ -86,7 +86,7 @@ public final class TerraFirmaCraft {
     }
 
     private final LoggingHelper log = new LoggingHelper(MODID_TFC);
-    private WorldTypeTFC worldTypeTFC;
+    private WorldTypeClassic worldTypeTFC;
     private SimpleNetworkWrapper network;
 
     public static LoggingHelper getLog() {
@@ -97,7 +97,7 @@ public final class TerraFirmaCraft {
         return PROXY;
     }
 
-    public static WorldTypeTFC getWorldType() {
+    public static WorldTypeClassic getWorldType() {
         return INSTANCE.worldTypeTFC;
     }
 
@@ -168,7 +168,7 @@ public final class TerraFirmaCraft {
             }
         }
 
-        worldTypeTFC = new WorldTypeTFC();
+        worldTypeTFC = new WorldTypeClassic();
 
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
     }

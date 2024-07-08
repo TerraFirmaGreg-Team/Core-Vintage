@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.init;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorBerryBushes;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -9,7 +11,6 @@ import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 
 import lombok.Getter;
 
@@ -22,7 +23,7 @@ public enum BushFL implements IBerryBush {
 
     static {
         for (IBerryBush bush : values()) {
-            WorldGenBerryBushes.register(bush);
+            GeneratorBerryBushes.register(bush);
         }
     }
 

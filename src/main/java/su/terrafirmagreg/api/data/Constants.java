@@ -3,6 +3,7 @@ package su.terrafirmagreg.api.data;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.api.lib.json.LowercaseEnumTypeAdapterFactory;
 import su.terrafirmagreg.api.lib.json.ResourceLocationJson;
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -12,7 +13,6 @@ import com.google.gson.GsonBuilder;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.util.json.AnimalFoodJson;
 import net.dries007.tfc.util.json.VeinTypeJson;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
 
 public final class Constants {
 

@@ -1,5 +1,8 @@
 package net.dries007.tfc.command;
 
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -17,10 +20,8 @@ import net.minecraftforge.common.WorldWorkerManager;
 
 
 import gnu.trove.map.hash.TObjectIntHashMap;
-import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
+import net.dries007.tfc.api.types.Rock;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,5 +1,9 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorLooseRocks;
+import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
+
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -9,12 +13,9 @@ import net.minecraft.world.gen.IChunkGenerator;
 
 import com.google.common.collect.Sets;
 import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.world.classic.worldgen.WorldGenLooseRocks;
-import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Set;
 
-public class RegenRocksSticks extends WorldGenLooseRocks {
+public class RegenRocksSticks extends GeneratorLooseRocks {
 
     public RegenRocksSticks(boolean generateOres) {
         super(generateOres);
@@ -36,7 +37,7 @@ public class RegenRocksSticks extends WorldGenLooseRocks {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (chunkGenerator instanceof ChunkGenTFC && world.provider.getDimension() == 0) {
+        if (chunkGenerator instanceof ChunkGenClassic && world.provider.getDimension() == 0) {
             final BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
             final ChunkData baseChunkData = ChunkData.get(world, chunkBlockPos);
 

@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -27,8 +29,6 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.network.PacketProspectResult;
 import net.dries007.tfc.util.skills.ProspectingSkill;
 import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinType;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

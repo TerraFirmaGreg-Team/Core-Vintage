@@ -4,6 +4,9 @@ import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorBerryBushes;
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorPlant;
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorTrees;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -47,10 +50,6 @@ import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
-import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
-import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
-import tfcflorae.util.RegenWildCropsTFCF;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -70,11 +69,10 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public class WorldRegenHandler {
 
-    public static final WorldGenPlantTFC PLANT_GEN = new WorldGenPlantTFC();
+    public static final GeneratorPlant PLANT_GEN = new GeneratorPlant();
     private static final RegenRocksSticks ROCKS_GEN = new RegenRocksSticks(true);
     private static final RegenWildCrops CROPS_GEN = new RegenWildCrops();
-    private static final RegenWildCropsTFCF CROPSTFCF_GEN = new RegenWildCropsTFCF();
-    private static final WorldGenBerryBushes BUSH_GEN = new WorldGenBerryBushes();
+    private static final GeneratorBerryBushes BUSH_GEN = new GeneratorBerryBushes();
     private static final List<ChunkPos> POSITIONS = new LinkedList<>();
 
     @SubscribeEvent
@@ -118,7 +116,7 @@ public class WorldRegenHandler {
                             if (trees.isEmpty()) {
                                 stickDensity = 1 + (int) (1.5f * density * rockModifier);
                             }
-                            WorldGenTrees.generateLooseSticks(RNG, pos.x, pos.z, event.world, stickDensity);
+                            GeneratorTrees.generateLooseSticks(RNG, pos.x, pos.z, event.world, stickDensity);
                         }
 
                         //Nuke crops/mushrooms/dead crops (not sure the latter is working.
@@ -134,7 +132,6 @@ public class WorldRegenHandler {
                             PLANT_GEN.generate(event.world, RNG, blockMushroomPos);
                         }
                         CROPS_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
-                        CROPSTFCF_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
                         BUSH_GEN.generate(RNG, pos.x, pos.z, event.world, chunkGenerator, chunkProvider);
                         int worldX = pos.x << 4;
                         int worldZ = pos.z << 4;

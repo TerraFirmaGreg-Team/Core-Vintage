@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
@@ -13,8 +15,6 @@ import net.dries007.tfc.objects.blocks.property.ITallPlant;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.dries007.tfc.world.classic.ChunkGenTFC.SALT_WATER;
 
 public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC implements ITallPlant {
 
@@ -35,7 +35,7 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
         int i;
         //noinspection StatementWithEmptyBody
         for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i) ;
-        if (water == SALT_WATER)
+        if (water == ChunkGenClassic.SALT_WATER)
             return i < plant.getMaxHeight() && (worldIn.isAirBlock(pos.up()) || BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up()))) &&
                     canBlockStay(worldIn, pos.up(), state);
         else
@@ -59,7 +59,7 @@ public class BlockEmergentTallWaterPlantTFC extends BlockTallWaterPlantTFC imple
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState soil = worldIn.getBlockState(pos.down());
-        if (plant.getWaterType() == SALT_WATER)
+        if (plant.getWaterType() == ChunkGenClassic.SALT_WATER)
             return (soil.getBlock() == this || BlocksTFC.isSaltWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
         return (soil.getBlock() == this || BlocksTFC.isFreshWater(worldIn.getBlockState(pos))) && this.canSustainBush(soil);
     }

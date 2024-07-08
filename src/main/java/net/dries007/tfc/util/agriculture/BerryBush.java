@@ -1,5 +1,7 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.modules.world.objects.generator.GeneratorBerryBushes;
+
 import net.minecraft.item.ItemStack;
 
 
@@ -8,7 +10,6 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 
 import lombok.Getter;
 
@@ -30,7 +31,7 @@ public enum BerryBush implements IBerryBush {
 
     static {
         for (IBerryBush bush : values()) {
-            WorldGenBerryBushes.register(bush);
+            GeneratorBerryBushes.register(bush);
         }
     }
 

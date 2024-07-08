@@ -54,7 +54,7 @@ public class ModelAnimalSheepBody extends ModelQuadruped {
         horn2b.addBox(0.5F, 1F, 0.5F, 1, 3, 1, 0.25F);
         horn2b.setRotationPoint(0F, -2F, 4F);
         horn2b.rotateAngleX = (float) -Math.PI / 3;
- 
+
         horn1.addChild(horn1b);
         horn2.addChild(horn2b);
 

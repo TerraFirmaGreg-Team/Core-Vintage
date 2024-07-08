@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -30,7 +32,6 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.world.classic.ChunkGenTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -87,7 +88,7 @@ public class ItemSeedsTFC extends Item implements IPlantable {
                     BlockPos blockpos1 = blockpos.up();
                     IBlockState iblockstate = worldIn.getBlockState(blockpos);
                     if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
-                            worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenTFC.FRESH_WATER) {
+                            worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER) {
                         BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                         worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState());
                         if (ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot, EnumFacing.UP, hand)
@@ -133,7 +134,7 @@ public class ItemSeedsTFC extends Item implements IPlantable {
                     BlockPos blockpos1 = blockpos.up();
                     IBlockState iblockstate = worldIn.getBlockState(blockpos);
                     if (iblockstate.getMaterial() == Material.WATER && (Integer) iblockstate.getValue(BlockLiquid.LEVEL) == 0 &&
-                            worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenTFC.FRESH_WATER) {
+                            worldIn.isAirBlock(blockpos1) && iblockstate == ChunkGenClassic.FRESH_WATER) {
                         BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                         worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState());
                         if (ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, EnumFacing.UP, handIn)

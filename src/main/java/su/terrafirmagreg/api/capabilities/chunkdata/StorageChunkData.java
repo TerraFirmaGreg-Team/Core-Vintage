@@ -1,6 +1,8 @@
 package su.terrafirmagreg.api.capabilities.chunkdata;
 
 import su.terrafirmagreg.api.lib.NBTBuilder;
+import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
+import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByteArray;
@@ -13,9 +15,6 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.util.Constants;
 
 
-import net.dries007.tfc.world.classic.DataLayer;
-import net.dries007.tfc.world.classic.worldgen.vein.Vein;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -23,13 +22,13 @@ import java.util.stream.Collectors;
 
 public final class StorageChunkData implements IStorage<ICapabilityChunkData> {
 
-    public static NBTTagByteArray write(DataLayer[] layers) {
+    public static NBTTagByteArray write(DataLayerClassic[] layers) {
         return new NBTTagByteArray(Arrays.stream(layers).map(x -> (byte) x.layerID).collect(Collectors.toList()));
     }
 
-    public static void read(DataLayer[] layers, byte[] bytes) {
+    public static void read(DataLayerClassic[] layers, byte[] bytes) {
         for (int i = bytes.length - 1; i >= 0; i--) {
-            layers[i] = DataLayer.get(bytes[i]);
+            layers[i] = DataLayerClassic.get(bytes[i]);
         }
     }
 

@@ -1,12 +1,14 @@
 package net.dries007.tfc.util.json;
 
+import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
+
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

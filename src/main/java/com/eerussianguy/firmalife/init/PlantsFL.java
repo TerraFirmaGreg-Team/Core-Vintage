@@ -1,13 +1,13 @@
 package com.eerussianguy.firmalife.init;
 
 import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeSequoia;
 
 import net.minecraft.util.ResourceLocation;
 
 
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class PlantsFL {
 
     public static final List<Plant> WRAPPERS = new ArrayList<>(8);
-    public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Constants.MODID_TFC, "cinnamon"), new TreeGenSequoia(), 28, 35, 280, 400,
+    public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Constants.MODID_TFC, "cinnamon"), new GeneratorTreeSequoia(), 28, 35, 280, 400,
             0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
     private static final int[] MAY = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0 };
     private static final int[] JUNE = new int[] { 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0 };

@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -141,12 +141,12 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_LION_HURT;
+        return SoundsAnimal.ANIMAL_LION_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_LION_DEATH;
+        return SoundsAnimal.ANIMAL_LION_DEATH;
     }
 
     @Override
@@ -201,7 +201,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_LION_CRY : SoundsAnimal.ANIMAL_LION_SAY;
     }
 
     @Nullable
@@ -219,7 +219,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
-        playSound(SoundAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
+        playSound(SoundsAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
     }
 
     /**

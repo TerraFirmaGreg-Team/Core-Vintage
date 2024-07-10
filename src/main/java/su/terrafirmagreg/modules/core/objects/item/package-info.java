@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package su.terrafirmagreg.modules.core.objects.blocks;
+package su.terrafirmagreg.modules.core.objects.item;
 
 import mcp.MethodsReturnNonnullByDefault;
 

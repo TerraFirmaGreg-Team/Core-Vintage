@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -105,12 +105,12 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_SABERTOOTH_HURT;
+        return SoundsAnimal.ANIMAL_SABERTOOTH_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_SABERTOOTH_DEATH;
+        return SoundsAnimal.ANIMAL_SABERTOOTH_DEATH;
     }
 
     @Override
@@ -173,7 +173,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_SABERTOOTH_CRY : SoundAnimal.ANIMAL_SABERTOOTH_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_SABERTOOTH_CRY : SoundsAnimal.ANIMAL_SABERTOOTH_SAY;
     }
 
     @Nullable
@@ -184,6 +184,6 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
     @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
-        playSound(SoundAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
+        playSound(SoundsAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
     }
 }

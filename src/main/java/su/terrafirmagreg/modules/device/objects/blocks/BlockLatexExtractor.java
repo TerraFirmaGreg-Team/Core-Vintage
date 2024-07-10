@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.tiles.TileLatexExtractor;
 
 import net.minecraft.block.Block;
@@ -131,24 +131,24 @@ public class BlockLatexExtractor extends BaseBlock implements ITileProvider {
             ItemStack stack = player.getHeldItem(hand);
             if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1) {
                 if (tile.makeCut()) {
-                    world.playSound(null, pos, SoundDevice.LATEX_EXTRACTOR_TRUNK_SCRATH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_TRUNK_SCRATH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     return true;
                 }
             } else if (!tile.hasPot() && tile.isValidPot(stack) && tile.addPot(stack)) {
                 stack.shrink(1);
-                world.playSound(null, pos, SoundDevice.LATEX_EXTRACTOR_BOWL_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_BOWL_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 return true;
             } else if (!tile.hasBase() && tile.isValidBase(stack) && tile.addBase(stack)) {
                 stack.shrink(1);
-                world.playSound(null, pos, SoundDevice.LATEX_EXTRACTOR_MOUNT_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_MOUNT_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 return true;
             } else if (stack.isEmpty() && tile.hasPot()) {
                 player.setHeldItem(hand, tile.removePot());
-                world.playSound(null, pos, SoundDevice.LATEX_EXTRACTOR_BOWL_GRAB, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_BOWL_GRAB, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 return true;
             } else if (stack.isEmpty() && tile.hasBase()) {
                 player.setHeldItem(hand, tile.removeBase());
-                world.playSound(null, pos, SoundDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 return true;
             }
         }

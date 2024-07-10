@@ -8,7 +8,7 @@ import su.terrafirmagreg.modules.device.network.SCPacketTileEntity;
 
 import net.minecraftforge.fml.relauncher.Side;
 
-public final class PacketDevice {
+public final class PacketsDevice {
 
     public static void onRegister(IPacketRegistry registry) {
         registry.register(

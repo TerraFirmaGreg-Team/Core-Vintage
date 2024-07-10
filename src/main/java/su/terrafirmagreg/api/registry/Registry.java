@@ -10,6 +10,7 @@ import su.terrafirmagreg.api.registry.provider.IOreDictProvider;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.objects.command.CommandManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -26,6 +27,7 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -47,11 +49,13 @@ public record Registry(RegistryManager registryManager) {
         for (var block : this.registryManager.getBlocks()) {
             event.getRegistry().register(block);
         }
+
+        this.onRegisterTileEntities();
     }
 
     public void onRegisterItem(RegistryEvent.Register<Item> event) {
         for (var item : this.registryManager.getItems()) {
-            event.getRegistry().registerAll(item);
+            event.getRegistry().register(item);
         }
     }
 
@@ -75,7 +79,6 @@ public record Registry(RegistryManager registryManager) {
                 BiomeDictionary.addTypes(biome, biome.getTypes());
             }
         }
-
     }
 
     public void onRegisterSound(RegistryEvent.Register<SoundEvent> event) {
@@ -127,11 +130,19 @@ public record Registry(RegistryManager registryManager) {
         }
     }
 
+    public void onRegisterCommand(FMLServerStartingEvent event) {
+        var manager = CommandManager.create(event);
+        for (var command : this.registryManager.getCommands()) {
+            manager.addCommand(command);
+        }
+    }
+
     // --------------------------------------------------------------------------
     // - Client
     // --------------------------------------------------------------------------
 
     @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unchecked")
     public void onRegisterModels(ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(new CustomModelLoader());
 
@@ -160,11 +171,7 @@ public record Registry(RegistryManager registryManager) {
                 ModelUtils.registerCustomMeshDefinition(item, provider.getItemMesh());
             }
         }
-    }
 
-    @SideOnly(Side.CLIENT)
-    @SuppressWarnings("unchecked")
-    public void onRegisterTileEntitySpecialRenderer() {
         for (var provider : this.registryManager.getTiles()) {
             final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 

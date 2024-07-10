@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import net.minecraft.block.Block;
@@ -115,10 +115,10 @@ public class EntityCoyoteTFC extends EntityAnimalMammal implements IPredator {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_COYOTE_HURT;}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundsAnimal.ANIMAL_COYOTE_HURT;}
 
     @Override
-    protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_COYOTE_DEATH;}
+    protected SoundEvent getDeathSound() {return SoundsAnimal.ANIMAL_COYOTE_DEATH;}
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
@@ -172,7 +172,7 @@ public class EntityCoyoteTFC extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COYOTE_CRY : SoundAnimal.ANIMAL_COYOTE_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COYOTE_CRY : SoundsAnimal.ANIMAL_COYOTE_SAY;
     }
 
     @Nullable

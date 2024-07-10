@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import net.minecraft.block.Block;
@@ -126,10 +126,10 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_LION_HURT;}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundsAnimal.ANIMAL_LION_HURT;}
 
     @Override
-    protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_LION_DEATH;}
+    protected SoundEvent getDeathSound() {return SoundsAnimal.ANIMAL_LION_DEATH;}
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
@@ -182,7 +182,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
     }
 
     @Override
-    protected SoundEvent getAmbientSound() {return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_LION_CRY : SoundAnimal.ANIMAL_LION_SAY;}
+    protected SoundEvent getAmbientSound() {return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_LION_CRY : SoundsAnimal.ANIMAL_LION_SAY;}
 
     @Nullable
     protected ResourceLocation getLootTable() {return LootTablesAnimal.ANIMALS_LION;}
@@ -197,7 +197,7 @@ public class EntityLionTFC extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
-        playSound(SoundAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
+        playSound(SoundsAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
     }
 
     /**

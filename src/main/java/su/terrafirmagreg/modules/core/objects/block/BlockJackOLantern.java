@@ -1,5 +1,7 @@
-package su.terrafirmagreg.modules.core.objects.blocks;
+package su.terrafirmagreg.modules.core.objects.block;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -20,13 +22,6 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.ConfigTFC;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 

@@ -130,6 +130,7 @@ public class ModuleEventRouter {
                         this.fireEvent(module -> {
                             module.getLogger().debug("Server-starting start");
                             module.onServerStarting(event);
+                            module.getRegistry().onRegisterCommand(event);
                             module.getLogger().debug("Server-starting complete");
                         })
         );
@@ -189,7 +190,6 @@ public class ModuleEventRouter {
         this.fireEvent(module -> {
             module.getLogger().debug("Register BlockEvent start");
             module.getRegistry().onRegisterBlock(event);
-            module.getRegistry().onRegisterTileEntities();
             module.getLogger().debug("Register BlockEvent complete");
         });
     }
@@ -296,7 +296,6 @@ public class ModuleEventRouter {
         this.fireEvent(module -> {
             module.getLogger().debug("Register ModelsEvent start");
             module.getRegistry().onRegisterModels(event);
-            module.getRegistry().onRegisterTileEntitySpecialRenderer();
             module.getLogger().debug("Register ModelsEvent complete");
         });
     }

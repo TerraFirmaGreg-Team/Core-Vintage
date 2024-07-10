@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.objects.items;
+package su.terrafirmagreg.modules.core.objects.item;
 
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.api.spi.item.BaseItem;

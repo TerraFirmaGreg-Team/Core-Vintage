@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIFindNest;
@@ -222,7 +222,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
         super.onLivingUpdate();
         if (this.getClass() == EntityAnimalChicken.class && this.getGender() == Gender.MALE && !this.world.isRemote && !this.isChild() &&
                 CalendarTFC.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
-            this.world.playSound(null, this.getPosition(), SoundAnimal.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
+            this.world.playSound(null, this.getPosition(), SoundsAnimal.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
         }
         this.oFlap = this.wingRotation;
         this.oFlapSpeed = this.destPos;

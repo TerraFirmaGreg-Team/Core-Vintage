@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.modules.core.objects.blocks.BlockAggregate;
-import su.terrafirmagreg.modules.core.objects.blocks.BlockDebug;
-import su.terrafirmagreg.modules.core.objects.blocks.BlockJackOLantern;
-import su.terrafirmagreg.modules.core.objects.blocks.BlockPuddle;
-import su.terrafirmagreg.modules.core.objects.blocks.BlockThatch;
+import su.terrafirmagreg.modules.core.objects.block.BlockAggregate;
+import su.terrafirmagreg.modules.core.objects.block.BlockDebug;
+import su.terrafirmagreg.modules.core.objects.block.BlockJackOLantern;
+import su.terrafirmagreg.modules.core.objects.block.BlockPuddle;
+import su.terrafirmagreg.modules.core.objects.block.BlockThatch;
 
 public final class BlocksCore {
 

@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.tiles.TileFirePit;
 import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
 import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
@@ -135,7 +135,7 @@ public class ItemFireStarter extends BaseItem {
             }
 
             if (count % 3 == 1) {
-                player.playSound(SoundDevice.FIRE_STARTER, 0.5f, 0.05F);
+                player.playSound(SoundsDevice.FIRE_STARTER, 0.5f, 0.05F);
             }
         } else if (countLeft == 1) // Server, and last tick of use
         {

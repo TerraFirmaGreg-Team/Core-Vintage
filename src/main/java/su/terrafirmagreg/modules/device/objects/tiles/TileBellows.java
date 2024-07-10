@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 
@@ -71,7 +71,7 @@ public class TileBellows extends BaseTile {
         long time = world.getTotalWorldTime() - lastPushed;
         if (time < 20)
             return true;
-        world.playSound(null, pos, SoundDevice.BELLOWS_BLOW_AIR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        world.playSound(null, pos, SoundsDevice.BELLOWS_BLOW_AIR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         if (!world.isRemote) {
             lastPushed = world.getTotalWorldTime();

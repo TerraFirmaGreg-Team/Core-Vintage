@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.entity.animal;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -61,10 +61,10 @@ public class EntityJackalTFC extends EntityCoyoteTFC implements IPredator {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_JACKAL_HURT;}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundsAnimal.ANIMAL_JACKAL_HURT;}
 
     @Override
-    protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_JACKAL_DEATH;}
+    protected SoundEvent getDeathSound() {return SoundsAnimal.ANIMAL_JACKAL_DEATH;}
 
     @Override
     protected void initEntityAI() {
@@ -95,7 +95,7 @@ public class EntityJackalTFC extends EntityCoyoteTFC implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_JACKAL_CRY : SoundAnimal.ANIMAL_JACKAL_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_JACKAL_CRY : SoundsAnimal.ANIMAL_JACKAL_SAY;
     }
 
     @Nullable

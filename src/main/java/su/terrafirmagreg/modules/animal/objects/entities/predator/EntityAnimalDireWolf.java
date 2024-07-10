@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -106,12 +106,12 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_DIREWOLF_HURT;
+        return SoundsAnimal.ANIMAL_DIREWOLF_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_DIREWOLF_DEATH;
+        return SoundsAnimal.ANIMAL_DIREWOLF_DEATH;
     }
 
     @Override
@@ -166,7 +166,7 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DIREWOLF_CRY : SoundAnimal.ANIMAL_DIREWOLF_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DIREWOLF_CRY : SoundsAnimal.ANIMAL_DIREWOLF_SAY;
     }
 
     @Nullable

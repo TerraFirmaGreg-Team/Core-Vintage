@@ -7,10 +7,10 @@ import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.EntitiesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
-import su.terrafirmagreg.modules.device.init.PacketDevice;
+import su.terrafirmagreg.modules.device.init.PacketsDevice;
 import su.terrafirmagreg.modules.device.init.RecipesDevice;
-import su.terrafirmagreg.modules.device.init.RegistryDevice;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.RegistriesDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.plugin.top.PluginTheOneProbe;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,7 +39,7 @@ public final class ModuleDevice extends ModuleBase {
         BlocksDevice.onRegister(registryManager);
         ItemsDevice.onRegister(registryManager);
         EntitiesDevice.onRegister(registryManager);
-        SoundDevice.onRegister(registryManager);
+        SoundsDevice.onRegister(registryManager);
     }
 
     @SideOnly(Side.CLIENT)
@@ -51,13 +51,13 @@ public final class ModuleDevice extends ModuleBase {
     @Override
     protected void onNetworkRegister() {
 
-        PacketDevice.onRegister(packetRegistry);
+        PacketsDevice.onRegister(packetRegistry);
     }
 
     @Override
     protected void onNewRegister() {
 
-        RegistryDevice.onRegister();
+        RegistriesDevice.onRegister();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockLatexExtractor;
 
 import net.minecraft.block.properties.IProperty;
@@ -82,7 +82,7 @@ public class ItemGroove extends ItemTechMetal {
                 }
                 player.getHeldItem(hand).shrink(1);
                 if (!worldIn.isRemote) {
-                    worldIn.playSound(null, pos, SoundDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    worldIn.playSound(null, pos, SoundsDevice.LATEX_EXTRACTOR_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     worldIn.setBlockState(pos.offset(facing), BlocksDevice.LATEX_EXTRACTOR.getDefaultState()
                             .withProperty(FACING, facing));
                 }

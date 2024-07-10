@@ -660,8 +660,8 @@ public final class CommonEventHandler {
         // Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
         // This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
         if (event.getWorld().getBlockState(pos).getBlock() == BlocksCore.THATCH || event.getWorld()
-                .getBlockState(pos.up())
-                .getBlock() == BlocksCore.THATCH) {
+                                                                                           .getBlockState(pos.up())
+                                                                                           .getBlock() == BlocksCore.THATCH) {
             event.setResult(Event.Result.DENY);
         }
     }

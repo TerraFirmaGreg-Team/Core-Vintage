@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.block.Block;
@@ -95,12 +95,12 @@ public class EntityTurkeyTFC extends su.terrafirmagreg.modules.animal.objects.en
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_TURKEY_HURT;
+        return SoundsAnimal.ANIMAL_TURKEY_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_TURKEY_DEATH;
+        return SoundsAnimal.ANIMAL_TURKEY_DEATH;
     }
 
     @Override
@@ -119,7 +119,7 @@ public class EntityTurkeyTFC extends su.terrafirmagreg.modules.animal.objects.en
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_TURKEY_SAY;
+        return SoundsAnimal.ANIMAL_TURKEY_SAY;
     }
 
     @Nullable

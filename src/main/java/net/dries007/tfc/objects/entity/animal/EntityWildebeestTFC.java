@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
@@ -104,12 +104,12 @@ public class EntityWildebeestTFC extends EntityAnimalMammal implements IHuntable
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_WILDEBEEST_HURT;
+        return SoundsAnimal.ANIMAL_WILDEBEEST_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_WILDEBEEST_DEATH;
+        return SoundsAnimal.ANIMAL_WILDEBEEST_DEATH;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class EntityWildebeestTFC extends EntityAnimalMammal implements IHuntable
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_WILDEBEEST_SAY;
+        return SoundsAnimal.ANIMAL_WILDEBEEST_SAY;
     }
 
     @Nullable

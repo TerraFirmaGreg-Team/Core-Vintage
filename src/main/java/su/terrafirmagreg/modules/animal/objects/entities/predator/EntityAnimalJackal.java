@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
 
@@ -62,12 +62,12 @@ public class EntityAnimalJackal extends EntityAnimalCoyote implements IPredator 
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_JACKAL_HURT;
+        return SoundsAnimal.ANIMAL_JACKAL_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_JACKAL_DEATH;
+        return SoundsAnimal.ANIMAL_JACKAL_DEATH;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class EntityAnimalJackal extends EntityAnimalCoyote implements IPredator 
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_JACKAL_CRY : SoundAnimal.ANIMAL_JACKAL_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_JACKAL_CRY : SoundsAnimal.ANIMAL_JACKAL_SAY;
     }
 
     @Nullable

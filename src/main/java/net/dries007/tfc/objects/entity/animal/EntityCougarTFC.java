@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.entity.animal;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -58,10 +58,10 @@ public class EntityCougarTFC extends EntityPantherTFC implements IPredator {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_COUGAR_HURT;}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundsAnimal.ANIMAL_COUGAR_HURT;}
 
     @Override
-    protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_COUGAR_DEATH;}
+    protected SoundEvent getDeathSound() {return SoundsAnimal.ANIMAL_COUGAR_DEATH;}
 
     @Override
     protected void initEntityAI() {
@@ -92,7 +92,7 @@ public class EntityCougarTFC extends EntityPantherTFC implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COUGAR_CRY : SoundAnimal.ANIMAL_COUGAR_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COUGAR_CRY : SoundsAnimal.ANIMAL_COUGAR_SAY;
     }
 
     @Nullable

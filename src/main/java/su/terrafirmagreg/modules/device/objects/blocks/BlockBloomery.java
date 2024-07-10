@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -30,13 +32,6 @@ import net.minecraft.world.World;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.util.block.Multiblock;
 
 import org.jetbrains.annotations.Nullable;

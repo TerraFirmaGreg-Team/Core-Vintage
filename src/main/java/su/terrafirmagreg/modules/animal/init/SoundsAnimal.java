@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 
 import net.minecraft.util.SoundEvent;
 
-public final class SoundAnimal {
+public final class SoundsAnimal {
 
     public static SoundEvent ANIMAL_BEAR_SAY;
     public static SoundEvent ANIMAL_BEAR_CRY;

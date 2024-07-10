@@ -8,7 +8,7 @@ import su.terrafirmagreg.modules.core.network.SCPacketTemperature;
 
 import net.minecraftforge.fml.relauncher.Side;
 
-public final class PacketCore {
+public final class PacketsCore {
 
     public static void onRegister(IPacketRegistry registry) {
 

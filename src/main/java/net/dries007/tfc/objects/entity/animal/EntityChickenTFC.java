@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.block.Block;
@@ -222,7 +222,7 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
         super.onLivingUpdate();
         if (this.getClass() == EntityChickenTFC.class && this.getGender() == Gender.MALE && !this.world.isRemote && !this.isChild() &&
                 CalendarTFC.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
-            this.world.playSound(null, this.getPosition(), SoundAnimal.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
+            this.world.playSound(null, this.getPosition(), SoundsAnimal.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
         }
         this.oFlap = this.wingRotation;
         this.oFlapSpeed = this.destPos;

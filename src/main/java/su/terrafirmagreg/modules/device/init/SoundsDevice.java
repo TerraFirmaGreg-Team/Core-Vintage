@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.registry.RegistryManager;
 
 import net.minecraft.util.SoundEvent;
 
-public final class SoundDevice {
+public final class SoundsDevice {
 
     public static SoundEvent FLASK_BREAK;
     public static SoundEvent FIRE_STARTER;

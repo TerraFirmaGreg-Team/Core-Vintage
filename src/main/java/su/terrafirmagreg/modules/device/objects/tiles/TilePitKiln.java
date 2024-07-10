@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -32,11 +33,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import net.dries007.tfc.ConfigTFC;
-
-
-import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
-
-
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TEPlacedItem;

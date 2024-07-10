@@ -33,10 +33,11 @@ import su.terrafirmagreg.modules.core.event.DebugInfoEventHandler;
 import su.terrafirmagreg.modules.core.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.core.event.PuddlesEventHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.CommandsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
-import su.terrafirmagreg.modules.core.init.PacketCore;
+import su.terrafirmagreg.modules.core.init.PacketsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -68,7 +69,7 @@ public final class ModuleCore extends ModuleBase {
     @Override
     public void onNetworkRegister() {
 
-        PacketCore.onRegister(packetRegistry);
+        PacketsCore.onRegister(packetRegistry);
     }
 
     @Override
@@ -79,6 +80,7 @@ public final class ModuleCore extends ModuleBase {
         ItemsCore.onRegister(registryManager);
         PotionsCore.onRegister(registryManager);
         LootTablesCore.onRegister(registryManager);
+        CommandsCore.onRegister(registryManager);
     }
 
     @Override

@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -88,17 +88,17 @@ public class EntityDuckTFC extends EntityChickenTFC implements ILivestock {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_DUCK_HURT;
+        return SoundsAnimal.ANIMAL_DUCK_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_DUCK_DEATH;
+        return SoundsAnimal.ANIMAL_DUCK_DEATH;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DUCK_CRY : SoundAnimal.ANIMAL_DUCK_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DUCK_CRY : SoundsAnimal.ANIMAL_DUCK_SAY;
     }
 
     @Nullable

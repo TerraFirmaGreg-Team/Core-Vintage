@@ -1,10 +1,12 @@
-package net.dries007.tfc.command;
+package su.terrafirmagreg.modules.core.objects.command;
+
+import su.terrafirmagreg.api.spi.command.BaseCommand;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -19,25 +21,21 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 
-import org.jetbrains.annotations.NotNull;
-
-public class CommandStripWorld extends CommandBase {
+public class CommandStripWorld extends BaseCommand {
 
     @Override
-    @NotNull
     public String getName() {
         return "stripworld";
     }
 
     @Override
-    @NotNull
     public String getUsage(ICommandSender sender) {
-        return "tfc.command.stripworld.usage";
+        return ModUtils.localize("command", "stripworld.usage");
     }
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        if (args.length != 1) throw new WrongUsageException("tfc.command.stripworld.failed");
+        if (args.length != 1) throw new WrongUsageException(ModUtils.localize("command", "stripworld.failed"));
         int radius = parseInt(args[0], 1, 250);
 
         if (sender.getCommandSenderEntity() == null) return;
@@ -62,7 +60,7 @@ public class CommandStripWorld extends CommandBase {
             }
         }
 
-        sender.sendMessage(new TextComponentTranslation("tfc.command.stripworld.done"));
+        sender.sendMessage(new TextComponentTranslation(ModUtils.localize("command", "stripworld.done")));
     }
 
     @Override

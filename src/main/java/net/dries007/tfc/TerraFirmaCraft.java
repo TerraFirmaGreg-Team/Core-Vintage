@@ -29,13 +29,6 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
-import net.dries007.tfc.command.CommandDebugInfo;
-import net.dries007.tfc.command.CommandFindVeins;
-import net.dries007.tfc.command.CommandHeat;
-import net.dries007.tfc.command.CommandPlayerTFC;
-import net.dries007.tfc.command.CommandStripWorld;
-import net.dries007.tfc.command.CommandTimeTFC;
-import net.dries007.tfc.command.CommandWorkChunk;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
 import net.dries007.tfc.network.PacketChunkData;
@@ -188,14 +181,6 @@ public final class TerraFirmaCraft {
 
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
-
-        event.registerServerCommand(new CommandStripWorld());
-        event.registerServerCommand(new CommandHeat());
-        event.registerServerCommand(new CommandPlayerTFC());
-        event.registerServerCommand(new CommandTimeTFC());
-        event.registerServerCommand(new CommandFindVeins());
-        event.registerServerCommand(new CommandDebugInfo());
-        event.registerServerCommand(new CommandWorkChunk());
 
         // Initialize calendar for the current server
         CalendarTFC.INSTANCE.init(event.getServer());

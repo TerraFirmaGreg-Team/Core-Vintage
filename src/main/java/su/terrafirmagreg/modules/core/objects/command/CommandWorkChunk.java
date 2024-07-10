@@ -1,6 +1,8 @@
-package net.dries007.tfc.command;
+package su.terrafirmagreg.modules.core.objects.command;
 
-import net.minecraft.command.CommandBase;
+import su.terrafirmagreg.api.spi.command.BaseCommand;
+import su.terrafirmagreg.api.util.ModUtils;
+
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -13,23 +15,21 @@ import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 
 import org.jetbrains.annotations.NotNull;
 
-public class CommandWorkChunk extends CommandBase {
+public class CommandWorkChunk extends BaseCommand {
 
     @Override
-    @NotNull
     public String getName() {
-        return "work";
+        return "workchunk";
     }
 
     @Override
-    @NotNull
     public String getUsage(@NotNull ICommandSender iCommandSender) {
-        return "tfc.command.work.usage";
+        return ModUtils.localize("command", "workchunk.usage");
     }
 
     @Override
     public void execute(MinecraftServer minecraftServer, ICommandSender iCommandSender, String[] strings) throws CommandException {
-        if (strings.length != 2) throw new WrongUsageException("tfc.command.work.args");
+        if (strings.length != 2) throw new WrongUsageException(ModUtils.localize("command", "workchunk.args"));
         String action = strings[0];
         int work = parseInt(strings[1]);
 
@@ -44,10 +44,10 @@ public class CommandWorkChunk extends CommandBase {
                     work = 0;
                 data.setWork(work);
             } else {
-                throw new WrongUsageException("tfc.command.work.string");
+                throw new WrongUsageException(ModUtils.localize("command", "workchunk.string"));
             }
         } else {
-            throw new WrongUsageException("tfc.command.work.nonentity");
+            throw new WrongUsageException(ModUtils.localize("command", "workchunk.nonentity"));
         }
 
     }

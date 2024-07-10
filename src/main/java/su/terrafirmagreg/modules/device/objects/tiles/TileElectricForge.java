@@ -8,7 +8,7 @@ import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvide
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiElectricForge;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockElectricForge;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerElectricForge;
 
@@ -241,7 +241,7 @@ public class TileElectricForge extends TEInventory
     @SideOnly(Side.CLIENT)
     @Override
     public SoundEvent getSoundEvent() {
-        return SoundDevice.INDUCTION_WORK;
+        return SoundsDevice.INDUCTION_WORK;
     }
 
     @Override

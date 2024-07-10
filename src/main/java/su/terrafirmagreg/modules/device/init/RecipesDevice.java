@@ -41,7 +41,7 @@ public final class RecipesDevice {
 
     public static void onRegister() {
 
-        quernRecipes(RegistryDevice.QUERN);
+        quernRecipes(RegistriesDevice.QUERN);
 
     }
 

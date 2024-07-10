@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.objects.entities;
+package su.terrafirmagreg.modules.core.objects.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

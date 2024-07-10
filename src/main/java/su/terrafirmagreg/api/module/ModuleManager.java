@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ModuleManager {
+public final class ModuleManager {
 
     private static final ModuleManager INSTANCE = new ModuleManager();
     private static final LoggingHelper LOGGER = new LoggingHelper(ModuleManager.class.getSimpleName());

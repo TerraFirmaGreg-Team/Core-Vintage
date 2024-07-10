@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.lib.LootBuilder;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
-import su.terrafirmagreg.api.registry.provider.IOreDictProvider;
 import su.terrafirmagreg.api.spi.biome.BaseBiome;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
 import su.terrafirmagreg.api.spi.item.IItemSettings;
@@ -11,6 +10,7 @@ import su.terrafirmagreg.api.util.WorldUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.command.ICommand;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -117,9 +117,9 @@ public class RegistryManager {
     private final List<Enchantment> enchantments = NonNullList.create();
 
     /**
-     * A list of all the oreDict registered here.
+     * A list of all the commands registered here.
      */
-    private final List<IOreDictProvider> oreDicts = NonNullList.create();
+    private final List<ICommand> commands = NonNullList.create();
 
     /**
      * The creative tab used by the mod. This can be null.
@@ -415,6 +415,21 @@ public class RegistryManager {
         enchant.setRegistryName(new ResourceLocation(this.modID, name));
         this.enchantments.add(enchant);
         return enchant;
+    }
+
+    //endregion
+
+    //region ===== Enchantment
+
+    /**
+     * Registers a new command. Registration will be handled for you.
+     *
+     * @param command The command to add.
+     */
+    public ICommand command(ICommand command) {
+
+        this.commands.add(command);
+        return command;
     }
 
     //endregion

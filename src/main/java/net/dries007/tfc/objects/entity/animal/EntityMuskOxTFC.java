@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntitySheep;
@@ -102,17 +102,17 @@ public class EntityMuskOxTFC extends EntitySheepTFC implements ILivestock {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_MUSKOX_HURT;
+        return SoundsAnimal.ANIMAL_MUSKOX_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_MUSKOX_DEATH;
+        return SoundsAnimal.ANIMAL_MUSKOX_DEATH;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_MUSKOX_SAY;
+        return SoundsAnimal.ANIMAL_MUSKOX_SAY;
     }
 
     @Nullable

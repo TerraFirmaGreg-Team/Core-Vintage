@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.objects.blocks;
+package su.terrafirmagreg.modules.core.objects.block;
 
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
 

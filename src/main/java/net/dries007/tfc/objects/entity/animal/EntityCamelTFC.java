@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.block.Block;
@@ -71,14 +71,14 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_CAMEL_CRY : SoundAnimal.ANIMAL_CAMEL_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_CAMEL_CRY : SoundsAnimal.ANIMAL_CAMEL_SAY;
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_CAMEL_HURT;}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundsAnimal.ANIMAL_CAMEL_HURT;}
 
     @Override
-    protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_CAMEL_DEATH;}
+    protected SoundEvent getDeathSound() {return SoundsAnimal.ANIMAL_CAMEL_DEATH;}
 
     @SuppressWarnings("deprecation")
     protected void playStepSound(BlockPos pos, Block blockIn) {

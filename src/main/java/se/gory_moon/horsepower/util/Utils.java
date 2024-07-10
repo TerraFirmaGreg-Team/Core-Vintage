@@ -114,26 +114,18 @@ public class Utils {
     }
 
     public static void sendSavedErrors() {
-        if (FMLCommonHandler.instance().getSide().isClient() && FMLClientHandler.instance()
-                .getClientPlayerEntity() != null && HPRecipes.ERRORS.size() > 0) {
-            FMLClientHandler.instance()
-                    .getClientPlayerEntity()
+        if (FMLCommonHandler.instance().getSide().isClient() && FMLClientHandler.instance().getClientPlayerEntity() != null && !HPRecipes.ERRORS.isEmpty()) {
+            FMLClientHandler.instance().getClientPlayerEntity()
                     .sendMessage(new TextComponentString(TextFormatting.RED + "" + TextFormatting.BOLD + "HorsePower config errors"));
-            FMLClientHandler.instance()
-                    .getClientPlayerEntity()
-                    .sendMessage(
-                            new TextComponentString(TextFormatting.RED + "" + TextFormatting.BOLD + "-----------------------------------------"));
-            HPRecipes.ERRORS.forEach(s -> FMLClientHandler.instance()
-                    .getClientPlayerEntity()
+            FMLClientHandler.instance().getClientPlayerEntity()
+                    .sendMessage(new TextComponentString(TextFormatting.RED + "" + TextFormatting.BOLD + "-----------------------------------------"));
+            HPRecipes.ERRORS.forEach(s -> FMLClientHandler.instance().getClientPlayerEntity()
                     .sendMessage(new TextComponentString(TextFormatting.RED + s).setStyle(
-                            new Style().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, Loader.instance()
-                                            .getConfigDir() + "/horsepower.cfg"))
+                            new Style().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, Loader.instance().getConfigDir() + "/horsepower.cfg"))
                                     .setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                                             new TextComponentString("Changed in in-game config or click to open the config file to fix this"))))));
-            FMLClientHandler.instance()
-                    .getClientPlayerEntity()
-                    .sendMessage(
-                            new TextComponentString(TextFormatting.RED + "" + TextFormatting.BOLD + "-----------------------------------------"));
+            FMLClientHandler.instance().getClientPlayerEntity()
+                    .sendMessage(new TextComponentString(TextFormatting.RED + "" + TextFormatting.BOLD + "-----------------------------------------"));
             HPRecipes.ERRORS.clear();
         }
     }

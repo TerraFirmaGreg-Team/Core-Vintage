@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -91,12 +91,12 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_ZEBU_HURT;
+        return SoundsAnimal.ANIMAL_ZEBU_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_ZEBU_DEATH;
+        return SoundsAnimal.ANIMAL_ZEBU_DEATH;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_ZEBU_SAY;
+        return SoundsAnimal.ANIMAL_ZEBU_SAY;
     }
 
     @Nullable

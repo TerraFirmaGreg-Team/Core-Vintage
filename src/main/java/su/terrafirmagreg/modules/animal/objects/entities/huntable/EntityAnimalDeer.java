@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import net.minecraft.block.Block;
@@ -108,12 +108,12 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_DEER_HURT;
+        return SoundsAnimal.ANIMAL_DEER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_DEER_DEATH;
+        return SoundsAnimal.ANIMAL_DEER_DEATH;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_DEER_CRY : SoundAnimal.ANIMAL_DEER_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DEER_CRY : SoundsAnimal.ANIMAL_DEER_SAY;
     }
 
     @Nullable

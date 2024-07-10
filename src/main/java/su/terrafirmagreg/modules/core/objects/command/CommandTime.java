@@ -1,6 +1,7 @@
-package net.dries007.tfc.command;
+package su.terrafirmagreg.modules.core.objects.command;
 
-import net.minecraft.command.CommandBase;
+import su.terrafirmagreg.api.spi.command.BaseCommand;
+
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
@@ -10,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
 
@@ -19,12 +19,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-@MethodsReturnNonnullByDefault
-public class CommandTimeTFC extends CommandBase {
+public class CommandTime extends BaseCommand {
 
     @Override
     public String getName() {
-        return "timetfc";
+        return "time";
     }
 
     @Override

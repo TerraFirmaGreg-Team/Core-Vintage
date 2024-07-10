@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -83,17 +83,17 @@ public class EntityQuailTFC extends EntityChickenTFC implements ILivestock {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_QUAIL_HURT;
+        return SoundsAnimal.ANIMAL_QUAIL_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_QUAIL_DEATH;
+        return SoundsAnimal.ANIMAL_QUAIL_DEATH;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_QUAIL_SAY;
+        return SoundsAnimal.ANIMAL_QUAIL_SAY;
     }
 
     @Nullable

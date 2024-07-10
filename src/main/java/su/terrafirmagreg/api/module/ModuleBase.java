@@ -70,6 +70,7 @@ public abstract class ModuleBase {
 
     @Getter
     private Registry registry;
+
     @Getter
     @Setter
     private File configurationDirectory;
@@ -80,7 +81,7 @@ public abstract class ModuleBase {
     }
 
     protected void enableAutoRegistry() {
-        
+
         enableAutoRegistry(null);
     }
 

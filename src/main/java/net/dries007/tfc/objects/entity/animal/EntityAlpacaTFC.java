@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -117,17 +117,17 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_ALPACA_HURT;
+        return SoundsAnimal.ANIMAL_ALPACA_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_ALPACA_DEATH;
+        return SoundsAnimal.ANIMAL_ALPACA_DEATH;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_ALPACA_CRY : SoundAnimal.ANIMAL_ALPACA_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_ALPACA_CRY : SoundsAnimal.ANIMAL_ALPACA_SAY;
     }
 
     @Nullable

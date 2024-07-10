@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.spi.item.IItemSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -208,7 +208,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSetti
                         if (stack.getItemDamage() == stack.getMaxDamage()) {
                             ResourceLocation name = stack.getItem().getRegistryName();
                             //break item, play sound
-                            worldIn.playSound(null, entityLiving.getPosition(), SoundDevice.FLASK_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                            worldIn.playSound(null, entityLiving.getPosition(), SoundsDevice.FLASK_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
                             if (name.toString().contains("leather")) {
                                 ItemHandlerHelper.giveItemToPlayer((EntityPlayer) entityLiving, new ItemStack(ItemsDevice.BROKEN_LEATHER_FLASK));
                             } else {

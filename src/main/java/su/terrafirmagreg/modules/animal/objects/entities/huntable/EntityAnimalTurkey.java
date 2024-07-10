@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 
 import net.minecraft.block.Block;
@@ -96,12 +96,12 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_TURKEY_HURT;
+        return SoundsAnimal.ANIMAL_TURKEY_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_TURKEY_DEATH;
+        return SoundsAnimal.ANIMAL_TURKEY_DEATH;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_TURKEY_SAY;
+        return SoundsAnimal.ANIMAL_TURKEY_SAY;
     }
 
     @Nullable

@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.ModuleDevice;
-import su.terrafirmagreg.modules.device.init.SoundDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.network.SCPacketFridge;
 import su.terrafirmagreg.modules.device.network.SCPacketTileEntity;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
@@ -312,7 +312,7 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
         if (openingState != 0) return false; //Already opening/closing
         if (!world.isRemote) {
             if (value) {
-                world.playSound(null, pos, SoundDevice.FRIDGE_OPEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, SoundsDevice.FRIDGE_OPEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 open = 0F;
                 openingState = 1;
             } else {
@@ -345,7 +345,7 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
             if (open <= 0F) {
                 open = 0F;
                 openingState = 0;
-                world.playSound(null, pos, SoundDevice.FRIDGE_CLOSE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, SoundsDevice.FRIDGE_CLOSE, SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
         }
         if (!world.isRemote) {

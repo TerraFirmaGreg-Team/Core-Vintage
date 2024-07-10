@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.init;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.device.objects.items.ItemCraftingTool;
 import su.terrafirmagreg.modules.device.objects.items.ItemDeviceMisc;
@@ -10,10 +12,6 @@ import su.terrafirmagreg.modules.device.objects.items.ItemMetalFlask;
 import su.terrafirmagreg.modules.device.objects.items.ItemSling;
 import su.terrafirmagreg.modules.device.objects.items.ItemSlingAmmo;
 import su.terrafirmagreg.modules.device.objects.items.ItemSlingReinforced;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 public final class ItemsDevice {
 

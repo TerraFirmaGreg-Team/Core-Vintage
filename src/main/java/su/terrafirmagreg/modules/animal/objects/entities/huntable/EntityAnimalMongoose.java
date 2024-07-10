@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import net.minecraft.block.Block;
@@ -102,12 +102,12 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_MONGOOSE_HURT;
+        return SoundsAnimal.ANIMAL_MONGOOSE_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_MONGOOSE_DEATH;
+        return SoundsAnimal.ANIMAL_MONGOOSE_DEATH;
     }
 
     @Override
@@ -126,7 +126,7 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_MONGOOSE_SAY;
+        return SoundsAnimal.ANIMAL_MONGOOSE_SAY;
     }
 
     @Nullable

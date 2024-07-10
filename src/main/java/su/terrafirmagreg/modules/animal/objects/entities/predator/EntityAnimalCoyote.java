@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -115,12 +115,12 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_COYOTE_HURT;
+        return SoundsAnimal.ANIMAL_COYOTE_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_COYOTE_DEATH;
+        return SoundsAnimal.ANIMAL_COYOTE_DEATH;
     }
 
     @Override
@@ -175,7 +175,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return MathConstants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COYOTE_CRY : SoundAnimal.ANIMAL_COYOTE_SAY;
+        return MathConstants.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COYOTE_CRY : SoundsAnimal.ANIMAL_COYOTE_SAY;
     }
 
     @Nullable

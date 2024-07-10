@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
 
 import net.minecraft.block.Block;
@@ -103,10 +103,10 @@ public class EntityPantherTFC extends EntityAnimalMammal implements IPredator {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundAnimal.ANIMAL_PANTHER_HURT;}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundsAnimal.ANIMAL_PANTHER_HURT;}
 
     @Override
-    protected SoundEvent getDeathSound() {return SoundAnimal.ANIMAL_PANTHER_DEATH;}
+    protected SoundEvent getDeathSound() {return SoundsAnimal.ANIMAL_PANTHER_DEATH;}
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
@@ -160,7 +160,7 @@ public class EntityPantherTFC extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return MathConstants.RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_PANTHER_CRY : SoundAnimal.ANIMAL_PANTHER_SAY;
+        return MathConstants.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_PANTHER_CRY : SoundsAnimal.ANIMAL_PANTHER_SAY;
     }
 
     @Nullable
@@ -179,6 +179,6 @@ public class EntityPantherTFC extends EntityAnimalMammal implements IPredator {
 
     @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
-        playSound(SoundAnimal.ANIMAL_FELINE_STEP, 0.14F, 1.1F);
+        playSound(SoundsAnimal.ANIMAL_FELINE_STEP, 0.14F, 1.1F);
     }
 }

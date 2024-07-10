@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.objects.entities.ai.EntityAnimalAIWanderHuntArea;
@@ -61,12 +61,12 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_COUGAR_HURT;
+        return SoundsAnimal.ANIMAL_COUGAR_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_COUGAR_DEATH;
+        return SoundsAnimal.ANIMAL_COUGAR_DEATH;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return RNG.nextInt(100) < 5 ? SoundAnimal.ANIMAL_COUGAR_CRY : SoundAnimal.ANIMAL_COUGAR_SAY;
+        return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COUGAR_CRY : SoundsAnimal.ANIMAL_COUGAR_SAY;
     }
 
     @Nullable

@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
-import su.terrafirmagreg.modules.animal.init.SoundAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -84,17 +84,17 @@ public class EntityGrouseTFC extends EntityChickenTFC implements ILivestock {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundAnimal.ANIMAL_GROUSE_HURT;
+        return SoundsAnimal.ANIMAL_GROUSE_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundAnimal.ANIMAL_GROUSE_DEATH;
+        return SoundsAnimal.ANIMAL_GROUSE_DEATH;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundAnimal.ANIMAL_GROUSE_SAY;
+        return SoundsAnimal.ANIMAL_GROUSE_SAY;
     }
 
     @Nullable

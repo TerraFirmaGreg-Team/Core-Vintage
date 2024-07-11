@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +57,7 @@ public class ServerProxy implements IProxy {
     @NotNull
     @Override
     public String getDayName(int dayOfMonth, long totalDays) {
-        return CalendarTFC.DAY_NAMES[(int) (totalDays % 7)];
+        return Calendar.DAY_NAMES[(int) (totalDays % 7)];
     }
 
     @NotNull

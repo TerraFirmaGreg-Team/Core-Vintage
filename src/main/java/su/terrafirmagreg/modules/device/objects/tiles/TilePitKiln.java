@@ -36,7 +36,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TEPlacedItem;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -126,14 +126,14 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
             }
 
             // Check if complete
-            long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (CalendarTFC.PLAYER_TIME.getTicks() - litTick);
+            long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
             if (remainingTicks <= 0) {
                 // Empty ingredients
                 emptyFuelContents();
 
                 // If we missed the point where remainingTicks == 0, then we need to transaction wrap this
                 if (remainingTicks < 0) {
-                    CalendarTFC.runTransaction(remainingTicks, 0, this::cookContents);
+                    Calendar.runTransaction(remainingTicks, 0, this::cookContents);
                 } else {
                     cookContents();
                 }
@@ -272,7 +272,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
                     }
                 }
                 isLit = true;
-                litTick = CalendarTFC.PLAYER_TIME.getTicks();
+                litTick = Calendar.PLAYER_TIME.getTicks();
                 updateBlock();
                 world.setBlockState(pos, world.getBlockState(pos).withProperty(LIT, true));
                 world.setBlockState(above, Blocks.FIRE.getDefaultState());

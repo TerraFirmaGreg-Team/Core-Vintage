@@ -30,7 +30,7 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
@@ -271,7 +271,7 @@ public final class CommonEventHandlerTFCF {
         BlockPos pos = event.getPos();
         IBlockState state = event.getState();
         Block block = state.getBlock();
-        Month month = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
 
         for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
             if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&

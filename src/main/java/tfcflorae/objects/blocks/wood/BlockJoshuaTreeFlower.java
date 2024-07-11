@@ -40,7 +40,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
@@ -674,7 +674,7 @@ public class BlockJoshuaTreeFlower extends Block {
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isAreaLoaded(pos, 1)) return;
 
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
         int expectedStage = fruitTree.getStageForMonth(currentMonth);
         float avgTemperature = Climate.getAvgTemp(world, pos);
 

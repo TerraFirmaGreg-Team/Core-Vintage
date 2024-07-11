@@ -18,7 +18,7 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -51,7 +51,7 @@ public class EntityZebuTFC extends EntityCowTFC implements ILivestock {
         int numberOfChildren = ConfigTFC.Animals.ZEBU.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityZebuTFC baby = new EntityZebuTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
             this.world.spawnEntity(baby);
@@ -85,7 +85,7 @@ public class EntityZebuTFC extends EntityCowTFC implements ILivestock {
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigTFC.Animals.ZEBU.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigTFC.Animals.ZEBU.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override

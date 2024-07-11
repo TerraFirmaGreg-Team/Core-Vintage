@@ -11,7 +11,7 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 
 import java.awt.*;
@@ -76,7 +76,7 @@ public class GrassColorHandler {
     }
 
     public static Color getSeasonalColor() {
-        return monthlyColors[CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal()];
+        return monthlyColors[Calendar.CALENDAR_TIME.getMonthOfYear().ordinal()];
     }
 
     public static double remap(double value, double currentLow, double currentHigh, double newLow, double newHigh) {

@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -96,7 +96,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
         int numberOfChildren = ConfigAnimal.ENTITIES.GOAT.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
             this.world.spawnEntity(baby);
@@ -130,7 +130,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigAnimal.ENTITIES.GOAT.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.GOAT.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override

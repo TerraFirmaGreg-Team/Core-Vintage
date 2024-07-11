@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TETickableInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
@@ -50,7 +50,7 @@ public class TileSmelteryFirebox extends TETickableInventory
         temperature = 0;
         burnTemperature = 0;
         burnTicks = 0;
-        lastPlayerTick = CalendarTFC.PLAYER_TIME.getTicks();
+        lastPlayerTick = Calendar.PLAYER_TIME.getTicks();
         reload = 0;
         airTicks = 0;
     }

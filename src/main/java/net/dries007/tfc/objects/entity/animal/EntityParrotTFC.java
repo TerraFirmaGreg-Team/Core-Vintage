@@ -32,7 +32,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -68,9 +68,9 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
         this.setBirthDay(birthDay);
         this.setFamiliarity(0);
         this.setGrowingAge(0); //We don't use this
-        this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-        this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
-        this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+        this.matingTime = Calendar.PLAYER_TIME.getTicks();
+        this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
+        this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
         this.fertilized = false;
     }
 
@@ -90,19 +90,19 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
             // Is it time to decay familiarity?
             // If this entity was never fed(eg: new born, wild)
             // or wasn't fed yesterday(this is the starting of the second day)
-            if (this.lastFDecay > -1 && this.lastFDecay + 1 < CalendarTFC.PLAYER_TIME.getTotalDays()) {
+            if (this.lastFDecay > -1 && this.lastFDecay + 1 < Calendar.PLAYER_TIME.getTotalDays()) {
                 float familiarity = getFamiliarity();
                 if (familiarity < 0.3f) {
-                    familiarity -= 0.02 * (CalendarTFC.PLAYER_TIME.getTotalDays() - this.lastFDecay);
-                    this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+                    familiarity -= 0.02 * (Calendar.PLAYER_TIME.getTotalDays() - this.lastFDecay);
+                    this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
                     this.setFamiliarity(familiarity);
                 }
             }
             if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
-                this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
+                this.matingTime = Calendar.PLAYER_TIME.getTicks();
                 EntityAnimalBase.findFemaleMate(this);
             }
-            if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
+            if (this.getAge() == Age.OLD && lastDeath < Calendar.PLAYER_TIME.getTotalDays()) {
 
                 /* todo disabled for the time being (since it is not possible to breed parrots), in 1.15 see if this animal can sit in player shoulder and do a proper mechanic here
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
@@ -134,7 +134,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
                         }
                     }
                     if (!this.world.isRemote) {
-                        lastFed = CalendarTFC.PLAYER_TIME.getTotalDays();
+                        lastFed = Calendar.PLAYER_TIME.getTotalDays();
                         lastFDecay = lastFed; //No decay needed
                         this.consumeItemFromStack(player, itemstack);
                         if (this.getAge() == Age.CHILD || this.getFamiliarity() < getAdultFamiliarityCap()) {
@@ -177,7 +177,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
     @Override
     public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
         return new EntityParrotTFC(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-                (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+                (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
     }
 
     @Override
@@ -284,7 +284,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimal, ILivestock
 
     @Override
     public boolean isHungry() {
-        return lastFed < CalendarTFC.PLAYER_TIME.getTotalDays();
+        return lastFed < Calendar.PLAYER_TIME.getTotalDays();
     }
 
     @Override

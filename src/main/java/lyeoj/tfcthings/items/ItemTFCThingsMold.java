@@ -31,7 +31,7 @@ import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -211,7 +211,7 @@ public class ItemTFCThingsMold extends ItemPottery {
             if (temp <= 0) {
                 nbt.setLong("ticks", -1);
             } else {
-                nbt.setLong("ticks", CalendarTFC.PLAYER_TIME.getTicks());
+                nbt.setLong("ticks", Calendar.PLAYER_TIME.getTicks());
             }
             return tank.writeToNBT(nbt);
         }

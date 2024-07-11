@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +65,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
         int numberOfChildren = ConfigAnimal.ENTITIES.MUSKOX.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
+                    (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
             world.spawnEntity(baby);
@@ -99,7 +99,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigAnimal.ENTITIES.MUSKOX.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.MUSKOX.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override

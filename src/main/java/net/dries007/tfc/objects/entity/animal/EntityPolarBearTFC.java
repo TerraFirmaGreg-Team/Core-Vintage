@@ -42,7 +42,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIStandAttack;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -79,7 +79,7 @@ public class EntityPolarBearTFC extends EntityPolarBear implements IAnimal, IPre
     @Override
     public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
         return new EntityPolarBearTFC(this.world, IAnimal.Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+                (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
     }
 
     @Override

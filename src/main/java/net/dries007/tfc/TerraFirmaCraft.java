@@ -47,7 +47,7 @@ import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 
@@ -183,6 +183,6 @@ public final class TerraFirmaCraft {
     public void onServerStarting(FMLServerStartingEvent event) {
 
         // Initialize calendar for the current server
-        CalendarTFC.INSTANCE.init(event.getServer());
+        Calendar.INSTANCE.init(event.getServer());
     }
 }

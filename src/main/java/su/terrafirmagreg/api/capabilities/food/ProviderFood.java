@@ -13,7 +13,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.agriculture.Food;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,7 +61,7 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
         if (isNonDecaying) {
             return UNKNOWN_CREATION_DATE;
         }
-        if (calculateRottenDate(creationDate) < CalendarTFC.PLAYER_TIME.getTicks()) {
+        if (calculateRottenDate(creationDate) < Calendar.PLAYER_TIME.getTicks()) {
             this.creationDate = ROTTEN_DATE;
         }
         return creationDate;
@@ -81,7 +81,7 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
             return ROTTEN_DATE;
         }
         long rottenDate = calculateRottenDate(creationDate);
-        if (rottenDate < CalendarTFC.PLAYER_TIME.getTicks()) {
+        if (rottenDate < Calendar.PLAYER_TIME.getTicks()) {
             return ROTTEN_DATE;
         }
         return rottenDate;

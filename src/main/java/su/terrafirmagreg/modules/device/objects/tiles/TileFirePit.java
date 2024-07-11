@@ -51,7 +51,7 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.agriculture.Food;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
@@ -118,7 +118,7 @@ public class TileFirePit extends TETickableInventory
         burnTemperature = 0;
         burnTicks = 0;
         cachedRecipe = null;
-        lastPlayerTick = CalendarTFC.PLAYER_TIME.getTicks();
+        lastPlayerTick = Calendar.PLAYER_TIME.getTicks();
 
         attachedItemStack = ItemStack.EMPTY;
 

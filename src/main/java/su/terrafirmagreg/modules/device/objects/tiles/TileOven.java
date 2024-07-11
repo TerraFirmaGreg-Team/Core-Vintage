@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
@@ -60,7 +60,7 @@ public class TileOven extends TEInventory implements ITickable, ITemperatureTile
     public void update() {
         if (!world.isRemote) {
             if (isBurning) {
-                if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
+                if ((int) (Calendar.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
                     if (isCuringRecipe()) {
                         cureSelfWallsAndChimney();
                         cook();
@@ -127,7 +127,7 @@ public class TileOven extends TEInventory implements ITickable, ITemperatureTile
         }
         if (recipeExists() && hasFuel()) {
             isBurning = true;
-            startTick = CalendarTFC.PLAYER_TIME.getTicks();
+            startTick = Calendar.PLAYER_TIME.getTicks();
             setDuration();
         } else {
             turnOff();
@@ -195,13 +195,13 @@ public class TileOven extends TEInventory implements ITickable, ITemperatureTile
         isBurning = false;
         startTick = 0;
         tickGoal = 0;
-        offTick = CalendarTFC.PLAYER_TIME.getTicks();
+        offTick = Calendar.PLAYER_TIME.getTicks();
         isWarmed = false;
         markDirty();
     }
 
     public boolean willDamage() {
-        return (CalendarTFC.PLAYER_TIME.getTicks() - offTick) > (2 * ICalendar.TICKS_IN_HOUR);
+        return (Calendar.PLAYER_TIME.getTicks() - offTick) > (2 * ICalendar.TICKS_IN_HOUR);
     }
 
     public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
@@ -244,7 +244,7 @@ public class TileOven extends TEInventory implements ITickable, ITemperatureTile
     }
 
     public long getTicksRemaining() {
-        return tickGoal - (CalendarTFC.PLAYER_TIME.getTicks() - startTick);
+        return tickGoal - (Calendar.PLAYER_TIME.getTicks() - startTick);
     }
 
     @Override

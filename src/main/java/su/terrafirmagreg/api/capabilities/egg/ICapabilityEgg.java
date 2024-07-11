@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -62,7 +62,7 @@ public interface ICapabilityEgg extends ICapabilitySerializable<NBTTagCompound> 
     @SideOnly(Side.CLIENT)
     default void addEggInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
         if (isFertilized()) {
-            long remainingDays = this.getHatchDay() - CalendarTFC.PLAYER_TIME.getTotalDays();
+            long remainingDays = this.getHatchDay() - Calendar.PLAYER_TIME.getTotalDays();
             text.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.fertilized"));
             if (remainingDays > 0) {
                 text.add(I18n.format("tfc.tooltip.egg_hatch", remainingDays));

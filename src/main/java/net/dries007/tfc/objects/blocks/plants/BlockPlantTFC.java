@@ -38,7 +38,7 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.objects.blocks.BlocksTFCF;
@@ -107,7 +107,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
 
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (worldIn.isAreaLoaded(pos, 1)) {
-            Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+            Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
             int currentStage = (Integer) state.getValue(this.growthStageProperty);
             int expectedStage = this.plant.getStageForMonth(currentMonth);
             int currentTime = (Integer) state.getValue(DAYPERIOD);
@@ -156,7 +156,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
     }
 
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
         int currentStage = (Integer) state.getValue(this.growthStageProperty);
         int expectedStage = this.plant.getStageForMonth(currentMonth);
         if (!this.plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem()
@@ -332,7 +332,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
     }
 
     int getDayPeriod() {
-        return CalendarTFC.CALENDAR_TIME.getHourOfDay() / 6;
+        return Calendar.CALENDAR_TIME.getHourOfDay() / 6;
     }
 
     private boolean isValidSoil(IBlockState state) {

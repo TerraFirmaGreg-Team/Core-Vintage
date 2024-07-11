@@ -40,7 +40,7 @@ import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -98,7 +98,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
         int numberOfChildren = ConfigAnimal.ENTITIES.COW.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
             world.spawnEntity(baby);
@@ -194,12 +194,12 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
     @Override
     public void setProductsCooldown() {
-        setMilkedTick(CalendarTFC.PLAYER_TIME.getTicks());
+        setMilkedTick(Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigAnimal.ENTITIES.COW.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.COW.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override

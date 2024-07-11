@@ -32,7 +32,7 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.objects.te.TETickableInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -200,7 +200,7 @@ public class TileBloomery extends TETickableInventory implements ITickable, ITem
     }
 
     public long getRemainingTicks() {
-        return ConfigTFC.Devices.BLOOMERY.ticks - (CalendarTFC.PLAYER_TIME.getTicks() - litTick);
+        return ConfigTFC.Devices.BLOOMERY.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
     }
 
     public boolean canIgnite() {
@@ -212,7 +212,7 @@ public class TileBloomery extends TETickableInventory implements ITickable, ITem
     }
 
     public void onIgnite() {
-        this.litTick = CalendarTFC.PLAYER_TIME.getTicks();
+        this.litTick = Calendar.PLAYER_TIME.getTicks();
     }
 
     /**

@@ -19,7 +19,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class ProviderPitKiln implements IProbeInfoProvider {
             List<String> currentTooltip = new ArrayList<>();
             
             if (tile.isLit()) {
-                long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (CalendarTFC.PLAYER_TIME.getTicks() - tile.getLitTick());
+                long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - tile.getLitTick());
                 long remainingMinutes = Math.round(remainingTicks / 1200.0f);
                 long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
                 switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {

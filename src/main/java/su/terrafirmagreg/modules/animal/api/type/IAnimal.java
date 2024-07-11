@@ -6,7 +6,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -96,7 +96,7 @@ public interface IAnimal extends ICreature {
      * @return double value between 0(birthday) to 1(full grown adult)
      */
     default double getPercentToAdulthood() {
-        long deltaDays = CalendarTFC.PLAYER_TIME.getTotalDays() - this.getBirthDay();
+        long deltaDays = Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay();
         long adulthoodDay = this.getDaysToAdulthood();
         return Math.max(0, Math.min(1, (double) deltaDays / adulthoodDay));
     }
@@ -107,7 +107,7 @@ public interface IAnimal extends ICreature {
      * @return the Age enum of this entity
      */
     default Age getAge() {
-        long deltaDays = CalendarTFC.PLAYER_TIME.getTotalDays() - this.getBirthDay();
+        long deltaDays = Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay();
         long adulthoodDay = this.getDaysToAdulthood();
         long elderlyDay = this.getDaysToElderly() + this.getDaysToAdulthood();
         if (getCreatureType() == CreatureType.LIVESTOCK && this.getDaysToElderly() > 0 && deltaDays > elderlyDay) {

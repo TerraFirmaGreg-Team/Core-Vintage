@@ -27,7 +27,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.blocks.BlockLargeVessel;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 
 import org.jetbrains.annotations.NotNull;
@@ -73,7 +73,7 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
 
     @NotNull
     public String getSealedDate() {
-        return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+        return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, Calendar.CALENDAR_TIME.getDaysInMonth());
     }
 
     @Override
@@ -92,8 +92,8 @@ public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCal
         }
 
         // Update sealed tick info and sync to client
-        sealedTick = CalendarTFC.PLAYER_TIME.getTicks();
-        sealedCalendarTick = CalendarTFC.CALENDAR_TIME.getTicks();
+        sealedTick = Calendar.PLAYER_TIME.getTicks();
+        sealedCalendarTick = Calendar.CALENDAR_TIME.getTicks();
         sealed = true;
         markForSync();
     }

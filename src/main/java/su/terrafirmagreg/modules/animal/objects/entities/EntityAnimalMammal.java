@@ -9,7 +9,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +44,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
     @Override
     public void onFertilized(@NotNull IAnimal male) {
         //Mark the day this female became pregnant
-        setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
+        setPregnantTime(Calendar.PLAYER_TIME.getTotalDays());
     }
 
     @Override
@@ -74,7 +74,7 @@ public abstract class EntityAnimalMammal extends EntityAnimalBase {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
-            if (this.isFertilized() && CalendarTFC.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
+            if (this.isFertilized() && Calendar.PLAYER_TIME.getTotalDays() >= getPregnantTime() + gestationDays()) {
                 birthChildren();
                 this.setFertilized(false);
             }

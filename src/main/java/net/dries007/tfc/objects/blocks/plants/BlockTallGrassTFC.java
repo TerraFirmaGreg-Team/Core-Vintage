@@ -26,7 +26,7 @@ import net.minecraftforge.common.IPlantable;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -125,7 +125,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     }
 
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
         int currentStage = (Integer) state.getValue(this.growthStageProperty);
         this.plant.getStageForMonth(currentMonth);
         int age = (Integer) state.getValue(AGE);

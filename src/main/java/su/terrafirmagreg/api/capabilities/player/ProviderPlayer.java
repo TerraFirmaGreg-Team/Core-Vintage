@@ -11,7 +11,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 import net.dries007.tfc.api.recipes.ChiselRecipe;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.skills.Skill;
 import net.dries007.tfc.util.skills.SkillType;
@@ -108,7 +108,7 @@ public class ProviderPlayer implements ICapabilityPlayer, ICapabilitySerializabl
 
     @Override
     public void addIntoxicatedTime(long ticks) {
-        long currentTicks = CalendarTFC.PLAYER_TIME.getTicks();
+        long currentTicks = Calendar.PLAYER_TIME.getTicks();
         if (this.intoxicatedTime < currentTicks) {
             this.intoxicatedTime = currentTicks;
         }
@@ -120,12 +120,12 @@ public class ProviderPlayer implements ICapabilityPlayer, ICapabilitySerializabl
 
     @Override
     public long getIntoxicatedTime() {
-        return Math.max(0, intoxicatedTime - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, intoxicatedTime - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override
     public void setNuttedTime() {
-        nutted = CalendarTFC.CALENDAR_TIME.getTicks();
+        nutted = Calendar.CALENDAR_TIME.getTicks();
     }
 
     @Override

@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import pieman.caffeineaddon.recipes.DryingMatRecipe;
 
@@ -54,12 +54,12 @@ public class TEDryingMat extends TEInventory implements ITickable {
     }
 
     public long getTicksSinceUpdate() {
-        return CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick;
+        return Calendar.PLAYER_TIME.getTicks() - lastUpdateTick;
     }
 
     public void resetCounter() {
-        lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
-        sealedCalendarTick = CalendarTFC.CALENDAR_TIME.getTicks();
+        lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
+        sealedCalendarTick = Calendar.CALENDAR_TIME.getTicks();
         markDirty();
     }
 
@@ -71,7 +71,7 @@ public class TEDryingMat extends TEInventory implements ITickable {
 
     @NotNull
     public String getSealedDate() {
-        return getStack().isEmpty() ? "" : ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+        return getStack().isEmpty() ? "" : ICalendarFormatted.getTimeAndDate(sealedCalendarTick, Calendar.CALENDAR_TIME.getDaysInMonth());
     }
 
     @NotNull

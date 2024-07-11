@@ -21,7 +21,7 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -79,7 +79,7 @@ public class EntityPigTFC extends EntityAnimalMammal implements ILivestock {
         int numberOfChildren = ConfigTFC.Animals.PIG.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityPigTFC baby = new EntityPigTFC(world, Gender.valueOf(RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
             world.spawnEntity(baby);

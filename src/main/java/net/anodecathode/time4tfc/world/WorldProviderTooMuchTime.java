@@ -6,7 +6,7 @@ import net.minecraftforge.common.DimensionManager;
 
 
 import net.anodecathode.time4tfc.data.SessionData;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +33,7 @@ public class WorldProviderTooMuchTime extends WorldProvider {
         }
 
         if (SessionData.tfcSeasons) {
-            int month = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal();
+            int month = Calendar.CALENDAR_TIME.getMonthOfYear().ordinal();
 
             SessionData.dayDuration = tfcDayLength[month];
             SessionData.nightDuration = 24000 - SessionData.dayDuration;

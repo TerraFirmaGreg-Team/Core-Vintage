@@ -1,6 +1,7 @@
 package BananaFructa.tfcfarming;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.world.api.data.FarmingWorldData;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -29,7 +30,7 @@ import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
 import java.lang.reflect.InvocationTargetException;
@@ -61,7 +62,7 @@ public class CommonProxy {
      */
 
     private final List<Tuple<BlockPos, World>> awaiting = new ArrayList<>();
-    private final long month = CalendarTFC.CALENDAR_TIME.getDaysInMonth() * 24000;
+    private final long month = Calendar.CALENDAR_TIME.getDaysInMonth() * 24000;
 
     public void init() {
 
@@ -128,7 +129,7 @@ public class CommonProxy {
         // cleanup and passive growth logic
         World w = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
         TETickCounter t = TFCFarming.INSTANCE.worldStorage.teTickCounter;
-        FarmingWorldStorage worldStorage = TFCFarming.INSTANCE.worldStorage;
+        FarmingWorldData worldStorage = TFCFarming.INSTANCE.worldStorage;
 
         // 255 units / 8 units / month = 32 months for a full replenish
         if (t.getTicksSinceUpdate() > month) {
@@ -141,8 +142,7 @@ public class CommonProxy {
 
     }
 
-    private void setTileEntity(World w, BlockPos pos)
-            throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    private void setTileEntity(World w, BlockPos pos) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         TECropBase te = TileUtils.getTile(w, pos, TECropBase.class);
         if (te == null) return;
         if (TFCFarming.firmalifeLoaded && te instanceof TEStemCrop && !(te instanceof TEStemCropN)) {

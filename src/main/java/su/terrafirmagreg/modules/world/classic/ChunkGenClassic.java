@@ -21,7 +21,7 @@ import su.terrafirmagreg.modules.world.objects.layer.datalayers.ph.GenLayerPH;
 import su.terrafirmagreg.modules.world.objects.mapgen.MapGenCaves;
 import su.terrafirmagreg.modules.world.objects.mapgen.MapGenRavine;
 import su.terrafirmagreg.modules.world.objects.mapgen.MapGenRiverRavine;
-import su.terrafirmagreg.modules.world.objects.spawner.WorldEntitySpawnerTFC;
+import su.terrafirmagreg.modules.world.objects.spawner.EntitySpawnerWorldData;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSnow;
@@ -46,7 +46,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.registries.ForgeRegistry;
 
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
@@ -70,7 +69,6 @@ import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER
 import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.ROCKLAYER3;
 
 @SuppressWarnings("WeakerAccess")
-@MethodsReturnNonnullByDefault
 public class ChunkGenClassic implements IChunkGenerator {
 
     public static final IBlockState STONE = Blocks.STONE.getDefaultState();
@@ -197,7 +195,7 @@ public class ChunkGenClassic implements IChunkGenerator {
         floraDiversitySpread = (float) ConfigTFC.General.WORLD.floraDiversitySpreadFactor;
         floraDensitySpread = (float) ConfigTFC.General.WORLD.floraDensitySpreadFactor;
         world.setSeaLevel(WorldTypeClassic.SEALEVEL); // Set sea level so squids can spawn
-        WorldEntitySpawnerTFC.init(); // Called here so only TFC Worlds are affected
+        EntitySpawnerWorldData.init(); // Called here so only TFC Worlds are affected
     }
 
     @Override
@@ -316,7 +314,7 @@ public class ChunkGenClassic implements IChunkGenerator {
         SNOW_ICE_GEN.generate(rand, chunkX, chunkZ, world, this, world.getChunkProvider());
 
         if (TerrainGen.populate(this, world, rand, chunkX, chunkZ, false, ANIMALS)) {
-            WorldEntitySpawnerTFC.performWorldGenSpawning(world, biome, worldX + 8, worldZ + 8, 16, 16, rand);
+            EntitySpawnerWorldData.performWorldGenSpawning(world, biome, worldX + 8, worldZ + 8, 16, 16, rand);
         }
 
         // To minimize the effects of this change, i'm putting this here, in the end of chunk generation

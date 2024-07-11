@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +43,7 @@ public class TrailMixRecipe extends SandwichBasedRecipe {
 
             trailMix.initCreationFoods(ingredients);
             // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
-            trailMix.setCreationDate(CalendarTFC.PLAYER_TIME.getTicks());
+            trailMix.setCreationDate(Calendar.PLAYER_TIME.getTicks());
         }
         return output;
     }

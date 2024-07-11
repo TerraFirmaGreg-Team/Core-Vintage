@@ -43,7 +43,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 
 import com.google.common.base.Predicates;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -78,9 +78,9 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
         this.setBirthDay(birthDay);
         this.setFamiliarity(0);
         this.setGrowingAge(0); //We don't use this
-        this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-        this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
-        this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+        this.matingTime = Calendar.PLAYER_TIME.getTicks();
+        this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
+        this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
         this.setFertilized(false);
     }
 
@@ -94,7 +94,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     public static int getRandomGrowth(int daysToAdult, int daysToElder) {
         int randomFactor = daysToElder > 0 ? (int) (daysToElder * 1.25f) : daysToAdult * 4;
         int lifeTimeDays = daysToAdult + MathConstants.RNG.nextInt(randomFactor);
-        return (int) (CalendarTFC.PLAYER_TIME.getTotalDays() - lifeTimeDays);
+        return (int) (Calendar.PLAYER_TIME.getTotalDays() - lifeTimeDays);
     }
 
     /**
@@ -197,12 +197,12 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
     public boolean isReadyToMate() {
         if (this.getAge() != Age.ADULT || this.getFamiliarity() < 0.3f || this.isFertilized() || this.isHungry())
             return false;
-        return this.matingTime + MATING_COOLDOWN_DEFAULT_TICKS <= CalendarTFC.PLAYER_TIME.getTicks();
+        return this.matingTime + MATING_COOLDOWN_DEFAULT_TICKS <= Calendar.PLAYER_TIME.getTicks();
     }
 
     @Override
     public boolean isHungry() {
-        return lastFed < CalendarTFC.PLAYER_TIME.getTotalDays();
+        return lastFed < Calendar.PLAYER_TIME.getTotalDays();
     }
 
     @Override
@@ -225,7 +225,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
             try {
                 EntityAnimalBase baby = this.getClass().getConstructor(World.class).newInstance(this.world);
                 baby.setGender(Gender.valueOf(MathConstants.RNG.nextBoolean()));
-                baby.setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                baby.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
                 baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
                 return baby;
             } catch (Exception ignored) {
@@ -289,23 +289,23 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
             // Is it time to decay familiarity?
             // If this entity was never fed(eg: new born, wild)
             // or wasn't fed yesterday(this is the starting of the second day)
-            if (this.lastFDecay > -1 && this.lastFDecay + 1 < CalendarTFC.PLAYER_TIME.getTotalDays()) {
+            if (this.lastFDecay > -1 && this.lastFDecay + 1 < Calendar.PLAYER_TIME.getTotalDays()) {
                 float familiarity = getFamiliarity();
                 if (familiarity < 0.3f) {
-                    familiarity -= 0.02 * (CalendarTFC.PLAYER_TIME.getTotalDays() - this.lastFDecay);
-                    this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+                    familiarity -= 0.02 * (Calendar.PLAYER_TIME.getTotalDays() - this.lastFDecay);
+                    this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
                     this.setFamiliarity(familiarity);
                 }
             }
             if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
-                this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
+                this.matingTime = Calendar.PLAYER_TIME.getTicks();
                 findFemaleMate(this);
             }
-            if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
-                this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
+            if (this.getAge() == Age.OLD && lastDeath < Calendar.PLAYER_TIME.getTotalDays()) {
+                this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
                 final Random random = new Random(
-                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                        this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < getOldDeathChance()) {
                     this.setDead();
                 }
@@ -313,7 +313,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
             if (this instanceof ILivestock) {
                 // Wild livestock disappear after 125% lifespan
                 if (this.getDaysToElderly() > 0 && this.getFamiliarity() < 0.10F && (this.getDaysToElderly() + this.getDaysToAdulthood()) * 1.25F <=
-                        CalendarTFC.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
+                        Calendar.PLAYER_TIME.getTotalDays() - this.getBirthDay()) {
                     this.setDead();
                 }
             }
@@ -398,7 +398,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
      */
     protected boolean eatFood(@NotNull ItemStack stack, EntityPlayer player) {
         if (!this.world.isRemote) {
-            lastFed = CalendarTFC.PLAYER_TIME.getTotalDays();
+            lastFed = Calendar.PLAYER_TIME.getTotalDays();
             lastFDecay = lastFed; //No decay needed
             this.consumeItemFromStack(player, stack);
             if (this.getAge() == Age.CHILD || this.getFamiliarity() < getAdultFamiliarityCap()) {

@@ -45,7 +45,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.tfc.api.capability.fluid.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 
 import org.jetbrains.annotations.NotNull;
@@ -146,7 +146,7 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvi
             }
 
             String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound().getLong("sealedCalendarTick"),
-                    CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+                    Calendar.CALENDAR_TIME.getDaysInMonth());
             tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("top.tfc.barrel.sealed", formattedDate).getFormattedText());
         }
     }
@@ -253,8 +253,8 @@ public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvi
             }
             NBTTagCompound nbt = container.getTagCompound();
             //noinspection ConstantConditions
-            NBTUtils.setGenericNBTValue(nbt, "sealedTick", CalendarTFC.PLAYER_TIME.getTicks());
-            NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", CalendarTFC.CALENDAR_TIME.getTicks());
+            NBTUtils.setGenericNBTValue(nbt, "sealedTick", Calendar.PLAYER_TIME.getTicks());
+            NBTUtils.setGenericNBTValue(nbt, "sealedCalendarTick", Calendar.CALENDAR_TIME.getTicks());
             container.setTagCompound(nbt);
             super.setFluid(fluid);
         }

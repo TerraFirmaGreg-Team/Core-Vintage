@@ -20,7 +20,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
@@ -54,7 +54,7 @@ public class FruitTreeProvider implements IWailaBlock {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockFruitTreeLeaves block) {
             if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree()
-                    .isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+                    .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
                 if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
                     TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);
                     addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkData.getRainfall(world, pos), currentTooltip);

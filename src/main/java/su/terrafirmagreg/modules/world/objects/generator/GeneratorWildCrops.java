@@ -15,7 +15,7 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -57,7 +57,7 @@ public class GeneratorWildCrops implements IWorldGenerator {
                         final int z = (chunkZ << 4) + random.nextInt(16) + 8;
                         final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
                         if (isValidPosition(world, pos)) {
-                            double yearProgress = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
+                            double yearProgress = Calendar.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
                             int maxStage = crop.getMaxStage();
                             int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
                             if (growth > maxStage)
@@ -77,7 +77,7 @@ public class GeneratorWildCrops implements IWorldGenerator {
                             BlockPos pos = world.getHeight(chunkBlockPos.add(random.nextInt(16) + 8, 0, random.nextInt(16) + 8));
 
                             if (isValidPosition(world, pos)) {
-                                double yearProgress = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
+                                double yearProgress = Calendar.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
                                 int maxStage = crop.getMaxStage();
                                 int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
                                 if (growth > maxStage)

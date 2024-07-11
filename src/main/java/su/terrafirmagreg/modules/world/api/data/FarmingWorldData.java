@@ -1,4 +1,6 @@
-package BananaFructa.tfcfarming;
+package su.terrafirmagreg.modules.world.api.data;
+
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
@@ -13,6 +15,11 @@ import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
 
+import BananaFructa.tfcfarming.Config;
+import BananaFructa.tfcfarming.CropNutrients;
+import BananaFructa.tfcfarming.NutrientClass;
+import BananaFructa.tfcfarming.NutrientValues;
+import BananaFructa.tfcfarming.TFCFarming;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
@@ -26,11 +33,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCFARMING;
+public class FarmingWorldData extends WorldSavedData {
 
-public class FarmingWorldStorage extends WorldSavedData {
+    private static final String DATA_ID = ModUtils.localize("data.farming");
 
-    public static final String dataName = MODID_TFCFARMING + "_WORLD_STORAGE";
     private static long ft = 0;
 
     static {
@@ -45,23 +51,23 @@ public class FarmingWorldStorage extends WorldSavedData {
     public TETickCounter teTickCounter = new TETickCounter();
     public HashMap<Long, Integer> nutrientMap;
 
-    public FarmingWorldStorage(String name) {
-        super(name);
-    }
-
-    public FarmingWorldStorage() {
-        super(dataName);
+    private FarmingWorldData() {
+        super(DATA_ID);
         nutrientMap = new HashMap<>();
     }
 
-    public static FarmingWorldStorage get(World world) {
-        MapStorage storage = world.getMapStorage();
-        FarmingWorldStorage farmingWorldStorage = (FarmingWorldStorage) storage.getOrLoadData(FarmingWorldStorage.class, dataName);
-        if (farmingWorldStorage == null) {
-            farmingWorldStorage = new FarmingWorldStorage();
-            storage.setData(dataName, farmingWorldStorage);
+    public static FarmingWorldData get(World world) {
+        MapStorage mapStorage = world.getMapStorage();
+        if (mapStorage != null) {
+            FarmingWorldData data = (FarmingWorldData) mapStorage.getOrLoadData(FarmingWorldData.class, DATA_ID);
+            if (data == null) {
+                data = new FarmingWorldData();
+                data.markDirty(); //!TODO проверить корректность работы
+                mapStorage.setData(DATA_ID, data);
+            }
+            return data;
         }
-        return farmingWorldStorage;
+        throw new IllegalStateException("Unable to access farming data!");
     }
 
     private long convertPosition(int x, int z) {

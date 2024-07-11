@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
 
@@ -34,8 +34,8 @@ public class ConfigTFCThings {
             for (int i = 1; i < text.length; i++) {
                 name += " " + text[i];
             }
-            if (CalendarTFC.BIRTHDAYS.get(day) == null) {
-                CalendarTFC.BIRTHDAYS.put(day, name);
+            if (Calendar.BIRTHDAYS.get(day) == null) {
+                Calendar.BIRTHDAYS.put(day, name);
             }
         }
     }

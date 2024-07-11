@@ -7,7 +7,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +59,7 @@ public class ProviderHeat implements ICapabilityHeat {
      */
     @Override
     public float getTemperature() {
-        return CapabilityHeat.adjustTemp(temperature, heatCapacity, CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick);
+        return CapabilityHeat.adjustTemp(temperature, heatCapacity, Calendar.PLAYER_TIME.getTicks() - lastUpdateTick);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ProviderHeat implements ICapabilityHeat {
     @Override
     public void setTemperature(float temperature) {
         this.temperature = temperature;
-        this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+        this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package BananaFructa.tfcfarming;
 
 import su.terrafirmagreg.Tags;
+import su.terrafirmagreg.modules.world.api.data.FarmingWorldData;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,7 +31,7 @@ public class TFCFarming {
     public static boolean firmalifeLoaded = false;
     @SidedProxy(modId = MODID_TFCFARMING, clientSide = "BananaFructa.tfcfarming.ClientProxy", serverSide = "BananaFructa.tfcfarming.CommonProxy")
     public static CommonProxy proxy;
-    public FarmingWorldStorage worldStorage;
+    public FarmingWorldData worldStorage;
 
     public TFCFarming() {
         tfcfloraeLoaded = Loader.isModLoaded(MODID_TFCF);
@@ -58,7 +59,7 @@ public class TFCFarming {
 
     @Mod.EventHandler
     public void serverStaring(FMLServerStartingEvent event) {
-        worldStorage = FarmingWorldStorage.get(event.getServer().getWorld(0));
+        worldStorage = FarmingWorldData.get(event.getServer().getWorld(0));
     }
 
 }

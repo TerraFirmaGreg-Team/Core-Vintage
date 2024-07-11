@@ -25,7 +25,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,11 +48,11 @@ public class TileNestBox extends BaseTileInventory
                 ItemStack stack = inventory.getStackInSlot(i);
                 if (!stack.isEmpty()) {
                     var cap = CapabilityEgg.get(stack);
-                    if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= CalendarTFC.PLAYER_TIME.getTotalDays()) {
+                    if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= Calendar.PLAYER_TIME.getTotalDays()) {
                         Entity baby = cap.getEntity(this.world);
                         if (baby != null) {
                             if (baby instanceof IAnimal) {
-                                ((IAnimal) baby).setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                                ((IAnimal) baby).setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
                             }
                             baby.setLocationAndAngles(this.pos.getX(), this.pos.getY() + 0.5D, this.pos.getZ(), 0.0F, 0.0F);
                             world.spawnEntity(baby);

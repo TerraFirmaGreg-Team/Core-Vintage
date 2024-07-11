@@ -22,7 +22,7 @@ import net.minecraftforge.common.IShearable;
 
 
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -55,7 +55,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
     }
 
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
         int currentStage = (Integer) state.getValue(this.growthStageProperty);
         this.plant.getStageForMonth(currentMonth);
         int age = (Integer) state.getValue(AGE);

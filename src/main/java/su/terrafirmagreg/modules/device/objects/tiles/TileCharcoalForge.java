@@ -34,7 +34,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TETickableInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendarTickable;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
@@ -78,7 +78,7 @@ public class TileCharcoalForge extends TETickableInventory
         burnTemperature = 0;
         burnTicks = 0;
         airTicks = 0;
-        lastPlayerTick = CalendarTFC.PLAYER_TIME.getTicks();
+        lastPlayerTick = Calendar.PLAYER_TIME.getTicks();
 
         Arrays.fill(cachedRecipes, null);
     }

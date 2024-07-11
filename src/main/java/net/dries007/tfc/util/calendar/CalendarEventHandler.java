@@ -37,14 +37,14 @@ public class CalendarEventHandler {
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent event) {
         if (event.phase == Phase.END) {
-            CalendarTFC.INSTANCE.onServerTick();
+            Calendar.INSTANCE.onServerTick();
         }
     }
 
     @SubscribeEvent
     public static void onOverworldTick(TickEvent.WorldTickEvent event) {
         if (event.phase == Phase.END && event.world.provider.getDimension() == 0) {
-            CalendarTFC.INSTANCE.onOverworldTick(event.world);
+            Calendar.INSTANCE.onOverworldTick(event.world);
         }
     }
 
@@ -70,8 +70,8 @@ public class CalendarEventHandler {
     public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
         if (!event.getEntityPlayer().world.isRemote && !event.updateWorld()) {
             long currentWorldTime = event.getEntity().getEntityWorld().getWorldTime();
-            if (CalendarTFC.CALENDAR_TIME.getWorldTime() != currentWorldTime) {
-                long jump = CalendarTFC.INSTANCE.setTimeFromWorldTime(currentWorldTime);
+            if (Calendar.CALENDAR_TIME.getWorldTime() != currentWorldTime) {
+                long jump = Calendar.INSTANCE.setTimeFromWorldTime(currentWorldTime);
                 // Consume food/water on all online players accordingly (EXHAUSTION_MULTIPLIER is here to de-compensate)
                 event.getEntity().getEntityWorld().getEntities(EntityPlayer.class, Objects::nonNull)
                         .forEach(player -> player.addExhaustion(FoodStatsTFC.PASSIVE_EXHAUSTION * jump / FoodStatsTFC.EXHAUSTION_MULTIPLIER *
@@ -99,7 +99,7 @@ public class CalendarEventHandler {
                 if (players.contains(event.player)) {
                     playerCount--;
                 }
-                CalendarTFC.INSTANCE.setPlayersLoggedOn(playerCount > 0);
+                Calendar.INSTANCE.setPlayersLoggedOn(playerCount > 0);
             }
         }
     }
@@ -117,7 +117,7 @@ public class CalendarEventHandler {
             if (server != null) {
                 TerraFirmaCraft.getLog().info("Player Logged In - Checking for Calendar Updates.");
                 int players = server.getPlayerList().getPlayers().size();
-                CalendarTFC.INSTANCE.setPlayersLoggedOn(players > 0);
+                Calendar.INSTANCE.setPlayersLoggedOn(players > 0);
             }
         }
     }
@@ -131,7 +131,7 @@ public class CalendarEventHandler {
     public static void onGameRuleChange(GameRuleChangeEvent event) {
         if ("doDaylightCycle".equals(event.getRuleName())) {
             // This is only called on server, so it needs to sync to client
-            CalendarTFC.INSTANCE.setDoDaylightCycle();
+            Calendar.INSTANCE.setDoDaylightCycle();
         }
     }
 }

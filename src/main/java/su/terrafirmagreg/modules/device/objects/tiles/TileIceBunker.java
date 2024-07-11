@@ -44,7 +44,7 @@ import net.minecraft.world.World;
 
 
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 import pieman.caffeineaddon.ModConfig;
 
@@ -174,7 +174,7 @@ public class TileIceBunker extends TileEntityLockableLoot
                             dryIce = false;
                         } else continue;
 
-                        lastUpdate = (int) CalendarTFC.CALENDAR_TIME.getTotalDays();
+                        lastUpdate = (int) Calendar.CALENDAR_TIME.getTotalDays();
                         decrStackSize(slot, 1);
                         break;
                     }
@@ -183,7 +183,7 @@ public class TileIceBunker extends TileEntityLockableLoot
 
             if (coolantAmount > 0) {
                 temperature = ModConfig.iceHouseTemperature;
-                if (lastUpdate < (int) CalendarTFC.CALENDAR_TIME.getTotalDays()) {
+                if (lastUpdate < (int) Calendar.CALENDAR_TIME.getTotalDays()) {
                     if (outsideTemp > -10) {    //magic
                         int volume = (size[1] + size[3] + 1) * (size[0] + size[2] + 1);
                         coolantAmount = coolantAmount -

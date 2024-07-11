@@ -36,7 +36,7 @@ import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -99,7 +99,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
     @Override
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isRemote) {
-            if (state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+            if (state.getValue(HARVESTABLE) && tree.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
                 var tile = TileUtils.getTile(world, pos, TETickCounter.class);
                 if (TileUtils.isNotNull(tile)) {
                     long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
@@ -108,7 +108,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
                         tile.resetCounter();
                     }
                 }
-            } else if (tree.isFlowerMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+            } else if (tree.isFlowerMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
                 if (state.getValue(LEAF_STATE) != EnumLeafState.FLOWERING) {
                     world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.FLOWERING));
                 }
@@ -278,7 +278,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
     public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
         if (world.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
             return GrowthStatus.FULLY_GROWN;
-        } else if (!state.getValue(HARVESTABLE) && tree.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+        } else if (!state.getValue(HARVESTABLE) && tree.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
             return GrowthStatus.GROWING;
         }
         return GrowthStatus.NOT_GROWING;

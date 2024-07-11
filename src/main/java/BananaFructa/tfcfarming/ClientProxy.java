@@ -2,6 +2,7 @@ package BananaFructa.tfcfarming;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -92,7 +93,7 @@ public class ClientProxy extends CommonProxy {
         GlStateManager.enableAlpha();
         GlStateManager.enableBlend();
         GlStateManager.resetColor();
-        Minecraft.getMinecraft().ingameGUI.drawRect(x, y - height, x + width, y, color);
+        Gui.drawRect(x, y - height, x + width, y, color);
         GlStateManager.popMatrix();
     }
 

@@ -38,7 +38,7 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -155,7 +155,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
 
     @Override
     public void onFertilized(@NotNull IAnimal male) {
-        this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
+        this.setPregnantTime(Calendar.PLAYER_TIME.getTotalDays());
         int selection = this.rand.nextInt(9);
         int i;
         if (selection < 4) {
@@ -283,7 +283,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
             // Only called if this animal is interacted with a spawn egg
             // Try to return to vanilla's default method a baby of this animal, as if bred normally
             return new EntityCamelTFC(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
         }
         return null;
     }
@@ -293,7 +293,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimal, ILivestoc
         int numberOfChildren = ConfigTFC.Animals.CAMEL.babies; //one always
         for (int i = 0; i < numberOfChildren; i++) {
             EntityCamelTFC baby = new EntityCamelTFC(this.world, Gender.valueOf(RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             if (this.geneHealth > 0) {
                 baby.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.geneHealth);

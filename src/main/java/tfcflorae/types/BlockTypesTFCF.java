@@ -203,78 +203,24 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 
         public static RockTFCF getNonGrassVersionStatic(RockTFCF rock) {
             if (!rock.isGrass) return rock;
-            switch (rock) {
-                case BOG_IRON_GRASS:
-                case DRY_BOG_IRON_GRASS:
-                case SPARSE_BOG_IRON_GRASS:
-                case BOG_IRON_PODZOL:
-                    return BOG_IRON;
-                case SPARSE_LOAMY_SAND_GRASS:
-                case DRY_LOAMY_SAND_GRASS:
-                case LOAMY_SAND_GRASS:
-                case LOAMY_SAND_PODZOL:
-                    return LOAMY_SAND;
-                case SPARSE_SANDY_LOAM_GRASS:
-                case DRY_SANDY_LOAM_GRASS:
-                case SANDY_LOAM_GRASS:
-                case SANDY_LOAM_PODZOL:
-                    return SANDY_LOAM;
-                case SPARSE_SANDY_CLAY_LOAM_GRASS:
-                case DRY_SANDY_CLAY_LOAM_GRASS:
-                case SANDY_CLAY_LOAM_GRASS:
-                case SANDY_CLAY_LOAM_PODZOL:
-                    return SANDY_CLAY_LOAM;
-                case SPARSE_SANDY_CLAY_GRASS:
-                case DRY_SANDY_CLAY_GRASS:
-                case SANDY_CLAY_GRASS:
-                case SANDY_CLAY_PODZOL:
-                    return SANDY_CLAY;
-                case SPARSE_LOAM_GRASS:
-                case DRY_LOAM_GRASS:
-                case LOAM_GRASS:
-                case LOAM_PODZOL:
-                    return LOAM;
-                case SPARSE_CLAY_LOAM_GRASS:
-                case DRY_CLAY_LOAM_GRASS:
-                case CLAY_LOAM_GRASS:
-                case CLAY_LOAM_PODZOL:
-                    return CLAY_LOAM;
-                case SPARSE_SILTY_CLAY_GRASS:
-                case DRY_SILTY_CLAY_GRASS:
-                case SILTY_CLAY_GRASS:
-                case SILTY_CLAY_PODZOL:
-                    return SILTY_CLAY;
-                case SPARSE_SILTY_CLAY_LOAM_GRASS:
-                case DRY_SILTY_CLAY_LOAM_GRASS:
-                case SILTY_CLAY_LOAM_GRASS:
-                case SILTY_CLAY_LOAM_PODZOL:
-                    return SILTY_CLAY_LOAM;
-                case SPARSE_SILT_LOAM_GRASS:
-                case DRY_SILT_LOAM_GRASS:
-                case SILT_LOAM_GRASS:
-                case SILT_LOAM_PODZOL:
-                    return SILT_LOAM;
-                case SPARSE_SILT_GRASS:
-                case DRY_SILT_GRASS:
-                case SILT_GRASS:
-                case SILT_PODZOL:
-                    return SILT;
-                case HUMUS_GRASS:
-                case SPARSE_HUMUS_GRASS:
-                case DRY_HUMUS_GRASS:
-                    return HUMUS;
-                case CLAY_HUMUS_GRASS:
-                case SPARSE_CLAY_HUMUS_GRASS:
-                case DRY_CLAY_HUMUS_GRASS:
-                    return CLAY_HUMUS;
-                case SPARSE_GRASS:
-                case SPARSE_CLAY_GRASS:
-                case DRY_CLAY_GRASS:
-                case CLAY_PODZOL:
-                case PODZOL:
-                    return null; //This is supposed to happen, because it is expected to run getNonGrassVersionTFC after this one
-            }
-            throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            return switch (rock) {
+                case BOG_IRON_GRASS, DRY_BOG_IRON_GRASS, SPARSE_BOG_IRON_GRASS, BOG_IRON_PODZOL -> BOG_IRON;
+                case SPARSE_LOAMY_SAND_GRASS, DRY_LOAMY_SAND_GRASS, LOAMY_SAND_GRASS, LOAMY_SAND_PODZOL -> LOAMY_SAND;
+                case SPARSE_SANDY_LOAM_GRASS, DRY_SANDY_LOAM_GRASS, SANDY_LOAM_GRASS, SANDY_LOAM_PODZOL -> SANDY_LOAM;
+                case SPARSE_SANDY_CLAY_LOAM_GRASS, DRY_SANDY_CLAY_LOAM_GRASS, SANDY_CLAY_LOAM_GRASS, SANDY_CLAY_LOAM_PODZOL -> SANDY_CLAY_LOAM;
+                case SPARSE_SANDY_CLAY_GRASS, DRY_SANDY_CLAY_GRASS, SANDY_CLAY_GRASS, SANDY_CLAY_PODZOL -> SANDY_CLAY;
+                case SPARSE_LOAM_GRASS, DRY_LOAM_GRASS, LOAM_GRASS, LOAM_PODZOL -> LOAM;
+                case SPARSE_CLAY_LOAM_GRASS, DRY_CLAY_LOAM_GRASS, CLAY_LOAM_GRASS, CLAY_LOAM_PODZOL -> CLAY_LOAM;
+                case SPARSE_SILTY_CLAY_GRASS, DRY_SILTY_CLAY_GRASS, SILTY_CLAY_GRASS, SILTY_CLAY_PODZOL -> SILTY_CLAY;
+                case SPARSE_SILTY_CLAY_LOAM_GRASS, DRY_SILTY_CLAY_LOAM_GRASS, SILTY_CLAY_LOAM_GRASS, SILTY_CLAY_LOAM_PODZOL -> SILTY_CLAY_LOAM;
+                case SPARSE_SILT_LOAM_GRASS, DRY_SILT_LOAM_GRASS, SILT_LOAM_GRASS, SILT_LOAM_PODZOL -> SILT_LOAM;
+                case SPARSE_SILT_GRASS, DRY_SILT_GRASS, SILT_GRASS, SILT_PODZOL -> SILT;
+                case HUMUS_GRASS, SPARSE_HUMUS_GRASS, DRY_HUMUS_GRASS -> HUMUS;
+                case CLAY_HUMUS_GRASS, SPARSE_CLAY_HUMUS_GRASS, DRY_CLAY_HUMUS_GRASS -> CLAY_HUMUS;
+                case SPARSE_GRASS, SPARSE_CLAY_GRASS, DRY_CLAY_GRASS, CLAY_PODZOL, PODZOL -> null;
+                default -> //This is supposed to happen, because it is expected to run getNonGrassVersionTFC after this one
+                        throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            };
         }
 
         public static Rock.Type getNonGrassVersionTFCStatic(RockTFCF rock) {
@@ -358,92 +304,33 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 
         public RockTFCF getNonGrassVersion() {
             if (!isGrass) return this;
-            switch (this) {
-                case BOG_IRON_GRASS:
-                case DRY_BOG_IRON_GRASS:
-                case SPARSE_BOG_IRON_GRASS:
-                case BOG_IRON_PODZOL:
-                    return BOG_IRON;
-                case SPARSE_LOAMY_SAND_GRASS:
-                case DRY_LOAMY_SAND_GRASS:
-                case LOAMY_SAND_GRASS:
-                case LOAMY_SAND_PODZOL:
-                    return LOAMY_SAND;
-                case SPARSE_SANDY_LOAM_GRASS:
-                case DRY_SANDY_LOAM_GRASS:
-                case SANDY_LOAM_GRASS:
-                case SANDY_LOAM_PODZOL:
-                    return SANDY_LOAM;
-                case SPARSE_SANDY_CLAY_LOAM_GRASS:
-                case DRY_SANDY_CLAY_LOAM_GRASS:
-                case SANDY_CLAY_LOAM_GRASS:
-                case SANDY_CLAY_LOAM_PODZOL:
-                    return SANDY_CLAY_LOAM;
-                case SPARSE_SANDY_CLAY_GRASS:
-                case DRY_SANDY_CLAY_GRASS:
-                case SANDY_CLAY_GRASS:
-                case SANDY_CLAY_PODZOL:
-                    return SANDY_CLAY;
-                case SPARSE_LOAM_GRASS:
-                case DRY_LOAM_GRASS:
-                case LOAM_GRASS:
-                case LOAM_PODZOL:
-                    return LOAM;
-                case SPARSE_CLAY_LOAM_GRASS:
-                case DRY_CLAY_LOAM_GRASS:
-                case CLAY_LOAM_GRASS:
-                case CLAY_LOAM_PODZOL:
-                    return CLAY_LOAM;
-                case SPARSE_SILTY_CLAY_GRASS:
-                case DRY_SILTY_CLAY_GRASS:
-                case SILTY_CLAY_GRASS:
-                case SILTY_CLAY_PODZOL:
-                    return SILTY_CLAY;
-                case SPARSE_SILTY_CLAY_LOAM_GRASS:
-                case DRY_SILTY_CLAY_LOAM_GRASS:
-                case SILTY_CLAY_LOAM_GRASS:
-                case SILTY_CLAY_LOAM_PODZOL:
-                    return SILTY_CLAY_LOAM;
-                case SPARSE_SILT_LOAM_GRASS:
-                case DRY_SILT_LOAM_GRASS:
-                case SILT_LOAM_GRASS:
-                case SILT_LOAM_PODZOL:
-                    return SILT_LOAM;
-                case SPARSE_SILT_GRASS:
-                case DRY_SILT_GRASS:
-                case SILT_GRASS:
-                case SILT_PODZOL:
-                    return SILT;
-                case HUMUS_GRASS:
-                case SPARSE_HUMUS_GRASS:
-                case DRY_HUMUS_GRASS:
-                    return HUMUS;
-                case CLAY_HUMUS_GRASS:
-                case SPARSE_CLAY_HUMUS_GRASS:
-                case DRY_CLAY_HUMUS_GRASS:
-                    return CLAY_HUMUS;
-                case SPARSE_GRASS:
-                case SPARSE_CLAY_GRASS:
-                case DRY_CLAY_GRASS:
-                case CLAY_PODZOL:
-                case PODZOL:
-                    return null; //This is supposed to happen, because it is expected to run getNonGrassVersionTFC after this one
-            }
-            throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            return switch (this) {
+                case BOG_IRON_GRASS, DRY_BOG_IRON_GRASS, SPARSE_BOG_IRON_GRASS, BOG_IRON_PODZOL -> BOG_IRON;
+                case SPARSE_LOAMY_SAND_GRASS, DRY_LOAMY_SAND_GRASS, LOAMY_SAND_GRASS, LOAMY_SAND_PODZOL -> LOAMY_SAND;
+                case SPARSE_SANDY_LOAM_GRASS, DRY_SANDY_LOAM_GRASS, SANDY_LOAM_GRASS, SANDY_LOAM_PODZOL -> SANDY_LOAM;
+                case SPARSE_SANDY_CLAY_LOAM_GRASS, DRY_SANDY_CLAY_LOAM_GRASS, SANDY_CLAY_LOAM_GRASS, SANDY_CLAY_LOAM_PODZOL -> SANDY_CLAY_LOAM;
+                case SPARSE_SANDY_CLAY_GRASS, DRY_SANDY_CLAY_GRASS, SANDY_CLAY_GRASS, SANDY_CLAY_PODZOL -> SANDY_CLAY;
+                case SPARSE_LOAM_GRASS, DRY_LOAM_GRASS, LOAM_GRASS, LOAM_PODZOL -> LOAM;
+                case SPARSE_CLAY_LOAM_GRASS, DRY_CLAY_LOAM_GRASS, CLAY_LOAM_GRASS, CLAY_LOAM_PODZOL -> CLAY_LOAM;
+                case SPARSE_SILTY_CLAY_GRASS, DRY_SILTY_CLAY_GRASS, SILTY_CLAY_GRASS, SILTY_CLAY_PODZOL -> SILTY_CLAY;
+                case SPARSE_SILTY_CLAY_LOAM_GRASS, DRY_SILTY_CLAY_LOAM_GRASS, SILTY_CLAY_LOAM_GRASS, SILTY_CLAY_LOAM_PODZOL -> SILTY_CLAY_LOAM;
+                case SPARSE_SILT_LOAM_GRASS, DRY_SILT_LOAM_GRASS, SILT_LOAM_GRASS, SILT_LOAM_PODZOL -> SILT_LOAM;
+                case SPARSE_SILT_GRASS, DRY_SILT_GRASS, SILT_GRASS, SILT_PODZOL -> SILT;
+                case HUMUS_GRASS, SPARSE_HUMUS_GRASS, DRY_HUMUS_GRASS -> HUMUS;
+                case CLAY_HUMUS_GRASS, SPARSE_CLAY_HUMUS_GRASS, DRY_CLAY_HUMUS_GRASS -> CLAY_HUMUS;
+                case SPARSE_GRASS, SPARSE_CLAY_GRASS, DRY_CLAY_GRASS, CLAY_PODZOL, PODZOL -> null;
+                default -> //This is supposed to happen, because it is expected to run getNonGrassVersionTFC after this one
+                        throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            };
         }
 
         public Rock.Type getNonGrassVersionTFC() {
             if (!isGrass) return null;
-            switch (this) {
-                case SPARSE_CLAY_GRASS:
-                case DRY_CLAY_GRASS:
-                case CLAY_PODZOL:
-                    return Rock.Type.CLAY;
-                case SPARSE_GRASS:
-                case PODZOL:
-                    return Rock.Type.DIRT;
-            }
-            throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            return switch (this) {
+                case SPARSE_CLAY_GRASS, DRY_CLAY_GRASS, CLAY_PODZOL -> Rock.Type.CLAY;
+                case SPARSE_GRASS, PODZOL -> Rock.Type.DIRT;
+                default -> throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            };
         }
 
         public RockTFCF getGrassVersion(RockTFCF spreader) {

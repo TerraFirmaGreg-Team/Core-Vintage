@@ -56,7 +56,7 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -215,13 +215,13 @@ public class ItemSmallVessel extends ItemPottery {
 
         @Override
         public float getTemperature() {
-            return CapabilityHeat.adjustTemp(temperature, heatCapacity, CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick);
+            return CapabilityHeat.adjustTemp(temperature, heatCapacity, Calendar.PLAYER_TIME.getTicks() - lastUpdateTick);
         }
 
         @Override
         public void setTemperature(float temperature) {
             this.temperature = temperature;
-            this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+            this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
         }
 
         @Override

@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -71,7 +71,7 @@ public enum StemCrop implements ICrop {
     // crop life behavior copied from base tfc
     @Override
     public long getGrowthTicks() {
-        return (long) (growthTime * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * ICalendar.TICKS_IN_DAY);
+        return (long) (growthTime * Calendar.CALENDAR_TIME.getDaysInMonth() * ICalendar.TICKS_IN_DAY);
     }
 
     @Override

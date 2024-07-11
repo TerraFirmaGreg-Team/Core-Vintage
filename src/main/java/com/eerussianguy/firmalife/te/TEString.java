@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,11 +34,11 @@ public class TEString extends TEInventory {
     }
 
     public long getTicksSinceUpdate() {
-        return CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick;
+        return Calendar.PLAYER_TIME.getTicks() - lastUpdateTick;
     }
 
     public void resetCounter() {
-        lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+        lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
         markForSync();
     }
 

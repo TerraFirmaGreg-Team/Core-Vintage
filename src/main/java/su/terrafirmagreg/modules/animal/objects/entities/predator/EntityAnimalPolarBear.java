@@ -43,7 +43,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -80,7 +80,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     @Override
     public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
         return new EntityAnimalPolarBear(this.world, IAnimal.Gender.valueOf(RNG.nextBoolean()),
-                (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+                (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
     }
 
     @Override

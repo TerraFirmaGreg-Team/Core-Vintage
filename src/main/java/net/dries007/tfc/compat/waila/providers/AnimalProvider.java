@@ -10,7 +10,7 @@ import net.minecraftforge.common.IShearable;
 
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaEntity;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 
@@ -35,9 +35,9 @@ public class AnimalProvider implements IWailaEntity {
             switch (animal.getAge()) {
                 case CHILD:
                     long endPlayerTick = (long) (animal.getBirthDay() + animal.getDaysToAdulthood()) * ICalendar.TICKS_IN_DAY;
-                    long delta = endPlayerTick - CalendarTFC.PLAYER_TIME.getTicks();
-                    long endCalendarTick = CalendarTFC.CALENDAR_TIME.getTicks() + delta;
-                    String date = ICalendarFormatted.getTimeAndDate(endCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+                    long delta = endPlayerTick - Calendar.PLAYER_TIME.getTicks();
+                    long endCalendarTick = Calendar.CALENDAR_TIME.getTicks() + delta;
+                    String date = ICalendarFormatted.getTimeAndDate(endCalendarTick, Calendar.CALENDAR_TIME.getDaysInMonth());
                     currentTooltip.add(new TextComponentTranslation("waila.tfc.animal.childhood_end", date).getFormattedText());
                     break;
                 case OLD:
@@ -55,7 +55,7 @@ public class AnimalProvider implements IWailaEntity {
                                 // For 1.12, addons will need to either extend EntityAnimalMammal or handle the tooltip themselves
                                 if (animal instanceof EntityAnimalMammal mother) {
                                     long gestationDaysRemaining =
-                                            mother.getPregnantTime() + mother.gestationDays() - CalendarTFC.PLAYER_TIME.getTotalDays();
+                                            mother.getPregnantTime() + mother.gestationDays() - Calendar.PLAYER_TIME.getTotalDays();
                                     currentTooltip.add(
                                             new TextComponentTranslation("waila.tfc.animal.pregnant_end", gestationDaysRemaining).getFormattedText());
                                 }

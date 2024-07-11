@@ -16,7 +16,7 @@ import com.eerussianguy.firmalife.te.TEPlanter;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.Climate;
 
 import java.lang.reflect.InvocationTargetException;
@@ -28,7 +28,7 @@ public class TEPlanterN extends TEPlanter {
     NutrientValues nutrientValues = new NutrientValues(0, 0, 0);
 
     public TEPlanterN() {
-        if (getTicksSinceUpdate() == CalendarTFC.PLAYER_TIME.getTicks()) resetCounter();
+        if (getTicksSinceUpdate() == Calendar.PLAYER_TIME.getTicks()) resetCounter();
     }
 
     @Override

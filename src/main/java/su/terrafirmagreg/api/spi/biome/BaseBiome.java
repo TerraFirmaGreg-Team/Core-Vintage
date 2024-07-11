@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.spi.biome;
 
 import su.terrafirmagreg.modules.world.ConfigWorld;
-import su.terrafirmagreg.modules.world.objects.spawner.WorldEntitySpawnerTFC;
+import su.terrafirmagreg.modules.world.objects.spawner.EntitySpawnerWorldData;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -68,7 +68,7 @@ public abstract class BaseBiome extends Biome implements IBiomeSettings {
         }
 
         // todo: Experimental Livestock respawning
-        for (Class<? extends EntityLiving> entityClass : WorldEntitySpawnerTFC.LIVESTOCK.keySet()) {
+        for (Class<? extends EntityLiving> entityClass : EntitySpawnerWorldData.LIVESTOCK.keySet()) {
             spawnableCreatureList.add(new Biome.SpawnListEntry(entityClass, 300, 1, 1));
         }
 

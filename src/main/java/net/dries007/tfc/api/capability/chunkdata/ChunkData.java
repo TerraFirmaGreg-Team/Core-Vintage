@@ -22,7 +22,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -155,8 +155,8 @@ public final class ChunkData {
 
         this.chunkWorkage = 0;
 
-        this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
-        this.lastUpdateYear = CalendarTFC.CALENDAR_TIME.getTotalYears();
+        this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
+        this.lastUpdateYear = Calendar.CALENDAR_TIME.getTotalYears();
     }
 
     /**
@@ -244,14 +244,14 @@ public final class ChunkData {
     }
 
     public void addSpawnProtection(int multiplier) {
-        if (protectedTicks < CalendarTFC.PLAYER_TIME.getTicks()) {
-            protectedTicks = CalendarTFC.PLAYER_TIME.getTicks();
+        if (protectedTicks < Calendar.PLAYER_TIME.getTicks()) {
+            protectedTicks = Calendar.PLAYER_TIME.getTicks();
         }
         protectedTicks += multiplier * 600L;
     }
 
     public long getSpawnProtection() {
-        return protectedTicks - (24 * ICalendar.TICKS_IN_HOUR) - CalendarTFC.PLAYER_TIME.getTicks();
+        return protectedTicks - (24 * ICalendar.TICKS_IN_HOUR) - Calendar.PLAYER_TIME.getTicks();
     }
 
     public boolean isSpawnProtected() {
@@ -259,11 +259,11 @@ public final class ChunkData {
     }
 
     public void resetLastUpdateTick() {
-        this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+        this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
     }
 
     public void resetLastUpdateYear() {
-        this.lastUpdateYear = CalendarTFC.CALENDAR_TIME.getTotalYears();
+        this.lastUpdateYear = Calendar.CALENDAR_TIME.getTotalYears();
     }
 
     public List<Tree> getValidTrees() {

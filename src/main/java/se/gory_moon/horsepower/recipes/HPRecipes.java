@@ -46,8 +46,7 @@ public class HPRecipes {
                     Arrays.asList(Configs.recipes.pressRecipes));
     }
 
-    public void reloadRecipes(List<String> grindstone, List<String> handGrindstone, List<String> chopping, List<String> manualChopping,
-                              List<String> press) {
+    public void reloadRecipes(List<String> grindstone, List<String> handGrindstone, List<String> chopping, List<String> manualChopping, List<String> press) {
         ERRORS.clear();
         grindstoneRecipes.clear();
         handGrindstoneRecipes.clear();

@@ -94,18 +94,17 @@ public class GeneratorSoilPits implements IWorldGenerator {
         }
     }
 
-    private boolean generatePeat(World world, Random rng, BlockPos start) {
+    private void generatePeat(World world, Random rng, BlockPos start) {
         // If this has to have a radius that is >= 8, then it needs to be moved to a cascading-lag safe model
         // Otherwise, do not change this unless you are prepared to do some fairly large re-writes, similar to how ore gen is handled
         int radius = rng.nextInt(4) + 4;
         byte depth = 2;
 
-        if (rng.nextInt(30) != 0 || start.getY() > WorldTypeClassic.SEALEVEL) return false;
+        if (rng.nextInt(30) != 0 || start.getY() > WorldTypeClassic.SEALEVEL) return;
         ChunkData data = ChunkData.get(world, start);
         if (data.isInitialized() && data.getRainfall() >= 375f && data.getFloraDiversity() >= 0.5f && data.getFloraDensity() >= 0.5f &&
-                world.getBiome(start)
-                        .getHeightVariation() < 0.15)
-            return false;
+                world.getBiome(start).getHeightVariation() < 0.15)
+            return;
 
         for (int x = -radius; x <= radius; ++x) {
             for (int z = -radius; z <= radius; ++z) {
@@ -123,6 +122,5 @@ public class GeneratorSoilPits implements IWorldGenerator {
                 }
             }
         }
-        return true;
     }
 }

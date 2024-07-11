@@ -5,7 +5,7 @@ import net.minecraft.world.WorldProvider;
 import net.minecraftforge.common.MinecraftForge;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 public class PassingDayWorldProviderServer extends PassingDaysWorldProvider {
 
@@ -68,8 +68,8 @@ public class PassingDayWorldProviderServer extends PassingDaysWorldProvider {
 
     public float calculateCelestialAngleAtPos(long worldTime, float partialTicks, int z) {
         int i = (int) (worldTime % 24000L);
-        double baseMonth = translateMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear());
-        baseMonth += (double) CalendarTFC.CALENDAR_TIME.getDayOfMonth() / (double) CalendarTFC.CALENDAR_TIME.getDaysInMonth();
+        double baseMonth = translateMonth(Calendar.CALENDAR_TIME.getMonthOfYear());
+        baseMonth += (double) Calendar.CALENDAR_TIME.getDayOfMonth() / (double) Calendar.CALENDAR_TIME.getDaysInMonth();
         i = translateToLocalizedCelestialTime(i, getDayPrecentege(baseMonth, getWinterSolticeDayPrecentege(z)));
         float f = ((float) i + partialTicks) / 24000.0F - 0.25F;
         if (f < 0.0F) {

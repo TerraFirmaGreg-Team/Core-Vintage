@@ -22,8 +22,7 @@ public class ItemWithSubType {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof ItemWithSubType) {
-            ItemWithSubType is = (ItemWithSubType) obj;
+        if (obj instanceof ItemWithSubType is) {
             return i == is.i && is.meta == meta;
         } else return false;
     }

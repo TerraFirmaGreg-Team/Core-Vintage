@@ -1,4 +1,6 @@
-package su.terrafirmagreg.modules.world.objects.spawner;
+package su.terrafirmagreg.modules.world.api.data;
+
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -17,32 +19,29 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
-
 /**
  * Saves animal respawning data to world save
  */
 public class AnimalRespawnWorldData extends WorldSavedData {
 
-    private static final String NAME = MODID_TFC + "_respawn";
-    private static final int REGION_SIZE = 16; // Number of chunks (sqr) per grid, ie: 16x16
+    private static final String DATA_ID = ModUtils.localize("data.animal_respawn");
+
     private final Map<ResourceLocation, Map<ChunkPos, Long>> respawnMap;
 
-    @SuppressWarnings("unused")
-    public AnimalRespawnWorldData(String name) {
-        super(name);
+    private AnimalRespawnWorldData() {
+        super(DATA_ID);
         respawnMap = new HashMap<>();
     }
 
     @NotNull
-    public static AnimalRespawnWorldData get(@NotNull World world) {
+    public static AnimalRespawnWorldData get(World world) {
         MapStorage mapStorage = world.getMapStorage();
         if (mapStorage != null) {
-            AnimalRespawnWorldData data = (AnimalRespawnWorldData) mapStorage.getOrLoadData(AnimalRespawnWorldData.class, NAME);
+            AnimalRespawnWorldData data = (AnimalRespawnWorldData) mapStorage.getOrLoadData(AnimalRespawnWorldData.class, DATA_ID);
             if (data == null) {
-                data = new AnimalRespawnWorldData(NAME);
+                data = new AnimalRespawnWorldData();
                 data.markDirty();
-                mapStorage.setData(NAME, data);
+                mapStorage.setData(DATA_ID, data);
             }
             return data;
         }
@@ -50,7 +49,7 @@ public class AnimalRespawnWorldData extends WorldSavedData {
     }
 
     @Override
-    public void readFromNBT(@NotNull NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt) {
         NBTTagList tag = nbt.getTagList("animal", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < tag.tagCount(); i++) {
             NBTTagCompound animalNbt = tag.getCompoundTagAt(i);
@@ -68,8 +67,7 @@ public class AnimalRespawnWorldData extends WorldSavedData {
     }
 
     @Override
-    @NotNull
-    public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         NBTTagList tag = new NBTTagList();
         for (ResourceLocation animal : respawnMap.keySet()) {
             NBTTagCompound animalNbt = new NBTTagCompound();
@@ -103,7 +101,7 @@ public class AnimalRespawnWorldData extends WorldSavedData {
         if (internal == null) {
             return 0L;
         }
-        ChunkPos grid = new ChunkPos(chunkPos.x - chunkPos.x % REGION_SIZE, chunkPos.z - chunkPos.z % REGION_SIZE);
+        ChunkPos grid = new ChunkPos(chunkPos.x - chunkPos.x % 16, chunkPos.z - chunkPos.z % 16);
         return internal.getOrDefault(grid, 0L);
     }
 

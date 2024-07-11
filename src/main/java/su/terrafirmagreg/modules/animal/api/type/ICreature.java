@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.api.type;
 
-import su.terrafirmagreg.modules.world.objects.spawner.WorldEntitySpawnerTFC;
+import su.terrafirmagreg.modules.world.objects.spawner.EntitySpawnerWorldData;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.biome.Biome;
@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 /**
- * Interface for creature spawning mechanics See {@link WorldEntitySpawnerTFC}
+ * Interface for creature spawning mechanics See {@link EntitySpawnerWorldData}
  */
 public interface ICreature {
 

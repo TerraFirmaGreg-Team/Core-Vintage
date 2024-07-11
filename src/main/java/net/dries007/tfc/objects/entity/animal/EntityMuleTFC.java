@@ -48,7 +48,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -82,8 +82,8 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
         this.setBirthDay(birthDay);
         this.setFamiliarity(0);
         this.setGrowingAge(0); //We don't use this
-        this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
-        this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+        this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
+        this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
     }
 
     @Override
@@ -147,7 +147,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
 
     @Override
     public boolean isHungry() {
-        return lastFed < CalendarTFC.PLAYER_TIME.getTotalDays();
+        return lastFed < Calendar.PLAYER_TIME.getTotalDays();
     }
 
     @Override
@@ -272,19 +272,19 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
             // Is it time to decay familiarity?
             // If this entity was never fed(eg: new born, wild)
             // or wasn't fed yesterday(this is the starting of the second day)
-            if (this.lastFDecay > -1 && this.lastFDecay + 1 < CalendarTFC.PLAYER_TIME.getTotalDays()) {
+            if (this.lastFDecay > -1 && this.lastFDecay + 1 < Calendar.PLAYER_TIME.getTotalDays()) {
                 float familiarity = getFamiliarity();
                 if (familiarity < 0.3f) {
-                    familiarity -= 0.02 * (CalendarTFC.PLAYER_TIME.getTotalDays() - this.lastFDecay);
-                    this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+                    familiarity -= 0.02 * (Calendar.PLAYER_TIME.getTotalDays() - this.lastFDecay);
+                    this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
                     this.setFamiliarity(familiarity);
                 }
             }
-            if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
-                this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
+            if (this.getAge() == Age.OLD && lastDeath < Calendar.PLAYER_TIME.getTotalDays()) {
+                this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
                 // Randomly die of old age, tied to entity UUID and calendar time
                 final Random random = new Random(
-                        this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+                        this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
                 if (random.nextDouble() < ConfigTFC.Animals.MULE.oldDeathChance) {
                     this.setDead();
                 }
@@ -303,7 +303,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
         if (other == this) {
             // Only called if this animal is interacted with a spawn egg
             EntityMuleTFC baby = new EntityMuleTFC(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
             this.setOffspringAttributes(this, baby);
             return baby;
         }
@@ -388,7 +388,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimal, ILivestock, IR
                         }
                     }
                     if (!this.world.isRemote) {
-                        lastFed = CalendarTFC.PLAYER_TIME.getTotalDays();
+                        lastFed = Calendar.PLAYER_TIME.getTotalDays();
                         lastFDecay = lastFed; //No decay needed
                         this.consumeItemFromStack(player, stack);
                         if (this.getAge() == Age.CHILD || this.getFamiliarity() < getAdultFamiliarityCap()) {

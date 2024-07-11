@@ -15,7 +15,7 @@ import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
@@ -35,7 +35,7 @@ public class BerryBushProvider implements IWailaBlock {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockBerryBush block) {
             if (block.getBush()
-                    .isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
+                    .isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear()) && !state.getValue(BlockBerryBush.FRUITING)) {
                 float temp = Climate.getActualTemp(world, pos);
                 float rainfall = ChunkData.getRainfall(world, pos);
                 TETickCounter te = TileUtils.getTile(world, pos, TETickCounter.class);

@@ -19,7 +19,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +50,7 @@ public class ItemBlockRot extends ItemBlockTFC {
         if (!worldIn.isRemote && result == EnumActionResult.SUCCESS) {
             TETickCounter te = TileUtils.getTile(worldIn, pos.offset(facing), TETickCounter.class);
             if (te != null) {
-                long currentTime = CalendarTFC.PLAYER_TIME.getTicks();
+                long currentTime = Calendar.PLAYER_TIME.getTicks();
                 te.resetCounter(); //te counter is at currentTime
                 te.reduceCounter(foodCreationDate - currentTime); //teCounter is now at foodCreationDate
             }

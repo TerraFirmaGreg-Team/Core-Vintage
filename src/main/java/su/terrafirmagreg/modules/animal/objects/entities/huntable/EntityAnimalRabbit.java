@@ -41,7 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -176,7 +176,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
         int numberOfChildren = 5 + rand.nextInt(5); // 5-10
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalRabbit baby = new EntityAnimalRabbit(this.world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                    (int) Calendar.PLAYER_TIME.getTotalDays());
             baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
             this.world.spawnEntity(baby);
         }

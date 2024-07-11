@@ -48,7 +48,7 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 
 import org.jetbrains.annotations.NotNull;
@@ -146,7 +146,7 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
                 }
             }
             if (leafCount > 0) {
-                Month month = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+                Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
                 if (!(month == Month.OCTOBER || month == Month.NOVEMBER)) {
                     player.sendStatusMessage(new TextComponentTranslation("tooltip.firmalife.not_fall"), true);
                     return EnumActionResult.PASS;
@@ -154,7 +154,7 @@ public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {
 
                 var cap = CapabilityPlayer.get(player);
                 if (cap != null) {
-                    boolean timePassed = (int) CalendarTFC.CALENDAR_TIME.getTicks() - cap.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
+                    boolean timePassed = (int) Calendar.CALENDAR_TIME.getTicks() - cap.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
                     boolean distanced = cap.getNutDistance(pos) > ConfigFL.General.BALANCE.nutDistance;
                     if (distanced && timePassed) {
                         cap.setNuttedTime();

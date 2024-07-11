@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -95,14 +95,14 @@ public class TileLogPile extends BaseTileInventory implements ITickable, IContai
     public void update() {
         if (!world.isRemote) {
             if (burning) {
-                if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startBurningTick) > ConfigTFC.Devices.CHARCOAL_PIT.ticks) {
+                if ((int) (Calendar.PLAYER_TIME.getTicks() - startBurningTick) > ConfigTFC.Devices.CHARCOAL_PIT.ticks) {
                     // Attempt to turn this log pile into charcoal
                     createCharcoal();
                 }
             } else {
                 if (world.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
                     burning = true;
-                    startBurningTick = CalendarTFC.PLAYER_TIME.getTicks();
+                    startBurningTick = Calendar.PLAYER_TIME.getTicks();
                 }
             }
         }
@@ -163,7 +163,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable, IContai
 
     public void light() {
         burning = true;
-        startBurningTick = CalendarTFC.PLAYER_TIME.getTicks();
+        startBurningTick = Calendar.PLAYER_TIME.getTicks();
         tryLightNearby();
         markDirty();
     }

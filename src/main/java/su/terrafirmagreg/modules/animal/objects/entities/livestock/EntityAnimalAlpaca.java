@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -79,7 +79,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
         int numberOfChildren = ConfigAnimal.ENTITIES.ALPACA.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntityAnimalAlpaca baby = new EntityAnimalAlpaca(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
+                    (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
             world.spawnEntity(baby);
@@ -113,7 +113,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigAnimal.ENTITIES.ALPACA.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.ALPACA.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override

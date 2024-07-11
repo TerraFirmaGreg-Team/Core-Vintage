@@ -44,7 +44,7 @@ import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -107,7 +107,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
         int numberOfChildren = ConfigTFC.Animals.SHEEP.babies;
         for (int i = 0; i < numberOfChildren; i++) {
             EntitySheepTFC baby = new EntitySheepTFC(world, Gender.valueOf(MathConstants.RNG.nextBoolean()),
-                    (int) CalendarTFC.PLAYER_TIME.getTotalDays(),
+                    (int) Calendar.PLAYER_TIME.getTotalDays(),
                     getDyeColor());
             baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
@@ -222,12 +222,12 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 
     @Override
     public void setProductsCooldown() {
-        setShearedTick(CalendarTFC.PLAYER_TIME.getTicks());
+        setShearedTick(Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigTFC.Animals.SHEEP.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigTFC.Animals.SHEEP.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override

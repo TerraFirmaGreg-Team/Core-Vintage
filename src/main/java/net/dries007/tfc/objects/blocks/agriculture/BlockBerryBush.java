@@ -34,7 +34,7 @@ import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -145,7 +145,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
                 float rainfall = ChunkData.getRainfall(world, pos);
                 long hours = tile.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
                 if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
-                    if (bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+                    if (bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
                         //Fruiting
                         world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
                     }
@@ -257,7 +257,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
         boolean canGrow = bush.isValidForGrowth(temp, rainfall);
         if (state.getValue(FRUITING)) {
             return GrowthStatus.FULLY_GROWN;
-        } else if (canGrow && bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+        } else if (canGrow && bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
             return GrowthStatus.GROWING;
         }
         return canGrow ? GrowthStatus.CAN_GROW : GrowthStatus.NOT_GROWING;

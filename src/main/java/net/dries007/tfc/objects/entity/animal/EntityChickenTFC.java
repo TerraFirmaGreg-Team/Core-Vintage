@@ -31,7 +31,7 @@ import net.minecraft.world.biome.Biome;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIFindNest;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -126,7 +126,7 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
             if (cap != null) {
                 EntityChickenTFC chick = new EntityChickenTFC(this.world);
                 chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ConfigTFC.Animals.CHICKEN.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+                cap.setFertilized(chick, ConfigTFC.Animals.CHICKEN.hatch + Calendar.PLAYER_TIME.getTotalDays());
             }
         }
         eggs.add(egg);
@@ -135,12 +135,12 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
 
     @Override
     public void setProductsCooldown() {
-        this.setLaidTicks(CalendarTFC.PLAYER_TIME.getTicks());
+        this.setLaidTicks(Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigTFC.Animals.CHICKEN.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigTFC.Animals.CHICKEN.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override
@@ -221,7 +221,7 @@ public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (this.getClass() == EntityChickenTFC.class && this.getGender() == Gender.MALE && !this.world.isRemote && !this.isChild() &&
-                CalendarTFC.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
+                Calendar.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
             this.world.playSound(null, this.getPosition(), SoundsAnimal.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
         }
         this.oFlap = this.wingRotation;

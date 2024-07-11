@@ -157,26 +157,20 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
 
         public Type getNonGrassVersion() {
             if (!isGrass) return this;
-            switch (this) {
-                case GRASS:
-                    return DIRT;
-                case DRY_GRASS:
-                    return DIRT;
-                case CLAY_GRASS:
-                    return CLAY;
-            }
-            throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            return switch (this) {
+                case GRASS, DRY_GRASS -> DIRT;
+                case CLAY_GRASS -> CLAY;
+                default -> throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+            };
         }
 
         public Type getGrassVersion(Type spreader) {
             if (!spreader.isGrass) throw new IllegalArgumentException("Non-grass can't spread.");
-            switch (this) {
-                case DIRT:
-                    return spreader == DRY_GRASS ? DRY_GRASS : GRASS;
-                case CLAY:
-                    return CLAY_GRASS;
-            }
-            throw new IllegalArgumentException("You cannot get grass from rock types.");
+            return switch (this) {
+                case DIRT -> spreader == DRY_GRASS ? DRY_GRASS : GRASS;
+                case CLAY -> CLAY_GRASS;
+                default -> throw new IllegalArgumentException("You cannot get grass from rock types.");
+            };
         }
 
         @Nullable

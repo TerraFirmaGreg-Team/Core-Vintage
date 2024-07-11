@@ -27,6 +27,7 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+import su.terrafirmagreg.modules.world.api.data.CalendarWorldData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.block.Block;
@@ -133,8 +134,7 @@ import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.CalendarWorldData;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SmithingSkill;
@@ -660,8 +660,8 @@ public final class CommonEventHandler {
         // Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
         // This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
         if (event.getWorld().getBlockState(pos).getBlock() == BlocksCore.THATCH || event.getWorld()
-                                                                                           .getBlockState(pos.up())
-                                                                                           .getBlock() == BlocksCore.THATCH) {
+                .getBlockState(pos.up())
+                .getBlock() == BlocksCore.THATCH) {
             event.setResult(Event.Result.DENY);
         }
     }
@@ -858,8 +858,8 @@ public final class CommonEventHandler {
         if (world.provider.getDimension() == 0 && !world.isRemote) {
             // Calendar Sync / Initialization
             CalendarWorldData data = CalendarWorldData.get(world);
-            CalendarTFC.INSTANCE.resetTo(data.getCalendar());
-            TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(CalendarTFC.INSTANCE));
+            Calendar.INSTANCE.resetTo(data.getCalendar());
+            TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(Calendar.INSTANCE));
         }
 
         if (ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {

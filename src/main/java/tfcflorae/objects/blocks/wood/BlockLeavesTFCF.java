@@ -38,7 +38,7 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.Climate;
@@ -117,7 +117,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
     public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!world.isAreaLoaded(pos, 1)) return;
 
-        Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
         int expectedStage = fruitTree.getStageForMonth(currentMonth);
         float avgTemperature = Climate.getAvgTemp(world, pos);
         float tempGauss = (int) (12f + (random.nextGaussian() / 4));

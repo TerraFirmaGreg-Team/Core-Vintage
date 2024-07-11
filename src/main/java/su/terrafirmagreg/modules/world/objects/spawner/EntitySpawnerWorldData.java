@@ -19,6 +19,7 @@ import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalS
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalWolf;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalYak;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.world.api.data.AnimalRespawnWorldData;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -38,7 +39,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
 
@@ -57,7 +58,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
  */
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = MODID_TFC)
-public final class WorldEntitySpawnerTFC {
+public final class EntitySpawnerWorldData {
 
     /**
      * Handles livestock cooldown time Supplier so we get the updated config value
@@ -111,10 +112,10 @@ public final class WorldEntitySpawnerTFC {
             AnimalRespawnWorldData data = AnimalRespawnWorldData.get(worldIn);
             ChunkPos pos = new ChunkPos(new BlockPos(event.getX(), event.getY(), event.getZ()));
             long lastSpawnTick = data.getLastRespawnTick(entity, pos);
-            long deltaTicks = CalendarTFC.PLAYER_TIME.getTicks() - lastSpawnTick;
+            long deltaTicks = Calendar.PLAYER_TIME.getTicks() - lastSpawnTick;
             long cooldown = LIVESTOCK.get(entity.getClass()).get();
             if (lastSpawnTick <= 0 || cooldown <= deltaTicks) {
-                data.setLastRespawnTick(entity, pos, CalendarTFC.PLAYER_TIME.getTicks());
+                data.setLastRespawnTick(entity, pos, Calendar.PLAYER_TIME.getTicks());
                 int centerX = (int) event.getX();
                 int centerZ = (int) event.getZ();
                 int diameterX = 16;

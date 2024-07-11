@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -74,7 +74,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
             if (cap != null) {
                 EntityAnimalDuck chick = new EntityAnimalDuck(this.world);
                 chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-                cap.setFertilized(chick, ConfigAnimal.ENTITIES.DUCK.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+                cap.setFertilized(chick, ConfigAnimal.ENTITIES.DUCK.hatch + Calendar.PLAYER_TIME.getTotalDays());
             }
         }
         eggs.add(egg);
@@ -83,7 +83,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
     @Override
     public long getProductsCooldown() {
-        return Math.max(0, ConfigAnimal.ENTITIES.DUCK.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+        return Math.max(0, ConfigAnimal.ENTITIES.DUCK.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
     }
 
     @Override

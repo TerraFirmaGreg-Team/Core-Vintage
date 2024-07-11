@@ -32,24 +32,24 @@ public class TFCFarmingContent {
         fertilizerValues.put(new ItemWithSubType(item, type), value);
     }
 
-    public static boolean isFertilizer(ItemStack is) {
-        Item i = is.getItem();
-        boolean meta = i.getHasSubtypes();
-        if (i != cachedItem || (meta && is.getMetadata() != cachedType)) {
-            cachedItem = i;
-            cachedType = meta ? is.getMetadata() : 0;
+    public static boolean isFertilizer(ItemStack itemStack) {
+        Item item = itemStack.getItem();
+        boolean meta = item.getHasSubtypes();
+        if (item != cachedItem || (meta && itemStack.getMetadata() != cachedType)) {
+            cachedItem = item;
+            cachedType = meta ? itemStack.getMetadata() : 0;
             cachedResponse = false;
-            cachedResponse = fertilizerClass.containsKey(new ItemWithSubType(i, cachedType));
+            cachedResponse = fertilizerClass.containsKey(new ItemWithSubType(item, cachedType));
         }
         return cachedResponse;
     }
 
-    public static NutrientClass getFertilizerClass(ItemStack i) {
-        return fertilizerClass.get(new ItemWithSubType(i.getItem(), i.getHasSubtypes() ? i.getMetadata() : 0));
+    public static NutrientClass getFertilizerClass(ItemStack itemStack) {
+        return fertilizerClass.get(new ItemWithSubType(itemStack.getItem(), itemStack.getHasSubtypes() ? itemStack.getMetadata() : 0));
     }
 
-    public static int getFertilizerValue(ItemStack i) {
-        return fertilizerValues.get(new ItemWithSubType(i.getItem(), i.getHasSubtypes() ? i.getMetadata() : 0));
+    public static int getFertilizerValue(ItemStack itemStack) {
+        return fertilizerValues.get(new ItemWithSubType(itemStack.getItem(), itemStack.getHasSubtypes() ? itemStack.getMetadata() : 0));
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

@@ -34,6 +34,7 @@ import su.terrafirmagreg.modules.core.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.core.event.PuddlesEventHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.CommandsCore;
+import su.terrafirmagreg.modules.core.init.DataSerializersCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
@@ -75,6 +76,7 @@ public final class ModuleCore extends ModuleBase {
     @Override
     public void onRegister() {
 
+        DataSerializersCore.onRegister(registryManager);
         BlocksCore.onRegister(registryManager);
         FluidsCore.onRegister(registryManager);
         ItemsCore.onRegister(registryManager);

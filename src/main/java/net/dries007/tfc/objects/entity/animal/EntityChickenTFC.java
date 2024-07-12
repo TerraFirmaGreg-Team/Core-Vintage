@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -29,7 +30,6 @@ import net.minecraft.world.biome.Biome;
 
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIFindNest;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -48,7 +48,7 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 public class EntityChickenTFC extends EntityAnimalBase implements ILivestock {
 
     //The last time(in ticks) this chicken has laid eggs
-    private static final DataParameter<Long> LAID = EntityDataManager.createKey(EntityChickenTFC.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> LAID = EntityDataManager.createKey(EntityChickenTFC.class, DataSerializers.LONG);
     //Copy from vanilla's EntityChicken, used by renderer to properly handle wing flap
     public float wingRotation;
     public float destPos;

@@ -110,23 +110,30 @@ repositories {
         name 'CleanroomMC Maven'
         url 'https://maven.cleanroommc.com'
     }
+
+    maven {
+        name 'GTNH Maven'
+        url 'https://nexus.gtnewhorizons.com/repository/public/'
+    }
 }
 
 dependencies {
     if (propertyBool('use_modern_java_syntax')) {
-        annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
-        // Workaround for https://github.com/bsideup/jabel/issues/174
-        annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
-        compileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
+        annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.1'
+        compileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.1') {
             transitive = false
         }
-        // Allow jdk.unsupported classes like sun.misc.Unsafe, workaround for JDK-8206937 and fixes crashes in tests
+        // workaround for https://github.com/bsideup/jabel/issues/174
+        annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
+        // Allow jdk.unsupported classes like sun.misc.Unsafe, workaround for JDK-8206937 and fixes Forge crashes in tests.
         patchedMinecraft 'me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0'
-        // Include for tests
-        testAnnotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
-        testCompileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
+
+        // allow Jabel to work in tests
+        testAnnotationProcessor "com.github.bsideup.jabel:jabel-javac-plugin:1.0.1"
+        testCompileOnly("com.github.bsideup.jabel:jabel-javac-plugin:1.0.1") {
             transitive = false // We only care about the 1 annotation class
         }
+        testCompileOnly "me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0"
     }
     if (propertyBool('use_asset_mover')) {
         implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
@@ -144,6 +151,12 @@ dependencies {
         }
     }
 
+    compileOnlyApi 'org.jetbrains:annotations:24.1.0'
+    annotationProcessor 'org.jetbrains:annotations:24.1.0'
+    patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
+        transitive = false
+    }
+
     compileOnly 'org.projectlombok:lombok:1.18.+'
     annotationProcessor 'org.projectlombok:lombok:1.18.+'
     testCompileOnly 'org.projectlombok:lombok:1.18.+'
@@ -151,9 +164,6 @@ dependencies {
 
     implementation "io.gitlab.hohserg.elegant.networking:elegant-networking-1.12:3.14"
     annotationProcessor "io.gitlab.hohserg.elegant.networking:annotation-processor:3.14"
-
-    compileOnlyApi 'org.jetbrains:annotations:24.1.0'
-    annotationProcessor 'org.jetbrains:annotations:24.1.0'
 
     implementation 'it.unimi.dsi:fastutil:8.5.+'
 }

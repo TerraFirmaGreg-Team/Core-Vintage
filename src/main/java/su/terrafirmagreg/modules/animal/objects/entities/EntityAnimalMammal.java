@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities;
 
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
@@ -20,8 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class EntityAnimalMammal extends EntityAnimalBase {
 
     // The time(in days) this entity became pregnant
-    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class,
-            TFCEntities.getLongDataSerializer());
+    private static final DataParameter<Long> PREGNANT_TIME = EntityDataManager.createKey(EntityAnimalMammal.class, DataSerializers.LONG);
 
     @SuppressWarnings("unused")
     public EntityAnimalMammal(World worldIn) {

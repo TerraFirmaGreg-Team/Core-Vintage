@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.spi.item;
 
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.registry.provider.IMultiItemBlock;
+import su.terrafirmagreg.api.registry.provider.IMultiItemBlockProvider;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
 
 import net.minecraft.block.Block;
@@ -27,7 +27,7 @@ public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
             this.rarity = EnumRarity.COMMON;
         }
 
-        if (block instanceof IMultiItemBlock multiItemBlock) {
+        if (block instanceof IMultiItemBlockProvider multiItemBlock) {
             setMaxDamage(multiItemBlock.getMaxItemDamage());
             setHasSubtypes(multiItemBlock.getHasItemSubtypes());
         } else {
@@ -47,7 +47,7 @@ public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
 
     @Override
     public String getTranslationKey(ItemStack stack) {
-        if (block instanceof IMultiItemBlock multiItemBlock && multiItemBlock.getTranslationKey(stack.getMetadata()) != null) {
+        if (block instanceof IMultiItemBlockProvider multiItemBlock && multiItemBlock.getTranslationKey(stack.getMetadata()) != null) {
             return super.getTranslationKey(stack) + "." + multiItemBlock.getTranslationKey(stack.getMetadata());
         } else {
             return super.getTranslationKey(stack);

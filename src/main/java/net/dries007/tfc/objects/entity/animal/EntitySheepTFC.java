@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -22,7 +23,6 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -42,7 +42,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
@@ -61,7 +60,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, ILivestock {
 
     private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntitySheepTFC.class, DataSerializers.VARINT);
-    private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntitySheepTFC.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntitySheepTFC.class, DataSerializers.LONG);
 
     @SuppressWarnings("unused")
     public EntitySheepTFC(World worldIn) {

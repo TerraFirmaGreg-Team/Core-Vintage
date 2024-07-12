@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.registry.provider;
 
 import org.jetbrains.annotations.Nullable;
 
-public interface IMultiItemBlock {
+public interface IMultiItemBlockProvider {
 
     boolean getHasItemSubtypes();
 

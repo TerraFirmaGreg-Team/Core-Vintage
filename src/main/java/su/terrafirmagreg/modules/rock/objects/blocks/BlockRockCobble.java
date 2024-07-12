@@ -9,6 +9,8 @@ import net.minecraft.util.BlockRenderLayer;
 
 import net.dries007.tfc.api.util.FallingBlockManager;
 
+import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL_ROCK;
+
 public class BlockRockCobble extends BlockRockFallable {
 
     public BlockRockCobble(RockBlockVariant variant, RockType type) {
@@ -16,8 +18,9 @@ public class BlockRockCobble extends BlockRockFallable {
 
         getSettings()
                 .renderLayer(BlockRenderLayer.CUTOUT)
-                .addOreDict("cobblestone");
+                .addOreDict("cobblestone")
+                .hardness(6f + type.getRockCategory().getHardnessModifier());
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
+        FallingBlockManager.registerFallable(this, VERTICAL_AND_HORIZONTAL_ROCK);
     }
 }

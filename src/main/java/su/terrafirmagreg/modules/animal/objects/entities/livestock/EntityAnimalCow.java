@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -9,7 +10,6 @@ import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
 import net.minecraft.block.Block;
@@ -54,7 +54,7 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
-    private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, TFCEntities.getLongDataSerializer());
+    private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, DataSerializers.LONG);
 
     @SuppressWarnings("unused")
     public EntityAnimalCow(World worldIn) {

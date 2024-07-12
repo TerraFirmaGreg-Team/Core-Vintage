@@ -58,7 +58,7 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
     public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
     private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 1.0, 0.875);
-    private static final Map<Plant, BlockPlantTFC> MAP = new HashMap();
+    private static final Map<Plant, BlockPlantTFC> MAP = new HashMap<>();
     public final PropertyInteger growthStageProperty;
     protected final Plant plant;
     protected final BlockStateContainer blockState;

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -39,7 +40,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
-import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.climate.BiomeHelper;
 
@@ -55,7 +55,7 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 
-    private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityCowTFC.class, EntitiesTFC.getLongDataSerializer());
+    private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityCowTFC.class, DataSerializers.LONG);
 
     @SuppressWarnings("unused")
     public EntityCowTFC(World worldIn) {

@@ -30,6 +30,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.DataSerializerEntry;
 
 
 import java.util.HashMap;
@@ -272,6 +273,26 @@ public class ModuleEventRouter {
             module.getLogger().debug("Register VillagerProfessionEvent start");
             module.getRegistry().onRegisterVillagerProfession(event);
             module.getLogger().debug("Register VillagerProfessionEvent complete");
+        });
+    }
+
+    @SubscribeEvent
+    @SuppressWarnings("unused")
+    protected void onRegisterRecipeEvent(RegistryEvent.Register<IRecipe> event) {
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register RecipeEvent start");
+            module.getRegistry().onRegisterRecipe(event);
+            module.getLogger().debug("Register RecipeEvent complete");
+        });
+    }
+
+    @SubscribeEvent
+    @SuppressWarnings("unused")
+    protected void onRegisterDataSerializerEntryEvent(RegistryEvent.Register<DataSerializerEntry> event) {
+        this.fireEvent(module -> {
+            module.getLogger().debug("Register RecipeEvent start");
+            module.getRegistry().onRegisterDataSerializerEntry(event);
+            module.getLogger().debug("Register RecipeEvent complete");
         });
     }
 

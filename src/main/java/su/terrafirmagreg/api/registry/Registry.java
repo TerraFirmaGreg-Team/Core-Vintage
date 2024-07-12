@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
@@ -24,7 +25,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -32,6 +32,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.DataSerializerEntry;
 
 
 import com.github.bsideup.jabel.Desugar;
@@ -46,61 +47,66 @@ import com.github.bsideup.jabel.Desugar;
 public record Registry(RegistryManager registryManager) {
 
     public void onRegisterBlock(RegistryEvent.Register<Block> event) {
-        for (var block : this.registryManager.getBlocks()) {
-            event.getRegistry().register(block);
-        }
 
+        this.registryManager.getBlocks().register(event);
         this.onRegisterTileEntities();
     }
 
     public void onRegisterItem(RegistryEvent.Register<Item> event) {
-        for (var item : this.registryManager.getItems()) {
-            event.getRegistry().register(item);
-        }
+
+        this.registryManager.getItems().register(event);
     }
 
     public void onRegisterPotion(RegistryEvent.Register<Potion> event) {
-        for (var potion : this.registryManager.getPotions()) {
-            event.getRegistry().register(potion);
-        }
+
+        this.registryManager.getPotions().register(event);
     }
 
     public void onRegisterPotionType(RegistryEvent.Register<PotionType> event) {
-        for (var potionType : this.registryManager.getPotionType()) {
-            event.getRegistry().register(potionType);
-        }
+
+        this.registryManager.getPotionType().register(event);
     }
 
     public void onRegisterBiome(RegistryEvent.Register<Biome> event) {
-        for (var biome : this.registryManager.getBiomes()) {
-            event.getRegistry().register(biome);
 
-            if (biome.getTypes().length > 0) {
-                BiomeDictionary.addTypes(biome, biome.getTypes());
-            }
-        }
+        this.registryManager.getBiomes().register(event);
+
+        //        for (var biome : this.registryManager.getBiomes()) {
+        //
+        //            if (biome.getTypes().length > 0) {
+        //                BiomeDictionary.addTypes(biome, biome.getTypes());
+        //            }
+        //        }
     }
 
     public void onRegisterSound(RegistryEvent.Register<SoundEvent> event) {
-        for (var sound : this.registryManager.getSounds()) {
-            event.getRegistry().register(sound);
-        }
+
+        this.registryManager.getSounds().register(event);
     }
 
     public void onRegisterEntity(RegistryEvent.Register<EntityEntry> event) {
-        for (var entity : this.registryManager.getEntities()) {
-            event.getRegistry().register(entity);
-        }
+
+        this.registryManager.getEntities().register(event);
     }
 
     public void onRegisterEnchantment(RegistryEvent.Register<Enchantment> event) {
-        for (var enchant : this.registryManager.getEnchantments()) {
-            event.getRegistry().register(enchant);
-        }
+
+        this.registryManager.getEnchantments().register(event);
     }
 
     public void onRegisterVillagerProfession(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
-        // TODO: register villager profession event
+
+        this.registryManager.getProfessions().register(event);
+    }
+
+    public void onRegisterRecipe(RegistryEvent.Register<IRecipe> event) {
+
+        this.registryManager.getRecipes().register(event);
+    }
+
+    public void onRegisterDataSerializerEntry(RegistryEvent.Register<DataSerializerEntry> event) {
+
+        this.registryManager.getDataSerializerEntries().register(event);
     }
 
     public void onRegisterTileEntities() {

@@ -397,8 +397,7 @@ public final class BlocksTFC {
             Builder<BlockPlantTFC> b = ImmutableList.builder();
             for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
                 if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS || plant.getPlantType() == Plant.PlantType.TALL_GRASS)
-                    b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType()
-                            .create(plant), CT_FLORA));
+                    b.add(register(r, "plants/" + plant.getRegistryName().getPath(), plant.getPlantType().create(plant), CT_FLORA));
             }
             allGrassBlocks = b.build();
             for (BlockPlantTFC blockPlant : allGrassBlocks) {

@@ -362,23 +362,12 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
 
         @Override
         public Material getPlantMaterial() {
-            switch (this) {
-                case CACTUS:
-                    return Material.CACTUS;
-                case HANGING:
-                case SHORT_GRASS:
-                case TALL_GRASS:
-                    return Material.VINE;
-                case WATER:
-                case WATER_SEA:
-                case TALL_WATER:
-                case TALL_WATER_SEA:
-                case EMERGENT_TALL_WATER:
-                case EMERGENT_TALL_WATER_SEA:
-                    return Material.CORAL;
-                default:
-                    return Material.PLANTS;
-            }
+            return switch (this) {
+                case CACTUS -> Material.CACTUS;
+                case HANGING, SHORT_GRASS, TALL_GRASS -> Material.VINE;
+                case WATER, WATER_SEA, TALL_WATER, TALL_WATER_SEA, EMERGENT_TALL_WATER, EMERGENT_TALL_WATER_SEA -> Material.CORAL;
+                default -> Material.PLANTS;
+            };
         }
     }
 

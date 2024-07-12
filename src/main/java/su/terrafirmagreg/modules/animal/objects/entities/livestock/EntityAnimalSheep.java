@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.animal.objects.entities.livestock;
 
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -12,7 +13,6 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.EntityAnimalMammal;
-import su.terrafirmagreg.modules.animal.objects.entities.TFCEntities;
 import su.terrafirmagreg.modules.core.network.SCPacketSimpleMessage;
 
 import net.minecraft.block.Block;
@@ -27,7 +27,6 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -60,7 +59,7 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
 
     private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.VARINT);
-    private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntityAnimalSheep.class, TFCEntities.getLongDataSerializer());
+    private static final DataParameter<Long> SHEARED = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.LONG);
 
     @SuppressWarnings("unused")
     public EntityAnimalSheep(World worldIn) {

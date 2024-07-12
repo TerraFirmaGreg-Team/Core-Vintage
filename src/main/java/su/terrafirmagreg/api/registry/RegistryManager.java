@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.lib.LootBuilder;
+import su.terrafirmagreg.api.lib.collection.RegistryList;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
 import su.terrafirmagreg.api.spi.biome.BaseBiome;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
@@ -16,6 +17,8 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.network.datasync.DataSerializer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -36,6 +39,8 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.registries.DataSerializerEntry;
 
 
 import com.google.common.collect.HashMultimap;
@@ -59,12 +64,62 @@ public class RegistryManager {
     /**
      * A list of all items registered by the helper.
      */
-    private final NonNullList<Item> items = NonNullList.create();
+    private final RegistryList<Item> items = RegistryList.create();
 
     /**
      * A list of all blocks registered by the helper.
      */
-    private final NonNullList<Block> blocks = NonNullList.create();
+    private final RegistryList<Block> blocks = RegistryList.create();
+
+    /**
+     * A list of all enchantments registered.
+     */
+    private final RegistryList<Enchantment> enchantments = RegistryList.create();
+
+    /**
+     * A list of all potions registered by the helper.
+     */
+    private final RegistryList<Potion> potions = RegistryList.create();
+
+    /**
+     * A list of all potion type registered by the helper.
+     */
+    private final RegistryList<PotionType> potionType = RegistryList.create();
+
+    /**
+     * A list of all biomes registered by the helper.
+     */
+    private final RegistryList<Biome> biomes = RegistryList.create();
+
+    /**
+     * A list of all the sounds registered by the helper.
+     */
+    private final RegistryList<SoundEvent> sounds = RegistryList.create();
+
+    /**
+     * A list of all entities registered by the helper.
+     */
+    private final RegistryList<EntityEntry> entities = RegistryList.create();
+
+    /**
+     * A list of all professions registered by the helper.
+     */
+    private final RegistryList<VillagerRegistry.VillagerProfession> professions = RegistryList.create();
+
+    /**
+     * A list of all recipes registered by the helper.
+     */
+    private final RegistryList<IRecipe> recipes = RegistryList.create();
+
+    /**
+     * A list of all recipes registered by the helper.
+     */
+    private final RegistryList<DataSerializerEntry> dataSerializerEntries = RegistryList.create();
+
+    /**
+     * A list of all the commands registered here.
+     */
+    private final NonNullList<ICommand> commands = NonNullList.create();
 
     /**
      * A list of all the tile providers registered here.
@@ -72,34 +127,9 @@ public class RegistryManager {
     private final NonNullList<ITileProvider> tiles = NonNullList.create();
 
     /**
-     * A list of all potions registered by the helper.
-     */
-    private final NonNullList<Potion> potions = NonNullList.create();
-
-    /**
-     * A list of all potion type registered by the helper.
-     */
-    private final NonNullList<PotionType> potionType = NonNullList.create();
-
-    /**
-     * A list of all biomes registered by the helper.
-     */
-    private final NonNullList<BaseBiome> biomes = NonNullList.create();
-
-    /**
-     * A list of all the sounds registered by the helper.
-     */
-    private final NonNullList<SoundEvent> sounds = NonNullList.create();
-
-    /**
      * A list of all the keyBinding registered by the helper.
      */
     private final NonNullList<KeyBinding> keyBinding = NonNullList.create();
-
-    /**
-     * A list of all entities registered by the helper.
-     */
-    private final NonNullList<EntityEntry> entities = NonNullList.create();
 
     /**
      * A list of all entities registered by the helper.
@@ -110,16 +140,6 @@ public class RegistryManager {
      * A local map of all the entries that have been added. This is on a per instance basis, used to get mod-specific entries.
      */
     private final Multimap<ResourceLocation, LootBuilder> lootTableEntries = HashMultimap.create();
-
-    /**
-     * A list of all enchantments registered.
-     */
-    private final List<Enchantment> enchantments = NonNullList.create();
-
-    /**
-     * A list of all the commands registered here.
-     */
-    private final List<ICommand> commands = NonNullList.create();
 
     /**
      * The creative tab used by the mod. This can be null.
@@ -419,7 +439,7 @@ public class RegistryManager {
 
     //endregion
 
-    //region ===== Enchantment
+    //region ===== Command
 
     /**
      * Registers a new command. Registration will be handled for you.
@@ -430,6 +450,24 @@ public class RegistryManager {
 
         this.commands.add(command);
         return command;
+    }
+
+    //endregion
+
+    //region ===== Enchantment
+
+    /**
+     * Registers a new dataSerializer. Registration will be handled for you.
+     *
+     * @param serializer The command to add.
+     */
+    public DataSerializerEntry dataSerializerEntry(DataSerializer<?> serializer, String name) {
+
+        var dataSerializerEntry = new DataSerializerEntry(serializer);
+        dataSerializerEntry.setRegistryName(new ResourceLocation(this.modID, name));
+        this.dataSerializerEntries.add(dataSerializerEntry);
+
+        return dataSerializerEntry;
     }
 
     //endregion
@@ -540,8 +578,7 @@ public class RegistryManager {
      * @param functions  A list of loot functions.
      * @return A builder object. It can be used to fine tune the loot entry.
      */
-    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, int quality, Item item,
-                            List<LootCondition> conditions, List<LootFunction> functions) {
+    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, int quality, Item item, List<LootCondition> conditions, List<LootFunction> functions) {
 
         return this.loot(location, new LootBuilder(this.modID + ":" + name, pool, weight, quality, item, conditions, functions));
     }

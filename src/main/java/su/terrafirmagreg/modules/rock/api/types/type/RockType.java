@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.type;
 
+import su.terrafirmagreg.api.spi.types.type.Type;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 
@@ -23,7 +24,7 @@ import java.util.Set;
  * Основной класс для типов камней.
  */
 @Getter
-public class RockType implements Comparable<RockType> {
+public class RockType extends Type<RockType> {
 
     @Getter
     private static final Set<RockType> types = new ObjectOpenHashSet<>();
@@ -35,15 +36,14 @@ public class RockType implements Comparable<RockType> {
     private final boolean isFlux;
 
     private RockType(Builder builder) {
+        super(builder.name);
         this.name = builder.name;
         this.rockCategory = builder.rockCategory;
         this.orePrefix = builder.orePrefix;
         this.material = builder.material;
         this.isFlux = builder.isFlux;
 
-        if (name.isEmpty()) throw new RuntimeException(String.format("Rock name must contain any character: [%s]", name));
-
-        if (!types.add(this)) throw new RuntimeException(String.format("Rock: [%s] already exists!", name));
+        if (!types.add(this)) throw new RuntimeException(String.format("RockType: [%s] already exists!", name));
     }
 
     @Nullable
@@ -78,11 +78,6 @@ public class RockType implements Comparable<RockType> {
         return new ArrayList<>(types).indexOf(type);
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
     /**
      * Возвращает ресурсное расположение текстуры породы.
      *
@@ -97,9 +92,9 @@ public class RockType implements Comparable<RockType> {
         return new TextComponentTranslation(String.format("rock.type.%s.name", this)).getFormattedText();
     }
 
-    @Override
-    public int compareTo(@NotNull RockType type) {
-        return this.name.compareTo(type.getName());
+    public static Builder builder(String name) {
+
+        return new Builder(name);
     }
 
     public static class Builder {

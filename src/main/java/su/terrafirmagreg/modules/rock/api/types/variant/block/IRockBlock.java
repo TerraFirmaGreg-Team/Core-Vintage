@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
-import su.terrafirmagreg.api.spi.types.IType;
-import su.terrafirmagreg.api.spi.types.IVariant;
+import su.terrafirmagreg.api.spi.types.type.IType;
+import su.terrafirmagreg.api.spi.types.variant.IVariant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
@@ -15,9 +15,6 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Интерфейс, представляющий блок породы.
- */
 public interface IRockBlock extends IType<RockType>, IVariant<RockBlockVariant>, IBlockSettings {
 
     /**

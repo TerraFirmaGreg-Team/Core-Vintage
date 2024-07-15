@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.spi.types;
+package su.terrafirmagreg.api.spi.types.type;
 
 @FunctionalInterface
 public interface IType<T> {

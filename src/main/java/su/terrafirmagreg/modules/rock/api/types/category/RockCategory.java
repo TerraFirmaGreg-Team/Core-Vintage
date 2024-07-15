@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.category;
 
+import su.terrafirmagreg.api.spi.types.category.Category;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.util.text.TextComponentTranslation;
@@ -15,11 +16,8 @@ import lombok.Getter;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/**
- * Класс, представляющий категорию породы.
- */
 @Getter
-public class RockCategory implements Comparable<RockCategory> {
+public class RockCategory extends Category<RockCategory> {
 
     @Getter
     private static final Set<RockCategory> categories = new ObjectOpenHashSet<>();
@@ -35,6 +33,7 @@ public class RockCategory implements Comparable<RockCategory> {
     private final TextFormatting textFormatting;
 
     private RockCategory(Builder builder) {
+        super(builder.name);
 
         this.name = builder.name;
         this.layer1 = builder.layer1;
@@ -46,20 +45,7 @@ public class RockCategory implements Comparable<RockCategory> {
         this.hardnessModifier = builder.hardnessModifier;
         this.textFormatting = builder.textFormatting;
 
-        if (name.isEmpty()) throw new RuntimeException(String.format("RockCategory name must contain any character: [%s]", name));
-
         if (!categories.add(this)) throw new RuntimeException(String.format("RockCategory: [%s] already exists!", name));
-
-    }
-
-    /**
-     * Возвращает строковое представление категории породы.
-     *
-     * @return Строковое представление категории породы.
-     */
-    @Override
-    public String toString() {
-        return name;
     }
 
     /**
@@ -69,11 +55,6 @@ public class RockCategory implements Comparable<RockCategory> {
      */
     public String getLocalizedName() {
         return textFormatting + new TextComponentTranslation(String.format("rock.category.%s.name", this)).getFormattedText();
-    }
-
-    @Override
-    public int compareTo(@NotNull RockCategory category) {
-        return this.name.compareTo(category.getName());
     }
 
     /**
@@ -110,6 +91,11 @@ public class RockCategory implements Comparable<RockCategory> {
         }
     }
 
+    public static Builder builder(String name) {
+
+        return new Builder(name);
+    }
+
     public static class Builder {
 
         private final String name;
@@ -123,8 +109,6 @@ public class RockCategory implements Comparable<RockCategory> {
         private boolean hasAnvil = false;
 
         /**
-         * Конструктор класса Builder.
-         *
          * @param name Название категории.
          */
         public Builder(@NotNull String name) {
@@ -197,4 +181,5 @@ public class RockCategory implements Comparable<RockCategory> {
             return new RockCategory(this);
         }
     }
+
 }

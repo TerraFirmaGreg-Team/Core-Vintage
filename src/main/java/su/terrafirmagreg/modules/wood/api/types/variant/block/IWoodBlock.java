@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.client.model.CustomStateMap;
 import su.terrafirmagreg.api.registry.provider.IBlockColorProvider;
 import su.terrafirmagreg.api.registry.provider.IModelProvider;
 import su.terrafirmagreg.api.spi.block.IBlockSettings;
-import su.terrafirmagreg.api.spi.types.IType;
-import su.terrafirmagreg.api.spi.types.IVariant;
+import su.terrafirmagreg.api.spi.types.type.IType;
+import su.terrafirmagreg.api.spi.types.variant.IVariant;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 

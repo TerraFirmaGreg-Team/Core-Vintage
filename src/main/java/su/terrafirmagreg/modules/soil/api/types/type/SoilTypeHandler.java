@@ -4,24 +4,24 @@ public final class SoilTypeHandler {
 
     public static void init() {
 
-        SoilTypes.SILT = new SoilType
-                .Builder("silt")
+        SoilTypes.SILT = SoilType
+                .builder("silt")
                 .build();
 
-        SoilTypes.LOAM = new SoilType
-                .Builder("loam")
+        SoilTypes.LOAM = SoilType
+                .builder("loam")
                 .build();
 
-        SoilTypes.SANDY_LOAM = new SoilType
-                .Builder("sandy_loam")
+        SoilTypes.SANDY_LOAM = SoilType
+                .builder("sandy_loam")
                 .build();
 
-        SoilTypes.SILTY_LOAM = new SoilType
-                .Builder("silty_loam")
+        SoilTypes.SILTY_LOAM = SoilType
+                .builder("silty_loam")
                 .build();
 
-        SoilTypes.HUMUS = new SoilType
-                .Builder("humus")
+        SoilTypes.HUMUS = SoilType
+                .builder("humus")
                 .build();
     }
 }

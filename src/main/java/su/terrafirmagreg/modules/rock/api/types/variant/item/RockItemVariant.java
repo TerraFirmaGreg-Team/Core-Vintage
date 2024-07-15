@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.item;
 
 import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.api.spi.types.variant.Variant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
@@ -17,11 +18,8 @@ import lombok.Getter;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-/**
- * Класс, представляющий тип блока породы.
- */
 @Getter
-public class RockItemVariant implements Comparable<RockItemVariant> {
+public class RockItemVariant extends Variant<RockItemVariant> {
 
     @Getter
     private static final Set<RockItemVariant> itemVariants = new ObjectOpenHashSet<>();
@@ -30,14 +28,12 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
     private final BiFunction<RockItemVariant, RockType, ? extends Item> factory;
 
     private RockItemVariant(Builder builder) {
+        super(builder.name);
+
         this.name = builder.name;
         this.factory = builder.factory;
 
-        if (name.isEmpty())
-            throw new RuntimeException(String.format("RockItemVariant name must contain any character: [%s]", name));
-
-        if (!itemVariants.add(this))
-            throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
+        if (!itemVariants.add(this)) throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
 
         createItem();
     }
@@ -48,31 +44,20 @@ public class RockItemVariant implements Comparable<RockItemVariant> {
         throw new RuntimeException(String.format("Item rock is null: %s, %s", this, type));
     }
 
-    /**
-     * Возвращает строковое представление типа блока породы.
-     *
-     * @return Строковое представление типа блока породы.
-     */
-    @Override
-    public String toString() {
-        return name;
-    }
-
     public String getLocalizedName() {
         return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
     }
 
     private void createItem() {
-
         for (var type : RockType.getTypes()) {
             if (ItemsRock.ROCK_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
     }
 
-    @Override
-    public int compareTo(@NotNull RockItemVariant variant) {
-        return this.name.compareTo(variant.getName());
+    public static Builder builder(String name) {
+
+        return new Builder(name);
     }
 
     public static class Builder {

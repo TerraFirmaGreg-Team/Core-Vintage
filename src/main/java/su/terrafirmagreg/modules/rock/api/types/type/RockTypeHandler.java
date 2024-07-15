@@ -13,173 +13,173 @@ public final class RockTypeHandler {
     public static void init() {
         RockCategoryHandler.init();
 
-        RockTypes.GRANITE = new RockType
-                .Builder("granite")
+        RockTypes.GRANITE = RockType
+                .builder("granite")
                 .setRockCategory(IGNEOUS_INTRUSIVE)
                 .setOrePrefix(oreGranite)
                 .setMaterial(Granite)
                 .build();
 
-        RockTypes.DIORITE = new RockType
-                .Builder("diorite")
+        RockTypes.DIORITE = RockType
+                .builder("diorite")
                 .setRockCategory(IGNEOUS_INTRUSIVE)
                 .setOrePrefix(oreDiorite)
                 .setMaterial(Diorite)
                 .build();
 
-        RockTypes.GABBRO = new RockType
-                .Builder("gabbro")
+        RockTypes.GABBRO = RockType
+                .builder("gabbro")
                 .setRockCategory(IGNEOUS_INTRUSIVE)
                 .setOrePrefix(oreGabbro)
                 .setMaterial(Gabbro)
                 .build();
 
-        RockTypes.BRECCIA = new RockType
-                .Builder("breccia")
+        RockTypes.BRECCIA = RockType
+                .builder("breccia")
                 .setRockCategory(IGNEOUS_INTRUSIVE)
                 .setOrePrefix(oreBreccia)
                 .setMaterial(Breccia)
                 .build();
 
-        RockTypes.FOIDOLITE = new RockType
-                .Builder("foidolite")
+        RockTypes.FOIDOLITE = RockType
+                .builder("foidolite")
                 .setRockCategory(IGNEOUS_INTRUSIVE)
                 .setOrePrefix(oreFoidolite)
                 .setMaterial(Foidolite)
                 .build();
 
-        RockTypes.RED_GRANITE = new RockType
-                .Builder("red_granite")
+        RockTypes.RED_GRANITE = RockType
+                .builder("red_granite")
                 .setRockCategory(IGNEOUS_INTRUSIVE)
                 .setOrePrefix(oreRedgranite)
                 .setMaterial(GraniteRed)
                 .build();
 
-        RockTypes.SHALE = new RockType
-                .Builder("shale")
+        RockTypes.SHALE = RockType
+                .builder("shale")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreShale)
                 .setMaterial(Shale)
                 .build();
 
-        RockTypes.CLAYSTONE = new RockType
-                .Builder("claystone")
+        RockTypes.CLAYSTONE = RockType
+                .builder("claystone")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreClaystone)
                 .setMaterial(Claystone)
                 .build();
 
-        RockTypes.LIMESTONE = new RockType
-                .Builder("limestone")
+        RockTypes.LIMESTONE = RockType
+                .builder("limestone")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreLimestone)
                 .setMaterial(Limestone)
                 .build();
 
-        RockTypes.CONGLOMERATE = new RockType
-                .Builder("conglomerate")
+        RockTypes.CONGLOMERATE = RockType
+                .builder("conglomerate")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreConglomerate)
                 .setMaterial(Conglomerate)
                 .build();
 
-        RockTypes.DOLOMITE = new RockType
-                .Builder("dolomite")
+        RockTypes.DOLOMITE = RockType
+                .builder("dolomite")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreDolomite)
                 .setMaterial(Dolomite)
                 .setFlux()
                 .build();
 
-        RockTypes.CHERT = new RockType
-                .Builder("chert")
+        RockTypes.CHERT = RockType
+                .builder("chert")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreChert)
                 .setMaterial(Chert)
                 .build();
 
-        RockTypes.CHALK = new RockType
-                .Builder("chalk")
+        RockTypes.CHALK = RockType
+                .builder("chalk")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreChalk)
                 .setMaterial(Chalk)
                 .setFlux()
                 .build();
 
-        RockTypes.MUDSTONE = new RockType
-                .Builder("mudstone")
+        RockTypes.MUDSTONE = RockType
+                .builder("mudstone")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreMudstone)
                 .setMaterial(Mudstone)
                 .setFlux()
                 .build();
 
-        RockTypes.SANDSTONE = new RockType
-                .Builder("sandstone")
+        RockTypes.SANDSTONE = RockType
+                .builder("sandstone")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreSandstone)
                 .setMaterial(Sandstone)
                 .setFlux()
                 .build();
 
-        RockTypes.SILTSTONE = new RockType
-                .Builder("siltstone")
+        RockTypes.SILTSTONE = RockType
+                .builder("siltstone")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreSiltstone)
                 .setMaterial(Siltstone)
                 .setFlux()
                 .build();
 
-        RockTypes.LATERITE = new RockType
-                .Builder("laterite")
+        RockTypes.LATERITE = RockType
+                .builder("laterite")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreLaterite)
                 .setMaterial(Laterite)
                 .setFlux()
                 .build();
 
-        RockTypes.ARKOSE = new RockType
-                .Builder("arkose")
+        RockTypes.ARKOSE = RockType
+                .builder("arkose")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreArkose)
                 .setMaterial(Arkose)
                 .setFlux()
                 .build();
 
-        RockTypes.JASPILLITE = new RockType
-                .Builder("jaspillite")
+        RockTypes.JASPILLITE = RockType
+                .builder("jaspillite")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreJaspillite)
                 .setMaterial(Jaspillite)
                 .setFlux()
                 .build();
 
-        RockTypes.TRAVERTINE = new RockType
-                .Builder("travertine")
+        RockTypes.TRAVERTINE = RockType
+                .builder("travertine")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreTravertine)
                 .setMaterial(Travertine)
                 .setFlux()
                 .build();
 
-        RockTypes.WACKESTONE = new RockType
-                .Builder("wackestone")
+        RockTypes.WACKESTONE = RockType
+                .builder("wackestone")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreWackestone)
                 .setMaterial(Wackestone)
                 .setFlux()
                 .build();
 
-        RockTypes.BLACKBAND_IRONSTONE = new RockType
-                .Builder("blackband_ironstone")
+        RockTypes.BLACKBAND_IRONSTONE = RockType
+                .builder("blackband_ironstone")
                 .setRockCategory(SEDIMENTARY)
                 .setOrePrefix(oreBlackbandIronstone)
                 .setMaterial(BlackbandIronstone)
                 .setFlux()
                 .build();
 
-        RockTypes.RHYOLITE = new RockType
-                .Builder("rhyolite")
+        RockTypes.RHYOLITE = RockType
+                .builder("rhyolite")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(oreRhyolite)
                 .setMaterial(Rhyolite)
@@ -192,157 +192,157 @@ public final class RockTypeHandler {
                 .setMaterial(Basalt)
                 .build();
 
-        RockTypes.ANDESITE = new RockType
-                .Builder("andesite")
+        RockTypes.ANDESITE = RockType
+                .builder("andesite")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(oreAndesite)
                 .setMaterial(Andesite)
                 .build();
 
-        RockTypes.DACITE = new RockType
-                .Builder("dacite")
+        RockTypes.DACITE = RockType
+                .builder("dacite")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(oreDacite)
                 .setMaterial(Dacite)
                 .build();
 
-        RockTypes.PERIDOTITE = new RockType
-                .Builder("peridotite")
+        RockTypes.PERIDOTITE = RockType
+                .builder("peridotite")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(orePeridotite)
                 .setMaterial(Peridotite)
                 .build();
 
-        RockTypes.PORPHYRY = new RockType
-                .Builder("porphyry")
+        RockTypes.PORPHYRY = RockType
+                .builder("porphyry")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(orePorphyry)
                 .setMaterial(Porphyry)
                 .build();
 
-        RockTypes.BLAIMORITE = new RockType
-                .Builder("blaimorite")
+        RockTypes.BLAIMORITE = RockType
+                .builder("blaimorite")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(oreBlaimorite)
                 .setMaterial(Blaimorite)
                 .build();
 
-        RockTypes.BONINITE = new RockType
-                .Builder("boninite")
+        RockTypes.BONINITE = RockType
+                .builder("boninite")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(oreBoninite)
                 .setMaterial(Boninite)
                 .build();
 
-        RockTypes.CARBONATITE = new RockType
-                .Builder("carbonatite")
+        RockTypes.CARBONATITE = RockType
+                .builder("carbonatite")
                 .setRockCategory(IGNEOUS_EXTRUSIVE)
                 .setOrePrefix(oreCarbonatite)
                 .setMaterial(Carbonatite)
                 .build();
 
-        RockTypes.QUARTZITE = new RockType
-                .Builder("quartzite")
+        RockTypes.QUARTZITE = RockType
+                .builder("quartzite")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreQuartzite)
                 .setMaterial(Quartzite)
                 .setFlux()
                 .build();
 
-        RockTypes.SLATE = new RockType
-                .Builder("slate")
+        RockTypes.SLATE = RockType
+                .builder("slate")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreSlate)
                 .setMaterial(Slate)
                 .build();
 
-        RockTypes.PHYLLITE = new RockType
-                .Builder("phyllite")
+        RockTypes.PHYLLITE = RockType
+                .builder("phyllite")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(orePhyllite)
                 .setMaterial(Phyllite)
                 .build();
 
-        RockTypes.SCHIST = new RockType
-                .Builder("schist")
+        RockTypes.SCHIST = RockType
+                .builder("schist")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreSchist)
                 .setMaterial(Schist)
                 .build();
 
-        RockTypes.GNEISS = new RockType
-                .Builder("gneiss")
+        RockTypes.GNEISS = RockType
+                .builder("gneiss")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreGneiss)
                 .setMaterial(Gneiss)
                 .build();
 
-        RockTypes.MARBLE = new RockType
-                .Builder("marble")
+        RockTypes.MARBLE = RockType
+                .builder("marble")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreMarble)
                 .setMaterial(Marble)
                 .setFlux()
                 .build();
 
-        RockTypes.BLUESCHIST = new RockType
-                .Builder("blueschist")
+        RockTypes.BLUESCHIST = RockType
+                .builder("blueschist")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreBlueschist)
                 .setMaterial(Blueschist)
                 .setFlux()
                 .build();
 
-        RockTypes.CATLINITE = new RockType
-                .Builder("catlinite")
+        RockTypes.CATLINITE = RockType
+                .builder("catlinite")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreCatlinite)
                 .setMaterial(Catlinite)
                 .setFlux()
                 .build();
 
-        RockTypes.GREENSCHIST = new RockType
-                .Builder("greenschist")
+        RockTypes.GREENSCHIST = RockType
+                .builder("greenschist")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreGreenschist)
                 .setMaterial(Greenschist)
                 .setFlux()
                 .build();
 
-        RockTypes.NOVACULITE = new RockType
-                .Builder("novaculite")
+        RockTypes.NOVACULITE = RockType
+                .builder("novaculite")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreNovaculite)
                 .setMaterial(Novaculite)
                 .setFlux()
                 .build();
 
-        RockTypes.SOAPSTONE = new RockType
-                .Builder("soapstone")
+        RockTypes.SOAPSTONE = RockType
+                .builder("soapstone")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreSoapstone)
                 .setMaterial(Soapstone)
                 .setFlux()
                 .build();
 
-        RockTypes.KOMATIITE = new RockType
-                .Builder("komatiite")
+        RockTypes.KOMATIITE = RockType
+                .builder("komatiite")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreKomatiite)
                 .setMaterial(Komatiite)
                 .setFlux()
                 .build();
 
-        RockTypes.CATACLASITE = new RockType
-                .Builder("cataclasite")
+        RockTypes.CATACLASITE = RockType
+                .builder("cataclasite")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreCataclasite)
                 .setMaterial(Cataclasite)
                 .setFlux()
                 .build();
 
-        RockTypes.MYLONITE = new RockType
-                .Builder("mylonite")
+        RockTypes.MYLONITE = RockType
+                .builder("mylonite")
                 .setRockCategory(METAMORPHIC)
                 .setOrePrefix(oreMylonite)
                 .setMaterial(Mylonite)

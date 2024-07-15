@@ -1,40 +1,30 @@
 package su.terrafirmagreg.modules.soil.api.types.type;
 
+import su.terrafirmagreg.api.spi.types.type.Type;
+
+
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import java.util.Set;
 
-/**
- * Класс, представляющий тип почвы.
- */
-public class SoilType implements Comparable<SoilType> {
+@Getter
+public class SoilType extends Type<SoilType> {
 
-    private static final Set<SoilType> SOIL_TYPES = new ObjectOpenHashSet<>();
+    @Getter
+    private static final Set<SoilType> types = new ObjectOpenHashSet<>();
 
-    @NotNull
     private final String name;
 
     private SoilType(Builder builder) {
+        super(builder.name);
         this.name = builder.name;
 
-        if (name.isEmpty()) {
-            throw new RuntimeException(String.format("SoilType name must contain any character: [%s]", name));
-        }
+        if (!types.add(this)) throw new RuntimeException(String.format("SoilType: [%s] already exists!", name));
 
-        if (!SOIL_TYPES.add(this)) {
-            throw new RuntimeException(String.format("SoilType: [%s] already exists!", name));
-        }
-    }
-
-    /**
-     * Возвращает набор всех типов почвы.
-     *
-     * @return Набор всех типов почвы.
-     */
-    public static Set<SoilType> getTypes() {
-        return SOIL_TYPES;
     }
 
     /**
@@ -45,26 +35,15 @@ public class SoilType implements Comparable<SoilType> {
      */
     @NotNull
     public static SoilType valueOf(int i) {
-        var values = new SoilType[SOIL_TYPES.size()];
-        values = SOIL_TYPES.toArray(values);
+        var values = new SoilType[types.size()];
+        values = types.toArray(values);
 
         return i >= 0 && i < values.length ? values[i] : values[i % values.length];
     }
 
-    /**
-     * Возвращает строковое представление типа почвы.
-     *
-     * @return Строковое представление типа почвы.
-     */
-    @NotNull
-    @Override
-    public String toString() {
-        return name;
-    }
+    public static Builder builder(String name) {
 
-    @Override
-    public int compareTo(@NotNull SoilType type) {
-        return this.name.compareTo(type.toString());
+        return new Builder(name);
     }
 
     public static class Builder {

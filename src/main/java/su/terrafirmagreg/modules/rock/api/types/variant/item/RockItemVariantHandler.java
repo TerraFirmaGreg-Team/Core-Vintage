@@ -11,15 +11,18 @@ public final class RockItemVariantHandler {
 
     public static void init() {
 
-        LOOSE = new RockItemVariant.Builder("loose")
+        LOOSE = RockItemVariant
+                .builder("loose")
                 .setFactory(ItemRockLoose::new)
                 .build();
 
-        BRICK = new RockItemVariant.Builder("brick")
+        BRICK = RockItemVariant
+                .builder("brick")
                 .setFactory(ItemRockBrick::new)
                 .build();
 
-        GRAVEL_LAYER = new RockItemVariant.Builder("gravel_layer")
+        GRAVEL_LAYER = RockItemVariant
+                .builder("gravel_layer")
                 .setFactory(ItemRockGravel::new)
                 .build();
     }

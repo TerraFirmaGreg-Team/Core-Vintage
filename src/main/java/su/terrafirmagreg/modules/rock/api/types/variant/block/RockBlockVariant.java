@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
 import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.api.spi.types.variant.Variant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
@@ -22,11 +23,8 @@ import java.util.function.BiFunction;
 
 import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
 
-/**
- * Класс, представляющий тип блока породы.
- */
 @Getter
-public class RockBlockVariant implements Comparable<RockBlockVariant> {
+public class RockBlockVariant extends Variant<RockBlockVariant> {
 
     @Getter
     private static final Set<RockBlockVariant> blockVariants = new ObjectOpenHashSet<>();
@@ -39,17 +37,15 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
     private final boolean hasStoneType;
 
     private RockBlockVariant(Builder builder) {
+        super(builder.name);
+
         this.name = builder.name;
         this.baseHardness = builder.baseHardness;
         this.specification = builder.specification;
         this.factory = builder.factory;
         this.hasStoneType = builder.hasStoneType;
 
-        if (name.isEmpty())
-            throw new RuntimeException(String.format("RockBlockVariant name must contain any character: [%s]", name));
-
-        if (!blockVariants.add(this))
-            throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
+        if (!blockVariants.add(this)) throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
 
         createBlock();
     }
@@ -58,11 +54,6 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
         var block = BlocksRock.ROCK_BLOCKS.get(Pair.of(this, type));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
     public boolean canFall() {
@@ -94,9 +85,9 @@ public class RockBlockVariant implements Comparable<RockBlockVariant> {
         return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
     }
 
-    @Override
-    public int compareTo(@NotNull RockBlockVariant variant) {
-        return this.name.compareTo(variant.getName());
+    public static Builder builder(String name) {
+
+        return new Builder(name);
     }
 
     public static class Builder {

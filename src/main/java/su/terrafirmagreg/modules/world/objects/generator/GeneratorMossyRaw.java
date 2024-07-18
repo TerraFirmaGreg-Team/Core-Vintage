@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.world.objects.generator;
 import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.api.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
@@ -42,7 +42,7 @@ public class GeneratorMossyRaw implements IWorldGenerator {
                     BlockPos blockPos = chunkBlockPos.add(random.nextInt(16) + 8, random.nextInt(16), random.nextInt(16) + 8);
                     if (BlockUtils.isRawStone(world.getBlockState(blockPos)) && BlockUtils.isBlockSurroundedByAir(world, blockPos) &&
                             world.getLightFor(EnumSkyBlock.SKY, blockPos) < 14 && !world.canSeeSky(blockPos)) {
-                        world.setBlockState(blockPos, RockBlockVariants.MOSSY_RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState(), 2);
+                        world.setBlockState(blockPos, BlocksRock.MOSSY_RAW.get(ProviderChunkData.getRockHeight(world, blockPos)).getDefaultState(), 2);
                     }
                 }
             }

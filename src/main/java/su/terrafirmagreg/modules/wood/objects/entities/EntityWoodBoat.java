@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
@@ -10,9 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
-
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.client.CPacketSteerBoat;
 import net.minecraft.util.SoundEvent;
@@ -65,7 +63,7 @@ public class EntityWoodBoat extends EntityBoat {
     public Item getItemBoat() {
         var type = getWood();
         if (type != null) {
-            return WoodItemVariants.BOAT.get(type);
+            return ItemsWood.BOAT.get(type);
         }
         return super.getItemBoat();
     }

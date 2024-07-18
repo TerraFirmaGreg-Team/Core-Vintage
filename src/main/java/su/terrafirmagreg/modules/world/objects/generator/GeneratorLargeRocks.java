@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.world.objects.generator;
 
 import su.terrafirmagreg.api.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -55,7 +55,7 @@ public class GeneratorLargeRocks implements IWorldGenerator {
             for (int z = -size; z <= size; z++) {
                 for (int y = -2; y <= 2; y++) {
                     if (x * x + z * z + y * y > size * size) continue;
-                    world.setBlockState(start.add(x, y, z), RockBlockVariants.RAW.get(rock).getDefaultState());
+                    world.setBlockState(start.add(x, y, z), BlocksRock.RAW.get(rock).getDefaultState());
                 }
             }
         }

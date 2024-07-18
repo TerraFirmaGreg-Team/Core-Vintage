@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package su.terrafirmagreg.api.spi.generation;
+package su.terrafirmagreg.api.spi.gen.feature;
 
 import mcp.MethodsReturnNonnullByDefault;
 

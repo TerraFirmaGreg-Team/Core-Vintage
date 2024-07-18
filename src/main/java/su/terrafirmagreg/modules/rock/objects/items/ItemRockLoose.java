@@ -3,10 +3,8 @@ package su.terrafirmagreg.modules.rock.objects.items;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.item.BaseItem;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.api.types.variant.item.IRockItem;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
 import su.terrafirmagreg.modules.rock.client.gui.GuiContainerKnappingRock;
 import su.terrafirmagreg.modules.rock.objects.containers.ContainerKnappingRock;
@@ -27,7 +25,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -35,15 +32,10 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProvider<ContainerKnappingRock, GuiContainerKnappingRock> {
-
-    private final RockItemVariant variant;
-    private final RockType type;
+public class ItemRockLoose extends ItemRock implements IContainerProvider<ContainerKnappingRock, GuiContainerKnappingRock> {
 
     public ItemRockLoose(RockItemVariant variant, RockType type) {
-
-        this.variant = variant;
-        this.type = type;
+        super(variant, type);
 
         getSettings()
                 .size(Size.SMALL)
@@ -56,7 +48,6 @@ public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProv
     }
 
     @Override
-    @NotNull
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && !player.isSneaking() && stack.getCount() > 1) {
@@ -73,7 +64,7 @@ public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProv
         tooltip.add(new TextComponentTranslation(
                 "rockcategory.name").getFormattedText() + ": " + getType().getRockCategory().getLocalizedName());
 
-        if (type.isFlux())
+        if (getType().isFlux())
             tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());
     }
 
@@ -84,6 +75,6 @@ public class ItemRockLoose extends BaseItem implements IRockItem, IContainerProv
 
     @Override
     public GuiContainerKnappingRock getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-        return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, type.getTexture());
+        return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, getType().getTexture());
     }
 }

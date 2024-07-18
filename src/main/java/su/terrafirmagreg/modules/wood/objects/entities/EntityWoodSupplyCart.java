@@ -1,11 +1,12 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodSupplyCart;
 
 import net.minecraft.block.state.IBlockState;
@@ -18,9 +19,6 @@ import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
-
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -62,7 +60,7 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
     public Item getItemCart() {
         var type = getWood();
         if (type != null) {
-            return WoodItemVariants.SUPPLY_CART.get(type);
+            return ItemsWood.SUPPLY_CART.get(type);
         }
         return getItemCart();
     }

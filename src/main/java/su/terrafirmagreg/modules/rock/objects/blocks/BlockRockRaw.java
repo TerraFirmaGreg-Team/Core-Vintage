@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.rock.ConfigRock;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
@@ -50,7 +50,7 @@ public class BlockRockRaw extends BlockRock {
 
         // Copy as each raw stone has an unique resultingState
         var spec = new FallingBlockManager.Specification(variant.getSpecification());
-        spec.setResultingState(RockBlockVariants.COBBLE.get(type).getDefaultState());
+        spec.setResultingState(BlocksRock.COBBLE.get(type).getDefaultState());
 
         FallingBlockManager.registerFallable(this, spec);
     }
@@ -94,7 +94,7 @@ public class BlockRockRaw extends BlockRock {
         if (ConfigRock.BLOCKS.enableStoneAnvil && stack.getItem() == ToolItems.HARD_HAMMER.get() && !worldIn.isBlockNormalCube(pos.up(), true)) {
             if (!worldIn.isRemote) {
                 // Create a stone anvil
-                var anvil = RockBlockVariants.ANVIL.get(getType());
+                var anvil = BlocksRock.ANVIL.get(getType());
                 if (anvil instanceof BlockRockAnvil) {
                     worldIn.setBlockState(pos, anvil.getDefaultState());
                 }

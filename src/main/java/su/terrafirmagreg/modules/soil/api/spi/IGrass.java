@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.soil.api.spi;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 
@@ -71,16 +70,16 @@ public interface IGrass {
                 if (currentBlock instanceof BlockSoilPeat) {
                     world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
                 } else if (currentBlock instanceof ISoilBlock soilBlock) {
-                    SoilBlockVariant spreader = SoilBlockVariants.GRASS;
+                    SoilBlockVariant spreader = BlocksSoil.GRASS;
 
                     // Проверяем тип блока, с которого распространяется трава
                     if (usBlock instanceof ISoilBlock) {
                         if (BlockUtils.isDryGrass(usBlock.getDefaultState())) {
-                            spreader = SoilBlockVariants.DRY_GRASS;
+                            spreader = BlocksSoil.DRY_GRASS;
                         } else if (BlockUtils.isSparseGrass(usBlock.getDefaultState())) {
-                            spreader = SoilBlockVariants.SPARSE_GRASS;
+                            spreader = BlocksSoil.SPARSE_GRASS;
                         } else {
-                            spreader = SoilBlockVariants.GRASS;
+                            spreader = BlocksSoil.GRASS;
                         }
                     }
 

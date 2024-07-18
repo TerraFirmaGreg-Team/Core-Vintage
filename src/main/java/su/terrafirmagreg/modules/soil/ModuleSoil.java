@@ -5,8 +5,6 @@ import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilTypeHandler;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariantHandler;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariantHandler;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
@@ -34,8 +32,6 @@ public final class ModuleSoil extends ModuleBase {
     @Override
     public void onRegister() {
         SoilTypeHandler.init();
-        SoilBlockVariantHandler.init();
-        SoilItemVariantHandler.init();
 
         BlocksSoil.onRegister(registryManager);
         ItemsSoil.onRegister(registryManager);

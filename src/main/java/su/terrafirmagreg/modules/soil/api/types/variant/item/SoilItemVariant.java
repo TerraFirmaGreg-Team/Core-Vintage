@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
 import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.api.spi.types.variant.Variant;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
@@ -9,43 +10,23 @@ import net.minecraft.item.Item;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 import java.util.Set;
 import java.util.function.BiFunction;
 
-/**
- * Класс CropItemVariant представляет вариант деревянного блока.
- */
-public class SoilItemVariant implements Comparable<SoilItemVariant> {
+@Getter
+public class SoilItemVariant extends Variant<SoilItemVariant> {
 
-    private static final Set<SoilItemVariant> SOIL_ITEM_VARIANTS = new ObjectOpenHashSet<>();
+    @Getter
+    private static final Set<SoilItemVariant> variants = new ObjectOpenHashSet<>();
 
-    @NotNull
-    private final String name;
+    private BiFunction<SoilItemVariant, SoilType, ? extends Item> factory;
 
-    private SoilItemVariant(Builder builder) {
-        this.name = builder.name;
+    private SoilItemVariant(String name) {
+        super(name);
 
-        if (name.isEmpty())
-            throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
-
-        if (!SOIL_ITEM_VARIANTS.add(this))
-            throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
-
-        for (var type : SoilType.getTypes()) {
-            if (ItemsSoil.SOIL_ITEMS.put(Pair.of(this, type), builder.factory.apply(this, type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-        }
-    }
-
-    /**
-     * Возвращает множество всех созданных вариантов деревянных блоков.
-     *
-     * @return множество вариантов деревянных блоков
-     */
-    public static Set<SoilItemVariant> getItemVariants() {
-        return SOIL_ITEM_VARIANTS;
+        if (!variants.add(this)) throw new RuntimeException(String.format("SoilItemVariant: [%s] already exists!", name));
     }
 
     public Item get(SoilType type) {
@@ -54,43 +35,21 @@ public class SoilItemVariant implements Comparable<SoilItemVariant> {
         throw new RuntimeException(String.format("Item soil is null: %s, %s", this, type));
     }
 
-    /**
-     * Возвращает строковое представление варианта деревянного блока (его имя).
-     *
-     * @return имя варианта деревянного блока
-     */
-    @NotNull
-    @Override
-    public String toString() {
-        return name;
+    public static SoilItemVariant builder(String name) {
+        return new SoilItemVariant(name);
     }
 
-    @Override
-    public int compareTo(@NotNull SoilItemVariant variant) {
-        return this.name.compareTo(variant.toString());
+    public SoilItemVariant setFactory(BiFunction<SoilItemVariant, SoilType, ? extends Item> factory) {
+        this.factory = factory;
+        return this;
     }
 
-    public static class Builder {
-
-        private final String name;
-        private BiFunction<SoilItemVariant, SoilType, ? extends Item> factory;
-
-        /**
-         * Создает экземпляр Builder с указанным именем.
-         *
-         * @param name Имя породы.
-         */
-        public Builder(@NotNull String name) {
-            this.name = name;
+    public SoilItemVariant build() {
+        for (var type : SoilType.getTypes()) {
+            if (ItemsSoil.SOIL_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
 
-        public Builder setFactory(BiFunction<SoilItemVariant, SoilType, ? extends Item> factory) {
-            this.factory = factory;
-            return this;
-        }
-
-        public SoilItemVariant build() {
-            return new SoilItemVariant(this);
-        }
+        return this;
     }
 }

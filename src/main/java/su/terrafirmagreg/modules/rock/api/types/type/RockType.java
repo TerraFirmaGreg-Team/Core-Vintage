@@ -50,7 +50,7 @@ public class RockType extends Type<RockType> {
     public static RockType getByName(@NotNull String name) {
         return RockType.getTypes()
                 .stream()
-                .filter(s -> s.toString().equals(name))
+                .filter(s -> s.getName().equals(name))
                 .findFirst()
                 .orElse(null);
     }

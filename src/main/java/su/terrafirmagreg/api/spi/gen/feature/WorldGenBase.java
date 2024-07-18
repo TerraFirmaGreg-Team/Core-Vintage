@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.spi.generation;
+package su.terrafirmagreg.api.spi.gen.feature;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

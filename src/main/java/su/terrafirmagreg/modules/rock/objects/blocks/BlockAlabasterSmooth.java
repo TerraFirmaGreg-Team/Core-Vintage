@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
 
-import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.SMOOTH;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.SMOOTH;
 
 public class BlockAlabasterSmooth extends BlockRockDecorative {
 

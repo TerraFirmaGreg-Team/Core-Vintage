@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.registry.provider.IBlockColorProvider;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -81,7 +81,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
         if (block instanceof ISoilBlock soilBlockVariant) {
             var soil = soilBlockVariant.getType();
 
-            world.setBlockState(pos, SoilBlockVariants.DIRT.get(soil).getDefaultState());
+            world.setBlockState(pos, BlocksSoil.DIRT.get(soil).getDefaultState());
             AxisAlignedBB axisalignedbb = FLIPPED_AABB.offset(pos);
             for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb)) {
                 double d0 = Math.min(axisalignedbb.maxY - axisalignedbb.minY, axisalignedbb.maxY - entity.getEntityBoundingBox().minY);
@@ -213,7 +213,7 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlo
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilItemVariants.PILE.get(getType());
+        return ItemsSoil.PILE.get(getType());
     }
 
     @Override

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.init;
 
 import su.terrafirmagreg.modules.device.objects.recipes.quern.IQuernRecipeManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -158,7 +158,7 @@ public final class RecipesDevice {
         manager.addRecipe(IIngredient.of("gemLapis"), new ItemStack(ItemPowder.get(Powder.LAPIS_LAZULI), 4));
         manager.addRecipe(IIngredient.of("gemGraphite"), new ItemStack(ItemPowder.get(Powder.GRAPHITE), 4));
         manager.addRecipe(IIngredient.of("gemKaolinite"), new ItemStack(ItemPowder.get(Powder.KAOLINITE), 4));
-        manager.addRecipe(IIngredient.of(RockBlockVariants.RAW.get(RockTypes.LIMESTONE)), new ItemStack(ItemsTFC.GYPSUM));
+        manager.addRecipe(IIngredient.of(BlocksRock.RAW.get(RockTypes.LIMESTONE)), new ItemStack(ItemsTFC.GYPSUM));
 
         manager.addRecipe(IIngredient.of("logWoodLogwood"), new ItemStack((ItemsTFCF.LOGWOOD_CHIPS), 3));
         manager.addRecipe(IIngredient.of("sugarcane"), new ItemStack((ItemsTFCF.MASHED_SUGAR_CANE)));

@@ -7,8 +7,8 @@ import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.metal.client.gui.GuiGlassworking;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
+import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.init.RegistryWood;
 import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
 
@@ -219,7 +219,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
         registry.addRecipes(loomRecipes, LOOM_UID);
         for (var wood : WoodType.getTypes()) {
-            registry.addRecipeCatalyst(new ItemStack(WoodBlockVariants.LOOM.get(wood)), LOOM_UID);
+            registry.addRecipeCatalyst(new ItemStack(BlocksWood.LOOM.get(wood)), LOOM_UID);
         }
 
         // Alloy Recipes
@@ -290,7 +290,7 @@ public final class TFCJEIPlugin implements IModPlugin {
                 .collect(Collectors.toList());
 
         registry.addRecipes(barrelRecipes, BARREL_UID);
-        for (var barrelItem : WoodBlockVariants.BARREL.get()) {
+        for (var barrelItem : BlocksWood.BARREL.get()) {
             registry.addRecipeCatalyst(new ItemStack(barrelItem), BARREL_UID);
         }
 

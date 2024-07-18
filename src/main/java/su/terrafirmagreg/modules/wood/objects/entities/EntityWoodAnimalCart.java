@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -43,7 +43,7 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
     public Item getItemCart() {
         var type = getWood();
         if (type != null) {
-            return WoodItemVariants.ANIMAL_CART.get(type);
+            return ItemsWood.ANIMAL_CART.get(type);
         }
         return getItemCart();
     }

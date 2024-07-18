@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.item;
 
 import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.api.spi.types.variant.Variant;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
@@ -9,43 +10,22 @@ import net.minecraft.item.Item;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 import java.util.Set;
 import java.util.function.BiFunction;
 
-/**
- * Класс CropItemVariant представляет вариант деревянного блока.
- */
-public class WoodItemVariant implements Comparable<WoodItemVariant> {
+@Getter
+public class WoodItemVariant extends Variant<WoodItemVariant> {
 
-    private static final Set<WoodItemVariant> ITEM_VARIANTS = new ObjectOpenHashSet<>();
+    private static final Set<WoodItemVariant> variants = new ObjectOpenHashSet<>();
 
-    @NotNull
-    private final String name;
+    private BiFunction<WoodItemVariant, WoodType, ? extends Item> factory;
 
-    private WoodItemVariant(Builder builder) {
-        this.name = builder.name;
+    private WoodItemVariant(String name) {
+        super(name);
 
-        if (name.isEmpty())
-            throw new RuntimeException(String.format("CropItemVariant name must contain any character: [%s]", name));
-
-        if (!ITEM_VARIANTS.add(this))
-            throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
-
-        for (var type : WoodType.getTypes()) {
-            if (ItemsWood.WOOD_ITEMS.put(Pair.of(this, type), builder.factory.apply(this, type)) != null)
-                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-        }
-    }
-
-    /**
-     * Возвращает множество всех созданных вариантов деревянных блоков.
-     *
-     * @return множество вариантов деревянных блоков
-     */
-    public static Set<WoodItemVariant> getItemVariants() {
-        return ITEM_VARIANTS;
+        if (!variants.add(this)) throw new RuntimeException(String.format("CropItemVariant: [%s] already exists!", name));
     }
 
     public Item get(WoodType type) {
@@ -54,44 +34,21 @@ public class WoodItemVariant implements Comparable<WoodItemVariant> {
         throw new RuntimeException(String.format("Item wood is null: %s, %s", this, type));
     }
 
-    /**
-     * Возвращает строковое представление варианта деревянного блока (его имя).
-     *
-     * @return имя варианта деревянного блока
-     */
-    @NotNull
-    @Override
-    public String toString() {
-        return name;
+    public static WoodItemVariant builder(String name) {
+        return new WoodItemVariant(name);
     }
 
-    @Override
-    public int compareTo(@NotNull WoodItemVariant variant) {
-        return this.name.compareTo(variant.toString());
+    public WoodItemVariant setFactory(BiFunction<WoodItemVariant, WoodType, ? extends Item> factory) {
+        this.factory = factory;
+        return this;
     }
 
-    public static class Builder {
-
-        private final String name;
-        private BiFunction<WoodItemVariant, WoodType, ? extends Item> factory;
-
-        /**
-         * Создает экземпляр Builder с указанным именем.
-         *
-         * @param name Имя породы.
-         */
-        public Builder(@NotNull String name) {
-
-            this.name = name;
+    public WoodItemVariant build() {
+        for (var type : WoodType.getTypes()) {
+            if (ItemsWood.WOOD_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
+                throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
 
-        public Builder setFactory(BiFunction<WoodItemVariant, WoodType, ? extends Item> factory) {
-            this.factory = factory;
-            return this;
-        }
-
-        public WoodItemVariant build() {
-            return new WoodItemVariant(this);
-        }
+        return this;
     }
 }

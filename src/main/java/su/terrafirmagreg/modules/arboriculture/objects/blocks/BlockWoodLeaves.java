@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants;
+import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -235,7 +235,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         if (state.getValue(LEAF_STATE) != WINTER) {
-            return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(WoodBlockVariants.SAPLING.get(type)) : Items.AIR;
+            return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlocksWood.SAPLING.get(type)) : Items.AIR;
         }
         return null;
     }

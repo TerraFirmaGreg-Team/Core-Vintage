@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
 
-import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.BRICKS;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.BRICKS;
 
 public class BlockAlabasterBricks extends BlockRockDecorative {
 

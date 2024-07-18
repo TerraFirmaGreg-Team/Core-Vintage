@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -69,6 +69,6 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilItemVariants.PILE.get(this.getType());
+        return ItemsSoil.PILE.get(this.getType());
     }
 }

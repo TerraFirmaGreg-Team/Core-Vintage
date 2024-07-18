@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 
 @Getter
-public class Variant<T> implements Comparable<Variant<T>> {
+public abstract class Variant<T> implements Comparable<Variant<T>> {
 
     private final String name;
 
@@ -24,4 +24,5 @@ public class Variant<T> implements Comparable<Variant<T>> {
     public int compareTo(@NotNull Variant<T> type) {
         return this.name.compareTo(type.getName());
     }
+
 }

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
-import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
@@ -69,7 +69,7 @@ public class BlockRockSpeleothem extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return RockItemVariants.LOOSE.get(getType());
+        return ItemsRock.LOOSE.get(getType());
     }
 
     @Override

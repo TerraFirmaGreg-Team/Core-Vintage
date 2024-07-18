@@ -41,8 +41,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static su.terrafirmagreg.api.data.Blockstates.CLAY;
-import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
-import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.*;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 @UtilityClass
 @SuppressWarnings("unused")

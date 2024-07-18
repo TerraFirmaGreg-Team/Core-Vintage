@@ -81,7 +81,7 @@ import static net.dries007.tfc.types.DefaultMetals.*;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants.*;
+import static su.terrafirmagreg.modules.rock.init.BlocksRock.*;
 
 /**
  * In 1.14+, every line in here needs to be a json file. Yay, but also ugh.

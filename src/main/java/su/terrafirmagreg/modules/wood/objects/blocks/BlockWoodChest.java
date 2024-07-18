@@ -11,6 +11,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
+import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.objects.inventory.capability.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodChest;
 
@@ -41,7 +42,6 @@ import lombok.Getter;
 
 import static net.minecraft.block.BlockChest.Type.BASIC;
 import static net.minecraft.block.BlockChest.Type.TRAP;
-import static su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariants.CHEST;
 
 @Getter
 public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileProvider {
@@ -51,7 +51,7 @@ public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileProvi
     private final WoodType type;
 
     public BlockWoodChest(WoodBlockVariant variant, WoodType type) {
-        super(variant == CHEST ? BASIC : TRAP);
+        super(variant == BlocksWood.CHEST ? BASIC : TRAP);
 
         this.variant = variant;
         this.type = type;

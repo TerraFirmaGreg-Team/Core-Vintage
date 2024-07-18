@@ -152,7 +152,7 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (tile != null) {
+        if (TileUtils.isNotNull(tile)) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face) && !worldIn.isSideSolid(pos.offset(face.getOpposite()), face)) {
                     InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(OreDictUnifier
@@ -171,14 +171,14 @@ public class BlockMetalCladding extends BaseBlock implements IMetalBlock {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (tile != null) tile.onBreakBlock();
+        if (TileUtils.isNotNull(tile)) tile.onBreakBlock();
         super.breakBlock(worldIn, pos, state);
     }
 
     @Override
     public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
         var tile = TileUtils.getTile(worldIn, pos, TEMetalSheet.class);
-        if (tile != null) {
+        if (TileUtils.isNotNull(tile)) {
             for (EnumFacing face : EnumFacing.values()) {
                 if (tile.getFace(face)) {
                     RayTraceResult result = rayTrace(pos, start, end, SHEET_AABB[face.getIndex()]);

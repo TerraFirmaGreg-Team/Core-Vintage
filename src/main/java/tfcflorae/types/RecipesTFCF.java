@@ -2,7 +2,7 @@ package tfcflorae.types;
 
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -272,9 +272,9 @@ public final class RecipesTFCF {
 
         for (var rock : RockType.getTypes()) {
             event.getRegistry().registerAll(
-                    new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 200), IIngredient.of(RockBlockVariants.RAW.get(rock)),
+                    new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 200), IIngredient.of(BlocksRock.RAW.get(rock)),
                             new FluidStack(FluidsTFC.FRESH_WATER.get(), 50),
-                            new ItemStack(RockBlockVariants.MOSSY_RAW.get(rock), 1),
+                            new ItemStack(BlocksRock.MOSSY_RAW.get(rock), 1),
                             8 * ICalendar.TICKS_IN_HOUR).setRegistryName(MODID_TFCF, "mossy_raw_" + rock.getName())
             );
         }

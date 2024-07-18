@@ -11,8 +11,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
-import org.jetbrains.annotations.NotNull;
-
 import lombok.Getter;
 
 import java.util.Set;
@@ -24,18 +22,12 @@ public class RockItemVariant extends Variant<RockItemVariant> {
     @Getter
     private static final Set<RockItemVariant> itemVariants = new ObjectOpenHashSet<>();
 
-    private final String name;
-    private final BiFunction<RockItemVariant, RockType, ? extends Item> factory;
+    private BiFunction<RockItemVariant, RockType, ? extends Item> factory;
 
-    private RockItemVariant(Builder builder) {
-        super(builder.name);
-
-        this.name = builder.name;
-        this.factory = builder.factory;
+    private RockItemVariant(String name) {
+        super(name);
 
         if (!itemVariants.add(this)) throw new RuntimeException(String.format("RockItemVariant: [%s] already exists!", name));
-
-        createItem();
     }
 
     public Item get(RockType type) {
@@ -44,45 +36,25 @@ public class RockItemVariant extends Variant<RockItemVariant> {
         throw new RuntimeException(String.format("Item rock is null: %s, %s", this, type));
     }
 
-    public String getLocalizedName() {
-        return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
+    public static RockItemVariant builder(String name) {
+        return new RockItemVariant(name);
     }
 
-    private void createItem() {
+    public RockItemVariant setFactory(BiFunction<RockItemVariant, RockType, ? extends Item> factory) {
+        this.factory = factory;
+        return this;
+    }
+
+    public RockItemVariant build() {
         for (var type : RockType.getTypes()) {
             if (ItemsRock.ROCK_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
+
+        return this;
     }
 
-    public static Builder builder(String name) {
-
-        return new Builder(name);
-    }
-
-    public static class Builder {
-
-        private final String name;
-        private BiFunction<RockItemVariant, RockType, ? extends Item> factory;
-
-        /**
-         * Создает экземпляр Builder с указанным именем.
-         *
-         * @param name Имя породы.
-         */
-        public Builder(@NotNull String name) {
-
-            this.name = name;
-        }
-
-        public Builder setFactory(BiFunction<RockItemVariant, RockType, ? extends Item> factory) {
-            this.factory = factory;
-            return this;
-        }
-
-        public RockItemVariant build() {
-
-            return new RockItemVariant(this);
-        }
+    public String getLocalizedName() {
+        return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
     }
 }

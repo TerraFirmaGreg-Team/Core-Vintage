@@ -6,11 +6,8 @@ import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariantHandler;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariantHandler;
 import su.terrafirmagreg.modules.wood.event.EntityJoinWorldEventHandler;
 import su.terrafirmagreg.modules.wood.event.KeyEventHandler;
-import su.terrafirmagreg.modules.wood.event.MissingMappingEventHandler;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.init.EntitiesWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
@@ -66,8 +63,6 @@ public final class ModuleWood extends ModuleBase {
     @Override
     public void onRegister() {
         WoodTypeHandler.init();
-        WoodBlockVariantHandler.init();
-        WoodItemVariantHandler.init();
 
         BlocksWood.onRegister(registryManager);
         ItemsWood.onRegister(registryManager);
@@ -85,7 +80,6 @@ public final class ModuleWood extends ModuleBase {
     @Override
     public void onPreInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new EntityJoinWorldEventHandler());
-        MinecraftForge.EVENT_BUS.register(new MissingMappingEventHandler());
     }
 
     @Override

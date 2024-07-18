@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
-import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
@@ -55,7 +55,7 @@ public class BlockRockSurface extends BlockRock {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        var itemStack = new ItemStack(RockItemVariants.LOOSE.get(getType()));
+        var itemStack = new ItemStack(ItemsRock.LOOSE.get(getType()));
 
         if (playerIn.addItemStackToInventory(itemStack)) {
             worldIn.setBlockToAir(pos);
@@ -69,7 +69,7 @@ public class BlockRockSurface extends BlockRock {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(RockItemVariants.LOOSE.get(getType())));
+        drops.add(new ItemStack(ItemsRock.LOOSE.get(getType())));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class BlockRockSurface extends BlockRock {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(RockItemVariants.LOOSE.get(getType()));
+        return new ItemStack(ItemsRock.LOOSE.get(getType()));
     }
 
     @Override

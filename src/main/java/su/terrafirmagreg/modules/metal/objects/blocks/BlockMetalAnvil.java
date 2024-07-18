@@ -1,12 +1,14 @@
 package su.terrafirmagreg.modules.metal.objects.blocks;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.spi.block.BaseBlock;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.IMetalBlock;
 import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariant;
-import su.terrafirmagreg.modules.metal.api.types.variant.block.MetalBlockVariants;
+import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 
 import net.minecraft.block.SoundType;
@@ -35,13 +37,6 @@ import net.minecraftforge.items.IItemHandler;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
@@ -106,7 +101,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
             if (state.getBlock().isReplaceable(worldIn, placedPos) &&
                     stateSupport.isSideSolid(worldIn, supportPos, EnumFacing.UP)) {
                 if (!worldIn.isRemote) {
-                    worldIn.setBlockState(placedPos, MetalBlockVariants.ANVIL.get(type).getDefaultState()
+                    worldIn.setBlockState(placedPos, BlocksMetal.ANVIL.get(type).getDefaultState()
                             .withProperty(HORIZONTAL, player.getHorizontalFacing()));
                     worldIn.playSound(null, placedPos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     stack.shrink(1);
@@ -240,7 +235,7 @@ public class BlockMetalAnvil extends BaseBlock implements IMetalBlock {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(MetalBlockVariants.ANVIL.get(type));
+        return new ItemStack(BlocksMetal.ANVIL.get(type));
     }
 
     @Override

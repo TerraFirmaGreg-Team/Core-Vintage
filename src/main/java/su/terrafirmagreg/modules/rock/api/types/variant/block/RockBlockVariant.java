@@ -13,8 +13,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import gregtech.api.unification.ore.StoneType;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
-import org.jetbrains.annotations.NotNull;
-
 import lombok.Getter;
 
 import java.util.Set;
@@ -30,24 +28,15 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
     private static final Set<RockBlockVariant> blockVariants = new ObjectOpenHashSet<>();
     private static final AtomicInteger idCounter = new AtomicInteger(16);
 
-    private final String name;
-    private final float baseHardness;
-    private final Specification specification;
-    private final BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
-    private final boolean hasStoneType;
+    private float baseHardness;
+    private Specification specification;
+    private BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
+    private boolean hasStoneType;
 
-    private RockBlockVariant(Builder builder) {
-        super(builder.name);
-
-        this.name = builder.name;
-        this.baseHardness = builder.baseHardness;
-        this.specification = builder.specification;
-        this.factory = builder.factory;
-        this.hasStoneType = builder.hasStoneType;
+    private RockBlockVariant(String name) {
+        super(name);
 
         if (!blockVariants.add(this)) throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
-
-        createBlock();
     }
 
     public Block get(RockType type) {
@@ -56,25 +45,47 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
         throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
     }
 
-    public boolean canFall() {
-        return specification != null;
+    public static RockBlockVariant builder(String name) {
+
+        return new RockBlockVariant(name);
     }
 
-    private Block create(RockType type) {
-        return factory.apply(this, type);
+    public RockBlockVariant setBaseHardness(float baseHardness) {
+        this.baseHardness = baseHardness;
+        return this;
     }
 
-    private void createBlock() {
+    public RockBlockVariant setFactory(BiFunction<RockBlockVariant, RockType, ? extends Block> factory) {
+        this.factory = factory;
+        return this;
+    }
+
+    public RockBlockVariant setFallingSpecification(Specification specification) {
+        this.specification = specification;
+        return this;
+    }
+
+    public RockBlockVariant setStoneType() {
+        this.hasStoneType = true;
+        return this;
+    }
+
+    public RockBlockVariant build() {
         for (var type : RockType.getTypes()) {
-            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), create(type)) != null)
+            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
 
             if (hasStoneType) createStoneType(idCounter.getAndIncrement(), type);
         }
+        return this;
+    }
+
+    public boolean canFall() {
+        return specification != null;
     }
 
     private void createStoneType(int id, RockType type) {
-        new StoneType(id, type + "_" + this.name, SoundType.STONE,
+        new StoneType(id, type + "_" + this.getName(), SoundType.STONE,
                 type.getOrePrefix(), type.getMaterial(),
                 () -> this.get(type).getDefaultState(),
                 state -> state.getBlock() == this.get(type), false
@@ -83,52 +94,5 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
 
     public String getLocalizedName() {
         return new TextComponentTranslation(String.format("rock.variant.%s.name", this)).getFormattedText();
-    }
-
-    public static Builder builder(String name) {
-
-        return new Builder(name);
-    }
-
-    public static class Builder {
-
-        private final String name;
-        private float baseHardness;
-        private BiFunction<RockBlockVariant, RockType, ? extends Block> factory;
-        private Specification specification = null;
-        private boolean hasStoneType = false;
-
-        /**
-         * Создает экземпляр Builder с указанным именем.
-         *
-         * @param name Имя породы.
-         */
-        public Builder(@NotNull String name) {
-            this.name = name;
-        }
-
-        public Builder setBaseHardness(float baseHardness) {
-            this.baseHardness = baseHardness;
-            return this;
-        }
-
-        public Builder setFactory(BiFunction<RockBlockVariant, RockType, ? extends Block> factory) {
-            this.factory = factory;
-            return this;
-        }
-
-        public Builder setFallingSpecification(Specification specification) {
-            this.specification = specification;
-            return this;
-        }
-
-        public Builder setStoneType() {
-            this.hasStoneType = true;
-            return this;
-        }
-
-        public RockBlockVariant build() {
-            return new RockBlockVariant(this);
-        }
     }
 }

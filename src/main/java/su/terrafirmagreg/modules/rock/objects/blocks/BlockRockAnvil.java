@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
-import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariants;
-import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariants;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -137,12 +137,12 @@ public class BlockRockAnvil extends BlockRock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return RockItemVariants.LOOSE.get(getType());
+        return ItemsRock.LOOSE.get(getType());
     }
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(RockBlockVariants.RAW.get(getType()));
+        return new ItemStack(BlocksRock.RAW.get(getType()));
     }
 
     //	@Nullable

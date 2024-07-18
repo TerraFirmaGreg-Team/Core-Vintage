@@ -5,9 +5,9 @@ import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
 import su.terrafirmagreg.modules.soil.client.GrassColorHandler;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
@@ -80,7 +80,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColo
                 var soil = soilBlockVariant.getType();
 
                 if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
-                    worldIn.setBlockState(pos, SoilBlockVariants.DIRT.get(soil).getDefaultState());
+                    worldIn.setBlockState(pos, BlocksSoil.DIRT.get(soil).getDefaultState());
                 } else {
                     if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
                         for (int i = 0; i < 4; ++i) {
@@ -93,9 +93,9 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColo
                             IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                             IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                            if (iblockstate1.getBlock() == SoilBlockVariants.DIRT.get(soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 &&
+                            if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soil) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 &&
                                     iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
-                                worldIn.setBlockState(blockpos, SoilBlockVariants.GRASS.get(soil)
+                                worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soil)
                                         .getDefaultState());
                             }
                         }
@@ -129,7 +129,7 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColo
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(CLAY) ? Items.CLAY_BALL : SoilItemVariants.PILE.get(getType());
+        return state.getValue(CLAY) ? Items.CLAY_BALL : ItemsSoil.PILE.get(getType());
     }
 
     @Override

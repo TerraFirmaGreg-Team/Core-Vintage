@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
-import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)

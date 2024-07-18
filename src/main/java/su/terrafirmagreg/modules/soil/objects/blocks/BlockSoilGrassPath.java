@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.spi.block.IBlockSettings;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
-import su.terrafirmagreg.modules.soil.api.types.variant.item.SoilItemVariants;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -80,7 +80,7 @@ public class BlockSoilGrassPath extends BlockGrassPath implements ISoilBlock, IB
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return SoilItemVariants.PILE.get(getType());
+        return ItemsSoil.PILE.get(getType());
     }
 
     @Override

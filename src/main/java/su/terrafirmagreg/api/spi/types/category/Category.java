@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 
 @Getter
-public class Category<T> implements Comparable<Category<T>> {
+public abstract class Category<T> implements Comparable<Category<T>> {
 
     private final String name;
 

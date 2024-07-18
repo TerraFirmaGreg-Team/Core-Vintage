@@ -1,12 +1,13 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariants;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.objects.containers.ContainerWoodPlowCart;
 
 import net.minecraft.block.material.Material;
@@ -24,9 +25,6 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
-
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -44,7 +42,7 @@ import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariants.*;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 public class EntityWoodPlowCart extends EntityWoodCartInventory
         implements IInventoryChangedListener, IContainerProvider<ContainerWoodPlowCart, GuiWoodPlow> {
@@ -83,7 +81,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
     public Item getItemCart() {
         var type = getWood();
         if (type != null) {
-            return WoodItemVariants.PLOW_CART.get(type);
+            return ItemsWood.PLOW_CART.get(type);
         }
         return getItemCart();
     }

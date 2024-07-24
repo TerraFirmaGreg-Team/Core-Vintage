@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.layer.biome;
 
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.classic.BiomeProviderClassic;
 import su.terrafirmagreg.modules.world.objects.layer.GenLayerBase;
 
@@ -8,7 +9,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class GenLayerBiome extends GenLayerBase {
     public GenLayerBiome(long seed, GenLayer parent) {
         super(seed);
         this.parent = parent;
-        if (ConfigTFC.General.DEBUG.debugWorldGenSafe) {
+        if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
             TerraFirmaCraft.getLog().info("Worldgen biome list (ints): {}", biomes);
             TerraFirmaCraft.getLog()
                     .info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes)

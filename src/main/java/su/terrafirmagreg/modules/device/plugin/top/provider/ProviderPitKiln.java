@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.plugin.top.provider;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPitKiln;
 import su.terrafirmagreg.modules.device.objects.tiles.TilePitKiln;
 
@@ -42,9 +43,9 @@ public class ProviderPitKiln implements IProbeInfoProvider {
             if (tile == null) return;
 
             List<String> currentTooltip = new ArrayList<>();
-            
+
             if (tile.isLit()) {
-                long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - tile.getLitTick());
+                long remainingTicks = ConfigDevice.BLOCKS.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - tile.getLitTick());
                 long remainingMinutes = Math.round(remainingTicks / 1200.0f);
                 long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
                 switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {

@@ -3,6 +3,8 @@ package net.dries007.tfc.api.capability.food;
 import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -16,7 +18,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -111,7 +112,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
                 long rottenCalendarTime = rottenDate - Calendar.PLAYER_TIME.getTicks() + Calendar.CALENDAR_TIME.getTicks();
                 // Days till food rots.
                 long daysToRotInTicks = rottenCalendarTime - Calendar.CALENDAR_TIME.getTicks();
-                switch (ConfigTFC.Client.TOOLTIP.decayTooltipMode) {
+                switch (ConfigFood.MISC.DECAY.tooltipMode) {
                     case HIDE:
                         break;
                     case EXPIRATION_ONLY:
@@ -131,7 +132,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
                 }
             }
         }
-        if (ConfigTFC.General.DEBUG.enable) {
+        if (ConfigCore.MISC.DEBUG.enable) {
             text.add("Created at " + getCreationDate());
         }
 

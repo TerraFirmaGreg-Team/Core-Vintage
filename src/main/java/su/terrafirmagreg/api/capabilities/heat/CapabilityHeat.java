@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.capabilities.heat;
 
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -8,9 +9,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
-
-import net.dries007.tfc.ConfigTFC;
 
 public final class CapabilityHeat {
 
@@ -54,7 +52,7 @@ public final class CapabilityHeat {
      */
     public static float adjustTemp(float temp, float heatCapacity, long ticksSinceUpdate) {
         if (ticksSinceUpdate <= 0) return temp;
-        final float newTemp = temp - heatCapacity * (float) ticksSinceUpdate * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
+        final float newTemp = temp - heatCapacity * (float) ticksSinceUpdate * (float) ConfigCore.MISC.HEAT.globalModifier;
         return newTemp < 0 ? 0 : newTemp;
     }
 
@@ -70,7 +68,7 @@ public final class CapabilityHeat {
      *                 heats faster
      */
     public static void addTemp(ICapabilityHeat instance, float modifier) {
-        final float temp = instance.getTemperature() + modifier * instance.getHeatCapacity() * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
+        final float temp = instance.getTemperature() + modifier * instance.getHeatCapacity() * (float) ConfigCore.MISC.HEAT.globalModifier;
         instance.setTemperature(temp);
     }
 
@@ -78,7 +76,7 @@ public final class CapabilityHeat {
         boolean hasAir = airTicks > 0;
         float targetTemperature = burnTemp + (hasAir ? MathHelper.clamp(burnTemp, 0, maxTempBonus) : 0);
         if (temp != targetTemperature) {
-            float delta = (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
+            float delta = (float) ConfigCore.MISC.HEAT.heatingModifier;
             return adjustTempTowards(temp, targetTemperature, delta * (hasAir ? 2 : 1), delta * (hasAir ? 0.5f : 1));
         }
         return temp;

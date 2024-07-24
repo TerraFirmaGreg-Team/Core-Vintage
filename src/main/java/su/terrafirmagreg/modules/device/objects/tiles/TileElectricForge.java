@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiElectricForge;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
@@ -34,7 +35,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.capability.GregtechCapabilities;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
@@ -65,7 +65,7 @@ public class TileElectricForge extends TEInventory
     private int litTime = 0;
     private boolean soundPlay = false;
 
-    private boolean addedToIc2Network = false;
+    private final boolean addedToIc2Network = false;
 
     public TileElectricForge() {
         super(12);
@@ -120,7 +120,7 @@ public class TileElectricForge extends TEInventory
                 int energy = (int) (energyUsage * modifier);
                 if (targetTemperature > itemTemp && energyContainer.consumeEnergy(energy, false)) {
                     float heatSpeed = (float) TechConfig.DEVICES.electricForgeSpeed * 15.0F;
-                    float temp = cap.getTemperature() + heatSpeed * cap.getHeatCapacity() * (float) ConfigTFC.Devices.TEMPERATURE.globalModifier;
+                    float temp = (float) (cap.getTemperature() + heatSpeed * cap.getHeatCapacity() * ConfigCore.MISC.HEAT.globalModifier);
                     cap.setTemperature(Math.min(temp, targetTemperature));
                     litTime = 15;
                 }

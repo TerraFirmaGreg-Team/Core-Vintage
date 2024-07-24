@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.material.Material;
@@ -32,7 +33,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.te.TEPlacedItem;
@@ -126,7 +126,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
             }
 
             // Check if complete
-            long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
+            long remainingTicks = ConfigDevice.BLOCKS.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
             if (remainingTicks <= 0) {
                 // Empty ingredients
                 emptyFuelContents();

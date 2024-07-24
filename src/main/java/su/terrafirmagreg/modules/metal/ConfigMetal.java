@@ -15,24 +15,17 @@ import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "metal")
 public class ConfigMetal {
 
-    @Config.Name("Blocks")
+    @Config.Name("Block")
     @Config.Comment("Block settings")
-
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
-    @Config.Name("Items")
-    @Config.Comment("Items settings")
-
+    @Config.Name("Item")
+    @Config.Comment("Item settings")
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
-    @Config.Comment("Miscellaneous")
-
+    @Config.Comment("Misc settings")
     public static final MiscCategory MISC = new MiscCategory();
-
-    static {
-        ConfigAnytime.register(ConfigMetal.class);
-    }
 
     public static final class BlocksCategory {
 
@@ -44,6 +37,10 @@ public class ConfigMetal {
 
     public static final class MiscCategory {
 
+    }
+
+    static {
+        ConfigAnytime.register(ConfigMetal.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

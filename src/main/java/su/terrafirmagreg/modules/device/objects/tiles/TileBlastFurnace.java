@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBlastFurnace;
@@ -31,7 +32,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
@@ -57,7 +57,7 @@ public class TileBlastFurnace extends TETickableInventory
     public static final int FIELD_ORE_UNITS = 4;
     public static final int CHIMNEY_LEVELS = 5;
 
-    private static final int MAX_AIR_TICKS = ConfigTFC.Devices.BELLOWS.maxTicks;
+    private static final int MAX_AIR_TICKS = ConfigDevice.BLOCKS.BELLOWS.maxTicks;
 
     private final List<ItemStack> oreStacks = new ArrayList<>();
     private final List<ItemStack> fuelStacks = new ArrayList<>();
@@ -72,7 +72,7 @@ public class TileBlastFurnace extends TETickableInventory
     public TileBlastFurnace() {
         super(1);
         // Blast furnaces hold the same amount of crucibles, should it matter to be different?
-        this.alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
+        this.alloy = new Alloy(ConfigDevice.BLOCKS.CRUCIBLE.tank);
     }
 
     @Override
@@ -230,7 +230,7 @@ public class TileBlastFurnace extends TETickableInventory
                         ItemStack fuelStack = fuelStacks.get(0);
                         fuelStacks.remove(0);
                         Fuel fuel = FuelManager.getFuel(fuelStack);
-                        burnTicksLeft = (int) (Math.ceil(fuel.getAmount() / ConfigTFC.Devices.BLAST_FURNACE.consumption));
+                        burnTicksLeft = (int) (Math.ceil(fuel.getAmount() / ConfigDevice.BLOCKS.BLAST_FURNACE.consumption));
                         burnTemperature = fuel.getTemperature();
                     } else {
                         burnTemperature = 0;

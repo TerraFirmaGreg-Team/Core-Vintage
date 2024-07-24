@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
@@ -29,7 +30,6 @@ import net.minecraftforge.common.util.Constants;
 
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -200,7 +200,7 @@ public class TileBloomery extends TETickableInventory implements ITickable, ITem
     }
 
     public long getRemainingTicks() {
-        return ConfigTFC.Devices.BLOOMERY.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
+        return ConfigDevice.BLOCKS.BLOOMERY.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
     }
 
     public boolean canIgnite() {

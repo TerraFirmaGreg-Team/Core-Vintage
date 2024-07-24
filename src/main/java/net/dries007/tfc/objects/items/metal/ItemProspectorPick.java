@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
 import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
 
@@ -21,7 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.api.types.Metal;
@@ -98,7 +98,7 @@ public class ItemProspectorPick extends ItemMetalTool {
                         ProspectResult result = (ProspectResult) results.toArray()[RNG.nextInt(results.size())];
                         event = new ProspectEvent.Server(player, pos, result.getType(), result.ore);
 
-                        if (ConfigTFC.General.DEBUG.enable) {
+                        if (ConfigCore.MISC.DEBUG.enable) {
                             for (ProspectResult debugResult : results) {
                                 TerraFirmaCraft.getLog()
                                         .debug(debugResult.ore.getDisplayName() + ": " + String.format("%.02f", debugResult.score));

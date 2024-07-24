@@ -169,8 +169,7 @@ public final class Helpers {
     }
 
     public static String getEnumName(Enum<?> anEnum) {
-        return JOINER_DOT.join(Constants.MODID_TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum)
-                .toLowerCase();
+        return JOINER_DOT.join(Constants.MODID_TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
     }
 
     public static String getTypeName(IForgeRegistryEntry<?> type) {

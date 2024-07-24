@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.lib.Injector;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
+import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.debug.WorldTypeDebug;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
@@ -19,6 +20,7 @@ import static su.terrafirmagreg.modules.Modules.WORLD;
 public final class ModuleWorld extends ModuleBase {
 
     public static final LoggingHelper LOGGER = new LoggingHelper(ModuleWorld.class.getSimpleName());
+    public static final WorldTypeClassic WORLD_TYPE_CLASSIC = new WorldTypeClassic();
 
     public ModuleWorld() {
         this.enableAutoRegistry();

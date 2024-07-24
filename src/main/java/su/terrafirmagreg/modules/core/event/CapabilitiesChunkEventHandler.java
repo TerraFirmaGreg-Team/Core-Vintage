@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
 import su.terrafirmagreg.api.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.network.SCPacketChunkData;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.chunk.Chunk;
@@ -12,7 +13,6 @@ import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.util.climate.Climate;
 
 @SuppressWarnings("unused")
@@ -25,7 +25,7 @@ public class CapabilitiesChunkEventHandler {
 
         if (event.getObject().getWorld() == null) return;
 
-        if (event.getObject().getWorld().getWorldType() == TerraFirmaCraft.getWorldType()) {
+        if (event.getObject().getWorld().getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC) {
             event.addCapability(CapabilityChunkData.KEY, new ProviderChunkData());
         }
     }

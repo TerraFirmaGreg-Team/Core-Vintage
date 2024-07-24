@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
@@ -181,7 +182,7 @@ public class ClientEvents {
         if (ConfigTFC.General.OVERRIDES.forceTFCWorldType && event.getGui() instanceof GuiCreateWorld gui) {
             // Only change if default is selected, because coming back from customisation, this will be set already.
             if (gui.selectedIndex == WorldType.DEFAULT.getId()) {
-                gui.selectedIndex = TerraFirmaCraft.getWorldType().getId();
+                gui.selectedIndex = ModuleWorld.WORLD_TYPE_CLASSIC.getId();
             }
         }
     }

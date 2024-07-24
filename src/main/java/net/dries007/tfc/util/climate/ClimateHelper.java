@@ -1,9 +1,10 @@
 package net.dries007.tfc.util.climate;
 
+import su.terrafirmagreg.modules.world.ConfigWorld;
+
 import net.minecraft.util.math.MathHelper;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -104,10 +105,10 @@ public class ClimateHelper {
      * @return the latitude factor for temperature calculation
      */
     public static float latitudeFactor(int chunkZ) {
-        int tempRange = ConfigTFC.General.WORLD.latitudeTemperatureModifier;
-        if (ConfigTFC.General.WORLD.temperatureMode == TemperatureMode.ENDLESS) {
+        int tempRange = ConfigWorld.MISC.latitudeTemperatureModifier;
+        if (ConfigWorld.MISC.temperatureMode == TemperatureMode.ENDLESS) {
             chunkZ = MathHelper.clamp(chunkZ, -tempRange / 2, tempRange / 2);
         }
-        return 0.5f + 0.5f * ConfigTFC.General.WORLD.hemisphereType.getValue() * (float) Math.sin(Math.PI * chunkZ / tempRange);
+        return 0.5f + 0.5f * ConfigWorld.MISC.hemisphereType.getValue() * (float) Math.sin(Math.PI * chunkZ / tempRange);
     }
 }

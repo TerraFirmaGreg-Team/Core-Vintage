@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
 import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -106,7 +107,7 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
         if (metal != null) {
             int smeltAmount = this.getSmeltAmount(stack);
             int meltTemp = (int) this.getMeltTemp(stack);
-            switch (ConfigTFC.Client.TOOLTIP.oreTooltipMode) {
+            switch (ConfigCore.MISC.HEAT.oreTooltipMode) {
                 case HIDE:
                     break;
                 case UNIT_ONLY:

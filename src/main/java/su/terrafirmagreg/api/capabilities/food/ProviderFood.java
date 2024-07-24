@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.capabilities.food;
 
 import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -11,7 +12,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.Calendar;
 
@@ -96,7 +96,7 @@ public class ProviderFood implements ICapabilityFood, ICapabilitySerializable<NB
     @Override
     public float getDecayDateModifier() {
         // Decay modifiers are higher = shorter
-        float mod = data.getDecayModifier() * (float) ConfigTFC.General.FOOD.decayModifier;
+        float mod = data.getDecayModifier() * (float) ConfigFood.MISC.DECAY.modifier;
         for (FoodTrait trait : foodTraits) {
             mod *= trait.getDecayModifier();
         }

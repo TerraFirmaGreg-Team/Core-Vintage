@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.layer.datalayers.tree;
 
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 import su.terrafirmagreg.modules.world.objects.layer.GenLayerBase;
 import su.terrafirmagreg.modules.world.objects.layer.GenLayerFuzzyZoom;
@@ -10,7 +11,6 @@ import su.terrafirmagreg.modules.world.objects.layer.GenLayerZoom;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 
 import javax.imageio.ImageIO;
@@ -50,7 +50,7 @@ public abstract class GenRiverLayer extends GenLayerBase {
     }
 
     public static void drawImage(int size, GenLayerBase genlayer, String name, IntFunction<Color> gibColor) {
-        if (ConfigTFC.General.DEBUG.debugWorldGenSafe) {
+        if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
             if (!FMLCommonHandler.instance().getEffectiveSide().isClient()) {
                 if (shouldDraw) {
                     try {

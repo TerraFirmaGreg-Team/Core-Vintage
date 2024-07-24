@@ -3,14 +3,13 @@ package su.terrafirmagreg.api.capabilities.size;
 import su.terrafirmagreg.api.capabilities.size.spi.Size;
 import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.lib.Unicode;
+import su.terrafirmagreg.api.util.GameUtils;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import net.dries007.tfc.util.Helpers;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public interface ICapabilitySize {
 
     @SideOnly(Side.CLIENT)
     default void addSizeInfo(ItemStack stack, List<String> text) {
-        text.add(Unicode.WEIGHT + " " + I18n.format(Helpers.getEnumName(getWeight(stack))) + " " + Unicode.SIZE + " " + I18n.format(Helpers.getEnumName(getSize(stack))));
+        text.add(Unicode.WEIGHT + " " + I18n.format(GameUtils.getEnumName(getWeight(stack))) + " " + Unicode.SIZE + " " + I18n.format(GameUtils.getEnumName(getSize(stack))));
     }
 
     /**

@@ -8,6 +8,7 @@ import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvide
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerCharcoalForge;
 
@@ -27,7 +28,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -58,7 +58,7 @@ public class TileCharcoalForge extends TETickableInventory
 
     public static final int FIELD_TEMPERATURE = 0;
 
-    private static final int MAX_AIR_TICKS = ConfigTFC.Devices.BELLOWS.maxTicks;
+    private static final int MAX_AIR_TICKS = ConfigDevice.BLOCKS.BELLOWS.maxTicks;
 
     private final HeatRecipe[] cachedRecipes = new HeatRecipe[5];
     private boolean requiresSlotUpdate = false;
@@ -104,7 +104,7 @@ public class TileCharcoalForge extends TETickableInventory
      * Consume more fuel on rain
      */
     public void onRainDrop() {
-        burnTicks -= ConfigTFC.Devices.CHARCOAL_FORGE.rainTicks;
+        burnTicks -= ConfigDevice.BLOCKS.CHARCOAL_FORGE.rainTicks;
         // Play the "tsssss" sound
         world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + MathConstants.RNG.nextFloat() * 0.4f);
     }

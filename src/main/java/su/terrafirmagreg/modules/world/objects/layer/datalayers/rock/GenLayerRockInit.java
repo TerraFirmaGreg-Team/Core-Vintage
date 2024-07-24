@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.world.objects.layer.datalayers.rock;
 
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.objects.layer.GenLayerBase;
 
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.registries.ForgeRegistry;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
@@ -30,7 +30,7 @@ public class GenLayerRockInit extends GenLayerBase {
                 .mapToInt(((ForgeRegistry<Rock>) TFCRegistries.ROCKS)::getID)
                 .sorted()
                 .toArray();
-        if (ConfigTFC.General.DEBUG.debugWorldGenSafe) {
+        if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
             TerraFirmaCraft.getLog().info("Worldgen rock list (ints): {}", layerRocks);
             TerraFirmaCraft.getLog()
                     .info("Worldgen rock list (names): {}", (Object) Arrays.stream(layerRocks)

@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.capability.chunkdata;
 
+import su.terrafirmagreg.modules.world.ModuleWorld;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.chunk.Chunk;
@@ -31,7 +33,7 @@ public final class CapabilityChunkData {
         //noinspection ConstantConditions
         if (event.getObject().getWorld() != null && event.getObject()
                 .getWorld()
-                .getWorldType() == TerraFirmaCraft.getWorldType()) {
+                .getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC) {
             event.addCapability(CHUNK_DATA, new ChunkDataProvider());
         }
     }

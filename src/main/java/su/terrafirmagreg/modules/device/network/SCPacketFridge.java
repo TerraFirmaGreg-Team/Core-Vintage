@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.network;
 
+import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileFridge;
 
@@ -12,7 +13,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +42,7 @@ public class SCPacketFridge implements IMessage, IMessageHandler<SCPacketFridge,
 
     @Override
     public IMessage onMessage(SCPacketFridge message, MessageContext ctx) {
-        EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+        EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
         if (player != null) {
             World world = player.getEntityWorld();
             var tile = TileUtils.getTile(world, message.pos, TileFridge.class);

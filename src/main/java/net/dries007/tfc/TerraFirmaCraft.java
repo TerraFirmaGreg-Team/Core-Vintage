@@ -1,7 +1,6 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.lib.LoggingHelper;
-import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -49,7 +48,6 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.tfc.util.json.JsonConfigRegistry;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
 import static su.terrafirmagreg.Tags.VERSION;
@@ -79,7 +77,6 @@ public final class TerraFirmaCraft {
     }
 
     private final LoggingHelper log = new LoggingHelper(MODID_TFC);
-    private WorldTypeClassic worldTypeTFC;
     private SimpleNetworkWrapper network;
 
     public static LoggingHelper getLog() {
@@ -88,10 +85,6 @@ public final class TerraFirmaCraft {
 
     public static IProxy getProxy() {
         return PROXY;
-    }
-
-    public static WorldTypeClassic getWorldType() {
-        return INSTANCE.worldTypeTFC;
     }
 
     public static SimpleNetworkWrapper getNetwork() {
@@ -160,8 +153,6 @@ public final class TerraFirmaCraft {
                 }
             }
         }
-
-        worldTypeTFC = new WorldTypeClassic();
 
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
     }

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.network;
 
+import su.terrafirmagreg.TerraFirmaGreg;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -12,7 +14,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
 
 public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTileEntity, IMessage> {
 
@@ -41,7 +42,7 @@ public class SCPacketTileEntity implements IMessage, IMessageHandler<SCPacketTil
 
     @Override
     public IMessage onMessage(SCPacketTileEntity message, MessageContext ctx) {
-        EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+        EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
         if (player != null) {
             World world = player.getEntityWorld();
             TileEntity te = world.getTileEntity(message.pos);

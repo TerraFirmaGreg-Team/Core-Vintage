@@ -5,6 +5,8 @@ import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerCrucible;
@@ -26,7 +28,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
@@ -68,7 +69,7 @@ public class TileCrucible extends TETickableInventory
     public TileCrucible() {
         super(10);
 
-        this.alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank); // Side effect: Maximum amount only matches config if not loading from disk
+        this.alloy = new Alloy(ConfigDevice.BLOCKS.CRUCIBLE.tank); // Side effect: Maximum amount only matches config if not loading from disk
         this.inventoryWrapperExtract = new ItemHandlerSidedWrapper(this, inventory, EnumFacing.DOWN);
         this.inventoryWrapperInsert = new ItemHandlerSidedWrapper(this, inventory, EnumFacing.UP);
 
@@ -101,10 +102,10 @@ public class TileCrucible extends TETickableInventory
     public void update() {
         super.update();
         if (!world.isRemote) {
-            temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature, (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier);
+            temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature, (float) ConfigCore.MISC.HEAT.heatingModifier);
             if (targetTemperature > 0) {
                 // Crucible target temperature decays constantly, since it is set by outside providers
-                targetTemperature -= (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
+                targetTemperature -= (float) ConfigCore.MISC.HEAT.heatingModifier;
             }
 
             // Input draining
@@ -137,10 +138,10 @@ public class TileCrucible extends TETickableInventory
                         if (mold.isMolten()) {
                             // Use mold.getMetal() to avoid off by one errors during draining
                             Metal metal = mold.getMetal();
-                            FluidStack fluidStack = mold.drain(ConfigTFC.Devices.CRUCIBLE.pouringSpeed, true);
+                            FluidStack fluidStack = mold.drain(ConfigDevice.BLOCKS.CRUCIBLE.pouringSpeed, true);
                             if (fluidStack != null && fluidStack.amount > 0) {
                                 lastFillTimer = 5;
-                                if (!ConfigTFC.Devices.CRUCIBLE.enableAllSlots) {
+                                if (!ConfigDevice.BLOCKS.CRUCIBLE.enableAllSlots) {
                                     canFill = false;
                                 }
                                 alloy.add(metal, fluidStack.amount);
@@ -235,7 +236,7 @@ public class TileCrucible extends TETickableInventory
         temperature = nbt.getFloat("temp");
 
         // Voids surplus and set the maximum amount if config was changed
-        alloy.setMaxAmount(ConfigTFC.Devices.CRUCIBLE.tank);
+        alloy.setMaxAmount(ConfigDevice.BLOCKS.CRUCIBLE.tank);
 
         // Also set the cached alloyResult:
         alloyResult = alloy.getResult();
@@ -318,7 +319,7 @@ public class TileCrucible extends TETickableInventory
         alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
 
         // Voids surplus and set the maximum amount if config was changed
-        alloy.setMaxAmount(ConfigTFC.Devices.CRUCIBLE.tank);
+        alloy.setMaxAmount(ConfigDevice.BLOCKS.CRUCIBLE.tank);
 
         // Also set the cached alloyResult:
         alloyResult = alloy.getResult();

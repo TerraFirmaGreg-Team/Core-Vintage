@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiLogPile;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile;
@@ -27,7 +28,6 @@ import net.minecraft.world.World;
 
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -95,7 +95,7 @@ public class TileLogPile extends BaseTileInventory implements ITickable, IContai
     public void update() {
         if (!world.isRemote) {
             if (burning) {
-                if ((int) (Calendar.PLAYER_TIME.getTicks() - startBurningTick) > ConfigTFC.Devices.CHARCOAL_PIT.ticks) {
+                if ((int) (Calendar.PLAYER_TIME.getTicks() - startBurningTick) > ConfigDevice.BLOCKS.CHARCOAL_PIT.ticks) {
                     // Attempt to turn this log pile into charcoal
                     createCharcoal();
                 }

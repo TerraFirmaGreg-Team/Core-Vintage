@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.objects.layer;
 
 import su.terrafirmagreg.api.spi.biome.BaseBiome;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 import su.terrafirmagreg.modules.world.objects.layer.biome.GenLayerAddIsland;
 import su.terrafirmagreg.modules.world.objects.layer.biome.GenLayerBiome;
@@ -20,7 +21,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.RockCategory;
 
@@ -175,7 +175,7 @@ public abstract class GenLayerBase extends GenLayer {
         layer = new GenLayerSmooth(1000L, layer);
 
         for (int zoomLevel = 0; zoomLevel < rockLayerSize; ++zoomLevel) {
-            layer = new GenLayerZoom((long) (1000 + zoomLevel), layer);
+            layer = new GenLayerZoom(1000 + zoomLevel, layer);
         }
 
         layer = new GenLayerSmooth(1000L, layer);
@@ -214,7 +214,7 @@ public abstract class GenLayerBase extends GenLayer {
     }
 
     public static void drawImage(int size, GenLayerBase genlayer, String name, IntFunction<Color> gibColor) {
-        if (!ConfigTFC.General.DEBUG.debugWorldGenSafe) return;
+        if (!ConfigCore.MISC.DEBUG.debugWorldGenSafe) return;
         if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
         try {
             int[] ints = genlayer.getInts(-size / 2, -size / 2, size, size);

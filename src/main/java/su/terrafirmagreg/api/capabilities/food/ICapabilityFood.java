@@ -3,6 +3,9 @@ package su.terrafirmagreg.api.capabilities.food;
 import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -16,8 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
@@ -111,7 +112,7 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
                 long rottenCalendarTime = rottenDate - Calendar.PLAYER_TIME.getTicks() + Calendar.CALENDAR_TIME.getTicks();
                 // Days till food rots.
                 long daysToRotInTicks = rottenCalendarTime - Calendar.CALENDAR_TIME.getTicks();
-                switch (ConfigTFC.Client.TOOLTIP.decayTooltipMode) {
+                switch (ConfigFood.MISC.DECAY.tooltipMode) {
                     case HIDE:
                         break;
                     case EXPIRATION_ONLY:
@@ -131,7 +132,7 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
                 }
             }
         }
-        if (ConfigTFC.General.DEBUG.enable) {
+        if (ConfigCore.MISC.DEBUG.enable) {
             text.add("Created at " + getCreationDate());
         }
 
@@ -153,7 +154,7 @@ public interface ICapabilityFood extends INBTSerializable<NBTTagCompound> {
                 float value = getData().getNutrients()[nutrient.ordinal()];
                 if (value > 0) {
                     text.add(nutrient.getColor() +
-                            I18n.format("tfc.tooltip.nutrition_nutrient", I18n.format(Helpers.getEnumName(nutrient)), String.format("%.1f", value)));
+                            I18n.format("tfc.tooltip.nutrition_nutrient", I18n.format(GameUtils.getEnumName(nutrient)), String.format("%.1f", value)));
                 }
             }
         } else {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.objects.generator.GeneratorLooseRocks;
 import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
@@ -12,7 +13,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 
 
 import com.google.common.collect.Sets;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
@@ -58,7 +58,7 @@ public class RegenRocksSticks extends GeneratorLooseRocks {
 
                 // Default to 35 below the surface, like classic
                 int lowestYScan = Math.max(10, world.getTopSolidOrLiquidBlock(chunkBlockPos)
-                        .getY() - ConfigTFC.General.WORLD.looseRockScan);
+                        .getY() - ConfigWorld.MISC.looseRockScan);
 
                 for (ChunkData data : chunkData) {
                     veins.addAll(data.getGeneratedVeins());
@@ -70,7 +70,7 @@ public class RegenRocksSticks extends GeneratorLooseRocks {
                 }
             }
 
-            for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency * factor; i++) {
+            for (int i = 0; i < ConfigWorld.MISC.looseRocksFrequency * factor; i++) {
                 BlockPos pos = new BlockPos(xoff + random.nextInt(16), 0, zoff + random.nextInt(16));
                 Rock rock = baseChunkData.getRock1(pos);
                 generateRock(world, pos.up(world.getTopSolidOrLiquidBlock(pos)

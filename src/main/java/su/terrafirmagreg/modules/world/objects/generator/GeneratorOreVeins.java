@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.generator;
 
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
 import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
@@ -12,7 +13,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Rock;
@@ -70,8 +70,7 @@ public class GeneratorOreVeins implements IWorldGenerator {
                             final IBlockState stateAt = world.getBlockState(posAt);
 
                             // Do checks specific to the individual block pos that is getting replaced
-                            if (random.nextDouble() < vein.getChanceToGenerate(posAt) && stateAt.getBlock() instanceof BlockRockVariant) {
-                                final BlockRockVariant blockAt = (BlockRockVariant) stateAt.getBlock();
+                            if (random.nextDouble() < vein.getChanceToGenerate(posAt) && stateAt.getBlock() instanceof BlockRockVariant blockAt) {
                                 if (blockAt.getType() == Rock.Type.RAW && vein.canSpawnIn(blockAt.getRock())) {
                                     world.setBlockState(posAt, vein.getOreState(blockAt.getRock()), 2);
                                     generated = true;
@@ -85,7 +84,7 @@ public class GeneratorOreVeins implements IWorldGenerator {
             if (vein.getType() != null) {
                 if (generated) {
                     chunkData.markVeinGenerated(vein);
-                } else if (ConfigTFC.General.DEBUG.enable) {
+                } else if (ConfigCore.MISC.DEBUG.enable) {
                     // Failed to generate, debug info
                     // This can be by a number of factors, mainly because at each expected replacing position we didn't find a matching raw rock.
                     // Some possible causes: Width / Height / Shape / Density / Y / Rock Layer

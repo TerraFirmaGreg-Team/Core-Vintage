@@ -9,13 +9,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.config.DecayTooltipMode;
 import net.dries007.tfc.util.config.HealthDisplayFormat;
-import net.dries007.tfc.util.config.HemisphereType;
 import net.dries007.tfc.util.config.InventoryCraftingMode;
-import net.dries007.tfc.util.config.OreTooltipMode;
 import net.dries007.tfc.util.config.QuiverSearch;
-import net.dries007.tfc.util.config.TemperatureMode;
 import net.dries007.tfc.util.config.TimeTooltipMode;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
@@ -38,10 +34,6 @@ public final class ConfigTFC {
     @Config(modid = MODID_TFC, category = "general", name = "TerraFirmaCraft - General")
     @Config.LangKey("config." + MODID_TFC + ".general")
     public static final class General {
-
-        @Config.Comment("Debug settings")
-        @Config.LangKey("config." + MODID_TFC + ".general.debug")
-        public static final DebugCFG DEBUG = new DebugCFG();
 
         @Config.Comment("Override settings")
         @Config.LangKey("config." + MODID_TFC + ".general.overrides")
@@ -67,10 +59,6 @@ public final class ConfigTFC {
         @Config.LangKey("config." + MODID_TFC + ".general.player")
         public static final PlayerCFG PLAYER = new PlayerCFG();
 
-        @Config.Comment("World generation settings")
-        @Config.LangKey("config." + MODID_TFC + ".general.world")
-        public static final WorldCFG WORLD = new WorldCFG();
-
         @Config.Comment("World regeneration settings")
         @Config.LangKey("config." + MODID_TFC + ".general.world_regen")
         public static final WorldRegenCFG WORLD_REGEN = new WorldRegenCFG();
@@ -82,25 +70,6 @@ public final class ConfigTFC {
         @Config.Comment("Miscelaneous")
         @Config.LangKey("config." + MODID_TFC + ".general.misc")
         public static final MiscCFG MISC = new MiscCFG();
-
-        public static final class DebugCFG {
-
-            @Config.Comment("Various debug options. Activates some extra wand features. Enables extra item tooltips.")
-            @Config.LangKey("config." + MODID_TFC + ".general.debug.enable")
-            public boolean enable = false;
-
-            @Config.Comment(
-                    "Debug worldgen (the danger part) This will glass maps at max world height to help debug world gen. THIS WILL MESS UP YOUR WORLD!")
-            @Config.LangKey("config." + MODID_TFC + ".general.debug.debugWorldGenDanger")
-            @Config.RequiresWorldRestart
-            public boolean debugWorldGenDanger = false;
-
-            @Config.Comment(
-                    "Debug worldgen (safe part) This will output map images of world gen steps and print some debug info. This is safe to use.")
-            @Config.LangKey("config." + MODID_TFC + ".general.debug.debugWorldGenSafe")
-            @Config.RequiresWorldRestart
-            public boolean debugWorldGenSafe = false;
-        }
 
         public static final class OverridesCFG {
 
@@ -392,102 +361,6 @@ public final class ConfigTFC {
             public QuiverSearch quiverSearch = QuiverSearch.HOTBAR;
         }
 
-        public static final class WorldCFG {
-
-            @Config.RequiresMcRestart
-            @Config.Comment("Sets temperature in relation to the equator change. North = Cold, South = Hot or North = Hot, South = Cold.")
-            @Config.LangKey("config." + MODID_TFC + ".general.world.hemisphereType")
-            public HemisphereType hemisphereType = HemisphereType.COLD_NORTH_HOT_SOUTH;
-
-            @Config.RequiresMcRestart
-            @Config.Comment("This controls how temperature is affected by how far from equator you are.")
-            @Config.LangKey("config." + MODID_TFC + ".general.world.temperatureMode")
-            public TemperatureMode temperatureMode = TemperatureMode.CYCLIC;
-
-            @Config.Comment({
-                    "If Cyclic, this controls the length (in blocks) of the temperature regions. The temperature values change in a wave-like pattern (sine wave).",
-                    "Wandering straight in a direction increases or decreases temperature. When you travel this many blocks, the temperature begins changing in the other direction." })
-            @Config.RangeInt(min = 1_000, max = 1_000_000)
-            @Config.LangKey("config." + MODID_TFC + ".general.world.latitudeTemperatureModifier")
-            public int latitudeTemperatureModifier = 40_000;
-
-            @Config.Comment(
-                    "The rarity for clay pits to occur. On average 1 / N chunks will have a clay deposit, if the chunk in question is valid for clay to spawn.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID_TFC + ".general.world.clayRarity")
-            public int clayRarity = 30;
-
-            @Config.Comment("The minimum rainfall in an area required for clay to spawn. By default this is the same threshold as dry grass.")
-            @Config.RangeInt(min = 1, max = 500)
-            @Config.LangKey("config." + MODID_TFC + ".general.world.clayRainfallThreshold")
-            public int clayRainfallThreshold = 150;
-
-            @Config.Comment("The number of attempts per chunk to spawn loose rocks. Includes surface ore samples.")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID_TFC + ".general.world.looseRocksFrequency")
-            public int looseRocksFrequency = 18;
-
-            @Config.Comment("Enable generation of loose rocks (just the rocks)?")
-            @Config.LangKey("config." + MODID_TFC + ".general.world.enableLooseRocks")
-            public boolean enableLooseRocks = true;
-
-            @Config.Comment("Enable generation of loose ores?")
-            @Config.LangKey("config." + MODID_TFC + ".general.world.enableLooseOres")
-            public boolean enableLooseOres = true;
-
-            @Config.Comment("Enable generation of loose rocks (just the rocks)?")
-            @Config.LangKey("config." + MODID_TFC + ".general.world.enableLooseSticks")
-            public boolean enableLooseSticks = true;
-
-            @Config.Comment({ "This controls the number of sticks generated on chunk generation.",
-                    "The number of trees in the area and flora density is also a factor in this." })
-            @Config.RangeDouble(min = 0, max = 10)
-            @Config.LangKey("config." + MODID_TFC + ".general.world.sticksDensityModifier")
-            public double sticksDensityModifier = 1;
-
-            @Config.Comment(
-                    "This is how deep (in blocks) from the surface a loose rock will scan for a vein when generating, Higher values = More veins spawn samples thus adding more samples.")
-            @Config.RangeInt(min = 1, max = 255)
-            @Config.LangKey("config." + MODID_TFC + ".general.world.looseRockScan")
-            public int looseRockScan = 35;
-
-            @Config.RequiresMcRestart
-            @Config.RangeDouble(min = 0.05, max = 0.4)
-            @Config.Comment({
-                    "This controls how spread the rainfall distribution is. Higher values means the world will be distributed towards the extremes more, making more deserts and rain forests.",
-                    "WARNING: This can cause very weird world generation conditions." })
-            @Config.LangKey("config." + MODID_TFC + ".general.world.rainfallSpreadFactor")
-            public double rainfallSpreadFactor = 0.13;
-
-            @Config.RequiresMcRestart
-            @Config.RangeDouble(min = 0.05, max = 0.4)
-            @Config.Comment({
-                    "This controls how spread the flora diversity distribution is. Higher values means the world will be distributed towards the extremes more, making forests have much more different kinds of trees.",
-                    "WARNING: This can cause very weird world generation conditions." })
-            @Config.LangKey("config." + MODID_TFC + ".general.world.floraDiversitySpreadFactor")
-            public double floraDiversitySpreadFactor = 0.16;
-
-            @Config.RequiresMcRestart
-            @Config.RangeDouble(min = 0.05, max = 0.4)
-            @Config.Comment({
-                    "This controls how spread the flora density distribution is. Higher values means the world will be distributed towards the extremes more, making more dense forest pockets.",
-                    "WARNING: This can cause very weird world generation conditions." })
-            @Config.LangKey("config." + MODID_TFC + ".general.world.floraDensitySpreadFactor")
-            public double floraDensitySpreadFactor = 0.16;
-
-            @Config.RequiresMcRestart
-            @Config.Comment({ "This controls which registered entities can respawn in TFC biomes.",
-                    "You must specify by following the pattern 'modid:entity <rarity> <minGroupSpawn> <maxGroupSpawn>'",
-                    "Invalid entries will be ignored." })
-            @Config.LangKey("config." + MODID_TFC + ".general.world.respawnableCreatures")
-            public String[] respawnableCreatures = { "tfc:blackbeartfc 30 1 2", "tfc:boartfc 30 1 2", "tfc:cougartfc 30 1 2", "tfc:coyotetfc 30 3 6",
-                    "tfc:deertfc 70 2 4", "tfc:direwolftfc 30 1 2", "tfc:gazelletfc 70 2 4", "tfc:grizzlybeartfc 30 1 2", "tfc:grousetfc 70 2 3",
-                    "tfc:haretfc 70 2 3", "tfc:hyenatfc 30 3 6", "tfc:jackaltfc 30 3 6", "tfc:liontfc 30 1 2", "tfc:mongoosetfc 30 1 2",
-                    "tfc:muskoxtfc 70 2 4", "tfc:ocelottfc 70 2 4", "tfc:panthertfc 30 1 2", "tfc:pheasanttfc 70 2 3", "tfc:polarbeartfc 30 1 2",
-                    "tfc:quailtfc 70 2 3", "tfc:rabbittfc 70 2 3", "tfc:sabertoothtfc 30 1 2", "tfc:turkeytfc 70 2 3", "tfc:wildebeesttfc 70 2 4",
-                    "tfc:wolftfc 70 2 4", "tfc:yaktfc 70 2 4", "tfc:zebutfc 70 2 4" };
-        }
-
         public static final class WorldRegenCFG {
 
             @Config.Comment(
@@ -508,17 +381,6 @@ public final class ConfigTFC {
         }
 
         public static final class FoodCFG {
-
-            @Config.Comment("Modifier for how quickly food will decay. Higher values = faster decay. Set to 0 for infinite expiration time")
-            @Config.RangeDouble(min = 0, max = 10)
-            @Config.LangKey("config." + MODID_TFC + ".general.food.decayModifier")
-            public double decayModifier = 1.0;
-
-            @Config.Comment(
-                    "The number of hours to which initial food decay will be synced. When a food item is dropped, it's initial expiration date will be rounded to the closest multiple of this (in hours).")
-            @Config.RangeInt(min = 1, max = 48)
-            @Config.LangKey("config." + MODID_TFC + ".general.food.decayStackTime")
-            public int decayStackTime = 6;
 
             @Config.Comment("If false, crops will never die under any circumstances. THIS DOES NOT MEAN THEY WILL ALWAYS GROW!")
             @Config.LangKey("config." + MODID_TFC + ".general.food.enableCropDeath")
@@ -556,10 +418,6 @@ public final class ConfigTFC {
         }
 
         public static final class MiscCFG {
-
-            @Config.Comment("If true, the player will spawn with the TFC guidebook")
-            @Config.LangKey("config." + MODID_TFC + ".general.misc.guidebook")
-            public boolean giveBook = true;
 
             @Config.Comment(
                     "The default length of a month (in days) when a new world is started. This can be changed in existing worlds via the /timetfc command.")
@@ -687,41 +545,9 @@ public final class ConfigTFC {
     @Config.LangKey("config." + MODID_TFC + ".devices")
     public static final class Devices {
 
-        @Config.Comment("Temperature Settings")
-        @Config.LangKey("config." + MODID_TFC + ".devices.temperature")
-        public static final TemperatureCFG TEMPERATURE = new TemperatureCFG();
-
         @Config.Comment("Barrel")
         @Config.LangKey("config." + MODID_TFC + ".devices.barrel")
         public static final BarrelCFG BARREL = new BarrelCFG();
-
-        @Config.Comment("Blast Furnace")
-        @Config.LangKey("config." + MODID_TFC + ".devices.blast_furnace")
-        public static final BlastFurnaceCFG BLAST_FURNACE = new BlastFurnaceCFG();
-
-        @Config.Comment("Bloomery")
-        @Config.LangKey("config." + MODID_TFC + ".devices.bloomery")
-        public static final BloomeryCFG BLOOMERY = new BloomeryCFG();
-
-        @Config.Comment("Crucible")
-        @Config.LangKey("config." + MODID_TFC + ".devices.crucible")
-        public static final CrucibleCFG CRUCIBLE = new CrucibleCFG();
-
-        @Config.Comment("Charcoal Pit")
-        @Config.LangKey("config." + MODID_TFC + ".devices.charcoal_pit")
-        public static final CharcoalPitCFG CHARCOAL_PIT = new CharcoalPitCFG();
-
-        @Config.Comment("Charcoal Forge")
-        @Config.LangKey("config." + MODID_TFC + ".devices.charcoal_forge")
-        public static final CharcoalForgeCFG CHARCOAL_FORGE = new CharcoalForgeCFG();
-
-        @Config.Comment("Fire Pit")
-        @Config.LangKey("config." + MODID_TFC + ".devices.fire_pit")
-        public static final FirePitCFG FIRE_PIT = new FirePitCFG();
-
-        @Config.Comment("Pit Kiln")
-        @Config.LangKey("config." + MODID_TFC + ".devices.pit_kiln")
-        public static final PitKilnCFG PIT_KILN = new PitKilnCFG();
 
         @Config.Comment("Lamp")
         @Config.LangKey("config." + MODID_TFC + ".devices.lamp")
@@ -746,33 +572,6 @@ public final class ConfigTFC {
         @Config.Comment("GoldPan")
         @Config.LangKey("config." + MODID_TFC + ".devices.goldpan")
         public static final GoldPanCFG GOLD_PAN = new GoldPanCFG();
-
-        @Config.Comment("Bellows")
-        @Config.LangKey("config." + MODID_TFC + ".devices.bellows")
-        public static final BellowsCFG BELLOWS = new BellowsCFG();
-
-        public static final class TemperatureCFG {
-
-            @Config.Comment("Modifier for how quickly items will gain or lose heat. Smaller number = slower temperature changes.")
-            @Config.RangeDouble(min = 0, max = 10)
-            @Config.LangKey("config." + MODID_TFC + ".devices.temperature.globalModifier")
-            public double globalModifier = 0.5;
-
-            @Config.Comment(
-                    "Modifier for how quickly devices (i.e. charcoal forge, fire pit) will gain or lose heat. Smaller number = slower temperature changes.")
-            @Config.RangeDouble(min = 0, max = 10)
-            @Config.LangKey("config." + MODID_TFC + ".devices.temperature.heatingModifier")
-            public double heatingModifier = 1;
-
-            @Config.Comment("Can heatable items be cooled down in the world? Such as putting it in a pool of water or on top of some snow?")
-            @Config.LangKey("config." + MODID_TFC + ".devices.temperature.coolHeatablesInWorld")
-            public boolean coolHeatablesInWorld = true;
-
-            @Config.Comment("If heatable items can be cooled down in world, after how many ticks should the item attempt to be cooled down?")
-            @Config.LangKey("config." + MODID_TFC + ".devices.temperature.ticksBeforeAttemptToCool")
-            @Config.RangeInt(min = 1, max = 5999)
-            public int ticksBeforeAttemptToCool = 10;
-        }
 
         public static final class BarrelCFG {
 
@@ -801,83 +600,6 @@ public final class ConfigTFC {
                     "juice_papaya", "juice_peach", "juice_pear", "juice_plum", "juice_juniper", "juice_green_grape", "juice_purple_grape",
                     "juice_barrel_cactus", "yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk", "curdled_goat_milk",
                     "curdled_yak_milk", "pina_colada" };
-        }
-
-        public static final class BlastFurnaceCFG {
-
-            @Config.Comment({ "How fast the blast furnace consume fuels (compared to the charcoal forge).",
-                    "Example: Charcoal (without bellows) lasts for 1800 ticks in forge while 1800 / 4 = 450 ticks in blast furnace." })
-            @Config.RangeDouble(min = 0.1D)
-            @Config.LangKey("config." + MODID_TFC + ".devices.blast_furnace.consumption")
-            public double consumption = 4;
-        }
-
-        public static final class BloomeryCFG {
-
-            @Config.Comment("Number of ticks required for a bloomery to complete. (1000 = 1 in game hour = 50 seconds), default is 15 hours.")
-            @Config.RangeInt(min = 20)
-            @Config.LangKey("config." + MODID_TFC + ".devices.bloomery.ticks")
-            public int ticks = 15_000;
-        }
-
-        public static final class CrucibleCFG {
-
-            @Config.Comment("How much metal (units / mB) can a crucible hold?")
-            @Config.RangeInt(min = 100, max = Alloy.SAFE_MAX_ALLOY)
-            @Config.LangKey("config." + MODID_TFC + ".devices.crucible.tank")
-            public int tank = 3_000;
-
-            @Config.Comment("Let crucibles accept pouring metal (from small vessels / molds) from all 9 input slots at the same time.")
-            @Config.LangKey("config." + MODID_TFC + ".devices.crucible.enableAllSlots")
-            public boolean enableAllSlots = false;
-
-            @Config.Comment("How fast should crucibles accept fluids from molds / small vessel?")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID_TFC + ".devices.crucible.pouringSpeed")
-            public int pouringSpeed = 1;
-        }
-
-        public static final class CharcoalPitCFG {
-
-            @Config.Comment("Number of ticks required for charcoal pit to complete. (1000 = 1 in game hour = 50 seconds), default is 18 hours.")
-            @Config.LangKey("config." + MODID_TFC + ".devices.charcoal_pit.ticks")
-            public int ticks = 18_000;
-
-            @Config.Comment("Can charcoal pits take glass (or stained glass) as a valid cover block?")
-            @Config.LangKey("config." + MODID_TFC + ".devices.charcoal_pit.glass")
-            public boolean canAcceptGlass = true;
-        }
-
-        public static final class CharcoalForgeCFG {
-
-            @Config.Comment({ "Number of burning ticks that is removed when the charcoal forge is on rain (random ticks).",
-                    "This effectively makes the charcoal forge consumes more fuel when it is raining above it." })
-            @Config.RangeInt(min = 0)
-            @Config.LangKey("config." + MODID_TFC + ".devices.charcoal_forge.rainTicks")
-            public int rainTicks = 600;
-        }
-
-        public static final class FirePitCFG {
-
-            @Config.Comment(
-                    "Number of ticks required for a cooking pot on a fire pit to boil before turning into soup, per serving. (1000 = 1 in game hour = 50 seconds). Default is 1 hour.")
-            @Config.RangeInt(min = 20)
-            @Config.LangKey("config." + MODID_TFC + ".devices.fire_pit.ticks")
-            public int ticks = 1_000;
-
-            @Config.Comment({ "Number of burning ticks that is removed when the fire pit is on rain (random ticks).",
-                    "This effectively makes the fire pit consumes more fuel when it is raining above it." })
-            @Config.RangeInt(min = 0)
-            @Config.LangKey("config." + MODID_TFC + ".devices.fire_pit.rainTicks")
-            public int rainTicks = 1000;
-        }
-
-        public static final class PitKilnCFG {
-
-            @Config.Comment("Number of ticks required for a pit kiln to burn out. (1000 = 1 in game hour = 50 seconds), default is 8 hours.")
-            @Config.RangeInt(min = 20)
-            @Config.LangKey("config." + MODID_TFC + ".devices.pit_kiln.ticks")
-            public int ticks = 8_000;
         }
 
         public static final class LampCFG {
@@ -972,20 +694,6 @@ public final class ConfigTFC {
             public int cooldownTicks = 20;
         }
 
-        public static final class BellowsCFG {
-
-            @Config.Comment(
-                    "The max number of air ticks, devices get a temperature bonus up to this amount. (1000 = 1 in game hour = 50 seconds), default is 600 ticks.")
-            @Config.RangeInt(min = 0)
-            @Config.LangKey("config." + MODID_TFC + ".devices.bellows.maxTicks")
-            public int maxTicks = 600;
-
-            @Config.Comment("Amount of air ticks given to the connected devices. (1000 = 1 in game hour = 50 seconds), default is 200 ticks.")
-            @Config.RangeInt(min = 0)
-            @Config.LangKey("config." + MODID_TFC + ".devices.bellows.ticks")
-            public int ticks = 200;
-        }
-
     }
 
     @Config(modid = MODID_TFC, category = "client", name = "TerraFirmaCraft - Client")
@@ -1037,14 +745,6 @@ public final class ConfigTFC {
             @Config.Comment("Should animal feedback output to the actionbar? (the space just above the hotbar)")
             @Config.LangKey("config." + MODID_TFC + ".client.tooltip.animalsOutputToActionBar")
             public boolean animalsOutputToActionBar = true;
-
-            @Config.Comment("Ore tooltip info mode.")
-            @Config.LangKey("config." + MODID_TFC + ".client.tooltip.oreTooltipMode")
-            public OreTooltipMode oreTooltipMode = OreTooltipMode.ALL_INFO;
-
-            @Config.Comment("Food decay tooltip mode.")
-            @Config.LangKey("config." + MODID_TFC + ".client.tooltip.decayTooltipMode")
-            public DecayTooltipMode decayTooltipMode = DecayTooltipMode.ALL_INFO;
 
             @Config.Comment({ "Time tooltip info mode." })
             @Config.LangKey("config." + MODID_TFC + ".client.tooltip.timeTooltipMode")

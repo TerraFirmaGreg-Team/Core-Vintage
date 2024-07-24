@@ -9,6 +9,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.cleanroommc.configanytime.ConfigAnytime;
 
 
+import net.dries007.tfc.util.config.DecayTooltipMode;
+
 import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
@@ -17,22 +19,15 @@ public class ConfigFood {
 
     @Config.Name("Blocks")
     @Config.Comment("Block settings")
-
     public static final BlocksCategory BLOCKS = new BlocksCategory();
 
     @Config.Name("Items")
     @Config.Comment("Items settings")
-
     public static final ItemsCategory ITEMS = new ItemsCategory();
 
     @Config.Name("Misc")
     @Config.Comment("Miscellaneous")
-
     public static final MiscCategory MISC = new MiscCategory();
-
-    static {
-        ConfigAnytime.register(ConfigFood.class);
-    }
 
     public static final class BlocksCategory {
 
@@ -44,6 +39,26 @@ public class ConfigFood {
 
     public static final class MiscCategory {
 
+        public final Decay DECAY = new Decay();
+
+        public static final class Decay {
+
+            @Config.Comment("Modifier for how quickly food will decay. Higher values = faster decay. Set to 0 for infinite expiration time")
+            @Config.RangeDouble(min = 0, max = 10)
+            public double modifier = 1.0;
+
+            @Config.Comment({ "The number of hours to which initial food decay will be synced. " +
+                    "When a food item is dropped, it's initial expiration date will be rounded to the closest multiple of this (in hours)." })
+            @Config.RangeInt(min = 1, max = 48)
+            public int stackTime = 6;
+
+            @Config.Comment("Food decay tooltip mode.")
+            public DecayTooltipMode tooltipMode = DecayTooltipMode.ALL_INFO;
+        }
+    }
+
+    static {
+        ConfigAnytime.register(ConfigFood.class);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)

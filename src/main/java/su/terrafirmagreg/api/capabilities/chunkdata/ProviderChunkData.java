@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -64,19 +63,17 @@ public final class ProviderChunkData implements ICapabilityChunkData {
      * Массив для хранения данных о смещении уровня моря.
      */
     private final int[] seaLevelOffset = new int[256];
-
+    private final Set<Vein> generatedVeins = new HashSet<>();
     /**
      * Флаг инициализации данных.
      */
     @Setter
     private boolean initialized = false;
-
     /**
      * Популяция рыбы в чанке. Может быть установлена на основе биома, температуры или случайного числа.
      */
     @Setter
     private int fishPopulation = FISH_POP_MAX; // todo: Set this based on biome? temp? rng?
-
     /**
      * Данные о осадках, региональной температуре, средней температуре, плотности и разнообразии растительности.
      */
@@ -90,19 +87,16 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     private float floraDensity;
     @Setter
     private float floraDiversity;
-
     /**
      * Рабочая нагрузка чанка.
      */
     @Setter
     private int chunkWorkage;
-
     /**
      * Количество тиков защиты от появления враждебных мобов. Начинается с отрицательного значения и увеличивается при наличии игроков в области.
      */
     @Setter
     private long protectedTicks; // Used for hostile spawn protection. Starts negative, increases by players in the area
-
     /**
      * Время последнего обновления чанка.
      */
@@ -110,8 +104,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
     private long lastUpdateTick;
     @Setter
     private long lastUpdateYear;
-
-    private Set<Vein> generatedVeins = new HashSet<>();
 
     /**
      * Возвращает тип горной породы слоя 1 для указанного мира и позиции.
@@ -291,10 +283,6 @@ public final class ProviderChunkData implements ICapabilityChunkData {
      */
     public void markVeinGenerated(@NotNull Vein vein) {
         generatedVeins.add(vein);
-    }
-
-    public boolean canWork(int amount) {
-        return ConfigTFC.Devices.SLUICE.maxWorkChunk == 0 || chunkWorkage <= ConfigTFC.Devices.SLUICE.maxWorkChunk + amount;
     }
 
     /**

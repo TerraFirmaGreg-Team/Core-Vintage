@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.world.classic;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 import su.terrafirmagreg.modules.world.objects.generator.GeneratorBerryBushes;
 import su.terrafirmagreg.modules.world.objects.generator.GeneratorFalls;
@@ -46,7 +48,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.registries.ForgeRegistry;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.capability.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -191,9 +192,9 @@ public class ChunkGenClassic implements IChunkGenerator {
         riverRavineGen = new MapGenRiverRavine(settings.riverRavineRarity);
 
         // Load these now, because if config changes, shit will break
-        rainfallSpread = (float) ConfigTFC.General.WORLD.rainfallSpreadFactor;
-        floraDiversitySpread = (float) ConfigTFC.General.WORLD.floraDiversitySpreadFactor;
-        floraDensitySpread = (float) ConfigTFC.General.WORLD.floraDensitySpreadFactor;
+        rainfallSpread = (float) ConfigWorld.MISC.rainfallSpreadFactor;
+        floraDiversitySpread = (float) ConfigWorld.MISC.floraDiversitySpreadFactor;
+        floraDensitySpread = (float) ConfigWorld.MISC.floraDensitySpreadFactor;
         world.setSeaLevel(WorldTypeClassic.SEALEVEL); // Set sea level so squids can spawn
         EntitySpawnerWorldData.init(); // Called here so only TFC Worlds are affected
     }
@@ -244,7 +245,7 @@ public class ChunkGenClassic implements IChunkGenerator {
         ravineGen.generate(world, chunkX, chunkZ, chunkPrimerOut);
         riverRavineGen.generate(world, chunkX, chunkZ, chunkPrimerOut);
 
-        if (ConfigTFC.General.DEBUG.debugWorldGenDanger) {
+        if (ConfigCore.MISC.DEBUG.debugWorldGenDanger) {
             for (int x = 0; x < 16; ++x) {
                 for (int z = 0; z < 16; ++z) {
                     chunkPrimerOut.setBlockState(x, 240, z, Blocks.STAINED_GLASS.getStateFromMeta(Biome.getIdForBiome(getBiomeOffset(x, z)) & 15));

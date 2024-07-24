@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.objects.generator;
 
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
@@ -13,7 +14,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
@@ -49,8 +49,8 @@ public class GeneratorSoilPits implements IWorldGenerator {
         // Otherwise, do not change this unless you are prepared to do some fairly large re-writes, similar to how ore gen is handled
         int radius = rng.nextInt(6) + 2;
         int depth = rng.nextInt(3) + 1;
-        if (rng.nextInt(ConfigTFC.General.WORLD.clayRarity) != 0 || start.getY() > WorldTypeClassic.SEALEVEL + 6) return;
-        if (ChunkData.getRainfall(world, start) < ConfigTFC.General.WORLD.clayRainfallThreshold) return;
+        if (rng.nextInt(ConfigWorld.MISC.clayRarity) != 0 || start.getY() > WorldTypeClassic.SEALEVEL + 6) return;
+        if (ChunkData.getRainfall(world, start) < ConfigWorld.MISC.clayRainfallThreshold) return;
 
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {

@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
 import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.render.TESRCrucible;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCrucible;
 
@@ -37,7 +38,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
 import net.dries007.tfc.util.Alloy;
 
@@ -91,7 +91,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         NBTTagCompound nbt = stack.getTagCompound();
         if (nbt != null) {
-            Alloy alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
+            Alloy alloy = new Alloy(ConfigDevice.BLOCKS.CRUCIBLE.tank);
             alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
             String metalName = new TextComponentTranslation(alloy.getResult().getTranslationKey()).getFormattedText();
             tooltip.add(I18n.format(Constants.MODID_TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));

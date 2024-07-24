@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.network;
 
+import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +12,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
 
 public class SCPacketTemperature implements IMessage, IMessageHandler<SCPacketTemperature, IMessage> {
 
@@ -36,8 +36,8 @@ public class SCPacketTemperature implements IMessage, IMessageHandler<SCPacketTe
 
     @Override
     public IMessage onMessage(SCPacketTemperature message, MessageContext ctx) {
-        TerraFirmaCraft.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
-            EntityPlayer player = TerraFirmaCraft.getProxy().getPlayer(ctx);
+        TerraFirmaGreg.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
+            EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(ctx);
             if (player != null) {
                 var sys = CapabilityTemperature.get(player);
                 if (sys != null) {

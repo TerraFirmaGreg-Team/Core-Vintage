@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
@@ -38,7 +39,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-import net.dries007.tfc.ConfigTFC;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -73,7 +73,7 @@ public class BlockLogPile extends BaseBlockContainer implements ITileProvider {
     private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
         if (offsetState.getBlock() instanceof BlockLogPile || offsetState.getBlock() == BlocksDevice.CHARCOAL_PILE) {
             return true;
-        } else if (offsetState.getMaterial() == Material.GLASS && ConfigTFC.Devices.CHARCOAL_PIT.canAcceptGlass) {
+        } else if (offsetState.getMaterial() == Material.GLASS && ConfigDevice.BLOCKS.CHARCOAL_PIT.canAcceptGlass) {
             return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID || offsetState.isSideSolid(world, pos, side);
         }
         return !offsetState.getMaterial()

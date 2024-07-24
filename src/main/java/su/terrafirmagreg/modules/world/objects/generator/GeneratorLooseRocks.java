@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.world.objects.generator;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
 
@@ -13,7 +14,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -67,7 +67,7 @@ public class GeneratorLooseRocks implements IWorldGenerator {
 
                 // Default to 35 below the surface, like classic
                 int lowestYScan = Math.max(10, world.getTopSolidOrLiquidBlock(chunkBlockPos)
-                        .getY() - ConfigTFC.General.WORLD.looseRockScan);
+                        .getY() - ConfigWorld.MISC.looseRockScan);
 
                 veins = GeneratorOreVeins.getNearbyVeins(chunkX, chunkZ, world.getSeed(), 1);
                 if (!veins.isEmpty()) {
@@ -86,7 +86,7 @@ public class GeneratorLooseRocks implements IWorldGenerator {
                 }
             }
 
-            for (int i = 0; i < ConfigTFC.General.WORLD.looseRocksFrequency * factor; i++) {
+            for (int i = 0; i < ConfigWorld.MISC.looseRocksFrequency * factor; i++) {
                 BlockPos pos = new BlockPos(
                         xoff + random.nextInt(16),
                         0,
@@ -110,12 +110,12 @@ public class GeneratorLooseRocks implements IWorldGenerator {
             if (tile != null) {
                 ItemStack stack = ItemStack.EMPTY;
                 if (vein != null && vein.getType() != null) {
-                    if (ConfigTFC.General.WORLD.enableLooseOres) {
+                    if (ConfigWorld.MISC.enableLooseOres) {
                         stack = vein.getType().getLooseRockItem();
                     }
                 }
                 if (stack.isEmpty()) {
-                    if (ConfigTFC.General.WORLD.enableLooseRocks) {
+                    if (ConfigWorld.MISC.enableLooseRocks) {
                         stack = ItemRock.get(rock, 1);
                     }
                 }

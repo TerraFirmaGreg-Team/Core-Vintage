@@ -12,6 +12,7 @@ import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvide
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerFirePit;
@@ -39,7 +40,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
@@ -87,7 +87,7 @@ public class TileFirePit extends TETickableInventory
 
     public static final float COOKING_POT_BOILING_TEMPERATURE = Heat.VERY_HOT.getMin();
 
-    private static final int MAX_AIR_TICKS = ConfigTFC.Devices.BELLOWS.maxTicks;
+    private static final int MAX_AIR_TICKS = ConfigDevice.BLOCKS.BELLOWS.maxTicks;
 
     private final IItemHandler[] inventoryWrappers;
     private final Queue<ItemStack> leftover = new LinkedList<>(); // Leftover items when we can't merge output into any output slot.
@@ -140,7 +140,7 @@ public class TileFirePit extends TETickableInventory
      * Consume more fuel on rain
      */
     public void onRainDrop() {
-        burnTicks -= ConfigTFC.Devices.FIRE_PIT.rainTicks;
+        burnTicks -= ConfigDevice.BLOCKS.FIRE_PIT.rainTicks;
         // Play the "tsssss" sound
         world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f,
                 0.8f + MathConstants.RNG.nextFloat() * 0.4f);
@@ -229,7 +229,7 @@ public class TileFirePit extends TETickableInventory
                         boilingTicks = 0;
                     } else {
                         boilingTicks++;
-                        if (boilingTicks > ConfigTFC.Devices.FIRE_PIT.ticks) {
+                        if (boilingTicks > ConfigDevice.BLOCKS.FIRE_PIT.ticks) {
                             // Convert output
                             float water = 20, saturation = 2; // soups have base 20 water + 2 saturation
                             float[] nutrition = new float[Nutrient.TOTAL];

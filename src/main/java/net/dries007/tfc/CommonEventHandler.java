@@ -27,6 +27,7 @@ import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.api.data.CalendarWorldData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 
@@ -601,7 +602,7 @@ public final class CommonEventHandler {
     public static void onLivingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
         World world = event.getWorld();
         BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
-        if (world.getWorldType() == TerraFirmaCraft.getWorldType() && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
+        if (world.getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
             if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity()
                     .isCreatureType(EnumCreatureType.MONSTER, false)) {
                 // Prevent Mobs
@@ -670,7 +671,7 @@ public final class CommonEventHandler {
     public static void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
         var world = event.getWorld();
-        if (world.getWorldType() == TerraFirmaCraft.getWorldType() && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
+        if (world.getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
             // Fix skeleton rider traps spawning during thunderstorms
             if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface && ((EntitySkeletonHorse) entity).isTrap()) {
                 entity.setDropItemsWhenDead(false);
@@ -722,13 +723,13 @@ public final class CommonEventHandler {
                 }
             }
         }
-        if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entity instanceof EntityItem entityItem) {
+        if (ConfigCore.MISC.HEAT.coolHeatablesInWorld && entity instanceof EntityItem entityItem) {
             ItemStack stack = entityItem.getItem();
             var cap = CapabilityHeat.get(stack);
             if (cap != null) {
                 // Add a NBT tag here to make sure our ItemExpireEvent listener picks this entity up as valid (and as an extra check)
                 entityItem.addTag("TFCHeatableItem");
-                entityItem.lifespan = ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool;
+                entityItem.lifespan = ConfigCore.MISC.HEAT.ticksBeforeAttemptToCool;
             }
         }
     }
@@ -753,7 +754,7 @@ public final class CommonEventHandler {
         EntityItem entityItem = event.getEntityItem();
         ItemStack stack = entityItem.getItem();
         ICapabilityHeat heatCap;
-        if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entityItem.getTags().contains("TFCHeatableItem") &&
+        if (ConfigCore.MISC.HEAT.coolHeatablesInWorld && entityItem.getTags().contains("TFCHeatableItem") &&
                 (heatCap = CapabilityHeat.get(stack)) != null) {
             int lifespan = stack.getItem().getEntityLifespan(stack, entityItem.world);
             if (entityItem.lifespan >= lifespan) {
@@ -776,7 +777,7 @@ public final class CommonEventHandler {
                                     2); // 1/1000 chance of the fluid being used up. Attempts to match the barrel recipe as it takes 1mb of water per operation.
                         }
                     }
-                    event.setExtraLife(ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool); // Set half a second onto the lifespan
+                    event.setExtraLife(ConfigCore.MISC.HEAT.ticksBeforeAttemptToCool); // Set half a second onto the lifespan
                     event.setCanceled(true);
                     entityItem.setNoPickupDelay(); // For some reason when lifespan is added, pickup delay is reset, we disable this to make the experience seamless
                     return;
@@ -823,7 +824,7 @@ public final class CommonEventHandler {
                                 .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
                     }
                 }
-                event.setExtraLife(itemTemp == 0 ? lifespan : ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool); // Set lifespan accordingly
+                event.setExtraLife(itemTemp == 0 ? lifespan : ConfigCore.MISC.HEAT.ticksBeforeAttemptToCool); // Set lifespan accordingly
                 entityItem.setNoPickupDelay(); // For some reason when lifespan is added, pickup delay is reset, we disable this to make the experience seamless
             } else {
                 event.setExtraLife(lifespan); // Sets the original lifespan, next time it expires it will be setDead

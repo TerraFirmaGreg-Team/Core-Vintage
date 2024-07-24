@@ -83,6 +83,7 @@ dependencies {
     if (use_gregtech.toBoolean()) {
         implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022-sources-5519024")
         implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5508050-sources-5508052")
+        implementation rfg.deobf("curse.maven:groovyscript-687577:5562296-sources-5562299")
     }
 
     // Forestry dependencies

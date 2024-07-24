@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.world.objects.generator;
 
 import su.terrafirmagreg.api.spi.biome.BaseBiome;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
@@ -23,7 +24,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.chunkdata.ChunkData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
@@ -79,7 +79,7 @@ public class GeneratorTrees implements IWorldGenerator {
         }
 
         if (!(biome == BiomesWorld.OCEAN || biome == BiomesWorld.DEEP_OCEAN)) {
-            generateLooseSticks(random, chunkX, chunkZ, world, (int) (Math.ceil(stickDensity * ConfigTFC.General.WORLD.sticksDensityModifier)));
+            generateLooseSticks(random, chunkX, chunkZ, world, (int) (Math.ceil(stickDensity * ConfigWorld.MISC.sticksDensityModifier)));
         }
 
         // This is to avoid giant regions of no trees whatsoever.
@@ -152,7 +152,7 @@ public class GeneratorTrees implements IWorldGenerator {
 
         // Sparse foliage were it's otherwise just completely barren and boring...
         if (!(biome == BiomesWorld.OCEAN || biome == BiomesWorld.DEEP_OCEAN)) {
-            generateBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.2f, 260f + gauss, 500f - gauss, 0 + random.nextInt(5), trees);
+            generateBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.2f, 260f + gauss, 500f - gauss, random.nextInt(5), trees);
         }
 
         int treesPerChunk1 = (int) (density * 12 - 2);
@@ -271,7 +271,7 @@ public class GeneratorTrees implements IWorldGenerator {
     }
 
     public static void generateLooseSticks(Random rand, int chunkX, int chunkZ, World world, int amount) {
-        if (ConfigTFC.General.WORLD.enableLooseSticks) {
+        if (ConfigWorld.MISC.enableLooseSticks) {
             for (int i = 0; i < amount; i++) {
                 final int x = chunkX * 16 + rand.nextInt(16) + 8;
                 final int z = chunkZ * 16 + rand.nextInt(16) + 8;

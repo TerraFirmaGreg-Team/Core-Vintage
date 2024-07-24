@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvide
 import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerSmelteryCauldron;
 
@@ -25,7 +26,6 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.fluid.FluidHandlerSided;
 import net.dries007.tfc.api.capability.fluid.FluidTankCallback;
 import net.dries007.tfc.api.capability.fluid.IFluidHandlerSidedCallback;
@@ -87,7 +87,7 @@ public class TileSmelteryCauldron extends TEInventory
                             inventory.setStackInSlot(i, input.get(i));
                         }
                         tank.fillInternal(output, true);
-                        temp -= ConfigTFC.Devices.TEMPERATURE.heatingModifier * 150;
+                        temp -= ConfigCore.MISC.HEAT.heatingModifier * 150;
                         if (tile != null) {
                             tile.setTemperature(temp);
                         }

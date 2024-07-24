@@ -1,6 +1,7 @@
 package net.dries007.tfc.api.capability.food;
 
 import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +12,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.calendar.Calendar;
@@ -196,8 +196,8 @@ public final class CapabilityFood {
      * @return Gets the creation date to set a piece of food to, in order to stack items created nearby in time
      */
     public static long getRoundedCreationDate() {
-        return (Calendar.PLAYER_TIME.getTotalHours() / ConfigTFC.General.FOOD.decayStackTime) * ICalendar.TICKS_IN_HOUR *
-                ConfigTFC.General.FOOD.decayStackTime;
+        return (Calendar.PLAYER_TIME.getTotalHours() / ConfigFood.MISC.DECAY.stackTime) * ICalendar.TICKS_IN_HOUR *
+                ConfigFood.MISC.DECAY.stackTime;
     }
 
     /**

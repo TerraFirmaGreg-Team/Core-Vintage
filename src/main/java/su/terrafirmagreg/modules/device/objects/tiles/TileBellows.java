@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.spi.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit;
@@ -17,7 +18,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 
@@ -34,7 +34,7 @@ public class TileBellows extends BaseTile {
     public static final Vec3i OFFSET_INSET = new Vec3i(1, -1, 0);
 
     private static final Set<Vec3i> OFFSETS = new HashSet<>();
-    private static final int BELLOWS_AIR = ConfigTFC.Devices.BELLOWS.ticks;
+    private static final int BELLOWS_AIR = ConfigDevice.BLOCKS.BELLOWS.ticks;
 
     static {
         addBellowsOffset(OFFSET_LEVEL);
@@ -77,9 +77,7 @@ public class TileBellows extends BaseTile {
             lastPushed = world.getTotalWorldTime();
             markForBlockUpdate();
         }
-
-        EnumFacing direction = world.getBlockState(pos)
-                .getValue(FACING); // It is a better idea to inherit the direction directly from the block.
+        EnumFacing direction = world.getBlockState(pos).getValue(FACING); // It is a better idea to inherit the direction directly from the block.
         for (Vec3i offset : OFFSETS) {
             BlockPos posx = pos.up(offset.getY())
                     .offset(direction, offset.getX())

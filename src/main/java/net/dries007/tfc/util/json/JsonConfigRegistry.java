@@ -60,16 +60,16 @@ public enum JsonConfigRegistry {
                 throw new Error("Problem creating default ore vein config file.", e);
             }
         }
-        File defaultFile = new File(tfcConfigDir, "entity_resistance_data.json");
-        try {
-            if (defaultFile.createNewFile()) {
-                FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader()
-                        .getResourceAsStream(DEFAULT_DAMAGE_RESISTANCE)), defaultFile);
-            }
-        } catch (IOException e) {
-            throw new Error("Problem creating default entity resistance config file.", e);
-        }
-        defaultFile = new File(tfcConfigDir, "animal_food_data.json");
+//        File defaultFile = new File(tfcConfigDir, "entity_resistance_data.json");
+//        try {
+//            if (defaultFile.createNewFile()) {
+//                FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader()
+//                        .getResourceAsStream(DEFAULT_DAMAGE_RESISTANCE)), defaultFile);
+//            }
+//        } catch (IOException e) {
+//            throw new Error("Problem creating default entity resistance config file.", e);
+//        }
+        File defaultFile = new File(tfcConfigDir, "animal_food_data.json");
         try {
             if (defaultFile.createNewFile()) {
                 FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader()

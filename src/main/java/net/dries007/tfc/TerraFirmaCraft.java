@@ -129,7 +129,7 @@ public final class TerraFirmaCraft {
         network.registerMessage(new PacketProspectResult.Handler(), PacketProspectResult.class, ++id, Side.CLIENT);
 
         EntitiesTFC.preInit();
-        JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
+        //JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
 
         CapabilityChunkData.preInit();
         CapabilityForgeable.preInit();
@@ -169,7 +169,7 @@ public final class TerraFirmaCraft {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         FuelManager.postInit();
-        JsonConfigRegistry.INSTANCE.postInit();
+        //JsonConfigRegistry.INSTANCE.postInit();
     }
 
     @Mod.EventHandler

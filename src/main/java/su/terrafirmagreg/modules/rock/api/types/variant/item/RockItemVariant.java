@@ -50,7 +50,6 @@ public class RockItemVariant extends Variant<RockItemVariant> {
             if (ItemsRock.ROCK_ITEMS.put(Pair.of(this, type), factory.apply(this, type)) != null)
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
         }
-
         return this;
     }
 

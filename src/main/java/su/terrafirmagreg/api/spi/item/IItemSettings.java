@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.spi.item;
 
+import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.registry.provider.IAutoRegProvider;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
@@ -8,10 +10,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +58,10 @@ public interface IItemSettings extends IAutoRegProvider {
     }
 
     default Item getItem() {
-        return (Item) this;
+        if (getSettings().getItem() == null) {
+            return (Item) this;
+        }
+        return getSettings().getItem();
     }
 
     // Override IAutoRegProvider methods
@@ -91,6 +92,7 @@ public interface IItemSettings extends IAutoRegProvider {
         protected String registryKey;
         protected String translationKey;
 
+        protected Item item;
         protected Size size;
         protected Weight weight;
         protected boolean canStack;
@@ -111,6 +113,11 @@ public interface IItemSettings extends IAutoRegProvider {
 
         public static Settings of() {
             return new Settings();
+        }
+
+        public Settings item(Item item) {
+            this.item = item;
+            return this;
         }
 
         public Settings registryKey(String registryKey) {

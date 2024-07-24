@@ -12,6 +12,7 @@ import net.minecraftforge.common.IRarity;
 import lombok.Getter;
 
 @Getter
+@SuppressWarnings("deprecation")
 public abstract class BaseItem extends Item implements IItemSettings {
 
     protected final Settings settings;

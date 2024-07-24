@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:ceramic/urn/closed",
+    "textures": {
+      "lid": "tfcflorae:blocks/storage/urn/fired/urn_lid",
+      "side": "tfcflorae:blocks/storage/urn/fired/urn_side_2",
+      "bottom": "tfcflorae:blocks/storage/urn/fired/urn_bottom",
+      "top": "tfcflorae:blocks/storage/urn/fired/urn_top",
+      "particle": "tfcflorae:blocks/storage/urn/fired/urn_side_2"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

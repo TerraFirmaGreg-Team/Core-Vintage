@@ -1,0 +1,39 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/powderkeg/opened",
+    "textures": {
+      "outside": "tfg:blocks/device/powderkeg/outside",
+      "inside": "tfg:blocks/device/powderkeg/inside",
+      "sheet": "tfg:blocks/device/powderkeg/sheet",
+      "particle": "tfg:blocks/device/powderkeg/outside",
+      "fuse": "tfg:blocks/device/powderkeg/fuse"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "sealed": {
+      "true": {
+        "model": "tfg:device/powderkeg/sealed"
+      },
+      "false": {}
+    },
+    "lit": {
+      "true": {
+        "textures": {
+          "fuse": "tfg:blocks/device/powderkeg/fuse_lit"
+        }
+      },
+      "false": {
+        "textures": {
+          "fuse": "tfg:blocks/device/powderkeg/fuse"
+        }
+      }
+    }
+  }
+}

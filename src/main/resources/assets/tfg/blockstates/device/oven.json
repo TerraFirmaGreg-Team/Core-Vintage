@@ -1,0 +1,50 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/oven",
+    "textures": {
+      "cured": "tfg:blocks/ceramic/unfired_bricks",
+      "particle": "tfg:blocks/ceramic/unfired_bricks",
+      "lit": "tfg:blocks/device/molten/off"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ],
+    "lit": {
+      "true": {
+        "textures": {
+          "lit": "tfg:blocks/device/molten/lit"
+        }
+      },
+      "false": {}
+    },
+    "cured": {
+      "true": {
+        "textures": {
+          "particle": "blocks/brick",
+          "cured": "blocks/brick"
+        }
+      },
+      "false": {}
+    },
+    "facing": {
+      "north": {
+        "y": 90
+      },
+      "south": {
+        "y": 270
+      },
+      "west": {
+        "y": 0
+      },
+      "east": {
+        "y": 180
+      }
+    }
+  }
+}

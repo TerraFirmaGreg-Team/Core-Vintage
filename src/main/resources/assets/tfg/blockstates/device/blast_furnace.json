@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/blast_furnace",
+    "textures": {
+      "side": "tfg:blocks/device/blast_furnace/side_lit",
+      "top": "tfg:blocks/device/blast_furnace/top_lit"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "lit": {
+      "true": {},
+      "false": {
+        "textures": {
+          "side": "tfg:blocks/device/blast_furnace/side",
+          "top": "tfg:blocks/device/blast_furnace/top"
+        }
+      }
+    }
+  }
+}

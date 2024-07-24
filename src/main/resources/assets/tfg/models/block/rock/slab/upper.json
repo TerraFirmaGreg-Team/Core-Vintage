@@ -1,0 +1,9 @@
+{
+  "parent": "block/upper_slab",
+  "textures": {
+    "particle": "#all",
+    "bottom": "#all",
+    "top": "#all",
+    "side": "#all"
+  }
+}

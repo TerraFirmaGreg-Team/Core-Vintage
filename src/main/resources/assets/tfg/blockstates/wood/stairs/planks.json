@@ -1,0 +1,53 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/stairs/straight",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/wood/planks"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing": {
+      "east": {},
+      "west": {
+        "y": 180
+      },
+      "south": {
+        "y": 90
+      },
+      "north": {
+        "y": 270
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": {
+        "x": 180
+      }
+    },
+    "shape": {
+      "straight": {
+        "model": "tfg:wood/stairs/straight"
+      },
+      "inner_left": {
+        "model": "tfg:wood/stairs/inner"
+      },
+      "inner_right": {
+        "model": "tfg:wood/stairs/inner"
+      },
+      "outer_left": {
+        "model": "tfg:wood/stairs/outer"
+      },
+      "outer_right": {
+        "model": "tfg:wood/stairs/outer"
+      }
+    }
+  }
+}

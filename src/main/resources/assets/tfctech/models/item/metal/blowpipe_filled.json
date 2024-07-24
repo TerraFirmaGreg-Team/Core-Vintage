@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "tfctech:items/metal/blowpipe",
-    "layer1": "tfctech:items/metal/blowpipe_glass"
-  }
-}

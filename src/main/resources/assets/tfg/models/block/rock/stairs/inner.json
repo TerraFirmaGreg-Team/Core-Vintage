@@ -1,9 +1,0 @@
-{
-  "parent": "block/inner_stairs",
-  "textures": {
-    "particle": "#all",
-    "top": "#all",
-    "bottom": "#all",
-    "side": "#all"
-  }
-}

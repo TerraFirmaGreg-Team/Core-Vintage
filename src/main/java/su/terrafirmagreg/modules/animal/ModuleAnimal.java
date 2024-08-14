@@ -22,7 +22,7 @@ import static su.terrafirmagreg.modules.core.ModuleCore.CORE_TAB;
 @Module(moduleID = ANIMAL)
 public final class ModuleAnimal extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleAnimal.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class.getSimpleName());
 
     public static IPacketService PACKET_SERVICE;
 

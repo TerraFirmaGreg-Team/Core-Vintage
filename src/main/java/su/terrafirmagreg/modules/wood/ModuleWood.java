@@ -31,7 +31,7 @@ import static su.terrafirmagreg.modules.Modules.WOOD;
 @Module(moduleID = WOOD)
 public final class ModuleWood extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleWood.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class.getSimpleName());
     public static final CreativeTabs WOOD_TAB = new BaseCreativeTab("wood", "wood/planks/pine");
 
     public static IPacketService PACKET_SERVICE;

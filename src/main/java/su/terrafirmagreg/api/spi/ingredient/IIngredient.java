@@ -1,15 +1,7 @@
-package net.dries007.tfc.objects.inventory.ingredient;
+package su.terrafirmagreg.api.spi.ingredient;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
@@ -34,55 +26,6 @@ public interface IIngredient<T> extends Predicate<T> {
         return (IIngredient<P>) ANY;
     }
 
-    static IIngredient<ItemStack> of(@NotNull Block predicateBlock) {
-
-        return new IngredientItemStack(new ItemStack(predicateBlock, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    static IIngredient<ItemStack> of(@NotNull Item predicateItem) {
-
-        return new IngredientItemStack(new ItemStack(predicateItem, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    static IIngredient<ItemStack> of(@NotNull Item predicateItem, int amount) {
-
-        return new IngredientItemStack(new ItemStack(predicateItem, amount, OreDictionary.WILDCARD_VALUE));
-    }
-
-    static IIngredient<ItemStack> of(@NotNull ItemStack predicateStack) {
-
-        return new IngredientItemStack(predicateStack);
-    }
-
-    static IIngredient<ItemStack> of(@NotNull String oreName) {
-
-        return new IngredientOreDict(oreName);
-    }
-
-    static IIngredient<ItemStack> of(@NotNull String oreName, int amount) {
-
-        return new IngredientOreDict(oreName, amount);
-    }
-
-    static IIngredient<FluidStack> of(@NotNull FluidStack predicateStack) {
-
-        return new IngredientFluidStack(predicateStack);
-    }
-
-    static IIngredient<FluidStack> of(@NotNull Fluid fluid, int amount) {
-
-        return new IngredientFluidStack(fluid, amount);
-    }
-
-    static IIngredient<FluidStack> of(int amount, @NotNull Fluid... fluids) {
-
-        return new IngredientMultipleFluidStack(amount, fluids);
-    }
-
-    static IIngredient<ItemStack> of(@NotNull IIngredient<ItemStack> predicateStack) {
-        return new IngredientItemFood(predicateStack);
-    }
-    
     /**
      * This is used by JEI-CT hooks, return a valid list of inputs for this IIngredient
      *

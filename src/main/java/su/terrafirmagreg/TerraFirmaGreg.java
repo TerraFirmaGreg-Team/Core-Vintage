@@ -27,14 +27,14 @@ import static su.terrafirmagreg.api.data.Constants.*;
 @Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper();
+    public static final LoggingHelper LOGGER = LoggingHelper.of();
 
     @Getter
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
     public static IProxy proxy;
 
     @Getter
-    @Mod.Instance
+    @Mod.Instance(MOD_ID)
     @SuppressWarnings("unused")
     private static TerraFirmaGreg instance;
 

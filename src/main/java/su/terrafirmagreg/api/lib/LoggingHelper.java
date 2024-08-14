@@ -2,18 +2,27 @@ package su.terrafirmagreg.api.lib;
 
 import su.terrafirmagreg.api.util.ModUtils;
 
+import com.cleanroommc.groovyscript.api.GroovyLog;
+
 
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.ParameterizedMessage;
+import org.intellij.lang.annotations.Flow;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 
@@ -24,22 +33,18 @@ import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
 @SuppressWarnings("unused")
 public class LoggingHelper {
 
+    public static final LoggingHelper LOGGER = LoggingHelper.of();
     /**
      * The logger delegate.
      */
     private final Logger logger;
 
-    public LoggingHelper() {
-        this(LogManager.getLogger(MOD_NAME));
+    public static LoggingHelper of(String name) {
+        return new LoggingHelper(LogManager.getLogger(ModUtils.name(name)));
     }
 
-    /**
-     * Constructs the helper using a logger name.
-     *
-     * @param name The name of the logger to create.
-     */
-    public LoggingHelper(String name) {
-        this(LogManager.getLogger(ModUtils.name(name)));
+    public static LoggingHelper of() {
+        return new LoggingHelper(LogManager.getLogger(MOD_NAME));
     }
 
     /**
@@ -47,9 +52,14 @@ public class LoggingHelper {
      *
      * @param logger The logger to use as a delegate.
      */
-    public LoggingHelper(Logger logger) {
+    private LoggingHelper(Logger logger) {
 
         this.logger = logger;
+    }
+
+    @NotNull
+    public static LoggingHelper get() {
+        return LoggingHelper.LOGGER;
     }
 
     public static List<String> wrapString(String string, int lnLength, boolean wrapLongWords, List<String> list) {
@@ -59,6 +69,10 @@ public class LoggingHelper {
         list.addAll(Arrays.asList(lines));
 
         return list;
+    }
+
+    public static String format(String msg, Object... args) {
+        return args.length == 0 ? msg : new ParameterizedMessage(msg, args).getFormattedMessage();
     }
 
     /**
@@ -190,5 +204,130 @@ public class LoggingHelper {
         }
 
         this.error("********************************************************************************");
+    }
+
+    public static Msg msg(String msg, Object... data) {
+        return new Msg(msg, data);
+    }
+
+    public static class Msg {
+
+        private final List<String> messages = new ArrayList<>();
+
+        private final String mainMsg;
+
+        @Getter
+        private Level level = Level.INFO;
+        private boolean logToMcLog;
+        @Nullable
+        private Throwable throwable;
+
+        public Msg(String msg, Object... data) {
+            this.mainMsg = LoggingHelper.format(msg, data);
+        }
+
+        @Flow(source = "this.level")
+        public boolean isValid() {
+            return level != null;
+        }
+
+        public Msg add(String msg, Object... data) {
+            this.messages.add(LoggingHelper.format(msg, data));
+            return this;
+        }
+
+        public Msg add(boolean condition, String msg, Object... args) {
+            if (condition) {
+                return add(msg, args);
+            }
+            return this;
+        }
+
+        public Msg add(boolean condition, Supplier<String> msg) {
+            if (condition) {
+                return add(msg.get());
+            }
+            return this;
+        }
+
+        public Msg add(boolean condition, Consumer<Msg> msgBuilder) {
+            if (condition) {
+                msgBuilder.accept(this);
+            }
+            return this;
+        }
+
+        public Msg exception(Throwable throwable) {
+            this.throwable = throwable;
+            return this;
+        }
+
+        private Msg level(Level level) {
+            this.level = level;
+            return this;
+        }
+
+        public Msg info() {
+            return level(Level.INFO);
+        }
+
+        public Msg debug() {
+            return level(Level.DEBUG);
+        }
+
+        public Msg warn() {
+            return level(Level.WARN);
+        }
+
+        public Msg fatal() {
+            return level(Level.FATAL);
+        }
+
+        public Msg error() {
+            return level(Level.ERROR);
+        }
+
+        public Msg logToMc(boolean logToMC) {
+            this.logToMcLog = logToMC;
+            return this;
+        }
+
+        public @NotNull String getMainMsg() {
+            return mainMsg;
+        }
+
+        public @NotNull List<String> getSubMessages() {
+            return messages;
+        }
+
+        public @Nullable Throwable getException() {
+            return throwable;
+        }
+
+        public boolean shouldLogToMc() {
+            return logToMcLog;
+        }
+
+        public boolean hasMessages() {
+            return !this.messages.isEmpty();
+        }
+
+        /**
+         * Returns if any sub messages (including the exception) exist in this message
+         *
+         * @return true if any sub messages exist
+         */
+        public boolean hasSubMessages() {
+            return !getSubMessages().isEmpty() && getException() == null;
+        }
+
+        /**
+         * Logs all messages of this message to {@link GroovyLog}, but only if {@link #hasSubMessages()} is true
+         *
+         * @return value of {@link #hasSubMessages()}
+         */
+        public boolean postIfNotEmpty() {
+            return hasSubMessages();
+        }
     }
 }

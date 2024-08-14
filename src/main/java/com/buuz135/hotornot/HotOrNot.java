@@ -44,11 +44,11 @@ public class HotOrNot {
 
     public static final String MOD_NAME = "Hot Or Not - TFC";
 
-    @Instance
-    private static HotOrNot INSTANCE = null;
+    @Instance(MODID_HOTORNOT)
+    private static HotOrNot INSTANCE;
     private static SimpleNetworkWrapper network;
 
-    private final LoggingHelper log = new LoggingHelper(MODID_HOTORNOT);
+    private final LoggingHelper log = LoggingHelper.of(MODID_HOTORNOT);
 
     public static SimpleNetworkWrapper getNetwork() {
         return network;

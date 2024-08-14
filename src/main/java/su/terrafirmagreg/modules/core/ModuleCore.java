@@ -59,7 +59,7 @@ import static su.terrafirmagreg.modules.Modules.CORE;
 )
 public final class ModuleCore extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleCore.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
     public static final CreativeTabs CORE_TAB = new BaseCreativeTab("misc", "core/wand");
 
     public ModuleCore() {

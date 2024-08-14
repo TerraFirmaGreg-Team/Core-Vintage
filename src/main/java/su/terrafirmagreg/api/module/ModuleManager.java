@@ -19,7 +19,7 @@ import java.util.Set;
 public final class ModuleManager {
 
     private static final ModuleManager INSTANCE = new ModuleManager();
-    private static final LoggingHelper LOGGER = new LoggingHelper(ModuleManager.class.getSimpleName());
+    private static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class.getSimpleName());
 
     private final Set<ModuleBase> loadedModules = new LinkedHashSet<>();
     private final Map<ResourceLocation, ModuleBase> sortedModules = new LinkedHashMap<>();

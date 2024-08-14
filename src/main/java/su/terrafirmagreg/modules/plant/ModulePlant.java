@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public final class ModulePlant extends ModuleBase {
 
     public static final CreativeTabs AGRICULTURE_TAB = new BaseCreativeTab("flora", "flora/crop/seed/rice");
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModulePlant.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModulePlant.class.getSimpleName());
 
     public ModulePlant() {
         this.enableAutoRegistry(AGRICULTURE_TAB);

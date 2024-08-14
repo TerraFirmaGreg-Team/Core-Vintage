@@ -20,7 +20,7 @@ public class CalendarWorldData extends WorldSavedData {
 
     private static final String DATA_ID = ModUtils.localize("data.calendar");
 
-    private static final LoggingHelper LOGGER = new LoggingHelper(DATA_ID);
+    private static final LoggingHelper LOGGER = LoggingHelper.of(DATA_ID);
 
     private final Calendar calendar;
 

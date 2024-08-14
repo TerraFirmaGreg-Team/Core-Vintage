@@ -66,7 +66,7 @@ public final class TerraFirmaCraft {
     public static final String MOD_NAME = "TerraFirmaCraft";
     public static final String GUI_FACTORY = "net.dries007.tfc.client.TFCModGuiFactory";
 
-    @Mod.Instance
+    @Mod.Instance(MODID_TFC)
     private static TerraFirmaCraft INSTANCE = null;
 
     @SidedProxy(modId = MODID_TFC, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
@@ -76,7 +76,7 @@ public final class TerraFirmaCraft {
         FluidRegistry.enableUniversalBucket();
     }
 
-    private final LoggingHelper log = new LoggingHelper(MODID_TFC);
+    private final LoggingHelper log = LoggingHelper.of(MODID_TFC);
     private SimpleNetworkWrapper network;
 
     public static LoggingHelper getLog() {

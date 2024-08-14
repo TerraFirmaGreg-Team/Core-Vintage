@@ -27,11 +27,12 @@ import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 public class FirmaLife {
 
     public static final String MODNAME = "FirmaLife";
-    public static final LoggingHelper LOGGER = new LoggingHelper(MODID_FL);
+    public static final LoggingHelper LOGGER = LoggingHelper.of(MODID_FL);
     @SidedProxy(clientSide = "com.eerussianguy.firmalife.proxy.ClientProxy", serverSide = "com.eerussianguy.firmalife.proxy.ServerProxy")
     public static CommonProxy proxy;
-    @Mod.Instance
-    private static FirmaLife INSTANCE = null;
+
+    @Mod.Instance(MODID_FL)
+    private static FirmaLife INSTANCE;
     private SimpleNetworkWrapper network;
 
     public static FirmaLife getInstance() {

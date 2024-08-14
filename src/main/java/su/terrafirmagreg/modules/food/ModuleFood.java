@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 //@ModuleTFG(moduleID = "Food", name = "TFG Module Food")
 public final class ModuleFood extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleFood.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class.getSimpleName());
     public static final CreativeTabs FOOD_TAB = new BaseCreativeTab("food", "food/ingredient/wheat_bread_sandwich");
 
     public ModuleFood() {

@@ -24,10 +24,10 @@ public class TFCTech {
     public static final String NAME = "TFCTech Unofficial";
     public static final String DEPENDENCIES = "after:tfc;after:ic2;after:gregtech";
     private static final boolean signedBuild = true;
-    private static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCTECH);
+    private static final LoggingHelper LOGGER = LoggingHelper.of(MODID_TFCTECH);
     @Getter
     @SuppressWarnings("FieldMayBeFinal")
-    @Mod.Instance
+    @Mod.Instance(MODID_TFCTECH)
     private static TFCTech instance = null;
 
     public static LoggingHelper getLog() {

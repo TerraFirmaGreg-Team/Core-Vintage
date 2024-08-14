@@ -46,7 +46,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_OSA;
 public class OversizedItemInStorageArea {
 
     public static final String MOD_NAME = "OversizedItemInStorageArea";
-    static final LoggingHelper LOGGER = new LoggingHelper(MODID_OSA);
+    static final LoggingHelper LOGGER = LoggingHelper.of(MODID_OSA);
     private static final Pattern splitter = Pattern.compile("\\b([A-Za-z0-9:._\\s]+)");
     /**
      * This is the instance of your mod as created by Forge. It will never be null.
@@ -70,18 +70,16 @@ public class OversizedItemInStorageArea {
     public void splitShit(String[] configInput, Map<String, Integer> outputSave) {
         ArrayList<String> array = new ArrayList<>();
         String key;
-        if (configInput.length > 0) {
-            for (String configEntry : configInput) {
-                Matcher matcher = splitter.matcher(configEntry);
-                while (matcher.find()) {
-                    array.add(matcher.group().trim());
-                }
-                if (!array.isEmpty()) {
-                    key = array.get(0);
-                    array.remove(0);
-                    outputSave.put(key, Integer.valueOf(array.get(0)));
-                    array.clear();
-                }
+        for (String configEntry : configInput) {
+            Matcher matcher = splitter.matcher(configEntry);
+            while (matcher.find()) {
+                array.add(matcher.group().trim());
+            }
+            if (!array.isEmpty()) {
+                key = array.get(0);
+                array.remove(0);
+                outputSave.put(key, Integer.valueOf(array.get(0)));
+                array.clear();
             }
         }
     }

@@ -26,7 +26,7 @@ import static su.terrafirmagreg.modules.Modules.DEVICE;
 @Module(moduleID = DEVICE)
 public final class ModuleDevice extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleDevice.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class.getSimpleName());
     public static final CreativeTabs DEVICES_TAB = new BaseCreativeTab("device", "device/firestarter");
 
     public ModuleDevice() {

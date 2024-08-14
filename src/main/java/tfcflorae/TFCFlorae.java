@@ -30,8 +30,8 @@ public class TFCFlorae {
             + "after:firmalife;"
             + "after:tfcelementia;"
             + "after:tfc_ph_compat;";
-    public static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCF);
-    @Mod.Instance
+    public static final LoggingHelper LOGGER = LoggingHelper.of(MODID_TFCF);
+    @Mod.Instance(MODID_TFCF)
     public static TFCFlorae instance;
     public static boolean signedBuild = true;
 

@@ -24,7 +24,7 @@ import static su.terrafirmagreg.modules.Modules.ROCK;
 @Module(moduleID = ROCK)
 public final class ModuleRock extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleRock.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class.getSimpleName());
 
     public static final CreativeTabs ROCK_TAB = new BaseCreativeTab("rock", "rock/raw/basalt");
 

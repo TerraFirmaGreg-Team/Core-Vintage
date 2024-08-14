@@ -21,7 +21,7 @@ import static su.terrafirmagreg.modules.Modules.SOIL;
 @Module(moduleID = SOIL)
 public final class ModuleSoil extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleSoil.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleSoil.class.getSimpleName());
 
     public static final CreativeTabs SOIL_TAB = new BaseCreativeTab("soil", "soil/grass/humus");
 

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 //@Module(moduleID = Metal)
 public final class ModuleMetal extends ModuleBase {
 
-    public static final LoggingHelper LOGGER = new LoggingHelper(ModuleMetal.class.getSimpleName());
+    public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class.getSimpleName());
     public static final CreativeTabs METAL_TAB = new BaseCreativeTab("metal", "metal/anvil/red_steel");
 
     public static IPacketService PACKET_SERVICE;

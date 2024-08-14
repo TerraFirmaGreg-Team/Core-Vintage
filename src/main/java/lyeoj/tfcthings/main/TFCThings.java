@@ -24,10 +24,10 @@ public class TFCThings {
     public static final String CLIENT_PROXY = "lyeoj.tfcthings.proxy.ClientProxy";
     public static final String COMMON_PROXY = "lyeoj.tfcthings.proxy.CommonProxy";
     public static final String DEPENDENCIES = "required-after:" + Constants.MODID_TFC;
-    public static final LoggingHelper LOGGER = new LoggingHelper(MODID_TFCTHINGS);
+    public static final LoggingHelper LOGGER = LoggingHelper.of(MODID_TFCTHINGS);
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy proxy;
-    @Mod.Instance
+    @Mod.Instance(MODID_TFCTHINGS)
     public static TFCThings instance;
     public static SimpleNetworkWrapper network;
 

@@ -38,7 +38,7 @@ public class HorsePowerMod {
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy proxy;
 
-    public static LoggingHelper logger = new LoggingHelper(MODID_HORSEPOWER);
+    public static LoggingHelper logger = LoggingHelper.of(MODID_HORSEPOWER);
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

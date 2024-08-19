@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "tfg:items/soil/mud_brick/sandy_loam"
-  }
-}

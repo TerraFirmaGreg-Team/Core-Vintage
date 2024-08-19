@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "pressure_plate_up",
+    "uvlock": true,
+    "textures": {
+      "texture": "tfg:blocks/rock/raw/dacite"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "powered": {
+      "false": {},
+      "true": {
+        "model": "pressure_plate_down"
+      }
+    }
+  }
+}

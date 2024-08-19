@@ -1,0 +1,216 @@
+{
+  "parent": "tfg:block/soil/wall/inventory",
+  "textures": {
+    "overlay": "#overlay"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 16, 12],
+      "faces": {
+        "down": {
+          "uv": [4, 4, 12, 12],
+          "texture": "#all",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [4, 4, 12, 12],
+          "texture": "#all"
+        },
+        "north": {
+          "uv": [4, 0, 12, 16],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [4, 0, 12, 16],
+          "texture": "#all"
+        },
+        "west": {
+          "uv": [4, 0, 12, 16],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [4, 0, 12, 16],
+          "texture": "#all"
+        }
+      },
+      "__comment": "Center post"
+    },
+    {
+      "from": [5, 0, 0],
+      "to": [11, 13, 16],
+      "faces": {
+        "down": {
+          "uv": [5, 0, 11, 16],
+          "texture": "#all",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [5, 0, 11, 16],
+          "texture": "#all"
+        },
+        "north": {
+          "uv": [5, 3, 11, 16],
+          "texture": "#all",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [5, 3, 11, 16],
+          "texture": "#all",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [0, 3, 16, 16],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [0, 3, 16, 16],
+          "texture": "#all"
+        }
+      },
+      "__comment": "Full wall"
+    },
+    {
+      "from": [
+        4,
+        0,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        12
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#overlay",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#overlay"
+        },
+        "north": {
+          "uv": [
+            4,
+            0,
+            12,
+            16
+          ],
+          "texture": "#overlay"
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            12,
+            16
+          ],
+          "texture": "#overlay"
+        },
+        "west": {
+          "uv": [
+            4,
+            0,
+            12,
+            16
+          ],
+          "texture": "#overlay"
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            12,
+            16
+          ],
+          "texture": "#overlay"
+        }
+      },
+      "__comment": "Center post overlay"
+    },
+    {
+      "from": [
+        5,
+        0,
+        0
+      ],
+      "to": [
+        11,
+        13,
+        16
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            5,
+            0,
+            11,
+            16
+          ],
+          "texture": "#overlay",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            5,
+            0,
+            11,
+            16
+          ],
+          "texture": "#overlay"
+        },
+        "north": {
+          "uv": [
+            5,
+            3,
+            11,
+            16
+          ],
+          "texture": "#overlay",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            5,
+            3,
+            11,
+            16
+          ],
+          "texture": "#overlay",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            0,
+            3,
+            16,
+            16
+          ],
+          "texture": "#overlay"
+        },
+        "east": {
+          "uv": [
+            0,
+            3,
+            16,
+            16
+          ],
+          "texture": "#overlay"
+        }
+      },
+      "__comment": "Full wall overlay"
+    }
+  ]
+}

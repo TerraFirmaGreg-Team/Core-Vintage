@@ -1,0 +1,16 @@
+item.coffee_cherries.name=Coffee Cherries
+item.coffee_cherries_dried.name=Dried Coffee Cherries
+item.coffee_beans_green.name=Green Coffee Beans
+item.coffee_beans.name=Coffee Beans
+item.coffee_ground.name=Ground Coffee
+item.fired_mug.name=Mug
+item.unfired_mug.name=Unfired Mug
+tile.drying_mat.name=Drying Mat
+tile.coffee_leaves.name=Coffee Leaves
+tile.coffee_sapling.name=Coffee Sapling
+fluid.coffee=Coffee
+fluid.sweet_coffee=Sweetened Coffee
+fluid.tea=Tea
+fluid.sweet_tea=Sweetened Tea
+jei.category.ca.drying_mat=Drying Mat recipes
+effectsTFC.caffeine=Caffeine

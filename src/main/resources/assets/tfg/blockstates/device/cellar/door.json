@@ -1,0 +1,139 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/cellar/door/inventory",
+    "textures": {
+      "bottom": "tfg:blocks/device/cellar/door/lower",
+      "top": "tfg:blocks/device/cellar/door/upper",
+      "particle": "tfg:blocks/device/cellar/wall"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing=east,half=lower,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/lower"
+    },
+    "facing=south,half=lower,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/lower",
+      "y": 90
+    },
+    "facing=west,half=lower,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/lower",
+      "y": 180
+    },
+    "facing=north,half=lower,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/lower",
+      "y": 270
+    },
+    "facing=east,half=lower,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/lower",
+      "y": 270
+    },
+    "facing=south,half=lower,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/lower"
+    },
+    "facing=west,half=lower,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/lower",
+      "y": 90
+    },
+    "facing=north,half=lower,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/lower",
+      "y": 180
+    },
+    "facing=east,half=lower,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/lower_rh"
+    },
+    "facing=south,half=lower,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/lower_rh",
+      "y": 90
+    },
+    "facing=west,half=lower,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/lower_rh",
+      "y": 180
+    },
+    "facing=north,half=lower,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/lower_rh",
+      "y": 270
+    },
+    "facing=east,half=lower,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/lower_rh",
+      "y": 90
+    },
+    "facing=south,half=lower,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/lower_rh",
+      "y": 180
+    },
+    "facing=west,half=lower,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/lower_rh",
+      "y": 270
+    },
+    "facing=north,half=lower,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/lower_rh"
+    },
+    "facing=east,half=upper,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/upper"
+    },
+    "facing=south,half=upper,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/upper",
+      "y": 90
+    },
+    "facing=west,half=upper,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/upper",
+      "y": 180
+    },
+    "facing=north,half=upper,hinge=left,open=false": {
+      "model": "tfg:device/cellar/door/upper",
+      "y": 270
+    },
+    "facing=east,half=upper,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/upper",
+      "y": 270
+    },
+    "facing=south,half=upper,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/upper"
+    },
+    "facing=west,half=upper,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/upper",
+      "y": 90
+    },
+    "facing=north,half=upper,hinge=right,open=true": {
+      "model": "tfg:device/cellar/door/upper",
+      "y": 180
+    },
+    "facing=east,half=upper,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/upper_rh"
+    },
+    "facing=south,half=upper,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/upper_rh",
+      "y": 90
+    },
+    "facing=west,half=upper,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/upper_rh",
+      "y": 180
+    },
+    "facing=north,half=upper,hinge=right,open=false": {
+      "model": "tfg:device/cellar/door/upper_rh",
+      "y": 270
+    },
+    "facing=east,half=upper,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/upper_rh",
+      "y": 90
+    },
+    "facing=south,half=upper,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/upper_rh",
+      "y": 180
+    },
+    "facing=west,half=upper,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/upper_rh",
+      "y": 270
+    },
+    "facing=north,half=upper,hinge=left,open=true": {
+      "model": "tfg:device/cellar/door/upper_rh"
+    }
+  }
+}

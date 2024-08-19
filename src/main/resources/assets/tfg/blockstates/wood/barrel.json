@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/barrel/opened",
+    "textures": {
+      "particle": "tfg:blocks/wood/planks",
+      "base": "tfg:blocks/wood/barrel/base",
+      "hoop": "tfg:blocks/wood/barrel/hoop",
+      "lid": "tfg:blocks/wood/barrel/lid"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "sealed": {
+      "true": {
+        "model": "tfg:wood/barrel/sealed"
+      },
+      "false": {}
+    }
+  }
+}

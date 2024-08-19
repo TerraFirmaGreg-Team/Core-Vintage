@@ -1,0 +1,67 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/grass",
+    "textures": {
+      "up": "tfg:blocks/soil/overlay/sparse_grass/top",
+      "north": "tfg:blocks/soil/overlay/sparse_grass/side",
+      "south": "tfg:blocks/soil/overlay/sparse_grass/side",
+      "east": "tfg:blocks/soil/overlay/sparse_grass/side",
+      "west": "tfg:blocks/soil/overlay/sparse_grass/side",
+      "all": "tfg:blocks/soil/dirt/humus"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "clay": {
+      "true": {
+        "model": "tfg:soil/clay_grass",
+        "textures": {
+          "clay": "tfg:blocks/soil/overlay/clay"
+        }
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "textures": {
+          "east": "tfg:blocks/soil/overlay/sparse_grass/top"
+        }
+      },
+      "false": {}
+    },
+    "north": {
+      "true": {
+        "textures": {
+          "north": "tfg:blocks/soil/overlay/sparse_grass/top"
+        }
+      },
+      "false": {}
+    },
+    "snowy": {
+      "true": {},
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "textures": {
+          "south": "tfg:blocks/soil/overlay/sparse_grass/top"
+        }
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "textures": {
+          "west": "tfg:blocks/soil/overlay/sparse_grass/top"
+        }
+      },
+      "false": {}
+    }
+  }
+}

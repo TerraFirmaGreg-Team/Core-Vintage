@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:cube_overlay_all",
+    "textures": {
+      "overlay": "tfg:blocks/soil/overlay/rooted_dirt",
+      "all": "tfg:blocks/soil/dirt/humus"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/sapling",
+    "textures": {
+      "side": "tfg:blocks/wood/log/side/hornbeam",
+      "leaves": "tfg:blocks/wood/log/leaves/hornbeam"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

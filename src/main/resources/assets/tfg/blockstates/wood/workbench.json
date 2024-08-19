@@ -1,0 +1,22 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:wood/workbench",
+    "textures": {
+      "all": "tfg:blocks/wood/planks",
+      "top": "tfg:blocks/wood/workbench/workbench_top",
+      "north": "tfg:blocks/wood/workbench/workbench_front",
+      "south": "tfg:blocks/wood/workbench/workbench_front",
+      "east": "tfg:blocks/wood/workbench/workbench_side",
+      "west": "tfg:blocks/wood/workbench/workbench_side"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

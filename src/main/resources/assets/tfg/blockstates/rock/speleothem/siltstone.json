@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/rock/raw/siltstone"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {
+        "model": "tfg:rock/speleothem/inventory"
+      }
+    ],
+    "size": {
+      "small": {
+        "model": "tfg:rock/speleothem/small"
+      },
+      "medium": {
+        "model": "tfg:rock/speleothem/medium"
+      },
+      "big": {
+        "model": "tfg:rock/speleothem/big"
+      }
+    }
+  }
+}

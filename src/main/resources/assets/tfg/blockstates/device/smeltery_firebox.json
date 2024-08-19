@@ -1,0 +1,45 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "back": "tfg:blocks/device/smeltery_firebox/back",
+      "top": "tfg:blocks/device/smeltery_firebox/top",
+      "side2": "tfg:blocks/device/smeltery_firebox/side2",
+      "bottom": "tfg:blocks/device/smeltery_firebox/bottom",
+      "chute": "tfg:blocks/device/smeltery_firebox/chute",
+      "gate_bricks": "tfg:blocks/device/smeltery_firebox/gate_bricks",
+      "side1": "tfg:blocks/device/smeltery_firebox/side1",
+      "particle": "tfg:blocks/device/smeltery_firebox/top"
+    },
+    "model": "tfg:device/smeltery_firebox"
+  },
+  "variants": {
+    "inventory": [{}],
+    "normal": [{}],
+    "lit": {
+      "true": {
+        "textures": {
+          "gate_bricks": "tfg:blocks/device/smeltery_firebox/gate_bricks_lit"
+        }
+      },
+      "false": {
+        "textures": {
+          "gate_bricks": "tfg:blocks/device/smeltery_firebox/gate_bricks"
+        }
+      }
+    },
+    "facing": {
+      "south": {
+        "y": 180
+      },
+      "east": {
+        "y": 90
+      },
+      "north": {},
+      "west": {
+        "y": 270
+      }
+    }
+  
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "hotornot:items/ceramics/fired/mold/tongs_jaw/bismuth_bronze"
+  }
+}

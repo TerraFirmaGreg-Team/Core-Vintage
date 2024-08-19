@@ -1,0 +1,53 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true,
+    "model": "tfg:rock/stairs/straight",
+    "textures": {
+      "all": "tfg:blocks/rock/cobble/soapstone"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing": {
+      "east": {},
+      "west": {
+        "y": 180
+      },
+      "south": {
+        "y": 90
+      },
+      "north": {
+        "y": 270
+      }
+    },
+    "half": {
+      "bottom": {},
+      "top": {
+        "x": 180
+      }
+    },
+    "shape": {
+      "straight": {
+        "model": "tfg:rock/stairs/straight"
+      },
+      "inner_left": {
+        "model": "tfg:rock/stairs/inner"
+      },
+      "inner_right": {
+        "model": "tfg:rock/stairs/inner"
+      },
+      "outer_left": {
+        "model": "tfg:rock/stairs/outer"
+      },
+      "outer_right": {
+        "model": "tfg:rock/stairs/outer"
+      }
+    }
+  }
+}

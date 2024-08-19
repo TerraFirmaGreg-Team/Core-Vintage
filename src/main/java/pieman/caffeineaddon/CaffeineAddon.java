@@ -11,10 +11,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import pieman.caffeineaddon.init.RegistryHandler;
 import pieman.caffeineaddon.proxy.CommonProxy;
 
+import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
+
 //@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
 public class CaffeineAddon {
 
-    @Instance()
+    @Instance(owner = MODID_CAFFEINEADDON)
     public static CaffeineAddon instance;
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)

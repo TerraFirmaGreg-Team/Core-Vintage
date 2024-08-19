@@ -1,7 +1,0 @@
-{
-  "parent": "dynamictrees:item/branch",
-  "textures": {
-    "bark": "tfg:blocks/wood/log/side/douglas_fir",
-    "rings": "tfg:blocks/wood/log/end/douglas_fir"
-  }
-}

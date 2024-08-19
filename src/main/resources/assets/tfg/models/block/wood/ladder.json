@@ -1,7 +1,0 @@
-{
-  "parent": "block/ladder",
-  "textures": {
-    "particle": "tfg:blocks/wood/planks",
-    "texture": "tfg:blocks/wood/planks"
-  }
-}

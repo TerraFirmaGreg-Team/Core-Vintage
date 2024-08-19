@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/farmland",
+    "textures": {
+      "side": "tfg:blocks/soil/dirt/loam",
+      "up": "tfg:blocks/soil/farmland/loam"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

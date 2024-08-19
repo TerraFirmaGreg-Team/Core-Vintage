@@ -1,0 +1,186 @@
+{
+  "item.ceramicbreak": {
+    "category": "ambient",
+    "subtitle": "tfc.item.ceramicbreak",
+    "sounds": [
+      "tfc:ceramicbreak1"
+    ]
+  },
+  "item.jug.blow": {
+    "category": "ambient",
+    "subtitle": "tfc.item.jug.blow",
+    "sounds": [
+      "tfc:jugblow1"
+    ]
+  },
+  "item.jug.fill": {
+    "category": "ambient",
+    "subtitle": "tfc.item.jug.fill",
+    "sounds": [
+      "tfc:jugfill"
+    ]
+  },
+  "item.throw": {
+    "category": "ambient",
+    "subtitle": "tfc.item.throw",
+    "sounds": [
+      "tfc:itemthrow"
+    ]
+  },
+  "quern.stonedrag": {
+    "category": "block",
+    "subtitle": "tfc.quern.stonedrag",
+    "sounds": [
+      "tfc:stonedrag1",
+      "tfc:stonedrag2"
+    ]
+  },
+  "dirt.slide.short": {
+    "category": "block",
+    "subtitle": "tfc.dirt.slide",
+    "sounds": [
+      "tfc:fdirts1",
+      "tfc:fdirts2"
+    ]
+  },
+  "rock.slide.long": {
+    "category": "block",
+    "subtitle": "tfc.rock.slide",
+    "sounds": [
+      "tfc:frockl1",
+      "tfc:frockl2"
+    ]
+  },
+  "rock.slide.short": {
+    "category": "block",
+    "subtitle": "tfc.rock.slide",
+    "sounds": [
+      "tfc:frocks1",
+      "tfc:frocks2"
+    ]
+  },
+  "anvil.metalimpact": {
+    "category": "block",
+    "subtitle": "tfc.anvil.metalimpact",
+    "sounds": [
+      "tfc:metalimpact1",
+      "tfc:metalimpact2",
+      "tfc:metalimpact3",
+      "tfc:metalimpact4"
+    ]
+  },
+  "block.charcoal.break": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 0.9
+      },
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 1.0
+      },
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.charcoal.fall": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 0.9
+      },
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 1.0
+      },
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.charcoal.hit": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "tfc:charcoalstep1",
+        "pitch": 0.9
+      },
+      {
+        "name": "tfc:charcoalstep1",
+        "pitch": 1.0
+      },
+      {
+        "name": "tfc:charcoalstep1",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.charcoal.place": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 0.9
+      },
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 1.0
+      },
+      {
+        "name": "tfc:charcoaldig1",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.charcoal.step": {
+    "category": "block",
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "tfc:charcoalstep1",
+        "pitch": 0.9
+      },
+      {
+        "name": "tfc:charcoalstep1",
+        "pitch": 1.0
+      },
+      {
+        "name": "tfc:charcoalstep1",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "music.tfc": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "tfc:music/m0",
+        "stream": true
+      },
+      {
+        "name": "tfc:music/m1",
+        "stream": true
+      },
+      {
+        "name": "tfc:music/m2",
+        "stream": true
+      },
+      {
+        "name": "tfc:music/m3",
+        "stream": true
+      },
+      {
+        "name": "tfc:music/m4",
+        "stream": true
+      }
+    ]
+  }
+}

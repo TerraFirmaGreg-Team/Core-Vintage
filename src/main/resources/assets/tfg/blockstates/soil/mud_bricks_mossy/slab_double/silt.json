@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/mud_bricks",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/soil/mud_bricks/silt",
+      "overlay": "tfg:blocks/soil/overlay/mossy/bricks"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

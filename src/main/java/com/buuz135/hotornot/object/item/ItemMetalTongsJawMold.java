@@ -1,7 +1,7 @@
 package com.buuz135.hotornot.object.item;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +35,7 @@ import com.buuz135.hotornot.object.recipe.UnMoldJawPiece;
 import net.dries007.tfc.api.capability.IMoldHandler;
 
 
-import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 
 
 import net.dries007.tfc.api.types.Metal;

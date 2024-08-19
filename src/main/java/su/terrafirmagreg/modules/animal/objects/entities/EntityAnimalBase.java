@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.objects.entities;
 
 import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
@@ -33,9 +34,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
-
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -372,7 +370,7 @@ public abstract class EntityAnimalBase extends EntityAnimal implements IAnimal {
                     if (!this.world.isRemote) {
                         //Show tooltips
                         if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-                            ModuleAnimal.PACKET_SERVICE.sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
+                            ModuleAnimal.getPacketService().sendTo(SCPacketSimpleMessage.translateMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL,
                                     ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()), (EntityPlayerMP) player);
                         }
                     }

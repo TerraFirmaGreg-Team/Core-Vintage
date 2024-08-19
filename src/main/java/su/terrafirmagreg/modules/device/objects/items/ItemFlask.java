@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
-import su.terrafirmagreg.api.spi.item.IItemSettings;
+import su.terrafirmagreg.api.registry.provider.IProviderItemMesh;
+import su.terrafirmagreg.api.base.item.IItemSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -52,7 +52,7 @@ import static su.terrafirmagreg.api.data.Constants.MOD_ID;
 import static su.terrafirmagreg.modules.food.api.IFoodStatsTFC.MAX_PLAYER_THIRST;
 
 @Getter
-public abstract class ItemFlask extends ItemFluidContainer implements IItemSettings, IItemMeshProvider {
+public abstract class ItemFlask extends ItemFluidContainer implements IItemSettings, IProviderItemMesh {
 
     protected final Settings settings;
     private final int capacity;

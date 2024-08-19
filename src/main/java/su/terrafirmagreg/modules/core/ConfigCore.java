@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core;
 
-import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;

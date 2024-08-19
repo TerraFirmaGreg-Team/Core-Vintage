@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.init;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.core.objects.item.ItemCoreMisc;
 import su.terrafirmagreg.modules.core.objects.item.ItemDebug;

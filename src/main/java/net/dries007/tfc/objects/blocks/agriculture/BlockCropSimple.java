@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;

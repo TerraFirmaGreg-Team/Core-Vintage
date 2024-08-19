@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.itemblocks;
 
-import su.terrafirmagreg.api.spi.item.BaseItemBlock;
+import su.terrafirmagreg.api.base.item.BaseItemBlock;
 import su.terrafirmagreg.modules.device.client.render.TEISRFridge;
 
 import net.minecraft.block.Block;

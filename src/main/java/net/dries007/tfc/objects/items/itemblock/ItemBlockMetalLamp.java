@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import su.terrafirmagreg.api.capabilities.heat.HandlerHeat;
-import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
-import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.heat.HandlerHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;

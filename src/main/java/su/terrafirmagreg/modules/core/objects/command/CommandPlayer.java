@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.core.objects.command;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
-import su.terrafirmagreg.api.spi.command.BaseCommand;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.api.base.command.BaseCommand;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;

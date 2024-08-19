@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.items.rock;
 
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 
 
-import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 
 import net.dries007.tfc.api.types.Rock;

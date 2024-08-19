@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.food;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.item.ItemStack;

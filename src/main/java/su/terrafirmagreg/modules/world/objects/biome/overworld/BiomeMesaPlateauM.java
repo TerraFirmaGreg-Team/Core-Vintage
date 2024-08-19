@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.biome.overworld;
 
-import su.terrafirmagreg.api.spi.biome.BaseBiomeMesa;
+import su.terrafirmagreg.api.base.biome.BaseBiomeMesa;
 
 import net.minecraftforge.common.BiomeDictionary;
 

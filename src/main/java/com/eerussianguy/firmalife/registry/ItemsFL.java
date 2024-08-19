@@ -1,8 +1,8 @@
 package com.eerussianguy.firmalife.registry;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

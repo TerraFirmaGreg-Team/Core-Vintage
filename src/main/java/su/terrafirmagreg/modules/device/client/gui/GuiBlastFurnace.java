@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 
 
 import net.dries007.tfc.client.gui.GuiContainerTE;

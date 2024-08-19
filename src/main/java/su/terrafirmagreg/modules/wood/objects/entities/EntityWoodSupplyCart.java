@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.wood.ConfigWood;
@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 public class EntityWoodSupplyCart extends EntityWoodCartInventory
-        implements IInventoryChangedListener, IContainerProvider<ContainerWoodSupplyCart, GuiWoodSupplyCart> {
+        implements IInventoryChangedListener, IProviderContainer<ContainerWoodSupplyCart, GuiWoodSupplyCart> {
 
     private static final DataParameter<Integer> CARGO = EntityDataManager.createKey(EntityWoodSupplyCart.class, DataSerializers.VARINT);
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

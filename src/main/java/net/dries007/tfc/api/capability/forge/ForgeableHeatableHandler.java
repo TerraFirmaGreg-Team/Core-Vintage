@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability.forge;
 
-import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

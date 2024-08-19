@@ -1,10 +1,10 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 
 import net.minecraft.block.Block;

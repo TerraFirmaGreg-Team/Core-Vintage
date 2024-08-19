@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;

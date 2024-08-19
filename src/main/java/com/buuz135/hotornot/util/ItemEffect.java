@@ -1,6 +1,6 @@
 package com.buuz135.hotornot.util;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;

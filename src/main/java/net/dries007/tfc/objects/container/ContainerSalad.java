@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.container;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

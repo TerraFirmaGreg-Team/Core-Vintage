@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.container;
 
-import su.terrafirmagreg.api.spi.gui.container.BaseContainerTile;
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
 

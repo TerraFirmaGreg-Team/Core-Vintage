@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.tile.BaseTileTickableInventory;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockPowderKeg;
@@ -54,7 +54,7 @@ import static su.terrafirmagreg.api.data.Blockstates.SEALED;
  */
 
 public class TilePowderKeg extends BaseTileTickableInventory
-        implements IItemHandlerSidedCallback, IContainerProvider<ContainerPowderKeg, GuiPowderkeg> {
+        implements IItemHandlerSidedCallback, IProviderContainer<ContainerPowderKeg, GuiPowderkeg> {
 
     @Getter
     private boolean sealed;

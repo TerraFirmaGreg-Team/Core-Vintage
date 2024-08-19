@@ -1,6 +1,6 @@
 package com.buuz135.hotornot.object.item;
 
-import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.recipes.quern;
 
-import su.terrafirmagreg.api.recipe.IBaseRecipe;
+import su.terrafirmagreg.api.base.recipe.IBaseRecipe;
 
 import net.minecraft.item.ItemStack;
 

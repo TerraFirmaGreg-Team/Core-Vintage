@@ -1,6 +1,6 @@
 package tfcflorae.util;
 
-import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlockContainer;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -47,7 +47,7 @@ import java.util.Random;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockLogPile extends BaseBlockContainer implements ITileProvider {
+public class BlockLogPile extends BaseBlockContainer implements IProviderTile {
 
     private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis",
             EnumFacing.Axis.class,

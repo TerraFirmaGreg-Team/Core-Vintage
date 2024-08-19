@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

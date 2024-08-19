@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device;
 
+import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.EntitiesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.DEVICE;
+import static su.terrafirmagreg.modules.ModuleContainer.DEVICE;
 
 @Module(moduleID = DEVICE)
 public final class ModuleDevice extends ModuleBase {
@@ -35,7 +35,7 @@ public final class ModuleDevice extends ModuleBase {
     }
 
     @Override
-    protected void onRegister() {
+    public void onRegister() {
         BlocksDevice.onRegister(registryManager);
         ItemsDevice.onRegister(registryManager);
         EntitiesDevice.onRegister(registryManager);
@@ -43,31 +43,31 @@ public final class ModuleDevice extends ModuleBase {
     }
 
     @SideOnly(Side.CLIENT)
-    protected void onClientRegister() {
+    public void onClientRegister() {
         EntitiesDevice.onClientRegister(registryManager);
 
     }
 
     @Override
-    protected void onNetworkRegister() {
+    public void onNetworkRegister() {
 
         PacketsDevice.onRegister(packetRegistry);
     }
 
     @Override
-    protected void onNewRegister() {
+    public void onNewRegister() {
 
         RegistriesDevice.onRegister();
     }
 
     @Override
-    protected void onRecipesRegister() {
+    public void onRecipesRegister() {
 
         RecipesDevice.onRegister();
     }
 
     @Override
-    protected void onInit(FMLInitializationEvent event) {
+    public void onInit(FMLInitializationEvent event) {
 
         PluginTheOneProbe.init();
     }

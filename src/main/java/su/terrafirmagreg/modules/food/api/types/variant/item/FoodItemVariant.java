@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.food.api.types.variant.item;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.food.api.types.category.FoodCategory;
 
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.generator;
 
-import su.terrafirmagreg.api.spi.biome.BaseBiome;
+import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;

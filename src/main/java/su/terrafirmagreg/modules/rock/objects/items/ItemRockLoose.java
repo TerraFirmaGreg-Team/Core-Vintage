@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.rock.objects.items;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.item.RockItemVariant;
@@ -32,7 +32,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ItemRockLoose extends ItemRock implements IContainerProvider<ContainerKnappingRock, GuiContainerKnappingRock> {
+public class ItemRockLoose extends ItemRock implements IProviderContainer<ContainerKnappingRock, GuiContainerKnappingRock> {
 
     public ItemRockLoose(RockItemVariant variant, RockType type) {
         super(variant, type);

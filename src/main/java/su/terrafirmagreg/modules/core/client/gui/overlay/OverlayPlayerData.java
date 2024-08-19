@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.client.gui.overlay;
 
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;

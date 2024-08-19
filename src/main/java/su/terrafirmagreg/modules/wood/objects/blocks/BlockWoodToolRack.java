@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -29,9 +29,9 @@ import net.minecraft.world.World;
 import gregtech.api.items.toolitem.ToolClasses;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +40,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.*;
 
 @SuppressWarnings("deprecation")
-public class BlockWoodToolRack extends BlockWood implements ITileProvider {
+public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
     protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
     protected static final AxisAlignedBB RACK_WEST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);

@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.recipe;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.command;
 
-import su.terrafirmagreg.api.spi.command.BaseCommand;
+import su.terrafirmagreg.api.base.command.BaseCommand;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandResultStats;

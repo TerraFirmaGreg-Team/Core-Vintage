@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.objects.items.ItemGrindstone;
 

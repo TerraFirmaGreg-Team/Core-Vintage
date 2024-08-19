@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.init;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.text.TextFormatting;

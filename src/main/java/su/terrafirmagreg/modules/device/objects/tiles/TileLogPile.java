@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.api.lib.MathConstants;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -36,7 +36,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockCharcoalPile.LAYERS;
 
 @MethodsReturnNonnullByDefault
-public class TileLogPile extends BaseTileInventory implements ITickable, IContainerProvider<ContainerLogPile, GuiLogPile> {
+public class TileLogPile extends BaseTileInventory implements ITickable, IProviderContainer<ContainerLogPile, GuiLogPile> {
 
     private static final int NUM_SLOTS = 4;
 

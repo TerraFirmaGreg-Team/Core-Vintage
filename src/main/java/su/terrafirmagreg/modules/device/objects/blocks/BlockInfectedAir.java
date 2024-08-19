@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.device.objects.tiles.TileInfectedAir;
 
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class BlockInfectedAir extends BaseBlock implements ITileProvider {
+public class BlockInfectedAir extends BaseBlock implements IProviderTile {
 
     public BlockInfectedAir() {
         super(Settings.of(Material.AIR));

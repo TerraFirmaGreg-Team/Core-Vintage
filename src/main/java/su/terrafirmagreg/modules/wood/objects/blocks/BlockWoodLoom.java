@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlockContainer;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -32,9 +32,9 @@ import net.minecraft.world.World;
 import gregtech.api.items.toolitem.ToolClasses;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +45,7 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, ITileProvider {
+public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IProviderTile {
 
     protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
     protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);

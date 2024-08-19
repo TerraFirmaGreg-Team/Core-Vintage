@@ -1,6 +1,6 @@
 package BananaFructa.tfcfarming.network;
 
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.entity.player.EntityPlayerMP;

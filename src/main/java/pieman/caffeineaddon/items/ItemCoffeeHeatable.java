@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.items;
 
-import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

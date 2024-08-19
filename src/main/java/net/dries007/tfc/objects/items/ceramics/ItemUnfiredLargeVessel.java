@@ -2,9 +2,9 @@ package net.dries007.tfc.objects.items.ceramics;
 
 import net.minecraft.item.ItemStack;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.NotNull;

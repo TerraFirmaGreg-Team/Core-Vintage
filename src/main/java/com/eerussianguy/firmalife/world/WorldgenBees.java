@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.world;
 
-import su.terrafirmagreg.api.spi.biome.BaseBiome;
+import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.block.material.Material;

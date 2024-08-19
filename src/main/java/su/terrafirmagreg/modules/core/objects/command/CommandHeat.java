@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.command;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.spi.command.BaseCommand;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.base.command.BaseCommand;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.command.CommandException;

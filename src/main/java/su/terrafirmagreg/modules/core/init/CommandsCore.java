@@ -10,18 +10,16 @@ import su.terrafirmagreg.modules.core.objects.command.CommandStripWorld;
 import su.terrafirmagreg.modules.core.objects.command.CommandTime;
 import su.terrafirmagreg.modules.core.objects.command.CommandWorkChunk;
 
-import net.minecraft.command.ICommand;
-
 public final class CommandsCore {
 
-    public static ICommand DEBUG_INFO;
-    public static ICommand STRIP_WORLD;
-    public static ICommand MAKE_TREE;
-    public static ICommand HEAT;
-    public static ICommand PLAYER;
-    public static ICommand TIME;
-    public static ICommand WORK_CHUNK;
-    public static ICommand HORSE_POWER;
+    public static CommandDebugInfo DEBUG_INFO;
+    public static CommandStripWorld STRIP_WORLD;
+    public static CommandGenTree MAKE_TREE;
+    public static CommandHeat HEAT;
+    public static CommandPlayer PLAYER;
+    public static CommandTime TIME;
+    public static CommandWorkChunk WORK_CHUNK;
+    public static CommandHorsePower HORSE_POWER;
 
     public static void onRegister(RegistryManager registry) {
 

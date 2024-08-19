@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
-import su.terrafirmagreg.api.spi.tile.BaseTile;
+import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;

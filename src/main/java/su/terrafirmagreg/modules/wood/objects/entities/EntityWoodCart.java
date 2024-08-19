@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
-import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
+import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;

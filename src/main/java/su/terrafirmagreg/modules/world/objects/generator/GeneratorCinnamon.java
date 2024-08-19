@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.generator;
 
-import su.terrafirmagreg.api.spi.biome.BaseBiome;
+import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.api.util.StructureUtils;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 

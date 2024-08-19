@@ -1,10 +1,10 @@
 package tfcflorae.objects.items;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

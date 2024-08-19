@@ -33,6 +33,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.DataSerializerEntry;
 
 
+import com.google.common.base.Preconditions;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -40,10 +42,12 @@ import java.util.function.Consumer;
 
 public class ModuleEventRouter {
 
-    private final Set<ModuleBase> loadedModules;
+    private final Set<IModule> loadedModules;
+
+    @SuppressWarnings("rawtypes")
     private final Map<Class<? extends FMLStateEvent>, IFMLStateEventRoute> routes;
 
-    public ModuleEventRouter(Set<ModuleBase> loadedModules) {
+    public ModuleEventRouter(Set<IModule> loadedModules) {
 
         this.loadedModules = loadedModules;
         this.routes = new HashMap<>();
@@ -159,6 +163,22 @@ public class ModuleEventRouter {
                             module.getLogger().debug("Server-stopped complete");
                         })
         );
+    }
+
+    // --------------------------------------------------------------------------
+    // - Internal
+    // --------------------------------------------------------------------------
+
+    protected void fireEvent(Consumer<IModule> moduleConsumer) {
+        loadedModules.forEach(moduleConsumer);
+    }
+
+    protected <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
+        //noinspection unchecked
+        IFMLStateEventRoute<E> route = this.routes.get(event.getClass());
+        Preconditions.checkNotNull(route, "No route found for event: " + event.getClass());
+
+        route.routeEvent(event);
     }
 
     // --------------------------------------------------------------------------
@@ -298,7 +318,7 @@ public class ModuleEventRouter {
 
     @SubscribeEvent
     @SuppressWarnings("unused")
-    protected void onRegisterEnchantmentEvent(LootTableLoadEvent event) {
+    protected void onRegisterLootTableLoadEvent(LootTableLoadEvent event) {
         this.fireEvent(module -> {
             module.getLogger().debug("Register LootTableLoadEvent start");
             module.getRegistry().onRegisterLootTableLoad(event);
@@ -341,23 +361,5 @@ public class ModuleEventRouter {
             module.getRegistry().onRegisterItemColor(event);
             module.getLogger().debug("Register ColorHandlerEvent Item complete");
         });
-    }
-
-    // --------------------------------------------------------------------------
-    // - Internal
-    // --------------------------------------------------------------------------
-
-    protected void fireEvent(Consumer<ModuleBase> moduleConsumer) {
-        for (ModuleBase module : this.loadedModules) {
-            moduleConsumer.accept(module);
-        }
-    }
-
-    protected <E extends FMLStateEvent> void routeFMLStateEvent(E event) {
-        //noinspection unchecked
-        IFMLStateEventRoute<E> route = this.routes.get(event.getClass());
-
-        if (route == null) throw new IllegalArgumentException("No route found for event: " + event.getClass());
-        route.routeEvent(event);
     }
 }

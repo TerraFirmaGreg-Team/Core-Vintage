@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
+import su.terrafirmagreg.api.base.block.BaseBlock;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -14,9 +14,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import static su.terrafirmagreg.api.data.Blockstates.CURED;

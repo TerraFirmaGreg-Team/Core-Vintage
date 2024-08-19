@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.agriculture;
 
+import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.agriculture.init.BlocksAgriculture;
 import su.terrafirmagreg.modules.agriculture.init.ItemsAgriculture;
 

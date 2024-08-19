@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -59,7 +59,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.data.Constants.MODID_CELLARS;
 
 public class TileIceBunker extends TileEntityLockableLoot
-        implements IInventory, ITickable, ITemperatureTileProvider, IContainerProvider<ContainerIceBunker, GuiIceBunker> {
+        implements IInventory, ITickable, ITemperatureTileProvider, IProviderContainer<ContainerIceBunker, GuiIceBunker> {
 
     private final int[] entrance = new int[4];    //x, z of the first door + offsetX, offsetZ of the second door
     private final int[] size = new int[4];        //internal size, +z -x -z + x

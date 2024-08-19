@@ -21,9 +21,9 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.api.registries.TFCRegistries;

@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiInductionCrucible;
@@ -46,7 +46,7 @@ public class TileInductionCrucible extends TileCrucible implements IMachineSound
     private final MachineEnergyContainer energyContainer;
     private int litTime = 0; //Client "effects" only
 
-    private boolean addedToIc2Network = false;
+    private final boolean addedToIc2Network = false;
     private boolean soundPlay = false;
 
     public TileInductionCrucible() {

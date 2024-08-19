@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.client.property.PropertyUnlistedString;
+import su.terrafirmagreg.api.lib.property.PropertyUnlistedString;
 import su.terrafirmagreg.api.util.NBTUtils;
 
 import net.minecraft.block.Block;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.fluids;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;

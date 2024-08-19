@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
@@ -48,7 +48,7 @@ import java.util.Arrays;
 
 @SuppressWarnings("WeakerAccess")
 public class TileCrucible extends TETickableInventory
-        implements ITickable, ITileFields, IItemHandlerSidedCallback, IContainerProvider<ContainerCrucible, GuiCrucible> {
+        implements ITickable, ITileFields, IItemHandlerSidedCallback, IProviderContainer<ContainerCrucible, GuiCrucible> {
 
     public static final int SLOT_INPUT_START = 0;
     public static final int SLOT_INPUT_END = 8;

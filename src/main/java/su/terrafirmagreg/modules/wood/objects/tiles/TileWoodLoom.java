@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;

@@ -1,8 +1,8 @@
 package net.dries007.tfc.api.capability.food;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.food.ConfigFood;
 

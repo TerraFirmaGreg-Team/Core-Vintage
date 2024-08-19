@@ -1,145 +1,37 @@
 package su.terrafirmagreg.api.registry;
 
-import su.terrafirmagreg.api.lib.LootBuilder;
-import su.terrafirmagreg.api.lib.collection.RegistryList;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
-import su.terrafirmagreg.api.spi.biome.BaseBiome;
-import su.terrafirmagreg.api.spi.block.IBlockSettings;
-import su.terrafirmagreg.api.spi.item.IItemSettings;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
-import su.terrafirmagreg.api.util.WorldUtils;
+import su.terrafirmagreg.api.registry.spi.IBiomeRegistry;
+import su.terrafirmagreg.api.registry.spi.IBlockRegistry;
+import su.terrafirmagreg.api.registry.spi.ICommandRegistry;
+import su.terrafirmagreg.api.registry.spi.IDataSerializerRegistry;
+import su.terrafirmagreg.api.registry.spi.IEnchantmentRegistry;
+import su.terrafirmagreg.api.registry.spi.IEntityRegistry;
+import su.terrafirmagreg.api.registry.spi.IItemRegistry;
+import su.terrafirmagreg.api.registry.spi.IKeyBindingRegistry;
+import su.terrafirmagreg.api.registry.spi.ILootTableRegistry;
+import su.terrafirmagreg.api.registry.spi.IPotionRegistry;
+import su.terrafirmagreg.api.registry.spi.IPotionTypeRegistry;
+import su.terrafirmagreg.api.registry.spi.ISoundRegistry;
+import su.terrafirmagreg.api.registry.spi.IWorldGeneratorRegistry;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.command.ICommand;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.network.datasync.DataSerializer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraft.world.storage.loot.functions.LootFunction;
-import net.minecraft.world.storage.loot.functions.LootFunctionManager;
-import net.minecraft.world.storage.loot.functions.SetCount;
-import net.minecraft.world.storage.loot.functions.SetMetadata;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import net.minecraftforge.registries.DataSerializerEntry;
 
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import java.util.Collection;
-import java.util.List;
-
 @Getter
-public class RegistryManager {
+public class RegistryManager
+        implements IBlockRegistry, IBiomeRegistry, IKeyBindingRegistry, IDataSerializerRegistry, IEnchantmentRegistry, IEntityRegistry, IItemRegistry, ILootTableRegistry,
+                   IPotionRegistry, IPotionTypeRegistry, ISoundRegistry, IWorldGeneratorRegistry, ICommandRegistry {
 
     /**
      * The id of the mod the registry helper instance belongs to.
      */
     private final String modID;
-
-    /**
-     * A list of all items registered by the helper.
-     */
-    private final RegistryList<Item> items = RegistryList.create();
-
-    /**
-     * A list of all blocks registered by the helper.
-     */
-    private final RegistryList<Block> blocks = RegistryList.create();
-
-    /**
-     * A list of all enchantments registered.
-     */
-    private final RegistryList<Enchantment> enchantments = RegistryList.create();
-
-    /**
-     * A list of all potions registered by the helper.
-     */
-    private final RegistryList<Potion> potions = RegistryList.create();
-
-    /**
-     * A list of all potion type registered by the helper.
-     */
-    private final RegistryList<PotionType> potionType = RegistryList.create();
-
-    /**
-     * A list of all biomes registered by the helper.
-     */
-    private final RegistryList<Biome> biomes = RegistryList.create();
-
-    /**
-     * A list of all the sounds registered by the helper.
-     */
-    private final RegistryList<SoundEvent> sounds = RegistryList.create();
-
-    /**
-     * A list of all entities registered by the helper.
-     */
-    private final RegistryList<EntityEntry> entities = RegistryList.create();
-
-    /**
-     * A list of all professions registered by the helper.
-     */
-    private final RegistryList<VillagerRegistry.VillagerProfession> professions = RegistryList.create();
-
-    /**
-     * A list of all recipes registered by the helper.
-     */
-    private final RegistryList<IRecipe> recipes = RegistryList.create();
-
-    /**
-     * A list of all recipes registered by the helper.
-     */
-    private final RegistryList<DataSerializerEntry> dataSerializerEntries = RegistryList.create();
-
-    /**
-     * A list of all the commands registered here.
-     */
-    private final NonNullList<ICommand> commands = NonNullList.create();
-
-    /**
-     * A list of all the tile providers registered here.
-     */
-    private final NonNullList<ITileProvider> tiles = NonNullList.create();
-
-    /**
-     * A list of all the keyBinding registered by the helper.
-     */
-    private final NonNullList<KeyBinding> keyBinding = NonNullList.create();
-
-    /**
-     * A list of all entities registered by the helper.
-     */
-    private final NonNullList<ResourceLocation> entityIds = NonNullList.create();
-
-    /**
-     * A local map of all the entries that have been added. This is on a per instance basis, used to get mod-specific entries.
-     */
-    private final Multimap<ResourceLocation, LootBuilder> lootTableEntries = HashMultimap.create();
 
     /**
      * The creative tab used by the mod. This can be null.
@@ -149,7 +41,7 @@ public class RegistryManager {
     /**
      * The auto registry for the helper.
      */
-    private Registry registry;
+    private final Registry registry;
 
     private NetworkEntityIdSupplier networkEntityIdSupplier;
 
@@ -162,440 +54,16 @@ public class RegistryManager {
 
         this.modID = modID;
         this.tab = tab;
-    }
-
-    /**
-     * Enables automatic registration for things like the event bus.
-     *
-     * @return The Registry, for convenience.
-     */
-    public RegistryManager create() {
 
         this.registry = new Registry(this);
         MinecraftForge.EVENT_BUS.register(this.registry);
-        return this;
-    }
-
-    /**
-     * Checks if the registry has automatic registration.
-     *
-     * @return Whether or not the helper has automatic registration.
-     */
-    public boolean hasAutoRegistry() {
-        return this.registry != null;
     }
 
     public void setNetworkEntityIdSupplier(NetworkEntityIdSupplier supplier) {
+
         if (this.networkEntityIdSupplier != null)
             throw new IllegalStateException("Network entity id supplier has already been set");
 
         this.networkEntityIdSupplier = supplier;
     }
-
-    //region ===== Block
-
-    public <T extends Block> Collection<T> blocks(Collection<T> collection) {
-        for (var block : collection) {
-            if (block instanceof IBlockSettings provider) {
-                this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
-            }
-        }
-        return collection;
-    }
-
-    public <B extends Block & IBlockSettings> B block(B provider) {
-
-        return this.block(provider, provider.getItemBlock(), provider.getRegistryKey());
-    }
-
-    /**
-     * Registers a block to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The block will also be cached in {@link #blocks}.
-     *
-     * @param block     The block to register.
-     * @param itemBlock The ItemBlock for the block.
-     * @param name      The name to register the block with.
-     */
-    public <B extends Block, I extends Item> B block(B block, @Nullable I itemBlock, String name) {
-
-        block.setRegistryName(this.modID, name);
-        block.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
-        if (this.tab != null) block.setCreativeTab(this.tab);
-
-        this.blocks.add(block);
-
-        if (itemBlock != null) this.item(itemBlock, name);
-        if (block instanceof ITileProvider tile) this.tiles.add(tile);
-
-        return block;
-    }
-
-    //endregion
-
-    //region ===== Item
-
-    public <T extends Item> void items(Collection<T> collection) {
-        for (var item : collection) {
-            if (item instanceof IItemSettings provider) {
-                this.item(item, provider.getRegistryKey());
-            }
-        }
-    }
-
-    public <T extends Item & IItemSettings> T item(T item) {
-
-        return this.item(item, item.getRegistryKey());
-    }
-
-    /**
-     * Registers an item to the game. This will also set the unlocalized name, and creative tab if {@link #tab} has been set. The item will also be cached in {@link #items}.
-     *
-     * @param item The item to register.
-     * @param name The name to register the item with.
-     */
-    public <T extends Item> T item(T item, String name) {
-
-        item.setRegistryName(this.modID, name);
-        item.setTranslationKey(this.modID + "." + name.toLowerCase().replace("_", ".").replaceAll("/", "."));
-        if (this.tab != null) item.setCreativeTab(this.tab);
-
-        this.items.add(item);
-
-        return item;
-    }
-
-    //endregion
-
-    //region ===== Potions
-
-    public Potion potion(String name, Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
-
-        potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
-        return this.potion(name, potion);
-    }
-
-    public Potion potion(String name, Potion potion) {
-        potion.setRegistryName(this.modID, name);
-        potion.setPotionName(this.modID + ".effect." + name.toLowerCase().replace("_", "."));
-        this.potions.add(potion);
-        return potion;
-    }
-
-    //endregion
-
-    //region ===== Potion Types
-
-    public PotionType potionType(String name, Potion potion, int duration) {
-
-        var potionType = new PotionType(new PotionEffect(potion, duration));
-        return potionType(name, potionType);
-    }
-
-    public PotionType potionType(String name, PotionType potionType) {
-
-        potionType.setRegistryName(this.modID, name);
-        this.potionType.add(potionType);
-        return potionType;
-    }
-
-    //endregion
-
-    //region ===== World Gen
-
-    public IWorldGenerator worldGenerator(IWorldGenerator generator) {
-
-        return worldGenerator(generator, 0);
-    }
-
-    public IWorldGenerator worldGenerator(IWorldGenerator generator, int modGenerationWeight) {
-        WorldUtils.registerWorldGenerator(generator, modGenerationWeight);
-
-        return generator;
-    }
-
-    //endregion
-
-    //region ===== Biome
-
-    public Biome biome(BaseBiome biome) {
-
-        return biome(biome, biome.getRegistryKey());
-    }
-
-    public Biome biome(BaseBiome biome, String name) {
-
-        biome.setRegistryName(this.modID, name.replace(' ', '_').toLowerCase());
-        this.biomes.add(biome);
-
-        if (biome.ignorePlayerSpawnSuitability()) {
-            BiomeManager.addSpawnBiome(biome);
-        }
-
-        //        if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.WATER)) {
-        //            // Register aquatic creatures
-        //            biome.getSpawnableList(EnumCreatureType.WATER_CREATURE).add(new Biome.SpawnListEntry(EntitySquid.class, 20, 3, 7));
-        //            // todo add fish (either in 1.15+ or if someone makes fish entities)
-        //        }
-
-        return biome;
-    }
-
-    //endregion
-
-    //region ===== Sound
-
-    /**
-     * Registers a new sound with the game. The sound must also exist in the sounds.json file.
-     *
-     * @param name The name of the sound file. No upper case chars!
-     */
-    public SoundEvent sound(String name) {
-
-        final ResourceLocation soundNameIn = new ResourceLocation(this.modID, name);
-        final SoundEvent sound = new SoundEvent(soundNameIn).setRegistryName(soundNameIn);
-        this.sounds.add(sound);
-
-        return sound;
-    }
-
-    //endregion
-
-    //region ===== KeyBinding
-
-    public KeyBinding keyBinding(String description, int keyCode) {
-
-        var prefix = "key." + modID + ".";
-        final KeyBinding key = new KeyBinding(prefix + description, keyCode, prefix + "categories");
-        ClientRegistry.registerKeyBinding(key);
-
-        this.keyBinding.add(key);
-        return key;
-    }
-
-    //endregion
-
-    //region ===== Entity
-
-    /**
-     * Registers any sort of entity. Will not have a spawn egg.
-     *
-     * @param entClass The entity class.
-     * @param name     The string name for the entity.
-     * @return The entity that was registered.
-     */
-    public <T extends Entity> EntityEntryBuilder<T> entity(String name, Class<T> entClass) {
-
-        final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
-        builder.entity(entClass);
-
-        entity(name, builder);
-
-        return builder;
-    }
-
-    public <E extends Entity> void entity(String name, EntityEntryBuilder<E> builder) {
-        final ResourceLocation entId = new ResourceLocation(this.modID, name);
-        builder.id(entId, this.networkEntityIdSupplier.getAndIncrement());
-        builder.name(this.modID + "." + name);
-
-        this.entities.add(builder.build());
-        this.entityIds.add(entId);
-    }
-
-    /**
-     * Registers any sort of entity. Will have a spawn egg.
-     *
-     * @param entClass The entity class.
-     * @param name     The string name for the entity.
-     * @return The entity that was registered.
-     */
-    public <T extends Entity> EntityEntryBuilder<T> entity(String name, Class<T> entClass, int primary, int seconday) {
-
-        final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
-        builder.entity(entClass);
-        builder.tracker(64, 1, true);
-        builder.egg(primary, seconday);
-
-        this.entity(name, builder);
-        return builder;
-    }
-
-    //endregion
-
-    //region ===== Enchantment
-
-    /**
-     * Registers an enchantment.
-     *
-     * @param enchant The enchantment to register.
-     * @param name    The ID of the enchantment.
-     * @return The enchantment that was registered.
-     */
-    public Enchantment enchantment(Enchantment enchant, String name) {
-
-        enchant.setRegistryName(new ResourceLocation(this.modID, name));
-        this.enchantments.add(enchant);
-        return enchant;
-    }
-
-    //endregion
-
-    //region ===== Command
-
-    /**
-     * Registers a new command. Registration will be handled for you.
-     *
-     * @param command The command to add.
-     */
-    public ICommand command(ICommand command) {
-
-        this.commands.add(command);
-        return command;
-    }
-
-    //endregion
-
-    //region ===== Enchantment
-
-    /**
-     * Registers a new dataSerializer. Registration will be handled for you.
-     *
-     * @param serializer The command to add.
-     */
-    public DataSerializerEntry dataSerializerEntry(DataSerializer<?> serializer, String name) {
-
-        var dataSerializerEntry = new DataSerializerEntry(serializer);
-        dataSerializerEntry.setRegistryName(new ResourceLocation(this.modID, name));
-        this.dataSerializerEntries.add(dataSerializerEntry);
-
-        return dataSerializerEntry;
-    }
-
-    //endregion
-
-    //region ===== Villager Profession
-
-    //endregion
-
-    //region ===== Loot Table
-
-    /**
-     * Registers a loot table with the loot table list. This needs to be called before a loot table can be used.
-     *
-     * @param name The name of the loot table to use.
-     * @return A ResourceLocation pointing to the table.
-     */
-    public ResourceLocation lootTable(String name) {
-
-        return LootTableList.register(new ResourceLocation(this.modID, name));
-    }
-
-    public <T extends LootFunction> void lootFunction(LootFunction.Serializer<? extends T> serializer) {
-
-        LootFunctionManager.registerFunction(serializer);
-    }
-
-    /**
-     * Creates a new loot entry that will be added to the loot pools when a world is loaded.
-     *
-     * @param location The loot table to add the loot to. You can use {@link LootTableList} for convenience.
-     * @param name     The name of the entry being added. This will be prefixed with {@link #modID} .
-     * @param pool     The name of the pool to add the entry to. This pool must already exist.
-     * @param weight   The weight of the entry.
-     * @param item     The item to add.
-     * @param meta     The metadata for the loot.
-     * @param amount   The amount of the item to set.
-     * @return A builder object. It can be used to fine tune the loot entry.
-     */
-    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int amount) {
-
-        return this.loot(location, name, pool, weight, item, meta, amount, amount);
-    }
-
-    /**
-     * Creates a new loot entry that will be added to the loot pools when a world is loaded.
-     *
-     * @param location The loot table to add the loot to. You can use {@link LootTableList} for convenience.
-     * @param name     The name of the entry being added. This will be prefixed with {@link #modID} .
-     * @param pool     The name of the pool to add the entry to. This pool must already exist.
-     * @param weight   The weight of the entry.
-     * @param item     The item to add.
-     * @param meta     The metadata for the loot.
-     * @param min      The smallest item size.
-     * @param max      The largest item size.
-     * @return A builder object. It can be used to fine tune the loot entry.
-     */
-    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int min, int max) {
-
-        final LootBuilder loot = this.loot(location, name, pool, weight, item, meta);
-        loot.addFunction(new SetCount(new LootCondition[0], new RandomValueRange(min, max)));
-        return loot;
-    }
-
-    /**
-     * Creates a new loot entry that will be added to the loot pools when a world is loaded.
-     *
-     * @param location The loot table to add the loot to. You can use {@link LootTableList} for convenience.
-     * @param name     The name of the entry being added. This will be prefixed with {@link #modID} .
-     * @param pool     The name of the pool to add the entry to. This pool must already exist.
-     * @param weight   The weight of the entry.
-     * @param item     The item to add.
-     * @param meta     The metadata for the loot.
-     * @return A builder object. It can be used to fine tune the loot entry.
-     */
-    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta) {
-
-        final LootBuilder loot = this.loot(location, name, pool, weight, item);
-        loot.addFunction(new SetMetadata(new LootCondition[0], new RandomValueRange(meta, meta)));
-        return loot;
-    }
-
-    /**
-     * Creates a new loot entry that will be added to the loot pools when a world is loaded.
-     *
-     * @param location The loot table to add the loot to. You can use {@link LootTableList} for convenience.
-     * @param name     The name of the entry being added. This will be prefixed with {@link #modID} .
-     * @param pool     The name of the pool to add the entry to. This pool must already exist.
-     * @param weight   The weight of the entry.
-     * @param item     The item to add.
-     * @return A builder object. It can be used to fine tune the loot entry.
-     */
-    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item) {
-
-        return this.loot(location, new LootBuilder(this.modID + ":" + name, pool, weight, item));
-    }
-
-    /**
-     * Creates a new loot entry that will be added to the loot pools when a world is loaded.
-     *
-     * @param location   The loot table to add the loot to. You can use {@link LootTableList} for convenience.
-     * @param name       The name of the entry being added. This will be prefixed with {@link #modID} .
-     * @param pool       The name of the pool to add the entry to. This pool must already exist.
-     * @param weight     The weight of the entry.
-     * @param quality    The quality of the entry. Quality is an optional value which modifies the weight of an entry based on the player's luck level. totalWeight = weight +
-     *                   (quality * luck)
-     * @param item       The item to add.
-     * @param conditions A list of loot conditions.
-     * @param functions  A list of loot functions.
-     * @return A builder object. It can be used to fine tune the loot entry.
-     */
-    public LootBuilder loot(ResourceLocation location, String name, String pool, int weight, int quality, Item item, List<LootCondition> conditions, List<LootFunction> functions) {
-
-        return this.loot(location, new LootBuilder(this.modID + ":" + name, pool, weight, quality, item, conditions, functions));
-    }
-
-    /**
-     * Creates a new loot entry that will be added to the loot pools when a world is loaded.
-     *
-     * @param location The loot table to add the loot to. You can use {@link LootTableList} for convenience.
-     * @param builder  The loot builder to add.
-     * @return A builder object. It can be used to fine tune the loot entry.
-     */
-    public LootBuilder loot(ResourceLocation location, LootBuilder builder) {
-
-        this.lootTableEntries.put(location, builder);
-        return builder;
-    }
-
-    //endregion
-
 }

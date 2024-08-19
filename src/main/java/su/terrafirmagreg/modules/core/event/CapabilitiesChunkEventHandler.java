@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
-import su.terrafirmagreg.api.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.network.SCPacketChunkData;
 import su.terrafirmagreg.modules.world.ModuleWorld;

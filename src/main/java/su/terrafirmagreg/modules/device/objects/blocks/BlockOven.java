@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.data.DamageSources;
-import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESROven;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
@@ -39,9 +39,9 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.ConfigFL;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.client.particle.TFCParticles;
@@ -57,7 +57,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 
 @SuppressWarnings("deprecation")
-public class BlockOven extends BaseBlock implements ITileProvider {
+public class BlockOven extends BaseBlock implements IProviderTile {
 
     public BlockOven() {
         super(Settings.of(Material.ROCK));

@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.recipes.barrel;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.api.util.CollectionUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 

@@ -1,6 +1,6 @@
 package tfcflorae.objects.items.food;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.lib.MathConstants;
 
 import net.minecraft.entity.player.EntityPlayer;

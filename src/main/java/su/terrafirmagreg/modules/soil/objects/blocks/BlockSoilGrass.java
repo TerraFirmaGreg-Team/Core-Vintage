@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.registry.provider.IBlockColorProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -42,7 +42,7 @@ import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IBlockColorProvider, IGrass {
+public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IProviderBlockColor, IGrass {
 
     protected final Settings settings;
     private final SoilBlockVariant variant;

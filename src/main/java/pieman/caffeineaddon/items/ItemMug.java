@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.items;
 
-import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderModel;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -15,7 +15,7 @@ import pieman.caffeineaddon.init.ModItems;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemMug extends ItemJug implements IModelProvider {
+public class ItemMug extends ItemJug implements IProviderModel {
 
     public ItemMug(String name) {
         super();

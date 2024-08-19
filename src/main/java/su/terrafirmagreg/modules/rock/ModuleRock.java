@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.rock;
 
+import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.Modules.ROCK;
+import static su.terrafirmagreg.modules.ModuleContainer.ROCK;
 
 @Module(moduleID = ROCK)
 public final class ModuleRock extends ModuleBase {

@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.te;
 
-import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierEnvironmental;
-import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierEnvironmental;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

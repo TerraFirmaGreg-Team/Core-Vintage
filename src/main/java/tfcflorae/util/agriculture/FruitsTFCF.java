@@ -1,6 +1,6 @@
 package tfcflorae.util.agriculture;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.item.Item;
 

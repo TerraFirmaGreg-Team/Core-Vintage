@@ -152,7 +152,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
                 } else {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        ModuleAnimal.PACKET_SERVICE.sendTo(new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
+                        ModuleAnimal.getPacketService().sendTo(new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
                                 (EntityPlayerMP) player);
                     }
                 }
@@ -163,7 +163,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
                 if (!isReadyForAnimalProduct()) {
                     TextComponentTranslation tooltip = getTooltip();
                     if (tooltip != null) {
-                        ModuleAnimal.PACKET_SERVICE.sendTo(new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
+                        ModuleAnimal.getPacketService().sendTo(new SCPacketSimpleMessage(SCPacketSimpleMessage.MessageCategory.ANIMAL, tooltip),
                                 (EntityPlayerMP) player);
                     }
                 }
@@ -228,7 +228,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
     }
 
     @Override
-    public TextComponentTranslation getTooltip() {
+    public @Nullable TextComponentTranslation getTooltip() {
         if (getAge() == Age.CHILD) {
             return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.young"), getAnimalName());
         } else if (getFamiliarity() <= 0.15f) {

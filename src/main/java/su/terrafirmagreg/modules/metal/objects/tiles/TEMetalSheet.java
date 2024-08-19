@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
-import su.terrafirmagreg.api.spi.tile.BaseTile;
+import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
 
 import net.minecraft.inventory.InventoryHelper;

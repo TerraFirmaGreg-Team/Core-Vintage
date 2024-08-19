@@ -1,6 +1,6 @@
 package tfcflorae.objects.items;
 
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package tfcflorae.objects.fluids;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.data.Constants;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;

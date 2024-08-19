@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 
 
 import net.dries007.tfc.client.gui.GuiContainerTE;

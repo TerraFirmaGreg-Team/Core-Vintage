@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.entity.player.EntityPlayer;

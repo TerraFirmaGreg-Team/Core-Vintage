@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.metal.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;

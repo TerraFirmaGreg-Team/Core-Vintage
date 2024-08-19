@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.objects.items.ItemMisc;

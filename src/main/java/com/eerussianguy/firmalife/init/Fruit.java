@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.init;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.item.Item;
 
@@ -10,7 +10,7 @@ import net.dries007.tfc.util.agriculture.Food;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.capabilities.food.spi.FoodData.*;
+import static su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData.*;
 
 /**
  * This is an easy way to wrap all the TFC fruits with our data

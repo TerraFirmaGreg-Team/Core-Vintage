@@ -10,7 +10,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 
 
-import su.terrafirmagreg.api.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 
 
 import net.dries007.tfc.api.types.Metal;

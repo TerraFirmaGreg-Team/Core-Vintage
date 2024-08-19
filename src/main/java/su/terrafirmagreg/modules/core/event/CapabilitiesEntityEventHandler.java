@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
-import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
-import su.terrafirmagreg.api.capabilities.player.ProviderPlayer;
-import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
-import su.terrafirmagreg.api.capabilities.pull.ProviderPull;
-import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
-import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.damage.HandlerDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.ProviderPlayer;
+import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
+import su.terrafirmagreg.modules.core.capabilities.pull.ProviderPull;
+import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

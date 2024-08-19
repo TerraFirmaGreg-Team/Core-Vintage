@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
 

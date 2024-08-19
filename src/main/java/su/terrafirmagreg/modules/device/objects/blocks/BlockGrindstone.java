@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRGrindstone;
 import su.terrafirmagreg.modules.device.objects.tiles.TileGrindstone;
@@ -30,9 +30,9 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import gregtech.api.items.toolitem.ToolClasses;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockGrindstone extends BaseBlock implements ITileProvider {
+public class BlockGrindstone extends BaseBlock implements IProviderTile {
 
     public BlockGrindstone() {
         super(Settings.of(Material.WOOD));

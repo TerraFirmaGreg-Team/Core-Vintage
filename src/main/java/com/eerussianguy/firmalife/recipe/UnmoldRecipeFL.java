@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.recipe;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;

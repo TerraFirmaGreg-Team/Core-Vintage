@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
-import su.terrafirmagreg.api.registry.provider.IBlockColorProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -38,7 +38,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IBlockColorProvider {
+public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IProviderBlockColor {
 
     public static final int[] TINT = new int[] {
             0xffffffff,

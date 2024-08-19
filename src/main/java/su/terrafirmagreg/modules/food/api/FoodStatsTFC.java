@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.food.api;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 

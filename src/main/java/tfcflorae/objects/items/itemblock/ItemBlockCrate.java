@@ -1,6 +1,6 @@
 package tfcflorae.objects.items.itemblock;
 
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrate;
 
 

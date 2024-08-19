@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

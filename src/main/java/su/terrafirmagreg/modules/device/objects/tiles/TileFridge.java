@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.network.SCPacketFridge;
@@ -59,7 +59,7 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
     private int applyTrait = 0;
     private int serverUpdate;
 
-    private boolean addedToIc2Network = false;
+    private final boolean addedToIc2Network = false;
     private int mainBlock = 0; // 0 - not initialized, 1 = main block, -1 not main block
 
     public TileFridge() {

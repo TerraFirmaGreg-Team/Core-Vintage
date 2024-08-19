@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.itemblocks;
 
-import su.terrafirmagreg.api.registry.provider.IItemMeshProvider;
-import su.terrafirmagreg.api.spi.item.BaseItemBlock;
+import su.terrafirmagreg.api.registry.provider.IProviderItemMesh;
+import su.terrafirmagreg.api.base.item.BaseItemBlock;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.wood.ConfigWood;
@@ -57,7 +57,7 @@ import java.util.List;
  * Item block for {@link BlockWoodBarrel} Only has NBT data if the barrel is sealed and has contents
  */
 
-public class ItemBlockWoodBarrel extends BaseItemBlock implements IItemMeshProvider {
+public class ItemBlockWoodBarrel extends BaseItemBlock implements IProviderItemMesh {
 
     private final BlockWoodBarrel block;
 

@@ -8,9 +8,9 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.dries007.tfc.api.capability.forge.ForgeableHandler;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.objects.CreativeTabsTFC;

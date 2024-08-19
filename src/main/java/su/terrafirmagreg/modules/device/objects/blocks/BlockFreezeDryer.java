@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlockContainer;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TileFreezeDryer;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockFreezeDryer extends BaseBlockContainer implements ITileProvider {
+public class BlockFreezeDryer extends BaseBlockContainer implements IProviderTile {
 
     public BlockFreezeDryer() {
         super(Settings.of(Material.WOOD));

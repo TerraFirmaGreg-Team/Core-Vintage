@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.base.block.BaseBlockHorizontal;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.objects.tiles.TileSmelteryCauldron;
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockSmelteryCauldron extends BaseBlockHorizontal implements ITileProvider {
+public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProviderTile {
 
     public BlockSmelteryCauldron() {
         super(Settings.of(Material.IRON));

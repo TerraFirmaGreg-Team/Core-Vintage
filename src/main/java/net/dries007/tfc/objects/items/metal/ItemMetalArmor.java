@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;

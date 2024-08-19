@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
 import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.api.spi.types.variant.Variant;
+import su.terrafirmagreg.api.base.types.variant.Variant;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;

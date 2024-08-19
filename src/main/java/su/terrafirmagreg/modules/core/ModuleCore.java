@@ -1,27 +1,27 @@
 package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
-import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
-import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.api.capabilities.egg.HandlerEgg;
-import su.terrafirmagreg.api.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.api.capabilities.food.HandlerFood;
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.capabilities.heat.HandlerHeat;
-import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.api.capabilities.metal.HandlerMetal;
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
-import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
-import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.HandlerSize;
-import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.damage.HandlerDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.egg.HandlerEgg;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.HandlerFood;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.HandlerHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.HandlerMetal;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.HandlerSize;
+import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayPlayerData;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayTemperature;
@@ -50,7 +50,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.modules.Modules.CORE;
+import static su.terrafirmagreg.modules.ModuleContainer.CORE;
 
 @Module(
         moduleID = CORE,
@@ -60,9 +60,12 @@ import static su.terrafirmagreg.modules.Modules.CORE;
 public final class ModuleCore extends ModuleBase {
 
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
-    public static final CreativeTabs CORE_TAB = new BaseCreativeTab("misc", "core/wand");
+
+    public static CreativeTabs CORE_TAB;
 
     public ModuleCore() {
+        CORE_TAB = new BaseCreativeTab("misc", "core/wand");
+
         this.enableAutoRegistry(CORE_TAB);
         this.enableNetwork();
     }
@@ -112,7 +115,7 @@ public final class ModuleCore extends ModuleBase {
     }
 
     @Override
-    protected void onClientPreInit(FMLPreInitializationEvent event) {
+    public void onClientPreInit(FMLPreInitializationEvent event) {
 
         MinecraftForge.EVENT_BUS.register(new OverlayTemperature());
         MinecraftForge.EVENT_BUS.register(new OverlayPlayerData());
@@ -120,7 +123,7 @@ public final class ModuleCore extends ModuleBase {
     }
 
     @Override
-    protected void onInit(FMLInitializationEvent event) {
+    public void onInit(FMLInitializationEvent event) {
         HandlerSize.init();
         HandlerFood.init();
         HandlerEgg.init();

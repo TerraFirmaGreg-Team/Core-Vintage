@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.tile.BaseTile;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerAlloyCalculator;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-public class TileAlloyCalculator extends BaseTile implements IContainerProvider<ContainerAlloyCalculator, GuiAlloyCalculator> {
+public class TileAlloyCalculator extends BaseTile implements IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {
 
     public final ItemStackHandler stacks = new ItemStackHandler(9);
     @Getter

@@ -2,9 +2,9 @@ package tfcflorae.objects.items;
 
 import net.minecraft.item.ItemStack;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import tfcflorae.objects.PowderTFCF;

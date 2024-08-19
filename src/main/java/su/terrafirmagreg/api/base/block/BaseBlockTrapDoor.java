@@ -1,0 +1,18 @@
+package su.terrafirmagreg.api.base.block;
+
+import net.minecraft.block.BlockTrapDoor;
+
+
+import lombok.Getter;
+
+@Getter
+public abstract class BaseBlockTrapDoor extends BlockTrapDoor implements IBlockSettings {
+
+    protected final Settings settings;
+
+    protected BaseBlockTrapDoor(Settings settings) {
+        super(settings.material);
+
+        this.settings = settings;
+    }
+}

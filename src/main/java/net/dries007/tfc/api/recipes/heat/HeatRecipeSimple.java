@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.recipes.heat;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

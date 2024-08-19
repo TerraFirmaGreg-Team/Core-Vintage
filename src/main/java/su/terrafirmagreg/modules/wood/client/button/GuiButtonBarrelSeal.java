@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.client.button;
 
-import su.terrafirmagreg.api.spi.gui.component.button.BaseGuiButton;
-import su.terrafirmagreg.api.spi.gui.component.button.IButtonTooltip;
+import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
+import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;

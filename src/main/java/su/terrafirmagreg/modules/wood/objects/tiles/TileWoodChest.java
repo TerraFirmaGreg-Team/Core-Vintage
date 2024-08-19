@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodChest;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodChest;
@@ -36,7 +36,7 @@ import net.dries007.tfc.api.capability.inventory.ISlotCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TileWoodChest extends TileEntityChest implements ISlotCallback, IContainerProvider<ContainerWoodChest, GuiWoodChest> {
+public class TileWoodChest extends TileEntityChest implements ISlotCallback, IProviderContainer<ContainerWoodChest, GuiWoodChest> {
 
     public static final int SIZE = 18;
 

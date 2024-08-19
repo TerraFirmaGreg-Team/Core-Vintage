@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.init;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 public enum FoodFL {
     DARK_CHOCOLATE(FoodData.CHOCOLATE, new String[] { "chocolate" }, false),

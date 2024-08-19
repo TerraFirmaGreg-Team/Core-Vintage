@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlockContainer;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlockContainer;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -38,7 +38,7 @@ import java.util.function.Predicate;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsConsumerBlock, ITileProvider {
+public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsConsumerBlock, IProviderTile {
 
     private static final Multiblock BLAST_FURNACE_CHIMNEY;
 

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.device.client.gui.GuiNestBox;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerNestBox;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class TileNestBox extends BaseTileInventory
-        implements ITickable, IItemHandlerSidedCallback, IContainerProvider<ContainerNestBox, GuiNestBox> {
+        implements ITickable, IItemHandlerSidedCallback, IProviderContainer<ContainerNestBox, GuiNestBox> {
 
     private static final int NUM_SLOTS = 4;
     private final IItemHandler inventoryWrapperExtract;

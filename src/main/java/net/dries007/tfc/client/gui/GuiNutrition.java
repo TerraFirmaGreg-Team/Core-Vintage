@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.api.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.client.gui.GuiButton;

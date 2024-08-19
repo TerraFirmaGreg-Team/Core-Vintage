@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerSmelteryCauldron;
 
@@ -44,7 +44,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TileSmelteryCauldron extends TEInventory
         implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, ITemperatureTileProvider,
-                   IContainerProvider<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
+                   IProviderContainer<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
 
     public static final int FLUID_CAPACITY = 4000;
     private final FluidTank tank = new FluidTankCallback(this, 0, FLUID_CAPACITY);

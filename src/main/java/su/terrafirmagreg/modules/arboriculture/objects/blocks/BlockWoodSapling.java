@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
-import su.terrafirmagreg.api.client.model.CustomStateMap;
-import su.terrafirmagreg.api.registry.provider.IBlockColorProvider;
-import su.terrafirmagreg.api.spi.item.BaseItemBlock;
+import su.terrafirmagreg.api.lib.model.CustomStateMap;
+import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.api.base.item.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Random;
 
 @Getter
-public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable, IGrowingPlant, IBlockColorProvider {
+public class BlockWoodSapling extends BlockBush implements IWoodBlock, IGrowable, IGrowingPlant, IProviderBlockColor {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);

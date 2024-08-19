@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlockHorizontal;
-import su.terrafirmagreg.api.spi.item.BaseItemBlock;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlockHorizontal;
+import su.terrafirmagreg.api.base.item.BaseItemBlock;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRFridge;
 import su.terrafirmagreg.modules.device.objects.itemblocks.ItemBlockFridge;
@@ -40,9 +40,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import gregtech.api.items.toolitem.ToolClasses;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +56,7 @@ import static net.minecraft.util.EnumFacing.NORTH;
 import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
 @SuppressWarnings("deprecation")
-public class BlockFridge extends BaseBlockHorizontal implements ITileProvider {
+public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {
 
     private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0D, 0D, 0.125D, 1D, 1D, 1D);
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0D, 0D, 0.0D, 1D, 1D, 0.875D);

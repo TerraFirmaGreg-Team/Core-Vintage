@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.registry;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.init.Items;

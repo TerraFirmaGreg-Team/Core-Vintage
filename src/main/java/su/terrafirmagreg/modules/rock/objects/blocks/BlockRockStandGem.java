@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -26,9 +26,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import gregtech.api.items.toolitem.ToolClasses;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +37,7 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 import static su.terrafirmagreg.api.data.Blockstates.UP;
 
 @SuppressWarnings("deprecation")
-public class BlockRockStandGem extends BlockRock implements ITileProvider {
+public class BlockRockStandGem extends BlockRock implements IProviderTile {
 
     public BlockRockStandGem(RockBlockVariant variant, RockType type) {
         super(variant, type);

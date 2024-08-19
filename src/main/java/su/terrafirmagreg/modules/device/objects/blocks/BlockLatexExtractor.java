@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.spi.block.BaseBlock;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
@@ -37,7 +37,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 import static net.minecraft.util.EnumFacing.NORTH;
 
 @SuppressWarnings("deprecation")
-public class BlockLatexExtractor extends BaseBlock implements ITileProvider {
+public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
     public static final PropertyBool BASE = PropertyBool.create("base"); //from TE
     public static final PropertyBool POT = PropertyBool.create("pot"); //from TE

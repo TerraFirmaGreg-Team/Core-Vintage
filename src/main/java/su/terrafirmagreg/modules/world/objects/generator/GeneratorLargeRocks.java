@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.generator;
 
-import su.terrafirmagreg.api.capabilities.chunkdata.ProviderChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.ProviderChunkData;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 

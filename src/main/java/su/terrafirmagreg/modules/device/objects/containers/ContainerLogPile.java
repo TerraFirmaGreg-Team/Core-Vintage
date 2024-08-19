@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.containers;
 
-import su.terrafirmagreg.api.spi.gui.container.BaseContainerTile;
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
 import su.terrafirmagreg.modules.device.objects.tiles.TileLogPile;
 
 import net.minecraft.entity.player.EntityPlayer;

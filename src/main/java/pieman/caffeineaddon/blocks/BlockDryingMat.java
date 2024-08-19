@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.blocks;
 
-import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.block.Block;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class BlockDryingMat extends Block implements IModelProvider {
+public class BlockDryingMat extends Block implements IProviderModel {
 
     public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
@@ -62,7 +62,7 @@ public class BlockDryingMat extends Block implements IModelProvider {
                     ItemStack stack = te.getStack();
                     if (stack.isEmpty()) {
                         ItemStack is = playerIn.getHeldItem(hand);
-                        if (te.isItemValid(te.SLOT, is)) {
+                        if (te.isItemValid(TEDryingMat.SLOT, is)) {
                             te.setStack(is.copy());
                             is.setCount(0);
                         }

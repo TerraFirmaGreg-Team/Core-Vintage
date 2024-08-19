@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.inventory.ingredient;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

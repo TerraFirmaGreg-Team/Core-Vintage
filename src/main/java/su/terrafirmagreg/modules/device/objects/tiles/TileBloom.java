@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 
 import net.minecraft.item.ItemStack;
 

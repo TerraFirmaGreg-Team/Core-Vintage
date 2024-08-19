@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiQuern;
@@ -33,7 +33,7 @@ import lombok.Getter;
 
 import static net.minecraft.init.SoundEvents.*;
 
-public class TileQuern extends BaseTileInventory implements ITickable, IContainerProvider<ContainerQuern, GuiQuern> {
+public class TileQuern extends BaseTileInventory implements ITickable, IProviderContainer<ContainerQuern, GuiQuern> {
 
     public static final int SLOT_HANDSTONE = 0;
     public static final int SLOT_INPUT = 1;

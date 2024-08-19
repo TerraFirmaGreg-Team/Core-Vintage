@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.objects.containers;
 
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

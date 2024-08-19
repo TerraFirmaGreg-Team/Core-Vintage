@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.objects.blocks;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.client.model.CustomStateMap;
-import su.terrafirmagreg.api.spi.tile.provider.ITileProvider;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.api.lib.model.CustomStateMap;
+import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
@@ -44,7 +44,7 @@ import static net.minecraft.block.BlockChest.Type.BASIC;
 import static net.minecraft.block.BlockChest.Type.TRAP;
 
 @Getter
-public class BlockWoodChest extends BlockChest implements IWoodBlock, ITileProvider {
+public class BlockWoodChest extends BlockChest implements IWoodBlock, IProviderTile {
 
     protected final Settings settings;
     private final WoodBlockVariant variant;

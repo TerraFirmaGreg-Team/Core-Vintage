@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.Item;
 
-import su.terrafirmagreg.api.spi.item.IItemSettings;
-import su.terrafirmagreg.api.spi.types.type.IType;
-import su.terrafirmagreg.api.spi.types.variant.IVariant;
+import su.terrafirmagreg.api.base.item.IItemSettings;
+import su.terrafirmagreg.api.base.types.type.IType;
+import su.terrafirmagreg.api.base.types.variant.IVariant;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 
 

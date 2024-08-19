@@ -1,8 +1,8 @@
 package tfcflorae.objects.items.tools;
 
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -12,7 +12,7 @@ import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 
 
-import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 
 import tfcflorae.util.OreDictionaryHelper;

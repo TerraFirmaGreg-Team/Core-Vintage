@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
-import su.terrafirmagreg.api.client.model.CustomStateMap;
+import su.terrafirmagreg.api.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;

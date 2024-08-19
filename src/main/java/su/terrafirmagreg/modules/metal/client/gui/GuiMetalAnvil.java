@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.metal.client.gui;
 
-import su.terrafirmagreg.api.spi.gui.component.button.IButtonTooltip;
+import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;

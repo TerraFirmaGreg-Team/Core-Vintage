@@ -1,6 +1,6 @@
 package lyeoj.tfcthings.recipes;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.lib.MathConstants;
 
 import net.minecraft.entity.player.EntityPlayer;

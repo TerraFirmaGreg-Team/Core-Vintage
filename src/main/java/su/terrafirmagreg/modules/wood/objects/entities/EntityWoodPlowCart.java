@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.client.GuiHandler;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -45,7 +45,7 @@ import org.jetbrains.annotations.NotNull;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 public class EntityWoodPlowCart extends EntityWoodCartInventory
-        implements IInventoryChangedListener, IContainerProvider<ContainerWoodPlowCart, GuiWoodPlow> {
+        implements IInventoryChangedListener, IProviderContainer<ContainerWoodPlowCart, GuiWoodPlow> {
 
     private static final DataParameter<Boolean> PLOWING = EntityDataManager.createKey(EntityWoodPlowCart.class, DataSerializers.BOOLEAN);
     private static final double BLADEOFFSET = 1.7D;

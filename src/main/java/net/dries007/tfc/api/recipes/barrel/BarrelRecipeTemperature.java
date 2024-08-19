@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.recipes.barrel;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.api.lib.MathConstants;
 import su.terrafirmagreg.api.util.CollectionUtils;
 

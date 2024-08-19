@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.capabilities.chunkdata.CapabilityChunkData;
+import su.terrafirmagreg.modules.core.capabilities.chunkdata.CapabilityChunkData;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;

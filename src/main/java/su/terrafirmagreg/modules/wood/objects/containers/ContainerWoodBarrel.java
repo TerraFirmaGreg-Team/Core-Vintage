@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.containers;
 
-import su.terrafirmagreg.api.spi.gui.container.BaseContainerTile;
+import su.terrafirmagreg.api.base.container.BaseContainerTile;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodBarrel;
 

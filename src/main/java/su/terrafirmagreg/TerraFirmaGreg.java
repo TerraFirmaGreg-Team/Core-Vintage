@@ -47,7 +47,7 @@ public class TerraFirmaGreg {
     @EventHandler
     @SuppressWarnings("unused")
     public void onConstruction(FMLConstructionEvent event) {
-        AnnotationUtils.setAnnotationData(event.getASMHarvestedData());
+        AnnotationUtils.setAsmData(event.getASMHarvestedData());
 
         this.moduleManager.setup();
         this.moduleManager.routeFMLStateEvent(event);

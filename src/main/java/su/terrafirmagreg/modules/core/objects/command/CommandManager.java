@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.command;
 
-import su.terrafirmagreg.api.spi.command.BaseCommandTree;
+import su.terrafirmagreg.api.base.command.BaseCommandTree;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.command.ICommand;

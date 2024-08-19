@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.recipes.quern;
 
-import su.terrafirmagreg.api.recipe.ICraftingProvider;
+import su.terrafirmagreg.api.base.recipe.ICraftingProvider;
 
 import net.minecraft.item.ItemStack;
 

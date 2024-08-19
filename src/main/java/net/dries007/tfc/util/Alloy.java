@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.api.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

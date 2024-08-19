@@ -1,8 +1,8 @@
 package net.doubledoordev.oiisa;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.modules.core.init.ItemsCore;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.client.gui;
 
-import su.terrafirmagreg.api.spi.gui.BaseGuiContainer;
+import su.terrafirmagreg.api.base.gui.BaseGuiContainer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.client.button.GuiButtonKnapping;
 import su.terrafirmagreg.modules.core.objects.container.ContainerBaseKnapping;

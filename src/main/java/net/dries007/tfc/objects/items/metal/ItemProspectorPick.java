@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.api.capabilities.player.CapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
 import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;

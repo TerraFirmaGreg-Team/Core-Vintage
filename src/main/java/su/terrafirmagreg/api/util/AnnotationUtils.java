@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.UtilityClass;
 
 import java.lang.annotation.Annotation;
@@ -23,17 +25,9 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public final class AnnotationUtils {
 
+    @Getter
+    @Setter
     private static ASMDataTable asmData;
-
-    public static ASMDataTable getASMDataTable() {
-
-        return asmData;
-    }
-
-    public static void setAnnotationData(ASMDataTable data) {
-
-        asmData = data;
-    }
 
     /**
      * Gets the ASMData for all classes annotated with the annotation class.

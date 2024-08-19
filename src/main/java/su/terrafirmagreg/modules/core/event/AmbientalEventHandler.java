@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
-import su.terrafirmagreg.api.capabilities.temperature.ProviderTemperature;
+import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;

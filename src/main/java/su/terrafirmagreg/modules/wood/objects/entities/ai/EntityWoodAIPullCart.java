@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.entities.ai;
 
-import su.terrafirmagreg.api.capabilities.pull.CapabilityPull;
+import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;

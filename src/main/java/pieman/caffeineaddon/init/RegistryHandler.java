@@ -1,6 +1,6 @@
 package pieman.caffeineaddon.init;
 
-import su.terrafirmagreg.api.registry.provider.IModelProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderModel;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -35,17 +35,17 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item : ModItems.ITEMS) {
-            if (item instanceof IModelProvider customModel) {
+            if (item instanceof IProviderModel customModel) {
                 customModel.onModelRegister();
             }
         }
         for (Block block : ModBlocks.BLOCKS) {
-            if (block instanceof IModelProvider customModel) {
+            if (block instanceof IProviderModel customModel) {
                 customModel.onModelRegister();
             }
         }
     }
-    
+
     public static void initRegistries() {
         GameRegistry.registerTileEntity(TEDryingMat.class, MODID_CAFFEINEADDON + ":drying_mat");
         NetworkRegistry.INSTANCE.registerGuiHandler(CaffeineAddon.instance, new GUIHandler());

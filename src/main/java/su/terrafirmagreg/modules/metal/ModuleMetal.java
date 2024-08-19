@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.metal;
 
+import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 import su.terrafirmagreg.modules.metal.init.ItemsMetal;
 

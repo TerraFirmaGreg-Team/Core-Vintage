@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.objects.item;
 
-import su.terrafirmagreg.api.capabilities.temperature.CapabilityTemperature;
-import su.terrafirmagreg.api.spi.item.BaseItem;
+import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
+import su.terrafirmagreg.api.base.item.BaseItem;
 import su.terrafirmagreg.api.util.NBTUtils;
 
 import net.minecraft.block.state.IBlockState;

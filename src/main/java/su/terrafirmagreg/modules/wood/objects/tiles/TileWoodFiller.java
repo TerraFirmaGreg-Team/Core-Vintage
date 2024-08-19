@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.objects.tiles;
 
-import su.terrafirmagreg.api.spi.tile.BaseTile;
+import su.terrafirmagreg.api.base.tile.BaseTile;
 
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.state.IBlockState;

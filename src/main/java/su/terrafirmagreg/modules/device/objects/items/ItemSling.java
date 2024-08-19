@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
-import su.terrafirmagreg.api.spi.item.BaseItem;
+import su.terrafirmagreg.api.base.item.BaseItem;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStone;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetal;
 import su.terrafirmagreg.modules.device.objects.entity.EntitySlingStoneMetalLight;
@@ -27,9 +27,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 
 
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
-import su.terrafirmagreg.api.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.api.types.Metal;

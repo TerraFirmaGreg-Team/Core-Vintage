@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.render;
 
-import su.terrafirmagreg.api.spi.render.BaseTESR;
+import su.terrafirmagreg.api.base.tesr.BaseTESR;
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.wood.objects.tiles.TileWoodLoom;

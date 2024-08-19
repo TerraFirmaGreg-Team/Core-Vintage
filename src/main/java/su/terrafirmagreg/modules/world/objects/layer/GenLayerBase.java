@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.layer;
 
-import su.terrafirmagreg.api.spi.biome.BaseBiome;
+import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 import su.terrafirmagreg.modules.world.objects.layer.biome.GenLayerAddIsland;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import su.terrafirmagreg.api.capabilities.heat.ProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

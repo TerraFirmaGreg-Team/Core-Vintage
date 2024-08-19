@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.api.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.api.features.ambiental.provider.ITemperatureTileProvider;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
+import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiElectricForge;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
@@ -53,7 +53,7 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 @SuppressWarnings("WeakerAccess")
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileElectricForge extends TEInventory
-        implements ITickable, ITileFields, IMachineSoundEffect, ITemperatureTileProvider, IContainerProvider<ContainerElectricForge, GuiElectricForge> {
+        implements ITickable, ITileFields, IMachineSoundEffect, ITemperatureTileProvider, IProviderContainer<ContainerElectricForge, GuiElectricForge> {
 
     public static final int SLOT_INPUT_MIN = 0;
     public static final int SLOT_INPUT_MAX = 8;

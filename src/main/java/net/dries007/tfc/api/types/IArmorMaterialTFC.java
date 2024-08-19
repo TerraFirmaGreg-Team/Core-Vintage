@@ -2,7 +2,7 @@ package net.dries007.tfc.api.types;
 
 import net.minecraft.item.ItemArmor;
 
-import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 
 import org.jetbrains.annotations.NotNull;

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.wood;
 
+import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.api.network.IPacketService;
-import su.terrafirmagreg.api.spi.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.event.EntityJoinWorldEventHandler;
 import su.terrafirmagreg.modules.wood.event.KeyEventHandler;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.Modules.WOOD;
+import static su.terrafirmagreg.modules.ModuleContainer.WOOD;
 
 @Module(moduleID = WOOD)
 public final class ModuleWood extends ModuleBase {
@@ -55,7 +55,7 @@ public final class ModuleWood extends ModuleBase {
     }
 
     @Override
-    protected void onRecipesRegister() {
+    public void onRecipesRegister() {
         LoomRecipes.onRegister();
 
     }

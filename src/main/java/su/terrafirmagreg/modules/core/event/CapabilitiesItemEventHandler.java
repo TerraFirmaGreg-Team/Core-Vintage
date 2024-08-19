@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.api.capabilities.damage.CapabilityDamageResistance;
-import su.terrafirmagreg.api.capabilities.damage.HandlerDamageResistance;
-import su.terrafirmagreg.api.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.api.capabilities.egg.HandlerEgg;
-import su.terrafirmagreg.api.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.api.capabilities.sharpness.HandlerSharpness;
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.HandlerSize;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.damage.HandlerDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.egg.HandlerEgg;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.HandlerSharpness;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.HandlerSize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

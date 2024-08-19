@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
@@ -47,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 
-public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSidedCallback, ITickable, IContainerProvider<ContainerFreezeDryer, GuiFreezeDryer> {
+public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSidedCallback, ITickable, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
 
     public boolean overheating = false;
     public int overheatTick;

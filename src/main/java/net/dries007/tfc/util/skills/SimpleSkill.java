@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.skills;
 
-import su.terrafirmagreg.api.capabilities.player.ICapabilityPlayer;
+import su.terrafirmagreg.modules.core.capabilities.player.ICapabilityPlayer;
 
 import net.minecraft.nbt.NBTTagCompound;
 

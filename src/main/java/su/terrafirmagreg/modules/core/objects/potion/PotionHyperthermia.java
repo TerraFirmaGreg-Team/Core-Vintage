@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.potion;
 
-import su.terrafirmagreg.api.spi.effects.BasePotion;
+import su.terrafirmagreg.api.base.effects.BasePotion;
 
 public class PotionHyperthermia extends BasePotion {
 

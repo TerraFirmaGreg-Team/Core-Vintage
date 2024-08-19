@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.api.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.api.capabilities.size.spi.Size;
-import su.terrafirmagreg.api.spi.gui.provider.IContainerProvider;
-import su.terrafirmagreg.api.spi.tile.BaseTileInventory;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
+import su.terrafirmagreg.api.base.tile.BaseTileInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrate;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerCrate;
@@ -39,7 +39,7 @@ import static net.dries007.tfc.objects.blocks.BlockLargeVessel.SEALED;
  * @see BlockLargeVessel
  */
 
-public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCallback, IContainerProvider<ContainerCrate, GuiCrate> {
+public class TileCrate extends BaseTileInventory implements IItemHandlerSidedCallback, IProviderContainer<ContainerCrate, GuiCrate> {
 
     private boolean sealed;
     private long sealedTick, sealedCalendarTick;

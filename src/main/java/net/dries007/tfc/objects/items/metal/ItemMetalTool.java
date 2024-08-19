@@ -28,7 +28,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 
 
-import su.terrafirmagreg.api.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 
 import net.dries007.tfc.api.types.Metal;

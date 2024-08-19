@@ -39,9 +39,9 @@ public final class PotionsCore {
         COLD_RESIST = registry.potion("resist_cold", new PotionResistCold());
         HEAT_RESIST = registry.potion("resist_heat", new PotionResistHeat());
 
-        COLD_RESIST_TYPE = registry.potionType("cold_resist_type", COLD_RESIST, 1200);           //TODO cfg duration
-        LONG_COLD_RESIST_TYPE = registry.potionType("long_cold_resist_type", COLD_RESIST, 2400); //TODO cfg duration
-        HEAT_RESIST_TYPE = registry.potionType("heat_resist_type", HEAT_RESIST, 1200);           //TODO cfg duration
-        LONG_HEAT_RESIST_TYPE = registry.potionType("long_heat_resist_type", HEAT_RESIST, 2400); //TODO cfg duration
+        COLD_RESIST_TYPE = registry.potionType(COLD_RESIST, "cold_resist_type", 1200);           //TODO cfg duration
+        LONG_COLD_RESIST_TYPE = registry.potionType(COLD_RESIST, "long_cold_resist_type", 2400); //TODO cfg duration
+        HEAT_RESIST_TYPE = registry.potionType(HEAT_RESIST, "heat_resist_type", 1200);           //TODO cfg duration
+        LONG_HEAT_RESIST_TYPE = registry.potionType(HEAT_RESIST, "long_heat_resist_type", 2400); //TODO cfg duration
     }
 }

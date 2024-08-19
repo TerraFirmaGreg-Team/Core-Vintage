@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.client.model.ModelFridge;
 import su.terrafirmagreg.modules.device.objects.tiles.TileFridge;
 
@@ -11,12 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
-
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
-
 public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
 
-    private static final ResourceLocation FRIDGE_TEXTURES = new ResourceLocation(MODID_TFCTECH, "textures/models/fridge.png");
+    private static final ResourceLocation FRIDGE_TEXTURES = ModUtils.resource("textures/blocks/device/fridge/base.png");
     private final ModelFridge model = new ModelFridge();
 
     @Override

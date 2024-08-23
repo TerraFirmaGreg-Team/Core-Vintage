@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.core.api.util.SitUtils;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.device.client.gui.GuiNestBox;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerNestBox;
 
@@ -24,7 +25,6 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Calendar;
 
 import org.jetbrains.annotations.NotNull;
@@ -96,12 +96,12 @@ public class TileNestBox extends BaseTileInventory
     }
 
     public void seatOnThis(EntityLiving bird) {
-        Helpers.sitOnBlock(this.world, this.pos, bird, 0.0D);
+        SitUtils.sitOnBlock(this.world, this.pos, bird, 0.0D);
     }
 
     @Nullable
     public Entity getBird() {
-        return Helpers.getSittingEntity(this.world, this.pos);
+        return SitUtils.getSittingEntity(this.world, this.pos);
     }
 
     @Override

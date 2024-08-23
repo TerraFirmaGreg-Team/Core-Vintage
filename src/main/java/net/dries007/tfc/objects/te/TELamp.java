@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.te;
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierEnvironmental;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +35,7 @@ import lombok.Setter;
 
 import java.util.Optional;
 
-public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidHandlerSidedCallback, ITemperatureTileProvider {
+public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidHandlerSidedCallback, IAmbientalTileProvider {
 
     public static int CAPACITY;
     private final FluidTank tank = new FluidTankCallback(this, 0, CAPACITY);

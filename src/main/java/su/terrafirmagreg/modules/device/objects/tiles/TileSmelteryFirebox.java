@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryFirebox;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockSmelteryCauldron;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerSmelteryFirebox;
@@ -35,7 +35,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 public class TileSmelteryFirebox extends TETickableInventory
-        implements ITickable, ICalendarTickable, ITileFields, ITemperatureTileProvider, IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
+        implements ITickable, ICalendarTickable, ITileFields, IAmbientalTileProvider, IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
 
     private float temperature;
     private float burnTemperature;

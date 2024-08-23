@@ -16,7 +16,7 @@ import lombok.Getter;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 
 @Getter

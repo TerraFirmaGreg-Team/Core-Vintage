@@ -37,7 +37,11 @@ import net.minecraftforge.items.IItemHandler;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
+
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.particle.TFCParticles;

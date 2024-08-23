@@ -159,11 +159,11 @@ public class ChunkGenClassic implements IChunkGenerator {
     private float rainfall;
     private float averageTemp;
 
-    public ChunkGenClassic(World w, String settingsString) {
-        world = w;
-        seed = world.getSeed();
-        rand = new Random(seed);
-        settings = WorldGenSettings.fromString(settingsString).build();
+    public ChunkGenClassic(World world, String settingsString) {
+        this.world = world;
+        this.seed = world.getSeed();
+        this.rand = new Random(seed);
+        this.settings = WorldGenSettings.fromString(settingsString).build();
 
         noiseGen1 = new NoiseGeneratorOctaves(rand, 4);
         noiseGen2 = new NoiseGeneratorOctaves(rand, 16);

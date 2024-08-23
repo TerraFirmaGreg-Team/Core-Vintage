@@ -3,12 +3,13 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiInductionCrucible;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockInductionCrucible;
+import su.terrafirmagreg.modules.device.objects.storage.MachineEnergyStorage;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import gregtech.api.capability.GregtechCapabilities;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
-import tfctech.objects.storage.MachineEnergyContainer;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,17 +41,16 @@ import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect, ITemperatureTileProvider {
+public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect, IAmbientalTileProvider {
 
-    private final MachineEnergyContainer energyContainer;
-    private int litTime = 0; //Client "effects" only
-
+    private final MachineEnergyStorage energyContainer;
     private final boolean addedToIc2Network = false;
+    private int litTime = 0; //Client "effects" only
     private boolean soundPlay = false;
 
     public TileInductionCrucible() {
         super();
-        energyContainer = new MachineEnergyContainer(TechConfig.DEVICES.inductionCrucibleEnergyCapacity, TechConfig.DEVICES.inductionCrucibleEnergyCapacity, 0);
+        energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.inductionCrucibleEnergyCapacity, TechConfig.DEVICES.inductionCrucibleEnergyCapacity, 0);
     }
 
     //    @Optional.Method(modid = "ic2")

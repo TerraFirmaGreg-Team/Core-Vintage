@@ -11,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.entity.RenderFallingBlock;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -78,7 +77,6 @@ import net.dries007.tfc.client.render.animal.RenderYakTFC;
 import net.dries007.tfc.client.render.animal.RenderZebuTFC;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.objects.entity.animal.EntityAlpacaTFC;
 import net.dries007.tfc.objects.entity.animal.EntityBlackBearTFC;
 import net.dries007.tfc.objects.entity.animal.EntityBoarTFC;
@@ -132,7 +130,6 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 public class ClientEvents {
 
     public static void preInit() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
         RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, RenderSheepTFC::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, RenderCowTFC::new);

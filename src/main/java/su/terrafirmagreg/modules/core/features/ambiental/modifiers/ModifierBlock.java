@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.core.features.ambiental.modifiers;
 
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.features.ambiental.AmbientalRegistry;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureBlockProvider;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalBlockProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.rock.objects.blocks.BlockRock;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoil;
 
@@ -91,20 +91,20 @@ public class ModifierBlock extends ModifierBase {
             }
 
             final float finalDistanceMultiplier = distanceMultiplier;
-            if (block instanceof ITemperatureBlockProvider provider) {
+            if (block instanceof IAmbientalBlockProvider provider) {
                 storage.add(provider.getModifier(player, pos, state));
             } else {
-                for (ITemperatureBlockProvider provider : BLOCKS) {
+                for (IAmbientalBlockProvider provider : BLOCKS) {
                     storage.add(provider.getModifier(player, pos, state));
                 }
             }
 
             if (block.hasTileEntity(state)) {
                 var tile = TileUtils.getTile(world, pos);
-                if (tile instanceof ITemperatureTileProvider provider) {
+                if (tile instanceof IAmbientalTileProvider provider) {
                     storage.add(provider.getModifier(player, tile));
                 } else
-                    for (ITemperatureTileProvider provider : AmbientalRegistry.TILE_ENTITIES) {
+                    for (IAmbientalTileProvider provider : AmbientalRegistry.TILE_ENTITIES) {
                         provider.getModifier(player, tile).ifPresent(mod -> {
                             mod.setChange(mod.getChange() * finalDistanceMultiplier);
                             mod.setPotency(mod.getPotency() * finalDistanceMultiplier);

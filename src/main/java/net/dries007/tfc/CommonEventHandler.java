@@ -1,5 +1,12 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.util.MathsUtils;
+import su.terrafirmagreg.api.util.WorldUtils;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ICreature;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
@@ -13,13 +20,7 @@ import su.terrafirmagreg.modules.core.capabilities.player.ProviderPlayer;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.data.DamageSources;
-import su.terrafirmagreg.api.util.MathsUtils;
-import su.terrafirmagreg.api.util.WorldUtils;
-import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.api.type.ICreature;
-import su.terrafirmagreg.modules.animal.api.type.IPredator;
-import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
@@ -116,7 +117,6 @@ import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
@@ -155,8 +155,7 @@ public final class CommonEventHandler {
         FallingBlockManager.Specification spec = FallingBlockManager.getSpecification(state);
         if (spec != null && !spec.isCollapsable()) {
             if (FallingBlockManager.checkFalling(event.getWorld(), event.getPos(), state)) {
-                event.getWorld()
-                        .playSound(null, event.getPos(), spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                event.getWorld().playSound(null, event.getPos(), spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
         } else {
             for (EnumFacing notifiedSide : event.getNotifiedSides()) {

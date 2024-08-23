@@ -19,7 +19,11 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
+
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.util.OreDictionaryHelper;

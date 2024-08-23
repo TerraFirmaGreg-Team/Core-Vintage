@@ -23,7 +23,11 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
+
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRock;

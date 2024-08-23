@@ -19,8 +19,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
-import net.dries007.tfc.api.util.FallingBlockManager;
 
 import lombok.Getter;
 

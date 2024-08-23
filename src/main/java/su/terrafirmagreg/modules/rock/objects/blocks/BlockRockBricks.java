@@ -3,8 +3,7 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
-
-import net.dries007.tfc.api.util.FallingBlockManager;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
 public class BlockRockBricks extends BlockRock {
 

@@ -20,8 +20,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
-import net.dries007.tfc.api.util.FallingBlockManager;
 
 import org.jetbrains.annotations.Nullable;
 

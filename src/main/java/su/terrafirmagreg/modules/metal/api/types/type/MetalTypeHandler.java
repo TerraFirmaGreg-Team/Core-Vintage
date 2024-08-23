@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.metal.api.types.type;
 
 import static gregtech.api.unification.material.Materials.*;
-import static su.terrafirmagreg.integration.material.Materials.*;
 
 public class MetalTypeHandler {
 

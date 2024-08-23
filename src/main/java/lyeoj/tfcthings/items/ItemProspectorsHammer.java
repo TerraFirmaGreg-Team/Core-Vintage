@@ -37,7 +37,11 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
+
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
 import net.dries007.tfc.objects.items.ItemTFC;

@@ -34,7 +34,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
 import java.util.Map;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.*;
+import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification.*;
 
 public final class BlocksRock {
 

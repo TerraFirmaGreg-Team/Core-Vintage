@@ -7,8 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import mcp.MethodsReturnNonnullByDefault;
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -17,8 +15,6 @@ import lombok.Getter;
  * Generic entity used for sitting on top of blocks
  */
 @Getter
-
-@MethodsReturnNonnullByDefault
 public class EntitySeatOn extends Entity {
 
     private BlockPos pos;

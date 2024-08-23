@@ -14,7 +14,11 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
+
 import net.dries007.tfc.client.TFCSounds;
 
 import org.jetbrains.annotations.NotNull;

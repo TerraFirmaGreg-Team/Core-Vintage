@@ -26,8 +26,8 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
 import java.util.Map;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification.VERTICAL_ONLY_SOIL;
+import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
+import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification.VERTICAL_ONLY_SOIL;
 
 public final class BlocksSoil {
 

@@ -6,12 +6,13 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.client.audio.IMachineSoundEffect;
 import su.terrafirmagreg.modules.device.client.gui.GuiElectricForge;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockElectricForge;
 import su.terrafirmagreg.modules.device.objects.containers.ContainerElectricForge;
+import su.terrafirmagreg.modules.device.objects.storage.MachineEnergyStorage;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,7 +41,6 @@ import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
 import tfctech.TFCTech;
 import tfctech.TechConfig;
-import tfctech.objects.storage.MachineEnergyContainer;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,24 +53,23 @@ import static su.terrafirmagreg.api.data.Blockstates.LIT;
 @SuppressWarnings("WeakerAccess")
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileElectricForge extends TEInventory
-        implements ITickable, ITileFields, IMachineSoundEffect, ITemperatureTileProvider, IProviderContainer<ContainerElectricForge, GuiElectricForge> {
+        implements ITickable, ITileFields, IMachineSoundEffect, IAmbientalTileProvider, IProviderContainer<ContainerElectricForge, GuiElectricForge> {
 
     public static final int SLOT_INPUT_MIN = 0;
     public static final int SLOT_INPUT_MAX = 8;
     public static final int SLOT_EXTRA_MIN = 9;
     public static final int SLOT_EXTRA_MAX = 11;
     private final HeatRecipe[] cachedRecipes = new HeatRecipe[9];
-    private final MachineEnergyContainer energyContainer;
+    private final MachineEnergyStorage energyContainer;
+    private final boolean addedToIc2Network = false;
     private float targetTemperature = 0.0F;
     private int litTime = 0;
     private boolean soundPlay = false;
 
-    private final boolean addedToIc2Network = false;
-
     public TileElectricForge() {
         super(12);
 
-        this.energyContainer = new MachineEnergyContainer(TechConfig.DEVICES.electricForgeEnergyCapacity, TechConfig.DEVICES.electricForgeEnergyCapacity, 0);
+        this.energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.electricForgeEnergyCapacity, TechConfig.DEVICES.electricForgeEnergyCapacity, 0);
         Arrays.fill(cachedRecipes, null);
     }
 

@@ -12,7 +12,6 @@ plugins {
     id 'com.gtnewhorizons.retrofuturagradle' version '1.4.+'
     id 'net.darkhax.curseforgegradle' version '1.+' apply false
     id 'com.modrinth.minotaur' version '2.+' apply false
-    id 'io.freefair.lombok' version '8.+'
 }
 
 apply from: 'gradle/scripts/helpers.gradle'

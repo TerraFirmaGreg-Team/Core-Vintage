@@ -4,8 +4,6 @@ import su.terrafirmagreg.api.base.effects.BasePotion;
 
 import net.minecraft.entity.EntityLivingBase;
 
-@SuppressWarnings("WeakerAccess")
-
 public class PotionOverburdened extends BasePotion {
 
     public PotionOverburdened() {

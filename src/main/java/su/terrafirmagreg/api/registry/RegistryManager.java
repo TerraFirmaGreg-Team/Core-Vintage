@@ -1,19 +1,19 @@
 package su.terrafirmagreg.api.registry;
 
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;
-import su.terrafirmagreg.api.registry.spi.IBiomeRegistry;
-import su.terrafirmagreg.api.registry.spi.IBlockRegistry;
-import su.terrafirmagreg.api.registry.spi.ICommandRegistry;
-import su.terrafirmagreg.api.registry.spi.IDataSerializerRegistry;
-import su.terrafirmagreg.api.registry.spi.IEnchantmentRegistry;
-import su.terrafirmagreg.api.registry.spi.IEntityRegistry;
-import su.terrafirmagreg.api.registry.spi.IItemRegistry;
-import su.terrafirmagreg.api.registry.spi.IKeyBindingRegistry;
-import su.terrafirmagreg.api.registry.spi.ILootTableRegistry;
-import su.terrafirmagreg.api.registry.spi.IPotionRegistry;
-import su.terrafirmagreg.api.registry.spi.IPotionTypeRegistry;
-import su.terrafirmagreg.api.registry.spi.ISoundRegistry;
-import su.terrafirmagreg.api.registry.spi.IWorldGeneratorRegistry;
+import su.terrafirmagreg.api.registry.spi.IRegistryBiome;
+import su.terrafirmagreg.api.registry.spi.IRegistryBlock;
+import su.terrafirmagreg.api.registry.spi.IRegistryCommand;
+import su.terrafirmagreg.api.registry.spi.IRegistryDataSerializer;
+import su.terrafirmagreg.api.registry.spi.IRegistryEnchantment;
+import su.terrafirmagreg.api.registry.spi.IRegistryEntity;
+import su.terrafirmagreg.api.registry.spi.IRegistryItem;
+import su.terrafirmagreg.api.registry.spi.IRegistryKeyBinding;
+import su.terrafirmagreg.api.registry.spi.IRegistryLootTable;
+import su.terrafirmagreg.api.registry.spi.IRegistryPotion;
+import su.terrafirmagreg.api.registry.spi.IRegistryPotionType;
+import su.terrafirmagreg.api.registry.spi.IRegistrySound;
+import su.terrafirmagreg.api.registry.spi.IRegistryWorldGenerator;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,8 +25,8 @@ import lombok.Getter;
 
 @Getter
 public class RegistryManager
-        implements IBlockRegistry, IBiomeRegistry, IKeyBindingRegistry, IDataSerializerRegistry, IEnchantmentRegistry, IEntityRegistry, IItemRegistry, ILootTableRegistry,
-                   IPotionRegistry, IPotionTypeRegistry, ISoundRegistry, IWorldGeneratorRegistry, ICommandRegistry {
+        implements IRegistryBlock, IRegistryBiome, IRegistryKeyBinding, IRegistryDataSerializer, IRegistryEnchantment, IRegistryEntity, IRegistryItem, IRegistryLootTable,
+                   IRegistryPotion, IRegistryPotionType, IRegistrySound, IRegistryWorldGenerator, IRegistryCommand {
 
     /**
      * The id of the mod the registry helper instance belongs to.

@@ -89,11 +89,6 @@ public final class EntitiesAnimal {
 
     public static void onRegister(RegistryManager registry) {
 
-        //		registry.registerEntity("sitblock", EntityEntryBuilder.create()
-        //				.entity(EntitySeatOn.class)
-        //				.tracker(160, 20, true)
-        //		);
-
         registry.entity("sheep", EntityAnimalSheep.class, 0xFFFFFF, 0xFF6347);
         registry.entity("cow", EntityAnimalCow.class, 0xA52A2A, 0xFFFFFF);
         registry.entity("grizzlybear", EntityAnimalGrizzlyBear.class, 0xB22222, 0xDEB887);

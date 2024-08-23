@@ -5,8 +5,7 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 
 import net.minecraft.util.BlockRenderLayer;
 
-
-import net.dries007.tfc.api.util.FallingBlockManager;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
 /**
  * Пока это почти полная копия {@link BlockRock} Этот клас в будущем планируется использовать для механики распространения мха

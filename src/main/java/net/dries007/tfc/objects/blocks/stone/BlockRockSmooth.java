@@ -7,7 +7,9 @@ import net.minecraft.block.state.IBlockState;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
 @MethodsReturnNonnullByDefault
 

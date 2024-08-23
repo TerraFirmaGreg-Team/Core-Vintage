@@ -28,7 +28,11 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe.Mode;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
+
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.container.ContainerEmpty;
 import net.dries007.tfc.util.OreDictionaryHelper;

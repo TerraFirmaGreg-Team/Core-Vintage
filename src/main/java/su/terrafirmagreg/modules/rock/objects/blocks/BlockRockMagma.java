@@ -23,8 +23,8 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
-import net.dries007.tfc.api.util.FallingBlockManager;
 
 import org.jetbrains.annotations.Nullable;
 

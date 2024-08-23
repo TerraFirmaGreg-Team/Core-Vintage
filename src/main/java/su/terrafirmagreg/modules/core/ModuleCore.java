@@ -35,6 +35,7 @@ import su.terrafirmagreg.modules.core.event.PuddlesEventHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.CommandsCore;
 import su.terrafirmagreg.modules.core.init.DataSerializersCore;
+import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
@@ -81,11 +82,16 @@ public final class ModuleCore extends ModuleBase {
 
         DataSerializersCore.onRegister(registryManager);
         BlocksCore.onRegister(registryManager);
+        EntitiesCore.onRegister(registryManager);
         FluidsCore.onRegister(registryManager);
         ItemsCore.onRegister(registryManager);
         PotionsCore.onRegister(registryManager);
         LootTablesCore.onRegister(registryManager);
         CommandsCore.onRegister(registryManager);
+    }
+
+    public void onClientRegister() {
+        EntitiesCore.onClientRegister(registryManager);
     }
 
     @Override

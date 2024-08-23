@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.core.features.ambiental.modifiers;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureEnvironmentalProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalEnvironmentalProvider;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -46,7 +46,7 @@ public class ModifierEnvironmental extends ModifierBase {
     }
 
     public static void computeModifiers(EntityPlayer player, ModifierStorage modifiers) {
-        for (ITemperatureEnvironmentalProvider provider : ENVIRONMENT) {
+        for (IAmbientalEnvironmentalProvider provider : ENVIRONMENT) {
             modifiers.add(provider.getModifier(player));
         }
     }

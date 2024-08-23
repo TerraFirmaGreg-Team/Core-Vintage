@@ -8,7 +8,11 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+
+
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRockAxe;
 import net.dries007.tfc.objects.items.rock.ItemRockHammer;

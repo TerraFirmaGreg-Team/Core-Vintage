@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
 
 @Getter
 public class WoodBlockVariant extends Variant<WoodBlockVariant> {
@@ -36,6 +36,10 @@ public class WoodBlockVariant extends Variant<WoodBlockVariant> {
         if (!variants.add(this)) throw new RuntimeException(String.format("WoodBlockVariant: [%s] already exists!", name));
     }
 
+    public static WoodBlockVariant builder(String name) {
+        return new WoodBlockVariant(name);
+    }
+
     public Block get(WoodType type) {
         var block = BlocksWood.WOOD_BLOCKS.get(Pair.of(this, type));
         if (block != null) return block;
@@ -50,10 +54,6 @@ public class WoodBlockVariant extends Variant<WoodBlockVariant> {
             }
         });
         return list;
-    }
-
-    public static WoodBlockVariant builder(String name) {
-        return new WoodBlockVariant(name);
     }
 
     public WoodBlockVariant setFactory(BiFunction<WoodBlockVariant, WoodType, ? extends Block> factory) {

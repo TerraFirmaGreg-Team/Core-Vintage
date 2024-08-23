@@ -9,7 +9,11 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
+
+
 import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.NotNull;

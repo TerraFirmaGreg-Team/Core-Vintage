@@ -19,8 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
-import net.dries007.tfc.api.util.FallingBlockManager;
 
 import java.util.Random;
 

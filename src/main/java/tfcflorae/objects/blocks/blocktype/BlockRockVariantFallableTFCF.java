@@ -14,7 +14,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
+
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import tfcflorae.objects.items.rock.ItemMud;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;

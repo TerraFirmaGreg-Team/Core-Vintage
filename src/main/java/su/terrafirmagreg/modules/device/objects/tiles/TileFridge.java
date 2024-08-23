@@ -3,12 +3,13 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.network.SCPacketFridge;
 import su.terrafirmagreg.modules.device.network.SCPacketTileEntity;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockFridge;
+import su.terrafirmagreg.modules.device.objects.storage.MachineEnergyStorage;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
@@ -35,7 +36,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.te.TEInventory;
 import tfctech.TechConfig;
-import tfctech.objects.storage.MachineEnergyContainer;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -46,11 +46,12 @@ import java.util.Optional;
 import static su.terrafirmagreg.api.data.Blockstates.UPPER;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public class TileFridge extends TEInventory implements ITickable, ITemperatureTileProvider {
+public class TileFridge extends TEInventory implements ITickable, IAmbientalTileProvider {
 
     private static final float MAX_DEGREE = 90F;
     private static final float DOOR_SPEED = 6F;
-    private final MachineEnergyContainer energyContainer;
+    private final MachineEnergyStorage energyContainer;
+    private final boolean addedToIc2Network = false;
     private float open = 0.0F;
     private float lastOpen = 0.0F;
     private int openingState = 0;
@@ -58,13 +59,11 @@ public class TileFridge extends TEInventory implements ITickable, ITemperatureTi
     private float efficiency = 0.0F;
     private int applyTrait = 0;
     private int serverUpdate;
-
-    private final boolean addedToIc2Network = false;
     private int mainBlock = 0; // 0 - not initialized, 1 = main block, -1 not main block
 
     public TileFridge() {
         super(8);
-        energyContainer = new MachineEnergyContainer(TechConfig.DEVICES.fridgeEnergyCapacity, TechConfig.DEVICES.fridgeEnergyCapacity, 0);
+        energyContainer = new MachineEnergyStorage(TechConfig.DEVICES.fridgeEnergyCapacity, TechConfig.DEVICES.fridgeEnergyCapacity, 0);
     }
 
     /**

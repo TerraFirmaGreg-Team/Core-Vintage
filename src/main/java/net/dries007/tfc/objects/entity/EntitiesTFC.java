@@ -55,8 +55,6 @@ public class EntitiesTFC {
     private static int id = 1; // don't use id 0, it's easier to debug if something goes wrong
 
     public static void preInit() {
-        register("sitblock", EntitySeatOn.class);
-        register("falling_block", EntityFallingBlockTFC.class);
         register("thrown_javelin", EntityThrownJavelin.class);
         registerLiving("sheeptfc", EntitySheepTFC.class, 0xFFFFFF, 0xFF6347);
         registerLiving("cowtfc", EntityCowTFC.class, 0xA52A2A, 0xFFFFFF);

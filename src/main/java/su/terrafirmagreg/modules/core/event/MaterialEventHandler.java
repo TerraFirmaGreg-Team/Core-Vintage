@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.integration.material.MaterialHandler;
+import su.terrafirmagreg.integration.gregtech.material.MaterialHandler;
 
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

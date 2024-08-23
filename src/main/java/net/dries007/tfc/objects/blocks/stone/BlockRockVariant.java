@@ -120,7 +120,6 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
             case ANVIL -> new BlockStoneAnvil(type, rock);
             case SPIKE -> new BlockRockSpike(type, rock);
             case FARMLAND -> new BlockFarmlandTFC(type, rock);
-            case PATH -> new BlockPathTFC(type, rock);
             case GRASS, DRY_GRASS, CLAY_GRASS -> new BlockRockVariantConnected(type, rock);
             case SAND, DIRT, CLAY, GRAVEL, COBBLE -> new BlockRockVariantFallable(type, rock);
             default -> new BlockRockVariant(type, rock);
@@ -176,8 +175,8 @@ public class BlockRockVariant extends Block implements ICapabilitySize {
         return switch (type) {
             case RAW, SPIKE -> ItemRock.get(rock);
             case CLAY, CLAY_GRASS -> Items.CLAY_BALL;
-            default -> super.getItemDropped(state, rand, fortune);
             case GRASS, DRY_GRASS, PATH -> Item.getItemFromBlock(get(rock, Rock.Type.DIRT));
+            default -> super.getItemDropped(state, rand, fortune);
         };
     }
 

@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
 
 @Getter
 public class RockBlockVariant extends Variant<RockBlockVariant> {
@@ -39,15 +39,15 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
         if (!blockVariants.add(this)) throw new RuntimeException(String.format("RockBlockVariant: [%s] already exists!", name));
     }
 
+    public static RockBlockVariant builder(String name) {
+
+        return new RockBlockVariant(name);
+    }
+
     public Block get(RockType type) {
         var block = BlocksRock.ROCK_BLOCKS.get(Pair.of(this, type));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block rock is null: %s, %s", this, type));
-    }
-
-    public static RockBlockVariant builder(String name) {
-
-        return new RockBlockVariant(name);
     }
 
     public RockBlockVariant setBaseHardness(float baseHardness) {

@@ -64,7 +64,7 @@ public final class ClientRegisterEvents {
                         new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem.getType()
                                 .name()
                                 .toLowerCase()), "inventory"));
-                if (((ItemTechMetal) item).getType() == ItemTechMetal.ItemType.WIRE) {
+                if (metalItem.getType() == ItemTechMetal.ItemType.WIRE) {
                     for (int i = 1; i <= 4; i++)
                         ModelLoader.setCustomModelResourceLocation(item, i,
                                 new ModelResourceLocation(new ResourceLocation(MODID_TFCTECH, "metal/" + metalItem

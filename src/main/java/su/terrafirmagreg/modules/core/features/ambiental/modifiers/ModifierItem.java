@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.features.ambiental.modifiers;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.features.ambiental.AmbientalRegistry;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureItemProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalItemProvider;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,10 +26,10 @@ public class ModifierItem extends ModifierBase {
                 float potency = 0f;
                 modifiers.add(new ModifierItem("heat_item", change, potency * stack.getCount()));
             }
-            if (stack.getItem() instanceof ITemperatureItemProvider provider) {
+            if (stack.getItem() instanceof IAmbientalItemProvider provider) {
                 modifiers.add(provider.getModifier(player, stack));
             }
-            for (ITemperatureItemProvider provider : AmbientalRegistry.ITEMS) {
+            for (IAmbientalItemProvider provider : AmbientalRegistry.ITEMS) {
                 modifiers.add(provider.getModifier(player, stack));
             }
         }

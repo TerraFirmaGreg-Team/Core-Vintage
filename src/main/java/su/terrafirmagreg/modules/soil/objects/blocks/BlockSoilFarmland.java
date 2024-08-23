@@ -30,7 +30,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
 
 import lombok.Getter;
 

@@ -21,7 +21,10 @@ import net.minecraft.world.World;
 
 
 import gregtech.common.items.ToolItems;
-import net.dries007.tfc.api.util.FallingBlockManager;
+
+
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+
 
 import org.jetbrains.annotations.NotNull;
 

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.objects.tiles;
 
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockOven;
@@ -35,7 +35,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.api.data.Blockstates.CURED;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
-public class TileOven extends TEInventory implements ITickable, ITemperatureTileProvider {
+public class TileOven extends TEInventory implements ITickable, IAmbientalTileProvider {
 
     public static final int SLOT_FUEL_1 = 0;
     public static final int SLOT_FUEL_2 = 1;

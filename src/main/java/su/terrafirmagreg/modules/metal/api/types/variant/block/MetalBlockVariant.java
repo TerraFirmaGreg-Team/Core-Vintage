@@ -15,7 +15,7 @@ import lombok.Getter;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.api.util.FallingBlockManager.Specification;
+import static su.terrafirmagreg.modules.core.features.falling.FallingBlockManager.Specification;
 
 @Getter
 public class MetalBlockVariant extends Variant<MetalBlockVariant> {
@@ -32,14 +32,14 @@ public class MetalBlockVariant extends Variant<MetalBlockVariant> {
         if (!variants.add(this)) throw new RuntimeException(String.format("MetalBlockVariant: [%s] already exists!", name));
     }
 
+    public static MetalBlockVariant builder(String name) {
+        return new MetalBlockVariant(name);
+    }
+
     public Block get(MetalType type) {
         var block = BlocksMetal.METAL_BLOCKS.get(Pair.of(this, type));
         if (block != null) return block;
         throw new RuntimeException(String.format("Block metal is null: %s, %s", this, type));
-    }
-
-    public static MetalBlockVariant builder(String name) {
-        return new MetalBlockVariant(name);
     }
 
     public MetalBlockVariant setFactory(BiFunction<MetalBlockVariant, MetalType, ? extends Block> factory) {

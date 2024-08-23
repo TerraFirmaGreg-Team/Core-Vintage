@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.features.ambiental.modifiers.ModifierTile;
-import su.terrafirmagreg.modules.core.features.ambiental.provider.ITemperatureTileProvider;
+import su.terrafirmagreg.modules.core.features.ambiental.provider.IAmbientalTileProvider;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockBloomery;
@@ -44,7 +44,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.api.data.Blockstates.LIT;
 
 @SuppressWarnings("WeakerAccess")
-public class TileBloomery extends TETickableInventory implements ITickable, ITemperatureTileProvider {
+public class TileBloomery extends TETickableInventory implements ITickable, IAmbientalTileProvider {
 
     // Gets the internal block, should be charcoal pile/bloom
     private static final Vec3i OFFSET_INTERNAL = new Vec3i(1, 0, 0);

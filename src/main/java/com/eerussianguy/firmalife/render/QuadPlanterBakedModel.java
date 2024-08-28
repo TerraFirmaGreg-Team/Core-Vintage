@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.eerussianguy.firmalife.util.ClientHelpers.bake;
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @MethodsReturnNonnullByDefault
 public class QuadPlanterBakedModel extends LargePlanterBakedModel implements IBakedModel {

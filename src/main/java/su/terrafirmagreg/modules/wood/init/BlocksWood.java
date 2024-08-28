@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.init;
 
-import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;

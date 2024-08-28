@@ -48,7 +48,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("WeakerAccess")
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")

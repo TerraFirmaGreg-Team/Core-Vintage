@@ -10,7 +10,7 @@ import net.dries007.tfc.objects.ArmorMaterialTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 public class ArmorMaterialsTFCF implements IArmorMaterialTFC {
 

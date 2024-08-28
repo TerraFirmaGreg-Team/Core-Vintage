@@ -23,7 +23,7 @@ import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 
 @SideOnly(Side.CLIENT)
 @EventBusSubscriber(modid = MODID_HOTORNOT, value = Side.CLIENT)

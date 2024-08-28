@@ -39,7 +39,7 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 import static net.dries007.tfc.api.types.Metal.ItemType.*;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.*;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS)
 public class RegistryHandlerCommon {

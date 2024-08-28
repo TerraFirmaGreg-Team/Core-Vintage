@@ -24,7 +24,7 @@ import se.gory_moon.horsepower.recipes.ShapedChoppingRecipe;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class ShapedChoppingCraftingWrapper implements IShapedCraftingRecipeWrapper, ICustomCraftingRecipeWrapper {
 

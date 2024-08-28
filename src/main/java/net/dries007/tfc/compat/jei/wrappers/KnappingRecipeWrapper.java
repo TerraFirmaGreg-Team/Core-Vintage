@@ -19,7 +19,7 @@ import net.dries007.tfc.objects.items.rock.ItemRock;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class KnappingRecipeWrapper implements IRecipeWrapper {
 

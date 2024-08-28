@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.api.base.tile.BaseTile;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.device.ModuleDevice;

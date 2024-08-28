@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileSmelteryCauldron extends TEInventory
         implements ITickable, IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, IAmbientalTileProvider,

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
@@ -66,7 +66,7 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.modules.device.objects.blocks.BlockFirePit.ATTACHMENT;
 
 public class TileFirePit extends TETickableInventory

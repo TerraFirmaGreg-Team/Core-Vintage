@@ -38,8 +38,6 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.*;
-
 @Getter
 @SuppressWarnings("deprecation")
 public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IProviderBlockColor, IGrass {

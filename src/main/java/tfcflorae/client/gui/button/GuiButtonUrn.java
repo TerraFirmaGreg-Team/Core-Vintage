@@ -12,7 +12,7 @@ import tfcflorae.objects.te.TEUrn;
 import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 public class GuiButtonUrn extends BaseGuiButton implements IButtonTooltip {
 

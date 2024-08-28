@@ -47,8 +47,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.*;
-
 @SuppressWarnings("deprecation")
 public class BlockSnare extends BaseBlock implements IProviderTile {
 

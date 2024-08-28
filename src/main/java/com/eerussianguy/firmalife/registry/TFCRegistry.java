@@ -51,7 +51,6 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 import static net.dries007.tfc.util.forge.ForgeRule.*;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
-import static su.terrafirmagreg.api.data.Constants.*;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class TFCRegistry {

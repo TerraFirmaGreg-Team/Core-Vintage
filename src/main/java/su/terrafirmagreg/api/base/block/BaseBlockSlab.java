@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.base.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.base.item.BaseItemSlab;
-import su.terrafirmagreg.api.lib.model.CustomStateMap;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;

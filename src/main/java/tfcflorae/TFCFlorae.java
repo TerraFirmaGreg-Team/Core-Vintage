@@ -1,7 +1,7 @@
 package tfcflorae;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -18,8 +18,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.proxy.CommonProxy;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 @SuppressWarnings({ "WeakerAccess", "unused" })
 @Mod(modid = MODID_TFCF, name = TFCFlorae.NAME, version = Tags.MOD_VERSION, dependencies = TFCFlorae.DEPENDENCIES)

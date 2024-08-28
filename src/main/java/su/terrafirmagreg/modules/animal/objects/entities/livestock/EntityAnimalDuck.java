@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 /**
  * A Chicken of the colder regions! Actually, ducks takes longer to reach maturity, but hey, they are cute!

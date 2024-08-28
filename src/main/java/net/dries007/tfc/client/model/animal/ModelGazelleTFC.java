@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.model.animal;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 import net.minecraft.client.model.ModelBase;

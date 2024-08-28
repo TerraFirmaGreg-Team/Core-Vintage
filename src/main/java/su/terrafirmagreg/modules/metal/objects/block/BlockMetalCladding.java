@@ -40,8 +40,6 @@ import lombok.Getter;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Blockstates.*;
-
 @SuppressWarnings("deprecation")
 @Getter
 public class BlockMetalCladding extends BaseBlock implements IMetalBlock {

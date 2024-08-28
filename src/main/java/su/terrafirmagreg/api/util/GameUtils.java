@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;

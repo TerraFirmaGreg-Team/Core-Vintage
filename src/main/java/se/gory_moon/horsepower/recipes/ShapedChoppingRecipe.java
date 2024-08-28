@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import static se.gory_moon.horsepower.blocks.BlockHPChoppingBase.createItemStack;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class ShapedChoppingRecipe extends ShapedOreRecipe {
 

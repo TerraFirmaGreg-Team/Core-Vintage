@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
-import su.terrafirmagreg.api.lib.types.variant.Variant;
-import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.data.lib.types.variant.Variant;
+import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 

@@ -24,8 +24,8 @@ import lombok.experimental.UtilityClass;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.Constants.MOD_ID;
-import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
+import static su.terrafirmagreg.data.Constants.MOD_ID;
+import static su.terrafirmagreg.data.Constants.MOD_NAME;
 
 @UtilityClass
 @SuppressWarnings("unused")

@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.items;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -49,7 +49,7 @@ import java.util.function.Function;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)

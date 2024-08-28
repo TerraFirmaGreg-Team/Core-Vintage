@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.client.model;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
 
 import net.minecraft.client.model.ModelBase;

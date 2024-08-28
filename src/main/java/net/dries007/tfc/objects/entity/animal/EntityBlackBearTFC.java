@@ -28,7 +28,7 @@ import net.dries007.tfc.util.climate.BiomeHelper;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class EntityBlackBearTFC extends EntityGrizzlyBearTFC implements IPredator, EntityAIStandAttack.IEntityStandAttack {
 

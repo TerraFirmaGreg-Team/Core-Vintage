@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.objects.generator.vein;
 
-import su.terrafirmagreg.api.data.Constants;
-import su.terrafirmagreg.api.lib.collection.WeightedCollection;
+import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.data.lib.collection.WeightedCollection;
 import su.terrafirmagreg.modules.world.objects.generator.GeneratorOreVeins;
 
 

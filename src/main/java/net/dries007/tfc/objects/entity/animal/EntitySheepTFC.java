@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.entity.animal;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, ILivestock {
 

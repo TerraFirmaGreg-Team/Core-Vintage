@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import pieman.caffeineaddon.init.RegistryHandler;
 import pieman.caffeineaddon.proxy.CommonProxy;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 
 //@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.MOD_VERSION, dependencies = "required-after:tfc")
 public class CaffeineAddon {

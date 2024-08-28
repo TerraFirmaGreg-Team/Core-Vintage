@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
 import static net.doubledoordev.oiisa.OversizedItemInStorageArea.INSTANCE;
-import static su.terrafirmagreg.api.data.Constants.MODID_OSA;
+import static su.terrafirmagreg.data.Constants.MODID_OSA;
 
 @Config(modid = MODID_OSA, category = "All")
 @Mod.EventBusSubscriber(modid = MODID_OSA)

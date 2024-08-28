@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -44,7 +44,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileCharcoalForge extends TETickableInventory
         implements ICalendarTickable, ITileFields, IAmbientalTileProvider, IProviderContainer<ContainerCharcoalForge, GuiCharcoalForge> {

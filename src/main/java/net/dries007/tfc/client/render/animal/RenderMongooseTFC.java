@@ -12,7 +12,7 @@ import net.dries007.tfc.objects.entity.animal.EntityMongooseTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 

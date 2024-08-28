@@ -14,7 +14,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.GlassworkingRecipe;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 
 public class GlassworkingRecipeWrapper implements IRecipeWrapper {
 

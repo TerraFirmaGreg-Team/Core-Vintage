@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 public class BlockMetalPigvil
         extends BlockMetalAnvil {

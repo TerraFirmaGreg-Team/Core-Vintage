@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
-import static su.terrafirmagreg.api.data.Blockstates.UPPER;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.UPPER;
 
 public class ItemBlockFridge extends BaseItemBlock {
 

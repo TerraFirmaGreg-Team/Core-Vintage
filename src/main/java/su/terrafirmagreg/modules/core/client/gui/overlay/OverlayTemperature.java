@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.client.gui.overlay;
 
 import su.terrafirmagreg.modules.core.capabilities.temperature.CapabilityTemperature;
 import su.terrafirmagreg.modules.core.capabilities.temperature.ProviderTemperature;
-import su.terrafirmagreg.api.lib.Unicode;
+import su.terrafirmagreg.data.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 

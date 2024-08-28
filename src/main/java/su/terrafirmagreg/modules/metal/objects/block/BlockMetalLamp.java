@@ -54,8 +54,8 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
-import static su.terrafirmagreg.api.data.Blockstates.VERTICAL;
+import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Properties.VERTICAL;
 import static su.terrafirmagreg.modules.metal.objects.itemblock.ItemBlockMetalLamp.CAPACITY;
 
 @Getter

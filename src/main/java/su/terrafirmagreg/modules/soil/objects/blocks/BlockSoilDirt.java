@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.CLAY;
+import static su.terrafirmagreg.data.Properties.CLAY;
 
 public class BlockSoilDirt extends BlockSoil {
 

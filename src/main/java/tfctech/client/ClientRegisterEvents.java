@@ -36,7 +36,7 @@ import java.awt.*;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)

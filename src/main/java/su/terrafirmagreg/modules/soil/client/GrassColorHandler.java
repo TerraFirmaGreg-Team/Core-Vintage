@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.client;
 
-import su.terrafirmagreg.api.lib.ThermiteRandom;
+import su.terrafirmagreg.data.lib.ThermiteRandom;
 import su.terrafirmagreg.modules.soil.ConfigSoil;
 
 import net.minecraft.block.state.IBlockState;

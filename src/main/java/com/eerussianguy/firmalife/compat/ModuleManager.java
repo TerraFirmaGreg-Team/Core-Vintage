@@ -13,7 +13,7 @@ import com.eerussianguy.firmalife.recipe.NutRecipe;
 
 import java.util.ArrayList;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class ModuleManager {

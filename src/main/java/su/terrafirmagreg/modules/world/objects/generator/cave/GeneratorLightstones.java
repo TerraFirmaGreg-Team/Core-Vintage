@@ -18,7 +18,7 @@ import tfcflorae.objects.blocks.groundcover.BlockLightstone;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class GeneratorLightstones implements IWorldGenerator {
 

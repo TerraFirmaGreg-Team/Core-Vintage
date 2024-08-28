@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.eerussianguy.firmalife.util.ClientHelpers.bake;
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @MethodsReturnNonnullByDefault
 public class LargePlanterBakedModel implements IBakedModel {

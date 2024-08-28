@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.capabilities.heat.ProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

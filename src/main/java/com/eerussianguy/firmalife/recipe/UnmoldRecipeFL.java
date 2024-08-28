@@ -32,7 +32,7 @@ import net.dries007.tfc.objects.recipes.RecipeUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class UnmoldRecipeFL extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 

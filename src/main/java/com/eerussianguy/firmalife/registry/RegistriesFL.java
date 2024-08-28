@@ -18,7 +18,7 @@ import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.recipe.StrainingRecipe;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 @GameRegistry.ObjectHolder(MODID_FL)

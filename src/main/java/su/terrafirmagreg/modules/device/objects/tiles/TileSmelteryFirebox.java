@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileSmelteryFirebox extends TETickableInventory
         implements ITickable, ICalendarTickable, ITileFields, IAmbientalTileProvider, IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {

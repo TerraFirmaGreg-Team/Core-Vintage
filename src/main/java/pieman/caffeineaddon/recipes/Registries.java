@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import pieman.caffeineaddon.blocks.BlockDryingMat;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class Registries {

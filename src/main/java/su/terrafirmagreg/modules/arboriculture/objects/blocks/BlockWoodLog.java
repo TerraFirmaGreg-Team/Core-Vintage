@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.capabilities.player.CapabilityPlayer;
-import su.terrafirmagreg.api.lib.model.CustomStateMap;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -53,9 +53,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.data.Blockstates.PLACED;
-import static su.terrafirmagreg.api.data.Blockstates.SMALL;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.PLACED;
+import static su.terrafirmagreg.data.Properties.SMALL;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 @Getter

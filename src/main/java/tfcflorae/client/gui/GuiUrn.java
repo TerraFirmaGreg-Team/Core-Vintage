@@ -19,7 +19,7 @@ import tfcflorae.objects.te.TEUrn;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 public class GuiUrn extends GuiContainerTE<TEUrn> {
 

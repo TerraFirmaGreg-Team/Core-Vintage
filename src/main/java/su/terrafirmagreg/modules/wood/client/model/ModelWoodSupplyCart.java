@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.client.model;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.modules.wood.objects.entities.EntityWoodSupplyCart;
 
 import net.minecraft.client.model.ModelBase;

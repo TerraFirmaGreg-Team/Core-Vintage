@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
-import su.terrafirmagreg.api.lib.model.CustomStateMap;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -55,8 +55,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.data.Blockstates.HARVESTABLE;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.HARVESTABLE;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 import static su.terrafirmagreg.modules.arboriculture.objects.blocks.BlockWoodLeaves.EnumLeafState.*;
 
 @Getter

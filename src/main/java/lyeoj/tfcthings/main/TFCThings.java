@@ -1,8 +1,8 @@
 package lyeoj.tfcthings.main;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.data.Constants;
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.Constants;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import lyeoj.tfcthings.network.MessageHookJavelinUpdate;
 import lyeoj.tfcthings.proxy.CommonProxy;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
 
 @Mod(modid = MODID_TFCTHINGS, name = TFCThings.NAME, version = Tags.MOD_VERSION, dependencies = TFCThings.DEPENDENCIES)
 public class TFCThings {

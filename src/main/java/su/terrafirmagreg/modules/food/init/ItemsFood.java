@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.food.init;
 
-import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.food.api.types.category.FoodCategories;
 import su.terrafirmagreg.modules.food.api.types.variant.item.FoodItemVariant;

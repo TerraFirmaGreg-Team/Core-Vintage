@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.api.data;
 
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.nbt.NBTTagCompound;

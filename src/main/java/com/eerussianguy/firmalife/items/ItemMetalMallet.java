@@ -56,7 +56,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 public class ItemMetalMallet extends ItemTFC implements ICapabilityMetal {

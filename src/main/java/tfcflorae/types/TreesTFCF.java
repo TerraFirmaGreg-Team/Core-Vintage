@@ -13,8 +13,8 @@ import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 @SuppressWarnings({ "unused", "WeakerAccess" })
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

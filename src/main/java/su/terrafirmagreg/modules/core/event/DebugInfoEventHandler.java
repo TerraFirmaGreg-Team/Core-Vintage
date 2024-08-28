@@ -23,7 +23,7 @@ import net.dries007.tfc.util.climate.ClimateHelper;
 import java.util.List;
 
 import static net.minecraft.util.text.TextFormatting.*;
-import static su.terrafirmagreg.api.lib.Unicode.DEGREE;
+import static su.terrafirmagreg.data.lib.Unicode.DEGREE;
 
 @SuppressWarnings("unused")
 public class DebugInfoEventHandler {

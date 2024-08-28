@@ -34,7 +34,7 @@ import gregtech.api.items.toolitem.ToolClasses;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProviderTile {

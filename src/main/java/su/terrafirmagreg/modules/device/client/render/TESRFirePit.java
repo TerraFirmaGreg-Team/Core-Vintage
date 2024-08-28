@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileFirePit.SLOT_EXTRA_INPUT_START;
 

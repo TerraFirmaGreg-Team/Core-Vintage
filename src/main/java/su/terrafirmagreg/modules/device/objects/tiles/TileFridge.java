@@ -43,7 +43,7 @@ import lombok.Getter;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.UPPER;
+import static su.terrafirmagreg.data.Properties.UPPER;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileFridge extends TEInventory implements ITickable, IAmbientalTileProvider {

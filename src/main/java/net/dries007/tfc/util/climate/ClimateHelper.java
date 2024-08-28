@@ -11,7 +11,7 @@ import net.dries007.tfc.util.calendar.ICalendarFormatted;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.config.TemperatureMode;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 import static su.terrafirmagreg.modules.world.classic.WorldTypeClassic.SEALEVEL;
 
 public class ClimateHelper {

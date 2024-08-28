@@ -25,7 +25,7 @@ import com.buuz135.hotornot.util.ItemEffect;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 
 @EventBusSubscriber(modid = MODID_HOTORNOT)
 public class ServerEvents {

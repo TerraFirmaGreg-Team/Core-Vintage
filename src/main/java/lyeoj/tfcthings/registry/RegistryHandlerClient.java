@@ -24,7 +24,7 @@ import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(modid = MODID_TFCTHINGS, value = Side.CLIENT)
 public class RegistryHandlerClient {

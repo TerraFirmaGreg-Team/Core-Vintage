@@ -12,7 +12,7 @@ import net.dries007.tfc.objects.entity.animal.EntityCamelTFC;
 
 import java.util.stream.IntStream;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 

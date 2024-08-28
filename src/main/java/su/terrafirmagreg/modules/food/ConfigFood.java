@@ -11,8 +11,8 @@ import com.cleanroommc.configanytime.ConfigAnytime;
 
 import net.dries007.tfc.util.config.DecayTooltipMode;
 
-import static su.terrafirmagreg.api.data.Constants.MOD_ID;
-import static su.terrafirmagreg.api.data.Constants.MOD_NAME;
+import static su.terrafirmagreg.data.Constants.MOD_ID;
+import static su.terrafirmagreg.data.Constants.MOD_NAME;
 
 @Config(modid = MOD_ID, name = MOD_NAME + "/" + "food")
 public class ConfigFood {

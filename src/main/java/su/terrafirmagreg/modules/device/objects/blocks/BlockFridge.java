@@ -53,7 +53,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static net.minecraft.util.EnumFacing.NORTH;
-import static su.terrafirmagreg.api.data.Blockstates.UPPER;
+import static su.terrafirmagreg.data.Properties.UPPER;
 
 @SuppressWarnings("deprecation")
 public class BlockFridge extends BaseBlockHorizontal implements IProviderTile {

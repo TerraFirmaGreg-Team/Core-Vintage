@@ -48,8 +48,8 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 import static su.terrafirmagreg.modules.core.capabilities.size.spi.Size.HUGE;
 import static su.terrafirmagreg.modules.core.capabilities.size.spi.Weight.VERY_HEAVY;
 

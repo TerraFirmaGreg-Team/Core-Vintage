@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
-import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
 import net.minecraft.block.material.Material;

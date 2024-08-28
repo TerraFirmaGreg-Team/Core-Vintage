@@ -58,7 +58,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = { Side.CLIENT }, modid = MODID_FL)

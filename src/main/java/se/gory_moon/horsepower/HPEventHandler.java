@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;

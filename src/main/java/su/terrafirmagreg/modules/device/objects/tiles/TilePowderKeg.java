@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.tiles;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -47,7 +47,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Blockstates.SEALED;
+import static su.terrafirmagreg.data.Properties.SEALED;
 
 /**
  * @see BlockPowderKeg

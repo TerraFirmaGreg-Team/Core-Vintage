@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.mapgen;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 
 import net.minecraft.block.state.IBlockState;

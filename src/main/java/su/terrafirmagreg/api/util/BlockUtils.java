@@ -40,7 +40,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Blockstates.CLAY;
+import static su.terrafirmagreg.data.Properties.CLAY;
 import static su.terrafirmagreg.modules.rock.init.BlocksRock.*;
 import static su.terrafirmagreg.modules.soil.init.BlocksSoil.*;
 

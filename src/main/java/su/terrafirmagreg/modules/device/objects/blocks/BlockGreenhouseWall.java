@@ -25,8 +25,8 @@ import net.minecraft.world.World;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.api.data.Blockstates.GLASS;
-import static su.terrafirmagreg.api.data.Blockstates.TOP;
+import static su.terrafirmagreg.data.Properties.GLASS;
+import static su.terrafirmagreg.data.Properties.TOP;
 
 @SuppressWarnings("deprecation")
 public class BlockGreenhouseWall extends BaseBlock {

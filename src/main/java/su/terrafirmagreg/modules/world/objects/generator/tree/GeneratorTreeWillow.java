@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.generator.tree;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.api.util.StructureUtils;
 
 import net.minecraft.block.BlockLog;

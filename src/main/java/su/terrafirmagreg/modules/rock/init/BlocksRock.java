@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.init;
 
-import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;

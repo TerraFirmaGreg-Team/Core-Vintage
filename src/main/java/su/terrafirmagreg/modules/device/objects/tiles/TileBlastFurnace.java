@@ -44,7 +44,7 @@ import net.dries007.tfc.util.fuel.FuelManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileBlastFurnace extends TETickableInventory
         implements ITickable, ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {

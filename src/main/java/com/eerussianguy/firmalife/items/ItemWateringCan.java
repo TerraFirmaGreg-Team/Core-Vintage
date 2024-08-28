@@ -31,7 +31,7 @@ import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemMisc;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 

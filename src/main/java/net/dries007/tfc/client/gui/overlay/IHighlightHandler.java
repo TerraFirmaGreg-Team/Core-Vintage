@@ -24,8 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
-import static su.terrafirmagreg.api.data.Blockstates.UPPER;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Properties.UPPER;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 /**
  * Interfacing to pass on DrawHighlightEvent's custom implementations

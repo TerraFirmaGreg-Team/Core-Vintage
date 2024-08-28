@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("unused")
 @Config(modid = MODID_TFCTECH, category = "")

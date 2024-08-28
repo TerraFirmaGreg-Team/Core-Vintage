@@ -11,7 +11,7 @@ import net.dries007.tfc.client.TFCGuiHandler;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class GuiButtonPlayerInventoryTab extends BaseGuiButton {
 

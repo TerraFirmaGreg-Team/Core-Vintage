@@ -14,7 +14,7 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public final class CreativeTabsTFC {
 

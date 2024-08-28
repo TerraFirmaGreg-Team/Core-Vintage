@@ -23,7 +23,7 @@
 package com.buuz135.hotornot;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -37,7 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import com.buuz135.hotornot.network.PacketClientSettings;
 import com.buuz135.hotornot.network.PacketServerSettings;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 
 @Mod(modid = MODID_HOTORNOT, name = HotOrNot.MOD_NAME, version = Tags.MOD_VERSION, useMetadata = true)
 public class HotOrNot {

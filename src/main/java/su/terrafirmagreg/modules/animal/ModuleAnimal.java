@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal;
 
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;

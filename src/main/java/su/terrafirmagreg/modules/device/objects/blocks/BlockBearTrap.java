@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -44,8 +44,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 import org.jetbrains.annotations.Nullable;
-
-import static su.terrafirmagreg.api.data.Blockstates.*;
 
 @SuppressWarnings("deprecation")
 public class BlockBearTrap extends BaseBlock implements IProviderTile {

@@ -9,7 +9,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import pieman.caffeineaddon.blocks.TEDryingMat;
 import pieman.caffeineaddon.client.TESRDryingMat;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 
 public class ClientProxy extends CommonProxy {
 

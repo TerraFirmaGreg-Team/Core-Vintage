@@ -1,6 +1,6 @@
 package BananaFructa.tfcfarming.firmalife;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

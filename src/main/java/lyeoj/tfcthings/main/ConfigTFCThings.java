@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.util.calendar.Calendar;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTHINGS;
 
 @Mod.EventBusSubscriber(
         modid = MODID_TFCTHINGS

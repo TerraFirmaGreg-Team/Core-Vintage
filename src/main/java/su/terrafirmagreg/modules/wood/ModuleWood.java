@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;

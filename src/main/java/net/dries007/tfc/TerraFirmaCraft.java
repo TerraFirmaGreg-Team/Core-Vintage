@@ -1,6 +1,6 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -50,8 +50,8 @@ import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.api.data.Constants.MOD_VERSION;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MOD_VERSION;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber

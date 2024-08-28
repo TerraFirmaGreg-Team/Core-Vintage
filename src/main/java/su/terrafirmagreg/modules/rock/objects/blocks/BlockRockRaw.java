@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.CAN_FALL;
+import static su.terrafirmagreg.data.Properties.CAN_FALL;
 
 @SuppressWarnings("deprecation")
 public class BlockRockRaw extends BlockRock {

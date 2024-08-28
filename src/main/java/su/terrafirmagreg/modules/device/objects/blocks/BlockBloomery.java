@@ -38,8 +38,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.api.data.Blockstates.*;
-
 @SuppressWarnings("deprecation")
 public class BlockBloomery extends BaseBlock implements IProviderTile {
 

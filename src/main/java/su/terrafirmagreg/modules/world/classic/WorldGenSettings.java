@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.classic;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 
 
 import com.google.common.base.Strings;

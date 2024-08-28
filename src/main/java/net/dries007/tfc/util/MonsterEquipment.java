@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.api.lib.collection.WeightedCollection;
+import su.terrafirmagreg.data.lib.collection.WeightedCollection;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

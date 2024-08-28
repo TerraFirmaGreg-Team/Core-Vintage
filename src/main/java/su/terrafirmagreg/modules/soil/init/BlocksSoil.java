@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.init;
 
-import su.terrafirmagreg.api.lib.Pair;
+import su.terrafirmagreg.data.lib.Pair;
 import su.terrafirmagreg.api.registry.RegistryManager;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;

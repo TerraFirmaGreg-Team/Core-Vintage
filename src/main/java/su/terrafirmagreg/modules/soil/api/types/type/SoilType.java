@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.api.types.type;
 
-import su.terrafirmagreg.api.lib.types.type.Type;
+import su.terrafirmagreg.data.lib.types.type.Type;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;

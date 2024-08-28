@@ -49,7 +49,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 import java.util.function.BiPredicate;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsConsumerBlock, IProviderTile {

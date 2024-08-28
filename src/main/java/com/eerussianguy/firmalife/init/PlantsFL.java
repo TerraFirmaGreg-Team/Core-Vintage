@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.init;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeSequoia;
 
 import net.minecraft.util.ResourceLocation;

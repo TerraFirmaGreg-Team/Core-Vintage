@@ -60,7 +60,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.api.data.Blockstates.SEALED;
+import static su.terrafirmagreg.data.Properties.SEALED;
 
 public class TileWoodBarrel extends BaseTileTickableInventory
         implements ICalendarTickable, IItemHandlerSidedCallback, IFluidHandlerSidedCallback, IFluidTankCallback, IProviderContainer<ContainerWoodBarrel, GuiWoodBarrel> {

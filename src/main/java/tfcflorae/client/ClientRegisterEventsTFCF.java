@@ -1,6 +1,6 @@
 package tfcflorae.client;
 
-import su.terrafirmagreg.api.data.Blockstates;
+import su.terrafirmagreg.data.Properties;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -55,7 +55,7 @@ import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = { Side.CLIENT }, modid = MODID_TFCF)
@@ -151,7 +151,7 @@ public class ClientRegisterEventsTFCF {
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 
         for (Block block : BlocksTFCF.getAllBambooLog())
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(Blockstates.CAN_GROW)
+            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(Properties.CAN_GROW)
                     .build());
 
         for (Block block : BlocksTFCF.getAllBambooLeaves())
@@ -160,14 +160,14 @@ public class ClientRegisterEventsTFCF {
         for (Block block : BlocksTFCF.getAllBambooSapling())
             ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
 
-        ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(Blockstates.CAN_GROW)
+        ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE)
                 .build());
 
-        ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(Blockstates.CAN_GROW)
+        ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(Properties.CAN_GROW)
                 .build());
         ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE)
                 .build());

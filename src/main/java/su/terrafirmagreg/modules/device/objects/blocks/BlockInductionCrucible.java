@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockInductionCrucible extends BaseBlock implements IProviderTile {

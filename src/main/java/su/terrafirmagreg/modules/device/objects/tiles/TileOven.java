@@ -32,8 +32,8 @@ import net.dries007.tfc.util.fuel.FuelManager;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.CURED;
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.CURED;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 public class TileOven extends TEInventory implements ITickable, IAmbientalTileProvider {
 

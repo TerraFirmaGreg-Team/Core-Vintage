@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.api.lib.Unicode;
+import su.terrafirmagreg.data.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.objects.tiles.TileBlastFurnace;
 
@@ -22,7 +22,7 @@ import net.dries007.tfc.client.gui.GuiContainerTE;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.client.gui;
 
-import su.terrafirmagreg.api.lib.NBTBuilder;
+import su.terrafirmagreg.data.lib.NBTBuilder;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;

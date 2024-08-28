@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.chunkdata;
 
-import su.terrafirmagreg.api.lib.NBTBuilder;
+import su.terrafirmagreg.data.lib.NBTBuilder;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
 import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
 

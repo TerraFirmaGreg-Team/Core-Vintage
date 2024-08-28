@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.food.api;
 
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 

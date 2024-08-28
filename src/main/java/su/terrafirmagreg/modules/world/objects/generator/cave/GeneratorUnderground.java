@@ -22,7 +22,7 @@ import tfcflorae.types.PlantsTFCF;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class GeneratorUnderground implements IWorldGenerator {
 

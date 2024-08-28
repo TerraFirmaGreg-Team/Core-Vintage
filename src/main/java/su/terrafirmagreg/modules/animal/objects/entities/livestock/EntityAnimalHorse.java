@@ -54,7 +54,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestock, IRidable {

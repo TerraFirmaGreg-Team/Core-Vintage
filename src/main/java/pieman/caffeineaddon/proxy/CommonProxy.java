@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 
 
-import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 
 @Mod.EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class CommonProxy {

@@ -31,7 +31,7 @@ import lombok.Getter;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 @Getter
 public class BlockJackOLantern extends BaseBlockHorizontal implements IProviderTile {

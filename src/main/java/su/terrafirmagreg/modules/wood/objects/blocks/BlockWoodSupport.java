@@ -28,8 +28,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.data.Blockstates.*;
-
 @SuppressWarnings("deprecation")
 public class BlockWoodSupport extends BlockWood {
 

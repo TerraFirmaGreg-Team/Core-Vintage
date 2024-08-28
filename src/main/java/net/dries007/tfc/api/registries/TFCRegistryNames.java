@@ -3,7 +3,7 @@ package net.dries007.tfc.api.registries;
 import net.minecraft.util.ResourceLocation;
 
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 /**
  * The names are separate from the instances TFCRegistries so they can be used without loading the class prematurely.

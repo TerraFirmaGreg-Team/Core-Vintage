@@ -25,7 +25,7 @@ import gregtech.api.items.toolitem.ToolClasses;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 public class BlockElectricForge extends BaseBlockHorizontal implements IProviderTile {
 

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.plant;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.modules.plant.init.BlocksPlant;
 import su.terrafirmagreg.modules.plant.init.ItemsPlant;

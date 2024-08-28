@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
 import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
-import su.terrafirmagreg.api.lib.model.CustomStateMap;
-import su.terrafirmagreg.api.lib.types.type.IType;
-import su.terrafirmagreg.api.lib.types.variant.IVariant;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
+import su.terrafirmagreg.data.lib.types.type.IType;
+import su.terrafirmagreg.data.lib.types.variant.IVariant;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.registry.provider.IProviderModel;
 import su.terrafirmagreg.api.util.ModUtils;

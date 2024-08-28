@@ -1,6 +1,6 @@
 package net.dries007.tfc.compat.jei.categories;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;

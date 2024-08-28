@@ -27,7 +27,7 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 import org.jetbrains.annotations.NotNull;
 
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 
 public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEntity, IEntityAdditionalSpawnData {
 

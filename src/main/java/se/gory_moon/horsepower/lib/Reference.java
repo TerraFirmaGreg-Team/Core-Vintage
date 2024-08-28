@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower.lib;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_HORSEPOWER;
+import static su.terrafirmagreg.data.Constants.MODID_HORSEPOWER;
 
 public class Reference {
 

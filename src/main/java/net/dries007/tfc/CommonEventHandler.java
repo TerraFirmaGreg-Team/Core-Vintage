@@ -1,6 +1,6 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
@@ -140,8 +140,8 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFC)

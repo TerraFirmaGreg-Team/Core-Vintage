@@ -16,7 +16,7 @@ import pieman.caffeineaddon.CaffeineAddon;
 import pieman.caffeineaddon.blocks.TEDryingMat;
 import pieman.caffeineaddon.client.GUIHandler;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
+import static su.terrafirmagreg.data.Constants.MODID_CAFFEINEADDON;
 
 @EventBusSubscriber(modid = MODID_CAFFEINEADDON)
 public class RegistryHandler {

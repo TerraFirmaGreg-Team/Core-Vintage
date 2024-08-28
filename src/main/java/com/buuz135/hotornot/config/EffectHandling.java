@@ -5,7 +5,7 @@ import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.RangeInt;
 
 
-import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
+import static su.terrafirmagreg.data.Constants.MODID_HOTORNOT;
 
 public final class EffectHandling {
 

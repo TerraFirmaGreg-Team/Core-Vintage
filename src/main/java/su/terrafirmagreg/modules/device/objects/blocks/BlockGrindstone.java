@@ -34,7 +34,7 @@ import gregtech.api.items.toolitem.ToolClasses;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
 public class BlockGrindstone extends BaseBlock implements IProviderTile {

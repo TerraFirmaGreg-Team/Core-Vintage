@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.capabilities.size;
 
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.lib.Unicode;
+import su.terrafirmagreg.data.lib.Unicode;
 import su.terrafirmagreg.api.util.GameUtils;
 
 import net.minecraft.client.resources.I18n;

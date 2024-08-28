@@ -18,7 +18,7 @@ import tfcflorae.objects.items.rock.ItemMud;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 

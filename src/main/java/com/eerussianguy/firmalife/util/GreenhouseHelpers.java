@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 import com.eerussianguy.firmalife.te.TEClimateStation;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.api.data.Blockstates.GLASS;
-import static su.terrafirmagreg.api.data.Blockstates.TOP;
+import static su.terrafirmagreg.data.Properties.GLASS;
+import static su.terrafirmagreg.data.Properties.TOP;
 
 public class GreenhouseHelpers {
 

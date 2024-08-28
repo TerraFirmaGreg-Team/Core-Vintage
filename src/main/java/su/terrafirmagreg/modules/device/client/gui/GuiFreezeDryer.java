@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.lib.MCColor;
-import su.terrafirmagreg.api.lib.Unicode;
+import su.terrafirmagreg.data.lib.MCColor;
+import su.terrafirmagreg.data.lib.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.module;
 
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.network.IPacketRegistry;
 import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.api.network.NetworkEntityIdSupplier;

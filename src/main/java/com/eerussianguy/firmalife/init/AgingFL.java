@@ -10,7 +10,7 @@ import mcp.MethodsReturnNonnullByDefault;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @MethodsReturnNonnullByDefault
 public enum AgingFL implements IStringSerializable {

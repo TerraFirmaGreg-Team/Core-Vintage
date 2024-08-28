@@ -35,7 +35,7 @@ import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 
 
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
@@ -45,7 +45,7 @@ import tfcflorae.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MODID_TFCF)

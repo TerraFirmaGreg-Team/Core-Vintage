@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
-import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -47,9 +47,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.api.data.Blockstates.CURED;
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.CURED;
+import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @SuppressWarnings("deprecation")
 public class BlockOven extends BaseBlock implements IProviderTile {

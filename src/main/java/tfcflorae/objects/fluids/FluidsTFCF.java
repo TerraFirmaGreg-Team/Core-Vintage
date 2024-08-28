@@ -1,7 +1,7 @@
 package tfcflorae.objects.fluids;
 
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public final class FluidsTFCF {
 

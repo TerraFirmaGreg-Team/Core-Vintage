@@ -1,6 +1,6 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.api.lib.ThermiteRandom;
+import su.terrafirmagreg.data.lib.ThermiteRandom;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

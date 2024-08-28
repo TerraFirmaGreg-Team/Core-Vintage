@@ -73,7 +73,7 @@ import lombok.Getter;
 import java.util.Optional;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.*;
-import static su.terrafirmagreg.api.data.Constants.MODID_FL;
+import static su.terrafirmagreg.data.Constants.MODID_FL;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 @GameRegistry.ObjectHolder(MODID_FL)

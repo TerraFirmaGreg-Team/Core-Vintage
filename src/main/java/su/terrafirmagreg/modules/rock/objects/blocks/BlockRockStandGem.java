@@ -29,8 +29,8 @@ import gregtech.api.items.toolitem.ToolClasses;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
-import static su.terrafirmagreg.api.data.Blockstates.UP;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.UP;
 
 @SuppressWarnings("deprecation")
 public class BlockRockStandGem extends BlockRock implements IProviderTile {

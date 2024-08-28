@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.arboriculture.objects.blocks;
 
-import su.terrafirmagreg.api.lib.model.CustomStateMap;
+import su.terrafirmagreg.data.lib.model.CustomStateMap;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.base.item.BaseItemBlock;
 import su.terrafirmagreg.api.util.BlockUtils;

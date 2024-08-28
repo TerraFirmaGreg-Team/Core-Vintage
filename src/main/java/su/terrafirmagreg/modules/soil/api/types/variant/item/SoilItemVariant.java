@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.item;
 
-import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.api.lib.types.variant.Variant;
+import su.terrafirmagreg.data.lib.Pair;
+import su.terrafirmagreg.data.lib.types.variant.Variant;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 

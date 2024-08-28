@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

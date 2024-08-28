@@ -55,8 +55,8 @@ import lombok.Getter;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
-import static su.terrafirmagreg.api.data.Constants.MODID_CELLARS;
+import static su.terrafirmagreg.data.Properties.LIT;
+import static su.terrafirmagreg.data.Constants.MODID_CELLARS;
 
 public class TileIceBunker extends TileEntityLockableLoot
         implements IInventory, ITickable, IAmbientalTileProvider, IProviderContainer<ContainerIceBunker, GuiIceBunker> {

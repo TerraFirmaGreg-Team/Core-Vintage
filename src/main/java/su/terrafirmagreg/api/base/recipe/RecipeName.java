@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.base.recipe;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.util.ResourceLocation;

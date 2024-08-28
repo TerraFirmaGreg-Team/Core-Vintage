@@ -1,6 +1,6 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.api.data.Constants;
+import su.terrafirmagreg.data.Constants;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Items;
@@ -47,7 +47,7 @@ import tfctech.TechConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings({ "ConstantConditions", "unused" })
 @Mod.EventBusSubscriber(modid = MODID_TFCTECH)

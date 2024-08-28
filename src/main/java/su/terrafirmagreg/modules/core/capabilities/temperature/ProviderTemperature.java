@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.temperature;
 
-import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.ModuleCore;

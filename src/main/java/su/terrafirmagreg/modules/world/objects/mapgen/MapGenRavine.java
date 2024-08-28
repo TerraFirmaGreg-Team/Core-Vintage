@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.objects.mapgen;
 
-import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.data.lib.MathConstants;
 
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;

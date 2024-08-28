@@ -33,8 +33,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.*;
-
 public class BlockCassiaCinnamonLog extends Block {
 
     public static final AxisAlignedBB SMALL_LOG = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);

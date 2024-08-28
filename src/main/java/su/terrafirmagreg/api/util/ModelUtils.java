@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.lib.model.CustomModelLoader;
+import su.terrafirmagreg.data.lib.model.CustomModelLoader;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

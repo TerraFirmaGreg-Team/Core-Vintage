@@ -28,7 +28,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.dries007.tfc.client.FluidSpriteCache;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.api.data.Blockstates.SEALED;
+import static su.terrafirmagreg.data.Properties.SEALED;
 
 @SideOnly(Side.CLIENT)
 public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {

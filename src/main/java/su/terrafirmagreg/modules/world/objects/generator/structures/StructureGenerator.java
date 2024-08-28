@@ -44,8 +44,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Constants.MODID_TFCF;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class StructureGenerator extends WorldGenerator {
 

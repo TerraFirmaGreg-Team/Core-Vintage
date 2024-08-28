@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world;
 
-import su.terrafirmagreg.api.lib.Injector;
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.Injector;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;

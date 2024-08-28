@@ -30,7 +30,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import static com.eerussianguy.firmalife.init.StatePropertiesFL.STAGE;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @MethodsReturnNonnullByDefault
 

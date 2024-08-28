@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.heat.spi;
 
-import su.terrafirmagreg.api.lib.Unicode;
+import su.terrafirmagreg.data.lib.Unicode;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 

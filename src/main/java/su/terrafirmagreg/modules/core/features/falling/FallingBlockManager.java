@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class FallingBlockManager {
 

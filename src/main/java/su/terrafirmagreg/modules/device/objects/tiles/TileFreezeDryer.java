@@ -45,7 +45,7 @@ import pieman.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
 
 public class TileFreezeDryer extends BaseTileInventory implements IItemHandlerSidedCallback, ITickable, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
 

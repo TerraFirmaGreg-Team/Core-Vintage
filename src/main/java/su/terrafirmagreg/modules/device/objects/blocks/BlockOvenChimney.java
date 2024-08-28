@@ -17,8 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 
-import static su.terrafirmagreg.api.data.Blockstates.CURED;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.CURED;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @SuppressWarnings("deprecation")
 public class BlockOvenChimney extends BaseBlock {

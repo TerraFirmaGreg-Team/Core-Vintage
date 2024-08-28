@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCFARMING;
+import static su.terrafirmagreg.data.Constants.MODID_TFCFARMING;
 
 public class PacketHandler {
 

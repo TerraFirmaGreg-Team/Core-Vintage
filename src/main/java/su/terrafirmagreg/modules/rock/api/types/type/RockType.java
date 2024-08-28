@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.type;
 
-import su.terrafirmagreg.api.lib.types.type.Type;
+import su.terrafirmagreg.data.lib.types.type.Type;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
 

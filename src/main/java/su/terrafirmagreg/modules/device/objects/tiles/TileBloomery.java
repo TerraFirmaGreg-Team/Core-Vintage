@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("WeakerAccess")
 public class TileBloomery extends TETickableInventory implements ITickable, IAmbientalTileProvider {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.world.debug;
 
-import su.terrafirmagreg.api.lib.Injector;
+import su.terrafirmagreg.data.lib.Injector;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.Block;

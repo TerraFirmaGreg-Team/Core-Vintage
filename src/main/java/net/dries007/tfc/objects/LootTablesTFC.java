@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public class LootTablesTFC {

@@ -21,8 +21,8 @@ import net.minecraft.world.World;
 
 
 import static net.minecraft.block.BlockHorizontal.FACING;
-import static su.terrafirmagreg.api.data.Blockstates.CURED;
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.Properties.CURED;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 @SuppressWarnings("deprecation")
 public class BlockOvenWall extends BaseBlock {

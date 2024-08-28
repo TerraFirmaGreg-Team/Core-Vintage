@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects;
 
-import su.terrafirmagreg.api.lib.collection.WeightedCollection;
+import su.terrafirmagreg.data.lib.collection.WeightedCollection;
 
 
 import org.jetbrains.annotations.NotNull;

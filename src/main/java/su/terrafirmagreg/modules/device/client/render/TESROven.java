@@ -15,8 +15,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 
-import static su.terrafirmagreg.api.data.Blockstates.CURED;
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.CURED;
+import static su.terrafirmagreg.data.Properties.LIT;
 import static su.terrafirmagreg.modules.device.objects.tiles.TileOven.*;
 
 @SideOnly(Side.CLIENT)

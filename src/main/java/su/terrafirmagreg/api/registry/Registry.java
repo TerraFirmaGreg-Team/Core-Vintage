@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.registry;
 
-import su.terrafirmagreg.api.lib.collection.RegistryList;
-import su.terrafirmagreg.api.lib.model.CustomModelLoader;
+import su.terrafirmagreg.data.lib.collection.RegistryList;
+import su.terrafirmagreg.data.lib.model.CustomModelLoader;
 import su.terrafirmagreg.api.registry.builder.LootBuilder;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockState;

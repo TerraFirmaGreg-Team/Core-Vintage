@@ -44,7 +44,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 @SuppressWarnings("deprecation")
 public class BlockLogPile extends BaseBlockContainer implements IProviderTile {

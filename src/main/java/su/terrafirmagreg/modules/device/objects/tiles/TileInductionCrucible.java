@@ -37,8 +37,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static su.terrafirmagreg.api.data.Blockstates.HORIZONTAL;
-import static su.terrafirmagreg.api.data.Blockstates.LIT;
+import static su.terrafirmagreg.data.Properties.HORIZONTAL;
+import static su.terrafirmagreg.data.Properties.LIT;
 
 //@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public class TileInductionCrucible extends TileCrucible implements IMachineSoundEffect, IAmbientalTileProvider {

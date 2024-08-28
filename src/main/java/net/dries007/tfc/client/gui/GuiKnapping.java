@@ -17,7 +17,7 @@ import net.dries007.tfc.objects.container.ContainerKnapping;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public class GuiKnapping extends GuiContainerTFC {
 

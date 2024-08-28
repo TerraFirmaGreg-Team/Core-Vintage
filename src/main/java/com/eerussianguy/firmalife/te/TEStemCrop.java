@@ -8,7 +8,7 @@ import net.dries007.tfc.objects.te.TECropBase;
 
 import org.jetbrains.annotations.NotNull;
 
-import static su.terrafirmagreg.api.lib.MathConstants.RNG;
+import static su.terrafirmagreg.data.lib.MathConstants.RNG;
 
 public class TEStemCrop extends TECropBase {
 

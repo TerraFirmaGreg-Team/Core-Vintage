@@ -18,7 +18,7 @@ import tfctech.TFCTech;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
+import static su.terrafirmagreg.data.Constants.MODID_TFCTECH;
 
 public class TechGuiHandler implements IGuiHandler {
 

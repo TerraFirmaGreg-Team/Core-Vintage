@@ -25,7 +25,7 @@ import net.dries007.tfc.api.capability.food.IFood;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Blockstates.UPPER;
+import static su.terrafirmagreg.data.Properties.UPPER;
 
 public final class ProviderFridge implements IProbeInfoProvider {
 

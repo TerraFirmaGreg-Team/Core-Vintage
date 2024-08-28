@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.food;
 
 import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
-import su.terrafirmagreg.api.lib.LoggingHelper;
+import su.terrafirmagreg.data.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.ModuleBase;
 import su.terrafirmagreg.modules.food.init.BlocksFood;
 import su.terrafirmagreg.modules.food.init.ItemsFood;

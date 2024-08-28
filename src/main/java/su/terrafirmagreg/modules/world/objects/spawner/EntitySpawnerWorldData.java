@@ -50,7 +50,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 /*
  * TFC entity spawning mechanics

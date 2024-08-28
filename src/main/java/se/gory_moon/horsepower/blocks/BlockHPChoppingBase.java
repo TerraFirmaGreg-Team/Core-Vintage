@@ -1,6 +1,6 @@
 package se.gory_moon.horsepower.blocks;
 
-import su.terrafirmagreg.api.lib.property.PropertyUnlistedString;
+import su.terrafirmagreg.data.lib.property.PropertyUnlistedString;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 public abstract class BlockHPChoppingBase extends BlockHPBase {
 

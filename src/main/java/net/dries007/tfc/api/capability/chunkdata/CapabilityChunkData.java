@@ -16,7 +16,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketChunkData;
 import net.dries007.tfc.util.climate.Climate;
 
-import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.data.Constants.MODID_TFC;
 
 @Mod.EventBusSubscriber(modid = MODID_TFC)
 public final class CapabilityChunkData {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.event;
 
-import su.terrafirmagreg.integration.gregtech.material.MaterialHandler;
+import su.terrafirmagreg.modules.metal.plugin.gregtech.material.MaterialMetalHandler;
 
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -13,6 +13,6 @@ public class MaterialEventHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void registerMaterials(MaterialEvent event) {
-        MaterialHandler.init();
+        MaterialMetalHandler.init();
     }
 }

@@ -1,5 +1,8 @@
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
+import su.terrafirmagreg.modules.metal.objects.container.ContainerMetalAnvil;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -15,9 +18,8 @@ import net.dries007.tfc.objects.container.IButtonHandler;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See
- * {@link net.dries007.tfc.client.gui.GuiAnvilTFC} for an example of its usage, and {@link net.dries007.tfc.objects.container.ContainerAnvilTFC} for
- * an example of the message handling
+ * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See {@link GuiMetalAnvil} for an example
+ * of its usage, and {@link ContainerMetalAnvil} for an example of the message handling
  *
  * @author AlcatrazEscapee
  */

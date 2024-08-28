@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.objects.generator.vein;
 
 import su.terrafirmagreg.api.data.Constants;
-import su.terrafirmagreg.api.lib.WeightedCollection;
+import su.terrafirmagreg.api.lib.collection.WeightedCollection;
 import su.terrafirmagreg.modules.world.objects.generator.GeneratorOreVeins;
 
 
@@ -74,7 +74,7 @@ public enum VeinRegistry {
                 veinTypeRegistry.put(properVeinName, vein);
                 weightedVeinTypes.add(vein.getWeight(), vein);
 
-                TerraFirmaCraft.getLog().debug("Registered new vein " + vein.toString());
+                TerraFirmaCraft.getLog().debug("Registered new vein " + vein);
             } catch (JsonParseException e) {
                 TerraFirmaCraft.getLog().error("An ore vein is specified incorrectly! Skipping.");
                 TerraFirmaCraft.getLog().error("Error: ", e);

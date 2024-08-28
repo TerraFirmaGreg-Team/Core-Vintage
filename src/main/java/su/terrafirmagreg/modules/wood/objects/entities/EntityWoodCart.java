@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.wood.objects.entities;
 
-import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.api.lib.MathConstants;
+import su.terrafirmagreg.api.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.capabilities.pull.CapabilityPull;
 import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.ModuleWood;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -22,9 +23,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-
-import su.terrafirmagreg.api.network.datasync.DataSerializers;
-
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
@@ -147,14 +145,14 @@ public abstract class EntityWoodCart extends Entity implements IEntityAdditional
                         this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
                     }
                     ((WorldServer) this.world).getEntityTracker()
-                            .sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
+                            .sendToTracking(this, ModuleWood.getPacketService().getPacketFrom(new SCPacketDrawnUpdate(-1, this.getEntityId())));
                 } else {
                     if (entityIn instanceof EntityLiving entityLiving) {
                         entityLiving.getNavigator().clearPath();
                     }
                     CapabilityPull.get(entityIn).setDrawn(this);
                     ((WorldServer) this.world).getEntityTracker()
-                            .sendToTracking(this, ModuleWood.PACKET_SERVICE.getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
+                            .sendToTracking(this, ModuleWood.getPacketService().getPacketFrom(new SCPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
                     this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);
                 }
             }

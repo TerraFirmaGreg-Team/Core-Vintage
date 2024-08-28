@@ -13,7 +13,7 @@ import pieman.caffeineaddon.proxy.CommonProxy;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_CAFFEINEADDON;
 
-//@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.VERSION, dependencies = "required-after:tfc")
+//@Mod(modid = MODID_CAFFEINEADDON, name = Reference.NAME, version = Tags.MOD_VERSION, dependencies = "required-after:tfc")
 public class CaffeineAddon {
 
     @Instance(owner = MODID_CAFFEINEADDON)

@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.api.lib.WeightedCollection;
+import su.terrafirmagreg.api.lib.collection.WeightedCollection;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -24,8 +24,8 @@ import java.util.Optional;
 import java.util.Random;
 
 /**
- * Just a helper class to store which equipment we should give to some entities If needed, this functionality can be extended via json and if this is
- * done, may as well merge into entity resistance data
+ * Just a helper class to store which equipment we should give to some entities If needed, this functionality can be extended via json and if this is done, may as well merge into
+ * entity resistance data
  */
 public class MonsterEquipment {
 

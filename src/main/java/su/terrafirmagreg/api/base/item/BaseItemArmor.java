@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.base.item;
 
+import su.terrafirmagreg.api.base.item.spi.IItemSettings;
+
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;

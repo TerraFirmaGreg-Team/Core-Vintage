@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -13,10 +15,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import static su.terrafirmagreg.api.data.Blockstates.CURED;
@@ -31,10 +29,9 @@ public class BlockOvenChimney extends BaseBlock {
                     .union(new AxisAlignedBB(0.75D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D)));
 
     public BlockOvenChimney() {
-        super(Settings.of(Material.ROCK));
+        super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
         getSettings()
-                .mapColor(MapColor.RED_STAINED_HARDENED_CLAY)
                 .registryKey("device/oven_chimney")
                 .hardness(2.0f)
                 .resistance(3.0f)

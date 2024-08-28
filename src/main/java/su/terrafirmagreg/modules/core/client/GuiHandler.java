@@ -99,10 +99,13 @@ public class GuiHandler implements IGuiHandler {
     }
 
     public enum Type {
+        // Wood modules
         WOOD_SUPPLY_CART,
         WOOD_PLOW,
         WOOD_BARREL,
         WOOD_CHEST,
+
+        // Device modules
         ALLOY_CALCULATOR,
         CRATE,
         CHARCOAL_FORGE,
@@ -119,7 +122,13 @@ public class GuiHandler implements IGuiHandler {
         SMELTERY_CAULDRON,
         SMELTERY_FIREBOX,
         POWDERKEG,
-        KNAPPING_ROCK,
+
+        // Metal modules
+        ANVIL,
+
+        // Rock modules
+        ROCK_ANVIL,
+        ROCK_KNAPPING,
         NULL;
 
         private static final Type[] values = values();

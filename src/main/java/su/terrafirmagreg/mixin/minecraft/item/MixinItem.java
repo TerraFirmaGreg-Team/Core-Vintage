@@ -1,10 +1,7 @@
 package su.terrafirmagreg.mixin.minecraft.item;
 
-import lombok.Getter;
-
-
+import su.terrafirmagreg.api.base.item.spi.IItemSettings;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.Item;
@@ -17,8 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
 
-
-import su.terrafirmagreg.api.base.item.IItemSettings;
+import lombok.Getter;
 
 @Getter
 @Mixin(value = Item.class, remap = false)

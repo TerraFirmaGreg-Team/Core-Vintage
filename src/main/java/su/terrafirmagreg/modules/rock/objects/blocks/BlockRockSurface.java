@@ -20,8 +20,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +41,6 @@ public class BlockRockSurface extends BlockRock {
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(HORIZONTAL, EnumFacing.NORTH));
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     @Override

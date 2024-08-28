@@ -29,6 +29,29 @@ public class ConfigMetal {
 
     public static final class BlocksCategory {
 
+        @Config.Comment("Lamp")
+        public Lamp LAMP = new Lamp();
+
+        public static final class Lamp {
+
+            @Config.Comment("How much fuel (mB) can a metal lamps hold?")
+            @Config.RangeInt(min = 1)
+            public int tank = 250;
+
+            @Config.Comment({ "How fast lamps consume fuel (mb/hour)? " +
+                    "1 = lamp life of 1 hour per mB, 0.125 = lamp life of 2000 hours by default, 0 = infinite fuel" })
+            @Config.RangeDouble(min = 0)
+            public double burnRate = 0.125;
+
+            @Config.Comment("Which fluids are valid fuels for lamps?")
+            public String[] fuels = {
+                    "olive_oil",
+                    "linseed_oil",
+                    "rape_seed_oil",
+                    "sunflower_seed_oil",
+                    "opium_poppy_seed_oil"
+            };
+        }
     }
 
     public static final class ItemsCategory {

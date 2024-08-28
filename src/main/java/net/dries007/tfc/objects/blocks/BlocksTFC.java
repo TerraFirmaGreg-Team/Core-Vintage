@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeat;
 import su.terrafirmagreg.modules.soil.objects.blocks.BlockSoilPeatGrass;
 
@@ -30,11 +31,6 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
-
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
@@ -42,9 +38,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.metal.BlockIngotPile;
-import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
@@ -63,11 +57,9 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockPlant;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TECropSpreading;
 import net.dries007.tfc.objects.te.TEIngotPile;
-import net.dries007.tfc.objects.te.TELamp;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.objects.te.TEPlacedHide;
@@ -121,11 +113,7 @@ public final class BlocksTFC {
     @Getter
     private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
     @Getter
-    private static ImmutableList<BlockAnvilTFC> allAnvils;
-    @Getter
     private static ImmutableList<BlockMetalSheet> allSheets;
-    @Getter
-    private static ImmutableList<BlockMetalLamp> allLamps;
     @Getter
     private static ImmutableList<BlockCropTFC> allCropBlocks;
     @Getter
@@ -288,30 +276,20 @@ public final class BlocksTFC {
         }
 
         {
-            Builder<BlockAnvilTFC> anvils = ImmutableList.builder();
             Builder<BlockMetalSheet> sheets = ImmutableList.builder();
-            Builder<BlockMetalLamp> lamps = ImmutableList.builder();
             Builder<BlockTrapDoorMetalTFC> metalTrapdoors = ImmutableList.builder();
 
             for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
-                if (Metal.ItemType.ANVIL.hasType(metal))
-                    anvils.add(register(r, "anvil/" + metal.getRegistryName()
-                            .getPath(), new BlockAnvilTFC(metal), CT_METAL));
                 if (Metal.ItemType.SHEET.hasType(metal)) {
                     sheets.add(register(r, "sheet/" + metal.getRegistryName()
                             .getPath(), new BlockMetalSheet(metal), CT_METAL));
                     metalTrapdoors.add(register(r, "trapdoor/" + metal.getRegistryName()
                             .getPath(), new BlockTrapDoorMetalTFC(metal), CT_METAL));
                 }
-                if (Metal.ItemType.LAMP.hasType(metal))
-                    lamps.add(register(r, "lamp/" + metal.getRegistryName()
-                            .getPath(), new BlockMetalLamp(metal), CT_METAL));
 
             }
 
-            allAnvils = anvils.build();
             allSheets = sheets.build();
-            allLamps = lamps.build();
             allTrapDoorMetalBlocks = metalTrapdoors.build();
         }
 
@@ -432,8 +410,6 @@ public final class BlocksTFC {
         register(TEPlacedItemFlat.class, "placed_item_flat");
         register(TEPlacedHide.class, "placed_hide");
         register(TEIngotPile.class, "ingot_pile");
-        register(TELamp.class, "lamp");
-        register(TEAnvilTFC.class, "anvil");
         register(TECropBase.class, "crop_base");
         register(TECropSpreading.class, "crop_spreading");
         register(TEMetalSheet.class, "metal_sheet");

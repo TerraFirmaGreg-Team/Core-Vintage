@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -19,10 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -39,12 +37,11 @@ public class BlockGreenhouseWall extends BaseBlock {
     public static final AxisAlignedBB GREEN_WALL_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.75D, 1.0D, 1.0D, 1.0D);
 
     public BlockGreenhouseWall() {
-        super(Settings.of(Material.IRON));
+        super(Settings.of(Material.IRON, MapColor.GRAY));
 
         getSettings()
                 .registryKey("device/greenhouse/wall")
                 .addOreDict("greenhouse")
-                .mapColor(MapColor.GRAY)
                 .soundType(SoundType.METAL)
                 .hardness(2.0f)
                 .resistance(3.0f)
@@ -123,10 +120,7 @@ public class BlockGreenhouseWall extends BaseBlock {
         if (facing.getAxis() == EnumFacing.Axis.Y) {
             facing = placer.getHorizontalFacing().getOpposite();
         }
-        boolean isTop = false;
-        if (!(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockGreenhouseWall)) {
-            isTop = true;
-        }
+        boolean isTop = !(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockGreenhouseWall);
         Block downBlock = worldIn.getBlockState(pos.down()).getBlock();
         if (downBlock instanceof BlockGreenhouseWall || downBlock instanceof BlockGreenhouseDoor) {
             facing = worldIn.getBlockState(pos.down()).getValue(FACING);
@@ -181,10 +175,10 @@ public class BlockGreenhouseWall extends BaseBlock {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return switch (state.getValue(FACING)) {
-            default -> GREEN_WALL_NORTH;
             case SOUTH -> GREEN_WALL_SOUTH;
             case WEST -> GREEN_WALL_WEST;
             case EAST -> GREEN_WALL_EAST;
+            default -> GREEN_WALL_NORTH;
         };
     }
 

@@ -17,8 +17,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IRockObject;
-import net.dries007.tfc.client.gui.GuiAnvilPlan;
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.client.gui.GuiCalendar;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.client.gui.GuiInventoryCrafting;
@@ -28,8 +26,6 @@ import net.dries007.tfc.client.gui.GuiLiquidTransfer;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSalad;
 import net.dries007.tfc.client.gui.GuiSkills;
-import net.dries007.tfc.objects.container.ContainerAnvilPlan;
-import net.dries007.tfc.objects.container.ContainerAnvilTFC;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.objects.container.ContainerLargeVessel;
@@ -43,7 +39,6 @@ import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -82,10 +77,6 @@ public class TFCGuiHandler implements IGuiHandler {
             case SMALL_VESSEL -> new ContainerSmallVessel(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
             case SMALL_VESSEL_LIQUID -> new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
             case MOLD -> new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
-            case ANVIL ->
-                //noinspection ConstantConditions
-                    new ContainerAnvilTFC(player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
-            case ANVIL_PLAN -> new ContainerAnvilPlan(player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
             case KNAPPING_STONE -> new ContainerKnapping(KnappingType.STONE, player.inventory,
                     stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
             case KNAPPING_CLAY -> new ContainerKnapping(KnappingType.CLAY, player.inventory,
@@ -114,8 +105,6 @@ public class TFCGuiHandler implements IGuiHandler {
             case SMALL_VESSEL -> new GuiContainerTFC(container, player.inventory, SMALL_INVENTORY_BACKGROUND);
             case SMALL_VESSEL_LIQUID -> new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemSmallVessel);
             case MOLD -> new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemMold);
-            case ANVIL -> new GuiAnvilTFC(container, player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
-            case ANVIL_PLAN -> new GuiAnvilPlan(container, player.inventory, TileUtils.getTile(world, pos, TEAnvilTFC.class));
             case KNAPPING_STONE -> {
                 ItemStack stack = player.getHeldItemMainhand();
                 Rock rock = stack.getItem() instanceof IRockObject iRockObject ? iRockObject.getRock(stack) :
@@ -149,8 +138,6 @@ public class TFCGuiHandler implements IGuiHandler {
         KNAPPING_CLAY,
         KNAPPING_FIRE_CLAY,
         KNAPPING_LEATHER,
-        ANVIL,
-        ANVIL_PLAN,
         LARGE_VESSEL,
         POWDERKEG,
         CALENDAR,

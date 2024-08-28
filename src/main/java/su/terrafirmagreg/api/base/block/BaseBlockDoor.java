@@ -1,6 +1,9 @@
 package su.terrafirmagreg.api.base.block;
 
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.base.item.BaseItemDoor;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.state.IBlockState;
@@ -16,10 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +32,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
     protected final Settings settings;
 
     protected BaseBlockDoor(Settings settings) {
-        super(settings.material);
+        super(settings.getMaterial());
 
         this.settings = settings;
 

@@ -1,6 +1,9 @@
 package net.dries007.tfc.client.gui;
 
 import su.terrafirmagreg.api.lib.NBTBuilder;
+import su.terrafirmagreg.modules.metal.objects.recipe.anvil.AnvilRecipeManager;
+import su.terrafirmagreg.modules.metal.objects.recipe.anvil.IAnvilRecipe;
+import su.terrafirmagreg.modules.metal.objects.tile.TileMetalAnvil;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,21 +19,19 @@ import net.minecraftforge.items.IItemHandler;
 
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlanIcon;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
 
 import java.io.IOException;
 import java.util.List;
 
-import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.modules.rock.objects.tiles.TileRockAnvil.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)
-public class GuiAnvilPlan extends GuiContainerTE<TEAnvilTFC> {
+public class GuiAnvilPlan extends GuiContainerTE<TileMetalAnvil> {
 
     public static final ResourceLocation PLAN_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/anvil_plan.png");
 
@@ -38,7 +39,7 @@ public class GuiAnvilPlan extends GuiContainerTE<TEAnvilTFC> {
     private int page;
     private GuiButton buttonLeft, buttonRight;
 
-    public GuiAnvilPlan(Container container, InventoryPlayer playerInv, TEAnvilTFC tile) {
+    public GuiAnvilPlan(Container container, InventoryPlayer playerInv, TileMetalAnvil tile) {
         super(container, playerInv, tile, PLAN_BACKGROUND);
 
         IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
@@ -56,8 +57,7 @@ public class GuiAnvilPlan extends GuiContainerTE<TEAnvilTFC> {
     protected void renderHoveredToolTip(int mouseX, int mouseY) {
         // Button Tooltips
         for (GuiButton button : buttonList) {
-            if (button instanceof IButtonTooltip && button.isMouseOver()) {
-                IButtonTooltip tooltip = (IButtonTooltip) button;
+            if (button instanceof IButtonTooltip tooltip && button.isMouseOver()) {
                 if (tooltip.hasTooltip()) {
                     drawHoveringText(I18n.format(tooltip.getTooltip()), mouseX, mouseY);
                 }
@@ -102,7 +102,7 @@ public class GuiAnvilPlan extends GuiContainerTE<TEAnvilTFC> {
     private void updatePage() {
         buttonList.clear();
         int buttonID = -1;
-        List<AnvilRecipe> recipeList = AnvilRecipe.getAllFor(inputStack);
+        List<IAnvilRecipe> recipeList = AnvilRecipeManager.getAllFor(inputStack);
         for (int i = page * 18; i < (page + 1) * 18 && i < recipeList.size(); i++) {
             int posX = 7 + (i % 9) * 18;
             int posY = 25 + ((i % 18) / 9) * 18;

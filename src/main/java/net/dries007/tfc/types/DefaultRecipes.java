@@ -779,7 +779,7 @@ public final class DefaultRecipes {
         // Misc
         addAnvil(r, DOUBLE_INGOT, SHEET, false, GENERAL, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST);
         addAnvil(r, DOUBLE_SHEET, TUYERE, true, GENERAL, BEND_LAST, BEND_SECOND_LAST);
-        addAnvil(r, INGOT, LAMP, false, GENERAL, BEND_LAST, BEND_SECOND_LAST, DRAW_THIRD_LAST);
+        //addAnvil(r, INGOT, LAMP, false, GENERAL, BEND_LAST, BEND_SECOND_LAST, DRAW_THIRD_LAST);
         addAnvil(r, SHEET, TRAPDOOR, false, GENERAL, BEND_LAST, DRAW_SECOND_LAST, DRAW_THIRD_LAST);
 
         // Tools
@@ -897,8 +897,7 @@ public final class DefaultRecipes {
         //		}
     }
 
-    private static void addAnvil(IForgeRegistry<AnvilRecipe> registry, Metal.ItemType inputType, Metal.ItemType outputType, boolean onlyToolMetals,
-                                 @Nullable SmithingSkill.Type skillType, ForgeRule... rules) {
+    private static void addAnvil(IForgeRegistry<AnvilRecipe> registry, Metal.ItemType inputType, Metal.ItemType outputType, boolean onlyToolMetals, @Nullable SmithingSkill.Type skillType, ForgeRule... rules) {
         // Helper method for adding all recipes that take ItemType -> ItemType
         for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
             if (onlyToolMetals && !metal.isToolMetal())

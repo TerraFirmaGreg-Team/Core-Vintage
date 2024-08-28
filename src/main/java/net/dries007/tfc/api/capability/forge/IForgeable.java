@@ -1,11 +1,12 @@
 package net.dries007.tfc.api.capability.forge;
 
+import su.terrafirmagreg.modules.metal.objects.recipe.anvil.IAnvilRecipe;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
 
 
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
@@ -34,14 +35,14 @@ public interface IForgeable extends INBTSerializable<NBTTagCompound> {
     ResourceLocation getRecipeName();
 
     /**
-     * Sets the recipe name from an {@link AnvilRecipe}. If null, sets the recipe name to null
+     * Sets the recipe name from an {@link IAnvilRecipe}. If null, sets the recipe name to null
      */
-    default void setRecipe(@Nullable AnvilRecipe recipe) {
-        setRecipe(recipe != null ? recipe.getRegistryName() : null);
+    default void setRecipe(@Nullable IAnvilRecipe recipe) {
+        setRecipe(recipe != null ? recipe.getRecipeName() : null);
     }
 
     /**
-     * Sets the recipe name from an {@link AnvilRecipe}'s registry name.
+     * Sets the recipe name from an {@link IAnvilRecipe}'s registry name.
      *
      * @param recipeName a registry name of an anvil recipe
      */
@@ -61,8 +62,8 @@ public interface IForgeable extends INBTSerializable<NBTTagCompound> {
     void addStep(@Nullable ForgeStep step);
 
     /**
-     * Resets the object's {@link IForgeable} components. Used if an item falls out of an anvil without getting worked Purpose is to preserve
-     * stackability on items that haven't been worked yet.
+     * Resets the object's {@link IForgeable} components. Used if an item falls out of an anvil without getting worked Purpose is to preserve stackability on items that haven't
+     * been worked yet.
      */
     void reset();
 

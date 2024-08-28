@@ -1,9 +1,11 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.client.render.TESROven;
 import su.terrafirmagreg.modules.device.objects.items.ItemFireStarter;
 import su.terrafirmagreg.modules.device.objects.tiles.TileOven;
@@ -37,13 +39,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 
 import com.eerussianguy.firmalife.ConfigFL;
-
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -60,10 +55,9 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
 public class BlockOven extends BaseBlock implements IProviderTile {
 
     public BlockOven() {
-        super(Settings.of(Material.ROCK));
+        super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
         getSettings()
-                .mapColor(MapColor.RED_STAINED_HARDENED_CLAY)
                 .registryKey("device/oven")
                 .hardness(2.0f)
                 .resistance(3.0f)

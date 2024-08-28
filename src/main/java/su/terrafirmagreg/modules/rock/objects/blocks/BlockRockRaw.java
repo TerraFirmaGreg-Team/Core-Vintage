@@ -22,10 +22,6 @@ import net.minecraft.world.World;
 
 import gregtech.common.items.ToolItems;
 
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -44,18 +40,13 @@ public class BlockRockRaw extends BlockRock {
         getSettings()
                 .ignoresProperties(CAN_FALL)
                 .renderLayer(BlockRenderLayer.CUTOUT)
+                .fallable(this, variant.getSpecification().setResultingState(BlocksRock.COBBLE.get(type).getDefaultState()))
                 .addOreDict(variant)
                 .addOreDict(variant, type)
                 .addOreDict("stone");
 
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(CAN_FALL, true));
-
-        // Copy as each raw stone has an unique resultingState
-        var spec = new FallingBlockManager.Specification(variant.getSpecification());
-        spec.setResultingState(BlocksRock.COBBLE.get(type).getDefaultState());
-
-        FallingBlockManager.registerFallable(this, spec);
     }
 
     @Override

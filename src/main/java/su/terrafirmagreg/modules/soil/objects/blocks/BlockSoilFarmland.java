@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -31,10 +32,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.items.toolitem.ToolClasses;
 
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -61,9 +58,6 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IPro
 
     public BlockSoilFarmland(SoilBlockVariant variant, SoilType type) {
 
-        if (variant.canFall())
-            FallingBlockManager.registerFallable(this, variant.getSpecification());
-
         this.variant = variant;
         this.type = type;
         this.useNeighborBrightness = true;
@@ -71,10 +65,11 @@ public class BlockSoilFarmland extends BlockFarmland implements ISoilBlock, IPro
                 .ignoresProperties(MOISTURE)
                 .soundType(SoundType.GROUND)
                 .hardness(2.0F)
+                .harvestLevel(ToolClasses.SHOVEL, 0)
+                .fallable(this, variant.getSpecification())
                 .addOreDict(variant)
                 .addOreDict(variant, type);
 
-        setHarvestLevel(ToolClasses.SHOVEL, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     }

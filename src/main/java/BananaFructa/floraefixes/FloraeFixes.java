@@ -40,7 +40,7 @@ import java.util.function.Supplier;
 import static net.minecraftforge.fml.common.eventhandler.EventPriority.LOW;
 import static su.terrafirmagreg.api.data.Constants.*;
 
-@Mod(modid = MODID_FF, name = FloraeFixes.name, version = Tags.VERSION, dependencies = "after:firmalife;after:tfcflorae")
+@Mod(modid = MODID_FF, name = FloraeFixes.name, version = Tags.MOD_VERSION, dependencies = "after:firmalife;after:tfcflorae")
 public class FloraeFixes {
 
     public static final String name = "TFC Florae Fixes";
@@ -235,7 +235,7 @@ public class FloraeFixes {
 
     private void registerPlanterRecipe(IForgeRegistry<PlanterRecipe> r, CropTFCF crop, Item i, int s, boolean p, String name) {
         r.registerAll(
-                (PlanterRecipe) (new PlanterRecipe(IIngredient.of(ItemSeedsTFC.get(crop)), new ItemStack(i), s, p)).setRegistryName(MODID_FL, name));
+                (new PlanterRecipe(IIngredient.of(ItemSeedsTFC.get(crop)), new ItemStack(i), s, p)).setRegistryName(MODID_FL, name));
     }
 
 }

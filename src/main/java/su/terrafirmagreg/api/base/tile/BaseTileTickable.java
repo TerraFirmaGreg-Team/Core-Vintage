@@ -5,7 +5,7 @@ import net.minecraft.util.ITickable;
 /**
  * Base class for tickable tile entities Batches sync requests into single packets per tick
  */
-public class BaseTileTickable extends BaseTile implements ITickable {
+public abstract class BaseTileTickable extends BaseTile implements ITickable {
 
     private boolean needsClientUpdate;
 

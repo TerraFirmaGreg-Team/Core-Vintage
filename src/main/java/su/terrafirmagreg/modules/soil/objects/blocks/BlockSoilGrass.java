@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.api.spi.IGrass;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
@@ -33,10 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.items.toolitem.ToolClasses;
 
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -58,9 +55,10 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IProviderB
         this.settings = Settings.of(Material.GRASS)
                 .soundType(SoundType.PLANT)
                 .renderLayer(BlockRenderLayer.CUTOUT)
+                .harvestLevel(ToolClasses.SHOVEL, 0)
+                .fallable(this, variant.getSpecification())
                 .hardness(2.1F);
 
-        setHarvestLevel(ToolClasses.SHOVEL, 0);
         setDefaultState(getBlockState().getBaseState()
                 .withProperty(NORTH, Boolean.FALSE)
                 .withProperty(EAST, Boolean.FALSE)
@@ -69,7 +67,6 @@ public class BlockSoilGrass extends BlockGrass implements ISoilBlock, IProviderB
                 .withProperty(SNOWY, Boolean.FALSE)
                 .withProperty(CLAY, Boolean.FALSE));
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
 

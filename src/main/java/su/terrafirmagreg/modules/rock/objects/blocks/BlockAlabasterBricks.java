@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.rock.objects.blocks;
 import su.terrafirmagreg.api.lib.Pair;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
 
@@ -24,10 +23,9 @@ public class BlockAlabasterBricks extends BlockRockDecorative {
     }
 
     public BlockAlabasterBricks(EnumDyeColor color) {
-        super(Settings.of(Material.ROCK));
+        super(Settings.of(Material.ROCK, color));
 
         getSettings()
-                .mapColor(MapColor.getBlockColor(color))
                 .addOreDict("alabaster")
                 .addOreDict("alabaster", "bricks")
                 .registryKey("rock/alabaster/bricks/" + color.getName());

@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.creativetab.BaseCreativeTab;
 import su.terrafirmagreg.api.lib.LoggingHelper;
 import su.terrafirmagreg.api.module.Module;
 import su.terrafirmagreg.api.module.ModuleBase;
-import su.terrafirmagreg.api.network.IPacketService;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypeHandler;
 import su.terrafirmagreg.modules.wood.event.EntityJoinWorldEventHandler;
 import su.terrafirmagreg.modules.wood.event.KeyEventHandler;
@@ -32,14 +31,14 @@ import static su.terrafirmagreg.modules.ModuleContainer.WOOD;
 public final class ModuleWood extends ModuleBase {
 
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class.getSimpleName());
-    public static final CreativeTabs WOOD_TAB = new BaseCreativeTab("wood", "wood/planks/pine");
 
-    public static IPacketService PACKET_SERVICE;
+    public final CreativeTabs WOOD_TAB;
 
     public ModuleWood() {
-        this.enableAutoRegistry(WOOD_TAB);
+        this.WOOD_TAB = BaseCreativeTab.of("wood", "wood/planks/pine");
 
-        PACKET_SERVICE = this.enableNetwork();
+        this.enableAutoRegistry(WOOD_TAB);
+        this.enableNetwork();
     }
 
     @Override

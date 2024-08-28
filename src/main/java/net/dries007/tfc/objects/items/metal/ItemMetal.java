@@ -22,7 +22,6 @@ import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -94,9 +93,6 @@ public class ItemMetal extends ItemTFC implements ICapabilityMetal {
             // Make sure to not crash (in 1.15+, don't forget to rewrite all metal items to extend the proper vanilla classes)
             return ItemMetalSword.get(metal);
         }
-        if (type == Metal.ItemType.LAMP) {
-            return ItemBlockMetalLamp.get(metal);
-        }
         if (type == Metal.ItemType.TRAPDOOR) {
             return ItemBlock.getItemFromBlock(BlockTrapDoorMetalTFC.get(metal));
         }
@@ -142,8 +138,6 @@ public class ItemMetal extends ItemTFC implements ICapabilityMetal {
             case SWORD_BLADE:
             case ICE_SAW_HEAD:
                 return Size.NORMAL; // Tool heads fits in large vessels
-            case ANVIL:
-                return Size.HUGE; // Overburdens
             default:
                 return Size.LARGE; // Everything else fits only in chests
         }
@@ -161,7 +155,6 @@ public class ItemMetal extends ItemTFC implements ICapabilityMetal {
             case SHEET:
             case DOUBLE_SHEET:
                 return Weight.LIGHT; // Stacksize = 32
-            case ANVIL:
             case HELMET:
             case GREAVES:
             case CHESTPLATE:
@@ -178,35 +171,11 @@ public class ItemMetal extends ItemTFC implements ICapabilityMetal {
 
     @Override
     public boolean canStack(@NotNull ItemStack stack) {
-        switch (type) {
-            case ROD:
-            case DUST:
-            case LAMP:
-            case ANVIL:
-            case TRAPDOOR:
-            case SCRAP:
-            case INGOT:
-            case SHEET:
-            case NUGGET:
-            case AXE_HEAD:
-            case HOE_HEAD:
-            case MACE_HEAD:
-            case PICK_HEAD:
-            case SAW_BLADE:
-            case CHISEL_HEAD:
-            case HAMMER_HEAD:
-            case KNIFE_BLADE:
-            case SHOVEL_HEAD:
-            case SWORD_BLADE:
-            case DOUBLE_INGOT:
-            case DOUBLE_SHEET:
-            case JAVELIN_HEAD:
-            case PROPICK_HEAD:
-            case SCYTHE_BLADE:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case ROD, DUST, TRAPDOOR, SCRAP, INGOT, SHEET, NUGGET, AXE_HEAD, HOE_HEAD, MACE_HEAD, PICK_HEAD, SAW_BLADE, CHISEL_HEAD, HAMMER_HEAD, KNIFE_BLADE,
+                 SHOVEL_HEAD, SWORD_BLADE, DOUBLE_INGOT, DOUBLE_SHEET, JAVELIN_HEAD, PROPICK_HEAD, SCYTHE_BLADE -> true;
+            default -> false;
+        };
     }
 
     @Override

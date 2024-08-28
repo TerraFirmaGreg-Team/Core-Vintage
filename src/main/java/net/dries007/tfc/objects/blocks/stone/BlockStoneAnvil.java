@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.blocks.stone;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.client.GuiHandler;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.metal.objects.tile.TileMetalAnvil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,22 +26,15 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Rock;
-
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
-import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
+import static su.terrafirmagreg.modules.rock.objects.tiles.TileRockAnvil.SLOT_HAMMER;
 
 public class BlockStoneAnvil extends BlockRockVariant {
 
@@ -47,8 +43,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
     public BlockStoneAnvil(Rock.Type type, Rock rock) {
         super(type, rock);
 
-        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(
-                type.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
+        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(type.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
         FallingBlockManager.registerFallable(this, spec);
     }
 
@@ -112,9 +107,9 @@ public class BlockStoneAnvil extends BlockRockVariant {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TEAnvilTFC te = TileUtils.getTile(worldIn, pos, TEAnvilTFC.class);
-        if (te != null) {
-            te.onBreakBlock(worldIn, pos, state);
+        var tile = TileUtils.getTile(worldIn, pos, TileMetalAnvil.class);
+        if (tile != null) {
+            tile.onBreakBlock(worldIn, pos, state);
         }
         super.breakBlock(worldIn, pos, state);
     }
@@ -131,11 +126,11 @@ public class BlockStoneAnvil extends BlockRockVariant {
         {
             return false;
         }
-        TEAnvilTFC te = TileUtils.getTile(worldIn, pos, TEAnvilTFC.class);
-        if (te == null) {
+        var tile = TileUtils.getTile(worldIn, pos, TileMetalAnvil.class);
+        if (tile == null) {
             return false;
         }
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap == null) {
             return false;
         }
@@ -155,8 +150,8 @@ public class BlockStoneAnvil extends BlockRockVariant {
                 }
             }
             // Welding requires a hammer in main hand
-            else if (te.isItemValid(SLOT_HAMMER, heldItem)) {
-                if (!worldIn.isRemote && te.attemptWelding(playerIn)) {
+            else if (tile.isItemValid(SLOT_HAMMER, heldItem)) {
+                if (!worldIn.isRemote && tile.attemptWelding(playerIn)) {
                     // Valid welding occurred.
                     worldIn.playSound(null, pos, TFCSounds.ANVIL_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     return true;
@@ -170,7 +165,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
                     if (i == SLOT_HAMMER) continue;
                     // Try to insert an item
                     // Hammers will not be inserted since we already checked if heldItem is a hammer for attemptWelding
-                    if (te.isItemValid(i, heldItem) && te.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
+                    if (tile.isItemValid(i, heldItem) && tile.getSlotLimit(i) > cap.getStackInSlot(i).getCount()) {
                         ItemStack result = cap.insertItem(i, heldItem, false);
                         playerIn.setHeldItem(hand, result);
                         TerraFirmaCraft.getLog().info("Inserted {} into slot {}", heldItem.getDisplayName(), i);
@@ -181,7 +176,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
         } else {
             // not sneaking, so try and open GUI
             if (!worldIn.isRemote) {
-                TFCGuiHandler.openGui(worldIn, pos, playerIn, TFCGuiHandler.Type.ANVIL);
+                GuiHandler.openGui(worldIn, pos, playerIn, GuiHandler.Type.ROCK_ANVIL);
             }
             return true;
         }
@@ -207,7 +202,7 @@ public class BlockStoneAnvil extends BlockRockVariant {
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TEAnvilTFC();
+        return new TileMetalAnvil();
     }
 
     @Override

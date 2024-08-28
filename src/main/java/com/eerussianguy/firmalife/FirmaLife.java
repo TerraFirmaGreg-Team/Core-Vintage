@@ -23,7 +23,7 @@ import com.eerussianguy.firmalife.util.OreDictsFL;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 
-@Mod(modid = MODID_FL, name = FirmaLife.MODNAME, version = Tags.VERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
+@Mod(modid = MODID_FL, name = FirmaLife.MODNAME, version = Tags.MOD_VERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
 public class FirmaLife {
 
     public static final String MODNAME = "FirmaLife";

@@ -30,7 +30,6 @@ import su.terrafirmagreg.modules.core.event.CapabilitiesChunkEventHandler;
 import su.terrafirmagreg.modules.core.event.CapabilitiesEntityEventHandler;
 import su.terrafirmagreg.modules.core.event.CapabilitiesItemEventHandler;
 import su.terrafirmagreg.modules.core.event.DebugInfoEventHandler;
-import su.terrafirmagreg.modules.core.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.core.event.PuddlesEventHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.CommandsCore;
@@ -65,7 +64,7 @@ public final class ModuleCore extends ModuleBase {
     public static CreativeTabs CORE_TAB;
 
     public ModuleCore() {
-        CORE_TAB = new BaseCreativeTab("misc", "core/wand");
+        CORE_TAB = BaseCreativeTab.of("misc", "core/wand");
 
         this.enableAutoRegistry(CORE_TAB);
         this.enableNetwork();
@@ -115,7 +114,6 @@ public final class ModuleCore extends ModuleBase {
         MinecraftForge.EVENT_BUS.register(new CapabilitiesChunkEventHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilitiesItemEventHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilitiesEntityEventHandler());
-        MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());
         MinecraftForge.EVENT_BUS.register(new PuddlesEventHandler());
 
     }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.registry.spi;
 
-import su.terrafirmagreg.api.lib.LootBuilder;
+import su.terrafirmagreg.api.registry.builder.LootBuilder;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;

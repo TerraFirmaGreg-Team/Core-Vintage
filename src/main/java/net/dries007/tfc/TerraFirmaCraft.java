@@ -50,14 +50,14 @@ import net.dries007.tfc.util.calendar.Calendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
 import static net.dries007.tfc.TerraFirmaCraft.GUI_FACTORY;
-import static su.terrafirmagreg.Tags.VERSION;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
+import static su.terrafirmagreg.api.data.Constants.MOD_VERSION;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
 @Mod(modid = MODID_TFC,
      name = TerraFirmaCraft.MOD_NAME,
-     version = VERSION,
+     version = MOD_VERSION,
      useMetadata = true,
      guiFactory = GUI_FACTORY,
      dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")

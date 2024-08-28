@@ -27,9 +27,12 @@ import static su.terrafirmagreg.modules.ModuleContainer.DEVICE;
 public final class ModuleDevice extends ModuleBase {
 
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class.getSimpleName());
-    public static final CreativeTabs DEVICES_TAB = new BaseCreativeTab("device", "device/firestarter");
+    
+    public final CreativeTabs DEVICES_TAB;
 
     public ModuleDevice() {
+        this.DEVICES_TAB = BaseCreativeTab.of("device", "device/firestarter");
+
         this.enableAutoRegistry(DEVICES_TAB);
         this.enableNetwork();
     }

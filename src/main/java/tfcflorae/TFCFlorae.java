@@ -22,7 +22,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_FL;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
 @SuppressWarnings({ "WeakerAccess", "unused" })
-@Mod(modid = MODID_TFCF, name = TFCFlorae.NAME, version = Tags.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
+@Mod(modid = MODID_TFCF, name = TFCFlorae.NAME, version = Tags.MOD_VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
 
     public static final String NAME = "TFC Florae";

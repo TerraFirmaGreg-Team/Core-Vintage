@@ -8,6 +8,7 @@ public final class RegistriesDevice {
     public static IQuernRecipeManager QUERN;
 
     public static void onRegister() {
+
         QUERN = new QuernRecipeManager();
     }
 

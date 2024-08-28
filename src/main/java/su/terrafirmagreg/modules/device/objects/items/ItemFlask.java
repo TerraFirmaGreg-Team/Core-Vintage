@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.items;
 
+import su.terrafirmagreg.api.base.item.spi.IItemSettings;
 import su.terrafirmagreg.api.registry.provider.IProviderItemMesh;
-import su.terrafirmagreg.api.base.item.IItemSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;

@@ -18,7 +18,7 @@ import static su.terrafirmagreg.api.data.Constants.MODID_TIME4TFC;
 /**
  * @author AnodeCathode, dmillerw
  */
-@Mod(modid = MODID_TIME4TFC, name = "Time4TFC", version = Tags.VERSION, dependencies = "required-after:tfc")
+@Mod(modid = MODID_TIME4TFC, name = "Time4TFC", version = Tags.MOD_VERSION, dependencies = "required-after:tfc")
 public class time4tfc {
 
     public static Configuration configuration;

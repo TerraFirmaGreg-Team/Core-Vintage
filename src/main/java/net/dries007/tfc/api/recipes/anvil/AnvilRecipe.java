@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes.anvil;
 
+import su.terrafirmagreg.modules.metal.objects.tile.TileMetalAnvil;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -10,13 +12,14 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
 import net.dries007.tfc.util.skills.SmithingSkill;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,23 +32,25 @@ import static su.terrafirmagreg.api.lib.MathConstants.RNG;
  * They all take a single item input and will produce a single item output
  * todo: in 1.13+ move this to a json recipe type
  */
-
+@Getter
 public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implements IJEISimpleRecipe {
 
     public static final NonNullList<ItemStack> EMPTY = NonNullList.create();
     private static long SEED = 0;
-    protected final ForgeRule[] rules;
-    protected final ItemStack output;
+
     protected final IIngredient<ItemStack> ingredient;
-    protected final Metal.Tier minTier;
+    protected final ItemStack outputItem;
+    protected final ForgeRule[] rules;
+    protected final Metal.Tier tier;
     protected final long workingSeed;
     protected final SmithingSkill.Type skillBonusType;
 
-    public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack output, Metal.Tier minTier,
+    public AnvilRecipe(ResourceLocation name, IIngredient<ItemStack> ingredient, ItemStack outputItem, Metal.Tier tier,
                        @Nullable SmithingSkill.Type skillBonusType, ForgeRule... rules) {
         this.ingredient = ingredient;
-        this.output = output;
-        this.minTier = minTier;
+        this.outputItem = outputItem;
+
+        this.tier = tier;
         this.skillBonusType = skillBonusType;
         this.rules = rules;
         if (rules.length == 0 || rules.length > 3)
@@ -76,33 +81,13 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
     }
 
     @NotNull
-    public NonNullList<ItemStack> getOutput(ItemStack input) {
-        return matches(input) ? NonNullList.withSize(1, output.copy()) : EMPTY;
-    }
-
-    @NotNull
-    public ItemStack getPlanIcon() {
-        return output;
-    }
-
-    @NotNull
-    public ForgeRule[] getRules() {
-        return rules;
-    }
-
-    @NotNull
-    public Metal.Tier getTier() {
-        return minTier;
-    }
-
-    @Nullable
-    public SmithingSkill.Type getSkillBonusType() {
-        return skillBonusType;
+    public NonNullList<ItemStack> getOutputItem(ItemStack input) {
+        return matches(input) ? NonNullList.withSize(1, outputItem.copy()) : EMPTY;
     }
 
     public int getTarget(long worldSeed) {
         RNG.setSeed(worldSeed + workingSeed);
-        return 40 + RNG.nextInt(TEAnvilTFC.WORK_MAX + -2 * 40);
+        return 40 + RNG.nextInt(TileMetalAnvil.WORK_MAX + -2 * 40);
     }
 
     @Override
@@ -115,6 +100,6 @@ public class AnvilRecipe extends IForgeRegistryEntry.Impl<AnvilRecipe> implement
 
     @Override
     public NonNullList<ItemStack> getOutputs() {
-        return NonNullList.withSize(1, output);
+        return NonNullList.withSize(1, outputItem);
     }
 }

@@ -13,7 +13,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_AGEDDRINKS;
 
-@Mod(modid = MODID_AGEDDRINKS, name = TFCAgedDrinks.NAME, version = Tags.VERSION)
+@Mod(modid = MODID_AGEDDRINKS, name = TFCAgedDrinks.NAME, version = Tags.MOD_VERSION)
 public class TFCAgedDrinks {
 
     public static final String NAME = "TFC Aged Drinks";

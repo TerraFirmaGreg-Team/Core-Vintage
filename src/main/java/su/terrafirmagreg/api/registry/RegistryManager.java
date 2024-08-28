@@ -36,6 +36,7 @@ public class RegistryManager
     /**
      * The creative tab used by the mod. This can be null.
      */
+    @Nullable
     private final CreativeTabs tab;
 
     /**

@@ -15,8 +15,8 @@ import net.dries007.tfc.util.forge.ForgeRule;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This is an anvil recipe that will split an {@link IForgeableMeasurableMetal} into a specific "chunk" size Used by blooms to split a 560 -> 5x 100
- * blooms and 1x 60 bloom for example
+ * This is an anvil recipe that will split an {@link IForgeableMeasurableMetal} into a specific "chunk" size Used by blooms to split a 560 -> 5x 100 blooms and 1x 60 bloom for
+ * example
  */
 
 public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
@@ -42,7 +42,7 @@ public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
 
     @Override
     @NotNull
-    public NonNullList<ItemStack> getOutput(ItemStack input) {
+    public NonNullList<ItemStack> getOutputItem(ItemStack input) {
         if (matches(input)) {
             IForgeable inCap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (inCap instanceof IForgeableMeasurableMetal) {

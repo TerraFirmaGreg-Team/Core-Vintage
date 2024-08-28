@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.objects.block;
 
-import su.terrafirmagreg.api.base.block.IBlockSettings;
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 
 import net.minecraft.block.BlockGravel;
 import net.minecraft.block.SoundType;

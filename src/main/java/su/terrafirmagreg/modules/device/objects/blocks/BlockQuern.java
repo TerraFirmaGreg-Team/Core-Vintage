@@ -3,6 +3,8 @@ package su.terrafirmagreg.modules.device.objects.blocks;
 import su.terrafirmagreg.api.base.block.BaseBlock;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.client.render.TESRQuern;
 import su.terrafirmagreg.modules.device.objects.tiles.TileQuern;
 
@@ -27,10 +29,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import net.dries007.tfc.client.TFCSounds;

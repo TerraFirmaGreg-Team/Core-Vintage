@@ -55,7 +55,7 @@ public class PathEventHandler {
                 player_speed = player_speed_current;
             }
 
-            if (ConfigCore.MISC.DEBUG.enable) {
+            if (ConfigCore.MISC.DEBUG.debugCreatePath) {
                 if (player_debug_cooldown == 0) {
                     ModuleSoil.LOGGER.info("[Player] Random: " + player_random);
                     ModuleSoil.LOGGER.info("[Player] Speed: " + player_speed);

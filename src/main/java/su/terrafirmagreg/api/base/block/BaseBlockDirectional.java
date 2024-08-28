@@ -1,8 +1,11 @@
 package su.terrafirmagreg.api.base.block;
 
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -14,15 +17,12 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +36,8 @@ public abstract class BaseBlockDirectional extends BlockDirectional implements I
     protected final Settings settings;
 
     public BaseBlockDirectional(Settings settings) {
-        super(settings.material);
+        super(settings.getMaterial());
+
         this.settings = settings;
 
         setDefaultState(getBlockState().getBaseState()
@@ -45,22 +46,22 @@ public abstract class BaseBlockDirectional extends BlockDirectional implements I
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return getSettings() != null && getSettings().isOpaque();
+        return this.settings == null || (state.isFullCube() && this.settings.isOpaque());
     }
 
     @Override
     public boolean isFullCube(IBlockState state) {
-        return getSettings().isFullCube();
+        return this.settings.isFullCube();
     }
 
     @Override
     public boolean isCollidable() {
-        return getSettings().isCollidable();
+        return this.settings.isCollidable();
     }
 
     @Override
     public SoundType getSoundType() {
-        return getSettings().getSoundType();
+        return this.settings.getSoundType();
     }
 
     @Override
@@ -71,37 +72,42 @@ public abstract class BaseBlockDirectional extends BlockDirectional implements I
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
-        return getSettings().getRenderLayer();
-    }
-
-    @Override
-    public MapColor getMapColor(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getSettings().getMapColor() != null ? getSettings().getMapColor().apply(state, world, pos) : getSettings().getMaterial().getMaterialMapColor();
+        return this.settings.getRenderLayer();
     }
 
     @Override
     public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-        return getSettings().getHardness().apply(blockState, worldIn, pos);
+        return this.settings.getHardness().apply(blockState, worldIn, pos);
     }
 
     @Override
     public float getExplosionResistance(Entity exploder) {
-        return getSettings().getResistance() / 5.0F;
+        return this.settings.getResistance() / 5.0F;
+    }
+
+    @Override
+    public boolean isAir(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return this.settings.isAir();
+    }
+
+    @Override
+    public boolean causesSuffocation(IBlockState state) {
+        return this.settings.getIsSuffocating().test(state);
     }
 
     @Override
     public String getTranslationKey() {
-        return getSettings().getTranslationKey() == null ? super.getTranslationKey() : "tile." + getSettings().getTranslationKey();
+        return this.settings.getTranslationKey() == null ? super.getTranslationKey() : "tile." + this.settings.getTranslationKey();
     }
 
     @Override
     public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity) {
-        return getSettings().getSlipperiness().apply(state, world, pos);
+        return this.settings.getSlipperiness().apply(state, world, pos);
     }
 
     @Override
     public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getSettings().getLightValue().apply(state, world, pos);
+        return this.settings.getLightValue().apply(state, world, pos);
     }
 
     @Override
@@ -110,23 +116,43 @@ public abstract class BaseBlockDirectional extends BlockDirectional implements I
     }
 
     @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos) : NULL_AABB;
+    }
+
+    @Override
+    public boolean getTickRandomly() {
+        return this.settings.isTicksRandomly();
+    }
+
+    @Override
+    public String getHarvestTool(IBlockState state) {
+        return this.settings.getHarvestTool();
+    }
+
+    @Override
+    public int getHarvestLevel(IBlockState state) {
+        return this.settings.getHarvestLevel();
+    }
+
+    @Override
     public boolean getHasItemSubtypes() {
-        return getSettings().isHasItemSubtypes();
+        return this.settings.isHasItemSubtypes();
     }
 
     @Override
     public Size getSize(ItemStack stack) {
-        return getSettings().getSize();
+        return this.settings.getSize();
     }
 
     @Override
     public Weight getWeight(ItemStack stack) {
-        return getSettings().getWeight();
+        return this.settings.getWeight();
     }
 
     @Override
     public boolean canStack(ItemStack stack) {
-        return getSettings().isCanStack();
+        return this.settings.isCanStack();
     }
 
     @Override

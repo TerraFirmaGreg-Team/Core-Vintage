@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.button;
 
+import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
-public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
+public class GuiButtonPlayerInventoryTab extends BaseGuiButton {
 
     private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/icons.png");
 

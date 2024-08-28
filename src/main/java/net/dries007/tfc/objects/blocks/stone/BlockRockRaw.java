@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.stone;
 
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
@@ -19,11 +20,6 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
-
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -38,8 +34,7 @@ public class BlockRockRaw extends BlockRockVariant {
     public BlockRockRaw(Rock.Type type, Rock rock) {
         super(type, rock);
 
-        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(
-                type.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
+        FallingBlockManager.Specification spec = new FallingBlockManager.Specification(type.getFallingSpecification()); // Copy as each raw stone has an unique resultingState
         FallingBlockManager.registerFallable(this, spec);
 
         setDefaultState(getBlockState().getBaseState().withProperty(CAN_FALL, true));

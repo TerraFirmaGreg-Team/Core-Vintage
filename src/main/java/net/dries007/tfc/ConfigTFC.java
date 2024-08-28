@@ -549,10 +549,6 @@ public final class ConfigTFC {
         @Config.LangKey("config." + MODID_TFC + ".devices.barrel")
         public static final BarrelCFG BARREL = new BarrelCFG();
 
-        @Config.Comment("Lamp")
-        @Config.LangKey("config." + MODID_TFC + ".devices.lamp")
-        public static final LampCFG LAMP = new LampCFG();
-
         @Config.Comment("Chisel")
         @Config.LangKey("config." + MODID_TFC + ".devices.chisel")
         public static final ChiselCFG CHISEL = new ChiselCFG();
@@ -600,30 +596,6 @@ public final class ConfigTFC {
                     "juice_papaya", "juice_peach", "juice_pear", "juice_plum", "juice_juniper", "juice_green_grape", "juice_purple_grape",
                     "juice_barrel_cactus", "yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk", "curdled_goat_milk",
                     "curdled_yak_milk", "pina_colada" };
-        }
-
-        public static final class LampCFG {
-
-            @Config.Comment("How much fuel (mB) can a metal lamps hold?")
-            @Config.RangeInt(min = 1)
-            @Config.LangKey("config." + MODID_TFC + ".devices.lamp.tank")
-            public int tank = 250;
-
-            @Config.Comment(
-                    "How fast lamps consume fuel (mb/hour)? 1 = lamp life of 1 hour per mB, 0.125 = lamp life of 2000 hours by default, 0 = infinite fuel")
-            @Config.RangeDouble(min = 0)
-            @Config.LangKey("config." + MODID_TFC + ".devices.lamp.burnRate")
-            public double burnRate = 0.125;
-
-            @Config.Comment("Which fluids are valid fuels for lamps?")
-            @Config.LangKey("config." + MODID_TFC + ".devices.lamp.fuels")
-            public String[] fuels = {
-                    "olive_oil",
-                    "linseed_oil",
-                    "rape_seed_oil",
-                    "sunflower_seed_oil",
-                    "opium_poppy_seed_oil"
-            };
         }
 
         public static final class ChiselCFG {

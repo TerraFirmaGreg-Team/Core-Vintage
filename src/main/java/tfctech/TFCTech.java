@@ -18,7 +18,7 @@ import lombok.Getter;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCTECH;
 
 @SuppressWarnings("WeakerAccess")
-@Mod(modid = MODID_TFCTECH, name = TFCTech.NAME, version = Tags.VERSION, dependencies = TFCTech.DEPENDENCIES)
+@Mod(modid = MODID_TFCTECH, name = TFCTech.NAME, version = Tags.MOD_VERSION, dependencies = TFCTech.DEPENDENCIES)
 public class TFCTech {
 
     public static final String NAME = "TFCTech Unofficial";

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.rock.api.types.variant.block;
 
+import su.terrafirmagreg.api.lib.types.variant.Variant;
 import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.api.base.types.variant.Variant;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.init.BlocksRock;
 
@@ -71,12 +71,14 @@ public class RockBlockVariant extends Variant<RockBlockVariant> {
     }
 
     public RockBlockVariant build() {
-        for (var type : RockType.getTypes()) {
-            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null)
+        RockType.getTypes().forEach(type -> {
+            if (BlocksRock.ROCK_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-
-            if (hasStoneType) createStoneType(idCounter.getAndIncrement(), type);
-        }
+            }
+            if (hasStoneType) {
+                createStoneType(idCounter.getAndIncrement(), type);
+            }
+        });
         return this;
     }
 

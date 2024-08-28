@@ -1,12 +1,11 @@
 package su.terrafirmagreg.mixin.minecraft.block;
 
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.api.base.block.IBlockSettings;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -101,16 +100,6 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return getSettings().getRenderLayer();
-    }
-
-    /**
-     * @author Xikaro
-     * @reason Адаптация под ISettingsBlock
-     */
-    @Override
-    @Overwrite
-    public MapColor getMapColor(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getSettings().getMapColor() != null ? getSettings().getMapColor().apply(state, world, pos) : getSettings().getMaterial().getMaterialMapColor();
     }
 
     /**

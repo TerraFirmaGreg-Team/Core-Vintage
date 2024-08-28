@@ -24,7 +24,7 @@ import lombok.Getter;
 import static net.minecraftforge.fml.common.Mod.EventHandler;
 import static su.terrafirmagreg.api.data.Constants.*;
 
-@Mod(modid = MOD_ID, version = VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
+@Mod(modid = MOD_ID, version = MOD_VERSION, name = MOD_NAME, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg {
 
     public static final LoggingHelper LOGGER = LoggingHelper.of();

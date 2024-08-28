@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-//@Mod(modid = MODID_TFCPASSINGDAYS, name = PassingDays.name, version = Tags.VERSION, dependencies = "after:galacticraftcore;after:immersivetech")
+//@Mod(modid = MODID_TFCPASSINGDAYS, name = PassingDays.name, version = Tags.MOD_VERSION, dependencies = "after:galacticraftcore;after:immersivetech")
 public class PassingDays {
 
     public static final String name = "TFC Passing Days";

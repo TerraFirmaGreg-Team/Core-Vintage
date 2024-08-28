@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.registry.spi;
 
-import su.terrafirmagreg.api.base.item.IItemSettings;
+import su.terrafirmagreg.api.base.item.spi.IItemSettings;
 
 import net.minecraft.item.Item;
 

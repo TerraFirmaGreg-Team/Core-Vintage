@@ -33,5 +33,7 @@ public final class PluginJustEnoughItems implements IModPlugin {
         // ==== QUERN ====
         registry.addRecipes(QuernRecipeMaker.getRecipes(), QuernRecipeCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN), QuernRecipeCategory.UID);
+
     }
 }
+

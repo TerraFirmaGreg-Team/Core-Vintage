@@ -10,7 +10,6 @@ import net.dries007.tfc.compat.waila.providers.CropProvider;
 import net.dries007.tfc.compat.waila.providers.FruitTreeProvider;
 import net.dries007.tfc.compat.waila.providers.InfoProvider;
 import net.dries007.tfc.compat.waila.providers.IngotPileProvider;
-import net.dries007.tfc.compat.waila.providers.LampProvider;
 import net.dries007.tfc.compat.waila.providers.OreProvider;
 import net.dries007.tfc.compat.waila.providers.PlacedItemProvider;
 import net.dries007.tfc.compat.waila.providers.TreeProvider;
@@ -25,7 +24,6 @@ public class TOPPlugin implements Function<ITheOneProbe, Void> {
     public static final List<TOPBlockInterface> TOP_BLOCK_INTERFACES = Arrays.asList(
             new TOPBlockInterface(new BarrelProvider()),
             new TOPBlockInterface(new BerryBushProvider()),
-            new TOPBlockInterface(new LampProvider()),
             new TOPBlockInterface(new CropProvider()),
             new TOPBlockInterface(new FruitTreeProvider()),
             new TOPBlockInterface(new OreProvider()),

@@ -12,6 +12,8 @@ import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalC
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalDuck;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalGrouse;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalQuail;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.objects.tiles.TileSnare;
 
 import net.minecraft.block.Block;
@@ -38,13 +40,6 @@ import net.minecraft.world.World;
 
 import gregtech.api.items.toolitem.ToolClasses;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 

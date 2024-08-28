@@ -6,16 +6,13 @@ import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
 public class BlockRockSand extends BlockRockFallable {
 
     public BlockRockSand(RockBlockVariant variant, RockType type) {
         super(Settings.of(Material.SAND), variant, type);
 
-        setSoundType(SoundType.SAND);
-
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
+        getSettings()
+                .soundType(SoundType.SAND);
         //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.SANDLIKE);
     }
 

@@ -27,8 +27,8 @@ import java.util.List;
 @Getter
 public abstract class BlockRockSlab extends BaseBlockSlab implements IRockBlock {
 
-    private final RockBlockVariant variant;
-    private final RockType type;
+    protected final RockBlockVariant variant;
+    protected final RockType type;
     protected Half halfSlab;
     protected Double doubleSlab;
 

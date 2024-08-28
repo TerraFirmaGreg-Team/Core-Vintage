@@ -37,6 +37,7 @@ public abstract class ModuleBase implements IModule {
      * Stores a network entity id supplier for each mod id.
      */
     private static final Map<String, NetworkEntityIdSupplier> NETWORK_ENTITY_ID_SUPPLIER_MAP = new HashMap<>();
+    
     @Getter
     protected static IPacketService packetService;
     private final String name;

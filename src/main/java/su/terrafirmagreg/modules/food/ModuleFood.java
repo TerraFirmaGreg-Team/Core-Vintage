@@ -15,9 +15,12 @@ import org.jetbrains.annotations.NotNull;
 public final class ModuleFood extends ModuleBase {
 
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class.getSimpleName());
-    public static final CreativeTabs FOOD_TAB = new BaseCreativeTab("food", "food/ingredient/wheat_bread_sandwich");
+    
+    public final CreativeTabs FOOD_TAB;
 
     public ModuleFood() {
+        this.FOOD_TAB = BaseCreativeTab.of("food", "food/ingredient/wheat_bread_sandwich");
+
         this.enableAutoRegistry(FOOD_TAB);
     }
 

@@ -26,9 +26,11 @@ public final class ModuleRock extends ModuleBase {
 
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class.getSimpleName());
 
-    public static final CreativeTabs ROCK_TAB = new BaseCreativeTab("rock", "rock/raw/basalt");
+    public final CreativeTabs ROCK_TAB;
 
     public ModuleRock() {
+        this.ROCK_TAB = BaseCreativeTab.of("rock", "rock/raw/basalt");
+
         this.enableAutoRegistry(ROCK_TAB);
 
         MinecraftForge.EVENT_BUS.register(new MaterialEventHandler());

@@ -45,6 +45,7 @@ public final class Blockstates {
      * Used to determine the direction a block is facing. Only includes horizontal directions. (N-S-W-E)
      */
     public static final PropertyDirection HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    public static final PropertyDirection VERTICAL = PropertyDirection.create("facing", EnumFacing.Plane.VERTICAL);
 
     /**
      * Used to determine if a block is connected on the bottom face.

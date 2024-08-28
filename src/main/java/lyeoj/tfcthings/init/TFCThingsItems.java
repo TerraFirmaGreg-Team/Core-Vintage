@@ -238,12 +238,7 @@ public class TFCThingsItems {
             ITEM_PLATINUM_CROWN_SAPPHIRE,
             ITEM_PLATINUM_CROWN_TOPAZ,
             ITEM_PLATINUM_CROWN_TOURMALINE,
-
-            TFCThingsBlocks.PIGVIL_ITEM,
-            TFCThingsBlocks.PIGVIL_ITEM_BLACK,
-            TFCThingsBlocks.PIGVIL_ITEM_BLUE,
-            TFCThingsBlocks.PIGVIL_ITEM_RED,
-            TFCThingsBlocks.PIGVIL_ITEM_PURPLE,
+            
             TFCThingsBlocks.ROPE_BRIDGE_ITEM,
             TFCThingsBlocks.ROPE_LADDER_ITEM
     };

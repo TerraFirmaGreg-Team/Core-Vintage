@@ -10,8 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -21,14 +19,6 @@ public class BaseCreativeTab extends CreativeTabs {
     private final boolean hasSearchBar;
     private final Supplier<ItemStack> iconSupplier;
 
-    public BaseCreativeTab(String TabName, String iconSupplier) {
-        this(TabName, iconSupplier, false);
-    }
-
-    public BaseCreativeTab(String TabName, String iconSupplier, boolean hasSearchBar) {
-        this(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
-    }
-
     public BaseCreativeTab(String TabName, ResourceLocation iconSupplier, boolean hasSearchBar) {
         super(ModUtils.localize(TabName));
 
@@ -36,6 +26,14 @@ public class BaseCreativeTab extends CreativeTabs {
         this.hasSearchBar = hasSearchBar;
 
         if (hasSearchBar) setBackgroundImageName("item_search.png");
+    }
+
+    public static BaseCreativeTab of(String TabName, String iconSupplier, boolean hasSearchBar) {
+        return new BaseCreativeTab(TabName, ModUtils.resource(iconSupplier), hasSearchBar);
+    }
+
+    public static BaseCreativeTab of(String TabName, String iconSupplier) {
+        return BaseCreativeTab.of(TabName, iconSupplier, false);
     }
 
     @NotNull
@@ -58,7 +56,7 @@ public class BaseCreativeTab extends CreativeTabs {
         }
 
         // Food stacks shouldn't rot in creative tabs, and these are created on demand instead of beforehand and cached
-        CapabilityFood.setStackNonDecaying(stack);
+        //CapabilityFood.setStackNonDecaying(stack);
         return stack;
     }
 

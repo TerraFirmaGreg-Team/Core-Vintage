@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.metal.api.types.type;
 
 import static gregtech.api.unification.material.Materials.*;
+import static su.terrafirmagreg.modules.metal.plugin.gregtech.material.MaterialsMetal.*;
 
 public class MetalTypeHandler {
 
@@ -132,49 +133,49 @@ public class MetalTypeHandler {
                 .tier(6)
                 .build();
 
-        MetalTypes.WEAK_STEEL = new MetalType.Builder("red_steel")
+        MetalTypes.WEAK_STEEL = new MetalType.Builder("weak_steel")
                 .material(WeakSteel)
                 .heat(0.35f, 1540)
                 .tier(4)
                 .build();
 
-        MetalTypes.WEAK_BLUE_STEEL = new MetalType.Builder("red_steel")
+        MetalTypes.WEAK_BLUE_STEEL = new MetalType.Builder("weak_blue_steel")
                 .material(WeakBlueSteel)
                 .heat(0.35f, 1540)
                 .tier(5)
                 .build();
 
-        MetalTypes.WEAK_RED_STEEL = new MetalType.Builder("red_steel")
+        MetalTypes.WEAK_RED_STEEL = new MetalType.Builder("weak_red_steel")
                 .material(WeakRedSteel)
                 .heat(0.35f, 1540)
                 .tier(5)
                 .build();
 
-        MetalTypes.HIGH_CARBON_STEEL = new MetalType.Builder("red_steel")
+        MetalTypes.HIGH_CARBON_STEEL = new MetalType.Builder("high_carbon_steel")
                 .material(HighCarbonSteel)
                 .heat(0.35f, 1540)
                 .tier(3)
                 .build();
 
-        MetalTypes.HIGH_CARBON_BLUE_STEEL = new MetalType.Builder("red_steel")
+        MetalTypes.HIGH_CARBON_BLUE_STEEL = new MetalType.Builder("high_carbon_blue_steel")
                 .material(HighCarbonBlueSteel)
                 .heat(0.35f, 1540)
                 .tier(5)
                 .build();
 
-        MetalTypes.HIGH_CARBON_RED_STEEL = new MetalType.Builder("red_steel")
+        MetalTypes.HIGH_CARBON_RED_STEEL = new MetalType.Builder("high_carbon_red_steel")
                 .material(HighCarbonRedSteel)
                 .heat(0.35f, 1540)
                 .tier(5)
                 .build();
 
-        MetalTypes.HIGH_CARBON_BLACK_STEEL = new MetalType.Builder("red_steel")
+        MetalTypes.HIGH_CARBON_BLACK_STEEL = new MetalType.Builder("high_carbon_black_steel")
                 .material(HighCarbonBlackSteel)
                 .heat(0.35f, 1540)
                 .tier(4)
                 .build();
 
-        MetalTypes.UNKNOWN = new MetalType.Builder("red_steel")
+        MetalTypes.UNKNOWN = new MetalType.Builder("unknown")
                 .material(Unknown)
                 .heat(0.5f, 1250)
                 .tier(1)

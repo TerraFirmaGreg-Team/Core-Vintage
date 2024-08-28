@@ -1,6 +1,6 @@
 package tfcflorae.objects;
 
-import su.terrafirmagreg.api.lib.WeightedCollection;
+import su.terrafirmagreg.api.lib.collection.WeightedCollection;
 
 
 import org.jetbrains.annotations.NotNull;

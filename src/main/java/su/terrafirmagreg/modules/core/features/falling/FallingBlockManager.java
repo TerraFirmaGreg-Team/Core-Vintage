@@ -352,6 +352,7 @@ public class FallingBlockManager {
                 new ItemStack(state.getBlock(), 1, state
                         .getBlock()
                         .damageDropped(state)));
+
         public static final ICollapseChecker DEFAULT_COLLAPSE_CHECKER = (world, collapsePos) -> world
                 .getBlockState(collapsePos.down())
                 .getMaterial()
@@ -372,7 +373,7 @@ public class FallingBlockManager {
         private final boolean collapsable;
         private ICollapseChecker collapseChecker;
 
-        @Setter
+        @Getter
         @Nullable
         private IBlockState resultingState; // Defaults to base IBlockState, null here as a reference as states can be pretty big in memory
         @Setter
@@ -413,8 +414,14 @@ public class FallingBlockManager {
             this.fallDropsProvider = fallDropsProvider;
         }
 
-        public void setCollapseCondition(ICollapseChecker collapseChecker) {
+        public Specification setResultingState(IBlockState resultingState) {
+            this.resultingState = resultingState;
+            return this;
+        }
+
+        public Specification setCollapseCondition(ICollapseChecker collapseChecker) {
             this.collapseChecker = collapseChecker;
+            return this;
         }
 
         public boolean canFallHorizontally() {
@@ -423,11 +430,6 @@ public class FallingBlockManager {
 
         public SoundEvent getSoundEvent() {
             return soundEventDelegate.get();
-        }
-
-        @Nullable
-        public IBlockState getResultingState() {
-            return resultingState;
         }
 
         @NotNull

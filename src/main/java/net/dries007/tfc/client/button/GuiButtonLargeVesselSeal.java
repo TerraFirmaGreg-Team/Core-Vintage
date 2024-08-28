@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.button;
 
+import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -11,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFC;
 
-public class GuiButtonLargeVesselSeal extends GuiButtonTFC implements IButtonTooltip {
+public class GuiButtonLargeVesselSeal extends BaseGuiButton implements IButtonTooltip {
 
     private final TELargeVessel tile;
 

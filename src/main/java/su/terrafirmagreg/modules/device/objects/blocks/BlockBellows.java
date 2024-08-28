@@ -33,11 +33,10 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 public class BlockBellows extends BaseBlock implements IProviderTile {
 
     public BlockBellows() {
-        super(Settings.of(Material.CIRCUITS));
+        super(Settings.of(Material.CIRCUITS, MapColor.GRAY));
 
         getSettings()
                 .registryKey("device/bellows")
-                .mapColor(MapColor.GRAY)
                 .soundType(SoundType.WOOD)
                 .nonFullCube()
                 .nonOpaque()

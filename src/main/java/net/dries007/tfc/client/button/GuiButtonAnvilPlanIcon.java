@@ -1,5 +1,8 @@
 package net.dries007.tfc.client.button;
 
+import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
+import su.terrafirmagreg.modules.metal.objects.recipe.anvil.IAnvilRecipe;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
@@ -8,24 +11,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-
 import org.jetbrains.annotations.NotNull;
 
 import static net.dries007.tfc.client.gui.GuiAnvilPlan.PLAN_BACKGROUND;
 
 @SideOnly(Side.CLIENT)
-public class GuiButtonAnvilPlanIcon extends GuiButtonTFC implements IButtonTooltip {
+public class GuiButtonAnvilPlanIcon extends BaseGuiButton implements IButtonTooltip {
 
     private final ItemStack displayItem;
     private final ResourceLocation recipeName;
     private final String tooltip;
 
-    public GuiButtonAnvilPlanIcon(AnvilRecipe recipe, int id, int x, int y) {
+    public GuiButtonAnvilPlanIcon(IAnvilRecipe recipe, int id, int x, int y) {
         super(id, x, y, 18, 18, "");
 
-        this.displayItem = recipe.getPlanIcon();
-        this.recipeName = recipe.getRegistryName();
+        this.displayItem = recipe.getOutputItem();
+        this.recipeName = recipe.getRecipeName();
         this.tooltip = displayItem.getDisplayName();
     }
 

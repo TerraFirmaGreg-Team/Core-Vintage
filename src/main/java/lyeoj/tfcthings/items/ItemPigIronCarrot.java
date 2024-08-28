@@ -2,6 +2,11 @@ package lyeoj.tfcthings.items;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.objects.entities.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.metal.api.types.type.MetalTypes;
+import su.terrafirmagreg.modules.metal.init.BlocksMetal;
+import su.terrafirmagreg.modules.metal.objects.entity.EntityMetalPigvil;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,16 +16,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 
 
-import lyeoj.tfcthings.entity.living.EntityPigvil;
-import lyeoj.tfcthings.init.TFCThingsBlocks;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemTFC;
@@ -62,7 +58,7 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
                         itemstack.shrink(1);
                     }
                     if (Math.random() < ConfigTFCThings.Misc.PIGVIL.convertChance) {
-                        EntityPigvil pigvil = new EntityPigvil(entity.world);
+                        EntityMetalPigvil pigvil = new EntityMetalPigvil(entity.world);
                         pigvil.copyLocationAndAnglesFrom(piggy);
                         entity.world.spawnEntity(pigvil);
                         pigvil.spawnExplosionParticle();
@@ -70,20 +66,19 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
                     }
                 }
             }
-        } else if (entity instanceof EntityPigvil) {
-            EntityPigvil pigvil = (EntityPigvil) entity;
-            if (pigvil.getAnvil() == TFCThingsBlocks.PIGVIL_BLOCK && metal == TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL)) {
+        } else if (entity instanceof EntityMetalPigvil pigvil) {
+            if (pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.STEEL) && metal == TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL)) {
                 player.world.playSound(player, pigvil.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                 if (!player.world.isRemote) {
                     if (!player.isCreative()) {
                         itemstack.shrink(1);
                     }
                     if (Math.random() < ConfigTFCThings.Misc.PIGVIL.convertChance) {
-                        pigvil.setAnvil(TFCThingsBlocks.PIGVIL_BLOCK_BLACK);
+                        pigvil.setAnvil(BlocksMetal.PIGVIL.get(MetalTypes.BLACK_STEEL));
                         pigvil.spawnExplosionParticle();
                     }
                 }
-            } else if (pigvil.getAnvil() == TFCThingsBlocks.PIGVIL_BLOCK_BLACK && (metal == TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL) ||
+            } else if (pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.BLACK_STEEL) && (metal == TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL) ||
                     metal == TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))) {
                 player.world.playSound(player, pigvil.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                 if (!player.world.isRemote) {
@@ -92,22 +87,22 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
                     }
                     if (Math.random() < ConfigTFCThings.Misc.PIGVIL.convertChance) {
                         if (metal == TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL)) {
-                            pigvil.setAnvil(TFCThingsBlocks.PIGVIL_BLOCK_BLUE);
+                            pigvil.setAnvil(BlocksMetal.PIGVIL.get(MetalTypes.BLUE_STEEL));
                         } else {
-                            pigvil.setAnvil(TFCThingsBlocks.PIGVIL_BLOCK_RED);
+                            pigvil.setAnvil(BlocksMetal.PIGVIL.get(MetalTypes.RED_STEEL));
                         }
                         pigvil.spawnExplosionParticle();
                     }
                 }
-            } else if ((pigvil.getAnvil() == TFCThingsBlocks.PIGVIL_BLOCK_RED && metal == TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL)) ||
-                    (pigvil.getAnvil() == TFCThingsBlocks.PIGVIL_BLOCK_BLUE && metal == TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))) {
+            } else if ((pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.RED_STEEL) && metal == TFCRegistries.METALS.getValue(DefaultMetals.BLUE_STEEL)) ||
+                    (pigvil.getAnvil() == BlocksMetal.PIGVIL.get(MetalTypes.BLUE_STEEL) && metal == TFCRegistries.METALS.getValue(DefaultMetals.RED_STEEL))) {
                 player.world.playSound(player, pigvil.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                 if (!player.world.isRemote) {
                     if (!player.isCreative()) {
                         itemstack.shrink(1);
                     }
                     if (Math.random() < ConfigTFCThings.Misc.PIGVIL.convertChance) {
-                        pigvil.setAnvil(TFCThingsBlocks.PIGVIL_BLOCK_PURPLE);
+                        pigvil.setAnvil(BlocksMetal.PIGVIL.get(MetalTypes.PIG_IRON));
                         pigvil.spawnExplosionParticle();
                     }
                 }

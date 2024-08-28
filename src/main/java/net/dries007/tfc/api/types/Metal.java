@@ -9,8 +9,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
-import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
@@ -175,9 +173,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
         DOUBLE_SHEET(false, 400),
         ROD(false, 50),
 
-        ANVIL(true, 1400, ItemAnvil::new),
         TUYERE(true, 400),
-        LAMP(false, 100, ItemBlockMetalLamp::new),
         TRAPDOOR(false, 200, (metal, itemType) -> new ItemBlock(BlockTrapDoorMetalTFC.get(metal))),
 
         PICK(true, 100, ItemMetalTool::new),
@@ -273,10 +269,13 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
             } else if (this == ItemType.ROD) // only make these for necessary metals
             {
                 return metal == WROUGHT_IRON || metal == STEEL || metal == GOLD;
-            } else if (this == ItemType.LAMP) // Avoid interfering with iron/steel production
-            {
-                return metal != PIG_IRON;
+
             }
+
+            //            // Avoid interfering with iron/steel production
+            //            else if (this == ItemType.LAMP) {
+            //                return metal != PIG_IRON;
+            //            }
             return !this.isToolItem() || metal.getToolMetal() != null;
         }
 

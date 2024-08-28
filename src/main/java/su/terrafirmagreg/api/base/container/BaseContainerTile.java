@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.base.container;
 
 import su.terrafirmagreg.api.base.tile.BaseTileInventory;
+import su.terrafirmagreg.api.base.tile.spi.ITileFields;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,8 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
-import net.dries007.tfc.objects.te.ITileFields;
 
 import org.jetbrains.annotations.NotNull;
 

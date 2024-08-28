@@ -26,8 +26,8 @@ import java.util.List;
 @Getter
 public abstract class BlockRock extends BaseBlock implements IRockBlock {
 
-    private final RockBlockVariant variant;
-    private final RockType type;
+    protected final RockBlockVariant variant;
+    protected final RockType type;
 
     public BlockRock(Settings settings, RockBlockVariant variant, RockType type) {
         super(settings);
@@ -37,10 +37,10 @@ public abstract class BlockRock extends BaseBlock implements IRockBlock {
 
         getSettings()
                 .soundType(SoundType.STONE)
+                .harvestLevel(ToolClasses.PICKAXE, 0)
+                .fallable(this, variant.getSpecification())
                 .addOreDict(variant)
                 .addOreDict(variant, type);
-
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
     }
 
     public BlockRock(RockBlockVariant variant, RockType type) {

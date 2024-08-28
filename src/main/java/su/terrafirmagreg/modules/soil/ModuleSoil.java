@@ -23,9 +23,11 @@ public final class ModuleSoil extends ModuleBase {
 
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleSoil.class.getSimpleName());
 
-    public static final CreativeTabs SOIL_TAB = new BaseCreativeTab("soil", "soil/grass/humus");
+    public final CreativeTabs SOIL_TAB;
 
     public ModuleSoil() {
+        this.SOIL_TAB = BaseCreativeTab.of("soil", "soil/grass/humus");
+
         this.enableAutoRegistry(SOIL_TAB);
     }
 

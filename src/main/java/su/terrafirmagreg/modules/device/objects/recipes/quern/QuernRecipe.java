@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.objects.recipes.quern;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -13,10 +14,12 @@ public class QuernRecipe implements IQuernRecipe {
 
     protected IIngredient<ItemStack> inputItem;
     protected ItemStack outputItem;
+    protected final ResourceLocation recipeName;
 
     public QuernRecipe(IIngredient<ItemStack> inputItem, ItemStack outputItem) {
         this.inputItem = inputItem;
         this.outputItem = outputItem;
+        this.recipeName = null;
 
         if (inputItem == null || outputItem == null) {
             throw new IllegalArgumentException("Input and output are not allowed to be empty");
@@ -30,5 +33,10 @@ public class QuernRecipe implements IQuernRecipe {
 
     public boolean isValidInput(ItemStack inputItem) {
         return this.inputItem.test(inputItem);
+    }
+
+    @Override
+    public ResourceLocation getRecipeName() {
+        return null;
     }
 }

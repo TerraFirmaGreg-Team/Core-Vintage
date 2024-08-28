@@ -72,6 +72,17 @@ minecraft {
     // Add any additional tweaker classes here
     extraTweakClasses.addAll(propertyStringList('extra_tweak_classes'))
 
+    // Automatic token injection with RetroFuturaGradle
+    if (propertyBool('use_tags')) {
+        injectedTags.put('MOD_ID', mod_id)
+        injectedTags.put('MOD_NAME', mod_name)
+        injectedTags.put('MOD_VERSION', mod_version)
+    }
+
+    if (propertyBool('use_modern_java_syntax')) {
+        lwjgl3Version = "3.3.2"
+    }
+
     // Add various JVM arguments here for runtime
     def args = ['-ea:' + group]
     if (propertyBool('is_coremod')) {
@@ -93,15 +104,6 @@ minecraft {
     }
     extraRunJvmArguments.addAll(args)
     extraRunJvmArguments.addAll(propertyStringList('extra_jvm_args'))
-
-    if (propertyBool('use_tags')) {
-        if (file('tags.properties').exists()) {
-            Properties props = new Properties().tap { it.load(file('tags.properties').newInputStream()); it }
-            if (!props.isEmpty()) {
-                injectedTags.set(props.collectEntries { k, v -> [(k): interpolate(v)] })
-            }
-        }
-    }
 }
 
 repositories {
@@ -157,9 +159,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.+'
     testCompileOnly 'org.projectlombok:lombok:1.18.+'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.+'
-
-    implementation "io.gitlab.hohserg.elegant.networking:elegant-networking-1.12:3.14"
-    annotationProcessor "io.gitlab.hohserg.elegant.networking:annotation-processor:3.14"
 
     implementation 'it.unimi.dsi:fastutil:8.5.+'
 }
@@ -282,7 +281,7 @@ tasks.withType(JavaCompile).configureEach {
         options.release.set(8)
         javaCompiler.set(javaToolchains.compilerFor {
             languageVersion.set(JavaLanguageVersion.of(17))
-            vendor.set(JvmVendorSpec.JETBRAINS)
+            vendor.set(JvmVendorSpec.AZUL)
         })
     }
 }

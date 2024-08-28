@@ -35,9 +35,9 @@ public class AnvilRecipeMeasurable extends AnvilRecipe {
 
     @Override
     @NotNull
-    public NonNullList<ItemStack> getOutput(ItemStack input) {
+    public NonNullList<ItemStack> getOutputItem(ItemStack input) {
         if (matches(input)) {
-            NonNullList<ItemStack> out = super.getOutput(input);
+            NonNullList<ItemStack> out = super.getOutputItem(input);
             IForgeable inputCap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             IForgeable outputCap = out.get(0).getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
             if (inputCap instanceof IForgeableMeasurableMetal && outputCap instanceof IForgeableMeasurableMetal) {

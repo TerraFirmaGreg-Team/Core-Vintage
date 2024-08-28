@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.metal.api.types.variant.block;
 
+import su.terrafirmagreg.api.lib.types.variant.Variant;
 import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.api.base.types.variant.Variant;
 import su.terrafirmagreg.modules.metal.api.types.type.MetalType;
 import su.terrafirmagreg.modules.metal.init.BlocksMetal;
 
@@ -53,11 +53,11 @@ public class MetalBlockVariant extends Variant<MetalBlockVariant> {
     }
 
     public MetalBlockVariant build() {
-        for (var type : MetalType.getTypes()) {
-            if (BlocksMetal.METAL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null)
+        MetalType.getTypes().forEach(type -> {
+            if (BlocksMetal.METAL_BLOCKS.put(Pair.of(this, type), factory.apply(this, type)) != null) {
                 throw new RuntimeException(String.format("Duplicate registry detected: %s, %s", this, type));
-        }
-
+            }
+        });
         return this;
     }
 }

@@ -1,22 +1,22 @@
 package su.terrafirmagreg.api.base.item;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.registry.provider.IProviderMultiItemBlock;
-import su.terrafirmagreg.api.base.block.IBlockSettings;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IRarity;
 
 
 import lombok.Getter;
 
 @Getter
-@SuppressWarnings("deprecation")
 public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
 
-    private final EnumRarity rarity;
+    private final IRarity rarity;
 
     public BaseItemBlock(Block block) {
         super(block);
@@ -36,7 +36,7 @@ public class BaseItemBlock extends ItemBlock implements ICapabilitySize {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return rarity;
     }
 

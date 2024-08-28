@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.variant.block.SoilBlockVariant;
@@ -20,10 +21,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import gregtech.api.items.toolitem.ToolClasses;
 
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
-
 import lombok.Getter;
 
 import java.util.Random;
@@ -42,11 +39,10 @@ public abstract class BlockSoil extends BaseBlock implements ISoilBlock {
 
         getSettings()
                 .soundType(SoundType.GROUND)
+                .harvestLevel(ToolClasses.SHOVEL, 0)
+                .fallable(this, variant.getSpecification())
                 .hardness(2.0F)
                 .addOreDict(variant);
-
-        setHarvestLevel(ToolClasses.SHOVEL, 0);
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     @Override

@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
 import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -17,10 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 import static su.terrafirmagreg.api.data.Blockstates.CURED;
@@ -35,10 +33,9 @@ public class BlockOvenWall extends BaseBlock {
     public static final AxisAlignedBB OVEN_WALL_SOUTH = new AxisAlignedBB(9.0D / 16, 0.0D, 0.0D, 16.0D / 16, 16.0D / 16, 16.0D / 16);
 
     public BlockOvenWall() {
-        super(Settings.of(Material.ROCK));
+        super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
         getSettings()
-                .mapColor(MapColor.RED_STAINED_HARDENED_CLAY)
                 .registryKey("device/oven_wall")
                 .hardness(2.0F)
                 .resistance(3.0F)
@@ -81,10 +78,10 @@ public class BlockOvenWall extends BaseBlock {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return switch (state.getValue(FACING)) {
-            default -> OVEN_WALL_NORTH;
             case SOUTH -> OVEN_WALL_SOUTH;
             case WEST -> OVEN_WALL_WEST;
             case EAST -> OVEN_WALL_EAST;
+            default -> OVEN_WALL_NORTH;
         };
     }
 

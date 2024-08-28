@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.base.item;
 
+import su.terrafirmagreg.api.base.item.spi.IItemSettings;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -22,22 +23,22 @@ public abstract class BaseItem extends Item implements IItemSettings {
     }
 
     public IRarity getForgeRarity(ItemStack stack) {
-        return getSettings().getRarity();
+        return this.settings.getRarity();
     }
 
     @Override
     public String getTranslationKey() {
-        return getSettings().getTranslationKey() == null ? super.getTranslationKey() : "item." + getSettings().getTranslationKey();
+        return this.settings.getTranslationKey() == null ? super.getTranslationKey() : "item." + this.settings.getTranslationKey();
     }
 
     @Override
     public int getMaxDamage() {
-        return getSettings().getMaxDamage();
+        return this.settings.getMaxDamage();
     }
 
     @Override
     public int getItemStackLimit() {
-        return getSettings().getMaxCount();
+        return this.settings.getMaxCount();
     }
 
     /**
@@ -52,17 +53,17 @@ public abstract class BaseItem extends Item implements IItemSettings {
 
     @Override
     public Size getSize(ItemStack stack) {
-        return getSettings().getSize();
+        return this.settings.getSize();
     }
 
     @Override
     public Weight getWeight(ItemStack stack) {
-        return getSettings().getWeight();
+        return this.settings.getWeight();
     }
 
     @Override
     public boolean canStack(ItemStack stack) {
-        return getSettings().isCanStack();
+        return this.settings.isCanStack();
     }
 
 }

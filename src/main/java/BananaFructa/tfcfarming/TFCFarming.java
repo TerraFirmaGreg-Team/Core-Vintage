@@ -21,7 +21,7 @@ import BananaFructa.tfcfarming.network.PacketHandler;
 
 import static su.terrafirmagreg.api.data.Constants.*;
 
-@Mod(modid = MODID_TFCFARMING, name = TFCFarming.name, version = Tags.VERSION, dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
+@Mod(modid = MODID_TFCFARMING, name = TFCFarming.name, version = Tags.MOD_VERSION, dependencies = "required-after:tfc;after:tfcflorae;after:firmalife")
 public class TFCFarming {
 
     public static final String name = "TFC Farming";

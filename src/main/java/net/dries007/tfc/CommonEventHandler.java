@@ -27,6 +27,7 @@ import su.terrafirmagreg.modules.core.init.PotionsCore;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockQuern;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
+import su.terrafirmagreg.modules.metal.objects.block.BlockMetalAnvil;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.modules.world.api.data.CalendarWorldData;
@@ -124,7 +125,6 @@ import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
@@ -306,14 +306,12 @@ public final class CommonEventHandler {
         final World world = event.getWorld();
         final BlockPos pos = event.getPos();
         final IBlockState state = world.getBlockState(pos);
+        final Block block = state.getBlock();
         final ItemStack stack = event.getItemStack();
         final EntityPlayer player = event.getEntityPlayer();
 
         // Fire onBlockActivated for in world crafting devices
-        if (state.getBlock() instanceof BlockAnvilTFC
-                || state.getBlock() instanceof BlockStoneAnvil
-                || state.getBlock() instanceof BlockQuern
-                || state.getBlock() instanceof BlockWoodSupport) {
+        if (block instanceof BlockMetalAnvil || block instanceof BlockStoneAnvil || block instanceof BlockQuern || block instanceof BlockWoodSupport) {
             event.setUseBlock(Event.Result.ALLOW);
         }
 

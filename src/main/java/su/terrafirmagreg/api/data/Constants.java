@@ -18,7 +18,7 @@ public final class Constants {
 
     public static final String MOD_ID = Tags.MOD_ID;
     public static final String MOD_NAME = Tags.MOD_NAME;
-    public static final String VERSION = Tags.VERSION;
+    public static final String MOD_VERSION = Tags.MOD_VERSION;
     public static final String DEPENDENCIES = "required:forge@[14.23.5.2847,);after:jei;after:gregtech;after:top;after:tfc;";
     public static final String SERVER_PROXY = "su.terrafirmagreg.proxy.ServerProxy";
     public static final String CLIENT_PROXY = "su.terrafirmagreg.proxy.ClientProxy";

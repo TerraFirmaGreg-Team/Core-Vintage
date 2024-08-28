@@ -4,6 +4,8 @@ import su.terrafirmagreg.api.base.block.BaseBlockContainer;
 import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
 import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
@@ -31,12 +33,6 @@ import net.minecraft.world.World;
 
 import gregtech.api.items.toolitem.ToolClasses;
 
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -56,13 +52,12 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
     private final WoodType type;
 
     public BlockWoodLoom(WoodBlockVariant variant, WoodType type) {
-        super(Settings.of(Material.WOOD));
+        super(Settings.of(Material.WOOD, MapColor.AIR));
 
         this.variant = variant;
         this.type = type;
 
         getSettings()
-                .mapColor(MapColor.AIR) // ?
                 .soundType(SoundType.WOOD)
                 .nonOpaque()
                 .nonFullCube()
@@ -93,10 +88,10 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock, IPr
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return switch (state.getValue(BlockHorizontal.FACING)) {
-            default -> LOOM_NORTH_AABB;
             case SOUTH -> LOOM_SOUTH_AABB;
             case WEST -> LOOM_WEST_AABB;
             case EAST -> LOOM_EAST_AABB;
+            default -> LOOM_NORTH_AABB;
         };
     }
 

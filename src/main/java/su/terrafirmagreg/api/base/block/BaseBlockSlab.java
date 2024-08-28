@@ -1,7 +1,8 @@
 package su.terrafirmagreg.api.base.block;
 
-import lombok.Getter;
-
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
+import su.terrafirmagreg.api.base.item.BaseItemSlab;
+import su.terrafirmagreg.api.lib.model.CustomStateMap;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;
@@ -18,10 +19,7 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-
-import su.terrafirmagreg.api.lib.model.CustomStateMap;
-import su.terrafirmagreg.api.base.item.BaseItemSlab;
-
+import lombok.Getter;
 
 import java.util.Random;
 

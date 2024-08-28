@@ -31,6 +31,7 @@ public abstract class BaseCommandTree extends CommandTreeBase {
      * Creates a string with all the usage lines for the sub commands.
      *
      * @param sender The thing sending the command.
+     *
      * @return A string with all the usage lines for sub commands.
      */
     private String getSubCommandDescriptions(ICommandSender sender) {

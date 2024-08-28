@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.plugin.top.provider;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.objects.blocks.BlockCrucible;
 import su.terrafirmagreg.modules.device.objects.tiles.TileCrucible;
 
@@ -19,11 +20,6 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-
-
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-
-
 import net.dries007.tfc.api.types.Metal;
 
 import java.util.ArrayList;
@@ -53,8 +49,9 @@ public class ProviderCrucible implements IProbeInfoProvider {
             var amount = tile.getAlloy().getAmount();
             if (amount > 0) {
                 Metal metal = tile.getAlloyResult();
-                currentTooltip.add(new TextComponentTranslation(ModUtils.localize("top", "metal.output"), amount,
-                        new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+                currentTooltip.add(
+                        new TextComponentTranslation(ModUtils.localize("top", "metal.output"), amount,
+                                new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
             }
             float temperature = nbt.getFloat("temp");
             String heatTooltip = Heat.getTooltip(temperature);

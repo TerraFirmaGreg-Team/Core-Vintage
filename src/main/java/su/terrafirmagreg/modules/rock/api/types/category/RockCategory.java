@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock.api.types.category;
 
-import su.terrafirmagreg.api.base.types.category.Category;
+import su.terrafirmagreg.api.lib.types.category.Category;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.util.text.TextComponentTranslation;

@@ -39,7 +39,7 @@ import com.buuz135.hotornot.network.PacketServerSettings;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_HOTORNOT;
 
-@Mod(modid = MODID_HOTORNOT, name = HotOrNot.MOD_NAME, version = Tags.VERSION, useMetadata = true)
+@Mod(modid = MODID_HOTORNOT, name = HotOrNot.MOD_NAME, version = Tags.MOD_VERSION, useMetadata = true)
 public class HotOrNot {
 
     public static final String MOD_NAME = "Hot Or Not - TFC";

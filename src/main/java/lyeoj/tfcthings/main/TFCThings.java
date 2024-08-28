@@ -17,7 +17,7 @@ import lyeoj.tfcthings.proxy.CommonProxy;
 
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCTHINGS;
 
-@Mod(modid = MODID_TFCTHINGS, name = TFCThings.NAME, version = Tags.VERSION, dependencies = TFCThings.DEPENDENCIES)
+@Mod(modid = MODID_TFCTHINGS, name = TFCThings.NAME, version = Tags.MOD_VERSION, dependencies = TFCThings.DEPENDENCIES)
 public class TFCThings {
 
     public static final String NAME = "TerraFirmaThings";

@@ -21,7 +21,7 @@ public enum ModuleContainer
     ROCK(true),
     SOIL(true),
     WOOD(true),
-    METAL(false),
+    METAL(true),
     ANIMAL(true),
     DEVICE(true),
     WORLD(true);

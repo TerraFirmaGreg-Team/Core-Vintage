@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.rock.objects.blocks;
 
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.IRockBlock;
 import su.terrafirmagreg.modules.rock.api.types.variant.block.RockBlockVariant;
@@ -17,14 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 import gregtech.api.items.toolitem.ToolClasses;
-
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
 
 import org.jetbrains.annotations.Nullable;
 
@@ -48,12 +42,10 @@ public class BlockRockMagma extends BlockMagma implements IRockBlock {
                 .size(Size.SMALL)
                 .weight(Weight.LIGHT)
                 .renderLayer(BlockRenderLayer.CUTOUT)
+                .harvestLevel(ToolClasses.PICKAXE, 0)
+                .fallable(this, variant.getSpecification())
                 .addOreDict(variant)
                 .addOreDict(variant, type);
-
-        setHarvestLevel(ToolClasses.PICKAXE, 0);
-
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
     }
 
     @Override

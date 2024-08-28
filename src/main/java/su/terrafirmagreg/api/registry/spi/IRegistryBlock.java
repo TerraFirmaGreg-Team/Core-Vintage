@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.registry.spi;
 
-import su.terrafirmagreg.api.base.block.IBlockSettings;
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

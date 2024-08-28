@@ -14,11 +14,15 @@ import org.jetbrains.annotations.NotNull;
 //@Module(moduleID = "Agriculture", name = "TFG Module Agriculture")
 public final class ModuleAgriculture extends ModuleBase {
 
-    public static final CreativeTabs AGRICULTURE_TAB = new BaseCreativeTab("agriculture", "agriculture/crop/seed/rice");
     public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAgriculture.class.getSimpleName());
 
+    public final CreativeTabs AGRICULTURE_TAB;
+
     public ModuleAgriculture() {
+
+        this.AGRICULTURE_TAB = BaseCreativeTab.of("agriculture", "agriculture/crop/seed/rice");
         this.enableAutoRegistry(AGRICULTURE_TAB);
+
     }
 
     @Override

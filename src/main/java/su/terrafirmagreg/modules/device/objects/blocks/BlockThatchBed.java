@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.objects.blocks;
 
-import su.terrafirmagreg.api.base.block.IBlockSettings;
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.init.BlocksCore;

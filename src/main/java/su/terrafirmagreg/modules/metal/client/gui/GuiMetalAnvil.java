@@ -4,7 +4,8 @@ import su.terrafirmagreg.api.base.gui.component.button.IButtonTooltip;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
-import su.terrafirmagreg.modules.metal.objects.tiles.TEMetalAnvil;
+import su.terrafirmagreg.modules.metal.objects.recipe.anvil.IAnvilRecipe;
+import su.terrafirmagreg.modules.metal.objects.tile.TileMetalAnvil;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,7 +16,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 
 
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilStep;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.util.Helpers;
@@ -25,14 +25,14 @@ import net.dries007.tfc.util.forge.ForgeSteps;
 
 import java.io.IOException;
 
-public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
+public class GuiMetalAnvil extends GuiContainerTE<TileMetalAnvil> {
 
     public static final ResourceLocation ANVIL_BACKGROUND = ModUtils.resource("textures/gui/anvil.png");
     public static final int BUTTON_ID_STEP_MIN = 0;
     public static final int BUTTON_ID_STEP_MAX = 7;
     public static final int BUTTON_ID_PLAN = 8;
 
-    public GuiMetalAnvil(Container container, InventoryPlayer playerInv, TEMetalAnvil tile) {
+    public GuiMetalAnvil(Container container, InventoryPlayer playerInv, TileMetalAnvil tile) {
         super(container, playerInv, tile, ANVIL_BACKGROUND);
         ySize = 192;
     }
@@ -59,7 +59,7 @@ public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
             }
         }
         // Rule Tooltips
-        AnvilRecipe recipe = tile.getRecipe();
+        IAnvilRecipe recipe = tile.getRecipe();
         if (recipe != null) {
             int x = guiLeft + 61, y = guiTop + 7;
             for (int i = 0; i < recipe.getRules().length; i++) {
@@ -91,7 +91,7 @@ public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
         drawTexturedModalRect(guiLeft + 13 + target, guiTop + 94, 181, 0, 5, 5);
 
         // Draw rule icons
-        AnvilRecipe recipe = tile.getRecipe();
+        IAnvilRecipe recipe = tile.getRecipe();
         ForgeSteps steps = tile.getSteps();
         if (recipe != null) {
             for (int i = 0; i < recipe.getRules().length; i++) {
@@ -129,7 +129,7 @@ public class GuiMetalAnvil extends GuiContainerTE<TEMetalAnvil> {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        ModuleMetal.PACKET_SERVICE.sendToServer(new CSPacketGuiButton(button.id));
+        ModuleMetal.getPacketService().sendToServer(new CSPacketGuiButton(button.id));
         super.actionPerformed(button);
     }
 }

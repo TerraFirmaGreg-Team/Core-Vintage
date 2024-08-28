@@ -249,6 +249,10 @@ public class ConfigCore {
             @Config.Comment("When enabled, prints debug values to console. Activates some extra wand features. Enables extra item tooltips.")
             public boolean enable = true;
 
+            @Config.Comment("Debug pathfinding")
+            @Config.RequiresWorldRestart
+            public boolean debugCreatePath = false;
+
             @Config.Comment({ "Debug worldgen (the danger part) " +
                     "This will glass maps at max world height to help debug world gen. " +
                     "THIS WILL MESS UP YOUR WORLD!" })

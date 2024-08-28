@@ -1,10 +1,11 @@
 package tfcflorae.client.gui.button;
 
+import su.terrafirmagreg.api.base.gui.component.button.BaseGuiButton;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
 
-import net.dries007.tfc.client.button.GuiButtonTFC;
 import net.dries007.tfc.client.button.IButtonTooltip;
 import tfcflorae.objects.te.TEUrn;
 
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
 import static su.terrafirmagreg.api.data.Constants.MODID_TFCF;
 
-public class GuiButtonUrn extends GuiButtonTFC implements IButtonTooltip {
+public class GuiButtonUrn extends BaseGuiButton implements IButtonTooltip {
 
     private final TEUrn tile;
 

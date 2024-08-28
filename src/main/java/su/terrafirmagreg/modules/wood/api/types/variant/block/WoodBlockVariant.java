@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.api.types.variant.block;
 
 import su.terrafirmagreg.api.lib.Pair;
-import su.terrafirmagreg.api.base.types.variant.Variant;
+import su.terrafirmagreg.api.lib.types.variant.Variant;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 

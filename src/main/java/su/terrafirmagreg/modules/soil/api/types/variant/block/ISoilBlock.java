@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.api.types.variant.block;
 
-import su.terrafirmagreg.api.base.block.IBlockSettings;
-import su.terrafirmagreg.api.base.types.type.IType;
-import su.terrafirmagreg.api.base.types.variant.IVariant;
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
+import su.terrafirmagreg.api.lib.types.type.IType;
+import su.terrafirmagreg.api.lib.types.variant.IVariant;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 

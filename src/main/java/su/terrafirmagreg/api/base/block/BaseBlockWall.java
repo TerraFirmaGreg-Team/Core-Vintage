@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.base.block;
 
+import su.terrafirmagreg.api.base.block.spi.IBlockSettings;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.MapColor;
@@ -33,13 +35,12 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockSettings 
     public BaseBlockWall(Block modelBlock) {
         super(modelBlock);
 
-        this.settings = Settings.copy(modelBlock);
+        this.settings = Settings
+                .copy(modelBlock)
+                .ignoresProperties(VARIANT);
 
         this.modelBlock = modelBlock;
         this.modelState = modelBlock.getDefaultState();
-
-        getSettings()
-                .ignoresProperties(VARIANT);
     }
 
     @Override

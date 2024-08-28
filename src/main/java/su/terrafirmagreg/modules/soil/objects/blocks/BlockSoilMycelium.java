@@ -19,8 +19,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import su.terrafirmagreg.modules.core.features.falling.FallingBlockManager;
-
 
 import lombok.Getter;
 
@@ -39,9 +37,9 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
 
         this.variant = variant;
         this.type = type;
-        this.settings = Settings.of(Material.GRASS)
-                .mapColor(MapColor.PURPLE)
+        this.settings = Settings.of(Material.GRASS, MapColor.PURPLE)
                 .renderLayer(BlockRenderLayer.CUTOUT)
+                .fallable(this, variant.getSpecification())
                 .addOreDict(variant)
                 .addOreDict(variant, type);
 
@@ -54,7 +52,6 @@ public class BlockSoilMycelium extends BlockMycelium implements ISoilBlock {
                 .withProperty(CLAY, Boolean.FALSE)
         );
 
-        FallingBlockManager.registerFallable(this, variant.getSpecification());
         //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     }
 

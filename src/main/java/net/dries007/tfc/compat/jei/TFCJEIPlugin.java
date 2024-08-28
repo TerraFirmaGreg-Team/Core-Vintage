@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.metal.client.gui.GuiGlassworking;
+import su.terrafirmagreg.modules.metal.client.gui.GuiMetalAnvil;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
@@ -34,13 +35,11 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.client.gui.GuiCalendar;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSkills;
 import net.dries007.tfc.compat.jei.categories.AlloyCategory;
-import net.dries007.tfc.compat.jei.categories.AnvilCategory;
 import net.dries007.tfc.compat.jei.categories.BarrelCategory;
 import net.dries007.tfc.compat.jei.categories.BlastFurnaceCategory;
 import net.dries007.tfc.compat.jei.categories.BloomeryCategory;
@@ -83,7 +82,6 @@ import net.dries007.tfc.objects.items.ItemAnimalHide.HideType;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
-import net.dries007.tfc.objects.items.metal.ItemAnvil;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.objects.items.rock.ItemRock;
@@ -135,7 +133,6 @@ public final class TFCJEIPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registry) {
         //Add new JEI recipe categories
         registry.addRecipeCategories(new AlloyCategory(registry.getJeiHelpers().getGuiHelper(), ALLOY_UID));
-        registry.addRecipeCategories(new AnvilCategory(registry.getJeiHelpers().getGuiHelper(), ANVIL_UID));
         registry.addRecipeCategories(new BarrelCategory(registry.getJeiHelpers().getGuiHelper(), BARREL_UID));
         registry.addRecipeCategories(new BlastFurnaceCategory(registry.getJeiHelpers().getGuiHelper(), BLAST_FURNACE_UID));
         registry.addRecipeCategories(new BloomeryCategory(registry.getJeiHelpers().getGuiHelper(), BLOOMERY_UID));
@@ -366,10 +363,6 @@ public final class TFCJEIPlugin implements IModPlugin {
                 .sorted(Comparator.comparingInt(metal -> metal.getTier().ordinal()))
                 .collect(Collectors.toList());
         for (Metal metal : tierOrdered) {
-            if (Metal.ItemType.ANVIL.hasType(metal)) {
-                registry.addRecipeCatalyst(new ItemStack(ItemAnvil.get(metal, Metal.ItemType.ANVIL)), ANVIL_UID);
-                registry.addRecipeCatalyst(new ItemStack(ItemAnvil.get(metal, Metal.ItemType.ANVIL)), WELDING_UID);
-            }
             if (Metal.ItemType.CHISEL.hasType(metal)) {
                 registry.addRecipeCatalyst(new ItemStack(ItemMetalChisel.get(metal, Metal.ItemType.CHISEL)), CHISEL_UID);
             }
@@ -394,7 +387,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
         //Click areas
         registry.addRecipeClickArea(GuiKnapping.class, 97, 44, 22, 15, KNAP_CLAY_UID, KNAP_FIRECLAY_UID, KNAP_LEATHER_UID, KNAP_STONE_UID);
-        registry.addRecipeClickArea(GuiAnvilTFC.class, 26, 24, 9, 14, ANVIL_UID, WELDING_UID);
+        registry.addRecipeClickArea(GuiMetalAnvil.class, 26, 24, 9, 14, ANVIL_UID, WELDING_UID);
         registry.addRecipeClickArea(GuiWoodBarrel.class, 92, 21, 9, 14, BARREL_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 139, 100, 10, 15, ALLOY_UID);
         registry.addRecipeClickArea(GuiCrucible.class, 82, 100, 10, 15, METAL_HEAT_UID);

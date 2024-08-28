@@ -28,6 +28,7 @@ public class TFCAgedDrinks {
 
         @SubscribeEvent
         public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
+            
             AgedRegistry.registerAgedDrinks(event);
         }
     }

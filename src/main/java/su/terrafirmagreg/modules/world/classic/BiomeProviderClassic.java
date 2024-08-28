@@ -1,20 +1,13 @@
 package su.terrafirmagreg.modules.world.classic;
 
+import su.terrafirmagreg.api.base.biome.BaseBiomeProvider;
 import su.terrafirmagreg.modules.world.objects.layer.GenLayerBase;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class BiomeProviderClassic extends BiomeProvider {
-
-    public static final List<Biome> WORLD_GEN_BIOMES = new ArrayList<>();
+public class BiomeProviderClassic extends BaseBiomeProvider {
 
     public BiomeProviderClassic(World world) {
         super(world.getWorldInfo());

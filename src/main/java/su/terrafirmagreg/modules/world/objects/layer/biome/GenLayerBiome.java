@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.world.objects.layer.biome;
 
+import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.base.biome.BaseBiomeProvider;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.world.classic.BiomeProviderClassic;
 import su.terrafirmagreg.modules.world.objects.layer.GenLayerBase;
 
 import net.minecraft.world.biome.Biome;
@@ -9,25 +10,22 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
 
-import net.dries007.tfc.TerraFirmaCraft;
-
 import java.util.Arrays;
 import java.util.Objects;
 
 public class GenLayerBiome extends GenLayerBase {
 
-    private final int[] biomes = BiomeProviderClassic.WORLD_GEN_BIOMES.stream().mapToInt(Biome::getIdForBiome).toArray();
+    private final int[] biomes = BaseBiomeProvider.WORLD_GEN_BIOMES.stream().mapToInt(Biome::getIdForBiome).toArray();
 
     public GenLayerBiome(long seed, GenLayer parent) {
         super(seed);
         this.parent = parent;
         if (ConfigCore.MISC.DEBUG.debugWorldGenSafe) {
-            TerraFirmaCraft.getLog().info("Worldgen biome list (ints): {}", biomes);
-            TerraFirmaCraft.getLog()
-                    .info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes)
-                            .mapToObj(Biome::getBiomeForId)
-                            .map(Objects::toString)
-                            .toArray());
+            TerraFirmaGreg.LOGGER.info("Worldgen biome list (ints): {}", biomes);
+            TerraFirmaGreg.LOGGER.info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes)
+                    .mapToObj(Biome::getBiomeForId)
+                    .map(Objects::toString)
+                    .toArray());
         }
     }
 

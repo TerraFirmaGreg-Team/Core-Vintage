@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.base.biome;
 
 import su.terrafirmagreg.api.base.biome.spi.IBiomeSettings;
 import su.terrafirmagreg.modules.world.ConfigWorld;
-import su.terrafirmagreg.modules.world.objects.spawner.EntitySpawnerWorldData;
+import su.terrafirmagreg.modules.world.classic.objects.spawner.EntitySpawnerWorldData;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

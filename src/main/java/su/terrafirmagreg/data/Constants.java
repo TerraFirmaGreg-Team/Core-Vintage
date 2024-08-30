@@ -3,7 +3,7 @@ package su.terrafirmagreg.data;
 import su.terrafirmagreg.Tags;
 import su.terrafirmagreg.data.lib.json.LowercaseEnumTypeAdapterFactory;
 import su.terrafirmagreg.data.lib.json.ResourceLocationJson;
-import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
+import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinType;
 
 import net.minecraft.util.ResourceLocation;
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.json;
 
-import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
+import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

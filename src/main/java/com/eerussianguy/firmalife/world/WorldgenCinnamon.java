@@ -1,7 +1,7 @@
 package com.eerussianguy.firmalife.world;
 
 import su.terrafirmagreg.api.base.biome.BaseBiome;
-import su.terrafirmagreg.modules.world.init.BiomesWorld;
+import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;

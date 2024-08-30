@@ -24,7 +24,7 @@ public class WorldTypeClassic extends WorldType {
     public static final int ROCKLAYER3 = 55;
 
     public WorldTypeClassic() {
-        super("tfc_classic");
+        super("tfg:classic");
 
     }
 

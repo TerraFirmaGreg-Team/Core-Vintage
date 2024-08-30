@@ -1,6 +1,6 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
-import su.terrafirmagreg.modules.world.objects.generator.vein.VeinType;
+import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

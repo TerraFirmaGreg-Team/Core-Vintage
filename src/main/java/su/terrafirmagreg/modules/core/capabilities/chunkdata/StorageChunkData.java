@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.capabilities.chunkdata;
 
 import su.terrafirmagreg.data.lib.NBTBuilder;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
-import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
+import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByteArray;

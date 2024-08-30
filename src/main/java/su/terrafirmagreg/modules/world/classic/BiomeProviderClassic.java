@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world.classic;
 
 import su.terrafirmagreg.api.base.biome.BaseBiomeProvider;
-import su.terrafirmagreg.modules.world.objects.layer.GenLayerBase;
+import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;

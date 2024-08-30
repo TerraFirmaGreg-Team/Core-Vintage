@@ -2,8 +2,8 @@ package net.dries007.tfc.util;
 
 import su.terrafirmagreg.modules.world.ConfigWorld;
 import su.terrafirmagreg.modules.world.classic.ChunkGenClassic;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorLooseRocks;
-import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorLooseRocks;
+import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;

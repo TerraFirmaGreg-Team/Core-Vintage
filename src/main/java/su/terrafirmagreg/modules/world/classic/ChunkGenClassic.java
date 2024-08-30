@@ -3,27 +3,27 @@ package su.terrafirmagreg.modules.world.classic;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.world.ConfigWorld;
-import su.terrafirmagreg.modules.world.init.BiomesWorld;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorBerryBushes;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorFalls;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorFissure;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorFruitTrees;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorLargeRocks;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorLooseRocks;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorOreVeins;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorRarityBased;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorSnowIce;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorSoilPits;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorSpikes;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorTrees;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
-import su.terrafirmagreg.modules.world.objects.layer.GenLayerBase;
-import su.terrafirmagreg.modules.world.objects.layer.datalayers.drainage.GenLayerDrainage;
-import su.terrafirmagreg.modules.world.objects.layer.datalayers.ph.GenLayerPH;
-import su.terrafirmagreg.modules.world.objects.mapgen.MapGenCaves;
-import su.terrafirmagreg.modules.world.objects.mapgen.MapGenRavine;
-import su.terrafirmagreg.modules.world.objects.mapgen.MapGenRiverRavine;
-import su.terrafirmagreg.modules.world.objects.spawner.EntitySpawnerWorldData;
+import su.terrafirmagreg.modules.world.classic.init.BiomesWorld;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFalls;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFissure;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorFruitTrees;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorLargeRocks;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorLooseRocks;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorOreVeins;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorRarityBased;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSnowIce;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSoilPits;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSpikes;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorTrees;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
+import su.terrafirmagreg.modules.world.classic.objects.layer.GenLayerBase;
+import su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.drainage.GenLayerDrainage;
+import su.terrafirmagreg.modules.world.classic.objects.layer.datalayers.ph.GenLayerPH;
+import su.terrafirmagreg.modules.world.classic.objects.mapgen.MapGenCaves;
+import su.terrafirmagreg.modules.world.classic.objects.mapgen.MapGenRavine;
+import su.terrafirmagreg.modules.world.classic.objects.mapgen.MapGenRiverRavine;
+import su.terrafirmagreg.modules.world.classic.objects.spawner.EntitySpawnerWorldData;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSnow;
@@ -665,7 +665,8 @@ public class ChunkGenClassic implements IChunkGenerator {
                                     outp.setBlockState(x, y + yOffset, z, surfaceBlock);
 
                                     boolean mountains =
-                                            BiomeUtils.isMountainBiome(biome) || biome == BiomesWorld.HIGH_HILLS || biome == BiomesWorld.HIGH_HILLS_EDGE ||
+                                            BiomeUtils.isMountainBiome(biome) || biome == BiomesWorld.HIGH_HILLS ||
+                                                    biome == BiomesWorld.HIGH_HILLS_EDGE ||
                                                     biome == BiomesWorld.MOUNTAINS || biome == BiomesWorld.MOUNTAINS_EDGE;
                                     for (int c = 1; c < dirtH && !mountains && !cliffMap[colIndex]; c++) {
                                         outp.setBlockState(x, y - c + yOffset, z, subSurfaceBlock);
@@ -679,7 +680,8 @@ public class ChunkGenClassic implements IChunkGenerator {
 
                         if (y > seaLevel - 2 && y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER ||
                                 y < seaLevel && inp.getBlockState(x, y + 1, z) == SALT_WATER) {
-                            if (biome == BiomesWorld.SWAMPLAND && biome == BiomesWorld.BAYOU && biome == BiomesWorld.MANGROVE && biome == BiomesWorld.MARSH) {
+                            if (biome == BiomesWorld.SWAMPLAND && biome == BiomesWorld.BAYOU && biome == BiomesWorld.MANGROVE &&
+                                    biome == BiomesWorld.MARSH) {
                                 if (outp.getBlockState(x, y + yOffset, z) != BlockRockVariant.get(rock1, Rock.Type.SAND)
                                         .getDefaultState()) {
                                     outp.setBlockState(x, y + yOffset, z, BlockRockVariant.get(rock1, Rock.Type.DIRT)

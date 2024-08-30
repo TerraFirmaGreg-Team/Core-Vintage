@@ -117,7 +117,7 @@ public final class ConfigTFC {
             public boolean enableLavaWaterPlacesTFCBlocks = true;
 
             @Config.Comment(
-                    "If true, TFC will try and force the `level-type` setting to `tfc_classic` during DedicatedServer startup or define it as default world type for clients.")
+                    "If true, TFC will try and force the `level-type` setting to `tfg:classic` during DedicatedServer startup or define it as default world type for clients.")
             @Config.LangKey("config." + MODID_TFC + ".general.overrides.forceTFCWorldType")
             public boolean forceTFCWorldType = true;
 

@@ -1,7 +1,7 @@
 package BananaFructa.tfcfarming;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.world.api.data.FarmingWorldData;
+import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataFarming;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -131,7 +131,7 @@ public class CommonProxy {
         // cleanup and passive growth logic
         World w = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
         TETickCounter t = TFCFarming.INSTANCE.worldStorage.teTickCounter;
-        FarmingWorldData worldStorage = TFCFarming.INSTANCE.worldStorage;
+        WorldDataFarming worldStorage = TFCFarming.INSTANCE.worldStorage;
 
         // 255 units / 8 units / month = 32 months for a full replenish
         if (t.getTicksSinceUpdate() > month) {

@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.util;
 
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeFruit;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeFruit;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

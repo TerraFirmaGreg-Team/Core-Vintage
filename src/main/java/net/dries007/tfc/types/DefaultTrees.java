@@ -1,13 +1,13 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeAcacia;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeBushes;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeComposite;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeKapok;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeNormal;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeSequoia;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeVariants;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeWillow;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeAcacia;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeBushes;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeComposite;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeKapok;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeNormal;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeSequoia;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeVariants;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeWillow;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.base.biome;
 
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorPlant;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorSand;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorSand;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;

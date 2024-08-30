@@ -9,9 +9,6 @@ import net.minecraft.world.gen.ChunkGeneratorDebug;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.Loader;
 
-
-import org.jetbrains.annotations.NotNull;
-
 public class WorldTypeDebug extends WorldType {
 
     /**
@@ -41,7 +38,7 @@ public class WorldTypeDebug extends WorldType {
     }
 
     @Override
-    public @NotNull IChunkGenerator getChunkGenerator(@NotNull World world, @NotNull String generatorOptions) {
+    public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
 
         // Try to get the modid from the world name.
         final String modid = WorldUtils.getWorldName(world).toLowerCase();
@@ -49,10 +46,9 @@ public class WorldTypeDebug extends WorldType {
         // If the mod actually exists, use that generator.
         if (Loader.isModLoaded(modid)) {
             return new ChunkGenDebug(world, modid);
-        } else {
-            ModuleWorld.LOGGER.error("No mod found for ID {}, falling back to default worldgen.", modid);
         }
 
+        ModuleWorld.LOGGER.error("No mod found for ID {}, falling back to default worldgen.", modid);
         // Use the fallback generator.
         return new ChunkGeneratorDebug(world);
     }

@@ -1,8 +1,8 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.api.util.MathsUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
+import su.terrafirmagreg.data.DamageSources;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -30,8 +30,8 @@ import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.modules.metal.objects.block.BlockMetalAnvil;
 import su.terrafirmagreg.modules.wood.objects.blocks.BlockWoodSupport;
 import su.terrafirmagreg.modules.world.ModuleWorld;
-import su.terrafirmagreg.modules.world.api.data.CalendarWorldData;
 import su.terrafirmagreg.modules.world.classic.WorldTypeClassic;
+import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -311,7 +311,8 @@ public final class CommonEventHandler {
         final EntityPlayer player = event.getEntityPlayer();
 
         // Fire onBlockActivated for in world crafting devices
-        if (block instanceof BlockMetalAnvil || block instanceof BlockStoneAnvil || block instanceof BlockQuern || block instanceof BlockWoodSupport) {
+        if (block instanceof BlockMetalAnvil || block instanceof BlockStoneAnvil || block instanceof BlockQuern ||
+                block instanceof BlockWoodSupport) {
             event.setUseBlock(Event.Result.ALLOW);
         }
 
@@ -440,7 +441,8 @@ public final class CommonEventHandler {
                     ICapabilityMetal cap = (ICapabilityMetal) metalCapability;
                     Metal metal = cap.getMetal(stack);
                     if (metal != null) {
-                        event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+                        event.addCapability(CapabilityForgeable.KEY,
+                                new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
                         isHeatable = true;
                     }
                 }
@@ -545,7 +547,8 @@ public final class CommonEventHandler {
     }
 
     /**
-     * Fired on server only when a player dies and respawns. Used to copy skill level before respawning since we need the original (AKA the body) player entity
+     * Fired on server only when a player dies and respawns. Used to copy skill level before respawning since we need the original (AKA the body)
+     * player entity
      *
      * @param event {@link net.minecraftforge.event.entity.player.PlayerEvent.Clone}
      */
@@ -647,7 +650,8 @@ public final class CommonEventHandler {
             // Stop mob spawning on surface
             if (ConfigTFC.General.DIFFICULTY.preventMobsOnSurface) {
                 if (Helpers.shouldPreventOnSurface(event.getEntity())) {
-                    int maximumY = (WorldTypeClassic.SEALEVEL - WorldTypeClassic.ROCKLAYER2) / 2 + WorldTypeClassic.ROCKLAYER2; // Half through rock layer 1
+                    int maximumY =
+                            (WorldTypeClassic.SEALEVEL - WorldTypeClassic.ROCKLAYER2) / 2 + WorldTypeClassic.ROCKLAYER2; // Half through rock layer 1
                     if (pos.getY() >= maximumY || world.canSeeSky(pos)) {
                         event.setResult(Event.Result.DENY);
                     }
@@ -670,7 +674,8 @@ public final class CommonEventHandler {
         var world = event.getWorld();
         if (world.getWorldType() == ModuleWorld.WORLD_TYPE_CLASSIC && WorldUtils.isDimension(world, DimensionType.OVERWORLD)) {
             // Fix skeleton rider traps spawning during thunderstorms
-            if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface && ((EntitySkeletonHorse) entity).isTrap()) {
+            if (entity instanceof EntitySkeletonHorse && ConfigTFC.General.DIFFICULTY.preventMobsOnSurface &&
+                    ((EntitySkeletonHorse) entity).isTrap()) {
                 entity.setDropItemsWhenDead(false);
                 entity.setDead();
                 event.setCanceled(true);
@@ -734,13 +739,14 @@ public final class CommonEventHandler {
     /**
      * This implementation utilizes EntityJoinWorldEvent and ItemExpireEvent, they go hand-in-hand with each other.
      * <p>
-     * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We also apply an extremely short
-     * lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via config). Then all the checks are done in ItemExpireEvent to set a
-     * new cooler temperature depending on if the conditions are met.
+     * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We
+     * also apply an extremely short lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via
+     * config). Then all the checks are done in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
      * <p>
      * First of all, if temperature is 0 or less, then nothing needs to be done and the original lifespan is restored/added on.
      * <p>
-     * If no conditions are met, the same, short length of lifespan is added on so a quick check can be done once again in case the condition will be met later.
+     * If no conditions are met, the same, short length of lifespan is added on so a quick check can be done once again in case the condition will be
+     * met later.
      * <p>
      * Now if, this has been repeated for a long time up until it meets the item's normal lifespan, it will despawn.
      * <p>
@@ -855,7 +861,7 @@ public final class CommonEventHandler {
 
         if (world.provider.getDimension() == 0 && !world.isRemote) {
             // Calendar Sync / Initialization
-            CalendarWorldData data = CalendarWorldData.get(world);
+            WorldDataCalendar data = WorldDataCalendar.get(world);
             Calendar.INSTANCE.resetTo(data.getCalendar());
             TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(Calendar.INSTANCE));
         }

@@ -4,9 +4,9 @@ import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorBerryBushes;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorPlant;
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorTrees;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorPlant;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorTrees;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

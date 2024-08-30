@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.calendar;
 
-import su.terrafirmagreg.modules.world.api.data.CalendarWorldData;
+import su.terrafirmagreg.modules.world.classic.objects.storage.WorldDataCalendar;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -24,13 +24,14 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     public static final Calendar INSTANCE = new Calendar();
 
     /**
-     * Player time. Advances when player sleeps, stops when no players are online NOT synced with the daylight cycle. Used for almost everything that tracks time.
+     * Player time. Advances when player sleeps, stops when no players are online NOT synced with the daylight cycle. Used for almost everything that
+     * tracks time.
      */
     public static final ICalendar PLAYER_TIME = () -> Calendar.INSTANCE.playerTime;
 
     /**
-     * Calendar time. Advances when player sleeps, stops when doDaylightCycle is false Synced with the daylight cycle Players can see this via the calendar GUI tab Calendar Time 0
-     * = Midnight, January 1, 1000
+     * Calendar time. Advances when player sleeps, stops when doDaylightCycle is false Synced with the daylight cycle Players can see this via the
+     * calendar GUI tab Calendar Time 0 = Midnight, January 1, 1000
      */
     public static final ICalendarFormatted CALENDAR_TIME = new ICalendarFormatted() {
 
@@ -80,8 +81,8 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
 
     /**
-     * This runs a sequence of code, but first will set the calendar and player time by an offset Useful if we need to run code that technically needs to happen at a different
-     * calendar time The offsets are removed once the transaction is complete
+     * This runs a sequence of code, but first will set the calendar and player time by an offset Useful if we need to run code that technically needs
+     * to happen at a different calendar time The offsets are removed once the transaction is complete
      *
      * @param transactionPlayerTimeOffset   the offset to be added to the player time
      * @param transactionCalendarTimeOffset the offset to be added to the calendar time
@@ -199,8 +200,8 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
 
     /**
-     * Called from {@link net.minecraftforge.fml.common.event.FMLServerStartingEvent} Initializes the calendar with the current minecraft server instance, reloading all values from
-     * world saved data
+     * Called from {@link net.minecraftforge.fml.common.event.FMLServerStartingEvent} Initializes the calendar with the current minecraft server
+     * instance, reloading all values from world saved data
      */
     public void init(MinecraftServer server) {
         this.server = server;
@@ -208,7 +209,7 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
         // Initialize doDaylightCycle to false as the server is just starting
         server.getEntityWorld().getGameRules().setOrCreateGameRule("doDaylightCycle", "false");
 
-        resetTo(CalendarWorldData.get(server.getEntityWorld()).getCalendar());
+        resetTo(WorldDataCalendar.get(server.getEntityWorld()).getCalendar());
         TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(this));
     }
 

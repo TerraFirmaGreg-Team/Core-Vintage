@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.agriculture;
 
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

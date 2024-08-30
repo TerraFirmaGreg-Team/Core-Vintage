@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.registry;
 
+import su.terrafirmagreg.api.base.biome.BaseBiome;
 import su.terrafirmagreg.api.registry.builder.LootBuilder;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.api.registry.provider.IProviderBlockState;
@@ -31,6 +32,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -176,12 +178,14 @@ public class Registry {
 
         this.biomes.register(event);
 
-        //                for (var biome : this.biomes) {
-        //
-        //                    if (biome.getTypes().length > 0) {
-        //                        BiomeDictionary.addTypes(biome, biome.getTypes());
-        //                    }
-        //                }
+        this.biomes.forEach(biome -> {
+            if (biome instanceof BaseBiome provider) {
+                if (provider.getTypes().length > 0) {
+                    BiomeDictionary.addTypes(biome, provider.getTypes());
+                }
+            }
+        });
+
     }
 
     public void onRegisterSound(RegistryEvent.Register<SoundEvent> event) {

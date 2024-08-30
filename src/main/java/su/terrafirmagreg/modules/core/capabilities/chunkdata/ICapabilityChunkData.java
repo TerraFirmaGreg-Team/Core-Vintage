@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.core.capabilities.chunkdata;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.world.classic.DataLayerClassic;
-import su.terrafirmagreg.modules.world.objects.generator.vein.Vein;
+import su.terrafirmagreg.modules.world.classic.objects.generator.vein.Vein;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;

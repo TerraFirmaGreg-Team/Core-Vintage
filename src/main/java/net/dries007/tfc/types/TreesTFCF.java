@@ -1,8 +1,8 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeNormal;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeRandom;
-import su.terrafirmagreg.modules.world.objects.generator.tree.GeneratorTreeVariants;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeNormal;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeRandom;
+import su.terrafirmagreg.modules.world.classic.objects.generator.tree.GeneratorTreeVariants;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;

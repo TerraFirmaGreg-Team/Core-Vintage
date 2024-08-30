@@ -1,6 +1,6 @@
 package net.dries007.tfc.util.json;
 
-import su.terrafirmagreg.modules.world.objects.generator.vein.VeinRegistry;
+import su.terrafirmagreg.modules.world.classic.objects.generator.vein.VeinRegistry;
 
 
 import com.google.gson.JsonElement;

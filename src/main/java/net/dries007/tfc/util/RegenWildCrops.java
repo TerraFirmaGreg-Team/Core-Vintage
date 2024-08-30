@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorWildCrops;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorWildCrops;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;

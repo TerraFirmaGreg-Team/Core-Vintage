@@ -14,17 +14,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static su.terrafirmagreg.modules.world.init.BiomesWorld.*;
+import static su.terrafirmagreg.modules.world.classic.init.BiomesWorld.*;
 
 @UtilityClass
 @SuppressWarnings("unused")
 public final class BiomeUtils {
 
     /**
-     * A cache of type names to their value. This is implemented to make type lookup much faster as forge does not offer this for some reason. This is populated by the first call
-     * to {@link #getType(String)}
+     * A cache of type names to their value. This is implemented to make type lookup much faster as forge does not offer this for some reason. This is
+     * populated by the first call to {@link #getType(String)}
      */
-    private static Map<String, BiomeDictionary.Type> typeMap = new HashMap<>();
+    private static final Map<String, BiomeDictionary.Type> typeMap = new HashMap<>();
 
     /**
      * Gets a list of biomes for a type string.

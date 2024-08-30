@@ -1,6 +1,6 @@
 package com.eerussianguy.firmalife.init;
 
-import su.terrafirmagreg.modules.world.objects.generator.GeneratorBerryBushes;
+import su.terrafirmagreg.modules.world.classic.objects.generator.GeneratorBerryBushes;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
